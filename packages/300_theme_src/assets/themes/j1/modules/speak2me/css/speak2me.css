@@ -7,18 +7,20 @@ button {
   margin: 8px 5px 5px 0;
 }
 
-div.articulate-area {
-    font-family: monospace;
-    font-size: 14px;
-    padding: 0 0 15px 0;
-    margin: 0 0 20px 0;
+/*
+div.settings-area {
+  font-family: monospace;
+  font-size: 14px;
+  padding: 0 0 15px 0;
+  margin: 0 0 20px 0;
 }
+*/
 
-div.articulate-area div {
+div.settings-area div {
   margin: 0 0 10px 0;
 }
 
-div.articulate-area input {
+div.settings-area input {
   width: 250px;
 }
 
@@ -26,6 +28,7 @@ div.voice-table {
   display: none;
 }
 
+/*
 table {
   margin: 30px auto 0 auto;
   border-collapse: collapse;
@@ -52,3 +55,4 @@ table td:last-child {
 table tr:nth-child(odd) td {
   background-color: #ddd;
 }
+*/

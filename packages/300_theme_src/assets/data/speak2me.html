@@ -66,135 +66,147 @@ exclude_from_search:                    true
 
 {% comment %} Modal Speak2Me (tts dialog)
 -------------------------------------------------------------------------------- {% endcomment %}
+<!-- start modal container -->
 <div id="speak2me-modal-data">
-  <div id="speak2me-modal" class="modal-dialog modal-frame modal-top modal-notify modal-primary" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="document">
+  <!-- start modal -->
+  <div id="speak2me-modal"
+    class="modal-dialog modal-frame modal-top modal-notify modal-primary"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1" role="document">
+    <!-- start modal content  -->
     <div class="modal-content">
 
       <div class="modal-header">
         <p class="lead">{{speak2me_options.modal.title}}</p>
       </div>
 
+      <!-- start modal body  -->
       <div class="modal-body">
 
-        <div class="modal-body-text" style="font-size: 90%">
-          <p class="mb-3">{{speak2me_options.modal.body_text}}</p>
-        </div>
-
-        <p style="font-size: 90%">{{speak2me_options.modal.language_selector_title}}</p>
-        <div id="speak2meDropdownJSON" class="ms-dopdown notranslate mb-4" style="display:none"></div>
-
-        <div class="articulate-area mt-5 mb-5" data-speak2me-ignore>
-          <h2 class="ml-2 mt-2 mb-4">Voice Settings</h2>
+        <!-- start settings -->
+        <div class="settings-area mb-5" data-speak2me-ignore>
+          <h2 class="ml-2 mt-4 mb-4">{{speak2me_options.modal.settings.voice_settings_title}}</h2>
           <div class="mb-3">
             <div>
-              <label class="form-label mr-3" for="rate">Speed</label>
+              <!-- speed selector -->
+              <label class="form-label mr-3" for="rate">{{speak2me_options.modal.settings.voice_speed_label}}</label>
               <input id="rate" class="form-range" style="height: unset"
                 name="rate"
                 type="range"
-                min="0.1"
-                max="3"
-                step="0.1"
-                value="0.9"
+                min="{{speak2me_options.modal.settings.voice_speed_min}}"
+                max="{{speak2me_options.modal.settings.voice_speed_max}}"
+                step="{{speak2me_options.modal.settings.voice_speed_step}}"
+                value="{{speak2me_options.modal.settings.voice_speed_value}}"
                 oninput="j1.adapter.speak2me.update(this, value)"
                 onchange="j1.adapter.speak2me.update(this, value)"
               />
-              <span class="val ml-3">0.9</span>
+              <span class="val ml-3">{{speak2me_options.modal.settings.voice_speed_value}}</span>
             </div>
-
             <div>
-              <label for="pitch" class="form-label mr-3">Pitch</label>
+              <!-- pitch selector -->
+              <label for="pitch" class="form-label mr-3">{{speak2me_options.modal.settings.voice_pitch_label}}</label>
               <input id="pitch" class="form-range" style="height: unset"
                 name="pitch"
                 type="range"
-                min="0.1"
-                max="2"
-                step="0.1"
-                value="0.9"
+                min="{{speak2me_options.modal.settings.voice_pitch_min}}"
+                max="{{speak2me_options.modal.settings.voice_pitch_max}}"
+                step="{{speak2me_options.modal.settings.voice_pitch_step}}"
+                value="{{speak2me_options.modal.settings.voice_pitch_value}}"
                 oninput="j1.adapter.speak2me.update(this, value)"
                 onchange="j1.adapter.speak2me.update(this, value)"
               />
-              <span class="val ml-3">0.9</span>
+              <span class="val ml-3">{{speak2me_options.modal.settings.voice_pitch_value}}</span>
             </div>
-
             <div>
-              <label for="volume" class="form-label mr-3">Volume</label>
+              <!-- volume selector -->
+              <label for="volume" class="form-label mr-3">{{speak2me_options.modal.settings.voice_volume_label}}</label>
               <input id="volume" class="form-range" style="height: unset"
                 name="volume"
                 type="range"
-                min="0"
-                max="1"
-                step="0.1"
-                value="0.9"
+                min="{{speak2me_options.modal.settings.voice_volume_min}}"
+                max="{{speak2me_options.modal.settings.voice_volume_max}}"
+                step="{{speak2me_options.modal.settings.voice_volume_step}}"
+                value="{{speak2me_options.modal.settings.voice_volume_value}}"
                 oninput="j1.adapter.speak2me.update(this, value)"
                 nchange="j1.adapter.speak2me.update(this, value)"
               />
-              <span class="val ml-3">0.9</span>
+              <span class="val ml-3">{{speak2me_options.modal.settings.voice_volume_value}}</span>
             </div>
 
             <div id="voiceSelector" class="ml-2 mt-3" ></div>
 
           </div>
 
-          <h2 class="ml-2 mt-5 mb-3">Voice Control</h2>
-
+          <h2 class="ml-2 mt-5 mb-3">{{speak2me_options.modal.settings.voice_control_title}}</h2>
+          <!-- start control buttons -->
           <div class="ml-2">
 
+            <!-- speak button -->
             <button type="button"
               id="speak_button"
-              class="btn btn-primary btn-sm"
+              class="btn btn-{{speak2me_options.modal.settings.speak_button_style}} btn-sm"
               style="min-width: 180px"
               data-bs-dismiss="modal"
               onclick="j1.adapter.speak2me.speak('main')">
               <i class="mdib mdib-speaker mdib-sm mr-2"></i>
-              Speak
+              {{speak2me_options.modal.settings.speak_button_text}}
             </button>
 
+            <!-- stop button -->
             <button type="button"
               id="stop_button"
-              class="btn btn-primary btn-sm"
+              class="btn btn-{{speak2me_options.modal.settings.stop_button_style}} btn-sm"
               style="min-width: 180px"
               data-bs-dismiss="modal"
               onclick="j1.adapter.speak2me.stop()">
               <i class="mdib mdib-speaker-off mdib-sm mr-2"></i>
-              Stop
+              {{speak2me_options.modal.settings.stop_button_text}}
             </button>
 
+            <!-- pause button -->
             <button type="button"
               id="pause_button"
-              class="btn btn-primary btn-sm"
+              class="btn btn-{{speak2me_options.modal.settings.pause_button_style}} btn-sm"
               style="min-width: 180px"
               data-bs-dismiss="modal"
               onclick="j1.adapter.speak2me.pause()">
               <i class="mdib mdib-pause mdib-sm mr-2"></i>
-              Pause
+              {{speak2me_options.modal.settings.pause_button_text}}
             </button>
 
+            <!-- resume button -->
             <button type="button"
               id="resume_button"
-              class="btn btn-primary btn-sm"
+              class="btn btn-{{speak2me_options.modal.settings.resume_button_style}} btn-sm"
               style="min-width: 180px"
               data-bs-dismiss="modal"
               onclick="j1.adapter.speak2me.resume()">
               <i class="mdib mdib-play-pause mdib-sm mr-2"></i>
-              Resume
+              {{speak2me_options.modal.settings.pause_button_text}}
             </button>
 
+            <!-- exit (modal) button -->
             <button type="button"
               id="exit_button"
-              class="btn btn-primary btn-sm"
+              class="btn btn-{{speak2me_options.modal.settings.exit_button_style}}  btn-sm"
               style="min-width: 180px"
               data-bs-dismiss="modal">
               <i class="mdib mdib-close mdib-sm mr-2"></i>
-              Do Nothing
+              {{speak2me_options.modal.settings.exit_button_text}}
             </button>
           </div>
+          <!-- end control buttons -->
         </div>
-
+        <!-- end settings -->
       </div>
-
+      <!-- end modal body  -->
     </div>
+    <!-- end modal content  -->
   </div>
+  <!-- end modal -->
 </div>
+<!-- end modal container -->
 
 {% comment %} END Modal Speak2Me (tts dialog)
 -------------------------------------------------------------------------------- {% endcomment %}

@@ -248,7 +248,7 @@ var Events = {
 
     // -------------------------------------------------------------------------
     // showDialog()
-    // manage ???
+    // display the tts settings dialog
     // -------------------------------------------------------------------------
     showDialog: function () {
       logger.debug('\n' + "showDialog");
