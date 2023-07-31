@@ -1,25 +1,29 @@
 ---
-title:                                  Speak to me
-title_extention:                        jQuery plugin for Speech Synthesise
-tagline:                                jQuery plugin for Speech Synthesise
+title:                                  Speak2Me
+title_extention:                        J1 Module for Speech Synthesise (TTS)
+tagline:                                J1 Module for Speech Synthesise
 
 date:                                   2023-07-26
 #last_modified:                         2023-01-01
 
 description: >
-                                        jQuery plugin, enables developers, with as little as one line
-                                        of code, to create links that allow users to click, sit back,
-                                        and listen to the browser read aloud the important content on
+                                        Speak2Me is a J1 Module that enables developers,
+                                        with as little as one line of code, to create links
+                                        that allow users to click, sit back, and listen to
+                                        the browser read aloud the important content on
                                         a Web page.
+keywords: >
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap,
+                                        speech, synthesise, sst, j1 module, jquery
 
-categories:                             [ Tester ]
-tags:                                   [ Speech Synthesise ]
-
+categories:                             [ Module ]
+tags:                                   [ Speech Synthesise, jQuery ]
 
 regenerate:                             true
 permalink:                              /pages/public/learn/speak2me/
 
-resources:                              [ animate, clipboard, lightbox, rouge, speak2me]
+resources:                              [ animate, clipboard, lightbox, rouge ]
 resource_options:
   - attic:
       slides:
@@ -54,223 +58,290 @@ resource_options:
 // https://mdn.github.io/dom-examples/web-speech-api/speak-easy-synthesis/
 // https://stackoverflow.com/questions/11279291/a-good-text-to-speech-javascript-library
 // https://codepen.io/meetselva/pen/EVaLmP
+//
+[role="dropcap"]
+Speech synthesis is an application programming interface (API) in web
+development that allows web browsers to generate synthesized speech,
+commonly known as text-to-speech (TTS). It enables developers to incorporate
+speech synthesis functionality into web pages, applications, and other
+online experiences.
 
-Articulate.js, a jQuery plugin, enables developers, with as little as one
-line of code, to create links that allow users to click, sit back, and
+With the speech synthesis API, you can convert text into speech, and the
+synthesized speech can then be played through the user's speakers or
+headphones. Spoken content is especially useful for making web content
+more accessible to individuals with visual impairments and for adding
+interactive voice elements to web applications.
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+[role="mt-5"]
+== Installation
+
+Speak2Me is a jQuery plugin that enables developers, with as little as
+one line of code, to create links that allow users to click, sit back, and
 listen to the browser read aloud the important content on a Web page.
 In some ways, it can turn a thoughtful essay or article into a mini podcast.
 And because it uses built-in JavaScript functionality, no browser extensions
 or other system software is needed.
 
-// Include sub-documents (if any)
-// -----------------------------------------------------------------------------
-== Installation
+Simply include the `speak2me.js` or `speak2me.min.js` file in your project.
 
-Simply include the ``articulate.min.js'' file in your project.
-
-== Usage
+[role="mt-4"]
+== API Reference
 
 Leverage the powerful selector options of jQuery to specify which parts
 of the Web page that you want spoken. For example, depending on how you
 have the Web page organized, a single line of code, like the following,
-can direct Articulate.js to speak the entire contents of an article or
-blog post:
+can direct Speak2Me to speak the entire contents of an article or a
+blog post.
 
-[source,javascript]
+[source, javascript]
 ----
-$('article').articulate('speak');
-----
-
-Or how about only the primary headers and paragraphs:
-
-[source,javascript]
-----
-$('h1,h2,p').articulate('speak');
+$('article').speak2me('speak')
 ----
 
-Internally, Articulate.js clones the matched set of elements and all
+Or how about only the primary headers and paragraphs
+
+[source, javascript]
+----
+$('h1,h2,p').speak2me('speak')
+----
+
+NOTE: Internally, Speak2Me clones the matched set of elements and all
 their descendant elements and text nodes. It then parses this clone
 using a default set of rules, deciding what should be spoken and
 ignored, then adding the appropriate pauses to make everything sound
 more like a narrative.
 
-== Documentation
+[role="mt-4"]
+=== Examples
 
-=== Basic Functions
+Do not speak the content of `<h5>`, `<h6>`, and `<em>` tags.
+[source, javascript]
+----
+$().speak2me('ignore','h5','h6','em')
+----
 
-[width="100%",cols="50%,50%",options="header",]
+Speak the content of `<button>` and `<code>` tags.
+[source, javascript]
+----
+$().speak2me('recognize','button','code')
+----
+
+When `i.e.` is encountered, say `That is`.
+[source, javascript]
+----
+$().speak2me('replace','i.e.','That is')
+----
+
+Change default intro text spoken when an HTML tga `<img>` is
+encountered.
+[source, javascript]
+----
+$().speak2me('customize','img','Embedded')
+----
+
+Change default intro and outro text spoken when an HTML tag `<ol>`
+is encountered.
+[source, javascript]
+----
+$().speak2me('customize','ol','Start of numbered List.','End of Numbered List')
+----
+
+[role="mt-4"]
+=== Base Functions
+
+[cols="6a,6a", options="header", width="100%", role="rtable"]
 |===
 |Method |Description
-|`$(selector).articulate('speak');` |Speaks aloud the specified DOM
-element(s) and their descendants
 
-|`$().articulate('pause');` |Pauses the speaking
+|`$(selector).speak2me('speak')`
+|Speaks aloud the specified DOM element(s) and their descendants.
 
-|`$().articulate('resume');` |Resumes the speaking after it has been
-paused
+|`$().speak2me('pause')`
+|Pauses the speaking.
 
-|`$().articulate('stop');` |Stops the speaking permanently
+|`$().speak2me('resume')`
+|Resumes the speaking after it has been paused.
+
+|`$().speak2me('stop')`
+|Stops the speaking permanently.
+
 |===
 
+[role="mt-4"]
 === Voice Parameters
 
-[width="100%",cols="50%,50%",options="header",]
+[cols="4a,5a,3", options="header", width="100%", role="rtable"]
 |===
-|Method |Description
-|`$().articulate('rate', number);` |Sets the rate of the speaking voice;
-default = 1.1; range = [0.1 - 10]
+|Method |Description |Default\|Range
 
-|`$().articulate('pitch', number);` |Sets the pitch of the speaking
-voice; default = 1.0; range = [0 - 2]
+|`$().speak2me('rate', number)`
+|Sets the rate of the speaking voice.
+|Default: 1.1 +
+Range: [0.1 - 10.0]
 
-|`$().articulate('volume', number);` |Sets the volume of the speaking
-voice; default = 1.0; range = [0 - 1]
+|`$().speak2me('pitch', number)`
+|Sets the pitch of the speaking voice.
+|Default: 1.0 +
+Range: [0.0 - 2.0]
+
+|`$().speak2me('volume', number)`
+|Sets the volume of the speaking voice.
+|Default: 1.0 +
+Range: [0.0 - 1.0]
 |===
 
-*Note:* Omitting number resets the parameter to its default value;
+NOTE: Omitting number resets the parameter to its default value;
 changes take effect only when next speak call is made
 
+[role="mt-4"]
 === Read-Only Attributes
 
-[width="100%",cols="50%,50%",options="header",]
+[cols="6a,6a", options="header", width="100%", role="rtable"]
 |===
 |Method |Description
-|`$().articulate('enabled');` |Returns (true / false) specifying whether
-the browser supports the Web Speech API
+|`$().speak2me('enabled')`
+|Returns `true`\|`false` specifying whether the browser supports
+the Web *Speech API*.
 
-|`$().articulate('isSpeaking');` |Returns (true / false) specifying
-whether speaking has not yet been completed or stopped
+|`$().speak2me('isSpeaking')`
+|Returns `true`\|`false` specifying whether speaking has not
+yet been completed or stopped.
 
-|`$().articulate('isPaused');` |Returns (true / false) specifying
-whether speaking is paused
+|`$().speak2me('isPaused')`
+|Returns `true`\|`false` specifying whether speaking is paused.
 |===
 
-*Note:* `$().articulate('isSpeaking');` returns the value of true even
+NOTE: `$().speak2me('isSpeaking')` returns the value of true even
 when paused
 
+[role="mt-4"]
 === Get and Set Voices
 
-[width="100%",cols="50%,50%",options="header",]
-|===
-|Method |Description
-|`$().articulate('getVoices');` |Returns an array of voice objects; each
-object has two properties: name and language
-
-|`$().articulate('getVoices',selector,text);` |Populates the DOM
-element(s) _selector_ with a dropdown menu for voice selection; optional
-_text_ overwrites default dropdown menu instruction
-
-|`$().articulate('setVoice','name',voice);` |Sets voice; must match
-exactly one of the names returned when using `getVoices`
-
-|`$().articulate('setVoice','language',twoDigit);` |Sets voice by
-finding the first voice that matches the _twoDigit_ language code; this
-is case-insensitive
-
-|`$().articulate('setVoice','language',code);` |Sets voice by finding
-the first voice that exactly matches the complete language code
-|===
-
-*Note:* Default text for `getVoices` dropdown menu is: `Choose a
-Different Voice'.
-
-*Note:* Language codes consist of two-characters that specify the
+NOTE: Language codes consist of two-characters that specify the
 language, followed by a hyphen, followed by additional characters that
 specify the particular country or regional dialect of that language. For
 example, the codes ``en-US'' and ``en-GB'' are both English language,
 but each represent a different country.
 
-*Note:* Setting a voice by specifying only a two-digit language code is
+[cols="6a,6a", options="header", width="100%", role="rtable"]
+|===
+|Method |Description
+
+|`$().speak2me('getVoices')`
+|Returns an array of voice objects; each object has two properties:
+`name` and `language`
+
+|`$().speak2me('getVoices',selector,text)`
+|Populates the DOM element(s) _selector_ with a dropdown menu for
+voice selection; optional _text_ overwrites default dropdown menu instruction
+
+|`$().speak2me('setVoice','name',voice)`
+|Sets the voice. Must exactly match one of the names returned
+when using `getVoices`.
+
+|`$().speak2me('setVoice','language',twoDigit)`
+|Sets the voice by finding the first voice that matches the _two digit_
+language code (case-insensitive).
+
+|`$().speak2me('setVoice','language',code)`
+|Sets the voice by finding the first voice that exactly matches the
+complete language code
+|===
+
+.Setting a Voice
+[TIP]
+====
+Setting a voice by specifying only a two-digit language code is
 useful for when you have text on the page in another language, but don’t
 want to bother checking to see if that language is available. For
 example, a page otherwise in English may have a paragraph in German that
 you want spoken. That paragraph can have a link like this:
 
-`$('p').articulate('setVoice','language','de').articulate('speak');`
+`$('p').speak2me('setVoice','language','de').speak2me('speak')`
+====
 
 If the German language is available, it will be appropriately spoken. If
 not, the current voice will remain.
 
+[role="mt-4"]
 === Text Manipulation
 
-[width="100%",cols="50%,50%",options="header",]
+[cols="6a,6a", options="header", width="100%", role="rtable"]
 |===
 |Method |Description
-|`$().articulate('ignore',tagName,tagName,...);` |Adds one or more HTML
-tags to the default array of ignored HTML tags; omitting _tagName_
-clears the array of user-specified ignored HTML tags; see Reference
-Information below
 
-|`$().articulate('recognize',tagName,tagName,...);` |Removes one or more
-HTML tags from the default array of ignored HTML tags; omitting
-_tagName_ clears the array of user-specified recognized HTML tags; see
-Reference Information below
+|`$().speak2me('ignore',tagName,tagName,...)`
+|Adds one or more *HTML tags* to the default array of ignored HTML tags.
+Omitting _tagName_ clears the array of user-specified ignored HTML tags. +
+See Reference Information below
 
-|`$().articulate('replace',oldText,newText,...);` |Replaces _oldText_
-with _newText_ when speaking; this is case-insensitive; multiple pairs
-of text can be specified; omitting parameters deletes previous replace
-commands
+|`$().speak2me('recognize',tagName,tagName,...)`
+|Removes one or more *HTML tags* from the default array of ignored
+HTML tags. Omitting _tagName_ clears the array of user-specified
+recognized HTML tags. +
+See Reference Information below
 
-|`$().articulate('customize',tagName,prepend);` |Replaces default text
-spoken prior to the description of the HTML tags `<img>`, `<table>`, and
-`<figure>`; omitting parameters reverts values to its defaults; see
-Reference Information below
+|`$().speak2me('replace',oldText,newText,...)`
+|Replaces _oldText_ with _newText_ when speaking. This is case-insensitive
+Multiple pairs of text can be specified. Omitting parameters deletes previous
+replace commands
 
-|`$().articulate('customize',tagName,prepend,append);` |Replaces default
-text spoken prior to and after the content of the HTML tags `<q>`,
-`<ol>`, `<ul>`, and `<blockquote>`; omitting parameters reverts values
-to its defaults; see Reference Information below
+|`$().speak2me('customize',tagName,prepend)`
+|Replaces default text spoken prior to the description of the *HTML tags*
+`<img>`, `<table>`, and `<figure>`. Omitting parameters reverts values to
+its defaults. +
+See Reference Information below
+
+|`$().speak2me('customize',tagName,prepend,append)`
+|Replaces default text spoken prior to and after the content of the
+*HTML tags* `<q>`, `<ol>`, `<ul>`, and `<blockquote>`. +
+Omitting parameters reverts values to its defaults. +
+See Reference Information below
 |===
 
+[role="mt-4"]
 === HTML Data Attributes
 
-[width="100%",cols="50%,50%",options="header",]
+[cols="6a,6a", options="header", width="100%", role="rtable"]
 |===
 |Data Attribute |Description
-|`data-articulate-ignore` |Content from that DOM element and its
-descendents are ignored
 
-|`data-articulate-recognize` |Content from that DOM element is spoken,
-overriding the default
+|`data-speak2me-ignore`
+|Content from that DOM element and its descendents are ignored.
 
-|`data-articulate-spell` |Content from that DOM element is spelled out
+|`data-speak2me-recognize`
+|Content from that DOM element is spoken, overriding the default.
 
-|`data-articulate-prepend=text` |Specified _text_ is spoken prior to the
-content of its DOM element
+|`data-speak2me-spell`
+|Content from that DOM element is spelled out.
 
-|`data-articulate-append=text` |Specified _text_ is spoken after to the
-content of its DOM element
+|`data-speak2me-prepend=text`
+|Specified _text_ is spoken prior to the content of its DOM element.
 
-|`data-articulate-swap=text` |Specified _text_ is spoken in place of the
-content of its DOM element
+|`data-speak2me-append=text`
+|Specified _text_ is spoken after to the content of its DOM element.
+
+|`data-speak2me-swap=text`
+|Specified _text_ is spoken in place of the content of its DOM element.
 |===
 
-=== Miscellaneous
-
-[source,html]
-----
-<!-- <articulate>text</articulate> -->
-----
-
-Specified _text_ is spoken when encountered in the HTML; the syntax must
-match exactly — one space separating the opening and closing
-`<articulate>` tags and their neighboring comment markers
-
+[role="mt-4"]
 === Reference Information
 
 Chaining calls is acceptable. For example, the following works just
-fine:
-
-[source,javascript]
+fine.
+[source, javascript]
 ----
-$('article').articulate('rate',1.3).articulate('speak');
+$('article').speak2me('rate',1.3).speak2me('speak');
 ----
 
-*Ignored Tags:* audio, button, canvas, code, del, dialog, dl, embed,
+CAUTION: *Ignored Tags:* audio, button, canvas, code, del, dialog, dl, embed,
 form, head, iframe, meter, nav, noscript, object, s, script, select,
 style, textarea, video
 
-[cols=",,",options="header",]
+[cols=",,", options="header", width="100%", role="rtable"]
 |===
 |HTML Tag |Default Prepend Text |Default Append Text
 |`<img>` |There’s an embedded image with the description, |n/a
@@ -282,71 +353,5 @@ style, textarea, video
 |`<blockquote>` |Blockquote start. |Blockquote end.
 |===
 
-*Note:* A comma followed by a space results in a pause when spoken; a
-period results in a slightly longer pause
-
-=== Examples
-
-[source,javascript]
-----
-$().articulate('ignore','h5','h6','em'); // Do not speak the content of <h5>, <h6>, and <em> tags
-----
-
-[source,javascript]
-----
-$().articulate('recognize','button','code'); // Speak the content of <button> and <code> tags
-----
-
-[source,javascript]
-----
-$().articulate('replace','i.e.','That is'); // When 'i.e.' is encountered, say 'That is'
-----
-
-[source,javascript]
-----
-$().articulate('customize','img','Embedded'); // Change default intro text spoken when <img> is encountered
-----
-
-[source,javascript]
-----
-$().articulate('customize','ol','Start of numbered List.','End of Numbered List'); // Change default intro and outro text spoken when <ol> is encountered
-----
-
-'''''
-
-[source,html]
-----
-<div class="speech">
-  <h1 data-articulate-prepend="An analysis of">The Gettysburg Address</h1>
-
-  <p>Despite the speech's prominent place in the history and popular culture
-  of the <span data-articulate-append="of America">United States</span>, the
-  exact wording and location of the speech are disputed. The five known manuscripts
-  of the Gettysburg Address in Lincoln's hand differ in a number of details, and
-  also differ from contemporary newspaper reprints of the speech.</p>
-
-  <p><span data-articulate-swap="Experienced researchers locate">Modern scholarship locates</span>
-  the speakers' platform 40 yards <span data-articulate-ignore>(or more)</span>
-  away from the Traditional Site within Soldiers' National Cemetery at
-  the Soldiers' National Monument and entirely within private, adjacent
-  Evergreen Cemetery.</p>
-
-  <!-- <articulate>This is the end of the article.</articulate> -->
-</div>
-----
-
-Using `$('div.speech').articulate('speak');` The above will be spoken
-as:
-
-____
-An analysis of The Gettysburg Address. Despite the speech’s prominent
-place in the history and popular culture of the United States of
-America, the exact wording and location of the speech are disputed. The
-five known manuscripts of the Gettysburg Address in Lincoln’s hand
-differ in a number of details, and also differ from contemporary
-newspaper reprints of the speech. Experienced researchers locate the
-speakers’ platform 40 yards away from the Traditional Site within
-Soldiers’ National Cemetery at the Soldiers’ National Monument and
-entirely within private, adjacent Evergreen Cemetery. This is the end of
-the article.
-____
+IMPORTANT: A comma `,` followed by a space results in a pause when
+spoken. A period `.` results in a *slightly* longer *pause*.

@@ -217,6 +217,10 @@ defaults:
     translate_action:                   translate
     translate_label:                    Google Translate
 
+    speak2me_icon:                      speaker
+    speak2me_action:                    speak
+    speak2me_label:                     Speak2Me
+
     theme_toggler_icon:                 lightbulb-outline
     theme_toggler_action:               themeToggler
     theme_toggler_label:                Theme Toggler

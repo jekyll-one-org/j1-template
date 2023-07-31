@@ -46,6 +46,8 @@ exclude_from_search:                    true
 
 {% assign translator_defaults       = modules.defaults.translator.defaults %}
 {% assign translator_settings       = modules.translator.settings %}
+{% assign speak2me_defaults         = modules.defaults.speak2me.defaults %}
+{% assign speak2me_settings         = modules.speak2me.settings %}
 {% assign toggler_defaults          = modules.defaults.theme_toggler.defaults %}
 {% assign toggler_settings          = modules.theme_toggler.settings %}
 
@@ -71,8 +73,9 @@ exclude_from_search:                    true
 {% assign lunr_search_options       = lunr_search_defaults | merge: lunr_search_settings %}
 {% assign quicklinks_options        = nav_quicklinks_defaults | merge: nav_quicklinks_settings %}
 {% assign consent_options           = consent_defaults | merge: consent_settings %}
-{% assign translator_options        = translator_defaults | merge: translator_settings %}
 {% assign toggler_options           = toggler_defaults | merge: toggler_settings %}
+{% assign translator_options        = translator_defaults | merge: translator_settings %}
+{% assign speak2me_options          = speak2me_defaults | merge: speak2me_settings %}
 
 {% comment %} Control Center disabled
 --------------------------------------------------------------------------------
@@ -131,6 +134,10 @@ exclude_from_search:                    true
 {% assign translate_action          = quicklinks_options.translate_action %}
 {% assign translate_label           = quicklinks_options.translate_label %}
 
+{% assign speak2me_icon             = quicklinks_options.speak2me_icon %}
+{% assign speak2me_action           = quicklinks_options.speak2me_action %}
+{% assign speak2me_label            = quicklinks_options.speak2me_label %}
+
 {% assign theme_toggler_icon        = quicklinks_options.theme_toggler_icon %}
 {% assign theme_toggler_action      = quicklinks_options.theme_toggler_action %}
 {% assign theme_toggler_label       = quicklinks_options.theme_toggler_label %}
@@ -164,6 +171,7 @@ exclude_from_search:                    true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign show_quicksearch_icon     = lunr_search_options.enabled  %}
 {% assign show_translator_icon      = translator_options.enabled  %}
+{% assign show_speak2me_icon        = speak2me_options.enabled  %}
 {% assign show_theme_toggler_icon   = toggler_options.enabled  %}
 {% assign show_control_center_icon  = cc_app_config_options.enabled %}
 {% assign show_auth_manager_icon    = authentication_enabled  %}
@@ -192,9 +200,8 @@ exclude_from_search:                    true
 
 {% comment %} QuickLink icons (Disabled)
 --------------------------------------------------------------------------------
-
 {% assign show_control_center_icon  = cc_app_config_options.enabled %}
-{% assign show_notebooks_icon       = nbi_defaults.enabled  %}
+{% assign show_notebooks_icon       = nbi_defaults.enabled %}
 
 {% comment %} Show|Hide RSizer icon
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -206,13 +213,11 @@ exclude_from_search:                    true
 
 {% comment %} Show|Hide Google Translate icon
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign show_google_translate_icon = true  %}
-{% assign show_google_translate_lang = false  %}
-{% assign translate_lang = 'gb'  %}
-
+{% assign show_google_translate_icon = true %}
+{% assign show_google_translate_lang = false %}
+{% assign translate_lang = 'gb' %}
 --------------------------------------------------------------------------------
 {% endcomment %}
-
 
 {% comment %} Select icon family and size (color set dynamically by adapter)
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -269,6 +274,7 @@ exclude_from_search:                    true
   {% if show_auth_manager_icon %}<li id="quickLinksSignInOutButton" class="nav-icon sign-inout" style="display: none;"><a class="nav-icon" id="navLinkSignInOut" aria-label="SignOut" href="#" data-bs-toggle="modal" data-bs-target="#{{signin_modal_id}}"><i id="iconSignInOut" class="nav-icon {{icon_family}} {{icon_family}}-{{signin_icon}} {{icon_size}}"></i></a></li>{% endif %}
   {% if show_cookieconsent_icon %}<li id="quickLinksCookieButton" class="nav-icon {{cookies_action}}" style="display: block;"><a href="#" aria-label="{{cookies_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{cookies_icon}} {{icon_size}}"></i></a></li>{% endif %}
   {% if show_translator_icon %}<li id="quickLinksTranslateButton" class="nav-icon {{translate_action}}" style="display: block;"><a href="#" aria-label="{{translate_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{translate_icon}} {{icon_size}}"></i></a></li>{% endif %}
+  {% if show_speak2me_icon %}<li id="quickLinksSpeakButton" class="nav-icon {{speak2me_action}}" style="display: block;"><a href="#" aria-label="{{speak2me_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{speak2me_icon}} {{icon_size}}"></i></a></li>{% endif %}
   {% if show_theme_toggler_icon %}<li id="quickLinksThemeTogglerButton" class="nav-icon {{theme_toggler_action}}" style="display: block;"><a href="#" aria-label="{{theme_toggler_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{theme_toggler_icon}} {{icon_size}}"></i></a></li>{% endif %}
 
   {% comment %} Unused

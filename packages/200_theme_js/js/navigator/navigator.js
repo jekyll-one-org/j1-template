@@ -376,6 +376,16 @@ module.exports = function navigator ( options ) {
         } // END Translator
 
         // ---------------------------------------------------------------------
+        // Speak2Me dialog
+        //
+        if ($('li.speak')) {
+          logger.debug('register SHOW event for J1 Speak2Me');
+          $('li.speak > a', this).on('click', function(e) {
+            j1.adapter.speak2me.showDialog();
+          });
+        } // END NBI Notebooks
+
+        // ---------------------------------------------------------------------
         // NBI Notebooks dialog
         //
         if ($('li.nbi-notebooks')) {

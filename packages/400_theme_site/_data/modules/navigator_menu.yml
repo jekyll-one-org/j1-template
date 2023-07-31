@@ -29,7 +29,7 @@
       icon:                             foot-print
 
     - title:                            Speak2Me
-      href:                             /pages/public/learn/s2m_tester/
+      href:                             /pages/public/learn/speak2me_tester/
       icon:                             speaker
 
 #   - title:                            Core Web Vitals
