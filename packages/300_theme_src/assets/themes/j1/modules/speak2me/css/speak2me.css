@@ -1,20 +1,21 @@
-/* speak2me.js (1.1.0). (C) 2017 Adam Coti. MIT @license: en.wikipedia.org/wiki/MIT_License
-   See Github page at: https://github.com/acoti/speak2me.js
-   See Web site at: http://speak2me.purefreedom.com
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/themes/j1/modules/speak2me/css/speak2me.js
+ # speak2me v.1.0 implementation (based on Articulate.js) for J1 Theme
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2023 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
 */
 
 button {
   margin: 8px 5px 5px 0;
 }
-
-/*
-div.settings-area {
-  font-family: monospace;
-  font-size: 14px;
-  padding: 0 0 15px 0;
-  margin: 0 0 20px 0;
-}
-*/
 
 div.settings-area div {
   margin: 0 0 10px 0;

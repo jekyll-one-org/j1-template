@@ -237,12 +237,19 @@ var Events = {
 
     // -------------------------------------------------------------------------
     // create()
-    // manage ???
+    // create a HTML select element for all (valid) voices found
     // -------------------------------------------------------------------------
     create: function (obj) {
-      var selectEmpty = ($('#voiceSelect').length == 1) ? false: true;
-      if (selectEmpty) {
-        $().speak2me('getVoices', obj, 'Select a voice');
+      var isSelectEmpty = ($('#voiceSelect').length == 1) ? false: true;
+      var numVoices;
+
+      // create select element (#voiceSelect) if not already exist
+      if (isSelectEmpty) {
+        numVoices = $().speak2me('getVoices', obj, 'Select a voice');
+      }
+      // delete select element (#voiceSelect) if no valid voiuces found
+      if (numVoices === 0) {
+        $(obj).remove();
       }
     },
 

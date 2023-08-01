@@ -12,10 +12,10 @@ categories:                             [ Book ]
 tags:                                   [ Biography ]
 
 image:
-  path:                                 https://d3by36x8sj6cra.cloudfront.net/assets/images/book/large/9781/8479/9781847923677.jpg
+  path:                                 /assets/images/collections/books/biography/when_breath_becomes_air.jpg
 
 book:
-  cover:                                https://d3by36x8sj6cra.cloudfront.net/assets/images/book/large/9781/8479/9781847923677.jpg
+  cover:                                /assets/images/collections/books/biography/when_breath_becomes_air.jpg
   format:                               hardback
   pages:                                256
   publisher:                            Vintage Publishing

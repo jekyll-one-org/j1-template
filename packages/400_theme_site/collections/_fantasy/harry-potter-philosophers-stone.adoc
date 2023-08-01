@@ -14,10 +14,10 @@ categories:                             [ Books ]
 tags:                                   [ Fantasy ]
 
 image:
-  path:                                 https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/large/9781/4088/9781408845646.jpg
+  path:                                 /assets/images/collections/books/fantasy/harry-potter-philosophers-stone.jpg
 
 book:
-  cover:                                https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/large/9781/4088/9781408845646.jpg
+  cover:                                /assets/images/collections/books/fantasy/harry-potter-philosophers-stone.jpg
   format:                               hardback
   pages:                                640
   publisher:                            Bloomsbury Publishing PLC

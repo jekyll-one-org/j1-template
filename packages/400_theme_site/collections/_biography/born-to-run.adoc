@@ -11,10 +11,10 @@ categories:                             [ Book ]
 tags:                                   [ Biography ]
 
 image:
-  path:                                 https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/large/9781/4711/9781471157790.jpg
+  path:                                 /assets/images/collections/books/biography/born_to_run.jpg
 
 book:
-  cover:                                https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/large/9781/4711/9781471157790.jpg
+  cover:                                /assets/images/collections/books/biography/born_to_run.jpg
   format:                               hardback
   pages:                                528
   publisher:                            Simon and Schuster Ltd.

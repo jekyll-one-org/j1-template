@@ -13,10 +13,10 @@ categories:                             [ Books ]
 tags:                                   [ Romance ]
 
 image:
-  path:                                 https://d4rri9bdfuube.cloudfront.net/assets/images/book/large/9780/4402/9780440212560.jpg
+  path:                                 /assets/images/collections/books/romance/outlander-novel.jpg
 
 book:
-  cover:                                https://d4rri9bdfuube.cloudfront.net/assets/images/book/large/9780/4402/9780440212560.jpg
+  cover:                                /assets/images/collections/books/romance/outlander-novel.jpg
   format:                               paperback
   pages:                                850
   publisher:                            Bantam Doubleday Dell Publishing Group Inc

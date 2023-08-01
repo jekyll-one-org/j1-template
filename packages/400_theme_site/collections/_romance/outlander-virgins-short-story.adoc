@@ -16,10 +16,10 @@ categories:                             [ Books ]
 tags:                                   [ Romance ]
 
 image:
-  path:                                 https://d4rri9bdfuube.cloudfront.net/assets/images/book/large/9781/7808/9781780896618.jpg
+  path:                                 /assets/images/collections/books/romance/outlander-short-story.jpg
 
 book:
-  cover:                                https://d4rri9bdfuube.cloudfront.net/assets/images/book/large/9781/7808/9781780896618.jpg
+  cover:                                /assets/images/collections/books/romance/outlander-short-story.jpg
   format:                               hardback
   pages:                                256
   publisher:                            Cornerstone

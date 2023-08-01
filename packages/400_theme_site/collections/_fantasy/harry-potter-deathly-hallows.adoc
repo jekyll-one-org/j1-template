@@ -14,10 +14,10 @@ categories:                             [ Books ]
 tags:                                   [ Fantasy ]
 
 image:
-  path:                                 https://d4rri9bdfuube.cloudfront.net/assets/images/book/large/9781/4088/9781408855713.jpg
+  path:                                 /assets/images/collections/books/fantasy/harry-potter-deathly-hallows.jpg
 
 book:
-  cover:                                https://d4rri9bdfuube.cloudfront.net/assets/images/book/large/9781/4088/9781408855713.jpg
+  cover:                                /assets/images/collections/books/fantasy/harry-potter-deathly-hallows.jpg
   format:                               paperback
   pages:                                640
   publisher:                            Bloomsbury Publishing PLC

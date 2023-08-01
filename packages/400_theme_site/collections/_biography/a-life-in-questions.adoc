@@ -11,10 +11,10 @@ categories:                             [ Book ]
 tags:                                   [ Biography ]
 
 image:
-  path:                                 https://d3by36x8sj6cra.cloudfront.net/assets/images/book/large/9780/0081/9780008128302.jpg
+  path:                                 /assets/images/collections/books/biography/a_life_in_questions.jpg
 
 book:
-  cover:                                https://d3by36x8sj6cra.cloudfront.net/assets/images/book/large/9780/0081/9780008128302.jpg
+  cover:                                /assets/images/collections/books/biography/a_life_in_questions.jpg
   format:                               hardback
   pages:                                320
   publisher:                            HarperCollins Publishers

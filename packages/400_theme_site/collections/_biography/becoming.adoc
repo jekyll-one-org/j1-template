@@ -12,10 +12,10 @@ categories:                             [ Book ]
 tags:                                   [ Biography ]
 
 image:
-  path:                                 https://images-na.ssl-images-amazon.com/images/I/414JfiBCutL.jpg
+  path:                                 /assets/images/collections/books/biography/becoming.jpg
 
 book:
-  cover:                                https://images-na.ssl-images-amazon.com/images/I/414JfiBCutL.jpg
+  cover:                                /assets/images/collections/books/biography/becoming.jpg
   format:                               hardback
   pages:                                430
   publisher:                            Penguin Random House LLC

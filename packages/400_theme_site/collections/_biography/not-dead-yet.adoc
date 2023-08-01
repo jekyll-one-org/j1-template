@@ -11,10 +11,10 @@ categories:                             [ Book ]
 tags:                                   [ Biography ]
 
 image:
-  path:                                 https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/large/9781/7808/9781780895123.jpg
+  path:                                 /assets/images/collections/books/biography/not_dead_yet.jpg
 
 book:
-  cover:                                https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/large/9781/7808/9781780895123.jpg
+  cover:                                /assets/images/collections/books/biography/not_dead_yet.jpg
   format:                               hardback
   pages:                                464
   publisher:                            Cornerstone

@@ -66,9 +66,8 @@ resource_options:
 // -----------------------------------------------------------------------------
 == Chapter One
 
-Tyrion Lannister, dwarf and exile, stood resolute upon the prow of
-the majestic vessel, the Wind's Grace, its timeworn planks creaking
-beneath his weight.
+    Tyrion Lannister stood resolute upon the prow of the majestic vessel,
+the Wind's Grace, its timeworn planks creaking beneath his weight.
 
     His mismatched eyes, one green as the emerald depths of the
 Whispering Wood, the other a glimmering pale amethyst, stared out into

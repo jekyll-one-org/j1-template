@@ -13,10 +13,10 @@ categories:                             [ Books ]
 tags:                                   [ Romance ]
 
 image:
-  path:                                 https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/large/9780/4402/9780440225805.jpg
+  path:                                 /assets/images/collections/books/romance/breath-of-snow-and-ashes.jpg
 
 book:
-  cover:                                https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/large/9780/4402/9780440225805.jpg
+  cover:                                /assets/images/collections/books/romance/breath-of-snow-and-ashes.jpg
   format:                               paperback
   pages:                                1438
   publisher:                            Random House USA Inc

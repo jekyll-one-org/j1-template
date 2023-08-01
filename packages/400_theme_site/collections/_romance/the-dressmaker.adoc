@@ -11,10 +11,10 @@ categories:                             [ Books ]
 tags:                                   [ Romance ]
 
 image:
-  path:                                 https://d20eq91zdmkqd.cloudfront.net/assets/images/book/large/9781/8466/9781846689949.jpg
+  path:                                 /assets/images/collections/books/romance/the_dressmaker.jpg
 
 book:
-  cover:                                https://d20eq91zdmkqd.cloudfront.net/assets/images/book/large/9781/8466/9781846689949.jpg
+  cover:                                /assets/images/collections/books/romance/the_dressmaker.jpg
   format:                               paperback
   pages:                                320
   publisher:                            Profile Books Ltd

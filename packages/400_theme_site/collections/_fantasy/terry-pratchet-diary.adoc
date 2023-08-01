@@ -12,10 +12,10 @@ categories:                             [ Books ]
 tags:                                   [ Fantasy ]
 
 image:
-  path:                                 https://d39ttiideeq0ys.cloudfront.net/assets/images/book/large/9781/4732/9781473208339.jpg
+  path:                                 /assets/images/collections/books/fantasy/terry-pratchet-diary.jpg
 
 book:
-  cover:                                https://d39ttiideeq0ys.cloudfront.net/assets/images/book/large/9781/4732/9781473208339.jpg
+  cover:                                /assets/images/collections/books/fantasy/terry-pratchet-diary.jpg
   format:                               hardback
   pages:                                128
   publisher:                            Orion Publishing Co

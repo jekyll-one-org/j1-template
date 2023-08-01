@@ -14,10 +14,10 @@ categories:                             [ Books ]
 tags:                                   [ Romance ]
 
 image:
-  path:                                 https://d20eq91zdmkqd.cloudfront.net/assets/images/book/large/9780/4402/9780440221661.jpg
+  path:                                 /assets/images/collections/books/romance/the-fiery-cross.jpg
 
 book:
-  cover:                                https://d20eq91zdmkqd.cloudfront.net/assets/images/book/large/9780/4402/9780440221661.jpg
+  cover:                                /assets/images/collections/books/romance/the-fiery-cross.jpg
   format:                               paperback
   pages:                                1443
   publisher:                            Random House USA Inc

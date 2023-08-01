@@ -1,33 +1,124 @@
-/* speak2me.js (1.1.0).
-   (C) 2017 Adam Coti.
-   MIT @license: en.wikipedia.org/wiki/MIT_License
-   See Github page at: https://github.com/acoti/speak2me.js
-   See Web site at: http://speak2me.purefreedom.com
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/themes/j1/modules/speak2me/js/speak2me.js
+ # speak2me v.1.0 implementation (based on Articulate.js) for J1 Theme
+ #
+ # Product/Info:
+ # https://jekyll.one
+ # https://github.com/acoti/articulate.js/tree/master
+ #
+ # Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2017 Adam Coti
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # Articulate is licensed under the MIT License.
+ # See: https://github.com/acoti/articulate.js/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
 */
-;(function($) {
 
+/* Articulate.js (1.1.0). (C) 2017 Adam Coti.
+  MIT @license: en.wikipedia.org/wiki/MIT_License
+  See Github page at: https://github.com/acoti/articulate.js
+  See Web site at: http://articulate.purefreedom.com
+*/
+
+(function($) {
     "use strict";
+
     var ignoreTagsUser = new Array();
     var recognizeTagsUser = new Array();
     var replacements = new Array();
     var customTags = new Array();
-    var rateDefault = 1.10;
+    var voices = new Array();
+
+    var rateDefault = 0.9;
     var pitchDefault = 1;
-    var volumeDefault = 1;
-    var rateUserDefault;
-    var pitchUserDefault;
-    var volumeUserDefault;
-    var voiceUserDefault;
+    var volumeDefault = 0.9;
     var rate = rateDefault;
     var pitch = pitchDefault;
     var volume = volumeDefault;
-    var voices = new Array();
-    var self = this;
+
+    var currentTranslation = getCookie('googtrans');
+
+    var voiceUserDefault = 'Google UK English Female';
+    var voiceChromeDefault = 'Google US English';
+    var ignoreProvider = 'Microsoft';
+    var preferredVoice = 'Natural';
+
+    var voiceLanguageGoogleDefault = {
+      'de-DE':  'Google Deutsch',
+      'en-US':  'Google US English',
+      'en-GB':  'Google UK English Female',
+      'es-ES':  'Google español',
+      'fr-FR':  'Google français',
+//    'hi-IN':  'Google हिन्दी',
+//    'id-ID':  'Google Bahasa Indonesia',
+      'it-IT':  'Google italiano',
+//    'jp-JP':  'Google 日本語',
+//    'ko-KR':  'Google 한국의',
+      'nl-NL':  'Google Nederlands',
+      'pl-PL':  'Google polski',
+//    'pt-BR':  'Google português do Brasil',
+      'pt-PT':  'Google português do Brasil',
+//    'ru-RU':  'Google русский',
+//    'zh-CN':  'Google 普通话（中国大陆)',
+    };
+
+    var voiceLanguageMicrosoftDefault = {
+      'sq-AL':  'Microsoft Anila Online (Natural) - Albanian (Albania)',
+      'ar-EG':  'Microsoft Salma Online (Natural) - Arabic (Egypt)',
+      'bg-BG':  'Microsoft Kalina Online (Natural) - Bulgarian (Bulgaria)',
+      'zh-CN':  'Microsoft Xiaoxiao Online (Natural) - Chinese (Mainland)',
+      'hr-HR':  'Microsoft Gabrijela Online (Natural) - Croatian (Croatia)',
+      'cs-CZ':  'Microsoft Antonin Online (Natural) - Czech (Czech)',
+      'da-DK':  'Microsoft Christel Online (Natural) - Danish (Denmark)',
+      'nl-NL':  'Microsoft Colette Online (Natural) - Dutch (Netherlands)',
+      'en-GB':  'Microsoft Libby Online (Natural) - English (United Kingdom)',
+      'en-US':  'Microsoft Aria Online (Natural) - English (United States)',
+      'et-EE':  'Microsoft Anu Online (Natural) - Estonian (Estonia)',
+      'fi-FI':  'Microsoft Noora Online (Natural) - Finnish (Finland)',
+      'fr-FR':  'Microsoft Denise Online (Natural) - French (France)',
+      'ka-GE':  'Microsoft Giorgi Online (Natural) - Georgian (Georgia)',
+      'de-DE':  'Microsoft Katja Online (Natural) - German (Germany)',
+      'el-GR':  'Microsoft Athina Online (Natural) - Greek (Greece)',
+      'he-IL':  'Microsoft Avri Online (Natural) - Hebrew (Israel)',
+      'hi-IN':  'Microsoft Madhur Online (Natural) - Hindi (India)',
+      'hu-HU':  'Microsoft Noemi Online (Natural) - Hungarian (Hungary)',
+      'it-IT':  'Microsoft Elsa Online (Natural) - Italian (Italy)',
+      'ja-JP':  'Microsoft Nanami Online (Natural) - Japanese (Japan)',
+    }
+
+    var isEdge    = /Edg/i.test( navigator.userAgent );
+    var chrome    = /chrome/i.test( navigator.userAgent );
+    var isChrome  = ((chrome) && (!isEdge));
+
+    var rateUserDefault;
+    var pitchUserDefault;
+    var volumeUserDefault;
+    var currentLanguage;
+    var voiceLanguageDefault;
 
     // -------------------------------------------------------------------------
     // Internal functions
     // -------------------------------------------------------------------------
     //
+    function getCookie(name) {
+      var nameEQ = name + "=";
+      var ca = document.cookie.split(';');
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) === ' ') {
+          c = c.substring(1, c.length);
+        }
+        if (c.indexOf(nameEQ) === 0) {
+          var value = c.substring(nameEQ.length, c.length);
+          return value;
+        }
+      }
+      return undefined;
+    }
+
     function voiceTag(prepend,append) {
       this.prepend = prepend;
       this.append = append;
@@ -64,18 +155,46 @@
         window.speechSynthesis.cancel();
     }
 
-    // Hated to do a browser detect, but Windows Chrome is a bit buggy
-    // and inconsistent with the default voice that it uses unless that
-    // default voice ('native') is specified directly -- see line 165.
-    // Every browser is fine with 'native' specified directly except
-    // nMicrosoft Edge, which is why this browser detect ened up necessary
-    // for the time being. I think this will all resolve itself
-    // in future browser versions, but for now, I felt this was the
-    // safest solution. But I feel dirty.
-    //
-    var chrome = /chrome/i.test( navigator.userAgent );
-    var edge = /Edg/i.test( navigator.userAgent );
-    var isChrome = ((chrome) && (!edge));
+    if ( currentTranslation === undefined ) {
+        currentLanguage = 'en-US'
+    } else {
+      var translation = currentTranslation.split("/");
+      if ( translation[2] == 'en') {
+        currentLanguage = 'en-GB';
+      } else if ( translation[2].includes('ar') ) {
+        currentLanguage = 'ar-EG';
+      } else if ( translation[2].includes('cs') ) {
+        currentLanguage = 'cs-CZ';
+      } else if ( translation[2].includes('da') ) {
+        currentLanguage = 'da-DK';
+      } else if ( translation[2].includes('en') ) {
+        currentLanguage = 'en-UK';
+      } else if ( translation[2].includes('et') ) {
+        currentLanguage = 'et-EE';
+      } else if ( translation[2].includes('ka') ) {
+        currentLanguage = 'ka-GE';
+      } else if ( translation[2].includes('el') ) {
+        currentLanguage = 'el-GR';
+      } else if ( translation[2].includes('iw') ) {
+        currentLanguage = 'he-IL';
+      } else if ( translation[2].includes('hi') ) {
+        currentLanguage = 'hi-IN';
+      } else if ( translation[2].includes('ja') ) {
+        currentLanguage = 'ja-JP';
+      } else if ( translation[2].includes('zh') ) {
+        currentLanguage = 'zh-CN';
+      } else {
+        currentLanguage = translation[2] + '-' + translation[2].toUpperCase();
+      }
+    }
+
+    if (isChrome) {
+      var voiceLanguageDefault = voiceLanguageGoogleDefault[currentLanguage];
+    }
+
+    if (isEdge) {
+      var voiceLanguageDefault = voiceLanguageMicrosoftDefault[currentLanguage];
+    }
 
     // -------------------------------------------------------------------------
     // Public functions
@@ -160,13 +279,20 @@
           speech.rate = rate;
           speech.pitch = pitch;
           speech.volume = volume;
+          speech.voice = undefined;
 
           if (isChrome) {
-            speech.voice = speechSynthesis.getVoices().filter(function(voice) { return voice.name == "native"; })[0];
+            speech.voice = speechSynthesis.getVoices().filter(function(voice) { return voice.name == voiceLanguageDefault; })[0];
+//          speech.voice = speechSynthesis.getVoices().filter(function(voice) { return voice.name == voiceChromeDefault; })[0];
           };
-          if (voiceUserDefault !== undefined) {
-            speech.voice = speechSynthesis.getVoices().filter(function(voice) { return voice.name == voiceUserDefault; })[0];
+
+          if (isEdge) {
+            speech.voice = speechSynthesis.getVoices().filter(function(voice) { return voice.name == voiceLanguageDefault; })[0];
           };
+
+//        if (speech.voice === undefined || speech.voice === null) {
+//          speech.voice = speechSynthesis.getVoices().filter(function(voice) { return voice.name == voiceUserDefault; })[0];
+//        };
 
           window.speechSynthesis.speak(speech);
 
@@ -544,28 +670,53 @@
           //
           var obj = jQuery(arguments[0]);
           var selectionTxt = "Choose a voice";
+
           if (arguments[1] !== undefined) {
               selectionTxt = arguments[1];
-          };
-          obj.append(jQuery("<select id='voiceSelect'><option value='none'>" + selectionTxt + "</option></select>"));
-          for(var i = 0; i < voices.length ; i++) {
+          }
+
+          obj.append(jQuery("<select id='voiceSelect' name='voiceSelect'><option value='none'>" + selectionTxt + "</option></select>"));
+
+          var skippedVoices = 0;
+          for (var i = 0; i < voices.length ; i++) {
+            if (isChrome && voices[i].name.includes(ignoreProvider)) {
+              skippedVoices++;
+              continue;
+            }
+            if (isEdge && !voices[i].name.includes('Natural')) {
+              skippedVoices++;
+              continue;
+            }
               var option = document.createElement('option');
               option.textContent = voices[i].name + ' (' + voices[i].language + ')';
               option.setAttribute('value', voices[i].name);
+
+              // set used voice as 'selected'
+              if (voiceLanguageDefault !== undefined) {
+                if ( voices[i].name ===  voiceLanguageDefault ) {
+                  option.setAttribute('selected', 'selected');
+                }
+              } else {
+                if ( voices[i].name.includes(voiceUserDefault) ) {
+//                option.setAttribute('selected', 'selected');
+                }
+              }
+
               option.setAttribute('data-speak2me-language', voices[i].language);
               obj.find("select").append(option);
           }
 
-          // Add an onchange event to the dropdown menu.
+          // Add an onchange event to the dropdown menu (???)
           //
-          obj.on('change', function() {
-              jQuery(this).find("option:selected").each(function() {
-                  if (jQuery(this).val() != "none") {
-                      voiceUserDefault = jQuery(this).val();
-                  }
-              });
-          });
-          return this;
+          // obj.on('change', function() {
+          //     jQuery(this).find("option:selected").each(function() {
+          //         if (jQuery(this).val() != "none") {
+          //             voiceUserDefault = jQuery(this).val();
+          //         }
+          //     });
+          // });
+
+          return i - skippedVoices;
       },
 
       setVoice: function() {

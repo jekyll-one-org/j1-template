@@ -16,10 +16,10 @@ categories:                             [ Books ]
 tags:                                   [ Fantasy ]
 
 image:
-  path:                                 https://d3by36x8sj6cra.cloudfront.net/assets/images/book/large/9780/0995/9780099560432.jpg
+  path:                                 /assets/images/collections/books/fantasy/ready-player-one.jpg
 
 book:
-  cover:                                https://d3by36x8sj6cra.cloudfront.net/assets/images/book/large/9780/0995/9780099560432.jpg
+  cover:                                /assets/images/collections/books/fantasy/ready-player-one.jpg
   format:                               paperback
   pages:                                384
   publisher:                            Cornerstone

@@ -12,10 +12,10 @@ categories:                             [ Books ]
 tags:                                   [ Fantasy ]
 
 image:
-  path:                                 https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/large/9781/4732/9781473213692.jpg
+  path:                                 /assets/images/collections/books/fantasy/mistborn-trilogy.jpg
 
 book:
-  cover:                                https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/large/9781/4732/9781473213692.jpg
+  cover:                                /assets/images/collections/books/fantasy/mistborn-trilogy.jpg
   format:                               paperback
   pages:                                2500
   publisher:                            Orion Publishing Co
