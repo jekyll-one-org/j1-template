@@ -663,7 +663,7 @@ defaults:
 
       tts:                              true
       toc:                              true
-      canonical:                        true
+      canonical:                        false
       fab_menu_id:                      open_toc
       comments:                         false
       scrollbar:                        false
@@ -709,7 +709,7 @@ defaults:
 
       tts:                              true
       toc:                              true
-      canonical:                        true
+      canonical:                        false
       fab_menu_id:                      open_toc
       scrollbar:                        false
       comments:                         false
@@ -736,7 +736,7 @@ defaults:
     values:
       layout:                           page
       tts:                              false
-      canonical:                        true
+      canonical:                        false
 
   # ----------------------------------------------------------------------------
   # Book Shelf
@@ -748,7 +748,7 @@ defaults:
     values:
       layout:                           page
       tts:                              false
-      canonical:                        true
+      canonical:                        false
 
   - scope:
       type:                             fantasy
@@ -757,7 +757,7 @@ defaults:
     values:
       layout:                           page
       tts:                              false
-      canonical:                        true
+      canonical:                        false
 
   - scope:
       type:                             romance
@@ -766,7 +766,7 @@ defaults:
     values:
       layout:                           page
       tts:                              false
-      canonical:                        true
+      canonical:                        false
 
 
 # ==============================================================================
