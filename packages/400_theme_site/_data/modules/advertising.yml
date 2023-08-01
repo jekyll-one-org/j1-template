@@ -28,15 +28,9 @@ description:
 #
 settings:
   enabled:                              true
-  placement:                            manual
 
   google:
-    publisherID:                        ca-pub-3885670015316130                 # jekyll.one
-#   publisherID:                        <your-publisher-id>
-
-    autoPlaceAds:                       false
-    autoHideOnUnfilled:                 false
-    addBorderOnUnfilled:                true
+    publisherID:                        <your-publisher-id>
 
     # --------------------------------------------------------------------------
     # Container settings

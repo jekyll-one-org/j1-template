@@ -96,6 +96,8 @@ defaults:
     #
     # --------------------------------------------------------------------------
     #
+    placement:                          manual
+    autoPlaceAds:                       false
     autoHideOnUnfilled:                 true
     addBorderOnUnfilled:                true
     checkTrackingProtection:            false
