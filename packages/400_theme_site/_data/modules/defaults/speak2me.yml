@@ -43,7 +43,7 @@ defaults:
       pause_button_style:               info
       resume_button_text:               Resume
       resume_button_style:              info
-      exit_button_text:                 Do nothing
+      exit_button_text:                 Close
       exit_button_style:                warning
 
       voice_speed_min:                  1.0

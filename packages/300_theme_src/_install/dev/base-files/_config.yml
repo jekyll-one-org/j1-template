@@ -53,7 +53,7 @@ environment:                            development
 # ------------------------------------------------------------------------------
 # Sets the build version of the site
 #
-version:                                2023.6.1
+version:                                2023.6.2
 
 # copyright
 # ------------------------------------------------------------------------------
@@ -660,8 +660,9 @@ defaults:
         index:                          true
         follow:                         true
 
+      tts:                              true
       toc:                              true
-      canonical:                        false
+      canonical:                        true
       fab_menu_id:                      open_toc
       comments:                         false
       scrollbar:                        false
@@ -705,8 +706,9 @@ defaults:
         index:                          true
         follow:                         true
 
+      tts:                              true
       toc:                              true
-      canonical:                        false
+      canonical:                        true
       fab_menu_id:                      open_toc
       scrollbar:                        false
       comments:                         false
@@ -732,7 +734,8 @@ defaults:
 
     values:
       layout:                           page
-      canonical:                        false
+      tts:                              false
+      canonical:                        true
 
   # ----------------------------------------------------------------------------
   # Book Shelf
@@ -743,7 +746,8 @@ defaults:
 
     values:
       layout:                           page
-      canonical:                        false
+      tts:                              false
+      canonical:                        true
 
   - scope:
       type:                             fantasy
@@ -751,7 +755,8 @@ defaults:
 
     values:
       layout:                           page
-      canonical:                        false
+      tts:                              false
+      canonical:                        true
 
   - scope:
       type:                             romance
@@ -759,7 +764,8 @@ defaults:
 
     values:
       layout:                           page
-      canonical:                        false
+      tts:                              false
+      canonical:                        true
 
 
 # ==============================================================================
