@@ -26,6 +26,7 @@ defaults:
   enabled:                              false
 
   dialogContainerID:                    speak2me_container
+  speechSelector:                       main
 
   modal:
     title:                              Text-2-Speech Translation

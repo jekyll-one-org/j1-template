@@ -104,6 +104,9 @@
     var currentSection;
 //  var chunksEnd = false;
 
+    const synth = window.speechSynthesis;
+    const speech = new SpeechSynthesisUtterance();
+
 
     // -------------------------------------------------------------------------
     // Internal functions
@@ -157,7 +160,7 @@
     // This is to fix a quirk in Windows Chrome.
     //
     if ("speechSynthesis" in window) {
-        var speech = new SpeechSynthesisUtterance();
+        // var speech = new SpeechSynthesisUtterance();
         window.speechSynthesis.cancel();
     }
 
@@ -201,6 +204,7 @@
     if (isEdge) {
       var voiceLanguageDefault = voiceLanguageMicrosoftDefault[currentLanguage];
     }
+
 
     // -------------------------------------------------------------------------
     // Public functions
@@ -257,6 +261,7 @@
               toSpeak = finished;
           });
 
+
           // Check if users have set their own rate/pitch/volume
           // defaults, otherwise use defaults
           //
@@ -287,8 +292,9 @@
           // fixes the Windows Chrome quirk, the custom voice is set
           // if one has been chosen.
           //
-          speech = new SpeechSynthesisUtterance();
-//        speech.text = toSpeak;
+          // speech = new SpeechSynthesisUtterance();
+          // speech.text = toSpeak;
+          //
           speech.rate = rate;
           speech.pitch = pitch;
           speech.volume = volume;
@@ -307,6 +313,50 @@
 
           // jadams
           processTextChunks(speech, toSpeak);
+
+          // jadams
+          var mySpeakMonitor = setInterval(function () {
+            if (! synth.speaking ) {
+              if (chunkCounter == chunkCounterMax || userStoppedSpeaking ) {
+                chunkCounter = 0;
+                userStoppedSpeaking = false;
+
+                synth.cancel();
+                $(".mdib-speaker").removeClass("mdib-spin");
+                clearInterval(mySpeakMonitor);
+              } else {
+                speech.text = chunks[chunkCounter];
+                var sectionText = speech.text.substr(0, 30);
+
+                // var currentSection = $("main:contains(sectionText)");
+                //var currentSection = $("main").find("p").text(sectionText)[0];
+                // $("body").find("a p").text())
+                // $('#dialog_title_span').text("new dialog title");
+                // $("p:contains(speaker.text)").css({ 'color': 'green' });
+                // $(currentSection).css({ 'color': 'green' });
+                // var currentSection = $( "p" ).first().text(speaker.text)[0];
+                // var currentSection = $( "div" ).first().text(speaker.text)[0];
+                // var currentSection = $("div p:first").text(speaker.text)[0];
+
+                currentSection = $("#content").find("p:contains('" + sectionText + "')")[0];
+                $(currentSection).addClass("speak-highlighted");
+
+                //$(currentSection).wrapInner('<span class="speak-highlighted"/></span>');
+                // $(currentSection).wrapAll( "<span class='speak-highlighted' />");
+
+
+                // $(currentSection).each(function(i, v) {
+                //   $(v).innerHTML().eq(2).wrap('<span class="new"/>');
+                // });
+
+                // var sentences = splitSectionIntoSentences (currentSection);
+
+
+
+                synth.speak(speech);
+              }
+            }
+          }, 500);
 
           // jadams
           function splitTextIntoChunks(text, chunkSize) {
@@ -344,7 +394,7 @@
         // Funktion zur sequenziellen Verarbeitung der Textkette
         //
         function processTextChunks(speaker, chunks) {
-          const synth = window.speechSynthesis;
+          // const synth = window.speechSynthesis;
 
           speaker.text = chunks[chunkCounter];
           synth.speak(speaker);
@@ -360,50 +410,6 @@
             $(currentSection).removeClass("speak-highlighted");
           });
 
-          // jadams
-          var mySpeakMonitor = setInterval(function () {
-            // chunkCounterMax = 4;
-            if (! synth.speaking ) {
-              if (chunkCounter == chunkCounterMax || userStoppedSpeaking ) {
-                chunkCounter = 0;
-                userStoppedSpeaking = false;
-
-                synth.cancel();
-                $(".mdib-speaker").removeClass("mdib-spin");
-                clearInterval(mySpeakMonitor);
-              } else {
-                speaker.text = chunks[chunkCounter];
-                var sectionText = speaker.text.substr(0, 20);
-
-                // var currentSection = $("main:contains(sectionText)");
-                //var currentSection = $("main").find("p").text(sectionText)[0];
-                // $("body").find("a p").text())
-                // $('#dialog_title_span').text("new dialog title");
-                // $("p:contains(speaker.text)").css({ 'color': 'green' });
-                // $(currentSection).css({ 'color': 'green' });
-                // var currentSection = $( "p" ).first().text(speaker.text)[0];
-                // var currentSection = $( "div" ).first().text(speaker.text)[0];
-                // var currentSection = $("div p:first").text(speaker.text)[0];
-
-                currentSection = $("#content").find("p:contains('" + sectionText + "')")[0];
-                $(currentSection).addClass("speak-highlighted");
-
-                //$(currentSection).wrapInner('<span class="speak-highlighted"/></span>');
-                // $(currentSection).wrapAll( "<span class='speak-highlighted' />");
-
-
-                // $(currentSection).each(function(i, v) {
-                //   $(v).innerHTML().eq(2).wrap('<span class="new"/>');
-                // });
-
-                // var sentences = splitSectionIntoSentences (currentSection);
-
-
-
-                synth.speak(speaker);
-              }
-            }
-          }, 500);
         }
 
         // jadams
@@ -704,6 +710,7 @@
       // jadams
       stop: function() {
           window.speechSynthesis.cancel();
+          $(currentSection).removeClass("speak-highlighted");
           userStoppedSpeaking = true;
           return this;
       },

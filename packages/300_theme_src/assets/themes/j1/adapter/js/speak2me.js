@@ -197,7 +197,7 @@ var Events = {
           }
 
           // -------------------------------------------------------------------
-          // on 'shown'
+          // on 'show'
           // -------------------------------------------------------------------
           $('#speak2me_container').on('show.bs.modal', function () {
             if (isChrome) {
@@ -288,13 +288,29 @@ var Events = {
       var p = parseFloat(document.getElementById('pitch').value);
       var v = parseFloat(document.getElementById('volume').value);
 
+      // $().speak2me('ignore', 'mark name="start"', 'mark name="stop"');
+
       // Note: Function calls can be perfromed individually or
       // chained together as demonstrated below
       //
       $(obj).speak2me('rate',r).speak2me('pitch',p).speak2me('volume',v);
       // $(obj).speak2me('ignore', 'h2','h3');
-      $(obj).speak2me('speak');
+      var speaker = $(obj).speak2me('speak');
       $(".mdib-speaker").addClass("mdib-spin");
+
+      // speaker.addEventListener('start', (event) => {
+      //   console.log('speak2me start:', event);
+      // });
+      //
+      // speaker.addEventListener('boundary', (event) => {
+      //   console.log('speak2me boundary:', event);
+      // });
+
+      // just for debugging completeness, no errors seem to be thrown though
+      speaker.addEventListener('error', (event) => {
+        console.log('speak2me error:', event);
+      });
+
     },
 
     // -------------------------------------------------------------------------

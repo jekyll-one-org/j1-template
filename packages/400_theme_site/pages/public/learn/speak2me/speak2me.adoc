@@ -58,6 +58,7 @@ resource_options:
 // https://mdn.github.io/dom-examples/web-speech-api/speak-easy-synthesis/
 // https://stackoverflow.com/questions/11279291/a-good-text-to-speech-javascript-library
 // https://codepen.io/meetselva/pen/EVaLmP
+// https://dev.to/jankapunkt/cross-browser-speech-synthesis-the-hard-way-and-the-easy-way-353
 //
 [role="dropcap"]
 Speech synthesis is an application programming interface (API) in web
@@ -355,3 +356,65 @@ style, textarea, video
 
 IMPORTANT: A comma `,` followed by a space results in a pause when
 spoken. A period `.` results in a *slightly* longer *pause*.
+
+== Issues
+
+=== Issues can't be fixed with JavaScript
+
+Some issues are platform-specific. You need to your app in a way to avoid
+these issues, where possible:
+
+* All browsers on Android actually do a cancel/stop when calling
+`peechSynthesis.pause`; pause is simply not supported on Android
+
+* There are *no* voices on *Chromium-Ubuntu* and Ubuntu-derivatives
+  unless the browser is started with a flag
+* If on Chromium-Desktop Ubuntu and the very first page wants to load
+  speech synthesis, then there are no voices ever loaded until the
+  page is refreshed or a new page is entered. This can be fixed with
+  JavaScript but it can lead to very bad UX to auto-refresh the page.
+* If voices are not installed on the host-OS and there are no voices
+  loaded from remote by the browser, then there are no voices and
+  thus no speech synthesis
+* There is no chance to just instant-load custom voices from remote
+  and use them as a shim in case there are no voices
+* If the installed voices are just bad users have to manually install
+  better voices
+
+=== Chrome-specific fix
+
+Longer texts on Chrome-Desktop will be cancelled automatically after
+*15 seconds*. This can be fixed by either chunking the texts or by
+using an interval of "zero"-latency pause/resume combination. At the
+same time this fix breaks on *Android*, since Android devices don't implement
+speechSynthesis.pause() as pause but as cancel:
+
+[source, javascript]
+----
+let timer
+
+utterance.onstart = () => {
+  // detection is up to you for this article as
+  // this is an own huge topic for itself
+  if (!isAndroid) {
+    resumeInfinity(utterance)
+  }
+}
+
+const clear = () => {  clearTimeout(timer) }
+
+utterance.onerror = clear
+utterance.onend = clear
+
+const resumeInfinity = (target) => {
+  // prevent memory-leak in case utterance is deleted, while this is ongoing
+  if (!target && timer) { return clear() }
+
+  speechSynthesis.pause()
+  speechSynthesis.resume()
+
+  timer = setTimeout(function () {
+    resumeInfinity(target)
+  }, 5000)
+}
+----

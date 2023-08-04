@@ -29,6 +29,10 @@ div.voice-table {
   display: none;
 }
 
+.speak-highlighted {
+  background-color: var(--bs-gray-300);
+}
+
 /*
 table {
   margin: 30px auto 0 auto;

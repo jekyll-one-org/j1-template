@@ -79,8 +79,8 @@ resource_options:
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [role="dropcap"]
 Welcome to the preview page focussing on the image module. This page shows
-all the valuable features of the J1 Template to manage your image-based content
-using using lightboxes, carousels, sliders, and galleries. The image modules
+all the valuable features of the J1 Template to manage your image-based
+content using lightboxes, carousels, sliders, and galleries. The image modules
 of J1 Template offer a wide range of complex functionality based on powerful
 OpenSource libraries like Lightbox2, Master Slider, LightGallery, or
 JustifiedGallery for high-end, masonry-styled preview maps.
