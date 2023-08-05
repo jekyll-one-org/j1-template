@@ -75,7 +75,7 @@
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
 
-<div class="paginator">
+<div class="paginator" data-speak2me-ignore>
   <ul class="pagination raised-z0">
 
     {% comment %} Set HOME page BUTTON (always)

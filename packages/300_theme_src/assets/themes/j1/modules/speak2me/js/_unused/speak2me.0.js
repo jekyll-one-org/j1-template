@@ -218,20 +218,16 @@
 
           // Default values
           //
-          voiceTags["a"]          = new voiceTag("clicking the link,", "");
-          voiceTags["q"]          = new voiceTag("quote,", ", unquote,");
-          voiceTags["ol"]         = new voiceTag("Start of list.", "End of list.");
-          voiceTags["ul"]         = new voiceTag("Start of list.", "End of list.");
-//        voiceTags["li"]         = new voiceTag("", ",");
-          voiceTags["dl"]         = new voiceTag("Start of list.", "End of list.");
-          voiceTags["dt"]         = new voiceTag("", ",");
-          voiceTags["img"]        = new voiceTag("There's an embedded image with the description,", "");
-          voiceTags["table"]      = new voiceTag("There's an embedded table with the caption,", "");
-          voiceTags["figure"]     = new voiceTag("There's an embedded figure with the caption,", "");
+          voiceTags["a"] = new voiceTag("clicking the link,", "");
+          voiceTags["q"] = new voiceTag("quote,", ", unquote,");
+          voiceTags["ol"] = new voiceTag("Start of list.", "End of list.");
+          voiceTags["ul"] = new voiceTag("Start of list.", "End of list.");
           voiceTags["blockquote"] = new voiceTag("Blockquote start.", "Blockquote end.");
+          voiceTags["img"] = new voiceTag("There's an embedded image with the description,", "");
+          voiceTags["table"] = new voiceTag("There's an embedded table with the caption,", "");
+          voiceTags["figure"] = new voiceTag("There's an embedded figure with the caption,", "");
 
-          // ignoreTags = ["audio","button","canvas","code","del","dialog","dl","embed","form","head","iframe","meter","nav","noscript","object","s","script","select","style","textarea","video"];
-          ignoreTags = ["audio","button","canvas","code","del","dialog","embed","form","head","iframe","meter","nav","noscript","object","s","script","select","style","textarea","video"];
+          ignoreTags = ["audio","button","canvas","code","del","dialog","dl","embed","form","head","iframe","meter","nav","noscript","object","s","script","select","style","textarea","video"];
 
           // Check to see if the browser supports the functionality.
           //
@@ -365,7 +361,7 @@
           });
 
           // jadams
-          var speechMonitor = setInterval(function () {
+          var mySpeakMonitor = setInterval(function () {
             // chunkCounterMax = 4;
             if (! synth.speaking ) {
               if (chunkCounter == chunkCounterMax || userStoppedSpeaking ) {
@@ -374,7 +370,7 @@
 
                 synth.cancel();
                 $(".mdib-speaker").removeClass("mdib-spin");
-                clearInterval(speechMonitor);
+                clearInterval(mySpeakMonitor);
               } else {
                 speaker.text = chunks[chunkCounter];
                 var sectionText = speaker.text.substr(0, 20);
@@ -407,9 +403,8 @@
                 synth.speak(speaker);
               }
             }
-          }, 500); // END speechMonitor
-
-        } // END processTextChunks
+          }, 500);
+        }
 
         // jadams
         function processDOMelements(clone) {
@@ -480,14 +475,13 @@
               jQuery(this).append(" " + copy);
           });
 
-          // jadams
           // Search for tags to prepend and append specified by
           // the "voiceTags" array.
           //
           var count = 0;
           for (var tag in voiceTags) {
-//            count++
-//            if (count <= 4) {
+              count++
+              if (count <= 4) {
                   jQuery(clone).find(tag).each(function() {
                       if (customTags[tag]) {
                           jQuery(this).prepend(customTags[tag].prepend + " ");
@@ -497,7 +491,7 @@
                           jQuery(this).append(" " + voiceTags[tag].append);
                       };
                   });
-//              };
+              };
           };
 
           // Search for <h1> through <h6> and <li> and <br> to add
@@ -648,27 +642,6 @@
           // the browser doesn't do so when reading.
           //
           final = final.replace(/:/g, ", ");
-
-          // jadams
-          // Replace empty lines
-          //
-          final = final.replace(/^$/g, "\n");
-          final = final.replace(/^\s+$/g, "\n");
-
-          // jadams
-          // Replace single full stops in line ' . '
-          //
-          final = final.replace(/\s+\.\s+/g, "\n");
-
-          // jadams
-          // Replace strange double full stops '..'
-          //
-          // final = final.replace(/\.\./g, ".");
-
-          // jadams
-          // RRemove question and exclamation (?|!) marks
-          //
-          final = final.replace(/[\!\?]/g, "");
 
           // Replace em-dashes and double-dashes with a pause since
           // the browser doesn't do so when reading.

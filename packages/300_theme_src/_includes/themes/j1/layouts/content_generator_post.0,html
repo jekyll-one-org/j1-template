@@ -78,7 +78,7 @@
   ------------------------------------------------------------------------------ {% endcomment %}
   <!-- Blog post CONTENT -->
   <div class="row">
-    <div id="content" class="">
+    <main id="main-content" class="r-text-{{rtext_size}} js-toc-content">
       {% if page.page_navigation %}
         <!-- Include a PAGER (top position) -->
         {% include {{pager}} %}
@@ -134,9 +134,9 @@
       -------------------------------------------------------------------------- {% endcomment %}
       <!-- Content placed by post_content.html -->
       <!-- Additional div container placed for dropcaps used in series -->
-      <main id="main-content" class="r-text-{{rtext_size}} js-toc-content mt-4">
+      <div class="mt-4">
       {{content}}
-      </main>
+      </div>
 
     {% if page.series %}</nav>{% endif %}
 
