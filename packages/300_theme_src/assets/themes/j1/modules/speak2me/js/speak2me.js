@@ -24,7 +24,7 @@
 */
 
 (function($) {
-    "use strict";
+    'use strict';
 
     var ignoreTagsUser = new Array();
     var recognizeTagsUser = new Array();
@@ -110,7 +110,7 @@
     // -------------------------------------------------------------------------
     //
     function getCookie(name) {
-      var nameEQ = name + "=";
+      var nameEQ = name + '=';
       var ca = document.cookie.split(';');
       for (var i = 0; i < ca.length; i++) {
         var c = ca[i];
@@ -156,7 +156,7 @@
     // then cancel the speech immediately even though nothing is yet spoken.
     // This is to fix a quirk in Windows Chrome.
     //
-    if ("speechSynthesis" in window) {
+    if ('speechSynthesis' in window) {
         var speech = new SpeechSynthesisUtterance();
         window.speechSynthesis.cancel();
     }
@@ -164,7 +164,7 @@
     if ( currentTranslation === undefined ) {
         currentLanguage = 'en-US'
     } else {
-      var translation = currentTranslation.split("/");
+      var translation = currentTranslation.split('/');
       if ( translation[2] == 'en') {
         currentLanguage = 'en-GB';
       } else if ( translation[2].includes('ar') ) {
@@ -210,7 +210,7 @@
 
       speak: function(options) {
           var opts = $.extend( {}, $.fn.speak2me.defaults, options );
-          var toSpeak = "";
+          var toSpeak = '';
           var obj, processed, finished;
           var voiceTags = new Array();
           var ignoreTags;
@@ -218,25 +218,26 @@
 
           // Default values
           //
-          voiceTags["a"]          = new voiceTag("clicking the link,", "");
-          voiceTags["q"]          = new voiceTag("quote,", ", unquote,");
-          voiceTags["ol"]         = new voiceTag("Start of list.", "End of list.");
-          voiceTags["ul"]         = new voiceTag("Start of list.", "End of list.");
-//        voiceTags["li"]         = new voiceTag("", ",");
-          voiceTags["dl"]         = new voiceTag("Start of list.", "End of list.");
-          voiceTags["dt"]         = new voiceTag("", ",");
-          voiceTags["img"]        = new voiceTag("There's an embedded image with the description,", "");
-          voiceTags["table"]      = new voiceTag("There's an embedded table with the caption,", "");
-          voiceTags["figure"]     = new voiceTag("There's an embedded figure with the caption,", "");
-          voiceTags["blockquote"] = new voiceTag("Blockquote start.", "Blockquote end.");
+          voiceTags['a']          = new voiceTag('clicking the link,', '');
+          voiceTags['q']          = new voiceTag(',', '');
+          voiceTags['ol']         = new voiceTag('Start of list.', 'End of list.');
+          voiceTags['ul']         = new voiceTag('Start of list.', 'End of list.');
+//        voiceTags["li"]         = new voiceTag(',', ',');
+          voiceTags['dl']         = new voiceTag('Start of list.', 'End of list.');
+          voiceTags['dt']         = new voiceTag('', ', ');
+          voiceTags['img']        = new voiceTag('There\'s an embedded image with the description,', '');
+          voiceTags['table']      = new voiceTag('There\'s an embedded table with the caption,', 'Note, table contents are not spoken, ');
+//        voiceTags["tbody"]      = new voiceTag(', ', ',');
+          voiceTags['figure']     = new voiceTag('There\'s an embedded figure with the caption,', '');
+          voiceTags['blockquote'] = new voiceTag('Blockquote start.', 'Blockquote end.');
 
-          // ignoreTags = ["audio","button","canvas","code","del","dialog","dl","embed","form","head","iframe","meter","nav","noscript","object","s","script","select","style","textarea","video"];
-          ignoreTags = ["audio","button","canvas","code","del","dialog","embed","form","head","iframe","meter","nav","noscript","object","s","script","select","style","textarea","video"];
+          // ignoreTags = ['audio','button','canvas','code','del','dialog','dl','embed','form','head','iframe','meter','nav','noscript','object','s','script','select','style','textarea','video'];
+          ignoreTags = ['audio','button','canvas','code','del','dialog','embed','form','head','iframe','meter','nav','noscript','object','s','script','select','style','textarea','video'];
 
           // Check to see if the browser supports the functionality.
           //
-          if (!("speechSynthesis" in window)) {
-              alert("Sorry, this browser does not support the Web Speech API.");
+          if (!('speechSynthesis' in window)) {
+              alert('Sorry, this browser does not support the Web Speech API.');
               return
           };
 
@@ -257,7 +258,7 @@
               processed = processDOMelements(obj);      // process and manipulate DOM tree of this clone
               processed = jQuery(processed).html();     // convert the result of all that to a string
               finished = cleanDOMelements(processed);   // do some text manipulation
-//            toSpeak = toSpeak + " " + finished;       // add it to what will ultimately be spoken after cycling through selectors
+//            toSpeak = toSpeak + ' ' + finished;       // add it to what will ultimately be spoken after cycling through selectors
               toSpeak = finished;
           });
 
@@ -326,24 +327,25 @@
             return chunks;
         }
 
-        // jadams
-        function splitSectionIntoSentences(section) {
-          const chunks = section.innerHTML.split(/[.!?]/);
+// jadams
+//         function splitSectionIntoSentences(section) {
+//           const chunks = section.innerHTML.split(/[.!?]/);
+//
+//           // cleanup chunks
+//           //
+//           chunks.forEach((chunk, index) => {
+//             if (chunks[index] !== '') {
+//               chunks[index] = chunks[index] + '.';
+// //              chunks[index] = chunks[index].wrap('<span class="new"/>');
+//             }
+//
+//             // chunks[index] = chunk.replace(/^\s+|\s+$/g, '');
+//             // chunks[index] = chunk.replace(/^\s+|\s+$/g, '');
+//           });
+//
+//           return chunks;
+//       }
 
-          // cleanup chunks
-          //
-          chunks.forEach((chunk, index) => {
-            if (chunks[index] !== '') {
-              chunks[index] = chunks[index] + '.';
-//              chunks[index] = chunks[index].wrap('<span class="new"/>');
-            }
-
-            // chunks[index] = chunk.replace(/^\s+|\s+$/g, '');
-            // chunks[index] = chunk.replace(/^\s+|\s+$/g, '');
-          });
-
-          return chunks;
-      }
         // jadams
         // Funktion zur sequenziellen Verarbeitung der Textkette
         //
@@ -355,13 +357,13 @@
 
           speaker.addEventListener('start', (event) => {
             // console.log('speak2me start:', event);
-            $(".mdib-speaker").addClass("mdib-spin");
+            $('.mdib-speaker').addClass('mdib-spin');
           });
 
           speaker.addEventListener('end', function (event) {
             chunkCounter ++;
             // console.log('speak2me end:', chunkCounter);
-            $(currentSection).removeClass("speak-highlighted");
+            $(currentSection).removeClass('speak-highlighted');
           });
 
           // jadams
@@ -373,36 +375,14 @@
                 userStoppedSpeaking = false;
 
                 synth.cancel();
-                $(".mdib-speaker").removeClass("mdib-spin");
+                $('.mdib-speaker').removeClass('mdib-spin');
                 clearInterval(speechMonitor);
               } else {
                 speaker.text = chunks[chunkCounter];
                 var sectionText = speaker.text.substr(0, 20);
 
-                // var currentSection = $("main:contains(sectionText)");
-                //var currentSection = $("main").find("p").text(sectionText)[0];
-                // $("body").find("a p").text())
-                // $('#dialog_title_span').text("new dialog title");
-                // $("p:contains(speaker.text)").css({ 'color': 'green' });
-                // $(currentSection).css({ 'color': 'green' });
-                // var currentSection = $( "p" ).first().text(speaker.text)[0];
-                // var currentSection = $( "div" ).first().text(speaker.text)[0];
-                // var currentSection = $("div p:first").text(speaker.text)[0];
-
-                currentSection = $("#content").find("p:contains('" + sectionText + "')")[0];
-                $(currentSection).addClass("speak-highlighted");
-
-                //$(currentSection).wrapInner('<span class="speak-highlighted"/></span>');
-                // $(currentSection).wrapAll( "<span class='speak-highlighted' />");
-
-
-                // $(currentSection).each(function(i, v) {
-                //   $(v).innerHTML().eq(2).wrap('<span class="new"/>');
-                // });
-
-                // var sentences = splitSectionIntoSentences (currentSection);
-
-
+                currentSection = $('#content').find("p:contains('" + sectionText + "')")[0];
+                $(currentSection).addClass('speak-highlighted');
 
                 synth.speak(speaker);
               }
@@ -413,7 +393,7 @@
 
         // jadams
         function processDOMelements(clone) {
-          var copy, prepend;
+          var copy, content, appended, prepend;
 
           // Remove tags from the "ignoreTags" array because the
           // user called "speak2me('recognize')" and said he/she
@@ -434,8 +414,8 @@
           // if any, he/she wants to keep
           //
           for (var prop in ignoreTags) {
-              jQuery(clone).find(ignoreTags[prop]).addBack(ignoreTags[prop]).not("[data-speak2me-recognize]").each(function() {
-                  jQuery(this).html("");
+              jQuery(clone).find(ignoreTags[prop]).addBack(ignoreTags[prop]).not('[data-speak2me-recognize]').each(function() {
+                  jQuery(this).html('');
               });
           };
 
@@ -444,8 +424,8 @@
           //
           if (ignoreTagsUser.length > 0) {
               for (var prop in ignoreTagsUser) {
-                  jQuery(clone).find(ignoreTagsUser[prop]).addBack(ignoreTagsUser[prop]).not("[data-speak2me-recognize]").each(function() {
-                      jQuery(this).html("");
+                  jQuery(clone).find(ignoreTagsUser[prop]).addBack(ignoreTagsUser[prop]).not('[data-speak2me-recognize]').each(function() {
+                      jQuery(this).html('');
                   });
               };
           };
@@ -453,31 +433,31 @@
           // Remove DOM objects specified in the HTML with
           // "data-speak2me-ignore"
           //
-          jQuery(clone).find("[data-speak2me-ignore]").addBack("[data-speak2me-ignore]").each(function() {
-              jQuery(this).html("");
+          jQuery(clone).find('[data-speak2me-ignore]').addBack('[data-speak2me-ignore]').each(function() {
+              jQuery(this).html('');
           });
 
           // jadams
           // Remove DOM objects specified in the HTML by class "speak2me-ignore"
           //
-          jQuery(clone).find(".speak2me-ignore").addBack("[data-speak2me-ignore]").each(function() {
+          jQuery(clone).find('.speak2me-ignore').addBack('[data-speak2me-ignore]').each(function() {
 //            jQuery(this).html("The following element in the article is skipped to be spoken. ");
-              jQuery(this).html("");
+              jQuery(this).html('');
           });
 
           // Search for prepend data specified in the HTML
           // with "data-speak2me-prepend"
-          jQuery(clone).find("[data-speak2me-prepend]").addBack("[data-speak2me-prepend]").each(function() {
-              copy = jQuery(this).data("speak2me-prepend");
-              jQuery(this).prepend(copy + " ");
+          jQuery(clone).find('[data-speak2me-prepend]').addBack('[data-speak2me-prepend]').each(function() {
+              copy = jQuery(this).data('speak2me-prepend');
+              jQuery(this).prepend(copy + ' ');
           });
 
           // Search for append data specified in the HTML
           // with "data-speak2me-append"
           //
-          jQuery(clone).find("[data-speak2me-append]").addBack("[data-speak2me-append]").each(function() {
-              copy = jQuery(this).data("speak2me-append");
-              jQuery(this).append(" " + copy);
+          jQuery(clone).find('[data-speak2me-append]').addBack('[data-speak2me-append]').each(function() {
+              copy = jQuery(this).data('speak2me-append');
+              jQuery(this).append(' ' + copy);
           });
 
           // jadams
@@ -490,11 +470,11 @@
 //            if (count <= 4) {
                   jQuery(clone).find(tag).each(function() {
                       if (customTags[tag]) {
-                          jQuery(this).prepend(customTags[tag].prepend + " ");
-                          jQuery(this).append(" " + customTags[tag].append);
+                          jQuery(this).prepend(customTags[tag].prepend + ' ');
+                          jQuery(this).append(' ' + customTags[tag].append);
                       } else {
-                          jQuery(this).prepend(voiceTags[tag].prepend + " ");
-                          jQuery(this).append(" " + voiceTags[tag].append);
+                          jQuery(this).prepend(voiceTags[tag].prepend + ' ');
+                          jQuery(this).append(' ' + voiceTags[tag].append);
                       };
                   });
 //              };
@@ -505,26 +485,26 @@
           // because these tags require a pause, but often don't
           // have a comma or period at the end of their text.
           //
-          jQuery(clone).find("h1,h2,h3,h4,h5,h6,li,p").addBack("h1,h2,h3,h4,h5,h6,li,p").each(function() {
-              jQuery(this).append(". ");
+          jQuery(clone).find('h1,h2,h3,h4,h5,h6,li,p').addBack('h1,h2,h3,h4,h5,h6,li,p').each(function() {
+              jQuery(this).append('. ');
           });
-          jQuery(clone).find("br").each(function() {
-              jQuery(this).after(", ");
+          jQuery(clone).find('br').each(function() {
+              jQuery(this).after(', ');
           });
 
           // Search for <figure>, check for <figcaption>, insert
           // that text if it exists and then remove the whole DOM object
           //
-          jQuery(clone).find("figure").addBack("figure").each(function() {
-              copy = jQuery(this).find("figcaption").html();
-              if (customTags["figure"]) {
-                  prepend = customTags["figure"].prepend
+          jQuery(clone).find('figure').addBack('figure').each(function() {
+              copy = jQuery(this).find('figcaption').html();
+              if (customTags['figure']) {
+                  prepend = customTags['figure'].prepend
               }
               else {
-                  prepend = voiceTags["figure"].prepend
+                  prepend = voiceTags['figure'].prepend
               }
-              if ((copy != undefined) && (copy !== "")) {
-                  jQuery("<div>" + prepend + " " + copy + ".</div>").insertBefore(this);
+              if ((copy != undefined) && (copy !== '')) {
+                  jQuery('<div>' + prepend + ' ' + copy + '.</div>').insertBefore(this);
               }
               jQuery(this).remove();
           });
@@ -533,49 +513,63 @@
           // text if it exists and then remove the whole DOM object.
           // Had to make adjustments for nesting in <picture> tags.
           //
-          jQuery(clone).find("img").addBack("img").each(function() {
-              copy = jQuery(this).attr("alt");
+          jQuery(clone).find('img').addBack('img').each(function() {
+              copy = jQuery(this).attr('alt');
               var parent = jQuery(this).parent();
               var parentName = parent.get(0).tagName;
-              if (customTags["img"]) {
-                  prepend = customTags["img"].prepend
+              if (customTags['img']) {
+                  prepend = customTags['img'].prepend
               }
               else {
-                  prepend = voiceTags["img"].prepend
+                  prepend = voiceTags['img'].prepend
               };
-              if ((copy !== undefined) && (copy != "")) {
-                  if (parentName == "PICTURE") {
+              if ((copy !== undefined) && (copy != '')) {
+                  if (parentName == 'PICTURE') {
                       var par
-                      jQuery("<div>" + prepend + " " + copy + ".</div>").insertBefore(parent);
+                      jQuery('<div>' + prepend + ' ' + copy + '.</div>').insertBefore(parent);
                   } else {
-                      jQuery("<div>" + prepend + " " + copy + ".</div>").insertBefore(this);
+                      jQuery('<div>' + prepend + ' ' + copy + '.</div>').insertBefore(this);
                   }
               };
               jQuery(this).remove();
           });
 
+          // jadams
           // Search for <table>, check for <caption>, insert that
           // text if it exists and then remove the whole DOM object
           //
-          jQuery(clone).find("table").addBack("table").each(function() {
-              copy = jQuery(this).find("caption").text();
-              if (customTags["table"]) {
-                  prepend = customTags["table"].prepend
+          jQuery(clone).find('table').addBack('table').each(function() {
+              copy    = jQuery(this).find('caption').text();
+//            content = jQuery(this).find("tbody");
+
+              if (customTags['table']) {
+                  prepend   = customTags['table'].prepend
+                  appended  = customTags['table'].append;
               }
               else {
-                  prepend = voiceTags["table"].prepend
+                  prepend   = voiceTags['table'].prepend
+                  appended  = voiceTags['table'].append;
               }
-              if ((copy !== undefined) && (copy != "")) {
-                  jQuery("<div>" + prepend + " " + copy + ".</div>").insertBefore(this);
+
+              if ((copy !== undefined) && (copy != '')) {
+                  jQuery('<div>' + prepend + ' ' + copy + '.</div>').insertBefore(this);
+                  jQuery('<div>' + appended + ' ' + '.</div>').insertBefore(this);
               }
+
+              // TODO: processing the table contents
+              //
+              // if ((content !== undefined) && (content != '')) {
+              //     jQuery('<div>' + ' ' + content + "</div>").insertBefore(this);
+              // }
+
               jQuery(this).remove();
           });
 
           // Search for DOM object to be replaced specified in
           // the HTML with "data-speak2me-swap"
           //
-          jQuery(clone).find("[data-speak2me-swap]").addBack("[data-speak2me-swap]").each(function() {
-              copy = jQuery(this).data("speak2me-swap");
+          jQuery(clone).find('[data-speak2me-swap]').addBack('[data-speak2me-swap]').each(function() {
+              copy = jQuery(this).data('speak2me-swap');
               jQuery(this).text(copy);
           });
 
@@ -583,9 +577,9 @@
           // the HTML with "data-speak2me-spell".
           // I find this function fun if, admittedly, not too practical.
           //
-          jQuery(clone).find("[data-speak2me-spell]").addBack("[data-speak2me-spell]").each(function() {
+          jQuery(clone).find('[data-speak2me-spell]').addBack('[data-speak2me-spell]').each(function() {
               copy = jQuery(this).text();
-              copy = copy.split("").join(" ");
+              copy = copy.split('').join(' ');
               jQuery(this).text(copy);
           });
           return clone;
@@ -599,23 +593,23 @@
           // place it outside the comment, and then splice together
           // "final" string again, which omits the comment.
           //
-          while (final.indexOf("<!-- <speak2me>") != -1) {
-              start = final.indexOf("<!-- <speak2me>");
-              ended = final.indexOf("</speak2me> -->",start);
+          while (final.indexOf('<!-- <speak2me>') != -1) {
+              start = final.indexOf('<!-- <speak2me>');
+              ended = final.indexOf('</speak2me> -->', start);
               if (ended == -1) { break; }
-              speak = final.substring(start + 17,ended);
-              part1 = final.substring(0,start);
+              speak = final.substring(start + 17, ended);
+              part1 = final.substring(0, start);
               part2 = final.substring(ended + 17);
-              final = part1 + " " + speak + " " + part2;
+              final = part1 + ' ' + speak + ' ' + part2;
           };
 
           // Strip out remaining comments.
           //
-          final = final.replace(/<!--[\s\S]*?-->/g,"");
+          final = final.replace(/<!--[\s\S]*?-->/g, '');
 
           // Strip out remaining HTML tags
           //
-          final = final.replace(/(<([^>]+)>)/ig,"");
+          final = final.replace(/(<([^>]+)>)/ig, '');
 
           // Replace a string of characters with another as specified
           // by "speak2me('replace')".
@@ -625,69 +619,76 @@
           var old, rep;
           while (i < len) {
               old = replacements[i];
-              old = old.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
-              rep = replacements[i + 1] + " ";
-              var regexp = new RegExp(old, "gi");
-              var final = final.replace(regexp,rep);
+              old = old.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+              rep = replacements[i + 1] + ' ';
+              var regexp = new RegExp(old, 'gi');
+              var final = final.replace(regexp, rep);
               i = i + 2;
           };
 
           // Replace double smart quotes with proper text, same as what
           // was done previously with <q>
           //
-          if (customTags["q"]) {
-              final = final.replace(/“/g,customTags["q"].prepend + " ");
-              final = final.replace(/”/g," " + customTags["q"].append);
+          if (customTags['q']) {
+              final = final.replace(/“/g, customTags['q'].prepend + ' ');
+              final = final.replace(/”/g, ' ' + customTags['q'].append);
           } else {
-              final = final.replace(/“/g,voiceTags["q"].prepend + " ");
-              final = final.replace(/”/g," " + voiceTags["q"].append);
+              final = final.replace(/“/g, voiceTags['q'].prepend + ' ');
+              final = final.replace(/”/g, ' ' + voiceTags['q'].append);
           }
 
           // jadams
           // Replace colons ':' with a pause since
           // the browser doesn't do so when reading.
           //
-          final = final.replace(/:/g, ", ");
+          final = final.replace(/:/g, ', ');
 
           // jadams
           // Replace empty lines
           //
-          final = final.replace(/^$/g, "\n");
-          final = final.replace(/^\s+$/g, "\n");
+          final = final.replace(/^$/g, '\n');
+          final = final.replace(/^\s+$/g, '\n');
 
           // jadams
-          // Replace single full stops in line ' . '
+          // Replace single full stops in line ' . ' or '. '
           //
-          final = final.replace(/\s+\.\s+/g, "\n");
+          final = final.replace(/\s+\.\s+/g, '\n');
+          final = final.replace(/\s+\.\s+$/g, '\n');
 
           // jadams
           // Replace strange double full stops '..'
           //
-          // final = final.replace(/\.\./g, ".");
+          final = final.replace(/\.\./g, '.');
 
           // jadams
-          // RRemove question and exclamation (?|!) marks
+          // Replace the abbreviation '.e.g.'or ',.e.g.,'
           //
-          final = final.replace(/[\!\?]/g, "");
+          final = final.replace(/\se\.g\.\s/g, ' for example, ');
+          final = final.replace(/\,\s+\.g\.\s+\,/g, ' for example, ');
+
+          // jadams
+          // Replace question and exclamation (?|!) marks
+          //
+          final = final.replace(/[\!\?]/g, ', ');
 
           // Replace em-dashes and double-dashes with a pause since
           // the browser doesn't do so when reading.
           //
-          final = final.replace(/—/g, ", ");
-          final = final.replace(/--/g, ", ");
+          final = final.replace(/—/g, ', ');
+          final = final.replace(/--/g, ', ');
 
           // When read from the DOM, a few special characters
           // (&amp; for example) display as their hex codes
           // rather than resolving into their actual character
           //
-          var txt = document.createElement("textarea");
+          var txt = document.createElement('textarea');
           txt.innerHTML = final;
           final = txt.value;
 
           // Strip out new line characters and carriage returns,
           // which cause unwanted pauses.
           //
-          final = final.replace(/(\r\n|\n|\r)/gm,"");
+          final = final.replace(/(\r\n|\n|\r)/gm, '');
 
           // Strip out multiple spaces and periods and commas
           // for neatness more than anything else since
@@ -698,7 +699,7 @@
           final = final.replace(/\.\./g, '.');
           final = final.replace(/,,/g, ',');
           final = final.replace(/ ,/g, ',');
-          final = final.replace(/^\s+|\s+$/g,'');
+          final = final.replace(/^\s+|\s+$/g, '');
 
           // final = final.replace(/^\s+|\s+$/g,'\n');
           // final = final.replace(/\. /g, '. \n');
@@ -736,7 +737,7 @@
       },
 
       enabled: function() {
-          return ("speechSynthesis" in window);
+          return ('speechSynthesis' in window);
       },
 
       isSpeaking: function() {
@@ -818,11 +819,11 @@
               customTags = [];
           };
           if (len == 2) {
-              if (["img","table","figure"].indexOf(arguments[0]) == -1) { console.log("Error: When customizing, tag indicated must be either 'img', 'table', or 'figure'."); return; }
+              if (['img','table','figure'].indexOf(arguments[0]) == -1) { console.log("Error: When customizing, tag indicated must be either 'img', 'table', or 'figure'."); return; }
               customTags[arguments[0].toString()] = new voiceTag(arguments[1].toString());
           };
           if (len == 3) {
-              if (["q","ol","ul","blockquote"].indexOf(arguments[0]) == -1) { console.log("Error: When customizing, tag indicated must be either 'q', 'ol', 'ul' or 'blockquote'."); return; }
+              if (['q',"ol","ul","blockquote"].indexOf(arguments[0]) == -1) { console.log("Error: When customizing, tag indicated must be either 'q', 'ol', 'ul' or 'blockquote'."); return; }
               customTags[arguments[0].toString()] = new voiceTag(arguments[1].toString(), arguments[2].toString());
           };
           return this;
@@ -843,7 +844,7 @@
           //in parenthesis, the language code.
           //
           var obj = jQuery(arguments[0]);
-          var selectionTxt = "Choose a voice";
+          var selectionTxt = 'Choose a voice';
 
           if (arguments[1] !== undefined) {
               selectionTxt = arguments[1];
@@ -878,7 +879,7 @@
               }
 
               option.setAttribute('data-speak2me-language', voices[i].language);
-              obj.find("select").append(option);
+              obj.find('select').append(option);
           }
 
           // jadams
@@ -897,7 +898,7 @@
           // User wants to change the voice directly. If that name indeed
           // exists, update the "voiceUserDefault" variable.
           //
-          if (arguments[0] == "name") {
+          if (arguments[0] == 'name') {
               requestedVoice = arguments[1];
               for (var i = 0; i < voices.length; i++) {
                   if (voices[i].name == requestedVoice) {
@@ -909,7 +910,7 @@
           // User wants to change the voice by only specifying the
           // first two characters of the language code. Case insensitive.
           //
-          if (arguments[0] == "language") {
+          if (arguments[0] == 'language') {
               requestedLanguage = arguments[1].toUpperCase();
               if (requestedLanguage.length == 2) {
                   for (var i = 0; i < voices.length; i++) {
@@ -936,10 +937,10 @@
     $.fn.speak2me = function(method) {
         if (methods[method]) {
             return methods[method].apply( this, Array.prototype.slice.call(arguments, 1));
-        } else if (typeof method === "object" || ! method) {
+        } else if (typeof method === 'object' || ! method) {
             return methods.speak.apply(this, arguments);
         } else {
-            jQuery.error("Method " +  method + " does not exist on jQuery.speak2me");
+            jQuery.error('Method ' +  method + ' does not exist on jQuery.speak2me');
         }
     };
 

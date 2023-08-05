@@ -28,10 +28,6 @@
       href:                             /pages/public/learn/where_to_go/
       icon:                             foot-print
 
-    - title:                            Speak2Me
-      href:                             /pages/public/learn/speak2me_tester/
-      icon:                             speaker
-
 #   - title:                            Core Web Vitals
 #     href:                             /pages/public/learn/core_web_vitals/
 #     icon:                             quadcopter
@@ -230,7 +226,7 @@
       dropdown:
 
         - title:                        Speak2Me
-          href:                         /pages/public/learn/speak2me/
+          href:                         /pages/public/modules/speak2me/
           icon:                         speaker
 
         - title:                        Master Header
@@ -417,6 +413,9 @@
       - title:                          Current Theme
         href:                           /pages/public/tools/previewer/current_theme/
         icon:                           theme-light-dark
+      - title:                          Speak2Me
+        href:                           /pages/public/tools/previewer/speak2me/
+        icon:                           speaker
 
       - title:                          Icon Picker
         href:                           https://jekyll.one/pages/public/tools/previewer/icon-picker/

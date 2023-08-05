@@ -44,7 +44,7 @@ Asciidoctor::Extensions.register do
       imagesdir     = parent.attr 'imagesdir'
       images_hash   = Hash[*attrs['image_data'].split(',')]
 
-      title_html    = (attrs.has_key? 'title') ? %(<div class="title notranslate">#{attrs['title']}</div>\n) : nil
+      title_html    = (attrs.has_key? 'title') ? %(<div class="title speak2me-ignore notranslate">#{attrs['title']}</div>\n) : nil
       role          = (attrs.has_key? 'role') ? role : ''
       grouped       = (attrs.has_key? 'group') ? true : false
 
@@ -74,7 +74,7 @@ Asciidoctor::Extensions.register do
       content = html_block.target! # See: https://stackoverflow.com/questions/4961609/extra-to-s-when-using-builder-to-generate-xml
 
       html = %(
-        <div id="lb-#{target}" class="imageblock">
+        <div id="lb-#{target}" class="imageblock speak2me-ignore">
           #{title_html}
           #{content}
         </div>

@@ -123,15 +123,15 @@ under the link:{url-j1-docs--lightbox-module}[Lightbox module, {browser-window--
 == Lightbox block examples
 
 [role="mb-4"]
-Find below an example of using the lightbox Lightbox standalone. See how
-single (individual) images are linked for use with Lightbox.
+Find below an example of using the lightbox used for standalone images.
+See how single (individual) images are linked for use with Lightbox.
 
 .Lightbox block for standalone images
 lightbox::example-standalone[ 800, {data-images-standalone}, role="mb-4" ]
 
 [role="mb-4"]
-Lightbox supports image groups (image sets). Click on the images below to
-see how Lightbox manages a group of images.
+The J1 Lightbox module supports image groups as well. Click on the image
+group below to see how a lightbox manages a group of images.
 
 .Lightbox block for grouped images
 lightbox::example-group[ 395, {data-images-group}, group, role="mb-4 wm-800" ]

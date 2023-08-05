@@ -1,17 +1,15 @@
 ---
 title:                                  Speak2Me
 title_extention:                        J1 Module for Speech Synthesise (TTS)
-tagline:                                J1 Module for Speech Synthesise
+tagline:                                Screen Reader for J1 Template
 
 date:                                   2023-07-26
 #last_modified:                         2023-01-01
 
 description: >
-                                        Speak2Me is a J1 Module that enables developers,
-                                        with as little as one line of code, to create links
-                                        that allow users to click, sit back, and listen to
-                                        the browser read aloud the important content on
-                                        a Web page.
+                                        Speak2Me for J1 Template is a speech synthesise module that enables a
+                                        so-called screen reader. The reader functionality allows users to sit back
+                                        and listen to the browser read aloud the important contents on a Web page.
 keywords: >
                                         open source, free, template, jekyll, jekyllone, web,
                                         sites, static, jamstack, bootstrap,
@@ -21,7 +19,7 @@ categories:                             [ Module ]
 tags:                                   [ Speech Synthesise, jQuery ]
 
 regenerate:                             true
-permalink:                              /pages/public/learn/speak2me/
+permalink:                              /pages/public/modules/speak2me/
 
 resources:                              [ animate, clipboard, lightbox, rouge ]
 resource_options:

@@ -96,6 +96,7 @@ various features, such as social integration and social networking to support
 your personal networks.
 endif::[]
 
+[role="mt-5"]
 == Discuss with Respect
 
 One of the most important aspects of a helpful blog is the conversation
@@ -113,6 +114,7 @@ without notice.
 
 NOTE: This comment policy is subject to change at any time.
 
+[role="mt-5"]
 Promotional::
 Comments deemed to be spam or solely promotional in nature will be
 deleted. Links to relevant content are permitted, but comments should be

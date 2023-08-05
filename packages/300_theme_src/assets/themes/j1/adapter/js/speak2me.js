@@ -228,7 +228,7 @@ var Events = {
         var chromeWorkaround = setInterval(function () {
           if ($().speak2me('isSpeaking')) {
             $().speak2me('pause').speak2me('resume');
-            logger.debug('\n' + "speak: send pause-resumed");
+            logger.debug('\n' + 'speak: send pause-resumed');
           }
         }, 10000);
       }
