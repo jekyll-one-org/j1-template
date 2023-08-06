@@ -85,7 +85,7 @@ or other system software is needed.
 
 Simply include the `speak2me.js` or `speak2me.min.js` file in your project.
 
-[role="mt-4"]
+[role="mt-5"]
 == API Reference
 
 Leverage the powerful selector options of jQuery to specify which parts
@@ -112,7 +112,6 @@ using a default set of rules, deciding what should be spoken and
 ignored, then adding the appropriate pauses to make everything sound
 more like a narrative.
 
-[role="mt-4"]
 === Examples
 
 Do not speak the content of `<h5>`, `<h6>`, and `<em>` tags.
@@ -147,7 +146,6 @@ is encountered.
 $().speak2me('customize','ol','Start of numbered List.','End of Numbered List')
 ----
 
-[role="mt-4"]
 === Base Functions
 
 [cols="6a,6a", options="header", width="100%", role="rtable"]
@@ -168,7 +166,6 @@ $().speak2me('customize','ol','Start of numbered List.','End of Numbered List')
 
 |===
 
-[role="mt-4"]
 === Voice Parameters
 
 [cols="4a,5a,3", options="header", width="100%", role="rtable"]
@@ -194,7 +191,6 @@ Range: [0.0 - 1.0]
 NOTE: Omitting number resets the parameter to its default value;
 changes take effect only when next speak call is made
 
-[role="mt-4"]
 === Read-Only Attributes
 
 [cols="6a,6a", options="header", width="100%", role="rtable"]
@@ -215,7 +211,6 @@ yet been completed or stopped.
 NOTE: `$().speak2me('isSpeaking')` returns the value of true even
 when paused
 
-[role="mt-4"]
 === Get and Set Voices
 
 NOTE: Language codes consist of two-characters that specify the
@@ -264,7 +259,6 @@ you want spoken. That paragraph can have a link like this:
 If the German language is available, it will be appropriately spoken. If
 not, the current voice will remain.
 
-[role="mt-4"]
 === Text Manipulation
 
 [cols="6a,6a", options="header", width="100%", role="rtable"]
@@ -300,7 +294,6 @@ Omitting parameters reverts values to its defaults. +
 See Reference Information below
 |===
 
-[role="mt-4"]
 === HTML Data Attributes
 
 [cols="6a,6a", options="header", width="100%", role="rtable"]
@@ -326,7 +319,6 @@ See Reference Information below
 |Specified _text_ is spoken in place of the content of its DOM element.
 |===
 
-[role="mt-4"]
 === Reference Information
 
 Chaining calls is acceptable. For example, the following works just
@@ -355,6 +347,8 @@ style, textarea, video
 IMPORTANT: A comma `,` followed by a space results in a pause when
 spoken. A period `.` results in a *slightly* longer *pause*.
 
+
+[role="mt-5"]
 == Issues
 
 === Issues can't be fixed with JavaScript

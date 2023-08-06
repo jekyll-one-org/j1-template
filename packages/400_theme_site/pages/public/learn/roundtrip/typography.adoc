@@ -13,7 +13,6 @@ description: >
                                         will take on an important role of acting not only as plain
                                         text but also as something like images.
 keywords: >
-keywords: >
                                         open source, free, template, jekyll, jekyllone, web,
                                         sites, static, jamstack, bootstrap,
                                         brand, typography, font
@@ -74,7 +73,7 @@ as plain text but also as something like images.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-[role="mt-4"]
+[role="mt-5"]
 == Responsive Text
 
 Sadly to say, one common flaw is seen in many templates and frameworks:
@@ -133,6 +132,7 @@ To see Responsive Text `r-text` in action, use the button above to toggle on
 and off Responsive Text to see the difference!
 
 
+[role="mt-5"]
 == Scaling Responsive Text
 
 The responsive text comes in five different scale factors in a range from 100
@@ -185,6 +185,7 @@ responsiveness in action.
 ++++
 
 
+[role="mt-5"]
 == Scale factors
 
 As mentioned, `r-text` comes in five levels of size. The base of `r-text` is
@@ -253,6 +254,7 @@ explorer of the truth, the master-builder of human happiness.
 |===
 
 
+[role="mt-5"]
 == What next
 
 Have you enjoyed playing with the text? I hope so. But even more, J1 can

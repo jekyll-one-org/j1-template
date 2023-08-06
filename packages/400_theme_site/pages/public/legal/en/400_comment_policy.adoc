@@ -1,8 +1,10 @@
 ---
 title:                                  Comment Policy
 tagline:                                Discuss With Respect
+
 date:                                   2021-03-30
 #last_modified:                         2023-01-01
+
 description: >
                                         J1 Template is a Bootstrap V5 website template for the static
                                         site generator Jekyll.
@@ -95,6 +97,7 @@ between your browser and the server at Disqus. The _Disqus_ platform includes
 various features, such as social integration and social networking to support
 your personal networks.
 endif::[]
+
 
 [role="mt-5"]
 == Discuss with Respect

@@ -83,6 +83,7 @@ individually.
 // -----------------------------------------------------------------------------
 include::{documentdir}/themes_bootstrap.asciidoc[]
 
+[role="mt-5"]
 == What next
 
 J1 Template is an excellent base for documentation websites. J1 supports

@@ -123,7 +123,7 @@ date: `title.MARKUP`.
 
 |===
 
-[role="mt-4"]
+[role="mt-5"]
 == Lists
 
 Lists are used to organize and present information in a structured and
@@ -180,7 +180,7 @@ site will have way fewer footprints and security issues since it will
 only load plain HTML and CSS files.
 
 
-[role="mt-4"]
+[role="mt-5"]
 == Text elements
 
 The most common text elements used are *headlines* and *paragraphs*.
@@ -250,7 +250,7 @@ of the waves crashing against the ship's hull. Each thunderous collision
 reverberated through his being, echoing the tumultuous path he had
 traversed.
 
-[role="mt-4"]
+[role="mt-5"]
 == Images
 
 There are two image macro types in AsciiDoc: block and inline. As with all
@@ -322,7 +322,7 @@ lightbox manages a group of images.
 lightbox::example-group[ 395, {data-images-group}, group, role="mb-4 wm-800" ]
 ////
 
-[role="mt-4"]
+[role="mt-5"]
 == Carousel
 
 J1 Carousel is based on OWL Carousel V1 in the latest (and unfortunately
@@ -369,7 +369,7 @@ banner presenting exciting things about your site or the products offered.
 carousel::demo_simple[role="mb-4"]
 
 
-[role="mt-4"]
+[role="mt-5"]
 == Slick Carousel
 
 _Slick_ is a popular jQuery plugin for creating responsive and fully
@@ -440,7 +440,7 @@ top, or at the bottom of a slideshow.
 masterslider::ms_00007[role="mb-5"]
 
 
-[role="mt-4"]
+[role="mt-5"]
 == JustifiedGallery
 
 link:{url-justified-gallery--home}[JustifiedGallery, {browser-window--new}]

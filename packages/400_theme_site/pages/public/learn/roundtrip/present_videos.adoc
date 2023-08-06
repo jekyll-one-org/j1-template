@@ -102,7 +102,7 @@ and from online sources on the Internet.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-[role="mt-4"]
+[role="mt-5"]
 == Video Galleries
 
 HTML5 Video opens the doors to your way of presenting video content. Modern
@@ -128,6 +128,8 @@ license is needed for business use. See
 link:{url-light-gallery--license}[LightGallery licenses, {browser-window--new}]
 how to use LightGallery for commercial websites and projects.
 
+
+[role="mt-5"]
 == Local Video content
 
 Digital image content, simple pictures or videos, are easy to make. Today,
@@ -149,6 +151,8 @@ HTML5 Video formats on modern browsers today (MP4, WebM, and Ogg).
 .MP4 Videos - VideoJS Player
 gallery::jg_video_html5[role="mb-5"]
 
+
+[role="mt-5"]
 == Online Video content
 
 The Internet is full of inspiring content. If you want to present video
@@ -237,6 +241,7 @@ right-wing extremists or to suppress racist currents on the platform.
 gallery::jg_video_online_vk[role="mb-5"]
 
 
+[role="mt-5"]
 == What next
 
 Images and videos are pretty visual. And it can be impressive, for sure.

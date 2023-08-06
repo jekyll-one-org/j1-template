@@ -119,7 +119,7 @@ image-data like gallery or carousel, the build-in carousel module.
 TIP: For details of the default lightbox of J1 Template, see the documentation
 under the link:{url-j1-docs--lightbox-module}[Lightbox module, {browser-window--new}].
 
-
+[role="mt-5"]
 == Lightbox block examples
 
 [role="mb-4"]
@@ -146,7 +146,7 @@ LightGallery can do this by the following example.
 
 gallery::jg_old_times[ role="mb-4 wm-800" ]
 
-
+[role="mt-5"]
 == J1 Carousel
 
 J1 Carousel is based on OWL Carousel V1 in the latest (and unfortunately
@@ -236,7 +236,7 @@ many images the show contains.
 .One Slide Carousel
 carousel::demo_oneslide[role="mb-4"]
 
-
+[role="mt-5"]
 == J1 Slick Carousel
 
 [role="mb-4"]
@@ -307,6 +307,7 @@ link:{url-j1-slick-previewer}[Slick Previewer, {browser-window--new}],
 
 
 [#masterSlider]
+[role="mt-5"]
 == J1 Master Slider
 
 The Javascript tool _Master Slider_ is a 3rd party plugin fully integrated
@@ -410,7 +411,7 @@ documents:
 * MS Slider link:{url-j1-masterslider-previewer}[Previewer, {browser-window--new}]
 * MS Slider link:{url-j1-docs--masterslider-module}[Module documentation, {browser-window--new}]
 
-[role="mt-4"]
+[role="mt-5"]
 == JustifiedGallery
 
 link:{url-justified-gallery--home}[JustifiedGallery, {browser-window--new}]
@@ -432,6 +433,7 @@ You'll have seen it in use all over the Internet!
 .Masonry Grid Gallery
 gallery::jg_customizer[role="mb-5"]
 
+[role="mt-5"]
 == What next
 
 Hopefully, you've enjoyed exploring the possibilities J1 offers for managing

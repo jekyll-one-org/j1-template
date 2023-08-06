@@ -194,6 +194,7 @@ QuickSearch. You’ll see for QuickSearch a similar behavior in *sorting*
 search results as you already know from commercial internet search engines
 like Google: the top results are the more relevant ones.
 
+[role="mt-5"]
 == Searching
 
 To access QuickSearch, a magnifier button is available in the `Quicklinks`

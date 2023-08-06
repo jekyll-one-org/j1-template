@@ -79,6 +79,7 @@ plugin, refer to: link:{url-bs-docs--components-modal}[Bootstrap Docs, {browser-
 // include::{documentdir}/tables/bs_modal_examples.asciidoc[]
 include::{documentdir}/410_table_bs_modal_examples.asciidoc[]
 
+[role="mt-5"]
 == What next
 
 Bootstrap is a helpful framework that offers a complete set of styles in

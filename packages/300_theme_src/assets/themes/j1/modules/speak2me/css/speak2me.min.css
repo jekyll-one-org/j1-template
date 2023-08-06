@@ -7,15 +7,6 @@ button {
   margin: 8px 5px 5px 0;
 }
 
-/*
-div.settings-area {
-  font-family: monospace;
-  font-size: 14px;
-  padding: 0 0 15px 0;
-  margin: 0 0 20px 0;
-}
-*/
-
 div.settings-area div {
   margin: 0 0 10px 0;
 }
@@ -26,6 +17,10 @@ div.settings-area input {
 
 div.voice-table {
   display: none;
+}
+
+.speak-highlighted {
+  background-color: var(--bs-gray-300);
 }
 
 /*

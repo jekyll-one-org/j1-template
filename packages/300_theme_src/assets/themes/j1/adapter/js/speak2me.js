@@ -279,7 +279,7 @@ var Events = {
 
     // -------------------------------------------------------------------------
     // speak()
-    // manage ???
+    // calls the 'speak' functiion of the screen reader
     // -------------------------------------------------------------------------
     speak: function (obj) {
       // Get the parameter values from the input sliders
@@ -288,8 +288,6 @@ var Events = {
       var p = parseFloat(document.getElementById('pitch').value);
       var v = parseFloat(document.getElementById('volume').value);
 
-      // $().speak2me('ignore', 'mark name="start"', 'mark name="stop"');
-
       // Note: Function calls can be perfromed individually or
       // chained together as demonstrated below
       //
@@ -297,14 +295,6 @@ var Events = {
       // $(obj).speak2me('ignore', 'h2','h3');
       var speaker = $(obj).speak2me('speak');
       $(".mdib-speaker").addClass("mdib-spin");
-
-      // speaker.addEventListener('start', (event) => {
-      //   console.log('speak2me start:', event);
-      // });
-      //
-      // speaker.addEventListener('boundary', (event) => {
-      //   console.log('speak2me boundary:', event);
-      // });
 
       // just for debugging completeness, no errors seem to be thrown though
       speaker.addEventListener('error', (event) => {
@@ -315,7 +305,7 @@ var Events = {
 
     // -------------------------------------------------------------------------
     // pause()
-    // manage ???
+    // Calls the 'pause' function of rge screen reader
     // -------------------------------------------------------------------------
     pause: function () {
       $().speak2me('pause');
@@ -323,30 +313,8 @@ var Events = {
     },
 
     // -------------------------------------------------------------------------
-    // populate()
-    // manage ???
-    // -------------------------------------------------------------------------
-    populate: function () {
-      var voiceName;
-      var voiceLang;
-      var row;
-      var voices = $().speak2me('getVoices');
-
-      for (var i = 0; i < voices.length; i++) {
-        voiceName = voices[i].name;
-        voiceLang = voices[i].language;
-        row = "<tr><td>" + voiceName + "</td>";
-        row += "<td>" + voiceLang + "</td></tr>";
-        $('table tbody').append(row);
-      }
-
-      $('div.voice-table').show();
-
-    },
-
-    // -------------------------------------------------------------------------
     // resume()
-    // manage ???
+    // Calls the 'resume' function of rge screen reader
     // -------------------------------------------------------------------------
     resume: function () {
       $().speak2me('resume');
@@ -355,7 +323,7 @@ var Events = {
 
     // -------------------------------------------------------------------------
     // stop()
-    // manage ???
+    // Calls the 'stop' function of rge screen reader
     // -------------------------------------------------------------------------
     stop: function () {
       $().speak2me('stop');
