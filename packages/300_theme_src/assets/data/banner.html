@@ -231,7 +231,7 @@ exclude_from_search:                    true
             {% if card_type == 'text' and card_enabled %}
 
             {% if badges %}
-            <div class="mb-3">
+            <div class="mb-3 speak2me-ignore">
               <p>
                 <span>
                   <a class="image" href="https://badge.fury.io/rb/j1-template" target="_blank" rel="noopener noreferrer">
@@ -252,7 +252,7 @@ exclude_from_search:                    true
                 {% comment %} TODO:
                 -----------------------------------------------------------------
                 <!-- Sticker -->
-                <div class="sticker" style="margin-top: -20px; right: 470px; display: block;">
+                <div class="sticker speak2me-ignore" style="margin-top: -20px; right: 470px; display: block;">
                   <a
                 		  id="banner-sticker-new-version"
                 		  class="link-no-decoration sticker-wrapper"
@@ -295,7 +295,7 @@ exclude_from_search:                    true
               <div class="{{card_properties}}">{{card_description}}</div>
               {% if card_buttons %}
               <!-- Footer|Button row -->
-              <div class="mt-5">
+              <div class="speak2me-ignore mt-5">
                 {% for button_hash in card_buttons %}
                   {% include {{create_bs_button}} button_data=button_hash button_type="link" %}
                   {{bs_button_html}}

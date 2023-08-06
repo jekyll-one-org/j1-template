@@ -61,7 +61,7 @@
 
 <!-- div id="word-cloud" class="row ml-3 mr-3" -->
 <!-- jadams, 2021-11-20: justify word cloud BETTER with paginator buttons -->
-<div id="word-cloud" class="row g-0 ml-3">
+<div id="word-cloud" class="row speak2me-ignore g-0 ml-3">
   <div class="tag__box mt-0 mb-2">
     <div class="tag__cloud">
 

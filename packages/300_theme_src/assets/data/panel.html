@@ -348,7 +348,7 @@ exclude_from_search:                    true
                     </div>
 
                     <div class="card-body g-min-height-200 r-text-300 mt-0">{{card_text}}</div>
-                    <div class="card-footer r-text-200 md-grey-900 text-lowercase">
+                    <div class="card-footer speak2me-ignore r-text-200 md-grey-900 text-lowercase">
                     {% for data in card_buttons %} {% for item in data %} {% for button in item[1] %}
                       {% assign key   = button[0] %}
                       {% assign value = button[1] %}
@@ -755,7 +755,7 @@ exclude_from_search:                    true
                         </div>
                         <div class="card-body g-min-height-350 r-text-300 mt-0">{{card_text}}</div>
 
-                        <div class="card-footer">
+                        <div class="card-footer speak2me-ignore">
                           <div class="row {{panel_settings.id}}">
                           	<div id="{{card_id}}" class="accordion">
                               {% for list in services %}
@@ -936,7 +936,7 @@ exclude_from_search:                    true
                             {{post.excerpt|truncatewords: truncate_words}}
                           </div>
                           <!-- End Body|Excerpt -->
-                          <div class="card-footer r-text-200">
+                          <div class="card-footer speak2me-ignore r-text-200">
 
                             <div class="card-footer-text">
                               {% if language == "en" %}
@@ -1005,7 +1005,7 @@ exclude_from_search:                    true
                         {{post.excerpt|truncatewords: truncate_words}}
                       </div>
                       <!-- End Body|Excerpt -->
-                      <div class="card-footer r-text-200">
+                      <div class="card-footer speak2me-ignore r-text-200">
 
                         <div class="card-footer-text">
                           {% if language == "en" %}
