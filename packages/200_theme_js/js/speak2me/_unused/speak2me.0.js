@@ -26,27 +26,15 @@
 (function($) {
     'use strict';
 
-    // var defaultOptions = require('./default-options.js');
-    // var ParseContent = require('./parse-content.js');
-    // var parseContent = ParseContent(options);
+    var defaultOptions  = require('./default-options.js');
+    var customOptions   = {};
+    // Object to store current options.
+    var myOptions = {}
 
-    // requirejs(["/assets/themes/j1/modules/speak2me/js/default-options.js"], function(defaultOptions) {
-    //   console.log("Balla: " + defaultOptions);
-    //   // This function is called when scripts/helper/util.js is loaded.
-    //   // If util.js calls define(), then this function is not fired until
-    //   // util's dependencies have loaded, and the util argument will hold
-    //   // the module value for "helper/util".
-    // });
+    // var _this = window;
 
-    // var defaultOptions = {};
-    // require(['/assets/themes/j1/modules/speak2me/js/default-options.js'], function() {
-    //     // Configuration loaded now, safe to do other require calls
-    //     // that depend on that config.
-    //     require([''], function(defaultOptions) {
-    //       var opt = defaultOptions;
-    //       console.log("Balla: " + opt);
-    //     });
-    // });
+    var ParseContent = require('./parse-content.js');
+    var parseContent = ParseContent(defaultOptions);
 
     var ignoreTagsUser = new Array();
     var recognizeTagsUser = new Array();
@@ -132,7 +120,36 @@
     // -------------------------------------------------------------------------
     // Internal functions
     // -------------------------------------------------------------------------
+
+    // see: https://stackoverflow.com/questions/3163615/how-to-scroll-an-html-page-to-a-given-anchor
     //
+    function scrollPage(headings) {
+      const id = 'image-carousel';
+      var pageYOffset = -65;
+      var yourElement;
+      var y;
+
+      for (let i=0; i<headings.length; i++) {
+        yourElement = headings[i];
+        y = yourElement.getBoundingClientRect().top + pageYOffset;
+        window.scrollTo({top: y, behavior: 'smooth'});
+      }
+
+    }
+
+    function extend () {
+      var target = {}
+      for (var i = 0; i < arguments.length; i++) {
+        var source = arguments[i]
+        for (var key in source) {
+          if (hasOwnProperty.call(source, key)) {
+            target[key] = source[key]
+          }
+        }
+      }
+      return target
+    }
+
     function getCookie(name) {
       var nameEQ = name + '=';
       var ca = document.cookie.split(';');
@@ -226,146 +243,7 @@
       var voiceLanguageDefault = voiceLanguageMicrosoftDefault[currentLanguage];
     }
 
-    // jadams
-    // parsing the content from the DOM and making
-    // sure data is nested properly.
-    //
-    // module.exports = function parseContent (options) {
-    //   var reduce = [].reduce
-    //
-    //   /**
-    //    * Get the last item in an array and return a reference to it.
-    //    * @param {Array} array
-    //    * @return {Object}
-    //    */
-    //   function getLastItem (array) {
-    //     return array[array.length - 1]
-    //   }
-    //
-    //   /**
-    //    * Get heading level for a heading dom node.
-    //    * @param {HTMLElement} heading
-    //    * @return {Number}
-    //    */
-    //   function getHeadingLevel (heading) {
-    //     return +heading.nodeName.split('H').join('')
-    //   }
-    //
-    //   /**
-    //    * Get important properties from a heading element and store in a plain object.
-    //    * @param {HTMLElement} heading
-    //    * @return {Object}
-    //    */
-    //   function getHeadingObject (heading) {
-    //     // each node is processed twice by this method because nestHeadingsArray() and addNode() calls it
-    //     // first time heading is real DOM node element, second time it is obj
-    //     // that is causing problem so I am processing only original DOM node
-    //     if (!(heading instanceof window.HTMLElement)) return heading
-    //
-    //     if (options.ignoreHiddenElements && (!heading.offsetHeight || !heading.offsetParent)) {
-    //       return null
-    //     }
-    //
-    //     var obj = {
-    //       id: heading.id,
-    //       children: [],
-    //       nodeName: heading.nodeName,
-    //       headingLevel: getHeadingLevel(heading),
-    //       textContent: options.headingLabelCallback ? String(options.headingLabelCallback(heading.textContent)) : heading.textContent.trim()
-    //     }
-    //
-    //     if (options.includeHtml) {
-    //       obj.childNodes = heading.childNodes
-    //     }
-    //
-    //     if (options.headingObjectCallback) {
-    //       return options.headingObjectCallback(obj, heading)
-    //     }
-    //
-    //     return obj
-    //   }
-    //
-    //   /**
-    //    * Add a node to the nested array.
-    //    * @param {Object} node
-    //    * @param {Array} nest
-    //    * @return {Array}
-    //    */
-    //   function addNode (node, nest) {
-    //     var obj = getHeadingObject(node)
-    //     var level = obj.headingLevel
-    //     var array = nest
-    //     var lastItem = getLastItem(array)
-    //     var lastItemLevel = lastItem
-    //       ? lastItem.headingLevel
-    //       : 0
-    //     var counter = level - lastItemLevel
-    //
-    //     while (counter > 0) {
-    //       lastItem = getLastItem(array)
-    //       if (lastItem && lastItem.children !== undefined) {
-    //         array = lastItem.children
-    //       }
-    //       counter--
-    //     }
-    //
-    //     if (level >= options.collapseDepth) {
-    //       obj.isCollapsed = true
-    //     }
-    //
-    //     array.push(obj)
-    //     return array
-    //   }
-    //
-    //   /**
-    //    * Select headings in content area, exclude any selector in options.ignoreSelector
-    //    * @param {String} contentSelector
-    //    * @param {Array} headingSelector
-    //    * @return {Array}
-    //    */
-    //   function selectHeadings (contentSelector, headingSelector) {
-    //     var selectors = headingSelector
-    //     if (options.ignoreSelector) {
-    //       selectors = headingSelector.split(',')
-    //         .map(function mapSelectors (selector) {
-    //           return selector.trim() + ':not(' + options.ignoreSelector + ')'
-    //         })
-    //     }
-    //     try {
-    //       return document.querySelector(contentSelector)
-    //         .querySelectorAll(selectors)
-    //     } catch (e) {
-    //       console.warn('Element not found: ' + contentSelector); // eslint-disable-line
-    //       return null
-    //     }
-    //   }
-    //
-    //   /**
-    //    * Nest headings array into nested arrays with 'children' property.
-    //    * @param {Array} headingsArray
-    //    * @return {Object}
-    //    */
-    //   function nestHeadingsArray (headingsArray) {
-    //     return reduce.call(headingsArray, function reducer (prev, curr) {
-    //       var currentHeading = getHeadingObject(curr)
-    //       if (currentHeading) {
-    //         addNode(currentHeading, prev.nest)
-    //       }
-    //       return prev
-    //     }, {
-    //       nest: []
-    //     })
-    //   }
-    //
-    //   return {
-    //     nestHeadingsArray: nestHeadingsArray,
-    //     selectHeadings: selectHeadings
-    //   }
-    // }
-
-    // Get headings array.
-    // headingsArray = parseContent.selectHeadings(".js-toc-content", "h2, h3, h4, h5, h6")
-    // // Return if no headings are found.
+    // Return if no headings are found.
     // if (headingsArray === null) {
     //   return
     // }
@@ -383,6 +261,13 @@
           var voiceTags = new Array();
           var ignoreTags;
 //        var chunksEnd = false;
+
+          // Get headings array
+          // Merge defaults with user options.
+          // Set to options variable at the top.
+          myOptions     = extend(defaultOptions, customOptions || {});
+          headingsArray = parseContent.selectHeadings(myOptions.contentSelector, myOptions.headingSelector);
+          scrollPage(headingsArray);
 
           // Default values
           //

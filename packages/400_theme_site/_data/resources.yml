@@ -1726,6 +1726,25 @@ resources:
   # Speak2Me
   # Speech synthesis (TTS)
   #
+  # - name:                               speak2me
+  #   resource:
+  #     enabled:                          false
+  #
+  #     id:                               speak2me
+  #     comment:                          Module speak2me
+  #     region:                           head
+  #     layout:                           [ all ]
+  #     required:                         always
+  #     preload:                          false
+  #     script_load:                      defer
+  #     dependencies:                     false
+  #     pass_init_data:                   true
+  #     data:
+  #       css:                            [ modules/speak2me/css/speak2me ]
+  #       files:                          [ adapter/js/speak2me.js ]
+  #       js:                             [ modules/speak2me/js/speak2me ]
+  #       init_function:                  [ j1.adapter.speak2me.init ]
+
   - name:                               speak2me
     resource:
       enabled:                          true
@@ -1742,7 +1761,7 @@ resources:
       data:
         css:                            [ modules/speak2me/css/speak2me ]
         files:                          [ adapter/js/speak2me.js ]
-        js:                             [ modules/speak2me/js/speak2me ]
+        js:                             []
         init_function:                  [ j1.adapter.speak2me.init ]
 
 # ------------------------------------------------------------------------------

@@ -80,6 +80,8 @@ regenerate:                             true
 /* eslint quotes: "off"                                                       */
 // -----------------------------------------------------------------------------
 // https://github.com/EdwardBalaj/Simple-DeepL-API-Integration
+// https://www.javatpoint.com/how-to-add-google-translate-button-on-your-webpage
+// https://gist.github.com/ab007shetty/28e99707734db32a6e881e4d245d42f7
 // https://github.com/marghoobsuleman/ms-Dropdown
 // https://www.marghoobsuleman.com/image-dropdown/help
 // https://www.marghoobsuleman.com/image-dropdown/advanced-help

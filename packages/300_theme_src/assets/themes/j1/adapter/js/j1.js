@@ -239,39 +239,35 @@ var j1 = (function (options) {
   };
   var user_consent = {};
   var user_session = {
-    'mode':                 'web',
-    'writer':               'j1.adapter',
-    'locale':               navigator.language || navigator.userLanguage,
-    'user_name':            '{{template_config.user.user_name}}',
-    'provider':             '{{template_config.user.provider}}',
-    'provider_membership':  '{{template_config.user.provider_membership}}',
-    'provider_permissions': 'public,{{template_config.user.provider_permissions}}',
-    'provider_site_url':    '{{template_config.user.provider_site_url}}',
-    'provider_home_url':    '{{template_config.user.provider_home_url}}',
-    'provider_blog_url':    '{{template_config.user.provider_blog_url}}',
-    'provider_member_url':  '{{template_config.user.provider_member_url}}',
-    'provider_privacy_url': '{{template_config.user.provider_privacy_url}}',
-    'requested_page':       'na',
-    'previous_page':        'na',
-    'last_pager':           '/pages/public/blog/navigator/'
+    'mode':                   'web',
+    'writer':                 'j1.adapter',
+    'locale':                 navigator.language || navigator.userLanguage,
+    'user_name':              '{{template_config.user.user_name}}',
+    'provider':               '{{template_config.user.provider}}',
+    'provider_membership':    '{{template_config.user.provider_membership}}',
+    'provider_permissions':   'public,{{template_config.user.provider_permissions}}',
+    'provider_site_url':      '{{template_config.user.provider_site_url}}',
+    'provider_home_url':      '{{template_config.user.provider_home_url}}',
+    'provider_blog_url':      '{{template_config.user.provider_blog_url}}',
+    'provider_member_url':    '{{template_config.user.provider_member_url}}',
+    'provider_privacy_url':   '{{template_config.user.provider_privacy_url}}',
+    'speech_synthesis_active': 'false',
+    'requested_page':         'na',
+    'previous_page':          'na',
+    'last_pager':             '/pages/public/blog/navigator/'
   };
   var user_state   = {
-    'writer':               'j1.adapter',
-    'template_version':     '{{template_version}}',
-//
-//  for testing only
-//  'template_version':     'undefined',
-//  'template_version':     '2022.4.4',
-//
-    'theme_name':           'UnoLight',
-    'theme_css':            '',
-    'theme_author':         'J1 Team',
-    'theme_version':        '{{template_version}}',
-    'session_active':       false,
-    'google_translate':     'disabled',
-    'translate_all_pages':  true,
-    'translate_locale':     navigator.language || navigator.userLanguage,
-    'last_session_ts':      ''
+    'writer':                 'j1.adapter',
+    'template_version':       '{{template_version}}',
+    'theme_name':             'UnoLight',
+    'theme_css':              '',
+    'theme_author':           'J1 Team',
+    'theme_version':          '{{template_version}}',
+    'session_active':         false,
+    'google_translate':       'disabled',
+    'translate_all_pages':    true,
+    'translate_locale':       navigator.language || navigator.userLanguage,
+    'last_session_ts':        ''
   };
 
   // ---------------------------------------------------------------------------

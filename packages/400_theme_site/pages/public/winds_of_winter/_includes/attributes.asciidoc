@@ -1,0 +1,60 @@
+// ~/document_base_folder/000_includes
+//  Asciidoc attribute includes:                 attributes.asciidoc
+// -----------------------------------------------------------------------------
+
+// URLs - Internal references and/or sources on the Internet
+// -----------------------------------------------------------------------------
+tag::urls[]
+
+:url-ai-book-wow--chapter-1:                           /pages/public/experience/books/wow-1/
+:url-ai-book-wow--chapter-2:                           /pages/public/experience/books/wow-2/
+:url-ai-book-wow--chapter-3:                           /pages/public/experience/books/wow-3/
+:url-ai-book-wow--chapter-4:                           /pages/public/experience/books/wow-4/
+:url-ai-book-wow--chapter-5:                           /pages/public/experience/books/wow-5/
+:url-ai-book-wow--chapter-6:                           /pages/public/experience/books/wow-6/
+:url-ai-book-wow--chapter-7:                           /pages/public/experience/books/wow-7/
+:url-ai-book-wow--chapter-8:                           /pages/public/experience/books/wow-8/
+:url-ai-book-wow--chapter-9:                           /pages/public/experience/books/wow-9/
+:url-ai-book-wow--chapter-10:                          /pages/public/experience/books/wow-10/
+:url-ai-book-wow--chapter-11:                          /pages/public/experience/books/wow-11/
+:url-ai-book-wow--chapter-12:                          /pages/public/experience/books/wow-12/
+:url-ai-book-wow--chapter-13:                          /pages/public/experience/books/wow-13/
+:url-ai-book-wow--chapter-14:                          /pages/public/experience/books/wow-14/
+
+end::urls[]
+
+
+// FOOTNOTES, global asciidoc attributes (variables)
+// -----------------------------------------------------------------------------
+tag::footnotes[]
+end::footnotes[]
+
+
+// Tags - Asciidoc attributes used internally
+// -----------------------------------------------------------------------------
+tag::tags[]
+end::tags[]
+
+
+// Data - Data elements for Asciidoctor extensions
+// -----------------------------------------------------------------------------
+tag::data[]
+end::data[]
+
+
+// Images - Images from local include/images folder
+// -----------------------------------------------------------------------------
+tag::images[]
+end::images[]
+
+
+// PRODUCTS, local product information (e.g. release)
+// -----------------------------------------------------------------------------
+tag::products[]
+end::products[]
+
+
+// AUTHORS, local author information (e.g. article)
+// -----------------------------------------------------------------------------
+tag::authors[]
+end::authors[]

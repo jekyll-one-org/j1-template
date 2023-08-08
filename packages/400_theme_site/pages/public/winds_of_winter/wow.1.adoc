@@ -1,0 +1,68 @@
+---
+title:                                  The Winds of Winter
+title_extention:                        Chapter One
+tagline:                                Chapter One
+
+date:                                   2023-07-21
+#last_modified:                         2023-01-01
+
+description: >
+                                        For twelve years, fans of George R.R. Martin's fantasy saga "A Song of Ice
+                                        and Fire," the basis for the TV series "Game of Thrones," longing for the
+                                        sequel. Now ChatGPT has written the last two parts of the fantasy saga.
+keywords: >
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap,
+                                        books, game of thrones, chatgpt
+
+categories:                             [ Knowledge ]
+tags:                                   [ ChatGPT ]
+
+image:
+  path:                                 /assets/images/modules/attics/1920x1280/georgerrmartin-winds-winter.jpg
+  width:                                1920
+  height:                               1280
+
+tts:                                    true
+regenerate:                             false
+permalink:                              /pages/public/experience/books/wow-1/
+
+resources:                              [ animate ]
+resource_options:
+  - attic:
+      slides:
+        - url:                          /assets/images/modules/attics/1920x1280/georgerrmartin-winds-winter.jpg
+          alt:                          Proposed Cover for The Winds of Winter
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="all" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+CAUTION: This work is NOT an attempt to *replace* _George R. R. Martin's_
+work. It's an experiment to see how AI writes extensive texts. This project
+is *not* intended to push the idea that AI can *replace writers*.
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+[role="mt-5"]
+== Chapter One
+
+include::{documentdir}/wow.1.asciidoc[]

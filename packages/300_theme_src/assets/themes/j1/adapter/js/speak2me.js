@@ -88,15 +88,17 @@ j1.adapter.speak2me = (function (j1, window) {
 
 {% comment %} Set global variables
 -------------------------------------------------------------------------------- {% endcomment %}
-var environment       = '{{environment}}';
-var cookie_names      = j1.getCookieNames();
-var user_state        = j1.readCookie(cookie_names.user_state);
-var state             = 'not_started';
-var chrome            = /chrome/i.test( navigator.userAgent );
-var edge              = /Edg/i.test( navigator.userAgent );
-var isChrome          = ((chrome) && (!edge));
-var ttsDisabled       = false;
-
+var environment           = '{{environment}}';
+var cookie_names          = j1.getCookieNames();
+var user_state            = j1.readCookie(cookie_names.user_state);
+var state                 = 'not_started';
+var chrome                = /chrome/i.test( navigator.userAgent );
+var edge                  = /Edg/i.test( navigator.userAgent );
+var isChrome              = ((chrome) && (!edge));
+var ttsDisabled           = false;
+var user_session          = j1.readCookie('j1.user.session');
+var chromeWorkaround      = {{speak2me_options.chromeWorkaround}};
+var chromePauseWorkaround = {{speak2me_options.chromePauseWorkaround}};
 var frontmatterOptions;
 var speak2meDefaults;
 var speak2meSettings;
@@ -156,10 +158,6 @@ var Events = {
       _this  = j1.adapter.speak2me;
       logger = log4javascript.getLogger('j1.adapter.speak2me');
 
-      _this.setState('started');
-      logger.debug('\n' + 'state: ' + _this.getState());
-      logger.info('\n' + 'module is being initialized');
-
       // -----------------------------------------------------------------------
       // initializer
       // -----------------------------------------------------------------------
@@ -167,14 +165,60 @@ var Events = {
         var pageState     = $('#no_flicker').css("display");
         var pageVisible   = (pageState == 'block') ? true : false;
         var speak2meModal;
+        var speak2mePause;
 
         if (j1.getState() === 'finished' && pageVisible) {
+
+          // jadams
+          // NOTE: coincident active speech synthesis in multiple
+          // browser windows (tabs) does NOT work
+          //
+          // if (user_session.speech_synthesis_active === true) {
+          //     return;
+          // }
+
+          _this.setState('started');
+          logger.debug('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'module is being initialized');
+
+          if (isChrome && chromeWorkaround) {
+            var chromeWorkaroundRunner = setInterval(function () {
+              if ($().speak2me('isSpeaking')) {
+                $().speak2me('pause').speak2me('resume');
+                logger.debug('\n' + 'speak: send pause-resumed');
+              }
+            }, 10000);
+          }
+
+          // Check for mobile browsers
+          //
+          if (navigator.userAgent.match(/(iPod|iPhone|iPad|Android)/)) {
+            logger.warn('\n' + 'module is currently not supported on mobile devices');
+            $('#quickLinksSpeakButton').hide();
+            return;
+          }
+
+          // Check to see if the browser supports speech synthesis
+          //
+          if (!('speechSynthesis' in window)) {
+            logger.warn('\n' + 'this browser does not support the Web Speech API.');
+            $('#quickLinksSpeakButton').hide();
+            return;
+          };
+
+          // If something is currently being spoken, ignore new voice
+          // request. Otherwise it would be queued, which is doable if
+          // someone wanted that, but not what I wanted.
+          //
+          if (window.speechSynthesis.speaking) {
+              return
+          };
 
           if (ttsDisabled) {
             logger.warn('\n' + 'tts detected: disabled');
             $('#quickLinksSpeakButton').hide();
           } else {
-            speak2meModal = document.createElement('div');
+            speak2meModal    = document.createElement('div');
             speak2meModal.id = speak2meOptions.dialogContainerID;
             speak2meModal.style.display = 'none';
 
@@ -184,9 +228,16 @@ var Events = {
             speak2meModal.setAttribute('aria-labelledby', speak2meOptions.dialogContainerID);
             document.body.append(speak2meModal);
 
-            // -------------------------------------------------------------------
+            const pauseSpoken = document.createTextNode(' professionals a clean implementation for starting new projects. JekyllOne is open source, and the modules packed are also free to use.');
+            speak2mePause     = document.createElement('pause');
+            speak2mePause.id  = 'pauseSpoken'
+            speak2mePause.style.display = 'none';
+            speak2mePause.appendChild(pauseSpoken);
+            document.body.append(speak2mePause);
+
+            // -----------------------------------------------------------------
             // data loader
-            // -------------------------------------------------------------------
+            // -----------------------------------------------------------------
             j1.loadHTML ({
               xhr_container_id:   'speak2me_container',
               xhr_data_path:      '/assets/data/speak2me/index.html',
@@ -194,13 +245,13 @@ var Events = {
               'j1.adapter.rtextResizer',
               'null'
             );
-          }
+          } // END if ttsDisabled
 
           // -------------------------------------------------------------------
           // on 'show'
           // -------------------------------------------------------------------
           $('#speak2me_container').on('show.bs.modal', function () {
-            if (isChrome) {
+            if (isChrome && chromeWorkaround) {
               logger.warn('\n' + 'chrome browser detected: pause|resume buttons disabled');
               $('#pause_button').hide();
               $('#resume_button').hide();
@@ -223,15 +274,6 @@ var Events = {
           clearInterval(dependencies_met_page_ready);
         }
       }, 10);
-
-      if (isChrome) {
-        var chromeWorkaround = setInterval(function () {
-          if ($().speak2me('isSpeaking')) {
-            $().speak2me('pause').speak2me('resume');
-            logger.debug('\n' + 'speak: send pause-resumed');
-          }
-        }, 10000);
-      }
 
     }, // END init
 
@@ -282,6 +324,7 @@ var Events = {
     // calls the 'speak' functiion of the screen reader
     // -------------------------------------------------------------------------
     speak: function (obj) {
+
       // Get the parameter values from the input sliders
       //
       var r = parseFloat(document.getElementById('rate').value);
@@ -291,7 +334,7 @@ var Events = {
       // Note: Function calls can be perfromed individually or
       // chained together as demonstrated below
       //
-      $(obj).speak2me('rate',r).speak2me('pitch',p).speak2me('volume',v);
+      $(obj).speak2me('rate',r).speak2me('pitch', p).speak2me('volume', v);
       // $(obj).speak2me('ignore', 'h2','h3');
       var speaker = $(obj).speak2me('speak');
       $(".mdib-speaker").addClass("mdib-spin");
@@ -300,30 +343,40 @@ var Events = {
       speaker.addEventListener('error', (event) => {
         console.log('speak2me error:', event);
       });
-
     },
 
     // -------------------------------------------------------------------------
     // pause()
-    // Calls the 'pause' function of rge screen reader
+    // Calls the 'pause' function of the screen reader
     // -------------------------------------------------------------------------
     pause: function () {
       $().speak2me('pause');
+      if (chromePauseWorkaround) {
+        chromePauseWorkaround = setInterval(function () {
+            $().speak2me('resume');
+            $('Pause').speak2me('speak');
+            logger.debug('\n' + 'speak: send pause text');
+            $().speak2me('pause');
+        }, 1000);
+      }
       $(".mdib-speaker").removeClass("mdib-spin");
     },
 
     // -------------------------------------------------------------------------
     // resume()
-    // Calls the 'resume' function of rge screen reader
+    // Calls the 'resume' function of the screen reader
     // -------------------------------------------------------------------------
     resume: function () {
+      if (chromePauseWorkaround) {
+        clearInterval(chromeWorkaroundRunner);
+      }
       $().speak2me('resume');
       $(".mdib-speaker").addClass("mdib-spin");
     },
 
     // -------------------------------------------------------------------------
     // stop()
-    // Calls the 'stop' function of rge screen reader
+    // Calls the 'stop' function of the screen reader
     // -------------------------------------------------------------------------
     stop: function () {
       $().speak2me('stop');
