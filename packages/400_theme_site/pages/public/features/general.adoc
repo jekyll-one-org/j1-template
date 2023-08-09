@@ -11,7 +11,7 @@ description: >
                                         Current software counts. Excellent tools in their latest versions
                                         make the rocket engine for each and every website. J1 Template
                                         is using current software in their latest versions. All of them
-                                        are OpenSource and free to use. No license issues using JekyllOne
+                                        are open source and free to use. No license issues using JekyllOne
                                         Theme for private or professional purposes.
 keywords: >
                                         Jekyll, JekyllOne, Theme, Software, Platforms, Frameworks, Devices
@@ -70,7 +70,7 @@ resource_options:
 [role="dropcap"]
 Current software counts. Excellent tools in their latest versions make the
 rocket engine for each and every website. Jekyll One is using current software
-in their latest versions. All of them are OpenSource and free to use.
+in their latest versions. All of them are open source and free to use.
 No license issues for private or professional use.
 
 // Include sub-documents (if any)
@@ -87,7 +87,7 @@ mdi:language-ruby[24px, md-blue ml-3 mr-2]
 mdi:nodejs[24px, md-blue ml-3 mr-2]
 <<NodeJS>> 14.x
 
-All software-platforms are OpenSource, free to use and available on all
+All software-platforms are open source, free to use and available on all
 common operating systems like Windows, Linux, and OSX.
 
 === Ruby

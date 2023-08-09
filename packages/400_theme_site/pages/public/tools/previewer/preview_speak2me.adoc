@@ -1,15 +1,16 @@
 ---
 title:                                  Speak2Me
-title_extention:                        Output previews for the Speak2Me module
-tagline:                                Screen reader output preview
+title_extention:                        Content samples for the TTS module
+tagline:                                Content samples
 
 date:                                   2023-07-26
 #last_modified:                         2023-01-01
 
 description: >
                                         Speak2Me for J1 Template is a speech synthesise module that enables a
-                                        so-called screen reader. The reader functionality allows users to sit back
-                                        and listen to the browser read aloud the important contents on a Web page.
+                                        so-called Text-To-Speech converter. The converter functionality allows
+                                        users to sit back and listen to the browser read aloud the important
+                                        contents on a Web page.
 keywords: >
                                         open source, free, template, jekyll, jekyllone, web,
                                         sites, static, jamstack, bootstrap,
@@ -24,6 +25,7 @@ book:
 tts:                                    true
 regenerate:                             true
 permalink:                              /pages/public/tools/previewer/speak2me/
+
 
 resources:                              [
                                           animate, clipboard, carousel, comments,
@@ -68,12 +70,14 @@ resource_options:
 //
 [role="dropcap"]
 Speak2Me for J1 Template is a speech synthesise module that enables a
-so-called screen reader. The reader functionality allows users to sit back
-and listen to the browser read aloud the important contents on a Web page.
+so-called Text-To-Speech converter. The converter functionality allows
+users to sit back and listen to the browser read aloud the important
+contents on a Web page. This page provides typical content elements used
+for web pages. Run the converter to experience how those content elements
+are spoken.
 
-The *screen reader* on websites created by J1 Template is started by
-clicking on the *speaker* symbol mdi:speaker[24px, md-blue] placed top
-right in the *menu bar*.
+The converter is started by clicking on the *speaker* symbol
+mdi:speaker[24px, md-blue] which is placed top right in the *menu bar*.
 
 CAUTION: The Speak2Me module is currently only available as an experimental
 version, and only elementary elements for designing websites are used for
@@ -95,7 +99,7 @@ Chromium-based browsers, such as the Opera browser, provide voices of a
 very poor quality and cannot be recommended for voice output.
 
 mdi:clock-time-five-outline[24px, md-gray mr-2]
-*15 Minutes* to read
+*15-30 Minutes* to read
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
@@ -224,11 +228,12 @@ content.
 
 Example of a *quote block*:
 
-[quote, Monty Python and the Holy Grail]
+[quote, Monty Python and The Life of Brian]
 ____
-Dennis: Come and see the violence inherent in the system.
-Help! Help! I'm being repressed!
+He’s not the Messiah – he’s a very naughty boy.
 ____
+
+// https://www.youtube.com/watch?v=3_kKAeh6qyc
 
 ==== Quoted text
 
@@ -369,59 +374,60 @@ An inline image is displayed in the flow of another element, such as a
 paragraph block.
 
 [role="mt-4"]
-image:{{page.book.cover}}[role="mr-4 mb-4 float-left"]
+image:{{page.book.cover}}[height=480, role="mr-4 mb-2 float-left"]
 
 His working life has been defined by questions. *Why is this bastard
 lying to me?* was at the front of his mind as he conducted every interview.
 But it wasn't just politicians. Paxman's interviews with Dizzee Rascal,
-David Bowie, Russell Brand, Vivienne Westwood are legendary. He discussed
-belief with religious leaders and philosophers, economics with CEOs and
-bankers, books with writers and art and theatre with artists.
+David Bowie, Russell Brand, Vivienne Westwood are legendary.
+
+He discussed belief with religious leaders and philosophers, economics
+with CEOs and bankers, books with writers and art and theatre with artists.
 
 After 22 years on University Challenge, Paxman is also the longest-serving
 active quizmaster on British television. Now, in these long-awaited memoirs,
-he spills the beans behind four decades in front of the camera. He offers
-reflections and stories from a career that has taken him as a reporter to
-many of the world's war zones and trouble spots - Central America, Beirut,
-Belfast, to the studios of Tonight, Panorama, Breakfast Time, the Six O'clock
-News. Filled with candid stories about the great, the good and the rotters
-that have crossed his path, his memoirs are as magnetic to read as Paxman
-is to watch.
+he spills the beans behind four decades in front of the camera.
 
-Candid, uncompromising, compassionate, reflective and astute, he writes
-of the principles that have governed his professional life, the inner
-workings of the BBC, the role of journalists in political debate, the
-scandals and rows he's been part of, the books he has written and the
-series he has made. In a book that tells some terrific stories and laughs
-at much of the silliness in the world, A Life in Questions charts the life
-of the greatest political interviewer of our time.
+He offers reflections and stories from a career that has taken him as a
+reporter to many of the world's war zones and trouble spots - Central America,
+Beirut, Belfast, to the studios of Tonight, Panorama, Breakfast Time, the
+Six O'clock News. Filled with candid stories about the great, the good and
+the rotters that have crossed his path, his memoirs are as magnetic to read
+as Paxman is to watch.
+In that book, Paxman tells some terrific stories and laughs at much of the
+silliness in the world. A Life in Questions charts the life of the greatest
+political interviewer of our time.
+
 
 [role="mt-4"]
 === Block image
 
 A block image is displayed as a discrete element on its own line in a
-document.
+document. Web pages use block images for various purposes to enhance
+visual appeal, convey information, and improve the overall user
+experience.
 
-image::/assets/images/pages/panels/responsive-text-1920x800.jpg[{{page.title}}, width=1280]
+image::/assets/images/pages/panels/responsive-text-1920x800.jpg[{{page.title}}, width=1280, role="mb-4"]
 
-////
+NOTE: Carefully chosen and well-placed images can significantly enhance
+the overall effectiveness of a web page.
+
 [role="mt-4"]
+[#lightbox2]
 == Lightbox
 
+Lightboxes are UI elements commonly used in web pages for various purposes.
+They serve as a way to display content or interact with users without
+requiring them to navigate away from the current page. This UI element
+is typically designed to grab the user's attention and provide a focused
+interaction experience.
+
 [role="mb-4"]
-Find below an example of using the lightbox for standalone images. See how
-single (individual) images are linked for use with Lightbox.
+Find below an example of using the default lightbox of the J1 Template
+to display and enlarge an group of images.
 
-.Lightbox block for standalone images
-lightbox::example-standalone[ 800, {data-images-standalone}, role="mb-4" ]
-
-[role="mb-4"]
-Lightbox supports image groups. Click on the images below to see how a
-lightbox manages a group of images.
-
-.Lightbox block for grouped images
+.Lightbox block for multiple images
 lightbox::example-group[ 395, {data-images-group}, group, role="mb-4 wm-800" ]
-////
 
 
 [role="mt-5"]
@@ -496,12 +502,11 @@ slick::collection_carousel_biography[role="mb-5"]
 [role="mt-4"]
 == Slider
 
-_Master Slider_ is a 3rd party jQuery plugin fully integrated into the
-J1 Template by the module MS module `masterslider`. JekyllOne uses the
-*free* version of Master Slider well-known as *MS Lite*. The Lite version
-does *not* support all features of the *full* product. The functionality of
-*filters*, *layouts* are limited and no *overlay* techniques are supported
-by the lite version.
+_Masterslider_ is a Query plugin fully integrated into the J1 Template.
+Jekyll One uses the *free* version of Masterslider well-known as *MS Lite*.
+The lite version does *not* support all features of the *full* product.
+The functionality of *filters*, *layouts* are limited and *no* overlay
+techniques are supported by the MS Lite version.
 
 [role="mt-4"]
 === Slider using ThumbImages

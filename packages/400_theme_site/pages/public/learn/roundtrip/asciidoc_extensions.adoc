@@ -272,7 +272,7 @@ ____
 [role="mt-5"]
 == Lightboxes
 
-A Lightbox is, in general, a helper which displays enlarged, almost
+A lightbox is, in general, a helper which displays enlarged, almost
 screen-filling versions of images (or videos) while dimming the remainder
 of the page. The technique, introduced by Lightbox V2, gained widespread
 popularity thanks to its simple style. The term lightbox has been employed

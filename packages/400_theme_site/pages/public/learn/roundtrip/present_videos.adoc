@@ -111,20 +111,20 @@ Browsers have a built-in multimedia framework already for decoding and displayin
 video content. No need to use such proprietary software components anymore!
 
 HTML5 Video support is given by the App gallery combined with the lightbox
-LightGallery.
+module *LightGallery*.
 
 Two types of video sources are supported:
 
 . Video files from local folders (your webspace)
 . Video files from online sources (on the Internet) like YouTube, Vimeo, etc.
 
-The combination of the App gallery and the lightbox LightGallery is entirely
-usable for all the video content you want to present on your site. You can
-place Galleries elsewhere with your content. You can use them for video blogs
-by putting them into your blog article's content.
+The combination of the gallery app and a lightbox is entirely usable for all
+the video content you want to present on your site. You can place galleries
+elsewhere with your content. You can use them for video blogs by putting
+them into your blog article's content.
 
-WARNING: LightGallery can be used for free for private use, but a commercial
-license is needed for business use. See
+WARNING: The module LightGallery can be used for free for private use, but
+a commercial license is needed for business use. See
 link:{url-light-gallery--license}[LightGallery licenses, {browser-window--new}]
 how to use LightGallery for commercial websites and projects.
 

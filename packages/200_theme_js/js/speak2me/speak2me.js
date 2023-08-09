@@ -303,21 +303,22 @@
 
           // Default values
           //
-          voiceTags['a']          = new voiceTag('clicking the link,', '');
-          voiceTags['q']          = new voiceTag(',', '');
-          voiceTags['ol']         = new voiceTag('Start of list.', 'End of list.');
-          voiceTags['ul']         = new voiceTag('Start of list.', 'End of list.');
-          voiceTags['dl']         = new voiceTag('Start of list.', 'End of list.');
-          voiceTags['dt']         = new voiceTag('', ', ');
-          voiceTags['img']        = new voiceTag('There\'s an embedded image with the description,', 'Note, image-based contents are not spoken.');
-          voiceTags['table']      = new voiceTag('There\'s an embedded table with the caption,', 'Note, table contents are not spoken.');
-          voiceTags['carousel']   = new voiceTag('There\'s an embedded carousel element with the caption,', 'Note, carousel elements are not spoken.');
-          voiceTags['slider']     = new voiceTag('There\'s an embedded slider element with the caption,', 'Note, slider elements are not spoken.');
-          voiceTags['masonry']    = new voiceTag('There\'s an embedded masonry element with the caption,', 'Note, masonry elements are not spoken.');
-          voiceTags['lightbox']    = new voiceTag('There\'s an embedded lightbox element with the caption,', 'Note, lightbox elements are not spoken.');
-          voiceTags['gallery']    = new voiceTag('There\'s an embedded gallery element with the caption,', 'Note, gallery elements are not spoken.');
-          voiceTags['figure']     = new voiceTag('There\'s an embedded figure with the caption,', '');
-          voiceTags['blockquote'] = new voiceTag('Blockquote start.', 'Blockquote end.');
+          voiceTags['a']              = new voiceTag('clicking the link,', '');
+          voiceTags['q']              = new voiceTag(',', '');
+          voiceTags['ol']             = new voiceTag('Start of list.', 'End of list.');
+          voiceTags['ul']             = new voiceTag('Start of list.', 'End of list.');
+          voiceTags['dl']             = new voiceTag('Start of list.', 'End of list.');
+          voiceTags['dt']             = new voiceTag('', ', ');
+          voiceTags['img']            = new voiceTag('There\'s an embedded image with the description,', 'Note, image-based contents are not spoken.');
+          voiceTags['table']          = new voiceTag('There\'s an embedded table with the caption,', 'Note, table contents are not spoken.');
+          voiceTags['listingblock']   = new voiceTag('There\'s an embedded structured text block with the caption,', 'Note, structured text blocks are not spoken.');
+          voiceTags['carousel']       = new voiceTag('There\'s an embedded carousel element with the caption,', 'Note, carousel elements are not spoken.');
+          voiceTags['slider']         = new voiceTag('There\'s an embedded slider element with the caption,', 'Note, slider elements are not spoken.');
+          voiceTags['masonry']        = new voiceTag('There\'s an embedded masonry element with the caption,', 'Note, masonry elements are not spoken.');
+          voiceTags['lightbox']       = new voiceTag('There\'s an embedded lightbox element with the caption,', 'Note, lightbox elements are not spoken.');
+          voiceTags['gallery']        = new voiceTag('There\'s an embedded gallery element with the caption,', 'Note, gallery elements are not spoken.');
+          voiceTags['figure']         = new voiceTag('There\'s an embedded figure with the caption,', '');
+          voiceTags['blockquote']     = new voiceTag('Blockquote start.', 'Blockquote end.');
 
 //        ignoreTags = ['audio','button','canvas','code','del','dialog','dl','embed','form','head','iframe','meter','nav','noscript','object','s','script','select','style','textarea','video'];
 //        ignoreTags = ['masonry', 'carousel', 'slider', 'pre','audio','button','canvas','code','del','dialog','embed','form','head','iframe','meter','nav','noscript','object','s','script','select','style','textarea','video'];
@@ -445,17 +446,21 @@
 
           speaker.text    = chunks[chunkCounter];
           sectionText     = speaker.text.substr(0, 20);
-          currentSection  = $('#content').find("p:contains('" + sectionText + "')")[0];
+          currentSection  = $('#content').find("p:contains('" + speaker.text.substr(0, 20) + "')")[0];
 
           synth.speak(speaker);
 
           speaker.addEventListener('start', (event) => {
             $('.mdib-speaker').addClass('mdib-spin');
-            var sectionText     = speaker.text.substr(0, 20);
+            var sectionText = speaker.text.substr(0, 20);
             currentSection  = $('#content').find("p:contains('" + sectionText + "')")[0];
+
             if (currentSection !== undefined) {
-              $(currentSection).addClass('speak-highlighted');
-              window.scrollTo({top: currentSection.offsetTop-100, behavior: 'smooth'});
+              var sectionContent =  currentSection.innerText;
+              if (sectionContent.startsWith(sectionText)) {
+                $(currentSection).addClass('speak-highlighted');
+                window.scrollTo({top: currentSection.offsetTop-100, behavior: 'smooth'});
+              }
             }
             // $('#speak_button').hide();
           });
@@ -679,6 +684,26 @@
           });
 
           // jadams
+          // Search for listingblock elements, check for previous declared <div>
+          // container that contains the title element and insert that
+          // text if it exists and then remove the DOM object
+          //
+          jQuery(clone).find('.listingblock').addBack('listingblock').each(function() {
+            title_element = jQuery(this).find('.title');
+            copy          = title_element[0].innerText;
+
+            prepend       = voiceTags['listingblock'].prepend
+            appended      = voiceTags['listingblock'].append;
+
+            if ((copy !== undefined) && (copy != '')) {
+                jQuery('<div>' + prepend + ' ' + copy + '.</div>').insertBefore(this);
+                jQuery('<div>' + appended + ' ' + '.</div>').insertBefore(this);
+            }
+
+            jQuery(this).remove();
+          });
+
+          // jadams
           // Search for <carousel>, check for previous declared <div>
           // container that contains the title element and insert that
           // text if it exists and then remove the DOM object
@@ -688,14 +713,8 @@
             title_element = jQuery(this).prev();
             jQuery(title_element).remove();
 
-            if (customTags['carousel']) {
-              prepend   = customTags['carousel'].prepend
-              appended  = customTags['carousel'].append;
-            }
-            else {
-              prepend   = voiceTags['carousel'].prepend
-              appended  = voiceTags['carousel'].append;
-            }
+            prepend   = voiceTags['carousel'].prepend
+            appended  = voiceTags['carousel'].append;
 
             if ((title !== undefined) && (title != '')) {
               jQuery('<div>' + prepend + ' ' + title + '.</div>').insertBefore(this);
@@ -715,14 +734,8 @@
             title_element = jQuery(this).prev();
             jQuery(title_element).remove();
 
-            if (customTags['slider']) {
-              prepend   = customTags['slider'].prepend
-              appended  = customTags['slider'].append;
-            }
-            else {
-              prepend   = voiceTags['slider'].prepend
-              appended  = voiceTags['slider'].append;
-            }
+            prepend   = voiceTags['slider'].prepend
+            appended  = voiceTags['slider'].append;
 
             if ((title !== undefined) && (title != '')) {
               jQuery('<div>' + prepend + ' ' + title + '.</div>').insertBefore(this);
@@ -742,14 +755,8 @@
             title_element = jQuery(this).prev();
             jQuery(title_element).remove();
 
-            if (customTags['gallery']) {
-              prepend   = customTags['gallery'].prepend
-              appended  = customTags['gallery'].append;
-            }
-            else {
-              prepend   = voiceTags['gallery'].prepend
-              appended  = voiceTags['gallery'].append;
-            }
+            prepend   = voiceTags['gallery'].prepend
+            appended  = voiceTags['gallery'].append;
 
             if ((title !== undefined) && (title != '')) {
               jQuery('<div>' + prepend + ' ' + title + '.</div>').insertBefore(this);
@@ -769,14 +776,8 @@
               title_element = jQuery(this).prev();
               jQuery(title_element).remove();
 
-              if (customTags['lightbox']) {
-                prepend   = customTags['lightbox'].prepend
-                appended  = customTags['lightbox'].append;
-              }
-              else {
-                prepend   = voiceTags['lightbox'].prepend
-                appended  = voiceTags['lightbox'].append;
-              }
+              prepend   = voiceTags['lightbox'].prepend
+              appended  = voiceTags['lightbox'].append;
 
               if ((title !== undefined) && (title != '')) {
                 jQuery('<div>' + prepend + ' ' + title + '.</div>').insertBefore(this);
@@ -882,10 +883,10 @@
           final = final.replace(/\.\./g, '.');
 
           // jadams
-          // Replace the abbreviation '.e.g.'or ',.e.g.,'
+          // Replace the abbreviation '.e.g.'or 'E.g.'
           //
-          final = final.replace(/\se\.g\.\s/g, ' for example, ');
-          final = final.replace(/\,\s+\.g\.\s+\,/g, ' for example, ');
+          final = final.replaceAll('e.g.', 'for example');
+          final = final.replaceAll('E.g.', 'For example, ');
 
           // jadams
           // Replace question and exclamation (?|!) marks

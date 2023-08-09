@@ -93,8 +93,8 @@ var cookie_names          = j1.getCookieNames();
 var user_state            = j1.readCookie(cookie_names.user_state);
 var state                 = 'not_started';
 var chrome                = /chrome/i.test( navigator.userAgent );
-var edge                  = /Edg/i.test( navigator.userAgent );
-var isChrome              = ((chrome) && (!edge));
+var isEdge                = /Edg/i.test( navigator.userAgent );
+var isChrome              = ((chrome) && (!isEdge));
 var ttsDisabled           = false;
 var user_session          = j1.readCookie('j1.user.session');
 var chromeWorkaround      = {{speak2me_options.chromeWorkaround}};
@@ -256,6 +256,12 @@ var Events = {
               $('#pause_button').hide();
               $('#resume_button').hide();
             }
+            if (isEdge) {
+              logger.warn('\n' + 'edge browser detected: pause|resume buttons disabled');
+              $('#pause_button').hide();
+              $('#resume_button').hide();
+            }
+
             _this.create('#voiceSelector');
           }); // END modal on 'show'
 

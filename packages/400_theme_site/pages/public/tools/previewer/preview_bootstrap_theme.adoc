@@ -27,7 +27,7 @@ permalink:                              /pages/public/tools/previewer/current_th
 resources:                              [ animate, clipboard, rouge ]
 resource_options:
   - toccer:
-      collapseDepth:                    3
+      collapseDepth:                    4
   - attic:
       slides:
         - url:                          /assets/images/modules/attics/themes-1920x1280-bw.jpg
@@ -105,7 +105,7 @@ resource_options:
 
 // Load page attributes
 // -----------------------------------------------------------------------------
-{% include {{load_attributes}} scope="global" %}
+{% include {{load_attributes}} scope="all" %}
 
 
 // Page content

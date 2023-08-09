@@ -28,7 +28,7 @@ image:
 regenerate:                             false
 permalink:                              /pages/public/learn/roundtrip/themes/
 
-resources:                              [ animate, rouge, clipboard, lightbox ]
+resources:                              [ animate, rouge, clipboard ]
 resource_options:
   - attic:
       slides:

@@ -412,7 +412,7 @@ j1.adapter.translator = (function (j1, window) {
     // Called by the translator CORE module after the user has made
     // the selection for a translation|language
     // -------------------------------------------------------------------------
-    cbGoogle: function () {
+    cbGoogle: function (option) {
       var logger            = log4javascript.getLogger('j1.adapter.translator.cbGoogle');
       var msDropdown        = document.getElementById('dropdownJSON').msDropdown;
 
@@ -446,6 +446,12 @@ j1.adapter.translator = (function (j1, window) {
       //   // domainAttribute = hostname;
       //   domainAttribute = '';
       // }
+
+      // button 'Do nothing' clicked
+      //
+      if (option === 'exitOnly') {
+        return;
+      }
 
       selectedTranslationLanguage = msDropdown.value;
       logger.info('\n' + 'selected translation language: ' + selectedTranslationLanguage);

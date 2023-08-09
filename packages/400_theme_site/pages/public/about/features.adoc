@@ -27,7 +27,7 @@ image:
 regenerate:                             false
 permalink:                              /pages/public/about/features/
 
-resources:                              [ animate, lightbox ]
+resources:                              [ animate ]
 resource_options:
   - attic:
       slides:
