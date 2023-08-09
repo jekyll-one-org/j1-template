@@ -59,11 +59,14 @@ h2.slide-item, h3.slide-item {
 	background: #fff url('../../images/ajax-loader.gif') center center no-repeat;
 }
 
+/*
+Moved to template CSS (carousel-title)
 .slider-title {
   font-style: italic;
   font-weight: 500;
   margin-left: 1px;
 }
+*/
 
 /* Cards
 -------------------------------------------------------------------------------- */

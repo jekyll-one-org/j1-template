@@ -56,12 +56,15 @@ padding-left: 1px;
   height: auto;
 }
 
+/*
+Moved to template CSS (carousel-title)
 .slider-title {
   line-height: 1.25rem;
   font-size: 1.125rem;
   font-weight: 500;
   margin-bottom: .5rem;
 }
+*/
 
 /* Navigation buttons
  ------------------------------------------------------------------------------- */

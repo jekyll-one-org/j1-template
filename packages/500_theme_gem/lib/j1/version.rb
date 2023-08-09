@@ -1,3 +1,3 @@
 module J1
-  VERSION = '2023.6.7'
+  VERSION = '2023.6.8'
 end

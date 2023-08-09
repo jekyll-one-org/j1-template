@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/scss/theme_uno/modules/_galleries.scss
+ # ~/scss/theme_uno/modules/_masonry.scss
  #
  # Product/Info:
  # http://jekyll.one
@@ -10,14 +10,15 @@
  # J1 Theme is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
- # NOTE: Styles for J1 Galleries (all)
+ # NOTE: Styles for all masonry blocks
  # -----------------------------------------------------------------------------
 */
 
-.gallery-title {
-  // color: #424242;
-  line-height: 1.25rem;
-  font-size: 1.125rem;
-  font-weight: 500;
-  margin-bottom: .5rem
+.masonry-title {
+    text-rendering: optimizeLegibility;
+    text-align: left;
+    line-height: 1.25;
+    font-size: 1.125rem;
+    font-weight: 500;
+    margin-bottom: .5rem;
 }

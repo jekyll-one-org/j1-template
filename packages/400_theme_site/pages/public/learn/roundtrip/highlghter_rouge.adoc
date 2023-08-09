@@ -60,6 +60,13 @@ resource_options:
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [role="dropcap"]
+
+In web pages, a code block refers to a section of code typically enclosed
+within special HTML or programming language tags to indicate that the content
+inside should be interpreted as code and not regular text. These code blocks
+are often used to display and format HTML, CSS, JavaScript, or other
+programming code snippets on a webpage.
+
 Rouge is a native Ruby themeable syntax highlighter fully integrated width J1
 Template. The highlighter supports 100+ different languages and generates HTML
 output using standard ANSI 256-colors displayed by all current browsers.
@@ -75,8 +82,8 @@ using Rouge.
 For the default themes `Uno` of J1 Template, the following _Rouge_ themes
 are used:
 
-* theme_light: based on theme `igorpro`
-* theme_dark:  based on theme `monokai.sublime`
+* light theme -- based on the Igor theme `igorpro`
+* dark theme -- based on the Monokai theme `monokai.sublime`
 
 The *default* themes used for the J1 Template can be configured with
 the global *template config* file `~/_data/j1_config.yml`.
@@ -96,7 +103,7 @@ To preview *all* themes supported by *J1 Template*, make your selection
 from the button *AVAILABLE THEMES* below.
 
 ++++
-<div class="btn-group">
+<div class="btn-group speak2me-ignore">
   <!-- See: https://stackoverflow.com/questions/47242702/force-bootstrap-dropdown-menu-to-always-display-at-the-bottom-and-allow-it-go-of -->
   <!-- NOTE: control the behaviour of popper.js for positioning -->
   <!-- NOTE: set attribute data-flip="false" to open the SELECT list at the BOTTOM of the BUTTON -->
@@ -138,6 +145,7 @@ from the button *AVAILABLE THEMES* below.
 
 === Liquid code
 
+{% raw %}
 [source, liquid]
 ----
 Hello {{ 'now' | date: "%Y %h" }}
@@ -147,6 +155,7 @@ Hello {{ 'now' | date: "%Y %h" }}
   {{ i }}
 {% endfor %}
 ----
+{% endraw %}
 
 === Javascript code
 
