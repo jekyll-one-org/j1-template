@@ -131,20 +131,23 @@
  {% comment %} Place Attic detected
  ------------------------------------------------------------------------------- {% endcomment %}
   <!-- div id="{{attic}}" class="attic notranslate" -->
-  <div id="{{attic}}" class="attic ">
-    <div class="container textOverlay" style="display: none">
-      {% if logo_enabled %}
-      <div class="{{imageAnimate}}"> <h2 class="home-title"><img src="{{imageName}}" height="{{imageHeigth}}px" alt="{{imageAlt}}"></h2></div>
-      {% endif %}
+  <attic>
+    <div id="{{attic}}" class="attic ">
+      <div class="container textOverlay" style="display: none">
+        {% if logo_enabled %}
+        <div class="{{imageAnimate}}"> <h2 class="home-title"><img src="{{imageName}}" height="{{imageHeigth}}px" alt="{{imageAlt}}"></h2></div>
+        {% endif %}
+      </div>
+      <div class="attic-caption" style="display: none"></div>
     </div>
-    <div class="attic-caption" style="display: none"></div>
-  </div>
-
+  </attic>
 {% else %}
 
   {% comment %} Fake attic used if NO attic is enabled for a layout
   ------------------------------------------------------------------------------ {% endcomment %}
    <!-- [INFO   ] [~/_includes/themes/j1/modules/attics/generator.html ] [ attic disabled for layout: {{page.layout}} ] -->
-   <div id="no_attic" class="no-attic mt-3"></div>
+   <attic>
+     <div id="no_attic" class="no-attic mt-3"></div>
+   </attic>     
 
 {% endif %}
