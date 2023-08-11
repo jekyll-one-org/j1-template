@@ -72,19 +72,21 @@ resource_options:
 Speak2Me for J1 Template is a speech synthesise module that enables a
 so-called Text-To-Speech converter. The converter functionality allows
 users to sit back and listen to the browser read aloud the important
-contents on a Web page. This page provides typical content elements used
-for web pages. Run the converter to experience how those content elements
+contents on a Web page.
+
+This page provides typical content elements used for web pages. Run the
+converter to experience how those content elements
 are spoken.
 
 The converter is started by clicking on the *speaker* symbol
 mdi:speaker[24px, md-blue] which is placed top right in the *menu bar*.
 
+////
 CAUTION: The Speak2Me module is currently only available as an experimental
 version, and only elementary elements for designing websites are used for
 speech output. In the case of complex elements such as tables, images,
 carousels, or galleries, only information texts are generated. Errors in
-the speech output can occur, especially with content previously translated
-with the build-in translator Google Translate from J1 Template.
+the speech output can occur, especially with content previously translated.
 
 The *quality* of the *voice output* depends heavily on the web browser
 used. Depending on the browser, different voices are provided for the
@@ -97,6 +99,7 @@ voices provided by Microsoft free of charge. However, the quality of the
 outputs cannot be compared to those offered by Microsoft Edge. Other
 Chromium-based browsers, such as the Opera browser, provide voices of a
 very poor quality and cannot be recommended for voice output.
+////
 
 mdi:clock-time-five-outline[24px, md-gray mr-2]
 *15-30 Minutes* to read
@@ -120,13 +123,13 @@ their complexity.
 [role="mt-4"]
 === Structured text
 
-Structured text blocks in web pages refer to specific *sections* or
-*elements* of content that are organized and formatted in a structured
+Blocks in web pages that contain structured text refer to specific *sections*
+or *elements* of content that are organized and formatted in a structured
 manner to improve readability and accessibility. These text blocks are
 designed to provide a clear and organized information presentation for
 human users to understand the discussed context better.
 
-Typical elements of structured text are:
+Typical elements are:
 
 * technical terms
 * highlighted text
@@ -134,14 +137,14 @@ Typical elements of structured text are:
 
 ==== Technical terms
 
-Technical terms are specialized words or phrases used in a particular
+Technological terms are specialized words or phrases used in a particular
 field or domain to describe specific concepts, processes, technologies,
 or ideas. These terms are often unique to a specific area of expertise
 and may have precise meanings well-understood by professionals and
 experts.
 
-Because of current limitations of screen readers, words are marked as
-*terms* are *not* spoken.
+Because of current limitations of the synthesise module *Speak2Me*, words
+are marked as *specialized* words are *not* spoken.
 
 The following _Rouge_ themes are used for J1 Template:
 
@@ -150,7 +153,7 @@ The following _Rouge_ themes are used for J1 Template:
 
 ==== Highlighted text
 
-Highlighted text blocks in web pages refer to sections of text that have
+Text blocks highlighted in web pages refer to sections of text that have
 been visually emphasized to stand out from the surrounding content. These
 blocks are typically formatted using different styles, such as changing
 the background color, applying a border, or using bold or italic fonts to
@@ -217,31 +220,29 @@ function styleSheetLoaded(styleSheet) {
 }
 ----
 
+[role="mt-4"]
 ==== Quote blocks
+// https://www.youtube.com/watch?v=3_kKAeh6qyc
 
-Quote blocks in web pages are elements used to visually highlight and
-format a quotation or excerpt from a source. They are designed to stand
-out from the regular text and clarify that the content is a quoted text
-from another person, website, or any external source. Quote blocks are
-commonly used to add emphasis, credibility, and attribution to the quoted
-content.
+Quotation elements in web pages are used to visually highlight an excerpt.
+They are designed to stand out from the regular text and clarify that the
+content is from another person, website, or any external source.
 
-Example of a *quote block*:
+Example of a *quote*:
 
 [quote, Monty Python and The Life of Brian]
 ____
 He’s not the Messiah – he’s a very naughty boy.
 ____
 
-// https://www.youtube.com/watch?v=3_kKAeh6qyc
 
+[role="mt-4"]
 ==== Quoted text
 
-Quoted text, usually indicated by enclosing it within quotation marks `""`,
-is used to attribute and reproduce the exact words spoken or written by
-someone else.
+Text placed within quotation marks `"` is used to attribute and reproduce
+the exact words spoken or written by someone else.
 
-==== Examples
+===== Examples
 
 Throughout "Becoming," Michelle Obama reflects on her efforts to balance
 her personal and professional life, her initiatives as First Lady, and her
@@ -259,32 +260,44 @@ typically used in larger text like articles, or books.
     Tyrion Lannister stood resolute upon the prow of the majestic vessel,
 the Wind's Grace, its timeworn planks creaking beneath his weight.
 
-    His mismatched eyes, one green as the emerald depths of the
-Whispering Wood, the other a glimmering pale amethyst, stared out into
-the boundless expanse of the Narrow Sea. As the ship cut through the
-frothing waves, the wind, bearing the salty tang of the ocean, lashed at
-his face, sending raven-black locks of hair spiraling across his brow.
-
 ===== Section One
 
     It was a gusty tempest, much like the swirling turmoil that had
 beset his life ever since he had been forced to flee the shores of
-Westeros. The crimson light of the setting sun cast an ethereal glow
-upon Tyrion's countenance, accentuating the shadows that danced upon his
-visage, mirroring the darkness that had shadowed his soul for far too
-long.
+Westeros.
 
-    His lips, full and pursed in contemplation, were tinged with a touch
-of melancholy, the weight of his troubled past etched upon his face like
-the lines of a map charting the arduous journey he had undertaken.
+
+[role="mt-5"]
+== Information elements
+
+Information blocks draw the reader to certain statements by labeling them
+as priorities displayed in separate blocks. The J1 template system provides
+five types shown by the following examples.
+
+NOTE: Blocks of type *note* give additional details on the currently
+discussed topic that may help the reader to understand the following
+content better.
+
+TIP: An *Information* block of type *tip* provides facts that may help
+the reader *to go further* or points to additional *options* available
+that can be used.
+
+IMPORTANT: Blocks of type *important* provide facts that should be
+remembered.
+
+CAUTION: *Information* blocks of type *caution* advise readers to act
+carefully and point to potential risks or trippings.
+
+WARNING: A block of type *warning* instructs readers of potential danger,
+harm, or consequences for the wrong usage.
 
 [role="mt-5"]
 == Tables
 
-Tables are used to organize and display data in a structured format. Tables
-consist of rows and columns, and they are primarily used to present tabular
-data such as technical data and other types of information that require a
-grid-like layout.
+Table elements are used to organize and display data in a structured format.
+Tables consist of rows and columns, and they are primarily used to present
+tabular data such as technical data and other types of information that
+require a grid-like layout.
 
 .Files and Folders
 [cols="4a,8a", width="100%", options="header", role="rtable mt-4"]
@@ -509,7 +522,7 @@ The functionality of *filters*, *layouts* are limited and *no* overlay
 techniques are supported by the MS Lite version.
 
 [role="mt-4"]
-=== Slider using ThumbImages
+=== Slider using Thumbs
 
 To give the users better control over a slideshow, sliders provide complex UI
 elements like *thumbs* placed side-by-side leftor right at the top, or at
@@ -518,13 +531,6 @@ the bottom of a slideshow. Find two examples to control a slideshow by
 
 .ThumbImage controls
 masterslider::ms_00004[role="mb-5"]
-
-[role="mt-4"]
-=== Slider using ThumbInfo
-
-To give the users better control over a slideshow, MS Slider provides
-complex UI elements like thumbs placed side-by-side left or right, at the
-top, or at the bottom of a slideshow.
 
 .ThumbInfo controls
 masterslider::ms_00007[role="mb-5"]

@@ -56,8 +56,7 @@
   var voiceChromeDefault  = 'Google US English';
   var ignoreProvider      = 'Microsoft';
   var preferredVoice      = 'Natural';
-  var pause_spoken        = ', ';
-  var pause_spoken_long   = '. , ';
+  var pause_spoken        = '. ';
 
   var isEdge              = /Edg/i.test( navigator.userAgent );
   var chrome              = /chrome/i.test( navigator.userAgent );
@@ -307,20 +306,21 @@
         // Default values
         //
         voiceTags['a']                = new voiceTag('clicking the link', pause_spoken);
-        voiceTags['q']                = new voiceTag(pause_spoken, '');
-        voiceTags['ol']               = new voiceTag('Start of list.', 'End of list.');
-        voiceTags['ul']               = new voiceTag('Start of list.', 'End of list.');
-        voiceTags['dl']               = new voiceTag('Start of list.', 'End of list.');
-        voiceTags['dt']               = new voiceTag('', pause_spoken);
-        voiceTags['img']              = new voiceTag('There\'s an embedded image with the description,', 'Note, image-based contents are not spoken.');
-        voiceTags['table']            = new voiceTag('There\'s an embedded table with the caption,', 'Note, table contents are not spoken.');
+        voiceTags['q']                = new voiceTag('', pause_spoken);
+        voiceTags['ol']               = new voiceTag('Start of list,', 'End of list.');
+        voiceTags['ul']               = new voiceTag('Start of list,', 'End of list.');
+        voiceTags['dl']               = new voiceTag('Start of list,', 'End of list.');
+        voiceTags['li']               = new voiceTag('', pause_spoken);
+        voiceTags['dt']               = new voiceTag('', pause_spoken,);
+        voiceTags['img']              = new voiceTag('There\'s an embedded image with the description,', '');
+        voiceTags['table']            = new voiceTag('There\'s an embedded table with the caption,', '');
         voiceTags['admonitionblock']  = new voiceTag('There\'s an attention element of type: ', '');
-        voiceTags['listingblock']     = new voiceTag('There\'s an embedded structured text block with the caption,', 'Note, structured text blocks are not spoken.');
-        voiceTags['carousel']         = new voiceTag('There\'s an embedded carousel element with the caption,', 'Note, carousel elements are not spoken.');
-        voiceTags['slider']           = new voiceTag('There\'s an embedded slider element with the caption,', 'Note, slider elements are not spoken.');
-        voiceTags['masonry']          = new voiceTag('There\'s an embedded masonry element with the caption,', 'Note, masonry elements are not spoken.');
-        voiceTags['lightbox']         = new voiceTag('There\'s an embedded lightbox element with the caption,', 'Note, lightbox elements are not spoken.');
-        voiceTags['gallery']          = new voiceTag('There\'s an embedded gallery element with the caption,', 'Note, gallery elements are not spoken.');
+        voiceTags['listingblock']     = new voiceTag('There\'s an embedded structured text block with the caption,', '');
+        voiceTags['carousel']         = new voiceTag('There\'s an embedded carousel element with the caption,', '');
+        voiceTags['slider']           = new voiceTag('There\'s an embedded slider element with the caption,', '');
+        voiceTags['masonry']          = new voiceTag('There\'s an embedded masonry element with the caption,', '');
+        voiceTags['lightbox']         = new voiceTag('There\'s an embedded lightbox element with the caption,', '');
+        voiceTags['gallery']          = new voiceTag('There\'s an embedded gallery element with the caption,', '');
         voiceTags['figure']           = new voiceTag('There\'s an embedded figure with the caption,', '');
         voiceTags['blockquote']       = new voiceTag('Blockquote start.', 'Blockquote end.');
 
@@ -425,7 +425,7 @@
             processTextChunks(speech, toSpeak);
             clearInterval(processSpeech);
           }
-        }, 50); // END processSpeech
+        }, 10); // END processSpeech
 
         // jadams
         function splitTextIntoChunks(text, chunkSize) {
@@ -442,52 +442,60 @@
       }
 
       // jadams
+      function textSlice(text, slicelenght) {
+        var startSubString  = 2;
+        var endSubString    = startSubString + slicelenght;
+        var subText         = text.substr(startSubString, endSubString);
+        var stringArray     = subText.split(/(\s+)/);
+
+        // Remove first two elements
+        stringArray.shift();
+        stringArray.shift();
+        // Remove last two elements
+        stringArray.pop();
+        stringArray.pop();
+
+        subText = stringArray.join('');
+        subText = subText.replaceAll('.', '');
+
+        // dots should NOT removed
+        //subText = subText.replaceAll(',', '');
+
+        if (stringArray.length < 3) {
+          return 'no search possible on this fraction of subText';
+        } else {
+          return subText;
+        }
+      }
+
+      // jadams
       // Funktion zur sequenziellen Verarbeitung der Textkette
       //
       function processTextChunks(speaker, chunks) {
         const synth = window.speechSynthesis;
-        // var sectionText;
-        $('.mdib-speaker').addClass('mdib-spin');
-        speaker.text    = chunks[chunkCounter];
-        // sectionText     = speaker.text.substr(0, 20);
-        // currentSection  = $('#content').find("p:contains('" + speaker.text.substr(0, 20) + "')")[0];
 
+        speaker.text = chunks[chunkCounter];
         synth.speak(speaker);
 
+        $('.mdib-speaker').addClass('mdib-spin');
+
         speaker.addEventListener('start', (event) => {
-//        $('.mdib-speaker').addClass('mdib-spin');
-          var sectionText = speaker.text.substr(10, 30);
+          var sectionText = textSlice(speaker.text, 30);
+          var scrollOffset    = 100;
+          var scrollBehavior  = 'smooth';
 
-          var stringArray = sectionText.split(/(\s+)/);
-          stringArray.shift();    // Remove first element
-          stringArray.shift();
-          stringArray.pop();      // Remove last element
-          stringArray.pop();
-
-          sectionText = stringArray.join('');
-
-          // sectionText = sectionText.slice(0, -1).join(" ")
-//        currentSection  = $('#content').find("p:contains('" + sectionText + "')")[0];
-//        currentSection  = $('#content').find("p:contains('" + speaker.text + "')")[0];
-//        currentSection  = $('#content').find("p:contains(sectionText)")[0];
-          currentSection  = $('#content').find("p:contains('" + sectionText + "')")[0];
-
+          currentSection = $('#content').find("p:contains('" + sectionText + "')")[0];
           if (currentSection !== undefined) {
             $(currentSection).addClass('speak-highlighted');
-            window.scrollTo({top: currentSection.offsetTop-100, behavior: 'smooth'});
-
-            // var sectionContent =  currentSection.innerText;
-            // if (sectionContent.startsWith(sectionText)) {
-            //   $(currentSection).addClass('speak-highlighted');
-            //   window.scrollTo({top: currentSection.offsetTop-100, behavior: 'smooth'});
-            // }
+            window.scrollTo({
+              top:      currentSection.offsetTop - scrollOffset,
+              behavior: scrollBehavior
+            });
           }
-
-          // $('#speak_button').hide();
         });
 
         speaker.addEventListener('end', function (event) {
-          var sectionText = speaker.text.substr(10, 30).trim();
+          var sectionText = textSlice(speaker.text, 30);
           currentSection  = $('#content').find("p:contains('" + sectionText + "')")[0];
           if (currentSection !== undefined) {
             $(currentSection).removeClass('speak-highlighted');
@@ -497,18 +505,16 @@
 
         // jadams
         var speechMonitor = setInterval(function () {
-          // chunkCounterMax = 4;
-          if (! synth.speaking ) {
+          if (!(synth.speaking)) {
+            var sectionText;
             if (chunkCounter == chunkCounterMax || userStoppedSpeaking ) {
-              chunkCounter = 0;
+              chunkCounter        = 0;
               userStoppedSpeaking = false;
-
-              var sectionText = speaker.text.substr(0, 20).trim();
-              currentSection  = $('#content').find("p:contains('" + sectionText + "')")[0];
+              sectionText         = textSlice(speaker.text, 30);
+              currentSection      = $('#content').find("p:contains('" + sectionText + "')")[0];
 
               if (currentSection !== undefined) {
                 $(currentSection).removeClass('speak-highlighted');
-                // $('#speak_button').show();
               }
 
               window.scrollTo({top: 0, behavior: 'smooth'});
@@ -516,7 +522,7 @@
               clearInterval(speechMonitor);
             } else {
               speaker.text    = chunks[chunkCounter];
-              sectionText     = speaker.text.substr(0, 20);
+              sectionText     = textSlice(speaker.text, 30);
               currentSection  = $('#content').find("p:contains('" + sectionText + "')")[0];
 
               if (currentSection !== undefined) {
@@ -526,7 +532,7 @@
               synth.speak(speaker);
             }
           }
-        }, 50); // END speechMonitor
+        }, 10); // END speechMonitor
 
       } // END processTextChunks
 
@@ -890,14 +896,25 @@
         // Replace double smart quotes with proper text, same as what
         // was done previously with <q>
         //
-        final = final.replace(/“/g, voiceTags['q'].prepend + ' ');
-        final = final.replace(/”/g, ' ' + voiceTags['q'].append);
+        final = final.replaceAll('“', pause_spoken);
+        final = final.replaceAll('”', pause_spoken);
 
         // jadams
         // Replace colons ':' with a pause since
         // the browser doesn't do so when reading.
         //
-        final = final.replace(/:/g, pause_spoken);
+        final = final.replaceAll(':', pause_spoken);
+
+        // jadams
+        // Replace all strange '., ' by a pause
+        //
+        final = final.replaceAll('., ', '. ');
+
+        // jadams
+        // Replace colons ':' with a pause since
+        // the browser doesn't do so when reading.
+        //
+        final = final.replaceAll('"', pause_spoken);
 
         // jadams
         // Replace empty lines
@@ -917,6 +934,11 @@
         final = final.replace(/\.\./g, '.');
 
         // jadams
+        // Remove double pause elements
+        //
+        final = final.replaceAll('. . ', '');
+
+        // jadams
         // Replace the abbreviation '.e.g.'or 'E.g.'
         //
         final = final.replaceAll('e.g.', 'for example');
@@ -925,13 +947,14 @@
         // jadams
         // Replace question and exclamation (?|!) marks
         //
-        final = final.replace(/[\!\?]/g, pause_spoken);
+        final = final.replace(/[\!\?]/g, ', ');
 
         // Replace em-dashes and double-dashes with a pause since
         // the browser doesn't do so when reading.
         //
-        final = final.replace(/—/g, pause_spoken);
-        final = final.replace(/--/g, pause_spoken);
+        final = final.replaceAll('—', pause_spoken);
+        final = final.replaceAll('–', pause_spoken);
+        final = final.replaceAll('--', pause_spoken);
 
         // When read from the DOM, a few special characters
         // (&amp; for example) display as their hex codes
@@ -956,6 +979,10 @@
         final = final.replace(/,,/g, ',');
         final = final.replace(/ ,/g, ',');
         final = final.replace(/^\s+|\s+$/g, '');
+
+        final = final.replace(/\.\s+$/g, '');
+//      final = final.replaceAll(". ", '');
+
 
         // final = final.replace(/^\s+|\s+$/g,'\n');
         // final = final.replace(/\. /g, '. \n');

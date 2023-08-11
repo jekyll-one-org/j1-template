@@ -103,10 +103,10 @@ Asciidoc code and how the resulting (HTML) code would look alike.
 [role="mt-5"]
 == Asciidoc Admonitions
 
-Admonition blocks draw attention to certain statements by taking them out
-of the content’s flow and labeling them as priorities. These types of
-(Asciidoc) blocks are called admonitions. The AsciiDoc language provides
-five admonition types represented by the following labels:
+Admonition blocks draw the reader to certain statements by labeling
+them as priorities displayed in separate blocks. These types of information
+blocks are called *admonitions*. The AsciiDoc language provides five
+block types shown by the following examples.
 
 .Admonition labels
 [cols="3a,9a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
@@ -114,24 +114,27 @@ five admonition types represented by the following labels:
 |Name |Description
 
 |`NOTE`
-|Additional information on the currently discussed topic that may help
-the reader
+|Additional details on the currently discussed topic that may help the
+reader to understand the following content better.
 
 |`TIP`
-|Additional information on the currently discussed topic that may help the
-reader *to go further* or describe *additional options* available
+|Provides facts that may help the reader *to go further* or points to
+additional *options* available that can be used.
 
 |`IMPORTANT`
-|Emphasis on what is currently being discussed and facts that should
-be kept in mind
+|Emphasis on what is currently being discussed and provide facts that
+should be remembered.
 
 |`CAUTION`
-|Advise the reader to act carefully and point to potential tripping
+|Advise the reader to act carefully and point to potential risks or
+trippings.
 
 |`WARNING`
-|inform the reader of danger, harm, or consequences that exist
+|instructs readers of potential danger, harm, or consequences for the
+wrong usage.
 
 |===
+
 
 NOTE: All colors for all default admonition blocks set to the standard
 MD color set. Find available block types and their colors below.

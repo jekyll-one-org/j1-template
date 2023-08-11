@@ -26,35 +26,42 @@
 (function($) {
     'use strict';
 
-    var defaultOptions  = require('./default-options.js');
-    var customOptions   = {};
-    // Object to store current options.
-    var myOptions = {}
+    var defaultOptions      = require('./default-options.js');
+    var customOptions       = {};
+    var myOptions           = {}
 
     // var _this = window;
 
-    var ParseContent = require('./parse-content.js');
-    var parseContent = ParseContent(defaultOptions);
+    var ParseContent        = require('./parse-content.js');
+    var parseContent        = ParseContent(defaultOptions);
 
-    var ignoreTagsUser = new Array();
-    var recognizeTagsUser = new Array();
-    var replacements = new Array();
-    var customTags = new Array();
-    var voices = new Array();
+    var ignoreTagsUser      = new Array();
+    var recognizeTagsUser   = new Array();
+    var replacements        = new Array();
+    var customTags          = new Array();
+    var voices              = new Array();
+    var headingsArray       = [];
 
-    var rateDefault = 0.9;
-    var pitchDefault = 1;
-    var volumeDefault = 0.9;
-    var rate = rateDefault;
-    var pitch = pitchDefault;
-    var volume = volumeDefault;
+    var rateDefault         = 0.9;
+    var pitchDefault        = 1;
+    var volumeDefault       = 0.9;
+    var rate                = rateDefault;
+    var pitch               = pitchDefault;
+    var volume              = volumeDefault;
+    var pageScanCycle       = 1000;
+    var pageScanLines       = 10000;
+    var linesCorrection     = 5000;
 
-    var currentTranslation = getCookie('googtrans');
+    var currentTranslation  = getCookie('googtrans');
 
-    var voiceUserDefault = 'Google UK English Female';
-    var voiceChromeDefault = 'Google US English';
-    var ignoreProvider = 'Microsoft';
-    var preferredVoice = 'Natural';
+    var voiceUserDefault    = 'Google UK English Female';
+    var voiceChromeDefault  = 'Google US English';
+    var ignoreProvider      = 'Microsoft';
+    var preferredVoice      = 'Natural';
+
+    var isEdge              = /Edg/i.test( navigator.userAgent );
+    var chrome              = /chrome/i.test( navigator.userAgent );
+    var isChrome            = ((chrome) && (!isEdge));
 
     var voiceLanguageGoogleDefault = {
       'de-DE':  'Google Deutsch',
@@ -99,12 +106,6 @@
       'ja-JP':  'Microsoft Nanami Online (Natural) - Japanese (Japan)',
     }
 
-    var isEdge    = /Edg/i.test( navigator.userAgent );
-    var chrome    = /chrome/i.test( navigator.userAgent );
-    var isChrome  = ((chrome) && (!isEdge));
-
-    var headingsArray = [];
-
     var rateUserDefault;
     var pitchUserDefault;
     var volumeUserDefault;
@@ -114,27 +115,51 @@
     var chunkCounterMax;
     var userStoppedSpeaking = false;
     var currentSection;
-//  var chunksEnd = false;
-
+    var user_session;
+    var scanFinished;
 
     // -------------------------------------------------------------------------
     // Internal functions
     // -------------------------------------------------------------------------
 
+    // jadams
     // see: https://stackoverflow.com/questions/3163615/how-to-scroll-an-html-page-to-a-given-anchor
+    // see: https://stackoverflow.com/questions/22154129/how-to-make-setinterval-behave-more-in-sync-or-how-to-use-settimeout-instea
     //
-    function scrollPage(headings) {
-      const id = 'image-carousel';
-      var pageYOffset = -65;
-      var yourElement;
-      var y;
+    function scanPage(options) {
+      var line = 0;
+      var lines;
 
-      for (let i=0; i<headings.length; i++) {
-        yourElement = headings[i];
-        y = yourElement.getBoundingClientRect().top + pageYOffset;
-        window.scrollTo({top: y, behavior: 'smooth'});
+      function scanSection(counter) {
+        // because of the current translation in progress, the length
+        // of a page may change to higher or lower values (asian)
+        //
+        lines = Math.max (
+          document.body.scrollHeight,
+          document.body.offsetHeight,
+          document.documentElement.clientHeight,
+          document.documentElement.scrollHeight,
+          document.documentElement.offsetHeight
+        );
+
+        $('#content').attr("style", "opacity: .3");
+
+        if (line < lines) {
+          setTimeout(function() {
+            counter++;
+            line = line + pageScanLines;
+            window.scrollTo({top: line, behavior: 'smooth'});
+            scanSection(counter);
+          }, pageScanCycle);
+        } else {
+          setTimeout(function() {
+            scanFinished = true;
+            $('#content').attr("style", "opacity: 1");
+            $(window).scrollTop(0);
+          }, pageScanCycle);
+        }
       }
-
+      scanSection(0);
     }
 
     function extend () {
@@ -183,8 +208,8 @@
     //
     function populateVoiceList() {
         var systemVoices = speechSynthesis.getVoices();
-        for(var i = 0; i < systemVoices.length ; i++) {
-            voices.push(new voiceObj(systemVoices[i].name,systemVoices[i].lang));
+        for(var i = 0; i<systemVoices.length; i++) {
+          voices.push(new voiceObj(systemVoices[i].name, systemVoices[i].lang));
         }
     }
     populateVoiceList();
@@ -255,45 +280,62 @@
     var methods = {
 
       speak: function(options) {
-          var opts = $.extend( {}, $.fn.speak2me.defaults, options );
-          var toSpeak = '';
-          var obj, processed, finished;
+          var opts      = $.extend( {}, $.fn.speak2me.defaults, options );
+          var toSpeak   = '';
           var voiceTags = new Array();
+          var _this     = this;
+          var obj, processed, finished;
           var ignoreTags;
-//        var chunksEnd = false;
+
+          scanFinished  = false;
+          myOptions     = extend(defaultOptions, customOptions || {});
 
           // Get headings array
           // Merge defaults with user options.
-          // Set to options variable at the top.
-          myOptions     = extend(defaultOptions, customOptions || {});
-          headingsArray = parseContent.selectHeadings(myOptions.contentSelector, myOptions.headingSelector);
-          scrollPage(headingsArray);
+          // Set to options variable at the top
+//        headingsArray = parseContent.selectHeadings(myOptions.contentSelector, myOptions.headingSelector);
+
+          if (currentTranslation !== undefined) {
+            scanPage();
+          } else {
+            scanFinished = true;
+          }
 
           // Default values
           //
-          voiceTags['a']          = new voiceTag('clicking the link,', '');
-          voiceTags['q']          = new voiceTag(',', '');
-          voiceTags['ol']         = new voiceTag('Start of list.', 'End of list.');
-          voiceTags['ul']         = new voiceTag('Start of list.', 'End of list.');
-//        voiceTags["li"]         = new voiceTag(',', ',');
-          voiceTags['dl']         = new voiceTag('Start of list.', 'End of list.');
-          voiceTags['dt']         = new voiceTag('', ', ');
-          voiceTags['img']        = new voiceTag('There\'s an embedded image with the description,', '');
-          voiceTags['table']      = new voiceTag('There\'s an embedded table with the caption,', 'Note, table contents are not spoken, ');
-//        voiceTags["tbody"]      = new voiceTag(', ', ',');
-          voiceTags['figure']     = new voiceTag('There\'s an embedded figure with the caption,', '');
-          voiceTags['blockquote'] = new voiceTag('Blockquote start.', 'Blockquote end.');
+          voiceTags['a']                = new voiceTag('clicking the link,', '');
+          voiceTags['q']                = new voiceTag(',', '');
+          voiceTags['ol']               = new voiceTag('Start of list.', 'End of list.');
+          voiceTags['ul']               = new voiceTag('Start of list.', 'End of list.');
+          voiceTags['dl']               = new voiceTag('Start of list.', 'End of list.');
+          voiceTags['dt']               = new voiceTag('', ', ');
+          voiceTags['img']              = new voiceTag('There\'s an embedded image with the description,', 'Note, image-based contents are not spoken.');
+          voiceTags['table']            = new voiceTag('There\'s an embedded table with the caption,', 'Note, table contents are not spoken.');
+          voiceTags['admonitionblock']  = new voiceTag('There\'s an admonition block with the mesaage,', 'End of admonition block.');
+          voiceTags['listingblock']     = new voiceTag('There\'s an embedded structured text block with the caption,', 'Note, structured text blocks are not spoken.');
+          voiceTags['carousel']         = new voiceTag('There\'s an embedded carousel element with the caption,', 'Note, carousel elements are not spoken.');
+          voiceTags['slider']           = new voiceTag('There\'s an embedded slider element with the caption,', 'Note, slider elements are not spoken.');
+          voiceTags['masonry']          = new voiceTag('There\'s an embedded masonry element with the caption,', 'Note, masonry elements are not spoken.');
+          voiceTags['lightbox']         = new voiceTag('There\'s an embedded lightbox element with the caption,', 'Note, lightbox elements are not spoken.');
+          voiceTags['gallery']          = new voiceTag('There\'s an embedded gallery element with the caption,', 'Note, gallery elements are not spoken.');
+          voiceTags['figure']           = new voiceTag('There\'s an embedded figure with the caption,', '');
+          voiceTags['blockquote']       = new voiceTag('Blockquote start.', 'Blockquote end.');
 
-          // ignoreTags = ['audio','button','canvas','code','del','dialog','dl','embed','form','head','iframe','meter','nav','noscript','object','s','script','select','style','textarea','video'];
-          ignoreTags = ['audio','button','canvas','code','del','dialog','embed','form','head','iframe','meter','nav','noscript','object','s','script','select','style','textarea','video'];
+//        ignoreTags = ['audio','button','canvas','code','del','dialog','dl','embed','form','head','iframe','meter','nav','noscript','object','s','script','select','style','textarea','video'];
+//        ignoreTags = ['masonry', 'carousel', 'slider', 'pre','audio','button','canvas','code','del','dialog','embed','form','head','iframe','meter','nav','noscript','object','s','script','select','style','textarea','video'];
+          ignoreTags = ['audio','button','canvas','code','del', 'pre', 'dialog','embed','form','head','iframe','meter','nav','noscript','object','s','script','select','style','textarea','video'];
 
+
+          // jadams: check moved to adapter
           // Check to see if the browser supports the functionality.
           //
-          if (!('speechSynthesis' in window)) {
-              alert('Sorry, this browser does not support the Web Speech API.');
-              return
-          };
+          // if (!('speechSynthesis' in window)) {
+          //     alert('Sorry, this browser does not support the Web Speech API.');
+          //     return
+          // };
 
+          // jadams: do NOT work for multiple 'tabs' for the same browser
+          //
           // If something is currently being spoken, ignore new voice
           // request. Otherwise it would be queued, which is doable if
           // someone wanted that, but not what I wanted.
@@ -302,69 +344,85 @@
               return
           };
 
-          // Cycle through all the elements in the original jQuery
-          // selector, process and clean them one at a time, and
-          // continually append it to the variable "toSpeak".
+          // jadams
+          // NOTE: coincident active speech synthesis in multiple
+          // browser windows (tabs) does NOT work
           //
-          this.each(function() {
-              obj = $(this).clone();                    // clone the DOM node and its descendants of what the user wants spoken
-              processed = processDOMelements(obj);      // process and manipulate DOM tree of this clone
-              processed = jQuery(processed).html();     // convert the result of all that to a string
-              finished = cleanDOMelements(processed);   // do some text manipulation
-//            toSpeak = toSpeak + ' ' + finished;       // add it to what will ultimately be spoken after cycling through selectors
-              toSpeak = finished;
-          });
+          // user_session = j1.readCookie('j1.user.session');
+          // if (user_session.speech_synthesis_active === true) {
+          //     return
+          // };
 
-          // Check if users have set their own rate/pitch/volume
-          // defaults, otherwise use defaults
-          //
-          if (rateUserDefault !== undefined) {
-              rate = rateUserDefault;
-          } else {
-              rate = rateDefault;
-          }
-          if (pitchUserDefault !== undefined) {
-              pitch = pitchUserDefault;
-          } else {
-              pitch = pitchDefault;
-          }
-          if (volumeUserDefault !== undefined) {
-              volume = volumeUserDefault;
-          } else {
-              volume = volumeDefault;
-          }
+          // user_session.speech_synthesis_active  = true;
+          // j1.writeCookie({
+          //   name:     'user_session',
+          //   data:     user_session,
+          //   secure:   false,
+          //   expires:  0
+          // });
 
           // jadams
-          // To debug, uncomment the following to see exactly what's
-          // about to be spoken.
-          // console.log(toSpeak)
+          var processSpeech = setInterval(function () {
+            if (scanFinished) {
+              // Cycle through all the elements in the original jQuery
+              // selector, process and clean them one at a time, and
+              // continually append it to the variable "toSpeak".
+              //
+              _this.each(function() {
+                  obj = $(this).clone();                    // clone the DOM node and its descendants of what the user wants spoken
+                  processed = processDOMelements(obj);      // process and manipulate DOM tree of this clone
+                  processed = jQuery(processed).html();     // convert the result of all that to a string
+                  finished = cleanDOMelements(processed);   // do some text manipulation
+                  toSpeak = finished;
+              });
 
-          // jadams
-          // This is where the magic happens. Well, not magic, but at
-          // least we can finally hear something. After the line that
-          // fixes the Windows Chrome quirk, the custom voice is set
-          // if one has been chosen.
-          //
-          speech = new SpeechSynthesisUtterance();
-//        speech.text = toSpeak;
-          speech.rate = rate;
-          speech.pitch = pitch;
-          speech.volume = volume;
-          speech.voice = undefined;
+              // Check if users have set their own rate/pitch/volume
+              // defaults, otherwise use defaults
+              //
+              if (rateUserDefault !== undefined) {
+                  rate = rateUserDefault;
+              } else {
+                  rate = rateDefault;
+              }
+              if (pitchUserDefault !== undefined) {
+                  pitch = pitchUserDefault;
+              } else {
+                  pitch = pitchDefault;
+              }
+              if (volumeUserDefault !== undefined) {
+                  volume = volumeUserDefault;
+              } else {
+                  volume = volumeDefault;
+              }
 
-          // jadams
-          if (isChrome) {
-            speech.voice = speechSynthesis.getVoices().filter(function(voice) { return voice.name == voiceLanguageDefault; })[0];
-//          speech.voice = speechSynthesis.getVoices().filter(function(voice) { return voice.name == voiceChromeDefault; })[0];
-          };
+              // jadams
+              // This is where the magic happens. Well, not magic, but at
+              // least we can finally hear something. After the line that
+              // fixes the Windows Chrome quirk, the custom voice is set
+              // if one has been chosen.
+              //
+              speech = new SpeechSynthesisUtterance();
+              speech.rate = rate;
+              speech.pitch = pitch;
+              speech.volume = volume;
+              speech.voice = undefined;
 
-          // jadams
-          if (isEdge) {
-            speech.voice = speechSynthesis.getVoices().filter(function(voice) { return voice.name == voiceLanguageDefault; })[0];
-          };
+              // jadams
+              if (isChrome) {
+                speech.voice = speechSynthesis.getVoices().filter(function(voice) { return voice.name == voiceLanguageDefault; })[0];
+    //          speech.voice = speechSynthesis.getVoices().filter(function(voice) { return voice.name == voiceChromeDefault; })[0];
+              };
 
-          // jadams
-          processTextChunks(speech, toSpeak);
+              // jadams
+              if (isEdge) {
+                speech.voice = speechSynthesis.getVoices().filter(function(voice) { return voice.name == voiceLanguageDefault; })[0];
+              };
+
+              // jadams
+              processTextChunks(speech, toSpeak);
+              clearInterval(processSpeech);
+            }
+          }, 50); // END processSpeech
 
           // jadams
           function splitTextIntoChunks(text, chunkSize) {
@@ -380,43 +438,41 @@
             return chunks;
         }
 
-// jadams
-//         function splitSectionIntoSentences(section) {
-//           const chunks = section.innerHTML.split(/[.!?]/);
-//
-//           // cleanup chunks
-//           //
-//           chunks.forEach((chunk, index) => {
-//             if (chunks[index] !== '') {
-//               chunks[index] = chunks[index] + '.';
-// //              chunks[index] = chunks[index].wrap('<span class="new"/>');
-//             }
-//
-//             // chunks[index] = chunk.replace(/^\s+|\s+$/g, '');
-//             // chunks[index] = chunk.replace(/^\s+|\s+$/g, '');
-//           });
-//
-//           return chunks;
-//       }
-
         // jadams
         // Funktion zur sequenziellen Verarbeitung der Textkette
         //
         function processTextChunks(speaker, chunks) {
           const synth = window.speechSynthesis;
+          var sectionText;
 
-          speaker.text = chunks[chunkCounter];
+          speaker.text    = chunks[chunkCounter];
+          sectionText     = speaker.text.substr(0, 20);
+          currentSection  = $('#content').find("p:contains('" + speaker.text.substr(0, 20) + "')")[0];
+
           synth.speak(speaker);
 
           speaker.addEventListener('start', (event) => {
-            // console.log('speak2me start:', event);
             $('.mdib-speaker').addClass('mdib-spin');
+            var sectionText = speaker.text.substr(0, 20);
+            currentSection  = $('#content').find("p:contains('" + sectionText + "')")[0];
+
+            if (currentSection !== undefined) {
+              var sectionContent =  currentSection.innerText;
+              if (sectionContent.startsWith(sectionText)) {
+                $(currentSection).addClass('speak-highlighted');
+                window.scrollTo({top: currentSection.offsetTop-100, behavior: 'smooth'});
+              }
+            }
+            // $('#speak_button').hide();
           });
 
           speaker.addEventListener('end', function (event) {
+            var sectionText = speaker.text.substr(0, 20).trim();
+            currentSection  = $('#content').find("p:contains('" + sectionText + "')")[0];
+            if (currentSection !== undefined) {
+              $(currentSection).removeClass('speak-highlighted');
+            }
             chunkCounter ++;
-            // console.log('speak2me end:', chunkCounter);
-            $(currentSection).removeClass('speak-highlighted');
           });
 
           // jadams
@@ -427,26 +483,36 @@
                 chunkCounter = 0;
                 userStoppedSpeaking = false;
 
-                synth.cancel();
+                var sectionText = speaker.text.substr(0, 20).trim();
+                currentSection  = $('#content').find("p:contains('" + sectionText + "')")[0];
+
+                if (currentSection !== undefined) {
+                  $(currentSection).removeClass('speak-highlighted');
+                  // $('#speak_button').show();
+                }
+
+                window.scrollTo({top: 0, behavior: 'smooth'});
                 $('.mdib-speaker').removeClass('mdib-spin');
                 clearInterval(speechMonitor);
               } else {
-                speaker.text = chunks[chunkCounter];
-                var sectionText = speaker.text.substr(0, 20);
+                speaker.text    = chunks[chunkCounter];
+                sectionText     = speaker.text.substr(0, 20);
+                currentSection  = $('#content').find("p:contains('" + sectionText + "')")[0];
 
-                currentSection = $('#content').find("p:contains('" + sectionText + "')")[0];
-                $(currentSection).addClass('speak-highlighted');
+                if (currentSection !== undefined) {
+                  $(currentSection).addClass('speak-highlighted');
+                }
 
                 synth.speak(speaker);
               }
             }
-          }, 500); // END speechMonitor
+          }, 50); // END speechMonitor
 
         } // END processTextChunks
 
         // jadams
         function processDOMelements(clone) {
-          var copy, content, appended, prepend;
+          var copy, title, title_element, content, appended, prepend;
 
           // Remove tags from the "ignoreTags" array because the
           // user called "speak2me('recognize')" and said he/she
@@ -588,6 +654,28 @@
           });
 
           // jadams
+          // Search for listingblock elements, check for previous declared <div>
+          // container that contains the title element and insert that
+          // text if it exists and then remove the DOM object
+          //
+          jQuery(clone).find('.admonitionblock').addBack('admonitionblock').each(function() {
+//          var content_type    = jQuery(this).classList[1];
+            var content_type    = this.classList[1];
+            var content_element = jQuery(this).find('.content');
+            var content         = content_type + ', ' + content_element[0].innerText;
+
+            prepend       = voiceTags['admonitionblock'].prepend
+            appended      = voiceTags['admonitionblock'].append;
+
+            if ((content !== undefined) && (copy != '')) {
+              jQuery('<div>' + prepend + ' ' + content + '.</div>').insertBefore(this);
+              jQuery('<div>' + appended + ' ' + '.</div>').insertBefore(this);
+            }
+
+            jQuery(this).remove();
+          });
+
+          // jadams
           // Search for <table>, check for <caption>, insert that
           // text if it exists and then remove the whole DOM object
           //
@@ -618,12 +706,116 @@
               jQuery(this).remove();
           });
 
+          // jadams
+          // Search for listingblock elements, check for previous declared <div>
+          // container that contains the title element and insert that
+          // text if it exists and then remove the DOM object
+          //
+          jQuery(clone).find('.listingblock').addBack('listingblock').each(function() {
+            title_element = jQuery(this).find('.title');
+            copy          = title_element[0].innerText;
+
+            prepend       = voiceTags['listingblock'].prepend
+            appended      = voiceTags['listingblock'].append;
+
+            if ((copy !== undefined) && (copy != '')) {
+              jQuery('<div>' + prepend + ' ' + copy + '.</div>').insertBefore(this);
+              jQuery('<div>' + appended + ' ' + '.</div>').insertBefore(this);
+            }
+
+            jQuery(this).remove();
+          });
+
+          // jadams
+          // Search for <carousel>, check for previous declared <div>
+          // container that contains the title element and insert that
+          // text if it exists and then remove the DOM object
+          //
+          jQuery(clone).find('carousel').addBack('carousel').each(function() {
+            title = $(this).prev()[0].innerText;
+            title_element = jQuery(this).prev();
+            jQuery(title_element).remove();
+
+            prepend   = voiceTags['carousel'].prepend
+            appended  = voiceTags['carousel'].append;
+
+            if ((title !== undefined) && (title != '')) {
+              jQuery('<div>' + prepend + ' ' + title + '.</div>').insertBefore(this);
+              jQuery('<div>' + appended + ' ' + '.</div>').insertBefore(this);
+            }
+
+            jQuery(this).remove();
+          });
+
+          // jadams
+          // Search for <slider>, check for previous declared <div>
+          // container that contains the title element and insert that
+          // text if it exists and then remove the DOM object
+          //
+          jQuery(clone).find('slider').addBack('slider').each(function() {
+            title = $(this).prev()[0].innerText;
+            title_element = jQuery(this).prev();
+            jQuery(title_element).remove();
+
+            prepend   = voiceTags['slider'].prepend
+            appended  = voiceTags['slider'].append;
+
+            if ((title !== undefined) && (title != '')) {
+              jQuery('<div>' + prepend + ' ' + title + '.</div>').insertBefore(this);
+              jQuery('<div>' + appended + ' ' + '.</div>').insertBefore(this);
+            }
+
+            jQuery(this).remove();
+        });
+
+          // jadams
+          // Search for <gallery>, check for previous declared <div>
+          // container that contains the title element and insert that
+          // text if it exists and then remove the DOM object
+          //
+          jQuery(clone).find('gallery').addBack('gallery').each(function() {
+            title = jQuery(this).prev()[0].innerText;
+            title_element = jQuery(this).prev();
+            jQuery(title_element).remove();
+
+            prepend   = voiceTags['gallery'].prepend
+            appended  = voiceTags['gallery'].append;
+
+            if ((title !== undefined) && (title != '')) {
+              jQuery('<div>' + prepend + ' ' + title + '.</div>').insertBefore(this);
+              jQuery('<div>' + appended + ' ' + '.</div>').insertBefore(this);
+            }
+
+            jQuery(this).remove();
+
+          });
+
+          // jadams
+          // Search for <slider>, check for <caption>, insert that
+          // text if it exists and then remove the DOM object
+          //
+          jQuery(clone).find('lightbox').addBack('gallery').each(function() {
+              title = jQuery(this).prev()[0].innerText;
+              title_element = jQuery(this).prev();
+              jQuery(title_element).remove();
+
+              prepend   = voiceTags['lightbox'].prepend
+              appended  = voiceTags['lightbox'].append;
+
+              if ((title !== undefined) && (title != '')) {
+                jQuery('<div>' + prepend + ' ' + title + '.</div>').insertBefore(this);
+                jQuery('<div>' + appended + ' ' + '.</div>').insertBefore(this);
+              }
+
+              jQuery(this).remove();
+          });
+
           // Search for DOM object to be replaced specified in
           // the HTML with "data-speak2me-swap"
           //
           jQuery(clone).find('[data-speak2me-swap]').addBack('[data-speak2me-swap]').each(function() {
-              copy = jQuery(this).data('speak2me-swap');
-              jQuery(this).text(copy);
+            copy = jQuery(this).data('speak2me-swap');
+            jQuery(this).text(copy);
           });
 
           // Search for DOM object to spelled out specified in
@@ -714,10 +906,10 @@
           final = final.replace(/\.\./g, '.');
 
           // jadams
-          // Replace the abbreviation '.e.g.'or ',.e.g.,'
+          // Replace the abbreviation '.e.g.'or 'E.g.'
           //
-          final = final.replace(/\se\.g\.\s/g, ' for example, ');
-          final = final.replace(/\,\s+\.g\.\s+\,/g, ' for example, ');
+          final = final.replaceAll('e.g.', 'for example');
+          final = final.replaceAll('E.g.', 'For example, ');
 
           // jadams
           // Replace question and exclamation (?|!) marks
@@ -786,6 +978,19 @@
       stop: function() {
           window.speechSynthesis.cancel();
           userStoppedSpeaking = true;
+
+          // jadams
+          // NOTE: coincident active speech synthesis in multiple
+          // browser windows (tabs) does NOT work
+          //
+          // user_session.speech_synthesis_active = false;
+          // j1.writeCookie({
+          //   name:     'user_session',
+          //   data:     user_session,
+          //   secure:   false,
+          //   expires:  0
+          // });
+
           return this;
       },
 
@@ -868,17 +1073,27 @@
 
       customize: function() {
           var len = arguments.length;
+
           if (len == 0) {
               customTags = [];
           };
+
           if (len == 2) {
-              if (['img','table','figure'].indexOf(arguments[0]) == -1) { console.log("Error: When customizing, tag indicated must be either 'img', 'table', or 'figure'."); return; }
-              customTags[arguments[0].toString()] = new voiceTag(arguments[1].toString());
+            if (['img','table','figure'].indexOf(arguments[0]) == -1) {
+              console.log("Error: When customizing, tag indicated must be either 'img', 'table', or 'figure'.");
+              return;
+            }
+            customTags[arguments[0].toString()] = new voiceTag(arguments[1].toString());
           };
+
           if (len == 3) {
-              if (['q',"ol","ul","blockquote"].indexOf(arguments[0]) == -1) { console.log("Error: When customizing, tag indicated must be either 'q', 'ol', 'ul' or 'blockquote'."); return; }
-              customTags[arguments[0].toString()] = new voiceTag(arguments[1].toString(), arguments[2].toString());
+            if (['q',"ol","ul","blockquote"].indexOf(arguments[0]) == -1) {
+              console.log("Error: When customizing, tag indicated must be either 'q', 'ol', 'ul' or 'blockquote'.");
+              return;
+            }
+            customTags[arguments[0].toString()] = new voiceTag(arguments[1].toString(), arguments[2].toString());
           };
+
           return this;
       },
 
@@ -889,6 +1104,7 @@
           if (arguments.length == 0) {
               return voices;
           };
+
           // If there's another argument, we'll assume it's a jQuery
           // selector designating where to put the dropdown menu.
           // And if there's a third argument, that will be custom text
