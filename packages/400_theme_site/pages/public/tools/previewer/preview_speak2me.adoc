@@ -81,7 +81,6 @@ are spoken.
 The converter is started by clicking on the *speaker* symbol
 mdi:speaker[24px, md-blue] which is placed top right in the *menu bar*.
 
-////
 CAUTION: The Speak2Me module is currently only available as an experimental
 version, and only elementary elements for designing websites are used for
 speech output. In the case of complex elements such as tables, images,
@@ -99,8 +98,8 @@ voices provided by Microsoft free of charge. However, the quality of the
 outputs cannot be compared to those offered by Microsoft Edge. Other
 Chromium-based browsers, such as the Opera browser, provide voices of a
 very poor quality and cannot be recommended for voice output.
-////
 
+[role="mt-4"]
 mdi:clock-time-five-outline[24px, md-gray mr-2]
 *15-30 Minutes* to read
 
