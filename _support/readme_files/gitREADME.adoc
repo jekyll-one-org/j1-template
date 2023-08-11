@@ -174,18 +174,18 @@ Use the git 'tag' command with the '-d' option
 
 === From local
 
-  git tag -d v2023.6.8
+  git tag -d v2023.6.10
 
 === From remote
 
-  git push -d origin v2023.6.8
+  git push -d origin v2023.6.10
 
 == Set a Git tag
 
 When modifying remember to issue a new tag command in git before committing,
 then push the new tag
 
-  git tag -a v2023.6.8 -m "v2023.6.8"
+  git tag -a v2023.6.10 -m "v2023.6.10"
   git push origin --tags
 
 == Update Git Index (cache) completely
