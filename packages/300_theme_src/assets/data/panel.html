@@ -343,7 +343,7 @@ exclude_from_search:                    true
                             </span>
                           {% endif %}
                         </div>
-                        <h3 class="m-0 {{card_title_translate}}">{{card_title}}</h3>
+                        <h3 class="m-0 speak2me-ignore {{card_title_translate}}">{{card_title}}</h3>
                       </div>
                     </div>
 
@@ -736,7 +736,7 @@ exclude_from_search:                    true
                   <article class="card raised-z0 card-same-height mb-3">
                     <div class="card-profile mb-0">
 
-                      <div class="card-icon mt-4">
+                      <div class="card-icon speak2me-ignore mt-4">
                         <a href="{{card_href}}" class="link-no-decoration" aria-label="Read more on features">
                           <i class="card-icon-circle raised-z0 {{icon_family}} {{icon_family}}-{{card_icon}} {{icon_size}} {{icon_color}} card-icon-background-color-primary"></i>
                         </a>
@@ -749,7 +749,7 @@ exclude_from_search:                    true
                           <h6 class="notoc category {{card_header_translate}} mt-2 mr-2">{{card_title}}</h6>
                           <h4 class="notoc card-title {{card_header_translate}}">{{card_tagline}}</h4>
                           -->
-                          <div class="notoc category {{card_header_translate}} mt-2 mr-2">{{card_title}}</div>
+                          <div class="notoc category {{card_header_translate}} speak2me-ignore mt-2 mr-2">{{card_title}}</div>
                           <div class="notoc card-title {{card_header_translate}}">{{card_tagline}}</div>
 
                         </div>
@@ -929,7 +929,7 @@ exclude_from_search:                    true
                             <img class="mt-2" src="" alt="">
                             {% assign post_width = '100x' %}
                           {% endif %}
-                          <h3 class="card-header bg-primary notoc notranslate">{{post.title}}</h3>
+                          <h3 class="card-header bg-primary notoc speak2me-ignore notranslate">{{post.title}}</h3>
                           <!-- Body|Excerpt -->
                           <div class="card-body r-text-300 mt-0">
                             {% comment %} {{post.excerpt|truncatewords: 50|replace:'...',' ...'|remove:'<div class="paragraph">'|remove:'</div>'|remove:'<p>'|remove:'</p>'}} {% endcomment %}
@@ -998,7 +998,7 @@ exclude_from_search:                    true
                         <img class="mt-2" src="" alt="">
                         {% assign post_width = '100x' %}
                       {% endif %}
-                      <h3 class="card-header bg-primary notoc">{{post.title}}</h3>
+                      <h3 class="card-header bg-primary speak2me-ignore notoc">{{post.title}}</h3>
                       <!-- Body|Excerpt -->
                       <div class="card-body r-text-300 mt-0">
                         {% comment %} {{post.excerpt|truncatewords: 50|replace:'...',' ...'|remove:'<div class="paragraph">'|remove:'</div>'|remove:'<p>'|remove:'</p>'}} {% endcomment %}

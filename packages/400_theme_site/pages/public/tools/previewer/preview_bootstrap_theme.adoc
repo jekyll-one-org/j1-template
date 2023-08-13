@@ -24,7 +24,7 @@ image:
 regenerate:                             false
 permalink:                              /pages/public/tools/previewer/current_theme/
 
-resources:                              [ animate, clipboard, rouge ]
+resources:                              [ animate, bmd, clipboard, rouge ]
 resource_options:
   - toccer:
       collapseDepth:                    4
@@ -124,10 +124,12 @@ CSS styles.
   <div id="theme" class="document-title row g-0 mt-4 mb-3"></div>
 ++++
 
-Bootstrap themes are used to customize the appearance of a website based
-on the basic rules and definitions of Bootstrap's (CSS) styles. The use or
-change of a theme does not alter the functionality of the underlying Bootstrap
-framework but modifies, for example, the color scheme, fonts, or font sizes.
+Themes for the Bootstrap framework are used to customize the appearance of
+a website based on the basic rules and definitions of Bootstrap's (CSS) styles.
+The use or change of a theme does not alter the functionality of the underlying
+Bootstrap framework but modifies, for example, the color scheme, fonts, or
+font sizes.
+
 The use or change of a style does not alter the functionality of the
 underlying Bootstrap framework but modifies, for example, the color scheme,
 fonts, or font sizes.
@@ -144,11 +146,13 @@ mdi:bootstrap[18px, mdi-md-deep-purple-400]
 link:{url-bs-docs--components-navbar}[Bootstrap Docs {char-middot} Navbar, {browser-window--new}]
 
 Theming the navbar has never been easier thanks to the combination of
-theming classes and background-color utilities. Choose from `.navbar-light`
-for use with light background colors, or '.navbar-dark' for dark background
-colors. Then, customize with `.bg-*` utilities.
+theming classes and background-color utilities. Choose the light style
+`.navbar-light` for use with light background colors, or the daek style
+'.navbar-dark' for dark background colors. Then, customize with the
+background `.bg-*` utilities.
 
 ++++
+<div class="title fw-bold mb-2">Output example</div>
 <div class="doc-example mb-3">
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-3">
     <div class="container-fluid">
@@ -1336,15 +1340,27 @@ endif::[]
 ifeval::[{typography_blockquotes} == true]
 === Blockquotes
 
-The HTML element `<blockquote>` specifies a section with content quoted
-from another source. Blockquotes are generally displayed with indented
+The HTML blockquote element `<blockquote>` specifies a section with content
+quoted from another source. Blockquotes are generally displayed with indented
 left and right margins, along with a little extra space added above and
 below.
 
 For Bootstrap, are more complex styling of cites is available with the
-`<blockquote>` elements respectively the additional CSS class `.blockquote`.
+blockquote elements `<blockquote>` respectively the additional CSS blockquote
+class `.blockquote` available.
+
+[source, html, role="mb-4"]
+----
+<blockquote class="blockquote">
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+  <footer class="blockquote-footer">Someone famous in
+    <cite title="Source Title">history</cite>
+  </footer>
+</blockquote>
+----
 
 ++++
+<div class="title fw-bold mb-2">Output example</div>
 <div class="doc-example mb-3">
   <blockquote class="blockquote">
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>

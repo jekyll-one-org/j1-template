@@ -7,10 +7,10 @@ date:                                   2023-07-26
 #last_modified:                         2023-01-01
 
 description: >
-                                        Speak2Me for J1 Template is a speech synthesise module that enables a
-                                        so-called Text-To-Speech converter. The converter functionality allows
-                                        users to sit back and listen to the browser read aloud the important
-                                        contents on a Web page.
+                                        Speak2Me, a speech synthesise module for J1 Template, enables a so-called
+                                        Text-To-Speech converter. The converter functionality allows users to sit
+                                        back and listen to the browser read aloud the important contents on a
+                                        Web page.
 keywords: >
                                         open source, free, template, jekyll, jekyllone, web,
                                         sites, static, jamstack, bootstrap,
@@ -68,24 +68,37 @@ resource_options:
 // https://github.com/acoti/articulate.js
 // https://codepen.io/meetselva/pen/EVaLmP
 //
+
+Quote elements cite a passage or phrase from a book, speech, or the like,
+such as authority, illustration, etc. the quote elements are controlled by
+the following *attributes*:
+
+attribution::
+The attribute `attribution` specifies the name of *who* the content
+is attributed to.
+
+information::
+The attribute `information` is optional and specifies the general or
+bibliographical information of the book, speech, play, poem, etc.,
+where the content was *drawn from*.
+
+
 [role="dropcap"]
-Speak2Me for J1 Template is a speech synthesise module that enables a
-so-called Text-To-Speech converter. The converter functionality allows
-users to sit back and listen to the browser read aloud the important
-contents on a Web page.
+Speak2Me, a speech synthesise module for J1 Template, enables a so-called
+Text-To-Speech converter. The converter functionality allows users to sit
+back and listen to the browser read aloud the important contents on a
+Web page.
 
 This page provides typical content elements used for web pages. Run the
-converter to experience how those content elements
-are spoken.
+converter to experience how those content elements are spoken.
 
 The converter is started by clicking on the *speaker* symbol
 mdi:speaker[24px, md-blue] which is placed top right in the *menu bar*.
 
 CAUTION: The Speak2Me module is currently only available as an experimental
-version, and only elementary elements for designing websites are used for
+version, and only base elements for designing websites are used for
 speech output. In the case of complex elements such as tables, images,
-carousels, or galleries, only information texts are generated. Errors in
-the speech output can occur, especially with content previously translated.
+carousels, or galleries, only information texts are spoken.
 
 The *quality* of the *voice output* depends heavily on the web browser
 used. Depending on the browser, different voices are provided for the
@@ -93,11 +106,15 @@ outputs, which differ *significantly* in their quality. _Google_'s
 browser *Chrome* delivers acceptable results. However, the best results
 are provided by _Microsoft_ with the browser *Edge*.
 
-NOTE: Browsers from other manufacturers, such as Firefox, usually use
+Browsers from other manufacturers, such as Firefox, usually use
 voices provided by Microsoft free of charge. However, the quality of the
 outputs cannot be compared to those offered by Microsoft Edge. Other
-Chromium-based browsers, such as the Opera browser, provide voices of a
+Chromium-based browsers, such as the *Opera* browser, provide voices of a
 very poor quality and cannot be recommended for voice output.
+
+IMPORTANT: Errors in the speech output can occur, especially with content
+previously translated.
+
 
 [role="mt-4"]
 mdi:clock-time-five-outline[24px, md-gray mr-2]
@@ -125,14 +142,14 @@ their complexity.
 Blocks in web pages that contain structured text refer to specific *sections*
 or *elements* of content that are organized and formatted in a structured
 manner to improve readability and accessibility. These text blocks are
-designed to provide a clear and organized information presentation for
-human users to understand the discussed context better.
+designed to provide a clear and organized presentation for human users to
+understand the discussed context better.
 
 Typical elements are:
 
-* technical terms
-* highlighted text
-* code blocks
+* all technical terms
+* highlighted text blocks
+* embedded code blocks
 
 ==== Technical terms
 
@@ -220,32 +237,20 @@ function styleSheetLoaded(styleSheet) {
 ----
 
 [role="mt-4"]
-==== Quote blocks
+==== Quotations
 // https://www.youtube.com/watch?v=3_kKAeh6qyc
 
-Quotation elements in web pages are used to visually highlight an excerpt.
-They are designed to stand out from the regular text and clarify that the
+Quotations in web pages are used to visually highlight an excerpt. They
+are designed to stand out from the regular text and clarify that the
 content is from another person, website, or any external source.
 
-Example of a *quote*:
+Example of a *quotation*:
 
 [quote, Monty Python and The Life of Brian]
 ____
 He’s not the Messiah – he’s a very naughty boy.
 ____
 
-
-[role="mt-4"]
-==== Quoted text
-
-Text placed within quotation marks `"` is used to attribute and reproduce
-the exact words spoken or written by someone else.
-
-===== Examples
-
-Throughout "Becoming," Michelle Obama reflects on her efforts to balance
-her personal and professional life, her initiatives as First Lady, and her
-advocacy for issues such as education, health, and empowerment.
 
 [role="mt-4"]
 === Ordered text
@@ -284,11 +289,12 @@ that can be used.
 IMPORTANT: Blocks of type *important* provide facts that should be
 remembered.
 
+WARNING: A block of type *warning* instructs readers of potential danger,
+harm, or consequences for the wrong usage.
+
 CAUTION: *Information* blocks of type *caution* advise readers to act
 carefully and point to potential risks or trippings.
 
-WARNING: A block of type *warning* instructs readers of potential danger,
-harm, or consequences for the wrong usage.
 
 [role="mt-5"]
 == Tables
@@ -359,19 +365,16 @@ their explanations.
 
 [role="mt-4"]
 Performance::
-The better performance and a crazy fast load time. One of the main advantages
-of using a static site is the fact that it is crazy fast to load. Indeed,
-when the user requests a page, there is no need to request a database first
-to generate the page itself. All the content is already placed in a one HTML
-file.
+One of the main advantages of using a static site is that it is unbelievably
+fast to load. When the user requests a page, there is no need to request
+a database to generate the page itself. All the content is already placed
+in one HTML file.
 
 Security::
-Having a static website: say goodbye to hacking and security issues.
-Are you tired of getting WordPress notifications about security issues and
-updates every week? No worries, as a static site has no database and no other
-moving parts. Indeed, your site will have way fewer footprints and security
-issues since it will only load plain HTML, Javascript and CSS files.
-
+Say goodbye to hacking and security issues issued every week. A static site
+has no database or other complex underlying interdependent parts. Indeed,
+your site will have fewer footprints and security issues since it
+only loads plain HTML files.
 
 [role="mt-5"]
 == Images
@@ -453,8 +456,8 @@ creating fully responsive and touch-enabled carousels.
 === Text Carousel
 
 [role="mb-4"]
-A carousel is typically used for displaying images. Still, the implementation
-for the J1 Template supports a lot more sources to be used for a slide show:
+A carousel is typically used for displaying images. The implementation for
+the J1 Template supports a lot more sources to be used for a slide show:
 simple text, for example.
 
 .Simple text

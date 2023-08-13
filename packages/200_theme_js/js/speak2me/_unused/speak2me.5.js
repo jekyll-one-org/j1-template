@@ -1094,15 +1094,9 @@
         // jadams
         // Replace the abbreviations '.e.g.', 'E.g.' and 'etc.'
         //
-        final = final.replaceAll('e.g.',  'for example');
-        final = final.replaceAll('E.g.',  'For example, ');
-        final = final.replaceAll('etc.',  'and so on, ');
-
-        // jadams
-        // Replace language specific abbreviations
-        // Note: required for some voices|languages, like Gewrman, only
-        //
-        final = final.replaceAll('z. B.', 'zum Beispiel, ');
+        final = final.replaceAll('e.g.', 'for example');
+        final = final.replaceAll('E.g.', 'For example, ');
+        final = final.replaceAll('etc.', 'and so on, ');
 
         // jadams
         // Remove question and exclamation (?|!) marks

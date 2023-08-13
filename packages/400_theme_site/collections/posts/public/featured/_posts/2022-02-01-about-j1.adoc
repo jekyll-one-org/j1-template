@@ -43,10 +43,10 @@ resource_options:
 // Place an excerpt at the most top position
 // -----------------------------------------------------------------------------
 [role="dropcap"]
-The template system J1 was initially developed to create a simple but fully
-configurable creation tool for document servers. Document servers provide
-websites, or other digital content like PDF files, to publish the project
-documentation to the public.
+J1 Template is a Bootstrap V5 website template for the static site generator
+Jekyll. The Theme J1 has been developed to create simple but fully configurable
+websites. Jekyll One is a full-featured Theme for Jekyll to create modern
+Bootstrap V5 based websites for free.
 
 excerpt__end
 

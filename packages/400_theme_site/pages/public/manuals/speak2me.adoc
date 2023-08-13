@@ -7,10 +7,10 @@ date:                                   2023-07-26
 #last_modified:                         2023-01-01
 
 description: >
-                                        Speak2Me for J1 Template is a speech synthesise module that enables a
-                                        so-called Text-To-Speech converter. The converter functionality allows
-                                        users to sit back and listen to the browser read aloud the important
-                                        contents on a Web page.
+                                        Speak2Me, a speech synthesise module for J1 Template, enables a so-called
+                                        Text-To-Speech converter. The converter functionality allows users to sit
+                                        back and listen to the browser read aloud the important contents on a
+                                        Web page.
 keywords: >
                                         open source, free, template, jekyll, jekyllone, web,
                                         sites, static, jamstack, bootstrap,
@@ -77,10 +77,10 @@ interactive voice elements to web applications.
 [role="mt-5"]
 == J1 Template Integration
 
-Speak2Me for J1 Template is a speech synthesise module that enables a
-so-called Text-To-Speech converter. The converter functionality allows
-users to sit back and listen to the browser read aloud the important
-contents on a Web page.
+Speak2Me, a speech synthesise module for J1 Template, enables a so-called
+Text-To-Speech converter. The converter functionality allows users to sit
+back and listen to the browser read aloud the important contents on a
+Web page.
 
 
 [role="mt-5"]

@@ -125,19 +125,18 @@ additional *options* available that can be used.
 |Emphasis on what is currently being discussed and provide facts that
 should be remembered.
 
-|`CAUTION`
-|Advise the reader to act carefully and point to potential risks or
-trippings.
-
 |`WARNING`
 |instructs readers of potential danger, harm, or consequences for the
 wrong usage.
 
+|`CAUTION`
+|Advise the reader to act carefully and point to potential risks or
+trippings.
+
 |===
 
-
 NOTE: All colors for all default admonition blocks set to the standard
-MD color set. Find available block types and their colors below.
+color set. Find available block types and their colors below.
 
 When you want to call attention to a single paragraph, start the first
 line of the paragraph with the label you want to use. The label must be
@@ -191,21 +190,22 @@ WARNING: Icon background-color: yellow
 .CAUTION block
 CAUTION: Icon background-color: red
 
+
 [role="mt-5"]
 == Asciidoc Quote elements
 
 Quote elements cite a passage or phrase from a book, speech, or the like,
-such as authority, illustration, etc. the quote elements are controlled by
-the following *attributes*:
+such as authority, illustration, etc. the quote elements are controlled
+by the following *attributes*:
 
 attribution::
 The attribute `attribution` specifies the name of *who* the content
-is attributed to
+is attributed to.
 
 information::
 The attribute `information` is optional and specifies the general or
 bibliographical information of the book, speech, play, poem, etc.,
-where the content was *drawn from*
+where the content was *drawn from*.
 
 === Quoted paragraph
 

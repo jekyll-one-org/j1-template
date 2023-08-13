@@ -317,7 +317,7 @@
         voiceTags['dl']               = new voiceTag('Start of list.', 'End of list.');
 
 //      voiceTags['li']               = new voiceTag(', ', '');
-        voiceTags['dt']               = new voiceTag('', ', ');
+//      voiceTags['dt']               = new voiceTag('', ', ');
 
         // voiceTags['img']              = new voiceTag('There\'s an embedded image with the description,', ', ');
         // voiceTags['table']            = new voiceTag('There\'s an embedded table,', '');
@@ -337,14 +337,14 @@
         voiceTags['img']              = new voiceTag('Start of an embedded image with the description,', ', ');
         voiceTags['table']            = new voiceTag('Start of an embedded table,', '');
         voiceTags['card-header']      = new voiceTag('', '');
-        voiceTags['doc-example']      = new voiceTag('Start of an embedded example element,', 'This element ist not spoken.');
+        voiceTags['doc-example']      = new voiceTag('Start of an embedded example element,', '');
         voiceTags['admonitionblock']  = new voiceTag('Start of an attention element of type, ', '');
-        voiceTags['listingblock']     = new voiceTag('Start of an embedded structured text block,', 'This element ist not spoken.');
-        voiceTags['carousel']         = new voiceTag('Start of an embedded carousel element,', 'This element ist not spoken.');
-        voiceTags['slider']           = new voiceTag('Start of an embedded slider element,', 'This element ist not spoken.');
-        voiceTags['masonry']          = new voiceTag('Start of an embedded masonry element,', 'This element ist not spoken.');
-        voiceTags['lightbox']         = new voiceTag('Start of an embedded lightbox element,', 'This element ist not spoken.');
-        voiceTags['gallery']          = new voiceTag('Start of an embedded gallery element,', 'This element ist not spoken.');
+        voiceTags['listingblock']     = new voiceTag('Start of an embedded structured text block,', '');
+        voiceTags['carousel']         = new voiceTag('Start of an embedded carousel element,', '');
+        voiceTags['slider']           = new voiceTag('Start of an embedded slider element,', '');
+        voiceTags['masonry']          = new voiceTag('Start of an embedded masonry element,', '');
+        voiceTags['lightbox']         = new voiceTag('Start of an embedded lightbox element,', '');
+        voiceTags['gallery']          = new voiceTag('Start of an embedded gallery element,', 'Gallery element end.');
         voiceTags['figure']           = new voiceTag('Start of an embedded figure with the caption,', '');
         voiceTags['blockquote']       = new voiceTag('Blockquote start.', 'Blockquote end.');
         voiceTags['quoteblock']       = new voiceTag('Start of an embedded quote block element,', 'Quote block element end.');
@@ -473,7 +473,7 @@
             // chunks[index] = chunk.replace(/^\s+|\s+$/g, '');
             // chunks[index] = chunk.replace(/(\r\n|\n|\r)/gm, '');
             // add chunk if contains text
-            // chunks[index] = chunks[index] + '. ';
+            chunks[index] = chunks[index] + '. ';
           });
 
           chunks.forEach((chunk, index) => {
@@ -763,7 +763,7 @@
         });
 
         // jadams
-        // Search for quote block elements
+        // Search for quote block elements and extract ...
         //
         jQuery(clone).find('.quoteblock').addBack('quoteblock').each(function() {
           var attribution = jQuery(this).find('.attribution');
@@ -851,10 +851,10 @@
 
           if ((copy !== undefined) && (copy != '')) {
             jQuery('<div>' + prepend + ' with the caption,' + copy + pause_spoken + '</div>').insertBefore(this);
-            jQuery('<div>' + appended + '</div>').insertBefore(this);
+            jQuery('<div>' + appended + element_not_spoken + pause_spoken + '</div>').insertBefore(this);
           } else {
             jQuery('<div>' + prepend + '</div>').insertBefore(this);
-            jQuery('<div>' + appended + '</div>').insertBefore(this);
+            jQuery('<div>' + appended + element_not_spoken + pause_spoken + '</div>').insertBefore(this);
           }
 
           jQuery(this).remove();
@@ -881,8 +881,8 @@
           appended = voiceTags['carousel'].append;
 
           if ((title !== undefined) && (title != '')) {
-            jQuery('<div>' + prepend + ' with the caption,' + title + pause_spoken + '</div>').insertBefore(this);
-            jQuery('<div>' + appended + '</div>').insertBefore(this);
+            jQuery('<div>' + prepend + ' with the caption,' + title + '</div>').insertBefore(this);
+            jQuery('<div>' + appended + element_not_spoken + pause_spoken + '</div>').insertBefore(this);
           } else {
             jQuery('<div>' + prepend + '</div>').insertBefore(this);
             jQuery('<div>' + appended + '</div>').insertBefore(this);
@@ -912,8 +912,8 @@
           appended = voiceTags['slider'].append;
 
           if ((title !== undefined) && (title != '')) {
-            jQuery('<div>' + prepend + ' with the caption, ' + title + pause_spoken + '</div>').insertBefore(this);
-            jQuery('<div>' + appended + '</div>').insertBefore(this);
+            jQuery('<div>' + prepend + 'with the caption, ' + title + '</div>').insertBefore(this);
+            jQuery('<div>' + appended + element_not_spoken + pause_spoken + '</div>').insertBefore(this);
           } else {
             jQuery('<div>' + prepend + '</div>').insertBefore(this);
             jQuery('<div>' + appended + '</div>').insertBefore(this);
@@ -943,8 +943,8 @@
           appended = voiceTags['gallery'].append;
 
           if ((title !== undefined) && (title != '')) {
-            (prepend !== '')  && jQuery('<div>' + prepend + ' with the caption ' + title + pause_spoken + '</div>').insertBefore(this);
-            (appended !== '') && jQuery('<div>' + appended + '</div>').insertBefore(this);
+            (prepend !== '')  && jQuery('<div>' + prepend + ' with the caption ' + title + '. ' + '</div>').insertBefore(this);
+            (appended !== '') && jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
           } else {
             (prepend !== '')  && jQuery('<div>' + prepend + '</div>').insertBefore(this);
             (appended !== '') && jQuery('<div>' + appended + '</div>').insertBefore(this);
@@ -974,8 +974,8 @@
           appended  = voiceTags['lightbox'].append;
 
           if ((title !== undefined) && (title != '')) {
-            jQuery('<div>' + prepend + ' with the caption,' + title + pause_spoken + '</div>').insertBefore(this);
-            jQuery('<div>' + appended + '</div>').insertBefore(this);
+            jQuery('<div>' + prepend + ' with the caption,' + title + '</div>').insertBefore(this);
+            jQuery('<div>' + appended + element_not_spoken + pause_spoken + '</div>').insertBefore(this);
           } else {
             jQuery('<div>' + prepend + '</div>').insertBefore(this);
             jQuery('<div>' + appended + '</div>').insertBefore(this);
@@ -1047,19 +1047,19 @@
         }
 
         // jadams
-        // Remove double quotes '"'
+        // Remove double quotes '"' ...
         //
         final = final.replaceAll('"', '');
 
-        // Remove double smart quotes
+        // Remove double smart quotes ...
         //
         final = final.replaceAll('“', '');
         final = final.replaceAll('”', '');
 
         // jadams
-        // Remove all colons ':' and replace by a dot
+        // Remove all colons ':'
         //
-        final = final.replaceAll(':', '.');
+        final = final.replaceAll(':', '');
 
         // jadams
         // Replace all strange '., ' by a pause
@@ -1092,17 +1092,10 @@
         final = final.replace(/\.\./g, '.');
 
         // jadams
-        // Replace the abbreviations '.e.g.', 'E.g.' and 'etc.'
+        // Replace the abbreviations '.e.g.' or 'E.g.'
         //
-        final = final.replaceAll('e.g.',  'for example');
-        final = final.replaceAll('E.g.',  'For example, ');
-        final = final.replaceAll('etc.',  'and so on, ');
-
-        // jadams
-        // Replace language specific abbreviations
-        // Note: required for some voices|languages, like Gewrman, only
-        //
-        final = final.replaceAll('z. B.', 'zum Beispiel, ');
+        final = final.replaceAll('e.g.', 'for example');
+        final = final.replaceAll('E.g.', 'For example, ');
 
         // jadams
         // Remove question and exclamation (?|!) marks
