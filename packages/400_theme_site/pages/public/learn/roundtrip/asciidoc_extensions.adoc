@@ -74,6 +74,9 @@ To create Asciidoc extensions on your own, it is highly recommended to read the
 link:{url-asciidoctor--extensions-manual}[extensions section, {browser-window--new}] in
 the Asciidoctor user manual.
 
+mdi:clock-time-five-outline[24px, md-gray mt-4 mr-2]
+*15 Minutes* to read
+
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 [role="mt-5"]

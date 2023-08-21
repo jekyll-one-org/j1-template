@@ -1,22 +1,23 @@
 ---
 title:                                  Speak2Me
-title_extention:                        Module for Speech Synthesise (SST)
-tagline:                                Preview for the Screen Reader
+title_extention:                        Content samples for the TTS module
+tagline:                                Content samples
 
 date:                                   2023-07-26
 #last_modified:                         2023-01-01
 
 description: >
-                                        Speak2Me for J1 Template is a speech synthesise module that enables a
-                                        so-called screen reader. The reader functionality allows users to sit back
-                                        and listen to the browser read aloud the important contents on a Web page.
+                                        Speak2Me, a speech synthesise module for J1 Template, enables a so-called
+                                        Text-To-Speech converter. The converter functionality allows users to sit
+                                        back and listen to the browser read aloud the important contents on a
+                                        Web page.
 keywords: >
                                         open source, free, template, jekyll, jekyllone, web,
                                         sites, static, jamstack, bootstrap,
-                                        speech synthesise, sst, j1 module, jquery
+                                        speech synthesise, sst, j1 module, speak2me, jquery
 
 categories:                             [ Module ]
-tags:                                   [ Speech Synthesise, SST, Tester ]
+tags:                                   [ Speech Synthesise, SST, Speak2Me, Preview ]
 
 book:
   cover:                                /assets/images/collections/books/biography/a_life_in_questions.jpg
@@ -25,12 +26,15 @@ tts:                                    true
 regenerate:                             true
 permalink:                              /pages/public/tools/previewer/speak2me/
 
+
 resources:                              [
                                           animate, clipboard, carousel, comments,
                                           justifiedGallery, lightbox, lightGallery,
                                           masterslider, rouge, slick
                                         ]
 resource_options:
+  - toccer:
+      collapseDepth:                    4
   - attic:
       slides:
         - url:                          /assets/images/pages/roundtrip/images-1920x1280-bw.jpg
@@ -67,20 +71,21 @@ resource_options:
 // https://codepen.io/meetselva/pen/EVaLmP
 //
 [role="dropcap"]
-Speak2Me for J1 Template is a speech synthesise module that enables a
-so-called screen reader. The reader functionality allows users to sit back
-and listen to the browser read aloud the important contents on a Web page.
+Speak2Me, a speech synthesise module for J1 Template, enables a so-called
+Text-To-Speech converter. The converter functionality allows users to sit
+back and listen to the browser read aloud the important contents on a
+Web page.
 
-The *screen reader* on websites created by J1 Template is started by
-clicking on the *speaker* symbol mdi:speaker[24px, md-blue] placed top
-right in the *menu bar*.
+This page provides typical content elements used for web pages. Run the
+converter to experience how those content elements are spoken.
 
-CAUTION: The Speak2Me module is currently only available as an experimental
-version, and only elementary elements for designing websites are used for
+The converter is started by clicking on the *speaker* symbol
+mdi:speaker[24px, md-blue] which is placed top right in the *menu bar*.
+
+IMPORTANT: The Speak2Me module is currently only available as an experimental
+version, and only base elements for designing websites are used for
 speech output. In the case of complex elements such as tables, images,
-carousels, or galleries, only information texts are generated. Errors in
-the speech output can occur, especially with content previously translated
-with the build-in translator Google Translate from J1 Template.
+carousels, or galleries, only information texts are spoken.
 
 The *quality* of the *voice output* depends heavily on the web browser
 used. Depending on the browser, different voices are provided for the
@@ -88,24 +93,203 @@ outputs, which differ *significantly* in their quality. _Google_'s
 browser *Chrome* delivers acceptable results. However, the best results
 are provided by _Microsoft_ with the browser *Edge*.
 
-NOTE: Browsers from other manufacturers, such as Firefox, usually use
+CAUTION: The Speak2Me module is currently *not* supported on mobile
+devices.
+
+Browsers from other manufacturers, such as Firefox, usually use
 voices provided by Microsoft free of charge. However, the quality of the
 outputs cannot be compared to those offered by Microsoft Edge. Other
-Chromium-based browsers, such as the Opera browser, provide voices of a
+Chromium-based browsers, such as the *Opera* browser, provide voices of a
 very poor quality and cannot be recommended for voice output.
 
+IMPORTANT: Errors in the speech output can occur, especially with
+content previously translated.
+
+
+[role="mt-4"]
 mdi:clock-time-five-outline[24px, md-gray mr-2]
-*15 Minutes* to read
+*15-30 Minutes* to read
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 [role="mt-5"]
+== Text elements
+
+The most common text elements used are *headlines* and *paragraphs*.
+
+Headings typically represent *titles* and *subtitles* of sections within a
+webpage. They provide visual differentiation for your content and play
+an important role in accessibility. For example, headings help screen readers
+understand the structure of your page and assist in navigation.
+
+Paragraphs are structural elements displayed in a separated *block* element.
+However, some elements defined as a paragraph cannot be spoken because of
+their complexity.
+
+[role="mt-4"]
+=== Structured text
+
+Blocks in web pages that contain structured text refer to specific *sections*
+or *elements* of content that are organized and formatted in a structured
+manner to improve readability and accessibility. These text blocks are
+designed to provide a clear and organized presentation for human users to
+understand the discussed context better.
+
+Typical elements are:
+
+* all technical terms
+* highlighted text blocks
+* embedded code blocks
+
+==== Technical terms
+
+Technological terms are specialized words or phrases used in a particular
+field or domain to describe specific concepts, processes, technologies,
+or ideas. These terms are often unique to a specific area of expertise
+and may have precise meanings well-understood by professionals and
+experts.
+
+Because of current limitations of the synthesise module *Speak2Me*, words
+are marked as *specialized* words are *not* spoken.
+
+The following _Rouge_ themes are used for J1 Template:
+
+* light theme -- based on the Igor theme `igorpro`
+* dark theme -- based on the Monokai theme `monokai.sublime`
+
+==== Highlighted text
+
+Text blocks highlighted in web pages refer to sections of text that have
+been visually emphasized to stand out from the surrounding content. These
+blocks are typically formatted using different styles, such as changing
+the background color, applying a border, or using bold or italic fonts to
+make them more noticeable and draw attention to important information.
+
+.Output example
+----
+Startup the site ..
+Configuration file: ...
+
+ Incremental build: enabled
+      Generating...
+     J1 QuickSearch: creating search index ...
+     J1 QuickSearch: finished, index ready.
+     ....
+----
+
+[role="mt-4"]
+==== Code blocks
+
+In web pages, a code block refers to a section of code typically enclosed
+within special HTML or programming language tags to indicate that the content
+inside should be interpreted as code and not regular text. These code blocks
+are often used to display and format HTML, CSS, JavaScript, or other
+programming code snippets on a webpage.
+
+.JSON data block
+[source, json, role="noclip"]
+----
+{
+  "id": 3,
+  "title": "Roundtrip",
+  "tagline": "present images",
+  "url": "/pages/public/learn/roundtrip/present_images/",
+  "date": "2020-11-03 +0100",
+  "tags": [
+    "Introduction",
+    "Module",
+    "Image"
+  ],
+  "categories": [
+    "Roundtrip"
+  ],
+  "description": "Welcome to the preview page ... and galleries.\n",
+  "is_post": false
+}
+----
+
+.Javascript code
+[source, javascript]
+----
+// helper functions
+//
+function styleSheetLoaded(styleSheet) {
+  var sheets     = document.styleSheets,
+      stylesheet = sheets[(sheets.length - 1)];
+
+  // find CSS file 'styleSheetName' in document
+  for(var i in document.styleSheets) {
+    if(sheets[i].href && sheets[i].href.indexOf(styleSheet) > -1) {
+      return true;;
+    }
+  }
+}
+----
+
+[role="mt-4"]
+==== Quotations
+
+Quotations in web pages are used to visually highlight an excerpt. They
+are designed to stand out from the regular text and clarify that the
+content is from another person, website, or any external source.
+
+[quote, Jean-Paul Sartre]
+____
+Don't do stupid things twice. The selection is too big for that.
+____
+
+
+[role="mt-4"]
+=== Ordered text
+
+Headlines and paragraphs are commonly used to structure the content of a
+web page, making it more readable. See such a structure below that is
+typically used in larger text like articles, or books.
+
+==== Chapter One
+
+    Tyrion Lannister stood resolute upon the prow of the majestic vessel,
+the Wind's Grace, its timeworn planks creaking beneath his weight.
+
+===== Section One
+
+    It was a gusty tempest, much like the swirling turmoil that had
+beset his life ever since he had been forced to flee the shores of
+Westeros.
+
+
+[role="mt-5"]
+== Information elements
+
+Information blocks draw the reader to certain statements by labeling them
+as priorities displayed in separate blocks. The J1 template system provides
+five types shown by the following examples.
+
+NOTE: Blocks of type *note* give additional details on the currently
+discussed topic that may help the reader to understand the following
+content better.
+
+TIP: An *Information* block of type *tip* provides facts that may help
+the reader *to go further* or points to additional *options* available
+that can be used.
+
+IMPORTANT: Blocks of type *important* provide facts that should be
+remembered.
+
+WARNING: A block of type *warning* instructs readers of potential danger,
+harm, or consequences for the wrong usage.
+
+CAUTION: *Information* blocks of type *caution* advise readers to act
+carefully and point to potential risks or trippings.
+
+
+[role="mt-5"]
 == Tables
 
-Tables are used to organize and display data in a structured format. Tables
-consist of rows and columns, and they are primarily used to present tabular
-data, such as financial data, schedules, comparison charts, and other types
-of information that require a grid-like layout.
+Table elements are used to organize and display data in a structured format.
+Tables consist of rows and columns, and they are primarily used to present
+tabular data such as technical data and other types of information that
+require a grid-like layout.
 
 .Files and Folders
 [cols="4a,8a", width="100%", options="header", role="rtable mt-4"]
@@ -123,6 +307,7 @@ date: `title.MARKUP`.
 
 |===
 
+
 [role="mt-5"]
 == Lists
 
@@ -131,6 +316,7 @@ easily readable format. The element is commonly used for creating navigation
 menus and content outlines, steps in a process, and various other scenarios
 where a structured presentation of information is required.
 
+[role="mt-4"]
 === Unordered list
 
 An unordered list represents a collection of items where the order of the
@@ -143,6 +329,7 @@ An unordered list may look-alike:
 * _Jekyll_ v4 Support and _Ruby_ v3 Support
 * Asciidoc and Markdown Support
 
+[role="mt-4"]
 === Ordered list
 
 An ordered list is a way to present a list of items in a specific order,
@@ -155,6 +342,7 @@ Here's an example of how an ordered list is displayed:
 . _Asciidoctor_ extensions included
 . Infinite Scoll Support
 
+[role="mt-4"]
 === Definition list
 
 A definition list is a element used to create a list of terms and their
@@ -164,291 +352,188 @@ their explanations.
 
 [role="mt-4"]
 Performance::
-*The better performance and a crazy fast load time*.
-One of the main advantages of using a static site is the fact that
-it is crazy fast to load. Indeed, when the user requests a page, there is
-no need to request a database and various files to generate the
-page itself as all the content is already placed in a one and only file:
-an HTML one.
+One of the main advantages of using a static site is that it is unbelievably
+fast to load. When the user requests a page, there is no need to request
+a database to generate the page itself. All the content is already placed
+in one HTML file.
 
 Security::
-*Having a static website: say goodbye to hacking and security issues*.
-Are you tired of getting WordPress notifications about security issues and
-updates every week? No worries, as a static site has no database, there are
-close to no hack possible compared to a WordPress website. Indeed, your
-site will have way fewer footprints and security issues since it will
-only load plain HTML and CSS files.
-
-
-[role="mt-5"]
-== Text elements
-
-The most common text elements used are *headlines* and *paragraphs*.
-
-Headings typically represent e.g. *titles* and *subtitles* of sections within a
-webpage. They provide visual differentiation for your content and play
-an important role in accessibility. For example, headings help screen readers
-understand the structure of your page and assist in navigation.
-
-A paragraph is a structural element that defines and displays text in a
-*text block* as a separate element.
-
-=== Quoted text
-
-Quoted text, usually indicated by enclosing it within quotation marks `" "`,
-is used to attribute and reproduce the exact words spoken or written by
-someone else.
-
-==== Text examples
-
-Throughout "Becoming," Michelle Obama reflects on her efforts to balance
-her personal and professional life, her initiatives as First Lady, and her
-advocacy for issues such as education, health, and empowerment.
-
-"Tyrion," came the gruff voice of Ser Jorah Mormont, his greying beard
-glimmering with flecks of gold in the fading light. "Your thoughts seem
-as stormy as the sea itself. What troubles your mind, my friend?"
-
-"Ah, Ser Jorah," he replied, his voice carrying a trace of both resignation
-and determination. "What troubles my mind? Why, the unending dance between
-fate and fortune, of course. It seems the gods have deemed me a pawn in
-their ever-twisting game. But fear not, my loyal knight, for I shall not be
-so easily swept away by the tides of destiny".
-
-=== Structured text
-
-Headlines and paragraphs are commonly used to structure the content of a
-web page, making it more readable. See such a structure below that is
-typically used in larger text like articles, or books.
-
-==== Chapter One
-
-    Tyrion Lannister stood resolute upon the prow of the majestic vessel,
-the Wind's Grace, its timeworn planks creaking beneath his weight.
-
-    His mismatched eyes, one green as the emerald depths of the
-Whispering Wood, the other a glimmering pale amethyst, stared out into
-the boundless expanse of the Narrow Sea. As the ship cut through the
-frothing waves, the wind, bearing the salty tang of the ocean, lashed at
-his face, sending raven-black locks of hair spiraling across his brow.
-
-===== Section One
-
-    It was a gusty tempest, much like the swirling turmoil that had
-beset his life ever since he had been forced to flee the shores of
-Westeros. The crimson light of the setting sun cast an ethereal glow
-upon Tyrion's countenance, accentuating the shadows that danced upon his
-visage, mirroring the darkness that had shadowed his soul for far too
-long.
-
-    His lips, full and pursed in contemplation, were tinged with a touch
-of melancholy, the weight of his troubled past etched upon his face like
-the lines of a map charting the arduous journey he had undertaken.
-
-    Lost in his ruminations, Tyrion found solace in the rhythmic cadence
-of the waves crashing against the ship's hull. Each thunderous collision
-reverberated through his being, echoing the tumultuous path he had
-traversed.
+Say goodbye to hacking and security issues issued every week. A static site
+has no database or other complex underlying interdependent parts. Indeed,
+your site will have fewer footprints and security issues since it
+only loads plain HTML files.
 
 [role="mt-5"]
 == Images
 
-There are two image macro types in AsciiDoc: block and inline. As with all
-*Asciidoc macros*, the *block* and *inline* forms differ by the *number*
-of *colons* that follow the macro name. The block form uses two colons `::`,
-whereas the *inline* form only uses a single one `:`.
+There are two general image types used on web pages: block and inline
+images.
 
+[role="mt-4"]
 === Inline image
 
 An inline image is displayed in the flow of another element, such as a
-paragraph or sidebar block. The inline image macro is almost identical
-to the block image macro, except its macro name is followed by a single
-colon ':'.
+paragraph block.
 
 [role="mt-4"]
-image:{{page.book.cover}}[role="mr-4 mb-4 float-left"]
+image:{{page.book.cover}}[height=480, role="mr-4 mb-2 float-left"]
 
 His working life has been defined by questions. *Why is this bastard
 lying to me?* was at the front of his mind as he conducted every interview.
 But it wasn't just politicians. Paxman's interviews with Dizzee Rascal,
-David Bowie, Russell Brand, Vivienne Westwood are legendary. He discussed
-belief with religious leaders and philosophers, economics with CEOs and
-bankers, books with writers and art and theatre with artists.
+David Bowie, Russell Brand, Vivienne Westwood are legendary.
+
+He discussed belief with religious leaders and philosophers, economics
+with CEOs and bankers, books with writers and art and theatre with artists.
 
 After 22 years on University Challenge, Paxman is also the longest-serving
 active quizmaster on British television. Now, in these long-awaited memoirs,
-he spills the beans behind four decades in front of the camera. He offers
-reflections and stories from a career that has taken him as a reporter to
-many of the world's war zones and trouble spots - Central America, Beirut,
-Belfast, to the studios of Tonight, Panorama, Breakfast Time, the Six O'clock
-News. Filled with candid stories about the great, the good and the rotters
-that have crossed his path, his memoirs are as magnetic to read as Paxman
-is to watch.
+he spills the beans behind four decades in front of the camera.
 
-Candid, uncompromising, compassionate, reflective and astute, he writes
-of the principles that have governed his professional life, the inner
-workings of the BBC, the role of journalists in political debate, the
-scandals and rows he's been part of, the books he has written and the
-series he has made. In a book that tells some terrific stories and laughs
-at much of the silliness in the world, A Life in Questions charts the life
-of the greatest political interviewer of our time.
+He offers reflections and stories from a career that has taken him as a
+reporter to many of the world's war zones and trouble spots - Central America,
+Beirut, Belfast, to the studios of Tonight, Panorama, Breakfast Time, the
+Six O'clock News. Filled with candid stories about the great, the good and
+the rotters that have crossed his path, his memoirs are as magnetic to read
+as Paxman is to watch.
+In that book, Paxman tells some terrific stories and laughs at much of the
+silliness in the world. A Life in Questions charts the life of the greatest
+political interviewer of our time.
+
 
 [role="mt-4"]
 === Block image
 
-A block image is displayed as a discrete element, i.e., on its own line,
-in a document. A block image is designated by image macro name and followed
-by two colons `::` It’s preceded by an empty line, entered on a line by
-itself, and then followed by an empty line.
+A block image is displayed as a discrete element on its own line in a
+document. Web pages use block images for various purposes to enhance
+visual appeal, convey information, and improve the overall user
+experience.
 
-image::/assets/images/pages/panels/responsive-text-1920x800.jpg[{{page.title}}, width=1280]
+image::/assets/images/pages/panels/responsive-text-1920x800.jpg[{{page.title}}, width=1280, role="mb-4"]
 
-////
+NOTE: Carefully chosen and well-placed images can significantly enhance
+the overall effectiveness of a web page.
+
 [role="mt-4"]
+[#lightbox2]
 == Lightbox
 
+Lightboxes are UI elements commonly used in web pages for various purposes.
+They serve as a way to display content or interact with users without
+requiring them to navigate away from the current page. This UI element
+is typically designed to grab the user's attention and provide a focused
+interaction experience.
+
 [role="mb-4"]
-Find below an example of using the lightbox for standalone images. See how
-single (individual) images are linked for use with Lightbox.
+Find below an example of using the default lightbox of the J1 Template
+to display and enlarge an group of images.
 
-.Lightbox block for standalone images
-lightbox::example-standalone[ 800, {data-images-standalone}, role="mb-4" ]
-
-[role="mb-4"]
-Lightbox supports image groups. Click on the images below to see how a
-lightbox manages a group of images.
-
-.Lightbox block for grouped images
+.Lightbox block for multiple images
 lightbox::example-group[ 395, {data-images-group}, group, role="mb-4 wm-800" ]
-////
+
 
 [role="mt-5"]
 == Carousel
 
-J1 Carousel is based on OWL Carousel V1 in the latest (and unfortunately
-last) version of 1.3.3. OWL Carousel is a clean and neat _jQuery_ slider
-plugin for creating fully responsive and touch-enabled carousel sliders.
+Standard carousels dor J1 Template are based on OWL Carousel *V1* in the
+latest version. OWL Carousel is a clean and neat _jQuery_ slider plugin for
+creating fully responsive and touch-enabled carousels.
 
+[role="mt-4"]
 === Text Carousel
 
 [role="mb-4"]
-A slider or carousel is typically used for displaying images. Still, the
-implementation for the J1 Template supports a lot more sources to be
-displayed as a slide show: simple text, for example.
+A carousel is typically used for displaying images. The implementation for
+the J1 Template supports a lot more sources to be used for a slide show:
+simple text, for example.
 
-.Text Carousel
+.Simple text
 carousel::demo_text_carousel[role="mb-4"]
 
-Important statements or topics can be placed, e.g., on top of an article or
-a paragraph, to give them better visibility. In one line, you can present
+Important statements or topics can be placed on top of an article or
+a paragraph to give them better visibility. In one line, you can present
 many facts to know animated for the reader's attention within a single
 line. No much space is needed!
 
-=== Parallax Text Carousel
+[role="mt-4"]
+=== Parallax text
 
-[role="mb-4"]
 A more eye-minded type of text-based slide show is a parallax text slider. If
 you want to emphasize your statements focussing the meaning, this kind of a
 slide show may be interesting. Image-based slide shows may draw off the
 reader's attention from the text, therefore a pure text-based presentation
 maybe the better choice.
 
-.Parallax Text
+.Parallax effect
 carousel::demo_text_carousel_parallax[role="mb-4"]
 
+[role="mt-4"]
 === Image Carousel
 
 Carousels are mostly used for pictures data to animate the images as a series.
 Find with the following some examples of how to use a carousel for your image
 data.
 
-A simple image show is useful, for example, as an animated (or not animated)
-banner presenting exciting things about your site or the products offered.
+A image carousel typically consists of a container with images and a navigation
+system, including buttons, arrows, or dots that allow users to move back and
+forth between images or select a specific image.
+
+Image carousels can also include animation effects, such as fade-in or
+slide-in transitions between images, to make the presentation more visually
+appealing.
 
 .Image Carousel
-carousel::demo_simple[role="mb-4"]
-
-
-[role="mt-5"]
-== Slick Carousel
-
-_Slick_ is a popular jQuery plugin for creating responsive and fully
-customizable carousels. It allows developers to easily create beautiful
-and dynamic carousels that can display images, videos, or any other type
-of content in a visually appealing way. The plugin is designed to be
-lightweight, fast, and easy to use, making it a popular choice for all web
-developers. It has many features, including multiple navigation options,
-lazy loading, or autoplay. Slick carousels are compatible with all modern
-browsers and devices, making it a great choice to create a responsive and
-mobile-friendly website.
-
-=== Image Carousel
-
-[role="mb-4"]
-An _Slick_ image carousel typically consists of a container with images and
-a navigation system, including buttons, arrows, or dots that allow users to
-move back and forth between images or select a specific image. Image carousels
-can also include animation effects, such as fade-in or slide-in transitions
-between images, to make the presentation more engaging and visually appealing.
-
-.Carousel + Arrows + Dots + Captions + Lightbox
 slick::image_carousel_full[role="mb-5"]
 
+[role="mt-4"]
 === Carousel from Collections
 
 [role="mb-4"]
 A carousel from a collection for J1 Template is a *pre-defined* carousel
 type to display collection *articles* on a webpage as a carousel. Collection
-carousels pull content from a specific *collection*. All Carousels
-for collections display the article image and a link to the article as a
-caption. All Slick carousels for the J1 Template can be easily customized in
+carousels pull content from a specific *collection*. All Carousels for
+collections display the article image and a link to the article as a
+caption. All carousels for the J1 Template can be easily customized in
 various ways, such as changing the slider speed, or the navigation options
 like *Arrows* and *Dots*.
 
-.Collection Biography + Arrows + Dots + Gutters
+.Collection Biography
 slick::collection_carousel_biography[role="mb-5"]
 
-[#masterSlider]
+
 [role="mt-4"]
-== Master Slider
+== Slider
 
-The Javascript tool _Master Slider_ is a 3rd party plugin fully integrated
-into the J1 Template by the module `masterslider`. J1 Template uses the
-*free* version of Master Slider (MS Lite). The Lite version does *not* support
-all features: the functionality of  *filters*, *layouts* are limited and no
-*overlay* techniques are supported by the MS Lite version.
+_Masterslider_ is a Query plugin fully integrated into the J1 Template.
+Jekyll One uses the *free* version of Masterslider well-known as *MS Lite*.
+The lite version does *not* support all features of the *full* product.
+The functionality of *filters*, *layouts* are limited and *no* overlay
+techniques are supported by the MS Lite version.
 
-[#thumbImages]
-=== Slider using ThumbImages
+[role="mt-4"]
+=== Slider using Thumbs
 
 To give the users better control over a slideshow, sliders provide complex UI
-elements like *thumbs* placed side-by-side (left|right), at the top, or at
+elements like *thumbs* placed side-by-side leftor right at the top, or at
 the bottom of a slideshow. Find two examples to control a slideshow by
 *thumb images*.
 
-.Slider using ThumbImages
+.ThumbImage controls
 masterslider::ms_00004[role="mb-5"]
 
-[#thumbInfo]
-=== Slider using ThumbInfo
-
-To give the users better control over a slideshow, MS Slider provides
-complex UI elements like thumbs placed side-by-side (left|right), at the
-top, or at the bottom of a slideshow.
-
-.Slider using ThumbInfo
+.ThumbInfo controls
 masterslider::ms_00007[role="mb-5"]
 
 
 [role="mt-5"]
-== JustifiedGallery
+== Galleries
 
 link:{url-justified-gallery--home}[JustifiedGallery, {browser-window--new}]
-is a great _jQuery_ Plugin to create responsive, infinite, and high-quality
-justified image galleries. J1 Template combines the Gallery with the lightboxes
+is a great _jQuery_ Plugin to create responsive and high-quality justified
+image galleries. J1 Template combines the Gallery with the lightboxes
 supported to enlarge the images of a gallery. See the gallery in action; and
 for sure, all that you see is even responsive. Change the size of your current
 browser window, by width or height to see what will happen!
 
-.Masonry Grid Gallery
+.Masonry grid Gallery
 gallery::jg_customizer[role="mb-5"]

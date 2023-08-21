@@ -76,6 +76,9 @@ searching at Google but offers additional features to do searches more
 specifically - if wanted. QuickSearch provides an easy-to-use query language
 for better results - with no advertising if wanted!
 
+mdi:clock-time-five-outline[24px, md-gray mt-4 mr-2]
+*15 Minutes* to read
+
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 [role="mt-4"]
