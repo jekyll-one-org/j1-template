@@ -6,10 +6,11 @@ tagline:                                Viewed Best On All Devices
 date:                                   2020-11-09
 #last_modified:                         2023-01-01
 description: >
-                                        J1 Template supports a new design for responsive tables
-                                        based on Bootstrap. The approach used is using pure CSS
-                                        styles on top of the classic Bootstrap styles for simplicity
-                                        and portability to be viewed best  on all devices and browsers.
+                                        J1 Templatesupports a new design for responsive tables
+                                        based on Bootstrap. The approach used by J1 Template is
+                                        using pure CSS styles on top of the classic Bootstrap
+                                        styles for simplicity and portability to be viewed best
+                                        on all devices and browsers.
 keywords: >
                                         open source, free, template, jekyll, jekyllone, web,
                                         sites, static, jamstack, bootstrap,
@@ -26,7 +27,7 @@ image:
 regenerate:                             false
 permalink:                              /pages/public/learn/roundtrip/responsive_tables/
 
-resources:                              [ animate, clipboard, rouge ]
+resources:                              [ animate, clipboard, lightbox, rouge ]
 resource_options:
   - attic:
       slides:
@@ -60,10 +61,11 @@ resource_options:
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [role="dropcap"]
-Creating a design for responsive tables is challenging. J1 Template supports
-a new design for responsive tables based on Bootstrap. The approach used is
-based on pure CSS styles on top of the classic Bootstrap tags for simplicity
-and portability to be viewed best on all devices and browsers.
+Creating a design for responsive tables is challenging. The Jekyll Theme
+JekyllOne supports a new design for responsive tables based on Bootstrap.
+The approach used by J1 Template is based on pure CSS styles on top of the
+classic Bootstrap tags for simplicity and portability to be viewed best
+on all devices and browsers.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
@@ -80,38 +82,37 @@ needs for tables viewed on desktop and mobile devices, two types of
 |Style |Type |Description
 
 |`rtable`
-|*B Table*
-|B Tables are used by J1 Template for default. Those tables are using the
+|*R Table (J1)*
+|J Table are used by J1 Template for default. Those tables are using the
 *responsive text* feature (see link:{url-roundtrip--typography}[Typography])
-of Bootstrap with no additional CSS classes applied. For smaller viewports,
-the text scales down and should fit the cells automatically. The default
-text size for J1 is `r-text-300`.
+with no additional CSS classes to be applied. For smaller viewports, the text
+scales down and should fit the cells automatically. The default text size for
+J1 is `r-text-300`.
 
 |`table-responsive`
-|*R Table*
+|*B Table (Bootstrap)*
 |If adding the class `table-responsive`, it creates a responsive table based
-on *additional* Bootstrap CSS styles.  Making any table responsive across
-all viewports, the additional class `table-responsive` is to applied. For
-specific Bootstrap breakpoints, the breakpoint classes
-`table-responsive-{lg \| sm \| md \| lg \| xl}` are available to have better
-control on what viewport sizes tables are being transformed.
+on Bootstrap CSS styles. The table will then scroll horizontally on small
+devices. Making any table responsive across all viewports, the additional
+class `table-responsive` is to applied. For specific (Bootstrap) breakpoints,
+the classes `table-responsive-{lg \| sm \| md \| lg \| xl}` are available to
+have better control on what viewport sizes tables are being transformed.
 
 |===
 
-TIP: To see the transformation on a table in action, resize for desktop
-devices the browser window smaller than *768px* to transform for mobiles or
-tablets.
+To see the transformation on a table in action, resize for desktop devices the
+browser window or use a device the viewport is smaller than 768px (mobiles or
+tablets).
 
 
 [role="mt-5"]
-== Bootstrap Tables
+== Table 2-column
 
 Tables are widely used for documentation pages. Below, simple 2-column tables
 are used to explain some of the Jekyll variables for templating your content
 pages.
 
-[bs-table-2-column-fixed]
-=== Fixed font size
+=== Bootstrap table
 
 Bootstrap tables support tables to be scrolled horizontally on smaller
 viewports. From a specified breakpoint and up, the table will behave
@@ -157,10 +158,6 @@ Post's front matter by specifying a new date/time in the format
 
 |===
 
-
-[bs-table-2-column-responsive]
-===  Responsive font size
-
 .Bootstrap using responsive text size
 [source, asciidoc, role="noclip"]
 ----
@@ -198,8 +195,8 @@ Post's front matter by specifying a new date/time in the format
 
 |===
 
-[role="mt-4"]
-== Responsive Tables
+
+=== Responsive table
 
 Responsive tables *rebuild* a table. The header is set to invisible, and
 all columns get vertically *stacked as rows*.
@@ -278,7 +275,7 @@ Post's front matter by specifying a new date/time in the format
 
 |===
 
-////
+
 [role="mt-5"]
 == Tables multi-column
 
@@ -290,7 +287,6 @@ available to better control over what viewport sizes table are transformed.
 From a specified breakpoint and up, the table will behave normally
 and do not scroll horizontally.
 
-[bs-table-multi-column]
 === Bootstrap table
 
 Bootstrap responsive tables make use of the CSS `overflow-x: auto`, which
@@ -368,7 +364,6 @@ the form `#RRGGBB`
 
 |===
 
-[role="mt-4"]
 === Responsive table
 
 .R Table using fixed text size `no-rtext`
@@ -440,7 +435,7 @@ Alternatively, the color can be configured as (hexadecimal) RGB valuess of
 the form `#RRGGBB`
 
 |===
-////
+
 
 [role="mt-5"]
 == What next
@@ -452,8 +447,8 @@ do for your Web Site.
 J1 Template offers various unique functionalities compared to other Jekyll
 themes and templates. Bootstrap themes for the J1 Template are based on the
 free and open-source CSS front-end framework Bootstrap of version V5. The
-Bootstrap themes for the J1 enable the presentation of different skins of
-the same site using already prepared Bootstrap CSS templates.
+Bootstrap themes for the J1 enable the presentation of different versions
+(skins) of the same site using already prepared Bootstrap CSS templates.
 
 Using Bootstrap themes results in a uniform appearance for the content in
 terms of the overall layout, text, tables, and form elements across all

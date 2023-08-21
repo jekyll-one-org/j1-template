@@ -1,96 +1,14 @@
----
-title:                                  Rouge
-title_extention:                        Ruby themeable syntax highlighter for J1 Template
-tagline:                                Code Highlighter
-
-date:                                   2023-07-08
-#last_modified:                         2023-01-01
-description: >
-
-                                        Rouge is a themeable syntax highlighter fully integrated by
-                                        J1 Template. The highlighter supports 100+ languages usaable
-                                        for all current browsers.
-keywords: >
-                                        open source, free, template, jekyll, jekyllone, web,
-                                        sites, static, jamstack, bootstrap,
-                                        highlighter, rouge
-
-categories:                             [ Roundtrip ]
-tags:                                   [ Module, Rouge ]
-
-image:
-  path:                                 /assets/images/modules/attics/1920x1280/mohammad-rahmani.jpg
-  width:                                1920
-  height:                               1280
-
-regenerate:                             true
-permalink:                              /pages/public/learn/roundtrip/rouge/
-
-resources:                              [ animate, clipboard, rouge ]
-resource_options:
-  - attic:
-      slides:
-        - url:                          /assets/images/modules/attics/1920x1280/mohammad-rahmani.jpg
-          alt:                          Photo by Mohammad Rahmani on Unsplash
-          badge:
-            type:                       unsplash
-            author:                     Mohammad Rahmani
-            href:                       https://unsplash.com/de/@afgprogrammer
----
-
-// Page Initializer
-// =============================================================================
-// Enable the Liquid Preprocessor
-:page-liquid:
-
-// Set (local) page attributes here
-// -----------------------------------------------------------------------------
-// :page--attr:                         <attr-value>
-
-//  Load Liquid procedures
-// -----------------------------------------------------------------------------
-{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
-
-// Load page attributes
-// -----------------------------------------------------------------------------
-{% include {{load_attributes}} scope="all" %}
-
-// Page content
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-[role="dropcap"]
-
-In web pages, a code block refers to a section of code typically enclosed
-within special HTML or programming language tags to indicate that the content
-inside should be interpreted as code and not regular text. These code blocks
-are often used to display and format HTML, CSS, JavaScript, or other
-programming code snippets on a webpage.
-
-Rouge is a native Ruby themeable syntax highlighter integrated width J1
-Template. The highlighter supports 100+ different languages and generates
-HTML output using the 256 standard ANSI colors displayed by all current
-browsers.
-
-Find available themes for selected languages to see how highlighting works
-using Rouge.
-
-mdi:clock-time-five-outline[24px, md-gray mt-4 mr-2]
-*3 Minutes* to read
-
-// Include sub-documents (if any)
-// -----------------------------------------------------------------------------
-[role="mt-5"]
 == Select a Theme
 
-For the default themes *Uno* of J1 Template, the following _Rouge_ themes
+For the default themes `Uno` of J1 Template, the following _Rouge_ themes
 are used:
 
-* light theme -- based on the Rouge *Igor* theme `igorpro`
-* dark theme -- based on the Rouge *Monokai* theme `monokai.sublime`
+* theme_light: based on theme `igorpro`
+* theme_dark:  based on theme `monokai.sublime`
 
 The *default* themes used for the J1 Template can be configured with
-the *template config* file *j1_config* `~/_data/j1_config.yml`.
+the global *template config* file `~/_data/j1_config.yml`.
 
-.Template setting for *Rouge*
 [source, yaml]
 ----
 # ------------------------------------------------------------------------------
@@ -102,11 +20,11 @@ rouge:
   theme_dark:                           uno.dark
 ----
 
-To preview *all* themes supported by *J1 Template*, make your selection from
-the button *AVAILABLE THEMES* below.
+To preview *all* themes supported by *J1 Template*, make your selection
+from the button *AVAILABLE THEMES* below.
 
 ++++
-<div class="btn-group speak2me-ignore">
+<div class="btn-group">
   <!-- See: https://stackoverflow.com/questions/47242702/force-bootstrap-dropdown-menu-to-always-display-at-the-bottom-and-allow-it-go-of -->
   <!-- NOTE: control the behaviour of popper.js for positioning -->
   <!-- NOTE: set attribute data-flip="false" to open the SELECT list at the BOTTOM of the BUTTON -->
@@ -146,17 +64,20 @@ the button *AVAILABLE THEMES* below.
 <div id="selected" class="mt-1 mb-3"></div>
 ++++
 
-== Render Examples
+=== Liquid code
 
-Programming languages have specific syntax rules and conventions,
-so code highlighting is tailored to each language. For example, in a typical
-JavaScript syntax highlighting scheme, keywords like `if`, `for`, and
-`function` may be displayed in one color, while variables and strings are
-displayed in another.
+[source, liquid]
+----
+Hello {{ 'now' | date: "%Y %h" }}
 
-=== Javascript Code
+{% comment %} if item.quantity is 4... {% endcomment %}
+{% for i in (1..item.quantity) %}
+  {{ i }}
+{% endfor %}
+----
 
-.Displaying Javascript code
+=== Javascript code
+
 [source, javascript]
 ----
 // helper functions
@@ -174,24 +95,8 @@ function styleSheetLoaded(styleSheet) {
 }
 ----
 
-=== Liquid Code
+=== Ruby code
 
-.Displaying Liquid code
-{% raw %}
-[source, liquid]
-----
-Hello {{ 'now' | date: "%Y %h" }}
-
-{% comment %} if item.quantity is 4... {% endcomment %}
-{% for i in (1..item.quantity) %}
-  {{ i }}
-{% endfor %}
-----
-{% endraw %}
-
-=== Ruby Code
-
-.Displaying Ruby code
 [source, ruby]
 ----
 require 'asciidoctor/extensions' unless RUBY_ENGINE == 'opal'
@@ -211,23 +116,4 @@ Asciidoctor::Extensions.register do
   block_macro J1BlockMacro
 end
 ----
-<1> don't miss to load the Ruby GEM *Asciidoctor*
-
-
-[role="mt-5"]
-== What next
-
-The search option for the J1 Template is based on the search engine Lunr and
-is fully integrated with the template. Lunr is designed to be lightweight
-yet full-featured to provide users with a great search experience. Using
-Lunr for a Jekyll website, there is no need to integrate complex external,
-server-sided search engines like Google or Bing.
-
-Visitors should be able to search your site to find pages and posts they
-are interested in. Usability is one of the top criteria for all visitors
-browsing your site. A good user experience and excellent content are key
-factors for the success of a website. Nothing in this business is guaranteed,
-but user experience efforts are good reasons your readers will return.
-
-Check what is searching a J1 website all about at
-link:{url-roundtrip--quicksearch}[Lunr Search].
+<1> don't miss to load the Asciidoctor ruby
