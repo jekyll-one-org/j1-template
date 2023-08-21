@@ -18,7 +18,7 @@ series:                                 Featured
 comments:                               false
 regenerate:                             false
 
-resources:                              [ animate, lightbox ]
+resources:                              [ animate, bmd, lightbox ]
 resource_options:
   - attic:
       padding_top:                      600

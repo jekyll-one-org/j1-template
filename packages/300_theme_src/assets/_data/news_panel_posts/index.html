@@ -1,0 +1,48 @@
+---
+layout:                                 news_panel_posts
+# title:                                scroller pages
+tagline:                                scroller page
+description: >
+                                        Create paginator pages for all posts.
+                                        Used for infinite scroll for the news panel (home page)
+
+categories:                             []
+tags:                                   []
+
+pagination:
+  enabled:                              true
+  per_page:                             2
+  permalink:                            /page:num/
+
+sort:                                   date
+toc:                                    false
+
+robots:
+  index:                                false
+  follow:                               false
+
+sitemap:                                false
+exclude_from_search:                    true
+
+analytics:                              false
+comments:                               false
+
+regenerate:                             true                                    # needed to update the pagination pages (infinite scroll)
+
+resources:                              []
+resource_options:                       []
+---
+
+<pre>
+
+  This page is created by the layout: {{ page.layout }}.
+
+  If this text is displayed (instead of the home page expected),
+  something went  wrong with the layout definitions. Check  the
+  output of the Jekyll engine building this site.
+
+  Check the  contents   of folder _layouts. Verify  if the base
+  layout  "{{ page.layout }}" exists  and the  referring  chain
+  (inheritance) is correct.
+
+</pre>

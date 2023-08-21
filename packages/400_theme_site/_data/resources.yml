@@ -1742,7 +1742,7 @@ resources:
       data:
         css:                            [ modules/speak2me/css/speak2me ]
         files:                          [ adapter/js/speak2me.js ]
-        js:                             [ modules/speak2me/js/speak2me ]
+        js:                             []
         init_function:                  [ j1.adapter.speak2me.init ]
 
 # ------------------------------------------------------------------------------

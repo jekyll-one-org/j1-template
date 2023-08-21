@@ -87,12 +87,14 @@
       {% endif %}
 
       <!-- place blog post HEADLINE -->
-      <div class="post-headline mt-4" data-speak2me-ignore>
+      <div class="post-headline mt-4">
         {% if language == "en" %}
-          <h1 class="notoc">{{ page.date | localize: "%Y %B, %e" }}</h1>
+          <!-- h1 class="notoc">{{ page.date | localize: "%Y %B, %e" }}</h1 -->
+          <h1 id="{{1000000 | rand}}">{{ page.date | localize: "%Y %B, %e" }}</h1>
         {% endif %}
         {% if language == "de" %}
-          <h1 class="notoc">{{ page.date | localize: "%-d. %B %Y" }}</h1>
+          <!-- h1 class="notoc">{{ page.date | localize: "%-d. %B %Y" }}</h1 -->
+          <h1 id="{{1000000 | rand}}">{{ page.date | localize: "%-d. %B %Y" }}</h1>
         {% endif %}
       </div>
 

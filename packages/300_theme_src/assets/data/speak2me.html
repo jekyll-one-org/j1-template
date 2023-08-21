@@ -147,7 +147,8 @@ exclude_from_search:                    true
               id="speak_button"
               class="btn btn-{{speak2me_options.modal.settings.speak_button_style}} btn-sm"
               style="min-width: 180px"
-              onclick="j1.adapter.speak2me.speak('{{speak2me_options.speechSelector}}')">
+              onclick="j1.adapter.speak2me.speak('{{speak2me_options.speechSelector}}')"
+              data-bs-dismiss="modal">
               <i class="mdib mdib-speaker mdib-sm mr-2"></i>
               {{speak2me_options.modal.settings.speak_button_text}}
             </button>
@@ -157,7 +158,8 @@ exclude_from_search:                    true
               id="stop_button"
               class="btn btn-{{speak2me_options.modal.settings.stop_button_style}} btn-sm"
               style="min-width: 180px"
-              onclick="j1.adapter.speak2me.stop()">
+              onclick="j1.adapter.speak2me.stop()"
+              data-bs-dismiss="modal">
               <i class="mdib mdib-speaker-off mdib-sm mr-2"></i>
               {{speak2me_options.modal.settings.stop_button_text}}
             </button>
