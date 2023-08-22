@@ -128,9 +128,7 @@ settings:
                                           engine optimization and social media integration, making it easy to
                                           get your site off the ground and running.
                                         </p>
-                                        <p class="fw-bold">
-                                          Explore what's possible using static webs.
-                                        </p>
+                                        <p class="mt-4 fw-bold">Explore what is possible when using static webs.</p>
               buttons:
 
                 - name:                 Roundtrip

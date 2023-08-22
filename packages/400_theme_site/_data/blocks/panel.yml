@@ -413,7 +413,7 @@ settings:
                                           People quite often ask if static websites make sense for
                                           anything beyond a one-page website. Some others see in
                                           static websites the stone age of the World Wide Web.
-                                          What's about static websites today? What's achievable?
+                                          What is achievable today?
                                         </p>
                                         <p>
                                           This board highlights top features, which make static webs
@@ -422,18 +422,16 @@ settings:
                                         </p>
                                         <ul>
                                           <li>
-                                            Current Technology and Design. Excellent performance on all devices.
+                                            <p style="margin-bottom: 0;">Current Technology and Design. Excellent performance on all devices.</p>
                                           </li>
                                           <li>
-                                            Fully Responsive. Best results on PCs, Tablets, and SmartPhones.
+                                            <p style="margin-bottom: 0;">Fully Responsive. Best results on PCs, Tablets, and SmartPhones.</p>
                                           </li>
                                           <li>
-                                            Start in no time. No programming is needed using Jekyll One.
+                                            <p style="margin-bottom: 0;">Start in no time. No programming is needed using Jekyll One.</p>
                                           </li>
                                         </ul>
-                                        <p class="fw-bold mb-4">
-                                          Explore what the J1 Template system can do for your next website.
-                                        </p>
+                                        <p class="fw-bold mt-4 mb-5">Explore what the J1 Template system can do for your next website.</p>
 
         wave:
           top:
@@ -746,10 +744,7 @@ settings:
                                           blog is an excellent example of how J1 and Jekyll can be
                                           used for blogging.
                                         </p>
-                                        <p class="fw-bold mb-4">
-                                          Read more regarding how Jekyll can be used for the powerful
-                                          websites of today.
-                                        </p>
+                                        <p class="fw-bold mb-4">Read more on how Jekyll can be used for the powerful websites of today.</p>
         wave:
           top:
             enabled:                      false

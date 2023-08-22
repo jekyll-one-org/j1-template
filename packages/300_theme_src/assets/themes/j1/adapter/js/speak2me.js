@@ -92,15 +92,21 @@ var environment       = '{{environment}}';
 var cookie_names      = j1.getCookieNames();
 var user_state        = j1.readCookie(cookie_names.user_state);
 var state             = 'not_started';
+var isFirefox         = /Firefox/i.test(navigator.userAgent);
 var chrome            = /chrome/i.test( navigator.userAgent );
-var edge              = /Edg/i.test( navigator.userAgent );
-var isChrome          = ((chrome) && (!edge));
+var isEdge            = /Edg/i.test(navigator.userAgent);
+var isOpera           = /OPR/i.test(navigator.userAgent);
+var isAvast           = /Avast/i.test(navigator.userAgent);
+var isChrome          = ((chrome) && (!isEdge));
 var ttsDisabled       = false;
+var isMobile          = (window.orientation !== undefined) ? true :false;       // NOTE: window.orientation is DEPRECATED
+// var isMobile       = (screen.orientation.type == 'portrait-secondary') ? true : false;
 
 var frontmatterOptions;
 var speak2meDefaults;
 var speak2meSettings;
 var speak2meOptions;
+var speak2meModal;
 var _this;
 var logger;
 var logText;
@@ -166,13 +172,52 @@ var Events = {
       var dependencies_met_page_ready = setInterval (function (options) {
         var pageState     = $('#no_flicker').css("display");
         var pageVisible   = (pageState == 'block') ? true : false;
-        var speak2meModal;
+        var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-        if (j1.getState() === 'finished' && pageVisible) {
+        if (j1.getState() === 'finished' && pageVisible && atticFinished) {
+
+          if (isMobile) {
+            console.log('module speak2me is currently not supported for the Opera browser');
+            $('#quickLinksSpeakButton').hide();
+            clearInterval(dependencies_met_page_ready);
+            return;
+          }
+
+          if (isOpera) {
+            console.log('module speak2me is currently not supported for the Firefox browser');
+            $('#quickLinksSpeakButton').hide();
+            clearInterval(dependencies_met_page_ready);
+            return;
+          }
+
+          if (isAvast) {
+            console.log('module speak2me is currently not supported for the Avast Secure browser');
+            $('#quickLinksSpeakButton').hide();
+            clearInterval(dependencies_met_page_ready);
+            return;
+          }
+
+          if (isFirefox) {
+            console.log('module speak2me is currently not supported on mobile devices');
+            $('#quickLinksSpeakButton').hide();
+            clearInterval(dependencies_met_page_ready);
+            return;
+          }
+
+          if (isChrome) {
+            var chromeWorkaround = setInterval(function () {
+              if ($().speak2me('isSpeaking')) {
+                $().speak2me('pause').speak2me('resume');
+                logger.debug('\n' + 'speak: send pause-resumed');
+              }
+            }, 10000);
+          }
 
           if (ttsDisabled) {
             logger.warn('\n' + 'tts detected: disabled');
             $('#quickLinksSpeakButton').hide();
+            clearInterval(dependencies_met_page_ready);
+            return;
           } else {
             speak2meModal = document.createElement('div');
             speak2meModal.id = speak2meOptions.dialogContainerID;
@@ -200,8 +245,8 @@ var Events = {
           // on 'show'
           // -------------------------------------------------------------------
           $('#speak2me_container').on('show.bs.modal', function () {
-            if (isChrome) {
-              logger.warn('\n' + 'chrome browser detected: pause|resume buttons disabled');
+            if (isChrome || isEdge) {
+              logger.warn('\n' + 'chromium browser detected: pause|resume buttons disabled');
               $('#pause_button').hide();
               $('#resume_button').hide();
             }
@@ -224,15 +269,6 @@ var Events = {
         }
       }, 10);
 
-      if (isChrome) {
-        var chromeWorkaround = setInterval(function () {
-          if ($().speak2me('isSpeaking')) {
-            $().speak2me('pause').speak2me('resume');
-            logger.debug('\n' + 'speak: send pause-resumed');
-          }
-        }, 10000);
-      }
-
     }, // END init
 
     // -------------------------------------------------------------------------
@@ -246,12 +282,13 @@ var Events = {
       // create select element (#voiceSelect) if not already exist
       if (isSelectEmpty) {
         numVoices = $().speak2me('getVoices', obj, 'Select a voice');
+
+        // delete select element (#voiceSelect) if no valid voiuces found
+        if (numVoices === 0) {
+          $(obj).remove();
+        }
       }
-      // delete select element (#voiceSelect) if no valid voiuces found
-      if (numVoices === 0) {
-        $(obj).remove();
-      }
-    },
+    }, // END create
 
     // -------------------------------------------------------------------------
     // showDialog()
@@ -266,7 +303,7 @@ var Events = {
       });
 
       $('#speak2me_container').modal('show');
-    },
+    }, // END showDialog
 
     // -------------------------------------------------------------------------
     // update()
@@ -275,7 +312,7 @@ var Events = {
     update: function (obj, value) {
       var n = parseFloat(value).toFixed(1)
       $(obj).parent().find('span').text(n);
-    },
+    }, // END update
 
     // -------------------------------------------------------------------------
     // speak()
@@ -284,14 +321,14 @@ var Events = {
     speak: function (obj) {
       // Get the parameter values from the input sliders
       //
-      var r = parseFloat(document.getElementById('rate').value);
-      var p = parseFloat(document.getElementById('pitch').value);
-      var v = parseFloat(document.getElementById('volume').value);
+      var rate    = parseFloat(document.getElementById('rate').value);
+      var pitch   = parseFloat(document.getElementById('pitch').value);
+      var volume  = parseFloat(document.getElementById('volume').value);
 
       // Note: Function calls can be perfromed individually or
       // chained together as demonstrated below
       //
-      $(obj).speak2me('rate',r).speak2me('pitch',p).speak2me('volume',v);
+      $(obj).speak2me('rate', rate).speak2me('pitch', pitch).speak2me('volume', volume);
       // $(obj).speak2me('ignore', 'h2','h3');
       var speaker = $(obj).speak2me('speak');
       $(".mdib-speaker").addClass("mdib-spin");
@@ -301,7 +338,7 @@ var Events = {
         console.log('speak2me error:', event);
       });
 
-    },
+    }, // END speak
 
     // -------------------------------------------------------------------------
     // pause()
@@ -310,7 +347,7 @@ var Events = {
     pause: function () {
       $().speak2me('pause');
       $(".mdib-speaker").removeClass("mdib-spin");
-    },
+    }, // END pause
 
     // -------------------------------------------------------------------------
     // resume()
@@ -319,7 +356,7 @@ var Events = {
     resume: function () {
       $().speak2me('resume');
       $(".mdib-speaker").addClass("mdib-spin");
-    },
+    }, // END resume
 
     // -------------------------------------------------------------------------
     // stop()
@@ -328,7 +365,10 @@ var Events = {
     stop: function () {
       $().speak2me('stop');
       $(".mdib-speaker").removeClass("mdib-spin");
-    },
+      // potential workaround, when selected language in voice
+      // selector (dialog) has NOT changed if translation was changed
+      // location.reload();
+    }, // END stop
 
     // -------------------------------------------------------------------------
     // messageHandler()

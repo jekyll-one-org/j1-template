@@ -44,7 +44,9 @@ resource_options:
 // -----------------------------------------------------------------------------
 [role="dropcap"]
 J1 Template is a Bootstrap V5 website template for the static site generator
-Jekyll. The Theme J1 has been developed to create simple but fully configurable
+Jekyll.
+
+The Theme J1 has been developed to create simple but fully configurable
 websites. Jekyll One is a full-featured Theme for Jekyll to create modern
 websites for free.
 

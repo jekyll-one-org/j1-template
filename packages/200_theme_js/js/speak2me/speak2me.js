@@ -37,14 +37,16 @@
   const minWords            = 3;
   const pageScanCycle       = 1000;
   const pageScanLines       = 10000;
-  const isEdge              = /Edg/i.test( navigator.userAgent );
-  const chrome              = /chrome/i.test( navigator.userAgent );
+  const isFirefox           = /Firefox/i.test(navigator.userAgent);
+  const isEdge              = /Edg/i.test(navigator.userAgent);
+  const chrome              = /chrome/i.test(navigator.userAgent);
   const isChrome            = ((chrome) && (!isEdge));
   const voiceUserDefault    = 'Google UK English Female';
   const voiceChromeDefault  = 'Google US English';
   const ignoreProvider      = 'Microsoft';
-  const currentTranslation  = getCookie('googtrans');
+  const defaultLanguage     = 'en-GB';
 
+  var currentTranslation    = getCookie('googtrans');
   var scrollBlockOffset     = 100;
 
   var customOptions         = {};
@@ -123,6 +125,12 @@
     'ja-JP':  'Microsoft Nanami Online (Natural) - Japanese (Japan)',
   };
 
+  var voiceLanguageFirefoxDefault = {
+    'en-GB':  'Microsoft Hazel - English (United Kingdom) (en-GB)',
+    'en-US':  'Microsoft Zira Desktop - English (United States) (en-US)',
+    'de-DE':  'Microsoft Katja Online (Natural) - German (Germany)',
+  }
+
   // -------------------------------------------------------------------------
   // Internal functions
   // -------------------------------------------------------------------------
@@ -165,7 +173,7 @@
       }
     }
     scanSection(0);
-  }
+  } // END scanPage
 
   // merge (configuration) objects
   //
@@ -180,7 +188,7 @@
       }
     }
     return target;
-  }
+  } // END  extend
 
   // get the conten of a Cookie (by its name)
   //
@@ -198,17 +206,17 @@
       }
     }
     return undefined;
-  }
+  } // END getCookie
 
   function voiceTag(prepend,append) {
     this.prepend = prepend;
     this.append = append;
-  }
+  } // END  voiceTag
 
   function voiceObj(name,language) {
     this.name = name;
     this.language = language;
-  }
+  } // END voiceObj
 
   // count the number of words in a string
   //
@@ -223,7 +231,7 @@
     }
 
     return (count);
-  }
+  } // END  wordCount
 
   // This populates the "voices" array with objects that represent the
   // available voices in the current browser. Each object has two
@@ -236,7 +244,8 @@
     for(var i = 0; i<systemVoices.length; i++) {
       voices.push(new voiceObj(systemVoices[i].name, systemVoices[i].lang));
     }
-  }
+  } // END populateVoiceList
+
   populateVoiceList();
 
   if (typeof speechSynthesis !== 'undefined' && speechSynthesis.onvoiceschanged !== undefined) {
@@ -253,7 +262,8 @@
   }
 
   if ( currentTranslation === undefined ) {
-      currentLanguage = 'en-US'
+    // currentLanguage = 'en-US'
+    currentLanguage = defaultLanguage;
   } else {
     var translation = currentTranslation.split('/');
     if ( translation[2] == 'en') {
@@ -291,6 +301,10 @@
 
   if (isEdge) {
     var voiceLanguageDefault = voiceLanguageMicrosoftDefault[currentLanguage];
+  }
+
+  if (isFirefox) {
+    var voiceLanguageDefault = voiceLanguageFirefoxDefault[currentLanguage];
   }
 
   // -------------------------------------------------------------------------
@@ -405,31 +419,15 @@
                 volume = volumeDefault;
             }
 
-            // jadams
-            // This is where the magic happens. Well, not magic, but at
-            // least we can finally hear something. After the line that
-            // fixes the Windows Chrome quirk, the custom voice is set
-            // if one has been chosen.
+            // create and configure the utterance object
             //
             speech = new SpeechSynthesisUtterance();
-            speech.rate               = rate;
-            speech.pitch              = pitch;
-            speech.volume             = volume;
-            speech.voice              = undefined;
+            speech.rate                   = rate;
+            speech.pitch                  = pitch;
+            speech.volume                 = volume;
+            speech.voice                  = speechSynthesis.getVoices().filter(function(voice) {return voice.name == voiceLanguageDefault;})[0];
             speech.previousScrollPosition = 0;
 
-            // jadams
-            if (isChrome) {
-              speech.voice = speechSynthesis.getVoices().filter(function(voice) { return voice.name == voiceLanguageDefault; })[0];
-  //          speech.voice = speechSynthesis.getVoices().filter(function(voice) { return voice.name == voiceChromeDefault; })[0];
-            };
-
-            // jadams
-            if (isEdge) {
-              speech.voice = speechSynthesis.getVoices().filter(function(voice) { return voice.name == voiceLanguageDefault; })[0];
-            };
-
-            // jadams
             processTextChunks(speech, toSpeak);
             clearInterval(processSpeech);
           }
@@ -650,6 +648,7 @@
           if (chunkCounter == chunkCounterMax || userStoppedSpeaking ) {
             chunkCounter        = 0;
             userStoppedSpeaking = false;
+            chunkSpoken = false;
 
             (speaker.$paragraph !== undefined) && speaker.$paragraph.removeClass('speak-highlighted');
 

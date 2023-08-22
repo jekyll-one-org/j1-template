@@ -42,10 +42,11 @@ resource_options:
 // -----------------------------------------------------------------------------
 [role="dropcap"]
 A static site serves the content straight to the user as it is stored on
-the server-side. To put it in another way, in opposition to WordPress
-which use a database to load dynamic content, a static site will display
-the same content to every user as it will directly load the HTML files
-on the server.
+the server-side.
+
+Contrary to WordPress, which uses a database to load dynamic content, a
+static site will display the content immediately as it will directly load
+the HTML files from the server.
 
 excerpt__end
 
