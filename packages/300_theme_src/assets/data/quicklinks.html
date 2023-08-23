@@ -51,7 +51,6 @@ exclude_from_search:                    true
 {% assign toggler_defaults          = modules.defaults.theme_toggler.defaults %}
 {% assign toggler_settings          = modules.theme_toggler.settings %}
 
-
 {% comment %} Modules disabled
 --------------------------------------------------------------------------------
 {% assign nbi_defaults              = modules.defaults.nbinteract.defaults %}
@@ -75,7 +74,6 @@ exclude_from_search:                    true
 {% assign consent_options           = consent_defaults | merge: consent_settings %}
 {% assign toggler_options           = toggler_defaults | merge: toggler_settings %}
 {% assign translator_options        = translator_defaults | merge: translator_settings %}
-{% assign speak2me_options          = speak2me_defaults | merge: speak2me_settings %}
 
 {% comment %} Control Center disabled
 --------------------------------------------------------------------------------
@@ -98,27 +96,29 @@ exclude_from_search:                    true
 {% assign home_url                  = quicklinks_options.home_url %}
 {% assign home_label                = quicklinks_options.home_label %}
 
-{% assign back_icon                 = quicklinks_options.back_icon %}
-{% assign back_url                  = quicklinks_options.back_url %}
-{% assign back_label                = quicklinks_options.back_label %}
-
 {% assign disqus_icon               = quicklinks_options.disqus_icon %}
-{% assign github_icon               = quicklinks_options.github_icon %}
-{% assign patreon_icon              = quicklinks_options.patreon_icon %}
-{% assign facebook_icon             = quicklinks_options.facebook_icon %}
-{% assign twitter_icon              = quicklinks_options.twitter_icon %}
-
 {% assign disqus_url                = quicklinks_options.disqus_url %}
-{% assign github_url                = quicklinks_options.github_url %}
-{% assign patreon_url               = quicklinks_options.patreon_url %}
-{% assign facebook_url              = quicklinks_options.facebook_url %}
-{% assign twitter_url               = quicklinks_options.twitter_url %}
-
 {% assign disqus_label              = quicklinks_options.disqus_label %}
+
+{% assign github_icon               = quicklinks_options.github_icon %}
+{% assign github_url                = quicklinks_options.github_url %}
 {% assign github_label              = quicklinks_options.github_label %}
+
+{% assign patreon_icon              = quicklinks_options.patreon_icon %}
+{% assign patreon_url               = quicklinks_options.patreon_url %}
 {% assign patreon_label             = quicklinks_options.patreon_label %}
+
+{% assign facebook_icon             = quicklinks_options.facebook_icon %}
+{% assign facebook_url              = quicklinks_options.facebook_url %}
 {% assign facebook_label            = quicklinks_options.facebook_label %}
+
+{% assign twitter_icon              = quicklinks_options.twitter_icon %}
+{% assign twitter_url               = quicklinks_options.twitter_url %}
 {% assign twitter_label             = quicklinks_options.twitter_label %}
+
+{% assign buymeacoffee_icon        = quicklinks_options.buymeacoffee_icon %}
+{% assign buymeacoffee_url         = quicklinks_options.buymeacoffee_url %}
+{% assign buymeacoffee_label       = quicklinks_options.buymeacoffee_label %}
 
 {% comment %} Action buttons
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -141,6 +141,7 @@ exclude_from_search:                    true
 {% assign theme_toggler_icon        = quicklinks_options.theme_toggler_icon %}
 {% assign theme_toggler_action      = quicklinks_options.theme_toggler_action %}
 {% assign theme_toggler_label       = quicklinks_options.theme_toggler_label %}
+
 
 {% comment %} Unused buttons
 --------------------------------------------------------------------------------
@@ -168,15 +169,15 @@ exclude_from_search:                    true
 {% assign control_center_url        = cc_app_config_options.quicklinks_url %}
 
 {% comment %} Show|Hide QuickLink icons
--------------------------------------------------------------------------------- {% endcomment %}
-{% assign show_quicksearch_icon     = lunr_search_options.enabled  %}
-{% assign show_translator_icon      = translator_options.enabled  %}
-{% assign show_speak2me_icon        = speak2me_options.enabled  %}
-{% assign show_theme_toggler_icon   = toggler_options.enabled  %}
-{% assign show_control_center_icon  = cc_app_config_options.enabled %}
-{% assign show_auth_manager_icon    = authentication_enabled  %}
-
 <!-- authentication_enabled: {{ authentication_enabled | debug }} -->
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign show_quicksearch_icon     = lunr_search_options.enabled %}
+{% assign show_translator_icon      = translator_options.enabled %}
+{% assign show_speak2me_icon        = speak2me_options.enabled %}
+{% assign show_theme_toggler_icon   = toggler_options.enabled %}
+
+{% assign show_control_center_icon  = cc_app_config_options.enabled %}
+{% assign show_auth_manager_icon    = authentication_enabled %}
 
 {% comment %} Show|Hide CookieConsent icon
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -242,9 +243,11 @@ exclude_from_search:                    true
 {% endif %}
 
 
+
 {% comment %} Main
 ================================================================================ {% endcomment %}
 <!-- [INFO   ][~/assets/data/quicklinks.html               ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
+<!-- [INFO   ][~/assets/data/quicklinks.html               ] [ fick dich ins knie] -->
 <head>
   <meta name="robots" content="noindex, nofollow">
 </head>
@@ -260,13 +263,13 @@ exclude_from_search:                    true
 
   {% comment %} Link buttons
   ------------------------------------------------------------------------------ {% endcomment %}
-  {% if back_url != "none" %}<li id="quickLinksBackButton" class="nav-icon"><a id="page_back_id" href="{{back_url}}" aria-label="{{back_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{back_icon}} {{icon_size}}"></i></a></li>{% endif %}
   {% if home_url != "none" %}<li id="quickLinksHomeButton" class="nav-icon"><a id="home_id" href="{{home_url}}" aria-label="{{home_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{home_icon}} {{icon_size}}"></i></a></li>{% endif %}
   {% if disqus_url != "none" %}<li id="quickLinksDisqusButton" class="nav-icon"><a id="disqus_id" href="{{disqus_url}}" aria-label="{{disqus_label}}" target="blank"><i class="nav-icon {{icon_family}} {{icon_family}}-{{disqus_icon}} {{icon_size}}"></i></a></li>{% endif %}
   {% if github_url != "none" %}<li id="quickLinksGithubButton" class="nav-icon"><a id="github_id" href="{{github_url}}" aria-label="{{github_label}}" target="blank"><i class="nav-icon {{icon_family}} {{icon_family}}-{{github_icon}} {{icon_size}}"></i></a></li>{% endif %}
   {% if patreon_url != "none" %}<li id="quickLinksPatreonButton" class="nav-icon"><a id="patreon_id" href="{{patreon_url}}" aria-label="{{patreon_label}}" target="blank"><i class="nav-icon {{icon_family}} {{icon_family}}-{{patreon_icon}} {{icon_size}}"></i></a></li>{% endif %}
   {% if facebook_url != "none" %}<li id="quickLinksFacebookButton" class="nav-icon"><a id="facebook_id" href="{{facebook_url}}" aria-label="{{facebook_label}}" target="blank"><i class="nav-icon {{icon_family}} {{icon_family}}-{{facebook_icon}} {{icon_size}}"></i></a></li>{% endif %}
   {% if twitter_url != "none" %}<li id="quickLinksTwitterButton" class="nav-icon"><a id="twitter_id" href="{{twitter_url}}" aria-label="{{twitter_label}}" target="blank"><i class="nav-icon {{icon_family}} {{icon_family}}-{{twitter_icon}} {{icon_size}}"></i></a></li>{% endif %}
+  {% if buymeacoffee_url != "none" %}<li id="quickLinksBuyMeAcoffeebutton" class="nav-icon"><a id="buymeacoffee_id" href="{{buymeacoffee_url}}" target="blank" aria-label="{{buymeacoffee_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{buymeacoffee_icon}} {{icon_size}}"></i></a></li>{% endif %}
 
   {% comment %} Action buttons
   ------------------------------------------------------------------------------ {% endcomment %}

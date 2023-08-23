@@ -105,13 +105,13 @@ packages/400_theme_site/_plugins
 
 packages/400_theme_site/_install
 
-packages/400_theme_site/_config.yml
+# packages/400_theme_site/_config.yml
 
 packages/400_theme_site/apps
 
 packages/400_theme_site/assets
 
-packages/400_theme_site/_data/j1_config.yml
+# packages/400_theme_site/_data/j1_config.yml
 
 packages/400_theme_site/_data/modules/cc.yml
 
