@@ -10,7 +10,9 @@ description: >
                                         J1 Template support valuable features to manage your image-based
                                         content using lightboxes, carousels, sliders, and galleries.
                                         The image modules of J1 Template offer a wide range of complex
-                                        functionality based on powerful open source libraries.
+                                        functionality based on powerful OpenSource libraries like
+                                        Lightbox2, Master Slider, LightGallery, or JustifiedGallery
+                                        for high-end, masonry-styled preview maps.
 keywords: >
                                         open source, free, template, jekyll, jekyllone, web,
                                         sites, static, jamstack, bootstrap,
@@ -80,7 +82,7 @@ Welcome to the preview page focussing on the image module. This page shows
 all the valuable features of the J1 Template to manage your image-based
 content using lightboxes, carousels, sliders, and galleries. The image modules
 of J1 Template offer a wide range of complex functionality based on powerful
-open source libraries like Lightbox2, Master Slider, LightGallery, or
+OpenSource libraries like Lightbox2, Master Slider, LightGallery, or
 JustifiedGallery for high-end, masonry-styled preview maps.
 
 mdi:clock-time-five-outline[24px, md-gray mt-4 mr-2]
@@ -89,11 +91,7 @@ mdi:clock-time-five-outline[24px, md-gray mt-4 mr-2]
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 // [role="notranslate"]
-<<<<<<< HEAD
-[role="mt-4"]
-=======
 [role="mt-5"]
->>>>>>> develop
 == Lightbox blocks
 
 A lightbox is, in general, a helper which displays enlarged, almost
@@ -123,11 +121,7 @@ gallerys or carousels.
 TIP: For details of the default lightbox of J1 Template, see the documentation
 under the link:{url-j1-docs--lightbox-module}[Lightbox module, {browser-window--new}].
 
-<<<<<<< HEAD
-[role="mt-5"]
-=======
 [role="mt-4"]
->>>>>>> develop
 === Lightbox examples
 
 [role="mb-4"]
@@ -158,10 +152,17 @@ gallery::jg_old_times[ role="mb-4 wm-800" ]
 [role="mt-5"]
 == J1 Carousel
 
-J1 Carousel is based on _OWL Carousel V1_ in the latest version. OWL Carousel
-is a clean and neat _jQuery_ slider plugin for creating fully responsive
-and touch-enabled carousel sliders.
+J1 Carousel is based on OWL Carousel V1 in the latest (and unfortunately
+last) version of 1.3.3. OWL Carousel is a clean and neat _jQuery_ slider
+plugin for creating fully responsive and touch-enabled carousel sliders.
 
+////
+NOTE: OWL Carousel V1 is no longer available on the Internet; for an
+unknown reason. Anyway, the J1 Template is using this version of OWL
+Carousel is a build-in carousel module because the software does an excellent
+job, is based on an MIT license with no issues using them for private and
+business use. And offers a lot of great features!
+////
 
 [role="mt-4"]
 === Simple Text Carousel
@@ -171,7 +172,7 @@ A slider or carousel is typically used for displaying images. Still, the
 implementation for the J1 Template supports a lot more sources to be
 displayed as a slide show: simple text, for example.
 
-.Simple Text
+.Text Carousel
 carousel::demo_text_carousel[role="mb-4"]
 
 Important statements or topics can be placed, e.g., on top of an article or
@@ -203,18 +204,14 @@ documentation for the
 link:{url-j1-docs--carousel-module}[Carousel module, {browser-window--new}]
 for more details.
 
-<<<<<<< HEAD
-=== Base Image Carousel
-=======
 [role="mt-4"]
 === Simple Image Carousel
->>>>>>> develop
 
 Carousels are mostly used for pictures data to animate the images as a series.
 Find with the following some examples of how to use a carousel for your image
 data.
 
-A base image show is useful, for example, as an animated (or not animated)
+A simple image show is useful, for example, as an animated (or not animated)
 banner presenting exciting things about your site or the products offered.
 
 .Image Carousel
@@ -225,16 +222,16 @@ carousel::demo_simple[role="mb-4"]
 
 Carousels are used for an exceptionally compact form of image galleries.
 This example shows some pictures having individual caption text and supports
-a lightbox to enlarge images full size. For the example below, the default
-lightbox for Jekyll One is used.
+a lightbox to enlarge images full size. For the example below, an almost simple
+lightbox is used: Lightbox2; or short: lightbox.
 
 .Image Carousel + Lightbox
 carousel::demo_cats[role="mb-3"]
 
-The J1 lightbox module offers a bunch of impressive features for displaying
-images. For example, the module can display all images (of a carousel) as
-a group. If one picture is opened, others are browsed by easy-to-use control
-buttons.
+The J1 module lightbox is a simple Lightbox but offers a bunch of impressive
+features for displaying images. For example, the lightbox can display all
+images (of a carousel) as a group. If one picture is opened in the lightbox,
+others are browsed by easy-to-use control buttons.
 
 [role="mt-4"]
 === One Slide Carousel + Lightbox
@@ -366,11 +363,11 @@ Filters can be used, for example, to *transform* the *style* of the images
 presented by a slider. In this example, the slider images are transformed
 from style *color* to *sepia*.
 
-WARNING: The support of using lightboxes is only available for the MS Lite
-version of J1 Theme. The product versions *MS Lite* and *MS Pro* does not
-support lightboxes on sliders out-of-the-box.
+WARNING: Lightbox support is only available for the MS Lite version of J1
+Theme. The product versions *MS Lite* and *MS Pro* does not support
+Lightboxes on sliders out-of-the-box.
 
-TIP: Click on the lightbox symbol mdi:image-outline[18px, md-gray] in the
+TIP: Click on the Lightbox symbol mdi:image-outline[18px, md-gray] in the
 slides to see the *colored* images configured for the slider.
 
 .Slider using Controls
