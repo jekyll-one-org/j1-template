@@ -98,7 +98,7 @@ defaults:
     #
     placement:                          manual
     autoPlaceAds:                       false
-    autoHideOnUnfilled:                 true
+    autoHideOnUnfilled:                 false
     addBorderOnUnfilled:                true
     checkTrackingProtection:            false
     showErrorPageOnBlocked:             false

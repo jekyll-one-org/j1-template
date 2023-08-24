@@ -332,7 +332,7 @@
 
         // Default values
         //
-        voiceTags['a']                = new voiceTag('Follow the link, ', pause_spoken);
+        voiceTags['a']                = new voiceTag('Link, ', pause_spoken);
         voiceTags['q']                = new voiceTag('', pause_spoken);
         voiceTags['ol']               = new voiceTag('Start of list.', 'End of list. ');
         voiceTags['ul']               = new voiceTag('Start of list.', 'End of list. ');
@@ -479,7 +479,7 @@
           chunks.forEach((chunk, index) => {
             var text        = chunks[index];
             var sectionText = textSlice(text, textSliceLength, minWords);
-            var $paragraph  = $('#main-content').find("p:contains('" + sectionText + "')");
+            var $paragraph  = $('#content').find("p:contains('" + sectionText + "')");
             var offset;
 
             if ($paragraph.length > 0) {
