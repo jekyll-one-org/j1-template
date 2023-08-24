@@ -1,0 +1,88 @@
+---
+layout:                                 default                                 # base layout the page inherits GLOBAL content
+debug:                                  false                                   # enable|disable additional debug information written to (static) content source
+---
+
+{% comment %}
+ # -----------------------------------------------------------------------------
+ #  ~/_layouts/home.html
+ #  Liquid layout template for all pages of content-type HOME
+ #  (landing page ~/index.html)
+ #
+ #  Product/Info:
+ #  https://jekyll.one
+ #
+ #  Copyright (C) 2023 Juergen Adams
+ #
+ #  J1 Theme is licensed under the MIT License.
+ #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ #
+ # -----------------------------------------------------------------------------
+ #  NOTE:
+ #    This is the layout for all content pages of type HOME.
+ #    Layout HOME is based on layout DEFAULT to inherit all
+ #    default (HTML) data used for ALL pages.
+ # -----------------------------------------------------------------------------
+ #  NOTE:
+ #    Do NOT add any CONTENT here.
+ #    For J1 Theme, Liquid procedures are being used intensively. To load
+ #    HTML data for a region (lane), the (Liquid) procedure "content_writer"
+ #    places the components specified in the connected YAML data file
+ #    'home.yml' located in folder: ~/_data/layouts.
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  liquid_var:  {{ liquid_var | debug }}
+ #
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+{% capture default_writer %}themes/{{site.template.name}}/procedures/layouts/default_writer.proc{% endcapture %}
+{% capture content_writer %}themes/{{site.template.name}}/procedures/layouts/content_writer.proc{% endcapture %}
+
+{% comment %} Set global settings
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign environment        = site.environment %}
+
+
+{% comment %} Process YML config data
+================================================================================ {% endcomment %}
+
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign lanes_collate       = site.data.layouts.home.lanes %}
+{% assign rtext               = site.data.j1_config.typography.rtext %}
+
+{% comment %} Set config data
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign page_rtext          = page.rtext %}
+{% assign page_rtext_size     = page.rtext_size %}
+
+
+{% comment %} Main
+-------------------------------------------------------------------------------- {% endcomment %}
+  {% if rtext %}
+    {% assign rtext_size = site.data.j1_config.typography.rtext_size %}
+  {% else %}
+    {% assign rtext_size = 0 %}
+  {% endif %}
+  <!-- [INFO   ] [j1.layout.home.html                   ] [ Resposive text (rtext) detected as: {{rtext_size}} ] -->
+
+  <!-- [INFO   ] [j1.layout.home.html                   ] [ start content processing ] -->
+  {% comment %} Collect the BODY-HEADER region
+  ------------------------------------------------------------------------------ {% endcomment %}
+  <!-- [INFO   ] [j1.layout.home.html                   ] [ call default_writer for region: 'body-header' ] -->
+  <header id="header">
+    {% include  {{default_writer}} region='body-header' items=lanes_collate %}
+  </header>
+  <!-- [INFO   ] [j1.layout.home.html                   ] [ end processing default_writer for region: 'body-header' ] -->
+
+  {% comment %} Collect the BODY-MAIN region
+  ------------------------------------------------------------------------------ {% endcomment %}
+  <!-- [INFO   ] [j1.layout.home.html                   ] [ call content_writer for region: 'body-main' ] -->
+  <main id="content" class="container-fluid g-0 r-text-{{rtext_size}}">
+      {% include  {{content_writer}} region='body-main' items=lanes_collate %}
+  </main>
+  <!-- [INFO   ] [j1.layout.home.html                   ] [ end processing content_writer for region: 'body-main' ] -->
+  <!-- [INFO   ] [j1.layout.home.html                   ] [ end content processing ] -->

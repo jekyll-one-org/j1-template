@@ -75,7 +75,10 @@ using Rouge.
 
 mdi:clock-time-five-outline[24px, md-gray mt-4 mr-2]
 *3 Minutes* to read
+<<<<<<< HEAD
 
+=======
+>>>>>>> develop
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 [role="mt-5"]

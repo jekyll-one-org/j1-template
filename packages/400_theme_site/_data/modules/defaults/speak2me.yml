@@ -50,9 +50,9 @@ defaults:
       voice_speed_min:                  0.1
       voice_speed_max:                  3.0
       voice_speed_step:                 0.1
-      voice_speed_value:                0.9
+      voice_speed_value:                1.0
       voice_speed_label:                Speed
-      voice_speed_max_label:            0.9
+      voice_speed_max_label:            1.0
 
       voice_pitch_min:                  0.1
       voice_pitch_max:                  2.0

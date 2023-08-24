@@ -1,0 +1,39 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/scss/theme_uno/modules/_speak2me.scss
+ #
+ # Product/Info:
+ # http://jekyll.one
+ #
+ # Copyright (C) 2023 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+ # NOTE: Provides styles for the module J1 Rouge (Highlighter)
+ # -----------------------------------------------------------------------------
+*/
+
+// Color settings
+// -----------------------------------------------------------------------------
+@import "../../theme_uno/variables/_colors.scss";
+
+.speak-highlighted {
+  background: $darken-200;
+}
+
+button {
+  margin: 8px 5px 5px 0;
+}
+
+div.settings-area div {
+  margin: 0 0 10px 0;
+}
+
+div.settings-area input {
+  width: 250px;
+}
+
+div.voice-table {
+  display: none;
+}

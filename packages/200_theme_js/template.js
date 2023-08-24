@@ -46,7 +46,6 @@ window.yaml                             = require('js-yaml');
 window.log4javascript                   = require('log4javascript');
 window.liteURL                          = require('lite-url');
 window.platform                         = require('platform');
-// window.articulate                       = require('./js/speak2me/articulate.js');
 
 // Core Libraries - build|required from SOURCE
 // -----------------------------------------------------------------------------
@@ -75,6 +74,7 @@ window.j1.core.scrollSmooth             = require('./js/scroll-smooth/scroll-smo
 
 const J1Tocbot                            = require('./js/tocbot/tocbot.js');
 const J1AttrChangeListener                = require('./js/listen-attribute-changes/attrchange.js');
+const J1Speak2Me                          = require('./js/speak2me/speak2me.js');
 
 // Passing log data over Internet|SeeMe (currently NOT used)
 // -----------------------------------------------------------------------------

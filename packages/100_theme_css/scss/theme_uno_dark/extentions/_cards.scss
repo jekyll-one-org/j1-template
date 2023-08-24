@@ -1,0 +1,36 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/scss/theme_uno/extensions/_cards.scss
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2023 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+ # NOTE: Styles for (extended) cards
+ # NOTE: Cards|Styles, inspired by BS3 Material-Kit
+ # -----------------------------------------------------------------------------
+ # TODO: Should be moved|integrated to|with ~/scss/theme_uno/bootstrap/_cards.scss
+ # TODO: CSS styles should rewritten to SCSS
+ # -----------------------------------------------------------------------------
+ # SPEC:
+ # -----------------------------------------------------------------------------
+*/
+
+@import "../../theme_uno/variables/_colors.scss";
+
+//  BS Overloads
+// -----------------------------------------------------------------------------
+
+// Cards
+// jadams, 2023-08-21:
+// -----------------------------------------------------------------------------
+
+.card-body {
+    color: $gray-dark !important;
+    background-color: $gray-400;
+
+}

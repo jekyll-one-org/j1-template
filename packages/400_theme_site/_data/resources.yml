@@ -374,6 +374,29 @@ resources:
         init_function:                  [ j1.init ]
 
   # ----------------------------------------------------------------------------
+  # Speak2Me
+  # Speech synthesis (TTS)
+  #
+  - name:                               speak2me
+    resource:
+      enabled:                          true
+
+      id:                               speak2me
+      comment:                          Module speak2me
+      region:                           head
+      layout:                           [ all ]
+      required:                         always
+      preload:                          false
+      script_load:                      defer
+      dependencies:                     false
+      pass_init_data:                   true
+      data:
+        css:                            []
+        files:                          [ adapter/js/speak2me.js ]
+        js:                             []
+        init_function:                  [ j1.adapter.speak2me.init ]
+
+  # ----------------------------------------------------------------------------
   # Bootstrap JS v5.3.0
   #
   # See: https://getbootstrap.com/docs/5.0/getting-started/introduction/
@@ -1721,29 +1744,6 @@ resources:
         files:                          []
         js:                             [ modules/slimSelect/js/select ]
         init_function:                  []
-
-  # ----------------------------------------------------------------------------
-  # Speak2Me
-  # Speech synthesis (TTS)
-  #
-  - name:                               speak2me
-    resource:
-      enabled:                          true
-
-      id:                               speak2me
-      comment:                          Module speak2me
-      region:                           head
-      layout:                           [ all ]
-      required:                         always
-      preload:                          false
-      script_load:                      defer
-      dependencies:                     false
-      pass_init_data:                   true
-      data:
-        css:                            [ modules/speak2me/css/speak2me ]
-        files:                          [ adapter/js/speak2me.js ]
-        js:                             [ modules/speak2me/js/speak2me ]
-        init_function:                  [ j1.adapter.speak2me.init ]
 
 # ------------------------------------------------------------------------------
 # END config

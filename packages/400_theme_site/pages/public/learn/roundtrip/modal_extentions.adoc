@@ -64,6 +64,9 @@ highlight important information to your visitors. The dialogs are positioned
 over everything else in the document so that messages get the full user's
 attention.
 
+mdi:clock-time-five-outline[24px, md-gray mt-4 mr-2]
+*15 Minutes* to read
+
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 

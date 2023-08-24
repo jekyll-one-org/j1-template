@@ -94,6 +94,9 @@ _Flash Player_, _Quicktime_, or _Silverlight_ is no longer needed as the
 Jekyll theme J1 provides HTML5 Video support for local video content
 and from online sources on the Internet.
 
+mdi:clock-time-five-outline[24px, md-gray mt-4 mr-2]
+*10 Minutes* to read
+
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 [role="mt-5"]

@@ -276,18 +276,21 @@ function Translator(props) {
           settings.visibleRows = dropdownLanguages.length;
         }
 
-        // create the dropdown
-        MsDropdown.make(selectorID, {
-          byJson: {
-            data: dropdownLanguages,
-            name: settings.name,
-            size: settings.size,
-            width: settings.width,
-            multiple: settings.multiple,
-          },
-          enableAutoFilter: settings.enableAutoFilter,
-          visibleRows: settings.visibleRows,
-        });
+        // prevent multiple dropdowns created
+        if ($('#dropdownJSON')[0].msDropdown === undefined) {
+          // create the dropdown
+          MsDropdown.make(selectorID, {
+            byJson: {
+              data: dropdownLanguages,
+              name: settings.name,
+              size: settings.size,
+              width: settings.width,
+              multiple: settings.multiple,
+            },
+            enableAutoFilter: settings.enableAutoFilter,
+            visibleRows: settings.visibleRows,
+          });
+        }
       },
       error: function (jqXHR, textStatus, errorThrown) {
         logger.error('\n' + 'failed to retrieve JSON data from: ' + settings.url);
@@ -300,6 +303,7 @@ function Translator(props) {
   // Show|Create the translation dialog (modal)
   // ---------------------------------------------------------------------------
   function showDialog() {
+    var cbAction = 'none'
     Events.documentReady(function () {
 
       self.modal = document.getElementById(self.props.dialogContainerID);
@@ -402,7 +406,7 @@ function Translator(props) {
           // if the modal is closed, show the menubar
           // $('#navigator_nav_navbar').show();
           // run the postSelectionCallback for (final) translation
-          executeFunctionByName (self.props.postSelectionCallback, window);
+          executeFunctionByName (self.props.postSelectionCallback, window, cbAction);
         }); // END modal on 'hidden'
 
         // ---------------------------------------------------------------------
@@ -423,6 +427,7 @@ function Translator(props) {
 
           self.$buttonDoNotAgree = $('#translator-buttonDoNotAgree');
           self.$buttonAgree      = $('#translator-buttonAgree');
+          self.$buttonExit       = $('#translator-buttonExit');
           self.$buttonSave       = $('#translator-buttonSave');
           self.$buttonAgreeAll   = $('#translator-buttonAgreeAll');
 
@@ -445,18 +450,26 @@ function Translator(props) {
 
           self.$buttonDoNotAgree.click(function () {
             doNotAgree();
+            cbAction = 'process';
           });
           self.$buttonAgree.click(function () {
             agreeAll();
+            cbAction = 'process';
+          });
+          self.$buttonExit.click(function () {
+            cbAction = 'exitOnly';
+            exitAll();
           });
           self.$buttonSave.click(function () {
             $('#google-options').collapse('hide');
             saveSettings();
             updateOptionsFromCookie();
+            cbAction = 'process';
           });
           self.$buttonAgreeAll.click(function () {
             $('#google-options').collapse('hide');
             agreeAll();
+            cbAction = 'process';
           });
           self.$modal.modal('show');
         })
@@ -561,6 +574,10 @@ function Translator(props) {
       self.props.cookieSecure
     );
 
+    self.$modal.modal('hide');
+  }
+
+  function exitAll() {
     self.$modal.modal('hide');
   }
 

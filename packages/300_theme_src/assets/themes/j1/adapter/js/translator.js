@@ -80,6 +80,8 @@ regenerate:                             true
 /* eslint quotes: "off"                                                       */
 // -----------------------------------------------------------------------------
 // https://github.com/EdwardBalaj/Simple-DeepL-API-Integration
+// https://www.javatpoint.com/how-to-add-google-translate-button-on-your-webpage
+// https://gist.github.com/ab007shetty/28e99707734db32a6e881e4d245d42f7
 // https://github.com/marghoobsuleman/ms-Dropdown
 // https://www.marghoobsuleman.com/image-dropdown/help
 // https://www.marghoobsuleman.com/image-dropdown/advanced-help
@@ -410,7 +412,7 @@ j1.adapter.translator = (function (j1, window) {
     // Called by the translator CORE module after the user has made
     // the selection for a translation|language
     // -------------------------------------------------------------------------
-    cbGoogle: function () {
+    cbGoogle: function (option) {
       var logger            = log4javascript.getLogger('j1.adapter.translator.cbGoogle');
       var msDropdown        = document.getElementById('dropdownJSON').msDropdown;
 
@@ -445,6 +447,12 @@ j1.adapter.translator = (function (j1, window) {
       //   domainAttribute = '';
       // }
 
+      // button 'Do nothing' clicked
+      //
+      if (option === 'exitOnly') {
+        return;
+      }
+
       selectedTranslationLanguage = msDropdown.value;
       logger.info('\n' + 'selected translation language: ' + selectedTranslationLanguage);
 
@@ -461,7 +469,7 @@ j1.adapter.translator = (function (j1, window) {
         Cookies.remove('googtrans', { domain: domainAttribute });
         Cookies.remove('googtrans', { domain: hostname });
         Cookies.remove('googtrans');
-        location.reload(true);
+        location.reload();
       }
 
       // set transCode settings

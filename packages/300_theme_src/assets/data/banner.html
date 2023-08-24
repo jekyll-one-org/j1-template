@@ -272,7 +272,7 @@ exclude_from_search:                    true
 
                 {% if heading_position == 'left' %}
                 <div>
-                  <h2 class="g-font-weight-500 mb-0 {{card_translate_description}}">{{card_title}}</h2>
+                  <h2 id="{{card_title}}" class="g-font-weight-500 mb-0 {{card_translate_description}}">{{card_title}}</h2>
                   <p class="tagline mb-0 {{card_translate_description}}">{{card_tagline}}</p>
                   <div class="d-inline-block g-width-50 g-height-2 bg-primary mb-2"></div>
                 </div>
@@ -280,7 +280,7 @@ exclude_from_search:                    true
 
                 {% if heading_position == 'center' %}
                 <div class="text-center mb-2">
-                	<h2 class="mb-0 {{card_translate_description}}">{{card_title}}</h2>
+                	<h2 id="{{card_title}}" class="mb-0 {{card_translate_description}}">{{card_title}}</h2>
                 	<p class="h4 mb-0 text-muted {{card_translate_description}}"><i>{{card_tagline}}</i></p>
                 	<div class="d-inline-block g-width-50 g-height-2 bg-primary mb-2"></div>
                 </div>
@@ -479,11 +479,11 @@ exclude_from_search:                    true
               <div class="col-md-12 col-sm-12 col-xs-12 no-padding">
                 <div class="box">
                   <div class="content content-danger">
-                    <h2 class="notoc">
+                    <h2 id="exception" class="notoc">
                       <i class="mdib mdib-alarm-light mdib-3x md-red mr-1"></i>
                       Banner of type <big>{{banner_settings.type}}</big> not found
                     </h2>
-                    <h4 class="notoc box-title">Check your configuration at {{banner_config_file_name}}</h4>
+                    <h3 class="notoc box-title">Check your configuration at {{banner_config_file_name}}</h3>
                     <div class="box-description">
                       Don't worry about this. Maybe you've a typo in the banner configuration.
                       Check the banner config file for the unknown type. <br />

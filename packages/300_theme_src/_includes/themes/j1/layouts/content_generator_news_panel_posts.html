@@ -296,10 +296,10 @@
                       <!-- [INFO   ] [j1.layouts.content_generator_news_panel_posts.html ] [ place post image ] -->
                       {% if post.image %}
                         {% if post.image.path %}
-                          <img class="img-fluid img-object--cover g-height-300" src="{{post.image.path}}" alt="{{post.title}}" style="{{image_filters}};">
+                          <img class="img-fluid img-object--cover g-height-300" src="{{post.image.path}}" alt="{{post.tagline}}" style="{{image_filters}};">
                         {% assign post_width = '80x' %}
                         {% else %}
-                          <img class="img-fluid img-object--cover g-height-300" src="{{post.image}}" alt="{{post.title}}" style="{{image_filters}};">
+                          <img class="img-fluid img-object--cover g-height-300" src="{{post.image}}" alt="{{post.tagline}}" style="{{image_filters}};">
                         {% assign post_width = '80x' %}
                         {% endif %}
                       {% else %}
@@ -307,7 +307,8 @@
                         {% assign post_width = '100x' %}
                       {% endif %}
 
-                      <h3 class="card-header bg-primary notoc notranslate">{{post.title}}</h3>
+                      <!-- h3 id="{{1000000 | rand}}" class="card-header bg-primary notoc notranslate">{{post.title}}</h3 -->
+                      <h3 id="{{1000000 | rand}}" class="card-header bg-primary notranslate">{{post.title}}</h3>
                       <!-- Body|Excerpt -->
                       <div class="card-body r-text-300 mt-0">
                         {{post.excerpt|truncatewords: truncate_words}}
@@ -368,17 +369,18 @@
                       <!-- [INFO   ] [j1.layouts.content_generator_news_panel_posts.html ] [ place post image ] -->
                       {% if post.image %}
                         {% if post.image.path %}
-                          <img class="img-fluid img-object--cover g-height-300" src="{{post.image.path}}" alt="{{post.title}}" style="{{image_filters}};">
+                          <img class="img-fluid img-object--cover g-height-300" src="{{post.image.path}}" alt="{{post.tagline}}" style="{{image_filters}};">
                         {% assign post_width = '80x' %}
                         {% else %}
-                          <img class="img-fluid img-object--cover g-height-300" src="{{post.image}}" alt="{{post.title}}" style="{{image_filters}};">
+                          <img class="img-fluid img-object--cover g-height-300" src="{{post.image}}" alt="{{post.tagline}}" style="{{image_filters}};">
                         {% assign post_width = '80x' %}
                         {% endif %}
                       {% else %}
                         <img class="mt-2" src="" alt="">
                         {% assign post_width = '100x' %}
                       {% endif %}
-                      <h3 class="card-header bg-primary notoc">{{post.title}}</h3>
+
+                      <h3 id="{{1000000 | rand}}" class="card-header bg-primary notoc">{{post.title}}</h3>
                       <!-- Body|Excerpt -->
                       <div class="card-body r-text-300 mt-0">
                         {% comment %} {{post.excerpt|truncatewords: 50|replace:'...',' ...'|remove:'<div class="paragraph">'|remove:'</div>'|remove:'<p>'|remove:'</p>'}} {% endcomment %}

@@ -124,7 +124,7 @@
           ---------------------------------------------------------------------- {% endcomment %}
           <!-- div class="timeline-title" -->
           <div class="card-header bg-primary pt-4 pb-3">
-            <h2 id="{{1000000 | rand}}" class="md-white notranslate">{{post.title}}</h2>
+            <h3 id="{{1000000 | rand}}" class="md-white notranslate">{{post.title}}</h3>
           </div>
 
           <!-- Collect icon data from frontmatter -->
