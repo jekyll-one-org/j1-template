@@ -6,7 +6,15 @@
 // -----------------------------------------------------------------------------
 tag::urls[]
 
-:url-j1--home:                                    https://jekyll.one/
+:url-jamstack-club--themes:                       https://jamstack.club/
+:url-jamstack-club--j1-theme:                     https://jamstack.club/theme/jekyll-j1-template/
+
+:url-jekyll-themes--home:                         https://jekyllthemes.io/
+
+:url-jekyll-docs:                                 https://jekyllrb.com/docs/
+:url-jekyll-docs--installation:                   https://jekyllrb.com/docs/installation/
+:url-jekyll-docs--jekyll-101:                     https://jekyllrb.com/docs/step-by-step/01-setup/
+:url-jekyll-docs--ruby-101:                       https://jekyllrb.com/docs/ruby-101/
 
 end::urls[]
 

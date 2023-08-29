@@ -93,18 +93,14 @@ outputs, which differ *significantly* in their quality. _Google_'s
 browser *Chrome* delivers acceptable results. However, the best results
 are provided by _Microsoft_ with the browser *Edge*.
 
-CAUTION: The Speak2Me module is currently *not* supported on mobile
-devices.
-
 Browsers from other manufacturers, such as Firefox, usually use
 voices provided by Microsoft free of charge. However, the quality of the
 outputs cannot be compared to those offered by Microsoft Edge. Other
 Chromium-based browsers, such as the *Opera* browser, provide voices of a
 very poor quality and cannot be recommended for voice output.
 
-IMPORTANT: Errors in the speech output can occur, especially with
-content previously translated.
-
+CAUTION: The Speak2Me module is currently *not* supported on mobile
+devices.
 
 [role="mt-4"]
 mdi:clock-time-five-outline[24px, md-gray mr-2]
@@ -256,6 +252,50 @@ the Wind's Grace, its timeworn planks creaking beneath his weight.
     It was a gusty tempest, much like the swirling turmoil that had
 beset his life ever since he had been forced to flee the shores of
 Westeros.
+
+[role="mt-5"]
+== Links
+
+Links are an essential part of all web pages. They allow users to navigate
+between different *pages* and *websites*. In HTML, links are created using
+the anchor tag `<a>`. The anchor tag defines a hyperlink, a *clickable element*,
+that takes the user to *another* web page or a specific location on the *same page*.
+
+[role="mt-4"]
+=== Inline Links
+
+Inline links are hyperlinks embedded directly within the content of a paragraph
+or any other text element on a web page. These links allow users to navigate
+to other web pages, resources, or sections of the same page by clicking on
+the linked *text* element.
+
+==== Inline Link Example
+
+All websites created by _Jekyll_ are based on Themes, a template
+system to ease the creation process of web pages, design, styles, navigation
+elements and more. For a wide range of website types, the
+link:{url-jamstack-club--j1-theme}[J1 Theme, {browser-window--new}] accessible
+at the Jamstack Club can be used. Check the preview function and, if the Jekyll
+Theme meet your needs, you can create a example web from here:
+link:{url-j1--rocketstart}[Rocketstart - Create A Internet Site In Minutes, {browser-window--new}].
+
+[role="mt-4"]
+=== Link Block
+
+A *block of links* refers to a section in a webpage containing a collection
+of organized hyperlinks. These links lead to different pages, resources, or
+external websites. Such blocks are commonly used to present links to point
+the reader to related content resources.
+
+==== Link Block Example
+
+Find more to know: +
+mdi:link-variant[24px, md-gray mr-2 ml-3]
+link:{url-jamstack-club--j1-theme}[J1 Theme at Jamstack Club, {browser-window--new}] +
+mdi:link-variant[24px, md-gray mr-2 ml-3]
+link:{url-jamstack-club--themes}[Popular SSGs and Themes at Jamstack Club, {browser-window--new}] +
+mdi:link-variant[24px, md-gray mr-2 ml-3]
+link:{url-jekyll-themes--home}[Popular SSGs and Themes at Jekyll Themes, {browser-window--new}]
 
 
 [role="mt-5"]

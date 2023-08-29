@@ -332,7 +332,7 @@
 
         // Default values
         //
-        voiceTags['a']                = new voiceTag('Follow the Link:', ':');
+        voiceTags['a']                = new voiceTag('', ', ');
         voiceTags['q']                = new voiceTag('', pause_spoken);
         voiceTags['ol']               = new voiceTag('Start of list.', 'End of list. ');
         voiceTags['ul']               = new voiceTag('Start of list.', 'End of list. ');
@@ -442,7 +442,6 @@
           // unclear why a elements of ' >' is generated in text
           // may caused by a HTML tag
           text = text.replace(/^\s+>/gm, '');
-          text = text.replaceAll(' ..', '.');
 
           // cleanup text
           text = text.replace(/(\r\n|\n|\r)/gm, '');
@@ -816,18 +815,18 @@
           jQuery(this).remove();
         });
 
-        // TODO: identify why the text 'Follow the link' is
-        // already placed on the anchor
+        // TODO: identify why the prepend text 'Follow the link' and the
+        // append text '. ' is already placed on the anchor
         //
         jQuery(clone).find('a').addBack('a').each(function() {
           var anchor  = jQuery(this);
           copy        = anchor[0].innerText;
-          prepend     = voiceTags['a'].prepend;
-          appended    = voiceTags['a'].append;
+//        prepend     = voiceTags['a'].prepend;
+//        appended    = voiceTags['a'].append;
 
 //        jQuery('<div>' + prepend + copy + '</div>').insertBefore(this);
           jQuery('<div>' + copy + '</div>').insertBefore(this);
-          jQuery('<div>' + appended + '</div>').insertBefore(this);
+//        jQuery('<div>' + appended + '</div>').insertBefore(this);
 
           jQuery(this).remove();
         });
