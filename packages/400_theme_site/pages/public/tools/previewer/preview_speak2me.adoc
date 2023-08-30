@@ -305,19 +305,29 @@ Information blocks draw the reader to certain statements by labeling them
 as priorities displayed in separate blocks. The J1 template system provides
 five types shown by the following examples.
 
+=== Type NOTE
+
 NOTE: Blocks of type *note* give additional details on the currently
 discussed topic that may help the reader to understand the following
 content better.
+
+=== Type TIP
 
 TIP: An *Information* block of type *tip* provides facts that may help
 the reader *to go further* or points to additional *options* available
 that can be used.
 
+=== Type IMPORTANT
+
 IMPORTANT: Blocks of type *important* provide facts that should be
 remembered.
 
+=== Type WARNING
+
 WARNING: A block of type *warning* instructs readers of potential danger,
 harm, or consequences for the wrong usage.
+
+=== Type CAUTION
 
 CAUTION: *Information* blocks of type *caution* advise readers to act
 carefully and point to potential risks or trippings.
@@ -332,7 +342,7 @@ tabular data such as technical data and other types of information that
 require a grid-like layout.
 
 .Files and Folders
-[cols="4a,8a", width="100%", options="header", role="rtable mt-4"]
+[cols="4a, 8a", width="100%", options="header", role="rtable mt-4"]
 |===
 |File\|Folder |Description
 
@@ -562,7 +572,7 @@ the bottom of a slideshow. Find two examples to control a slideshow by
 masterslider::ms_00004[role="mb-5"]
 
 .ThumbInfo controls
-masterslider::ms_00007[role="mb-5"]
+masterslider::ms_00007[role="mt-4 mb-5"]
 
 
 [role="mt-5"]

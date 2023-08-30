@@ -45,15 +45,14 @@
 }
 
 .j1-ms-info-boxed {
-  margin-top: -140px;
+  margin-top: -180px;
   font-family: "Lato";
   padding-top: 10px;
   padding-right: 90px;
   padding-bottom: 10px;
   padding-left: 90px;
   line-height: normal;
-  color: #f3f3f3;
-  background-color: rgba(0,0,0,.875);
+  background-color: rgba(0,0,0,.85);
 }
 
 .j1-ms-info-title {
