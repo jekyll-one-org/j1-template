@@ -45,6 +45,11 @@ padding-left: 1px;
   border-bottom: unset;
 }
 
+/* jadams, 2023-08-31: overload hover style */
+.owl-carousel .owl-item > a:hover {
+  color: rgba(0, 0, 0, 0.5) !important;
+}
+
 .owl-carousel .item p {
   margin: 3px;
   color: var(--bs-gray-500);

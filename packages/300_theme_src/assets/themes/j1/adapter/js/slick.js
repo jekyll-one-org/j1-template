@@ -260,7 +260,7 @@ j1.adapter.slick = (function (j1, window) {
                 logger.info('\n' + 'adjust positions of arrows on id: {{carousel.id}}');
                 var buttons = $("#{{carousel.id}} > button");
 
-                // recalculate right arrow position based on gutter settings
+                // re-calculate right arrow position based on gutter settings
                 //
                 var percentage_right = 3 + carouselSettings.gutters;
                 $.each($(buttons), function(index, button) {
@@ -310,9 +310,9 @@ j1.adapter.slick = (function (j1, window) {
                     const $currentSlide = $slides.filter((index, slide) => $(slide).hasClass('slick-current'));
 
                     if (carousel_type == 'example') {
-                      slideImageHeight = ($currentSlide.find('{{carousel.style}}').height() / 2) - 25;
+                      slideImageHeight = ($currentSlide.find('{{carousel.style}}').height()/2) - 25;
                     } else {
-                      slideImageHeight = ($currentSlide.find('img').height() / 2) - 20;
+                      slideImageHeight = ($currentSlide.find('img').height()/2) - 25;
                     }
 
                     logger.info('\n' + 'adjust top arrow position (centered) by ' + slideImageHeight + ' on id: {{carousel.id}}');

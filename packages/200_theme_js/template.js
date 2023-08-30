@@ -75,6 +75,7 @@ window.j1.core.scrollSmooth             = require('./js/scroll-smooth/scroll-smo
 const J1Tocbot                            = require('./js/tocbot/tocbot.js');
 const J1AttrChangeListener                = require('./js/listen-attribute-changes/attrchange.js');
 const J1Speak2Me                          = require('./js/speak2me/speak2me.js');
+const J1SCarousel                         = require('./js/carousel/carousel.js');
 
 // Passing log data over Internet|SeeMe (currently NOT used)
 // -----------------------------------------------------------------------------
