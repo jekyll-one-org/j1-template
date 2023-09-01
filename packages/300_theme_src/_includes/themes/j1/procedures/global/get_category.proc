@@ -33,28 +33,22 @@
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
-{% comment %} Variables
-   ------------------------------------------------------------ {% endcomment %}
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
 
+{% comment %} Variables
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign _categories = include.post.categories %}
 {% assign _category   = nil %}
 
 
-{% comment %} Liquid procedures
-   ------------------------------------------------------------ {% endcomment %}
-
-
 {% comment %} Main
-   ------------------------------------------------------------ {% endcomment %}
-
-  {% for item in _categories %}
-    {% if item == "posts"  %}
-      {% continue %}
-    {% else %}
-      {% assign _category = item %}
-      {% break %}
-    {% endif %}
-  {% endfor %}
-
-
-
+-------------------------------------------------------------------------------- {% endcomment %}
+{% for item in _categories %}
+  {% if item == "posts"  %}
+    {% continue %}
+  {% else %}
+    {% assign _category = item %}
+    {% break %}
+  {% endif %}
+{% endfor %}

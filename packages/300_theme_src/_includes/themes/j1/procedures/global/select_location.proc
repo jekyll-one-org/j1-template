@@ -41,79 +41,76 @@
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
-{% comment %} Variables
+{% comment %} Liquid procedures
 -------------------------------------------------------------------------------- {% endcomment %}
 
+{% comment %} Variables
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign location = include.location %}
 {% assign locator  = include.locator %}
 
 
-{% comment %} Liquid procedures
--------------------------------------------------------------------------------- {% endcomment %}
-
-
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
+{% if page.debug %}
+  <!-- [DEBUG  ] [j1.procedures.select_location.proc    ] [ location:         {{location}} ] -->
+  <!-- [DEBUG  ] [j1.procedures.select_location.proc    ] [ locator_data_set: {{locator}} ] -->
+  <!-- [DEBUG  ] [j1.procedures.select_location.proc    ] [ base_path:        {{base_path}} ] -->
+{% endif %}
 
-  {% if page.debug %}
-    <!-- [DEBUG  ] [j1.procedures.select_location.proc    ] [ location:         {{location}} ] -->
-    <!-- [DEBUG  ] [j1.procedures.select_location.proc    ] [ locator_data_set: {{locator}} ] -->
-    <!-- [DEBUG  ] [j1.procedures.select_location.proc    ] [ base_path:        {{base_path}} ] -->
-  {% endif %}
 
+{% for resource in locator %}
+    {% assign key = resource[0] %}
+    {% assign value = resource[1] %}
+    {% if key == 'remote' %} {% assign location_remote  = value %}  {% endif %}
+    {% if key == 'local' %}  {% assign location_local   = value %}  {% endif %}
+{% endfor %}
 
-  {% for resource in locator %}
-      {% assign key = resource[0] %}
-      {% assign value = resource[1] %}
-      {% if key == 'remote' %} {% assign location_remote  = value %}  {% endif %}
-      {% if key == 'local' %}  {% assign location_local   = value %}  {% endif %}
-  {% endfor %}
+{% case location %}
 
-  {% case location %}
+    {% when 'remote' %}
+    {% comment %} Check location data for REMOTE
+    -------------------------------------------------------------------------- {% endcomment %}
+    {% if location_remote and location_remote != "" %}
+        <!-- [INFO   ] [j1.procedures.select_location.proc    ] [ preferred location REMOTE detected: {{location_remote}} ] -->
+        {% assign location_source = location_remote %}
+    {% elsif location_local and location_local != "" %}
+        <!-- [INFO   ] [j1.procedures.select_location.proc    ] [ fallback location LOCAL selected: {{location_local}} ] -->
+        {% capture location_source %}{{base_path}}/{{location_local}}{% endcapture %}
+    {% else %}
+        <!-- [ERROR  ] [j1.procedures.select_location.proc    ] [ no valid resource locator for REMOTE found ] -->
+        <!-- [WARN   ] [j1.procedures.select_location.proc    ] [ fallback location LOCAL selected ] -->
+        {% capture location_source %}{{base_path}}/{{location_local}}{% endcapture %}
+        {% comment %} DISABLED !!!
+        ----------------------------------------------------------------------
+        {% assign location_source = "no_valid_resource_locator_for_REMOTE_found" %}
+        {% endcomment %}
+    {% endif %}
 
-      {% when 'remote' %}
-      {% comment %} Check location data for REMOTE
-      -------------------------------------------------------------------------- {% endcomment %}
-      {% if location_remote and location_remote != "" %}
-          <!-- [INFO   ] [j1.procedures.select_location.proc    ] [ preferred location REMOTE detected: {{location_remote}} ] -->
-          {% assign location_source = location_remote %}
-      {% elsif location_local and location_local != "" %}
-          <!-- [INFO   ] [j1.procedures.select_location.proc    ] [ fallback location LOCAL selected: {{location_local}} ] -->
-          {% capture location_source %}{{base_path}}/{{location_local}}{% endcapture %}
-      {% else %}
-          <!-- [ERROR  ] [j1.procedures.select_location.proc    ] [ no valid resource locator for REMOTE found ] -->
-          <!-- [WARN   ] [j1.procedures.select_location.proc    ] [ fallback location LOCAL selected ] -->
-          {% capture location_source %}{{base_path}}/{{location_local}}{% endcapture %}
-          {% comment %} DISABLED !!!
-          ----------------------------------------------------------------------
-          {% assign location_source = "no_valid_resource_locator_for_REMOTE_found" %}
-          {% endcomment %}
-      {% endif %}
-
-      {% when 'local' %}
-      {% comment %} Check location data for LOCAL
-         ----------------------------------------------------------------------- {% endcomment %}
-      {% if location_local and location_local != "" %}
-         <!-- [INFO   ] [j1.procedures.select_location.proc    ] [ preferred location LOCAL detected: {{location_local}} ] -->
-         {% capture location_source %}{{base_path}}/{{location_local}}{% endcapture %}
-      {% else %}
-          <!-- [ERROR  ] [j1.procedures.select_location.proc    ] [ no valid resource locator for LOCAL found ] -->
-          <!-- [WARN   ] [j1.procedures.select_location.proc    ] [ fallback location LOCAL selected ] -->
-          {% capture location_source %}{{base_path}}/{{locator}}{% endcapture %}
-          {% comment %} DISABLED !!!
-          ----------------------------------------------------------------------
-          {% assign location_source = "no_valid_resource_locator_for_LOCAL_found" %}
-          {% endcomment %}
-      {% endif %}
-
-      {% comment %} NO valid locator detected
-      -------------------------------------------------------------------------- {% endcomment %}
-      {% else %}
-        <!-- [ERROR  ] [j1.procedures.select_location.proc    ] [ no valid resource locator found ] -->
+    {% when 'local' %}
+    {% comment %} Check location data for LOCAL
+       ----------------------------------------------------------------------- {% endcomment %}
+    {% if location_local and location_local != "" %}
+       <!-- [INFO   ] [j1.procedures.select_location.proc    ] [ preferred location LOCAL detected: {{location_local}} ] -->
+       {% capture location_source %}{{base_path}}/{{location_local}}{% endcapture %}
+    {% else %}
+        <!-- [ERROR  ] [j1.procedures.select_location.proc    ] [ no valid resource locator for LOCAL found ] -->
         <!-- [WARN   ] [j1.procedures.select_location.proc    ] [ fallback location LOCAL selected ] -->
         {% capture location_source %}{{base_path}}/{{locator}}{% endcapture %}
         {% comment %} DISABLED !!!
-        ------------------------------------------------------------------------
-        {% assign location_source = "no_valid_resource_locator_found" %}
+        ----------------------------------------------------------------------
+        {% assign location_source = "no_valid_resource_locator_for_LOCAL_found" %}
         {% endcomment %}
-  {% endcase %}
+    {% endif %}
+
+    {% comment %} NO valid locator detected
+    -------------------------------------------------------------------------- {% endcomment %}
+    {% else %}
+      <!-- [ERROR  ] [j1.procedures.select_location.proc    ] [ no valid resource locator found ] -->
+      <!-- [WARN   ] [j1.procedures.select_location.proc    ] [ fallback location LOCAL selected ] -->
+      {% capture location_source %}{{base_path}}/{{locator}}{% endcapture %}
+      {% comment %} DISABLED !!!
+      ------------------------------------------------------------------------
+      {% assign location_source = "no_valid_resource_locator_found" %}
+      {% endcomment %}
+{% endcase %}

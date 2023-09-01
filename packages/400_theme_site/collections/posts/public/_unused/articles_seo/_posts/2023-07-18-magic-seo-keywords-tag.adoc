@@ -1,0 +1,168 @@
+---
+title:                                  Magic SEO - Creating Keywords
+title_extention:                        Creating Keywords in 2023
+tagline:                                Creating Keywords in 2023
+
+#date:                                  2023-07-18
+#last_modified:                         2023-01-01
+
+categories:                             [ Seo ]
+tags:                                   [ Keywords ]
+
+image:
+  path:                                 /assets/images/modules/attics/giammarco-boscaro-1920x1280.jpg
+  width:                                1920
+  height:                               1280
+
+group:                                  SEO
+series:                                 SEO
+
+canonical:                              false
+regenerate:                             false
+
+resources:                              [ advertising, animate, bmd, clipboard, lightbox, rouge ]
+resource_options:
+  - attic:
+      slides:
+        - url:                          /assets/images/modules/attics/giammarco-boscaro-1920x1280.jpg
+          alt:                          Photo by Giammarco on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Giammarco
+            href:                       https://unsplash.com/@giamboscaro
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+
+// Place an excerpt at the most top position
+// -----------------------------------------------------------------------------
+[role="dropcap"]
+Internet search services are not a friendly support provided by the vendors.
+The search engine market is a highly competitive Business that sells companies
+in their market's attention on the Internet.
+
+For search engines to succeed, the search results delivered must be of
+excellent quality and of real value to visitors and businesses. Fraud to
+improve rankings in search results leads to considerable economic damage
+for operators.
+
+excerpt__end
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="all" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+mdi:clock-time-five-outline[24px, md-gray mr-2]
+*5 Minutes* to read
+
+[role="mt-5"]
+Cheating search engines to get a better ranking in search results was
+relatively easy in the early years of search services. A popular method was
+to set huge amounts of keywords but with little or no relation to the actual
+content of the websites. Providers have made significant efforts to prevent
+fraud to improve rankings. Today, the use of artificial intelligence is
+commonplace. The robots that examine and index websites on the Internet are
+now supported by an armada of AI systems that calculate many factors that
+determine ranking in search results.
+
+gad::ad_7522184684_post["mt-5 mb-5"]
+
+Nevertheless, using keywords on websites is important for boosting the
+visibility of websites in search results for all modern search engines like
+Google or Bing. The bad story first: the meta tag `<keywords>` is dead.
+As mentionend earlier, the robots used by search engines are supported by
+AI systems to calcualte ranking out of the content of webpages and two
+very important meta tags are:
+
+* `<title>`
+* `<description>`
+
+Both meta tags provide keywords cross checked by robots of search engines.
+Today, it not easy to make keywords a trigger for a good ranking in search
+results. Authors has to invest much more time on working on their content
+to make keywords effective.
+
+mdi:clock-time-five-outline[24px, md-gray mr-2]
+*5 Minutes* to read
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+[role="mt-5"]
+== Title Tag
+
+Technically spoken, web browsers are using the `title` tag to give the
+browser's window (tab) a descriptive name. There are no hard and fast rules
+regarding the length of the title, however the *recommended length* of the
+title is somewhere up to *60 to 70* characters (including spaces).
+
+.Title tag length in 2023
+TIP: You do not need to stick to a limit of 60-70 character for your title
+tags, today. Your titles can be – and should be – as long as needed within
+reason. Titles up to *140* characters can be used without negative impacts;
+for the Google search engine at least.
+
+The importance of a well formed `title` tag has drastically changed since
+AI algorithms used by search engines calculate their page ranking based
+this tag. Today, the technical role is factually overruled by using titles
+because of the usage similiar to the `keywords` used in the past.
+
+In the last years, optimizing the `title` tag in the `<head>` section is
+*vital* for boosting the visibility of pages in search results for *all*
+modern search engines. Relevant keywords in the title tag can have a high
+*impact on your rankings*. Nowadays, the title should provide the *base*
+information in terms of relevant *keywords* to describe the article's
+topics.
+
+TIP: Check at link:{url-google-search-central}[Google Seach Central, {browser-window--new}]
+to learn more how title tags influencing your pages in terms of ranking
+in search results.
+
+.Example for the title tag
+[source, html]
+----
+<title>Image - Lightboxes, Carousels, Sliders, and Galleries for J1 Template</title>
+<meta property="og:title" content="Image - Lightboxes, Carousels, Sliders, and Galleries for J1 Template">
+----
+
+[role="mt-4"]
+== Description Tag
+
+Well-formed `title` tags are used to place relevant *keywords*, but it is
+*not* possible to give real *context* related information. The `description`
+tag can fill this gap by providing an excerpt describing what the article is
+focussing on.
+
+The `description` property is used by search engines to correctly
+classify the page and display it for the right search queries. However,
+the description is only a suggestion, so the search engine does not necessarily
+have to display it. The search engine sometimes displays a different section
+of the page.
+
+The suggested description length is *100 to 160* characters, including spaces.
+You can even use fewer characters, and it works great if your descriptions
+look appealing and read better but only try to create lengthy descriptions
+that make little sense or descriptions with more than *240 characters*.
+
+[role="mt-4"]
+== Summary
+
+SEO is a hard piece of work for sure, but important to influence the
+visibility of webpages in search results. Authors should take care upfront
+what *keywords* support the content at its best and what *description* gives
+an overview of what an article is concentrating on.

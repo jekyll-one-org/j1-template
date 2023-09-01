@@ -29,15 +29,17 @@
 {% endcomment %}
 
 {% comment %} Liquid procedures
---------------------------------------------------------------- {% endcomment %}
+-------------------------------------------------------------------------------- {% endcomment %}
 
 {% comment %} Variables
-   ------------------------------------------------------------ {% endcomment %}
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign image_name  = include.image_name %}
 {% assign image_title = include.image_title %}
 {% assign image_width = include.image_width %}
 
 
+{% comment %} Main
+-------------------------------------------------------------------------------- {% endcomment %}
 [subs=attributes]
 ++++
 <div class="imageblock mt-4 mb-4">

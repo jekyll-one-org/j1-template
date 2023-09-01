@@ -16,11 +16,11 @@
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
-{% comment %} liquid procedures 
+{% comment %} Liquid procedures
 jadams, 2019-08-23: no procedures should be used for initial setup
 -------------------------------------------------------------------------------- {% endcomment %}
 
-{% comment %} set base config files and folders
+{% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign data                = site.data %}
 {% assign apps                = data.apps %}
@@ -31,7 +31,5 @@ jadams, 2019-08-23: no procedures should be used for initial setup
 {% assign pages               = data.pages %}
 {% assign tables              = data.tables %}
 
-{% comment %} set base variables
--------------------------------------------------------------------------------- {% endcomment %}
 {% assign environment         = site.environment %}
 {% assign template_name       = site.template.name %}

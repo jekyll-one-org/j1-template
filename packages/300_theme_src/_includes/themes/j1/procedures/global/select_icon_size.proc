@@ -39,51 +39,49 @@
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
-{% comment %} Variables
-   ------------------------------------------------------------ {% endcomment %}
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
 
+{% comment %} Variables
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign family = include.family | strip | downcase %}
 {% assign size   = include.size | strip | downcase %}
 
 
-{% comment %} Liquid procedures
-   ------------------------------------------------------------ {% endcomment %}
-
-
 {% comment %} Main
-   ------------------------------------------------------------ {% endcomment %}
-   {% if family == 'mdib' %}
-     {% if size == 'default' %}  {% assign size = '' %}           {% endif %}
-     {% if size == 'large' %}    {% assign size = 'mdib-18px' %}   {% endif %}
-     {% if size == 'larger' %}   {% assign size = 'mdib-24px' %}   {% endif %}
-     {% if size == 'xlarge' %}   {% assign size = 'mdib-36px' %}   {% endif %}
-     {% if size == 'xxlarge' %}  {% assign size = 'mdib-48px' %}   {% endif %}
-     {% if size == 'xxxlarge' %} {% assign size = 'mdib-48px' %}   {% endif %}
-   {% endif %}
-   
-  {% if family == 'mdi' or family == 'material design icons' %}
-    {% if size == 'default' %}  {% assign size = '' %}           {% endif %}
-    {% if size == 'large' %}    {% assign size = 'mdi-18px' %}   {% endif %}
-    {% if size == 'larger' %}   {% assign size = 'mdi-24px' %}   {% endif %}
-    {% if size == 'xlarge' %}   {% assign size = 'mdi-36px' %}   {% endif %}
-    {% if size == 'xxlarge' %}  {% assign size = 'mdi-48px' %}   {% endif %}
-    {% if size == 'xxxlarge' %} {% assign size = 'mdi-48px' %}   {% endif %}
-  {% endif %}
+-------------------------------------------------------------------------------- {% endcomment %}
+{% if family == 'mdib' %}
+ {% if size == 'default' %}  {% assign size = '' %}           {% endif %}
+ {% if size == 'large' %}    {% assign size = 'mdib-18px' %}   {% endif %}
+ {% if size == 'larger' %}   {% assign size = 'mdib-24px' %}   {% endif %}
+ {% if size == 'xlarge' %}   {% assign size = 'mdib-36px' %}   {% endif %}
+ {% if size == 'xxlarge' %}  {% assign size = 'mdib-48px' %}   {% endif %}
+ {% if size == 'xxxlarge' %} {% assign size = 'mdib-48px' %}   {% endif %}
+{% endif %}
 
-  {% if family == 'fontawesome' or family == 'fontawesome5' or family == 'fa' %}
-    {% if size == 'default' %}  {% assign size = 'fa-lg' %}     {% endif %}
-    {% if size == 'large' %}    {% assign size = 'fa-2x' %}     {% endif %}
-    {% if size == 'larger' %}   {% assign size = 'fa-3x' %}     {% endif %}
-    {% if size == 'xlarge' %}   {% assign size = 'fa-5x' %}     {% endif %}
-    {% if size == 'xxlarge' %}  {% assign size = 'fa-7x' %}     {% endif %}
-    {% if size == 'xxxlarge' %} {% assign size = 'fa-10x' %}    {% endif %}
-  {% endif %}
+{% if family == 'mdi' or family == 'material design icons' %}
+{% if size == 'default' %}  {% assign size = '' %}           {% endif %}
+{% if size == 'large' %}    {% assign size = 'mdi-18px' %}   {% endif %}
+{% if size == 'larger' %}   {% assign size = 'mdi-24px' %}   {% endif %}
+{% if size == 'xlarge' %}   {% assign size = 'mdi-36px' %}   {% endif %}
+{% if size == 'xxlarge' %}  {% assign size = 'mdi-48px' %}   {% endif %}
+{% if size == 'xxxlarge' %} {% assign size = 'mdi-48px' %}   {% endif %}
+{% endif %}
 
-  {% if family == 'iconify' %}
-    {% if size == 'default' %}  {% assign size = '' %}               {% endif %}
-    {% if size == 'large' %}    {% assign size = 'iconify-18px' %}   {% endif %}
-    {% if size == 'larger' %}   {% assign size = 'iconify-24px' %}   {% endif %}
-    {% if size == 'xlarge' %}   {% assign size = 'iconify-36px' %}   {% endif %}
-    {% if size == 'xxlarge' %}  {% assign size = 'iconify-48px' %}   {% endif %}
-    {% if size == 'xxxlarge' %} {% assign size = 'iconify-48px' %}   {% endif %}
-  {% endif %}
+{% if family == 'fontawesome' or family == 'fontawesome5' or family == 'fa' %}
+{% if size == 'default' %}  {% assign size = 'fa-lg' %}     {% endif %}
+{% if size == 'large' %}    {% assign size = 'fa-2x' %}     {% endif %}
+{% if size == 'larger' %}   {% assign size = 'fa-3x' %}     {% endif %}
+{% if size == 'xlarge' %}   {% assign size = 'fa-5x' %}     {% endif %}
+{% if size == 'xxlarge' %}  {% assign size = 'fa-7x' %}     {% endif %}
+{% if size == 'xxxlarge' %} {% assign size = 'fa-10x' %}    {% endif %}
+{% endif %}
+
+{% if family == 'iconify' %}
+{% if size == 'default' %}  {% assign size = '' %}               {% endif %}
+{% if size == 'large' %}    {% assign size = 'iconify-18px' %}   {% endif %}
+{% if size == 'larger' %}   {% assign size = 'iconify-24px' %}   {% endif %}
+{% if size == 'xlarge' %}   {% assign size = 'iconify-36px' %}   {% endif %}
+{% if size == 'xxlarge' %}  {% assign size = 'iconify-48px' %}   {% endif %}
+{% if size == 'xxxlarge' %} {% assign size = 'iconify-48px' %}   {% endif %}
+{% endif %}

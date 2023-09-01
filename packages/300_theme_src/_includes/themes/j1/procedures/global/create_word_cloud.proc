@@ -39,6 +39,7 @@
 -------------------------------------------------------------------------------- {% endcomment %}
 
 {% comment %} Variables
+word_array:  {{ word_array | debug }}
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign source      = include.source %}
 {% assign word_list   = include.word_list %}
@@ -72,7 +73,7 @@
       <ul class="content">
         {% if source == 'categories' %}
           {% for tag in word_array %}
-            <li class="badge-tag">
+            <li class="badge-tag categories">
               <a class="bg-primary" href="#{{tag|downcase}}">
                 {{ tag | capitalize }}
                 <span>{{ site.categories[tag] | size }}</span>
@@ -81,7 +82,7 @@
           {% endfor %}
         {% elsif source == 'tags' %}
           {% for tag in word_array %}
-            <li class="badge-tag">
+            <li class="badge-tag tags">
               <a class="bg-primary" href="#{{ tag | replace: '+','_' | replace: ' ','_' | downcase }}">
                 {{ tag }}
                 <span>{{ site.tags[tag] | size }}</span>

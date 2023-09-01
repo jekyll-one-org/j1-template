@@ -29,13 +29,13 @@
 {% endcomment %}
 
 {% comment %} Liquid procedures
---------------------------------------------------------------- {% endcomment %}
+-------------------------------------------------------------------------------- {% endcomment %}
 {% capture get_page_path %}themes/{{site.template.name}}/procedures/global/get_page_path.proc{% endcapture %}
 
-{% comment %} Variables
-   ------------------------------------------------------------ {% endcomment %}
-{% assign folders = include.init_folders %}
 
+{% comment %} Variables
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign folders = include.init_folders %}
 
 // NOTE: Calculation of Pathes
 // Web sources are loaded by the Web Server. The location imagesdir
@@ -43,7 +43,7 @@
 // collected by AsciiDoctor relative to "page_root"
 
 {% comment %} Variables
---------------------------------------------------------------- {% endcomment %}
+-------------------------------------------------------------------------------- {% endcomment %}
 {% if site.source.size %} {% assign source_dir = site.source %} {% else %} {% assign source_path = "." %} {% endif %}
 
 {% include {{get_page_path}} %}
@@ -55,13 +55,13 @@
 :tabledir:                              {includedir}/tables
 //:tabledir:                              ../tables
 
-
-{% comment %} Moved imagesdir settings to the document
----------------------------------------------------------------------------
+{% comment %} Main
+Moved imagesdir settings to the document
+--------------------------------------------------------------------------------
 {% if page.collection %}
 {% assign imagesdir = site.asciidoc_attributes.imagesdir %}
 {% else %}
 :imagesdir:                             {{web_root}}/000_includes/images
 {% endif %}
----------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 {% endcomment %}

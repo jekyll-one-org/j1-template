@@ -39,20 +39,15 @@ See: https://github.com/uwolf/jekyll-i18n-date
 NOTE already implemented as an plugin: ~/_plugins/date-i18n.rb
 -------------------------------------------------------------------------------- {% endcomment %}
 
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
 
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
 
 
-
-{% comment %} Liquid procedures
--------------------------------------------------------------------------------- {% endcomment %}
-
-
-
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
-
 {% assign formattedDate = '' %}
 
 {% if include.showDay %}

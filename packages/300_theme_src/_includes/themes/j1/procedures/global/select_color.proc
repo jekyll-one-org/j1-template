@@ -40,30 +40,25 @@
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
 
 {% comment %} Variables
-   ------------------------------------------------------------ {% endcomment %}
-
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign j1_color_config = site.data.j1_colors %}
 {% assign color           = include.color %}
 {% assign color_fallback  = include.fallback %}
 
 
-{% comment %} Liquid procedures
-   ------------------------------------------------------------ {% endcomment %}
-
-
 {% comment %} Main
-   ------------------------------------------------------------ {% endcomment %}
-
-  {% for item in j1_color_config %}
-    {% if item[0] == color %}
-      {% assign color = item[1] %}
-      {% break %}
-    {% endif %}
-  {% endfor %}
-
-  {% if color == include.color %}
-    {% assign color = color_fallback %}
+-------------------------------------------------------------------------------- {% endcomment %}
+{% for item in j1_color_config %}
+  {% if item[0] == color %}
+    {% assign color = item[1] %}
+    {% break %}
   {% endif %}
+{% endfor %}
 
+{% if color == include.color %}
+  {% assign color = color_fallback %}
+{% endif %}

@@ -16,11 +16,16 @@
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
-{% comment %} liquid procedures 
+{% comment %} Liquid procedures
 jadams, 2019-08-23: no procedures should be used for initial setup
 -------------------------------------------------------------------------------- {% endcomment %}
 
-{% comment %} main (???)
+{% comment %} Variables
+jadams, 2019-08-23: no variables should be used for initial setup
+-------------------------------------------------------------------------------- {% endcomment %}
+
+
+{% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
 {% if site.template.setup_provider == "custom" %}
   {% include custom/functions/setup %}

@@ -1,0 +1,94 @@
+// ~/document_base_folder/000_includes
+//  Asciidoc attribute includes:                 attributes.asciidoc
+// -----------------------------------------------------------------------------
+
+// URLS, local references to internal|external web links (macro link:)
+// -----------------------------------------------------------------------------
+tag::urls[]
+
+:url-google-search-central:                       https://developers.google.com/search?hl=en
+:url-google-search-central--​title:                https://developers.google.com/search/docs/appearance/title-link
+
+:url-jamstack-club--themes:                       https://jamstack.club/
+:url-jamstack-club--j1-theme:                     https://jamstack.club/theme/jekyll-j1-template/
+
+:url-jekyll-themes--home:                         https://jekyllthemes.io/
+
+:url-jekyll--news:                                https://jekyllrb.com/news/
+:url-jekyll--philosophy:                          https://jekyllrb.com/philosophy/
+
+:url-jekyll-docs:                                 https://jekyllrb.com/docs/
+:url-jekyll-docs--installation:                   http://jekyllrb.com/docs/installation/
+:url-jekyll-docs--jekyll-101:                     https://jekyllrb.com/docs/step-by-step/01-setup/
+:url-jekyll-docs--ruby-101:                       https://jekyllrb.com/docs/ruby-101/
+:url-jekyll-docs--assets:                         https://jekyllrb.com/docs/assets/
+:url-jekyll-docs--assets-sass:                    https://jekyllrb.com/docs/step-by-step/07-assets/#sass
+
+:jekyll-for-beginners:                            https://cloudcannon.com/community/learn/jekyll-tutorial/getting-started/
+:add-search-to-your-jekyll-site:                  https://learn.cloudcannon.com/jekyll/jekyll-search-using-lunr-js/
+:create-a-jekyll-website:                         https://opensource.com/article/21/9/build-website-jekyll
+:jekyll-blog-from-scratch:                        https://www.creativebloq.com/how-to/jekyll-blog
+:create-a-jekyll-theme:                           https://www.siteleaf.com/blog/making-your-first-jekyll-theme-part-1/
+:add-ga-to-jekyll-sites:                          https://scotch.io/tutorials/how-to-add-google-analytics-to-jekyll-sites
+:speed-up-your-jekyll-site:                       https://blog.webjeda.com/jekyll-speed/
+:building-a-static-e-commerce-website:            https://snipcart.com/blog/jekyll-tutorial
+:liquid-basics-for-jekyll:                        https://cloudcannon.com/community/learn/jekyll-tutorial/introduction-to-liquid/
+
+:url-structured-data--json-ld:                    https://json-ld.org/
+:url-structured-data--microdata:                  https://html.spec.whatwg.org/multipage/microdata.html#microdata/
+:url-structured-data--rdfa:                       https://rdfa.info/
+
+:url-j1-template--home:                           https://jekyll.one/
+:url-j1-template--github-pages:                   https://jekyll-one-org.github.io/
+:url-search-google--test-rich-results:            https://search.google.com/test/rich-results?hl=en
+
+:url-github-pages--site-generators:               https://jekyll-one-org.github.io/posts/public/featured/jekyll/2021/02/01/static-site-generators/
+
+end::urls[]
+
+// FOOTNOTES, global asciidoc attributes (variables)
+// -----------------------------------------------------------------------------
+tag::footnotes[]
+end::footnotes[]
+
+
+// TAGS, local asciidoc attributes (general variables)
+// -----------------------------------------------------------------------------
+tag::tags[]
+end::tags[]
+
+
+// DATA, local references to data elements (asciidoc extensions)
+// -----------------------------------------------------------------------------
+tag::data[]
+
+:data-kickstart-wiad--static-web-access:          "assets/images/collections/blog/featured/static-web-access.jpg, Accessing scheme for a static web"
+:data-kickstart-wiad--dynamic-web-access:         "assets/images/collections/blog/featured/dynamic-web-access.jpg, Accessing scheme for a CMS (dynamic web)"
+
+:data-knowledge--seo-data:                        "assets/images/collections/blog/knowledge/seo-data.jpg, SEO data"
+:data-knowledge--bing-search-results:             "assets/images/collections/blog/knowledge/bing-extended-search-results.jpg, Extended search results at Bing"
+:data-knowledge--google-search-results:           "assets/images/collections/blog/knowledge/google-extended-search-results.jpg, Extended search results at Google"
+:data-knowledge-tester--rich-results-home:        "assets/images/collections/blog/knowledge/rich-results-tester.jpg, Rich Results Tester"
+:data-knowledge-tester--rich-results:             "assets/images/collections/blog/knowledge/rich-test-results.jpg, Tester Results"
+
+
+end::data[]
+
+
+
+// DOCUMENTS, local document resources (macro include::)
+// -----------------------------------------------------------------------------
+tag::documents[]
+end::documents[]
+
+
+// TABLES, local table resources (macro include::)
+// -----------------------------------------------------------------------------
+tag::tables[]
+end::tables[]
+
+
+// AUTHORS, local author information (special variables)
+// -----------------------------------------------------------------------------
+tag::authors[]
+end::authors[]

@@ -34,47 +34,43 @@
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
-{% comment %} Variables
-   ------------------------------------------------------------ {% endcomment %}
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
 
+{% comment %} Variables
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign _category       = include.category %}
 {% assign _category_icon  = nil %}
 
 {% assign _category_icons = site.data.categories %}
 
 
-{% comment %} Liquid procedures
-   ------------------------------------------------------------ {% endcomment %}
-
-
 {% comment %} Main
-   ------------------------------------------------------------ {% endcomment %}
-
-  {% for item in _category_icons %}
-    {% if item[0] == _category %}
-      {% assign _category = "found" %}
-      {% assign _category_icon = item[1] %}
-      {% break %}
-    {% endif %}
-  {% endfor %}
-
-  {% if _category == include.category %}
-    {% assign icon_name = site.data.categories.default.icon_name | downcase %}
-    {% assign icon_family = site.data.categories.default.icon_family %}
-    {% assign icon_size = site.data.categories.default.icon_size %}
-  {% else%}
-    {% assign icon_name   = _category_icon.icon_name | downcase %}
-    {% assign icon_family = _category_icon.icon_family %}
-    {% assign icon_size   = _category_icon.icon_size %}
+-------------------------------------------------------------------------------- {% endcomment %}
+{% for item in _category_icons %}
+  {% if item[0] == _category %}
+    {% assign _category = "found" %}
+    {% assign _category_icon = item[1] %}
+    {% break %}
   {% endif %}
+{% endfor %}
 
-  {% if icon_family == "FontAwesome" %}
-    {% assign icon_family = "fa" %}
-  {% elsif icon_family == "Glyphicon" %}
-    {% assign icon_family = "glyphicon" %}
-  {% elsif icon_family == "MDI" %}
-    {% assign icon_family = "mdi" %}
-  {% elsif icon_family == "ZMDI" %}
-    {% assign icon_family = "zmdi" %}
-  {% endif %}
+{% if _category == include.category %}
+  {% assign icon_name = site.data.categories.default.icon_name | downcase %}
+  {% assign icon_family = site.data.categories.default.icon_family %}
+  {% assign icon_size = site.data.categories.default.icon_size %}
+{% else%}
+  {% assign icon_name   = _category_icon.icon_name | downcase %}
+  {% assign icon_family = _category_icon.icon_family %}
+  {% assign icon_size   = _category_icon.icon_size %}
+{% endif %}
 
+{% if icon_family == "FontAwesome" %}
+  {% assign icon_family = "fa" %}
+{% elsif icon_family == "Glyphicon" %}
+  {% assign icon_family = "glyphicon" %}
+{% elsif icon_family == "MDI" %}
+  {% assign icon_family = "mdi" %}
+{% elsif icon_family == "ZMDI" %}
+  {% assign icon_family = "zmdi" %}
+{% endif %}

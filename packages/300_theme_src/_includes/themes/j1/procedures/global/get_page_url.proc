@@ -34,22 +34,17 @@
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
 
 {% comment %} Variables
-   ------------------------------------------------------------ {% endcomment %}
-
-
-
-{% comment %} Liquid procedures
-   ------------------------------------------------------------ {% endcomment %}
-
+-------------------------------------------------------------------------------- {% endcomment %}
 
 
 {% comment %} Main
-   ------------------------------------------------------------ {% endcomment %}
-
-  {% if site.permalink == 'none' %}
-    {% capture page_url %}{{ page.url }}.html{% endcapture %}
-  {% else %}
-    {% capture page_url %}{{ page.url }}{% endcapture %}
-  {% endif %}
+-------------------------------------------------------------------------------- {% endcomment %}
+{% if site.permalink == 'none' %}
+  {% capture page_url %}{{ page.url }}.html{% endcapture %}
+{% else %}
+  {% capture page_url %}{{ page.url }}{% endcapture %}
+{% endif %}
