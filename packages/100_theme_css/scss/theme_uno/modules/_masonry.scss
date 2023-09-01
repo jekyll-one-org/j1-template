@@ -43,7 +43,7 @@ a.masonry-article-link {
   font-weight: 500 !important;
   text-decoration: none;
   border-bottom: unset;
-  color: #F5F5F5;
+  color: #FFFFFF;
 }
 
 a.masonry-article-link:hover {
@@ -89,18 +89,20 @@ a.masonry-article-link:hover {
     .masonry-article-caption {
         padding: 1.5rem;
         text-align: center;
-        background-color: $gray-300;
+        background-color: $gray-400;
 
         .masonry-article-caption-heading {
-            font-size: 1.5rem;
-            font-family: $headings-font-family;
-            font-weight: $headings-font-weight;
-            margin-bottom: 0;
+          font-size: 1.5rem;
+          font-family: $headings-font-family;
+          font-weight: $headings-font-weight;
+          margin-bottom: 0;
         }
 
         .masonry-article-caption-subheading {
-            font-style: italic;
-            font-family: $subheadings-font-family;
+          font-style: italic;
+          font-weight: 600;
+          font-family: $subheadings-font-family;
+          color: $gray-900;
         }
     }
 }
