@@ -12,8 +12,6 @@
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
 */
-@charset 'UTF-8';
-
 
 /* Close Button
 -------------------------------------------------------------------------------- */
@@ -33,4 +31,17 @@
 	opacity: 0.85;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+}
+
+
+/* Arrow Buttons
+-------------------------------------------------------------------------------- */
+
+/* jadams, 2023-09-01: set top postion */
+.slick-lightbox .slick-prev {
+  top: 45%;
+}
+
+.slick-lightbox .slick-next {
+  top: 45%;
 }

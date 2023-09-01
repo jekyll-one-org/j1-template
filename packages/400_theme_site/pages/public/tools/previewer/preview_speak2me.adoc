@@ -16,6 +16,11 @@ keywords: >
                                         sites, static, jamstack, bootstrap,
                                         speech synthesise, sst, j1 module, speak2me, jquery
 
+image:
+  path:                                 /assets/images/pages/roundtrip/images-1920x1280-bw.jpg
+  width:                                1920
+  height:                               1280
+
 categories:                             [ Module ]
 tags:                                   [ Speech Synthesise, SST, Speak2Me, Preview ]
 
@@ -23,9 +28,9 @@ book:
   cover:                                /assets/images/collections/books/biography/a_life_in_questions.jpg
 
 tts:                                    true
-regenerate:                             true
+comments:                               false
+regenerate:                             false
 permalink:                              /pages/public/tools/previewer/speak2me/
-
 
 resources:                              [
                                           animate, clipboard, carousel, comments,
@@ -73,34 +78,29 @@ resource_options:
 [role="dropcap"]
 Speak2Me, a speech synthesise module for J1 Template, enables a so-called
 Text-To-Speech converter. The converter functionality allows users to sit
-back and listen to the browser read aloud the important contents on a
-Web page.
+back and listen to the browser read aloud the important contents on a web
+page.
 
 This page provides typical content elements used for web pages. Run the
 converter to experience how those content elements are spoken.
 
+[role="mb-4"]
 The converter is started by clicking on the *speaker* symbol
 mdi:speaker[24px, md-blue] which is placed top right in the *menu bar*.
 
-IMPORTANT: The Speak2Me module is currently only available as an experimental
-version, and only base elements for designing websites are used for
-speech output. In the case of complex elements such as tables, images,
-carousels, or galleries, only information texts are spoken.
+[CAUTION]
+====
+The Speak2Me module is currently only available as an experimental version,
+and only base elements are used for speech output. In the case of complex
+elements such as tables, images, carousels, or galleries, only information
+is spoken.
 
-The *quality* of the *voice output* depends heavily on the web browser
-used. Depending on the browser, different voices are provided for the
-outputs, which differ *significantly* in their quality. _Google_'s
-browser *Chrome* delivers acceptable results. However, the best results
-are provided by _Microsoft_ with the browser *Edge*.
+Browsers from manufacturers such as *Firefox* or Chromium-based browsers
+like *Opera* use voices provided by Microsoft but in very poor quality and
+are not supported for speech output.
 
-Browsers from other manufacturers, such as Firefox, usually use
-voices provided by Microsoft free of charge. However, the quality of the
-outputs cannot be compared to those offered by Microsoft Edge. Other
-Chromium-based browsers, such as the *Opera* browser, provide voices of a
-very poor quality and cannot be recommended for voice output.
-
-CAUTION: The Speak2Me module is currently *not* supported on mobile
-devices.
+Note that *Text-To-Speech* conversion is *not* available on mobile devices.
+====
 
 [role="mt-4"]
 mdi:clock-time-five-outline[24px, md-gray mr-2]
@@ -297,40 +297,44 @@ link:{url-jamstack-club--themes}[Popular SSGs and Themes at Jamstack Club, {brow
 mdi:link-variant[24px, md-gray mr-2 ml-3]
 link:{url-jekyll-themes--home}[Popular SSGs and Themes at Jekyll Themes, {browser-window--new}]
 
-
 [role="mt-5"]
-== Information elements
+== Information Blocks
 
-Information blocks draw the reader to certain statements by labeling them
+Information elements draw the reader to certain statements by labeling them
 as priorities displayed in separate blocks. The J1 template system provides
 five types shown by the following examples.
 
-=== Type NOTE
-
-NOTE: Blocks of type *note* give additional details on the currently
+[NOTE]
+====
+Blocks of type *note* give additional details on the currently
 discussed topic that may help the reader to understand the following
 content better.
+====
 
-=== Type TIP
-
-TIP: An *Information* block of type *tip* provides facts that may help
+[TIP]
+====
+An *Information* block of type *tip* provides facts that may help
 the reader *to go further* or points to additional *options* available
 that can be used.
+====
 
-=== Type IMPORTANT
-
-IMPORTANT: Blocks of type *important* provide facts that should be
+[IMPORTANT]
+====
+Blocks of type *important* provide facts that should be
 remembered.
+====
 
-=== Type WARNING
+[WARNING]
+====
+Blocks of type *warning* advise readers to act carefully and point to
+potential risks or trippings.
+====
 
-WARNING: A block of type *warning* instructs readers of potential danger,
+[CAUTION]
+====
+A block of type *caution* instructs readers of potential danger,
 harm, or consequences for the wrong usage.
-
-=== Type CAUTION
-
-CAUTION: *Information* blocks of type *caution* advise readers to act
-carefully and point to potential risks or trippings.
+====
 
 
 [role="mt-5"]
@@ -461,8 +465,11 @@ experience.
 
 image::/assets/images/pages/panels/responsive-text-1920x800.jpg[{{page.title}}, width=1280, role="mb-4"]
 
-NOTE: Carefully chosen and well-placed images can significantly enhance
+[NOTE]
+====
+Carefully chosen and well-placed images can significantly enhance
 the overall effectiveness of a web page.
+====
 
 [role="mt-4"]
 [#lightbox2]
@@ -564,26 +571,25 @@ techniques are supported by the MS Lite version.
 === Slider using Thumbs
 
 To give the users better control over a slideshow, sliders provide complex UI
-elements like *thumbs* placed side-by-side leftor right at the top, or at
-the bottom of a slideshow. Find two examples to control a slideshow by
-*thumb images*.
+elements like *thumbs* placed side-by-side left or right, or at the bottom
+of a slideshow. Find two examples below how to control a slideshow.
 
-.ThumbImage controls
+.Image controls
 masterslider::ms_00004[role="mb-5"]
 
-.ThumbInfo controls
+.Text controls
 masterslider::ms_00007[role="mt-4 mb-5"]
 
 
 [role="mt-5"]
 == Galleries
 
-link:{url-justified-gallery--home}[JustifiedGallery, {browser-window--new}]
-is a great _jQuery_ Plugin to create responsive and high-quality justified
-image galleries. J1 Template combines the Gallery with the lightboxes
-supported to enlarge the images of a gallery. See the gallery in action; and
-for sure, all that you see is even responsive. Change the size of your current
-browser window, by width or height to see what will happen!
+The J1 module link:{url-justified-gallery--home}[JustifiedGallery, {browser-window--new}]
+is a great tool to create *responsive* and high-quality *justified* image
+galleries. Jekyll One combines the gallery with a lightbox to enlarge the
+images of a gallery. See the gallery in action. And for sure, all what you see
+is even *responsive*. Change the size of your current browser width to see what
+will happen!
 
 .Masonry grid Gallery
 gallery::jg_customizer[role="mb-5"]

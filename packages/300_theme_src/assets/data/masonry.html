@@ -144,7 +144,7 @@ exclude_from_search:                    true
               ------------------------------------------------------------------ {% endcomment %}
               {% for category in categories %}
               {% if category contains post.category %}
-              <a  class="article-link d-block text-white text-uppercase link-no-decoration {{translate}}"
+              <a  class="masonry-article-link d-block text-white text-uppercase link-no-decoration {{translate}}"
                   href="/pages/public/blog/navigator/archive/categoryview/#{{grid.group | slugify}}"
                   target="{{target}}"
                   style="font-size: 32px;">
@@ -166,7 +166,7 @@ exclude_from_search:                    true
 
               <!-- Post link (caption) -->
               <h4 class="caption notoc">
-                <a class="article-link {{translate}}"
+                <a class="masonry-article-link {{translate}}"
                    href="{{post.url}}"
                    target="{{target}}"
                    style="font-size: 32px;">
@@ -233,12 +233,12 @@ exclude_from_search:                    true
 
       {% for article in articles %}
       <div class="col-xl-{{masonry_options.responsive.xl}} col-lg-{{masonry_options.responsive.lg}} col-md-{{masonry_options.responsive.md}} col-sm-{{masonry_options.responsive.sm}} col-{{masonry_options.responsive.xs}} px-{{gutter}} py-{{gutter}}">
-        <!-- Article item -->
-        <div id="{{article.title | downcase | replace: ' ' ,'_'}}" class="article-item article-item--w400">
+        <!-- (Masonry) Article item -->
+        <div id="{{article.title | downcase | replace: ' ' ,'_'}}" class="masonry-article-item masonry-article-item--w400">
           {% if grid.preview %}
-          <a class="article-link" data-bs-toggle="modal" href="#articleModal_{{grid.id}}_{{forloop.index}}">
-            <div class="article-hover">
-              <div class="article-hover-content">
+          <a class="masonry-article-link" data-bs-toggle="modal" href="#articleModal_{{grid.id}}_{{forloop.index}}">
+            <div class="masonry-article-hover">
+              <div class="masonry-article-hover-content">
                 <i class="mdib mdib-plus mdib-10x"></i>
               </div>
             </div>
@@ -247,14 +247,14 @@ exclude_from_search:                    true
           {% else %}
             <img class="{{grid.image_styles}}" src="{{article.image.path}}" alt="{{article.title}}" style="{{image_filters}}; height: {{grid.image_height}}; width: {{grid.image_width}}">
           {% endif %}
-          <div class="article-caption">
-            <div class="article-caption-heading">
-              <a class="article-link {{translate}}" href="{{article.url}}">{{article.title}}</a>
+          <div class="masonry-article-caption">
+            <div class="masonry-article-caption-heading">
+              <a class="masonry-article-link {{translate}}" href="{{article.url}}" target="{{target}}">{{article.title}}</a>
             </div>
-            <div class="article-caption-subheading text-muted">{{article.tags[0]}}</div>
+            <div class="masonry-article-caption-subheading text-muted">{{article.tags[0]}}</div>
           </div>
         </div>
-        <!-- /Article item -->
+        <!-- /(Masonry) Article item -->
       </div>
 
       <!-- Article Modal-->

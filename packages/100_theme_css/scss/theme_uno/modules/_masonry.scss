@@ -14,11 +14,119 @@
  # -----------------------------------------------------------------------------
 */
 
+$subheadings-font-family: "Lato",
+-apple-system,
+BlinkMacSystemFont,
+"Segoe UI",
+Roboto,
+"Helvetica Neue",
+Arial,
+sans-serif,
+"Apple Color Emoji",
+"Segoe UI Emoji",
+"Segoe UI Symbol",
+"Noto Color Emoji";
+
+.masonry-parent {
+}
+
+.grid {
+}
+
+.grid-sizer,
+.grid-item {
+  float: left;
+  width: 33%;
+}
+
+a.masonry-article-link {
+  font-weight: 500 !important;
+  text-decoration: none;
+  border-bottom: unset;
+  color: #F5F5F5;
+}
+
+a.masonry-article-link:hover {
+  color: #757575;
+}
+
+.masonry-article-item {
+    max-width: 26rem;
+    margin-left: auto;
+    margin-right: auto;
+
+    .masonry-article-link {
+        position: relative;
+        display: block;
+        margin: 0 auto;
+        border-bottom: none;
+
+        .masonry-article-hover {
+            display: flex;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            // background: fade-out($primary, 0.1);
+            background: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity ease-in-out 0.25s;
+
+            .masonry-article-hover-content {
+                font-size: 1.25rem;
+                color: white;
+            }
+        }
+
+        &:hover {
+            .masonry-article-hover {
+                opacity: 1;
+            }
+        }
+    }
+
+    .masonry-article-caption {
+        padding: 1.5rem;
+        text-align: center;
+        background-color: $gray-300;
+
+        .masonry-article-caption-heading {
+            font-size: 1.5rem;
+            font-family: $headings-font-family;
+            font-weight: $headings-font-weight;
+            margin-bottom: 0;
+        }
+
+        .masonry-article-caption-subheading {
+            font-style: italic;
+            font-family: $subheadings-font-family;
+        }
+    }
+}
+
+.masonry-article-item--w100 {
+  max-width: 100px !important;
+}
+.masonry-article-item--w200 {
+  max-width: 200px !important;
+}
+.masonry-article-item--w300 {
+  max-width: 300px !important;
+}
+.masonry-article-item--w400 {
+  max-width: 400px !important;
+}
+.masonry-article-item--w500 {
+  max-width: 500px !important;
+}
+
 .masonry-title {
     text-rendering: optimizeLegibility;
     text-align: left;
     line-height: 1.25;
     font-size: 1.125rem;
     font-weight: 500;
+    margin-top: 1.75rem;
     margin-bottom: .5rem;
 }

@@ -342,7 +342,7 @@
         voiceTags['table']            = new voiceTag('Start of an embedded table,', 'This element ist not spoken.');
         voiceTags['card-header']      = new voiceTag('', '');
         voiceTags['doc-example']      = new voiceTag('Start of an embedded example element,', 'This element ist not spoken.');
-        voiceTags['admonitionblock']  = new voiceTag('Start of an attention element of type, ', '');
+        voiceTags['admonitionblock']  = new voiceTag('Start of an attention element of type, ', ':');
         voiceTags['listingblock']     = new voiceTag('Start of an embedded structured text block,', 'This element ist not spoken.');
         voiceTags['carousel']         = new voiceTag('Start of an embedded carousel element,', 'This element ist not spoken.');
         voiceTags['slider']           = new voiceTag('Start of an embedded slider element,', 'This element ist not spoken.');
@@ -844,7 +844,7 @@
 
           if ((content !== undefined) && (content != '')) {
             jQuery('<div>' + prepend + ' ' + content + '</div>').insertBefore(this);
-            jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+            jQuery('<div>' + appended + '</div>').insertBefore(this);
           }
 
           jQuery(this).remove();
@@ -960,6 +960,36 @@
 
           prepend  = voiceTags['carousel'].prepend;
           appended = voiceTags['carousel'].append;
+
+          if ((title !== undefined) && (title != '')) {
+            jQuery('<div>' + prepend + ' with the caption,' + title + pause_spoken + '</div>').insertBefore(this);
+            jQuery('<div>' + appended + '</div>').insertBefore(this);
+          } else {
+            jQuery('<div>' + prepend + '</div>').insertBefore(this);
+            jQuery('<div>' + appended + '</div>').insertBefore(this);
+          }
+
+          jQuery(this).remove();
+        });
+
+        // Search for <masonry> tags, check for previous declared <div>
+        // container that contains the title element and insert the
+        // text if exists and finally remove the DOM object.
+        //
+        jQuery(clone).find('masonry').addBack('masonry').each(function() {
+
+          if ($(this).prev()[0].innerText !== undefined) {
+            title = $(this).prev()[0].innerText;
+            title_element = jQuery(this).prev();
+            // remove the title 'before' the DOM object deleted
+            //
+            jQuery(title_element).remove();
+          } else {
+            title = '';
+          }
+
+          prepend  = voiceTags['masonry'].prepend;
+          appended = voiceTags['masonry'].append;
 
           if ((title !== undefined) && (title != '')) {
             jQuery('<div>' + prepend + ' with the caption,' + title + pause_spoken + '</div>').insertBefore(this);

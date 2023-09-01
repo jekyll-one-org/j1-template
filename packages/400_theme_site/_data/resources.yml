@@ -1646,7 +1646,7 @@ resources:
       dependencies:                     false
       pass_init_data:                   false
       data:
-        css:                            [ modules/masonry/css/theme/uno ]
+        css:                            []
         files:                          [ adapter/js/masonry.js ]
         js:                             [ modules/masonry/js/masonry ]
         init_function:                  [ j1.adapter.masonry.init ]

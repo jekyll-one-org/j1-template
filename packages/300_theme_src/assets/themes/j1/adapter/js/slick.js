@@ -257,17 +257,20 @@ j1.adapter.slick = (function (j1, window) {
                   });
                 } // END carousel lightbox enabled
 
-                logger.info('\n' + 'adjust positions of arrows on id: {{carousel.id}}');
+                logger.info('\n' + 'adjust positions of slick lightbox arrows on id: {{carousel.id}}');
                 var buttons = $("#{{carousel.id}} > button");
+                var arrowTopPos = Math.round(document.documentElement.clientHeight/2)
 
-                // re-calculate right arrow position based on gutter settings
+                // jadams, 2023-09-01: not used anymore
                 //
-                var percentage_right = 3 + carouselSettings.gutters;
-                $.each($(buttons), function(index, button) {
-                  if (button.textContent.includes("Next")) {
-                    $(button).attr('style','right: ' + percentage_right + '%');
-                  }
-                });
+                // re-calculate right arrow position based on gutter settings
+                // var percentage_right = 3 + carouselSettings.gutters;
+                // $.each($(buttons), function(index, button) {
+                //
+                //   if (button.textContent.includes("Next")) {
+                //     $(button).attr('style', 'right: ' + percentage_right + '%');
+                //   }
+                // });
 
                 // add CSS style for individual top position for all carousels
                 //

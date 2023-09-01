@@ -87,7 +87,7 @@ a.link-no-decoration:hover {
 	display: block;
 	width: 100%;
 	padding-left: 0;                                                              /* overwite left padding */
-  margin: 0;                                                                    /* overwite button styles */
+  margin: 10px 0 0 0;                                                           /* overwite button styles */
 	list-style: none;
 	text-align: center;
   line-height: 0;
