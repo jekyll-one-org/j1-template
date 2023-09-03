@@ -166,8 +166,9 @@ j1.adapter.masterslider = (function (j1, window) {
       var dependencies_met_module_finished = setInterval(function() {
         var contentState    = $('#content').css("display");
         var contentVisible  = (contentState == 'block') ? true: false;
+        var atticFinished   = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-        if (_this.getState() == 'sliders_initialized' && contentVisible) {
+        if (_this.getState() == 'sliders_initialized' && contentVisible && atticFinished) {
             // TODO: Check why a timeout is required to load the Slider Manager
             setTimeout (function() {
               if (sliderManager) document.body.appendChild(msSliderManager);

@@ -413,42 +413,42 @@
       - title:                          Current Theme
         href:                           /pages/public/tools/previewer/current_theme/
         icon:                           theme-light-dark
-      - title:                          Speak2Me
-        href:                           /pages/public/tools/previewer/speak2me/
-        icon:                           speaker
 
-      - title:                          Icon Picker
-        href:                           https://jekyll.one/pages/public/tools/previewer/icon-picker/
-        icon:                           emoticon-cool-outline
+      - title:                          Speech Converter
+        href:                           https://jekyll.one/pages/public/tools/previewer/speak2me/
+        icon:                           speaker
         target:                         _blank
-      - title:                          Slick
+
+      - title:                          Slick Slider
         href:                           https://jekyll.one/pages/public/tools/previewer/slick/
         icon:                           view-carousel
-        target:                         _blank
-      - title:                          Masonry
-        href:                           https://jekyll.one/pages/public/tools/previewer/masonry/
-        icon:                           view-dashboard-variant
-        target:                         _blank
-      - title:                          MD Color Palette
-        href:                           https://jekyll.one/pages/public/tools/previewer/color_palette/
-        icon:                           format-color-fill
         target:                         _blank
       - title:                          Master Slider
         href:                           https://jekyll.one/pages/public/tools/previewer/masterslider/
         icon:                           gesture-swipe
         target:                         _blank
-      - title:                          Country Flags
+      - title:                          Masonry
+        href:                           https://jekyll.one/pages/public/tools/previewer/masonry/
+        icon:                           view-dashboard-variant
+        target:                         _blank
+
+      - title:                          Icon Picker
+        href:                           https://jekyll.one/pages/public/tools/previewer/icon-picker/
+        icon:                           emoticon-cool-outline
+        target:                         _blank
+      - title:                          Country Flag Icons
         href:                           https://jekyll.one/pages/public/tools/previewer/country_flags/
         icon:                           flag
         target:                         _blank
-      - title:                          Font Icons
-        href:                           https://jekyll.one/pages/public/tools/previewer/icon-picker/
-        icon:                           sprout
-        target:                         _blank
-        icon:                           emoticon-cool-outline
-      - title:                          Rouge Styles
+
+      - title:                          Code Highlighter
         href:                           https://jekyll.one/pages/public/tools/previewer/rouge/
         icon:                           code-parentheses
+        target:                         _blank
+
+      - title:                          Color Palette
+        href:                           https://jekyll.one/pages/public/tools/previewer/color_palette/
+        icon:                           format-color-fill
         target:                         _blank
 
     # --------------------------------------------------------------------------
