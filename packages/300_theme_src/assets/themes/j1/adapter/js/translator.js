@@ -55,7 +55,6 @@ regenerate:                             true
   {% assign production = true %}
 {% endif %}
 
-
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/adapter/js/translator.js
@@ -104,6 +103,7 @@ j1.adapter.translator = (function (j1, window) {
   var hostname;
   var domain;
   var subDomain;
+  var isSubDomain;
   var cookie_option_domain;
   var secure;
   var logText;
@@ -149,7 +149,8 @@ j1.adapter.translator = (function (j1, window) {
       baseUrl               = url.origin;
       hostname              = url.hostname;
       domain                = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
-      subDomain             = j1.subdomain(hostname);
+      subDomain             = '.' + domain;
+      isSubDomain           = j1.subdomain(hostname);
       secure                = (url.protocol.includes('https')) ? true : false;
       navigator_language    = navigator.language || navigator.userLanguage;     // userLanguage for MS IE compatibility
       translation_language  = navigator_language.split('-')[0];
@@ -334,6 +335,7 @@ j1.adapter.translator = (function (j1, window) {
               // remove all googtrans cookies that POTENTIALLY exists
               //
               Cookies.remove('googtrans', { domain: domainAttribute });
+              Cookies.remove('googtrans', { domain: subDomain });
               Cookies.remove('googtrans', { domain: hostname });
               Cookies.remove('googtrans');
             }
@@ -419,8 +421,9 @@ j1.adapter.translator = (function (j1, window) {
       var url               = new liteURL(window.location.href);
       var baseUrl           = url.origin;
       var hostname          = url.hostname;
-      var auto_domain       = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
-      var subDomain         = j1.subdomain(hostname);
+      var domain            = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
+      var subDomain         = '.' + domain;
+      var isSubDomain       = j1.subdomain(hostname);
       var domainAttribute   = '';
       var srcLang;
       var destLang;
@@ -458,6 +461,7 @@ j1.adapter.translator = (function (j1, window) {
         // remove all googtrans cookies that POTENTIALLY exists
         //
         Cookies.remove('googtrans', { domain: domainAttribute });
+        Cookies.remove('googtrans', { domain: subDomain });
         Cookies.remove('googtrans', { domain: hostname });
         Cookies.remove('googtrans');
         location.reload();
@@ -471,6 +475,7 @@ j1.adapter.translator = (function (j1, window) {
       // remove all googtrans cookies that POTENTIALLY exists
       //
       Cookies.remove('googtrans', { domain: domainAttribute });
+      Cookies.remove('googtrans', { domain: subDomain });
       Cookies.remove('googtrans', { domain: hostname });
       Cookies.remove('googtrans');
 
@@ -480,8 +485,8 @@ j1.adapter.translator = (function (j1, window) {
       // in an empty field and two cookies (host+domain) if domain option
       // is enabled!!!
       // -----------------------------------------------------------------------
-      if (subDomain) {
-        Cookies.set('googtrans', transCode, { domain: auto_domain });
+      if (isSubDomain) {
+        Cookies.set('googtrans', transCode, { domain: domain });
       } else {
         Cookies.set('googtrans', transCode);
       }
@@ -499,9 +504,9 @@ j1.adapter.translator = (function (j1, window) {
     cbDeepl: function () {
       var logger     = log4javascript.getLogger('j1.adapter.translator.cbDeepl');
 
-      // place
-      // code for processing
-      // here
+      //
+      // place code for processing here
+      //
 
     } // END cbDeepl
 
