@@ -667,11 +667,10 @@ var j1 = (function (options) {
           if (panels_exists) {j1.initPanel(settings)};
           if (footer_exists) {j1.initFooter(settings);}
 
-          // process pages having banners or panels
-          //
           if (banner_blocks || panel_blocks) {
+            // pages having banners or panels
+
             var dependencies_met_blocks_ready = setInterval (function (settings) {
-              // check the footer if HTML portion is loaded successfully
               if (footer_exists) {
                 footer_state = j1.getXhrDataState('#{{footer_id}}');
               } else {
@@ -679,7 +678,7 @@ var j1 = (function (options) {
                 footer_state = 'success';
               }
 
-              // check bannern if HTML content is loaded successfully
+              // check bannern if HTML content loaded successfully
               //
               if (banners_exits) {
                 Object.entries(j1.xhrDataState).forEach(entry => {
@@ -693,7 +692,7 @@ var j1 = (function (options) {
                 banner_state = 'success';
               }
 
-              // check panels if HTML content is loaded successfully
+              // check panels if HTML content loaded successfully
               //
               if (panels_exists)  {
                 Object.entries(j1.xhrDataState).forEach(entry => {
@@ -707,40 +706,24 @@ var j1 = (function (options) {
                 panel_state = 'success';
               }
 
-              // show the content section if block content is available (CLS optimization)
+              // show the content section for 'block content' to optimze CLS
               //
               if (banner_state == 'success' && panel_state == 'success' && footer_state == 'success') {
+//            if (banner_state == 'success' && panel_state == 'success') {
+//            if (true) {
                 // show the content|footer
                 //
                 $('#content').show();
                 $('.{{footer}}').show();
 
+//              clearInterval(dependencies_met_page_ready);
                 clearInterval(dependencies_met_blocks_ready);
               }
             }, 10);
           } else {
-            // process pages w/o banners or panels
-            //
-            var dependencies_met_footer_block_ready = setInterval (function (settings) {
-              // check the footer if HTML portion is loaded successfully
-              if (footer_exists) {
-                footer_state = j1.getXhrDataState('#{{footer_id}}');
-              } else {
-                // pages w/o footer
-                footer_state = 'success';
-              }
-
-              // show the content section if footer is available (CLS optimization)
-              //
-              if (footer_state == 'success') {
-                // show the content|footer
-                //
-                $('#content').show();
-                $('.{{footer}}').show();
-
-                clearInterval(dependencies_met_footer_block_ready);
-              }
-            }, 10);
+            // pages w/o banners or panels
+            $('#content').show();
+            $('.{{footer}}').show();
           }
         }
       }, 10);
