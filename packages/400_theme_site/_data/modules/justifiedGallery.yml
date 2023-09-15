@@ -120,7 +120,7 @@ settings:
           mode:                         lg-fade
           cssEasing:                    cubic-bezier(0.25, 0, 0.25, 1)
 
-    # ----------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
     # Old Times
     #
     - gallery:
@@ -144,8 +144,8 @@ settings:
                                         ]
         captions_lightbox:              []
         gallery_options:
-          rowHeight:                    200
-          margins:                      5
+          rowHeight:                    250
+          margins:                      3
         lightbox_options:
           lightbox:                     lg
           mode:                         lg-fade
