@@ -1,22 +1,35 @@
 ---
 title:                                  Welcome to Jekyll
 tagline:                                Websites For Everyone
+
 #date:                                  <%= Time.now.strftime('%Y-%m-%d') %>
 #last_modified:                         2023-01-01
 
-categories:                             [ Jekyll, Featured ]
-tags:                                   [ Post, Template ]
+description: >
+                                        Jekyll is a static site generator that allows you to build websites
+                                        using HTML, CSS, Javascript, and Markdown for writing the content.
+                                        It uses templates and layouts to generate the static files that make
+                                        up your website, which can be hosted on any web server.
+keywords: >
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap
+
+categories:                             [ Jekyll ]
+tags:                                   [ Template, Theme ]
 
 image:
   path:                                 /assets/images/modules/attics/katie-moum-1920x1280.jpg
   width:                                1920
   height:                               1200
-  alt:                                  Jekyll for Everyone
+  alt:                                  Photo by Katie Moum on Unsplash
 
 group:                                  Featured
 series:                                 Featured
+
+#tts:                                   false
 regenerate:                             false
 
+#resources:                             [ animate, bmd ]
 resources:                              [ animate ]
 resource_options:
   - attic:
@@ -43,12 +56,12 @@ resource_options:
 // Place an excerpt at the most top position
 // -----------------------------------------------------------------------------
 [role="dropcap"]
-A static site serves the content straight to the user as it is stored on
-the server-side.
+Jekyll is a static site generator that allows you to build websites
+using HTML, CSS, Javascript, and Markdown or Asciidoc for writing
+the content.
 
-Contrary to WordPress, which uses a database to load dynamic content, a
-static site will display the content immediately as it will directly load
-the HTML files from the server.
+It uses templates and layouts to generate the static files that make up your
+website, which can be hosted on any web server.
 
 excerpt__end
 
@@ -68,8 +81,12 @@ All you’re doing at the end of the day is writing your content, and the J1
 Template does all the tricky things: putting out HTML, Javascript, and CSS.
 As a result, the site creation process gets out of your way.
 
+mdi:clock-time-five-outline[24px, md-gray mr-2 mt-4]
+*3 Minutes* to read
+
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
+[role="mt-5"]
 == What is a static site?
 
 A static site serves the content straight to the user as it is stored on
@@ -78,16 +95,12 @@ which use a database to load dynamic content, a static site will display
 the same content to every user as it will directly load the HTML files
 on the server.
 
-A static site serves the content straight to the user as it is stored on
-the server-side. In opposition to WordPress, which uses a database to load
-dynamic content, a static site will display the same content to every user
-as it will directly load the HTML files on the server.
-
 In the last few years, static sites have greatly increased in popularity.
 This surge is primarily due to advances in developer tools (languages and
 libraries) and a stronger desire among businesses to optimize website
 performance beyond the limits of a database-driven site.
 
+[role="mt-4"]
 === What's different?
 
 A dynamic website uses a database and PHP/MySQL to generate the content of
@@ -102,6 +115,7 @@ leveraging HTML and CSS as well as server-side scripting languages like PHP
 to build webpages on the fly and serve different content to each site
 visitor.
 
+[role="mt-4"]
 === Why use a static site?
 
 What are the advantages of a static website over a dynamic site?
@@ -146,6 +160,7 @@ Control::
 *You're the master*. You were using a CMS means, giving control over your
 site to others. Simple like this.
 
+[role="mt-5"]
 == Why use a site generator?
 
 Working with pure HTML files is annoying; senseless today. Indeed, if you need
@@ -159,6 +174,7 @@ content and the Template. To say it another way, by using a static site
 generator, you will only need to make the modification once, and the
 generator will apply it to all your pages.
 
+[role="mt-4"]
 === Why Jekyll?
 
 As the popularity of static sites is growing, there are plenty of static
@@ -172,7 +188,7 @@ choose Jekyll as for me. It's a well-known static site generator, good support
 in case of trouble, and the software gets regularly updated. This website is
 powered by Jekyll. For good reasons.
 
-
+[role="mt-5"]
 == Automatically generated posts
 
 You’ll find this post in your `_posts` directory. Go ahead and edit it and
