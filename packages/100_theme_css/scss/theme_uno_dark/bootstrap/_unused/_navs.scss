@@ -146,6 +146,10 @@
   }
 }
 
+li.page-item.disabled {
+    background-color: $gray-300;
+}
+
 .breadcrumb {
   // border: 1px solid $darken-600;
   text-shadow: 1px 1px 1px $darken-300;

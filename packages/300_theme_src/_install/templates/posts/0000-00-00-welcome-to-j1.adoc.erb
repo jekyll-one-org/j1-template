@@ -24,12 +24,13 @@ image:
   alt:                                  Photo by Katie Moum on Unsplash
 
 group:                                  Featured
-series:                                 Featured
+#series:                                Featured
 
-#tts:                                   false
+tts:                                    true
+fab_menu_id:                            open_toc
+comments:                               false
 regenerate:                             false
 
-#resources:                             [ animate, bmd ]
 resources:                              [ animate ]
 resource_options:
   - attic:
@@ -82,7 +83,7 @@ Template does all the tricky things: putting out HTML, Javascript, and CSS.
 As a result, the site creation process gets out of your way.
 
 mdi:clock-time-five-outline[24px, md-gray mr-2 mt-4]
-*3 Minutes* to read
+*5 Minutes* to read
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
@@ -115,50 +116,71 @@ leveraging HTML and CSS as well as server-side scripting languages like PHP
 to build webpages on the fly and serve different content to each site
 visitor.
 
-[role="mt-4"]
-=== Why use a static site?
+
+[role="mt-5"]
+== Why use a static site?
 
 What are the advantages of a static website over a dynamic site?
-You may be wondering *Why should I build a static site when I could do the
-same by using WordPress?*. Well, having a database implies a lot of downsides.
-Here come the main advantages of using a static site over a dynamic
-one.
+You may be wondering *Why should I build a static site* when I could do *the
+same by using WordPress?*.
 
-Performance::
-*The better performance and a crazy fast load time*.
-One of the main advantages of using a static site is the fact that
-it is crazy fast to load. Indeed, when the user requests a page, there is
+Well, having a database implies a lot of downsides. Here come the main
+advantages of using a static site over a dynamic one.
+
+[role="mt-4"]
+=== Performance
+
+Better performance and a crazy fast load time.
+
+One of the main advantages of using a static site is the fact that it is
+crazy fast to load. Indeed, when the user requests a page, there is
 no need to request a database and various files to generate the
 page itself as all the content is already placed in a one and only file:
-an HTML one. That’s why by using a static site, you will get a boost in
+an HTML one.
+
+That’s why by using a static site, you will get a boost in
 your loading time that will provide a great user experience for the
 internauts. Moreover, we know that more and more people are surfing the
 web using their smartphones with, sometimes, poor internet connections.
 That’s why having fast loading times will participate in making your
 website mobile-friendly.
 
-Security::
-*Having a static website: say goodbye to hacking and security issues*.
+[role="mt-4"]
+=== Security
+
+Say goodbye to hacking and security issues.
+
 Are you tired of getting WordPress notifications about security issues and
 updates every week? No worries, as a static site has no database, there are
 close to no hack possible compared to a WordPress website. Indeed, your
 site will have way fewer footprints and security issues since it will
-only load plain HTML and CSS files. The security gain in having a static
+only load plain HTML and CSS files.
+
+The security gain in having a static
 website is one of the main reasons why many famous brands switch to a
 static site instead of having their website on Drupal or WordPress.
 
-Hosting::
-*Building a static site and hosting: you will save you money*.
-Using a static site, you will only have most of the time only HTML and CSS
-files to host. This kind of file is super light which also means that you
-will not need a powerhouse hosting to have a static site up and running.
+[role="mt-4"]
+=== Hosting
+
+Building a static site and hosting: you will save money.
+
+Using a static site, you need only HTML and CSS files to host. This kind
+of file is super light which also means that you will not need a powerhouse
+hosting to have a static site up and running.
+
 Moreover, if your traffic suddenly increases, your site will not go down,
 contrary to a dynamic site that should request the database each time
 for each user.
 
-Control::
-*You're the master*. You were using a CMS means, giving control over your
-site to others. Simple like this.
+[role="mt-4"]
+=== Control
+
+You're the master.
+
+You were using a CMS means, giving control over your site to others.
+Simple like this.
+
 
 [role="mt-5"]
 == Why use a site generator?
@@ -187,37 +209,3 @@ When I decided to go for a blog based on a static web, I personally
 choose Jekyll as for me. It's a well-known static site generator, good support
 in case of trouble, and the software gets regularly updated. This website is
 powered by Jekyll. For good reasons.
-
-[role="mt-5"]
-== Automatically generated posts
-
-You’ll find this post in your `_posts` directory. Go ahead and edit it and
-re-build the site to see your changes. You can rebuild the site in many
-different ways, but the most common way is to run `jekyll serve`, which
-launches a web server and auto-regenerates your site when a file is updated.
-
-Jekyll requires blog post files to be named according to the following format:
-
-`YEAR-MONTH-DAY-title.MARKUP`
-
-Where `YEAR` is a four-digit number, `MONTH` and `DAY` are both two-digit
-numbers, and `MARKUP` is the file extension representing the format used in
-the file. After that, include the necessary front matter. Take a look at the
-source for this post to get an idea about how it works.
-
-Jekyll also offers powerful support for code snippets:
-
-[source, ruby]
-----
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
-----
-
-Check out the https://jekyllrb.com/docs/home[Jekyll Docs, {{browser-window--new}}]
-for more info on how to get the most out of Jekyll. File all bugs amd feature
-requests at https://github.com/jekyll/jekyll/issues[Jekyll Github Project, {{browser-window--new}}].
-If you have questions, you can ask them on
-https://talk.jekyllrb.com/[Jekyll Talk, {{browser-window--new}}].

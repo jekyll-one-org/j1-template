@@ -22,6 +22,10 @@
     color:  $darken-800 !important;
 }
 
+.page-link.disabled {
+    background-color: $gray-300;
+}
+
 .page-link:hover, .page-link:focus {
     border: 1px solid !important;
     background-color: $gray-600 !important;

@@ -52,6 +52,17 @@
  {% assign rtext_size = 0 %}
 {% endif %}
 
+{% comment %} i18n: language detection
+-------------------------------------------------------------------------------- {% endcomment %}
+{% if site.language == "en" %}
+  {% assign language = "en" %}
+{% elsif site.language == "de"%}
+  {% assign language = "de" %}
+{% else %}
+  {% assign language = "en" %}
+{% endif %}
+
+
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
 <!-- [INFO   ] [j1.layout.content_generator_post.html ] [ begin content ] -->
@@ -76,16 +87,21 @@
       {% endif %}
 
       <!-- place blog post HEADLINE -->
-      <div class="post-headline mt-5">
-        <h1 id="{{1000000 | rand}}">{{ page.date | localize: "%Y %B, %e" }}</h1>
-        <!-- German date -->
-        <!-- h1 id="{{1000000 | rand}}">{{ page.date | localize: "%-d. %B %Y" }}</h1 -->
+      <div class="post-headline mt-4">
+        {% if language == "en" %}
+          <!-- h1 class="notoc">{{ page.date | localize: "%Y %B, %e" }}</h1 -->
+          <h1 id="{{1000000 | rand}}">{{ page.date | localize: "%Y %B, %e" }}</h1>
+        {% endif %}
+        {% if language == "de" %}
+          <!-- h1 class="notoc">{{ page.date | localize: "%-d. %B %Y" }}</h1 -->
+          <h1 id="{{1000000 | rand}}">{{ page.date | localize: "%-d. %B %Y" }}</h1>
+        {% endif %}
       </div>
 
       {% comment %} Place Blog post SERIES Navigation (BS@5 OffCanvas)
       -------------------------------------------------------------------------- {% endcomment %}
       {% if page.series %}
-      <!-- jadams, 2023-09-18: added bs5 offcanvas -->
+      <!-- jadams, 2021-02-28: added bmd-drawer-overlay to close nav -->
       <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasPostSeriesNavigation" aria-labelledby="Post Series Navigation" style="top: 80px;">
 
         <div class="offcanvas-header">
@@ -96,21 +112,47 @@
         <div class="offcanvas-body">
           <div class="container content series-navigation">
             <div class="row">
-              {% include {{create_series_header}} page=page post=post readmore=false %}
+              <div style="width: calc(100% - 5px)">
+                <!-- series heading -->
+                <h4 id="blog_series_list" class="notoc mt-2 mr-2 mb-4">This is <strong>part 1 </strong> in a <strong>3-part</strong> series:</h4>
+                <ul class="side-nav" style="width: calc(100% - 15px)">
+                  <li class="current" style="width: calc(100% - 5px)"><a data-proofer-ignore="" href="#" style="width: calc(100% - 5px)">2022-02-01 · Part 1 · J1 Theme</a></li>
+                  <li style="width: calc(100% - 5px)"><a data-proofer-ignore="" href="/posts/public/featured/jekyll/2021/02/01/static-site-generators/" style="width: calc(100% - 5px)">2021-02-01 · Part 2 · Static Site Generators</a></li>
+                  <li style="width: calc(100% - 5px)"><a data-proofer-ignore="" href="/posts/public/featured/technology/2021/01/01/about-cookies/" style="width: calc(100% - 5px)">2021-01-01 · Part 3 · Cookies</a></li>
+                </ul>
+              </div>
+              <!-- place excerpt -->
+              <div class="mt-5 mr-3">
+                <h5 class="notoc series-exerpt-title">About the template</h5>
+                <div class="series-exerpt">
+                  <div class="paragraph mt-3">
+                    <p>
+                      J1 Template is a Bootstrap V5 website template for the static site generator
+                      Jekyll.
+                      The Theme J1 has been developed to create simple but fully configurable
+                      websites. Jekyll One is a full-featured Theme for Jekyll to create modern
+                      websites for free.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      {% endif %}
+
       {% comment %} END SERIES Navigation
       -------------------------------------------------------------------------- {% endcomment %}
 
       {% comment %} Inherit CONTENT
       -------------------------------------------------------------------------- {% endcomment %}
       <!-- Content placed by post_content.html -->
+      <!-- Additional div container placed for dropcaps used in series -->
       <main id="main-content" class="r-text-{{rtext_size}} js-toc-content mt-4">
       {{content}}
       </main>
+
+      {% endif %}
 
     </div> <!-- end col-md-12 -->
   </div> <!-- end row -->

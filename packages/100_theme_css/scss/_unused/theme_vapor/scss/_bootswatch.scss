@@ -215,6 +215,14 @@ table,
   }
 }
 
+// $component-disabled-bg: theme-color("secondary");
+// .page-item.disabled {
+//   .page-link {
+//     @include box-shadow($component-disabled-bg);
+//   }
+// }
+
+
 // Forms
 
 legend {

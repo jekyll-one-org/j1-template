@@ -42,15 +42,6 @@
 {% assign post     = include.post %}
 {% assign readmore = include.readmore %}
 
-{% comment %} i18n: language detection
--------------------------------------------------------------------------------- {% endcomment %}
-{% if site.language == "en" %}
-  {% assign language = "en" %}
-{% elsif site.language == "de" %}
-  {% assign language = "de" %}
-{% else %}
-  {% assign language = "en" %}
-{% endif %}
 
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -65,11 +56,7 @@
   <div class="container content series-navigation">
      <div class="row">
        <div style="width: calc(100% - 5px)">
-         {% if site.language == "en" %}
-           {% assign series_heading = "This is <strong>part <<idx>> </strong> in a <strong><<count>>-part</strong> series:" %}
-         {% elsif site.language == "de" %}
-           {% assign series_heading = "indigenous ist <strong>Teil <<idx>> </strong> einer <strong><<count>>-er</strong> Serie:" %}
-         {% endif %}
+          {% assign series_heading = "This is <strong>part <<idx>> </strong> in a <strong><<count>>-part</strong> series:" %}
          <!-- series heading -->
          <h4 id="blog_series_list" class="notoc mt-2 mr-2 mb-4">{{series_heading}}</h4>
          <ul class="side-nav" style="width: calc(100% - 15px)">

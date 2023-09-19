@@ -52,6 +52,17 @@
  {% assign rtext_size = 0 %}
 {% endif %}
 
+{% comment %} i18n: language detection
+-------------------------------------------------------------------------------- {% endcomment %}
+{% if site.language == "en" %}
+  {% assign language = "en" %}
+{% elsif site.language == "de"%}
+  {% assign language = "de" %}
+{% else %}
+  {% assign language = "en" %}
+{% endif %}
+
+
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
 <!-- [INFO   ] [j1.layout.content_generator_post.html ] [ begin content ] -->
@@ -76,31 +87,47 @@
       {% endif %}
 
       <!-- place blog post HEADLINE -->
-      <div class="post-headline mt-5">
-        <h1 id="{{1000000 | rand}}">{{ page.date | localize: "%Y %B, %e" }}</h1>
-        <!-- German date -->
-        <!-- h1 id="{{1000000 | rand}}">{{ page.date | localize: "%-d. %B %Y" }}</h1 -->
+      <div class="post-headline mt-4">
+        {% if language == "en" %}
+          <!-- h1 class="notoc">{{ page.date | localize: "%Y %B, %e" }}</h1 -->
+          <h1 id="{{1000000 | rand}}">{{ page.date | localize: "%Y %B, %e" }}</h1>
+        {% endif %}
+        {% if language == "de" %}
+          <!-- h1 class="notoc">{{ page.date | localize: "%-d. %B %Y" }}</h1 -->
+          <h1 id="{{1000000 | rand}}">{{ page.date | localize: "%-d. %B %Y" }}</h1>
+        {% endif %}
       </div>
 
-      {% comment %} Place Blog post SERIES Navigation (BS@5 OffCanvas)
+      {% comment %} Place Blog post SERIES Navigation
       -------------------------------------------------------------------------- {% endcomment %}
       {% if page.series %}
-      <!-- jadams, 2023-09-18: added bs5 offcanvas -->
-      <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasPostSeriesNavigation" aria-labelledby="Post Series Navigation" style="top: 80px;">
-
-        <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasPostSeriesNavigationLabel">Series Elements</h5>
-          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      <header class="bmd-layout-header" data-speak2me-ignore>
+        <!-- jadams, 2021-02-28 added mb-3 to the navbar -->
+        <div class="navbar navbar-dark bg-primary raised-z0">
+          <button class="bmd-drawer drawer-toggler animated fadeIn" type="button" data-bs-toggle="drawer" data-bs-target="#post_navigator" aria-label="Series button">
+            <span class="mdib mdib-menu mdib-2x"></span>
+          </button>
+          <ul class="nav navbar-nav">
+            <li class="nav-item">
+              <!-- jadams, 2021-08-04: modified displaying the series name -->
+              <!-- span class="navbar-text">Series: {{page.series}}</span-->
+              <span class="navbar-text mr-3" style="color: #FFF;font-weight: 500;"><b>{{page.series|upcase}}</b></span>
+            </li>
+          </ul>
         </div>
+      </header>
 
-        <div class="offcanvas-body">
-          <div class="container content series-navigation">
-            <div class="row">
-              {% include {{create_series_header}} page=page post=post readmore=false %}
-            </div>
-          </div>
+      <!-- jadams, 2021-02-28: added bmd-drawer-overlay to close nav -->
+      <!-- by click on overflow (as well as by toggle button) -->
+      <nav class="nav bmd-layout-container bmd-drawer-overlay custom-size-350 bmd-drawer-f-l">
+        <!-- Drawer content -->
+        <div id="post_navigator" class="bmd-layout-drawer bg-faded">
+          <!-- jadams, 2021-02-28: disabled header -->
+          <!-- header><a class="navbar-brand mb-3">{{page.title}}</a></header -->
+          <!--  Series Navigator -->
+          {% comment %}{% include {{create_series_header}} page=page post=post readmore=page.readmore %}{% endcomment %}
+          {% include {{create_series_header}} page=page post=post readmore=false %}
         </div>
-      </div>
       {% endif %}
       {% comment %} END SERIES Navigation
       -------------------------------------------------------------------------- {% endcomment %}
@@ -108,9 +135,13 @@
       {% comment %} Inherit CONTENT
       -------------------------------------------------------------------------- {% endcomment %}
       <!-- Content placed by post_content.html -->
+      <!-- Additional div container placed for dropcaps used in series -->
       <main id="main-content" class="r-text-{{rtext_size}} js-toc-content mt-4">
       {{content}}
       </main>
+
+    {% if page.series %}
+    </nav>{% endif %}
 
     </div> <!-- end col-md-12 -->
   </div> <!-- end row -->
