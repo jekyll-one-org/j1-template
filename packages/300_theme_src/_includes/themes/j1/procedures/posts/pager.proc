@@ -42,24 +42,14 @@
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign blog_navigator_options        = blog_navigator_defaults | merge: blog_navigator_settings %}
 
-
-{% comment %} Language detection
+{% comment %} Set button text
 -------------------------------------------------------------------------------- {% endcomment %}
-{% if {{site.language}} == "en" %}
-  {% assign language = "en" %}
-{% else %}
-  {% assign language = "en" %}
-{% endif %}
+{% assign pager_previous_button_text  = blog_navigator_options.button_text.pager.previous %}
+{% assign pager_next_button_text      = blog_navigator_options.button_text.pager.next %}
+{% assign pager_back_button_text      = blog_navigator_options.button_text.pager.back %}
+{% assign pager_first_button_text     = blog_navigator_options.button_text.pager.first %}
+{% assign pager_last_button_text      = blog_navigator_options.button_text.pager.last %}
 
-{% comment %} Set language specific button text
--------------------------------------------------------------------------------- {% endcomment %}
-{% if language == "en" %}
-  {% assign pager_previous_button_text  = blog_navigator_options.button_text.pager.previous %}
-  {% assign pager_next_button_text      = blog_navigator_options.button_text.pager.next %}
-  {% assign pager_back_button_text      = blog_navigator_options.button_text.pager.back %}
-  {% assign pager_first_button_text     = blog_navigator_options.button_text.pager.first %}
-  {% assign pager_last_button_text      = blog_navigator_options.button_text.pager.last %}
-{% endif %}
 
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}

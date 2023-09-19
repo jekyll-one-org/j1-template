@@ -141,9 +141,7 @@ description:
 #
 defaults:
 
-  # ----------------------------------------------------------------------------
-  # Navigator options
-  # ----------------------------------------------------------------------------
+  readmore_text:                        read
   post_image:                           /assets/images/modules/attics/christa-dodoo-1920x1280.jpg
   previewer:                            timeline
 
@@ -152,22 +150,10 @@ defaults:
     contrast:                           0.8
     brightness:                         0.8
 
-  readmore_text:                        read
-
+  # ----------------------------------------------------------------------------
+  # Button text settings
+  #
   button_text:
-
-    pager:
-      previous:                         Previous
-      next:                             Next
-      back:                             Navigator
-      first:                            First
-      last:                             Last
-
-    # paginator:
-    #   older_posts:                      Older
-    #   newer_posts:                      Newer
-    #   first_post:                       First
-    #   last_post:                        Last
 
     view_selector:
       category_view:                    Category
@@ -175,6 +161,24 @@ defaults:
       archive_view:                     All
       tag_view:                         Tag
 
+    pager:
+      back:                             Navigator
+      previous:                         Previous
+      next:                             Next
+      first:                            First
+      last:                             Last
+
+    paginator:
+      older_posts:                      Older
+      newer_posts:                      Newer
+      first_post:                       First
+      last_post:                        Last
+
+
+
+  # ----------------------------------------------------------------------------
+  # Navigator options
+  #
   article_navigator:
     page_text:
       enabled:                          true

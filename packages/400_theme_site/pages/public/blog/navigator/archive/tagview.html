@@ -47,6 +47,13 @@ resource_options:
 {% comment %} TODO: logic for "letter_group_written == false" to be fixed
 -------------------------------------------------------------------------------- {% endcomment %}
 
+{% comment %} Debugging
+--------------------------------------------------------------------------------
+skip_categories:            {{skip_categories | debug}}
+site_category_word_list:    {{site_category_word_list | debug}}
+--------------------------------------------------------------------------------
+{% endcomment %}
+
 {% comment %} Liquid procedures
 -------------------------------------------------------------------------------- {% endcomment %}
 {% capture get_page_path %}themes/{{site.template.name}}/procedures/global/get_page_path.proc{% endcapture %}
@@ -127,33 +134,17 @@ resource_options:
   {% assign readmore_text = blog_navigator_options.readmore_text %}
 {% endif %}
 
-{% comment %} language detection
+{% comment %} Collect Button Text/Description
 -------------------------------------------------------------------------------- {% endcomment %}
-{% if site.language == "en" %}
-  {% assign language = "en" %}
-{% else %}
-  {% assign language = "en" %}
-{% endif %}
-
-{% if language == "en" %}
-  {% assign category_view_button_text         = blog_navigator_options.button_text.view_selector.category_view %}
-  {% assign date_view_button_text             = blog_navigator_options.button_text.view_selector.date_view %}
-  {% assign archive_view_button_text          = blog_navigator_options.button_text.view_selector.archive_view %}
-  {% assign tag_view_button_text              = blog_navigator_options.button_text.view_selector.tag_view %}
-
-  {% assign view_description_text             = blog_navigator_options.tag_view.page_text.description %}
-{% endif %}
-
-{% comment %} Debugging
---------------------------------------------------------------------------------
-skip_categories:            {{skip_categories | debug}}
-site_category_word_list:    {{site_category_word_list | debug}}
---------------------------------------------------------------------------------
-{% endcomment %}
+{% assign category_view_button_text         = blog_navigator_options.button_text.view_selector.category_view %}
+{% assign date_view_button_text             = blog_navigator_options.button_text.view_selector.date_view %}
+{% assign archive_view_button_text          = blog_navigator_options.button_text.view_selector.archive_view %}
+{% assign tag_view_button_text              = blog_navigator_options.button_text.view_selector.tag_view %}
+{% assign view_description_text             = blog_navigator_options.tag_view.page_text.description %}
 
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
-<!-- [INFO   ] [ {{page.url}} ] [Generate HTML}] -->
+<!-- [INFO   ] [blog.navigator.archive.tagview.html     ] [Begin content] -->
 {% include {{create_word_cloud}} word_list=tag_list source="tags" %}
 
 <div class="paginator speak2me-ignore ml-3">
