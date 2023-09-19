@@ -163,11 +163,11 @@ defaults:
       first:                            First
       last:                             Last
 
-    paginator:
-      older_posts:                      Older
-      newer_posts:                      Newer
-      first_post:                       First
-      last_post:                        Last
+    # paginator:
+    #   older_posts:                      Older
+    #   newer_posts:                      Newer
+    #   first_post:                       First
+    #   last_post:                        Last
 
     view_selector:
       category_view:                    Category
