@@ -4,7 +4,7 @@ layout:                                 page
 title:                                  Navigator
 tagline:                                Explore Posts
 
-date:                                   2022-01-01
+date:                                   2023-09-20
 #last_modified:                         2023-01-01
 
 description: >
@@ -31,7 +31,7 @@ image:
   width:                                1920
   height:                               1280
 
-tts:                                    false
+#tts:                                   false
 sort:                                   date
 fab_menu_id:                            default
 scrollDynamicPagesTopOnChange:          false                                   # do NOT scroll the page to top on content changes
@@ -110,34 +110,30 @@ blog_navigator_options.article_navigator.page_text: {{blog_navigator_options.art
   {% assign rtext_size = 0 %}
 {% endif %}
 
-{% comment %} language detection
+{% comment %} Collect Button Text/Description
 -------------------------------------------------------------------------------- {% endcomment %}
-{% if site.language == "en" %}
-  {% assign language = "en" %}
-{% else %}
-  {% assign language = "en" %}
-{% endif %}
+{% assign home_button_text                  = blog_navigator_options.button_text.view_pager.home %}
+{% assign category_view_button_text         = blog_navigator_options.button_text.view_pager.category_view %}
+{% assign date_view_button_text             = blog_navigator_options.button_text.view_pager.date_view %}
+{% assign archive_view_button_text          = blog_navigator_options.button_text.view_pager.archive_view %}
+{% assign tag_view_button_text              = blog_navigator_options.button_text.view_pager.tag_view %}
 
-{% if language == "en" %}
-  {% assign category_view_button_text         = blog_navigator_options.button_text.view_selector.category_view %}
-  {% assign date_view_button_text             = blog_navigator_options.button_text.view_selector.date_view %}
-  {% assign archive_view_button_text          = blog_navigator_options.button_text.view_selector.archive_view %}
-  {% assign tag_view_button_text              = blog_navigator_options.button_text.view_selector.tag_view %}
-
-  {% assign previewer_headline                = blog_navigator_options.article_previewer.page_text.headline %}
-  {% assign navigator_description_text        = blog_navigator_options.article_navigator.page_text.description %}
-  {% assign previewer_description_text        = blog_navigator_options.article_previewer.page_text.description %}
-{% endif %}
+{% assign description_enabled               = blog_navigator_options.article_navigator.page_description.enabled %}
+{% assign description_text                  = blog_navigator_options.article_navigator.page_description.text %}
+{% assign headline_enabled                  = blog_navigator_options.article_navigator.headline.enabled %}
+{% assign headline_text                     = blog_navigator_options.article_navigator.headline.text %}
 
 
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
   <!-- [INFO   ] [blog.navigator.index.html               ] [Begin content] -->
-  <main id="main-content" class="container r-text-{{rtext_size}} js-toc-content mb-5">
+  <div id="navigator_content">
 
     <div id="blog_navigator">
       <div id="article_navigator">
 
+        {% comment %} Generate URLs for all Navigator Views
+        ------------------------------------------------------------------------ {% endcomment %}
         {% include {{get_page_path}} mode='absolute' %}
         {% capture navigator_path%}{{page_path}}{% endcapture %}
         {% capture archive_path %}{{navigator_path}}/archive{% endcapture %}
@@ -146,31 +142,41 @@ blog_navigator_options.article_navigator.page_text: {{blog_navigator_options.art
         {% capture tag_view %}{{archive_path}}/tagview/{% endcapture %}
         {% capture all_view %}{{archive_path}}/allview/{% endcapture %}
 
+        {% comment %} Generate navigation pager
+        ------------------------------------------------------------------------ {% endcomment %}
         <div class="navigator-headline">
           <nav class="paginator speak2me-ignore">
             <ul class="pagination raised-z0">
-              <li class="page-item"><a class="page-link" href="/" title="Home">Home</a></li>
-              <li class="page-item"><a class="page-link" href="{{category_view}}" alt="View by Category">{{category_view_button_text}}</a></li>
-              <li class="page-item"><a class="page-link" href="{{date_view}}" alt="View by Date">{{date_view_button_text}}</a></li>
-              <!-- li class="page-item"><a class="page-link" href="{{tag_view}}" alt="{{tag_view_button_text}}">By Tag</a></li -->
-              <li class="page-item"><a class="page-link" href="{{all_view}}" alt="View All">{{archive_view_button_text}}</a></li>
+              <li class="page-item"><a class="page-link" href="/"                 title="Back to {{home_button_text}}"          alt="Back to {{home_button_text}}">{{home_button_text}}</a></li>
+              <li class="page-item"><a class="page-link" href="{{category_view}}" title="View by {{category_view_button_text}}" alt="View by {{category_view_button_text}}">{{category_view_button_text}}</a></li>
+              <li class="page-item"><a class="page-link" href="{{date_view}}"     title="View by {{date_view_button_text}}"     alt="View by {{date_view_button_text}}">{{date_view_button_text}}</a></li>
+          <!-- li class="page-item"><a class="page-link" href="{{tag_view}}"      title="View by {{tag_view_button_text}}"      alt="View by {{tag_view_button_text}}">{{tag_view_button_text}}</a></li -->
+              <li class="page-item"><a class="page-link" href="{{all_view}}"      title="View {{archive_view_button_text}}"     alt="View {{archive_view_button_text}}">{{archive_view_button_text}}</a></li>
             </ul>
           </nav> <!-- end paginator -->
         </div> <!-- end navigator headline -->
 
-        {% if blog_navigator_options.article_navigator.page_text.enabled %}
-        <div class="view-description mt-5 mb-5">{{navigator_description_text}}</div>
+        {% if description_enabled %}
+        <div class="view-description mt-4 mb-4">{{description_text}}</div>
+        {% endif %}
+
+        {% if headline_enabled %}
+        <div class="post-headline mt-5 mb-4">
+          <h2 id="post_headline" class="notoc">{{headline_text}}</h2>
+        </div>
         {% endif %}
 
       </div> <!-- end article_navigator -->
 
+      {% comment %} Generate content section
+      ------------------------------------------------------------------------ {% endcomment %}
       <!-- Add article previewer -->
       {% if paginate %}
       <div id="article_previewer">
 
         <div id="article_preview">
           <!-- Previewer selected of type: {{previewer}}-->
-          <div id="preview_content">
+          <div id="previewer_{{previewer}}">
             {% assign posts_collate = paginator.posts %}
             {% case previewer %}
               {% when 'list' %}
@@ -190,4 +196,4 @@ blog_navigator_options.article_navigator.page_text: {{blog_navigator_options.art
       {% endif %}
 
     </div> <!-- end blog_navigator -->
-  </main> <!-- end main -->
+  </div> <!-- end main -->

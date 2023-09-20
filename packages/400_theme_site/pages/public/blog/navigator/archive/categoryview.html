@@ -4,7 +4,7 @@ layout:                                 page
 title:                                  Posts by Category
 tagline:                                Explore Posts
 
-date:                                   2022-01-01
+date:                                   2023-09-20
 #last_modified:                         2023-01-01
 
 description: >
@@ -28,7 +28,7 @@ image:
   width:                                1920
   height:                               1280
 
-tts:                                    false
+#tts:                                   false
 fab_menu_id:                            open_toc
 sort:                                   date
 exclude_from_search:                    true
@@ -89,9 +89,10 @@ site_category_word_list:    {{site_category_word_list | debug}}
   {% capture browser_page_url %}{{page.url}}{% endcapture %}
 {% endif %}
 
+{% comment %} Generate URLs for all Navigator Views
+------------------------------------------------------------------------ {% endcomment %}
 {% include {{get_page_path}} mode='absolute' %}
 {% assign navigator_path = page_path|remove_first: 'archive' %}
-
 {% capture navigator %}{{navigator_path}}{% endcapture %}
 {% capture date_view %}{{page_path}}/dateview/{% endcapture %}
 {% capture category_view %}{{page_path}}/categoryview/{% endcapture %}
@@ -149,11 +150,17 @@ by processing of categories
 
 {% comment %} Collect Button Text/Description
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign category_view_button_text         = blog_navigator_options.button_text.view_selector.category_view %}
-{% assign date_view_button_text             = blog_navigator_options.button_text.view_selector.date_view %}
-{% assign archive_view_button_text          = blog_navigator_options.button_text.view_selector.archive_view %}
-{% assign tag_view_button_text              = blog_navigator_options.button_text.view_selector.tag_view %}
-{% assign view_description_text             = blog_navigator_options.category_view.page_text.description %}
+{% assign home_button_text                  = blog_navigator_options.button_text.view_pager.home %}
+{% assign navigator_button_text             = blog_navigator_options.button_text.view_pager.navigator %}
+{% assign category_view_button_text         = blog_navigator_options.button_text.view_pager.category_view %}
+{% assign date_view_button_text             = blog_navigator_options.button_text.view_pager.date_view %}
+{% assign archive_view_button_text          = blog_navigator_options.button_text.view_pager.archive_view %}
+{% assign tag_view_button_text              = blog_navigator_options.button_text.view_pager.tag_view %}
+
+{% assign description_enabled               = blog_navigator_options.category_view.page_description.enabled %}
+{% assign description_text                  = blog_navigator_options.category_view.page_description.text %}
+{% assign headline_enabled                  = blog_navigator_options.category_view.headline.enabled %}
+{% assign headline_text                     = blog_navigator_options.category_view.headline.text %}
 
 
 {% comment %} Main
@@ -161,21 +168,30 @@ by processing of categories
 <!-- [INFO   ] [blog.navigator.archive.categoryview.html ] [Begin content] -->
 {% include {{create_word_cloud}} source="categories" word_list=category_list %}
 
+{% comment %} Generate navigation pager
+-------------------------------------------------------------------------------- {% endcomment %}
 <!-- [INFO   ] [ {{page.url}} ] [Generate HTML}] -->
 <div class="paginator speak2me-ignore ml-3">
   <ul class="pagination raised-z0">
-    <li class="page-item"><a class="page-link" href="/" title="Home">Home</a></li>
-    <!-- li class="page-item"><a class="page-link" href="{{navigator|prepend: site.baseurl}}" alt="Blog Navigator">Navigator</a></li -->
-    <li class="page-item"><a class="page-link" href="{{navigator|remove_first:archive}}" alt="Blog Navigator">Navigator</a></li>
-    <li class="page-item"><a class="page-link" href="{{date_view}}" alt="View by Date">{{date_view_button_text}}</a></li>
-    <!-- li class="page-item"><a class="page-link" href="{{tag_view}}" alt="{{tag_view_button_text}}">By Tag</a></li -->
-    <li class="page-item"><a class="page-link" href="{{all_view}}" alt="View All">{{archive_view_button_text}}</a></li>
+    <li class="page-item"><a class="page-link" href="/"             title="Back to {{home_button_text}}"       alt="Back to {{home_button_text}}">{{home_button_text}}</a></li>
+    <li class="page-item"><a class="page-link" href="{{navigator}}" title="Back to {{navigator_button_text}}"  alt="Back to {{navigator_button_text}}">{{navigator_button_text}}</a></li>
+    <li class="page-item"><a class="page-link" href="{{date_view}}" title="View by {{date_view_button_text}}"  alt="View by {{date_view_button_text}}">{{date_view_button_text}}</a></li>
+<!-- li class="page-item"><a class="page-link" href="{{tag_view}}"  title="View by {{tag_view_button_text}}"   alt="View by {{tag_view_button_text}}">{{tag_view_button_text}}</a></li -->
+    <li class="page-item"><a class="page-link" href="{{all_view}}"  title="View {{archive_view_button_text}}"  alt="View {{archive_view_button_text}}">{{archive_view_button_text}}</a></li>
   </ul>
 </div>
 
-<div class="post-search-results ml-3">
-  {% if blog_navigator_options.category_view.page_text.enabled %}
-  <div class="view-description mt-5 mb-5">{{view_description_text}}</div>
+{% comment %} Generate content section
+-------------------------------------------------------------------------------- {% endcomment %}
+<div class="content post-search-results ml-3">
+  {% if description_enabled %}
+  <div class="view-description mt-4 mb-4">{{description_text}}</div>
+  {% endif %}
+
+  {% if headline_enabled %}
+  <div class="post-headline mt-5 mb-4">
+    <h2 id="post_headline" class="notoc">{{headline_text}}</h2>
+  </div>
   {% endif %}
 
   {% assign tags = site.categories|sort %}
