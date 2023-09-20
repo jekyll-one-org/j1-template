@@ -78,6 +78,11 @@ regenerate:                             true
  # -----------------------------------------------------------------------------
 */
 
+/* Further reading
+  https://dev.to/jankapunkt/cross-browser-speech-synthesis-the-hard-way-and-the-easy-way-353
+  https://github.com/jankapunkt/easy-speech
+*/
+
 // -----------------------------------------------------------------------------
 // ESLint shimming
 // -----------------------------------------------------------------------------
@@ -102,6 +107,9 @@ var ttsDisabled       = false;
 var isMobile          = (window.orientation !== undefined) ? true :false;       // NOTE: window.orientation is DEPRECATED
 // var isMobile       = (screen.orientation.type == 'portrait-secondary') ? true : false;
 
+// synthetic puase
+var isPaused          = false;
+
 var frontmatterOptions;
 var speak2meDefaults;
 var speak2meSettings;
@@ -110,6 +118,11 @@ var speak2meModal;
 var _this;
 var logger;
 var logText;
+var chromeWorkaround;
+var chromeWorkaroundPause
+var chromeWorkaroundResume;
+var $buttonPause;
+var $buttonResume;
 
 // -------------------------------------------------------------------------
 // global event handler
@@ -123,6 +136,49 @@ var Events = {
     }
   }
 };
+
+function pauseFunction() {
+  if (isChrome) {
+    // clearInterval(chromeWorkaround);
+    logger.info('\n' + 'speak: pause workaround for chromium based browsers');
+    // synthetic puase
+    isPaused = true;
+
+    setTimeout (function() {
+        logger.info('\n' + 'speak: paused for chromium based browsers');
+    }, 3000);
+
+  }
+}
+
+function waitAndExecute(delayInMilliseconds, taskToExecute) {
+  let elapsedTime = 0;
+
+  const intervalId = setInterval(function() {
+    if (elapsedTime >= delayInMilliseconds) {
+      clearInterval(intervalId); // Stop the interval
+      taskToExecute(); // Execute the task
+    } else {
+      elapsedTime += 100; // Increment elapsed time by 100 milliseconds (adjust as needed)
+    }
+  }, 100); // Run the interval check every 100 milliseconds (adjust as needed)
+}
+
+// Example usage:
+function myTask() {
+  console.log("speak: Task executed after waiting");
+
+  chromeWorkaroundPause = setInterval(function () {
+    // synthetic puase
+    isPaused = true;
+
+    setTimeout (function() {
+        console.log('\n' + 'speak: paused for chromium based browsers');
+    }, 3000);
+
+  }, 3000);
+
+}
 
   // ---------------------------------------------------------------------------
   // Main object
@@ -176,6 +232,10 @@ var Events = {
 
         if (j1.getState() === 'finished' && pageVisible && atticFinished) {
 
+
+          // console.log("Task: Waiting for 5 seconds...");
+          // waitAndExecute(5000, myTask);
+
           if (isMobile) {
             console.log('module speak2me is currently not supported for the Opera browser');
             $('#quickLinksSpeakButton').hide();
@@ -202,15 +262,6 @@ var Events = {
             $('#quickLinksSpeakButton').hide();
             clearInterval(dependencies_met_page_ready);
             return;
-          }
-
-          if (isChrome) {
-            var chromeWorkaround = setInterval(function () {
-              if ($().speak2me('isSpeaking')) {
-                $().speak2me('pause').speak2me('resume');
-                logger.debug('\n' + 'speak: send pause-resumed');
-              }
-            }, speak2meOptions.chrome_pause_resume_cycle);
           }
 
           if (ttsDisabled) {
@@ -246,9 +297,12 @@ var Events = {
           // -------------------------------------------------------------------
           $('#speak2me_container').on('show.bs.modal', function () {
             if (isChrome || isEdge) {
+              // for chromium based browsers disable pause|resume
+              // buttons (workaround)
+              //
               logger.warn('\n' + 'chromium browser detected: pause|resume buttons disabled');
-              $('#pause_button').hide();
-              $('#resume_button').hide();
+              // $('#pause_button').hide();
+              // $('#resume_button').hide();
             }
             _this.create('#voiceSelector');
           }); // END modal on 'show'
@@ -256,10 +310,87 @@ var Events = {
           // -------------------------------------------------------------------
           // on 'shown'
           // -------------------------------------------------------------------
-          // $('#speak2me_container').on('shown.bs.modal', function () {
-          //     // do something here
-          //     return;
-          // }); // END modal on 'shown'
+          $('#speak2me_container').on('shown.bs.modal', function () {
+            this.$buttonSpeak   = $('#speak_button');
+            this.$buttonStop    = $('#stop_button');
+            this.$buttonPause   = $('#pause_button');
+            this.$buttonResume  = $('#resume_button');
+
+            this.$buttonPause.click(function () {
+
+              if (isChrome) {
+                // synthetic puase
+                isPaused = true;
+
+                console.log("Task: Waiting for 0.5 seconds ...");
+                waitAndExecute(500, myTask);
+              }
+
+            });
+
+            // setup workaround for chromium based browsers
+            // to enable a synthetic resume function
+            this.$buttonResume.click(function () {
+              if (isChrome) {
+                var isSpeaking  = $().speak2me('isSpeaking');
+//              var isPaused    = $().speak2me('isPaused');
+
+                // synthetic puase
+                isPaused = false;
+
+                logger.info('\n' + 'speak: resume workaround for chromium based browsers');
+                clearInterval(chromeWorkaroundPause);
+              }
+            });
+
+            // setup workaround for chromium based browsers
+            // to enable infinite speech output
+            //
+            this.$buttonSpeak.click(function () {
+              if (isChrome) {
+                logger.info('\n' + 'speak: setup workaround for chromium based browsers');
+                chromeWorkaround = setInterval(function () {
+                  var isSpeaking  = $().speak2me('isSpeaking');
+//                var isPaused    = $().speak2me('isPaused');
+
+                  logger.info('\n' + 'speak: isSpeaking|isPaused: ' + isSpeaking + '|' + isPaused);
+                  if (isSpeaking && !isPaused) {
+                    $().speak2me('pause').speak2me('resume');
+                    logger.info('\n' + 'speak: send pause-resumed');
+                  } else {
+                    $().speak2me('resume');
+                    logger.info('\n' + 'speak: send resumed');
+                  }
+
+                }, speak2meOptions.chrome_pause_resume_cycle);
+              }
+            });
+
+            // stop workaround for chromium based browsers
+            //
+            this.$buttonStop.click(function () {
+              logger.info('\n' + 'speak: remove workaround for chromium based browsers');
+              // wait 3 sec to make sure speech output is stopped
+              setTimeout (function() {
+                var isSpeaking  = $().speak2me('isSpeaking');
+                var isPaused    = $().speak2me('isPaused');
+
+                if (!isSpeaking && !isPaused) {
+                  clearInterval(chromeWorkaround);
+                }
+              }, 3000);
+            });
+
+          }); // END modal on 'shown'
+
+          // -------------------------------------------------------------------
+          // on 'hidden' (close)
+          // -------------------------------------------------------------------
+          $('#speak2me_container').on('hidden.bs.modal', function () {
+            //
+            // do something here
+            //
+          }); // END modal on 'hidden'
 
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
@@ -345,8 +476,11 @@ var Events = {
     // Calls the 'pause' function of rge screen reader
     // -------------------------------------------------------------------------
     pause: function () {
-      $().speak2me('pause');
       $(".mdib-speaker").removeClass("mdib-spin");
+
+      if (!isChrome) {
+        $().speak2me('pause');
+      }
     }, // END pause
 
     // -------------------------------------------------------------------------
@@ -354,8 +488,10 @@ var Events = {
     // Calls the 'resume' function of rge screen reader
     // -------------------------------------------------------------------------
     resume: function () {
-      $().speak2me('resume');
       $(".mdib-speaker").addClass("mdib-spin");
+      if (!isChrome) {
+        $().speak2me('resume');
+      }
     }, // END resume
 
     // -------------------------------------------------------------------------

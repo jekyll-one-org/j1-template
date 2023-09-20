@@ -78,6 +78,11 @@ regenerate:                             true
  # -----------------------------------------------------------------------------
 */
 
+/* Further reading
+  https://dev.to/jankapunkt/cross-browser-speech-synthesis-the-hard-way-and-the-easy-way-353
+  https://github.com/jankapunkt/easy-speech
+*/
+
 // -----------------------------------------------------------------------------
 // ESLint shimming
 // -----------------------------------------------------------------------------
@@ -206,7 +211,10 @@ var Events = {
 
           if (isChrome) {
             var chromeWorkaround = setInterval(function () {
-              if ($().speak2me('isSpeaking')) {
+              var isSpeaking  = $().speak2me('isSpeaking');
+              var isPaused    = $().speak2me('isPaused');
+              logger.info('\n' + 'speak: isSpeaking|isPaused: ' + isSpeaking + '|' + isPaused);
+              if (isSpeaking && !isPaused) {
                 $().speak2me('pause').speak2me('resume');
                 logger.debug('\n' + 'speak: send pause-resumed');
               }
@@ -247,8 +255,8 @@ var Events = {
           $('#speak2me_container').on('show.bs.modal', function () {
             if (isChrome || isEdge) {
               logger.warn('\n' + 'chromium browser detected: pause|resume buttons disabled');
-              $('#pause_button').hide();
-              $('#resume_button').hide();
+              // $('#pause_button').hide();
+              // $('#resume_button').hide();
             }
             _this.create('#voiceSelector');
           }); // END modal on 'show'
