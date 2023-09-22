@@ -516,7 +516,6 @@
           );
 
           // parse the headingsArray to add missing offset values
-          // for headlines
           //
           chunkSet.forEach((chunk, index) => {
             var text;
@@ -527,9 +526,6 @@
               //
               text = chunk.text.replaceAll('. ', '');
 
-              // jadams:
-              // for this type of loop, not ALL headings are found
-              //
               if (headingsArray !== null) {
                 // see: https://stackoverflow.com/questions/29285897/difference-between-for-in-and-for-of-statements
                 // for in loops over enumerable property names of an object
@@ -540,7 +536,7 @@
                   // cleanup the innerText for compare
                   //
                   innerText = node.innerText.replaceAll('?', '');
-                  innerText = node.innerText;
+                  innerText = node.innerText.replaceAll('!', '');
                   if (innerText == text) {
                     var headline = $('#' + node.id);
                     if (headline.length > 0) {
@@ -549,12 +545,12 @@
 //                    console.debug('speak2me, text: ' + node.innerText + ', offsetTop: ' + chunk.offsetTop);
                     } else {
 //                    console.warn('speak2me, text: ' + node.innerText + ', offsetTop not caclulated.');
-                    }
-                  }
-                }
-              }
-            }
-          });
+                    } // END if headline.length
+                  } // END if innerText
+                } // END for headingsArray
+              } // END if headingsArray
+            } // END if chunk.offset
+          }); // END forEach chunkSet
 
           return chunkSet;
       }
@@ -1225,6 +1221,18 @@
         var txt = document.createElement('textarea');
         txt.innerHTML = final;
         final = txt.value;
+
+        // Replace single word in line
+        //
+        final = final.replace(/^\s*(\b\w+\b)\s*$/gm, "$1. ");
+
+        // Replace month year in line
+        //
+        final = final.replace(/^\s*(\b\w+\b\s*[0-9]{4})$/gm, "$1. ");
+
+        // Replace multiple whitespaces
+        //
+        final = final.replace(/\s+/g, ' ');
 
         // split the final text in to chunks (sentences).
         //

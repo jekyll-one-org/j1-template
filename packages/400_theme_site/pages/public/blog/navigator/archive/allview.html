@@ -26,7 +26,7 @@ image:
   width:                                1920
   height:                               1280
 
-tts:                                   false
+tts:                                    true
 fab_menu_id:                            open_toc
 sort:                                   date
 exclude_from_search:                    true
@@ -135,11 +135,11 @@ site_category_word_list:    {{site_category_word_list | debug}}
 -------------------------------------------------------------------------------- {% endcomment %}
 <div class="paginator speak2me-ignore ml-3">
   <ul class="pagination raised-z0">
-    <li class="page-item"><a class="page-link" href="/"                 title="Back to {{home_button_text}}"          alt="Back to {{home_button_text}}">{{home_button_text}}</a></li>
-    <li class="page-item"><a class="page-link" href="{{navigator}}"     title="Back to {{navigator_button_text}}"     alt="Back to {{navigator_button_text}}">{{navigator_button_text}}</a></li>
-    <li class="page-item"><a class="page-link" href="{{category_view}}" title="View by {{category_view_button_text}}" alt="View by {{category_view_button_text}}">{{category_view_button_text}}</a></li>
-    <li class="page-item"><a class="page-link" href="{{date_view}}"     title="View by {{date_view_button_text}}"     alt="View by {{date_view_button_text}}">{{date_view_button_text}}</a></li>
-<!-- li class="page-item"><a class="page-link" href="{{tag_view}}"      title="View by {{tag_view_button_text}}"      alt="View by {{tag_view_button_text}}">{{tag_view_button_text}}</a></li -->
+    <li class="page-item"><a class="page-link" href="/"                 title="Back to {{home_button_text}}">{{home_button_text}}</a></li>
+    <li class="page-item"><a class="page-link" href="{{navigator}}"     title="Back to {{navigator_button_text}}">{{navigator_button_text}}</a></li>
+    <li class="page-item"><a class="page-link" href="{{category_view}}" title="View by {{category_view_button_text}}">{{category_view_button_text}}</a></li>
+    <li class="page-item"><a class="page-link" href="{{date_view}}"     title="View by {{date_view_button_text}}">{{date_view_button_text}}</a></li>
+<!-- li class="page-item"><a class="page-link" href="{{tag_view}}"      title="View by {{tag_view_button_text}}">{{tag_view_button_text}}</a></li -->
   </ul>
 </div>
 
@@ -151,7 +151,7 @@ site_category_word_list:    {{site_category_word_list | debug}}
   {% endif %}
 
   {% if headline_enabled %}
-  <div class="post-headline mt-5 mb-4">
+  <div class="post-headline mt-4 mb-5">
     <h2 id="post_headline" class="notoc">{{headline_text}}</h2>
   </div>
   {% endif %}
@@ -161,20 +161,20 @@ site_category_word_list:    {{site_category_word_list | debug}}
     {% comment %} {% assign excerpt = post.excerpt|truncatewords: truncate_words|replace:'...',' ...'|strip_html %} {% endcomment %}
     {% assign excerpt = post.excerpt|truncatewords: truncate_words|replace:'...',' ...' %}
 
+    {% comment %} jadams, 2023-09-20: currently NOT used
+    ----------------------------------------------------------------------------
     <!-- Collect comment provider details -->
     {% for sharing in builder_config.sharing_provider %}
       {% assign provider      = sharing.provider %}
       {% assign likes_count   = sharing.likes_count %}
       {% assign comment_count = sharing.comment_count %}
     {% endfor %}
+    ---------------------------------------------------------------------------- {% endcomment %}
 
     <article class="card raised-z0 mb-5">
-      <div class="card-header bg-primary">
 
-        <h3 id="{{100000|rand}}" class="card-header bg-primary notranslate">
-          {{post.title}}
-        </h3>
-
+      <div class="card-header bg-primary pt-3 pb-2">
+        <h3 id="{{100000|rand}}" class="md-white notranslate">{{post.title}}</h3>
       </div>
 
       <div class="row mx-0">
@@ -204,21 +204,23 @@ site_category_word_list:    {{site_category_word_list | debug}}
             <div class="card-footer-text">
 
               {% if post.date %}
-                {% if language == "en" %}
-                  <i class="mdi mdi-calendar-blank md-grey-900 mr-1"></i>{{post.date | localize: "%Y %B, %e"}}
-                {% endif %}
-                {% if language == "de" %}
-                  <i class="mdi mdi-calendar-blank md-grey-900 mr-1"></i>{{post.date | localize: "%-d. %B %Y"}}
-                {% endif %}
+              <i class="mdi mdi-calendar-blank md-grey-600 mr-2"></i>{{post.date | localize: "%Y %B, %e"}}
               {% endif %}
+
+              {% comment %} jadams, 2023-09-20: currently NOT used
+              ------------------------------------------------------------
               {% if likes_count %}
-              <span class="font-weight-bold"> · </span>
-              <i class="mdi mdi-heart md-grey-900 mr-1"></i> {{likes_count}}
+                <span class="ml-3">
+                <i class="mdib mdib-heart md-grey-900 mr-0"></i> · {{likes_count}}
+                </span>
               {% endif %}
+
               {% if comment_count %}
-              <span class="font-weight-bold"> · </span>
-              <i class="mdi mdi-comment md-grey-900 mr-1"></i> {{comment_count}}
+                <span class="ml-3">
+                <i class="mdib mdib-comment md-grey-900 mr-0"></i> · {{comment_count}}
+                </span>
               {% endif %}
+              ------------------------------------------------------------ {% endcomment %}
 
               <!-- Cleanup categories by given blacklist -->
               {% assign my_categories = post.categories | difference: category_blacklist %}

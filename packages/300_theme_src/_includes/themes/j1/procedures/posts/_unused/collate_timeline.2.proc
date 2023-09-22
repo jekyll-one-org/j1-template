@@ -56,8 +56,24 @@
 {% assign posts_collate       = include.items %}
 {% assign limit_excerpt       = include.limit_excerpt %}
 {% assign category_blacklist  = template_config.posts.category_blacklist %}
-{% assign readmore_text       = "read" %}
 
+{% comment %} language detection
+-------------------------------------------------------------------------------- {% endcomment %}
+{% if site.language == "en" %}
+  {% assign language = "en" %}
+{% elsif site.language == "de"%}
+  {% assign language = "de" %}
+{% else %}
+  {% assign language = "en" %}
+{% endif %}
+
+{% if language == "en" %}
+  {% assign readmore_text = "read" %}
+{% endif %}
+
+{% if language == "de" %}
+  {% assign readmore_text = "lesen" %}
+{% endif %}
 
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -109,42 +125,42 @@
 	  NOTE: Changed headerlevel form h3 -> h2
 	  ---------------------------------------------------------------------- {% endcomment %}
 	  <!-- div class="timeline-title" -->
-	  <div class="card-header bg-primary pt-3 pb-2">
-		  <h3 id="{{1000000 | rand}}" class="md-white notranslate">{{post.title}}</h3>
+	  <div class="card-header bg-primary pt-4 pb-3">
+		<h3 id="{{1000000 | rand}}" class="md-white notranslate">{{post.title}}</h3>
 	  </div>
 
 	  <!-- Collect icon data from frontmatter -->
 	  {% if post.icons.category-icon.size > 0 %}
-  		{% assign icon_name   = post.icons.category-icon %}
-  		{% assign icon_family = post.icons.family | strip | downcase %}
-  		{% assign icon_size   = post.icons.size %}
-  		{% assign icon_color  = post.icons.color %}
-  		{% if icon_name %}
-  		  <!-- Set category icon: "{{icon_name}}" -->
-  		  {% assign place_icon = true %}
-  		  <!-- Flags: place_image = "{{place_image}}", place_icon = "{{place_icon}}" -->
-  		{% endif %}
+		{% assign icon_name   = post.icons.category-icon %}
+		{% assign icon_family = post.icons.family | strip | downcase %}
+		{% assign icon_size   = post.icons.size %}
+		{% assign icon_color  = post.icons.color %}
+		{% if icon_name %}
+		  <!-- Set category icon: "{{icon_name}}" -->
+		  {% assign place_icon = true %}
+		  <!-- Flags: place_image = "{{place_image}}", place_icon = "{{place_icon}}" -->
+		{% endif %}
 	  {% endif %}
 
 	  <!-- Collect image data from frontmatter (overload icon data if configured) -->
 	  {% if post.images.category-image.size > 0  %}
-  		{% assign image_name = post.images.category-image %}
-  		{% assign image_path = post.images.dir %}
-  		{% capture image %}{{image_path}}/{{image_name}}{% endcapture %}
-  		<!-- Set category image: "{{image}}" -->
-  		{% assign place_image = true %}
-  		{% assign place_icon  = false %}
-  		<!-- Flags: place_image = "{{place_image}}", place_icon = "{{place_icon}}" -->
+		{% assign image_name = post.images.category-image %}
+		{% assign image_path = post.images.dir %}
+		{% capture image %}{{image_path}}/{{image_name}}{% endcapture %}
+		<!-- Set category image: "{{image}}" -->
+		{% assign place_image = true %}
+		{% assign place_icon  = false %}
+		<!-- Flags: place_image = "{{place_image}}", place_icon = "{{place_icon}}" -->
 	  {% endif %}
 
 	  {% if place_icon %}
-  		{% if icon_family == 'fontawesome' or icon_family == 'fontawesome5' %}
-  		  {% assign icon_family  = 'fa' %}
-  		{% elsif icon_family == 'mdi' %}
-  		  {% assign icon_family  = 'mdi' %}
-  		{% else %}
-  		  {% assign icon_family  = 'mdi' %}
-  		{% endif %}
+		{% if icon_family == 'fontawesome' or icon_family == 'fontawesome5' %}
+		  {% assign icon_family  = 'fa' %}
+		{% elsif icon_family == 'mdi' %}
+		  {% assign icon_family  = 'mdi' %}
+		{% else %}
+		  {% assign icon_family  = 'mdi' %}
+		{% endif %}
 	  {% endif %}
 
 	  {% if place_icon %}
@@ -201,39 +217,32 @@
   			{{excerpt}}
 		  </div>
 		</div>
-    {% endif %}
 
-    {% comment %} jadams, 2023-09-20: currently NOT used
-    ----------------------------------------------------------------------------
 		<!-- Collect comment provider details -->
 		{% for sharing in builder_config.sharing_provider %}
 		  {% assign provider      = sharing.provider %}
 		  {% assign likes_count   = sharing.likes_count %}
 		  {% assign comment_count = sharing.comment_count %}
 		{% endfor %}
-    ---------------------------------------------------------------------------- {% endcomment %}
 
 		<div class="card-footer speak2me-ignore r-text-200">
 		  <div class="card-footer-text">
 
-      {% if post.date %}
-        <i class="mdib mdib-calendar-blank md-grey-900 mr-2"></i>{{post.date | localize: "%Y %B, %e"}}
-      {% endif %}
+        <i class="mdib mdib-calendar-blank md-grey-900 mr-1"></i>{{post.date | localize: "%Y %B, %e"}}
 
-      {% comment %} jadams, 2023-09-20: currently NOT used
-  	  --------------------------------------------------------------------------
-		  {% if likes_count %}
-  			<span class="ml-3">
-  			<i class="mdib mdib-heart md-grey-900 mr-0"></i> · {{likes_count}}
+        {% assign likes_count = 4 %}
+  		  {% if likes_count %}
+  			<span class="font-weight-bold">
+  			   <i class="mdib mdib-heart md-grey-900 mr-1"></i> · {{likes_count}}
         </span>
-		  {% endif %}
+		    {% endif %}
 
-		  {% if comment_count %}
-  			<span class="ml-3">
-  			<i class="mdib mdib-comment md-grey-900 mr-0"></i> · {{comment_count}}
+        {% assign comment_count = 10 %}
+  		  {% if comment_count %}
+  			<span class="font-weight-bold">
+  			   <i class="mdib mdib-comment md-grey-900 mr-1"></i> · {{comment_count}}
         </span>
-		  {% endif %}
-      -------------------------------------------------------------------------- {% endcomment %}
+		    {% endif %}
 
 		  <!-- Cleanup categories by given blacklist -->
 		  {% assign my_categories = post.categories | difference: category_blacklist %}
@@ -242,24 +251,23 @@
 		  {% assign categories    = my_categories |join: " · "  %}
 		  {% assign tags          = post.tags | join: " · "  %}
 
-  			<p class="result-item-text small mb-3 notranslate">
-  			  <i class="mdib mdib-tag-text-outline mdib-18px mr-1"></i>
-  			  <span class="sr-categories">{{categories}}</span>
-  			  <br>
-  			  <i class="mdib mdib-tag mdib-18px mr-1"></i>
-  			  <span class="sr-tags">{{tags}}</span>
-  			</p>
-
-        <a class="card-link text-lowercase"
-        href="{{post.url}}">
-        {{readmore_text}} · {{post.tagline}}
-        </a>
+			<p class="result-item-text small mb-3 notranslate">
+			  <i class="mdib mdib-tag-text-outline mdib-18px mr-1"></i>
+			  <span class="sr-categories">{{categories}}</span>
+			  <br>
+			  <i class="mdib mdib-tag mdib-18px mr-1"></i>
+			  <span class="sr-tags">{{tags}}</span>
+			</p>
+			 <a class="card-link text-lowercase"
+				href="{{post.url}}">
+				{{readmore_text}} · {{post.tagline}}
+			 </a>
 
 		  </div>
 		</div>
 	</div>
   </li>
-{% endfor %}
+{% endif %}{% endfor %}
 
   <!-- final|last element placed as an empty list item -->
   <li class="mb-0" style="float: none;"></li>

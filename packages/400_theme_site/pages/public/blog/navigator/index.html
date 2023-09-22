@@ -147,11 +147,11 @@ blog_navigator_options.article_navigator.page_text: {{blog_navigator_options.art
         <div class="navigator-headline">
           <nav class="paginator speak2me-ignore">
             <ul class="pagination raised-z0">
-              <li class="page-item"><a class="page-link" href="/"                 title="Back to {{home_button_text}}"          alt="Back to {{home_button_text}}">{{home_button_text}}</a></li>
-              <li class="page-item"><a class="page-link" href="{{category_view}}" title="View by {{category_view_button_text}}" alt="View by {{category_view_button_text}}">{{category_view_button_text}}</a></li>
-              <li class="page-item"><a class="page-link" href="{{date_view}}"     title="View by {{date_view_button_text}}"     alt="View by {{date_view_button_text}}">{{date_view_button_text}}</a></li>
-          <!-- li class="page-item"><a class="page-link" href="{{tag_view}}"      title="View by {{tag_view_button_text}}"      alt="View by {{tag_view_button_text}}">{{tag_view_button_text}}</a></li -->
-              <li class="page-item"><a class="page-link" href="{{all_view}}"      title="View {{archive_view_button_text}}"     alt="View {{archive_view_button_text}}">{{archive_view_button_text}}</a></li>
+              <li class="page-item"><a class="page-link" href="/"                 title="Back to {{home_button_text}}">{{home_button_text}}</a></li>
+              <li class="page-item"><a class="page-link" href="{{category_view}}" title="View by {{category_view_button_text}}">{{category_view_button_text}}</a></li>
+              <li class="page-item"><a class="page-link" href="{{date_view}}"     title="View by {{date_view_button_text}}">{{date_view_button_text}}</a></li>
+          <!-- li class="page-item"><a class="page-link" href="{{tag_view}}"      title="View by {{tag_view_button_text}}">{{tag_view_button_text}}</a></li -->
+              <li class="page-item"><a class="page-link" href="{{all_view}}"      title="View {{archive_view_button_text}}">{{archive_view_button_text}}</a></li>
             </ul>
           </nav> <!-- end paginator -->
         </div> <!-- end navigator headline -->
@@ -161,7 +161,7 @@ blog_navigator_options.article_navigator.page_text: {{blog_navigator_options.art
         {% endif %}
 
         {% if headline_enabled %}
-        <div class="post-headline mt-5 mb-4">
+        <div class="post-headline mt-4 mb-5">
           <h2 id="post_headline" class="notoc">{{headline_text}}</h2>
         </div>
         {% endif %}
@@ -172,7 +172,7 @@ blog_navigator_options.article_navigator.page_text: {{blog_navigator_options.art
       ------------------------------------------------------------------------ {% endcomment %}
       <!-- Add article previewer -->
       {% if paginate %}
-      <div id="article_previewer">
+      <div id="article_previewer" class="mt-5">
 
         <div id="article_preview">
           <!-- Previewer selected of type: {{previewer}}-->

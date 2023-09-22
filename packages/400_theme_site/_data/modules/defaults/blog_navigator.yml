@@ -177,7 +177,7 @@ defaults:
   #
   article_navigator:
     headline:
-      enabled:                          true
+      enabled:                          false
       text:                             Posts Timeline
     page_description:
       enabled:                          true
@@ -196,7 +196,7 @@ defaults:
 
   archive_view:
     headline:
-      enabled:                          true
+      enabled:                          false
       text:                             All Posts
     page_description:
       enabled:                          true
@@ -221,7 +221,7 @@ defaults:
 
   category_view:
     headline:
-      enabled:                          true
+      enabled:                          false
       text:                             Posts by Category
     page_description:
       enabled:                          true
@@ -245,8 +245,8 @@ defaults:
                                         </p>
 
   date_view:
-    headline_text:
-      enabled:                          true
+    headline:
+      enabled:                          false
       text:                             Posts by Date
     page_description:
       enabled:                          true
@@ -271,7 +271,7 @@ defaults:
 
   tag_view:
     headline:
-      enabled:                          true
+      enabled:                          false
       text:                             Posts by Tag
     page_description:
       enabled:                          true

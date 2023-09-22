@@ -65,7 +65,7 @@
 
     {% comment %} Set HOME page BUTTON (always)
     ---------------------------------------------------------------------------- {% endcomment %}
-    <li class="page-item"><a class="page-link" href="/" title="Back to {{pager_home_button_text}}" alt="Back to {{pager_home_button_text}}">{{pager_home_button_text}}</a></li>
+    <li class="page-item"><a class="page-link" href="/" title="Back to {{pager_home_button_text}}">{{pager_home_button_text}}</a></li>
 
     {% comment %} Set BACK page (PagerURL) BUTTON
     ---------------------------------------------------------------------------- {% endcomment %}
@@ -80,9 +80,9 @@
 
       <!-- [INFO   ] [procedures.global.pager.proc          ] [Calculate BackURL from User State Cookie for page: {{page.title}}] -->
       if (re.test(last_pager)) {
-        last_pager_url = '<li class="page-item"><a class="page-link" href="' + last_pager + '"title="Back to {{pager_back_button_text}}" alt="Back to {{pager_back_button_text}}">{{pager_back_button_text}}</a></li>';
+        last_pager_url = '<li class="page-item"><a class="page-link" href="' + last_pager + '"title="Back to {{pager_back_button_text}}">{{pager_back_button_text}}</a></li>';
       } else {
-        last_pager_url = '<li class="page-item"><a class="page-link disabled" title="Back to {{pager_back_button_text}}" alt="Back to {{pager_back_button_text}} Article">{{pager_back_button_text}}</a></li>';
+        last_pager_url = '<li class="page-item"><a class="page-link disabled" title="Back to {{pager_back_button_text}}">{{pager_back_button_text}}</a></li>';
       }
 
       document.write( last_pager_url );
@@ -95,13 +95,13 @@
     {% comment %} Set SERIES Button
     ---------------------------------------------------------------------------- {% endcomment %}
     {% if page.series %}
-      <a class="page-link" href="#offcanvasPostSeriesNavigation" title="Show Article {{pager_series_button_text}}" alt="Show Article {{pager_series_button_text}}" data-bs-toggle="offcanvas">{{pager_series_button_text}}</a>
+      <a class="page-link" href="#offcanvasPostSeriesNavigation" title="Show Article {{pager_series_button_text}}" data-bs-toggle="offcanvas">{{pager_series_button_text}}</a>
     {% endif %}
 
     {% comment %} Set PREVIOUS page BUTTON
     ---------------------------------------------------------------------------- {% endcomment %}
     {% if page.previous %}
-      <li class="page-item"><a class="page-link" href="{{page.previous.url}}" title="Show {{pager_previous_button_text}} Article" alt="Show {{pager_previous_button_text}} Article">{{pager_previous_button_text}}</a></li>
+      <li class="page-item"><a class="page-link" href="{{page.previous.url}}" title="Show {{pager_previous_button_text}} Article">{{pager_previous_button_text}}</a></li>
     {% else %}
       <li class="page-item"><a class="page-link disabled">{{pager_first_button_text}}</a></li>
     {% endif %}
@@ -109,9 +109,9 @@
     {% comment %} Set NEXT page BUTTON
     ---------------------------------------------------------------------------- {% endcomment %}
     {% if page.next %}
-      <li class="page-item"><a class="page-link" href="{{page.next.url}}" title="Show Next Article" alt="Show Next Article">{{pager_next_button_text}}</a></li>
+      <li class="page-item"><a class="page-link" href="{{page.next.url}}" title="Show Next Article">{{pager_next_button_text}}</a></li>
     {% else %}
-      <li class="page-item"><a class="page-link disabled" href="#" title="{{pager_last_button_text}} Article" alt="{{pager_last_button_text}} Article">{{pager_last_button_text}}</a></li>
+      <li class="page-item"><a class="page-link disabled" href="#" title="{{pager_last_button_text}} Article">{{pager_last_button_text}}</a></li>
     {% endif %}
 
   </ul>
