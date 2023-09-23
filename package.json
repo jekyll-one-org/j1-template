@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "j1-theme",
-  "version": "2023.9.1",
+  "version": "2023.9.2",
   "description": "Gem-based Template for Jekyll",
   "homepage": "https://jekyll.one",
   "author": {
