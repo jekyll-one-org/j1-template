@@ -346,13 +346,14 @@
         voiceTags['img']              = new voiceTag('Start of an embedded image with the description,', ', ');
         voiceTags['table']            = new voiceTag('Start of an embedded table,', 'This element ist not spoken.');
         voiceTags['card-header']      = new voiceTag('', '');
-        voiceTags['.doc-example']     = new voiceTag('Start of an embedded example element,', 'This element ist not spoken.');
-        voiceTags['.admonitionblock'] = new voiceTag('Start of an attention element of type, ', ':');
-        voiceTags['.listingblock']    = new voiceTag('Start of an embedded structured text block,', 'This element ist not spoken.');
-        voiceTags['.slider']          = new voiceTag('Start of an embedded slider element,', 'This element ist not spoken.');
-        voiceTags['.masonry']         = new voiceTag('Start of an embedded masonry element,', 'This element ist not spoken.');
-        voiceTags['.lightbox-block']  = new voiceTag('Start of an embedded lightbox element,', 'This element ist not spoken.');
-        voiceTags['.gallery']         = new voiceTag('Start of an embedded gallery element,', 'This element ist not spoken.');
+        voiceTags['doc-example']      = new voiceTag('Start of an embedded example element,', 'This element ist not spoken.');
+        voiceTags['admonitionblock']  = new voiceTag('Start of an attention element of type, ', ':');
+        voiceTags['listingblock']     = new voiceTag('Start of an embedded structured text block,', 'This element ist not spoken.');
+        voiceTags['carousel']         = new voiceTag('Start of an embedded carousel element,', 'This element ist not spoken.');
+        voiceTags['slider']           = new voiceTag('Start of an embedded slider element,', 'This element ist not spoken.');
+        voiceTags['masonry']          = new voiceTag('Start of an embedded masonry element,', 'This element ist not spoken.');
+        voiceTags['lightbox']         = new voiceTag('Start of an embedded lightbox element,', 'This element ist not spoken.');
+        voiceTags['gallery']          = new voiceTag('Start of an embedded gallery element,', 'This element ist not spoken.');
         voiceTags['figure']           = new voiceTag('Start of an embedded figure with the caption,', '');
         voiceTags['blockquote']       = new voiceTag('Blockquote start.', 'Blockquote end.');
         voiceTags['quoteblock']       = new voiceTag('Start of an embedded quote block element,', 'Quote block element end.');
@@ -834,15 +835,15 @@
           jQuery(this).remove();
         });
 
-        // Search for admonition block elements and extract the type and
+        // Search for admonitionblock elements and extract the type and
         // content. Insert type and content and then remove the DOM object.
         //
-        jQuery(clone).find('.admonitionblock').addBack('.admonitionblock').each(function() {
+        jQuery(clone).find('.admonitionblock').addBack('admonitionblock').each(function() {
           content_type    = this.classList[1];
           content_element = jQuery(this).find('.content');
           content         = content_element[0].innerText;
-          prepend         = voiceTags['.admonitionblock'].prepend + content_type + '. ';
-          appended        = voiceTags['.admonitionblock'].append;
+          prepend         = voiceTags['admonitionblock'].prepend + content_type + '. ';
+          appended        = voiceTags['admonitionblock'].append;
 
           if ((content !== undefined) && (content != '')) {
             jQuery('<div>' + prepend + ' ' + content + '</div>').insertBefore(this);
@@ -869,7 +870,7 @@
           jQuery(this).remove();
         });
 
-        // Search for <table> tags, check for <caption>, insert text
+        // Search for <table>, check for <caption>, insert text
         // if exists and then remove the DOM object.
         //
         jQuery(clone).find('table').addBack('table').each(function() {
@@ -906,10 +907,10 @@
 
           // Search for doc-example elements and then remove the DOM object.
           //
-          jQuery(clone).find('.doc-example').addBack('.doc-example').each(function() {
+          jQuery(clone).find('.doc-example').addBack('doc-example').each(function() {
 
-            prepend       = voiceTags['.doc-example'].prepend;
-            appended      = voiceTags['.doc-example'].append;
+            prepend       = voiceTags['doc-example'].prepend;
+            appended      = voiceTags['doc-example'].append;
 
             jQuery('<div>' + prepend + '</div>').insertBefore(this);
             jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
@@ -917,11 +918,11 @@
             jQuery(this).remove();
           });
 
-        // Search for listing block elements, check for previous declared <div>
+        // Search for listingblock elements, check for previous declared <div>
         // container that contains the title element and insert the
         // text if exists and then finally remove the DOM object.
         //
-        jQuery(clone).find('.listingblock').addBack('.listingblock').each(function() {
+        jQuery(clone).find('.listingblock').addBack('listingblock').each(function() {
           title_element = jQuery(this).find('.title');
 
           if (title_element.length) {
@@ -930,8 +931,8 @@
             copy = '';
           }
 
-          prepend       = voiceTags['.listingblock'].prepend;
-          appended      = voiceTags['.listingblock'].append;
+          prepend       = voiceTags['listingblock'].prepend;
+          appended      = voiceTags['listingblock'].append;
 
           if ((copy !== undefined) && (copy != '')) {
             jQuery('<div>' + prepend + ' with the caption,' + copy + pause_spoken + '</div>').insertBefore(this);
@@ -944,12 +945,11 @@
           jQuery(this).remove();
         });
 
-
-        // Search for masonry elements, check for previous declared <div>
+        // Search for <carousel> tags, check for previous declared <div>
         // container that contains the title element and insert the
         // text if exists and finally remove the DOM object.
         //
-        jQuery(clone).find('.masonry').addBack('.masonry').each(function() {
+        jQuery(clone).find('carousel').addBack('carousel').each(function() {
 
           if ($(this).prev()[0].innerText !== undefined) {
             title = $(this).prev()[0].innerText;
@@ -961,8 +961,8 @@
             title = '';
           }
 
-          prepend  = voiceTags['.masonry'].prepend;
-          appended = voiceTags['.masonry'].append;
+          prepend  = voiceTags['carousel'].prepend;
+          appended = voiceTags['carousel'].append;
 
           if ((title !== undefined) && (title != '')) {
             jQuery('<div>' + prepend + ' with the caption,' + title + pause_spoken + '</div>').insertBefore(this);
@@ -975,11 +975,11 @@
           jQuery(this).remove();
         });
 
-        // Search for slider elements, check for previous declared <div>
+        // Search for <masonry> tags, check for previous declared <div>
         // container that contains the title element and insert the
         // text if exists and finally remove the DOM object.
         //
-        jQuery(clone).find('.slider').addBack('.slider').each(function() {
+        jQuery(clone).find('masonry').addBack('masonry').each(function() {
 
           if ($(this).prev()[0].innerText !== undefined) {
             title = $(this).prev()[0].innerText;
@@ -991,8 +991,38 @@
             title = '';
           }
 
-          prepend  = voiceTags['.slider'].prepend;
-          appended = voiceTags['.slider'].append;
+          prepend  = voiceTags['masonry'].prepend;
+          appended = voiceTags['masonry'].append;
+
+          if ((title !== undefined) && (title != '')) {
+            jQuery('<div>' + prepend + ' with the caption,' + title + pause_spoken + '</div>').insertBefore(this);
+            jQuery('<div>' + appended + '</div>').insertBefore(this);
+          } else {
+            jQuery('<div>' + prepend + '</div>').insertBefore(this);
+            jQuery('<div>' + appended + '</div>').insertBefore(this);
+          }
+
+          jQuery(this).remove();
+        });
+
+        // Search for <slider> tags, check for previous declared <div>
+        // container that contains the title element and insert the
+        // text if exists and finally remove the DOM object.
+        //
+        jQuery(clone).find('slider').addBack('slider').each(function() {
+
+          if ($(this).prev()[0].innerText !== undefined) {
+            title = $(this).prev()[0].innerText;
+            title_element = jQuery(this).prev();
+            // remove the title 'before' the DOM object deleted
+            //
+            jQuery(title_element).remove();
+          } else {
+            title = '';
+          }
+
+          prepend  = voiceTags['slider'].prepend;
+          appended = voiceTags['slider'].append;
 
           if ((title !== undefined) && (title != '')) {
             jQuery('<div>' + prepend + ' with the caption, ' + title + pause_spoken + '</div>').insertBefore(this);
@@ -1005,11 +1035,11 @@
           jQuery(this).remove();
       });
 
-        // Search for gallery elements, check for previous declared <div>
+        // Search for <gallery> tags, check for previous declared <div>
         // container that contains the title element and insert the
         // text if exists and finally remove the DOM object.
         //
-        jQuery(clone).find('.gallery').addBack('.gallery').each(function() {
+        jQuery(clone).find('gallery').addBack('gallery').each(function() {
 
           if ($(this).prev()[0].innerText !== undefined) {
             title = $(this).prev()[0].innerText;
@@ -1021,8 +1051,8 @@
             title = '';
           }
 
-          prepend  = voiceTags['.gallery'].prepend;
-          appended = voiceTags['.gallery'].append;
+          prepend  = voiceTags['gallery'].prepend;
+          appended = voiceTags['gallery'].append;
 
           if ((title !== undefined) && (title != '')) {
             (prepend !== '')  && jQuery('<div>' + prepend + ' with the caption ' + title + pause_spoken + '</div>').insertBefore(this);
@@ -1036,10 +1066,10 @@
 
         });
 
-        // Search for a lightbox blocks and extract the <caption> tag data,
+        // Search for <slider> tags, and extract the <caption> tag data,
         // insert the text if exists and finally remove the DOM object.
         //
-        jQuery(clone).find('.lightbox-block').addBack('.lightbox-block').each(function() {
+        jQuery(clone).find('lightbox').addBack('gallery').each(function() {
 
           if ($(this).prev()[0].innerText !== undefined) {
             title = $(this).prev()[0].innerText;
@@ -1051,8 +1081,8 @@
             title = '';
           }
 
-          prepend   = voiceTags['.lightbox-block'].prepend;
-          appended  = voiceTags['.lightbox-block'].append;
+          prepend   = voiceTags['lightbox'].prepend;
+          appended  = voiceTags['lightbox'].append;
 
           if ((title !== undefined) && (title != '')) {
             jQuery('<div>' + prepend + ' with the caption,' + title + pause_spoken + '</div>').insertBefore(this);
