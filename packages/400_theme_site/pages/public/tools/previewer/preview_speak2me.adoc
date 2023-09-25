@@ -555,7 +555,7 @@ slick::image_carousel_full[]
 [role="mb-4"]
 A carousel from a collection for J1 Template is a *pre-defined* carousel
 type to display collection *articles* on a webpage as a carousel. Collection
-carousels pull content from a specific Jekyll *collection*. Carousels for
+carousels pull content from a specific Jekyll Collection. Carousels for
 collections display the article image and a link to the article as a
 caption. All carousels for the J1 Template can be easily customized in
 various ways, such as changing the slider speed, or the navigation options
