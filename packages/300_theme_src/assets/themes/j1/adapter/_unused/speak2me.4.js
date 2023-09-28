@@ -441,6 +441,11 @@ var Events = {
 
       if (!isChrome) {
         $().speak2me('pause');
+
+        // workaround: send pause twice
+        if (isFirefox) {
+          $().speak2me('pause');
+        }
       } else {
         // synthetic pause-resume for chromium-based browsers
         //
@@ -465,6 +470,11 @@ var Events = {
       $('.mdib-speaker').addClass('mdib-spin');
       if (!isChrome) {
         $().speak2me('resume');
+
+        // workaround: send resume twice
+        if (isFirefox) {
+          $().speak2me('resume');
+        }
       } else {
         // synthetic pause-resume for chromium-based browsers
         //

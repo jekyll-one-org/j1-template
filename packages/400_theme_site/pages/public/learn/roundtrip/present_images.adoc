@@ -79,11 +79,11 @@ resource_options:
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [role="dropcap"]
 Welcome to the preview page focussing on image modules. This page shows
-all the valuable features of the J1 Template to manage your image-based
+all of the powerful features of the J1 Template to manage your image-based
 content using lightboxes, carousels, sliders, grids, and galleries.
 
 The image-related modules of the J1 Template offer a wide range of complex
-functionality based on powerful Open Source libraries like Lightbox V2,
+functionality based on powerful Open Source libraries like Lightbox Version 2,
 Slick Slider, Master Slider, or Masonry Grid and JustifiedGallery to create
 masonry-styled preview maps.
 
@@ -98,14 +98,14 @@ mdi:clock-time-five-outline[24px, md-gray mt-4 mr-2]
 
 A Lightbox is a helper which displays enlarged, almost screen-filling versions
 of images while dimming the remainder of the page. The technique, introduced
-by Lightbox V2, gained widespread popularity thanks to its simple style. The
-term *Lightbox* has been employed since then for Javascript libraries to
+by Lightbox Version 2, gained widespread popularity thanks to its simple style.
+The term *Lightbox* has been employed since then for Javascript libraries to
 support such functionality.
 
 For J1 Template, different lightbox modules are available:
 
-* Lightbox V2 (default)
-* LightGallery Lightbox (optional)
+* Lightbox Version 2 (default)
+* Lightbox LightGallery (optional)
 * Slick Lightbox (for Slick Carousels only)
 
 The *default* tool employed by J1 Template is Lightbox V2, a Javascript

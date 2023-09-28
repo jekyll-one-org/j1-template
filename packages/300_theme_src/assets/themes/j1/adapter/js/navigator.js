@@ -877,7 +877,9 @@ j1.adapter.navigator = (function (j1, window) {
       // jadams, 2023-02-26: navicon settings
       style  = '<style>';
       style += '  .nav-icon {';
-      style += '    color: ' + navQuicklinksOptions.icon_color + ' !important;';
+//    style += '    color: ' + navQuicklinksOptions.icon_color + ' !important;';
+      style += '    color: ' + navQuicklinksOptions.icon_color + ';';
+      quicklinks
       style += '  }';
       style += '</style>';
       $('head').append(style);
@@ -885,7 +887,8 @@ j1.adapter.navigator = (function (j1, window) {
       // jadams, 2023-02-26: navicon settings
       style  = '<style>';
       style += '  .nav-icon:hover {';
-      style += '    color: ' + navQuicklinksOptions.icon_color_hover + ' !important;';
+//    style += '    color: ' + navQuicklinksOptions.icon_color_hover + ' !important;';
+      style += '    color: ' + navQuicklinksOptions.icon_color_hover + ';';
       style += '  }';
       style += '</style>';
       $('head').append(style);

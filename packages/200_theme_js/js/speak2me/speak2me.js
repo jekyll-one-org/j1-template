@@ -76,7 +76,7 @@
   var chunkCounter          = 0;
   var userStoppedSpeaking   = false;
   var chunkSpoken           = false;
-  var scrollOnce            = true;
+  var lastScrollPosition    = false;
 
   var rateUserDefault;
   var pitchUserDefault;
@@ -85,6 +85,7 @@
   var voiceLanguageDefault;
   var chunkCounterMax;
   var user_session;
+
   var scanFinished;
 
   var voiceLanguageGoogleDefault = {
@@ -136,19 +137,20 @@
     'de-DE':  'Microsoft Katja Online (Natural) - German (Germany)',
   }
 
-  // -------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------
   // Internal functions
-  // -------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------
 
   // scan a page to get correct positions for scrolling and highlightning
   //
   function scanPage(options) {
     // see: https://stackoverflow.com/questions/3163615/how-to-scroll-an-html-page-to-a-given-anchor
     // see: https://stackoverflow.com/questions/22154129/how-to-make-setinterval-behave-more-in-sync-or-how-to-use-settimeout-instea
-    var line = 0;
+    var line = options.startLine;
     var lines;
 
     function scanSection(counter) {
+      // jadams, 2023-09-28:
       // because of the current translation in progress, the length
       // of a page may change to higher or lower values (asian)
       //
@@ -173,11 +175,21 @@
         setTimeout(function() {
           scanFinished = true;
           $('#content').attr("style", "opacity: 1");
-          $(window).scrollTop(0);
+
+          // jadams, 2023-09-28:
+          // do NOT scroll on stop if paused
+          // disabled
+          // -------------------------------------------------------------------
+          // if (!myOptions.isPaused) {
+          //   window.scrollTo({top: 0, behavior: 'smooth'});
+          // }
+
         }, pageScanCycle);
       }
     }
-    scanSection(0);
+    scanSection({
+      startLine: 0
+    });
   } // END scanPage
 
   // merge (configuration) objects
@@ -312,16 +324,15 @@
     var voiceLanguageDefault = voiceLanguageFirefoxDefault[currentLanguage];
   }
 
-  // -------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------
   // Public functions (methods)
-  // -------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------
   //
   var methods = {
 
     // main speak2me method.
     //
     speak: function(options) {
-        var opts      = $.extend( {}, $.fn.speak2me.defaults, options );
         var toSpeak   = '';
         var voiceTags = new Array();
         var _this     = this;
@@ -329,11 +340,17 @@
         var ignoreTags;
 
         scanFinished  = false;
-        myOptions     = extend(defaultOptions, customOptions || {});
+        myOptions     = extend(options, defaultOptions, customOptions || {});
 
         // scan page to find correct positions for scrolling and highlightning
         //
-        scanPage();
+        if (!myOptions.isPaused) {
+          scanPage({
+            startLine: 0
+          });
+        } else {
+          scanFinished = true;
+        }
 
         // Default values
         //
@@ -357,7 +374,6 @@
         voiceTags['blockquote']       = new voiceTag('Blockquote start.', 'Blockquote end.');
         voiceTags['quoteblock']       = new voiceTag('Start of an embedded quote block element,', 'Quote block element end.');
 
-//      ignoreTags = ['masonry', 'carousel', 'slider', 'pre','audio','button','canvas','code','del','dialog','embed','form','head','iframe','meter','nav','noscript','object','s','script','select','style','textarea','video'];
         ignoreTags = ['audio','button','canvas','code','del', 'pre', 'dialog','embed','form','head','iframe','meter','nav','noscript','object','s','script','select','style','textarea','video'];
 
         // TODO: NOT working for multiple 'tab' windows
@@ -425,7 +441,7 @@
 
             // create and configure the utterance object
             //
-            speech = new SpeechSynthesisUtterance();
+            speech                        = new SpeechSynthesisUtterance();
             speech.rate                   = rate;
             speech.pitch                  = pitch;
             speech.volume                 = volume;
@@ -631,6 +647,7 @@
             if (speaker.offsetTop >= speaker.previousScrollPosition) {
               speaker.previousScrollPosition = speaker.offsetTop;
             }
+            lastScrollPosition = speaker.offsetTop - scrollBlockOffset;
           }
 
           // remove highlightning for the paragraph already spoken
@@ -640,26 +657,41 @@
           }
 
           chunkSpoken = false;
-          chunkCounter ++;
+          chunkCounter++;
         });
 
         // loop to prepare ALL chunks to speak or STOP the voice output
         //
+        var wasRunOnce = false;
         var speechMonitor = setInterval(function () {
           // check if all chunks (text) are spoken
           //
           if (chunkCounter == chunkCounterMax || userStoppedSpeaking ) {
             chunkCounter        = 0;
             userStoppedSpeaking = false;
-            chunkSpoken = false;
+            chunkSpoken         = false;
 
             (speaker.$paragraph !== undefined) && speaker.$paragraph.removeClass('speak-highlighted');
 
-            window.scrollTo({top: 0, behavior: 'smooth'});
+            // jadams, 2023-09-28:
+            // do NOT scroll on stop if paused
+            // disabled
+            // -----------------------------------------------------------------
+            // if (!myOptions.isPaused) {
+            //   window.scrollTo({top: 0, behavior: 'smooth'});
+            // }
+
+            // remove speak indication;
             $('.mdib-speaker').removeClass('mdib-spin');
 
             clearInterval(speechMonitor);
           } else {
+
+            if (!wasRunOnce && myOptions.isPaused) {
+              chunkCounter = myOptions.lastChunk;
+              wasRunOnce = true;
+            }
+
             // prepare speaker data and start the voice
             //
             speaker.text       = chunks[chunkCounter].text;
@@ -827,7 +859,6 @@
           prepend     = voiceTags['a'].prepend;
           appended    = voiceTags['a'].append;
 
-//        jQuery('<div>' + prepend + copy + '</div>').insertBefore(this);
           jQuery('<div>' + copy + '</div>').insertBefore(this);
           jQuery('<div>' + appended + '</div>').insertBefore(this);
 
@@ -930,8 +961,8 @@
             copy = '';
           }
 
-          prepend       = voiceTags['.listingblock'].prepend;
-          appended      = voiceTags['.listingblock'].append;
+          prepend  = voiceTags['.listingblock'].prepend;
+          appended = voiceTags['.listingblock'].append;
 
           if ((copy !== undefined) && (copy != '')) {
             jQuery('<div>' + prepend + ' with the caption,' + copy + pause_spoken + '</div>').insertBefore(this);
@@ -1070,6 +1101,7 @@
         //
         jQuery(clone).find('[data-speak2me-swap]').addBack('[data-speak2me-swap]').each(function() {
           copy = jQuery(this).data('speak2me-swap');
+
           jQuery(this).text(copy);
         });
 
@@ -1079,6 +1111,7 @@
         jQuery(clone).find('[data-speak2me-spell]').addBack('[data-speak2me-spell]').each(function() {
           copy = jQuery(this).text();
           copy = copy.split('').join(' ');
+
           jQuery(this).text(copy);
         });
         return clone;
@@ -1115,7 +1148,7 @@
         // by "speak2me('replace')".
         //
         var len = replacements.length;
-        var i = 0;
+        var i   = 0;
         var old, rep;
 
         while (i < len) {
@@ -1232,19 +1265,21 @@
       window.speechSynthesis.cancel();
       userStoppedSpeaking = true;
 
-      // jadams
+      // jadams, 2023-09-28;
+      // do not work
+      // -----------------------------------------------------------------------
       // NOTE: stopping coincident active speech synthesis
       // in multiple browser windows (tabs) does NOT work
-      //
-//    user_session.speech_synthesis_active = false;
-//    j1.writeCookie({
-//      name:     'user_session',
-//      data:     user_session,
-//      secure:   false,
-//      expires:  0
-//    });
+      // -----------------------------------------------------------------------
+      //    user_session.speech_synthesis_active = false;
+      //    j1.writeCookie({
+      //      name:     'user_session',
+      //      data:     user_session,
+      //      secure:   false,
+      //      expires:  0
+      //    });
 
-      return this;
+      // return this;
     }, // END stop
 
     enabled: function() {
@@ -1253,8 +1288,23 @@
 
     isSpeaking: function() {
       return (window.speechSynthesis.speaking);
-    }, // END is Speaking
+    }, // END isSpeaking
 
+    isSpoken: function() {
+      if (window.speechSynthesis.speaking) {
+        return chunkCounter;
+      } else {
+        return false;
+      }
+    }, // END isSpoken
+
+    isScrolled: function() {
+      if (window.speechSynthesis.speaking) {
+        return lastScrollPosition;
+      } else {
+        return false;
+      }
+    }, // END isSpoken
     isPaused: function() {
       return (window.speechSynthesis.paused);
     }, // END isPaused
@@ -1408,7 +1458,7 @@
           }
         } else {
           if ( voices[i].name.includes(voiceUserDefault) ) {
-//          option.setAttribute('selected', 'selected');
+           //  option.setAttribute('selected', 'selected');
           }
         }
 
@@ -1417,7 +1467,7 @@
       }
 
       return i - skippedVoices;
-    }, // END get Voiuces
+    }, // END getVoiuces
 
     setVoice: function() {
       // The setVoice function has to have two attributes
@@ -1468,8 +1518,8 @@
       }
 
       return this;
-    } // END set Voice
-  } // END methods
+    } // END setVoice
+  } // END public methods
 
   // main speak2me method
   //
@@ -1481,6 +1531,6 @@
     } else {
       jQuery.error('Method ' +  method + ' does not exist on jQuery.speak2me');
     }
-  };
+  }; // END main
 
 }(jQuery));
