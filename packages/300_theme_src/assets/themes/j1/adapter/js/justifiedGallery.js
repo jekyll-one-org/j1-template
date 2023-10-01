@@ -312,7 +312,7 @@ j1.adapter.justifiedGallery = (function (j1, window) {
                 var video_type   = video.substr(video.lastIndexOf('.') + 1);
                 hidden_video_div += '<div style="display:none;" id="' +video_id+ '">' + '\n';
                 hidden_video_div += '  <video class="lg-video-object lg-html5 video-js vjs-theme-{{theme}}"' + '\n';
-                hidden_video_div += '         poster="' +poster+ '" controls="" preload="none">' + '\n';
+                hidden_video_div += '    poster="' +poster+ '" controls="" preload="none">' + '\n';
                 hidden_video_div += '    <source src="' +video+ '" type="video/' +video_type+ '">' + '\n';
                 hidden_video_div += '    Your browser does not support HTML5 video.' + '\n';
                 hidden_video_div += '  </video>' + '\n';

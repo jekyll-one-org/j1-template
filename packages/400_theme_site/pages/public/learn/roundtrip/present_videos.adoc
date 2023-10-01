@@ -29,8 +29,10 @@ personalization:                        true
 permalink:                              /pages/public/learn/roundtrip/present_videos/
 
 resources:                              [
-                                          animate, lightGallery, justifiedGallery, video_js,
-                                          vimeo_player, vimeo_froogaloop
+                                          animate, lightGallery, justifiedGallery,
+                                          video_js,
+                                          vimeo_player,
+                                          vimeo_froogaloop
                                         ]
 resource_options:
   - attic:
@@ -159,6 +161,62 @@ The Internet is full of inspiring content. If you want to present video
 content from the Internet, the online video support of J1 Template is the
 right choice.
 
+[role="mt-4"]
+=== YouTube (VideoJS)
+// See: https://www.tutorialspoint.com/how-to-play-youtube-videos-using-video-js-player
+
+For playing YouTube videos using the VideoJS player you need to install the
+package 'videojs-youtube'. Installation of the package is very easy and can
+be done using node package manager.
+
+[source, html]
+----
+<video
+  id="videojs_youtube"
+  class="video-js vjs-theme-uno"
+  controls
+  width="640" height="360"
+  poster="/assets/videos/gallery/video_gaga-poster.jpg"
+  data-setup='{
+    "techOrder": [
+      "youtube", "html5"
+    ],
+    "sources": [{
+      "type": "video/youtube",
+      "src": "//youtube.com/watch?v=X5Cfi7U4eL4"
+    }],
+    "controlBar": {
+      "pictureInPictureToggle": false
+    }
+  }'
+>
+</video>
+----
+
+++++
+<video
+  id="videojs_youtube"
+  class="video-js vjs-theme-uno"
+  controls
+  width="640" height="360"
+  poster="/assets/videos/gallery/video_gaga-poster.jpg"
+  data-setup='{
+    "techOrder": [
+      "youtube", "html5"
+    ],
+    "sources": [{
+      "type": "video/youtube",
+      "src": "//youtube.com/watch?v=X5Cfi7U4eL4"
+    }],
+    "controlBar": {
+      "pictureInPictureToggle": false
+    }
+  }'
+>
+</video>
+++++
+
+[role="mt-4"]
 === YouTube
 
 The community at link:{url-youtube--home}[YouTube, {browser-window--new}] is
@@ -175,6 +233,50 @@ gallery::jg_video_online_youtube_2[role="mb-5"]
 .James Cordon's Carpool Karaoke
 gallery::jg_video_online_youtube[role="mb-5"]
 
+/////
+=== Vimeo (VideoJS)
+// See: https://www.tutorialspoint.com/how-to-play-vimeo-files-using-video-js-player
+
+For playing Vimeo video using the VideoJS player, you need to create a
+simple player and pass some option in data setup attribute.
+
+[source, html]
+----
+<video
+  id="video_js_vimeo"
+  class="video-js vjs-big-play-centered vjs-default-skin"
+  controls
+  preload="auto"
+  fluid="true"
+  controls
+  width="640" height="264"
+  data-setup='
+    {"techOrder": ["Vimeo"],
+    "sources": [{ "type":"video/vimeo",
+    "src": "https://www.vimeo.com/380886323"}]
+  }'>
+</video>
+----
+
+++++
+<video
+  id="video_js_vimeo"
+  class="video-js vjs-big-play-centered vjs-default-skin"
+  controls
+  preload="auto"
+  fluid="true"
+  controls
+  width="640" height="264"
+  data-setup='
+    {"techOrder": ["Vimeo"],
+    "sources": [{ "type":"video/vimeo",
+    "src": "https://www.vimeo.com/380886323"}]
+  }'>
+</video>
+++++
+/////
+
+[role="mt-4"]
 === Vimeo
 
 link:{url-vimeo--home}[Vimeo, {browser-window--new}] is a video-sharing
@@ -197,6 +299,48 @@ platform.
 .Vimeo Video Gallery - Fashion
 gallery::jg_video_online_vimeo[role="mb-5"]
 
+
+/////
+[role="mt-4"]
+===  DailyMotion (viedeoJS)
+
+For playing DailyMotion video using the VideoJS player, you need to create a
+simple player and pass some option in data setup attribute.
+
+[source, html]
+----
+<video
+  id="videojs_dailymotion"
+  class="video-js vjs-theme-uno"
+  controls
+  autoplay
+  width="640" height="264"
+  poster="/assets/videos/gallery/dailymotion/meditation.jpg"
+  data-setup='{ "techOrder": ["dailymotion", "html5"],
+  "sources": [{ "type": "video/dailymotion",
+  "src": "//dai.ly/x887s09"}]
+  }'
+>
+</video>
+----
+
+++++
+<video
+  id="videojs_dailymotion"
+  class="video-js vjs-theme-uno"
+  controls
+  autoplay
+  width="640" height="264"
+  data-setup='{ "techOrder": ["dailymotion", "html5"],
+  "sources": [{ "type": "video/dailymotion",
+  "src": "https://www.dailymotion.com/video/x7t3la2"}]
+  }'
+>
+</video>
+++++
+/////
+
+[role="mt-4"]
 === DailyMotion
 
 link:{url-dailymotion--home}[Dailymotion, {browser-window--new}] is a French
@@ -225,29 +369,6 @@ on all video content. On every video, an ad clip is presented of 15 to
 
 .DailyMotion Video Gallery - SELF Magazine (Channel)
 gallery::jg_video_online_dailymotion[role="mb-5"]
-
-=== VK
-
-link:{url-vk--home}[VK, {browser-window--new}], Vkontakte.ru until
-January 2012, is a multilingual social network operated from Russia.
-Registered users can create a profile on VK and exchange information with
-other users.
-
-According to the operator, the platform has over 100 million active users,
-but mainly in Russia, Ukraine, and other Russian spoken countries. VK is
-among the most popular websites in Russia.
-
-[NOTE]
-====
-VK is accused of insufficient protection of personal data. The platform
-is also openly criticized by neo-Nazi and neo-fascist Groups used without
-there being a handle against them so far. To date, the Russian investigative
-authorities (especially the FSB) have not made any efforts to identify
-right-wing extremists or to suppress racist currents on the platform.
-====
-
-.VK Video Gallery - Wildlife
-gallery::jg_video_online_vk[role="mb-5"]
 
 
 [role="mt-5"]

@@ -27,7 +27,7 @@ description:
 # User settings
 #
 settings:
-  enabled:                              true
+  enabled:                              false
 
   google:
     publisherID:                        <your-publisher-id>
