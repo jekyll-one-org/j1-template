@@ -1401,6 +1401,7 @@ resources:
         js:                             [
                                           modules/videojs/js/video,
                                           modules/videojs/js/youtube/youtube,
+                                          modules/videojs/js/dailymotion/dailymotion,
                                         ]
         init_function:                  []
 

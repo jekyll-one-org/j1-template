@@ -1,0 +1,206 @@
+---
+title:                                  HTML5 Video
+title_extention:                        Playing HTML5 Video using J1 Template
+tagline:                                Playing HTML5 Video using J1 Template
+
+date:                                   2020-11-04
+#last_modified:                         2023-01-01
+
+description: >
+                                        The J1 Template support playing video on web pages
+                                        by HTML5 Video, the new standard of HTML to show
+                                        videos on web pages.
+keywords: >
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap,
+                                        html, html5, video, support, flash player,
+                                        quicktime, silverlight
+
+categories:                             [ Roundtrip ]
+tags:                                   [ Module, Video ]
+
+image:
+  path:                                 /assets/images/icons/videojs/videojs-poster.png
+  width:                                1920
+  height:                               1280
+
+regenerate:                             false
+personalization:                        true
+permalink:                              /pages/public/video_tester/
+
+resources:                              [
+                                          animate,
+                                          lightGallery, justifiedGallery,
+                                          video_js
+                                        ]
+resource_options:
+  - attic:
+      slides:
+        - url:                          /assets/images/icons/videojs/videojs-poster.png
+          alt:                          VideoJS Poster
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:images-dir:                            {imagesdir}/pages/roundtrip/100_present_images
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+The J1 Template support playing video on web pages by HTML5 Video, the new
+standard of HTML to show videos on webpages.
+
+Modern browsers support the video tag `<video>` for the new HTML5 video
+standard. The previous proprietary de facto standard software like
+_Flash Player_, _Quicktime_, or _Silverlight_ is no longer needed as the
+Jekyll theme J1 provides HTML5 Video support for local video content
+and from online sources on the Internet.
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+[role="mt-5"]
+== Embed VideoJS Players
+
+HTML5 Video opens the doors to your way of presenting video content. All
+modern browsers support the video tag `<video>` for the HTML5. Browsers have
+a built-in multimedia framework already for decoding and displaying video
+content. No need to use such proprietary software components anymore!
+
+[role="mt-4"]
+=== YouTube
+// See: https://www.tutorialspoint.com/how-to-play-youtube-videos-using-video-js-player
+
+It's the last week of The Late Late Show with James Corden and his dear friend
+Adele surprises him with one final Carpool Karaoke commute to work. Adele takes
+the wheel and asks James about his memories hosting the show, Carpool Karaoke
+and the significance of it ending.
+
+[role="mb-4"]
+The two get emotional reflecting about their friendship and the times they've
+been there for each other.
+
+.VideoJS Player for YouTube Video
+youtube::nV8UZJNBY6Y[poster="/assets/videos/gallery/video_adele_last_carpool_caraoke_poster.jpg"]
+
+/////
+[role="mt-4"]
+More than 8 years after our premiere, we say goodbye to The Late Late Show
+with James Corden in our final episode with guests Harry Styles and Will
+Ferrell.
+
+Please enjoy in full and thank you for sharing in so many memories with us.
+
+++++
+<div class="gallery-title">Last Late Late Show</div>
+<video
+  id="videojs_youtube_james"
+  class="video-js vjs-theme-uno"
+  controls
+  width="640" height="360"
+  poster="/assets/videos/gallery/video_james_carpool_caraoke_poster.jpg"
+  data-setup='{
+    "techOrder": [
+      "youtube", "html5"
+    ],
+    "sources": [{
+      "type": "video/youtube",
+      "src": "//youtube.com/watch?v=AeEYQ62t8hA"
+    }],
+    "controlBar": {
+      "pictureInPictureToggle": false
+    }
+  }'
+>
+</video>
+++++
+/////
+
+[role="mt-5"]
+=== Dailymotion
+
+link:{url-dailymotion--home}[Dailymotion, {browser-window--new}] is a French
+video-sharing technology platform primarily owned by
+link:{url-vivendi--home}[Vivendi, {browser-window--new}]. The platform is
+available worldwide in 183 languages and 43 localised versions featuring local
+home pages and local content.
+
+[role="mb-4"]
+The platform is a monetization solution that allows allows to directly
+connect to high-quality advertisers through a proprietary Advertising system.
+Like YouTube, videos can be watched for free, but ads are shown on each and
+every video.
+
+.VideoJS Player for Dailymotion Video
+dailymotion::x87ycik[]
+
+////
+++++
+<div class="gallery-title">VideoJS Player for Dailymotion Video</div>
+<video
+  id="videojs_dailymotion"
+  class="video-js vjs-theme-uno"
+  controls
+  width="640" height="360"
+  data-setup='{
+    "techOrder": [
+      "dailymotion", "html5"
+    ],
+    "sources": [{
+      "type": "video/dailymotion",
+      "src": "//dailymotion.com/video/x87ycik"
+    }],
+    "controlBar": {
+      "pictureInPictureToggle": false
+    }
+  }'
+></video>
+++++
+////
+
+
+[role="mt-5"]
+== Embed VideoJS Galleries
+
+
+[role="mt-4"]
+=== Gallery for YouTube Video
+
+[role="mb-4"]
+The community at link:{url-youtube--home}[YouTube, {browser-window--new}] is
+large, with over 1 billion users that watch hundreds of millions of hours of
+content every day. The number of channels on YouTube is enormous. For TV
+Stations, it's a must to publish videos of their shows on YouTube. Find below
+a real classic channel *Carpool Karaoke* presented by the frontman _James Corden_
+of *The Late Late Show* at CBS, Los Angeles.
+
+.James Cordon and Adele
+gallery::jg_video_online_youtube_james_and_adele[role="mb-5"]
+
+
+[role="mt-5"]
+=== Gallery for DailyMotion Video
+
+[role="mb-4"]
+Dailymotion allows users to search videos by *tags*, topic *channels*, or
+user-created *groups*. Users can upload videos of up to 2 gigabytes and a
+length of 60 minutes. If a user is a MotionMaker or MotionPartner, a program
+for particularly creative users or partners, they can upload videos of
+unlimited length.
+
+.SELF Magazine
+gallery::jg_video_online_dailymotion[role="mb-5"]

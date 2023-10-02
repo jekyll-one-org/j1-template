@@ -115,6 +115,7 @@ video sources are supported:
 . Video files from local folders (your webspace)
 . Video files from online sources (on the Internet) like YouTube, Vimeo, etc.
 
+[role="mb-4"]
 The combination of a gallery and a lightbox is entirely usable for all
 the video content you want to present on your site. You can place galleries
 elsewhere with your content. You can use them for video blogs by putting
@@ -129,7 +130,7 @@ how to use LightGallery for commercial websites and projects.
 ====
 
 [role="mt-5"]
-== Local Video content
+== Local Video
 
 Digital image content, simple pictures or videos, are easy to make. Today,
 every mobile has a camera. Presenting a bunch of pictures is done very easily
@@ -139,10 +140,12 @@ made at it's best.
 
 Two players are available with LightGallery:
 
+[role="mb-4"]
 . an internal player used by default
 . VideoJS {url-videojs--home}[video.js, {browser-window--new}], a
   excellent Javascript video library including a great player
 
+[role="mb-4"]
 [NOTE]
 ====
 The HTML5 specification does *not* define which video and audio formats
@@ -150,75 +153,67 @@ browsers *should* support. J1 LightGallery can play all types of standard
 HTML5 Video formats on modern browsers today like MP4, WebM, or Ogg.
 ====
 
-.MP4 Videos - VideoJS Player
+.MP4 Video (VideoJS)
 gallery::jg_video_html5[role="mb-5"]
 
 
 [role="mt-5"]
-== Online Video content
+== Online Video
 
 The Internet is full of inspiring content. If you want to present video
 content from the Internet, the online video support of J1 Template is the
 right choice.
 
 [role="mt-4"]
-=== YouTube (VideoJS)
+=== VideoJS for YouTube
 // See: https://www.tutorialspoint.com/how-to-play-youtube-videos-using-video-js-player
 
-For playing YouTube videos using the VideoJS player you need to install the
-package 'videojs-youtube'. Installation of the package is very easy and can
-be done using node package manager.
+[role="mb-4"]
+For playing _YouTube_ videos using the VideoJS player, the template system J1
+implemented *videojs-youtube* as an add-on package. The package is automatically
+enabled if the module *video_js* is loaded.
 
-[source, html]
-----
-<video
-  id="videojs_youtube"
-  class="video-js vjs-theme-uno"
-  controls
-  width="640" height="360"
-  poster="/assets/videos/gallery/video_gaga-poster.jpg"
-  data-setup='{
-    "techOrder": [
-      "youtube", "html5"
-    ],
-    "sources": [{
-      "type": "video/youtube",
-      "src": "//youtube.com/watch?v=X5Cfi7U4eL4"
-    }],
-    "controlBar": {
-      "pictureInPictureToggle": false
-    }
-  }'
->
-</video>
-----
-
-++++
-<video
-  id="videojs_youtube"
-  class="video-js vjs-theme-uno"
-  controls
-  width="640" height="360"
-  poster="/assets/videos/gallery/video_gaga-poster.jpg"
-  data-setup='{
-    "techOrder": [
-      "youtube", "html5"
-    ],
-    "sources": [{
-      "type": "video/youtube",
-      "src": "//youtube.com/watch?v=X5Cfi7U4eL4"
-    }],
-    "controlBar": {
-      "pictureInPictureToggle": false
-    }
-  }'
->
-</video>
-++++
+[TIP]
+====
+The *default theme* `vjs_theme_name` of VideoJS for the J1 Template system
+is the *uno* theme. Alternatively, the themes *city*, *fantasy*, *forest*,
+or *sea* are available.
+====
 
 [role="mt-4"]
-=== YouTube
+The Asciidoc extension *youtube::* can embed single YouTube videos in your
+documents for easy use.
 
+.Usage
+[source, html]
+----
+youtube::video_id[
+  poster="full_image_path"
+  theme="vjs_theme_name"
+  role="CSS classes"
+]
+----
+
+As as example, find a video of Adele and James Cordon get emotional reflecting
+about their friendship and the times they've been there for each other.
+
+.Example
+[source, html]
+----
+.Adele joins James Cordon for the last Carpool Caraoke
+youtube::nV8UZJNBY6Y[
+  poster="/assets/videos/gallery/video_adele_last_carpool_caraoke_poster.jpg"
+  role="mt-4"
+]
+----
+
+.Adele joins James Cordon for the last Carpool Caraoke
+youtube::nV8UZJNBY6Y[poster="/assets/videos/gallery/video_adele_last_carpool_caraoke_poster.jpg" role="mt-4"]
+
+[role="mt-5"]
+=== YouTube Video Galleries
+
+[role="mb-4"]
 The community at link:{url-youtube--home}[YouTube, {browser-window--new}] is
 large, with over 1 billion users that watch hundreds of millions of hours of
 content every day. The number of channels on YouTube is enormous. For TV
@@ -227,11 +222,13 @@ a current gallery from *The Voice Kids*, a SAT.1 Germany production, and a
 real classic channel *Carpool Karaoke* presented by the frontman _James Corden_
 of *The Late Late Show* at CBS, Los Angeles.
 
-.The Voice Kids, Germany 2021
-gallery::jg_video_online_youtube_2[role="mb-5"]
-
 .James Cordon's Carpool Karaoke
-gallery::jg_video_online_youtube[role="mb-5"]
+gallery::jg_video_online_youtube_new[role="mb-4"]
+
+.James Cordon and Adele
+gallery::jg_video_online_youtube_james_and_adele[role="mb-5"]
+
+
 
 /////
 === Vimeo (VideoJS)
@@ -277,18 +274,14 @@ simple player and pass some option in data setup attribute.
 /////
 
 [role="mt-4"]
-=== Vimeo
+=== Vimeo Video Galleries
 
+[role="mb-4"]
 link:{url-vimeo--home}[Vimeo, {browser-window--new}] is a video-sharing
 platform that includes features such as live-streaming and customization.
 Vimeo provides many tools for video creation, editing, and broadcasting.
 The platform provides you with an excellent channel to present high-quality,
 professional videos and reach audiences worldwide.
-
-Vimeo does offer a basic, free membership, but it limits you to 500MB maximum
-storage per week. Alternately, you can book on paid plans: Plus, PRO, Business.
-Each membership has varied storage limits, but the free plan offers sufficient
-space for private projects to present video content without advertising.
 
 [NOTE]
 ====
@@ -296,7 +289,13 @@ A great plus using Vimeo is that *no advertising* is used on that
 platform.
 ====
 
-.Vimeo Video Gallery - Fashion
+[role="mt-4 mb-4"]
+Vimeo does offer a basic, free membership, but it limits you to 500MB maximum
+storage per week. Alternately, you can book on paid plans: Plus, PRO, Business.
+Each membership has varied storage limits, but the free plan offers sufficient
+space for private projects to present video content without advertising.
+
+.Fashion
 gallery::jg_video_online_vimeo[role="mb-5"]
 
 
@@ -341,7 +340,7 @@ simple player and pass some option in data setup attribute.
 /////
 
 [role="mt-4"]
-=== DailyMotion
+=== DailyMotion Video Galleries
 
 link:{url-dailymotion--home}[Dailymotion, {browser-window--new}] is a French
 video-sharing technology platform primarily owned by
@@ -349,16 +348,11 @@ link:{url-vivendi--home}[Vivendi, {browser-window--new}]. The platform is
 available worldwide in 183 languages and 43 localised versions featuring local
 home pages and local content.
 
+[role="mt-4 mb-4"]
 The platform is a *monetization* solution that allows allows to directly
 connect to high-quality advertisers through a proprietary Advertising system.
 Like YouTube, videos can be watched for free, but ads are shown on each and
 every video.
-
-Dailymotion allows users to search videos by *tags*, topic *channels*, or
-user-created *groups*. Users can upload videos of up to 2 gigabytes and a
-length of 60 minutes. If a user is a MotionMaker or MotionPartner, a program
-for particularly creative users or partners, they can upload videos of
-unlimited length.
 
 [NOTE]
 ====
@@ -367,7 +361,14 @@ on all video content. On every video, an ad clip is presented of 15 to
 30 seconds in length.
 ====
 
-.DailyMotion Video Gallery - SELF Magazine (Channel)
+[role="mt-4 mb-4"]
+Dailymotion allows users to search videos by *tags*, topic *channels*, or
+user-created *groups*. Users can upload videos of up to 2 gigabytes and a
+length of 60 minutes. If a user is a MotionMaker or MotionPartner, a program
+for particularly creative users or partners, they can upload videos of
+unlimited length.
+
+.SELF Magazine
 gallery::jg_video_online_dailymotion[role="mb-5"]
 
 
@@ -390,5 +391,6 @@ presenting text. The text will take on an important role of acting as plain
 text and as something like images. To see how text could be presented great
 for modern responsive websites.
 
+[role="mb-5"]
 What? Please find out how it works.
 Go for: link:{url-roundtrip--typography}[Typography], then.

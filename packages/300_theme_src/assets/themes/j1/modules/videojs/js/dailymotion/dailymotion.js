@@ -1,8 +1,44 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/themes/j1/modules/videojs/js/dailymotion/dailymotion.js
+ # Provides Dailymotion Playback Technology for Video.js V8 and newer
+ #
+ #  Product/Info:
+ #  http://jekyll.one
+ #
+  # Copyright (C) John Law
+ #  Copyright (C) 2023 Juergen Adams
+ #
+ #  J1 Theme is licensed under MIT License.
+ #  See: https://github.com/jekyll-one/J1 Theme/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+/*
+  Copyright (c) John Law <chihonlaw@gmail.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+*/
+
 /*global define, DM*/
 (function (root, factory) {
-  if (typeof window !== 'undefined' && window.videojs) {
-    factory(window.videojs);
-  } else if (typeof exports==='object' && typeof module!=='undefined') {
+  if (typeof exports==='object' && typeof module!=='undefined') {
     var videojs = require('video.js');
     module.exports = factory(videojs.default || videojs);
   } else if (typeof define === 'function' && define.amd) {
@@ -13,17 +49,17 @@
     root.Dailymotion = factory(root.videojs);
   }
 }(this, function(videojs) {
-  'use strict';
-
+ 'use strict';
   var _isOnMobile = videojs.browser.IS_IOS || videojs.browser.IS_NATIVE_ANDROID;
   var Tech = videojs.getTech('Tech');
 
-  var Dailymotion = videojs.extend(Tech, {
+  class Dailymotion extends Tech {
 
-    constructor: function(options, ready) {
-      Tech.call(this, options, ready);
+    constructor(options, ready) {
+      super(options, ready);
 
-      this.setSrc(this.options_.source);
+      this.setPoster(options.poster);
+      this.setSrc(this.options_.source, true);
 
       // Set the vjs-dailymotion class to the player
       // Parent is not set yet so we have to wait a tick
@@ -43,9 +79,9 @@
           }
         }
       }.bind(this));
-    },
+    }
 
-    _getPlayerParams: function() {
+    getPlayerParams() {
       var playerParams = {
         autoplay: false,
         mute: false,
@@ -53,6 +89,7 @@
         'queue-autoplay-next': false,
         'queue-enable': false
       };
+
       // Let the user set any Dailymotion parameter
       // https://developer.dailymotion.com/player/#player-parameters
       // To use Dailymotion controls, you must use dmControls instead
@@ -60,6 +97,7 @@
       var params = ['api', 'autoplay', 'autoplay-mute', 'id', 'mute', 'origin', 'quality', 'queue-autoplay-next',
       'queue-enable', 'sharing-enable', 'start', 'subtitles-default', 'syndication', 'ui-highlight', 'ui-logo',
       'ui-start-screen-info', 'ui-theme', 'apimode', 'playlist'];
+
       var options = this.options_;
       params.forEach(function(param) {
         if (typeof options[param] === 'undefined') {
@@ -86,13 +124,13 @@
       }
 
       return playerParams;
-    },
+    }
 
-    _getPlayerConfig: function() {
+    getPlayerConfig() {
       var playerConfig = {
         width: '100%',
         height: '100%',
-        params: this._getPlayerParams()
+        params: this.getPlayerParams()
       };
 
       if (this.url && typeof this.url.video !== 'undefined') {
@@ -102,15 +140,15 @@
       }
 
       return playerConfig;
-    },
+    }
 
-    initDMPlayer: function() {
+    initDMPlayer() {
       if (this.dmPlayer) {
         return;
       }
       this.dmPlayer = new DM.player(
         document.getElementById(this.options_.techId),
-        this._getPlayerConfig()
+        this.getPlayerConfig()
       );
       var vm = this;
       this.isApiReady = false;
@@ -149,29 +187,29 @@
       this.dmPlayer.addEventListener('volumechange', function() {
         vm.trigger('volumechange');
       });
-    },
+    }
 
-    autoplay: function(autoplay) {
+    autoplay(autoplay) {
       if (typeof autoplay !== 'undefined') {
         return this.setAutoplay(autoplay);
       }
 
       return this.options_.autoplay;
-    },
+    }
 
-    setAutoplay: function(val) {
+    setAutoplay(val) {
       return this.options_.autoplay = val;
-    },
+    }
 
-    buffered: function() {
+    buffered() {
       if(!this.dmPlayer || !this.dmPlayer.bufferedTime) {
         return videojs.createTimeRange();
       }
 
       return videojs.createTimeRange(0, this.dmPlayer.bufferedTime);
-    },
+    }
 
-    createEl: function() {
+    createEl() {
       var div = document.createElement('div');
       div.setAttribute('id', this.options_.techId);
       div.setAttribute('style', 'width:100%;height:100%;top:0;left:0;position:absolute');
@@ -181,6 +219,7 @@
       divWrapper.appendChild(div);
 
       if (!_isOnMobile && !this.options_.dmControls) {
+
         // var divBlocker = document.createElement('div');
         // divBlocker.setAttribute('class', 'vjs-iframe-blocker');
         // divBlocker.setAttribute('style', 'position:absolute;top:0;left:0;width:100%;height:100%');
@@ -194,28 +233,28 @@
       }
 
       return divWrapper;
-    },
+    }
 
-    currentSrc: function() {
+    currentSrc() {
       return this.source && this.source.src;
-    },
+    }
 
-    currentTime: function(seconds) {
+    currentTime(seconds) {
       if (typeof seconds !== 'undefined') {
         return this.setCurrentTime(seconds);
       }
       return this.dmPlayer && this.dmPlayer.currentTime;
-    },
+    }
 
-    setCurrentTime: function(seconds) {
+    setCurrentTime(seconds) {
       if (!this.dmPlayer || !this.dmPlayer.seek) {
         return;
       }
 
       return this.dmPlayer.seek(seconds);
-    },
+    }
 
-    dispose: function() {
+    dispose() {
       if (DM && DM.destroy) {
         //Destroy the Dailymotion Player
         DM.destroy(this.options_.techId);
@@ -236,78 +275,78 @@
       // Needs to be called after the Dailymotion player is destroyed,
       // otherwise there will be a undefined reference exception
       Tech.prototype.dispose.call(this);
-    },
+    }
 
-    duration: function(seconds) {
+    duration(seconds) {
       if (typeof seconds !== 'undefined') {
         return this.setDuration(seconds);
       }
       return this.dmPlayer ? this.dmPlayer.duration : 0;
-    },
+    }
 
-    setDuration: function(seconds) {
+    setDuration(seconds) {
       if (!this.dmPlayer || !this.dmPlayer.seek) {
         return;
       }
       return this.dmPlayer.seek(seconds);
-    },
+    }
 
-    ended: function() {
+    ended() {
       return this.dmPlayer && this.dmPlayer.ended;
-    },
+    }
 
-    enterFullWindow: function() {
+    enterFullWindow() {
       if (!this.dmPlayer || !this.dmPlayer.setFullscreen) {
         return;
       }
       return this.dmPlayer.setFullscreen(true);
-    },
+    }
 
-    error: function() {
+    error() {
       return this.dmPlayer && this.dmPlayer.error;
-    },
+    }
 
-    exitFullscreen: function() {
+    exitFullscreen() {
       if (!this.dmPlayer || !this.dmPlayer.setFullscreen) {
         return;
       }
       return this.dmPlayer.setFullscreen(false);
-    },
+    }
 
-    isFullscreen: function() {
+    isFullscreen() {
       return this.dmPlayer && this.dmPlayer.fullscreen;
-    },
+    }
 
     // Not supported by Dailymotion
-    language: function() {
+    language() {
       return undefined;
-    },
+    }
 
     // Not supported by Dailymotion
-    languages: function() {
+    languages() {
       return undefined;
-    },
+    }
 
-    load: function() {
+    load() {
       if (!this.dmPlayer || !this.dmPlayer.load) {
         return;
       }
-      return this.dmPlayer.load(this._getPlayerConfig());
-    },
+      return this.dmPlayer.load(this.getPlayerConfig());
+    }
 
     // Not supported by Dailymotion
-    loop: function() {
+    loop() {
       return undefined;
-    },
+    }
 
-    muted: function(muted) {
+    muted(muted) {
       if (typeof muted !== undefined) {
         return this.setMuted(muted);
       }
       return this.dmPlayer && this.dmPlayer.mute;
-    },
+    }
 
-    setMuted: function(mute) {
+    setMuted(mute) {
       if (typeof mute === 'undefined' || !this.dmPlayer || !this.dmPlayer.setMuted) {
         return;
       }
@@ -323,9 +362,9 @@
       // setTimeout( function(){
       //   vm.trigger('volumechange');
       // }, 50);
-    },
+    }
 
-    networkState: function () {
+    networkState() {
       if (!this.dmPlayer || this.dmPlayer.error) {
         return 0; //NETWORK_EMPTY
       }
@@ -333,21 +372,21 @@
       if (this.dmPlayer.seeking) {
         return 2; //NETWORK_LOADING
       }
-    },
+    }
 
-    pause: function() {
+    pause() {
       if (!this.dmPlayer || !this.dmPlayer.pause) {
         return;
       }
 
       return this.dmPlayer.pause();
-    },
+    }
 
-    paused: function() {
+    paused() {
       return this.dmPlayer && this.dmPlayer.paused;
-    },
+    }
 
-    play: function() {
+    play() {
       if (!this.isApiReady || !this.dmPlayer || !this.dmPlayer.play) {
         return;
       }
@@ -355,25 +394,25 @@
       this.trigger('loadStart');
       this.trigger('waiting');
       return this.dmPlayer.play();
-    },
+    }
 
     // Playback rate is not support by Dailymotion
-    playbackRate: function() {
+    playbackRate() {
       return 1;
-    },
+    }
 
     // Not supported by Dailymotion
-    poster: function() {
+    poster() {
       return undefined;
-    },
+    }
 
     // Not supported by Dailymotion
-    preload: function() {
+    preload() {
       return undefined;
-    },
+    }
 
     // TODO: Confirm if it can be more detail
-    readyState: function() {
+    readyState() {
       if (!this.dmPlayer || this.dmPlayer.error) {
         return 0; //NETWORK_EMPTY
       }
@@ -382,45 +421,45 @@
         return 1; //HAVE_METADATA
       }
       return 4; //HAVE_ENOUGH_DATA
-    },
+    }
 
-    remainingTime: function() {
+    remainingTime() {
       return this.dmPlayer && (this.dmPlayer.duration - this.dmPlayer.currentTime);
-    },
+    }
 
-    requestFullscreen: function() {
+    requestFullscreen() {
       return this.enterFullWindow();
-    },
+    }
 
-    enterFullScreen: function() {
+    enterFullScreen() {
       return this.enterFullWindow();
-    },
+    }
 
-    reset: function() {
+    reset() {
       this.load();
-    },
+    }
 
-    seekable: function () {
+    seekable() {
       if(!this.dmPlayer) {
         return videojs.createTimeRange();
       }
 
       return videojs.createTimeRange(0, this.dmPlayer.duration);
-    },
+    }
 
-    seeking: function () {
+    seeking() {
       return this.dmPlayer && this.dmPlayer.seeking;
-    },
+    }
 
-    src: function(source) {
+    src(source) {
       if (typeof source !== 'undefined') {
         return this.setSrc(source);
       }
 
       return this.source;
-    },
+    }
 
-    setSrc: function(source) {
+    setSrc(source) {
       if (typeof source === 'undefined') {
         return;
       }
@@ -433,26 +472,26 @@
         this.load();
       }
       return this.source;
-    },
+    }
 
-    supportsFullScreen: function() {
+    supportsFullScreen() {
       return true;
-    },
+    }
 
-    volume: function() {
+    volume() {
       return this.dmPlayer ? this.dmPlayer.volume : 1;
-    },
+    }
 
-    setVolume: function(percentAsDecimal) {
+    setVolume(percentAsDecimal) {
       if (!this.dmPlayer || !this.dmPlayer.setMuted || !this.dmPlayer.setVolume) {
         return;
       }
 
       this.dmPlayer.setMuted(false);
       this.dmPlayer.setVolume(percentAsDecimal);
-    },
+    }
 
-  });
+  }
 
   Dailymotion.isSupported = function() {
     return true;

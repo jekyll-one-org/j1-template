@@ -270,8 +270,8 @@ settings:
                                           "Rollin`Wild"
                                         ]
         captions_lightbox:              [
-                                          "<p>CGI Animated Short HD: Student Academy Award Winning <b>PeckPocketed</b> by Kevin Herron</p>",
-                                          "<p>Rollin`Wild - Short Funny Animated Clips - Film Academy BW</p>"
+                                          "<p>Student Academy Award Winning <b>PeckPocketed</b> by Kevin Herron.</p>",
+                                          "<p>Rollin`Wild. Short Funny Animated Clips created at the Film Academy.</p>"
                                         ]
         poster:                         [
                                           video1-poster.jpg,
@@ -317,14 +317,99 @@ settings:
                                           "Carpool Karaoke - First Lady Michelle Obama"
                                         ]
         captions_lightbox:              [
-                                          "<p>Lady Gaga joins James for a drive through Los Angeles singing her classics and tracks from her new album</p>",
-                                          "<p>James Corden is about the holidays in London and gets Adele off for a ride through the city. On the way they sing some of their biggest hits and Adele raps Nicki Minaj's <b>monster</b></p>",
-                                          "<p>Gwen Stefani, Julia Roberts, George Clooney and James Corden singing Holla back girl, there's nothing left to see</p>",
-                                          "<p>James Corden's White House tour takes an unthinkable turn when First Lady Michelle Obama joins him for a drive around the grounds singing Stevie Wonder and Beyonce</p>"
+                                          "<p>Lady Gaga joins James for a drive through Los Angeles singing her classics and tracks from her new album.</p>",
+                                          "<p>James Corden is about the holidays in London and gets Adele off for a ride through the city. On the way they sing some of their biggest hits and Adele raps Nicki Minaj's <b>monster</b>.</p>",
+                                          "<p>Gwen Stefani, Julia Roberts, George Clooney and James Corden singing Holla back girl, there's nothing left to see.</p>",
+                                          "<p>James Corden's White House tour takes an unthinkable turn when First Lady Michelle Obama joins him for a drive around the grounds singing Stevie Wonder and Beyonce.</p>"
                                         ]
         poster:                         [
                                           video_gaga-poster.jpg, video_adele-poster.jpg,
                                           video_gwen-poster.jpg, video_michelle-poster.jpg
+                                        ]
+
+    # --------------------------------------------------------------------------
+    # Online VIDEO (YouTube)
+    #
+    - gallery:
+        enabled:                        true
+
+        id:                             jg_video_online_youtube_new
+        type:                           video-online
+        show_delay:                     300
+        title:                          false                                   # YouTube Video Gallery
+
+        css_classes:
+        image_path:                     /assets/videos/gallery
+        thumb_path:                     /assets/videos/gallery
+
+        gallery_options:
+          rowHeight:                    200
+          margins:                      5
+
+        lightbox_options:
+          lightbox:                     lg
+#         mode:                         lg-fade
+#         cssEasing:                    cubic-bezier(0.25, 0, 0.25, 1)
+          videojs:                      true
+          videojsOptions:               {}
+
+        videos:                         [
+                                          "//youtube.com/watch?v=X5Cfi7U4eL4",
+                                          "//youtube.com/watch?v=ln3wAdRAim4"
+                                        ]
+        captions_gallery:               [
+                                          "Carpool Karaoke - Lady Gaga",
+                                          "Carpool Karaoke - First Lady Michelle Obama"
+                                        ]
+        captions_lightbox:              [
+                                          "<p>Lady Gaga joins James for a drive through Los Angeles singing her classics and tracks from her new album.</p>",
+                                          "<p>James Corden's White House tour takes an unthinkable turn when First Lady Michelle Obama joins him for a drive around the grounds singing Stevie Wonder and Beyonce.</p>"
+                                        ]
+        poster:                         [
+                                          video_gaga-poster.jpg,
+                                          video_michelle-poster.jpg
+                                        ]
+
+
+    # --------------------------------------------------------------------------
+    # Online VIDEO (YouTube)
+    #
+    - gallery:
+        enabled:                        true
+
+        id:                             jg_video_online_youtube_james_and_adele
+        type:                           video-online
+        show_delay:                     300
+        title:                          false                                   # YouTube Video Gallery
+
+        image_path:                     /assets/videos/gallery
+        thumb_path:                     /assets/videos/gallery
+        css_classes:
+
+        gallery_options:
+          rowHeight:                    200
+          margins:                      5
+
+        lightbox_options:
+          lightbox:                     lg
+          videojs:                      true
+          videojsOptions:               {}
+
+        videos:                         [
+                                          "//youtube.com/watch?v=Nck6BZga7TQ",
+                                          "//youtube.com/watch?v=nV8UZJNBY6Y"
+                                        ]
+        captions_gallery:               [
+                                          "December 2015 - James is on holidays is about the holidays in London and gets Adele off for a ride through the city. On the way they sing some of their biggest hits.",
+                                          "April 2023 - Adele wakeup James at home for the last Late Night Show, for the last Carpool Caraoke ever.",
+                                        ]
+        captions_lightbox:              [
+                                          "<p>December 2015 - James is on holidays is about the holidays in London and gets Adele off for a ride through the city. On the way they sing some of their biggest hits.</p>",
+                                          "<p>April 2023 - Adele wakeup James at home for the last Late Night Show, for the last Carpool Caraoke ever.</p>"
+                                        ]
+        poster:                         [
+                                          video_adele-poster.jpg,
+                                          video_adele_last_carpool_caraoke_poster.jpg
                                         ]
 
     # --------------------------------------------------------------------------
@@ -456,24 +541,20 @@ settings:
         videos:                         [
                                           "//vimeo.com/179528528",
                                           "//vimeo.com/202117650",
-                                          "//vimeo.com/196000652"
                                         ]
         captions_gallery:               [
                                           "Forever 21 - Kick It Old School",
                                           "Forever 21 - Stay Colorful, Babe!",
-                                          "Forever 21 - NYE Party Shop"
 
                                         ]
         captions_lightbox:              [
                                           "<p>Kick It Old School on Vimeo</p>",
                                           "<p>Stay Colorful on Vimeo</p>",
-                                          "<p>NYE Party Shop on Vimeo</p>"
 
                                         ]
         poster:                         [
                                           kick-it-old-school-poster.jpg,
                                           stay-colorful-poster.jpg,
-                                          nye-party-shop-poster.jpg
                                         ]
 
     # --------------------------------------------------------------------------
