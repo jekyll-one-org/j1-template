@@ -1396,12 +1396,13 @@ resources:
                                           modules/videojs/css/themes/sea,
                                           modules/videojs/css/themes/uno
                                         ]
-#       files:                          [ modules/videojs/js/vimeo/vimeo.js, modules/videojs/js/dailymotion/dailymotionjs ]
         files:                          []
         js:                             [
                                           modules/videojs/js/video,
-                                          modules/videojs/js/youtube/youtube,
                                           modules/videojs/js/dailymotion/dailymotion,
+                                          modules/videojs/js/youtube/youtube,
+                                          modules/videojs/js/vimeo/player,
+#                                         modules/videojs/js/vimeo/vimeo
                                         ]
         init_function:                  []
 

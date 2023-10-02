@@ -82,6 +82,63 @@ a built-in multimedia framework already for decoding and displaying video
 content. No need to use such proprietary software components anymore!
 
 [role="mt-4"]
+=== Vimeo
+
+Already have a player on the page? Pass the element to the `Vimeo.Player`
+constructor and you’re ready to go.
+
+// ++++
+//   <div class="gallery-title">VideoJS Player for Vimeo Video</div>
+//   <video
+//     id="videojs_vimeo"
+//     class="video-js vjs-theme-uno"
+//     controls
+//     width="640" height="360"
+//     data-setup='{
+//       "techOrder": [
+//         "vimeo", "html5"
+//       ],
+//       "sources": [{
+//         "type": "video/vimeo",
+//         "src": "//player.vimeo.com/video/76979871?h=8272103f6e"
+//       }],
+//       "controlBar": {
+//         "pictureInPictureToggle": false
+//       }
+//     }'
+//   ></video>
+// ++++
+
+++++
+<iframe
+  src="//player.vimeo.com/video/76979871?h=8272103f6e"
+  width="640" height="360"
+  frameborder="0"
+  allowfullscreen
+  allow="autoplay; encrypted-media">
+</iframe>
+
+<!-- Load the Player (API) -->
+<!-- script src="https://player.vimeo.com/api/player.js"></script -->
+
+<script>
+  $(function() {
+    const iframe    = document.querySelector('iframe');
+    const myPlayer  = new Vimeo.Player(iframe);
+
+    myPlayer.on('play', function() {
+      console.log('Vimeo: played the video');
+    });
+
+    myPlayer.getVideoTitle().then(function(title) {
+      console.log('Vimeo: video title: ', title);
+    });
+  });
+</script>
+++++
+
+
+[role="mt-4"]
 === YouTube
 // See: https://www.tutorialspoint.com/how-to-play-youtube-videos-using-video-js-player
 
