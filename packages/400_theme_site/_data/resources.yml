@@ -1400,9 +1400,9 @@ resources:
         js:                             [
                                           modules/videojs/js/video,
                                           modules/videojs/js/dailymotion/dailymotion,
-                                          modules/videojs/js/youtube/youtube,
                                           modules/videojs/js/vimeo/player,
-#                                         modules/videojs/js/vimeo/vimeo
+                                          modules/videojs/js/vimeo/vimeo,
+                                          modules/videojs/js/youtube/youtube
                                         ]
         init_function:                  []
 

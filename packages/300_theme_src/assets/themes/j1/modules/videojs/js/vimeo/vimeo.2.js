@@ -27,6 +27,12 @@
      */
       constructor(options, ready) {
         super(options, ready);
+
+//      this.setPoster(options.poster);
+        // $(function() {
+        //   this.initVimeoPlayer();
+        // });
+
         this.initVimeoPlayer();
       }
 
@@ -130,7 +136,6 @@
       src() {
         // @note: Not sure why this is needed but videojs requires it
         return this.options_.source;
-        // return '//player.vimeo.com/api/player.js';
       }
 
       currentSrc() {
@@ -242,12 +247,16 @@
 
     Vimeo.registerSourceHandler(Vimeo.nativeSourceHandler);
 
+    // Component.registerComponent('Vimeo', Vimeo);
+    // Tech.registerTech('Vimeo', Vimeo);
+
     // Include the version number
     Vimeo.VERSION = '1.0.0';
 
+
     // if (typeof document !== 'undefined'){
-    //   loadScript('https://player.vimeo.com/api/player.js', apiLoaded);
-    //   // injectCss();
+    //   loadScript('https://www.youtube.com/iframe_api', apiLoaded);
+    //   injectCss();
     // }
 
     // Older versions of VJS5 doesn't have the registerTech function
