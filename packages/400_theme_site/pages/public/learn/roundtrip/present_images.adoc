@@ -126,19 +126,17 @@ under the link:{url-j1-docs--lightbox-module}[Lightbox module, {browser-window--
 [role="mt-4"]
 === Default Lightbox
 
-[role="mb-4"]
 Find below an example of using the the default lightbox used for standalone
 images. See how individual images are linked.
 
 .Lightbox for standalone images
-lightbox::example-standalone[ 800, {data-images-standalone}, role="mb-4" ]
+lightbox::example-standalone[ 800, {data-images-standalone}, role="mt-4 mb-4" ]
 
-[role="mb-4"]
 The J1 lightbox module supports groups of images as well. Click on the image
 group below to see how a group is managed.
 
 .Lightbox for grouped images
-lightbox::example-group[ 395, {data-images-group}, group, role="mb-4 wm-800" ]
+lightbox::example-group[ 395, {data-images-group}, group, role="mt-4 mb-4 wm-800" ]
 
 
 [role="mt-5"]
@@ -373,9 +371,8 @@ Lightboxes on sliders out-of-the-box.
 ====
 
 .Slider using Controls + Filters + Lightbox
-masterslider::ms_00002[]
+masterslider::ms_00002[role="mt-4 mb-4"]
 
-[role="mt-4"]
 [TIP]
 ====
 Click on the Lightbox symbol mdi:image-outline[18px, md-gray] in the
@@ -392,11 +389,11 @@ MS Slider additionally provides functions to combine images and text by
 so-called *MSInfo* blocks out-of-the-box.
 
 .Slider using Images + Text
-masterslider::ms_00003[]
+masterslider::ms_00003[role="mt-4 mb-4"]
 
 [role="mt-4"]
 [[thumb_images]]
-=== [role="mt-4"] Slider using Thumb Elements
+=== Slider using Thumb Elements
 
 To give the users better control over a slideshow, sliders provide complex UI
 elements to place dor example mini-images or short text elements side-by-side
@@ -404,7 +401,7 @@ left or right, or at the bottom of a slideshow. Find two examples below how
 to control such a carousel element.
 
 .Image controls
-masterslider::ms_00004[role="mb-5"]
+masterslider::ms_00004[role="mt-4 mb-5"]
 
 .Text controls
 masterslider::ms_00007[role="mt-4 mb-5"]
@@ -420,7 +417,7 @@ a larger number of slides. The layout `partialview` accompanies the active
 slide by their neighbors on the left and the right.
 
 .Slider using PartialView
-masterslider::ms_00009[]
+masterslider::ms_00009[role="mt-4 mb-5"]
 
 [role="mt-4"]
 [[more_about_masterslider]]
@@ -440,12 +437,11 @@ J1 Masonry is a great tool to create dynamic image galleries. Image galleries
 are popular on many websites, and masonry can be a useful tool for creating
 dynamic and visually appealing galleries.
 
-[role="mb-4"]
 By using masonry, you can create a gallery that displays images of different
 sizes in an aesthetically pleasing and functional way.
 
 .Image Cards
-masonry::card_example[role="mb-5"]
+masonry::card_example[role="mt-4 mb-4"]
 
 [TIP]
 ====

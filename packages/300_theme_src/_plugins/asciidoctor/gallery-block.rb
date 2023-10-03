@@ -31,14 +31,20 @@ Asciidoctor::Extensions.register do
 
     named :gallery
     name_positional_attributes 'role'
+    default_attrs 'role' => 'mt-3 mb-3'
 
-    def process parent, target, attrs
-      title_html  = (attrs.has_key? 'title') ? %(<div class="gallery-title">#{attrs['title']}</div>\n) : nil
-      html = %(#{title_html} <div id="#{target}" class="gallery #{attrs['role']}"></div>)
-      create_pass_block parent, html, attrs, subs: nil
+    def process parent, target, attributes
+      title_html  = (attributes.has_key? 'title') ? %(<div class="gallery-title">#{attributes['title']}</div>\n) : nil
+      html        = %(
+        <div class="#{attributes['role']}">
+          #{title_html}
+          <div id="#{target}" class="gallery"></div>
+        </div>
+      )
+
+      create_pass_block parent, html, attributes, subs: nil
     end
   end
 
   block_macro ImageBlockMacro
-
 end

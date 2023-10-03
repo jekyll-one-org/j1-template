@@ -31,7 +31,9 @@ permalink:                              /pages/public/video_tester/
 resources:                              [
                                           animate,
                                           lightGallery, justifiedGallery,
-                                          video_js
+                                          video_js,
+#                                         vimeo_player,
+#                                         vimeo_froogaloop
                                         ]
 resource_options:
   - attic:
@@ -83,7 +85,6 @@ to play videos from the:
 * Vimeo platform
 * YouTube platform
 
-
 [role="mt-4"]
 === VideoJS Vimeo
 
@@ -104,7 +105,7 @@ implementaion is inspired by the official VideoJS _YouTube_ project.
       ],
       "sources": [{
         "type": "video/vimeo",
-        "src": "//player.vimeo.com/video/76979871?h=8272103f6e"
+        "src": "//vimeo.com/179528528"
       }],
       "controlBar": {
         "pictureInPictureToggle": false
@@ -268,3 +269,15 @@ unlimited length.
 
 .SELF Magazine
 gallery::jg_video_online_dailymotion[role="mb-5"]
+
+
+// [role="mt-5"]
+// === Gallery for Vimeo Video
+//
+// Vimeo does offer a basic, free membership, but it limits you to 500MB maximum
+// storage per week. Alternately, you can book on paid plans: Plus, PRO, Business.
+// Each membership has varied storage limits, but the free plan offers sufficient
+// space for private projects to present video content without advertising.
+//
+// .Fashion
+// gallery::jg_video_online_vimeo[role="mt-4 mb-5"]

@@ -22,12 +22,15 @@ Asciidoctor::Extensions.register do
     default_attrs 'size' => '1x', 'modifier' => ''
 
     def process parent, target, attributes
-      doc = parent.document
-      size_class = (size = attributes['size']) ? %(#{size}) : nil
-      modifier_class = (modifier = attributes['modifier']) ? %(#{modifier}) : nil
-      icon_name = target.tr '_', '-'
+
+      doc             = parent.document
+      size_class      = (size = attributes['size']) ? %(#{size}) : nil
+      modifier_class  = (modifier = attributes['modifier']) ? %(#{modifier}) : nil
+      icon_name       = target.tr '_', '-'
+
       %(<span class="iconify iconify-#{size_class} #{modifier}" data-icon="#{icon_name}" data-inline="false"></span>)
     end
   end
+
   inline_macro IconifyIconInlineMacro
 end

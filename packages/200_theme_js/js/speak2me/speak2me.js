@@ -366,6 +366,7 @@
         voiceTags['.doc-example']     = new voiceTag('Start of an embedded example element,', 'This element ist not spoken.');
         voiceTags['.admonitionblock'] = new voiceTag('Start of an attention element of type, ', ':');
         voiceTags['.listingblock']    = new voiceTag('Start of an embedded structured text block,', 'This element ist not spoken.');
+        voiceTags['.gist']            = new voiceTag('Start of an embedded gist element,', 'This element ist not spoken.');
         voiceTags['.slider']          = new voiceTag('Start of an embedded slider element,', 'This element ist not spoken.');
         voiceTags['.masonry']         = new voiceTag('Start of an embedded masonry element,', 'This element ist not spoken.');
         voiceTags['.lightbox-block']  = new voiceTag('Start of an embedded lightbox element,', 'This element ist not spoken.');
@@ -975,6 +976,35 @@
           jQuery(this).remove();
         });
 
+        // Search for gist elements, check for previous declared <div>
+        // container that contains the title element and insert the
+        // text if exists and finally remove the DOM object.
+        //
+        jQuery(clone).find('.gist').addBack('.gist').each(function() {
+
+          if ($(this).prev()[0] !== undefined && $(this).prev()[0].innerText !== undefined) {
+            title = $(this).prev()[0].innerText;
+            title_element = jQuery(this).prev();
+            // remove the title 'before' the DOM object deleted
+            //
+            jQuery(title_element).remove();
+          } else {
+            title = '';
+          }
+
+          prepend  = voiceTags['.gist'].prepend;
+          appended = voiceTags['.gist'].append;
+
+          if ((title !== undefined) && (title != '')) {
+            jQuery('<div>' + prepend + ' with the caption, ' + title + pause_spoken + '</div>').insertBefore(this);
+            jQuery('<div>' + appended + '</div>').insertBefore(this);
+          } else {
+            jQuery('<div>' + prepend + '</div>').insertBefore(this);
+            jQuery('<div>' + appended + '</div>').insertBefore(this);
+          }
+
+          jQuery(this).remove();
+      });
 
         // Search for masonry elements, check for previous declared <div>
         // container that contains the title element and insert the

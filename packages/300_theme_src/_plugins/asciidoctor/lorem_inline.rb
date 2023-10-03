@@ -86,9 +86,10 @@ Asciidoctor::Extensions.register do
     end
 
     def email(replacement = nil)
-      delimiters = [ '_', '-', '' ]
-      domains = %w(gmail.com yahoo.com hotmail.com email.com live.com me.com mac.com aol.com fastmail.com mail.com)
-      username = name.gsub(/[^\w]/, delimiters[rand(delimiters.size)])
+      delimiters  = [ '_', '-', '' ]
+      domains     = %w(gmail.com yahoo.com hotmail.com email.com live.com me.com mac.com aol.com fastmail.com mail.com)
+      username    = name.gsub(/[^\w]/, delimiters[rand(delimiters.size)])
+
       "#{username}@#{domains[rand(domains.size)]}".downcase
     end
 

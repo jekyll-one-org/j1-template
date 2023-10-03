@@ -32,13 +32,14 @@ Asciidoctor::Extensions.register do
     default_attrs 'size' => '300x300', 'modifier' => ''
 
     def process parent, target, attributes
+
       doc = parent.document
       size_class = (size = attributes['size']) ? %(mdil-#{size}) : nil
       modifier_class = (modifier = attributes['modifier']) ? %(#{modifier}) : nil
-#     %(<i class="#{size} #{modifier}"></i>)
-      %("http://placehold.it/#{size}/#{modifier}")
 
+      %("http://placehold.it/#{size}/#{modifier}")
     end
   end
+
   inline_macro PlaceholderInlineMacro
 end

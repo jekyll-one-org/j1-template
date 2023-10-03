@@ -39,5 +39,6 @@ Asciidoctor::Extensions.register do
       %(<i class="mdil #{size_class} #{modifier} mdil-#{icon_name}"></i>)
     end
   end
+
   inline_macro MdilIconInlineMacro
 end

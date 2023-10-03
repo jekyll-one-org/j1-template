@@ -36,13 +36,14 @@ Asciidoctor::Extensions.register do
     named :QUESTION
     on_contexts :example, :paragraph
 
-    def process parent, reader, attrs
-      attrs['name'] = 'question'
-      attrs['caption'] = 'Question'
-      create_block parent, :admonition, reader.lines, attrs, content_model: :compound
+    def process parent, reader, attributes
+
+      attributes['name'] = 'question'
+      attributes['caption'] = 'Question'
+
+      create_block parent, :admonition, reader.lines, attributes, content_model: :compound
     end
   end
 
   block CustomAdmonitionBlockQuestion
-
 end

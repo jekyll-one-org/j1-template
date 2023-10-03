@@ -29,5 +29,6 @@ Asciidoctor::Extensions.register do
       %(<i class="mdi #{size_class} #{modifier} mdi-#{icon_name}"></i>)
     end
   end
+
   inline_macro MdiIconInlineMacro
 end

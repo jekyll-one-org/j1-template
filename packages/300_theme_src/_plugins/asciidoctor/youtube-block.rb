@@ -79,5 +79,4 @@ Asciidoctor::Extensions.register do
   end
 
   block_macro YouTubeBlockMacro
-
 end

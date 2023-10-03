@@ -76,5 +76,4 @@ Asciidoctor::Extensions.register do
   end
 
   block_macro DailymotionBlockMacro
-
 end

@@ -25,13 +25,16 @@ Asciidoctor::Extensions.register do
     default_attrs 'style' => 'rectangle', 'size' => '', 'modifier' => ''
 
     def process parent, target, attributes
+
       doc = parent.document
-      style_class = (style = attributes['style']) ? %(#{style}) : nil
-      size_class = (size = attributes['size']) ? %(size-#{size}) : nil
-      modifier_class = (modifier = attributes['modifier']) ? %(#{modifier}) : nil
-      country_name = target.tr '_', '-'
+      style_class     = (style = attributes['style']) ? %(#{style}) : nil
+      size_class      = (size = attributes['size']) ? %(size-#{size}) : nil
+      modifier_class  = (modifier = attributes['modifier']) ? %(#{modifier}) : nil
+      country_name    = target.tr '_', '-'
+
       %(<i class="flag-icon flag-icon-#{country_name} #{style_class} #{size_class} #{modifier}"></i>)
     end
   end
+
   inline_macro FlagIconInlineMacro
 end
