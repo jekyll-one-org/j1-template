@@ -1,3 +1,18 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/themes/j1/modules/videojs/js/vimeo/vimeo.js
+ # Provides Vimeo Playback Technology for Video.js V8 and newer
+ #
+ #  Product/Info:
+ #  http://jekyll.one
+ #
+ #  Copyright (C) 2023 Juergen Adams
+ #
+ #  J1 Theme is licensed under MIT License.
+ #  See: https://github.com/jekyll-one/J1 Theme/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
 /*global define, VM*/
 (function (root, factory) {
   if(typeof exports==='object' && typeof module!=='undefined') {
