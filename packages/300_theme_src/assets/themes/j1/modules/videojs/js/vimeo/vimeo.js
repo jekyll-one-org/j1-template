@@ -27,8 +27,41 @@
   }
 }(this, function(videojs) {
  'use strict';
+
   var _isOnMobile = videojs.browser.IS_IOS || videojs.browser.IS_NATIVE_ANDROID;
-  var Tech = videojs.getTech('Tech');
+  var Tech        = videojs.getTech('Tech');
+  var cssInjected = false;
+
+  // Since the iframe can't be touched using Vimeo's way of embedding,
+  // let's add a new styling rule to have the same style as `vjs-tech`
+  //
+  function injectCss() {
+    if (cssInjected) {
+      return;
+    }
+    cssInjected = true;
+    const css = `
+      .vjs-vimeo iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    `;
+
+    const head  = document.head || document.getElementsByTagName('head')[0];
+    const style = document.createElement('style');
+    style.type  = 'text/css';
+
+    if (style.styleSheet) {
+      style.styleSheet.cssText = css;
+    } else {
+      style.appendChild(document.createTextNode(css));
+    }
+
+    head.appendChild(style);
+  }
 
   class Vimeo extends Tech {
 
@@ -42,6 +75,9 @@
      */
       constructor(options, ready) {
         super(options, ready);
+
+        injectCss();
+        this.setPoster(options.poster);
         this.initVimeoPlayer();
       }
 

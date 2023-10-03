@@ -96,8 +96,7 @@ implementaion is inspired by the official VideoJS _YouTube_ project.
   <div class="gallery-title">VideoJS Player for Vimeo Video</div>
   <video
     id="videojs_vimeo"
-    class="video-js vjs-theme-uno"
-    controls
+    class="video-js"
     width="640" height="360"
     data-setup='{
       "techOrder": [
@@ -106,10 +105,7 @@ implementaion is inspired by the official VideoJS _YouTube_ project.
       "sources": [{
         "type": "video/vimeo",
         "src": "//vimeo.com/179528528"
-      }],
-      "controlBar": {
-        "pictureInPictureToggle": false
-      }
+      }]
     }'
   ></video>
 ++++
