@@ -1399,10 +1399,9 @@ resources:
         files:                          []
         js:                             [
                                           modules/videojs/js/video,
-                                          modules/videojs/js/dailymotion/dailymotion,
-                                          modules/videojs/js/vimeo/player/vimeo,
-                                          modules/videojs/js/vimeo/vimeo,
-                                          modules/videojs/js/youtube/youtube
+                                          modules/videojs/js/plugins/dm/dailymotion,
+                                          modules/videojs/js/plugins/vm/vimeo,
+                                          modules/videojs/js/plugins/yt/youtube,                                          modules/videojs/js/video
                                         ]
         init_function:                  []
 

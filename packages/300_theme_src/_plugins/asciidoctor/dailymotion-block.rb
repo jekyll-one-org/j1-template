@@ -44,8 +44,8 @@ Asciidoctor::Extensions.register do
       chars         = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
       video_id      = (0...11).map { chars[rand(chars.length)] }.join
 
-      title_html    = (attributes.has_key? 'title') ? %(<div class="gallery-title">#{attributes['title']}</div>\n) : nil
-      theme_name    = (theme  = attributes['theme'])  ? %(#{theme}) : nil
+      title_html    = (attributes.has_key? 'title') ? %(<div class="video-title">#{attributes['title']}</div>\n) : nil
+      theme_name    = (theme = attributes['theme'])  ? %(#{theme}) : nil
 
       html = %(
         <div class="#{attributes['role']}" role="img" aria-label="YouTube Video">

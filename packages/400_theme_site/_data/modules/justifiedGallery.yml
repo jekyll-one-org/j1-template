@@ -378,7 +378,7 @@ settings:
         enabled:                        true
 
         id:                             jg_video_online_youtube_james_and_adele
-        type:                           video-online
+        type:                           video-online                            # video-html5
         show_delay:                     300
         title:                          false                                   # YouTube Video Gallery
 

@@ -371,11 +371,12 @@
         voiceTags['.masonry']         = new voiceTag('Start of an embedded masonry element,', 'This element ist not spoken.');
         voiceTags['.lightbox-block']  = new voiceTag('Start of an embedded lightbox element,', 'This element ist not spoken.');
         voiceTags['.gallery']         = new voiceTag('Start of an embedded gallery element,', 'This element ist not spoken.');
+        voiceTags['.video-js']        = new voiceTag('Start of an embedded video,', '');
         voiceTags['figure']           = new voiceTag('Start of an embedded figure with the caption,', '');
         voiceTags['blockquote']       = new voiceTag('Blockquote start.', 'Blockquote end.');
         voiceTags['quoteblock']       = new voiceTag('Start of an embedded quote block element,', 'Quote block element end.');
 
-        ignoreTags = ['audio','button','canvas','code','del', 'pre', 'dialog','embed','form','head','iframe','meter','nav','noscript','object','s','script','select','style','textarea','video'];
+        ignoreTags = ['audio','button','canvas','code','del', 'pre', 'dialog','embed','form','head','iframe','meter','nav','noscript','object','picture','s','script','select','style','textarea','video'];
 
         // TODO: NOT working for multiple 'tab' windows
         // dispayed in the same browser
@@ -917,37 +918,61 @@
           jQuery(this).remove();
         });
 
-          // Search for cards|header elements and then remove the DOM object.
-          //
-          jQuery(clone).find('.card-header').addBack('card-header').each(function() {
-            title_element = jQuery(this).find('.card-title');
-            prepend       = voiceTags['card-header'].prepend;
-            appended      = voiceTags['card-header'].append;
-
-            if (title_element.length) {
-              title = title_element[0].innerText + pause_spoken;
-            } else {
-              title = '';
-            }
-
-            jQuery('<div>' + prepend + '</div>').insertBefore(this);
-            jQuery('<div>' + appended + title + '</div>').insertBefore(this);
-
+        // Search for VideoJS elements, check for the title and insert text
+        // if exists and then remove the DOM object.
+        //
+        jQuery(clone).find('.video-js').addBack('.video-js').each(function() {
+          if ($(this).prev()[0] !== undefined && $(this).prev()[0].innerText !== undefined) {
+            title = $(this).prev()[0].innerText;
+            title_element = jQuery(this).prev();
+            // remove the title 'before' the DOM object deleted
+            //
             jQuery(title_element).remove();
-          });
+          } else {
+            title = '';
+          }
+          prepend   = voiceTags['.video-js'].prepend;
+          appended  = voiceTags['.video-js'].append;
 
-          // Search for doc-example elements and then remove the DOM object.
-          //
-          jQuery(clone).find('.doc-example').addBack('.doc-example').each(function() {
+          if ((copy !== undefined) && (copy != '')) {
+              jQuery('<div>' + prepend + ' ' + copy + '</div>').insertBefore(this);
+              jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+          }
 
-            prepend       = voiceTags['.doc-example'].prepend;
-            appended      = voiceTags['.doc-example'].append;
+          jQuery(this).remove();
+        });
 
-            jQuery('<div>' + prepend + '</div>').insertBefore(this);
-            jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+        // Search for cards|header elements and then remove the DOM object.
+        //
+        jQuery(clone).find('.card-header').addBack('card-header').each(function() {
+          title_element = jQuery(this).find('.card-title');
+          prepend       = voiceTags['card-header'].prepend;
+          appended      = voiceTags['card-header'].append;
 
-            jQuery(this).remove();
-          });
+          if (title_element.length) {
+            title = title_element[0].innerText + pause_spoken;
+          } else {
+            title = '';
+          }
+
+          jQuery('<div>' + prepend + '</div>').insertBefore(this);
+          jQuery('<div>' + appended + title + '</div>').insertBefore(this);
+
+          jQuery(title_element).remove();
+        });
+
+        // Search for doc-example elements and then remove the DOM object.
+        //
+        jQuery(clone).find('.doc-example').addBack('.doc-example').each(function() {
+
+          prepend       = voiceTags['.doc-example'].prepend;
+          appended      = voiceTags['.doc-example'].append;
+
+          jQuery('<div>' + prepend + '</div>').insertBefore(this);
+          jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+
+          jQuery(this).remove();
+        });
 
         // Search for listing block elements, check for previous declared <div>
         // container that contains the title element and insert the

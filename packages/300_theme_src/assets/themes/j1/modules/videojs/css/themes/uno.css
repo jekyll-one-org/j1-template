@@ -22,6 +22,12 @@
   --vjs-theme-uno--secondary: #fff
 }
 
+.vjs-theme-uno .vjs-control-bar {
+  height: 54px;
+  background-color: #2B333F !important;
+}
+
+
 /* Set img elements (poster) to 'fluid'
  ------------------------------------------------------------------------------- */
 picture > img {
@@ -62,10 +68,6 @@ picture > img {
 .vjs-theme-uno:hover .vjs-big-play-button {
   background-color: transparent;
   color: #fff
-}
-
-.vjs-theme-uno .vjs-control-bar {
-  height: 54px
 }
 
 .vjs-theme-uno .vjs-button>.vjs-icon-placeholder:before,
