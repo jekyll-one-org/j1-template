@@ -1,0 +1,1124 @@
+---
+title:                                  HTML5 Tags
+title_extention:                        HTML5 Cheatsheet for daily use
+tagline:                                Cheatsheet for daily use
+
+date:                                   2023-09-21
+#last_modified:                         2023-01-01
+
+description: >
+                                        The cheatsheet contains a complete list of standard tags
+                                        belonging to the latest HTML5 and XHTML 1.1 specifications.
+
+keywords: >
+                                        Jekyll, Theme, JekyllOne, J1, Theme, Features
+                                        HTML, HTML5, Cheatsheet
+
+categories:                             [ Manual ]
+tags:                                   [ Cheatsheet, HTML ]
+
+image:
+  path:                                 /assets/images/modules/attics/1920x1280/recha-oktaviani.jpg
+  width:                                1920
+  height:                               1280
+
+regenerate:                             false
+permalink:                              /pages/public/tools/cheatsheet/html/
+
+resources:                              [ animate ]
+resource_options:
+  - attic:
+      slides:
+        - url:                          /assets/images/modules/attics/1920x1280/recha-oktaviani.jpg
+          alt:                          Photo by Recha Oktaviani on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Recha Oktaviani
+            href:                       https://unsplash.com/de/@rechaoktaviani
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:badges-enabled:                        false
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="none" %}
+
+
+// Page content
+// See: https://www.tutorialrepublic.com/html-reference/html5-tags.php
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+The following contains a complete list of standard tags belonging to the
+latest HTML5 and XHTML 1.1 specifications.
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+[role="mt-5"]
+== All Tags
+
+The following table contains a list of HTML5 elements alphabetically along
+with a brief description.
+
+[role="mb-4"]
+*Legend*: +
+mdib:check-all[24px, md-gray mr-2 ml-3]
+Can be used for for *all* HTML versions +
+mdib:coffin[24px, md-gray mr-2 ml-3]
+Obsolete, should be replaced  +
+mdib:language-html5[24px, md-gray mr-2 ml-3]
+New in version V5
+
+[cols="4a, 1a, 7a", options="header", width="100%", role="rtable"]
+|===
+|Tag |Info |Description
+
+|`<a>`
+|mdib:check-all[24px]
+|Specifies a hyperlink.
+
+|`<abbr>`
+|mdib:check-all[24px]
+|Specifies an abbreviated form of a longer word or phrase.
+
+|`<acronym>`
+|mdib:coffin[24px]
+|Specifies an acronym. Use `<abbr>` instead.
+
+|`<address>`
+|mdib:check-all[24px]
+|Specifies the author's contact information.
+
+|`<applet>`
+|mdib:coffin[24px]
+|Embeds a Java applet (mini Java applications) on the page.
+Use `<object>` instead.
+
+|`<area>`
+|mdib:check-all[24px]
+|Specifies a specific area within an image map.
+
+|`<article>`
+|mdib:language-html5[24px]
+|Specifies an article.
+
+|`<aside>`
+|mdib:language-html5[24px]
+|Specifies some content loosely related to the page content.
+The `<aside>` element represents a section of the web page that encloses
+content which is tangentially related to the content around it.
+
+|`<audio>`
+|mdib:language-html5[24px]
+|Embeds a sound, or an audio stream in an HTML document.
+
+|`<b>`
+|mdib:check-all[24px]
+|Displays text in a bold style.
+
+|`<base>`
+|mdib:check-all[24px]
+|Specifies the base URL for all relative URLs in a document.
+
+|`<basefont>`
+|mdib:coffin[24px]
+|Specifies the base font for a page. Use CSS instead.
+
+|`<bdi>`
+|mdib:language-html5[24px]
+|Defines text that is isolated from its surrounding for the purposes
+of bidirectional text formatting.
+
+|`<bdo>`
+|mdib:check-all[24px]
+|Overrides the current text direction.
+
+|`<big>`
+|mdib:coffin[24px]
+|Displays text in a large size. Use CSS instead.
+
+|`<blockquote>`
+|mdib:check-all[24px]
+|Defines a section that is quoted from another source.
+
+|`<body>`
+|mdib:check-all[24px]
+|Specifies the document's body.
+
+|`<br>`
+|mdib:check-all[24px]
+|Produces a single line break.
+
+|`<button>`
+|mdib:check-all[24px]
+|Creates a clickable button.
+
+|`<canvas>`]
+|mdib:language-html5[24px]
+|Specifies a region in the document, which can be used to draw graphics
+on the fly via scripting (usually JavaScript).
+
+|`<caption>`
+|mdib:check-all[24px]
+|Specifies the caption or title of the table.
+
+|`<center>`
+|mdib:coffin[24px]
+|Align contents in the center. Use CSS instead.
+
+|`<cite>`
+|mdib:check-all[24px]
+|Indicates a citation or reference to another source.
+
+|`<code>`
+|mdib:check-all[24px]
+|Specifies text as computer code.
+
+|`<col>`
+|mdib:check-all[24px]
+|Specifies attribute values for one or more columns in a table.
+
+|`<colgroup>`
+|mdib:check-all[24px]
+|Specifies attributes for multiple columns in a table.
+
+|`<data>`
+|mdib:language-html5[24px]
+|Links a piece of content with a machine-readable translation.
+
+|`<datalist>`
+|mdib:language-html5[24px]
+|Defines a set of pre-defined options for an `<input>` element.
+
+|`<dd>`
+|mdib:check-all[24px]
+|Specifies a description, or value for the term `<dt>` in a
+description list `<dl>`.
+
+|`<del>`
+|mdib:check-all[24px]
+|Defines text that has been deleted from the document.
+
+|`<details>`
+|mdib:language-html5[24px]
+|The `<details>` element represents a control from which the user can
+obtain additional information on-demand. It can be used to create an
+interactive widget that the user can show or hide, like expand and collapse,
+to retrieve the additional information or controls. Any sort of element
+can be placed inside the details element.
+
+|`<dfn>`
+|mdib:check-all[24px]
+|Specifies a definition.
+
+|`<dialog>`
+|mdib:language-html5[24px]
+|The `<dialog>` element defines a dialog box, a Bootstrap modal for example,
+or other interactive component on a web page that a user can interacts with
+to perform a task, such as a dismissible alert.
+
+|`<dir>`
+|mdib:coffin[24px]
+|Specifies a directory list. Use `<ul>` instead.
+
+|`<div>`
+|mdib:check-all[24px]
+|Specifies a division or a section in a document.
+
+|`<dl>`
+|mdib:check-all[24px]
+|Specifies a description list.
+
+|`<dt>`
+|mdib:check-all[24px]
+|Specifies a term (an item) in a description list.
+
+|`<em>`
+|mdib:check-all[24px]
+|Specifies emphasized text.
+
+|`<embed>`
+|mdib:language-html5[24px]
+|Embeds external application, typically multimedia content like audio
+or video into an HTML document. +
+[NOTE]
+====
+The `<embed>` tag is very well supported in most of the web browsers for
+a long time. However, the tag has *not* been a part of the HTML 4 specification.
+Now, it is included in HTML5 as a standard.
+====
+
+|`<fieldset>`
+|mdib:check-all[24px]
+|Specifies a set of related form fields.
+
+|`<figcaption>`
+|mdib:language-html5[24px]
+|Specifies a caption or legend for a figure.
+
+|`<figure>`
+|mdib:language-html5[24px]
+|Defines a figure illustrated as part of the document.
+
+|`<font>`
+|mdib:coffin[24px]
+|Specifies font, color, and size for text. Use CSS instead.
+
+|`<footer>`
+|mdib:language-html5[24px]
+|Defines the footer of a document or a section.
+
+|`<form>`
+|mdib:check-all[24px]
+|Specifies an HTML form for user input.
+
+|`<frame>`
+|mdib:coffin[24px]
+|Specifies a single frame within a frameset.
+
+|`<frameset>`
+|mdib:coffin[24px]
+|Specifies a collection of frames or other frameset. Should be replaced
+by multiple `<frame>` tags.
+
+|`<head>`
+|mdib:check-all[24px]
+|Specifies the head portion of the document that contains information
+about the document such as title.
+
+|`<header>`
+|mdib:language-html5[24px]
+|Defines the header of a document or a section.
+
+|`<hgroup>`
+|mdib:language-html5[24px]
+|Specifies a group of headings. +
+[NOTE]
+====
+The `<hgroup>` element can be placed anywhere inside the `<body>` but it
+must *not* be a descendant of an `<address>`, `<footer>` or another `<header>`
+element.
+====
+
+|`<h1>` to `<h6>`
+|mdib:check-all[24px]
+|Specifies HTML headings. +
+[NOTE]
+====
+The `<h1>` element in *Asciidoc* is reserved for the document *title* and
+should *not* for regular header sections in *article* documents.
+====
+
+|`<hr>`
+|mdib:check-all[24px]
+|Produce a horizontal line.
+
+|`<html>`
+|mdib:check-all[24px]
+|The `<html>` element defines the *root* of HTML and XHTML documents.
+It is the outer container for everything that appears in an HTML or XHTML
+document except `<!DOCTYPE>`.
+
+|`<i>`
+|mdib:check-all[24px]
+|Displays text in an italic style.
+
+|`<iframe>`
+|mdib:check-all[24px]
+|Displays a URL in an inline frame.
+
+|`<img>`
+|mdib:check-all[24px]
+|Defines an image.
+
+|`<input>`
+|mdib:check-all[24px]
+|Specifies an input control.
+
+|`<ins>`
+|mdib:check-all[24px]
+|Specifies a block of text that has been
+inserted into a document.
+
+|`<kbd>`
+|mdib:check-all[24px]
+|Specifies text as keyboard input.
+
+|`<keygen>`
+|mdib:language-html5[24px]
+|Defines a control for generating a public-private key pair.
+
+|`<label>`
+|mdib:check-all[24px]
+|Specifies a label for an `<input>` control.
+
+|`<legend>`
+|mdib:check-all[24px]
+|Specifies a caption for a `<fieldset>` element.
+
+|`<li>`
+|mdib:check-all[24px]
+|Specifies a list item.
+
+|`<link>`
+|mdib:check-all[24px]
+|Specifies the relationship between the current document and an
+external resource.
+
+|`<main>`
+|mdib:language-html5[24px]
+|Defines the main or dominant content of the document.
+
+|`<map>`
+|mdib:check-all[24px]
+|Specifies a client-side image-map. An image map is a list of coordinates
+relating to a specific image, created in order to hyperlink areas of the
+image to various destinations as opposed to a normal image link, in which
+the entire area of the image links to a single destination. +
+
+[TIP]
+====
+For example, a map of the world may have each country hyperlinked to
+further information about that country. The intention of an image map is
+to provide an easy way of linking various parts of an image without dividing
+the image into separate image files.
+====
+
+|`<mark>`
+|mdib:language-html5[24px]
+|Defines text highlighted for reference purposes.
+
+|`<menu>`
+|mdib:language-html5[24px]
+|Defines a list of commands. +
+
+[NOTE]
+====
+The `<menu>` tag was deprecated in HTML 4.01, but reintroduced in HTML5.
+However, it is better to avoid using this tag, because it is not supported
+by the major web browsers like Chrome, IE, Safari and Opera.
+====
+
+|`<menuitem>`
+|mdib:language-html5[24px]
+|Specifies a list or menuitem of commands that a user can perform.
+
+|`<meta>`
+|mdib:check-all[24px]
+|Provides structured metadata about the document content.
+
+|`<meter>`
+|mdib:language-html5[24px]
+|Defines a scalar measurement within a known range, or a fractional value.
+This is also known as a *gauge*.
+
+|`<nav>`
+|mdib:language-html5[24px]
+|Specifies a section of navigation links.
+
+|`<noframes>`
+|mdib:coffin[24px]
+|Specifies an alternate content that displays in browsers that do
+not support frames.
+
+|`<noscript>`
+|mdib:check-all[24px]
+|Specifies alternative content to display when the browser doesn't
+support scripting.
+
+|`<object>`
+|mdib:check-all[24px]
+|Specifies an embedded object.
+
+|`<ol>`
+|mdib:check-all[24px]
+|Specifies an ordered list.
+
+|`<optgroup>`
+|mdib:check-all[24px]
+|Specifies a group of related options in a selection list.
+
+|`<option>`
+|mdib:check-all[24px]
+|Specifies an option in a selection list.
+
+|`<output>`
+|mdib:language-html5[24px]
+|Defines the result of a calculation.
+
+|`<p>`
+|mdib:check-all[24px]
+|Specifies a paragraph.
+
+|`<param>`
+|mdib:check-all[24px]
+|Specifies a parameter for an object or applet element.
+
+|`<picture>`
+|mdib:language-html5[24px]
+|Specifies a container for multiple image sources.
+
+|`<pre>`
+|mdib:check-all[24px]
+|Specifies a block of preformatted text.
+
+|`<progress>`
+|mdib:language-html5[24px]
+|Defines the completion progress of a task.
+
+|`<q>`
+|mdib:check-all[24px]
+|Specifies a short inline quotation.
+
+|`<rp>`
+|mdib:language-html5[24px]
+|Provides fall-back parenthesis for browsers that that don't support
+ruby annotations.
+
+|`<rt>`
+|mdib:language-html5[24px]
+|Specifies the pronunciation of character presented in a ruby annotations.
+
+|`<ruby>`
+|mdib:language-html5[24px]
+|Defines a ruby annotation.
+
+|`<s>`
+|mdib:check-all[24px]
+|Defines contents that are no longer accurate or no longer relevant.
+
+|`<samp>`
+|mdib:check-all[24px]
+|Specifies text as sample output from a computer program.
+
+|`<script>`
+|mdib:check-all[24px]
+|Places script in the document for client-side processing.
+
+|`<section>`
+|mdib:language-html5[24px]
+|Specifies a section of a document, such as header, footer etc.
+
+|`<select>`
+|mdib:check-all[24px]
+|Specifies a selection list within a form.
+
+|`<small>`
+|mdib:check-all[24px]
+|Displays text in a smaller size.
+
+|`<source>`
+|mdib:language-html5[24px]
+|Defines alternative media resources for the media elements like
+`<audio>` or `<video>`.
+
+|`<span>`
+|mdib:check-all[24px]
+|Specifies an inline section in a document.
+
+|`<strike>`
+|mdib:coffin[24px]
+|Displays text in strikethrough style. Should be replaced by CSS styles.
+
+|`<strong>`
+|mdib:check-all[24px]
+|Indicate strongly emphasized text.
+
+|`<style>`
+|mdib:check-all[24px]
+|Inserts CSS style information into the head of a document.
+
+|`<sub>`
+|mdib:check-all[24px]
+|Specifies subscripted text.
+
+|`<summary>`
+|mdib:language-html5[24px]
+|Specifies a summary for a `<details>` element.
+
+|`<sup>`
+|mdib:check-all[24px]
+|Specifies superscripted text.
+
+|`<svg>`
+|mdib:language-html5[24px]
+|Embed Scalable Vector Graphics SVG content in an HTML document.
+
+|`<table>`
+|mdib:check-all[24px]
+|Specifies a data table.
+
+|`<tbody>`
+|mdib:check-all[24px]
+|Groups a set of rows defining the main body of the table data.
+
+|`<td>`
+|mdib:check-all[24px]
+|Specifies a cell in a table.
+
+|`<template>`
+|mdib:language-html5[24px]
+|Specifies the fragments of HTML that should be hidden when the page
+is loaded, but can be cloned and inserted in the document by JavaScript.
+
+|`<textarea>`
+|mdib:check-all[24px]
+|Specifies a multi-line text input element.
+
+|`<tfoot>`
+|mdib:check-all[24px]
+|Groups a set of rows summarizing the columns of the table.
+
+|`<th>`
+|mdib:check-all[24px]
+|Specifies a header cell in a table.
+
+|`<thead>`
+|mdib:check-all[24px]
+|Groups a set of rows that describes the column labels of a table.
+
+|`<time>`
+|mdib:language-html5[24px]
+|Defines a time and/or date.
+
+|`<title>`
+|mdib:check-all[24px]
+|Specifies a title for the document.
+
+|`<tr>`
+|mdib:check-all[24px]
+|Specifies a row of cells in a table.
+
+|`<track>`
+|mdib:language-html5[24px]
+|Specifies text tracks for the media elements like `<audio>` or `<video>`.
+The `<track>` element is used to specify supplementary text tracks such as
+subtitle tracks and caption tracks for `<audio>` and `<video>` elements.
+
+|`<tt>`
+|mdib:coffin[24px]
+|Displays text in a teletype style. Should be replaced by CSS styles.
+
+|`<u>`
+|mdib:check-all[24px]
+|Displays text with an underline.
+
+|`<ul>`
+|mdib:check-all[24px]
+|Specifies an unordered list.
+
+|`<var>`
+|mdib:check-all[24px]
+|Specifies a variable. The `<var>` tag is used to indicate that the text
+is an instance of a variable or program argument.
+
+|`<video>`
+|mdib:language-html5[24px]
+|Embeds video content in an HTML document.
+
+|`<wbr>`
+|mdib:language-html5[24px]
+|Defines a line break opportunity.
+
+|===
+
+/////
+
+[role="mt-5"]
+== Structural Tags
+
+[role="mb-4"]
+*Legend*: +
+mdib:check-all[24px, md-gray mr-2 ml-3]
+Can be used for for *all* HTML versions +
+mdib:coffin[24px, md-gray mr-2 ml-3]
+Obsolete, should be replaced  +
+mdib:language-html5[24px, md-gray mr-2 ml-3]
+New in version V5
+
+[cols=",",options="header",]
+|===
+|Tag |Description
+|link:html-a-tag.php[`<a>`] |Specifies a hyperlink.
+
+|link:html5-article-tag.php[`<article>`] mdib:language-html5[24px] |Specifies an
+article.
+
+|link:html5-aside-tag.php[`<aside>`] mdib:language-html5[24px] |Specifies some
+content loosely related to the page content.
+
+|link:html-body-tag.php[`<body>`] |Specifies the document's body.
+
+|link:html-br-tag.php[`<br>`] |Produces a single line break.
+
+|link:html5-details-tag.php[`<details>`] mdib:language-html5[24px] |Defines a
+widget from which the user can obtain additional information or controls
+on-demand.
+
+|link:html-div-tag.php[`<div>`] |Specifies a division or a section in a
+document.
+
+|link:html-head-tag.php[`<head>`] |Specifies the head portion of the
+document that contains information about the document.
+
+|link:html5-header-tag.php[`<header>`] mdib:language-html5[24px] |Defines the
+header of a document or a section.
+
+|link:html5-hgroup-tag.php[`<hgroup>`] mdib:language-html5[24px] |Specifies a group
+of headings.
+
+|link:html-headings-tag.php[`<h1> to <h6>`] |Specifies HTML headings.
+
+|link:html-hr-tag.php[`<hr>`] |Produce a horizontal line.
+
+|link:html-html-tag.php[`<html>`] |Specifies the root of an HTML document.
+
+|link:html5-footer-tag.php[`<footer>`] mdib:language-html5[24px] |Defines the
+footer of a document or a section.
+
+|link:html5-main-tag.php[`<main>`] mdib:language-html5[24px] |Defines the main
+or dominant content of the document.
+
+|link:html5-nav-tag.php[`<nav>`] mdib:language-html5[24px] |Specifies a section of
+navigation links.
+
+|link:html-p-tag.php[`<p>`] |Specifies a paragraph.
+
+|link:html5-section-tag.php[`<section>`] mdib:language-html5[24px] |Specifies a
+section of a document, such as header, footer etc.
+
+|link:html-span-tag.php[`<span>`] |Specifies an inline styleless section
+in a document.
+
+|link:html5-summary-tag.php[`<summary>`] mdib:language-html5[24px] |Specifies a
+summary for the link:html5-details-tag.php[`<details>`] element.
+|===
+
+
+[role="mt-5"]
+== Metadata Tags
+
+[role="mb-4"]
+*Legend*: +
+mdib:check-all[24px, md-gray mr-2 ml-3]
+Can be used for for *all* HTML versions +
+mdib:coffin[24px, md-gray mr-2 ml-3]
+Obsolete, should be replaced  +
+mdib:language-html5[24px, md-gray mr-2 ml-3]
+New in version V5
+
+[cols=",",options="header",]
+|===
+|Tag |Description
+|link:html-base-tag.php[`<base>`] |Specifies the base URL for all relative
+URLs in a document.
+
+|link:html-basefont-tag.php[`<basefont>`]
+|mdib:coffin[24px] Specifies the base font for
+a page. Use CSS instead.
+
+|link:html-link-tag.php[`<link>`] |Specifies the relationship between the
+current document and an external resource.
+
+|link:html-meta-tag.php[`<meta>`] |Provides structured metadata about
+the document content.
+
+|link:html-style-tag.php[`<style>`] |Inserts style information (commonly
+CSS) into the head of a document.
+
+|link:html-title-tag.php[`<title>`] |Specifies a title for the document.
+|===
+
+
+[role="mt-5"]
+== Form Tags
+
+[role="mb-4"]
+*Legend*: +
+mdib:check-all[24px, md-gray mr-2 ml-3]
+Can be used for for *all* HTML versions +
+mdib:coffin[24px, md-gray mr-2 ml-3]
+Obsolete, should be replaced  +
+mdib:language-html5[24px, md-gray mr-2 ml-3]
+New in version V5
+
+[cols=",",options="header",]
+|===
+|Tag |Description
+|link:html-button-tag.php[`<button>`] |Creates a clickable button.
+
+|link:html5-datalist-tag.php[`<datalist>`] mdib:language-html5[24px] |Represents
+a set of pre-defined options for an link:html-input-tag.php[`<input>`]
+element.
+
+|link:html5-dialog-tag.php[`<dialog>`] mdib:language-html5[24px] |Specifies a
+dialog box or subwindow.
+
+|link:html-fieldset-tag.php[`<fieldset>`] |Specifies a set of related
+form fields.
+
+|link:html-form-tag.php[`<form>`] |Specifies an HTML form for user input.
+
+|link:html-input-tag.php[`<input>`] |Specifies an input control.
+
+|link:html5-keygen-tag.php[`<keygen>`] mdib:language-html5[24px] |Defines a
+control for generating a public-private key pair.
+
+|link:html-label-tag.php[`<label>`] |Specifies a label for an `<input>`
+control.
+
+|link:html-legend-tag.php[`<legend>`] |Specifies a caption for a
+`<fieldset>` element.
+
+|link:html5-meter-tag.php[`<meter>`] mdib:language-html5[24px] |Defines a
+scalar measurement within a known range.
+
+|link:html-optgroup-tag.php[`<optgroup>`] |Specifies a group of related
+options in a selection list.
+
+|link:html-option-tag.php[`<option>`] |Specifies an option in a selection
+list.
+
+|link:html-select-tag.php[`<select>`] |Specifies a selection list within a
+form.
+
+|link:html-textarea-tag.php[`<textarea>`] |Specifies a multi-line text
+input control (text area).
+|===
+
+
+[role="mt-5"]
+== Formatting Tags
+
+[role="mb-4"]
+*Legend*: +
+mdib:check-all[24px, md-gray mr-2 ml-3]
+Can be used for for *all* HTML versions +
+mdib:coffin[24px, md-gray mr-2 ml-3]
+Obsolete, should be replaced  +
+mdib:language-html5[24px, md-gray mr-2 ml-3]
+New in version V5
+
+[cols=",",options="header",]
+|===
+|Tag |Description
+|link:html-abbr-tag.php[`<abbr>`] |Specifies an abbreviated form of a
+longer word or phrase.
+
+|link:html-acronym-tag.php[`<acronym>`]
+|mdib:coffin[24px] Specifies an acronym. Use
+link:html-abbr-tag.php[`<abbr>`] instead.
+
+|link:html-address-tag.php[`<address>`] |Specifies the author's contact
+information.
+
+|link:html-b-tag.php[`<b>`] |Displays text in a bold style.
+
+|link:html5-bdi-tag.php[`<bdi>`] mdib:language-html5[24px] |Defines text that
+is isolated from its surrounding for the purposes of bidirectional text
+formatting.
+
+|link:html-bdo-tag.php[`<bdo>`] |Overrides the current text direction.
+
+|link:html-big-tag.php[`<big>`]
+|[Obsolete] Displays text in a large
+size. Use CSS instead.
+
+|link:html-blockquote-tag.php[`<blockquote>`] |Defines a section that
+is quoted from another source.
+
+|link:html-center-tag.php[`<center>`]
+|[Obsolete] Align contents in the
+center. Use CSS instead.
+
+|link:html-cite-tag.php[`<cite>`] |Indicates a citation or reference to
+another source.
+
+|link:html-code-tag.php[`<code>`] |Specifies text as computer code.
+
+|link:html5-data-tag.php[`<data>`] mdib:language-html5[24px] |Links a piece of
+content with a machine-readable translation.
+
+|link:html-del-tag.php[`<del>`] |Defines text that has been deleted
+from the document.
+
+|link:html-dfn-tag.php[`<dfn>`] |Specifies a definition.
+
+|link:html-em-tag.php[`<em>`] |Specifies emphasized text.
+
+|link:html-font-tag.php[`<font>`]
+|[Obsolete] Specifies font, color, and
+size for text. Use CSS instead.
+
+|link:html-i-tag.php[`<i>`] |Displays text in an italic style.
+
+|link:html-ins-tag.php[`<ins>`] |Specifies a block of text that has been
+inserted into a document.
+
+|link:html-kbd-tag.php[`<kbd>`] |Specifies text as keyboard input.
+
+|link:html5-mark-tag.php[`<mark>`] mdib:language-html5[24px] |Defines text
+highlighted for reference purposes.
+
+|link:html5-output-tag.php[`<output>`] mdib:language-html5[24px] |Defines the
+result of a calculation.
+
+|link:html-pre-tag.php[`<pre>`] |Specifies a block of preformatted text.
+
+|link:html5-progress-tag.php[`<progress>`] mdib:language-html5[24px] |Represents
+the completion progress of a task.
+
+|link:html-q-tag.php[`<q>`] |Specifies a short inline quotation.
+
+|link:html5-rp-tag.php[`<rp>`] mdib:language-html5[24px] |Provides fall-back
+parenthesis for browsers that that don't support ruby annotations.
+
+|link:html5-rt-tag.php[`<rt>`] mdib:language-html5[24px] |Specifies the
+pronunciation of character presented in a ruby annotations.
+
+|link:html5-ruby-tag.php[`<ruby>`] mdib:language-html5[24px] |Defines a ruby
+annotation.
+
+|link:html-s-tag.php[`<s>`] |Defines contents that are no longer
+accurate or no longer relevant.
+
+|link:html-samp-tag.php[`<samp>`] |Specifies text as sample output from
+a computer program.
+
+|link:html-small-tag.php[`<small>`] |Displays text in a smaller size.
+
+|link:html-strike-tag.php[`<strike>`]
+|[Obsolete] Displays text in
+strikethrough style. Use link:html-del-tag.php[`<del>`] or
+link:html-s-tag.php[`<s>`] instead.
+
+|link:html-strong-tag.php[`<strong>`] |Indicate strongly emphasized
+text.
+
+|link:html-sub-tag.php[`<sub>`] |Specifies subscripted text.
+
+|link:html-sup-tag.php[`<sup>`] |Specifies superscripted text.
+
+|link:html-tt-tag.php[`<tt>`]
+|[Obsolete] Displays text in a teletype
+style.
+
+|link:html-u-tag.php[`<u>`] |Displays text with an underline.
+
+|link:html-var-tag.php[`<var>`] |Specifies a variable.
+
+|link:html5-wbr-tag.php[`<wbr>`] mdib:language-html5[24px] |Defines a line
+break opportunity.
+|===
+
+
+[role="mt-5"]
+== List Tags
+
+[role="mb-4"]
+*Legend*: +
+mdib:check-all[24px, md-gray mr-2 ml-3]
+Can be used for for *all* HTML versions +
+mdib:coffin[24px, md-gray mr-2 ml-3]
+Obsolete, should be replaced  +
+mdib:language-html5[24px, md-gray mr-2 ml-3]
+New in version V5
+
+[cols=",",options="header",]
+|===
+|Tag |Description
+|link:html-dd-tag.php[`<dd>`] |Specifies a description, or value for the
+term (link:html-dt-tag.php[`<dt>`]) in a description list
+(link:html-dl-tag.php[`<dl>`]).
+
+|link:html-dir-tag.php[`<dir>`]
+|[Obsolete] Specifies a directory list.
+Use link:html-ul-tag.php[`<ul>`] instead.
+
+|link:html-dl-tag.php[`<dl>`] |Specifies a description list.
+
+|link:html-dt-tag.php[`<dt>`] |Specifies a term (an item) in a description
+list.
+
+|link:html-li-tag.php[`<li>`] |Specifies a list item.
+
+|link:html-ol-tag.php[`<ol>`] |Specifies an ordered list.
+
+|link:html-menu-tag.php[`<menu>`] |Defines a list of commands.
+
+|link:html5-menuitem-tag.php[`<menuitem>`] mdib:language-html5[24px] |Specifies a
+list (or menuitem) of commands that a user can perform.
+
+|link:html-ul-tag.php[`<ul>`] |Specifies an unordered list.
+|===
+
+
+[role="mt-5"]
+== Table Tags
+
+[role="mb-4"]
+*Legend*: +
+mdib:check-all[24px, md-gray mr-2 ml-3]
+Can be used for for *all* HTML versions +
+mdib:coffin[24px, md-gray mr-2 ml-3]
+Obsolete, should be replaced  +
+mdib:language-html5[24px, md-gray mr-2 ml-3]
+New in version V5
+
+[cols=",",options="header",]
+|===
+|Tag |Description
+|link:html-caption-tag.php[`<caption>`] |Specifies the caption or title of
+the table.
+
+|link:html-col-tag.php[`<col>`] |Specifies attribute values for one or
+more columns in a table.
+
+|link:html-colgroup-tag.php[`<colgroup>`] |Specifies attributes for
+multiple columns in a table.
+
+|link:html-table-tag.php[`<table>`] |Specifies a data table.
+
+|link:html-tbody-tag.php[`<tbody>`] |Groups a set of rows defining the
+main body of the table data.
+
+|link:html-td-tag.php[`<td>`] |Specifies a cell in a table.
+
+|link:html-tfoot-tag.php[`<tfoot>`] |Groups a set of rows summarizing
+the columns of the table.
+
+|link:html-thead-tag.php[`<thead>`] |Groups a set of rows that describes
+the column labels of a table.
+
+|link:html-th-tag.php[`<th>`] |Specifies a header cell in a table.
+
+|link:html-tr-tag.php[`<tr>`] |Specifies a row of cells in a table.
+|===
+
+
+[role="mt-5"]
+== Scripting Tags
+
+[role="mb-4"]
+*Legend*: +
+mdib:check-all[24px, md-gray mr-2 ml-3]
+Can be used for for *all* HTML versions +
+mdib:coffin[24px, md-gray mr-2 ml-3]
+Obsolete, should be replaced  +
+mdib:language-html5[24px, md-gray mr-2 ml-3]
+New in version V5
+
+[cols=",",options="header",]
+|===
+|Tag |Description
+|link:html-noscript-tag.php[`<noscript>`] |Specifies alternative content
+to display when the browser doesn't support scripting.
+
+|link:html-script-tag.php[`<script>`] |Places script in the document for
+client-side processing.
+
+|link:html5-template-tag.php[`<template>`] mdib:language-html5[24px] |Specifies the
+fragments of HTML that should be hidden when the page is loaded, but can
+be cloned and inserted in the document by JavaScript.
+|===
+
+
+[role="mt-5"]
+== Embedded Content Tags
+
+[role="mb-4"]
+*Legend*: +
+mdib:check-all[24px, md-gray mr-2 ml-3]
+Can be used for for *all* HTML versions +
+mdib:coffin[24px, md-gray mr-2 ml-3]
+Obsolete, should be replaced  +
+mdib:language-html5[24px, md-gray mr-2 ml-3]
+New in version V5
+
+[cols=",",options="header",]
+|===
+|Tag |Description
+|link:html-applet-tag.php[`<applet>`]
+|[Obsolete] Embeds a Java applet (mini
+Java applications) on the page. Use link:html-object-tag.php[`<object>`]
+instead.
+
+|link:html-area-tag.php[`<area>`] |Specifies a specific area within an
+image map.
+
+|link:html5-audio-tag.php[`<audio>`] mdib:language-html5[24px] |Embeds a sound,
+or an audio stream in an HTML document.
+
+|link:html5-canvas-tag.php[`<canvas>`] mdib:language-html5[24px] |Specifies a
+region in the document, which can be used to draw graphics on the fly
+via scripting (usually JavaScript).
+
+|link:html5-embed-tag.php[`<embed>`] mdib:language-html5[24px] |Embeds external
+application, typically multimedia content like audio or video into an
+HTML document.
+
+|link:html5-figcaption-tag.php[`<figcaption>`] mdib:language-html5[24px] |Defines
+a caption or legend for a figure.
+
+|link:html5-figure-tag.php[`<figure>`] mdib:language-html5[24px] |Defines a
+figure illustrated as part of the document.
+
+|link:html-frame-tag.php[`<frame>`]
+|[Obsolete] Specifies a single frame
+within a frameset.
+
+|link:html-frameset-tag.php[`<frameset>`]
+|[Obsolete] Specifies a collection of
+frames or other frameset.
+
+|link:html-iframe-tag.php[`<iframe>`] |Displays a URL in an inline
+frame.
+
+|link:html-img-tag.php[`<img>`] |Defines an image.
+
+|link:html-map-tag.php[`<map>`] |Specifies a client-side image-map.
+
+|link:html-noframes-tag.php[`<noframes>`]
+|[Obsolete] Specifies an alternate content
+that displays in browsers that do not support frames.
+
+|link:html-object-tag.php[`<object>`] |Specifies an embedded object.
+
+|link:html-param-tag.php[`<param>`] |Specifies a parameter for an object
+or applet element.
+
+|link:html5-picture-tag.php[`<picture>`] mdib:language-html5[24px] |Specifies a
+container for multiple image sources.
+
+|link:html5-source-tag.php[`<source>`] mdib:language-html5[24px] |Defines
+alternative media resources for the media elements like
+link:html5-audio-tag.php[`<audio>`] or
+link:html5-video-tag.php[`<video>`].
+
+|link:html5-svg-tag.php[`<svg>`] mdib:language-html5[24px] |Embed SVG (Scalable
+Vector Graphics) content in an HTML document.
+
+|link:html5-time-tag.php[`<time>`] mdib:language-html5[24px] |Defines a time
+and/or date.
+
+|link:html5-track-tag.php[`<track>`] mdib:language-html5[24px] |Specifies text
+tracks for the media elements like link:html5-audio-tag.php[`<audio>`]
+or link:html5-video-tag.php[`<video>`].
+
+|link:html5-video-tag.php[`<video>`] mdib:language-html5[24px] |Embeds video
+content in an HTML document.
+
+|===
+
+/////

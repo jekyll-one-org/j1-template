@@ -1,0 +1,255 @@
+---
+title:                                  Video
+title_extention:                        Playing HTML5 Video using J1 Template
+tagline:                                Playing HTML5 Video
+
+date:                                   2020-11-04
+#last_modified:                         2023-01-01
+
+description: >
+                                        The J1 Template support playing video on web pages
+                                        by HTML5 Video, the new standard of HTML to show
+                                        videos on web pages.
+keywords: >
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap,
+                                        html, html5, video, support, flash player,
+                                        quicktime, silverlight
+
+categories:                             [ Roundtrip ]
+tags:                                   [ Module, Video ]
+
+image:
+  path:                                 /assets/images/icons/videojs/videojs-poster.png
+  width:                                1920
+  height:                               1280
+
+regenerate:                             false
+personalization:                        true
+permalink:                              /pages/public/tools/previewer/video_tester/
+
+resources:                              [
+                                          animate,
+                                          lightGallery, justifiedGallery,
+                                          video_js
+                                        ]
+resource_options:
+  - attic:
+      slides:
+        - url:                          /assets/images/icons/videojs/videojs-poster.png
+          alt:                          VideoJS Poster
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:images-dir:                            {imagesdir}/pages/roundtrip/100_present_images
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+The J1 Template support playing video on web pages by HTML5 Video, the new
+standard of HTML to show videos on webpages.
+
+HTML5 Video opens the doors to your way of presenting video content. All
+modern browsers support the video tag `<video>` for the HTML5. Browsers have
+a built-in multimedia framework already for decoding and displaying video
+content. No need to use such proprietary software components anymore.
+
+mdi:clock-time-five-outline[24px, md-gray mt-4 mb-5 mr-2]
+*10 Minutes* to read
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+[role="mt-5"]
+== VideoJS Player
+
+If you like *one* HTML5 video player for *all* of your video content,
+_VideoJS_ is a good choice. Based on the video tag `<video>` for HTML5,
+several plugins are available to be used for playing videos from the:
+
+* Dailymotion Video platform
+* Vimeo Video platform
+* YouTube Video platform
+
+[role="mt-4"]
+=== Vimeo Plugin
+
+The Vimeo plugin using the Vimeo Player *v2.20.1* version. This
+implementaion is inspired by the official VideoJS _YouTube_ project.
+
+// [NOTE]
+// ====
+// For the Vimeo plugin *no* VJS themes are available. The plugin is
+// using the *original skin* of the Vimeo Player.
+// ====
+
+.Vimeo Video
+vimeo::179528528[role="mt-4 mb-4"]
+
+// ++++
+//   <div class="gallery-title">Vimeo Video</div>
+//   <video
+//     id="videojs_vimeo"
+//     class="video-js vjs-theme-uno"
+//     width="640" height="360"
+//     controls
+//     data-setup='{
+//       "techOrder": [
+//         "vimeo", "html5"
+//       ],
+//       "sources": [{
+//         "type": "video/vimeo",
+//         "src": "//vimeo.com/179528528"
+//       }],
+//       "controlBar": {
+//         "pictureInPictureToggle": false
+//       }
+//     }'
+//   ></video>
+// ++++
+
+
+[role="mt-5"]
+=== YouTube Plugin
+// See: https://www.tutorialspoint.com/how-to-play-youtube-videos-using-video-js-player
+
+It's the last week of The Late Late Show with James Corden and his dear friend
+Adele surprises him with one final Carpool Karaoke commute to work. Adele takes
+the wheel and asks James about his memories hosting the show, Carpool Karaoke
+and the significance of it ending.
+
+The two get emotional reflecting about their friendship and the times they've
+been there for each other.
+
+.YouTube Video
+youtube::nV8UZJNBY6Y[poster="/assets/videos/gallery/video_adele_last_carpool_caraoke_poster.jpg" role="mt-4 mb-4"]
+
+/////
+[role="mt-4"]
+More than 8 years after our premiere, we say goodbye to The Late Late Show
+with James Corden in our final episode with guests Harry Styles and Will
+Ferrell.
+
+Please enjoy in full and thank you for sharing in so many memories with us.
+
+++++
+<div class="gallery-title">Last Late Late Show</div>
+<video
+  id="videojs_youtube_james"
+  class="video-js vjs-theme-uno"
+  controls
+  width="640" height="360"
+  poster="/assets/videos/gallery/video_james_carpool_caraoke_poster.jpg"
+  data-setup='{
+    "techOrder": [
+      "youtube", "html5"
+    ],
+    "sources": [{
+      "type": "video/youtube",
+      "src": "//youtube.com/watch?v=AeEYQ62t8hA"
+    }],
+    "controlBar": {
+      "pictureInPictureToggle": false
+    }
+  }'
+>
+</video>
+++++
+/////
+
+[role="mt-5"]
+=== Dailymotion Plugin
+
+link:{url-dailymotion--home}[Dailymotion, {browser-window--new}] is a French
+video-sharing technology platform primarily owned by
+link:{url-vivendi--home}[Vivendi, {browser-window--new}]. The platform is
+available worldwide in 183 languages and 43 localised versions featuring local
+home pages and local content.
+
+[role="mb-4"]
+The platform is a monetization solution that allows to directly
+connect to high-quality advertisers through a proprietary Advertising system.
+Like YouTube, videos can be watched for free, but ads are shown on each and
+every video.
+
+.Dailymotion Video
+dailymotion::x87ycik[role="mt-4 mb-4"]
+
+// ++++
+// <div class="gallery-title">Dailymotion Video</div>
+// <video
+//   id="videojs_dailymotion"
+//   class="video-js vjs-theme-uno"
+//   controls
+//   width="640" height="360"
+//   data-setup='{
+//     "techOrder": [
+//       "dailymotion", "html5"
+//     ],
+//     "sources": [{
+//       "type": "video/dailymotion",
+//       "src": "//dailymotion.com/video/x87ycik"
+//     }],
+//     "controlBar": {
+//       "pictureInPictureToggle": false
+//     }
+//   }'
+// ></video>
+// ++++
+
+[role="mt-5"]
+== Video Galleries
+
+
+[role="mt-4"]
+=== YouTube Gallery
+
+The community at link:{url-youtube--home}[YouTube, {browser-window--new}] is
+large, with over 1 billion users that watch hundreds of millions of hours of
+content every day. The number of channels on YouTube is enormous. For TV
+Stations, it's a must to publish videos of their shows on YouTube. Find below
+a real classic channel *Carpool Karaoke* presented by the frontman _James Corden_
+of *The Late Late Show* at CBS, Los Angeles.
+
+.James Cordon and Adele
+gallery::jg_video_online_youtube_james_and_adele[role="mt-4 mb-5"]
+
+
+[role="mt-5"]
+=== DailyMotion Gallery
+
+Dailymotion allows users to search videos by *tags*, topic *channels*, or
+user-created *groups*. Users can upload videos of up to 2 gigabytes and a
+length of 60 minutes. If a user is a MotionMaker or MotionPartner, a program
+for particularly creative users or partners, they can upload videos of
+unlimited length.
+
+.SELF Magazine
+gallery::jg_video_online_dailymotion[role="mt-4 mb-5"]
+
+
+// [role="mt-5"]
+// === Vimeo Gallery
+//
+// Vimeo does offer a basic, free membership, but it limits you to 500MB maximum
+// storage per week. Alternately, you can book on paid plans: Plus, PRO, Business.
+// Each membership has varied storage limits, but the free plan offers sufficient
+// space for private projects to present video content without advertising.
+//
+// .Fashion
+// gallery::jg_video_online_vimeo[role="mt-4 mb-5"]

@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <title>videojs-vimeo Demo</title>
+    <link href="/node_modules/video.js/dist/video-js.css" rel="stylesheet">
+  </head>
+  <body>
+    <video
+      id="vid1"
+      class="video-js"
+      width="640" height="360"
+      data-setup='{
+        "techOrder": [
+          "vimeo", "html5"
+        ],
+        "sources": [{
+          "type": "video/vimeo",
+          "src": "https://vimeo.com/179528528"
+        }],
+        "vimeo": {
+          "color": "#fbc51b"
+        }
+      }'
+    >
+    </video>
+
+    <script src="/node_modules/video.js/dist/video.js"></script>
+    <script src="/dist/videojs-vimeo.js"></script>
+  </body>
+
+</html>
