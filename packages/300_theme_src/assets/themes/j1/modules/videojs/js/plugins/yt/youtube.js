@@ -1,4 +1,20 @@
 /*
+ # -----------------------------------------------------------------------------
+ # ~/assets/themes/j1/modules/videojs/js/yt/youtube.js
+ # Provides YiuTube Playback Technology for Video.js V8 and newer
+ #
+ #  Product/Info:
+ #  http://jekyll.one
+ #
+ #  Copyright (C) 2023 Juergen Adams
+ #  Copyright (C) 2014-2015 Benoit Tremblay
+ #
+ #  J1 Theme is licensed under MIT License.
+ #  See: https://github.com/jekyll-one/J1 Theme/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+/*
   The MIT License (MIT)
 
   Copyright (c) 2014-2015 Benoit Tremblay <trembl.ben@gmail.com>
@@ -795,7 +811,7 @@
   Youtube.apiReadyQueue = [];
 
   if (typeof document !== 'undefined'){
-    loadScript('/assets/themes/j1/modules/videojs/js/plugins/yt/api/youtube.js', apiLoaded);
+    loadScript('/assets/themes/j1/modules/videojs/js/plugins/yt/api/youtube.min.js', apiLoaded);
     injectCss();
   }
 

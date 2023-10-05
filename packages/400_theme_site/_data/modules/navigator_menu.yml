@@ -220,6 +220,30 @@
       icon:                             foot-print
       target:                           _blank
 
+    - title:                            VideoJS
+      icon:                             video
+      dropdown:
+
+        - title:                        Video Tester
+          href:                         /pages/public/manuals/videojs/video_tester/
+          icon:                         video
+          target:                       _blank
+
+        - title:                        VideoJS API
+          href:                         /pages/public/manuals/videojs/videojs_api/
+          icon:                         video
+          target:                       _blank
+
+        - title:                        Vimeo API
+          href:                         /pages/public/manuals/videojs/vimeo_api/
+          icon:                         video
+          target:                       _blank
+
+        - title:                        Dailymotion API
+          href:                         /pages/public/manuals/videojs/dailymotion_api/
+          icon:                         video
+          target:                       _blank
+
     - title:                            Modules
       icon:                             alpha-j-box
       dropdown:

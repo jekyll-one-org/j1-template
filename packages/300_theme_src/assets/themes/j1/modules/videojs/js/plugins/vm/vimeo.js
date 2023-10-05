@@ -45,11 +45,10 @@
       constructor(options, ready) {
         super(options, ready);
 
-//      this.setPoster(options.poster);
-//      this.initVMPlayer();
+        this.setPoster(options.poster);
 
-        // Set the vjs-dailymotion class to the player
-        // Parent is not set yet so we have to wait a tick
+        // Set the vjs-vimeo class to the player
+        // parent is not set yet so we have to wait a tick
         var vm = this;
         setTimeout(function() {
           if (this.el_) {
@@ -66,6 +65,7 @@
             }
           }
         }.bind(this));
+
       } // END Constructor
 
       initVMPlayer() {
@@ -99,39 +99,74 @@
           vimeoOptions.color = this.options_.color.replace(/^#/, '');
         }
 
-        this._player = new VimeoPlayer(this.el(), vimeoOptions);
+        this.vmPlayer = new VM.Player(this.el(), vimeoOptions);
         this.initVimeoState();
 
-        ['play', 'pause', 'ended', 'timeupdate', 'progress', 'seeked'].forEach(e => {
-          this._player.on(e, (progress) => {
+        // setup API events
+        //
+//      ['play', 'playing', 'pause', 'ended', 'timeupdate', 'progress', 'seeking', 'seeked'].forEach(e => {
+        ['play', 'playing', 'pause', 'ended', 'loaded', 'timeupdate', 'progress', 'seeking', 'seeked', 'ready'].forEach(e => {
+
+          this.vmPlayer.on(e, (progress) => {
             if (this._vimeoState.progress.duration !== progress.duration) {
               this.trigger('durationchange');
             }
             this._vimeoState.progress = progress;
             this.trigger(e);
           });
+
+          this.vmPlayer.on(e, (ready) => {
+            this.vmPlayer.getVideoEmbedCode()
+            .then (function(embedCode) {
+              var code = embedCode
+            })
+            .catch(function(error) {
+             console.err('Vimeo API: an error occurred');
+            });
+          });
+
+          this.vmPlayer.on(e, (timeupdate) => {
+            if (this._vimeoState.progress.duration !== progress.duration) {
+              this.trigger('durationchange');
+            }
+            this._vimeoState.progress = progress;
+            this.trigger(e);
+          });
+
+          this.vmPlayer.on('pause', () => this._vimeoState.playing = false);
+
+          this.vmPlayer.on('play', () => {
+           const bigPlayButton = document.getElementsByClassName("vjs-big-play-button");
+
+            for (var i = 0; i < bigPlayButton.length; ++i) {
+              bigPlayButton[i].style.display = 'none';
+            }
+
+            this._vimeoState.playing = true;
+            this._vimeoState.ended = false;
+          });
+
         });
 
-        this._player.on('pause', () => this._vimeoState.playing = false);
-        this._player.on('play', () => {
+        // jadams: just a try
+        // ---------------------------------------------------------------------
+        // this.vmPlayer.on('playing', () => {
+        //   const vjsControlBar = document.getElementsByClassName("vjs-control-bar");
+        //
+        //   for (var i = 0; i < vjsControlBar.length; ++i) {
+        //     vjsControlBar[i].style.display = 'block';
+        //   }
+        // });
 
-          // jadams: just a try
-          // -------------------------------------------------------------------
-          // const vjsControlBar = document.getElementsByClassName("vjs-control-bar");
-          // vjsControlBar[0].style.display = 'block';
-
-          this._vimeoState.playing = true;
-          this._vimeoState.ended = false;
-        });
-        this._player.on('ended', () => {
+        this.vmPlayer.on('ended', () => {
           this._vimeoState.playing = false;
           this._vimeoState.ended = true;
         });
-        this._player.on('volumechange', (v) => this._vimeoState.volume = v);
-        this._player.on('error', e => this.trigger('error', e));
+
+        this.vmPlayer.on('volumechange', (v) => this._vimeoState.volume = v);
+        this.vmPlayer.on('error', e => this.trigger('error', e));
 
         this.triggerReady();
-
       }
 
       initVimeoState() {
@@ -146,10 +181,10 @@
           }
         };
 
-        this._player.getCurrentTime().then(time => state.progress.seconds = time);
-        this._player.getDuration().then(time => state.progress.duration = time);
-        this._player.getPaused().then(paused => state.playing = !paused);
-        this._player.getVolume().then(volume => state.volume = volume);
+        this.vmPlayer.getCurrentTime().then(time => state.progress.seconds = time);
+        this.vmPlayer.getDuration().then(time => state.progress.duration = time);
+        this.vmPlayer.getPaused().then(paused => state.playing = !paused);
+        this.vmPlayer.getVolume().then(volume => state.volume = volume);
       }
 
       createEl() {
@@ -191,7 +226,7 @@
       }
 
       setCurrentTime(time) {
-        this._player.setCurrentTime(time);
+        this.vmPlayer.setCurrentTime(time);
       }
 
       volume() {
@@ -199,7 +234,7 @@
       }
 
       setVolume(volume) {
-        return this._player.setVolume(volume);
+        return this.vmPlayer.setVolume(volume);
       }
 
       duration() {
@@ -219,11 +254,11 @@
       }
 
       pause() {
-        this._player.pause();
+        this.vmPlayer.pause();
       }
 
       play() {
-        this._player.play();
+        this.vmPlayer.play();
       }
 
       muted() {
@@ -234,16 +269,12 @@
         return this._vimeoState.ended;
       }
 
-      // jadams: TODO
-      // replace all YT.Player* by theirs Videmo API conterparts
-      // -----------------------------------------------------------------------
-
       currentTime() {
-        return this._player ? this._player.getCurrentTime() : 0;
+        return this.vmPlayer ? this.vmPlayer.getCurrentTime() : 0;
       }
 
       setCurrentTime(seconds) {
-        if (this.lastState === YT.PlayerState.PAUSED) {
+        if (this.lastState === vmPlayer.getPaused()) {
           this.timeBeforeSeek = this.currentTime();
         }
 
@@ -251,17 +282,17 @@
           this.wasPausedBeforeSeek = this.paused();
         }
 
-        this._player.seekTo(seconds, true);
+        this.vmPlayer.seekTo(seconds, true);
         this.trigger('timeupdate');
         this.trigger('seeking');
         this.isSeeking = true;
 
         // A seek event during pause does not return an event to trigger a seeked event,
         // so run an interval timer to look for the currentTime to change
-        if (this.lastState === YT.PlayerState.PAUSED && this.timeBeforeSeek !== seconds) {
+        if (this.lastState === vmPlayer.getPaused() && this.timeBeforeSeek !== seconds) {
           clearInterval(this.checkSeekedInPauseInterval);
           this.checkSeekedInPauseInterval = setInterval(function() {
-            if (this.lastState !== YT.PlayerState.PAUSED || !this.isSeeking) {
+            if (this.lastState !== vmPlayer.getPaused() || !this.isSeeking) {
               // If something changed while we were waiting for the currentTime to change,
               //  clear the interval timer
               clearInterval(this.checkSeekedInPauseInterval);
@@ -280,12 +311,12 @@
       // jadams, 2023-10-01: videojs.createTimeRange() deprecated in VideoJS 9
       //
       seekable() {
-        if(!this._player) {
+        if(!this.vmPlayer) {
           // return videojs.createTimeRange();
           return videojs.time.createTimeRanges();
         }
-        // return videojs.createTimeRange(0, this._player.getDuration());
-        return videojs.time.createTimeRanges(0, this._player.getDuration());
+        // return videojs.createTimeRange(0, this.vmPlayer.getDuration());
+        return videojs.time.createTimeRanges(0, this.vmPlayer.getDuration());
       }
 
       onSeeked() {
@@ -300,19 +331,19 @@
       }
 
       playbackRate() {
-        return this._player ? this._player.getPlaybackRate() : 1;
+        return this.vmPlayer ? this.vmPlayer.getPlaybackRate() : 1;
       }
 
       setPlaybackRate(suggestedRate) {
-        if (!this._player) {
+        if (!this.vmPlayer) {
           return;
         }
 
-        this._player.setPlaybackRate(suggestedRate);
+        this.vmPlayer.setPlaybackRate(suggestedRate);
       }
 
       duration() {
-        return this._player ? this._player.getDuration() : 0;
+        return this.vmPlayer ? this.vmPlayer.getDuration() : 0;
       }
 
       // Vimeo does has a mute API and native controls aren't being used,
@@ -397,6 +428,12 @@
         .vjs-vimeo.vjs-user-inactive .vjs-iframe-blocker { display: block; }
         .vjs-vimeo .vjs-poster { background-size: cover; }'
         .vjs-vimeo-mobile .vjs-big-play-button { display: none; }
+
+        .vjs-vimeo .vjs-duration { display: none; }
+        .vjs-vimeo .vjs-remaining-time { display: none; }
+
+        .vjs-vimeo .vjs-big-play-button { display: block; }
+        .player .vp-player-ui-overlays { display: none !important; }
       `;
 
       const head  = document.head || document.getElementsByTagName('head')[0];
@@ -448,7 +485,7 @@
     // document ready
     //
     if (typeof document !== 'undefined') {
-      loadScript('/assets/themes/j1/modules/videojs/js/plugins/vm/api/vimeo.js', apiLoaded);
+      loadScript('/assets/themes/j1/modules/videojs/js/plugins/vm/api/vimeo.min.js', apiLoaded);
       injectCss();
     }
 

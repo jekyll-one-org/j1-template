@@ -13,13 +13,17 @@
  #  J1 Theme is licensed under MIT License.
  #  See: https://github.com/jekyll-one/J1 Theme/blob/master/LICENSE
  # -----------------------------------------------------------------------------
+ # NOTE:
+ # Namespace changed from "Vimeo" to "VM" to not conflict with the
+ # namespace used by the VideoJS plugin which is "Vimeo" as well.
+ # -----------------------------------------------------------------------------
 */
 
 /*! @vimeo/player v2.20.1 | (c) 2023 Vimeo | MIT License | https://github.com/vimeo/player.js */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, ({}, global.VimeoPlayer = factory()));
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, (global.VM = global.VM || {}, global.VM.Player = factory()));
 }(this, (function () { 'use strict';
 
   function ownKeys(object, enumerableOnly) {

@@ -588,7 +588,7 @@
   Dailymotion.sdkReadyQueue = [];
 
   if (typeof document !== 'undefined'){
-    loadScript('/assets/themes/j1/modules/videojs/js/plugins/dm/api/dailymotion.js', apiLoaded);
+    loadScript('/assets/themes/j1/modules/videojs/js/plugins/dm/api/dailymotion.min.js', apiLoaded);
     injectCss();
   }
 
@@ -598,4 +598,5 @@
   } else {
     videojs.registerComponent('Dailymotion', Dailymotion);
   }
+
 }));

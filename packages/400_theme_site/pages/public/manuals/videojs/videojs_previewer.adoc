@@ -13,8 +13,8 @@ description: >
 keywords: >
                                         open source, free, template, jekyll, jekyllone, web,
                                         sites, static, jamstack, bootstrap,
-                                        html, html5, video, support, flash player,
-                                        quicktime, silverlight
+                                        html, html5, video, support,
+                                        flash player, quicktime, silverlight, videojs
 
 categories:                             [ Roundtrip ]
 tags:                                   [ Module, Video ]
@@ -26,7 +26,7 @@ image:
 
 regenerate:                             false
 personalization:                        true
-permalink:                              /pages/public/tools/previewer/video_tester/
+permalink:                              /pages/public/manuals/videojs/video_tester/
 
 resources:                              [
                                           animate,
@@ -71,7 +71,7 @@ a built-in multimedia framework already for decoding and displaying video
 content. No need to use such proprietary software components anymore.
 
 mdi:clock-time-five-outline[24px, md-gray mt-4 mb-5 mr-2]
-*10 Minutes* to read
+*15-30 Minutes* to read
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
@@ -82,24 +82,41 @@ If you like *one* HTML5 video player for *all* of your video content,
 _VideoJS_ is a good choice. Based on the video tag `<video>` for HTML5,
 several plugins are available to be used for playing videos from the:
 
-* Dailymotion Video platform
-* Vimeo Video platform
-* YouTube Video platform
+* _Vimeo_ Video platform
+* _Dailymotion_ Video platform
+* _YouTube_ Video platform
+* Videos available *locally* on the Web Server
 
 [role="mt-4"]
-=== Vimeo Plugin
+=== Embed Vimeo Video
 
-The Vimeo plugin using the Vimeo Player *v2.20.1* version. This
-implementaion is inspired by the official VideoJS _YouTube_ project.
+Vimeo is an online video-sharing platform that allows users to upload,
+share, and view videos. It was founded in 2004 by a group of filmmakers
+and has since grown into a popular platform for individuals and businesses
+to showcase their videos. Vimeo is known for its emphasis on high-quality
+video content, creative expression, and a supportive community of creators.
 
-// [NOTE]
-// ====
-// For the Vimeo plugin *no* VJS themes are available. The plugin is
-// using the *original skin* of the Vimeo Player.
-// ====
+[role="mb-4"]
+Vimeo is often compared to other video-sharing platforms like YouTube.
+While YouTube focuses on a wide range of user-generated content and has
+a larger audience, Vimeo focuses on high-quality and often professional
+video. It has gained popularity among filmmakers, artists, and businesses
+looking for a platform to showcase their work with a more
+creative and controlled approach to sharing videos.
+
+[NOTE]
+====
+The Vimeo plugin using the Vimeo Player *v2.20.1* version of March 2023.
+====
+
+[CAUTION]
+====
+For the Vimeo plugin *no* VideoJS themes are available. The plugin is
+using the *original* skin of the Vimeo Player to control the player.
+====
 
 .Vimeo Video
-vimeo::179528528[role="mt-4 mb-4"]
+vimeo::179528528[role="mt-5 mb-4"]
 
 // ++++
 //   <div class="gallery-title">Vimeo Video</div>
@@ -125,16 +142,28 @@ vimeo::179528528[role="mt-4 mb-4"]
 
 
 [role="mt-5"]
-=== YouTube Plugin
+=== Embed YouTube Video
 // See: https://www.tutorialspoint.com/how-to-play-youtube-videos-using-video-js-player
 
-It's the last week of The Late Late Show with James Corden and his dear friend
-Adele surprises him with one final Carpool Karaoke commute to work. Adele takes
-the wheel and asks James about his memories hosting the show, Carpool Karaoke
-and the significance of it ending.
+YouTube is a popular online video-sharing platform that allows users to
+upload, view, share, and comment on videos. It was created in February 2005
+and acquired by Google in November 2006. YouTube provides a platform for
+people and organizations to publish various video content.
 
-The two get emotional reflecting about their friendship and the times they've
-been there for each other.
+[role="mb-4"]
+YouTube has become a significant part of internet culture and a valuable
+platform for content creators and viewers. It offers various features and
+tools to help content creators build their audiences and monetize their
+content through advertising, memberships, merchandise sales, and more.
+
+[NOTE]
+====
+The YouTube plugin used is in the latest version of *2023*. The player
+used is automatically detected and loaded by the YouTube platform.
+====
+
+Find the following example Adele and James Cordon get emotional reflecting
+about their friendship and the times they've been there for each other.
 
 .YouTube Video
 youtube::nV8UZJNBY6Y[poster="/assets/videos/gallery/video_adele_last_carpool_caraoke_poster.jpg" role="mt-4 mb-4"]
@@ -173,10 +202,10 @@ Please enjoy in full and thank you for sharing in so many memories with us.
 /////
 
 [role="mt-5"]
-=== Dailymotion Plugin
+=== Embed Dailymotion Video
 
-link:{url-dailymotion--home}[Dailymotion, {browser-window--new}] is a French
-video-sharing technology platform primarily owned by
+link:{url-dailymotion--home}[Dailymotion, {browser-window--new}] is a
+French video-sharing technology platform primarily owned by
 link:{url-vivendi--home}[Vivendi, {browser-window--new}]. The platform is
 available worldwide in 183 languages and 43 localised versions featuring local
 home pages and local content.
@@ -187,8 +216,14 @@ connect to high-quality advertisers through a proprietary Advertising system.
 Like YouTube, videos can be watched for free, but ads are shown on each and
 every video.
 
+[NOTE]
+====
+The Dailymotion plugin using the Dailymotion *SDK* in the last version of
+October 2022.
+====
+
 .Dailymotion Video
-dailymotion::x87ycik[role="mt-4 mb-4"]
+dailymotion::x87ycik[role="mt-5 mb-4"]
 
 // ++++
 // <div class="gallery-title">Dailymotion Video</div>
@@ -213,10 +248,82 @@ dailymotion::x87ycik[role="mt-4 mb-4"]
 // ++++
 
 [role="mt-5"]
+=== Embed Local Video
+
+Digital image content, simple pictures or videos, are easy to make. Today,
+every mobile has a camera. Presenting a bunch of pictures is done very easily
+by using *VideoJS*.
+
+.Local Video
+video::/assets/videos/gallery/html5/video1.mp4[poster="/assets/videos/gallery/video1-poster.jpg" role="mt-4 mb-5"]
+
+
+[role="mt-5"]
 == Video Galleries
 
+Video galleries are collections or displays of videos organized in a
+specific manner, typically on a website or within a software application.
+Galleries of videos are commonly used for various purposes, such as showcasing
+videos, organizing content, or providing a visually appealing way to present
+video content to an audience.
 
-[role="mt-4"]
+[role="mb-4"]
+Here are some key characteristics and uses of video galleries.
+
+Organized Display::
+Video galleries are designed to present videos in an organized and visually
+appealing manner. They often include thumbnails, titles, and descriptions
+to help users browse and select the videos they want to watch.
+
+Categorization:: Videos in a gallery can be categorized or grouped based on
+specific criteria, such as topic, date, genre, or any other relevant
+classification. Categorization makes it easier for users to find the videos
+they are interested in.
+
+User-Friendly Navigation::
+Video galleries typically include navigation features like pagination, search
+functionality, filters, and sorting options to enhance the user experience
+and make it easier to explore the video content.
+
+Embedding::
+Video galleries can be embedded on websites or integrated into web
+applications. Embedding allows content creators to showcase their videos
+to a wider audience while maintaining control over the presentation.
+
+Responsive Design::
+Many modern video galleries are designed to be responsive, meaning they
+adapt to different screen sizes and devices. Responsiveness ensures that
+the gallery remains user-friendly on desktop computers and mobile devices.
+
+Customization::
+Depending on the platform or software used, video galleries can often be
+customized in terms of appearance, layout, and functionality to match the
+branding or style of a website or application.
+
+Playback Options::
+Video galleries typically provide playback options, such as play, pause,
+volume control, and fullscreen mode, to give users control over their
+viewing experience.
+
+Analytics::
+Some video gallery platforms offer tools to track viewer engagement and
+gather insights into how users interact with the videos.
+
+Social Sharing::
+Integration with social media platforms and sharing options are common in
+video galleries, allowing users to share videos with their networks easily.
+
+Security and Privacy::
+Depending on the context, video galleries may include security features to
+protect the content from unauthorized access and privacy settings to control
+who can view the videos.
+
+Video galleries are widely used in various industries, including entertainment,
+education, e-commerce, and marketing. They provide a versatile way to present
+video content and engage with an audience online.
+
+
+[role="mt-5"]
 === YouTube Gallery
 
 The community at link:{url-youtube--home}[YouTube, {browser-window--new}] is
@@ -240,7 +347,7 @@ for particularly creative users or partners, they can upload videos of
 unlimited length.
 
 .SELF Magazine
-gallery::jg_video_online_dailymotion[role="mt-4 mb-5"]
+gallery::jg_video_online_dailymotion[role="mt-4 mb-7"]
 
 
 // [role="mt-5"]

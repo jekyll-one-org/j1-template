@@ -1,0 +1,134 @@
+---
+title:                                  VideoJS Player API
+title_extention:                        Interact with and control videos
+tagline:                                Interact with and control videos
+
+date:                                   2020-11-04
+#last_modified:                         2023-01-01
+
+description: >
+                                        Video.js is an open-source JavaScript framework for building HTML5 based
+                                        video players on the web. It provides a customizable and extensible platform
+                                        for embedding and controlling video playback within web applications. Video.js
+                                        is designed to work with HTML5 video and allows developers to create responsive
+                                        and feature-rich video players with a wide range of customization options.
+keywords: >
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap,
+                                        html, html5, video, support, flash player,
+                                        quicktime, silverlight, videojs
+
+categories:                             [ Manuals ]
+tags:                                   [ Module, VideoJS ]
+
+image:
+  path:                                 /assets/images/icons/videojs/videojs-poster.png
+  width:                                1920
+  height:                               1280
+
+regenerate:                             false
+personalization:                        true
+permalink:                              /pages/public/manuals/videojs/videojs_api/
+
+resources:                              [ animate, video_js ]
+resource_options:
+  - toccer:
+      collapseDepth:                    3
+  - attic:
+      slides:
+        - url:                          /assets/images/icons/videojs/videojs-poster.png
+          alt:                          VideoJS Poster
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:images-dir:                            {imagesdir}/pages/roundtrip/100_present_images
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+The J1 Template support playing video on web pages by HTML5 Video, the new
+standard of HTML to show videos on webpages.
+
+HTML5 Video opens the doors to your way of presenting video content. All
+modern browsers support the video tag `<video>` for the HTML5. Browsers have
+a built-in multimedia framework already for decoding and displaying video
+content. No need to use such proprietary software components anymore.
+
+mdi:clock-time-five-outline[24px, md-gray mt-4 mb-5 mr-2]
+*10 Minutes* to read
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+[role="mt-5"]
+== VideoJS
+
+Video.js is an open-source JavaScript framework for building HTML5 based
+video players on the web. It provides a customizable and extensible platform
+for embedding and controlling video playback within web applications. Video.js
+is designed to work with HTML5 video and allows developers to create responsive
+and feature-rich video players with a wide range of customization options.
+
+Key features and benefits:
+
+Cross-browser compatibility::
+Video.js is designed to work seamlessly across different web browsers,
+ensuring that a wide audience can view your videos.
+
+Customizable player skins::
+It is easy to customize the appearance of the video player by changing the
+player skin and applying CSS styles to match the look and feel of your website
+or application.
+
+Plugin system::
+Video.js has a robust plugin system that allows developers to extend its
+functionality. Many community-contributed plugins are available to add
+features like captions, analytics, advertising, and more.
+
+Accessibility::
+The framework is built with accessibility in mind, making it possible to
+create video players compliant with web accessibility standards, such as
+providing support for screen readers and keyboard navigation.
+
+Responsive design::
+Video.js can be configured to automatically adapt to different screen sizes
+and orientations, making it suitable for mobile and desktop devices.
+
+HTML5 video support::
+It leverages HTML5 video capabilities, allowing you to play videos without
+relying on external plugins like Flash.
+
+Streaming support::
+Video.js can be used to stream video content, including progressive download
+and adaptive streaming technologies like HLS (HTTP Live Streaming) and
+DASH (Dynamic Adaptive Streaming over HTTP).
+
+Community and documentation::
+Video.js has an active and supportive community of developers. It also
+provides extensive documentation and examples to help developers get started
+and troubleshoot any issues.
+
+Video.js is a powerful and versatile tool for integrating video playback
+into web applications and websites, offering a high degree of flexibility
+and customization. It has gained popularity due to its ease of use and robust
+feature set, making it a popular choice for developers looking to incorporate
+video content on the web.
+
+
+[role="mt-5"]
+== VideoJS Player API
