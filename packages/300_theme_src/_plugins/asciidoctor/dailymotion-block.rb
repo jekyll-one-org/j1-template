@@ -28,6 +28,9 @@ include Asciidoctor
 #   dailymotion::x87ycik[theme="city" role="mt-5 mb-5"]
 #
 # ------------------------------------------------------------------------------
+# See:
+# https://www.tutorialspoint.com/creating-a-responsive-video-player-using-video-js
+# ------------------------------------------------------------------------------
 
 Asciidoctor::Extensions.register do
 
@@ -57,6 +60,7 @@ Asciidoctor::Extensions.register do
             width="640" height="360"
             aria-label="#{attributes['title']}"
             data-setup='{
+              "fluid" : true,
               "techOrder": [
                 "dailymotion", "html5"
               ],

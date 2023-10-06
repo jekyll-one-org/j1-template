@@ -28,6 +28,9 @@ include Asciidoctor
 #   youtube::nV8UZJNBY6Y[poster="/assets/images/icons/videojs/videojs-poster.png" theme="city" role="mt-5 mb-5"]
 #
 # ------------------------------------------------------------------------------
+# See:
+# https://www.tutorialspoint.com/creating-a-responsive-video-player-using-video-js
+# ------------------------------------------------------------------------------
 
 Asciidoctor::Extensions.register do
 
@@ -60,6 +63,7 @@ Asciidoctor::Extensions.register do
             poster="#{poster_image}"
             aria-label="#{attributes['title']}"
             data-setup='{
+              "fluid" : true,
               "techOrder": [
                 "youtube", "html5"
               ],
