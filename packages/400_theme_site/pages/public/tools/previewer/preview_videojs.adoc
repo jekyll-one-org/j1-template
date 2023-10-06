@@ -151,24 +151,25 @@ Please enjoy in full and thank you for sharing in so many memories with us.
 [role="mt-5"]
 === Vimeo Video
 
+[role="mb-4"]
 Vimeo is an online video-sharing platform that allows users to upload,
 share, and view videos. It was founded in 2004 by a group of filmmakers
 and has since grown into a popular platform for individuals and businesses
 to showcase their videos. Vimeo is known for its emphasis on high-quality
 video content, creative expression, and a supportive community of creators.
 
-[role="mb-4"]
+[NOTE]
+====
+The Vimeo plugin using the Vimeo Player *v2.20.1* version of March 2023.
+====
+
+[role="mt-4 mb-4"]
 Vimeo is often compared to other video-sharing platforms like YouTube.
 While YouTube focuses on a wide range of user-generated content and has
 a larger audience, Vimeo focuses on high-quality and often professional
 video. It has gained popularity among filmmakers, artists, and businesses
 looking for a platform to showcase their work with a more
 creative and controlled approach to sharing videos.
-
-[NOTE]
-====
-The Vimeo plugin using the Vimeo Player *v2.20.1* version of March 2023.
-====
 
 [CAUTION]
 ====
