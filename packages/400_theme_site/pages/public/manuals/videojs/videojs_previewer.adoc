@@ -87,60 +87,6 @@ several plugins are available to be used for playing videos from the:
 * _YouTube_ Video platform
 * Videos available *locally* on the Web Server
 
-[role="mt-4"]
-=== Embed Vimeo Video
-
-Vimeo is an online video-sharing platform that allows users to upload,
-share, and view videos. It was founded in 2004 by a group of filmmakers
-and has since grown into a popular platform for individuals and businesses
-to showcase their videos. Vimeo is known for its emphasis on high-quality
-video content, creative expression, and a supportive community of creators.
-
-[role="mb-4"]
-Vimeo is often compared to other video-sharing platforms like YouTube.
-While YouTube focuses on a wide range of user-generated content and has
-a larger audience, Vimeo focuses on high-quality and often professional
-video. It has gained popularity among filmmakers, artists, and businesses
-looking for a platform to showcase their work with a more
-creative and controlled approach to sharing videos.
-
-[NOTE]
-====
-The Vimeo plugin using the Vimeo Player *v2.20.1* version of March 2023.
-====
-
-[CAUTION]
-====
-For the Vimeo plugin *no* VideoJS themes are available. The plugin is
-using the *original* skin of the Vimeo Player to control the player.
-====
-
-.Vimeo Video
-vimeo::179528528[role="mt-5 mb-4"]
-
-// ++++
-//   <div class="gallery-title">Vimeo Video</div>
-//   <video
-//     id="videojs_vimeo"
-//     class="video-js vjs-theme-uno"
-//     width="640" height="360"
-//     controls
-//     data-setup='{
-//       "techOrder": [
-//         "vimeo", "html5"
-//       ],
-//       "sources": [{
-//         "type": "video/vimeo",
-//         "src": "//vimeo.com/179528528"
-//       }],
-//       "controlBar": {
-//         "pictureInPictureToggle": false
-//       }
-//     }'
-//   ></video>
-// ++++
-
-
 [role="mt-5"]
 === Embed YouTube Video
 // See: https://www.tutorialspoint.com/how-to-play-youtube-videos-using-video-js-player
@@ -200,6 +146,59 @@ Please enjoy in full and thank you for sharing in so many memories with us.
 </video>
 ++++
 /////
+
+[role="mt-5"]
+=== Embed Vimeo Video
+
+Vimeo is an online video-sharing platform that allows users to upload,
+share, and view videos. It was founded in 2004 by a group of filmmakers
+and has since grown into a popular platform for individuals and businesses
+to showcase their videos. Vimeo is known for its emphasis on high-quality
+video content, creative expression, and a supportive community of creators.
+
+[role="mb-4"]
+Vimeo is often compared to other video-sharing platforms like YouTube.
+While YouTube focuses on a wide range of user-generated content and has
+a larger audience, Vimeo focuses on high-quality and often professional
+video. It has gained popularity among filmmakers, artists, and businesses
+looking for a platform to showcase their work with a more
+creative and controlled approach to sharing videos.
+
+[NOTE]
+====
+The Vimeo plugin using the Vimeo Player *v2.20.1* version of March 2023.
+====
+
+[CAUTION]
+====
+For the Vimeo plugin *no* VideoJS themes are available. The plugin is
+using the *original* skin of the Vimeo Player to control the player.
+====
+
+.Vimeo Video
+vimeo::179528528[role="mt-5 mb-4"]
+
+// ++++
+//   <div class="gallery-title">Vimeo Video</div>
+//   <video
+//     id="videojs_vimeo"
+//     class="video-js vjs-theme-uno"
+//     width="640" height="360"
+//     controls
+//     data-setup='{
+//       "techOrder": [
+//         "vimeo", "html5"
+//       ],
+//       "sources": [{
+//         "type": "video/vimeo",
+//         "src": "//vimeo.com/179528528"
+//       }],
+//       "controlBar": {
+//         "pictureInPictureToggle": false
+//       }
+//     }'
+//   ></video>
+// ++++
 
 [role="mt-5"]
 === Embed Dailymotion Video
@@ -338,6 +337,18 @@ gallery::jg_video_online_youtube_james_and_adele[role="mt-4 mb-5"]
 
 
 [role="mt-5"]
+=== Vimeo Gallery
+
+Vimeo does offer a basic, free membership, but it limits you to 500MB maximum
+storage per week. Alternately, you can book on paid plans: Plus, PRO, Business.
+Each membership has varied storage limits, but the free plan offers sufficient
+space for private projects to present video content without advertising.
+
+.Fashion
+gallery::jg_video_online_vimeo[role="mt-4 mb-5"]
+
+
+[role="mt-5"]
 === DailyMotion Gallery
 
 Dailymotion allows users to search videos by *tags*, topic *channels*, or
@@ -347,16 +358,15 @@ for particularly creative users or partners, they can upload videos of
 unlimited length.
 
 .SELF Magazine
-gallery::jg_video_online_dailymotion[role="mt-4 mb-7"]
+gallery::jg_video_online_dailymotion[role="mt-4 mb-5"]
 
 
-// [role="mt-5"]
-// === Vimeo Gallery
-//
-// Vimeo does offer a basic, free membership, but it limits you to 500MB maximum
-// storage per week. Alternately, you can book on paid plans: Plus, PRO, Business.
-// Each membership has varied storage limits, but the free plan offers sufficient
-// space for private projects to present video content without advertising.
-//
-// .Fashion
-// gallery::jg_video_online_vimeo[role="mt-4 mb-5"]
+[role="mt-5"]
+=== Local Video Gallery
+
+The HTML5 specification does *not* define which video and audio formats
+browsers *should* support. J1 LightGallery can play all types of standard
+HTML5 Video formats on modern browsers today like MP4, WebM, or Ogg.
+
+.Local MP4 Video
+gallery::jg_video_html5[role="mb-5 mb-7"]

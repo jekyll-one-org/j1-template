@@ -22,9 +22,9 @@
 }(this, function ($) {
 
 (function() {
-    
+
         'use strict';
-    
+
         var defaults = {
             videoMaxWidth: '855px',
 
@@ -38,48 +38,48 @@
             videojs: false,
             videojsOptions: {}
         };
-    
+
         var Video = function(element) {
-    
+
             this.core = $(element).data('lightGallery');
-    
+
             this.$el = $(element);
             this.core.s = $.extend({}, defaults, this.core.s);
             this.videoLoaded = false;
-    
+
             this.init();
-    
+
             return this;
         };
-    
+
         Video.prototype.init = function() {
             var _this = this;
-    
+
             // Event triggered when video url found without poster
             _this.core.$el.on('hasVideo.lg.tm', onHasVideo.bind(this));
-    
+
             // Set max width for video
             _this.core.$el.on('onAferAppendSlide.lg.tm', onAferAppendSlide.bind(this));
-    
+
             if (_this.core.doCss() && (_this.core.$items.length > 1) && (_this.core.s.enableSwipe || _this.core.s.enableDrag)) {
                 _this.core.$el.on('onSlideClick.lg.tm', function() {
                     var $el = _this.core.$slide.eq(_this.core.index);
                     _this.loadVideoOnclick($el);
                 });
             } else {
-    
+
                 // For IE 9 and bellow
                 _this.core.$slide.on('click.lg', function() {
                     _this.loadVideoOnclick($(this));
                 });
             }
-    
+
             _this.core.$el.on('onBeforeSlide.lg.tm', onBeforeSlide.bind(this));
-    
+
             _this.core.$el.on('onAfterSlide.lg.tm', function(event, prevIndex) {
                 _this.core.$slide.eq(prevIndex).removeClass('lg-video-playing');
             });
-            
+
             if (_this.core.s.autoplayFirstVideo) {
                 _this.core.$el.on('onAferAppendSlide.lg.tm', function (e, index) {
                     if (!_this.core.lGalleryOn) {
@@ -91,13 +91,13 @@
                 });
             }
         };
-    
+
         Video.prototype.loadVideo = function(src, addClass, noPoster, index, html) {
           var video = '';
           var autoplay = 1;
           var a = '';
           var isVideo = this.core.isVideo(src, index) || {};
-  
+
           // Enable autoplay based on setting for first video if poster doesn't exist
           if (noPoster) {
               if (this.videoLoaded) {
@@ -106,11 +106,11 @@
                   autoplay = this.core.s.autoplayFirstVideo ? 1 : 0;
               }
           }
-  
+
           if (isVideo.youtube) {
 
             /* jadams, 2020-04-10:
-               This code loads the YouTube IFrame Player API code 
+               This code loads the YouTube IFrame Player API code
                asynchronously (before the first JS script tag in the head)
             */
             var tag = document.createElement('script');
@@ -124,34 +124,34 @@
             }
 
             video = '<iframe class="lg-video-object lg-youtube ' + addClass + '" width="560" height="315" src="//www.youtube.com/embed/' + isVideo.youtube[1] + a + '" frameborder="0" allowfullscreen></iframe>';
-  
+
           } else if (isVideo.vimeo) {
-  
+
             a = '?autoplay=' + autoplay + '&api=1';
             if (this.core.s.vimeoPlayerParams) {
                 a = a + '&' + $.param(this.core.s.vimeoPlayerParams);
             }
 
             video = '<iframe class="lg-video-object lg-vimeo ' + addClass + '" width="560" height="315"  src="//player.vimeo.com/video/' + isVideo.vimeo[1] + a + '" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
-  
+
           } else if (isVideo.dailymotion) {
-  
+
             a = '?wmode=opaque&autoplay=' + autoplay + '&api=postMessage';
             if (this.core.s.dailymotionPlayerParams) {
                 a = a + '&' + $.param(this.core.s.dailymotionPlayerParams);
             }
 
             video = '<iframe class="lg-video-object lg-dailymotion ' + addClass + '" width="560" height="315" src="//www.dailymotion.com/embed/video/' + isVideo.dailymotion[1] + a + '" frameborder="0" allowfullscreen></iframe>';
-  
+
           } else if (isVideo.html5) {
             var fL = html.substring(0, 1);
             if (fL === '.' || fL === '#') {
                 html = $(html).html();
             }
             video = html;
-  
+
           } else if (isVideo.vk) {
-  
+
             a = '&autoplay=' + autoplay;
             if (this.core.s.vkPlayerParams) {
                 a = a + '&' + $.param(this.core.s.vkPlayerParams);
@@ -184,8 +184,8 @@
                             if (_this.core.s.videojs) {
                                 var player_ref = _this.core.$slide.eq(_this.core.index).find('.lg-html5').get(0);
                                 var videoOptions = _this.core.s.videojsOptions;
-                                /* 
-                                    jadams, 2020-04-10: Player Readiness: 
+                                /*
+                                    jadams, 2020-04-10: Player Readiness:
                                     Pass a callback to the videojs function (as a third argument)
                                 */
                                 try {
@@ -238,8 +238,8 @@
                     var dailymotionPlayer;
                     var html5Player;
 
-                    /* 
-                        jadams, 2020-04-10: Player Readiness: 
+                    /*
+                        jadams, 2020-04-10: Player Readiness:
                         Make sure that the HTML portion of a player is already loaded
                     */
                     var player_loaded = setInterval(function() {
@@ -256,17 +256,18 @@
                         } else if (vimeoPlayer) {
                             try {
                                 $f(vimeoPlayer).api('play');
-                            } catch (e) {
-                                console.error('Make sure you have included froogaloop2 js');
+                            }
+                            catch (e) {
+                              // handle Vimeo Player errors from here
                             }
                         } else if (dailymotionPlayer) {
                             dailymotionPlayer.contentWindow.postMessage('play', '*');
-
                         } else if (html5Player) {
                             if (_this.core.s.videojs) {
                                 try {
                                     videojs(html5Player).play();
-                                } catch (e) {
+                                }
+                                catch (e) {
                                     console.error('Make sure you have included videojs');
                                 }
                             } else {
@@ -283,7 +284,7 @@
                 }
             }
         };
-    
+
         Video.prototype.destroy = function() {
             this.videoLoaded = false;
         };
@@ -337,8 +338,8 @@
             var html5Player;
             var vkPlayer;
 
-            /* 
-                jadams, 2020-04-10: Player Readiness: 
+            /*
+                jadams, 2020-04-10: Player Readiness:
                 Make sure that the HTML portion of a player is already loaded
             */
             var player_loaded = setInterval(function() {
@@ -359,7 +360,7 @@
                     try {
                         $f(vimeoPlayer).api('pause');
                     } catch (e) {
-                        console.error('Make sure you have included froogaloop2 js');
+                        // handle Vimeo Player errors from here
                     }
                 } else if (dailymotionPlayer) {
                     dailymotionPlayer.contentWindow.postMessage('pause', '*');
@@ -394,9 +395,9 @@
             }
           }, 10);
         }
-    
+
         $.fn.lightGallery.modules.video = Video;
-    
+
     })();
 
 }));

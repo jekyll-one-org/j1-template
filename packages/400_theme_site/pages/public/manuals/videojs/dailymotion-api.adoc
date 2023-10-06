@@ -80,22 +80,24 @@ mdi:clock-time-five-outline[24px, md-gray mt-4 mb-5 mr-2]
 // https://github.com/dailymotion/dailymotion-sdk-js
 // https://github.com/dailymotion/dailymotion-sdk-js/tree/master/src/core
 
-The JavaScript SDK is available
-on https://github.com/dailymotion/dailymotion-sdk-js[GitHub] and must be
-loaded from `https://api.dmcdn.net/all.js`. This SDK will provide access
-to the features of
-the https://developers.dailymotion.com/api#graph-api[Dailymotion Data
-API].
+[role="mb-4"]
+The JavaScript SDK `api.dmcdn.net/all.js` is available on
+https://github.com/dailymotion/dailymotion-sdk-js[GitHub, {browser-window--new}]
+and must be loaded from `https://api.dmcdn.net/all.js`.
+This SDK on https://api.dmcdn.net/all.js[Dailymotion CDN, {browser-window--new}]
+provide access to the features of the
+https://developers.dailymotion.com/api#graph-api[Dailymotion Data API, {browser-window--new}].
 
 [WARNING]
 ====
-We no longer support using this JS SDK for Player integration and should
-only be used for interaction with the Data API. The Player can be
+Dailymotion does not longer support using this JS *SDK* for Player integration
+and should only be used for interaction with the Data API. The Player can be
 embedded with any of our embed methods that can be found
-https://developers.dailymotion.com/player[here].
+https://developers.dailymotion.com/player[here, {browser-window--new}].
 ====
 
-[role="mt-4"]
+
+[role="mt-5"]
 [[sdk-javascript-loading]]
 === Loading the SDK
 
@@ -115,6 +117,7 @@ SDK with all the common options turned on:
   </script>
 ----
 
+[role="mt-4"]
 [[sdk-javascript-loading-asynchronously]]
 ==== Loading the SDK asynchronously
 
@@ -160,21 +163,21 @@ publish or edit videos, etc. For this purpose, you can use any of:
 |===
 |Method |Method description
 
-|https://developers.dailymotion.com/sdks/#sdk-javascript-methods-login[`dm.login()`]
+|https://developers.dailymotion.com/sdks/#sdk-javascript-methods-login[`dm.login()`, {browser-window--new}]
 |Login and/or request extended permissions.
 
-|https://developers.dailymotion.com/sdks/#sdk-javascript-methods-logout[`dm.logout()`]
+|https://developers.dailymotion.com/sdks/#sdk-javascript-methods-logout[`dm.logout()`, {browser-window--new}]
 |Logout (only if the user is connected with your site).
 
-|https://developers.dailymotion.com/sdks/#sdk-javascript-methods-getLoginStatus[`dm.getloginstatus()`]
+|https://developers.dailymotion.com/sdks/#sdk-javascript-methods-getLoginStatus[`dm.getloginstatus()`, {browser-window--new}]
 |Get current login status from dailymotion.com.
 
-|https://developers.dailymotion.com/sdks/#sdk-javascript-methods-getSession[`dm.getsession()`]
+|https://developers.dailymotion.com/sdks/#sdk-javascript-methods-getSession[`dm.getsession()`, {browser-window--new}]
 |Synchronous accessor for the current session.
 |===
 
 In addition, you can subscribe to the following events
-using https://developers.dailymotion.com/sdks/#sdk-javascript-methods-eventsubscribe[`DM.Event.subscribe()`]:
+using https://developers.dailymotion.com/sdks/#sdk-javascript-methods-eventsubscribe[`DM.Event.subscribe()`, {browser-window--new}]:
 
 * `auth.statusChange`
 * `auth.sessionChange`
@@ -186,7 +189,7 @@ using https://developers.dailymotion.com/sdks/#sdk-javascript-methods-eventsubs
 === Graph API
 
 You can make Graph API requests using
-https://developers.dailymotion.com/sdks/#sdk-javascript-methods-api[`DM.api()`]
+https://developers.dailymotion.com/sdks/#sdk-javascript-methods-api[`DM.api()`, {browser-window--new}]
 method:
 
 [source, js]
@@ -200,9 +203,12 @@ var handleAPIResponse = function (response) {
   }, handleAPIResponse);
 ----
 
+
 [role="mt-5"]
 [[sdk-javascript-methods]]
 == Dailymotion Player API
+
+Find all Player API methods below.
 
 [role="mt-4"]
 === DM.play()
@@ -404,12 +410,12 @@ do other things.
 DM.api(path, method, params, callback)
 ----
 
-[role="mt-4"]
+[role="mt-5"]
 ==== Parameters
 
 Except `path`, all arguments to this method are optional.
 
-[cols="3a,3a,6a", width="100%", options="header", role="rtable mt-4"]
+[cols="3a,3a,6a", width="100%", options="header", role="rtable mt-4" mb-5]
 |===
 |Name |Type |Description
 
@@ -431,7 +437,7 @@ Except `path`, all arguments to this method are optional.
 
 |===
 
-[role="mt-4"]
+[role="mt-5"]
 ==== Examples
 
 If you have an authenticated user, get their User Object:
@@ -592,10 +598,10 @@ object contains:
 
 |===
 
-[role="mt-4"]
+[role="mt-5"]
 ==== Parameters
 
-[cols="3a,3a,6a", width="100%", options="header", role="rtable mt-4"]
+[cols="3a,3a,6a", width="100%", options="header", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -683,9 +689,10 @@ DM.login(function(response)
   }, {scope: 'read write'});
 ----
 
-==== Parameters
+[role="mt-5"]
 
-[cols="3a,3a,6a", width="100%", options="header", role="rtable mt-4"]
+
+[cols="3a,3a,6a", width="100%", options="header", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -724,10 +731,10 @@ DM.logout(function(response)
 You can only log out a user that is connected to your site.
 ====
 
-[role="mt-4"]
-===== Parameters
+[role="mt-5"]
+==== Parameters
 
-[cols="3a,3a,6a", width="100%", options="header", role="rtable mt-4"]
+[cols="3a,3a,6a", width="100%", options="header", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -756,10 +763,10 @@ DM.Event.subscribe('auth.sessionChange', function(response)
   });
 ----
 
-[role="mt-4"]
+[role="mt-5"]
 ==== Parameters
 
-[cols="3a,3a,6a", width="100%", options="header", role="rtable mt-4"]
+[cols="3a,3a,6a", width="100%", options="header", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -797,10 +804,10 @@ var onSessionChange = function(response)
   DM.Event.unsubscribe('auth.sessionChange', onSessionChange);
 ----
 
-[role="mt-4"]
+[role="mt-5"]
 ==== Parameters
 
-[cols="3a,3a,6a", width="100%", options="header", role="rtable mt-4"]
+[cols="3a,3a,6a", width="100%", options="header", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -818,56 +825,243 @@ var onSessionChange = function(response)
 [role="mt-4"]
 === Events
 
+All events supported by the API.
+
+
+[role="mt-4 noclip"]
+==== apiready
+
 [source, js]
 ----
-_recvEvent: function(event) {
-  switch (event.event) {
-    case 'apiready': if (this.apiReady) return /* dispatch only once */;
-    case 'start': this.ended = false; break;
-    case 'loadedmetadata': this.error = null; break;
-    case 'timeupdate': // no break statement here
-    case 'ad_timeupdate': this.currentTime = parseFloat(event.time); break;
-    case 'progress': this.bufferedTime = parseFloat(event.time); break;
-    case 'durationchange': this.duration = parseFloat(event.duration); break;
-    case 'seeking': this.seeking = true; this.currentTime = parseFloat(event.time); break;
-    case 'seeked': this.seeking = false; this.currentTime = parseFloat(event.time); break;
-    case 'fullscreenchange': this.fullscreen = DM.parseBool(event.fullscreen); break;
-    case 'controlschange': this.controls = DM.parseBool(event.controls); break;
-    case 'volumechange': this.volume = parseFloat(event.volume); this.muted = DM.parseBool(event.muted); break;
-    case 'ad_start': this.adData = event.adData;
-    case 'video_start':
-    case 'ad_play':
-    case 'playing':
-    case 'play': this.paused = false; break;
-    case 'end': this.ended = true; break; // no break, also set paused
-    case 'ad_end': this.adData = {};
-    case 'ad_pause':
-    case 'video_end':
-    case 'pause': this.paused = true; break;
-    case 'error': this.error = {
-      code: event.code,
-      title: event.title,
-      message: event.message
-    }; break;
-    case 'rebuffer': this.rebuffering = DM.parseBool(event.rebuffering); break;
-    case 'qualitiesavailable': this.qualities = event.qualities; break;
-    case 'qualitychange': this.quality = event.quality; break;
-    case 'subtitlesavailable': this.subtitles = event.subtitles; break;
-    case 'subtitlechange': this.subtitle = event.subtitle; break;
-    case 'videochange': this.video = {
-      videoId: event.videoId,
-      title: event.title,
-      duration: parseFloat(event.duration)
-    }; break;
-    case 'ad_companions': this.companionAds = event.companionAds; break;
-  }
-  this._dispatch(event);
-}
+if (this.apiReady) return /* dispatch only once */;
 ----
 
-[role="mt-4"]
+[role="mt-4 noclip"]
+==== start
+
+[source, js]
+----
+this.ended = false;
+----
+
+[role="mt-4 noclip"]
+==== loadedmetadata
+
+[source, js]
+----
+this.error = null;
+----
+
+[role="mt-4 noclip"]
+==== timeupdate
+
+[source, js]
+----
+this.error = null;
+----
+
+[role="mt-4 noclip"]
+==== ad_timeupdate
+
+[source, js]
+----
+this.currentTime = parseFloat(event.time);
+----
+
+[role="mt-4 noclip"]
+==== progress
+
+[source, js]
+----
+this.bufferedTime = parseFloat(event.time);
+----
+
+[role="mt-4 noclip"]
+==== durationchange
+
+[source, js]
+----
+this.duration = parseFloat(event.duration);
+----
+
+[role="mt-4 noclip"]
+==== seeking
+
+[source, js]
+----
+this.seeking = true;
+this.currentTime = parseFloat(event.time);
+----
+
+[role="mt-4 noclip"]
+==== seeked
+
+[source, js]
+----
+this.seeking = false;
+this.currentTime = parseFloat(event.time);
+----
+
+[role="mt-4 noclip"]
+==== fullscreenchange
+
+[source, js]
+----
+this.fullscreen = DM.parseBool(event.fullscreen);
+----
+
+[role="mt-4 noclip"]
+==== controlschange
+
+[source, js]
+----
+this.controls = DM.parseBool(event.controls);
+----
+
+[role="mt-4 noclip"]
+==== volumechange
+
+[source, js]
+----
+this.volume = parseFloat(event.volume);
+this.muted = DM.parseBool(event.muted);
+----
+
+[role="mt-4 noclip"]
+==== ad_start
+
+[source, js]
+----
+this.adData = event.adData;
+----
+
+[role="mt-4 noclip"]
+==== video_start
+
+[role="mt-4 noclip"]
+==== ad_play
+
+[role="mt-4 noclip"]
+==== playing
+
+[role="mt-4 noclip"]
+==== ad_start
+
+[source, js]
+----
+this.paused = false;
+----
+
+[role="mt-4 noclip"]
+==== end
+
+[source, js]
+----
+// no break, also set paused
+this.ended = true;
+----
+
+[role="mt-4 noclip"]
+==== ad_end
+
+[source, js]
+----
+this.adData = {};
+----
+
+[role="mt-4 noclip"]
+==== ad_pause
+
+[role="mt-4 noclip"]
+==== video_end
+
+[role="mt-4 noclip"]
+==== pause
+
+[source, js]
+----
+this.paused = true;
+----
+
+[role="mt-4 noclip"]
+==== error
+
+[source, js]
+----
+this.error = {
+  code: event.code,
+  title: event.title,
+  message: event.message
+};
+----
+
+[role="mt-4 noclip"]
+==== rebuffer
+
+[source, js]
+----
+this.rebuffering = DM.parseBool(event.rebuffering);
+----
+
+[role="mt-4 noclip"]
+==== qualitiesavailable
+
+[source, js]
+----
+this.qualities = event.qualities;
+----
+
+[role="mt-4 noclip"]
+==== qualitychange
+
+[source, js]
+----
+this.quality = event.quality;
+----
+
+[role="mt-4 noclip"]
+==== subtitlesavailable
+
+[source, js]
+----
+this.subtitles = event.subtitles;
+----
+
+[role="mt-4 noclip"]
+==== subtitlechange
+
+[source, js]
+----
+this.subtitle = event.subtitle;
+----
+
+[role="mt-4 noclip"]
+==== videochange
+
+[source, js]
+----
+this.video = {
+  videoId: event.videoId,
+  title: event.title,
+  duration: parseFloat(event.duration)
+};
+----
+
+[role="mt-4 noclip"]
+==== ad_companions
+
+[source, js]
+----
+this.companionAds = event.companionAds;
+----
+
+
+[role="mt-5"]
 == Error codes
 
+Find a summary of error codes used by the API.
+
+[role="mt-4"]
 === HTTP Error codes
 
 [cols="3a,9a", width="100%", options="header", role="rtable mt-4"]
@@ -909,6 +1103,7 @@ more information.
 |===
 
 
+[role="mt-4"]
 === DM Error types
 
 Here’s a list of error types you may encounter in errors returned by the API.
@@ -947,6 +1142,7 @@ is generally a temporary error that will resolve itself over time.
 
 |===
 
+[role="mt-4"]
 === DM Video access errors
 
 When requesting access to a video, the API may return a message explaining

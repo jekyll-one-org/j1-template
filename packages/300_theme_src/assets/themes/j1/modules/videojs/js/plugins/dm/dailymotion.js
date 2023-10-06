@@ -50,7 +50,7 @@
   }
 }(this, function(videojs) {
  'use strict';
-  var _isOnMobile = videojs.browser.IS_IOS || videojs.browser.IS_NATIVE_ANDROID;
+  var _isOnMobile = videojs.browser.IS_IOS || videojs.browser.IS_ANDROID;
   var Tech = videojs.getTech('Tech');
 
   class Dailymotion extends Tech {

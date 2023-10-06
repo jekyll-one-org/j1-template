@@ -105,6 +105,7 @@ The API provided hooks for integrating video analytics and tracking user
 interactions with Vimeo videos.
 
 
+[role="mt-4"]
 === Installation
 
 You can install the Vimeo Player API through either npm:
@@ -125,6 +126,7 @@ Alternatively, you can reference an up‐to‐date version on our CDN:
 dynamically via the RequireJS load system.
 http://www.requirejs.org/docs/api.html#jsfiles
 
+[role="mt-4"]
 === Getting Started
 
 In order to control the Vimeo player, you need a player to control.
@@ -234,17 +236,20 @@ attribute, you will need to provide the full video URL in a
 </script>
 ----
 
+[role="mt-5"]
 === Browser Support
 
 The Player API library is supported in IE 11+, Chrome, Firefox, Safari,
 and Opera.
 
+[role="mt-4"]
 === Migrate from Froogaloop
 
 Using our old Froogaloop library? See the
 link:docs/migrate-from-froogaloop.md[migration doc] for details on how
 to update your code to use this library.
 
+[role="mt-4"]
 === Using with a module bundler
 
 If you’re using a module bundler like https://webpack.js.org[webpack] or
@@ -290,12 +295,13 @@ browser, it will also import the Player constructor directly:
 </script>
 ----
 
+[role="mt-5"]
 === Create a Player
 
 The `Vimeo.Player` object wraps an iframe so you can interact with and
 control a Vimeo Player embed.
 
-==== Existing embed
+==== Existing Embed
 
 If you already have a Vimeo `<iframe>` on your page, pass that element
 into the constructor to get a `Player` object. You can also use jQuery
@@ -317,7 +323,7 @@ const jqueryPlayer = new Vimeo.Player($('iframe'));
 const idPlayer = new Vimeo.Player('player1');
 ----
 
-==== Create an embed
+==== Create an Embed
 
 Pass any element and an options object to the `Vimeo.Player` constructor
 to make an embed inside that element. The options object should consist
@@ -401,6 +407,7 @@ thumbnail, for example).
 </script>
 ----
 
+[role="mt-4"]
 === Embed Options
 
 These options are available to be appended to the query string of the
@@ -409,6 +416,7 @@ an object passed to the `Vimeo.Player` constructor. The complete list of
 embed options can be found in Vimeo's official
 https://developer.vimeo.com/player/sdk/embed[SDK documentation].
 
+[role="mt-5"]
 === Methods
 // http://www.html5rocks.com/en/tutorials/es6/promises/
 
@@ -453,6 +461,7 @@ player.setColor('#00adef').then(function(color) {
 });
 ----
 
+[role="mt-4"]
 ==== on()
 
 Add an event listener for the specified event. Will call the callback
@@ -471,6 +480,7 @@ const onPlay = function(data) {
 player.on('play', onPlay);
 ----
 
+[role="mt-4"]
 ==== off()
 
 Remove an event listener for the specified event. Will remove all
@@ -496,6 +506,7 @@ player.off('play', onPlay);
 player.off('play');
 ----
 
+[role="mt-4"]
 ==== loadVideo()
 
 Load a new video into this embed. The promise will be resolved if the
@@ -540,6 +551,7 @@ player.loadVideo(76979871).then(function(id) {
 });
 ----
 
+[role="mt-4"]
 ==== ready()
 
 Trigger a function when the player iframe has initialized. You do not
@@ -555,6 +567,7 @@ player.ready().then(function() {
 });
 ----
 
+[role="mt-4"]
 ==== enableTextTrack()
 
 Enable the text track with the specified language, and optionally the
@@ -589,6 +602,7 @@ player.enableTextTrack('en').then(function(track) {
 });
 ----
 
+[role="mt-4"]
 ==== disableTextTrack()
 
 Disable the currently-active text track.
@@ -604,6 +618,7 @@ player.disableTextTrack().then(function() {
 });
 ----
 
+[role="mt-4"]
 ==== pause()
 
 Pause the video if it’s playing.
@@ -632,6 +647,7 @@ player.pause().then(function() {
 });
 ----
 
+[role="mt-4"]
 ==== play()
 
 Play the video if it’s paused.
@@ -667,6 +683,7 @@ player.play().then(function() {
 });
 ----
 
+[role="mt-4"]
 ==== unload()
 
 Return the internal player (iframe) to its initial state.
@@ -682,6 +699,7 @@ player.unload().then(function() {
 });
 ----
 
+[role="mt-4"]
 ==== destroy()
 
 Cleanup the player and remove it from the DOM. It won’t be usable and a
@@ -698,6 +716,7 @@ player.destroy().then(function() {
 });
 ----
 
+[role="mt-4"]
 ==== requestFullscreen()
 
 Request the player enters fullscreen.
@@ -713,6 +732,7 @@ player.requestFullscreen().then(function() {
 });
 ----
 
+[role="mt-4"]
 ==== exitFullscreen()
 
 Request the player exits fullscreen.
@@ -728,6 +748,7 @@ player.exitFullscreen().then(function() {
 });
 ----
 
+[role="mt-4"]
 ==== getFullscreen()
 
 Checks whether the player is currently fullscreen.
@@ -743,6 +764,7 @@ player.getFullscreen().then(function(fullscreen) {
 });
 ----
 
+[role="mt-4"]
 ==== requestPictureInPicture()
 
 Request the player enters picture-in-picture.
@@ -758,6 +780,7 @@ player.requestPictureInPicture().then(function() {
 });
 ----
 
+[role="mt-4"]
 ==== exitPictureInPicture()
 
 Request the player exits picture-in-picture.
@@ -773,6 +796,7 @@ player.exitPictureInPicture().then(function() {
 });
 ----
 
+[role="mt-4"]
 ==== getPictureInPicture
 
 Checks whether the player is currently picture-in-picture.
@@ -788,6 +812,7 @@ player.getPictureInPicture().then(function(pip) {
 });
 ----
 
+[role="mt-4"]
 ==== remotePlaybackPrompt()
 
 Prompt the viewer to activate or deactivate a remote playback device, if
@@ -819,6 +844,7 @@ player.remotePlaybackPrompt().then(function() {
 });
 ----
 
+[role="mt-4"]
 ==== getRemotePlaybackAvailability()
 
 Checks if there is a remote playback device available.
@@ -834,6 +860,7 @@ player.getRemotePlaybackAvailability().then(function(remotePlaybackAvailable) {
 })
 ----
 
+[role="mt-4"]
 ==== getRemotePlaybackState()
 
 Get the current state of remote playback. Can be one of `connecting`,
@@ -854,6 +881,7 @@ player.getRemotePlaybackState().then(function(remotePlaybackState) {
 })
 ----
 
+[role="mt-4"]
 ==== getAutopause()
 
 Get the autopause behavior for this player.
@@ -877,6 +905,7 @@ player.getAutopause().then(function(autopause) {
 });
 ----
 
+[role="mt-4"]
 ==== setAutopause()
 
 Enable or disable the autopause behavior of this player. By default,
@@ -905,6 +934,7 @@ player.setAutopause(false).then(function(autopause) {
 });
 ----
 
+[role="mt-4"]
 ==== getBuffered()
 
 Get the buffered time ranges of the video.
@@ -920,6 +950,7 @@ player.getBuffered().then(function(buffered) {
 });
 ----
 
+[role="mt-4"]
 ==== getChapters()
 
 Get an array of the chapters that are on the video.
@@ -946,6 +977,7 @@ Each chapters object looks like this:
 }
 ----
 
+[role="mt-4"]
 ==== getCurrentChapter()
 
 Get the current chapter. A chapter is *current* when the `currentTime`
@@ -963,6 +995,7 @@ player.getCurrentChapter().then(function(chapter) {
 });
 ----
 
+[role="mt-4"]
 ==== getColor()
 
 Get the accent color for this player. Note that this is deprecated in
@@ -979,6 +1012,7 @@ player.getColor().then(function(color) {
 });
 ----
 
+[role="mt-4"]
 ==== getColors()
 
 Get all colors used for this player. The return value is an array of
@@ -995,6 +1029,7 @@ player.getColors().then(function(colors) {
 });
 ----
 
+[role="mt-4"]
 ==== setColor()
 
 Set the accent color of this player to a hex or rgb string. Setting the
@@ -1027,6 +1062,7 @@ player.setColor('#00adef').then(function(color) {
 });
 ----
 
+[role="mt-4"]
 ==== setColors()
 
 Set all colors of this player with an array of hex values. Setting the
@@ -1059,6 +1095,7 @@ player.setColors(['abc', 'def', '123', '456']).then(function(color) {
 });
 ----
 
+[role="mt-4"]
 ==== addCuePoint()
 
 Add a cue point to the player. Cue points fire a `cuepoint` event when
@@ -1096,6 +1133,7 @@ player.addCuePoint(15, {
 });
 ----
 
+[role="mt-4"]
 ==== removeCuePoint()
 
 Remove the specified cue point using the id returned from
@@ -1125,6 +1163,7 @@ player.removeCuePoint('09ecf4e4-b587-42cf-ad9f-e666b679c9ab').then(function(id) 
 });
 ----
 
+[role="mt-4"]
 ==== getCuePoints()
 
 Get an array of the cue points that have been added to the video.
@@ -1161,6 +1200,7 @@ Each cue point object looks like this:
 }
 ----
 
+[role="mt-4"]
 ==== getCurrentTime()
 
 Get the current playback position in seconds.
@@ -1176,6 +1216,7 @@ player.getCurrentTime().then(function(seconds) {
 });
 ----
 
+[role="mt-4"]
 ==== setCurrentTime()
 
 Set the current playback position in seconds. Once playback has started,
@@ -1208,6 +1249,7 @@ player.setCurrentTime(30.456).then(function(seconds) {
 });
 ----
 
+[role="mt-4"]
 ==== getDuration()
 
 Get the duration of the video in seconds. It will be rounded to the
@@ -1225,6 +1267,7 @@ player.getDuration().then(function(duration) {
 });
 ----
 
+[role="mt-4"]
 ==== getEnded()
 
 Get the ended state of the video. The video has ended if
@@ -1241,6 +1284,7 @@ player.getEnded().then(function(ended) {
 });
 ----
 
+[role="mt-4"]
 ==== getLoop()
 
 Get the loop state of the player.
@@ -1256,6 +1300,7 @@ player.getLoop().then(function(loop) {
 });
 ----
 
+[role="mt-4"]
 ==== setLoop()
 
 Set the loop state of the player. When set to `true`, the player will
@@ -1278,6 +1323,7 @@ player.setLoop(true).then(function(loop) {
 });
 ----
 
+[role="mt-4"]
 ==== getMuted()
 
 Get the muted state of the player.
@@ -1293,6 +1339,7 @@ player.getMuted().then(function(muted) {
 });
 ----
 
+[role="mt-4"]
 ==== setMuted()
 
 Set the muted state of the player. When set to `true`, the player volume
@@ -1310,6 +1357,7 @@ player.setMuted(true).then(function(muted) {
 });
 ----
 
+[role="mt-4"]
 ==== getPaused()
 
 Get the paused state of the player.
@@ -1325,6 +1373,7 @@ player.getPaused().then(function(paused) {
 });
 ----
 
+[role="mt-4"]
 ==== getPlaybackRate()
 
 Get the playback rate of the player on a scale from `0` to `2`.
@@ -1340,6 +1389,7 @@ player.getPlaybackRate().then(function(playbackRate) {
 });
 ----
 
+[role="mt-4"]
 ==== setPlaybackRate()
 
 Set the playback rate of the player on a scale from `0` to `2` available
@@ -1367,6 +1417,7 @@ player.setPlaybackRate(0.5).then(function(playbackRate) {
 });
 ----
 
+[role="mt-4"]
 ==== getPlayed()
 
 Get the played time ranges of the video.
@@ -1382,6 +1433,7 @@ player.getPlayed().then(function(played) {
 });
 ----
 
+[role="mt-4"]
 ==== getSeekable()
 
 Get the video time ranges that are seekable.
@@ -1397,6 +1449,7 @@ player.getSeekable().then(function(seekable) {
 });
 ----
 
+[role="mt-4"]
 ==== getSeeking()
 
 Get if the player is currently seeking.
@@ -1412,6 +1465,7 @@ player.getSeeking().then(function(seeking) {
 });
 ----
 
+[role="mt-4"]
 ==== getTextTracks()
 
 Get an array of the text tracks that exist for the video.
@@ -1443,6 +1497,7 @@ Kind can be either `captions` or `subtitles`. The mode can be either
 `showing` or `disabled`. Only one track can be `showing` at any given
 time; the rest will be `disabled`.
 
+[role="mt-4"]
 ==== getVideoEmbedCode()
 
 Get the `<iframe>` embed code for the video.
@@ -1458,6 +1513,7 @@ player.getVideoEmbedCode().then(function(embedCode) {
 });
 ----
 
+[role="mt-4"]
 ==== getVideoId()
 
 Get the id of the video.
@@ -1473,6 +1529,7 @@ player.getVideoId().then(function(id) {
 });
 ----
 
+[role="mt-4"]
 ==== getVideoTitle()
 
 Get the title of the video.
@@ -1488,6 +1545,7 @@ player.getVideoTitle().then(function(title) {
 });
 ----
 
+[role="mt-4"]
 ==== getVideoWidth()
 
 Get the native width of the currently‐playing video. The width of the
@@ -1504,6 +1562,7 @@ player.getVideoWidth().then(function(width) {
 });
 ----
 
+[role="mt-4"]
 ==== getVideoHeight()
 
 Get the native height of the currently‐playing video. The height of the
@@ -1530,6 +1589,7 @@ Promise.all([player.getVideoWidth(), player.getVideoHeight()]).then(function(dim
 });
 ----
 
+[role="mt-4"]
 ==== getVideoUrl()
 
 Get the https://vimeo.com[vimeo.com] url for the video.
@@ -1553,6 +1613,7 @@ player.getVideoUrl().then(function(url) {
 });
 ----
 
+[role="mt-4"]
 ==== getVolume()
 
 Get the current volume level of the player on a scale from `0` to `1`.
@@ -1570,6 +1631,7 @@ player.getVolume().then(function(volume) {
 });
 ----
 
+[role="mt-4"]
 ==== setVolume()
 
 Set the volume of the player on a scale from `0` to `1`. When set via
@@ -1600,6 +1662,7 @@ player.setVolume(0.5).then(function(volume) {
 });
 ----
 
+[role="mt-4"]
 ==== setTimingSrc()
 
 Syncs a Timing Object to the video player.
@@ -1644,6 +1707,7 @@ for available options.
 See this https://salmoro.github.io/vimeo-timing-object-demo/dist[demo app]
 which syncs video playback in real-time for all viewers.
 
+[role="mt-4"]
 ==== getQualities()
 
 Get the available qualities of the current video.
@@ -1670,6 +1734,7 @@ Each quality object looks like this:
 }
 ----
 
+[role="mt-4"]
 ==== getQuality()
 
 Get the current selected quality.
@@ -1685,6 +1750,7 @@ player.getQuality().then(function(quality) {
 });
 ----
 
+[role="mt-4"]
 ==== setQuality()
 
 Set the quality of the video. Available to Plus, PRO and Business accounts.
@@ -1709,6 +1775,7 @@ player.setQuality('720p').then(function(quality) {
 });
 ----
 
+[role="mt-4"]
 ==== getCameraProps()
 
 Get the current camera properties for a 360° video.
@@ -1736,6 +1803,7 @@ Each `cameraProps` object looks like this:
 }
 ----
 
+[role="mt-4"]
 ==== setCameraProps()
 
 Set the camera properties for a 360° video.
@@ -1765,6 +1833,7 @@ player.setCameraProps({
 });
 ----
 
+[role="mt-5"]
 === Events
 
 You can listen for events in the player by attaching a callback using
@@ -1792,6 +1861,7 @@ player.off('eventName', callback);
 If you pass only an event name, all listeners for that event will be
 removed.
 
+[role="mt-4"]
 ==== play
 
 Triggered when video playback is initiated.
@@ -1805,6 +1875,7 @@ Triggered when video playback is initiated.
 }
 ----
 
+[role="mt-4"]
 ==== playing
 
 Triggered when the video starts playing.
@@ -1818,6 +1889,7 @@ Triggered when the video starts playing.
 }
 ----
 
+[role="mt-4"]
 ==== pause
 
 Triggered when the video pauses.
@@ -1831,6 +1903,7 @@ Triggered when the video pauses.
 }
 ----
 
+[role="mt-4"]
 ==== ended
 
 Triggered any time the video playback reaches the end.
@@ -1849,6 +1922,7 @@ when loop is turned on, the `ended` event will not fire.
 }
 ----
 
+[role="mt-4"]
 ==== timeupdate
 
 Triggered as the `currentTime` of the video updates. It generally fires
@@ -1863,6 +1937,7 @@ every 250ms, but it may vary depending on the browser.
 }
 ----
 
+[role="mt-4"]
 ==== progress
 
 Triggered as the video is loaded. Reports back the amount of the video
@@ -1877,6 +1952,7 @@ that has been buffered.
 }
 ----
 
+[role="mt-4"]
 ==== seeking
 
 Triggered when the player starts seeking to a specific time. A
@@ -1891,6 +1967,7 @@ Triggered when the player starts seeking to a specific time. A
 }
 ----
 
+[role="mt-4"]
 ==== seeked
 
 Triggered when the player seeks to a specific time. A `timeupdate` event
@@ -1905,6 +1982,7 @@ will also be fired at the same time.
 }
 ----
 
+[role="mt-4"]
 ==== texttrackchange
 
 Triggered when the active text track (captions/subtitles) changes. The
@@ -1919,6 +1997,7 @@ values will be null if text tracks are turned off.
 }
 ----
 
+[role="mt-4"]
 ==== chapterchange
 
 Triggered when the current chapter changes.
@@ -1935,6 +2014,7 @@ Triggered when the current chapter changes.
 The `index` property of each chapter is the place it holds in the order
 of all the chapters. It starts at 1.
 
+[role="mt-4"]
 ==== cuechange
 
 Triggered when the active cue for the current text track changes. It
@@ -1960,6 +2040,7 @@ The `text` property of each cue is the raw value parsed from the caption
 or subtitle file. The `html` property contains the HTML that the Player
 renders for that cue.
 
+[role="mt-4"]
 ==== cuepoint
 
 Triggered when the current time hits a registered cue point.
@@ -1978,6 +2059,7 @@ Triggered when the current time hits a registered cue point.
 The `data` property will be the custom data provided in the
 `addCuePoint()` call, or an empty object if none was provided.
 
+[role="mt-4"]
 ==== volumechange
 
 Triggered when the volume in the player changes. Some devices do not
@@ -1991,6 +2073,7 @@ volume, so this event will never fire on those devices.
 }
 ----
 
+[role="mt-4"]
 ==== playbackratechange
 
 Triggered when the playback rate of the video in the player changes. The
@@ -2005,18 +2088,21 @@ event.
 }
 ----
 
+[role="mt-4"]
 ==== bufferstart
 
 Triggered when buffering starts in the player. This is also triggered
 during preload and while seeking. There is no associated data with this
 event.
 
+[role="mt-4"]
 ==== bufferend
 
 Triggered when buffering ends in the player. This is also triggered at
 the end of preload and seeking. There is no associated data with this
 event.
 
+[role="mt-4"]
 ==== error
 
 Triggered when some kind of error is generated in the player. In general
@@ -2035,6 +2121,7 @@ will be included.
 }
 ----
 
+[role="mt-4"]
 ==== loaded
 
 Triggered when a new video is loaded in the player.
@@ -2046,6 +2133,7 @@ Triggered when a new video is loaded in the player.
 }
 ----
 
+[role="mt-4"]
 ==== durationchange
 
 Triggered when the duration attribute has been updated.
@@ -2057,6 +2145,7 @@ Triggered when the duration attribute has been updated.
 }
 ----
 
+[role="mt-4"]
 ==== fullscreenchange
 
 Triggered when the player enters or exits fullscreen.
@@ -2068,6 +2157,7 @@ Triggered when the player enters or exits fullscreen.
 }
 ----
 
+[role="mt-4"]
 ==== qualitychange
 
 Triggered when the set quality changes.
@@ -2079,6 +2169,7 @@ Triggered when the set quality changes.
 }
 ----
 
+[role="mt-4"]
 ==== camerachange
 
 Triggered when any of the camera properties change for 360° videos.
@@ -2093,6 +2184,7 @@ Triggered when any of the camera properties change for 360° videos.
 }
 ----
 
+[role="mt-4"]
 ==== resize
 
 Triggered when the intrinsic size of the media changes.
@@ -2105,14 +2197,17 @@ Triggered when the intrinsic size of the media changes.
 }
 ----
 
+[role="mt-4"]
 ==== enterpictureinpicture
 
 Triggered when the player enters picture-in-picture.
 
+[role="mt-4"]
 ==== leavepictureinpicture
 
 Triggered when the player leaves picture-in-picture.
 
+[role="mt-4"]
 ==== remoteplaybackavailabilitychange
 
 Triggered when the availability of remote playback changes.
@@ -2122,21 +2217,25 @@ http://developer.mozilla.org/en-US/docs/Web/API/RemotePlayback/watchAvailability
 except that there is no `cancelWatchAvailability()`. You can remove the
 listener for this event instead.
 
+[role="mt-4"]
 ==== remoteplaybackconnecting
 
 Triggered when the player is attempting to connect to a remote playback
 device.
 
+[role="mt-4"]
 ==== remoteplaybackconnect
 
 Triggered when the player has successfully connected to a remote
 playback device.
 
+[role="mt-4"]
 ==== remoteplaybackdisconnect
 
 Triggered when the player has disconnected from a remote playback
 device.
 
+[role="mt-4"]
 ==== interactivehotspotclicked
 
 Triggered when a hotspot is clicked.
@@ -2157,6 +2256,7 @@ Triggered when a hotspot is clicked.
 }
 ----
 
+[role="mt-4"]
 ==== interactiveoverlaypanelclicked
 
 Triggered when the overlay panel (buttons or images) within the

@@ -31,8 +31,7 @@ permalink:                              /pages/public/learn/roundtrip/present_vi
 resources:                              [
                                           animate, lightGallery, justifiedGallery,
                                           video_js,
-                                          vimeo_player,
-                                          vimeo_froogaloop
+                                          vimeo_player
                                         ]
 resource_options:
   - attic:

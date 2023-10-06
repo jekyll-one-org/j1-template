@@ -28,7 +28,7 @@
 }(this, function(videojs) {
   'use strict';
 
-   var _isOnMobile = videojs.browser.IS_IOS || videojs.browser.IS_NATIVE_ANDROID;
+   var _isOnMobile = videojs.browser.IS_IOS || videojs.browser.IS_ANDROID;
    var Tech        = videojs.getTech('Tech');
    var cssInjected = false;
 
@@ -138,9 +138,11 @@
           this.vmPlayer.on('play', () => {
            const bigPlayButton = document.getElementsByClassName("vjs-big-play-button");
 
-            for (var i = 0; i < bigPlayButton.length; ++i) {
-              bigPlayButton[i].style.display = 'none';
-            }
+           // jadams: just a try
+           // ------------------------------------------------------------------
+            // for (var i = 0; i < bigPlayButton.length; ++i) {
+            //   bigPlayButton[i].style.display = 'none';
+            // }
 
             this._vimeoState.playing = true;
             this._vimeoState.ended = false;
@@ -416,6 +418,27 @@
         return;
       }
       cssInjected = true;
+
+      // const css = `
+      //   .vjs-vimeo iframe {
+      //     position: absolute;
+      //     top: 0;
+      //     left: 0;
+      //     width: 100%;
+      //     height: 100%;
+      //   }
+      //   .vjs-vimeo .vjs-iframe-blocker { display: none; }
+      //   .vjs-vimeo.vjs-user-inactive .vjs-iframe-blocker { display: block; }
+      //   .vjs-vimeo .vjs-poster { background-size: cover; }'
+      //   .vjs-vimeo-mobile .vjs-big-play-button { display: none; }
+      //
+      //   .vjs-vimeo .vjs-duration { display: none; }
+      //   .vjs-vimeo .vjs-remaining-time { display: none; }
+      //
+      //   .vjs-vimeo .vjs-big-play-button { display: block; }
+      //   .player .vp-player-ui-overlays { display: none !important; }
+      // `;
+
       const css = `
         .vjs-vimeo iframe {
           position: absolute;
@@ -431,9 +454,6 @@
 
         .vjs-vimeo .vjs-duration { display: none; }
         .vjs-vimeo .vjs-remaining-time { display: none; }
-
-        .vjs-vimeo .vjs-big-play-button { display: block; }
-        .player .vp-player-ui-overlays { display: none !important; }
       `;
 
       const head  = document.head || document.getElementsByTagName('head')[0];
