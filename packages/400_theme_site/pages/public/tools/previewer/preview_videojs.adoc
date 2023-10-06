@@ -89,7 +89,7 @@ several plugins are available to be used for playing videos from the:
 * Videos available *locally* on the Web Server
 
 [role="mt-5"]
-=== Embed YouTube Video
+=== YouTube Video
 // See: https://www.tutorialspoint.com/how-to-play-youtube-videos-using-video-js-player
 
 YouTube is a popular online video-sharing platform that allows users to
@@ -149,7 +149,7 @@ Please enjoy in full and thank you for sharing in so many memories with us.
 /////
 
 [role="mt-5"]
-=== Embed Vimeo Video
+=== Vimeo Video
 
 Vimeo is an online video-sharing platform that allows users to upload,
 share, and view videos. It was founded in 2004 by a group of filmmakers
@@ -202,7 +202,7 @@ vimeo::179528528[role="mt-5 mb-4"]
 // ++++
 
 [role="mt-5"]
-=== Embed Dailymotion Video
+=== Dailymotion Video
 
 link:{url-dailymotion--home}[Dailymotion, {browser-window--new}] is a
 French video-sharing technology platform primarily owned by
@@ -248,7 +248,7 @@ dailymotion::x87ycik[role="mt-5 mb-4"]
 // ++++
 
 [role="mt-5"]
-=== Embed Local Video
+=== Local Video
 
 Digital image content, simple pictures or videos, are easy to make. Today,
 every mobile has a camera. Presenting a bunch of pictures is done very easily
