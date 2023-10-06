@@ -1,7 +1,7 @@
 ---
-title:                                  Video
-title_extention:                        Playing HTML5 Video using J1 Template
-tagline:                                Playing HTML5 Video
+title:                                  VideoJS
+title_extention:                        Preview Video using VideoJS
+tagline:                                Preview Video using VideoJS
 
 date:                                   2020-11-04
 #last_modified:                         2023-01-01
@@ -14,7 +14,8 @@ keywords: >
                                         open source, free, template, jekyll, jekyllone, web,
                                         sites, static, jamstack, bootstrap,
                                         html, html5, video, support,
-                                        flash player, quicktime, silverlight, videojs
+                                        flash player, quicktime, silverlight,
+                                        videojs
 
 categories:                             [ Roundtrip ]
 tags:                                   [ Module, Video ]
