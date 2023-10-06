@@ -1,7 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/scss/theme_uno/extensions/_wave.scss
- # Helper classen for J! template lanes
+ # ~/scss/theme_uno/extensions/_video.scss
  # Product/Info:
  # https://jekyll.one
  #
@@ -10,11 +9,15 @@
  # J1 Theme is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
- # NOTE: Styles for J1 Theme Lanes
+ # NOTE: Styles for HTML5 video
+ # See:  https://stackoverflow.com/questions/10826784/make-html5-video-poster-be-same-size-as-video-itself
+ # -----------------------------------------------------------------------------
+ # NOTE:
+ # jadams, 2023-10-06: hardcoded poster size
  # -----------------------------------------------------------------------------
 */
 
-// jadams, 2022-11-13: do not show by default
-.wave {
-    display: none;
+video {
+  width:640px;
+  height:360px;
 }
