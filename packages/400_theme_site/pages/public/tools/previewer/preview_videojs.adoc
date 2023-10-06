@@ -261,7 +261,7 @@ display are available:
 See both players in action below.
 
 .HTML5 Video Player
-video::/assets/videos/gallery/html5/video2.mp4[poster="/assets/videos/gallery/video2-poster.jpg" role="mt-5 mb-5"]
+video::/assets/videos/gallery/html5/video1.mp4[poster="/assets/videos/gallery/video1-poster.jpg" role="mt-4 mb-5"]
 
 .VideoJS Video Player
 videojs::/assets/videos/gallery/html5/video1.mp4[poster="/assets/videos/gallery/video1-poster.jpg" role="mt-4 mb-5"]
