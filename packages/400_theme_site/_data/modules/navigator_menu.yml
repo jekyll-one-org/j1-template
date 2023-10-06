@@ -224,11 +224,6 @@
       icon:                             video
       dropdown:
 
-        - title:                        Video Tester
-          href:                         /pages/public/manuals/videojs/video_tester/
-          icon:                         video
-          target:                       _blank
-
         - title:                        VideoJS API
           href:                         /pages/public/manuals/videojs/videojs_api/
           icon:                         video
@@ -441,6 +436,11 @@
       - title:                          Current Theme
         href:                           /pages/public/tools/previewer/current_theme/
         icon:                           theme-light-dark
+
+      - title:                          VideoJS
+        href:                           /pages/public/tools/previewer/videojs/
+        icon:                           video
+        target:                         _blank
 
       - title:                          Speech Converter
         href:                           https://jekyll.one/pages/public/tools/previewer/speak2me/
