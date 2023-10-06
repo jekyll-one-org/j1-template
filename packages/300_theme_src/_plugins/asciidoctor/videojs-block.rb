@@ -30,10 +30,10 @@ include Asciidoctor
 
 Asciidoctor::Extensions.register do
 
-  class VideoBlockMacro < Extensions::BlockMacroProcessor
+  class VideoJSBlockMacro < Extensions::BlockMacroProcessor
     use_dsl
 
-    named :video
+    named :videojs
     name_positional_attributes 'poster', 'theme', 'role'
     default_attrs 'poster' => '/assets/images/icons/videojs/videojs-poster.png',
                   'theme' => 'uno',
@@ -60,7 +60,7 @@ Asciidoctor::Extensions.register do
             aria-label="#{attributes['title']}"
             data-setup='{
               "sources": [{
-                "type": "video/html",
+                "type": "video/mp4",
                 "src": "#{target}"
               }],
               "controlBar": {
@@ -74,5 +74,5 @@ Asciidoctor::Extensions.register do
     end
   end
 
-  block_macro VideoBlockMacro
+  block_macro VideoJSBlockMacro
 end
