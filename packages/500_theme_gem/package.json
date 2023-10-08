@@ -111,8 +111,8 @@
     "posttemplate-gem-site-files:assets-copy": "shx cp -r ../300_theme_src/assets/error_pages ./assets && shx cp -r ../300_theme_src/assets/data ./assets",
     "posttemplate-gem-site-files:includes-remove": "shx rm -rf ./lib/starter_web/_includes/themes",
     "posttemplate-gem-site-files:posts-remove": "shx rm -f ./lib/starter_web/collections/_posts/featured/*-welcome-to-j1.adoc",
-    "posttemplate-gem-site-files:pages-remove": "shx rm -rf ./lib/starter_web/pages/public/tools/previewer/* && shx rm -rf ./lib/starter_web/pages/public/jupyter/* && shx rm -rf ./lib/starter_web/pages/_test* && shx rm -rf ./lib/starter_web/pages/public/se",
-    "posttemplate-gem-site-files:pages-copy-preview-theme": "shx cp ../400_theme_site/pages/public/tools/previewer/preview_bootstrap_theme.adoc ./lib/starter_web/pages/public/tools/previewer/",
+    "posttemplate-gem-site-files:pages-remove": "shx rm -rf ./lib/starter_web/pages/public/jupyter/* && shx rm -rf ./lib/starter_web/pages/_test* && shx rm -rf ./lib/starter_web/pages/public/se",
+    "posttemplate-gem-site-files:pages-copy-previewers": "shx cp -r ../400_theme_site/pages/public/tools/previewer/* ./lib/starter_web/pages/public/tools/previewer/",
     "posttemplate-gem-site-files:utilsrv-remove": "shx rm -rf ./lib/starter_web/utilsrv/node_modules && shx rm -f ./lib/starter_web/utilsrv/yarn.lock && shx rm -f ./lib/starter_web/utilsrv/package-lock.json",
     "posttemplate-gem-site-files:about-remove": "shx rm -rf ./lib/starter_web/pages/public/about",
     "posttemplate-gem-site-files:about-copy": "shx mkdir ./lib/starter_web/pages/public/about && shx cp -f ../300_theme_src/_install/templates/pages/about_site.adoc ./lib/starter_web/pages/public/about/site.adoc",
@@ -130,6 +130,6 @@
     "cross-env": "^7.0.3",
     "cross-var": "^1.1.0",
     "npm-run-all": "^4.1.5",
-    "shx": "^0.3.3"
+    "shx": "^0.3.4"
   }
 }
