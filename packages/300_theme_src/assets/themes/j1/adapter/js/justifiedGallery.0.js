@@ -342,11 +342,7 @@ j1.adapter.justifiedGallery = (function (j1, window) {
 
                     // options enabled
                     /* eslint-disable */
-                    window.lightGallery(
-                      document.getElementById("{{gallery_id}}"), {
-//                    plugins: [lgVideo, lgZoom, lgFullscreen, lgRotate, lgShare, lgThumbnail, lgMediumZoom],
-                      plugins: [lgRotate],
-//                    licenseKey: '0000-0000-000-0000',
+                    gallery_selector.lightGallery({
                       {% for option in item.gallery.lightbox_options %}
                       {{option[0] | json}}: {{option[1] | json}},
                       {% endfor %}
@@ -374,9 +370,7 @@ j1.adapter.justifiedGallery = (function (j1, window) {
                      e.stopPropagation();
                     // lightbox initialized on COMPLETE event of justifiedGallery
                     /* eslint-disable */
-                    window.lightGallery(
-                      document.getElementById("{{gallery_id}}"), {
-                      plugins: [lgVideo],
+                    gallery_selector.lightGallery({
                       {% for option in item.gallery.lightbox_options %}
                       {{option[0] | json}}: {{option[1] | json}},
                       {% endfor %}
@@ -395,6 +389,10 @@ j1.adapter.justifiedGallery = (function (j1, window) {
                   });
                 }
               {% endif %} // ENDIF lightbox "lg"
+
+              {% if lightbox == "cb" %}
+                // $(this).find('a').colorbox();
+              {% endif %}  // ENDIF lightbox "cb"
 
             }); // END getJSON
           } //end gallery

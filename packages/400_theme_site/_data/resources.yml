@@ -1331,16 +1331,16 @@ resources:
 
   # ----------------------------------------------------------------------------
   # LightGallery, JS implementaion for full-featured lightboxes based on
-  # the JS API lightGallery
+  # the JS API lightGallery v2.7.2, September 2023
   #
   # See: https://www.lightgalleryjs.com/
   #
-  - name:                               J1 LightGallery
+  - name:                               J1 LightGallery V2
     resource:
       enabled:                          true
 
       id:                               lightGallery
-      comment:                          Module J1 LightGallery
+      comment:                          Module J1 LightGallery V2
       region:                           head
       layout:                           [ all ]
       required:                         ondemand
@@ -1351,22 +1351,25 @@ resources:
 
       data:
         css:                            [
-                                          modules/lightGallery/css/core/lightgallery,
-                                          modules/lightGallery/css/core/lg-transitions,
-                                          modules/lightGallery/css/core/lg-fb-comment-box,
-                                          modules/lightGallery/css/themes/uno
+                                          modules/lightGallery/css/lightgallery-bundle,
+                                          modules/lightGallery/css/lg-transitions,
+                                          modules/lightGallery/css/themes/uno/uno
                                         ]
         files:                          []
         js:                             [
-                                          modules/lightGallery/js/core/j1/lightgallery,
-                                          modules/lightGallery/js/modules/j1/j1-video,
-                                          modules/lightGallery/js/modules/lg-autoplay,
-                                          modules/lightGallery/js/modules/lg-fullscreen,
-                                          modules/lightGallery/js/modules/lg-hash,
-                                          modules/lightGallery/js/modules/lg-pager,
-                                          modules/lightGallery/js/modules/lg-share,
-                                          modules/lightGallery/js/modules/lg-thumbnail,
-                                          modules/lightGallery/js/modules/lg-zoom
+                                          modules/lightGallery/js/lightgallery,
+                                          modules/lightGallery/js/plugins/lg-autoplay,
+                                          modules/lightGallery/js/plugins/lg-comment,
+                                          modules/lightGallery/js/plugins/lg-fullscreen,
+                                          modules/lightGallery/js/plugins/lg-hash,
+                                          modules/lightGallery/js/plugins/lg-medium-zoom,
+                                          modules/lightGallery/js/plugins/lg-pager,
+                                          modules/lightGallery/js/plugins/lg-rotate,
+                                          modules/lightGallery/js/plugins/lg-share,
+                                          modules/lightGallery/js/plugins/lg-thumbnail,
+                                          modules/lightGallery/js/plugins/lg-video,
+                                          modules/lightGallery/js/plugins/lg-vimeo-thumbnail,
+                                          modules/lightGallery/js/plugins/lg-zoom
                                         ]
         init_function:                  []
 
@@ -1655,7 +1658,10 @@ resources:
       data:
         css:                            []
         files:                          [ adapter/js/masonry.js ]
-        js:                             [ modules/masonry/js/masonry ]
+        js:                             [
+                                          modules/masonry/js/masonry,
+                                          modules/masonry/js/utils/images_loaded
+                                        ]
         init_function:                  [ j1.adapter.masonry.init ]
 
   # ----------------------------------------------------------------------------

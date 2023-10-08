@@ -203,10 +203,10 @@
 
     buffered() {
       if(!this.dmPlayer || !this.dmPlayer.bufferedTime) {
-        return videojs.createTimeRange();
+        return videojs.time.createTimeRanges();
       }
 
-      return videojs.createTimeRange(0, this.dmPlayer.bufferedTime);
+      return videojs.time.createTimeRanges(0, this.dmPlayer.bufferedTime);
     }
 
     createEl() {

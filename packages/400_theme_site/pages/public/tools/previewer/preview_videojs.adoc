@@ -17,8 +17,8 @@ keywords: >
                                         flash player, quicktime, silverlight,
                                         videojs
 
-categories:                             [ Roundtrip ]
-tags:                                   [ Module, Video ]
+categories:                             [ Previewer ]
+tags:                                   [ Module, VideoJS ]
 
 image:
   path:                                 /assets/images/icons/videojs/videojs-poster.png
@@ -112,8 +112,8 @@ used is automatically detected and loaded by the YouTube platform.
 Find the following example Adele and James Cordon get emotional reflecting
 about their friendship and the times they've been there for each other.
 
-.YouTube Video
-youtube::nV8UZJNBY6Y[poster="/assets/videos/gallery/video_adele_last_carpool_caraoke_poster.jpg" role="mt-4 mb-4"]
+.Carpool Karaoke Channel
+youtube::nV8UZJNBY6Y[poster="/assets/videos/gallery/video_adele_last_carpool_caraoke_poster.1920.jpg" role="mt-4 mb-4"]
 
 /////
 [role="mt-4"]
@@ -177,7 +177,7 @@ For the Vimeo plugin *no* VideoJS themes are available. The plugin is
 using the *original* skin of the Vimeo Player to control the player.
 ====
 
-.Vimeo Video
+.Forever 21 Channel
 vimeo::179528528[role="mt-5 mb-4"]
 
 // ++++
@@ -223,7 +223,7 @@ The Dailymotion plugin using the Dailymotion *SDK* in the last version of
 October 2022.
 ====
 
-.Dailymotion Video
+.SELF Channel
 dailymotion::x87ycik[role="mt-5 mb-4"]
 
 // ++++
@@ -261,10 +261,10 @@ display are available:
 See both players in action below.
 
 .HTML5 Video Player
-video::/assets/videos/gallery/html5/video1.mp4[poster="/assets/videos/gallery/video1-poster.jpg" role="mt-4 mb-5"]
+video::/assets/videos/gallery/html5/video1.mp4[poster="/assets/videos/gallery/video1-poster.1920.jpg" role="mt-4 mb-5"]
 
 .VideoJS Video Player
-videojs::/assets/videos/gallery/html5/video1.mp4[poster="/assets/videos/gallery/video1-poster.jpg" role="mt-4 mb-5"]
+videojs::/assets/videos/gallery/html5/video1.mp4[poster="/assets/videos/gallery/video1-poster.1920.jpg" role="mt-4 mb-5"]
 
 
 [role="mt-5"]
@@ -342,7 +342,7 @@ Stations, it's a must to publish videos of their shows on YouTube. Find below
 a real classic channel *Carpool Karaoke* presented by the frontman _James Corden_
 of *The Late Late Show* at CBS, Los Angeles.
 
-.James Cordon and Adele
+.Carpool Karaoke Channel
 gallery::jg_video_online_youtube_james_and_adele[role="mt-4 mb-5"]
 
 
@@ -354,7 +354,7 @@ storage per week. Alternately, you can book on paid plans: Plus, PRO, Business.
 Each membership has varied storage limits, but the free plan offers sufficient
 space for private projects to present video content without advertising.
 
-.Fashion
+.Forever 21 Channel
 gallery::jg_video_online_vimeo[role="mt-4 mb-5"]
 
 
@@ -367,7 +367,7 @@ length of 60 minutes. If a user is a MotionMaker or MotionPartner, a program
 for particularly creative users or partners, they can upload videos of
 unlimited length.
 
-.SELF Magazine
+.SELF Channel
 gallery::jg_video_online_dailymotion[role="mt-4 mb-5"]
 
 

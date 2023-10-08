@@ -1,0 +1,30 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/themes/j1/modules/lightGallery/css/plugins/lg-fullscreen.css
+ # Provides lightGallery styles for the plugin lgFullscreen
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2020 Sachin Neravath
+ # Copyright (C) 2023 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
+
+/*!
+ * lightgallery | 2.7.2 | September 20th 2023
+ * http://www.lightgalleryjs.com/
+ * Copyright (c) 2020 Sachin Neravath;
+ * @license GPLv3
+ */
+
+.lg-fullscreen:after {
+  content: "\e20c";
+}
+
+.lg-fullscreen-on .lg-fullscreen:after {
+  content: "\e20d";
+}
