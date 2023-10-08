@@ -1404,6 +1404,7 @@ resources:
                                           modules/videojs/js/video,
                                           modules/videojs/js/plugins/dm/dailymotion,
                                           modules/videojs/js/plugins/vm/vimeo,
+                                          modules/videojs/js/plugins/wt/wistia,
                                           modules/videojs/js/plugins/yt/youtube
                                         ]
         init_function:                  []

@@ -221,7 +221,7 @@ sizes in an aesthetically pleasing and functional way.
         }'>
           <img id="slide_4" class="img-responsive" src="/assets/videos/gallery/video1-poster.jpg">
       </a>
-      <div class="caption">Peck Pocketed - by Kevin Herron</div>
+      <div class="caption">Student Academy Award Winning <b>Peck Pocketed</b> by Kevin Herron</div>
     </div>
   </div>
 
@@ -269,7 +269,7 @@ made at it's best.
       <img
         class="speak2me-ignore" src="/assets/videos/gallery/video1-poster.jpg"
         img=""
-        alt="<p>Student Academy Award Winning <b>Peck Pocketed</b> by Kevin Herron</p>">
+        alt="Student Academy Award Winning <b>Peck Pocketed</b> by Kevin Herron">
       <span>
         <img
           class="justified-gallery img-overlay speak2me-ignore"
@@ -277,7 +277,7 @@ made at it's best.
           alt="Play Button">
       </span>
       <div class="jg-caption">
-        <p>Student Academy Award Winning <b>Peck Pocketed</b> by Kevin Herron</p>
+        Student Academy Award Winning <b>Peck Pocketed</b> by Kevin Herron
       </div>
   </a>
 
@@ -304,7 +304,7 @@ made at it's best.
           alt="Play Button">
       </span>
       <div class="jg-caption">
-        <p>Rollin Wild - Short Funny Animated Clips created at the Film Academy</p>
+        Rollin Wild - Short Funny Animated Clips created at the Film Academy
       </div>
   </a>
 
