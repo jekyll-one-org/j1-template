@@ -1310,7 +1310,7 @@ resources:
     resource:
       enabled:                          true
 
-      id:                               justifiedGallery
+      id:                               justifiedgallery
       comment:                          Module J1 JustifiedGallery
       region:                           head
       layout:                           [ home, page, post, collection, blog_archive, raw, app ]
@@ -1339,7 +1339,7 @@ resources:
     resource:
       enabled:                          true
 
-      id:                               lightGallery
+      id:                               lightgallery
       comment:                          Module J1 LightGallery V2
       region:                           head
       layout:                           [ all ]
@@ -1376,12 +1376,12 @@ resources:
   # ----------------------------------------------------------------------------
   # VideoJS Player, JS API|Player for HTML5 video content
   #
-  - name:                               VideoJS Player
+  - name:                               VideoJS
     resource:
       enabled:                          true
 
-      id:                               video_js
-      comment:                          Module VideoJS Player
+      id:                               videojs
+      comment:                          Module VideoJS
       region:                           head
       layout:                           [ all ]
       required:                         ondemand
@@ -1409,6 +1409,28 @@ resources:
                                         ]
         init_function:                  []
 
+  # ----------------------------------------------------------------------------
+  # Dailymotion Player, Version v-0.0.3352-rc1 for Dailymotion Video content
+  #
+  - name:                               Dailymotion Player
+    resource:
+      enabled:                          true
+
+      id:                               dailymotionplayer
+      comment:                          Module Dailymotion Player
+      region:                           head
+      layout:                           [ all ]
+      required:                         ondemand
+      preload:                          false
+      script_load:                      defer
+      dependencies:                     false
+      pass_init_data:                   false
+
+      data:
+        css:                            []
+        files:                          [ modules/videojs/js/plugins/vm/api/dailymotion.player.min.js ]
+        js:                             []
+        init_function:                  []
 
   # ----------------------------------------------------------------------------
   # Vimeo Player, JS API|Player for Vimeo Video content
@@ -1417,7 +1439,7 @@ resources:
     resource:
       enabled:                          true
 
-      id:                               vimeo_player
+      id:                               vimeoplayer
       comment:                          Module Vimeo Player
       region:                           head
       layout:                           [ all ]
@@ -1431,6 +1453,29 @@ resources:
         css:                            []
         files:                          []
         js:                             [ modules/videojs/js/plugins/vm/api/vimeo ]
+        init_function:                  []
+
+  # ----------------------------------------------------------------------------
+  # Wistia Player, JS API|Player for Wistia Video content
+  #
+  - name:                               Wistia Player
+    resource:
+      enabled:                          true
+
+      id:                               wistiaplayer
+      comment:                          Module Wistia Player
+      region:                           head
+      layout:                           [ all ]
+      required:                         ondemand
+      preload:                          false
+      script_load:                      defer
+      dependencies:                     false
+      pass_init_data:                   false
+
+      data:
+        css:                            []
+        files:                          [ modules/videojs/js/plugins/wt/api/wistia.min.js]
+        js:                             []
         init_function:                  []
 
   # ----------------------------------------------------------------------------

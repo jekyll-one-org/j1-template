@@ -243,6 +243,11 @@
       icon:                             alpha-j-box
       dropdown:
 
+        - title:                        lightGallery
+          href:                         /pages/public/manuals/videojs/lightgallery_api/
+          icon:                         flashlight
+          target:                       _blank
+
         - title:                        Speak2Me
           href:                         https://jekyll.one/pages/public/modules/speak2me/
           icon:                         speaker

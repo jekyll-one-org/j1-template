@@ -1,0 +1,78 @@
+---
+title:                                  YouTube API
+title_extention:                        Interact with and control videos
+tagline:                                Interact with and control videos
+
+date:                                   2020-11-04
+#last_modified:                         2023-01-01
+
+description: >
+                                        YiuTube offered an Application Programming Interface
+                                        that allowed developers to interact with and access various
+                                        features of the Dailymotion platform programmatically.
+keywords: >
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap,
+                                        html, html5, video, support,
+                                        youtube
+
+categories:                             [ Manuals ]
+tags:                                   [ Module, Dailymotion ]
+
+image:
+  path:                                 /assets/images/icons/videojs/videojs-poster.png
+  width:                                1920
+  height:                               1280
+
+regenerate:                             false
+personalization:                        true
+permalink:                              /pages/public/manuals/videojs/youtube_api/
+
+resources:                              [ animate, clipboard, rouge ]
+resource_options:
+  - toccer:
+      collapseDepth:                    3
+  - attic:
+      slides:
+        - url:                          /assets/images/icons/videojs/videojs-poster.png
+          alt:                          VideoJS Poster
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:images-dir:                            {imagesdir}/pages/roundtrip/100_present_images
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+Dailymotion offered an Application Programming Interface (API) that allowed
+developers to interact with and access various features of the Dailymotion
+platform programmatically.
+
+This API enabled developers to integrate Dailymotion's video content, user
+accounts, and other functionalities into their applications, websites, or
+services.
+
+mdi:clock-time-five-outline[24px, md-gray mt-4 mb-5 mr-2]
+*30-60 Minutes* to read
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+
+[role="mt-5"]
+== Youtube Player API

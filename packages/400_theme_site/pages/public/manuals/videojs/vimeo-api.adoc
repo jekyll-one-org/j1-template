@@ -246,8 +246,8 @@ and Opera.
 === Migrate from Froogaloop
 
 Using our old Froogaloop library? See the
-link:docs/migrate-from-froogaloop.md[migration doc] for details on how
-to update your code to use this library.
+link:https://github.com/vimeo/player.js/blob/master/docs/migrate-from-froogaloop.md[migration doc]
+for details on how to update your code to use this library.
 
 [role="mt-4"]
 === Using with a module bundler
@@ -1699,10 +1699,6 @@ player.setTimingSrc(timingObject)
 player.setTimingSrc(timingObject, {role: 'controller'})
 // any update to the player will reflect in the timing object
 ----
-
-See
-link:src/lib/timing-src-connector.types.ts[TimingSrcConnectorOptions]
-for available options.
 
 See this https://salmoro.github.io/vimeo-timing-object-demo/dist[demo app]
 which syncs video playback in real-time for all viewers.

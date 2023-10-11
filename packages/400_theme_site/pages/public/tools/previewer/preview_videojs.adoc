@@ -32,7 +32,7 @@ permalink:                              /pages/public/tools/previewer/videojs/
 resources:                              [
                                           animate,
                                           lightGallery, justifiedGallery,
-                                          video_js
+                                          videojs
                                         ]
 resource_options:
   - attic:
@@ -83,10 +83,11 @@ If you like *one* HTML5 video player for *all* of your video content,
 _VideoJS_ is a good choice. Based on the video tag `<video>` for HTML5,
 several plugins are available to be used for playing videos from the:
 
-* _Vimeo_ Video platform
-* _Dailymotion_ Video platform
 * _YouTube_ Video platform
-* Videos available *locally* on the Web Server
+* _Dailymotion_ Video platform
+* _Wistia_ Video platform
+* _Vimeo_ Video platform
+* _HTML Video_ to play video files available *locally* on the Web Server
 
 [role="mt-5"]
 === YouTube Video
@@ -229,6 +230,7 @@ this option is not available.
 
 .Wistia Video
 wistia::29b0fbf547[role="mt-5 mb-4"]
+// wistia::mwhrulrucj[role="mt-5 mb-4"]
 
 // ++++
 // <div class="gallery-title">Wistia Video</div>

@@ -14,6 +14,7 @@ keywords: >
                                         open source, free, template, jekyll, jekyllone, web,
                                         sites, static, jamstack, bootstrap,
                                         html, html5, image, video, lightbox, gallery,
+                                        youtube, vimeo, wistia, videojs,
                                         lightgallery
 
 categories:                             [ Previewer ]
@@ -30,8 +31,8 @@ permalink:                              /pages/public/tools/previewer/lightgalle
 
 resources:                              [
                                           animate,
-                                          lightGallery, justifiedGallery,
-                                          masonry
+                                          lightgallery, justifiedgallery, masonry,
+                                          videojs, vimeoplayer, wistiaplayer
                                         ]
 resource_options:
   - attic:
@@ -103,22 +104,30 @@ Change the size of your current browser width to see what will happen!
 ====
 
 ++++
-<!-- Image Gallery --->
+<!-- Image Gallery -->
 <div id="old_times" class="gallery justified-gallery mb-5">
-  <a class="speak2me-ignore jg-entry jg-entry-visible" data-sub-html="GrandPa's 80th Birthday" href="/assets/images/modules/gallery/old_times/image_01.jpg">
-    <img class="speak2me-ignore" src="/assets/images/modules/gallery/old_times/image_01.jpg" img="" alt="GrandPa's 80th Birthday">
+  <a class="speak2me-ignore jg-entry jg-entry-visible"
+    data-sub-html="GrandPa's 80th Birthday"
+    href="/assets/images/modules/gallery/old_times/image_01.jpg">
+    <img class="speak2me-ignore" src="/assets/images/modules/gallery/old_times/image_01.jpg" alt="GrandPa's 80th Birthday">
     <div class="jg-caption">GrandPa's 80th Birthday</div>
   </a>
-  <a class="speak2me-ignore jg-entry jg-entry-visible" data-sub-html="GrandPa's 80th Birthday" href="/assets/images/modules/gallery/old_times/image_02.jpg">
-    <img class="speak2me-ignore" src="/assets/images/modules/gallery/old_times/image_02.jpg" img="" alt="GrandPa's 80th Birthday">
+  <a class="speak2me-ignore jg-entry jg-entry-visible"
+    data-sub-html="GrandPa's 80th Birthday"
+    href="/assets/images/modules/gallery/old_times/image_02.jpg">
+    <img class="speak2me-ignore" src="/assets/images/modules/gallery/old_times/image_02.jpg" alt="GrandPa's 80th Birthday">
     <div class="jg-caption">GrandPa's 80th Birthday</div>
   </a>
-  <a class="speak2me-ignore jg-entry jg-entry-visible" data-sub-html="GrandPa's annual journey" href="/assets/images/modules/gallery/old_times/image_03.jpg">
-    <img class="speak2me-ignore" src="/assets/images/modules/gallery/old_times/image_03.jpg" img="" alt="GrandPa's annual journey">
+  <a class="speak2me-ignore jg-entry jg-entry-visible"
+    data-sub-html="GrandPa's annual journey"
+    href="/assets/images/modules/gallery/old_times/image_03.jpg">
+    <img class="speak2me-ignore" src="/assets/images/modules/gallery/old_times/image_03.jpg" alt="GrandPa's annual journey">
     <div class="jg-caption">GrandPa's annual journey</div>
   </a>
-  <a class="speak2me-ignore jg-entry jg-entry-visible" data-sub-html="GrandPa's annual journey" href="/assets/images/modules/gallery/old_times/image_04.jpg">
-    <img class="speak2me-ignore" src="/assets/images/modules/gallery/old_times/image_04.jpg" img="" alt="GrandPa's annual journey">
+  <a class="speak2me-ignore jg-entry jg-entry-visible"
+    data-sub-html="GrandPa's annual journey"
+    href="/assets/images/modules/gallery/old_times/image_04.jpg">
+    <img class="speak2me-ignore" src="/assets/images/modules/gallery/old_times/image_04.jpg" alt="GrandPa's annual journey">
     <div class="jg-caption">GrandPa's annual journey</div>
   </a>
 </div>
@@ -146,8 +155,8 @@ sizes in an aesthetically pleasing and functional way.
 
   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" style="padding-bottom: 2px; padding-left: 2px">
     <div class="card bottom">
-      <!-- YouTube Video, slide item 1 --->
-      <a class="item"
+      <!-- YouTube Video, slide item 1 -->
+      <a class="lg-item"
         data-lg-size="1280-720"
         data-pinterest-text="Pin it3"
         data-tweet-text="lightGallery slide  4"
@@ -156,14 +165,14 @@ sizes in an aesthetically pleasing and functional way.
         data-sub-html="<h4>Visual Soundscapes - Mountains | Planet Earth II | BBC America</h4><p>On the heels of Planet Earth II’s record-breaking Emmy nominations, BBC America presents stunning visual soundscapes from the series' amazing habitats.</p>">
           <img id="slide_1" class="img-responsive" src="https://img.youtube.com/vi/IUN664s7N-c/maxresdefault.jpg">
       </a>
-      <div class="caption">Visual Soundscapes - Mountains | Planet Earth II | BBC America</div>
+      <div class="caption">YouTube &middot; Visual Soundscapes - Mountains |  BBC America</div>
     </div>
   </div>
 
   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" style="padding-bottom: 2px; padding-left: 2px">
     <div class="card bottom">
-      <!-- Vimeo Video --->
-      <a class="item"
+      <!-- Vimeo Video -->
+      <a class="lg-item"
         data-lg-size="1280-720"
         data-pinterest-text="Pin it3"
         data-tweet-text="lightGallery slide  4"
@@ -172,14 +181,14 @@ sizes in an aesthetically pleasing and functional way.
         data-sub-html="<h4>Nature</h4><p>Video by <a target='_blank' href='https://vimeo.com/charliekaye'>Charlie Kaye</a></p>">
           <img id="slide_2" class="img-responsive" src="https://www.lightgalleryjs.com/images/demo/vimeo-video-poster.jpg">
       </a>
-      <div class="caption">Nature Video by Charlie Kaye</div>
+      <div class="caption">Vimeo &middot; Nature Video by Charlie Kaye</div>
     </div>
   </div>
 
   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" style="padding-bottom: 2px; padding-left: 2px">
     <div class="card bottom">
-      <!-- Wistia Video --->
-      <a class="item"
+      <!-- Wistia Video -->
+      <a class="lg-item"
         data-lg-size="1280-720"
         data-pinterest-text="Pin it3"
         data-tweet-text="lightGallery slide  4"
@@ -188,14 +197,14 @@ sizes in an aesthetically pleasing and functional way.
         data-sub-html="<h4>Thank You!</h4><p> Sample Wistia video </p>">
           <img id="slide_3" class="img-responsive" src="https://www.lightgalleryjs.com/images/demo/wistia-video-poster.jpeg">
       </a>
-      <div class="caption">Thank You - Sample Wistia video</div>
+      <div class="caption">Wistia &middot; Thank You</div>
     </div>
   </div>
 
   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" style="padding-bottom: 2px; padding-left: 2px">
     <div class="card bottom">
-      <!-- HTML5 Video --->
-      <a class="item"
+      <!-- HTML5 Video (MP4) -->
+      <a class="lg-item"
         data-lg-size="1280-720"
         data-pinterest-text="Pin it3"
         data-tweet-text="lightGallery slide  4"
@@ -206,22 +215,22 @@ sizes in an aesthetically pleasing and functional way.
             "src":"/assets/videos/gallery/html5/video1.mp4",
             "type":"video/mp4"
           }],
+          "attributes": {
+            "preload": false,
+            "controls": true,
+            "playsinline": false
+          },
           "tracks": [{
             "src": "/assets/videos/gallery/html5/video1.subtitles.vtt",
             "kind":"captions",
             "srclang": "en",
             "label": "English",
             "default": "true"
-          }],
-          "attributes": {
-            "preload": false,
-            "controls": true,
-            "playsinline": true
-          }
+          }]
         }'>
           <img id="slide_4" class="img-responsive" src="/assets/videos/gallery/video1-poster.jpg">
       </a>
-      <div class="caption">Student Academy Award Winning <b>Peck Pocketed</b> by Kevin Herron</div>
+      <div class="caption">MP4 Video &middot; Student Academy Award winning cartoon clip</div>
     </div>
   </div>
 
@@ -239,10 +248,10 @@ played by J1 Template using the HTML5 Video support. Present videos you have
 made at it's best.
 
 ++++
-<!-- HTML5 Video --->
+<!-- HTML5 Video -->
 <div id="video_html5" class="gallery justified-gallery mb-7">
 
-  <a class="item"
+  <a class="lg-item"
     data-lg-size="1280-720"
     data-pinterest-text="Pin it - Slide 1"
     data-tweet-text="lightGallery slide 1"
@@ -281,7 +290,7 @@ made at it's best.
       </div>
   </a>
 
-  <a class="item"
+  <a class="lg-item"
     data-lg-size="1280-720"
     data-pinterest-text="Pin it - Slide 2"
     data-tweet-text="lightGallery slide 2"
@@ -289,7 +298,12 @@ made at it's best.
       "source": [{
         "src":"/assets/videos/gallery/html5/video2.mp4",
         "type":"video/mp4"
-      }]
+      }],
+      "attributes": {
+        "preload": false,
+        "controls": true,
+        "playsinline": true
+      }
     }'
     data-poster="/assets/videos/gallery/video2-poster.jpg"
     data-sub-html="<p>Rollin Wild - Short Funny Animated Clip created at the <b>Film Academy</b></p>">
@@ -345,18 +359,18 @@ $(function() {
       margins: 3
     })
     .on("jg.complete", function () {
-      window.lightGallery(
+      lightGallery(
         document.getElementById("old_times"), {
           plugins: [lgFullscreen, lgRotate, lgThumbnail, lgZoom],
+          download: false,
 //        galleryId: "my_old_times",
-          licenseKey: '0000-0000-000-0000',
+//        licenseKey: '0000-0000-000-0000',
+//        pager: false,
           addClass: 'lg-uno-thumbnails',
           appendThumbnailsTo: '.lg-outer',
           alignThumbnails: 'left',
           animateThumb: false,
           allowMediaOverlap: true,
-//        autoplayFirstVideo: false,
-//        pager: false,
           mobileSettings: {
             controls: false,
             showCloseIcon: false,
@@ -388,11 +402,35 @@ $(function() {
       $grid.imagesLoaded(function() {
         console.log("masonry: imagesLoaded");
         console.log("masonry: fire lightGallery");
+
         lightGallery(document.getElementById("masonry_example"), {
-          selector: '.item',
+          plugins: [lgFullscreen, lgThumbnail, lgVideo],
+          selector: '.lg-item',
+          alignThumbnails: 'left',
+          download: false,
           speed: 500,
           alignThumbnails: 'left',
-          plugins: [lgFullscreen, lgThumbnail, lgVideo]
+          autoplayFirstVideo: false,
+          videojs: true,
+          videojsTheme: 'vjs-theme-uno',
+          videojsOptions: {
+            autoplay: false,
+            controls: true,
+            fluid: true,
+            muted: false,
+            preload: true,
+            playbackRates: [0.25, 0.5, 1, 1.5, 2],
+//            fullscreenToggle: true,
+//            volumePanel: true,
+            controlBar: {
+//              remainingTimeDisplay: true,
+              pictureInPictureToggle: false,
+              skipButtons: {
+                forward:  5,
+                backward: 5
+              }
+            }
+          },
         });
       });
 
@@ -405,11 +443,33 @@ $(function() {
         margins: 3
       })
       .on("jg.complete", function () {
-        window.lightGallery(
+        lightGallery(
           document.getElementById("video_html5"), {
-            selector: '.item',
+            plugins: [lgFullscreen, lgThumbnail, lgVideo],
+            download: false,
+            selector: '.lg-item',
             alignThumbnails: 'left',
-            plugins: [lgFullscreen, lgThumbnail, lgVideo]
+            autoplayFirstVideo: false,
+            videojs: true,
+            videojsTheme: 'vjs-theme-uno',
+            videojsOptions: {
+              autoplay: false,
+              controls: true,
+              fluid: true,
+              muted: false,
+              preload: true,
+              playbackRates: [0.25, 0.5, 1, 1.5, 2],
+//            fullscreenToggle: true,
+//            volumePanel: true,
+              controlBar: {
+//              remainingTimeDisplay: true,
+                pictureInPictureToggle: false,
+                skipButtons: {
+                  forward:  5,
+                  backward: 5
+                }
+              }
+            }
           },
         );
       });

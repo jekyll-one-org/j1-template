@@ -193,7 +193,6 @@
             this.settings = __assign(__assign({}, videoSettings), this.core.settings);
             return this;
         }
-
         Video.prototype.init = function () {
             var _this = this;
             /**
@@ -212,7 +211,6 @@
             // @desc fired immediately after each slide transition.
             this.core.LGel.on(lGEvents.afterSlide + ".video", this.onAfterSlide.bind(this));
         };
-
         /**
          * @desc Event triggered when a slide is completely loaded
          *
@@ -237,7 +235,6 @@
                 this.loadAndPlayVideo(index);
             }
         };
-
         /**
          * @desc Event triggered when video url or poster found
          * Append video HTML is poster is not given
@@ -259,7 +256,6 @@
                 this.gotoNextSlideOnVideoEnd(src, index);
             }
         };
-
         /**
          * @desc fired immediately before each slide transition.
          * Pause the previous video
@@ -275,7 +271,6 @@
                 this.pauseVideo(prevIndex);
             }
         };
-
         /**
          * @desc fired immediately after each slide transition.
          * Play video if autoplayVideoOnSlide option is enabled.
@@ -298,7 +293,6 @@
                 }
             }
         };
-
         Video.prototype.loadAndPlayVideo = function (index) {
             var $slide = this.core.getSlideItem(index);
             var currentGalleryItem = this.core.galleryItems[index];
@@ -316,7 +310,6 @@
         Video.prototype.playVideo = function (index) {
             this.controlVideo(index, 'play');
         };
-
         /**
          * Pause HTML5, Youtube, Vimeo or Wistia videos in a particular slide.
          * @param {number} index - Index of the slide
@@ -324,7 +317,6 @@
         Video.prototype.pauseVideo = function (index) {
             this.controlVideo(index, 'pause');
         };
-
         Video.prototype.getVideoHtml = function (src, addClass, index, html5Video) {
             var video = '';
             var videoInfo = this.core.galleryItems[index]
@@ -382,7 +374,6 @@
             }
             return video;
         };
-
         /**
          * @desc - Append videos to the slide
          *
@@ -404,11 +395,10 @@
                     return videojs($videoElement.get(), this.settings.videojsOptions);
                 }
                 catch (e) {
-                    console.warn('lightGallery: Make sure you have included videojs');
+                    console.error('lightGallery:- Make sure you have included videojs');
                 }
             }
         };
-
         Video.prototype.gotoNextSlideOnVideoEnd = function (src, index) {
             var _this = this;
             var $videoElement = this.core
@@ -430,8 +420,7 @@
                         });
                     }
                     catch (e) {
-                        // jadams:
-                        console.warn('lightGallery: Make sure you have included //github.com/vimeo/player.js');
+                        console.error('lightGallery:- Make sure you have included //github.com/vimeo/player.js');
                     }
                 }
                 else if (videoInfo.wistia) {
@@ -448,13 +437,11 @@
                         });
                     }
                     catch (e) {
-                      // jadams:
-                      console.warn('lightGallery: Make sure you have included //fast.wistia.com/assets/external/E-v1.js');
+                        console.error('lightGallery:- Make sure you have included //fast.wistia.com/assets/external/E-v1.js');
                     }
                 }
             }
         };
-
         Video.prototype.controlVideo = function (index, action) {
             var $videoElement = this.core
                 .getSlideItem(index)
@@ -476,7 +463,7 @@
                     new Vimeo.Player($videoElement.get())[action]();
                 }
                 catch (e) {
-                    console.warn('lightGallery: Make sure you have included //github.com/vimeo/player.js');
+                    console.error('lightGallery:- Make sure you have included //github.com/vimeo/player.js');
                 }
             }
             else if (videoInfo.html5) {
@@ -485,7 +472,7 @@
                         videojs($videoElement.get())[action]();
                     }
                     catch (e) {
-                        console.warn('lightGallery: Make sure you have included videojs');
+                        console.error('lightGallery:- Make sure you have included videojs');
                     }
                 }
                 else {
@@ -504,11 +491,10 @@
                     });
                 }
                 catch (e) {
-                    console.warn('lightGallery: Make sure you have included //fast.wistia.com/assets/external/E-v1.js');
+                    console.error('lightGallery:- Make sure you have included //fast.wistia.com/assets/external/E-v1.js');
                 }
             }
         };
-
         Video.prototype.loadVideoOnPosterClick = function ($el, forcePlay) {
             var _this = this;
             // check slide has poster
@@ -556,12 +542,10 @@
                 this.playVideo(this.core.index);
             }
         };
-
         Video.prototype.onVideoLoadAfterPosterClick = function ($el, index) {
             $el.addClass('lg-video-loaded');
             this.playVideo(index);
         };
-
         Video.prototype.destroy = function () {
             this.core.LGel.off('.lg.video');
             this.core.LGel.off('.video');

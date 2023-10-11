@@ -1,15 +1,15 @@
 ---
-title:                                  VideoJS Player API
-title_extention:                        Interact with and control videos
-tagline:                                Interact with and control videos
+title:                                  VideoJS API
+title_extention:                        Control VideoJS Videos
+tagline:                                Control VideoJS Videos
 
 date:                                   2020-11-04
 #last_modified:                         2023-01-01
 
 description: >
-                                        Video.js is an open-source JavaScript framework for building HTML5 based
+                                        VideoJS is an Open Source JavaScript framework for building HTML5 based
                                         video players on the web. It provides a customizable and extensible platform
-                                        for embedding and controlling video playback within web applications. Video.js
+                                        for embedding and controlling video playback within web applications. VideoJS
                                         is designed to work with HTML5 video and allows developers to create responsive
                                         and feature-rich video players with a wide range of customization options.
 keywords: >
@@ -30,7 +30,7 @@ regenerate:                             false
 personalization:                        true
 permalink:                              /pages/public/manuals/videojs/videojs_api/
 
-resources:                              [ animate, video_js ]
+resources:                              [ animate, clipboard, rouge ]
 resource_options:
   - toccer:
       collapseDepth:                    3
@@ -62,68 +62,65 @@ resource_options:
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [role="dropcap"]
-The J1 Template support playing video on web pages by HTML5 Video, the new
-standard of HTML to show videos on webpages.
+The J1 Template support playing video on web pages, the new standard of HTML5
+to show videos on webpages natively.
 
 HTML5 Video opens the doors to your way of presenting video content. All
-modern browsers support the video tag `<video>` for the HTML5. Browsers have
+modern browsers support the tag `<video>` for playing videos. Browsers have
 a built-in multimedia framework already for decoding and displaying video
 content. No need to use such proprietary software components anymore.
 
 mdi:clock-time-five-outline[24px, md-gray mt-4 mb-5 mr-2]
-*10 Minutes* to read
+*30-60 Minutes* to read
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 [role="mt-5"]
-== VideoJS
-
-Video.js is an open-source JavaScript framework for building HTML5 based
-video players on the web. It provides a customizable and extensible platform
-for embedding and controlling video playback within web applications. Video.js
-is designed to work with HTML5 video and allows developers to create responsive
-and feature-rich video players with a wide range of customization options.
+The VideoJS library is an Open Source JavaScript framework for building HTML5
+based video players on the web. It provides a customizable and extensible
+platform for embedding and controlling video playback within web applications.
 
 Key features and benefits:
 
-Cross-browser compatibility::
-Video.js is designed to work seamlessly across different web browsers,
+Compatibility::
+The library is designed to work seamlessly across different web browsers,
 ensuring that a wide audience can view your videos.
 
-Customizable player skins::
+Skins::
 It is easy to customize the appearance of the video player by changing the
 player skin and applying CSS styles to match the look and feel of your website
 or application.
 
-Plugin system::
-Video.js has a robust plugin system that allows developers to extend its
-functionality. Many community-contributed plugins are available to add
-features like captions, analytics, advertising, and more.
+Plugins::
+The API provides a robust plugin system that allows developers to extend its
+functionality. Many plugins contributed by the community are available to add
+features like captions, analytics, or advertising.
 
 Accessibility::
-The framework is built with accessibility in mind, making it possible to
-create video players compliant with web accessibility standards, such as
-providing support for screen readers and keyboard navigation.
+The framework is built with accessibility in mind. VideoJS is making it
+possible to create video players compliant with web accessibility standards,
+such as providing support for screen readers and keyboard navigation.
 
-Responsive design::
-Video.js can be configured to automatically adapt to different screen sizes
-and orientations, making it suitable for mobile and desktop devices.
+Responsiveness::
+The Player provided can be configured to automatically adapt to different
+screen sizes and orientations, making it suitable for mobile and desktop
+devices.
 
-HTML5 video support::
-It leverages HTML5 video capabilities, allowing you to play videos without
-relying on external plugins like Flash.
+HTML5 video::
+The framework leverages HTML5 video capabilities, allowing you to play
+videos without relying on external plugins like _Flash_.
 
-Streaming support::
-Video.js can be used to stream video content, including progressive download
-and adaptive streaming technologies like HLS (HTTP Live Streaming) and
-DASH (Dynamic Adaptive Streaming over HTTP).
+Streaming::
+The frameowek can be used to stream video conten. This includes progressive
+download and adaptive streaming technologies like HTTP Live Streaming (HLS)
+and Dynamic Adaptive Streaming over HTTP (DASH).
 
-Community and documentation::
-Video.js has an active and supportive community of developers. It also
+Community and Documentation::
+The API has an active and supportive community of developers. It also
 provides extensive documentation and examples to help developers get started
 and troubleshoot any issues.
 
-Video.js is a powerful and versatile tool for integrating video playback
+VideoJS is a powerful and versatile tool for integrating video playback
 into web applications and websites, offering a high degree of flexibility
 and customization. It has gained popularity due to its ease of use and robust
 feature set, making it a popular choice for developers looking to incorporate
@@ -131,4 +128,1543 @@ video content on the web.
 
 
 [role="mt-5"]
-== VideoJS Player API
+== Options Reference
+// See: https://videojs.com/guides/options/
+
+The VideoJS system provides comprehensive documentation on its website,
+which includes detailed information on the available options and
+configurations.
+
+[role="mt-5"]
+=== HTML5 Video Options
+
+[role="mb-4"]
+Each of these options on the HTML video element `video` is also available
+as a guide for all available attributes for the HTML5 standard
+link:https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#Attributes[HTML5 Video Element, {browser-window--new}].
+So, they can be defined in all three manners as outlined in the
+link:https://videojs.com/guides/options/[VideoJS Setup Guide, {browser-window--new}].
+
+[NOTE]
+====
+Typically, defaults are not listed as this is left to browser vendors.
+====
+
+[role="mt-5"]
+==== autoplay
+
+Instead of using the `autoplay` attribute you should pass an `autoplay`
+option to the `videojs` function. The following values are valid:
+
+* a boolean *false* value `false` -- the same as having no attribute on the
+  video element, won't `autoplay`
+* a boolean *true* value `true` -- the same as having attribute on the video
+  element, will use browsers `autoplay`
+* a muted string value of *muted* -- will mute the video element and then
+  manually call `play()` on `loadstart`. This is likely to work.
+* a string value *play* -- will call `play()` on `loadstart`, similar
+  to browsers `autoplay`
+* a string value of *any* -- will call `play()` on `loadstart` and if
+  the promise is rejected it will mute the video element then call `play()`.
+
+To pass the option:
+
+[source, js]
+----
+var player = videojs('my-video', {
+  autoplay: 'muted'
+});
+// or
+player.autoplay('muted');
+----
+
+[NOTE]
+====
+The autoplay attribute and option are *not* a guarantee that your video
+will autoplay. Note, if there is an attribute on the media element the
+option will be ignored.
+====
+
+More info on autoplay support and changes, see the VideoJS blog post at
+link:https://videojs.com/blog/autoplay-best-practices-with-video-js/[Autoplay Best Practices, {browser-window--new}].
+
+[WARNING]
+====
+You cannot pass a string value in the attribute, you must pass it in the
+*VideoJS options*.
+====
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-5 mb-5"]
+|===
+|Type |Default
+
+|`boolean`\|`string`
+|no defaults
+
+|===
+
+[role=" speak2me-ignore mt-4"]
+[[controlbar-remainingtime]]
+==== controlBar.remainingTimeDisplay.displayNegative
+
+By default the remaining time display shows as negative time. To not
+show the negative sign set
+`controlBar.remainingTimeDisplay.displayNegative` to `false`.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`boolean`
+|no defaults
+
+|===
+
+[role="mt-4"]
+==== controls
+
+Determines whether or not the player has controls that the user can
+interact with. Without controls the only way to start the video playing
+is with the attribute autoplay `autoplay` or through the Player API.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`boolean`
+|no defaults
+
+|===
+
+[role="mt-4"]
+==== height
+
+Sets the display height of the video player in pixels.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`number`\|`string`
+|no defaults
+
+|===
+
+[role="mt-4"]
+==== loop
+
+Causes the video to start over as soon as it ends.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`boolean`
+|no defaults
+
+|===
+
+[role="mt-4"]
+==== muted
+
+Will silence any audio by default.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`boolean`
+|no defaults
+
+|===
+
+[role="mt-4"]
+==== poster
+
+A URL to an image that displays before the video begins playing. This is
+often a frame of the video or a custom title screen. As soon as the user
+hits *play* the image will go away.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`string`
+|no defaults
+
+|===
+
+[role="mt-4"]
+==== preload
+
+Suggests to the browser whether or not the video data should begin
+downloading as soon as the video element `<video>` is loaded.
+Supported values are:
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4"]
+|===
+
+|`auto`
+|Start loading the video immediately (if the browser supports it).
+Some mobile devices will *not preload* the video in order to protect
+their users' bandwidth/data usage. +
+
+This is why the value is called *auto* and not something more conclusive
+like the rue value `true`. +
+
+Tip: This tends to be the most common and recommended value as it
+allows the browser to choose the best behavior.
+
+|`metadata`
+|Load only the meta data of the video, which includes information like
+the duration and dimensions of the video. Sometimes, the meta data will
+be loaded by downloading a few frames of video.
+
+|`none`
+|Don't preload any data. The browser will wait until the user hits "play"
+to begin downloading.
+
+|===
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`string`
+|no defaults
+
+|===
+
+[role="mt-4"]
+==== src
+
+The source URL to a video source to embed.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`string`
+|no defaults
+
+|===
+
+[role="mt-4"]
+==== width
+
+Sets the display width of the video player in pixels.
+
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4"]
+|===
+|Type |Default
+
+|`string`\|`number`
+|no defaults
+
+|===
+
+[role="mt-5"]
+[[videojs-specific-options]]
+=== VideoJS-specific Options
+
+Each option is *undefined`* by default unless otherwise specified.
+
+[role="mt-4"]
+==== aspectRatio
+
+Puts the player in link:https://videojs.com/guides/options/#fluid[fluid, {browser-window--new}]
+mode and the value is used when calculating the dynamic size of the player.
+The value should represent a ratio - two numbers separated by a colon (e.g.
+`"16:9"` or `"4:3"`).
+
+Alternatively, the *vjs-* classes `vjs-16-9`, `vjs-9-16`, `vjs-4-3` or
+`vjs-1-1` can be added to the player.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`string`
+|no defaults
+
+|===
+
+[role="mt-4"]
+==== audioOnlyMode
+
+If set audioOnlyMode to true, it asynchronously hides all player components
+except the control bar, as well as any specific controls that are needed
+only for video. This option can be set to *true* or *false* by calling the
+audioOnlyMode method `audioOnlyMode([true|false])` at runtime. When used
+as a setter, it returns a *Promise*. When used as a getter, it returns a
+*Boolean*.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`boolean`
+|`false`
+
+|===
+
+[role="mt-4"]
+==== audioPosterMode
+
+If set audioPosterMode to true, it enables the poster viewer experience by
+hiding the video element and displaying the poster image persistently. This
+option can be set to *true* or *false* by calling  the *audioPosterMode*
+method `audioPosterMode([true|false])` at runtime.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`boolean`
+|`false`
+
+|===
+
+[role="mt-4"]
+==== autoSetup
+
+Prevents the player from running the autoSetup for media elements with the
+*data-setup* attribute.
+
+[NOTE]
+====
+This option must be set globally with `videojs.options.autoSetup = false`
+in the same tick as videojs source is loaded to take effect.
+====
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4"]
+|===
+|Type |Default
+
+|`string`\|`boolean`
+|no defaults
+
+|===
+
+[role="mt-4"]
+==== breakpoints
+
+When used with the link:https://videojs.com/guides/options/#responsive[responsive, {browser-window--new}]
+option,  sets breakpoints that will configure how class names are toggled
+on the player to adjust the UI based on the player's dimensions.
+
+By default, the breakpoints are:
+
+.Default Breakpoints
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4"]
+|===
+|Class Name |Width Range
+
+|`vjs-layout-tiny`
+|0-210
+
+|`vjs-layout-x-small`
+|211-320
+
+|`vjs-layout-small`
+|321-425
+
+|`vjs-layout-medium`
+|426-768
+
+|`vjs-layout-large`
+|769-1440
+
+|`vjs-layout-x-large`
+|1441-2560
+
+|`vjs-layout-huge`
+|2561+
+
+|===
+
+While the class names cannot be changed, the width ranges can be
+configured via an object like this:
+
+[source, js]
+----
+breakpoints: {
+  tiny: 300,
+  xsmall: 400,
+  small: 500,
+  medium: 600,
+  large: 700,
+  xlarge: 800,
+  huge: 900
+}
+----
+
+* The _keys_ of the *breakpoints* object are derived from the associated
+  class names by removing the *vjs-layout-* prefix and any `-` characters.
+* The _values_ of the *breakpoints* object define the max width for a
+  range.
+* Not all keys need to be defined. You can easily override a single
+  breakpoint by passing an object with one key/value pair! Customized
+  breakpoints will be merged with default breakpoints when the player is
+  created.
+
+When the player's size changes, the merged breakpoints will be inspected
+in the size order until a matching breakpoint is found.
+
+That breakpoint's associated class name will be added as a class to the
+player. The previous breakpoint's class will be removed.
+
+See the file *sandbox/responsive.html.example* for an example of a responsive
+player using the default breakpoints.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`object`
+| no defaults
+
+|===
+
+[role="mt-4"]
+==== VideoJS specific children
+
+This option is inherited from the
+link:https://videojs.com/guides/options/#component-options[Component options, {browser-window--new}]
+base class.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4"]
+|===
+|Type |Default
+
+|`array`\|`object`
+|no defaults
+
+|===
+
+[role="mt-4"]
+==== disablePictureInPicture
+
+If disablePictureInPicture is set to *true*, switching the video element
+into picture-in-picture is disabled. The default value is *false*.
+
+This has no effect on Firefox, which implements a proprietary
+picture-in-picture mode which does not implement the standard
+picture-in-picture API.
+
+This does not disable the document picture-in-picture mode which allows
+the player element to put into a PiP window.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`boolean`
+|no defaults
+
+|===
+
+[role="mt-4"]
+==== enableDocumentPictureInPicture [.badge .rounded-pill .bg-danger]#v8.3.0#
+
+If enableDocumentPictureInPicture is set to *true*, the
+link:https://developer.chrome.com/docs/web-platform/document-picture-in-picture/[documentPictureInPicture API, {browser-window--new}]
+will be used for picture-in-picture, if available. Defaults to
+*false*, but may default to *true* when the feature has become
+established.
+
+Currently this is available in Chrome 111+ as an origin trial.
+
+This is a different picture-in-picture mode than has previously been
+available, where the entire player element is windowed rather than just
+the video itself. Since there are scenarios where it would be desirable
+to allow PiP on the player but not PiP on the video alone (such as ads,
+overlays), the *disablePictureInPicture* option *only* disables the
+old-style picture-in-picture mode on the video.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`boolean`
+|no defaults
+
+|===
+
+[role="mt-4"]
+==== experimentalSvgIcons [.badge .rounded-pill .bg-danger]#v8.5.0#
+
+If set *experimentalSvgIcons* to *true*, the icons used throughout the player
+from link:https://github.com/videojs/font[videojs/font, {browser-window--new}]
+will be replaced by SVGs stored in VideoJS. Defaults to *false*, but may
+default to *true* when the feature has become established.
+
+These SVGs were downloaded from link:https://fontawesome.com/icons[Font Awesome, {browser-window--new}]
+and link:https://mui.com/material-ui/material-icons/[Google's Material UI, {browser-window--new}].
+
+You can view all of the icons available by renaming
+link:https://github.com/videojs/video.js/blob/main/sandbox/svg-icons.html.example[sandbox svg-icons example, {browser-window--new}]
+to *sandbox/svg-icons.html*, building VideoJS with the *npm run build* command,
+and opening *sandbox/svg-icons.html* in your browser of choice.
+
+Icons are expected to be added to a *component* inside of the player
+using the link:https://videojs.com/guides/components/#adding-a-component[setIcon, {browser-window--new}]
+method when customizing the player.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`boolean`
+|no defaults
+
+|===
+
+[role="mt-4"]
+==== fluid
+
+When *fluid* is set to *true*, the VideoJS player will have a fluid size.
+In other words, it will scale to fit its container at the video's intrinsic
+aspect ratio, or at a specified
+link:https://videojs.com/guides/options/#aspectRatio[aspectRatio, {browser-window--new}].
+
+Also, if the video tag `<video>` element has the class *vjs-fluid*, this
+option is automatically set to *true*.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`boolean`
+|no defaults
+
+|===
+
+[role="mt-4"]
+==== fullscreen
+
+The object *fullscreen.options* can be set to pass in specific fullscreen
+options. At some point, it will be augmented with *element* and *handler*
+for more functionality.
+
+See the link:https://fullscreen.spec.whatwg.org/#dictdef-fullscreenoptions[Fullscreen API Spec, {browser-window--new}]
+for more details.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`object`
+|{options: {navigationUI: 'hide'}
+
+|===
+
+[role="mt-4"]
+==== id
+
+If provided, and the element does not already have an `id`, this value
+is used as the *id* of the player element.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`string`
+|no defaults
+
+|===
+
+[role="mt-4"]
+==== inactivitytimeout
+
+VideoJS indicates that the user is interacting with the player by way
+of the classes *vjs-user-active* and *vjs-user-inactive* and the
+event *useractive*.
+
+The attribute *inactivityTimeout* determines how many milliseconds of
+inactivity is required before declaring the user inactive. A value of *0*
+indicates that there is no *inactivityTimeout* and the user will never be
+considered *inactive*.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4"]
+|===
+|Type |Default
+
+|`string`\|`number`
+|no defaults
+
+|===
+
+[role="mt-4"]
+==== language
+
+A
+link:https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry[language code, {browser-window--new}]
+matching one of the available languages in the player. This sets
+the initial language for a player, but it can always be changed.
+
+Learn more about link:https://videojs.com/guides/languages[languages, {browser-window--new}]
+in VideoJS.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`string`
+|browser default or *en*
+
+|===
+
+[role="mt-4"]
+==== languages
+
+Customize which languages are available in a player. The keys of this
+object will be
+link:https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry[language codes, {browser-window--new}]
+and the values will be objects with English keys and translated
+values.
+
+Learn more about link:https://videojs.com/guides/languages[languages in VideoJS, {browser-window--new}].
+
+[NOTE]
+====
+Generally, this option is not needed and it would be better to
+pass your custom languages to `videojs.addLanguage()`, so they are
+available in all players!
+====
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4"]
+|===
+|Type |Default
+
+|`array`\|`object`
+|no defaults
+
+|===
+
+[role="mt-4"]
+==== liveui
+
+Allows the player to use the new live ui that includes:
+
+* A progress bar for seeking within the live window
+* A button that can be clicked to seek to the live edge with a circle
+  indicating if you are at the live edge or not.
+
+Without this option the progress bar will be hidden and in its place
+will be text that indicates a *LIVE* playback. There will be no progress
+control and you will not be able click the text to seek to the live
+edge.
+
+[NOTE]
+====
+The attribute *liveui* will default to *true* in future versions.
+====
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`boolean`
+|`false`
+
+|===
+
+[role="mt-4"]
+[[livetrackertrackingthreshold]]
+==== liveTracker.trackingThreshold
+
+An option for the liveTracker component of the player that controls when
+the liveui should be shown. By default if a stream has less than 20s on
+the seekBar then we do not show the new liveui even with the liveui
+option set.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4"]
+|===
+|Type |Default
+
+|`number`
+|20
+
+|===
+
+[role="mt-4"]
+[[livetrackerlivetolerance]]
+==== liveTracker.liveTolerance
+
+An option for the liveTracker component of the player that controls how
+far from the seekable end should be considered live playback. By default
+anything further than 15s from the live seekable edge is considered
+behind live and everything else is considered live. Any user interaction
+to seek backwards will ignore this value as a user would expect.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4"]
+|===
+|Type |Default
+
+|`number`
+|15
+
+|===
+
+[role="mt-4"]
+==== nativeControlsForTouch
+
+Explicitly set a default value for the associated
+link:https://videojs.com/guides/options/#nativecontrolsfortouch[tech option, {browser-window--new}].
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`boolean`
+|no defaults
+
+|===
+
+[role="mt-4"]
+==== normalizeAutoplay
+
+Specify whether setting *autoplay* to *true* and the video element
+`<video autoplay>` should be treated the same as `autoplay: 'play'`,
+i.e. the *autoplay* attribute should be removed from (or not added to)
+the video element and play method `play()` be initiated manually by VideoJS
+rather than the browser.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`boolean`
+|no defaults
+
+|===
+
+[role="mt-4"]
+==== notSupportedMessage
+
+Allows overriding the default message that is displayed when VideoJS
+cannot play back a media source.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`string`
+|no defaults
+
+|===
+
+[role="mt-4"]
+==== noUITitleAttributes
+
+Control whether UI elements have a *title* attribute. A *title*
+attribute is shown on mouse hover, which can be helpful for usability,
+but has drawbacks for accessibility. Setting the attribute *noUITitleAttributes*
+to *true* prevents the *title* attribute from being added to UI elements,
+allowing for more accessible tooltips to be added to controls by a
+plugin or external framework.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`boolean`
+|`false`
+
+|===
+
+[role="mt-4"]
+==== playbackRates
+
+An array of numbers strictly greater than 0, where 1 means regular speed
+(100%), 0.5 means half-speed (50%), 2 means double-speed (200%), etc. If
+specified, VideoJS displays a control (of the class *vjs-playback-rate*
+`vjs-playback-rate`) allowing the user to choose playback speed from among
+the array of choices. The choices are presented in the specified order from
+bottom to top.
+
+For example:
+
+[source, js]
+----
+videojs('my-player', {
+  playbackRates: [0.5, 1, 1.5, 2]
+});
+----
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`array`
+| no defaults
+
+|===
+
+[role="mt-4"]
+==== plugins
+
+This supports having plugins be initialized automatically with custom
+options when the player is initialized - rather than requiring you to
+initialize them manually.
+
+[source, js]
+----
+videojs('my-player', {
+  plugins: {
+    foo: {bar: true},
+    boo: {baz: false}
+  }
+});
+----
+
+The above is roughly equivalent to:
+
+[source, js]
+----
+var player = videojs('my-player');
+
+player.foo({bar: true});
+player.boo({baz: false});
+----
+
+[NOTE]
+====
+Although, since the *plugins* option is an object, the order of initialization
+is not guaranteed!
+====
+
+See the link:https://videojs.com/guides/plugins[Plugins Guide, {browser-window--new}]
+for more information on VideoJS plugins.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4"]
+|===
+|Type |Default
+
+|`array`\|`object`
+|no defaults
+
+|===
+
+[role="mt-4"]
+==== preferFullWindow
+
+Setting this to *true* will change fullscreen behaviour on devices which
+do not support the HTML5 fullscreen API but do support fullscreen on the
+video element, i.e. _iPhone_. Instead of making the video fullscreen, the
+player will be stretched to fill the browser window.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`boolean`
+|`false`
+
+|===
+
+[role="mt-4"]
+==== responsive
+
+Setting this option to *true* will cause the player to customize itself
+based on responsive breakpoints. Find more on the
+link:https://videojs.com/guides/options/#breakpoints[breakpoints, {browser-window--new}]
+option.
+
+When this option is *false* (the default), responsive breakpoints will be
+ignored.
+
+[NOTE]
+====
+Note this is about the responsiveness of the controls within the player,
+not responsive sizing of the pplayer itself. For that, see
+link:https://videojs.com/guides/options/#fluid[fluid, {browser-window--new}].
+====
+
+.Breakpoint Defaults
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`boolean`
+|`false`
+
+|===
+
+[role="mt-4"]
+==== restoreEl
+
+If set restoreEl to *true*, a *copy* of the placeholder element will be made
+before the player is initalised. If the player is disposed, the copy is
+put back into the DOM in the player's place.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`boolean`\|`element`
+|`false`
+
+|===
+
+[role="mt-4"]
+==== skipbuttons [.badge .rounded-pill .bg-danger]#v8.2.0#
+
+Add missing description.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4"]
+|===
+|Type |Default
+
+|`array`\|`object`
+|no defaults
+
+|===
+
+[role="mt-4"]
+[[skipbuttonsforward]]
+==== skipButtons.forward [.badge .rounded-pill .bg-danger]#v8.2.0#
+
+If specified, VideoJS displays a control allowing the user to jump
+forward in a video by the specified number of seconds.
+
+The following values are valid: *5 | 10 | 30*
+
+[source, js]
+----
+videojs('my-player', {
+  controlBar: {
+    skipButtons: {
+      forward: 5
+    }
+  }
+});
+----
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4"]
+|===
+|Type |Default
+
+|`number`
+|no defaults
+
+|===
+
+[role="mt-4"]
+[[skipbuttonsbackward]]
+==== skipButtons.backward [.badge .rounded-pill .bg-danger]#v8.2.0#
+
+If specified, VideoJS displays a control allowing the user to jump back
+in a video by the specified number of seconds.
+
+The following values are valid: *5 | 10 | 30*
+
+[source, js]
+----
+videojs('my-player', {
+  controlBar: {
+    skipButtons: {
+      backward: 10
+    }
+  }
+});
+----
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4"]
+|===
+|Type |Default
+
+|`number`
+|no defaults
+
+|===
+
+[role="mt-4"]
+==== sources
+
+An array of objects that mirror the native video element's `<video>`
+capability to have a series of child source elements `<source>`. This
+should be an array of objects with the *src* and *type* properties.
+
+For example:
+
+[source, js]
+----
+videojs('my-player', {
+  sources: [{
+    src: '//path/to/video.mp4',
+    type: 'video/mp4'
+  }, {
+    src: '//path/to/video.webm',
+    type: 'video/webm'
+  }]
+});
+----
+
+Using source elements `<source>` will have the same effect:
+
+[source, html]
+----
+<video ...>
+  <source src="//path/to/video.mp4" type="video/mp4">
+  <source src="//path/to/video.webm" type="video/webm">
+</video>
+----
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4"]
+|===
+|Type |Default
+
+|`array`
+|no defaults
+
+|===
+
+[role="mt-4"]
+==== suppressNotSupportedError
+
+If set suppressNotSupportedError to *true*, then the no compatible source
+error will not be triggered immediately and instead will occur on the first
+user interaction. This is useful for Google's *mobile friendly* test tool,
+which can't play video but where you might not want to see an error
+displayed.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4"]
+|===
+|Type |Default
+
+|`boolean`
+|`false`
+
+|===
+
+[role="mt-4"]
+==== techCanOverridePoster
+
+Gives the possibility to techs to override the player's poster and
+integrate into the player's poster life-cycle. This can be useful when
+multiple techs are used and each has to set their own poster any time a
+new source is played.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4"]
+|===
+|Type |Default
+
+|`boolean`
+|`false`
+
+|===
+
+[role="mt-4"]
+==== techOrder
+
+Defines the order in which VideoJS techs are preferred. By default,
+this means that the *Html5* tech is preferred. Other registered techs
+will be added after this tech in the *order* in which they are registered.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4"]
+|===
+|Type |Default
+
+|`array`
+|['html5']
+
+|===
+
+[role="mt-4"]
+==== userActions
+
+Configure handlers to call on specific events.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4"]
+|===
+|Type |Default
+
+|`array`\|`object`
+|no defaults
+
+|===
+
+[role="mt-4"]
+===== click
+
+Control *click* how clicking on the player (tech) operates. If the *click*
+action is set to *false*, clicking is disabled and will no longer cause the
+player to toggle between paused and playing. If controls are disabled by
+setting controls to *false* `controls: false`, this will not call the
+handler function.
+
+[source, js]
+----
+videojs('my-player', {
+  userActions: {
+    click: false
+  }
+});
+----
+
+If the action *click* is undefined or set to *true*, clicking is enabled and
+toggles the player between paused and play. To override the default click
+handling, set the  action *click* to a function which accepts a *click* event.
+In the following example, it will request Full Screen, the same as a the
+*doubleClick* event.
+
+[source, js]
+----
+function myClickHandler(event) = {
+  // `this` is the player in this context
+  if (this.isFullscreen()) {
+    this.exitFullscreen();
+  } else {
+    this.requestFullscreen();
+  }
+};
+
+videojs('my-player', {
+  userActions: {
+    click: myClickHandler
+  }
+});
+----
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4"]
+|===
+|Type |Default
+
+|`boolean`\|`function`
+|`false`
+
+|===
+
+
+[role="mt-4"]
+===== doubleClick
+
+Control *doubleClick* how double-clicking on the player/tech operates.
+If the *doubleClick* action is set to *false*, double-clicking is disabled.
+If undefined or set to *true*, double-clicking is enabled and toggles
+fullscreen mode. To override the default double-click handling, set
+*doubleClick* to a function which accepts a *dblclick* event.
+
+[source, js]
+----
+function myDoubleClickHandler(event) = {
+  // `this` is the player in this context
+  this.pause();
+};
+
+videojs('my-player', {
+  userActions: {
+    doubleClick: myDoubleClickHandler
+  }
+});
+----
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4"]
+|===
+|Type |Default
+
+|`boolean`\|`function`
+|`false`
+
+|===
+
+[role="mt-4"]
+===== hotkeys
+
+Control *hotkeys* how the player-wide hotkeys operate. If the *hotkeys* actions
+are set to *false*, or *undefined*, hotkeys are disabled. If is set to *true*
+or an object -- to allow definitions of *fullscreenKey* -- hotkeys are enabled
+as described below.
+
+To override the default hotkey handling, set *hotkeys* to a function which
+accepts a *keydown* event. If controls are disabled ba setting controls to
+*false* `controls: false`, this will not call the related handler function.
+
+[source, js]
+----
+var player = videojs('my-player', {
+  userActions: {
+      hotkeys: function(event) {
+        // `this` is the player in this context
+        // `x` key = pause
+      if (event.which === 88) {
+       this.pause();
+      }
+      // `y` key = play
+      if (event.which === 89) {
+       this.play();
+     }
+   }
+ }
+});
+----
+
+Default hotkey handling is:
+
+.Default hotkey handling
+[cols="2a,2a,8a", width="100%", options="header", role="rtable mt-4"]
+|===
+|Key |Action |Enabled by
+
+|`f`
+|toggle fullscreen
+|only enabled if a Fullscreen button is present in the Control Bar
+
+|`m`
+|toggle mute
+|always enabled, even if no Control Bar is present
+
+|`k`
+|toggle play/pause
+|always enabled, even if no Control Bar is present
+
+|`Space`
+|toggle play/pause |always enabled, even if no Control Bar is
+present
+
+|===
+
+Hotkeys require player focus first. Note that the *Space* key activates
+controls such as buttons and menus if that control has keyboard focus.
+The other hotkeys work regardless of which control in the player has
+focus.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4"]
+|===
+|Type |Default
+
+|`boolean`\|`function`\|`object`
+|`false`
+
+|===
+
+[role="mt-4"]
+===== fullscreenKey
+
+Override the *fullscreenKey* hotkey definition. If this is set, the
+function receives the *keydown* event. If the function returns *true*,
+then the fullscreen toggle action is performed.
+
+[source, js]
+----
+var player = videojs('my-player', {
+  userActions: {
+    hotkeys: {
+      muteKey: function(event) {
+        // disable mute key
+      },
+      fullscreenKey: function(event) {
+        // override fullscreen to trigger when pressing the v key
+        return (event.which === 86);
+      }
+    }
+  }
+});
+----
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4"]
+|===
+|Type |Default
+
+|`function`
+|no defaults
+
+|===
+
+[role="mt-4"]
+===== muteKey
+
+Override the *muteKey* key definition. If muteKey is set, the function
+receives the *keydown* event. If the function returns *true*, then the
+mute toggle action is performed.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4"]
+|===
+|Type |Default
+
+|`function`
+|no defaults
+
+|===
+
+[role="mt-4"]
+===== playPauseKey
+
+Override the hotkey *playPauseKey* definition. If playPauseKey definition
+is set, the function receives the *keydown* event. If the function
+returns *true*, then the play or pause toggle action is performed.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4"]
+|===
+|Type |Default
+
+|`function`
+|no defaults
+
+|===
+
+[role="mt-4"]
+==== vttjs
+
+Allows overriding the default URL to vtt.js, which may be loaded
+asynchronously to polyfill support for *WebVTT*.
+
+This option will be used in the "novtt" build of VideoJS (i.e.
+*video.novtt.js*). Otherwise, vtt.js is bundled with VideoJS.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4"]
+|===
+|Type |Default
+
+|`string` (URL)
+|no defaults
+
+|===
+
+
+[role="mt-5"]
+=== Component Options
+
+The VideoJS player is a component. Like all components, you can define
+what children it includes, what order they appear in, and what options
+are passed to them.
+
+This is meant to be a quick reference; so, for more detailed information
+on components in VideoJS, check out the
+link:https://videojs.com/guides/components[Components Guide, {browser-window--new}].
+
+[role="mt-4"]
+==== Component children
+
+If an *Array* -- which is the default -- this is used to determine which
+children (by component name) and in which order they are created on a
+player (or other component).
+
+[source, js]
+----
+// The following code creates a player with ONLY bigPlayButton and
+// controlBar child components.
+videojs('my-player', {
+  children: [
+    'bigPlayButton',
+    'controlBar'
+  ]
+});
+----
+
+The *children* options can also be passed as an *object*. In this case,
+it is used to provide *options* for any/all children, including
+disabling them with *false*.
+
+[source, js]
+----
+// This player's ONLY child will be the controlBar. Clearly, this is not the
+// ideal method for disabling a grandchild!
+videojs('my-player', {
+  children: {
+    controlBar: {
+      fullscreenToggle: false
+    }
+  }
+});
+----
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`array`\|`object`
+| no defaults
+
+|===
+
+[role="mt-4"]
+[[componentName]]
+==== ${componentName}
+
+Components can be given custom options via the _lower-camel-case variant
+of the component name_ (e.g. *controlBar* for *ControlBar*). These can
+be nested in a representation of grandchild relationships. For example,
+to disable the fullscreen control:
+
+[source, js]
+----
+videojs('my-player', {
+  controlBar: {
+    fullscreenToggle: false
+  }
+});
+----
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`object`
+| no defaults
+
+|===
+
+
+[role="mt-5"]
+=== Tech Options
+
+In VideoJS, a *tech* is a key component responsible for handling media
+playback. The tech is an *abstraction layer* between the player and the
+underlying technology for playing a video. It allows the framwork to support
+various video technologies -- for example HTML5 video, YouTube Video,
+Vimeo video, HLS, or DASH. Users of VideoJS does not need to worry about
+the specific implementation details of each technology.
+
+[NOTE]
+====
+The J1 Template system provides several plugins that implements *Tech*
+plugins to be used for playing videos:
+
+* _YouTube_ Video platform
+* _Dailymotion_ Video platform
+* _Wistia_ Video platform
+* _Vimeo_ Video platform
+====
+
+A *tech* for the VideoJS framework typically consists of *JavaScript code*
+that provides a common API for controlling and interacting with the video
+element, regardless of the underlying technology.
+
+This abstraction layer simplifies the process of building and customizing
+video *players*, as developers can work with a consistent interface no matter
+what playback technology -- YouTube for example -- is being used.
+
+[role="mt-4"]
+[[techName]]
+==== ${techName}
+
+For VideoJS, playback technologies can be given as custom options as a part
+of the options passed to the *videojs* function or the video HTML element
+`video`. They should be passed under the *lower-case* variant of a tech name
+like *html5*.
+
+Example:
+
+[source, html, role="noclip"]
+----
+<video
+  id="videojs_id"
+  class="video-js vjs-theme-city"
+  controls
+  width="640" height="360"
+  poster="/assets/videos/gallery/youtube_poster.jpg"
+  data-setup='{
+    "techOrder": [
+      "youtube", "html5"
+    ],
+    "sources": [{
+      "type": "video/youtube",
+      "src": "//youtube.com/watch?v=AeEYQ62t8hA"
+    }],
+    "controlBar": {
+      "pictureInPictureToggle": false
+    }
+  }'
+>
+</video>
+----
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`object`
+| no defaults
+
+|===
+
+[role="mt-4"]
+==== html5
+
+Tech option for (native) HTML5 videos.
+
+[role="mt-4"]
+[[nativecontrolsfortouch-1]]
+===== nativeControlsForTouch
+
+The nativeControlsForTouch option is only supported by the *Html5* tech. This
+option can be set to *true* to force native controls for touch devices.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`boolean`
+| no defaults
+
+|===
+
+[role="mt-4"]
+===== nativeAudioTracks
+
+Option nativeAudioTracks cab be set to *false* to disable native audio track
+support. Most commonly used with
+link:https://github.com/videojs/videojs-contrib-hls[videojs-contrib-hls, {browser-window--new}].
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`boolean`
+| no defaults
+
+|===
+
+[role="mt-4"]
+===== nativeTextTracks
+
+Set nativeTextTracks to *false* to force emulation of text tracks instead of
+native support. The *nativeCaptions* option also exists, but is simply
+an alias to *nativeTextTracks*.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`boolean`
+| no defaults
+
+|===
+
+[role="mt-4"]
+===== nativeVideoTracks
+
+If nativeVideoTracks is set to *false*, native video track support is
+*disabled*. Most commonly used with
+link:https://github.com/videojs/videojs-contrib-hls[videojs-contrib-hls, {browser-window--new}].
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`boolean`
+| no defaults
+
+|===
+
+[role="mt-4"]
+===== preloadTextTracks
+
+Can be set to *false* to delay loading of non-active text tracks until
+use. This can cause a short delay when switching captions during which
+there may be missing captions.
+
+The default behavior is to preload all text tracks.
+
+[cols="4a,8a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`boolean`
+| no defaults
+
+|===

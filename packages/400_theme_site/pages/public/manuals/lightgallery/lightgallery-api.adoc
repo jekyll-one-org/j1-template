@@ -1,0 +1,1798 @@
+---
+title:                                  lightGallery
+title_extention:                        control lightGallery
+tagline:                                control lightGallery
+
+date:                                   2020-11-04
+#last_modified:                         2023-01-01
+
+description: >
+                                        lightGallery provides a modular JavaScript image and
+                                        video lightbox gallery plugin built with most modern
+                                        technologies available to achieve the best performance
+                                        and quality and supports all modern browsers.
+                                        The lightbox comes with a lot of settings, events, and
+                                        methods to customize the gallery without touching the
+                                        core code.
+keywords: >
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap,
+                                        html, html5, video, support, videojs,
+                                        lightGallery
+
+categories:                             [ Manuals ]
+tags:                                   [ Module, lightGallery ]
+
+image:
+  path:                                 /assets/images/modules/attics/1920x1280/josh-liu.jpg
+  width:                                1920
+  height:                               1280
+
+regenerate:                             false
+personalization:                        true
+permalink:                              /pages/public/manuals/videojs/lightgallery_api/
+
+resources:                              [ animate, clipboard, rouge ]
+resource_options:
+  - toccer:
+      collapseDepth:                    2
+  - attic:
+      slides:
+        - url:                          /assets/images/modules/attics/1920x1280/josh-liu.jpg
+          alt:                          Photo by Josh Liu on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Josh Liu
+            href:                       https://unsplash.com/@joshtw
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:images-dir:                            {imagesdir}/pages/roundtrip/100_present_images
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+lightGallery provides a modular JavaScript image and video lightbox gallery
+plugin built with most modern technologies available to achieve the best
+performance and quality and supports all modern browsers.
+
+The lightbox comes with a lot of settings, events, and methods to customize
+the gallery without touching the core code.
+
+mdi:clock-time-five-outline[24px, md-gray mt-4 mb-5 mr-2]
+*30-60 Minutes* to read
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+// See: https://www.lightgalleryjs.com/docs/settings/
+
+[role="mt-5"]
+== Settings
+lightGallery accepts two parameters, an HTML element as the first parameter
+and library settings as the second parameter. You need to pass settings only
+if you want to modify default behaviors
+
+[source, js]
+----
+lightGallery(
+  document.getElementById('gallery-container-id'), {
+  speed: 500,
+  mode: 'lg-fade',
+  ...
+});
+----
+
+[role="mt-5"]
+=== Examples
+
+Note that all examples given with the following sections are focussing the
+J1 Template system and may *not* useable in general.
+
+[role="mt-5"]
+=== Core
+
+The library lightGallery comes with modular architecture. All the basic
+functionalities are available in the core module. You need to include plugins
+such if you need additional functionalities such as thumbnails, vide support,
+zoom, etc.
+
+Here you can find all lightGallery *core* settings.
+
+[role="mt-4"]
+==== addClass
+
+Add custom class for gallery container This can be used to set different
+style for different galleries
+
+Type: string +
+Default: ""
+
+[role="mt-4"]
+==== allowMediaOverlap
+
+If true, toolbar, captions and thumbnails will not overlap with media
+element This will not effect thumbnails if animateThumb is false Also,
+toggle thumbnails button is not displayed if allowMediaOverlap is false
+
+[NOTE]
+====
+Changing the position of the media on every slide transition
+creates a flickering effect. Therefore, the height of the caption is
+calculated dynamically, only once based on the first slide caption.
+
+If you have dynamic captions for each media, you can provide an
+appropriate height for the captions via `allowMediaOverlap` option.
+====
+
+boolean +
+false
+
+[role="mt-4"]
+===== appendCounterTo
+
+Where the counter should be appended.
+
+string +
+".lg-toolbar"
+
+[role="mt-4"]
+==== appendSubHtmlTo
+
+Control where the sub-html should be appended. If you choose
+'.lg-outer', you are responsible for placing the div at the right
+position. '.lg-outer' is useful if you want show custom HTML outside the
+normal gallery
+
+.lg-sub-html .lg-item .lg-outer +
+".lg-sub-html"
+
+[role="mt-4"]
+==== ariaDescribedby
+
+Set the attribute `aria-describedby` for a gallery.
+
+Type:     string +
+Default:  ""
+
+[role="mt-4"]
+==== ariaLabelledby
+
+Set the attribute `aria-labelledby` for a gallery.
+
+Type:     string +
+Default:  ""
+
+[role="mt-4"]
+==== backdropDuration
+
+Backdrop transition duration. Note - Do not change the value of backdrop
+via css.
+
+number +
+300
+
+[role="mt-4"]
+==== closable
+
+If set to `false`, the  user won't be able to close the gallery at all.
+This is useful for creating *inline* galleries.
+
+boolean +
+true
+
+[role="mt-4"]
+==== closeOnTap
+
+Allows clicks on black area to close gallery.
+
+boolean +
+true
+
+[role="mt-4"]
+==== container
+
+Configure where the gallery should be appended. Useful to create inline
+galleries and more It is an empty string in the default settings and
+later assigned to document.body to avoid accessing document for SSR
+
+Type:  +
+Default
+
+[role="mt-4"]
+==== controls
+
+If set to `false`, prev/next buttons will not be displayed.
+
+boolean +
+true
+
+[role="mt-4"]
+==== counter
+
+Whether to show total number of images and index number of currently
+displayed image.
+
+boolean +
+true
+
+[role="mt-4"]
+==== defaultCaptionHeight
+
+Height of the caption for calculating allowMediaOverlap positions.
+
+[NOTE]
+====
+This is only used to find the position of media item if allowMediaOverlap
+is set to `true`, not for setting height of the captions. Set 0 if you want
+to calculate the height of captions dynamically.
+====
+
+number +
+0
+
+[role="mt-4"]
+==== download
+
+Enables the download button.
+
+By default download url will be taken from data-src/href attribute but
+it supports only for modern browsers. If you want you can provide
+another url for download via data-download-url. pass false in
+data-download-url if you want to hide download button for the particular
+slide.
+
+boolean +
+true
+
+[role="mt-4"]
+==== dynamic
+
+LightGallery can be instantiated and launched programmatically by
+setting this option to true and populating dynamicEl option (see below)
+with the definitions of images.
+
+boolean +
+false
+
+[role="mt-4"]
+==== dynamicEl
+
+An array of objects (src, iframe, subHtml, thumb, poster, responsive,
+srcset sizes) representing gallery elements.
+
+Type: Array +
+Default: []
+
+
+[role="mt-4"]
+==== easing
+
+Slide animation CSS easing property.
+
+string +
+"ease"
+
+[role="mt-4"]
+==== enableDrag
+
+Enables desktop mouse drag support.
+
+boolean +
+true
+
+[role="mt-4"]
+==== enableSwipe
+
+Enables swipe support for touch devices.
+
+boolean +
+true
+
+[role="mt-4"]
+==== escKey
+
+Whether the LightGallery could be closed by pressing the *Esc* key.
+
+boolean +
+true
+
+[role="mt-4"]
+==== exThumbImage
+
+Option to fetch different thumbnail image other than first image
+
+If you want to use external image for thumbnail, add the path of that
+image inside *data-* attribute and set value of this option to the name
+of your custom attribute.
+
+Type: string +
+Default: ""
+
+[source, html]
+----
+<div id="lightGallery">
+  <a
+    href="a.jpg"
+    data-external-thumb-image="images/externalThumb.jpg">
+      <img src="thumb.jpg">
+  </a>
+</div>
+
+<script>
+  lightGallery(document.getElementById('lightGallery'), {
+    exThumbImage: 'data-external-thumb-image'
+  });
+</script>
+----
+
+[role="mt-4"]
+==== extraProps
+
+Fetch custom properties from the selector. This settings is useful for
+plugin development.
+
+By default, lightGallery fetches and store all the props selectors to
+reduce frequent dom interaction for fetching props every time. If you
+need any addition data to be fetched and stored in the galleryItems
+variable, you can do this just by passing the prop names via extraProps.
+
+Type: Array +
+Default: []
+
+[source, html]
+----
+<div id="lightGallery">
+  <a href="a.jpg" data-custom-prop="abc"><img src="thumb.jpg"></a>
+  <a href="a.jpg" data-custom-prop="xyz"><img src="thumb.jpg"></a>
+</div>
+
+<script>
+  lightGallery(document.getElementById('lightGallery'), {
+    extraProps: ['customProp']
+  });
+
+  // Note:
+  // If you are using dynamic mode, you can pass any custom
+  // prop in the galleryItem
+  lightGallery(document.getElementById('lightGallery'), {
+    dynamic: true,
+    dynamicEl: [{
+      src: 'img/img1.jpg',
+      customProp:'abc'
+    }]
+  });
+</script>
+----
+
+[role="mt-4"]
+==== getCaptionFromTitleOrAlt
+
+Option to get captions from alt or title tags.
+
+boolean +
+true
+
+[role="mt-4"]
+==== height
+
+Height of the gallery. Examples: *100%* , *300px*
+
+string +
+"100%"
+
+[role="mt-4"]
+==== hideBarsDelay
+
+Delay for hiding gallery controls in ms. Pass *0* if you don't want to
+hide the controls.
+
+number +
+0
+
+[role="mt-4"]
+==== hideControlOnEnd
+
+If set to `true`, prev/next button will be hidden on first/last image.
+
+[NOTE]
+====
+This option will be ignored if `loop` or `slideEndAnimation` is
+set to `true`.
+====
+
+boolean +
+false
+
+[role="mt-4"]
+==== hideScrollbar [.badge .rounded-pill .bg-danger]#v2.5.0#
+
+Hide scrollbar when gallery is opened.
+
+Type:     boolean +
+Defaulr:  false +
+Version:  *V2.5.0* and upper
+
+[role="mt-4"]
+==== iframeHeight
+
+Set height of the iframe.
+
+string +
+"100%"
+
+[role="mt-4"]
+==== iframeMaxHeight
+
+Set max height of the iframe.
+
+string +
+"100%"
+
+[role="mt-4"]
+==== iframeMaxWidth
+
+Set max width of the iframe.
+
+string +
+"100%"
+
+[role="mt-4"]
+==== iframeWidth
+
+Set width of the iframe.
+
+string +
+"100%" +
+
+[role="mt-4"]
+==== index
+
+Specify which slide should be loaded initially.
+
+number +
+0
+
+[role="mt-4"]
+==== isMobile
+
+Function to detect mobile devices.
+
+Type: function +
+Default: undefined
+
+[role="mt-4"]
+==== keyPress
+
+Enable keyboard navigation.
+
+boolean +
+true
+
+[role="mt-4"]
+==== licenseKey
+
+If you are using lightGallery for commercial projects, you need to
+purchase a commercial license to get the license key. If you want
+to test lightGallery before purchasing a commercial license, you
+can use `0000-0000-000-0000` as a temporary license key.
+
+[NOTE]
+====
+For projects that are compatible with GPLv3 license, please contact
+contact@lightgalleryjs.com for getting a license key.
+====
+
+string +
+"0000-0000-000-0000"
+
+[role="mt-4"]
+==== loadYouTubePoster
+
+Automatically load poster image for *YouTube* videos.
+
+boolean +
+true
+
+[role="mt-4"]
+==== loop
+
+If set to `false`, this will disable the ability to loop back to the
+beginning of the gallery from the last slide.
+
+boolean +
+true
+
+[role="mt-4"]
+==== mobileSettings
+
+Separate settings for mobile devices.
+
+Type:     Partial
+Default:  { controls: false, showCloseIcon: false, download: false } as MobileSettings
+
+[NOTE]
+====
+This is applied only at the time of loading by default controls
+and close buttons are disabled on mobile devices. Use this options if
+you want to enable them or change any other settings for mobile devices
+
+`mobileSettings` does not merge default values. You need to provide
+all mobileSettings including default values
+====
+
+[role="mt-4"]
+==== mode
+
+Type of the transition between images.
+
+Type:     string
+Default:  "lg-slide"
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4"]
+|===
+|Transition |Description
+
+|`lg-slide`
+|
+
+|`lg-fade`
+|
+
+|`lg-zoom-in`
+|
+
+|`lg-zoom-in-big`
+|
+
+|`lg-zoom-out`
+|
+
+|`lg-zoom-out-big`
+|
+
+|`lg-zoom-out-in`
+|
+
+|`lg-zoom-in-out`
+|
+
+|`lg-soft-zoom`
+|
+
+|`lg-scale-up`
+|
+
+|`lg-slide-circular`
+|
+
+|`lg-slide-circular-vertical`
+|
+
+|`lg-slide-vertical`
+|
+
+|`lg-slide-vertical-growth`
+|
+
+|`lg-slide-skew-only`
+|
+
+|`lg-slide-skew-only-rev`
+|
+
+|`lg-slide-skew-only-y`
+|
+
+|`lg-slide-skew-only-y-rev`
+|
+
+|`lg-slide-skew`
+|
+
+|`lg-slide-skew-rev`
+|
+
+|`lg-slide-skew-cross`
+|
+
+|`lg-slide-skew-cross-rev`
+|
+
+|`lg-slide-skew-ver`
+|
+
+|`lg-slide-skew-ver-rev`
+|
+
+|`lg-slide-skew-ver-cross`
+|
+
+|`lg-slide-skew-ver-cross-rev`
+|
+
+|`lg-lollipop`
+|
+
+|`lg-lollipop-rev`
+|
+
+|`lg-rotate`
+|
+
+|`lg-rotate-rev`
+|
+
+|`lg-tube`
+|
+
+|===
+
+[role="mt-4"]
+==== mousewheel
+
+Enables the ability to navigate to next/prev slides on mousewheel.
+
+boolean +
+false
+
+[role="mt-4"]
+==== nextHtml
+
+Custom HTML code for the *next* control.
+
+Type:     string +
+Default:  ""
+
+[role="mt-4"]
+==== numberOfSlideItemsInDom
+
+Control how many slide items should be kept in *DOM* at a time.
+
+To improve performance by reducing the number of gallery items in the DOM.
+lightGallery keeps only the lowest possible number of slides at a time.
+This setting has a minimum value of *3*.
+
+number +
+10
+
+[role="mt-4"]
+==== plugins
+
+lightGalley plugins to load.
+
+Type:     Array
+Default:  []
+
+[role="mt-4"]
+==== preload
+
+Number of preload slides.
+
+It will execute after the current slide is fully loaded. For example,
+if you click on the 4th image and preload is set to *1*, then the 3rd
+slide and 5th slide will be loaded in the background after the 4th slide
+is fully loaded. If preload is two then 2nd 3rd, 5th 6th slides will
+be preload.
+
+number +
+2
+
+[role="mt-4"]
+==== prevHtml
+
+Custom HTML code for the *prev* control.
+
+Type:     string
+Default:  ""
+
+[role="mt-4"]
+==== resetScrollPosition [.badge .rounded-pill .bg-danger]#v2.5.0#
+
+Reset to previous scrollPosition when lightGallery is closed.
+
+By default, lightGallery doesn't hide the scrollbar for a smooth opening
+transition. If a user changes the scroll position, lightGallery resets
+it to the previous value
+
+Type:     boolean +
+Defaulr:  true +
+Version:  *V2.5.0* and upper
+
+[role="mt-4"]
+==== selectWithin
+
+By default selector element relative to the current gallery. Instead of
+that you can tell lightGallery to select element relative to another
+element.
+
+Example - '.my-selector-container' | '#my-selector-container'
+In the code this become selector =
+document.querySelector(this.s.selectWithin
+).querySelectorAll(this.s.selector);
+
+Type:     string
+Default:  ""
+
+[role="mt-4"]
+==== selector
+
+Custom selector property instead of direct children.
+
+// Wrong type !!!
+Type:     string +
+Defaul:   ""
+
+Based on your markup structure, you can specify custom selectors to
+fetch media data for the gallery Pass "this" to select same element You
+can also pass HTMLCollection directly Example - '.my-selector' |
+'#my-selector' | this | document.querySelectorAll('.my-selector')
+
+[role="mt-4"]
+==== showBarsAfter
+
+Delay in hiding controls for the first time when gallery is opened.
+
+number +
+10000
+
+[role="mt-4"]
+==== showCloseIcon
+
+If false, close button won't be displayed. Useful for creating inline
+galleries.
+
+boolean +
+true
+
+[role="mt-4"]
+==== showMaximizeIcon
+
+Show icon maximized. Useful for creating *inline* galleries.
+
+boolean +
+false
+
+[role="mt-4"]
+==== slideDelay
+
+Delay slide transitions. This is useful if you want to do any action
+in the current slide before moving to next slide.
+
+For example, fading out the captions before going to next slide.
+`.lg-slide-progress` class name is added to the current slide
+immediately after calling the slide method. But transition begins
+only after the delay
+
+number +
+0
+
+[role="mt-4"]
+==== slideEndAnimation
+
+Enable slideEnd animation.
+
+boolean +
+true
+
+[role="mt-4"]
+==== speed
+
+Transition duration (ms).
+
+number +
+400
+
+[role="mt-4"]
+==== startAnimationDuration
+
+Zoom from image animation duration.
+
+number +
+400
+
+[role="mt-4"]
+==== startClass
+
+Start animation class for the gallery.
+
+* The startClass property will be empty, if the value of `zoomFromOrigin` is `true`
+* This can be used to change the starting effect when the image is loaded
+* This is also applied when navigating to new slides
+
+string +
+"lg-start-zoom"
+
+[role="mt-4"]
+==== strings
+
+Customize lightGallery strings. This can be useful if you want to localize
+the lightGallery strings to other languages.
+
+Use your own service to translate the strings and pass
+it via settings.strings You can find dedicated strings option for all
+lightGallery modules in their respective documentation. Note - You need
+to provide values for all the strings. For example, even if you just
+want to change the closeGallery string, you need to provide all the
+other strings as well.
+
+LightGalleryCoreStrings +
+{ closeGallery: 'Close gallery',
+  toggleMaximize: 'Toggle maximize',
+  previousSlide: 'Previous slide',
+  nextSlide: 'Next slide',
+  download: 'Download',
+  playVideo: 'Play video',
+  mediaLoadingFailed: 'Oops... Failed to load content...'
+} as LightGalleryCoreStrings
+
+
+[role="mt-4"]
+==== subHtmlSelectorRelative
+
+Set to `true`, if the selector in *data-sub-html* prpoerty should be used
+for the *current* item as its *origin*.
+
+boolean +
+false
+
+[role="mt-4"]
+==== supportLegacyBrowser
+
+Support legacy browsers.
+
+Currently this is used only for adding support to srcset attribute via
+picturefill library. If set to `true`, lightGallery will show a warning
+message to include the *picturefill* library.
+
+boolean +
+true
+
+[role="mt-4"]
+==== swipeThreshold
+
+By setting the swipeThreshold (px), you can control how far the user must
+swipe for the *next/prev* image.
+
+number +
+50
+
+[role="mt-4"]
+==== swipeToClose
+
+Allows vertical drag/swipe to close gallery `false`, if option `closable`
+is `false`.
+
+boolean +
+true
+
+[role="mt-4"]
+==== trapFocus [.badge .rounded-pill .bg-danger]#v2.5.0#
+
+Trap focus within the lightGallery.
+
+Type:     boolean +
+Default:  true +
+Version:  *V2.5.0* and upper
+
+[role="mt-4"]
+==== videoMaxSize
+
+Video max size.
+
+This can be overwritten by passing specific size via *data-lg-size*
+attribute. Recommended video resolution and  aspect ratios can be found
+at https://support.google.com/youtube/answer/6375112[Google Support] pages.
+
+string +
+"1280-720"
+
+[role="mt-4"]
+==== width
+
+Width of the gallery. Example: *100%* , *300px*.
+
+string +
+"100%"
+
+[role="mt-4"]
+==== zoomFromOrigin
+
+Enable zoom from origin effect.
+
+You need to know the original image size upfront and provide it via
+data-lg-size attribute as ` data-lg-size="1920-1280`" If you don't know,
+the size of a few images in the list, you can skip the data-lg-size
+attribute for the particular slides, lightGallery will show the default
+animation if data-lg-size is not available If you are using responsive
+images, you can pass a comma separated list of sizes combined with a
+max-width (up to what size the particular image should be used).
+
+Examples
+
+* data-lg-size="240-160-375, 400-267-480, 1600-1067"
+*  data-responsive="img-240.jpg 375, img-400.jpg 480"
+*  data-src="img-1600.jpg"
+
+In the above example, upto 375 width img.240.jpg and lg-size 240-160
+will be used. Similarly, upto 480 pixel width size 400-267 and
+img-400.jpg will be used And above 480, lg-size 1600-1067 and
+img-1600.jpg will be used.
+
+* At the moment, zoomFromOrigin options is supported only for image slides.
+* Will be false if dynamic option is enabled or galleryID found in the URL.
+* startClass will be empty if zoomFromOrigin is true to avoid css conflicts.
+
+boolean +
+true
+
+[role="mt-5"]
+=== Plugins
+
+LightGallery plugins enable additional functionalities for the lightbiox.
+
+
+[role="mt-5"]
+==== Zoom
+
+[role="mb-4"]
+The Zoom plugins enable functionalities like pinch to zoom, double-tap,
+or double click to see the actual size, zoom in, zoom out.
+
+[NOTE]
+====
+You need to include Zoom plugin in the document to use the following options.
+====
+
+[role="mt-5"]
+===== actualSize
+
+Enable actual size icon.
+
+boolean +
+true
+
+[role="mt-4"]
+===== actualSizeIcons
+
+Actual size icons classnames. Specify classnames for both ZoomIn and
+ZoomOut states You can use:
+
+* actualSizeIcons: {zoomIn: 'lg-actual-size', zoomOut: 'lg-zoom-out'}
+
+to show actual size icons instead of zoom in and zoom out icons.
+
+Type:     ActualSizeIcons
+Default:  `{ zoomIn: 'lg-zoom-in', zoomOut: 'lg-zoom-out', } as ActualSizeIcons`
+
+
+[role="mt-4"]
+===== enableZoomAfter
+
+Once the slide transition is completed, how much time should take zoom
+plugin to activate.
+
+Some css styles will be added to the images if zoom is enabled. So it
+might conflict if you add any custom styles to the images such as the
+initial transition while opening the gallery. So you can delay adding
+zoom related styles to the images by changing the value of
+enableZoomAfter.
+
+number +
+300
+
+[role="mt-4"]
+===== infiniteZoom
+
+Enable/Disable infinite zoom.
+
+If you set this to true, you can zoom in more than the original size of
+the image.
+
+boolean +
+true
+
+[role="mt-4"]
+===== scale
+
+Value of zoom should be incremented/decremented.
+
+number +
+1
+
+[role="mt-4"]
+===== showZoomInOutIcons
+
+Show zoom in, zoom out icons.
+
+boolean +
+false
+
+[role="mt-4"]
+===== zoom
+
+Enable/Disable zoom option.
+
+boolean +
+true
+
+[role="mt-4"]
+===== zoomPluginStrings
+
+Custom translation strings for aria-labels.
+
+Type:     ZoomStrings
+Dedault:  { zoomIn: 'Zoom in',
+            zoomOut: 'Zoom out',
+            viewActualSize: 'View actual size'
+          } as ZoomStrings
+
+[role="mt-5"]
+==== Thumbnails
+
+Thumbnails plugins is required to generate thumbnails for your gallery.
+It supports features like animated thumbnails, automatically load
+thumbnails from external videos, and more.
+
+[NOTE]
+====
+You need to include Thumbnails plugin in the document to
+use the following options.
+====
+
+[role="mt-4"]
+===== alignThumbnails
+
+Position of thumbnails when the width of all thumbnails combined is less
+than the gallery's width.
+
+left middle right +
+"middle"
+
+[role="mt-4"]
+===== animateThumb
+
+*Add description*
+
+boolean +
+true
+
+[role="mt-4"]
+===== appendThumbnailsTo
+
+Control where the thumbnails should be appended. By default, thumbnails
+are appended to `.lg-components` which has inbuilt open close transitions.
+
+If you don't want initial thumbnails transitions, or want to do more
+customization, you can append thumbnails to the lightGalley outer `<div>`
+element.
+
+Type:      string +
+Options:   `.lg-components`, `.lg-outer` +
+Default:   `.lg-components`
+
+Example:
+
+[source, js]
+----
+lightGallery (
+  document.getElementById("<gallery-id>"), {
+    plugins: [lgThumbnail],
+    addClass: 'lg-uno-thumbnails',
+    alignThumbnails: 'left',
+    appendThumbnailsTo: '.lg-outer'
+  }
+})
+----
+
+[role="mt-4"]
+===== enableThumbDrag
+
+Enables desktop mouse drag support for thumbnails.
+
+boolean +
+true
+
+[role="mt-4"]
+===== enableThumbSwipe
+
+Enables thumbnail touch/swipe support for touch devices.
+
+boolean +
+true
+
+[role="mt-4"]
+===== loadYouTubeThumbnail
+
+You can automatically load thumbnails for *YouTube* videos from the platform
+by setting loadYouTubeThumbnail to `true`.
+
+boolean +
+true
+
+[role="mt-4"]
+===== thumbHeight
+
+Height of each thumbnails.
+
+string +
+"80px"
+
+[role="mt-4"]
+===== thumbMargin
+
+Spacing between the thumbnails.
+
+number +
+5
+
+[role="mt-4"]
+===== thumbWidth
+
+Width of each thumbnail.
+
+number +
+100
+
+[role="mt-4"]
+===== thumbnail
+
+Enable thumbnails for the gallery.
+
+boolean +
+true
+
+[role="mt-4"]
+===== thumbnailPluginStrings
+
+Custom translation strings for *aria-labels*.
+
+Type:     ThumbnailStrings
+Default:  {toggleThumbnails: 'Toggle thumbnails'} as ThumbnailStrings
+
+[role="mt-4"]
+===== thumbnailSwipeThreshold
+
+By setting the thumbnailSwipeThreshold (px), you can set how far the
+user must swipe for the next/prev slide.
+
+number +
+10
+
+[role="mt-4"]
+===== toggleThumb
+
+Enable toggle captions and thumbnails. Not applicable if `allowMediaOverlap`
+is set to `false`.
+
+boolean +
+false
+
+[role="mt-4"]
+===== youTubeThumbSize
+
+You can specify the thumbnail size by setting respective number.
+
+number +
+1
+
+[role="mt-5"]
+==== Video
+
+The Video plugin is required to display videos in lightGallery. Video plugin
+supports, YouTube, Vimeo, Wistia, and HTML5 videos.
+
+[NOTE]
+====
+You need to include Video plugin in the document to use the following options.
+Additionally it is required to include
+https://github.com/vimeo/player.js/[player.js] for Vimeo videos and
+https://wistia.com/support/developers/player-api[Wistia player API] for
+Wistia videos on your docment to enable video player feature like
+automatic play pause, automatically navigate to next slide when video
+ended.
+====
+
+[role="mt-4"]
+===== autoplayFirstVideo
+
+Enable/Disable first video autoplay.
+
+Autoplay has to be managed using this setting. Autoplay in PlayerParams
+doesn't have any effect.
+
+boolean +
+true
+
+[role="mt-4"]
+===== autoplayVideoOnSlide
+
+Autoplay video on slide change. Make sure you set preload: "none".
+
+boolean +
+false
+
+[role="mt-4"]
+===== gotoNextSlideOnVideoEnd
+
+Go to next slide when video is ended.
+
+[NOTE]
+====
+This doesn't work with YouTube videos at the moment.
+====
+
+boolean +
+true
+
+[role="mt-4"]
+===== videojs
+
+Enable the VideoJS custom video player.
+
+[NOTE]
+====
+You need to include https://videojs.com/[videoJs] on your document
+to enable videojs player
+====
+
+boolean +
+false
+
+[role="mt-4"]
+===== videojsOptions
+
+Videojs player options.
+
+Type:     string (any player option)
+Default:  ""
+
+[role="mt-4"]
+===== videojsTheme [.badge .rounded-pill .bg-danger]#v2.5.0#
+// Adjust description for j1 template
+
+Class name of the videojs theme You need to include the theme stylesheet
+on your document.
+
+Type:     string +
+Default:  "" +
+Version:  *V2.5.0* and upper
+
+[role="mt-4"]
+===== vimeoPlayerParams
+
+Change Vimeo player parameters. You can find the list of vimeo player
+parameters from the following link
+https://developer.vimeo.com/player/embedding#universal-parameters[Vimeo player]
+parameters.
+
+[source, js]
+----
+lightGallery(document.getElementById('lightGallery'), {
+    vimeoPlayerParams: {
+        byline : 0,
+        portrait : 0,
+        color : 'CCCCCC'
+    }
+})
+----
+
+Type:     PlayerParams
+Default:  false
+
+[role="mt-4"]
+===== wistiaPlayerParams
+
+Change Wistia player parameters. You can find the list of Wistia player
+parameters from the following link
+https://wistia.com/support/developers/embed-options#using-embed-options[Vimeo player]
+parameters.
+
+Type:     string (any player options)
+Default:  ""
+
+[role="mt-4"]
+===== youTubePlayerParams
+
+Change YouTube player parameters. You can find the list of YouTube
+player parameters from the following link
+https://developers.google.com/youtube/player_parameters[YouTube player]
+parameters.
+
+[source, js]
+----
+lightGallery(document.getElementById('lightGallery'), {
+    youTubePlayerParams: {
+        modestbranding : 1,
+        showinfo : 0,
+        controls : 0
+    }
+})
+----
+
+Type:     string (any player options)
+Default:  ""
+
+[role="mt-5"]
+==== Hash
+
+The Hash plugin lets you provide custom unique URLs for each gallery image.
+This link can be used to share media anywhere on the web.It allows you to
+navigate to different slides via browser back/forward buttons too.
+
+[NOTE]
+====
+You need to include Hash plugin in the document to use the following options.
+====
+
+[role="mt-4"]
+===== customSlideName
+
+Custom slide name to use in the url when hash plugin is enabled.
+
+boolean +
+false
+
+[role="mt-4"]
+===== galleryId
+
+Unique id for each gallery.
+
+It is mandatory when you use hash plugin for multiple galleries on the
+same page.
+
+string +
+"1"
+
+[role="mt-4"]
+===== hash
+
+Enable/Disable hash option.
+
+boolean +
+true
+
+[role="mt-4"]
+==== Autoplay
+
+The Autoplay plugin supports automatic slideshow which can be stopped on
+the first user action. It supports progress bar that indicates the
+duration of the current slide.
+
+[NOTE]
+====
+You need to include Autoplay plugin in the document to use the following options.
+====
+
+[role="mt-4"]
+===== appendAutoplayControlsTo
+
+Specify where the autoplay controls should be appended.
+
+string +
+".lg-toolbar"
+
+[role="mt-4"]
+===== autoplay
+
+Enable autoplay plugin.
+
+boolean +
+true
+
+[role="mt-4"]
+===== autoplayControls
+
+Show/hide autoplay controls.
+
+boolean +
+true
+
+[role="mt-4"]
+===== autoplayPluginStrings
+
+Custom translation strings for *aria-labels*.
+
+Type:     AutoplayStrings
+Default:  {toggleAutoplay: 'Toggle Autoplay'} as AutoplayStrings
+
+Custom translation strings for aria-labels.
+
+[role="mt-4"]
+===== forceSlideShowAutoplay
+
+If false autoplay will be stopped after first user action.
+
+boolean +
+false
+
+[role="mt-4"]
+===== progressBar
+
+Show autoplay progressBar.
+
+boolean +
+true
+
+[role="mt-4"]
+===== slideShowAutoplay
+
+Enable slideshow autoplay.
+
+boolean +
+false
+
+[role="mt-4"]
+===== slideShowInterval
+
+The time (ms) between each auto transition.
+
+number +
+5000
+
+
+[role="mt-5"]
+==== Rotate
+
+Rotate plugin support features like rotate clockwise, rotate
+anticlockwise, flip horizontal, flip vertical with single click.
+
+[NOTE]
+====
+You need to include Rotate plugin in the document to use the following options.
+====
+
+[role="mt-4"]
+===== flipHorizontal
+
+Enable flip horizontal.
+
+boolean +
+true
+
+[role="mt-4"]
+===== flipVertical
+
+Enable flip vertical.
+
+boolean +
+true
+
+[role="mt-4"]
+===== rotate
+
+Enable/Disable rotate option.
+
+boolean +
+true
+
+[role="mt-4"]
+===== rotateLeft
+
+Enable rotate left.
+
+boolean +
+true
+
+[role="mt-4"]
+===== rotatePluginStrings
+
+Custom translation strings for aria-labels.
+
+Type:     RotateStrings
+Default:  {
+            flipVertical: 'Flip vertical',
+            flipHorizontal: 'Flip horizontal',
+            rotateLeft: 'Rotate left',
+            rotateRight: 'Rotate right'} as RotateStrings
+
+[role="mt-4"]
+===== rotateRight
+
+Enable rotate right.
+
+boolean +
+true
+
+[role="mt-4"]
+===== rotateSpeed
+
+Rotate speed in milliseconds.
+
+number +
+400
+
+[role="mt-4"]
+==== Share
+
+The Share plugin allows you to share your images/videos to social media
+platforms such as _Twitter_ or _Facebook_ with unique url. It supports
+adding your own social share button too.
+
+[NOTE]
+====
+You need to include Share plugin in the document touse the following options.
+====
+
+[role="mt-4"]
+===== additionalShareOptions
+
+Array of additional share options. This can be used to build additional
+share options.
+
+Type:     Array +
+Default:  []
+
+[role="mt-4"]
+===== facebook
+
+Enable _Facebook_ share.
+
+boolean +
+true
+
+[role="mt-4"]
+===== facebookDropdownText
+
+Facebook dropdown text.
+
+string +
+"Facebook"
+
+[role="mt-4"]
+===== pinterest
+
+Enable pinterest share.
+
+boolean +
+true
+
+[role="mt-4"]
+===== pinterestDropdownText
+
+Pinterest dropdown text.
+
+string +
+"Pinterest"
+
+[role="mt-4"]
+===== share
+
+Enable/Disable share options.
+
+boolean +
+true
+
+Enable/Disable share options.
+
+[role="mt-4"]
+===== sharePluginStrings
+
+Custom translation strings for *aria-labels*.
+
+Type:     ShareStrings
+Default:  {share: 'Share'} as ShareStrings
+
+[role="mt-4"]
+===== twitter
+
+Enable twitter share.
+
+boolean +
+true
+
+[role="mt-4"]
+===== twitterDropdownText
+
+Twitter dropdown text.
+
+string +
+"Twitter"
+
+
+[role="mt-5"]
+==== Pager
+
+If you prefer minimal layouts, you can use the pagers plugin instead of
+*thumbnails*. Pagers create minimal graphics that represent each slide,
+and hovering over each pager item, shows the correspondent thumbnails.
+
+[NOTE]
+====
+You need to include Pager plugin in the document to use the following options.
+====
+
+[role="mt-4"]
+===== pager
+
+Enable/Disable pager option.
+
+boolean +
+true
+
+
+[role="mt-5"]
+==== FullScreen
+
+The Fullscreen plugin supports native HTML5 fullscreen feature in the
+gallery. You can toggle fullscreen with one click.
+
+[NOTE]
+====
+You need to include FullScreen plugin in the document to use the following options.
+====
+
+[role="mt-4"]
+===== fullScreen
+
+Enable/Disable fullscreen option.
+
+boolean +
+true
+
+[role="mt-4"]
+===== fullscreenPluginStrings
+
+Custom translation strings for *aria-labels*.
+
+Type:     FullscreenStrings
+Default:  {toggleFullscreen: 'Toggle Fullscreen'} as FullscreenStrings
+
+
+[role="mt-5"]
+==== Comment Box
+
+The Comment plugin supports _Facebook_ and _Disqus_ comments out of the box.
+Allows people to comment on slides using their _Facebook_ or _Disqus_
+accounts. You can easily add your own comment widget as well.
+
+[NOTE]
+====
+You need to include Comment box plugin in the document to
+use the following options.
+====
+
+[role="mt-4"]
+===== commentBox
+
+Enable comment box.
+
+boolean +
+false
+
+[role="mt-4"]
+===== commentPluginStrings
+
+Custom translation strings for *aria-labels*.
+
+Type:      CommentStrings
+Default:  {toggleComments: 'Toggle Comments'} as CommentStrings
+
+[role="mt-4"]
+===== commentsMarkup
+
+Facebook comments default markup.
+
+Example:
+
+[source, html]
+----
+<div id="lg-comment-box" class="lg-comment-box lg-fb-comment-box">
+  <div class="lg-comment-header">
+    <h3 class="lg-comment-title">Leave a comment.</h3>
+    <span class="lg-comment-close lg-icon"></span>
+  </div>
+  <div class="lg-comment-body"></div>
+</div>
+----
+
+Type:     string
+Default:  "<div id="lg-comment-box" class="lg-comment-box lg-fb-comment-box"><div
+class="lg-comment-header"><h3 class="lg-comment-title">Leave a
+comment.</h3><span class="lg-comment-close lg-icon"></span></div><div
+class="lg-comment-body"></div></div>"
+
+[role="mt-4"]
+===== disqusComments
+
+Enable disqus comment box.
+
+boolean +
+false
+
+[role="mt-4"]
+===== disqusConfig
+
+Disqus comment config.
+
+boolean +
+false
+
+[role="mt-4"]
+===== fbComments
+
+Enable facebook comment box.
+
+boolean +
+false
+
+[role="mt-5"]
+==== MediumZoom
+
+The MediumZoom plugin helps you create similar zooming experience as
+seen on _Medium_. This is a very basic plugin created just to demonstrate
+the customizability of lightGallery.
+
+[NOTE]
+====
+You need to include  Medium zoom plugin in the document touse the following options.
+====
+
+[role="mt-4"]
+===== backgroundColor
+
+Background color for the gallery This can be overwritten by passing
+background color via `lg-background-color` for each item.
+
+string +
+"#000"
+
+[role="mt-4"]
+===== margin
+
+Space between the gallery outer area and images.
+
+number +
+40
+
+[role="mt-4"]
+===== mediumZoom
+
+Enable/Disable medium like zoom experience.
+
+boolean +
+true
+
+
+[role="mt-5"]
+==== Vimeo Thumbnails [.badge .rounded-pill .bg-danger]#v2.5.0#
+
+Vimeo thumbnails plugin helps you load thumbnails automatically for
+Vimeo videos.
+
+[NOTE]
+====
+You need to include Vimeo Thumbnails plugin in the document to
+use the following options.
+====
+
+[role="mt-4"]
+===== showThumbnailWithPlayButton
+
+Show thumbnails with play button.
+
+boolean +
+false
+
+[role="mt-4"]
+===== showVimeoThumbnails
+
+Auto load thumbnails for Vimeo videos.
+
+boolean +
+true

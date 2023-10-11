@@ -360,23 +360,23 @@
         voiceTags['ul']               = new voiceTag('Start of list.', 'End of list. ');
         voiceTags['dl']               = new voiceTag('Start of list.', 'End of list. ');
         voiceTags['dt']               = new voiceTag('', ', ');
-        voiceTags['img']              = new voiceTag('Start of an embedded image with the description,', ', ');
-        voiceTags['table']            = new voiceTag('Start of an embedded table,', 'This element ist not spoken.');
+        voiceTags['img']              = new voiceTag('Start of an image with the description,', ', ');
+        voiceTags['table']            = new voiceTag('Start of an table element,', 'This element ist not spoken.');
         voiceTags['card-header']      = new voiceTag('', '');
-        voiceTags['.doc-example']     = new voiceTag('Start of an embedded example element,', 'This element ist not spoken.');
+        voiceTags['.doc-example']     = new voiceTag('Start of an example element,', 'This element ist not spoken.');
         voiceTags['.admonitionblock'] = new voiceTag('Start of an attention element of type, ', ':');
-        voiceTags['.listingblock']    = new voiceTag('Start of an embedded structured text block,', 'This element ist not spoken.');
-        voiceTags['.gist']            = new voiceTag('Start of an embedded gist element,', 'This element ist not spoken.');
-        voiceTags['.slider']          = new voiceTag('Start of an embedded slider element,', 'This element ist not spoken.');
-        voiceTags['.masonry']         = new voiceTag('Start of an embedded masonry element,', 'This element ist not spoken.');
-        voiceTags['.lightbox-block']  = new voiceTag('Start of an embedded lightbox element,', 'This element ist not spoken.');
-        voiceTags['.gallery']         = new voiceTag('Start of an embedded gallery element,', 'This element ist not spoken.');
-        voiceTags['.video-js']        = new voiceTag('Start of an embedded video,', '');
-        voiceTags['figure']           = new voiceTag('Start of an embedded figure with the caption,', '');
-        voiceTags['blockquote']       = new voiceTag('Blockquote start.', 'Blockquote end.');
-        voiceTags['quoteblock']       = new voiceTag('Start of an embedded quote block element,', 'Quote block element end.');
+        voiceTags['.listingblock']    = new voiceTag('Start of an structured text block,', 'This element ist not spoken.');
+        voiceTags['.gist']            = new voiceTag('Start of an gist element,', 'This element ist not spoken.');
+        voiceTags['.slider']          = new voiceTag('Start of an slider element,', 'This element ist not spoken.');
+        voiceTags['.masonry']         = new voiceTag('Start of an masonry element,', 'This element ist not spoken.');
+        voiceTags['.lightbox-block']  = new voiceTag('Start of an lightbox element,', 'This element ist not spoken.');
+        voiceTags['.gallery']         = new voiceTag('Start of an gallery element,', 'This element ist not spoken.');
+        voiceTags['.video-js']        = new voiceTag('Start of an video,', '');
+        voiceTags['figure']           = new voiceTag('Start of an figure with the caption,', '');
+        voiceTags['blockquote']       = new voiceTag('Blockquote start,', 'Blockquote end.');
+        voiceTags['quoteblock']       = new voiceTag('Start of an quote block element,', 'Quote block element end.');
 
-        ignoreTags = ['audio','button','canvas','code','del', 'pre', 'dialog','embed','form','head','iframe','meter','nav','noscript','object','picture','s','script','select','style','textarea','video'];
+        ignoreTags = ['audio','button','canvas','code','del', 'pre', 'dialog','embed','form','head','iframe','meter','nav','noscript','object','picture', 'script','select','style','textarea','video'];
 
         // TODO: NOT working for multiple 'tab' windows
         // dispayed in the same browser
@@ -911,8 +911,11 @@
           appended  = voiceTags['table'].append;
 
           if ((copy !== undefined) && (copy != '')) {
-              jQuery('<div>' + prepend + ' ' + copy + '</div>').insertBefore(this);
-              jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+            jQuery('<div>' + prepend + ' ' + copy + '</div>').insertBefore(this);
+            jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+          } else {
+            jQuery('<div>' + prepend  + '</div>').insertBefore(this);
+            jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
           }
 
           jQuery(this).remove();
