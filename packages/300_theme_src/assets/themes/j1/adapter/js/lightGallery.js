@@ -6,15 +6,15 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/justifiedGallery.js
- # Liquid template to create the J1 Adapter for Justified Gallery
+ # ~/assets/themes/j1/adapter/js/lightGallery.js
+ # Liquid template to create the J1 Adapter for lightGallery
  #
  # Product/Info:
  # https://jekyll.one
  #
  # Copyright (C) 2023 Juergen Adams
  #
- # J1 Theme is licensed under the MIT License.
+ # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
 {% endcomment %}
@@ -24,26 +24,26 @@ regenerate:                             true
 
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment           = site.environment %}
-{% assign template_version      = site.version %}
+{% assign environment       = site.environment %}
+{% assign template_version  = site.version %}
 
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config       = site.data.j1_config %}
-{% assign apps                  = site.data.apps %}
-{% assign modules               = site.data.modules %}
+{% assign template_config   = site.data.j1_config %}
+{% assign apps              = site.data.apps %}
+{% assign modules           = site.data.modules %}
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign jf_gallery_defaults   = modules.defaults.justifiedGallery.defaults %}
-{% assign jf_gallery_settings   = modules.justifiedGallery.settings %}
+{% assign lg_defaults       = modules.defaults.lightGallery.defaults %}
+{% assign lg_settings       = modules.lightGallery.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign jf_gallery_options    = jf_gallery_defaults | merge: jf_gallery_settings %}
+{% assign lg_options        = lg_defaults | merge: lg_settings %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -54,20 +54,24 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/justifiedGallery.js
- # JS Adapter for JustifiedGallery
+ # ~/assets/themes/j1/adapter/js/lightGallery.js
+ # JS Adapter for lightGallery
  #
  # Product/Info:
  # https://jekyll.one
  # https://github.com/miromannino/Justified-Gallery
+ # https://github.com/sachinchoolur/lightGallery
  #
+ # Copyright (C) 2020 Miro Mannino
+ # Copyright (C) 2023 Sachin Neravath
  # Copyright (C) 2023 Juergen Adams
- # Copyright (C) 2016 Miro Mannino
  #
- # J1 Theme is licensed under the MIT License.
+ # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # Justified Gallery is licensed under the MIT license
- # See: https://github.com/miromannino/Justified-Gallery
+ # See: https://github.com/miromannino/Justified-Gallery/blob/master/LICENSE
+ # lightGallery is licensed under the GPLv3 license
+ # See: https://github.com/sachinchoolur/lightGallery/blob/master/LICENSE
  # -----------------------------------------------------------------------------
  # Adapter generated: {{site.time}}
  # -----------------------------------------------------------------------------
@@ -79,15 +83,15 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.justifiedGallery = (function (j1, window) {
+j1.adapter.lightGallery = (function (j1, window) {
 
   {% comment %} Global variables
   ------------------------------------------------------------------------------ {% endcomment %}
   var environment   = '{{environment}}';
   var state         = 'not_started';
-  var justifiedGalleryDefaults;
-  var justifiedGallerySettings;
-  var justifiedGalleryOptions;
+  var lightGalleryDefaults;
+  var lightGallerySettings;
+  var lightGalleryOptions;
   var frontmatterOptions;
   var _this;
   var logger;
@@ -111,7 +115,7 @@ j1.adapter.justifiedGallery = (function (j1, window) {
       // Default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
-        module_name: 'j1.adapter.justifiedGallery',
+        module_name: 'j1.adapter.lightGallery',
         generated:   '{{site.time}}'
       }, options);
 
@@ -123,12 +127,12 @@ j1.adapter.justifiedGallery = (function (j1, window) {
       frontmatterOptions  = options != null ? $.extend({}, options) : {};
 
       // Load  module DEFAULTS|CONFIG
-      justifiedGalleryDefaults = $.extend({}, {{jf_gallery_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      justifiedGallerySettings = $.extend({}, {{jf_gallery_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      justifiedGalleryOptions  = $.extend(true, {}, justifiedGalleryDefaults, justifiedGallerySettings, frontmatterOptions);
+      lightGalleryDefaults = $.extend({}, {{lg_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      lightGallerySettings = $.extend({}, {{lg_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      lightGalleryOptions  = $.extend(true, {}, lightGalleryDefaults, lightGallerySettings, frontmatterOptions);
 
-      _this = j1.adapter.justifiedGallery;
-      logger = log4javascript.getLogger('j1.adapter.justifiedGallery');
+      _this = j1.adapter.lightGallery;
+      logger = log4javascript.getLogger('j1.adapter.lightGallery');
 
       var dependencies_met_j1_finished= setInterval(function() {
         var pageState     = $('#no_flicker').css("display");
@@ -143,7 +147,7 @@ j1.adapter.justifiedGallery = (function (j1, window) {
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module is being initialized');
 
-          _this.initialize(justifiedGalleryOptions);
+          _this.initialize(lightGalleryOptions);
           _this.setState('finished');
 
           logger.debug('\n' + 'state: ' + _this.getState());
@@ -158,12 +162,12 @@ j1.adapter.justifiedGallery = (function (j1, window) {
     // Load AJAX data and initialize the jg gallery
     // -----------------------------------------------------------------------
     initialize: function (options) {
-      logger = log4javascript.getLogger('j1.adapter.justifiedGallery');
+      logger = log4javascript.getLogger('j1.adapter.lightGallery');
 
       _this.setState('running');
       logger.debug('\n' + 'state: ' + _this.getState());
 
-      {% for item in jf_gallery_options.galleries %}
+      {% for item in lg_options.galleries %}
         {% if item.gallery.enabled %}
 
           {% assign gallery_id = item.gallery.id %}
@@ -227,7 +231,7 @@ j1.adapter.justifiedGallery = (function (j1, window) {
 
           {% if gallery_type == "image" %}
             // Collect image gallery data from data file (xhr_data_path)
-            $.getJSON('{{jf_gallery_options.xhr_data_path}}', function (data) {
+            $.getJSON('{{lg_options.xhr_data_path}}', function (data) {
               var content = '';
               var gallery_class = 'justified-gallery';
               {% if lightbox == "lg" %}
@@ -257,7 +261,7 @@ j1.adapter.justifiedGallery = (function (j1, window) {
 
             // Collect html5 video gallery data from data file (xhr_data_path)
             //
-            $.getJSON('{{jf_gallery_options.xhr_data_path}}', function (data) {
+            $.getJSON('{{lg_options.xhr_data_path}}', function (data) {
               var play_button = '/assets/themes/j1/modules/lightGallery/css/themes/icons/play-button.png';
               var content = '';
               var gallery_class = 'justified-gallery';
@@ -329,7 +333,7 @@ j1.adapter.justifiedGallery = (function (j1, window) {
               {% if lightbox == "lg" %}
                 var gallery_selector = $('#{{gallery_id}}');
                 if (options !== undefined) {
-                  // lightbox initialized on COMPLETE event of justifiedGallery
+                  // lightbox initialized on COMPLETE event of lightGallery
                   /* eslint-disable */
                   gallery_selector.justifiedGallery({
                     {% for option in item.gallery.gallery_options %}
@@ -342,7 +346,11 @@ j1.adapter.justifiedGallery = (function (j1, window) {
 
                     // options enabled
                     /* eslint-disable */
-                    gallery_selector.lightGallery({
+                    window.lightGallery(
+                      document.getElementById("{{gallery_id}}"), {
+//                    plugins: [lgVideo, lgZoom, lgFullscreen, lgRotate, lgShare, lgThumbnail, lgMediumZoom],
+                      plugins: [lgRotate],
+//                    licenseKey: '0000-0000-000-0000',
                       {% for option in item.gallery.lightbox_options %}
                       {{option[0] | json}}: {{option[1] | json}},
                       {% endfor %}
@@ -370,7 +378,9 @@ j1.adapter.justifiedGallery = (function (j1, window) {
                      e.stopPropagation();
                     // lightbox initialized on COMPLETE event of justifiedGallery
                     /* eslint-disable */
-                    gallery_selector.lightGallery({
+                    window.lightGallery(
+                      document.getElementById("{{gallery_id}}"), {
+                      plugins: [lgVideo],
                       {% for option in item.gallery.lightbox_options %}
                       {{option[0] | json}}: {{option[1] | json}},
                       {% endfor %}
@@ -389,10 +399,6 @@ j1.adapter.justifiedGallery = (function (j1, window) {
                   });
                 }
               {% endif %} // ENDIF lightbox "lg"
-
-              {% if lightbox == "cb" %}
-                // $(this).find('a').colorbox();
-              {% endif %}  // ENDIF lightbox "cb"
 
             }); // END getJSON
           } //end gallery

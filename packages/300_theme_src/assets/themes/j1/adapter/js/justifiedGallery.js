@@ -14,7 +14,7 @@ regenerate:                             true
  #
  # Copyright (C) 2023 Juergen Adams
  #
- # J1 Theme is licensed under the MIT License.
+ # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
 {% endcomment %}
@@ -55,19 +55,19 @@ regenerate:                             true
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/adapter/js/justifiedGallery.js
- # JS Adapter for JustifiedGallery
+ # JS Adapter for Justified Gallery
  #
  # Product/Info:
  # https://jekyll.one
  # https://github.com/miromannino/Justified-Gallery
  #
+ # Copyright (C) 2020 Miro Mannino
  # Copyright (C) 2023 Juergen Adams
- # Copyright (C) 2016 Miro Mannino
  #
- # J1 Theme is licensed under the MIT License.
+ # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # Justified Gallery is licensed under the MIT license
- # See: https://github.com/miromannino/Justified-Gallery
+ # See: https://github.com/miromannino/Justified-Gallery/blob/master/LICENSE
  # -----------------------------------------------------------------------------
  # Adapter generated: {{site.time}}
  # -----------------------------------------------------------------------------

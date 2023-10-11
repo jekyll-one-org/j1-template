@@ -5,7 +5,7 @@
 #   https://jekyll.one
 #
 #   Copyright (C) 2023 Juergen Adams
-#   J1 Theme is licensed under the MIT License.
+#   J1 Template is licensed under the MIT License.
 # ------------------------------------------------------------------------------
 
 # clear && bundle exec jekyll s --incremental -c config/_config.yml --source work/ --destination site

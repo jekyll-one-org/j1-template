@@ -14,7 +14,7 @@ regenerate: true
  #
  # Copyright (C) 2023 Juergen Adams
  #
- # J1 Theme is licensed under the MIT License.
+ # J1 Template is licensed under the MIT License.
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
  # Test data:
@@ -84,7 +84,7 @@ regenerate: true
  #
  # Copyright (C) 2023 Juergen Adams
  #
- # J1 Theme is licensed under the MIT License.
+ # J1 Template is licensed under the MIT License.
  # For details, see {{site.data.template_settings.theme_author_url}}
  # -----------------------------------------------------------------------------
  # NOTE: For AJAX (XHR) loads see

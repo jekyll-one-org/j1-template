@@ -10,7 +10,7 @@
  # Copyright (C) 2023 Juergen Adams
  # Copyright (c) 2011-2018 Felix Gnass
  #
- # J1 Theme is licensed under the MIT License.
+ # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # Spin is licensed under the MIT License.
  # See: https://github.com/fgnass/spin.js/blob/master/LICENSE.md

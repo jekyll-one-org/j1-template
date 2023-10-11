@@ -10,7 +10,7 @@
  # Copyright (C) 2023 Juergen Adams
  # Copyright (C) 2012 Scott Robbin
  #
- # J1 Theme is licensed under the MIT License.
+ # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # Backstretch is licensed under the MIT License.
  # See: https://github.com/jquery-backstretch/jquery-backstretch/blob/2.1.16/LICENSE-MIT

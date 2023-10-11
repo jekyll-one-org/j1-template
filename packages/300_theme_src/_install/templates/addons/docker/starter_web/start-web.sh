@@ -4,7 +4,7 @@
 #   https://jekyll.one
 #
 #   Copyright (C) 2023 Juergen Adams
-#   J1 Theme is licensed under the MIT License.
+#   J1 Template is licensed under the MIT License.
 # ------------------------------------------------------------------------------
 
 docker run --restart=always -d \

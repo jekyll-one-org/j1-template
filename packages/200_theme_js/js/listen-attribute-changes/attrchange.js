@@ -12,7 +12,7 @@
  # Attrchange is licensed under the MIT License.
  # See: https://github.com/meetselva/attrchange/blob/master/MIT-License.txt
  #
- # J1 Theme is licensed under the MIT License.
+ # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
 */

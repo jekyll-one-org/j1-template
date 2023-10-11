@@ -10,7 +10,7 @@
  # Copyright (C) 2023 Juergen Adams
  # Copyright (C) 2015-2019 Lokesh Dhakar
  #
- # J1 Theme is licensed under the MIT License.
+ # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # Lightbox is licensed under the MIT License.
  # See: https://github.com/lokesh/lightbox2/blob/master/LICENSE
