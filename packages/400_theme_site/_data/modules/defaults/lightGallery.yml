@@ -75,7 +75,7 @@ defaults:
   # THUMBNAIL plugin
   #
   thumbnail:
-    enabled:                            false
+    enabled:                            true
     animateThumb:                       true
     currentPagerPosition:               middle
     thumbWidth:                         100

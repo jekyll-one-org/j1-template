@@ -148,8 +148,8 @@ var logText;
         var pageVisible   = (pageState == 'block') ? true: false;
         var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-//      if ( j1.getState() === 'finished' && pageVisible) {
-        if ( j1.getState() === 'finished' && pageVisible && atticFinished) {
+//      if ( j1.getState() === 'finished' && pageVisible && atticFinished) {
+        if ( j1.getState() === 'finished' && pageVisible) {
 
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());
@@ -190,7 +190,7 @@ var logText;
               {% if grid.options.containerStyle %}     {% assign containerStyle      = grid.options.containerStyle %}     {% endif %}
               {% if grid.options.columnWidth %}        {% assign columnWidth         = grid.options.columnWidth %}     {% endif %}
 
-              // create dynamic loader variable to setup the grid on id {{grid.id}}
+              // create dynamic loader variable|s
               dependency = 'dependencies_met_html_loaded_{{grid.id}}';
               load_dependencies[dependency] = '';
 
@@ -230,32 +230,14 @@ var logText;
                       stagger:                "{{stagger_duration}}s",
                       resize:                 {{resize}},
                       gutter:                 {{gutter_size}},
+//                    containerStyle:         "{{containerStyle}}",
+//                    columnWidth:             {{columnWidth}},
                     });
 
                     // run code after all images are loaded with the grid
                     //
                     $grid_{{grid_id}}.imagesLoaded(function() {
-                      console.debug("masonry: images loaded on {{grid_id}}");
-
-                      {% if grid.lightbox.type == 'lg' %}
-                      console.log("masonry: lightGallery detected on id: {{grid_id}}");
-
-                      var lg      = document.getElementById("{{grid_id}}");
-                      var gallery = lightGallery(lg, {
-                        plugins: [lgFullscreen, lgRotate, lgThumbnail],
-                        selector: '.lg-item',
-                        download: false,
-                        alignThumbnails: 'left',
-                      });
-
-                      // jadams, 2023-10-13: do NOT work
-                      // lg.addEventListener('lgInit', (event) => {
-                      //    pluginInstance = event.detail.instance;
-                      //    console.log("masonry: lightGallery initialized on id: {{grid_id}}");
-                      //    logger.info('\n' + 'masonry: lightGallery initialized on id: ' + '{{grid.id}}');
-                      // });
-
-                      {% endif %}
+                      console.log("masonry: imagesLoaded");
                     });
 
                   }, masonryOptions.initTimeout);

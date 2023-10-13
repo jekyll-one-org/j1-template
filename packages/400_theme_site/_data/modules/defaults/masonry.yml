@@ -25,6 +25,34 @@ description:
 defaults:
   enabled:                              false
 
+  gutters:                              3
+
+  # ----------------------------------------------------------------------------
+  # AJAX (HTML)
+  #
+  # The HTML portion of a grid are being read from a HTML file generated
+  # automatically from its configuration for all grids configured.
+  # AJAX methods are used to supply the needed HTML code at the time
+  # a grid is initialized by the JS adapter.
+  #
+  xhr_data_path:                        /assets/data/masonry
+
+  # ----------------------------------------------------------------------------
+  # Lightbox options
+  # ----------------------------------------------------------------------------
+  #
+  lightbox:
+    enabled:                            true
+    type:                               lb                                      # lb | lg
+
+  lightGallery:
+    options:
+      plugins:                          [lgFullscreen, lgThumbnail]
+      selector:                         '.lg-item'
+      alignThumbnails:                  'left'
+      download:                         false
+      speed:                            500
+
   # ----------------------------------------------------------------------------
   # Masonry MODULE options
   # ----------------------------------------------------------------------------
@@ -47,7 +75,7 @@ defaults:
   #  default:                          true
   #
   # ----------------------------------------------------------------------------
-  initTimeout:                          500
+  initTimeout:                          1200
   hideDisabled:                         true
 
   # ------------------------------------------------------------------------
@@ -68,16 +96,6 @@ defaults:
     grayscale:                          1
     contrast:                           1
     brightness:                         1
-
-  # ----------------------------------------------------------------------------
-  # AJAX (HTML)
-  #
-  # The HTML portion of a grid are being read from a HTML file generated
-  # automatically from its configuration for all grids configured.
-  # AJAX methods are used to supply the needed HTML code at the time
-  # a grid is initialized by the JS adapter.
-  #
-  xhr_data_path:                        /assets/data/masonry
 
   # ----------------------------------------------------------------------------
   # Masonry API options

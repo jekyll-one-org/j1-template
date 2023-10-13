@@ -342,24 +342,12 @@ j1.adapter.justifiedGallery = (function (j1, window) {
 
                     // options enabled
                     /* eslint-disable */
-
-                    // lightGallery(
-                    //   document.getElementById("{{gallery_id}}"), {
-                    //   plugins: [lgFullscreen, lgRotate, lgThumbnail],
-                    //   licenseKey: '0000-0000-000-0000',
-                    //   download: false,
-                    //   alignThumbnails: 'left',
-                    //   {% for option in item.gallery.lightbox_options %}
-                    //   {{option[0] | json}}: {{option[1] | json}},
-                    //   {% endfor %}
-                    // });
-
                     lightGallery(
                       document.getElementById("{{gallery_id}}"), {
                       plugins: [lgFullscreen, lgRotate, lgThumbnail],
-                      licenseKey: '0000-0000-000-0000',
-                      download: false,
-                      alignThumbnails: 'left',
+                      {% for option in item.gallery.lightbox_options %}
+                      {{option[0] | json}}: {{option[1] | json}},                      
+                      {% endfor %}
                     });
                     /* eslint-enable */
 

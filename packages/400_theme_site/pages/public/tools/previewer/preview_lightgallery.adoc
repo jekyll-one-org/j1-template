@@ -260,18 +260,18 @@ made at it's best.
         "src":"/assets/videos/gallery/html5/video1.mp4",
         "type":"video/mp4"
       }],
+      "attributes": {
+        "preload": false,
+        "controls": true,
+        "playsinline": true
+      },
       "tracks": [{
         "src": "/assets/videos/gallery/html5/video1.subtitles.vtt",
         "kind":"captions",
         "srclang": "en",
         "label": "English",
         "default": "true"
-      }],
-      "attributes": {
-        "preload": false,
-        "controls": true,
-        "playsinline": true
-      }
+      }]
     }'
     data-poster="/assets/videos/gallery/video1-poster.jpg"
     data-sub-html="<p>Student Academy Award Winning <b>Peck Pocketed</b> by Kevin Herron</p>">
@@ -406,7 +406,6 @@ $(function() {
         lightGallery(document.getElementById("masonry_example"), {
           plugins: [lgFullscreen, lgThumbnail, lgVideo],
           selector: '.lg-item',
-          alignThumbnails: 'left',
           download: false,
           speed: 500,
           alignThumbnails: 'left',
@@ -423,7 +422,7 @@ $(function() {
 //            fullscreenToggle: true,
 //            volumePanel: true,
             controlBar: {
-//              remainingTimeDisplay: true,
+//            remainingTimeDisplay: true,
               pictureInPictureToggle: false,
               skipButtons: {
                 forward:  5,
