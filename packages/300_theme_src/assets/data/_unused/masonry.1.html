@@ -296,11 +296,12 @@ exclude_from_search:                    true
       {% endfor %}
     </div>
     <!-- /Collection|Articles -->
+
     {% endif %}
 
-    {% comment %} Image Grids
+    {% comment %} Bootrap Card Grids
     ---------------------------------------------------------------------------- {% endcomment %}
-    {% if grid.type == 'image' %}
+    {% if grid.type == 'card' %}
 
       {% comment %} Collect CSS image filters
       -------------------------------------------------------------------------- {% endcomment %}
@@ -360,6 +361,101 @@ exclude_from_search:                    true
             {% endif %}
             {% endif %}
           </div>
+        </div>
+        {% endfor %}
+      </div>
+      <!-- /Card Image Grid -->
+    {% endif %}
+
+    {% comment %} IMAGE Image Grids
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% if grid.type == 'image' %}
+
+      {% comment %} Collect CSS image filters
+      -------------------------------------------------------------------------- {% endcomment %}
+      {% assign css_filters   = masonry_options.filters | merge: grid.filters %}
+      {% assign image_filters = 'filter:' %}
+
+      {% if css_filters.enabled %}
+        {% for filter in css_filters %}
+          {% if filter[0] contains 'enabled' %}
+            {% continue %}
+          {% endif %}
+          {% capture image_filters %}{{image_filters}} {{filter[0]}}({{filter[1]}}){% endcapture %}
+        {% endfor %}
+      {% endif %}
+
+      <!-- Image Grid -->
+      <div id="{{grid.id}}" class="row {{grid.id | replace: '_','-' }} g-0">
+        {% for image in grid.images %}
+        <div class="col-xl-{{masonry_options.responsive.xl}} col-lg-{{masonry_options.responsive.lg}} col-md-{{masonry_options.responsive.md}} col-sm-{{masonry_options.responsive.sm}} col-{{masonry_options.responsive.xs}}" style=";padding-bottom: {{grid.gutters}}px; padding-left: {{grid.gutters}}px;">
+          {% if grid.lightbox.enabled %}
+          {% if grid.lightbox.type == 'lb' %}
+          <div class="{{grid.caption.position}}">
+            <a href="{{grid.image_base_path}}/{{image.file}}"
+               data-lightbox="{{grid.id}}-image-group"
+               data-caption="{{image.caption}}"
+               data-containerStyle="{{image_filters}}"
+               data-title="{{image.caption}}">
+              <img id="{{forloop.index}}" class="{{grid.image_styles}}" src="{{grid.image_base_path}}/{{image.file}}" alt="{{image.caption}}" style="{{image_filters}}">              {% if grid.caption.enabled %}
+                {% if grid.gutters and grid.caption.position == 'top' %}
+                  <div class="caption" style="top: calc(2px + {{gutter}}*4px - {{gutter}}px); width: calc(100% - {{gutter}}*3%);">{{image.caption}}</div>
+                {% elsif grid.gutters and grid.caption.position == 'center' %}
+                  <div class="caption" style="width: calc(100% - {{gutter}}*3%);">{{image.caption}}</div>
+                {% elsif grid.gutters and grid.caption.position == 'bottom' %}
+                  <div class="caption" style="top: calc(100% - {{gutter}}*1% - 1px); width: calc(100% - {{gutter}}*3%);">{{image.caption}}</div>
+                {% else %}
+                  <div class="caption">{{image.caption}}</div>
+                {% endif %}
+              {% endif %}
+            </a>
+          </div>
+          {% elsif grid.lightbox.type == 'lg' %}
+          <!-- place lightGalley code -->
+          <!-- place lightGalley code -->
+          <!-- see: https://www.lightgalleryjs.com/docs/getting-started/#the-markup -->
+          <div class="{{grid.caption.position}}">
+            <a class="lg-item" href="{{grid.image_base_path}}/{{image.file}}">
+              <img
+                id="{{forloop.index}}"
+                class="img-responsive"
+                src="{{grid.image_base_path}}/{{image.file}}"
+                alt="{{image.caption}}">
+            </a>
+            {% if grid.caption.enabled %}
+            <div class="caption">{{image.caption}}</div>
+            {% endif %}
+          </div>
+          {% else %}
+          <div class="{{grid.caption.position}}">
+            <img id="{{forloop.index}}" class="{{grid.image_styles}}" src="{{grid.image_base_path}}/{{image.file}}" alt="{{image.caption}}">
+            {% if grid.caption.enabled %}
+            <div class="caption">{{image.caption}}</div>
+            {% endif %}
+          </div>
+          {% else %}
+            <div class="{{grid.caption.position}}">
+              <img
+                id="{{forloop.index}}"
+                class="{{grid.image_styles}}"
+                src="{{grid.image_base_path}}/{{image.file}}"
+                alt="{{image.caption}}"
+                style="{{image_filters}}">
+
+              {% if grid.caption.enabled %}
+                {% if grid.gutters and grid.caption.position == 'top' %}
+                  <div class="caption" style="top: calc(2px + {{gutter}}*4px - {{gutter}}px); width: calc(100% - {{gutter}}*3%);">{{image.caption}}</div>
+                {% elsif grid.gutters and grid.caption.position == 'center' %}
+                  <div class="caption" style="width: calc(100% - {{gutter}}*3%);">{{image.caption}}</div>
+                {% elsif grid.gutters and grid.caption.position == 'bottom' %}
+                  <div class="caption" style="top: calc(100% - {{gutter}}*1%); width: calc(100% - {{gutter}}*3%);">{{image.caption}}</div>
+                {% else %}
+                  <div class="caption">{{image.caption}}</div>
+                {% endif %}
+              {% endif %}
+            </div>
+          {% endif %}
+          {% endif %}
         </div>
         {% endfor %}
       </div>

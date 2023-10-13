@@ -46,12 +46,10 @@ defaults:
     type:                               lb                                      # lb | lg
 
   lightGallery:
+    plugins:                            lgFullscreen, lgRotate, lgThumbnail
     options:
-      plugins:                          [lgFullscreen, lgThumbnail]
-      selector:                         '.lg-item'
-      alignThumbnails:                  'left'
       download:                         false
-      speed:                            500
+      alignThumbnails:                  left
 
   # ----------------------------------------------------------------------------
   # Masonry MODULE options

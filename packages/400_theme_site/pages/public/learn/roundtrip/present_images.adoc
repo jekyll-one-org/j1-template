@@ -11,7 +11,7 @@ description: >
                                         content using lightboxes, carousels, sliders, and galleries.
                                         The image modules of J1 Template offer a wide range of complex
                                         functionality based on powerful OpenSource libraries like
-                                        Lightbox2, Master Slider, lightGallery, or Justifie dGallery
+                                        Lightbox2, Master Slider, lightGallery, or Justified Gallery
                                         for high-end, masonry-styled preview maps.
 keywords: >
                                         open source, free, template, jekyll, jekyllone, web,
@@ -440,7 +440,7 @@ dynamic and visually appealing galleries.
 By using masonry, you can create a gallery that displays images of different
 sizes in an aesthetically pleasing and functional way.
 
-.Masonry Grid of Image Cards + Lightbox
+.Masonry Grid of Images + Lightbox
 masonry::card_example[role="mt-4 mb-4"]
 
 [TIP]
