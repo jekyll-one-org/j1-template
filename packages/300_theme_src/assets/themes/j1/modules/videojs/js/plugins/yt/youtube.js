@@ -811,7 +811,8 @@
   Youtube.apiReadyQueue = [];
 
   if (typeof document !== 'undefined'){
-    loadScript('/assets/themes/j1/modules/videojs/js/plugins/yt/api/youtube.min.js', apiLoaded);
+//  loadScript('/assets/themes/j1/modules/videojs/js/plugins/yt/api/youtube.min.js', apiLoaded);
+    loadScript('https://www.youtube.com/iframe_api', apiLoaded);
     injectCss();
   }
 
