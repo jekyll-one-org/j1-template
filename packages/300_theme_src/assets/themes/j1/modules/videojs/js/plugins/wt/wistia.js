@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/modules/videojs/js/Wistia/Wistia.js
+ # ~/assets/themes/j1/modules/videojs/js/wt/wistia.js
  # Provides Wistia Playback Technology for Video.js V8 and newer
  # See: https://github.com/edly-io/videojs-wistia
  #
