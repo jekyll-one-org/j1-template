@@ -63,8 +63,8 @@ settings:
   #
   enabled:                              true
   xhr_data_path:                        /assets/data/galleries.json
-  instance_type:                        multiple
-  rowHeight:                            170
+  # instance_type:                        multiple
+  # rowHeight:                            170
 
   # ----------------------------------------------------------------------------
   # INSTANCE configuration (galleries)
@@ -97,31 +97,46 @@ settings:
 
         id:                             jg_example
         type:                           image
-
-        title:                          Example of LightGallery Lightbox
-        show_delay:                     250
-        css_classes:                    mb-3
         images_path:                    /assets/images/modules/gallery/mega_cities
         thumb_path:                     /assets/images/modules/gallery/mega_cities
 
+        # ----------------------------------------------------------------------
+        # Justified Gallery settings
+        # ----------------------------------------------------------------------
+        #
         gallery_options:
+          show_delay:                   250
           rowHeight:                    250
-          margins:                      1
+          gutters:                      1
 
-        lightbox_options:
-          lightbox:                     lg
-          mode:                         lg-fade
-          cssEasing:                    cubic-bezier(0.25, 0, 0.25, 1)
+        # ----------------------------------------------------------------------
+        # Lightbox settings
+        # ----------------------------------------------------------------------
+        #
+        lightbox:
+          enabled:                      true
+          type:                         lg
 
+        lightGallery:
+          plugins:                      lgFullscreen, lgRotate, lgThumbnail
+          options:
+            licenseKey:                 0000-0000-000-0000
+            download:                   false
+            alignThumbnails:            left
+
+
+        # ----------------------------------------------------------------------
+        # Image settings
+        # ----------------------------------------------------------------------
+        #
         images:                         [
                                           banter-snaps_b.jpg,
                                           denys-nevozhai-1_b.jpg
                                         ]
-        captions_gallery:               [
+        captions:                       [
                                           Osaka - Japan,
                                           Man posing at the rooftop of Jin Mao Tower Shanghai - China
                                         ]
-        captions_lightbox:              []
 
     # --------------------------------------------------------------------------
     # Old Times
@@ -131,32 +146,51 @@ settings:
 
         id:                             jg_old_times
         type:                           image
-        show_delay:                     200
-        title:                          GrandPa around the 1930th
-        css_classes:                    mb-3
         images_path:                    /assets/images/modules/gallery/old_times
         thumb_path:                     /assets/images/modules/gallery/old_times
 
+        # ----------------------------------------------------------------------
+        # Justified Gallery settings
+        # ----------------------------------------------------------------------
+        #
         gallery_options:
+          show_delay:                   200
+          theme:                        uno
           rowHeight:                    250
-          margins:                      3
+          gutters:                      3
 
-        lightbox_options:
-          lightbox:                     lg
-          mode:                         lg-fade
-          cssEasing:                    cubic-bezier(0.25, 0, 0.25, 1)
+        # ----------------------------------------------------------------------
+        # Lightbox settings
+        # ----------------------------------------------------------------------
+        #
+        lightbox:
+          enabled:                      true
+          type:                         lg                                      # lb | lg
 
+        lightGallery:
+          plugins:                      lgFullscreen, lgRotate, lgThumbnail
+          options:
+            licenseKey:                 0000-0000-000-0000
+            download:                   false
+#           pager:                      false
+#           addClass:                   lg-uno-thumbnails
+#           appendThumbnailsTo:         .lg-outer
+            alignThumbnails:            left
+
+        # ----------------------------------------------------------------------
+        # Image settings
+        # ----------------------------------------------------------------------
+        #
         images:                         [
                                           image_01.jpg, image_02.jpg,
                                           image_03.jpg, image_04.jpg
                                         ]
-        captions_gallery:               [
+        captions:                       [
                                           "GrandPa's 80th Birthday",
                                           "GrandPa's 80th Birthday",
                                           "GrandPa's annual journey",
                                           "GrandPa's annual journey"
                                         ]
-        captions_lightbox:              []
 
     # --------------------------------------------------------------------------
     # Gallery Customizer (Mega Cities)
@@ -166,21 +200,36 @@ settings:
 
         id:                             jg_customizer
         type:                           image
-  #     title:                          Masonry grid layout of Justified Gallery
-        show_delay:                     250
-        css_classes:                    mb-3
         images_path:                    /assets/images/modules/gallery/mega_cities
         thumb_path:                     /assets/images/modules/gallery/mega_cities
 
+        # ----------------------------------------------------------------------
+        # Justified Gallery settings
+        # ----------------------------------------------------------------------
+        #
         gallery_options:
+          show_delay:                   200
           rowHeight:                    150
-          margins:                      1
+          gutters:                      1
 
-        lightbox_options:
-          lightbox:                     lg
-          mode:                         lg-fade
-          cssEasing:                    cubic-bezier(0.25, 0, 0.25, 1)
+        # ----------------------------------------------------------------------
+        # Lightbox settings
+        # ----------------------------------------------------------------------
+        #
+        lightbox:
+          enabled:                      true
+          type:                         lg
 
+        lightGallery:
+          plugins:                      lgFullscreen, lgRotate, lgThumbnail
+          options:
+            licenseKey:                 0000-0000-000-0000
+
+
+        # ----------------------------------------------------------------------
+        # Image settings
+        # ----------------------------------------------------------------------
+        #
         images:                         [
                                           banter-snaps_b.jpg,
                                           denys-nevozhai-1_b.jpg,
@@ -196,7 +245,7 @@ settings:
                                           ethan-brooke_b.jpg,
                                           oskars-sylwan_b.jpg
                                         ]
-        captions_gallery:               [
+        captions:                       [
                                           Osaka - Japan,
                                           Man posing at the rooftop of Jin Mao Tower Shanghai - China,
                                           Shangri-La Hotel Jakarta - Indonesia,
@@ -211,7 +260,6 @@ settings:
                                           Lotte World Tower Seoul - South Korea,
                                           New York City, United States
                                         ]
-        captions_lightbox:              []
 
     # ==========================================================================
     # Video Galleries
@@ -225,24 +273,34 @@ settings:
 
         id:                             jg_video_html5
         type:                           video-html5
-        show_delay:                     300
-        title:                          false                                   # HTML5 Video Gallery
-        theme:                          uno
-
         video_path:                     /assets/videos/gallery/html5
         image_path:                     /assets/videos/gallery
         thumb_path:                     /assets/videos/gallery
 
+        # ----------------------------------------------------------------------
+        # Justified Gallery settings
+        # ----------------------------------------------------------------------
+        #
         gallery_options:
+          show_delay:                   200
+          theme:                        uno
           rowHeight:                    200
-          margins:                      5
+          gutters:                      5
 
-        lightbox_options:
-          lightbox:                     lg
-#         mode:                         lg-fade
-#         cssEasing:                    cubic-bezier(0.25, 0, 0.25, 1)
-          videojs:                      true
-          videojsOptions:               {
+        # ----------------------------------------------------------------------
+        # Lightbox settings
+        # ----------------------------------------------------------------------
+        #
+        lightbox:
+          enabled:                      true
+          type:                         lg
+
+        lightGallery:
+          plugins:                      lgVideo
+          options:
+            licenseKey:                 0000-0000-000-0000
+            videojs:                     true
+            videojsOptions:             {
                                           autoplay: false,
                                           controls: true,
                                           fluid: true,
@@ -261,18 +319,19 @@ settings:
                                           }
                                         }
 
+        # ----------------------------------------------------------------------
+        # Video settings
+        # ----------------------------------------------------------------------
+        #
         videos:                         [
                                           video1.mp4,
                                           video2.mp4
                                         ]
-        captions_gallery:               [
-                                          "PeckPocketed",
-                                          "Rollin`Wild"
+        captions:                       [
+                                          "Student Academy Award Winning <b>PeckPocketed</b> by Kevin Herron.",
+                                          "Rollin`Wild. Short Funny Animated Clips created at the Film Academy."
                                         ]
-        captions_lightbox:              [
-                                          "<p>Student Academy Award Winning <b>PeckPocketed</b> by Kevin Herron.</p>",
-                                          "<p>Rollin`Wild. Short Funny Animated Clips created at the Film Academy.</p>"
-                                        ]
+
         poster:                         [
                                           video1-poster.jpg,
                                           video2-poster.jpg
@@ -286,42 +345,51 @@ settings:
 
         id:                             jg_video_online_youtube
         type:                           video-online
-        show_delay:                     300
-        title:                          false                                   # YouTube Video Gallery
-
-        css_classes:
         image_path:                     /assets/videos/gallery
         thumb_path:                     /assets/videos/gallery
 
+        # ----------------------------------------------------------------------
+        # Justified Gallery settings
+        # ----------------------------------------------------------------------
+        #
         gallery_options:
+          show_delay:                   200
+          theme:                        uno
           rowHeight:                    200
-          margins:                      5
+          gutters:                      5
 
-        lightbox_options:
-          lightbox:                     lg
-#         mode:                         lg-fade
-#         cssEasing:                    cubic-bezier(0.25, 0, 0.25, 1)
-          videojs:                      true
-          videojsOptions:               {}
+        # ----------------------------------------------------------------------
+        # Lightbox settings
+        # ----------------------------------------------------------------------
+        #
+        lightbox:
+          enabled:                      true
+          type:                         lg
 
+        lightGallery:
+          plugins:                      lgVideo
+          options:
+            licenseKey:                 0000-0000-000-0000
+            videojs:                    true
+            videojsOptions:             {}
+
+        # ----------------------------------------------------------------------
+        # Video settings
+        # ----------------------------------------------------------------------
+        #
         videos:                         [
                                           "//youtube.com/watch?v=X5Cfi7U4eL4",
                                           "//youtube.com/watch?v=Nck6BZga7TQ",
                                           "//youtube.com/watch?v=F2SXmzk8ve4",
                                           "//youtube.com/watch?v=ln3wAdRAim4"
                                         ]
-        captions_gallery:               [
-                                          "Carpool Karaoke - Lady Gaga",
-                                          "Carpool Karaoke - Adele",
-                                          "Carpool Karaoke - Gwen Stefani",
-                                          "Carpool Karaoke - First Lady Michelle Obama"
+        captions:                       [
+                                          "Carpool Karaoke - Lady Gaga joins James for a drive through Los Angeles singing her classics and tracks from her new album",
+                                          "Carpool Karaoke - James Corden is about the holidays in London and gets Adele off for a ride through the city. On the way they sing some of their biggest hits and Adele raps Nicki Minaj's <b>monster</b>",
+                                          "Carpool Karaoke - Gwen Stefani, Julia Roberts, George Clooney and James Corden singing Holla back girl, there's nothing left to see",
+                                          "Carpool Karaoke - James Corden's White House tour takes an unthinkable turn when First Lady Michelle Obama joins him for a drive around the grounds singing Stevie Wonder and Beyonce"
                                         ]
-        captions_lightbox:              [
-                                          "<p>Lady Gaga joins James for a drive through Los Angeles singing her classics and tracks from her new album.</p>",
-                                          "<p>James Corden is about the holidays in London and gets Adele off for a ride through the city. On the way they sing some of their biggest hits and Adele raps Nicki Minaj's <b>monster</b>.</p>",
-                                          "<p>Gwen Stefani, Julia Roberts, George Clooney and James Corden singing Holla back girl, there's nothing left to see.</p>",
-                                          "<p>James Corden's White House tour takes an unthinkable turn when First Lady Michelle Obama joins him for a drive around the grounds singing Stevie Wonder and Beyonce.</p>"
-                                        ]
+
         poster:                         [
                                           video_gaga-poster.jpg, video_adele-poster.jpg,
                                           video_gwen-poster.jpg, video_michelle-poster.jpg
@@ -335,41 +403,50 @@ settings:
 
         id:                             jg_video_online_youtube_new
         type:                           video-online
-        show_delay:                     300
-        title:                          false                                   # YouTube Video Gallery
-
-        css_classes:
         image_path:                     /assets/videos/gallery
         thumb_path:                     /assets/videos/gallery
 
+        # ----------------------------------------------------------------------
+        # Justified Gallery settings
+        # ----------------------------------------------------------------------
+        #
         gallery_options:
+          show_delay:                   200
           rowHeight:                    200
-          margins:                      5
+          gutters:                      5
 
-        lightbox_options:
-          lightbox:                     lg
-#         mode:                         lg-fade
-#         cssEasing:                    cubic-bezier(0.25, 0, 0.25, 1)
-          videojs:                      true
-          videojsOptions:               {}
+        # ----------------------------------------------------------------------
+        # Lightbox settings
+        # ----------------------------------------------------------------------
+        #
+        lightbox:
+          enabled:                      true
+          type:                         lg
 
+        lightGallery:
+          plugins:                      lgVideo
+          options:
+            licenseKey:                 0000-0000-000-0000
+            videojs:                    true
+            videojsOptions:             {}
+
+        # ----------------------------------------------------------------------
+        # Video settings
+        # ----------------------------------------------------------------------
+        #
         videos:                         [
                                           "//youtube.com/watch?v=X5Cfi7U4eL4",
                                           "//youtube.com/watch?v=ln3wAdRAim4"
                                         ]
-        captions_gallery:               [
-                                          "Carpool Karaoke - Lady Gaga",
-                                          "Carpool Karaoke - First Lady Michelle Obama"
+        captions:                       [
+                                          "Carpool Karaoke - Lady Gaga joins James for a drive through Los Angeles singing her classics and tracks from her new album",
+                                          "Carpool Karaoke - James Corden's White House tour takes an unthinkable turn when First Lady Michelle Obama joins him for a drive around the grounds singing Stevie Wonder and Beyonce"
                                         ]
-        captions_lightbox:              [
-                                          "<p>Lady Gaga joins James for a drive through Los Angeles singing her classics and tracks from her new album.</p>",
-                                          "<p>James Corden's White House tour takes an unthinkable turn when First Lady Michelle Obama joins him for a drive around the grounds singing Stevie Wonder and Beyonce.</p>"
-                                        ]
+
         poster:                         [
                                           video_gaga-poster.jpg,
                                           video_michelle-poster.jpg
                                         ]
-
 
     # --------------------------------------------------------------------------
     # Online VIDEO (YouTube)
@@ -379,34 +456,46 @@ settings:
 
         id:                             jg_video_online_youtube_james_and_adele
         type:                           video-online                            # video-html5
-        show_delay:                     300
-        title:                          false                                   # YouTube Video Gallery
-
         image_path:                     /assets/videos/gallery
         thumb_path:                     /assets/videos/gallery
-        css_classes:
 
+        # ----------------------------------------------------------------------
+        # Justified Gallery settings
+        # ----------------------------------------------------------------------
+        #
         gallery_options:
+          show_delay:                   200
           rowHeight:                    200
-          margins:                      5
+          gutters:                      5
 
-        lightbox_options:
-          lightbox:                     lg
-          videojs:                      true
-          videojsOptions:               {}
+        # ----------------------------------------------------------------------
+        # Lightbox settings
+        # ----------------------------------------------------------------------
+        #
+        lightbox:
+          enabled:                      true
+          type:                         lg
 
+        lightGallery:
+          plugins:                      lgVideo
+          options:
+            licenseKey:                 0000-0000-000-0000
+            videojs:                    true
+            videojsOptions:             {}
+
+        # ----------------------------------------------------------------------
+        # Video settings
+        # ----------------------------------------------------------------------
+        #
         videos:                         [
                                           "//youtube.com/watch?v=Nck6BZga7TQ",
                                           "//youtube.com/watch?v=nV8UZJNBY6Y"
                                         ]
-        captions_gallery:               [
+        captions:                       [
                                           "December 2015 - James is on holidays is about the holidays in London and gets Adele off for a ride through the city. On the way they sing some of their biggest hits.",
                                           "April 2023 - Adele wakeup James at home for the last Late Night Show, for the last Carpool Caraoke ever.",
                                         ]
-        captions_lightbox:              [
-                                          "<p>December 2015 - James is on holidays is about the holidays in London and gets Adele off for a ride through the city. On the way they sing some of their biggest hits.</p>",
-                                          "<p>April 2023 - Adele wakeup James at home for the last Late Night Show, for the last Carpool Caraoke ever.</p>"
-                                        ]
+
         poster:                         [
                                           video_adele-poster.jpg,
                                           video_adele_last_carpool_caraoke_poster.jpg
@@ -420,24 +509,37 @@ settings:
 
         id:                             jg_video_online_youtube_2
         type:                           video-online
-        show_delay:                     300
-        title:                          false                                   # YouTube Video Gallery
-
-        css_classes:
         image_path:                     /assets/videos/gallery/voice_kids_de_2021
         thumb_path:                     /assets/videos/gallery/voice_kids_de_2021
 
+        # ----------------------------------------------------------------------
+        # Justified Gallery settings
+        # ----------------------------------------------------------------------
+        #
         gallery_options:
+          show_delay:                   300
           rowHeight:                    200
-          margins:                      5
+          gutters:                      5
 
-        lightbox_options:
-          lightbox:                     lg
-#         mode:                         lg-fade
-#         cssEasing:                    cubic-bezier(0.25, 0, 0.25, 1)
-          videojs:                      true
-          videojsOptions:               {}
+        # ----------------------------------------------------------------------
+        # Lightbox settings
+        # ----------------------------------------------------------------------
+        #
+        lightbox:
+          enabled:                      true
+          type:                         lg
 
+        lightGallery:
+          plugins:                      lgVideo
+          options:
+            licenseKey:                 0000-0000-000-0000
+            videojs:                    true
+            videojsOptions:             {}
+
+        # ----------------------------------------------------------------------
+        # Video settings
+        # ----------------------------------------------------------------------
+        #
         videos:                         [
                                           "//youtube.com/watch?v=aQqPgLMgO-I",
                                           "//youtube.com/watch?v=Bl6tkAgaP1g",
@@ -451,18 +553,13 @@ settings:
                                           "start: 10, end: 173"
                                         ]
 
-        captions_gallery:               [
-                                          "The Voice Kids Germany 2021 - Constance",
-                                          "The Voice Kids Germany 2021 - Elisa",
-                                          "The Voice Kids Germany 2021 - Ben",
-                                          "The Voice Kids Germany 2021 - The Battle"
+        captions:                       [
+                                          "The Voice Kids Germany 2021 - 14-year-old Constance has dreamed of being on The Voice Kids stage for a very long time. Your dream has finally come true! She performs a breathtaking version of Sia's song Alive",
+                                          "The Voice Kids Germany 2021 - 14-year-old Elisa is fascinated by the classics of pop music. Her version of Hey Jude from The Beatles comes with a lot of feeling",
+                                          "The Voice Kids Germany 2021 - >14-year-old Ben pours all of his emotions into his performance of Maroon 5's Sunday Morning. He wants to show what he's made of",
+                                          "The Voice Kids Germany 2021 - The battle of the three young people is a real emotional battle. Elisa's husky voice, Constanze's unbelievable power, and Ben's rhythm come into their own in Adele's James Bond theme song Skyfall"
                                         ]
-        captions_lightbox:              [
-                                          "<p>14-year-old Constance has dreamed of being on The Voice Kids stage for a very long time. Your dream has finally come true! She performs a breathtaking version of Sia's song Alive.</p>",
-                                          "<p>14-year-old Elisa is fascinated by the classics of pop music. Her version of Hey Jude from The Beatles comes with a lot of feeling.</p>",
-                                          "<p>14-year-old Ben pours all of his emotions into his performance of Maroon 5's Sunday Morning. He wants to show what he's made of.</p>",
-                                          "<p>The battle of the three young people is a real emotional battle. Elisa's husky voice, Constanze's unbelievable power, and Ben's rhythm come into their own in Adele's James Bond theme song Skyfall.</p>"
-                                        ]
+
         poster:                         [
                                           constance.jpg, elisa.jpg,
                                           ben.jpg, battle.jpg
@@ -476,22 +573,37 @@ settings:
 
         id:                             jg_video_online_youtube_2_short
         type:                           video-online
-        show_delay:                     300
-        title:                          false
-
-        css_classes:
         image_path:                     /assets/videos/gallery/voice_kids_de_2021
         thumb_path:                     /assets/videos/gallery/voice_kids_de_2021
 
+        # ----------------------------------------------------------------------
+        # Justified Gallery settings
+        # ----------------------------------------------------------------------
+        #
         gallery_options:
+          show_delay:                   300
           rowHeight:                    200
           margins:                      5
 
-        lightbox_options:
-          lightbox:                     lg
-          videojs:                      true
-          videojsOptions:               {}
+        # ----------------------------------------------------------------------
+        # Lightbox settings
+        # ----------------------------------------------------------------------
+        #
+        lightbox:
+          enabled:                      true
+          type:                         lg
 
+        lightGallery:
+          plugins:                      lgVideo
+          options:
+            licenseKey:                 0000-0000-000-0000
+            videojs:                    true
+            videojsOptions:             {}
+
+        # ----------------------------------------------------------------------
+        # Video settings
+        # ----------------------------------------------------------------------
+        #
         videos:                         [
                                           "//youtube.com/watch?v=GuiOYCv9NTI",
                                           "//youtube.com/watch?v=1bvE2mgJ22I"
@@ -501,14 +613,11 @@ settings:
                                           "start: 10, end: 173"
                                         ]
 
-        captions_gallery:               [
-                                          "The Voice Kids Germany 2021 - Ben",
-                                          "The Voice Kids Germany 2021 - The Battle"
+        captions:                       [
+                                          "The Voice Kids Germany 2021 - 14-year-old Ben pours all of his emotions into his performance of Maroon 5's Sunday Morning. He wants to show what he's made of",
+                                          "The Voice Kids Germany 2021 - The battle of the three young people is a real emotional battle. Elisa's husky voice, Constanze's unbelievable power, and Ben's rhythm come into their own in Adele's James Bond theme song Skyfall"
                                         ]
-        captions_lightbox:              [
-                                          "<p>14-year-old Ben pours all of his emotions into his performance of Maroon 5's Sunday Morning. He wants to show what he's made of.</p>",
-                                          "<p>The battle of the three young people is a real emotional battle. Elisa's husky voice, Constanze's unbelievable power, and Ben's rhythm come into their own in Adele's James Bond theme song Skyfall.</p>"
-                                        ]
+
         poster:                         [ ben.jpg, battle.jpg ]
 
 
@@ -520,38 +629,51 @@ settings:
 
         id:                             jg_video_online_vimeo
         type:                           video-online
-        show_delay:                     300
-        title:                          false                                   # Vimeo Video Gallery
+        image_path:                     /assets/videos/gallery
+        thumb_path:                     /assets/videos/gallery
 
         thumb_items:                    2
         thumb_spacing:                  5
         thumb_bordered:                 true
         thumb_animate:                  true
-        css_classes:
-        image_path:                     /assets/videos/gallery
-        thumb_path:                     /assets/videos/gallery
 
+        # ----------------------------------------------------------------------
+        # Justified Gallery settings
+        # ----------------------------------------------------------------------
+        #
         gallery_options:
+          show_delay:                   300
           rowHeight:                    200
           margins:                      5
 
-        lightbox_options:
-          lightbox:                     lg
+        # ----------------------------------------------------------------------
+        # Lightbox settings
+        # ----------------------------------------------------------------------
+        #
+        lightbox:
+          enabled:                      true
+          type:                         lg
 
+        lightGallery:
+          plugins:                      lgVideo
+          options:
+            licenseKey:                 0000-0000-000-0000
+            videojs:                    true
+            videojsOptions:             {}
+
+        # ----------------------------------------------------------------------
+        # Video settings
+        # ----------------------------------------------------------------------
+        #
         videos:                         [
                                           "//vimeo.com/179528528",
                                           "//vimeo.com/202117650",
                                         ]
-        captions_gallery:               [
-                                          "Forever 21 - Kick It Old School",
-                                          "Forever 21 - Stay Colorful, Babe!",
-
+        captions:                       [
+                                          "Forever 21 - Kick It Old School on Vimeo",
+                                          "Forever 21 - Stay Colorful on Vimeo",
                                         ]
-        captions_lightbox:              [
-                                          "<p>Kick It Old School on Vimeo</p>",
-                                          "<p>Stay Colorful on Vimeo</p>",
 
-                                        ]
         poster:                         [
                                           kick-it-old-school-poster.jpg,
                                           stay-colorful-poster.jpg,
@@ -565,39 +687,52 @@ settings:
 
         id:                             jg_video_online_vimeo_short
         type:                           video-online
+        image_path:                     /assets/videos/gallery
+        thumb_path:                     /assets/videos/gallery
 
-        show_delay:                     300
-        title:                          false
         thumb_items:                    2
         thumb_spacing:                  5
         thumb_bordered:                 true
         thumb_animate:                  true
 
-        css_classes:
-        image_path:                     /assets/videos/gallery
-        thumb_path:                     /assets/videos/gallery
-
+        # ----------------------------------------------------------------------
+        # Justified Gallery settings
+        # ----------------------------------------------------------------------
+        #
         gallery_options:
+          show_delay:                   300
           rowHeight:                    200
           margins:                      5
 
-        lightbox_options:
-          lightbox:                     lg
+        # ----------------------------------------------------------------------
+        # Lightbox settings
+        # ----------------------------------------------------------------------
+        #
+        lightbox:
+          enabled:                      true
+          type:                         lg
 
+        lightGallery:
+          plugins:                      lgVideo
+          options:
+            licenseKey:                 0000-0000-000-0000
+            videojs:                    true
+            videojsOptions:             {}
+
+        # ----------------------------------------------------------------------
+        # Video settings
+        # ----------------------------------------------------------------------
+        #
         videos:                         [
                                           "//vimeo.com/179528528",
                                           "//vimeo.com/202117650"
                                         ]
-        captions_gallery:               [
-                                          "Forever 21 - Kick It Old School",
-                                          "Forever 21 - Stay Colorful, Babe!"
+        captions:                       [
+                                          "Forever 21 - Kick It Old School on Vimeo",
+                                          "Forever 21 - Stay Colorful on Vimeo"
 
                                         ]
-        captions_lightbox:              [
-                                          "<p>Kick It Old School on Vimeo</p>",
-                                          "<p>Stay Colorful on Vimeo</p>"
 
-                                        ]
         poster:                         [
                                           kick-it-old-school-poster.jpg,
                                           stay-colorful-poster.jpg
@@ -611,37 +746,52 @@ settings:
 
         id:                             jg_video_online_dailymotion
         type:                           video-online
-        show_delay:                     300
-        title:                          false                                   # DailyMotion Video Gallery
+        image_path:                     /assets/videos/gallery/dailymotion
+        thumb_path:                     /assets/videos/gallery/dailymotion
 
         thumb_items:                    2
         thumb_spacing:                  5
         thumb_bordered:                 true
         thumb_animate:                  true
-        css_classes:
 
+        # ----------------------------------------------------------------------
+        # Justified Gallery settings
+        # ----------------------------------------------------------------------
+        #
         gallery_options:
+          show_delay:                   300
           rowHeight:                    200
           margins:                      5
 
-        lightbox_options:
-          lightbox:                     lg
+        # ----------------------------------------------------------------------
+        # Lightbox settings
+        # ----------------------------------------------------------------------
+        #
+        lightbox:
+          enabled:                      true
+          type:                         lg
 
-        image_path:                     /assets/videos/gallery/dailymotion
-        thumb_path:                     /assets/videos/gallery/dailymotion
+        lightGallery:
+          plugins:                      lgVideo
+          options:
+            licenseKey:                 0000-0000-000-0000
+            videojs:                    true
+            videojsOptions:             {}
+
+        # ----------------------------------------------------------------------
+        # Video settings
+        # ----------------------------------------------------------------------
+        #
         videos:                         [
                                           "//dai.ly/x887s09",
                                           "//dai.ly/x87ycik"
                                         ]
 
-        captions_gallery:               [
+        captions:                       [
                                           "Guided Meditation: Morning Energy",
                                           "Beginner Mat Pilates: Core Workout"
                                         ]
-        captions_lightbox:              [
-                                          "<p>Guided Meditation: Morning Energy</p>",
-                                          "<p>Beginner Mat Pilates: Core Workout</p>"
-                                        ]
+
         poster:                         [
                                           meditation.jpg,
                                           pilates.jpg

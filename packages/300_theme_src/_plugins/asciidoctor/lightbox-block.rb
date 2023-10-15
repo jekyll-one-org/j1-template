@@ -21,7 +21,7 @@
 # Example:
 #
 #  .The image block title
-#  lightbox::lightbox-example[300, "pages/roundtrip/100_present_images/image-1.jpg, description 1, pages/roundtrip/100_present_images/image-2.jpg, description 2" ]
+#  lightbox::lightbox-example[450, "assets/images/modules/gallery/old_times/image_01.jpg, description 1, assets/images/modules/gallery/old_times/image_02.jpg, description 2" ]
 #
 # ------------------------------------------------------------------------------
 include Asciidoctor

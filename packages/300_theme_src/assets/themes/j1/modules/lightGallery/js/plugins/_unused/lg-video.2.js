@@ -375,12 +375,66 @@
                 }
                 var html5VideoAttrs_1 = '';
                 var videoAttributes_1 = html5Video.attributes || {};
+
                 Object.keys(videoAttributes_1 || {}).forEach(function (key) {
                     html5VideoAttrs_1 += key + "=\"" + videoAttributes_1[key] + "\" ";
                 });
+
                 video = "<video class=\"lg-video-object lg-html5 " + (this.settings.videojs && this.settings.videojsTheme
                     ? this.settings.videojsTheme + ' '
                     : '') + " " + (this.settings.videojs ? ' video-js' : '') + "\" " + html5VideoAttrs_1 + ">\n                " + html5VideoMarkup + "\n                Your browser does not support HTML5 video.\n            </video>";
+
+                // video = `
+                //  <video
+                //    class="lg-video-object lg-html5 vjs-theme-uno video-js"
+                //    preload="false"
+                //    controls="true"
+                //    playsinline="false">
+                //    <source
+               	// 	  src="//youtube.com/watch?v=nV8UZJNBY6Y"
+               	// 	  type="video/youtube">
+               	// 	Your browser does not support HTML5 video.
+                //  </video>
+                // `;
+
+                // video = `
+                //  <video
+                //    class="lg-video-object lg-html5 vjs-theme-uno video-js"
+                //    preload="false"
+                //    controls="true"
+                //    playsinline="false">
+                //    <source
+               	// 	  src="//vimeo.com/179528528"
+               	// 	  type="video/vimeo">
+               	// 	Your browser does not support HTML5 video.
+                //  </video>
+                // `;
+
+                // video = `
+                //  <video
+                //    class="lg-video-object lg-html5 vjs-theme-uno video-js"
+                //    preload="false"
+                //    controls="true"
+                //    playsinline="false">
+                //    <source
+               	// 	  src="29b0fbf547"
+               	// 	  type="video/wistia">
+               	// 	Your browser does not support HTML5 video.
+                //  </video>
+                // `;
+
+                // video = `
+                //  <video
+                //    class="lg-video-object lg-html5 vjs-theme-uno video-js"
+                //    preload="false"
+                //    controls="true"
+                //    playsinline="false">
+                //    <source
+               	// 	  src="//dailymotion.com/video/x87ycik"
+               	// 	  type="video/dailymotion">
+               	// 	Your browser does not support HTML5 video.
+                //  </video>
+                // `;
             }
             return video;
         };

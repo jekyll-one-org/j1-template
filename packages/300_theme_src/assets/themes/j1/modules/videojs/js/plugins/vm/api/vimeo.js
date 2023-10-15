@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/modules/videojs/js/vimeo/api/vimeo.js
- # Vimeo Player API
+ # Vimeo Player API (modified version)
  #
  #  Product/Info:
  #  https://jekyll.one

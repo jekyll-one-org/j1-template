@@ -30,14 +30,13 @@ regenerate:                             false
 permalink:                              /pages/public/tools/previewer/masonry/
 
 resources:                              [
-                                          advertising,
-                                          animate, clipboard, justifiedgallery,
+                                          advertising, animate, clipboard, justifiedgallery,
                                           lightbox, lightgallery, masonry,
-                                          rouge, slick, videojs, vimeoplayer
+                                          rouge, slick
                                         ]
 resource_options:
   - toccer:
-      collapseDepth:                    3
+      collapseDepth:                    4
   - attic:
       slides:
         - url:                          /assets/images/modules/attics/1920x1280/hayden-mills-2.jpg
@@ -94,27 +93,20 @@ mdi:clock-time-five-outline[24px, md-gray mt-4 mr-2]
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 [role="mt-5"]
-== Grid of Collections
+== Grid of Collection
 
 The Masonry module for J1 Template creates a *collection grid* by pulling
 articles from a specific Jekyll collection. The grid display all *articles*
 a collection contains.
 
-.Asciidoc Markup
+.Asciidoc configuration
 [source, config, role="noclip mt-4 mb-4"]
 ----
 masonry::collection_biography[]
 ----
 
-Additionally, the article *title* and the first *tag* of an article are
-displayed. Masonry grids for the J1 Template can be easily customized in
-various ways, such as speed and other options.
-
-.Collection Biography + Gutters
-masonry::collection_biography[role="mt-4 mb-4"]
-
 .Configuration settings
-[source, yaml, role="noclip mb-4"]
+[source, yaml, role="noclip mt-4 mb-5"]
 ----
 # ------------------------------------------------------------------------------
 # Collection Biography
@@ -141,6 +133,14 @@ masonry::collection_biography[role="mt-4 mb-4"]
     percentPosition:                true
 ----
 
+[role="mb-4"]
+Additionally, the article *title* and the first *tag* of an article are
+displayed. Masonry grids for the J1 Template can be easily customized in
+various ways, such as speed and other options.
+
+.Collection Grid + Gutters
+masonry::collection_biography[]
+
 
 [role="mt-5"]
 == Grid of Posts
@@ -150,21 +150,14 @@ posts. All grids display the post category, the title, the author and date.
 All grids for the J1 Template can be easily customized in various ways, such
 as changing the number of posts displayed, the speed, and other options.
 
-.Asciidoc Markup
+.Asciidoc configuration
 [source, config, role="noclip mt-4 mb-4"]
 ----
 masonry::post_series_example[]
 ----
 
-.Featured Posts + Gutters
-masonry::post_series_example[role="mb-4"]
-
-The Javascript module Masonry has become a go-to library for web developers
-who need to create dynamic grid layouts, especially for websites that showcase
-many images or other visual content like post series for example.
-
 .Configuration settings
-[source, yaml, role="noclip mt-4 mb-4"]
+[source, yaml, role="noclip mt-4 mb-5"]
 ----
 # ------------------------------------------------------------------------------
 # Post Series
@@ -197,12 +190,20 @@ many images or other visual content like post series for example.
     brightness:                     0.4
 ----
 
+The Javascript module Masonry has become a go-to library for web developers
+who need to create dynamic grid layouts, especially for websites that showcase
+many images or other visual content like post series for example.
+
+[role="mb-5"]
 [NOTE]
 ====
 The Masonry module supports a series of posts out of the box. If the
 grid type of `post-series` is given, all posts of a group (series) are
 generated automatically as Bootstrap Cards of type *post*.
 ====
+
+.Posts Grid + Gutters
+masonry::post_series_example[]
 
 
 [role="mt-5"]
@@ -222,21 +223,18 @@ in action.
 
 
 [role="mt-5"]
-=== Fixed Height
+=== Fixed Image Height
 
 Pictures you've made are typically not even in size. Images may have the
 same resolution, but some are orientated landscapes, and others may be
 portrait. Using the height parameter on images `image_height`, all images
 can be displayed at the same height.
 
-.Asciidoc Markup
+.Asciidoc configuration
 [source, config, role="noclip mt-4 mb-4"]
 ----
 masonry::image_fixed_height_lb[]
 ----
-
-.Images + Fixed Height + Gutters + Captions + Lightbox
-masonry::image_fixed_height_lb[role="mt-4 mb-5"]
 
 .Configuration settings
 [source, yaml, role="noclip mt-4 mb-5"]
@@ -292,9 +290,12 @@ masonry::image_fixed_height_lb[role="mt-4 mb-5"]
       ...
 ----
 
+.Images + Fixed Height + Gutters + Captions + Lightbox
+masonry::image_fixed_height_lb[role="mt-4 mb-5"]
+
 
 [role="mt-5"]
-=== Variable Height
+=== Variable Image Height
 
 Using a Masonry-based grid, images can be arranged in their *original sizes*
 quite easy. The module creates elegant image galleries that manages the
@@ -306,14 +307,11 @@ various sizes and aspect ratio of images.
 The default lightbox supports all images of a grid as a group. Click on the
 images in the grid below to see how the lightbox manages your images.
 
-.Asciidoc Markup
+.Asciidoc configuration
 [source, config, role="noclip mt-4 mb-4"]
 ----
 masonry::image_variable_height_lb[]
 ----
-
-.Images + Variable Height + Gutters + Captions + Lightbox
-masonry::image_variable_height_lb[role="mt-4 mb-4"]
 
 .Configuration settings
 [source, yaml, role="noclip mt-4 mb-5"]
@@ -367,6 +365,9 @@ masonry::image_variable_height_lb[role="mt-4 mb-4"]
       ...
 ----
 
+.Images + Variable Height + Gutters + Captions + Lightbox
+masonry::image_variable_height_lb[role="mt-4 mb-5"]
+
 [role="mt-4"]
 ==== lightGallery
 
@@ -374,17 +375,14 @@ Using *lightGallery* for the lightbox on a Masonry-based grid compared to the
 default lightbox, more options are available to manage images. Click on the
 the grid elements below to see how lightGallery manages your image content.
 
-.Asciidoc Markup
+.Asciidoc configuration
 [source, config, role="noclip mt-4 mb-4"]
 ----
 masonry::image_variable_height_lg[]
 ----
 
-.Images + Variable Height + Gutters + Captions + lightGalley
-masonry::image_variable_height_lg[role="mt-4 mb-5"]
-
 .Configuration settings
-[source, yaml, role="noclip mt-4 mb-4"]
+[source, yaml, role="noclip mt-4 mb-5"]
 ----
 # ------------------------------------------------------------------------------
 # Images + Variable Height + Gutters + Captions + lightGallery
@@ -442,93 +440,9 @@ masonry::image_variable_height_lg[role="mt-4 mb-5"]
       ...
 ----
 
-[role="mt-5"]
-== Grid of Videos
-// See: https://masonry.desandro.com/
+.Images + Variable Height + Gutters + Captions + lightGalley
+masonry::image_variable_height_lg[role="mt-4 mb-5"]
 
-J1 Masonry is a great tool to create dynamic image galleries. Image galleries
-are popular on many websites, and masonry can be a useful tool for creating
-dynamic and visually appealing galleries.
-
-++++
-<div class="gallery-title" class="mt-4">Mixed Video Content + lightGallery</div>
-<div id="masonry_video_example" class="row g-0 mb-5">
-  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" style="padding-bottom: 2px; padding-left: 2px">
-    <div class="card bottom">
-      <!-- YouTube Video, slide item 1 -->
-      <a class="lg-item"
-        data-lg-size="1280-720"
-        data-pinterest-text="Pin it3"
-        data-tweet-text="lightGallery slide  4"
-        data-src="https://youtu.be/IUN664s7N-c"
-        data-poster="https://img.youtube.com/vi/IUN664s7N-c/maxresdefault.jpg"
-        data-sub-html="<h4>Visual Soundscapes - Mountains | Planet Earth II | BBC America</h4><p>On the heels of Planet Earth II’s record-breaking Emmy nominations, BBC America presents stunning visual soundscapes from the series' amazing habitats.</p>">
-          <img id="slide_1" class="img-responsive" src="https://img.youtube.com/vi/IUN664s7N-c/maxresdefault.jpg">
-      </a>
-      <div class="caption">YouTube &middot; Visual Soundscapes - Mountains |  BBC America</div>
-    </div>
-  </div>
-
-  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" style="padding-bottom: 2px; padding-left: 2px">
-    <div class="card bottom">
-      <!-- Vimeo Video, VideoJS -->
-      <a class="lg-item"
-        data-lg-size="1280-720"
-        data-pinterest-text="Pin it3"
-        data-tweet-text="lightGallery slide  4"
-        data-src="//vimeo.com/112836958"
-        data-poster="https://www.lightgalleryjs.com/images/demo/vimeo-video-poster.jpg"
-        data-sub-html="<h4>Nature</h4><p>Video by <a target='_blank' href='https://vimeo.com/charliekaye'>Charlie Kaye</a></p>">
-          <img id="slide_2" class="img-responsive" src="https://www.lightgalleryjs.com/images/demo/vimeo-video-poster.jpg">
-      </a>
-      <div class="caption">Vimeo &middot; Nature Video by Charlie Kaye</div>
-    </div>
-  </div>
-
-  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" style="padding-bottom: 2px; padding-left: 2px">
-    <div class="card bottom">
-      <!-- Wistia Video -->
-      <a class="lg-item"
-        data-lg-size="1280-720"
-        data-pinterest-text="Pin it3"
-        data-tweet-text="lightGallery slide  4"
-        data-src="https://private-sharing.wistia.com/medias/mwhrulrucj"
-        data-poster="https://www.lightgalleryjs.com/images/demo/wistia-video-poster.jpeg"
-        data-sub-html="<h4>Thank You!</h4><p> Sample Wistia video </p>">
-          <img id="slide_3" class="img-responsive" src="https://www.lightgalleryjs.com/images/demo/wistia-video-poster.jpeg">
-      </a>
-      <div class="caption">Wistia &middot; Thank You</div>
-    </div>
-  </div>
-
-  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" style="padding-bottom: 2px; padding-left: 2px">
-    <div class="card bottom">
-      <!-- HTML5 Video (MP4) -->
-      <a class="lg-item"
-        data-lg-size="1280-720"
-        data-pinterest-text="Pin it3"
-        data-tweet-text="lightGallery slide  4"
-        data-poster="/assets/videos/gallery/video1-poster.jpg"
-        data-sub-html="<h4>'Peck Pocketed' by Kevin Herron | Disney Favorite</h4>"
-        data-video='{
-          "source": [{
-            "src":"/assets/videos/gallery/html5/video1.mp4",
-            "type":"video/mp4"
-          }],
-          "attributes": {
-            "preload": false,
-            "controls": true,
-            "playsinline": false
-          }
-        }'>
-          <img id="slide_4" class="img-responsive" src="/assets/videos/gallery/video1-poster.jpg">
-      </a>
-      <div class="caption">MP4 Video &middot; Student Academy Award winning cartoon clip</div>
-    </div>
-  </div>
-
-</div>
-++++
 
 [role="mt-5"]
 == Justified Gallery
@@ -538,14 +452,8 @@ module can also display photos in a masonry-styled gallery. The module
 link:{url-justified-gallery--home}[Justified Gallery, {browser-window--new}]
 is a great module to create responsive justified image galleries.
 
-.Asciidoc Markup
-[source, config, role="noclip mt-4 mb-4"]
-----
-gallery::jg_gallery[]
-----
-
-.Masonry-styled Gallery of Images + lightGallery
-gallery::jg_customizer[role="mb-4"]
+.Masonry Layout of Justified Gallery
+gallery::jg_customizer[role="mt-4 mb-4"]
 
 Digital image content, pictures or videos, are easy to make. Today, every
 mobile has a camera. Presenting a bunch of photos or videos is done very
@@ -561,68 +469,3 @@ Justified Gallery is using *lightGallery* for default.
 [role="mt-4"]
 Find more on how to present video content using *Justified Gallery* on the example
 page link:{url-roundtrip--present-videos}[Present Videos, {browser-window--new}].
-
-++++
-<script>
-
-$(function() {
-
-  setTimeout (function() {
-
-    var $grid = $('#masonry_video_example').masonry({
-      percentPosition:        true,
-      horizontalOrder:        true,
-      originLeft:             true,
-      originTop:              true,
-      initLayout:             true,
-      transitionDuration:     "0.8s",
-      stagger:                "0.03s",
-      resize:                 true,
-      gutter:                 0,
-    })
-    .on('layoutComplete', function(items) {
-      console.log("masonry: layoutComplete");
-    });
-
-    // run lightGallery after all images are loaded with the grid
-    //
-    $grid.imagesLoaded(function() {
-      console.log("masonry: imagesLoaded");
-      console.log("masonry: fire lightGallery");
-
-      lightGallery(document.getElementById("masonry_video_example"), {
-        plugins: [lgFullscreen, lgThumbnail, lgVideo],
-        selector: '.lg-item',
-        download: false,
-        speed: 500,
-        alignThumbnails: 'left',
-        autoplayFirstVideo: false,
-        videojs: true,
-        videojsTheme: 'vjs-theme-uno',
-        videojsOptions: {
-          autoplay: false,
-          controls: true,
-          fluid: true,
-          muted: false,
-          preload: true,
-          playbackRates: [0.25, 0.5, 1, 1.5, 2],
-//            fullscreenToggle: true,
-//            volumePanel: true,
-          controlBar: {
-//            remainingTimeDisplay: true,
-            pictureInPictureToggle: false,
-            skipButtons: {
-              forward:  5,
-              backward: 5
-            }
-          }
-        },
-      });
-    });
-
-  }, 1200);
-
-});
-
-</script>
-++++

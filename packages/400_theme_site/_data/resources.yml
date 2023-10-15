@@ -1451,8 +1451,8 @@ resources:
 
       data:
         css:                            []
-        files:                          []
-        js:                             [ modules/videojs/js/plugins/vm/api/vimeo ]
+        files:                          [ modules/videojs/js/plugins/vm/api/player.min.js ]
+        js:                             []
         init_function:                  []
 
   # ----------------------------------------------------------------------------

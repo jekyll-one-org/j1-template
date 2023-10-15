@@ -135,8 +135,14 @@
       return divWrapper;
     }
 
+    // prevent "Failed to execute 'postMessage' on 'DOMWindow'"
+    // by setting "origin" with "playerVars"
+    // see: https://stackoverflow.com/questions/27573017/failed-to-execute-postmessage-on-domwindow-https-www-youtube-com-http
+    //
     initYTPlayer() {
+      const origin = window.location.origin;
       var playerVars = {
+        origin: origin,
         controls: 0,
         modestbranding: 1,
         rel: 0,
@@ -253,6 +259,7 @@
       var playerConfig = {
         videoId: this.activeVideoId,
         playerVars: playerVars,
+
         events: {
           onReady: this.onPlayerReady.bind(this),
           onPlaybackQualityChange: this.onPlayerPlaybackQualityChange.bind(this),

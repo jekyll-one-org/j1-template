@@ -47,12 +47,11 @@ settings:
       link_new_window:                  true                                    # default: false
 
       # ------------------------------------------------------------------------
-      # Lightbox options
+      # Lightbox options (no lightbox available for posts)
       # ------------------------------------------------------------------------
       #
       lightbox:
         enabled:                        false
-        type:                           lb                                      # lb | lg
 
       # ------------------------------------------------------------------------
       # Masonry options
@@ -87,16 +86,13 @@ settings:
       image_height:                     300px
       image_width:                      300px
       translate_titles:                 false                                   # default: false
-      lightbox:                         false
-
 
       # ------------------------------------------------------------------------
-      # Lightbox options
+      # Lightbox options (no lightbox available for collections)
       # ------------------------------------------------------------------------
       #
       lightbox:
         enabled:                        false
-        type:                           lb                                      # lb | lg
 
       # ------------------------------------------------------------------------
       # Preview options
@@ -131,6 +127,12 @@ settings:
       translate_titles:                 false                                   # default: false
       preview:                          true
 
+      # ------------------------------------------------------------------------
+      # Lightbox options (no lightbox available for collections)
+      # ------------------------------------------------------------------------
+      #
+      lightbox:
+        enabled:                        false
 
       # ------------------------------------------------------------------------
       # Masonry options
@@ -160,6 +162,13 @@ settings:
       preview:                          true
 
       # ------------------------------------------------------------------------
+      # Lightbox options (no lightbox available for collections)
+      # ------------------------------------------------------------------------
+      #
+      lightbox:
+        enabled:                        false
+
+      # ------------------------------------------------------------------------
       # Masonry options
       #
       options:
@@ -185,6 +194,13 @@ settings:
       image_height:                     470px
       image_width:                      400px
       preview:                          true
+
+      # ------------------------------------------------------------------------
+      # Lightbox options (no lightbox available for collections)
+      # ------------------------------------------------------------------------
+      #
+      lightbox:
+        enabled:                        false
 
       # ------------------------------------------------------------------------
       # Masonry options
@@ -216,7 +232,6 @@ settings:
       lightbox:
         enabled:                        true
         type:                           lb                                      # lb | lg
-        options:
 
       # ------------------------------------------------------------------------
       # Caption options
@@ -349,7 +364,6 @@ settings:
       lightbox:
         enabled:                        true
         type:                           lg                                      # lb | lg
-        options:
 
       lightGallery:
         plugins:                        lgFullscreen, lgRotate, lgThumbnail

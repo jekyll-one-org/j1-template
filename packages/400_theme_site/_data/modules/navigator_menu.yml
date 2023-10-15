@@ -239,6 +239,11 @@
           icon:                         video
           target:                       _blank
 
+        - title:                        Wisria API
+          href:                         /pages/public/manuals/videojs/wistia_api/
+          icon:                         video
+          target:                       _blank
+
     - title:                            Modules
       icon:                             alpha-j-box
       dropdown:

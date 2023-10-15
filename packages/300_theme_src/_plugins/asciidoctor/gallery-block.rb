@@ -22,7 +22,7 @@ include Asciidoctor
 # Example:
 #
 #   .The gallery title
-#   gallery::jg_live_demo[]
+#   gallery::jg_live_demo[role="mt-4 mb-5"]
 #
 Asciidoctor::Extensions.register do
 
@@ -31,7 +31,7 @@ Asciidoctor::Extensions.register do
 
     named :gallery
     name_positional_attributes 'role'
-    default_attrs 'role' => 'mt-3 mb-3'
+    default_attrs 'role' => 'mt-4 mb-4'
 
     def process parent, target, attributes
       title_html  = (attributes.has_key? 'title') ? %(<div class="gallery-title">#{attributes['title']}</div>\n) : nil

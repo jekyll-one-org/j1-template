@@ -11,6 +11,8 @@
  #
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # lightGallery is licensed under the GPLv3 license
+ # See: https://github.com/sachinchoolur/lightGallery/blob/master/LICENSE
  # -----------------------------------------------------------------------------
 */
 
@@ -20,7 +22,7 @@
  * Copyright (c) 2020 Sachin Neravath;
  * @license GPLv3
  */
- 
+
 .lg-outer .lg-pager-outer {
   text-align: center;
   z-index: 1080;

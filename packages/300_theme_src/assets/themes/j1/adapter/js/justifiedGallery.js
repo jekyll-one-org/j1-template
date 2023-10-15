@@ -62,12 +62,15 @@ regenerate:                             true
  # https://github.com/miromannino/Justified-Gallery
  #
  # Copyright (C) 2020 Miro Mannino
+ # Copyright (C) 2023 Sachin Neravath
  # Copyright (C) 2023 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # Justified Gallery is licensed under the MIT license
  # See: https://github.com/miromannino/Justified-Gallery/blob/master/LICENSE
+ # lightGallery is licensed under the GPLv3 license
+ # See: https://github.com/sachinchoolur/lightGallery/blob/master/LICENSE
  # -----------------------------------------------------------------------------
  # Adapter generated: {{site.time}}
  # -----------------------------------------------------------------------------
@@ -166,50 +169,14 @@ j1.adapter.justifiedGallery = (function (j1, window) {
       {% for item in jf_gallery_options.galleries %}
         {% if item.gallery.enabled %}
 
-          {% assign gallery_id = item.gallery.id %}
-
+          {% assign gallery_id            = item.gallery.id %}
           {% assign lb_options        	  = item.gallery.lightbox_options %}
           {% assign jg_options            = item.gallery.gallery_options  %}
-          {% assign gallery_title         = item.gallery.title %}
           {% assign gallery_type          = item.gallery.type %}
-          {% assign lightbox              = item.gallery.lightbox_options.lightbox %}
-          {% assign theme                 = item.gallery.theme %}
-          {% assign show_delay        	  = 250 %}
-
-          {% if lightbox == "lg" %}
-            {% assign lb_mode             = "lg-fade" %}
-            {% assign lb_cssEasing        = "cubic-bezier(0.25, 0, 0.25, 1)" %}
-            {% assign lb_thumbnails       = true  %}
-            {% assign lb_autoplay         = false %}
-            {% assign lb_fullscreen       = true  %}
-            {% assign lb_pager            = true  %}
-            {% assign lb_zoomer           = true  %}
-            {% assign lb_hash             = true  %}
-            {% assign lb_video            = false %}
-            {% assign lb_video_html5      = false %}
-            {% assign lb_video_online     = false %}
-            {% assign lb_share            = false %}
-            {% assign lb_share_facebook   = false %}
-            {% assign lb_share_twitter    = false %}
-            {% assign lb_share_googleplus = false %}
-            {% assign lb_share_pinterest  = false %}
-          {% endif %}
-
-          {% if item.gallery.show_delay %}  {% assign show_delay    = item.gallery.show_delay %}  {% endif %}
-          {% if item.gallery.theme %}       {% assign theme         = item.gallery.theme %}  {% endif %}
-          {% if lb_options.mode %}          {% assign lb_mode       = lb_options.mode %}          {% endif %}
-          {% if lb_options.cssEasing %}     {% assign lb_cssEasing  = lb_options.cssEasing %}     {% endif %}
-          {% if lb_options.thumbnails %}    {% assign lb_thumbnails = lb_options.thumbnails %}    {% endif %}
-          {% if lb_options.autoplay %}      {% assign lb_autoplay   = lb_options.autoplay %}      {% endif %}
-          {% if lb_options.fullscreen %}    {% assign lb_fullscreen = lb_options.fullscreen %}    {% endif %}
-          {% if lb_options.pager %}         {% assign lb_pager      = lb_options.pager %}         {% endif %}
-          {% if lb_options.zoomer %}        {% assign lb_zoomer     = lb_options.zoomer %}        {% endif %}
-          {% if lb_options.video.enabled %} {% assign lb_video      = lb_options.video.enabled %} {% endif %}
-
-          {% if lb_options.video.enabled %}
-            logText = '\n' + 'type video not supported';
-            logger.error(logText);
-          {% endif %}
+          {% assign lightbox_enabled      = item.gallery.lightbox.enabled %}
+          {% assign lightbox_type         = item.gallery.lightbox.type %}
+          {% assign show_delay        	  = item.gallery.gallery_options.show_delay %}
+          {% assign theme                 = item.gallery.gallery_options.theme %}
 
           // Create an gallery instance if id: {{gallery_id}} exists
           if ($('#{{gallery_id}}').length) {
@@ -217,38 +184,25 @@ j1.adapter.justifiedGallery = (function (j1, window) {
           logText = '\n' + 'gallery is being initialized on id: #{{gallery_id}}';
           logger.info(logText);
 
-          // Place HTML markup for the title
-          {% if gallery_title %}
-          var gallery_title = '<div class="jg-gallery-title">{{gallery_title}}</div>';
-          $('#{{gallery_id}}').before(gallery_title);
-          {% endif %}
-
-          $('#{{gallery_id}}').addClass('justified-gallery {{css_classes}}');
+          $('#{{gallery_id}}').addClass('justified-gallery');
 
           {% if gallery_type == "image" %}
             // Collect image gallery data from data file (xhr_data_path)
             $.getJSON('{{jf_gallery_options.xhr_data_path}}', function (data) {
               var content = '';
               var gallery_class = 'justified-gallery';
-              {% if lightbox == "lg" %}
+              {% if lightbox_enabled and lightbox_type == "lg" %}
               gallery_class += ' light-gallery ';
               {% endif %}
 
               for (var i in data['{{item.gallery.id}}']) {
-                var img               = data['{{item.gallery.id}}'][i].img;
-                var captions_gallery  = data['{{item.gallery.id}}'][i].captions_gallery;
-                var captions_lightbox = data['{{item.gallery.id}}'][i].captions_lightbox;
-                var lightbox          = '{{lightbox}}';
+                var img           = data['{{item.gallery.id}}'][i].img;
+                var captions      = data['{{item.gallery.id}}'][i].captions;
+                var lightbox_type = '{{lightbox_type}}';
 
-                if (captions_lightbox != null && lightbox == 'lg') {
-                  content +=  '<a class="speak2me-ignore" data-sub-html="' +captions_lightbox+ '" ';
-                  content +=  'href="' +img+ '">' + '\n';
-                  content +=  '  <img class="speak2me-ignore" src="' +img+ '" img alt="' +captions_lightbox+ '">' + '\n';
-                } else {
-                  content +=  '<a class="speak2me-ignore" data-sub-html="' +captions_gallery+ '" ';
-                  content +=  'href="' +img+ '">' + '\n';
-                  content +=  ' <img class="speak2me-ignore" src="' +img+ '" img alt="' +captions_gallery+ '">' + '\n';
-                }
+                content +=  '<a class="lg-item speak2me-ignore" data-sub-html="' +captions+ '" ';
+                content +=  'href="' +img+ '">' + '\n';
+                content +=  ' <img class="speak2me-ignore" src="' +img+ '" img alt="' +captions+ '">' + '\n';
                 content +=  '</a>' + '\n';
 
               } // END for
@@ -261,7 +215,7 @@ j1.adapter.justifiedGallery = (function (j1, window) {
               var play_button = '/assets/themes/j1/modules/lightGallery/css/themes/icons/play-button.png';
               var content = '';
               var gallery_class = 'justified-gallery';
-              {% if lightbox == "lg" %}
+              {% if lightbox_type == "lg" %}
               gallery_class += ' light-gallery ';
               {% endif %}
 
@@ -271,15 +225,14 @@ j1.adapter.justifiedGallery = (function (j1, window) {
                 var captions_lightbox = data['{{item.gallery.id}}'][i].captions_lightbox;
                 var video_id          = data['{{item.gallery.id}}'][i].video_id;
                 var video             = data['{{item.gallery.id}}'][i].video;
-                var theme             = data['{{item.gallery.id}}'][i].theme;
                 var player_params     = data['{{item.gallery.id}}'][i].player_params;
-                var lightbox          = '{{lightbox}}';
+                var lightbox          = '{{lightbox_type}}';
 
                 if (captions_lightbox != null && lightbox == 'lg') {
                   // VIDEO content use 'lightGallery'
                   // jadams 2023-06-18: NOT possible to add an href element (required for SEO)
                   //
-                  content +=  '<a class="speak2me-ignore" data-sub-html="' +captions_lightbox+ '" ';
+                  content +=  '<a class="lg-item speak2me-ignore" data-sub-html="' +captions_lightbox+ '" ';
                   {% if gallery_type == "video-html5" %}
                   content += ' data-html="#' +video_id+ '">' + '\n';
                   {% endif %}
@@ -326,13 +279,17 @@ j1.adapter.justifiedGallery = (function (j1, window) {
               // and place HTML markup
               $('#{{gallery_id}}').hide().html(content);
               // Initialize and run the gallery using individual gallery|lightbox options
-              {% if lightbox == "lg" %}
+              {% if lightbox_type == "lg" %}
                 var gallery_selector = $('#{{gallery_id}}');
                 if (options !== undefined) {
                   // lightbox initialized on COMPLETE event of justifiedGallery
                   /* eslint-disable */
                   gallery_selector.justifiedGallery({
                     {% for option in item.gallery.gallery_options %}
+                    {% if option[0] contains "gutters" %}
+                    {{'margins' | json}}: {{option[1] | json}},
+                    {% continue %}
+                    {% endif %}
                     {{option[0] | json}}: {{option[1] | json}},
                     {% endfor %}
                   })
@@ -340,26 +297,17 @@ j1.adapter.justifiedGallery = (function (j1, window) {
                   .on('jg.complete', function (e) {
                     e.stopPropagation();
 
-                    // options enabled
                     /* eslint-disable */
-
-                    // lightGallery(
-                    //   document.getElementById("{{gallery_id}}"), {
-                    //   plugins: [lgFullscreen, lgRotate, lgThumbnail],
-                    //   licenseKey: '0000-0000-000-0000',
-                    //   download: false,
-                    //   alignThumbnails: 'left',
-                    //   {% for option in item.gallery.lightbox_options %}
-                    //   {{option[0] | json}}: {{option[1] | json}},
-                    //   {% endfor %}
-                    // });
-
-                    lightGallery(
-                      document.getElementById("{{gallery_id}}"), {
-                      plugins: [lgFullscreen, lgRotate, lgThumbnail],
-                      licenseKey: '0000-0000-000-0000',
-                      download: false,
-                      alignThumbnails: 'left',
+                    // setup the lightbox
+                    //
+                    var lg      = document.getElementById("{{gallery_id}}");
+                    var gallery = lightGallery(lg, {
+                      "plugins":    [{{item.gallery.lightGallery.plugins}}],
+                      {% for option in item.gallery.lightGallery.options %}
+                      {{option[0] | json}}: {{option[1] | json}},
+                      {% endfor %}
+                      "galleryId":  "{{gallery_id}}",
+                      "selector":   ".lg-item",
                     });
                     /* eslint-enable */
 
@@ -384,7 +332,7 @@ j1.adapter.justifiedGallery = (function (j1, window) {
                      e.stopPropagation();
                     // lightbox initialized on COMPLETE event of justifiedGallery
                     /* eslint-disable */
-                    window.lightGallery(
+                    lightGallery(
                       document.getElementById("{{gallery_id}}"), {
                       plugins: [lgVideo],
                       {% for option in item.gallery.lightbox_options %}

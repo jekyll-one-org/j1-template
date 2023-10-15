@@ -1,0 +1,1870 @@
+== JavaScript Player API
+
+The Wistia player has a built-in JavaScript API, providing you with a
+variety of ways to create awesome functions and interact with the
+player.
+
+The JavaScript Player API was specifically built for _videos_. We do not
+formally support using it for audio files, either in projects or
+Channels, at this time. For the most reliable experience, we recommend
+continuing to use it for videos.
+
+=== link:#get-started[Get started]
+
+To use the Player API, you need a “handle” to it. When we use the term
+“handle,” we mean a javascript variable that is associated with a Wistia
+video and defines the Player API methods. You’ll see the variable
+`video` - and other similar variables - used frequently in examples in
+these docs; these are all Player API handles. Since Wistia embeds are
+initialized asynchronously, we recommend the following patterns to
+acquire player API handles for your videos.
+
+[[use-window-_wq-to-get-a-video-handle]]
+==== link:#use-window-_wq-to-get-a-video-handle[Use window._wq to get a video handle]
+
+The first and easiest way is to push a function onto the initialization
+queue. The handle will be given as an argument of the callback function.
+
+===== link:#with-standard-embeds[With Standard embeds]
+
+We push an object of the form
+`{ id: matcher, initialization_event: callback }` onto the queue. Embeds
+that match — as described in the
+link:/support/developers/player-api#wistiaapimatcher[`Wistia.api(matcher)`]
+section below — will run the callback function.
+
+There are three possible initialization events: `onHasData`,
+`onEmbedded`, and `onReady`. These names align with the
+link:#hasdata[hasData()], link:#embedded[embedded()], and
+link:#ready[ready()] methods described below.
+
+In this example, we get a handle to the video when `ready()` becomes
+true:
+
+[source,markdown]
+----
+<script src="//fast.wistia.com/assets/external/E-v1.js" async></script>
+    <div class="wistia_embed wistia_async_abcde12345" style="width:640px;height:360px;"></div>
+    <script>
+    window._wq = window._wq || [];
+    _wq.push({ id: 'abcde12345', onReady: function(video) {
+      console.log("I got a handle to the video!", video);
+    }});
+    </script>
+
+----
+
+===== link:#with-iframe-embeds[With iframe embeds]
+
+The exact same syntax will work with iframe embeds too:
+
+[source,markdown]
+----
+<iframe src="//fast.wistia.net/embed/iframe/abcde12345" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen width="640" height="360"></iframe>
+    <script src="//fast.wistia.net/assets/external/E-v1.js" async></script>
+    <script>
+    window._wq = window._wq || [];
+    _wq.push({ id: "abcde12345", onReady: function(video) {
+      console.log("I got a handle to the video!", video);
+    }});
+    </script>
+
+----
+
+===== link:#heres-whats-happening[Here’s what’s happening:]
+
+. We make sure `window._wq` is defined as an array.
+. We push a matcher ("abcde12345") associated with a callback function
+onto the queue.
+. E-v1.js loads and the video data is fetched in the background.
+. The callback function runs when the specified initialization state is
+reached.
+
+Note that you can push functions onto `window._wq` at any time–including
+after `E-v1.js` has loaded and expect it to be quickly executed.
+
+===== link:#you-can-also-target-all-videos-on-the-page[You can also target all videos on the page]
+
+If you’d like to run your function on all videos on the page, you can
+use the special “_all” matcher:
+
+[source,markdown]
+----
+window._wq = window._wq || [];
+    _wq.push({ id: "_all", onReady: function(video) {
+      console.log("This will run for every video on the page. Right now I'm on this one:", video);
+    }});
+
+----
+
+This will run immediately on any videos that are currently on the page.
+It will also be run immediately on videos injected after the page loads.
+
+[[wistia-api-matcher]]
+==== link:#wistia-api-matcher[Wistia.api(matcher)]
+
+If you’re quite sure your video code will be running after the video has
+already loaded, you can use `Wistia.api(matcher)` to get a handle
+synchronously. If no match is found, `Wistia.api(matcher)` will return
+`null`.
+
+[source,markdown]
+----
+var video = Wistia.api("abcde12345");
+    console.log("I got a handle to the video!", video);
+
+----
+
+The `matcher` argument is compared to the container ID or the hashed ID
+of the video.
+
+[source,markdown]
+----
+<script src="//fast.wistia.com/assets/external/E-v1.js" async></script>
+    <div id="my_video" class="wistia_embed wistia_async_abcde12345" style="width:640px;height:360px;"></div>
+
+----
+
+To access it, you can reference a portion of the video’s container ID or
+hashed ID. For example, any of the following calls would get the same
+handle to the video:
+
+[source,markdown]
+----
+var video1 = Wistia.api("my_video");
+    var video2 = Wistia.api("abcde12345");
+    var video3 = Wistia.api("my_");
+    var video4 = Wistia.api("abc");
+
+    console.log(video1 === video2); // true
+    console.log(video2 === video3); // true
+    console.log(video3 === video4); // true
+
+----
+
+If the same video appears several times on the page,
+`Wistia.api("hashedid")` will only return the first instance. If you
+need a handle for each instance, you’ll need to assign unique container
+IDs and reference those. When assigning custom container IDs,
+numeric-only IDs are not allowed.
+
+If the first 3 letters of the hashed ID are used, there is a 1 in 46,656
+chance that you will have a collision with another video on the page. To
+be safe, if you have many videos on a page, you may want to be more
+verbose. For example, increasing your matcher to 4 characters decreases
+the chance of collision to 1 in 1,679,616. But short access is
+convenient and can be used on most pages where the number of videos is
+small.
+
+'''''
+
+=== link:#methods[Methods]
+
+==== link:#list-of-player-methods[List of Player Methods]
+
+* link:#addtoplaylist-hashedid-options-position[addToPlaylist(hashedId,
+[options], [position])]
+* link:#aspect[aspect()]
+* link:#bind-eventtype-callbackfn[bind(eventType, callbackFn)]
+* link:#cancelfullscreenmethod[cancelFullscreen()]
+* link:#duration[duration()]
+* link:#email[email()]
+* link:#email-val[email(val)]
+* link:#embedded[embedded()]
+* link:#eventkey[eventKey()]
+* link:#getsubtitlesscale[getSubtitlesScale()]
+* link:#hasdata[hasData()]
+* link:#hashedid[hashedId()]
+* link:#height[height()]
+* link:#height-val-options[height(val, [options])]
+* link:#infullscreen[inFullscreen()]
+* link:#ismuted[isMuted()]
+* link:#look[look()]
+* link:#look-options[look(options)]
+* link:#mute[mute()]
+* link:#name[name()]
+* link:#pause[pause()]
+* link:#percentwatched[percentWatched()]
+* link:#play[play()]
+* link:#playbackrate-r[playbackRate(r)]
+* link:#ready[ready()]
+* link:#remove[remove()]
+* link:#replacewith-hashedid-options[replaceWith(hashedId, [options])]
+* link:#requestfullscreen[requestFullscreen]
+* link:#revoke[revoke]
+* link:#secondswatched[secondsWatched()]
+* link:#secondswatchedvector[secondsWatchedVector()]
+* link:#setsubtitlesscale-val[setSubtitlesScale(val)]
+* link:#state[state()]
+* link:#time[time()]
+* link:#time-val[time(val)]
+* link:#unbind-eventtype-callbackfn[unbind(eventType, callbackFn)]
+* link:#unmute[unmute()]
+* link:#videoheight[videoHeight()]
+* link:#videoheight-val-options[videoHeight(val, [options])]
+* link:#videoquality[videoQuality()]
+* link:#videoquality-val[videoQuality(val)]
+* link:#videowidth[videoWidth()]
+* link:#videowidth-val-options[videoWidth(val, [options])]
+* link:#visitorkey[visitorKey()]
+* link:#volume[volume()]
+* link:#volume-val[volume(val)]
+* link:#width[width()]
+* link:#width-val[width(val)]
+
+[[addtoplaylist-hashedid-options-position]]
+==== link:#addtoplaylist-hashedid-options-position[addToPlaylist(hashedId, [options], [position])]
+
+A video has a “playlist,” which is a list of videos to play in sequence.
+Each playlist must have a unique list of hashed IDs; a hashed ID cannot
+appear twice within the same playlist.
+
+Use `addToPlaylist` to push more videos onto the queue. When a video is
+finished playing, it will play the next one in its playlist.
+
+[source,markdown]
+----
+video.addToPlaylist("abcde12345", {
+      playerColor: "00ff00"
+    });
+
+----
+
+The `position` argument lets you define where in the playlist the video
+should be added. It can take any of these forms:
+
+[source,markdown]
+----
+// Play abcde12345 before hashedid
+    video.addToPlaylist("abcde12345", {}, { before: "hashedid" });
+
+    // Play abcde12345 after hashedid
+    video.addToPlaylist("abcde12345", {}, { after: "hashedid" });
+
+    // Put abcde12345 in the first position
+    // Note that this will not automatically replace the video too. To do that, you
+    // should make use of `replaceWith`. See the pre-roll video example below.
+    video.addToPlaylist("abcde12345", {}, { index: 0 });
+
+----
+
+Before using this, you might want to see if
+link:/support/developers/embed-links#simple-playlist-link-example[embed
+and playlist links] covers your use case.
+
+NOTE: This method currently does not work with iframe embeds or
+link:/support/developers/embed-links#special-playlist-options[playlist
+links set to auto]
+
+==== link:#aspect[aspect()]
+
+Returns the aspect ratio (width / height) of the originally uploaded
+video.
+
+[source,markdown]
+----
+if (video.aspect() < 1) {
+      console.log("vertical video");
+    } else if (video.aspect() > 1) {
+      console.log("horizontal video");
+    } else {
+      console.log("This video is square.");
+    }
+
+----
+
+[[bind-eventtype-callbackfn]]
+==== link:#bind-eventtype-callbackfn[bind(eventType, callbackFn)]
+
+Runs a callback function when a specific event is triggered.
+link:#events[Refer to the Events section] to see how to respond to the
+different types events.
+
+[source,markdown]
+----
+video.bind("play", function() {
+      console.log("the video played!");
+    });
+
+    video.bind("timechange", function(t) {
+      console.log("the time changed to " + t);
+    });
+
+    video.bind("end", function(t) {
+      console.log("the video ended");
+    });
+
+----
+
+[[cancelfullscreenmethod]]
+==== link:#cancelfullscreenmethod[cancelFullscreen()]
+
+If video is playing in fullscreen mode, calling this method will exit
+fullscreen.
+
+==== link:#duration[duration()]
+
+Returns the duration of the video in seconds. This will return 0 until
+`video.hasData()` is true.
+
+[source,markdown]
+----
+showVideoDurationOnMyPage(video.duration())
+
+----
+
+==== link:#email[email()]
+
+Returns the email associated with this viewing session. If no email is
+associated, it will return `null`.
+
+An email can be associated with a viewing session by:
+
+* calling `video.email('the@email.com')`
+* setting the `email` embed option
+* entering their email via Turnstile
+* adding `wemail=the%40email.com` to the URL of the page.
+
+Once an email has been saved for a viewer, it will persist for that web
+page until they clear their localStorage.
+
+[source,markdown]
+----
+recordViewerEmail(video.email());
+
+----
+
+[[email-val]]
+==== link:#email-val[email(val)]
+
+Associates the view of this video with the given email value. This email
+will appear in stats for the video.
+
+[source,markdown]
+----
+video.email(emailForThisUserInMySystem);
+
+----
+
+==== link:#embedded[embedded()]
+
+Returns true if the video has been embedded, false if it hasn’t yet. We
+define “embedded” as the video’s markup having been visibly injected
+into the DOM.
+
+[source,markdown]
+----
+if (video.embedded()) {
+      // do this thing
+    }
+
+----
+
+==== link:#eventkey[eventKey()]
+
+Returns the `event_key` for the current viewing session. You can get all
+events for your account from the
+link:/support/developers/stats-api#events[Stats API].
+
+==== link:#getsubtitlesscale[getSubtitlesScale()]
+
+Returns the value of the multiplier that’s scaling the size of your
+captions.
+
+[source,markdown]
+----
+video.plugin('captions').then(function (captions) {
+      captions.setSubtitlesScale(1.2);
+      captions.getSubtitlesScale(); // returns 1.2
+    });
+
+----
+
+==== link:#hasdata[hasData()]
+
+Returns true if the video has received data from the Wistia server,
+false if not. The data includes information like which video files are
+available, the name and duration of the video, and its customizations.
+
+==== link:#hashedid[hashedId()]
+
+Returns the hashed ID associated with this video. The hashed ID is an
+alphanumeric string that uniquely identifies your video in Wistia.
+
+[source,markdown]
+----
+recordPlayedVideo(video.hashedId(), video.name());
+
+----
+
+==== link:#height[height()]
+
+Returns the current height of the video container in pixels.
+
+[source,markdown]
+----
+// e.g. set the height of <div id="next_to_video"> to match the video.
+    $("#next_to_video").height(video.height());
+
+----
+
+[[height-val-options]]
+==== link:#height-val-options[height(val, [options])]
+
+Sets the height of the video container to `val` in pixels. It is
+expected that `val` is an integer. Decimal or string values will be
+truncated.
+
+If `constrain: true` is passed as an option, then the width of the video
+will also be updated to maintain the correct aspect ratio.
+
+[source,markdown]
+----
+video.height(360);
+    video.height(400, { constrain: true });
+
+----
+
+==== link:#infullscreen[inFullscreen()]
+
+Returns `true` if the video is currently playing in fullscreen, `false`
+if not.
+
+==== link:#ismuted[isMuted()]
+
+Returns true if the video is muted.
+
+==== link:#look[look()]
+
+[[97471cc4-6ddc-49d7-b3ae-545352283cc2]]
+image:data:image/svg+xml;base64,PHN2ZyB2aWV3Ym94PSIwIDAgNTEyIDUxMiIgY2xhc3M9Ikljb24ganN4LTQwNTQ2NDcxMzYiIHJvbGU9InByZXNlbnRhdGlvbiI+CiAgICAgICAgICAgICAgICAgIDxwYXRoIGQ9IiBNNDY0IDMySDQ4QzIxLjQ5IDMyIDAgNTMuNDkgMCA4MHYzNTJjMCAyNi41MSAyMS40OSA0OCA0OCA0OGg0MTZjMjYuNTEgMCA0OC0yMS40OSA0OC00OFY4MGMwLTI2LjUxLTIxLjQ5LTQ4LTQ4LTQ4em0tNiA0MDBINTRhNiA2IDAgMCAxLTYtNlY4NiBhNiA2IDAgMCAxIDYtNmg0MDRhNiA2IDAgMCAxIDYgNnYzNDBhNiA2IDAgMCAxLTYgNnptLTQyLTkydjI0YzAgNi42MjcgLTUuMzczIDEyLTEyIDEySDIwNGMtNi42MjcgMC0xMi01LjM3My0xMi0xMnYtMjRjMC02LjYyNyA1LjM3My0xMiAxMi0xMiBoMjAwYzYuNjI3IDAgMTIgNS4zNzMgMTIgMTJ6bTAtOTZ2MjRjMCA2LjYyNy01LjM3MyAxMi0xMiAxMkgyMDRjLTYuNjI3IDAtMTItNS4zNzMtMTItMTJ2LTI0YzAtNi42MjcgNS4zNzMtMTIgMTItMTJoMjAwYzYuNjI3IDAgMTIgNS4zNzMgMTIgMTIgem0wLTk2djI0YzAgNi42MjctNS4zNzMgMTItMTIgMTJIMjA0Yy02LjYyNyAwLTEyLTUuMzczLTEyLTEydi0yNGMwIC02LjYyNyA1LjM3My0xMiAxMi0xMmgyMDBjNi42MjcgMCAxMiA1LjM3MyAxMiAxMnptLTI1MiAxMmMwIDE5Ljg4MiAtMTYuMTE4IDM2LTM2IDM2cy0zNi0xNi4xMTgtMzYtMzYgMTYuMTE4LTM2IDM2LTM2IDM2IDE2LjExOCAzNiAzNnptMCA5NmMwIDE5Ljg4Mi0xNi4xMTggMzYtMzYgMzZzLTM2LTE2LjExOC0zNi0zNiAxNi4xMTgtMzYgMzYtMzYgMzYgMTYuMTE4IDM2IDM2em0wIDk2YzAgMTkuODgyLTE2LjExOCAzNi0zNiAzNnMtMzYtMTYuMTE4LTM2LTM2IDE2LjExOC0zNiAzNi0zNiAzNiAxNi4xMTggMzYgMzZ6ICIgZmlsbD0iY3VycmVudENvbG9yIj48L3BhdGg+CiAgICAgICAgICAgICAgICA8L3N2Zz4=[image]
+Note
+
+For 360° video only. To use the 360° player for a video head to the
+Controls section of the Customize panel and check the “This is a 360°
+video” checkbox.
+
+Returns an object that represents where the viewer is currently looking.
+The object contains the current `heading`, `pitch`, and `fov` (field of
+view) all in degrees.
+
+[source,markdown]
+----
+video.look() //=> { heading: 90, pitch: 5, fov: 120 }
+
+----
+
+A `heading` of 0 is straight ahead. A `heading` of 90 is looking to the
+right, -90 is to the left, and 180 is looking directly back.
+
+A `pitch` of 0 is looking straight ahead. A `pitch` of 90 is looking
+straight up, and -90 is straight down.
+
+`fov` is the horizontal field of view in degrees. A `fov` of 120
+indicates that the viewer is seeing one third of the whole scene
+(120°/360° = 1/3).
+
+[[look-options]]
+==== link:#look-options[look(options)]
+
+For 360° video only.
+
+Sets where the viewer is looking. Provide one or more of `heading`,
+`pitch`, and `fov`.
+
+[source,markdown]
+----
+video.look({ heading: 90 }) //=> look to the right
+    video.look({ pitch: 45 }) //=> look up 45°
+    video.look({ fov: 180 }) //=> expand the field of view so the viewer can see half the scene
+    video.look({ heading: 180, pitch: 0 }) //=> look straight back
+
+----
+
+By default, the view will `tween` to its new position — that is, it will
+smoothly animate to the new view. If you’d like it to snap to the new
+view without any animation, set `tween` to false like this:
+
+[source,markdown]
+----
+video.look({ heading: -90, tween: false })
+
+----
+
+==== link:#mute[mute()]
+
+Disables audio on the video.
+
+[source,markdown]
+----
+video.mute()
+
+----
+
+==== link:#name[name()]
+
+Returns the name of the video, as defined in the Wistia application.
+Returns null until `hasData()` is true.
+
+[source,markdown]
+----
+console.log("Thank you for watching " + video.name() + "!");
+
+----
+
+==== link:#pause[pause()]
+
+Pauses the video. If this is called and the video’s state is “playing,”
+it’s expected that it will change to “paused.”
+
+[source,markdown]
+----
+$("#custom_pause_button").click(function() {
+      video.pause()
+    });
+
+----
+
+==== link:#percentwatched[percentWatched()]
+
+Returns the percent of the video that has been watched as a decimal
+between 0 and 1. This is equivalent to computing
+`video.secondsWatched() / Math.floor(video.duration())`.
+
+[source,markdown]
+----
+$("#next_page").click(function() {
+      if (video.percentWatched() > 0.9 && video.percentWatched() < 0.99) {
+        if (confirm("But you're so closed to finishing the video -- there's a prize at the end! Move on anyway?")) {
+          goToNextPage();
+        }
+      } else {
+        goToNextPage();
+      }
+    });
+
+----
+
+==== link:#play[play()]
+
+Plays the video. If this is called, it is expected that the state will
+change to “playing.”
+
+NOTE: On iOS and other mobile devices, videos cannot be issued the
+“play” command outside the context of a user-driven or video event. For
+example, “click” and “touch” events are user-driven, and video events
+include “pause” and “end” (you can bind to these using
+`video.bind(eventType, callbackFn)` described above. Because of this
+restriction, you should avoid calling `play()` within a `setTimeout`
+callback or other asynchronous functions like XHR or javascript
+promises.
+
+Also for this reason, the `play()` method will never work with the
+iframe API on mobile. This is because the iframe API makes use of
+javascript’s `postMessage` API, which is by its nature asynchronous.
+
+Please refer to
+https://developer.apple.com/library/safari/documentation/AudioVideo/Conceptual/Using_HTML5_Audio_Video/Device-SpecificConsiderations/Device-SpecificConsiderations.html[Apple’s
+Documentation] for the reasons behind this behavior.
+
+[[playbackrate-r]]
+==== link:#playbackrate-r[playbackRate(r)]
+
+Sets the playback rate of the video, from 0 to infinity and beyond
+(though we would recommend keeping things between 0.5 and 2).
+
+[source,markdown]
+----
+video.playbackRate(1.25); // sets the playback rate to 1.25x regular speed.
+
+----
+
+[[78ea2fab-b26a-431d-8b0a-f7eacc959c3e]]
+image:data:image/svg+xml;base64,PHN2ZyB2aWV3Ym94PSIwIDAgNTEyIDUxMiIgY2xhc3M9Ikljb24ganN4LTQwNTQ2NDcxMzYiIHJvbGU9InByZXNlbnRhdGlvbiI+CiAgICAgICAgICAgICAgICAgIDxwYXRoIGQ9IiBNNDY0IDMySDQ4QzIxLjQ5IDMyIDAgNTMuNDkgMCA4MHYzNTJjMCAyNi41MSAyMS40OSA0OCA0OCA0OGg0MTZjMjYuNTEgMCA0OC0yMS40OSA0OC00OFY4MGMwLTI2LjUxLTIxLjQ5LTQ4LTQ4LTQ4em0tNiA0MDBINTRhNiA2IDAgMCAxLTYtNlY4NiBhNiA2IDAgMCAxIDYtNmg0MDRhNiA2IDAgMCAxIDYgNnYzNDBhNiA2IDAgMCAxLTYgNnptLTQyLTkydjI0YzAgNi42MjcgLTUuMzczIDEyLTEyIDEySDIwNGMtNi42MjcgMC0xMi01LjM3My0xMi0xMnYtMjRjMC02LjYyNyA1LjM3My0xMiAxMi0xMiBoMjAwYzYuNjI3IDAgMTIgNS4zNzMgMTIgMTJ6bTAtOTZ2MjRjMCA2LjYyNy01LjM3MyAxMi0xMiAxMkgyMDRjLTYuNjI3IDAtMTItNS4zNzMtMTItMTJ2LTI0YzAtNi42MjcgNS4zNzMtMTIgMTItMTJoMjAwYzYuNjI3IDAgMTIgNS4zNzMgMTIgMTIgem0wLTk2djI0YzAgNi42MjctNS4zNzMgMTItMTIgMTJIMjA0Yy02LjYyNyAwLTEyLTUuMzczLTEyLTEydi0yNGMwIC02LjYyNyA1LjM3My0xMiAxMi0xMmgyMDBjNi42MjcgMCAxMiA1LjM3MyAxMiAxMnptLTI1MiAxMmMwIDE5Ljg4MiAtMTYuMTE4IDM2LTM2IDM2cy0zNi0xNi4xMTgtMzYtMzYgMTYuMTE4LTM2IDM2LTM2IDM2IDE2LjExOCAzNiAzNnptMCA5NmMwIDE5Ljg4Mi0xNi4xMTggMzYtMzYgMzZzLTM2LTE2LjExOC0zNi0zNiAxNi4xMTgtMzYgMzYtMzYgMzYgMTYuMTE4IDM2IDM2em0wIDk2YzAgMTkuODgyLTE2LjExOCAzNi0zNiAzNnMtMzYtMTYuMTE4LTM2LTM2IDE2LjExOC0zNiAzNi0zNiAzNiAxNi4xMTggMzYgMzZ6ICIgZmlsbD0iY3VycmVudENvbG9yIj48L3BhdGg+CiAgICAgICAgICAgICAgICA8L3N2Zz4=[image]
+Note
+
+The `playbackRate` method does not work with the Flash player, which
+Wistia will sometimes fall back to for legacy browser support.
+
+==== link:#ready[ready()]
+
+Returns true if the video is ready to be played, false if it is not. A
+video is “ready” if:
+
+. it has data from the server,
+. it is embedded in the DOM,
+. its javascript interface is available,
+. metadata required to play is loaded,
+. it is not hidden via `display: none`.
+
+The visibility requirement is grounded in practicality. That is, Flash
+videos cannot be played when they are hidden via `display: none`, so
+supporting the opposite with HTML5 videos would set up a fundamental
+difference between our embed types. But it is also a common use case to
+embed a video in a hidden tab or a custom lightbox. In these cases, if
+the video has `autoPlay=true`, it will still defer playing until it
+becomes visible.
+
+If you must have your video be hidden AND ready, consider moving it
+offscreen like `position: absolute; left: -99999em` instead of using
+`display: none`.
+
+==== link:#remove[remove()]
+
+Removes the video from the page cleanly. This will do garbage
+collection, cancel asynchronous operations, and stop the video from
+streaming, none of which are reliable if the video is simply removed
+from the DOM, e.g. `$(".wistia_embed").empty().remove()`.
+
+[source,markdown]
+----
+function nextPage() {
+      $.get("/next_page.html", function() {
+        // If a video is defined for this page, remove it cleanly before it is
+        // removed from the DOM.
+        if (currentVideo) {
+          currentVideo.remove();
+          currentVideo = null;
+        }
+        $("#the_content").html(nextPageContent);
+      });
+    }
+
+----
+
+[[replacewith-hashedid-options]]
+==== link:#replacewith-hashedid-options[replaceWith(hashedId, [options])]
+
+Replaces the content of the current video with the video identified by
+`hashedId`. This video will be loaded with all its customizations, which
+can be overridden in the `options` object. This method can be used in
+conjunction with `addToPlaylist(hashedId, [options])` to create custom
+playlist implementations.
+
+In addition to the normal link:/support/developers/embed-options[embed
+options], you can set the `transition` option, which defines how to
+visually transition to the new video. Available values are “slide,”
+“fade,” “crossfade,” and “none.” By default, “fade” is used.
+
+[source,markdown]
+----
+$("#video_abcde12345").click(function() {
+      video.replaceWith("abcde12345",
+        {transition: "slide"}
+      );
+    });
+
+----
+
+Before using this, you might want to see if
+link:/support/developers/embed-links#simple-video-replacement-example[embed
+and playlist links] covers your use case.
+
+NOTE: This method currently does not work with iframe embeds.
+
+==== link:#requestfullscreen[requestFullscreen()]
+
+If this method is called, the player will try to go fullscreen. NOTE:
+This method will only work if called in response to a user-initiated
+event, such as a click or a keyboard event. It will not work if called
+as part of an async operation, such as a timeout.
+
+==== link:#revoke[revoke]
+
+Unlike `remove()` which will only remove an embed from a page, `revoke`
+is used to remove any embed initialization configuration objects from
+the page that were added using the `_wq` syntax. This is especially
+useful when embedding videos within a single-page application or working
+with JS frameworks such as React, Vue.js, or Angular. In those
+situations, the config object is often pushed onto the initialization
+queue each time a video component is mounted, resulting in compounding
+function calls if the component is unmounted and then remounted
+repeatedly. You can solve this by using `revoke` when your component
+unmounts.
+
+To revoke an embed initialization config object, push a reference to it
+onto the queue under the `revoke` key, like this:
+
+[source,markdown]
+----
+window._wq = window._wq || []
+
+    const embedInitConfig = {
+      id: "abcde12345",
+      onReady: function(video) {
+        video.bind("play", () => {
+          // some function to run when the video plays
+        }
+      }
+    });
+    .
+    .
+    // push embedInitConfig onto queue when video is mounted
+    window._wq.push(embedInitConfig);
+    .
+    .
+    // revoke embedInitConfig when video is unmounted
+    window._wq.push( { revoke: embedInitConfig } );
+
+----
+
+==== link:#secondswatched[secondsWatched()]
+
+Returns the number of unique seconds that have been watched for the
+video. This does not include seconds that have been skipped by seeking.
+
+[source,markdown]
+----
+video.bind("secondchange", function() {
+      if (video.secondsWatched() >= 60) {
+        console.log("You've watched over a full minute of this video!");
+      }
+    });
+
+----
+
+NOTE: This method currently does not work with iframe embeds.
+
+==== link:#secondswatchedvector[secondsWatchedVector()]
+
+ADVANCED. Returns an array where each index represents the number of
+times the viewer has watched each second of the video. For example, if a
+video is 10 seconds long and the viewer has watched the first three
+seconds, it will look like this:
+
+[source,markdown]
+----
+[1, 1, 1, 0, 0, 0, 0, 0, 0, 0]
+
+----
+
+If the viewer has watched the entire video once and rewatched the first
+5 seconds, it will look like this:
+
+[source,markdown]
+----
+[2, 2, 2, 2, 2, 1, 1, 1, 1, 1]
+
+----
+
+This can be used to quickly determine if a viewer has missed or
+rewatched an important part of a video.
+
+[source,markdown]
+----
+video.bind("end", function() {
+      var watchedVector = video.secondsWatchedVector();
+      var watchedImportantSeconds = 0;
+      for (var i = 4; i < 9; i++) {
+        if (watchedVector[i] > 0) {
+          watchedImportantSeconds += 1;
+        }
+      }
+      if (watchedImportantSeconds < 2) {
+        console.log("You should really go back and watch seconds 5 through 10. They're important!");
+      }
+    });
+
+----
+
+NOTE: This method currently does not work with iframe embeds.
+
+[[setsubtitlesscale-val]]
+==== link:#setsubtitlesscale-val[setSubtitlesScale(val)]
+
+Sets the a multiplier `val` to scale the size of your captions.
+
+[source,markdown]
+----
+video.plugin('captions').then(function (captions) {
+      captions.setSubtitlesScale(1.2);
+      captions.getSubtitlesScale(); // returns 1.2
+    });
+
+----
+
+NOTE: The scaling value is a multiplier on top of our existing scaling,
+so the font still gets bigger and smaller with the video, but its final
+size is multiplied by that option.
+
+==== link:#state[state()]
+
+Returns the current state of the video as a string. Possible values are
+“beforeplay,” “playing,” “paused,” and “ended.”
+
+The most common use case for `state()` is implementing a play/pause
+toggle button.
+
+[source,markdown]
+----
+$("#toggle_play").click(function() {
+      if (video.state() === "playing") {
+        video.pause();
+      } else {
+        video.play();
+      }
+    });
+
+----
+
+==== link:#time[time()]
+
+Returns the current time of the video as a decimal in seconds.
+
+[source,markdown]
+----
+$("#leave_comment").click(function() {
+      $("#comment").html(commentData + "<span class='time'>left at " + video.time() + " seconds</span>")
+    });
+
+----
+
+[[time-val]]
+==== link:#time-val[time(val)]
+
+Seeks the video to the time defined by `val`. It is expected that `val`
+is a decimal integer specified in seconds. This method will maintain the
+state of the video: if the video was playing, it will continue playing
+after seek. If it was not playing, the video will be paused.
+
+NOTE: On iOS, when seeking from the “beforeplay” state,
+`video.time(val)` is subject to the same restrictions as `video.play()`.
+However, there is a bit of nuance. If you call `video.time(30)` before
+play, the video will not play per the restrictions. But once the viewer
+clicks the video to play it, it will begin playing 30 seconds in.
+
+[[unbind-eventtype-callbackfn]]
+==== link:#unbind-eventtype-callbackfn[unbind(eventType, callbackFn)]
+
+Unbind a callback that was setup with `bind(eventType, callbackFn)`.
+
+[source,markdown]
+----
+var onPlayFunction = function() {
+      doThisThing();
+    };
+    video.bind("play", onPlayFunction);
+    $("#dont_do_this_thing_ever").click(function() {
+      video.unbind("play", onPlayFunction);
+    });
+
+----
+
+Since binding until a condition is met is a common operation with
+videos, the Player API also supports anonymous function unbinding.
+
+[source,markdown]
+----
+video.bind("timechange", function(t) {
+      if (t > 30) {
+        console.log("Made it past 30 seconds! This will never fire again.");
+        return video.unbind;
+      }
+    });
+
+----
+
+==== link:#unmute[unmute()]
+
+Enables audio on the video if it had been disabled via `mute()`. The
+video’s volume before it was muted will be restored.
+
+[source,markdown]
+----
+video.unmute();
+
+----
+
+==== link:#videoheight[videoHeight()]
+
+Returns the height of the video itself in pixels, without anything
+extra. For example, if the socialbar is enabled and `video.height()`
+returns 388, then `video.videoHeight()` will return 360 because the
+height of the Social Bar is 28px.
+
+[source,markdown]
+----
+$("#video_matcher").height(video.videoHeight());
+
+----
+
+[[videoheight-val-options]]
+==== link:#videoheight-val-options[videoHeight(val, [options])]
+
+Sets the height of the video to `val` in pixels. It is expected that
+`val` is an integer. Decimal or string values will be truncated.
+
+If `constrain: true` is passed as an option, then the width of the video
+will also be updated to maintain the correct aspect ratio.
+
+[source,markdown]
+----
+video.videoHeight(360);
+    video.videoHeight(400, { constrain: true });
+
+----
+
+==== link:#videoquality[videoQuality()]
+
+Returns the current quality level of the video. Typically this will be
+an integer such as `720` or `1080`, but in Safari it will return `auto`
+if the video is currently set to adaptive bit rate streaming.
+
+[[videoquality-val]]
+==== link:#videoquality-val[videoQuality(val)]
+
+Sets the quality level for the video. It accepts either an integer
+indicating the exact quality level to stream (ex. `224`, `360`, `540`,
+`720`, or `1080`) or the string `auto` to enable adaptive bit rate
+streaming.
+
+NOTE: If you specify a quality level corresponding to an asset that
+doesn’t exist for your video, `videoQuality(val)` will default to the
+highest or lowest quality asset available. For example, if you pass
+`1080` as an argument but your video doesn’t have a 1080p asset,
+`videoQuality(val)` will select the 720p asset instead.
+
+==== link:#videowidth[videoWidth()]
+
+Returns the width of the video itself in pixels, without anything extra.
+For example, if the Presentation Sync lab is enabled and `video.width()`
+returns 1166, then `video.videoWidth()` will return 640 because the
+width of the presentation is 526px.
+
+[source,markdown]
+----
+$("#video_matcher").width(video.videoWidth());
+
+----
+
+[[videowidth-val-options]]
+==== link:#videowidth-val-options[videoWidth(val, [options])]
+
+Sets the width of the video to `val` in pixels. It is expected that
+`val` is an integer. Decimal or string values will be truncated.
+
+If `constrain: true` is passed as an option, then the height of the
+video will also be updated to maintain the correct aspect ratio.
+
+[source,markdown]
+----
+video.videoWidth(640);
+    video.videoWidth(640, { constrain: true });
+
+----
+
+==== link:#visitorkey[visitorKey()]
+
+Returns the `visitor_key` of the person watching the video. This is used
+to associate multiple viewing sessions with a single person. You can use
+it to filter link:/support/developers/stats-api#events[events] in the
+Stats API.
+
+==== link:#volume[volume()]
+
+Returns the current volume of the video as a decimal between 0 and 1.
+This value is not dependable until `video.ready()` returns true.
+
+[source,markdown]
+----
+$("#custom_volume_monitor").text(Math.round(video.volume() * 100) + "%")
+
+----
+
+[[volume-val]]
+==== link:#volume-val[volume(val)]
+
+Sets the volume to `val`. It is expected that `val` is a decimal between
+0 and 1.
+
+[source,markdown]
+----
+$("#custom_volume_slider").on("change", function() {
+      video.volume($(this).val());
+    });
+
+----
+
+==== link:#width[width()]
+
+Returns the current width of the video container in pixels.
+
+[source,markdown]
+----
+// e.g. set the width of <div id="next_to_video"> to match the video.
+    $("#next_to_video").width(video.width());
+
+----
+
+[[width-val]]
+==== link:#width-val[width(val)]
+
+Sets the width of the video container to `val` in pixels. It is expected
+that `val` is an integer. Decimal or string values will be truncated.
+
+If `constrain: true` is passed as an option, then the width of the video
+will also be updated to maintain the correct aspect ratio.
+
+[source,markdown]
+----
+video.width(640);
+    video.width(700, { constrain: true });
+
+----
+
+'''''
+
+=== link:#events[Events]
+
+Use these events when working with the `bind` and `unbind` methods.
+
+==== link:#list-of-player-events[List of Player Events]
+
+* link:#beforeremove[beforeremove]
+* link:#beforereplace[beforereplace]
+* link:#betweentimes[betweentimes]
+* link:#cancelfullscreenevent[cancelfullscreen]
+* link:#captionschange[captionschange]
+* link:#conversion[conversion]
+* link:#crosstime[crosstime]
+* link:#end[end]
+* link:#enterfullscreen[enterfullscreen]
+* link:#heightchange[heightchange]
+* link:#lookchange[lookchange]
+* link:#mutechange[mutechange]
+* link:#pause-1[pause]
+* link:#percentwatchedchanged[percentwatchedchanged]
+* link:#play-1[play]
+* link:#playbackratechange[playbackratechange]
+* link:#secondchange[secondchange]
+* link:#seek[seek]
+* link:#silentplaybackmodechange[silentplaybackmodechange]
+* link:#timechange[timechange]
+* link:#volumechange[volumechange]
+* link:#widthchange[widthchange]
+
+==== link:#beforeremove[beforeremove]
+
+Fired when a request to remove the video has been received. This occurs
+when the `remove()` method is used, which can be called manually or
+automatically when a video is removed from the DOM. This is a fine place
+for garbage collection.
+
+[source,markdown]
+----
+video.bind("beforeremove", function() { cleanUp(); return video.unbind; });
+
+----
+
+==== link:#beforereplace[beforereplace]
+
+Fired when a request to replace the video has been received. This occurs
+when the `replaceWith()` method is used, which is what happens under the
+hood with playlists and embed links. If you need to do garbage
+collection for each video in a playlist, this is a good place for that
+to live.
+
+This is the only event type that is not automatically removed when
+`replaceWith()` is called.
+
+[source,markdown]
+----
+video.bind("beforereplace", function() { cleanUp(); return video.unbind; });
+
+----
+
+==== link:#betweentimes[betweentimes]
+
+Fired once when the playhead enters the interval and once when it leaves
+it. This can run multiple times if the viewer leaves the time interval
+and re-enters it, either by seeking or by playing through. This event is
+useful if you have page elements that should be visible only for a
+specific time interval.
+
+[source,markdown]
+----
+video.bind("betweentimes", 30, 60, function(withinInterval) {
+      if (withinInterval) {
+        showMyElement();
+      } else {
+        hideMyElement();
+      }
+    });
+
+----
+
+To only show it once using anonymous function unbinding:
+
+[source,markdown]
+----
+video.bind("betweentimes", 30, 60, function(withinInterval) {
+      if (withinInterval) {
+        showMyElement();
+      } else {
+        hideMyElement();
+        return video.unbind;
+      }
+    });
+
+----
+
+To only show it once using explicit unbinding:
+
+[source,markdown]
+----
+var showMyElementOnce = function() {
+      showMyElement();
+      video.unbind('betweentimes', 30, 60, showMyElementOnce);
+    };
+    video.bind("betweentimes", 30, 60, showMyElementOnce);
+
+----
+
+NOTE: This event currently does not fire on iframe embeds.
+
+[[cancelfullscreenevent]]
+==== link:#cancelfullscreenevent[cancelfullscreen]
+
+Fired when a video leaves fullscreen mode.
+
+[source,markdown]
+----
+video.bind("cancelfullscreen", function() {
+      console.log("Your video is no longer playing in fullscreen.");
+    });
+
+----
+
+==== link:#captionschange[captionschange]
+
+Fired once a different caption setting is selected in the player. Can be
+used to return which language is selected as well.
+
+[source,markdown]
+----
+video.bind('captionschange', function (details) {
+      console.log(details.visible, details.language);
+    });
+
+----
+
+Example output: `true "eng"`
+
+==== link:#conversion[conversion]
+
+Fired when an email is entered in Turnstile. The `type` argument can be
+“pre-roll-email,” “mid-roll-email,” or “post-roll-email.”
+
+[source,markdown]
+----
+video.bind("conversion", function(type, email, firstName, lastName) {
+      recordMyOwnData(email, firstName, lastName);
+    })
+
+----
+
+==== link:#crosstime[crosstime]
+
+Runs the callback function when the time of the video moves from
+_before_ `time` to _after_ `time`. It is expected that `time` is a
+decimal value specified in seconds.
+
+This event is meant to be used with “gates” or CTAs. For example,
+perhaps you have a call to action that should appear after the 30 second
+mark in your video. Code to show that might look like this:
+
+[source,markdown]
+----
+video.bind("crosstime", 30, function() {
+      showMyCustomCTA();
+    });
+
+----
+
+To only show it once using anonymous function unbinding:
+
+[source,markdown]
+----
+video.bind("crosstime", 30, function() {
+      showMyCustomCTA();
+      return video.unbind;
+    });
+
+----
+
+To only show it once using explicit unbinding:
+
+[source,markdown]
+----
+var showMyCustomCTAOnce = function() {
+      showMyCustomCTA();
+      video.unbind('crosstime', 30, showMyCustomCTAOnce);
+    };
+    video.bind("crosstime", 30, showMyCustomCTAOnce);
+
+----
+
+NOTE: This event currently does not fire on iframe embeds.
+
+==== link:#end[end]
+
+Fired when the video’s state changes to “ended.”
+
+[source,markdown]
+----
+video.bind("end", function() {
+      console.log("Lenny was here.");
+    });
+
+----
+
+==== link:#enterfullscreen[enterfullscreen]
+
+Fired when a video goes into fullscreen mode.
+
+[source,markdown]
+----
+video.bind("enterfullscreen", function() {
+      console.log("Your video is now playing in fullscreen!");
+    });
+
+----
+
+==== link:#heightchange[heightchange]
+
+Fired whenever the height of the embed changes. If you have element
+sizes or positions that depend on the height of the video, you can bind
+to this event.
+
+[source,markdown]
+----
+video.bind("heightchange", function() {
+      console.log("The height changed to " + video.height());
+    });
+
+----
+
+==== link:#lookchange[lookchange]
+
+For 360° video only. Fired when the viewer changes their heading, pitch,
+or field of view.
+
+[source,markdown]
+----
+video.bind("lookchange", function (look) {
+      console.log('Look', look.heading, look.pitch, look.fov);
+    });
+
+----
+
+==== link:#mutechange[mutechange]
+
+Fired when the video’s muted state changes.
+
+[source,markdown]
+----
+video.bind("mutechange", function (isMuted) {
+      console.log("Is the video muted?", isMuted ? "yes" : "no");
+    })
+
+----
+
+==== link:#pause-1[pause]
+
+Fired when the video’s state changes to “paused.”
+
+[source,markdown]
+----
+video.bind("pause", function() {
+      console.log("The video was just paused!");
+    });
+
+----
+
+==== link:#percentwatchedchanged[percentwatchedchanged]
+
+Fired when the value of link:#percentwatched[`percentWatched()`]
+changes.
+
+[source,markdown]
+----
+video.bind('percentwatchedchanged', function (percent, lastPercent) {
+      if (percent >= .25 && lastPercent < .25) {
+        console.log('The viewer has watched 25% of the video! 📈')
+      }
+    });
+
+----
+
+https://glitch.com/~wistia-percentwatchedchanged[Start with a live
+example on Glitch].
+
+==== link:#play-1[play]
+
+Fired when the video’s state changes to “playing.” This can fire
+multiple times for a single viewing session since the viewer can
+repeatedly pause and play.
+
+[source,markdown]
+----
+video.bind("play", function() {
+      console.log("The video was just played!");
+    });
+
+----
+
+==== link:#playbackratechange[playbackratechange]
+
+Fired when the the playback rate of the video changes. Normal speed is
+1.0, half speed is 0.5, double speed is 2.0, etc.
+
+[source,markdown]
+----
+video.bind("playbackratechange", function(playbackRate) {
+      console.log("The playback rate is now " + playbackRate + "x.");
+    });
+
+----
+
+==== link:#secondchange[secondchange]
+
+Fired when the current second of the video has changed. The `second`
+argument will always be passed as an integer. It is equivalent to
+`Math.floor(video.time())`.
+
+Technically this is a subset of the “timechange” event, and thus will
+always fire _after_ “timechange” events but _before_ “seek” events.
+
+[source,markdown]
+----
+video.bind("secondchange", function(s) {
+      if (s === 30) {
+        // do something at exactly 30 seconds
+      }
+    });
+
+----
+
+==== link:#seek[seek]
+
+Our player will compare `currentTime` to `lastTime` once every 300ms and
+fire this event if the difference is greater than 1.5 seconds.
+
+Technically this is a subset of the “timechange” event, and thus will
+always fire _after_ both “timechange” and “secondchange.”
+
+[source,markdown]
+----
+video.bind("seek", function(currentTime, lastTime) {
+      console.log("Whoa, you jumped " + Math.abs(lastTime - currentTime) + " seconds!");
+    });
+
+----
+
+==== link:#silentplaybackmodechange[silentplaybackmodechange]
+
+Based on your settings for the `silentAutoPlay` embed option, the “Click
+For Sound” button may appear over your video. If you’d like to know when
+the video is in that state — compared to when it’s simply muted — you
+can bind to this event.
+
+[source,markdown]
+----
+video.bind("silentplaybackmodechange", function (inSilentPlaybackMode) {
+      console.log("Is 'Click For Sound' visible?", inSilentPlaybackMode ? "yes" : "no");
+    });
+
+----
+
+==== link:#timechange[timechange]
+
+Our player will compare `currentTime` and `lastTime` once every 300ms
+and fire this event if they are different.
+
+Both “secondchange” and “seek” key off this event, and thus “timechange”
+will always fire _before_ both “secondchange” and “seek.”
+
+[source,markdown]
+----
+video.bind("timechange", function(t) {
+      updateCustomPlayHead(t);
+    });
+
+----
+
+==== link:#volumechange[volumechange]
+
+Fired when the volume or mute state changes.
+
+[source,markdown]
+----
+video.bind("volumechange", function(v, isMuted) {
+      console.log("The volume changed to " + Math.round(v * 100) + "%");
+    });
+
+----
+
+==== link:#widthchange[widthchange]
+
+Fired whenever the width of the embed changes. If you have element sizes
+or positions that depend on the width of the video, you can bind to this
+event.
+
+[source,markdown]
+----
+video.bind("widthchange", function() {
+      console.log("The width changed to " + video.width());
+    });
+
+----
+
+'''''
+
+=== link:#options[Options]
+
+Many behaviors can be defined by setting options instead of using Player
+API methods. Check out the link:/support/developers/embed-options[Embed
+Options] page for a full list.
+
+'''''
+
+=== link:#examples[Examples]
+
+To get you making video magic as fast as possible, here are some
+examples of common JavaScript player API projects.
+
+==== link:#start-video-playback-at-a-specific-time[Start Video Playback at a Specific Time]
+
+In this example, you want the video to skip ahead a certain amount of
+time when the viewer presses ’play'. This utilizes the `bind on play`
+functionality built into the API.
+
+[source,markdown]
+----
+<script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js" async></script>
+    <div class="wistia_embed wistia_async_29b0fbf547" style="width:640px;height:360px;">&nbsp;</div>
+    <script>
+    window._wq = window._wq || [];
+
+    // target our video by the first 3 characters of the hashed ID
+    _wq.push({ id: "29b0fbf547", onReady: function(video) {
+
+      // on play, seek the video to 10 seconds, then unbind so it
+      // only happens once.
+      video.bind('play', function() {
+        video.time(10);
+        return video.unbind;
+      });
+
+    }});
+    </script>
+
+----
+
+'''''
+
+==== link:#trigger-an-event-at-a-specific-time[Trigger an event at a specific time]
+
+In this example, let’s assume that we want to run some javascript when
+the viewer gets 60 seconds into the video. In order to accomplish this,
+we only need the bind method from the API.
+
+[source,markdown]
+----
+<script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js" async></script>
+    <div class="wistia_embed wistia_async_29b0fbf547" style="width:640px;height:360px;">&nbsp;</div>
+    <script>
+    window._wq = window._wq || [];
+
+    // target our video by the first 3 characters of the hashed ID
+    _wq.push({ id: "29b0fbf547", onReady: function(video) {
+      // at 10 seconds, do something amazing
+      video.bind('secondchange', function(s) {
+        if (s === 10) {
+          // Insert code to do something amazing here
+          console.log("We just reached " + s + " seconds!");
+        }
+      });
+    }});
+
+    </script>
+
+----
+
+The bind function monitors the state of the video in an event loop.
+Every 300 milliseconds, it checks to see if the video’s time position
+has changed. If it has, it runs your function with the current second
+(s) as the only argument.
+
+The `secondchange` will only run once per second while the video is
+playing. If you need more fine-grained control, try binding to the
+`timechange` event instead.
+
+'''''
+
+==== link:#pause-other-videos-when-another-is-played[Pause Other Videos When Another is Played]
+
+Don’t like the barrage of sound that comes from three different videos
+playing in the same page? This snippet will pause all videos that aren’t
+currently playing:
+
+[source,markdown]
+----
+<script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js" async></script>
+    <div class="wistia_embed wistia_async_9kksns1ede" style="width:480px;height:270px;">&nbsp;</div>
+    <div class="wistia_embed wistia_async_oh34zbesuh" style="width:480px;height:270px;">&nbsp;</div>
+    <div class="wistia_embed wistia_async_2jvt3wqkye" style="width:480px;height:270px;">&nbsp;</div>
+
+    <script>
+    window._wq = window._wq || [];
+    _wq.push({ id: "_all", onReady: function(video) {
+      // for all existing and future videos, run this function
+      video.bind('play', function() {
+        // when one video plays, iterate over all the videos and pause each,
+        // unless it's the video that just started playing.
+        var allVideos = Wistia.api.all();
+        for (var i = 0; i < allVideos.length; i++) {
+          if (allVideos[i].hashedId() !== video.hashedId()) {
+            allVideos[i].pause();
+          }
+        }
+      });
+    }});
+    </script>
+
+----
+
+'''''
+
+[[a-b-testing-videos-against-each-other]]
+==== link:#a-b-testing-videos-against-each-other[A/B testing videos against each other]
+
+Using a Standard embed code as a template, we can switch out hashed ID’s
+for multiple videos easily. Comparing the viewer analytics in the
+background will tell you which video reigned supreme!
+
+In this example, we create an array of hashed IDs for possible videos to
+embed, then randomly select one and embed the video with that hashed ID
+by adding to the class name of the embed’s container. The Wistia library
+will monitor the DOM for changes like this, and automatically embed a
+video where it sees an element with the right class.
+
+[source,markdown]
+----
+<script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js" async></script>
+    <div id="thumbnail_test" class="wistia_embed" style="width:640px;height:360px;">&nbsp;</div>
+
+    <script>
+      var hashedIds = ["wfu7q0s0pf", "ck7avcilwk"];
+      var rand = Math.floor(Math.random() * hashedIds.length);
+      var hashedId = hashedIds[rand];
+      document.getElementById("thumbnail_test").className += " wistia_async_" + hashedId;
+    </script>
+
+----
+
+'''''
+
+==== link:#add-chaptering-links-to-your-embedded-video[Add Chaptering Links to your Embedded Video]
+
+You can do this yourself using the `time(val)` method described above,
+OR you could make your life easier and use
+link:/support/developers/embed-links[embed links], which handles
+chaptering automatically!
+
+'''''
+
+==== link:#mute-the-video-on-load[Mute the Video on Load]
+
+You can do this by setting the `volume`
+link:/support/developers/embed-options[embed option] to 0, like so:
+
+[source,markdown]
+----
+<script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js" async></script>
+    <div class="wistia_embed wistia_async_5bbw8l7kl5 volume=0" style="width:640px;height:360px;">&nbsp;</div>
+
+----
+
+'''''
+
+==== link:#selective-autoplay[Selective Autoplay]
+
+Selective Autoplay will automatically play your embedded video based on
+the presence of a query string you specify.
+
+[source,markdown]
+----
+<script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js" async></script>
+    <div class="wistia_embed wistia_async_5bbw8l7kl5" style="width:640px;height:360px;">&nbsp;</div>
+    <script>
+    window._wq = window._wq || [];
+    _wq.push(function(W) {
+      var playedOnce = false;
+      W.api(function(video) {
+        if (!playedOnce && /[&?]autoplay/i.test(location.href)) {
+          playedOnce = true;
+          video.play();
+        }
+      });
+    });
+    </script>
+
+----
+
+In this example, if “?autoplay” or “&autoplay” appears in the page URL,
+the first video that initializes will autoplay.
+
+'''''
+
+==== link:#selective-autoplay-for-popovers[Selective Autoplay for Popovers]
+
+You can also set up selective autoplay for popover embeds as well. You
+have to take advantage of the `popover.show()` method, which can read
+about on our link:/support/developers/popover-customization#show[Popover
+Customization Page].
+
+[source,markdown]
+----
+<script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js" async></script>
+    <div class="wistia_embed wistia_async_5bbw8l7kl5 popover=true popoverAnimateThumbnail=true" style="width:640px;height:360px;">&nbsp;</div>
+    <script>
+    var playedOnce = false;
+    window._wq = window._wq || [];
+    _wq.push({id: "5bbw8l7kl5", onReady: function(video) {
+        if (!playedOnce && /[&?]popoverAutoplay/i.test(location.href)) {
+          playedOnce = true;
+          video.popover.show();
+          video.play();
+        }
+    }});
+    </script>
+
+----
+
+'''''
+
+==== link:#alert-on-play-just-once[Alert on play just once]
+
+With the bind method, every time “play” is triggered, your function will
+be executed. But sometimes a user will scroll back to the beginning and
+hit Play again. If you want to avoid your function being executed again,
+you need to unbind it.
+
+Our library contains a special unbinding pattern for convenience. In the
+callback function, just return `video.unbind`.
+
+[source,markdown]
+----
+<script>
+    video.bind("play", function() {
+      alert("Played the first time!");
+      return video.unbind;
+    });
+    </script>
+
+----
+
+If you are performing asynchronous operations or need more control over
+unbinding, you can use the `unbind` method as shown below.
+
+[source,markdown]
+----
+<script>
+    function playFunc() {
+      alert("Played the first time!");
+      video.unbind("play", playFunc);
+    }
+
+    video.bind("play", playFunc);
+    </script>
+
+----
+
+'''''
+
+==== link:#add-custom-pre-roll-to-your-videos[Add Custom Pre-Roll to Your Videos]
+
+You can leverage the `addToPlaylist` method to play pre-roll before your
+video.
+
+We simply add the main video to the playlist on the pre-roll video.
+
+[source,markdown]
+----
+<script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js" async></script>
+    <div class="wistia_embed wistia_async_oefj398m6q" style="width:640px;height:360px;">&nbsp;</div>
+    <script>
+    window._wq = window._wq || [];
+    _wq.push({ id: "5bbw8l7kl5", onHasData: function(video) {
+      video.addToPlaylist("5bbw8l7kl5");
+    }});
+    </script>
+
+----
+
+'''''
+
+==== link:#playing-a-second-video-on-post-roll-click[Playing a second video on Post Roll click]
+
+You can now handle this behavior by using
+link:/support/developers/embed-links#watch-another-video-in-ctaannotation[embed
+links].
+
+'''''
+
+==== link:#make-the-video-background-transparent[Make the video background transparent]
+
+If you are embedding a Wistia video on a website with a white
+background, the natural black background of the Wistia player can look a
+little out of place. Instead, using a `wmode=transparent` string
+parameter, the background of the player loading can be set to
+transparent.
+
+So a finished iframe embed code would look something like this:
+
+[source,markdown]
+----
+<iframe src="http://fast.wistia.net/embed/iframe/e4a27b971d?
+    controlsVisibleOnLoad=true&playerColor=688AAD&version=v1&wmode=transparent"
+    allowtransparency="true" frameborder="0" scrolling="no"
+    class="wistia_embed" name="wistia_embed" width="640"
+    height="360"></iframe>
+
+----
+
+Or a Standard inline embed would look like this:
+
+[source,markdown]
+----
+<script src="//fast.wistia.com/assets/external/E-v1.js" async></script>
+    <div class="wistia_embed wistia_async_abcde12345 wmode=transparent"
+    style="width:640px;height:360px;"></div>
+
+----
+
+=== link:#legacy-api-embeds[Legacy API Embeds]
+
+This section exists to help customers transition from our Legacy API
+embeds to Standard (a.k.a. “async”) embeds.
+
+If you have an embed code which look like this, then you have a Legacy
+API embed:
+
+[source,markdown]
+----
+<div id="wistia_abcde12345" class="wistia_embed" style="width:640px;height:360px;">&nbsp;</div>
+    <script src="//fast.wistia.com/assets/external/E-v1.js"></script>
+    <script>
+    wistiaEmbed = Wistia.embed("abcde12345");
+    </script>
+
+----
+
+An equivalent Standard (a.k.a. “async”) embed would look like this:
+
+[source,markdown]
+----
+<script src="//fast.wistia.com/assets/external/E-v1.js" async></script>
+    <div class="wistia_embed wistia_async_abcde12345" style="width:640px;height:360px;"></div>
+
+----
+
+Going forward, it is recommended that you switch to a “Standard” (a.k.a.
+“async”) embed for all new embed codes. Async embeds can do everything
+Legacy API embeds can do, but they never block page load, they are less
+susceptible to mangling, and they are easier to inject dynamically into
+html.
+
+There are no plans to remove the Legacy API embed syntax; if you have
+existing Legacy API embeds, they do not need to be re-embedded.
+
+==== link:#embed-options-comparison[Embed Options Comparison]
+
+In Legacy API embeds, options passed to the embed code might look like
+this:
+
+[source,markdown]
+----
+<div id="wistia_abcde12345" class="wistia_embed" style="width:640px;height:360px;">&nbsp;</div>
+    <script src="//fast.wistia.com/assets/external/E-v1.js"></script>
+    <script>
+    wistiaEmbed = Wistia.embed("abcde12345", {
+      autoPlay: true,
+      controlsVisibleOnLoad: false
+    });
+    </script>
+
+----
+
+The options there are specified as part of the `Wistia.embed` function
+call.
+
+With Standard (a.k.a. “async”) embeds, an equivalent embed code would
+be:
+
+[source,markdown]
+----
+<script src="//fast.wistia.com/assets/external/E-v1.js" async></script>
+    <div class="wistia_embed wistia_async_abcde12345 autoPlay=true
+    controlsVisibleOnLoad=false" style="width:640px;height:360px;"></div>
+
+----
+
+The options there are specified as key/val pairs in the container’s
+`class` attribute.
+
+For more information on setting options, check out the
+link:/support/developers/embed-options[docs on embed options].
+
+==== link:#player-api-usage-comparison[Player API Usage Comparison]
+
+With Legacy API embeds, each embed code is assigned the `wistiaEmbed`
+variable by default. You could use this variable to set up bindings,
+play on load, etc. You can do the same things with Standard embeds, but
+they are always loaded asynchronously, so the flow to get Player API
+access is slightly different.
+
+Setting up bindings with a Legacy API embed:
+
+[source,markdown]
+----
+<div id="wistia_abcde12345" class="wistia_embed" style="width:640px;height:360px;">&nbsp;</div>
+    <script src="//fast.wistia.com/assets/external/E-v1.js"></script>
+    <script>
+    wistiaEmbed = Wistia.embed("abcde12345");
+    wistiaEmbed.hasData(function() {
+      wistiaEmbed.bind("play", function() {
+        console.log("video played", wistiaEmbed.name());
+      });
+    });
+    </script>
+
+----
+
+Equivalent code for Standard embeds:
+
+[source,markdown]
+----
+<script src="//fast.wistia.com/assets/external/E-v1.js" async></script>
+    <div class="wistia_embed wistia_async_abcde12345" style="width:640px;height:360px;"></div>
+    <script>
+    window._wq = window._wq || [];
+    _wq.push({ id: "abcde12345", onReady: function(video) {
+      video.bind("play", function() {
+        console.log("video played", video.name());
+      });
+    }});
+    </script>
+
+----
+
+The inline script syntax for Standard embeds makes it easier for
+javascript in external files to get a handle to each video. That is,
+instead of setting a global variable when the video is embedded, you can
+access the Player API by hashed ID or DOM ID. It also implicitly waits
+for data to be returned from the server, so you are guaranteed methods
+like `name()` and `duration()` will return meaningful values.
+
+For more information on using the Player API, scroll to the top of this
+page.

@@ -31,6 +31,15 @@ include Asciidoctor
 # See:
 # https://www.tutorialspoint.com/creating-a-responsive-video-player-using-video-js
 # ------------------------------------------------------------------------------
+# NOTE
+# Bei YouTube Nocookie handelt es sich um einen Code zum
+# Einbetten inklusive entsprechender URL, der es Webseitenbetreibern
+# erlaubt, Videos ohne Tracking Cookies auf ihren Webseiten zu
+# integrieren. Der Code muss für jedes eingebettete Video generiert
+# und eingefügt werden.
+#
+# See: https://www.datenschutz.org/youtube-nocookie/
+# ------------------------------------------------------------------------------
 
 Asciidoctor::Extensions.register do
 
@@ -69,7 +78,7 @@ Asciidoctor::Extensions.register do
               ],
               "sources": [{
                 "type": "video/youtube",
-                "src": "//youtube.com/watch?v=#{target}"
+                "src": "//youtube-nocookie.com/watch?v=#{target}"
               }],
               "controlBar": {
                 "pictureInPictureToggle": false

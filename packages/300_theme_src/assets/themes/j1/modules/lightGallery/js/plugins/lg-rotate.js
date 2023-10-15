@@ -6,11 +6,13 @@
  # Product/Info:
  # https://jekyll.one
  #
- # Copyright (C) 2020 Sachin Neravath
+ # Copyright (C) 2023 Sachin Neravath
  # Copyright (C) 2023 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # lightGallery is licensed under the GPLv3 license
+ # See: https://github.com/sachinchoolur/lightGallery/blob/master/LICENSE
  # -----------------------------------------------------------------------------
 */
 

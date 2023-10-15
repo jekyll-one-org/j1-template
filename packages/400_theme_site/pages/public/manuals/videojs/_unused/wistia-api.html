@@ -1,0 +1,990 @@
+<html>
+  <body>
+    <article class="jsx-1617886528 PostBody PostBody--left-align">
+      <h1 data-testid="title-tag" class="jsx-880272370 TitleTag SupportDocWrapper__title">JavaScript Player API</h1>
+      <p role="doc-subtitle" data-testid="text" class="jsx-1180850590 TextCopy SupportDocWrapper__text">The Wistia player has a built-in JavaScript API, providing you with a variety of ways to create awesome functions and interact with the player.</p>
+      <div class="jsx-2331198471 SupportDocWrapper--desktop">
+        <nav aria-label="table of contents" class="jsx-2056807354 PostChapters PostChapters--right">
+          <h2 class="jsx-2056807354">Jump to section</h2>
+          <ul class="PostChapters__list">
+            <li class="jsx-2056807354 PostChapters__list-item"><a href="#get-started" class="jsx-2056807354 PostChapters__link">Get started</a></li>
+            <li class="jsx-2056807354 PostChapters__list-item active"><a href="#methods" class="jsx-2056807354 PostChapters__link">Methods</a></li>
+            <li class="jsx-2056807354 PostChapters__list-item"><a href="#events" class="jsx-2056807354 PostChapters__link">Events</a></li>
+            <li class="jsx-2056807354 PostChapters__list-item"><a href="#options" class="jsx-2056807354 PostChapters__link">Options</a></li>
+            <li class="jsx-2056807354 PostChapters__list-item"><a href="#examples" class="jsx-2056807354 PostChapters__link">Examples</a></li>
+            <li class="jsx-2056807354 PostChapters__list-item"><a href="#legacy-api-embeds" class="jsx-2056807354 PostChapters__link">Legacy API Embeds</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="jsx-1617886528 PostBody__wrap-inner">
+        <div class="jsx-1617886528 PostBody__inner">
+          <section class="markdown">
+            <p class="markdown"><em class="markdown">The Wistia video player has a JavaScript API which supports a number of ways to interact with and control the video player. You can try all the <a href="#methods" class="markdown">methods</a> and <a href="#events" class="markdown">events</a> in <a href="https://glitch.com/edit/#!/wistia-support-starter?path=README.md%3A1%3A0" target="_blank" rel="noopener" class="markdown">this starter app on Glitch</a>. Enjoy!</em></p>
+            <div role="note" aria-labelledby="0faf6f69-fda9-433e-9fe7-48e38cb5e99d" class="jsx-4054647136 CallOut">
+              <div id="0faf6f69-fda9-433e-9fe7-48e38cb5e99d" class="jsx-4054647136 CallOut__designation">
+                <svg viewBox="0 0 512 512" class="Icon jsx-4054647136" role="presentation">
+                  <path d=" M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zm-6 400H54a6 6 0 0 1-6-6V86 a6 6 0 0 1 6-6h404a6 6 0 0 1 6 6v340a6 6 0 0 1-6 6zm-42-92v24c0 6.627 -5.373 12-12 12H204c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12 h200c6.627 0 12 5.373 12 12zm0-96v24c0 6.627-5.373 12-12 12H204c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h200c6.627 0 12 5.373 12 12 zm0-96v24c0 6.627-5.373 12-12 12H204c-6.627 0-12-5.373-12-12v-24c0 -6.627 5.373-12 12-12h200c6.627 0 12 5.373 12 12zm-252 12c0 19.882 -16.118 36-36 36s-36-16.118-36-36 16.118-36 36-36 36 16.118 36 36zm0 96c0 19.882-16.118 36-36 36s-36-16.118-36-36 16.118-36 36-36 36 16.118 36 36zm0 96c0 19.882-16.118 36-36 36s-36-16.118-36-36 16.118-36 36-36 36 16.118 36 36z " fill="currentColor"></path>
+                </svg>
+                Note
+              </div>
+              <div class="jsx-4054647136 CallOut__message">The JavaScript Player API was specifically built for <em class="markdown">videos</em>. We do not formally support using it for audio files, either in projects or Channels, at this time. For the most reliable experience, we recommend continuing to use it for videos. </div>
+            </div>
+          </section>
+          <section id="get-started" class="markdown">
+            <h2 class="markdown"><a href="#get-started" class="markdown">Get started</a></h2>
+            <p class="markdown">To use the Player API, you need a “handle” to it. When we use the term “handle,” we mean a javascript variable that is associated with a Wistia video and defines the Player API methods. You’ll see the variable <code class="markdown">video</code> - and other similar variables - used frequently in examples in these docs; these are all Player API handles. Since Wistia embeds are initialized asynchronously, we recommend the following patterns to acquire player API handles for your videos.</p>
+            <h3 id="use-window-_wq-to-get-a-video-handle" class="markdown"><a href="#use-window-_wq-to-get-a-video-handle" class="markdown">Use window._wq to get a video handle</a></h3>
+            <p class="markdown">The first and easiest way is to push a function onto the initialization queue. The handle will be given as an argument of the callback function.</p>
+            <h4 id="with-standard-embeds" class="markdown"><a href="#with-standard-embeds" class="markdown">With Standard embeds</a></h4>
+            <p class="markdown">We push an object of the form <code class="markdown">{ id: matcher, initialization_event: callback }</code> onto the queue. Embeds that match&hairsp;—&hairsp;as described in the <a class="markdown" href="/support/developers/player-api#wistiaapimatcher"><code class="markdown">Wistia.api(matcher)</code></a> section below&hairsp;—&hairsp;will run the callback function.</p>
+            <p class="markdown">There are three possible initialization events: <code class="markdown">onHasData</code>, <code class="markdown">onEmbedded</code>, and <code class="markdown">onReady</code>. These names align with the <a href="#hasdata" class="markdown">hasData()</a>, <a href="#embedded" class="markdown">embedded()</a>, and <a href="#ready" class="markdown">ready()</a> methods described below.</p>
+            <p class="markdown">In this example, we get a handle to the video when <code class="markdown">ready()</code> becomes true:</p>
+            <pre class="markdown"><code class="markdown">&lt;script src="//fast.wistia.com/assets/external/E-v1.js" async&gt;&lt;/script&gt;
+    &lt;div class="wistia_embed wistia_async_abcde12345" style="width:640px;height:360px;"&gt;&lt;/div&gt;
+    &lt;script&gt;
+    window._wq = window._wq || [];
+    _wq.push({ id: 'abcde12345', onReady: function(video) {
+      console.log("I got a handle to the video!", video);
+    }});
+    &lt;/script&gt;
+    </code></pre>
+            <h4 id="with-iframe-embeds" class="markdown"><a href="#with-iframe-embeds" class="markdown">With iframe embeds</a></h4>
+            <p class="markdown">The exact same syntax will work with iframe embeds too:</p>
+            <pre class="markdown"><code class="markdown lang-html"><span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">iframe</span> <span class="markdown hljs-attr">src</span>=<span class="markdown hljs-string">"//fast.wistia.net/embed/iframe/abcde12345"</span> <span class="markdown hljs-attr">allowtransparency</span>=<span class="markdown hljs-string">"true"</span> <span class="markdown hljs-attr">frameborder</span>=<span class="markdown hljs-string">"0"</span> <span class="markdown hljs-attr">scrolling</span>=<span class="markdown hljs-string">"no"</span> <span class="markdown hljs-attr">class</span>=<span class="markdown hljs-string">"wistia_embed"</span> <span class="markdown hljs-attr">name</span>=<span class="markdown hljs-string">"wistia_embed"</span> <span class="markdown hljs-attr">allowfullscreen</span> <span class="markdown hljs-attr">mozallowfullscreen</span> <span class="markdown hljs-attr">webkitallowfullscreen</span> <span class="markdown hljs-attr">oallowfullscreen</span> <span class="markdown hljs-attr">msallowfullscreen</span> <span class="markdown hljs-attr">width</span>=<span class="markdown hljs-string">"640"</span> <span class="markdown hljs-attr">height</span>=<span class="markdown hljs-string">"360"</span>&gt;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">iframe</span>&gt;</span>
+    <span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">script</span> <span class="markdown hljs-attr">src</span>=<span class="markdown hljs-string">"//fast.wistia.net/assets/external/E-v1.js"</span> <span class="markdown hljs-attr">async</span>&gt;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">script</span>&gt;</span>
+    <span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">script</span>&gt;</span><span class="markdown javascript">
+    <span class="markdown hljs-variable language_">window</span>.<span class="markdown hljs-property">_wq</span> = <span class="markdown hljs-variable language_">window</span>.<span class="markdown hljs-property">_wq</span> || [];
+    _wq.<span class="markdown hljs-title function_">push</span>({ <span class="markdown hljs-attr">id</span>: <span class="markdown hljs-string">"abcde12345"</span>, <span class="markdown hljs-attr">onReady</span>: <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params">video</span>) {
+      <span class="markdown hljs-variable language_">console</span>.<span class="markdown hljs-title function_">log</span>(<span class="markdown hljs-string">"I got a handle to the video!"</span>, video);
+    }});
+    </span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">script</span>&gt;</span>
+    </code></pre>
+            <h4 id="heres-whats-happening" class="markdown"><a href="#heres-whats-happening" class="markdown">Here’s what’s happening:</a></h4>
+            <ol class="markdown">
+              <li class="markdown">We make sure <code class="markdown">window._wq</code> is defined as an array.</li>
+              <li class="markdown">We push a matcher ("abcde12345") associated with a callback function onto the
+                queue.
+              </li>
+              <li class="markdown">E-v1.js loads and the video data is fetched in the background.</li>
+              <li class="markdown">The callback function runs when the specified initialization state is reached.</li>
+            </ol>
+            <p class="markdown">Note that you can push functions onto <code class="markdown">window._wq</code> at any time–including after <code class="markdown">E-v1.js</code> has loaded and expect it to be quickly executed.</p>
+            <h4 id="you-can-also-target-all-videos-on-the-page" class="markdown"><a href="#you-can-also-target-all-videos-on-the-page" class="markdown">You can also target all videos on the page</a></h4>
+            <p class="markdown">If you’d like to run your function on all videos on the page, you can use the special “_all” matcher:</p>
+            <pre class="markdown"><code class="markdown lang-js"><span class="markdown hljs-variable language_">window</span>.<span class="markdown hljs-property">_wq</span> = <span class="markdown hljs-variable language_">window</span>.<span class="markdown hljs-property">_wq</span> || [];
+    _wq.<span class="markdown hljs-title function_">push</span>({ <span class="markdown hljs-attr">id</span>: <span class="markdown hljs-string">"_all"</span>, <span class="markdown hljs-attr">onReady</span>: <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params">video</span>) {
+      <span class="markdown hljs-variable language_">console</span>.<span class="markdown hljs-title function_">log</span>(<span class="markdown hljs-string">"This will run for every video on the page. Right now I'm on this one:"</span>, video);
+    }});
+    </code></pre>
+            <p class="markdown">This will run immediately on any videos that are currently on the page. It will also be run immediately on videos injected after the page loads.</p>
+            <h3 id="wistia-api-matcher" class="markdown"><a href="#wistia-api-matcher" class="markdown">Wistia.api(matcher)</a></h3>
+            <p class="markdown">If you’re quite sure your video code will be running after the video has already loaded, you can use <code class="markdown">Wistia.api(matcher)</code> to get a handle synchronously. If no match is found, <code class="markdown">Wistia.api(matcher)</code> will return <code class="markdown">null</code>.</p>
+            <pre class="markdown"><code class="markdown lang-js"><span class="markdown hljs-keyword">var</span> video = <span class="markdown hljs-title class_">Wistia</span>.<span class="markdown hljs-title function_">api</span>(<span class="markdown hljs-string">"abcde12345"</span>);
+    <span class="markdown hljs-variable language_">console</span>.<span class="markdown hljs-title function_">log</span>(<span class="markdown hljs-string">"I got a handle to the video!"</span>, video);
+    </code></pre>
+            <p class="markdown">The <code class="markdown">matcher</code> argument is compared to the container ID or the hashed ID of the video.</p>
+            <pre class="markdown"><code class="markdown lang-html"><span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">script</span> <span class="markdown hljs-attr">src</span>=<span class="markdown hljs-string">"//fast.wistia.com/assets/external/E-v1.js"</span> <span class="markdown hljs-attr">async</span>&gt;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">script</span>&gt;</span>
+    <span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">div</span> <span class="markdown hljs-attr">id</span>=<span class="markdown hljs-string">"my_video"</span> <span class="markdown hljs-attr">class</span>=<span class="markdown hljs-string">"wistia_embed wistia_async_abcde12345"</span> <span class="markdown hljs-attr">style</span>=<span class="markdown hljs-string">"width:640px;height:360px;"</span>&gt;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">div</span>&gt;</span>
+    </code></pre>
+            <p class="markdown">To access it, you can reference a portion of the video’s container ID or hashed ID. For example, any of the following calls would get the same handle to the video:</p>
+            <pre class="markdown"><code class="markdown lang-js"><span class="markdown hljs-keyword">var</span> video1 = <span class="markdown hljs-title class_">Wistia</span>.<span class="markdown hljs-title function_">api</span>(<span class="markdown hljs-string">"my_video"</span>);
+    <span class="markdown hljs-keyword">var</span> video2 = <span class="markdown hljs-title class_">Wistia</span>.<span class="markdown hljs-title function_">api</span>(<span class="markdown hljs-string">"abcde12345"</span>);
+    <span class="markdown hljs-keyword">var</span> video3 = <span class="markdown hljs-title class_">Wistia</span>.<span class="markdown hljs-title function_">api</span>(<span class="markdown hljs-string">"my_"</span>);
+    <span class="markdown hljs-keyword">var</span> video4 = <span class="markdown hljs-title class_">Wistia</span>.<span class="markdown hljs-title function_">api</span>(<span class="markdown hljs-string">"abc"</span>);
+
+    <span class="markdown hljs-variable language_">console</span>.<span class="markdown hljs-title function_">log</span>(video1 === video2); <span class="markdown hljs-comment">// true</span>
+    <span class="markdown hljs-variable language_">console</span>.<span class="markdown hljs-title function_">log</span>(video2 === video3); <span class="markdown hljs-comment">// true</span>
+    <span class="markdown hljs-variable language_">console</span>.<span class="markdown hljs-title function_">log</span>(video3 === video4); <span class="markdown hljs-comment">// true</span>
+    </code></pre>
+            <p class="markdown">If the same video appears several times on the page, <code class="markdown">Wistia.api("hashedid")</code> will only return the first instance. If you need a handle for each instance, you’ll need to assign unique container IDs and reference those. When assigning custom container IDs, numeric-only IDs are not allowed.</p>
+            <p class="markdown">If the first 3 letters of the hashed ID are used, there is a 1 in 46,656 chance that you will have a collision with another video on the page. To be safe, if you have many videos on a page, you may want to be more verbose. For example, increasing your matcher to 4 characters decreases the chance of collision to 1 in 1,679,616. But short access is convenient and can be used on most pages where the number of videos is small.</p>
+            <hr class="markdown">
+          </section>
+          <section id="methods" class="markdown">
+            <h2 class="markdown"><a href="#methods" class="markdown">Methods</a></h2>
+            <h3 id="list-of-player-methods" class="markdown"><a href="#list-of-player-methods" class="markdown">List of Player Methods</a></h3>
+            <ul class="markdown">
+              <li class="markdown"><a href="#addtoplaylist-hashedid-options-position" class="markdown">addToPlaylist(hashedId, [options], [position])</a></li>
+              <li class="markdown"><a href="#aspect" class="markdown">aspect()</a></li>
+              <li class="markdown"><a href="#bind-eventtype-callbackfn" class="markdown">bind(eventType, callbackFn)</a></li>
+              <li class="markdown"><a href="#cancelfullscreenmethod" class="markdown">cancelFullscreen()</a></li>
+              <li class="markdown"><a href="#duration" class="markdown">duration()</a></li>
+              <li class="markdown"><a href="#email" class="markdown">email()</a></li>
+              <li class="markdown"><a href="#email-val" class="markdown">email(val)</a></li>
+              <li class="markdown"><a href="#embedded" class="markdown">embedded()</a></li>
+              <li class="markdown"><a href="#eventkey" class="markdown">eventKey()</a></li>
+              <li class="markdown"><a href="#getsubtitlesscale" class="markdown">getSubtitlesScale()</a></li>
+              <li class="markdown"><a href="#hasdata" class="markdown">hasData()</a></li>
+              <li class="markdown"><a href="#hashedid" class="markdown">hashedId()</a></li>
+              <li class="markdown"><a href="#height" class="markdown">height()</a></li>
+              <li class="markdown"><a href="#height-val-options" class="markdown">height(val, [options])</a></li>
+              <li class="markdown"><a href="#infullscreen" class="markdown">inFullscreen()</a></li>
+              <li class="markdown"><a href="#ismuted" class="markdown">isMuted()</a></li>
+              <li class="markdown"><a href="#look" class="markdown">look()</a></li>
+              <li class="markdown"><a href="#look-options" class="markdown">look(options)</a></li>
+              <li class="markdown"><a href="#mute" class="markdown">mute()</a></li>
+              <li class="markdown"><a href="#name" class="markdown">name()</a></li>
+              <li class="markdown"><a href="#pause" class="markdown">pause()</a></li>
+              <li class="markdown"><a href="#percentwatched" class="markdown">percentWatched()</a></li>
+              <li class="markdown"><a href="#play" class="markdown">play()</a></li>
+              <li class="markdown"><a href="#playbackrate-r" class="markdown">playbackRate(r)</a></li>
+              <li class="markdown"><a href="#ready" class="markdown">ready()</a></li>
+              <li class="markdown"><a href="#remove" class="markdown">remove()</a></li>
+              <li class="markdown"><a href="#replacewith-hashedid-options" class="markdown">replaceWith(hashedId, [options])</a></li>
+              <li class="markdown"><a href="#requestfullscreen" class="markdown">requestFullscreen</a></li>
+              <li class="markdown"><a href="#revoke" class="markdown">revoke</a></li>
+              <li class="markdown"><a href="#secondswatched" class="markdown">secondsWatched()</a></li>
+              <li class="markdown"><a href="#secondswatchedvector" class="markdown">secondsWatchedVector()</a></li>
+              <li class="markdown"><a href="#setsubtitlesscale-val" class="markdown">setSubtitlesScale(val)</a></li>
+              <li class="markdown"><a href="#state" class="markdown">state()</a></li>
+              <li class="markdown"><a href="#time" class="markdown">time()</a></li>
+              <li class="markdown"><a href="#time-val" class="markdown">time(val)</a></li>
+              <li class="markdown"><a href="#unbind-eventtype-callbackfn" class="markdown">unbind(eventType, callbackFn)</a></li>
+              <li class="markdown"><a href="#unmute" class="markdown">unmute()</a></li>
+              <li class="markdown"><a href="#videoheight" class="markdown">videoHeight()</a></li>
+              <li class="markdown"><a href="#videoheight-val-options" class="markdown">videoHeight(val, [options])</a></li>
+              <li class="markdown"><a href="#videoquality" class="markdown">videoQuality()</a></li>
+              <li class="markdown"><a href="#videoquality-val" class="markdown">videoQuality(val)</a></li>
+              <li class="markdown"><a href="#videowidth" class="markdown">videoWidth()</a></li>
+              <li class="markdown"><a href="#videowidth-val-options" class="markdown">videoWidth(val, [options])</a></li>
+              <li class="markdown"><a href="#visitorkey" class="markdown">visitorKey()</a></li>
+              <li class="markdown"><a href="#volume" class="markdown">volume()</a></li>
+              <li class="markdown"><a href="#volume-val" class="markdown">volume(val)</a></li>
+              <li class="markdown"><a href="#width" class="markdown">width()</a></li>
+              <li class="markdown"><a href="#width-val" class="markdown">width(val)</a></li>
+            </ul>
+            <h3 id="addtoplaylist-hashedid-options-position" class="markdown"><a href="#addtoplaylist-hashedid-options-position" class="markdown">addToPlaylist(hashedId, [options], [position])</a></h3>
+            <p class="markdown">A video has a “playlist,” which is a list of videos to play in sequence. Each playlist must have a unique list of hashed IDs; a hashed ID cannot appear twice within the same playlist.</p>
+            <p class="markdown">Use <code class="markdown">addToPlaylist</code> to push more videos onto the queue. When a video is finished playing, it will play the next one in its playlist.</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">addToPlaylist</span>(<span class="markdown hljs-string">"abcde12345"</span>, {
+      <span class="markdown hljs-attr">playerColor</span>: <span class="markdown hljs-string">"00ff00"</span>
+    });
+    </code></pre>
+            <p class="markdown">The <code class="markdown">position</code> argument lets you define where in the playlist the video should be added. It can take any of these forms:</p>
+            <pre class="markdown"><code class="markdown lang-js"><span class="markdown hljs-comment">// Play abcde12345 before hashedid</span>
+    video.<span class="markdown hljs-title function_">addToPlaylist</span>(<span class="markdown hljs-string">"abcde12345"</span>, {}, { <span class="markdown hljs-attr">before</span>: <span class="markdown hljs-string">"hashedid"</span> });
+
+    <span class="markdown hljs-comment">// Play abcde12345 after hashedid</span>
+    video.<span class="markdown hljs-title function_">addToPlaylist</span>(<span class="markdown hljs-string">"abcde12345"</span>, {}, { <span class="markdown hljs-attr">after</span>: <span class="markdown hljs-string">"hashedid"</span> });
+
+    <span class="markdown hljs-comment">// Put abcde12345 in the first position</span>
+    <span class="markdown hljs-comment">// Note that this will not automatically replace the video too. To do that, you</span>
+    <span class="markdown hljs-comment">// should make use of `replaceWith`. See the pre-roll video example below.</span>
+    video.<span class="markdown hljs-title function_">addToPlaylist</span>(<span class="markdown hljs-string">"abcde12345"</span>, {}, { <span class="markdown hljs-attr">index</span>: <span class="markdown hljs-number">0</span> });
+    </code></pre>
+            <p class="markdown">Before using this, you might want to see if <a class="markdown" href="/support/developers/embed-links#simple-playlist-link-example">embed and playlist links</a> covers your use case.</p>
+            <p class="markdown">NOTE: This method currently does not work with iframe embeds or <a class="markdown" href="/support/developers/embed-links#special-playlist-options">playlist links set to auto</a></p>
+            <h3 id="aspect" class="markdown"><a href="#aspect" class="markdown">aspect()</a></h3>
+            <p class="markdown">Returns the aspect ratio (width / height) of the originally uploaded video.</p>
+            <pre class="markdown"><code class="markdown lang-js"><span class="markdown hljs-keyword">if</span> (video.<span class="markdown hljs-title function_">aspect</span>() &lt; <span class="markdown hljs-number">1</span>) {
+      <span class="markdown hljs-variable language_">console</span>.<span class="markdown hljs-title function_">log</span>(<span class="markdown hljs-string">"vertical video"</span>);
+    } <span class="markdown hljs-keyword">else</span> <span class="markdown hljs-keyword">if</span> (video.<span class="markdown hljs-title function_">aspect</span>() &gt; <span class="markdown hljs-number">1</span>) {
+      <span class="markdown hljs-variable language_">console</span>.<span class="markdown hljs-title function_">log</span>(<span class="markdown hljs-string">"horizontal video"</span>);
+    } <span class="markdown hljs-keyword">else</span> {
+      <span class="markdown hljs-variable language_">console</span>.<span class="markdown hljs-title function_">log</span>(<span class="markdown hljs-string">"This video is square."</span>);
+    }
+    </code></pre>
+            <h3 id="bind-eventtype-callbackfn" class="markdown"><a href="#bind-eventtype-callbackfn" class="markdown">bind(eventType, callbackFn)</a></h3>
+            <p class="markdown">Runs a callback function when a specific event is triggered. <a href="#events" class="markdown">Refer to the Events section</a> to see how to respond to the different types events.</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"play"</span>, <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params"></span>) {
+      <span class="markdown hljs-variable language_">console</span>.<span class="markdown hljs-title function_">log</span>(<span class="markdown hljs-string">"the video played!"</span>);
+    });
+
+    video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"timechange"</span>, <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params">t</span>) {
+      <span class="markdown hljs-variable language_">console</span>.<span class="markdown hljs-title function_">log</span>(<span class="markdown hljs-string">"the time changed to "</span> + t);
+    });
+
+    video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"end"</span>, <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params">t</span>) {
+      <span class="markdown hljs-variable language_">console</span>.<span class="markdown hljs-title function_">log</span>(<span class="markdown hljs-string">"the video ended"</span>);
+    });
+    </code></pre>
+            <h3 id="cancelfullscreenmethod" class="markdown"><a href="#cancelfullscreenmethod" class="markdown">cancelFullscreen()</a></h3>
+            <p class="markdown">If video is playing in fullscreen mode, calling this method will exit fullscreen.</p>
+            <h3 id="duration" class="markdown"><a href="#duration" class="markdown">duration()</a></h3>
+            <p class="markdown">Returns the duration of the video in seconds. This will return 0 until <code class="markdown">video.hasData()</code> is true.</p>
+            <pre class="markdown"><code class="markdown lang-js"><span class="markdown hljs-title function_">showVideoDurationOnMyPage</span>(video.<span class="markdown hljs-title function_">duration</span>())
+    </code></pre>
+            <h3 id="email" class="markdown"><a href="#email" class="markdown">email()</a></h3>
+            <p class="markdown">Returns the email associated with this viewing session. If no email is associated, it will return <code class="markdown">null</code>.</p>
+            <p class="markdown">An email can be associated with a viewing session by:</p>
+            <ul class="markdown">
+              <li class="markdown">calling <code class="markdown">video.email('the@email.com')</code></li>
+              <li class="markdown">setting the <code class="markdown">email</code> embed option</li>
+              <li class="markdown">entering their email via Turnstile</li>
+              <li class="markdown">adding <code class="markdown">wemail=the%40email.com</code> to the URL of the page.</li>
+            </ul>
+            <p class="markdown">Once an email has been saved for a viewer, it will persist for that web page
+              until they clear their localStorage.
+            </p>
+            <pre class="markdown"><code class="markdown lang-js"><span class="markdown hljs-title function_">recordViewerEmail</span>(video.<span class="markdown hljs-title function_">email</span>());
+    </code></pre>
+            <h3 id="email-val" class="markdown"><a href="#email-val" class="markdown">email(val)</a></h3>
+            <p class="markdown">Associates the view of this video with the given email value. This email will appear in stats for the video.</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">email</span>(emailForThisUserInMySystem);
+    </code></pre>
+            <h3 id="embedded" class="markdown"><a href="#embedded" class="markdown">embedded()</a></h3>
+            <p class="markdown">Returns true if the video has been embedded, false if it hasn’t yet. We define “embedded” as the video’s markup having been visibly injected into the DOM.</p>
+            <pre class="markdown"><code class="markdown lang-js"><span class="markdown hljs-keyword">if</span> (video.<span class="markdown hljs-title function_">embedded</span>()) {
+      <span class="markdown hljs-comment">// do this thing</span>
+    }
+    </code></pre>
+            <h3 id="eventkey" class="markdown"><a href="#eventkey" class="markdown">eventKey()</a></h3>
+            <p class="markdown">Returns the <code class="markdown">event_key</code> for the current viewing session. You can get all events for your account from the <a class="markdown" href="/support/developers/stats-api#events">Stats API</a>.</p>
+            <h3 id="getsubtitlesscale" class="markdown"><a href="#getsubtitlesscale" class="markdown">getSubtitlesScale()</a></h3>
+            <p class="markdown">Returns the value of the multiplier that’s scaling the size of your captions.</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">plugin</span>(<span class="markdown hljs-string">'captions'</span>).<span class="markdown hljs-title function_">then</span>(<span class="markdown hljs-keyword">function</span> (<span class="markdown hljs-params">captions</span>) {
+      captions.<span class="markdown hljs-title function_">setSubtitlesScale</span>(<span class="markdown hljs-number">1.2</span>);
+      captions.<span class="markdown hljs-title function_">getSubtitlesScale</span>(); <span class="markdown hljs-comment">// returns 1.2</span>
+    });
+    </code></pre>
+            <h3 id="hasdata" class="markdown"><a href="#hasdata" class="markdown">hasData()</a></h3>
+            <p class="markdown">Returns true if the video has received data from the Wistia server, false if not. The data includes information like which video files are available, the name and duration of the video, and its customizations.</p>
+            <h3 id="hashedid" class="markdown"><a href="#hashedid" class="markdown">hashedId()</a></h3>
+            <p class="markdown">Returns the hashed ID associated with this video. The hashed ID is an alphanumeric string that uniquely identifies your video in Wistia.</p>
+            <pre class="markdown"><code class="markdown lang-js"><span class="markdown hljs-title function_">recordPlayedVideo</span>(video.<span class="markdown hljs-title function_">hashedId</span>(), video.<span class="markdown hljs-title function_">name</span>());
+    </code></pre>
+            <h3 id="height" class="markdown"><a href="#height" class="markdown">height()</a></h3>
+            <p class="markdown">Returns the current height of the video container in pixels.</p>
+            <pre class="markdown"><code class="markdown lang-js"><span class="markdown hljs-comment">// e.g. set the height of &lt;div id="next_to_video"&gt; to match the video.</span>
+    $(<span class="markdown hljs-string">"#next_to_video"</span>).<span class="markdown hljs-title function_">height</span>(video.<span class="markdown hljs-title function_">height</span>());
+    </code></pre>
+            <h3 id="height-val-options" class="markdown"><a href="#height-val-options" class="markdown">height(val, [options])</a></h3>
+            <p class="markdown">Sets the height of the video container to <code class="markdown">val</code> in pixels. It is expected that <code class="markdown">val</code> is an integer. Decimal or string values will be truncated.</p>
+            <p class="markdown">If <code class="markdown">constrain: true</code> is passed as an option, then the width of the video will also be updated to maintain the correct aspect ratio.</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">height</span>(<span class="markdown hljs-number">360</span>);
+    video.<span class="markdown hljs-title function_">height</span>(<span class="markdown hljs-number">400</span>, { <span class="markdown hljs-attr">constrain</span>: <span class="markdown hljs-literal">true</span> });
+    </code></pre>
+            <h3 id="infullscreen" class="markdown"><a href="#infullscreen" class="markdown">inFullscreen()</a></h3>
+            <p class="markdown">Returns <code class="markdown">true</code> if the video is currently playing in fullscreen, <code class="markdown">false</code> if not.</p>
+            <h3 id="ismuted" class="markdown"><a href="#ismuted" class="markdown">isMuted()</a></h3>
+            <p class="markdown">Returns true if the video is muted.</p>
+            <h3 id="look" class="markdown"><a href="#look" class="markdown">look()</a></h3>
+            <div role="note" aria-labelledby="97471cc4-6ddc-49d7-b3ae-545352283cc2" class="jsx-4054647136 CallOut">
+              <div id="97471cc4-6ddc-49d7-b3ae-545352283cc2" class="jsx-4054647136 CallOut__designation">
+                <svg viewBox="0 0 512 512" class="Icon jsx-4054647136" role="presentation">
+                  <path d=" M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zm-6 400H54a6 6 0 0 1-6-6V86 a6 6 0 0 1 6-6h404a6 6 0 0 1 6 6v340a6 6 0 0 1-6 6zm-42-92v24c0 6.627 -5.373 12-12 12H204c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12 h200c6.627 0 12 5.373 12 12zm0-96v24c0 6.627-5.373 12-12 12H204c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h200c6.627 0 12 5.373 12 12 zm0-96v24c0 6.627-5.373 12-12 12H204c-6.627 0-12-5.373-12-12v-24c0 -6.627 5.373-12 12-12h200c6.627 0 12 5.373 12 12zm-252 12c0 19.882 -16.118 36-36 36s-36-16.118-36-36 16.118-36 36-36 36 16.118 36 36zm0 96c0 19.882-16.118 36-36 36s-36-16.118-36-36 16.118-36 36-36 36 16.118 36 36zm0 96c0 19.882-16.118 36-36 36s-36-16.118-36-36 16.118-36 36-36 36 16.118 36 36z " fill="currentColor"></path>
+                </svg>
+                Note
+              </div>
+              <div class="jsx-4054647136 CallOut__message">
+                For 360° video only. To use the 360° player for a video head to the Controls section of the Customize panel and check the “This is a 360° video” checkbox.
+              </div>
+            </div>
+            <p class="markdown">Returns an object that represents where the viewer is currently looking. The object contains the current <code class="markdown">heading</code>, <code class="markdown">pitch</code>, and <code class="markdown">fov</code> (field of view) all in degrees.</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">look</span>() <span class="markdown hljs-comment">//=&gt; { heading: 90, pitch: 5, fov: 120 }</span>
+    </code></pre>
+            <p class="markdown">A <code class="markdown">heading</code> of 0 is straight ahead. A <code class="markdown">heading</code> of 90 is looking to the right, -90 is to the left, and 180 is looking directly back.</p>
+            <p class="markdown">A <code class="markdown">pitch</code> of 0 is looking straight ahead. A <code class="markdown">pitch</code> of 90 is looking straight up, and -90 is straight down.</p>
+            <p class="markdown"><code class="markdown">fov</code> is the horizontal field of view in degrees. A <code class="markdown">fov</code> of 120 indicates that the viewer is seeing one third of the whole scene (120°/360° = 1/3).</p>
+            <h3 id="look-options" class="markdown"><a href="#look-options" class="markdown">look(options)</a></h3>
+            <p class="markdown">For 360° video only.</p>
+            <p class="markdown">Sets where the viewer is looking. Provide one or more of <code class="markdown">heading</code>, <code class="markdown">pitch</code>, and <code class="markdown">fov</code>.</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">look</span>({ <span class="markdown hljs-attr">heading</span>: <span class="markdown hljs-number">90</span> }) <span class="markdown hljs-comment">//=&gt; look to the right</span>
+    video.<span class="markdown hljs-title function_">look</span>({ <span class="markdown hljs-attr">pitch</span>: <span class="markdown hljs-number">45</span> }) <span class="markdown hljs-comment">//=&gt; look up 45°</span>
+    video.<span class="markdown hljs-title function_">look</span>({ <span class="markdown hljs-attr">fov</span>: <span class="markdown hljs-number">180</span> }) <span class="markdown hljs-comment">//=&gt; expand the field of view so the viewer can see half the scene</span>
+    video.<span class="markdown hljs-title function_">look</span>({ <span class="markdown hljs-attr">heading</span>: <span class="markdown hljs-number">180</span>, <span class="markdown hljs-attr">pitch</span>: <span class="markdown hljs-number">0</span> }) <span class="markdown hljs-comment">//=&gt; look straight back</span>
+    </code></pre>
+            <p class="markdown">By default, the view will <code class="markdown">tween</code> to its new position&hairsp;—&hairsp;that is, it will smoothly animate to the new view. If you’d like it to snap to the new view without any animation, set <code class="markdown">tween</code> to false like this:</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">look</span>({ <span class="markdown hljs-attr">heading</span>: -<span class="markdown hljs-number">90</span>, <span class="markdown hljs-attr">tween</span>: <span class="markdown hljs-literal">false</span> })
+    </code></pre>
+            <h3 id="mute" class="markdown"><a href="#mute" class="markdown">mute()</a></h3>
+            <p class="markdown">Disables audio on the video.</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">mute</span>()
+    </code></pre>
+            <h3 id="name" class="markdown"><a href="#name" class="markdown">name()</a></h3>
+            <p class="markdown">Returns the name of the video, as defined in the Wistia application. Returns null until <code class="markdown">hasData()</code> is true.</p>
+            <pre class="markdown"><code class="markdown lang-js"><span class="markdown hljs-variable language_">console</span>.<span class="markdown hljs-title function_">log</span>(<span class="markdown hljs-string">"Thank you for watching "</span> + video.<span class="markdown hljs-title function_">name</span>() + <span class="markdown hljs-string">"!"</span>);
+    </code></pre>
+            <h3 id="pause" class="markdown"><a href="#pause" class="markdown">pause()</a></h3>
+            <p class="markdown">Pauses the video. If this is called and the video’s state is “playing,” it’s expected that it will change to “paused.”</p>
+            <pre class="markdown"><code class="markdown lang-js">$(<span class="markdown hljs-string">"#custom_pause_button"</span>).<span class="markdown hljs-title function_">click</span>(<span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params"></span>) {
+      video.<span class="markdown hljs-title function_">pause</span>()
+    });
+    </code></pre>
+            <h3 id="percentwatched" class="markdown"><a href="#percentwatched" class="markdown">percentWatched()</a></h3>
+            <p class="markdown">Returns the percent of the video that has been watched as a decimal between 0 and 1. This is equivalent to computing <code class="markdown">video.secondsWatched() / Math.floor(video.duration())</code>.</p>
+            <pre class="markdown"><code class="markdown lang-js">$(<span class="markdown hljs-string">"#next_page"</span>).<span class="markdown hljs-title function_">click</span>(<span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params"></span>) {
+      <span class="markdown hljs-keyword">if</span> (video.<span class="markdown hljs-title function_">percentWatched</span>() &gt; <span class="markdown hljs-number">0.9</span> &amp;&amp; video.<span class="markdown hljs-title function_">percentWatched</span>() &lt; <span class="markdown hljs-number">0.99</span>) {
+        <span class="markdown hljs-keyword">if</span> (<span class="markdown hljs-title function_">confirm</span>(<span class="markdown hljs-string">"But you're so closed to finishing the video -- there's a prize at the end! Move on anyway?"</span>)) {
+          <span class="markdown hljs-title function_">goToNextPage</span>();
+        }
+      } <span class="markdown hljs-keyword">else</span> {
+        <span class="markdown hljs-title function_">goToNextPage</span>();
+      }
+    });
+    </code></pre>
+            <h3 id="play" class="markdown"><a href="#play" class="markdown">play()</a></h3>
+            <p class="markdown">Plays the video. If this is called, it is expected that the state will change to “playing.”</p>
+            <p class="markdown">NOTE: On iOS and other mobile devices, videos cannot be issued the “play” command outside the context of a user-driven or video event. For example, “click” and “touch” events are user-driven, and video events include “pause” and “end” (you can bind to these using <code class="markdown">video.bind(eventType, callbackFn)</code> described above.  Because of this restriction, you should avoid calling <code class="markdown">play()</code> within a <code class="markdown">setTimeout</code> callback or other asynchronous functions like XHR or javascript promises.</p>
+            <p class="markdown">Also for this reason, the <code class="markdown">play()</code> method will never work with the iframe API on mobile. This is because the iframe API makes use of javascript’s <code class="markdown">postMessage</code> API, which is by its nature asynchronous.</p>
+            <p class="markdown">Please refer to <a href="https://developer.apple.com/library/safari/documentation/AudioVideo/Conceptual/Using_HTML5_Audio_Video/Device-SpecificConsiderations/Device-SpecificConsiderations.html" target="_blank" rel="noopener" class="markdown">Apple’s Documentation</a> for the reasons behind this behavior.</p>
+            <h3 id="playbackrate-r" class="markdown"><a href="#playbackrate-r" class="markdown">playbackRate(r)</a></h3>
+            <p class="markdown">Sets the playback rate of the video, from 0 to infinity and beyond (though we would recommend keeping things between 0.5 and 2).</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">playbackRate</span>(<span class="markdown hljs-number">1.25</span>); <span class="markdown hljs-comment">// sets the playback rate to 1.25x regular speed.</span>
+    </code></pre>
+            <div role="note" aria-labelledby="78ea2fab-b26a-431d-8b0a-f7eacc959c3e" class="jsx-4054647136 CallOut">
+              <div id="78ea2fab-b26a-431d-8b0a-f7eacc959c3e" class="jsx-4054647136 CallOut__designation">
+                <svg viewBox="0 0 512 512" class="Icon jsx-4054647136" role="presentation">
+                  <path d=" M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zm-6 400H54a6 6 0 0 1-6-6V86 a6 6 0 0 1 6-6h404a6 6 0 0 1 6 6v340a6 6 0 0 1-6 6zm-42-92v24c0 6.627 -5.373 12-12 12H204c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12 h200c6.627 0 12 5.373 12 12zm0-96v24c0 6.627-5.373 12-12 12H204c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h200c6.627 0 12 5.373 12 12 zm0-96v24c0 6.627-5.373 12-12 12H204c-6.627 0-12-5.373-12-12v-24c0 -6.627 5.373-12 12-12h200c6.627 0 12 5.373 12 12zm-252 12c0 19.882 -16.118 36-36 36s-36-16.118-36-36 16.118-36 36-36 36 16.118 36 36zm0 96c0 19.882-16.118 36-36 36s-36-16.118-36-36 16.118-36 36-36 36 16.118 36 36zm0 96c0 19.882-16.118 36-36 36s-36-16.118-36-36 16.118-36 36-36 36 16.118 36 36z " fill="currentColor"></path>
+                </svg>
+                Note
+              </div>
+              <div class="jsx-4054647136 CallOut__message">
+                The <code class="markdown">playbackRate</code> method does not work with the Flash player, which Wistia will sometimes fall back to for legacy browser support.
+              </div>
+            </div>
+            <h3 id="ready" class="markdown"><a href="#ready" class="markdown">ready()</a></h3>
+            <p class="markdown">Returns true if the video is ready to be played, false if it is not. A video is “ready” if:</p>
+            <ol class="markdown">
+              <li class="markdown">it has data from the server,</li>
+              <li class="markdown">it is embedded in the DOM,</li>
+              <li class="markdown">its javascript interface is available,</li>
+              <li class="markdown">metadata required to play is loaded,</li>
+              <li class="markdown">it is not hidden via <code class="markdown">display: none</code>.</li>
+            </ol>
+            <p class="markdown">The visibility requirement is grounded in practicality. That is, Flash videos cannot be played when they are hidden via <code class="markdown">display: none</code>, so supporting the opposite with HTML5 videos would set up a fundamental difference between our embed types. But it is also a common use case to embed a video in a hidden tab or a custom lightbox. In these cases, if the video has <code class="markdown">autoPlay=true</code>, it will still defer playing until it becomes visible.</p>
+            <p class="markdown">If you must have your video be hidden AND ready, consider moving it offscreen like <code class="markdown">position: absolute; left: -99999em</code> instead of using <code class="markdown">display: none</code>.</p>
+            <h3 id="remove" class="markdown"><a href="#remove" class="markdown">remove()</a></h3>
+            <p class="markdown">Removes the video from the page cleanly. This will do garbage collection, cancel asynchronous operations, and stop the video from streaming, none of which are reliable if the video is simply removed from the DOM, e.g. <code class="markdown">$(".wistia_embed").empty().remove()</code>.</p>
+            <pre class="markdown"><code class="markdown lang-js"><span class="markdown hljs-keyword">function</span> <span class="markdown hljs-title function_">nextPage</span>(<span class="markdown hljs-params"></span>) {
+      $.<span class="markdown hljs-title function_">get</span>(<span class="markdown hljs-string">"/next_page.html"</span>, <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params"></span>) {
+        <span class="markdown hljs-comment">// If a video is defined for this page, remove it cleanly before it is</span>
+        <span class="markdown hljs-comment">// removed from the DOM.</span>
+        <span class="markdown hljs-keyword">if</span> (currentVideo) {
+          currentVideo.<span class="markdown hljs-title function_">remove</span>();
+          currentVideo = <span class="markdown hljs-literal">null</span>;
+        }
+        $(<span class="markdown hljs-string">"#the_content"</span>).<span class="markdown hljs-title function_">html</span>(nextPageContent);
+      });
+    }
+    </code></pre>
+            <h3 id="replacewith-hashedid-options" class="markdown"><a href="#replacewith-hashedid-options" class="markdown">replaceWith(hashedId, [options])</a></h3>
+            <p class="markdown">Replaces the content of the current video with the video identified by <code class="markdown">hashedId</code>. This video will be loaded with all its customizations, which can be overridden in the <code class="markdown">options</code> object. This method can be used in conjunction with <code class="markdown">addToPlaylist(hashedId, [options])</code> to create custom playlist implementations.</p>
+            <p class="markdown">In addition to the normal <a class="markdown" href="/support/developers/embed-options">embed options</a>, you can set the <code class="markdown">transition</code> option, which defines how to visually transition to the new video. Available values are “slide,” “fade,” “crossfade,” and “none.” By default, “fade” is used.</p>
+            <pre class="markdown"><code class="markdown lang-js">$(<span class="markdown hljs-string">"#video_abcde12345"</span>).<span class="markdown hljs-title function_">click</span>(<span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params"></span>) {
+      video.<span class="markdown hljs-title function_">replaceWith</span>(<span class="markdown hljs-string">"abcde12345"</span>,
+        {<span class="markdown hljs-attr">transition</span>: <span class="markdown hljs-string">"slide"</span>}
+      );
+    });
+    </code></pre>
+            <p class="markdown">Before using this, you might want to see if <a class="markdown" href="/support/developers/embed-links#simple-video-replacement-example">embed and playlist links</a> covers your use case.</p>
+            <p class="markdown">NOTE: This method currently does not work with iframe embeds.</p>
+            <h3 id="requestfullscreen" class="markdown"><a href="#requestfullscreen" class="markdown">requestFullscreen()</a></h3>
+            <p class="markdown">If this method is called, the player will try to go fullscreen. NOTE: This method will only work if called in response to a user-initiated event, such as a click or a keyboard event. It will not work if called as part of an async operation, such as a timeout.</p>
+            <h3 id="revoke" class="markdown"><a href="#revoke" class="markdown">revoke</a></h3>
+            <p class="markdown">Unlike <code class="markdown">remove()</code> which will only remove an embed from a page, <code class="markdown">revoke</code> is used to remove any embed initialization configuration objects from the page that were added using the <code class="markdown">_wq</code> syntax. This is especially useful when embedding videos within a single-page application or working with JS frameworks such as React, Vue.js, or Angular. In those situations, the config object is often pushed onto the initialization queue each time a video component is mounted, resulting in compounding function calls if the component is unmounted and then remounted repeatedly. You can solve this by using <code class="markdown">revoke</code> when your component unmounts.</p>
+            <p class="markdown">To revoke an embed initialization config object, push a reference to it onto the queue under the <code class="markdown">revoke</code> key, like this:</p>
+            <pre class="markdown"><code class="markdown lang-js"><span class="markdown hljs-variable language_">window</span>.<span class="markdown hljs-property">_wq</span> = <span class="markdown hljs-variable language_">window</span>.<span class="markdown hljs-property">_wq</span> || []
+
+    <span class="markdown hljs-keyword">const</span> embedInitConfig = {
+      <span class="markdown hljs-attr">id</span>: <span class="markdown hljs-string">"abcde12345"</span>,
+      <span class="markdown hljs-attr">onReady</span>: <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params">video</span>) {
+        video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"play"</span>, <span class="markdown hljs-function">() =&gt;</span> {
+          <span class="markdown hljs-comment">// some function to run when the video plays</span>
+        }
+      }
+    });
+    .
+    .
+    <span class="markdown hljs-comment">// push embedInitConfig onto queue when video is mounted</span>
+    <span class="markdown hljs-variable language_">window</span>.<span class="markdown hljs-property">_wq</span>.<span class="markdown hljs-title function_">push</span>(embedInitConfig);
+    .
+    .
+    <span class="markdown hljs-comment">// revoke embedInitConfig when video is unmounted</span>
+    <span class="markdown hljs-variable language_">window</span>.<span class="markdown hljs-property">_wq</span>.<span class="markdown hljs-title function_">push</span>( { <span class="markdown hljs-attr">revoke</span>: embedInitConfig } );
+    </code></pre>
+            <h3 id="secondswatched" class="markdown"><a href="#secondswatched" class="markdown">secondsWatched()</a></h3>
+            <p class="markdown">Returns the number of unique seconds that have been watched for the video. This does not include seconds that have been skipped by seeking.</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"secondchange"</span>, <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params"></span>) {
+      <span class="markdown hljs-keyword">if</span> (video.<span class="markdown hljs-title function_">secondsWatched</span>() &gt;= <span class="markdown hljs-number">60</span>) {
+        <span class="markdown hljs-variable language_">console</span>.<span class="markdown hljs-title function_">log</span>(<span class="markdown hljs-string">"You've watched over a full minute of this video!"</span>);
+      }
+    });
+    </code></pre>
+            <p class="markdown">NOTE: This method currently does not work with iframe embeds.</p>
+            <h3 id="secondswatchedvector" class="markdown"><a href="#secondswatchedvector" class="markdown">secondsWatchedVector()</a></h3>
+            <p class="markdown">ADVANCED. Returns an array where each index represents the number of times the viewer has watched each second of the video. For example, if a video is 10 seconds long and the viewer has watched the first three seconds, it will look like this:</p>
+            <pre class="markdown"><code class="markdown">[1, 1, 1, 0, 0, 0, 0, 0, 0, 0]
+    </code></pre>
+            <p class="markdown">If the viewer has watched the entire video once and rewatched the first 5 seconds, it will look like this:</p>
+            <pre class="markdown"><code class="markdown">[2, 2, 2, 2, 2, 1, 1, 1, 1, 1]
+    </code></pre>
+            <p class="markdown">This can be used to quickly determine if a viewer has missed or rewatched an important part of a video.</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"end"</span>, <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params"></span>) {
+      <span class="markdown hljs-keyword">var</span> watchedVector = video.<span class="markdown hljs-title function_">secondsWatchedVector</span>();
+      <span class="markdown hljs-keyword">var</span> watchedImportantSeconds = <span class="markdown hljs-number">0</span>;
+      <span class="markdown hljs-keyword">for</span> (<span class="markdown hljs-keyword">var</span> i = <span class="markdown hljs-number">4</span>; i &lt; <span class="markdown hljs-number">9</span>; i++) {
+        <span class="markdown hljs-keyword">if</span> (watchedVector[i] &gt; <span class="markdown hljs-number">0</span>) {
+          watchedImportantSeconds += <span class="markdown hljs-number">1</span>;
+        }
+      }
+      <span class="markdown hljs-keyword">if</span> (watchedImportantSeconds &lt; <span class="markdown hljs-number">2</span>) {
+        <span class="markdown hljs-variable language_">console</span>.<span class="markdown hljs-title function_">log</span>(<span class="markdown hljs-string">"You should really go back and watch seconds 5 through 10. They're important!"</span>);
+      }
+    });
+    </code></pre>
+            <p class="markdown">NOTE: This method currently does not work with iframe embeds.</p>
+            <h3 id="setsubtitlesscale-val" class="markdown"><a href="#setsubtitlesscale-val" class="markdown">setSubtitlesScale(val)</a></h3>
+            <p class="markdown">Sets the a multiplier <code class="markdown">val</code> to scale the size of your captions. </p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">plugin</span>(<span class="markdown hljs-string">'captions'</span>).<span class="markdown hljs-title function_">then</span>(<span class="markdown hljs-keyword">function</span> (<span class="markdown hljs-params">captions</span>) {
+      captions.<span class="markdown hljs-title function_">setSubtitlesScale</span>(<span class="markdown hljs-number">1.2</span>);
+      captions.<span class="markdown hljs-title function_">getSubtitlesScale</span>(); <span class="markdown hljs-comment">// returns 1.2</span>
+    });
+    </code></pre>
+            <p class="markdown">NOTE: The scaling value is a multiplier on top of our existing scaling, so the font still gets bigger and smaller with the video, but its final size is multiplied by that option.</p>
+            <h3 id="state" class="markdown"><a href="#state" class="markdown">state()</a></h3>
+            <p class="markdown">Returns the current state of the video as a string. Possible values are “beforeplay,” “playing,” “paused,” and “ended.”</p>
+            <p class="markdown">The most common use case for <code class="markdown">state()</code> is implementing a play/pause toggle button.</p>
+            <pre class="markdown"><code class="markdown lang-js">$(<span class="markdown hljs-string">"#toggle_play"</span>).<span class="markdown hljs-title function_">click</span>(<span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params"></span>) {
+      <span class="markdown hljs-keyword">if</span> (video.<span class="markdown hljs-title function_">state</span>() === <span class="markdown hljs-string">"playing"</span>) {
+        video.<span class="markdown hljs-title function_">pause</span>();
+      } <span class="markdown hljs-keyword">else</span> {
+        video.<span class="markdown hljs-title function_">play</span>();
+      }
+    });
+    </code></pre>
+            <h3 id="time" class="markdown"><a href="#time" class="markdown">time()</a></h3>
+            <p class="markdown">Returns the current time of the video as a decimal in seconds.</p>
+            <pre class="markdown"><code class="markdown lang-js">$(<span class="markdown hljs-string">"#leave_comment"</span>).<span class="markdown hljs-title function_">click</span>(<span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params"></span>) {
+      $(<span class="markdown hljs-string">"#comment"</span>).<span class="markdown hljs-title function_">html</span>(commentData + <span class="markdown hljs-string">"&lt;span class='time'&gt;left at "</span> + video.<span class="markdown hljs-title function_">time</span>() + <span class="markdown hljs-string">" seconds&lt;/span&gt;"</span>)
+    });
+    </code></pre>
+            <h3 id="time-val" class="markdown"><a href="#time-val" class="markdown">time(val)</a></h3>
+            <p class="markdown">Seeks the video to the time defined by <code class="markdown">val</code>. It is expected that <code class="markdown">val</code> is a decimal integer specified in seconds. This method will maintain the state of the video: if the video was playing, it will continue playing after seek. If it was not playing, the video will be paused.</p>
+            <p class="markdown">NOTE: On iOS, when seeking from the “beforeplay” state, <code class="markdown">video.time(val)</code> is subject to the same restrictions as <code class="markdown">video.play()</code>. However, there is a bit of nuance.  If you call <code class="markdown">video.time(30)</code> before play, the video will not play per the restrictions. But once the viewer clicks the video to play it, it will begin playing 30 seconds in.</p>
+            <h3 id="unbind-eventtype-callbackfn" class="markdown"><a href="#unbind-eventtype-callbackfn" class="markdown">unbind(eventType, callbackFn)</a></h3>
+            <p class="markdown">Unbind a callback that was setup with <code class="markdown">bind(eventType, callbackFn)</code>.</p>
+            <pre class="markdown"><code class="markdown lang-js"><span class="markdown hljs-keyword">var</span> onPlayFunction = <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params"></span>) {
+      <span class="markdown hljs-title function_">doThisThing</span>();
+    };
+    video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"play"</span>, onPlayFunction);
+    $(<span class="markdown hljs-string">"#dont_do_this_thing_ever"</span>).<span class="markdown hljs-title function_">click</span>(<span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params"></span>) {
+      video.<span class="markdown hljs-title function_">unbind</span>(<span class="markdown hljs-string">"play"</span>, onPlayFunction);
+    });
+    </code></pre>
+            <p class="markdown">Since binding until a condition is met is a common operation with videos, the Player API also supports anonymous function unbinding.</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"timechange"</span>, <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params">t</span>) {
+      <span class="markdown hljs-keyword">if</span> (t &gt; <span class="markdown hljs-number">30</span>) {
+        <span class="markdown hljs-variable language_">console</span>.<span class="markdown hljs-title function_">log</span>(<span class="markdown hljs-string">"Made it past 30 seconds! This will never fire again."</span>);
+        <span class="markdown hljs-keyword">return</span> video.<span class="markdown hljs-property">unbind</span>;
+      }
+    });
+    </code></pre>
+            <h3 id="unmute" class="markdown"><a href="#unmute" class="markdown">unmute()</a></h3>
+            <p class="markdown">Enables audio on the video if it had been disabled via <code class="markdown">mute()</code>. The video’s volume before it was muted will be restored.</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">unmute</span>();
+    </code></pre>
+            <h3 id="videoheight" class="markdown"><a href="#videoheight" class="markdown">videoHeight()</a></h3>
+            <p class="markdown">Returns the height of the video itself in pixels, without anything extra. For example, if the socialbar is enabled and <code class="markdown">video.height()</code> returns 388, then <code class="markdown">video.videoHeight()</code> will return 360 because the height of the Social Bar is 28px.</p>
+            <pre class="markdown"><code class="markdown lang-js">$(<span class="markdown hljs-string">"#video_matcher"</span>).<span class="markdown hljs-title function_">height</span>(video.<span class="markdown hljs-title function_">videoHeight</span>());
+    </code></pre>
+            <h3 id="videoheight-val-options" class="markdown"><a href="#videoheight-val-options" class="markdown">videoHeight(val, [options])</a></h3>
+            <p class="markdown">Sets the height of the video to <code class="markdown">val</code> in pixels. It is expected that <code class="markdown">val</code> is an integer.  Decimal or string values will be truncated.</p>
+            <p class="markdown">If <code class="markdown">constrain: true</code> is passed as an option, then the width of the video will also be updated to maintain the correct aspect ratio.</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">videoHeight</span>(<span class="markdown hljs-number">360</span>);
+    video.<span class="markdown hljs-title function_">videoHeight</span>(<span class="markdown hljs-number">400</span>, { <span class="markdown hljs-attr">constrain</span>: <span class="markdown hljs-literal">true</span> });
+    </code></pre>
+            <h3 id="videoquality" class="markdown"><a href="#videoquality" class="markdown">videoQuality()</a></h3>
+            <p class="markdown">Returns the current quality level of the video. Typically this will be an integer such as <code class="markdown">720</code> or <code class="markdown">1080</code>, but in Safari it will return <code class="markdown">auto</code> if the video is currently set to adaptive bit rate streaming.</p>
+            <h3 id="videoquality-val" class="markdown"><a href="#videoquality-val" class="markdown">videoQuality(val)</a></h3>
+            <p class="markdown">Sets the quality level for the video. It accepts either an integer indicating the exact quality level to stream (ex. <code class="markdown">224</code>, <code class="markdown">360</code>, <code class="markdown">540</code>, <code class="markdown">720</code>, or <code class="markdown">1080</code>) or the string <code class="markdown">auto</code> to enable adaptive bit rate streaming. </p>
+            <p class="markdown">NOTE: If you specify a quality level corresponding to an asset that doesn’t exist for your video, <code class="markdown">videoQuality(val)</code> will default to the highest or lowest quality asset available. For example, if you pass <code class="markdown">1080</code> as an argument but your video doesn’t have a 1080p asset, <code class="markdown">videoQuality(val)</code> will select the 720p asset instead.</p>
+            <h3 id="videowidth" class="markdown"><a href="#videowidth" class="markdown">videoWidth()</a></h3>
+            <p class="markdown">Returns the width of the video itself in pixels, without anything extra. For example, if the Presentation Sync lab is enabled and <code class="markdown">video.width()</code> returns 1166, then <code class="markdown">video.videoWidth()</code> will return 640 because the width of the presentation is 526px.</p>
+            <pre class="markdown"><code class="markdown lang-js">$(<span class="markdown hljs-string">"#video_matcher"</span>).<span class="markdown hljs-title function_">width</span>(video.<span class="markdown hljs-title function_">videoWidth</span>());
+    </code></pre>
+            <h3 id="videowidth-val-options" class="markdown"><a href="#videowidth-val-options" class="markdown">videoWidth(val, [options])</a></h3>
+            <p class="markdown">Sets the width of the video to <code class="markdown">val</code> in pixels. It is expected that <code class="markdown">val</code> is an integer.  Decimal or string values will be truncated.</p>
+            <p class="markdown">If <code class="markdown">constrain: true</code> is passed as an option, then the height of the video will also be updated to maintain the correct aspect ratio.</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">videoWidth</span>(<span class="markdown hljs-number">640</span>);
+    video.<span class="markdown hljs-title function_">videoWidth</span>(<span class="markdown hljs-number">640</span>, { <span class="markdown hljs-attr">constrain</span>: <span class="markdown hljs-literal">true</span> });
+    </code></pre>
+            <h3 id="visitorkey" class="markdown"><a href="#visitorkey" class="markdown">visitorKey()</a></h3>
+            <p class="markdown">Returns the <code class="markdown">visitor_key</code> of the person watching the video. This is used to associate multiple viewing sessions with a single person. You can use it to filter <a class="markdown" href="/support/developers/stats-api#events">events</a> in the Stats API.</p>
+            <h3 id="volume" class="markdown"><a href="#volume" class="markdown">volume()</a></h3>
+            <p class="markdown">Returns the current volume of the video as a decimal between 0 and 1. This value is not dependable until <code class="markdown">video.ready()</code> returns true.</p>
+            <pre class="markdown"><code class="markdown lang-js">$(<span class="markdown hljs-string">"#custom_volume_monitor"</span>).<span class="markdown hljs-title function_">text</span>(<span class="markdown hljs-title class_">Math</span>.<span class="markdown hljs-title function_">round</span>(video.<span class="markdown hljs-title function_">volume</span>() * <span class="markdown hljs-number">100</span>) + <span class="markdown hljs-string">"%"</span>)
+    </code></pre>
+            <h3 id="volume-val" class="markdown"><a href="#volume-val" class="markdown">volume(val)</a></h3>
+            <p class="markdown">Sets the volume to <code class="markdown">val</code>. It is expected that <code class="markdown">val</code> is a decimal between 0 and 1.</p>
+            <pre class="markdown"><code class="markdown lang-js">$(<span class="markdown hljs-string">"#custom_volume_slider"</span>).<span class="markdown hljs-title function_">on</span>(<span class="markdown hljs-string">"change"</span>, <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params"></span>) {
+      video.<span class="markdown hljs-title function_">volume</span>($(<span class="markdown hljs-variable language_">this</span>).<span class="markdown hljs-title function_">val</span>());
+    });
+    </code></pre>
+            <h3 id="width" class="markdown"><a href="#width" class="markdown">width()</a></h3>
+            <p class="markdown">Returns the current width of the video container in pixels.</p>
+            <pre class="markdown"><code class="markdown lang-js"><span class="markdown hljs-comment">// e.g. set the width of &lt;div id="next_to_video"&gt; to match the video.</span>
+    $(<span class="markdown hljs-string">"#next_to_video"</span>).<span class="markdown hljs-title function_">width</span>(video.<span class="markdown hljs-title function_">width</span>());
+    </code></pre>
+            <h3 id="width-val" class="markdown"><a href="#width-val" class="markdown">width(val)</a></h3>
+            <p class="markdown">Sets the width of the video container to <code class="markdown">val</code> in pixels. It is expected that <code class="markdown">val</code> is an integer. Decimal or string values will be truncated.</p>
+            <p class="markdown">If <code class="markdown">constrain: true</code> is passed as an option, then the width of the video will also be updated to maintain the correct aspect ratio.</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">width</span>(<span class="markdown hljs-number">640</span>);
+    video.<span class="markdown hljs-title function_">width</span>(<span class="markdown hljs-number">700</span>, { <span class="markdown hljs-attr">constrain</span>: <span class="markdown hljs-literal">true</span> });
+    </code></pre>
+            <hr class="markdown">
+          </section>
+          <section id="events" class="markdown">
+            <h2 class="markdown"><a href="#events" class="markdown">Events</a></h2>
+            <p class="markdown">Use these events when working with the <code class="markdown">bind</code> and <code class="markdown">unbind</code> methods.</p>
+            <h3 id="list-of-player-events" class="markdown"><a href="#list-of-player-events" class="markdown">List of Player Events</a></h3>
+            <ul class="markdown">
+              <li class="markdown"><a href="#beforeremove" class="markdown">beforeremove</a></li>
+              <li class="markdown"><a href="#beforereplace" class="markdown">beforereplace</a></li>
+              <li class="markdown"><a href="#betweentimes" class="markdown">betweentimes</a></li>
+              <li class="markdown"><a href="#cancelfullscreenevent" class="markdown">cancelfullscreen</a></li>
+              <li class="markdown"><a href="#captionschange" class="markdown">captionschange</a></li>
+              <li class="markdown"><a href="#conversion" class="markdown">conversion</a></li>
+              <li class="markdown"><a href="#crosstime" class="markdown">crosstime</a></li>
+              <li class="markdown"><a href="#end" class="markdown">end</a></li>
+              <li class="markdown"><a href="#enterfullscreen" class="markdown">enterfullscreen</a></li>
+              <li class="markdown"><a href="#heightchange" class="markdown">heightchange</a></li>
+              <li class="markdown"><a href="#lookchange" class="markdown">lookchange</a></li>
+              <li class="markdown"><a href="#mutechange" class="markdown">mutechange</a></li>
+              <li class="markdown"><a href="#pause-1" class="markdown">pause</a></li>
+              <li class="markdown"><a href="#percentwatchedchanged" class="markdown">percentwatchedchanged</a></li>
+              <li class="markdown"><a href="#play-1" class="markdown">play</a></li>
+              <li class="markdown"><a href="#playbackratechange" class="markdown">playbackratechange</a></li>
+              <li class="markdown"><a href="#secondchange" class="markdown">secondchange</a></li>
+              <li class="markdown"><a href="#seek" class="markdown">seek</a></li>
+              <li class="markdown"><a href="#silentplaybackmodechange" class="markdown">silentplaybackmodechange</a></li>
+              <li class="markdown"><a href="#timechange" class="markdown">timechange</a></li>
+              <li class="markdown"><a href="#volumechange" class="markdown">volumechange</a></li>
+              <li class="markdown"><a href="#widthchange" class="markdown">widthchange</a></li>
+            </ul>
+            <h3 id="beforeremove" class="markdown"><a href="#beforeremove" class="markdown">beforeremove</a></h3>
+            <p class="markdown">Fired when a request to remove the video has been received. This occurs when the <code class="markdown">remove()</code> method is used, which can be called manually or automatically when a video is removed from the DOM. This is a fine place for garbage collection.</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"beforeremove"</span>, <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params"></span>) { <span class="markdown hljs-title function_">cleanUp</span>(); <span class="markdown hljs-keyword">return</span> video.<span class="markdown hljs-property">unbind</span>; });
+    </code></pre>
+            <h3 id="beforereplace" class="markdown"><a href="#beforereplace" class="markdown">beforereplace</a></h3>
+            <p class="markdown">Fired when a request to replace the video has been received. This occurs when the <code class="markdown">replaceWith()</code> method is used, which is what happens under the hood with playlists and embed links. If you need to do garbage collection for each video in a playlist, this is a good place for that to live.</p>
+            <p class="markdown">This is the only event type that is not automatically removed when <code class="markdown">replaceWith()</code> is called.</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"beforereplace"</span>, <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params"></span>) { <span class="markdown hljs-title function_">cleanUp</span>(); <span class="markdown hljs-keyword">return</span> video.<span class="markdown hljs-property">unbind</span>; });
+    </code></pre>
+            <h3 id="betweentimes" class="markdown"><a href="#betweentimes" class="markdown">betweentimes</a></h3>
+            <p class="markdown">Fired once when the playhead enters the interval and once when it leaves it. This can run multiple times if the viewer leaves the time interval and re-enters it, either by seeking or by playing through. This event is useful if you have page elements that should be visible only for a specific time interval.</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"betweentimes"</span>, <span class="markdown hljs-number">30</span>, <span class="markdown hljs-number">60</span>, <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params">withinInterval</span>) {
+      <span class="markdown hljs-keyword">if</span> (withinInterval) {
+        <span class="markdown hljs-title function_">showMyElement</span>();
+      } <span class="markdown hljs-keyword">else</span> {
+        <span class="markdown hljs-title function_">hideMyElement</span>();
+      }
+    });
+    </code></pre>
+            <p class="markdown">To only show it once using anonymous function unbinding:</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"betweentimes"</span>, <span class="markdown hljs-number">30</span>, <span class="markdown hljs-number">60</span>, <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params">withinInterval</span>) {
+      <span class="markdown hljs-keyword">if</span> (withinInterval) {
+        <span class="markdown hljs-title function_">showMyElement</span>();
+      } <span class="markdown hljs-keyword">else</span> {
+        <span class="markdown hljs-title function_">hideMyElement</span>();
+        <span class="markdown hljs-keyword">return</span> video.<span class="markdown hljs-property">unbind</span>;
+      }
+    });
+    </code></pre>
+            <p class="markdown">To only show it once using explicit unbinding:</p>
+            <pre class="markdown"><code class="markdown lang-js"><span class="markdown hljs-keyword">var</span> showMyElementOnce = <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params"></span>) {
+      <span class="markdown hljs-title function_">showMyElement</span>();
+      video.<span class="markdown hljs-title function_">unbind</span>(<span class="markdown hljs-string">'betweentimes'</span>, <span class="markdown hljs-number">30</span>, <span class="markdown hljs-number">60</span>, showMyElementOnce);
+    };
+    video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"betweentimes"</span>, <span class="markdown hljs-number">30</span>, <span class="markdown hljs-number">60</span>, showMyElementOnce);
+    </code></pre>
+            <p class="markdown">NOTE: This event currently does not fire on iframe embeds.</p>
+            <h3 id="cancelfullscreenevent" class="markdown"><a href="#cancelfullscreenevent" class="markdown">cancelfullscreen</a></h3>
+            <p class="markdown">Fired when a video leaves fullscreen mode.</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"cancelfullscreen"</span>, <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params"></span>) {
+      <span class="markdown hljs-variable language_">console</span>.<span class="markdown hljs-title function_">log</span>(<span class="markdown hljs-string">"Your video is no longer playing in fullscreen."</span>);
+    });
+    </code></pre>
+            <h3 id="captionschange" class="markdown"><a href="#captionschange" class="markdown">captionschange</a></h3>
+            <p class="markdown">Fired once a different caption setting is selected in the player. Can be used to return which language is selected as well.</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">'captionschange'</span>, <span class="markdown hljs-keyword">function</span> (<span class="markdown hljs-params">details</span>) {
+      <span class="markdown hljs-variable language_">console</span>.<span class="markdown hljs-title function_">log</span>(details.<span class="markdown hljs-property">visible</span>, details.<span class="markdown hljs-property">language</span>);
+    });
+    </code></pre>
+            <p class="markdown">Example output: <code class="markdown">true "eng"</code></p>
+            <h3 id="conversion" class="markdown"><a href="#conversion" class="markdown">conversion</a></h3>
+            <p class="markdown">Fired when an email is entered in Turnstile. The <code class="markdown">type</code> argument can be “pre-roll-email,” “mid-roll-email,” or “post-roll-email.”</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"conversion"</span>, <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params">type, email, firstName, lastName</span>) {
+      <span class="markdown hljs-title function_">recordMyOwnData</span>(email, firstName, lastName);
+    })
+    </code></pre>
+            <h3 id="crosstime" class="markdown"><a href="#crosstime" class="markdown">crosstime</a></h3>
+            <p class="markdown">Runs the callback function when the time of the video moves from <em class="markdown">before</em> <code class="markdown">time</code> to <em class="markdown">after</em> <code class="markdown">time</code>. It is expected that <code class="markdown">time</code> is a decimal value specified in seconds.</p>
+            <p class="markdown">This event is meant to be used with “gates” or CTAs. For example, perhaps you have a call to action that should appear after the 30 second mark in your video. Code to show that might look like this:</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"crosstime"</span>, <span class="markdown hljs-number">30</span>, <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params"></span>) {
+      <span class="markdown hljs-title function_">showMyCustomCTA</span>();
+    });
+    </code></pre>
+            <p class="markdown">To only show it once using anonymous function unbinding:</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"crosstime"</span>, <span class="markdown hljs-number">30</span>, <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params"></span>) {
+      <span class="markdown hljs-title function_">showMyCustomCTA</span>();
+      <span class="markdown hljs-keyword">return</span> video.<span class="markdown hljs-property">unbind</span>;
+    });
+    </code></pre>
+            <p class="markdown">To only show it once using explicit unbinding:</p>
+            <pre class="markdown"><code class="markdown lang-js"><span class="markdown hljs-keyword">var</span> showMyCustomCTAOnce = <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params"></span>) {
+      <span class="markdown hljs-title function_">showMyCustomCTA</span>();
+      video.<span class="markdown hljs-title function_">unbind</span>(<span class="markdown hljs-string">'crosstime'</span>, <span class="markdown hljs-number">30</span>, showMyCustomCTAOnce);
+    };
+    video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"crosstime"</span>, <span class="markdown hljs-number">30</span>, showMyCustomCTAOnce);
+    </code></pre>
+            <p class="markdown">NOTE: This event currently does not fire on iframe embeds.</p>
+            <h3 id="end" class="markdown"><a href="#end" class="markdown">end</a></h3>
+            <p class="markdown">Fired when the video’s state changes to “ended.”</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"end"</span>, <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params"></span>) {
+      <span class="markdown hljs-variable language_">console</span>.<span class="markdown hljs-title function_">log</span>(<span class="markdown hljs-string">"Lenny was here."</span>);
+    });
+    </code></pre>
+            <h3 id="enterfullscreen" class="markdown"><a href="#enterfullscreen" class="markdown">enterfullscreen</a></h3>
+            <p class="markdown">Fired when a video goes into fullscreen mode.</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"enterfullscreen"</span>, <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params"></span>) {
+      <span class="markdown hljs-variable language_">console</span>.<span class="markdown hljs-title function_">log</span>(<span class="markdown hljs-string">"Your video is now playing in fullscreen!"</span>);
+    });
+    </code></pre>
+            <h3 id="heightchange" class="markdown"><a href="#heightchange" class="markdown">heightchange</a></h3>
+            <p class="markdown">Fired whenever the height of the embed changes. If you have element sizes or positions that depend on the height of the video, you can bind to this event.</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"heightchange"</span>, <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params"></span>) {
+      <span class="markdown hljs-variable language_">console</span>.<span class="markdown hljs-title function_">log</span>(<span class="markdown hljs-string">"The height changed to "</span> + video.<span class="markdown hljs-title function_">height</span>());
+    });
+    </code></pre>
+            <h3 id="lookchange" class="markdown"><a href="#lookchange" class="markdown">lookchange</a></h3>
+            <p class="markdown">For 360° video only. Fired when the viewer changes their heading, pitch, or field of view.</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"lookchange"</span>, <span class="markdown hljs-keyword">function</span> (<span class="markdown hljs-params">look</span>) {
+      <span class="markdown hljs-variable language_">console</span>.<span class="markdown hljs-title function_">log</span>(<span class="markdown hljs-string">'Look'</span>, look.<span class="markdown hljs-property">heading</span>, look.<span class="markdown hljs-property">pitch</span>, look.<span class="markdown hljs-property">fov</span>);
+    });
+    </code></pre>
+            <h3 id="mutechange" class="markdown"><a href="#mutechange" class="markdown">mutechange</a></h3>
+            <p class="markdown">Fired when the video’s muted state changes.</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"mutechange"</span>, <span class="markdown hljs-keyword">function</span> (<span class="markdown hljs-params">isMuted</span>) {
+      <span class="markdown hljs-variable language_">console</span>.<span class="markdown hljs-title function_">log</span>(<span class="markdown hljs-string">"Is the video muted?"</span>, isMuted ? <span class="markdown hljs-string">"yes"</span> : <span class="markdown hljs-string">"no"</span>);
+    })
+    </code></pre>
+            <h3 id="pause-1" class="markdown"><a href="#pause-1" class="markdown">pause</a></h3>
+            <p class="markdown">Fired when the video’s state changes to “paused.”</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"pause"</span>, <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params"></span>) {
+      <span class="markdown hljs-variable language_">console</span>.<span class="markdown hljs-title function_">log</span>(<span class="markdown hljs-string">"The video was just paused!"</span>);
+    });
+    </code></pre>
+            <h3 id="percentwatchedchanged" class="markdown"><a href="#percentwatchedchanged" class="markdown">percentwatchedchanged</a></h3>
+            <p class="markdown">Fired when the value of <a href="#percentwatched" class="markdown"><code class="markdown">percentWatched()</code></a> changes.</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">'percentwatchedchanged'</span>, <span class="markdown hljs-keyword">function</span> (<span class="markdown hljs-params">percent, lastPercent</span>) {
+      <span class="markdown hljs-keyword">if</span> (percent &gt;= <span class="markdown hljs-number">.25</span> &amp;&amp; lastPercent &lt; <span class="markdown hljs-number">.25</span>) {
+        <span class="markdown hljs-variable language_">console</span>.<span class="markdown hljs-title function_">log</span>(<span class="markdown hljs-string">'The viewer has watched 25% of the video! 📈'</span>)
+      }
+    });
+    </code></pre>
+            <p class="markdown"><a href="https://glitch.com/~wistia-percentwatchedchanged" target="_blank" rel="noopener" class="markdown">Start with a live example on Glitch</a>.</p>
+            <h3 id="play-1" class="markdown"><a href="#play-1" class="markdown">play</a></h3>
+            <p class="markdown">Fired when the video’s state changes to “playing.” This can fire multiple times for a single viewing session since the viewer can repeatedly pause and play.</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"play"</span>, <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params"></span>) {
+      <span class="markdown hljs-variable language_">console</span>.<span class="markdown hljs-title function_">log</span>(<span class="markdown hljs-string">"The video was just played!"</span>);
+    });
+    </code></pre>
+            <h3 id="playbackratechange" class="markdown"><a href="#playbackratechange" class="markdown">playbackratechange</a></h3>
+            <p class="markdown">Fired when the the playback rate of the video changes. Normal speed is 1.0, half speed is 0.5, double speed is 2.0, etc.</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"playbackratechange"</span>, <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params">playbackRate</span>) {
+      <span class="markdown hljs-variable language_">console</span>.<span class="markdown hljs-title function_">log</span>(<span class="markdown hljs-string">"The playback rate is now "</span> + playbackRate + <span class="markdown hljs-string">"x."</span>);
+    });
+    </code></pre>
+            <h3 id="secondchange" class="markdown"><a href="#secondchange" class="markdown">secondchange</a></h3>
+            <p class="markdown">Fired when the current second of the video has changed. The <code class="markdown">second</code> argument will always be passed as an integer. It is equivalent to
+              <code class="markdown">Math.floor(video.time())</code>.
+            </p>
+            <p class="markdown">Technically this is a subset of the “timechange” event, and thus will always fire <em class="markdown">after</em> “timechange” events but <em class="markdown">before</em> “seek” events.</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"secondchange"</span>, <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params">s</span>) {
+      <span class="markdown hljs-keyword">if</span> (s === <span class="markdown hljs-number">30</span>) {
+        <span class="markdown hljs-comment">// do something at exactly 30 seconds</span>
+      }
+    });
+    </code></pre>
+            <h3 id="seek" class="markdown"><a href="#seek" class="markdown">seek</a></h3>
+            <p class="markdown">Our player will compare <code class="markdown">currentTime</code> to <code class="markdown">lastTime</code> once every 300ms and fire this event if the difference is greater than 1.5 seconds.</p>
+            <p class="markdown">Technically this is a subset of the “timechange” event, and thus will always fire <em class="markdown">after</em> both “timechange” and “secondchange.”</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"seek"</span>, <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params">currentTime, lastTime</span>) {
+      <span class="markdown hljs-variable language_">console</span>.<span class="markdown hljs-title function_">log</span>(<span class="markdown hljs-string">"Whoa, you jumped "</span> + <span class="markdown hljs-title class_">Math</span>.<span class="markdown hljs-title function_">abs</span>(lastTime - currentTime) + <span class="markdown hljs-string">" seconds!"</span>);
+    });
+    </code></pre>
+            <h3 id="silentplaybackmodechange" class="markdown"><a href="#silentplaybackmodechange" class="markdown">silentplaybackmodechange</a></h3>
+            <p class="markdown">Based on your settings for the <code class="markdown">silentAutoPlay</code> embed option, the “Click For Sound” button may appear over your video. If you’d like to know when the video is in that state&hairsp;—&hairsp;compared to when it’s simply muted&hairsp;—&hairsp;you can bind to this event.</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"silentplaybackmodechange"</span>, <span class="markdown hljs-keyword">function</span> (<span class="markdown hljs-params">inSilentPlaybackMode</span>) {
+      <span class="markdown hljs-variable language_">console</span>.<span class="markdown hljs-title function_">log</span>(<span class="markdown hljs-string">"Is 'Click For Sound' visible?"</span>, inSilentPlaybackMode ? <span class="markdown hljs-string">"yes"</span> : <span class="markdown hljs-string">"no"</span>);
+    });
+    </code></pre>
+            <h3 id="timechange" class="markdown"><a href="#timechange" class="markdown">timechange</a></h3>
+            <p class="markdown">Our player will compare <code class="markdown">currentTime</code> and <code class="markdown">lastTime</code> once every 300ms and fire this event if they are different.</p>
+            <p class="markdown">Both “secondchange” and “seek” key off this event, and thus “timechange” will always fire <em class="markdown">before</em> both “secondchange” and “seek.”</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"timechange"</span>, <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params">t</span>) {
+      <span class="markdown hljs-title function_">updateCustomPlayHead</span>(t);
+    });
+    </code></pre>
+            <h3 id="volumechange" class="markdown"><a href="#volumechange" class="markdown">volumechange</a></h3>
+            <p class="markdown">Fired when the volume or mute state changes.</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"volumechange"</span>, <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params">v, isMuted</span>) {
+      <span class="markdown hljs-variable language_">console</span>.<span class="markdown hljs-title function_">log</span>(<span class="markdown hljs-string">"The volume changed to "</span> + <span class="markdown hljs-title class_">Math</span>.<span class="markdown hljs-title function_">round</span>(v * <span class="markdown hljs-number">100</span>) + <span class="markdown hljs-string">"%"</span>);
+    });
+    </code></pre>
+            <h3 id="widthchange" class="markdown"><a href="#widthchange" class="markdown">widthchange</a></h3>
+            <p class="markdown">Fired whenever the width of the embed changes. If you have element sizes or positions that depend on the width of the video, you can bind to this event.</p>
+            <pre class="markdown"><code class="markdown lang-js">video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"widthchange"</span>, <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params"></span>) {
+      <span class="markdown hljs-variable language_">console</span>.<span class="markdown hljs-title function_">log</span>(<span class="markdown hljs-string">"The width changed to "</span> + video.<span class="markdown hljs-title function_">width</span>());
+    });
+    </code></pre>
+            <hr class="markdown">
+          </section>
+          <section id="options" class="markdown">
+            <h2 class="markdown"><a href="#options" class="markdown">Options</a></h2>
+            <p class="markdown">Many behaviors can be defined by setting options instead of using Player API methods. Check out the <a class="markdown" href="/support/developers/embed-options">Embed Options</a> page for a full list.</p>
+            <hr class="markdown">
+          </section>
+          <section id="examples" class="markdown">
+            <h2 class="markdown"><a href="#examples" class="markdown">Examples</a></h2>
+            <p class="markdown">To get you making video magic as fast as possible, here are some examples of common JavaScript player API projects.</p>
+            <h3 id="start-video-playback-at-a-specific-time" class="markdown"><a href="#start-video-playback-at-a-specific-time" class="markdown">Start Video Playback at a Specific Time</a></h3>
+            <p class="markdown">In this example, you want the video to skip ahead a certain amount of time when the viewer presses ’play'. This utilizes the <code class="markdown">bind on play</code> functionality built into the API.</p>
+            <pre class="markdown"><code class="markdown lang-html"><span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">script</span> <span class="markdown hljs-attr">charset</span>=<span class="markdown hljs-string">"ISO-8859-1"</span> <span class="markdown hljs-attr">src</span>=<span class="markdown hljs-string">"//fast.wistia.com/assets/external/E-v1.js"</span> <span class="markdown hljs-attr">async</span>&gt;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">script</span>&gt;</span>
+    <span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">div</span> <span class="markdown hljs-attr">class</span>=<span class="markdown hljs-string">"wistia_embed wistia_async_29b0fbf547"</span> <span class="markdown hljs-attr">style</span>=<span class="markdown hljs-string">"width:640px;height:360px;"</span>&gt;</span><span class="markdown hljs-symbol">&amp;nbsp;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">div</span>&gt;</span>
+    <span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">script</span>&gt;</span><span class="markdown javascript">
+    <span class="markdown hljs-variable language_">window</span>.<span class="markdown hljs-property">_wq</span> = <span class="markdown hljs-variable language_">window</span>.<span class="markdown hljs-property">_wq</span> || [];
+
+    <span class="markdown hljs-comment">// target our video by the first 3 characters of the hashed ID</span>
+    _wq.<span class="markdown hljs-title function_">push</span>({ <span class="markdown hljs-attr">id</span>: <span class="markdown hljs-string">"29b0fbf547"</span>, <span class="markdown hljs-attr">onReady</span>: <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params">video</span>) {
+
+      <span class="markdown hljs-comment">// on play, seek the video to 10 seconds, then unbind so it</span>
+      <span class="markdown hljs-comment">// only happens once.</span>
+      video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">'play'</span>, <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params"></span>) {
+        video.<span class="markdown hljs-title function_">time</span>(<span class="markdown hljs-number">10</span>);
+        <span class="markdown hljs-keyword">return</span> video.<span class="markdown hljs-property">unbind</span>;
+      });
+
+    }});
+    </span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">script</span>&gt;</span>
+    </code></pre>
+            <hr class="markdown">
+            <h3 id="trigger-an-event-at-a-specific-time" class="markdown"><a href="#trigger-an-event-at-a-specific-time" class="markdown">Trigger an event at a specific time</a></h3>
+            <p class="markdown">In this example, let’s assume that we want to run some javascript when the viewer gets 60 seconds into the video. In order to accomplish this, we only need the bind method from the API.</p>
+            <pre class="markdown"><code class="markdown lang-html"><span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">script</span> <span class="markdown hljs-attr">charset</span>=<span class="markdown hljs-string">"ISO-8859-1"</span> <span class="markdown hljs-attr">src</span>=<span class="markdown hljs-string">"//fast.wistia.com/assets/external/E-v1.js"</span> <span class="markdown hljs-attr">async</span>&gt;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">script</span>&gt;</span>
+    <span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">div</span> <span class="markdown hljs-attr">class</span>=<span class="markdown hljs-string">"wistia_embed wistia_async_29b0fbf547"</span> <span class="markdown hljs-attr">style</span>=<span class="markdown hljs-string">"width:640px;height:360px;"</span>&gt;</span><span class="markdown hljs-symbol">&amp;nbsp;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">div</span>&gt;</span>
+    <span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">script</span>&gt;</span><span class="markdown javascript">
+    <span class="markdown hljs-variable language_">window</span>.<span class="markdown hljs-property">_wq</span> = <span class="markdown hljs-variable language_">window</span>.<span class="markdown hljs-property">_wq</span> || [];
+
+    <span class="markdown hljs-comment">// target our video by the first 3 characters of the hashed ID</span>
+    _wq.<span class="markdown hljs-title function_">push</span>({ <span class="markdown hljs-attr">id</span>: <span class="markdown hljs-string">"29b0fbf547"</span>, <span class="markdown hljs-attr">onReady</span>: <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params">video</span>) {
+      <span class="markdown hljs-comment">// at 10 seconds, do something amazing</span>
+      video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">'secondchange'</span>, <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params">s</span>) {
+        <span class="markdown hljs-keyword">if</span> (s === <span class="markdown hljs-number">10</span>) {
+          <span class="markdown hljs-comment">// Insert code to do something amazing here</span>
+          <span class="markdown hljs-variable language_">console</span>.<span class="markdown hljs-title function_">log</span>(<span class="markdown hljs-string">"We just reached "</span> + s + <span class="markdown hljs-string">" seconds!"</span>);
+        }
+      });
+    }});
+
+    </span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">script</span>&gt;</span>
+    </code></pre>
+            <p class="markdown">The bind function monitors the state of the video in an event loop. Every 300 milliseconds, it checks to see if the video’s time position has changed. If it has, it runs your function with the current second (s) as the only argument.</p>
+            <p class="markdown">The <code class="markdown">secondchange</code> will only run once per second while the video is playing. If you need more fine-grained control, try binding to the <code class="markdown">timechange</code> event instead.</p>
+            <hr class="markdown">
+            <h3 id="pause-other-videos-when-another-is-played" class="markdown"><a href="#pause-other-videos-when-another-is-played" class="markdown">Pause Other Videos When Another is Played</a></h3>
+            <p class="markdown">Don’t like the barrage of sound that comes from three different videos playing in the same page? This snippet will pause all videos that aren’t currently playing:</p>
+            <pre class="markdown"><code class="markdown lang-html"><span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">script</span> <span class="markdown hljs-attr">charset</span>=<span class="markdown hljs-string">"ISO-8859-1"</span> <span class="markdown hljs-attr">src</span>=<span class="markdown hljs-string">"//fast.wistia.com/assets/external/E-v1.js"</span> <span class="markdown hljs-attr">async</span>&gt;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">script</span>&gt;</span>
+    <span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">div</span> <span class="markdown hljs-attr">class</span>=<span class="markdown hljs-string">"wistia_embed wistia_async_9kksns1ede"</span> <span class="markdown hljs-attr">style</span>=<span class="markdown hljs-string">"width:480px;height:270px;"</span>&gt;</span><span class="markdown hljs-symbol">&amp;nbsp;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">div</span>&gt;</span>
+    <span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">div</span> <span class="markdown hljs-attr">class</span>=<span class="markdown hljs-string">"wistia_embed wistia_async_oh34zbesuh"</span> <span class="markdown hljs-attr">style</span>=<span class="markdown hljs-string">"width:480px;height:270px;"</span>&gt;</span><span class="markdown hljs-symbol">&amp;nbsp;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">div</span>&gt;</span>
+    <span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">div</span> <span class="markdown hljs-attr">class</span>=<span class="markdown hljs-string">"wistia_embed wistia_async_2jvt3wqkye"</span> <span class="markdown hljs-attr">style</span>=<span class="markdown hljs-string">"width:480px;height:270px;"</span>&gt;</span><span class="markdown hljs-symbol">&amp;nbsp;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">div</span>&gt;</span>
+
+    <span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">script</span>&gt;</span><span class="markdown javascript">
+    <span class="markdown hljs-variable language_">window</span>.<span class="markdown hljs-property">_wq</span> = <span class="markdown hljs-variable language_">window</span>.<span class="markdown hljs-property">_wq</span> || [];
+    _wq.<span class="markdown hljs-title function_">push</span>({ <span class="markdown hljs-attr">id</span>: <span class="markdown hljs-string">"_all"</span>, <span class="markdown hljs-attr">onReady</span>: <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params">video</span>) {
+      <span class="markdown hljs-comment">// for all existing and future videos, run this function</span>
+      video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">'play'</span>, <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params"></span>) {
+        <span class="markdown hljs-comment">// when one video plays, iterate over all the videos and pause each,</span>
+        <span class="markdown hljs-comment">// unless it's the video that just started playing.</span>
+        <span class="markdown hljs-keyword">var</span> allVideos = <span class="markdown hljs-title class_">Wistia</span>.<span class="markdown hljs-property">api</span>.<span class="markdown hljs-title function_">all</span>();
+        <span class="markdown hljs-keyword">for</span> (<span class="markdown hljs-keyword">var</span> i = <span class="markdown hljs-number">0</span>; i &lt; allVideos.<span class="markdown hljs-property">length</span>; i++) {
+          <span class="markdown hljs-keyword">if</span> (allVideos[i].<span class="markdown hljs-title function_">hashedId</span>() !== video.<span class="markdown hljs-title function_">hashedId</span>()) {
+            allVideos[i].<span class="markdown hljs-title function_">pause</span>();
+          }
+        }
+      });
+    }});
+    </span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">script</span>&gt;</span>
+    </code></pre>
+            <hr class="markdown">
+            <h3 id="a-b-testing-videos-against-each-other" class="markdown"><a href="#a-b-testing-videos-against-each-other" class="markdown">A/B testing videos against each other</a></h3>
+            <p class="markdown">Using a Standard embed code as a template, we can switch out hashed ID’s for multiple videos easily. Comparing the viewer analytics in the background will tell you which video reigned supreme!</p>
+            <p class="markdown">In this example, we create an array of hashed IDs for possible videos to embed, then randomly select one and embed the video with that hashed ID by adding to the class name of the embed’s container. The Wistia library will monitor the DOM for changes like this, and automatically embed a video where it sees an element with the right class.</p>
+            <pre class="markdown"><code class="markdown lang-html"><span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">script</span> <span class="markdown hljs-attr">charset</span>=<span class="markdown hljs-string">"ISO-8859-1"</span> <span class="markdown hljs-attr">src</span>=<span class="markdown hljs-string">"//fast.wistia.com/assets/external/E-v1.js"</span> <span class="markdown hljs-attr">async</span>&gt;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">script</span>&gt;</span>
+    <span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">div</span> <span class="markdown hljs-attr">id</span>=<span class="markdown hljs-string">"thumbnail_test"</span> <span class="markdown hljs-attr">class</span>=<span class="markdown hljs-string">"wistia_embed"</span> <span class="markdown hljs-attr">style</span>=<span class="markdown hljs-string">"width:640px;height:360px;"</span>&gt;</span><span class="markdown hljs-symbol">&amp;nbsp;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">div</span>&gt;</span>
+
+    <span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">script</span>&gt;</span><span class="markdown javascript">
+      <span class="markdown hljs-keyword">var</span> hashedIds = [<span class="markdown hljs-string">"wfu7q0s0pf"</span>, <span class="markdown hljs-string">"ck7avcilwk"</span>];
+      <span class="markdown hljs-keyword">var</span> rand = <span class="markdown hljs-title class_">Math</span>.<span class="markdown hljs-title function_">floor</span>(<span class="markdown hljs-title class_">Math</span>.<span class="markdown hljs-title function_">random</span>() * hashedIds.<span class="markdown hljs-property">length</span>);
+      <span class="markdown hljs-keyword">var</span> hashedId = hashedIds[rand];
+      <span class="markdown hljs-variable language_">document</span>.<span class="markdown hljs-title function_">getElementById</span>(<span class="markdown hljs-string">"thumbnail_test"</span>).<span class="markdown hljs-property">className</span> += <span class="markdown hljs-string">" wistia_async_"</span> + hashedId;
+    </span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">script</span>&gt;</span>
+    </code></pre>
+            <hr class="markdown">
+            <h3 id="add-chaptering-links-to-your-embedded-video" class="markdown"><a href="#add-chaptering-links-to-your-embedded-video" class="markdown">Add Chaptering Links to your Embedded Video</a></h3>
+            <p class="markdown">You can do this yourself using the <code class="markdown">time(val)</code> method described above, OR you could make your life easier and use <a class="markdown" href="/support/developers/embed-links">embed links</a>, which handles chaptering automatically!</p>
+            <hr class="markdown">
+            <h3 id="mute-the-video-on-load" class="markdown"><a href="#mute-the-video-on-load" class="markdown">Mute the Video on Load</a></h3>
+            <p class="markdown">You can do this by setting the <code class="markdown">volume</code> <a class="markdown" href="/support/developers/embed-options">embed option</a> to 0, like so:</p>
+            <pre class="markdown"><code class="markdown lang-html"><span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">script</span> <span class="markdown hljs-attr">charset</span>=<span class="markdown hljs-string">"ISO-8859-1"</span> <span class="markdown hljs-attr">src</span>=<span class="markdown hljs-string">"//fast.wistia.com/assets/external/E-v1.js"</span> <span class="markdown hljs-attr">async</span>&gt;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">script</span>&gt;</span>
+    <span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">div</span> <span class="markdown hljs-attr">class</span>=<span class="markdown hljs-string">"wistia_embed wistia_async_5bbw8l7kl5 volume=0"</span> <span class="markdown hljs-attr">style</span>=<span class="markdown hljs-string">"width:640px;height:360px;"</span>&gt;</span><span class="markdown hljs-symbol">&amp;nbsp;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">div</span>&gt;</span>
+    </code></pre>
+            <hr class="markdown">
+            <h3 id="selective-autoplay" class="markdown"><a href="#selective-autoplay" class="markdown">Selective Autoplay</a></h3>
+            <p class="markdown">Selective Autoplay will automatically play your embedded video based on the presence of a query string you specify.</p>
+            <pre class="markdown"><code class="markdown lang-html"><span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">script</span> <span class="markdown hljs-attr">charset</span>=<span class="markdown hljs-string">"ISO-8859-1"</span> <span class="markdown hljs-attr">src</span>=<span class="markdown hljs-string">"//fast.wistia.com/assets/external/E-v1.js"</span> <span class="markdown hljs-attr">async</span>&gt;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">script</span>&gt;</span>
+    <span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">div</span> <span class="markdown hljs-attr">class</span>=<span class="markdown hljs-string">"wistia_embed wistia_async_5bbw8l7kl5"</span> <span class="markdown hljs-attr">style</span>=<span class="markdown hljs-string">"width:640px;height:360px;"</span>&gt;</span><span class="markdown hljs-symbol">&amp;nbsp;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">div</span>&gt;</span>
+    <span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">script</span>&gt;</span><span class="markdown javascript">
+    <span class="markdown hljs-variable language_">window</span>.<span class="markdown hljs-property">_wq</span> = <span class="markdown hljs-variable language_">window</span>.<span class="markdown hljs-property">_wq</span> || [];
+    _wq.<span class="markdown hljs-title function_">push</span>(<span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params">W</span>) {
+      <span class="markdown hljs-keyword">var</span> playedOnce = <span class="markdown hljs-literal">false</span>;
+      W.<span class="markdown hljs-title function_">api</span>(<span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params">video</span>) {
+        <span class="markdown hljs-keyword">if</span> (!playedOnce &amp;&amp; <span class="markdown hljs-regexp">/[&amp;?]autoplay/i</span>.<span class="markdown hljs-title function_">test</span>(location.<span class="markdown hljs-property">href</span>)) {
+          playedOnce = <span class="markdown hljs-literal">true</span>;
+          video.<span class="markdown hljs-title function_">play</span>();
+        }
+      });
+    });
+    </span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">script</span>&gt;</span>
+    </code></pre>
+            <p class="markdown">In this example, if “?autoplay” or “&amp;autoplay” appears in the page URL, the first video that initializes will autoplay.</p>
+            <hr class="markdown">
+            <h3 id="selective-autoplay-for-popovers" class="markdown"><a href="#selective-autoplay-for-popovers" class="markdown">Selective Autoplay for Popovers</a></h3>
+            <p class="markdown">You can also set up selective autoplay for popover embeds as well. You have to take advantage of the <code class="markdown">popover.show()</code> method, which can read about on our <a class="markdown" href="/support/developers/popover-customization#show">Popover Customization Page</a>.</p>
+            <pre class="markdown"><code class="markdown lang-html"><span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">script</span> <span class="markdown hljs-attr">charset</span>=<span class="markdown hljs-string">"ISO-8859-1"</span> <span class="markdown hljs-attr">src</span>=<span class="markdown hljs-string">"//fast.wistia.com/assets/external/E-v1.js"</span> <span class="markdown hljs-attr">async</span>&gt;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">script</span>&gt;</span>
+    <span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">div</span> <span class="markdown hljs-attr">class</span>=<span class="markdown hljs-string">"wistia_embed wistia_async_5bbw8l7kl5 popover=true popoverAnimateThumbnail=true"</span> <span class="markdown hljs-attr">style</span>=<span class="markdown hljs-string">"width:640px;height:360px;"</span>&gt;</span><span class="markdown hljs-symbol">&amp;nbsp;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">div</span>&gt;</span>
+    <span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">script</span>&gt;</span><span class="markdown javascript">
+    <span class="markdown hljs-keyword">var</span> playedOnce = <span class="markdown hljs-literal">false</span>;
+    <span class="markdown hljs-variable language_">window</span>.<span class="markdown hljs-property">_wq</span> = <span class="markdown hljs-variable language_">window</span>.<span class="markdown hljs-property">_wq</span> || [];
+    _wq.<span class="markdown hljs-title function_">push</span>({<span class="markdown hljs-attr">id</span>: <span class="markdown hljs-string">"5bbw8l7kl5"</span>, <span class="markdown hljs-attr">onReady</span>: <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params">video</span>) {
+        <span class="markdown hljs-keyword">if</span> (!playedOnce &amp;&amp; <span class="markdown hljs-regexp">/[&amp;?]popoverAutoplay/i</span>.<span class="markdown hljs-title function_">test</span>(location.<span class="markdown hljs-property">href</span>)) {
+          playedOnce = <span class="markdown hljs-literal">true</span>;
+          video.<span class="markdown hljs-property">popover</span>.<span class="markdown hljs-title function_">show</span>();
+          video.<span class="markdown hljs-title function_">play</span>();
+        }
+    }});
+    </span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">script</span>&gt;</span>
+    </code></pre>
+            <hr class="markdown">
+            <h3 id="alert-on-play-just-once" class="markdown"><a href="#alert-on-play-just-once" class="markdown">Alert on play just once</a></h3>
+            <p class="markdown">With the bind method, every time “play” is triggered, your function will be executed. But sometimes a user will scroll back to the beginning and hit Play again. If you want to avoid your function being executed again, you need to unbind it.</p>
+            <p class="markdown">Our library contains a special unbinding pattern for convenience. In the callback function, just return <code class="markdown">video.unbind</code>.</p>
+            <pre class="markdown"><code class="markdown lang-js">&lt;script&gt;
+    video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"play"</span>, <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params"></span>) {
+      <span class="markdown hljs-title function_">alert</span>(<span class="markdown hljs-string">"Played the first time!"</span>);
+      <span class="markdown hljs-keyword">return</span> video.<span class="markdown hljs-property">unbind</span>;
+    });
+    &lt;/script&gt;
+    </code></pre>
+            <p class="markdown">If you are performing asynchronous operations or need more control over unbinding, you can use the <code class="markdown">unbind</code> method as shown below.</p>
+            <pre class="markdown"><code class="markdown lang-html"><span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">script</span>&gt;</span><span class="markdown javascript">
+    <span class="markdown hljs-keyword">function</span> <span class="markdown hljs-title function_">playFunc</span>(<span class="markdown hljs-params"></span>) {
+      <span class="markdown hljs-title function_">alert</span>(<span class="markdown hljs-string">"Played the first time!"</span>);
+      video.<span class="markdown hljs-title function_">unbind</span>(<span class="markdown hljs-string">"play"</span>, playFunc);
+    }
+
+    video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"play"</span>, playFunc);
+    </span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">script</span>&gt;</span>
+    </code></pre>
+            <hr class="markdown">
+            <h3 id="add-custom-pre-roll-to-your-videos" class="markdown"><a href="#add-custom-pre-roll-to-your-videos" class="markdown">Add Custom Pre-Roll to Your Videos</a></h3>
+            <p class="markdown">You can leverage the <code class="markdown">addToPlaylist</code> method to play pre-roll before your video.</p>
+            <p class="markdown">We simply add the main video to the playlist on the pre-roll video.</p>
+            <pre class="markdown"><code class="markdown lang-html"><span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">script</span> <span class="markdown hljs-attr">charset</span>=<span class="markdown hljs-string">"ISO-8859-1"</span> <span class="markdown hljs-attr">src</span>=<span class="markdown hljs-string">"//fast.wistia.com/assets/external/E-v1.js"</span> <span class="markdown hljs-attr">async</span>&gt;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">script</span>&gt;</span>
+    <span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">div</span> <span class="markdown hljs-attr">class</span>=<span class="markdown hljs-string">"wistia_embed wistia_async_oefj398m6q"</span> <span class="markdown hljs-attr">style</span>=<span class="markdown hljs-string">"width:640px;height:360px;"</span>&gt;</span><span class="markdown hljs-symbol">&amp;nbsp;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">div</span>&gt;</span>
+    <span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">script</span>&gt;</span><span class="markdown javascript">
+    <span class="markdown hljs-variable language_">window</span>.<span class="markdown hljs-property">_wq</span> = <span class="markdown hljs-variable language_">window</span>.<span class="markdown hljs-property">_wq</span> || [];
+    _wq.<span class="markdown hljs-title function_">push</span>({ <span class="markdown hljs-attr">id</span>: <span class="markdown hljs-string">"5bbw8l7kl5"</span>, <span class="markdown hljs-attr">onHasData</span>: <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params">video</span>) {
+      video.<span class="markdown hljs-title function_">addToPlaylist</span>(<span class="markdown hljs-string">"5bbw8l7kl5"</span>);
+    }});
+    </span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">script</span>&gt;</span>
+    </code></pre>
+            <hr class="markdown">
+            <h3 id="playing-a-second-video-on-post-roll-click" class="markdown"><a href="#playing-a-second-video-on-post-roll-click" class="markdown">Playing a second video on Post Roll click</a></h3>
+            <p class="markdown">You can now handle this behavior by using <a class="markdown" href="/support/developers/embed-links#watch-another-video-in-ctaannotation">embed links</a>.</p>
+            <hr class="markdown">
+            <h3 id="make-the-video-background-transparent" class="markdown"><a href="#make-the-video-background-transparent" class="markdown">Make the video background transparent</a></h3>
+            <p class="markdown">If you are embedding a Wistia video on a website with a white background, the natural black background of the Wistia player can look a little out of place. Instead, using a <code class="markdown">wmode=transparent</code> string parameter, the background of the player loading can be set to transparent.</p>
+            <p class="markdown">So a finished iframe embed code would look something like this:</p>
+            <pre class="markdown"><code class="markdown lang-html"><span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">iframe</span> <span class="markdown hljs-attr">src</span>=<span class="markdown hljs-string">"http://fast.wistia.net/embed/iframe/e4a27b971d?
+    controlsVisibleOnLoad=true&amp;playerColor=688AAD&amp;version=v1&amp;wmode=transparent"</span>
+    <span class="markdown hljs-attr">allowtransparency</span>=<span class="markdown hljs-string">"true"</span> <span class="markdown hljs-attr">frameborder</span>=<span class="markdown hljs-string">"0"</span> <span class="markdown hljs-attr">scrolling</span>=<span class="markdown hljs-string">"no"</span>
+    <span class="markdown hljs-attr">class</span>=<span class="markdown hljs-string">"wistia_embed"</span> <span class="markdown hljs-attr">name</span>=<span class="markdown hljs-string">"wistia_embed"</span> <span class="markdown hljs-attr">width</span>=<span class="markdown hljs-string">"640"</span>
+    <span class="markdown hljs-attr">height</span>=<span class="markdown hljs-string">"360"</span>&gt;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">iframe</span>&gt;</span>
+    </code></pre>
+            <p class="markdown">Or a Standard inline embed would look like this:</p>
+            <pre class="markdown"><code class="markdown lang-html"><span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">script</span> <span class="markdown hljs-attr">src</span>=<span class="markdown hljs-string">"//fast.wistia.com/assets/external/E-v1.js"</span> <span class="markdown hljs-attr">async</span>&gt;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">script</span>&gt;</span>
+    <span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">div</span> <span class="markdown hljs-attr">class</span>=<span class="markdown hljs-string">"wistia_embed wistia_async_abcde12345 wmode=transparent"</span>
+    <span class="markdown hljs-attr">style</span>=<span class="markdown hljs-string">"width:640px;height:360px;"</span>&gt;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">div</span>&gt;</span>
+    </code></pre>
+          </section>
+          <section id="legacy-api-embeds" class="markdown">
+            <h2 class="markdown"><a href="#legacy-api-embeds" class="markdown">Legacy API Embeds</a></h2>
+            <p class="markdown">This section exists to help customers transition from our Legacy API embeds to Standard (a.k.a. “async”) embeds.</p>
+            <p class="markdown">If you have an embed code which look like this, then you have a Legacy API embed:</p>
+            <pre class="markdown"><code class="markdown lang-html"><span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">div</span> <span class="markdown hljs-attr">id</span>=<span class="markdown hljs-string">"wistia_abcde12345"</span> <span class="markdown hljs-attr">class</span>=<span class="markdown hljs-string">"wistia_embed"</span> <span class="markdown hljs-attr">style</span>=<span class="markdown hljs-string">"width:640px;height:360px;"</span>&gt;</span><span class="markdown hljs-symbol">&amp;nbsp;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">div</span>&gt;</span>
+    <span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">script</span> <span class="markdown hljs-attr">src</span>=<span class="markdown hljs-string">"//fast.wistia.com/assets/external/E-v1.js"</span>&gt;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">script</span>&gt;</span>
+    <span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">script</span>&gt;</span><span class="markdown javascript">
+    wistiaEmbed = <span class="markdown hljs-title class_">Wistia</span>.<span class="markdown hljs-title function_">embed</span>(<span class="markdown hljs-string">"abcde12345"</span>);
+    </span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">script</span>&gt;</span>
+    </code></pre>
+            <p class="markdown">An equivalent Standard (a.k.a. “async”) embed would look like this:</p>
+            <pre class="markdown"><code class="markdown lang-html"><span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">script</span> <span class="markdown hljs-attr">src</span>=<span class="markdown hljs-string">"//fast.wistia.com/assets/external/E-v1.js"</span> <span class="markdown hljs-attr">async</span>&gt;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">script</span>&gt;</span>
+    <span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">div</span> <span class="markdown hljs-attr">class</span>=<span class="markdown hljs-string">"wistia_embed wistia_async_abcde12345"</span> <span class="markdown hljs-attr">style</span>=<span class="markdown hljs-string">"width:640px;height:360px;"</span>&gt;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">div</span>&gt;</span>
+    </code></pre>
+            <p class="markdown">Going forward, it is recommended that you switch to a “Standard” (a.k.a. “async”) embed for all new embed codes. Async embeds can do everything Legacy API embeds can do, but they never block page load, they are less susceptible to mangling, and they are easier to inject dynamically into html.</p>
+            <p class="markdown">There are no plans to remove the Legacy API embed syntax; if you have existing Legacy API embeds, they do not need to be re-embedded.</p>
+            <h3 id="embed-options-comparison" class="markdown"><a href="#embed-options-comparison" class="markdown">Embed Options Comparison</a></h3>
+            <p class="markdown">In Legacy API embeds, options passed to the embed code might look like this:</p>
+            <pre class="markdown"><code class="markdown lang-html"><span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">div</span> <span class="markdown hljs-attr">id</span>=<span class="markdown hljs-string">"wistia_abcde12345"</span> <span class="markdown hljs-attr">class</span>=<span class="markdown hljs-string">"wistia_embed"</span> <span class="markdown hljs-attr">style</span>=<span class="markdown hljs-string">"width:640px;height:360px;"</span>&gt;</span><span class="markdown hljs-symbol">&amp;nbsp;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">div</span>&gt;</span>
+    <span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">script</span> <span class="markdown hljs-attr">src</span>=<span class="markdown hljs-string">"//fast.wistia.com/assets/external/E-v1.js"</span>&gt;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">script</span>&gt;</span>
+    <span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">script</span>&gt;</span><span class="markdown javascript">
+    wistiaEmbed = <span class="markdown hljs-title class_">Wistia</span>.<span class="markdown hljs-title function_">embed</span>(<span class="markdown hljs-string">"abcde12345"</span>, {
+      <span class="markdown hljs-attr">autoPlay</span>: <span class="markdown hljs-literal">true</span>,
+      <span class="markdown hljs-attr">controlsVisibleOnLoad</span>: <span class="markdown hljs-literal">false</span>
+    });
+    </span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">script</span>&gt;</span>
+    </code></pre>
+            <p class="markdown">The options there are specified as part of the <code class="markdown">Wistia.embed</code> function call.</p>
+            <p class="markdown">With Standard (a.k.a. “async”) embeds, an equivalent embed code would be:</p>
+            <pre class="markdown"><code class="markdown lang-html"><span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">script</span> <span class="markdown hljs-attr">src</span>=<span class="markdown hljs-string">"//fast.wistia.com/assets/external/E-v1.js"</span> <span class="markdown hljs-attr">async</span>&gt;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">script</span>&gt;</span>
+    <span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">div</span> <span class="markdown hljs-attr">class</span>=<span class="markdown hljs-string">"wistia_embed wistia_async_abcde12345 autoPlay=true
+    controlsVisibleOnLoad=false"</span> <span class="markdown hljs-attr">style</span>=<span class="markdown hljs-string">"width:640px;height:360px;"</span>&gt;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">div</span>&gt;</span>
+    </code></pre>
+            <p class="markdown">The options there are specified as key/val pairs in the container’s <code class="markdown">class</code> attribute.</p>
+            <p class="markdown">For more information on setting options, check out the <a class="markdown" href="/support/developers/embed-options">docs on embed options</a>.</p>
+            <h3 id="player-api-usage-comparison" class="markdown"><a href="#player-api-usage-comparison" class="markdown">Player API Usage Comparison</a></h3>
+            <p class="markdown">With Legacy API embeds, each embed code is assigned the <code class="markdown">wistiaEmbed</code> variable by default. You could use this variable to set up bindings, play on load, etc. You can do the same things with Standard embeds, but they are always loaded asynchronously, so the flow to get Player API access is slightly different.</p>
+            <p class="markdown">Setting up bindings with a Legacy API embed:</p>
+            <pre class="markdown"><code class="markdown lang-html"><span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">div</span> <span class="markdown hljs-attr">id</span>=<span class="markdown hljs-string">"wistia_abcde12345"</span> <span class="markdown hljs-attr">class</span>=<span class="markdown hljs-string">"wistia_embed"</span> <span class="markdown hljs-attr">style</span>=<span class="markdown hljs-string">"width:640px;height:360px;"</span>&gt;</span><span class="markdown hljs-symbol">&amp;nbsp;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">div</span>&gt;</span>
+    <span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">script</span> <span class="markdown hljs-attr">src</span>=<span class="markdown hljs-string">"//fast.wistia.com/assets/external/E-v1.js"</span>&gt;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">script</span>&gt;</span>
+    <span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">script</span>&gt;</span><span class="markdown javascript">
+    wistiaEmbed = <span class="markdown hljs-title class_">Wistia</span>.<span class="markdown hljs-title function_">embed</span>(<span class="markdown hljs-string">"abcde12345"</span>);
+    wistiaEmbed.<span class="markdown hljs-title function_">hasData</span>(<span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params"></span>) {
+      wistiaEmbed.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"play"</span>, <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params"></span>) {
+        <span class="markdown hljs-variable language_">console</span>.<span class="markdown hljs-title function_">log</span>(<span class="markdown hljs-string">"video played"</span>, wistiaEmbed.<span class="markdown hljs-title function_">name</span>());
+      });
+    });
+    </span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">script</span>&gt;</span>
+    </code></pre>
+            <p class="markdown">Equivalent code for Standard embeds:</p>
+            <pre class="markdown"><code class="markdown lang-html"><span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">script</span> <span class="markdown hljs-attr">src</span>=<span class="markdown hljs-string">"//fast.wistia.com/assets/external/E-v1.js"</span> <span class="markdown hljs-attr">async</span>&gt;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">script</span>&gt;</span>
+    <span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">div</span> <span class="markdown hljs-attr">class</span>=<span class="markdown hljs-string">"wistia_embed wistia_async_abcde12345"</span> <span class="markdown hljs-attr">style</span>=<span class="markdown hljs-string">"width:640px;height:360px;"</span>&gt;</span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">div</span>&gt;</span>
+    <span class="markdown hljs-tag">&lt;<span class="markdown hljs-name">script</span>&gt;</span><span class="markdown javascript">
+    <span class="markdown hljs-variable language_">window</span>.<span class="markdown hljs-property">_wq</span> = <span class="markdown hljs-variable language_">window</span>.<span class="markdown hljs-property">_wq</span> || [];
+    _wq.<span class="markdown hljs-title function_">push</span>({ <span class="markdown hljs-attr">id</span>: <span class="markdown hljs-string">"abcde12345"</span>, <span class="markdown hljs-attr">onReady</span>: <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params">video</span>) {
+      video.<span class="markdown hljs-title function_">bind</span>(<span class="markdown hljs-string">"play"</span>, <span class="markdown hljs-keyword">function</span>(<span class="markdown hljs-params"></span>) {
+        <span class="markdown hljs-variable language_">console</span>.<span class="markdown hljs-title function_">log</span>(<span class="markdown hljs-string">"video played"</span>, video.<span class="markdown hljs-title function_">name</span>());
+      });
+    }});
+    </span><span class="markdown hljs-tag">&lt;/<span class="markdown hljs-name">script</span>&gt;</span>
+    </code></pre>
+            <p class="markdown">The inline script syntax for Standard embeds makes it easier for javascript in external files to get a handle to each video. That is, instead of setting a global variable when the video is embedded, you can access the Player API by hashed ID or DOM ID. It also implicitly waits for data to be returned from the server, so you are guaranteed methods like <code class="markdown">name()</code> and <code class="markdown">duration()</code> will return meaningful values.</p>
+            <p class="markdown">For more information on using the Player API, scroll to the top of this page.</p>
+          </section>
+        </div>
+      </div>
+    </article>
+  </body>
+</html>
