@@ -37,16 +37,40 @@ defaults:
   #
   xhr_data_path:                        /assets/data/masonry
 
+  # ------------------------------------------------------------------------
+  # VideoJS settings
+  # See details: https://jekyll.one/pages/public/manuals/videojs/videojs_api
+  # ------------------------------------------------------------------------
+  #
+  videojs:
+    enabled:                            false
+    theme:                              uno
+    options:
+      autoplay:                         false
+      controls:                         true
+      fluid:                            true
+      muted:                            false
+      preload:                          false
+      playbackRates:                    [0.25, 0.5, 1, 1.5, 2]
+      controlBar:
+        remainingTimeDisplay:           true
+        pictureInPictureToggle:         true
+        skipButtons:
+          forward:                      5
+          backward:                     5
+
   # ----------------------------------------------------------------------------
-  # Lightbox options
+  # Lightbox settings
+  # See settings for lightbox:     https://jekyll.one/pages/public/manuals/modules/lightbox/
+  # See settings for lightGallery: https://jekyll.one/pages/public/manuals/videojs/videojs_api
   # ----------------------------------------------------------------------------
   #
   lightbox:
-    enabled:                            true
-    type:                               lb                                      # lb | lg
+    enabled:                            false
+    type:                               lb
 
   lightGallery:
-    plugins:                            lgFullscreen, lgRotate, lgThumbnail
+    plugins:                            lgFullscreen, lgThumbnail
     options:
       download:                         false
       alignThumbnails:                  left
@@ -84,7 +108,7 @@ defaults:
     sm:                                 12                                      # viewport: ≥  576px, 1 colum|s
     md:                                 6                                       # viewport: ≥  768px, 2 colum|s
     lg:                                 4                                       # viewport: ≥  992px, 3 colum|s
-    xl:                                 3                                       # viewport: ≥ 1200px, 4 colum|s
+    xl:                                 4                                       # viewport: ≥ 1200px, 4 colum|s
 
   # ----------------------------------------------------------------------------
   # CSS filter options

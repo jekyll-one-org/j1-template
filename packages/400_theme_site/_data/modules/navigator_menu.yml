@@ -239,7 +239,7 @@
           icon:                         video
           target:                       _blank
 
-        - title:                        Wisria API
+        - title:                        Wistia API
           href:                         /pages/public/manuals/videojs/wistia_api/
           icon:                         video
           target:                       _blank

@@ -51,12 +51,14 @@ regenerate:                             true
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
 
+
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}
 {% endif %}
+
 
 /*
  # -----------------------------------------------------------------------------
@@ -226,7 +228,7 @@ var logText;
                       transitionDuration:     "{{transition_duration}}s",
                       stagger:                "{{stagger_duration}}s",
                       resize:                 {{resize}},
-                      gutter:                 {{gutter_size}}
+                      gutter:                 {{gutter_size}},
                     });
 
                     // run code after all images are loaded with the grid
@@ -246,33 +248,10 @@ var logText;
                         {% for option in grid.lightGallery.options %}
                         {{option[0] | json}}: {{option[1] | json}},
                         {% endfor %}
-                        {% if grid.videojs.enabled %}
-                        // setup VideoJS
-                        //
-                        videojs:        {{grid.videojs.enabled}},
-                        videojsTheme:   "vjs-theme-{{grid.videojs.theme}}",
-                        videojsOptions: {
-                          {% for option in grid.videojs.options %}
-                          {% if option == 'playbackRates' %}
-                          playbackRates: [{{option[1]}}],
-                          {% continue %}
-                          {% endif %}
-                          {{option[0] | json}}: {{option[1] | json}},
-                          {% endfor %}
-                          "controls": {{grid.videojs.controls.enabled}},
-                          "controlBar": {
-                            {% for option in grid.videojs.controls.controlBar %}
-                            {% if option == 'enabled' %}
-                            {% continue %}
-                            {% endif %}
-                            {{option[0] | json}}: {{option[1] | json}}{% if forloop.last %}{% else %},{% endif %}
-                            {% endfor %}
-                          } // END controlBar
-                        } // END videojsOptions
-                        {% endif %}
-                      }); // END lightGallery
+                      });
+
                       {% endif %}
-                    }); // END grid|imagesLoaded
+                    });
 
                   }, masonryOptions.initTimeout);
                 }

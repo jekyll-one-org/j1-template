@@ -31,6 +31,10 @@ settings:
   grids:
 
     # --------------------------------------------------------------------------
+    # POSTS
+    # ------------------------------------------.-------------------------------
+
+    # --------------------------------------------------------------------------
     # Post Series
     #
     - grid:
@@ -47,6 +51,16 @@ settings:
       link_new_window:                  true                                    # default: false
 
       # ------------------------------------------------------------------------
+      # Bootstrap responsive options
+      #
+      responsive:
+        xs:                             12
+        sm:                             12
+        md:                             6
+        lg:                             4
+        xl:                             4
+
+      # ------------------------------------------------------------------------
       # Lightbox options (no lightbox available for posts)
       # ------------------------------------------------------------------------
       #
@@ -54,7 +68,7 @@ settings:
         enabled:                        false
 
       # ------------------------------------------------------------------------
-      # Masonry options
+      # masonry options
       #
       options:
         originTop:                      true
@@ -70,6 +84,10 @@ settings:
         grayscale:                      1
         contrast:                       0.8
         brightness:                     0.4
+
+    # --------------------------------------------------------------------------
+    # COLLECTIONS
+    # ------------------------------------------.-------------------------------
 
     # --------------------------------------------------------------------------
     # Collection Portfolio
@@ -88,6 +106,16 @@ settings:
       translate_titles:                 false                                   # default: false
 
       # ------------------------------------------------------------------------
+      # Bootstrap responsive options
+      #
+      responsive:
+        xs:                             12
+        sm:                             12
+        md:                             6
+        lg:                             4
+        xl:                             4
+
+      # ------------------------------------------------------------------------
       # Lightbox options (no lightbox available for collections)
       # ------------------------------------------------------------------------
       #
@@ -101,7 +129,7 @@ settings:
         enabled:                        true
 
       # ------------------------------------------------------------------------
-      # Masonry options
+      # masonry options
       #
       options:
         originTop:                      true
@@ -128,6 +156,16 @@ settings:
       preview:                          true
 
       # ------------------------------------------------------------------------
+      # Bootstrap responsive options
+      #
+      responsive:
+        xs:                             12
+        sm:                             12
+        md:                             6
+        lg:                             4
+        xl:                             4
+
+      # ------------------------------------------------------------------------
       # Lightbox options (no lightbox available for collections)
       # ------------------------------------------------------------------------
       #
@@ -135,7 +173,7 @@ settings:
         enabled:                        false
 
       # ------------------------------------------------------------------------
-      # Masonry options
+      # masonry options
       #
       options:
         originTop:                      true
@@ -162,6 +200,16 @@ settings:
       preview:                          true
 
       # ------------------------------------------------------------------------
+      # Bootstrap responsive options
+      #
+      responsive:
+        xs:                             12
+        sm:                             12
+        md:                             6
+        lg:                             4
+        xl:                             4
+
+      # ------------------------------------------------------------------------
       # Lightbox options (no lightbox available for collections)
       # ------------------------------------------------------------------------
       #
@@ -169,7 +217,7 @@ settings:
         enabled:                        false
 
       # ------------------------------------------------------------------------
-      # Masonry options
+      # masonry options
       #
       options:
         originTop:                      true
@@ -196,6 +244,16 @@ settings:
       preview:                          true
 
       # ------------------------------------------------------------------------
+      # Bootstrap responsive options
+      #
+      responsive:
+        xs:                             12
+        sm:                             12
+        md:                             6
+        lg:                             4
+        xl:                             4
+
+      # ------------------------------------------------------------------------
       # Lightbox options (no lightbox available for collections)
       # ------------------------------------------------------------------------
       #
@@ -203,13 +261,17 @@ settings:
         enabled:                        false
 
       # ------------------------------------------------------------------------
-      # Masonry options
+      # masonry options
       #
       options:
         originTop:                      true
         originLeft:                     true
         initLayout:                     true
         percentPosition:                true
+
+    # --------------------------------------------------------------------------
+    # IMAGES
+    # ------------------------------------------.-------------------------------
 
     # --------------------------------------------------------------------------
     # Images + Fixed Height + Gutters + Captions + Lightbox
@@ -226,7 +288,17 @@ settings:
       image_height:                     300px
 
       # ------------------------------------------------------------------------
-      # Lightbox settings
+      # Bootstrap responsive options
+      #
+      responsive:
+        xs:                             12
+        sm:                             12
+        md:                             6
+        lg:                             4
+        xl:                             4
+
+      # ------------------------------------------------------------------------
+      # lightbox settings
       # ------------------------------------------------------------------------
       #
       lightbox:
@@ -234,14 +306,14 @@ settings:
         type:                           lb                                      # lb | lg
 
       # ------------------------------------------------------------------------
-      # Caption options
+      # caption options
       #
       caption:
         enabled:                        true
         position:                       bottom                                  # top|bottom|center
 
       # ------------------------------------------------------------------------
-      # Masonry options
+      # masonry options
       #
       options:
         originTop:                      true
@@ -292,6 +364,16 @@ settings:
       image_styles:                     img-fluid
 
       # ------------------------------------------------------------------------
+      # Bootstrap responsive options
+      #
+      responsive:
+        xs:                             12
+        sm:                             12
+        md:                             6
+        lg:                             4
+        xl:                             4
+
+      # ------------------------------------------------------------------------
       # Lightbox options
       # ------------------------------------------------------------------------
       #
@@ -300,14 +382,14 @@ settings:
         type:                           lb                                      # lb | lg
 
       # ------------------------------------------------------------------------
-      # Caption options
+      # caption options
       #
       caption:
         enabled:                        true
         position:                       bottom                                  # top|bottom|center
 
       # ------------------------------------------------------------------------
-      # Masonry options
+      # masonry options
       #
       options:
         originTop:                      true
@@ -358,7 +440,24 @@ settings:
       image_height:                     300px
 
       # ------------------------------------------------------------------------
-      # Lightbox settings
+      # Bootstrap responsive options
+      #
+      responsive:
+        xs:                             12
+        sm:                             12
+        md:                             6
+        lg:                             4
+        xl:                             4
+
+      # ------------------------------------------------------------------------
+      # VideoJS settings
+      # ------------------------------------------------------------------------
+      #
+      videojs:
+        enabled:                        false
+
+      # ------------------------------------------------------------------------
+      # lightbox settings
       # ------------------------------------------------------------------------
       #
       lightbox:
@@ -372,14 +471,14 @@ settings:
           alignThumbnails:              left
 
       # ------------------------------------------------------------------------
-      # Caption options
+      # caption options
       #
       caption:
         enabled:                        true
         position:                       bottom                                  # top|bottom|center
 
       # ------------------------------------------------------------------------
-      # Masonry options
+      # masonry options
       #
       options:
         originTop:                      true
@@ -416,6 +515,185 @@ settings:
         - image:
           file:                         gints-gailis_b.jpg
           caption:                      Shangri-La Hotel Jakarta - Indonesia
+
+    # --------------------------------------------------------------------------
+    # VIDEOS
+    # ------------------------------------------.-------------------------------
+
+    # --------------------------------------------------------------------------
+    # Video + Variable Height + Gutters + Captions + lightGallery
+    - grid:
+      enabled:                          true
+
+      id:                               masonry_video_example
+      type:                             video
+      gutters:                          2
+
+      # ------------------------------------------------------------------------
+      # Bootstrap responsive options
+      #
+      responsive:
+        xs:                             12
+        sm:                             12
+        md:                             6
+        lg:                             6
+        xl:                             6
+
+      # ------------------------------------------------------------------------
+      # VideoJS settings
+      # See settings: https://jekyll.one/pages/public/manuals/videojs/videojs_api/
+      # ------------------------------------------------------------------------
+      #
+      videojs:
+        enabled:                        true
+        theme:                          uno
+
+        options:
+          autoplay:                     false
+          fluid:                        false
+          muted:                        false
+          preload:                      true
+          playbackRates:                [0.25, 0.5, 1, 1.5, 2]
+
+        controls:
+          enabled:                      true
+          controlBar:
+            remainingTimeDisplay:       true
+            pictureInPictureToggle:     false
+          skipButtons:
+            forward:                    5
+            backward:                   5
+
+      # ----------------------------------------------------------------------------
+      # Lightbox settings
+      # See settings for lightbox:     https://jekyll.one/pages/public/manuals/modules/lightbox/
+      # See settings for lightGallery: https://jekyll.one/pages/public/manuals/videojs/videojs_api
+      # ----------------------------------------------------------------------------
+      #
+      lightbox:
+        enabled:                        true
+        type:                           lg
+
+      lightGallery:
+        plugins:                        lgThumbnail, lgVideo
+        options:
+          download:                     false
+          alignThumbnails:              left
+          autoplayFirstVideo:           false
+
+      # ------------------------------------------------------------------------
+      # caption options
+      #
+      caption:
+        enabled:                        true
+        position:                       bottom                                  # top|bottom|center
+
+      # ------------------------------------------------------------------------
+      # masonry options
+      #
+      options:
+        originTop:                      true
+        originLeft:                     true
+        initLayout:                     true
+        percentPosition:                true
+
+      # ------------------------------------------------------------------------
+      # html5 video settings
+      # ------------------------------------------------------------------------
+      #
+      html5:
+        video_base_path:                /assets/videos/gallery/html5
+        poster_base_path:               /assets/videos/gallery/html5
+
+      # ------------------------------------------------------------------------
+      # videos
+      #
+      videos:
+
+#       video 1
+        - video:
+          name:                         Planet Earth II
+          type:                         youtube
+          size:                         "1280-720"
+          source:                       "https://youtu.be/IUN664s7N-c"
+          pinterest_prefix:             Pin video
+          tweet_prefix:                 Try video
+          description: >
+                                        <h4>
+                                          Visual Soundscapes - Mountains | Planet Earth II | BBC America
+                                        </h4>
+                                        <p>
+                                          On the heels of Planet Earth II’s record-breaking
+                                          Emmy nominations, BBC America presents stunning visual
+                                          soundscapes from the series' amazing habitats.
+                                        </p>
+          poster:
+            style:                      img-responsive
+            source:                     "https://img.youtube.com/vi/IUN664s7N-c/maxresdefault.jpg"
+          caption:
+            position:                   bottom
+            text:                       "YouTube &middot; Visual Soundscapes - Mountains | BBC America"
+
+#       video 2
+        - video:
+          name:                         Nature Video by Charlie Kaye
+          type:                         vimeo
+          size:                         "1280-720"
+          source:                       "https://vimeo.com/112836958"
+          pinterest_prefix:             Pin video
+          tweet_prefix:                 Try video
+          description: >
+                                        <h4>
+                                          Nature
+                                        </h4>
+                                        <p>
+                                          Video by <a target='_blank' href='https://vimeo.com/charliekaye'>Charlie Kaye.</a>
+                                        </p>
+          poster:
+            style:                      img-responsive
+            source:                     "https://www.lightgalleryjs.com/images/demo/vimeo-video-poster.jpg"
+          caption:
+            position:                   bottom
+            text:                       "Vimeo &middot; Nature Video by Charlie Kaye"
+
+#       video 3
+        - video:
+          name:                         Thank You
+          type:                         wistia
+          size:                         "1280-720"
+          source:                       "https://private-sharing.wistia.com/medias/mwhrulrucj"
+          pinterest_prefix:             Pin video
+          tweet_prefix:                 Try video
+          description: >
+                                        <h4>Thank You!</h4>
+                                        <p>
+                                          Sample Wistia video
+                                        </p>
+          poster:
+            style:                      img-responsive
+            source:                     "https://www.lightgalleryjs.com/images/demo/wistia-video-poster.jpeg"
+          caption:
+            position:                   bottom
+            text:                       "Wistia &middot; Thank You"
+
+#       video 4
+        - video:
+          name:                         Peck Pocketed
+          type:                         html5
+          size:                         "1280-720"
+          source:                       video1.mp4
+          pinterest_prefix:             Pin video
+          tweet_prefix:                 Try video
+          description: >
+                                        <h4>
+                                          Peck Pocketed by Kevin Herron | Disney Favorite
+                                        </h4>
+          poster:
+            style:                      img-responsive
+            source:                     video1-poster.jpg
+          caption:
+            position:                   bottom
+            text:                       "MP4 Video &middot; Student Academy Award winning cartoon clip"
 
 # ------------------------------------------------------------------------------
 # END config

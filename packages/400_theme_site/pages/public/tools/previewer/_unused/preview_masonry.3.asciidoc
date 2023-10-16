@@ -95,7 +95,6 @@ mdi:clock-time-five-outline[24px, md-gray mt-4 mr-2]
 // -----------------------------------------------------------------------------
 [role="mt-5"]
 == Grid of Collections
-// See: https://masonry.desandro.com/
 
 The Masonry module for J1 Template creates a *collection grid* by pulling
 articles from a specific Jekyll collection. The grid display all *articles*
@@ -445,6 +444,7 @@ masonry::image_variable_height_lg[role="mt-4 mb-5"]
 
 [role="mt-5"]
 == Grid of Videos
+// See: https://masonry.desandro.com/
 
 J1 Masonry is a great tool to create dynamic image galleries. Image galleries
 are popular on many websites, and masonry can be a useful tool for creating
@@ -456,128 +456,7 @@ dynamic and visually appealing galleries.
 masonry::masonry_video_example[]
 ----
 
-masonry::masonry_video_example[role="mt-4 mb-5"]
-
-.Configuration settings for Videos (Online|HTML5)
-[source, yaml, role="noclip mt-4 mb-5"]
-----
-# --------------------------------------------------------------------------
-# Video + Variable Height + Gutters + Captions + lightGallery
-- grid:
-  enabled:                          true
-
-  id:                               masonry_video_example
-  type:                             video
-  gutters:                          2
-
-  # ------------------------------------------------------------------------
-  # Bootstrap responsive options
-  #
-  responsive:
-    xs:                             12
-    sm:                             12
-    md:                             6
-    lg:                             6
-    xl:                             6
-
-  # ------------------------------------------------------------------------
-  # VideoJS settings
-  # ------------------------------------------------------------------------
-  #
-  theme:
-    name:                           uno
-
-  # ------------------------------------------------------------------------
-  # lightbox settings
-  # ------------------------------------------------------------------------
-  #
-  lightbox:
-    enabled:                        true
-    type:                           lb
-
-  lightGallery:
-    plugins:                        lgFullscreen, lgThumbnail, lgVideo
-    download:                       false
-    alignThumbnails:                left
-    attributes:
-      preload:                      false
-      controls:                     true
-      playsinline:                  false
-
-  # ------------------------------------------------------------------------
-  # caption options
-  #
-  caption:
-    enabled:                        true
-    position:                       bottom
-
-  # ------------------------------------------------------------------------
-  # masonry options
-  #
-  options:
-    originTop:                      true
-    originLeft:                     true
-    initLayout:                     true
-    percentPosition:                true
-
-  # ------------------------------------------------------------------------
-  # html5 video settings
-  # ------------------------------------------------------------------------
-  #
-  html5:
-    video_base_path:                /assets/videos/gallery/html5
-    poster_base_path:               /assets/videos/gallery/html5
-
-  # ------------------------------------------------------------------------
-  # videos
-  #
-  videos:
-
-#   video 1 (Online)
-    - video:
-      name:                         Planet Earth II
-      type:                         youtube
-      size:                         "1280-720"
-      source:                       "https://youtu.be/IUN664s7N-c"
-      pinterest_prefix:             Pin video
-      tweet_prefix:                 Try video
-      description: >
-                                    <h4>
-                                      Visual Soundscapes - Mountains | Planet Earth II | BBC America
-                                    </h4>
-                                    <p>
-                                      On the heels of Planet Earth II’s record-breaking
-                                      Emmy nominations, BBC America presents stunning visual
-                                      soundscapes from the series' amazing habitats.
-                                    </p>
-      poster:
-        style:                      img-responsive
-        source:                     "https://img.youtube.com/vi/IUN664s7N-c/maxresdefault.jpg"
-      caption:
-        position:                   bottom
-        text:                       "YouTube &middot; Visual Soundscapes - Mountains | BBC America"
-
-...
-
-#   video 4 (HTML5|VideoJS)
-    - video:
-      name:                         Peck Pocketed
-      type:                         html5
-      size:                         "1280-720"
-      source:                       video1.mp4
-      pinterest_prefix:             Pin video
-      tweet_prefix:                 Try video
-      description: >
-                                    <h4>
-                                      Peck Pocketed by Kevin Herron | Disney Favorite
-                                    </h4>
-      poster:
-        style:                      img-responsive
-        source:                     video1-poster.jpg
-      caption:
-        position:                   bottom
-        text:                       "MP4 Video &middot; Student Academy Award winning cartoon clip"
-----
+masonry::masonry_video_example[role="mt-4 mb-4"]
 
 
 [role="mt-5"]
@@ -612,66 +491,66 @@ Justified Gallery is using *lightGallery* for default.
 Find more on how to present video content using *Justified Gallery* on the example
 page link:{url-roundtrip--present-videos}[Present Videos, {browser-window--new}].
 
-// ++++
-// <script>
-//
-//   $(function() {
-//     setTimeout (function() {
-//
-//     	var $grid = $('#masonry_video_example').masonry({
-//     	  percentPosition:        true,
-//     	  horizontalOrder:        true,
-//     	  originLeft:             true,
-//     	  originTop:              true,
-//     	  initLayout:             true,
-//     	  transitionDuration:     "0.8s",
-//     	  stagger:                "0.03s",
-//     	  resize:                 true,
-//     	  gutter:                 0,
-//     	})
-//     	.on('layoutComplete', function(items) {
-//     	  console.log("masonry: layoutComplete");
-//     	});
-//
-//     	// run lightGallery after all images are loaded with the grid
-//     	//
-//     	$grid.imagesLoaded(function() {
-//     	  console.log("masonry: imagesLoaded");
-//     	  console.log("masonry: fire lightGallery");
-//
-//     	  var lg = document.getElementById("masonry_video_example");
-//     	  lightGallery(lg, {
-//       		plugins: [lgFullscreen, lgThumbnail, lgVideo],
-//       		selector: '.lg-item',
-//       		download: false,
-//       		speed: 500,
-//       		alignThumbnails: 'left',
-//       		autoplayFirstVideo: false,
-//       		videojs: true,
-//       		videojsTheme: 'vjs-theme-uno',
-//       		videojsOptions: {
-//       		  autoplay: false,
-//       		  controls: true,
-//       		  fluid: true,
-//       		  muted: false,
-//       		  preload: true,
-//       		  playbackRates: [0.25, 0.5, 1, 1.5, 2],
-//       //     fullscreenToggle: true,
-//       //     volumePanel: true,
-//       		  controlBar: {
-//       //      remainingTimeDisplay: true,
-//         			pictureInPictureToggle: false,
-//         			skipButtons: {
-//         			  forward:  5,
-//         			  backward: 5
-//         			}
-//             } // END controlBar
-//       		} // END videojsOptions
-//   	    }); // END lightGallery
-//       }); // END grid|imagesLoaded
-//
-//     }, 1200); // END rimeout
-//   }); // END document ready
-//
-// </script>
-// ++++
+++++
+<script>
+
+  $(function() {
+    setTimeout (function() {
+
+    	var $grid = $('#masonry_video_example').masonry({
+    	  percentPosition:        true,
+    	  horizontalOrder:        true,
+    	  originLeft:             true,
+    	  originTop:              true,
+    	  initLayout:             true,
+    	  transitionDuration:     "0.8s",
+    	  stagger:                "0.03s",
+    	  resize:                 true,
+    	  gutter:                 0,
+    	})
+    	.on('layoutComplete', function(items) {
+    	  console.log("masonry: layoutComplete");
+    	});
+
+    	// run lightGallery after all images are loaded with the grid
+    	//
+    	$grid.imagesLoaded(function() {
+    	  console.log("masonry: imagesLoaded");
+    	  console.log("masonry: fire lightGallery");
+
+    	  var lg = document.getElementById("masonry_video_example");
+    	  lightGallery(lg, {
+      		plugins: [lgFullscreen, lgThumbnail, lgVideo],
+      		selector: '.lg-item',
+      		download: false,
+      		speed: 500,
+      		alignThumbnails: 'left',
+      		autoplayFirstVideo: false,
+      		videojs: true,
+      		videojsTheme: 'vjs-theme-uno',
+      		videojsOptions: {
+      		  autoplay: false,
+      		  controls: true,
+      		  fluid: true,
+      		  muted: false,
+      		  preload: true,
+      		  playbackRates: [0.25, 0.5, 1, 1.5, 2],
+      //     fullscreenToggle: true,
+      //     volumePanel: true,
+      		  controlBar: {
+      //      remainingTimeDisplay: true,
+        			pictureInPictureToggle: false,
+        			skipButtons: {
+        			  forward:  5,
+        			  backward: 5
+        			}
+            } // END controlBar
+      		} // END videojsOptions
+  	    }); // END lightGallery
+      }); // END grid|imagesLoaded
+
+    }, 1200); // END rimeout
+  }); // END document ready
+
+</script>
+++++
