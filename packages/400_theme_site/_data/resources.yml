@@ -400,7 +400,7 @@ resources:
         init_function:                  [ j1.adapter.speak2me.init ]
 
   # ----------------------------------------------------------------------------
-  # Bootstrap JS v5.3.0
+  # Bootstrap JS v5.x
   #
   # See: https://getbootstrap.com/docs/5.0/getting-started/introduction/
   #

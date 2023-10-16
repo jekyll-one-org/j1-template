@@ -61,6 +61,7 @@
     "uglify-js": "^3.0.25"
   },
   "devDependencies": {
+    "bootstrap": "^5",
     "unminified-webpack-plugin": "^3.0.0"
   }
 }

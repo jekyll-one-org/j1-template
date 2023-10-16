@@ -83,6 +83,6 @@
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.8.1",
-    "bootstrap": "^5.2.3"
+    "bootstrap": "^5"
   }
 }
