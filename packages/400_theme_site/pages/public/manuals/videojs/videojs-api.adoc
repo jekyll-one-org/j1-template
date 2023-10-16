@@ -1012,7 +1012,11 @@ put back into the DOM in the player's place.
 [role="mt-4"]
 ==== skipbuttons [.badge .rounded-pill .bg-danger]#v8.2.0#
 
-Add missing description.
+If specified, VideoJS displays a control allowing the user to jump
+forward|backward in a video by a specified number of seconds.
+
+See below *skipButtons.forward* or *skipButtons.backward* for more
+details.
 
 [cols="4a,8a", width="100%", options="header", role="rtable mt-4"]
 |===

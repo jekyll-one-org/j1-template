@@ -466,6 +466,7 @@ settings:
 
       lightGallery:
         plugins:                        lgFullscreen, lgRotate, lgThumbnail
+
         options:
           download:                     false
           alignThumbnails:              left
@@ -525,7 +526,7 @@ settings:
     - grid:
       enabled:                          true
 
-      id:                               masonry_video_example
+      id:                               mixed_video_example
       type:                             video
       gutters:                          2
 
@@ -548,27 +549,56 @@ settings:
         enabled:                        true
         theme:                          uno
 
-        options:
-          autoplay:                     false
-          fluid:                        false
-          muted:                        false
-          preload:                      true
-          playbackRates:                [0.25, 0.5, 1, 1.5, 2]
-
-        controls:
+        # ----------------------------------------------------------------------
+        # Player settings
+        # See: https://jekyll.one/pages/public/manuals/videojs/lightgallery_api
+        # ----------------------------------------------------------------------
+        #
+        player:
           enabled:                      true
-          controlBar:
-            remainingTimeDisplay:       true
-            pictureInPictureToggle:     false
-          skipButtons:
-            forward:                    5
-            backward:                   5
 
-      # ----------------------------------------------------------------------------
+          videojsPlayer:
+            enabled:                    true
+
+            options:
+              muted:                    false
+              preload:                  false
+              playbackRates:            [0.25, 0.5, 1, 1.5, 2]
+
+            controls:                   true
+            controlBar:
+              remainingTimeDisplay:     true
+              pictureInPictureToggle:   false
+
+          vimeoPlayer:
+            enabled:                    true
+            options:
+              autoPlay:                 true
+              byline:                   0
+              portrait:                 0
+              color:                    CCCCCC
+
+          wistiaPlayer:
+            enabled:                    true
+            options:
+              autoPlay:                 true
+              fullscreenButton:         true
+              muted:                    false
+              qualityControl:           false
+
+          youTubePlayer:
+            enabled:                    true
+            options:
+              autoPlay:                 true
+              modestbranding:           1
+              showinfo:                 0
+              controls:                 0
+
+      # ------------------------------------------------------------------------
       # Lightbox settings
-      # See settings for lightbox:     https://jekyll.one/pages/public/manuals/modules/lightbox/
+      # See settings for lightbox:     https://jekyll.one/pages/public/manuals/modules/lightbox
       # See settings for lightGallery: https://jekyll.one/pages/public/manuals/videojs/videojs_api
-      # ----------------------------------------------------------------------------
+      # ------------------------------------------------------------------------
       #
       lightbox:
         enabled:                        true
@@ -576,6 +606,7 @@ settings:
 
       lightGallery:
         plugins:                        lgThumbnail, lgVideo
+
         options:
           download:                     false
           alignThumbnails:              left

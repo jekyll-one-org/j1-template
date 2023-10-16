@@ -453,10 +453,11 @@ dynamic and visually appealing galleries.
 .Asciidoc Markup
 [source, config, role="noclip mt-4 mb-4"]
 ----
-masonry::masonry_video_example[]
+masonry::mixed_video_example[]
 ----
 
-masonry::masonry_video_example[role="mt-4 mb-5"]
+.Mixed Video Example
+masonry::mixed_video_example[role="mt-4 mb-5"]
 
 .Configuration settings for Videos (Online|HTML5)
 [source, yaml, role="noclip mt-4 mb-5"]
@@ -611,67 +612,3 @@ Justified Gallery is using *lightGallery* for default.
 [role="mt-4"]
 Find more on how to present video content using *Justified Gallery* on the example
 page link:{url-roundtrip--present-videos}[Present Videos, {browser-window--new}].
-
-// ++++
-// <script>
-//
-//   $(function() {
-//     setTimeout (function() {
-//
-//     	var $grid = $('#masonry_video_example').masonry({
-//     	  percentPosition:        true,
-//     	  horizontalOrder:        true,
-//     	  originLeft:             true,
-//     	  originTop:              true,
-//     	  initLayout:             true,
-//     	  transitionDuration:     "0.8s",
-//     	  stagger:                "0.03s",
-//     	  resize:                 true,
-//     	  gutter:                 0,
-//     	})
-//     	.on('layoutComplete', function(items) {
-//     	  console.log("masonry: layoutComplete");
-//     	});
-//
-//     	// run lightGallery after all images are loaded with the grid
-//     	//
-//     	$grid.imagesLoaded(function() {
-//     	  console.log("masonry: imagesLoaded");
-//     	  console.log("masonry: fire lightGallery");
-//
-//     	  var lg = document.getElementById("masonry_video_example");
-//     	  lightGallery(lg, {
-//       		plugins: [lgFullscreen, lgThumbnail, lgVideo],
-//       		selector: '.lg-item',
-//       		download: false,
-//       		speed: 500,
-//       		alignThumbnails: 'left',
-//       		autoplayFirstVideo: false,
-//       		videojs: true,
-//       		videojsTheme: 'vjs-theme-uno',
-//       		videojsOptions: {
-//       		  autoplay: false,
-//       		  controls: true,
-//       		  fluid: true,
-//       		  muted: false,
-//       		  preload: true,
-//       		  playbackRates: [0.25, 0.5, 1, 1.5, 2],
-//       //     fullscreenToggle: true,
-//       //     volumePanel: true,
-//       		  controlBar: {
-//       //      remainingTimeDisplay: true,
-//         			pictureInPictureToggle: false,
-//         			skipButtons: {
-//         			  forward:  5,
-//         			  backward: 5
-//         			}
-//             } // END controlBar
-//       		} // END videojsOptions
-//   	    }); // END lightGallery
-//       }); // END grid|imagesLoaded
-//
-//     }, 1200); // END rimeout
-//   }); // END document ready
-//
-// </script>
-// ++++

@@ -399,14 +399,18 @@ exclude_from_search:                    true
               data-src="{{video.source}}"
               data-poster="{{video.poster.source}}"
               data-sub-html="{{video.description|strip|strip_newlines}}">
+              <div class="lg-uno-video-icon">
                 <img
                   id="{{video.name | replace: ' ','_' | replace: '-','_' | downcase}}"
                   class="{{video.poster.style}}"
                   src="{{video.poster.source}}">
+                 <span></span>
+              </div>
             </a>
             <div class="caption">{{video.caption.text}}</div>
           </div>
         </div>
+
         {% elsif video.type == 'html5' %}
         {% assign video_split = video.source | split: '.' %}
         <div class="col-xl-{{grid.responsive.xl}} col-lg-{{grid.responsive.lg}} col-md-{{grid.responsive.md}} col-sm-{{grid.responsive.sm}} col-{{grid.responsive.xs}}" style="padding-bottom: {{grid.gutters}}px; padding-left: {{grid.gutters}}px;">
@@ -429,10 +433,13 @@ exclude_from_search:                    true
                    {% endfor %}
                 }
               }'>
-              <img
-                id="{{video.name | replace: ' ','_' | replace: '-','_' | downcase}}"
-                class="{{video.poster.style}}"
-                src="{{grid.html5.poster_base_path}}/{{video.poster.source}}">
+              <div class="lg-uno-video-icon">
+                <img
+                  id="{{video.name | replace: ' ','_' | replace: '-','_' | downcase}}"
+                  class="{{video.poster.style}}"
+                  src="{{grid.html5.poster_base_path}}/{{video.poster.source}}">
+                 <span></span>
+              </div>
             </a>
             <div class="caption">{{video.caption.text}}</div>
           </div>

@@ -16,6 +16,20 @@
  # -----------------------------------------------------------------------------
 */
 
+
+/* Custom icons
+ ------------------------------------------------------------------------------- */
+.lg-uno-video-icon span {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  background: url(icons/play-button.png) no-repeat center center;
+}
+
 /* Custom thumbnails
  ------------------------------------------------------------------------------- */
  .lg-uno-thumbnails .lg-outer {
