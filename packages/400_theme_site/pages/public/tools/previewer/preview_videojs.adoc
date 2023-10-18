@@ -31,7 +31,7 @@ permalink:                              /pages/public/tools/previewer/videojs/
 
 resources:                              [
                                           animate,
-                                          lightGallery, justifiedGallery,
+                                          lightgallery, justifiedgallery,
                                           videojs
                                         ]
 resource_options:
@@ -114,7 +114,7 @@ used is automatically detected and loaded by the YouTube platform.
 Find the following example Adele and James Cordon get emotional reflecting
 about their friendship and the times they've been there for each other.
 
-.Carpool Karaoke Channel
+.Last Carpool Karaoke
 youtube::nV8UZJNBY6Y[poster="/assets/videos/gallery/video_adele_last_carpool_caraoke_poster.1920.jpg" role="mt-4 mb-4"]
 
 /////
@@ -126,7 +126,7 @@ Ferrell.
 Please enjoy in full and thank you for sharing in so many memories with us.
 
 ++++
-<div class="gallery-title">Last Late Late Show</div>
+<div class="gallery-title">Video Galleries Late Late Show</div>
 <video
   id="videojs_youtube_james"
   class="video-js vjs-theme-uno"

@@ -592,11 +592,11 @@ is a great module to create responsive justified image galleries.
 .Asciidoc Markup
 [source, config, role="noclip mt-4 mb-4"]
 ----
-gallery::jg_gallery[]
+gallery::jg_mega_cities[]
 ----
 
 .Masonry-styled Gallery of Images + lightGallery
-gallery::jg_customizer[role="mb-4"]
+gallery::jg_mega_cities[role="mb-4"]
 
 Digital image content, pictures or videos, are easy to make. Today, every
 mobile has a camera. Presenting a bunch of photos or videos is done very

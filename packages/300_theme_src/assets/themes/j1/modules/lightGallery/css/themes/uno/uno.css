@@ -16,6 +16,27 @@
  # -----------------------------------------------------------------------------
 */
 
+.img-responsive {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.gallery-container a {
+  width: 240px;
+  margin: 5px;
+}
+
+.gallery-container a img {
+  max-width: 100%;
+  height: auto;
+}
 
 /* Custom icons
  ------------------------------------------------------------------------------- */
@@ -29,6 +50,20 @@
   z-index: 1;
   background: url(icons/play-button.png) no-repeat center center;
 }
+
+.lg-video-icon span {
+  display: block;
+  position: absolute;
+  overflow: hidden;
+  max-height: 50%;
+  top: 15px;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  background: url(icons/play-button.png) no-repeat center center;
+}
+
 
 /* Custom thumbnails
  ------------------------------------------------------------------------------- */

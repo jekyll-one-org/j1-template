@@ -1,5 +1,5 @@
 ---
-title:                                  Video
+title:                                  Video Content
 title_extention:                        Playing HTML5 Video using J1 Template
 tagline:                                Playing Video
 
@@ -29,9 +29,8 @@ personalization:                        true
 permalink:                              /pages/public/learn/roundtrip/present_videos/
 
 resources:                              [
-                                          animate, lightGallery, justifiedGallery,
-                                          video_js,
-                                          vimeo_player
+                                          animate, lightgallery, justifiedgallery,
+                                          videojs, vimeoplayer
                                         ]
 resource_options:
   - attic:
@@ -206,8 +205,8 @@ youtube::nV8UZJNBY6Y[
 ]
 ----
 
-.Adele joins James Cordon for the last Carpool Caraoke
-youtube::nV8UZJNBY6Y[poster="/assets/videos/gallery/video_adele_last_carpool_caraoke_poster.jpg" role="mt-4"]
+.Last Carpool Karaoke
+youtube::nV8UZJNBY6Y[poster="/assets/videos/gallery/video_adele_last_carpool_caraoke_poster.1920.jpg" role="mt-4 mb-4"]
 
 [role="mt-5"]
 === YouTube Video Galleries

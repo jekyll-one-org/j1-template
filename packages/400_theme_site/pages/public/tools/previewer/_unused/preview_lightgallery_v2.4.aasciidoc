@@ -105,9 +105,15 @@ what will happen.
 ++++
 <!-- Image Gallery --->
 <div id="old_times" class="gallery justified-gallery mb-5">
-  <a class="speak2me-ignore jg-entry jg-entry-visible" data-sub-html="GrandPa's 80th Birthday" href="/assets/images/modules/gallery/old_times/image_01.jpg">
-    <img class="speak2me-ignore" src="/assets/images/modules/gallery/old_times/image_01.jpg" img="" alt="GrandPa's 80th Birthday">
-    <div class="jg-caption">GrandPa's 80th Birthday</div>
+  <a
+    class="speak2me-ignore jg-entry jg-entry-visible"
+    data-sub-html="GrandPa's 80th Birthday"
+    href="/assets/images/modules/gallery/old_times/image_01.jpg">
+      <img class="speak2me-ignore"
+        src="/assets/images/modules/gallery/old_times/image_01.jpg"
+        img=""
+        alt="GrandPa's 80th Birthday">
+      <div class="jg-caption">GrandPa's 80th Birthday</div>
   </a>
   <a class="speak2me-ignore jg-entry jg-entry-visible" data-sub-html="GrandPa's 80th Birthday" href="/assets/images/modules/gallery/old_times/image_02.jpg">
     <img class="speak2me-ignore" src="/assets/images/modules/gallery/old_times/image_02.jpg" img="" alt="GrandPa's 80th Birthday">

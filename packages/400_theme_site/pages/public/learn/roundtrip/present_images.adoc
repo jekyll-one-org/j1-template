@@ -1,5 +1,5 @@
 ---
-title:                                  Image
+title:                                  Image Content
 title_extention:                        Lightboxes, Carousels, Sliders, and Galleries for J1 Template
 tagline:                                Present Images
 
@@ -64,8 +64,10 @@ resource_options:
 :url-j1-docs--lightbox-module:          https://jekyll.one/pages/public/manuals/modules/lightbox/
 :url-j1-docs--masterslider-module:      https://jekyll.one/pages/public/manuals/modules/masterslider/
 
-:url-j1-masterslider-previewer:         https://jekyll.one/pages/public/tools/previewer/masterslider/
 :url-j1-slick-previewer:                https://jekyll.one/pages/public/tools/previewer/slick/
+:url-j1-masonry-previewer:              http://localhost:41000/pages/public/tools/previewer/masonry/
+:url-j1-masterslider-previewer:         https://jekyll.one/pages/public/tools/previewer/masterslider/
+:url-j1-lightGallery-previewer:         http://localhost:41000/pages/public/tools/previewer/lightgallery/
 
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
@@ -141,6 +143,7 @@ lightbox::example-group[ 395, {data-images-group}, group, role="mt-4 mb-4 wm-800
 
 [role="mt-5"]
 === lightGallery
+// !!! Justified Gallery KAPOTT !!!
 
 lightGallery provides more complex image data functions than the default
 lightbox. The module supports a gallery-style thumbnail preview plus image
@@ -155,8 +158,15 @@ than enlarged displaying of images.
 
 Check what lightGallery can do this by the following example.
 
+.Justified Gallery + lightGallery
 gallery::jg_old_times[]
 
+[TIP]
+====
+Find more on how the lightGallery module can be used on the
+link:{url-j1-lightGallery-previewer}[lightGallery Preview, {browser-window--new}]
+page.
+====
 
 [role="mt-5"]
 == J1 Carousel
@@ -441,11 +451,12 @@ By using masonry, you can create a gallery that displays images of different
 sizes in an aesthetically pleasing and functional way.
 
 .Masonry Grid of Images + Lightbox
-masonry::card_example[role="mt-4 mb-4"]
+masonry::image_fixed_height_lb[role="mt-4 mb-4"]
 
 [TIP]
 ====
-Change the size of your current browser width to see what will happen!
+Find more on how the Masonry module can be used on the
+link:{url-j1-masonry-previewer}[Masonry Preview, {browser-window--new}] page.
 ====
 
 
@@ -469,7 +480,7 @@ horizontal and vertical space. Sort of like mason fitting stones in a wall.
 You'll have seen it in use all over the Internet!
 
 .Justified Gallery of Images + lightGallery
-gallery::jg_customizer[]
+gallery::jg_mega_cities[]
 
 
 [role="mt-5"]

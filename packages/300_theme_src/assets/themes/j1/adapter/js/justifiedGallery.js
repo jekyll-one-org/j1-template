@@ -38,12 +38,12 @@ regenerate:                             true
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign jf_gallery_defaults   = modules.defaults.justifiedGallery.defaults %}
-{% assign jf_gallery_settings   = modules.justifiedGallery.settings %}
+{% assign gallery_defaults   = modules.defaults.justifiedGallery.defaults %}
+{% assign gallery_settings   = modules.justifiedGallery.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign jf_gallery_options    = jf_gallery_defaults | merge: jf_gallery_settings %}
+{% assign gallery_options    = gallery_defaults | merge: gallery_settings %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -88,6 +88,7 @@ j1.adapter.justifiedGallery = (function (j1, window) {
   ------------------------------------------------------------------------------ {% endcomment %}
   var environment   = '{{environment}}';
   var state         = 'not_started';
+  var play_button   = '/assets/themes/j1/modules/lightGallery/css/themes/uno/icons/play-button.png';
   var justifiedGalleryDefaults;
   var justifiedGallerySettings;
   var justifiedGalleryOptions;
@@ -121,17 +122,20 @@ j1.adapter.justifiedGallery = (function (j1, window) {
       // -----------------------------------------------------------------------
       // Global variable settings
       // -----------------------------------------------------------------------
+      _this = j1.adapter.justifiedGallery;
+      logger = log4javascript.getLogger('j1.adapter.justifiedGallery');
 
       // create settings object from frontmatter (page settings)
       frontmatterOptions  = options != null ? $.extend({}, options) : {};
 
       // Load  module DEFAULTS|CONFIG
-      justifiedGalleryDefaults = $.extend({}, {{jf_gallery_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      justifiedGallerySettings = $.extend({}, {{jf_gallery_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      justifiedGalleryDefaults = $.extend({}, {{gallery_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      justifiedGallerySettings = $.extend({}, {{gallery_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
       justifiedGalleryOptions  = $.extend(true, {}, justifiedGalleryDefaults, justifiedGallerySettings, frontmatterOptions);
 
-      _this = j1.adapter.justifiedGallery;
-      logger = log4javascript.getLogger('j1.adapter.justifiedGallery');
+      // load HTML portion for all grids
+      console.debug('loading HTML portion for all Masonry grids configured');
+      _this.loadGalleryHTML(justifiedGalleryOptions, justifiedGalleryOptions.galleries);
 
       var dependencies_met_j1_finished= setInterval(function() {
         var pageState     = $('#no_flicker').css("display");
@@ -161,204 +165,114 @@ j1.adapter.justifiedGallery = (function (j1, window) {
     // Load AJAX data and initialize the jg gallery
     // -----------------------------------------------------------------------
     initialize: function (options) {
+      var xhrLoadState      = 'pending';                                        // (initial) load state for the HTML portion of the slider
+      var load_dependencies = {};
+      var dependency;
+
       logger = log4javascript.getLogger('j1.adapter.justifiedGallery');
 
       _this.setState('running');
       logger.debug('\n' + 'state: ' + _this.getState());
 
-      {% for item in jf_gallery_options.galleries %}
-        {% if item.gallery.enabled %}
+      {% for gallery in gallery_options.galleries %}
 
-          {% assign gallery_id            = item.gallery.id %}
-          {% assign lb_options        	  = item.gallery.lightbox_options %}
-          {% assign jg_options            = item.gallery.gallery_options  %}
-          {% assign gallery_type          = item.gallery.type %}
-          {% assign lightbox_enabled      = item.gallery.lightbox.enabled %}
-          {% assign lightbox_type         = item.gallery.lightbox.type %}
-          {% assign show_delay        	  = item.gallery.gallery_options.show_delay %}
-          {% assign theme                 = item.gallery.gallery_options.theme %}
+        {% if gallery.enabled %}
+        {% assign gallery_id = gallery.id %}
+        logger.info('\n' + 'found gallery on id: ' + '{{gallery_id}}');
 
-          // Create an gallery instance if id: {{gallery_id}} exists
-          if ($('#{{gallery_id}}').length) {
+          // create dynamic loader variable to setup the grid on id {{gallery_id}}
+          dependency = 'dependencies_met_html_loaded_{{gallery_id}}';
+          load_dependencies[dependency] = '';
 
-          logText = '\n' + 'gallery is being initialized on id: #{{gallery_id}}';
-          logger.info(logText);
+          // initialize the gallery if HTML portion successfully loaded
+          //
+          load_dependencies['dependencies_met_html_loaded_{{gallery_id}}'] = setInterval (function (options) {
+            // check if HTML portion of the gallery is loaded successfully
+            xhrLoadState = j1.xhrDOMState['#{{gallery_id}}_parent'];
+            if ( xhrLoadState === 'success' ) {
+              var $grid_{{gallery_id}} = $('#{{gallery_id}}');
+              logger.info('\n' + 'initialize gallery on id: ' + '{{gallery_id}}');
 
-          $('#{{gallery_id}}').addClass('justified-gallery');
+              // run code after all images are loaded with the gallery
+              $grid_{{gallery_id}}.justifiedGallery({
+                {% for option in gallery.gallery_options %}
+                {% if option[0] contains "gutters" %}
+                {{'margins' | json}}: {{option[1] | json}},
+                {% continue %}
+                {% endif %}
+                {{option[0] | json}}: {{option[1] | json}},
+                {% endfor %}
+              })
+              /* eslint-enable */
+              .on('jg.complete', function (e) {
+                e.stopPropagation();
 
-          {% if gallery_type == "image" %}
-            // Collect image gallery data from data file (xhr_data_path)
-            $.getJSON('{{jf_gallery_options.xhr_data_path}}', function (data) {
-              var content = '';
-              var gallery_class = 'justified-gallery';
-              {% if lightbox_enabled and lightbox_type == "lg" %}
-              gallery_class += ' light-gallery ';
-              {% endif %}
+                /* eslint-disable */
+                // setup the lightbox
+                //
+                var lg      = document.getElementById("{{gallery_id}}");
+                var gallery = lightGallery(lg, {
+                  "plugins":    [{{gallery.lightGallery.plugins}}],
+                  {% for option in gallery.lightGallery.options %}
+                  {{option[0] | json}}: {{option[1] | json}},
+                  {% endfor %}
+                  "galleryId":  "{{gallery_id}}",
+                  "selector":   ".lg-item",
+                });
+                /* eslint-enable */
 
-              for (var i in data['{{item.gallery.id}}']) {
-                var img           = data['{{item.gallery.id}}'][i].img;
-                var captions      = data['{{item.gallery.id}}'][i].captions;
-                var lightbox_type = '{{lightbox_type}}';
+                // Initialize instance variable of lightGallery (for later access)
+                j1['{{gallery_id}}'] = $grid_{{gallery_id}}.data('lightGallery');
+                // Show gallery DIV element if jg has completed *and* the
+                // lightbox is initialized (delayed)
+                setTimeout(function() {
+                  $('#{{gallery_id}}').show();
+                  logText = '\n' + 'initializing gallery finished on id: #{{gallery_id}}';
+                  logger.info(logText);
+                }, {{show_delay}});
+              });
 
-                content +=  '<a class="lg-item speak2me-ignore" data-sub-html="' +captions+ '" ';
-                content +=  'href="' +img+ '">' + '\n';
-                content +=  ' <img class="speak2me-ignore" src="' +img+ '" img alt="' +captions+ '">' + '\n';
-                content +=  '</a>' + '\n';
+            }
+            clearInterval(load_dependencies['dependencies_met_html_loaded_{{gallery_id}}']);
+          }, 10); // END dependencies_met_html_loaded
 
-              } // END for
-
-          {% elsif gallery_type == "video-html5" or gallery_type == "video-online" %}
-
-            // Collect html5 video gallery data from data file (xhr_data_path)
-            //
-            $.getJSON('{{jf_gallery_options.xhr_data_path}}', function (data) {
-              var play_button = '/assets/themes/j1/modules/lightGallery/css/themes/icons/play-button.png';
-              var content = '';
-              var gallery_class = 'justified-gallery';
-              {% if lightbox_type == "lg" %}
-              gallery_class += ' light-gallery ';
-              {% endif %}
-
-              for (var i in data['{{item.gallery.id}}']) {
-                var img               = data['{{item.gallery.id}}'][i].image_path + '/' + data['{{item.gallery.id}}'][i].poster;
-                var captions_gallery  = data['{{item.gallery.id}}'][i].captions_gallery;
-                var captions_lightbox = data['{{item.gallery.id}}'][i].captions_lightbox;
-                var video_id          = data['{{item.gallery.id}}'][i].video_id;
-                var video             = data['{{item.gallery.id}}'][i].video;
-                var player_params     = data['{{item.gallery.id}}'][i].player_params;
-                var lightbox          = '{{lightbox_type}}';
-
-                if (captions_lightbox != null && lightbox == 'lg') {
-                  // VIDEO content use 'lightGallery'
-                  // jadams 2023-06-18: NOT possible to add an href element (required for SEO)
-                  //
-                  content +=  '<a class="lg-item speak2me-ignore" data-sub-html="' +captions_lightbox+ '" ';
-                  {% if gallery_type == "video-html5" %}
-                  content += ' data-html="#' +video_id+ '">' + '\n';
-                  {% endif %}
-                  {% if gallery_type == "video-online" %}
-                  content += ' data-src="' +video+ '"';
-                  content += ' data-options="' +player_params+ '"' + '>' + '\n';
-                  {% endif %}
-                  content +=  'href="' +img+ '"' + '\n';
-                  content +=  '<img class="speak2me-ignore" src="' +img+ '" img alt="' +captions_lightbox+ '">' + '\n';
-                  content +=  '<span><img class="justified-gallery img-overlay speak2me-ignore" src="/assets/themes/j1/modules/lightGallery/css/themes/icons/play-button.png" alt="Play Button"></span>' + '\n';
-                } else {
-                  // IMAGE content use default 'Lightbox'
-                  content +=  '<a data-sub-html="' +captions_gallery+ '" ';
-                  content +=  'href="' +img+ '">' + '\n';
-                  content +=  '<img class="speak2me-ignore" src="' +img+ '" img alt="' +captions_gallery+ '">' + '\n';
-                  content +=  '<span><img class="justified-gallery img-overlay speak2me-ignore" src="/assets/themes/j1/modules/lightGallery/css/themes/icons/play-button.png" alt="Play Button"></span>' + '\n';
-                }
-                content +=  '</a>' + '\n';
-
-              } // END for
-
-              // hidden container for the video-js player
-              //
-              var hidden_video_div = '';
-              for (var i in data['{{item.gallery.id}}']) {
-                var video        = data['{{item.gallery.id}}'][i].video_path + '/' + data['{{item.gallery.id}}'][i].video;
-                var poster       = data['{{item.gallery.id}}'][i].image_path + '/' + data['{{item.gallery.id}}'][i].poster;
-                var caption      = data['{{item.gallery.id}}'][i].captions_lightbox;
-                var video_id     = data['{{item.gallery.id}}'][i].video_id;
-                var video_type   = video.substr(video.lastIndexOf('.') + 1);
-                hidden_video_div += '<div style="display:none;" id="' +video_id+ '">' + '\n';
-                hidden_video_div += '  <video class="lg-video-object lg-html5 video-js vjs-theme-{{theme}}"' + '\n';
-                hidden_video_div += '    poster="' +poster+ '" controls="" preload="none">' + '\n';
-                hidden_video_div += '    <source src="' +video+ '" type="video/' +video_type+ '">' + '\n';
-                hidden_video_div += '    Your browser does not support HTML5 video.' + '\n';
-                hidden_video_div += '  </video>' + '\n';
-                hidden_video_div += '</div>' + '\n';
-              }
-              $('#{{ gallery_id }}').before(hidden_video_div);
-
-          {% endif %}
-
-              // Hide gallery container (until lightGallery is NOT initialized)
-              // and place HTML markup
-              $('#{{gallery_id}}').hide().html(content);
-              // Initialize and run the gallery using individual gallery|lightbox options
-              {% if lightbox_type == "lg" %}
-                var gallery_selector = $('#{{gallery_id}}');
-                if (options !== undefined) {
-                  // lightbox initialized on COMPLETE event of justifiedGallery
-                  /* eslint-disable */
-                  gallery_selector.justifiedGallery({
-                    {% for option in item.gallery.gallery_options %}
-                    {% if option[0] contains "gutters" %}
-                    {{'margins' | json}}: {{option[1] | json}},
-                    {% continue %}
-                    {% endif %}
-                    {{option[0] | json}}: {{option[1] | json}},
-                    {% endfor %}
-                  })
-                  /* eslint-enable */
-                  .on('jg.complete', function (e) {
-                    e.stopPropagation();
-
-                    /* eslint-disable */
-                    // setup the lightbox
-                    //
-                    var lg      = document.getElementById("{{gallery_id}}");
-                    var gallery = lightGallery(lg, {
-                      "plugins":    [{{item.gallery.lightGallery.plugins}}],
-                      {% for option in item.gallery.lightGallery.options %}
-                      {{option[0] | json}}: {{option[1] | json}},
-                      {% endfor %}
-                      "galleryId":  "{{gallery_id}}",
-                      "selector":   ".lg-item",
-                    });
-                    /* eslint-enable */
-
-                    // Initialize instance variable of lightGallery (for later access)
-                    j1['{{gallery_id}}'] = gallery_selector.data('lightGallery');
-                    // Show gallery DIV element if jg has completed *and* the
-                    // lightbox is initialized (delayed)
-                    setTimeout(function() {
-                      $('#{{gallery_id}}').show();
-                      logText = '\n' + 'initializing gallery finished on id: #{{gallery_id}}';
-                      logger.info(logText);
-                    }, {{show_delay}});
-                  });
-                } else {
-                  /* eslint-disable */
-                  gallery_selector.justifiedGallery({
-                    {% for option in item.gallery.gallery_options %}
-                    {{option[0] | json}}: {{option[1] | json}},
-                    {% endfor %}
-                  /* eslint-enable */
-                  }).on('jg.complete', function (e) {
-                     e.stopPropagation();
-                    // lightbox initialized on COMPLETE event of justifiedGallery
-                    /* eslint-disable */
-                    lightGallery(
-                      document.getElementById("{{gallery_id}}"), {
-                      plugins: [lgVideo],
-                      {% for option in item.gallery.lightbox_options %}
-                      {{option[0] | json}}: {{option[1] | json}},
-                      {% endfor %}
-                    });
-                    /* eslint-enable */
-
-                    // Initialize instance variable of lightGallery (for later access)
-                    j1['{{gallery_id}}'] = gallery_selector.data('lightGallery');
-                    // Show gallery DIV element if jg has completed *and* the
-                    // lightbox is initialized (delayed)
-                    setTimeout(function() {
-                      $('#{{gallery_id}}').show();
-                      logText = '\n' + 'initializing gallery finished on id: #{{gallery_id}}';
-                      logger.info(logText);
-                      }, {{show_delay}});
-                  });
-                }
-              {% endif %} // ENDIF lightbox "lg"
-
-            }); // END getJSON
-          } //end gallery
         {% endif %} // ENDIF gallery enabled
       {% endfor %}
     }, // END function initialize
+
+    // -------------------------------------------------------------------------
+    // loadGalleryHTML()
+    // loads the HTML portion via AJAX for all galleries configured.
+    // NOTE: Make sure the placeholder DIV is available in the content
+    // page as generated using the Asciidoc extension gallery::
+    // -------------------------------------------------------------------------
+    loadGalleryHTML: function (options, gallery) {
+      var numGalleries  = Object.keys(gallery).length;
+      var active_grids  = numGalleries;
+      var xhr_data_path = options.xhr_data_path + '/index.html';
+      var xhr_container_id;
+
+      console.debug('number of galleries found: ' + active_grids);
+
+      _this.setState('load_data');
+      Object.keys(gallery).forEach(function(key) {
+        if (gallery[key].enabled) {
+          xhr_container_id = gallery[key].id + '_parent';
+
+          console.debug('load HTML portion on gallery id: ' + gallery[key].id);
+          j1.loadHTML({
+            xhr_container_id: xhr_container_id,
+            xhr_data_path:    xhr_data_path,
+            xhr_data_element: gallery[key].id
+          });
+        } else {
+          console.debug('gallery found disabled on id: ' + gallery[key].id);
+          active_grids--;
+        }
+      });
+      console.debug('galleries loaded in page enabled|all: ' + active_grids + '|' + numGalleries);
+      _this.setState('data_loaded');
+    }, // END loadSliderHTML
 
     // -------------------------------------------------------------------------
     // messageHandler: MessageHandler for J1 CookieConsent module

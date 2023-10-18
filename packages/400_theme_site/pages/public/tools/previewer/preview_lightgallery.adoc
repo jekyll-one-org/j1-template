@@ -7,9 +7,10 @@ date:                                   2020-11-04
 #last_modified:                         2023-01-01
 
 description: >
-                                        lightGallery provides a modular JavaScript image and video lightbox gallery
-                                        plugin built with most modern technologies available to achieve the best
-                                        performance and quality and supports all modern browsers.
+                                        lightGallery provides a modular JavaScript image and
+                                        video lightbox built with the most modern technologies
+                                        available to achieve the best performance and quality
+                                        and supports all modern browsers.
 keywords: >
                                         open source, free, template, jekyll, jekyllone, web,
                                         sites, static, jamstack, bootstrap,
@@ -71,184 +72,74 @@ resource_options:
 // See: https://wistia.com/
 //
 [role="dropcap"]
-LightGallery provides a modular JavaScript image and video lightbox gallery
-plugin built with most modern technologies available to achieve the best
-performance and quality and supports all modern browsers.
+The module lightGallery provides a modular JavaScript API with image and
+video plugins built with the most modern technologies available to achieve
+the best performance and quality and support all modern browsers.
 
-mdi:clock-time-five-outline[24px, md-gray mt-4 mb-5 mr-2]
-*10-15 Minutes* to read
+Using lightGallery for the J1 Template system benefits in more complex
+functions than the default lightbox. The module supports a gallery-style
+thumbnail preview, image resizing, a download dialog, sharing provider
+support, and more.
+
+mdi:clock-time-five-outline[24px, md-gray mt-4 mr-2 mb-5]
+*5 Minutes* to read
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 [role="mt-5"]
-== lightGallery
-
-lightGallery provides more complex image data functions than the default
-lightbox. The module supports a gallery-style thumbnail preview plus image
-resizing, a download dialog, sharing provider support, and more helpful.
-
-
-[role="mt-4"]
-=== Gallery of Images
+== Gallery of Images
 
 [role="mb-4"]
-link:{url-justified-gallery--home}[JustifiedGallery, {browser-window--new}]
+link:{url-justified-gallery--home}[Justified Gallery, {browser-window--new}]
 is a great _jQuery_ Plugin to create responsive, infinite, and high-quality
 justified image galleries. J1 Template combines the Gallery with the lightboxes
-supported to enlarge the images of a gallery. See the gallery in action and
-for sure, all that you see is even responsive.
+supported to enlarge the images of a gallery. See the gallery module in action
+and for sure, all that you see is even responsive.
 
 [TIP]
 ====
 Change the size of your current browser width to see what will happen!
 ====
 
-++++
-<!-- Image Gallery -->
-<div id="old_times" class="gallery justified-gallery mb-5">
-  <a class="speak2me-ignore jg-entry jg-entry-visible"
-    data-sub-html="GrandPa's 80th Birthday"
-    href="/assets/images/modules/gallery/old_times/image_01.jpg">
-    <img class="speak2me-ignore" src="/assets/images/modules/gallery/old_times/image_01.jpg" alt="GrandPa's 80th Birthday">
-    <div class="jg-caption">GrandPa's 80th Birthday</div>
-  </a>
-  <a class="speak2me-ignore jg-entry jg-entry-visible"
-    data-sub-html="GrandPa's 80th Birthday"
-    href="/assets/images/modules/gallery/old_times/image_02.jpg">
-    <img class="speak2me-ignore" src="/assets/images/modules/gallery/old_times/image_02.jpg" alt="GrandPa's 80th Birthday">
-    <div class="jg-caption">GrandPa's 80th Birthday</div>
-  </a>
-  <a class="speak2me-ignore jg-entry jg-entry-visible"
-    data-sub-html="GrandPa's annual journey"
-    href="/assets/images/modules/gallery/old_times/image_03.jpg">
-    <img class="speak2me-ignore" src="/assets/images/modules/gallery/old_times/image_03.jpg" alt="GrandPa's annual journey">
-    <div class="jg-caption">GrandPa's annual journey</div>
-  </a>
-  <a class="speak2me-ignore jg-entry jg-entry-visible"
-    data-sub-html="GrandPa's annual journey"
-    href="/assets/images/modules/gallery/old_times/image_04.jpg">
-    <img class="speak2me-ignore" src="/assets/images/modules/gallery/old_times/image_04.jpg" alt="GrandPa's annual journey">
-    <div class="jg-caption">GrandPa's annual journey</div>
-  </a>
-</div>
-++++
+.Asciidoc Markup
+[source, config, role="noclip mt-4 mb-4"]
+----
+gallery::jg_old_times[]
+----
 
+.Images + Justified Gallery + lightGallery
+gallery::jg_old_times[role="mt-4"]
 
-[role="mt-4"]
-=== Masonry Grid of Videos
+[role="mt-5"]
+== Grid of Videos
 // See: https://masonry.desandro.com/
 
-J1 Masonry is a great tool to create dynamic image galleries. Image galleries
-are popular on many websites, and masonry can be a useful tool for creating
-dynamic and visually appealing galleries.
+The Masonry module for J1 is a great tool to create dynamic video galleries.
+Galleries are popular on many websites, and them Masonry module can be a
+useful tool for creating dynamic and visually appealing video galleries.
 
-[TIP]
-====
-Change the size of your current browser width to see what will happen!
-====
+.Asciidoc Markup
+[source, config, role="noclip mt-4 mb-4"]
+----
+masonry::mixed_video_example[]
+----
 
-By using masonry, you can create a gallery that displays images of different
-sizes in an aesthetically pleasing and functional way.
-
-++++
-<div id="masonry_example" class="row g-0 mb-5">
-
-  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" style="padding-bottom: 2px; padding-left: 2px">
-    <div class="card bottom">
-      <!-- YouTube Video, slide item 1 -->
-      <a class="lg-item"
-        data-lg-size="1280-720"
-        data-pinterest-text="Pin it3"
-        data-tweet-text="lightGallery slide  4"
-        data-src="https://youtu.be/IUN664s7N-c"
-        data-poster="https://img.youtube.com/vi/IUN664s7N-c/maxresdefault.jpg"
-        data-sub-html="<h4>Visual Soundscapes - Mountains | Planet Earth II | BBC America</h4><p>On the heels of Planet Earth II’s record-breaking Emmy nominations, BBC America presents stunning visual soundscapes from the series' amazing habitats.</p>">
-          <img id="slide_1" class="img-responsive" src="https://img.youtube.com/vi/IUN664s7N-c/maxresdefault.jpg">
-      </a>
-      <div class="caption">YouTube &middot; Visual Soundscapes - Mountains |  BBC America</div>
-    </div>
-  </div>
-
-  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" style="padding-bottom: 2px; padding-left: 2px">
-    <div class="card bottom">
-      <!-- Vimeo Video -->
-      <a class="lg-item"
-        data-lg-size="1280-720"
-        data-pinterest-text="Pin it3"
-        data-tweet-text="lightGallery slide  4"
-        data-src="//vimeo.com/112836958"
-        data-poster="https://www.lightgalleryjs.com/images/demo/vimeo-video-poster.jpg"
-        data-sub-html="<h4>Nature</h4><p>Video by <a target='_blank' href='https://vimeo.com/charliekaye'>Charlie Kaye</a></p>">
-          <img id="slide_2" class="img-responsive" src="https://www.lightgalleryjs.com/images/demo/vimeo-video-poster.jpg">
-      </a>
-      <div class="caption">Vimeo &middot; Nature Video by Charlie Kaye</div>
-    </div>
-  </div>
-
-  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" style="padding-bottom: 2px; padding-left: 2px">
-    <div class="card bottom">
-      <!-- Wistia Video -->
-      <a class="lg-item"
-        data-lg-size="1280-720"
-        data-pinterest-text="Pin it3"
-        data-tweet-text="lightGallery slide  4"
-        data-src="https://private-sharing.wistia.com/medias/mwhrulrucj"
-        data-poster="https://www.lightgalleryjs.com/images/demo/wistia-video-poster.jpeg"
-        data-sub-html="<h4>Thank You!</h4><p> Sample Wistia video </p>">
-          <img id="slide_3" class="img-responsive" src="https://www.lightgalleryjs.com/images/demo/wistia-video-poster.jpeg">
-      </a>
-      <div class="caption">Wistia &middot; Thank You</div>
-    </div>
-  </div>
-
-  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" style="padding-bottom: 2px; padding-left: 2px">
-    <div class="card bottom">
-      <!-- HTML5 Video (MP4) -->
-      <a class="lg-item"
-        data-lg-size="1280-720"
-        data-pinterest-text="Pin it3"
-        data-tweet-text="lightGallery slide  4"
-        data-poster="/assets/videos/gallery/video1-poster.jpg"
-        data-sub-html="<h4>'Peck Pocketed' by Kevin Herron | Disney Favorite</h4>"
-        data-video='{
-          "source": [{
-            "src":"/assets/videos/gallery/html5/video1.mp4",
-            "type":"video/mp4"
-          }],
-          "attributes": {
-            "preload": false,
-            "controls": true,
-            "playsinline": false
-          },
-          "tracks": [{
-            "src": "/assets/videos/gallery/html5/video1.subtitles.vtt",
-            "kind":"captions",
-            "srclang": "en",
-            "label": "English",
-            "default": "true"
-          }]
-        }'>
-          <img id="slide_4" class="img-responsive" src="/assets/videos/gallery/video1-poster.jpg">
-      </a>
-      <div class="caption">MP4 Video &middot; Student Academy Award winning cartoon clip</div>
-    </div>
-  </div>
-
-</div>
-++++
+.Mixed Video Example
+masonry::mixed_video_example[role="mt-4 mb-5"]
 
 
-[role="mt-4"]
-=== Gallery of Videos
+[role="mt-5"]
+== Gallery of Videos
 
 Digital image content, simple pictures or videos, are easy to make. Today,
-every mobile has a camera. Presenting a bunch of pictures is done very easily
-by using *Justified Gallery*. Videos created by a digicam or a mobile can be
-played by J1 Template using the HTML5 Video support. Present videos you have
-made at it's best.
+every mobile has a camera. Presenting pictures is done very easily by
+using *Justified Gallery*. Videos created by a digicam or a mobile can be
+played by J1 Template using the HTML5 Video support. Present videos you made
+at their best.
 
 ++++
 <!-- HTML5 Video -->
+<div class="gallery-title">Videos + Justified Gallery + lightGallery</div>
 <div id="video_html5" class="gallery justified-gallery mb-7">
 
   <a class="lg-item"
@@ -328,16 +219,6 @@ made at it's best.
 ++++
 <style>
 
-.gallery-container a {
-  width: 240px;
-  margin: 5px;
-}
-
-.gallery-container a img {
-  max-width: 100%;
-  height: auto;
-}
-
 .img-responsive {
   width: 100%;
   height: auto;
@@ -348,92 +229,7 @@ made at it's best.
 
 ++++
 <script>
-
-$(function() {
-
-  $("#old_times")
-    .justifiedGallery({
-      captions: true,
-//   lastRow: "hide",
-      rowHeight: 240,
-      margins: 3
-    })
-    .on("jg.complete", function () {
-      lightGallery(
-        document.getElementById("old_times"), {
-          plugins: [lgFullscreen, lgRotate, lgThumbnail, lgZoom],
-          download: false,
-//        galleryId: "my_old_times",
-//        licenseKey: '0000-0000-000-0000',
-//        pager: false,
-          addClass: 'lg-uno-thumbnails',
-          appendThumbnailsTo: '.lg-outer',
-          alignThumbnails: 'left',
-          animateThumb: false,
-          allowMediaOverlap: true,
-          mobileSettings: {
-            controls: false,
-            showCloseIcon: false,
-            download: false,
-            rotate: false
-          }
-        });
-    });
-
-    setTimeout (function() {
-
-      var $grid = $('#masonry_example').masonry({
-        percentPosition:        true,
-        horizontalOrder:        true,
-        originLeft:             true,
-        originTop:              true,
-        initLayout:             true,
-        transitionDuration:     "0.8s",
-        stagger:                "0.03s",
-        resize:                 true,
-        gutter:                 0,
-      })
-      .on('layoutComplete', function(items) {
-        console.log("masonry: layoutComplete");
-      });
-
-      // run lightGallery after all images are loaded with the grid
-      //
-      $grid.imagesLoaded(function() {
-        console.log("masonry: imagesLoaded");
-        console.log("masonry: fire lightGallery");
-
-        lightGallery(document.getElementById("masonry_example"), {
-          plugins: [lgFullscreen, lgThumbnail, lgVideo],
-          selector: '.lg-item',
-          download: false,
-          speed: 500,
-          alignThumbnails: 'left',
-          autoplayFirstVideo: false,
-          videojs: true,
-          videojsTheme: 'vjs-theme-uno',
-          videojsOptions: {
-            autoplay: false,
-            controls: true,
-            fluid: true,
-            muted: false,
-            preload: true,
-            playbackRates: [0.25, 0.5, 1, 1.5, 2],
-//            fullscreenToggle: true,
-//            volumePanel: true,
-            controlBar: {
-//            remainingTimeDisplay: true,
-              pictureInPictureToggle: false,
-              skipButtons: {
-                forward:  5,
-                backward: 5
-              }
-            }
-          },
-        });
-      });
-
-    }, 1200);
+  $(function() {
 
     $("#video_html5")
       .justifiedGallery({
@@ -444,7 +240,7 @@ $(function() {
       .on("jg.complete", function () {
         lightGallery(
           document.getElementById("video_html5"), {
-            plugins: [lgFullscreen, lgThumbnail, lgVideo],
+            plugins: [lgThumbnail, lgVideo],
             download: false,
             selector: '.lg-item',
             alignThumbnails: 'left',
@@ -454,26 +250,18 @@ $(function() {
             videojsOptions: {
               autoplay: false,
               controls: true,
-              fluid: true,
               muted: false,
               preload: true,
               playbackRates: [0.25, 0.5, 1, 1.5, 2],
-//            fullscreenToggle: true,
-//            volumePanel: true,
               controlBar: {
-//              remainingTimeDisplay: true,
-                pictureInPictureToggle: false,
-                skipButtons: {
-                  forward:  5,
-                  backward: 5
-                }
+                remainingTimeDisplay: true,
+                pictureInPictureToggle: false
               }
             }
           },
         );
       });
 
-});
-
+  });
 </script>
 ++++

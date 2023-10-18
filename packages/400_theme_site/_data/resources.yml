@@ -376,6 +376,32 @@ resources:
         init_function:                  [ j1.init ]
 
   # ----------------------------------------------------------------------------
+  # Bootstrap JS v5.3.2
+  # Bootstrap Javascript component
+  #
+  # See: https://getbootstrap.com/docs/5.0/getting-started/introduction/
+  #
+  - name:                               Bootstrap JS
+    resource:
+      enabled:                          true
+
+      id:                               bs5
+      comment:                          Module Bootstrap JS
+      region:                           head
+      layout:                           [ all ]
+      required:                         always
+      preload:                          false
+      script_load:
+      dependencies:                     false
+      pass_init_data:                   false
+
+      data:
+        css:                            []
+        files:                          []
+        js:                             [ modules/bootstrap/js/bootstrap ]
+        init_function:                  []
+
+  # ----------------------------------------------------------------------------
   # Speak2Me
   # Speech synthesis (TTS)
   #
@@ -399,30 +425,7 @@ resources:
         js:                             []
         init_function:                  [ j1.adapter.speak2me.init ]
 
-  # ----------------------------------------------------------------------------
-  # Bootstrap JS v5.x
-  #
-  # See: https://getbootstrap.com/docs/5.0/getting-started/introduction/
-  #
-  - name:                               Bootstrap JS
-    resource:
-      enabled:                          true
 
-      id:                               bs5
-      comment:                          Module Bootstrap JS
-      region:                           head
-      layout:                           [ all ]
-      required:                         always
-      preload:                          false
-      script_load:
-      dependencies:                     false
-      pass_init_data:                   false
-
-      data:
-        css:                            []
-        files:                          []
-        js:                             [ modules/bootstrap/js/bootstrap ]
-        init_function:                  []
 
   # ----------------------------------------------------------------------------
   # Bootstrap Material Design (BMD), responsive UI framework for Bootstrap

@@ -142,7 +142,6 @@
     "shx": "^0.3.4"
   },
   "devDependencies": {
-    "bootstrap": "^5",
     "@webpack-cli/serve": "^1.6.0",
     "eslint": "^7.19.0",
     "webpack": "^5.62.1",

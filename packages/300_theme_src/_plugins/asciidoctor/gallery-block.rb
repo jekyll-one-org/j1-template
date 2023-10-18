@@ -38,7 +38,7 @@ Asciidoctor::Extensions.register do
       html        = %(
         <div class="#{attributes['role']}">
           #{title_html}
-          <div id="#{target}" class="gallery"></div>
+          <div id="#{target}_parent" class="gallery"></div>
         </div>
       )
 

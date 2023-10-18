@@ -60,8 +60,7 @@
     "terser": "^5.5.1",
     "uglify-js": "^3.0.25"
   },
-  "devDependencies": {
-    "bootstrap": "^5",
+  "devDependencies": {  
     "unminified-webpack-plugin": "^3.0.0"
   }
 }

@@ -192,7 +192,7 @@ var logText;
 
               // initialize the grid if HTML portion successfully loaded
               load_dependencies['dependencies_met_html_loaded_{{grid.id}}'] = setInterval (function (options) {
-                // check if HTML portion of the slider is loaded successfully (loadSliderHTML)
+                // check if HTML portion of the grid is loaded successfully
                 xhrLoadState = j1.xhrDOMState['#{{grid.id}}_parent'];
                 if ( xhrLoadState === 'success' ) {
                   setTimeout (function() {
