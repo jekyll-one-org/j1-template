@@ -1,0 +1,704 @@
+# ------------------------------------------------------------------------------
+# ~/_data/modules/justifiedGallery.yml
+# User configuration for J1 Justified Gallery (jg)
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2023 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# Description
+#
+description:
+  title:                                Justified Gallery
+  scope:                                User settings
+  location:                             _data/apps/justifiedGallery.yml
+
+# ------------------------------------------------------------------------------
+# User configuration settings
+#
+settings:
+
+  # ----------------------------------------------------------------------------
+  # GENERAL gallery settings
+  #
+  # enabled
+  # ----------------------------------------------------------------------------
+  #   Enables|Disables the use of a gallery
+  #
+  # xhr_data_path
+  # ----------------------------------------------------------------------------
+  #   All data items displayed by a gallery are being read from a
+  #   JSON file automatically generated from that configuration.
+  #   AJAX get method is used to supply the gallery with respective
+  #   the HTML code at the time the gallery is initialized (by the
+  #   J1 Adapter for J1 Justified Gallery).
+  #
+  #   values:                           string
+  #   default:                          /assets/data/galleries.json
+  #
+  # instance_type
+  # ----------------------------------------------------------------------------
+  #   Specifies if a modules can be run as a single instance
+  #   (only) or run in multiple instances.
+  #
+  #   NOTE: The parameter instance_type controls how MODULE runner
+  #         manages configuration options.
+  #
+  #   values:                           single|multiple
+  #   default:                          single
+  #
+  # rowHeight
+  # ----------------------------------------------------------------------------
+  #   All data items displayed by a gallery are being read from a
+  #   JSON file automatically generated from that configuration.
+  #
+  #   values:                           string
+  #   default:                          /assets/data/galleries.json
+  #
+  enabled:                              true
+  xhr_data_path:                        /assets/data/galleries.json
+  # instance_type:                        multiple
+  # rowHeight:                            170
+
+  # ----------------------------------------------------------------------------
+  # INSTANCE configuration (galleries)
+  #
+  # lightbox_options
+  # ----------------------------------------------------------------------------
+  #
+  #
+  #   lightbox
+  #   --------------------------------------------------------------------------
+  #   Specifies the lightbox used with the gallery
+  #
+  #   lb: Lightbox 2
+  #   lg: LightGallery
+  #
+  #   values:                           lb|lg
+  #   default:                          lb
+  # ----------------------------------------------------------------------------
+  galleries:
+
+    # ==========================================================================
+    # Image Galleries
+    #
+
+    # --------------------------------------------------------------------------
+    # Example gallery
+    #
+    # - gallery:
+    #     enabled:                        true
+    #
+    #     id:                             jg_example
+    #     type:                           image
+    #     images_path:                    /assets/images/modules/gallery/mega_cities
+    #     thumb_path:                     /assets/images/modules/gallery/mega_cities
+    #
+    #     # ----------------------------------------------------------------------
+    #     # Justified Gallery settings
+    #     # ----------------------------------------------------------------------
+    #     #
+    #     gallery_options:
+    #       show_delay:                   250
+    #       rowHeight:                    250
+    #       gutters:                      1
+    #
+    #     # ----------------------------------------------------------------------
+    #     # Lightbox settings
+    #     # ----------------------------------------------------------------------
+    #     #
+    #     lightbox:
+    #       enabled:                      true
+    #       type:                         lg
+    #
+    #     lightGallery:
+    #       plugins:                      lgFullscreen, lgRotate, lgThumbnail
+    #       options:
+    #         licenseKey:                 0000-0000-000-0000
+    #         download:                   false
+    #         alignThumbnails:            left
+    #
+    #     # ----------------------------------------------------------------------
+    #     # Image settings
+    #     # ----------------------------------------------------------------------
+    #     #
+    #     images:                         [
+    #                                       banter-snaps_b.jpg,
+    #                                       denys-nevozhai-1_b.jpg
+    #                                     ]
+    #     captions:                       [
+    #                                       Osaka - Japan,
+    #                                       Man posing at the rooftop of Jin Mao Tower Shanghai - China
+    #                                     ]
+
+
+    # --------------------------------------------------------------------------
+    # Gallery Mega Cities
+    #
+    - gallery:
+        enabled:                        true
+
+        id:                             jg_mega_cities
+        type:                           image
+        images_path:                    /assets/images/modules/gallery/mega_cities
+        thumb_path:                     /assets/images/modules/gallery/mega_cities
+
+        # ----------------------------------------------------------------------
+        # Justified Gallery settings
+        # ----------------------------------------------------------------------
+        #
+        gallery_options:
+          show_delay:                   200
+          rowHeight:                    150
+          gutters:                      1
+
+        # ----------------------------------------------------------------------
+        # Lightbox settings
+        # ----------------------------------------------------------------------
+        #
+        lightbox:
+          enabled:                      true
+          type:                         lg
+
+        lightGallery:
+          plugins:                      lgFullscreen, lgRotate, lgThumbnail
+          options:
+            licenseKey:                 0000-0000-000-0000
+            download:                   false
+            pager:                      false
+            alignThumbnails:            left
+            animateThumb:               false
+            addClass:                   lg-uno-thumbnails
+            allowMediaOverlap:          true                                    # required for customized thumbnails
+            appendThumbnailsTo:         .lg-outer                               # required for customized thumbnails
+
+
+        # ----------------------------------------------------------------------
+        # Images
+        #
+        images:
+
+          - image:                      # image
+            file:                       denys-nevozhai-1_b.jpg
+            caption:                    Man posing at the rooftop of Jin Mao Tower Shanghai - China
+
+          - image:                      # image
+            file:                       thomas-tucker_b.jpg
+            caption:                    Sunset over Taipei City - Taiwan
+
+          - image:                      # image
+            file:                       emmad-mazhari_b.jpg
+            caption:                    Chicago - United States
+
+          - image:                      # image
+            file:                       johan-mouchet_b.jpg
+            caption:                    The Queen Bee at the Eureka Tower - Melbourne Southbank Australia
+
+          - image:                      # image
+            file:                       federico-rizzarelli_b.jpg
+            caption:                    Shanghai - China
+
+          - image:                      # image
+            file:                       gints-gailis_b.jpg
+            caption:                    Shangri-La Hotel Jakarta - Indonesia
+
+        # images:                         [
+        #                                   banter-snaps_b.jpg,
+        #                                   denys-nevozhai-1_b.jpg,
+        #                                   gints-gailis_b.jpg,
+        #                                   steven-diaz_b.jpg,
+        #                                   denys-nevozhai-2_b.jpg,
+        #                                   johan-mouchet_b.jpg,
+        #                                   emmad-mazhari_b.jpg,
+        #                                   federico-rizzarelli_b.jpg,
+        #                                   andreas-brucker_b.jpg,
+        #                                   thomas-tucker_b.jpg,
+        #                                   luca-bravo_b.jpg,
+        #                                   ethan-brooke_b.jpg,
+        #                                   oskars-sylwan_b.jpg
+        #                                 ]
+        # captions:                       [
+        #                                   Osaka - Japan,
+        #                                   Man posing at the rooftop of Jin Mao Tower Shanghai - China,
+        #                                   Shangri-La Hotel Jakarta - Indonesia,
+        #                                   Tokyo seen from World Trade Center Observation Deck - Japan,
+        #                                   Young couple over Shenzhen - China,
+        #                                   The Queen Bee at the Eureka Tower - Melbourne Southbank Australia,
+        #                                   Chicago - United States,
+        #                                   Shanghai - China,
+        #                                   Cityscape of Bangkok Downtown - Thailand,
+        #                                   Sunset over Taipei City - Taiwan,
+        #                                   Brooklyn Bridge New York - United States,
+        #                                   Lotte World Tower Seoul - South Korea,
+        #                                   New York City, United States
+        #                                 ]
+
+
+#     # --------------------------------------------------------------------------
+#     # Online VIDEO (YouTube)
+#     #
+#     - gallery:
+#         enabled:                        true
+#
+#         id:                             jg_video_online_youtube
+#         type:                           video-online
+#         image_path:                     /assets/videos/gallery
+#         thumb_path:                     /assets/videos/gallery
+#
+#         # ----------------------------------------------------------------------
+#         # Justified Gallery settings
+#         # ----------------------------------------------------------------------
+#         #
+#         gallery_options:
+#           show_delay:                   200
+#           theme:                        uno
+#           rowHeight:                    200
+#           gutters:                      5
+#
+#         # ----------------------------------------------------------------------
+#         # Lightbox settings
+#         # ----------------------------------------------------------------------
+#         #
+#         lightbox:
+#           enabled:                      true
+#           type:                         lg
+#
+#         lightGallery:
+#           plugins:                      lgVideo
+#           options:
+#             licenseKey:                 0000-0000-000-0000
+#             videojs:                    true
+#             videojsOptions:             {}
+#
+#         # ----------------------------------------------------------------------
+#         # Video settings
+#         # ----------------------------------------------------------------------
+#         #
+#         videos:                         [
+#                                           "//youtube.com/watch?v=X5Cfi7U4eL4",
+#                                           "//youtube.com/watch?v=Nck6BZga7TQ",
+#                                           "//youtube.com/watch?v=F2SXmzk8ve4",
+#                                           "//youtube.com/watch?v=ln3wAdRAim4"
+#                                         ]
+#         captions:                       [
+#                                           "Carpool Karaoke - Lady Gaga joins James for a drive through Los Angeles singing her classics and tracks from her new album",
+#                                           "Carpool Karaoke - James Corden is about the holidays in London and gets Adele off for a ride through the city. On the way they sing some of their biggest hits and Adele raps Nicki Minaj's <b>monster</b>",
+#                                           "Carpool Karaoke - Gwen Stefani, Julia Roberts, George Clooney and James Corden singing Holla back girl, there's nothing left to see",
+#                                           "Carpool Karaoke - James Corden's White House tour takes an unthinkable turn when First Lady Michelle Obama joins him for a drive around the grounds singing Stevie Wonder and Beyonce"
+#                                         ]
+#
+#         poster:                         [
+#                                           video_gaga-poster.jpg, video_adele-poster.jpg,
+#                                           video_gwen-poster.jpg, video_michelle-poster.jpg
+#                                         ]
+#
+#     # --------------------------------------------------------------------------
+#     # Online VIDEO (YouTube)
+#     #
+#     - gallery:
+#         enabled:                        true
+#
+#         id:                             jg_video_online_youtube_new
+#         type:                           video-online
+#         image_path:                     /assets/videos/gallery
+#         thumb_path:                     /assets/videos/gallery
+#
+#         # ----------------------------------------------------------------------
+#         # Justified Gallery settings
+#         # ----------------------------------------------------------------------
+#         #
+#         gallery_options:
+#           show_delay:                   200
+#           rowHeight:                    200
+#           gutters:                      5
+#
+#         # ----------------------------------------------------------------------
+#         # Lightbox settings
+#         # ----------------------------------------------------------------------
+#         #
+#         lightbox:
+#           enabled:                      true
+#           type:                         lg
+#
+#         lightGallery:
+#           plugins:                      lgVideo
+#           options:
+#             licenseKey:                 0000-0000-000-0000
+#             videojs:                    true
+#             videojsOptions:             {}
+#
+#         # ----------------------------------------------------------------------
+#         # Video settings
+#         # ----------------------------------------------------------------------
+#         #
+#         videos:                         [
+#                                           "//youtube.com/watch?v=X5Cfi7U4eL4",
+#                                           "//youtube.com/watch?v=ln3wAdRAim4"
+#                                         ]
+#         captions:                       [
+#                                           "Carpool Karaoke - Lady Gaga joins James for a drive through Los Angeles singing her classics and tracks from her new album",
+#                                           "Carpool Karaoke - James Corden's White House tour takes an unthinkable turn when First Lady Michelle Obama joins him for a drive around the grounds singing Stevie Wonder and Beyonce"
+#                                         ]
+#
+#         poster:                         [
+#                                           video_gaga-poster.jpg,
+#                                           video_michelle-poster.jpg
+#                                         ]
+#
+#     # --------------------------------------------------------------------------
+#     # Online VIDEO (YouTube)
+#     #
+#     - gallery:
+#         enabled:                        true
+#
+#         id:                             jg_video_online_youtube_james_and_adele
+#         type:                           video-online                            # video-html5
+#         image_path:                     /assets/videos/gallery
+#         thumb_path:                     /assets/videos/gallery
+#
+#         # ----------------------------------------------------------------------
+#         # Justified Gallery settings
+#         # ----------------------------------------------------------------------
+#         #
+#         gallery_options:
+#           show_delay:                   200
+#           rowHeight:                    200
+#           gutters:                      5
+#
+#         # ----------------------------------------------------------------------
+#         # Lightbox settings
+#         # ----------------------------------------------------------------------
+#         #
+#         lightbox:
+#           enabled:                      true
+#           type:                         lg
+#
+#         lightGallery:
+#           plugins:                      lgVideo
+#           options:
+#             licenseKey:                 0000-0000-000-0000
+#             videojs:                    true
+#             videojsOptions:             {}
+#
+#         # ----------------------------------------------------------------------
+#         # Video settings
+#         # ----------------------------------------------------------------------
+#         #
+#         videos:                         [
+#                                           "//youtube.com/watch?v=Nck6BZga7TQ",
+#                                           "//youtube.com/watch?v=nV8UZJNBY6Y"
+#                                         ]
+#         captions:                       [
+#                                           "December 2015 - James is on holidays is about the holidays in London and gets Adele off for a ride through the city. On the way they sing some of their biggest hits.",
+#                                           "April 2023 - Adele wakeup James at home for the last Late Night Show, for the last Carpool Caraoke ever.",
+#                                         ]
+#
+#         poster:                         [
+#                                           video_adele-poster.jpg,
+#                                           video_adele_last_carpool_caraoke_poster.jpg
+#                                         ]
+#
+#     # --------------------------------------------------------------------------
+#     # Online VIDEO 2 (YouTube)
+#     #
+#     - gallery:
+#         enabled:                        true
+#
+#         id:                             jg_video_online_youtube_2
+#         type:                           video-online
+#         image_path:                     /assets/videos/gallery/voice_kids_de_2021
+#         thumb_path:                     /assets/videos/gallery/voice_kids_de_2021
+#
+#         # ----------------------------------------------------------------------
+#         # Justified Gallery settings
+#         # ----------------------------------------------------------------------
+#         #
+#         gallery_options:
+#           show_delay:                   300
+#           rowHeight:                    200
+#           gutters:                      5
+#
+#         # ----------------------------------------------------------------------
+#         # Lightbox settings
+#         # ----------------------------------------------------------------------
+#         #
+#         lightbox:
+#           enabled:                      true
+#           type:                         lg
+#
+#         lightGallery:
+#           plugins:                      lgVideo
+#           options:
+#             licenseKey:                 0000-0000-000-0000
+#             videojs:                    true
+#             videojsOptions:             {}
+#
+#         # ----------------------------------------------------------------------
+#         # Video settings
+#         # ----------------------------------------------------------------------
+#         #
+#         videos:                         [
+#                                           "//youtube.com/watch?v=aQqPgLMgO-I",
+#                                           "//youtube.com/watch?v=Bl6tkAgaP1g",
+#                                           "//youtube.com/watch?v=GuiOYCv9NTI",
+#                                           "//youtube.com/watch?v=1bvE2mgJ22I"
+#                                         ]
+#         player_params:                  [
+#                                           "start: 0, end: 148",
+#                                           "start: 0, end: 122",
+#                                           "start: 0, end: 104",
+#                                           "start: 10, end: 173"
+#                                         ]
+#
+#         captions:                       [
+#                                           "The Voice Kids Germany 2021 - 14-year-old Constance has dreamed of being on The Voice Kids stage for a very long time. Your dream has finally come true! She performs a breathtaking version of Sia's song Alive",
+#                                           "The Voice Kids Germany 2021 - 14-year-old Elisa is fascinated by the classics of pop music. Her version of Hey Jude from The Beatles comes with a lot of feeling",
+#                                           "The Voice Kids Germany 2021 - >14-year-old Ben pours all of his emotions into his performance of Maroon 5's Sunday Morning. He wants to show what he's made of",
+#                                           "The Voice Kids Germany 2021 - The battle of the three young people is a real emotional battle. Elisa's husky voice, Constanze's unbelievable power, and Ben's rhythm come into their own in Adele's James Bond theme song Skyfall"
+#                                         ]
+#
+#         poster:                         [
+#                                           constance.jpg, elisa.jpg,
+#                                           ben.jpg, battle.jpg
+#                                         ]
+#
+#     # --------------------------------------------------------------------------
+#     # Online VIDEO 2a (YouTube)
+#     #
+#     - gallery:
+#         enabled:                        true
+#
+#         id:                             jg_video_online_youtube_2_short
+#         type:                           video-online
+#         image_path:                     /assets/videos/gallery/voice_kids_de_2021
+#         thumb_path:                     /assets/videos/gallery/voice_kids_de_2021
+#
+#         # ----------------------------------------------------------------------
+#         # Justified Gallery settings
+#         # ----------------------------------------------------------------------
+#         #
+#         gallery_options:
+#           show_delay:                   300
+#           rowHeight:                    200
+#           margins:                      5
+#
+#         # ----------------------------------------------------------------------
+#         # Lightbox settings
+#         # ----------------------------------------------------------------------
+#         #
+#         lightbox:
+#           enabled:                      true
+#           type:                         lg
+#
+#         lightGallery:
+#           plugins:                      lgVideo
+#           options:
+#             licenseKey:                 0000-0000-000-0000
+#             videojs:                    true
+#             videojsOptions:             {}
+#
+#         # ----------------------------------------------------------------------
+#         # Video settings
+#         # ----------------------------------------------------------------------
+#         #
+#         videos:                         [
+#                                           "//youtube.com/watch?v=GuiOYCv9NTI",
+#                                           "//youtube.com/watch?v=1bvE2mgJ22I"
+#                                         ]
+#         player_params:                  [
+#                                           "start: 0, end: 104",
+#                                           "start: 10, end: 173"
+#                                         ]
+#
+#         captions:                       [
+#                                           "The Voice Kids Germany 2021 - 14-year-old Ben pours all of his emotions into his performance of Maroon 5's Sunday Morning. He wants to show what he's made of",
+#                                           "The Voice Kids Germany 2021 - The battle of the three young people is a real emotional battle. Elisa's husky voice, Constanze's unbelievable power, and Ben's rhythm come into their own in Adele's James Bond theme song Skyfall"
+#                                         ]
+#
+#         poster:                         [ ben.jpg, battle.jpg ]
+#
+#
+#     # --------------------------------------------------------------------------
+#     # Online VIDEO 3 (Vimeo)
+#     #
+#     - gallery:
+#         enabled:                        true
+#
+#         id:                             jg_video_online_vimeo
+#         type:                           video-online
+#         image_path:                     /assets/videos/gallery
+#         thumb_path:                     /assets/videos/gallery
+#
+#         thumb_items:                    2
+#         thumb_spacing:                  5
+#         thumb_bordered:                 true
+#         thumb_animate:                  true
+#
+#         # ----------------------------------------------------------------------
+#         # Justified Gallery settings
+#         # ----------------------------------------------------------------------
+#         #
+#         gallery_options:
+#           show_delay:                   300
+#           rowHeight:                    200
+#           margins:                      5
+#
+#         # ----------------------------------------------------------------------
+#         # Lightbox settings
+#         # ----------------------------------------------------------------------
+#         #
+#         lightbox:
+#           enabled:                      true
+#           type:                         lg
+#
+#         lightGallery:
+#           plugins:                      lgVideo
+#           options:
+#             licenseKey:                 0000-0000-000-0000
+#             videojs:                    true
+#             videojsOptions:             {}
+#
+#         # ----------------------------------------------------------------------
+#         # Video settings
+#         # ----------------------------------------------------------------------
+#         #
+#         videos:                         [
+#                                           "//vimeo.com/179528528",
+#                                           "//vimeo.com/202117650",
+#                                         ]
+#         captions:                       [
+#                                           "Forever 21 - Kick It Old School on Vimeo",
+#                                           "Forever 21 - Stay Colorful on Vimeo",
+#                                         ]
+#
+#         poster:                         [
+#                                           kick-it-old-school-poster.jpg,
+#                                           stay-colorful-poster.jpg,
+#                                         ]
+#
+#     # --------------------------------------------------------------------------
+#     # Online VIDEO 3a (Vimeo, shortend)
+#     #
+#     - gallery:
+#         enabled:                        true
+#
+#         id:                             jg_video_online_vimeo_short
+#         type:                           video-online
+#         image_path:                     /assets/videos/gallery
+#         thumb_path:                     /assets/videos/gallery
+#
+#         thumb_items:                    2
+#         thumb_spacing:                  5
+#         thumb_bordered:                 true
+#         thumb_animate:                  true
+#
+#         # ----------------------------------------------------------------------
+#         # Justified Gallery settings
+#         # ----------------------------------------------------------------------
+#         #
+#         gallery_options:
+#           show_delay:                   300
+#           rowHeight:                    200
+#           margins:                      5
+#
+#         # ----------------------------------------------------------------------
+#         # Lightbox settings
+#         # ----------------------------------------------------------------------
+#         #
+#         lightbox:
+#           enabled:                      true
+#           type:                         lg
+#
+#         lightGallery:
+#           plugins:                      lgVideo
+#           options:
+#             licenseKey:                 0000-0000-000-0000
+#             videojs:                    true
+#             videojsOptions:             {}
+#
+#         # ----------------------------------------------------------------------
+#         # Video settings
+#         # ----------------------------------------------------------------------
+#         #
+#         videos:                         [
+#                                           "//vimeo.com/179528528",
+#                                           "//vimeo.com/202117650"
+#                                         ]
+#         captions:                       [
+#                                           "Forever 21 - Kick It Old School on Vimeo",
+#                                           "Forever 21 - Stay Colorful on Vimeo"
+#
+#                                         ]
+#
+#         poster:                         [
+#                                           kick-it-old-school-poster.jpg,
+#                                           stay-colorful-poster.jpg
+#                                         ]
+#
+#     # --------------------------------------------------------------------------
+#     # Online VIDEO (DailyMotion)
+#     #
+#     - gallery:
+#         enabled:                        true
+#
+#         id:                             jg_video_online_dailymotion
+#         type:                           video-online
+#         image_path:                     /assets/videos/gallery/dailymotion
+#         thumb_path:                     /assets/videos/gallery/dailymotion
+#
+#         thumb_items:                    2
+#         thumb_spacing:                  5
+#         thumb_bordered:                 true
+#         thumb_animate:                  true
+#
+#         # ----------------------------------------------------------------------
+#         # Justified Gallery settings
+#         # ----------------------------------------------------------------------
+#         #
+#         gallery_options:
+#           show_delay:                   300
+#           rowHeight:                    200
+#           margins:                      5
+#
+#         # ----------------------------------------------------------------------
+#         # Lightbox settings
+#         # ----------------------------------------------------------------------
+#         #
+#         lightbox:
+#           enabled:                      true
+#           type:                         lg
+#
+#         lightGallery:
+#           plugins:                      lgVideo
+#           options:
+#             licenseKey:                 0000-0000-000-0000
+#             videojs:                    true
+#             videojsOptions:             {}
+#
+#         # ----------------------------------------------------------------------
+#         # Video settings
+#         # ----------------------------------------------------------------------
+#         #
+#         videos:                         [
+#                                           "//dai.ly/x887s09",
+#                                           "//dai.ly/x87ycik"
+#                                         ]
+#
+#         captions:                       [
+#                                           "Guided Meditation: Morning Energy",
+#                                           "Beginner Mat Pilates: Core Workout"
+#                                         ]
+#
+#         poster:                         [
+#                                           meditation.jpg,
+#                                           pilates.jpg
+#                                         ]
+
+# ------------------------------------------------------------------------------
+# END config
