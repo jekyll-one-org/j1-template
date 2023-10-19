@@ -8,8 +8,8 @@ exclude_from_search:                    true
 {% comment %}
  # -----------------------------------------------------------------------------
  # ~/assets/data/galleries.html
- # Liquid procedure to generate the HTML portion for all J1 Galleries
- # configured (Justified Gallery)
+ # Liquid procedure to generate the HTML portion for all Justified Galleries
+ # configured
  #
  # Product/Info:
  # https://jekyll.one
@@ -19,7 +19,7 @@ exclude_from_search:                    true
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
- # NOTE: Data loaded dynamically by J1 Gallery module (AJAX)
+ # NOTE: Data loaded dynamically by J1 Masonry module (AJAX)
  # -----------------------------------------------------------------------------
  # Test data:
  #    {{variable | debug}}
@@ -43,8 +43,8 @@ exclude_from_search:                    true
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign environment         = site.environment %}
-{% assign gallery_defaults    = modules.defaults.gallery.defaults %}
-{% assign gallery_settings    = modules.gallery.settings %}
+{% assign gallery_defaults    = modules.defaults.justifiedGallery.defaults %}
+{% assign gallery_settings    = modules.justifiedGallery.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -138,10 +138,9 @@ exclude_from_search:                    true
       <!-- /Image Gallery -->
     {% endif %}
 
-      {% comment %} VIDEO Galleries
+      {% comment %} HTML5 VIDEO Galleries
       -------------------------------------------------------------------------- {% endcomment %}
       {% if gallery.type == 'video' %}
-      {% assign play-button = '/assets/themes/j1/modules/lightGallery/css/themes/uno/icons/play-button.png' %}
 
       {% comment %} Collect CSS image filters
       -------------------------------------------------------------------------- {% endcomment %}
@@ -158,67 +157,65 @@ exclude_from_search:                    true
       {% endif %}
 
       <!-- Video Gallery -->
-      <div id="{{gallery.id}}" class="gallery justified-gallery">
+      <div id="{{gallery.id}}" class="justified-gallery">
         {% for video in gallery.videos %}
 
-        {% if video.type == 'youtube' or video.type == 'vimeo' or video.type == 'wistia' or video.type == 'dailymotion' %}
-        {% assign description = video.description|strip|strip_newlines %}
+        {% if video.type == 'youtube' or video.type == 'vimeo' or video.type == 'wistia' %}
+        % assign description  = video.description|strip|strip_newlines %}
         {% assign alt         = description|strip_html %}
-
-          <!-- {{video.type}} video -->
-          <a class="lg-item"
-            data-lg-size="{{video.size}}"
-            data-pinterest-text="{{video.pinterest_prefix}} {{video.name}} at {{video.source}}"
-            data-tweet-text="{{video.tweet_prefix}} {{video.name}} at {{video.source}}"
-            data-src="{{video.source}}"
-            data-poster="{{gallery.image_base_path}}/{{video.poster.source}}"
-            data-sub-html="{{description}}">
-            <img class="speak2me-ignore"
-              src="{{gallery.image_base_path}}/{{video.poster.source}}"
-              img alt="{{video.caption.text}}">
-          	<span>
-          		<img
-          			class="justified-gallery img-overlay speak2me-ignore"
-          			src="{{play-button}}"
-          			alt="Play Button">
-          	</span>
-          </a>
+            <!-- {{video.type}} video -->
+            <a class="lg-item"
+              data-lg-size="{{video.size}}"
+              data-pinterest-text="{{video.pinterest_prefix}} {{video.name}} at {{video.source}}"
+              data-tweet-text="{{video.tweet_prefix}} {{video.name}} at {{video.source}}"
+              data-src="{{video.source}}"
+              data-poster="{{gallery.image_base_path}}/{{video.poster.source}}"
+              data-sub-html="{{description}}">
+              <div class="lg-uno-video-icon">
+                <img
+                  id="{{video.name | replace: ' ','_' | replace: '-','_' | downcase}}"
+                  class="{{video.poster.style}}"
+                  src="{{gallery.image_base_path}}/{{video.poster.source}}"
+                  alt="{{alt}}"
+                  style=";{{image_filters}};">
+                 <span></span>
+              </div>
+            </a>
 
         {% elsif video.type == 'html5' %}
-        {% assign description = video.description|strip|strip_newlines %}
-        {% assign alt         = description|strip_html %}
         {% assign video_split = video.source | split: '.' %}
         {% assign extention   = video_split[1] %}
-
-          <!-- {{video.type}} video -->
-          <a class="lg-item speak2me-ignore"
-            data-lg-size="{{video.size}}"
-            data-pinterest-text="{{video.pinterest_prefix}} {{video.name}} at {{video.source}}"
-            data-tweet-text="{{video.tweet_prefix}} {{video.name}} at {{video.source}}"
-            data-poster="{{gallery.image_base_path}}/{{video.poster.source}}"
-            data-sub-html="{{description}}"
-            data-video='{
-              "source": [{
-                 "src":   "{{gallery.video_base_path}}/{{video.source}}",
-                 "type":  "video/{{extention}}"
-              }],
-              "tracks": [{
-                 {% for attribute in video.tracks %}
-                 {{attribute[0] | json}}: {{attribute[1] | json}}{% if forloop.last %}{% else %},{% endif %}
-                 {% endfor %}
-              }]
-            }'>
-          	<img class="speak2me-ignore"
-              src="{{gallery.image_base_path}}/{{video.poster.source}}"
-              img alt="{{video.caption.text}}">
-          	<span>
-          		<img
-          			class="justified-gallery img-overlay speak2me-ignore"
-          			src="{{play-button}}"
-          			alt="Play Button">
-          	</span>
-          </a>
-
+        {% assign description = video.description|strip|strip_newlines %}
+        {% assign alt         = description|strip_html %}
+            <!-- {{video.type}} video -->
+            <a class="lg-item"
+              href="{{gallery.image_base_path}}/{{video.poster.source}}"
+              data-lg-size="{{video.size}}"
+              data-pinterest-text="{{video.pinterest_prefix}} {{video.name}} at {{video.source}}"
+              data-tweet-text="{{video.tweet_prefix}} {{video.name}} at {{video.source}}"
+              data-poster="{{gallery.image_base_path}}/{{video.poster.source}}"
+              data-sub-html="{{description}}"
+              data-video='{
+                "source": [{
+                   "src":   "{{gallery.video_base_path}}/{{video.source}}",
+                   "type":  "video/{{extention}}"
+                }],
+                "attributes": {
+                   {% for attribute in gallery.lightGallery.attributes %}
+                   {{attribute[0] | json}}: {{attribute[1] | json}}{% if forloop.last %}{% else %},{% endif %}
+                   {% endfor %}
+                }
+              }'>
+              <div class="lg-uno-video-icon">
+                <img
+                  id="{{video.name | replace: ' ','_' | replace: '-','_' | downcase}}"
+                  class="{{video.poster.style}}"
+                  src="{{gallery.image_base_path}}/{{video.poster.source}}"
+                  alt="{{alt}}"
+                  style=";{{image_filters}};">
+                 <span></span>
+              </div>
+            </a>
         {% endif %}
         {% endfor %}
       </div>

@@ -104,7 +104,7 @@ displayed. Masonry grids for the J1 Template can be easily customized in
 various ways, such as speed and other options.
 
 .Asciidoc configuration
-[source, config, role="noclip mt-4 mb-4"]
+[source, apib, role="noclip mt-4 mb-4"]
 ----
 masonry::collection_biography[]
 ----
@@ -150,7 +150,7 @@ grids for the J1 Template can be easily customized in various ways, such
 as changing the number of posts displayed, the speed, and other options.
 
 .Asciidoc configuration
-[source, config, role="noclip mt-4 mb-4"]
+[source, apib, role="noclip mt-4 mb-4"]
 ----
 masonry::post_series_example[]
 ----
@@ -225,7 +225,7 @@ A card is a container for content that can be styled and arranged in various
 ways to suit the website's needs.
 
 .Asciidoc configuration
-[source, config, role="noclip mt-4 mb-4"]
+[source, apib, role="noclip mt-4 mb-4"]
 ----
 masonry::card_example[]
 ----
@@ -292,7 +292,7 @@ images of different sizes without worrying about them looking out of place
 or disrupting the overall flow of the gallery.
 
 .Asciidoc configuration
-[source, config, role="noclip mt-4 mb-4"]
+[source, apib, role="noclip mt-4 mb-4"]
 ----
 masonry::image_grid_base_example[]
 ----
@@ -352,7 +352,7 @@ on the images below to see how a Lightbox manages a group of images in your
 grid.
 
 .Asciidoc configuration
-[source, config, role="noclip mt-4 mb-4"]
+[source, apib, role="noclip mt-4 mb-4"]
 ----
 masonry::image_grid_full_example[]
 ----

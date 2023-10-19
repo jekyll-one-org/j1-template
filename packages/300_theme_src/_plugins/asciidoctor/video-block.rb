@@ -47,7 +47,7 @@ Asciidoctor::Extensions.register do
       poster_image  = (poster = attributes['poster']) ? %(#{poster}) : nil
 
       html = %(
-        <div class="#{attributes['role']}">
+        <div class="html5-player #{attributes['role']}">
           #{title_html}
           <video
             id="#{video_id}"

@@ -1051,29 +1051,6 @@ resources:
         init_function:                  []
 
   # ----------------------------------------------------------------------------
-  # Gallery Customizer, Customizer UI for JustifiedGallery
-  #
-  - name:                               J1 Gallery Customizer
-    resource:
-      enabled:                          false
-
-      id:                               justifiedGalleryCustomizer
-      comment:                          Module J1 Gallery Customizer
-      layout:                           [ app, raw ]
-      region:                           head
-      required:                         ondemand
-      preload:                          false
-      script_load:                      defer
-      dependencies:                     false
-      pass_init_data:                   true
-
-      data:
-        css:                            []
-        files:                          [ adapter/js/justifiedGalleryCustomizer.js ]
-        js:                             []
-        init_function:                  [ j1.adapter.justifiedGalleryCustomizer.init ]
-
-  # ----------------------------------------------------------------------------
   # iFrameResizer, JS Client|Server implementation to manage HTML iframes
   # based on the JS API iFrame Resizer
   #
@@ -1304,17 +1281,17 @@ resources:
         init_function:                  [ j1.adapter.masterslider.init ]
 
   # ----------------------------------------------------------------------------
-  # Justified Gallery, JS implementation for full-featured image galleries
+  # J1 Gallery, JS implementation for full-featured image galleries
   # based on the Justified Gallery API
   #
   # See: https://miromannino.github.io/Justified-Gallery/
   #
-  - name:                               J1 Justified Gallery
+  - name:                               J1 Gallery
     resource:
       enabled:                          true
 
-      id:                               justifiedgallery
-      comment:                          Module J1 JustifiedGallery
+      id:                               gallery
+      comment:                          Module J1 Gallery
       region:                           head
       layout:                           [ home, page, post, collection, blog_archive, raw, app ]
       required:                         ondemand
@@ -1328,9 +1305,9 @@ resources:
                                           modules/justifiedGallery/css/justifiedGallery,
                                           modules/justifiedGallery/css/theme/uno
                                         ]
-        files:                          [ adapter/js/justifiedGallery.js ]
+        files:                          [ adapter/js/gallery.js ]
         js:                             [ modules/justifiedGallery/js/justifiedGallery ]
-        init_function:                  [ j1.adapter.justifiedGallery.init ]
+        init_function:                  [ j1.adapter.gallery.init ]
 
   # ----------------------------------------------------------------------------
   # LightGallery, JS implementaion for full-featured lightboxes based on

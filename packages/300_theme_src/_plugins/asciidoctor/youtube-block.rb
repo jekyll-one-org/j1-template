@@ -62,7 +62,7 @@ Asciidoctor::Extensions.register do
       theme_name    = (theme  = attributes['theme'])  ? %(#{theme}) : nil
 
       html = %(
-        <div class="#{attributes['role']}" role="img" aria-label="YouTube Video">
+        <div class="youtube-player #{attributes['role']}">
           #{title_html}
           <video
             id="#{video_id}"

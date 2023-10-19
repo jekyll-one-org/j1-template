@@ -134,7 +134,7 @@ j1.adapter.justifiedGallery = (function (j1, window) {
       justifiedGalleryOptions  = $.extend(true, {}, justifiedGalleryDefaults, justifiedGallerySettings, frontmatterOptions);
 
       // load HTML portion for all grids
-      console.debug('loading HTML portion for all Masonry grids configured');
+      console.debug('loading HTML portion for all Justified Galleries configured');
       _this.loadGalleryHTML(justifiedGalleryOptions, justifiedGalleryOptions.galleries);
 
       var dependencies_met_j1_finished= setInterval(function() {
@@ -142,8 +142,8 @@ j1.adapter.justifiedGallery = (function (j1, window) {
         var pageVisible   = (pageState == 'block') ? true : false;
         var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-        if (j1.getState() == 'finished' && pageVisible) {
-//      if (j1.getState() == 'finished' && pageVisible && atticFinished) {
+//      if (j1.getState() == 'finished' && pageVisible) {
+        if (j1.getState() == 'finished' && pageVisible && atticFinished) {
 
           // initialize state flag
           _this.setState('started');
@@ -194,6 +194,7 @@ j1.adapter.justifiedGallery = (function (j1, window) {
               logger.info('\n' + 'initialize gallery on id: ' + '{{gallery_id}}');
 
               // run code after all images are loaded with the gallery
+              //
               $grid_{{gallery_id}}.justifiedGallery({
                 {% for option in gallery.gallery_options %}
                 {% if option[0] contains "gutters" %}
@@ -204,12 +205,12 @@ j1.adapter.justifiedGallery = (function (j1, window) {
                 {% endfor %}
               })
               /* eslint-enable */
-              .on('jg.complete', function (e) {
-                e.stopPropagation();
+              .on('jg.complete', function (evt) {
+                evt.stopPropagation();
 
-                /* eslint-disable */
                 // setup the lightbox
                 //
+                /* eslint-disable */
                 var lg      = document.getElementById("{{gallery_id}}");
                 var gallery = lightGallery(lg, {
                   "plugins":    [{{gallery.lightGallery.plugins}}],
@@ -218,18 +219,13 @@ j1.adapter.justifiedGallery = (function (j1, window) {
                   {% endfor %}
                   "galleryId":  "{{gallery_id}}",
                   "selector":   ".lg-item",
+                  "videojsOptions": {
+                    {% for option in gallery.lightGallery.videojsOptions %}
+                    {{option[0] | json}}: {{option[1] | json}},
+                    {% endfor %}
+                  }
                 });
                 /* eslint-enable */
-
-                // Initialize instance variable of lightGallery (for later access)
-                j1['{{gallery_id}}'] = $grid_{{gallery_id}}.data('lightGallery');
-                // Show gallery DIV element if jg has completed *and* the
-                // lightbox is initialized (delayed)
-                setTimeout(function() {
-                  $('#{{gallery_id}}').show();
-                  logText = '\n' + 'initializing gallery finished on id: #{{gallery_id}}';
-                  logger.info(logText);
-                }, {{show_delay}});
               });
 
             }

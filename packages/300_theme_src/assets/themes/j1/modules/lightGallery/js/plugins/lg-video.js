@@ -60,6 +60,8 @@
         youTubePlayerParams: false,
         vimeoPlayerParams: false,
         wistiaPlayerParams: false,
+        dailymotionPlayerParams: false,
+        vkPlayerParams: false,
         gotoNextSlideOnVideoEnd: true,
         autoplayVideoOnSlide: false,
         videojs: false,
@@ -354,6 +356,13 @@
                 var playerParams = param(this.settings.wistiaPlayerParams);
                 playerParams = playerParams ? '?' + playerParams : '';
                 video = "<iframe allow=\"autoplay\" id=\"" + wistiaId + "\" src=\"//fast.wistia.net/embed/iframe/" + (videoInfo.wistia[4] + playerParams) + "\" " + videoTitle + " class=\"wistia_embed lg-video-object lg-wistia " + addClass + "\" name=\"wistia_embed\" " + commonIframeProps + "></iframe>";
+            }
+            // jadams: added Dailymotion Player
+            else if (videoInfo.dailymotion) {
+                var dailymotionId = 'lg-dailymotion' + index;
+                var playerParams = param(this.settings.dailymotionPlayerParams);
+                playerParams = playerParams ? '?' + playerParams : '';
+                video = "<iframe allow=\"autoplay\" id=\"" + dailymotionId + "\" src=\"//www.dailymotion.com/embed/video/" + (videoInfo.dailymotion[1] + playerParams) + "\" " + videoTitle + " class=\"dailymotion_embed lg-video-object lg-dailymotion " + addClass + "\" name=\"dailymotion_embed\" " + commonIframeProps + "></iframe>"
             }
             else if (videoInfo.html5) {
                 var html5VideoMarkup = '';

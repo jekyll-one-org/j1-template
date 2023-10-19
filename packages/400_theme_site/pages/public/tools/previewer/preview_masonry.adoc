@@ -31,7 +31,7 @@ permalink:                              /pages/public/tools/previewer/masonry/
 
 resources:                              [
                                           advertising,
-                                          animate, clipboard, justifiedgallery,
+                                          animate, clipboard, gallery,
                                           lightbox, lightgallery, masonry,
                                           rouge, slick, videojs, vimeoplayer
                                         ]
@@ -102,7 +102,7 @@ articles from a specific Jekyll collection. The grid display all *articles*
 a collection contains.
 
 .Asciidoc Markup
-[source, config, role="noclip mt-4 mb-4"]
+[source, apib, role="noclip mt-4 mb-4"]
 ----
 masonry::collection_biography[]
 ----
@@ -152,7 +152,7 @@ All grids for the J1 Template can be easily customized in various ways, such
 as changing the number of posts displayed, the speed, and other options.
 
 .Asciidoc Markup
-[source, config, role="noclip mt-4 mb-4"]
+[source, apib, role="noclip mt-4 mb-4"]
 ----
 masonry::post_series_example[]
 ----
@@ -231,7 +231,7 @@ portrait. Using the height parameter on images `image_height`, all images
 can be displayed at the same height.
 
 .Asciidoc Markup
-[source, config, role="noclip mt-4 mb-4"]
+[source, apib, role="noclip mt-4 mb-4"]
 ----
 masonry::image_fixed_height_lb[]
 ----
@@ -308,7 +308,7 @@ The default lightbox supports all images of a grid as a group. Click on the
 images in the grid below to see how the lightbox manages your images.
 
 .Asciidoc Markup
-[source, config, role="noclip mt-4 mb-4"]
+[source, apib, role="noclip mt-4 mb-4"]
 ----
 masonry::image_variable_height_lb[]
 ----
@@ -376,7 +376,7 @@ default lightbox, more options are available to manage images. Click on the
 the grid elements below to see how lightGallery manages your image content.
 
 .Asciidoc Markup
-[source, config, role="noclip mt-4 mb-4"]
+[source, apib, role="noclip mt-4 mb-4"]
 ----
 masonry::image_variable_height_lg[]
 ----
@@ -451,7 +451,7 @@ are popular on many websites, and masonry can be a useful tool for creating
 dynamic and visually appealing galleries.
 
 .Asciidoc Markup
-[source, config, role="noclip mt-4 mb-4"]
+[source, apib, role="noclip mt-4 mb-4"]
 ----
 masonry::mixed_video_example[]
 ----
@@ -590,7 +590,7 @@ link:{url-justified-gallery--home}[Justified Gallery, {browser-window--new}]
 is a great module to create responsive justified image galleries.
 
 .Asciidoc Markup
-[source, config, role="noclip mt-4 mb-4"]
+[source, apib, role="noclip mt-4 mb-4"]
 ----
 gallery::jg_mega_cities[]
 ----

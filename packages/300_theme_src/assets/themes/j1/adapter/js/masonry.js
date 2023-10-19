@@ -235,7 +235,7 @@ var logText;
                       console.debug("masonry: images loaded on {{grid_id}}");
 
                       {% if grid.lightbox.type == 'lg' %}
-                      console.log("masonry: lightGallery detected on id: {{grid_id}}");
+                      console.log("masonry: gallery detected on id: {{grid_id}}");
 
                       // setup the lightbox
                       //

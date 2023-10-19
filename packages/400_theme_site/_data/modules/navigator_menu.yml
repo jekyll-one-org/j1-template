@@ -447,6 +447,11 @@
         href:                           /pages/public/tools/previewer/current_theme/
         icon:                           theme-light-dark
         target:                         _blank
+
+      - title:                          J1 Gallery
+        href:                           /pages/public/tools/previewer/gallery/
+        icon:                           view-dashboard-variant
+        target:                         _blank
       - title:                          lightGallery
         href:                           /pages/public/tools/previewer/lightgallery/
         icon:                           view-dashboard-variant
@@ -460,7 +465,6 @@
         href:                           https://jekyll.one/pages/public/tools/previewer/speak2me/
         icon:                           speaker
         target:                         _blank
-
       - title:                          Slick Slider
         href:                           https://jekyll.one/pages/public/tools/previewer/slick/
         icon:                           view-carousel

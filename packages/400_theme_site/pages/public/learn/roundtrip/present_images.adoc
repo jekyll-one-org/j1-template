@@ -32,7 +32,7 @@ permalink:                              /pages/public/learn/roundtrip/present_im
 
 resources:                              [
                                           animate, clipboard, carousel, comments,
-                                          justifiedgallery, lightbox, lightgallery,
+                                          gallery, lightbox, lightgallery,
                                           masterslider, masonry, rouge, slick
                                         ]
 resource_options:
@@ -315,7 +315,7 @@ posts display the post category, the title, the author information and
 date.
 
 .Asciidoc configuration
-[source, config, role="noclip mb-3"]
+[source, apib, role="noclip mb-3"]
 ----
 slick::post_carousel_featured[]
 ----
@@ -498,4 +498,5 @@ Player, Quicktime, or Silverlight is no longer needed as the Jekyll theme
 JekyllOne provides HTML5 Video support for local video content and from
 online sources on the Internet.
 
+[role="mb-7"]
 Incredible? See the next example page link:{url-roundtrip--present-videos}[Present Videos].

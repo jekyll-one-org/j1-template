@@ -1,5 +1,5 @@
 ---
-title:                                  Justified Gallery
+title:                                  J1 Gallery
 title_extention:                        Preview supported Galleries
 tagline:                                Preview supported Galleries
 
@@ -20,7 +20,7 @@ keywords: >
                                         lightbox2, master slider, lightgallery, justifiedgallery
 
 categories:                             [ Previewer ]
-tags:                                   [ Module, Justified-Gallery ]
+tags:                                   [ Module, Gallery ]
 
 image:
   path:                                 /assets/images/modules/attics/1920x1280/quino-al-2.jpg
@@ -28,11 +28,11 @@ image:
   height:                               1280
 
 regenerate:                             false
-permalink:                              /pages/public/tools/previewer/justfiedgallery/
+permalink:                              /pages/public/tools/previewer/gallery/
 
 resources:                              [
                                           animate, clipboard,
-                                          justifiedgallery, lightbox, lightgallery,
+                                          gallery, lightbox, lightgallery,
                                           rouge, videojs
                                         ]
 resource_options:
@@ -102,8 +102,10 @@ same size (resolution), but some are orientated landscapes, or others
 may be portraits. For that reason, a more powerful gallery is needed to create
 so-called justified views.
 
+gad::ad_7522184684["mt-5 mb-5"]
+
 .Old Times
-gallery::jg_old_times[]
+gallery::jg_old_times[role="mb-5"]
 
 .Justified Gallery of Images + lightGallery
 gallery::jg_mega_cities[]
@@ -119,7 +121,7 @@ videos, organizing content, or providing a visually appealing way to present
 video content to an audience.
 
 .Carpool Karoke
-gallery::jg_video_online_youtube[]
+gallery::jg_video_online_youtube[role="mb-5"]
 
 .HTML4 Video
-gallery::jg_video_html5[role="mb-4"]
+gallery::jg_video_html5[role="mb-7"]

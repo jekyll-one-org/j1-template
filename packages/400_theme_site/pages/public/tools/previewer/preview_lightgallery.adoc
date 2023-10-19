@@ -31,9 +31,9 @@ personalization:                        true
 permalink:                              /pages/public/tools/previewer/lightgallery/
 
 resources:                              [
-                                          animate,
-                                          lightgallery, justifiedgallery, masonry,
-                                          videojs, vimeoplayer, wistiaplayer
+                                          animate, advertising,
+                                          lightgallery, gallery, masonry,
+                                          rouge, videojs, vimeoplayer
                                         ]
 resource_options:
   - attic:
@@ -96,13 +96,15 @@ justified image galleries. J1 Template combines the Gallery with the lightboxes
 supported to enlarge the images of a gallery. See the gallery module in action
 and for sure, all that you see is even responsive.
 
+gad::ad_7522184684["mt-5 mb-5"]
+
 [TIP]
 ====
 Change the size of your current browser width to see what will happen!
 ====
 
 .Asciidoc Markup
-[source, config, role="noclip mt-4 mb-4"]
+[source, apib, role="noclip mt-4 mb-4"]
 ----
 gallery::jg_old_times[]
 ----
@@ -119,7 +121,7 @@ Galleries are popular on many websites, and them Masonry module can be a
 useful tool for creating dynamic and visually appealing video galleries.
 
 .Asciidoc Markup
-[source, config, role="noclip mt-4 mb-4"]
+[source, apib, role="noclip mt-4 mb-4"]
 ----
 masonry::mixed_video_example[]
 ----
@@ -137,131 +139,5 @@ using *Justified Gallery*. Videos created by a digicam or a mobile can be
 played by J1 Template using the HTML5 Video support. Present videos you made
 at their best.
 
-++++
-<!-- HTML5 Video -->
-<div class="gallery-title">Videos + Justified Gallery + lightGallery</div>
-<div id="video_html5" class="gallery justified-gallery mb-7">
-
-  <a class="lg-item"
-    data-lg-size="1280-720"
-    data-pinterest-text="Pin it - Slide 1"
-    data-tweet-text="lightGallery slide 1"
-    data-video='{
-      "source": [{
-        "src":"/assets/videos/gallery/html5/video1.mp4",
-        "type":"video/mp4"
-      }],
-      "attributes": {
-        "preload": false,
-        "controls": true,
-        "playsinline": true
-      },
-      "tracks": [{
-        "src": "/assets/videos/gallery/html5/video1.subtitles.vtt",
-        "kind":"captions",
-        "srclang": "en",
-        "label": "English",
-        "default": "true"
-      }]
-    }'
-    data-poster="/assets/videos/gallery/video1-poster.jpg"
-    data-sub-html="<p>Student Academy Award Winning <b>Peck Pocketed</b> by Kevin Herron</p>">
-      <img
-        class="speak2me-ignore" src="/assets/videos/gallery/video1-poster.jpg"
-        img=""
-        alt="Student Academy Award Winning <b>Peck Pocketed</b> by Kevin Herron">
-      <span>
-        <img
-          class="justified-gallery img-overlay speak2me-ignore"
-          src="/assets/themes/j1/modules/lightGallery/css/themes/uno/icons/play-button.png"
-          alt="Play Button">
-      </span>
-      <div class="jg-caption">
-        Student Academy Award Winning <b>Peck Pocketed</b> by Kevin Herron
-      </div>
-  </a>
-
-  <a class="lg-item"
-    data-lg-size="1280-720"
-    data-pinterest-text="Pin it - Slide 2"
-    data-tweet-text="lightGallery slide 2"
-    data-video='{
-      "source": [{
-        "src":"/assets/videos/gallery/html5/video2.mp4",
-        "type":"video/mp4"
-      }],
-      "attributes": {
-        "preload": false,
-        "controls": true,
-        "playsinline": true
-      }
-    }'
-    data-poster="/assets/videos/gallery/video2-poster.jpg"
-    data-sub-html="<p>Rollin Wild - Short Funny Animated Clip created at the <b>Film Academy</b></p>">
-      <img
-        class="speak2me-ignore"
-        src="/assets/videos/gallery/video2-poster.jpg"
-        alt="Rollin Wild - Short Funny Animated Clips created at the Film Academy">
-      <span>
-        <img
-          class="justified-gallery img-overlay speak2me-ignore"
-          src="/assets/themes/j1/modules/lightGallery/css/themes/uno/icons/play-button.png"
-          alt="Play Button">
-      </span>
-      <div class="jg-caption">
-        Rollin Wild - Short Funny Animated Clips created at the Film Academy
-      </div>
-  </a>
-
-</div>
-++++
-
-++++
-<style>
-
-.img-responsive {
-  width: 100%;
-  height: auto;
-}
-
-</style>
-++++
-
-++++
-<script>
-  $(function() {
-
-    $("#video_html5")
-      .justifiedGallery({
-        captions: true,
-        rowHeight: 240,
-        margins: 3
-      })
-      .on("jg.complete", function () {
-        lightGallery(
-          document.getElementById("video_html5"), {
-            plugins: [lgThumbnail, lgVideo],
-            download: false,
-            selector: '.lg-item',
-            alignThumbnails: 'left',
-            autoplayFirstVideo: false,
-            videojs: true,
-            videojsTheme: 'vjs-theme-uno',
-            videojsOptions: {
-              autoplay: false,
-              controls: true,
-              muted: false,
-              preload: true,
-              playbackRates: [0.25, 0.5, 1, 1.5, 2],
-              controlBar: {
-                remainingTimeDisplay: true,
-                pictureInPictureToggle: false
-              }
-            }
-          },
-        );
-      });
-
-  });
-</script>
-++++
+.Videos + Justified Gallery + lightGallery
+gallery::jg_video_html5[role="mb-5 mb-7"]

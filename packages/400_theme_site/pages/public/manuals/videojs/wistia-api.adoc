@@ -97,7 +97,7 @@ queue. The handle will be given as an argument of the callback function.
 We push an object of the form
 `{ id: matcher, initialization_event: callback }` onto the queue. Embeds
 that match — as described in the
-link:/support/developers/player-api#wistiaapimatcher[`Wistia.api(matcher)`]
+{https://wistia.com/support/developers/player-apii#wistiaapimatcher}[`Wistia.api(matcher)`]
 section below — will run the callback function.
 
 There are three possible initialization events: `onHasData`,
@@ -279,14 +279,13 @@ should be added. It can take any of these forms:
 ----
 
 Before using this, you might want to see if
-link:/support/developers/embed-links#simple-playlist-link-example[embed
-and playlist links] covers your use case.
+{https://wistia.com/support/developers/embed-links#simple-playlist-link-example}[embed and playlist links]
+covers your use case.
 
 [NOTE]
 ====
 This method currently does not work with iframe embeds or
-link:/support/developers/embed-links#special-playlist-options[playlist
-links set to auto]
+{https://wistia.com/support/developers/embed-links#special-playlist-options}[playlist links set to auto]
 ====
 
 [role="mt-4"]
@@ -399,7 +398,7 @@ if (video.embedded()) {
 
 Returns the `event_key` for the current viewing session. You can get all
 events for your account from the
-link:/support/developers/stats-api#events[Stats API].
+{https://wistia.com/support/developers/stats-api#events}[Stats API].
 
 [role="mt-4"]
 === getSubtitlesScale()
@@ -681,10 +680,9 @@ can be overridden in the `options` object. This method can be used in
 conjunction with `addToPlaylist(hashedId, [options])` to create custom
 playlist implementations.
 
-In addition to the normal link:/support/developers/embed-options[embed
-options], you can set the `transition` option, which defines how to
-visually transition to the new video. Available values are *slide,*
-*fade,* *crossfade,* and *none.* By default, *fade* is used.
+In addition to the normal embed options, you can set the `transition` option,
+which defines how to visually transition to the new video. Available values
+are *slide,* *fade,* *crossfade,* and *none.* By default, *fade* is used.
 
 [source, js]
 ----
@@ -696,7 +694,7 @@ $("#video_abcde12345").click(function() {
 ----
 
 Before using this, you might want to see if
-link:/support/developers/embed-links#simple-video-replacement-example[embed and playlist links]
+{https://wistia.com/support/developers/embed-links#simple-video-replacement-example}[embed and playlist links]
 covers your use case.
 
 [NOTE]
@@ -1014,8 +1012,8 @@ video.videoWidth(640, { constrain: true });
 
 Returns the `visitor_key` of the person watching the video. This is used
 to associate multiple viewing sessions with a single person. You can use
-it to filter link:/support/developers/stats-api#events[events] in the
-Stats API.
+it to filter {https://wistia.com/support/developers/stats-api#events}[events]
+in the Stats API.
 
 [role="mt-4"]
 === volume()
@@ -1461,8 +1459,9 @@ video.bind("widthchange", function() {
 == Options
 
 Many behaviors can be defined by setting options instead of using Player
-API methods. Check out the link:/support/developers/embed-options[Embed
-Options] page for a full list.
+API methods. Check out the
+{https://wistia.com/support/developers/embed-options}[Embed Options]
+page for a full list.
 
 
 [role="mt-5"]
@@ -1605,15 +1604,16 @@ video where it sees an element with the right class.
 
 You can do this yourself using the `time(val)` method described above,
 OR you could make your life easier and use
-link:/support/developers/embed-links[embed links], which handles
-chaptering automatically!
+{https://wistia.com/support/developers/embed-links}[embed links], which
+handles chaptering automatically!
 
 [role="mt-4"]
 [[mute-the-video-on-load]]
 === Mute the Video on Load
 
 You can do this by setting the `volume`
-link:/support/developers/embed-options[embed option] to 0, like so:
+{https://wistia.com/support/developers/embed-options}[embed option] to 0,
+like so:
 
 [source, html]
 ----
@@ -1655,8 +1655,8 @@ the first video that initializes will autoplay.
 
 You can also set up selective autoplay for popover embeds as well. You
 have to take advantage of the `popover.show()` method, which can read
-about on our link:/support/developers/popover-customization#show[Popover
-Customization Page].
+about on
+{https://wistia.com/support/developers/popover-customization#show}[Popover Customization Page].
 
 [source, html]
 ----
@@ -1738,8 +1738,7 @@ video. We simply add the main video to the playlist on the pre-roll video.
 === Playing a second video on Post Roll click
 
 You can now handle this behavior by using
-link:/support/developers/embed-links#watch-another-video-in-ctaannotation[embed
-links].
+{https://wistia.com/support/developers/embed-links#watch-another-video-in-ctaannotation}[embed links].
 
 
 [role="mt-4"]
@@ -1841,7 +1840,7 @@ controlsVisibleOnLoad=false" style="width:640px;height:360px;"></div>
 
 The options there are specified as key/val pairs in the container’s
 `class` attribute. For more information on setting options, check out the
-link:/support/developers/embed-options[docs on embed options].
+{https://wistia.com/support/developers/embed-options}[docs on embed options].
 
 [role="mt-4"]
 === Player API Usage Comparison

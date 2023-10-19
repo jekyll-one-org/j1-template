@@ -30,9 +30,9 @@ personalization:                        true
 permalink:                              /pages/public/tools/previewer/videojs/
 
 resources:                              [
-                                          animate,
-                                          lightgallery, justifiedgallery,
-                                          videojs
+                                          advertising, animate,
+                                          lightgallery, gallery, rouge,
+                                          videojs, vimeoplayer
                                         ]
 resource_options:
   - attic:
@@ -79,15 +79,23 @@ mdi:clock-time-five-outline[24px, md-gray mt-4 mb-5 mr-2]
 [role="mt-5"]
 == VideoJS Player
 
-If you like *one* HTML5 video player for *all* of your video content,
-_VideoJS_ is a good choice. Based on the video tag `<video>` for HTML5,
-several plugins are available to be used for playing videos from the:
+VideoJS is an open-source JavaScript framework and library for building
+custom video players for the web. It provides a flexible and customizable
+platform for displaying and controlling video content on websites and web
+applications.
 
+gad::ad_7522184684["mt-5 mb-5"]
+
+If you like *one* Video player for *all* of your video content, _VideoJS_
+is a good choice. Several plugins are available for J1 Template to be used
+for playing videos from the:
+
+* _HTML5 Video_ to play video files available *locally* on the Web Server
 * _YouTube_ Video platform
 * _Dailymotion_ Video platform
 * _Wistia_ Video platform
 * _Vimeo_ Video platform
-* _HTML Video_ to play video files available *locally* on the Web Server
+
 
 [role="mt-5"]
 === YouTube Video
@@ -396,7 +404,6 @@ Video galleries are widely used in various industries, including entertainment,
 education, e-commerce, and marketing. They provide a versatile way to present
 video content and engage with an audience online.
 
-////
 [role="mt-5"]
 === YouTube Gallery
 
@@ -408,7 +415,10 @@ a real classic channel *Carpool Karaoke* presented by the frontman _James Corden
 of *The Late Late Show* at CBS, Los Angeles.
 
 .Carpool Karaoke Channel
-gallery::jg_video_online_youtube_james_and_adele[role="mt-4 mb-5"]
+gallery::jg_video_online_youtube_james_and_adele[role="mt-4 mb-4"]
+
+.The Voice Kids Germany 2021
+gallery::jg_video_online_youtube_voice_kids[role="mt-4 mb-5"]
 
 
 [role="mt-5"]
@@ -445,4 +455,3 @@ HTML5 Video formats on modern browsers today like MP4, WebM, or Ogg.
 
 .Local MP4 Video
 gallery::jg_video_html5[role="mb-5 mb-7"]
-////

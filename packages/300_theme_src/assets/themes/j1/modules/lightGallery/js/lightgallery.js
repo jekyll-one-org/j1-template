@@ -981,7 +981,8 @@
                 console.error('Please provide a valid license key');
             }
             else if (this.settings.licenseKey === '0000-0000-000-0000') {
-                console.warn("lightGallery: " + " license key not valid for business use: " + this.settings.licenseKey);
+              // jadams: disabled license warning
+              // console.warn("lightGallery: " + " license key not valid for business use: " + this.settings.licenseKey);
             }
         };
         LightGallery.prototype.getSlideItem = function (index) {

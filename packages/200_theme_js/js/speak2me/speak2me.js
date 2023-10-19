@@ -354,27 +354,32 @@
 
         // Default values
         //
-        voiceTags['a']                = new voiceTag('Follow the Link:', ':');
-        voiceTags['q']                = new voiceTag('', pause_spoken);
-        voiceTags['ol']               = new voiceTag('Start of list.', 'End of list. ');
-        voiceTags['ul']               = new voiceTag('Start of list.', 'End of list. ');
-        voiceTags['dl']               = new voiceTag('Start of list.', 'End of list. ');
-        voiceTags['dt']               = new voiceTag('', ', ');
-        voiceTags['img']              = new voiceTag('Start of an image with the description,', ', ');
-        voiceTags['table']            = new voiceTag('Start of an table element,', 'This element ist not spoken.');
-        voiceTags['card-header']      = new voiceTag('', '');
-        voiceTags['.doc-example']     = new voiceTag('Start of an example element,', 'This element ist not spoken.');
-        voiceTags['.admonitionblock'] = new voiceTag('Start of an attention element of type, ', ':');
-        voiceTags['.listingblock']    = new voiceTag('Start of an structured text block,', 'This element ist not spoken.');
-        voiceTags['.gist']            = new voiceTag('Start of an gist element,', 'This element ist not spoken.');
-        voiceTags['.slider']          = new voiceTag('Start of an slider element,', 'This element ist not spoken.');
-        voiceTags['.masonry']         = new voiceTag('Start of an masonry element,', 'This element ist not spoken.');
-        voiceTags['.lightbox-block']  = new voiceTag('Start of an lightbox element,', 'This element ist not spoken.');
-        voiceTags['.gallery']         = new voiceTag('Start of an gallery element,', 'This element ist not spoken.');
-        voiceTags['.video-js']        = new voiceTag('Start of an video,', '');
-        voiceTags['figure']           = new voiceTag('Start of an figure with the caption,', '');
-        voiceTags['blockquote']       = new voiceTag('Blockquote start,', 'Blockquote end.');
-        voiceTags['quoteblock']       = new voiceTag('Start of an quote block element,', 'Quote block element end.');
+        voiceTags['a']                    = new voiceTag('Follow the Link:', ':');
+        voiceTags['q']                    = new voiceTag('', pause_spoken);
+        voiceTags['ol']                   = new voiceTag('Start of list.', 'End of list. ');
+        voiceTags['ul']                   = new voiceTag('Start of list.', 'End of list. ');
+        voiceTags['dl']                   = new voiceTag('Start of list.', 'End of list. ');
+        voiceTags['dt']                   = new voiceTag('', ', ');
+        voiceTags['img']                  = new voiceTag('Start of an image with the description,', ', ');
+        voiceTags['table']                = new voiceTag('Start of a table element,', 'This element ist not spoken.');
+        voiceTags['card-header']          = new voiceTag('', '');
+        voiceTags['.doc-example']         = new voiceTag('Start of an example element,', 'This element ist not spoken.');
+        voiceTags['.admonitionblock']     = new voiceTag('Start of an attention element of type, ', ':');
+        voiceTags['.listingblock']        = new voiceTag('Start of a structured text block,', 'This element ist not spoken.');
+        voiceTags['.gist']                = new voiceTag('Start of a gist element,', 'This element ist not spoken.');
+        voiceTags['.slider']              =  new voiceTag('Start of a slider element,', 'This element ist not spoken.');
+        voiceTags['.masonry']             = new voiceTag('Start of a masonry element,', 'This element ist not spoken.');
+        voiceTags['.lightbox-block']      = new voiceTag('Start of a lightbox element,', 'This element ist not spoken.');
+        voiceTags['.gallery']             = new voiceTag('Start of a gallery element,', 'This element ist not spoken.');
+        voiceTags['.videoblock']          = new voiceTag('Start of a HTML5 Video,', 'This video ist not spoken.');
+        voiceTags['.videojs-player']      = new voiceTag('Start of a VideoJS Video,', 'This video ist not spoken.');
+        voiceTags['.youtube-player']      = new voiceTag('Start of a YouTube Video,', 'This video ist not spoken.');
+        voiceTags['.dailymotion-player']  = new voiceTag('Start of a Dailymotion Video,', 'This video ist not spoken.');
+        voiceTags['.vimeo-player']       = new voiceTag('Start of a Vimeo Video,', 'This video ist not spoken.');
+        voiceTags['.wistia-player']       = new voiceTag('Start of a Wistia Video,', 'This video ist not spoken.');
+        voiceTags['figure']               = new voiceTag('Start of a figure with the caption,', '');
+        voiceTags['blockquote']           = new voiceTag('Blockquote start,', 'Blockquote end.');
+        voiceTags['quoteblock']           = new voiceTag('Start of a quote block element,', 'Quote block element end.');
 
         ignoreTags = ['audio','button','canvas','code','del', 'pre', 'dialog','embed','form','head','iframe','meter','nav','noscript','object','picture', 'script','select','style','textarea','video'];
 
@@ -921,25 +926,115 @@
           jQuery(this).remove();
         });
 
-        // Search for VideoJS elements, check for the title and insert text
+        // Search for HTML5 video players, check for the title and insert text
         // if exists and then remove the DOM object.
         //
-        jQuery(clone).find('.video-js').addBack('.video-js').each(function() {
-          if ($(this).prev()[0] !== undefined && $(this).prev()[0].innerText !== undefined) {
-            title = $(this).prev()[0].innerText;
-            title_element = jQuery(this).prev();
-            // remove the title 'before' the DOM object deleted
-            //
-            jQuery(title_element).remove();
-          } else {
-            title = '';
-          }
-          prepend   = voiceTags['.video-js'].prepend;
-          appended  = voiceTags['.video-js'].append;
+        jQuery(clone).find('.videoblock').addBack('.videoblock').each(function() {
+          copy      = jQuery(this).find('.title').text();
+          prepend   = voiceTags['.videoblock'].prepend;
+          appended  = voiceTags['.videoblock'].append;
 
           if ((copy !== undefined) && (copy != '')) {
-              jQuery('<div>' + prepend + ' ' + copy + '</div>').insertBefore(this);
-              jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+            jQuery('<div>' + prepend + ' ' + 'with the title, ' + copy + pause_spoken + '</div>').insertBefore(this);
+            jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+          } else {
+            jQuery('<div>' + prepend  + '</div>').insertBefore(this);
+            jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+          }
+
+          jQuery(this).remove();
+        });
+
+        // Search for VideoJS players, check for the title and insert text
+        // if exists and then remove the DOM object.
+        //
+        jQuery(clone).find('.videojs-player').addBack('.videojs-player').each(function() {
+          copy      = jQuery(this).find('.video-title').text();
+          prepend   = voiceTags['.videojs-player'].prepend;
+          appended  = voiceTags['.videojs-player'].append;
+
+          if ((copy !== undefined) && (copy != '')) {
+            jQuery('<div>' + prepend + ' ' + 'with the title, ' + copy + pause_spoken + '</div>').insertBefore(this);
+            jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+          } else {
+            jQuery('<div>' + prepend  + '</div>').insertBefore(this);
+            jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+          }
+
+          jQuery(this).remove();
+        });
+
+        // Search for YouTube players, check for the title and insert text
+        // if exists and then remove the DOM object.
+        //
+        jQuery(clone).find('.youtube-player').addBack('.youtube-player').each(function() {
+          copy      = jQuery(this).find('.video-title').text();
+          prepend   = voiceTags['.youtube-player'].prepend;
+          appended  = voiceTags['.youtube-player'].append;
+
+          if ((copy !== undefined) && (copy != '')) {
+            jQuery('<div>' + prepend + ' ' + 'with the title, ' + copy + pause_spoken + '</div>').insertBefore(this);
+            jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+          } else {
+            jQuery('<div>' + prepend  + '</div>').insertBefore(this);
+            jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+          }
+
+          jQuery(this).remove();
+        });
+
+        // Search for Dailymotion players, check for the title and insert text
+        // if exists and then remove the DOM object.
+        //
+        jQuery(clone).find('.dailymotion-player').addBack('.dailymotion-player').each(function() {
+          copy      = jQuery(this).find('.video-title').text();
+          prepend   = voiceTags['.dailymotion-player'].prepend;
+          appended  = voiceTags['.dailymotion-player'].append;
+
+          if ((copy !== undefined) && (copy != '')) {
+            jQuery('<div>' + prepend + ' ' + 'with the title, ' + copy + pause_spoken + '</div>').insertBefore(this);
+            jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+          } else {
+            jQuery('<div>' + prepend  + '</div>').insertBefore(this);
+            jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+          }
+
+          jQuery(this).remove();
+        });
+
+        // Search for Vimeo players, check for the title and insert text
+        // if exists and then remove the DOM object.
+        //
+        jQuery(clone).find('.vimeo-player').addBack('.vimeo-player').each(function() {
+          copy      = jQuery(this).find('.video-title').text();
+          prepend   = voiceTags['.vimeo-player'].prepend;
+          appended  = voiceTags['.vimeo-player'].append;
+
+          if ((copy !== undefined) && (copy != '')) {
+            jQuery('<div>' + prepend + ' ' + 'with the title, ' + copy + pause_spoken + '</div>').insertBefore(this);
+            jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+          } else {
+            jQuery('<div>' + prepend  + '</div>').insertBefore(this);
+            jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+          }
+
+          jQuery(this).remove();
+        });
+
+        // Search for Wistia players, check for the title and insert text
+        // if exists and then remove the DOM object.
+        //
+        jQuery(clone).find('.wistia-player').addBack('.wistia-player').each(function() {
+          copy      = jQuery(this).find('.video-title').text();
+          prepend   = voiceTags['.wistia-player'].prepend;
+          appended  = voiceTags['.wistia-player'].append;
+
+          if ((copy !== undefined) && (copy != '')) {
+            jQuery('<div>' + prepend + ' ' + 'with the title, ' + copy + pause_spoken + '</div>').insertBefore(this);
+            jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+          } else {
+            jQuery('<div>' + prepend  + '</div>').insertBefore(this);
+            jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
           }
 
           jQuery(this).remove();
@@ -1100,7 +1195,7 @@
         //
         jQuery(clone).find('.gallery').addBack('.gallery').each(function() {
 
-          if ($(this).prev()[0].innerText !== undefined) {
+          if ($(this).prev()[0] !== undefined && $(this).prev()[0].innerText !== undefined) {
             title = $(this).prev()[0].innerText;
             title_element = jQuery(this).prev();
             // remove the title BEFORE the DOM object gets deleted

@@ -101,7 +101,7 @@ articles from a specific Jekyll collection. The grid display all *articles*
 a collection contains.
 
 .Asciidoc configuration
-[source, config, role="noclip mt-4 mb-4"]
+[source, apib, role="noclip mt-4 mb-4"]
 ----
 masonry::collection_biography[]
 ----
@@ -152,7 +152,7 @@ All grids for the J1 Template can be easily customized in various ways, such
 as changing the number of posts displayed, the speed, and other options.
 
 .Asciidoc configuration
-[source, config, role="noclip mt-4 mb-4"]
+[source, apib, role="noclip mt-4 mb-4"]
 ----
 masonry::post_series_example[]
 ----
@@ -232,7 +232,7 @@ portrait. Using the height parameter on images `image_height`, all images
 can be displayed at the same height.
 
 .Asciidoc configuration
-[source, config, role="noclip mt-4 mb-4"]
+[source, apib, role="noclip mt-4 mb-4"]
 ----
 masonry::image_fixed_height_lb[]
 ----
@@ -309,7 +309,7 @@ The default lightbox supports all images of a grid as a group. Click on the
 images in the grid below to see how the lightbox manages your images.
 
 .Asciidoc configuration
-[source, config, role="noclip mt-4 mb-4"]
+[source, apib, role="noclip mt-4 mb-4"]
 ----
 masonry::image_variable_height_lb[]
 ----
@@ -377,7 +377,7 @@ default lightbox, more options are available to manage images. Click on the
 the grid elements below to see how lightGallery manages your image content.
 
 .Asciidoc configuration
-[source, config, role="noclip mt-4 mb-4"]
+[source, apib, role="noclip mt-4 mb-4"]
 ----
 masonry::image_variable_height_lg[]
 ----
