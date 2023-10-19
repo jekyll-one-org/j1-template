@@ -143,7 +143,6 @@ lightbox::example-group[ 395, {data-images-group}, group, role="mt-4 mb-4 wm-800
 
 [role="mt-5"]
 === lightGallery
-// !!! Justified Gallery KAPOTT !!!
 
 lightGallery provides more complex image data functions than the default
 lightbox. The module supports a gallery-style thumbnail preview plus image
@@ -158,7 +157,7 @@ than enlarged displaying of images.
 
 Check what lightGallery can do this by the following example.
 
-.Justified Gallery + lightGallery
+.J1 Gallery + lightGallery
 gallery::jg_old_times[]
 
 [TIP]
@@ -441,7 +440,7 @@ documents:
 
 
 [role="mt-5"]
-== Masonry
+== J1 Masonry
 
 Masonry is a great tool to create dynamic image galleries. Image galleries
 are popular on many websites, and masonry can be a useful tool for creating
@@ -461,7 +460,7 @@ link:{url-j1-masonry-previewer}[Masonry Preview, {browser-window--new}] page.
 
 
 [role="mt-5"]
-== Justified Gallery
+== J1 Gallery
 
 link:{url-justified-gallery--home}[JustifiedGallery, {browser-window--new}]
 is a great _jQuery_ Plugin to create responsive, infinite, and high-quality
@@ -474,12 +473,14 @@ browser window, by width or height to see what will happen!
 Pictures you've made are typically not even in size. Images may have the
 same size (resolution), but some are orientated landscapes, or others
 may be portraits. For that reason, a more powerful gallery is needed to create
-so-called justified views. Justified Gallery uses a so-called masonry grid
-layout. It works by placing elements in an optimal position based on available
-horizontal and vertical space. Sort of like mason fitting stones in a wall.
-You'll have seen it in use all over the Internet!
+so-called justified views. J1 Gallery is based on Justified Gallery to create
+so-called masonry grid layouts.
 
-.Justified Gallery of Images + lightGallery
+It works by placing elements in an optimal position based on available
+horizontal and vertical space. Sort of like mason fitting stones in a wall.
+You'll have seen it for sure in use all over the Internet.
+
+.J1 Gallery of Images + lightGallery
 gallery::jg_mega_cities[role="mb-4"]
 
 
