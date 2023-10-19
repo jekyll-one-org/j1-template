@@ -1,0 +1,216 @@
+
+
+++++
+
+<div id="gallery-container" class="gallery-container d-flex align-items-center justify-content-center">
+
+  <a
+    data-lg-size="1280-720"
+    data-pinterest-text="Pin it3"
+    data-tweet-text="lightGallery slide  4"
+    data-src="https://youtu.be/IUN664s7N-c"
+    data-poster="https://img.youtube.com/vi/IUN664s7N-c/maxresdefault.jpg"
+    data-sub-html="<h4>Visual Soundscapes - Mountains | Planet Earth II | BBC America</h4><p>On the heels of Planet Earth II’s record-breaking Emmy nominations, BBC America presents stunning visual soundscapes from the series' amazing habitats.</p>">
+      <img class="img-responsive" src="https://img.youtube.com/vi/IUN664s7N-c/maxresdefault.jpg" />
+  </a>
+  <a
+    data-lg-size="1280-720"
+    data-pinterest-text="Pin it3"
+    data-tweet-text="lightGallery slide  4"
+    data-src="//vimeo.com/112836958"
+    data-poster="https://www.lightgalleryjs.com/images/demo/vimeo-video-poster.jpg"
+    data-sub-html="<h4>Nature</h4><p>Video by <a target='_blank' href='https://vimeo.com/charliekaye'>Charlie Kaye</a></p>">
+      <img class="img-responsive" src="https://www.lightgalleryjs.com/images/demo/vimeo-video-poster.jpg" />
+  </a>
+  <a
+    data-lg-size="1280-720"
+    data-pinterest-text="Pin it3"
+    data-tweet-text="lightGallery slide  4"
+    data-src="https://private-sharing.wistia.com/medias/mwhrulrucj"
+    data-poster="https://www.lightgalleryjs.com/images/demo/wistia-video-poster.jpeg"
+    data-sub-html="<h4>Thank You!</h4><p> Sample Wistia video </p>">
+      <img class="img-responsive" src="https://www.lightgalleryjs.com/images/demo/wistia-video-poster.jpeg" />
+  </a>
+  <a
+    data-lg-size="1280-720"
+    data-pinterest-text="Pin it3"
+    data-tweet-text="lightGallery slide  4"
+    data-video='{"source": [{"src":"https://www.lightgalleryjs.com/videos/video1.mp4", "type":"video/mp4"}], "tracks": [{"src": "https://www.lightgalleryjs.com/videos/title.txt", "kind":"captions", "srclang": "en", "label": "English", "default": "true"}], "attributes": {"preload": false, "controls": true, "playsinline": true}}'
+    data-poster="https://www.lightgalleryjs.com/images/demo/html5-video-poster.jpg"
+    data-sub-html="<h4>'Peck Pocketed' by Kevin Herron | Disney Favorite</h4>">
+      <img class="img-responsive" src="https://www.lightgalleryjs.com/images/demo/html5-video-poster.jpg" />
+  </a>
+
+</div>
+++++
+
+
+
+
+
+
+
+
+// data-video='{
+//   "source": [{
+//     "src":"/assets/videos/gallery/html5/video1.mp4'", "type":"video/mp4"
+//   }],
+//   "tracks": [
+//     "src": "{
+//       /videos/title.txt",
+//       "kind":"captions",
+//       "srclang": "en",
+//       "label": "English",
+//       "default": "true"
+//   }],
+//   "attributes": {
+//     "preload": false,
+//     "playsinline": true,
+//     "controls": true
+//   }
+// }'
+
+//  <!-- HTML5 Video --->
+// -----------------------------------------------------------------------------
+// <div id="gallery-videos-demo">
+//   <a
+//     data-lg-size="1280-720"
+//     data-video='{"source": [{"src":"/assets/videos/gallery/html5/video1.mp4", "type":"video/mp4"}], "tracks": [{"src": "{/videos/title.txt", "kind":"captions", "srclang": "en", "label": "English", "default": "true"}], "attributes": {"preload": false, "playsinline": true, "controls": true}}'
+//     data-poster="/assets/videos/gallery/video1-poster.jpg"
+//     data-sub-html="<h4>'Peck Pocketed' by Kevin Herron | Disney Favorite</h4>">
+//     <img
+//       width="300"
+//       height="100"
+//       class="img-responsive"
+//       src="/assets/videos/gallery/video1-poster.jpg"/>
+//   </a>
+//
+//   <a
+//     data-lg-size="1280-720"
+//     data-video='{"source": [{"src":"/assets/videos/gallery/html5/video1.mp4", "type":"video/mp4"}], "tracks": [{"src": "{/videos/title.txt", "kind":"captions", "srclang": "en", "label": "English", "default": "true"}], "attributes": {"preload": false, "playsinline": true, "controls": true}}'
+//     data-poster="/assets/videos/gallery/video1-poster.jpg"
+//     data-sub-html="<h4>'Peck Pocketed' by Kevin Herron | Disney Favorite</h4>">
+//     <img
+//       width="300"
+//       height="100"
+//       class="img-responsive"
+//       src="/assets/videos/gallery/video1-poster.jpg"/>
+//   </a>
+// </div>
+
+
+////
+<!-- YouTube Video --->
+<a
+  data-lg-size="1280-720"
+  data-src="//www.youtube.com/watch?v=EIUJfXk3_3w"
+  data-poster="https://img.youtube.com/vi/EIUJfXk3_3w/maxresdefault.jpg"
+  data-sub-html="<h4>Puffin Hunts Fish To Feed Puffling | Blue Planet II | BBC Earth</h4><p>On the heels of Planet Earth II's record-breaking Emmy nominations, BBC America presents stunning visual soundscapes from the series' amazing habitats.</p>"
+  >
+  <img
+    width="300"
+    height="100"
+    class="img-responsive"
+    src="https://img.youtube.com/vi/EIUJfXk3_3w/maxresdefault.jpg"
+    />
+</a>
+<!-- Vimeo Video --->
+<a
+  data-lg-size="1280-720"
+  data-src="//vimeo.com/112836958"
+  data-poster="/images/demo/vimeo-video-poster.jpg"
+  data-sub-html="<h4>Nature</h4><p>Video by <a target='_blank' href='https://vimeo.com/charliekaye'>Charlie Kaye</a></p>"
+  >
+<img
+  width="300"
+  height="100"
+  class="img-responsive"
+  src="/images/demo/vimeo-video-poster.jpg"
+  />
+</a>
+<!-- Wistia Video --->
+<a
+  data-lg-size="1280-720"
+  data-src="https://private-sharing.wistia.com/medias/mwhrulrucj"
+  data-poster="/images/demo/wistia-video-poster.jpeg"
+  data-sub-html="<h4>Thank You!</h4><p> Sample Wistia video </p>"
+  >
+<img
+  width="300"
+  height="100"
+  class="img-responsive"
+  src="/images/demo/wistia-video-poster.jpeg"
+  />
+</a>
+////
+
+////
+var thumbnailsSettings = {
+    thumbnail: true,
+    animateThumb: true,
+    currentPagerPosition: 'middle',
+    alignThumbnails: 'middle',
+    thumbWidth: 100,
+    thumbHeight: '80px',
+    thumbMargin: 5,
+    appendThumbnailsTo: '.lg-components',
+    toggleThumb: false,
+    enableThumbDrag: true,
+    enableThumbSwipe: true,
+    thumbnailSwipeThreshold: 10,
+    loadYouTubeThumbnail: true,
+    youTubeThumbSize: 1,
+    thumbnailPluginStrings: {
+        toggleThumbnails: 'Toggle thumbnails',
+    },
+};
+////
+
+
+
+++++
+<div id="grid_example_parent" class="masonry masonry-parent">
+  <div id="grid_example" class="row card-example g-0" style="position: relative; height: 616px;">
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 px-1 py-1" style="position: absolute; left: 0%; top: 0px;">
+      <div class="card">
+        <div class="bottom">
+          <a href="/assets/images/modules/gallery/mega_cities/denys-nevozhai-1_b.jpg" data-lightbox="card_example-image-group" data-caption="Man posing at the rooftop of Jin Mao Tower Shanghai - China" data-title="Man posing at the rooftop of Jin Mao Tower Shanghai - China">
+          <img id="1" class="img-fluid" src="/assets/images/modules/gallery/mega_cities/denys-nevozhai-1_b.jpg" alt="Man posing at the rooftop of Jin Mao Tower Shanghai - China" style="filter:; height: 300px">
+          </a>
+          <div class="caption">Man posing at the rooftop of Jin Mao Tower Shanghai - China</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 px-1 py-1" style="position: absolute; left: 33.3316%; top: 0px;">
+      <div class="card">
+        <div class="bottom">
+          <a href="/assets/images/modules/gallery/mega_cities/thomas-tucker_b.jpg" data-lightbox="card_example-image-group" data-caption="Sunset over Taipei City - Taiwan" data-title="Sunset over Taipei City - Taiwan">
+          <img id="2" class="img-fluid" src="/assets/images/modules/gallery/mega_cities/thomas-tucker_b.jpg" alt="Sunset over Taipei City - Taiwan" style="filter:; height: 300px">
+          </a>
+          <div class="caption">Sunset over Taipei City - Taiwan</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 px-1 py-1" style="position: absolute; left: 66.6632%; top: 0px;">
+      <div class="card">
+        <div class="bottom">
+          <a href="/assets/images/modules/gallery/mega_cities/emmad-mazhari_b.jpg" data-lightbox="card_example-image-group" data-caption="Chicago - United States" data-title="Chicago - United States">
+          <img id="3" class="img-fluid" src="/assets/images/modules/gallery/mega_cities/emmad-mazhari_b.jpg" alt="Chicago - United States" style="filter:; height: 300px">
+          </a>
+          <div class="caption">Chicago - United States</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 px-1 py-1" style="position: absolute; left: 0%; top: 308px;">
+      <div class="card">
+        <div class="bottom">
+          <a href="/assets/images/modules/gallery/mega_cities/johan-mouchet_b.jpg" data-lightbox="card_example-image-group" data-caption="The Queen Bee at the Eureka Tower - Melbourne Southbank Australia" data-title="The Queen Bee at the Eureka Tower - Melbourne Southbank Australia">
+          <img id="4" class="img-fluid" src="/assets/images/modules/gallery/mega_cities/johan-mouchet_b.jpg" alt="The Queen Bee at the Eureka Tower - Melbourne Southbank Australia" style="filter:; height: 300px">
+          </a>
+          <div class="caption">The Queen Bee at the Eureka Tower - Melbourne Southbank Australia</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+++++
