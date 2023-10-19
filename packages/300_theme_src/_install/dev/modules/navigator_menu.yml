@@ -417,7 +417,24 @@
       - title:                          Current Theme
         href:                           /pages/public/tools/previewer/current_theme/
         icon:                           theme-light-dark
+        target:                         _blank
 
+      - title:                          J1 Gallery
+        href:                           https://jekyll.one/pages/public/tools/previewer/gallery/
+        icon:                           view-dashboard-variant
+        target:                         _blank
+      - title:                          J1 Masonry
+        href:                           https://jekyll.one/pages/public/tools/previewer/masonry/
+        icon:                           view-dashboard-variant
+        target:                         _blank
+      - title:                          lightGallery
+        href:                           https://jekyll.one/pages/public/tools/previewer/lightgallery/
+        icon:                           view-dashboard-variant
+        target:                         _blank
+      - title:                          VideoJS
+        href:                           https://jekyll.one/pages/public/tools/previewer/videojs/
+        icon:                           video
+        target:                         _blank
       - title:                          Speech Converter
         href:                           https://jekyll.one/pages/public/tools/previewer/speak2me/
         icon:                           speaker
@@ -435,7 +452,6 @@
         href:                           https://jekyll.one/pages/public/tools/previewer/masonry/
         icon:                           view-dashboard-variant
         target:                         _blank
-
       - title:                          Icon Picker
         href:                           https://jekyll.one/pages/public/tools/previewer/icon-picker/
         icon:                           emoticon-cool-outline
@@ -444,12 +460,10 @@
         href:                           https://jekyll.one/pages/public/tools/previewer/country_flags/
         icon:                           flag
         target:                         _blank
-
       - title:                          Code Highlighter
         href:                           https://jekyll.one/pages/public/tools/previewer/rouge/
         icon:                           code-parentheses
         target:                         _blank
-
       - title:                          Color Palette
         href:                           https://jekyll.one/pages/public/tools/previewer/color_palette/
         icon:                           format-color-fill
