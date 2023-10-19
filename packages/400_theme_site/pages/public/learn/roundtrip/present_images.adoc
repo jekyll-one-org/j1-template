@@ -31,7 +31,7 @@ regenerate:                             false
 permalink:                              /pages/public/learn/roundtrip/present_images/
 
 resources:                              [
-                                          animate, clipboard, carousel, comments,
+                                          animate, clipboard, carousel,
                                           gallery, lightbox, lightgallery,
                                           masterslider, masonry, rouge, slick
                                         ]
@@ -480,7 +480,7 @@ horizontal and vertical space. Sort of like mason fitting stones in a wall.
 You'll have seen it in use all over the Internet!
 
 .Justified Gallery of Images + lightGallery
-gallery::jg_mega_cities[]
+gallery::jg_mega_cities[role="mb-4"]
 
 
 [role="mt-5"]

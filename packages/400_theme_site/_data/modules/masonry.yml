@@ -563,7 +563,7 @@ settings:
             options:
               muted:                    false
               preload:                  false
-              playbackRates:            [0.25, 0.5, 1, 1.5, 2]
+              autoplayFirstVideo:       true
 
             controls:                   true
             controlBar:
@@ -610,7 +610,7 @@ settings:
         options:
           download:                     false
           alignThumbnails:              left
-          autoplayFirstVideo:           false
+          autoplayFirstVideo:           true
 
       # ------------------------------------------------------------------------
       # caption options

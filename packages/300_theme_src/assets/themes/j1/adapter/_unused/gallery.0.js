@@ -55,7 +55,7 @@ regenerate:                             true
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/adapter/js/gallery.js
- # JS Adapter for J1 Gallery
+ # JS Adapter for Justified Gallery
  #
  # Product/Info:
  # https://jekyll.one
@@ -134,7 +134,7 @@ j1.adapter.gallery = (function (j1, window) {
       galleryOptions  = $.extend(true, {}, galleryDefaults, gallerySettings, frontmatterOptions);
 
       // load HTML portion for all grids
-      console.debug('loading HTML portion for all galleries configured');
+      console.debug('loading HTML portion for all Justified Galleries configured');
       _this.loadGalleryHTML(galleryOptions, galleryOptions.galleries);
 
       var dependencies_met_j1_finished= setInterval(function() {
@@ -142,8 +142,8 @@ j1.adapter.gallery = (function (j1, window) {
         var pageVisible   = (pageState == 'block') ? true : false;
         var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-        if (j1.getState() == 'finished' && pageVisible) {
-//      if (j1.getState() == 'finished' && pageVisible && atticFinished) {
+//      if (j1.getState() == 'finished' && pageVisible) {
+        if (j1.getState() == 'finished' && pageVisible && atticFinished) {
 
           // initialize state flag
           _this.setState('started');
@@ -190,8 +190,7 @@ j1.adapter.gallery = (function (j1, window) {
             // check if HTML portion of the gallery is loaded successfully
             xhrLoadState = j1.xhrDOMState['#{{gallery_id}}_parent'];
             if ( xhrLoadState === 'success' ) {
-              var $grid_{{gallery_id}} = $('#{{gallery_id}}');                  // used for later access
-
+              var $grid_{{gallery_id}} = $('#{{gallery_id}}');
               logger.info('\n' + 'initialize gallery on id: ' + '{{gallery_id}}');
 
               // run code after all images are loaded with the gallery
@@ -204,14 +203,13 @@ j1.adapter.gallery = (function (j1, window) {
                 {% endif %}
                 {{option[0] | json}}: {{option[1] | json}},
                 {% endfor %}
-              });
+              })
+              /* eslint-enable */
+              .on('jg.complete', function (evt) {
+                evt.stopPropagation();
 
-              // jadams, 2023-10-18:
-              // For unknown reason, the callback on('jg.complete') does
-              // not work as expected. Replace by a simple rimeout function
-              //
-              setTimeout (function() {
-                logger.info('\n' + 'initialize LightGallery on id: ' + '{{gallery_id}}');
+                // setup the lightbox
+                //
                 /* eslint-disable */
                 var lg      = document.getElementById("{{gallery_id}}");
                 var gallery = lightGallery(lg, {
@@ -228,7 +226,7 @@ j1.adapter.gallery = (function (j1, window) {
                   }
                 });
                 /* eslint-enable */
-              }, galleryOptions.gallery_complete_timeout);
+              });
 
             }
             clearInterval(load_dependencies['dependencies_met_html_loaded_{{gallery_id}}']);
