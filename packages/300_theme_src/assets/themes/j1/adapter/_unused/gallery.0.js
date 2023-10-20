@@ -193,6 +193,7 @@ j1.adapter.gallery = (function (j1, window) {
               var $grid_{{gallery_id}} = $('#{{gallery_id}}');
               logger.info('\n' + 'initialize gallery on id: ' + '{{gallery_id}}');
 
+              /* eslint-disable */
               // run code after all images are loaded with the gallery
               //
               $grid_{{gallery_id}}.justifiedGallery({
@@ -204,13 +205,11 @@ j1.adapter.gallery = (function (j1, window) {
                 {{option[0] | json}}: {{option[1] | json}},
                 {% endfor %}
               })
-              /* eslint-enable */
               .on('jg.complete', function (evt) {
                 evt.stopPropagation();
 
                 // setup the lightbox
                 //
-                /* eslint-disable */
                 var lg      = document.getElementById("{{gallery_id}}");
                 var gallery = lightGallery(lg, {
                   "plugins":    [{{gallery.lightGallery.plugins}}],
@@ -224,11 +223,10 @@ j1.adapter.gallery = (function (j1, window) {
                     {{option[0] | json}}: {{option[1] | json}},
                     {% endfor %}
                   }
-                });
-                /* eslint-enable */
-              });
-
-            }
+                }); // END lightGallery
+              }); // END .on('jg.complete)
+              /* eslint-enable */
+            } // END if xhrLoadState === 'success'
             clearInterval(load_dependencies['dependencies_met_html_loaded_{{gallery_id}}']);
           }, 10); // END dependencies_met_html_loaded
 

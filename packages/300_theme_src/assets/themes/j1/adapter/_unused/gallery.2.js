@@ -142,7 +142,9 @@ j1.adapter.gallery = (function (j1, window) {
         var pageVisible   = (pageState == 'block') ? true : false;
         var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-        if (j1.getState() == 'finished' && pageVisible) {
+//      if (j1.getState() == 'finished' && pageVisible) {
+        if (j1.getState() == 'finished' && pageVisible && atticFinished) {
+
           // initialize state flag
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());
@@ -155,7 +157,7 @@ j1.adapter.gallery = (function (j1, window) {
           logger.info('\n' + 'module initialized successfully');
 
           clearInterval(dependencies_met_j1_finished);
-        } // END 'finished' && 'pageVisible'
+        }
       }, 10);
     },
 
@@ -207,11 +209,34 @@ j1.adapter.gallery = (function (j1, window) {
 
                 // setup the lightbox
                 //
-                logger.info('\n' + 'dyn_loader: callback "jg.complete" entered on id: ' + '{{gallery_id}}');
-                logger.info('\n' + 'dyn_loader: initialize lightGallery on id: ' + '{{gallery_id}}');
+                  logger.info('\n' + 'dyn_loader: initialize lightGallery on id: ' + '{{gallery_id}}');
 
-                var lg = document.getElementById("{{gallery_id}}");
-                lightGallery(lg, {
+                  var lg      = document.getElementById("{{gallery_id}}");
+                  var gallery = lightGallery(lg, {
+                    "plugins":    [{{gallery.lightGallery.plugins}}],
+                    {% for option in gallery.lightGallery.options %}
+                    {{option[0] | json}}: {{option[1] | json}},
+                    {% endfor %}
+                    "galleryId":  "{{gallery_id}}",
+                    "selector":   ".lg-item",
+                    "videojsOptions": {
+                      {% for option in gallery.lightGallery.videojsOptions %}
+                      {{option[0] | json}}: {{option[1] | json}},
+                      {% endfor %}
+                    }
+                  }); // END lightGallery
+              }); // END .on('jg.complete)
+              /* eslint-enable */
+
+              // jadams, 2023-10-18:
+              // For unknown reason, the callback on('jg.complete') does
+              // not work as expected. Replace by a simple rimeout function
+              //
+              setTimeout (function() {
+                logger.info('\n' + 'dyn_loader2: initialize lightGallery on id: ' + '{{gallery_id}}');
+                /* eslint-disable */
+                var lg      = document.getElementById("{{gallery_id}}");
+                var gallery = lightGallery(lg, {
                   "plugins":    [{{gallery.lightGallery.plugins}}],
                   {% for option in gallery.lightGallery.options %}
                   {{option[0] | json}}: {{option[1] | json}},
@@ -223,10 +248,9 @@ j1.adapter.gallery = (function (j1, window) {
                     {{option[0] | json}}: {{option[1] | json}},
                     {% endfor %}
                   }
-                }); // END lightGallery
-
-              }); // END justifiedGallery on('jg.complete)
-              /* eslint-enable */
+                });
+                /* eslint-enable */
+              }, galleryOptions.gallery_complete_timeout);
 
               clearInterval(load_dependencies['dependencies_met_html_loaded_{{gallery_id}}']);
             } // END  if xhrLoadState === 'success'

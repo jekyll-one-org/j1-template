@@ -196,7 +196,7 @@ video platform.
 wistia::29b0fbf547[role="mt-5 mb-4"]
 
 [role="mt-5"]
-=== Vimeo Video
+=== Vimeo
 
 Vimeo is an online video-sharing platform that allows users to upload,
 share, and view videos. It was founded in 2004 by a group of filmmakers

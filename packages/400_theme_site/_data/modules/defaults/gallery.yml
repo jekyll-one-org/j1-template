@@ -45,7 +45,7 @@ defaults:
   #
   enabled:                              false                                    # needed for j1.layout_shim_generator.html
   xhr_data_path:                        /assets/data/galeries
-  gallery_complete_timeout:             500
+  gallery_complete_timeout:             1000
 
   # ------------------------------------------------------------------------
   # CSS filter options
