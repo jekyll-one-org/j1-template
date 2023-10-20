@@ -1,0 +1,165 @@
+=== J1 Integration
+
+J1 Theme has fully integrated Owl Carousel V1. For the typical usage of a
+slide show with your content *no* manual configuration, *no* carousel
+initialization and *no* HTML code is needed. J1 Owl Carousel instances are
+created *automatically* based on a single *configuration* step with the Owl
+Carousel YAML file `j1_carousel_mgr.yml`.
+
+==== Module sources
+
+The sources for J1 OWL Carousel are stored within the *asset path*
+of J1Template. You'll find all necessary data files under
+`/assets/themes/j1/owl_carousel_v1`:
+
+.Structure of the J1 OWL Carousel application tree (base components)
+----
+  ├───css
+  │   │   owl.carousel.css
+  │   │   owl.carousel.min.css
+  │   │   owl.transitions.css
+  │   │   owl.transitions.min.css
+  │   │
+  │   └───themes
+  │           j1_template.css
+  │           j1_samples.css
+  ├───images
+  │       ajax-loader.gif
+  │       grabbing.jpg
+  │       owl.video.play.jpg
+  └───js
+          owl.carousel.js
+          owl.carousel.min.js
+----
+
+////
+==== Configuration
+
+==== Initialization
+
+==== Customization
+
+==== Plugin API
+
+Here is the basic structure of the lightgallery module.
+
+[source, js]
+----
+(function($, window, document, undefined) {
+
+    'use strict';
+
+    var defaults = {
+        fullScreen: true
+    };
+
+    var Fullscreen = function(element) {
+
+        // You can access all lightgallery variables and functions like this.
+        this.core = $(element).data('lightGallery');
+
+        this.$el = $(element);
+        this.core.s = $.extend({}, defaults, this.core.s)
+
+        this.init();
+
+        return this;
+    }
+
+    Fullscreen.prototype.init = function() {
+
+    };
+
+    /**
+    * Destroy function must be defined.
+    * lightgallery will automatically call your module destroy function
+    * before destroying the gallery
+    */
+    Fullscreen.prototype.destroy = function() {
+
+    }
+
+    // Attach your module with lightgallery
+    $.fn.lightGallery.modules.fullscreen = Fullscreen;
+
+
+})(jQuery, window, document);
+----
+
+
+==== Sass variables
+
+[cols="4,3,5",options="header", role="table-responsive mt-3"]
+|=======================================================================
+|Name |value |Description
+|`$backdrop-opacity` |`1` |Gallery backdrop opacity
+
+|`$lg-toolbar-bg` |`rgba(0, 0, 0, 0.45)` |Toolbar background color
+
+|`$lg-border-radius-base` |`2px` |Base border radius for the gallery
+elements
+
+|`$lg-theme-highlight` |`rgb(169, 7, 7)` |Gallery highlight areas like
+progressbar active bg, thumbnails border..
+
+|`$lg-icon-bg` |`rgba(0, 0, 0, 0.45)` |Gallery icons background color
+
+|`$lg-icon-color` |`#999` |Gallery icons color
+
+|`$lg-counter-color` |`#e6e6e6` |Gallery counter color
+
+|`$lg-counter-font-size` |`16px` |Gallery counter font size
+
+|`$lg-next-prev-bg` |`$lg-icon-bg` |Next prev controls background color
+
+|`$lg-next-prev-color` |`$lg-icon-color` |Next prev controls icon color
+
+|`$lg-next-prev-hover-color` |`$lg-icon-hover-color` |Next prev controls
+icon color on hover
+
+|`$lg-progress-bar-bg` |`#333` |Progress bar background color
+
+|`$lg-progress-bar-active-bg` |`$lg-theme-highlight` |Progress bar
+highlight color
+
+|`$lg-progress-bar-height` |`5px` |Height of the progress bar
+
+|`$zoom-transition-duration` |`0.3s` |Image zoom animation duration..
+
+|`$lg-sub-html-bg` |`rgba(0, 0, 0, 0.45)` |Sub html container background
+color
+
+|`$lg-sub-html-color` |`#EEE` |Sub html color
+
+|`$lg-thumb-toggle-bg` |`#0D0A0A` |Thumbnail icon toggle icon background
+color
+
+|`$lg-thumb-toggle-color` |`$lg-icon-color` |Thumbnail icon toggle icon
+color
+
+|`$lg-thumb-toggle-hover-color` |`$lg-icon-hover-color` |Thumbnail icon
+toggle icon color on hover
+
+|`$lg-thumb-bg` |`#0D0A0A` |Thumbnail container background color
+
+|`$zindex-outer` |`1050` |Gallery outer div z-index
+
+|`$zindex-progressbar` |`1080` |Gallery autoplay progress bar z-index
+
+|`$zindex-controls` |`1080` |Gallery controls z-index
+
+|`$zindex-toolbar` |`1080` |Gallery toolbar z-index
+
+|`$zindex-subhtml` |`1080` |Gallery sub html container z-index
+
+|`$zindex-thumbnail` |`1080` |Gallery thumbnail container z-index
+
+|`$zindex-pager` |`1080` |Gallery pager z-index
+
+|`$zindex-playbutton` |`1080` |Video play button z-index
+
+|`$zindex-item` |`1060` |Gallery slide item z-index
+
+|`$zindex-backdrop` |`1040` |Gallery backdrop z-index
+|=======================================================================
+////

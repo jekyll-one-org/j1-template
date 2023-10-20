@@ -50,7 +50,7 @@ settings:
       # ------------------------------------------------------------------------
       #
       gallery_options:
-        rowHeight:                    300
+        rowHeight:                    250
         gutters:                      3
 
       # ------------------------------------------------------------------------
@@ -224,7 +224,7 @@ settings:
       # ------------------------------------------------------------------------
       #
       gallery_options:
-        rowHeight:                    200
+        rowHeight:                    250
         gutters:                      3
 
       # ------------------------------------------------------------------------
@@ -394,7 +394,7 @@ settings:
           name:                         Carpool Karaoke Adele
           type:                         youtube
           size:                         "1280-720"
-          source:                       "https//youtube.com/watch?v=Nck6BZga7TQ"
+          source:                       "//youtube.com/watch?v=Nck6BZga7TQ"
           pinterest_prefix:             Pin video
           tweet_prefix:                 Try video
           description: >
@@ -435,7 +435,7 @@ settings:
           name:                         Carpool Karaoke Michelle Obama
           type:                         youtube
           size:                         "1280-720"
-          source:                       "https//youtube.com/watch?v=ln3wAdRAim4"
+          source:                       "//youtube.com/watch?v=ln3wAdRAim4"
           pinterest_prefix:             Pin video
           tweet_prefix:                 Try video
           description: >
@@ -467,7 +467,7 @@ settings:
       # ------------------------------------------------------------------------
       #
       gallery_options:
-        rowHeight:                    200
+        rowHeight:                    250
         gutters:                      3
 
       # ------------------------------------------------------------------------
@@ -512,7 +512,7 @@ settings:
           name:                         Carpool Karaoke Lady Gaga
           type:                         youtube
           size:                         "1280-720"
-          source:                       "https//youtube.com/watch?v=Nck6BZga7TQ"
+          source:                       "//youtube.com/watch?v=Nck6BZga7TQ"
           pinterest_prefix:             Pin video
           tweet_prefix:                 Try video
           description: >
@@ -533,7 +533,7 @@ settings:
           name:                         Last Carpool Karaoke
           type:                         youtube
           size:                         "1280-720"
-          source:                       "https//youtube.com/watch?v=nV8UZJNBY6Y"
+          source:                       "//youtube.com/watch?v=nV8UZJNBY6Y"
           pinterest_prefix:             Pin video
           tweet_prefix:                 Try video
           description: >
@@ -610,7 +610,7 @@ settings:
           name:                         Voice Kids - Constance
           type:                         youtube
           size:                         "1280-720"
-          source:                       "https//youtube.com/watch?v=aQqPgLMgO-I"
+          source:                       "//youtube.com/watch?v=aQqPgLMgO-I"
           pinterest_prefix:             Pin video
           tweet_prefix:                 Try video
           description: >
@@ -631,7 +631,7 @@ settings:
           name:                         Voice Kids - Elisa
           type:                         youtube
           size:                         "1280-720"
-          source:                       "https//youtube.com/watch?v=Bl6tkAgaP1g"
+          source:                       "//youtube.com/watch?v=Bl6tkAgaP1g"
           pinterest_prefix:             Pin video
           tweet_prefix:                 Try video
           description: >
@@ -702,7 +702,7 @@ settings:
       # ------------------------------------------------------------------------
       #
       gallery_options:
-        rowHeight:                    200
+        rowHeight:                    250
         gutters:                      3
 
       # ------------------------------------------------------------------------
@@ -747,7 +747,7 @@ settings:
           name:                         Forever 21
           type:                         vimeo
           size:                         "1280-720"
-          source:                       "https//vimeo.com/179528528"
+          source:                       "//vimeo.com/179528528"
           pinterest_prefix:             Pin video
           tweet_prefix:                 Try video
           description: >
@@ -766,7 +766,7 @@ settings:
           name:                         Forever 21
           type:                         vimeo
           size:                         "1280-720"
-          source:                       "https//vimeo.com/202117650"
+          source:                       "//vimeo.com/202117650"
           pinterest_prefix:             Pin video
           tweet_prefix:                 Try video
           description: >
@@ -778,7 +778,6 @@ settings:
             source:                     stay-colorful-poster.jpg
           caption:
             text:                       "Vimeo &middot; Forever 21 - Stay Colorful, Babe!"
-
 
     # --------------------------------------------------------------------------
     # Online VIDEO (DailyMotion)
@@ -796,7 +795,7 @@ settings:
       # ------------------------------------------------------------------------
       #
       gallery_options:
-        rowHeight:                    200
+        rowHeight:                    250
         gutters:                      3
 
       # ------------------------------------------------------------------------
@@ -860,7 +859,7 @@ settings:
           name:                         SELF Channel
           type:                         dailymotion
           size:                         "1280-720"
-          source:                       "https//dai.ly/x87ycik"
+          source:                       "//dai.ly/x87ycik"
           pinterest_prefix:             Pin video
           tweet_prefix:                 Try video
           description: >

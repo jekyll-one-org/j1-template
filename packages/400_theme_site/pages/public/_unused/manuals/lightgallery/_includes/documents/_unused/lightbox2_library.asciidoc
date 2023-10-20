@@ -1,0 +1,233 @@
+== Lightbox V2 API
+
+The current major version for Lightbox used by J1Template is version 2.9.0
+for jQuery. Lightbox is fully integrated with the template system. The module
+is enabled by default and automatically loaded and initialized. Lightbox is
+controlled by it's configuration (file) `j1_lightbox.yml`, located
+under `_data/modules`.
+
+=== Initialization
+
+The initialization of Lightbox is done by *J1Template* in a 4-step-sequence.
+By default,`Lightbox` is *enabled* and initialized *automatically*.
+
+==== CSS load
+
+The first step of initialization is to load the CSS data.
+
+[start=1]
+. The CSS data for Lightbox is included by the `CSS loader` component
+  of J1Template at the top of every page within the `<HEAD>` section:
+
+.Include the CSS
+[source, html]
+----
+<!-- Styles for J1 LightBox -->
+<link rel="stylesheet" href="/assets/themes/j1/Lightbox V2/css/lightbox.min.css">
+----
+
+==== JS load
+
+As a second step the JavaScript gets loaded. Lightbox uses lightbox.js
+(lightbox.min.js for the minified version).
+
+[start=2]
+. The Javascript portion of Lightbox is included by the `JS loader`
+  component at the bottom of a page, before the closing `</HTML>` tag:
+
+.Include the Javascript
+[source, html]
+----
+<!-- JS components for J1 LightBox -->
+<script src="/assets/themes/j1/Lightbox V2/js/lightbox.min.js"></script>
+----
+
+==== HTML Markup
+
+To enable `Lightbox` on images, a trigger `event` is needed as well as
+`data attributes` to hook in and control the `Lightbox` library.
+
+To use Lightbox with image data, images are linked by HTML `anchor` elements.
+The anchor element `<a> .. </a>` enables on-click events and allows to place
+`data attributes` to hook in the library and pass data to the software.
+
+.Anchor element to enable Lightbox for an image
+[source, html]
+----
+<a href="</path/to/image>" data-lightbox="<value>" data-title="<title>"></a>
+----
+
+The on-click `event` triggers the `jQuery` system and the data attribute
+`data-lightbox` binds (hooks) this event to `Lightbox`, pass data `values`
+to process the `image` data referenced by the parameter `href` of the anchor
+element.
+
+==== JS initialization
+
+[start=3]
+. Finally, the Lightbox library is being initialized by the `JS Initializer`
+  component on the `document-ready` event.
+
+.Initialize the Javascript portion of Lightbox
+[source, html]
+----
+<!-- ++++++++++++++ -->
+<!-- Load J1 Initializers -->
+<!-- ++++++++++++++++++++ -->
+<!-- Enable Initializer for J1 LightBox -->
+  <script type="text/javascript"
+    src="/assets/themes/j1/j1/js/initializers/j1_lightbox.js">
+  </script>
+    ...
+    ...
+<!-- Run J1 Initializers on DocumentReady Event -->
+<!-- ++++++++++++++++++++++++++++++++++++++++++ -->
+  <script type="text/javascript">
+  $(document).ready(function() {
+
+<!-- J1 Lightbox -->
+<!-- Initialize the Lightbox -->
+    J1Lightbox.init();
+    ...
+    ...
+  });
+  </script>
+----
+
+=== Options
+
+The `Lightbox` library supports several options to control how images are
+displayed in size, offer parameters to change e.g. the animation or
+the placement of images.
+
+If you want to change any of the default options, the `option` method can
+be used to set individual values to change the behaviour of `Lightbox`. To
+change any of the (default) options, the (Javascript) `lightbox` object
+provides the method `option` to set individual values.
+
+[source, html]
+----
+<script>
+  lightbox.option({
+    resizeDuration: 200,
+    wrapAround:     true
+  })
+</script>
+----
+
+Find with the following all options available with `Lightbox` to change
+the behaviour of the module for your specific needs.
+
+[cols="^3a,^2a,^5a", options="header", width="100%", role="rtable mt-3"]
+|===
+|Option |Default |Description
+
+|`alwaysShowNavOnTouchDevices`
+|false
+|If `true`, the left and right navigation arrows which appear on mouse hover
+when viewing image sets will always be visible on devices which support
+touch.
+
+|`albumLabel`
+|Image %1 of %2
+|The text displayed below the caption when viewing an image set. The default
+text shows the current image number and the total number of images in the set.
+
+|`disableScrolling`
+|false
+|If `true`, prevent the page from scrolling while Lightbox is open. This
+works by settings overflow hidden on the body.
+
+|`fadeDuration`
+|600
+|The time it takes for the Lightbox container and overlay to fade in and
+out, in milliseconds.
+
+|`fitImagesInViewport`
+|true
+|If `true`, resize images that would extend outside of the viewport so
+they fit neatly inside of it. This saves the user from having to scroll
+to see the entire image.
+
+|`imageFadeDuration`
+|600
+|The time it takes for the image to fade in once loaded, in milliseconds.
+
+|`maxWidth`
+|no default
+|If set, the image width will be limited to this number, in pixels.
+
+|`maxHeight`
+|no default
+|If set, the image height will be limited to this number, in pixels.
+
+|`positionFromTop`
+|50
+|The distance from top of viewport that the Lightbox container will
+appear, in pixels.
+
+|`resizeDuration`
+|700
+|The time it takes for the Lightbox container to animate its width and
+height when transition between different size images, in milliseconds.
+
+|`showImageNumberLabel`
+|true
+|If `false`, the text indicating the current image number and the total
+number of images in set (Ex. "image 2 of 4") will be hidden.
+
+|`wrapAround`
+|true
+|If `true`, when a user reaches the last image in a set, the right
+navigation arrow will appear and they will be to continue moving
+forward which will take them back to the first image in the set.
+
+|===
+
+=== Data Attributes
+
+At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
+gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
+ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+
+==== Attribute `data-lightbox`
+
+Add the `data-lightbox` attribute to *any* image link to enable Lightbox.
+For the value of the attribute, use a:
+
+* a *unique* name, e.g `data-lightbox="image-1"` for *single* images
+* a *group* name, e.g `data-lightbox="image-group-1"` for a *group* of images
+
+.Single images
+[source, html]
+----
+<a href="image-1.jpg" data-lightbox="image-1"></a>
+<a href="image-2.jpg" data-lightbox="image-2"></a>
+----
+
+If you have a *group* of related images that you would like to combine them into
+a *set*, use the *same* `data-lightbox` attribute *value* for *all* images of
+that group.
+
+.Image group
+[source, html]
+----
+<a href="image-1.jpg" data-lightbox="image-group-1"></a>
+<a href="image-2.jpg" data-lightbox="image-group-1"></a>
+----
+
+==== Attribute `data-title`
+
+Add a `data-title` attribute to the anchor element if you want to show a
+caption for the image displayed by Lightbox.
+
+The following example:
+[source, html]
+----
+<a href="image-1.jpg" data-lightbox="roadtrip" data-title="Caption text #1">Image #1</a>
+<a href="image-2.jpg" data-lightbox="roadtrip" data-title="Caption text #2">Image #2</a>
+<a href="image-3.jpg" data-lightbox="roadtrip" data-title="Caption text #3">Image #3</a>
+----
+
+*groups* three images but sets individual *caption text* each picture.

@@ -1,0 +1,73 @@
+=== J1 Integration
+
+The *configuration* file of the Lightbox module is called `j1_lightbox.yml`.
+It  includes the *default values* used for the initialization.
+
+[source, yml]
+----
+enabled:                      true
+alwaysShowNavOnTouchDevices:  false
+albumLabel:                   Image %1 of %2
+disableScrolling:             false
+fadeDuration:                 600
+fitImagesInViewport:          true
+imageFadeDuration:            600
+maxWidth:
+maxHeight:
+positionFromTop:              50
+resizeDuration:               700
+showImageNumberLabel:         true
+wrapAround:                   true
+----
+
+==== Module sources
+
+The sources for J1 Lightbox are stored within the *asset path*
+of J1Template. You'll find all necessary data files under
+`/assets/themes/j1/lightbox2`:
+
+.Structure of the J1 Lightbox application tree (base components)
+----
+
+├── css
+│   ├── lightbox.css
+│   └── lightbox.min.css
+├── images
+│   ├── close.jpg
+│   ├── loading.gif
+│   ├── next.jpg
+│   └── prev.jpg
+└── js
+    ├── lightbox.js
+    ├── lightbox.min.js
+    ├── lightbox.min.map
+    ├── lightbox-plus-jquery.js
+    ├── lightbox-plus-jquery.min.js
+    └── lightbox-plus-jquery.min.map
+
+----
+
+==== Configuration
+
+The *configuration* file of the module is called `j1_lightbox.yml`.
+It  includes the *default values* used for the initialization.
+
+NOTE: The *default values* used for the initialization are taken
+from the module.
+
+[source, yml]
+----
+enabled:                      true
+alwaysShowNavOnTouchDevices:  false
+albumLabel:                   Image %1 of %2
+disableScrolling:             false
+fadeDuration:                 600
+fitImagesInViewport:          true
+imageFadeDuration:            600
+maxWidth:
+maxHeight:
+positionFromTop:              50
+resizeDuration:               700
+showImageNumberLabel:         true
+wrapAround:                   true
+----

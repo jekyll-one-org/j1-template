@@ -1,0 +1,560 @@
+Instructions & Help
+~~~~~~~~~~~~~~~~~~~
+
+The link:faq/index.html[FAQ] has instructions on asking for help,
+solutions to common problems, and how-to examples. First-time jQuery
+users can check out the Colorbox link:guide/index.html[Beginner's
+Guide]. Intermediate users can probably glean everything needed by
+view-source'ing the demo pages.
+
+Usage
+~~~~~
+
+Colorbox accepts settings from an object of key/value pairs, and can be
+assigned to any HTML element.
+
+--------------------------------------------------------
+// Format:
+$(selector).colorbox({key:value, key:value, key:value});
+--------------------------------------------------------
+
+------------------------------------------------------------------------
+// Examples:
+// Image links displayed as a group
+$('a.gallery').colorbox({rel:'gal'});
+
+// Ajax
+$('a#login').colorbox();
+
+// Called directly, without assignment to an element:
+$.colorbox({href:"thankyou.html"});
+
+// Called directly with HTML
+$.colorbox({html:"<h1>Welcome</h1>"});
+
+// Colorbox can accept a function in place of a static value:
+$("a.gallery").colorbox({rel: 'gal', title: function(){
+  var url = $(this).attr('href');
+  return '<a href="' + url + '" target="_blank">Open In New Window</a>';
+}});
+------------------------------------------------------------------------
+
+Settings
+~~~~~~~~
+
+Property
+
+Default
+
+Description
+
+transition
+
+"elastic"
+
+The transition type. Can be set to "elastic", "fade", or "none".
+
+speed
+
+350
+
+Sets the speed of the fade and elastic transitions, in milliseconds.
+
+href
+
+false
+
+This can be used as an alternative anchor URL or to associate a URL for
+non-anchor elements such as images or form buttons.
+`$("h1").colorbox({href:"welcome.html"});`
+
+title
+
+false
+
+This can be used as an anchor title alternative for Colorbox.
+
+rel
+
+false
+
+This can be used as an anchor rel alternative for Colorbox. This allows
+the user to group any combination of elements together for a gallery, or
+to override an existing rel so elements are not grouped together.
+`$("a.gallery").colorbox({rel:"group1"});` Note: The value can also be
+set to 'nofollow' to disable grouping.
+
+scalePhotos
+
+true
+
+If true, and if maxWidth, maxHeight, innerWidth, innerHeight, width, or
+height have been defined, Colorbox will scale photos to fit within the
+those values.
+
+scrolling
+
+true
+
+If false, Colorbox will hide scrollbars for overflowing content. This
+could be used on conjunction with the resize method (see below) for a
+smoother transition if you are appending content to an already open
+instance of Colorbox.
+
+opacity
+
+0.85
+
+The overlay opacity level. Range: 0 to 1.
+
+open
+
+false
+
+If true, Colorbox will immediately open.
+
+returnFocus
+
+true
+
+If true, focus will be returned when Colorbox exits to the element it
+was launched from.
+
+trapFocus
+
+true
+
+If true, keyboard focus will be limited to Colorbox's navigation and
+content.
+
+fastIframe
+
+true
+
+If false, the loading graphic removal and onComplete event will be
+delayed until iframe's content has completely loaded.
+
+preloading
+
+true
+
+Allows for preloading of 'Next' and 'Previous' content in a group, after
+the current content has finished loading. Set to false to disable.
+
+overlayClose
+
+true
+
+If false, disables closing Colorbox by clicking on the background
+overlay.
+
+escKey
+
+true
+
+If false, will disable closing colorbox on 'esc' key press.
+
+arrowKey
+
+true
+
+If false, will disable the left and right arrow keys from navigating
+between the items in a group.
+
+loop
+
+true
+
+If false, will disable the ability to loop back to the beginning of the
+group when on the last element.
+
+data
+
+false
+
+For submitting GET or POST values through an ajax request. The data
+property will act exactly like jQuery's
+http://api.jquery.com/load/[.load()] data argument, as Colorbox uses
+.load() for ajax handling.
+
+className
+
+false
+
+Adds a given class to colorbox and the overlay.
+
+fadeOut
+
+300
+
+Sets the fadeOut speed, in milliseconds, when closing Colorbox.
+
+closeButton
+
+true
+
+Set to false to remove the close button.
+
+Internationalization
+
+current
+
+"image \{current} of \{total}"
+
+Text or HTML for the group counter while viewing a group. \{current} and
+\{total} are detected and replaced with actual numbers while Colorbox
+runs.
+
+previous
+
+"previous"
+
+Text or HTML for the previous button while viewing a group.
+
+next
+
+"next"
+
+Text or HTML for the next button while viewing a group.
+
+close
+
+"close"
+
+Text or HTML for the close button. The 'esc' key will also close
+Colorbox.
+
+xhrError
+
+"This content failed to load."
+
+Error message given when ajax content for a given URL cannot be loaded.
+
+imgError
+
+"This image failed to load."
+
+Error message given when a link to an image fails to load.
+
+Content Type
+
+iframe
+
+false
+
+If true, specifies that content should be displayed in an iFrame.
+
+inline
+
+false
+
+If true, content from the current document can be displayed by passing
+the href property a jQuery selector, or jQuery object.
+
+-----------------------------------------------------
+// Using a selector:
+$("#inline").colorbox({inline:true, href:"#myForm"});
+// Using a jQuery object:
+var $form = $("#myForm");
+$("#inline").colorbox({inline:true, href:$form});
+-----------------------------------------------------
+
+html
+
+false
+
+For displaying a string of HTML or text:
+`$.colorbox({html:"<p>Hello</p>"});`
+
+photo
+
+false
+
+If true, this setting forces Colorbox to display a link as a photo. Use
+this when automatic photo detection fails (such as using a url like
+'photo.php' instead of 'photo.jpg')
+
+ajax
+
+This property isn't actually used as Colorbox assumes all hrefs should
+be treated as either ajax or photos, unless one of the other content
+types were specified.
+
+Dimensions
+
+width
+
+false
+
+Set a fixed total width. This includes borders and buttons. Example:
+"100%", "500px", or 500
+
+height
+
+false
+
+Set a fixed total height. This includes borders and buttons. Example:
+"100%", "500px", or 500
+
+innerWidth
+
+false
+
+This is an alternative to 'width' used to set a fixed inner width. This
+excludes borders and buttons. Example: "50%", "500px", or 500
+
+innerHeight
+
+false
+
+This is an alternative to 'height' used to set a fixed inner height.
+This excludes borders and buttons. Example: "50%", "500px", or 500
+
+initialWidth
+
+300
+
+Set the initial width, prior to any content being loaded.
+
+initialHeight
+
+100
+
+Set the initial height, prior to any content being loaded.
+
+maxWidth
+
+false
+
+Set a maximum width for loaded content. Example: "100%", 500, "500px"
+
+maxHeight
+
+false
+
+Set a maximum height for loaded content. Example: "100%", 500, "500px"
+
+Slideshow
+
+slideshow
+
+false
+
+If true, adds an automatic slideshow to a content group / gallery.
+
+slideshowSpeed
+
+2500
+
+Sets the speed of the slideshow, in milliseconds.
+
+slideshowAuto
+
+true
+
+If true, the slideshow will automatically start to play.
+
+slideshowStart
+
+"start slideshow"
+
+Text for the slideshow start button.
+
+slideshowStop
+
+"stop slideshow"
+
+Text for the slideshow stop button
+
+Positioning
+
+fixed
+
+false
+
+If true, Colorbox will be displayed in a fixed position within the
+visitor's viewport. This is unlike the default absolute positioning
+relative to the document.
+
+top
+
+false
+
+Accepts a pixel or percent value (50, "50px", "10%"). Controls
+Colorbox's vertical positioning instead of using the default position of
+being centered in the viewport.
+
+bottom
+
+false
+
+Accepts a pixel or percent value (50, "50px", "10%"). Controls
+Colorbox's vertical positioning instead of using the default position of
+being centered in the viewport.
+
+left
+
+false
+
+Accepts a pixel or percent value (50, "50px", "10%"). Controls
+Colorbox's horizontal positioning instead of using the default position
+of being centered in the viewport.
+
+right
+
+false
+
+Accepts a pixel or percent value (50, "50px", "10%"). Controls
+Colorbox's horizontal positioning instead of using the default position
+of being centered in the viewport.
+
+reposition
+
+true
+
+Repositions Colorbox if the window's resize event is fired.
+
+Retina Images
+
+retinaImage
+
+false
+
+If true, Colorbox will scale down the current photo to match the
+screen's pixel ratio
+
+retinaUrl
+
+false
+
+If true and the device has a high resolution display, Colorbox will
+replace the current photo's file extention with the
+retinaSuffix+extension
+
+retinaSuffix
+
+"@2x.$1"
+
+If retinaUrl is true and the device has a high resolution display, the
+href value will have its extention extended with this suffix. For
+example, the default value would change `my-photo.jpg` to
+`my-photo@2x.jpg`
+
+Callbacks
+
+onOpen
+
+false
+
+Callback that fires right before Colorbox begins to open.
+
+onLoad
+
+false
+
+Callback that fires right before attempting to load the target content.
+
+onComplete
+
+false
+
+Callback that fires right after loaded content is displayed.
+
+onCleanup
+
+false
+
+Callback that fires at the start of the close process.
+
+onClosed
+
+false
+
+Callback that fires once Colorbox is closed.
+
+Public Methods
+~~~~~~~~~~~~~~
+
+[width="100%",cols="100%",]
+|=======================================================================
+a|
+$.colorbox()
+This method allows you to call Colorbox without having to assign it to
+an element. `$.colorbox({href:"login.php"});`
+
+a|
+$.colorbox.next() +
+ $.colorbox.prev()
+These methods moves to the next and previous items in a group and are
+the same as pressing the 'next' or 'previous' buttons.
+
+a|
+$.colorbox.close()
+This method initiates the close sequence, which does not immediately
+complete. The lightbox will be completely closed only when the
+`cbox_closed` event / `onClosed` callback is fired.
+
+a|
+$.colorbox.element()
+This method is used to fetch the current HTML element that Colorbox is
+associated with. Returns a jQuery object containing the element.
+`var $element = $.colorbox.element();`
+
+a|
+$.colorbox.resize()
+This allows Colorbox to be resized based on its own auto-calculations,
+or to a specific size. This must be called manually after Colorbox's
+content has loaded. The optional parameters object can accept `width` or
+`innerWidth` and `height` or `innerHeight`. Without specifying a width
+or height, Colorbox will attempt to recalculate the height of its
+current content.
+
+a|
+$.colorbox.remove()
+Removes all traces of Colorbox from the document. Not the same as
+$.colorbox.close(), which tucks colorbox away for future use.
+|=======================================================================
+
+Event Hooks
+~~~~~~~~~~~
+
+These event hooks fire at the same time as their corresponding callbacks
+(i.e. cbox_complete & onComplete), but can be used to make a universal
+change to Colorbox, while callbacks are only applied to selected
+elements.
+
+---------------------------------------------------------------------------------------
+// Example of using an event listener and public method to build a primitive slideshow:
+$(document).bind('cbox_complete', function(){
+  setTimeout($.colorbox.next, 1500);
+});
+---------------------------------------------------------------------------------------
+
+[width="100%",cols="100%",]
+|=======================================================================
+a|
+cbox_open
+triggers when Colorbox is first opened, but after a few key variable
+assignments take place.
+
+a|
+cbox_load
+triggers at the start of the phase where content type is determined and
+loaded.
+
+a|
+cbox_complete
+triggers when the transition has completed and the newly loaded content
+has been revealed.
+
+a|
+cbox_cleanup
+triggers as the close method begins.
+
+a|
+cbox_closed
+triggers as the close method ends.
+|=======================================================================
+
+'''''
+

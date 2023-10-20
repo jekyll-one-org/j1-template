@@ -1,0 +1,123 @@
+---
+title:                                  Lightboxes
+title_extention:                        Integrated Lightbox Modules for J1 Template
+tagline:                                Present Images Enlarged
+
+date:                                   2022-08-14
+#last_modified:                         2023-01-01
+
+description: >
+                                        J1 Template support lightboxes out of the box. A lightbox is a
+                                        helper module that displays enlarged, almost screen-filling
+                                        versions of images and videos while dimming the rest of the
+                                        web page. Lightbox2 is fully integrated to be used as a
+                                        standalone module or as a helper under the hood by other
+                                        modules focusing on image data like galleries, sliders,
+                                        or carousels.
+keywords: >
+                                        Jekyll, JekyllOne, Theme, User Guide, Module, Lightbox, Lightbox2,
+                                        Manual
+
+categories:                             [ Manual, Module ]
+tags:                                   [ Lightbox, LightGallery ]
+
+image:
+  path:                                 /assets/images/modules/attics/1920x1280/isaac-davis.jpg
+  width:                                1920
+  height:                               1280
+
+tts:                                    true
+comments:                               false
+regenerate:                             false
+permalink:                              /pages/public/manuals/modules/lightbox/
+
+resources:                              [
+                                          animate, clipboard, lightbox, lightGallery, justifiedGallery, video_js,
+                                          vimeo_player, vimeo_froogaloop, rouge
+                                        ]
+
+resource_options:
+  - attic:
+      slides:
+        - url:                          /assets/images/modules/attics/1920x1280/isaac-davis.jpg
+          alt:                          Photo by Isaac Davis on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Isaac Davis
+            href:                       https://unsplash.com/@isaacdavis
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="all" %}
+
+// CAUTION: This page is under construction. An updated version will be
+// available soon.
+
+// https://stackoverflow.com/questions/tagged/lightbox2?tab=active&page=5
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+J1 Theme support lightboxes out of the box. A *lightbox* is a helper module
+that displays enlarged, almost screen-filling versions of images and videos
+while dimming the rest of the web page. The technique used by Lightbox gained
+widespread popularity due to its simple and elegant style.
+
+The term Lightbox refers to the Lightbox V2 Javascript library written by
+Lokesh Dhakar. The library is fully integrated to be used as a standalone
+module or as a helper under the hood by other modules focusing on image data
+like galleries, sliders, or carousels.
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+== Lightbox V2
+
+The current major version for Lightbox used by J1Template is version 2.9.0
+for jQuery. Lightbox is fully integrated with the template system. The module
+is enabled by default and automatically loaded and initialized. Lightbox is
+controlled by it's configuration (file) `j1_lightbox.yml`, located
+under `_data/modules`.
+
+include::{documentdir}/lightbox2_integration.asciidoc[]
+
+include::{documentdir}/lightbox2_examples.asciidoc[]
+
+== LightGallery
+
+Lightgallery is a fast, modular and responsive jQuery Plugin to create
+simple but beautiful looking, featured image and video galleries supported by
+a powerful lightbox.
+
+* Fully responsive, HTML iframe support
+* Modular architecture with built-in plugins
+* Multiple instances per page
+* Smart image preloading and Font icon support
+* Touch support for Mobile Devices
+* Keyboard navigation and Mouse drag support for Desktops
+* Double-click|Double-tap support for fullsize view
+* Support for Youtube, Vimeo, Dailymotion, VK and HTML5 video
+* 20+ Hardware-Accelerated CSS3 transitions
+* Animated thumbnails, Full screen and Image Zoom support for the Lightbox
+* Easy customizable via CSS, SCSS and Module Settings
+
+include::{documentdir}/lightgallery_integration.asciidoc[]
+
+include::{documentdir}/lightgallery_examples.asciidoc[]
+
+
+// include::{documentdir}/lightbox2_library.asciidoc[]
+// include::{documentdir}/lightgallery_library.asciidoc[]

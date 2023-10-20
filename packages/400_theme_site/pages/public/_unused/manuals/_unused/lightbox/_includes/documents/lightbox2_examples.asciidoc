@@ -1,0 +1,144 @@
+=== Lightbox V2 examples
+
+`Lightbox` can be used as a *standalone* module to enlarge images
+(thumbnails) *or* as a *helper* used by other modules *under-the-hood* to
+provide Lightbox functionality, too.
+
+NOTE: The `Owl Carousel` module can be enabled to use `Lightbox` as a
+helper to enlarge images of a slideshow.
+
+==== Standalone
+
+`Lightbox` used as a *standalone* module helps to display single images or
+groups of pictures in *enlarged sizes*. This might be helpful for e.g. manual
+pages using images in a reduced resolution (shown as thumb nails for example)
+but should be displayed fullsize to see all the details in a better quality.
+
+The following example shows an image in reduced size that describes the *Content
+inheritance of Jekyll* as a thumb nail image. To see what Lightbox is doing,
+click on the *thumb nail* image to enlage this picture.
+
+.Lightbox block for standalone images
+lightbox::example-standalone[ 800, {data-images-standalone}, role="mb-4" ]
+
+Find some other examples of using Lightbox *standalone*. See how *single*
+(individual) images are linked for the use with Lightbox or *groups* of pictures
+managed as a *sets*.
+
+==== Individual images
+
+For *single* (individual) images, the *value* for the data attribute `data-lightbox`
+is set *unique* each picture. Click on the images below to see how Lightbox
+manages the data.
+
+.A Lightbox block for individual images
+lightbox::example-group[ 400, {data-images-group} ]
+
+The following HTML code is used to link the images for Lightbox from the
+example above.
+
+.Code example
+[source, html]
+----
+<div class="imageblock mb-4">
+  <a href="{imagesdir}/image-1.jpg"
+     data-lightbox="example-1"
+     data-title="Optional caption #1.">
+     <img src="{imagesdir}/thumb-1.jpg"
+     alt="Girl looking out people on beach">
+  </a>
+  <a href="{imagesdir}/image-2.jpg"
+     data-lightbox="example-2"
+     data-title="Optional caption #2.">
+     <img src="{imagesdir}/thumb-2.jpg"
+     alt="Two men in bicycle jerseys sitting outside at table having coffee">
+  </a>
+</div>
+----
+
+==== Image sets
+
+For a *group* of images (image sets), the *value* for the data attribute `data-lightbox`
+is set *unique* to the *group*. Click on the images below to see how Lightbox
+manages the data.
+
+.Lightbox block for grouped images
+lightbox::example-group[ 395, {data-images-group}, group, role="mb-4 wm-800" ]
+
+The following HTML code is used to link the images for Lightbox from the
+example above.
+
+.Code example
+[source, html]
+----
+<div class="imageblock mb-4">
+  <a href="{imagesdir}/image-3.jpg"
+     data-lightbox="example-set"
+     data-title="Click the right half of the image to move forward.">
+     <img src="{imagesdir}/thumb-3.jpg"
+          alt="Golden Gate Bridge with San Francisco in distance">
+  </a>
+  <a href="{imagesdir}/image-4.jpg"
+     data-lightbox="example-set"
+     data-title="Or press the right arrow on your keyboard.">
+     <img class="example-image" src="{imagesdir}/thumb-4.jpg"
+          alt="Forest with mountains behind">
+  </a>
+  <a href="{imagesdir}/image-5.jpg"
+     data-lightbox="example-set"
+     data-title="The next image in the set is preloaded as you&apos;re viewing.">
+     <img class="example-image" src="{imagesdir}/thumb-5.jpg"
+      alt="Bicyclist looking out over hill at ocean">
+  </a>
+</div>
+----
+
+==== Lightbox V2 and Carousels
+
+The `Owl Carousel` is a good example how `Lightbox` is integrated with a slider
+respectively a carousel module that J1Template is using. The following example
+enables Lighbox and group all images into a *set*.
+
+NOTE: J1Template is using Lightbox for all image related modules to enlarge images
+managed by these modules as well. If Lightbox should be enabled for a module,
+set the option `lighbox` to `enabled` (*disabled* by default).
+
+The carousel provides a very compact way to display a set of images as thumb
+nails but *no* need to create additional images for the lower resolution. The
+slider adds a navigation system for powerful selection and Lightbox add
+the functionality to display the images full size.
+
+++++
+  <div id="owl_demo_cats" class="mb-4"></div>
+++++
+
+.Code example
+[source, html]
+----
+<ul id="owl-demo-lightbox" class="owl-carousel list-unstyled">
+  <li class="item">
+    <a href="/path/to/images/image_1"
+       data-lightbox="owl-demo-lightbox">
+      <img class="lazyOwl" data-src="/path/to/images/image_1">
+    </a>
+  </li>
+  ...
+  ...
+  <li class="item">
+    <a href="/path/to/images/image_n"
+       data-lightbox="owl-demo-lightbox">
+      <img class="lazyOwl" data-src="/path/to/images/image_n">
+    </a>
+  </li>
+</ul>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#owl-demo-lightbox").owlCarousel({
+      items:      2,
+      lazyLoad:   true,
+      navigation: true,
+    });
+  });
+</script>
+----

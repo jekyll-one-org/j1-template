@@ -1,0 +1,98 @@
+---
+title:                                  lightGallery
+title_extention:                        Integrated lightGallery Module for J1 Template
+tagline:                                Module for J1 Template
+
+date:                                   2022-08-14
+#last_modified:                         2023-01-01
+
+description: >
+                                        The lightGallery module is a fast, modular and responsive
+                                        jQuery Plugin to create simple but beautiful looking, featured
+                                        image and video galleries.
+keywords: >
+                                        Jekyll, JekyllOne, Theme, User Guide, Module, lightGallery,
+                                        Manual
+
+categories:                             [ Manual, Module ]
+tags:                                   [ lightGallery ]
+
+image:
+  path:                                 /assets/images/modules/attics/1920x1280/isaac-davis.jpg
+  width:                                1920
+  height:                               1280
+
+tts:                                    true
+comments:                               false
+regenerate:                             true
+permalink:                              /pages/public/manuals/modules/lightgallery/
+
+resources:                              [
+                                          animate, clipboard, lightbox,
+                                          lightgallery, gallery, videojs,
+                                          vimeoplayer, rouge
+                                        ]
+
+resource_options:
+  - attic:
+      slides:
+        - url:                          /assets/images/modules/attics/1920x1280/isaac-davis.jpg
+          alt:                          Photo by Isaac Davis on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Isaac Davis
+            href:                       https://unsplash.com/@isaacdavis
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="all" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+J1 Template support lightboxes out of the box. A *lightbox* is a helper module
+that displays enlarged, almost screen-filling versions of images and videos
+while dimming the rest of the web page. The technique used by Lightbox gained
+widespread popularity due to its simple and elegant style.
+
+// Include sub-documents (if any)
+// See: // See: https://www.lightgalleryjs.com/docs/getting-started/
+// -----------------------------------------------------------------------------
+[role="mt-5"]
+== lightGallery
+
+The lightGallery module is a fast, modular and responsive jQuery Plugin to
+create simple but beautiful looking, featured image and video galleries.
+
+* Fully responsive, HTML iframe support
+* Modular architecture with built-in plugins
+* Multiple instances per page
+* Smart image preloading and Font icon support
+* Touch support for Mobile Devices
+* Keyboard navigation and Mouse drag support for Desktops
+* Double-click|Double-tap support for fullsize view
+* Support for Youtube, Vimeo, Dailymotion, VK and HTML5 video
+* 20+ Hardware-Accelerated CSS3 transitions
+* Animated thumbnails, Full screen and Image Zoom support for the Lightbox
+* Easy customizable via CSS, SCSS and Module Settings
+
+include::{documentdir}/lightgallery_integration.asciidoc[]
+
+include::{documentdir}/lightgallery_library.asciidoc[]
+
+
+// include::{documentdir}/lightgallery_examples.asciidoc[]

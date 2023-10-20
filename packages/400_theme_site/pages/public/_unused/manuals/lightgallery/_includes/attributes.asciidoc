@@ -1,0 +1,49 @@
+// ~/document_base_folder/_includes
+//  Asciidoc attribute includes:                 attributes.asciidoc
+// -----------------------------------------------------------------------------
+
+
+// URLs - Internal references and/or sources on the Internet
+// -----------------------------------------------------------------------------
+tag::urls[]
+:fontawesome-home:                                https://fontawesome.com/
+end::urls[]
+
+
+// FOOTNOTES, global asciidoc attributes (variables)
+// -----------------------------------------------------------------------------
+tag::footnotes[]
+
+:fn-wikipedia--open_data:                         footnote:[link:https://de.wikipedia.org/wiki/Open_Data[Wikipedia · OpenOata, window="_blank"]]
+
+end::footnotes[]
+
+
+// Tags - Asciidoc attributes used internally
+// -----------------------------------------------------------------------------
+tag::tags[]
+end::tags[]
+
+// Data - Data elements for Asciidoctor extensions
+// -----------------------------------------------------------------------------
+tag::data[]
+
+:data-images-standalone:                          "assets/images/modules/gallery/old_times/image_02.jpg, GrandPa's 80th Birthday"
+:data-images-group:                               "assets/images/modules/gallery/old_times/image_03.jpg, GrandPa's annual journey, assets/images/modules/gallery/old_times/image_04.jpg, GrandPa's annual journey"
+
+end::data[]
+
+// Images - Images from local include/images folder
+// -----------------------------------------------------------------------------
+tag::images[]
+end::images[]
+
+// PRODUCTS, local product information (e.g. release)
+// -----------------------------------------------------------------------------
+tag::products[]
+end::products[]
+
+// AUTHORS, local author information (e.g. article)
+// -----------------------------------------------------------------------------
+tag::authors[]
+end::authors[]
