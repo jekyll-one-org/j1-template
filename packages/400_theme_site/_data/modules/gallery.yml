@@ -68,10 +68,6 @@ settings:
           licenseKey:                 0000-0000-000-0000
           download:                   false
           alignThumbnails:            left
-          addClass:                   lg-uno-thumbnails                         # customized thumbnails
-          appendThumbnailsTo:         .lg-outer                                 # required for customized thumbnails
-          animateThumb:               false                                     # required for customized thumbnails
-          allowMediaOverlap:          true                                      # required for customized thumbnails
 
       # ------------------------------------------------------------------------
       # Images
