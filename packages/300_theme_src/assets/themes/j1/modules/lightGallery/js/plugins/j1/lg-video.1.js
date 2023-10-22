@@ -44,9 +44,6 @@
     PERFORMANCE OF THIS SOFTWARE.
     ***************************************************************************** */
 
-    var url = new URL(window.location.href);
-    var origin = url.origin;
-
     var __assign = function() {
         __assign = Object.assign || function __assign(t) {
             for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -64,6 +61,7 @@
         vimeoPlayerParams: false,
         wistiaPlayerParams: false,
         dailymotionPlayerParams: false,
+        vkPlayerParams: false,
         gotoNextSlideOnVideoEnd: true,
         autoplayVideoOnSlide: false,
         videojs: false,
@@ -130,20 +128,13 @@
         var slideUrlParams = videoInfo.youtube[2]
             ? paramsToObject(videoInfo.youtube[2])
             : '';
-
-        // For YouTube first params gets priority if duplicates found
-        // See: https://stackoverflow.com/questions/40685142/youtube-autoplay-does-not-work-with-iframe
+        // For youtube first params gets priority if duplicates found
         var defaultYouTubePlayerParams = {
-            autoplay: 0,
-            controls: 1,
-            enablejsapi: 1,
-            hl: 'en',
-            loop: 0,
-            mute: 1,
             wmode: 'opaque',
-            origin: origin,
+            autoplay: 1,
+            mute: 0,
+            enablejsapi: 1,
         };
-
         var playerParamsSettings = youTubePlayerParamsSettings || {};
         var youTubePlayerParams = __assign(__assign(__assign({}, defaultYouTubePlayerParams), playerParamsSettings), slideUrlParams);
         var youTubeParams = "?" + param(youTubePlayerParams);
@@ -170,7 +161,7 @@
         urlParams =
             urlParams[0] == '?' ? '&' + urlParams.slice(1) : urlParams || '';
         // For vimeo last params gets priority if duplicates found
-        var vimeoPlayerParams = "?autoplay=0&muted=1" + (isPrivate ? "&h=" + hash : '') + defaultPlayerParams + urlParams;
+        var vimeoPlayerParams = "?autoplay=0&muted=0" + (isPrivate ? "&h=" + hash : '') + defaultPlayerParams + urlParams;
         return vimeoPlayerParams;
     };
 
@@ -345,7 +336,7 @@
             var currentGalleryItem = this.core.galleryItems[index];
             var videoTitle = currentGalleryItem.title || currentGalleryItem.alt;
             videoTitle = videoTitle ? 'title="' + videoTitle + '"' : '';
-            var commonIframeProps = "allowtransparency=\"true\"\n            frameborder=\"0\"\n            scrolling=\"no\"\n            allowfullscreen\n            mozallowfullscreen\n            webkitallowfullscreen\n            msallowfullscreen";
+            var commonIframeProps = "allowtransparency=\"true\"\n            frameborder=\"0\"\n            scrolling=\"no\"\n            allowfullscreen\n            mozallowfullscreen\n            webkitallowfullscreen\n            oallowfullscreen\n            msallowfullscreen";
             if (videoInfo.youtube) {
                 var videoId = 'lg-youtube' + index;
                 var youTubeParams = getYouTubeParams(videoInfo, this.settings.youTubePlayerParams);

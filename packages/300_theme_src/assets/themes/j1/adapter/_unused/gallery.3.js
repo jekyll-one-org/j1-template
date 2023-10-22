@@ -89,8 +89,6 @@ j1.adapter.gallery = (function (j1, window) {
   var environment   = '{{environment}}';
   var state         = 'not_started';
   var play_button   = '/assets/themes/j1/modules/lightGallery/css/themes/uno/icons/play-button.png';
-  var url;
-  var origin;
   var galleryDefaults;
   var gallerySettings;
   var galleryOptions;
@@ -112,9 +110,6 @@ j1.adapter.gallery = (function (j1, window) {
     // Initializer
     // -------------------------------------------------------------------------
     init: function (options) {
-
-      url     = new URL(window.location.href);
-      origin  = url.origin;
 
       // -----------------------------------------------------------------------
       // Default module settings
@@ -242,7 +237,6 @@ j1.adapter.gallery = (function (j1, window) {
                     {% endif %}
                     {{option[0] | json}}: {{option[1] | json}},
                     {% endfor %}
-                    "origin": "origin"
                   }
                   {% endif %}
 

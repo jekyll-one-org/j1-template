@@ -203,6 +203,7 @@ settings:
           file:                       oskars-sylwan_b.jpg
           caption:                    New York City, United States
 
+
     # ==========================================================================
     # Video Galleries
     # ==========================================================================
@@ -215,6 +216,7 @@ settings:
 
       id:                             jg_video_html5
       type:                           video
+      video:                          html5
       video_base_path:                /assets/videos/gallery/html5
       image_base_path:                /assets/videos/gallery
       thumb_base_path:                /assets/videos/gallery
@@ -245,9 +247,10 @@ settings:
           animateThumb:               true
           autoplayFirstVideo:         true
           videojs:                    true
-          videojsTheme:               'vjs-theme-uno'
+          videojsTheme:               vjs-theme-uno
 
         videojsOptions:
+          enabled:                    true
           controls:                   true
           muted:                      false
           preload:                    true
@@ -321,6 +324,7 @@ settings:
 
       id:                             jg_video_online_youtube
       type:                           video
+      video:                          youtube
       image_base_path:                /assets/videos/gallery
       thumb_base_path:                /assets/videos/gallery
 
@@ -351,7 +355,19 @@ settings:
           autoplayFirstVideo:         true
           videojs:                    false
 
-        videojsOptions:               {}
+        videojsOptions:
+          enabled:                    false
+
+        playerParams:
+          enabled:                    true
+          autoplay:                   0
+          controls:                   0
+          enablejsapi:                1
+          hl:                         en
+          loop:                       0
+          mute:                       0
+          playsinline:                1
+          wmode:                      opaque
 
       # ------------------------------------------------------------------------
       # CSS filter options
@@ -388,6 +404,9 @@ settings:
           caption:
             text:                       "YouTube &middot; Carpool Karaoke Lady Gaga"
 
+          playerParams:
+            enabled:                    false
+
         - video:                        # video 2
           enabled:                      true
 
@@ -409,6 +428,9 @@ settings:
           caption:
             text:                       "YouTube &middot; Carpool Karaoke Adele"
 
+          playerParams:
+            enabled:                    false
+
         - video:                        # video 3
           enabled:                      true
 
@@ -428,6 +450,8 @@ settings:
             source:                     video_gwen-poster.jpg
           caption:
             text:                       "YouTube &middot; Carpool Karaoke Gwen Stefani"
+
+          playerParams:                 false
 
         - video:                        # video 4
           enabled:                      true
@@ -450,6 +474,8 @@ settings:
           caption:
             text:                       "YouTube &middot; Carpool Karaoke Michelle Obama"
 
+          playerParams:
+            enabled:                    false
 
     # --------------------------------------------------------------------------
     # Online VIDEO (YouTube)
@@ -459,6 +485,7 @@ settings:
 
       id:                             jg_video_online_youtube_james_and_adele
       type:                           video
+      video:                          youtube
       image_base_path:                /assets/videos/gallery
       thumb_base_path:                /assets/videos/gallery
 
@@ -489,7 +516,20 @@ settings:
           autoplayFirstVideo:         true
           videojs:                    false
 
-        videojsOptions:               {}
+        videojsOptions:
+          enabled:                    false
+
+#       See: https://stackoverflow.com/questions/40685142/youtube-autoplay-does-not-work-with-iframe
+        playerParams:
+          enabled:                    true
+          autoplay:                   1                                         # autoplay = 1 only available for YouTube when muted.
+#         controls:                   1                                         # default = 0
+#         enablejsapi:                1                                         # default = 1
+#         hl:                         en                                        # default = en
+#         loop:                       0                                         # default = 0
+          mute:                       0                                         # default = 1
+#         playsinline:                1                                         # for mobile|iOS only
+#         wmode:                      opaque                                    # default = opaque
 
       # ------------------------------------------------------------------------
       # CSS filter options
@@ -547,8 +587,6 @@ settings:
           caption:
             text:                       "YouTube &middot; Last Carpool Karaoke"
 
-
-
     # --------------------------------------------------------------------------
     # Online VIDEO 2 (YouTube)
     #
@@ -557,6 +595,7 @@ settings:
 
       id:                             jg_video_online_youtube_voice_kids
       type:                           video
+      video:                          youtube
       image_base_path:                /assets/videos/gallery/voice_kids_de_2021
       thumb_base_path:                /assets/videos/gallery/voice_kids_de_2021
 
@@ -587,7 +626,20 @@ settings:
           autoplayFirstVideo:         true
           videojs:                    false
 
-        videojsOptions:               {}
+        videojsOptions:
+          enabled:                    false
+
+#       See: https://stackoverflow.com/questions/40685142/youtube-autoplay-does-not-work-with-iframe
+        playerParams:
+          enabled:                    true
+          autoplay:                   1                                         # autoplay = 1 only available for YouTube when muted.
+#         controls:                   1                                         # default = 0
+#         enablejsapi:                1                                         # default = 1
+#         hl:                         en                                        # default = en
+#         loop:                       0                                         # default = 0
+          mute:                       0                                         # default = 1
+#         playsinline:                1                                         # for mobile|iOS only
+#         wmode:                      opaque                                    # default = opaque
 
       # ------------------------------------------------------------------------
       # CSS filter options
@@ -694,6 +746,7 @@ settings:
 
       id:                             jg_video_online_vimeo
       type:                           video
+      video:                          vimeo
       image_base_path:                /assets/videos/gallery
       thumb_base_path:                /assets/videos/gallery
 
@@ -724,7 +777,16 @@ settings:
           autoplayFirstVideo:         true
           videojs:                    false
 
-        videojsOptions:               {}
+        videojsOptions:
+          enabled:                    false
+
+        playerParams:
+          enabled:                    false
+          autoplay:                   0
+          byline:                     0
+          portrait:                   0
+          color:                      CCCCCC
+          muted:                      0
 
       # ------------------------------------------------------------------------
       # CSS filter options
@@ -787,6 +849,7 @@ settings:
 
       id:                             jg_video_online_dailymotion
       type:                           video
+      video:                          dailymotion
       image_base_path:                /assets/videos/gallery/dailymotion
       thumb_base_path:                /assets/videos/gallery/dailymotion
 
@@ -817,7 +880,11 @@ settings:
           autoplayFirstVideo:         true
           videojs:                    false
 
-        videojsOptions:               {}
+        videojsOptions:
+          enabled:                    false
+
+        playerParams:
+          enabled:                    false
 
       # ------------------------------------------------------------------------
       # CSS filter options
