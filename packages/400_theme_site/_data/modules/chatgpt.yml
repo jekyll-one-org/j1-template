@@ -25,8 +25,8 @@ description:
 settings:
   enabled:                              true
 
-  # ID taken for site jekyll.one. Replace this by <your-chatbot-id>
-  # if yuo have an account|your own project configured.
+  # Replace this ID by <your-chatbot-id> if yuo have an account|your own
+  # project configured.
   #
   chatbotID:                            653593d609b6412fa51792f6
   provider:                             webwhiz
