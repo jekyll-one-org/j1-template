@@ -217,9 +217,9 @@ Then:
 See: https://medium.com/@akash1233/change-file-permissions-when-working-with-git-repos-on-windows-ea22e34d5cee
 
 Most of the folks on Windows working with git repo’s use windows git bash
-for doing git check-ins and check-outs to/from from git repo…. if you are
-already not using it i will highly recommend use it… pretty neat tool
-for windows os.
+for doing git check-ins and check-outs to/from from git repo. If you are
+already not using it, I will highly recommend use it pretty neat tool
+for the Windows OS.
 
   git update-index --chmod=+x 'name-of-shell-script'
 
