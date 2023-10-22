@@ -1,16 +1,15 @@
 {% comment %}
  # -----------------------------------------------------------------------------
- #   ~/_includes/themes/j1/procedures/components/create_word_cloud.proc
- #  Liquid PROCEDURE to create a word cloud from a list of comma separated
- #  words.
+ # ~/_includes/themes/j1/procedures/components/create_word_cloud.proc
+ # Liquid PROCEDURE to create a word cloud from a list of comma separated
+ # words.
  #
- #  https://jekyll.one
+ # https://jekyll.one
  #
- #  Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023 Juergen Adams
  #
- #  J1 Template is licensed under the MIT License.
- #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
- #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
  #  Components procedure. Create the HTML code (to be included in a page) for
  #  a word cloud generated from a LIST of comma separated WORDS. All words are

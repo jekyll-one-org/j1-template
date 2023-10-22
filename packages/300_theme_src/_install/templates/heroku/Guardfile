@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
 # ~/Guardfile
-# Provides watcher information for Guard used to livereload 
+# Provides watcher information for Guard used to livereload
 # for J1 App development
 #
 # Product/Info:
@@ -10,7 +10,6 @@
 #
 # J1 Template is licensed under the MIT License.
 # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
-#
 # ------------------------------------------------------------------------------
 # NOTE:
 #   Based on the sample Guardfile created by:
@@ -33,7 +32,7 @@
 #  $ mv Guardfile config/
 #  $ ln -s config/Guardfile .
 #
-# and, you'll have to watch "config/Guardfile" instead of "Guardfile" 
+# and, you'll have to watch "config/Guardfile" instead of "Guardfile"
 
 guard 'livereload' do
   extensions = {
@@ -73,4 +72,3 @@ guard 'livereload' do
   watch(%r{app/helpers/.+\.rb})
   watch(%r{config/locales/.+\.yml})
 end
-

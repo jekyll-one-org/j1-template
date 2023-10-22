@@ -1,15 +1,14 @@
 {% comment %}
  # -----------------------------------------------------------------------------
- #   ~/_includes/themes/j1/procedures/components/select_color.proc
- #  Liquid PROCEDURE to calculate RGB color values from color NAMES
+ # ~/_includes/themes/j1/procedures/components/select_color.proc
+ # Liquid PROCEDURE to calculate RGB color values from color NAMES
  #
- #  https://jekyll.one
+ # https://jekyll.one
  #
- #  Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023 Juergen Adams
  #
- #  J1 Template is licensed under the MIT License.
- #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
- #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
  #   Global procedure. Read RGB color values from j1_colors.yml and returns
  #   the color found with liquid var color

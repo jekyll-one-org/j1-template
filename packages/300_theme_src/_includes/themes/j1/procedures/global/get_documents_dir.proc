@@ -1,15 +1,15 @@
 {% comment %}
  # -----------------------------------------------------------------------------
- #  ~/_includes/themes/j1/procedures/global/get_documents_dir.proc
- #  Liquid PROCEDURE to get the (top-level) documents dir of an Asciidoc
- #  main entry document.
+ # ~/_includes/themes/j1/procedures/global/get_documents_dir.proc
+ # Liquid PROCEDURE to get the (top-level) documents dir of an Asciidoc
+ # main entry document.
  #
- #  https://jekyll.one
+ # https://jekyll.one
  #
- #  Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023 Juergen Adams
  #
- #  J1 Template is licensed under the MIT License.
- #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
  #   Components procedure. Calculate the HTML code for a given button TYPE
  #   based on the button_data (hash) (e.g. taken from the panel configuration)

@@ -1,15 +1,14 @@
 {% comment %}
  # -----------------------------------------------------------------------------
- #   ~/_includes/themes/j1/procedures/components/get_category_item.proc
- #  Liquid PROCEDURE to get the font-icon for a given category
+ # ~/_includes/themes/j1/procedures/components/get_category_item.proc
+ # Liquid PROCEDURE to get the font-icon for a given category
  #
- #  https://jekyll.one
+ # https://jekyll.one
  #
- #  Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023 Juergen Adams
  #
- #  J1 Template is licensed under the MIT License.
- #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
- #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
  #   Global procedure. Read RGB category values from j1_categorys.yml and returns
  #   the category found with liquid var category

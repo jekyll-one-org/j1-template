@@ -2,9 +2,9 @@
 # ~/config.ru (production)
 # Provides run-time information for the (Rack) Application Loader "rackup"
 #
-# Transforms J1 into a Web Application based on Rack and 
-# Sinatra using the OmniAuth software stack managed by Warden 
-# for authentication to create secured static J1 based web 
+# Transforms J1 into a Web Application based on Rack and
+# Sinatra using the OmniAuth software stack managed by Warden
+# for authentication to create secured static J1 based web
 # sites.
 #
 # Product/Info:
@@ -14,18 +14,17 @@
 #
 # J1 Template is licensed under the MIT License.
 # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
-#
 # ------------------------------------------------------------------------------
-# NOTE: 
+# NOTE:
 #   See: https://www.netlify.com/docs/continuous-deployment/
 # ------------------------------------------------------------------------------
-# NOTE: 
+# NOTE:
 #   Global settings applied to the whole site.
-#   “base” is the directory to change to before starting build. 
-#   If you set base: that is where we will look for package.json/.nvmrc/etc, 
+#   “base” is the directory to change to before starting build.
+#   If you set base: that is where we will look for package.json/.nvmrc/etc,
 #   not repo root!
 #   “command” is your build command.
-#   “publish” is the directory to publish (relative to the root of 
+#   “publish” is the directory to publish (relative to the root of
 #   your repo).
 # ------------------------------------------------------------------------------
 
@@ -59,5 +58,3 @@
 
 [context."features/branch"]
   command = "gulp"
-
-

@@ -1,15 +1,14 @@
 {% comment %}
  # -----------------------------------------------------------------------------
- #   ~/_includes/themes/j1/procedures/components/select_font_size.proc
- #  Liquid PROCEDURE to calculate the VALUE for a given font-size
+ # ~/_includes/themes/j1/procedures/components/select_font_size.proc
+ # Liquid PROCEDURE to calculate the VALUE for a given font-size
  #
- #  https://jekyll.one
+ # https://jekyll.one
  #
- #  Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023 Juergen Adams
  #
- #  J1 Template is licensed under the MIT License.
- #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
- #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
  #   Components procedure. Calculate the CLASS of an icon for a given size
  #   for a specific icon font.

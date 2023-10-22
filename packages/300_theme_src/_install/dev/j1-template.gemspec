@@ -1,16 +1,15 @@
 # ------------------------------------------------------------------------------
-#  J1: ~/packages/500_theme_gem/j1-template.gemspec
-#  Provides Gem Spec information to create the gem-based Template
-#  for J1 Theme
+# ~/packages/500_theme_gem/j1-template.gemspec
+# Provides Gem Spec information to create the gem-based Template
+# for J1 Theme
 #
-#  Product/Info:
-#  https://jekyll.one
+# Product/Info:
+# https://jekyll.one
 #
-#  Copyright (C) 2023 Juergen Adams
+# Copyright (C) 2023 Juergen Adams
 #
-#  J1 Template is licensed under the MIT License.
-#  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
-#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
 # ------------------------------------------------------------------------------
 # NOTE:
 #   Removed spec.add_runtime_dependency 'activesupport'. Conflicts with

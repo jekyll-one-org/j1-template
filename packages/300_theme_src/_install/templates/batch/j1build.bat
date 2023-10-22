@@ -1,9 +1,9 @@
 rem  ---------------------------------------------------------------------------
-rem    Product/Info:
-rem    https://jekyll.one
+rem  Product/Info:
+rem  https://jekyll.one
 rem
-rem    Copyright (C) 2023 Juergen Adams
-rem    J1 Template is licensed under the MIT License.
+rem  Copyright (C) 2023 Juergen Adams
+rem  J1 Template is licensed under the MIT License.
 rem  ---------------------------------------------------------------------------
 @echo off
 

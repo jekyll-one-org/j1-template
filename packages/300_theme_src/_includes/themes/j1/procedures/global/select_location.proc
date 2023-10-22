@@ -1,16 +1,15 @@
 {% comment %}
  # -----------------------------------------------------------------------------
- #   ~/_includes/themes/j1/procedures/components/select_location.proc
- #  Liquid PROCEDURE to select|extract a resource location from a locator
- #  data set
+ # ~/_includes/themes/j1/procedures/components/select_location.proc
+ # Liquid PROCEDURE to select|extract a resource location from a locator
+ # data set
  #
- #  https://jekyll.one
+ # https://jekyll.one
  #
- #  Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023 Juergen Adams
  #
- #  J1 Template is licensed under the MIT License.
- #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
- #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
  #   Global procedure. Reads a locator data set and returns the location source
  #   depending on preferred local|remote source

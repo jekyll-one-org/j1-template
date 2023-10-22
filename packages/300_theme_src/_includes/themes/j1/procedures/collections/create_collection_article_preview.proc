@@ -1,15 +1,14 @@
 {% comment %}
  # -----------------------------------------------------------------------------
- #   ~/_includes/themes/j1/procedures/posts/create_collection_article_preview.proc
- #  Liquid PROCEDURE to create a series header for collection articles
+ # ~/_includes/themes/j1/procedures/posts/create_collection_article_preview.proc
+ # Liquid PROCEDURE to create a series header for collection articles
  #
- #  http://jekyll.one
+ # http://jekyll.one
  #
- #  Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023 Juergen Adams
  #
- #  J1 Template is licensed under the MIT License.
- #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
- #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
  #   Posts procedure. Generates ...
  #

@@ -1,17 +1,16 @@
 {% comment %}
  # -----------------------------------------------------------------------------
- #  ~/_includes/themes/j1/procedures/global/collect_frontmatter_options.proc
- #  Liquid PROCEDURE to extract|collect frontmatter options from the current
- #  PAGE for a given MODULE.
- #  Returns a JSON string (object) of all name-value pairs found.
+ # ~/_includes/themes/j1/procedures/global/collect_frontmatter_options.proc
+ # Liquid PROCEDURE to extract|collect frontmatter options from the current
+ # PAGE for a given MODULE.
+ # Returns a JSON string (object) of all name-value pairs found.
  #
- #  https://jekyll.one
+ # https://jekyll.one
  #
- #  Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023 Juergen Adams
  #
- #  J1 Template is licensed under the MIT License.
- #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
- #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
  #   Components procedure. Calculate the CLASS of an icon for a given size
  #   for a specific icon font.

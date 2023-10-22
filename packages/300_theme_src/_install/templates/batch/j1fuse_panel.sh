@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
 # ------------------------------------------------------------------------------
-#   Product/Info:
-#   https://jekyll.one
+# Product/Info:
+# https://jekyll.one
 #
-#   Copyright (C) 2023 Juergen Adams
-#   J1 Template is licensed under the MIT License.
+# Copyright (C) 2023 Juergen Adams
+# J1 Template is licensed under the MIT License.
 # ------------------------------------------------------------------------------
 
 # Credentials
@@ -32,4 +32,3 @@ nohup ${FUSE_PANEL_EXE} \
   --bind ${FUSE_PANEL_ADDRESS} \
   --port ${FUSE_PANEL_PORT} \
   ${FUSE_DISABLE_USAGE_STATS} &
-

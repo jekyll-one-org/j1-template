@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
 # ------------------------------------------------------------------------------
-#   Product/Info:
-#   https://jekyll.one
+# Product/Info:
+# https://jekyll.one
 #
-#   Copyright (C) 2023 Juergen Adams
-#   J1 Template is licensed under the MIT License.
+# Copyright (C) 2023 Juergen Adams
+# J1 Template is licensed under the MIT License.
 # ------------------------------------------------------------------------------
 
 # clear && bundle exec jekyll s --incremental -c config/_config.yml --source work/ --destination site

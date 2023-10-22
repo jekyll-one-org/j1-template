@@ -1,15 +1,14 @@
 {% comment %}
  # -----------------------------------------------------------------------------
- #   ~/_includes/themes/j1/procedures/global/get_page_url.proc
- #  Liquid PROCEDURE to calculate the URL of a page (page_url)
+ # ~/_includes/themes/j1/procedures/global/get_page_url.proc
+ # Liquid PROCEDURE to calculate the URL of a page (page_url)
  #
- #  https://jekyll.one
+ # https://jekyll.one
  #
- #  Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023 Juergen Adams
  #
- #  J1 Template is licensed under the MIT License.
- #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
- #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
  #   Global procedure. Calculates the absolute path of the current page
  #   relative to the web root. The path is resturned by the liquid variable
