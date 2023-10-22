@@ -51,7 +51,7 @@ defaults:
   #
   enabled:                              false
 
-  provider:                             google
+  provider:                             webwhiz
   trackingID:                           your-tracking-id
   skipAllHosts:                         localhost, 127.0.0.1
 

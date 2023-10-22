@@ -1,0 +1,58 @@
+# ------------------------------------------------------------------------------
+#  ~/_data/modules/defaults/chatgpt.yml
+#  User configuration settings for J1 ChatGPT module
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2023 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+#
+# ------------------------------------------------------------------------------
+# NOTE:
+#
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# Description
+#
+description:
+  title:                                ChatGPT
+  scope:                                Default settings
+  location:                             _data/modules/default/analytics.yml
+
+# ------------------------------------------------------------------------------
+# Default settings
+#
+defaults:
+
+  # ----------------------------------------------------------------------------
+  # Settings
+  #
+  #   enabled
+  #   --------------------------------------------------------------------------
+  #   Enables or disables the Ad services. If disabled, no ads services are
+  #   enabled and no unit container get initialized on any page.
+  #
+  #   values:                           [true|false]
+  #   default:                          false
+  #
+  #   provider
+  #   --------------------------------------------------------------------------
+  #   Currently, only Google adsense (google) is available as an provider
+  #   for advertising.
+  #
+  #   values:                           [webwhiz]
+  #   default:                          webwhiz
+  #
+  # ----------------------------------------------------------------------------
+  #
+  enabled:                              false
+
+  provider:                             webwhiz
+  chatbotID:                            <your-chatbot-id>
+
+# ------------------------------------------------------------------------------
+# END config

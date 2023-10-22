@@ -1,0 +1,32 @@
+# ------------------------------------------------------------------------------
+#  ~/_data/modules/chatgpt.yml
+#  User configuration settings for J1 ChatGPT module
+#
+#  Product/Info:
+#  https://jekyll.one
+#
+#  Copyright (C) 2023 Juergen Adams
+#
+#  J1 Template is licensed under the MIT License.
+#  See: https://github.com/jekyll-one/J1 Theme/blob/master/LICENSE
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# Description
+#
+description:
+  title:                                J1 Analytics
+  scope:                                User settings
+  location:                             _data/modules/analytics.yml
+
+# ------------------------------------------------------------------------------
+# User configuration settings
+#
+settings:
+  enabled:                              true
+
+  chatbotID:                            653561a937644411e2df85f1                # <your-chatbot-id>, 653561a937644411e2df85f1
+  provider:                             webwhiz
+
+# ------------------------------------------------------------------------------
+# END config

@@ -1,7 +1,7 @@
 ---
-title:                                  Where to go
-title_extention:                        Info pages for J1 Template
-tagline:                                Fasten Your Way
+title:                                  WebWhiz
+title_extention:                        ChatGPT Client for J1 Template
+tagline:                                ChatGPT Client
 
 date:                                   2023-01-01
 #last_modified:                         2023-01-01
@@ -23,9 +23,9 @@ image:
   width:                                1920
   height:                               1280
 
-fab_menu_id:                            default
+fab_menu_id:                            open_toc
 regenerate:                             false
-permalink:                              /pages/public/learn/where_to_go/
+permalink:                              /pages/public/learn/web_whiz/
 
 resources:                              [ animate, rouge ]
 resource_options:
@@ -73,68 +73,45 @@ mdi:clock-time-five-outline[24px, md-gray mr-2]
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-[role="mt-5"]
-== Important Sections
 
-The crucial first step in finding your way to Jekyll is done: congratulations.
-The section *Learn* contains all you need to expirience what Jekyll and J1
-can do for your new website, for your new static web. You are welcome to spend
-some time diving into the techniques of creating modern static webs.
+== Chat Interface
 
-[role="mt-4"]
-=== Roundtrip
-
-In this section, you’ll find a tour to show some of the main features of
-the J1 Template. This trip covers how image data can be managed using
-J1, some background of the Theme's typography, discuss extensions, and
-what J1 can do in general. The roundtrip is a visual tour, no technical
-stuff, nothing academic. See what you will get as an overview of some of
-the top features of J1.
-
-If you're interested what J1 Template can do, continue by walking through the
-roundtrip examples by starting an inspiring tour
-link:{url-j1-roundtrip--present-images}[from here].
-
-[role="mt-4"]
-=== Cheatsheets
-
-A cheatsheet is a helper text concise as a reference or summary to provide
-quick and handy information about a topic or subject. They will help you to
-remember key concepts, formulas, commands, or other essential details without
-consulting extensive documentation or resources.
-
-Find convenient quick references for _YAML_, _Git_ and more. For example,
-go for the cheatsheet link:{url-j1--cheatsheet-yaml}[YAML, {browser-window--new}].
-
-[role="mt-4"]
-=== Collections
-
-Collections are Jekyll’s most powerful and simultaneously least understood
-feature of the generator. Collections add another possibility, or use-case,
-outside of Jekyll’s post- and page-publishing functionality. Learn more
-about collections for more powerful static websites. To learn more what
-collections are, check
-link:{url-j1--jekyll-collections}[Jekyll Collections, {browser-window--new}].
-
-[role="mt-4"]
-=== Tutorials
-
-To become more familiar with using J1, go to the tutorial section. Have
-fun experiencing what Jekyll and J1 can do. A good starting point for using
-J1 Template is
-link:{url-j1--tutorial-j1-in-a-day}[Jekll in a Day, {browser-window--new}].
-
-[role="mb-7"]
-Optimizing a website for search engines (SEO) is important for success.
-Read more about SEO and how to implement working strategies for a Jekyll-based
-websites at link:{url-j1--tutorial-learning-seo}[Learning SEO, {browser-window--new}].
-
+Embedded Chat Interface (No Launcher). The Chat interface is permanently
+displayed on your web page without a launcher icon.
 
 ++++
 $(function() {
   <script id="__webwhizSdk__"
-    data-chatbot-id="6534995a09b6412fa51792da"
-    src="https://widget.webwhiz.ai/webwhiz-sdk.js">
+  src="https://widget.webwhiz.ai/webwhiz-sdk.js"
+  data-chatbot-id="653561a937644411e2df85f1">
   </script>
 });
+
+<style>
+.webwhiz-widget {
+    position: fixed;
+    z-index: 9999999;
+    max-height: calc(100% - 30px);
+    right: 78px;
+    bottom: 11px;
+    min-width: 80px;
+    height: 80px;
+    width: 80px;
+    max-width: calc(100% - 40px);
+}
+
+.chat-header, .chat-loading-dot, .chat-launcher-btn {
+    background-color: #2196f3!important;
+}
+
+</style>
 ++++
+
+// // https://widget.webwhiz.ai/?kbId=653561a937644411e2df85f1&embed=true&hide-chat-actions=true[WebWhiz]
+//
+//
+// ++++
+// <iframe width="800px" height="600px" frameborder="0"
+//   src="https://widget.webwhiz.ai/?kbId=653561a937644411e2df85f1&embed=true&hide-chat-actions=true">
+// </iframe>
+// ++++

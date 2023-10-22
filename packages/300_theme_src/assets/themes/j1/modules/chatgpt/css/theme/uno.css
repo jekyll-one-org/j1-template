@@ -1,0 +1,34 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/themes/j1/modules/chatgpt/css/uno.css
+ # Provides styles for J1 Module ChatGPT
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2023 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
+
+/* Chat buttion settings
+-------------------------------------------------------------------------------- */
+.webwhiz-widget {
+  z-index: 9 !important;
+  right: 80px !important;
+  bottom: 10px !important;
+}
+
+.chat-header, .chat-loading-dot, .chat-launcher-btn {
+  background-color: #2196f3 !important;
+}
+
+/* Chat assistant settings
+-------------------------------------------------------------------------------- */
+.webwhiz-widget.wb-expand {
+  width: 500px !important;
+  height: 600px !important;
+  min-width: 500px !important;
+}
