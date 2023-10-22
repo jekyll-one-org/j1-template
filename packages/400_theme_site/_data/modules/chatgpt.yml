@@ -25,7 +25,10 @@ description:
 settings:
   enabled:                              true
 
-  chatbotID:                            653593d609b6412fa51792f6                # <your-chatbot-id>, 653561a937644411e2df85f1
+  # ID taken for site jekyll.one. Replace this by <your-chatbot-id>
+  # if yuo have an account|your own project configured.
+  #
+  chatbotID:                            653593d609b6412fa51792f6
   provider:                             webwhiz
 
 # ------------------------------------------------------------------------------
