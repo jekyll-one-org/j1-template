@@ -200,7 +200,7 @@ j1.adapter.gallery = (function (j1, window) {
             if ( xhrLoadState === 'success' ) {
               var $grid_{{gallery_id}} = $('#{{gallery_id}}');                  // used for later access
 
-              logger.info('\n' + 'dyn_loader: initialize gallery on id: ' + '{{gallery_id}}');
+              logger.info('\n' + 'dyn_loader, initialize gallery on id: ' + '{{gallery_id}}');
 
               j1.jg.callback.{{gallery_id}} = 'waiting';
 
@@ -221,8 +221,8 @@ j1.adapter.gallery = (function (j1, window) {
 
                 // setup the lightbox
                 //
-                logger.info('\n' + 'dyn_loader: callback "jg.complete" entered on id: ' + '{{gallery_id}}');
-                logger.info('\n' + 'dyn_loader: initialize lightGallery on id: ' + '{{gallery_id}}');
+                logger.info('\n' + 'dyn_loader, callback "jg.complete" entered on id: ' + '{{gallery_id}}');
+                logger.info('\n' + 'dyn_loader, initialize lightGallery on id: ' + '{{gallery_id}}');
 
                 var lg = document.getElementById("{{gallery_id}}");
                 lightGallery(lg, {
@@ -298,8 +298,8 @@ j1.adapter.gallery = (function (j1, window) {
               //
               setTimeout (function() {
                 if (j1.jg.callback.{{gallery_id}} == 'waiting') {
-                  logger.warn('callback "jg.callback": ' + j1.jg.callback.{{gallery_id}})
-                  logger.info('\n' + 'dyn_loader: initialize lightGallery on id: ' + '{{gallery_id}}');
+                  logger.warn('\n' + 'dyn_loader, callback "jg.callback": ' + j1.jg.callback.{{gallery_id}})
+                  logger.info('\n' + 'dyn_loader, initialize lightGallery on id: ' + '{{gallery_id}}');
 
                   var lg = document.getElementById("{{gallery_id}}");
                   lightGallery(lg, {
