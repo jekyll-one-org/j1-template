@@ -106,29 +106,34 @@ exclude_from_search:                    true
         {% endfor %}
       {% endif %}
 
+
       <!-- Image Gallery -->
       <div id="{{gallery.id}}">
       {% for image in gallery.images %}
+        {% assign caption     = image.caption|strip|strip_newlines %}
+        {% assign description = image.description|strip|strip_newlines %}
+
         {% if gallery.lightbox.enabled %}
         {% if gallery.lightbox.type == 'lb' %}
         <a
            href="{{gallery.image_base_path}}/{{image.file}}"
            data-lightbox="{{gallery.id}}-image-group"
-           data-caption="{{image.caption}}"
-           data-title="{{image.caption}}">
+           data-caption="{{caption}}"
+           data-title="{{caption}}">
              <img id="{{gallery.id}}_{{forloop.index}}"
               class="{{gallery.image_styles}}"
               src="{{gallery.image_base_path}}/{{image.file}}"
-              alt="{{image.caption}}"
+              alt="{{caption}}"
               style="{{image_filters}};">
         </a>
         {% elsif gallery.lightbox.type == 'lg' %}
         <a class="lg-item"
-          href="{{gallery.image_base_path}}/{{image.file}}">
+          href="{{gallery.image_base_path}}/{{image.file}}"
+          data-sub-html="{{description}}">
           <img id="{{gallery.id}}_{{forloop.index}}"
             class="{{gallery.image_styles}}"
             src="{{gallery.image_base_path}}/{{image.file}}"
-            alt="{{image.caption}}"
+            alt="{{caption}}"
             style="{{image_filters}};">
         </a>
         {% endif %}
