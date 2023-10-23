@@ -59,7 +59,7 @@ settings:
       #
       lightbox:
         enabled:                      true
-        type:                         lg                                      # lb | lg
+        type:                         lg                                        # lb | lg
 
       lightGallery:
         plugins:                      lgFullscreen, lgRotate, lgThumbnail
