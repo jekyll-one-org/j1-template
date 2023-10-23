@@ -30,8 +30,8 @@ regenerate:                             false
 permalink:                              /pages/public/learn/roundtrip/asciidoc_extensions/
 
 resources:                              [
-                                          animate, clipboard, lightbox, lightGallery,
-                                          iconify, gallery, rouge, video_js
+                                          animate, clipboard, lightbox, lightgallery,
+                                          iconify, gallery, rouge, videojs
                                         ]
 resource_options:
   - attic:
@@ -415,7 +415,7 @@ gallery::<gallery_id>[role="<additional CSS styles>"]
 ----
 
 .Image Gallery
-gallery::jg_customizer[role="mb-5"]
+gallery::jg_old_times[role="mb-5"]
 
 .Video Gallery
 gallery::jg_video_html5[role="mb-5"]
@@ -753,7 +753,7 @@ lorem:email[]
 // -----------------------------------------------------------------------------
 include::{documentdir}/100_gistblock.asciidoc[]
 
-[role="mb-7"]
+[role="mt-5"]
 == What next
 
 Asciidoc extensions open up the Markup language to new use cases. Using
