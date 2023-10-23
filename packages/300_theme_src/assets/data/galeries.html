@@ -110,7 +110,7 @@ exclude_from_search:                    true
       <!-- Image Gallery -->
       <div id="{{gallery.id}}">
       {% for image in gallery.images %}
-        {% assign caption     = image.caption|strip|strip_newlines %}
+        {% assign caption     = image.caption.text|strip|strip_newlines %}
         {% assign description = image.description|strip|strip_newlines %}
 
         {% if gallery.lightbox.enabled %}
