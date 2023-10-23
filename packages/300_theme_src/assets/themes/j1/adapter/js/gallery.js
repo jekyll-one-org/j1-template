@@ -113,8 +113,13 @@ j1.adapter.gallery = (function (j1, window) {
     // -------------------------------------------------------------------------
     init: function (options) {
 
-      url     = new URL(window.location.href);
-      origin  = url.origin;
+      url               = new URL(window.location.href);
+      origin            = url.origin;
+
+      // flag used for Chromium browser workaround
+      j1['jg'] = {
+        callback:   {},
+      };
 
       // -----------------------------------------------------------------------
       // Default module settings
@@ -197,6 +202,8 @@ j1.adapter.gallery = (function (j1, window) {
 
               logger.info('\n' + 'dyn_loader: initialize gallery on id: ' + '{{gallery_id}}');
 
+              j1.jg.callback.{{gallery_id}} = 'waiting';
+
               /* eslint-disable */
               $('#{{gallery_id}}').justifiedGallery({
                 {% for option in gallery.gallery_options %}
@@ -209,6 +216,8 @@ j1.adapter.gallery = (function (j1, window) {
               })
               .on('jg.complete', function (evt) {
                 evt.stopPropagation();
+
+                j1.jg.callback.{{gallery_id}} = 'successful';
 
                 // setup the lightbox
                 //
@@ -283,6 +292,82 @@ j1.adapter.gallery = (function (j1, window) {
 
               }); // END justifiedGallery on('jg.complete)
               /* eslint-enable */
+
+              // workaround for Chromium brwosers if callback jg.complete
+              // NOT fired
+              //
+              setTimeout (function() {
+                if (j1.jg.callback.{{gallery_id}} == 'waiting') {
+                  logger.warn('callback "jg.callback": ' + j1.jg.callback.{{gallery_id}})
+                  logger.info('\n' + 'dyn_loader: initialize lightGallery on id: ' + '{{gallery_id}}');
+
+                  var lg = document.getElementById("{{gallery_id}}");
+                  lightGallery(lg, {
+                    "plugins":    [{{gallery.lightGallery.plugins}}],
+                    {% for option in gallery.lightGallery.options %}
+                    {{option[0] | json}}: {{option[1] | json}},
+                    {% endfor %}
+                    "galleryId":  "{{gallery_id}}",
+                    "selector":   ".lg-item",
+                    {% if gallery.video == 'html5' and gallery.lightGallery.videojsOptions.enabled %}
+                    "videojsOptions": {
+                      {% for option in gallery.lightGallery.videojsOptions %}
+                      {% if option[0] contains "enabled" %}
+                      {% continue %}
+                      {% endif %}
+                      {{option[0] | json}}: {{option[1] | json}},
+                      {% endfor %}
+                    }
+                    {% endif %}
+
+                    {% if gallery.video == 'youtube' and gallery.lightGallery.playerParams.enabled %}
+                    "youTubePlayerParams": {
+                      {% for option in gallery.lightGallery.playerParams %}
+                      {% if option[0] contains "enabled" %}
+                      {% continue %}
+                      {% endif %}
+                      {{option[0] | json}}: {{option[1] | json}},
+                      {% endfor %}
+                      "origin": "origin"
+                    }
+                    {% endif %}
+
+                    {% if gallery.video == 'vimeo' and gallery.lightGallery.playerParams.enabled %}
+                    "vimeoPlayerParams": {
+                      {% for option in gallery.lightGallery.playerParams %}
+                      {% if option[0] contains "enabled" %}
+                      {% continue %}
+                      {% endif %}
+                      {{option[0] | json}}: {{option[1] | json}},
+                      {% endfor %}
+                    }
+                    {% endif %}
+
+                    {% if gallery.video == 'dailymotion' and gallery.lightGallery.playerParams.enabled %}
+                    "dailymotionPlayerParams": {
+                      {% for option in gallery.lightGallery.playerParams %}
+                      {% if option[0] contains "enabled" %}
+                      {% continue %}
+                      {% endif %}
+                      {{option[0] | json}}: {{option[1] | json}},
+                      {% endfor %}
+                    }
+                    {% endif %}
+
+                    {% if gallery.video == 'wistia' and gallery.lightGallery.playerParams.enabled %}
+                    "wistiaPlayerParams": {
+                      {% for option in gallery.lightGallery.playerParams %}
+                      {% if option[0] contains "enabled" %}
+                      {% continue %}
+                      {% endif %}
+                      {{option[0] | json}}: {{option[1] | json}},
+                      {% endfor %}
+                    }
+                    {% endif %}
+
+                  }); // END lightGallery
+                } // END if j1.jg.callback
+              }, 2000); // END timeout
 
               clearInterval(load_dependencies['dependencies_met_html_loaded_{{gallery_id}}']);
             } // END  if xhrLoadState === 'success'
