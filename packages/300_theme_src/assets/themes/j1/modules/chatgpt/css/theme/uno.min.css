@@ -13,4 +13,4 @@
  # -----------------------------------------------------------------------------
 */
 
-.webwhiz-widget{z-index:9 !important;right:80px !important;bottom:10px !important}.chat-header,.chat-loading-dot,.chat-launcher-btn{background-color:#2196f3 !important}.webwhiz-widget.wb-expand{width:500px !important;height:600px !important;min-width:500px !important}
+#ChatBobBubble{bottom:20px !important;right:85px !important;width:3.5rem !important;height:3.5rem !important;border-radius:27.5px;background-color:#2196f3 !important;z-index:9 !important}.webwhiz-widget{z-index:9 !important;right:80px !important;bottom:10px !important}.chat-header,.chat-loading-dot,.chat-launcher-btn{background-color:#2196f3 !important}.webwhiz-widget.wb-expand{width:500px !important;height:600px !important;min-width:500px !important}

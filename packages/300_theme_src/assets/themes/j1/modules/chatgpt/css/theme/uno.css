@@ -13,6 +13,35 @@
  # -----------------------------------------------------------------------------
 */
 
+/* ChatBob settings
+================================================================================ */
+
+/* Chat buttion settings
+-------------------------------------------------------------------------------- */
+#ChatBobBubble {
+  bottom: 20px !important;
+	right: 85px !important;
+	width: 3.5rem !important;
+	height: 3.5rem !important;
+	border-radius: 27.5px;
+	background-color: #2196f3 !important;
+	z-index: 9 !important;
+}
+
+/* Chat assistant settings (does NOT work this way)
+-------------------------------------------------------------------------------- */
+/*
+.inset-0 {
+  background-color: #2196f3 !important;
+  margin-top: 0.75rem !important;
+  margin-bottom: 0.75rem !important;
+}
+*/
+
+
+/* WebWhiz settings
+================================================================================ */
+
 /* Chat buttion settings
 -------------------------------------------------------------------------------- */
 .webwhiz-widget {

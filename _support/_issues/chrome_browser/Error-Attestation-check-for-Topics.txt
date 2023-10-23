@@ -1,0 +1,15 @@
+Issue:
+------
+
+Chrome Browser Error:
+
+  Attestation check for Topics on
+  https://pagead2.googlesyndication.com/
+  failed
+
+See: https://stackoverflow.com/questions/77303375/chrome-browser-error-attestation-check-for-topics-on-https-pagead2-googlesynd
+See: https://wordpress.org/support/topic/attestation-check-for-topics-on-https-pagead2-googlesyndication-com-failed/
+
+
+Solution
+-------

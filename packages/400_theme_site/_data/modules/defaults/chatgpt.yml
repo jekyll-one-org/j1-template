@@ -55,7 +55,7 @@ defaults:
   #
   enabled:                              false
 
-  provider:                             webwhiz
+  provider:                             chatbob                                 # [chatbob, webwhiz]
   chatbotID:                            <your-chatbot-id>
 
 # ------------------------------------------------------------------------------
