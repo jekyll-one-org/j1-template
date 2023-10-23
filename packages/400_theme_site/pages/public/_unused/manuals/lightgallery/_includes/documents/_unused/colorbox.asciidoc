@@ -81,8 +81,12 @@ false
 This can be used as an anchor rel alternative for Colorbox. This allows
 the user to group any combination of elements together for a gallery, or
 to override an existing rel so elements are not grouped together.
-`$("a.gallery").colorbox({rel:"group1"});` Note: The value can also be
-set to 'nofollow' to disable grouping.
+`$("a.gallery").colorbox({rel:"group1"});` +
+
+[NOTE]
+====
+The value can also be set to 'nofollow' to disable grouping.
+====
 
 scalePhotos
 
@@ -557,4 +561,3 @@ triggers as the close method ends.
 |=======================================================================
 
 '''''
-

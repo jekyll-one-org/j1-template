@@ -188,7 +188,7 @@ The block text (multiline)
 To add an *additional* title element on an admonition, place a dot `.`
 directly followed by the text of the title.
 
-.Admonition block syntax and additional title
+.Admonition block syntax + title
 [source, apib]
 ----
 .title text
@@ -199,20 +199,34 @@ The block text (multiline)
 ----
 
 .NOTE block
-NOTE: Icon background-color: indigo
+[NOTE]
+====
+Icon background-color: indigo
+====
 
 .TIP block
-TIP: Icon background-color: green
+[TIP]
+====
+Icon background-color: green
+====
 
 .IMPORTANT block
-IMPORTANT: Icon background-color: orange
+[IMPORTANT]
+====
+Icon background-color: orange
+====
 
 .WARNING block
-WARNING: Icon background-color: yellow
+[WARNING]
+====
+Icon background-color: yellow
+====
 
 .CAUTION block
-CAUTION: Icon background-color: red
-
+[CAUTION]
+====
+Icon background-color: red
+====
 
 [role="mt-5"]
 == Asciidoc Quote elements

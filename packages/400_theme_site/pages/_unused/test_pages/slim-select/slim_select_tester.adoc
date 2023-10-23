@@ -149,5 +149,8 @@ var dependencies_met_page_ready = setInterval (function (options) {
 </script>
 ++++
 
-TIP: *Double-click* an icon copies the selected icon (class) data to
+[TIP]
+====
+*Double-click* an icon copies the selected icon (class) data to
 the *clipboard*.
+====
