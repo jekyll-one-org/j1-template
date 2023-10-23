@@ -1315,12 +1315,12 @@ resources:
   #
   # See: https://www.lightgalleryjs.com/
   #
-  - name:                               J1 LightGallery V2
+  - name:                               J1 lightGallery V2
     resource:
       enabled:                          true
 
       id:                               lightgallery
-      comment:                          Module J1 LightGallery V2
+      comment:                          Module J1 lightGallery V2
       region:                           head
       layout:                           [ all ]
       required:                         ondemand
