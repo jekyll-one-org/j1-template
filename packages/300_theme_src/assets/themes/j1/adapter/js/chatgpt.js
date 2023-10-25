@@ -129,6 +129,7 @@ var logText;
 
       if ( j1.getState() === 'finished' && pageVisible ) {
 //    if ( j1.getState() === 'finished' && pageVisible && atticFinished) {
+
           {% if chatgpt %}
 
             // Load  module DEFAULTS|CONFIG
@@ -163,7 +164,6 @@ var logText;
             logger.debug('\n' + 'state: ' + _this.getState());
             logger.info('\n' + 'module initializing: started');
 
-//          apiExists = document.getElementById('__webwhizSdk__') === null ? false : true;
             user_consent = j1.readCookie(cookie_names.user_consent);
             if (user_consent.personalization) {
               if (validchatbotID) {
@@ -227,22 +227,19 @@ var logText;
 
                 // create the chatbotAPI
                 //
-                apiScript.src   = "https://widget.tutgpt.com/chat.js";
-                apiScript.async = true;
-                apiScript.id    = "chatbot-api";
-                apiScript.addEventListener("load", function (evt) {
-//                evt.stopPropagation();
+               apiScript.src   = "https://widget.tutgpt.com/chat.js";
+               apiScript.async = true;
+               apiScript.id    = "chatbot-api";
 
-                  window.BotChat.init({
+                apiScript.addEventListener("load", function (evt) {
+                  BotChat.init({
                     id: chatbotID,
                   });
-
                 })
 
                 setTimeout (function() {
                   logger.info('\n' + 'Initialize TutGPT API');
-
-                  // add the chatbotAPI (delayed)
+                  // add the chatbotAPI to run the Bot (delayed)
                   //
                   document.head.appendChild(apiScript);
                   logger.info('\n' + 'TutGPT API added in section: head');

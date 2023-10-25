@@ -31,9 +31,12 @@ Find more on https://docs.asciidoctor.org/asciidoc/latest/blocks/paragraphs/
 
 What is Rocketstart?
 
-Create a site on the Internet in minutes. The people on Netlify provide a
-really easy workflow to bring a website to life using a template like
-JekyllOne Template on the Internet in minutes: The 1-Click Deployment.
+Using Rocketstart, no software needs to be installed localy on your computer
+to create J1 Template based website. Create a site on the Internet in minutes.
+
+The people on Netlify provide a really easy workflow to bring a website to
+life using a template like JekyllOne Template on the Internet in minutes:
+The 1-Click Deployment.
 
 The Workflow allows users to deploy a website on the Internet without a
 locally running installation on their computers. I invite you on a journey
