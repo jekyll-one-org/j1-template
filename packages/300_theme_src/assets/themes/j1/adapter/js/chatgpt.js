@@ -92,7 +92,7 @@ j1.adapter.chatgpt = (function (j1, window) {
 var url               = new URL(window.location.href);
 var hostname          = url.hostname;
 var environment       = '{{environment}}';
-var apiScript     = document.createElement('script');
+var apiScript         = document.createElement('script');
 var cookie_names      = j1.getCookieNames();
 var date              = new Date();
 var timestamp_now     = date.toISOString();
@@ -103,6 +103,7 @@ var chatgptDefaults;
 var chatgptSettings;
 var chatgptOptions;
 var chatbotID;
+var chatbotWidget;
 var validchatbotID;
 var user_consent;
 var apiExists;
@@ -124,7 +125,10 @@ var logText;
       var dependencies_met_page_ready = setInterval (function (options) {
         var pageState   = $('#no_flicker').css("display");
         var pageVisible = (pageState == 'block') ? true: false;
-        if ( j1.getState() === 'finished' && pageVisible ) {
+        var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
+
+      if ( j1.getState() === 'finished' && pageVisible ) {
+//    if ( j1.getState() === 'finished' && pageVisible && atticFinished) {
           {% if chatgpt %}
 
             // Load  module DEFAULTS|CONFIG
@@ -159,28 +163,97 @@ var logText;
             logger.debug('\n' + 'state: ' + _this.getState());
             logger.info('\n' + 'module initializing: started');
 
-            apiExists = document.getElementById('__webwhizSdk__') === null ? false : true;
-            user_consent  = j1.readCookie(cookie_names.user_consent);
+//          apiExists = document.getElementById('__webwhizSdk__') === null ? false : true;
+            user_consent = j1.readCookie(cookie_names.user_consent);
             if (user_consent.personalization) {
               if (validchatbotID) {
                 logger.info('\n' + 'user consent on personalization: ' + user_consent.personalization);
-                logger.info('\n' + 'enable chatbot on ID: ' + chatbotID);
+              } else {
+                logger.warn('\n' + 'invalid chatbotID detected: ' + chatbotID);
+                logger.warn('\n' + 'module chatGPT: disabled');
+                return;
+              }
+            } else {
+              logger.info('\n' + 'user consent on personalization: ' + user_consent.personalization);
+              logger.warn('\n' + 'disable Chatbot on ID: ' + chatbotID);
+              return;
+            }
 
+            _this.setState('finished');
+
+            logger.debug('\n' + 'state: ' + _this.getState());
+            logger.info('\n' + 'module initializing: finished');
+            clearInterval(dependencies_met_page_ready);
+
+
+            {% comment %} Setup TutGPT
+            -------------------------------------------------------------------- {% endcomment %}
+            {% when "tutgpt" %}
+
+            // [INFO   ] [j1.adapter.chatgpt                    ] [ place provider: WebWhiz ]
+            chatbotID        = chatgptOptions.chatbotID;
+            validchatbotID   = (chatbotID.includes('your')) ? false : true;
+
+            // -----------------------------------------------------------------
+            // Default module settings
+            // -----------------------------------------------------------------
+            var settings = $.extend({
+              module_name: 'j1.adapter.chatgpt',
+              generated:   '{{site.time}}'
+            }, options);
+
+            // -----------------------------------------------------------------
+            // Global variable settings
+            // -----------------------------------------------------------------
+            _this = j1.adapter.chatgpt;
+            logger = log4javascript.getLogger('j1.adapter.chatgpt');
+
+            // initialize state flag
+            _this.setState('started');
+            logger.debug('\n' + 'state: ' + _this.getState());
+            logger.info('\n' + 'module initializing: started');
+
+            user_consent = j1.readCookie(cookie_names.user_consent);
+            if (user_consent.personalization) {
+              if (validchatbotID) {
+                logger.info('\n' + 'user consent on personalization: ' + user_consent.personalization);
+                logger.info('\n' + 'enable TutGPT on ID: ' + chatbotID);
+
+                // create the chatbotWidget (Button container)
+                //
+                chatbotWidget = document.createElement("div");
+                chatbotWidget.setAttribute("id", "chatbot-widget");
+                document.body.appendChild(chatbotWidget);
+
+                // create the chatbotAPI
+                //
+                apiScript.src   = "https://widget.tutgpt.com/chat.js";
                 apiScript.async = true;
-                apiScript.id    = '__webwhizSdk__';
-                apiScript.src   = 'https://widget.webwhiz.ai/webwhiz-sdk.js';
+                apiScript.id    = "chatbot-api";
+                apiScript.addEventListener("load", function (evt) {
+//                evt.stopPropagation();
 
-                apiScript.setAttribute('data-chatbot-id', chatbotID);
-                document.head.appendChild(apiScript);
+                  window.BotChat.init({
+                    id: chatbotID,
+                  });
 
-                logger.info('\n' + 'WebWhiz API added in section: head');
+                })
+
+                setTimeout (function() {
+                  logger.info('\n' + 'Initialize TutGPT API');
+
+                  // add the chatbotAPI (delayed)
+                  //
+                  document.head.appendChild(apiScript);
+                  logger.info('\n' + 'TutGPT API added in section: head');
+                }, 3000);
               } else {
                 logger.warn('\n' + 'invalid chatbotID detected: ' + chatbotID);
                 logger.warn('\n' + 'module chatGPT: disabled');
               }
             } else {
               logger.info('\n' + 'user consent on personalization: ' + user_consent.personalization);
-              logger.warn('\n' + 'disable Chatbot on ID: ' + chatbotID);
+              logger.warn('\n' + 'disable TutGPT on ID: ' + chatbotID);
             }
 
             _this.setState('finished');
@@ -188,6 +261,9 @@ var logText;
             logger.info('\n' + 'module initializing: finished');
             clearInterval(dependencies_met_page_ready);
 
+
+            {% comment %} Setup ChatBob
+            -------------------------------------------------------------------- {% endcomment %}
             {% when "chatbob" %}
             // [INFO   ] [j1.adapter.chatgpt                    ] [ place provider: WebWhiz ]
             chatbotID        = chatgptOptions.chatbotID;
@@ -240,6 +316,9 @@ var logText;
             logger.info('\n' + 'module initializing: finished');
             clearInterval(dependencies_met_page_ready);
 
+
+            {% comment %} Setup Custom Bot
+            -------------------------------------------------------------------- {% endcomment %}
             {% when "custom" %}
             // [INFO   ] [j1.adapter.analytics                    ] [ place provider: Custom Provider ]
 

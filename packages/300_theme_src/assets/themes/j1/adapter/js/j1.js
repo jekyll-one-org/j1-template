@@ -3010,43 +3010,47 @@ var j1 = (function (options) {
         document.querySelector('body')
       );
 
+      // jadams, 2023-10-25: disabled
+      // NOTE: Funtions like j1.getCookieNames()seems NOT available
+      // in callback beforeunload'
+      //
       // -----------------------------------------------------------------------
       // final updates before browser page|tab
       // see: https://stackoverflow.com/questions/3888902/detect-browser-or-tab-closing
       // -----------------------------------------------------------------------
-      window.addEventListener('beforeunload', function (event) {
-        var cookie_names  = j1.getCookieNames();
-        var date          = new Date();
-        var timestamp_now = date.toISOString();
-        var user_state    = j1.readCookie(cookie_names.user_state);
-        var user_consent  = j1.readCookie(cookie_names.user_consent);
-        var url           = new liteURL(window.location.href);
-        var secure        = (url.protocol.includes('https')) ? true : false;
-        var ep_status;
-        var url;
-        var baseUrl;
-
-        // final update of the user state cookie
-        user_state.session_active     = false;
-        user_state.last_session_ts    = timestamp_now;
-
-        if (!user_consent.analysis || !user_consent.personalization) {
-
-          cookie_written = j1.writeCookie({
-            name:     cookie_names.user_state,
-            data:     user_state,
-            secure:   secure,
-            expires:  0
-          });
-        } else {
-          cookie_written = j1.writeCookie({
-            name:     cookie_names.user_state,
-            data:     user_state,
-            secure:   secure,
-            expires:  365
-          });
-        }
-      }); // END beforeunload
+      // window.addEventListener('beforeunload', function (event) {
+      //   var cookie_names  = j1.getCookieNames();
+      //   var date          = new Date();
+      //   var timestamp_now = date.toISOString();
+      //   var user_state    = j1.readCookie(cookie_names.user_state);
+      //   var user_consent  = j1.readCookie(cookie_names.user_consent);
+      //   var url           = new liteURL(window.location.href);
+      //   var secure        = (url.protocol.includes('https')) ? true : false;
+      //   var ep_status;
+      //   var url;
+      //   var baseUrl;
+      //
+      //   // final update of the user state cookie
+      //   user_state.session_active     = false;
+      //   user_state.last_session_ts    = timestamp_now;
+      //
+      //   if (!user_consent.analysis || !user_consent.personalization) {
+      //
+      //     cookie_written = j1.writeCookie({
+      //       name:     cookie_names.user_state,
+      //       data:     user_state,
+      //       secure:   secure,
+      //       expires:  0
+      //     });
+      //   } else {
+      //     cookie_written = j1.writeCookie({
+      //       name:     cookie_names.user_state,
+      //       data:     user_state,
+      //       secure:   secure,
+      //       expires:  365
+      //     });
+      //   }
+      // }); // END beforeunload
 
       // initialize event handler for window/history/back on <ESC>
       //
