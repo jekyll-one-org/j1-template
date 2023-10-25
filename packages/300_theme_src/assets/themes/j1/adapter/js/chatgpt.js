@@ -186,21 +186,61 @@ var logText;
             clearInterval(dependencies_met_page_ready);
 
 
-            {% comment %} Setup TutGPT
+            {% comment %} Setup VivoChat
             -------------------------------------------------------------------- {% endcomment %}
-            {% when "tutgpt" %}
-
+            {% when "vivochat" %}
             // [INFO   ] [j1.adapter.chatgpt                    ] [ place provider: WebWhiz ]
             chatbotID        = chatgptOptions.chatbotID;
             validchatbotID   = (chatbotID.includes('your')) ? false : true;
 
             // -----------------------------------------------------------------
-            // Default module settings
+            // Global variable settings
             // -----------------------------------------------------------------
-            var settings = $.extend({
-              module_name: 'j1.adapter.chatgpt',
-              generated:   '{{site.time}}'
-            }, options);
+            _this = j1.adapter.chatgpt;
+            logger = log4javascript.getLogger('j1.adapter.chatgpt');
+
+            // initialize state flag
+            _this.setState('started');
+            logger.debug('\n' + 'state: ' + _this.getState());
+            logger.info('\n' + 'module initializing: started');
+
+            apiExists = document.getElementById("{{chatbotID}}") === null ? false : true;
+            user_consent  = j1.readCookie(cookie_names.user_consent);
+            if (user_consent.personalization) {
+              if (validchatbotID) {
+                logger.info('\n' + 'user consent on personalization: ' + user_consent.personalization);
+                logger.info('\n' + 'enable VivoChat on ID: ' + chatbotID);
+
+                apiScript.async = true;
+                apiScript.id    = 'VivoChat';
+                apiScript.src   = 'https://www.vivochat.ai/dist/widget.js';
+                apiScript.setAttribute("vivochat-bot-id", chatbotID);
+
+                document.head.appendChild(apiScript);
+
+                logger.info('\n' + 'VivoChat API added in section: head');
+              } else {
+                logger.warn('\n' + 'invalid chatbotID detected: ' + chatbotID);
+                logger.warn('\n' + 'module chatGPT: disabled');
+              }
+            } else {
+              logger.info('\n' + 'user consent on personalization: ' + user_consent.personalization);
+              logger.warn('\n' + 'disable VivoChat on ID: ' + chatbotID);
+            }
+
+            _this.setState('finished');
+            logger.debug('\n' + 'state: ' + _this.getState());
+            logger.info('\n' + 'module initializing: finished');
+            clearInterval(dependencies_met_page_ready);
+
+
+            {% comment %} Setup TutGPT
+            -------------------------------------------------------------------- {% endcomment %}
+            {% when "tutgpt" %}
+
+            // [INFO   ] [j1.adapter.chatgpt                    ] [ place provider: WebWhiz ]
+            chatbotID      = chatgptOptions.chatbotID;
+            validchatbotID = (chatbotID.includes('your')) ? false : true;
 
             // -----------------------------------------------------------------
             // Global variable settings
@@ -267,14 +307,6 @@ var logText;
             validchatbotID   = (chatbotID.includes('your')) ? false : true;
 
             // -----------------------------------------------------------------
-            // Default module settings
-            // -----------------------------------------------------------------
-            var settings = $.extend({
-              module_name: 'j1.adapter.chatgpt',
-              generated:   '{{site.time}}'
-            }, options);
-
-            // -----------------------------------------------------------------
             // Global variable settings
             // -----------------------------------------------------------------
             _this = j1.adapter.chatgpt;
@@ -306,6 +338,53 @@ var logText;
             } else {
               logger.info('\n' + 'user consent on personalization: ' + user_consent.personalization);
               logger.warn('\n' + 'disable ChatBob on ID: ' + chatbotID);
+            }
+
+            _this.setState('finished');
+            logger.debug('\n' + 'state: ' + _this.getState());
+            logger.info('\n' + 'module initializing: finished');
+            clearInterval(dependencies_met_page_ready);
+
+
+            {% comment %} Setup WebWhiz
+            -------------------------------------------------------------------- {% endcomment %}
+            {% when "webwhiz" %}
+            // [INFO   ] [j1.adapter.chatgpt                    ] [ place provider: WebWhiz ]
+            chatbotID        = chatgptOptions.chatbotID;
+            validchatbotID   = (chatbotID.includes('your')) ? false : true;
+
+            // -----------------------------------------------------------------
+            // Global variable settings
+            // -----------------------------------------------------------------
+            _this = j1.adapter.chatgpt;
+            logger = log4javascript.getLogger('j1.adapter.chatgpt');
+
+            // initialize state flag
+            _this.setState('started');
+            logger.debug('\n' + 'state: ' + _this.getState());
+            logger.info('\n' + 'module initializing: started');
+
+            apiExists = document.getElementById("{{chatbotID}}") === null ? false : true;
+            user_consent  = j1.readCookie(cookie_names.user_consent);
+            if (user_consent.personalization) {
+              if (validchatbotID) {
+                logger.info('\n' + 'user consent on personalization: ' + user_consent.personalization);
+                logger.info('\n' + 'enable WebWhiz on ID: ' + chatbotID);
+
+                apiScript.id    = '__webwhizSdk__';
+                apiScript.src   = 'https://widget.webwhiz.ai/webwhiz-sdk.js';
+                apiScript.setAttribute("data-chatbot-id", chatbotID);
+
+                document.head.appendChild(apiScript);
+
+                logger.info('\n' + 'WebWhiz API added in section: head');
+              } else {
+                logger.warn('\n' + 'invalid chatbotID detected: ' + chatbotID);
+                logger.warn('\n' + 'module chatGPT: disabled');
+              }
+            } else {
+              logger.info('\n' + 'user consent on personalization: ' + user_consent.personalization);
+              logger.warn('\n' + 'disable WebWhiz on ID: ' + chatbotID);
             }
 
             _this.setState('finished');

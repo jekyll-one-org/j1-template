@@ -13,13 +13,17 @@
  # -----------------------------------------------------------------------------
 */
 
+/* VivoChat settings
+================================================================================ */
+
+
 /* TutGPT settings
 ================================================================================ */
 
 /* Chat button settings
 -------------------------------------------------------------------------------- */
 #chatbot-widget .text-right {
-  padding-right: 80px !important;
+  padding-right: 5px !important;
   padding-bottom: 18px !important;
 }
 
@@ -31,7 +35,7 @@
 -------------------------------------------------------------------------------- */
 #ChatBobBubble {
   bottom: 20px !important;
-	right: 85px !important;
+	right: .75rem !important;
 	width: 3.5rem !important;
 	height: 3.5rem !important;
 	border-radius: 27.5px;
@@ -49,14 +53,6 @@
 }
 */
 
-/* Chat brand settings (does NOT work this way)
--------------------------------------------------------------------------------- */
-/*
-.text-gray-300 {
-  display: none !important;
-}
-*/
-
 /* WebWhiz settings
 ================================================================================ */
 
@@ -64,7 +60,7 @@
 -------------------------------------------------------------------------------- */
 .webwhiz-widget {
   z-index: 9 !important;
-  right: 80px !important;
+  right: 0 !important;
   bottom: 10px !important;
 }
 
@@ -74,8 +70,23 @@
 
 /* Chat assistant settings
 -------------------------------------------------------------------------------- */
-.webwhiz-widget.wb-expand {
-  width: 500px !important;
-  height: 600px !important;
-  min-width: 500px !important;
+@media only screen and (device-width: 768px), only screen and (min-width: 768px) {
+  .webwhiz-widget.wb-expand {
+    width: 500px !important;
+    height: 800px !important;
+    min-width: 500px!important;
+  }
+}
+
+@media only screen and (device-width: 768px), only screen and (max-width: 768px) {
+  .webwhiz-widget.wb-expand {
+      width: 100% !important;
+      height: 550px !important;
+      left: 0 !important;
+      right: 10px !important;
+      bottom: 10px !important;
+      top: 80px !important;
+      max-width: 100% !important;
+      max-height: 100% !important;
+  }
 }
