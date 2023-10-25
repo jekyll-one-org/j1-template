@@ -48,7 +48,7 @@ defaults:
   #   NOT recommended.
   #
   #   values:                           [vivochat, chatbob, tutgpt, webwhiz]
-  #   default:                          vivochat
+  #   default:                          chatbob
   #
   #   chatbotID
   #   --------------------------------------------------------------------------

@@ -31,8 +31,8 @@ settings:
   # Replace this ID by <your-chatbot-id> if yuo have an account|your own
   # project configured.
   #
-  provider:                             vivochat
-  chatbotID:                            3d0b29f1-623a-4915-a817-e436d328f18f
+  provider:                             chatbob
+  chatbotID:                            qhtrvti8SjKDaf9QFKn6xw
 
 # ------------------------------------------------------------------------------
 # END config
