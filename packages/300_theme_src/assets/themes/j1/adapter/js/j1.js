@@ -2709,17 +2709,19 @@ var j1 = (function (options) {
                       if (headlineNo == 1) {
                         scrollOffsetCorrection  = scrollOffset - (headlineNo * 89);
                       } else if (headlineNo <= 3) {
-                        scrollOffsetCorrection  = scrollOffset - (headlineNo * 30);
+                        scrollOffsetCorrection = scrollOffset - (headlineNo * 30);
                       } else if (headlineNo > 3 && headlineNo <= 6) {
-                        scrollOffsetCorrection  = scrollOffset - (headlineNo * 18);
+                        scrollOffsetCorrection = scrollOffset - (headlineNo * 18);
                       } else if (headlineNo > 6 && headlineNo <= 9) {
-                        scrollOffsetCorrection  = scrollOffset - (headlineNo * 14);
+                        scrollOffsetCorrection = scrollOffset - (headlineNo * 14);
                       } else if (headlineNo > 9 && headlineNo <= 13) {
-                        scrollOffsetCorrection  = scrollOffset - (headlineNo * 34);
+                        scrollOffsetCorrection = scrollOffset - (headlineNo * 34);
                       } else if (headlineNo > 13 && headlineNo <= 16) {
-                        scrollOffsetCorrection  = scrollOffset - (headlineNo * 22);
+                        scrollOffsetCorrection = scrollOffset - (headlineNo * 22);
                       } else if (headlineNo > 16 && headlineNo <= 20) {
-                        scrollOffsetCorrection  = scrollOffset - (headlineNo * 26);
+                        scrollOffsetCorrection = scrollOffset - (headlineNo * 26);
+                      } else if (headlineNo > 20) {
+                        scrollOffsetCorrection = scrollOffset - (headlineNo * 23);
                       }
 
                       countOnce = false;

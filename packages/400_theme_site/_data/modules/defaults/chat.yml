@@ -46,15 +46,16 @@ defaults:
   #
   #   values:                           [vivochat, chatbob, tutgpt, webwhiz]
   #   default:                          no default
+  #   recommended:                      tutgpt
   #
   #   Example chatbotIDs
   #   --------------------------------------------------------------------------
   #   Bot ID procided by the provider
   #
   #   J1 Template Bots:
+  #   tutgpt:                           clo54vmlw000582y700nkde5t
   #   vivochat:                         3d0b29f1-623a-4915-a817-e436d328f18f
   #   chatbob:                          qhtrvti8SjKDaf9QFKn6xw
-  #   tutgpt:                           clo54vmlw000582y700nkde5t
   #   webwhiz:                          653593d609b6412fa51792f6
   #
   # ----------------------------------------------------------------------------
