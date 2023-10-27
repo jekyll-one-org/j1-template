@@ -143,7 +143,6 @@ var j1 = (function (options) {
   // base page resources
   var rePager                 =  new RegExp('navigator|dateview|tagview|archive');
   var environment             = '{{environment}}';
-  var scrollOffsetBase        = {{scroller_options.smoothscroll.offsetBase}};
   var scrollOffsetCorrection  = {{scroller_options.smoothscroll.offsetCorrection}};
   var moduleOptions           = {};
   var j1_runtime_data         = {};
@@ -152,7 +151,6 @@ var j1 = (function (options) {
   var scrollerDefaults        = {};
   var banner                  = [];
   var _this                   = j1;
-  var headingArray            = [];
 
   var settings;
   var json_data;
@@ -332,7 +330,7 @@ var j1 = (function (options) {
       // Global variable settings
       // -----------------------------------------------------------------------
       var logger            = log4javascript.getLogger('j1.init');
-      var url               = new URL(window.location.href);
+      var url               = new liteURL(window.location.href);
       var baseUrl           = url.origin;
       var hostname          = url.hostname;
       var domain            = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
@@ -1578,12 +1576,12 @@ var j1 = (function (options) {
     // TOCCER module
     // NOTE: crollTo() is triggered by 'onDocumentHeigthChange'
     // -------------------------------------------------------------------------
-    scrollTo: function (offset) {
+    scrollTo: function (offsetCorrection) {
       var logger          = log4javascript.getLogger('j1.scrollTo');
       var anchor          = window.location.href.split('#')[1];
       var anchor_id       = (typeof anchor !== 'undefined') && (anchor != '') ? '#' + anchor : false;
       var scrollDuration  = {{toccer_options.scrollSmoothDuration}};
-      var scrollOffset    = offset; // j1.getScrollOffset();
+      var scrollOffset    = j1.getScrollOffset() + offsetCorrection; // j1.getScrollOffset();
       var isSlider        = false;
       var selector        = $(anchor_id);
 
@@ -2665,97 +2663,37 @@ var j1 = (function (options) {
       var dependencies_met_page_displayed = setInterval (function () {
         var pageState   = $('#no_flicker').css("display");
         var pageVisible = (pageState == 'block') ? true: false;
-        if (j1['pageMonitor'].pageType !== 'unknown' && j1.getState() == 'finished' && pageVisible) {
+        if (j1.getState() == 'finished' && j1['pageMonitor'].pageType !== 'unknown' && pageVisible) {
 
-          // TODO: Check why a timeout is required to run the
-          // smmoth scroller (j1.scrollTo)
-          //
+          // TODO: Check why a timeout is required to run the smmoth scroller (j1.scrollTo)
           if (j1['pageMonitor'].pageType == 'static') {
-            // page type static
             setTimeout (function() {
               logger.debug('\n' + 'Scroller: Scroll static page');
-              scrollOffset = (scrollOffsetBase - scrollOffsetCorrection) * -1;
-              j1.scrollTo(scrollOffset);
+//            scrollOffsetCorrection = scrollerOptions.smoothscroll.offsetCorrection;
+//            scrollOffset = scrollOffsetCorrection;
+              j1.scrollTo(scrollOffsetCorrection);
             }, {{template_config.timeoutScrollStaticPages}} );
-
             clearInterval(dependencies_met_page_displayed);
           } else if (j1['pageMonitor'].pageType == 'dynamic') {
-            // page type dynamic
             setTimeout (function() {
-              var headingArray           = j1.core.parseHeadings();            // collect all headings in page
-              var headingUrl              = new URL(window.location.href);
-              var headingHash             = headingUrl.hash;
-              var headingId               = headingHash.replace(/#/g, '');
-              var scrollTop               = 0
-              var scrollOffset            = 0;
-              var headlineNo              = 0;
-              var countOnce               = true;
-              var scrollOffset            = 0;
-              var scrollOffsetCorrection  = 0;
-
-              // collect top position for the active headline
-              //
-              if (headingArray !== null) {
-                headingArray.forEach(function(heading, index) {
-
-                    if (heading.offsetTop !== undefined && heading.id == headingId && countOnce) {
-                      scrollOffset            = heading.offsetTop;
-                      headlineNo              = ++index;
-
-                      // jadams, 2023-10-27: !!! TEST !!!
-                      // calculate scrollOffsetCorrection based on AVERAGE
-                      // height of (number of) headlines
-                      //
-                      if (headlineNo == 1) {
-                        scrollOffsetCorrection  = scrollOffset - (headlineNo * 89);
-                      } else if (headlineNo <= 3) {
-                        scrollOffsetCorrection  = scrollOffset - (headlineNo * 30);
-                      } else if (headlineNo > 3 && headlineNo <= 6) {
-                        scrollOffsetCorrection  = scrollOffset - (headlineNo * 18);
-                      } else if (headlineNo > 6 && headlineNo <= 9) {
-                        scrollOffsetCorrection  = scrollOffset - (headlineNo * 14);
-                      } else if (headlineNo > 9 && headlineNo <= 13) {
-                        scrollOffsetCorrection  = scrollOffset - (headlineNo * 34);
-                      } else if (headlineNo > 13 && headlineNo <= 16) {
-                        scrollOffsetCorrection  = scrollOffset - (headlineNo * 22);
-                      } else if (headlineNo > 16 && headlineNo <= 20) {
-                        scrollOffsetCorrection  = scrollOffset - (headlineNo * 26);
-                      }
-
-                      countOnce = false;
-                      scrollTop = Math.round(scrollOffsetCorrection);
-                    } //  END if heading.offsetTop|heading.id|countOnce
-                  } // END function(heading, index)
-                ); // END forEach headingArray
-              } // END if headingArray !== null
-
-              // scroll to headline's top position
-              //
-              logger.debug('\n' + 'Scroller: scroll to headline|no: ' + headingHash + '|' + headlineNo);
-              logger.debug('\n' + 'Scroller: top position: ' + scrollTop);
-
-              window.scroll ({
-              	top:       scrollTop,
-              	left:      0,
-              	behavior: 'smooth'
-              });
-
-            }, {{template_config.timeoutScrollDynamicPages}});
-
+//            scrollOffsetCorrection = scrollerOptions.smoothscroll.offsetCorrection;
+//            scrollOffset = j1.getScrollOffset(scrollOffsetCorrection);
+              j1.scrollTo(scrollOffsetCorrection);
+              logger.debug('\n' + 'Scroller: Scroll dynamic page on timeout');
+          }, {{template_config.timeoutScrollDynamicPages}} );
             clearInterval(dependencies_met_page_displayed);
           } else {
-            // page type unknown (failsave fallback)
+            // failsave fallback
             setTimeout (function() {
               logger.debug('\n' + 'Scroller: Scroll page of unknown type');
-              scrollOffset = scrollOffsetCorrection - scrollOffsetBase;
-              j1.scrollTo(scrollOffset);
+//            scrollOffsetCorrection = scrollerOptions.smoothscroll.offsetCorrection;
+//            scrollOffset = j1.getScrollOffset(scrollOffsetCorrection);
+              j1.scrollTo(scrollOffsetCorrection);
             }, {{template_config.page_on_load_timeout}} );
-
             clearInterval(dependencies_met_page_displayed);
-          } // END if|else j1['pageMonitor'].pageType == 'dynamic'
+          }
 
-
-        } // END if j1['pageMonitor'].pageType
+        }
       }, 10);
     },
 
@@ -2989,24 +2927,20 @@ var j1 = (function (options) {
         if (j1['pageMonitor'] !== undefined && j1['pageMonitor'].eventNo !== undefined && j1['pageMonitor'].eventNo == 2) {
           // Set initial data from second event
           //
-          j1['pageMonitor'].pageBaseHeight      = documentHeight;
+          j1['pageMonitor'].pageBaseHeight      = document.body.scrollHeight;
           j1['pageMonitor'].currentPageHeight   = document.body.scrollHeight;
           j1['pageMonitor'].previousPageHeight  = document.body.scrollHeight;
           j1['pageMonitor'].previousGrowthRatio = 0.00;
 
-          pageBaseHeight      = documentHeight;
+          pageBaseHeight      = document.body.scrollHeight;
           previousGrowthRatio = 100;
           growthRatio         = 0.00;
-
         } else {
           // collect 'pageHeight' from 'entries'
           //
-          previousGrowthRatio = document.body.scrollHeight / pageBaseHeight * 100;
-          growthRatio         = document.body.scrollHeight / pageBaseHeight * 100;
-
           if (j1['pageMonitor'] !== undefined) {
             for (const entry of entries) {
-              pageBaseHeight = documentHeight;
+              pageBaseHeight = j1['pageMonitor'].pageBaseHeight;
               if (pageBaseHeight > 0) {
                 // get the page height (rounded to int) from observer
                 //
@@ -3016,17 +2950,12 @@ var j1 = (function (options) {
                 // total growth ratio
                 //
                 pageGrowthRatio = pageHeight / pageBaseHeight * 100;
-//              pageGrowthRatio = pageGrowthRatio.toFixed(2);
+                pageGrowthRatio = pageGrowthRatio.toFixed(2);
 
                 j1['pageMonitor'].currentGrowthRatio = pageGrowthRatio;
 
-//              growthRatio = ((pageGrowthRatio / previousGrowthRatio) - 1) * 100;
-//                growthRatio = growthRatio.toFixed(2);
-                if (growthRatio !== undefined && growthRatio > 0) {
-                  growthRatio = growthRatio.toFixed(2);
-                } else {
-                  growthRatio = 0.00;
-                }
+                growthRatio = ((pageGrowthRatio / previousGrowthRatio) - 1) * 100;
+                growthRatio = growthRatio.toFixed(2);
                 j1['pageMonitor'].growthRatio = growthRatio;
               }
             } // END for entries
@@ -3049,7 +2978,7 @@ var j1 = (function (options) {
             } else {
               // set the page type to 'static' if low growth detected
               //
-              if (typeof j1['pageMonitor'].growthRatio != 'undefined' && j1['pageMonitor'].growthRatio == 0) {
+              if (typeof j1['pageMonitor'].growthRatio != 'undefined' && j1['pageMonitor'].growthRatio > 0) {
                 j1['pageMonitor'].pageType = 'static';
                 if (development) {
                   logger.debug('\n' + 'growthRatio: ' + j1['pageMonitor'].growthRatio + '%');
@@ -3086,13 +3015,10 @@ var j1 = (function (options) {
 
       {% endif %}
 
-      // jadams, 2023-10-26: delay untion STATIC portion of a page is loaded
-      //
-      setTimeout (function() {
-        resizeObserver.observe(
-          document.querySelector('body')
-        );
-      }, 500);
+      // monitor 'GROWTH'
+      resizeObserver.observe(
+        document.querySelector('body')
+      );
 
       // jadams, 2023-10-25: disabled
       // NOTE: Funtions like j1.getCookieNames()seems NOT available
@@ -3147,6 +3073,7 @@ var j1 = (function (options) {
         var target = $(this.hash);
         target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
         if (target.length) {
+//        var scrollOffsetCorrection  = scrollerOptions.smoothscroll.offsetCorrectionLocal;
           var offset                  = target.offset().top + scrollOffsetCorrection;
           $('html,body').animate({
             scrollTop: offset

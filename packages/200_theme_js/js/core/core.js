@@ -31,6 +31,10 @@
  */
 module.exports = (function (options) {
 
+    const defaultOptions       = require('./default-options.js');
+    const ParseContent         = require('./parse-content.js');
+    const parseContent         = ParseContent(defaultOptions);
+
   // ---------------------------------------------------------------------------
   // Global variables
   // ---------------------------------------------------------------------------
@@ -123,7 +127,23 @@ module.exports = (function (options) {
           $p.html(text.replace(firstLetter, marginalDropCap));
         });
       }
-    } // END createDropCap
+    }, // END createDropCap
+
+    // -------------------------------------------------------------------------
+    // Initialize Backdrops on all <p> elements of class "dropcap"
+    // -------------------------------------------------------------------------
+    parseHeadings: function () {
+      var headings = parseContent.selectHeadings(
+        ".js-toc-content",
+        "h2, h3, h4, h5, h6"
+      );
+      return headings;
+    }, // END parseContent
+
+    // parseContent.selectHeadings(
+    //   defaultOptions.contentSelector,
+    //   defaultOptions.headingSelector
+    // );
 
   }; // end return (object)
 

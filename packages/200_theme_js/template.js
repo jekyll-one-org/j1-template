@@ -54,12 +54,13 @@ window.platform                         = require('platform');
 // exposed for run-time to the global namespace (window).
 // -----------------------------------------------------------------------------
 // window.deeplTranslator               = require('./js/deepl-translator');     // J1 Module deeplAPI used instead
-// window.j1.fam                        = require('./js/fam/fam.js');           // cannot used until NOT rewritten to jQuery
+// window.j1.fab                        = require('./js/fab/fab.js');           // cannot used until NOT rewritten to jQuery
 
 window.j1.adapter                       = require('./js/adapter/adapter.js');
-window.j1.anime                         = require('./js/anime/anime.js');       // added for fam
+window.j1.anime                         = require('./js/anime/anime.js');       // added for fab
 window.j1.lazyCSS                       = require('./js/lazyCSS/lazyCSS.js');
 window.j1.core                          = require('./js/core/core.js');
+window.j1.core.parseContent             = require('./js/speak2me/parse-content.js');
 window.j1.core.navigator                = require('./js/navigator/navigator.js');
 window.j1.core.asciidoctor              = require('./js/asciidoctor/asciidoctor.js');
 window.j1.core.scrollSmooth             = require('./js/scroll-smooth/scroll-smooth.js');
