@@ -23,7 +23,7 @@
   },
   "scripts": {
     "audit": "npm audit",
-    "clean": "shx rm -f *.lock && shx rm -f package-lock.json",
+    "clean": "shx rm -f *.lock && shx rm -rf package-lock.json",
     "start": "run-p -s utilsrv-run",
     "app": "run-p -s utilsrv",
     "develop": "run-p -s utilsrv",

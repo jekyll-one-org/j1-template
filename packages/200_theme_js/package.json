@@ -25,9 +25,9 @@
     "deploy": "run-s -s deploy:*",
     "lint": "run-p -s lint:*",
     "rebuild": "npm run build-js",
-    "clean:lock": "shx rm -f *.lock && shx rm -f package-lock.json",
+    "clean:lock": "shx rm -rf *.lock && shx rm -f package-lock.json",
     "clean:dist": "shx rm -rf dist/",
-    "clean:tmp": "shx rm -f *.tmp && shx rm -rf tmp/",
+    "clean:tmp": "shx rm -rf *.tmp && shx rm -rf tmp/",
     "lint:j1-adapter": "eslint --ignore-path .eslintignore js/adapter/*",
     "lint:adoc-result-viewer": "eslint --ignore-path .eslintignore js/adoc_result_viewer/",
     "lint:j1-core": "eslint --ignore-path .eslintignore js/core/*",
@@ -60,7 +60,7 @@
     "terser": "^5.5.1",
     "uglify-js": "^3.0.25"
   },
-  "devDependencies": {  
+  "devDependencies": {
     "unminified-webpack-plugin": "^3.0.0"
   }
 }
