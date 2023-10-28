@@ -2673,27 +2673,75 @@ var j1 = (function (options) {
           if (j1['pageMonitor'].pageType == 'static') {
             // page type static
             setTimeout (function() {
+//            var headingArray           = j1.core.parseHeadings();            // collect all headings in page
               var headingUrl              = new URL(window.location.href);
               var headingHash             = headingUrl.hash;
               var headingId               = headingHash.replace(/#/g, '');
+//            var headlineNo              = 0;
+//            var scrollTop               = 0;
               var scrollOffsetCorrection  = -93;
               var scrollDuration          = 300;
+//            var countOnce               = true;
+
+              // if (headingArray !== null) {
+              //   headingArray.forEach(function(heading, index) {
+              //
+              //       if (heading.offsetTop !== undefined && heading.id == headingId && countOnce) {
+              //         countOnce  = false;
+              //         headlineNo = ++index;
+              //         scrollTop  = heading.offsetTop;
+              //       } //  END if heading.offsetTop|heading.id|countOnce
+              //     } // END function(heading, index)
+              //   ); // END forEach headingArray
+              // } // END if headingArray !== null
+
+              // jadams, 2023-10-27: !!! TEST !!!
+              // calculate scrollOffsetCorrection based on AVERAGE
+              // height of (number of) headlines
+              //
+              // if (headlineNo == 1) {
+              //   scrollTop  = scrollTop - (headlineNo * 89);
+              // } else if (headlineNo <= 3) {
+              //   scrollTop = scrollTop - (headlineNo * 200);
+              // } else if (headlineNo > 3 && headlineNo <= 6) {
+              //   scrollTop = scrollTop - (headlineNo * 150);
+              // } else if (headlineNo > 6 && headlineNo <= 9) {
+              //   scrollTop = scrollTop - (headlineNo * 14);
+              // } else if (headlineNo > 9 && headlineNo <= 13) {
+              //   scrollTop = scrollTop - (headlineNo * 34);
+              // } else if (headlineNo > 13 && headlineNo <= 16) {
+              //   scrollTop = scrollTop - (headlineNo * 22);
+              // } else if (headlineNo > 16 && headlineNo <= 20) {
+              //   scrollTop = scrollTop - (headlineNo * 26);
+              // } else if (headlineNo > 20) {
+              //   scrollTop = scrollTop - (headlineNo * 23);
+              // }
+
+//            scrollTop = (scrollTop - scrollOffsetCorrection);
 
               logger.debug('\n' + 'scrollToAnchor: scroll page of type: static');
-
-              // scroll if headingId
+              // scroll if scrollOffset > 0
               //
-              if (headingHash == '') {
-                logger.debug('\n' + 'scrollToAnchor: top position detected');
-              } else {
-                logger.debug('\n' + 'scrollToAnchor: scroll to headline by id: ' + headingHash);
+              if (headingId !== '') {
+                logger.debug('\n' + 'scrollToAnchor: scroll headline: ' + headingHash);
+
                 j1.core.scrollSmooth.scroll(headingHash, {
                   duration:   scrollDuration,
                   offset:     scrollOffsetCorrection,
                   callback:   false
                 });
+
+//              j1.scrollTo(scrollTop);
+
+                // window.scroll ({
+                //   top:       scrollTop,
+                //   left:      0,
+                //   behavior: 'smooth'
+                // });
+
               }
-            }, {{template_config.timeoutScrollStaticPages}});
+
+            }, {{template_config.timeoutScrollStaticPages}} );
 
             clearInterval(dependencies_met_page_displayed);
           } else if (j1['pageMonitor'].pageType == 'dynamic') {
@@ -2709,9 +2757,6 @@ var j1 = (function (options) {
               var countOnce               = true;
               var scrollOffset            = 0;
               var scrollOffsetCorrection  = 0;
-//
-//            var scrollOffsetCorrection  = -93;
-//              var scrollDuration          = 300;
 
               logger.debug('\n' + 'scrollToAnchor: scroll page of type: dynamic');
 
@@ -2757,18 +2802,21 @@ var j1 = (function (options) {
               //
               if (headingHash == '') {
                 headingHash = '#';
-                logger.debug('\n' + 'scrollToAnchor: top position detected');
+                logger.debug('\n' + 'scrollToAnchor: headline|no: ' + headingHash + '|' + headlineNo);
               } else {
-                  logger.debug('\n' + 'scrollToAnchor: headline|no: ' + headingHash + '|' + headlineNo);
+                logger.debug('\n' + 'scrollToAnchor: headline|no: ' + headingHash + '|' + headlineNo);
+              }
 
-                  // build-in scroller
-                  //
-                  window.scroll ({
-                  	top:       scrollTop,
-                  	left:      0,
-                  	behavior: 'smooth'
-                  });
-              } // END if headingHash
+              if (headingHash) {
+                logger.debug('\n' + 'scrollToAnchor: scroll headline to top position: ' + scrollTop);
+
+                window.scroll ({
+                	top:       scrollTop,
+                	left:      0,
+                	behavior: 'smooth'
+                });
+
+              }
 
             }, {{template_config.timeoutScrollDynamicPages}});
 

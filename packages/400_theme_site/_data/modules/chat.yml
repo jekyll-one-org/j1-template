@@ -28,7 +28,7 @@ settings:
   # Replace this ID by <your-chatbot-id> if yuo have an account|your own
   # project configured.
   #
-  provider:                             <your-chatbot> tutgpt
+  provider:                             <your-chatbot>
   chatbotID:                            <your-chatbot-id>
 
 # ------------------------------------------------------------------------------
