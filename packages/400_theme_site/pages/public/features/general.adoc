@@ -223,7 +223,7 @@ traffic on mobile phones has surged over the past decade. As of July 2021,
 more than 50 percent of all web traffic came through mobile devices.
 
 .Global mobile traffic, 2011-2021
-lightbox::broadbandsearch--global-mobile-traffic[ 800, {data-broadbandsearch--global-mobile-traffic} ]
+lightbox::broadbandsearch--global-mobile-traffic[ 1024, {data-broadbandsearch--global-mobile-traffic} ]
 
 Source: link:{url-broadbandsearch--mobile-internet-usage}[broadbandsearch.net, {browser-window--new}]
 
@@ -253,7 +253,7 @@ your vistors easy access to all of your content pages on a mouse-click.
 ----
 
 .Desktop Web Navigation
-lightbox::images--desktop-navigation[ 800, {data-images--desktop-navigation} ]
+lightbox::images--desktop-navigation[ 1024, {data-images--desktop-navigation} ]
 
 [role="mt-4"]
 === Mobile Web Navigation
@@ -282,4 +282,4 @@ level.
 
 [role="mb-7"]
 .Google Lighthouse Scores (Starter Web at Github)
-lightbox::images--google-lighthouse[ 800, {data-images--google-lighthouse} ]
+lightbox::images--google-lighthouse[ 1024, {data-images--google-lighthouse} ]

@@ -1,5 +1,5 @@
 ---
-regenerate:                             false
+regenerate:                             true
 ---
 
 {% capture cache %}
@@ -12,7 +12,7 @@ regenerate:                             false
  # Product/Info:
  # https://jekyll.one
  #
- # Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
@@ -46,7 +46,7 @@ regenerate:                             false
  # Product/Info:
  # {{site.data.j1_config.theme_author_url}}
  #
- # Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # For details, see {{site.data.j1_config.theme_author_url}}

@@ -7,7 +7,7 @@
  #  https://jekyll.one
  #  https://github.com/rouge-ruby/rouge
  #
- #  Copyright (C) 2023 Juergen Adams
+ #  Copyright (C) 2023, 2024 Juergen Adams
  #  Copyright (c) 2012 Jeanine Adkisson
  #
  #  J1 Template is licensed under the MIT License.

@@ -5,7 +5,7 @@
  # Product/Info:
  # https://jekyll.one
  #
- # Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
@@ -104,18 +104,6 @@ $btn-fab-font-size:                 1.5rem !default; // 24px
   color: $lighten-800;                                                          // jadams, 2021-11-18: removed !important
 }
 
-.fab-btn ul {
-  left: 0;
-  right: 0;
-  text-align: center;
-  position: absolute;
-  bottom: 64px;
-  margin: 0;
-  visibility: hidden;
-  padding-left: 0;
-  list-style-type: none;
-}
-
 .btn-fab-floating.disabled,
 .btn-fab-floating[disabled] {
   pointer-events: none;
@@ -201,8 +189,6 @@ button.btn-fab-floating {
     position: fixed;
     right: .5rem;
     bottom: 1rem;
-//  padding-top: 4rem;
-//  margin-bottom: 0;
     z-index: 9;
 }
 
@@ -321,12 +307,14 @@ button.btn-fab-floating {
 
 .fab-btn ul {
   left: 0;
-  right: 0;
+  right: 5px;
   text-align: center;
   position: absolute;
-  bottom: 64px;
+  bottom: 56px;
   margin: 0;
-  visibility: hidden
+  visibility: hidden;
+  padding-left: 0;
+  list-style-type: none;
 }
 
 .fab-btn ul li {

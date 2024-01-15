@@ -12,7 +12,7 @@ regenerate:                             true
  # Product/Info:
  # https://jekyll.one
  #
- # Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
@@ -118,7 +118,7 @@ regenerate:                             true
  # Product/Info:
  # https://jekyll.one
  #
- # Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
@@ -454,28 +454,23 @@ var j1 = (function (options) {
           j1.setState(curr_state);
           logger.debug('\n' + 'state: ' + j1.getState());
 
-          var dependencies_met_page_displayed = setInterval (function () {
-            if (j1.getState() == 'finished') {
-              if (j1.authEnabled()) {
-                if (user_session.authenticated === 'true') {
-                  // set signout
-                  logger.info('\n' + 'show signout icon');
-                  $('#navLinkSignInOut').attr('data-bs-target','#modalOmniSignOut');
-                  $('#iconSignInOut').removeClass('mdib-login').addClass('mdib-logout');
-                } else {
-                  // set signin
-                  logger.info('\n' + 'show signin icon');
-                  $('#navLinkSignInOut').attr('data-bs-target','#modalOmniSignIn');
-                  $('#iconSignInOut').removeClass('mdib-logout').addClass('mdib-login');
-                }
-                logger.info('\n' + 'authentication detected as: ' + user_session.authenticated);
-                $('#quickLinksSignInOutButton').css('display', 'block');
-                logger.debug('\n' + 'met dependencies for: j1');
-                clearInterval(dependencies_met_page_displayed);
-              }
+          if (j1.authEnabled()) {
+            if (user_session.authenticated === 'true') {
+              // set signout
+              logger.info('\n' + 'show signout icon');
+              $('#navLinkSignInOut').attr('data-bs-target','#modalOmniSignOut');
+              $('#iconSignInOut').removeClass('mdib-login').addClass('mdib-logout');
+            } else {
+              // set signin
+              logger.info('\n' + 'show signin icon');
+              $('#navLinkSignInOut').attr('data-bs-target','#modalOmniSignIn');
+              $('#iconSignInOut').removeClass('mdib-logout').addClass('mdib-login');
             }
-          }, 10);
-        })
+            logger.info('\n' + 'authentication detected as: ' + user_session.authenticated);
+            $('#quickLinksSignInOutButton').css('display', 'block');
+            logger.debug('\n' + 'met dependencies for: j1');
+          } // END if (j1.authEnabled
+        }) // ENF then
         .catch(function(error) {
           // jadams, 2018-08-31
           // TODO:  Check why a timeout is required

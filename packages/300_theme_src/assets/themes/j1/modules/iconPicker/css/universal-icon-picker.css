@@ -7,7 +7,7 @@
  # https://jekyll.one
  # https://github.com/migliori/universal-icon-picker
  #
- # Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023, 2024 Juergen Adams
  # Copyright (C) 2023 Gilles Migliori
  #
  # J1 Template is licensed under the MIT License.

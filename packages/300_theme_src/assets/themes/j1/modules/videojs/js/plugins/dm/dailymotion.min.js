@@ -7,7 +7,7 @@
  #  http://jekyll.one
  #
   # Copyright (C) John Law
- #  Copyright (C) 2023 Juergen Adams
+ #  Copyright (C) 2023, 2024 Juergen Adams
  #
  #  J1 Theme is licensed under MIT License.
  #  See: https://github.com/jekyll-one/J1 Theme/blob/master/LICENSE

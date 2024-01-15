@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "gem",
-  "version": "2024.0.0",
+  "version": "2024.1.0",
   "description": "RubyGem sources for J1 Starter",
   "main": "j1-template.gemspec",
   "config": {
@@ -22,7 +22,7 @@
     "gemspec": "j1-template.gemspec",
     "gemfile": "Gemfile",
     "gemext":  "gem",
-    "gemversion": "2024.0.0",
+    "gemversion": "2024.1.0",
     "binaries": "true"
   },
   "ruby": {
@@ -89,12 +89,8 @@
     "template-gem-folder:_includes": "shx cp -r ../300_theme_src/_includes ./lib/starter_web",
     "template-gem-files": "run-s template-gem-site-files:*",
     "template-gem-site-files:data": "shx mkdir ./lib/starter_web/_data && shx cp -r ../400_theme_site/_data/* ./lib/starter_web/_data/",
-    "template-gem-site-files:private-default-config": "shx cp -f ../300_theme_src/_install/site/config/private.default.yml ./lib/starter_web/_data/_defaults/private.yml",
-    "template-gem-site-files:private-config": "shx cp -f ../300_theme_src/_install/site/config/private.default.yml ./lib/starter_web/_data/private.yml",
     "template-gem-site-files:plugins": "shx cp -r ../300_theme_src/_plugins ./lib/starter_web/_plugins",
-    "template-gem-site-files:netlify-config": "shx cp -f ../300_theme_src/_install/site/config/cc.yml ./apps/public/cc",
     "template-gem-site-files:post-data": "shx cp -rf ../300_theme_src/_install/site/modules/* ./lib/starter_web/_data/modules",
-    "template-gem-site-files:utilities": "shx cp -rf ../300_theme_src/_install/site/utilities ./lib/starter_web/_data/",
     "template-gem-site-files:assets": "shx cp -r ../300_theme_src/assets ./lib/starter_web",
     "template-gem-site-files:assets-themes-core": "shx rm -rf ./lib/starter_web/assets/themes",
     "template-gem-site-files:collections": "shx cp -r ../400_theme_site/collections ./lib/starter_web",
@@ -103,8 +99,6 @@
     "template-gem-site-files:site-base-files": "shx cp -rf ../300_theme_src/_install/site/base-files/* ./lib/starter_web",
     "template-gem-site-files:site-template-config": "shx cp -f ../300_theme_src/_install/site/config/j1_config.yml ./lib/starter_web/_data/",
     "template-gem-site-files:site-base-gemfile": "shx mv ./lib/starter_web/production.gem ./lib/starter_web/Gemfile",
-    "template-gem-site-files:netlify-test-data": "echo shx cp -r ../400_theme_site/_cc_test_data/ ./lib/starter_web/",
-    "template-gem-site-files:util-server": "shx cp -r ../600_theme_utilsrv/_* ./lib/starter_web/utilsrv && shx cp ../600_theme_utilsrv/package.json ./lib/starter_web/utilsrv && shx cp ../600_theme_utilsrv/server.js ./lib/starter_web/utilsrv",
     "posttemplate-gem-files": "run-s posttemplate-gem-site-files:*",
     "posttemplate-gem-site-files:data-remove": "shx rm -f lib/starter_web/_data/modules/cc.yml",
     "posttemplate-gem-site-files:assets-remove": "shx rm -rf ./lib/starter_web/assets/error_pages && shx rm -rf ./lib/starter_web/assets/data",

@@ -7,7 +7,7 @@
  # https://jekyll.one
  # http://srobbin.com/jquery-plugins/backstretch/
  #
- # Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023, 2024 Juergen Adams
  # Copyright (C) 2017 Daniel Cohen Gindi
  # Copyright (C) 2012 Scott Robbin
  #

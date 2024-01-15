@@ -12,7 +12,7 @@ regenerate:                             true
  # Product/Info:
  # http://jekyll.one
  #
- # Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
@@ -63,7 +63,7 @@ regenerate:                             true
  #  Product/Info:
  #  http://jekyll.one
  #
- #  Copyright (C) 2023 Juergen Adams
+ #  Copyright (C) 2023, 2024 Juergen Adams
  #
  #  J1 Theme is licensed under MIT License.
  #  See: https://github.com/jekyll-one/J1 Theme/blob/master/LICENSE
@@ -198,6 +198,11 @@ j1.adapter.translator = (function (j1, window) {
         var translationFeedbackHighlight;
 
         user_consent = j1.readCookie(cookie_names.user_consent);
+        if (!user_consent.personalization) {
+          const translateButton = '#quickLinksTranslateButton';
+          $(translateButton).hide();
+          return;
+        }
 
         // set domain used by cookies
         //

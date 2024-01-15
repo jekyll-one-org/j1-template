@@ -6,7 +6,7 @@
 # Product/Info:
 # https://jekyll.one
 #
-# Copyright (C) 2023 Juergen Adams
+# Copyright (C) 2023, 2024 Juergen Adams
 # Copyright (C) 2012 Mark Dodwell
 #
 # J1 Theme is licensed under the MIT License

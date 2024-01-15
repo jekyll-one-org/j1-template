@@ -8,7 +8,7 @@
  * https://github.com/fabiospampinato/cash/tree/1.3.5
  #
  # Copyright (c) 2014 Ken Wheeler
- # Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023, 2024 Juergen Adams
  #
  # Cash is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md

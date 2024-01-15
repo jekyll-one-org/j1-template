@@ -7,7 +7,7 @@
  #  https://jekyll.one
  #  http://getbootstrap.com/
  #
- #  Copyright (C) 2023 Juergen Adams
+ #  Copyright (C) 2023, 2024 Juergen Adams
  #
  #  J1 Theme is licensed under MIT License.
  #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
@@ -26,7 +26,7 @@
 // module.exports = function core ( options ) {
 /*!
  * J1 Core
- * Copyright (C) 2023 Juergen Adams
+ * Copyright (C) 2023, 2024 Juergen Adams
  * Licensed under MIT License.
  */
 module.exports = (function (options) {

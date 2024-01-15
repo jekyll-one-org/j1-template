@@ -7,7 +7,7 @@
  # https://jekyll.one
  #
  # Copyright (C) 2023 Sachin Neravath
- # Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
@@ -16,4 +16,4 @@
  # -----------------------------------------------------------------------------
 */
 
-.lg-uno-video-icon span{display:block;position:absolute;top:0;left:0;bottom:0;right:0;z-index:1;background:url(icons/play-button.png) no-repeat center center}.lg-uno-thumbnails .lg-outer{width:auto;right:230px;left:10px}.lg-uno-thumbnails .lg-outer .lg-thumb-outer{left:auto;top:0;width:230px;max-height:none;bottom:0;background-color:#999;padding-left:5px;padding-right:5px;margin:0 -10px;overflow-y:auto;position:fixed;right:0;transform:translate3d(30%,0,0);opacity:0;will-change:transform opacity;transition:transform .15s cubic-bezier(0,0,0.25,1) 0,cubic-bezier(0,0,0.25,1) .15s}.lg-uno-thumbnails .lg-outer.lg-components-open .lg-thumb-outer{transform:translate3d(0,0,0);opacity:1}.lg-uno-thumbnails .lg-outer .lg-thumb-item{float:left;will-change:filter;transition:filter .12s ease-in,border-color .12s ease}.lg-uno-thumbnails .lg-outer .lg-thumb{padding:5px;background-color:#1c1c1d}
+.img-responsive{width:100%;height:auto;overflow:hidden}.img-fluid{max-width:100%;height:auto;overflow:hidden}.gallery-container a{width:240px;margin:5px}.gallery-container a img{max-width:100%;height:auto}.vjs-chapter-marker{position:absolute;background:#0d47a1;width:7px;height:7px;margin-left:-3px}.vjs-chapter-marker span{position:absolute;bottom:50px;opacity:0;margin-left:-20px;z-index:90;background:rgba(0,0,0,.8);padding:8px;font-size:10px}.vjs-chapter-marker:hover span{opacity:1}.lg-uno-video-icon span{display:block;position:absolute;top:0;left:0;bottom:0;right:0;z-index:1;background:url(icons/play-button.png) no-repeat center center}.lg-video-icon span{display:block;position:absolute;overflow:hidden;max-height:50%;top:15px;left:0;bottom:0;right:0;z-index:1;background:url(icons/play-button.png) no-repeat center center}.lg-uno-thumbnails .lg-outer{width:auto;right:230px;left:10px}.lg-uno-thumbnails .lg-outer .lg-thumb-outer{left:auto;top:0;width:230px;max-height:none;bottom:0;background-color:#999;padding-left:5px;padding-right:5px;margin:0 -10px;overflow-y:auto;position:fixed;right:0;transform:translate3d(30%,0,0);opacity:0;will-change:transform opacity;transition:transform .15s cubic-bezier(0,0,0.25,1) 0,cubic-bezier(0,0,0.25,1) .15s}.lg-uno-thumbnails .lg-outer.lg-components-open .lg-thumb-outer{transform:translate3d(0,0,0);opacity:1}.lg-uno-thumbnails .lg-outer .lg-thumb-item{float:left;will-change:filter;transition:filter .12s ease-in,border-color .12s ease}.lg-uno-thumbnails .lg-outer .lg-thumb{padding:5px;background-color:#1c1c1d}

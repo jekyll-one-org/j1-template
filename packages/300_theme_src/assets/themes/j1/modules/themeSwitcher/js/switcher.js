@@ -7,7 +7,7 @@
  # https://jekyll.one
  # https://github.com/jguadagno/bootstrapThemeSwitcher
  #
- # Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023, 2024 Juergen Adams
  # Copyright (C) 2014 Joseph Guadagno
  #
  # J1 Template is licensed under the MIT License.

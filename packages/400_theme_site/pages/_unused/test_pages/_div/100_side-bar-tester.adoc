@@ -62,7 +62,7 @@ Welcome to the first preview page focussing on the image module. This page
 shows some valuable features of the J1 Theme to manage your image-based
 content using lightboxes, carousels (slider), and galleries.
 
-The image module offers complex functionality based on powerful OpenSource
+The image module offers complex functionality based on powerful Open Source
 libraries like JustifiedGallery for high-end, masonry-styled preview maps.
 J1 Theme uses the jQuery plugin Owl Carousel as a base for image sliders.
 A carousel app (slider) lets you present your images as shows.

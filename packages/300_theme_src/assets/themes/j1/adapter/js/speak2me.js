@@ -11,7 +11,7 @@ regenerate:                             true
  #
  # Product/Info:
  # https://jekyll.one
- # Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
@@ -67,7 +67,7 @@ regenerate:                             true
  # Product/Info:
  # https://jekyll.one
  #
- # Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
@@ -234,7 +234,7 @@ var Events = {
           }
 
           if (ttsDisabled) {
-            logger.warn('\n' + 'tts detected: disabled');
+            logger.debug('\n' + 'tts detected: disabled');
             $('#quickLinksSpeakButton').hide();
             clearInterval(dependencies_met_page_ready);
             return;
@@ -256,7 +256,7 @@ var Events = {
               xhr_container_id:   'speak2me_container',
               xhr_data_path:      '/assets/data/speak2me/index.html',
               xhr_data_element:   'speak2me-modal-data' },
-              'j1.adapter.rtextResizer',
+              'j1.adapter.speak2me',
               'null'
             );
           }

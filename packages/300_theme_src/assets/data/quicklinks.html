@@ -14,7 +14,7 @@ exclude_from_search:                    true
  # Product/Info:
  # https://jekyll.one
  #
- # Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
@@ -43,6 +43,8 @@ exclude_from_search:                    true
 {% assign consent_settings          = modules.cookieconsent.settings %}
 {% assign lunr_search_defaults      = modules.defaults.lunr.defaults %}
 {% assign lunr_search_settings      = modules.lunr.settings %}
+{% assign doc_search_defaults       = modules.defaults.docsearch.defaults %}
+{% assign doc_search_settings       = modules.docsearch.settings %}
 
 {% assign translator_defaults       = modules.defaults.translator.defaults %}
 {% assign translator_settings       = modules.translator.settings %}
@@ -70,6 +72,7 @@ exclude_from_search:                    true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign authentication_options    = authentication_defaults | merge: authentication_settings %}
 {% assign lunr_search_options       = lunr_search_defaults | merge: lunr_search_settings %}
+{% assign doc_search_options        = doc_search_defaults | merge: doc_search_settings %}
 {% assign quicklinks_options        = nav_quicklinks_defaults | merge: nav_quicklinks_settings %}
 {% assign consent_options           = consent_defaults | merge: consent_settings %}
 {% assign toggler_options           = toggler_defaults | merge: toggler_settings %}
@@ -131,6 +134,10 @@ exclude_from_search:                    true
 {% assign quicksearch_action        = quicklinks_options.quicksearch_action %}
 {% assign quicksearch_label         = quicklinks_options.quicksearch_label %}
 
+{% assign docsearch_icon            = quicklinks_options.docsearch_icon %}
+{% assign docsearch_action          = quicklinks_options.docsearch_action %}
+{% assign docsearch_label           = quicklinks_options.docsearch_label %}
+
 {% assign translate_icon            = quicklinks_options.translate_icon %}
 {% assign translate_action          = quicklinks_options.translate_action %}
 {% assign translate_label           = quicklinks_options.translate_label %}
@@ -160,6 +167,7 @@ exclude_from_search:                    true
 --------------------------------------------------------------------------------
 {% endcomment %}
 
+
 {% comment %} Legacy buttons
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign signin_icon               = auth_client_config.signin_icon %}
@@ -173,6 +181,7 @@ exclude_from_search:                    true
 <!-- authentication_enabled: {{ authentication_enabled | debug }} -->
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign show_quicksearch_icon     = lunr_search_options.enabled %}
+{% assign show_docsearch_icon       = doc_search_options.enabled %}
 {% assign show_translator_icon      = translator_options.enabled %}
 {% assign show_speak2me_icon        = speak2me_options.enabled %}
 {% assign show_theme_toggler_icon   = toggler_options.enabled %}
@@ -275,6 +284,7 @@ exclude_from_search:                    true
   {% comment %} Action buttons
   ------------------------------------------------------------------------------ {% endcomment %}
   {% if show_quicksearch_icon %}<li id="quickLinksSearchButton" class="nav-icon {{quicksearch_action}}"><a href="#" aria-label="{{quicksearch_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{quicksearch_icon}} {{icon_size}}"></i></a></li>{% endif %}
+  {% if show_docsearch_icon %}<li id="quickLinksDocSearchButton" class="nav-icon {{docsearch_action}}"><a href="#" aria-label="{{docsearch_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{docsearch_icon}} {{icon_size}}"></i></a></li>{% endif %}
   {% if show_auth_manager_icon %}<li id="quickLinksSignInOutButton" class="nav-icon sign-inout" style="display: none;"><a class="nav-icon" id="navLinkSignInOut" aria-label="SignOut" href="#" data-bs-toggle="modal" data-bs-target="#{{signin_modal_id}}"><i id="iconSignInOut" class="nav-icon {{icon_family}} {{icon_family}}-{{signin_icon}} {{icon_size}}"></i></a></li>{% endif %}
   {% if show_cookieconsent_icon %}<li id="quickLinksCookieButton" class="nav-icon {{cookies_action}}" style="display: block;"><a href="#" aria-label="{{cookies_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{cookies_icon}} {{icon_size}}"></i></a></li>{% endif %}
   {% if show_translator_icon %}<li id="quickLinksTranslateButton" class="nav-icon {{translate_action}}" style="display: block;"><a href="#" aria-label="{{translate_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{translate_icon}} {{icon_size}}"></i></a></li>{% endif %}

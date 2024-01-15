@@ -1,8 +1,8 @@
 Font Awesome Free License
 -------------------------
 
-Font Awesome Free is free, OpenSource, and GPL friendly. You can use it for
-commercial projects, OpenSource projects, or really almost whatever you want.
+Font Awesome Free is free, Open Source, and GPL friendly. You can use it for
+commercial projects, Open Source projects, or really almost whatever you want.
 Full Font Awesome Free license: https://fontawesome.com/license.
 
 # Icons: CC BY 4.0 License (https://creativecommons.org/licenses/by/4.0/)

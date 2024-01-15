@@ -7,7 +7,7 @@
  # https://jekyll.one
  #
  # Copyright (C) 2023 Sachin Neravath
- # Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
@@ -16,6 +16,8 @@
  # -----------------------------------------------------------------------------
 */
 
+/* Global styles
+   ----------------------------------------------------------------------------- */
 .img-responsive {
   width: 100%;
   height: auto;
@@ -38,8 +40,38 @@
   height: auto;
 }
 
+
+/* Custom timeline chapter markers
+   ----------------------------------------------------------------------------- */
+
+/* marker (bullet) */
+.vjs-chapter-marker {
+	position: absolute;
+	background: #0D47A1;
+	width: 7px;
+	height: 7px;
+	margin-left: -3px;
+}
+
+/* title (text) */
+.vjs-chapter-marker span {
+  position: absolute;
+  bottom: 50px;
+  opacity: 0;
+  margin-left: -20px;
+  z-index: 90;
+  background: rgba(0,0,0,.8);
+  padding: 8px;
+  font-size: 10px;
+}
+
+.vjs-chapter-marker:hover span {
+  opacity: 1;
+}
+
+
 /* Custom icons
- ------------------------------------------------------------------------------- */
+   ----------------------------------------------------------------------------- */
 .lg-uno-video-icon span {
   display: block;
   position: absolute;
@@ -66,7 +98,7 @@
 
 
 /* Custom thumbnails
- ------------------------------------------------------------------------------- */
+   ----------------------------------------------------------------------------- */
  .lg-uno-thumbnails .lg-outer {
    width: auto;
    right: 230px;

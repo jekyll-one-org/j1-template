@@ -12,7 +12,7 @@ regenerate:                             true
  # Product/Info:
  # https://jekyll.one
  #
- # Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
@@ -126,7 +126,7 @@ ToDo: Remove configuration from j1_navigator.yml
  # Product/Info:
  # {{site.data.template_settings.theme_author_url}}
  #
- # Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # For details, see {{site.data.template_settings.theme_author_url}}
@@ -327,6 +327,10 @@ j1.adapter.navigator = (function (j1, window) {
             appDetected       = j1.appDetected();
             authClientEnabled = j1.authEnabled();
             logger.info('\n' + 'application status detected: ' + appDetected);
+
+            // setTimeout (function() {
+            //   j1.core.navigator.init (_this.navDefaults, _this.navMenuOptions);
+            // }, 1000);  // {{template_config.page_on_load_timeout}}
 
             j1.core.navigator.init (_this.navDefaults, _this.navMenuOptions);
 
@@ -1082,6 +1086,8 @@ j1.adapter.navigator = (function (j1, window) {
       style += '       min-width: ' + navMenuOptions.dropdown_item_min_width + 'rem !important;';
       style += '       border-top: solid ' + navMenuOptions.dropdown_border_top + 'px !important;';
       style += '       border-radius: ' + navMenuOptions.dropdown_border_radius + 'px !important;';
+      // jadams, 2023-12-22: overwrite "margin-top" default of dropdown-menu[data-bs-popper]
+      style += '       margin-top: 0;';
       style += '       left: 0;';
       style += '    }';
       style += '  }';

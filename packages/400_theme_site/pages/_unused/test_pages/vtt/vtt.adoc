@@ -1,0 +1,111 @@
+---
+title:                                  WEBVTT
+title_extention:                        Tester
+tagline:                                Tester
+
+date:                                   2023-12-12
+#last_modified:                         2023-12-12
+
+description: >
+                                        Videos from Ersties website.
+keywords: >
+                                        Anal, WebCams, Solo, Video
+
+categories:                             [ WebCams ]
+tags:                                   [ anal, solo, video ]
+
+image:
+  path:                                 /assets/images/modules/attics/1920x1280/quino-al-2.jpg
+  width:                                1920
+  height:                               1280
+
+toc:                                    false
+tts:                                    false
+fab_menu_id:                            default
+regenerate:                             false
+personalization:                        false
+permalink:                              /pages/public/learn/vtt/
+
+resources:                              [ animate, lightgallery, gallery, videojs ]
+resource_options:
+  - attic:
+      slides:
+        - url:                          /assets/images/modules/attics/1920x1280/quino-al-2.jpg
+          alt:                          Photo by Quino Al Angel on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Quino Al Angel
+            href:                       https://unsplash.com/@quinoal
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="none" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+Videos created by a digicam or a mobile can be played by J1 Template using
+the lightGallery integration. Present videos you have made at it's best.
+
+.MP4 Videos
+gallery::jg_video_html5[role="mt-4 mb-4"]
+
+
+++++
+<style>
+
+.video-js .vjs-text-track-display div {
+  font-size: 1.75rem;
+}
+
+.video-js .vjs-text-track-display > div > div > div {
+  background: transparent !important;
+  display: inline-block !important;
+	line-height: 33px !important;
+	padding: 5px !important;
+	text-shadow: 1px 1px 2px #000;
+}
+
+</style>
+
+<!-- video
+	id="sf4qhLLPm6H_html5_api"
+	class="video-js vjs-theme-uno"
+  crossorigin="anonymous"
+	width="640" height="360"
+	controls
+	data-setup='{
+		"fluid" : true,
+		"sources": [{
+			"type": "video/mp4",
+			"src": "/assets/videos/gallery/html5/video1.mp4"
+		}],
+		"controlBar": {
+			"pictureInPictureToggle": false
+		}
+	}'>
+
+  <track kind="captions" src="/assets/videos/gallery/vtt/captions/video1.vtt" srclang="en" label="Captions">
+  <track kind="chapters" src="/assets/videos/gallery/vtt/chapters/video1.vtt" srclang="en" label="Chapters">
+
+</video -->
+
+
+++++

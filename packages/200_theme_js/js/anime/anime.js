@@ -8,7 +8,7 @@
  # https://jekyll.one
  #
  # Copyright (C) 2020 Julian Garnier
- # Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023, 2024 Juergen Adams
  #
  # Anime is licensed under the MIT License.
  # See: https://github.com/juliangarnier/anime/blob/master/LICENSE.md

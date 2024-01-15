@@ -8,13 +8,13 @@ exclude_from_search:                    true
 {% comment %}
  # -----------------------------------------------------------------------------
  # ~/assets/data/translator.html
- # Liquid PROCEDURE to generate the HTML (data) portion of all modals used
- # by the J1 Translator module
+ # Liquid PROCEDURE to generate the HTML (data) portion of the modal (dialog)
+ # used by the J1 Translator module
  #
  # Product/Info:
  # https://jekyll.one
  #
- # Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
@@ -30,23 +30,23 @@ exclude_from_search:                    true
 
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment     = site.environment %}
+{% assign environment         = site.environment %}
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign modules         = site.data.modules %}
+{% assign modules             = site.data.modules %}
 
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign translate_defaults = modules.defaults.translator.defaults %}
-{% assign translate_settings = modules.translator.settings %}
+{% assign translate_defaults  = modules.defaults.translator.defaults %}
+{% assign translate_settings  = modules.translator.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign translate_options  = translate_defaults | merge: translate_settings %}
+{% assign translate_options   = translate_defaults | merge: translate_settings %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -63,38 +63,42 @@ exclude_from_search:                    true
   <meta name="robots" content="noindex, nofollow">
 </head>
 
-{% comment %} i18n: translations
+
+{% comment %} Modal Translator dialog
 -------------------------------------------------------------------------------- {% endcomment %}
 
-{% comment %} Modal Google Translator dialog (default: en-EN)
--------------------------------------------------------------------------------- {% endcomment %}
 <div id="google-data-en">
   <div id="modal-google-translate-en" class="modal-dialog modal-frame modal-top modal-notify modal-primary" role="document">
     <div class="modal-content">
 
       <div class="modal-header">
-        <p class="lead">{{translate_options.google.modal_settings.title.en}}</p>
+        <p class="lead">{{translate_options.google.modal_settings.title}}</p>
       </div>
 
-      <div class="modal-body">
-        <div class="modal-body-text" style="font-size: 90%">
-          <p class="mb-3">{{translate_options.google.modal_settings.body_text.en}}</p>
-        </div>
-        <p style="font-size: 90%">{{translate_options.google.modal_settings.language_selector_title.en}}</p>
-        <div id="dropdownJSON" class="ms-dopdown notranslate mb-4" style="display:none"></div>
+      <!-- start modal body  -->
+      <div class="container mt-4">
+
         <p>
           <a href="#google-privacy" data-bs-toggle="collapse" class="">Privacy Notice</a>
-          <a href="#google-options" data-bs-toggle="collapse" class="float-right">Privacy</a>
+          <a href="#google-options" data-bs-toggle="collapse" class="float-right">My Settings</a>
         </p>
 
+        <div class="modal-body-text r-text-300">
+          <p class="mb-3">{{translate_options.google.modal_settings.body_text}}</p>
+        </div>
+        <p class="r-text-300">{{translate_options.google.modal_settings.language_selector_title}}:</p>
+        <div id="dropdownJSON" class="ms-dopdown notranslate mb-4" style="display:none"></div>
+
         <div id="google-privacy" class="collapse">
-          <div class="modal-body-text" style="font-size: 90%">
-            <p class="mb-2">{{translate_options.google.modal_settings.privacy_notice.en}}</p>
+          <div class="bccs-body-text r-text-200">
+            <p class="tagline mt-4 mb-1"><b>Privacy Notice</b></p>
+            <div class="d-inline-block g-width-50 g-height-2 bg-primary mb-3"></div>
+            <p>{{translate_options.google.modal_settings.privacy_notice}}</p>
           </div>
         </div>
 
         <div id="google-options" class="collapse">
-          <p class="tagline mt-4 mb-1"><b>Settings</b></p>
+          <p class="tagline mt-4 mb-1"><b>My Settings</b></p>
           <div class="d-inline-block g-width-50 g-height-2 bg-primary mb-3"></div>
 
           <div class="translator-option" data-name="analysis">
@@ -128,7 +132,7 @@ exclude_from_search:                    true
           </div>
 
           <div class="translator-option" data-name="translateAllPages">
-            <div class="switch mb-1">
+            <div class="switch mb-4">
               <label>
                 <input id="checkboxTranslateAllPages" type="checkbox" name="checkboxTranslateAllPages" checked disabled>
                 <span class="bmd-switch-track"></span>
@@ -136,16 +140,6 @@ exclude_from_search:                    true
               </label>
             </div>
           </div>
-
-          <!-- div class="translator-option" data-name="translationEnabled">
-            <div class="switch mb-1">
-              <label>
-                <input id="checkboxTranslationEnabled" type="checkbox" name="checkboxTranslationEnabled" checked>
-                <span class="bmd-switch-track"></span>
-                Translation Service
-              </label>
-            </div>
-          </div -->
 
         </div>
       </div>
@@ -197,121 +191,7 @@ exclude_from_search:                    true
   </div>
 </div>
 
-{% comment %} END Modal Google Translator dialog (en-EN)
--------------------------------------------------------------------------------- {% endcomment %}
-
-{% comment %} Modal Google Translator dialog (de-DE)
--------------------------------------------------------------------------------- {% endcomment %}
-<div id="google-data-de">
-  <div id="modal-google-translate-de" class="modal-dialog modal-frame modal-top modal-notify modal-primary" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <p class="lead">{{translate_options.google.modal_settings.title.de}}</p>
-      </div>
-      <div class="modal-body">
-        <div class="modal-body-text" style="font-size: 90%">
-          <p class="mb-2">{{translate_options.google.modal_settings.body_text.de}}</p>
-        </div>
-        <p style="font-size: 90%">{{translate_options.google.modal_settings.language_selector_title.de}}</p>
-        <div id="dropdownJSON" class="mb-4" style="display:none"></div>
-        <p>
-          <a href="#google-privacy" data-bs-toggle="collapse" class="">Datenschutzerklärung</a>
-          <a href="#google-options" data-bs-toggle="collapse" class="float-right">Meine Einstellungen</a>
-        </p>
-
-        <div id="google-privacy" class="collapse">
-          <div class="modal-body-text" style="font-size: 90%">
-            <p class="mb-2">{{translate_options.google.modal_settings.privacy_notice.de}}</p>
-          </div>
-        </div>
-
-        <div id="google-options" class="collapse">
-          <p class="tagline mt-4 mb-1"><b>Settings</b></p>
-          <div class="d-inline-block g-width-50 g-height-2 bg-primary mb-3"></div>
-
-          <div class="translator-option" data-name="analysis">
-            <div class="switch mb-1">
-              <label>
-                <input id="checkboxAnalysis" type="checkbox" name="checkboxAnalysis" checked>
-                <span class="bmd-switch-track"></span>
-                Analysen erlaubt (Ihre Privatsphäre)
-              </label>
-            </div>
-          </div>
-
-          <div class="translator-option" data-name="personalization">
-            <div class="switch mb-1">
-              <label>
-                <input id="checkboxPersonalization" type="checkbox" name="checkboxPersonalization" checked>
-                <span class="bmd-switch-track"></span>
-                Personalisierung erlaubt (Ihre Privatsphäre)
-              </label>
-            </div>
-          </div>
-
-          <div class="translator-option" data-name="useLanguageFromBrowser">
-            <div class="switch mb-1">
-              <label>
-                <input id="checkboxUseLanguageFromBrowser" type="checkbox" name="checkboxUseLanguageFromBrowser" checked>
-                <span class="bmd-switch-track"></span>
-                Spracheinstellungen vom Browser
-              </label>
-            </div>
-          </div>
-
-          <div class="translator-option" data-name="translateAllPages">
-            <div class="switch mb-1">
-              <label>
-                <input id="checkboxTranslateAllPages" type="checkbox" name="checkboxTranslateAllPages" checked disabled>
-                <span class="bmd-switch-track"></span>
-                Übersetzung aller Seiten
-              </label>
-            </div>
-          </div>
-
-          <!-- div class="translator-option" data-name="translatorName">
-            <div class="switch mb-1">
-              <label>
-                <input id="checkboxTranslatorName" type="checkbox"  name="checkboxTranslatorNameEnabled" disabled="true" checked>
-                <span class="bmd-switch-track"></span>
-                Übersetzung eingeschaltet
-              </label>
-            </div>
-          </div -->
-
-          <div class="translator-option" data-name="translationEnabled">
-            <div class="switch mb-1">
-              <label>
-                <input id="checkboxTranslator" type="checkbox" name="checkboxTranslator" checked>
-                <span class="bmd-switch-track"></span>
-                Übersetzung eingeschaltet
-              </label>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="modal-footer">
-        <button id="translator-buttonDoNotAgree" type="button" class="btn btn-outline-secondary mb-1 mr-2" style="min-width: 20rem">
-        Nein, Übersetzung abschalten
-        </button>
-        <button id="translator-buttonAgree" type="button" class="btn btn-primary mb-1 mr-2" style="min-width: 20rem">
-        Ja, bitte übersetzen
-        </button>
-        <button id="translator-buttonSave" type="button" class="btn btn-outline-secondary mb-1 mr-2" style="display:none; min-width: 20rem">
-        Auswahl speichern
-        </button>
-        <button id="translator-buttonAgreeAll" type="button" class="btn btn-primary mb-1 mr-2" style="display:none; min-width: 20rem">
-        Allen zustimmen
-        </button>
-      </div>
-
-    </div>
-  </div>
-</div>
-{% comment %} END Modal Google Translator dialog (de-DE)
+{% comment %} END Modal Translator dialog
 -------------------------------------------------------------------------------- {% endcomment %}
 
 {% endcapture %}

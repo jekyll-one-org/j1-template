@@ -13,7 +13,7 @@ regenerate:                             true
  # Product/Info:
  # https://jekyll.one
  #
- # Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
@@ -65,7 +65,7 @@ regenerate:                             true
  # https://jekyll.one
  # http://www.jquery-backstretch.com/
  #
- # Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023, 2024 Juergen Adams
  # Copyright (C) 2012 Scott Robbin
  #
  # J1 Template is licensed under the MIT License.

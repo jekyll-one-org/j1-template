@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "utls",
-  "version": "2024.0.0",
+  "version": "2024.1.0",
   "description": "J1 Theme Utility Server",
   "homepage": "https://jekyll.one",
   "author": {
@@ -23,11 +23,11 @@
   },
   "scripts": {
     "audit": "npm audit",
-    "clean": "shx rm -f *.lock && shx rm -rf package-lock.json",
-    "start": "run-p -s utilsrv-run",
-    "app": "run-p -s utilsrv",
-    "develop": "run-p -s utilsrv",
-    "site": "run-p -s utilsrv",
+    "_clean": "shx rm -f *.lock && shx rm -rf package-lock.json",
+    "_start": "run-p -s utilsrv-run",
+    "_app": "run-p -s utilsrv",
+    "_develop": "run-p -s utilsrv",
+    "_site": "run-p -s utilsrv",
     "utilsrv": "cross-env UTILSRV_ENABLED=$npm_package_utilsrv_enabled if-env UTILSRV_ENABLED=true && run-p -s utilsrv-run || run-p -s utilsrv-exit",
     "utilsrv-run": "echo Startup UTILSRV .. && node server.js",
     "utilsrv-exit": "echo UTILSRV disabled. Not started."

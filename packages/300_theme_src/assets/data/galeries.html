@@ -14,7 +14,7 @@ exclude_from_search:                    true
  # Product/Info:
  # https://jekyll.one
  #
- # Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
@@ -207,11 +207,16 @@ exclude_from_search:                    true
                  "src":   "{{gallery.video_base_path}}/{{video.source}}",
                  "type":  "video/{{extention}}"
               }],
-              "tracks": [{
-                 {% for attribute in video.tracks %}
-                 {{attribute[0] | json}}: {{attribute[1] | json}}{% if forloop.last %}{% else %},{% endif %}
+              "tracks": [
+                 {% for track in video.tracks %}
+                 {
+                   {% for attribute in track %}
+                     {% if attribute[0] == 'track' %} {% continue %} {% endif %}
+                     {{attribute[0] | json}}: {{attribute[1] | json}}{% if forloop.last %}{% else %},{% endif %}
+                   {% endfor %}
+                 }{% if forloop.last %}{% else %},{% endif %}
                  {% endfor %}
-              }]
+              ]
             }'>
           	<img class="speak2me-ignore"
               src="{{gallery.image_base_path}}/{{video.poster.source}}"

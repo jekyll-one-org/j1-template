@@ -8,7 +8,7 @@
  #  https://github.com/adamnurdin01/bootsnav
  #  http://corenav.anurdin.net/
  #
- #  Copyright (C) 2023 Juergen Adams
+ #  Copyright (C) 2023, 2024 Juergen Adams
  #  Copyright (C) 2016 adamnurdin01
  #
  #  J1 Theme is licensed under MIT License.
@@ -366,6 +366,16 @@ module.exports = function navigator ( options ) {
         } // END QuickSearch
 
         // ---------------------------------------------------------------------
+        // DocSearch dialog
+        //
+        if ($('li.documind')) {
+          logger.debug('register SHOW event for J1 DocSearch');
+          $('li.documind > a', this).on('click', function(e) {
+            j1.adapter.docsearch.showDialog();
+          });
+        } // END DocSearch
+
+        // ---------------------------------------------------------------------
         // Translator dialog
         //
         if ($('li.translate')) {
@@ -383,17 +393,17 @@ module.exports = function navigator ( options ) {
           $('li.speak > a', this).on('click', function(e) {
             j1.adapter.speak2me.showDialog();
           });
-        } // END NBI Notebooks
+        } // END Speak2Me
 
         // ---------------------------------------------------------------------
         // NBI Notebooks dialog
         //
-        if ($('li.nbi-notebooks')) {
-          logger.debug('register SHOW event for J1 NBI');
-          $('li.nbi-notebooks > a', this).on('click', function(e) {
-            j1.adapter.nbinteract.showDialog();
-          });
-        } // END NBI Notebooks
+        // if ($('li.nbi-notebooks')) {
+        //   logger.debug('register SHOW event for J1 NBI');
+        //   $('li.nbi-notebooks > a', this).on('click', function(e) {
+        //     j1.adapter.nbinteract.showDialog();
+        //   });
+        // } // END NBI Notebooks
 
         // ---------------------------------------------------------------------
         // CookieConsent dialog
@@ -669,4 +679,6 @@ module.exports = function navigator ( options ) {
     }, // END updateSidebar
 
   }; // end return (object)
+
+// }( j1, window, jQuery );
 }( jQuery );

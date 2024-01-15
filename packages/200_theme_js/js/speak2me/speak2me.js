@@ -7,7 +7,7 @@
  # https://jekyll.one
  # https://github.com/acoti/articulate.js/tree/master
  #
- # Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023, 2024 Juergen Adams
  # Copyright (C) 2017 Adam Coti
  #
  # J1 Template is licensed under the MIT License.
@@ -368,6 +368,7 @@
         voiceTags['.listingblock']        = new voiceTag('Start of a structured text block,', 'This element ist not spoken.');
         voiceTags['.gist']                = new voiceTag('Start of a gist element,', 'This element ist not spoken.');
         voiceTags['.slider']              =  new voiceTag('Start of a slider element,', 'This element ist not spoken.');
+        voiceTags['.modal']               = new voiceTag('Start of a modal element,', 'This element ist not spoken.');
         voiceTags['.masonry']             = new voiceTag('Start of a masonry element,', 'This element ist not spoken.');
         voiceTags['.lightbox-block']      = new voiceTag('Start of a lightbox element,', 'This element ist not spoken.');
         voiceTags['.gallery']             = new voiceTag('Start of a gallery element,', 'This element ist not spoken.');
@@ -415,14 +416,14 @@
         //
         var processSpeech = setInterval(function () {
           if (scanFinished) {
-            // Cycle through all the elements in the original jQuery
+            // Cycle through all the elements in the original $
             // selector, process and clean them one at a time, and
             // continually append it to the variable "toSpeak".
             //
             _this.each(function() {
                 obj = $(this).clone();                    // clone the DOM node and its descendants of what the user wants spoken
                 processed = processDOMelements(obj);      // process and manipulate DOM tree of this clone
-                processed = jQuery(processed).html();     // convert the result of all that to a string
+                processed = $(processed).html();     // convert the result of all that to a string
                 finished = cleanDOMelements(processed);   // do some text manipulation
                 toSpeak = finished;
             });
@@ -738,8 +739,8 @@
         // Remove DOM objects listed in the "ignoreTags" array
         //
         for (var prop in ignoreTags) {
-          jQuery(clone).find(ignoreTags[prop]).addBack(ignoreTags[prop]).not('[data-speak2me-recognize]').each(function() {
-            jQuery(this).html('');
+          $(clone).find(ignoreTags[prop]).addBack(ignoreTags[prop]).not('[data-speak2me-recognize]').each(function() {
+            $(this).html('');
           });
         };
 
@@ -748,49 +749,49 @@
         //
         if (ignoreTagsUser.length > 0) {
           for (var prop in ignoreTagsUser) {
-            jQuery(clone).find(ignoreTagsUser[prop]).addBack(ignoreTagsUser[prop]).not('[data-speak2me-recognize]').each(function() {
-                jQuery(this).html('');
+            $(clone).find(ignoreTagsUser[prop]).addBack(ignoreTagsUser[prop]).not('[data-speak2me-recognize]').each(function() {
+                $(this).html('');
             });
           };
         };
 
         // Remove DOM objects marked in the HTML code by "data-speak2me-ignore".
         //
-        jQuery(clone).find('[data-speak2me-ignore]').addBack('[data-speak2me-ignore]').each(function() {
-          jQuery(this).html('');
+        $(clone).find('[data-speak2me-ignore]').addBack('[data-speak2me-ignore]').each(function() {
+          $(this).html('');
         });
 
         // Remove DOM objects in the HTML code mareked by class "speak2me-ignore".
         //
-        jQuery(clone).find('.speak2me-ignore').addBack('[data-speak2me-ignore]').each(function() {
-          jQuery(this).html('');
+        $(clone).find('.speak2me-ignore').addBack('[data-speak2me-ignore]').each(function() {
+          $(this).html('');
         });
 
         // Search for prepend data specified in the HTML code by "data-speak2me-prepend".
         //
-        jQuery(clone).find('[data-speak2me-prepend]').addBack('[data-speak2me-prepend]').each(function() {
-          copy = jQuery(this).data('speak2me-prepend');
-          jQuery(this).prepend(copy + ' ');
+        $(clone).find('[data-speak2me-prepend]').addBack('[data-speak2me-prepend]').each(function() {
+          copy = $(this).data('speak2me-prepend');
+          $(this).prepend(copy + ' ');
         });
 
         // Search for append data specified in the HTML code by "data-speak2me-append".
         //
-        jQuery(clone).find('[data-speak2me-append]').addBack('[data-speak2me-append]').each(function() {
-          copy = jQuery(this).data('speak2me-append');
-          jQuery(this).append(' ' + copy);
+        $(clone).find('[data-speak2me-append]').addBack('[data-speak2me-append]').each(function() {
+          copy = $(this).data('speak2me-append');
+          $(this).append(' ' + copy);
         });
 
         // Search for tags to prepend and append specified by the "voiceTags" array.
         //
         var count = 0;
         for (var tag in voiceTags) {
-          jQuery(clone).find(tag).each(function() {
+          $(clone).find(tag).each(function() {
             if (customTags[tag]) {
-                jQuery(this).prepend(customTags[tag].prepend + ' ');
-                jQuery(this).append(' ' + customTags[tag].append);
+                $(this).prepend(customTags[tag].prepend + ' ');
+                $(this).append(' ' + customTags[tag].append);
             } else {
-                jQuery(this).prepend(voiceTags[tag].prepend + ' ');
-                jQuery(this).append(' ' + voiceTags[tag].append);
+                $(this).prepend(voiceTags[tag].prepend + ' ');
+                $(this).append(' ' + voiceTags[tag].append);
             };
           });
         };
@@ -800,20 +801,20 @@
         // because these tags require a pause, but often don't
         // have a comma or period at the end of their text.
         //
-        jQuery(clone).find('h1,h2,h3,h4,h5,h6,li,p').addBack('h1,h2,h3,h4,h5,h6,li,p').each(function() {
-          jQuery(this).append(pause_spoken);
+        $(clone).find('h1,h2,h3,h4,h5,h6,li,p').addBack('h1,h2,h3,h4,h5,h6,li,p').each(function() {
+          $(this).append(pause_spoken);
         });
 
         // Search for <br> tags to add a pause at the end.
-        jQuery(clone).find('br').each(function() {
-          jQuery(this).after(pause_spoken);
+        $(clone).find('br').each(function() {
+          $(this).after(pause_spoken);
         });
 
         // Search for <figure>, check for <figcaption>, insert
         // that text if exists and then remove the whole DOM object.
         //
-        jQuery(clone).find('figure').addBack('figure').each(function() {
-          copy = jQuery(this).find('figcaption').html();
+        $(clone).find('figure').addBack('figure').each(function() {
+          copy = $(this).find('figcaption').html();
 
           if (customTags['figure']) {
             prepend = customTags['figure'].prepend;
@@ -823,19 +824,19 @@
           }
 
           if ((copy != undefined) && (copy !== '')) {
-            jQuery('<div>' + prepend + ' ' + copy + '</div>').insertBefore(this);
+            $('<div>' + prepend + ' ' + copy + '</div>').insertBefore(this);
           }
 
-          jQuery(this).remove();
+          $(this).remove();
         });
 
         // Search for <image> tags, check for ALT attribute, and insert
         // text if exists and then dinally remove the DOM object.
         // NOTE: had to make adjustments for nesting in <picture> tags.
         //
-        jQuery(clone).find('img').addBack('img').each(function() {
-          copy = jQuery(this).attr('alt');
-          var parent = jQuery(this).parent();
+        $(clone).find('img').addBack('img').each(function() {
+          copy = $(this).attr('alt');
+          var parent = $(this).parent();
           var parentName = parent.get(0).tagName;
 
           if (customTags['img']) {
@@ -848,202 +849,202 @@
           if ((copy !== undefined) && (copy != '')) {
             if (parentName == 'PICTURE') {
                 var par;
-                jQuery('<div>' + prepend + ' ' + copy + pause_spoken + '</div>').insertBefore(parent);
+                $('<div>' + prepend + ' ' + copy + pause_spoken + '</div>').insertBefore(parent);
             } else {
-                jQuery('<div>' + prepend + ' ' + copy + pause_spoken + '</div>').insertBefore(this);
+                $('<div>' + prepend + ' ' + copy + pause_spoken + '</div>').insertBefore(this);
             }
           }
 
-          jQuery(this).remove();
+          $(this).remove();
         });
 
         // TODO: identify why the text 'Follow the link' is
         // already placed on the anchor
         //
-        jQuery(clone).find('a').addBack('a').each(function() {
-          var anchor  = jQuery(this);
+        $(clone).find('a').addBack('a').each(function() {
+          var anchor  = $(this);
           copy        = anchor[0].innerText;
           prepend     = voiceTags['a'].prepend;
           appended    = voiceTags['a'].append;
 
-          jQuery('<div>' + copy + '</div>').insertBefore(this);
-          jQuery('<div>' + appended + '</div>').insertBefore(this);
+          $('<div>' + copy + '</div>').insertBefore(this);
+          $('<div>' + appended + '</div>').insertBefore(this);
 
-          jQuery(this).remove();
+          $(this).remove();
         });
 
         // Search for admonition block elements and extract the type and
         // content. Insert type and content and then remove the DOM object.
         //
-        jQuery(clone).find('.admonitionblock').addBack('.admonitionblock').each(function() {
+        $(clone).find('.admonitionblock').addBack('.admonitionblock').each(function() {
           content_type    = this.classList[1];
-          content_element = jQuery(this).find('.content');
+          content_element = $(this).find('.content');
           content         = content_element[0].innerText;
           prepend         = voiceTags['.admonitionblock'].prepend + content_type + '. ';
           appended        = voiceTags['.admonitionblock'].append;
 
           if ((content !== undefined) && (content != '')) {
-            jQuery('<div>' + prepend + ' ' + content + '</div>').insertBefore(this);
-            jQuery('<div>' + appended + '</div>').insertBefore(this);
+            $('<div>' + prepend + ' ' + content + '</div>').insertBefore(this);
+            $('<div>' + appended + '</div>').insertBefore(this);
           }
 
-          jQuery(this).remove();
+          $(this).remove();
         });
 
         // Search for quote block elements.
         //
-        jQuery(clone).find('.quoteblock').addBack('quoteblock').each(function() {
-          var attribution = jQuery(this).find('.attribution');
-          content_element = jQuery(this).find('blockquote');
+        $(clone).find('.quoteblock').addBack('quoteblock').each(function() {
+          var attribution = $(this).find('.attribution');
+          content_element = $(this).find('blockquote');
           content         = content_element[0].innerText + 'quoted by, ' + attribution[0].innerText + ', ';
           prepend         = voiceTags['quoteblock'].prepend;
           appended        = voiceTags['quoteblock'].append;
 
           if ((content !== undefined) && (content != '')) {
-            jQuery('<div>' + prepend + ' ' + content + '</div>').insertBefore(this);
-            jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + prepend + ' ' + content + '</div>').insertBefore(this);
+            $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
           }
 
-          jQuery(this).remove();
+          $(this).remove();
         });
 
         // Search for <table> tags, check for <caption>, insert text
         // if exists and then remove the DOM object.
         //
-        jQuery(clone).find('table').addBack('table').each(function() {
-          copy      = jQuery(this).find('caption').text();
+        $(clone).find('table').addBack('table').each(function() {
+          copy      = $(this).find('caption').text();
           prepend   = voiceTags['table'].prepend;
           appended  = voiceTags['table'].append;
 
           if ((copy !== undefined) && (copy != '')) {
-            jQuery('<div>' + prepend + ' ' + copy + '</div>').insertBefore(this);
-            jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + prepend + ' ' + copy + '</div>').insertBefore(this);
+            $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
           } else {
-            jQuery('<div>' + prepend  + '</div>').insertBefore(this);
-            jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + prepend  + '</div>').insertBefore(this);
+            $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
           }
 
-          jQuery(this).remove();
+          $(this).remove();
         });
 
         // Search for HTML5 video players, check for the title and insert text
         // if exists and then remove the DOM object.
         //
-        jQuery(clone).find('.videoblock').addBack('.videoblock').each(function() {
-          copy      = jQuery(this).find('.title').text();
+        $(clone).find('.videoblock').addBack('.videoblock').each(function() {
+          copy      = $(this).find('.title').text();
           prepend   = voiceTags['.videoblock'].prepend;
           appended  = voiceTags['.videoblock'].append;
 
           if ((copy !== undefined) && (copy != '')) {
-            jQuery('<div>' + prepend + ' ' + 'with the title, ' + copy + pause_spoken + '</div>').insertBefore(this);
-            jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + prepend + ' ' + 'with the title, ' + copy + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
           } else {
-            jQuery('<div>' + prepend  + '</div>').insertBefore(this);
-            jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + prepend  + '</div>').insertBefore(this);
+            $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
           }
 
-          jQuery(this).remove();
+          $(this).remove();
         });
 
         // Search for VideoJS players, check for the title and insert text
         // if exists and then remove the DOM object.
         //
-        jQuery(clone).find('.videojs-player').addBack('.videojs-player').each(function() {
-          copy      = jQuery(this).find('.video-title').text();
+        $(clone).find('.videojs-player').addBack('.videojs-player').each(function() {
+          copy      = $(this).find('.video-title').text();
           prepend   = voiceTags['.videojs-player'].prepend;
           appended  = voiceTags['.videojs-player'].append;
 
           if ((copy !== undefined) && (copy != '')) {
-            jQuery('<div>' + prepend + ' ' + 'with the title, ' + copy + pause_spoken + '</div>').insertBefore(this);
-            jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + prepend + ' ' + 'with the title, ' + copy + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
           } else {
-            jQuery('<div>' + prepend  + '</div>').insertBefore(this);
-            jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + prepend  + '</div>').insertBefore(this);
+            $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
           }
 
-          jQuery(this).remove();
+          $(this).remove();
         });
 
         // Search for YouTube players, check for the title and insert text
         // if exists and then remove the DOM object.
         //
-        jQuery(clone).find('.youtube-player').addBack('.youtube-player').each(function() {
-          copy      = jQuery(this).find('.video-title').text();
+        $(clone).find('.youtube-player').addBack('.youtube-player').each(function() {
+          copy      = $(this).find('.video-title').text();
           prepend   = voiceTags['.youtube-player'].prepend;
           appended  = voiceTags['.youtube-player'].append;
 
           if ((copy !== undefined) && (copy != '')) {
-            jQuery('<div>' + prepend + ' ' + 'with the title, ' + copy + pause_spoken + '</div>').insertBefore(this);
-            jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + prepend + ' ' + 'with the title, ' + copy + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
           } else {
-            jQuery('<div>' + prepend  + '</div>').insertBefore(this);
-            jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + prepend  + '</div>').insertBefore(this);
+            $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
           }
 
-          jQuery(this).remove();
+          $(this).remove();
         });
 
         // Search for Dailymotion players, check for the title and insert text
         // if exists and then remove the DOM object.
         //
-        jQuery(clone).find('.dailymotion-player').addBack('.dailymotion-player').each(function() {
-          copy      = jQuery(this).find('.video-title').text();
+        $(clone).find('.dailymotion-player').addBack('.dailymotion-player').each(function() {
+          copy      = $(this).find('.video-title').text();
           prepend   = voiceTags['.dailymotion-player'].prepend;
           appended  = voiceTags['.dailymotion-player'].append;
 
           if ((copy !== undefined) && (copy != '')) {
-            jQuery('<div>' + prepend + ' ' + 'with the title, ' + copy + pause_spoken + '</div>').insertBefore(this);
-            jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + prepend + ' ' + 'with the title, ' + copy + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
           } else {
-            jQuery('<div>' + prepend  + '</div>').insertBefore(this);
-            jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + prepend  + '</div>').insertBefore(this);
+            $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
           }
 
-          jQuery(this).remove();
+          $(this).remove();
         });
 
         // Search for Vimeo players, check for the title and insert text
         // if exists and then remove the DOM object.
         //
-        jQuery(clone).find('.vimeo-player').addBack('.vimeo-player').each(function() {
-          copy      = jQuery(this).find('.video-title').text();
+        $(clone).find('.vimeo-player').addBack('.vimeo-player').each(function() {
+          copy      = $(this).find('.video-title').text();
           prepend   = voiceTags['.vimeo-player'].prepend;
           appended  = voiceTags['.vimeo-player'].append;
 
           if ((copy !== undefined) && (copy != '')) {
-            jQuery('<div>' + prepend + ' ' + 'with the title, ' + copy + pause_spoken + '</div>').insertBefore(this);
-            jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + prepend + ' ' + 'with the title, ' + copy + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
           } else {
-            jQuery('<div>' + prepend  + '</div>').insertBefore(this);
-            jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + prepend  + '</div>').insertBefore(this);
+            $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
           }
 
-          jQuery(this).remove();
+          $(this).remove();
         });
 
         // Search for Wistia players, check for the title and insert text
         // if exists and then remove the DOM object.
         //
-        jQuery(clone).find('.wistia-player').addBack('.wistia-player').each(function() {
-          copy      = jQuery(this).find('.video-title').text();
+        $(clone).find('.wistia-player').addBack('.wistia-player').each(function() {
+          copy      = $(this).find('.video-title').text();
           prepend   = voiceTags['.wistia-player'].prepend;
           appended  = voiceTags['.wistia-player'].append;
 
           if ((copy !== undefined) && (copy != '')) {
-            jQuery('<div>' + prepend + ' ' + 'with the title, ' + copy + pause_spoken + '</div>').insertBefore(this);
-            jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + prepend + ' ' + 'with the title, ' + copy + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
           } else {
-            jQuery('<div>' + prepend  + '</div>').insertBefore(this);
-            jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + prepend  + '</div>').insertBefore(this);
+            $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
           }
 
-          jQuery(this).remove();
+          $(this).remove();
         });
 
         // Search for cards|header elements and then remove the DOM object.
         //
-        jQuery(clone).find('.card-header').addBack('card-header').each(function() {
-          title_element = jQuery(this).find('.card-title');
+        $(clone).find('.card-header').addBack('card-header').each(function() {
+          title_element = $(this).find('.card-title');
           prepend       = voiceTags['card-header'].prepend;
           appended      = voiceTags['card-header'].append;
 
@@ -1053,31 +1054,31 @@
             title = '';
           }
 
-          jQuery('<div>' + prepend + '</div>').insertBefore(this);
-          jQuery('<div>' + appended + title + '</div>').insertBefore(this);
+          $('<div>' + prepend + '</div>').insertBefore(this);
+          $('<div>' + appended + title + '</div>').insertBefore(this);
 
-          jQuery(title_element).remove();
+          $(title_element).remove();
         });
 
         // Search for doc-example elements and then remove the DOM object.
         //
-        jQuery(clone).find('.doc-example').addBack('.doc-example').each(function() {
+        $(clone).find('.doc-example').addBack('.doc-example').each(function() {
 
           prepend       = voiceTags['.doc-example'].prepend;
           appended      = voiceTags['.doc-example'].append;
 
-          jQuery('<div>' + prepend + '</div>').insertBefore(this);
-          jQuery('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+          $('<div>' + prepend + '</div>').insertBefore(this);
+          $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
 
-          jQuery(this).remove();
+          $(this).remove();
         });
 
         // Search for listing block elements, check for previous declared <div>
         // container that contains the title element and insert the
         // text if exists and then finally remove the DOM object.
         //
-        jQuery(clone).find('.listingblock').addBack('.listingblock').each(function() {
-          title_element = jQuery(this).find('.title');
+        $(clone).find('.listingblock').addBack('.listingblock').each(function() {
+          title_element = $(this).find('.title');
 
           if (title_element.length) {
             copy = title_element[0].innerText;
@@ -1089,28 +1090,28 @@
           appended = voiceTags['.listingblock'].append;
 
           if ((copy !== undefined) && (copy != '')) {
-            jQuery('<div>' + prepend + ' with the caption,' + copy + pause_spoken + '</div>').insertBefore(this);
-            jQuery('<div>' + appended + '</div>').insertBefore(this);
+            $('<div>' + prepend + ' with the caption,' + copy + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + appended + '</div>').insertBefore(this);
           } else {
-            jQuery('<div>' + prepend + '</div>').insertBefore(this);
-            jQuery('<div>' + appended + '</div>').insertBefore(this);
+            $('<div>' + prepend + '</div>').insertBefore(this);
+            $('<div>' + appended + '</div>').insertBefore(this);
           }
 
-          jQuery(this).remove();
+          $(this).remove();
         });
 
         // Search for gist elements, check for previous declared <div>
         // container that contains the title element and insert the
         // text if exists and finally remove the DOM object.
         //
-        jQuery(clone).find('.gist').addBack('.gist').each(function() {
+        $(clone).find('.gist').addBack('.gist').each(function() {
 
           if ($(this).prev()[0] !== undefined && $(this).prev()[0].innerText !== undefined) {
             title = $(this).prev()[0].innerText;
-            title_element = jQuery(this).prev();
+            title_element = $(this).prev();
             // remove the title 'before' the DOM object deleted
             //
-            jQuery(title_element).remove();
+            $(title_element).remove();
           } else {
             title = '';
           }
@@ -1119,288 +1120,294 @@
           appended = voiceTags['.gist'].append;
 
           if ((title !== undefined) && (title != '')) {
-            jQuery('<div>' + prepend + ' with the caption, ' + title + pause_spoken + '</div>').insertBefore(this);
-            jQuery('<div>' + appended + '</div>').insertBefore(this);
+            $('<div>' + prepend + ' with the caption, ' + title + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + appended + '</div>').insertBefore(this);
           } else {
-            jQuery('<div>' + prepend + '</div>').insertBefore(this);
-            jQuery('<div>' + appended + '</div>').insertBefore(this);
+            $('<div>' + prepend + '</div>').insertBefore(this);
+            $('<div>' + appended + '</div>').insertBefore(this);
           }
 
-          jQuery(this).remove();
+          $(this).remove();
       });
 
-        // Search for masonry elements, check for previous declared <div>
-        // container that contains the title element and insert the
-        // text if exists and finally remove the DOM object.
-        //
-        jQuery(clone).find('.masonry').addBack('.masonry').each(function() {
-
-          if ($(this).prev()[0].innerText !== undefined) {
-            title = $(this).prev()[0].innerText;
-            title_element = jQuery(this).prev();
-            // remove the title 'before' the DOM object deleted
-            //
-            jQuery(title_element).remove();
-          } else {
-            title = '';
-          }
-
-          prepend  = voiceTags['.masonry'].prepend;
-          appended = voiceTags['.masonry'].append;
-
-          if ((title !== undefined) && (title != '')) {
-            jQuery('<div>' + prepend + ' with the caption,' + title + pause_spoken + '</div>').insertBefore(this);
-            jQuery('<div>' + appended + '</div>').insertBefore(this);
-          } else {
-            jQuery('<div>' + prepend + '</div>').insertBefore(this);
-            jQuery('<div>' + appended + '</div>').insertBefore(this);
-          }
-
-          jQuery(this).remove();
-        });
-
-        // Search for slider elements, check for previous declared <div>
-        // container that contains the title element and insert the
-        // text if exists and finally remove the DOM object.
-        //
-        jQuery(clone).find('.slider').addBack('.slider').each(function() {
-
-          if ($(this).prev()[0].innerText !== undefined) {
-            title = $(this).prev()[0].innerText;
-            title_element = jQuery(this).prev();
-            // remove the title 'before' the DOM object deleted
-            //
-            jQuery(title_element).remove();
-          } else {
-            title = '';
-          }
-
-          prepend  = voiceTags['.slider'].prepend;
-          appended = voiceTags['.slider'].append;
-
-          if ((title !== undefined) && (title != '')) {
-            jQuery('<div>' + prepend + ' with the caption, ' + title + pause_spoken + '</div>').insertBefore(this);
-            jQuery('<div>' + appended + '</div>').insertBefore(this);
-          } else {
-            jQuery('<div>' + prepend + '</div>').insertBefore(this);
-            jQuery('<div>' + appended + '</div>').insertBefore(this);
-          }
-
-          jQuery(this).remove();
-      });
-
-        // Search for gallery elements, check for previous declared <div>
-        // container that contains the title element and insert the
-        // text if exists and finally remove the DOM object.
-        //
-        jQuery(clone).find('.gallery').addBack('.gallery').each(function() {
-
-          if ($(this).prev()[0] !== undefined && $(this).prev()[0].innerText !== undefined) {
-            title = $(this).prev()[0].innerText;
-            title_element = jQuery(this).prev();
-            // remove the title BEFORE the DOM object gets deleted
-            //
-            jQuery(title_element).remove();
-          } else {
-            title = '';
-          }
-
-          prepend  = voiceTags['.gallery'].prepend;
-          appended = voiceTags['.gallery'].append;
-
-          if ((title !== undefined) && (title != '')) {
-            (prepend !== '')  && jQuery('<div>' + prepend + ' with the caption ' + title + pause_spoken + '</div>').insertBefore(this);
-            (appended !== '') && jQuery('<div>' + appended + '</div>').insertBefore(this);
-          } else {
-            (prepend !== '')  && jQuery('<div>' + prepend + '</div>').insertBefore(this);
-            (appended !== '') && jQuery('<div>' + appended + '</div>').insertBefore(this);
-          }
-
-          jQuery(this).remove();
-
-        });
-
-        // Search for a lightbox blocks and extract the <caption> tag data,
-        // insert the text if exists and finally remove the DOM object.
-        //
-        jQuery(clone).find('.lightbox-block').addBack('.lightbox-block').each(function() {
-
-          if ($(this).prev()[0].innerText !== undefined) {
-            title = $(this).prev()[0].innerText;
-            title_element = jQuery(this).prev();
-            // remove the title 'before' the DOM object deleted
-            //
-            jQuery(title_element).remove();
-          } else {
-            title = '';
-          }
-
-          prepend   = voiceTags['.lightbox-block'].prepend;
-          appended  = voiceTags['.lightbox-block'].append;
-
-          if ((title !== undefined) && (title != '')) {
-            jQuery('<div>' + prepend + ' with the caption,' + title + pause_spoken + '</div>').insertBefore(this);
-            jQuery('<div>' + appended + '</div>').insertBefore(this);
-          } else {
-            jQuery('<div>' + prepend + '</div>').insertBefore(this);
-            jQuery('<div>' + appended + '</div>').insertBefore(this);
-          }
-
-          jQuery(this).remove();
-        });
-
-        // Search for DOM object to be replaced specified in
-        // the HTML code by "data-speak2me-swap".
-        //
-        jQuery(clone).find('[data-speak2me-swap]').addBack('[data-speak2me-swap]').each(function() {
-          copy = jQuery(this).data('speak2me-swap');
-
-          jQuery(this).text(copy);
-        });
-
-        // Search for DOM object to spelled out specified in
-        // the HTML code by "data-speak2me-spell".
-        //
-        jQuery(clone).find('[data-speak2me-spell]').addBack('[data-speak2me-spell]').each(function() {
-          copy = jQuery(this).text();
-          copy = copy.split('').join(' ');
-
-          jQuery(this).text(copy);
-        });
-        return clone;
-      }
-
-      // run final cleanups on all DOM elements processed.
+      // Search for BS modal elements, if exists remove the DOM object.
       //
-      function cleanDOMelements(final) {
-        var start, ended, speak, part1, part2, final;
+      $(clone).find('.modal').addBack('.modal').each(function() {
+        $(this).remove();
+      });
 
-        // Search for <speak2me> in comments, copy the text,
-        // place it outside the comment, and then splice together
-        // "final" string again, which omits the comment.
-        //
-        while (final.indexOf('<!-- <speak2me>') != -1) {
-            start = final.indexOf('<!-- <speak2me>');
-            ended = final.indexOf('</speak2me> -->', start);
-            if (ended == -1) { break; }
-            speak = final.substring(start + 17, ended);
-            part1 = final.substring(0, start);
-            part2 = final.substring(ended + 17);
-            final = part1 + ' ' + speak + ' ' + part2;
-        };
+      // Search for masonry elements, check for previous declared <div>
+      // container that contains the title element and insert the
+      // text if exists and finally remove the DOM object.
+      //
+      $(clone).find('.masonry').addBack('.masonry').each(function() {
 
-        // Strip out remaining comments.
-        //
-        final = final.replace(/<!--[\s\S]*?-->/g, '');
-
-        // Strip out remaining HTML tags.
-        //
-        final = final.replace(/(<([^>]+)>)/ig, '');
-
-        // Replace a string of characters with another as specified
-        // by "speak2me('replace')".
-        //
-        var len = replacements.length;
-        var i   = 0;
-        var old, rep;
-
-        while (i < len) {
-          old = replacements[i];
-          old = old.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
-          rep = replacements[i + 1] + ' ';
-          var regexp = new RegExp(old, 'gi');
-          var final = final.replace(regexp, rep);
-          i = i + 2;
+        if ($(this).prev()[0].innerText !== undefined) {
+          title = $(this).prev()[0].innerText;
+          title_element = $(this).prev();
+          // remove the title 'before' the DOM object deleted
+          //
+          $(title_element).remove();
+        } else {
+          title = '';
         }
 
-        // Remove double quotes.
-        //
-        final = final.replaceAll('"', '');
-        final = final.replaceAll('“', '');
-        final = final.replaceAll('”', '');
+        prepend  = voiceTags['.masonry'].prepend;
+        appended = voiceTags['.masonry'].append;
 
-        // Remove all colon ':' and replace by a dot.
-        //
-        final = final.replaceAll(':', '.');
+        if ((title !== undefined) && (title != '')) {
+          $('<div>' + prepend + ' with the caption,' + title + pause_spoken + '</div>').insertBefore(this);
+          $('<div>' + appended + '</div>').insertBefore(this);
+        } else {
+          $('<div>' + prepend + '</div>').insertBefore(this);
+          $('<div>' + appended + '</div>').insertBefore(this);
+        }
 
-        // Replace all strange '., ' by a pause.
-        //
-        final = final.replaceAll('., ', '. ');
-        final = final.replaceAll(' , ', ', ');
+        $(this).remove();
+      });
 
-        // Remove strange double pause elements.
-        //
-        final = final.replaceAll('. .', '');
-        final = final.replaceAll(', .', '');
-        final = final.replaceAll('  ,  ', '');
+      // Search for slider elements, check for previous declared <div>
+      // container that contains the title element and insert the
+      // text if exists and finally remove the DOM object.
+      //
+      $(clone).find('.slider').addBack('.slider').each(function() {
 
-        // Replace empty lines.
-        //
-        final = final.replace(/^$/g, '\n');
-        final = final.replace(/^\s+$/g, '\n');
+        if ($(this).prev()[0].innerText !== undefined) {
+          title = $(this).prev()[0].innerText;
+          title_element = $(this).prev();
+          // remove the title 'before' the DOM object deleted
+          //
+          $(title_element).remove();
+        } else {
+          title = '';
+        }
 
-        // Replace single full stops in line ' . ' or '. '.
-        //
-        final = final.replace(/\s+\.\s+/g, '\n');
-        final = final.replace(/\s+\.\s+$/g, '\n');
+        prepend  = voiceTags['.slider'].prepend;
+        appended = voiceTags['.slider'].append;
 
-        // Replace strange double full stops '..'.
-        //
-        final = final.replace(/\.\./g, '.');
+        if ((title !== undefined) && (title != '')) {
+          $('<div>' + prepend + ' with the caption, ' + title + pause_spoken + '</div>').insertBefore(this);
+          $('<div>' + appended + '</div>').insertBefore(this);
+        } else {
+          $('<div>' + prepend + '</div>').insertBefore(this);
+          $('<div>' + appended + '</div>').insertBefore(this);
+        }
 
-        // Replace the abbreviations '.e.g.', 'E.g.' and 'etc.'.
-        //
-        final = final.replaceAll('e.g.',  'for example');
-        final = final.replaceAll('E.g.',  'For example, ');
-        final = final.replaceAll('etc.',  'and so on, ');
+        $(this).remove();
+      });
 
-        // Replace language specific abbreviations.
-        // NOTE: may required for some voices|languages (like Gewrman)
-        //
-        final = final.replaceAll('z. B.', 'zum Beispiel, ');
+      // Search for gallery elements, check for previous declared <div>
+      // container that contains the title element and insert the
+      // text if exists and finally remove the DOM object.
+      //
+      $(clone).find('.gallery').addBack('.gallery').each(function() {
 
-        // Remove question and exclamation (?|!) marks.
-        //
-        final = final.replace(/[\!\?]/g, '. ');
+        if ($(this).prev()[0] !== undefined && $(this).prev()[0].innerText !== undefined) {
+          title = $(this).prev()[0].innerText;
+          title_element = $(this).prev();
+          // remove the title BEFORE the DOM object gets deleted
+          //
+          $(title_element).remove();
+        } else {
+          title = '';
+        }
 
-        // Replace em-dashes and double-dashes with a pause
-        // since most voices doesn't do so when speaking.
-        //
-        final = final.replaceAll('—', pause_spoken);
-        final = final.replaceAll('–', pause_spoken);
-        final = final.replaceAll('--', pause_spoken);
+        prepend  = voiceTags['.gallery'].prepend;
+        appended = voiceTags['.gallery'].append;
 
-        // When read from the DOM, a few special characters
-        // (&amp; for example) display as their hex codes
-        // rather than resolving into their actual character.
-        //
-        var txt = document.createElement('textarea');
-        txt.innerHTML = final;
-        final = txt.value;
+        if ((title !== undefined) && (title != '')) {
+          (prepend !== '')  && $('<div>' + prepend + ' with the caption ' + title + pause_spoken + '</div>').insertBefore(this);
+          (appended !== '') && $('<div>' + appended + '</div>').insertBefore(this);
+        } else {
+          (prepend !== '')  && $('<div>' + prepend + '</div>').insertBefore(this);
+          (appended !== '') && $('<div>' + appended + '</div>').insertBefore(this);
+        }
 
-        // Replace single word in line
-        //
-        final = final.replace(/^\s*(\b\w+\b)\s*$/gm, "$1. ");
+        $(this).remove();
 
-        // Replace month year in line
-        //
-        final = final.replace(/^\s*(\b\w+\b\s*[0-9]{4})$/gm, "$1. ");
+      });
 
-        // Replace multiple whitespaces
-        //
-        final = final.replace(/\s+/g, ' ');
+      // Search for a lightbox blocks and extract the <caption> tag data,
+      // insert the text if exists and finally remove the DOM object.
+      //
+      $(clone).find('.lightbox-block').addBack('.lightbox-block').each(function() {
 
-        // split the final text in to chunks (sentences).
-        //
-        const textChunks = splitTextIntoChunks(final);
-        chunkCounterMax = textChunks.length;
+        if ($(this).prev()[0].innerText !== undefined) {
+          title = $(this).prev()[0].innerText;
+          title_element = $(this).prev();
+          // remove the title 'before' the DOM object deleted
+          //
+          $(title_element).remove();
+        } else {
+          title = '';
+        }
 
-        return textChunks;
+        prepend   = voiceTags['.lightbox-block'].prepend;
+        appended  = voiceTags['.lightbox-block'].append;
+
+        if ((title !== undefined) && (title != '')) {
+          $('<div>' + prepend + ' with the caption,' + title + pause_spoken + '</div>').insertBefore(this);
+          $('<div>' + appended + '</div>').insertBefore(this);
+        } else {
+          $('<div>' + prepend + '</div>').insertBefore(this);
+          $('<div>' + appended + '</div>').insertBefore(this);
+        }
+
+        $(this).remove();
+      });
+
+      // Search for DOM object to be replaced specified in
+      // the HTML code by "data-speak2me-swap".
+      //
+      $(clone).find('[data-speak2me-swap]').addBack('[data-speak2me-swap]').each(function() {
+        copy = $(this).data('speak2me-swap');
+
+        $(this).text(copy);
+      });
+
+      // Search for DOM object to spelled out specified in
+      // the HTML code by "data-speak2me-spell".
+      //
+      $(clone).find('[data-speak2me-spell]').addBack('[data-speak2me-spell]').each(function() {
+        copy = $(this).text();
+        copy = copy.split('').join(' ');
+
+        $(this).text(copy);
+      });
+      return clone;
+    }
+
+    // run final cleanups on all DOM elements processed.
+    //
+    function cleanDOMelements(final) {
+      var start, ended, speak, part1, part2, final;
+
+      // Search for <speak2me> in comments, copy the text,
+      // place it outside the comment, and then splice together
+      // "final" string again, which omits the comment.
+      //
+      while (final.indexOf('<!-- <speak2me>') != -1) {
+          start = final.indexOf('<!-- <speak2me>');
+          ended = final.indexOf('</speak2me> -->', start);
+          if (ended == -1) { break; }
+          speak = final.substring(start + 17, ended);
+          part1 = final.substring(0, start);
+          part2 = final.substring(ended + 17);
+          final = part1 + ' ' + speak + ' ' + part2;
+      };
+
+      // Strip out remaining comments.
+      //
+      final = final.replace(/<!--[\s\S]*?-->/g, '');
+
+      // Strip out remaining HTML tags.
+      //
+      final = final.replace(/(<([^>]+)>)/ig, '');
+
+      // Replace a string of characters with another as specified
+      // by "speak2me('replace')".
+      //
+      var len = replacements.length;
+      var i   = 0;
+      var old, rep;
+
+      while (i < len) {
+        old = replacements[i];
+        old = old.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+        rep = replacements[i + 1] + ' ';
+        var regexp = new RegExp(old, 'gi');
+        var final = final.replace(regexp, rep);
+        i = i + 2;
       }
 
-      // return the Utterance object of the SpeechSynthesis API.
+      // Remove double quotes.
       //
-      return speech;
+      final = final.replaceAll('"', '');
+      final = final.replaceAll('“', '');
+      final = final.replaceAll('”', '');
+
+      // Remove all colon ':' and replace by a dot.
+      //
+      final = final.replaceAll(':', '.');
+
+      // Replace all strange '., ' by a pause.
+      //
+      final = final.replaceAll('., ', '. ');
+      final = final.replaceAll(' , ', ', ');
+
+      // Remove strange double pause elements.
+      //
+      final = final.replaceAll('. .', '');
+      final = final.replaceAll(', .', '');
+      final = final.replaceAll('  ,  ', '');
+
+      // Replace empty lines.
+      //
+      final = final.replace(/^$/g, '\n');
+      final = final.replace(/^\s+$/g, '\n');
+
+      // Replace single full stops in line ' . ' or '. '.
+      //
+      final = final.replace(/\s+\.\s+/g, '\n');
+      final = final.replace(/\s+\.\s+$/g, '\n');
+
+      // Replace strange double full stops '..'.
+      //
+      final = final.replace(/\.\./g, '.');
+
+      // Replace the abbreviations '.e.g.', 'E.g.' and 'etc.'.
+      //
+      final = final.replaceAll('e.g.',  'for example');
+      final = final.replaceAll('E.g.',  'For example, ');
+      final = final.replaceAll('etc.',  'and so on, ');
+
+      // Replace language specific abbreviations.
+      // NOTE: may required for some voices|languages (like Gewrman)
+      //
+      final = final.replaceAll('z. B.', 'zum Beispiel, ');
+
+      // Remove question and exclamation (?|!) marks.
+      //
+      final = final.replace(/[\!\?]/g, '. ');
+
+      // Replace em-dashes and double-dashes with a pause
+      // since most voices doesn't do so when speaking.
+      //
+      final = final.replaceAll('—', pause_spoken);
+      final = final.replaceAll('–', pause_spoken);
+      final = final.replaceAll('--', pause_spoken);
+
+      // When read from the DOM, a few special characters
+      // (&amp; for example) display as their hex codes
+      // rather than resolving into their actual character.
+      //
+      var txt = document.createElement('textarea');
+      txt.innerHTML = final;
+      final = txt.value;
+
+      // Replace single word in line
+      //
+      final = final.replace(/^\s*(\b\w+\b)\s*$/gm, "$1. ");
+
+      // Replace month year in line
+      //
+      final = final.replace(/^\s*(\b\w+\b\s*[0-9]{4})$/gm, "$1. ");
+
+      // Replace multiple whitespaces
+      //
+      final = final.replace(/\s+/g, ' ');
+
+      // split the final text in to chunks (sentences).
+      //
+      const textChunks = splitTextIntoChunks(final);
+      chunkCounterMax = textChunks.length;
+
+      return textChunks;
+    }
+
+    // return the Utterance object of the SpeechSynthesis API
+    //
+    return speech;
     }, // END speak
 
     pause: function() {
@@ -1572,21 +1579,21 @@
           return voices;
       }
 
-      // If there's another argument, we'll assume it's a jQuery
+      // If there's another argument, we'll assume it's a $
       // selector designating where to put the dropdown menu.
       // And if there's a third argument, that will be custom text
       // for the dropdown menu.
       // Then we'll create a dropdown menu with the voice names and,
       //in parenthesis, the language code.
       //
-      var obj = jQuery(arguments[0]);
+      var obj = $(arguments[0]);
       var selectionTxt = 'Choose a voice';
 
       if (arguments[1] !== undefined) {
         selectionTxt = arguments[1];
       }
 
-      obj.append(jQuery("<select id='voiceSelect' name='voiceSelect'><option value='none'>" + selectionTxt + "</option></select>"));
+      obj.append($("<select id='voiceSelect' name='voiceSelect'><option value='none'>" + selectionTxt + "</option></select>"));
 
       // jadams
       var skippedVoices = 0;
@@ -1682,8 +1689,8 @@
     } else if (typeof method === 'object' || ! method) {
       return methods.speak.apply(this, arguments);
     } else {
-      jQuery.error('Method ' +  method + ' does not exist on jQuery.speak2me');
+      $.error('Method ' +  method + ' does not exist on $.speak2me');
     }
   }; // END main
 
-}(jQuery));
+}($));

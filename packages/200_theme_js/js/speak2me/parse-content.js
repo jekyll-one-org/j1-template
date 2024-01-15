@@ -16,7 +16,6 @@
 module.exports = function parseContent (options) {
   var reduce = [].reduce
 
-
   /**
    * Get the last item in an array and return a reference to it.
    * @param {Array} array

@@ -1,0 +1,89 @@
+---
+title:                                  WEBVTT
+title_extention:                        Tester
+tagline:                                Tester
+
+date:                                   2023-12-12
+#last_modified:                         2023-12-12
+
+description: >
+                                        Videos from Ersties website.
+keywords: >
+                                        Anal, WebCams, Solo, Video
+
+categories:                             [ WebCams ]
+tags:                                   [ anal, solo, video ]
+
+image:
+  path:                                 /assets/images/modules/attics/1920x1280/quino-al-2.jpg
+  width:                                1920
+  height:                               1280
+
+toc:                                    false
+tts:                                    false
+fab_menu_id:                            default
+regenerate:                             false
+personalization:                        false
+permalink:                              /pages/public/learn/vtt/
+
+resources:                              [ animate, lightgallery, gallery, videojs ]
+resource_options:
+  - attic:
+      slides:
+        - url:                          /assets/images/modules/attics/1920x1280/quino-al-2.jpg
+          alt:                          Photo by Quino Al Angel on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Quino Al Angel
+            href:                       https://unsplash.com/@quinoal
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="none" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+
+++++
+<video
+	id="sf4qhLLPm6H_html5_api"
+	class="video-js vjs-theme-uno"
+	width="640" height="360"
+	controls
+	data-setup='{
+		"fluid" : true,
+		"sources": [{
+			"type": "video/mp4",
+			"src": "/assets/videos/gallery/html5/video1.mp4"
+		}],
+    "tracks": [{
+      "default":    true,
+       "kind":      "chapters",
+       "src":       "/assets/videos/gallery/vtt/chapters/video1.vtt",
+       "srclang=":  "en",
+       "label":     "Chapters"
+    }],
+		"controlBar": {
+			"pictureInPictureToggle": false
+		}
+	}'
+></video>
+++++

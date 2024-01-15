@@ -12,7 +12,7 @@ regenerate:                             true
  # Product/Info:
  # https://jekyll.one
  #
- # Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
@@ -63,7 +63,7 @@ regenerate:                             true
  #
  # Copyright (C) 2020 Miro Mannino
  # Copyright (C) 2023 Sachin Neravath
- # Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
@@ -147,7 +147,7 @@ j1.adapter.gallery = (function (j1, window) {
       console.debug('loading HTML portion for all galleries configured');
       _this.loadGalleryHTML(galleryOptions, galleryOptions.galleries);
 
-      var dependencies_met_j1_finished= setInterval(function() {
+      var dependencies_met_j1_finished = setInterval(function() {
         var pageState     = $('#no_flicker').css("display");
         var pageVisible   = (pageState == 'block') ? true : false;
         var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;

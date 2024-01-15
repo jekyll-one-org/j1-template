@@ -7,7 +7,7 @@
  #  https://jekyll.one
  #  https://github.com/FrDH/mmenu-light
  #
- #  Copyright (C) 2023 Juergen Adams
+ #  Copyright (C) 2023, 2024 Juergen Adams
  #  Copyright (C) 2015-2021 Fred Heusschen
  #
  #  J1 Template is licensed under the MIT License.

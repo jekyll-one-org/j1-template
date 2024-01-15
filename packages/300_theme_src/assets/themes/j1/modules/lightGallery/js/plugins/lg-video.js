@@ -7,7 +7,7 @@
  # https://jekyll.one
  #
  # Copyright (C) 2023 Sachin Neravath
- # Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
@@ -173,6 +173,25 @@
         var vimeoPlayerParams = "?autoplay=0&muted=1" + (isPrivate ? "&h=" + hash : '') + defaultPlayerParams + urlParams;
         return vimeoPlayerParams;
     };
+
+    // -------------------------------------------------------------------------
+    // loadVtt
+    // Loads a given WEBVTT file (from data path) and process loaded
+    // data in callback cb (function)
+    // -------------------------------------------------------------------------
+    var loadVtt = function (data_path, cb) {
+      var parser = new WebVTTParser();
+
+      $.ajax({
+        url:      data_path,
+        type:     'GET',
+        success:  cb,
+        error:    function(data) {
+          var json_data = JSON.stringify(data, undefined, 2);
+        }
+      });
+
+    } // END loadVtt
 
     /**
      * Video module for lightGallery
@@ -386,6 +405,7 @@
                             trackAttributes += key + "=\"" + track[key] + "\" ";
                         });
                         html5VideoMarkup += "<track " + trackAttributes + ">";
+//                      html5VideoMarkup += '<track default="true" kind="captions" src="/assets/videos/gallery/vtt/captions/video1.vtt" srclang="en" label="Captions">';
                     };
                     for (var i = 0; i < html5Video.tracks.length; i++) {
                         _loop_1(i);
@@ -476,11 +496,104 @@
         };
 
         Video.prototype.controlVideo = function (index, action) {
-            var $videoElement = this.core
-                .getSlideItem(index)
-                .find('.lg-video-object')
-                .first();
-            var videoInfo = this.core.galleryItems[index].__slideVideoInfo || {};
+            var trackSrc, $videoElement, videoInfo, videoData, videoId, videojsPlayer, zoomPlugin;
+
+            var chapterTracksEnabled = false;
+            var zoomPluginDefaults   = {
+              moveX:  0,
+              moveY:  0,
+              rotate: 0,
+              zoom:   1
+            };
+
+            videoInfo     = this.core.galleryItems[index].__slideVideoInfo || {};
+            $videoElement = this.core
+              .getSlideItem(index)
+              .find('.lg-video-object')
+              .first()
+
+            // zoom and chapter tracks only available for HTML5 video
+            //
+            if (videoInfo.html5) {
+              videoData = JSON.parse(this.core.galleryItems[this.core.index].video);
+              if (videoData.tracks.length > 0) {
+                for (var i=0; i<videoData.tracks.length; i++) {
+                  if (videoData.tracks[i].kind == 'chapters') {
+                    trackSrc = videoData.tracks[i].src;
+                    chapterTracksEnabled = true;
+                  }
+                }
+              } // END if videoData.tracks
+
+              videoId       = $videoElement.selector.id;
+              videojsPlayer = videojs(videoId);
+
+              // jadams, 2023-12-11: added VideoJS zoomPlugin
+              // -----------------------------------------------------------------
+              var zoomPlugin = this.settings.videojsOptions.zoomPlugin;
+              if (zoomPlugin != undefined && zoomPlugin.enabled) {
+
+                zoomPlugin.settings = __assign(__assign({}, zoomPluginDefaults), zoomPlugin.options);
+                videojsPlayer.zoomPlugin({
+                  moveX:  zoomPlugin.settings.moveX,
+                  moveY:  zoomPlugin.settings.moveY,
+                  rotate: zoomPlugin.settings.rotate,
+                  zoom:   zoomPlugin.settings.zoom
+                });
+              } // END if zoomPlugin enabled
+            } // END if videoInfo.html
+
+            // jadams, 2023-12-11: added chapter track processing
+            // -----------------------------------------------------------------
+            if (chapterTracksEnabled) {
+              var parser  = new WebVTTParser();
+              var markers = [];
+
+              function cb_load (data /* , textStatus, jqXHR */ ) {
+                var tree = parser.parse(data, 'metadata');
+                var marker;
+
+                // add chapter tracks to markers array
+                for (var i=0; i<tree.cues.length; i++) {
+                  marker = { time: tree.cues[i].startTime, label: tree.cues[i].text };
+                  markers.push(marker);
+                }
+              }; // END callback
+
+              // load chapter tracks
+              //
+              loadVtt(trackSrc, cb_load);
+
+              // add chapter tracks on play
+              //
+              videojsPlayer.on("play", function() {
+                var total    = videojsPlayer.duration();
+                var timeline = $(videojsPlayer.controlBar.progressControl.children_[0].el_);
+
+                // add chapter tracks on timeline (delayed)
+                setTimeout (function() {
+                  var markers_loaded = setInterval (function () {
+                    if (markers.length) {
+                      for (var i=0; i<markers.length; i++) {
+                        var left = (markers[i].time / total * 100) + '%';
+                        var time = markers[i].time;
+                        var el   = $('<div class="vjs-chapter-marker" style="left: ' +left+ '" data-time="' +time+ '"> <span>' +markers[i].label+ '</span></div>');
+
+                        el.click(function() {
+                          videojsPlayer.currentTime($(this).data('time'));
+                        });
+
+                        timeline.append(el);
+                      }
+                      clearInterval(markers_loaded);
+                    }
+                  }, 10);
+                }, 1000 );
+
+              }); // END on "play"
+
+            } // END if chapterTracksEnabled
+
             if (!$videoElement.get())
                 return;
             if (videoInfo.youtube) {
