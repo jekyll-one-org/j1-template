@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "j1-theme",
-  "version": "2024.0.0",
+  "version": "2024.1.0",
   "description": "Gem-based Template for Jekyll",
   "homepage": "https://jekyll.one",
   "author": {
@@ -14,12 +14,25 @@
     "url": "https://github.com/jekyll-one/j1_template/issues"
   },
   "config": {
-    "bumplevel": "patch",
-    "mode": "development"
+    "jekyll_app_interface": "0.0.0.0",
+    "jekyll_app_port": "30010",
+    "jekyll_app_url": "http://localhost:30010/",
+    "jekyll_config_file": "_config.yml",
+    "jekyll_port": "30000",
+    "jekyll_livereload_port": "30001",
+    "jekyll_option_livereload": "--livereload",
+    "jekyll_option_watch": "--watch",
+    "jekyll_option_initial_build": "--skip-initial-build",
+    "jekyll_option_incremental": "--incremental",
+    "ruby_gemfile": "Gemfile",
+    "ruby_userize": "true",
+    "ruby_vendorize": "true",
+    "mode": "development",
+    "loglevel": "silent"
   },
   "engines": {
-    "node": ">=12.0",
-    "npm": ">=6.0",
+    "node": ">=16.0",
+    "npm": ">=8.0",
     "yarn": ">=1.22"
   },
   "npm": {
@@ -52,7 +65,6 @@
     "deploy": "lerna run deploy",
     "lint": "lerna run lint --parallel --scope",
     "gem": "lerna run --parallel --scope gem",
-    "nbi": "lerna run --parallel --scope site",
     "publish": "npm --silent run publish:*",
     "setup": "npm --silent run setup-start && npm --silent run setup-base && run-s -s setup-create-log-folders && run-s -s setup:*",
     "site": "lerna run --parallel develop",
@@ -95,6 +107,7 @@
     "setup-create-folders:link-log-folder": "shx ln -s packages/400_theme_site/log ./log && echo done.",
     "setup-base": "echo Bootstrap base modules .. && echo J1 Project Base modules: > install.log && npm install --silent shx npm-run-all cross-var cross-env >> install.log && echo done.",
     "setup:env": "cross-var echo \"Configure environment ..\" && run-s -s set-env:*",
+    "setup:tip": "echo Run \"yarn site\" to open the web.",
     "set-env:npm-loglevel": "cross-var cross-env npm_config_loglevel=$npm_package_npm_loglevel",
     "set-env:npm-node-path": "cross-var cross-env  npm config set scripts-prepend-node-path=$npm_package_npm_prepend_nodepath",
     "set-env:mode": "cross-var cross-env npm_config_mode=$npm_package_config_mode && echo done.",
@@ -104,27 +117,27 @@
   "dependencies": {
     "cross-env": "^7.0.3",
     "cross-var": "^1.1.0",
-    "getos": "^3.1.0",
-    "getos-cli": "^1.0.0",
-    "if-env": "^1.0.4",
+    "getos": "^3.1",
+    "getos-cli": "^1.0",
+    "if-env": "^1.0",
     "lerna": "^6.6.2",
-    "npm-delay": "^1.0.4",
+    "npm-delay": "^1.0",
     "npm-run-all": "^4.1.5",
     "shx": "^0.3.4",
-    "yarn": "^1.22.17"
+    "yarn": "^1.22"
   },
   "optionalDependencies": {
     "fsevents": "^1.2.7"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta.46",
-    "@babel/preset-env": "^7.0.0-beta.46",
+    "@babel/core": "^7",
+    "@babel/preset-env": "^7",
     "@popperjs/core": "^2.10",
-    "@webpack-cli/serve": "^1.6.0",
-    "babel-loader": "^8.0.0-beta.2",
+    "@webpack-cli/serve": "^1.6",
+    "babel-loader": "^8.0",
     "webpack": "^5.62",
-    "webpack-cli": "^4.9.1",
-    "webpack-dev-server": "^4.4.0",
-    "webpack-merge": "^5.8.0"
+    "webpack-cli": "^4.9",
+    "webpack-dev-server": "^4.4",
+    "webpack-merge": "^5.8"
   }
 }
