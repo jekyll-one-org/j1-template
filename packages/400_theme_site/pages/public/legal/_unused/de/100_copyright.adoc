@@ -1,0 +1,133 @@
+---
+title:                                  Urheberrechte
+tagline:                                Gesetzliches Recht am Inhalt
+
+date:                                   2024-01-19
+#last_modified:                         2024-01-19
+
+description: >
+                                        Die auf dieser Website veröffentlichten Inhalte und Werke unterliegen
+                                        dem Urheberrecht Gesetze von Deutschland. Jegliche Vervielfältigung,
+                                        Bearbeitung, Verbreitung oder jede Form von einer Verwertung außerhalb
+                                        der Grenzen des Urheberrechts bedarf der vorherigen schriftlichen
+                                        Zustimmung des jeweiligen Autors bzw. der betreffenden Autoren.
+
+categories:                             [ Site ]
+tags:                                   [ Copyright ]
+
+robots:
+  index:                                true
+  follow:                               true
+
+image:
+  path:                                 /assets/images/modules/attics/1920x1280/ifonnx-toys.jpg
+  width:                                1920
+  height:                               1200
+
+sitemap:                                false
+exclude_from_search:                    true
+regenerate:                             false
+permalink:                              /pages/public/legal/de/copyright/
+
+resources:                              [ animate, rouge ]
+resource_options:
+  - attic:
+      padding_top:                      630
+#     padding_bottom:                   100
+#     margin_bottom:                    180
+      slides:
+        - url:                          /assets/images/modules/attics/1920x1280/ifonnx-toys.jpg
+          alt:                          IFONNX Toys
+          badge:
+            type:                       unsplash
+            author:                     IFONNX Toys
+            href:                       https://unsplash.com/de/@danroc0414
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:disclaimer:                            true
+:legal-warning:                         false
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+ifeval::[{legal-warning} == false]
+[WARNING]
+====
+Dieses Dokument *stellt* keine *Rechtsberatung* dar. Es ist dringend empfohlen,
+rechtliche Aspekte und deren Auswirkungen zu überprüfen.
+====
+endif::[]
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+Die auf dieser Website veröffentlichten Inhalte und Werke unterliegen dem
+Urheberrecht Gesetze von Deutschland. Jegliche Vervielfältigung, Bearbeitung,
+Verbreitung oder jede Form von einer Verwertung außerhalb der Grenzen des
+Urheberrechts bedarf der vorherigen schriftlichen Zustimmung des jeweiligen
+Autors bzw. der betreffenden Autoren.
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+[role="mt-5"]
+== Urheberrechtsrichtlinie
+
+Die auf dieser Seite bereitgestellten Inhalte unterliegen dem deutschen
+Urheberrecht. Der Vervielfältigung, Bearbeitung, Verbreitung und jede Art
+der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der
+schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.
+
+Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden,
+sind Dritte verantwortlich. Die Urheberrechte dieser Parteien werden
+respektiert. Stellen Sie falsche Nutzung fremder Inhalte fest, bitten wir
+um einen entsprechenden Hinweis.
+
+ifeval::[{disclaimer} == true]
+[role="mt-5"]
+== Haftungsausschluss
+
+Die Inhalte der Website wurden mit größter Sorgfalt und nach bestem Wissen
+und Gewissen erstellt. Dennoch übernimmt der Anbieter dieser Website keine
+Verantwortung für die Aktualität, Vollständigkeit und Richtigkeit der
+bereitgestellten Seiten und Inhalte.
+
+=== Haftung für Inhalte
+
+Als Inhaltsanbieter sind wir gemäß § 7 für eigene Inhalte verantwortlich nach
+Abs.1 TMG gemäß §§ 8 bis 10 TMG. Als Dienstleister jedoch sind wir nicht
+verpflichtet, gespeicherte fremde Daten zu übermitteln oder zu überwachen
+die auf eine Rechtswidrigkeit Aktivität schließen lassen.
+
+Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen
+nach den allgemeinen Gesetzen bleiben unberührt. Eine diesbezügliche Haftung
+besteht jedoch erst ab dem Zeitpunkt der Kenntnis eines konkreten Verstoßes.
+Beim Erkennen von Verstößen werden wir diesen Inhalt umgehend entfernen.
+
+=== Haftung für verlinkte Seiten
+
+Unser Angebot kann Links zu externen Webseiten Dritter enthalten. Auf den
+dieser Inhalte haben wir keinen Einfluss. Deshalb können wir für diese fremden
+Inhalte keine Haftung übernehmen. Für die Inhalte der verlinkten Seiten
+die jeweiligen Anbieter oder Betreiber der Seiten die Haftung.
+
+Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung auf den Seiten nicht
+erkennbar. Eine inhaltliche Kontrolle der verlinkten Seiten erfolgt ohne konkrete
+Haftung. Beim Erkennen von Verstößen werden wir diesen Inhalt umgehend entfernen.
+Stellen Sie Verstößen fremder Inhalte fest, bitten wir um einen entsprechenden
+Hinweis.
+endif::[]
+
+[role="mb-7"]

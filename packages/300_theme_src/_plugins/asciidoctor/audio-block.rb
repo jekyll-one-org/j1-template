@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
-# ~/_plugins/asciidoctor-extensions/video-block.rb
-# Asciidoctor extension for local HTML5 Video
+# ~/_plugins/asciidoctor-extensions/audio-block.rb
+# Asciidoctor extension for local HTML5 MP3 Audio
 #
 # Product/Info:
 # https://jekyll.one
@@ -14,28 +14,27 @@ require 'asciidoctor/extensions' unless RUBY_ENGINE == 'opal'
 include Asciidoctor
 
 # ------------------------------------------------------------------------------
-# A block macro that embeds a local video into the output document
+# A block macro that embeds a local MP3 audio into the output document
 #
 # Usage:
 #
-#   video::video_path[poster="full_image_path" role="CSS classes"]
+#   audio::mp3_audio_file[role="CSS classes"]
 #
 # Example:
 #
-#   .Video title
-#   video::/assets/videos/gallery/html5/video2.mp4[poster="/assets/videos/gallery/video2-poster.jpg" role="mt-5 mb-5"]
+#   .Ambient Piano (sound-effect)
+#   audio::/assets/audio/sound-effects/ambient-piano.mp3[role="mt-5 mb-5"]
 #
 # ------------------------------------------------------------------------------
 
 Asciidoctor::Extensions.register do
 
-  class VideoBlockMacro < Extensions::BlockMacroProcessor
+  class AudioBlockMacro < Extensions::BlockMacroProcessor
     use_dsl
 
-    named :video
-    name_positional_attributes 'poster', 'role'
-    default_attrs 'poster' => '/assets/images/icons/videojs/videojs-poster.png',
-                  'role' => 'mt-3 mb-3'
+    named :audio
+    name_positional_attributes 'role'
+    default_attrs 'role' => 'mt-3 mb-3'
 
     def process parent, target, attributes
 
@@ -43,22 +42,22 @@ Asciidoctor::Extensions.register do
       video_id      = (0...11).map { chars[rand(chars.length)] }.join
 
       title_html    = (attributes.has_key? 'title') ? %(<div class="video-title">#{attributes['title']}</div>\n) : nil
-      poster_image  = (poster = attributes['poster']) ? %(#{poster}) : nil
 
       html = %(
-        <div class="html5-player #{attributes['role']}">
+        <div class="audio-player #{attributes['role']}">
           #{title_html}
-          <video
+          <audio
             id="#{video_id}"
-            width="640" height="360"
-            poster="#{poster_image}"
-            aria-label="#{attributes['title']}"
-          ></video>
+            controls
+          >
+            <source src="#{target}">
+            Your browser does not support the HTML5 audio element.
+          </audio>
         </div>
       )
       create_pass_block parent, html, attributes, subs: nil
     end
   end
 
-  block_macro VideoBlockMacro
+  block_macro AudioBlockMacro
 end

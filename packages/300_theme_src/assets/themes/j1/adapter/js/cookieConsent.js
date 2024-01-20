@@ -182,11 +182,16 @@ j1.adapter.cookieConsent = (function (j1, window) {
       // if (typeof settings !== 'undefined') {
       //   moduleOptions = $.extend({}, moduleOptions, settings);
       // }
+      if (navigatorLanguage.indexOf("-") !== -1) {
+        navigatorLanguage = navigatorLanguage.split("-")[0];
+      }
 
       if (cookieConsentOptions.dialogLanguage === 'auto') {
         cookieConsentOptions.dialogLanguage = navigatorLanguage;
       } else if (cookieConsentOptions.dialogLanguage === 'content') {
         cookieConsentOptions.dialogLanguage = contentLanguage;
+      } else {
+        cookieConsentOptions.dialogLanguage = navigatorLanguage;
       }
 
       check_cookie_option_domain  = (cookieOptions.domain === 'false') ? false : true;

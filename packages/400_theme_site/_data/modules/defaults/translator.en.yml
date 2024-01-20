@@ -31,14 +31,14 @@ defaults:
   translationEnabled:                   false
   hideTranslatorIcon:                   false                                   # hide translator icon if translation not allowed (cookie consent)
   disableLanguageSelector:              false                                   # disable language dropdown for translation in dialog (modal)
-  translationLanguage:                  en                                      # 'auto'|detect translation language from browser
+  translationLanguage:                  auto                                    # detect translation language from browser
   translateAllPages:                    true                                    # enable translation for all pages
   reloadPageOnChange:                   true                                    # reload current page if user settings has been changed
 
   contentURL:                           /assets/data/translator                 # dialogs (modals) for all supported translators|languages
   contentLanguage:                      auto                                    # auto | one of 'translationLanguages'
   dialogLanguage:                       auto                                    # auto|content|one of dialogLanguages
-  dialogLanguages:                      [en, de]                                # supported dialog (modal) languages, defaults to FIRST language defined
+  dialogLanguages:                      [en,de]                                 # supported dialog (modal) languages, defaults to FIRST language defined
   cookieName:                           j1.user.translate                       # name of the user translation cookie (primary data)
   cookieConsentName:                    j1.user.consent                         # name of the Cookie Consent Cookie (secondary data)
   xhrDataElement:                       google-data                             # container for the language-specific modal (taken fromcontentURL)
@@ -70,35 +70,35 @@ defaults:
                                         ]
     modal_settings:
 
-      title:                            Google Übersetzer
+      title:                            Google Translator
       body_text: >
-                                        Diese Website nutzt den <b>kostenlosen</b> Dienst <b>Google Translator</b>
-                                        Übersetzen Sie den Inhalt dieser Website in Sekundenschnelle in über 100 Sprachen.
-                                        Die zu übersetzende Sprache wird automatisch von Ihrem Browser übernommen
-                                        Einstellungen.
+                                        This website use the <b>free</b> service <b>Google Translator</b> to
+                                        translate the content of this website into 100+ languages in seconds.
+                                        The language for translation is automatically taken from your browser
+                                        settings.
       language_selector_title: >
-                                        Ihre aktuellen Spracheinstellungen für die Übersetzung sind
+                                        Your current language settings for the translation are
       privacy_notice: >
-                                        Der <b>kostenlose Dienst</b> von Google Translate verwendet zur Bereitstellung Cookies
-                                        seine Dienste, personalisieren Werbung und führen Verkehrsanalysen durch
-                                        Für die Nutzung von Cookies ist Ihre Einwilligung erforderlich. Weitere Informationen finden Sie hier
-                                        etwa bei Google
-                                        <a href="https://policies.google.com/" target="_blank" rel="noopener">Datenschutzerklärung</a>.
+                                        The <b>free service</b> from Google Translate uses cookies to provide
+                                        its services, personalize advertising and run traffic analysis To use the
+                                        service, your consent on using cookies is required. Find more information
+                                        about at the Google
+                                        <a href="https://policies.google.com/" target="_blank" rel="noopener">Privacy Policy</a>.
                                         <br><br>
-                                        Erforderliche Cookie-Einstellungen:
+                                        Required Cookie Settings:
                                         <ul>
                                           <li style="list-style-type: none;">
-                                            <b>Analyse</b>
+                                            <b>Analysis</b>
                                             <p>
-                                              Für die Nutzung von Google Translations ist Ihre Einwilligung zur Analyse erforderlich
-                                              in den Datenschutzeinstellungen ist erforderlich.
+                                              For the use of Google Translations, your consent on analysis
+                                              in the privacy settings is required.
                                             </p>
                                           </li>
                                           <li style="list-style-type: none;">
-                                            <b>Personalisierung</b>
+                                            <b>Personalization</b>
                                             <p>
-                                              Für die Nutzung von Google Translations ist Ihre Einwilligung zur Personalisierung erforderlich
-                                              in den Datenschutzeinstellungen ist erforderlich.
+                                              For the use of Google Translations, your consent on personalization
+                                              in the privacy settings is required.
                                             </p>
                                           </li>
                                         </ul>

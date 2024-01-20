@@ -43,8 +43,6 @@ function CookieConsent(props) {
   var detailedSettingsShown = false;
   var url                   = new liteURL(window.location.href);
   var cookieSecure          = (url.protocol.includes('https')) ? true : false;
-  var navigatorLanguage     = navigator.language || navigator.userLanguage;
-  var defaultDialogLanguage = 'en';
   var logText;
   var current_page;
   var whitelisted;
@@ -52,14 +50,10 @@ function CookieConsent(props) {
   logger.info('\n' + 'initializing core module: started');
   logger.info('\n' + 'state: started');
 
-  if (navigatorLanguage.indexOf("-") !== -1) {
-    navigatorLanguage = navigatorLanguage.split("-")[0];
-  }
-
   // default settings
   this.props = {
     autoShowDialog:         true,                                               // show dialog if NO consent cookie found
-    dialogLanguage:         navigatorLanguage,                                  // language used for the consent dialog (modal)
+    dialogLanguage:         'content',                                          // language used for the consent dialog (modal)
     dialogLanguages:        ['en','de'],                                        // supported languages for the consent dialog (modal), defaults to first in array
     contentURL:             '/assets/data/cookieconsent',                       // URL contain the consent dialogs (modals) for ALL supported languages
     postSelectionCallback:  '',                                                 // callback function, called after the user has made his selection
@@ -79,7 +73,7 @@ function CookieConsent(props) {
 
   // fallback on default language (modal) if dialogLanguage not suppported
   if (!this.props.dialogLanguages.includes(this.props.dialogLanguage)) {
-    this.props.dialogLanguage = defaultDialogLanguage;
+    this.props.dialogLanguage = this.props.dialogLanguages[0];
   }
 
   // set modal by dialogLanguage that is loadad

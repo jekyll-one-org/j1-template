@@ -1,0 +1,95 @@
+---
+title:                                  Tester
+tagline:                                HTML Audio
+date:                                   2024-01-17
+description: >
+                                        Welcome to the preview page focussing on the image module. This page
+                                        shows some valuable features of the J1 Theme to manage your image-based
+                                        content using lightboxes, carousels (slider), and galleries.
+
+categories:                             [ Testpages ]
+tags:                                   [ Example ]
+
+comments:                               false
+fab_menu_id:                            open_toc
+
+permalink:                              /pages/public/learn/audio/
+regenerate:                             false
+
+resources:                              [
+                                          animate,
+                                          clipboard, rouge,
+                                          videojs
+                                        ]
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/pages/roundtrip/images-1920x1280-bw.jpg
+          alt:                          Photo by Ricardo Gomez Angel on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Ricardo Gomez Angel
+            href:                       https://unsplash.com/@ripato/portfolio
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:images-dir:                            {imagesdir}/pages/roundtrip/100_present_images
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+
+.Remote Video
+videojs::https://nrodlzdf-a.akamaihd.net/none/3sat/24/01/240111_sendung_wido/5/240111_sendung_wido_6660k_p37v17.mp4[poster="/assets/videos/gallery/240111-sendung-wido-104~1280x720.jpg" role="mt-4 mb-5"]
+
+++++
+<div class="audio-player mt-4 mb-5">
+  <div class="video-title">WDR 2 Jörg Thadeusz · Sabine Kuegler, Autorin</div>
+  <p class="result-item-text small text-muted mt-2 mb-0">
+    <i class="mdib mdib-calendar-blank mdib-18px mr-1"></i>
+    17.01.2024 · 31 Min
+  </p>
+  <p class="result-item-text mt-2">
+    Als Kind von Sprachforschern wächst Sabine Kuegler im Urwald von Westpapua unter Einheimischen auf - ihr Buch "Dschungelkind" wird ein weltweiter Millionenbestseller. Als Teenager kommt sie zurück nach Europa und erfährt einen Kultur-Schock. Zerrissen zwischen den Welten und schwer erkrankt geht sie für weitere Jahre zurück in den Dschungel auf Suche nach Heilung, Glück und ihrem Platz im Leben.
+  </p>
+  <audio controls>
+    <source src="https://wdrmedien-a.akamaihd.net/medp/podcast/weltweit/fsk0/305/3058000/wdr2joergthadeusz_2024-01-17_sabinekueglerautorin_wdr2.mp3" type="audio/mp3">
+    Dein Browser unterstützt das Audio-Element nicht.
+  </audio>
+</div>
+
+<div class="audio-player mt-4 mb-5">
+  <div class="video-title">WDR 2 Jörg Thadeusz · Johannes Fuß, Sexualmediziner</div>
+  <p class="result-item-text small text-muted mt-2 mb-0">
+    <i class="mdib mdib-calendar-blank mdib-18px mr-1"></i>
+    16.01.2024 · 31 Min
+  </p>
+  <p class="result-item-text mt-2">
+    Sowohl Menschen als auch Tiere haben Solo-Sex. Unterscheiden sich die körperlichen Reaktionen bei uns Menschen, je nachdem, ob ein Orgasmus durch Masturbation oder Sex mit einer anderen Person ausgelöst wird? Diese Frage erforscht der Sexualmediziner Professor Johannes Fuß mit Unterstützung von experimentierfreudigen Testpersonen in seinem Labor an der Universität Duisburg-Essen.
+  </p>
+  <audio controls>
+    <source src="https://wdrmedien-a.akamaihd.net/medp/podcast/weltweit/fsk0/305/3057323/wdr2joergthadeusz_2024-01-16_johannesfusssexualmediziner_wdr2.mp3" type="audio/mp3">
+    Dein Browser unterstützt das Audio-Element nicht.
+  </audio>
+</div>
+++++

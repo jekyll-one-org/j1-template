@@ -1,0 +1,635 @@
+---
+title:                                  Privatsphäre
+tagline:                                Ihre persönlichen Daten
+
+date:                                   2024-01-19
+#last_modified:                         2024-01-19
+
+description: >
+                                        Die Betreiber dieser Website nehmen den Schutz Ihrer persönlichen
+                                        Daten ernst. Wir behandeln Ihre Daten vertraulich und schützen Ihre
+                                        Privatsphäre auf Basis der Datenschutz-Grundverordnung (DSGVO) der
+                                        Europäischen Union.
+
+categories:                             [ Site ]
+tags:                                   [ Privacy, Policy ]
+
+robots:
+  index:                                true
+  follow:                               true
+
+image:
+  path:                                 /assets/images/modules/attics/1920x1280/ifonnx-toys.jpg
+  width:                                1920
+  height:                               1200
+
+sitemap:                                false
+exclude_from_search:                    true
+regenerate:                             false
+permalink:                              /pages/public/legal/de/privacy/
+
+resources:                              [ animate, rouge ]
+resource_options:
+  - attic:
+      padding_top:                      600
+#     padding_bottom:                   100
+#     margin_bottom:                    180
+      slides:
+        - url:                          /assets/images/modules/attics/1920x1280/ifonnx-toys.jpg
+          alt:                          IFONNX Toys
+          badge:
+            type:                       unsplash
+            author:                     IFONNX Toys
+            href:                       https://unsplash.com/de/@danroc0414
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:legal-warning:                         false
+
+// Attribute settings for section control
+//
+:cookies:                               true
+:cookie-consent:                        true
+:themes:                                true
+:logs-files:                            false
+:google-analytics:                      true
+:google-translator:                     true
+:google-ads:                            false
+:hyvor:                                 true
+:facebook:                              false
+:twitter:                               false
+:instagram:                             false
+:youtube:                               true
+:vimeo:                                 false
+:dailymotion:                           false
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+ifeval::[{legal-warning} == true]
+[WARNING]
+====
+Dieses Dokument *stellt* keine *Rechtsberatung* dar. Es ist dringend empfohlen,
+rechtliche Aspekte und deren Auswirkungen zu überprüfen.
+====
+endif::[]
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+Die Betreiber dieser Website nehmen den Schutz Ihrer persönlichen Daten ernst.
+Wir behandeln Ihre Daten vertraulich und schützen Ihre Privatsphäre gemäß der
+Datenschutz-Grundverordnung DSGVO der Europäischen Union.
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+ifeval::[{cookies} == true]
+[role="mt-5"]
+== Cookies
+
+Diese Website verwendet für ihren Betrieb Cookies und ähnliche Technologien
+dieses Angebot. Es steht Ihnen frei, Ihre Einwilligung zu erteilen, zu
+verweigern oder zu widerrufen.
+
+Nachträgliche Änderungen sind *jederzeit* durch einen Klick auf das Cookie
+Icon mdi:cookie[24px, md-blue] möglich und wird oben rechts in der *Menüleiste*
+platziert.
+
+[role="mb-4"]
+*Erweiterte* Cookies von Drittanbietern werden nur mit Ihrer Zustimmung
+verwendet. Zusätzlich werden Cookies verwendet, um die Nutzung der Website
+zu analysieren oder personalisierte Inhalte anzubieten.
+
+Die Auswertung dieser Informationen ermöglicht Ihnen ein besseres Benutzererlebnis
+der angebotene Inhalte, wie z.B. Zusatzfunktionen wie Übersezungen und
+Kommentare. Weitere Informationen finden Sie im Datenschutzdialog durch
+Anklicken des Buttons *Datenschutzerklärung* oder in den folgenden Abschnitten
+der jeweiligen Anbieter.
+
+Erforderlich::
+In Cookies werden notwendige Daten gespeichert, um die grundlegenden Dienste
+dieser Website zu ermöglichen. Diese Website führt mit den erforderlichen
+Cookies *keine* Aufzeichnungen über Ihr Nutzungsverhalten. Alle Informationen
+dienen der generellen Steuerung und werden in sogenannten *Session-Cookies*
+gespeichert.
+
+Sitzungscookies werden *automatisch* aus Ihrem Browser entfernt, wenn Sie
+alle Tabs in Ihrem Browser *geschlossen* haben.
+
+Analyse::
+Die Analyse der Nutzung dieser Website hilft uns, Ihr Benutzererlebnis zu
+verbessern und die Website zu optimieren. Für die Analyse wird Google Analytics
+verwendet. Die Website übermittelt keine personenbezogenen Daten. Implizite
+personenbezogene Daten wie z.B. IP-Adressen werden zum Schutz Ihrer Privatsphäre
+vor der Übertragung *anonymisiert*.
+
+Personalisierung::
+Personalisierung wird beispielsweise verwendet, um Benutzerfeedback zu sammeln
+und Angebote anzubieten die Zusatzfunktionen nutzen oder um Werbekampagnen
+durchführen. Einnahmen aus Werbung ermöglicht es uns, Ihnen diese Website
+kostenfrei zur Verfügung zu stellen.
+
+Partner ermöglichen es uns, Ihnen exzellente personalisierte Dienstleistungen
+anzubieten und die Finanzierung der Kosten für den Betrieb dieser Website zu
+ermöglichen.
+endif::[]
+
+
+ifeval::[{cookie-consent} == true]
+[role="mt-5"]
+== Datenschutzeinstellungen
+
+Wenn Sie festlegen möchten, welche *Cookies* von dieser Website verwendet
+werden, können Sie Ihre Einstellungen in dem *Einwilligungseinstellungen*
+anpassen. Sie können Cookies auch über Ihren *Browser* ablehnen.
+
+Bitte seien Sie vorsichtig, wenn Sie Ihre Browsereinstellungen ändern. Ablehnen
+von Cookies können beim Besuch von Websites zu schwerwiegenden Problemen
+führen. Dies gilt nicht nur für die Seiten dieser Website.
+
+[NOTE]
+====
+Haben Sie unsere Website schon einmal besucht und der Verwendung von Cookies
+zugestimmt?
+
+Die zu diesem Zeitpunkt erstellten Datendateien sind möglicherweise noch auf
+Ihrem System gespeichert. In einigen Fällen sind Cookies bereits vorhanden und
+müssen über die Funktionen Ihres Browsers *manuell* gelöscht werden.
+====
+
+++++
+<div class="mt-4 mb-4 d-grid gap-2">
+  <a href="#"
+     onclick="j1.cookieConsent.showDialog(); return false;"
+     class="btn btn-info btn-flex btn-lg"
+     aria-label="Cookie Consent">
+     <i class="mdi mdi-cookie mdi-2x mr-2"></i>
+      Ihre Einstellungen
+  </a>
+</div>
+++++
+endif::[]
+
+
+ifeval::[{themes} == true]
+[role="mt-5"]
+== Bootstrap Themen
+
+Themen für Bootstrap werden verwendet, um das Erscheinungsbild einer Website
+basierend auf den Grundregeln und Definitionen der CSS-Stile von Bootstrap
+anzupassen. Die Verwendung oder Änderung eines Themas verändert nicht die
+Funktionalität der zugrunde liegenden Webseiten. Das Bootstrap-Framework ändert
+jedoch beispielsweise das Farbschema, die Schriftarten oder Schriftgrößen usw.
+Darüber hinaus kann das Erscheinungsbild ausgewählter vordefinierter HTML
+Elemente wie Schaltflächen, Formulare oder Navigationselemente durch ein Thema
+angepasst werden.
+
+Das zugrunde liegende *Themen*-Modul verwendet die kostenlosen Themen für
+Bootstrap die über die Dienste von _Bootswatch_ bereitgestellt werden. Die
+Plattform bietet eine große Anzahl verschiedener kostenloser Themen, die
+vorkompilierte CSS-Dateien von Bootstrap V5 verwenden und direkt für eine
+Website verwendet werden können.
+
+Die Dienste von _Bootswatch_ verwenden *permanente* Cookies, um Information
+zu relevanten Themen zu speichern. Um die Themenfunktion nutzen zu können,
+müssen Sie daher den Cookies zur *Personalisierung* zustimmen.
+endif::[]
+
+
+ifeval::[{logs-files} == true]
+[role="mt-5"]
+== Log-Dateien
+
+Wir erfassen bestimmte Informationen automatisch von unseren Webservern und
+speichern sie in Protokolldateien auf unseren Servern. Bei diesen Informationen
+kann es sich um eine Internet Protocol IP, Adressen, Browsertyp, Internetdienstanbieter,
+Weiterleitung und Ausstieg von Seiten, das Betriebssystem, Zeitstempel und/oder
+andere Clickstream-Daten handeln.
+
+These are:
+
+* Browsertyp und -version
+* Betriebssystem
+* URLs
+* Hostnamen
+* Zeitstempel der aufgerufenen Seiten
+
+Wir können diese Protokollinformationen mit anderen Informationen kombinieren.
+Wir tun dies um die von uns angebotenen Dienstleistungen zu verbessern und
+den Inhalt unserer Website zu verbessern.
+endif::[]
+
+
+ifeval::[{google-analytics} == true]
+[role="mt-5"]
+== Google Traffic Analytics
+
+Diese Website nutzt Google Analytics GA, einen Datendienst zur Analyse von
+Benutzeraktivitäten. Diese Funktionalität ist nur verfügbar, wenn Sie Ihre
+Zustimmung zu den Datenschutzeinstellungen zu *Analysen* gegeben haben.
+
+Dieser Service wird angeboten von:
+
+----
+   Google Inc.
+   1600 Amphitheatre Parkway Mountain View
+   CA 94043
+   USA
+----
+
+Der Dienst verwendet sogenannte Cookies. Dabei handelt es sich um Textdateien,
+die auf Ihrem System gespeichert werden um Nutzer hinsichtlich ihrer Aktivität
+auf der Website auszuwerten. Die Inhalte der generierten Cookies werden an den
+Anbieter übermittelt und dort gespeichert.
+
+Diese Website nutzt die *Anonymisierung* von IP-Adressen. Netzwerkadressen von
+Besuchern aus dem Gebiet der Europäischen Union unterliegen den Datenschutzbestimmungen
+des Europäischen Wirtschaftsraums. Eine persönliche Zuordnung der erfassten
+Daten ist *nicht* möglich.
+
+Weitere Informationen finden Sie in den Unternehmensrichtlinien unter
+link:{url-google--privacy-policy-en}[Datenschutzeinstellungen, {browser-window--new}].
+
+[NOTE]
+====
+Der Nutzung können Sie jederzeit durch entsprechende Auswahl in den Einstellungen
+Ihrer Datenschutzeinstellungen widersprechen. Beachten Sie jedoch, dass Sie
+in diesem Fall *nicht* den vollen Funktionsumfang dieser Website nutzen können.
+====
+endif::[]
+
+ifeval::[{google-ads} == true]
+[role="mt-5"]
+== Google Advertising
+
+Diese Website nutzt Google Adsense GAD, einen Datendienst zur personalisierten
+Nutzung von Werbung. Diese Funktionalität ist nur verfügbar, wenn Sie Ihre
+Zustimmung zu den Datenschutzeinstellungen zur *Personalisierung* gegeben haben.
+
+Dieser Service wird angeboten von:
+
+----
+   Google Inc.
+   1600 Amphitheatre Parkway Mountain View
+   CA 94043
+   USA
+----
+
+Der Dienst verwendet sogenannte Cookies. Dabei handelt es sich um Textdateien,
+die auf Ihrem System gespeichert werden um Nutzer hinsichtlich ihrer Aktivität
+auf der Website auszuwerten. Die Inhalte der generierten Cookies werden an den
+Anbieter übermittelt und dort gespeichert.
+
+Diese Website nutzt die *Anonymisierung* von IP-Adressen. Netzwerkadressen von
+Besuchern aus dem Gebiet der Europäischen Union unterliegen den Datenschutzbestimmungen
+des Europäischen Wirtschaftsraums. Eine persönliche Zuordnung der erfassten
+Daten ist *nicht* möglich.
+
+Weitere Informationen finden Sie in den Unternehmensrichtlinien unter
+link:{url-google--privacy-policy-en}[Datenschutzeinstellungen, {browser-window--new}].
+
+[NOTE]
+====
+Der Nutzung können Sie jederzeit durch entsprechende Auswahl in den Einstellungen
+Ihrer Datenschutzeinstellungen widersprechen. Beachten Sie jedoch, dass Sie
+in diesem Fall *nicht* den vollen Funktionsumfang dieser Website nutzen können.
+====
+endif::[]
+
+
+ifeval::[{google-translator} == true]
+[role="mt-5"]
+== Google Translation
+
+Diese Website nutzt Google Google Translator GT, einen Dienst zur Übersetzung
+Inhalte von Websites. Diese Funktionalität ist nur verfügbar, wenn Sie Ihre
+Zustimmung zu den Datenschutzeinstellungen zur *Personalisierung* gegeben
+haben.
+
+Dieser Service wird angeboten von:
+
+----
+   Google Inc.
+   1600 Amphitheatre Parkway Mountain View
+   CA 94043
+   USA
+----
+
+Diese Website nutzt die *Anonymisierung* von IP-Adressen. Netzwerkadressen von
+Besuchern aus dem Gebiet der Europäischen Union unterliegen den Datenschutzbestimmungen
+des Europäischen Wirtschaftsraums. Eine persönliche Zuordnung der erfassten
+Daten ist *nicht* möglich.
+
+Weitere Informationen finden Sie in den Unternehmensrichtlinien unter
+link:{url-google--privacy-policy-en}[Datenschutzeinstellungen, {browser-window--new}].
+
+[NOTE]
+====
+Der Nutzung können Sie jederzeit durch entsprechende Auswahl in den Einstellungen
+Ihrer Datenschutzeinstellungen widersprechen. Beachten Sie jedoch, dass Sie
+in diesem Fall *nicht* den vollen Funktionsumfang dieser Website nutzen können.
+====
+endif::[]
+
+
+ifeval::[{hyvor} == true]
+[role="mt-5"]
+== Kommentare
+
+Auf unseren Seiten können Funktionen des Dienstes *Hyvor Talk* HT eingebunden
+sein. Diese Funktionalität ist nur verfügbar, wenn Sie Ihre Zustimmung zu den
+Datenschutzeinstellungen zur *Personalisierung* gegeben haben.
+
+Die *Kosten* für die Bereitstellung der Dienstleistung trägt der *Betreiber*
+diese Internetseite. Die Dienste von *Hyvor Talk* respektieren Ihre
+Privatsphäre. Wenn Sie über den Dienst Hyvor kommentieren, wird *kein*
+Tracking verwendet, Werbung geschaltet oder ähnliche *Drittanbieter*-Codes
+erfasst oder übermittelt. Persönliche Daten werden bei der Nutzung niemals
+an Dritte weitergegeben.
+
+Der Dienst verwendet sogenannte Cookies. Dabei handelt es sich um Textdateien,
+die auf Ihrem System gespeichert werden um die Aktivität des Benutzers
+auszuwerten. Die durch Cookies erzeugten Informationen werden an den Anbieter
+übermittelt und auf den Servern des Unternehmens gespeichert.
+
+Weitere Informationen finden Sie in den Unternehmensrichtlinien der
+https://hyvor.com/privacy-policy[Datenschutzeinstellungen, {browser-window--new}].
+
+[NOTE]
+====
+Der Nutzung können Sie jederzeit durch entsprechende Auswahl in den Einstellungen
+Ihrer Datenschutzeinstellungen widersprechen. Beachten Sie jedoch, dass Sie
+in diesem Fall *nicht* den vollen Funktionsumfang dieser Website nutzen können.
+====
+endif::[]
+
+
+ifeval::[{facebook} == true]
+[role="mt-5"]
+== Facebook Integration
+
+Auf unseren Seiten können *Funktionen* des sozialen Netzwerks *Facebook*
+eingebunden sein. Diese Funktionalität ist nur verfügbar, wenn Sie Ihre
+Zustimmung zu den Datenschutzeinstellungen zur *Personalisierung* gegeben
+haben.
+
+Diese Dienstleistungen werden angeboten von:
+
+----
+  Facebook Inc.
+  1 Hacker Way Menlo Park
+  CA 94025
+  USA
+----
+
+Wenn Sie unsere Website besuchen, wird die Einbindung, der *Like-Button*,
+eine direkte Verbindung zwischen Ihrem Browser und dem Server des Anbieters
+hergestellt. Dabei werden personenbezogene Daten an die Systeme des Anbieters
+übermittelt. Hierzu ist es erforderlich, dass Sie mit Ihrem Benutzerkonto bei
+unserem Besuch eingeloggt sind.
+
+Der Dienst verwendet sogenannte Cookies. Dabei handelt es sich um Textdateien,
+die auf Ihrem System gespeichert werden um die Aktivität des Benutzers
+auszuwerten. Die durch Cookies erzeugten Informationen werden an den Anbieter
+übermittelt und auf den Servern des Unternehmens gespeichert.
+
+Wir weisen darauf hin, dass wir als Betreiber keine Kenntnis davon haben,
+welche Daten übermittelt werden sowie deren Verwendung beim Diensteanbieter.
+
+Weitere Informationen finden Sie in den Unternehmensrichtlinien unter
+link:{url-facebook--privacy-policy-en}[Privacy Settings, {browser-window--new}].
+
+[NOTE]
+====
+Der Nutzung können Sie jederzeit durch entsprechende Auswahl in den Einstellungen
+Ihrer Datenschutzeinstellungen widersprechen. Beachten Sie jedoch, dass Sie
+in diesem Fall *nicht* den vollen Funktionsumfang dieser Website nutzen können.
+====
+endif::[]
+
+
+ifeval::[{twitter} == true]
+[role="mt-5"]
+== X (vormals Twitter) Integration
+
+Auf unseren Seiten können *Funktionen* des Nachrichtennetzwerks *X* (vormals
+Twitter) eingebunden sein. Diese Funktionalität ist nur verfügbar, wenn Sie
+Ihre Zustimmung zu den Datenschutzeinstellungen zur *Personalisierung* gegeben
+haben.
+
+Diese Dienstleistungen werden angeboten von:
+
+----
+  Twitter Inc.
+  1355 Market Street Suite 900
+  CA 94103
+  USA
+----
+
+Wenn Sie unsere Website besuchen, wird die Einbindung der *Re-Tweet*-Funktion
+aktiviert, die eine direkte Verbindung zwischen Ihrem Browser und dem Server
+des Anbieters herstellt. Dabei werden personenbezogene Daten an die Systeme
+des Anbieters übermittelt. Die Voraussetzung hierzu ist es erforderlich, dass
+Sie mit Ihrem Benutzerkonto bei unserem Besuch eingeloggt sind.
+
+Der Dienst verwendet sogenannte Cookies. Dabei handelt es sich um Textdateien,
+die auf Ihrem System gespeichert werden um die Aktivität des Benutzers
+auszuwerten. Die durch Cookies erzeugten Informationen werden an den Anbieter
+übermittelt und auf den Servern des Unternehmens gespeichert.
+
+Wir weisen darauf hin, dass wir als Betreiber keine Kenntnis davon haben,
+welche Daten übermittelt werden sowie deren Verwendung beim Diensteanbieter.
+
+Weitere Informationen finden Sie in den Unternehmensrichtlinien unter
+link:{url-twitter--privacy-policy-en}[Privacy Settings, {browser-window--new}].
+
+[NOTE]
+====
+Der Nutzung können Sie jederzeit durch entsprechende Auswahl in den Einstellungen
+Ihrer Datenschutzeinstellungen widersprechen. Beachten Sie jedoch, dass Sie
+in diesem Fall *nicht* den vollen Funktionsumfang dieser Website nutzen können.
+====
+endif::[]
+
+
+ifeval::[{instagram} == true]
+[role="mt-5"]
+== Instagram Integration
+
+Auf unseren Seiten können *Funktionen* des sozialen Netzwerks *Instagram*
+eingebunden sein. Diese Funktionalität ist nur verfügbar, wenn Sie Ihre
+Zustimmung zu den Datenschutzeinstellungen zur *Personalisierung* gegeben
+haben.
+
+Diese Dienstleistungen werden angeboten von:
+
+----
+  Instagram Inc.
+  1601 Willow Road Menlo Park
+  CA 94025
+  USA
+----
+
+Wenn Sie unsere Website besuchen, entsteht durch die Einbindung des
+*Instagram-Buttons* eine direkte Verbindung zwischen Ihrem Browser und dem
+Server des Anbieters. Dabei werden personenbezogene Daten an die Systeme des
+Anbieters übermittelt. Die Voraussetzung hierzu ist es erforderlich, dass Sie
+mit Ihrem Benutzerkonto bei unserem Besuch eingeloggt sind
+
+Wir weisen darauf hin, dass wir als Betreiber keine Kenntnis davon haben,
+welche Daten übermittelt werden sowie deren Verwendung beim Diensteanbieter.
+
+Der Dienst verwendet sogenannte Cookies. Dabei handelt es sich um Textdateien,
+die auf Ihrem System gespeichert werden um die Aktivität des Benutzers
+auszuwerten. Die durch Cookies erzeugten Informationen werden an den Anbieter
+übermittelt und auf den Servern des Unternehmens gespeichert.
+
+Weitere Informationen finden Sie in den Unternehmensrichtlinien unter
+link:{url-instagram--privacy-policy}[Privacy Settings, {browser-window--new}].
+
+[NOTE]
+====
+Der Nutzung können Sie jederzeit durch entsprechende Auswahl in den Einstellungen
+Ihrer Datenschutzeinstellungen widersprechen. Beachten Sie jedoch, dass Sie
+in diesem Fall *nicht* den vollen Funktionsumfang dieser Website nutzen können.
+====
+endif::[]
+
+
+ifeval::[{youtube} == true]
+[role="mt-5"]
+== YouTube Videos
+
+Auf unseren Seiten kann der *Player* der Videoplattform *YouTube* YT eingebunden
+sein. Diese Funktionalität ist nur verfügbar, wenn Sie Ihre Zustimmung zu den
+Datenschutzeinstellungen zur *Personalisierung* gegeben haben.
+
+Diese Dienstleistungen werden angeboten von:
+
+----
+  Google Ireland Limited
+  Gordon House, Barrow Street
+  Dublin 4
+  Irland
+----
+
+Wenn Sie unsere Website besuchen, stellt der *Player* eine direkte Verbindung
+zwischen Ihrem Browser und dem Server des Anbieters her. Neben dem Inhalt können
+auch persönliche Daten an die Server des Unternehmens *YouTube* übermittelt
+werden.
+
+Der Dienst verwendet sogenannte Cookies. Dabei handelt es sich um Textdateien,
+die auf Ihrem System gespeichert werden um die Aktivität des Benutzers
+auszuwerten. Die durch Cookies erzeugten Informationen werden an den Anbieter
+übermittelt und auf den Servern des Unternehmens gespeichert.
+
+Wir weisen darauf hin, dass wir als Betreiber keine Kenntnis davon haben,
+welche Daten übermittelt werden sowie deren Verwendung beim Diensteanbieter.
+
+Weitere Informationen finden Sie in den Unternehmensrichtlinien unter
+link:{url-google--privacy-policy-de}[Privacy Settings, {browser-window--new}].
+
+[NOTE]
+====
+Der Nutzung können Sie jederzeit durch entsprechende Auswahl in den Einstellungen
+Ihrer Datenschutzeinstellungen widersprechen. Beachten Sie jedoch, dass Sie
+in diesem Fall *nicht* den vollen Funktionsumfang dieser Website nutzen können.
+====
+endif::[]
+
+
+ifeval::[{vimeo} == true]
+[role="mt-5"]
+== Vimeo Videos
+
+Wenn Sie unsere Website besuchen, stellt der *Player* eine direkte Verbindung
+zwischen Ihrem Browser und dem Server des Anbieters *Vimeo* her. Neben dem
+Inhalt können auch persönliche Daten an die Server des Unternehmens *Vimeo*
+übermittelt werden.
+
+Diese Funktionalität ist nur verfügbar, wenn Sie Ihre Zustimmung zu den
+Datenschutzeinstellungen zur *Personalisierung* gegeben haben.
+
+Diese Dienstleistungen werden angeboten von:
+
+----
+  Vimeo Inc.
+  555 West 18th Street
+  NY 10011
+  USA
+----
+
+Der Dienst verwendet sogenannte Cookies. Dabei handelt es sich um Textdateien,
+die auf Ihrem System gespeichert werden um die Aktivität des Benutzers
+auszuwerten. Die durch Cookies erzeugten Informationen werden an den Anbieter
+übermittelt und auf den Servern des Unternehmens gespeichert.
+
+Wir weisen darauf hin, dass wir als Betreiber keine Kenntnis davon haben,
+welche Daten übermittelt werden sowie deren Verwendung beim Diensteanbieter.
+
+Weitere Informationen finden Sie in den Unternehmensrichtlinien unter
+link:{url-vimeo--privacy-policy}[Privacy Settings, {browser-window--new}].
+
+[NOTE]
+====
+Der Nutzung können Sie jederzeit durch entsprechende Auswahl in den Einstellungen
+Ihrer Datenschutzeinstellungen widersprechen. Beachten Sie jedoch, dass Sie
+in diesem Fall *nicht* den vollen Funktionsumfang dieser Website nutzen können.
+====
+endif::[]
+
+
+ifeval::[{dailymotion} == true]
+[role="mt-5"]
+== DailyMotion Videos
+
+Wenn Sie unsere Website besuchen, stellt der *Player* eine direkte Verbindung
+zwischen Ihrem Browser und dem Server des Anbieters *DailyMotion* her. Neben
+dem Inhalt können auch persönliche Daten an die Server des Unternehmens
+*DailyMotion* übermittelt werden.
+
+Diese Funktionalität ist nur verfügbar, wenn Sie Ihre Zustimmung zu den
+Datenschutzeinstellungen für *Personalisierung* gegeben haben.
+
+Diese Dienstleistungen werden angeboten von:
+
+----
+  Dailymotion
+  bd Malesherbes
+  75017 Paris
+  France
+----
+
+Der Dienst verwendet sogenannte Cookies. Dabei handelt es sich um Textdateien,
+die auf Ihrem System gespeichert werden um die Aktivität des Benutzers
+auszuwerten. Die durch Cookies erzeugten Informationen werden an den Anbieter
+übermittelt und auf den Servern des Unternehmens gespeichert.
+
+Wir weisen darauf hin, dass wir als Betreiber keine Kenntnis davon haben,
+welche Daten übermittelt werden sowie deren Verwendung beim Diensteanbieter.
+
+Weitere Informationen finden Sie in den Unternehmensrichtlinien unter
+link:{url-dailymotion--privacy-policy}[Privacy Settings, {browser-window--new}].
+
+[NOTE]
+====
+Der Nutzung können Sie jederzeit durch entsprechende Auswahl in den Einstellungen
+Ihrer Datenschutzeinstellungen widersprechen. Beachten Sie jedoch, dass Sie
+in diesem Fall *nicht* den vollen Funktionsumfang dieser Website nutzen können.
+====
+endif::[]
+
+[role="mb-7"]

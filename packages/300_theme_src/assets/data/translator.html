@@ -191,6 +191,130 @@ exclude_from_search:                    true
   </div>
 </div>
 
+<div id="google-data-de">
+  <div id="modal-google-translate-de" class="modal-dialog modal-frame modal-top modal-notify modal-primary" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <p class="lead">{{translate_options.google.modal_settings.title}}</p>
+      </div>
+
+      <!-- start modal body  -->
+      <div class="container mt-4">
+
+        <p>
+          <a href="#google-privacy" data-bs-toggle="collapse" class="">Datenschutzerklärung</a>
+          <a href="#google-options" data-bs-toggle="collapse" class="float-right">Meine Einstellungen</a>
+        </p>
+
+        <div class="modal-body-text r-text-300">
+          <p class="mb-3">{{translate_options.google.modal_settings.body_text}}</p>
+        </div>
+        <p class="r-text-300">{{translate_options.google.modal_settings.language_selector_title}}:</p>
+        <div id="dropdownJSON" class="ms-dopdown notranslate mb-4" style="display:none"></div>
+
+        <div id="google-privacy" class="collapse">
+          <div class="bccs-body-text r-text-200">
+            <p class="tagline mt-4 mb-1"><b>Datenschutzerklärung</b></p>
+            <div class="d-inline-block g-width-50 g-height-2 bg-primary mb-3"></div>
+            <p>{{translate_options.google.modal_settings.privacy_notice}}</p>
+          </div>
+        </div>
+
+        <div id="google-options" class="collapse">
+          <p class="tagline mt-4 mb-1"><b>Meine Einstellungen</b></p>
+          <div class="d-inline-block g-width-50 g-height-2 bg-primary mb-3"></div>
+
+          <div class="translator-option" data-name="analysis">
+            <div class="switch mb-1">
+              <label>
+                <input id="checkboxAnalysis" type="checkbox" name="checkboxAnalysis" checked>
+                <span class="bmd-switch-track"></span>
+                Analyse
+              </label>
+            </div>
+          </div>
+
+          <div class="translator-option" data-name="personalization">
+            <div class="switch mb-1">
+              <label>
+                <input id="checkboxPersonalization" type="checkbox" name="checkboxPersonalization" checked>
+                <span class="bmd-switch-track"></span>
+                Personalisierung
+              </label>
+            </div>
+          </div>
+
+          <div class="translator-option" data-name="useLanguageFromBrowser">
+            <div class="switch mb-1">
+              <label>
+                <input id="checkboxuseLanguageFromBrowser" type="checkbox" name="checkboxuseLanguageFromBrowser" checked disabled>
+                <span class="bmd-switch-track"></span>
+                Sprache vom Browser übernehmen
+              </label>
+            </div>
+          </div>
+
+          <div class="translator-option" data-name="translateAllPages">
+            <div class="switch mb-4">
+              <label>
+                <input id="checkboxTranslateAllPages" type="checkbox" name="checkboxTranslateAllPages" checked disabled>
+                <span class="bmd-switch-track"></span>
+                Alle Seiten übersetzen
+              </label>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button
+          id="translator-buttonDoNotAgree"
+          type="button"
+          class="btn btn-outline-secondary mb-1 mr-2"
+          style="min-width: 20rem">
+            Nein, Übersetzung deaktivieren
+        </button>
+
+        <button
+          id="translator-buttonAgree"
+          type="button"
+          class="btn btn-primary mb-1 mr-2"
+          style="min-width: 20rem">
+            Ja, bitte übersetzen Sie
+        </button>
+
+        <button
+          id="translator-buttonExit"
+          type="button"
+          class="btn btn-warning mb-1 mr-2"
+          style="min-width: 20rem"
+          data-bs-dismiss="modal">
+            Nichts tun
+        </button>
+
+        <button
+          id="translator-buttonSave"
+          type="button"
+          class="btn btn-outline-secondary mb-1 mr-2"
+          style="display:none; min-width: 20rem">
+            Auswahl speichern
+        </button>
+
+        <button
+          id="translator-buttonAgreeAll"
+          type="button"
+          class="btn btn-primary mb-1 mr-2"
+          style="display:none; min-width: 20rem">
+            Stimme allen zu
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 {% comment %} END Modal Translator dialog
 -------------------------------------------------------------------------------- {% endcomment %}
 

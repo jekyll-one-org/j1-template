@@ -1,15 +1,15 @@
 ---
-title:                                  Impress
-tagline:                                Legal Information
+title:                                  Impressum
+tagline:                                Informationen zum Betreiber
 
-date:                                   2020-10-23
-#last_modified:                         2023-01-01
+date:                                   2024-01-19
+#last_modified:                         2024-01-19
 
 description: >
-                                        Required information about the content responsible
-                                        persons in accordance of the Germany laws based on
-                                        § 18 section 1 MStV regarding Information obligations
-                                        and rights to information
+                                        Erforderliche Informationen der zum Inhalt
+                                        Verantwortlichen Personen gemäß § 18 Abs. 1 MStV
+                                        der deutschen Gesetzgebung zu Informationspflichten
+                                        und Auskunftsrechten
 
 categories:                             [ Site ]
 tags:                                   [ Impress ]
@@ -29,7 +29,7 @@ fab_menu_id:                            default
 comments:                               false
 toc:                                    false
 regenerate:                             false
-permalink:                              /pages/public/legal/en/impress/
+permalink:                              /pages/public/legal/de/impress/
 
 resources:                              [ animate, rouge ]
 resource_options:
@@ -44,7 +44,6 @@ resource_options:
             type:                       unsplash
             author:                     IFONNX Toys
             href:                       https://unsplash.com/de/@danroc0414
-
 ---
 
 // Page Initializer
@@ -65,11 +64,11 @@ resource_options:
 // -----------------------------------------------------------------------------
 {% include {{load_attributes}} scope="none" %}
 
-ifeval::[{legal-warning} == true]
+ifeval::[{legal-warning} == false]
 [WARNING]
 ====
-This document *does not* constitute any *legal advice*. It is
-highly recommended to verify legal aspects and implications.
+Dieses Dokument *stellt* keine *Rechtsberatung* dar. Es ist dringend empfohlen,
+rechtliche Aspekte und deren Auswirkungen zu überprüfen.
 ====
 endif::[]
 
@@ -88,30 +87,32 @@ endif::[]
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [role="dropcap"]
-Find below the required information about the content responsible persons in
-accordance of the German Laws with section 18 of paragraph 1 MStV regarding
-information obligations and rights to information.
+Nachfolgend finden Sie alle erforderlichen Informationen der zum Inhalt
+verantwortlichen Personen gemäß der Deutschland gültigen Regeln nach
+§ 18 Abs. 1 MStV zu Informationspflichten und Auskunftsrechten.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 ifeval::[{eu-region} == true]
-.Postal address
+.Postanschrift
 ----
-  <your-postal-address>
+  Juergen Adams
+  Erasmusstrasse 28
+  40223 Duesseldorf
 ----
 endif::[]
 
-.Contact
+.Kontakt
 [source, text]
 ----
-  webmaster@<your.domain>
+  webmaster@jekyll.one
 ----
 
 ifeval::[{eu-region} == true]
-.Responsible for the content according to § 18 Abs. 1 MStV:
+.Inhaltlich Verantwortlicher gemäß § 18 Abs. 1 MStV:
 ----
-  <your-postal-address>
+  Juergen Adams
+  Erasmusstrasse 28
+  40223 Duesseldorf
 ----
 endif::[]
-
-[role="mb-7"]

@@ -1,0 +1,159 @@
+---
+title:                                  Comment Policy
+tagline:                                Discuss With Respect
+
+date:                                   2024-01-19
+#last_modified:                         2024-01-19
+
+description: >
+
+                                        Wir freuen uns über Kommentare und schätzen die Zeit, die unsere Besucher
+                                        aufwenden, um Ideen auszutauschen und Feedback zu geben. Herzlichen Dank an
+                                        dieser Stelle an alle Nutzer, die Seiten dieser Webseite kommentieren.
+
+categories:                             [ Site ]
+tags:                                   [ Comments, Policy ]
+
+robots:
+  index:                                true
+  follow:                               true
+
+image:
+  path:                                 /assets/images/modules/attics/1920x1280/ifonnx-toys.jpg
+  width:                                1920
+  height:                               1200
+
+sitemap:                                false
+exclude_from_search:                    true
+regenerate:                             false
+permalink:                              /pages/public/legal/de/comment_policy/
+
+resources:                              [ animate, rouge ]
+resource_options:
+  - attic:
+      padding_top:                      630
+#     padding_bottom:                   100
+#     margin_bottom:                    180
+      slides:
+        - url:                          /assets/images/modules/attics/1920x1280/ifonnx-toys.jpg
+          alt:                          IFONNX Toys
+          badge:
+            type:                       unsplash
+            author:                     IFONNX Toys
+            href:                       https://unsplash.com/de/@danroc0414
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:j1--site-name:                         Solo-Sex
+:disqus:                                false
+:hyvor:                                 true
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+[role="dropcap"]
+Ich liebe Kommentare und schätze die Zeit unserer Besucher, Ideen auszutauschen
+und Rückmeldung zu geben. Vielen Dank an alle, die einen Kommentar auf den Seiten
+von {j1--site-name} schreiben.
+
+ifeval::[{hyvor} == true]
+Um auf die öffentliche Kommentarfunktion zugreifen zu können, müssen Sie sich
+zuvor registrieren und ein Konto als *Einzelperson* bei _Hyvor_ anlegen. Einer
+der Hauptzwecke ist das Ermutigen von Kommentaren und dient dient der Förderung
+eines Gemeinschaftsgefühls.
+
+[NOTE]
+====
+_Hyvor Talk_ ist ein Dienstleister der die *Privatsphäre* an erster Stelle
+stellt, keine Werbung schaltet und keine Tracking-Plattform einsetzt.
+Wenn Sie unsere Website besuchen *und* die Kommarfunktion nutzen, wird eine
+eine direkte Verbindung zur Kommentarplattform hergestellt. Über den
+Browser werden Verbindungen zu den Servern bei _Hyvor_ hergestellt, jedoch
+*keine* Ihrer persönlichen Daten an Dritte oder Werbetreibende weitergegeben.
+====
+endif::[]
+
+ifeval::[{disqus} == true]
+Um auf die öffentliche Kommentarfunktion von _Disqus_ zugreifen zu können,
+müssen Sie sich zuvor registrieren und ein Konto als *Einzelperson* bei
+_Disqus_ einrichten. Einer der Hauptzwecke ist das Ermutigen von Kommentaren
+und dient der Förderung eines Gemeinschaftsgefühls.
+
+[NOTE]
+====
+_Disqus_ (/dɪsˈkʌs/) is a *commercial* blog comment hosting service
+for websites and online communities that use a networked platform. When you
+visit our website, the commenting platform will establish a direct connection
+between your browser and the server at Disqus. The _Disqus_ platform includes
+various features, such as social integration and social networking to support
+your personal networks.
+====
+endif::[]
+
+
+[role="mt-5"]
+== Diskutieren Sie mit Respekt
+
+Einer der wichtigsten Aspekte eines hilfreichen Blogs ist die Konversation mit
+den Besuchern. Dies geschieht durch Kommentare, die Besucher au Webseiten oder
+in Blogbeiträgen veröffentlichen. Kommentare können manchmal eine negative
+Wendung nehmen oder Spam-Links enthalten. Aus diesem Grund ist notwendig, dass
+Nutzer diese Kommentarrichtlinie akzeptieren.
+
+=== Kommentare sind willkommen
+
+Kommentare sind auf dieser Website willkommen und erwünscht, aber es gibt
+einige Fälle, in denen Kommentare bearbeitet oder gelöscht werden. Der
+Eigentümer dieser Website behält sich das Recht vor, alle eingereichten
+Kommentare zu bearbeiten oder ohne vorherige Ankündigung zu löschen.
+
+[NOTE]
+====
+Beachten Sie, dass diese Kommentarrichtlinie kann jederzeit geändert werden.
+====
+
+[role="mt-5 mb-7"]
+Spam und werbende Inhalte::
+Kommentare, die als Spam gelten oder ausschließlich werblicher Natur sind,
+werden gemerell als Spam eingestuft und gelöscht. Links zu relevanten Inhalten
+sind erlaubt, sollten jedoch relevant für die jeweiligen Themen sein.
+
+Schimpfwörter::
+Kommentare, die Schimpfwörter enthalten, werden gelöscht.
+
+Grobe Sprache::
+Kommentare, die eine Sprache oder Konzepte enthalten, die als anstößig
+angesehen werden könnten werden gelöscht. Beachten Sie, dass beleidigende,
+bedrohliche, pornografische, irreführende oder verleumderische Sprache in
+Kommnentaren nicht zulässig ist.
+
+Angriffe::
+Kommentare, die *Einzelpersonen* direkt angreifen, werden gelöscht.
+
+Belästigung::
+Kommentare, die andere Besucher belästigen, werden gelöscht. Gespräche und
+der Austausch verschiedener Ideen wird gefördert, jedoch sollen alle Kommentare
+respektvoll gegenüber unseren Nutzern sein.
+
+Anonymität::
+Anonyme Kommentare werden gelöscht. Wir akzeptieren nur Kommentare von Nutzern
+die sich identifizieren.

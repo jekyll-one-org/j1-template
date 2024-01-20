@@ -33,10 +33,7 @@ function Translator(props) {
   var logger                = log4javascript.getLogger('j1.core.translator');
   var pageURL               = new liteURL(window.location.href);
   var cookieSecure          = (pageURL.protocol.includes('https')) ? true : false;
-  var navigatorLanguage     = navigator.language || navigator.userLanguage;
-  var defaultDialogLanguage = 'en';
   var detailedSettingsShown = false;
-  var defaultDialogLanguage = 'en';
   var navigator_language;
   var translation_language;
 
@@ -111,8 +108,8 @@ function Translator(props) {
     hideSuggestionBox:          true,                                           // disable suggestions on translated text
     hidePoweredBy:              true,                                           // disable label "Powered by Google"
     hideTopFrame:               true,                                           // disable the (google) translator frame
-    dialogLanguage:             'auto',                                      // language used for the consent dialog (modal)
-    dialogLanguages:            ['en', 'de'],                                    // supported languages for the consent dialog (modal), defaults to first in array//
+    dialogLanguage:             'content',                                      // language used for the consent dialog (modal)
+    dialogLanguages:            ['en','de'],                                    // supported languages for the consent dialog (modal), defaults to first in array//
     dialogContainerID:          'translator-modal',                             // container, the dialog modal is (dynamically) loaded
     xhrDataElement:             '',                                             // container for the language-specific consent modal taken from /assets/data/cookieconsent.html
     postSelectionCallback:      '',                                             // callback function, called after the user has made his selection
@@ -130,7 +127,7 @@ function Translator(props) {
 
   // fallback on default language (modal) if dialogLanguage not suppported
   if (!this.props.dialogLanguages.includes(this.props.dialogLanguage)) {
-    this.props.dialogLanguage = defaultDialogLanguage;
+    this.props.dialogLanguage = this.props.dialogLanguages[0];
   }
 
   // set the xhrDataElement of the modal loadad based on dialogLanguage
