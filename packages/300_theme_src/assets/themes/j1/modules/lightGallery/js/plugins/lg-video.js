@@ -60,6 +60,7 @@
 
     var videoSettings = {
         autoplayFirstVideo: true,
+        htmlPlayerParams: false,
         youTubePlayerParams: false,
         vimeoPlayerParams: false,
         wistiaPlayerParams: false,
@@ -289,6 +290,9 @@
                 });
                 // Automatically navigate to next slide once video reaches the end.
                 this.gotoNextSlideOnVideoEnd(src, index);
+            } else {
+              // jadams
+              var slideItem = this.core.getSlideItem(index);
             }
         };
 
@@ -390,7 +394,21 @@
                 var dailymotionId = 'lg-dailymotion' + index;
                 var playerParams = param(this.settings.dailymotionPlayerParams);
                 playerParams = playerParams ? '?' + playerParams : '';
-                video = "<iframe allow=\"autoplay\" id=\"" + dailymotionId + "\" src=\"//www.dailymotion.com/embed/video/" + (videoInfo.dailymotion[1] + playerParams) + "\" " + videoTitle + " class=\"dailymotion_embed lg-video-object lg-dailymotion " + addClass + "\" name=\"dailymotion_embed\" " + commonIframeProps + "></iframe>"
+                video = "<iframe allow=\"autoplay\" id=\"" + dailymotionId + "\" src=\"//www.dailymotion.com/embed/video/" + (videoInfo.dailymotion[1] + playerParams) + "\" " + videoTitle + " class=\"dailymotion_embed lg-video-object lg-dailymotion " + addClass + "\" name=\"dailymotion_embed\" " + commonIframeProps + "></iframe>";
+            }
+            // jadams, 2024-01-22: added TicToc Player
+            else if (videoInfo.tictoc) {
+                var dailymotionId = 'lg-tictoc' + index;
+                var playerParams = param(this.settings.TicTocPlayerParams);
+                playerParams = playerParams ? '?' + playerParams : '';
+                video = "";
+//              video = "<blockquote  + tictocId + "\" src=\"data-video-id" + (videoInfo.tictoc[1] + playerParams) + "\" " + videoTitle + " style=\"dailymotion_embed lg-video-object lg-dailymotion " + addClass + "\" name=\"dailymotion_embed\" " + commonIframeProps + "></blockquote>"
+
+// class="tiktok-embed"
+// data-video-id="7192587077148609798"
+// style="border-left: 0px; padding-left: 0px;">
+// <a href="https://www.tiktok.com/"></a>
+
             }
             else if (videoInfo.html5) {
                 var html5VideoMarkup = '';
@@ -496,7 +514,7 @@
         };
 
         Video.prototype.controlVideo = function (index, action) {
-            var trackSrc, $videoElement, videoInfo, videoData, videoId, videojsPlayer, zoomPlugin;
+            var trackSrc, $videoElement, videoInfo, videoStart, videoData, videoId, videojsPlayer, zoomPlugin;
 
             var chapterTracksEnabled = false;
             var zoomPluginDefaults   = {
@@ -529,10 +547,19 @@
               videojsPlayer = videojs(videoId);
 
               // jadams, 2023-12-11: added VideoJS zoomPlugin
-              // -----------------------------------------------------------------
+              // ---------------------------------------------------------------
               var zoomPlugin = this.settings.videojsOptions.zoomPlugin;
-              if (zoomPlugin != undefined && zoomPlugin.enabled) {
 
+              //  jadams, 2024-01-22: added video start position
+              // ---------------------------------------------------------------
+              if (this.settings.videojsOptions.videoStart) {
+                videoStart = this.settings.videojsOptions.videoStart[index];
+                videojsPlayer.on("play", function() {
+                  videojsPlayer.currentTime(videoStart);
+                }); // END on "play"
+              } // END if videoStart
+
+              if (zoomPlugin != undefined && zoomPlugin.enabled) {
                 zoomPlugin.settings = __assign(__assign({}, zoomPluginDefaults), zoomPlugin.options);
                 videojsPlayer.zoomPlugin({
                   moveX:  zoomPlugin.settings.moveX,
@@ -567,6 +594,8 @@
               // add chapter tracks on play
               //
               videojsPlayer.on("play", function() {
+                videojsPlayer.currentTime(videoStart);
+
                 var total    = videojsPlayer.duration();
                 var timeline = $(videojsPlayer.controlBar.progressControl.children_[0].el_);
 

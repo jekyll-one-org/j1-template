@@ -36,8 +36,9 @@ Asciidoctor::Extensions.register do
     use_dsl
 
     named :videojs
-    name_positional_attributes 'poster', 'theme', 'zoom', 'role'
-    default_attrs 'poster' => '/assets/images/icons/videojs/videojs-poster.png',
+    name_positional_attributes 'start', 'poster', 'theme', 'zoom', 'role'
+    default_attrs 'start' => 0,
+                  'poster' => '/assets/images/icons/videojs/videojs-poster.png',
                   'theme' => 'uno',
                   'role' => 'mt-3 mb-3'
 
@@ -75,6 +76,25 @@ Asciidoctor::Extensions.register do
             }'
           > </video>
         </div>
+
+        <script>
+          $(function() {
+            var dependencies_met_page_ready = setInterval (function (options) {
+              var pageState   = $('#no_flicker').css("display");
+              var pageVisible = (pageState == 'block') ? true : false;
+
+              if (j1.getState() === 'finished' && pageVisible) {
+                videojs("#{video_id}").ready(function() {
+                  var videojsPlayer = this;
+                  videojsPlayer.on("play", function() {
+                    videojsPlayer.currentTime(#{attributes['start']});
+                  });
+                });
+                clearInterval(dependencies_met_page_ready);
+              }
+            }, 10);
+          });
+        </script>
       )
 
       create_pass_block parent, html, attributes, subs: nil

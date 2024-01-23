@@ -1624,12 +1624,14 @@
                 }
             });
         };
+
         /**
          *  Load slide content into slide.
          *  This is used to load content into slides that is not visible too
          *  @param {Number} index - index of the slide.
          *  @param {Boolean} rec - if true call loadcontent() function again.
          */
+         // jadams
         LightGallery.prototype.loadContent = function (index, rec) {
             var _this = this;
             var currentGalleryItem = this.galleryItems[index];

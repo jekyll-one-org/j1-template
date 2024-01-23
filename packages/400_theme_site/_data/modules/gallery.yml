@@ -302,6 +302,8 @@ settings:
 
         videojsOptions:
           enabled:                    true
+
+#         videoStart:                 [30, 100]                                 # start time for [video1, video2]
           controls:                   true
           muted:                      false
           preload:                    true
@@ -383,6 +385,9 @@ settings:
           poster:
             source:                     video2-poster.jpg
 
+          playerParams:
+            startTime:                  "00:00:30"                              # hh:mm:ss
+
     # --------------------------------------------------------------------------
     # Online VIDEO (YouTube)
     #
@@ -427,6 +432,7 @@ settings:
 
         playerParams:
           enabled:                    true
+          start:                      [50, 50]
           autoplay:                   0
           controls:                   0
           enablejsapi:                1
@@ -454,6 +460,7 @@ settings:
         - video:                        # video 1
           enabled:                      true
 
+          id:                           X5Cfi7U4eL4
           name:                         Carpool Karaoke Lady Gaga
           type:                         youtube
           size:                         "1280-720"
@@ -496,7 +503,8 @@ settings:
             source:                     video_adele-poster.jpg
 
           playerParams:
-            enabled:                    false
+            enabled:                    true
+            start:                      50
 
         - video:                        # video 3
           enabled:                      true
@@ -589,6 +597,7 @@ settings:
 #       See: https://stackoverflow.com/questions/40685142/youtube-autoplay-does-not-work-with-iframe
         playerParams:
           enabled:                    true
+          start:                      [50, 50]                                  # start time video1, vido2
           autoplay:                   1                                         # autoplay = 1 only available for YouTube when muted.
 #         controls:                   1                                         # default = 0
 #         enablejsapi:                1                                         # default = 1
@@ -634,6 +643,9 @@ settings:
           poster:
             source:                     video_adele-poster.jpg
 
+          playerParams:
+            start:                      50                                      # seconds to start
+
         - video:                        # video 2
           enabled:                      true
 
@@ -653,6 +665,9 @@ settings:
             text:                       "Carpool Karaoke &middot; Last Carpool Karaoke"
           poster:
             source:                     video_adele_last_carpool_caraoke_poster.jpg
+
+          playerParams:
+            start:                      50                                      # seconds to start
 
     # --------------------------------------------------------------------------
     # Online VIDEO 2 (YouTube)
@@ -898,6 +913,9 @@ settings:
             text:                       "Forever 21 &middot; Kick It Old School"
           poster:
             source:                     kick-it-old-school-poster.jpg
+
+          playerParams:
+            start:                      50                                      # seconds to start
 
         - video:                        # video 2
           enabled:                      true
