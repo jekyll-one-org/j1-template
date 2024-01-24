@@ -1393,12 +1393,12 @@ resources:
   # ----------------------------------------------------------------------------
   # TikTok Player, Version v1.0.11
   #
-  - name:                               TikTok Player
+  - name:                               TikToc Player
     resource:
       enabled:                          true
 
       id:                               tiktokplayer
-      comment:                          Module TikTok Player
+      comment:                          Module TikToc Player
       region:                           head
       layout:                           [ all ]
       required:                         ondemand
@@ -1409,7 +1409,7 @@ resources:
 
       data:
         css:                            []
-        files:                          [ modules/tiktokPlayer/js/player.min.js ]
+        files:                          [ modules/tiktocPlayer/js/player.min.js ]
         js:                             []
         init_function:                  []
 

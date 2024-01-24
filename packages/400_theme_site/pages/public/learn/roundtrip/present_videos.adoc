@@ -32,6 +32,7 @@ permalink:                              /pages/public/learn/roundtrip/present_vi
 resources:                              [
                                           animate,
                                           lightgallery, gallery, rouge,
+#                                         tiktocplayer,
                                           videojs, vimeoplayer
                                         ]
 resource_options:
@@ -154,11 +155,11 @@ video::/assets/videos/gallery/html5/video1.mp4[poster="/assets/videos/gallery/vi
 
 VideoJS is an Open Source JavaScript framework and library for building
 custom video players for the web. It provides a flexible and customizable
-platform for displaying and controlling video content on websites and web
-applications.
+platform for displaying and controlling MPEG 4 video content on websites
+and web applications.
 
 .MP4 Video, Rolling Wild
-// videojs::/assets/videos/gallery/html5/video1.mp4[start="50" poster="/assets/videos/gallery/video1-poster.1920.jpg" role="mt-4 mb-5"]
+// videojs::/assets/videos/gallery/html5/video2.mp4[start="00:00:50" poster="/assets/videos/gallery/video2-poster.jpg" role="mt-4 mb-5"]
 videojs::/assets/videos/gallery/html5/video2.mp4[poster="/assets/videos/gallery/video2-poster.jpg" role="mt-4 mb-5"]
 
 
@@ -222,10 +223,18 @@ Find below examples of video galleries of locally stored (MP4) video resources
 and video content provided online via YouTube.
 
 [role="mt-4"]
-=== Local Video
+=== MP4 Video
 
 Videos created by a digicam or a mobile can be played by J1 Template using
 the lightGallery integration. Present videos you have made at it's best.
+
+[NOTE]
+====
+The current file size of Local Video is *limited* to *50MB* (Git LFS limit).
+Using a modern MP4 Encoder (H264|H265 compression), a video will have a
+playing time of around ~*3-5 minutes* for HD 1080p (1920x1080) or
+up to ~*10 minutes* for HD 720p (1280x720) resolution.
+====
 
 .MP4 Videos
 gallery::jg_video_html5[role="mt-4 mb-4"]
@@ -254,6 +263,13 @@ _James Corden_ of *The Late Late Show* at CBS, Los Angeles.
 .Carpool Karaoke
 gallery::jg_video_online_youtube_james_and_adele[role="mb-5"]
 
+// [role="mt-4"]
+// === TikToc Video
+//
+// Bla ...
+//
+// .TikToc Videos
+// gallery::jg_video_online_tiktoc[role="mb-5"]
 
 [role="mt-4"]
 === Vimeo Video

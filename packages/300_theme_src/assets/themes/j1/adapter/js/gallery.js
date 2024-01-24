@@ -288,6 +288,17 @@ j1.adapter.gallery = (function (j1, window) {
                   }
                   {% endif %}
 
+                  {% if gallery.video == 'tiktok' and gallery.lightGallery.playerParams.enabled %}
+                  "tiktokPlayerParams": {
+                    {% for option in gallery.lightGallery.playerParams %}
+                    {% if option[0] contains "enabled" %}
+                    {% continue %}
+                    {% endif %}
+                    {{option[0] | json}}: {{option[1] | json}},
+                    {% endfor %}
+                  }
+                  {% endif %}
+
                 }); // END lightGallery
 
               }); // END justifiedGallery on('jg.complete)
