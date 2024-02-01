@@ -1574,7 +1574,10 @@ resources:
 
       data:
         css:                            []
-        files:                          [ adapter/js/comments.js ]
+        files:                          [
+                                          modules/comments/hyvor/css/themes/uno.css,
+                                          adapter/js/comments.js
+                                        ]
         js:                             []
         init_function:                  [ j1.adapter.comments.init ]
 

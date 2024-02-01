@@ -1,38 +1,43 @@
 ---
-title:                                  Tester
-tagline:                                HTML Audio
-date:                                   2024-01-17
+title:                                  Audio
+title_extention:                        Playing HTML5 Audio using J1 Template
+tagline:                                Playing Video
+
+date:                                   2020-11-04
+#last_modified:                         2023-01-01
+
 description: >
-                                        Welcome to the preview page focussing on the image module. This page
-                                        shows some valuable features of the J1 Theme to manage your image-based
-                                        content using lightboxes, carousels (slider), and galleries.
+                                        The J1 Template support playing video on web pages
+                                        by HTML5 Video, the new standard of HTML to show
+                                        videos on web pages.
+keywords: >
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap,
+                                        html, html5, video, support, flash player,
+                                        quicktime, silverlight
 
-categories:                             [ Testpages ]
-tags:                                   [ Example ]
+categories:                             [ Roundtrip ]
+tags:                                   [ Module, Video ]
 
-comments:                               false
-fab_menu_id:                            open_toc
+image:
+  path:                                 /assets/images/icons/videojs/videojs-poster.png
+  width:                                1920
+  height:                               1280
 
-permalink:                              /pages/public/learn/audio/
 regenerate:                             false
+personalization:                        true
+permalink:                              /pages/public/audio_tester/
 
 resources:                              [
                                           animate,
-                                          clipboard, rouge,
-                                          videojs
+                                          lightGallery, justifiedGallery,
+                                          video_js
                                         ]
 resource_options:
   - attic:
-      padding_top:                      400
-      padding_bottom:                   50
-      opacity:                          0.5
       slides:
-        - url:                          /assets/images/pages/roundtrip/images-1920x1280-bw.jpg
-          alt:                          Photo by Ricardo Gomez Angel on Unsplash
-          badge:
-            type:                       unsplash
-            author:                     Ricardo Gomez Angel
-            href:                       https://unsplash.com/@ripato/portfolio
+        - url:                          /assets/images/icons/videojs/videojs-poster.png
+          alt:                          VideoJS Poster
 ---
 
 // Page Initializer
@@ -53,43 +58,53 @@ resource_options:
 // -----------------------------------------------------------------------------
 {% include {{load_attributes}} scope="global" %}
 
+
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+The J1 Template support playing audio on web pages by HTML5 Video, the new
+standard of HTML to show videos on webpages. Modern browsers support the
+audio tag `<audio>` for the new HTML5 audio audio standard. 
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
+[role="mt-5"]
+== HTML5 Audio
 
-.Remote Video
-videojs::https://nrodlzdf-a.akamaihd.net/none/3sat/24/01/240111_sendung_wido/5/240111_sendung_wido_6660k_p37v17.mp4[poster="/assets/videos/gallery/240111-sendung-wido-104~1280x720.jpg" role="mt-4 mb-5"]
+HTML5 Video opens the doors to your way of presenting video content. All
+modern browsers support the video tag `<video>` for the HTML5. Browsers have
+a built-in multimedia framework already for decoding and displaying video
+content. No need to use such proprietary software components anymore!
 
+audio:://cdn.julephosting.de/podcasts/554-pinkelpause/97348-new-episode.mp3[start="00:05:49" role="mt-4 mb-5"]
+
+/////
 ++++
-<div class="audio-player mt-4 mb-5">
-  <div class="video-title">WDR 2 Jörg Thadeusz · Sabine Kuegler, Autorin</div>
-  <p class="result-item-text small text-muted mt-2 mb-0">
-    <i class="mdib mdib-calendar-blank mdib-18px mr-1"></i>
-    17.01.2024 · 31 Min
-  </p>
-  <p class="result-item-text mt-2">
-    Als Kind von Sprachforschern wächst Sabine Kuegler im Urwald von Westpapua unter Einheimischen auf - ihr Buch "Dschungelkind" wird ein weltweiter Millionenbestseller. Als Teenager kommt sie zurück nach Europa und erfährt einen Kultur-Schock. Zerrissen zwischen den Welten und schwer erkrankt geht sie für weitere Jahre zurück in den Dschungel auf Suche nach Heilung, Glück und ihrem Platz im Leben.
-  </p>
-  <audio controls>
-    <source src="https://wdrmedien-a.akamaihd.net/medp/podcast/weltweit/fsk0/305/3058000/wdr2joergthadeusz_2024-01-17_sabinekueglerautorin_wdr2.mp3" type="audio/mp3">
-    Dein Browser unterstützt das Audio-Element nicht.
-  </audio>
-</div>
+<div class="gallery-title">Playing Audio</div>
+<audio
+  id="554-pinkelpause"
+  controls
+  style="display: none;">
+   <source src="//cdn.julephosting.de/podcasts/554-pinkelpause/97348-new-episode.mp3" type="audio/mpeg" />
+</audio>
 
-<div class="audio-player mt-4 mb-5">
-  <div class="video-title">WDR 2 Jörg Thadeusz · Johannes Fuß, Sexualmediziner</div>
-  <p class="result-item-text small text-muted mt-2 mb-0">
-    <i class="mdib mdib-calendar-blank mdib-18px mr-1"></i>
-    16.01.2024 · 31 Min
-  </p>
-  <p class="result-item-text mt-2">
-    Sowohl Menschen als auch Tiere haben Solo-Sex. Unterscheiden sich die körperlichen Reaktionen bei uns Menschen, je nachdem, ob ein Orgasmus durch Masturbation oder Sex mit einer anderen Person ausgelöst wird? Diese Frage erforscht der Sexualmediziner Professor Johannes Fuß mit Unterstützung von experimentierfreudigen Testpersonen in seinem Labor an der Universität Duisburg-Essen.
-  </p>
-  <audio controls>
-    <source src="https://wdrmedien-a.akamaihd.net/medp/podcast/weltweit/fsk0/305/3057323/wdr2joergthadeusz_2024-01-16_johannesfusssexualmediziner_wdr2.mp3" type="audio/mp3">
-    Dein Browser unterstützt das Audio-Element nicht.
-  </audio>
-</div>
+<script>
+  $(function() {
+    var dependencies_met_page_ready = setInterval (function (options) {
+      var pageState   = $('#no_flicker').css("display");
+      var pageVisible = (pageState == 'block') ? true : false;
+
+      if (j1.getState() === 'finished' && pageVisible) {
+        var ts = "00:05:49";
+        var startFromSecond = new Date('1970-01-01T' + ts + 'Z').getTime() / 1000;
+        const audio = document.getElementById("554-pinkelpause");
+        //add the time in seconds
+        audio.currentTime = startFromSecond;
+        audio.style.display = 'block';
+        clearInterval(dependencies_met_page_ready);
+      }
+    }, 10);
+  });
+</script>
 ++++
+/////

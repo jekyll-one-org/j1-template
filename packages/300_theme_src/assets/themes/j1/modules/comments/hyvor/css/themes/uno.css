@@ -1,0 +1,18 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/themes/j1/modules/comments/hyvor/themes/uno.css
+ # Provides Hyvor Comments styles for Theme Uno
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2024 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
+
+.reactions {
+  text-align: left !important;
+}
