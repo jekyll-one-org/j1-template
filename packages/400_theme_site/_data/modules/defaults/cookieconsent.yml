@@ -34,7 +34,7 @@ defaults:
   dialogLanguages:                      [en, de]                                # supported dialog (modal) languages, defaults to FIRST language defined by languages
   contentURL:                           /assets/data/cookieconsent              # dialog content (modals) for all supported languages
   reloadPageOnChange:                   true                                    # reload current page if user settings has been changed
-  whitelisted:                          []                                      # pages NO consent issued
+  whitelisted:                          []                                      # pages NO consent issued 
   xhrDataElement:                       consent-data                            # container for all language-specific consent modals (taken from contentURL)
   dialogContainerID:                    consent-dialog                          # container, the dialog modal is (dynamically) loaded
   postSelectionCallback:                j1.adapter.cookieConsent.cbCookie       # called after the user has made his selection
@@ -43,59 +43,59 @@ defaults:
 
     title:                              Your Privacy
     body_text: >
-                                        Diese Website verwendet Cookies und ähnliche Technologien, die erforderlich sind
-                                        für den Betrieb. Sie können frei entscheiden, ob Sie Ihr Geld geben, ablehnen oder zurückziehen möchten
-                                        Ihre Einwilligung können Sie jederzeit durch Klicken auf die Schaltfläche <b>Meine Einstellungen</b> erteilen.
-                                        Änderungen sind jederzeit durch einen Klick auf das Cookie-Symbol im möglich
-                                        Menüleiste. Weitere Cookies werden nur mit Ihrer Einwilligung verwendet.
-                                        Weitere Cookies werden verwendet, um die Nutzung dieser Website zu analysieren oder zu speichern
-                                        Ihre persönlichen Einstellungen für diese Website. Persönliche Einstellungen ermöglichen allen Besuchern
-                                        um Präferenzen bei der Nutzung von Diensten zu speichern.
-                                        Weitere Informationen darüber, welche Daten erfasst und an Partner weitergegeben werden, finden Sie unter
-                                        Weitere Informationen finden Sie in der <b>Datenschutzerklärung</b>.
+                                        This website uses cookies and similar technologies that are required
+                                        for operation. You are free to decide to give, refuse or withdraw your
+                                        consent at any time by clicking the <b>My Settings</b> button.
+                                        Changes are possible at any time by clicking on the cookie icon in the
+                                        menu bar. Additional cookies are used only with your consent.
+                                        Additional cookies are used to analyze the use of this website or to store
+                                        your personal settings for this website. Personal settings allow all visitors
+                                        to save preferences of the use of services.
+                                        For more information about what data is collected and shared with partners,
+                                        please find more information with <b>Privacy Notice</b>.
                                         <br><br>
-                                        Um diese Website zu besuchen, ist Ihre Zustimmung zu Cookies erforderlich, indem Sie auf klicken
-                                        Klicken Sie auf die Schaltfläche <b>Ich stimme zu</b>.
+                                        To visit this website, your consent on cookies is required by clicking
+                                        the <b>I Agree</b> button.
     privacy_notice: >
 
-                                        Der Betreiber dieser Website nimmt den Schutz Ihrer persönlichen Daten ernst
-                                        ernsthaft. Wir behandeln Ihre Daten vertraulich und beachten die Datenschutzbestimmungen
-                                        Datenschutz-Grundverordnung (DSGVO) der Europäischen Union zum Schutz Ihrer
-                                        Privatsphäre.
-                                        Eine Reihe von Daten wird in dauerhaften Cookies gespeichert und verbleibt auf Ihrem Computer
-                                        zur späteren Verwendung. Unsere Partner und wir nutzen persistente Vookies. Diese
-                                        Weitere Cookies werden nur mit Ihrer Einwilligung verwendet.
+                                        The operator of this website takes the protection of your personal data
+                                        seriously. We treat your data confidential and comply with the General
+                                        Data Protection Regulation (GDPR) of the European Union to protect your
+                                        privacy.
+                                        A set of data is stored in persistent cookies and remain on your computer
+                                        for later use. Our partners and we make use of persistent vookies. Those
+                                        additional cookies are only used with your consent.
                                         <br>
                                         <ul>
                                           <li style="list-style-type: none;">
-                                            <b>Erforderlich</b>
+                                            <b>Necessary</b>
                                             <p>
-                                              Diese Website basiert auf statischen Inhalten und es wird keine Datenbank dahinter verwendet.
-                                              Sämtliche zur Steuerung dieser Seite notwendigen Informationen (Daten) werden in sogenannten
-                                              Sitzungscookies. Ihr Browser entfernt automatisch alle Sitzungscookies
-                                              wenn Sie alle Fenster im Browser schließen.
+                                              This website is based on static content, and no database is used behind it.
+                                              All information (data) needed to control this site is stored in so-called
+                                              session Cookies. Your browser automatically removes all session cookies
+                                              if you close all windows in the browser.
                                             </p>
                                           </li>
                                           <li style="list-style-type: none;">
-                                            <b>Analyse</b>
-                                            <p>​
-                                              Die Analyse der Nutzung dieser Website trägt dazu bei, die Seiten der Website zu optimieren
-                                              das Besuchererlebnis verbessern. Zur Verkehrsanalyse dient der Dienst
-                                              Es wird Google Analytics (GA) verwendet. GA verwendet dauerhafte Cookies, die aktiv bleiben
-                                              Ihren Computer für seinen Service. Diese Website überträgt <b>keine</b> Daten
-                                              personenbezogene Daten an GA. Implizite persönliche Informationen wie IP-Adressen sind es
-                                              anonymisiert, um Ihre Privatsphäre zu schützen.
+                                            <b>Analysis</b>
+                                            <p>
+                                              Analysis of the usage of this website helps optimize the site's pages to
+                                              improve the visitor's experience. For traffic analysis, the service
+                                              Google Analytics (GA) is used. GA uses persistent cookies that remain on
+                                              your computer for its service. This website does <b>not</b> transfer any
+                                              personal data to GA. Implicit personal information, like IP addresses, is
+                                              anonymized to protect your privacy.
                                             </p>
                                           </li>
                                           <li style="list-style-type: none;">
-                                            <b>Personalisierung</b>
+                                            <b>Personalization</b>
                                             <p>
-                                              Durch das Speichern Ihrer persönlichen Einstellungen erhalten Sie zusätzliche Dienste wie Themen
-                                              Übersetzungen, Kommentare oder die Durchführung von Werbekampagnen, um Besucher zu versorgen
-                                              mit einer kostenlosen Website. Partner verwenden dauerhafte Cookies
-                                              bleiben für ihre Dienste auf Ihrem Computer. Unsere Partner wie Bootswatch,
-                                              Hyvor, Disqus oder Google bieten hervorragende personalisierte Dienste und Finanzen
-                                              Betreiber dieser Website.
+                                              Remebering your personal settings provides additional services like themes
+                                              translation, comments, or running advertising campaigns to provide visitors
+                                              with a website free of charge. Partners use persistent cookies that
+                                              remain on your computer for their services. Our partners like Bootswatch,
+                                              Hyvor, Disqus, or Google provide excellent personalized services and finance
+                                              running this site.
                                             </p>
                                           </li>
                                         </ul>

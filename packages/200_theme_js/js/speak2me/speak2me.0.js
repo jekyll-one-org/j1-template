@@ -49,10 +49,7 @@
   const voiceUserDefault    = 'Google UK English Female';
   const voiceChromeDefault  = 'Google US English';
   const ignoreProvider      = 'Microsoft';
-  const sourceLanguage      = document.getElementsByTagName("html")[0].getAttribute("lang");
-
-  var defaultLanguage       = '';
-  var navigatorLanguage     = navigator.language || navigator.userLanguage;
+  const defaultLanguage     = 'en-GB';
 
   var currentTranslation    = getCookie('googtrans');
   var scrollBlockOffset     = 100;
@@ -139,13 +136,6 @@
     'en-US':  'Microsoft Zira Desktop - English (United States) (en-US)',
     'de-DE':  'Microsoft Katja Online (Natural) - German (Germany)',
   }
-
-  if (sourceLanguage == 'en') {
-    defaultLanguage = sourceLanguage + '-' + 'GB';
-  } else {
-    defaultLanguage = sourceLanguage + '-' + sourceLanguage.toUpperCase();
-  }
-
 
   // ---------------------------------------------------------------------------
   // Internal functions
