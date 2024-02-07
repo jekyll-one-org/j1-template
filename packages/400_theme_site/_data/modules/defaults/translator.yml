@@ -32,6 +32,8 @@ defaults:
   hideTranslatorIcon:                   false                                   # hide translator icon if translation not allowed (cookie consent)
   disableLanguageSelector:              false                                   # disable language dropdown for translation in dialog (modal)
   translationLanguage:                  en                                      # 'auto'|detect translation language from browser
+  translatorLanguagesFile:              /assets/data/iso-639-language-codes-flags.json
+  translatorLanguages:                  translator-languages                    # languages supported by the translator taken from "translatorLanguagesFile"
   translateAllPages:                    true                                    # enable translation for all pages
   reloadPageOnChange:                   true                                    # reload current page if user settings has been changed
 

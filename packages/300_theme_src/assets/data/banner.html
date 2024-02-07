@@ -449,10 +449,10 @@ exclude_from_search:                    true
               </style>
 
               <div class="panel-fluid {{banner_settings.properties}}">
-                <div class="row no-gutters {{banner_settings.id}}-parallax-quote {{banner_settings.id}}-parallaxBg">
-                  <div class="col-md-12 col-xs-12 {{banner_settings.id}}-parallax-quote-in">
-                    {% if card_text %} <p>{{card_text}}</p>{% endif %}
-                    {% if card_text %}<i>{{card_cite}}</i>{% endif %}
+                <div class="row no-gutters {{banner_settings.id}}-parallax-quote {{banner_settings.id}}-parallaxBg parallax-quoteblock">
+                  <div class="col-md-12 col-xs-12 {{banner_settings.id}}-parallax-quote-in quote-text">
+                    {% if card_text %} <p>{{card_text}}</p> {% endif %}
+                    {% if card_cite %} <p class="fs-3 text-end"><i>{{card_cite}}</i></p> {% endif %}
                   </div>
                 </div>
               </div>

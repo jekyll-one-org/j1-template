@@ -302,6 +302,8 @@ j1.adapter.translator = (function (j1, window) {
             cookieSecure:             secure,                                           // set secure
             cookieConsentName:        translatorOptions.cookieConsentName,              // the name of the Cookie Consent Cookie (secondary data)
             disableLanguageSelector:  translatorOptions.disableLanguageSelector,        // disable language dropdown for translation in dialog (modal)
+            translatorLanguagesFile:  translatorOptions.translatorLanguagesFile,
+            translatorLanguages:      translatorOptions.translatorLanguages,
             dialogContainerID:        translatorOptions.dialogContainerID,              // dest container, the dialog modal is loaded (dynamically)
             dialogLanguage:           translatorOptions.dialogLanguage,                 // language for the dialog (modal)
             translationLanguage:      translatorOptions.translationLanguage,            // default language for translation

@@ -1221,7 +1221,7 @@ class ddMaker {
         if(row !== null) {
             let li = this._getEle("li[data-ms-index='0']", this._wrapper.listOfItems);
             let size = (this._settings.rowHeight !== null) ? this._settings.rowHeight : li.clientHeight;
-            this._wrapper.listOfItems.style.height = (row * size)+'px';
+            this._wrapper.listOfItems.style.height = (row * size) + 12 + 'px';
         }
 
     }

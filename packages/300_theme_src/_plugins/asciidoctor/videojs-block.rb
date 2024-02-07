@@ -39,7 +39,7 @@ Asciidoctor::Extensions.register do
     named :videojs
     name_positional_attributes 'start', 'poster', 'theme', 'zoom', 'role'
     default_attrs 'start' => '00:00:00',
-                  'poster' => '/assets/images/icons/videojs/videojs-poster.png',
+                  'poster' => '/assets/videos/gallery/videojs-poster.png',
                   'theme' => 'uno',
                   'zoom' => false,
                   'role' => 'mt-3 mb-3'

@@ -120,6 +120,12 @@ j1.adapter.cookieConsent = (function (j1, window) {
   var navigatorLanguage;
   var domainAttribute;
 
+  // var user_translate = {
+  //   'analysis':                 'true',
+  //   'personalization':          'true',
+  //   'translationEnabled':       'true'
+  // };
+
   // NOTE: RegEx for tracking_id: ^(G|UA|YT|MO)-[a-zA-Z0-9-]+$
   // See: https://stackoverflow.com/questions/20411767/how-to-validate-google-analytics-tracking-id-using-a-javascript-function/20412153
 

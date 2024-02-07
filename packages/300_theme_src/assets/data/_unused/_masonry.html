@@ -74,7 +74,6 @@ exclude_from_search:                    true
   {% assign production = true %}
 {% endif %}
 
-
 {% comment %} Main
 ================================================================================ {% endcomment %}
 <!-- [INFO   ] [~/assets/data/masonry.html                    ]  [ set meta data (robots) to exclude HTML datafiles from index ] -->
@@ -252,13 +251,9 @@ exclude_from_search:                    true
         <div class="modal-dialog">
           <div class="modal-content">
 
-            <!-- div class="close-modal" data-bs-dismiss="modal">
+            <div class="close-modal" data-bs-dismiss="modal">
               <img src="{{'/assets/images/icons/controls/close-icon.svg' | relative_url}}" alt="Close modal">
-            </div -->
-
-            <div class="close-modal" data-bs-dismiss="modal" aria-label="Close">
-              <i class="mdi mdi-close mdi-dark mdi-48px"></i>
-            </div >
+            </div>
 
             <div class="container">
               <div class="row justify-content-center">
@@ -267,27 +262,26 @@ exclude_from_search:                    true
                     <!-- Project details-->
                     <h2 class="text-uppercase notoc {{translate}}">{{article.title}}</h2>
                     <p class="item-intro">{{article.tagline}}</p>
-                    <!-- img class="img-fluid d-block mx-auto" src="{{article.image.path | relative_url}}" alt="{{article.title}}" -->
+                    <img class="img-fluid d-block mx-auto" src="{{article.image.path | relative_url}}" alt="{{article.title}}">
                     <p>{{article.description}}</p>
                     <ul class="list-inline">
-                      <!-- li>
-                        <strong>Titel:</strong>
+                      <li>
+                        <strong>Title:</strong>
                         <span class="{{translate}}">{{article.title}}</span>
-                      </li -->
-                      <!-- li>
-                        <strong>Kategorien:</strong>
+                      </li>
+                      <li>
+                        <strong>Categories:</strong>
                         <span class="{{translate}}">{{article.categories}}</span>
-                      </li -->
+                      </li>
                       <!-- li>
                         <strong>Tags:</strong>
                         <span class="{{translate}}">{{article.tags}}</span>
                       </li -->
                     </ul>
-
-                    <!-- button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                       <i class="mdib mdib-close mdib-24px mx-2"></i>
-                      Schließen
-                    </button -->
+                      Close Preview
+                    </button>
                   </div>
                 </div>
               </div>

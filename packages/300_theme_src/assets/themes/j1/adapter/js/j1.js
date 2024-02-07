@@ -241,6 +241,11 @@ var j1 = (function (options) {
     'user_translate': '{{template_config.cookies.user_translate}}'
   };
   var user_consent = {};
+  var user_translate = {
+    'analysis':             true,
+    'personalization':      true,
+    'translationEnabled':   true
+  };
   var user_session = {
     'mode':                 'web',
     'writer':               'j1.adapter',
@@ -368,24 +373,33 @@ var j1 = (function (options) {
       user_session.created    = timestamp_now;
       user_session.timestamp  = timestamp_now;
 
-      user_consent  = j1.readCookie(cookie_names.user_consent);
-      user_session  =  j1.existsCookie(cookie_names.user_session)
-                        ? j1.readCookie(cookie_names.user_session)
-                        : cookie_written = j1.writeCookie({
-                            name:     cookie_names.user_session,
-                            data:     user_session,
-                            secure:   secure,
-                            expires:  0
-                          });
+      user_consent            = j1.readCookie(cookie_names.user_consent);
+      user_session            = j1.existsCookie(cookie_names.user_session)
+                                  ? j1.readCookie(cookie_names.user_session)
+                                  : cookie_written = j1.writeCookie({
+                                      name:     cookie_names.user_session,
+                                      data:     user_session,
+                                      secure:   secure,
+                                      expires:  0
+                                    });
 
-      user_state    =  j1.existsCookie(cookie_names.user_state)
-                        ? j1.readCookie(cookie_names.user_state)
-                        : cookie_written = j1.writeCookie({
-                            name:     cookie_names.user_state,
-                            data:     user_state,
-                            secure:   secure,
-                            expires:  365
-                          });
+      user_state              = j1.existsCookie(cookie_names.user_state)
+                                  ? j1.readCookie(cookie_names.user_state)
+                                  : cookie_written = j1.writeCookie({
+                                      name:     cookie_names.user_state,
+                                      data:     user_state,
+                                      secure:   secure,
+                                      expires:  365
+                                    });
+
+      user_translate          = j1.existsCookie(cookie_names.user_translate)
+                                  ? j1.readCookie(cookie_names.user_translate)
+                                  : cookie_written = j1.writeCookie({
+                                      name:     cookie_names.user_translate,
+                                      data:     user_translate,
+                                      secure:   secure,
+                                      expires:  365
+                                    });
 
       if (typeof user_state.template_version == 'undefined') {
         // add for compatibility reasons

@@ -169,13 +169,6 @@ Check what lightGallery can do this by the following example.
 .J1 Gallery + lightGallery
 gallery::jg_old_times[]
 
-[TIP]
-====
-Find more on how the lightGallery module can be used on the
-link:{url-j1-lightgallery-previewer}[lightGallery Preview, {browser-window--new}]
-page.
-====
-
 [role="mt-5"]
 == J1 Carousel
 
