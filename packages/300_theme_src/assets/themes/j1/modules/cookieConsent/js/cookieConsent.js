@@ -59,7 +59,7 @@ function CookieConsent(props) {
   // default settings
   this.props = {
     autoShowDialog:         true,                                               // show dialog if NO consent cookie found
-    dialogLanguage:         navigatorLanguage,                                  // language used for the consent dialog (modal)
+    dialogLanguage:         defaultDialogLanguage,                                  // language used for the consent dialog (modal)
     dialogLanguages:        ['en','de'],                                        // supported languages for the consent dialog (modal), defaults to first in array
     contentURL:             '/assets/data/cookieconsent',                       // URL contain the consent dialogs (modals) for ALL supported languages
     postSelectionCallback:  '',                                                 // callback function, called after the user has made his selection
