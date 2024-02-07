@@ -377,10 +377,10 @@
         // Default values
         //
         voiceTags['a']                    = new voiceTag('Link, ',                    pause_spoken);
-        voiceTags['q']                    = new voiceTag(pause_spoken,                pause_spoken);
-        voiceTags['ol']                   = new voiceTag('List element, ',            pause_spoken);
-        voiceTags['ul']                   = new voiceTag('List element, ',            pause_spoken);
-        voiceTags['dl']                   = new voiceTag('List element, ',            pause_spoken);
+//      voiceTags['q']                    = new voiceTag(pause_spoken,                pause_spoken);
+//      voiceTags['ol']                   = new voiceTag('List element, ',            pause_spoken);
+//      voiceTags['ul']                   = new voiceTag('List element, ',            pause_spoken);
+//      voiceTags['dl']                   = new voiceTag('List element, ',            pause_spoken);
         voiceTags['dt']                   = new voiceTag(pause_spoken,                pause_spoken);
         voiceTags['img']                  = new voiceTag('Image element, ',           pause_spoken);
         voiceTags['table']                = new voiceTag('Table element, ',           pause_spoken);
