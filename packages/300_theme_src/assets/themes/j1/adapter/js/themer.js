@@ -213,9 +213,7 @@ j1.adapter.themer = (function (j1, window) {
 
       // initialize state flag
       _this.state = 'started';
-      if (development) {
-        logger.debug('\n' + 'state: ' + _this.getState());
-      }
+      logger.debug('\n' + 'state: ' + _this.getState());
 
       // hide page until 'theme' is loaded
       $('#no_flicker').hide();
@@ -242,9 +240,7 @@ j1.adapter.themer = (function (j1, window) {
            user_state   = j1.readCookie(cookie_names.user_state);
            user_consent = j1.readCookie(cookie_names.user_consent);
 
-           if (development) {
-             logger.debug('\n' + 'cookie ' +  cookie_names.user_state + ' successfully loaded after: ' + interval_count * 25 + ' ms');
-           }
+           logger.debug('\n' + 'cookie ' +  cookie_names.user_state + ' successfully loaded after: ' + interval_count * 25 + ' ms');
 
            // initial theme data
            if (user_state.theme_css === '') {
@@ -261,9 +257,7 @@ j1.adapter.themer = (function (j1, window) {
              });
 
              if (!cookie_written) {
-               if (development) {
-                 logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_consent);
-               }
+               logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_consent);
              }
            }
 
@@ -271,10 +265,8 @@ j1.adapter.themer = (function (j1, window) {
            user_state.theme_switcher = themerOptions.enabled;
            if (themerOptions.enabled) {
              // enable BS ThemeSwitcher
-             if (development) {
-               logger.info('\n' + 'themes detected as: ' + themerOptions.enabled);
-               logger.info('\n' + 'remote themes are being initialized');
-             }
+             logger.info('\n' + 'themes detected as: ' + themerOptions.enabled);
+             logger.info('\n' + 'remote themes are being initialized');
 
              /* eslint-disable */
              // load list of remote themes
@@ -299,14 +291,12 @@ j1.adapter.themer = (function (j1, window) {
              };
              /* eslint-enable */
            } else {
-             if (development) {
-               logger.warn('\n' + 'themes detected as: disabled');
-               logger.warn('\n' + 'no remote themes are available');
-             }
+             logger.debug('\n' + 'themes detected as: disabled');
+             logger.debug('\n' + 'no remote themes are available');
           }
 
           // validate theme to be loaded
-           urlExists(user_state.theme_css, function(success) {
+          urlExists(user_state.theme_css, function(success) {
              // load  theme
              if (success) {
                // continue processing if page is ready
@@ -319,16 +309,13 @@ j1.adapter.themer = (function (j1, window) {
                }, 10); // END dependencies_met_theme_loaded
              } else {
                // invalid theme, fallback on default
-               if (development) {
-                 logger.warn('\n' + 'themes CSS invalid: ' + user_state.theme_css);
-               }
+               logger.warn('\n' + 'themes CSS invalid: ' + user_state.theme_css);
 
                theme_css_html = '<link rel="stylesheet" id="' + id + '" href="' + default_theme_css + '" type="text/css">';
 
-               if (development) {
-                 logger.warn('\n' + 'set default theme :' + default_theme_name);
-                 logger.debug('\n' + 'theme CSS loaded: ' + default_theme_css);
-               }
+               logger.debug('\n' + 'set default theme :' + default_theme_name);
+               logger.debug('\n' + 'theme CSS loaded: ' + default_theme_css);
+
 
                $('head').append(theme_css_html);
 
@@ -366,17 +353,13 @@ j1.adapter.themer = (function (j1, window) {
           // show page (theme is loaded)
           $('#no_flicker').show();
 
-          if (development) {
-            logger.info('\n' + 'theme loaded successfully: ' + user_state.theme_name);
-            logger.debug('\n' + 'theme CSS loaded: ' + user_state.theme_css);
-          }
+          logger.info('\n' + 'theme loaded successfully: ' + user_state.theme_name);
+          logger.debug('\n' + 'theme CSS loaded: ' + user_state.theme_css);
 
           _this.setState('finished');
 
-          if (development) {
-            logger.debug('\n' + 'state: ' + _this.getState());
-            logger.info('\n' + 'module initialized successfully');
-          }
+          logger.debug('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'module initialized successfully');
 
           clearInterval(dependencies_met_theme_applied);
         }
@@ -393,23 +376,18 @@ j1.adapter.themer = (function (j1, window) {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
-
-      if (development) {
-        logger.info(logText);
-      }
+      logger.info(logText);
 
       // -----------------------------------------------------------------------
       //  Process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
-
-        if (development) {
-          logger.info('\n' + message.text);
-        }
+        logger.info('\n' + message.text);
 
         //
         // Place handling of other command|action here
         //
+
       }
     }, // END messageHandler
 

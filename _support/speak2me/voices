@@ -1,0 +1,40 @@
+voiceLanguageMicrosoftDefault
+--------------------------------------------------------------------------------
+
+systemVoices START -
+de-DE : Microsoft Hedda - German (Germany)
+de-DE : Microsoft Katja - German (Germany)
+de-DE : Microsoft Stefan - German (Germany)
+nl-BE : Microsoft Arnaud Online (Natural) - Dutch (Belgium)
+nl-BE : Microsoft Dena Online (Natural) - Dutch (Belgium)
+nl-NL : Microsoft Colette Online (Natural) - Dutch (Netherlands)
+nl-NL : Microsoft Fenna Online (Natural) - Dutch (Netherlands)
+nl-NL : Microsoft Maarten Online (Natural) - Dutch (Netherlands)
+de-DE : Microsoft SeraphinaMultilingual Online (Natural) - German (Germany)
+de-DE : Microsoft FlorianMultilingual Online (Natural) - German (Germany)
+de-DE : Microsoft Amala Online (Natural) - German (Germany)
+de-DE : Microsoft Conrad Online (Natural) - German (Germany)
+de-DE : Microsoft Katja Online (Natural) - German (Germany)
+de-DE : Microsoft Killian Online (Natural) - German (Germany)
+pl-PL : Microsoft Marek Online (Natural) - Polish (Poland)
+pl-PL : Microsoft Zofia Online (Natural) - Polish (Poland)
+es-ES : Microsoft Ximena Online (Natural) - Spanish (Colombia)
+es-ES : Microsoft Alvaro Online (Natural) - Spanish (Spain)
+es-ES : Microsoft Elvira Online (Natural) - Spanish (Spain)
+systemVoices END.
+
+
+
+voiceLanguageFirefoxDefault
+--------------------------------------------------------------------------------
+systemVoices START -
+de-DE : Microsoft Hedda - German (Germany)
+de-DE : Microsoft Katja - German (Germany)
+de-DE : Microsoft Stefan - German (Germany
+en-GB : Microsoft George - English (United Kingdom)
+en-GB : Microsoft Hazel - English (United Kingdom)
+en-GB : Microsoft Susan - English (United Kingdom)
+de-DE : Microsoft Hedda Desktop - German
+en-GB : Microsoft Hazel Desktop - English (Great Britain)
+en-US : Microsoft Zira Desktop - English (United States)
+systemVoices END.
