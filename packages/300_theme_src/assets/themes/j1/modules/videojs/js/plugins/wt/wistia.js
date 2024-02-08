@@ -370,7 +370,7 @@ THE SOFTWARE. */
     Wistia.apiReadyQueue = [];
 
     if (typeof document !== 'undefined'){
-      loadScript('https://fast.wistia.com/assets/external/E-v1.js', apiLoaded);
+      loadScript('//fast.wistia.com/assets/external/E-v1.js', apiLoaded);
       injectCss();
     }
 

@@ -7,7 +7,7 @@
  #  https://jekyll.one
  #  https://github.com/vimeo/player.js
  #
- #  Copyright (C) Vimeo 2023
+ #  Copyright (C) Vimeo 2024
  #  Copyright (C) 2023, 2024 Juergen Adams
  #
  #  J1 Theme is licensed under MIT License.
@@ -19,7 +19,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/*! @vimeo/player v2.20.1 | (c) 2023 Vimeo | MIT License | https://github.com/vimeo/player.js */
+/*! @vimeo/player v2.21.0 | (c) 2024 Vimeo | MIT License | https://github.com/vimeo/player.js */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
@@ -1302,7 +1302,7 @@
   /**
    * @module lib/embed
    */
-  var oEmbedParameters = ['autopause', 'autoplay', 'background', 'byline', 'color', 'colors', 'controls', 'dnt', 'height', 'id', 'interactive_params', 'keyboard', 'loop', 'maxheight', 'maxwidth', 'muted', 'playsinline', 'portrait', 'responsive', 'speed', 'texttrack', 'title', 'transparent', 'url', 'width'];
+  var oEmbedParameters = ['airplay', 'audio_tracks', 'autopause', 'autoplay', 'background', 'byline', 'cc', 'chapters', 'chromecast', 'color', 'colors', 'controls', 'dnt', 'fullscreen', 'height', 'id', 'interactive_params', 'keyboard', 'loop', 'maxheight', 'maxwidth', 'muted', 'play_button_position', 'playsinline', 'portrait', 'progress_bar', 'quality_selector', 'responsive', 'speed', 'texttrack', 'title', 'transcript', 'transparent', 'url', 'vimeo_logo', 'volume', 'width'];
 
   /**
    * Get the 'data-vimeo'-prefixed attributes from an element as an object.
@@ -3546,9 +3546,7 @@
       }()
     }]);
     return Player;
-  }();
-
-  // Setup embed only if this is not a node environment
+  }(); // Setup embed only if this is not a node environment
   if (!isNode) {
     screenfull = initializeScreenfull();
     initializeEmbeds();

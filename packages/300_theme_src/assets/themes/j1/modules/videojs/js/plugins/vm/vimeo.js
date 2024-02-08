@@ -505,7 +505,7 @@
     // document ready
     //
     if (typeof document !== 'undefined') {
-      // load script local bcause of NemeSpace conflicts (Vimeo)
+      // load script local because of NemeSpace conflicts (Vimeo -> VM)
       loadScript('/assets/themes/j1/modules/videojs/js/plugins/vm/api/vimeo.min.js', apiLoaded);
 //    loadScript('https://player.vimeo.com/api/player.js', apiLoaded);
       injectCss();
