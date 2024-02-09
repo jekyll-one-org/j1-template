@@ -1150,7 +1150,7 @@
           appended = voiceTags['.listingblock'].append;
 
           if ((copy !== undefined) && (copy != '')) {
-            $('<div>' + prepend + ' with the caption,' + copy + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + prepend + ' with the title,' + copy + pause_spoken + '</div>').insertBefore(this);
             $('<div>' + appended + '</div>').insertBefore(this);
           } else {
             $('<div>' + prepend  + pause_spoken + '</div>').insertBefore(this);
@@ -1166,7 +1166,7 @@
         //
         $(clone).find('.gist').addBack('.gist').each(function() {
 
-          if ($(this).prev()[0] !== undefined && $(this).prev()[0].innerText !== undefined) {
+          if ($(this).prev()[0] !== undefined) {
             title = $(this).prev()[0].innerText;
             title_element = $(this).prev();
             // remove the title 'before' the DOM object deleted
@@ -1180,7 +1180,7 @@
           appended = voiceTags['.gist'].append;
 
           if ((title !== undefined) && (title != '')) {
-            $('<div>' + prepend + ' with the caption, ' + title + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + prepend + ' with the title, ' + title + pause_spoken + '</div>').insertBefore(this);
             $('<div>' + appended + '</div>').insertBefore(this);
           } else {
             $('<div>' + prepend  + pause_spoken + '</div>').insertBefore(this);
@@ -1202,7 +1202,7 @@
       //
       $(clone).find('.masonry').addBack('.masonry').each(function() {
 
-        if ($(this).prev()[0].innerText !== undefined) {
+        if ($(this).prev()[0] !== undefined) {
           title = $(this).prev()[0].innerText;
           title_element = $(this).prev();
           // remove the title 'before' the DOM object deleted
@@ -1216,7 +1216,7 @@
         appended = voiceTags['.masonry'].append;
 
         if ((title !== undefined) && (title != '')) {
-          $('<div>' + prepend + ' with the caption,' + title + pause_spoken + '</div>').insertBefore(this);
+          $('<div>' + prepend + ' with the title,' + title + pause_spoken + '</div>').insertBefore(this);
           $('<div>' + appended + '</div>').insertBefore(this);
         } else {
           $('<div>' + prepend  + pause_spoken + '</div>').insertBefore(this);
@@ -1232,7 +1232,7 @@
       //
       $(clone).find('.slider').addBack('.slider').each(function() {
 
-        if ($(this).prev()[0].innerText !== undefined) {
+        if ($(this).prev()[0] !== undefined) {
           title = $(this).prev()[0].innerText;
           title_element = $(this).prev();
           // remove the title 'before' the DOM object deleted
@@ -1246,7 +1246,7 @@
         appended = voiceTags['.slider'].append;
 
         if ((title !== undefined) && (title != '')) {
-          $('<div>' + prepend + ' with the caption, ' + title + pause_spoken + '</div>').insertBefore(this);
+          $('<div>' + prepend + ' with the title, ' + title + pause_spoken + '</div>').insertBefore(this);
           $('<div>' + appended + '</div>').insertBefore(this);
         } else {
           $('<div>' + prepend  + pause_spoken + '</div>').insertBefore(this);
@@ -1262,7 +1262,7 @@
       //
       $(clone).find('.gallery').addBack('.gallery').each(function() {
 
-        if ($(this).prev()[0] !== undefined && $(this).prev()[0].innerText !== undefined) {
+        if ($(this).prev()[0] !== undefined) {
           title = $(this).prev()[0].innerText;
           title_element = $(this).prev();
           // remove the title BEFORE the DOM object gets deleted
@@ -1276,7 +1276,7 @@
         appended = voiceTags['.gallery'].append;
 
         if ((title !== undefined) && (title != '')) {
-          (prepend !== '')  && $('<div>' + prepend + ' with the caption ' + title + pause_spoken + '</div>').insertBefore(this);
+          (prepend !== '')  && $('<div>' + prepend + ' with the title ' + title + pause_spoken + '</div>').insertBefore(this);
           (appended !== '') && $('<div>' + appended + '</div>').insertBefore(this);
         } else {
           (prepend !== '')  && $('<div>' + prepend + pause_spoken  + '</div>').insertBefore(this);
@@ -1292,7 +1292,7 @@
       //
       $(clone).find('.lightbox-block').addBack('.lightbox-block').each(function() {
 
-        if ($(this).prev()[0].innerText !== undefined) {
+        if ($(this).prev()[0] !== undefined) {
           title = $(this).prev()[0].innerText;
           title_element = $(this).prev();
           // remove the title 'before' the DOM object deleted
@@ -1306,7 +1306,7 @@
         appended  = voiceTags['.lightbox-block'].append;
 
         if ((title !== undefined) && (title != '')) {
-          $('<div>' + prepend + ' with the caption,' + title + pause_spoken + '</div>').insertBefore(this);
+          $('<div>' + prepend + ' with the title,' + title + pause_spoken + '</div>').insertBefore(this);
           $('<div>' + appended + '</div>').insertBefore(this);
         } else {
           $('<div>' + prepend  + pause_spoken + '</div>').insertBefore(this);

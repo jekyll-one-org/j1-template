@@ -24,7 +24,7 @@ image:
   width:                                1920
   height:                               1280
 
-tts:                                    false
+tts:                                    true
 comments:                               false
 regenerate:                             false
 permalink:                              /pages/public/learn/roundtrip/asciidoc_extensions/
@@ -322,14 +322,14 @@ and CSS styles are configurable for all images using this macro.
 .Lightbox block for single images
 [source, no_template, role="noclip"]
 ----
-.block_title
+.Block title
 lightbox::<block_id>[ <images_width>, <images_data_id>, <role="CSS styles"> ]
 ----
 
 .Lightbox block for image groups
 [source, no_template, role="noclip"]
 ----
-.block_title
+.Block title
 lightbox::<block_id>[ <images_width>, <images_data_id>, <group_name>, <role="CSS styles"> ]
 ----
 
@@ -424,10 +424,10 @@ portrait. For that reason, a more powerful gallery is needed to create
 a so-called *masonry grid layout*. It works by placing elements in an
 optimal position based on available horizontal and vertical space.
 
-.Gallerie macro for images and videos
+.Gallery macro for images and videos
 [source, no_template, role="noclip"]
 ----
-.block_title
+.Gallery title
 gallery::<gallery_id>[role="<additional CSS styles>"]
 ----
 
