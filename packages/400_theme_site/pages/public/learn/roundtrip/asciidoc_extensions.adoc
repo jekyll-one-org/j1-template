@@ -24,6 +24,7 @@ image:
   width:                                1920
   height:                               1280
 
+tts:                                    false
 comments:                               false
 regenerate:                             false
 permalink:                              /pages/public/learn/roundtrip/asciidoc_extensions/
@@ -82,7 +83,7 @@ Extensions for the markup language Asciidoc were made especially for documents
 of the Jekyll content type *page*, but can be used for *posts* or *collections*
 as well.
 
-mdi:clock-time-five-outline[24px, md-gray mt-4 mr-2]
+mdi:clock-time-five-outline[24px, md-gray mt-5 mr-2]
 *5-10 Minutes* to read
 
 // Include sub-documents (if any)

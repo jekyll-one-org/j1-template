@@ -96,7 +96,7 @@ standard. The previous proprietary software like _Flash Player_, _Quicktime_,
 or _Silverlight_ is no longer needed as J1 provides HTML Video and VideoJS
 support for local video and from online sources on the Internet.
 
-mdi:clock-time-five-outline[24px, md-gray mt-4 mr-2]
+mdi:clock-time-five-outline[24px, md-gray mt-5 mr-2]
 *10-15 Minutes* to read
 
 // Include sub-documents (if any)

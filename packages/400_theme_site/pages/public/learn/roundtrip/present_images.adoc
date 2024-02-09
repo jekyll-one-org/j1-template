@@ -89,7 +89,7 @@ functionality based on powerful Open Source libraries like Lightbox Version 2,
 lightGallery Version 2, Slick Slider, Master Slider, or Masonry and
 Justified-Gallery to create masonry-styled preview maps.
 
-mdi:clock-time-five-outline[24px, md-gray mt-4 mr-2]
+mdi:clock-time-five-outline[24px, md-gray mt-5 mr-2]
 *10-15 Minutes* to read
 
 // Include sub-documents (if any)

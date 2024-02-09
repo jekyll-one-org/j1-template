@@ -74,7 +74,7 @@
   var pitch                 = pitchDefault;
   var volume                = volumeDefault;
 
-  var pause_spoken          = '. ';
+  var pause_spoken          = ':  ';
 
   var chunkCounter          = 0;
   var userStoppedSpeaking   = false;
@@ -381,30 +381,30 @@
 //      voiceTags['ol']                   = new voiceTag('List element, ',            pause_spoken);
 //      voiceTags['ul']                   = new voiceTag('List element, ',            pause_spoken);
 //      voiceTags['dl']                   = new voiceTag('List element, ',            pause_spoken);
-        voiceTags['dt']                   = new voiceTag(pause_spoken,                pause_spoken);
-        voiceTags['img']                  = new voiceTag('Image element, ',           pause_spoken);
-        voiceTags['table']                = new voiceTag('Table element, ',           pause_spoken);
-        voiceTags['card-header']          = new voiceTag(pause_spoken,                pause_spoken);
-        voiceTags['.doc-example']         = new voiceTag('Example element, ',         pause_spoken);
+        voiceTags['dt']                   = new voiceTag(pause_spoken,                'Element not spoken: ');
+        voiceTags['img']                  = new voiceTag('Image element, ',           'Element not spoken: ');
+        voiceTags['table']                = new voiceTag('Table element, ',           'Element not spoken: ');
+        voiceTags['card-header']          = new voiceTag(pause_spoken,                'Element not spoken: ');
+        voiceTags['.doc-example']         = new voiceTag('Example element, ',         'Element not spoken: ');
         voiceTags['.admonitionblock']     = new voiceTag('Attention element, ',       pause_spoken);
-        voiceTags['.listingblock']        = new voiceTag('Text element, ',            pause_spoken);
-        voiceTags['.gist']                = new voiceTag('Gist element, ',            pause_spoken);
-        voiceTags['.slider']              = new voiceTag('Slider element, ',          pause_spoken);
-        voiceTags['.modal']               = new voiceTag('Info element, ',            pause_spoken);
-        voiceTags['.masonry']             = new voiceTag('Masonry element, ',         pause_spoken);
-        voiceTags['.lightbox-block']      = new voiceTag('Lightbox element, ',        pause_spoken);
-        voiceTags['.gallery']             = new voiceTag('Gallery element, ',         pause_spoken);
-        voiceTags['.audioblock']          = new voiceTag('Audio element, ',           pause_spoken);
-        voiceTags['.videoblock']          = new voiceTag('Video element, ',           pause_spoken);
-        voiceTags['.videojs-player']      = new voiceTag('Video element, ',           pause_spoken);
-        voiceTags['.youtube-player']      = new voiceTag('Video element, ',           pause_spoken);
-        voiceTags['.dailymotion-player']  = new voiceTag('Video element, ',           pause_spoken);
-        voiceTags['.vimeo-player']        = new voiceTag('Video element, ',           pause_spoken);
-        voiceTags['.wistia-player']       = new voiceTag('Video element, ',           pause_spoken);
-        voiceTags['figure']               = new voiceTag('Figure element, ',          pause_spoken);
-        voiceTags['parallax-quoteblock']  = new voiceTag('Quote element, ',           pause_spoken);
-        voiceTags['blockquote']           = new voiceTag('Quote element, ',           pause_spoken);
-        voiceTags['quoteblock']           = new voiceTag('Quote element, ',           pause_spoken);
+        voiceTags['.listingblock']        = new voiceTag('Text element, ',            'Element not spoken: ');
+        voiceTags['.gist']                = new voiceTag('Gist element, ',            'Element not spoken: ');
+        voiceTags['.slider']              = new voiceTag('Slider element, ',          'Element not spoken: ');
+        voiceTags['.modal']               = new voiceTag('Info element, ',            'Element not spoken: ');
+        voiceTags['.masonry']             = new voiceTag('Masonry element, ',         'Element not spoken: ');
+        voiceTags['.lightbox-block']      = new voiceTag('Lightbox element, ',        'Element not spoken: ');
+        voiceTags['.gallery']             = new voiceTag('Gallery element, ',         'Element not spoken: ');
+        voiceTags['.audioblock']          = new voiceTag('Audio element, ',           'Element not spoken: ');
+        voiceTags['.videoblock']          = new voiceTag('Video element, ',           'Element not spoken: ');
+        voiceTags['.videojs-player']      = new voiceTag('Video element, ',           'Element not spoken: ');
+        voiceTags['.youtube-player']      = new voiceTag('Video element, ',           'Element not spoken: ');
+        voiceTags['.dailymotion-player']  = new voiceTag('Video element, ',           'Element not spoken: ');
+        voiceTags['.vimeo-player']        = new voiceTag('Video element, ',           'Element not spoken: ');
+        voiceTags['.wistia-player']       = new voiceTag('Video element, ',           'Element not spoken: ');
+        voiceTags['figure']               = new voiceTag('Figure element, ',          'Element not spoken: ');
+        voiceTags['parallax-quoteblock']  = new voiceTag('Quote element, ',           'Element not spoken: ');
+        voiceTags['blockquote']           = new voiceTag('Quote element, ',           'Element not spoken: ');
+        voiceTags['quoteblock']           = new voiceTag('Quote element, ',           'Element not spoken: ');
 
         ignoreTags = ['audio','button','canvas','code','del', 'pre', 'dialog','embed','form','head','iframe','meter','nav','noscript','object','picture', 'script','select','style','textarea','video'];
 
