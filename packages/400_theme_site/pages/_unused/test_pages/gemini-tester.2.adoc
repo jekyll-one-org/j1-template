@@ -26,7 +26,7 @@ image:
 
 regenerate:                             false
 personalization:                        true
-permalink:                              /pages/public/audio_tester/
+permalink:                              /pages/public/gemini_tester-2/
 
 resources:                              [
                                           animate,
@@ -76,35 +76,51 @@ modern browsers support the video tag `<video>` for the HTML5. Browsers have
 a built-in multimedia framework already for decoding and displaying video
 content. No need to use such proprietary software components anymore!
 
-audio:://cdn.julephosting.de/podcasts/554-pinkelpause/97348-new-episode.mp3[start="00:05:49" role="mt-4 mb-5"]
-
-/////
 ++++
-<div class="gallery-title">Playing Audio</div>
-<audio
-  id="554-pinkelpause"
-  controls
-  style="display: none;">
-   <source src="//cdn.julephosting.de/podcasts/554-pinkelpause/97348-new-episode.mp3" type="audio/mpeg" />
-</audio>
+<div class="gallery-title">Connect Bard</div>
+<script src="https://unpkg.com/gemini-pro@latest/dist/gemini-pro.min.js"></script>
 
 <script>
   $(function() {
-    var dependencies_met_page_ready = setInterval (function (options) {
+      var dependencies_met_page_ready = setInterval (function (options) {
       var pageState   = $('#no_flicker').css("display");
       var pageVisible = (pageState == 'block') ? true : false;
 
       if (j1.getState() === 'finished' && pageVisible) {
-        var ts = "00:05:49";
-        var startFromSecond = new Date('1970-01-01T' + ts + 'Z').getTime() / 1000;
-        const audio = document.getElementById("554-pinkelpause");
-        //add the time in seconds
-        audio.currentTime = startFromSecond;
-        audio.style.display = 'block';
+
+        // Import the Gemini-Pro module.
+        import GeminiPro from 'gemini-pro';
+
+        // Create a new Gemini-Pro client.
+        const client = new GeminiPro();
+
+        // Initialize the Bard client.
+        const bard = client.bard;
+
+        // Set the Bard API key.
+        bard.apiKey = 'AIzaSyAtiLEW4oQiOJtGiPsdsGwMHi8O__7cqjU';
+
+        // Set the Bard API URL.
+        bard.apiURL = 'https://bard.googleapis.com';
+
+        // Create a function to integrate Bard with your static website.
+        function integrateBard() {
+          // Create a new Bard prompt.
+          const prompt = { text: 'What is the weather in New York City?', };
+          // Send the prompt to Bard and wait for a response.
+          bard.generateResponse(prompt).then((response) => {
+            // Get the Bard response.
+            const result = response.result;
+            // Display the Bard response on your static website.
+            document.getElementById('bard-response').innerHTML = result;
+          });
+        }
+
+        // Call the integrateBard function to integrate Bard with your static website.
+        integrateBard();
         clearInterval(dependencies_met_page_ready);
       }
     }, 10);
   });
 </script>
 ++++
-/////

@@ -394,7 +394,7 @@ strict_front_matter:                    false
 #
 sass:
   sass_dir:                             _sass/scss
-  style:                                expanded                                # possible values: nested expanded compact compressed
+  style:                                expanded                                # values: compact|compressed|expanded|nested
 
 # ------------------------------------------------------------------------------
 # WEBRICK Customizations

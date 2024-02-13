@@ -26,7 +26,7 @@ image:
 
 regenerate:                             false
 personalization:                        true
-permalink:                              /pages/public/audio_tester/
+permalink:                              /pages/public/gemini_tester-1/
 
 resources:                              [
                                           animate,
@@ -76,17 +76,9 @@ modern browsers support the video tag `<video>` for the HTML5. Browsers have
 a built-in multimedia framework already for decoding and displaying video
 content. No need to use such proprietary software components anymore!
 
-audio:://cdn.julephosting.de/podcasts/554-pinkelpause/97348-new-episode.mp3[start="00:05:49" role="mt-4 mb-5"]
 
-/////
 ++++
-<div class="gallery-title">Playing Audio</div>
-<audio
-  id="554-pinkelpause"
-  controls
-  style="display: none;">
-   <source src="//cdn.julephosting.de/podcasts/554-pinkelpause/97348-new-episode.mp3" type="audio/mpeg" />
-</audio>
+<div class="gallery-title">Connectin Gemini</div>
 
 <script>
   $(function() {
@@ -95,16 +87,65 @@ audio:://cdn.julephosting.de/podcasts/554-pinkelpause/97348-new-episode.mp3[star
       var pageVisible = (pageState == 'block') ? true : false;
 
       if (j1.getState() === 'finished' && pageVisible) {
-        var ts = "00:05:49";
-        var startFromSecond = new Date('1970-01-01T' + ts + 'Z').getTime() / 1000;
-        const audio = document.getElementById("554-pinkelpause");
-        //add the time in seconds
-        audio.currentTime = startFromSecond;
-        audio.style.display = 'block';
+        // Create a new WebSocket connection to Gemini's WebSocket API
+        let ws = new WebSocket('wss://api.gemini.com/v1/marketdata');
+
+        // Listen for messages from the WebSocket connection
+        ws.onmessage = (event) => {
+        	// Parse the JSON message received from the WebSocket connection
+        	let data = JSON.parse(event.data);
+        	// Check if the message type is a market update
+        	if (data.type === 'market-update') {
+        		// Extract the information from the market update message
+        		let symbol = data.symbol; let price = data.price;
+        		let quantity = data.quantity;
+        		let timestamp = data.timestamp;
+        		// Update the UI with the latest market information
+        		document.getElementById('symbol').innerText = symbol;
+        		document.getElementById('price').innerText = price;
+        		document.getElementById('quantity').innerText = quantity;
+        		document.getElementById('timestamp').innerText = timestamp;
+        	}
+        };
+
+        // Listen for errors from the WebSocket connection
+        ws.onerror = (event) => {
+        	console.error('WebSocket error:', event); };
+        	// Listen for WebSocket connection close events
+        	ws.onclose = (event) => { console.log('WebSocket connection closed'); };
+        	// Create a new WebSocket connection to Gemini's WebSocket API for the order book
+        	let orderbookWs = new WebSocket('wss://api.gemini.com/v1/orderbook');
+        	// Listen for messages from the WebSocket connection
+        	orderbookWs.onmessage = (event) => {
+        		// Parse the JSON message received from the WebSocket connection
+        		let data = JSON.parse(event.data);
+        		// Check if the message type is an order book update
+        		if (data.type === 'orderbook-update') {
+        			// Extract the information from the order book update message
+        			let symbol = data.symbol;
+        			let asks = data.asks;
+        			let bids = data.bids;
+        			let timestamp = data.timestamp;
+        			// Update the UI with the latest order book information
+        			document.getElementById('symbol-ob').innerText = symbol;
+        			document.getElementById('asks-ob').innerText = JSON.stringify(asks);
+        			document.getElementById('bids-ob').innerText = JSON.stringify(bids);
+        			document.getElementById('timestamp-ob').innerText = timestamp;
+        		}
+        	};
+
+        // Listen for errors from the WebSocket connection
+        	orderbookWs.onerror = (event) => {
+        		console.error('WebSocket error:', event);
+        	};
+        // Listen for WebSocket connection close events
+        	orderbookWs.onclose = (event) => {
+        		console.log('WebSocket connection closed');
+        	};
+
         clearInterval(dependencies_met_page_ready);
       }
     }, 10);
   });
 </script>
 ++++
-/////
