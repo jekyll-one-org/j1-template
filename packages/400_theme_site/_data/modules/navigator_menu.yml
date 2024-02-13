@@ -440,14 +440,14 @@
       - title:                          Current Theme
         href:                           /pages/public/tools/previewer/current_theme/
         icon:                           theme-light-dark
-      - title:                          Google Gemini AI
-        href:                           /pages/public/tools/previewer/google-gemini-ai/
-        icon:                           google
 
 #      - title:                          J1 iFramer
 #        href:                           /pages/public/tools/previewer/iframer/
 #        icon:                           window-open-variant
 
+      - title:                          Google Gemini AI
+        href:                           https://jekyll.one/pages/public/tools/previewer/google-gemini-ai/
+        icon:                           google
       - title:                          J1 DocSearch
         href:                           https://jekyll.one/pages/public/tools/previewer/docsearch/
         icon:                           head-question
