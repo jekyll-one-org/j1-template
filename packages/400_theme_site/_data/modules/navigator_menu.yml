@@ -440,8 +440,8 @@
       - title:                          Current Theme
         href:                           /pages/public/tools/previewer/current_theme/
         icon:                           theme-light-dark
-      - title:                          Google Gemini
-        href:                           /pages/public/tools/previewer/gemini_ai/
+      - title:                          Google Gemini AI
+        href:                           /pages/public/tools/previewer/google-gemini-ai/
         icon:                           google
 
 #      - title:                          J1 iFramer

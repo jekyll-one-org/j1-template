@@ -25,7 +25,7 @@ image:
 
 regenerate:                             false
 personalization:                        true
-permalink:                              /pages/public/tools/previewer/gemini_ai/
+permalink:                              /pages/public/tools/previewer/google-gemini-ai/
 
 resources:                              [
                                           animate, clipboard, rouge
