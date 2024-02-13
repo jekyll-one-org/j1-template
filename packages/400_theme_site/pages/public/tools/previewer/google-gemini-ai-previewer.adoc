@@ -1,7 +1,7 @@
 ---
-title:                                  Google Gemini
-title_extention:                        Google AI
-tagline:                                Google AI
+title:                                  Google Gemini AI
+title_extention:                        Previewer
+tagline:                                Previewer
 
 date:                                   2024-02-14
 #last_modified:                         2024-01-01
