@@ -184,6 +184,7 @@ End of the story motivate them to belive themselefs.
   var genAIError      = false;
   var response        = '';
   const httpError400  ='User location is not supported for the API use.';
+  const defaultPrompt = 'Please provide tips on how using the prompt for a chat bot';
 
   var result;
 
@@ -196,8 +197,10 @@ End of the story motivate them to belive themselefs.
   	const model = genAI.getGenerativeModel({ model: "gemini-pro"});
 
     var prompt = $('textarea#prompt').val();
-  	// console.log("prompt: ", prompt);
-  	// const result = await model.generateContent(prompt);
+    if (prompt.length == 0) {
+      prompt = defaultPrompt;
+      document.getElementById('prompt').value = prompt;
+    }
 
     try {
         result = await model.generateContent(prompt);
@@ -207,7 +210,6 @@ End of the story motivate them to belive themselefs.
     } finally {
         if (!genAIError) {
           // console.log("result: ", result);
-        	// const response = await result.response;
 
           try {
               response = await result.response;

@@ -141,7 +141,7 @@ End of the story motivate them to belive themselefs.
     <div class="modal-content">
       <!--Header-->
       <div class="modal-header">
-        <p class="lead">Google Gemini AI</p>
+        <p class="lead">Processing Error</p>
         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
           <i class="mdi mdi-close mdi-dark mdi-48px"></i>
         </button>
@@ -150,7 +150,7 @@ End of the story motivate them to belive themselefs.
       <div class="modal-body">
         <div class="text-center">
           <i class="mdi mdi-4x mdi-bug md-red mb-1"></i>
-          <p>Error: User location is <b>not supported</b>.</p>
+          <p>User location is not supported.</p>
         </div>
       </div>
       <!-- Footer -->
@@ -184,6 +184,7 @@ End of the story motivate them to belive themselefs.
   var genAIError      = false;
   var response        = '';
   const httpError400  ='User location is not supported for the API use.';
+  const defaultPrompt = 'Please provide tips on how using the prompt for a chat bot';
 
   var result;
 
@@ -196,8 +197,10 @@ End of the story motivate them to belive themselefs.
   	const model = genAI.getGenerativeModel({ model: "gemini-pro"});
 
     var prompt = $('textarea#prompt').val();
-  	// console.log("prompt: ", prompt);
-  	// const result = await model.generateContent(prompt);
+    if (prompt.length == 0) {
+      prompt = defaultPrompt;
+      document.getElementById('prompt').value = prompt;
+    }
 
     try {
         result = await model.generateContent(prompt);
@@ -207,7 +210,6 @@ End of the story motivate them to belive themselefs.
     } finally {
         if (!genAIError) {
           // console.log("result: ", result);
-        	// const response = await result.response;
 
           try {
               response = await result.response;
