@@ -141,7 +141,7 @@ End of the story motivate them to belive themselefs.
     <div class="modal-content">
       <!--Header-->
       <div class="modal-header">
-        <p class="lead">Processing Error</p>
+        <p class="lead">Google Gemini AI</p>
         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
           <i class="mdi mdi-close mdi-dark mdi-48px"></i>
         </button>
@@ -150,7 +150,7 @@ End of the story motivate them to belive themselefs.
       <div class="modal-body">
         <div class="text-center">
           <i class="mdi mdi-4x mdi-bug md-red mb-1"></i>
-          <p>User location is not supported.</p>
+          <p>Error: User location is <b>not supported</b>.</p>
         </div>
       </div>
       <!-- Footer -->
