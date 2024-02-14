@@ -42,7 +42,7 @@ resource_options:
           badge:
             type:                       unsplash
             author:                     Jessica Ruscello
-            href:                       https://unsplash.com/@jruscello
+            href:                       //unsplash.com/@jruscello
 ---
 
 // Page Initializer

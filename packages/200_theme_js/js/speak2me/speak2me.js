@@ -376,35 +376,35 @@
 
         // Default values
         //
-        voiceTags['a']                    = new voiceTag('Link — ',                   '');
-        voiceTags['q']                    = new voiceTag(pause_spoken,                '');
-        voiceTags['ol']                   = new voiceTag(pause_spoken,                '');
-        voiceTags['ul']                   = new voiceTag(pause_spoken,                '');
-        voiceTags['dl']                   = new voiceTag(pause_spoken,                '');
-        voiceTags['dt']                   = new voiceTag(pause_spoken,                '');
-        voiceTags['img']                  = new voiceTag('Image element — ',          'Element not spoken  — ');
-        voiceTags['table']                = new voiceTag('Table element — ',          'Element not spoken  — ');
-        voiceTags['card-header']          = new voiceTag(pause_spoken,                '');
-        voiceTags['.doc-example']         = new voiceTag('Example element — ',        'Element not spoken  — ');
-        voiceTags['.admonitionblock']     = new voiceTag('Attention element — ',      '');
-        voiceTags['.listingblock']        = new voiceTag('Text element — ',           'Element not spoken  — ');
-        voiceTags['.gist']                = new voiceTag('Gist element — ',           'Element not spoken  — ');
-        voiceTags['.slider']              = new voiceTag('Slider element — ',         'Element not spoken  — ');
-        voiceTags['.modal']               = new voiceTag('Info element —  ',          'Element not spoken  — ');
-        voiceTags['.masonry']             = new voiceTag('Masonry element — ',        'Element not spoken  — ');
-        voiceTags['.lightbox-block']      = new voiceTag('Lightbox element — ',       'Element not spoken  — ');
-        voiceTags['.gallery']             = new voiceTag('Gallery element — ',        'Element not spoken  — ');
-        voiceTags['.audioblock']          = new voiceTag('Audio element — ',          'Element not spoken  — ');
-        voiceTags['.videoblock']          = new voiceTag('Video element — ',          'Element not spoken  — ');
-        voiceTags['.videojs-player']      = new voiceTag('Video element — ',          'Element not spoken  — ');
-        voiceTags['.youtube-player']      = new voiceTag('Video element — ',          'Element not spoken  — ');
-        voiceTags['.dailymotion-player']  = new voiceTag('Video element — ',          'Element not spoken  — ');
-        voiceTags['.vimeo-player']        = new voiceTag('Video element — ',          'Element not spoken  — ');
-        voiceTags['.wistia-player']       = new voiceTag('Video element — ',          'Element not spoken  — ');
-        voiceTags['figure']               = new voiceTag('Figure element — ',         'Element not spoken  — ');
-        voiceTags['parallax-quoteblock']  = new voiceTag(pause_spoken,                '');
-        voiceTags['blockquote']           = new voiceTag(pause_spoken,                '');
-        voiceTags['quoteblock']           = new voiceTag(pause_spoken,                '');
+        voiceTags['a']                    = new voiceTag('Link' + pause_spoken,              '');
+        voiceTags['q']                    = new voiceTag(pause_spoken,                       '');
+        voiceTags['ol']                   = new voiceTag(pause_spoken,                       '');
+        voiceTags['ul']                   = new voiceTag(pause_spoken,                       '');
+        voiceTags['dl']                   = new voiceTag(pause_spoken,                       '');
+        voiceTags['dt']                   = new voiceTag(pause_spoken,                       '');
+        voiceTags['img']                  = new voiceTag('Image element' + pause_spoken,     'Element not spoken' + pause_spoken);
+        voiceTags['table']                = new voiceTag('Table element' + pause_spoken,     'Element not spoken' + pause_spoken);
+        voiceTags['card-header']          = new voiceTag(pause_spoken,                       '');
+        voiceTags['.doc-example']         = new voiceTag('Example element' + pause_spoken,   'Element not spoken' + pause_spoken);
+        voiceTags['.admonitionblock']     = new voiceTag('Attention element' + pause_spoken, pause_spoken);
+        voiceTags['.listingblock']        = new voiceTag('Text element' + pause_spoken,      'Element not spoken' + pause_spoken);
+        voiceTags['.gist']                = new voiceTag('Gist element' + pause_spoken,      'Element not spoken' + pause_spoken);
+        voiceTags['.slider']              = new voiceTag('Slider element' + pause_spoken,    'Element not spoken' + pause_spoken);
+        voiceTags['.modal']               = new voiceTag('Info element' + pause_spoken,      'Element not spoken' + pause_spoken);
+        voiceTags['.masonry']             = new voiceTag('Masonry element' + pause_spoken,   'Element not spoken' + pause_spoken);
+        voiceTags['.lightbox-block']      = new voiceTag('Lightbox element' + pause_spoken,  'Element not spoken' + pause_spoken);
+        voiceTags['.gallery']             = new voiceTag('Gallery element' + pause_spoken,   'Element not spoken' + pause_spoken);
+        voiceTags['.audioblock']          = new voiceTag('Audio element' + pause_spoken,     'Element not spoken' + pause_spoken);
+        voiceTags['.videoblock']          = new voiceTag('Video element' + pause_spoken,     'Element not spoken' + pause_spoken);
+        voiceTags['.videojs-player']      = new voiceTag('Video element' + pause_spoken,     'Element not spoken' + pause_spoken);
+        voiceTags['.youtube-player']      = new voiceTag('Video element' + pause_spoken,     'Element not spoken' + pause_spoken);
+        voiceTags['.dailymotion-player']  = new voiceTag('Video element' + pause_spoken,     'Element not spoken' + pause_spoken);
+        voiceTags['.vimeo-player']        = new voiceTag('Video element' + pause_spoken,     'Element not spoken' + pause_spoken);
+        voiceTags['.wistia-player']       = new voiceTag('Video element' + pause_spoken,     'Element not spoken' + pause_spoken);
+        voiceTags['figure']               = new voiceTag('Figure element' + pause_spoken,    'Element not spoken' + pause_spoken);
+        voiceTags['parallax-quoteblock']  = new voiceTag('',                                  pause_spoken);
+        voiceTags['blockquote']           = new voiceTag('',                                  pause_spoken);
+        voiceTags['quoteblock']           = new voiceTag('',                                  pause_spoken);
 
         ignoreTags = ['audio','button','canvas','code','del', 'pre', 'dialog','embed','form','head','iframe','meter','nav','noscript','object','picture', 'script','select','style','textarea','video'];
 
@@ -583,7 +583,8 @@
                   // cleanup the innerText for compare
                   //
                   innerText = node.innerText.replaceAll('?', '');
-                  innerText = node.innerText.replaceAll('!', '');
+                 innerText = node.innerText.replaceAll('!', '');
+                  innerText = node.innerText + pause_spoken;
                   if (innerText == text) {
                     var headline = $('#' + node.id);
                     if (headline.length > 0) {
@@ -825,13 +826,16 @@
         // because these tags require a pause, but often don't
         // have a comma or period at the end of their text.
         //
-        $(clone).find('h1,h2,h3,h4,h5,h6,li,p').addBack('h1,h2,h3,h4,h5,h6,li,p').each(function() {
-          $(this).append(pause_spoken);
+        $(clone).find('h1,h2,h3,h4,h5,h6,p,li').addBack('h1,h2,h3,h4,h5,h6,p,li').each(function() {
+          var text = $(this)[0].innerText;
+          text.replace(/\s+/g, '\s');
+          text = text + pause_spoken;
+          $(this)[0].innerText = text;
         });
 
         // Search for <br> tags to add a pause at the end.
         $(clone).find('br').each(function() {
-          $(this).after(pause_spoken);
+          $(this).append(pause_spoken);
         });
 
         // Search for <figure>, check for <figcaption>, insert
@@ -919,7 +923,7 @@
         //
         $(clone).find('.parallax-quoteblock').addBack('.parallax-quoteblock').each(function() {
           content_element = $(this).find('.quote-text');
-          content         = content_element[0].innerText + ' — ';
+          content         = content_element[0].innerText + '' + pause_spoken;
           prepend         = voiceTags['quoteblock'].prepend;
           appended        = voiceTags['quoteblock'].append;
 
@@ -936,7 +940,7 @@
         $(clone).find('.quoteblock').addBack('.quoteblock').each(function() {
           var attribution = $(this).find('.attribution');
           content_element = $(this).find('blockquote');
-          content         = content_element[0].innerText + ' — ' + attribution[0].innerText + ' — ';
+          content         = content_element[0].innerText + '' + attribution[0].innerText;
           prepend         = voiceTags['quoteblock'].prepend;
           appended        = voiceTags['quoteblock'].append;
 
@@ -976,11 +980,11 @@
           appended  = voiceTags['.audioblock'].append;
 
           if ((copy !== undefined) && (copy != '')) {
-            $('<div>' + prepend  + pause_spoken + 'with the title, ' + copy + pause_spoken + '</div>').insertBefore(this);
-            $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + prepend  + 'with the title, ' + copy + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + appended + '</div>').insertBefore(this);
           } else {
-            $('<div>' + prepend  + pause_spoken + '</div>').insertBefore(this);
-            $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + prepend  + '</div>').insertBefore(this);
+            $('<div>' + appended + '</div>').insertBefore(this);
           }
 
           $(this).remove();
@@ -996,11 +1000,11 @@
           appended  = voiceTags['.videoblock'].append;
 
           if ((copy !== undefined) && (copy != '')) {
-            $('<div>' + prepend  + pause_spoken + 'with the title, ' + copy + pause_spoken + '</div>').insertBefore(this);
-            $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + prepend  + 'with the title, ' + copy + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + appended + '</div>').insertBefore(this);
           } else {
-            $('<div>' + prepend  + pause_spoken + '</div>').insertBefore(this);
-            $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + prepend  + '</div>').insertBefore(this);
+            $('<div>' + appended + '</div>').insertBefore(this);
           }
 
           $(this).remove();
@@ -1015,11 +1019,11 @@
           appended  = voiceTags['.videojs-player'].append;
 
           if ((copy !== undefined) && (copy != '')) {
-            $('<div>' + prepend + pause_spoken  + 'with the title, ' + copy + pause_spoken + '</div>').insertBefore(this);
-            $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + prepend  + 'with the title, ' + copy + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + appended + '</div>').insertBefore(this);
           } else {
-            $('<div>' + prepend  + pause_spoken + '</div>').insertBefore(this);
-            $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + prepend  + '</div>').insertBefore(this);
+            $('<div>' + appended + '</div>').insertBefore(this);
           }
 
           $(this).remove();
@@ -1034,11 +1038,11 @@
           appended  = voiceTags['.youtube-player'].append;
 
           if ((copy !== undefined) && (copy != '')) {
-            $('<div>' + prepend  + pause_spoken + 'with the title, ' + copy + pause_spoken + '</div>').insertBefore(this);
-            $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + prepend  + 'with the title, ' + copy + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + appended + '</div>').insertBefore(this);
           } else {
-            $('<div>' + prepend  + pause_spoken + '</div>').insertBefore(this);
-            $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + prepend  + '</div>').insertBefore(this);
+            $('<div>' + appended + '</div>').insertBefore(this);
           }
 
           $(this).remove();
@@ -1053,11 +1057,11 @@
           appended  = voiceTags['.dailymotion-player'].append;
 
           if ((copy !== undefined) && (copy != '')) {
-            $('<div>' + prepend  + pause_spoken + 'with the title, ' + copy + pause_spoken + '</div>').insertBefore(this);
-            $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + prepend  + 'with the title, ' + copy + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + appended + '</div>').insertBefore(this);
           } else {
-            $('<div>' + prepend  + pause_spoken + '</div>').insertBefore(this);
-            $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + prepend  + '</div>').insertBefore(this);
+            $('<div>' + appended + '</div>').insertBefore(this);
           }
 
           $(this).remove();
@@ -1072,11 +1076,11 @@
           appended  = voiceTags['.vimeo-player'].append;
 
           if ((copy !== undefined) && (copy != '')) {
-            $('<div>' + prepend  + pause_spoken + 'with the title, ' + copy + pause_spoken + '</div>').insertBefore(this);
-            $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + prepend  + 'with the title, ' + copy + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + appended + '</div>').insertBefore(this);
           } else {
-            $('<div>' + prepend  + pause_spoken + '</div>').insertBefore(this);
-            $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + prepend  + '</div>').insertBefore(this);
+            $('<div>' + appended + '</div>').insertBefore(this);
           }
 
           $(this).remove();
@@ -1091,11 +1095,11 @@
           appended  = voiceTags['.wistia-player'].append;
 
           if ((copy !== undefined) && (copy != '')) {
-            $('<div>' + prepend  + pause_spoken  + 'with the title, ' + copy + pause_spoken + '</div>').insertBefore(this);
-            $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + prepend  + 'with the title, ' + copy + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + appended + '</div>').insertBefore(this);
           } else {
-            $('<div>' + prepend  + pause_spoken + '</div>').insertBefore(this);
-            $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + prepend  + '</div>').insertBefore(this);
+            $('<div>' + appended + '</div>').insertBefore(this);
           }
 
           $(this).remove();

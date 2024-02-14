@@ -28,7 +28,7 @@ resource_options:
           badge:
             type:                       unsplash
             author:                     Ricardo Gomez Angel
-            href:                       https://unsplash.com/@ripato/portfolio
+            href:                       //unsplash.com/@ripato/portfolio
 ---
 
 // Page Initializer

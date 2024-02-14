@@ -1,9 +1,9 @@
 ---
 title:                                  Speak2Me
-title_extention:                        Content samples for the TTS module
+title_extention:                        Samples for the TTS module
 tagline:                                Content samples
 
-date:                                   2023-07-26
+date:                                   2024-02-15
 #last_modified:                         2023-01-01
 
 description: >
@@ -88,7 +88,7 @@ Text-To-Speech converter. The converter functionality allows users to sit
 back and listen to the browser read aloud the important contents on a web
 page.
 
-This page provides typical content elements used for web pages. Run the
+This page provides typical content elements used for webpages. Run the
 converter to experience how those content elements are spoken.
 
 [role="mb-4"]
@@ -132,7 +132,7 @@ their complexity.
 [role="mt-4"]
 === Structured text
 
-Blocks in web pages that contain structured text refer to specific *sections*
+Blocks in webpages that contain structured text refer to specific *sections*
 or *elements* of content that are organized and formatted in a structured
 manner to improve readability and accessibility. These text blocks are
 designed to provide a clear and organized presentation for human users to
@@ -144,6 +144,7 @@ Typical elements are:
 * highlighted text blocks
 * embedded code blocks
 
+[role="mt-4"]
 ==== Technical terms
 
 Technological terms are specialized words or phrases used in a particular
@@ -155,19 +156,22 @@ experts.
 Because of current limitations of the synthesise module *Speak2Me*, words
 are marked as *specialized* words are *not* spoken.
 
-The following _Rouge_ themes are used for J1 Template:
+The following _Rouge_ themes are used for J1 Template (specialized words are
+not spoken):
 
-* light theme -- based on the Igor theme `igorpro`
-* dark theme -- based on the Monokai theme `monokai.sublime`
+* light theme — based on the Igor theme `igorpro`
+* dark theme — based on the Monokai theme `monokai.sublime`
 
+[role="mt-4"]
 ==== Highlighted text
 
-Text blocks highlighted in web pages refer to sections of text that have
+Text blocks highlighted in webpages refer to sections of text that have
 been visually emphasized to stand out from the surrounding content. These
 blocks are typically formatted using different styles, such as changing
 the background color, applying a border, or using bold or italic fonts to
 make them more noticeable and draw attention to important information.
 
+[role="mt-4 mb-5"]
 .Output example
 ----
 Startup the site ..
@@ -183,7 +187,7 @@ Configuration file: ...
 [role="mt-4"]
 ==== Code blocks
 
-In web pages, a code block refers to a section of code typically enclosed
+In webpages, a code block refers to a section of code typically enclosed
 within special HTML or programming language tags to indicate that the content
 inside should be interpreted as code and not regular text. These code blocks
 are often used to display and format HTML, CSS, JavaScript, or other
@@ -211,6 +215,7 @@ programming code snippets on a webpage.
 }
 ----
 
+[role="mt-4 mb-5"]
 .Javascript code
 [source, javascript]
 ----
@@ -232,9 +237,9 @@ function styleSheetLoaded(styleSheet) {
 [role="mt-4"]
 ==== Quotations
 
-Quotations in web pages are used to visually highlight an excerpt. They
-are designed to stand out from the regular text and clarify that the
-content is from another person, website, or any external source.
+Elements that povide quotations in webpages are used to visually highlight an
+excerpt. They are designed to stand out from the regular text and clarify that
+the content is from another person, website, or any external source.
 
 Example of a *single* line quote:
 
@@ -249,6 +254,19 @@ What frightens me is not the destructive power of the bomb,
 but the explosive power of the human heart for evil.
 ____
 
+[role="mt-4"]
+==== Parallax Quote
+
+To show a more eye-catching quote, a parallax quote can be used.
+
+++++
+<div id="banner_home_parallax" class="elevated-z0"></div>
+++++
+
+[role="mt-4"]
+Parallax quotes are used typically on landing pages to present e.g. the
+general idea of a website or can be used as an delimiter element on
+webpages.
 
 [role="mt-4"]
 === Ordered text
@@ -257,11 +275,13 @@ Headlines and paragraphs are commonly used to structure the content of a
 web page, making it more readable. See such a structure below that is
 typically used in larger text like articles, or books.
 
+[role="mt-4"]
 ==== Chapter One
 
     Tyrion Lannister stood resolute upon the prow of the majestic vessel,
 the Wind's Grace, its timeworn planks creaking beneath his weight.
 
+[role="mt-4"]
 ===== Section One
 
     It was a gusty tempest, much like the swirling turmoil that had
@@ -271,7 +291,7 @@ Westeros.
 [role="mt-5"]
 == Links
 
-Links are an essential part of all web pages. They allow users to navigate
+Elemts for linking are an essential part of all webpages. They allow users to navigate
 between different *pages* and *websites*. In HTML, links are created using
 the anchor tag `<a>`. The anchor tag defines a hyperlink, a *clickable element*,
 that takes the user to *another* web page or a specific location on the *same page*.
@@ -281,18 +301,20 @@ that takes the user to *another* web page or a specific location on the *same pa
 
 Inline links are hyperlinks embedded directly within the content of a paragraph
 or any other text element on a web page. These links allow users to navigate
-to other web pages, resources, or sections of the same page by clicking on
+to other webpages, resources, or sections of the same page by clicking on
 the linked *text* element.
 
+[role="mt-4"]
 ==== Inline Link Example
 
 All websites created by _Jekyll_ are based on Themes, a template
-system to ease the creation process of web pages, design, styles, navigation
+system to ease the creation process of webpages, design, styles, navigation
 elements and more. For a wide range of website types, the
 link:{url-jamstack-club--j1-theme}[J1 Theme, {browser-window--new}] accessible
 at the Jamstack Club can be used. Check the preview function and, if the Jekyll
 Theme meet your needs, you can create a example web from here:
-link:{url-j1--rocketstart}[Rocketstart - Create A Internet Site In Minutes, {browser-window--new}].
+link:{url-j1--rocketstart}[Rocketstart, {browser-window--new}] to create a
+Internet site in minutes.
 
 [role="mt-4"]
 === Link Block
@@ -302,15 +324,16 @@ of organized hyperlinks. These links lead to different pages, resources, or
 external websites. Such blocks are commonly used to present links to point
 the reader to related content resources.
 
+[role="mt-4"]
 ==== Link Block Example
 
 Find more to know: +
 mdi:link-variant[24px, md-gray mr-2 ml-3]
-link:{url-jamstack-club--j1-theme}[J1 Theme at Jamstack Club, {browser-window--new}] +
+J1 Theme at link:{url-jamstack-club--j1-theme}[Jamstack Club, {browser-window--new}] +
 mdi:link-variant[24px, md-gray mr-2 ml-3]
-link:{url-jamstack-club--themes}[Popular SSGs and Themes at Jamstack Club, {browser-window--new}] +
+Popular SSGs and Themes at link:{url-jamstack-club--themes}[Jamstack Club, {browser-window--new}] +
 mdi:link-variant[24px, md-gray mr-2 ml-3]
-link:{url-jekyll-themes--home}[Popular SSGs and Themes at Jekyll Themes, {browser-window--new}]
+Popular SSGs and Themes at link:{url-jekyll-themes--home}[Jekyll Themes, {browser-window--new}]
 
 [role="mt-5"]
 == Information Blocks
@@ -435,7 +458,7 @@ only loads plain HTML files.
 [role="mt-5"]
 == Images
 
-There are two general image types used on web pages: block and inline
+There are two general image types used on webpages: block and inline
 images.
 
 [role="mt-4"]
@@ -469,17 +492,17 @@ In that book, Paxman tells some terrific stories and laughs at much of the
 silliness in the world. A Life in Questions charts the life of the greatest
 political interviewer of our time.
 
-
 [role="mt-4"]
 === Block image
 
 A block image is displayed as a discrete element on its own line in a
-document. Web pages use block images for various purposes to enhance
+document. webpages use block images for various purposes to enhance
 visual appeal, convey information, and improve the overall user
 experience.
 
 image::/assets/images/pages/panels/responsive-text-1920x800.jpg[{{page.title}}, width=1280, role="mb-4"]
 
+[role="mt-4 mb-5"]
 [NOTE]
 ====
 Carefully chosen and well-placed images can significantly enhance
@@ -490,7 +513,7 @@ the overall effectiveness of a web page.
 [#lightbox2]
 == Lightbox
 
-Lightboxes are UI elements commonly used in web pages for various purposes.
+Lightboxes are UI elements commonly used in webpages for various purposes.
 They serve as a way to display content or interact with users without
 requiring them to navigate away from the current page. This UI element
 is typically designed to grab the user's attention and provide a focused
@@ -605,6 +628,7 @@ galleries. Jekyll One combines the gallery with a lightbox to enlarge the
 images of a gallery. See the gallery in action. And for sure, all what you see
 is even *responsive*.
 
+[role="mt-4"]
 [TIP]
 ====
 Change the size of your current browser width to see what will happen!
@@ -621,6 +645,7 @@ J1 Masonry is a great tool to create dynamic image galleries. Image galleries
 are popular on many websites, and masonry can be a useful tool for creating
 dynamic and visually appealing galleries.
 
+[role="mb-5"]
 [TIP]
 ====
 Change the size of your current browser width to see what will happen!
@@ -633,10 +658,22 @@ masonry::image_fixed_height_lb[]
 By using masonry, you can create a gallery that displays images of different
 sizes in an aesthetically pleasing and functional way.
 
+
+[role="mt-5"]
+== Audio Players
+
+Audio players can be embedded in webpages very easy by using the HTML5 audio
+tag `<audio>`. Browsers have a built-in multimedia framework for decoding
+and playing audio content directly within a webpage.
+
+.Ambient Piano
+audio::/assets/audio/sound-effects/ambient-piano.mp3[role="mt-4 mb-5"]
+
+
 [role="mt-4"]
 == Video Players
 
-Video players embedded in Web pages are software components that integrate
+Video players embedded in webpages are software components that integrate
 and play videos directly within a web page or application. These players
 are essential for websites, blogs, and apps that want to display video content
 without requiring users to download the video file or use any external

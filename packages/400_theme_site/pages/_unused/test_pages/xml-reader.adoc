@@ -35,7 +35,7 @@ resource_options:
           badge:
             type:                       unsplash
             author:                     Alexander Redl
-            href:                       https://unsplash.com/@alexanderredl
+            href:                       //unsplash.com/@alexanderredl
 ---
 
 // Page Initializer

@@ -30,7 +30,7 @@ resource_options:
           badge:
             type:                       unsplash
             author:                     Franck
-            href:                       https://unsplash.com/@franckinjapan
+            href:                       //unsplash.com/@franckinjapan
 ---
 
 // Page Initializer

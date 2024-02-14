@@ -35,7 +35,7 @@ resource_options:
           badge:
             type:                       unsplash
             author:                     Quino Al Angel
-            href:                       https://unsplash.com/@quinoal
+            href:                       //unsplash.com/@quinoal
 ---
 
 // Page Initializer

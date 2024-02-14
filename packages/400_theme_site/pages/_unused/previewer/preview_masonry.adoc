@@ -44,7 +44,7 @@ resource_options:
           badge:
             type:                       unsplash
             author:                     Hayden Mills
-            href:                       https://unsplash.com/@haydmills
+            href:                       //unsplash.com/@haydmills
 ---
 
 // Page Initializer
