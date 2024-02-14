@@ -1,22 +1,25 @@
 ---
-title:                                  Google Gemini AI
-title_extention:                        Previewer
-tagline:                                Previewer
+title:                                  Google Gemini
+title_extention:                        Preview the Chatbot
+tagline:                                Chatbot Preview
 
 date:                                   2024-02-14
 #last_modified:                         2024-01-01
 
 description: >
-                                        Google Gemini is a family of large language models (LLMs) developed by
-                                        Google AI, announced in December 2023. It's the successor to LaMDA and PaLM 2,
-                                        and positions itself as a competitor to OpenAI's GPT-4.
+                                        The Google Gemini platform provides an AI-based ChatBot system
+                                        (formerly "Bard") based on a family of so-called large language
+                                        models (LLMs) developed by Google AI, announced in December 2023.
+                                        The Chatbot of Gemini are the successors to LaMDA and PaLM 2,
+                                        positioning itself as a competitor to OpenAIs' ChatGPT
+                                        for the current version of "GPT-4".
 keywords: >
                                         open source, free, template, jekyll, jekyllone, web,
                                         sites, static, jamstack, bootstrap,
-                                        Google, Gemini
+                                        Internet, Search, Google, Gemini, Chatbot
 
 categories:                             [ Previewer ]
-tags:                                   [ Module, Gemini ]
+tags:                                   [ Module, Gemini, ChatBot ]
 
 image:
   path:                                 /assets/images/modules/attics/1920x1280/markus-spiske.jpg
@@ -29,7 +32,8 @@ personalization:                        true
 permalink:                              /pages/public/tools/previewer/google-gemini-ai/
 
 resources:                              [
-                                          animate, clipboard, rouge
+                                          animate,
+                                          clipboard, rouge
                                         ]
 resource_options:
   - attic:
@@ -68,18 +72,102 @@ resource_options:
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [role="dropcap"]
-Google Gemini is a family of large language models (LLMs) developed by
-Google AI, announced in December 2023. It's the successor to LaMDA and PaLM 2,
-and positions itself as a competitor to OpenAI's GPT-4.
+The Google Gemini platform provides an AI-based ChatBot system (formerly *Bard*)
+based on a family of so-called large language models (LLMs) developed by
+Google AI, announced in December 2023. The LLMs of Gemini are the successors
+to LaMDA and PaLM 2, positioning itself as a competitor to OpenAIs' ChatGPT
+for the current version of *GPT-4*.
+
+Searching the Internet today typically requires multiple search engine requests
+for proper results. Modern AI-based Chatbots can simplify an Internet search
+to a single request by asking a Bot.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 [role="mt-5"]
+== Supported regions
+
+Following its initial launch in the United States, Google's next-generation
+AI assistant Gemini is now available in select regions across Latin America,
+Africa, Asia Pacific, and Canada. Find more details on where you can use
+link:{url-google--gemini-regions-en}[Google Gemini, {browser-window--new}].
+
+Note that Google Gemini is currently *not supported* for the *EU* and some
+other regions. Google Gemini is a personalized advertising solution that uses
+cookies and other tracking technologies to make advertising more relevant.
+However, this may violate EU data protection laws that govern companies
+prohibit the use of personal data without the express consent of the to
+collect user information.
+
+Gemini requires collecting personal information, such as IP addresses and
+device identifiers, which are only collected with the user's consent in the
+EU. The lack of support for Google Gemini in the EU region has essentially
+the following reasons:
+
+Privacy Policys::
+Google Gemini is a tool that enables display ad targeting across multiple
+platforms, which requires collecting and sharing data about users'
+online activities. The EU has strict data protection regulations that make
+it difficult for companies to process data and collect and share user
+information. These provisions make it difficult for Google to operate
+Google Gemini in the EU.
+
+Competition law regulations::
+Google's Gemini could allow the company to gain a dominant position in the
+digital advertising market. The EU has a competition law. Some regulations
+prohibit companies from establishing their dominant position which may in the
+EU conflict with these provisions.
+
+
+[role="mt-5"]
+== Use out of supported regions
+
+With the help of a virtual private network (VPN), you can use Google Gemini,
+which is also used in regions that are not currently supported. VPNs hide
+the user's actual IP address. Instead, a new IP address that comes from a
+selectable region, for example, the USA, will be used.
+
+A virtual private network (VPN) is a private network that is built and
+operated over a public network such as the Internet. VPNs allow users to
+establish secure connections to other networks over the Internet. They can
+be used to provide access to geographically restricted websites and services,
+improve privacy and security, and optimize network performance.
+
+Common features of VPNs:
+
+Traffic Encryption::
+VPNs encrypt all traffic sent and received over the network. Encryption
+prevents third parties, such as Internet service providers or hackers,
+from accessing and reading the data. Encryption, therefore, ensures that
+the privacy of users is protected.
+
+Hiding the IP address::
+VPNs hide the user's actual IP address. Instead, a new IP address belonging
+to the VPN provider is used. Third parties can no longer determine the users'
+location or track them based on their IP address., which protects their privacy.
+
+Access restricted content::
+Many VPNs allow users to access blocked content in their country or region
+because VPNs hide the user's true IP address, allowing them to access content
+unavailable in their country or region.
+
+[role="mt-4"]
+.Privacy
+[NOTE]
+====
+Using Google Gemini outside supported regions via a VPN, your privacy is
+protected and no *real* user information is used or transferred to the
+service.
+====
+
+
+[role="mt-5"]
 == Ask the Bot
 
-Google Gemini is a significant advancement in the field of LLMs. Its
-ability to process information from multiple modalities and its flexible
-architecture make it a powerful tool for a wide range of applications.
+The Google Gemini platform provides a ChatBot system using a significant
+advancement in the field of LLMs. The ability to process information from
+multiple sources, text and images, and its flexible architecture makes it
+a powerful tool for many applications and websites.
 
 [role="mt-4"]
 === Examples for Prompts
@@ -104,8 +192,8 @@ What is the JekyllOne Template and what types of websites are supported?
 Why is Google Gemini currently not supported for the EU region?
 ----
 
-.Story
-[source, text, role="mb-5"]
+.Storys
+[source, text, role="mb-4"]
 ----
 Tell a wonderful story for your child every single night.
 Generate a bedtime story for the chield bease on child's favourite things, country, and age.
@@ -113,11 +201,19 @@ Give some advice for kids to be good and do good for the sociaty.`
 End of the story motivate them to belive themselefs.
 ----
 
+Use the copy function of the examples given to copy the function from the
+examples above to test Google Gemini. Copy such a given *text* and paste it
+into the input field *prompt* for a generation.
+
 [role="mt-4"]
 === Generate
 
+You can enter your requests in the input field *Prompt*. If you need help
+formulating such requests, leave the prompt field empty and start a
+generation.
+
 ++++
-<div class="gallery-title mt-3">Prompt</div>
+<div class="gallery-title mt-3">Prompt (Input)</div>
 <div class="form-group">
   <textarea id="prompt" class="form-control mb-3" placeholder="Enter a clear and concise text that conveys the task or question you want the chatbot to perform" rows="5"></textarea>
 
@@ -130,7 +226,7 @@ End of the story motivate them to belive themselefs.
 </div>
 
 <div id="output" class="mt-5 mb-7">
-  <h3 id="result" class="mb-2 notoc">Result</h3>
+  <h3 id="result" class="mb-2 notoc speak2me-ignore">Result</h3>
   <div id="md_result"></div>
 </div>
 
@@ -176,7 +272,7 @@ End of the story motivate them to belive themselefs.
 <script type="importmap">
   {
     "imports": {
-      "@google/generative-ai": "https://esm.run/@google/generative-ai"
+      "@google/generative-ai": "//esm.run/@google/generative-ai"
     }
   }
 </script>
@@ -194,13 +290,13 @@ End of the story motivate them to belive themselefs.
 
   var result;
 
-  import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
+  import { GoogleGenerativeAI } from "//esm.run/@google/generative-ai";
 
   async function run() {
     let input = document.getElementById("name");
 
-  	// For text-only input, use the gemini-pro model
-  	const model = genAI.getGenerativeModel({ model: "gemini-pro"});
+    // For text-only input, use the gemini-pro model
+    const model = genAI.getGenerativeModel({ model: "gemini-pro"});
 
     var prompt = $('textarea#prompt').val();
     if (prompt.length == 0) {
@@ -222,9 +318,9 @@ End of the story motivate them to belive themselefs.
           } catch (e) {
               console.warn(e);
           } finally {
-          	// console.log("response: ", response);
-          	const text = response.text();
-          	// console.log(text);
+            // console.log("response: ", response);
+            const text = response.text();
+            // console.log(text);
 
             if (text.length > 0) {
                document.getElementById('md_result').innerHTML = marked.parse(text);
