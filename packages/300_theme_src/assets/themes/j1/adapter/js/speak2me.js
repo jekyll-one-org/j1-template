@@ -101,6 +101,7 @@ var isFirefox         = /Firefox/i.test(navigator.userAgent);
 var chrome            = /chrome/i.test( navigator.userAgent );
 var isEdge            = /Edg/i.test(navigator.userAgent);
 var isOpera           = /OPR/i.test(navigator.userAgent);
+var isSafari          = /Safari/i.test(navigator.userAgent);
 var isAvast           = /Avast/i.test(navigator.userAgent);
 var isChrome          = ((chrome) && (!isEdge));
 var ttsDisabled       = false;
@@ -202,8 +203,8 @@ var Events = {
         if (j1.getState() === 'finished' && pageVisible && atticFinished) {
 
           if (mobilesDisabled && isMobile) {
-            console.log('speak: module speak2me is disabled for mobile browsers');
-            logger.warn('\n' + 'speak: module speak2me is disabled for mobile browsers');
+            console.log('module speak2me is disabled for mobile browsers');
+            logger.warn('\n' + 'module speak2me is disabled for mobile browsers');
             $('#quickLinksSpeakButton').hide();
             clearInterval(dependencies_met_page_ready);
             return;
@@ -211,8 +212,8 @@ var Events = {
 
           var operaDisabled = (browsersDisabled.includes('Opera')) ? true : false;
           if (operaDisabled && isOpera) {
-            console.log('speak: module speak2me is disabled for the Opera browser');
-            logger.warn('\n' + 'speak: module speak2me is disabled for the Opera browser');
+            console.log('module speak2me is disabled for the Opera browser');
+            logger.warn('\n' + 'module speak2me is disabled for the Opera browser');
             $('#quickLinksSpeakButton').hide();
             clearInterval(dependencies_met_page_ready);
             return;
@@ -220,8 +221,8 @@ var Events = {
 
           var firefoxDisabled = (browsersDisabled.includes('Firefox')) ? true : false;
           if (firefoxDisabled && isFirefox) {
-            console.log('speak: module speak2me is disabled for the Firefox browser');
-            logger.warn('\n' + 'speak: module speak2me is disabled for the Firefox browser');
+            console.log('module speak2me is disabled for the Firefox browser');
+            logger.warn('\n' + 'module speak2me is disabled for the Firefox browser');
             $('#quickLinksSpeakButton').hide();
             clearInterval(dependencies_met_page_ready);
             return;
@@ -232,7 +233,16 @@ var Events = {
           var avastDisabled = (browsersDisabled.includes('Avast')) ? true : false;
           if (avastDisabled && isAvast) {
             console.log('module speak2me is not supported for the Avast Secure browser');
-            logger.warn('\n' + 'speak: module speak2me is disabled for the Avast Secure browser');
+            logger.warn('\n' + 'module speak2me is disabled for the Avast Secure browser');
+            $('#quickLinksSpeakButton').hide();
+            clearInterval(dependencies_met_page_ready);
+            return;
+          }
+
+          var safariDisabled = (browsersDisabled.includes('Safari')) ? true : false;
+          if (safariDisabled && isSafari) {
+            console.log('module speak2me is disabled for the Safari browser');
+            logger.warn('\n' + 'module speak2me is disabled for the Safari browser');
             $('#quickLinksSpeakButton').hide();
             clearInterval(dependencies_met_page_ready);
             return;
