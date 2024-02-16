@@ -33,7 +33,7 @@ permalink:                              /pages/public/tools/previewer/google-gem
 
 resources:                              [
                                           animate,
-                                          clipboard, lightbox, rouge
+                                          clipboard, rouge
                                         ]
 resource_options:
   - attic:
@@ -66,7 +66,7 @@ resource_options:
 
 // Load page attributes
 // -----------------------------------------------------------------------------
-{% include {{load_attributes}} scope="all" %}
+{% include {{load_attributes}} scope="global" %}
 
 
 // Page content
@@ -144,8 +144,7 @@ the privacy of users is protected.
 Hiding the IP address::
 VPNs hide the user's actual IP address. Instead, a new IP address belonging
 to the VPN provider is used. Third parties can no longer determine the users'
-location or track them based on their IP address., which protects their
-privacy.
+location or track them based on their IP address., which protects their privacy.
 
 Access restricted content::
 Many VPNs allow users to access blocked content in their country or region
@@ -161,62 +160,11 @@ protected and no *real* user information is used or transferred to the
 service.
 ====
 
-[role="mt-5"]
-== VPN Clients on Windows
-
-Several VPN clients on Windows are available that can be used for free.
-
-VPN Clients providing a *free plan*:
-
-* link://windscribe.com/[Windscribe VPN, {browser-window--new}],
-  Offers AES-256 encryption and secure browsing features.
-* link://protonvpn.com/[Proton VPN, {browser-window--new}],
-  Focuses on privacy and offers secure OpenVPN connections. ProtonVPN
-  offers a usable *free* plan and *premium* plans for more options
-  as well.
-* link://tunnelbear.com/[TunnelBear VPN, {browser-window--new}],
-  Provides a user-friendly interface and unlimited data
-  for free users.
-
-[role="mt-4"]
-.Build-in VPN
-[TIP]
-=====
-Some computer *security applications* like link://avast.com/[Avast, {browser-window--new}]
-provide for *paid plans* a VPN solution *build-in*. You should check if a VPN
-client is already availabe for the security application you'e using.
-=====
-
-I've tested the VPN client _TunnelBear VPN_ on Windows with success. The
-limitation I found is the *amount* of *data* transferred over the VPN gateway.
-The limit is *2GB* for the *free* version, but should be enough for testing
-Google Gemini.
-
-[role="mt-4"]
-=== Setting up TunnelBear VPN
-
-Setting up TunnelBear VPN is a simple three step procedure. First, subscribe
-at link://tunnelbear.com/[TunnelBear VPN, {browser-window--new}] and install
-the product:
-
-.Subscribe at TunnelBear VPN
-lightbox::tunnelbear-subscribe[1280, {data-image-tunnelbear--subscribe}, role="mt-4 mb-4"]
-
-.Verify your email address
-lightbox:::tunnelbear-verify-email-address[1280, {data-image-tunnelbear--verify-email-address}, role="mt-4 mb-4"]
-
-.Set the VPN Gateway
-lightbox::tunnelbear-set-vpn-gateway[1280, {data-image-tunnelbear--set-vpn-gateway}, role="mt-4 mb-4"]
-
-If _TunnelBear VPN_ is setting up and running successfully using a *supported*
-region for the *VPN Gateway*, you can start testing Google Gemini out of any
-region you are located.
-
 
 [role="mt-5"]
 == Ask the Bot
 
-The _Google Gemini_ platform provides a *ChatBot* system using a significant
+The Google Gemini platform provides a ChatBot system using a significant
 advancement in the field of LLMs. The ability to process information from
 multiple sources, text and images, and its flexible architecture makes it
 a powerful tool for many applications and websites.
@@ -293,7 +241,7 @@ generation.
   <div class="modal-dialog modal-side modal-top-right modal-notify modal-danger" role="document">
     <!-- Content -->
     <div class="modal-content">
-      <!-- Header -->
+      <!--Header-->
       <div class="modal-header">
         <p class="lead">Processing Error</p>
         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
@@ -304,7 +252,7 @@ generation.
       <div class="modal-body">
         <div class="text-center">
           <i class="mdi mdi-4x mdi-bug md-red mb-1"></i>
-          <p id="modal_error">Error text placeholder</p>
+          <p>User location is not supported.</p>
         </div>
       </div>
       <!-- Footer -->
@@ -333,15 +281,12 @@ generation.
   $("#spinner").hide();
   $("#output").hide();
 
-  const API_KEY         = "AIzaSyAtiLEW4oQiOJtGiPsdsGwMHi8O__7cqjU";
-  const genAI           = new GoogleGenerativeAI(API_KEY);
-  var genAIError        = false;
-  var genAIErrorType    = '';
-  var response          = '';
-  const httpError400    = 'User location is not supported.';
-  const httpError500    = 'API services currently unavailable';
-  var modal_error_text  = '';
-  const defaultPrompt   = 'Please provide tips on how using the prompt for a chat bot';
+  const API_KEY       = "AIzaSyAtiLEW4oQiOJtGiPsdsGwMHi8O__7cqjU";
+  const genAI         = new GoogleGenerativeAI(API_KEY);
+  var genAIError      = false;
+  var response        = '';
+  const httpError400  ='User location is not supported for the API use.';
+  const defaultPrompt = 'Please provide tips on how using the prompt for a chat bot';
 
   var result;
 
@@ -362,19 +307,12 @@ generation.
     try {
         result = await model.generateContent(prompt);
     } catch (e) {
-      var error = e.toString();
-        if (error.includes("400")) {
-          genAIErrorType = 400;
-          modal_error_text = httpError400;
-          console.warn(httpError400);
-        } else if (error.includes("50")) {
-          genAIErrorType = 500;
-          modal_error_text = httpError500;
-          console.warn(httpError500);
-        }
+        console.warn(httpError400);
         genAIError = true;
     } finally {
         if (!genAIError) {
+          // console.log("result: ", result);
+
           try {
               response = await result.response;
           } catch (e) {
@@ -382,6 +320,7 @@ generation.
           } finally {
             // console.log("response: ", response);
             const text = response.text();
+            // console.log(text);
 
             if (text.length > 0) {
                document.getElementById('md_result').innerHTML = marked.parse(text);
@@ -390,10 +329,9 @@ generation.
              }
           }
         } else {
-          $("#modal_error").html(modal_error_text);
-           console.warn('Processing failed.');
-           $('#sideModalTRSuccessDemo').modal('show');
-           $("#spinner").hide();
+         console.warn('Processing failed.');
+         $('#sideModalTRSuccessDemo').modal('show');
+         $("#spinner").hide();
        }
     }
   } //END async run()
