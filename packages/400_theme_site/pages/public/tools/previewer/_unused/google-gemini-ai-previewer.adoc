@@ -99,6 +99,13 @@ However, this may violate EU data protection laws that govern companies
 prohibit the use of personal data without the express consent of the to
 collect user information.
 
+[role="mt-3 mb-4"]
+[NOTE]
+====
+Google is working on making Gemini compliant with GDPR for the EU region.
+However, it is not clear when this will happen.
+====
+
 Gemini requires collecting personal information, such as IP addresses and
 device identifiers, which are only collected with the user's consent in the
 EU. The lack of support for Google Gemini in the EU region has essentially
@@ -274,7 +281,7 @@ generation.
     <span role="status">Generate</span>
   </button>
 
-  <button id="reset" type="button" class="btn btn-warning btn-raised mt-1">Reset</button>
+  <button id="reset" type="button" class="btn btn-warning mt-1">Reset</button>
 </div>
 
 <div id="output" class="mt-5 mb-7">
@@ -282,12 +289,27 @@ generation.
   <div id="md_result"></div>
 </div>
 
-<!-- Side Modal Top Right Success -->
-<div id="sideModalTRSuccessDemo"
+<!-- Consent Modal -->
+<div id="consentModal" class="modal">
+  <div class="modal-info-content">
+    <p>This page requires to detect the current location for using Google Gemini.</p>
+    <button id="infoConsentButtonAccept" class="btn btn-primary" type="button" data-bs-dismiss="modal" aria-label="Accept">
+      <i class="mdi mdi-check mdi-1x mr-2"></i>
+      Yes, I agree
+    </button>
+    <button id="infoConsentButtonDecline" class="btn btn-warning" type="button" data-bs-dismiss="modal" aria-label="Decline">
+      <i class="mdi mdi-close mdi-1x mr-2"></i>
+      No, I don't agree
+    </button>
+  </div>
+</div>
+
+<!-- Modal Top Right -->
+<div id="errorModal"
   class="modal fade right"
   tabindex="-1"
   role="dialog"
-  aria-labelledby="myModalLabel" aria-hidden="true"
+  aria-labelledby="errorModalLabel" aria-hidden="true"
   data-keyboard="false"
   data-backdrop="static">
   <div class="modal-dialog modal-side modal-top-right modal-notify modal-danger" role="document">
@@ -318,8 +340,47 @@ generation.
 </div>
 <!-- END Side Modal Top Right Success -->
 
-
+<script src="//unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="//unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 <script src="//cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<style>
+  /* Styles for the modal */
+  .modal-info {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  .modal-info-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+
+  .modal-info-content p {
+    margin-bottom: 20px;
+  }
+
+  .modal-info-content button {
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .modal-info-content button:hover {
+    background-color: #E0E0E0;
+  }
+</style>
 
 <script type="importmap">
   {
@@ -330,6 +391,80 @@ generation.
 </script>
 
 <script type="module">
+
+  var consentModal = document.getElementById("consentModal");
+
+   // Get the button that opens the modal
+   var infoConsentButtonAccept = document.getElementById("infoConsentButtonAccept");
+
+   // When the page loads, ask for consent
+   window.onload = function() {
+     // Display the modal
+     consentModal.style.display = "block";
+   };
+
+   // When the user clicks on the consent button, close the modal
+   // and collect the geolocation
+   infoConsentButtonAccept.onclick = function() {
+     // Hide the modal
+     consentModal.style.display = "none";
+     if (navigator.geolocation) {
+       navigator.geolocation.getCurrentPosition(showPosition);
+     } else {
+       alert("Geolocation is not supported by the browser.");
+     }
+   };
+    // When the user clicks on the deline button, close the modal and reditec to home page
+   infoConsentButtonDecline.onclick = function() {
+     // Hide the modal
+     consentModal.style.display = "none";
+     document.location.href="/";
+   };
+
+   // log the geolocation position
+   function showPosition(position) {
+     var latitude = position.coords.latitude;
+     var longitude = position.coords.longitude;
+     console.debug("Detected geocode (lat:long): " + latitude + ':' + longitude);
+   }
+
+  function locateCountry(position) {
+    const latitude  = position.coords.latitude;
+    const longitude = position.coords.longitude;
+
+    // Reverse geocode to find the country
+    fetch(`//nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`)
+    .then(response => response.json())
+    .then(data => {
+      const country = '<b>' + data.address.country;
+      const city    = data.address.city;
+      $("#modal_error").html(modal_error_text + '<br>' + country);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  }
+
+  function geoFindMe() {
+
+    function success(position) {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+
+      locateCountry(position);
+    }
+
+    function error() {
+      console.warn("Unable to retrieve the location");
+    }
+
+    if (!navigator.geolocation) {
+      console.warn("Geolocation API is not supported by the browser");
+    } else {
+      navigator.geolocation.getCurrentPosition(success, error);
+    }
+  }
+
   $("#spinner").hide();
   $("#output").hide();
 
@@ -338,11 +473,10 @@ generation.
   var genAIError        = false;
   var genAIErrorType    = '';
   var response          = '';
-  const httpError400    = 'User location is not supported.';
-  const httpError500    = 'API services currently unavailable';
+  const httpError400    = 'Location is not supported: ';
+  const httpError500    = 'Service currently not available: ';
   var modal_error_text  = '';
   const defaultPrompt   = 'Please provide tips on how using the prompt for a chat bot';
-
   var result;
 
   import { GoogleGenerativeAI } from "//esm.run/@google/generative-ai";
@@ -380,9 +514,7 @@ generation.
           } catch (e) {
               console.warn(e);
           } finally {
-            // console.log("response: ", response);
             const text = response.text();
-
             if (text.length > 0) {
                document.getElementById('md_result').innerHTML = marked.parse(text);
                $("#spinner").hide();
@@ -390,9 +522,9 @@ generation.
              }
           }
         } else {
-          $("#modal_error").html(modal_error_text);
+           geoFindMe();
            console.warn('Processing failed.');
-           $('#sideModalTRSuccessDemo').modal('show');
+           $('#errorModal').modal('show');
            $("#spinner").hide();
        }
     }
@@ -405,7 +537,7 @@ generation.
   if (j1.getState() === 'finished' && pageVisible) {
     const sendButton = document.getElementById('send');
     sendButton.addEventListener('click', (event) => {
-      // Prevent default form submission
+      // Prevent default actions
       event.preventDefault();
       $("#spinner").show();
       run();
@@ -413,7 +545,7 @@ generation.
 
     const resetButton = document.getElementById('reset');
     resetButton.addEventListener('click', (event) => {
-      // Prevent default form submission
+      // Prevent default actions
       event.preventDefault();
       document.getElementById("prompt").value = "";
       document.getElementById("output").value = "";

@@ -255,7 +255,7 @@ var Events = {
           }
 
           var safariDisabled = (browsersDisabled.includes('Safari')) ? true : false;
-          if (safariDisabled && isSafari) {
+          if (safariDisabled && !isChrome && isSafari) {
             console.log('module speak2me is disabled for the Safari browser');
             logger.warn('\n' + 'module speak2me is disabled for the Safari browser');
             $('#quickLinksSpeakButton').hide();
