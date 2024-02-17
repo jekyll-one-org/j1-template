@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/assets/themes/j1/core/css/themes/unolight/bootstrap.css">
+    <link rel="stylesheet" href="/assets/themes/j1/core/css/vendor.css">
+
+    <script src="/assets/themes/j1/modules/jquery/js/jquery.js"></script>
+    <script src="/assets/themes/j1/modules/popper/js/popper.js"></script>
+    <script src="/assets/themes/j1/modules/iframeResizer/js/client/iframeResizer.contentWindow.js"></script>
+  </head>
+
+  <body>
+    <a href="../iframer_documents/my.content.html">Back to page</a>
+    <h2>iFrame TextArea Example</h2>
+    <p>
+      Resize the textarea element below.
+    </p>
+
+    <textarea id="textArea">Resize me</textarea>
+
+    <script>
+      function store() {
+        this.x = this.offsetWidth
+        this.y = this.offsetHeight
+      }
+
+      $('textarea')
+        .each(store)
+        .on('mouseover mouseout', function() {
+          if (this.offsetWidth !== this.x || this.offsetHeight !== this.y) {
+            if ('parentIFrame' in window) parentIFrame.size()
+            store.call(this)
+          }
+        })
+    </script>
+  </body>
+</html>

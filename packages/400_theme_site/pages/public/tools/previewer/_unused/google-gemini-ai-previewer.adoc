@@ -3,7 +3,7 @@ title:                                  Google Gemini
 title_extention:                        Preview the Chatbot
 tagline:                                Chatbot Preview
 
-date:                                   2024-02-14
+date:                                   2024-02-17
 #last_modified:                         2024-01-01
 
 description: >
@@ -292,12 +292,20 @@ generation.
 <!-- Consent Modal -->
 <div id="consentModal" class="modal">
   <div class="modal-info-content">
-    <p>This page requires to detect the current location for using Google Gemini.</p>
-    <button id="infoConsentButtonAccept" class="btn btn-primary" type="button" data-bs-dismiss="modal" aria-label="Accept">
+    <p>
+      This page requires to detect your current location for using Google
+      Gemini.
+      <br><br>
+      If a connection to Google Gemini is established, personal information
+      is collected. Cookies and other tracking technologies are used and
+      transferred to the service provider for processing.
+    </p>
+
+    <button id="consentButtonAccept" class="btn btn-primary" type="button" data-bs-dismiss="modal" aria-label="Accept">
       <i class="mdi mdi-check mdi-1x mr-2"></i>
       Yes, I agree
     </button>
-    <button id="infoConsentButtonDecline" class="btn btn-warning" type="button" data-bs-dismiss="modal" aria-label="Decline">
+    <button id="consentButtonDecline" class="btn btn-warning" type="button" data-bs-dismiss="modal" aria-label="Decline">
       <i class="mdi mdi-close mdi-1x mr-2"></i>
       No, I don't agree
     </button>
@@ -394,8 +402,9 @@ generation.
 
   var consentModal = document.getElementById("consentModal");
 
-   // Get the button that opens the modal
-   var infoConsentButtonAccept = document.getElementById("infoConsentButtonAccept");
+   // Get the modal buttons
+   var consentButtonAccept  = document.getElementById("consentButtonAccept");
+   var consentButtonDecline = document.getElementById("consentButtonDecline");
 
    // When the page loads, ask for consent
    window.onload = function() {
@@ -405,7 +414,7 @@ generation.
 
    // When the user clicks on the consent button, close the modal
    // and collect the geolocation
-   infoConsentButtonAccept.onclick = function() {
+   consentButtonAccept.onclick = function() {
      // Hide the modal
      consentModal.style.display = "none";
      if (navigator.geolocation) {
@@ -415,7 +424,7 @@ generation.
      }
    };
     // When the user clicks on the deline button, close the modal and reditec to home page
-   infoConsentButtonDecline.onclick = function() {
+   consentButtonDecline.onclick = function() {
      // Hide the modal
      consentModal.style.display = "none";
      document.location.href="/";
