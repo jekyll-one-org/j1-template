@@ -1,0 +1,53 @@
+/*
+ # -----------------------------------------------------------------------------
+ #  ~/modules/gemini/css/theme/uno.css
+ #  J1 Theme Uni (default)
+ #
+ #  Product/Info:
+ #  https://jekyll.one
+ #
+ #  Copyright (C) 2023, 2024 Juergen Adams
+ #
+ #  J1 Template is licensed under the MIT License.
+ #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
+
+/* J1 Modules
+   ----------------------------------------------------------------------------- */
+
+/* Styles for the modal */
+.modal-info {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-info-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.modal-info-content p {
+  margin-bottom: 20px;
+}
+
+.modal-info-content button {
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.modal-info-content button:hover {
+  background-color: #E0E0E0;
+}

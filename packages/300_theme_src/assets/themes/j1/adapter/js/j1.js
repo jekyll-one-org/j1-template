@@ -1690,7 +1690,7 @@ var j1 = (function (options) {
             j1.setXhrDomState(id, 'pending');
 
             logText = '\n' + 'data loaded successfully on id: ' +id;
-            logger.info(logText);
+            logger.debug(logText);
             state = true;
           }
           if ( statusTxt === 'error' ) {
@@ -1747,7 +1747,7 @@ var j1 = (function (options) {
         function mutationHandler (mutationRecords) {
           mutationRecords.forEach ( function (mutation) {
             if (mutation.addedNodes.length) {
-              logger.info('\n' + 'XHR data loaded in the DOM: ' + id);
+              logger.debug('\n' + 'XHR data loaded in the DOM: ' + id);
               j1.setXhrDomState(id, 'success');
             }
           });
