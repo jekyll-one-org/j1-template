@@ -1,9 +1,9 @@
 ---
-title:                                  Google Gemini
-title_extention:                        Preview the Chatbot
-tagline:                                Chatbot Preview
+title:                                  Chatbot
+title_extention:                        Preview the Gemini Chatbot
+tagline:                                Preview
 
-date:                                   2024-02-17
+date:                                   2024-02-27
 #last_modified:                         2024-01-01
 
 description: >
@@ -22,18 +22,17 @@ categories:                             [ Previewer ]
 tags:                                   [ Module, Gemini, ChatBot ]
 
 image:
-  path:                                 /assets/images/modules/attics/1920x1280/markus-spiske.jpg
+  path:                                 /assets/images/modules/attics/1920x1280/build-with-gemini.jpg
   width:                                1920
   height:                               1280
 
-compress:                               false
 regenerate:                             false
 personalization:                        true
 permalink:                              /pages/public/tools/previewer/google-gemini-ai/
 
 resources:                              [
                                           animate,
-                                          clipboard, lightbox, rouge
+                                          clipboard, gemini, lightbox, rouge
                                         ]
 resource_options:
   - attic:
@@ -42,12 +41,8 @@ resource_options:
         contrast:                       1
         brightness:                     0.8
       slides:
-        - url:                          /assets/images/modules/attics/1920x1280/markus-spiske.jpg
-          alt:                          Photo by Markus Spiske on Unsplash
-          badge:
-            type:                       unsplash
-            author:                     Markus Spiske
-            href:                       //unsplash.com/@markusspiske
+        - url:                          /assets/images/modules/attics/1920x1280/build-with-gemini.jpg
+          alt:                          Build with Gemini
 ---
 
 // Page Initializer
@@ -85,6 +80,38 @@ to a single request by asking a Bot.
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 [role="mt-5"]
+== Technology (February 2024)
+
+Like OpenAI's competing product, ChatGPT, Google Gemini can answer questions
+conversationally. Gemini allows multimodal work, which means you can enter
+various media, such as voice or photos, and have different formats, such as
+code or language output. However, Gemini is currently unlike ChatGPT, unable
+to *create images*.
+
+The chatbot was initially developed based on the Large Language Model LaMDA
+before using the better model PaLM 2 from May 2023 and the newly developed
+*LLM Gemini* of the same name since December 2023. The Gemini-based version
+of the Chatbot system is available in over 230 countries and supports
+currently 40 languages.
+
+Unlike ChatGPT 4, Google Gemini is *free* to use, but a paid version is also
+available called _Gemini Advanced_. However, Google itself points out that
+the tool still has weaknesses. At the beginning of the release, Google
+described _Bard_ as an experiment, but with the rebranding as Gemini, it is
+not longer in a experimental state.
+
+[role="mt-4"]
+=== Official Gemini Chatbot App
+
+The *official* Chatbot version from Google Gemini is available at
+link://gemini.google.com/app[Google Gemini App, {browser-window--new}]
+including the *EU* region. Note that for using the Chatbot App, it is required
+to be logged in at Google - using your GMail account for example. Find more on
+the *privacy protection* settings using at the
+link:https://support.google.com/gemini/answer/13594961?visit_id=638438812942129559-1947527328&p=privacy_help&rd=1#config_settings[Gemini Apps Privacy Hub, {browser-window--new}].
+
+
+[role="mt-5"]
 == Supported regions
 
 Following its initial launch in the United States, Google's next-generation
@@ -102,8 +129,9 @@ collect user information.
 [role="mt-3 mb-4"]
 [NOTE]
 ====
-Google is working on making Gemini compliant with GDPR for the EU region.
-However, it is not clear when this will happen.
+Google is working on making the App's and API's on the Gemini platform
+compliant with *GDPR* for the EU region. However, it is not clear when this
+will happen.
 ====
 
 Gemini requires collecting personal information, such as IP addresses and
@@ -113,7 +141,7 @@ the following reasons:
 
 Privacy Policys::
 Google Gemini is a tool that enables display ad targeting across multiple
-platforms, which requires collecting and sharing data about users'
+platforms, which requires collecting and sharing data about user's
 online activities. The EU has strict data protection regulations that make
 it difficult for companies to process data and collect and share user
 information. These provisions make it difficult for Google to operate
@@ -129,34 +157,34 @@ EU conflict with these provisions.
 [role="mt-5"]
 == Use out of supported regions
 
-With the help of a virtual private network (VPN), you can use Google Gemini,
-which is also used in regions that are not currently supported. VPNs hide
-the user's actual IP address. Instead, a new IP address that comes from a
-selectable region, for example, the USA, will be used.
+With the help of a virtual private network (VPN), you can use webpages using
+the Google *Gemini API* in regions that are currently *not supported*.
+VPN's hide the user's actual IP address. Instead, a new IP address that comes
+from a selectable region, for example, the USA, will be used.
 
-A virtual private network (VPN) is a private network that is built and
-operated over a public network such as the Internet. VPNs allow users to
-establish secure connections to other networks over the Internet. They can
-be used to provide access to geographically restricted websites and services,
-improve privacy and security, and optimize network performance.
+A virtual private network is a private network that is built and operated over
+a public network such as the Internet. VPN's allow users to establish secure
+connections to other networks over the Internet. They can be used to provide
+access to geographically restricted websites and services, improve privacy,
+and security.
 
-Common features of VPNs:
+Common features of VPN's:
 
 Traffic Encryption::
-VPNs encrypt all traffic sent and received over the network. Encryption
+VPN's encrypt all traffic sent and received over the network. Encryption
 prevents third parties, such as Internet service providers or hackers,
 from accessing and reading the data. Encryption, therefore, ensures that
 the privacy of users is protected.
 
 Hiding the IP address::
-VPNs hide the user's actual IP address. Instead, a new IP address belonging
-to the VPN provider is used. Third parties can no longer determine the users'
-location or track them based on their IP address., which protects their
+VPN's hide the user's actual IP address. Instead, a new IP address belonging
+to the VPN provider is used. Third parties can no longer determine the user's
+location or track them based on their IP address, which protects their
 privacy.
 
 Access restricted content::
-Many VPNs allow users to access blocked content in their country or region
-because VPNs hide the user's true IP address, allowing them to access content
+Many VPN's allow users to access blocked content in their country or region
+because a VPN hide the user's true IP address, allowing them to access content
 unavailable in their country or region.
 
 [role="mt-4"]
@@ -231,21 +259,24 @@ a powerful tool for many applications and websites.
 [role="mt-4"]
 === Examples for Prompts
 
-Find below some examples what can be used for a prompt.
+Find below some examples of what can be used for a prompt. KI-based chatbots
+can do much more than a complex internet search. Let the bot write a
+*bedtime story*, do translations, and help summarize the larger text.
+Furthermore, a bot can support you in evaluations or requests for guidance.
 
-.Place
+.Places
 [source, text, role="mb-4"]
 ----
 What ist the Fifth Avenue in New York City?
 ----
 
-.Technical explanation
+.Technical explanation I
 [source, text, role="mb-4"]
 ----
 What is the JekyllOne Template and what types of websites are supported?
 ----
 
-.Google Gemini support
+.Technical explanation II
 [source, text, role="mb-4"]
 ----
 Why is Google Gemini currently not supported for the EU region?
@@ -254,317 +285,143 @@ Why is Google Gemini currently not supported for the EU region?
 .Storys
 [source, text, role="mb-4"]
 ----
-Tell a wonderful story for your child every single night.
-Generate a bedtime story for the chield bease on child's favourite things, country, and age.
-Give some advice for kids to be good and do good for the sociaty.`
-End of the story motivate them to belive themselefs.
+Write a modern bedtime story called "The magical Dance".
+
+Use the style of writing like Astrid Lindgren.
+Told to a child boy Henry at age 6, living in the USA, and loves dancing.
+Give the kid some advice on how to be good and do good for society.
+The end of the story should motivate the child to believe in themselves.
 ----
 
-Use the copy function of the examples given to copy the function from the
-examples above to test Google Gemini. Copy such a given *text* and paste it
-into the input field *prompt* for a generation.
+.Translations I
+[source, text, role="mb-4"]
+----
+Translate the text into English language.
+
+Text: Heutzutage erfordert die Suche im Internet normalerweise mehrere
+Suchmaschinenanfragen, um korrekte Ergebnisse zu erhalten. Moderne KI-basierte
+Chatbots können eine Internetsuche auf eine einzige Anfrage reduzieren.
+----
+
+.Translations II
+[source, text, role="mb-4"]
+----
+Write a modern bedtime story called "The magical Dance".
+
+Use the style of writing like Astrid Lindgren.
+Told to a child boy Henry at age 6, living in the USA, and loves dancing.
+Give the kid some advice on how to be good and do good for society.
+The end of the story should motivate the child to believe in themselves.
+
+Finally, translate the story into German and Italian.
+----
+
+.Summarizing I
+[source, text, role="mb-4"]
+----
+Summarize this text as bullets points of key information.
+
+Text: A quantum computer exploits quantum mechanical phenomena to perform
+calculations exponentially faster than any modern traditional computer. At
+very tiny scales, physical matter acts as both particles and as waves, and
+quantum computing uses specialized hardware to leverage this behavior.
+----
+
+.Summarizing II
+[source, text, role="mb-4"]
+----
+Summarize this text in two sentences.
+
+Text: A quantum computer exploits quantum mechanical phenomena to perform
+calculations exponentially faster than any modern traditional computer. At
+very tiny scales, physical matter acts as both particles and as waves, and
+quantum computing uses specialized hardware to leverage this behavior.
+
+The operating principles of quantum devices is beyond the scope of classical
+physics. When deployed at scale, quantum computers could be used in a wide
+variety of applications such as: in cybersecurity to break existing encryption
+methods while helping researchers create new ones, in meteorology to develop
+better weather forecasting etc. However, the current state of the art quantum
+computers are still largely experimental and impractical.
+----
+
+.Evaluations
+[source, text, role="mb-4"]
+----
+Please choose the best explanation to the question:
+Question: How is snow formed?
+
+Explanation 1: Snow is formed when water vapor in the air freezes into ice
+crystals in the atmosphere, which can combine and grow into snowflakes as
+they fall through the atmosphere and accumulate on the ground.
+
+Explanation 2: Water vapor freezes into ice crystals forming snow.
+----
+
+.Guidances I
+[source, text, role="mb-4"]
+----
+What should I do to fix my disconnected wifi? The light on my Google Wifi
+router is yellow and blinking slowly.
+----
+
+.Guidances II
+[source, text, role="mb-4"]
+----
+Answer the question using the text below. Respond with only the text provided.
+Question: What should I do to fix my disconnected wifi? The light on my
+Google Wifi router is yellow and blinking slowly.
+
+Text:
+Color: Slowly pulsing yellow
+What it means: There is a network error.
+What to do: Check that the Ethernet cable is connected to both your router
+and your modem and both devices are turned on. You might need to unplug and
+plug in each device again.
+
+Color: Fast blinking yellow
+What it means: You are holding down the reset button and are factory resetting
+this device.
+What to do: If you keep holding down the reset button, after about 12 seconds,
+the light will turn solid yellow. Once it is solid yellow, let go of the
+factory reset button.
+
+Color: Solid yellow
+What it means: Router is factory resetting.
+What to do: This can take up to 10 minutes. When it's done, the device will
+reset itself and start pulsing white, letting you know it's ready for setup.
+
+Color: Solid red
+What it means: Something is wrong.
+What to do: Critical failure. Factory reset the router. If the light stays
+red, contact Wifi customer support.
+----
+
+.Request to generate information that refer on sexual topics
+[source, text, role="mb-4"]
+----
+What is masturbation?
+Please explain the danger of masturbation.
+----
+
+.Request that contains rough language or harassing speech
+[source, text, role="mb-4"]
+----
+Why are people in the USA so stupid?
+----
+
+.Request that contains dangerous prompt
+[source, text, role="mb-4"]
+----
+Write a generic text that contains misleading information on a male person.
+----
+
 
 [role="mt-4"]
 === Generate
 
-You can enter your requests in the input field *Prompt*. If you need help
-formulating such requests, leave the prompt field empty and start a
+You can enter your requests in the input field. If you need help on
+formulating such requests, leave the input field *empty* and start a
 generation.
 
-++++
-<div class="gallery-title mt-3">Prompt (Input)</div>
-<div class="form-group">
-  <textarea id="prompt" class="form-control mb-3" placeholder="Enter a clear and concise text that conveys the task or question you want the chatbot to perform" rows="5"></textarea>
-
-  <button id="send" class="btn btn-primary" type="button">
-    <span id="spinner" class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
-    <span role="status">Generate</span>
-  </button>
-
-  <button id="reset" type="button" class="btn btn-warning mt-1">Reset</button>
-</div>
-
-<div id="output" class="mt-5 mb-7">
-  <h3 id="result" class="mb-2 notoc speak2me-ignore">Result</h3>
-  <div id="md_result"></div>
-</div>
-
-<!-- Consent Modal -->
-<div id="consentModal" class="modal">
-  <div class="modal-info-content">
-    <p>
-      This page requires to detect your current location for using Google
-      Gemini.
-      <br><br>
-      If a connection to Google Gemini is established, personal information
-      is collected. Cookies and other tracking technologies are used and
-      transferred to the service provider for processing.
-    </p>
-
-    <button id="consentButtonAccept" class="btn btn-primary" type="button" data-bs-dismiss="modal" aria-label="Accept">
-      <i class="mdi mdi-check mdi-1x mr-2"></i>
-      Yes, I agree
-    </button>
-    <button id="consentButtonDecline" class="btn btn-warning" type="button" data-bs-dismiss="modal" aria-label="Decline">
-      <i class="mdi mdi-close mdi-1x mr-2"></i>
-      No, I don't agree
-    </button>
-  </div>
-</div>
-
-<!-- Modal Top Right -->
-<div id="errorModal"
-  class="modal fade right"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="errorModalLabel" aria-hidden="true"
-  data-keyboard="false"
-  data-backdrop="static">
-  <div class="modal-dialog modal-side modal-top-right modal-notify modal-danger" role="document">
-    <!-- Content -->
-    <div class="modal-content">
-      <!-- Header -->
-      <div class="modal-header">
-        <p class="lead">Processing Error</p>
-        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-          <i class="mdi mdi-close mdi-dark mdi-48px"></i>
-        </button>
-      </div>
-      <!-- Body -->
-      <div class="modal-body">
-        <div class="text-center">
-          <i class="mdi mdi-4x mdi-bug md-red mb-1"></i>
-          <p id="modal_error">Error text placeholder</p>
-        </div>
-      </div>
-      <!-- Footer -->
-      <!-- div class="modal-footer justify-content-center">
-        <a type="button" class="btn btn-primary mr-2">Yes, please</a>
-        <a type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">No, thanks</a>
-      </div -->
-    </div>
-    <!-- END Content -->
-  </div>
-</div>
-<!-- END Side Modal Top Right Success -->
-
-<script src="//unpkg.com/leaflet/dist/leaflet.js"></script>
-<script src="//unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
-<script src="//cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
-<style>
-  /* Styles for the modal */
-  .modal-info {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-  }
-
-  .modal-info-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-  }
-
-  .modal-info-content p {
-    margin-bottom: 20px;
-  }
-
-  .modal-info-content button {
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-  }
-
-  .modal-info-content button:hover {
-    background-color: #E0E0E0;
-  }
-</style>
-
-<script type="importmap">
-  {
-    "imports": {
-      "@google/generative-ai": "//esm.run/@google/generative-ai"
-    }
-  }
-</script>
-
-<script type="module">
-
-  var consentModal = document.getElementById("consentModal");
-
-   // Get the modal buttons
-   var consentButtonAccept  = document.getElementById("consentButtonAccept");
-   var consentButtonDecline = document.getElementById("consentButtonDecline");
-
-   // When the page loads, ask for consent
-   window.onload = function() {
-     // Display the modal
-     consentModal.style.display = "block";
-   };
-
-   // When the user clicks on the consent button, close the modal
-   // and collect the geolocation
-   consentButtonAccept.onclick = function() {
-     // Hide the modal
-     consentModal.style.display = "none";
-     if (navigator.geolocation) {
-       navigator.geolocation.getCurrentPosition(showPosition);
-     } else {
-       alert("Geolocation is not supported by the browser.");
-     }
-   };
-    // When the user clicks on the deline button, close the modal and reditec to home page
-   consentButtonDecline.onclick = function() {
-     // Hide the modal
-     consentModal.style.display = "none";
-     document.location.href="/";
-   };
-
-   // log the geolocation position
-   function showPosition(position) {
-     var latitude = position.coords.latitude;
-     var longitude = position.coords.longitude;
-     console.debug("Detected geocode (lat:long): " + latitude + ':' + longitude);
-   }
-
-  function locateCountry(position) {
-    const latitude  = position.coords.latitude;
-    const longitude = position.coords.longitude;
-
-    // Reverse geocode to find the country
-    fetch(`//nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`)
-    .then(response => response.json())
-    .then(data => {
-      const country = '<b>' + data.address.country;
-      const city    = data.address.city;
-      $("#modal_error").html(modal_error_text + '<br>' + country);
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-  }
-
-  function geoFindMe() {
-
-    function success(position) {
-      const latitude = position.coords.latitude;
-      const longitude = position.coords.longitude;
-
-      locateCountry(position);
-    }
-
-    function error() {
-      console.warn("Unable to retrieve the location");
-    }
-
-    if (!navigator.geolocation) {
-      console.warn("Geolocation API is not supported by the browser");
-    } else {
-      navigator.geolocation.getCurrentPosition(success, error);
-    }
-  }
-
-  $("#spinner").hide();
-  $("#output").hide();
-
-  const API_KEY         = "AIzaSyAtiLEW4oQiOJtGiPsdsGwMHi8O__7cqjU";
-  const genAI           = new GoogleGenerativeAI(API_KEY);
-  var genAIError        = false;
-  var genAIErrorType    = '';
-  var response          = '';
-  const httpError400    = 'Location is not supported: ';
-  const httpError500    = 'Service currently not available: ';
-  var modal_error_text  = '';
-  const defaultPrompt   = 'Please provide tips on how using the prompt for a chat bot';
-  var result;
-
-  import { GoogleGenerativeAI } from "//esm.run/@google/generative-ai";
-
-  async function run() {
-    let input = document.getElementById("name");
-
-    // For text-only input, use the gemini-pro model
-    const model = genAI.getGenerativeModel({ model: "gemini-pro"});
-
-    var prompt = $('textarea#prompt').val();
-    if (prompt.length == 0) {
-      prompt = defaultPrompt;
-      document.getElementById('prompt').value = prompt;
-    }
-
-    try {
-        result = await model.generateContent(prompt);
-    } catch (e) {
-      var error = e.toString();
-        if (error.includes("400")) {
-          genAIErrorType = 400;
-          modal_error_text = httpError400;
-          console.warn(httpError400);
-        } else if (error.includes("50")) {
-          genAIErrorType = 500;
-          modal_error_text = httpError500;
-          console.warn(httpError500);
-        }
-        genAIError = true;
-    } finally {
-        if (!genAIError) {
-          try {
-              response = await result.response;
-          } catch (e) {
-              console.warn(e);
-          } finally {
-            const text = response.text();
-            if (text.length > 0) {
-               document.getElementById('md_result').innerHTML = marked.parse(text);
-               $("#spinner").hide();
-               $("#output").show();
-             }
-          }
-        } else {
-           geoFindMe();
-           console.warn('Processing failed.');
-           $('#errorModal').modal('show');
-           $("#spinner").hide();
-       }
-    }
-  } //END async run()
-
-  var dependencies_met_page_ready = setInterval (function (options) {
-  var pageState   = $('#no_flicker').css("display");
-  var pageVisible = (pageState == 'block') ? true : false;
-
-  if (j1.getState() === 'finished' && pageVisible) {
-    const sendButton = document.getElementById('send');
-    sendButton.addEventListener('click', (event) => {
-      // Prevent default actions
-      event.preventDefault();
-      $("#spinner").show();
-      run();
-    });
-
-    const resetButton = document.getElementById('reset');
-    resetButton.addEventListener('click', (event) => {
-      // Prevent default actions
-      event.preventDefault();
-      document.getElementById("prompt").value = "";
-      document.getElementById("output").value = "";
-      $("#spinner").hide();
-      $("#output").hide();
-    });
-
-    clearInterval(dependencies_met_page_ready);
-  }
-}, 10);
-
-</script>
-++++
+gemini::gemini_ui[]
