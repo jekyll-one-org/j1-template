@@ -298,11 +298,13 @@ const httpError500  = geminiOptions.errors.http500;
             }
           } //END finally
         } else {
-           geoFindMe();
-           $("#spinner").hide();
-           setTimeout (function() {
-             $('#errorModal').modal('show');
-           }, 1000);
+          if (geminiOptions.detectGeoLocation) {
+            geoFindMe();
+          }
+          $("#spinner").hide();
+          setTimeout (function() {
+            $('#errorModal').modal('show');
+          }, 1000);
        } //END else
     } //END finally
   } //END async function runner()
@@ -317,7 +319,7 @@ const httpError500  = geminiOptions.errors.http500;
     // adapter initializer
     // -------------------------------------------------------------------------
     init: function (options) {
-      var logStartOnce      = false;
+      var logStartOnce = false;
 
       // -----------------------------------------------------------------------
       // Default module settings
@@ -333,16 +335,6 @@ const httpError500  = geminiOptions.errors.http500;
 
       // create settings object from frontmatter
       frontmatterOptions  = options != null ? $.extend({}, options) : {};
-
-      //
-      // // create settings object from module options
-      // geminiDefaults = $.extend({}, {{gemini_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      // geminiSettings = $.extend({}, {{gemini_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      // geminiOptions  = $.extend(true, {}, geminiDefaults, geminiSettings, frontmatterOptions);
-      //
-      // const defaultPrompt = geminiOptions.prompt.default;
-      // const httpError400  = geminiOptions.errors.http400;
-      // const httpError500  = geminiOptions.errors.http500;
 
       _this  = j1.adapter.gemini;
       logger = log4javascript.getLogger('j1.adapter.gemini');

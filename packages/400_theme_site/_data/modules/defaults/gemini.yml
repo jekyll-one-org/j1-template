@@ -117,7 +117,7 @@ defaults:
   #
   enabled:                              false
 
-  detectGeoLocation:                    true
+  detectGeoLocation:                    false
 
   prompt:
     title:                              Your request
@@ -145,6 +145,7 @@ defaults:
   # Gemini API options
   # ----------------------------------------------------------------------------
   apiKey:                               <your-api-key>
+
   responseLengthMin:                    10
   enableCandidateFeedback:              true
 

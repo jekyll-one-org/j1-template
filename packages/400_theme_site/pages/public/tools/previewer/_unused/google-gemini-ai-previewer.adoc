@@ -407,7 +407,7 @@ Please explain the danger of masturbation.
 .Request that contains rough language or harassing speech
 [source, text, role="mb-4"]
 ----
-Why are people in the USA so stupid?
+Why are people in the USA so fat?
 ----
 
 .Request that contains dangerous prompt
