@@ -190,10 +190,12 @@ const httpError500  = geminiOptions.errors.http500;
         if (error.includes("400")) {
           genAIErrorType = 400;
           modal_error_text = httpError400;
+          $("#modal_error").html(modal_error_text);
           logger.warn('\n' + 'Location is not supported');
         } else if (error.includes("50")) {
           genAIErrorType = 500;
           modal_error_text = httpError500;
+          $("#modal_error").html(modal_error_text);
           logger.warn('\n' + 'Service currently not available');
         }
         genAIError = true;

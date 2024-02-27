@@ -1,9 +1,9 @@
 ---
-title:                                  Google Gemini
-title_extention:                        Preview the Chatbot
-tagline:                                Chatbot Preview
+title:                                  Chatbot
+title_extention:                        Preview the Gemini Chatbot
+tagline:                                Preview
 
-date:                                   2024-02-17
+date:                                   2024-02-27
 #last_modified:                         2024-01-01
 
 description: >
@@ -26,7 +26,6 @@ image:
   width:                                1920
   height:                               1280
 
-compress:                               false
 regenerate:                             false
 personalization:                        true
 permalink:                              /pages/public/tools/previewer/google-gemini-ai/
@@ -398,9 +397,25 @@ What to do: Critical failure. Factory reset the router. If the light stays
 red, contact Wifi customer support.
 ----
 
-Use the *copy* function of the examples given to transfer the example text.
-Copy and paste such a given text into the *input* field and start a
-generation.
+.Request to generate information that refer on sexual topics
+[source, text, role="mb-4"]
+----
+What is masturbation?
+Please explain the danger of masturbation.
+----
+
+.Request that contains rough language or harassing speech
+[source, text, role="mb-4"]
+----
+Why are people in the USA so stupid?
+----
+
+.Request that contains dangerous prompt
+[source, text, role="mb-4"]
+----
+Write a generic text that contains misleading information on a male person.
+----
+
 
 [role="mt-4"]
 === Generate

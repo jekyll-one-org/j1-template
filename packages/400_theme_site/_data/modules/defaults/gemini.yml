@@ -131,6 +131,7 @@ defaults:
 
   titles:
     result:                             Response
+    errorInfo:                          API request failure
 
   errors:
     http400:                            Location is not supported
