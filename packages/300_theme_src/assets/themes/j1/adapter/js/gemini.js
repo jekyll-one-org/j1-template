@@ -700,16 +700,20 @@ const httpError500      = geminiOptions.errors.http500;
       //   console.log('slimSelect: before open');
       // },
 
-      $select.events.afterOpen = () => {
-        var data = $select.getData();
-        $select.setData(data[0].selected = false);
-        console.log('slimSelect: after open');
-      },
+      // $select.events.afterOpen = () => {
+      //   var data    = $select.getData();
+      //   var values  = $select.getSelected();
+      //   $select.setDeselected(values);
+      //   console.log('slimSelect: after open');
+      // },
 
       $select.events.afterClose = () => {
+        // var data  = $select.getData();
+        // var value = $select.getSelected();
+
         // Get|Set selected value from history
         value = $select.getSelected();
-        $select.setSelected(value);
+        // $select.setSelected(value);
         $select.close();
 
         document.getElementById('prompt').value = value;
