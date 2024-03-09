@@ -436,7 +436,7 @@ const httpError500      = geminiOptions.errors.http500;
           maxHistory             = geminiOptions.max_history;
           allowHistoryDuplicates = geminiOptions.allow_history_duplicates;
 
-          _this.init_select_events();
+          _this.slim_select_eventHandler();
 
           // Initialize the textHistory array from cookie
           if (geminiOptions.read_prompt_history_from_cookie) {
@@ -688,7 +688,7 @@ const httpError500      = geminiOptions.errors.http500;
 
     }, // END loadUI
 
-    init_select_events: function () {
+    slim_select_eventHandler: function () {
       var select  = document.getElementById(geminiOptions.prompt_history_id);
       var $select = select.slim;
       var value;
@@ -714,7 +714,7 @@ const httpError500      = geminiOptions.errors.http500;
 
         document.getElementById('prompt').value = value;
       }
-    }, //END init_select_events()
+    }, //END slim_select_eventHandler()
 
     // -------------------------------------------------------------------------
     // messageHandler()
