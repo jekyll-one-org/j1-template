@@ -441,9 +441,11 @@ j1.adapter.mmenu = (function (j1, window) {
       //  Process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
+
         //
         // Place handling of command|action here
         //
+
         logger.info('\n' + message.text);
       }
       if (message.type === 'command' && message.action === 'status') {

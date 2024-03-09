@@ -287,49 +287,6 @@ j1.adapter.cookieConsent = (function (j1, window) {
     }, // END init
 
     // -------------------------------------------------------------------------
-    // messageHandler: MessageHandler for J1 CookieConsent module
-    // Manage messages send from other J1 modules
-    // -------------------------------------------------------------------------
-    messageHandler: function (sender, message) {
-      var json_message = JSON.stringify(message, undefined, 2);
-
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
-      logger.debug(logText);
-
-      // -----------------------------------------------------------------------
-      //  Process commands|actions
-      // -----------------------------------------------------------------------
-      if (message.type === 'command' && message.action === 'module_initialized') {
-        //
-        // Place handling of command|action here
-        //
-        logger.info('\n' + message.text);
-      }
-
-      //
-      // Place handling of other command|action here
-      //
-
-      return true;
-    }, // END messageHandler
-
-    // -------------------------------------------------------------------------
-    // setState()
-    // Sets the current (processing) state of the module
-    // -------------------------------------------------------------------------
-    setState: function (stat) {
-      _this.state = stat;
-    }, // END setState
-
-    // -------------------------------------------------------------------------
-    // getState()
-    // Returns the current (processing) state of the module
-    // -------------------------------------------------------------------------
-    getState: function () {
-      return _this.state;
-    }, // END getState
-
-    // -------------------------------------------------------------------------
     // cbCookie()
     // Called (callback) by CookieConsent module after the user has
     // made his selection
@@ -452,7 +409,52 @@ j1.adapter.cookieConsent = (function (j1, window) {
           location.reload(true);
         }
       } // END if tracking_enabled
-    } // END cbCookie
+    }, // END cbCookie
+
+    // -------------------------------------------------------------------------
+    // messageHandler: MessageHandler for J1 CookieConsent module
+    // Manage messages send from other J1 modules
+    // -------------------------------------------------------------------------
+    messageHandler: function (sender, message) {
+      var json_message = JSON.stringify(message, undefined, 2);
+
+      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logger.debug(logText);
+
+      // -----------------------------------------------------------------------
+      //  Process commands|actions
+      // -----------------------------------------------------------------------
+      if (message.type === 'command' && message.action === 'module_initialized') {
+
+        //
+        // Place handling of command|action here
+        //
+
+        logger.info('\n' + message.text);
+      }
+
+      //
+      // Place handling of other command|action here
+      //
+
+      return true;
+    }, // END messageHandler
+
+    // -------------------------------------------------------------------------
+    // setState()
+    // Sets the current (processing) state of the module
+    // -------------------------------------------------------------------------
+    setState: function (stat) {
+      _this.state = stat;
+    }, // END setState
+
+    // -------------------------------------------------------------------------
+    // getState()
+    // Returns the current (processing) state of the module
+    // -------------------------------------------------------------------------
+    getState: function () {
+      return _this.state;
+    } // END getState
 
   }; // END return
 })(j1, window);

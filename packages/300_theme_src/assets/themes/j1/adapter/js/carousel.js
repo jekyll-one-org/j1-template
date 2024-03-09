@@ -751,7 +751,7 @@ j1.adapter.carousel = (function (j1, window) {
     // -------------------------------------------------------------------------
     getState: function () {
       return _this.state;
-    }, // END getState
+    } // END getState
 
   }; // END return
 

@@ -318,9 +318,11 @@ j1.adapter.logger = (function (j1, window) {
       //  process commands|actions
       //
       if (message.type === 'command' && message.action === 'module_initialized') {
+
         //
         // place handling of command|action here
         //
+
         logger.info('\n' + message.text);
       }
 

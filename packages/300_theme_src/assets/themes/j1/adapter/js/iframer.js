@@ -283,6 +283,22 @@ j1.adapter.iframer = (function (j1, window) {
     }, // END loadIframeHTML
 
     // -------------------------------------------------------------------------
+    // setXhrState
+    // Set the final (loading) state of an element (partial) loaded via Xhr
+    // -------------------------------------------------------------------------
+    setXhrState: function (obj, stat) {
+      j1.adapter.navigator.xhrData[obj] = stat;
+    }, // END setXhrState
+
+    // -------------------------------------------------------------------------
+    // getState
+    // Returns the final (loading) state of an element (partial) loaded via Xhr
+    // -------------------------------------------------------------------------
+    getXhrState: function (obj) {
+      return j1.adapter.navigator.xhrData[obj];
+    }, // END getXhrState
+
+    // -------------------------------------------------------------------------
     // messageHandler: MessageHandler for J1 CookieConsent module
     // Manage messages send from other J1 modules
     // -------------------------------------------------------------------------
@@ -325,23 +341,7 @@ j1.adapter.iframer = (function (j1, window) {
     // -------------------------------------------------------------------------
     getState: function () {
       return j1.adapter.navigator.state;
-    }, // END getState
-
-    // -------------------------------------------------------------------------
-    // setXhrState
-    // Set the final (loading) state of an element (partial) loaded via Xhr
-    // -------------------------------------------------------------------------
-    setXhrState: function (obj, stat) {
-      j1.adapter.navigator.xhrData[obj] = stat;
-    }, // END setXhrState
-
-    // -------------------------------------------------------------------------
-    // getState
-    // Returns the final (loading) state of an element (partial) loaded via Xhr
-    // -------------------------------------------------------------------------
-    getXhrState: function (obj) {
-      return j1.adapter.navigator.xhrData[obj];
-    } // END getXhrState
+    } // END getState
 
   }; // END return
 })(j1, window);

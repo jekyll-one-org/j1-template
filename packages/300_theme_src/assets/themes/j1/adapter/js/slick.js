@@ -444,9 +444,11 @@ j1.adapter.slick = (function (j1, window) {
       //  Process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
+
         //
         // Place handling of command|action here
         //
+
         logger.info('\n' + message.text);
       }
 
@@ -471,7 +473,7 @@ j1.adapter.slick = (function (j1, window) {
     // -------------------------------------------------------------------------
     getState: function () {
       return _this.state;
-    }, // END getState
+    } // END getState
 
   }; // END return
 })(j1, window);

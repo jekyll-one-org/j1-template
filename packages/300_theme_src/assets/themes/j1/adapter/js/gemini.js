@@ -150,21 +150,6 @@ const httpError500      = geminiOptions.errors.http500;
 // Helper functions
 // -----------------------------------------------------------------------------
 
-  function init_select_events() {
-    var select  = document.getElementById(geminiOptions.prompt_history_id);
-    var $select = select.slim;
-    var value;
-
-    $select.events.afterClose = () => {
-      // Get|Set selected value from history
-      value = $select.getSelected();
-      $select.setSelected(value);
-      $select.close();
-
-      document.getElementById('prompt').value = value;
-    }
-  } //END init_select_events()
-
   // Log the geolocation position
   function showPosition(position) {
      var latitude = position.coords.latitude;
@@ -451,7 +436,7 @@ const httpError500      = geminiOptions.errors.http500;
           maxHistory             = geminiOptions.max_history;
           allowHistoryDuplicates = geminiOptions.allow_history_duplicates;
 
-          init_select_events();
+          _this.init_select_events();
 
           // Initialize the textHistory array from cookie
           if (geminiOptions.read_prompt_history_from_cookie) {
@@ -472,7 +457,10 @@ const httpError500      = geminiOptions.errors.http500;
 
             textHistory.forEach(function(optionText) {
               option = {
-                text: optionText
+                text: optionText,
+                display: true,
+                selected: false,
+                disabled: false
               }
               data.push(option);
             }); // END forEach
@@ -611,49 +599,6 @@ const httpError500      = geminiOptions.errors.http500;
     }, // END init
 
     // -------------------------------------------------------------------------
-    // messageHandler()
-    // manage messages send from other J1 modules
-    // -------------------------------------------------------------------------
-    messageHandler: function (sender, message) {
-      var json_message = JSON.stringify(message, undefined, 2);
-
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
-      logger.debug(logText);
-
-      // -----------------------------------------------------------------------
-      //  Process commands|actions
-      // -----------------------------------------------------------------------
-      if (message.type === 'command' && message.action === 'module_initialized') {
-        //
-        // Place handling of command|action here
-        //
-        logger.info('\n' + message.text);
-      }
-
-      //
-      // Place handling of other command|action here
-      //
-
-      return true;
-    }, // END messageHandler
-
-    // -------------------------------------------------------------------------
-    // setState()
-    // Sets the current (processing) state of the module
-    // -------------------------------------------------------------------------
-    setState: function (stat) {
-      _this.state = stat;
-    }, // END setState
-
-    // -------------------------------------------------------------------------
-    // getState()
-    // Returns the current (processing) state of the module
-    // -------------------------------------------------------------------------
-    getState: function () {
-      return _this.state;
-    }, // END getState
-
-    // -------------------------------------------------------------------------
     // loadModules()
     // Module loader
     // -------------------------------------------------------------------------
@@ -741,7 +686,80 @@ const httpError500      = geminiOptions.errors.http500;
         } // END if xhrDOMState
       }, 10);
 
-    } // END loadUI
+    }, // END loadUI
+
+    init_select_events: function () {
+      var select  = document.getElementById(geminiOptions.prompt_history_id);
+      var $select = select.slim;
+      var value;
+
+      // $select.events.beforeOpen = () => {
+      //   var values = $select.getSelected();
+      //   var data = $select.getData();
+      //   $select.setData(data[0].selected = false);
+      //   console.log('slimSelect: before open');
+      // },
+
+      $select.events.afterOpen = () => {
+        var data = $select.getData();
+        $select.setData(data[0].selected = false);
+        console.log('slimSelect: after open');
+      },
+
+      $select.events.afterClose = () => {
+        // Get|Set selected value from history
+        value = $select.getSelected();
+        $select.setSelected(value);
+        $select.close();
+
+        document.getElementById('prompt').value = value;
+      }
+    }, //END init_select_events()
+
+    // -------------------------------------------------------------------------
+    // messageHandler()
+    // manage messages send from other J1 modules
+    // -------------------------------------------------------------------------
+    messageHandler: function (sender, message) {
+      var json_message = JSON.stringify(message, undefined, 2);
+
+      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logger.debug(logText);
+
+      // -----------------------------------------------------------------------
+      //  Process commands|actions
+      // -----------------------------------------------------------------------
+      if (message.type === 'command' && message.action === 'module_initialized') {
+
+        //
+        // Place handling of command|action here
+        //
+
+        logger.info('\n' + message.text);
+      }
+
+      //
+      // Place handling of other command|action here
+      //
+
+      return true;
+    }, // END messageHandler
+
+    // -------------------------------------------------------------------------
+    // setState()
+    // Sets the current (processing) state of the module
+    // -------------------------------------------------------------------------
+    setState: function (stat) {
+      _this.state = stat;
+    }, // END setState
+
+    // -------------------------------------------------------------------------
+    // getState()
+    // Returns the current (processing) state of the module
+    // -------------------------------------------------------------------------
+    getState: function () {
+      return _this.state;
+    } // END getState
 
   }; // END return
 })(j1, window);
