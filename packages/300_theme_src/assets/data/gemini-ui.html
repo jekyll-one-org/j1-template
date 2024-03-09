@@ -30,23 +30,26 @@ exclude_from_search:                    true
 
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment     = site.environment %}
+{% assign environment           = site.environment %}
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign modules         = site.data.modules %}
+{% assign modules               = site.data.modules %}
 
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign gemini_defaults = modules.defaults.gemini.defaults %}
-{% assign gemini_settings = modules.gemini.settings %}
+{% assign slim_select_defaults  = modules.defaults.slim_select.defaults %}
+{% assign slim_select_settings  = modules.slim_select.settings %}
+{% assign gemini_defaults       = modules.defaults.gemini.defaults %}
+{% assign gemini_settings       = modules.gemini.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign gemini_options  = gemini_defaults | merge: gemini_settings %}
+{% assign slim_select_options   = slim_select_defaults | merge: slim_select_settings %}
+{% assign gemini_options        = gemini_defaults | merge: gemini_settings %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -70,21 +73,36 @@ exclude_from_search:                    true
 <!-- START UI container -->
 <div id="gemini_ui_container" style="display: none">
 
+    <div id="list-container" style="display: none">
+      <div class="gallery-title mt-3">{{gemini_options.titles.request_history}}</div>
+      <!-- create prompt history wrapper -->
+      <!-- prompt history select added by module slimSelect -->
+      {% for select in slim_select_options.selects %}{% if select.id == gemini_options.prompt_history_id %}
+      {% comment %} select.wrapper_id: {{select.wrapper_id | debug}} {% endcomment %}
+      <div id="{{select.wrapper_id}}"></div>
+      {% endif %}{% endfor %}
+    </div>
+
+    <!-- Request input -->
     <div class="gallery-title mt-3">{{gemini_options.prompt.title}}</div>
     <div class="form-group">
       <textarea
-        id="prompt"
+        id="{{gemini_options.prompt_id}}"
         class="form-control mb-3"
         placeholder="{{gemini_options.prompt.placeholder}}"
         rows="{{gemini_options.prompt.size}}">
       </textarea>
 
-      <button id="send" class="btn btn-primary" type="button">
+      <!-- Send request button -->
+      <button id="{{gemini_options.buttons.generate.id}}" class="btn btn-primary" type="button">
         <span id="spinner" class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
-        <span role="status">{{gemini_options.buttons.generate}}</span>
+        <span role="status">{{gemini_options.buttons.generate.name}}</span>
       </button>
 
-      <button id="reset" type="button" class="btn btn-warning mt-1">{{gemini_options.buttons.reset}}</button>
+      <!-- Reset request button -->
+      <button id="{{gemini_options.buttons.reset.id}}" type="button" class="btn btn-warning mt-1">{{gemini_options.buttons.reset.name}}</button>
+      <!-- Clear history button -->
+      <button id="{{gemini_options.buttons.clear.id}}" type="button" class="btn btn-danger mt-1">{{gemini_options.buttons.clear.name}}</button>
     </div>
 
     <div id="response" class="mt-4 mb-7">

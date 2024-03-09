@@ -146,12 +146,12 @@ var logText;
       // -----------------------------------------------------------------------
       // Global variable settings
       // -----------------------------------------------------------------------
-      logger                = log4javascript.getLogger('j1.adapter.advertising');
-      _this                 = j1.adapter.advertising;
-      cookie_names          = j1.getCookieNames();
-      user_consent          = j1.readCookie(cookie_names.user_consent);
-      url                   = new liteURL(window.location.href);
-      hostname              = url.hostname;
+      logger                  = log4javascript.getLogger('j1.adapter.advertising');
+      _this                   = j1.adapter.advertising;
+      cookie_names            = j1.getCookieNames();
+      user_consent            = j1.readCookie(cookie_names.user_consent);
+      url                     = new liteURL(window.location.href);
+      hostname                = url.hostname;
 
       // create settings object from frontmatter
       //
@@ -170,13 +170,15 @@ var logText;
       checkTrackingProtection = advertisingOptions.google.checkTrackingProtection;
       showErrorPageOnBlocked  = advertisingOptions.google.showErrorPageOnBlocked;
 
-      // run initialization on 'contentVisible'
-      //
-      var dependencies_met_page_ready = setInterval (function (options) {
-        var contentState      = $('#content').css("display");
-        var contentVisible    = (contentState == 'block') ? true: false;
+      // -----------------------------------------------------------------------
+      // initializer
+      // -----------------------------------------------------------------------
+      var dependencies_met_page_ready = setInterval(() => {
+        var pageState       = $('#content').css("display");
+        var pageVisible     = (pageState == 'block') ? true: false;
+        var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
 
-        if (j1.getState() === 'finished' && contentVisible) {
+        if (j1CoreFinished && pageVisible) {
 
         {% comment %} detect|load code if 'advertising' is 'enabled'
         ------------------------------------------------------------------------ {% endcomment %}
@@ -261,7 +263,7 @@ var logText;
               }
 
               _this.check_tracking_protection();
-              var dependencies_met_tracking_check_ready = setInterval (function (options) {
+              var dependencies_met_tracking_check_ready = setInterval(() => {
                 if (typeof tracking_protection !== 'undefined' ) {
                   var browser_tracking_feature = navigator.DoNotTrack;
 
@@ -369,14 +371,15 @@ var logText;
     // -------------------------------------------------------------------------
     ad_initializer: function () {
 
-      var dependencies_met_page_visible = setInterval (function (options) {
-        var contentState    = $('#content').css("display");
-        var contentVisible  = (contentState == 'block') ? true: false;
+      var dependencies_met_page_visible = setInterval(() => {
+        var pageState       = $('#no_flicker').css("display");
+        var pageVisible     = (pageState == 'block') ? true: false;
+        var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
         var ads_found       = (document.getElementsByClassName('adsbygoogle').length > 0) ? true : false;
         var ads_initialized = 0;
         var ad_containers;
 
-        if (j1.getState() === 'finished' && contentVisible && ads_found) {
+        if (j1CoreFinished && pageVisible && ads_found) {
           if (!validpublisherID) {
             // skip setup processes
             //

@@ -124,15 +124,15 @@ var logText;
     // -------------------------------------------------------------------------
     init: function (options) {
 
-      var dependencies_met_page_ready = setInterval (function (options) {
-        var pageState     = $('#no_flicker').css("display");
+      // -----------------------------------------------------------------------
+      // initializer
+      // -----------------------------------------------------------------------
+      var dependencies_met_page_ready = setInterval(() => {
+        var pageState     = $('#content').css("display");
         var pageVisible   = (pageState == 'block') ? true: false;
         var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-        if ( j1.getState() === 'finished' && pageVisible ) {
-//      if (j1.getState() == 'finished' && pageVisible && atticFinished) {
-//      if (j1.getState() == 'finished') {
-
+        if (j1.getState() === 'finished' && pageVisible) {
           {% if chat_enabled %}
 
             // Load  module DEFAULTS|CONFIG
@@ -219,7 +219,7 @@ var logText;
               if (validChatbotID) {
                 logger.info('\n' + 'enable VivoChat on ID: ' + chatbotID);
 
-                setTimeout (function() {
+                setTimeout(() => {
                   logger.info('\n' + 'set fab button position');
                   $('.fab-btn').css('bottom', '5rem');
                 }, 1000);
@@ -256,7 +256,7 @@ var logText;
             logger.debug('\n' + 'state: ' + _this.getState());
             logger.info('\n' + 'module initializing: started');
 
-            setTimeout (function() {
+            setTimeout(() => {
               logger.info('\n' + 'set fab button position');
               $('.fab-btn').css('bottom', '5rem');
             }, 1000);
@@ -285,7 +285,7 @@ var logText;
                   });
                 })
 
-                setTimeout (function() {
+                setTimeout(() => {
                   logger.info('\n' + 'Initialize TutGPT API');
                   // add the chatbotAPI to run the Bot (delayed)
                   //
@@ -317,7 +317,7 @@ var logText;
             logger.debug('\n' + 'state: ' + _this.getState());
             logger.info('\n' + 'module initializing: started');
 
-            setTimeout (function() {
+            setTimeout(() => {
               logger.info('\n' + 'set fab button position');
               $('.fab-btn').css('bottom', '5rem');
             }, 1000);
@@ -360,7 +360,7 @@ var logText;
             logger.debug('\n' + 'state: ' + _this.getState());
             logger.info('\n' + 'module initializing: started');
 
-            setTimeout (function() {
+            setTimeout(() => {
               logger.info('\n' + 'set fab button position');
               $('.fab-btn').css('bottom', '5rem');
             }, 1000);
@@ -425,9 +425,11 @@ var logText;
       //  Process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
+
         //
         // Place handling of command|action here
         //
+
         logger.info('\n' + message.text);
       }
 

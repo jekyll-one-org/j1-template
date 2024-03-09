@@ -27,30 +27,30 @@ regenerate:                             true
 
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment       = site.environment %}
-{% assign asset_path        = "/assets/themes/j1" %}
+{% assign environment         = site.environment %}
+{% assign asset_path          = "/assets/themes/j1" %}
 
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config    = site.data.j1_config %}
-{% assign blocks             = site.data.blocks %}
-{% assign modules            = site.data.modules %}
+{% assign template_config     = site.data.j1_config %}
+{% assign blocks              = site.data.blocks %}
+{% assign modules             = site.data.modules %}
 
 {% comment %} Set config data (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign wave_defaults = modules.defaults.waves.defaults %}
-{% assign wave_settings = modules.waves.settings %}
+{% assign wave_defaults       = modules.defaults.waves.defaults %}
+{% assign wave_settings       = modules.waves.settings %}
 
 {% comment %} Set config options (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign wave_options  = wave_defaults | merge: wave_settings %}
+{% assign wave_options        = wave_defaults | merge: wave_settings %}
 
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign comments          = wave_options.enabled %}
+{% assign comments            = wave_options.enabled %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -138,21 +138,19 @@ var logText;
       waveSettings = $.extend({}, {{wave_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
       waveOptions  = $.extend(true, {}, waveDefaults, waveSettings, frontmatterOptions);
 
-      _this  = j1.adapter.waves;
-      theme  = user_state.theme_name;
-      logger = log4javascript.getLogger('j1.adapter.wave');
+      _this        = j1.adapter.waves;
+      theme        = user_state.theme_name;
+      logger       = log4javascript.getLogger('j1.adapter.wave');
 
       // -----------------------------------------------------------------------
       // initializer
       // -----------------------------------------------------------------------
-      var dependencies_met_page_ready = setInterval (function (options) {
-        var pageState     = $('#no_flicker').css("display");
-        var pageVisible   = (pageState == 'block') ? true : false;
-        var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
+      var dependencies_met_page_ready = setInterval(() => {
+        var pageState       = $('#content').css("display");
+        var pageVisible     = (pageState == 'block') ? true : false;
+        var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
 
-        if (j1.getState() === 'finished' && pageVisible) {
-//      if (j1.getState() === 'finished' && pageVisible && atticFinished) {
-
+        if (j1CoreFinished && pageVisible) {
           themes_allowed = waveOptions.themes.toString();
           theme_enabled  = waveOptions.themes.indexOf(theme) > -1 ? true : false;
 
@@ -164,26 +162,30 @@ var logText;
           logger.debug('\n' + 'theme detected: ' + theme);
 
           // TODO: Check why a timeout is required to enable|disable the wave elements
-          if (themes_allowed === 'all' ) {
+          if (themes_allowed === 'all') {
             logger.info('\n' + 'activate waves for theme: ' + 'all' );
-            setTimeout (function() {
+            setTimeout(() => {
               $('.wave').show();
               logger.info('\n' + 'initializing module finished');
             }, {{template_config.page_on_load_timeout}} );
           } else if (theme_enabled) {
             logger.info('\n' + 'activate waves for theme: ' + theme );
-            setTimeout (function() {
+            setTimeout(() => {
               $('.wave').show();
               logger.info('\n' + 'initializing module finished');
             }, {{template_config.page_on_load_timeout}} );
           } else {
             logger.warn('\n' + 'no valid theme/s found');
             logger.warn('\n' + 'deactivate (hide) waves');
-            setTimeout (function() {
+            setTimeout(() => {
               $('.wave').hide();
               logger.info('\n' + 'initializing module finished');
             }, {{template_config.page_on_load_timeout}} );
           }
+
+          _this.setState('finished');
+          logger.debug('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'module initialized successfully');
 
           clearInterval(dependencies_met_page_ready);
         }
@@ -205,9 +207,11 @@ var logText;
       //  Process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
+
         //
         // Place handling of command|action here
         //
+
         logger.info('\n' + message.text);
       }
 

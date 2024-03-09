@@ -314,7 +314,7 @@ j1.adapter.navigator = (function (j1, window) {
         'j1.adapter.navigator',
         'data_loaded');
 
-        var dependencies_met_load_menu_finished = setInterval (function () {
+        var dependencies_met_load_menu_finished = setInterval(() => {
   	      if (j1.xhrDOMState['#'+navQuicklinksOptions.xhr_container_id] === 'success' &&
             j1.xhrDOMState['#'+navAuthClientConfig.xhr_container_id] === 'success' &&
             j1.xhrDOMState['#'+navMenuOptions.xhr_container_id] === 'success' ) {
@@ -328,7 +328,7 @@ j1.adapter.navigator = (function (j1, window) {
             authClientEnabled = j1.authEnabled();
             logger.info('\n' + 'application status detected: ' + appDetected);
 
-            // setTimeout (function() {
+            // setTimeout(() => {
             //   j1.core.navigator.init (_this.navDefaults, _this.navMenuOptions);
             // }, 1000);  // {{template_config.page_on_load_timeout}}
 
@@ -344,7 +344,7 @@ j1.adapter.navigator = (function (j1, window) {
 
 
               if (user_state_detected) {
-                user_state        = j1.readCookie(cookie_user_state_name);
+                user_state = j1.readCookie(cookie_user_state_name);
               }  else {
                 logger.error('\n' + 'cookie not found: j1.user.state');
                 logger.debug('\n' + 'j1 cookies found:' + j1Cookies.length);
@@ -354,7 +354,7 @@ j1.adapter.navigator = (function (j1, window) {
               }
 
               // jadams, 2021-07-03: wait until navigator CORE get finished
-              var dependencies_met_page_finished = setInterval(function() {
+              var dependencies_met_page_finished = setInterval(() => {
                 if (j1.adapter.navigator.getState() == 'core_initialized') {
                   logText = '\n' + 'load themes';
                   logger.info(logText);
@@ -379,10 +379,10 @@ j1.adapter.navigator = (function (j1, window) {
                   // added same checks (as already done by adapter themer) to
                   // check if remote theme menu detected as LOADED
                   //
-                  var dependencies_met_remote_themes_loaded = setInterval(function() {
+                  var dependencies_met_remote_themes_loaded = setInterval(() => {
                     interval_count += 1;
                     themes_count = document.getElementById("remote_themes").getElementsByTagName("li").length;
-                    if ( themes_count > 0  ) {
+                    if (themes_count > 0 ) {
                       logger.info('\n' + 'remote themes loaded: successfully');
                       logger.info('\n' + 'remote themes loaded: successfully after: ' + interval_count * 25 + ' ms');
 
@@ -398,7 +398,7 @@ j1.adapter.navigator = (function (j1, window) {
                     clearInterval(dependencies_met_page_finished);
                   }, 10);
                 }
-//              _this.setState('initialized');
+
                 _this.setState('finished');
               }, 10); // END 'dependencies_met_page_finished'
             } else {
@@ -410,14 +410,15 @@ j1.adapter.navigator = (function (j1, window) {
             // -----------------------------------------------------------------
             // event handler|css styles
             // -----------------------------------------------------------------
-            var dependencies_met_initialized = setInterval(function() {
-              var pageState     = $('#no_flicker').css("display");
-              var pageVisible   = (pageState == 'block') ? true: false;
-              var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
+            var dependencies_met_initialized = setInterval(() => {
+              var pageState      = $('#content').css("display");
+              var pageVisible    = (pageState == 'block') ? true: false;
+              var j1CoreFinished = (j1.getState() == 'finished') ? true: false;
+              var themerFinished = (j1.adapter.themer.getState() == 'finished') ? true: false;
 
               // initialize if page and themer ready
-              if (j1.getState() === 'finished' && j1.adapter.themer.getState() === 'finished' && pageVisible) {
-//            if (j1.getState() === 'finished' && j1.adapter.themer.getState() === 'finished' && pageVisible && atticFinished) {
+              if (pageVisible && j1CoreFinished && themerFinished) {
+
                 _this.setState('processing');
 
                 // apply module configuration settings
@@ -429,7 +430,7 @@ j1.adapter.navigator = (function (j1, window) {
                 // (static) delay applying styles until added CSS data
                 // of the theme is processed by the browser
                 // TODO: Check why a timeout is required to load dynamic styles in a page
-                setTimeout (function() {
+                setTimeout(() => {
                   // set general|global theme colors
                   logger.info('\n' + 'initializing dynamic CSS styles');
                   _this.applyThemeSettings (
@@ -444,11 +445,12 @@ j1.adapter.navigator = (function (j1, window) {
                 _this.setState('finished');
                 logger.debug('\n' + 'state: ' + _this.getState());
                 logger.info('\n' + 'module initialized successfully');
-                logger.debug('\n' + 'met dependencies for: j1');
+
                 clearInterval(dependencies_met_initialized);
               }
             }, 10); // END 'dependencies_met_initialized'
             logger.debug('\n' + 'met dependencies for: themer');
+
             clearInterval(dependencies_met_load_menu_finished);
           }
         }, 10); // END 'dependencies_met_load_menu_finished'
@@ -463,7 +465,7 @@ j1.adapter.navigator = (function (j1, window) {
 
         // Manage sticky NAV bars
         // TODO: Check why a timeout is required to manage sticky NAV bars on RESIZE a page
-        setTimeout (function() {
+        setTimeout(() => {
           j1.core.navigator.navbarSticky();
         }, 500);
 
@@ -1173,9 +1175,11 @@ j1.adapter.navigator = (function (j1, window) {
       //  Process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
+
         //
         // Place handling of command|action here
         //
+
         logger.info('\n' + message.text);
       }
       if (message.type === 'command' && message.action === 'status') {

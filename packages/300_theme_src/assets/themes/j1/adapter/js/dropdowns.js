@@ -130,13 +130,15 @@ j1.adapter.dropdowns = (function (j1, window) {
       logger.debug('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
 
-      var dependencies_met_j1_finished = setInterval(function() {
-        var pageState     = $('#no_flicker').css("display");
-        var pageVisible   = (pageState == 'block') ? true : false;
-        var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
+      // -----------------------------------------------------------------------
+      // initializer
+      // -----------------------------------------------------------------------
+      var dependencies_met_page_ready = setInterval(() => {
+        var pageState      = $('#content').css("display");
+        var pageVisible    = (pageState == 'block') ? true : false;
+        var j1CoreFinished = (j1.getState() == 'finished') ? true : false;
 
-        if (j1.getState() == 'finished' && pageVisible) {
-//      if (j1.getState() == 'finished' && pageVisible && atticFinished) {
+        if (j1CoreFinished && pageVisible) {
 
           var elms = document.querySelectorAll('.dropdowns');
 
@@ -205,9 +207,10 @@ j1.adapter.dropdowns = (function (j1, window) {
 
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'module initialized successfully');
 
-          clearInterval(dependencies_met_j1_finished);
-        } // END dependencies_met_j1_finished
+          clearInterval(dependencies_met_page_ready);
+        } // END dependencies_met_page_ready
       }, 10);
 
     }, // END init

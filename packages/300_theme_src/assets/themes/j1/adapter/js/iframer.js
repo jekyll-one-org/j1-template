@@ -24,8 +24,8 @@ regenerate:                             true
 
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment       = site.environment %}
-{% assign template_version  = site.version %}
+{% assign environment         = site.environment %}
+{% assign template_version    = site.version %}
 
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
@@ -109,8 +109,8 @@ j1.adapter.iframer = (function (j1, window) {
     // -------------------------------------------------------------------------
     init: function (options) {
 
-      url               = new URL(window.location.href);
-      origin            = url.origin;
+      url     = new URL(window.location.href);
+      origin  = url.origin;
 
       // -----------------------------------------------------------------------
       // Default module settings
@@ -140,12 +140,15 @@ j1.adapter.iframer = (function (j1, window) {
       logger.debug('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
 
-      var dependencies_met_j1_finished = setInterval(function() {
-        var pageState     = $('#no_flicker').css("display");
-        var pageVisible   = (pageState == 'block') ? true : false;
-        var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
+      // -----------------------------------------------------------------------
+      // initializer
+      // -----------------------------------------------------------------------
+      var dependencies_met_page_ready = setInterval(() => {
+        var pageState      = $('#content').css("display");
+        var pageVisible    = (pageState == 'block') ? true : false;
+        var j1CoreFinished = (j1.getState() == 'finished') ? true : false;
 
-        if (j1.getState() == 'finished' && pageVisible) {
+        if (j1CoreFinished && pageVisible) {
           // initialize state flag
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());
@@ -153,8 +156,8 @@ j1.adapter.iframer = (function (j1, window) {
 
           _this.initialize(iframerOptions);
 
-          clearInterval(dependencies_met_j1_finished);
-        } // END 'finished' && 'pageVisible'
+          clearInterval(dependencies_met_page_ready);
+        } // END j1CoreFinished && pageVisible
       }, 10);
 
     }, // END init
@@ -185,10 +188,10 @@ j1.adapter.iframer = (function (j1, window) {
 
           // initialize the iframe if HTML portion successfully loaded
           //
-          load_dependencies['dependencies_met_html_loaded_{{iframe_id}}'] = setInterval (function (options) {
+          load_dependencies['dependencies_met_html_loaded_{{iframe_id}}'] = setInterval(() => {
             // check if HTML portion of the iframe is loaded successfully
             xhrLoadState = j1.xhrDOMState['#{{iframe_id}}_parent'];
-            if ( xhrLoadState === 'success' ) {
+            if (xhrLoadState === 'success') {
               var $iframe_{{iframe_id}} = $('#{{iframe_id}}');                  // used for later access
 
               logger.info('\n' + 'dyn_loader, initialize iframe on id: ' + '{{iframe_id}}');
@@ -196,7 +199,7 @@ j1.adapter.iframer = (function (j1, window) {
               // Inject contentWindow script into the docoment to be loaded
               // into an iframe element
               if ('{{iframe.inject_contentWindowScript}}' == 'true') {
-                setTimeout (function() {
+                setTimeout(() => {
                   var iframe;
                   var iframeSelector;
                   var iframeDocument;
@@ -219,7 +222,7 @@ j1.adapter.iframer = (function (j1, window) {
                 }, iframerOptions.delay_inject_contentWindowScript);
             } // END if iframerOptions.inject_contentWindowScript
 
-            setTimeout (function() {
+            setTimeout(() => {
               /* eslint-disable */
               var $iframe_{{iframe_id}} = iFrameResize({
                 {% for option in iframe.options %}
@@ -293,9 +296,11 @@ j1.adapter.iframer = (function (j1, window) {
       //  Process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
+
         //
         // Place handling of command|action here
         //
+
         logger.info('\n' + message.text);
       }
 

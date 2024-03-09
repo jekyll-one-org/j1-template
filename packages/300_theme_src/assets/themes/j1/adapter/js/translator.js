@@ -93,6 +93,7 @@ j1.adapter.translator = (function (j1, window) {
   var translatorDefaults;
   var translatorSettings;
   var translatorOptions;
+  var translationFeedbackHighlight;
   var _this;
   var $modal;
   var cookie_names;
@@ -191,32 +192,32 @@ j1.adapter.translator = (function (j1, window) {
       // -----------------------------------------------------------------------
       // initializer
       // -----------------------------------------------------------------------
-      var dependencies_met_page_ready = setInterval (function (options) {
-        var expires       = '{{cookie_options.expires}}';
-        var same_site     = '{{cookie_options.same_site}}';
-        var option_domain = '{{cookie_options.domain}}';
-        var translationFeedbackHighlight;
+      var dependencies_met_page_ready = setInterval(() => {
+        var pageState       = $('#content').css("display");
+        var pageVisible     = (pageState == 'block') ? true: false;
+        var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
+        var atticFinished   = (j1.adapter.attic.getState() == 'finished') ? true : false;
 
-        user_consent = j1.readCookie(cookie_names.user_consent);
-        if (!user_consent.personalization) {
-          const translateButton = '#quickLinksTranslateButton';
-          $(translateButton).hide();
-          return;
-        }
+        if (j1CoreFinished && pageVisible && atticFinished) {
 
-        // set domain used by cookies
-        //
-        if (option_domain == 'auto') {
-          domainAttribute = domain ;
-        } else  {
-          domainAttribute = '';
-        }
+          var expires       = '{{cookie_options.expires}}';
+          var same_site     = '{{cookie_options.same_site}}';
+          var option_domain = '{{cookie_options.domain}}';
 
-        var pageState     = $('#no_flicker').css("display");
-        var pageVisible   = (pageState == 'block') ? true: false;
-        var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true : false;
+          user_consent = j1.readCookie(cookie_names.user_consent);
+          if (!user_consent.personalization) {
+            const translateButton = '#quickLinksTranslateButton';
+            $(translateButton).hide();
+            return;
+          }
 
-        if (j1.getState() === 'finished' && pageVisible && atticFinished) {
+          // set domain used by cookies
+          //
+          if (option_domain == 'auto') {
+            domainAttribute = domain ;
+          } else  {
+            domainAttribute = '';
+          }
 
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());
@@ -354,56 +355,13 @@ j1.adapter.translator = (function (j1, window) {
 
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
-          logger.debug('\n' + 'module initialized successfully');
+          logger.info('\n' + 'module initialized successfully');
 
           clearInterval(dependencies_met_page_ready);
         }
       }, 10);
 
     }, // END init
-
-    // -------------------------------------------------------------------------
-    // messageHandler: MessageHandler for J1 google_translate module
-    // Manage messages send from other J1 modules
-    // -------------------------------------------------------------------------
-    messageHandler: function (sender, message) {
-      var json_message = JSON.stringify(message, undefined, 2);
-
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
-      logger.debug(logText);
-
-      // -----------------------------------------------------------------------
-      //  Process commands|actions
-      // -----------------------------------------------------------------------
-      if (message.type === 'command' && message.action === 'module_initialized') {
-        //
-        // Place handling of command|action here
-        //
-        logger.info('\n' + message.text);
-      }
-
-      //
-      // Place handling of other command|action here
-      //
-
-      return true;
-    }, // END messageHandler
-
-    // -------------------------------------------------------------------------
-    // setState()
-    // Sets the current (processing) state of the module
-    // -------------------------------------------------------------------------
-    setState: function (stat) {
-      _this.state = stat;
-    }, // END setState
-
-    // -------------------------------------------------------------------------
-    // getState()
-    // Returns the current (processing) state of the module
-    // -------------------------------------------------------------------------
-    getState: function () {
-      return _this.state;
-    }, // END getState
 
     // -------------------------------------------------------------------------
     // postTranslateElementInit()
@@ -517,7 +475,52 @@ j1.adapter.translator = (function (j1, window) {
       // place code for processing here
       //
 
-    } // END cbDeepl
+    }, // END cbDeepl
+
+    // -------------------------------------------------------------------------
+    // messageHandler: MessageHandler for J1 google_translate module
+    // Manage messages send from other J1 modules
+    // -------------------------------------------------------------------------
+    messageHandler: function (sender, message) {
+      var json_message = JSON.stringify(message, undefined, 2);
+
+      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logger.debug(logText);
+
+      // -----------------------------------------------------------------------
+      //  Process commands|actions
+      // -----------------------------------------------------------------------
+      if (message.type === 'command' && message.action === 'module_initialized') {
+
+        //
+        // Place handling of command|action here
+        //
+
+        logger.info('\n' + message.text);
+      }
+
+      //
+      // Place handling of other command|action here
+      //
+
+      return true;
+    }, // END messageHandler
+
+    // -------------------------------------------------------------------------
+    // setState()
+    // Sets the current (processing) state of the module
+    // -------------------------------------------------------------------------
+    setState: function (stat) {
+      _this.state = stat;
+    }, // END setState
+
+    // -------------------------------------------------------------------------
+    // getState()
+    // Returns the current (processing) state of the module
+    // -------------------------------------------------------------------------
+    getState: function () {
+      return _this.state;
+    } // END getState
 
   }; // END return
 

@@ -27,30 +27,30 @@ regenerate:                             true
 
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment       = site.environment %}
-{% assign asset_path        = "/assets/themes/j1" %}
+{% assign environment         = site.environment %}
+{% assign asset_path          = "/assets/themes/j1" %}
 
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config    = site.data.j1_config %}
-{% assign blocks             = site.data.blocks %}
-{% assign modules            = site.data.modules %}
+{% assign template_config     = site.data.j1_config %}
+{% assign blocks              = site.data.blocks %}
+{% assign modules             = site.data.modules %}
 
 {% comment %} Set config data (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign speak2me_defaults = modules.defaults.speak2me.defaults %}
-{% assign speak2me_settings = modules.speak2me.settings %}
+{% assign speak2me_defaults   = modules.defaults.speak2me.defaults %}
+{% assign speak2me_settings   = modules.speak2me.settings %}
 
 {% comment %} Set config options (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign speak2me_options  = speak2me_defaults | merge: speak2me_settings %}
+{% assign speak2me_options    = speak2me_defaults | merge: speak2me_settings %}
 
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign comments          = speak2me_options.enabled %}
+{% assign comments            = speak2me_options.enabled %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -93,46 +93,47 @@ j1.adapter.speak2me = (function (j1, window) {
 
 {% comment %} Set global variables
 -------------------------------------------------------------------------------- {% endcomment %}
-var environment       = '{{environment}}';
-var cookie_names      = j1.getCookieNames();
-var user_state        = j1.readCookie(cookie_names.user_state);
-var state             = 'not_started';
-var isFirefox         = /Firefox/i.test(navigator.userAgent);
-var chrome            = /chrome/i.test( navigator.userAgent );
-var isEdge            = /Edg/i.test(navigator.userAgent);
-var isOpera           = /OPR/i.test(navigator.userAgent);
-var isSafari          = /Safari/i.test(navigator.userAgent);
-var isAvast           = /Avast/i.test(navigator.userAgent);
-var isChrome          = ((chrome) && (!isEdge));
-var ttsDisabled       = false;
-var mobilesDisabled   = false;
-var browsersDisabled  = [];
-var isMobile          = (window.orientation !== undefined) ? true :false;       // NOTE: window.orientation is DEPRECATED
-// var isMobile       = (screen.orientation.type == 'portrait-secondary') ? true : false;
+const scrollBehavior    = 'smooth';
+
+var environment         = '{{environment}}';
+var cookie_names        = j1.getCookieNames();
+var user_state          = j1.readCookie(cookie_names.user_state);
+var state               = 'not_started';
+var isFirefox           = /Firefox/i.test(navigator.userAgent);
+var chrome              = /chrome/i.test( navigator.userAgent );
+var isEdge              = /Edg/i.test(navigator.userAgent);
+var isOpera             = /OPR/i.test(navigator.userAgent);
+var isSafari            = /Safari/i.test(navigator.userAgent);
+var isAvast             = /Avast/i.test(navigator.userAgent);
+var isChrome            = ((chrome) && (!isEdge));
+var ttsDisabled         = false;
+var mobilesDisabled     = false;
+var browsersDisabled    = [];
+var isMobile            = (window.orientation !== undefined) ? true :false;       // NOTE: window.orientation is DEPRECATED
+// var isMobile         = (screen.orientation.type == 'portrait-secondary') ? true : false;
 
 // synthetic puase
 var isPaused            = false;
 var lastSpokenChunk     = false;
 var lastScrollPosition  = false;
 
+var isRunning           = true;
+
 var frontmatterOptions;
 var speak2meDefaults;
 var speak2meSettings;
 var speak2meOptions;
 var speak2meModal;
-var _this;
-var logger;
-var logText;
+
 var chromeWorkaround;
 var chromeWorkaroundPause
 var chromeWorkaroundResume;
 var $buttonPause;
 var $buttonResume;
-
-let isRunning = true;
-let intervalId;
-
-const scrollBehavior      = 'smooth';
+var intervalId;
+var _this;
+var logger;
+var logText;
 
 // -----------------------------------------------------------------------------
 // global event handler
@@ -210,12 +211,13 @@ var Events = {
       // -----------------------------------------------------------------------
       // initializer
       // -----------------------------------------------------------------------
-      var dependencies_met_page_ready = setInterval (function (options) {
-        var pageState     = $('#no_flicker').css("display");
-        var pageVisible   = (pageState == 'block') ? true : false;
-        var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
+      var dependencies_met_page_ready = setInterval(() => {
+        var pageState       = $('#content').css("display");
+        var pageVisible     = (pageState == 'block') ? true : false;
+        var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
+        var atticFinished   = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-        if (j1.getState() === 'finished' && pageVisible && atticFinished) {
+        if (j1CoreFinished && pageVisible && atticFinished) {
 
           if (mobilesDisabled && isMobile) {
             console.log('module speak2me is disabled for mobile browsers');
@@ -255,7 +257,7 @@ var Events = {
           }
 
           var safariDisabled = (browsersDisabled.includes('Safari')) ? true : false;
-          if (safariDisabled && !isChrome && isSafari) {
+          if (safariDisabled && !isChrome && !isEdge && !isSafari) {
             console.log('module speak2me is disabled for the Safari browser');
             logger.warn('\n' + 'module speak2me is disabled for the Safari browser');
             $('#quickLinksSpeakButton').hide();
@@ -332,7 +334,7 @@ var Events = {
             this.$buttonStop.click(function () {
               logger.info('\n' + 'speak: remove pause workaround for chromium based browsers');
               // wait 3 sec to make sure speech output is stopped
-              setTimeout (function() {
+              setTimeout(() => {
                 var isSpeaking  = $().speak2me('isSpeaking');
                 var isPaused    = $().speak2me('isPaused');
 
@@ -549,9 +551,11 @@ var Events = {
       //  Process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
+
         //
         // Place handling of command|action here
         //
+
         logger.info('\n' + message.text);
       }
 

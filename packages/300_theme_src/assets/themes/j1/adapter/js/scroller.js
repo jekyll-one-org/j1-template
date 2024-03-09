@@ -132,22 +132,24 @@ var lastPageInfo;
       scrollerOptions  = $.extend(true, {}, scrollerDefaults, scrollerSettings);
 
       // initialize state flag
-      //
       _this.setState('started');
       logger.debug('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
 
-      var dependencies_met_page_ready = setInterval (function (options) {
-        var contentState    = $('#content').css("display");
-        var ContentVisible  = (contentState == 'block') ? true: false;
+      // -----------------------------------------------------------------------
+      // initializer
+      // -----------------------------------------------------------------------
+      var dependencies_met_page_ready = setInterval(() => {
+        var pageState       = $('#content').css("display");
+        var pageVisible     = (pageState == 'block') ? true: false;
+        var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
 
-        // initialize scrollers if content is fully available|visible
-        //
-        if (j1.getState() === 'finished' && ContentVisible) {
+        if (j1CoreFinished && pageVisible) {
           _this.generate_scrollers();
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module initialized successfully');
+
           clearInterval(dependencies_met_page_ready);
         }
       }, 10);
@@ -268,9 +270,11 @@ var lastPageInfo;
       //  Process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
+
         //
         // Place handling of command|action here
         //
+
         logger.info('\n' + message.text);
       }
 

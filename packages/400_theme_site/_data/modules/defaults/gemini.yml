@@ -39,49 +39,58 @@ defaults:
   #   --------------------------------------------------------------------------
   #   Enable|Disable the detection of the current GeoLocation.
   #
-  #   values:                           false|true
+  #   values:                           [true|false]
   #   default:                          false
+  #
+  #   maxHistory
+  #   --------------------------------------------------------------------------
+  #   Limit the prompt history to maxHistory elements.
+  #   Valid values [1 .. 20].
+  #
+  #   values:                           integer
+  #   default:                          20
+  #
+  #   allowHistoryDuplicates
+  #   --------------------------------------------------------------------------
+  #   If set to 'true', duplicates allowed in the prompt history.
+  #   If set to 'false', duplicates are removed from the prompt history.
+  #
+  #   values:                           [true|false]
+  #   default:                          true
   #
   #   xhr_data_path
   #   --------------------------------------------------------------------------
   #   Full path of the HTML data file loaded|processed for the Gemini UI.
   #
-  #   values:                           string
+  #   value:                            string
   #   default:                          /assets/data/gemini-ui/index.html
   #
   #   xhr_container_id
   #   --------------------------------------------------------------------------
   #   ID of the container element the UI is placed.
   #
-  #   values:                           string
+  #   value:                            string
   #   default:                          gemini_ui
   #
   #   xhr_data_element
   #   --------------------------------------------------------------------------
   #   ID of the container element the UI is being read.
   #
-  #   values:                           string
+  #   value:                            string
   #   default:                          gemini_ui_container
-  #
-  #   xhr_container_id
-  #   --------------------------------------------------------------------------
-  #   ID of the container element the UI is placed.
-  #
-  #   values:                           string
-  #   default:                          gemini_ui
   #
   #   apiKey
   #   --------------------------------------------------------------------------
   #   API key to be used for the Google Gemini API.
   #
-  #   values:                           string
+  #   value:                            string
   #   default:                          <your-api-key> (placeholder)
   #
   #   responseLengthMin
   #   --------------------------------------------------------------------------
   #   Minimum number of characters returned by the Google Gemini API.
   #
-  #   values:                           integer
+  #   value:                            integer
   #   default:                          10
   #
   #   enableCandidateFeedback
@@ -117,20 +126,40 @@ defaults:
   #
   enabled:                              false
 
-  detectGeoLocation:                    false
+  # ----------------------------------------------------------------------------
+  # MODULE options
+  # ----------------------------------------------------------------------------
+  #
+  detect_geo_location:                  false
+  max_history:                          20
+  allow_history_duplicates:             true
+  save_prompt_history_to_cookie:        false
+  read_prompt_history_from_cookie:      false
 
   prompt:
     title:                              Your request
-    default:                            Please provide tips on how using the prompt for a chat bot.
-    placeholder:                        Please enter a clear and concise text that conveys the task or question you want the chatbot to perform.
+    default: >
+                                        Please provide tips on how using the prompt
+                                        for a chat bot.
+    placeholder: >
+                                        Please enter a clear and concise text that conveys
+                                        the task or question you want the chatbot to perform.
     size:                               7
 
   buttons:
-    generate:                           Generate
-    reset:                              Reset
+    generate:
+      id:                               send
+      name:                             Generate
+    reset:
+      id:                               reset
+      name:                             Reset request
+    clear:
+      id:                               clear
+      name:                             Clear history
 
   titles:
     result:                             Response
+    request_history:                    Request history
     errorInfo:                          API request failure
 
   errors:
@@ -142,24 +171,33 @@ defaults:
   xhr_data_element:                     gemini_ui_container
 
   # ----------------------------------------------------------------------------
-  # Gemini API options
+  # API options
   # ----------------------------------------------------------------------------
-  apiKey:                               <your-api-key>
+  #
+  api_options:
+    model:                              gemini-pro                              # gemini-pro (text only) | gemini-pro-vision (requires text and images)
 
-  responseLengthMin:                    10
-  enableCandidateFeedback:              true
+    responseLengthMin:                  10
+    enableCandidateFeedback:            true
 
-  safetyRatings:
-    HARM_CATEGORY_DANGEROUS_CONTENT:    BLOCK_MEDIUM_AND_ABOVE
-    HARM_CATEGORY_HARASSMENT:           BLOCK_ONLY_HIGH
-    HARM_CATEGORY_HATE_SPEECH:          BLOCK_ONLY_HIGH
-    HARM_CATEGORY_SEXUALLY_EXPLICIT:    BLOCK_NONE
+    generationConfig:
+      candidateCount:                   1                                       # currentely fixed to 1
+      maxOutputTokens:                  65536                                   # 32k:32768
+      temperature:                      0.5
+      topK:                             40
+      topP:                             0.5
 
-  candidateRatings:
-    HARM_CATEGORY_DANGEROUS_CONTENT:    BLOCK_MEDIUM_AND_ABOVE
-    HARM_CATEGORY_HARASSMENT:           BLOCK_ONLY_HIGH
-    HARM_CATEGORY_HATE_SPEECH:          BLOCK_ONLY_HIGH
-    HARM_CATEGORY_SEXUALLY_EXPLICIT:    BLOCK_NONE
+    safetyRatings:
+      HARM_CATEGORY_DANGEROUS_CONTENT:  BLOCK_MEDIUM_AND_ABOVE
+      HARM_CATEGORY_HARASSMENT:         BLOCK_ONLY_HIGH
+      HARM_CATEGORY_HATE_SPEECH:        BLOCK_ONLY_HIGH
+      HARM_CATEGORY_SEXUALLY_EXPLICIT:  BLOCK_NONE
+
+    candidateRatings:
+      HARM_CATEGORY_DANGEROUS_CONTENT:  BLOCK_MEDIUM_AND_ABOVE
+      HARM_CATEGORY_HARASSMENT:         BLOCK_ONLY_HIGH
+      HARM_CATEGORY_HATE_SPEECH:        BLOCK_ONLY_HIGH
+      HARM_CATEGORY_SEXUALLY_EXPLICIT:  BLOCK_NONE
 
 # ------------------------------------------------------------------------------
 # END config

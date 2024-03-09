@@ -6,8 +6,8 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/docsearch.js
- # Liquid template to adapt the DocSearch module
+ # ~/assets/themes/j1/adapter/js/slimSelect.js
+ # Liquid template to adapt the slimSelect module
  #
  # Product/Info:
  # https://jekyll.one
@@ -18,7 +18,7 @@ regenerate:                             true
  # -----------------------------------------------------------------------------
  # Test data:
  #  {{ liquid_var | debug }}
- #  docsearch_options:  {{ docsearch_options | debug }}
+ #  slim_select_options:  {{ slim_select_options | debug }}
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
@@ -39,18 +39,18 @@ regenerate:                             true
 {% assign blocks             = site.data.blocks %}
 {% assign modules            = site.data.modules %}
 
-{% comment %} Set config data (settings only)
+{% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign docsearch_defaults = modules.defaults.docsearch.defaults %}
-{% assign docsearch_settings = modules.docsearch.settings %}
+{% assign slim_select_defaults = modules.defaults.slim_select.defaults %}
+{% assign slim_select_settings = modules.slim_select.settings %}
 
-{% comment %} Set config options (settings only)
+{% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign docsearch_options  = docsearch_defaults | merge: docsearch_settings %}
+{% assign slim_select_options  = slim_select_defaults | merge: slim_select_settings %}
 
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign comments          = docsearch_options.enabled %}
+{% assign comments          = slim_select_options.enabled %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -61,8 +61,8 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/docsearch.js
- # J1 Adapter for the DocSearch module
+ # ~/assets/themes/j1/adapter/js/waves.js
+ # J1 Adapter for the waves module
  #
  # Product/Info:
  # https://jekyll.one
@@ -71,6 +71,8 @@ regenerate:                             true
  #
  # J1 Template is licensed under the MIT License.
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+ # NOTE: Wave styles defind in /assets/data/panel.html, key 'wave'
  # -----------------------------------------------------------------------------
  #  Adapter generated: {{site.time}}
  # -----------------------------------------------------------------------------
@@ -82,19 +84,17 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.docsearch = (function (j1, window) {
+j1.adapter.slimSelect = (function (j1, window) {
 
 {% comment %} Set global variables
 -------------------------------------------------------------------------------- {% endcomment %}
-var environment   = '{{environment}}';
-var state         = 'not_started';
-var cookie_names  = j1.getCookieNames();
-var docsearchDefaults;
-var docsearchSettings;
-var docsearchOptions;
-var docsearchModal;
-var modal_container;
-var user_consent;
+var environment           = '{{environment}}';
+var selectDIV             = document.createElement('div');
+var selectHTML;
+var slimSelectDefaults;
+var slimSelectSettings;
+var slimSelectOptions;
+var frontmatterOptions;
 var _this;
 var logger;
 var logText;
@@ -106,115 +106,113 @@ var logText;
 
     // -------------------------------------------------------------------------
     // init()
-    // initializer
+    // adapter initializer
     // -------------------------------------------------------------------------
-    init: function () {
+    init: function (options) {
 
       // -----------------------------------------------------------------------
       // Default module settings
       // -----------------------------------------------------------------------
-      docsearchDefaults = $.extend({}, {{docsearch_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      docsearchSettings = $.extend({}, {{docsearch_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      docsearchOptions  = $.extend(true, {}, docsearchDefaults, docsearchSettings);
+      var settings = $.extend({
+        module_name: 'j1.adapter.slimSelect',
+        generated:   '{{site.time}}'
+      }, options);
 
-      _this  = j1.adapter.docsearch;
-      logger = log4javascript.getLogger('j1.adapter.docsearch');
+      // -----------------------------------------------------------------------
+      // Global variable settings
+      // -----------------------------------------------------------------------
 
-      _this.setState('started');
-      logger.debug('\n' + 'state: ' + _this.getState());
-      logger.info('\n' + 'module is being initialized');
+      // create settings object from frontmatter
+      frontmatterOptions  = options != null ? $.extend({}, options) : {};
 
-      modal_container               = document.createElement('div');
-      modal_container.id            = 'docsearch_container';
-      modal_container.style.display = 'none';
+      // create settings object from module options
+      slimSelectDefaults = $.extend({}, {{slim_select_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      slimSelectSettings = $.extend({}, {{slim_select_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      slimSelectOptions  = $.extend(true, {}, slimSelectDefaults, slimSelectSettings, frontmatterOptions);
 
-      modal_container.setAttribute('class', 'modal fade');
-      modal_container.setAttribute('tabindex', '-1');
-      modal_container.setAttribute('role', 'dialog');
-      modal_container.setAttribute('aria-labelledby', 'docsearch_container');
-
-      document.body.append(modal_container);
+      _this        = j1.adapter.slimSelect;
+      _this.select = {};
+      logger       = log4javascript.getLogger('j1.adapter.slimSelect');
 
       // -----------------------------------------------------------------------
       // initializer
       // -----------------------------------------------------------------------
       var dependencies_met_page_ready = setInterval(() => {
-        var pageState       = $('#content').css("display");
-        var pageVisible     = (pageState == 'block') ? true : false;
-        var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
-        var atticFinished   = (j1.adapter.attic.getState() == 'finished') ? true: false;
+        var pageState      = $('#content').css("display");
+        var pageVisible    = (pageState == 'block') ? true : false;
+        var j1CoreFinished = (j1.getState() == 'finished') ? true : false;
 
-        if (j1CoreFinished && pageVisible && atticFinished) {
+        if (j1CoreFinished && pageVisible) {
 
-          user_consent = j1.readCookie(cookie_names.user_consent);
-          if (!user_consent.personalization) {
-            const docsSearchButton = '#quickLinksDocSearchButton';
-            $(docsSearchButton).hide();
-            return;
-          }
+          _this.setState('started');
+          logger.debug('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'module is being initialized');
 
-          // -----------------------------------------------------------------
-          // data loader
-          // -----------------------------------------------------------------
-          j1.loadHTML ({
-            xhr_container_id:   'docsearch_container',
-            xhr_data_path:      '/assets/data/docsearch/index.html',
-            xhr_data_element:   'docsearch-modal-data' },
-            'j1.adapter.docsearch',
-            'null'
-          );
+          {% for select in slim_select_settings.selects %} {% if select.enabled %}
+          logger.debug('\n' + 'select is being initialized on id: ' + '{{select.id}}');
 
-          // -------------------------------------------------------------------
-          // on 'show'
-          // -------------------------------------------------------------------
-          $('#docsearch_container').on('show.bs.modal', function () {
-            //
-            // place code here
-            //
-          }); // END modal on 'show'
+          // process the wrapper if extsts
+          if ($('#{{select.wrapper_id}}').length) {
+            logger.debug('\n' + 'select is being placed in wrapper on id: {{select.wrapper_id}}');
+            // create|place select HTML
+            selectHTML          = `{{select.items}}`;
+            selectDIV.innerHTML = selectHTML;
+            document.getElementById('{{select.wrapper_id}}').appendChild(selectDIV);
 
-          // -------------------------------------------------------------------
-          // on 'shown'
-          // -------------------------------------------------------------------
-          $('#docsearch_container').on('shown.bs.modal', function () {
-            //
-            // place code here
-            //
-          }); // END modal on 'shown'
+            // set initial select values
+            // jadams, 2024-03-06: moved to page (test_icon_picker.adoc)
 
-          // -------------------------------------------------------------------
-          // on 'hidden' (close)
-          // -------------------------------------------------------------------
-          $('#docsearch_container').on('hidden.bs.modal', function () {
+            // setup new SlimSelect
+            // jadams, 2024-03-06: setup events moved to page (test_icon_picker.adoc)
+            logger.debug('\n' + 'select is being created on id: ' + '{{select.id}}');
+            var $select_{{select.id}} = new SlimSelect({
+              select:                   'select[name ="{{select.name}}"]',
+              settings: {
+                showSearch:             slimSelectOptions.api_options.showSearch,
+                searchPlaceholder:      slimSelectOptions.api_options.searchPlaceholder,
+                searchText:             slimSelectOptions.api_options.searchText,
+                searchingText:          slimSelectOptions.api_options.searchingText,
+                searchHighlight:        slimSelectOptions.api_options.searchHighlight,
+                closeOnSelect:          slimSelectOptions.api_options.closeOnSelect,
+
+//              option 'contentLocation' currently NOT supported
+//              contentLocation:        slimSelectOptions.api_options.contentLocation,
+
+                contentPosition:        slimSelectOptions.api_options.contentPosition,
+                openPosition:           slimSelectOptions.api_options.openPosition,
+                placeholderText:        slimSelectOptions.api_options.placeholderText,
+                allowDeselect:          slimSelectOptions.api_options.allowDeselect,
+                hideSelected:           slimSelectOptions.api_options.hideSelected,
+                showOptionTooltips:     slimSelectOptions.api_options.showOptionTooltips,
+                minSelected:            slimSelectOptions.api_options.minSelected,
+                maxSelected:            slimSelectOptions.api_options.maxSelected,
+                timeoutDelay:           slimSelectOptions.api_options.timeoutDelay,
+                maxValuesShown:         slimSelectOptions.api_options.maxValuesShown
+              }
+            });
+
+            // Store the select into the adapter select object for later access
             //
-            // do something here
-            //
-          }); // END modal on 'hidden'
+            _this.select.{{select.id}} = $select_{{select.id}};
+
+            logger.debug('\n' + 'initializing select finished on id: {{select.id}}');
+          } else {
+            logger.info('\n' + 'wrapper not found for select id: {{select.wrapper_id}}');
+          } //END if selectWrapper exists
+
+          {% endif %} {% endfor %}
+          // ENDFOR (all) selects
 
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module initialization finished');
+          logger.info('\n' + 'initializing module finished');
 
           clearInterval(dependencies_met_page_ready);
-        } // END if
-      }, 10); // END dependencies_met_page_ready
+        } // END 'pageVisible'
+
+      }, 10);
+
     }, // END init
-
-    // -------------------------------------------------------------------------
-    // showDialog()
-    // display the dialog
-    // -------------------------------------------------------------------------
-    showDialog: function () {
-      logger.debug('\n' + "showDialog");
-
-      $('#docsearch_container').modal({
-        backdrop: 'static',
-        keyboard: false
-      });
-
-      $('#docsearch_container').modal('show');
-
-    }, // END showDialog
 
     // -------------------------------------------------------------------------
     // messageHandler()
@@ -230,11 +228,9 @@ var logText;
       //  Process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
-
         //
         // Place handling of command|action here
         //
-
         logger.info('\n' + message.text);
       }
 

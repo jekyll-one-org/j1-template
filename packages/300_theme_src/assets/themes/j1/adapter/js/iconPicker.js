@@ -41,12 +41,13 @@ regenerate:                             true
 
 {% comment %} Set config data (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign icon_picker_defaults  = modules.defaults.iconPicker.defaults %}
-{% assign icon_picker_settings  = modules.iconPicker.settings %}
+{% assign icon_picker_defaults  = modules.defaults.icon_picker.defaults %}
+{% assign icon_picker_settings  = modules.icon_picker.settings %}
 
 {% comment %} Set config options (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign icon_picker_options   = icon_picker_defaults | merge: icon_picker_settings %}
+
 
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -122,13 +123,10 @@ var logText;
       // Global variable settings
       // -----------------------------------------------------------------------
 
-      // create settings object from frontmatter
-      frontmatterOptions = options != null ? $.extend({}, options) : {};
-
       // create settings object from module options
       iconPickerDefaults = $.extend({}, {{icon_picker_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
       iconPickerSettings = $.extend({}, {{icon_picker_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      iconPickerOptions  = $.extend(true, {}, iconPickerDefaults, iconPickerSettings, frontmatterOptions);
+      iconPickerOptions  = $.extend(true, {}, iconPickerDefaults, iconPickerSettings);
 
       _this  = j1.adapter.iconPicker;
       logger = log4javascript.getLogger('j1.adapter.iconPicker');
@@ -141,7 +139,7 @@ var logText;
         var pageVisible   = (pageState == 'block') ? true : false;
 
         if (j1.getState() === 'finished' && pageVisible) {
-          icon_picker_button_id = '#' + iconPickerDefaults.picker_button_id;
+          icon_picker_button_id = '#' + iconPickerOptions.picker_button_id;
 
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());

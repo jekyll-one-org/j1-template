@@ -33,7 +33,7 @@ permalink:                              /pages/public/tools/previewer/google-gem
 resources:                              [
                                           animate,
                                           clipboard, lightbox, rouge,
-                                          gemini, iconpicker, slim_select
+                                          gemini, slim_select
                                         ]
 resource_options:
   - attic:

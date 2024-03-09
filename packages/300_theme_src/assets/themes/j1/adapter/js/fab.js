@@ -20,13 +20,6 @@ regenerate:                             true
  # Test data:
  #  {{ liquid_var | debug }}
  # -----------------------------------------------------------------------------
- # NOTE:
- #  jadams, 2020-07-17:
- #    J1 FAB can't be minfied for now. Uglifier fails on an ES6 (most probably)
- #    structure that couldn't fixed by 'harmony' setting. Minifier fails by:
- #    Unexpected token: punc ())
- #    Current, minifying has been disabled
- # -----------------------------------------------------------------------------
 {% endcomment %}
 
 {% comment %} Liquid var initialization
@@ -154,14 +147,19 @@ j1.adapter.fab = (function (j1, window) {
       //
       _this['moduleOptions'] = fabOptions;
 
+      // -----------------------------------------------------------------------
+      // initializer
+      // -----------------------------------------------------------------------
       var dependencies_met_navigator = setInterval(function() {
-        var pageState     = $('#no_flicker').css("display");
-        var pageVisible   = (pageState == 'block') ? true : false;
+        var pageState         = $('#content').css("display");
+        var pageVisible       = (pageState == 'block') ? true : false;
+        var navigatorFinished = (j1.adapter.navigator.getState() == 'finished') ? true : false;
 
-        if (j1.adapter.navigator.getState() == 'finished' && pageVisible) {
+        if (pageVisible && navigatorFinished) {
 
           logger.debug('\n' + 'met dependencies for: navigator');
           _this.fabLoader(fabOptions);
+
           clearInterval(dependencies_met_navigator);
         }
       }, 10);
@@ -189,12 +187,13 @@ j1.adapter.fab = (function (j1, window) {
       // ---------------------------------------------------------------------
       // Initialize FAB button
       // ---------------------------------------------------------------------
-      var dependencies_met_fab_initialized = setInterval (function () {
-        var pageState     = $('#no_flicker').css("display");
-        var pageVisible   = (pageState == 'block') ? true: false;
-        var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
+      var dependencies_met_fab_initialized = setInterval(() => {
+        var pageState      = $('#content').css("display");
+        var pageVisible    = (pageState == 'block') ? true: false;
+        var j1CoreFinished = (j1.getState() == 'finished') ? true : false;
+        var fabLoaded      = (j1.xhrDOMState['#' + fabOptions.xhr_container_id] == 'success') ? true: false;
 
-        if (j1.xhrDOMState['#' + fabOptions.xhr_container_id] == 'success' && j1.getState() == 'finished' && pageVisible ) {
+        if (j1CoreFinished && pageVisible && fabLoaded) {
           _this.setState('loaded');
           logger.info('\n' + 'set module state to: ' + _this.getState());
           logger.info('\n' + 'HTML data for FAB: ' + _this.getState());
@@ -216,6 +215,10 @@ j1.adapter.fab = (function (j1, window) {
     // Button Initializer
     // -------------------------------------------------------------------------
     buttonInitializer: function (fabOptions) {
+      var $fabContainer         = $('#' + fabOptions.xhr_container_id);
+      var iconFamily            = fabOptions.icon_family.toLowerCase();
+      var floatingActionOptions = fabOptions.menu_options;
+      var fabButtons            = document.querySelectorAll('.fab-btn');
       var eventHandler;
       var actionMenuId;
       var actionMenuOptions;
@@ -224,13 +227,9 @@ j1.adapter.fab = (function (j1, window) {
       var $actionButton;
       var toggleIcons;
       var fabActions;
-      var $fabContainer         = $('#' + fabOptions.xhr_container_id);
-      var iconFamily            = fabOptions.icon_family.toLowerCase();
-      var floatingActionOptions = fabOptions.menu_options;
-      var fabButtons            = document.querySelectorAll('.fab-btn');
 
       // check if multiple buttons detected
-      if ( fabButtons.length == 1 ) {
+      if (fabButtons.length == 1) {
         _this.setState('processing');
         logger.info('\n' + 'set module state to: ' + _this.getState());
         logger.info('\n' + 'initialize FAB menu');
@@ -250,7 +249,7 @@ j1.adapter.fab = (function (j1, window) {
         // found the FAB button gets created as a FAB (no menu) that has the
         // the action bound directly to the button
         //
-        fabActions = actionMenuOptions.items.length;
+        fabActions  = actionMenuOptions.items.length;
         toggleIcons = iconFamily + '-' + actionMenuOptions.icon + ' ' + iconFamily + '-' + actionMenuOptions.icon_hover;
 
         // toggle the icon for the FAB if configured
@@ -269,7 +268,6 @@ j1.adapter.fab = (function (j1, window) {
         }
 
         if (fabActions > 1) {
-
           actionMenuOptions.items.forEach(function (item, index) {
             // Bind an eventhandler instance if item id exists
             if ($('#' + item.id).length) {
@@ -278,11 +276,11 @@ j1.adapter.fab = (function (j1, window) {
               if (eventHandler.split(' ').length == 1) {
                 logger.info('\n' + 'register pre-configured eventhandler ' +eventHandler+ ' on id: #' + item.id);
 
-                if ( eventHandler === 'open_mmenu_toc' ) {
+                if (eventHandler === 'open_mmenu_toc') {
                   if ($('#j1-toc-mgr').length) {
                     logger.info('\n' + 'found toc in page: enabled');
-                    var dependencies_met_toccer_finished = setInterval (function () {
-                      if ( j1.adapter.toccer.getState() == 'finished' ) {
+                    var dependencies_met_toccer_finished = setInterval(() => {
+                      if (j1.adapter.toccer.getState() == 'finished') {
                         logger.debug('\n' + 'met dependencies for: toccer');
 
                         $('#open_mmenu_toc').show();
@@ -336,8 +334,8 @@ j1.adapter.fab = (function (j1, window) {
                 // check if toccer (toc_mgr) is available
                 if ($('#j1-toc-mgr').length) {
                   logger.info('\n' + 'found toc in page: enabled');
-                  var dependencies_met_toccer_finished = setInterval (function () {
-                    if ( j1.adapter.toccer.getState() == 'finished' ) {
+                  var dependencies_met_toccer_finished = setInterval(() => {
+                    if (j1.adapter.toccer.getState() == 'finished') {
                       logger.debug('\n' + 'met dependencies for toccer: finished');
 
                       // change the id of the $actionButton to the already
@@ -565,9 +563,11 @@ j1.adapter.fab = (function (j1, window) {
       //  Process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
+
         //
         // Place handling of command|action here
         //
+
         logger.info('\n' + message.text);
       }
       if (message.type === 'command' && message.action === 'status') {

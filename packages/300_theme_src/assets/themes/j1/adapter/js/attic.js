@@ -142,7 +142,7 @@ j1.adapter.attic = (function (j1, window) {
       logger.debug('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
 
-      var dependencies_met_page_ready = setInterval (function (options) {
+      var dependencies_met_page_ready = setInterval(() => {
         var pageState   = $('#no_flicker').css("display");
         var pageVisible = (pageState == 'block') ? true: false;
 
@@ -166,7 +166,7 @@ j1.adapter.attic = (function (j1, window) {
           {% else %}
           logger.warn('\n' + 'found module attics disabled');
           // add additional top space if attics are disabled
-          $('#content').addClass('mt-5');
+          $('#no_flicker').addClass('mt-5');
           clearInterval(dependencies_met_page_ready);
           {% endif %}
         }
@@ -663,7 +663,7 @@ j1.adapter.attic = (function (j1, window) {
             // start RUNNER on page 'ready'|module state 'initialized'
             //
             $(function() {
-              var dependencies_met_attic_ready = setInterval (function (options) {
+              var dependencies_met_attic_ready = setInterval(() => {
                 if (_this.getState() === 'initialized') {
                   logger.info('\n' + 'initialize attic on id {{attic_id}}: started');
                   {{attic_id}}_runner (atticOptions);
@@ -683,7 +683,7 @@ j1.adapter.attic = (function (j1, window) {
 
           // add additional top space if attic disabled
           //
-          $('#content').addClass('mt-3');
+          $('#no_flicker').addClass('mt-3');
 
           logger.warn('\n' + 'attic on id {{attic_id}}: disabled');
           $('#no_flicker').css('display', 'block');

@@ -62,7 +62,6 @@ regenerate:                             true
 
 {% comment %} analytics_options:  {{ analytics_options | debug }} {% endcomment %}
 
-
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/adapter/js/analytics.js
@@ -126,10 +125,14 @@ var logText;
     // -------------------------------------------------------------------------
     init: function (options) {
 
-      var dependencies_met_page_ready = setInterval (function (options) {
-        var pageState   = $('#no_flicker').css("display");
+      // -----------------------------------------------------------------------
+      // initializer
+      // -----------------------------------------------------------------------
+      var dependencies_met_page_ready = setInterval(() => {
+        var pageState   = $('#content').css("display");
         var pageVisible = (pageState == 'block') ? true: false;
-        if ( j1.getState() === 'finished' && pageVisible ) {
+
+        if (j1.getState() === 'finished' && pageVisible) {
           {% if analytics %}
 
             // Load  module DEFAULTS|CONFIG
@@ -219,6 +222,7 @@ var logText;
             _this.setState('finished');
             logger.debug('\n' + 'state: ' + _this.getState());
             logger.info('\n' + 'module initializing: finished');
+
             clearInterval(dependencies_met_page_ready);
             {% when "custom" %}
             // [INFO   ] [j1.adapter.analytics                    ] [ place provider: Custom Provider ]
@@ -227,6 +231,7 @@ var logText;
           {% else %}
             logger = log4javascript.getLogger('j1.adapter.analytics');
             logger.info('\n' + 'Google Analytics: disabled');
+
             clearInterval(dependencies_met_page_ready);
           {% endif %}
         }
@@ -249,9 +254,11 @@ var logText;
       //  Process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
+
         //
         // Place handling of command|action here
         //
+
         logger.info('\n' + message.text);
       }
 

@@ -162,7 +162,6 @@ var j1 = (function (options) {
   var documentHeight;
   var scrollOffset;
 
-
   // defaults for status information
   var state                         = 'not_started';
   var mode                          = 'not_detected';
@@ -238,14 +237,19 @@ var j1 = (function (options) {
     'user_session':   '{{template_config.cookies.user_session}}',
     'user_state':     '{{template_config.cookies.user_state}}',
     'user_consent':   '{{template_config.cookies.user_consent}}',
-    'user_translate': '{{template_config.cookies.user_translate}}'
+    'user_translate': '{{template_config.cookies.user_translate}}',
+    'chat_prompt':    '{{template_config.cookies.chat_prompt}}',
+    'search_prompt':  '{{template_config.cookies.search_prompt}}'
   };
+
   var user_consent = {};
+
   var user_translate = {
     'analysis':             true,
     'personalization':      true,
     'translationEnabled':   true
   };
+
   var user_session = {
     'mode':                 'web',
     'writer':               'j1.adapter',
@@ -263,14 +267,13 @@ var j1 = (function (options) {
     'previous_page':        'na',
     'last_pager':           '/pages/public/blog/navigator/'
   };
-  var user_state   = {
+
+  var user_state = {
     'writer':               'j1.adapter',
     'template_version':     '{{template_version}}',
-//
-//  for testing only
-//  'template_version':     'undefined',
-//  'template_version':     '2022.4.4',
-//
+
+    //  for testing only
+    //
     'theme_name':           'UnoLight',
     'theme_css':            '',
     'theme_author':         'J1 Team',
@@ -281,6 +284,10 @@ var j1 = (function (options) {
     'translate_locale':     navigator.language || navigator.userLanguage,
     'last_session_ts':      ''
   };
+
+  var chat_prompt = {};
+  var search_prompt = {};
+
 
   // ---------------------------------------------------------------------------
   // Helper functions
@@ -374,6 +381,7 @@ var j1 = (function (options) {
       user_session.timestamp  = timestamp_now;
 
       user_consent            = j1.readCookie(cookie_names.user_consent);
+
       user_session            = j1.existsCookie(cookie_names.user_session)
                                   ? j1.readCookie(cookie_names.user_session)
                                   : cookie_written = j1.writeCookie({
@@ -397,6 +405,24 @@ var j1 = (function (options) {
                                   : cookie_written = j1.writeCookie({
                                       name:     cookie_names.user_translate,
                                       data:     user_translate,
+                                      secure:   secure,
+                                      expires:  365
+                                    });
+
+      chat_prompt             = j1.existsCookie(cookie_names.chat_prompt)
+                                  ? j1.readCookie(cookie_names.chat_prompt)
+                                  : cookie_written = j1.writeCookie({
+                                      name:     cookie_names.chat_prompt,
+                                      data:     chat_prompt,
+                                      secure:   secure,
+                                      expires:  365
+                                    });
+
+      search_prompt           = j1.existsCookie(cookie_names.search_prompt)
+                                  ? j1.readCookie(cookie_names.search_prompt)
+                                  : cookie_written = j1.writeCookie({
+                                      name:     cookie_names.search_prompt,
+                                      data:     search_prompt,
                                       secure:   secure,
                                       expires:  365
                                     });
@@ -488,7 +514,7 @@ var j1 = (function (options) {
         .catch(function(error) {
           // jadams, 2018-08-31
           // TODO:  Check why a timeout is required
-          setTimeout (function() {
+          setTimeout(() => {
             var logger                  = log4javascript.getLogger('j1.init');
             user_session                = j1.readCookie(cookie_names.user_session);
             user_session.mode           = 'web';
@@ -508,23 +534,24 @@ var j1 = (function (options) {
             // -----------------------------------------------------------------
             // load|initialize page resources for block elements
             // NOTE: asynchronous calls should be rewitten to xhrData
-            // NOTE: Find $('#content').hide() conterpart in themer adapter
+            // NOTE: Find $('#no_flicker').hide() conterpart in themer adapter
             // -----------------------------------------------------------------
-            var dependencies_met_page_ready = setInterval (function (options) {
-              var pageState     = $('#no_flicker').css("display");
-              var pageVisible   = (pageState == 'block') ? true : false;
-              var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
-              var banner_blocks = document.querySelectorAll('[id^="banner"]').length;
-              var panel_blocks  = document.querySelectorAll('[id^="panel"]').length;
-              var footer_blocks = document.querySelectorAll('[id^="footer"]').length;
-              var banners_exits = (banner_blocks > 0) ? true : false;
-              var panels_exists = (panel_blocks > 0)  ? true : false;
-              var footer_exists = (footer_blocks > 0) ? true : false;
+            var dependencies_met_page_ready = setInterval(() => {
+              var pageState       = $('#no_flicker').css("display");
+              var pageVisible     = (pageState == 'block') ? true : false;
+              var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
+              var atticFinished   = (j1.adapter.attic.getState() == 'finished') ? true: false;
+              var banner_blocks   = document.querySelectorAll('[id^="banner"]').length;
+              var panel_blocks    = document.querySelectorAll('[id^="panel"]').length;
+              var footer_blocks   = document.querySelectorAll('[id^="footer"]').length;
+              var banners_exits   = (banner_blocks > 0) ? true : false;
+              var panels_exists   = (panel_blocks > 0)  ? true : false;
+              var footer_exists   = (footer_blocks > 0) ? true : false;
               var banner_state;
               var panel_state;
               var footer_state;
 
-              if (j1.getState() === 'finished' && pageVisible && atticFinished) {
+              if (j1CoreFinished && pageVisible && atticFinished) {
                 clearInterval(dependencies_met_page_ready);
                 logger.info('\n' + 'load block elements');
 
@@ -535,7 +562,7 @@ var j1 = (function (options) {
                 // process pages having banners or panels
                 //
                 if (banner_blocks || panel_blocks) {
-                  var dependencies_met_blocks_ready = setInterval (function (settings) {
+                  var dependencies_met_blocks_ready = setInterval(() => {
                     // check the footer if HTML portion is loaded successfully
                     if (footer_exists) {
                       footer_state = j1.getXhrDataState('#{{footer_id}}');
@@ -577,7 +604,7 @@ var j1 = (function (options) {
                     if (banner_state == 'success' && panel_state == 'success' && footer_state == 'success') {
                       // show the content|footer
                       //
-                      $('#content').show();
+                      $('#no_flicker').show();
                       $('.{{footer}}').show();
 
                       clearInterval(dependencies_met_blocks_ready);
@@ -586,7 +613,7 @@ var j1 = (function (options) {
                 } else {
                   // process pages w/o banners or panels
                   //
-                  var dependencies_met_footer_block_ready = setInterval (function (settings) {
+                  var dependencies_met_footer_block_ready = setInterval(() => {
                     // check the footer if HTML portion is loaded successfully
                     if (footer_exists) {
                       footer_state = j1.getXhrDataState('#{{footer_id}}');
@@ -600,7 +627,7 @@ var j1 = (function (options) {
                     if (footer_state == 'success') {
                       // show the content|footer
                       //
-                      $('#content').show();
+                      $('#no_flicker').show();
                       $('.{{footer}}').show();
 
                       clearInterval(dependencies_met_footer_block_ready);
@@ -673,23 +700,24 @@ var j1 = (function (options) {
       // -----------------------------------------------------------------------
       // load|initialize page resources for block elements
       // NOTE: asynchronous calls should be rewitten to xhrData
-      // NOTE: Find $('#content').hide() conterpart in themer adapter
+      // NOTE: Find $('#no_flicker').hide() conterpart in themer adapter
       // -----------------------------------------------------------------------
-      var dependencies_met_page_ready = setInterval (function (options) {
-        var pageState     = $('#no_flicker').css("display");
-        var pageVisible   = (pageState == 'block') ? true : false;
-        var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
-        var banner_blocks = document.querySelectorAll('[id^="banner"]').length;
-        var panel_blocks  = document.querySelectorAll('[id^="panel"]').length;
-        var footer_blocks = document.querySelectorAll('[id^="footer"]').length;
-        var banners_exits = (banner_blocks > 0) ? true : false;
-        var panels_exists = (panel_blocks > 0)  ? true : false;
-        var footer_exists = (footer_blocks > 0) ? true : false;
+      var dependencies_met_page_ready = setInterval(() => {
+        var pageState       = $('#no_flicker').css("display");
+        var pageVisible     = (pageState == 'block') ? true : false;
+        var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
+        var atticFinished   = (j1.adapter.attic.getState() == 'finished') ? true: false;
+        var banner_blocks   = document.querySelectorAll('[id^="banner"]').length;
+        var panel_blocks    = document.querySelectorAll('[id^="panel"]').length;
+        var footer_blocks   = document.querySelectorAll('[id^="footer"]').length;
+        var banners_exits   = (banner_blocks > 0) ? true : false;
+        var panels_exists   = (panel_blocks > 0)  ? true : false;
+        var footer_exists   = (footer_blocks > 0) ? true : false;
         var banner_state;
         var panel_state;
         var footer_state;
 
-        if (j1.getState() === 'finished' && pageVisible && atticFinished) {
+        if (j1CoreFinished && pageVisible && atticFinished) {
           clearInterval(dependencies_met_page_ready);
           logger.info('\n' + 'load block elements');
 
@@ -700,7 +728,7 @@ var j1 = (function (options) {
           // process pages having banners or panels
           //
           if (banner_blocks || panel_blocks) {
-            var dependencies_met_blocks_ready = setInterval (function (settings) {
+            var dependencies_met_blocks_ready = setInterval(() => {
               // check the footer if HTML portion is loaded successfully
               if (footer_exists) {
                 footer_state = j1.getXhrDataState('#{{footer_id}}');
@@ -740,8 +768,10 @@ var j1 = (function (options) {
               // show the content section if block content is available (CLS optimization)
               //
               if (banner_state == 'success' && panel_state == 'success' && footer_state == 'success') {
+
                 // show the content|footer
                 //
+                $('#no_flicker').show();
                 $('#content').show();
                 $('.{{footer}}').show();
 
@@ -751,7 +781,7 @@ var j1 = (function (options) {
           } else {
             // process pages w/o banners or panels
             //
-            var dependencies_met_footer_block_ready = setInterval (function (settings) {
+            var dependencies_met_footer_block_ready = setInterval(() => {
               // check the footer if HTML portion is loaded successfully
               if (footer_exists) {
                 footer_state = j1.getXhrDataState('#{{footer_id}}');
@@ -763,8 +793,10 @@ var j1 = (function (options) {
               // show the content section if footer is available (CLS optimization)
               //
               if (footer_state == 'success') {
+
                 // show the content|footer
                 //
+                $('#no_flicker').show();
                 $('#content').show();
                 $('.{{footer}}').show();
 
@@ -797,7 +829,6 @@ var j1 = (function (options) {
       // -----------------------------------------------------------------------
       //
       j1.finalizePage();
-
     },
 
     // -------------------------------------------------------------------------
@@ -1080,7 +1111,6 @@ var j1 = (function (options) {
     // -------------------------------------------------------------------------
     finalizePage: function (options) {
       var logger              = log4javascript.getLogger('j1.adapter.finalizePage');
-//    var flickerTimeout      = {{template_config.flicker_timeout}};
       var url                 = new liteURL(window.location.href);
       var baseUrl             = url.origin;
       var secure              = (url.protocol.includes('https')) ? true : false;
@@ -1288,11 +1318,13 @@ var j1 = (function (options) {
           j1.core.navigator.updateSidebar(current_user_data);
 
           // initiate smooth scroller if page is ready and visible
-          var dependencies_met_page_ready = setInterval (function (options) {
-            var pageState   = $('#no_flicker').css("display");
-            var pageVisible = (pageState == 'block') ? true: false;
-            if ( j1.getState() === 'finished' && pageVisible ) {
-              setTimeout (function() {
+          var dependencies_met_page_ready = setInterval(() => {
+            var pageState       = $('#no_flicker').css("display");
+            var pageVisible     = (pageState == 'block') ? true: false;
+            var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
+
+            if (j1CoreFinished && pageVisible) {
+              setTimeout(() => {
                 // scroll to an anchor in current page if given in URL
                 j1.scrollToAnchor();
               }, {{template_config.page_on_load_timeout}});
@@ -1430,7 +1462,7 @@ var j1 = (function (options) {
         // is using e.g GA. Because NO control is possible on 3rd parties,
         // for GDPR compliance, themes feature may disabled on
         // privacy settings
-        if (!user_consent.personalization)  {
+        if (!user_consent.personalization) {
           logger.debug('\n' + 'disable themes feature because of privacy settings');
           logger.debug('\n' + 'personalization not allowed, privacy settings for personalization: ' + user_consent.personalization);
           $("#themes_menu").hide();
@@ -1456,6 +1488,7 @@ var j1 = (function (options) {
           if (typeof template_previous_version == 'undefined') template_previous_version = 'na';
           logger.warn('\n' + 'template version detected as changed');
           logger.warn('\n' + 'template version previous|current: ' +  template_previous_version + '|' + template_version);
+
           // Update the user_state cookie
           // TODO:  replace theme_version by template_version as they
           //        are alwas the same
@@ -1478,11 +1511,12 @@ var j1 = (function (options) {
         j1.core.navigator.updateSidebar(current_user_data);
 
         // initiate smooth scroller if page is ready and visible
-        var dependencies_met_page_ready = setInterval (function (options) {
+        var dependencies_met_page_ready = setInterval(() => {
           var pageState   = $('#no_flicker').css("display");
           var pageVisible = (pageState == 'block') ? true: false;
-          if ( j1.getState() === 'finished' && pageVisible ) {
-            setTimeout (function() {
+
+          if (j1.getState() === 'finished' && pageVisible) {
+            setTimeout(() => {
               // scroll to an anchor in current page if given in URL
               j1.scrollToAnchor();
             }, {{template_config.page_on_load_timeout}});
@@ -1520,7 +1554,7 @@ var j1 = (function (options) {
         }
       }
       return o;
-    },
+    }, // END mergeData
 
     // -------------------------------------------------------------------------
     // getPrevPage()
@@ -1528,7 +1562,7 @@ var j1 = (function (options) {
     // -------------------------------------------------------------------------
     getPrevPage: function () {
       return previous_page;
-    },
+    }, // END getPrevPage
 
     // -------------------------------------------------------------------------
     // getLanguage()
@@ -1538,7 +1572,7 @@ var j1 = (function (options) {
     // -------------------------------------------------------------------------
     getLanguage: function () {
       var language = navigator.languages ? navigator.languages[0] : (navigator.language || navigator.userLanguage);
-    },
+    }, // END getLanguage
 
     // -------------------------------------------------------------------------
     // getTemplateVersion()
@@ -1546,16 +1580,13 @@ var j1 = (function (options) {
     // -------------------------------------------------------------------------
     getTemplateVersion: function () {
       return '{{template_version}}';
-    },
+    }, // END getTemplateVersion
 
     // -------------------------------------------------------------------------
     // getScrollOffset()
     // Calculate offset for a correct (smooth) scroll position
     // -------------------------------------------------------------------------
     getScrollOffset: function (offsetCorrection) {
-//     var scrollOffset;
-//      var offsetCorrection = 0;
-
       var $pagehead     = $('.attic');
       var $navbar       = $('#navigator_nav_navbar');
       var $adblock      = $('#adblock');
@@ -1578,7 +1609,7 @@ var j1 = (function (options) {
                             : -1*(n + a + f) + h + offsetCorrection;
 
       return scrollOffset;
-    },
+    }, // END getScrollOffset
 
     // -------------------------------------------------------------------------
     // scrollTo()
@@ -1632,7 +1663,7 @@ var j1 = (function (options) {
         $(window).scrollTop($(window).scrollTop()-1);
         return false;
       }
-    },
+    }, // END scrollTo
 
     // -------------------------------------------------------------------------
     //  authEnabled()
@@ -1643,7 +1674,7 @@ var j1 = (function (options) {
       var authEnabled = {{authentication_options.j1_auth.enabled}};
 
       return authEnabled;
-    },
+    }, // END authEnabled
 
     // -------------------------------------------------------------------------
     //  appDetected()
@@ -1662,7 +1693,7 @@ var j1 = (function (options) {
         detected = false;
       }
       return detected;
-    },
+    }, // END appDetected
 
     // -------------------------------------------------------------------------
     // loadHTML()
@@ -1760,16 +1791,20 @@ var j1 = (function (options) {
           logger.debug(logText);
           j1.setXhrDataState(id, 'not loaded');
           j1.setXhrDomState(id, 'not loaded');
+
           // Set processing state to 'finished' to complete module load
           state = 'finished';
           logger.debug('\n' + 'state: ' + state);
+          logger.info(logText);
+          logText = '\n' + 'page finalized successfully';
+
           // jadams, 2020-07-21: intermediate state should DISABLED
           // executeFunctionByName(mod + '.setState', window, state);
-          state = false;
+          // state = false;
         }
       }
       return state;
-    },
+    }, // END loadHTML
 
     // -------------------------------------------------------------------------
     // loadJS()
@@ -1808,7 +1843,7 @@ var j1 = (function (options) {
       });
 
       return state;
-    },
+    }, // END loadJS
 
     // -------------------------------------------------------------------------
     // removeRessource (Vanilla JS)
@@ -1826,7 +1861,7 @@ var j1 = (function (options) {
         if (allsuspects[i] && allsuspects[i].getAttribute(targetattr)!=null && allsuspects[i].getAttribute(targetattr).indexOf(filename)!=-1)
             allsuspects[i].parentNode.removeChild(allsuspects[i])
       }
-    },
+    }, // END removeRessource
 
     // -------------------------------------------------------------------------
     // subdomain()
@@ -1886,7 +1921,7 @@ var j1 = (function (options) {
       } else {
         return false;
       }
-    },
+    }, // END readCookie
 
     // -------------------------------------------------------------------------
     // writeCookie (Cookie lib)
@@ -2000,7 +2035,7 @@ var j1 = (function (options) {
       } else {
         return false;
       }
-    },
+    }, // END writeCookie
 
     // -------------------------------------------------------------------------
     // findCookie (Vanilla JS)
@@ -2016,7 +2051,7 @@ var j1 = (function (options) {
       document.cookie.replace(new RegExp(name + '[^= ]*', 'g'), function(a){ rCookie.push(a.trim()); });
 
       return rCookie;
-    },
+    }, // END findCookie
 
     // -------------------------------------------------------------------------
     // removeCookie (Vanilla JS)
@@ -2071,7 +2106,7 @@ var j1 = (function (options) {
       } else {
         return false;
       }
-    },
+    }, // END removeCookie
 
     // -------------------------------------------------------------------------
     // expireCookie (Vanilla JS)
@@ -2169,7 +2204,7 @@ var j1 = (function (options) {
       document.cookie = settings.name + '=' + content + stringifiedAttributes;
 
       return true;
-    },
+    }, // END expireCookie
 
     // -------------------------------------------------------------------------
     // existsCookie (Vanilla JS)
@@ -2209,7 +2244,7 @@ var j1 = (function (options) {
       cookieExists  = cookieContent.length ? true : false;
 
       return cookieExists;
-    },
+    }, // END existsCookie
 
     // -------------------------------------------------------------------------
     // Resolve MACROs
@@ -2287,7 +2322,7 @@ var j1 = (function (options) {
           }
         }
       }, 10);
-    },
+    }, // END resolveMacros
 
     // -------------------------------------------------------------------------
     // Update MACROs
@@ -2345,7 +2380,7 @@ var j1 = (function (options) {
           }
         }
       }, 10);
-    },
+    }, // END updateMacros
 
     // -------------------------------------------------------------------------
     // getMessage
@@ -2355,7 +2390,7 @@ var j1 = (function (options) {
       var message = j1.messages[level][message]['message'][property];
 
       return message;
-    },
+    }, // END mergeData
 
     // -------------------------------------------------------------------------
     // logger
@@ -2367,7 +2402,7 @@ var j1 = (function (options) {
       logger[level](message);
 
       return true;
-    },
+    }, // END logger
 
     // -------------------------------------------------------------------------
     // Send message
@@ -2387,8 +2422,7 @@ var j1 = (function (options) {
         //executeFunctionByName('j1.' + receiver + '.messageHandler', window, sender, message)
         executeFunctionByName(receiver + '.messageHandler', window, sender, message);
       }
-
-    },
+    }, // END sendMessage
 
     // -------------------------------------------------------------------------
     // messageHandler: MessageHandler for J1 CookieConsent module
@@ -2414,7 +2448,7 @@ var j1 = (function (options) {
       //
 
       return true;
-    },
+    }, // END messageHandler
 
     // -------------------------------------------------------------------------
     // getStyleValue:
@@ -2435,7 +2469,7 @@ var j1 = (function (options) {
       document.body.removeChild(testElement);
 
       return val;
-    },
+    }, // END getStyleValue
 
     // -------------------------------------------------------------------------
     // getStyleSheetLoaded:
@@ -2452,14 +2486,14 @@ var j1 = (function (options) {
           return true;;
         }
       }
-    },
+    }, // END getStyleSheetLoaded
 
     // -------------------------------------------------------------------------
     //  Returns the names of cookies used for J1 Theme
     // -------------------------------------------------------------------------
     getCookieNames: function () {
       return cookie_names;
-    },
+    }, // END getCookieNames
 
     // -------------------------------------------------------------------------
     // Set dynamic styles
@@ -2534,7 +2568,7 @@ var j1 = (function (options) {
     // -------------------------------------------------------------------------
     setState: function (stat) {
       state = stat;
-    },
+    }, // END setState
 
     // -------------------------------------------------------------------------
     // getState()
@@ -2542,7 +2576,7 @@ var j1 = (function (options) {
     // -------------------------------------------------------------------------
     getState: function () {
       return state;
-    },
+    }, // END getState
 
     // -------------------------------------------------------------------------
     // setXhrDataState()
@@ -2550,7 +2584,7 @@ var j1 = (function (options) {
     // -------------------------------------------------------------------------
     setXhrDataState: function (obj, stat) {
       j1.xhrDataState[obj] = stat;
-    },
+    }, // END setXhrDataState
 
     // -------------------------------------------------------------------------
     // getXhrDataState()
@@ -2558,7 +2592,7 @@ var j1 = (function (options) {
     // -------------------------------------------------------------------------
     getXhrDataState: function (obj) {
       return j1.xhrDataState[obj];
-    },
+    }, // END mergeData
 
     // -------------------------------------------------------------------------
     // setXhrDomState()
@@ -2567,7 +2601,7 @@ var j1 = (function (options) {
     // -------------------------------------------------------------------------
     setXhrDomState: function (obj, stat) {
       j1.xhrDOMState[obj] = stat;
-    },
+    }, // END getXhrDataState
 
     // -------------------------------------------------------------------------
     // getXhrDataState()
@@ -2576,7 +2610,7 @@ var j1 = (function (options) {
     // -------------------------------------------------------------------------
     getXhrDOMState: function (obj) {
       return j1.xhrDOMState[obj];
-    },
+    }, // END getXhrDOMState
 
     // -------------------------------------------------------------------------
     // setMode()
@@ -2584,7 +2618,7 @@ var j1 = (function (options) {
     // -------------------------------------------------------------------------
     setMode: function (mod) {
       mode = mod;
-    },
+    }, // END setMode
 
     // -------------------------------------------------------------------------
     // getMode()
@@ -2592,7 +2626,7 @@ var j1 = (function (options) {
     // -------------------------------------------------------------------------
     getMode: function () {
       return mode;
-    },
+    }, // END getMode
 
     // -------------------------------------------------------------------------
     // checkUserAgent()
@@ -2604,7 +2638,7 @@ var j1 = (function (options) {
       } else {
         return false;
       }
-    },
+    }, // END checkUserAgent
 
     // -------------------------------------------------------------------------
     // generateId()
@@ -2618,7 +2652,7 @@ var j1 = (function (options) {
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
      }
      return result;
-    },
+    }, // END generateId
 
     // -------------------------------------------------------------------------
     // getTrue()
@@ -2626,7 +2660,7 @@ var j1 = (function (options) {
     // -------------------------------------------------------------------------
     getTrue: function () {
       return true;
-    },
+    }, // END getTrue
 
     // -------------------------------------------------------------------------
     // getFalse()
@@ -2634,7 +2668,7 @@ var j1 = (function (options) {
     // -------------------------------------------------------------------------
     getFalse: function () {
       return false;
-    },
+    }, // END getFalse
 
     // -------------------------------------------------------------------------
     // goHome()
@@ -2650,7 +2684,7 @@ var j1 = (function (options) {
       } else {
         window.location.href = 'about:blank';
       }
-    },
+    }, // END goHome
 
     // -------------------------------------------------------------------------
     // goBack()
@@ -2659,7 +2693,7 @@ var j1 = (function (options) {
     goBack: function () {
       // where visitor has come from
       window.location.href = document.referrer;
-    },
+    }, // END goBack
 
     // -------------------------------------------------------------------------
     // scrollToAnchor()
@@ -2671,17 +2705,20 @@ var j1 = (function (options) {
       var logger = log4javascript.getLogger('j1.adapter.scrollToAnchor');
       var scrollOffset;
 
-      var dependencies_met_page_displayed = setInterval (function () {
-        var pageState   = $('#no_flicker').css("display");
-        var pageVisible = (pageState == 'block') ? true: false;
-        if (j1['pageMonitor'].pageType !== 'unknown' && j1.getState() == 'finished' && pageVisible) {
+      var dependencies_met_page_displayed = setInterval(() => {
+        var pageState      = $('#no_flicker').css("display");
+        var pageVisible    = (pageState == 'block') ? true: false;
+        var j1CoreFinished = (j1.getState() == 'finished') ? true : false;
+        var pageMonitor    = (j1['pageMonitor'].pageType !== 'unknown') ? true : false;
+
+        if (j1CoreFinished && pageVisible && pageMonitor) {
 
           // TODO: Check why a timeout is required to run the
           // smmoth scroller (j1.scrollTo)
           //
           if (j1['pageMonitor'].pageType == 'static') {
             // page type static
-            setTimeout (function() {
+            setTimeout(() => {
               var headingUrl              = new URL(window.location.href);
               var headingHash             = headingUrl.hash;
               var headingId               = headingHash.replace(/#/g, '');
@@ -2707,7 +2744,7 @@ var j1 = (function (options) {
             clearInterval(dependencies_met_page_displayed);
           } else if (j1['pageMonitor'].pageType == 'dynamic') {
             // page type dynamic
-            setTimeout (function() {
+            setTimeout(() => {
               var headingArray           = j1.core.parseHeadings();            // collect all headings in page
               var headingUrl              = new URL(window.location.href);
               var headingHash             = headingUrl.hash;
@@ -2768,15 +2805,15 @@ var j1 = (function (options) {
                 headingHash = '#';
                 logger.debug('\n' + 'scrollToAnchor: top position detected');
               } else {
-                  logger.debug('\n' + 'scrollToAnchor: headline|no: ' + headingHash + '|' + headlineNo);
+                logger.debug('\n' + 'scrollToAnchor: headline|no: ' + headingHash + '|' + headlineNo);
 
-                  // build-in scroller
-                  //
-                  window.scroll ({
-                  	top:       scrollTop,
-                  	left:      0,
-                  	behavior: 'smooth'
-                  });
+                // build-in scroller
+                //
+                window.scroll ({
+                	top:       scrollTop,
+                	left:      0,
+                	behavior: 'smooth'
+                });
               } // END if headingHash
 
             }, {{template_config.timeoutScrollDynamicPages}});
@@ -2784,7 +2821,7 @@ var j1 = (function (options) {
             clearInterval(dependencies_met_page_displayed);
           } else {
             // page type unknown (failsave fallback)
-            setTimeout (function() {
+            setTimeout(() => {
               logger.debug('\n' + 'scrollToAnchor: scroll page of type: unknown');
 
               scrollOffset = scrollOffsetCorrection - scrollOffsetBase;
@@ -2797,14 +2834,13 @@ var j1 = (function (options) {
 
         } // END if j1['pageMonitor'].pageType
       }, 10);
-    },
+    }, // END scrollToAnchor
 
     // -------------------------------------------------------------------------
     // stringToBoolean()
     // convert a string to boolean
     // -------------------------------------------------------------------------
     stringToBoolean: function (string) {
-
       switch(string.toLowerCase().trim()) {
         case "true":
         case "yes":
@@ -2818,7 +2854,6 @@ var j1 = (function (options) {
         default:
           return Boolean(string);
       }
-
     }, // END stringToBoolean
 
     // -------------------------------------------------------------------------
@@ -3130,53 +3165,11 @@ var j1 = (function (options) {
 
       // jadams, 2023-10-26: delay untion STATIC portion of a page is loaded
       //
-      setTimeout (function() {
+      setTimeout(() => {
         resizeObserver.observe(
           document.querySelector('body')
         );
       }, 500);
-
-      // jadams, 2023-10-25: disabled
-      // NOTE: Funtions like j1.getCookieNames()seems NOT available
-      // in callback beforeunload'
-      //
-      // -----------------------------------------------------------------------
-      // final updates before browser page|tab
-      // see: https://stackoverflow.com/questions/3888902/detect-browser-or-tab-closing
-      // -----------------------------------------------------------------------
-      // window.addEventListener('beforeunload', function (event) {
-      //   var cookie_names  = j1.getCookieNames();
-      //   var date          = new Date();
-      //   var timestamp_now = date.toISOString();
-      //   var user_state    = j1.readCookie(cookie_names.user_state);
-      //   var user_consent  = j1.readCookie(cookie_names.user_consent);
-      //   var url           = new liteURL(window.location.href);
-      //   var secure        = (url.protocol.includes('https')) ? true : false;
-      //   var ep_status;
-      //   var url;
-      //   var baseUrl;
-      //
-      //   // final update of the user state cookie
-      //   user_state.session_active     = false;
-      //   user_state.last_session_ts    = timestamp_now;
-      //
-      //   if (!user_consent.analysis || !user_consent.personalization) {
-      //
-      //     cookie_written = j1.writeCookie({
-      //       name:     cookie_names.user_state,
-      //       data:     user_state,
-      //       secure:   secure,
-      //       expires:  0
-      //     });
-      //   } else {
-      //     cookie_written = j1.writeCookie({
-      //       name:     cookie_names.user_state,
-      //       data:     user_state,
-      //       secure:   secure,
-      //       expires:  365
-      //     });
-      //   }
-      // }); // END beforeunload
 
       // initialize event handler for window/history/back on <ESC>
       //

@@ -27,8 +27,8 @@ regenerate:                             true
 
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment       = site.environment %}
-{% assign asset_path        = "/assets/themes/j1" %}
+{% assign environment        = site.environment %}
+{% assign asset_path         = "/assets/themes/j1" %}
 
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
@@ -41,16 +41,16 @@ regenerate:                             true
 
 {% comment %} Set config data (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign toggler_defaults    = modules.defaults.theme_toggler.defaults %}
-{% assign toggler_settings    = modules.theme_toggler.settings %}
+{% assign toggler_defaults   = modules.defaults.theme_toggler.defaults %}
+{% assign toggler_settings   = modules.theme_toggler.settings %}
 
 {% comment %} Set config options (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign toggler_options     = toggler_defaults | merge: toggler_settings %}
+{% assign toggler_options    = toggler_defaults | merge: toggler_settings %}
 
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign comments            = toggler_options.enabled %}
+{% assign comments           = toggler_options.enabled %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -105,6 +105,7 @@ var togglerDefaults;
 var togglerSettings;
 var togglerOptions;
 var frontmatterOptions;
+var _this;
 var logger;
 var logText;
 
@@ -118,7 +119,7 @@ var logText;
     // adapter initializer
     // -------------------------------------------------------------------------
     init: function (options) {
-      logger = log4javascript.getLogger('j1.adapter.theme_toggler');
+
 
       // -----------------------------------------------------------------------
       // Default module settings
@@ -136,6 +137,9 @@ var logText;
       //
       frontmatterOptions  = options != null ? $.extend({}, options) : {};
 
+      logger = log4javascript.getLogger('j1.adapter.theme_toggler');
+      _this  = j1.adapter.themeToggler;
+
       // create settings object from module options
       //
       togglerDefaults     = $.extend({}, {{toggler_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
@@ -152,12 +156,13 @@ var logText;
       // -----------------------------------------------------------------------
       // initializer
       // -----------------------------------------------------------------------
-      var dependencies_met_page_ready = setInterval (function (options) {
-        var pageState     = $('#no_flicker').css("display");
-        var pageVisible   = (pageState == 'block') ? true : false;
-        var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
+      var dependencies_met_page_ready = setInterval(() => {
+        var pageState       = $('#content').css("display");
+        var pageVisible     = (pageState == 'block') ? true : false;
+        var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
+        var atticFinished   = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-        if (j1.getState() === 'finished' && pageVisible && atticFinished) {
+        if (j1CoreFinished && pageVisible && atticFinished) {
             logger.info('\n' + 'initialize module: started');
             user_state = j1.readCookie(cookie_names.user_state);
 
@@ -170,7 +175,6 @@ var logText;
             }
 
             $('#quickLinksThemeTogglerButton').click(function() {
-
               if (user_state.theme_name == light_theme_name) {
                 user_state.theme_name = dark_theme_name;
                 user_state.theme_css  = dark_theme_css;
@@ -196,10 +200,12 @@ var logText;
               } else {
                 location.reload(true);
               }
+            }); // END button click
 
-            });
-
+            _this.setState('finished');
+            logger.debug('\n' + 'state: ' + _this.getState());
             logger.info('\n' + 'initializing module: finished');
+
             clearInterval(dependencies_met_page_ready);
         }
       }, 10);
@@ -219,9 +225,11 @@ var logText;
       //  Process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
+
         //
         // Place handling of command|action here
         //
+
         logger.info('\n' + message.text);
       }
 

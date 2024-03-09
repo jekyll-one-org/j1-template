@@ -122,7 +122,7 @@ create fully responsive web pages. The Template system offers various unique
 functionalities compared to other Jekyll themes and templates.
 
 mdi:clock-time-five-outline[24px, md-gray mt-4 mb-5 mr-2]
-*15-30 Minutes* to read
+*15-30 Minutes* to read.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------

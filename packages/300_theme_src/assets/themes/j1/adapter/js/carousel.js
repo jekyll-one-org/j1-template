@@ -131,13 +131,15 @@ j1.adapter.carousel = (function (j1, window) {
       carouselSettings = $.extend({},   {{analytics_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
       carouselOptions  = $.extend(true, {}, carouselDefaults, carouselSettings);
 
-      var dependencies_met_page_finished = setInterval(function() {
-        var pageState     = $('#no_flicker').css("display");
-        var pageVisible   = (pageState == 'block') ? true : false;
-        var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
+      // -----------------------------------------------------------------------
+      // initializer
+      // -----------------------------------------------------------------------
+      var dependencies_met_page_finished = setInterval(() => {
+        var pageState      = $('#content').css("display");
+        var pageVisible    = (pageState == 'block') ? true : false;
+        var j1CoreFinished = (j1.getState() == 'finished') ? true : false;
 
-        if (j1.getState() == 'finished' && pageVisible) {
-//      if (j1.getState() == 'finished' && pageVisible && atticFinished) {
+        if (j1CoreFinished && pageVisible) {
 
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());
@@ -197,7 +199,7 @@ j1.adapter.carousel = (function (j1, window) {
                 {% unless parallax %} {% if slider_type == 'text' %}
                   $('head').append('<style>#{{slider_id}}{border-left: 3px solid #0072ff;}</style>');
                   // wait until carousel has been initialized
-                  var dependency_met_owl_initialized = setInterval (function () {
+                  var dependency_met_owl_initialized = setInterval(() => {
                     if ($('#{{slider_id}} > .owl-wrapper-outer').length) {
                       {% if font_size %}
                       $('head').append('<style>#{{slider_id}}{font-size:{{font_size}}}</style>');
@@ -369,6 +371,7 @@ j1.adapter.carousel = (function (j1, window) {
 
           var dependencies_met_sliders_processed = setInterval(function() {
             if (_this.getState() == 'processed') {
+
               _this.setState('finished');
               logger.debug('\n' + 'state: ' + _this.getState());
               logger.info('\n' + 'initializing module finished');
@@ -379,49 +382,6 @@ j1.adapter.carousel = (function (j1, window) {
         } // END if j1.getState 'finished'
       }, 10); // END 'dependencies_met_page_finished'
     }, // END init
-
-    // -------------------------------------------------------------------------
-    // messageHandler: MessageHandler for J1 CookieConsent module
-    // Manage messages send from other J1 modules
-    // -------------------------------------------------------------------------
-    messageHandler: function (sender, message) {
-      var json_message = JSON.stringify(message, undefined, 2);
-
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
-      logger.debug(logText);
-
-      // -----------------------------------------------------------------------
-      //  Process commands|actions
-      // -----------------------------------------------------------------------
-      if (message.type === 'command' && message.action === 'module_initialized') {
-        //
-        // Place handling of command|action here
-        //
-        logger.info('\n' + message.text);
-      }
-
-      //
-      // Place handling of other command|action here
-      //
-
-      return true;
-    }, // END messageHandler
-
-    // -------------------------------------------------------------------------
-    // setState()
-    // Sets the current (processing) state of the module
-    // -------------------------------------------------------------------------
-    setState: function (stat) {
-      _this.state = stat;
-    }, // END setState
-
-    // -------------------------------------------------------------------------
-    // getState()
-    // Returns the current (processing) state of the module
-    // -------------------------------------------------------------------------
-    getState: function () {
-      return _this.state;
-    }, // END getState
 
     // -----------------------------------------------------------------------
     //  Caption text animation (currently NOT used)
@@ -747,6 +707,51 @@ j1.adapter.carousel = (function (j1, window) {
         });
       }
     }, // END fadeInLeftReset
+
+    // -------------------------------------------------------------------------
+    // messageHandler: MessageHandler for J1 CookieConsent module
+    // Manage messages send from other J1 modules
+    // -------------------------------------------------------------------------
+    messageHandler: function (sender, message) {
+      var json_message = JSON.stringify(message, undefined, 2);
+
+      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logger.debug(logText);
+
+      // -----------------------------------------------------------------------
+      //  Process commands|actions
+      // -----------------------------------------------------------------------
+      if (message.type === 'command' && message.action === 'module_initialized') {
+
+        //
+        // Place handling of command|action here
+        //
+
+        logger.info('\n' + message.text);
+      }
+
+      //
+      // Place handling of other command|action here
+      //
+
+      return true;
+    }, // END messageHandler
+
+    // -------------------------------------------------------------------------
+    // setState()
+    // Sets the current (processing) state of the module
+    // -------------------------------------------------------------------------
+    setState: function (stat) {
+      _this.state = stat;
+    }, // END setState
+
+    // -------------------------------------------------------------------------
+    // getState()
+    // Returns the current (processing) state of the module
+    // -------------------------------------------------------------------------
+    getState: function () {
+      return _this.state;
+    }, // END getState
 
   }; // END return
 

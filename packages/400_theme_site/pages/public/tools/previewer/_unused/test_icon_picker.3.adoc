@@ -1,0 +1,224 @@
+---
+title:                                  Tester
+title_extention:                        SlimSelect and IconPicker API
+tagline:                                SlimSelect and IconPicker
+
+date:                                   2024-03-05
+#last_modified:                         2024-01-01
+
+description: >
+                                        SlimSelect is an advanced Javascript API for the browser to
+                                        create featured configurable (HTML) select dropdowns. Icon
+                                        Picker is a Javascript API that creates picker interfaces to
+                                        display and select icons from any icon library in a user-friendly
+                                        UI.
+keywords: >
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap,
+                                        select, dropdown, SlimSelect
+
+categories:                             [ Tester ]
+tags:                                   [ Module, slimSelect, IconPicker ]
+
+image:
+  path:                                 /assets/images/pages/roundtrip/icon-fonts-1920x1280-bw.jpg
+  width:                                1920
+  height:                               1280
+
+fab_menu_id:                            default
+permalink:                              /pages/public/test_icon_picker/
+regenerate:                             false
+
+resources:                              [
+                                          animate, clipboard,
+                                          iconpicker, slim_select
+                                        ]
+resource_options:
+  - attic:
+      padding_top:                      600
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/pages/roundtrip/icon-fonts-1920x1280-bw.jpg
+          alt:                          Icon Fonts
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+{% comment %} Process YML config data (slim_select)
+================================================================================ {% endcomment %}
+
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign modules              = site.data.modules %}
+
+{% comment %} Set config data (settings only)
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign icon_picker_defaults = modules.defaults.icon_picker.defaults %}
+{% assign icon_picker_settings = modules.icon_picker.settings %}
+{% assign slim_select_defaults = modules.defaults.slim_select.defaults %}
+{% assign slim_select_settings = modules.slim_select.settings %}
+
+{% comment %} Set config options
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign icon_picker_options  = icon_picker_defaults | merge: icon_picker_settings %}
+{% assign slim_select_options  = slim_select_defaults | merge: slim_select_settings %}
+
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:picker_button_id:                      {{icon_picker_options.picker_button_id}}
+:picker_button_label:                   {{icon_picker_options.picker_button_label}}
+:slim_select_wrapper_id:                {{slim_select_options.wrapper_id}}
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// See: https://github.com/brianvoe/slim-select
+// See: https://slimselectjs.com/
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+[role="dropcap"]
+SlimSelect is an advanced Javascript API for the browser to create featured
+configurable (HTML) select dropdowns. Icon Picker is a Javascript API that
+creates picker interfaces to display and select icons from any icon library
+in a user-friendly UI.
+
+The tester combines both APIs to create a user interface to select and show
+supported icon sets. J1 Theme supports out-of-the-box popular icon font sets.
+The available icon sets Material Design Icons MDI and FontAwesome FA are excellent
+in design and have a rich set of icons for many categories typically used on
+web pages.
+
+mdi:clock-time-five-outline[24px, md-gray mt-4 mr-2]
+*5-10 Minutes* to read.
+
+[role="mt-5"]
+The J1 Icon Picker supports the following icon sets:
+
+* link:{url-mdil--preview}[Material Design Light Icons MDIL,  {browser-window--new}], 260+ icons of version 0  (February 2024)
+* link:{url-mdi--preview}[Material Design Regular Icons MDI,  {browser-window--new}], 7200+ icons of version 7 (March 2024)
+* link:{url-fontawesome--free-preview}[FontAwesome Icons FA,  {browser-window--new}], 2000+ icons of the *free* version 6 (March 2024)
+
+[role="mt-4"]
+.Icon sets
+[NOTE]
+====
+The *free* version of FontAwesome does *not* support the *full* icon set
+available for FA. The commercial Pro Version supports *26000+* icons but
+requires a *paid* subscription plan.
+
+The MDI *Base* Icons is a *subset* of about 2600+ icons taken out of the
+full set provided by the *regular* MDI icon set. Because the regular
+icon set is very huge, 7200+ icons, for performance reasons it is *not*
+recommended to load all icons while a page is being initialized.
+====
+
+[role="mt-4"]
+Select the icon set to be shown from the *dropdown* below. To open a picker UI
+for the icon set selected, click on the button *SHOW ICON SET SELECTED*.
+
+// slimSelect::{slim_select_wrapper_id}[role="mt-4 mb-3"]
+slimSelect::icon_library_select_wrapper[role="mt-4 mb-3"]
+
+// Button to open the picker UI for the selected icon set
+++++
+<div id="picker_button_wrapper" class="{{icon_picker_options.picker_button_wrapper_classes}}">
+  <a id="{{icon_picker_options.picker_button_id}}" href="#"
+     class="{{icon_picker_options.picker_button_classes}}"
+     aria-label="{{icon_picker_options.picker_button_label}}">
+     <i class="mdi mdi-{{icon_picker_options.picker_button_icon}} mdi-2x mr-2"></i>
+     {{icon_picker_options.picker_button_label}}
+  </a>
+</div>
+++++
+
+++++
+<script>
+  function init_select() {
+    var select = 'icon-library';
+
+    // set initial select values
+    var $selectElement        = document.querySelector('select[name=' + select + ']');
+    var icon_picker           = j1.adapter.iconPicker.picker;
+    var currentIconLibrary    = $selectElement.value;
+    var currentIconLibraryCss = $selectElement.options[$selectElement.selectedIndex].dataset.css;
+
+    icon_picker.setOptions({
+      iconLibraries:    [currentIconLibrary + '.min.json'],
+      iconLibrariesCss: [currentIconLibraryCss]
+    });
+  } //END init_select()
+
+  function init_select_events() {
+    var select  = 'icon-library';
+    var $select = j1.adapter.slimSelect.select.icon_library;
+
+    $select.events.afterClose = () => {
+      var $selectElement        = document.querySelector('select[name=' + select + ']');
+      var icon_picker           = j1.adapter.iconPicker.picker;
+      var currentIconLibrary    = $selectElement.value;
+      var currentIconLibraryCss = $selectElement.options[$selectElement.selectedIndex].dataset.css;
+
+      // apply selection
+      currentIconLibrary    = $selectElement.value;
+      currentIconLibraryCss = $selectElement.options[$selectElement.selectedIndex].dataset.css;
+
+      icon_picker.setOptions({
+        iconLibraries:    [currentIconLibrary + '.min.json'],
+        iconLibrariesCss: [currentIconLibraryCss]
+      });
+    }
+  } //END init_select_events()
+
+  var dependencies_met_page_ready = setInterval(() => {
+    var pageState   = $('#no_flicker').css("display");
+    var pageVisible = (pageState == 'block') ? true : false;
+    var j1Finished  = (j1.getState() == 'finished') ? true : false;
+
+    if (j1Finished && pageVisible) {
+      var dependencies_met_modules_ready = setInterval(() => {
+        var iconPickerFinished = (j1.adapter.iconPicker.getState() === 'finished') ? true: false;
+        var slimSelectFinished = (j1.adapter.slimSelect.getState() === 'finished') ? true: false;
+
+        if (iconPickerFinished && slimSelectFinished) {
+          var logger = log4javascript.getLogger('page.iconPicker');
+
+          // setup initial slimSelect values|iconPicker options
+          logger.info('\n' + 'slimSelect: setup initial values');
+          init_select();
+
+          // setup slimSelect events|iconPicker options
+          logger.info('\n' + 'slimSelect: setup events');
+          init_select_events()
+
+          logger.info('\n' + 'slimSelect: initializing finished');
+
+          clearInterval(dependencies_met_modules_ready);
+        }
+      }, 10);
+
+      clearInterval(dependencies_met_page_ready);
+    } // END if
+  }, 10);
+</script>
+++++
+
+[role="mb-10"]
+[TIP]
+====
+*Double-click* an icon in the Picker UI to copy the selected icon data to the
+*clipboard*.
+====

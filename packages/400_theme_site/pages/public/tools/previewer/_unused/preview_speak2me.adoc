@@ -111,7 +111,7 @@ Note that *Text-To-Speech* conversion is *not* available on mobile devices.
 
 [role="mt-4"]
 mdi:clock-time-five-outline[24px, md-gray mr-2]
-*15-30 Minutes* to read
+*15-30 Minutes* to read.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------

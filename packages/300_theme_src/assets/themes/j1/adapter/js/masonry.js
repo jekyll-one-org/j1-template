@@ -35,14 +35,14 @@ regenerate:                             true
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config    = site.data.j1_config %}
-{% assign blocks             = site.data.blocks %}
-{% assign modules            = site.data.modules %}
+{% assign template_config   = site.data.j1_config %}
+{% assign blocks            = site.data.blocks %}
+{% assign modules           = site.data.modules %}
 
 {% comment %} Set config data (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign masonry_defaults = modules.defaults.masonry.defaults %}
-{% assign masonry_settings = modules.masonry.settings %}
+{% assign masonry_defaults  = modules.defaults.masonry.defaults %}
+{% assign masonry_settings  = modules.masonry.settings %}
 
 {% comment %} Set config options (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -141,12 +141,13 @@ var logText;
       // -----------------------------------------------------------------------
       // initializer
       // -----------------------------------------------------------------------
-      var dependencies_met_page_ready = setInterval (function (options) {
-        var pageState     = $('#no_flicker').css("display");
-        var pageVisible   = (pageState == 'block') ? true: false;
-        var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
+      var dependencies_met_page_ready = setInterval(() => {
+        var pageState       = $('#content').css("display");
+        var pageVisible     = (pageState == 'block') ? true: false;
+        var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
+        var atticFinished   = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-        if ( j1.getState() === 'finished' && pageVisible && atticFinished) {
+        if (j1CoreFinished && pageVisible && atticFinished) {
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module is being initialized');
@@ -191,11 +192,11 @@ var logText;
               load_dependencies[dependency] = '';
 
               // initialize the grid if HTML portion successfully loaded
-              load_dependencies['dependencies_met_html_loaded_{{grid.id}}'] = setInterval (function (options) {
+              load_dependencies['dependencies_met_html_loaded_{{grid.id}}'] = setInterval(() => {
                 // check if HTML portion of the grid is loaded successfully
                 xhrLoadState = j1.xhrDOMState['#{{grid.id}}_parent'];
-                if ( xhrLoadState === 'success' ) {
-                  setTimeout (function() {
+                if (xhrLoadState === 'success') {
+                  setTimeout( () => {
                     var $grid_{{grid_id}} = $('#{{grid_id}}');
                     logger.info('\n' + 'initialize grid on id: ' + '{{grid_id}}');
 
@@ -370,9 +371,11 @@ var logText;
       //  Process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
+
         //
         // Place handling of command|action here
         //
+
         logger.info('\n' + message.text);
       }
 

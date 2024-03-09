@@ -35,22 +35,25 @@ regenerate:                             true
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config     = site.data.j1_config %}
-{% assign blocks              = site.data.blocks %}
-{% assign modules             = site.data.modules %}
+{% assign template_config       = site.data.j1_config %}
+{% assign blocks                = site.data.blocks %}
+{% assign modules               = site.data.modules %}
 
 {% comment %} Set config data (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign gemini_defaults     = modules.defaults.gemini.defaults %}
-{% assign gemini_settings     = modules.gemini.settings %}
+{% assign slim_select_defaults  = modules.defaults.slim_select.defaults %}
+{% assign slim_select_settings  = modules.slim_select.settings %}
+{% assign gemini_defaults       = modules.defaults.gemini.defaults %}
+{% assign gemini_settings       = modules.gemini.settings %}
 
 {% comment %} Set config options (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign gemini_options      = gemini_defaults | merge: gemini_settings %}
+{% assign slim_select_options   = slim_select_defaults | merge: slim_select_settings %}
+{% assign gemini_options        = gemini_defaults | merge: gemini_settings %}
 
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign comments            = gemini_options.enabled %}
+{% assign comments              = gemini_options.enabled %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -93,36 +96,74 @@ var state             = 'not_started';
 var leafletScript     = document.createElement('script');
 var geocoderScript    = document.createElement('script');
 var safetySettings    = [];
+var generationConfig  = {} ;
 var genAIError        = false;
 var genAIErrorType    = '';
 var response          = '';
 var modal_error_text  = '';
-var moduleLoaded      = false;
-var moduleLoaded      = false;
+var modulesLoaded     = false;
+var textHistory       = []; // Array to store the history of entered text
+var historyIndex      = -1; // Index to keep track of the current position in the history
+var chat_prompt       = {};
+
+var url;
+var baseUrl;
+var cookie_names;
+var cookie_written;
+var hostname;
+var auto_domain;
+var check_cookie_option_domain;
+var cookie_domain;
+var secure;
+
+var gemini_model;
 var apiKey;
 var validApiKey;
+var maxHistory;
+var allowHistoryDuplicates;
 var genAI;
-var frontmatterOptions;
 var result;
 var _this;
 var logger;
 var logText;
-var HarmCategory, HarmBlockThreshold;
+var HarmCategory, HarmBlockThreshold; // values taken from API
 
 // -----------------------------------------------------------------------
 // Module variable settings
 // -----------------------------------------------------------------------
-var geminiDefaults  = $.extend({}, {{gemini_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-var geminiSettings  = $.extend({}, {{gemini_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-var geminiOptions   = $.extend(true, {}, geminiDefaults, geminiSettings, frontmatterOptions);
 
-const defaultPrompt = geminiOptions.prompt.default;
-const httpError400  = geminiOptions.errors.http400;
-const httpError500  = geminiOptions.errors.http500;
+// create settings object from module options
+//
+var slimSelectDefaults  = $.extend({}, {{slim_select_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+var slimSelectSettings  = $.extend({}, {{slim_select_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+var slimSelectOptions   = $.extend(true, {}, slimSelectDefaults, slimSelectSettings);
+
+var geminiDefaults      = $.extend({}, {{gemini_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+var geminiSettings      = $.extend({}, {{gemini_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+var geminiOptions       = $.extend(true, {}, geminiDefaults, geminiSettings);
+
+const defaultPrompt     = geminiOptions.prompt.default;
+const httpError400      = geminiOptions.errors.http400;
+const httpError500      = geminiOptions.errors.http500;
 
 // -----------------------------------------------------------------------------
 // Helper functions
 // -----------------------------------------------------------------------------
+
+  function init_select_events() {
+    var select  = document.getElementById(geminiOptions.prompt_history_id);
+    var $select = select.slim;
+    var value;
+
+    $select.events.afterClose = () => {
+      // Get|Set selected value from history
+      value = $select.getSelected();
+      $select.setSelected(value);
+      $select.close();
+
+      document.getElementById('prompt').value = value;
+    }
+  } //END init_select_events()
 
   // Log the geolocation position
   function showPosition(position) {
@@ -171,10 +212,11 @@ const httpError500  = geminiOptions.errors.http500;
   async function runner() {
     let input = document.getElementById("name");
 
-    // For text-only input, use the gemini-pro model
+    // For text-only input, use the selected model
     const model = genAI.getGenerativeModel({
-      model: "gemini-pro",
-      safetySettings
+      model: gemini_model,
+      safetySettings,
+      generationConfig
     });
 
     var prompt = $('textarea#prompt').val();
@@ -202,14 +244,14 @@ const httpError500  = geminiOptions.errors.http500;
     } finally {
         if (!genAIError) {
           try {
-            response = await result.response;
+            response  = await result.response;
           } catch (e) {
             logger.warn('\n' + e);
           } finally {
             $("#spinner").hide();
 
             // Evaluate|Process feedback returned from API
-            var candidateRatings = geminiOptions.candidateRatings;
+            var candidateRatings = geminiOptions.api_options.candidateRatings;
             var responseText     = '';
             var safetyRatings;
             var safetyRating;
@@ -233,7 +275,9 @@ const httpError500  = geminiOptions.errors.http500;
                 if (ratingCategory !== undefined && ratingCategory !== '' && ratingProbability !== undefined && ratingProbability !== '') {
                   logger.warn('\n' + 'Security issue detected, reason: ' + ratingCategory + ' = ' + ratingProbability);
                 }
-                responseText = 'Response disabled due to security reasons. You need to <b>change your prompt</b> to get proper results.';
+                var ratingCategoryText    = ratingCategory.replace("HARM_CATEGORY_", '').toLowerCase();
+                var ratingProbabilityText = ratingProbability.toLowerCase();
+                responseText = 'Response disabled due to security reasons (<b>' + ratingCategoryText + ': ' + ratingProbabilityText + '</b>). Please modify your prompt.';
               }
               if (response.text !== undefined && response.text.length > 0) {
                 responseText = response.text;
@@ -279,30 +323,47 @@ const httpError500  = geminiOptions.errors.http500;
                 if (safetyCategory !== undefined) {
                   logger.debug('\n' + safetyCategory + ': ' + safetyRating);
                 }
-                if (response.candidates[0].finishReason == 'SAFETY') {
-                  responseText = 'Response disabled due to security reasons. You need to <b>change your prompt</b> to get proper results.';
-                }
-              } //END if finishReason
-            }
+              } //END responseFinishReason STOP
+
+              if (response.candidates[0].finishReason == 'MAX_TOKENS') {
+                responseText = 'Response disabled due to model settings (<b>maxOutputTokens: ' + geminiOptions.api_options.generationConfig.maxOutputTokens + '</b>). You need to increase your settings to get full response.';
+              } //END responseFinishReason MAX_TOKENS
+
+              if (response.candidates[0].finishReason == 'SAFETY') {
+                responseText = 'Response disabled due to security reasons. You need to <b>change your prompt</b> to get proper results.';
+                  console.warn('Response disabled due to security reasons');
+              } //END responseFinishReason SAFETY
+
+              if (response.candidates[0].finishReason == 'RECITATION') {
+                responseText = 'Response flagged "RECITATION". Resposne currently not supported';
+                console.warn('finishReason "RECITATION" currently not supported');
+              } //END responseFinishReason RECITATION
+
+              if (response.candidates[0].finishReason == 'OTHER') {
+                responseText = 'Response disabled due to unknown reasons.';
+                console.warn('Response disabled due to unknown reasons');
+              } //END responseFinishReason OTHER
+
+            } //END if response.candidates
 
             if (responseText.length > 0) {
               // Set|Show UI elements
-              if (responseText.length < geminiOptions.responseLengthMin) {
-                logger.warn('\n' + 'Response generated too short: <' + geminiOptions.responseLengthMin + ' characters');
-                document.getElementById('md_result').innerHTML = 'Response generated too short (less than ' + geminiOptions.responseLengthMin + ' characters). Please re-run the generation for better results';
+              if (responseText.length < geminiOptions.api_options.responseLengthMin) {
+                logger.warn('\n' + 'Response generated too short: <' + geminiOptions.api_options.responseLengthMin + ' characters');
+                document.getElementById('md_result').innerHTML = 'Response generated too short (less than ' + geminiOptions.api_options.responseLengthMin + ' characters). Please re-run the generation for better results';
               } else {
                 document.getElementById('md_result').innerHTML = marked.parse(responseText);
               }
               $("#result").show();
               $("#response").show();
-            }
+            } //END responseText length
           } //END finally
         } else {
           if (geminiOptions.detectGeoLocation) {
             geoFindMe();
           }
           $("#spinner").hide();
-          setTimeout (function() {
+          setTimeout(() => {
             $('#errorModal').modal('show');
           }, 1000);
        } //END else
@@ -332,12 +393,14 @@ const httpError500  = geminiOptions.errors.http500;
       // -----------------------------------------------------------------------
       // Module variable settings
       // -----------------------------------------------------------------------
-
-      // create settings object from frontmatter
-      frontmatterOptions  = options != null ? $.extend({}, options) : {};
-
-      _this  = j1.adapter.gemini;
-      logger = log4javascript.getLogger('j1.adapter.gemini');
+      _this         = j1.adapter.gemini;
+      logger        = log4javascript.getLogger('j1.adapter.gemini');
+      cookie_names  = j1.getCookieNames();
+      url           = new liteURL(window.location.href);
+      baseUrl       = url.origin;
+      hostname      = url.hostname;
+      auto_domain   = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
+      secure        = (url.protocol.includes('https')) ? true : false;
 
       // Module loader
       _this.loadModules();
@@ -346,10 +409,12 @@ const httpError500  = geminiOptions.errors.http500;
       _this.loadUI();
 
       // Module initializer
-      var dependencies_met_page_ready = setInterval (function (options) {
-        var pageState     = $('#no_flicker').css("display");
-        var pageVisible   = (pageState == 'block') ? true : false;
-        var uiLoaded      = (j1.xhrDOMState['#gemini_ui'] == 'success') ? true : false;
+      var dependencies_met_page_ready = setInterval(() => {
+        var pageState           = $('#content').css("display");
+        var pageVisible         = (pageState == 'block') ? true : false;
+        var j1CoreFinished      = (j1.getState() == 'finished') ? true : false;
+        var slimSelectFinished  = (j1.adapter.slimSelect.getState() == 'finished') ? true : false;
+        var uiLoaded            = (j1.xhrDOMState['#gemini_ui'] == 'success') ? true : false;
 
         if (!logStartOnce) {
           _this.setState('started');
@@ -358,7 +423,7 @@ const httpError500  = geminiOptions.errors.http500;
           logStartOnce = true;
         }
 
-        if (j1.getState() === 'finished' && pageVisible && moduleLoaded && uiLoaded) {
+        if (j1CoreFinished && pageVisible && slimSelectFinished && uiLoaded && modulesLoaded) {
 
           // Initialize|Hide UI Components
           $("#gemini_ui_container").show();
@@ -374,30 +439,166 @@ const httpError500  = geminiOptions.errors.http500;
             $("#reset").hide();
           }
 
-          const sendButton = document.getElementById('send');
+          // Get the textarea element
+          const textarea = document.getElementById(geminiOptions.prompt_id);
+
+          // Get SlimSelect object for the history (placed ny slimSelect adapter)
+          const selectList  = document.getElementById('prompt_history');
+//        const selectList  = document.getElementById(geminiOptions.prompt_history_id);
+          const $slimSelect = selectList.slim;
+
+          // limit the history array length
+          maxHistory             = geminiOptions.max_history;
+          allowHistoryDuplicates = geminiOptions.allow_history_duplicates;
+
+          init_select_events();
+
+          // Initialize the textHistory array from cookie
+          if (geminiOptions.read_prompt_history_from_cookie) {
+            var data    = [];
+            var option  = {};
+            chat_prompt = j1.existsCookie(cookie_names.chat_prompt)
+              ? j1.readCookie(cookie_names.chat_prompt)
+              : {};
+            // convert the chat_prompt object to array textHistory
+            textHistory = Object.values(chat_prompt);
+
+            // Remove duplicates from the history array
+            if (!allowHistoryDuplicates && textHistory.length > 1) {
+              // Create a 'Set' from the history array to automatically remove duplicates
+              var uniqueArray = [...new Set(textHistory)];
+              textHistory = uniqueArray;
+            } // END if allowHistoryDupicates
+
+            textHistory.forEach(function(optionText) {
+              option = {
+                text: optionText
+              }
+              data.push(option);
+            }); // END forEach
+
+            // Update the history select
+            $slimSelect.setData(data);
+
+            // Display history select container
+            if (textHistory.length > 0) {
+              $("#list-container").show();
+            }
+          }
+
+          // Send request to generate results
+          const sendButton = document.getElementById('{{gemini_options.buttons.generate.id}}');
           sendButton.addEventListener('click', (event) => {
+
             // Prevent default actions
             event.preventDefault();
+
+            // Initialize the textHistory array
+            if (geminiOptions.read_prompt_history_from_cookie) {
+              chat_prompt = j1.existsCookie(cookie_names.chat_prompt)
+                ? j1.readCookie(cookie_names.chat_prompt)
+                : {};
+              // convert the chat_prompt object to array textHistory
+              textHistory = Object.values(chat_prompt);
+            }
+
+            // Update the history array
+            if (textarea.value.length > 0 && textHistory.length < maxHistory) {
+              // Add the current value of the textarea to the history array
+              textHistory.push(textarea.value);
+            } else if (textarea.value.length > 0 && textHistory.length == maxHistory) {
+              // Replace the oldest history element by current prompt
+              textHistory[0] = textarea.value;
+            } else if (textarea.value.length == 0 && textHistory.length == maxHistory) {
+              // Replace the oldest history element by defaultPrompt prompt
+              textHistory[0] = defaultPrompt;
+            } else if (textarea.value.length == 0 && textHistory.length < maxHistory) {
+              // Add the default prompt
+              textHistory.push(defaultPrompt);
+            } //END if textarea length
+
+            // Remove duplicates from the history array
+            if (!allowHistoryDuplicates && textHistory.length > 1) {
+              // Create a 'Set' from the history array to automatically remove duplicates
+              var uniqueArray = [...new Set(textHistory)];
+              textHistory = uniqueArray;
+            } // END if allowHistoryDupicates
+
+            // Loop through the history array to create data elements
+            data    = [];
+            option  = {};
+            textHistory.forEach(function(optionText) {
+              option = {
+                text: optionText
+              }
+              data.push(option);
+            }); // END forEach
+
+            // Update the history select
+            $slimSelect.setData(data);
+
+            // Display history select container
+            if (textHistory.length > 0) {
+              $("#list-container").show();
+            }
+
+            if (geminiOptions.save_prompt_history_to_cookie) {
+              cookie_written = j1.writeCookie({
+                name:     cookie_names.chat_prompt,
+                data:     textHistory,
+                secure:   secure
+              });
+            }
+
+            // Display history select container
+            if (textHistory.length > 0) {
+              $("#list-container").show();
+            }
 
             // Clear UI elements
             document.getElementById('md_result').innerHTML = '';
             $("#result").hide();
             $("#spinner").show();
 
-            // Run main processing
+            // Call the Gemini API for processing
             runner();
           }); //END sendButton (click)
 
           // Clear input form|spinner|responses
-          const resetButton = document.getElementById('reset');
+          const resetButton = document.getElementById('{{gemini_options.buttons.reset.id}}');
           resetButton.addEventListener('click', (event) => {
             // Prevent default actions
             event.preventDefault();
+
             document.getElementById("prompt").value   = '';
             document.getElementById("response").value = '';
             $("#spinner").hide();
             $("#response").hide();
           }); //END resetButton (click)
+
+          // Clear history|cookie
+          const clearButton = document.getElementById('{{gemini_options.buttons.clear.id}}');
+          clearButton.addEventListener('click', (event) => {
+            // Prevent default actions
+            event.preventDefault();
+
+            textHistory = [];
+            if (geminiOptions.save_prompt_history_to_cookie) {
+              j1.removeCookie({
+                name:     cookie_names.chat_prompt,
+                domain:   auto_domain,
+                secure:   secure
+              });
+
+              cookie_written = j1.writeCookie({
+                name:     cookie_names.chat_prompt,
+                data:     {},
+                secure:   secure
+              });
+            }
+
+            $("#list-container").hide();
+          }); //END clearButton (click)
 
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
@@ -458,7 +659,7 @@ const httpError500  = geminiOptions.errors.http500;
     // -------------------------------------------------------------------------
     loadModules: function () {
 
-      if (geminiOptions.detectGeoLocation) {
+      if (geminiOptions.detect_geo_location) {
         leafletScript.async   = true;
         leafletScript.type    = "script";
         leafletScript.id      = 'leaflet-api';
@@ -472,36 +673,46 @@ const httpError500  = geminiOptions.errors.http500;
         document.head.appendChild(geocoderScript);
       }
 
+      // https://github.com/google/generative-ai-js/blob/main/docs/reference/generative-ai.md
       import('//esm.run/@google/generative-ai')
         .then((module) => {
           // Module is imported successfully
-          apiKey             = geminiOptions.apiKey;
+          apiKey             = geminiOptions.api_options.apiKey;
           validApiKey        = (apiKey.includes('your-')) ? false : true;
           genAI              = new module.GoogleGenerativeAI(apiKey);
           HarmCategory       = module.HarmCategory;
           HarmBlockThreshold = module.HarmBlockThreshold;
+          gemini_model       = geminiOptions.api_options.model;
+
+          generationConfig = {
+            candidateCount:   geminiOptions.api_options.generationConfig.candidateCount,
+            maxOutputTokens:  geminiOptions.api_options.generationConfig.maxOutputTokens,
+            temperature:      geminiOptions.api_options.generationConfig.temperature,
+            topK:             geminiOptions.api_options.generationConfig.topK,
+            topP:             geminiOptions.api_options.generationConfig.topP
+          };
 
           safetySettings = [
             {
               category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-              threshold: geminiOptions.safetyRatings.HARM_CATEGORY_DANGEROUS_CONTENT
+              threshold: geminiOptions.api_options.safetyRatings.HARM_CATEGORY_DANGEROUS_CONTENT
             },
             {
               category: HarmCategory.HARM_CATEGORY_HARASSMENT,
-              threshold: geminiOptions.safetyRatings.HARM_CATEGORY_HARASSMENT
+              threshold: geminiOptions.api_options.safetyRatings.HARM_CATEGORY_HARASSMENT
             },
             {
               category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-              threshold: geminiOptions.safetyRatings.HARM_CATEGORY_HATE_SPEECH
+              threshold: geminiOptions.api_options.safetyRatings.HARM_CATEGORY_HATE_SPEECH
             },
             {
               category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-              threshold: geminiOptions.safetyRatings.HARM_CATEGORY_SEXUALLY_EXPLICIT
+              threshold: geminiOptions.api_options.safetyRatings.HARM_CATEGORY_SEXUALLY_EXPLICIT
             }
           ];
 
           console.debug('gemini: Importing module: successful');
-          moduleLoaded = true;
+          modulesLoaded = true;
         })
         .catch((error) => {
           // An error occurred during module import

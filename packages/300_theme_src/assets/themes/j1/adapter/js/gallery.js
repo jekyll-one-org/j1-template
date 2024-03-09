@@ -38,12 +38,12 @@ regenerate:                             true
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign gallery_defaults   = modules.defaults.gallery.defaults %}
-{% assign gallery_settings   = modules.gallery.settings %}
+{% assign gallery_defaults      = modules.defaults.gallery.defaults %}
+{% assign gallery_settings      = modules.gallery.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign gallery_options    = gallery_defaults | merge: gallery_settings %}
+{% assign gallery_options       = gallery_defaults | merge: gallery_settings %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -112,9 +112,8 @@ j1.adapter.gallery = (function (j1, window) {
     // Initializer
     // -------------------------------------------------------------------------
     init: function (options) {
-
-      url               = new URL(window.location.href);
-      origin            = url.origin;
+      url    = new URL(window.location.href);
+      origin = url.origin;
 
       // flag used for Chromium browser workaround
       j1['jg'] = {
@@ -132,11 +131,11 @@ j1.adapter.gallery = (function (j1, window) {
       // -----------------------------------------------------------------------
       // Global variable settings
       // -----------------------------------------------------------------------
-      _this = j1.adapter.gallery;
+      _this  = j1.adapter.gallery;
       logger = log4javascript.getLogger('j1.adapter.gallery');
 
       // create settings object from frontmatter (page settings)
-      frontmatterOptions  = options != null ? $.extend({}, options) : {};
+      frontmatterOptions = options != null ? $.extend({}, options) : {};
 
       // Load  module DEFAULTS|CONFIG
       galleryDefaults = $.extend({}, {{gallery_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
@@ -147,12 +146,15 @@ j1.adapter.gallery = (function (j1, window) {
       console.debug('loading HTML portion for all galleries configured');
       _this.loadGalleryHTML(galleryOptions, galleryOptions.galleries);
 
-      var dependencies_met_j1_finished = setInterval(function() {
-        var pageState     = $('#no_flicker').css("display");
-        var pageVisible   = (pageState == 'block') ? true : false;
-        var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
+      // -----------------------------------------------------------------------
+      // initializer
+      // -----------------------------------------------------------------------
+      var dependencies_met_j1_core_finished = setInterval(() => {
+        var pageState      = $('#content').css("display");
+        var pageVisible    = (pageState == 'block') ? true : false;
+        var j1CoreFinished = (j1.getState() == 'finished') ? true : false;
 
-        if (j1.getState() == 'finished' && pageVisible) {
+        if (j1CoreFinished && pageVisible) {
           // initialize state flag
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());
@@ -164,7 +166,7 @@ j1.adapter.gallery = (function (j1, window) {
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module initialized successfully');
 
-          clearInterval(dependencies_met_j1_finished);
+          clearInterval(dependencies_met_j1_core_finished);
         } // END 'finished' && 'pageVisible'
       }, 10);
     },
@@ -194,10 +196,10 @@ j1.adapter.gallery = (function (j1, window) {
 
           // initialize the gallery if HTML portion successfully loaded
           //
-          load_dependencies['dependencies_met_html_loaded_{{gallery_id}}'] = setInterval (function (options) {
+          load_dependencies['dependencies_met_html_loaded_{{gallery_id}}'] = setInterval(() => {
             // check if HTML portion of the gallery is loaded successfully
             xhrLoadState = j1.xhrDOMState['#{{gallery_id}}_parent'];
-            if ( xhrLoadState === 'success' ) {
+            if (xhrLoadState === 'success') {
               var $grid_{{gallery_id}} = $('#{{gallery_id}}');                  // used for later access
 
               logger.info('\n' + 'dyn_loader, initialize gallery on id: ' + '{{gallery_id}}');
@@ -307,9 +309,9 @@ j1.adapter.gallery = (function (j1, window) {
               // workaround for Chromium brwosers if callback jg.complete
               // NOT fired
               //
-              setTimeout (function() {
+              setTimeout(() => {
                 if (j1.jg.callback.{{gallery_id}} == 'waiting') {
-                  logger.warn('\n' + 'dyn_loader, callback "jg.callback": ' + j1.jg.callback.{{gallery_id}})
+                  logger.debug('\n' + 'dyn_loader, callback "jg.callback": ' + j1.jg.callback.{{gallery_id}})
                   logger.info('\n' + 'dyn_loader, initialize lightGallery on id: ' + '{{gallery_id}}');
 
                   var lg = document.getElementById("{{gallery_id}}");
