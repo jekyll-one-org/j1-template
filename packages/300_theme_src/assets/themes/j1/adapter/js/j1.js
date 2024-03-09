@@ -285,9 +285,8 @@ var j1 = (function (options) {
     'last_session_ts':      ''
   };
 
-  var chat_prompt = {};
+  var chat_prompt   = {};
   var search_prompt = {};
-
 
   // ---------------------------------------------------------------------------
   // Helper functions
