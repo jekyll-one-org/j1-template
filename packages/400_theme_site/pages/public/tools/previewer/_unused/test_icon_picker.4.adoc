@@ -25,7 +25,6 @@ image:
   width:                                1920
   height:                               1280
 
-select_id:                              icon_library
 fab_menu_id:                            default
 permalink:                              /pages/public/test_icon_picker/
 regenerate:                             false
@@ -74,6 +73,7 @@ resource_options:
 // :page--attr:                         <attr-value>
 :picker_button_id:                      {{icon_picker_options.picker_button_id}}
 :picker_button_label:                   {{icon_picker_options.picker_button_label}}
+:slim_select_wrapper_id:                {{slim_select_options.wrapper_id}}
 
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
@@ -130,11 +130,7 @@ recommended to load all icons while a page is being initialized.
 Select the icon set to be shown from the *dropdown* below. To open a picker UI
 for the icon set selected, click on the button *SHOW ICON SET SELECTED*.
 
-// {% for select in slim_select_options.selects %}{% if select.id == page.select_id %}
-// wrapper_id: {{select.wrapper_id}}
-// {% endif %}{% endfor %}
-
-// Wrapper (div) placed for the <select> loaded by module slimSelect
+// slimSelect::{slim_select_wrapper_id}[role="mt-4 mb-3"]
 slimSelect::icon_library_select_wrapper[role="mt-4 mb-3"]
 
 // Button to open the picker UI for the selected icon set
@@ -147,14 +143,16 @@ slimSelect::icon_library_select_wrapper[role="mt-4 mb-3"]
      {{icon_picker_options.picker_button_label}}
   </a>
 </div>
+++++
 
+++++
 <script>
   function init_select() {
     var select = 'icon-library';
 
     // set initial select values
     var $selectElement        = document.querySelector('select[name=' + select + ']');
-    var icon_picker           = j1.adapter.iconPicker.icon_picker;
+    var icon_picker           = j1.adapter.iconPicker.picker;
     var currentIconLibrary    = $selectElement.value;
     var currentIconLibraryCss = $selectElement.options[$selectElement.selectedIndex].dataset.css;
 
@@ -167,15 +165,12 @@ slimSelect::icon_library_select_wrapper[role="mt-4 mb-3"]
   function init_select_events() {
     var select  = 'icon-library';
     var $select = j1.adapter.slimSelect.select.icon_library;
-    var logger  = log4javascript.getLogger('page.iconPicker');
 
     $select.events.afterClose = () => {
       var $selectElement        = document.querySelector('select[name=' + select + ']');
-      var icon_picker           = j1.adapter.iconPicker.icon_picker;
+      var icon_picker           = j1.adapter.iconPicker.picker;
       var currentIconLibrary    = $selectElement.value;
       var currentIconLibraryCss = $selectElement.options[$selectElement.selectedIndex].dataset.css;
-
-      logger.debug('\n' + 'slimSelect: use current IconLibrary: ' + currentIconLibrary);
 
       // apply selection
       currentIconLibrary        = $selectElement.value;
@@ -189,7 +184,7 @@ slimSelect::icon_library_select_wrapper[role="mt-4 mb-3"]
   } //END init_select_events()
 
   var dependencies_met_page_ready = setInterval(() => {
-    var pageState   = $('#content').css("display");
+    var pageState   = $('#no_flicker').css("display");
     var pageVisible = (pageState == 'block') ? true : false;
     var j1Finished  = (j1.getState() == 'finished') ? true : false;
 
