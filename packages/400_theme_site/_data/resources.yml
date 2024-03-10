@@ -1738,7 +1738,10 @@ resources:
       pass_init_data:                   false
 
       data:
-        css:                            [ modules/iconPicker/css/universal-icon-picker ]
+        css:                            [
+                                          modules/iconPicker/css/universal-icon-picker,
+                                          modules/iconPicker/css/theme/uno
+                                        ]
         files:                          [ adapter/js/iconPicker.js ]
         js:                             [ modules/iconPicker/js/universal-icon-picker ]
         init_function:                  [ j1.adapter.iconPicker.init ]
