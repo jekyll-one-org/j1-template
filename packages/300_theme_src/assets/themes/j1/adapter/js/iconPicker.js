@@ -147,9 +147,9 @@ var logText;
           logger.info('\n' + 'module is being initialized on id: ' + icon_picker_button_id);
 
           icon_picker = new UniversalIconPicker(icon_picker_button_id, {
-            allowEmpty:       iconPickerOptions.allowEmpty,
-            iconLibraries:    iconPickerOptions.iconLibraries,
-            iconLibrariesCss: iconPickerOptions.iconLibrariesCss,
+            allowEmpty:       iconPickerOptions.api_options.allowEmpty,
+            iconLibraries:    iconPickerOptions.api_options.iconLibraries,
+            iconLibrariesCss: iconPickerOptions.api_options.iconLibrariesCss,
             onSelect: function(jsonIconData) {
               // copy selected icon to clipboard (iconClass)
               var copyFrom = document.createElement('textarea');

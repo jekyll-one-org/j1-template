@@ -177,7 +177,7 @@ slimSelect::icon_library_select_wrapper[role="mt-4 mb-3"]
       var currentIconLibrary    = $selectElement.value;
       var currentIconLibraryCss = $selectElement.options[$selectElement.selectedIndex].dataset.css;
 
-      logger.info('\n' + 'slimSelect: use current IconLibrary: ' + currentIconLibrary);
+      logger.debug('\n' + 'slimSelect: use current IconLibrary: ' + currentIconLibrary);
 
       // apply selection
       currentIconLibrary        = $selectElement.value;
