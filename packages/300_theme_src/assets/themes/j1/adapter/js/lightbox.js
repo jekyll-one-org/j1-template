@@ -125,20 +125,20 @@ j1.adapter.lightbox = (function (j1, window) {
       logger  = log4javascript.getLogger('j1.adapter.lightbox');
 
       // create settings object from frontmatter (page settings)
-      frontmatterOptions  = options != null ? $.extend({}, options) : {};
+      frontmatterOptions    = options != null ? $.extend({}, options) : {};
 
       // Load  module DEFAULTS|CONFIG
-      lightboxDefaults          = $.extend({}, {{lightbox_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      lightboxSettings          = $.extend({}, {{lightbox_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      lightboxOptions           = $.extend(true, {}, lightboxDefaults, lightboxSettings, frontmatterOptions);
+      lightboxDefaults      = $.extend({}, {{lightbox_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      lightboxSettings      = $.extend({}, {{lightbox_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      lightboxOptions       = $.extend(true, {}, lightboxDefaults, lightboxSettings, frontmatterOptions);
 
-      var dependencies_met_j1_finished = setInterval(function() {
-        var pageState     = $('#no_flicker').css("display");
-        var pageVisible   = (pageState == 'block') ? true: false;
-        var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
+      var dependencies_met_page_ready = setInterval(() => {
+        var pageState       = $('#content').css("display");
+        var pageVisible     = (pageState == 'block') ? true: false;
+        var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
+        var lbV2Finished    = ($('#lightbox').length) ? true : false;
 
-         if (j1.getState() == 'finished' && pageVisible) {
-//       if (j1.getState() == 'finished' && pageVisible && atticFinished) {
+         if (j1CoreFinished && pageVisible && lbV2Finished) {
 
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());
@@ -159,30 +159,13 @@ j1.adapter.lightbox = (function (j1, window) {
             wrapAround:                   lightboxOptions.wrapAround
           });
 
-          // _this.setState('finished');
-          // logger.debug('\n' + 'state: ' + _this.getState());
-          // logger.info('\n' + 'initializing module finished');
-
-          clearInterval(dependencies_met_j1_finished);
-        } // END dependencies_met_j1_finished
-      }, 10);
-
-      // jadams, 2023-05-07: place CSS styles in GENERAL on a LIGHTBOX V2 doesn't help.
-      // a lightbox shoud restpect the individual IMAGE styles
-      // FixMe:
-      //
-      var dependencies_met_lb_v2_finished = setInterval(function() {
-        var lb_v2 = $('#lightbox').length;
-        if (lb_v2) {
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'initializing module finished');
 
-          // $('#lightbox').css("filter: grayscale(0.8) contrast(0.8) brightness(0.7) sepia(1)");
-
-          clearInterval(dependencies_met_lb_v2_finished);
-        }
-      }, 10); // END dependencies_met_lb_v2_finished
+          clearInterval(dependencies_met_page_ready);
+        } // END dependencies_met_page_ready
+      }, 10);
 
     }, // END init lightbox
 

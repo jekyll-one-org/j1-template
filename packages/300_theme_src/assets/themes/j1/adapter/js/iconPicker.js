@@ -135,10 +135,11 @@ var logText;
       // initializer
       // -----------------------------------------------------------------------
       var dependencies_met_page_ready = setInterval (function (options) {
-        var pageState     = $('#no_flicker').css("display");
-        var pageVisible   = (pageState == 'block') ? true : false;
+        var pageState       = $('#content').css("display");
+        var pageVisible     = (pageState == 'block') ? true : false;
+        var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
 
-        if (j1.getState() === 'finished' && pageVisible) {
+        if (j1CoreFinished && pageVisible) {
           icon_picker_button_id = '#' + iconPickerOptions.picker_button_id;
 
           _this.setState('started');

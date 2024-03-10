@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
-# ~/_plugins/asciidoctor-extensions/gemini-ui-block.rb
-# Asciidoctor extension for the J1 Gemini module
+# ~/_plugins/asciidoctor-extensions/slim-select-block.rb
+# Asciidoctor extension for the J1 slimSelect module
 #
 # Product/Info:
 # https://jekyll.one
@@ -17,18 +17,18 @@ include Asciidoctor
 #
 # Usage
 #
-#   gemini::ui_id[role="additional classes"]
+#   slimSelect::wrapper_id[role="additional classes"]
 #
 # Example:
 #
-#   gemini::gemini_ui[role="mt-4 mb-5"]
+#   slimSelect::icon_library_select_wrapper[role="mt-4 mb-3"]
 #
 Asciidoctor::Extensions.register do
 
-  class GeminiUiBlockMacro < Extensions::BlockMacroProcessor
+  class SlimSelectBlockMacro < Extensions::BlockMacroProcessor
     use_dsl
 
-    named :gemini
+    named :slimSelect
     name_positional_attributes 'role'
     default_attrs 'role' => 'mt-0 mb-0'
 
@@ -41,5 +41,5 @@ Asciidoctor::Extensions.register do
     end
   end
 
-  block_macro GeminiUiBlockMacro
+  block_macro SlimSelectBlockMacro
 end

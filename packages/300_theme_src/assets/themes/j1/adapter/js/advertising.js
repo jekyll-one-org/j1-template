@@ -372,7 +372,7 @@ var logText;
     ad_initializer: function () {
 
       var dependencies_met_page_visible = setInterval(() => {
-        var pageState       = $('#no_flicker').css("display");
+        var pageState       = $('#content').css("display");
         var pageVisible     = (pageState == 'block') ? true: false;
         var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
         var ads_found       = (document.getElementsByClassName('adsbygoogle').length > 0) ? true : false;
@@ -380,6 +380,7 @@ var logText;
         var ad_containers;
 
         if (j1CoreFinished && pageVisible && ads_found) {
+
           if (!validpublisherID) {
             // skip setup processes
             //

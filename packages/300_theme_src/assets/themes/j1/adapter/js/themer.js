@@ -196,20 +196,20 @@ j1.adapter.themer = (function (j1, window) {
       // -----------------------------------------------------------------------
       // Global variable settings
       // -----------------------------------------------------------------------
-      _this       = j1.adapter.themer;
-      logger      = log4javascript.getLogger('j1.adapter.themer');
+      _this           = j1.adapter.themer;
+      logger          = log4javascript.getLogger('j1.adapter.themer');
 
       // Load  module DEFAULTS|CONFIG
-      themerDefaults = $.extend({}, {{themer_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      themerSettings = $.extend({}, {{themer_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      themerOptions  = $.extend(true, {}, themerDefaults, themerSettings);
+      themerDefaults  = $.extend({}, {{themer_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      themerSettings  = $.extend({}, {{themer_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      themerOptions   = $.extend(true, {}, themerDefaults, themerSettings);
 
-      max_count   = themerOptions.retries;
-      url         = new liteURL(window.location.href);
-      baseUrl     = url.origin;
-      error_page  = url.origin + '/204.html';
-      j1Cookies   = j1.findCookie('j1');
-      gaCookies   = j1.findCookie('__g');
+      max_count       = themerOptions.retries;
+      url             = new liteURL(window.location.href);
+      baseUrl         = url.origin;
+      error_page      = url.origin + '/204.html';
+      j1Cookies       = j1.findCookie('j1');
+      gaCookies       = j1.findCookie('__g');
 
       // initialize state flag
       _this.state = 'started';
@@ -230,7 +230,8 @@ j1.adapter.themer = (function (j1, window) {
       //
       // jadams, 2021-07-11: added dependecy on the user state cookie
       // Found timing issues testing mobile devices (iPad)
-      var dependencies_met_user_state_available = setInterval (function () {
+      //
+      var dependencies_met_user_state_available = setInterval(() => {
         user_state_detected = j1.existsCookie(cookie_names.user_state);
 
         // counter how often the check should be done for the existence
@@ -340,12 +341,13 @@ j1.adapter.themer = (function (j1, window) {
                location.reload(true);
              }
            });
+
           clearInterval(dependencies_met_user_state_available);
         }
       }, 10); // END dependencies_met_user_state_available
 
       // set final module state if theme loaded
-      var dependencies_met_theme_applied = setInterval (function () {
+      var dependencies_met_theme_applied = setInterval(() => {
         user_state  = j1.readCookie(cookie_names.user_state);
         styleLoaded = styleSheetLoaded(user_state.theme_css);
 

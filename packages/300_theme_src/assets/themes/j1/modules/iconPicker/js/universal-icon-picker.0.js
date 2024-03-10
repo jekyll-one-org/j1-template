@@ -302,14 +302,14 @@ const loadedDependencies = [];
                         let cssFileLink = iconPickerUrl + 'css/' + cssFile;
                         if (cssFile.match(/^http|^\/\//)) {
                             cssFileLink = cssFile;
-                            link = document.createElement('link');
-                            link.rel = 'stylesheet';
-                            link.type = 'text/css';
-                            link.href = cssFileLink;
-                            link.media = 'screen';
-                            document.head.appendChild(link);
-                            loadedDependencies.push(cssFile);
                         }
+                        link = document.createElement('link');
+                        link.rel = 'stylesheet';
+                        link.type = 'text/css';
+                        link.href = cssFileLink;
+                        link.media = 'screen';
+                        document.head.appendChild(link);
+                        loadedDependencies.push(cssFile);
                     }
                 });
             }

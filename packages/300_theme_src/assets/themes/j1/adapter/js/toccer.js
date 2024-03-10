@@ -163,13 +163,12 @@ j1.adapter.toccer = (function () {
       _this['moduleOptions'] = toccerOptions;
 
       if (j1.stringToBoolean(toccerOptions.toc)) {
-        var dependencies_met_navigator = setInterval(function() {
-          var pageState   = $('#no_flicker').css("display");
-          var pageVisible = (pageState == 'block') ? true: false;
-          var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
+        var dependencies_met_navigator = setInterval(() => {
+          var pageState       = $('#content').css("display");
+          var pageVisible     = (pageState == 'block') ? true: false;
+          var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
 
-          if (j1.getState() == 'finished' && pageVisible) {
-//        if (j1.getState() == 'finished' && pageVisible && atticFinished) {
+          if (j1CoreFinished && pageVisible) {
 
             _this.initToccerCore(toccerOptions);
             _this.setState('finished');
@@ -177,6 +176,7 @@ j1.adapter.toccer = (function () {
             logger.debug('\n' + 'state: ' + _this.getState());
             logger.info('\n' + 'module initialized successfully');
             logger.debug('\n' + 'met dependencies for: j1');
+
             clearInterval(dependencies_met_navigator);
           }
         }, 10);
@@ -187,15 +187,16 @@ j1.adapter.toccer = (function () {
     // Initialize the toccer on page
     // -------------------------------------------------------------------------
     initToccerCore: function (options) {
-      var scrollOffsetCorrection = scrollerOptions.smoothscroll.offsetCorrection;
-      var scrollOffset = j1.getScrollOffset(scrollOffsetCorrection);
+      var scrollOffsetCorrection  = scrollerOptions.smoothscroll.offsetCorrection;
+      var scrollOffset            = j1.getScrollOffset(scrollOffsetCorrection);
 
       _this.setState('running');
       logger.debug('\n' + 'state: ' + _this.getState());
 
       // tocbot get fired if HTML portion is loaded (AJAX load finished)
       //
-      var dependencies_met_ajax_load_finished = setInterval (function () {
+      var dependencies_met_ajax_load_finished = setInterval(() => {
+
         if ($('#toc_mmenu').length) {
           /* eslint-disable */
           tocbot.init({
