@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/theme_uno/modules/iconPicker/css/theme/uno.css
+ # ~/theme_uno/modules/iconPicker/css/theme/uno.min.css
  # UniversalIconPicker theme for J1 Theme
  #
  # Product/Info:
@@ -13,37 +13,4 @@
  # -----------------------------------------------------------------------------
 */
 
-.uip-modal .uip-modal--content .uip-modal--header .uip-modal--header-logo-title {
-  /*jadams, 2023-05-21: increased font size */
-  font-size: 20px !important;
-}
-
-.uip-modal .uip-modal--content .uip-modal--body .uip-modal--icon-preview-wrap .uip-modal--icon-preview-inner .uip-modal--icon-preview {
-  grid-gap: 10px !important;  /* jadams, was 20px */
-}
-
-.uip-modal .uip-modal--content .uip-modal--body .uip-modal--icon-preview-wrap .uip-modal--icon-preview-inner .uip-modal--icon-preview
-.uip-icon-item:hover {
-  background-color: #9FA8DA !important; /* jadams, added: mdi-blue-300 */
-}
-
-.uip-modal .uip-modal--content .uip-modal--body .uip-modal--icon-preview-wrap .uip-modal--icon-preview-inner .uip-modal--icon-preview
-.uip-icon-item.universal-selected {
-  -webkit-box-shadow: 0 1px 12px rgba(0, 0, 0, 0.05), 0 0 0 3px #1976D2 !important; /* jadams, was: #1cc2ff,  now: mdi-blue-700 */
-  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.05), 0 0 0 3px #1976D2 !important; /* jadams, was: #1cc2ff,  now: mdi-blue-700 */
-}
-
-.uip-modal .uip-modal--content .uip-modal--body .uip-modal--icon-preview-wrap .uip-modal--icon-preview-inner .uip-modal--icon-preview .uip-icon-item .uip-icon-item-inner .uip-icon-item__icon,
-.uip-modal .uip-modal--content .uip-modal--body .uip-modal--icon-preview-wrap .uip-modal--icon-preview-inner .uip-modal--icon-preview .uip-icon-item .uip-icon-item-inner i {
-  font-size: 36px !important; /* jadams, was: 25px */
-  color: #616161 !important; /* jadams, was: #6d7882 */
-}
-
-.uip-modal .uip-modal--content .uip-modal--body .uip-modal--icon-preview-wrap .uip-modal--icon-preview-inner .uip-modal--icon-preview .uip-icon-item .uip-icon-item-inner
-.uip-icon-item-name {
-  color: #616161 !important; /* jadams, was: #c2cbd2, now: mdi-gray-700 */
-}
-
-.uip-modal .uip-modal--footer button.uip-insert-icon-button:hover {
-  background-color: #1976D2 !important; /* jadams: mdi-blue-700 */
-}
+.uip-modal .uip-modal--content .uip-modal--header .uip-modal--header-logo-title{font-size:20px !important}.uip-modal .uip-modal--content .uip-modal--body .uip-modal--icon-preview-wrap .uip-modal--icon-preview-inner .uip-modal--icon-preview{grid-gap:10px !important}.uip-modal .uip-modal--content .uip-modal--body .uip-modal--icon-preview-wrap .uip-modal--icon-preview-inner .uip-modal--icon-preview .uip-icon-item:hover{background-color:#9fa8da !important}.uip-modal .uip-modal--content .uip-modal--body .uip-modal--icon-preview-wrap .uip-modal--icon-preview-inner .uip-modal--icon-preview .uip-icon-item.universal-selected{-webkit-box-shadow:0 1px 12px rgba(0,0,0,0.05),0 0 0 3px #1976d2 !important;box-shadow:0 1px 12px rgba(0,0,0,0.05),0 0 0 3px #1976d2 !important}.uip-modal .uip-modal--content .uip-modal--body .uip-modal--icon-preview-wrap .uip-modal--icon-preview-inner .uip-modal--icon-preview .uip-icon-item .uip-icon-item-inner .uip-icon-item__icon,.uip-modal .uip-modal--content .uip-modal--body .uip-modal--icon-preview-wrap .uip-modal--icon-preview-inner .uip-modal--icon-preview .uip-icon-item .uip-icon-item-inner i{font-size:36px !important;color:#616161 !important}.uip-modal .uip-modal--content .uip-modal--body .uip-modal--icon-preview-wrap .uip-modal--icon-preview-inner .uip-modal--icon-preview .uip-icon-item .uip-icon-item-inner .uip-icon-item-name{color:#616161 !important}.uip-modal .uip-modal--footer button.uip-insert-icon-button:hover{background-color:#1976d2 !important}.uip-modal .uip-modal--footer button.uip-insert-icon-button{background-color:#2196f3 !important}

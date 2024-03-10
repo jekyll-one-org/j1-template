@@ -25,6 +25,7 @@ image:
   width:                                1920
   height:                               1280
 
+select_id:                              icon_library
 fab_menu_id:                            default
 permalink:                              /pages/public/test_icon_picker/
 regenerate:                             false
@@ -73,7 +74,6 @@ resource_options:
 // :page--attr:                         <attr-value>
 :picker_button_id:                      {{icon_picker_options.picker_button_id}}
 :picker_button_label:                   {{icon_picker_options.picker_button_label}}
-:select_id:                             icon_library
 
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
@@ -169,12 +169,15 @@ slimSelect::icon_library_select_wrapper[role="mt-4 mb-3"]
   function init_select_events() {
     var select  = 'icon-library';
     var $select = j1.adapter.slimSelect.select.icon_library;
+    var logger  = log4javascript.getLogger('page.iconPicker');
 
     $select.events.afterClose = () => {
       var $selectElement        = document.querySelector('select[name=' + select + ']');
       var icon_picker           = j1.adapter.iconPicker.icon_picker;
       var currentIconLibrary    = $selectElement.value;
       var currentIconLibraryCss = $selectElement.options[$selectElement.selectedIndex].dataset.css;
+
+      logger.info('\n' + 'slimSelect: use current IconLibrary: ' + currentIconLibrary);
 
       // apply selection
       currentIconLibrary        = $selectElement.value;
