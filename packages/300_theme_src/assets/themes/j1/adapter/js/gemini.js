@@ -222,7 +222,8 @@ const httpError500      = geminiOptions.errors.http500;
       var error = e.toString();
         if (error.includes("400")) {
           genAIErrorType   = 400;
-          modal_error_text = '<br>' + httpError400;
+          // modal_error_text = '<br>' + httpError400;
+          modal_error_text = httpError400;
 
           if (geminiOptions.detect_geo_location) {
             geoFindMe();
@@ -233,7 +234,7 @@ const httpError500      = geminiOptions.errors.http500;
           }
         } else if (error.includes("50")) {
           genAIErrorType   = 500;
-          modal_error_text = '<br>' + httpError500;
+          modal_error_text = httpError500;
           $("#modal_error").html(modal_error_text);
           logger.warn('\n' + 'Service currently not available');
         }
@@ -361,7 +362,7 @@ const httpError500      = geminiOptions.errors.http500;
           }
           $("#spinner").hide();
           setTimeout(() => {
-            $('#errorModal').modal('show');
+            $('#confirmError').modal('show');
           }, 1000);
        } //END else
     } //END finally
@@ -575,6 +576,7 @@ const httpError500      = geminiOptions.errors.http500;
           // Clear input prompt and the spinner|responses
           const resetButton = document.getElementById('{{gemini_options.buttons.reset.id}}');
           resetButton.addEventListener('click', (event) => {
+
             // Prevent default actions
             event.preventDefault();
 
@@ -587,25 +589,54 @@ const httpError500      = geminiOptions.errors.http500;
           // Clear history|cookie
           const clearButton = document.getElementById('{{gemini_options.buttons.clear.id}}');
           clearButton.addEventListener('click', (event) => {
+            logStartOnce = false;
             // Prevent default actions
             event.preventDefault();
 
-            textHistory = [];
-            if (geminiOptions.save_prompt_history_to_cookie) {
-              j1.removeCookie({
-                name:     cookie_names.chat_prompt,
-                domain:   auto_domain,
-                secure:   secure
-              });
+            $('#clearHistory').modal('show');
 
-              cookie_written = j1.writeCookie({
-                name:     cookie_names.chat_prompt,
-                data:     {},
-                secure:   secure
-              });
-            }
+            const confirmClearHistory = document.getElementById('clearHistory');
+            const accecptClearHistory = document.getElementById('accecptClearHistory');
+            const dismissClearHistory = document.getElementById('dismissClearHistory');
 
-            $("#list-container").hide();
+            accecptClearHistory.addEventListener('click', (event) => {
+
+              // perform clear history
+              if (!logStartOnce) {
+                logger.warn('\n' + 'perform clearHistory');
+                logStartOnce = true;
+              }
+
+              textHistory = [];
+              if (geminiOptions.save_prompt_history_to_cookie) {
+                j1.removeCookie({
+                  name:     cookie_names.chat_prompt,
+                  domain:   auto_domain,
+                  secure:   secure
+                });
+
+                cookie_written = j1.writeCookie({
+                  name:     cookie_names.chat_prompt,
+                  data:     {},
+                  secure:   secure
+                });
+              }
+
+              $("#list-container").hide();
+            }); // END accecptClearHistory(click)
+
+            dismissClearHistory.addEventListener('click', (event) => {
+              // Prevent default actions
+              event.preventDefault();
+
+              // skip clear history
+              if (!logStartOnce) {
+                logger.debug('\n' + 'skipped clearHistory');
+                logStartOnce = true;
+              }
+
+            }); // END dismissClearHistoryButton (click)
+
           }); //END clearButton (click)
 
           _this.setState('finished');

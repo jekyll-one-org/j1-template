@@ -110,14 +110,14 @@ exclude_from_search:                    true
       <div id="md_result"></div>
     </div>
 
-    <!-- Modal Top Right -->
-    <div id="errorModal"
+    <!-- Modal error (top|right) -->
+    <div id="confirmError"
       class="modal fade right"
       tabindex="-1"
       role="dialog"
-      aria-labelledby="errorModalLabel" aria-hidden="true"
-      data-keyboard="false"
-      data-backdrop="static">
+      aria-labelledby="confirmErrorLabel" aria-hidden="true"
+      data-bs-keyboard="false"
+      data-bs-backdrop="static">
       <div class="modal-dialog modal-side modal-top-right modal-notify modal-danger" role="document">
         <!-- Content -->
         <div class="modal-content">
@@ -131,20 +131,43 @@ exclude_from_search:                    true
           <!-- Body -->
           <div class="modal-body">
             <div class="text-center">
-              <i class="mdi mdi-4x mdi-bug md-red mb-1"></i>
+              <i class="mdib mdib-4x mdib-alert md-red mb-1"></i>
               <p id="modal_error">Error text placeholder</p>
             </div>
           </div>
           <!-- Footer -->
-          <!-- div class="modal-footer justify-content-center">
-            <a type="button" class="btn btn-primary mr-2">Yes, please</a>
-            <a type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">No, thanks</a>
-          </div -->
+          <div class="modal-footer justify-content-center">
+            <a type="button" class="btn btn-primary mr-2" data-bs-dismiss="modal">Close</a>
+          </div>
         </div>
         <!-- END Content -->
       </div>
     </div>
-    <!-- END Side Modal Top Right Success -->
+    <!-- END Modal error -->
+
+    <!-- Modal confirm (bottom|full-width) -->
+    <div id="clearHistory"
+      class="modal fade bottom"
+      tabindex="-1"
+      aria-labelledby="confirmClearHistory"
+      data-bs-keyboard="false"
+      data-bs-backdrop="static">
+      <div class="modal-dialog modal-frame modal-bottom modal-notify modal-danger" role="document">
+        <!-- Content -->
+        <div class="modal-content">
+          <!-- Body -->
+          <div class="modal-body">
+            <p class="mt-1 ml-3 mr-2">Do you really want to <b>delete</b> all history items?</p>
+            <div class="row ml-3">
+              <a id="accecptClearHistory" type="button" class="btn btn-danger mr-2" data-bs-dismiss="modal">Yes, please</a>
+              <a id="dismissClearHistory" type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">No, thanks</a>
+            </div>
+          </div>
+        </div>
+        <!-- END Content -->
+      </div>
+    </div>
+    <!-- END Modal confirm -->
 
 </div>
 <!-- END UI container -->
