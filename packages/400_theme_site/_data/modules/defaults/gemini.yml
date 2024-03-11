@@ -130,9 +130,10 @@ defaults:
   # MODULE options
   # ----------------------------------------------------------------------------
   #
-  detect_geo_location:                  false
   max_history:                          20
-  allow_history_duplicates:             true
+  detect_geo_location:                  false
+  allow_history_duplicates:             false
+  allow_history_updates_on_max:         false
   save_prompt_history_to_cookie:        false
   read_prompt_history_from_cookie:      false
 

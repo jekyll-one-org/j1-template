@@ -126,6 +126,7 @@ var apiKey;
 var validApiKey;
 var maxHistory;
 var allowHistoryDuplicates;
+var allowHistoryUpdatesOnMax;
 var genAI;
 var result;
 var _this;
@@ -201,7 +202,7 @@ const httpError500      = geminiOptions.errors.http500;
   } //END function geoFindMe
 
   async function runner() {
-    let input = document.getElementById("name");
+    var input = document.getElementById("name");
 
     // For text-only input, use the selected model
     const model = genAI.getGenerativeModel({
@@ -452,10 +453,14 @@ const httpError500      = geminiOptions.errors.http500;
           // allow|reject duplicates for the history
           allowHistoryDuplicates = geminiOptions.allow_history_duplicates;
 
+          // allow|reject history updates if maxHistory reached
+          allowHistoryUpdatesOnMax = geminiOptions.allow_history_updates_on_max;
+
           _this.slim_select_eventHandler();
 
           // initialize history array from cookie
           if (geminiOptions.read_prompt_history_from_cookie) {
+            logger.debug('\n' + 'read prompt history from cookie');
             var data    = [];
             var option  = {};
             chat_prompt = j1.existsCookie(cookie_names.chat_prompt)
@@ -495,8 +500,8 @@ const httpError500      = geminiOptions.errors.http500;
               logger.debug('\n' + `prompt: ${textarea.value}\nexists already in history at index: ${index}`);
             }
 
-            // update history
-            if (textHistory.length == maxHistory && !itemExists && !historySet) {
+            // update history on maxHistory
+            if (textHistory.length == maxHistory && allowHistoryUpdatesOnMax && !itemExists && !historySet) {
               logger.debug('\n' + 'update items in history array');
               // put the CURRENT history element FIRST for replacement
               textHistory.reverse();
@@ -537,6 +542,8 @@ const httpError500      = geminiOptions.errors.http500;
             // loop (history) array to create history data elements (select)
             data    = [];
             option  = {};
+
+            // create history select elements
             textHistory.forEach(function(optionText) {
               option = {
                 text: optionText
@@ -553,7 +560,7 @@ const httpError500      = geminiOptions.errors.http500;
             }
 
             // write current history to cookie
-            logger.debug('\n' + 'write current textHistory to cookie');
+            logger.debug('\n' + 'save prompt history to cookie');
             if (geminiOptions.save_prompt_history_to_cookie) {
               cookie_written = j1.writeCookie({
                 name:   cookie_names.chat_prompt,
@@ -673,6 +680,7 @@ const httpError500      = geminiOptions.errors.http500;
       import('//esm.run/@google/generative-ai')
         .then((module) => {
           // Module is imported successfully
+          logger             = log4javascript.getLogger('j1.adapter.gemini');
           apiKey             = geminiOptions.api_options.apiKey;
           validApiKey        = (apiKey.includes('your-')) ? false : true;
           genAI              = new module.GoogleGenerativeAI(apiKey);
@@ -707,12 +715,13 @@ const httpError500      = geminiOptions.errors.http500;
             }
           ];
 
-          console.debug('gemini: Importing module: successful');
+          logger.debug('\n' + 'Importing Gemini module: successful');
           modulesLoaded = true;
         })
         .catch((error) => {
+          logger = log4javascript.getLogger('j1.adapter.gemini');
           // An error occurred during module import
-          console.warn('gemini: Importing module failed: ', error);
+          logger.warn('\n' + 'Importing Gemini module failed: ' + error);
         });
     }, // END loadModules
 
@@ -732,7 +741,7 @@ const httpError500      = geminiOptions.errors.http500;
 
       var dependencies_met_data_loaded = setInterval(function() {
         if (j1.xhrDOMState['#gemini_ui'] == 'success') {
-          console.debug('gemini: Loading UI: successful');
+          logger.debug('\n' + 'Loading UI: successful');
           clearInterval(dependencies_met_data_loaded);
         } // END if xhrDOMState
       }, 10);
@@ -744,7 +753,7 @@ const httpError500      = geminiOptions.errors.http500;
       //
       var select  = document.getElementById(geminiOptions.prompt_history_id);
       var $select = select.slim;
-      var value;
+      var slimValues;
       var data;
       var prompt;
 
@@ -765,14 +774,16 @@ const httpError500      = geminiOptions.errors.http500;
 
       $select.events.afterClose = () => {
         // Get|Set selected value
-        value = $select.getSelected();
-        $select.setSelected(value);
-
-        data  = $select.getData();
+        slimValues = $select.getSelected();
+        $select.setSelected(slimValues[0]);
         $select.close();
 
-        // remove all whitespaces from the end
-        prompt = value[0].replace(/\s+$/g, '');
+        // put the CURRENT history element FIRST
+        // $select.store.data.unshift(prompt);
+        // $select.setSelected(prompt);
+
+        // cleanup|add selected value to input element
+        prompt = slimValues[0].replace(/\s+$/g, '');
         document.getElementById('prompt').value = prompt;
       }
     }, //END slim_select_eventHandler()
