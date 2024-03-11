@@ -30,7 +30,7 @@ settings:
   # ----------------------------------------------------------------------------
   #
 # detect_geo_location:                  true
-  max_history:                          3
+  max_history:                          2
   allow_history_duplicates:             false
 
   save_prompt_history_to_cookie:        true

@@ -462,6 +462,13 @@ const httpError500      = geminiOptions.errors.http500;
             // convert the chat_prompt object to array textHistory
             textHistory = Object.values(chat_prompt);
 
+            // // Remove duplicates from the history array if set
+            // if (!allowHistoryDuplicates && textHistory.length > 1) {
+            //   // Create a 'Set' from the history array to automatically remove duplicates
+            //   var uniqueArray = [...new Set(textHistory)];
+            //   textHistory = uniqueArray;
+            // } // END if allowHistoryDupicates
+
             textHistory.forEach(function(optionText) {
               option = {
                 text: optionText,
@@ -484,49 +491,46 @@ const httpError500      = geminiOptions.errors.http500;
           // Send request to generate results
           const sendButton = document.getElementById('{{gemini_options.buttons.generate.id}}');
           sendButton.addEventListener('click', (event) => {
-            var historySet = false;
 
-            // check if current prompt alreay exists in textHistory
-            const index    = textHistory.indexOf(textarea.value);
-            var itemExists = (index !== -1) ? true : false;
-            if (itemExists) {
-              logger.debug('\n' + `prompt: ${textarea.value}\nexists already in textHistory at index: ${index}`);
-            }
+            // Prevent default actions
+            event.preventDefault();
 
-            // UPDATE history array
-            if (textHistory.length == maxHistory && !itemExists && !historySet) {
-              logger.debug('\n' + 'update items in history array');
-              if (textarea.value.length > 0) {
-                // Replace the FIRST (latest) history element by current prompt
-                textHistory[0] = textarea.value;
-              } else if (textarea.value.length == 0) {
-                // Replace the FIRST (latest) history element by defaultPrompt prompt
-                textHistory[0] = defaultPrompt;
-              }
-              historySet = true;
-            }
+            // // Initialize the textHistory array
+            // if (geminiOptions.read_prompt_history_from_cookie) {
+            //   chat_prompt = j1.existsCookie(cookie_names.chat_prompt)
+            //     ? j1.readCookie(cookie_names.chat_prompt)
+            //     : {};
+            //   // convert the chat_prompt object to array textHistory
+            //   textHistory = Object.values(chat_prompt);
+            // }
 
-            // ADD item to history array
-            if (textHistory.length < maxHistory && !itemExists && !historySet) {
-              logger.debug('\n' + 'add item to history array');
-              if (textarea.value.length > 0) {
-                // Add the current value of the textarea to the history array
-                textHistory.push(textarea.value);
-              } else if (textarea.value.length == 0) {
-                // Add the default prompt
-                textHistory.push(defaultPrompt);
-              }
-              historySet = true;
-            }
+            // // Remove duplicates from the history array (1st|cookie)
+            // if (!allowHistoryDuplicates && textHistory.length > 1) {
+            //   // Create a 'Set' from the history array to automatically remove duplicates
+            //   var uniqueArray = [...new Set(textHistory)];
+            //   textHistory = uniqueArray;
+            // } // END if allowHistoryDupicates
 
-            // Remove duplicates from the history array
+            // Update the history array
+            if (textarea.value.length > 0 && textHistory.length <= maxHistory) {
+              // Add the current value of the textarea to the history array
+              textHistory.push(textarea.value);
+            } else if (textarea.value.length == 0 && textHistory.length <= maxHistory) {
+              // Add the default prompt
+              textHistory.push(defaultPrompt);
+            } else if (textarea.value.length > 0 && textHistory.length == maxHistory) {
+              // Replace the ??? history element by current prompt
+              textHistory[0] = textarea.value;
+            } else if (textarea.value.length == 0 && textHistory.length == maxHistory) {
+              // Replace the ??? history element by defaultPrompt prompt
+              textHistory[0] = defaultPrompt;
+            } // END if textarea length
+
+            // Remove duplicates from the history array (2nd|current textHistory)
             if (!allowHistoryDuplicates && textHistory.length > 1) {
-              var textHistoryLenght = textHistory.length;
-              var uniqueArray       = [...new Set(textHistory)];                // create a 'Set' from the history array to automatically remove duplicates
+              // Create a 'Set' from the history array to automatically remove duplicates
+              var uniqueArray = [...new Set(textHistory)];
               textHistory = uniqueArray;
-              if (textHistoryLenght > textHistory.length) {
-                logger.debug('\n' + 'removed duplicates from history array: ' + (textHistoryLenght - textHistory.length) + ' element|s');
-              }
             } // END if allowHistoryDupicates
 
             // Loop through the history array to create data elements
@@ -547,8 +551,6 @@ const httpError500      = geminiOptions.errors.http500;
               $("#list-container").show();
             }
 
-            // write current textHistory to cookie
-            logger.debug('\n' + 'write current textHistory to cookie');
             if (geminiOptions.save_prompt_history_to_cookie) {
               cookie_written = j1.writeCookie({
                 name:     cookie_names.chat_prompt,
@@ -738,35 +740,33 @@ const httpError500      = geminiOptions.errors.http500;
     }, // END loadUI
 
     slim_select_eventHandler: function () {
-      // See: https://slimselectjs.com/
-      //
       var select  = document.getElementById(geminiOptions.prompt_history_id);
       var $select = select.slim;
       var value;
-      var data;
 
       // $select.events.beforeOpen = () => {
-      //   values = $select.getSelected();
-      //   data = $select.getData();
+      //   var values = $select.getSelected();
+      //   var data = $select.getData();
       //   $select.setData(data[0].selected = false);
       //   console.log('slimSelect: before open');
       // },
 
       // $select.events.afterOpen = () => {
-      //   data  = $select.getData();
-      //   value = $select.getSelected();
-      //   $select.setSelected(value);
-      //   $select.setSelected(value, false);  // To not trigger the afterChange callback
-      //   // onsole.log('slimSelect: after open');
+      //   var data    = $select.getData();
+      //   var values  = $select.getSelected();
+      //   $select.setDeselected(values);
+      //   console.log('slimSelect: after open');
       // },
 
       $select.events.afterClose = () => {
-        // Get|Set selected value
-        value = $select.getSelected();
-        $select.setSelected(value);
+        // var data  = $select.getData();
+        // var value = $select.getSelected();
 
-        data  = $select.getData();
+        // Get|Set selected value from history
+        value = $select.getSelected();
+        // $select.setSelected(value);
         $select.close();
+
         document.getElementById('prompt').value = value;
       }
     }, //END slim_select_eventHandler()
