@@ -116,6 +116,11 @@ var check_cookie_option_domain;
 var cookie_domain;
 var secure;
 
+var latitude;
+var longitude;
+var country;
+var city;
+
 var gemini_model;
 var apiKey;
 var validApiKey;
@@ -152,22 +157,23 @@ const httpError500      = geminiOptions.errors.http500;
 
   // Log the geolocation position
   function showPosition(position) {
-     var latitude = position.coords.latitude;
-     var longitude = position.coords.longitude;
+     latitude = position.coords.latitude;
+     longitude = position.coords.longitude;
      console.debug("Detected geocode (lat:long): " + latitude + ':' + longitude);
   } //END function showPosition
 
   function locateCountry(position) {
-    const latitude  = position.coords.latitude;
-    const longitude = position.coords.longitude;
+    latitude  = position.coords.latitude;
+    longitude = position.coords.longitude;
 
     // Reverse geocode to find the country
     fetch(`//nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`)
     .then(response => response.json())
     .then(data => {
-      const country = '<b>' + data.address.country;
-      const city    = data.address.city;
-      $("#modal_error").html(modal_error_text + '<br>' + country);
+      country = data.address.country;
+      city    = data.address.city;
+      $("#modal_error").html(modal_error_text + '<br>' + '<b>' + country + '</b>');
+      logger.warn('\n' + 'Location is not supported: ' + country + ':' + city);
     })
     .catch(error => {
       console.warn('Error:', error);
@@ -177,8 +183,8 @@ const httpError500      = geminiOptions.errors.http500;
   function geoFindMe() {
 
     function success(position) {
-      const latitude = position.coords.latitude;
-      const longitude = position.coords.longitude;
+      latitude = position.coords.latitude;
+      longitude = position.coords.longitude;
 
       locateCountry(position);
     } //END function success
@@ -215,13 +221,19 @@ const httpError500      = geminiOptions.errors.http500;
     } catch (e) {
       var error = e.toString();
         if (error.includes("400")) {
-          genAIErrorType = 400;
-          modal_error_text = httpError400;
-          $("#modal_error").html(modal_error_text);
-          logger.warn('\n' + 'Location is not supported');
+          genAIErrorType   = 400;
+          modal_error_text = '<br>' + httpError400;
+
+          if (geminiOptions.detect_geo_location) {
+            geoFindMe();
+            $("#modal_error").html(modal_error_text);
+          } else {
+            $("#modal_error").html(modal_error_text);
+            logger.warn('\n' + 'Location is not supported');
+          }
         } else if (error.includes("50")) {
-          genAIErrorType = 500;
-          modal_error_text = httpError500;
+          genAIErrorType   = 500;
+          modal_error_text = '<br>' + httpError500;
           $("#modal_error").html(modal_error_text);
           logger.warn('\n' + 'Service currently not available');
         }
@@ -427,13 +439,14 @@ const httpError500      = geminiOptions.errors.http500;
           // Get the textarea element
           const textarea = document.getElementById(geminiOptions.prompt_id);
 
-          // Get SlimSelect object for the history (placed ny slimSelect adapter)
+          // Get slimSelect object for the history (placed ny slimSelect adapter)
           const selectList  = document.getElementById('prompt_history');
-//        const selectList  = document.getElementById(geminiOptions.prompt_history_id);
           const $slimSelect = selectList.slim;
 
-          // limit the history array length
-          maxHistory             = geminiOptions.max_history;
+          // limit the history
+          maxHistory        = geminiOptions.max_history;
+
+          // allow|reject duplicates for the history
           allowHistoryDuplicates = geminiOptions.allow_history_duplicates;
 
           _this.slim_select_eventHandler();
@@ -448,12 +461,12 @@ const httpError500      = geminiOptions.errors.http500;
             // convert the chat_prompt object to array textHistory
             textHistory = Object.values(chat_prompt);
 
-            // Remove duplicates from the history array
-            if (!allowHistoryDuplicates && textHistory.length > 1) {
-              // Create a 'Set' from the history array to automatically remove duplicates
-              var uniqueArray = [...new Set(textHistory)];
-              textHistory = uniqueArray;
-            } // END if allowHistoryDupicates
+            // // Remove duplicates from the history array if set
+            // if (!allowHistoryDuplicates && textHistory.length > 1) {
+            //   // Create a 'Set' from the history array to automatically remove duplicates
+            //   var uniqueArray = [...new Set(textHistory)];
+            //   textHistory = uniqueArray;
+            // } // END if allowHistoryDupicates
 
             textHistory.forEach(function(optionText) {
               option = {
@@ -472,7 +485,7 @@ const httpError500      = geminiOptions.errors.http500;
             if (textHistory.length > 0) {
               $("#list-container").show();
             }
-          }
+          } // if read_prompt_history_from_cookie
 
           // Send request to generate results
           const sendButton = document.getElementById('{{gemini_options.buttons.generate.id}}');
@@ -481,31 +494,38 @@ const httpError500      = geminiOptions.errors.http500;
             // Prevent default actions
             event.preventDefault();
 
-            // Initialize the textHistory array
-            if (geminiOptions.read_prompt_history_from_cookie) {
-              chat_prompt = j1.existsCookie(cookie_names.chat_prompt)
-                ? j1.readCookie(cookie_names.chat_prompt)
-                : {};
-              // convert the chat_prompt object to array textHistory
-              textHistory = Object.values(chat_prompt);
-            }
+            // // Initialize the textHistory array
+            // if (geminiOptions.read_prompt_history_from_cookie) {
+            //   chat_prompt = j1.existsCookie(cookie_names.chat_prompt)
+            //     ? j1.readCookie(cookie_names.chat_prompt)
+            //     : {};
+            //   // convert the chat_prompt object to array textHistory
+            //   textHistory = Object.values(chat_prompt);
+            // }
+
+            // // Remove duplicates from the history array (1st|cookie)
+            // if (!allowHistoryDuplicates && textHistory.length > 1) {
+            //   // Create a 'Set' from the history array to automatically remove duplicates
+            //   var uniqueArray = [...new Set(textHistory)];
+            //   textHistory = uniqueArray;
+            // } // END if allowHistoryDupicates
 
             // Update the history array
             if (textarea.value.length > 0 && textHistory.length < maxHistory) {
               // Add the current value of the textarea to the history array
               textHistory.push(textarea.value);
             } else if (textarea.value.length > 0 && textHistory.length == maxHistory) {
-              // Replace the oldest history element by current prompt
+              // Replace the latest history element by current prompt
               textHistory[0] = textarea.value;
             } else if (textarea.value.length == 0 && textHistory.length == maxHistory) {
-              // Replace the oldest history element by defaultPrompt prompt
+              // Replace the latest history element by defaultPrompt prompt
               textHistory[0] = defaultPrompt;
             } else if (textarea.value.length == 0 && textHistory.length < maxHistory) {
               // Add the default prompt
               textHistory.push(defaultPrompt);
             } //END if textarea length
 
-            // Remove duplicates from the history array
+            // Remove duplicates from the history array (2nd|current textHistory)
             if (!allowHistoryDuplicates && textHistory.length > 1) {
               // Create a 'Set' from the history array to automatically remove duplicates
               var uniqueArray = [...new Set(textHistory)];
@@ -552,7 +572,7 @@ const httpError500      = geminiOptions.errors.http500;
             runner();
           }); //END sendButton (click)
 
-          // Clear input form|spinner|responses
+          // Clear input prompt and the spinner|responses
           const resetButton = document.getElementById('{{gemini_options.buttons.reset.id}}');
           resetButton.addEventListener('click', (event) => {
             // Prevent default actions
