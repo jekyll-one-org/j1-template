@@ -400,6 +400,8 @@ const httpError500      = geminiOptions.errors.http500;
       hostname      = url.hostname;
       auto_domain   = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
       secure        = (url.protocol.includes('https')) ? true : false;
+      var newItem;
+      var itemExists;
 
       // module loader
       _this.loadModules();
@@ -466,8 +468,31 @@ const httpError500      = geminiOptions.errors.http500;
             chat_prompt = j1.existsCookie(cookie_names.chat_prompt)
               ? j1.readCookie(cookie_names.chat_prompt)
               : {};
+
             // convert chat prompt object to array
             textHistory = Object.values(chat_prompt);
+
+            // failsafe, cleanup history
+            // if (textHistory.length > 0) {
+            //   var p = 0;
+            //   textHistory.forEach (function (elm) {
+            //     prompt = elm.replace(/\s+$/g, '');
+            //     textHistory[p] = prompt;
+            //     p++;
+            //   }); // END forEach
+            //   logger.debug('\n' + 'cleaned history for trailing whitespaces');
+            // }
+
+            // failsafe, remove duplicates from chat_prompt (history)
+            if (!allowHistoryDuplicates && textHistory.length > 1) {
+              var textHistoryLenght = textHistory.length;
+              var uniqueArray       = [...new Set(textHistory)];                // create a 'Set' from the history array to automatically remove duplicates
+
+              textHistory = uniqueArray;
+              if (textHistoryLenght > textHistory.length) {
+                logger.debug('\n' + 'removed duplicates from history array: ' + (textHistoryLenght - textHistory.length) + ' element|s');
+              }
+            } // END if allowHistoryDupicates
 
             textHistory.forEach(function(optionText) {
               option = {
@@ -494,38 +519,51 @@ const httpError500      = geminiOptions.errors.http500;
             var historySet = false;
 
             // check if current prompt alreay exists in history
-            const index    = textHistory.indexOf(textarea.value);
-            var itemExists = (index !== -1) ? true : false;
+            const index = textHistory.indexOf(textarea.value);
+            itemExists  = (index !== -1) ? true : false;
             if (itemExists) {
               logger.debug('\n' + `prompt: ${textarea.value}\nexists already in history at index: ${index}`);
             }
 
             // update history on maxHistory
             if (textHistory.length == maxHistory && allowHistoryUpdatesOnMax && !itemExists && !historySet) {
-              logger.debug('\n' + 'update items in history array');
-              // put the CURRENT history element FIRST for replacement
+              // place the CURRENT history element FIRST for replacement
               textHistory.reverse();
               if (textarea.value.length > 0) {
-                // replace FIRST history element by CURRENT prompt
-                textHistory[0] = textarea.value;
+                newItem = textarea.value;
               } else if (textarea.value.length == 0) {
-                // replace FIRST history element by DEFAULT PROMPT
-                textHistory[textHistory.length-1] = defaultPrompt;
+                newItem = defaultPrompt;
               }
+              logger.debug('\n' + 'update item in history: ' +  newItem);
+              // replace FIRST history element by NEW item
+              textHistory[0] = newItem;
               historySet = true;
             }
 
             // add new item to history
             if (textHistory.length < maxHistory && !itemExists && !historySet) {
-              logger.debug('\n' + 'add item to history array');
               if (textarea.value.length > 0) {
                 // add current (prompt) value to history
-                textHistory.push(textarea.value);
+                newItem = textarea.value;
               } else if (textarea.value.length == 0) {
                 // add default prompt
-                textHistory.push(defaultPrompt);
+                newItem = defaultPrompt;
               }
+              logger.debug('\n' + 'add new item to history: ' + newItem);
+              textHistory.push(newItem);
               historySet = true;
+            }
+
+            // failsafe, cleanup history
+            if (textHistory.length > 0) {
+              // cleanup|add selected value
+              var p = 0;
+              textHistory.forEach (function (elm) {
+                prompt = elm.replace(/\s+$/g, '');
+                textHistory[p] = prompt;
+                p++;
+              }); // END forEach
+              logger.debug('\n' + 'cleaned history for trailing whitespaces');
             }
 
             // remove duplicates from history
@@ -769,18 +807,48 @@ const httpError500      = geminiOptions.errors.http500;
       //   value = $select.getSelected();
       //   $select.setSelected(value);
       //   $select.setSelected(value, false);  // To not trigger the afterChange callback
-      //   // onsole.log('slimSelect: after open');
+      //   // console.log('slimSelect: after open');
       // },
+
+      // $select.events.addable = (value) => {
+      //   // return false or null if you do not want to allow value to be submitted
+      //   if (value === 'bad') {return false}
+      //
+      //   // Return the value string
+      //   return value // Optional - value alteration // ex: value.toLowerCase()
+      //
+      //   // Optional - Return a valid data object.
+      //   // See methods/setData for list of valid options
+      //   return {
+      //     text: value,
+      //     value: value.toLowerCase()
+      //   }
+      // },
+
+      $select.events.beforeClose = () => {
+        // get|set selected value
+        slimValues = $select.getSelected();
+
+        // failsafe on empty selection (clear prompt)
+        if (slimValues.length == 0) {
+          logger.debug('\n' + 'selection from history: empty');
+          document.getElementById('prompt').value = '';
+        }
+      },
 
       $select.events.afterClose = () => {
         // get|set selected value
         slimValues = $select.getSelected();
-        $select.setSelected(slimValues[0]);
-        $select.close();
 
-        // cleanup|add selected value to input element
-        prompt = slimValues[0].replace(/\s+$/g, '');
-        document.getElementById('prompt').value = prompt;
+        //make sure an item was selected
+        if (slimValues.length > 0) {
+          // cleanup|add selected value
+          prompt = slimValues[0].replace(/\s+$/g, '');
+          document.getElementById('prompt').value = prompt;
+          logger.debug('\n' + 'selection from history: ' + prompt);
+        }
+
+        $select.close();
       }
     }, //END slim_select_eventHandler()
 

@@ -130,6 +130,13 @@ recommended to load all icons while a page is being initialized.
 Select the icon set to be shown from the *dropdown* below. To open a picker UI
 for the icon set selected, click on the button *SHOW ICON SET SELECTED*.
 
+// [role="mb-10"]
+[TIP]
+====
+*Double-click* an icon in the Picker UI to copy the selected icon data to the
+*clipboard*.
+====
+
 // {% for select in slim_select_options.selects %}{% if select.id == page.select_id %}
 // wrapper_id: {{select.wrapper_id}}
 // {% endif %}{% endfor %}
@@ -220,10 +227,3 @@ slimSelect::icon_library_select_wrapper[role="mt-4 mb-3"]
   }, 10);
 </script>
 ++++
-
-[role="mb-10"]
-[TIP]
-====
-*Double-click* an icon in the Picker UI to copy the selected icon data to the
-*clipboard*.
-====

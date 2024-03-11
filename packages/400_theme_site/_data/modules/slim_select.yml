@@ -69,7 +69,7 @@ settings:
       wrapper_id:                       prompt_history_select_wrapper
       id:                               prompt_history
       name:                             prompt-history
-      items:                            <select id="prompt_history" name="prompt-history"></select>
+      items:                            <select multiple id="prompt_history" name="prompt-history"></select>
 
 # ------------------------------------------------------------------------------
 # END config
