@@ -773,14 +773,10 @@ const httpError500      = geminiOptions.errors.http500;
       // },
 
       $select.events.afterClose = () => {
-        // Get|Set selected value
+        // get|set selected value
         slimValues = $select.getSelected();
         $select.setSelected(slimValues[0]);
         $select.close();
-
-        // put the CURRENT history element FIRST
-        // $select.store.data.unshift(prompt);
-        // $select.setSelected(prompt);
 
         // cleanup|add selected value to input element
         prompt = slimValues[0].replace(/\s+$/g, '');
