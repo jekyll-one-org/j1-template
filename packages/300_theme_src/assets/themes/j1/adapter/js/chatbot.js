@@ -127,7 +127,7 @@ var logText;
       // -----------------------------------------------------------------------
       // initializer
       // -----------------------------------------------------------------------
-      var dependencies_met_page_ready = setInterval(() => {
+      var dependencies_met_page_ready = setInterval (() => {
         var pageState     = $('#content').css("display");
         var pageVisible   = (pageState == 'block') ? true: false;
         var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;

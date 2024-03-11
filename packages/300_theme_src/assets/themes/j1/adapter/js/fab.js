@@ -187,7 +187,7 @@ j1.adapter.fab = (function (j1, window) {
       // ---------------------------------------------------------------------
       // Initialize FAB button
       // ---------------------------------------------------------------------
-      var dependencies_met_fab_initialized = setInterval(() => {
+      var dependencies_met_fab_initialized = setInterval (() => {
         var pageState      = $('#content').css("display");
         var pageVisible    = (pageState == 'block') ? true: false;
         var j1CoreFinished = (j1.getState() == 'finished') ? true : false;
@@ -279,7 +279,7 @@ j1.adapter.fab = (function (j1, window) {
                 if (eventHandler === 'open_mmenu_toc') {
                   if ($('#j1-toc-mgr').length) {
                     logger.info('\n' + 'found toc in page: enabled');
-                    var dependencies_met_toccer_finished = setInterval(() => {
+                    var dependencies_met_toccer_finished = setInterval (() => {
                       if (j1.adapter.toccer.getState() == 'finished') {
                         logger.debug('\n' + 'met dependencies for: toccer');
 
@@ -334,7 +334,7 @@ j1.adapter.fab = (function (j1, window) {
                 // check if toccer (toc_mgr) is available
                 if ($('#j1-toc-mgr').length) {
                   logger.info('\n' + 'found toc in page: enabled');
-                  var dependencies_met_toccer_finished = setInterval(() => {
+                  var dependencies_met_toccer_finished = setInterval (() => {
                     if (j1.adapter.toccer.getState() == 'finished') {
                       logger.debug('\n' + 'met dependencies for toccer: finished');
 

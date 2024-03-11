@@ -134,7 +134,7 @@ j1.adapter.carousel = (function (j1, window) {
       // -----------------------------------------------------------------------
       // initializer
       // -----------------------------------------------------------------------
-      var dependencies_met_page_finished = setInterval(() => {
+      var dependencies_met_page_finished = setInterval (() => {
         var pageState      = $('#content').css("display");
         var pageVisible    = (pageState == 'block') ? true : false;
         var j1CoreFinished = (j1.getState() == 'finished') ? true : false;
@@ -199,7 +199,7 @@ j1.adapter.carousel = (function (j1, window) {
                 {% unless parallax %} {% if slider_type == 'text' %}
                   $('head').append('<style>#{{slider_id}}{border-left: 3px solid #0072ff;}</style>');
                   // wait until carousel has been initialized
-                  var dependency_met_owl_initialized = setInterval(() => {
+                  var dependency_met_owl_initialized = setInterval (() => {
                     if ($('#{{slider_id}} > .owl-wrapper-outer').length) {
                       {% if font_size %}
                       $('head').append('<style>#{{slider_id}}{font-size:{{font_size}}}</style>');

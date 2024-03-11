@@ -163,7 +163,7 @@ j1.adapter.toccer = (function () {
       _this['moduleOptions'] = toccerOptions;
 
       if (j1.stringToBoolean(toccerOptions.toc)) {
-        var dependencies_met_navigator = setInterval(() => {
+        var dependencies_met_navigator = setInterval (() => {
           var pageState       = $('#content').css("display");
           var pageVisible     = (pageState == 'block') ? true: false;
           var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
@@ -195,7 +195,7 @@ j1.adapter.toccer = (function () {
 
       // tocbot get fired if HTML portion is loaded (AJAX load finished)
       //
-      var dependencies_met_ajax_load_finished = setInterval(() => {
+      var dependencies_met_ajax_load_finished = setInterval (() => {
 
         if ($('#toc_mmenu').length) {
           /* eslint-disable */

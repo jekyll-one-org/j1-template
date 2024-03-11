@@ -211,7 +211,7 @@ var Events = {
       // -----------------------------------------------------------------------
       // initializer
       // -----------------------------------------------------------------------
-      var dependencies_met_page_ready = setInterval(() => {
+      var dependencies_met_page_ready = setInterval (() => {
         var pageState       = $('#content').css("display");
         var pageVisible     = (pageState == 'block') ? true : false;
         var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;

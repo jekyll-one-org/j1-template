@@ -29,7 +29,7 @@ settings:
   # MODULE options
   # ----------------------------------------------------------------------------
   #
-  detect_geo_location:                  true
+# detect_geo_location:                  true
   max_history:                          3
   allow_history_duplicates:             false
 

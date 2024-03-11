@@ -141,7 +141,7 @@ var logText;
       // -----------------------------------------------------------------------
       // initializer
       // -----------------------------------------------------------------------
-      var dependencies_met_page_ready = setInterval(() => {
+      var dependencies_met_page_ready = setInterval (() => {
         var pageState       = $('#content').css("display");
         var pageVisible     = (pageState == 'block') ? true: false;
         var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
@@ -192,7 +192,7 @@ var logText;
               load_dependencies[dependency] = '';
 
               // initialize the grid if HTML portion successfully loaded
-              load_dependencies['dependencies_met_html_loaded_{{grid.id}}'] = setInterval(() => {
+              load_dependencies['dependencies_met_html_loaded_{{grid.id}}'] = setInterval (() => {
                 // check if HTML portion of the grid is loaded successfully
                 xhrLoadState = j1.xhrDOMState['#{{grid.id}}_parent'];
                 if (xhrLoadState === 'success') {

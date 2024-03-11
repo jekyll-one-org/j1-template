@@ -314,7 +314,7 @@ j1.adapter.navigator = (function (j1, window) {
         'j1.adapter.navigator',
         'data_loaded');
 
-        var dependencies_met_load_menu_finished = setInterval(() => {
+        var dependencies_met_load_menu_finished = setInterval (() => {
   	      if (j1.xhrDOMState['#'+navQuicklinksOptions.xhr_container_id] === 'success' &&
             j1.xhrDOMState['#'+navAuthClientConfig.xhr_container_id] === 'success' &&
             j1.xhrDOMState['#'+navMenuOptions.xhr_container_id] === 'success' ) {
@@ -354,7 +354,7 @@ j1.adapter.navigator = (function (j1, window) {
               }
 
               // jadams, 2021-07-03: wait until navigator CORE get finished
-              var dependencies_met_page_finished = setInterval(() => {
+              var dependencies_met_page_finished = setInterval (() => {
                 if (j1.adapter.navigator.getState() == 'core_initialized') {
                   logText = '\n' + 'load themes';
                   logger.info(logText);
@@ -379,7 +379,7 @@ j1.adapter.navigator = (function (j1, window) {
                   // added same checks (as already done by adapter themer) to
                   // check if remote theme menu detected as LOADED
                   //
-                  var dependencies_met_remote_themes_loaded = setInterval(() => {
+                  var dependencies_met_remote_themes_loaded = setInterval (() => {
                     interval_count += 1;
                     themes_count = document.getElementById("remote_themes").getElementsByTagName("li").length;
                     if (themes_count > 0 ) {
@@ -410,7 +410,7 @@ j1.adapter.navigator = (function (j1, window) {
             // -----------------------------------------------------------------
             // event handler|css styles
             // -----------------------------------------------------------------
-            var dependencies_met_initialized = setInterval(() => {
+            var dependencies_met_initialized = setInterval (() => {
               var pageState      = $('#content').css("display");
               var pageVisible    = (pageState == 'block') ? true: false;
               var j1CoreFinished = (j1.getState() == 'finished') ? true: false;

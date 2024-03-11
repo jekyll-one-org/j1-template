@@ -149,7 +149,7 @@ j1.adapter.gallery = (function (j1, window) {
       // -----------------------------------------------------------------------
       // initializer
       // -----------------------------------------------------------------------
-      var dependencies_met_j1_core_finished = setInterval(() => {
+      var dependencies_met_j1_core_finished = setInterval (() => {
         var pageState      = $('#content').css("display");
         var pageVisible    = (pageState == 'block') ? true : false;
         var j1CoreFinished = (j1.getState() == 'finished') ? true : false;
@@ -196,7 +196,7 @@ j1.adapter.gallery = (function (j1, window) {
 
           // initialize the gallery if HTML portion successfully loaded
           //
-          load_dependencies['dependencies_met_html_loaded_{{gallery_id}}'] = setInterval(() => {
+          load_dependencies['dependencies_met_html_loaded_{{gallery_id}}'] = setInterval (() => {
             // check if HTML portion of the gallery is loaded successfully
             xhrLoadState = j1.xhrDOMState['#{{gallery_id}}_parent'];
             if (xhrLoadState === 'success') {

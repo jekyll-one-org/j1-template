@@ -535,7 +535,7 @@ var j1 = (function (options) {
             // NOTE: asynchronous calls should be rewitten to xhrData
             // NOTE: Find $('#no_flicker').hide() conterpart in themer adapter
             // -----------------------------------------------------------------
-            var dependencies_met_page_ready = setInterval(() => {
+            var dependencies_met_page_ready = setInterval (() => {
               var pageState       = $('#no_flicker').css("display");
               var pageVisible     = (pageState == 'block') ? true : false;
               var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
@@ -561,7 +561,7 @@ var j1 = (function (options) {
                 // process pages having banners or panels
                 //
                 if (banner_blocks || panel_blocks) {
-                  var dependencies_met_blocks_ready = setInterval(() => {
+                  var dependencies_met_blocks_ready = setInterval (() => {
                     // check the footer if HTML portion is loaded successfully
                     if (footer_exists) {
                       footer_state = j1.getXhrDataState('#{{footer_id}}');
@@ -612,7 +612,7 @@ var j1 = (function (options) {
                 } else {
                   // process pages w/o banners or panels
                   //
-                  var dependencies_met_footer_block_ready = setInterval(() => {
+                  var dependencies_met_footer_block_ready = setInterval (() => {
                     // check the footer if HTML portion is loaded successfully
                     if (footer_exists) {
                       footer_state = j1.getXhrDataState('#{{footer_id}}');
@@ -701,7 +701,7 @@ var j1 = (function (options) {
       // NOTE: asynchronous calls should be rewitten to xhrData
       // NOTE: Find $('#no_flicker').hide() conterpart in themer adapter
       // -----------------------------------------------------------------------
-      var dependencies_met_page_ready = setInterval(() => {
+      var dependencies_met_page_ready = setInterval (() => {
         var pageState       = $('#no_flicker').css("display");
         var pageVisible     = (pageState == 'block') ? true : false;
         var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
@@ -727,7 +727,7 @@ var j1 = (function (options) {
           // process pages having banners or panels
           //
           if (banner_blocks || panel_blocks) {
-            var dependencies_met_blocks_ready = setInterval(() => {
+            var dependencies_met_blocks_ready = setInterval (() => {
               // check the footer if HTML portion is loaded successfully
               if (footer_exists) {
                 footer_state = j1.getXhrDataState('#{{footer_id}}');
@@ -780,7 +780,7 @@ var j1 = (function (options) {
           } else {
             // process pages w/o banners or panels
             //
-            var dependencies_met_footer_block_ready = setInterval(() => {
+            var dependencies_met_footer_block_ready = setInterval (() => {
               // check the footer if HTML portion is loaded successfully
               if (footer_exists) {
                 footer_state = j1.getXhrDataState('#{{footer_id}}');
@@ -1317,7 +1317,7 @@ var j1 = (function (options) {
           j1.core.navigator.updateSidebar(current_user_data);
 
           // initiate smooth scroller if page is ready and visible
-          var dependencies_met_page_ready = setInterval(() => {
+          var dependencies_met_page_ready = setInterval (() => {
             var pageState       = $('#no_flicker').css("display");
             var pageVisible     = (pageState == 'block') ? true: false;
             var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
@@ -1510,7 +1510,7 @@ var j1 = (function (options) {
         j1.core.navigator.updateSidebar(current_user_data);
 
         // initiate smooth scroller if page is ready and visible
-        var dependencies_met_page_ready = setInterval(() => {
+        var dependencies_met_page_ready = setInterval (() => {
           var pageState   = $('#no_flicker').css("display");
           var pageVisible = (pageState == 'block') ? true: false;
 
@@ -2704,7 +2704,7 @@ var j1 = (function (options) {
       var logger = log4javascript.getLogger('j1.adapter.scrollToAnchor');
       var scrollOffset;
 
-      var dependencies_met_page_displayed = setInterval(() => {
+      var dependencies_met_page_displayed = setInterval (() => {
         var pageState      = $('#no_flicker').css("display");
         var pageVisible    = (pageState == 'block') ? true: false;
         var j1CoreFinished = (j1.getState() == 'finished') ? true : false;

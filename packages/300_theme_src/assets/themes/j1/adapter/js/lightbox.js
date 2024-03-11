@@ -132,7 +132,7 @@ j1.adapter.lightbox = (function (j1, window) {
       lightboxSettings      = $.extend({}, {{lightbox_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
       lightboxOptions       = $.extend(true, {}, lightboxDefaults, lightboxSettings, frontmatterOptions);
 
-      var dependencies_met_page_ready = setInterval(() => {
+      var dependencies_met_page_ready = setInterval (() => {
         var pageState       = $('#content').css("display");
         var pageVisible     = (pageState == 'block') ? true: false;
         var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;

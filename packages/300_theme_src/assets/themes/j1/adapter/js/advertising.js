@@ -173,7 +173,7 @@ var logText;
       // -----------------------------------------------------------------------
       // initializer
       // -----------------------------------------------------------------------
-      var dependencies_met_page_ready = setInterval(() => {
+      var dependencies_met_page_ready = setInterval (() => {
         var pageState       = $('#content').css("display");
         var pageVisible     = (pageState == 'block') ? true: false;
         var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
@@ -263,7 +263,7 @@ var logText;
               }
 
               _this.check_tracking_protection();
-              var dependencies_met_tracking_check_ready = setInterval(() => {
+              var dependencies_met_tracking_check_ready = setInterval (() => {
                 if (typeof tracking_protection !== 'undefined' ) {
                   var browser_tracking_feature = navigator.DoNotTrack;
 
@@ -371,7 +371,7 @@ var logText;
     // -------------------------------------------------------------------------
     ad_initializer: function () {
 
-      var dependencies_met_page_visible = setInterval(() => {
+      var dependencies_met_page_visible = setInterval (() => {
         var pageState       = $('#content').css("display");
         var pageVisible     = (pageState == 'block') ? true: false;
         var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;

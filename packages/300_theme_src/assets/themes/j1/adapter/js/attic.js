@@ -142,7 +142,7 @@ j1.adapter.attic = (function (j1, window) {
       logger.debug('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
 
-      var dependencies_met_page_ready = setInterval(() => {
+      var dependencies_met_page_ready = setInterval (() => {
         var pageState   = $('#no_flicker').css("display");
         var pageVisible = (pageState == 'block') ? true: false;
 
@@ -663,7 +663,7 @@ j1.adapter.attic = (function (j1, window) {
             // start RUNNER on page 'ready'|module state 'initialized'
             //
             $(function() {
-              var dependencies_met_attic_ready = setInterval(() => {
+              var dependencies_met_attic_ready = setInterval (() => {
                 if (_this.getState() === 'initialized') {
                   logger.info('\n' + 'initialize attic on id {{attic_id}}: started');
                   {{attic_id}}_runner (atticOptions);

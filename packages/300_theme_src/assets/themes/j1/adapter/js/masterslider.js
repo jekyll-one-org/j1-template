@@ -170,7 +170,7 @@ j1.adapter.masterslider = (function (j1, window) {
 
       // make sure the 'content' section is visible BEFORE setting-up sliders
       //
-      var dependencies_met_module_finished = setInterval(() => {
+      var dependencies_met_module_finished = setInterval (() => {
         var pageState           = $('#content').css("display");
         var pageVisible         = (pageState == 'block') ? true: false;
         var atticFinished       = (j1.adapter.attic.getState() == 'finished') ? true: false;
