@@ -41,17 +41,13 @@ regenerate:                             true
 {% assign lunr_search_defaults  = modules.defaults.lunr.defaults %}
 {% assign lunr_search_settings  = modules.lunr.settings %}
 
-{% comment %} Set config options
--------------------------------------------------------------------------------- {% endcomment %}
-{% assign lunr_search_options    = lunr_search_defaults | merge: lunr_search_settings %}
-{% assign topsearch_options      = lunr_search_options.topsearch %}
-
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}
 {% endif %}
+
 
 /*
  # -----------------------------------------------------------------------------
@@ -85,32 +81,10 @@ j1.adapter.lunr = (function (j1, window) {
   var searchDefaults;
   var searchSettings;
   var searchOptions;
-  var topSearchOptions;
-  var selectList;
-  var $slimSelect;
-  var newItem;
-  var itemExists;
-
-  var cookie_names;
-  var url;
-  var baseUrl;
-  var hostname;
-  var auto_domain;
-  var secure;
-
   var _this;
   var logger;
   var logText;
-
-  var maxHistory;
-  var textHistory;
-  var history_select_wrapper;
-  var search_prompt;
-  var searchHstoryWrapper;
-  var $searchHstoryWrapperId;
-  var searchHstoryEnabled;
-  var allowHistoryDuplicates;
-  var allowHistoryUpdatesOnMax;
+  var modalBody;
 
   // ---------------------------------------------------------------------------
   // Helper functions
@@ -127,35 +101,23 @@ j1.adapter.lunr = (function (j1, window) {
     init: function (options) {
 
       // -----------------------------------------------------------------------
-      // default module settings
+      // Default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
         module_name: 'j1.adapter.lunr',
         generated:   '{{site.time}}'
       }, options);
 
-      // Load  module DEFAULTS|CONFIG
-      searchDefaults    = $.extend({},   {{lunr_search_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      searchSettings    = $.extend({},   {{lunr_search_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      searchOptions     = $.extend(true, {}, searchDefaults, searchSettings);
-      topSearchOptions  = searchOptions.topsearch;
-
       // -----------------------------------------------------------------------
-      // module variable settings
+      // Global variable settings
       // -----------------------------------------------------------------------
       _this   = j1.adapter.lunr;
       logger  = log4javascript.getLogger('j1.adapter.lunr');
 
-      // -----------------------------------------------------------------------
-      // top search variable settings
-      // -----------------------------------------------------------------------
-      cookie_names        = j1.getCookieNames();
-      url                 = new liteURL(window.location.href);
-      baseUrl             = url.origin;
-      hostname            = url.hostname;
-      auto_domain         = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
-      secure              = (url.protocol.includes('https')) ? true : false;
-      searchHstoryEnabled = topSearchOptions.history_enabled;
+      // Load  module DEFAULTS|CONFIG
+      searchDefaults = $.extend({},   {{lunr_search_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      searchSettings = $.extend({},   {{lunr_search_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      searchOptions  = $.extend(true, {}, searchDefaults, searchSettings);
 
       // -----------------------------------------------------------------------
       // lunr initializer
@@ -181,60 +143,6 @@ j1.adapter.lunr = (function (j1, window) {
 
           _this.eventHandler();
 
-          // initialize history array from cookie
-          if (searchHstoryEnabled && topSearchOptions.read_prompt_history_from_cookie) {
-
-            // get slimSelect object for the history (placed by slimSelect adapter)
-            // const topSearchModalId  = '#' + 'searchModal';
-            selectList                = document.getElementById('search_history');
-            $slimSelect               = selectList.slim;
-
-            // limit the history
-            maxHistory                = topSearchOptions.max_history;
-
-            // allow|reject duplicates for the history
-            allowHistoryDuplicates    = topSearchOptions.allow_history_duplicates;
-
-            // allow|reject history updates if maxHistory reached
-            allowHistoryUpdatesOnMax  = topSearchOptions.allow_history_updates_on_max;
-
-            logger.debug('\n' + 'read prompt history from cookie');
-            var data      = [];
-            var option    = {};
-            search_prompt = j1.existsCookie(cookie_names.search_prompt)
-              ? j1.readCookie(cookie_names.search_prompt)
-              : {};
-
-            // convert search prompt object to array
-            textHistory = Object.values(search_prompt);
-
-            // remove duplicates from history
-            if (!allowHistoryDuplicates && textHistory.length > 1) {
-              var textHistoryLenght = textHistory.length;
-              var uniqueArray       = [...new Set(textHistory)];                // create a 'Set' from the history array to automatically remove duplicates
-
-              textHistory = uniqueArray;
-              if (textHistoryLenght > textHistory.length) {
-                logger.debug('\n' + 'removed duplicates from history array: ' + (textHistoryLenght - textHistory.length) + ' element|s');
-              }
-            } // END if !allowHistoryDupicates
-
-            // update|set slimSelect data elements
-            data   = [];
-            option = {};
-            textHistory.forEach(function(historyText) {
-              option = {
-                text: historyText,
-                display: true,
-                selected: false,
-                disabled: false
-              }
-              data.push(option);
-            }); // END forEach
-            $slimSelect.setData(data);
-
-          } // END if searchHstoryEnabled
-
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'initializing module finished');
@@ -246,26 +154,49 @@ j1.adapter.lunr = (function (j1, window) {
     }, // END init
 
     // -------------------------------------------------------------------------
-    // eventHandler
+    // loadDialog ()
+    // NOT used anymore. Modal HTML loaded dynamically from ???
+    // -------------------------------------------------------------------------
+    // loadDialog: function () {
+    //
+    //   logger.info('\n' + 'create|append search modal, id: ' + 'bratze');
+    //
+    //   _this.modal = document.createElement('div');
+    //   _this.modal.id = "topInfoModalContainer";
+    //   document.body.append(_this.modal);
+    //
+    //   {% raw %}
+    //   _this.modalScript       = document.createElement('script');
+    //   _this.modalScript.type  = 'text/mustache';
+    //   _this.modalScript.id    = 'search-results-template';
+    //   _this.modalScript.text  = '<ul style="list-style: none; margin-left: .5rem; margin-right: 4.25rem">' + '\n';
+    //   _this.modalScript.text += '{{#docs}}' + '\n';
+    //   _this.modalScript.text += '  <li>' + '\n';
+    //   _this.modalScript.text += '    <h4 class="result-item"> <a class="link-no-decoration" href="{{url}}" target="_blank">{{title}} · {{tagline}}</a> </h4>' + '\n';
+    //   _this.modalScript.text += '    <p class="result-item-text small text-muted mt-2 mb-0"> <i class="mdib mdib-calendar-blank mdib-18px mr-1"></i>{{displaydate}} </p>' + '\n';
+    //   _this.modalScript.text += '    <p class="result-item-text">{{description}}</p>' + '\n';
+    //   _this.modalScript.text += '      <i class="mdib mdib-tag-text-outline mdib-18px mr-1"></i><span class="sr-categories">{{#categories}} {{.}} · {{/categories}}</span>' + '\n';
+    //   _this.modalScript.text += '      <i class="mdib mdib-tag mdib-18px mr-1 ml-2"></i><span class="sr-tags">{{#tags}} {{.}} · {{/tags}}</span>' + '\n';
+    //   _this.modalScript.text += '    </p>' + '\n';
+    //   _this.modalScript.text += '  </li>' + '\n';
+    //   _this.modalScript.text += '{{/docs}}' + '\n';
+    //   _this.modalScript.text += '<ul>' + '\n';
+    //   {% endraw %}
+    //
+    //   document.body.append(_this.modalScript);
+    // }, // END loadDialog
+
+    // -------------------------------------------------------------------------
+    // eventhandler
     // -------------------------------------------------------------------------
     eventHandler: function () {
-      const topSearchModalId = '#' + 'searchModal';
-
-      selectList  = document.getElementById('search_history');
-      $slimSelect = selectList.slim;
+      // const topSearchModal    = document.getElementById('searchModal');
+      const topSearchModalId  = '#' + 'searchModal';
+      const selectList  = document.getElementById('prompt_history');
+      const $slimSelect = selectList.slim
 
       $(topSearchModalId).on('shown.bs.modal', function () {
-        logger.debug('\n' + 'search modal shown');
-
-        searchHstoryWrapper     = document.getElementById('search_history_select_wrapper');
-        $searchHstoryWrapperId  = '#' + searchHstoryWrapper.id;
-
-        // display history container
-        if (textHistory.length > 0) {
-          logger.debug('\n' + 'show search history on id: ' + $searchHstoryWrapperId);
-          $($searchHstoryWrapperId).show();
-        }
-
+        logger.debug('\n' + 'lunr: modal shown');
       });
 
       // hide|clear results from top search

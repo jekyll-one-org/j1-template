@@ -57,6 +57,13 @@ defaults:
   topsearch:
     enabled:                            false
 
+    max_history:                        20
+    history_enabled:                    false
+    allow_history_duplicates:           false
+    allow_history_updates_on_max:       false
+    save_prompt_history_to_cookie:      false
+    read_prompt_history_from_cookie:    false
+
     container_id:                       search_modal
     type:                               quicksearch                             # quicksearch | elasticsearch
     icon_family:                        mdib
