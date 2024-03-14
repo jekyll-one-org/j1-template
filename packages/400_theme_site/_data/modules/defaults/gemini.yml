@@ -131,11 +131,13 @@ defaults:
   # ----------------------------------------------------------------------------
   #
   max_history:                          20
-  detect_geo_location:                  false
+  history_enabled:                      true
   allow_history_duplicates:             false
   allow_history_updates_on_max:         false
   save_prompt_history_to_cookie:        false
   read_prompt_history_from_cookie:      false
+
+  detect_geo_location:                  false
 
   prompt:
     title:                              Your request

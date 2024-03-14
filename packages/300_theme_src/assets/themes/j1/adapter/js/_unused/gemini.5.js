@@ -116,25 +116,20 @@ var check_cookie_option_domain;
 var cookie_domain;
 var secure;
 
-var gemini_model;
-var apiKey;
-var validApiKey;
-var genAI;
-var result;
-
 var latitude;
 var longitude;
 var country;
 var city;
 
-var selectList;
-var $slimSelect;
-var textarea;
+var gemini_model;
+var apiKey;
+var validApiKey;
 var maxHistory;
 var promptHstoryEnabled;
 var allowHistoryDuplicates;
 var allowHistoryUpdatesOnMax;
-
+var genAI;
+var result;
 var _this;
 var logger;
 var logText;
@@ -435,11 +430,31 @@ const httpError500      = geminiOptions.errors.http500;
 
         // check page ready state
         if (j1CoreFinished && pageVisible && slimSelectFinished && uiLoaded && modulesLoaded) {
+          // get textarea element (prompt)
+          const textarea    = document.getElementById(geminiOptions.prompt_id);
+
+          // get slimSelect object for the history (placed ny slimSelect adapter)
+          const selectList  = document.getElementById('prompt_history');
+
+          // NOTE, jadams 2023-03-13:
+          // For unclear reasons, the slimSelect object fals to get if
+          // site search is enabled using a history as well
+          //
+          // failsafe: disable prompt history if slimSelect object NOT found
+          // promptHstoryEnabled = (selectList != null) ? promptHstoryEnabled : false;
+          // if (!promptHstoryEnabled) {
+          //   logger.error('\n' + 'fatal: prompt history select not found');
+          //   logger.warn('\n'  + 'disabled prompt history');
+          //   $("#clear").hide();
+          // } // END if promptHstoryEnabled
 
           // initialize|hide Chatbot UI
           $("#gemini_ui_container").show();
           $("#spinner").hide();
           $("#response").hide();
+
+          // clear prompt (textarea)
+          document.getElementById('prompt').value = '';
 
           if (!validApiKey) {
             logger.warn('\n' + 'Invalid API key detected: ' + apiKey);
@@ -447,16 +462,10 @@ const httpError500      = geminiOptions.errors.http500;
             $("#reset").hide();
           }
 
-          // get|clear textarea element (prompt)
-          textarea        = document.getElementById(geminiOptions.prompt_id);
-          textarea.value  = '';
-
           // initialize history array from cookie
           if (promptHstoryEnabled && geminiOptions.read_prompt_history_from_cookie) {
-
-            // get slimSelect object for the history (placed by slimSelect adapter)
-            selectList                = document.getElementById('prompt_history');
-            $slimSelect               = selectList.slim;
+            // set the history select (slimSelect)
+            const $slimSelect         = selectList.slim;
 
             // limit the history
             maxHistory                = geminiOptions.max_history;
@@ -488,28 +497,53 @@ const httpError500      = geminiOptions.errors.http500;
               }
             } // END if !allowHistoryDupicates
 
-            // update|set slimSelect data elements
-            data   = [];
-            option = {};
-            textHistory.forEach(function(historyText) {
+            // create slimSelect data elements
+            textHistory.forEach(function(optionText) {
               option = {
-                text: historyText,
+                text: optionText,
                 display: true,
                 selected: false,
                 disabled: false
               }
               data.push(option);
             }); // END forEach
+
+            // jadams, 2023-03-13
+            // TODO: check if the failsafe check on selectList is required
+            // failsafe
+            // if (selectList == null) {
+            //   promptHstoryEnabled = false;
+            //
+            //   logger.error('\n' + 'fatal: prompt history select not found');
+            //   logger.warn('\n'  + 'disabled prompt history');
+            //   $("#clear").hide();
+            // } else {
+            //   // update history select
+            //   $slimSelect.setData(data);
+            //
+            //   // fisplay history container
+            //   if (textHistory.length > 0) {
+            //     $("#list-container").show();
+            //   }
+            //
+            //   // ---------------------------------------------------------------
+            //   // sliemSelect event handlers
+            //   // ---------------------------------------------------------------
+            //   //
+            //   _this.slim_select_eventHandler();
+            // } // END if selectList
+
+            // update history select
             $slimSelect.setData(data);
 
-            // display history container
+            // fisplay history container
             if (textHistory.length > 0) {
               $("#list-container").show();
             }
 
-            // -----------------------------------------------------------------
+            // ---------------------------------------------------------------
             // sliemSelect event handlers
-            // -----------------------------------------------------------------
+            // ---------------------------------------------------------------
             //
             _this.slim_select_eventHandler();
 
@@ -525,8 +559,11 @@ const httpError500      = geminiOptions.errors.http500;
           const sendButton = document.getElementById('{{gemini_options.buttons.generate.id}}');
           sendButton.addEventListener('click', (event) => {
             // jadams, 2023-03-13: unclear why consttants are required to set again
-            // const selectList  = document.getElementById('prompt_history');
-            // const $slimSelect = selectList.slim
+            const selectList  = document.getElementById('prompt_history');
+            const $slimSelect = selectList.slim;
+
+            // jadams, 2023-03-13: promptHstoryEnabled taken from globals
+            // var promptHstoryEnabled = (selectList != null) ? true : false;
 
             if (promptHstoryEnabled) {
               var historySet = false;
@@ -550,7 +587,6 @@ const httpError500      = geminiOptions.errors.http500;
                 logger.debug('\n' + 'update item in history: ' +  newItem);
                 // replace FIRST history element by NEW item
                 textHistory[0] = newItem;
-                // textHistory.push(newItem);
                 historySet = true;
               }
 
@@ -591,18 +627,19 @@ const httpError500      = geminiOptions.errors.http500;
                 }
               } // END if allowHistoryDupicates
 
-              // create|set slimSelect data elements
-              data   = [];
-              option = {};
-              textHistory.forEach(function(historyText) {
+              // loop (history) array to create history data elements (select)
+              data    = [];
+              option  = {};
+
+              // create history select elements
+              textHistory.forEach(function(optionText) {
                 option = {
-                  text: historyText,
-                  display: true,
-                  selected: false,
-                  disabled: false
+                  text: optionText
                 }
                 data.push(option);
               }); // END forEach
+
+              // update history select
               $slimSelect.setData(data);
 
               // display history container

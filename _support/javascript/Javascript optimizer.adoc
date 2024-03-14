@@ -1,0 +1,21 @@
+== Does use the JS byte engine use an optimizer before running the code?
+
+Yes, JavaScript engines like V8 (used in Chrome and Node.js) do use
+optimizers before running the code. The optimization process typically
+happens in two stages:
+
+1. Ignition::
+This is a fast interpreter that gets your code running quickly. It
+translates your JavaScript code into bytecode, a lower-level representation
+that the engine can understand.
+
+2. Turbofan::
+This is an optimizing compiler. It analyzes the bytecode and frequently
+executed parts of your code. Based on this analysis, it generates faster
+machine code that can run directly on your device. This optimization happens
+over time, as the engine gathers information about how your code is used.
+
+Here are some resources you can explore to learn more:
+
+Mastering JavaScript high performance in V8: https://v8.dev/blog/retiring-octane
+How the JavaScript engine works: https://www.freecodecamp.org/news/how-javascript-works-behind-the-scenes/

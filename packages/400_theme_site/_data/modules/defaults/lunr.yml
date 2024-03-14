@@ -51,7 +51,6 @@ defaults:
   #
   emptyMsg:                                                                     # '<p style="margin-left: 3.5rem">No matches.</p>'
 
-
   # ----------------------------------------------------------------------------
   # TopSearch
   #

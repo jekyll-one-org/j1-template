@@ -56,17 +56,21 @@
 {% assign elastic_search      = false %}
 
 {% if topsearch_options.type == 'quicksearch' %}
-  {% assign quick_search = true %}
+  {% if topsearch_options.page %}
+    {% assign quick_search = true %}
+  {% endif %}
 {% endif %}
 
 {% if topsearch_options.type == 'elasticsearch' %}
   {% assign elastic_search = true %}
-  {% assign quick_search   = false %}
+  {% if topsearch_options.page %}
+    {% assign quick_search = true %}
+  {% endif %}
 {% endif %}
 
-{% if topsearch_options.icon_family     == 'FontAwesome' or topsearch_options.icon_family == 'FontAwesome4' or topsearch_options.icon_family == 'FontAwesome5' %}
+{% if topsearch_options.icon_family    == 'FontAwesome' or topsearch_options.icon_family == 'FontAwesome4' or topsearch_options.icon_family == 'FontAwesome5' %}
   {% assign icon_family = 'fa' %}
-{% elsif topsearch_options.icon_family  == 'MDI' or topsearch_options.icon_family == 'Material Design Icons'%}
+{% elsif topsearch_options.icon_family == 'MDI' or topsearch_options.icon_family == 'Material Design Icons'%}
   {% assign icon_family = 'mdi' %}
 {% else %}
   {% assign icon_family = 'mdi' %}
@@ -86,42 +90,40 @@
   {% comment %} lunrSearch engine
   ------------------------------------------------------------------------------ {% endcomment %}
   {% if quick_search %}
-    <!-- [INFO   ] [~/includes/themes/j1/modules/searcher/procedures/topsearch.proc ] [ PLACE: modal top search: searchModal ] -->
     <!-- Modal Top Search -->
-    <div id="searchModal" class="modal fade"
-      data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="searchModal" aria-hidden="true">
-      <div class="modal-dialog modal-top modal-frame role="document">
+    <div id="searchModal"
+      class="modal fade top" tabindex="-1" role="dialog">
 
+      <div class="modal-dialog modal-frame modal-top modal-notify modal-info" role="document">
         <!-- MODAL Content -->
         <div class="modal-content">
-          <div class="modal-header">
-            <h2 id="exampleModalLabel"class="modal-title fs-5">QuickSearch</h2>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
           <!-- MODAL Body -->
           <div class="modal-body">
             <div id="navigator_nav_topsearch" class="top-search ml-4 mr-4">
+              <div id="search_history_select_wrapper" style="display: none"></div>
               <div class="bmd-form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="mdib mdib-magnify mdib-2x mb-2" style="color:#9E9E9E"></i></span>
                   <input id="search-query" type="text" name="q" placeholder="{{placeholder}}" autocomplete="off" class="form-control">
                   <!-- span id="clear-topsearch" class="form-clear form-clear-searcher d-none" style="margin-top: 0.75rem"> <i class="mdib mdib-format-clear mdib-2x" style="color:#9E9E9E"></i> </span -->
                   <span id="clear-topsearch" class="form-clear form-clear-searcher d-none" style="margin-top: 1.15rem"> <i class="mdib mdib-format-clear mdib-24px" style="color:#9E9E9E"></i> </span>
-                  <!-- button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="margin-top: 24px;"></button -->
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="margin-top: 24px;"></button>
                 </div>
               </div>
+              <!-- [INFO   ] [~/assets/data/top_search_modal.html                    ] [ place: results container ] -->
               <div class="search-results hide-scrollbar mt-4">
                 <div id="search-results" style="display: none;"></div>
               </div>
             </div>
           </div>
         </div>
+        <!-- END MODAL Content -->
 
       </div>
     </div>
-    <!-- [INFO   ] [~/includes/themes/j1/modules/searcher/procedures/topsearch.proc ] [ END modal top search: searchModal] -->
+    <!-- END Modal Top Search -->
 
-    <!-- [INFO   ] [~/includes/themes/j1/modules/searcher/procedures/topsearch.proc ] [ PLACE: mustache template ] -->
+    <!-- [INFO   ] [_includes/themes/j1/modules/searcher/procedures/topsearch.proc ] [ place: mustache template ] -->
     {% raw %}
     <script id="search-results-template" type="text/mustache">
       <ul style="list-style: none; margin-left: .5rem; margin-right: 4.25rem">
@@ -141,9 +143,7 @@
       </ul>
     </script>
     {% endraw %}
-    <!-- [INFO   ] [~/includes/themes/j1/modules/searcher/procedures/topsearch.proc ] [ END: mustache template ] -->
 
   {% endif %}
-  <!-- [INFO   ] [~/includes/themes/j1/modules/searcher/procedures/topsearch.proc   ] [ END: processing: top search ] -->
-
+  <!-- [INFO   ] [_includes/themes/j1/modules/searcher/procedures/topsearch.proc ] [ end processing: top search ] -->
 {% endif %}

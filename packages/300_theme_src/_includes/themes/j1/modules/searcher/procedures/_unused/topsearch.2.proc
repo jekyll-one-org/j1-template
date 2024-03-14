@@ -88,16 +88,13 @@
   {% if quick_search %}
     <!-- [INFO   ] [~/includes/themes/j1/modules/searcher/procedures/topsearch.proc ] [ PLACE: modal top search: searchModal ] -->
     <!-- Modal Top Search -->
-    <div id="searchModal" class="modal fade"
-      data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="searchModal" aria-hidden="true">
-      <div class="modal-dialog modal-top modal-frame role="document">
+    <div id="searchModal"
+      class="modal fade top" tabindex="-1" role="dialog"
+      data-keyboard="false" data-backdrop="static">
 
+      <div class="modal-dialog modal-frame modal-top modal-notify modal-info" role="document">
         <!-- MODAL Content -->
         <div class="modal-content">
-          <div class="modal-header">
-            <h2 id="exampleModalLabel"class="modal-title fs-5">QuickSearch</h2>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
           <!-- MODAL Body -->
           <div class="modal-body">
             <div id="navigator_nav_topsearch" class="top-search ml-4 mr-4">
@@ -107,7 +104,7 @@
                   <input id="search-query" type="text" name="q" placeholder="{{placeholder}}" autocomplete="off" class="form-control">
                   <!-- span id="clear-topsearch" class="form-clear form-clear-searcher d-none" style="margin-top: 0.75rem"> <i class="mdib mdib-format-clear mdib-2x" style="color:#9E9E9E"></i> </span -->
                   <span id="clear-topsearch" class="form-clear form-clear-searcher d-none" style="margin-top: 1.15rem"> <i class="mdib mdib-format-clear mdib-24px" style="color:#9E9E9E"></i> </span>
-                  <!-- button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="margin-top: 24px;"></button -->
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="margin-top: 24px;"></button>
                 </div>
               </div>
               <div class="search-results hide-scrollbar mt-4">
@@ -116,8 +113,8 @@
             </div>
           </div>
         </div>
-
       </div>
+
     </div>
     <!-- [INFO   ] [~/includes/themes/j1/modules/searcher/procedures/topsearch.proc ] [ END modal top search: searchModal] -->
 

@@ -30,11 +30,12 @@ settings:
   # ----------------------------------------------------------------------------
   #
   max_history:                          3
-  detect_geo_location:                  true
+  history_enabled:                      true
   allow_history_updates_on_max:         true
   save_prompt_history_to_cookie:        true
   read_prompt_history_from_cookie:      true
 
+  detect_geo_location:                  true
   prompt_history_id:                    prompt_history
   prompt_id:                            prompt
 

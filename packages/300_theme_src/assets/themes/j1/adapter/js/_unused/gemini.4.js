@@ -116,25 +116,20 @@ var check_cookie_option_domain;
 var cookie_domain;
 var secure;
 
-var gemini_model;
-var apiKey;
-var validApiKey;
-var genAI;
-var result;
-
 var latitude;
 var longitude;
 var country;
 var city;
 
-var selectList;
-var $slimSelect;
-var textarea;
+var gemini_model;
+var apiKey;
+var validApiKey;
 var maxHistory;
 var promptHstoryEnabled;
 var allowHistoryDuplicates;
 var allowHistoryUpdatesOnMax;
-
+var genAI;
+var result;
 var _this;
 var logger;
 var logText;
@@ -433,13 +428,33 @@ const httpError500      = geminiOptions.errors.http500;
           logStartOnce = true;
         }
 
-        // check page ready state
         if (j1CoreFinished && pageVisible && slimSelectFinished && uiLoaded && modulesLoaded) {
+          // get textarea element (prompt)
+          const textarea      = document.getElementById(geminiOptions.prompt_id);
 
-          // initialize|hide Chatbot UI
+          // Get slimSelect object for the history (placed ny slimSelect adapter)
+          const selectList    = document.getElementById('prompt_history');
+
+          promptHstoryEnabled = (selectList != null) ? promptHstoryEnabled : false;
+
+          // NOTE, jadams 2023-03-13:
+          // For unclear reasons, the slimSelect object fals to get if
+          // site search is enabled using a history as well
+          //
+          // failsafe: disable prompt history if slimSelect object NOT found
+          if (!promptHstoryEnabled) {
+            logger.error('\n' + 'fatal: prompt history select not found');
+            logger.warn('\n'  + 'disabled prompt history');
+            $("#clear").hide();
+          } // END if selectList
+
+          // initialize|Hide UI
           $("#gemini_ui_container").show();
           $("#spinner").hide();
           $("#response").hide();
+
+          // initialize|Empty prompt (textarea)
+          document.getElementById('prompt').value = '';
 
           if (!validApiKey) {
             logger.warn('\n' + 'Invalid API key detected: ' + apiKey);
@@ -447,16 +462,10 @@ const httpError500      = geminiOptions.errors.http500;
             $("#reset").hide();
           }
 
-          // get|clear textarea element (prompt)
-          textarea        = document.getElementById(geminiOptions.prompt_id);
-          textarea.value  = '';
-
           // initialize history array from cookie
           if (promptHstoryEnabled && geminiOptions.read_prompt_history_from_cookie) {
-
-            // get slimSelect object for the history (placed by slimSelect adapter)
-            selectList                = document.getElementById('prompt_history');
-            $slimSelect               = selectList.slim;
+            // set the history select (slimSelect)
+            const $slimSelect         = selectList.slim;
 
             // limit the history
             maxHistory                = geminiOptions.max_history;
@@ -477,7 +486,7 @@ const httpError500      = geminiOptions.errors.http500;
             // convert chat prompt object to array
             textHistory = Object.values(chat_prompt);
 
-            // remove duplicates from history
+            // failsafe, remove duplicates from chat_prompt (history)
             if (!allowHistoryDuplicates && textHistory.length > 1) {
               var textHistoryLenght = textHistory.length;
               var uniqueArray       = [...new Set(textHistory)];                // create a 'Set' from the history array to automatically remove duplicates
@@ -486,47 +495,57 @@ const httpError500      = geminiOptions.errors.http500;
               if (textHistoryLenght > textHistory.length) {
                 logger.debug('\n' + 'removed duplicates from history array: ' + (textHistoryLenght - textHistory.length) + ' element|s');
               }
-            } // END if !allowHistoryDupicates
+            } // END if allowHistoryDupicates
 
-            // update|set slimSelect data elements
-            data   = [];
-            option = {};
-            textHistory.forEach(function(historyText) {
+            textHistory.forEach(function(optionText) {
               option = {
-                text: historyText,
+                text: optionText,
                 display: true,
                 selected: false,
                 disabled: false
               }
               data.push(option);
             }); // END forEach
-            $slimSelect.setData(data);
 
-            // display history container
-            if (textHistory.length > 0) {
-              $("#list-container").show();
-            }
+            // jadams, 2023-03-13
+            //  TODO: check if the check on selectList is required
+            if (selectList == null) {
+              promptHstoryEnabled = false;
 
-            // -----------------------------------------------------------------
-            // sliemSelect event handlers
-            // -----------------------------------------------------------------
-            //
-            _this.slim_select_eventHandler();
+              logger.error('\n' + 'fatal: prompt history select not found');
+              logger.warn('\n'  + 'disabled prompt history');
+              $("#clear").hide();
+            } else {
+              // update history select
+              $slimSelect.setData(data);
 
+              // fisplay history container
+              if (textHistory.length > 0) {
+                $("#list-container").show();
+              }
+
+              // ---------------------------------------------------------------
+              // sliemSelect event handlers
+              // ---------------------------------------------------------------
+              _this.slim_select_eventHandler();
+            } // END if selectList
           } else {
             $("#clear").hide();
-          } // if promptHstoryEnabled
+          } // if promptHstoryEnabled && read_prompt_history_from_cookie
 
           // -------------------------------------------------------------------
           // button event handlers
           // -------------------------------------------------------------------
-          //
+
           // send request to generate results
           const sendButton = document.getElementById('{{gemini_options.buttons.generate.id}}');
           sendButton.addEventListener('click', (event) => {
             // jadams, 2023-03-13: unclear why consttants are required to set again
-            // const selectList  = document.getElementById('prompt_history');
-            // const $slimSelect = selectList.slim
+            const selectList  = document.getElementById('prompt_history');
+            const $slimSelect = selectList.slim;
+
+            // jadams, 2023-03-13: promptHstoryEnabled taken from globals
+            // var promptHstoryEnabled = (selectList != null) ? true : false;
 
             if (promptHstoryEnabled) {
               var historySet = false;
@@ -550,7 +569,6 @@ const httpError500      = geminiOptions.errors.http500;
                 logger.debug('\n' + 'update item in history: ' +  newItem);
                 // replace FIRST history element by NEW item
                 textHistory[0] = newItem;
-                // textHistory.push(newItem);
                 historySet = true;
               }
 
@@ -591,18 +609,19 @@ const httpError500      = geminiOptions.errors.http500;
                 }
               } // END if allowHistoryDupicates
 
-              // create|set slimSelect data elements
-              data   = [];
-              option = {};
-              textHistory.forEach(function(historyText) {
+              // loop (history) array to create history data elements (select)
+              data    = [];
+              option  = {};
+
+              // create history select elements
+              textHistory.forEach(function(optionText) {
                 option = {
-                  text: historyText,
-                  display: true,
-                  selected: false,
-                  disabled: false
+                  text: optionText
                 }
                 data.push(option);
               }); // END forEach
+
+              // update history select
               $slimSelect.setData(data);
 
               // display history container

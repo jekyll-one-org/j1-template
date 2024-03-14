@@ -63,6 +63,9 @@ settings:
                                           </optgroup>
                                         </select>
 
+    # --------------------------------------------------------------------------
+    # Prompt history (gemini previewer)
+    #
     - select:                           prompt_history
       enabled:                          true
 
@@ -70,6 +73,17 @@ settings:
       id:                               prompt_history
       name:                             prompt-history
       items:                            <select multiple id="prompt_history" name="prompt-history"></select>
+
+    # --------------------------------------------------------------------------
+    # Search history (site search)
+    #
+    - select:                           search_history
+      enabled:                          true
+
+      wrapper_id:                       search_history_select_wrapper
+      id:                               search_history
+      name:                             search-history
+      items:                            <select multiple id="search_history" name="search-history"></select>
 
 # ------------------------------------------------------------------------------
 # END config
