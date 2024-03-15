@@ -32,9 +32,8 @@ personalization:                        true
 permalink:                              /pages/public/tools/previewer/google-gemini-ai/
 
 resources:                              [
-                                          animate,
-                                          clipboard, lightbox, rouge,
-                                          gemini, slim_select
+                                          animate, clipboard, lightbox, rouge,
+                                          gemini
                                         ]
 resource_options:
   - attic:

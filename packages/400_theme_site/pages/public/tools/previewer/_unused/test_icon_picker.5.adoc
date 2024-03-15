@@ -18,7 +18,7 @@ keywords: >
                                         select, dropdown, SlimSelect
 
 categories:                             [ Tester ]
-tags:                                   [ Module, SlimSelect, IconPicker ]
+tags:                                   [ Module, slimSelect, IconPicker ]
 
 image:
   path:                                 /assets/images/pages/roundtrip/icon-fonts-1920x1280-bw.jpg
@@ -60,10 +60,13 @@ resource_options:
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign icon_picker_defaults = modules.defaults.icon_picker.defaults %}
 {% assign icon_picker_settings = modules.icon_picker.settings %}
+{% assign slim_select_defaults = modules.defaults.slim_select.defaults %}
+{% assign slim_select_settings = modules.slim_select.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign icon_picker_options  = icon_picker_defaults | merge: icon_picker_settings %}
+{% assign slim_select_options  = slim_select_defaults | merge: slim_select_settings %}
 
 
 // Set (local) page attributes here
@@ -127,13 +130,18 @@ recommended to load all icons while a page is being initialized.
 Select the icon set to be shown from the *dropdown* below. To open a picker UI
 for the icon set selected, click on the button *SHOW ICON SET SELECTED*.
 
+// [role="mb-10"]
 [TIP]
 ====
 *Double-click* an icon in the Picker UI to copy the selected icon data to the
 *clipboard*.
 ====
 
-// wrapper (div) placed for the <select> loaded by module slimSelect
+// {% for select in slim_select_options.selects %}{% if select.id == page.select_id %}
+// wrapper_id: {{select.wrapper_id}}
+// {% endif %}{% endfor %}
+
+// Wrapper (div) placed for the <select> loaded by module slimSelect
 slimSelect::icon_library_select_wrapper[role="mt-4 mb-3"]
 
 // Button to open the picker UI for the selected icon set

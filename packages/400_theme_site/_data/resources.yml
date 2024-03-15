@@ -1836,7 +1836,7 @@ resources:
       comment:                          Module slimSelect
       region:                           head
       layout:                           [ home, page, post ]
-      required:                         ondemand
+      required:                         always
       preload:                          false
       script_load:                      defer
       dependencies:                     false

@@ -437,7 +437,7 @@ const httpError500      = geminiOptions.errors.http500;
         if (j1CoreFinished && pageVisible && slimSelectFinished && uiLoaded && modulesLoaded) {
 
           // initialize|hide Chatbot UI
-          $("#gemini_ui_container").show();
+          // $("#gemini_ui_container").show();
           $("#spinner").hide();
           $("#response").hide();
 
@@ -791,6 +791,9 @@ const httpError500      = geminiOptions.errors.http500;
       var dependencies_met_data_loaded = setInterval(function() {
         if (j1.xhrDOMState['#gemini_ui'] == 'success') {
           logger.debug('\n' + 'Loading UI: successful');
+
+          $("#gemini_ui").show();
+
           clearInterval(dependencies_met_data_loaded);
         } // END if xhrDOMState
       }, 10);

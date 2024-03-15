@@ -251,19 +251,21 @@ j1.adapter.lunr = (function (j1, window) {
     eventHandler: function () {
       const topSearchModalId = '#' + 'searchModal';
 
-      selectList  = document.getElementById('search_history');
-      $slimSelect = selectList.slim;
-
       $(topSearchModalId).on('shown.bs.modal', function () {
         logger.debug('\n' + 'search modal shown');
 
-        searchHstoryWrapper     = document.getElementById('search_history_select_wrapper');
-        $searchHstoryWrapperId  = '#' + searchHstoryWrapper.id;
+        if (searchHstoryEnabled) {
+          selectList  = document.getElementById('search_history');
+          $slimSelect = selectList.slim;
 
-        // display history container
-        if (textHistory.length > 0) {
-          logger.debug('\n' + 'show search history on id: ' + $searchHstoryWrapperId);
-          $($searchHstoryWrapperId).show();
+          searchHstoryWrapper     = document.getElementById('search_history_select_wrapper');
+          $searchHstoryWrapperId  = '#' + searchHstoryWrapper.id;
+
+          // display history container
+          if (textHistory.length > 0) {
+            logger.debug('\n' + 'show search history on id: ' + $searchHstoryWrapperId);
+            $($searchHstoryWrapperId).show();
+          }
         }
 
       });

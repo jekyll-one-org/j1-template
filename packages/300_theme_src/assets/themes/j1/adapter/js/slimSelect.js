@@ -203,9 +203,11 @@ var logText;
           {% endif %} {% endfor %}
           // ENDFOR (all) selects
 
-          _this.setState('finished');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'initializing module finished');
+          setTimeout(() => {
+            _this.setState('finished');
+            logger.debug('\n' + 'state: ' + _this.getState());
+            logger.info('\n' + 'initializing module finished');
+          }, 1000 );
 
           clearInterval(dependencies_met_page_ready);
         } // END 'pageVisible'

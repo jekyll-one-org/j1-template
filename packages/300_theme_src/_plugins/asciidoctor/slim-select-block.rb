@@ -34,7 +34,7 @@ Asciidoctor::Extensions.register do
 
     def process parent, target, attributes
       html = %(
-        <div id="#{target}" class="#{attributes['role']}"></div>
+        <div id="#{target}" class="#{attributes['role']} style="display: none"></div>
       )
 
       create_pass_block parent, html, attributes, subs: nil

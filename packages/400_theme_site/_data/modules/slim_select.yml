@@ -78,7 +78,7 @@ settings:
     # Search history (site search)
     #
     - select:                           search_history
-      enabled:                          true
+      enabled:                          false
 
       wrapper_id:                       search_history_select_wrapper
       id:                               search_history
