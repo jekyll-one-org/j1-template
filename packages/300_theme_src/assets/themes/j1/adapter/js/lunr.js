@@ -80,8 +80,8 @@ j1.adapter.lunr = (function (j1, window) {
 
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
-  var environment = '{{environment}}';
-  var state       = 'not_started';
+  var searchHistorySelectWrapper = 'search_history_select_wrapper';
+
   var searchDefaults;
   var searchSettings;
   var searchOptions;
@@ -101,16 +101,18 @@ j1.adapter.lunr = (function (j1, window) {
   var _this;
   var logger;
   var logText;
+  var state;
 
-  var maxHistory;
+
   var textHistory;
-  var history_select_wrapper;
+
   var search_prompt;
-  var searchHstoryWrapper;
-  var $searchHstoryWrapperId;
+  var $searchHstoryWrapper;
+  var searchHstoryWrapperID;
+  var searchHistoryMax;
   var searchHstoryEnabled;
-  var allowHistoryDuplicates;
-  var allowHistoryUpdatesOnMax;
+  var allowSearchHistoryDuplicates;
+  var allowSearchHistoryUpdatesOnMax;
 
   // ---------------------------------------------------------------------------
   // Helper functions
@@ -155,14 +157,16 @@ j1.adapter.lunr = (function (j1, window) {
       hostname            = url.hostname;
       auto_domain         = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
       secure              = (url.protocol.includes('https')) ? true : false;
-      searchHstoryEnabled = topSearchOptions.history_enabled;
+      searchHstoryEnabled = (topSearchOptions.search_history_enabled === true) ? true : false;
+
 
       // -----------------------------------------------------------------------
       // lunr initializer
       // -----------------------------------------------------------------------
       var dependencies_met_j1_finished = setInterval (() => {
-        var j1CoreFinished      = (j1.getState() == 'finished') ? true : false;
-        var slimSelectFinished  = (j1.adapter.slimSelect.getState() == 'finished') ? true : false;
+        var j1CoreFinished          = (j1.getState() === 'finished') ? true : false;
+        var slimSelectFinished      = (j1.adapter.slimSelect.getState() === 'finished') ? true : false;
+        var searchHstoryFromCookie  = (topSearchOptions.prompt_history_from_cookie === true) ? true : false;
 
         if (j1CoreFinished && slimSelectFinished) {
 
@@ -182,21 +186,16 @@ j1.adapter.lunr = (function (j1, window) {
           _this.eventHandler();
 
           // initialize history array from cookie
-          if (searchHstoryEnabled && topSearchOptions.read_prompt_history_from_cookie) {
-
-            // get slimSelect object for the history (placed by slimSelect adapter)
-            // const topSearchModalId  = '#' + 'searchModal';
-            // selectList                = document.getElementById('search_history');
-            // $slimSelect               = selectList.slim;
+          if (searchHstoryEnabled && searchHstoryFromCookie) {
 
             // limit the history
-            maxHistory                = topSearchOptions.max_history;
+            searchHistoryMax                = topSearchOptions.search_history_max;
 
             // allow|reject duplicates for the history
-            allowHistoryDuplicates    = topSearchOptions.allow_history_duplicates;
+            allowSearchHistoryDuplicates    = topSearchOptions.allow_history_duplicates;
 
-            // allow|reject history updates if maxHistory reached
-            allowHistoryUpdatesOnMax  = topSearchOptions.allow_history_updates_on_max;
+            // allow|reject history updates if searchHistoryMax reached
+            allowSearchHistoryUpdatesOnMax  = topSearchOptions.allow_history_updates_on_max;
 
             logger.debug('\n' + 'read prompt history from cookie');
             var data      = [];
@@ -209,7 +208,7 @@ j1.adapter.lunr = (function (j1, window) {
             textHistory = Object.values(search_prompt);
 
             // remove duplicates from history
-            if (!allowHistoryDuplicates && textHistory.length > 1) {
+            if (!allowSearchHistoryDuplicates && textHistory.length > 1) {
               var textHistoryLenght = textHistory.length;
               var uniqueArray       = [...new Set(textHistory)];                // create a 'Set' from the history array to automatically remove duplicates
 
@@ -218,20 +217,6 @@ j1.adapter.lunr = (function (j1, window) {
                 logger.debug('\n' + 'removed duplicates from history array: ' + (textHistoryLenght - textHistory.length) + ' element|s');
               }
             } // END if !allowHistoryDupicates
-
-            // update|set slimSelect data elements
-            // data   = [];
-            // option = {};
-            // textHistory.forEach(function(historyText) {
-            //   option = {
-            //     text: historyText,
-            //     display: true,
-            //     selected: false,
-            //     disabled: false
-            //   }
-            //   data.push(option);
-            // }); // END forEach
-            // $slimSelect.setData(data);
 
           } // END if searchHstoryEnabled
 
@@ -249,16 +234,16 @@ j1.adapter.lunr = (function (j1, window) {
     // eventHandler
     // -------------------------------------------------------------------------
     eventHandler: function () {
-      const topSearchModalID  = '#' + 'searchModal';
-      var data                = [];
-      var option              = {};
+      const topSearchModalID      = '#' + 'searchModal';
+      var data                    = [];
+      var option                  = {};
 
       $(topSearchModalID).on('shown.bs.modal', () => {
         logger.debug('\n' + 'search modal shown');
 
         if (searchHstoryEnabled) {
-          searchHstoryWrapper     = document.getElementById('search_history_select_wrapper');
-          $searchHstoryWrapperId  = '#' + searchHstoryWrapper.id;
+          $searchHstoryWrapper    = document.getElementById(searchHistorySelectWrapper);
+          searchHstoryWrapperID   = '#' + $searchHstoryWrapper.id;
 
           selectList              = document.getElementById('search_history');
           $slimSelect             = selectList.slim;
@@ -277,8 +262,8 @@ j1.adapter.lunr = (function (j1, window) {
 
           // display history container
           if (textHistory.length > 0) {
-            logger.debug('\n' + 'show search history on id: ' + $searchHstoryWrapperId);
-            $($searchHstoryWrapperId).show();
+            logger.debug('\n' + 'show search history on id: ' + searchHstoryWrapperID);
+            $(searchHstoryWrapperID).show();
           }
         }
 

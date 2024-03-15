@@ -234,12 +234,12 @@ defaults:
   #
   # ----------------------------------------------------------------------------
   #
-  enabled:                              false
-
   # ----------------------------------------------------------------------------
   # GENERAL options
   # ----------------------------------------------------------------------------
   #
+  enabled:                              false
+
   xhr_data_path:                        /assets/data/gemini-ui/index.html
   xhr_container_id:                     gemini_ui
   xhr_data_element:                     gemini_ui_container

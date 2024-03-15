@@ -23,8 +23,17 @@ description:
 # Default settings
 #
 defaults:
+
+  # ----------------------------------------------------------------------------
+  # GENERAL options
+  # ----------------------------------------------------------------------------
+  #
   enabled:                              false
 
+  # ----------------------------------------------------------------------------
+  # MODULE options
+  # ----------------------------------------------------------------------------
+  #
   placement:                            navbar
   target:                               _blank
   rebuild:                              false
@@ -52,13 +61,11 @@ defaults:
   emptyMsg:                                                                     # '<p style="margin-left: 3.5rem">No matches.</p>'
 
   # ----------------------------------------------------------------------------
-  # TopSearch
-  #
+  # Search options
+  # ----------------------------------------------------------------------------
   topsearch:
-    enabled:                            false
-
-    max_history:                        20
-    history_enabled:                    false
+    search_history_max:                 30
+    search_history_enabled:             false
     allow_history_duplicates:           false
     allow_history_updates_on_max:       false
     save_prompt_history_to_cookie:      false
