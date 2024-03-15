@@ -26,9 +26,8 @@ image:
   width:                                1920
   height:                               1280
 
-top_search:                             false
-regenerate:                             false
 personalization:                        true
+regenerate:                             false
 permalink:                              /pages/public/tools/previewer/google-gemini-ai/
 
 resources:                              [

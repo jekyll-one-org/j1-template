@@ -25,12 +25,14 @@ image:
   width:                                1920
   height:                               1280
 
-tts:                                    true
 comments:                               false
 regenerate:                             false
 permalink:                              /pages/public/tools/previewer/current_theme/
 
-resources:                              [ animate, bmd, rouge ]
+resources:                              [
+                                          animate, rouge,
+                                          bmd
+                                        ]
 resource_options:
   - toccer:
       collapseDepth:                    4
