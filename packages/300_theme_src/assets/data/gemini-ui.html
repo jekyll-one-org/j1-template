@@ -73,14 +73,14 @@ exclude_from_search:                    true
 <!-- START UI container -->
 <div id="gemini_ui_container" style="display: none">
 
-    <div id="list-container" style="display: none">
+    <div id="prompt_history_container" style="display: none">
       <div class="gallery-title mt-3">{{gemini_options.titles.request_history}}</div>
       <!-- create prompt history wrapper -->
       <!-- prompt history select added by module slimSelect -->
-      {% for select in slim_select_options.selects %}{% if select.id == gemini_options.prompt_history_id %}
+      {% for select in slim_select_options.selects %} {% if select.id == gemini_options.prompt_history_id %}
       {% comment %} select.wrapper_id: {{select.wrapper_id | debug}} {% endcomment %}
       <div id="{{select.wrapper_id}}"></div>
-      {% endif %}{% endfor %}
+      {% endif %} {% endfor %}
     </div>
 
     <!-- Request input -->
@@ -93,22 +93,27 @@ exclude_from_search:                    true
         rows="{{gemini_options.prompt.size}}">
       </textarea>
 
+      <!-- UI buttons -->
       <!-- Send request button -->
       <button id="{{gemini_options.buttons.generate.id}}" class="btn btn-primary" type="button">
         <span id="spinner" class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
         <span role="status">{{gemini_options.buttons.generate.name}}</span>
       </button>
-
       <!-- Reset request button -->
       <button id="{{gemini_options.buttons.reset.id}}" type="button" class="btn btn-warning mt-1">{{gemini_options.buttons.reset.name}}</button>
       <!-- Clear history button -->
       <button id="{{gemini_options.buttons.clear.id}}" type="button" class="btn btn-danger mt-1">{{gemini_options.buttons.clear.name}}</button>
-    </div>
+      <!-- END UI buttons -->
 
+    </div>
+    <!-- END Request input -->
+
+    <!-- Response container -->
     <div id="response" class="mt-4 mb-7">
       <h3 id="result" class="mb-3 notoc speak2me-ignore">{{gemini_options.titles.result}}</h3>
       <div id="md_result"></div>
     </div>
+    <!-- END Response container -->
 
     <!-- Modal error (top|right) -->
     <div id="confirmError"
@@ -119,8 +124,10 @@ exclude_from_search:                    true
       data-bs-keyboard="false"
       data-bs-backdrop="static">
       <div class="modal-dialog modal-side modal-top-right modal-notify modal-danger" role="document">
+
         <!-- Content -->
         <div class="modal-content">
+
           <!-- Header -->
           <div class="modal-header">
             <p class="lead">{{gemini_options.titles.errorInfo}}</p>
@@ -128,6 +135,8 @@ exclude_from_search:                    true
               <i class="mdi mdi-close mdi-dark mdi-48px"></i>
             </button -->
           </div>
+          <!-- END Header -->
+
           <!-- Body -->
           <div class="modal-body">
             <div class="text-center">
@@ -135,10 +144,14 @@ exclude_from_search:                    true
               <p id="modal_error">Error text placeholder</p>
             </div>
           </div>
+          <!-- END Body -->
+
           <!-- Footer -->
           <div class="modal-footer justify-content-center">
             <a type="button" class="btn btn-primary mr-2" data-bs-dismiss="modal">Close</a>
           </div>
+          <!-- END Footer -->
+
         </div>
         <!-- END Content -->
       </div>
@@ -174,7 +187,6 @@ exclude_from_search:                    true
 
 {% comment %} END Gemini UI
 -------------------------------------------------------------------------------- {% endcomment %}
-
 {% endcapture %}
 
 {% if production %}

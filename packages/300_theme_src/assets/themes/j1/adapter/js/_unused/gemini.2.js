@@ -509,7 +509,7 @@ const httpError500      = geminiOptions.errors.http500;
 
             // fisplay history container
             if (textHistory.length > 0) {
-              $("#list-container").show();
+              $("#prompt_history_container").show();
             }
           } // if read_prompt_history_from_cookie
 
@@ -594,7 +594,7 @@ const httpError500      = geminiOptions.errors.http500;
 
             // display history container
             if (textHistory.length > 0) {
-              $("#list-container").show();
+              $("#prompt_history_container").show();
             }
 
             // write current history to cookie
@@ -667,7 +667,7 @@ const httpError500      = geminiOptions.errors.http500;
                 });
               }
 
-              $("#list-container").hide();
+              $("#prompt_history_container").hide();
             }); // END accecptClearHistory(click)
 
             dismissClearHistory.addEventListener('click', (event) => {

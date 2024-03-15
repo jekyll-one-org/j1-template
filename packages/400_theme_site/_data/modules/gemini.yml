@@ -9,7 +9,7 @@
 #
 # J1 Template is licensed under the MIT License.
 # See: https://github.com/jekyll-one/J1 Theme/blob/master/LICENSE
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------
 # Description
@@ -23,28 +23,54 @@ description:
 # User configuration settings
 #
 settings:
+
+  # ----------------------------------------------------------------------------
+  # Settings|Descriptions (find more descriptions in module defaults)
+  #
+  #   enabled (required)
+  #   --------------------------------------------------------------------------
+  #   Enables or disables the module. If disabled, the Gemini module is NOT
+  #   loaded and no SERVICES are available on ANY PAGE.
+  #
+  #   values:                           [true|false]
+  #   default:                          false
+  #
+  #   api_options
+  #   --------------------------------------------------------------------------
+  #   Configures avaialve options to control the Gemini API-
+  #
+  #   apiKey (required)
+  #   --------------------------------------------------------------------------
+  #   API key for the Google Gemini API.
+  #
+  #   value:                            string
+  #   default:                          <your-api-key>
+  #
+  # ----------------------------------------------------------------------------
+  #
   enabled:                              true
+
+  # ----------------------------------------------------------------------------
+  # GENERAL options
+  # ----------------------------------------------------------------------------
+  #
+  detect_geo_location:                  true
 
   # ----------------------------------------------------------------------------
   # MODULE options
   # ----------------------------------------------------------------------------
   #
-  max_history:                          3
-  history_enabled:                      true
-  allow_history_updates_on_max:         true
-  save_prompt_history_to_cookie:        true
-  read_prompt_history_from_cookie:      true
-
-  detect_geo_location:                  true
-  prompt_history_id:                    prompt_history
-  prompt_id:                            prompt
+  prompt_history_max:                   3
+  prompt_history_enabled:               true
+  prompt_history_from_cookie:           true
+  allow_prompt_history_updates_on_max:  true
 
   # ----------------------------------------------------------------------------
   # API options
   # ----------------------------------------------------------------------------
   #
   api_options:
-    apiKey:                             AIzaSyAtiLEW4oQiOJtGiPsdsGwMHi8O__7cqjU   # <your-api-key>
+    apiKey:                             AIzaSyAtiLEW4oQiOJtGiPsdsGwMHi8O__7cqjU # <your-api-key>
 
 # ------------------------------------------------------------------------------
 # END config

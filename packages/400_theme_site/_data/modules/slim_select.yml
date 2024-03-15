@@ -44,7 +44,14 @@ settings:
     - select:                           icon_library
       enabled:                          true
 
+      # CONTAINER settings
+      # ------------------------------------------------------------------------
+      #
       wrapper_id:                       icon_library_select_wrapper
+
+      # SELECT settings
+      # ------------------------------------------------------------------------
+      #
       id:                               icon_library
       name:                             icon-library
       items: >
@@ -64,12 +71,19 @@ settings:
                                         </select>
 
     # --------------------------------------------------------------------------
-    # Prompt history (gemini previewer)
+    # Prompt history (gemini ai previewer)
     #
     - select:                           prompt_history
       enabled:                          true
 
+      # CONTAINER settings
+      # ------------------------------------------------------------------------
+      #
       wrapper_id:                       prompt_history_select_wrapper
+
+      # SELECT settings
+      # ------------------------------------------------------------------------
+      #
       id:                               prompt_history
       name:                             prompt-history
       items:                            <select multiple id="prompt_history" name="prompt-history"></select>
@@ -80,7 +94,14 @@ settings:
     - select:                           search_history
       enabled:                          false
 
+      # CONTAINER settings
+      # ------------------------------------------------------------------------
+      #
       wrapper_id:                       search_history_select_wrapper
+
+      # SELECT settings
+      # ------------------------------------------------------------------------
+      #
       id:                               search_history
       name:                             search-history
       items:                            <select multiple id="search_history" name="search-history"></select>

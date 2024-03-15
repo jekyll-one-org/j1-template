@@ -484,7 +484,7 @@ const httpError500      = geminiOptions.errors.http500;
 
             // Display history select container
             if (textHistory.length > 0) {
-              $("#list-container").show();
+              $("#prompt_history_container").show();
             }
           } // if read_prompt_history_from_cookie
 
@@ -548,7 +548,7 @@ const httpError500      = geminiOptions.errors.http500;
 
             // Display history select container
             if (textHistory.length > 0) {
-              $("#list-container").show();
+              $("#prompt_history_container").show();
             }
 
             if (geminiOptions.save_prompt_history_to_cookie) {
@@ -561,7 +561,7 @@ const httpError500      = geminiOptions.errors.http500;
 
             // Display history select container
             if (textHistory.length > 0) {
-              $("#list-container").show();
+              $("#prompt_history_container").show();
             }
 
             // Clear UI elements
@@ -622,7 +622,7 @@ const httpError500      = geminiOptions.errors.http500;
                 });
               }
 
-              $("#list-container").hide();
+              $("#prompt_history_container").hide();
             }); // END accecptClearHistory(click)
 
             dismissClearHistory.addEventListener('click', (event) => {

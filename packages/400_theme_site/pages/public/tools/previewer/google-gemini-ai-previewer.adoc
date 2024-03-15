@@ -424,8 +424,8 @@ Write a generic text that contains misleading information on a male person.
 [role="mt-4"]
 === Generate
 
-You can enter your requests in the input field. If you need help on
-formulating such requests, leave the input field *empty* and start a
-generation.
+You can enter your requests in the input field *Your request*. If you need
+help on formulating such requests, leave the input field *empty* and start
+to *process* a request.
 
 gemini::gemini_ui[]
