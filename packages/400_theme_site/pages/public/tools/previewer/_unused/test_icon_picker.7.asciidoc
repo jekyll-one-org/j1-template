@@ -18,7 +18,7 @@ keywords: >
                                         select, dropdown, SlimSelect
 
 categories:                             [ Tester ]
-tags:                                   [ Module, slimSelect, IconPicker ]
+tags:                                   [ Module, SlimSelect, IconPicker ]
 
 image:
   path:                                 /assets/images/pages/roundtrip/icon-fonts-1920x1280-bw.jpg
@@ -32,7 +32,7 @@ regenerate:                             false
 
 resources:                              [
                                           animate, clipboard,
-                                          iconpicker, slim_select
+                                          iconpicker
                                         ]
 resource_options:
   - attic:
@@ -130,11 +130,13 @@ recommended to load all icons while a page is being initialized.
 Select the icon set to be shown from the *dropdown* below. To open a picker UI
 for the icon set selected, click on the button *SHOW ICON SET SELECTED*.
 
-// {% for select in slim_select_options.selects %}{% if select.id == page.select_id %}
-// wrapper_id: {{select.wrapper_id}}
-// {% endif %}{% endfor %}
+[TIP]
+====
+*Double-click* an icon in the Picker UI to copy the selected icon data to the
+*clipboard*.
+====
 
-// Wrapper (div) placed for the <select> loaded by module slimSelect
+// wrapper (div) placed for the <select> loaded by module slimSelect
 slimSelect::icon_library_select_wrapper[role="mt-4 mb-3"]
 
 // Button to open the picker UI for the selected icon set
@@ -147,39 +149,46 @@ slimSelect::icon_library_select_wrapper[role="mt-4 mb-3"]
      {{icon_picker_options.picker_button_label}}
   </a>
 </div>
+++++
 
+++++
 <script>
-  function init_select() {
-    var select = 'icon-library';
+  const logger    = log4javascript.getLogger('page.iconPicker');
+  const selectID  = 'icon_library';
 
+  function init_select() {
     // set initial select values
-    var $selectElement        = document.querySelector('select[name=' + select + ']');
-    var icon_picker           = j1.adapter.iconPicker.icon_picker;
-    var currentIconLibrary    = $selectElement.value;
-    var currentIconLibraryCss = $selectElement.options[$selectElement.selectedIndex].dataset.css;
+    const select              = document.getElementById(selectID);
+    const icon_picker         = j1.adapter.iconPicker.icon_picker;
+
+    var currentIconLibrary    = select.value;
+    var currentIconLibraryCss = select.options[select.selectedIndex].dataset.css;
 
     icon_picker.setOptions({
       iconLibraries:          [currentIconLibrary + '.min.json'],
       iconLibrariesCss:       [currentIconLibraryCss]
     });
+
+    // setup slimSelect events|iconPicker options
+    logger.info('\n' + 'slimSelect: setup events');
+    init_select_events();
   } //END init_select()
 
   function init_select_events() {
-    var select  = 'icon-library';
-    var $select = j1.adapter.slimSelect.select.icon_library;
-    var logger  = log4javascript.getLogger('page.iconPicker');
+    const $slimSelect = j1.adapter.slimSelect.select.icon_library;
 
-    $select.events.afterClose = () => {
-      var $selectElement        = document.querySelector('select[name=' + select + ']');
-      var icon_picker           = j1.adapter.iconPicker.icon_picker;
-      var currentIconLibrary    = $selectElement.value;
-      var currentIconLibraryCss = $selectElement.options[$selectElement.selectedIndex].dataset.css;
+    $slimSelect.events.afterClose = () => {
+      const icon_picker         = j1.adapter.iconPicker.icon_picker;
+      const select              = document.getElementById(selectID);
 
-      logger.debug('\n' + 'slimSelect: use current IconLibrary: ' + currentIconLibrary);
+      var currentIconLibrary    = select.value;
+      var currentIconLibraryCss = select.options[select.selectedIndex].dataset.css;
+
+      logger.debug('\n' + 'select: use current IconLibrary: ' + currentIconLibrary);
 
       // apply selection
-      currentIconLibrary        = $selectElement.value;
-      currentIconLibraryCss     = $selectElement.options[$selectElement.selectedIndex].dataset.css;
+      currentIconLibrary        = select.value;
+      currentIconLibraryCss     = select.options[select.selectedIndex].dataset.css;
 
       icon_picker.setOptions({
         iconLibraries:          [currentIconLibrary + '.min.json'],
@@ -199,15 +208,11 @@ slimSelect::icon_library_select_wrapper[role="mt-4 mb-3"]
         var slimSelectFinished = (j1.adapter.slimSelect.getState() === 'finished') ? true: false;
 
         if (iconPickerFinished && slimSelectFinished) {
-          var logger = log4javascript.getLogger('page.iconPicker');
+
+          logger.info('\n' + 'slimSelect: setup initial values');
 
           // setup initial slimSelect values|iconPicker options
-          logger.info('\n' + 'slimSelect: setup initial values');
           init_select();
-
-          // setup slimSelect events|iconPicker options
-          logger.info('\n' + 'slimSelect: setup events');
-          init_select_events()
 
           logger.info('\n' + 'slimSelect: initializing finished');
 
@@ -220,10 +225,3 @@ slimSelect::icon_library_select_wrapper[role="mt-4 mb-3"]
   }, 10);
 </script>
 ++++
-
-[role="mb-10"]
-[TIP]
-====
-*Double-click* an icon in the Picker UI to copy the selected icon data to the
-*clipboard*.
-====

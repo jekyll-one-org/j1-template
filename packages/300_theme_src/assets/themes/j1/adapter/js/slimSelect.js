@@ -86,18 +86,19 @@ regenerate:                             true
 'use strict';
 j1.adapter.slimSelect = (function (j1, window) {
 
-{% comment %} Set global variables
--------------------------------------------------------------------------------- {% endcomment %}
-var environment           = '{{environment}}';
-var selectDIV             = document.createElement('div');
-var selectHTML;
+// -----------------------------------------------------------------------------
+// Set global variables
+// -----------------------------------------------------------------------------
 var slimSelectDefaults;
 var slimSelectSettings;
 var slimSelectOptions;
-var frontmatterOptions;
+
 var _this;
 var logger;
 var logText;
+
+var selectDIV;
+var selectHTML;
 
   // ---------------------------------------------------------------------------
   // Main object
@@ -122,17 +123,17 @@ var logText;
       // Global variable settings
       // -----------------------------------------------------------------------
 
-      // create settings object from frontmatter
-      frontmatterOptions  = options != null ? $.extend({}, options) : {};
-
       // create settings object from module options
-      slimSelectDefaults = $.extend({}, {{slim_select_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      slimSelectSettings = $.extend({}, {{slim_select_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      slimSelectOptions  = $.extend(true, {}, slimSelectDefaults, slimSelectSettings, frontmatterOptions);
+      slimSelectDefaults  = $.extend({}, {{slim_select_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      slimSelectSettings  = $.extend({}, {{slim_select_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      slimSelectOptions   = $.extend(true, {}, slimSelectDefaults, slimSelectSettings);
 
-      _this        = j1.adapter.slimSelect;
-      _this.select = {};
-      logger       = log4javascript.getLogger('j1.adapter.slimSelect');
+      _this               = j1.adapter.slimSelect;
+      logger              = log4javascript.getLogger('j1.adapter.slimSelect');
+
+      // intialize select data (for later access)
+      _this.select        = {};
+      _this.selectHTML    = {};
 
       // -----------------------------------------------------------------------
       // initializer
@@ -154,10 +155,18 @@ var logText;
           // process the wrapper if extsts
           if ($('#{{select.wrapper_id}}').length) {
             logger.debug('\n' + 'select is being placed in wrapper on id: {{select.wrapper_id}}');
-            // create|place select HTML
+
+            // create|place select <div> element
+            selectDIV           = document.createElement('div');
             selectHTML          = `{{select.items}}`;
             selectDIV.innerHTML = selectHTML;
+
+            // to be removed
             document.getElementById('{{select.wrapper_id}}').appendChild(selectDIV);
+
+            // Store the select HTML code into the adapter for later access
+            //
+            _this.selectHTML.{{select.id}} = selectDIV;
 
             // set initial select values
             // jadams, 2024-03-06: moved to page (test_icon_picker.adoc)

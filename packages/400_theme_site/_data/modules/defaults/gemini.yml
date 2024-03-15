@@ -72,10 +72,19 @@ defaults:
   #
   #   prompt_history_id
   #   --------------------------------------------------------------------------
-  #   ID of the history element (textarea).
+  #   ID of the prompt history SELECT element. The ID equals 'id' in
+  #   slim_select USER config (slim_select.yml) for the select requested.
   #
   #   values:                           string
   #   default:                          prompt_history
+  #
+  #   prompt_history_wrapper_id
+  #   --------------------------------------------------------------------------
+  #   ID of the promot history CONTAINER element. The ID equals 'wrapper_id'
+  #   in slim_select USER config (slim_select.yml) for the select requested.
+  #
+  #   values:                           string
+  #   default:                          prompt_history_select_wrapper
   #
   #   prompt_history_max
   #   --------------------------------------------------------------------------
@@ -237,12 +246,14 @@ defaults:
 
   detect_geo_location:                  false
 
+  prompt_id:                            prompt
+  prompt_history_id:                    prompt_history
+  prompt_history_wrapper_id:            prompt_history_select_wrapper
+
   # ----------------------------------------------------------------------------
   # MODULE options
   # ----------------------------------------------------------------------------
   #
-  prompt_id:                            prompt
-  prompt_history_id:                    prompt_history
   prompt_history_max:                   30
   prompt_history_enabled:               false
   prompt_history_from_cookie:           false

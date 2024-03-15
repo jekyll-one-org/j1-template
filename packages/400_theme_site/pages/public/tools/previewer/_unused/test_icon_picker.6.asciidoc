@@ -60,13 +60,10 @@ resource_options:
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign icon_picker_defaults = modules.defaults.icon_picker.defaults %}
 {% assign icon_picker_settings = modules.icon_picker.settings %}
-{% assign slim_select_defaults = modules.defaults.slim_select.defaults %}
-{% assign slim_select_settings = modules.slim_select.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign icon_picker_options  = icon_picker_defaults | merge: icon_picker_settings %}
-{% assign slim_select_options  = slim_select_defaults | merge: slim_select_settings %}
 
 
 // Set (local) page attributes here
@@ -141,28 +138,33 @@ slimSelect::icon_library_select_wrapper[role="mt-4 mb-3"]
 
 // Button to open the picker UI for the selected icon set
 ++++
-<div id="picker_button_wrapper" class="{{icon_picker_options.picker_button_wrapper_classes}}">
+<!-- div id="picker_button_wrapper" class="{{icon_picker_options.picker_button_wrapper_classes}}">
   <a id="{{icon_picker_options.picker_button_id}}" href="#"
      class="{{icon_picker_options.picker_button_classes}}"
      aria-label="{{icon_picker_options.picker_button_label}}">
      <i class="mdi mdi-{{icon_picker_options.picker_button_icon}} mdi-2x mr-2"></i>
      {{icon_picker_options.picker_button_label}}
   </a>
-</div>
-++++
+</div -->
 
-++++
 <script>
-  const logger    = log4javascript.getLogger('page.iconPicker');
-  const selectID  = 'icon_library';
+  const historyWrapperID  = 'icon_library_select_wrapper'
+  const logger            = log4javascript.getLogger('page.iconPicker');
+  const selectName        = 'icon-library';
+  const selectID          = 'icon_library';
 
   function init_select() {
-    // set initial select values
-    const select              = document.getElementById(selectID);
-    const icon_picker         = j1.adapter.iconPicker.icon_picker;
 
-    var currentIconLibrary    = select.value;
-    var currentIconLibraryCss = select.options[select.selectedIndex].dataset.css;
+    const selectHTMLSettings      = j1.adapter.slimSelect.selectHTML;
+    const propertyName            = selectID;
+    const selectHTML              = selectHTMLSettings[propertyName];
+    // document.getElementById(historyWrapperID).appendChild(selectHTML);
+
+    // set initial select values
+    var $selectElement        = document.querySelector('select[name=' + selectName + ']');
+    var icon_picker           = j1.adapter.iconPicker.icon_picker;
+    var currentIconLibrary    = $selectElement.value;
+    var currentIconLibraryCss = $selectElement.options[$selectElement.selectedIndex].dataset.css;
 
     icon_picker.setOptions({
       iconLibraries:          [currentIconLibrary + '.min.json'],
@@ -175,20 +177,20 @@ slimSelect::icon_library_select_wrapper[role="mt-4 mb-3"]
   } //END init_select()
 
   function init_select_events() {
-    const $slimSelect = j1.adapter.slimSelect.select.icon_library;
+    var select  = 'icon-library';
+    var $select = j1.adapter.slimSelect.select.icon_library;
 
-    $slimSelect.events.afterClose = () => {
-      const icon_picker         = j1.adapter.iconPicker.icon_picker;
-      const select              = document.getElementById(selectID);
+    $select.events.afterClose = () => {
+      var $selectElement        = document.querySelector('select[name=' + select + ']');
+      var icon_picker           = j1.adapter.iconPicker.icon_picker;
+      var currentIconLibrary    = $selectElement.value;
+      var currentIconLibraryCss = $selectElement.options[$selectElement.selectedIndex].dataset.css;
 
-      var currentIconLibrary    = select.value;
-      var currentIconLibraryCss = select.options[select.selectedIndex].dataset.css;
-
-      logger.debug('\n' + 'select: use current IconLibrary: ' + currentIconLibrary);
+      logger.debug('\n' + 'slimSelect: use current IconLibrary: ' + currentIconLibrary);
 
       // apply selection
-      currentIconLibrary        = select.value;
-      currentIconLibraryCss     = select.options[select.selectedIndex].dataset.css;
+      currentIconLibrary        = $selectElement.value;
+      currentIconLibraryCss     = $selectElement.options[$selectElement.selectedIndex].dataset.css;
 
       icon_picker.setOptions({
         iconLibraries:          [currentIconLibrary + '.min.json'],
@@ -208,10 +210,9 @@ slimSelect::icon_library_select_wrapper[role="mt-4 mb-3"]
         var slimSelectFinished = (j1.adapter.slimSelect.getState() === 'finished') ? true: false;
 
         if (iconPickerFinished && slimSelectFinished) {
-
+          // setup initial slimSelect values|iconPicker options
           logger.info('\n' + 'slimSelect: setup initial values');
 
-          // setup initial slimSelect values|iconPicker options
           init_select();
 
           logger.info('\n' + 'slimSelect: initializing finished');

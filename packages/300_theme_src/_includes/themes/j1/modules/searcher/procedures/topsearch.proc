@@ -95,9 +95,7 @@
             {% comment %} topsearch_options.history_enabled: {{ topsearch_options.history_enabled | debug }} {% endcomment %}
 
             <!-- SEARCH History -->
-            {% if topsearch_options.history_enabled %}
-            <div id="search_history_select_wrapper" style="display: none;"></div>
-            {% endif %}
+            <div id="search_history_select_wrapper" style="display: block;"></div>
             <!-- END SEARCH History -->
 
             <!-- SEARCH Container -->

@@ -186,8 +186,8 @@ j1.adapter.lunr = (function (j1, window) {
 
             // get slimSelect object for the history (placed by slimSelect adapter)
             // const topSearchModalId  = '#' + 'searchModal';
-            selectList                = document.getElementById('search_history');
-            $slimSelect               = selectList.slim;
+            // selectList                = document.getElementById('search_history');
+            // $slimSelect               = selectList.slim;
 
             // limit the history
             maxHistory                = topSearchOptions.max_history;
@@ -220,18 +220,18 @@ j1.adapter.lunr = (function (j1, window) {
             } // END if !allowHistoryDupicates
 
             // update|set slimSelect data elements
-            data   = [];
-            option = {};
-            textHistory.forEach(function(historyText) {
-              option = {
-                text: historyText,
-                display: true,
-                selected: false,
-                disabled: false
-              }
-              data.push(option);
-            }); // END forEach
-            $slimSelect.setData(data);
+            // data   = [];
+            // option = {};
+            // textHistory.forEach(function(historyText) {
+            //   option = {
+            //     text: historyText,
+            //     display: true,
+            //     selected: false,
+            //     disabled: false
+            //   }
+            //   data.push(option);
+            // }); // END forEach
+            // $slimSelect.setData(data);
 
           } // END if searchHstoryEnabled
 
@@ -249,17 +249,31 @@ j1.adapter.lunr = (function (j1, window) {
     // eventHandler
     // -------------------------------------------------------------------------
     eventHandler: function () {
-      const topSearchModalId = '#' + 'searchModal';
+      const topSearchModalID  = '#' + 'searchModal';
+      var data                = [];
+      var option              = {};
 
-      $(topSearchModalId).on('shown.bs.modal', function () {
+      $(topSearchModalID).on('shown.bs.modal', () => {
         logger.debug('\n' + 'search modal shown');
 
         if (searchHstoryEnabled) {
-          selectList  = document.getElementById('search_history');
-          $slimSelect = selectList.slim;
-
           searchHstoryWrapper     = document.getElementById('search_history_select_wrapper');
           $searchHstoryWrapperId  = '#' + searchHstoryWrapper.id;
+
+          selectList              = document.getElementById('search_history');
+          $slimSelect             = selectList.slim;
+
+          // update|set slimSelect data elements
+          textHistory.forEach(function(historyText) {
+            option = {
+              text: historyText,
+              display: true,
+              selected: false,
+              disabled: false
+            }
+            data.push(option);
+          }); // END forEach
+          $slimSelect.setData(data);
 
           // display history container
           if (textHistory.length > 0) {

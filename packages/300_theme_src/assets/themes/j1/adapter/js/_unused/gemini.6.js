@@ -130,11 +130,11 @@ var city;
 var selectList;
 var $slimSelect;
 var textarea;
-var promptHistoryMax;
+var maxHistory;
 var promptHstoryEnabled;
 var promptHistoryFromCookie;
-var allowPromptHistoryDuplicates;
-var allowPromptHistoryUpdatesOnMax;
+var allowHistoryDuplicates;
+var allowHistoryUpdatesOnMax;
 
 var _this;
 var logger;
@@ -219,23 +219,15 @@ const httpError500      = geminiOptions.errors.http500;
     });
 
     var prompt = $('textarea#prompt').val();
-    if (prompt.length === 0) {
-      // use default prompt
-      prompt = defaultPrompt.replace(/\s+$/g, '');
-      logger.debug('\n' + 'use default prompt: ' + prompt);
+    if (prompt.length == 0) {
+      prompt = defaultPrompt;
       document.getElementById('prompt').value = prompt;
     }
 
-    let retryCount    = 0;
-    const maxRetries  = 3;  // Set the maximum number of retries
-    while (retryCount < maxRetries) {
-      try {
-        logger.debug('\n' + 'Gemini API: process request: started');
-        result = await model.generateContent(prompt);
-        break;  // Exit the loop on success
-      } catch (e) {
-        var error = e.toString();
-
+    try {
+      result = await model.generateContent(prompt);
+    } catch (e) {
+      var error = e.toString();
         if (error.includes("400")) {
           genAIErrorType   = 400;
           // modal_error_text = '<br>' + httpError400;
@@ -255,148 +247,133 @@ const httpError500      = geminiOptions.errors.http500;
           logger.warn('\n' + 'Gemini API: service currently not available');
         }
         genAIError = true;
-        // Increment retry counter
-        // retryCount++;
-      } finally {
-          if (!genAIError) {
-            try {
-              response  = await result.response;
-            } catch (e) {
-              logger.warn('\n' + e);
-            } finally {
-              $("#spinner").hide();
+    } finally {
+        if (!genAIError) {
+          try {
+            response  = await result.response;
+          } catch (e) {
+            logger.warn('\n' + e);
+          } finally {
+            $("#spinner").hide();
 
-              // Evaluate|Process feedback returned from API
-              var candidateRatings = geminiOptions.api_options.candidateRatings;
-              var responseText     = '';
-              var safetyRatings;
-              var safetyRating;
-              var safetyCategory;
-              var ratingCategory;
-              var ratingProbability;
-              var responseFinishReason;
+            // Evaluate|Process feedback returned from API
+            var candidateRatings = geminiOptions.api_options.candidateRatings;
+            var responseText     = '';
+            var safetyRatings;
+            var safetyRating;
+            var safetyCategory;
+            var ratingCategory;
+            var ratingProbability;
+            var responseFinishReason;
 
-              if (response.promptFeedback !== undefined) {
-                safetyRatings         = response.promptFeedback.safetyRatings;
-                responseFinishReason  = response.promptFeedback.blockReason;
-                if (responseFinishReason === 'SAFETY') {
-                  safetyRatings.forEach(rating => {
-                    if (rating.probability !== undefined && rating.probability !== 'NEGLIGIBLE' && rating.probability !== 'LOW') {
-                      if (rating.category !== undefined) {
-                        ratingCategory    = rating.category;
-                        ratingProbability = rating.probability;
-                      }
+            if (response.promptFeedback !== undefined) {
+              safetyRatings         = response.promptFeedback.safetyRatings;
+              responseFinishReason  = response.promptFeedback.blockReason;
+              if (responseFinishReason == 'SAFETY') {
+                safetyRatings.forEach(rating => {
+                  if (rating.probability !== undefined && rating.probability !== 'NEGLIGIBLE' && rating.probability !== 'LOW') {
+                    if (rating.category !== undefined) {
+                      ratingCategory    = rating.category;
+                      ratingProbability = rating.probability;
                     }
-                  });
-                  if (ratingCategory !== undefined && ratingCategory !== '' && ratingProbability !== undefined && ratingProbability !== '') {
-                    logger.warn('\n' + 'Security issue detected, reason: ' + ratingCategory + ' = ' + ratingProbability);
                   }
-                  var ratingCategoryText    = ratingCategory.replace("HARM_CATEGORY_", '').toLowerCase();
-                  var ratingProbabilityText = ratingProbability.toLowerCase();
-                  responseText = 'Response disabled due to security reasons (<b>' + ratingCategoryText + ': ' + ratingProbabilityText + '</b>). Please modify your prompt.';
+                });
+                if (ratingCategory !== undefined && ratingCategory !== '' && ratingProbability !== undefined && ratingProbability !== '') {
+                  logger.warn('\n' + 'Security issue detected, reason: ' + ratingCategory + ' = ' + ratingProbability);
                 }
-                if (response.text !== undefined && response.text.length > 0) {
-                  responseText = response.text;
-                }
+                var ratingCategoryText    = ratingCategory.replace("HARM_CATEGORY_", '').toLowerCase();
+                var ratingProbabilityText = ratingProbability.toLowerCase();
+                responseText = 'Response disabled due to security reasons (<b>' + ratingCategoryText + ': ' + ratingProbabilityText + '</b>). Please modify your prompt.';
               }
-
-              if (response.candidates !== undefined) {
-                safetyRatings         = response.candidates[0].safetyRatings;
-                responseFinishReason  = response.candidates[0].finishReason;
-
-                if (responseFinishReason === 'STOP') {
-                  for (const [key, value] of Object.entries(candidateRatings)) {
-                    safetyRatings.forEach(rating => {
-                      if (rating === 'HARM_CATEGORY_DANGEROUS_CONTENT' || rating.category === 'HARM_CATEGORY_HARASSMENT' || rating.category === 'HARM_CATEGORY_HATE_SPEECH' || rating.category === 'HARM_CATEGORY_SEXUALLY_EXPLICIT') {
-                        if (rating.probability !== "NEGLIGIBLE") {
-                          if (candidateRatings.HARM_CATEGORY_DANGEROUS_CONTENT === "BLOCK_NONE") {
-                            safetyCategory  = rating.category;
-                            safetyRating    = candidateRatings.HARM_CATEGORY_DANGEROUS_CONTENT;
-                            responseText    = response.candidates[0].content.parts[0].text;
-                          }
-                          if (candidateRatings.HARM_CATEGORY_HARASSMENT === "BLOCK_NONE") {
-                            safetyCategory  = rating.category;
-                            safetyRating    = candidateRatings.HARM_CATEGORY_HARASSMENT;
-                            responseText    = response.candidates[0].content.parts[0].text;
-                          }
-                          if (candidateRatings.HARM_CATEGORY_HATE_SPEECH === "BLOCK_NONE") {
-                            safetyCategory  = rating.category;
-                            safetyRating    = candidateRatings.HARM_CATEGORY_HATE_SPEECH;
-                            responseText    = response.candidates[0].content.parts[0].text;
-                          }
-                          if (candidateRatings.HARM_CATEGORY_SEXUALLY_EXPLICIT === "BLOCK_NONE") {
-                            safetyCategory  = rating.category;
-                            safetyRating    = candidateRatings.HARM_CATEGORY_SEXUALLY_EXPLICIT;
-                            responseText = response.candidates[0].content.parts[0].text;
-                          }
-                        } else {
-                          responseText = response.candidates[0].content.parts[0].text;
-                        } //END if rating.probability
-                      } //END if rating.category
-                    }); //END forEach
-                  } //END for
-
-                  if (safetyCategory !== undefined) {
-                    logger.debug('\n' + safetyCategory + ': ' + safetyRating);
-                  }
-                } //END responseFinishReason STOP
-
-                if (response.candidates[0].finishReason === 'MAX_TOKENS') {
-                  responseText = 'Response disabled due to model settings (<b>maxOutputTokens: ' + geminiOptions.api_options.generationConfig.maxOutputTokens + '</b>). You need to increase your settings to get full response.';
-                } //END responseFinishReason MAX_TOKENS
-
-                if (response.candidates[0].finishReason === 'SAFETY') {
-                  responseText = 'Response disabled due to security reasons. You need to <b>change your prompt</b> to get proper results.';
-                    console.warn('Response disabled due to security reasons');
-                } //END responseFinishReason SAFETY
-
-                if (response.candidates[0].finishReason === 'RECITATION') {
-                  responseText = 'Response flagged "RECITATION". Resposne currently not supported';
-                  console.warn('finishReason "RECITATION" currently not supported');
-                } //END responseFinishReason RECITATION
-
-                if (response.candidates[0].finishReason === 'OTHER') {
-                  responseText = 'Response disabled due to unknown reasons.';
-                  console.warn('Response disabled due to unknown reasons');
-                } //END responseFinishReason OTHER
-
-              } //END if response.candidates
-
-              if (responseText.length > 0) {
-                // Set|Show UI elements
-                if (responseText.length < geminiOptions.api_options.responseLengthMin) {
-                  logger.warn('\n' + 'Response generated too short: <' + geminiOptions.api_options.responseLengthMin + ' characters');
-                  document.getElementById('md_result').innerHTML = 'Response generated too short (less than ' + geminiOptions.api_options.responseLengthMin + ' characters). Please re-run the generation for better results';
-                } else {
-                  document.getElementById('md_result').innerHTML = marked.parse(responseText);
-                }
-                $("#result").show();
-                $("#response").show();
-              } //END responseText length
-            } //END finally
-          } else {
-            if (retryCount > 3) {
-              $("#spinner").hide();
-
-              if (geminiOptions.detectGeoLocation) {
-                geoFindMe();
+              if (response.text !== undefined && response.text.length > 0) {
+                responseText = response.text;
               }
-              setTimeout(() => {
-                $('#confirmError').modal('show');
-              }, 1000);
             }
-            // Increment retry counter
-            retryCount++;
-         } // END else
-      } // END finally
-    } // END while (retry)
 
-    if (retryCount === 0) {
-      logger.debug('\n' + 'Gemini API: process request: finished');
-    } else if (retryCount === maxRetries) {
-      logger.warn('\n' + 'Gemini API: request failed after max retries: ' + maxRetries);
-    }
+            if (response.candidates !== undefined) {
+              safetyRatings         = response.candidates[0].safetyRatings;
+              responseFinishReason  = response.candidates[0].finishReason;
 
+              if (responseFinishReason == 'STOP') {
+                for (const [key, value] of Object.entries(candidateRatings)) {
+                  safetyRatings.forEach(rating => {
+                    if (rating == 'HARM_CATEGORY_DANGEROUS_CONTENT' || rating.category == 'HARM_CATEGORY_HARASSMENT' || rating.category == 'HARM_CATEGORY_HATE_SPEECH' || rating.category == 'HARM_CATEGORY_SEXUALLY_EXPLICIT') {
+                      if (rating.probability !== "NEGLIGIBLE") {
+                        if (candidateRatings.HARM_CATEGORY_DANGEROUS_CONTENT == "BLOCK_NONE") {
+                          safetyCategory  = rating.category;
+                          safetyRating    = candidateRatings.HARM_CATEGORY_DANGEROUS_CONTENT;
+                          responseText    = response.candidates[0].content.parts[0].text;
+                        }
+                        if (candidateRatings.HARM_CATEGORY_HARASSMENT == "BLOCK_NONE") {
+                          safetyCategory  = rating.category;
+                          safetyRating    = candidateRatings.HARM_CATEGORY_HARASSMENT;
+                          responseText    = response.candidates[0].content.parts[0].text;
+                        }
+                        if (candidateRatings.HARM_CATEGORY_HATE_SPEECH == "BLOCK_NONE") {
+                          safetyCategory  = rating.category;
+                          safetyRating    = candidateRatings.HARM_CATEGORY_HATE_SPEECH;
+                          responseText    = response.candidates[0].content.parts[0].text;
+                        }
+                        if (candidateRatings.HARM_CATEGORY_SEXUALLY_EXPLICIT == "BLOCK_NONE") {
+                          safetyCategory  = rating.category;
+                          safetyRating    = candidateRatings.HARM_CATEGORY_SEXUALLY_EXPLICIT;
+                          responseText = response.candidates[0].content.parts[0].text;
+                        }
+                      } else {
+                        responseText = response.candidates[0].content.parts[0].text;
+                      } //END if rating.probability
+                    } //END if rating.category
+                  }); //END forEach
+                } //END for
+
+                if (safetyCategory !== undefined) {
+                  logger.debug('\n' + safetyCategory + ': ' + safetyRating);
+                }
+              } //END responseFinishReason STOP
+
+              if (response.candidates[0].finishReason == 'MAX_TOKENS') {
+                responseText = 'Response disabled due to model settings (<b>maxOutputTokens: ' + geminiOptions.api_options.generationConfig.maxOutputTokens + '</b>). You need to increase your settings to get full response.';
+              } //END responseFinishReason MAX_TOKENS
+
+              if (response.candidates[0].finishReason == 'SAFETY') {
+                responseText = 'Response disabled due to security reasons. You need to <b>change your prompt</b> to get proper results.';
+                  console.warn('Response disabled due to security reasons');
+              } //END responseFinishReason SAFETY
+
+              if (response.candidates[0].finishReason == 'RECITATION') {
+                responseText = 'Response flagged "RECITATION". Resposne currently not supported';
+                console.warn('finishReason "RECITATION" currently not supported');
+              } //END responseFinishReason RECITATION
+
+              if (response.candidates[0].finishReason == 'OTHER') {
+                responseText = 'Response disabled due to unknown reasons.';
+                console.warn('Response disabled due to unknown reasons');
+              } //END responseFinishReason OTHER
+
+            } //END if response.candidates
+
+            if (responseText.length > 0) {
+              // Set|Show UI elements
+              if (responseText.length < geminiOptions.api_options.responseLengthMin) {
+                logger.warn('\n' + 'Response generated too short: <' + geminiOptions.api_options.responseLengthMin + ' characters');
+                document.getElementById('md_result').innerHTML = 'Response generated too short (less than ' + geminiOptions.api_options.responseLengthMin + ' characters). Please re-run the generation for better results';
+              } else {
+                document.getElementById('md_result').innerHTML = marked.parse(responseText);
+              }
+              $("#result").show();
+              $("#response").show();
+            } //END responseText length
+          } //END finally
+        } else {
+          if (geminiOptions.detectGeoLocation) {
+            geoFindMe();
+          }
+          $("#spinner").hide();
+          setTimeout(() => {
+            $('#confirmError').modal('show');
+          }, 1000);
+       } //END else
+    } //END finally
   } //END async function runner()
 
   // ---------------------------------------------------------------------------
@@ -430,8 +407,8 @@ const httpError500      = geminiOptions.errors.http500;
       hostname                = url.hostname;
       auto_domain             = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
       secure                  = (url.protocol.includes('https')) ? true : false;
-      promptHstoryEnabled     = geminiOptions.prompt_history_enabled;
-      promptHistoryFromCookie = geminiOptions.prompt_history_from_cookie;
+      promptHstoryEnabled     = geminiOptions.history_enabled;
+      promptHistoryFromCookie = geminiOptions.use_prompt_history_from_cookie;
       var newItem;
       var itemExists;
 
@@ -446,10 +423,10 @@ const httpError500      = geminiOptions.errors.http500;
       // -----------------------------------------------------------------------
       var dependencies_met_page_ready = setInterval (() => {
         var pageState           = $('#content').css("display");
-        var pageVisible         = (pageState === 'block') ? true : false;
-        var j1CoreFinished      = (j1.getState() === 'finished') ? true : false;
-        var slimSelectFinished  = (j1.adapter.slimSelect.getState() === 'finished') ? true : false;
-        var uiLoaded            = (j1.xhrDOMState['#gemini_ui'] === 'success') ? true : false;
+        var pageVisible         = (pageState == 'block') ? true : false;
+        var j1CoreFinished      = (j1.getState() == 'finished') ? true : false;
+        var slimSelectFinished  = (j1.adapter.slimSelect.getState() == 'finished') ? true : false;
+        var uiLoaded            = (j1.xhrDOMState['#gemini_ui'] == 'success') ? true : false;
 
         if (!logStartOnce) {
           _this.setState('started');
@@ -482,25 +459,18 @@ const httpError500      = geminiOptions.errors.http500;
           // initialize history array from cookie
           if (promptHstoryEnabled && promptHistoryFromCookie) {
 
-            // const selectHTMLSettings      = j1.adapter.slimSelect.selectHTML;
-            // const propertyName            = geminiOptions.prompt_history_id;
-            // const selectHTML              = selectHTMLSettings[propertyName];
-            // document.getElementById(geminiOptions.prompt_history_wrapper_id).appendChild(selectHTML);
-//          var bla = j1.adapter.slimSelect.select[geminiOptions.prompt_history_id];
-
-
             // get slimSelect object for the history (placed by slimSelect adapter)
-            // selectList                      = document.getElementById('prompt_history');
-            $slimSelect                     =  j1.adapter.slimSelect.select[geminiOptions.prompt_history_id];
+            selectList                = document.getElementById('prompt_history');
+            $slimSelect               = selectList.slim;
 
-            // limit the prompt history
-            promptHistoryMax                = geminiOptions.prompt_history_max;
+            // limit the history
+            maxHistory                = geminiOptions.max_prompt_history;
 
             // allow|reject duplicates for the history
-            allowPromptHistoryDuplicates    = geminiOptions.allow_prompt_history_duplicates;
+            allowHistoryDuplicates    = geminiOptions.allow_prompt_history_duplicates;
 
-            // allow|reject history updates if promptHistoryMax reached
-            allowPromptHistoryUpdatesOnMax  = geminiOptions.allow_prompt_history_updates_on_max;
+            // allow|reject history updates if maxHistory reached
+            allowHistoryUpdatesOnMax  = geminiOptions.allow_prompt_history_updates_on_max;
 
             logger.debug('\n' + 'read prompt history from cookie');
             var data    = [];
@@ -513,7 +483,7 @@ const httpError500      = geminiOptions.errors.http500;
             textHistory = Object.values(chat_prompt);
 
             // remove duplicates from history
-            if (!allowPromptHistoryDuplicates && textHistory.length > 1) {
+            if (!allowHistoryDuplicates && textHistory.length > 1) {
               var textHistoryLenght = textHistory.length;
               var uniqueArray       = [...new Set(textHistory)];                // create a 'Set' from the history array to automatically remove duplicates
 
@@ -549,7 +519,6 @@ const httpError500      = geminiOptions.errors.http500;
             _this.slim_select_eventHandler();
 
           } else {
-            // disable|hide clear history button
             $("#clear").hide();
           } // if promptHstoryEnabled
 
@@ -567,56 +536,40 @@ const httpError500      = geminiOptions.errors.http500;
             if (promptHstoryEnabled) {
               var historySet = false;
 
-              if (textarea.value.length === 0) {
-                // use default prompt
-                prompt = defaultPrompt.replace(/\s+$/g, '');
-                logger.debug('\n' + 'use default prompt: ' + prompt);
-              } else {
-                prompt = textarea.value.replace(/\s+$/g, '');
-              }
-
               // check if current prompt alreay exists in history
-              const index = textHistory.indexOf(prompt);
+              const index = textHistory.indexOf(textarea.value);
               itemExists  = (index !== -1) ? true : false;
               if (itemExists) {
-                logText = '\n' + `prompt: "${prompt}"\n` + `already exists in history at index: ${index}`;
-                logger.debug(logText);
+                logger.debug('\n' + `prompt: ${textarea.value}\nexists already in history at index: ${index}`);
               }
 
-              // update history on promptHistoryMax
-              if (textHistory.length === promptHistoryMax && allowPromptHistoryUpdatesOnMax && !itemExists && !historySet) {
+              // update history on maxHistory
+              if (textHistory.length == maxHistory && allowHistoryUpdatesOnMax && !itemExists && !historySet) {
                 // place the CURRENT history element FIRST for replacement
                 textHistory.reverse();
                 if (textarea.value.length > 0) {
-                  // cleanup textarea value for trailing whitespaces
-                  newItem = textarea.value.replace(/\s+$/g, '');
-                } else if (textarea.value.length === 0) {
-                  // use default prompt
-                  newItem = defaultPrompt.replace(/\s+$/g, '');
-                  logger.debug('\n' + 'use default prompt: ' + newItem);
+                  newItem = textarea.value;
+                } else if (textarea.value.length == 0) {
+                  newItem = defaultPrompt;
                 }
-
-                logger.debug('\n' + 'update item in history: ' +  textHistory[0]);
+                logger.debug('\n' + 'update item in history: ' +  newItem);
                 // replace FIRST history element by NEW item
                 textHistory[0] = newItem;
-                logger.debug('\n' + 'add new item to history: ' + textHistory[0]);
-
+                // textHistory.push(newItem);
                 historySet = true;
               }
 
               // add new item to history
-              if (textHistory.length < promptHistoryMax && !itemExists && !historySet) {
+              if (textHistory.length < maxHistory && !itemExists && !historySet) {
                 if (textarea.value.length > 0) {
-                  // cleanup textarea value for trailing whitespaces
-                  newItem = textarea.value.replace(/\s+$/g, '');
-                } else if (textarea.value.length === 0) {
-                  // use default prompt
-                  newItem = defaultPrompt.replace(/\s+$/g, '');
-                  logger.debug('\n' + 'use default prompt: ' + newItem);
+                  // add current (prompt) value to history
+                  newItem = textarea.value;
+                } else if (textarea.value.length == 0) {
+                  // add default prompt
+                  newItem = defaultPrompt;
                 }
                 logger.debug('\n' + 'add new item to history: ' + newItem);
                 textHistory.push(newItem);
-
                 historySet = true;
               }
 
@@ -633,7 +586,7 @@ const httpError500      = geminiOptions.errors.http500;
               }
 
               // remove duplicates from history
-              if (textHistory.length > 1 && !allowPromptHistoryDuplicates) {
+              if (textHistory.length > 1 && !allowHistoryDuplicates) {
                 var textHistoryLenght = textHistory.length;
                 var uniqueArray       = [...new Set(textHistory)];              // create a 'Set' from the history array to automatically remove duplicates
 
@@ -663,8 +616,8 @@ const httpError500      = geminiOptions.errors.http500;
               }
 
               // write current history to cookie
+              logger.debug('\n' + 'save prompt history to cookie');
               if (promptHistoryFromCookie) {
-                logger.debug('\n' + 'save prompt history to cookie');
                 cookie_written = j1.writeCookie({
                   name:   cookie_names.chat_prompt,
                   data:   textHistory,
@@ -841,7 +794,7 @@ const httpError500      = geminiOptions.errors.http500;
       );
 
       var dependencies_met_data_loaded = setInterval(function() {
-        if (j1.xhrDOMState['#gemini_ui'] === 'success') {
+        if (j1.xhrDOMState['#gemini_ui'] == 'success') {
           logger.debug('\n' + 'Loading UI: successful');
 
           clearInterval(dependencies_met_data_loaded);
@@ -894,7 +847,7 @@ const httpError500      = geminiOptions.errors.http500;
         slimValues = $select.getSelected();
 
         // failsafe on empty selection (clear prompt)
-        if (slimValues.length === 0) {
+        if (slimValues.length == 0) {
           logger.debug('\n' + 'selection from history: empty');
           document.getElementById('prompt').value = '';
         }
