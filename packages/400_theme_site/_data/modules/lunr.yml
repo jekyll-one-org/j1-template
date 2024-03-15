@@ -31,17 +31,18 @@ settings:
   enabled:                              true
 
   # ----------------------------------------------------------------------------
-  # Search options
+  # SEARCH options
   # ----------------------------------------------------------------------------
   topsearch:
     enabled:                            true
 
+    # search history settings
+    # --------------------------------------------------------------------------
+    #
     search_history_max:                 3
     search_history_enabled:             true
     prompt_history_from_cookie:         true
     allow_history_updates_on_max:       true
-
-    read_prompt_history_from_cookie:    true
 
 # ------------------------------------------------------------------------------
 # END config

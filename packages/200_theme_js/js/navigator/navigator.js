@@ -68,8 +68,7 @@ module.exports = function navigator ( options ) {
     init: function( defaultOptions, menuOptions ) {
       logger  = log4javascript.getLogger('j1.core.navigator');
 
-      logText = 'core is being initialized';
-      logger.info(logText);
+      logger.info('\n' + 'initializing module: started');
 
       // -----------------------------------------------------------------------
       // Create a Wrapper for the nav system
@@ -80,10 +79,12 @@ module.exports = function navigator ( options ) {
       this.navbarSticky();
       this.eventHandler(defaultOptions); // jadams, 2021-07-03: initialize events early
 
+      logger.info('\n' + 'initializing module: finished');
+
       message.type    = 'command';
       message.action  = 'core_initialized';
       message.text    = 'navigator core initialized';
-      j1.sendMessage( 'j1.core.navigator', 'j1.adapter.navigator', message );
+      j1.sendMessage('j1.core.navigator', 'j1.adapter.navigator', message);
 
       return true;
     },
@@ -93,7 +94,7 @@ module.exports = function navigator ( options ) {
     // -------------------------------------------------------------------------
     eventHandler: function(options) {
       var defaultOptions    = options;
-      var logger            = log4javascript.getLogger('j1.core.navigator.eventHandler');
+//    var logger            = log4javascript.getLogger('j1.core.navigator.eventHandler');
       var $getNav           = $('nav.navbar.navigator');
       var scrollDuration    = 300;
       var page_link;
@@ -103,6 +104,8 @@ module.exports = function navigator ( options ) {
       var anchor_id;
       var scrollOffset;
       var json_data;
+
+      logger.info('\n' + 'initializing eventHandler: started');
 
       // jadams: unused code (for now).: manages HTML5 server side events
       // for incoming messages from Git Server send e.g. on a 'pull request'
@@ -416,6 +419,8 @@ module.exports = function navigator ( options ) {
         } // END CookieConsent
 
       }); // End manage events for all quicklinks
+
+      logger.info('\n' + 'initializing eventHandler: finished');
 
     }, // END eventHandler
 

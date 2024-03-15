@@ -146,8 +146,8 @@ var selectHTML;
         if (j1CoreFinished && pageVisible) {
 
           _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized');
+          logger.debug('\n' + 'set module state to: ' + _this.getState());
+          logger.info('\n' + 'initializing module: started');
 
           {% for select in slim_select_settings.selects %} {% if select.enabled %}
           logger.debug('\n' + 'select is being initialized on id: ' + '{{select.id}}');
@@ -215,7 +215,7 @@ var selectHTML;
           setTimeout(() => {
             _this.setState('finished');
             logger.debug('\n' + 'state: ' + _this.getState());
-            logger.info('\n' + 'initializing module finished');
+            logger.info('\n' + 'initializing module: finished');
           }, 1000 );
 
           clearInterval(dependencies_met_page_ready);

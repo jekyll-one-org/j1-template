@@ -172,8 +172,8 @@ j1.adapter.lunr = (function (j1, window) {
 
           // initialize state flag
           _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized');
+          logger.debug('\n' + 'set module state to: ' + _this.getState());
+          logger.info('\n' + 'initializing module: started');
 
           $(searchOptions.search_input).lunrSearch({
             index_file: searchOptions.index_file,
@@ -222,7 +222,7 @@ j1.adapter.lunr = (function (j1, window) {
 
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'initializing module finished');
+          logger.info('\n' + 'initializing module: finished');
 
           clearInterval(dependencies_met_j1_finished);
         } // END dependencies_met_j1_finished

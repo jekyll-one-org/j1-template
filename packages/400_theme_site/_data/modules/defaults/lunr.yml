@@ -64,6 +64,8 @@ defaults:
   # Search options
   # ----------------------------------------------------------------------------
   topsearch:
+    enabled:                            false
+
     search_history_max:                 30
     search_history_enabled:             false
     allow_history_duplicates:           false
@@ -77,7 +79,6 @@ defaults:
     icon_color:                         "#FFFFFF"                               # md-white
     icon_size:                          mdib-2x
     search_icon:                        magnify
-    close_icon:                         close
     clear_icon:                         format-clear
     input_color:                        rgba(0, 0, 0, 0.7)                      # rgba-darken-700
     background_color:                   transparent                             # md-grey-50

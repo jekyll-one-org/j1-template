@@ -18,9 +18,9 @@
 {% endcomment %}
 
 {% comment %} Liquid procedure parameter|s
+topsearch_options.enabled: {{topsearch_options.enabled | debug}}
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign topsearch_options = include.options %}
-
 
 {% comment %} Liquid procedures
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -35,11 +35,10 @@
 {% assign search_heading_lead     = topsearch_options.search_heading_lead %}
 {% assign result_heading_lead     = topsearch_options.result_heading_lead %}
 {% assign search_icon             = topsearch_options.search_icon %}
-{% assign close_icon              = topsearch_options.close_icon %}
 {% assign clear_icon              = topsearch_options.clear_icon %}
 
-{% assign quick_search        = false %}
-{% assign elastic_search      = false %}
+{% assign quick_search            = false %}
+{% assign elastic_search          = false %}
 
 {% if topsearch_options.type == 'quicksearch' %}
   {% assign quick_search = true %}

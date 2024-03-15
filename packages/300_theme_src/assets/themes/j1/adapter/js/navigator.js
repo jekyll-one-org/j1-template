@@ -320,7 +320,7 @@ j1.adapter.navigator = (function (j1, window) {
             j1.xhrDOMState['#'+navMenuOptions.xhr_container_id] === 'success' ) {
             // continue if all AJAX loads (loadHTML) has finished
             _this.setState('processing');
-            logger.info('\n' + 'status: ' + _this.getState());
+            logger.debug('\n' + 'set module state to: ' + _this.getState());
             logger.info('\n' + 'initialize navigator core');
 
             // Detect|Set J1 App status

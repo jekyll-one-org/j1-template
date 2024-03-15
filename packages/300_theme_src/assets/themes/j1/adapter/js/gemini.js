@@ -453,8 +453,8 @@ const httpError500      = geminiOptions.errors.http500;
 
         if (!logStartOnce) {
           _this.setState('started');
-          logger.info('\n' + 'set module state to: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized');
+          logger.debug('\n' + 'set module state to: ' + _this.getState());
+          logger.info('\n' + 'initializing module: started');
           logStartOnce = true;
         }
 
@@ -749,7 +749,7 @@ const httpError500      = geminiOptions.errors.http500;
 
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module initialized successfully');
+          logger.info('\n' + 'initializing module: finished');
 
           clearInterval(dependencies_met_page_ready);
         }

@@ -43,9 +43,9 @@
 {% assign topsearch_settings      = lunr_settings.topsearch %}
 
 {% comment %} Set config options
+topsearch_options.enabled: {{topsearch_options.enabled | debug}}
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign topsearch_options       = topsearch_defaults | merge: topsearch_settings %}
-
 
 {% comment %} Main
 --------------------------------------------------------------------------------
