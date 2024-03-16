@@ -623,11 +623,12 @@
         subText = stringArray.join('');
         subText = subText.replaceAll('.', '');
 
-        // at least wordsMin words required
+        // at least wordsMin words are required
         //
         words = wordCount(subText);
         if (words < wordsMin) {
-          console.warn('no search possible on this fraction of subText');
+          console.debug('j1.core.speak2me: no search possible on this fraction of subText: ' + subText);
+          console.debug('j1.core.speak2me: number of words found: ' + words + ' lower that words min: ' + wordsMin);
           return undefined;
         } else {
           return subText;

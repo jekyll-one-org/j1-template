@@ -220,7 +220,7 @@ j1.adapter.translator = (function (j1, window) {
           }
 
           _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState());
+          logger.debug('\n' + 'state: ' + _this.getState ());
           logger.info('\n' + 'module is being initialized');
 
           // load|initialize user translate cookie
@@ -228,7 +228,7 @@ j1.adapter.translator = (function (j1, window) {
           if (j1.existsCookie(cookie_names.user_translate)) {
             user_translate = j1.readCookie(cookie_names.user_translate);
           } else {
-            logger.debug('\n' + 'write to cookie : ' + cookie_names.user_translate);
+            logger.debug ('\n' + 'write to cookie : ' + cookie_names.user_translate);
             cookie_written = j1.writeCookie({
               name:     cookie_names.user_translate,
               data:     user_translate,

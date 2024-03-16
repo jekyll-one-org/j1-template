@@ -212,7 +212,7 @@ var selectHTML;
           {% endif %} {% endfor %}
           // ENDFOR (all) selects
 
-          setTimeout(() => {
+          setTimeout (() => {
             _this.setState('finished');
             logger.debug('\n' + 'state: ' + _this.getState());
             logger.info('\n' + 'initializing module: finished');

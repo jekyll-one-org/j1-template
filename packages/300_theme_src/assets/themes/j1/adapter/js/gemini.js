@@ -105,6 +105,7 @@ var modulesLoaded     = false;
 var textHistory       = []; // Array to store the history of entered text
 var historyIndex      = -1; // Index to keep track of the current position in the history
 var chat_prompt       = {};
+var maxRetries        = 3;
 
 var url;
 var baseUrl;
@@ -121,6 +122,7 @@ var apiKey;
 var validApiKey;
 var genAI;
 var result;
+var retryCount;
 
 var latitude;
 var longitude;
@@ -139,7 +141,14 @@ var allowPromptHistoryUpdatesOnMax;
 var _this;
 var logger;
 var logText;
-var HarmCategory, HarmBlockThreshold; // values taken from API
+
+// values taken from API
+var HarmCategory, HarmBlockThreshold;
+
+// date|time
+var startTime;
+var endTime;
+var timeSeconds;
 
 // -----------------------------------------------------------------------
 // Module variable settings
@@ -168,7 +177,7 @@ const httpError500      = geminiOptions.errors.http500;
      latitude = position.coords.latitude;
      longitude = position.coords.longitude;
      console.debug("Detected geocode (lat:long): " + latitude + ':' + longitude);
-  } //END function showPosition
+  } // END function showPosition
 
   function locateCountry(position) {
     latitude  = position.coords.latitude;
@@ -186,7 +195,7 @@ const httpError500      = geminiOptions.errors.http500;
     .catch(error => {
       console.warn('Error:', error);
     });
-  } //END function locateCountry
+  } // END function locateCountry
 
   function geoFindMe() {
 
@@ -195,18 +204,18 @@ const httpError500      = geminiOptions.errors.http500;
       longitude = position.coords.longitude;
 
       locateCountry(position);
-    } //END function success
+    } // END function success
 
     function error() {
       logger.warn('\n' + 'Unable to retrieve the location');
-    } //END function error
+    } // END function error
 
     if (!navigator.geolocation) {
       logger.warn('\n' + 'Geolocation API is not supported by the browser');
     } else {
       navigator.geolocation.getCurrentPosition(success, error);
     }
-  } //END function geoFindMe
+  } // END function geoFindMe
 
   async function runner() {
     var input = document.getElementById("name");
@@ -226,41 +235,40 @@ const httpError500      = geminiOptions.errors.http500;
       document.getElementById('prompt').value = prompt;
     }
 
-    let retryCount    = 0;
-    const maxRetries  = 3;  // Set the maximum number of retries
-    while (retryCount < maxRetries) {
+    // run a request
+    startTime   = Date.now();
+    retryCount  = 1;
+    while (retryCount <= maxRetries) {
       try {
-        logger.debug('\n' + 'Gemini API: process request: started');
+        logger.info('\n' + 'processing started: #' + retryCount + '|' + maxRetries);
         result = await model.generateContent(prompt);
-        break;  // Exit the loop on success
+
+        // exit the loop on success
+        break;
       } catch (e) {
         var error = e.toString();
-
-        if (error.includes("400")) {
+        if (error.includes('400')) {
           genAIErrorType   = 400;
-          // modal_error_text = '<br>' + httpError400;
           modal_error_text = httpError400;
-
           if (geminiOptions.detect_geo_location) {
             geoFindMe();
             $("#modal_error").html(modal_error_text);
           } else {
             $("#modal_error").html(modal_error_text);
-            logger.warn('\n' + 'Gemini API: location is not supported');
+            logger.warn('\n' + 'location not supported');
           }
-        } else if (error.includes("50")) {
+        } else if (error.includes('50')) {
           genAIErrorType   = 500;
           modal_error_text = httpError500;
           $("#modal_error").html(modal_error_text);
-          logger.warn('\n' + 'Gemini API: service currently not available');
+          logger.warn('\n' + 'service not available');
         }
         genAIError = true;
-        // Increment retry counter
-        // retryCount++;
       } finally {
           if (!genAIError) {
             try {
-              response  = await result.response;
+              logger.debug('\n' + 'collecting results ...');
+              response = await result.response;
             } catch (e) {
               logger.warn('\n' + e);
             } finally {
@@ -331,36 +339,36 @@ const httpError500      = geminiOptions.errors.http500;
                           }
                         } else {
                           responseText = response.candidates[0].content.parts[0].text;
-                        } //END if rating.probability
-                      } //END if rating.category
-                    }); //END forEach
-                  } //END for
+                        } // END if rating.probability
+                      } // END if rating.category
+                    }); // END forEach
+                  } // END for
 
                   if (safetyCategory !== undefined) {
                     logger.debug('\n' + safetyCategory + ': ' + safetyRating);
                   }
-                } //END responseFinishReason STOP
+                } // END responseFinishReason STOP
 
                 if (response.candidates[0].finishReason === 'MAX_TOKENS') {
                   responseText = 'Response disabled due to model settings (<b>maxOutputTokens: ' + geminiOptions.api_options.generationConfig.maxOutputTokens + '</b>). You need to increase your settings to get full response.';
-                } //END responseFinishReason MAX_TOKENS
+                } // END responseFinishReason MAX_TOKENS
 
                 if (response.candidates[0].finishReason === 'SAFETY') {
                   responseText = 'Response disabled due to security reasons. You need to <b>change your prompt</b> to get proper results.';
                     console.warn('Response disabled due to security reasons');
-                } //END responseFinishReason SAFETY
+                } // END responseFinishReason SAFETY
 
                 if (response.candidates[0].finishReason === 'RECITATION') {
                   responseText = 'Response flagged "RECITATION". Resposne currently not supported';
                   console.warn('finishReason "RECITATION" currently not supported');
-                } //END responseFinishReason RECITATION
+                } // END responseFinishReason RECITATION
 
                 if (response.candidates[0].finishReason === 'OTHER') {
                   responseText = 'Response disabled due to unknown reasons.';
                   console.warn('Response disabled due to unknown reasons');
-                } //END responseFinishReason OTHER
+                } // END responseFinishReason OTHER
 
-              } //END if response.candidates
+              } // END if response.candidates
 
               if (responseText.length > 0) {
                 // Set|Show UI elements
@@ -372,32 +380,32 @@ const httpError500      = geminiOptions.errors.http500;
                 }
                 $("#result").show();
                 $("#response").show();
-              } //END responseText length
-            } //END finally
+              } // END responseText length
+            } // END finally
           } else {
-            if (retryCount > 3) {
+            if (retryCount === 3) {
+              logger.info('\n' + 'request failed after max retries: ' + maxRetries);
               $("#spinner").hide();
-
               if (geminiOptions.detectGeoLocation) {
                 geoFindMe();
               }
-              setTimeout(() => {
+              setTimeout (() => {
                 $('#confirmError').modal('show');
               }, 1000);
             }
-            // Increment retry counter
+            // increment retry counter
             retryCount++;
          } // END else
       } // END finally
     } // END while (retry)
 
-    if (retryCount === 0) {
-      logger.debug('\n' + 'Gemini API: process request: finished');
-    } else if (retryCount === maxRetries) {
-      logger.warn('\n' + 'Gemini API: request failed after max retries: ' + maxRetries);
-    }
+    endTime     = Date.now();
+    timeSeconds = _this.int2float((endTime-startTime)/1000);
 
-  } //END async function runner()
+    logger.info('\n' + 'processing finished: #' + retryCount + '|' + maxRetries);
+    logger.info('\n' + 'total execution time: ' + timeSeconds + 's');
+
+  } // END async function runner()
 
   // ---------------------------------------------------------------------------
   // Main object
@@ -680,7 +688,7 @@ const httpError500      = geminiOptions.errors.http500;
 
             // call Gemini API for processing
             runner();
-          }); //END sendButton (click)
+          }); // END sendButton (click)
 
           // Clear input prompt and the spinner|responses
           const resetButton = document.getElementById('{{gemini_options.buttons.reset.id}}');
@@ -693,7 +701,7 @@ const httpError500      = geminiOptions.errors.http500;
             document.getElementById("response").value = '';
             $("#spinner").hide();
             $("#response").hide();
-          }); //END resetButton (click)
+          }); // END resetButton (click)
 
           // Clear history|cookie
           const clearButton = document.getElementById('{{gemini_options.buttons.clear.id}}');
@@ -745,7 +753,7 @@ const httpError500      = geminiOptions.errors.http500;
 
             }); // END dismissClearHistoryButton (click)
 
-          }); //END clearButton (click)
+          }); // END clearButton (click)
 
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
@@ -914,7 +922,51 @@ const httpError500      = geminiOptions.errors.http500;
 
         $select.close();
       }
-    }, //END slim_select_eventHandler()
+    }, // END slim_select_eventHandler()
+
+    // -------------------------------------------------------------------------
+    // int2float()
+    // convert an integer to float using given precision (default: 2 decimals)
+    // -------------------------------------------------------------------------
+    int2float: function (number, precision=2) {
+      return number.toFixed(precision);
+    },
+
+    // -------------------------------------------------------------------------
+    // getTimeLeft()
+    // calulates the time left
+    // -------------------------------------------------------------------------
+    getTimeLeft: function (endDate) {
+      // Get the current date and time
+      const now = new Date();
+
+      // Get the milliseconds of both dates
+      const endTime = endDate.getTime();
+      const currentTime = now.getTime();
+
+      // Calculate the difference in milliseconds
+      const difference = endTime - currentTime;
+
+      // Check if the end date has passed (difference is negative)
+      if (difference < 0) {
+        return 'Time has passed!';
+      }
+
+      // Calculate remaining days using milliseconds in a day
+      const daysLeft = Math.floor(difference / (1000 * 60 * 60 * 24));
+
+      // Calculate remaining hours using milliseconds in an hour
+      const hoursLeft = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+      // Calculate remaining minutes using milliseconds in a minute
+      const minutesLeft = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+
+      // Calculate remaining seconds using milliseconds in a second
+      const secondsLeft = Math.floor((difference % (1000 * 60)) / 1000);
+
+      // Return a formatted string showing remaining time
+      return `${daysLeft} days, ${hoursLeft} hours, ${minutesLeft} minutes, ${secondsLeft} seconds left`;
+    }, // END getTimeLeft
 
     // -------------------------------------------------------------------------
     // messageHandler()

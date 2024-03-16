@@ -310,19 +310,19 @@ var Events = {
             // setup workaround for chromium based browsers
             // to enable infinite speech output
             //
-            this.$buttonSpeak.click(function () {
+            this.$buttonSpeak.click (() => {
               if (isChrome) {
                 logger.info('\n' + 'speak: setup pause workaround for chromium based browsers');
                 chromeWorkaround = setInterval(function () {
                   var isSpeaking  = $().speak2me('isSpeaking');
 
-                  logger.info('\n' + 'speak: isSpeaking|isPaused: ' + isSpeaking + '|' + isPaused);
+                  logger.debug('\n' + 'speak: isSpeaking|isPaused: ' + isSpeaking + '|' + isPaused);
                   if (isSpeaking) {
                     $().speak2me('pause').speak2me('resume');
-                    logger.info('\n' + 'speak: send pause-resumed');
+                    logger.debug('\n' + 'speak: send pause-resumed');
                   } else {
                     $().speak2me('resume');
-                    logger.info('\n' + 'speak: send resumed');
+                    logger.debug('\n' + 'speak: send resumed');
                   }
 
                 }, speak2meOptions.chrome_pause_resume_cycle);
@@ -331,10 +331,10 @@ var Events = {
 
             // stop workaround for chromium based browsers
             //
-            this.$buttonStop.click(function () {
+            this.$buttonStop.click (() => {
               logger.info('\n' + 'speak: remove pause workaround for chromium based browsers');
               // wait 3 sec to make sure speech output is stopped
-              setTimeout(() => {
+              setTimeout (() => {
                 var isSpeaking  = $().speak2me('isSpeaking');
                 var isPaused    = $().speak2me('isPaused');
 
@@ -352,7 +352,7 @@ var Events = {
           // -------------------------------------------------------------------
           // on 'hidden' (close)
           // -------------------------------------------------------------------
-          $('#speak2me_container').on('hidden.bs.modal', function () {
+          $('#speak2me_container').on('hidden.bs.modal', () => {
             //
             // do something here
             //

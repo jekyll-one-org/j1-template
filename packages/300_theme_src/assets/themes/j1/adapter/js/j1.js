@@ -27,8 +27,8 @@ regenerate:                             true
 
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment             = site.environment %}
-{% assign template_version        = site.version %}
+{% assign environment               = site.environment %}
+{% assign template_version          = site.version %}
 
 {% if site.permalink == 'none' %}
    {% capture page_url %}{{ site.url }}.html{% endcapture %}
@@ -141,23 +141,29 @@ var j1 = (function (options) {
   // globals
   // ---------------------------------------------------------------------------
   // base page resources
-  var rePager                 =  new RegExp('navigator|dateview|tagview|archive');
-  var environment             = '{{environment}}';
-  var scrollOffsetBase        = {{scroller_options.smoothscroll.offsetBase}};
-  var scrollOffsetCorrection  = {{scroller_options.smoothscroll.offsetCorrection}};
-  var moduleOptions           = {};
-  var j1_runtime_data         = {};
-  var scrollerSettings        = {};
-  var scrollerOptions         = {};
-  var scrollerDefaults        = {};
-  var banner                  = [];
-  var _this                   = j1;
-  var headingArray            = [];
+  var environment                   = '{{environment}}';
+  var scrollOffsetBase              = {{scroller_options.smoothscroll.offsetBase}};
+  var scrollOffsetCorrection        = {{scroller_options.smoothscroll.offsetCorrection}};
+  var date                          = new Date();
+  var timestamp_now                 = date.toISOString();
+  var url                           = new URL(window.location.href);
+  var rePager                       =  new RegExp('navigator|dateview|tagview|archive');
+  var baseUrl                       = url.origin;
+  var hostname                      = url.hostname;
+  var domain                        = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
+  var secure                        = (url.protocol.includes('https')) ? true : false;
+  var template_version              = '{{template_version}}';
+  var moduleOptions                 = {};
+  var j1_runtime_data               = {};
+  var scrollerSettings              = {};
+  var scrollerOptions               = {};
+  var scrollerDefaults              = {};
+  var banner                        = [];
+  var headingArray                  = [];
 
+  var ep;
   var settings;
   var json_data;
-  var ep;
-  var baseUrl;
   var referrer;
   var documentHeight;
   var scrollOffset;
@@ -186,13 +192,13 @@ var j1 = (function (options) {
 
   // defaults for dynamic pages
   var timeoutScrollDynamicPages     = '{{template_config.timeoutScrollDynamicPages}}';
-
   var scrollDynamicPagesTopOnChange = '{{template_config.scrollDynamicPagesTopOnChange}}';
-  var pageGrowthRatio               = 0;                                          // ratio a dynamic page has grown in height
-  var pageBaseHeigth                = 0;                                          // base height of a dynamic page (not grown)
-  var staticPage                    = false;                                      // defalt: false, but decided in ResizeObserver
+
+  var pageGrowthRatio               = 0;                                        // ratio a dynamic page has grown in height
+  var pageBaseHeigth                = 0;                                        // base height of a dynamic page (not grown)
+  var staticPage                    = false;                                    // defalt: false, but decided in ResizeObserver
   var pageHeight;
-  var pageBaseHeight;                                                              // height of a page dynamic detected in ResizeObserver
+  var pageBaseHeight;                                                           // height of a page dynamic detected in ResizeObserver
 
   var growthRatio                   = 0.00;
   var previousGrowthRatio           = 0.00;
@@ -209,84 +215,87 @@ var j1 = (function (options) {
   var user_session_detected;
   var cookie_written;
 
-  // defaults for the template
-  var template_version;
+  // defaults for template versions
   var template_previous_version;
   var template_version_changed;
 
   // defaults for themes
   var themeName;
   var themeCss;
-  var cssExtension                = (environment === 'production')
-                                    ? '.min.css'
-                                    : '.css'
+  var cssExtension                  = (environment === 'production') ? '.min.css' : '.css';
 
   // defaults for data files
-  var colors_data_path            = '{{template_config.colors_data_path}}';
-  var font_size_data_path         = '{{template_config.font_size_data_path}}';
-  var runtime_data_path           = '{{template_config.runtime_data_path}}';
-  var message_catalog_data_path   = '{{template_config.message_catalog_data_path}}';
+  var colors_data_path              = '{{template_config.colors_data_path}}';
+  var font_size_data_path           = '{{template_config.font_size_data_path}}';
+  var runtime_data_path             = '{{template_config.runtime_data_path}}';
+  var message_catalog_data_path     = '{{template_config.message_catalog_data_path}}';
 
   // Logger resources
   var logger;
   var logText;
 
+  var frontmatterOptions;
+  var _this;
+
   // initial cookie settings
   var cookie_names = {
-    'app_session':    '{{template_config.cookies.app_session}}',
-    'user_session':   '{{template_config.cookies.user_session}}',
-    'user_state':     '{{template_config.cookies.user_state}}',
-    'user_consent':   '{{template_config.cookies.user_consent}}',
-    'user_translate': '{{template_config.cookies.user_translate}}',
-    'chat_prompt':    '{{template_config.cookies.chat_prompt}}',
-    'search_prompt':  '{{template_config.cookies.search_prompt}}'
+    'app_session':                  '{{template_config.cookies.app_session}}',
+    'user_session':                 '{{template_config.cookies.user_session}}',
+    'user_state':                   '{{template_config.cookies.user_state}}',
+    'user_consent':                 '{{template_config.cookies.user_consent}}',
+    'user_translate':               '{{template_config.cookies.user_translate}}',
+    'chat_prompt':                  '{{template_config.cookies.chat_prompt}}',
+    'search_prompt':                '{{template_config.cookies.search_prompt}}'
   };
 
-  var user_consent = {};
+  var user_consent = {
+    'necessary':                    true,
+    'analysis':                     false,
+    'personalization':              false
+  };
 
   var user_translate = {
-    'analysis':             true,
-    'personalization':      true,
-    'translationEnabled':   true
+    'analysis':                     false,
+    'personalization':              false,
+    'useLanguageFromBrowser':       true,
+    'translateAllPages':            true,
+    'translationEnabled':           false
   };
 
   var user_session = {
-    'mode':                 'web',
-    'writer':               'j1.adapter',
-    'locale':               navigator.language || navigator.userLanguage,
-    'user_name':            '{{template_config.user.user_name}}',
-    'provider':             '{{template_config.user.provider}}',
-    'provider_membership':  '{{template_config.user.provider_membership}}',
-    'provider_permissions': 'public,{{template_config.user.provider_permissions}}',
-    'provider_site_url':    '{{template_config.user.provider_site_url}}',
-    'provider_home_url':    '{{template_config.user.provider_home_url}}',
-    'provider_blog_url':    '{{template_config.user.provider_blog_url}}',
-    'provider_member_url':  '{{template_config.user.provider_member_url}}',
-    'provider_privacy_url': '{{template_config.user.provider_privacy_url}}',
-    'requested_page':       'na',
-    'previous_page':        'na',
-    'last_pager':           '/pages/public/blog/navigator/'
+    'mode':                         'web',
+    'writer':                       'j1.adapter',
+    'locale':                       navigator.language || navigator.userLanguage,
+    'user_name':                    '{{template_config.user.user_name}}',
+    'provider':                     '{{template_config.user.provider}}',
+    'provider_membership':          '{{template_config.user.provider_membership}}',
+    'provider_permissions':         'public,{{template_config.user.provider_permissions}}',
+    'provider_site_url':            '{{template_config.user.provider_site_url}}',
+    'provider_home_url':            '{{template_config.user.provider_home_url}}',
+    'provider_blog_url':            '{{template_config.user.provider_blog_url}}',
+    'provider_member_url':          '{{template_config.user.provider_member_url}}',
+    'provider_privacy_url':         '{{template_config.user.provider_privacy_url}}',
+    'requested_page':               '',
+    'previous_page':                '',
+    'last_pager':                   ''
   };
 
   var user_state = {
-    'writer':               'j1.adapter',
-    'template_version':     '{{template_version}}',
-
-    //  for testing only
-    //
-    'theme_name':           'UnoLight',
-    'theme_css':            '',
-    'theme_author':         'J1 Team',
-    'theme_version':        '{{template_version}}',
-    'session_active':       false,
-    'google_translate':     'disabled',
-    'translate_all_pages':  true,
-    'translate_locale':     navigator.language || navigator.userLanguage,
-    'last_session_ts':      ''
+    'writer':                       'j1.adapter',
+    'template_version':             '{{template_version}}',
+    'theme_name':                   'UnoLight',
+    'theme_css':                    '/assets/themes/j1/core/css/themes/unolight/bootstrap.css',
+    'theme_author':                 'J1 Team',
+    'theme_version':                '{{template_version}}',
+    'session_active':               false,
+    'google_translate':             'disabled',
+    'translate_all_pages':          true,
+    'translate_locale':             navigator.language || navigator.userLanguage,
+    'last_session_ts':              timestamp_now
   };
 
-  var chat_prompt   = {};
-  var search_prompt = {};
+  var chat_prompt   =               {};
+  var search_prompt =               {};
 
   // ---------------------------------------------------------------------------
   // Helper functions
@@ -328,12 +337,12 @@ var j1 = (function (options) {
       }, options);
 
       // create settings object from frontmatter options
-      var frontmatterOptions  = options != null ? $.extend({}, options) : {};
+      frontmatterOptions  = options != null ? $.extend({}, options) : {};
 
       // Load scroller module DEFAULTS|CONFIGs
-      scrollerDefaults = $.extend({}, {{scroller_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      scrollerSettings = $.extend({}, {{scroller_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      scrollerOptions  = $.extend(true, {}, scrollerDefaults, scrollerSettings);
+      scrollerDefaults    = $.extend({}, {{scroller_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      scrollerSettings    = $.extend({}, {{scroller_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      scrollerOptions     = $.extend(true, {}, scrollerDefaults, scrollerSettings);
 
       // settings for dynamic pages
       scrollDynamicPagesTopOnChange = frontmatterOptions.scrollDynamicPagesTopOnChange ? frontmatterOptions.scrollDynamicPagesTopOnChange : '{{template_config.scrollDynamicPagesTopOnChange}}';
@@ -342,28 +351,22 @@ var j1 = (function (options) {
       // -----------------------------------------------------------------------
       // Global variable settings
       // -----------------------------------------------------------------------
-      var logger            = log4javascript.getLogger('j1.init');
-      var url               = new URL(window.location.href);
-      var baseUrl           = url.origin;
-      var hostname          = url.hostname;
-      var domain            = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
-      var secure            = (url.protocol.includes('https')) ? true : false;
-      var date              = new Date();
-      var timestamp_now     = date.toISOString();
-      var curr_state        = 'started';
-      var gaCookies         = j1.findCookie('_ga');
-      var themerOptions     = $.extend({}, {{themer_options | replace: '=>', ':' | replace: 'nil', '""' }});
+      var logger              = log4javascript.getLogger('j1.init');
+      var _this               = j1;
+      var curr_state          = 'started';
+      var gaCookies           = j1.findCookie('_ga');
+      var themerOptions       = $.extend({}, {{themer_options | replace: '=>', ':' | replace: 'nil', '""' }});
 
       // current template version
-      template_version  = j1.getTemplateVersion();
+      // template_version  = j1.getTemplateVersion();
 
       // -----------------------------------------------------------------------
       // status settings
       // save status into the adapter object for (later) global access
       // -----------------------------------------------------------------------
-      j1['xhrDataState'] = {};
-      j1['xhrDOMState']  = {};
-      j1['pageMonitor']  = {
+      j1['xhrDataState']      = {};
+      j1['xhrDOMState']       = {};
+      j1['pageMonitor']       = {
         eventNo:              0,
         pageType:             'unknown',
         pageBaseHeight:       0,
@@ -573,7 +576,7 @@ var j1 = (function (options) {
                     // check bannern if HTML content is loaded successfully
                     //
                     if (banners_exits) {
-                      Object.entries(j1.xhrDataState).forEach(entry => {
+                      Object.entries(j1.xhrDataState).forEach ((entry) => {
                         const [key, value] = entry;
                         if (key.includes('banner')) {
                           banner_state = value;
@@ -587,7 +590,7 @@ var j1 = (function (options) {
                     // check panels if HTML content is loaded successfully
                     //
                     if (panels_exists)  {
-                      Object.entries(j1.xhrDataState).forEach(entry => {
+                      Object.entries(j1.xhrDataState).forEach ((entry) => {
                         const [key, value] = entry;
                         if (key.includes('panel')) {
                           panel_state = value;
@@ -739,7 +742,7 @@ var j1 = (function (options) {
               // check bannern if HTML content is loaded successfully
               //
               if (banners_exits) {
-                Object.entries(j1.xhrDataState).forEach(entry => {
+                Object.entries(j1.xhrDataState).forEach ((entry) => {
                   const [key, value] = entry;
                   if (key.includes('banner')) {
                     banner_state = value;
@@ -753,7 +756,7 @@ var j1 = (function (options) {
               // check panels if HTML content is loaded successfully
               //
               if (panels_exists)  {
-                Object.entries(j1.xhrDataState).forEach(entry => {
+                Object.entries(j1.xhrDataState).forEach ((entry) => {
                   const [key, value] = entry;
                   if (key.includes('panel')) {
                     panel_state = value;
@@ -1143,7 +1146,7 @@ var j1 = (function (options) {
       var personalization       = (meta_personalization === 'true') ? true: false;
 
       const cb = (list) => {
-          list.getEntries().forEach(entry => {
+          list.getEntries().forEach ((entry) => {
               console.log(entry);
           });
       }
@@ -2763,7 +2766,7 @@ var j1 = (function (options) {
               // collect top position for the active headline
               //
               if (headingArray !== null) {
-                headingArray.forEach(function(heading, index) {
+                headingArray.forEach ((heading, index) => {
 
                     if (heading.offsetTop !== undefined && heading.id == headingId && countOnce) {
                       scrollOffset            = heading.offsetTop;
@@ -2984,7 +2987,7 @@ var j1 = (function (options) {
           var logger = log4javascript.getLogger('PerformanceObserver');
         }
 
-        entries.forEach(entry => {
+        entries.forEach ((entry) => {
 
           if (entry.sources) {
 
