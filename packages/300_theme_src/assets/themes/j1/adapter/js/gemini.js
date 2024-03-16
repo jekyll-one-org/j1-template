@@ -106,6 +106,7 @@ var textHistory       = []; // Array to store the history of entered text
 var historyIndex      = -1; // Index to keep track of the current position in the history
 var chat_prompt       = {};
 var maxRetries        = 3;
+var logStartOnce      = false;
 
 var url;
 var baseUrl;
@@ -129,6 +130,9 @@ var longitude;
 var country;
 var city;
 
+var newItem;
+var itemExists;
+
 var selectList;
 var $slimSelect;
 var textarea;
@@ -148,6 +152,8 @@ var HarmCategory, HarmBlockThreshold;
 // date|time
 var startTime;
 var endTime;
+var startTimeModule;
+var endTimeModule;
 var timeSeconds;
 
 // -----------------------------------------------------------------------
@@ -384,7 +390,8 @@ const httpError500      = geminiOptions.errors.http500;
             } // END finally
           } else {
             if (retryCount === 3) {
-              logger.info('\n' + 'request failed after max retries: ' + maxRetries);
+              logger.info('\n' + 'requests failed after max retries: ' + maxRetries);
+
               $("#spinner").hide();
               if (geminiOptions.detectGeoLocation) {
                 geoFindMe();
@@ -399,11 +406,9 @@ const httpError500      = geminiOptions.errors.http500;
       } // END finally
     } // END while (retry)
 
-    endTime     = Date.now();
-    timeSeconds = _this.int2float((endTime-startTime)/1000);
-
-    logger.info('\n' + 'processing finished: #' + retryCount + '|' + maxRetries);
-    logger.info('\n' + 'total execution time: ' + timeSeconds + 's');
+    endTime = Date.now();
+    logger.info('\n' + 'processing finished: #' + --retryCount + '|' + maxRetries);
+    logger.info('\n' + 'total execution time: ' + (endTime-startTime) + 'ms');
 
   } // END async function runner()
 
@@ -417,7 +422,6 @@ const httpError500      = geminiOptions.errors.http500;
     // adapter initializer
     // -------------------------------------------------------------------------
     init: function (options) {
-      var logStartOnce = false;
 
       // -----------------------------------------------------------------------
       // default module settings
@@ -440,8 +444,6 @@ const httpError500      = geminiOptions.errors.http500;
       secure                  = (url.protocol.includes('https')) ? true : false;
       promptHstoryEnabled     = geminiOptions.prompt_history_enabled;
       promptHistoryFromCookie = geminiOptions.prompt_history_from_cookie;
-      var newItem;
-      var itemExists;
 
       // module loader
       _this.loadModules();
@@ -459,15 +461,13 @@ const httpError500      = geminiOptions.errors.http500;
         var slimSelectFinished  = (j1.adapter.slimSelect.getState() === 'finished') ? true : false;
         var uiLoaded            = (j1.xhrDOMState['#gemini_ui'] === 'success') ? true : false;
 
-        if (!logStartOnce) {
+        // check page ready state
+        if (j1CoreFinished && pageVisible && slimSelectFinished && uiLoaded && modulesLoaded) {
+
+          startTimeModule = Date.now();
           _this.setState('started');
           logger.debug('\n' + 'set module state to: ' + _this.getState());
           logger.info('\n' + 'initializing module: started');
-          logStartOnce = true;
-        }
-
-        // check page ready state
-        if (j1CoreFinished && pageVisible && slimSelectFinished && uiLoaded && modulesLoaded) {
 
           if (!validApiKey) {
             logger.warn('\n' + 'Invalid API key detected: ' + apiKey);
@@ -489,14 +489,6 @@ const httpError500      = geminiOptions.errors.http500;
 
           // initialize history array from cookie
           if (promptHstoryEnabled && promptHistoryFromCookie) {
-
-            // const selectHTMLSettings      = j1.adapter.slimSelect.selectHTML;
-            // const propertyName            = geminiOptions.prompt_history_id;
-            // const selectHTML              = selectHTMLSettings[propertyName];
-            // document.getElementById(geminiOptions.prompt_history_wrapper_id).appendChild(selectHTML);
-//          var bla = j1.adapter.slimSelect.select[geminiOptions.prompt_history_id];
-
-
             // get slimSelect object for the history (placed by slimSelect adapter)
             // selectList                      = document.getElementById('prompt_history');
             $slimSelect                     =  j1.adapter.slimSelect.select[geminiOptions.prompt_history_id];
@@ -753,11 +745,14 @@ const httpError500      = geminiOptions.errors.http500;
 
             }); // END dismissClearHistoryButton (click)
 
-          }); // END clearButton (click)
+          }); // END clearButton (click)          
 
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'initializing module: finished');
+
+          endTimeModule = Date.now();
+          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_page_ready);
         }

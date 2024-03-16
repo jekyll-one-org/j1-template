@@ -139,21 +139,24 @@ for the icon set selected, click on the button *SHOW ICON SET SELECTED*.
 slimSelect::icon_library_select_wrapper[role="mt-4 mb-3"]
 
 // Button to open the picker UI for the selected icon set
-++++
-<div id="picker_button_wrapper" class="{{icon_picker_options.picker_button_wrapper_classes}}">
-  <a id="{{icon_picker_options.picker_button_id}}" href="#"
-     class="{{icon_picker_options.picker_button_classes}}"
-     aria-label="{{icon_picker_options.picker_button_label}}">
-     <i class="mdi mdi-{{icon_picker_options.picker_button_icon}} mdi-2x mr-2"></i>
-     {{icon_picker_options.picker_button_label}}
-  </a>
-</div>
-++++
+// ++++
+// <div id="picker_button_wrapper" class="{{icon_picker_options.picker_button_wrapper_classes}}">
+//   <a id="{{icon_picker_options.picker_button_id}}" href="#"
+//      class="{{icon_picker_options.picker_button_classes}}"
+//      aria-label="{{icon_picker_options.picker_button_label}}">
+//      <i class="mdi mdi-{{icon_picker_options.picker_button_icon}} mdi-2x mr-2"></i>
+//      {{icon_picker_options.picker_button_label}}
+//   </a>
+// </div>
+// ++++
 
 ++++
 <script>
   const logger    = log4javascript.getLogger('page.iconPicker');
   const selectID  = 'icon_library';
+
+  var buttonDIV;
+  var buttonHTML;
 
   function init_select() {
     // set initial select values
@@ -208,16 +211,31 @@ slimSelect::icon_library_select_wrapper[role="mt-4 mb-3"]
 
         if (iconPickerFinished && slimSelectFinished) {
 
-          logger.info('\n' + 'slimSelect: setup initial values');
+          _this.setState('started');
+          logger.debug('\n' + 'set module state to: ' + _this.getState());
+          logger.info('\n' + 'initializing module: started');
+
+          // create|place button <div> element
+          //
+          buttonHTML = '';
+          buttonDIV           = document.createElement('div');
+          buttonDIV.id        = "picker_button_wrapper";
+          buttonDIV.className = "{{icon_picker_options.picker_button_wrapper_classes}}";
+          buttonDIV.innerHTML = buttonHTML;
+          document.getElementById('icon_library_select_wrapper').appendChild(buttonDIV);
 
           // setup initial slimSelect values|iconPicker options
           init_select();
 
-          logger.info('\n' + 'slimSelect: initializing finished');
+          _this.setState('finished');
+          logger.debug('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'initializing module: finished');
 
           clearInterval(dependencies_met_modules_ready);
         } // END if modules loaded
       }, 10);
+
+      logger.info('\n' + 'slimSelect: initializing finished');
 
       clearInterval(dependencies_met_page_ready);
     } // END if page loaded

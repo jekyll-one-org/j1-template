@@ -103,7 +103,6 @@ j1.adapter.lunr = (function (j1, window) {
   var logText;
   var state;
 
-
   var textHistory;
 
   var search_prompt;
@@ -113,6 +112,13 @@ j1.adapter.lunr = (function (j1, window) {
   var searchHstoryEnabled;
   var allowSearchHistoryDuplicates;
   var allowSearchHistoryUpdatesOnMax;
+
+  // date|time
+  var startTime;
+  var endTime;
+  var startTimeModule;
+  var endTimeModule;
+  var timeSeconds;
 
   // ---------------------------------------------------------------------------
   // Helper functions
@@ -157,8 +163,7 @@ j1.adapter.lunr = (function (j1, window) {
       hostname            = url.hostname;
       auto_domain         = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
       secure              = (url.protocol.includes('https')) ? true : false;
-      searchHstoryEnabled = (topSearchOptions.search_history_enabled === true) ? true : false;
-
+      searchHstoryEnabled = (topSearchOptions.search_history_enabled === true) ? true : false;      
 
       // -----------------------------------------------------------------------
       // lunr initializer
@@ -166,9 +171,11 @@ j1.adapter.lunr = (function (j1, window) {
       var dependencies_met_j1_finished = setInterval (() => {
         var j1CoreFinished          = (j1.getState() === 'finished') ? true : false;
         var slimSelectFinished      = (j1.adapter.slimSelect.getState() === 'finished') ? true : false;
-        var searchHstoryFromCookie  = (topSearchOptions.prompt_history_from_cookie === true) ? true : false;
+        var searchHstoryFromCookie  = (topSearchOptions.prompt_history_from_cookie === true) ? true : false;        
 
         if (j1CoreFinished && slimSelectFinished) {
+
+          startTimeModule = Date.now();
 
           // initialize state flag
           _this.setState('started');
@@ -224,6 +231,9 @@ j1.adapter.lunr = (function (j1, window) {
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'initializing module: finished');
 
+          endTimeModule = Date.now();
+          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');  
+
           clearInterval(dependencies_met_j1_finished);
         } // END dependencies_met_j1_finished
       }, 10);
@@ -277,6 +287,14 @@ j1.adapter.lunr = (function (j1, window) {
       });
 
     }, // END eventHandler
+
+    // -------------------------------------------------------------------------
+    // int2float()
+    // convert an integer to float using given precision (default: 2 decimals)
+    // -------------------------------------------------------------------------
+    int2float: function (number, precision=2) {
+      return number.toFixed(precision);
+    },
 
     // -------------------------------------------------------------------------
     // messageHandler: MessageHandler for J1 CookieConsent module

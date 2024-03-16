@@ -100,6 +100,13 @@ var logText;
 var selectDIV;
 var selectHTML;
 
+// date|time
+var startTime;
+var endTime;
+var startTimeModule;
+var endTimeModule;
+var timeSeconds;
+
   // ---------------------------------------------------------------------------
   // Main object
   // ---------------------------------------------------------------------------
@@ -141,9 +148,11 @@ var selectHTML;
       var dependencies_met_page_ready = setInterval (() => {
         var pageState      = $('#content').css("display");
         var pageVisible    = (pageState == 'block') ? true : false;
-        var j1CoreFinished = (j1.getState() == 'finished') ? true : false;
+        var j1CoreFinished = (j1.getState() == 'finished') ? true : false;        
 
         if (j1CoreFinished && pageVisible) {
+
+          startTimeModule = Date.now();
 
           _this.setState('started');
           logger.debug('\n' + 'set module state to: ' + _this.getState());
@@ -206,17 +215,18 @@ var selectHTML;
 
             logger.debug('\n' + 'initializing select finished on id: {{select.id}}');
           } else {
-            logger.info('\n' + 'wrapper not found for select id: {{select.wrapper_id}}');
+            logger.debug('\n' + 'wrapper not found for select id: {{select.wrapper_id}}');
           } //END if selectWrapper exists
 
           {% endif %} {% endfor %}
-          // ENDFOR (all) selects
+          // ENDFOR (all) selects          
 
-          setTimeout (() => {
-            _this.setState('finished');
-            logger.debug('\n' + 'state: ' + _this.getState());
-            logger.info('\n' + 'initializing module: finished');
-          }, 1000 );
+          _this.setState('finished');
+          logger.debug('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'initializing module: finished');
+
+          endTimeModule = Date.now();
+          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');         
 
           clearInterval(dependencies_met_page_ready);
         } // END 'pageVisible'
@@ -224,6 +234,14 @@ var selectHTML;
       }, 10);
 
     }, // END init
+
+    // -------------------------------------------------------------------------
+    // int2float()
+    // convert an integer to float using given precision (default: 2 decimals)
+    // -------------------------------------------------------------------------
+    int2float: function (number, precision=2) {
+      return number.toFixed(precision);
+    },
 
     // -------------------------------------------------------------------------
     // messageHandler()
