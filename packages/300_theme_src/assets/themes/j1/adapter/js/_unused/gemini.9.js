@@ -537,10 +537,11 @@ const httpError500      = geminiOptions.errors.http500;
                 } // END if !allowHistoryDupicates
 
                 // update|set slimSelect data elements
-                index   = 1;
-                data    = [];
-                option  = {};
+                index     = 1;
+                data      = [];
+                option    = {};
                 textHistory.forEach((historyText) => {
+//                html    = '<button id="opt_' + geminiOptions.prompt_history_id + '_' + index + '" type="button" class="btn-close"></button> | ' + historyText;
                   html    = '<span id="opt_' + geminiOptions.prompt_history_id + '_' + index + '" class="ss-option-delete">' + '<i class="mdib mdib-close mdib-16px ml-1 mr-2"></i></span>' + historyText;
 
                   option = {
@@ -550,31 +551,36 @@ const httpError500      = geminiOptions.errors.http500;
                     selected: false,
                     disabled: false
                   }
-
                   data.push(option);
                   index++
                 }); // END forEach
                 $slimSelect.setData(data);
 
-                // add EventListeners
                 index = 1;
                 data  = $slimSelect.getData();
                 data.forEach((dummy) => {
                   var span        = 'opt_prompt_history_' + index;
                   var spanElement = document.getElementById(span);
-
                   spanElement.addEventListener('click', function(event) {
+                    // var text;
+
                     // suppress default actions|bubble up
                     event.preventDefault();
                     event.stopPropagation();
 
+                    // Code to be executed on click
+                    // var data = $slimSelect.getData();
+                    // var dataText = event.currentTarget.nextSibling.data;
+                    // var text = dataText.replace(/^\s+/, '');
+
+                    // text = event.currentTarget.nextSibling.data;
                     console.warn('option text: ' + event.currentTarget.nextSibling.data);
+
                     $slimSelect.close();
 
-                  }); // END addEventListener
-
-                  index++;
-                }); // END forEach data
+//                  return true;
+                  });
+                }); // END forEach
 
                 // display history container
                 if (textHistory.length > 0) {
@@ -687,12 +693,11 @@ const httpError500      = geminiOptions.errors.http500;
               } // END if allowHistoryDupicates
 
               // create|set slimSelect data elements
-              index   = 1;
-              data    = [];
-              option  = {};
+              index     = 1;
+              data      = [];
+              option    = {};
               textHistory.forEach ((historyText) => {
-                html    = '<span id="opt_' + geminiOptions.prompt_history_id + '_' + index + '" class="ss-option-delete">' + '<i class="mdib mdib-close mdib-16px ml-1 mr-2"></i></span>' + historyText;
-
+                html    = '<span id="opt_' + geminiOptions.prompt_history_id + '_' + index + '" class="ss-option-delete">' + '<i class="mdib mdib-close mdib-16px ml-1 mr-2"></i></span> | ' + historyText;
                 option  = {
                   text:     historyText,
                   html:     html,
@@ -705,25 +710,21 @@ const httpError500      = geminiOptions.errors.http500;
               }); // END forEach
               $slimSelect.setData(data);
 
-              // add EventListeners
-              index = 1;
-              data  = $slimSelect.getData();
-              data.forEach((dummy) => {
-                var span        = 'opt_prompt_history_' + index;
-                var spanElement = document.getElementById(span);
-
-                spanElement.addEventListener('click', function(event) {
-                  // suppress default actions|bubble up
-                  event.preventDefault();
-                  event.stopPropagation();
-
-                  console.warn('option text: ' + event.currentTarget.nextSibling.data);
-                  $slimSelect.close();
-
-                }); // END addEventListener
-
-                index++;
-              }); // END forEach data
+              // index = 1;
+              // data  = $slimSelect.getData();
+              // data.forEach((dummy) => {
+              //   var span        = 'opt_prompt_history_' + index;
+              //   var spanElement = document.getElementById(span);
+              //   spanElement.addEventListener('click', function(event) {
+              //     // suppress bubble up|default actions
+              //     event.preventDefault();
+              //
+              //     var text = e.currentTarget.nextSibling.data;
+              //       // Code to be executed on click
+              //       console.warn('span data: ' + text);
+              //       alert("You clicked span: ");
+              //   });
+              // }); // END forEach
 
               // display history container
               if (textHistory.length > 0) {
@@ -931,6 +932,22 @@ const httpError500      = geminiOptions.errors.http500;
       var data;
       var prompt;
 
+      // index = 1;
+      // data  = $slimSelect.getData();
+      // data.forEach((dummy) => {
+      //   var span        = 'opt_prompt_history_' + index;
+      //   var spanElement = document.getElementById(span);
+      //   spanElement.addEventListener('click', function(event) {
+      //     // suppress bubble up|default actions
+      //     event.preventDefault();
+      //
+      //     var text = e.currentTarget.nextSibling.data;
+      //       // Code to be executed on click
+      //       console.warn('span data: ' + text);
+      //       alert("You clicked span: ");
+      //   });
+      // }); // END forEach
+
       // $select.events.beforeOpen = () => {
       //   values = $select.getSelected();
       //   data = $select.getData();
@@ -971,6 +988,15 @@ const httpError500      = geminiOptions.errors.http500;
           logger.debug('\n' + 'selection from history: empty');
           document.getElementById('prompt').value = '';
         }
+
+        // var spanElement = document.getElementById("opt_prompt_history_1");
+        // spanElement.addEventListener("click", function(event) {
+        //   var event = e;
+        //   var text  = e.currentTarget.nextSibling.data;
+        //     // Code to be executed on click
+        //     console.warn('span data: ' + text);
+        //     alert("You clicked the span!");
+        // });
 
       }, // END event beforeClose
 

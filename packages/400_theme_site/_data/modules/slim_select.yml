@@ -86,8 +86,8 @@ settings:
       #
       id:                               prompt_history
       name:                             prompt-history
-      items:                            <select multiple="dummy" id="prompt_history" name="prompt-history"></select>
-
+#     items:                            <select id="prompt_history" name="prompt-history"></select>
+      items:                            <select multiple="" id="prompt_history" name="prompt-history"></select>
     # --------------------------------------------------------------------------
     # Search history (site search)
     #
@@ -104,7 +104,7 @@ settings:
       #
       id:                               search_history
       name:                             search-history
-      items:                            <select multiple="dummy" id="search_history" name="search-history"></select>
+      items:                            <select multiple="" id="search_history" name="search-history"></select>
 
 # ------------------------------------------------------------------------------
 # END config
