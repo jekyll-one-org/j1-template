@@ -146,44 +146,33 @@ var logText;
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module is being initialized on id: ' + icon_picker_button_id);
 
-          var dependencies_met_picker_button_ready = setInterval (() => {
-            var buttonState = $(icon_picker_button_id).length;
-            var buttonReady = (buttonState > 0) ? true : false;
-
-            if (buttonReady) {
-              // setup initial slimSelect values|iconPicker options
-
-              icon_picker = new UniversalIconPicker(icon_picker_button_id, {
-                allowEmpty:       iconPickerOptions.api_options.allowEmpty,
-                iconLibraries:    iconPickerOptions.api_options.iconLibraries,
-                iconLibrariesCss: iconPickerOptions.api_options.iconLibrariesCss,
-                onSelect: function(jsonIconData) {
-                  // copy selected icon to clipboard (iconClass)
-                  var copyFrom = document.createElement('textarea');
-                  copyFrom.value = jsonIconData.iconClass;
-                  document.body.appendChild(copyFrom);
-                  copyFrom.select();
-                  document.execCommand('copy');
-                  // Remove data element from body
-                  setTimeout(function () {
-                    document.body.removeChild(copyFrom);
-                  }, 500);
-                }
-              });
-
-              // save config settings into the toccer object for later access
-              //
-              _this['icon_picker']    = icon_picker;
-              _this['moduleOptions']  = iconPickerOptions;
-
-              _this.setState('finished');
-              logger.debug('\n' + 'state: ' + _this.getState());
-              logger.info('\n' + 'initializing module finished');
-
-              clearInterval(dependencies_met_picker_button_ready);
+          icon_picker = new UniversalIconPicker(icon_picker_button_id, {
+            allowEmpty:       iconPickerOptions.api_options.allowEmpty,
+            iconLibraries:    iconPickerOptions.api_options.iconLibraries,
+            iconLibrariesCss: iconPickerOptions.api_options.iconLibrariesCss,
+            onSelect: function(jsonIconData) {
+              // copy selected icon to clipboard (iconClass)
+              var copyFrom = document.createElement('textarea');
+              copyFrom.value = jsonIconData.iconClass;
+              document.body.appendChild(copyFrom);
+              copyFrom.select();
+              document.execCommand('copy');
+              // Remove data element from body
+              setTimeout(function () {
+                document.body.removeChild(copyFrom);
+              }, 500);
             }
-          }, 10);
-          
+          });
+
+          // save config settings into the toccer object for later access
+          //
+          _this['icon_picker']    = icon_picker;
+          _this['moduleOptions']  = iconPickerOptions;
+
+          _this.setState('finished');
+          logger.debug('\n' + 'state: ' + _this.getState());
+
+          logger.info('\n' + 'initializing module finished');
           clearInterval(dependencies_met_page_ready);
         }
       }, 10);

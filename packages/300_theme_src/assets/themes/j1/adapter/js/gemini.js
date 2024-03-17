@@ -560,9 +560,8 @@ const httpError500      = geminiOptions.errors.http500;
           // send request to generate results
           const sendButton = document.getElementById('{{gemini_options.buttons.generate.id}}');
           sendButton.addEventListener('click', (event) => {
-            // jadams, 2023-03-13: unclear why consttants are required to set again
-            // const selectList  = document.getElementById('prompt_history');
-            // const $slimSelect = selectList.slim
+            // suppress bubble up|default actions
+            event.preventDefault();
 
             if (promptHstoryEnabled) {
               var historySet = false;
@@ -685,9 +684,8 @@ const httpError500      = geminiOptions.errors.http500;
           // Clear input prompt and the spinner|responses
           const resetButton = document.getElementById('{{gemini_options.buttons.reset.id}}');
           resetButton.addEventListener('click', (event) => {
-
-            // prevent default actions
-            // event.preventDefault();
+            // suppress bubble up|default actions
+            event.preventDefault();
 
             document.getElementById("prompt").value   = '';
             document.getElementById("response").value = '';
@@ -698,8 +696,10 @@ const httpError500      = geminiOptions.errors.http500;
           // Clear history|cookie
           const clearButton = document.getElementById('{{gemini_options.buttons.clear.id}}');
           clearButton.addEventListener('click', (event) => {
-            logStartOnce = false;
+            // suppress bubble up|default actions
+            event.preventDefault();
 
+            logStartOnce = false;
             $('#clearHistory').modal('show');
 
             const confirmClearHistory = document.getElementById('clearHistory');
@@ -708,6 +708,9 @@ const httpError500      = geminiOptions.errors.http500;
 
             accecptClearHistory.addEventListener('click', (event) => {
               logStartOnce = false;
+
+              // suppress bubble up|default actions
+              event.preventDefault();
 
               // clear history
               if (!logStartOnce) {
@@ -737,15 +740,17 @@ const httpError500      = geminiOptions.errors.http500;
             dismissClearHistory.addEventListener('click', (event) => {
               logStartOnce = false;
 
+              // suppress bubble up|default actions
+              event.preventDefault();
+
               // skip clear history
               if (!logStartOnce) {
                 logger.debug('\n' + 'skipped clearHistory');
                 logStartOnce = true;
               }
-
             }); // END dismissClearHistoryButton (click)
 
-          }); // END clearButton (click)          
+          }); // END clearButton (click)
 
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());

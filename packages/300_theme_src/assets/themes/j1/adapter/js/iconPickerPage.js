@@ -6,8 +6,8 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/iconPicker.js
- # Liquid template to adapt the iconPicker module
+ # ~/assets/themes/j1/adapter/js/iconPickers.js
+ # Liquid template to adapt the iconPickers module
  #
  # Product/Info:
  # https://jekyll.one
@@ -18,7 +18,7 @@ regenerate:                             true
  # -----------------------------------------------------------------------------
  # Test data:
  #  {{ liquid_var | debug }}
- #  icon_picker_options:  {{ icon_picker_options | debug }}
+ #  iconPicker_options:  {{ iconPicker_options | debug }}
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
@@ -27,42 +27,34 @@ regenerate:                             true
 
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment           = site.environment %}
-{% assign asset_path            = "/assets/themes/j1" %}
+{% assign environment         = site.environment %}
+{% assign asset_path          = "/assets/themes/j1" %}
 
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config       = site.data.j1_config %}
-{% assign blocks                = site.data.blocks %}
-{% assign modules               = site.data.modules %}
+{% assign template_config     = site.data.j1_config %}
+{% assign blocks              = site.data.blocks %}
+{% assign modules             = site.data.modules %}
 
 {% comment %} Set config data (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign icon_picker_defaults  = modules.defaults.icon_picker.defaults %}
-{% assign icon_picker_settings  = modules.icon_picker.settings %}
+{% assign icon_picker_defaults = modules.defaults.icon_picker.defaults %}
+{% assign icon_picker_settings = modules.icon_picker.settings %}
+{% assign slim_select_defaults = modules.defaults.slim_select.defaults %}
+{% assign slim_select_settings = modules.slim_select.settings %}
 
-{% comment %} Set config options (settings only)
+{% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign icon_picker_options   = icon_picker_defaults | merge: icon_picker_settings %}
-
-
-{% comment %} Variables
--------------------------------------------------------------------------------- {% endcomment %}
-
-{% comment %} Detect prod mode
--------------------------------------------------------------------------------- {% endcomment %}
-{% assign production = false %}
-{% if environment == 'prod' or environment == 'production' %}
-  {% assign production = true %}
-{% endif %}
+{% assign icon_picker_options  = icon_picker_defaults | merge: icon_picker_settings %}
+{% assign slim_select_options  = slim_select_defaults | merge: slim_select_settings %}
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/iconPicker.js
- # J1 Adapter for the iconPicker module
+ # ~/assets/themes/j1/adapter/js/iconPickers.js
+ # J1 Adapter for the iconPickers module
  #
  # Product/Info:
  # https://jekyll.one
@@ -72,7 +64,7 @@ regenerate:                             true
  # J1 Template is licensed under the MIT License.
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
- # NOTE:
+ # NOTE: iconPicker styles defind in /assets/data/panel.html, key 'iconPicker'
  # -----------------------------------------------------------------------------
  #  Adapter generated: {{site.time}}
  # -----------------------------------------------------------------------------
@@ -84,18 +76,20 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.iconPicker = (function (j1, window) {
+j1.adapter.iconPickerPage = (function (j1, window) {
 
 {% comment %} Set global variables
 -------------------------------------------------------------------------------- {% endcomment %}
-var environment           = '{{environment}}';
-var state                 = 'not_started';
+const selectID  = 'icon_library';
+
 var iconPickerDefaults;
 var iconPickerSettings;
 var iconPickerOptions;
-var frontmatterOptions;
-var icon_picker;
-var icon_picker_button_id;
+
+var slimSelectDefaults;
+var slimSelectSettings;
+var slimSelectOptions;
+
 var _this;
 var logger;
 var logText;
@@ -115,79 +109,114 @@ var logText;
       // Default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
-        module_name: 'j1.adapter.iconPicker',
+        module_name: 'j1.adapter.iconPickerPage',
         generated:   '{{site.time}}'
       }, options);
 
       // -----------------------------------------------------------------------
       // Global variable settings
       // -----------------------------------------------------------------------
+      iconPickerDefaults  = $.extend({}, {{icon_picker_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      iconPickerSettings  = $.extend({}, {{iconPicker_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      iconPickerOptions   = $.extend(true, {}, iconPickerDefaults, iconPickerSettings);
 
-      // create settings object from module options
-      iconPickerDefaults = $.extend({}, {{icon_picker_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      iconPickerSettings = $.extend({}, {{icon_picker_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      iconPickerOptions  = $.extend(true, {}, iconPickerDefaults, iconPickerSettings);
-
-      _this  = j1.adapter.iconPicker;
-      logger = log4javascript.getLogger('j1.adapter.iconPicker');
+      slimSelectDefaults  = $.extend({}, {{slim_select_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      slimSelectSettings  = $.extend({}, {{slim_select_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      slimSelectOptions   = $.extend(true, {}, slimSelectDefaults, slimSelectSettings);
 
       // -----------------------------------------------------------------------
       // initializer
       // -----------------------------------------------------------------------
-      var dependencies_met_page_ready = setInterval (function (options) {
-        var pageState       = $('#content').css("display");
-        var pageVisible     = (pageState == 'block') ? true : false;
-        var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
+      _this   = j1.adapter.iconPickerPage;
+      logger  = log4javascript.getLogger('j1.adapter.iconPicker');
 
-        if (j1CoreFinished && pageVisible) {
-          icon_picker_button_id = '#' + iconPickerOptions.picker_button_id;
+      function init_select() {
+        // set initial select values
+        const select              = document.getElementById(selectID);
+        const icon_picker         = j1.adapter.iconPicker.icon_picker;
+
+        var currentIconLibrary    = select.value;
+        var currentIconLibraryCss = select.options[select.selectedIndex].dataset.css;
+
+        icon_picker.setOptions({
+          iconLibraries:          [currentIconLibrary + '.min.json'],
+          iconLibrariesCss:       [currentIconLibraryCss]
+        });
+
+        // stop default actions on picker button
+        const pickerButton = document.getElementById('icon_picker');
+        pickerButton.addEventListener('click', (event) => {
+          event.preventDefault();
+        }); // END pickerButton (click)
+
+        // setup slimSelect events|iconPicker options
+        logger.info('\n' + 'setup select events');
+        init_select_events();
+
+        _this.setState('finished');
+        logger.debug('\n' + 'state: ' + _this.getState());
+        logger.info('\n' + 'initializing finished');
+      } // END init_select
+
+      function init_select_events() {
+
+        const $slimSelect = j1.adapter.slimSelect.select.icon_library;
+        $slimSelect.events.afterClose = () => {
+          const icon_picker         = j1.adapter.iconPicker.icon_picker;
+          const select              = document.getElementById(selectID);
+
+          var currentIconLibrary    = select.value;
+          var currentIconLibraryCss = select.options[select.selectedIndex].dataset.css;
+
+          logger.debug('\n' + 'use current IconLibrary: ' + currentIconLibrary);
+
+          // apply selection
+          currentIconLibrary        = select.value;
+          currentIconLibraryCss     = select.options[select.selectedIndex].dataset.css;
+
+          icon_picker.setOptions({
+            iconLibraries:          [currentIconLibrary + '.min.json'],
+            iconLibrariesCss:       [currentIconLibraryCss]
+          });
+        }
+      } // END init_select_events
+
+      var dependencies_met_page_ready = setInterval (() => {
+        var pageState   = $('#content').css("display");
+        var pageVisible = (pageState == 'block') ? true : false;
+        var j1Finished  = (j1.getState() == 'finished') ? true : false;
+
+        if (j1Finished && pageVisible) {
 
           _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized on id: ' + icon_picker_button_id);
+          logger.debug('\n' + 'set module state to: ' + _this.getState());
+          logger.info('\n' + 'initializing started');
 
-          var dependencies_met_picker_button_ready = setInterval (() => {
-            var buttonState = $(icon_picker_button_id).length;
-            var buttonReady = (buttonState > 0) ? true : false;
+          var dependencies_met_modules_ready = setInterval(() => {
+            var selectState         = $('#container_icon_library_select_wrapper').length;
+            var selectReady         = (selectState > 0) ? true : false;
+            var slimSelectFinished  = (j1.adapter.slimSelect.getState() === 'finished') ? true: false;
+            var iconPickerFinished = (j1.adapter.iconPicker.getState() === 'finished') ? true: false;
 
-            if (buttonReady) {
+            if (slimSelectFinished && iconPickerFinished && selectReady) {
+              logger.info('\n' + 'initializing select data');
+
               // setup initial slimSelect values|iconPicker options
+              init_select();
 
-              icon_picker = new UniversalIconPicker(icon_picker_button_id, {
-                allowEmpty:       iconPickerOptions.api_options.allowEmpty,
-                iconLibraries:    iconPickerOptions.api_options.iconLibraries,
-                iconLibrariesCss: iconPickerOptions.api_options.iconLibrariesCss,
-                onSelect: function(jsonIconData) {
-                  // copy selected icon to clipboard (iconClass)
-                  var copyFrom = document.createElement('textarea');
-                  copyFrom.value = jsonIconData.iconClass;
-                  document.body.appendChild(copyFrom);
-                  copyFrom.select();
-                  document.execCommand('copy');
-                  // Remove data element from body
-                  setTimeout(function () {
-                    document.body.removeChild(copyFrom);
-                  }, 500);
-                }
-              });
-
-              // save config settings into the toccer object for later access
-              //
-              _this['icon_picker']    = icon_picker;
-              _this['moduleOptions']  = iconPickerOptions;
-
-              _this.setState('finished');
-              logger.debug('\n' + 'state: ' + _this.getState());
-              logger.info('\n' + 'initializing module finished');
-
-              clearInterval(dependencies_met_picker_button_ready);
-            }
+              clearInterval(dependencies_met_modules_ready);
+            } // END if modules loaded
           }, 10);
-          
-          clearInterval(dependencies_met_page_ready);
-        }
-      }, 10);
 
+          const dummy = document.getElementById('dummy');
+          dummy.remove();
+
+          var wrapperContainer = document.getElementById('icon_library_select_wrapper');
+          wrapperContainer.classList.add('mb-10');
+
+          clearInterval(dependencies_met_page_ready);
+        } // END if page loaded
+      }, 10);
     }, // END init
 
     // -------------------------------------------------------------------------
