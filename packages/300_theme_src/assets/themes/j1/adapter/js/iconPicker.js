@@ -100,6 +100,13 @@ var _this;
 var logger;
 var logText;
 
+// date|time
+var startTime;
+var endTime;
+var startTimeModule;
+var endTimeModule;
+var timeSeconds;
+
   // ---------------------------------------------------------------------------
   // Main object
   // ---------------------------------------------------------------------------
@@ -139,7 +146,9 @@ var logText;
         var pageVisible     = (pageState == 'block') ? true : false;
         var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
 
+
         if (j1CoreFinished && pageVisible) {
+          startTimeModule       = Date.now();
           icon_picker_button_id = '#' + iconPickerOptions.picker_button_id;
 
           _this.setState('started');
@@ -180,15 +189,26 @@ var logText;
               logger.debug('\n' + 'state: ' + _this.getState());
               logger.info('\n' + 'initializing module finished');
 
+              endTimeModule = Date.now();
+              logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+
               clearInterval(dependencies_met_picker_button_ready);
             }
           }, 10);
-          
+
           clearInterval(dependencies_met_page_ready);
         }
       }, 10);
 
     }, // END init
+
+    // -------------------------------------------------------------------------
+    // int2float()
+    // convert an integer to float using given precision (default: 2 decimals)
+    // -------------------------------------------------------------------------
+    int2float: function (number, precision=2) {
+      return number.toFixed(precision);
+    },
 
     // -------------------------------------------------------------------------
     // messageHandler()

@@ -445,6 +445,9 @@ const httpError500      = geminiOptions.errors.http500;
       promptHstoryEnabled     = geminiOptions.prompt_history_enabled;
       promptHistoryFromCookie = geminiOptions.prompt_history_from_cookie;
 
+      var data;
+      var option;
+
       // module loader
       _this.loadModules();
 
@@ -487,71 +490,82 @@ const httpError500      = geminiOptions.errors.http500;
           textarea        = document.getElementById(geminiOptions.prompt_id);
           textarea.value  = '';
 
-          // initialize history array from cookie
-          if (promptHstoryEnabled && promptHistoryFromCookie) {
-            // get slimSelect object for the history (placed by slimSelect adapter)
-            // selectList                      = document.getElementById('prompt_history');
-            $slimSelect                     =  j1.adapter.slimSelect.select[geminiOptions.prompt_history_id];
+          var dependencies_met_select_ready = setInterval(() => {
+            var selectState         = $('#container_prompt_history_select_wrapper').length;
+            var selectReady         = (selectState > 0) ? true : false;
 
-            // limit the prompt history
-            promptHistoryMax                = geminiOptions.prompt_history_max;
+            if (selectReady) {
+              logger.info('\n' + 'initializing select data');
 
-            // allow|reject duplicates for the history
-            allowPromptHistoryDuplicates    = geminiOptions.allow_prompt_history_duplicates;
+              // initialize history array from cookie
+              if (promptHstoryEnabled && promptHistoryFromCookie) {
+                // get slimSelect object for the history (placed by slimSelect adapter)
+                // selectList                      = document.getElementById('prompt_history');
+                $slimSelect                     =  j1.adapter.slimSelect.select[geminiOptions.prompt_history_id];
 
-            // allow|reject history updates if promptHistoryMax reached
-            allowPromptHistoryUpdatesOnMax  = geminiOptions.allow_prompt_history_updates_on_max;
+                // limit the prompt history
+                promptHistoryMax                = geminiOptions.prompt_history_max;
 
-            logger.debug('\n' + 'read prompt history from cookie');
-            var data    = [];
-            var option  = {};
-            chat_prompt = j1.existsCookie(cookie_names.chat_prompt)
-              ? j1.readCookie(cookie_names.chat_prompt)
-              : {};
+                // allow|reject duplicates for the history
+                allowPromptHistoryDuplicates    = geminiOptions.allow_prompt_history_duplicates;
 
-            // convert chat prompt object to array
-            textHistory = Object.values(chat_prompt);
+                // allow|reject history updates if promptHistoryMax reached
+                allowPromptHistoryUpdatesOnMax  = geminiOptions.allow_prompt_history_updates_on_max;
 
-            // remove duplicates from history
-            if (!allowPromptHistoryDuplicates && textHistory.length > 1) {
-              var textHistoryLenght = textHistory.length;
-              var uniqueArray       = [...new Set(textHistory)];                // create a 'Set' from the history array to automatically remove duplicates
+                logger.debug('\n' + 'read prompt history from cookie');
+                var data    = [];
+                var option  = {};
+                chat_prompt = j1.existsCookie(cookie_names.chat_prompt)
+                  ? j1.readCookie(cookie_names.chat_prompt)
+                  : {};
 
-              textHistory = uniqueArray;
-              if (textHistoryLenght > textHistory.length) {
-                logger.debug('\n' + 'removed duplicates from history array: ' + (textHistoryLenght - textHistory.length) + ' element|s');
-              }
-            } // END if !allowHistoryDupicates
+                // convert chat prompt object to array
+                textHistory = Object.values(chat_prompt);
 
-            // update|set slimSelect data elements
-            data   = [];
-            option = {};
-            textHistory.forEach(function(historyText) {
-              option = {
-                text: historyText,
-                display: true,
-                selected: false,
-                disabled: false
-              }
-              data.push(option);
-            }); // END forEach
-            $slimSelect.setData(data);
+                // remove duplicates from history
+                if (!allowPromptHistoryDuplicates && textHistory.length > 1) {
+                  var textHistoryLenght = textHistory.length;
+                  var uniqueArray       = [...new Set(textHistory)];                // create a 'Set' from the history array to automatically remove duplicates
 
-            // display history container
-            if (textHistory.length > 0) {
-              $("#prompt_history_container").show();
-            }
+                  textHistory = uniqueArray;
+                  if (textHistoryLenght > textHistory.length) {
+                    logger.debug('\n' + 'removed duplicates from history array: ' + (textHistoryLenght - textHistory.length) + ' element|s');
+                  }
+                } // END if !allowHistoryDupicates
 
-            // -----------------------------------------------------------------
-            // sliemSelect event handlers
-            // -----------------------------------------------------------------
-            //
-            _this.slim_select_eventHandler();
+                // update|set slimSelect data elements
+                data   = [];
+                option = {};
+                textHistory.forEach(function(historyText) {
+                  option = {
+                    text: historyText,
+                    display: true,
+                    selected: false,
+                    disabled: false
+                  }
+                  data.push(option);
+                }); // END forEach
+                $slimSelect.setData(data);
 
-          } else {
-            // disable|hide clear history button
-            $("#clear").hide();
-          } // if promptHstoryEnabled
+                // display history container
+                if (textHistory.length > 0) {
+                  $("#prompt_history_container").show();
+                }
+
+                // -----------------------------------------------------------------
+                // sliemSelect event handlers
+                // -----------------------------------------------------------------
+                //
+                _this.slim_select_eventHandler();
+
+              } else {
+                // disable|hide clear history button
+                $("#clear").hide();
+              } // if promptHstoryEnabled
+
+              clearInterval(dependencies_met_select_ready);
+            } // END if modules loaded
+          }, 10);
 
           // -------------------------------------------------------------------
           // button event handlers
