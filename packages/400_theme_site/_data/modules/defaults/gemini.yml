@@ -264,32 +264,32 @@ defaults:
   # ----------------------------------------------------------------------------
   prompt:
     size:                               7
-    title:                              Your request
+    title:                              Prompt
     default: >
                                         Please provide tips on how using the prompt
-                                        for a chat bot.
+                                        for a chat bot
     placeholder: >
                                         Please enter a clear and concise text that conveys
-                                        the task or question you want the chatbot to perform.
+                                        the task or question you want the chatbot to perform
 
   # UI buttons
   # ----------------------------------------------------------------------------
   buttons:
     generate:
       id:                               send
-      name:                             Process request
+      name:                             Process prompt
     reset:
       id:                               reset
-      name:                             Reset request
+      name:                             Reset prompt
     clear:
       id:                               clear
-      name:                             Clear request history
+      name:                             Clear last prompts
 
   # UI titles
   # ----------------------------------------------------------------------------
   titles:
     result:                             Response
-    request_history:                    Request history
+    request_history:                    Last Prompts
     errorInfo:                          API request failure
 
   # Gemini API errors

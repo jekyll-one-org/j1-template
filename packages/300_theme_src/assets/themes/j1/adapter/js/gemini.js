@@ -424,7 +424,7 @@ const httpError500      = geminiOptions.errors.http500;
     // init()
     // adapter initializer
     // -------------------------------------------------------------------------
-    init: function (options) {
+    init: (options) => {
 
       // -----------------------------------------------------------------------
       // default module settings
@@ -556,25 +556,12 @@ const httpError500      = geminiOptions.errors.http500;
                 }); // END forEach
                 $slimSelect.setData(data);
 
-                // add EventListeners
-                index = 1;
-                data  = $slimSelect.getData();
-                data.forEach((dummy) => {
-                  var span        = 'opt_prompt_history_' + index;
-                  var spanElement = document.getElementById(span);
-
-                  spanElement.addEventListener('click', function(event) {
-                    // suppress default actions|bubble up
-                    event.preventDefault();
-                    event.stopPropagation();
-
-                    console.warn('option text: ' + event.currentTarget.nextSibling.data);
-                    $slimSelect.close();
-
-                  }); // END addEventListener
-
-                  index++;
-                }); // END forEach data
+                // -------------------------------------------------------------
+                // CREATE history event handlers
+                // -------------------------------------------------------------
+                if (data.length) {
+                  _this.historyEventListeners(data);
+                }
 
                 // display history container
                 if (textHistory.length > 0) {
@@ -604,8 +591,9 @@ const httpError500      = geminiOptions.errors.http500;
           // send request to generate results
           const sendButton = document.getElementById('{{gemini_options.buttons.generate.id}}');
           sendButton.addEventListener('click', (event) => {
-            // suppress bubble up|default actions
+            // suppress default actions|bubble up
             event.preventDefault();
+            event.stopPropagation();
 
             if (promptHstoryEnabled) {
               var historySet = false;
@@ -705,25 +693,12 @@ const httpError500      = geminiOptions.errors.http500;
               }); // END forEach
               $slimSelect.setData(data);
 
-              // add EventListeners
-              index = 1;
-              data  = $slimSelect.getData();
-              data.forEach((dummy) => {
-                var span        = 'opt_prompt_history_' + index;
-                var spanElement = document.getElementById(span);
-
-                spanElement.addEventListener('click', function(event) {
-                  // suppress default actions|bubble up
-                  event.preventDefault();
-                  event.stopPropagation();
-
-                  console.warn('option text: ' + event.currentTarget.nextSibling.data);
-                  $slimSelect.close();
-
-                }); // END addEventListener
-
-                index++;
-              }); // END forEach data
+              // ---------------------------------------------------------------
+              // UPDATE history event handlers
+              // ---------------------------------------------------------------
+              if (data.length) {
+                _this.historyEventListeners(data);
+              }
 
               // display history container
               if (textHistory.length > 0) {
@@ -753,8 +728,9 @@ const httpError500      = geminiOptions.errors.http500;
           // Clear input prompt and the spinner|responses
           const resetButton = document.getElementById('{{gemini_options.buttons.reset.id}}');
           resetButton.addEventListener('click', (event) => {
-            // suppress bubble up|default actions
+            // suppress default actions|bubble up
             event.preventDefault();
+            event.stopPropagation();
 
             document.getElementById("prompt").value   = '';
             document.getElementById("response").value = '';
@@ -765,8 +741,9 @@ const httpError500      = geminiOptions.errors.http500;
           // Clear history|cookie
           const clearButton = document.getElementById('{{gemini_options.buttons.clear.id}}');
           clearButton.addEventListener('click', (event) => {
-            // suppress bubble up|default actions
+            // suppress default actions|bubble up
             event.preventDefault();
+            event.stopPropagation();
 
             logStartOnce = false;
             $('#clearHistory').modal('show');
@@ -795,21 +772,20 @@ const httpError500      = geminiOptions.errors.http500;
                   domain: auto_domain,
                   secure: secure
                 });
-
                 cookie_written = j1.writeCookie({
                   name:     cookie_names.chat_prompt,
                   data:     {},
                   secure:   secure
                 });
               }
-
               $("#prompt_history_container").hide();
             }); // END accecptClearHistory(click)
 
             // skip clear history
             dismissClearHistory.addEventListener('click', (event) => {
-              // suppress bubble up|default actions
+              // suppress default actions|bubble up
               event.preventDefault();
+              event.stopPropagation();
 
               logger.debug('\n' + 'skipped clearHistory');
             }); // END dismissClearHistoryButton (click)
@@ -833,7 +809,7 @@ const httpError500      = geminiOptions.errors.http500;
     // loadModules()
     // Module loader
     // -------------------------------------------------------------------------
-    loadModules: function () {
+    loadModules: () => {
 
       if (geminiOptions.detect_geo_location) {
         leafletScript.async   = true;
@@ -902,7 +878,7 @@ const httpError500      = geminiOptions.errors.http500;
     // loadUI()
     // UI loader
     // -------------------------------------------------------------------------
-    loadUI: function () {
+    loadUI: () => {
       j1.loadHTML ({
           xhr_container_id: geminiOptions.xhr_container_id,
           xhr_data_path:    geminiOptions.xhr_data_path,
@@ -922,7 +898,7 @@ const httpError500      = geminiOptions.errors.http500;
 
     }, // END loadUI
 
-    slim_select_eventHandler: function () {
+    slim_select_eventHandler: () => {
       // See: https://slimselectjs.com/
       //
       var select  = document.getElementById(geminiOptions.prompt_history_id);
@@ -1010,7 +986,7 @@ const httpError500      = geminiOptions.errors.http500;
     // int2float()
     // convert an integer to float using given precision (default: 2 decimals)
     // -------------------------------------------------------------------------
-    int2float: function (number, precision=2) {
+    int2float: (number, precision=2) => {
       return number.toFixed(precision);
     },
 
@@ -1018,7 +994,7 @@ const httpError500      = geminiOptions.errors.http500;
     // getTimeLeft()
     // calulates the time left
     // -------------------------------------------------------------------------
-    getTimeLeft: function (endDate) {
+    getTimeLeft: (endDate) => {
       // Get the current date and time
       const now = new Date();
 
@@ -1054,7 +1030,7 @@ const httpError500      = geminiOptions.errors.http500;
     // deleteSlimOption()
     // delete an option from SlimSelect
     // -------------------------------------------------------------------------
-    deleteSlimOption: function (slimSelect, optionValue) {
+    deleteSlimOption: (slimSelect, optionValue) => {
       // Find the option to delete
       var optionToDelete = document.querySelector('#mySelect option[value="' + optionValue + '"]');
 
@@ -1066,21 +1042,115 @@ const httpError500      = geminiOptions.errors.http500;
     },
 
     // -------------------------------------------------------------------------
-    // handleClickFunction()
-    // ???
+    // historyEventListeners)
+    // Add events for all hitsory elements for deletion
     // -------------------------------------------------------------------------
-    // handleClickFunction: function (e) {
-    //   var event = e;
-    //
-    //   // Code to be executed on click
-    //   alert("You clicked the span!");
-    // },
+    historyEventListeners: (slimSelectData) => {
+      var index     = 1;
+
+      // process all (slim) data elements
+      slimSelectData.forEach( () => {
+        var span        = 'opt_prompt_history_' + index;
+        var spanElement = document.getElementById(span);
+        var newData;
+
+        spanElement.addEventListener('click', (event) => {
+          var optionText  = event.currentTarget.nextSibling.data;
+          var logger      = log4javascript.getLogger('j1.adapter.gemini');
+          var slimData    = $slimSelect.getData();
+          var textHistory = [];
+          var chatHistory = j1.existsCookie(cookie_names.chat_prompt)
+            ? j1.readCookie(cookie_names.chat_prompt)
+            : {};
+          var foundItem;
+          var newHistory;
+
+          // suppress default actions|bubble up
+          event.preventDefault();
+          event.stopPropagation();
+
+          // update slimSelect data
+          foundItem = -1;
+          for (let i = 0; i < slimData.length; i++) {
+            if (slimData[i].text === optionText) {
+              foundItem = i;
+              break;
+            }
+          }
+
+          if (foundItem !== -1) {
+            delete slimData[foundItem];
+
+            // create new reindexed data object
+            newData = Object.values(slimData);
+            // update the select
+            $slimSelect.setData(newData);
+          }
+
+          // update prompt history data
+          foundItem = -1;
+          // convert chat prompt object to array
+          textHistory = Object.values(chatHistory);
+          for (let i = 0; i < textHistory.length; i++) {
+            if (textHistory[i] === optionText) {
+              foundItem = i;
+              break;
+            }
+          }
+
+          if (foundItem !== -1) {
+            delete textHistory[foundItem];
+
+            // create new reindexed data object
+            newHistory = Object.values(textHistory);
+
+            // remove duplicates from history
+            if (newHistory.length > 1 && !allowPromptHistoryDuplicates) {
+              // create a 'Set' from the history array to automatically remove duplicates
+              var uniqueArray       = [...new Set(newHistory)];
+              newHistory = Object.values(uniqueArray);
+            } // END if allowHistoryDupicates
+
+            // update the prompt history
+            if (promptHistoryFromCookie) {
+              logger.debug('\n' + 'save prompt history to cookie');
+              j1.removeCookie({
+                name:   cookie_names.chat_prompt,
+                domain: auto_domain,
+                secure: secure
+              });
+
+              if (newHistory.length > 0) {
+                cookie_written = j1.writeCookie({
+                  name:   cookie_names.chat_prompt,
+                  data:   newHistory,
+                  secure: secure
+                });
+              } else {
+                cookie_written = j1.writeCookie({
+                  name:   cookie_names.chat_prompt,
+                  data:   {},
+                  secure: secure
+                });
+                console.log('j1.adapter.gemini' + '\n' + 'hide prompt history on last element deleted');
+                $("#prompt_history_container").hide();
+              } // END if length
+            } // END if promptHistoryFromCookie
+          }
+
+          // $slimSelect.close();
+          console.log('j1.adapter.gemini' + '\n' + 'option deleted: ' + optionText);
+        }); // END addEventListener
+
+        index++;
+      }); // END forEach data
+    }, // END historyEventListeners
 
     // -------------------------------------------------------------------------
     // messageHandler()
     // manage messages send from other J1 modules
     // -------------------------------------------------------------------------
-    messageHandler: function (sender, message) {
+    messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
@@ -1109,7 +1179,7 @@ const httpError500      = geminiOptions.errors.http500;
     // setState()
     // Sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: function (stat) {
+    setState: (stat) => {
       _this.state = stat;
     }, // END setState
 
@@ -1117,7 +1187,7 @@ const httpError500      = geminiOptions.errors.http500;
     // getState()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: function () {
+    getState: () => {
       return _this.state;
     } // END getState
 

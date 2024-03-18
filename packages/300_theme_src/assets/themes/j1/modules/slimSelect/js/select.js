@@ -5,7 +5,7 @@
  * Licensed MIT © Brian Voelker
  * https://github.com/brianvoe/slim-select/blob/master/LICENSE
  */
- 
+
  (function (global, factory) {
      typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
      typeof define === 'function' && define.amd ? define(factory) :
@@ -451,6 +451,8 @@
                  deselect.classList.remove(this.classes.hide);
              }
              deselect.onclick = (e) => {
+                 // jadams
+                 // e.preventDefault();
                  e.stopPropagation();
                  if (this.settings.disabled) {
                      return;

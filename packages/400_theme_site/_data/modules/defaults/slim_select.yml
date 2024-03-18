@@ -40,7 +40,7 @@ defaults:
   # contentLocation:                    document.getElementById('body')         # document.body, currently NOT supported
     contentPosition:                    absolute
     openPosition:                       auto                                    # options: auto, up, down
-    placeholderText:                    Select value
+    placeholderText:                    Select an item
     allowDeselect:                      false
     hideSelected:                       false
     showOptionTooltips:                 false

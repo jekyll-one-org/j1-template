@@ -1,6 +1,6 @@
 ---
 title:                                  Chatbot
-title_extention:                        Preview the Gemini Chatbot
+title_extention:                        Preview the Chatbot
 tagline:                                Preview
 
 date:                                   2024-02-27
@@ -249,7 +249,7 @@ region you are located.
 
 
 [role="mt-5"]
-== Ask the Bot
+== Chatbot
 
 The _Google Gemini_ platform provides a *ChatBot* system using a significant
 advancement in the field of LLMs. The ability to process information from
@@ -257,12 +257,15 @@ multiple sources, text and images, and its flexible architecture makes it
 a powerful tool for many applications and websites.
 
 [role="mt-4"]
-=== Examples for Prompts
+=== Example Prompts
 
-Find below some examples of what can be used for a prompt. KI-based chatbots
-can do much more than a complex internet search. Let the bot write a
-*bedtime story*, do translations, and help summarize the larger text.
-Furthermore, a bot can support you in evaluations or requests for guidance.
+Find examples of what can be used for a prompt below. AI-based chatbots can
+do much more than an internet search. Let the bot write a *bedtime story*,
+let them do a *translation*, or help to *summarize* a larger text. Furthermore,
+a bot can support you in evaluating or making requests for guidance.
+
+Copy and paste one of the examples to be used as a prompt. Go for
+<<Ask the Bot>> to see the response of the bot.
 
 .Places
 [source, text, role="mb-4"]
@@ -419,12 +422,21 @@ Why are people in the USA so fat?
 Write a generic text that contains misleading information on a male person.
 ----
 
-
 [role="mt-4"]
-=== Generate
+=== Ask the Bot
 
 You can enter your requests in the input field *Your request*. If you need
 help on formulating such requests, leave the input field *empty* and start
 to *process* a request.
 
-gemini::gemini_ui[]
+[role="mt-4 mb-5"]
+.Example Prompts
+[TIP]
+====
+From the previous section <<Example Prompts>>, you can find examples sorted
+by typical requests. The examples demonstrate use cases the Bot can process.
+If you're using AI-based Bots seldom, checking the examples to learn what
+is possible to request is recommended.
+====
+
+gemini::gemini_ui[role="mb-10"]
