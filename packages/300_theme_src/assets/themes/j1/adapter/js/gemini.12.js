@@ -181,7 +181,7 @@ const httpError500      = geminiOptions.errors.http500;
 // Helper functions
 // -----------------------------------------------------------------------------
 
-  function addPromptHistoryEventListeners(slimSelectData) {
+  function addHistoryEventListeners(slimSelectData) {
     // process all (slim) data elements
     index = 1;
     slimSelectData.forEach( () => {
@@ -191,14 +191,17 @@ const httpError500      = geminiOptions.errors.http500;
       var dependencies_met_span_ready = setInterval (() => {
         var spanElementReady = (($(spanElement).length) !== 0) ? true : false;
         if (spanElementReady) {
+//        spanElement.onclick = spanElementEventListener;
           spanElement.addEventListener('click', spanElementEventListener);
+          // index++;
 
           clearInterval(dependencies_met_span_ready);
         }
       }, 10);
+
       index++;
     }); // END forEach data
-  } // END addPromptHistoryEventListeners
+  } // END addHistoryEventListeners
 
   function spanElementEventListener(event) {
     var optionText  = event.currentTarget.nextSibling.data;
@@ -286,10 +289,16 @@ const httpError500      = geminiOptions.errors.http500;
     }
 
     // TODO: check why re-adding of events is required
-    slimData = $slimSelect.getData();
-    if (slimData.length) {
-      addPromptHistoryEventListeners(slimData)
-    }
+    addHistoryEventListeners(slimData);
+    setTimeout(() => {
+      addHistoryEventListeners(slimData);
+    }, 500);
+
+    // if (slimData.length) {
+    //   // setTimeout(() => {
+    //   //   addHistoryEventListeners(slimData);
+    //   // }, 500);
+    // }
 
     console.log('j1.adapter.gemini' + '\n' + 'option deleted: ' + optionText);
     $slimSelect.close();
@@ -671,10 +680,10 @@ const httpError500      = geminiOptions.errors.http500;
                 $slimSelect.setData(data);
 
                 // -------------------------------------------------------------
-                // CREATE addPromptHistoryEventListeners
+                // CREATE history event handlers
                 // -------------------------------------------------------------
                 if (data.length) {
-                  addPromptHistoryEventListeners(data);
+                  addHistoryEventListeners(data);
                 }
 
                 // display history container
@@ -808,10 +817,10 @@ const httpError500      = geminiOptions.errors.http500;
               $slimSelect.setData(data);
 
               // ---------------------------------------------------------------
-              // UPDATE prompt history event handlers
+              // UPDATE history event handlers
               // ---------------------------------------------------------------
               if (data.length) {
-                addPromptHistoryEventListeners(data);
+                addHistoryEventListeners(data);
               }
 
               // display history container
@@ -1154,23 +1163,6 @@ const httpError500      = geminiOptions.errors.http500;
       // Update SlimSelect
       slimSelect.render();
     },
-
-    // -------------------------------------------------------------------------
-    // historyEventListeners)
-    // Add events for all hitsory elements for deletion
-    // -------------------------------------------------------------------------
-    // historyEventListeners: (slimSelectData) => {
-    //   // process all (slim) data elements
-    //   index = 1;
-    //   slimSelectData.forEach( () => {
-    //     var span        = 'opt_prompt_history_' + index;
-    //     var spanElement = document.getElementById(span);
-    //     var newData;
-    //
-    //     spanElement.addEventListener('click', spanElementEventListener);
-    //     index++;
-    //   }); // END forEach data
-    // }, // END historyEventListeners
 
     // -------------------------------------------------------------------------
     // messageHandler()
