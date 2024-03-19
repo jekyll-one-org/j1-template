@@ -181,114 +181,6 @@ const httpError500      = geminiOptions.errors.http500;
 // Helper functions
 // -----------------------------------------------------------------------------
 
-  function historyEventListeners(slimSelectData) {
-    // process all (slim) data elements
-    index = 1;
-    slimSelectData.forEach( () => {
-      var span        = 'opt_prompt_history_' + index;
-      var spanElement = document.getElementById(span);
-      var newData;
-
-      spanElement.addEventListener('click', spanElementEventListener);
-      index++;
-    }); // END forEach data
-  } // END historyEventListeners
-
-  function spanElementEventListener(event) {
-    var optionText  = event.currentTarget.nextSibling.data;
-    var logger      = log4javascript.getLogger('j1.adapter.gemini');
-    var slimData    = $slimSelect.getData();
-    var textHistory = [];
-    var chatHistory = j1.existsCookie(cookie_names.chat_prompt)
-      ? j1.readCookie(cookie_names.chat_prompt)
-      : {};
-    var foundItem;
-    var newHistory;
-    var newData;
-
-    // suppress default actions|bubble up
-    event.preventDefault();
-    event.stopPropagation();
-
-    // update slimSelect data
-    foundItem = -1;
-    for (let i = 0; i < slimData.length; i++) {
-      if (slimData[i].text === optionText) {
-        foundItem = i;
-        break;
-      }
-    }
-
-    if (foundItem !== -1) {
-      delete slimData[foundItem];
-
-      // create new reindexed data object
-      newData = Object.values(slimData);
-      // update the select
-      $slimSelect.setData(newData);
-    }
-
-    // update prompt history data
-    foundItem = -1;
-    // convert chat prompt object to array
-    textHistory = Object.values(chatHistory);
-    for (let i = 0; i < textHistory.length; i++) {
-      if (textHistory[i] === optionText) {
-        foundItem = i;
-        break;
-      }
-    }
-
-    if (foundItem !== -1) {
-      delete textHistory[foundItem];
-
-      // create new reindexed data object
-      newHistory = Object.values(textHistory);
-
-      // remove duplicates from history
-      if (newHistory.length > 1 && !allowPromptHistoryDuplicates) {
-        // create a 'Set' from the history array to automatically remove duplicates
-        var uniqueArray       = [...new Set(newHistory)];
-        newHistory = Object.values(uniqueArray);
-      } // END if allowHistoryDupicates
-
-      // update the prompt history
-      if (promptHistoryFromCookie) {
-        logger.debug('\n' + 'save prompt history to cookie');
-        j1.removeCookie({
-          name:   cookie_names.chat_prompt,
-          domain: auto_domain,
-          secure: secure
-        });
-
-        if (newHistory.length > 0) {
-          cookie_written = j1.writeCookie({
-            name:   cookie_names.chat_prompt,
-            data:   newHistory,
-            secure: secure
-          });
-        } else {
-          cookie_written = j1.writeCookie({
-            name:   cookie_names.chat_prompt,
-            data:   {},
-            secure: secure
-          });
-          console.log('j1.adapter.gemini' + '\n' + 'hide prompt history on last element deleted');
-          $("#prompt_history_container").hide();
-        } // END if length
-      } // END if promptHistoryFromCookie
-    }
-
-    // TODO: check why re-adding of events is required
-    slimData = $slimSelect.getData();
-    if (slimData.length) {
-      historyEventListeners(slimData)
-    }
-
-    console.log('j1.adapter.gemini' + '\n' + 'option deleted: ' + optionText);
-    $slimSelect.close();
-  } // END  spanElementEventListener
-
   // Log the geolocation position
   function showPosition(position) {
      latitude = position.coords.latitude;
@@ -668,8 +560,7 @@ const httpError500      = geminiOptions.errors.http500;
                 // CREATE history event handlers
                 // -------------------------------------------------------------
                 if (data.length) {
-//                _this.historyEventListeners(data);
-                  historyEventListeners(data);
+                  _this.historyEventListeners(data);
                 }
 
                 // display history container
@@ -806,8 +697,7 @@ const httpError500      = geminiOptions.errors.http500;
               // UPDATE history event handlers
               // ---------------------------------------------------------------
               if (data.length) {
-//              _this.historyEventListeners(data);
-                historyEventListeners(data);
+                _this.historyEventListeners(data);
               }
 
               // display history container
@@ -1155,18 +1045,105 @@ const httpError500      = geminiOptions.errors.http500;
     // historyEventListeners)
     // Add events for all hitsory elements for deletion
     // -------------------------------------------------------------------------
-    // historyEventListeners: (slimSelectData) => {
-    //   // process all (slim) data elements
-    //   index = 1;
-    //   slimSelectData.forEach( () => {
-    //     var span        = 'opt_prompt_history_' + index;
-    //     var spanElement = document.getElementById(span);
-    //     var newData;
-    //
-    //     spanElement.addEventListener('click', spanElementEventListener);
-    //     index++;
-    //   }); // END forEach data
-    // }, // END historyEventListeners
+    historyEventListeners: (slimSelectData) => {
+      // process all (slim) data elements
+      index = 1;
+      slimSelectData.forEach( () => {
+        var span        = 'opt_prompt_history_' + index;
+        var spanElement = document.getElementById(span);
+        var newData;
+
+        spanElement.addEventListener('click', (event) => {
+          var optionText  = event.currentTarget.nextSibling.data;
+          var logger      = log4javascript.getLogger('j1.adapter.gemini');
+          var slimData    = $slimSelect.getData();
+          var textHistory = [];
+          var chatHistory = j1.existsCookie(cookie_names.chat_prompt)
+            ? j1.readCookie(cookie_names.chat_prompt)
+            : {};
+          var foundItem;
+          var newHistory;
+
+          // suppress default actions|bubble up
+          event.preventDefault();
+          event.stopPropagation();
+
+          // update slimSelect data
+          foundItem = -1;
+          for (let i = 0; i < slimData.length; i++) {
+            if (slimData[i].text === optionText) {
+              foundItem = i;
+              break;
+            }
+          }
+
+          if (foundItem !== -1) {
+            delete slimData[foundItem];
+
+            // create new reindexed data object
+            newData = Object.values(slimData);
+            // update the select
+            $slimSelect.setData(newData);
+          }
+
+          // update prompt history data
+          foundItem = -1;
+          // convert chat prompt object to array
+          textHistory = Object.values(chatHistory);
+          for (let i = 0; i < textHistory.length; i++) {
+            if (textHistory[i] === optionText) {
+              foundItem = i;
+              break;
+            }
+          }
+
+          if (foundItem !== -1) {
+            delete textHistory[foundItem];
+
+            // create new reindexed data object
+            newHistory = Object.values(textHistory);
+
+            // remove duplicates from history
+            if (newHistory.length > 1 && !allowPromptHistoryDuplicates) {
+              // create a 'Set' from the history array to automatically remove duplicates
+              var uniqueArray       = [...new Set(newHistory)];
+              newHistory = Object.values(uniqueArray);
+            } // END if allowHistoryDupicates
+
+            // update the prompt history
+            if (promptHistoryFromCookie) {
+              logger.debug('\n' + 'save prompt history to cookie');
+              j1.removeCookie({
+                name:   cookie_names.chat_prompt,
+                domain: auto_domain,
+                secure: secure
+              });
+
+              if (newHistory.length > 0) {
+                cookie_written = j1.writeCookie({
+                  name:   cookie_names.chat_prompt,
+                  data:   newHistory,
+                  secure: secure
+                });
+              } else {
+                cookie_written = j1.writeCookie({
+                  name:   cookie_names.chat_prompt,
+                  data:   {},
+                  secure: secure
+                });
+                console.log('j1.adapter.gemini' + '\n' + 'hide prompt history on last element deleted');
+                $("#prompt_history_container").hide();
+              } // END if length
+            } // END if promptHistoryFromCookie
+          }
+
+          // $slimSelect.close();
+          console.log('j1.adapter.gemini' + '\n' + 'option deleted: ' + optionText);
+        }); // END addEventListener
+
+        index++;
+      }); // END forEach data
+    }, // END historyEventListeners
 
     // -------------------------------------------------------------------------
     // messageHandler()
