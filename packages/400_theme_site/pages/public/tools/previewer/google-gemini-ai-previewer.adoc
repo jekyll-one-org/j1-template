@@ -296,6 +296,16 @@ Give the kid some advice on how to be good and do good for society.
 The end of the story should motivate the child to believe in themselves.
 ----
 
+.Advise (Cusine/German)
+[source, text, role="mb-4"]
+----
+Ich möchte einen Salat für eine Grillparty machen.
+Die Gäste mögen Feta, allerdings keine Nüsse und Oliven.
+Die Zubereitung sollte leicht zu verstehen sein.
+Bitte alle Angaben der Zutaten in Gramm.
+Weitere Ideen zum Rezept und zum Anrichten des Salats sind hilfreich.
+----
+
 .Translations I
 [source, text, role="mb-4"]
 ----

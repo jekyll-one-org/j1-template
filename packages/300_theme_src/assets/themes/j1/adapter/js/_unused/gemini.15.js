@@ -157,6 +157,7 @@ var endTimeModule;
 var timeSeconds;
 
 var eventListenersReady;
+var promptHistoryItemDeletionReady = true;
 
 // -----------------------------------------------------------------------------
 // Module variable settings
@@ -182,9 +183,9 @@ const httpError500      = geminiOptions.errors.http500;
   //
   function addPromptHistoryEventListeners(slimSelectData) {
     var index = 1;
-    slimSelectData.forEach (() => {
-      var span        = 'opt_prompt_history_' + index;
-      var spanElement = document.getElementById(span);
+    slimSelectData.forEach( () => {
+      var span             = 'opt_prompt_history_' + index;
+      var spanElement      = document.getElementById(span);
 
       var dependencies_met_span_ready = setInterval (() => {
         var spanElementReady = (($(spanElement).length) !== 0) ? true : false;
@@ -283,6 +284,7 @@ const httpError500      = geminiOptions.errors.http500;
       } // END if promptHistoryFromCookie
     }
 
+    promptHistoryItemDeletionReady = true;
     logger.info('\n' + 'spanElementEventListener, option deleted: ' + optionText);
 
     // close currently required to re-add history prompt events on next beforeOpen
@@ -812,40 +814,12 @@ const httpError500      = geminiOptions.errors.http500;
 
       $select.events.beforeOpen = (e) => {
         // get all options
-        const slimValues   = $select.getData();
+        const slimValues        = $select.getData();
+
         eventListenersReady = false;
+        promptHistoryItemDeletionReady = false;
 
         logger.debug('\n' + 'slimSelect.beforeOpen, processing: started');
-
-        // re-read current history from cookie for initial values
-        if (promptHistoryFromCookie) {
-          var chatHistory = j1.existsCookie(cookie_names.chat_prompt)
-            ? j1.readCookie(cookie_names.chat_prompt)
-            : {};
-
-          // set textHistory array
-          textHistory = Object.values(chatHistory);
-
-          // create|set current slimSelect data elements
-          var index   = 1;
-          var data    = [];
-          var option  = {};
-          var html;
-          textHistory.forEach ((historyText) => {
-            html    = '<span id="opt_' + geminiOptions.prompt_history_id + '_' + index + '" class="ss-option-delete">' + '<i class="mdib mdib-close mdib-16px ml-1 mr-2"></i></span>' + historyText;
-            option  = {
-              text:     historyText,
-              html:     html,
-              display:  true,
-              selected: false,
-              disabled: false
-            }
-            data.push(option);
-            index++;
-          }); // END forEach
-          $slimSelect.setData(data);
-
-        } // END re-read current history from cookie
 
         // set prompt history EventListeners (for option deletion)
         if (slimValues.length) {
@@ -881,7 +855,7 @@ const httpError500      = geminiOptions.errors.http500;
             clearInterval(dependencies_beforeOpen_met_ready);
           }
         }, 10);
-      } // END event beforeOpen
+      }
 
       $select.events.afterClose = (e) => {
         // get selected value (NOTE: one||no selection possible)
@@ -972,20 +946,17 @@ const httpError500      = geminiOptions.errors.http500;
         event.preventDefault();
         event.stopPropagation();
 
+        // re-read current chat history from cookie
+        var chatHistory = j1.existsCookie(cookie_names.chat_prompt)
+          ? j1.readCookie(cookie_names.chat_prompt)
+          : {};
+
+        // set current textHistory
+        textHistory = Object.values(chatHistory);
+
         if (promptHstoryEnabled) {
           var historySet = false;
 
-          // re-read current history from cookie for initial values
-          if (promptHistoryFromCookie) {
-            var chatHistory = j1.existsCookie(cookie_names.chat_prompt)
-              ? j1.readCookie(cookie_names.chat_prompt)
-              : {};
-
-            // set textHistory array
-            textHistory = Object.values(chatHistory);
-          } // END re-read current history from cookie
-
-          // set initial prompt from input (textarea)
           if (textarea.value.length === 0) {
             // use default prompt
             prompt = defaultPrompt.replace(/\s+$/g, '');
@@ -1021,7 +992,7 @@ const httpError500      = geminiOptions.errors.http500;
             logger.debug('\n' + 'sendButton, add new item to history:\n' + textHistory[0]);
 
             historySet = true;
-          } // END update history on promptHistoryMax
+          }
 
           // add new item to history
           if (textHistory.length < promptHistoryMax && !itemExists && !historySet) {
@@ -1037,7 +1008,7 @@ const httpError500      = geminiOptions.errors.http500;
             textHistory.push(newItem);
 
             historySet = true;
-          } // END add new item to history
+          }
 
           // failsafe, cleanup history
           if (textHistory.length > 0) {
@@ -1049,7 +1020,7 @@ const httpError500      = geminiOptions.errors.http500;
               p++;
             }); // END forEach
             logger.debug('\n' + 'sendButton, cleaned history for trailing whitespaces');
-          } // END failsafe, cleanup history
+          }
 
           // remove duplicates from history
           if (textHistory.length > 1 && !allowPromptHistoryDuplicates) {
@@ -1060,7 +1031,7 @@ const httpError500      = geminiOptions.errors.http500;
             if (textHistoryLenght > textHistory.length) {
               logger.debug('\n' + 'sendButton, removed duplicates from history array: ' + (textHistoryLenght - textHistory.length) + ' element|s');
             }
-          } // END remove duplicates from history
+          } // END if allowHistoryDupicates
 
           // create|set slimSelect data elements
           var index   = 1;
@@ -1080,7 +1051,6 @@ const httpError500      = geminiOptions.errors.http500;
             index++;
           }); // END forEach
           $slimSelect.setData(data);
-          // END create|set slimSelect data elements
 
           // display history container
           if (textHistory.length > 0) {
@@ -1100,8 +1070,8 @@ const httpError500      = geminiOptions.errors.http500;
               data:   textHistory,
               secure: secure
             });
-          } // END write current history to cookie
-        } // END if promptHstoryEnabled
+          }
+        }
 
         // clear results
         document.getElementById('md_result').innerHTML = '';
