@@ -249,7 +249,7 @@ region you are located.
 
 
 [role="mt-5"]
-== Chatbot
+== Ask the Bot
 
 The _Google Gemini_ platform provides a *ChatBot* system using a significant
 advancement in the field of LLMs. The ability to process information from
@@ -432,21 +432,21 @@ Why are people in the USA so fat?
 Write a generic text that contains misleading information on a male person.
 ----
 
-[role="mt-4"]
-=== Ask the Bot
+[role="mt-5"]
+=== Send Requests
 
-You can enter your requests in the input field *Your request*. If you need
-help on formulating such requests, leave the input field *empty* and start
-to *process* a request.
+Enter your request for the Gemini Bot in the input field *Prompt*. If you
+need *help* formulating requests, leave the input field *empty* and click
+on *PROCESS PROMPT*.
 
 [role="mt-4 mb-5"]
 .Example Prompts
 [TIP]
 ====
-From the previous section <<Example Prompts>>, you can find examples sorted
-by typical requests. The examples demonstrate use cases the Bot can process.
-If you're using AI-based Bots seldom, checking the examples to learn what
-is possible to request is recommended.
+From the previous section <<Example Prompts>>, you can find examples sorted by
+typical requests. The examples demonstrate use cases the bot can process. If
+you're using AI-based bots seldom, it is recommended to check the examples to
+learn what type of prompt it is possible to request from a bot.
 ====
 
-gemini::gemini_ui[role="mb-10"]
+gemini::gemini_ui[role="mb-7"]

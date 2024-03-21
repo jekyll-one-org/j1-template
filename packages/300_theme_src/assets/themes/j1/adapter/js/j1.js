@@ -351,7 +351,7 @@ var j1 = (function (options) {
       // -----------------------------------------------------------------------
       // Global variable settings
       // -----------------------------------------------------------------------
-      var logger              = log4javascript.getLogger('j1.init');
+      var logger              = log4javascript.getLogger('j1');
       var _this               = j1;
       var curr_state          = 'started';
       var gaCookies           = j1.findCookie('_ga');
@@ -475,7 +475,7 @@ var j1 = (function (options) {
           $.ajax(ep_status)
         )
         .then(function(data) {
-          var logger                  = log4javascript.getLogger('j1.init');
+          var logger                  = log4javascript.getLogger('j1');
           user_session                = j1.readCookie(cookie_names.user_session);
           user_session.mode           = 'app';
           user_session.requested_page = window.location.pathname;
@@ -517,7 +517,7 @@ var j1 = (function (options) {
           // jadams, 2018-08-31
           // TODO:  Check why a timeout is required
           setTimeout(() => {
-            var logger                  = log4javascript.getLogger('j1.init');
+            var logger                  = log4javascript.getLogger('j1');
             user_session                = j1.readCookie(cookie_names.user_session);
             user_session.mode           = 'web';
             user_session.requested_page = window.location.pathname;
@@ -851,7 +851,6 @@ var j1 = (function (options) {
       var cb_load_closure = function(banner_id) {
         return function ( responseTxt, statusTxt, xhr ) {
           if ( statusTxt ==  'success' ) {
-            // var logger = log4javascript.getLogger('j1.adapter.xhrData');
             logText = '\n' + 'loading banner completed on id: ' +banner_id;
             logger.info(logText);
             j1.setXhrDataState(banner_id, statusTxt);
@@ -962,7 +961,7 @@ var j1 = (function (options) {
       -------------------------------------------------------------------------- {% endcomment %}
       var cb_load_closure = function(panel_id) {
         return function ( responseTxt, statusTxt, xhr ) {
-          var logger = log4javascript.getLogger('j1.adapter.xhrData');
+          var logger = log4javascript.getLogger('j1.xhrData');
           if ( statusTxt == 'success' ) {
             logText = '\n' + 'loading panel completed on id: ' +panel_id;
             logger.info(logText);
@@ -1061,7 +1060,7 @@ var j1 = (function (options) {
 
       var cb_load_closure = function(footer_id) {
         return function ( responseTxt, statusTxt, xhr ) {
-          var logger = log4javascript.getLogger('j1.adapter.xhrData');
+          var logger = log4javascript.getLogger('j1.xhrData');
           if ( statusTxt ==  'success' ) {
             logText = '\n' + 'footer loaded successfully on id: ' + footer_id;
             logger.info(logText);
@@ -1112,7 +1111,7 @@ var j1 = (function (options) {
     //  to load the current state from the middleware (skipped in WEB mode)
     // -------------------------------------------------------------------------
     finalizePage: function (options) {
-      var logger              = log4javascript.getLogger('j1.adapter.finalizePage');
+      var logger              = log4javascript.getLogger('j1.finalizePage');
       var url                 = new liteURL(window.location.href);
       var baseUrl             = url.origin;
       var secure              = (url.protocol.includes('https')) ? true : false;
@@ -1703,7 +1702,7 @@ var j1 = (function (options) {
     // specified by xhr_container_id, xhr_data_path (options)
     // -------------------------------------------------------------------------
     loadHTML: function (options, mod, status) {
-      var logger            = log4javascript.getLogger('j1.adapter.loadHTML');
+      var logger            = log4javascript.getLogger('j1.loadHTML');
       var selector          = $('#' + options.xhr_container_id);
       var state             = status;
       var observer_options  = {
@@ -1717,7 +1716,7 @@ var j1 = (function (options) {
 
       var cb_load_closure = function(mod, id) {
         return function (responseTxt, statusTxt, xhr) {
-          var logger = log4javascript.getLogger('j1.adapter.loadHTML');
+          var logger = log4javascript.getLogger('j1.loadHTML');
           if ( statusTxt === 'success' ) {
             j1.setXhrDataState(id, statusTxt);
             j1.setXhrDomState(id, 'pending');
@@ -1813,13 +1812,13 @@ var j1 = (function (options) {
     // Load JS data asychronously using jQuery (XHR)
     // -------------------------------------------------------------------------
     loadJS: function (options, mod, status) {
-      var logger  = log4javascript.getLogger('j1.adapter.loadJS');
+      var logger  = log4javascript.getLogger('j1.loadJS');
       var state   = status;
       var logText;
 
       var cb_load_closure = function(mod, id) {
         return function (responseTxt, statusTxt, xhr) {
-          var logger = log4javascript.getLogger('j1.adapter.loadJS');
+          var logger = log4javascript.getLogger('j1.loadJS');
           if ( statusTxt === 'success' ) {
             j1.setXhrDataState(id, statusTxt);
 
@@ -2704,7 +2703,7 @@ var j1 = (function (options) {
     // the content if fully loaded instead using a timeout
     // -------------------------------------------------------------------------
     scrollToAnchor: function () {
-      var logger = log4javascript.getLogger('j1.adapter.scrollToAnchor');
+      var logger = log4javascript.getLogger('j1.scrollToAnchor');
       var scrollOffset;
 
       var dependencies_met_page_displayed = setInterval (() => {
@@ -2940,7 +2939,7 @@ var j1 = (function (options) {
         // logger API used for deveöopment only
         //
         if (development) {
-          var logger = log4javascript.getLogger('PerformanceObserver');
+          var logger = log4javascript.getLogger('j1.PerformanceObserver');
         }
 
         // Use the latest LCP candidate
@@ -2984,7 +2983,7 @@ var j1 = (function (options) {
         // logger API used for deveöopment only
         //
         if (development) {
-          var logger = log4javascript.getLogger('PerformanceObserver');
+          var logger = log4javascript.getLogger('j1.PerformanceObserver');
         }
 
         entries.forEach ((entry) => {
@@ -3044,7 +3043,7 @@ var j1 = (function (options) {
         // logger API used for deveöopment only
         //
         if (development) {
-          var logger = log4javascript.getLogger('ResizeObserver');
+          var logger = log4javascript.getLogger('j1.ResizeObserver');
         }
 
         // get the page height from the DOM

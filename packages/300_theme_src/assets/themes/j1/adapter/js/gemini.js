@@ -139,7 +139,6 @@ var textarea;
 var promptHistoryMax;
 var promptHstoryEnabled;
 var promptHistoryFromCookie;
-var allowPromptHistoryDuplicates;
 var allowPromptHistoryUpdatesOnMax;
 
 var _this;
@@ -250,7 +249,7 @@ const httpError500      = geminiOptions.errors.http500;
       newHistory = Object.values(textHistory);
 
       // remove duplicates from history
-      if (newHistory.length > 1 && !allowPromptHistoryDuplicates) {
+      if (newHistory.length > 1) {
         // create a 'Set' from the history array to automatically remove duplicates
         var uniqueArray       = [...new Set(newHistory)];
         newHistory = Object.values(uniqueArray);
@@ -283,7 +282,7 @@ const httpError500      = geminiOptions.errors.http500;
       } // END if promptHistoryFromCookie
     }
 
-    logger.info('\n' + 'spanElementEventListener, option deleted: ' + optionText);
+    logger.info('\n' + 'spanElementEventListener, option deleted:\n' + optionText);
 
     // close currently required to re-add history prompt events on next beforeOpen
     $slimSelect.close();
@@ -620,9 +619,6 @@ const httpError500      = geminiOptions.errors.http500;
                 // limit the prompt history
                 promptHistoryMax                = geminiOptions.prompt_history_max;
 
-                // allow|reject duplicates for the history
-                allowPromptHistoryDuplicates    = geminiOptions.allow_prompt_history_duplicates;
-
                 // allow|reject history updates if promptHistoryMax reached
                 allowPromptHistoryUpdatesOnMax  = geminiOptions.allow_prompt_history_updates_on_max;
 
@@ -637,7 +633,7 @@ const httpError500      = geminiOptions.errors.http500;
                 textHistory = Object.values(chat_prompt);
 
                 // remove duplicates from history
-                if (!allowPromptHistoryDuplicates && textHistory.length > 1) {
+                if (textHistory.length > 1) {
                   var textHistoryLenght = textHistory.length;
                   var uniqueArray       = [...new Set(textHistory)];                // create a 'Set' from the history array to automatically remove duplicates
 
@@ -1052,7 +1048,7 @@ const httpError500      = geminiOptions.errors.http500;
           } // END failsafe, cleanup history
 
           // remove duplicates from history
-          if (textHistory.length > 1 && !allowPromptHistoryDuplicates) {
+          if (textHistory.length > 1) {
             var textHistoryLenght = textHistory.length;
             var uniqueArray       = [...new Set(textHistory)];              // create a 'Set' from the history array to automatically remove duplicates
 

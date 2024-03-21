@@ -60,12 +60,9 @@ settings:
   # MODULE options
   # ----------------------------------------------------------------------------
   #
-# prompt_history_max:                   3
   prompt_history_enabled:               true
   prompt_history_from_cookie:           true
   allow_prompt_history_updates_on_max:  true
-
-# allow_prompt_history_duplicates:      true
 
   # ----------------------------------------------------------------------------
   # API options

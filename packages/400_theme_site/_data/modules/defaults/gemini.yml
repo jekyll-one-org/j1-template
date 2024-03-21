@@ -108,14 +108,6 @@ defaults:
   #   values:                           [true|false]
   #   default:                          false
   #
-  #   allow_prompt_history_duplicates
-  #   --------------------------------------------------------------------------
-  #   If set to 'true', duplicates allowed AND added to the prompt history.
-  #   If set to 'false', duplicates are NOT added to the prompt history.
-  #
-  #   values:                           [true|false]
-  #   default:                          false
-  #
   #   allow_prompt_history_updates_on_max
   #   --------------------------------------------------------------------------
   #   If set to 'true', duplicates allowed in the prompt history.
@@ -257,7 +249,6 @@ defaults:
   prompt_history_max:                   30
   prompt_history_enabled:               false
   prompt_history_from_cookie:           false
-  allow_prompt_history_duplicates:      false
   allow_prompt_history_updates_on_max:  false
 
   # UI prompt (input)
@@ -266,11 +257,11 @@ defaults:
     size:                               7
     title:                              Prompt
     default: >
-                                        Please provide tips on how using the prompt
-                                        for a chat bot
+                                        Please provide tips on how to use a prompt
+                                        for the chatbot
     placeholder: >
-                                        Please enter a clear and concise text that conveys
-                                        the task or question you want the chatbot to perform
+                                        Please enter a text describing the task or question
+                                        for which the chatbot should process
 
   # UI buttons
   # ----------------------------------------------------------------------------
