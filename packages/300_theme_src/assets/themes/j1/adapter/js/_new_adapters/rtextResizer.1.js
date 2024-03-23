@@ -6,11 +6,12 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/customModule.js
- # Liquid template to adapt a custom module
+ # ~/assets/themes/j1/adapter/js/rtextResizer.js
+ # Liquid template to adapt rtextResizer functions (currently NOT used)
  #
  # Product/Info:
  # https://jekyll.one
+ #
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
@@ -18,36 +19,38 @@ regenerate:                             true
  # -----------------------------------------------------------------------------
  # Test data:
  #  {{ liquid_var | debug }}
- #  {{ dropdowns_options | debug }}
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
-{% comment %} Liquid procedures
--------------------------------------------------------------------------------- {% endcomment %}
-
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment       = site.environment %}
-{% assign asset_path        = "/assets/themes/j1" %}
+{% assign environment                 = site.environment %}
+{% assign template_name               = site.template.name %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
 
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config   = site.data.j1_config %}
-{% assign blocks            = site.data.blocks %}
-{% assign modules           = site.data.modules %}
+{% assign data                        = site.data %}
+{% assign apps                        = data.apps %}
+{% assign blocks                      = data.blocks %}
+{% assign builder                     = data.builder %}
+{% assign layouts                     = data.layouts %}
+{% assign modules                     = data.modules %}
+{% assign pages                       = data.pages %}
+{% assign tables                      = data.tables %}
 
-{% comment %} Set config data (unused)
---------------------------------------------------------------------------------
-{% assign custom_module_defaults = modules.defaults.custom_module.defaults %}
-{% assign custom_module_settings = modules.custom_module.settings %}
+{% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
 
-{% comment %} Set config options (unused)
---------------------------------------------------------------------------------
-{% assign custom_module_options  = custom_module_defaults | merge: custom_module_settings %}
+{% comment %} Set config options
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Liquid var initialization
 -------------------------------------------------------------------------------- {% endcomment %}
 
 {% comment %} Detect prod mode
@@ -59,8 +62,8 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/customModule.js
- # J1 Adapter for custom module
+ # ~/assets/themes/j1/adapter/js/rtextResizer.js
+ # Liquid template to adapt rtextResizer functions
  #
  # Product/Info:
  # https://jekyll.one
@@ -70,7 +73,7 @@ regenerate:                             true
  # J1 Template is licensed under the MIT License.
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
- #  Adapter generated: {{site.time}}
+ # Adapter generated: {{site.time}}
  # -----------------------------------------------------------------------------
 */
 
@@ -80,33 +83,18 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.customModule = ((j1, window) => {
+j1.adapter.rtextResizer = ((j1, window) => {
 
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
-  var environment   = '{{environment}}';
-  var moduleOptions = {};
-  var instances     = [];
-  var state         = 'not_started';
-  var frontmatterOptions;
-
+  var environment = '{{environment}}';
+  var state       = 'not_started';
   var _this;
   var logger;
   var logText;
 
-  // date|time
-  var startTime;
-  var endTime;
-  var startTimeModule;
-  var endTimeModule;
-  var timeSeconds;
-
   // ---------------------------------------------------------------------------
-  // helper functions
-  // ---------------------------------------------------------------------------
-
-  // ---------------------------------------------------------------------------
-  // main
+  // Main object
   // ---------------------------------------------------------------------------
   return {
 
@@ -116,69 +104,125 @@ j1.adapter.customModule = ((j1, window) => {
     init: (options) => {
 
       // -----------------------------------------------------------------------
-      // default module settings
+      // Default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
-        module_name: 'j1.adapter.customModule',
+        module_name: 'j1.adapter.rtextResizer',
         generated:   '{{site.time}}'
       }, options);
 
       // -----------------------------------------------------------------------
-      // global variable settings
+      // Global variable settings
       // -----------------------------------------------------------------------
-      _this   = j1.adapter.dropdowns;
-      logger  = log4javascript.getLogger('j1.adapter.customModule');
+      _this   = j1.adapter.rtextResizer;
+      logger  = log4javascript.getLogger('j1.adapter.rtextResizer');
 
-      // create settings object from frontmatterOptions
-      frontmatterOptions  = options != null ? $.extend({}, options) : {};
-      moduleOptions       = $.extend({}, {{dropdowns_options | replace: 'nil', 'null' | replace: '=>', ':' }});
+      // initialize state flag
+      _this.setState('started');
+      logger.debug('\n' + 'state: ' + _this.getState());
+      logger.info('\n' + 'module is being initialized');
 
-      if (typeof frontmatterOptions !== 'undefined') {
-        moduleOptions = $.extend({}, moduleOptions, frontmatterOptions);;
-      }
+      // -----------------------------------------------------------------------
+      // data loader
+      // -----------------------------------------------------------------------
+      j1.loadHTML ({
+        xhr_container_id:   'rtext_resizer_container',
+        xhr_data_path:      '/assets/data/rtext_resizer/index.html',
+        xhr_data_element:   'rtext_resizer_modal' },
+        'j1.adapter.rtextResizer',
+        'null'
+      );
 
       // -----------------------------------------------------------------------
       // initializer
       // -----------------------------------------------------------------------
-      var dependencies_met_j1_finished = setInterval(() => {
-        var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
+      var dependencies_met_data_loaded = setInterval(() => {
+        var logger = log4javascript.getLogger('j1.adapter.rtextResizer');
 
-        if (j1CoreFinished) {
-          startTimeModule = Date.now();
+        if (j1.xhrDOMState['#rtext_resizer_container'] == 'success') {
+          var $modalContainer = $('#rtext_resizer_modal');
 
-          _this.setState('started');
-          logger.debug('\n' + 'set module state to: ' + _this.getState());
-          logger.info('\n' + 'custom functions are being initialized');
+          logger.info('\n' + 'loading rtext resizer modal finished on id: #' + 'rtext_resizer');
+          logger.info('\n' + 'initialize resizer ui');
 
-          //
-          // place init code here
-          //
+          if ($modalContainer.length) {
+            var environment     = '{{environment}}';
+            var logger          = log4javascript.getLogger('j1.template.rtext-resizer');
+            var $el             = $("main[class*='r-text']");
+            var base_classes    = $("main[class*='r-text']").attr('class').replace(/r-text-[0-9]*/g, '');
+            var r_text_default  = ' r-text-300';
+            var r_text_larger   = ' r-text-400';
+            var r_text_largest  = ' r-text-500';
+            var cl;
+            var value;
+
+            $('input:checkbox[name="textsize-300"]').on('click', (e) => {
+              value = $(this).is(':checked');
+
+              $('input:checkbox[name="textsize-400"]').prop('checked', false);
+              $('input:checkbox[name="textsize-500"]').prop('checked', false);
+
+              if (value == true) {
+                cl = r_text_default;
+              }
+              $el.attr('class', base_classes + cl);
+
+              if(environment === 'development') {
+                logText = 'Changed textsize to: ' +cl;
+                logger.info(logText);
+              }
+              e.stopPropagation();
+            });
+
+            $('input:checkbox[name="textsize-400"]').on('click', (e) => {
+              value = $(this).is(':checked');
+
+              $('input:checkbox[name="textsize-300"]').prop('checked', false);
+              $('input:checkbox[name="textsize-500"]').prop('checked', false);
+
+              if (value == true) {
+                cl = r_text_larger;
+              }
+              $el.attr('class', base_classes + cl);
+
+              if(environment === 'development') {
+                logText = 'Changed textsize to: ' +cl;
+                logger.info(logText);
+              }
+              e.stopPropagation();
+            });
+
+            $('input:checkbox[name="textsize-500"]').on('click', (e) => {
+              value = $(this).is(':checked');
+
+              $('input:checkbox[name="textsize-300"]').prop('checked', false);
+              $('input:checkbox[name="textsize-400"]').prop('checked', false);
+
+              if (value == true) {
+                cl = r_text_largest;
+              }
+              $el.attr('class', base_classes + cl);
+
+              if(environment === 'development') {
+                logText = 'Changed textsize to: ' +cl;
+                logger.info(logText);
+              }
+              e.stopPropagation();
+            });
+
+          } // END form events
+          clearInterval(dependencies_met_data_loaded);
 
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'initializing custom functions: finished');
-
-          endTimeModule = Date.now();
-          logger.info('\n' + 'initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
-        } // END j1CoreFinished
-      }, 10); // END dependencies_met_j1_finished
+          logger.info('\n' + 'initializing module finished');
+          logger.debug('\n' + 'met dependencies for: loadHTML');
+        } // END dependencies_met_data_loaded
+      }, 10);
     }, // END init
 
     // -------------------------------------------------------------------------
-    // custom_module_1
-    // Called by ???
-    // -------------------------------------------------------------------------
-    custom_module_1: (options) => {
-      var logger  = log4javascript.getLogger('j1.adapter.customModule.custom_module_1');
-
-      logText = '\n' + 'entered custom function: custom_module_1';
-      logger.info(logText);
-
-      return true;
-    },
-
-    // -------------------------------------------------------------------------
-    // messageHandler
+    // messageHandler: MessageHandler for J1 CookieConsent module
     // Manage messages send from other J1 modules
     // -------------------------------------------------------------------------
     messageHandler: (sender, message) => {

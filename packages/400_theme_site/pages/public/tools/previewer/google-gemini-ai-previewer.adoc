@@ -31,7 +31,8 @@ regenerate:                             false
 permalink:                              /pages/public/tools/previewer/google-gemini-ai/
 
 resources:                              [
-                                          animate, clipboard, lightbox, rouge,
+                                          animate, advertising,
+                                          clipboard, lightbox, rouge,
                                           gemini
                                         ]
 resource_options:

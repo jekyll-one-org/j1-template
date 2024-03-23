@@ -50,7 +50,7 @@ regenerate:                             true
 
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign comments          = slim_select_options.enabled %}
+{% assign comments             = slim_select_options.enabled %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -84,7 +84,7 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.slimSelect = (function (j1, window) {
+j1.adapter.slimSelect = ((j1, window) => {
 
 // -----------------------------------------------------------------------------
 // Set global variables
@@ -108,15 +108,14 @@ var endTimeModule;
 var timeSeconds;
 
   // ---------------------------------------------------------------------------
-  // Main object
+  // main
   // ---------------------------------------------------------------------------
   return {
 
     // -------------------------------------------------------------------------
-    // init()
     // adapter initializer
     // -------------------------------------------------------------------------
-    init: function (options) {
+    init: (options) => {
 
       // -----------------------------------------------------------------------
       // Default module settings
@@ -140,12 +139,12 @@ var timeSeconds;
       _this.selectHTML    = {};
 
       // -----------------------------------------------------------------------
-      // initializer
+      // module initializer
       // -----------------------------------------------------------------------
       var dependency_met_page_ready = setInterval (() => {
         var pageState      = $('#content').css("display");
-        var pageVisible    = (pageState == 'block') ? true : false;
-        var j1CoreFinished = (j1.getState() == 'finished') ? true : false;
+        var pageVisible    = (pageState === 'block') ? true : false;
+        var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
         if (j1CoreFinished && pageVisible) {
           startTimeModule = Date.now();
@@ -218,7 +217,7 @@ var timeSeconds;
             } // END if wrapperReady
 
             clearInterval(wrapper_dependencies['dependency_met_wrapper_ready_{{select.id}}']);
-          }, 10);
+          }, 10); // END dependency_met_wrapper_ready_
           {% endif %} {% endfor %}
           // END (for) all selects
 
@@ -230,24 +229,15 @@ var timeSeconds;
           logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependency_met_page_ready);
-        } // END 'pageVisible'
-      }, 10);
-
+        } // END pageVisible
+      }, 10); // END dependencies_met_page_ready
     }, // END init
-
-    // -------------------------------------------------------------------------
-    // int2float()
-    // convert an integer to float using given precision (default: 2 decimals)
-    // -------------------------------------------------------------------------
-    int2float: function (number, precision=2) {
-      return number.toFixed(precision);
-    },
 
     // -------------------------------------------------------------------------
     // messageHandler()
     // manage messages send from other J1 modules
     // -------------------------------------------------------------------------
-    messageHandler: function (sender, message) {
+    messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
@@ -276,7 +266,7 @@ var timeSeconds;
     // setState()
     // Sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: function (stat) {
+    setState: (stat) => {
       _this.state = stat;
     }, // END setState
 
@@ -284,7 +274,7 @@ var timeSeconds;
     // getState()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: function () {
+    getState: () => {
       return _this.state;
     } // END getState
 

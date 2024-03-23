@@ -6,8 +6,8 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/customModule.js
- # Liquid template to adapt a custom module
+ # ~/assets/themes/j1/adapter/js/rouge.js
+ # Liquid template to adapt J1 Highlighter (Rouge)
  #
  # Product/Info:
  # https://jekyll.one
@@ -18,7 +18,6 @@ regenerate:                             true
  # -----------------------------------------------------------------------------
  # Test data:
  #  {{ liquid_var | debug }}
- #  {{ dropdowns_options | debug }}
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
@@ -28,6 +27,7 @@ regenerate:                             true
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign environment       = site.environment %}
+{% assign template_version  = site.version %}
 {% assign asset_path        = "/assets/themes/j1" %}
 
 {% comment %} Process YML config data
@@ -36,19 +36,6 @@ regenerate:                             true
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign template_config   = site.data.j1_config %}
-{% assign blocks            = site.data.blocks %}
-{% assign modules           = site.data.modules %}
-
-{% comment %} Set config data (unused)
---------------------------------------------------------------------------------
-{% assign custom_module_defaults = modules.defaults.custom_module.defaults %}
-{% assign custom_module_settings = modules.custom_module.settings %}
--------------------------------------------------------------------------------- {% endcomment %}
-
-{% comment %} Set config options (unused)
---------------------------------------------------------------------------------
-{% assign custom_module_options  = custom_module_defaults | merge: custom_module_settings %}
--------------------------------------------------------------------------------- {% endcomment %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -59,8 +46,8 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/customModule.js
- # J1 Adapter for custom module
+ # ~/assets/themes/j1/adapter/js/rouge.js
+ # J1 Adapter for rouge
  #
  # Product/Info:
  # https://jekyll.one
@@ -70,6 +57,9 @@ regenerate:                             true
  # J1 Template is licensed under the MIT License.
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
+ # Note:
+ #  https://github.com/jirutka/asciidoctor-rouge/issues/9
+ # -----------------------------------------------------------------------------
  #  Adapter generated: {{site.time}}
  # -----------------------------------------------------------------------------
 */
@@ -78,17 +68,23 @@ regenerate:                             true
 // ESLint shimming
 // -----------------------------------------------------------------------------
 /* eslint indent: "off"                                                       */
+/* eslint quotes: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.customModule = ((j1, window) => {
+j1.adapter.rouge = ((j1, window) => {
 
-  {% comment %} Set global variables
-  ------------------------------------------------------------------------------ {% endcomment %}
-  var environment   = '{{environment}}';
-  var moduleOptions = {};
-  var instances     = [];
-  var state         = 'not_started';
-  var frontmatterOptions;
+  // ---------------------------------------------------------------------------
+  // globals
+  // ---------------------------------------------------------------------------
+  var environment             = '{{environment}}';
+  var moduleOptions           = {};
+  var user_state              = {};
+  var cookie_names            = j1.getCookieNames();
+  var cookie_user_state_name  = cookie_names.user_state;
+  var state                   = 'not_started';
+  var user_state_detected;
+  var themeCss;
+  var darkTheme;
 
   var _this;
   var logger;
@@ -101,84 +97,140 @@ j1.adapter.customModule = ((j1, window) => {
   var endTimeModule;
   var timeSeconds;
 
+  var templateOptions = $.extend({}, {{template_config | replace: 'nil', 'null' | replace: '=>', ':' }});
+
   // ---------------------------------------------------------------------------
-  // helper functions
+  // Helper functions
   // ---------------------------------------------------------------------------
 
   // ---------------------------------------------------------------------------
-  // main
+  // Main object
   // ---------------------------------------------------------------------------
   return {
 
     // -------------------------------------------------------------------------
-    // initializer
+    // helper functions
+    // -------------------------------------------------------------------------
+
+    // -------------------------------------------------------------------------
+    // Initializer
     // -------------------------------------------------------------------------
     init: (options) => {
 
       // -----------------------------------------------------------------------
-      // default module settings
+      // Default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
-        module_name: 'j1.adapter.customModule',
+        module_name: 'j1.adapter.rouge',
         generated:   '{{site.time}}'
       }, options);
 
       // -----------------------------------------------------------------------
-      // global variable settings
+      // Global variable settings
       // -----------------------------------------------------------------------
-      _this   = j1.adapter.dropdowns;
-      logger  = log4javascript.getLogger('j1.adapter.customModule');
-
-      // create settings object from frontmatterOptions
-      frontmatterOptions  = options != null ? $.extend({}, options) : {};
-      moduleOptions       = $.extend({}, {{dropdowns_options | replace: 'nil', 'null' | replace: '=>', ':' }});
-
-      if (typeof frontmatterOptions !== 'undefined') {
-        moduleOptions = $.extend({}, moduleOptions, frontmatterOptions);;
-      }
+      _this   = j1.adapter.rouge;
+      logger  = log4javascript.getLogger('j1.adapter.rouge');
 
       // -----------------------------------------------------------------------
       // initializer
       // -----------------------------------------------------------------------
-      var dependencies_met_j1_finished = setInterval(() => {
-        var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
+      var dependency_met_page_ready = setInterval(() => {
+        var pageState      = $('#content').css("display");
+        var pageVisible    = (pageState == 'block') ? true : false;
+        var j1CoreFinished = (j1.getState() == 'finished') ? true : false;
 
-        if (j1CoreFinished) {
+        if (j1CoreFinished && pageVisible) {
           startTimeModule = Date.now();
 
           _this.setState('started');
           logger.debug('\n' + 'set module state to: ' + _this.getState());
-          logger.info('\n' + 'custom functions are being initialized');
+          logger.info('\n' + 'initializing module: started');
 
+          // Detect|Set J1 UserState
+          user_state_detected = j1.existsCookie(cookie_user_state_name);
+          if (user_state_detected) {
+            user_state  = j1.readCookie(cookie_user_state_name);
+            themeCss    = user_state.theme_css;
+            darkTheme   = themeCss.includes('dark') ||
+                          themeCss.includes('cyborg') ||
+                          themeCss.includes('darkly') ||
+                          themeCss.includes('slate') ||
+                          themeCss.includes('superhero');
+          } else {
+            log_text = '\n' + 'user_state cookie not found';
+            logger.warn(log_text);
+          }
+
+          $('.dropdown-menu a').click(() => {
+            $('#selected-theme').html('Current selection: <div class="md-gray-900 mt-1 p-2" style="background-color: #BDBDBD; font-weight: 700;">' +$(this).text() + '</div>');
+          });
+
+          // disable (Google) translation for all highlight HTML elements
+          // used for rouge
+          // see: https://www.codingexercises.com/replace-all-instances-of-css-class-in-vanilla-js
           //
-          // place init code here
-          //
+          var highlight = document.getElementsByClassName('highlight');
+          [...highlight].forEach((x) => {
+           if (!x.className.includes('notranslate')) {
+             x.className += " notranslate"
+           }
+          });
 
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'initializing custom functions: finished');
+          logger.info('\n' + 'initializing module: finished');
 
           endTimeModule = Date.now();
-          logger.info('\n' + 'initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
-        } // END j1CoreFinished
-      }, 10); // END dependencies_met_j1_finished
+          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+
+          clearInterval(dependency_met_page_ready);
+        } // END pageVisible
+      }, 10); // END dependency_met_page_ready
+
+      var dependencies_met_rouge_finished = setInterval(() => {
+        var moduleFinished = (j1.adapter.rouge.getState() === 'finished') ? true : false;
+
+        if (moduleFinished) {
+          if (darkTheme) {
+            j1.adapter.rouge.reaplyStyles(templateOptions.rouge.theme_dark);
+          } else {
+            j1.adapter.rouge.reaplyStyles(templateOptions.rouge.theme_light);
+          }
+
+          clearInterval(dependencies_met_rouge_finished);
+        } //  END if darkTheme
+      }, 10); // END dependencies_met_rouge_finished
+
     }, // END init
 
     // -------------------------------------------------------------------------
-    // custom_module_1
-    // Called by ???
+    // load|apply new rouge theme
     // -------------------------------------------------------------------------
-    custom_module_1: (options) => {
-      var logger  = log4javascript.getLogger('j1.adapter.customModule.custom_module_1');
-
-      logText = '\n' + 'entered custom function: custom_module_1';
-      logger.info(logText);
-
+    reaplyStyles: (themename) => {
+      _this.removeAllRougeStyles();
+      _this.addStyle(themename);
       return true;
     },
 
     // -------------------------------------------------------------------------
-    // messageHandler
+    // remove existing rouge theme CSS (from section <head>)
+    // -------------------------------------------------------------------------
+    removeAllRougeStyles: () => {
+      $('link[rel=stylesheet][href*="/assets/themes/j1/modules/rouge"]').remove();
+    },
+
+    // -------------------------------------------------------------------------
+    // add rouge theme CSS (to section <head>)
+    // -------------------------------------------------------------------------
+    addStyle: (themename) => {
+      $('<link>').attr('rel','stylesheet')
+      .attr('type','text/css')
+      .attr('href','/assets/themes/j1/modules/rouge/css/' +themename+ '/theme.min.css')
+      .appendTo('head');
+    },
+
+    // -------------------------------------------------------------------------
+    // messageHandler: MessageHandler for J1 CookieConsent module
     // Manage messages send from other J1 modules
     // -------------------------------------------------------------------------
     messageHandler: (sender, message) => {

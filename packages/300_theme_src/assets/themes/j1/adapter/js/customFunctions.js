@@ -41,8 +41,8 @@ regenerate:                             true
 
 {% comment %} Set config data (unused)
 --------------------------------------------------------------------------------
-{% assign custom_defaults = modules.defaults.custom.defaults %}
-{% assign custom_settings = modules.custom.settings %}
+{% assign custom_defaults   = modules.defaults.custom.defaults %}
+{% assign custom_settings   = modules.custom.settings %}
 -------------------------------------------------------------------------------- {% endcomment %}
 
 {% comment %} Set config options (unused)
@@ -80,7 +80,7 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.customFunctions = (function (j1, window) {
+j1.adapter.customFunctions = ((j1, window) => {
 
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
@@ -89,26 +89,34 @@ j1.adapter.customFunctions = (function (j1, window) {
   var instances     = [];
   var state         = 'not_started';
   var frontmatterOptions;
+
   var _this;
   var logger;
   var logText;
 
+  // date|time
+  var startTime;
+  var endTime;
+  var startTimeModule;
+  var endTimeModule;
+  var timeSeconds;
+
   // ---------------------------------------------------------------------------
-  // Helper functions
+  // helper functions
   // ---------------------------------------------------------------------------
 
   // ---------------------------------------------------------------------------
-  // Main object
+  // main
   // ---------------------------------------------------------------------------
   return {
 
     // -------------------------------------------------------------------------
-    // Initializer
+    // initializer
     // -------------------------------------------------------------------------
-    init: function (options) {
+    init: (options) => {
 
       // -----------------------------------------------------------------------
-      // Default module settings
+      // default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
         module_name: 'j1.adapter.custom_functions',
@@ -116,10 +124,10 @@ j1.adapter.customFunctions = (function (j1, window) {
       }, options);
 
       // -----------------------------------------------------------------------
-      // Global variable settings
+      // global variable settings
       // -----------------------------------------------------------------------
-      _this   = j1.adapter.dropdowns;
-      logger  = log4javascript.getLogger('j1.adapter.custom_functions');
+      _this  = j1.adapter.custom_functions;
+      logger = log4javascript.getLogger('j1.adapter.custom_functions');
 
       // initialize state flag
       _this.setState('started');
@@ -128,39 +136,46 @@ j1.adapter.customFunctions = (function (j1, window) {
 
       // create settings object from frontmatterOptions
       frontmatterOptions = options != null ? $.extend({}, options) : {};
-      moduleOptions = $.extend({}, {{dropdowns_options | replace: 'nil', 'null' | replace: '=>', ':' }});
+      moduleOptions      = $.extend({}, {{dropdowns_options | replace: 'nil', 'null' | replace: '=>', ':' }});
 
       if (typeof frontmatterOptions !== 'undefined') {
         moduleOptions = $.extend({}, moduleOptions, frontmatterOptions);
       }
 
-      var dependencies_met_j1_finished = setInterval(function() {
-        if (j1.getState() == 'finished') {
-          var elms = document.querySelectorAll('.dropdowns');
+      // -----------------------------------------------------------------------
+      // initializer
+      // -----------------------------------------------------------------------
+      var dependencies_met_j1_finished = setInterval(() => {
+        var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
-          // -------------------------------------------------------------------
-          // Initializer
-          // -------------------------------------------------------------------
-          var log_text = '\n' + 'custom functions are being initialized';
-          logger.info(log_text);
+        if (j1CoreFinished) {
+          startTimeModule = Date.now();
+
+          _this.setState('started');
+          logger.debug('\n' + 'set module state to: ' + _this.getState());
+          logger.info('\n' + 'custom functions are being initialized');
 
           //
-          // place init code here if required
+          // place init code here
           //
+
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'initializing custom functions: finished');
+
+          endTimeModule = Date.now();
+          logger.info('\n' + 'initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_j1_finished);
-        } // END dependencies_met_j1_finished
-      }, 10);
-
+        } // END j1CoreFinished
+      }, 10); // END dependencies_met_j1_finished
     }, // END init
 
     // -------------------------------------------------------------------------
     // custom_1
     // Called by ???
     // -------------------------------------------------------------------------
-    custom_1: function (options) {
+    custom_1: (options) => {
       var logger  = log4javascript.getLogger('j1.adapter.custom_functions.custom_1');
 
       logText = '\n' + 'entered custom function: custom_1';
@@ -173,7 +188,7 @@ j1.adapter.customFunctions = (function (j1, window) {
     // messageHandler
     // Manage messages send from other J1 modules
     // -------------------------------------------------------------------------
-    messageHandler: function (sender, message) {
+    messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
@@ -200,7 +215,7 @@ j1.adapter.customFunctions = (function (j1, window) {
     // setState()
     // Sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: function (stat) {
+    setState: (stat) => {
       _this.state = stat;
     }, // END setState
 
@@ -208,7 +223,7 @@ j1.adapter.customFunctions = (function (j1, window) {
     // getState()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: function () {
+    getState: () => {
       return _this.state;
     } // END getState
 

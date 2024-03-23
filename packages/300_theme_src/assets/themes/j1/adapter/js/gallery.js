@@ -82,7 +82,7 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.gallery = (function (j1, window) {
+j1.adapter.gallery = ((j1, window) => {
 
   {% comment %} Global variables
   ------------------------------------------------------------------------------ {% endcomment %}
@@ -95,9 +95,17 @@ j1.adapter.gallery = (function (j1, window) {
   var gallerySettings;
   var galleryOptions;
   var frontmatterOptions;
+
   var _this;
   var logger;
   var logText;
+
+  // date|time
+  var startTime;
+  var endTime;
+  var startTimeModule;
+  var endTimeModule;
+  var timeSeconds;
 
   // ---------------------------------------------------------------------------
   // Helper functions
@@ -111,7 +119,7 @@ j1.adapter.gallery = (function (j1, window) {
     // -------------------------------------------------------------------------
     // Initializer
     // -------------------------------------------------------------------------
-    init: function (options) {
+    init: (options) => {
       url    = new URL(window.location.href);
       origin = url.origin;
 
@@ -149,12 +157,14 @@ j1.adapter.gallery = (function (j1, window) {
       // -----------------------------------------------------------------------
       // initializer
       // -----------------------------------------------------------------------
-      var dependencies_met_j1_core_finished = setInterval (() => {
+      var dependency_met_page_ready = setInterval (() => {
         var pageState      = $('#content').css("display");
-        var pageVisible    = (pageState == 'block') ? true : false;
-        var j1CoreFinished = (j1.getState() == 'finished') ? true : false;
+        var pageVisible    = (pageState === 'block') ? true : false;
+        var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
         if (j1CoreFinished && pageVisible) {
+          startTimeModule = Date.now();
+
           // initialize state flag
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());
@@ -166,15 +176,18 @@ j1.adapter.gallery = (function (j1, window) {
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module initialized successfully');
 
-          clearInterval(dependencies_met_j1_core_finished);
+          endTimeModule = Date.now();
+          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+
+          clearInterval(dependency_met_page_ready);
         } // END 'finished' && 'pageVisible'
-      }, 10);
-    },
+      }, 10); // END dependency_met_page_ready
+    }, // END init
 
     // -----------------------------------------------------------------------
     // Load AJAX data and initialize the jg gallery
     // -----------------------------------------------------------------------
-    initialize: function (options) {
+    initialize: (options) => {
       var xhrLoadState      = 'pending';                                        // (initial) load state for the HTML portion of the slider
       var load_dependencies = {};
       var dependency;
@@ -202,7 +215,7 @@ j1.adapter.gallery = (function (j1, window) {
             if (xhrLoadState === 'success') {
               var $grid_{{gallery_id}} = $('#{{gallery_id}}');                  // used for later access
 
-              logger.info('\n' + 'dyn_loader, initialize gallery on id: ' + '{{gallery_id}}');
+              logger.debug('\n' + 'dyn_loader, initialize gallery on id: ' + '{{gallery_id}}');
 
               j1.jg.callback.{{gallery_id}} = 'waiting';
 
@@ -216,15 +229,15 @@ j1.adapter.gallery = (function (j1, window) {
                 {{option[0] | json}}: {{option[1] | json}},
                 {% endfor %}
               })
-              .on('jg.complete', function (evt) {
+              .on('jg.complete', (evt) => {
                 evt.stopPropagation();
 
                 j1.jg.callback.{{gallery_id}} = 'successful';
 
                 // setup the lightbox
                 //
-                logger.info('\n' + 'dyn_loader, callback "jg.complete" entered on id: ' + '{{gallery_id}}');
-                logger.info('\n' + 'dyn_loader, initialize lightGallery on id: ' + '{{gallery_id}}');
+                logger.debug('\n' + 'dyn_loader, callback "jg.complete" entered on id: ' + '{{gallery_id}}');
+                logger.debug('\n' + 'dyn_loader, initialize lightGallery on id: ' + '{{gallery_id}}');
 
                 var lg = document.getElementById("{{gallery_id}}");
                 lightGallery(lg, {
@@ -312,7 +325,7 @@ j1.adapter.gallery = (function (j1, window) {
               setTimeout(() => {
                 if (j1.jg.callback.{{gallery_id}} == 'waiting') {
                   logger.debug('\n' + 'dyn_loader, callback "jg.callback": ' + j1.jg.callback.{{gallery_id}})
-                  logger.info('\n' + 'dyn_loader, initialize lightGallery on id: ' + '{{gallery_id}}');
+                  logger.debug('\n' + 'dyn_loader, initialize lightGallery on id: ' + '{{gallery_id}}');
 
                   var lg = document.getElementById("{{gallery_id}}");
                   lightGallery(lg, {
@@ -380,11 +393,10 @@ j1.adapter.gallery = (function (j1, window) {
 
                   }); // END lightGallery
                 } // END if j1.jg.callback
-              }, 2000); // END timeout
+              }, 1000); // END timeout
 
               clearInterval(load_dependencies['dependencies_met_html_loaded_{{gallery_id}}']);
             } // END  if xhrLoadState === 'success'
-
           }, 10); // END dependencies_met_html_loaded
 
         {% endif %} // ENDIF gallery enabled
@@ -397,7 +409,7 @@ j1.adapter.gallery = (function (j1, window) {
     // NOTE: Make sure the placeholder DIV is available in the content
     // page as generated using the Asciidoc extension gallery::
     // -------------------------------------------------------------------------
-    loadGalleryHTML: function (options, gallery) {
+    loadGalleryHTML: (options, gallery) => {
       var numGalleries  = Object.keys(gallery).length;
       var active_grids  = numGalleries;
       var xhr_data_path = options.xhr_data_path + '/index.html';
@@ -406,7 +418,7 @@ j1.adapter.gallery = (function (j1, window) {
       console.debug('number of galleries found: ' + active_grids);
 
       _this.setState('load_data');
-      Object.keys(gallery).forEach(function(key) {
+      Object.keys(gallery).forEach((key) => {
         if (gallery[key].enabled) {
           xhr_container_id = gallery[key].id + '_parent';
 
@@ -429,7 +441,7 @@ j1.adapter.gallery = (function (j1, window) {
     // messageHandler: MessageHandler for J1 CookieConsent module
     // Manage messages send from other J1 modules
     // -------------------------------------------------------------------------
-    messageHandler: function (sender, message) {
+    messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
@@ -454,7 +466,7 @@ j1.adapter.gallery = (function (j1, window) {
     // setState()
     // Sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: function (stat) {
+    setState: (stat) => {
       _this.state = stat;
     }, // END setState
 
@@ -462,7 +474,7 @@ j1.adapter.gallery = (function (j1, window) {
     // getState()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: function () {
+    getState: () => {
       return _this.state;
     } // END getState
 

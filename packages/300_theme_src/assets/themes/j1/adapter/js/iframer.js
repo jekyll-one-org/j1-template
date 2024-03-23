@@ -80,7 +80,7 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.iframer = (function (j1, window) {
+j1.adapter.iframer = ((j1, window) => {
 
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
@@ -89,31 +89,39 @@ j1.adapter.iframer = (function (j1, window) {
   var iframerDefaults;
   var iframerSettings;
   var iframerOptions;
-  var _this;
-  var logger;
-  var logText;
+
   var url;
   var origin;
 
+  var _this;
+  var logger;
+  var logText;
+
+  // date|time
+  var startTime;
+  var endTime;
+  var startTimeModule;
+  var endTimeModule;
+  var timeSeconds;
+
   // ---------------------------------------------------------------------------
-  // Helper functions
+  // helper functions
   // ---------------------------------------------------------------------------
 
   // ---------------------------------------------------------------------------
-  // Main object
+  // main
   // ---------------------------------------------------------------------------
   return {
 
     // -------------------------------------------------------------------------
-    // Initializer
+    // adapter tnitializer
     // -------------------------------------------------------------------------
-    init: function (options) {
-
+    init: (options) => {
       url     = new URL(window.location.href);
       origin  = url.origin;
 
       // -----------------------------------------------------------------------
-      // Default module settings
+      // default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
         module_name: 'j1.adapter.iframer',
@@ -121,7 +129,7 @@ j1.adapter.iframer = (function (j1, window) {
       }, options);
 
       // -----------------------------------------------------------------------
-      // Global variable settings
+      // global variable settings
       // -----------------------------------------------------------------------
       _this   = j1.adapter.iframer;
       logger  = log4javascript.getLogger('j1.adapter.iframer');
@@ -141,31 +149,38 @@ j1.adapter.iframer = (function (j1, window) {
       logger.info('\n' + 'module is being initialized');
 
       // -----------------------------------------------------------------------
-      // initializer
+      // module initializer
       // -----------------------------------------------------------------------
       var dependencies_met_page_ready = setInterval (() => {
         var pageState      = $('#content').css("display");
-        var pageVisible    = (pageState == 'block') ? true : false;
-        var j1CoreFinished = (j1.getState() == 'finished') ? true : false;
+        var pageVisible    = (pageState === 'block') ? true : false;
+        var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
         if (j1CoreFinished && pageVisible) {
-          // initialize state flag
+
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module is being initialized');
 
+          logger.info('\n' + 'initialize iFramer');
           _this.initialize(iframerOptions);
+
+          _this.setState('finished');
+          logger.debug('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'initializing module finished');
+
+          endTimeModule = Date.now();
+          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_page_ready);
         } // END j1CoreFinished && pageVisible
-      }, 10);
-
+      }, 10); // END dependencies_met_page_ready
     }, // END init
 
     // -----------------------------------------------------------------------
     // Load AJAX data and initialize the jg gallery
     // -----------------------------------------------------------------------
-    initialize: function (options) {
+    initialize: (options) => {
       var iframerOptions    = options;
       var xhrLoadState      = 'pending';                                        // (initial) load state for the HTML portion of the slider
       var load_dependencies = {};
@@ -254,7 +269,7 @@ j1.adapter.iframer = (function (j1, window) {
     // NOTE: Make sure the placeholder DIV is available in the content
     // page as generated using the Asciidoc extension iframe::
     // -------------------------------------------------------------------------
-    loadIframeHTML: function (options, iframe) {
+    loadIframeHTML: (options, iframe) => {
       var numIFrames  = Object.keys(iframe).length;
       var activeIFrames  = numIFrames;
       var xhr_data_path = options.xhr_data_path + '/index.html';
@@ -263,7 +278,7 @@ j1.adapter.iframer = (function (j1, window) {
       console.debug('number of iframes found: ' + activeIFrames);
 
       _this.setState('load_data');
-      Object.keys(iframe).forEach(function(key) {
+      Object.keys(iframe).forEach((key) => {
         if (iframe[key].enabled) {
           xhr_container_id = iframe[key].id + '_parent';
 
@@ -286,7 +301,7 @@ j1.adapter.iframer = (function (j1, window) {
     // setXhrState
     // Set the final (loading) state of an element (partial) loaded via Xhr
     // -------------------------------------------------------------------------
-    setXhrState: function (obj, stat) {
+    setXhrState: (obj, stat) => {
       j1.adapter.navigator.xhrData[obj] = stat;
     }, // END setXhrState
 
@@ -294,7 +309,7 @@ j1.adapter.iframer = (function (j1, window) {
     // getState
     // Returns the final (loading) state of an element (partial) loaded via Xhr
     // -------------------------------------------------------------------------
-    getXhrState: function (obj) {
+    getXhrState: (obj) => {
       return j1.adapter.navigator.xhrData[obj];
     }, // END getXhrState
 
@@ -302,7 +317,7 @@ j1.adapter.iframer = (function (j1, window) {
     // messageHandler: MessageHandler for J1 CookieConsent module
     // Manage messages send from other J1 modules
     // -------------------------------------------------------------------------
-    messageHandler: function (sender, message) {
+    messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
@@ -331,7 +346,7 @@ j1.adapter.iframer = (function (j1, window) {
     // setState()
     // Sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: function (stat) {
+    setState: (stat) => {
       _this.state = stat;
     }, // END setState
 
@@ -339,7 +354,7 @@ j1.adapter.iframer = (function (j1, window) {
     // getState
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: function () {
+    getState:  () => {
       return j1.adapter.navigator.state;
     } // END getState
 

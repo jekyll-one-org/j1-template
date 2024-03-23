@@ -63,7 +63,7 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.clipboard = (function (j1, window) {
+j1.adapter.clipboard = ((j1, window) => {
 
   // ---------------------------------------------------------------------------
   // globals
@@ -73,27 +73,35 @@ j1.adapter.clipboard = (function (j1, window) {
   var clipboardDefaults;
   var clipboardSettings;
   var clipboardOptions;
-  var logger;
-  var logText;
-  var _this;
   var clipboardJS;
   var language;
   var btnTitle;
   var btnText;
   var btnResponseText;
 
+  var _this;
+  var logger;
+  var logText;
+
+  // date|time
+  var startTime;
+  var endTime;
+  var startTimeModule;
+  var endTimeModule;
+  var timeSeconds;
+
   // ---------------------------------------------------------------------------
-  // main object
+  // main
   // ---------------------------------------------------------------------------
   return {
 
     // -------------------------------------------------------------------------
     // module initializer
     // -------------------------------------------------------------------------
-    init: function (options) {
+    init: (options) => {
 
       // -----------------------------------------------------------------------
-      // Default module settings
+      // default module settings
       // -----------------------------------------------------------------------
       var settings  = $.extend({
         module_name: 'j1.adapter.clipboard',
@@ -101,11 +109,11 @@ j1.adapter.clipboard = (function (j1, window) {
       }, options);
 
       // -----------------------------------------------------------------------
-      // Global variable settings
+      // global variable settings
       // -----------------------------------------------------------------------
-      _this     = j1.adapter.clipboard;
-      language  = '{{site.language}}';
-      logger    = log4javascript.getLogger('j1.adapter.clipboard');
+      _this    = j1.adapter.clipboard;
+      logger   = log4javascript.getLogger('j1.adapter.clipboard');
+      language = '{{site.language}}';
 
       // Load  module DEFAULTS|CONFIG
       clipboardDefaults = $.extend({},   {{analytics_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
@@ -132,10 +140,15 @@ j1.adapter.clipboard = (function (j1, window) {
       }
 
       // initialize ClipboardJS if page is loaded
-      var dependencies_met_j1_finished = setInterval(function() {
-        if ( j1.getState() == 'finished' ) {
-          logText = '\n' + 'create clipboard';
-          logger.info(logText);
+      var dependencies_met_j1_finished = setInterval(() => {
+        var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
+
+        if (j1CoreFinished) {
+          startTimeModule = Date.now();
+
+          _this.setState('started');
+          logger.debug('\n' + 'set module state to: ' + _this.getState());
+          logger.info('\n' + 'initializing module: started');
 
           clipboardJS = new ClipboardJS('.btn-clipboard', {
             target: function target(trigger) {
@@ -146,14 +159,19 @@ j1.adapter.clipboard = (function (j1, window) {
           _this.initClipButtons();
           _this.initEventHandler(clipboardJS);
 
-          clearInterval(dependencies_met_j1_finished);
           logger.debug('\n' + 'met dependencies for: j1');
+
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module initialized successfully');
-        }
+
+          endTimeModule = Date.now();
+          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+
+          clearInterval(dependencies_met_j1_finished);
+        } // END j1CoreFinished
       }, 10); // END dependencies_met_j1_finished
-    },
+    }, // END init
 
     // -------------------------------------------------------------------------
     // initClipboard
@@ -161,7 +179,7 @@ j1.adapter.clipboard = (function (j1, window) {
     // NOTE: Added check on isNotebook to skip clipboard button on
     //       Notebooks
     // -------------------------------------------------------------------------
-    initClipButtons: function () {
+    initClipButtons: () => {
       var btnHtml = '<div class="j1-clipboard"><span class="btn-clipboard" data-bs-toggle="tooltip" data-bs-placement="left" title="' + btnTitle +'">' + btnText + '</span></div>';
       var isNoClip;
       var isNotebook;
@@ -184,9 +202,9 @@ j1.adapter.clipboard = (function (j1, window) {
     // -------------------------------------------------------------------------
     // Event handler
     // -------------------------------------------------------------------------
-    initEventHandler: function (clipboard) {
+    initEventHandler: (clipboard) => {
       // Manage clipboard events
-      clipboard.on('success', function (e) {
+      clipboard.on('success', (e) => {
         $(e.trigger).attr('title', btnResponseText).tooltip('_fixTitle').tooltip('show').attr('title', btnTitle).tooltip('_fixTitle');
         var logger = log4javascript.getLogger('j1.initClipboard');
         var logText = '\n' + 'initialization copy-to-clipboard sucessfull';
@@ -200,7 +218,7 @@ j1.adapter.clipboard = (function (j1, window) {
         }
         e.clearSelection();
       });
-      clipboard.on('error', function (e) {
+      clipboard.on('error', (e) => {
         var fallbackMsg = /Mac/i.test(navigator.userAgent) ? 'press \u2318 to copy' : 'press ctrl-c to copy';
         logger = log4javascript.getLogger('j1.initClipboard');
         logText = '\n' + 'initialization copy-to-clipboard failed, fallback used.';
@@ -213,7 +231,7 @@ j1.adapter.clipboard = (function (j1, window) {
     // messageHandler
     // Manage messages (paylods) send from other J1 modules
     // -------------------------------------------------------------------------
-    messageHandler: function (sender, message) {
+    messageHandler: (sender, message) => {
       // var json_message = JSON.stringify(message, undefined, 2);              // multiline
       var json_message = JSON.stringify(message);
 
@@ -246,7 +264,7 @@ j1.adapter.clipboard = (function (j1, window) {
     // setState()
     // Sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: function (stat) {
+    setState: (stat) => {
       _this.state = stat;
     }, // END setState
 
@@ -254,7 +272,7 @@ j1.adapter.clipboard = (function (j1, window) {
     // getState()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: function () {
+    getState: () => {
       return _this.state;
     } // END getState
 

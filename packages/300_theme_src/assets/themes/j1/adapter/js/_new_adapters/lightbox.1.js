@@ -6,11 +6,12 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/iconPicker.js
- # Liquid template to adapt the iconPicker module
+ # ~/assets/themes/j1/adapter/js/lightbox.js
+ # Liquid template to adapt Lightbox Core functions
  #
  # Product/Info:
  # https://jekyll.one
+ #
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
@@ -18,7 +19,6 @@ regenerate:                             true
  # -----------------------------------------------------------------------------
  # Test data:
  #  {{ liquid_var | debug }}
- #  icon_picker_options:  {{ icon_picker_options | debug }}
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
@@ -27,30 +27,25 @@ regenerate:                             true
 
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment           = site.environment %}
-{% assign asset_path            = "/assets/themes/j1" %}
+{% assign environment       = site.environment %}
+{% assign template_version  = site.version %}
 
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config       = site.data.j1_config %}
-{% assign blocks                = site.data.blocks %}
-{% assign modules               = site.data.modules %}
+{% assign template_config   = site.data.j1_config %}
+{% assign modules           = site.data.modules %}
 
-{% comment %} Set config data (settings only)
+{% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign icon_picker_defaults  = modules.defaults.icon_picker.defaults %}
-{% assign icon_picker_settings  = modules.icon_picker.settings %}
+{% assign lightbox_defaults  = modules.defaults.lightbox.defaults %}
+{% assign lightbox_settings  = modules.lightbox.settings %}
 
-{% comment %} Set config options (settings only)
+{% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign icon_picker_options   = icon_picker_defaults | merge: icon_picker_settings %}
-
-
-{% comment %} Variables
--------------------------------------------------------------------------------- {% endcomment %}
+{% assign lightbox_options   = lightbox_defaults | merge: lightbox_settings %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -61,20 +56,23 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/iconPicker.js
- # J1 Adapter for the iconPicker module
+ # ~/assets/themes/j1/adapter/js/lightbox.js
+ # JS Adapter for J1 Lightbox
  #
  # Product/Info:
  # https://jekyll.one
+ # https://github.com/lokesh/lightbox2/
  #
  # Copyright (C) 2023, 2024 Juergen Adams
+ # Copyright (C) 2007, 2018 Lokesh Dhakar
  #
  # J1 Template is licensed under the MIT License.
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # Lightbox V2 is licensed under the MIT License.
+ # For details, see https://github.com/lokesh/lightbox2/
+ #
  # -----------------------------------------------------------------------------
- # NOTE:
- # -----------------------------------------------------------------------------
- #  Adapter generated: {{site.time}}
+ # Adapter generated: {{site.time}}
  # -----------------------------------------------------------------------------
 */
 
@@ -84,28 +82,31 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.iconPicker = ((j1, window) => {
+j1.adapter.lightbox = ((j1, window) => {
 
-{% comment %} Set global variables
--------------------------------------------------------------------------------- {% endcomment %}
-var environment           = '{{environment}}';
-var state                 = 'not_started';
-var iconPickerDefaults;
-var iconPickerSettings;
-var iconPickerOptions;
-var frontmatterOptions;
-var icon_picker;
-var icon_picker_button_id;
-var _this;
-var logger;
-var logText;
+  {% comment %} Global variables
+  ------------------------------------------------------------------------------ {% endcomment %}
+  var environment  = '{{environment}}';
+  var state        = 'not_started';
+  var lightboxDefaults;
+  var lightboxSettings;
+  var lightboxOptions;
+  var frontmatterOptions;
 
-// date|time
-var startTime;
-var endTime;
-var startTimeModule;
-var endTimeModule;
-var timeSeconds;
+  var _this;
+  var logger;
+  var logText;
+
+  // date|time
+  var startTime;
+  var endTime;
+  var startTimeModule;
+  var endTimeModule;
+  var timeSeconds;
+
+  // ---------------------------------------------------------------------------
+  // Helper functions
+  // ---------------------------------------------------------------------------
 
   // ---------------------------------------------------------------------------
   // Main object
@@ -113,94 +114,76 @@ var timeSeconds;
   return {
 
     // -------------------------------------------------------------------------
-    // adapter initializer
+    // Initializer
     // -------------------------------------------------------------------------
     init: (options) => {
 
       // -----------------------------------------------------------------------
-      // default module settings
+      // Default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
-        module_name: 'j1.adapter.iconPicker',
+        module_name: 'j1.adapter.lightbox',
         generated:   '{{site.time}}'
       }, options);
 
       // -----------------------------------------------------------------------
-      // global variable settings
+      // Global variable settings
       // -----------------------------------------------------------------------
+      _this   = j1.adapter.lightbox;
+      logger  = log4javascript.getLogger('j1.adapter.lightbox');
 
-      // create settings object from module options
-      iconPickerDefaults = $.extend({}, {{icon_picker_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      iconPickerSettings = $.extend({}, {{icon_picker_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      iconPickerOptions  = $.extend(true, {}, iconPickerDefaults, iconPickerSettings);
+      // create settings object from frontmatter (page settings)
+      frontmatterOptions    = options != null ? $.extend({}, options) : {};
 
-      _this  = j1.adapter.iconPicker;
-      logger = log4javascript.getLogger('j1.adapter.iconPicker');
+      // Load  module DEFAULTS|CONFIG
+      lightboxDefaults      = $.extend({}, {{lightbox_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      lightboxSettings      = $.extend({}, {{lightbox_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      lightboxOptions       = $.extend(true, {}, lightboxDefaults, lightboxSettings, frontmatterOptions);
 
-      // -----------------------------------------------------------------------
-      // module initializer
-      // -----------------------------------------------------------------------
-      var dependencies_met_page_ready = setInterval((options) => {
+      var dependencies_met_page_ready = setInterval (() => {
         var pageState       = $('#content').css("display");
-        var pageVisible     = (pageState === 'block') ? true : false;
-        var j1CoreFinished  = (j1.getState() === 'finished') ? true : false;
+        var pageVisible     = (pageState == 'block') ? true: false;
+        var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
+        var lbV2Finished    = ($('#lightbox').length) ? true : false;
 
-        if (j1CoreFinished && pageVisible) {
-          startTimeModule = Date.now();
-
-          icon_picker_button_id = '#' + iconPickerOptions.picker_button_id;
+         if (j1CoreFinished && pageVisible && lbV2Finished) {
+           startTimeModule = Date.now();
 
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized on id: ' + icon_picker_button_id);
+          logger.info('\n' + 'module is being initialized');
 
-          var dependencies_met_picker_button_ready = setInterval (() => {
-            var buttonState = $(icon_picker_button_id).length;
-            var buttonReady = (buttonState > 0) ? true : false;
+          lightbox.option({
+            alwaysShowNavOnTouchDevices:  lightboxOptions.alwaysShowNavOnTouchDevices,
+            albumLabel:                   lightboxOptions.albumLabel,
+            disableScrolling:             lightboxOptions.disableScrolling,
+            fadeDuration:                 lightboxOptions.fadeDuration,
+            fitImagesInViewport:          lightboxOptions.fitImagesInViewport,
+            imageFadeDuration:            lightboxOptions.imageFadeDuration,
+            maxWidth:                     lightboxOptions.maxWidth,
+            maxHeight:                    lightboxOptions.maxHeight,
+            positionFromTop:              lightboxOptions.positionFromTop,
+            resizeDuration:               lightboxOptions.resizeDuration,
+            showImageNumberLabel:         lightboxOptions.showImageNumberLabel,
+            wrapAround:                   lightboxOptions.wrapAround
+          });
 
-            if (buttonReady) {
-              // setup initial slimSelect values|iconPicker options
-              icon_picker = new UniversalIconPicker(icon_picker_button_id, {
-                allowEmpty:       iconPickerOptions.api_options.allowEmpty,
-                iconLibraries:    iconPickerOptions.api_options.iconLibraries,
-                iconLibrariesCss: iconPickerOptions.api_options.iconLibrariesCss,
-                onSelect:         (jsonIconData) => {
-                  // copy selected icon to clipboard (iconClass)
-                  var copyFrom = document.createElement('textarea');
-                  copyFrom.value = jsonIconData.iconClass;
-                  document.body.appendChild(copyFrom);
-                  copyFrom.select();
-                  document.execCommand('copy');
-                  // Remove data element from body
-                  setTimeout(() => {
-                    document.body.removeChild(copyFrom);
-                  }, 500);
-                }
-              });
+          _this.setState('finished');
+          logger.debug('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'initializing module finished');
 
-              // save config settings into the toccer object for later access
-              _this['icon_picker']    = icon_picker;
-              _this['moduleOptions']  = iconPickerOptions;
-
-              _this.setState('finished');
-              logger.debug('\n' + 'state: ' + _this.getState());
-              logger.info('\n' + 'initializing module finished');
-
-              endTimeModule = Date.now();
-              logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
-
-              clearInterval(dependencies_met_picker_button_ready);
-            } // END if buttonReady
-          }, 10); // END dependencies_met_picker_button_ready
+          endTimeModule = Date.now();
+          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_page_ready);
-        } // END pageVisible
+        } // END if pageVisible
       }, 10); // END dependencies_met_page_ready
-    }, // END init
+
+    }, // END init lightbox
 
     // -------------------------------------------------------------------------
-    // messageHandler()
-    // manage messages send from other J1 modules
+    // messageHandler: MessageHandler for J1 CookieConsent module
+    // Manage messages send from other J1 modules
     // -------------------------------------------------------------------------
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);

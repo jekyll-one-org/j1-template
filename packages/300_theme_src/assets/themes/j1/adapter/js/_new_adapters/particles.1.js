@@ -2,12 +2,12 @@
 regenerate:                             true
 ---
 
-{% capture cache %}
+{%- capture cache %}
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/iconPicker.js
- # Liquid template to adapt the iconPicker module
+ # ~/assets/themes/j1/adapter/js/particles.js
+ # Liquid template to adapt the particles module
  #
  # Product/Info:
  # https://jekyll.one
@@ -18,7 +18,7 @@ regenerate:                             true
  # -----------------------------------------------------------------------------
  # Test data:
  #  {{ liquid_var | debug }}
- #  icon_picker_options:  {{ icon_picker_options | debug }}
+ #  particles_options:  {{ particles_options | debug }}
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
@@ -27,30 +27,30 @@ regenerate:                             true
 
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment           = site.environment %}
-{% assign asset_path            = "/assets/themes/j1" %}
+{% assign environment       = site.environment %}
+{% assign asset_path        = '/assets/themes/j1' %}
 
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config       = site.data.j1_config %}
-{% assign blocks                = site.data.blocks %}
-{% assign modules               = site.data.modules %}
+{% assign template_config    = site.data.j1_config %}
+{% assign blocks             = site.data.blocks %}
+{% assign modules            = site.data.modules %}
 
 {% comment %} Set config data (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign icon_picker_defaults  = modules.defaults.icon_picker.defaults %}
-{% assign icon_picker_settings  = modules.icon_picker.settings %}
+{% assign particles_defaults = modules.defaults.particles.defaults %}
+{% assign particles_settings = modules.particles.settings %}
 
 {% comment %} Set config options (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign icon_picker_options   = icon_picker_defaults | merge: icon_picker_settings %}
-
+{% assign particles_options  = particles_defaults | merge: particles_settings %}
 
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
+{% assign comments          = particles_options.enabled %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -61,8 +61,8 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/iconPicker.js
- # J1 Adapter for the iconPicker module
+ # ~/assets/themes/j1/adapter/js/particles.js
+ # J1 Adapter for the particles module
  #
  # Product/Info:
  # https://jekyll.one
@@ -71,8 +71,6 @@ regenerate:                             true
  #
  # J1 Template is licensed under the MIT License.
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
- # -----------------------------------------------------------------------------
- # NOTE:
  # -----------------------------------------------------------------------------
  #  Adapter generated: {{site.time}}
  # -----------------------------------------------------------------------------
@@ -84,28 +82,20 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.iconPicker = ((j1, window) => {
+j1.adapter.particles = ((j1, window) => {
 
 {% comment %} Set global variables
 -------------------------------------------------------------------------------- {% endcomment %}
-var environment           = '{{environment}}';
-var state                 = 'not_started';
-var iconPickerDefaults;
-var iconPickerSettings;
-var iconPickerOptions;
+var environment     = '{{environment}}';
+var cookie_names    = j1.getCookieNames();
+var state           = 'not_started';
+var particleDefaults;
+var particleSettings;
+var particleOptions;
 var frontmatterOptions;
-var icon_picker;
-var icon_picker_button_id;
 var _this;
 var logger;
 var logText;
-
-// date|time
-var startTime;
-var endTime;
-var startTimeModule;
-var endTimeModule;
-var timeSeconds;
 
   // ---------------------------------------------------------------------------
   // Main object
@@ -113,89 +103,103 @@ var timeSeconds;
   return {
 
     // -------------------------------------------------------------------------
+    // init()
     // adapter initializer
     // -------------------------------------------------------------------------
     init: (options) => {
 
       // -----------------------------------------------------------------------
-      // default module settings
+      // Default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
-        module_name: 'j1.adapter.iconPicker',
+        module_name: 'j1.adapter.particles',
         generated:   '{{site.time}}'
       }, options);
 
       // -----------------------------------------------------------------------
-      // global variable settings
+      // Global variable settings
       // -----------------------------------------------------------------------
 
-      // create settings object from module options
-      iconPickerDefaults = $.extend({}, {{icon_picker_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      iconPickerSettings = $.extend({}, {{icon_picker_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      iconPickerOptions  = $.extend(true, {}, iconPickerDefaults, iconPickerSettings);
+      // create settings object from frontmatter
+      frontmatterOptions  = options != null ? $.extend({}, options) : {};
 
-      _this  = j1.adapter.iconPicker;
-      logger = log4javascript.getLogger('j1.adapter.iconPicker');
+      // Load  module DEFAULTS|CONFIG
+      particleDefaults = $.extend({}, {{particles_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      particleSettings = $.extend({}, {{particles_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      particleOptions  = $.extend(true, {}, particleDefaults, particleSettings, frontmatterOptions);
+
+      _this  = j1.adapter.particles;
+      logger = log4javascript.getLogger('j1.adapter.particles');
 
       // -----------------------------------------------------------------------
-      // module initializer
+      // initializer
       // -----------------------------------------------------------------------
-      var dependencies_met_page_ready = setInterval((options) => {
-        var pageState       = $('#content').css("display");
-        var pageVisible     = (pageState === 'block') ? true : false;
-        var j1CoreFinished  = (j1.getState() === 'finished') ? true : false;
+      var dependencies_met_page_ready = setInterval ((options) => {
 
-        if (j1CoreFinished && pageVisible) {
-          startTimeModule = Date.now();
-
-          icon_picker_button_id = '#' + iconPickerOptions.picker_button_id;
+        if ( j1.getState() === 'finished' ) {
+          var obj;
+          var data;
+          var allConfigs;
+          var particlesJSON;
+          var objParticles;
+          var particleID;
+          var particleContainer;
+          var dataUrl = particleDefaults['xhr_data_path'];
 
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized on id: ' + icon_picker_button_id);
+          logger.info('\n' + 'module is being initialized')
 
-          var dependencies_met_picker_button_ready = setInterval (() => {
-            var buttonState = $(icon_picker_button_id).length;
-            var buttonReady = (buttonState > 0) ? true : false;
+          {% for item in particles_settings.particles %}
+            {% if item.particle.enabled %}
 
-            if (buttonReady) {
-              // setup initial slimSelect values|iconPicker options
-              icon_picker = new UniversalIconPicker(icon_picker_button_id, {
-                allowEmpty:       iconPickerOptions.api_options.allowEmpty,
-                iconLibraries:    iconPickerOptions.api_options.iconLibraries,
-                iconLibrariesCss: iconPickerOptions.api_options.iconLibrariesCss,
-                onSelect:         (jsonIconData) => {
-                  // copy selected icon to clipboard (iconClass)
-                  var copyFrom = document.createElement('textarea');
-                  copyFrom.value = jsonIconData.iconClass;
-                  document.body.appendChild(copyFrom);
-                  copyFrom.select();
-                  document.execCommand('copy');
-                  // Remove data element from body
-                  setTimeout(() => {
-                    document.body.removeChild(copyFrom);
-                  }, 500);
+              {% assign particle_id     = item.particle.id %}
+              {% assign canvas_selector = item.particle.canvas_selector %}
+
+              particleID          = '{{ item.particle.id }}';
+              particleContainer   = '{{ item.particle.canvas_selector }}';
+              $(particleContainer).attr('id', particleID);
+
+              var dependencies_met_attic_ready = setInterval((options) => {
+                if ($('#' + particleID).length != 0) {
+                  logger.info('\n' + 'container found: ' + '#' + particleID);
+
+                  // load particles config from yaml data file (dataUrl)
+                  $.get(dataUrl)
+                  .done((data) => {
+                    allConfigs = yaml.loadAll(data, 'utf8');
+
+                    {% for item in particles_settings.particles %}
+                      {% if item.particle.enabled %}
+
+                      {% assign particle_id = item.particle.id %}
+                      particleID = '{{ particle_id }}';
+
+                      if (particleID == 'snowflake') {
+                        // pass the data >>object<<
+                        objParticles = allConfigs[0][particleID][0];
+                        particlesJS(particleID, objParticles);
+                      }
+
+                    {% endif %}
+                  {% endfor %}
+                  })
+                  .fail(() => {
+                    logger.error('\n' + 'loading data: failed');
+                  });
+
+                } else {
+                  logger.warn('\n' + 'container id not found: ' + '#' + particleID);
                 }
-              });
-
-              // save config settings into the toccer object for later access
-              _this['icon_picker']    = icon_picker;
-              _this['moduleOptions']  = iconPickerOptions;
-
-              _this.setState('finished');
-              logger.debug('\n' + 'state: ' + _this.getState());
-              logger.info('\n' + 'initializing module finished');
-
-              endTimeModule = Date.now();
-              logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
-
-              clearInterval(dependencies_met_picker_button_ready);
-            } // END if buttonReady
-          }, 10); // END dependencies_met_picker_button_ready
+                clearInterval(dependencies_met_attic_ready);
+              }, 10);
+            {% endif %}
+          {% endfor %}
 
           clearInterval(dependencies_met_page_ready);
-        } // END pageVisible
-      }, 10); // END dependencies_met_page_ready
+        }
+      }, 10);
+
     }, // END init
 
     // -------------------------------------------------------------------------
@@ -246,10 +250,10 @@ var timeSeconds;
   }; // END return
 })(j1, window);
 
-{% endcapture %}
-{% if production %}
+{% endcapture -%}
+{%- if production -%}
   {{ cache | minifyJS }}
-{% else %}
+{%- else -%}
   {{ cache | strip_empty_lines }}
-{% endif %}
+{%- endif- %}
 {% assign cache = nil %}

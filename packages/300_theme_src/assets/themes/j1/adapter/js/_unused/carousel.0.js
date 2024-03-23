@@ -63,6 +63,7 @@ regenerate:                             true
   {% assign production = true %}
 {% endif %}
 
+
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/adapter/js/carousel.js
@@ -86,41 +87,33 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.carousel = ((j1, window) => {
+j1.adapter.carousel = (function (j1, window) {
   var environment   = '{{environment}}';
   var dragging      = false;
   var state         = 'not_started';
   var carouselDefaults;
   var carouselSettings;
   var carouselOptions;
-
   var _this;
   var logger;
   var logText;
 
-  // date|time
-  var startTime;
-  var endTime;
-  var startTimeModule;
-  var endTimeModule;
-  var timeSeconds;
-
   // ---------------------------------------------------------------------------
-  // helper functions
+  // Helper functions
   // ---------------------------------------------------------------------------
 
   // ---------------------------------------------------------------------------
-  // main
+  // Main object
   // ---------------------------------------------------------------------------
   return {
 
     // -------------------------------------------------------------------------
-    // initializer
+    // Initializer
     // -------------------------------------------------------------------------
-    init: (options) => {
+    init: function (options) {
 
       // -----------------------------------------------------------------------
-      // default module settings
+      // Default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
         module_name: 'j1.adapter.carousel',
@@ -128,7 +121,7 @@ j1.adapter.carousel = ((j1, window) => {
       }, options);
 
       // -----------------------------------------------------------------------
-      // global variable settings
+      // Global variable settings
       // -----------------------------------------------------------------------
       _this   = j1.adapter.carousel;
       logger  = log4javascript.getLogger('j1.adapter.carousel');
@@ -143,11 +136,10 @@ j1.adapter.carousel = ((j1, window) => {
       // -----------------------------------------------------------------------
       var dependencies_met_page_finished = setInterval (() => {
         var pageState      = $('#content').css("display");
-        var pageVisible    = (pageState === 'block') ? true : false;
-        var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
+        var pageVisible    = (pageState == 'block') ? true : false;
+        var j1CoreFinished = (j1.getState() == 'finished') ? true : false;
 
         if (j1CoreFinished && pageVisible) {
-          startTimeModule = Date.now();
 
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());
@@ -368,7 +360,8 @@ j1.adapter.carousel = ((j1, window) => {
                   // );
 
                   _this.setState('processed');
-                  logger.debug('\n' + 'processing slider finished on id: {{slider_id}}');
+                  logText = '\n' + 'processing slider finished on id: {{slider_id}}';
+                  logger.info(logText);
                 } // END customDataSuccess_{{forloop.index}}
               } // END if carousel exists
             {% endif %}
@@ -376,17 +369,12 @@ j1.adapter.carousel = ((j1, window) => {
 
           clearInterval(dependencies_met_page_finished);
 
-          var dependencies_met_sliders_processed = setInterval(() => {
-            var slidersProcessed = (_this.getState() === 'processed') ? true : false;
-
-            if (slidersProcessed) {
+          var dependencies_met_sliders_processed = setInterval(function() {
+            if (_this.getState() == 'processed') {
 
               _this.setState('finished');
               logger.debug('\n' + 'state: ' + _this.getState());
               logger.info('\n' + 'initializing module finished');
-
-              endTimeModule = Date.now();
-              logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
               clearInterval(dependencies_met_sliders_processed);
             }
@@ -403,7 +391,7 @@ j1.adapter.carousel = ((j1, window) => {
     // fadeIn()
     // Animation (caption): fadeIn
     // -------------------------------------------------------------------------
-    fadeIn: (id, options) => {
+    fadeIn: function (id, options) {
       $(id + '.active .caption .fadeIn-1').stop().delay(options.delay)
       .animate({
         opacity:      options.opacity
@@ -431,7 +419,7 @@ j1.adapter.carousel = ((j1, window) => {
     // fadeInUp()
     // Animation (caption): fadeInUp
     // -------------------------------------------------------------------------
-    fadeInUp: (id, options) => {
+    fadeInUp: function (id, options) {
       $(id + '.active .caption .fadeInUp-1')
       .stop()
       .delay(options.delay)
@@ -468,7 +456,7 @@ j1.adapter.carousel = ((j1, window) => {
     // fadeInRight()
     // Animation (caption): fadeInRight
     // -------------------------------------------------------------------------
-    fadeInRight: (id, options) => {
+    fadeInRight: function (id, options) {
       $(id + '.active .caption .fadeInRight-1')
       .stop()
       .delay(options.delay)
@@ -505,7 +493,7 @@ j1.adapter.carousel = ((j1, window) => {
     // fadeInDown()
     // Animation (caption): fadeInDown
     // -------------------------------------------------------------------------
-    fadeInDown: (id, options) => {
+    fadeInDown: function (id, options) {
       $('#item-1').backstretch();
       $(id + '.active .caption .fadeInDown-1')
       .stop()
@@ -543,7 +531,7 @@ j1.adapter.carousel = ((j1, window) => {
     // fadeInLeft()
     // Animation (caption): fadeInLeft
     // -------------------------------------------------------------------------
-    fadeInLeft: (id, options) => {
+    fadeInLeft: function (id, options) {
       $('#item-2').backstretch();
       $(id + '.active .caption .fadeInLeft-1')
       .stop()
@@ -581,7 +569,7 @@ j1.adapter.carousel = ((j1, window) => {
     // fadeInReset()
     // Reset animation (caption): fadeIn
     // -------------------------------------------------------------------------
-    fadeInReset: (id, options) => {
+    fadeInReset: function (id, options) {
       if (!options.dragging) {
         $(id + '.caption .fadeIn-1,' +
           id + '.caption .fadeIn-2,' +
@@ -608,7 +596,7 @@ j1.adapter.carousel = ((j1, window) => {
     // fadeInUpReset()
     // Reset animation (caption): fadeInUp
     // -------------------------------------------------------------------------
-    fadeInUpReset: (id, options) => {
+    fadeInUpReset: function (id, options) {
       if (!options.dragging) {
         $(id + '.caption .fadeInUp-1,' +
           id + '.caption .fadeInUp-2,' +
@@ -637,7 +625,7 @@ j1.adapter.carousel = ((j1, window) => {
     // fadeInRightReset()
     // Reset animation (caption): fadeInRight
     // -------------------------------------------------------------------------
-    fadeInRightReset: (id, options) => {
+    fadeInRightReset: function (id, options) {
       if (!options.dragging) {
         $(id + '.caption .fadeInRight-1,' +
           id + '.caption .fadeInRight-2,' +
@@ -666,7 +654,7 @@ j1.adapter.carousel = ((j1, window) => {
     // fadeOutDown()
     // Reset animation (caption): fadeInDown
     // -------------------------------------------------------------------------
-    fadeInDownReset: (id, options) => {
+    fadeInDownReset: function (id, options) {
       if (!options.dragging) {
         $(id + '.caption .fadeInDown-1,' +
           id + '.caption .fadeInDown-2,' +
@@ -695,7 +683,7 @@ j1.adapter.carousel = ((j1, window) => {
     // fadeInLeftReset()
     // Reset animation (caption): fadeInLeft
     // -------------------------------------------------------------------------
-    fadeInLeftReset: (id, options) => {
+    fadeInLeftReset: function (id, options) {
       if (!options.dragging) {
         $(id + '.caption .fadeInLeft-1,' +
           id + '.caption .fadeInLeft-2,' +
@@ -724,7 +712,7 @@ j1.adapter.carousel = ((j1, window) => {
     // messageHandler: MessageHandler for J1 CookieConsent module
     // Manage messages send from other J1 modules
     // -------------------------------------------------------------------------
-    messageHandler: (sender, message) => {
+    messageHandler: function (sender, message) {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
@@ -753,7 +741,7 @@ j1.adapter.carousel = ((j1, window) => {
     // setState()
     // Sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: (stat) => {
+    setState: function (stat) {
       _this.state = stat;
     }, // END setState
 
@@ -761,7 +749,7 @@ j1.adapter.carousel = ((j1, window) => {
     // getState()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: () => {
+    getState: function () {
       return _this.state;
     } // END getState
 

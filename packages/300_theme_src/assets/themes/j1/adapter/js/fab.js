@@ -73,7 +73,7 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.fab = (function (j1, window) {
+j1.adapter.fab = ((j1, window) => {
 
   // ---------------------------------------------------------------------------
   // Global variable settings
@@ -95,26 +95,34 @@ j1.adapter.fab = (function (j1, window) {
   var sect3Nodes;
   var sect12Nodes;
   var sect123Nodes;
+
   var _this;
   var logger;
   var logText;
+
+  // date|time
+  var startTime;
+  var endTime;
+  var startTimeModule;
+  var endTimeModule;
+  var timeSeconds;
 
   // ---------------------------------------------------------------------------
   // helper functions
   // ---------------------------------------------------------------------------
 
   // ---------------------------------------------------------------------------
-  // main object
+  // main
   // ---------------------------------------------------------------------------
   return {
 
     // -------------------------------------------------------------------------
     // module initializer
     // -------------------------------------------------------------------------
-    init: function (options) {
+    init: (options) => {
 
       // -----------------------------------------------------------------------
-      // Default module settings
+      // default module settings
       // -----------------------------------------------------------------------
       var settings  = $.extend({
         module_name: 'j1.adapter.fab',
@@ -122,18 +130,13 @@ j1.adapter.fab = (function (j1, window) {
       }, options);
 
       // -----------------------------------------------------------------------
-      // Global variable settings
+      // global variable settings
       // -----------------------------------------------------------------------
-      _this         = j1.adapter.fab;
-      logger        = log4javascript.getLogger('j1.adapter.fab');
-      sect123Nodes  = $('[class$="sect1"],[class$="sect2"],[class$="sect3"]');
-      sect12Nodes   = $('[class$="sect1"],[class$="sect2"]');
-      sect1Nodes    = $('[class$="sect1"]');
-
-      // initialize state flag
-      _this.setState('started');
-      logger.info('\n' + 'set module state to: ' + _this.getState());
-      logger.info('\n' + 'module is being initialized');
+      _this        = j1.adapter.fab;
+      logger       = log4javascript.getLogger('j1.adapter.fab');
+      sect123Nodes = $('[class$="sect1"],[class$="sect2"],[class$="sect3"]');
+      sect12Nodes  = $('[class$="sect1"],[class$="sect2"]');
+      sect1Nodes   = $('[class$="sect1"]');
 
       // create settings object from frontmatter (page settings)
       frontmatterOptions  = options != null ? $.extend({}, options) : {};
@@ -144,32 +147,36 @@ j1.adapter.fab = (function (j1, window) {
       fabOptions  = $.extend(true, {}, fabDefaults, fabSettings, frontmatterOptions);
 
       // save config settings into the FAB object for global access
-      //
       _this['moduleOptions'] = fabOptions;
 
       // -----------------------------------------------------------------------
       // initializer
       // -----------------------------------------------------------------------
-      var dependencies_met_navigator = setInterval(function() {
-        var pageState         = $('#content').css("display");
-        var pageVisible       = (pageState == 'block') ? true : false;
-        var navigatorFinished = (j1.adapter.navigator.getState() == 'finished') ? true : false;
+      var dependency_met_page_ready = setInterval(() => {
+        var pageState      = $('#content').css("display");
+        var pageVisible    = (pageState === 'block') ? true : false;
+        var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
+        var atticFinished  = (j1.adapter.attic.getState() === 'finished') ? true: false;
 
-        if (pageVisible && navigatorFinished) {
+        if (pageVisible && j1CoreFinished && atticFinished) {
+          startTimeModule = Date.now();
 
-          logger.debug('\n' + 'met dependencies for: navigator');
+          _this.setState('started');
+          logger.info('\n' + 'set module state to: ' + _this.getState());
+          logger.info('\n' + 'module is being initialized');
+
+          logger.info('\n' + 'load FABs');
           _this.fabLoader(fabOptions);
 
-          clearInterval(dependencies_met_navigator);
-        }
-      }, 10);
-
+          clearInterval(dependency_met_page_ready);
+        } // END pageVisible
+      }, 10); // END dependency_met_page_ready
     }, // END init
 
     // -------------------------------------------------------------------------
     // FAB Loader
     // -------------------------------------------------------------------------
-    fabLoader: function (fabOptions) {
+    fabLoader: (fabOptions) => {
 
       _this.setState('loading');
       logger.info('\n' + 'set module state to: ' + _this.getState());
@@ -188,23 +195,23 @@ j1.adapter.fab = (function (j1, window) {
       // Initialize FAB button
       // ---------------------------------------------------------------------
       var dependencies_met_fab_initialized = setInterval (() => {
-        var pageState      = $('#content').css("display");
-        var pageVisible    = (pageState == 'block') ? true: false;
-        var j1CoreFinished = (j1.getState() == 'finished') ? true : false;
-        var fabLoaded      = (j1.xhrDOMState['#' + fabOptions.xhr_container_id] == 'success') ? true: false;
+        var fabLoaded = (j1.xhrDOMState['#' + fabOptions.xhr_container_id] === 'success') ? true: false;
 
-        if (j1CoreFinished && pageVisible && fabLoaded) {
+        if (fabLoaded) {
+
           _this.setState('loaded');
           logger.info('\n' + 'set module state to: ' + _this.getState());
           logger.info('\n' + 'HTML data for FAB: ' + _this.getState());
 
           _this.buttonInitializer(fabOptions);
+          $('.fab-btn').show();
 
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module initialized successfully');
 
-          $('.fab-btn').show();
+          endTimeModule = Date.now();
+          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_fab_initialized);
         }
@@ -214,7 +221,7 @@ j1.adapter.fab = (function (j1, window) {
     // -------------------------------------------------------------------------
     // Button Initializer
     // -------------------------------------------------------------------------
-    buttonInitializer: function (fabOptions) {
+    buttonInitializer: (fabOptions) => {
       var $fabContainer         = $('#' + fabOptions.xhr_container_id);
       var iconFamily            = fabOptions.icon_family.toLowerCase();
       var floatingActionOptions = fabOptions.menu_options;
@@ -229,7 +236,7 @@ j1.adapter.fab = (function (j1, window) {
       var fabActions;
 
       // check if multiple buttons detected
-      if (fabButtons.length == 1) {
+      if (fabButtons.length === 1) {
         _this.setState('processing');
         logger.info('\n' + 'set module state to: ' + _this.getState());
         logger.info('\n' + 'initialize FAB menu');
@@ -239,7 +246,7 @@ j1.adapter.fab = (function (j1, window) {
         instances       = j1.fab.init(fabButtons, floatingActionOptions);
         $actionButton   = $('#' + actionButtonId);
 
-        fabOptions.menus.forEach(function (menu, index) {
+        fabOptions.menus.forEach((menu, index) => {
           if (menu.id === actionMenuId) {
             actionMenuOptions = fabOptions.menus[index];
           };
@@ -255,26 +262,26 @@ j1.adapter.fab = (function (j1, window) {
         // toggle the icon for the FAB if configured
         if (floatingActionOptions.hoverEnabled) {
           $actionButton.hover(
-            function() {
+            function () {
               $('#fab-icon').toggleClass(toggleIcons);
-            }, function() {
+            }, function () {
               $('#fab-icon').toggleClass(toggleIcons);
             }
           );
         } else {
-          $actionButton.on('click', function (e) {
+          $actionButton.on('click', (e) => {
             $('#fab-icon').toggleClass(toggleIcons);
           });
         }
 
         if (fabActions > 1) {
-          actionMenuOptions.items.forEach(function (item, index) {
+          actionMenuOptions.items.forEach((item, index) => {
             // Bind an eventhandler instance if item id exists
             if ($('#' + item.id).length) {
               eventHandler = item.event_handler;
               // check if eventhandler configured is a SINGLE word
               if (eventHandler.split(' ').length == 1) {
-                logger.info('\n' + 'register pre-configured eventhandler ' +eventHandler+ ' on id: #' + item.id);
+                logger.debug('\n' + 'register pre-configured eventhandler ' + eventHandler + ' on id: #' + item.id);
 
                 if (eventHandler === 'open_mmenu_toc') {
                   if ($('#j1-toc-mgr').length) {
@@ -294,9 +301,9 @@ j1.adapter.fab = (function (j1, window) {
                   $('#' + item.id).show();
                 } // END eventHandler 'open_mmenu_toc'
 
-                $('#' + item.id).each(function(e) {
+                $('#' + item.id).each(function (e) {
                   var $this = $(this);
-                  $this.on('click', function(e) {
+                  $this.on('click', function (e) {
                   _this[item.event_handler](sect123Nodes);
                   });
                 });
@@ -314,15 +321,15 @@ j1.adapter.fab = (function (j1, window) {
           // disable hover event (CSS)
           // $actionButton.css({'pointer-events': 'none'})
 
-          actionMenuOptions.items.forEach(function (item, index) {
+          actionMenuOptions.items.forEach((item, index) => {
             eventHandler = item.event_handler;
             // check if eventhandler configured is a SINGLE word
-            if (eventHandler.split(' ').length == 1) {
-              logger.info('\n' + 'register pre-configured eventhandler ' +eventHandler+ ' on id: #' + actionButtonId);
+            if (eventHandler.split(' ').length === 1) {
+              logger.debug('\n' + 'register pre-configured eventhandler ' +eventHandler+ ' on id: #' + actionButtonId);
 
               if (eventHandler === 'scroll_to_top') {
                 // register click event
-                $actionButton.on('click', function(e) {
+                $actionButton.on('click', function (e) {
                   var dest = 0;
                   $('html, body').animate({
                     scrollTop: dest
@@ -335,7 +342,7 @@ j1.adapter.fab = (function (j1, window) {
                 if ($('#j1-toc-mgr').length) {
                   logger.info('\n' + 'found toc in page: enabled');
                   var dependencies_met_toccer_finished = setInterval (() => {
-                    if (j1.adapter.toccer.getState() == 'finished') {
+                    if (j1.adapter.toccer.getState() === 'finished') {
                       logger.debug('\n' + 'met dependencies for toccer: finished');
 
                       // change the id of the $actionButton to the already
@@ -367,7 +374,7 @@ j1.adapter.fab = (function (j1, window) {
     // -------------------------------------------------------------------------
     // open mmenu TOC
     // -------------------------------------------------------------------------
-    open_mmenu_toc: function () {
+    open_mmenu_toc: () => {
         // Event configured with Navigator module (navigator.yml)
         // with content section DRAWER TOC. Event registered at
         // runtime on element with id '#open_mmenu_toc' by Mobile Menu
@@ -379,7 +386,7 @@ j1.adapter.fab = (function (j1, window) {
     // -------------------------------------------------------------------------
     // reload page
     // -------------------------------------------------------------------------
-    reload_page: function () {
+    reload_page: () => {
       // reload current page (skip cache)
       location.reload(true);
     }, // END reload_page
@@ -387,7 +394,7 @@ j1.adapter.fab = (function (j1, window) {
     // -------------------------------------------------------------------------
     // scroll to previous section
     // -------------------------------------------------------------------------
-    scroll_previous_section: function (nodes) {
+    scroll_previous_section: (nodes) => {
       var previous_header_id;
       var currentNode;
       var prev_node;
@@ -423,7 +430,7 @@ j1.adapter.fab = (function (j1, window) {
       //
       scrollOffset        = scrollOffset + toccerScrollOffset;
 
-      nodes.each(function () {
+      nodes.each(() => {
         currentNode = $(this).find(current_header_id);
         if (currentNode.length) {
           if (index > maxNode) {
@@ -447,7 +454,7 @@ j1.adapter.fab = (function (j1, window) {
     // -------------------------------------------------------------------------
     // scroll to next section
     // -------------------------------------------------------------------------
-    scroll_next_section: function (nodes) {
+    scroll_next_section: (nodes) => {
       var next_header_id;
       var next_header_plus_id;
       var currentNode;
@@ -463,7 +470,7 @@ j1.adapter.fab = (function (j1, window) {
       var toccerScrollOffset    = {{toccer_options.scrollSmoothOffset}};
 
       current_header_id = $toc.find('.is-active-link').attr('href');
-      nodes.each(function () {
+      nodes.each(() => {
         currentNode = $(this).find(current_header_id);
         if (currentNode.length) {
           if (index == maxNode) {
@@ -508,7 +515,7 @@ j1.adapter.fab = (function (j1, window) {
     // -------------------------------------------------------------------------
     // scroll to top
     // -------------------------------------------------------------------------
-    scroll_to_top: function () {
+    scroll_to_top: () => {
       var dest = 0;
 
       $('html, body').animate({
@@ -521,7 +528,7 @@ j1.adapter.fab = (function (j1, window) {
     // -------------------------------------------------------------------------
     // scroll to bottom
     // -------------------------------------------------------------------------
-    scroll_to_bottom: function () {
+    scroll_to_bottom: () => {
       var $page           = $(document);
       var $footer         = $('#j1_footer');
       var f               = $footer.length ? $footer.outerHeight() : 0;
@@ -538,13 +545,13 @@ j1.adapter.fab = (function (j1, window) {
     // -------------------------------------------------------------------------
     // scroll to comments (Disqus)
     // -------------------------------------------------------------------------
-    scroll_to_comments: function () {
+    scroll_to_comments: () => {
     }, // END scroll_comments
 
     // -------------------------------------------------------------------------
     // create generic alert
     // -------------------------------------------------------------------------
-    alert_me: function () {
+    alert_me: () => {
       alert ('Hello world!');
     }, // END alert_me
 
@@ -552,7 +559,7 @@ j1.adapter.fab = (function (j1, window) {
     // messageHandler
     // Manage messages (paylods) send from other J1 modules
     // -------------------------------------------------------------------------
-    messageHandler: function (sender, message) {
+    messageHandler: (sender, message) => {
       // var json_message = JSON.stringify(message, undefined, 2);              // multiline
       var json_message = JSON.stringify(message);
 
@@ -585,7 +592,7 @@ j1.adapter.fab = (function (j1, window) {
     // setState()
     // Sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: function (stat) {
+    setState: (stat) => {
       _this.state = stat;
     }, // END setState
 
@@ -593,7 +600,7 @@ j1.adapter.fab = (function (j1, window) {
     // getState()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: function () {
+    getState: () => {
       return _this.state;
     } // END getState
 

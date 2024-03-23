@@ -451,7 +451,6 @@ var j1 = ((options) => {
         // add for compatibility reasons
         template_version_changed = true;
         user_state.template_version = template_version;
-        logger.warn('\n' + 'template_version not found, set value to: ' +  template_version);
         cookie_written = j1.writeCookie({
           name:     cookie_names.user_state,
           data:     user_state,
@@ -475,9 +474,6 @@ var j1 = ((options) => {
           j1.expireCookie({ name: cookie_names.user_translate });
         }
       }
-
-      // logger.info('\n' + 'register monitors');
-      // j1.registerMonitors();
 
       // -----------------------------------------------------------------------
       // APP mode
@@ -568,6 +564,13 @@ var j1 = ((options) => {
 
               if (j1CoreFinished && pageVisible && atticFinished) {
                 startTimeModule = Date.now();
+
+                _this.setState('started');
+                logger.debug('\n' + 'set page initializer state to: ' + _this.getState());
+                logger.info('\n' + 'initializing page: started');
+
+                logger.info('\n' + 'register monitors');
+                j1.registerMonitors();
 
                 banner_blocks   = document.querySelectorAll('[id^="banner"]').length;
                 panel_blocks    = document.querySelectorAll('[id^="panel"]').length;
@@ -669,15 +672,19 @@ var j1 = ((options) => {
         });
         // END app mode
       } else {
-        // web mode
+        // ---------------------------------------------------------------------
+        // WEB mode
+        // ---------------------------------------------------------------------
+        //
         state = 'started';
         logger.debug('\n' + 'state: ' + state);
         logger.info('\n' + 'page is being initialized');
       }
 
-      // ---------------------------------------------------------------------
-      // WEB mode
-      // ---------------------------------------------------------------------
+      state = 'started';
+      logger.debug('\n' + 'state: ' + state);
+      logger.info('\n' + 'page is being initialized');
+
       if ( settings.scrollbar === 'false'  ) {
         $('body').addClass('hide-scrollbar');
         $('html').addClass('hide-scrollbar-moz');
@@ -734,10 +741,12 @@ var j1 = ((options) => {
         var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
         var atticFinished   = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-        if (pageVisible && atticFinished) {
+        if (j1CoreFinished && pageVisible && atticFinished) {
           startTimeModule = Date.now();
 
-          logger.info('\n' + 'page is being initialized');
+          _this.setState('started');
+          logger.debug('\n' + 'set page initializer state to: ' + _this.getState());
+          logger.info('\n' + 'initializing page: started');
 
           logger.info('\n' + 'register monitors');
           j1.registerMonitors();
@@ -809,6 +818,10 @@ var j1 = ((options) => {
               }
             }, 10);
 
+            endTimeModule = Date.now();
+            logger.info('\n' + 'page finalized successfully');
+            logger.info('\n' + 'page initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+
             clearInterval(dependencies_met_page_ready);
             // END if  banner_blocks || panel_blocks
           } else {
@@ -838,9 +851,9 @@ var j1 = ((options) => {
             }, 10); // END dependencies_met_footer_block_ready
           } // END pages w/o banners or panels
 
-          endTimeModule = Date.now();
-          logger.info('\n' + 'page finalized successfully');
-          logger.info('\n' + 'page initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+          // endTimeModule = Date.now();
+          // logger.info('\n' + 'page finalized successfully');
+          // logger.info('\n' + 'page initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_page_ready);
         } // END pageVisible
@@ -887,17 +900,18 @@ var j1 = ((options) => {
       var cb_load_closure = (banner_id) => {
         return (responseTxt, statusTxt, xhr) => {
           if (statusTxt ==  'success') {
-            logger.debug('\n' + 'loading banner completed on id: ' + banner_id);
+            logText = '\n' + 'loading banner completed on id: ' +banner_id;
+            logger.debug(logText);
             j1.setXhrDataState(banner_id, statusTxt);
             j1.setXhrDomState(banner_id, statusTxt);
             logger.debug('\n' + 'XHR data loaded in the DOM: ' + banner_id);
           }
           if (statusTxt == 'error') {
-            logText = '\n' + 'loading banner failed on id: '  +banner_id + ', error: ' + xhr.status + ': ' + xhr.statusText;
+            logText = '\n' + 'loading banner failed on id: ' +banner_id+ ', error: ' + xhr.status + ': ' + xhr.statusText;
             logger.error(logText);
             j1.setXhrDataState(banner_id, statusTxt);
             j1.setXhrDomState(banner_id, statusTxt);
-
+            // Set|Log status
             state = 'failed';
             logger.error('\n' + 'state: ' + state);
           }
@@ -955,7 +969,7 @@ var j1 = ((options) => {
 
       {% comment %} LOAD all banner registered
       -------------------------------------------------------------------------- {% endcomment %}
-      if ( banner.length ) {
+      if (banner.length) {
         for (var i in banner) {
           var id = '#' + banner[i];
           var selector = $(id);
@@ -971,12 +985,11 @@ var j1 = ((options) => {
       }  else {
         logText = '\n' + 'no banner found in site';
         logger.debug(logText);
-
         return false;
-      }
+      } // END if banner
 
       return true;
-    }, // END initBanner
+    },
 
     // -------------------------------------------------------------------------
     // initPanel()
@@ -998,17 +1011,18 @@ var j1 = ((options) => {
       var cb_load_closure = (panel_id) => {
         return (responseTxt, statusTxt, xhr) => {
           if (statusTxt == 'success') {
-            logger.debug('\n' + 'loading panel completed on id: ' + panel_id);
+            logText = '\n' + 'loading panel completed on id: ' +panel_id;
+            logger.debug(logText);
             j1.setXhrDataState(panel_id, statusTxt);
             j1.setXhrDomState(panel_id, statusTxt);
             logger.debug('\n' + 'XHR data loaded in the DOM: ' + panel_id);
           }
           if (statusTxt == 'error') {
-            logText = '\n' + 'loading panel failed on id: ' + panel_id + ', error ' + xhr.status + ': ' + xhr.statusText;
+            logText = '\n' + 'loading panel failed on id: ' +panel_id+ ', error ' + xhr.status + ': ' + xhr.statusText;
             logger.error(logText);
             j1.setXhrDataState(panel_id, statusTxt);
             j1.setXhrDomState(panel_id, statusTxt);
-
+            // Set|Log status
             state = 'error';
             logger.error('\n' + 'state: ' + state);
           }
@@ -1075,12 +1089,11 @@ var j1 = ((options) => {
       } else {
         logText = '\n' + 'no panel found in site';
         logger.debug(logText);
-
         return false;
-      }
+      } // END if panel
 
       return true;
-    }, // END initPanel
+    },
 
     // -------------------------------------------------------------------------
     // initFooter()
@@ -1090,17 +1103,19 @@ var j1 = ((options) => {
       var logger = log4javascript.getLogger('j1.initFooter');
       var mod    = 'j1';
 
-      var cb_load_closure = (footer_id) => {
+      var cb_load_closure = function (footer_id) {
         return (responseTxt, statusTxt, xhr) => {
           if (statusTxt ==  'success') {
-            logger.debug('\n' + 'footer loaded successfully on id: ' + footer_id);
+            logText = '\n' + 'footer loaded successfully on id: ' + footer_id;
+            logger.debug(logText);
             j1.setXhrDataState(footer_id, statusTxt);
             j1.setXhrDomState(footer_id, statusTxt);
             logger.debug('\n' + 'XHR data loaded in the DOM: ' + footer_id);
-            logger.debug('\n' + 'initialization footer finished');
+            logText = '\n' + 'initialization finished';
+            logger.info(logText);
           }
           if (statusTxt == 'error') {
-            logText = '\n' + 'loading footer failed on id: ' + footer_id + ', error ' + xhr.status + ': ' + xhr.statusText;
+            logText = '\n' + 'loading footer failed on id: ' +footer_id+ ', error ' + xhr.status + ': ' + xhr.statusText;
             logger.error(logText);
             j1.setXhrDataState(footer_id, statusTxt);
             j1.setXhrDomState(footer_id, statusTxt);
@@ -1108,12 +1123,14 @@ var j1 = ((options) => {
             // Set|Log status
             state = 'failed';
             logger.error('\n' + 'state: ' + state);
-            logger.error('\n' + 'initialization footer failed');
+            logText = '\n' + 'initialization finished';
+            logger.info(logText);
           }
         };
       };
 
-      logger.info('\n' + 'loading footer on id: {{footer_id}}');
+      logText = '\n' + 'loading footer on id: {{footer_id}}';
+      logger.info(logText);
 
       var id = '#' + '{{footer_id}}';
       var selector = $(id);
@@ -1121,15 +1138,15 @@ var j1 = ((options) => {
         var footer_data_path = '{{footer_data_path}} ' + id;
         selector.load(footer_data_path, cb_load_closure(id));
       } else {
-        logger.debug('\n' + 'data not loaded');
+        logText = '\n' + 'data not loaded';
+        logger.debug(logText);
         j1.setXhrDataState(id, 'not loaded');
         j1.setXhrDomState(id, 'pending');
-
         return false;
-      }
+      } // END if selector
 
       return true;
-    }, // END initFooter
+    },
 
     // -------------------------------------------------------------------------
     // finalizePage
@@ -1141,7 +1158,7 @@ var j1 = ((options) => {
     //  To make correct data sure for APP mode, a status request is done
     //  to load the current state from the middleware (skipped in WEB mode)
     // -------------------------------------------------------------------------
-    finalizePage: (options) => {
+    finalizePage: function (options) {
       var logger              = log4javascript.getLogger('j1.finalizePage');
       var url                 = new liteURL(window.location.href);
       var baseUrl             = url.origin;
@@ -1193,8 +1210,7 @@ var j1 = ((options) => {
       logger.info(logText);
 
       if (j1.appDetected()) {
-        // ---------------------------------------------------------------------
-        // APP mode
+        // app mode
         // ---------------------------------------------------------------------
         logger.info('\n' + 'mode detected: app');
 
@@ -1364,25 +1380,19 @@ var j1 = ((options) => {
               }, {{template_config.page_on_load_timeout}});
 
               clearInterval(dependencies_met_page_ready);
-            }
-          }, 10);
+            } // END pageVisible
+          }, 10);  // END dependencies_met_page_ready
 
-          // set|log status
+          // set status
           state = 'finished';
           j1.setState(state);
-          logText = '\n' + 'state: ' + state;
-          logger.info(logText);
-          logText = '\n' + 'page finalized successfully';
-          logger.info(logText);
-
-          endTimeModule = Date.now();
-          logger.info('\n' + 'page initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
-
         });
+      // END appDetected
       } else {
         // ---------------------------------------------------------------------
         // WEB mode
         // ---------------------------------------------------------------------
+
         logger.info('\n' + 'state: finished');
         logger.info('\n' + 'page initialization: finished');
 
@@ -1549,10 +1559,9 @@ var j1 = ((options) => {
 
         // initiate smooth scroller if page is ready and visible
         var dependencies_met_page_ready = setInterval (() => {
-          var pageState   = $('#no_flicker').css("display");
-          var pageVisible = (pageState == 'block') ? true: false;
-          var atticFinished   = (j1.adapter.attic.getState() == 'finished') ? true: false;
-
+          var pageState     = $('#no_flicker').css("display");
+          var pageVisible   = (pageState == 'block') ? true: false;
+          var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
           if (j1.getState() === 'finished' && pageVisible && atticFinished) {
             setTimeout(() => {
@@ -1561,21 +1570,19 @@ var j1 = ((options) => {
             }, {{template_config.page_on_load_timeout}});
 
             clearInterval(dependencies_met_page_ready);
-          }
-        }, 10);
+          } // END pageVisible
+        }, 10); // END dependencies_met_page_ready
 
-        // set|log status
+        // set status
         state = 'finished';
         j1.setState(state);
-        logText = '\n' + 'state: ' + state;
-        logger.info(logText);
-        logText = '\n' + 'page finalized successfully';
-        logger.info(logText);
 
-        endTimeModule = Date.now();
-        logger.info('\n' + 'page initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
-      }
+      }  // END WEB mode
     }, // END finalizePage
+
+    // -------------------------------------------------------------------------
+    // Helper functions
+    // -------------------------------------------------------------------------
 
     // -------------------------------------------------------------------------
     // mergeData()
@@ -1598,7 +1605,7 @@ var j1 = ((options) => {
     // getPrevPage()
     // Returns the last vistited page
     // -------------------------------------------------------------------------
-    getPrevPage: () => {
+    getPrevPage: function () {
       return previous_page;
     }, // END getPrevPage
 
@@ -1608,7 +1615,7 @@ var j1 = ((options) => {
     // See:
     // https://stackoverflow.com/questions/1043339/javascript-for-detecting-browser-language-preference
     // -------------------------------------------------------------------------
-    getLanguage: () => {
+    getLanguage: function () {
       var language = navigator.languages ? navigator.languages[0] : (navigator.language || navigator.userLanguage);
     }, // END getLanguage
 
@@ -1616,7 +1623,7 @@ var j1 = ((options) => {
     // getTemplateVersion()
     // Returns the template version taken from site config (_config.yml)
     // -------------------------------------------------------------------------
-    getTemplateVersion: () => {
+    getTemplateVersion: function () {
       return '{{template_version}}';
     }, // END getTemplateVersion
 
@@ -1624,7 +1631,7 @@ var j1 = ((options) => {
     // getScrollOffset()
     // Calculate offset for a correct (smooth) scroll position
     // -------------------------------------------------------------------------
-    getScrollOffset: (offsetCorrection) => {
+    getScrollOffset: function (offsetCorrection) {
       var $pagehead     = $('.attic');
       var $navbar       = $('#navigator_nav_navbar');
       var $adblock      = $('#adblock');
@@ -1656,7 +1663,7 @@ var j1 = ((options) => {
     // TOCCER module
     // NOTE: crollTo() is triggered by 'onDocumentHeigthChange'
     // -------------------------------------------------------------------------
-    scrollTo: (offset) => {
+    scrollTo: function (offset) {
       var logger          = log4javascript.getLogger('j1.scrollTo');
       var anchor          = window.location.href.split('#')[1];
       var anchor_id       = (typeof anchor !== 'undefined') && (anchor != '') ? '#' + anchor : false;
@@ -1699,7 +1706,6 @@ var j1 = ((options) => {
         logger.info('\n' + 'bound click event to "#", suppress default action');
         $(window).scrollTop($(window).scrollTop()+1);
         $(window).scrollTop($(window).scrollTop()-1);
-
         return false;
       }
     }, // END scrollTo
@@ -1708,7 +1714,7 @@ var j1 = ((options) => {
     //  authEnabled()
     //  Returns the state of the authentication module
     // -------------------------------------------------------------------------
-    authEnabled: () => {
+    authEnabled: function () {
       var logger      = log4javascript.getLogger('j1.authentication');
       var authEnabled = {{authentication_options.j1_auth.enabled}};
 
@@ -1719,7 +1725,7 @@ var j1 = ((options) => {
     //  appDetected()
     //  Returns true if a web session cookie exists
     // -------------------------------------------------------------------------
-    appDetected: () => {
+    appDetected: function () {
       var user_session;
       var cookieExists = j1.existsCookie(cookie_names.user_session);
       var detected = false;
@@ -1731,7 +1737,6 @@ var j1 = ((options) => {
         // detected = 'unknown';
         detected = false;
       }
-
       return detected;
     }, // END appDetected
 
@@ -1740,7 +1745,7 @@ var j1 = ((options) => {
     // Load HTML data asychronously using XHR|jQuery on an element (e.g. <div>)
     // specified by xhr_container_id, xhr_data_path (options)
     // -------------------------------------------------------------------------
-    loadHTML: (options, mod, status) => {
+    loadHTML: function (options, mod, status) {
       var logger            = log4javascript.getLogger('j1.loadHTML');
       var selector          = $('#' + options.xhr_container_id);
       var state             = status;
@@ -1751,29 +1756,30 @@ var j1 = ((options) => {
         subtree:        true
       };
       var observer;
+      var logText;
 
-      var cb_load_closure = (mod, id) => {
-        return (responseTxt, statusTxt, xhr) => {
-          if (statusTxt === 'success') {
+      var cb_load_closure = function(mod, id) {
+        return function (responseTxt, statusTxt, xhr) {
+          var logger = log4javascript.getLogger('j1.loadHTML');
+          if ( statusTxt === 'success' ) {
             j1.setXhrDataState(id, statusTxt);
             j1.setXhrDomState(id, 'pending');
 
-            logger.debug('\n' + 'data loaded successfully on id: ' +id);
-
+            logText = '\n' + 'data loaded successfully on id: ' +id;
+            logger.debug(logText);
             state = true;
           }
           if ( statusTxt === 'error' ) {
             // jadams, 2020-07-21: to be checked why id could be UNDEFINED
             if (typeof(id) != "undefined") {
               state = 'failed';
-              logger.debug('\n' + 'set state for ' +mod+ ' to: ' + state);
+              logger.info('\n' + 'set state for ' +mod+ ' to: ' + state);
               // jadams, 2020-07-21: intermediate state should DISABLED
               // executeFunctionByName(mod + '.setState', window, state);
               j1.setXhrDataState(id, statusTxt);
               j1.setXhrDomState(id, 'pending');
               logText = '\n' + 'loading data failed on id: ' +id+ ', error ' + xhr.status + ': ' + xhr.statusText;
               logger.error(logText);
-
               state = false;
             }
           }
@@ -1783,9 +1789,9 @@ var j1 = ((options) => {
       // see: https://stackoverflow.com/questions/20420577/detect-added-element-to-dom-with-mutation-observer
       //
       var html_data_path = options.xhr_data_path + ' #' + options.xhr_data_element;
-      var id             = '#' + options.xhr_container_id;
-      var container      = '#' + options.xhr_container_id + '_container';
-      var $selector      = $(id);
+      var id        = '#' + options.xhr_container_id;
+      var container = '#' + options.xhr_container_id + '_container';
+      var $selector = $(id);
 
       // NOTE: Unclear why some pages (e.g. about/site) affected (fam button).
       // All pages should have FRONTMATTER defaults (by _config.yml) setting
@@ -1799,8 +1805,8 @@ var j1 = ((options) => {
         return;
       }
 
-      if ($selector.length) {
-        $selector.load(html_data_path, cb_load_closure( mod, id ));
+      if ( $selector.length ) {
+        $selector.load( html_data_path, cb_load_closure( mod, id ) );
 
         var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
         var xhrObserver = new MutationObserver (mutationHandler);
@@ -1825,7 +1831,7 @@ var j1 = ((options) => {
       } else {
         // jadams, 2020-07-21: To be clarified why a id is "undefined"
         // failsafe - prevent XHR load errors
-        if (id !== '#undefined') {
+        if (id != '#undefined') {
           j1.setXhrDataState(id, 'not loaded');
           j1.setXhrDomState(id, 'not loaded')
 
@@ -1834,7 +1840,6 @@ var j1 = ((options) => {
           // state = false;
         }
       }
-
       return state;
     }, // END loadHTML
 
@@ -1842,7 +1847,7 @@ var j1 = ((options) => {
     // loadJS()
     // Load JS data asychronously using jQuery (XHR)
     // -------------------------------------------------------------------------
-    loadJS: (options, mod, status) => {
+    loadJS: function (options, mod, status) {
       var logger  = log4javascript.getLogger('j1.loadJS');
       var state   = status;
       var logText;
@@ -1855,7 +1860,6 @@ var j1 = ((options) => {
 
             logText = '\n' + 'data loaded successfully for: ' +id;
             logger.info(logText);
-
             state = true;
           }
           if ( statusTxt === 'error' ) {
@@ -1864,7 +1868,6 @@ var j1 = ((options) => {
             j1.setXhrDataState(id, statusTxt);
             logText = '\n' + 'loading data failed for: ' +id+ ', error ' + xhr.status + ': ' + xhr.statusText;
             logger.error(logText);
-
             state = false;
           }
         };
@@ -1882,12 +1885,12 @@ var j1 = ((options) => {
     // -------------------------------------------------------------------------
     // removeRessource (Vanilla JS)
     // -------------------------------------------------------------------------
-    removeRessource: (filename, filetype) => {
+    removeRessource: function (filename, filetype) {
       // determine element type to create nodelist from
-      var targetelement = (filetype === "js") ? "script" : (filetype === "css") ? "link" : "none";
+      var targetelement=(filetype=="js")? "script" : (filetype=="css")? "link" : "none"
       // determine corresponding attribute to test for
-      var targetattr = (filetype === "js") ? "src" : (filetype === "css") ? "href" : "none";
-      var allsuspects = document.getElementsByTagName(targetelement)
+      var targetattr=(filetype=="js")? "src" : (filetype=="css")? "href" : "none"
+      var allsuspects=document.getElementsByTagName(targetelement)
 
       // search backwards within nodelist for matching elements to remove
       // remove element by calling parentNode.removeChild()
@@ -1901,7 +1904,7 @@ var j1 = ((options) => {
     // subdomain()
     // Returns true|false if a subdomain is used for a given URL
     // -------------------------------------------------------------------------
-    subdomain: (url) => {
+    subdomain: function (url) {
       // See: https://snipplr.com/view/5449/check-if-a-url-contains-a-subdomain
 
       // IF THERE, REMOVE WHITE SPACE FROM BOTH ENDS
@@ -1938,7 +1941,7 @@ var j1 = ((options) => {
     // -------------------------------------------------------------------------
     //  readCookie (Vanilla JS)
     // -------------------------------------------------------------------------
-    readCookie: (name) => {
+    readCookie: function (name) {
       var data;
       var data_json;
       var cookieExists = j1.existsCookie(name);
@@ -1989,7 +1992,7 @@ var j1 = ((options) => {
     //    must now also specify the Secure attribute (they require a secure
     //    context/HTTPS).
     // -------------------------------------------------------------------------
-    writeCookie: (options /*name, data, [path, expires, domain, samesite, http_only, secure]*/) => {
+    writeCookie: function (options /*name, data, [path, expires, domain, samesite, http_only, secure]*/) {
       var date                  = new Date();
       var timestamp_now         = date.toISOString();
       var url                   = new liteURL(window.location.href);
@@ -2014,7 +2017,7 @@ var j1 = ((options) => {
 
       // Failsafe: if 'None' is given for samesite in non-secure environments
       // -----------------------------------------------------------------------
-      if (settings.samesite === 'None' && !settings.secure) {
+      if (settings.samesite == 'None' && !settings.secure) {
         settings.samesite = 'Lax';
       }
 
@@ -2044,7 +2047,7 @@ var j1 = ((options) => {
 
       // set domain used by cookies
       if (settings.domain) {
-        if (settings.domain === 'auto') {
+        if (settings.domain == 'auto') {
           stringifiedAttributes += '; ' + 'Domain=' + auto_domain;
         } else {
           stringifiedAttributes += '; ' + 'Domain=' + settings.domain;
@@ -2053,7 +2056,7 @@ var j1 = ((options) => {
 
       // set secure attribute
       if (settings.secure) {
-        if (settings.secure === 'auto') {
+        if (settings.secure == 'auto') {
           stringifiedAttributes += '; ' + 'Secure=' + auto_secure;
         } else {
           stringifiedAttributes += '; ' + 'Secure=' + settings.secure;
@@ -2080,7 +2083,7 @@ var j1 = ((options) => {
     // -------------------------------------------------------------------------
     // See: https://stackoverflow.com/questions/52287989/javascript-cookie-remove-or-delete-with-regex-regular-expression
     // -------------------------------------------------------------------------
-    findCookie: (name) => {
+    findCookie: function (name) {
       var rCookie=[];
       document.cookie.replace(new RegExp(name + '[^= ]*', 'g'), function(a){ rCookie.push(a.trim()); });
 
@@ -2090,7 +2093,7 @@ var j1 = ((options) => {
     // -------------------------------------------------------------------------
     // removeCookie (Vanilla JS)
     // -------------------------------------------------------------------------
-    removeCookie: (options /*name, [path, domain]*/) => {
+    removeCookie: function (options /*name, [path, domain]*/) {
       var url                   = new liteURL(window.location.href);
       var baseUrl               = url.origin;;
       var hostname              = url.hostname;
@@ -2116,16 +2119,16 @@ var j1 = ((options) => {
 
       // set domain used by cookies
       if (settings.domain) {
-        if (settings.domain === 'auto') {
+        if (settings.domain == 'auto') {
           stringifiedAttributes += '; ' + 'Domain=' + auto_domain;
-        } else if (typeof settings.domain === 'string') {
+        } else if (typeof settings.domain == 'string') {
           stringifiedAttributes += '; ' + 'Domain=' + settings.domain;
         }
       }
 
       // set secure attribute
       if (settings.secure) {
-        if (settings.secure === 'auto') {
+        if (settings.secure == 'auto') {
           stringifiedAttributes += '; ' + 'Secure=' + auto_secure;
         } else {
           stringifiedAttributes += '; ' + 'Secure=' + settings.secure;
@@ -2163,7 +2166,7 @@ var j1 = ((options) => {
     // to already KNOWN values.
     //
     // -------------------------------------------------------------------------
-    expireCookie: (options /*name [,path, samesite, secure]*/) => {
+    expireCookie: function (options /*name [,path, samesite, secure]*/) {
       var url                   = new liteURL(window.location.href);
       var baseUrl               = url.origin;;
       var hostname              = url.hostname;
@@ -2188,7 +2191,7 @@ var j1 = ((options) => {
 
       // set domain used by cookies
       if (settings.domain) {
-        if (settings.domain === 'auto') {
+        if (settings.domain == 'auto') {
           stringifiedAttributes += '; ' + 'Domain=' + auto_domain;
         } else if (typeof settings.domain == 'string') {
           if (settings.domain !== 'false') {
@@ -2199,18 +2202,18 @@ var j1 = ((options) => {
 
       // set secure attribute
       if (settings.secure) {
-        if (settings.secure === 'auto') {
+        if (settings.secure == 'auto') {
           stringifiedAttributes += '; ' + 'Secure=' + auto_secure;
         } else {
           stringifiedAttributes += '; ' + 'Secure=' + settings.secure;
         }
       }
 
-      var dc      = document.cookie;                                          // all cookies in page
-      var end     = dc.length;                                                // default to end of the string
-      var prefix  = settings.name + '=';                                      // search string for the cookie name given
-      var begin   = dc.indexOf('; ' + prefix);
-      var content = '';
+      var dc        = document.cookie;                                          // all cookies in page
+      var end       = dc.length;                                                // default to end of the string
+      var prefix    = settings.name + '=';                                      // search string for the cookie name given
+      var begin     = dc.indexOf('; ' + prefix);
+      var content   = '';
 
       // collect the cookie content
       // -----------------------------------------------------------------------
@@ -2244,7 +2247,7 @@ var j1 = ((options) => {
     // existsCookie (Vanilla JS)
     // returns true if a cookie of given name exists
     // -------------------------------------------------------------------------
-    existsCookie: (name) => {
+    existsCookie: function (name) {
       var dc            = document.cookie;
       var prefix        = name + '=';
       var begin         = dc.indexOf('; ' + prefix);
@@ -2290,10 +2293,10 @@ var j1 = ((options) => {
     //  https://stackoverflow.com/questions/179713/how-to-change-the-href-for-a-hyperlink-using-jquery
     //  https://stackoverflow.com/questions/5223/length-of-a-javascript-object
     // -------------------------------------------------------------------------
-    resolveMacros: (user_data) => {
+    resolveMacros: function (user_data) {
       var logger = log4javascript.getLogger('j1.resolveMacros');
 
-      var sidebarLoaded = setInterval(() => {
+      var sidebarLoaded = setInterval(function() {
         if ($('#sidebar_mmenu').length) {
           if (Object.keys(user_data).length) {
             $('[id^=macro-]').each(function() {
@@ -2362,10 +2365,10 @@ var j1 = ((options) => {
     // Update MACROs
     // Update the values, NOT the placeholders
     // -------------------------------------------------------------------------
-    updateMacros: (user_data) => {
+    updateMacros: function (user_data) {
       var logger = log4javascript.getLogger('j1.updateMacros');
 
-      var sidebarLoaded = setInterval(() => {
+      var sidebarLoaded = setInterval(function() {
         if ($('#sidebar_mmenu').length) {
 
           if (Object.keys(user_data).length) {
@@ -2420,7 +2423,7 @@ var j1 = ((options) => {
     // logger
     // Log a message
     // -------------------------------------------------------------------------
-    logger: (logger, level, message) => {
+    logger: function (logger, level, message) {
       var logger = log4javascript.getLogger(logger);
 
       logger[level](message);
@@ -2432,7 +2435,7 @@ var j1 = ((options) => {
     // getStyleValue:
     // Returns the value of a style from a css class definition
     // example: j1.getStyleValue('uno-primary', 'background-color')
-    getStyleValue: (className, style) => {
+    getStyleValue: function (className, style) {
       var elementId = 'test-' + className,
         testElement = document.getElementById(elementId),
         val;
@@ -2453,9 +2456,10 @@ var j1 = ((options) => {
     // getStyleSheetLoaded:
     // NOTE:
     // EXAMPLE: getStyleSheetLoaded('bootstrap');
-    // -------------------------------------------------------------------------
-    getStyleSheetLoaded: (styleSheet) => {
-      var sheets = document.styleSheets, stylesheet = sheets[(sheets.length - 1)];
+    //
+    getStyleSheetLoaded: function (styleSheet) {
+      // var styleSheet  = styleSheetName.toLowerCase() + '.css';
+      var sheets      = document.styleSheets, stylesheet = sheets[(sheets.length - 1)];
 
       // find CSS file 'styleSheetName' in document
       for(var i in document.styleSheets) {
@@ -2468,7 +2472,7 @@ var j1 = ((options) => {
     // -------------------------------------------------------------------------
     //  Returns the names of cookies used for J1 Theme
     // -------------------------------------------------------------------------
-    getCookieNames: () => {
+    getCookieNames: function () {
       return cookie_names;
     }, // END getCookieNames
 
@@ -2543,7 +2547,7 @@ var j1 = ((options) => {
     // setXhrDataState()
     // Set the final (loading) state of an element (partial) loaded via Xhr
     // -------------------------------------------------------------------------
-    setXhrDataState: (obj, stat) => {
+    setXhrDataState: function (obj, stat) {
       j1.xhrDataState[obj] = stat;
     }, // END setXhrDataState
 
@@ -2551,7 +2555,7 @@ var j1 = ((options) => {
     // getXhrDataState()
     // Returns the final (loading) state of an element (partial) loaded via Xhr
     // -------------------------------------------------------------------------
-    getXhrDataState: (obj) => {
+    getXhrDataState: function (obj) {
       return j1.xhrDataState[obj];
     }, // END mergeData
 
@@ -2560,7 +2564,7 @@ var j1 = ((options) => {
     // Set the state of an element loaded via Xhr that is
     // successfully added to the DOM
     // -------------------------------------------------------------------------
-    setXhrDomState: (obj, stat) => {
+    setXhrDomState: function (obj, stat) {
       j1.xhrDOMState[obj] = stat;
     }, // END getXhrDataState
 
@@ -2569,7 +2573,7 @@ var j1 = ((options) => {
     // Returns the state of an element loaded via Xhr that is
     // successfully added to the DOM
     // -------------------------------------------------------------------------
-    getXhrDOMState: (obj) => {
+    getXhrDOMState: function (obj) {
       return j1.xhrDOMState[obj];
     }, // END getXhrDOMState
 
@@ -2577,7 +2581,7 @@ var j1 = ((options) => {
     // setMode()
     // Set the current mode of the site (web|app)
     // -------------------------------------------------------------------------
-    setMode: (mod) => {
+    setMode: function (mod) {
       mode = mod;
     }, // END setMode
 
@@ -2585,7 +2589,7 @@ var j1 = ((options) => {
     // getMode()
     // Returns the current mode of the site (web|app)
     // -------------------------------------------------------------------------
-    getMode: () => {
+    getMode: function () {
       return mode;
     }, // END getMode
 
@@ -2593,7 +2597,7 @@ var j1 = ((options) => {
     // checkUserAgent()
     // Returns the name (UA) of the web browser
     // -------------------------------------------------------------------------
-    checkUserAgent: () => {
+    checkUserAgent: function () {
       if (navigator.userAgent.search(ua_name) >= 0) {
         return true;
       } else {
@@ -2605,15 +2609,13 @@ var j1 = ((options) => {
     // generateId()
     // Generate a unique (thread) id used by the logger
     // -------------------------------------------------------------------------
-    generateId: (length) => {
+    generateId: function (length) {
      var result           = '';
      var characters       = 'abcdefghijklmnopqrstuvwxyz0123456789';
      var charactersLength = characters.length;
-
      for ( var i = 0; i < length; i++ ) {
-       result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
      }
-
      return result;
     }, // END generateId
 
@@ -2621,7 +2623,7 @@ var j1 = ((options) => {
     // getTrue()
     // Returns always true (for testing purposes)
     // -------------------------------------------------------------------------
-    getTrue: () => {
+    getTrue: function () {
       return true;
     }, // END getTrue
 
@@ -2629,7 +2631,7 @@ var j1 = ((options) => {
     // getFalse()
     // Returns always false (for testing purposes)
     // -------------------------------------------------------------------------
-    getFalse: () => {
+    getFalse: function () {
       return false;
     }, // END getFalse
 
@@ -2637,7 +2639,7 @@ var j1 = ((options) => {
     // goHome()
     // Redirect current page to the browser homepage
     // -------------------------------------------------------------------------
-    goHome: () => {
+    goHome: function () {
       // most browsers
       if (typeof window.home == 'function') {
         window.home();
@@ -2653,7 +2655,7 @@ var j1 = ((options) => {
     // goBack()
     // Redirect current page to last visited page (referrer)
     // -------------------------------------------------------------------------
-    goBack: () => {
+    goBack: function () {
       // where visitor has come from
       window.location.href = document.referrer;
     }, // END goBack
@@ -2664,14 +2666,14 @@ var j1 = ((options) => {
     // TODO: Find a better solution for 'dynamic' pages to detect
     // the content if fully loaded instead using a timeout
     // -------------------------------------------------------------------------
-    scrollToAnchor: () => {
+    scrollToAnchor: function () {
       var logger = log4javascript.getLogger('j1.scrollToAnchor');
       var scrollOffset;
 
       var dependencies_met_page_displayed = setInterval (() => {
         var pageState      = $('#no_flicker').css("display");
-        var pageVisible    = (pageState === 'block') ? true: false;
-        var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
+        var pageVisible    = (pageState == 'block') ? true: false;
+        var j1CoreFinished = (j1.getState() == 'finished') ? true : false;
         var pageMonitor    = (j1['pageMonitor'].pageType !== 'unknown') ? true : false;
 
         if (j1CoreFinished && pageVisible && pageMonitor) {
@@ -2679,7 +2681,7 @@ var j1 = ((options) => {
           // TODO: Check why a timeout is required to run the
           // smmoth scroller (j1.scrollTo)
           //
-          if (j1['pageMonitor'].pageType === 'static') {
+          if (j1['pageMonitor'].pageType == 'static') {
             // page type static
             setTimeout(() => {
               var headingUrl              = new URL(window.location.href);
@@ -2692,7 +2694,7 @@ var j1 = ((options) => {
 
               // scroll if headingId
               //
-              if (headingHash === '') {
+              if (headingHash == '') {
                 logger.debug('\n' + 'scrollToAnchor: top position detected');
               } else {
                 logger.debug('\n' + 'scrollToAnchor: scroll to headline by id: ' + headingHash);
@@ -2705,7 +2707,7 @@ var j1 = ((options) => {
             }, {{template_config.timeoutScrollStaticPages}});
 
             clearInterval(dependencies_met_page_displayed);
-          } else if (j1['pageMonitor'].pageType === 'dynamic') {
+          } else if (j1['pageMonitor'].pageType == 'dynamic') {
             // page type dynamic
             setTimeout(() => {
               var headingArray           = j1.core.parseHeadings();            // collect all headings in page
@@ -2737,7 +2739,7 @@ var j1 = ((options) => {
                       // calculate scrollOffsetCorrection based on AVERAGE
                       // height of (number of) headlines
                       //
-                      if (headlineNo === 1) {
+                      if (headlineNo == 1) {
                         scrollOffsetCorrection  = scrollOffset - (headlineNo * 89);
                       } else if (headlineNo <= 3) {
                         scrollOffsetCorrection = scrollOffset - (headlineNo * 30);
@@ -2764,7 +2766,7 @@ var j1 = ((options) => {
 
               // scroll to headline's top position
               //
-              if (headingHash === '') {
+              if (headingHash == '') {
                 headingHash = '#';
                 logger.debug('\n' + 'scrollToAnchor: top position detected');
               } else {
@@ -2803,7 +2805,7 @@ var j1 = ((options) => {
     // stringToBoolean()
     // convert a string to boolean
     // -------------------------------------------------------------------------
-    stringToBoolean: (string) => {
+    stringToBoolean: function (string) {
       switch(string.toLowerCase().trim()) {
         case "true":
         case "yes":
@@ -2831,7 +2833,7 @@ var j1 = ((options) => {
     //
     // -------------------------------------------------------------------------
     //
-    registerLazyLoadCss: () => {
+    registerLazyLoadCss: function () {
 
       console.log('register CSS files for lazy loading');
 
@@ -2881,12 +2883,12 @@ var j1 = ((options) => {
     // registerMonitors()
     //
     // -------------------------------------------------------------------------
-    registerMonitors: () => {
-      const development = ('{{environment}}'.includes('prod')) ? false : true;
+    registerMonitors: function () {
+      var cls;
+      var lcp
       var cumulated_cls = 0;
       var cumulated_lcp = 0;
-      var cls;
-      var lcp;
+      const development = ('{{environment}}'.includes('prod')) ? false : true;
 
       {% comment %} generate code for performance monitor if 'enabled'
       ------------------------------------------------------------------------ {% endcomment %}
@@ -2896,7 +2898,7 @@ var j1 = ((options) => {
       // see: https://developer.mozilla.org/en-US/docs/Web/API/LargestContentfulPaint
       //
       const performanceObserverLCP = new PerformanceObserver((entryList) => {
-        const entries = entryList.getEntries();
+        const entries     = entryList.getEntries();
 
         // logger API used for deveöopment only
         //
@@ -2912,10 +2914,10 @@ var j1 = ((options) => {
         var lcp_full    = cumulated_lcp/1000;
         lcp             = lcp_full.toFixed(3);
 
-        var url         = lastEntry.url;
-        var pathname    = url.replace( /^[a-zA-Z]{3,5}\:\/{2}[a-zA-Z0-9_.:-]+\//, '' );
+        var url       = lastEntry.url;
+        var pathname  = url.replace( /^[a-zA-Z]{3,5}\:\/{2}[a-zA-Z0-9_.:-]+\//, '' );
 
-        if (development && lastEntry.url !== '') {
+        if (development && lastEntry.url != '') {
           logger.debug('\n' + 'Largest Contentful Paint (LCP), url:', pathname);
         } else {
           console.debug(`Largest Contentful Paint (LCP), url: ${pathname}`);
@@ -3024,7 +3026,7 @@ var j1 = ((options) => {
 
         // skip first Observer event
         //
-        if (j1['pageMonitor'] !== undefined && j1['pageMonitor'].eventNo !== undefined && j1['pageMonitor'].eventNo === 2) {
+        if (j1['pageMonitor'] !== undefined && j1['pageMonitor'].eventNo !== undefined && j1['pageMonitor'].eventNo == 2) {
           // Set initial data from second event
           //
           j1['pageMonitor'].pageBaseHeight      = documentHeight;
@@ -3154,127 +3156,128 @@ var j1 = ((options) => {
       }
      });
 
-    }, // END registerMonitors
+   }, // END registerMonitors
 
-    // -------------------------------------------------------------------------
-    // int2float()
-    // convert an integer to float using given precision (default: 2 decimals)
-    // -------------------------------------------------------------------------
-    int2float: (number, precision = 2) => {
-      return number.toFixed(precision);
-    },
 
-    // -------------------------------------------------------------------------
-    // getTimeLeft()
-    // calulates the time left
-    // -------------------------------------------------------------------------
-    getTimeLeft: (endDate) => {
-      // Get the current date and time
-      const now = new Date();
+      // -------------------------------------------------------------------------
+      // int2float()
+      // convert an integer to float using given precision (default: 2 decimals)
+      // -------------------------------------------------------------------------
+      int2float: (number, precision=2) => {
+        return number.toFixed(precision);
+      },
 
-      // Get the milliseconds of both dates
-      const endTime     = endDate.getTime();
-      const currentTime = now.getTime();
+      // -------------------------------------------------------------------------
+      // getTimeLeft()
+      // calulates the time left
+      // -------------------------------------------------------------------------
+      getTimeLeft: (endDate) => {
+        // Get the current date and time
+        const now = new Date();
 
-      // Calculate the difference in milliseconds
-      const difference  = endTime - currentTime;
+        // Get the milliseconds of both dates
+        const endTime = endDate.getTime();
+        const currentTime = now.getTime();
 
-      // Check if the end date has passed (difference is negative)
-      if (difference < 0) {
-        return 'Time has passed!';
-      }
+        // Calculate the difference in milliseconds
+        const difference = endTime - currentTime;
 
-      // Calculate remaining days using milliseconds in a day
-      const daysLeft = Math.floor(difference / (1000 * 60 * 60 * 24));
+        // Check if the end date has passed (difference is negative)
+        if (difference < 0) {
+          return 'Time has passed!';
+        }
 
-      // Calculate remaining hours using milliseconds in an hour
-      const hoursLeft = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        // Calculate remaining days using milliseconds in a day
+        const daysLeft = Math.floor(difference / (1000 * 60 * 60 * 24));
 
-      // Calculate remaining minutes using milliseconds in a minute
-      const minutesLeft = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        // Calculate remaining hours using milliseconds in an hour
+        const hoursLeft = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 
-      // Calculate remaining seconds using milliseconds in a second
-      const secondsLeft = Math.floor((difference % (1000 * 60)) / 1000);
+        // Calculate remaining minutes using milliseconds in a minute
+        const minutesLeft = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
 
-      // Return a formatted string showing remaining time
-      return `${daysLeft} days, ${hoursLeft} hours, ${minutesLeft} minutes, ${secondsLeft} seconds left`;
+        // Calculate remaining seconds using milliseconds in a second
+        const secondsLeft = Math.floor((difference % (1000 * 60)) / 1000);
 
-    }, // END getTimeLeft
+        // Return a formatted string showing remaining time
+        return `${daysLeft} days, ${hoursLeft} hours, ${minutesLeft} minutes, ${secondsLeft} seconds left`;
 
-    // -------------------------------------------------------------------------
-    // getMessage
-    // Get a log message from the log message catalog object
-    // -------------------------------------------------------------------------
-    getMessage: (level, message, property) => {
-      var message = j1.messages[level][message]['message'][property];
+      }, // END getTimeLeft
 
-      return message;
-    }, // END getMessage
+      // -------------------------------------------------------------------------
+      // getMessage
+      // Get a log message from the log message catalog object
+      // -------------------------------------------------------------------------
+      getMessage: function (level, message, property) {
+        var message = j1.messages[level][message]['message'][property];
 
-    // -------------------------------------------------------------------------
-    // Send message
-    // -------------------------------------------------------------------------
-    sendMessage: (sender, receiver, message) => {
-      var logger        = log4javascript.getLogger('j1.sendMessage');
-      // var json_message  = JSON.stringify(message, undefined, 2);             // multiline
-      var json_message  = JSON.stringify(message);
+        return message;
+      }, // END mergeData
 
-      if (receiver === 'j1') {
-        logText = '\n' + 'send message from ' + sender + ' to' + receiver + ': ' + json_message;
+      // -------------------------------------------------------------------------
+      // Send message
+      // -------------------------------------------------------------------------
+      sendMessage: (sender, receiver, message) => {
+        var logger        = log4javascript.getLogger('j1.sendMessage');
+        // var json_message  = JSON.stringify(message, undefined, 2);             // multiline
+        var json_message  = JSON.stringify(message);
+
+        if (receiver === 'j1') {
+          logText = '\n' + 'send message from ' + sender + ' to' + receiver + ': ' + json_message;
+          logger.debug(logText);
+          executeFunctionByName('j1' + '.messageHandler', window, sender, message);
+        } else {
+          logText = '\n' + 'send message from ' + sender + ' to ' + receiver + ': ' + json_message;
+          logger.debug(logText);
+          //executeFunctionByName('j1.' + receiver + '.messageHandler', window, sender, message)
+          executeFunctionByName(receiver + '.messageHandler', window, sender, message);
+        }
+      }, // END sendMessage
+
+      // -------------------------------------------------------------------------
+      // messageHandler: MessageHandler for J1 CookieConsent module
+      // Manage messages send from other J1 modules
+      // -------------------------------------------------------------------------
+      messageHandler: (sender, message) => {
+        // var json_message  = JSON.stringify(message, undefined, 2);             // multiline
+        var json_message  = JSON.stringify(message);
+
+        logText = '\n' + 'received message from ' + sender + ': ' + json_message;
         logger.debug(logText);
-        executeFunctionByName('j1' + '.messageHandler', window, sender, message);
-      } else {
-        logText = '\n' + 'send message from ' + sender + ' to ' + receiver + ': ' + json_message;
-        logger.debug(logText);
-        //executeFunctionByName('j1.' + receiver + '.messageHandler', window, sender, message)
-        executeFunctionByName(receiver + '.messageHandler', window, sender, message);
-      }
-    }, // END sendMessage
 
-    // -------------------------------------------------------------------------
-    // messageHandler: MessageHandler for J1 CookieConsent module
-    // Manage messages send from other J1 modules
-    // -------------------------------------------------------------------------
-    messageHandler: (sender, message) => {
-      // var json_message  = JSON.stringify(message, undefined, 2);             // multiline
-      var json_message  = JSON.stringify(message);
+        // -----------------------------------------------------------------------
+        //  Process commands|actions
+        // -----------------------------------------------------------------------
+        if ( message.type === 'command' && message.action === 'module_initialized' ) {
+          _this.setState('finished');
+          logger.info('\n' + message.text);
+        }
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
-      logger.debug(logText);
+        //
+        // Place handling of other command|action here
+        //
 
-      // -----------------------------------------------------------------------
-      //  Process commands|actions
-      // -----------------------------------------------------------------------
-      if ( message.type === 'command' && message.action === 'module_initialized' ) {
-        _this.setState('finished');
-        logger.info('\n' + message.text);
-      }
+        return true;
+      }, // END messageHandler
 
-      //
-      // Place handling of other command|action here
-      //
+      // -------------------------------------------------------------------------
+      // setState()
+      // Set the current (processing) state of the module
+      // -------------------------------------------------------------------------
+      setState: function (stat) {
+        state = stat;
+      }, // END setState
 
-      return true;
-    }, // END messageHandler
+      // -------------------------------------------------------------------------
+      // getState()
+      // Returns the current (processing) state of the module
+      // -------------------------------------------------------------------------
+      getState: function () {
+        return state;
+      } // END getState
 
-    // -------------------------------------------------------------------------
-    // setState()
-    // Set the current (processing) state of the module
-    // -------------------------------------------------------------------------
-    setState: (stat) => {
-      state = stat;
-    }, // END setState
-
-    // -------------------------------------------------------------------------
-    // getState()
-    // Returns the current (processing) state of the module
-    // -------------------------------------------------------------------------
-    getState: () => {
-      return state;
-    } // END getState
-
-  }; // END return
-})(j1, window);
+    }; // END return
+  })(j1, window);
 
 {% comment %} NOTE: Unexpected token: punc (;) errors if compressed
 --------------------------------------------------------------------------------

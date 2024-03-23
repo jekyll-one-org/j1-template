@@ -85,7 +85,7 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.chatbot = (function (j1, window) {
+j1.adapter.chatbot = ((j1, window) => {
 
 {% comment %} Set global variables
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -109,12 +109,20 @@ var validChatbot;
 var validChatbotID;
 var user_consent;
 var apiExists;
+
 var _this;
 var logger;
 var logText;
 
+// date|time
+var startTime;
+var endTime;
+var startTimeModule;
+var endTimeModule;
+var timeSeconds;
+
   // ---------------------------------------------------------------------------
-  // Main object
+  // main
   // ---------------------------------------------------------------------------
   return {
 
@@ -122,17 +130,19 @@ var logText;
     // init()
     // adapter initializer
     // -------------------------------------------------------------------------
-    init: function (options) {
+    init: (options) => {
 
       // -----------------------------------------------------------------------
       // initializer
       // -----------------------------------------------------------------------
       var dependencies_met_page_ready = setInterval (() => {
-        var pageState     = $('#content').css("display");
-        var pageVisible   = (pageState == 'block') ? true: false;
-        var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
+        var pageState      = $('#content').css("display");
+        var pageVisible    = (pageState === 'block') ? true: false;
+        var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
-        if (j1.getState() === 'finished' && pageVisible) {
+        if (j1CoreFinished && pageVisible) {
+          startTimeModule = Date.now();
+
           {% if chat_enabled %}
 
             // Load  module DEFAULTS|CONFIG
@@ -199,6 +209,10 @@ var logText;
 
             logger.debug('\n' + 'state: ' + _this.getState());
             logger.info('\n' + 'module initializing: finished');
+
+            endTimeModule = Date.now();
+            logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+
             clearInterval(dependencies_met_page_ready);
 
             {% comment %} Setup VivoChat
@@ -211,7 +225,7 @@ var logText;
             logger.debug('\n' + 'state: ' + _this.getState());
             logger.info('\n' + 'module initializing: started');
 
-            apiExists = document.getElementById("{{chatbotID}}") === null ? false : true;
+            apiExists     = document.getElementById("{{chatbotID}}") === null ? false : true;
             user_consent  = j1.readCookie(cookie_names.user_consent);
             if (user_consent.personalization) {
               logger.info('\n' + 'user consent on personalization: ' + user_consent.personalization);
@@ -244,6 +258,10 @@ var logText;
             _this.setState('finished');
             logger.debug('\n' + 'state: ' + _this.getState());
             logger.info('\n' + 'module initializing: finished');
+
+            endTimeModule = Date.now();
+            logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+
             clearInterval(dependencies_met_page_ready);
 
             {% comment %} Setup TutGPT
@@ -279,7 +297,7 @@ var logText;
                apiScript.async = true;
                apiScript.id    = "chatbot-api";
 
-                apiScript.addEventListener("load", function (evt) {
+                apiScript.addEventListener("load", (evt) => {
                   BotChat.init({
                     id: chatbotID,
                   });
@@ -305,6 +323,10 @@ var logText;
             _this.setState('finished');
             logger.debug('\n' + 'state: ' + _this.getState());
             logger.info('\n' + 'module initializing: finished');
+
+            endTimeModule = Date.now();
+            logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+
             clearInterval(dependencies_met_page_ready);
 
             {% comment %} Setup ChatBob
@@ -322,8 +344,9 @@ var logText;
               $('.fab-btn').css('bottom', '5rem');
             }, 1000);
 
-            apiExists = document.getElementById("{{chatbotID}}") === null ? false : true;
+            apiExists     = document.getElementById("{{chatbotID}}") === null ? false : true;
             user_consent  = j1.readCookie(cookie_names.user_consent);
+
             if (user_consent.personalization) {
               logger.info('\n' + 'user consent on personalization: ' + user_consent.personalization);
               if (validChatbotID) {
@@ -348,6 +371,10 @@ var logText;
             _this.setState('finished');
             logger.debug('\n' + 'state: ' + _this.getState());
             logger.info('\n' + 'module initializing: finished');
+
+            endTimeModule = Date.now();
+            logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+
             clearInterval(dependencies_met_page_ready);
 
             {% comment %} Setup WebWhiz
@@ -365,8 +392,9 @@ var logText;
               $('.fab-btn').css('bottom', '5rem');
             }, 1000);
 
-            apiExists = document.getElementById("{{chatbotID}}") === null ? false : true;
+            apiExists     = document.getElementById("{{chatbotID}}") === null ? false : true;
             user_consent  = j1.readCookie(cookie_names.user_consent);
+
             if (user_consent.personalization) {
               logger.info('\n' + 'user consent on personalization: ' + user_consent.personalization);
               if (validChatbotID) {
@@ -391,6 +419,10 @@ var logText;
             _this.setState('finished');
             logger.debug('\n' + 'state: ' + _this.getState());
             logger.info('\n' + 'module initializing: finished');
+
+            endTimeModule = Date.now();
+            logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+
             clearInterval(dependencies_met_page_ready);
 
             {% comment %} Setup Custom Bot
@@ -403,6 +435,10 @@ var logText;
           {% else %}
             logger = log4javascript.getLogger('j1.adapter.chatbot');
             logger.info('\n' + 'chatbot: disabled');
+
+            endTimeModule = Date.now();
+            logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+
             clearInterval(dependencies_met_page_ready);
           {% endif %}
         }
@@ -415,7 +451,7 @@ var logText;
     // messageHandler()
     // manage messages send from other J1 modules
     // -------------------------------------------------------------------------
-    messageHandler: function (sender, message) {
+    messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
@@ -444,7 +480,7 @@ var logText;
     // setState()
     // Sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: function (stat) {
+    setState: (stat) => {
       _this.state = stat;
     }, // END setState
 
@@ -452,7 +488,7 @@ var logText;
     // getState()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: function () {
+    getState: () => {
       return _this.state;
     } // END getState
 

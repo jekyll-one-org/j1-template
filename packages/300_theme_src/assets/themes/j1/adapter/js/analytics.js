@@ -27,8 +27,8 @@ regenerate:                             true
 
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment       = site.environment %}
-{% assign asset_path        = "/assets/themes/j1" %}
+{% assign environment        = site.environment %}
+{% assign asset_path         = "/assets/themes/j1" %}
 
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
@@ -85,7 +85,7 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.analytics = (function (j1, window) {
+j1.adapter.analytics = ((j1, window) => {
 
 {% comment %} Set global variables
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -110,9 +110,17 @@ var skipHosts;
 var gaCookies;
 var user_consent;
 var gaExists;
+
 var _this;
 var logger;
 var logText;
+
+// date|time
+var startTime;
+var endTime;
+var startTimeModule;
+var endTimeModule;
+var timeSeconds;
 
   // ---------------------------------------------------------------------------
   // Main object
@@ -123,16 +131,17 @@ var logText;
     // init()
     // adapter initializer
     // -------------------------------------------------------------------------
-    init: function (options) {
+    init: (options) => {
 
       // -----------------------------------------------------------------------
       // initializer
       // -----------------------------------------------------------------------
       var dependencies_met_page_ready = setInterval (() => {
-        var pageState   = $('#content').css("display");
-        var pageVisible = (pageState == 'block') ? true: false;
+        var pageState      = $('#content').css("display");
+        var pageVisible    = (pageState === 'block') ? true: false;
+        var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
-        if (j1.getState() === 'finished' && pageVisible) {
+        if (j1CoreFinished && pageVisible) {
           {% if analytics %}
 
             // Load  module DEFAULTS|CONFIG
@@ -152,7 +161,7 @@ var logText;
             validProviderID   = (providerID.includes('your')) ? false : true;
 
             // -----------------------------------------------------------------
-            // Default module settings
+            // default module settings
             // -----------------------------------------------------------------
             var settings = $.extend({
               module_name: 'j1.adapter.analytics',
@@ -160,12 +169,13 @@ var logText;
             }, options);
 
             // -----------------------------------------------------------------
-            // Global variable settings
+            // global variable settings
             // -----------------------------------------------------------------
-            _this = j1.adapter.analytics;
+            _this  = j1.adapter.analytics;
             logger = log4javascript.getLogger('j1.adapter.analytics');
 
-            // initialize state flag
+            startTimeModule = Date.now();
+
             _this.setState('started');
             logger.debug('\n' + 'state: ' + _this.getState());
             logger.info('\n' + 'module initializing: started');
@@ -174,7 +184,7 @@ var logText;
             // session/page view if they exists
             // -----------------------------------------------------------------
             gaCookies = j1.findCookie('_ga');
-            gaCookies.forEach(function (item) {
+            gaCookies.forEach((item) => {
               logger.debug('\n' + 'delete cookie created by Google Analytics: ' + item);
               if (hostname == 'localhost') {
                 j1.removeCookie({ name: item, domain: false, secure: false });
@@ -219,9 +229,13 @@ var logText;
               GTagOptIn.register(providerID);
               GTagOptIn.optOut();
             }
+
             _this.setState('finished');
             logger.debug('\n' + 'state: ' + _this.getState());
             logger.info('\n' + 'module initializing: finished');
+
+            endTimeModule = Date.now();
+            logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
             clearInterval(dependencies_met_page_ready);
             {% when "custom" %}
@@ -244,7 +258,7 @@ var logText;
     // messageHandler()
     // manage messages send from other J1 modules
     // -------------------------------------------------------------------------
-    messageHandler: function (sender, message) {
+    messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
@@ -273,7 +287,7 @@ var logText;
     // setState()
     // Sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: function (stat) {
+    setState: (stat) => {
       _this.state = stat;
     }, // END setState
 
@@ -281,7 +295,7 @@ var logText;
     // getState()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: function () {
+    getState: () => {
       return _this.state;
     } // END getState
 

@@ -76,7 +76,7 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.iconPickerPage = (function (j1, window) {
+j1.adapter.iconPickerPage = ((j1, window) => {
 
 {% comment %} Set global variables
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -100,13 +100,12 @@ var logText;
   return {
 
     // -------------------------------------------------------------------------
-    // init()
     // adapter initializer
     // -------------------------------------------------------------------------
-    init: function (options) {
+    init: (options) => {
 
       // -----------------------------------------------------------------------
-      // Default module settings
+      // default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
         module_name: 'j1.adapter.iconPickerPage',
@@ -114,7 +113,7 @@ var logText;
       }, options);
 
       // -----------------------------------------------------------------------
-      // Global variable settings
+      // global variable settings
       // -----------------------------------------------------------------------
       iconPickerDefaults  = $.extend({}, {{icon_picker_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
       iconPickerSettings  = $.extend({}, {{iconPicker_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
@@ -183,11 +182,10 @@ var logText;
 
       var dependencies_met_page_ready = setInterval (() => {
         var pageState   = $('#content').css("display");
-        var pageVisible = (pageState == 'block') ? true : false;
-        var j1Finished  = (j1.getState() == 'finished') ? true : false;
+        var pageVisible = (pageState === 'block') ? true : false;
+        var j1Finished  = (j1.getState() === 'finished') ? true : false;
 
         if (j1Finished && pageVisible) {
-
           _this.setState('started');
           logger.debug('\n' + 'set module state to: ' + _this.getState());
           logger.info('\n' + 'initializing started');
@@ -206,7 +204,7 @@ var logText;
 
               clearInterval(dependencies_met_modules_ready);
             } // END if modules loaded
-          }, 10);
+          }, 10); // END if modules loaded
 
           const dummy = document.getElementById('dummy');
           dummy.remove();
@@ -216,14 +214,14 @@ var logText;
 
           clearInterval(dependencies_met_page_ready);
         } // END if page loaded
-      }, 10);
+      }, 10); // END dependencies_met_page_ready
     }, // END init
 
     // -------------------------------------------------------------------------
     // messageHandler()
     // manage messages send from other J1 modules
     // -------------------------------------------------------------------------
-    messageHandler: function (sender, message) {
+    messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
@@ -252,7 +250,7 @@ var logText;
     // setState()
     // Sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: function (stat) {
+    setState: (stat) => {
       _this.state = stat;
     }, // END setState
 
@@ -260,7 +258,7 @@ var logText;
     // getState()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: function () {
+    getState: () => {
       return _this.state;
     } // END getState
 

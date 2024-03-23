@@ -49,8 +49,8 @@ function CookieConsent(props) {
   var current_page;
   var whitelisted;
 
-  logger.info('\n' + 'initializing core module: started');
-  logger.info('\n' + 'state: started');
+  logger.debug('\n' + 'initializing core module: started');
+  logger.debug('\n' + 'state: started');
 
   if (navigatorLanguage.indexOf("-") !== -1) {
     navigatorLanguage = navigatorLanguage.split("-")[0];
@@ -395,8 +395,8 @@ function CookieConsent(props) {
 
   // API functions
   // ---------------------------------------------------------------------------
-  logger.info('\n' + 'initializing core module finished');
-  logger.info('\n' + 'state: finished');
+  logger.debug('\n' + 'initializing core module finished');
+  logger.debug('\n' + 'state: finished');
 
   // show the consent dialog (modal)
   // ---------------------------------------------------------------------------

@@ -84,7 +84,7 @@ regenerate:                             true
 /* eslint quotes: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.cookieConsent = (function (j1, window) {
+j1.adapter.cookieConsent = ((j1, window) => {
   var environment           = '{{environment}}';
   var tracking_enabled      = ('{{tracking_enabled}}' === 'true') ? true: false;
   var tracking_id           = '{{tracking_id}}';
@@ -102,11 +102,9 @@ j1.adapter.cookieConsent = (function (j1, window) {
   var cookieConsentSettings;
   var cookieConsentOptions;
 
-  var _this;
   var $modal;
   var cookie_names;
   var user_cookie;
-  var logger;
   var url;
   var baseUrl;
   var hostname;
@@ -114,24 +112,27 @@ j1.adapter.cookieConsent = (function (j1, window) {
   var check_cookie_option_domain;
   var cookie_domain;
   var secure;
-  var logText;
   var cookie_written;
   var contentLanguage;
   var navigatorLanguage;
   var domainAttribute;
 
-  // var user_translate = {
-  //   'analysis':                 'true',
-  //   'personalization':          'true',
-  //   'translationEnabled':       'true'
-  // };
+  var logger;
+  var logText;
+  var _this;
 
-  // NOTE: RegEx for tracking_id: ^(G|UA|YT|MO)-[a-zA-Z0-9-]+$
-  // See: https://stackoverflow.com/questions/20411767/how-to-validate-google-analytics-tracking-id-using-a-javascript-function/20412153
+  // date|time
+  var startTime;
+  var endTime;
+  var startTimeModule;
+  var endTimeModule;
+  var timeSeconds;
 
   // ---------------------------------------------------------------------------
   // Helper functions
   // ---------------------------------------------------------------------------
+  // NOTE: RegEx for tracking_id: ^(G|UA|YT|MO)-[a-zA-Z0-9-]+$
+  // See: https://stackoverflow.com/questions/20411767/how-to-validate-google-analytics-tracking-id-using-a-javascript-function/20412153
 
   // ---------------------------------------------------------------------------
   // Main object
@@ -141,7 +142,7 @@ j1.adapter.cookieConsent = (function (j1, window) {
     // -------------------------------------------------------------------------
     // Initializer
     // -------------------------------------------------------------------------
-    init: function (options) {
+    init: (options) => {
 
       // -----------------------------------------------------------------------
       // Default module settings
@@ -154,29 +155,26 @@ j1.adapter.cookieConsent = (function (j1, window) {
       // -----------------------------------------------------------------------
       // Global variable settings
       // -----------------------------------------------------------------------
-      _this                 = j1.adapter.cookieConsent;
-      logger                = log4javascript.getLogger('j1.adapter.cookieConsent');
-      cookie_names          = j1.getCookieNames();
-      url                   = new liteURL(window.location.href);
-      baseUrl               = url.origin;
-      hostname              = url.hostname;
-      auto_domain           = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
-      secure                = (url.protocol.includes('https')) ? true : false;
-      contentLanguage       = '{{site.language}}';
-      navigatorLanguage     = navigator.language || navigator.userLanguage;
+      _this             = j1.adapter.cookieConsent;
+      logger            = log4javascript.getLogger('j1.adapter.cookieConsent');
+      cookie_names      = j1.getCookieNames();
+      url               = new liteURL(window.location.href);
+      baseUrl           = url.origin;
+      hostname          = url.hostname;
+      auto_domain       = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
+      secure            = (url.protocol.includes('https')) ? true : false;
+      contentLanguage   = '{{site.language}}';
+      navigatorLanguage = navigator.language || navigator.userLanguage;
 
       // Load cookie DEFAULTS|CONFIG
-      cookieDefaults        = $.extend({}, {{cookie_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      cookieSettings        = $.extend({}, {{cookie_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      cookieOptions         = $.extend(true, {}, cookieDefaults, cookieSettings);
+      cookieDefaults    = $.extend({}, {{cookie_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      cookieSettings    = $.extend({}, {{cookie_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      cookieOptions     = $.extend(true, {}, cookieDefaults, cookieSettings);
 
       // Load  module DEFAULTS|CONFIG
       cookieConsentDefaults = $.extend({}, {{consent_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
       cookieConsentSettings = $.extend({}, {{consent_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
       cookieConsentOptions  = $.extend(true, {}, cookieConsentDefaults, cookieConsentSettings);
-
-      // initialize state flag
-      _this.state = 'pending';
 
       {% comment %} Load module config from yml data
       -------------------------------------------------------------------------- {% endcomment %}
@@ -187,7 +185,8 @@ j1.adapter.cookieConsent = (function (j1, window) {
 
       // if (typeof settings !== 'undefined') {
       //   moduleOptions = $.extend({}, moduleOptions, settings);
-      // }
+      //
+
       if (navigatorLanguage.indexOf("-") !== -1) {
         navigatorLanguage = navigatorLanguage.split("-")[0];
       }
@@ -206,54 +205,66 @@ j1.adapter.cookieConsent = (function (j1, window) {
       // -----------------------------------------------------------------------
       // initializer
       // -----------------------------------------------------------------------
-      var dependencies_met_page_ready = setInterval (function (options) {
-        var same_site = cookieOptions.same_site;
-        var expires;
+      var dependencies_met_page_ready = setInterval((options) => {
+        var pageState      = $('#content').css("display");
+        var pageVisible    = (pageState === 'block') ? true : false;
+        var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
-        if (cookieConsentOptions.enabled) {
-          expires = cookieOptions.expires;
-        } else {
-          // expire permanent cookies to session
-          j1.expireCookie({ name: cookie_names.user_state });
-          j1.expireCookie({ name: cookie_names.user_consent });
-          j1.expireCookie({ name: cookie_names.user_translate });
+        if (j1CoreFinished) {
+          var same_site = cookieOptions.same_site;
+          var expires;
 
-          // disable the themes menus
-          $('#themes_menu').css('display', 'none');
-          $('#themes_mmenu').css('display', 'none');
-          logger.warn('\n' + 'disable module: Themer');
+          startTimeModule = Date.now();
 
-          // disable the quick link for (Google) Translation
-          $('#quickLinksTranslateButton').css('display', 'none');
-          logger.warn('\n' + 'disable module: Trranslator');
-        }
-
-        // set domain used by cookies
-        if (check_cookie_option_domain) {
-          if (cookieOptions.domain == 'auto') {
-            domainAttribute = auto_domain;
-            stringifiedAttributes += '; ' + 'Domain=' + domainAttribute;
-          } else  {
-            domainAttribute = cookieOptions.domain;
-            stringifiedAttributes += '; ' + 'Domain=' + domainAttribute;
-          }
-        } else {
-          domainAttribute = cookieOptions.domain;
-        }
-
-        // Failsafe: if 'None' is given for samesite in non-secure
-        // environments open access to cookies to subdomains
-        // ---------------------------------------------------------------------
-        if (same_site == 'None' && !secure) {
-          same_site = 'Lax';
-        }
-
-        if ( j1.getState() === 'finished' ) {
           _this.setState('started');
+          logger.debug('\n' + 'set module state to: ' + _this.getState());
+          logger.info('\n' + 'initializing module: started');
+
+          if (cookieConsentOptions.enabled) {
+            expires = cookieOptions.expires;
+          } else {
+            // expire permanent cookies to session
+            j1.expireCookie({ name: cookie_names.user_state });
+            j1.expireCookie({ name: cookie_names.user_consent });
+            j1.expireCookie({ name: cookie_names.user_translate });
+
+            // disable the themes menus
+            $('#themes_menu').css('display', 'none');
+            $('#themes_mmenu').css('display', 'none');
+            logger.warn('\n' + 'disable module: Themer');
+
+            // disable the quick link for (Google) Translation
+            $('#quickLinksTranslateButton').css('display', 'none');
+            logger.warn('\n' + 'disable module: Trranslator');
+          }
+
+          // set domain used by cookies
+          if (check_cookie_option_domain) {
+            if (cookieOptions.domain === 'auto') {
+              domainAttribute = auto_domain;
+              stringifiedAttributes += '; ' + 'Domain=' + domainAttribute;
+            } else  {
+              domainAttribute = cookieOptions.domain;
+              stringifiedAttributes += '; ' + 'Domain=' + domainAttribute;
+            }
+          } else {
+            domainAttribute = cookieOptions.domain;
+          }
+
+          // Failsafe: if 'None' is given for samesite in non-secure
+          // environments open access to cookies to subdomains
+          // ---------------------------------------------------------------------
+          if (same_site === 'None' && !secure) {
+            same_site = 'Lax';
+          }
+
+          // -------------------------------------------------------------------
+          // NOTE: Click events moved to Navigator (core)
+          // -------------------------------------------------------------------
 
           if (cookieConsentOptions.enabled) {
             logger.debug('\n' + 'state: ' + _this.getState());
-            logger.info('\n' + 'module is being initialized');
+            logger.info('\n' + 'initialize core module');
 
             j1.cookieConsent = new CookieConsent ({
               contentURL:             cookieConsentOptions.contentURL,          // dialog content (modals) for all supported languages
@@ -275,15 +286,14 @@ j1.adapter.cookieConsent = (function (j1, window) {
 
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
-          logger.debug('\n' + 'module initialized successfully');
+          logger.info('\n' + 'module initialized successfully');
 
-          // -------------------------------------------------------------------
-          // NOTE: Click events moved to Navigator (core)
-          // -------------------------------------------------------------------
+          endTimeModule = Date.now();
+          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_page_ready);
-        }
-      }, 10);
+        } // END  j1CoreFinished
+      }, 10); // END dependencies_met_page_ready
     }, // END init
 
     // -------------------------------------------------------------------------
@@ -291,7 +301,7 @@ j1.adapter.cookieConsent = (function (j1, window) {
     // Called (callback) by CookieConsent module after the user has
     // made his selection
     // -------------------------------------------------------------------------
-    cbCookie: function () {
+    cbCookie: () => {
       var url             = new liteURL(window.location.href);
       var hostname        = url.hostname;
       var gaCookies       = j1.findCookie('_ga');
@@ -326,8 +336,8 @@ j1.adapter.cookieConsent = (function (j1, window) {
         if (!user_consent.analysis || !user_consent.personalization) {
 
           // overload cookie consent settings
-          user_translate.analysis         = user_consent.analysis;
-          user_translate.personalization  = user_consent.personalization;
+          user_translate.analysis        = user_consent.analysis;
+          user_translate.personalization = user_consent.personalization;
           // disable translation service
           user_translate.translationEnabled = false;
 
@@ -355,9 +365,9 @@ j1.adapter.cookieConsent = (function (j1, window) {
         // remove cookies on invalid GA config or left from a previous
         // session/page view if they exists
         // ---------------------------------------------------------------------
-        gaCookies.forEach(function (item) {
+        gaCookies.forEach((item) => {
           logger.warn('\n' + 'delete GA cookie: ' + item);
-          if (hostname == 'localhost') {
+          if (hostname === 'localhost') {
             j1.removeCookie({ name: item, domain: false, secure: false });
           } else {
             j1.removeCookie({ name: item, domain: '.' + hostname, secure: false });
@@ -367,10 +377,10 @@ j1.adapter.cookieConsent = (function (j1, window) {
         // remove cookies on invalid GAS config or left from a previous
         // session/page view if they exists
         // ---------------------------------------------------------------------
-        gasCookies.forEach(function (item) {
+        gasCookies.forEach((item) => {
           // Remove cookies from Google Ads
           logger.warn('\n' + 'delete GAS cookie: ' + item);
-          if (hostname == 'localhost') {
+          if (hostname === 'localhost') {
             j1.removeCookie({ name: item, domain: false, secure: false });
           } else {
             j1.removeCookie({ name: item, domain: '.' + hostname, secure: false });
@@ -385,15 +395,15 @@ j1.adapter.cookieConsent = (function (j1, window) {
         // ---------------------------------------------------------------------
         if (!user_consent.analysis || !user_consent.personalization) {
           // overload cookie consent settings
-          user_translate.analysis         = user_consent.analysis;
-          user_translate.personalization  = user_consent.personalization;
+          user_translate.analysis        = user_consent.analysis;
+          user_translate.personalization = user_consent.personalization;
           // disable translation service
           user_translate.translationEnabled = false;
 
           cookie_written = j1.writeCookie({
-            name:     cookie_names.user_translate,
-            data:     user_translate,
-            secure:   secure
+            name:   cookie_names.user_translate,
+            data:   user_translate,
+            secure: secure
           });
 
           if (expireCookiesOnRequiredOnly) {
@@ -415,7 +425,7 @@ j1.adapter.cookieConsent = (function (j1, window) {
     // messageHandler: MessageHandler for J1 CookieConsent module
     // Manage messages send from other J1 modules
     // -------------------------------------------------------------------------
-    messageHandler: function (sender, message) {
+    messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
@@ -444,7 +454,7 @@ j1.adapter.cookieConsent = (function (j1, window) {
     // setState()
     // Sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: function (stat) {
+    setState: (stat) => {
       _this.state = stat;
     }, // END setState
 
@@ -452,7 +462,7 @@ j1.adapter.cookieConsent = (function (j1, window) {
     // getState()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: function () {
+    getState: () => {
       return _this.state;
     } // END getState
 

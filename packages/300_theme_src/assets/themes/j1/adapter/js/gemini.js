@@ -35,25 +35,25 @@ regenerate:                             true
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config       = site.data.j1_config %}
-{% assign blocks                = site.data.blocks %}
-{% assign modules               = site.data.modules %}
+{% assign template_config     = site.data.j1_config %}
+{% assign blocks              = site.data.blocks %}
+{% assign modules             = site.data.modules %}
 
 {% comment %} Set config data (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign slim_select_defaults  = modules.defaults.slim_select.defaults %}
-{% assign slim_select_settings  = modules.slim_select.settings %}
-{% assign gemini_defaults       = modules.defaults.gemini.defaults %}
-{% assign gemini_settings       = modules.gemini.settings %}
+{% assign slim_select_defaults = modules.defaults.slim_select.defaults %}
+{% assign slim_select_settings = modules.slim_select.settings %}
+{% assign gemini_defaults      = modules.defaults.gemini.defaults %}
+{% assign gemini_settings      = modules.gemini.settings %}
 
 {% comment %} Set config options (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign slim_select_options   = slim_select_defaults | merge: slim_select_settings %}
-{% assign gemini_options        = gemini_defaults | merge: gemini_settings %}
+{% assign slim_select_options = slim_select_defaults | merge: slim_select_settings %}
+{% assign gemini_options      = gemini_defaults | merge: gemini_settings %}
 
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign comments              = gemini_options.enabled %}
+{% assign comments            = gemini_options.enabled %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -87,7 +87,7 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.gemini = (function (j1, window) {
+j1.adapter.gemini = ((j1, window) => {
 
 {% comment %} Set global variables
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -176,7 +176,7 @@ const httpError400      = geminiOptions.errors.http400;
 const httpError500      = geminiOptions.errors.http500;
 
   // ---------------------------------------------------------------------------
-  // Helper functions
+  // helper functions
   // ---------------------------------------------------------------------------
   //
   function addPromptHistoryEventListeners(slimSelectData) {
@@ -525,13 +525,12 @@ const httpError500      = geminiOptions.errors.http500;
   } // END async function runner()
 
   // ---------------------------------------------------------------------------
-  // Main object
+  // main
   // ---------------------------------------------------------------------------
   //
   return {
 
     // -------------------------------------------------------------------------
-    // init()
     // adapter initializer
     // -------------------------------------------------------------------------
     init: (options) => {
@@ -579,8 +578,8 @@ const httpError500      = geminiOptions.errors.http500;
 
         // check page ready state
         if (j1CoreFinished && pageVisible && slimSelectFinished && uiLoaded && modulesLoaded) {
-
           startTimeModule = Date.now();
+
           _this.setState('started');
           logger.debug('\n' + 'set module state to: ' + _this.getState());
           logger.info('\n' + 'initializing module: started');
@@ -680,7 +679,7 @@ const httpError500      = geminiOptions.errors.http500;
 
               clearInterval(dependencies_met_select_ready);
             } // END if modules loaded
-          }, 10);
+          }, 10); // END dependencies_met_select_ready
 
           // -------------------------------------------------------------------
           // setup UI button eventHandlers
@@ -696,9 +695,8 @@ const httpError500      = geminiOptions.errors.http500;
           logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_page_ready);
-        }
-      }, 10);
-
+        } // END slimSelectFinished && uiLoaded && modulesLoaded
+      }, 10); // END dependencies_met_page_ready
     }, // END init
 
     // -------------------------------------------------------------------------
@@ -784,7 +782,7 @@ const httpError500      = geminiOptions.errors.http500;
         'null'
       );
 
-      var dependencies_met_data_loaded = setInterval(function() {
+      var dependencies_met_data_loaded = setInterval(() => {
         if (j1.xhrDOMState['#gemini_ui'] === 'success') {
           logger.debug('\n' + 'Loading UI: successful');
 
@@ -1039,7 +1037,7 @@ const httpError500      = geminiOptions.errors.http500;
           if (textHistory.length > 0) {
             // cleanup|add selected value
             var p = 0;
-            textHistory.forEach (function (elm) {
+            textHistory.forEach ((elm) => {
               prompt = elm.replace(/\s+$/g, '');
               textHistory[p] = prompt;
               p++;

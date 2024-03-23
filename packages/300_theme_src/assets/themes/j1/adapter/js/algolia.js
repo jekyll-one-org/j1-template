@@ -76,30 +76,38 @@ regenerate:                             false
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.algolia = (function (j1, window) {
+j1.adapter.algolia = ((j1, window) => {
 
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
   var environment   = '{{environment}}';
   var moduleOptions = {};
   var state         = 'not_started';
+
   var _this;
   var logger;
   var logText;
 
+  // date|time
+  var startTime;
+  var endTime;
+  var startTimeModule;
+  var endTimeModule;
+  var timeSeconds;
+
   // ---------------------------------------------------------------------------
-  // Helper functions
+  // helper functions
   // ---------------------------------------------------------------------------
 
   // ---------------------------------------------------------------------------
-  // Main object
+  // main
   // ---------------------------------------------------------------------------
   return {
 
     // -------------------------------------------------------------------------
     // Initializer
     // -------------------------------------------------------------------------
-    init: function (options) {
+    init: (options) => {
 
       // -----------------------------------------------------------------------
       // Default module settings
@@ -115,8 +123,7 @@ j1.adapter.algolia = (function (j1, window) {
       _this   = j1.adapter.algolia;
       logger  = log4javascript.getLogger('j1.adapter.algolia');
 
-      // initialize state flag
-      _this.state = 'pending';
+      startTimeModule = Date.now();
 
       _this.setState('started');
       logger.debug('\n' + 'state: ' + _this.getState());
@@ -140,7 +147,7 @@ j1.adapter.algolia = (function (j1, window) {
         routing:    true
       });
 
-      var hitTemplate = function(hit) {
+      var hitTemplate = (hit) => {
         // state = 'start search';
         // logger.debug('\n' + 'state: ' + state);
         // var re = new RegExp('^\/posts');
@@ -211,21 +218,21 @@ j1.adapter.algolia = (function (j1, window) {
         // initialize pagination
         search.addWidget(
           instantsearch.widgets.pagination({
-            container: '#pagination',
-            maxPages: 20,
+            container:  '#pagination',
+            maxPages:   20,
             // default is to scroll to 'body', here we disable this behavior
-            scrollTo: false
+            scrollTo:   false
           })
         );
         // initialize SearchBox
         search.addWidget(
           instantsearch.widgets.searchBox({
-            container:            '#search-searchbar',
-            placeholder:          'Search this site ..',
-            autofocus:            true,
-            reset:                true,
-            loadingIndicator:     false,
-            poweredBy:            true // This is required if you're on the free Community plan
+            container:        '#search-searchbar',
+            placeholder:      'Search this site ..',
+            autofocus:        true,
+            reset:            true,
+            loadingIndicator: false,
+            poweredBy:        true // This is required if you're on the free Community plan
           })
         );
         // initialize hits widget
@@ -241,18 +248,19 @@ j1.adapter.algolia = (function (j1, window) {
         // initialize RefinementList
         search.addWidget(
           instantsearch.widgets.refinementList({
-            container:        '#refinement-list',
-            attributeName:    'tags',
-            collapsible:      true,
-            operator:         'and',
-            limit:            5,
-            sortBy:           ['isRefined','count:desc','name:asc'],
+            container:      '#refinement-list',
+            attributeName:  'tags',
+            collapsible:    true,
+            operator:       'and',
+            limit:          5,
+            sortBy:         ['isRefined','count:desc','name:asc'],
             templates: {
-              header:         'Tags'
+              header:       'Tags'
             },
-            showMore:         true
+            showMore:       true
           })
         );
+
         /*
         search.addWidget(
           instantsearch.widgets.hitsPerPageSelector({
@@ -267,7 +275,7 @@ j1.adapter.algolia = (function (j1, window) {
         */
       }
 
-      if (moduleOptions.enabled == true) {
+      if (moduleOptions.enabled === true) {
         search.start();
         $('#searcher').addClass('row');
 
@@ -275,6 +283,8 @@ j1.adapter.algolia = (function (j1, window) {
         logger.debug('\n' + 'state: ' + _this.getState());
         logger.info('\n' + 'module initialized successfully');
 
+        endTimeModule = Date.now();
+        logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
       } else {
         $('#algolia-site-search').append('<p class="ml-5 mt-5 mb-5 "> <strong>Algolia Search DISABLED</strong> </p>');
         _this.setState('finished');
@@ -289,7 +299,7 @@ j1.adapter.algolia = (function (j1, window) {
     // messageHandler: MessageHandler for J1 CookieConsent module
     // Manage messages send from other J1 modules
     // -------------------------------------------------------------------------
-    messageHandler: function (sender, message) {
+    messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
@@ -318,7 +328,7 @@ j1.adapter.algolia = (function (j1, window) {
     // setState()
     // Sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: function (stat) {
+    setState: (stat) => {
       _this.state = stat;
     }, // END setState
 
@@ -326,7 +336,7 @@ j1.adapter.algolia = (function (j1, window) {
     // getState()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: function () {
+    getState: () => {
       return _this.state;
     } // END getState
 

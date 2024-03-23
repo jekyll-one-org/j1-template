@@ -6,8 +6,8 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/customModule.js
- # Liquid template to adapt a custom module
+ # ~/assets/themes/j1/adapter/js/rtable.js
+ # Liquid template to adapt rtable
  #
  # Product/Info:
  # https://jekyll.one
@@ -18,7 +18,6 @@ regenerate:                             true
  # -----------------------------------------------------------------------------
  # Test data:
  #  {{ liquid_var | debug }}
- #  {{ dropdowns_options | debug }}
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
@@ -39,16 +38,14 @@ regenerate:                             true
 {% assign blocks            = site.data.blocks %}
 {% assign modules           = site.data.modules %}
 
-{% comment %} Set config data (unused)
---------------------------------------------------------------------------------
-{% assign custom_module_defaults = modules.defaults.custom_module.defaults %}
-{% assign custom_module_settings = modules.custom_module.settings %}
+{% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
+{% assign rtable_defaults = modules.defaults.rtable.defaults %}
+{% assign rtable_settings = modules.rtable.settings %}
 
-{% comment %} Set config options (unused)
---------------------------------------------------------------------------------
-{% assign custom_module_options  = custom_module_defaults | merge: custom_module_settings %}
+{% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
+{% assign rtable_options  = rtable_defaults | merge: rtable_settings %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -59,8 +56,8 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/customModule.js
- # J1 Adapter for custom module
+ # ~/assets/themes/j1/adapter/js/rtable.js
+ # J1 Adapter for rtable
  #
  # Product/Info:
  # https://jekyll.one
@@ -80,15 +77,15 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.customModule = ((j1, window) => {
+j1.adapter.rtable = ((j1, window) => {
 
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
   var environment   = '{{environment}}';
-  var moduleOptions = {};
-  var instances     = [];
   var state         = 'not_started';
-  var frontmatterOptions;
+  var rtableDefaults;
+  var rtableSettings;
+  var rtableOptions;
 
   var _this;
   var logger;
@@ -106,79 +103,161 @@ j1.adapter.customModule = ((j1, window) => {
   // ---------------------------------------------------------------------------
 
   // ---------------------------------------------------------------------------
-  // main
+  // main object
   // ---------------------------------------------------------------------------
   return {
 
     // -------------------------------------------------------------------------
-    // initializer
+    // Initializer
     // -------------------------------------------------------------------------
     init: (options) => {
 
       // -----------------------------------------------------------------------
-      // default module settings
+      // Default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
-        module_name: 'j1.adapter.customModule',
+        module_name: 'j1.adapter.rtable',
         generated:   '{{site.time}}'
       }, options);
 
-      // -----------------------------------------------------------------------
-      // global variable settings
-      // -----------------------------------------------------------------------
-      _this   = j1.adapter.dropdowns;
-      logger  = log4javascript.getLogger('j1.adapter.customModule');
+      var bsMediaBreakpoints = {
+        xs: 575,
+        sm: 576,
+        md: 768,
+        lg: 992,
+        xl: 1200
+      };
 
-      // create settings object from frontmatterOptions
-      frontmatterOptions  = options != null ? $.extend({}, options) : {};
-      moduleOptions       = $.extend({}, {{dropdowns_options | replace: 'nil', 'null' | replace: '=>', ':' }});
+      var breakpoint;
 
-      if (typeof frontmatterOptions !== 'undefined') {
-        moduleOptions = $.extend({}, moduleOptions, frontmatterOptions);;
-      }
+      // -----------------------------------------------------------------------
+      // Global variable settings
+      // -----------------------------------------------------------------------
+      _this   = j1.adapter.rtable;
+      logger  = log4javascript.getLogger('j1.adapter.rtable');
+
+      // Load  module DEFAULTS|CONFIG
+      rtableDefaults = $.extend({}, {{rtable_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      rtableSettings = $.extend({}, {{rtable_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      rtableOptions  = $.extend(true, {}, rtableDefaults, rtableSettings);
+
+      // initialize state flag
+      _this.setState('started');
+      logger.debug('\n' + 'state: ' + _this.getState());
+      logger.info('\n' + 'module is being initialized');
 
       // -----------------------------------------------------------------------
       // initializer
       // -----------------------------------------------------------------------
-      var dependencies_met_j1_finished = setInterval(() => {
-        var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
+      var dependency_met_page_ready = setInterval(() => {
+        var pageState      = $('#content').css("display");
+        var pageVisible    = (pageState == 'block') ? true : false;
+        var j1CoreFinished = (j1.getState() == 'finished') ? true : false;
 
-        if (j1CoreFinished) {
+        if (j1CoreFinished && pageVisible) {
           startTimeModule = Date.now();
 
           _this.setState('started');
           logger.debug('\n' + 'set module state to: ' + _this.getState());
-          logger.info('\n' + 'custom functions are being initialized');
+          logger.info('\n' + 'initializing module: started');
 
+          // Add data attributes for tablesaw to all tables of a page
+          // as Asciidoctor has NO option to pass 'data attributes'
+          // See: https://stackoverflow.com/questions/50600405/how-to-add-custom-data-attributes-with-asciidoctor
           //
-          // place init code here
-          //
+          $('table').each(function () {
+            var curTable = $(this);
+            var log_text;
+            // jadams, 2020-09-16: class 'rtable' indicate use of 'tablesaw'
+            if ($(curTable).hasClass('rtable')) {
+              // add needed CSS class/attribute for tablesaw
+              $(curTable).addClass('table');
+              $(curTable).addClass('tablesaw');
+              $(curTable).attr('data-tablesaw-mode', rtableOptions.rtable.mode);
+
+              // Advanced mode NOT supported (mode stack only)
+              //
+              // $(curTable).attr('data-tablesaw-sortable', '');
+              // $(curTable).attr('data-tablesaw-sortable-switch', '');
+              // $(curTable).attr('data-tablesaw-minimap', '');
+              // $(curTable).attr('data-tablesaw-mode-switch', '');
+
+              Tablesaw.init(curTable, {
+                breakpoint:   rtableOptions.rtable.breakpoint
+              });
+
+              // set initial state for all table/colgroup elements
+              //
+              breakpoint = bsMediaBreakpoints[rtableOptions.rtable.breakpoint];
+              if (! breakpoint) {
+                breakpoint = bsMediaBreakpoints['lg'];
+              }
+
+              if ($(window).width() < breakpoint) {
+                log_text = '\n' + 'hide colgroups: ' + curTable.attr('id')
+                curTable.find('colgroup').hide();
+                logger.debug(log_text);
+              } else {
+                log_text = '\n' + 'show colgroup: ' + curTable.attr('id')
+                curTable.find('colgroup').show();
+                logger.debug(log_text);
+              }
+            } // END if hasClass 'rtable'
+
+            // add needed div element needed for BS to move the table found
+            // for BS responsiveness
+            //
+            if ($(curTable).hasClass(/table-responsive/)) {
+              // see: https://stackoverflow.com/questions/2596833/how-to-move-child-element-from-one-parent-to-another-using-jquery
+              // see: https://github.com/NV/jquery-regexp-classes
+              //
+              const re                  = /table-responsive[-]*\w*/;
+              const myID                = 'b-table-' + Math.floor(Math.random() * 10000) + 1;
+              var myClasses             = $(curTable).attr("class");
+              var responsiveClassFound  = myClasses.match(re);
+              var responsiveClass;
+
+              if (responsiveClassFound) {
+                responsiveClass = responsiveClassFound[0];
+              } else {
+                // failsafe
+                log_text = '\n' + 'no matching responsive class found';
+                logger.warn(log_text);
+              }
+
+              // remove responsive class from the table
+              //
+              $(curTable).removeClass(/table-responsive[-]*\w+/);
+              $(curTable).addClass('table');
+
+              // add needed div element needed for BS
+              //
+              jQuery('<div>', {
+                id: myID,
+                class: responsiveClass
+              }).insertBefore($(curTable));
+
+              // move the table found for BS responsiveness
+              //
+              $('#' + myID ).append($(curTable));
+            } // END if hasClass 'table-responsive'
+          });
 
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'initializing custom functions: finished');
+          logger.info('\n' + 'initializing module: finished');
 
           endTimeModule = Date.now();
-          logger.info('\n' + 'initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
-        } // END j1CoreFinished
-      }, 10); // END dependencies_met_j1_finished
+          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+
+          clearInterval(dependency_met_page_ready);
+        } // END if pageVisible
+      }, 10); // END dependency_met_page_ready
+
     }, // END init
 
     // -------------------------------------------------------------------------
-    // custom_module_1
-    // Called by ???
-    // -------------------------------------------------------------------------
-    custom_module_1: (options) => {
-      var logger  = log4javascript.getLogger('j1.adapter.customModule.custom_module_1');
-
-      logText = '\n' + 'entered custom function: custom_module_1';
-      logger.info(logText);
-
-      return true;
-    },
-
-    // -------------------------------------------------------------------------
-    // messageHandler
+    // messageHandler:
     // Manage messages send from other J1 modules
     // -------------------------------------------------------------------------
     messageHandler: (sender, message) => {

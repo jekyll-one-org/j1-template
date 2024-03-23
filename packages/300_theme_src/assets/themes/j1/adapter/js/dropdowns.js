@@ -27,17 +27,17 @@ regenerate:                             true
 
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment       = site.environment %}
-{% assign asset_path        = "/assets/themes/j1" %}
+{% assign environment        = site.environment %}
+{% assign asset_path         = "/assets/themes/j1" %}
 
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config   = site.data.j1_config %}
-{% assign blocks            = site.data.blocks %}
-{% assign modules           = site.data.modules %}
+{% assign template_config    = site.data.j1_config %}
+{% assign blocks             = site.data.blocks %}
+{% assign modules            = site.data.modules %}
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -78,36 +78,44 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.dropdowns = (function (j1, window) {
+j1.adapter.dropdowns = ((j1, window) => {
 
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
-  var environment   = '{{environment}}';
-  var instances     = [];
-  var state         = 'not_started';
+  var environment           = '{{environment}}';
+  var instances             = [];
+  var state                 = 'not_started';
   var dropdownsDefaults;
   var dropdownsSettings;
   var dropdownsOptions;
+
   var _this;
   var logger;
   var logText;
 
+  // date|time
+  var startTime;
+  var endTime;
+  var startTimeModule;
+  var endTimeModule;
+  var timeSeconds;
+
   // ---------------------------------------------------------------------------
-  // Helper functions
+  // helper functions
   // ---------------------------------------------------------------------------
 
   // ---------------------------------------------------------------------------
-  // Main object
+  // main
   // ---------------------------------------------------------------------------
   return {
 
     // -------------------------------------------------------------------------
-    // Initializer
+    // initializer
     // -------------------------------------------------------------------------
-    init: function (options) {
+    init: (options) => {
 
       // -----------------------------------------------------------------------
-      // Default module settings
+      // default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
         module_name: 'j1.adapter.dropdowns',
@@ -115,7 +123,7 @@ j1.adapter.dropdowns = (function (j1, window) {
       }, options);
 
       // -----------------------------------------------------------------------
-      // Global variable settings
+      // global variable settings
       // -----------------------------------------------------------------------
       _this   = j1.adapter.dropdowns;
       logger  = log4javascript.getLogger('j1.adapter.dropdowns');
@@ -139,14 +147,13 @@ j1.adapter.dropdowns = (function (j1, window) {
         var j1CoreFinished = (j1.getState() == 'finished') ? true : false;
 
         if (j1CoreFinished && pageVisible) {
-
           var elms = document.querySelectorAll('.dropdowns');
 
-          // -------------------------------------------------------------------
-          // dropdowns initializer
-          // -------------------------------------------------------------------
-          var log_text = '\n' + 'dropdowns is being initialized';
-          logger.info(log_text);
+          startTimeModule = Date.now();
+
+          _this.setState('started');
+          logger.debug('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'module is being initialized');
 
           {% for item in dropdowns_options.dropdowns %} {% if item.dropdown.enabled %}
             {% assign dropdown_id = item.dropdown.id %}
@@ -179,7 +186,7 @@ j1.adapter.dropdowns = (function (j1, window) {
             {% if item.dropdown.options.cbOnClose %}      {% assign cbOnClose       = item.dropdown.options.cbOnClose %}        {% endif %}
             {% if item.dropdown.options.cbOnItemClick %}  {% assign cbOnItemClick   = item.dropdown.options.cbOnItemClick %}    {% endif %}
 
-            elms.forEach(function (elm) {
+            elms.forEach((elm) => {
               var id = elm.dataset.target;
 
               if (id === '{{dropdown_id}}') {
@@ -209,10 +216,12 @@ j1.adapter.dropdowns = (function (j1, window) {
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module initialized successfully');
 
-          clearInterval(dependencies_met_page_ready);
-        } // END dependencies_met_page_ready
-      }, 10);
+          endTimeModule = Date.now();
+          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
+          clearInterval(dependencies_met_page_ready);
+        } // END pageVisible
+      }, 10); // END dependencies_met_page_ready
     }, // END init
 
     // -------------------------------------------------------------------------
@@ -220,7 +229,7 @@ j1.adapter.dropdowns = (function (j1, window) {
     // Called by the dropdowns CORE module when and dropdown element
     // is clicked
     // -------------------------------------------------------------------------
-    cbOnclick: function (event) {
+    cbOnclick: (event) => {
       var logger  = log4javascript.getLogger('j1.adapter.dropdowns.cbOnClick');
       var itemEl = $(event.target).closest('li')[0];
 
@@ -235,7 +244,7 @@ j1.adapter.dropdowns = (function (j1, window) {
     // cbOnOpen()
     // Called by the dropdowns CORE module when dropdown get opened
     // -------------------------------------------------------------------------
-    cbOnOpen: function (elm) {
+    cbOnOpen: (elm) => {
       var logger  = log4javascript.getLogger('j1.adapter.dropdowns.cbOnOpen');
       var id      = elm.id;
 
@@ -248,7 +257,7 @@ j1.adapter.dropdowns = (function (j1, window) {
     // cbOnClose()
     // Called by the dropdowns CORE module when dropdown get closed
     // -------------------------------------------------------------------------
-    cbOnClose: function (elm) {
+    cbOnClose: (elm) => {
       var logger    = log4javascript.getLogger('j1.adapter.dropdowns.cbOnClose');
       var id        = elm.id;
       var listItems = '#' + elm.id + " li";
@@ -277,7 +286,7 @@ j1.adapter.dropdowns = (function (j1, window) {
     // messageHandler
     // Manage messages send from other J1 modules
     // -------------------------------------------------------------------------
-    messageHandler: function (sender, message) {
+    messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
@@ -306,7 +315,7 @@ j1.adapter.dropdowns = (function (j1, window) {
     // setState()
     // Sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: function (stat) {
+    setState: (stat) => {
       _this.state = stat;
     }, // END setState
 
@@ -314,7 +323,7 @@ j1.adapter.dropdowns = (function (j1, window) {
     // getState()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: function () {
+    getState: () => {
       return _this.state;
     } // END getState
 

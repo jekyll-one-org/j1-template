@@ -6,8 +6,8 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/iconPicker.js
- # Liquid template to adapt the iconPicker module
+ # ~/assets/themes/j1/adapter/js/themeToggler.js
+ # Liquid template to adapt the Theme Toggler module
  #
  # Product/Info:
  # https://jekyll.one
@@ -18,7 +18,7 @@ regenerate:                             true
  # -----------------------------------------------------------------------------
  # Test data:
  #  {{ liquid_var | debug }}
- #  icon_picker_options:  {{ icon_picker_options | debug }}
+ #  wave_options:  {{ wave_options | debug }}
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
@@ -27,30 +27,30 @@ regenerate:                             true
 
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment           = site.environment %}
-{% assign asset_path            = "/assets/themes/j1" %}
+{% assign environment        = site.environment %}
+{% assign asset_path         = "/assets/themes/j1" %}
 
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config       = site.data.j1_config %}
-{% assign blocks                = site.data.blocks %}
-{% assign modules               = site.data.modules %}
+{% assign template_config    = site.data.j1_config %}
+{% assign blocks             = site.data.blocks %}
+{% assign modules            = site.data.modules %}
 
 {% comment %} Set config data (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign icon_picker_defaults  = modules.defaults.icon_picker.defaults %}
-{% assign icon_picker_settings  = modules.icon_picker.settings %}
+{% assign toggler_defaults   = modules.defaults.theme_toggler.defaults %}
+{% assign toggler_settings   = modules.theme_toggler.settings %}
 
 {% comment %} Set config options (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign icon_picker_options   = icon_picker_defaults | merge: icon_picker_settings %}
-
+{% assign toggler_options    = toggler_defaults | merge: toggler_settings %}
 
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
+{% assign comments           = toggler_options.enabled %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -61,8 +61,8 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/iconPicker.js
- # J1 Adapter for the iconPicker module
+ # ~/assets/themes/j1/adapter/js/themeToggler.js
+ # J1 Adapter for the Theme Toggler module
  #
  # Product/Info:
  # https://jekyll.one
@@ -72,7 +72,7 @@ regenerate:                             true
  # J1 Template is licensed under the MIT License.
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
- # NOTE:
+ # NOTE: Wave styles defind in /assets/data/panel.html, key 'wave'
  # -----------------------------------------------------------------------------
  #  Adapter generated: {{site.time}}
  # -----------------------------------------------------------------------------
@@ -84,18 +84,28 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.iconPicker = ((j1, window) => {
+j1.adapter.themeToggler = ((j1, window) => {
 
 {% comment %} Set global variables
 -------------------------------------------------------------------------------- {% endcomment %}
-var environment           = '{{environment}}';
-var state                 = 'not_started';
-var iconPickerDefaults;
-var iconPickerSettings;
-var iconPickerOptions;
+var environment       = '{{environment}}';
+var cookie_names      = j1.getCookieNames();
+var user_state        = j1.readCookie(cookie_names.user_state);
+var viewport_width    = $(window).width();
+var url               = new liteURL(window.location.href);
+var secure            = (url.protocol.includes('https')) ? true : false;
+var cookie_names      = j1.getCookieNames();
+var state             = 'not_started';
+var user_state        = {};
+var light_theme_css;
+var dark_theme_css;
+var light_theme_name;
+var dark_theme_name;
+var togglerDefaults;
+var togglerSettings;
+var togglerOptions;
 var frontmatterOptions;
-var icon_picker;
-var icon_picker_button_id;
+
 var _this;
 var logger;
 var logText;
@@ -113,89 +123,106 @@ var timeSeconds;
   return {
 
     // -------------------------------------------------------------------------
+    // init()
     // adapter initializer
     // -------------------------------------------------------------------------
     init: (options) => {
-
       // -----------------------------------------------------------------------
-      // default module settings
+      // Default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
-        module_name: 'j1.adapter.iconPicker',
+        module_name: 'j1.adapter.waves',
         generated:   '{{site.time}}'
       }, options);
 
       // -----------------------------------------------------------------------
-      // global variable settings
+      // Global variable settings
       // -----------------------------------------------------------------------
+
+      // create settings object from frontmatter
+      //
+      frontmatterOptions  = options != null ? $.extend({}, options) : {};
+
+      logger = log4javascript.getLogger('j1.adapter.theme_toggler');
+      _this  = j1.adapter.themeToggler;
 
       // create settings object from module options
-      iconPickerDefaults = $.extend({}, {{icon_picker_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      iconPickerSettings = $.extend({}, {{icon_picker_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      iconPickerOptions  = $.extend(true, {}, iconPickerDefaults, iconPickerSettings);
+      //
+      togglerDefaults     = $.extend({}, {{toggler_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      togglerSettings     = $.extend({}, {{toggler_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      togglerOptions      = $.extend(true, {}, togglerDefaults, togglerSettings, frontmatterOptions);
 
-      _this  = j1.adapter.iconPicker;
-      logger = log4javascript.getLogger('j1.adapter.iconPicker');
+      // toggle themes
+      //
+      light_theme_name    = togglerOptions.themes.light.name;
+      light_theme_css     = togglerOptions.themes.light.css_file;
+      dark_theme_name     = togglerOptions.themes.dark.name;
+      dark_theme_css      = togglerOptions.themes.dark.css_file;;
 
       // -----------------------------------------------------------------------
-      // module initializer
+      // initializer
       // -----------------------------------------------------------------------
-      var dependencies_met_page_ready = setInterval((options) => {
+      var dependencies_met_page_ready = setInterval (() => {
         var pageState       = $('#content').css("display");
-        var pageVisible     = (pageState === 'block') ? true : false;
-        var j1CoreFinished  = (j1.getState() === 'finished') ? true : false;
+        var pageVisible     = (pageState == 'block') ? true : false;
+        var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
 
         if (j1CoreFinished && pageVisible) {
           startTimeModule = Date.now();
 
-          icon_picker_button_id = '#' + iconPickerOptions.picker_button_id;
-
           _this.setState('started');
+          logger.debug('\n' + 'set module state to: ' + _this.getState());
+          logger.info('\n' + 'initializing module: started');
+
+          user_state = j1.readCookie(cookie_names.user_state);
+
+          // toggle themeToggler icon to 'dark' if required
+          //
+          if ($('#quickLinksThemeTogglerButton').length) {
+            if (user_state.theme_name == dark_theme_name) {
+              $('#quickLinksThemeTogglerButton a i').toggleClass('mdib-lightbulb mdib-lightbulb-outline');
+            }
+          }
+
+          $('#quickLinksThemeTogglerButton').click(() => {
+            if (user_state.theme_name == light_theme_name) {
+              user_state.theme_name = dark_theme_name;
+              user_state.theme_css  = dark_theme_css;
+              user_state.theme_icon = 'mdib-lightbulb';
+            } else {
+              user_state.theme_name = light_theme_name;
+              user_state.theme_css  = light_theme_css;
+              user_state.theme_icon = 'mdib-lightbulb-outline';
+            }
+
+            logger.info('\n' + 'switch theme to: ' + user_state.theme_name);
+
+            user_state.writer = 'themeToggler';
+            var cookie_written = j1.writeCookie({
+              name:     cookie_names.user_state,
+              data:     user_state,
+              secure:   secure,
+              expires:  365
+            });
+
+            if (!cookie_written) {
+              logger.error('\n' + 'failed write to cookie: ' + cookie_names.user_consent);
+            } else {
+              location.reload(true);
+            }
+          }); // END button click
+
+          _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized on id: ' + icon_picker_button_id);
+          logger.info('\n' + 'initializing module: finished');
 
-          var dependencies_met_picker_button_ready = setInterval (() => {
-            var buttonState = $(icon_picker_button_id).length;
-            var buttonReady = (buttonState > 0) ? true : false;
-
-            if (buttonReady) {
-              // setup initial slimSelect values|iconPicker options
-              icon_picker = new UniversalIconPicker(icon_picker_button_id, {
-                allowEmpty:       iconPickerOptions.api_options.allowEmpty,
-                iconLibraries:    iconPickerOptions.api_options.iconLibraries,
-                iconLibrariesCss: iconPickerOptions.api_options.iconLibrariesCss,
-                onSelect:         (jsonIconData) => {
-                  // copy selected icon to clipboard (iconClass)
-                  var copyFrom = document.createElement('textarea');
-                  copyFrom.value = jsonIconData.iconClass;
-                  document.body.appendChild(copyFrom);
-                  copyFrom.select();
-                  document.execCommand('copy');
-                  // Remove data element from body
-                  setTimeout(() => {
-                    document.body.removeChild(copyFrom);
-                  }, 500);
-                }
-              });
-
-              // save config settings into the toccer object for later access
-              _this['icon_picker']    = icon_picker;
-              _this['moduleOptions']  = iconPickerOptions;
-
-              _this.setState('finished');
-              logger.debug('\n' + 'state: ' + _this.getState());
-              logger.info('\n' + 'initializing module finished');
-
-              endTimeModule = Date.now();
-              logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
-
-              clearInterval(dependencies_met_picker_button_ready);
-            } // END if buttonReady
-          }, 10); // END dependencies_met_picker_button_ready
+          endTimeModule = Date.now();
+          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_page_ready);
         } // END pageVisible
       }, 10); // END dependencies_met_page_ready
+
     }, // END init
 
     // -------------------------------------------------------------------------

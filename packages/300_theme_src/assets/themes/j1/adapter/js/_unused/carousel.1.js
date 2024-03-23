@@ -176,7 +176,7 @@ j1.adapter.carousel = ((j1, window) => {
                 logger.info(logText);
                 _this.setState('processing');
 
-                {% if item.show.slide_height != null %}
+                {% if item.show.slide_height !== null %}
                   // Set slide_height: {{item.show.slide_height}}vh
                   {% assign slide_height  = item.show.slide_height %}
                   $('head').append('<style>.owl-carousel .item{height: {{slide_height}}vh;}</style>');
@@ -368,7 +368,8 @@ j1.adapter.carousel = ((j1, window) => {
                   // );
 
                   _this.setState('processed');
-                  logger.debug('\n' + 'processing slider finished on id: {{slider_id}}');
+                  logText = '\n' + 'processing slider finished on id: {{slider_id}}';
+                  logger.info(logText);
                 } // END customDataSuccess_{{forloop.index}}
               } // END if carousel exists
             {% endif %}

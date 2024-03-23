@@ -27,8 +27,8 @@ regenerate:                             true
 
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment       = site.environment %}
-{% assign asset_path        = "/assets/themes/j1" %}
+{% assign environment        = site.environment %}
+{% assign asset_path         = "/assets/themes/j1" %}
 
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
@@ -50,7 +50,7 @@ regenerate:                             true
 
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign comments          = docsearch_options.enabled %}
+{% assign comments           = docsearch_options.enabled %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -82,36 +82,43 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.docsearch = (function (j1, window) {
+j1.adapter.docsearch = ((j1, window) => {
 
 {% comment %} Set global variables
 -------------------------------------------------------------------------------- {% endcomment %}
-var environment   = '{{environment}}';
-var state         = 'not_started';
-var cookie_names  = j1.getCookieNames();
+var environment           = '{{environment}}';
+var state                 = 'not_started';
+var cookie_names          = j1.getCookieNames();
 var docsearchDefaults;
 var docsearchSettings;
 var docsearchOptions;
 var docsearchModal;
 var modal_container;
 var user_consent;
+
 var _this;
 var logger;
 var logText;
 
+// date|time
+var startTime;
+var endTime;
+var startTimeModule;
+var endTimeModule;
+var timeSeconds;
+
   // ---------------------------------------------------------------------------
-  // Main object
+  // main
   // ---------------------------------------------------------------------------
   return {
 
     // -------------------------------------------------------------------------
-    // init()
     // initializer
     // -------------------------------------------------------------------------
-    init: function () {
+    init: () => {
 
       // -----------------------------------------------------------------------
-      // Default module settings
+      // default module settings
       // -----------------------------------------------------------------------
       docsearchDefaults = $.extend({}, {{docsearch_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
       docsearchSettings = $.extend({}, {{docsearch_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
@@ -119,10 +126,6 @@ var logText;
 
       _this  = j1.adapter.docsearch;
       logger = log4javascript.getLogger('j1.adapter.docsearch');
-
-      _this.setState('started');
-      logger.debug('\n' + 'state: ' + _this.getState());
-      logger.info('\n' + 'module is being initialized');
 
       modal_container               = document.createElement('div');
       modal_container.id            = 'docsearch_container';
@@ -139,12 +142,17 @@ var logText;
       // initializer
       // -----------------------------------------------------------------------
       var dependencies_met_page_ready = setInterval (() => {
-        var pageState       = $('#content').css("display");
-        var pageVisible     = (pageState == 'block') ? true : false;
-        var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
-        var atticFinished   = (j1.adapter.attic.getState() == 'finished') ? true: false;
+        var pageState      = $('#content').css("display");
+        var pageVisible    = (pageState === 'block') ? true : false;
+        var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
+        var atticFinished  = (j1.adapter.attic.getState() === 'finished') ? true: false;
 
         if (j1CoreFinished && pageVisible && atticFinished) {
+          startTimeModule = Date.now();
+
+          _this.setState('started');
+          logger.debug('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'module is being initialized');
 
           user_consent = j1.readCookie(cookie_names.user_consent);
           if (!user_consent.personalization) {
@@ -167,33 +175,42 @@ var logText;
           // -------------------------------------------------------------------
           // on 'show'
           // -------------------------------------------------------------------
-          $('#docsearch_container').on('show.bs.modal', function () {
+          $('#docsearch_container').on('show.bs.modal', () => {
+
             //
             // place code here
             //
+
           }); // END modal on 'show'
 
           // -------------------------------------------------------------------
           // on 'shown'
           // -------------------------------------------------------------------
-          $('#docsearch_container').on('shown.bs.modal', function () {
+          $('#docsearch_container').on('shown.bs.modal', () => {
+
             //
             // place code here
             //
+
           }); // END modal on 'shown'
 
           // -------------------------------------------------------------------
           // on 'hidden' (close)
           // -------------------------------------------------------------------
-          $('#docsearch_container').on('hidden.bs.modal', function () {
+          $('#docsearch_container').on('hidden.bs.modal', () => {
+
             //
             // do something here
             //
+
           }); // END modal on 'hidden'
 
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module initialization finished');
+
+          endTimeModule = Date.now();
+          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_page_ready);
         } // END if
@@ -204,7 +221,7 @@ var logText;
     // showDialog()
     // display the dialog
     // -------------------------------------------------------------------------
-    showDialog: function () {
+    showDialog: () => {
       logger.debug('\n' + "showDialog");
 
       $('#docsearch_container').modal({
@@ -220,7 +237,7 @@ var logText;
     // messageHandler()
     // manage messages send from other J1 modules
     // -------------------------------------------------------------------------
-    messageHandler: function (sender, message) {
+    messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
@@ -249,7 +266,7 @@ var logText;
     // setState()
     // Sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: function (stat) {
+    setState: (stat) => {
       _this.state = stat;
     }, // END setState
 
@@ -257,7 +274,7 @@ var logText;
     // getState()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: function () {
+    getState: () => {
       return _this.state;
     } // END getState
 

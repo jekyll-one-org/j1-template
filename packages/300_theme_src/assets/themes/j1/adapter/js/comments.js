@@ -27,8 +27,8 @@ regenerate:                             true
 
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment       = site.environment %}
-{% assign asset_path        = "/assets/themes/j1" %}
+{% assign environment         = site.environment %}
+{% assign asset_path          = "/assets/themes/j1" %}
 
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
@@ -41,17 +41,17 @@ regenerate:                             true
 
 {% comment %} Set config data (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign comments_defaults = modules.defaults.comments.defaults %}
-{% assign comments_settings = modules.comments.settings %}
+{% assign comments_defaults   = modules.defaults.comments.defaults %}
+{% assign comments_settings   = modules.comments.settings %}
 
 {% comment %} Set config options (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign comments_options  = comments_defaults | merge: comments_settings %}
+{% assign comments_options    = comments_defaults | merge: comments_settings %}
 
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign comments          = comments_options.enabled %}
-{% assign comments_provider = comments_options.provider %}
+{% assign comments            = comments_options.enabled %}
+{% assign comments_provider   = comments_options.provider %}
 
 {% if comments_provider == 'disqus' %}
   {% assign site_id = comments_options.disqus.site_id %}
@@ -92,7 +92,6 @@ regenerate:                             true
   {% assign production = true %}
 {% endif %}
 
-
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/adapter/js/comments.js
@@ -116,7 +115,7 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.comments = (function (j1, window) {
+j1.adapter.comments = ((j1, window) => {
 
 {% comment %} Set global variables
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -142,20 +141,17 @@ var logger;
 var logText;
 
   // ---------------------------------------------------------------------------
-  // Main object
+  // main
   // ---------------------------------------------------------------------------
   return {
 
     // -------------------------------------------------------------------------
-    // init()
     // adapter initializer
+    // see: https://talk.hyvor.com/docs
     // -------------------------------------------------------------------------
-    init: function (options) {
-
-      // https://talk.hyvor.com/docs
-
+    init: (options) => {
       // -----------------------------------------------------------------------
-      // Global variable settings
+      // global variable settings
       // -----------------------------------------------------------------------
 
       // create settings object from frontmatter (page settings)
@@ -176,7 +172,7 @@ var logText;
         // [INFO   ] [j1.adapter.comments                    ] [ start processing load region head, layout: {{page.layout}} ]
 
         // ---------------------------------------------------------------------
-        // Default module settings
+        // default module settings
         // ---------------------------------------------------------------------
         var settings = $.extend({
           module_name: 'j1.adapter.comments',
@@ -190,25 +186,30 @@ var logText;
         providerID      = (typeof commentsOptions.site_id == "number") ? commentsOptions.site_id.toString() : commentsOptions.site_id;
         validProviderID = (providerID.includes('your')) ? false : true;
 
+        // ---------------------------------------------------------------------
+        // module initializer
+        // ---------------------------------------------------------------------
         {% case comments_provider %}
         {% when "hyvor" %}
         // [INFO   ] [j1.adapter.comments                    ] [ place provider: Hyvor Talk ]
 
-        var dependencies_met_page_ready = setInterval(function() {
-          if (j1.getState() == 'finished') {
+        var dependencies_met_page_ready = setInterval(() => {
+          var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
+
+          if (j1CoreFinished) {
+            startTimeModule = Date.now();
+
+            _this.setState('started');
+            logger.debug('\n' + 'state: ' + _this.getState());
+            logger.info('\n' + 'module is being initialized');
 
             if (!validProviderID) {
               logger.debug('\n' + 'invalid site id detected for Hyvor Talk: ' + providerID);
               logger.info('\n' + 'skip initialization for provider: ' + comments_provider);
+
               clearInterval(dependencies_met_page_ready);
               return false;
             }
-
-            // initialize state flag, issue init message
-            // -----------------------------------------------------------------
-            _this.setState('started');
-            logger.debug('\n' + 'state: ' + _this.getState());
-            logger.info('\n' + 'module is being initialized for provider: ' + comments_provider);
 
             // place|remove initialization code
             // -----------------------------------------------------------------
@@ -246,7 +247,7 @@ var logText;
 
               // add recommended title to the comments iframe for SEO optimization
               // ---------------------------------------------------------------
-              var dependencies_met_load_provider_finished = setInterval (function () {
+              var dependencies_met_load_provider_finished = setInterval(() => {
                 if ($('#hyvor-talk-view').children().length) {
                   $('#hyvor-talk-iframe').prop('title', 'Hyvor comments iframe');
                   clearInterval(dependencies_met_load_provider_finished);
@@ -271,8 +272,15 @@ var logText;
 
         {% when "disqus" %}
         // [INFO   ] [j1.adapter.comments                    ] [ place provider: Disqus ]
-        var dependencies_met_page_ready = setInterval(function() {
-          if (j1.getState() == 'finished') {
+        var dependencies_met_page_ready = setInterval(() => {
+          var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
+
+          if (j1CoreFinished) {
+            startTimeModule = Date.now();
+
+            _this.setState('started');
+            logger.debug('\n' + 'state: ' + _this.getState());
+            logger.info('\n' + 'module is being initialized');
 
             if (!validProviderID) {
               logger.debug('\n' + 'invalid short name detected for Disqus: ' + providerID);
@@ -354,22 +362,30 @@ var logText;
         }, 10);
         {% endcase %}
       } else {
-        var dependencies_met_page_ready = setInterval(function() {
-          if (j1.getState() == 'finished') {
+        var dependencies_met_page_ready = setInterval(() => {
+          var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
+
+          if (j1CoreFinished) {
+            startTimeModule = Date.now();
+
             logger = log4javascript.getLogger('j1.adapter.comments');
             logger.info('\n' + 'comment services: disabled');
-            clearInterval(dependencies_met_page_ready);
-          }
-        }, 10);
-      } // END if 'commentsOptions.comments'
 
+            endTimeModule = Date.now();
+            logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+
+            clearInterval(dependencies_met_page_ready);
+          } // END j1CoreFinished
+        }, 10); // END dependencies_met_page_ready
+
+      } // END if  commentsOptions.comments
     }, // END init
 
     // -------------------------------------------------------------------------
     // messageHandler()
     // manage messages send from other J1 modules
     // -------------------------------------------------------------------------
-    messageHandler: function (sender, message) {
+    messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
@@ -398,7 +414,7 @@ var logText;
     // setState()
     // Sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: function (stat) {
+    setState: (stat) => {
       _this.state = stat;
     }, // END setState
 
@@ -406,7 +422,7 @@ var logText;
     // getState()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: function () {
+    getState: () => {
       return _this.state;
     } // END getState
 

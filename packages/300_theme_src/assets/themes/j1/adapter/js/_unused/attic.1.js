@@ -144,7 +144,7 @@ j1.adapter.attic = ((j1, window) => {
 
       var dependencies_met_page_ready = setInterval (() => {
         var pageState   = $('#no_flicker').css("display");
-        var pageVisible = (pageState === 'block') ? true: false;
+        var pageVisible = (pageState == 'block') ? true: false;
 
         // run on 'pageVisible'
         //
@@ -277,7 +277,7 @@ j1.adapter.attic = ((j1, window) => {
               _this.setState('backstretch_before');
 
               if (index === backstretch_instance_data.images.length -1) {
-                if (atticOptions.circuit === false) {
+                if (atticOptions.circuit == false) {
                   // Stop the slideshow after reached the last image
                   $('#{{attic_id}}').backstretch('pause');
                 }
@@ -315,11 +315,11 @@ j1.adapter.attic = ((j1, window) => {
               // apply FRONTMATTER settings for title|tagline if
               // NOT set with the FIRST backstretch (image) instance
               //
-              if (index === 0) {
-                if (typeof instance.images[index].title === 'undefined') {
+              if (index == 0) {
+                if (typeof instance.images[index].title == 'undefined') {
                   textOverlayTitle    = frontmatterOptions.title;
                 }
-                if (typeof instance.images[index].tagline === 'undefined') {
+                if (typeof instance.images[index].tagline == 'undefined') {
                   textOverlayTagline  = frontmatterOptions.tagline;
                 }
               }
@@ -595,7 +595,7 @@ j1.adapter.attic = ((j1, window) => {
 
             // add r-text|raised_level settings
             //
-            if (atticOptions.r_text === 'enabled') { $('#{{attic_id}}').addClass('r-text'); }
+            if (atticOptions.r_text == 'enabled') { $('#{{attic_id}}').addClass('r-text'); }
             var raised_level = 'raised-z' +atticOptions.raised_level;
 
             $('#{{attic_id}}').addClass(raised_level);

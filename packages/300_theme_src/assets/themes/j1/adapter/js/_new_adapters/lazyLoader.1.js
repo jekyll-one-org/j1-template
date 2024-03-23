@@ -6,8 +6,8 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/iconPicker.js
- # Liquid template to adapt the iconPicker module
+ # ~/assets/themes/j1/adapter/js/lazyCSSLoader.js
+ # Liquid template to adapt the lazyCSS module(core)
  #
  # Product/Info:
  # https://jekyll.one
@@ -18,7 +18,7 @@ regenerate:                             true
  # -----------------------------------------------------------------------------
  # Test data:
  #  {{ liquid_var | debug }}
- #  icon_picker_options:  {{ icon_picker_options | debug }}
+ #  wave_options:  {{ wave_options | debug }}
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
@@ -27,30 +27,26 @@ regenerate:                             true
 
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment           = site.environment %}
-{% assign asset_path            = "/assets/themes/j1" %}
+{% assign environment          = site.environment %}
+{% assign asset_path           = "/assets/themes/j1" %}
 
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config       = site.data.j1_config %}
-{% assign blocks                = site.data.blocks %}
-{% assign modules               = site.data.modules %}
+{% assign template_config      = site.data.j1_config %}
+{% assign blocks               = site.data.blocks %}
+{% assign modules              = site.data.modules %}
 
 {% comment %} Set config data (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign icon_picker_defaults  = modules.defaults.icon_picker.defaults %}
-{% assign icon_picker_settings  = modules.icon_picker.settings %}
+{% assign lazy_loader_defaults = modules.defaults.lazyLoader.defaults %}
+{% assign lazy_loader_settings = modules.lazyLoader.settings %}
 
 {% comment %} Set config options (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign icon_picker_options   = icon_picker_defaults | merge: icon_picker_settings %}
-
-
-{% comment %} Variables
--------------------------------------------------------------------------------- {% endcomment %}
+{% assign lazy_loader_options = lazy_loader_defaults | merge: lazy_loader_settings %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -61,8 +57,8 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/iconPicker.js
- # J1 Adapter for the iconPicker module
+ # ~/assets/themes/j1/adapter/js/lazyLoader.js
+ # J1 Adapter for the lazyLoader module (core)
  #
  # Product/Info:
  # https://jekyll.one
@@ -71,8 +67,6 @@ regenerate:                             true
  #
  # J1 Template is licensed under the MIT License.
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
- # -----------------------------------------------------------------------------
- # NOTE:
  # -----------------------------------------------------------------------------
  #  Adapter generated: {{site.time}}
  # -----------------------------------------------------------------------------
@@ -84,18 +78,19 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.iconPicker = ((j1, window) => {
+j1.adapter.lazyLoader = ((j1, window) => {
 
 {% comment %} Set global variables
 -------------------------------------------------------------------------------- {% endcomment %}
-var environment           = '{{environment}}';
-var state                 = 'not_started';
-var iconPickerDefaults;
-var iconPickerSettings;
-var iconPickerOptions;
+var environment     = '{{environment}}';
+var cookie_names    = j1.getCookieNames();
+var user_state      = j1.readCookie(cookie_names.user_state);
+var state           = 'not_started';
+var lazyLoaderDefaults;
+var lazyLoaderSettings;
+var lazyLoaderOptions;
 var frontmatterOptions;
-var icon_picker;
-var icon_picker_button_id;
+
 var _this;
 var logger;
 var logText;
@@ -113,90 +108,79 @@ var timeSeconds;
   return {
 
     // -------------------------------------------------------------------------
+    // init()
     // adapter initializer
     // -------------------------------------------------------------------------
     init: (options) => {
 
       // -----------------------------------------------------------------------
-      // default module settings
+      // Default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
-        module_name: 'j1.adapter.iconPicker',
+        module_name: 'j1.adapter.lazyLoader',
         generated:   '{{site.time}}'
       }, options);
 
       // -----------------------------------------------------------------------
-      // global variable settings
+      // Global variable settings
       // -----------------------------------------------------------------------
 
       // create settings object from module options
-      iconPickerDefaults = $.extend({}, {{icon_picker_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      iconPickerSettings = $.extend({}, {{icon_picker_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      iconPickerOptions  = $.extend(true, {}, iconPickerDefaults, iconPickerSettings);
+      //
+      lazyLoaderDefaults = $.extend({}, {{lazy_loader_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      lazyLoaderSettings = $.extend({}, {{lazy_loader_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      lazyLoaderOptions  = $.extend(true, {}, lazyLoaderDefaults, lazyLoaderSettings);
 
-      _this  = j1.adapter.iconPicker;
-      logger = log4javascript.getLogger('j1.adapter.iconPicker');
+      _this  = j1.adapter.lazyLoader;
+      logger = log4javascript.getLogger('j1.adapter.lazyLoader');
 
-      // -----------------------------------------------------------------------
-      // module initializer
-      // -----------------------------------------------------------------------
-      var dependencies_met_page_ready = setInterval((options) => {
-        var pageState       = $('#content').css("display");
-        var pageVisible     = (pageState === 'block') ? true : false;
-        var j1CoreFinished  = (j1.getState() === 'finished') ? true : false;
+      var dependency_met_page_ready = setInterval(() => {
+        var pageFinished = (j1.getState() == 'finished') ? true: false;
 
-        if (j1CoreFinished && pageVisible) {
+        if (pageFinished) {
           startTimeModule = Date.now();
 
-          icon_picker_button_id = '#' + iconPickerOptions.picker_button_id;
-
           _this.setState('started');
+          logger.debug('\n' + 'set module state to: ' + _this.getState());
+          logger.info('\n' + 'initializing module: started');
+
+          _this.registerLoaders(lazyLoaderOptions);
+
+          _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized on id: ' + icon_picker_button_id);
+          logger.info('\n' + 'initializing module: finished');
 
-          var dependencies_met_picker_button_ready = setInterval (() => {
-            var buttonState = $(icon_picker_button_id).length;
-            var buttonReady = (buttonState > 0) ? true : false;
+          endTimeModule = Date.now();
+          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
-            if (buttonReady) {
-              // setup initial slimSelect values|iconPicker options
-              icon_picker = new UniversalIconPicker(icon_picker_button_id, {
-                allowEmpty:       iconPickerOptions.api_options.allowEmpty,
-                iconLibraries:    iconPickerOptions.api_options.iconLibraries,
-                iconLibrariesCss: iconPickerOptions.api_options.iconLibrariesCss,
-                onSelect:         (jsonIconData) => {
-                  // copy selected icon to clipboard (iconClass)
-                  var copyFrom = document.createElement('textarea');
-                  copyFrom.value = jsonIconData.iconClass;
-                  document.body.appendChild(copyFrom);
-                  copyFrom.select();
-                  document.execCommand('copy');
-                  // Remove data element from body
-                  setTimeout(() => {
-                    document.body.removeChild(copyFrom);
-                  }, 500);
-                }
-              });
+          clearInterval(dependency_met_page_ready);
+        } // END if pageVisible
+      }, 10); // END dependency_met_page_ready
 
-              // save config settings into the toccer object for later access
-              _this['icon_picker']    = icon_picker;
-              _this['moduleOptions']  = iconPickerOptions;
-
-              _this.setState('finished');
-              logger.debug('\n' + 'state: ' + _this.getState());
-              logger.info('\n' + 'initializing module finished');
-
-              endTimeModule = Date.now();
-              logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
-
-              clearInterval(dependencies_met_picker_button_ready);
-            } // END if buttonReady
-          }, 10); // END dependencies_met_picker_button_ready
-
-          clearInterval(dependencies_met_page_ready);
-        } // END pageVisible
-      }, 10); // END dependencies_met_page_ready
     }, // END init
+
+    // -------------------------------------------------------------------------
+    // registerLoaders()
+    // Lazy load CSS to speed up page rendering
+    //
+    // Requires the following settings:
+    //
+    //    src:        the 'location' of the CSS file
+    //    selector:   the 'selector' that triggers the observer
+    //    rootMargin: the 'margin' before the load is trigged
+    //
+    // -------------------------------------------------------------------------
+    //
+    registerLoaders: () => {
+      {% for loader in lazy_loader_options.loaders %} {% if loader.enabled %}
+        j1.lazyCSS().observe({
+          src:        '{{loader.src}}',
+          selector:   '{{loader.selector}}',
+          rootMargin: '{{loader.rootMargin}}'
+        });
+        logger.info('\n' + 'register lazy loading for: {{loader.description}}');
+      {% endif %} {% endfor %}
+    }, // END registerLoaders
 
     // -------------------------------------------------------------------------
     // messageHandler()
