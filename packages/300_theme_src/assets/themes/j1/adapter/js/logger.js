@@ -28,8 +28,8 @@ regenerate:                             true
 
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment       = site.environment %}
-{% assign template_version  = site.version %}
+{% assign environment           = site.environment %}
+{% assign template_version      = site.version %}
 
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
@@ -82,11 +82,10 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.logger = (function (j1, window) {
+j1.adapter.logger = ((j1, window) => {
 
-  // ---------------------------------------------------------------------------
-  // globals
-  // ---------------------------------------------------------------------------
+  {% comment %} Global variables
+  ------------------------------------------------------------------------------ {% endcomment %}
   var environment           = '{{environment}}';
   var page_id               = j1.generateId(11);
   var cookie_names          = j1.getCookieNames();
@@ -99,8 +98,6 @@ j1.adapter.logger = (function (j1, window) {
   var loggerOptions;
   var user_session;
   var appDetected;
-  var _this;
-  var logger;
   var ajaxAppender;
   var consoleAppender;
   var jsonLayout;
@@ -110,8 +107,18 @@ j1.adapter.logger = (function (j1, window) {
   var nullLayout;
   var simpleLayout;
   var patternLayout;
-  var logText;
   var payloadURL;
+
+  var _this;
+  var logger;
+  var logText;
+
+  // date|time
+  var startTime;
+  var endTime;
+  var startTimeModule;
+  var endTimeModule;
+  var timeSeconds;
 
   // ---------------------------------------------------------------------------
   // helper functions
@@ -122,7 +129,7 @@ j1.adapter.logger = (function (j1, window) {
   // throw a 'fake' exception to retrieve the stack trace and analyze
   // to find the line from which this function was called
   // ---------------------------------------------------------------------------
-  var getCustomData = function(layout, loggingReference) {
+  var getCustomData = (layout, loggingReference) => {
     var customData = [];
 
     try { (0)(); } catch (e) {
@@ -160,7 +167,7 @@ j1.adapter.logger = (function (j1, window) {
     return customData[0].value;
   };
 
-  var requestCallback = function(data) {
+  var requestCallback = (data) => {
     var xhrData = data;
     //
     // place handling of command|action here
@@ -169,19 +176,19 @@ j1.adapter.logger = (function (j1, window) {
   };
 
   // ---------------------------------------------------------------------------
-  // main object
-  //
+  // main
+  // ---------------------------------------------------------------------------
   return {
 
     // -------------------------------------------------------------------------
-    // initializer
+    // adapter initializer
     // -------------------------------------------------------------------------
-    init: function (options) {
+    init: (options) => {
       // initialize state flag
       j1.adapter.logger.state = 'started';
 
       // -----------------------------------------------------------------------
-      // Default module settings
+      // default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
         module_name: 'j1.adapter.logger',
@@ -189,10 +196,10 @@ j1.adapter.logger = (function (j1, window) {
       }, options);
 
       // -----------------------------------------------------------------------
-      // Global variable settings
+      // global variable settings
       // -----------------------------------------------------------------------
-      _this       = j1.adapter.logger;
-      logger      = log4javascript.getLogger('j1.adapter.logger');
+      _this               = j1.adapter.logger;
+      logger              = log4javascript.getLogger('j1.adapter.logger');
 
       // Load  module DEFAULTS|CONFIG
       loggerDefaults      = $.extend({},   {{logger_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
@@ -204,21 +211,23 @@ j1.adapter.logger = (function (j1, window) {
       utilServerOptions   = $.extend({}, {{util_server_options | replace: '=>', ':' | replace: 'nil', '""'}});
       /* eslint-enable */
 
-      // wait until user_session.mode is detected by j1.init()
-      //
-      var dependencies_met_mode_detected = setInterval(function() {
-        user_session = j1.readCookie(cookie_names.user_session);
+      // -----------------------------------------------------------------------
+      // module initializer
+      // -----------------------------------------------------------------------
+      var dependencies_met_mode_detected = setInterval(() => {
+        var userSession  = j1.readCookie(cookie_names.user_session);
+        var sessionReady = (userSession.mode !== 'na') ? true : false;
 
-        if (user_session.mode !== 'na') {
-          clearInterval(dependencies_met_mode_detected);
-          logger.debug('\n' + 'met dependencies for: mode detected');
-          appDetected = user_session.mode === 'app' ? true : false;
+        if (sessionReady) {
+          startTimeModule = Date.now();
 
-          if (appDetected) {
-            payloadURL = ajaxAppenderOptions.payload_url_app;
-          } else {
-            payloadURL = ajaxAppenderOptions.payload_url_web;
-          }
+          // appDetected = user_session.mode === 'app' ? true : false;
+          // if (appDetected) {
+          //   payloadURL = ajaxAppenderOptions.payload_url_app;
+          // } else {
+          //   payloadURL = ajaxAppenderOptions.payload_url_web;
+          // }
+
           payloadURL = 'http://localhost:' + utilServerOptions.port + '/log2disk?request=write';
 
           // -------------------------------------------------------------------
@@ -241,23 +250,19 @@ j1.adapter.logger = (function (j1, window) {
           ajaxAppender.addHeader('X-TZ-Offset', loggerOptions.tz_offset);
 
           // success callback for testing (disabled for default)
-          //
           if (loggerRequestCallback) {
             ajaxAppender.setRequestSuccessCallback(requestCallback);
           }
 
-          // -----------------------------------------------------------------------
           // setup layouts
-          //
-          patternLayout       = new log4javascript.PatternLayout('[%d{HH:mm:ss.SSS}] [%f{4}] [%-5p] [%-60c] [%f{1}:%f{2}] %m%n[%f{3}]');
-          httpPostDataLayout  = new log4javascript.HttpPostDataLayout();
-          xmlLayout           = new log4javascript.XmlLayout();
-          jsonLayout          = new log4javascript.JsonLayout();
-          nullLayout          = new log4javascript.NullLayout();
-          simpleLayout        = new log4javascript.SimpleLayout();
+          patternLayout      = new log4javascript.PatternLayout('[%d{HH:mm:ss.SSS}] [%f{4}] [%-5p] [%-60c] [%f{1}:%f{2}] %m%n[%f{3}]');
+          httpPostDataLayout = new log4javascript.HttpPostDataLayout();
+          xmlLayout          = new log4javascript.XmlLayout();
+          jsonLayout         = new log4javascript.JsonLayout();
+          nullLayout         = new log4javascript.NullLayout();
+          simpleLayout       = new log4javascript.SimpleLayout();
 
-          // Use the method getLineNumber() as the value for the 0th custom field
-          //
+          // use the method getLineNumber() as the value for the 0th custom field
           patternLayout.setCustomField('file',    getCustomData);
           patternLayout.setCustomField('line',    getCustomData);
           patternLayout.setCustomField('path',    getCustomData);
@@ -267,23 +272,23 @@ j1.adapter.logger = (function (j1, window) {
           consoleAppender.setLayout(patternLayout);
           ajaxAppender.setLayout(httpPostDataLayout);
 
-          // -----------------------------------------------------------------------
           // setup log levels
-          //
-          if (environment == 'production') {
+          if (environment === 'production') {
             log4javascript.getLogger('j1').setLevel(log4javascript.Level.WARN);
           }
-          if (environment == 'development' || environment == 'devel' || environment == 'dev' || environment == 'test') {
+          if (environment === 'development' || environment == 'devel' || environment == 'dev' || environment == 'test') {
             log4javascript.getLogger('j1').setLevel(log4javascript.Level.DEBUG);
           } else {
             // fallback settings
             log4javascript.getLogger('j1').setLevel(log4javascript.Level.WARN);
           }
 
-          // -----------------------------------------------------------------------
           // setup (root) loggers
-          //
           log4javascript.getRootLogger().addAppender(consoleAppender);
+
+          _this.setState('started');
+          logger.debug('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'module is being initialized');
 
           // to use the ajaxAppender (write logs to disk), the utility server
           // needs to be enabled (util_srv.yml) as well
@@ -299,16 +304,20 @@ j1.adapter.logger = (function (j1, window) {
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module initialized successfully');
 
+          endTimeModule = Date.now();
+          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+
+          clearInterval(dependencies_met_mode_detected);
           return true;
-        }
-      }, 10); // END 'mode detected'
+        } // END sessionReady
+      }, 10); // END dependencies_met_mode_detected
     }, // END init
 
     // -------------------------------------------------------------------------
-    // messageHandler: MessageHandler for J1 NAV module
-    // manage messages (paylods) send from other J1 modules
+    // messageHandler()
+    // manage messages send from other J1 modules
     // -------------------------------------------------------------------------
-    messageHandler: function (sender, message) {
+    messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
@@ -316,7 +325,7 @@ j1.adapter.logger = (function (j1, window) {
 
       // -----------------------------------------------------------------------
       //  process commands|actions
-      //
+      // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
 
         //
@@ -334,22 +343,22 @@ j1.adapter.logger = (function (j1, window) {
     }, // END messageHandler
 
     // -------------------------------------------------------------------------
-    // setState
-    // set the current (processing) state of the module
+    // setState()
+    // sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: function (stat) {
-      j1.adapter.logger.state = stat;
+    setState: (stat) => {
+      _this.state = stat;
     }, // END setState
 
     // -------------------------------------------------------------------------
-    // getState
-    // return ;urns the current (processing) state of the module
+    // getState()
+    // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: function () {
-      return j1.adapter.logger.state;
-    } // END state
+    getState: () => {
+      return _this.state;
+    } // END getState
 
-  }; // END return
+  }; // END main (return)
 })(j1, window);
 
 {% endcapture %}

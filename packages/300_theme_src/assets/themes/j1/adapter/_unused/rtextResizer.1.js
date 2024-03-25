@@ -89,22 +89,30 @@ j1.adapter.rtextResizer = ((j1, window) => {
   ------------------------------------------------------------------------------ {% endcomment %}
   var environment = '{{environment}}';
   var state       = 'not_started';
+
   var _this;
   var logger;
   var logText;
 
+  // date|time
+  var startTime;
+  var endTime;
+  var startTimeModule;
+  var endTimeModule;
+  var timeSeconds;
+
   // ---------------------------------------------------------------------------
-  // Main object
+  // main
   // ---------------------------------------------------------------------------
   return {
 
     // -------------------------------------------------------------------------
-    // initializer
+    // adapter initializer
     // -------------------------------------------------------------------------
     init: (options) => {
 
       // -----------------------------------------------------------------------
-      // Default module settings
+      // default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
         module_name: 'j1.adapter.rtextResizer',
@@ -112,18 +120,13 @@ j1.adapter.rtextResizer = ((j1, window) => {
       }, options);
 
       // -----------------------------------------------------------------------
-      // Global variable settings
+      // global variable settings
       // -----------------------------------------------------------------------
       _this   = j1.adapter.rtextResizer;
       logger  = log4javascript.getLogger('j1.adapter.rtextResizer');
 
-      // initialize state flag
-      _this.setState('started');
-      logger.debug('\n' + 'state: ' + _this.getState());
-      logger.info('\n' + 'module is being initialized');
-
       // -----------------------------------------------------------------------
-      // data loader
+      // data loader (resizer UI)
       // -----------------------------------------------------------------------
       j1.loadHTML ({
         xhr_container_id:   'rtext_resizer_container',
@@ -134,17 +137,23 @@ j1.adapter.rtextResizer = ((j1, window) => {
       );
 
       // -----------------------------------------------------------------------
-      // initializer
+      // module initializer
       // -----------------------------------------------------------------------
       var dependencies_met_data_loaded = setInterval(() => {
-        var logger = log4javascript.getLogger('j1.adapter.rtextResizer');
+        var pageState            = $('#content').css("display");
+        var pageVisible          = (pageState === 'block') ? true : false;
+        var j1CoreFinished       = (j1.getState() === 'finished') ? true : false;
+        var rtextContainerLoaded = (j1.xhrDOMState['#rtext_resizer_container'] == 'success') ? true : false;
 
-        if (j1.xhrDOMState['#rtext_resizer_container'] == 'success') {
-          var $modalContainer = $('#rtext_resizer_modal');
+        if (rtextContainerLoaded) {
+          startTimeModule = Date.now();
 
-          logger.info('\n' + 'loading rtext resizer modal finished on id: #' + 'rtext_resizer');
+          _this.setState('started');
+          logger.debug('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'module is being initialized');
+
           logger.info('\n' + 'initialize resizer ui');
-
+          var $modalContainer = $('#rtext_resizer_modal');
           if ($modalContainer.length) {
             var environment     = '{{environment}}';
             var logger          = log4javascript.getLogger('j1.template.rtext-resizer');
@@ -156,12 +165,13 @@ j1.adapter.rtextResizer = ((j1, window) => {
             var cl;
             var value;
 
-            $('input:checkbox[name="textsize-300"]').on('click', (e) => {
-              value = $(this).is(':checked');
+            $('input:checkbox[name="textsize-300"]').on('click', function (e) {
+              e.stopPropagation();
 
               $('input:checkbox[name="textsize-400"]').prop('checked', false);
               $('input:checkbox[name="textsize-500"]').prop('checked', false);
 
+              value = $(this).is(':checked');
               if (value == true) {
                 cl = r_text_default;
               }
@@ -171,15 +181,15 @@ j1.adapter.rtextResizer = ((j1, window) => {
                 logText = 'Changed textsize to: ' +cl;
                 logger.info(logText);
               }
-              e.stopPropagation();
-            });
+            }); // END textsize-300 on click
 
-            $('input:checkbox[name="textsize-400"]').on('click', (e) => {
-              value = $(this).is(':checked');
+            $('input:checkbox[name="textsize-400"]').on('click', function (e) {
+              e.stopPropagation();
 
               $('input:checkbox[name="textsize-300"]').prop('checked', false);
               $('input:checkbox[name="textsize-500"]').prop('checked', false);
 
+              value = $(this).is(':checked');
               if (value == true) {
                 cl = r_text_larger;
               }
@@ -189,15 +199,15 @@ j1.adapter.rtextResizer = ((j1, window) => {
                 logText = 'Changed textsize to: ' +cl;
                 logger.info(logText);
               }
-              e.stopPropagation();
-            });
+            }); // END textsize-400 on click
 
-            $('input:checkbox[name="textsize-500"]').on('click', (e) => {
-              value = $(this).is(':checked');
+            $('input:checkbox[name="textsize-500"]').on('click', function (e) {
+              e.stopPropagation();
 
               $('input:checkbox[name="textsize-300"]').prop('checked', false);
               $('input:checkbox[name="textsize-400"]').prop('checked', false);
 
+              value = $(this).is(':checked');
               if (value == true) {
                 cl = r_text_largest;
               }
@@ -207,23 +217,24 @@ j1.adapter.rtextResizer = ((j1, window) => {
                 logText = 'Changed textsize to: ' +cl;
                 logger.info(logText);
               }
-              e.stopPropagation();
-            });
-
-          } // END form events
-          clearInterval(dependencies_met_data_loaded);
+            }); // END textsize-500 on click
+          } // END if $modalContainer
 
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'initializing module finished');
-          logger.debug('\n' + 'met dependencies for: loadHTML');
-        } // END dependencies_met_data_loaded
-      }, 10);
+
+          endTimeModule = Date.now();
+          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+
+          clearInterval(dependencies_met_data_loaded);
+        } // END if rtextContainerLoaded
+      }, 10); // END dependencies_met_data_loaded
     }, // END init
 
     // -------------------------------------------------------------------------
-    // messageHandler: MessageHandler for J1 CookieConsent module
-    // Manage messages send from other J1 modules
+    // messageHandler()
+    // manage messages send from other J1 modules
     // -------------------------------------------------------------------------
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
@@ -232,19 +243,19 @@ j1.adapter.rtextResizer = ((j1, window) => {
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
-      //  Process commands|actions
+      //  process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
 
         //
-        // Place handling of command|action here
+        // place handling of command|action here
         //
 
         logger.info('\n' + message.text);
       }
 
       //
-      // Place handling of other command|action here
+      // place handling of other command|action here
       //
 
       return true;
@@ -252,7 +263,7 @@ j1.adapter.rtextResizer = ((j1, window) => {
 
     // -------------------------------------------------------------------------
     // setState()
-    // Sets the current (processing) state of the module
+    // sets the current (processing) state of the module
     // -------------------------------------------------------------------------
     setState: (stat) => {
       _this.state = stat;
@@ -266,7 +277,7 @@ j1.adapter.rtextResizer = ((j1, window) => {
       return _this.state;
     } // END getState
 
-  }; // END return
+  }; // END main (return)
 })(j1, window);
 
 {% endcapture %}

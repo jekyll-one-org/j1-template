@@ -27,17 +27,17 @@ regenerate:                             true
 
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment         = site.environment %}
-{% assign asset_path          = "/assets/themes/j1" %}
+{% assign environment          = site.environment %}
+{% assign asset_path           = "/assets/themes/j1" %}
 
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config     = site.data.j1_config %}
-{% assign blocks              = site.data.blocks %}
-{% assign modules             = site.data.modules %}
+{% assign template_config      = site.data.j1_config %}
+{% assign blocks               = site.data.blocks %}
+{% assign modules              = site.data.modules %}
 
 {% comment %} Set config data (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -78,24 +78,24 @@ regenerate:                             true
 'use strict';
 j1.adapter.iconPickerPage = ((j1, window) => {
 
-{% comment %} Set global variables
--------------------------------------------------------------------------------- {% endcomment %}
-const selectID  = 'icon_library';
+  {% comment %} Set global variables
+  ------------------------------------------------------------------------------ {% endcomment %}
+  const selectID  = 'icon_library';
 
-var iconPickerDefaults;
-var iconPickerSettings;
-var iconPickerOptions;
+  var iconPickerDefaults;
+  var iconPickerSettings;
+  var iconPickerOptions;
 
-var slimSelectDefaults;
-var slimSelectSettings;
-var slimSelectOptions;
+  var slimSelectDefaults;
+  var slimSelectSettings;
+  var slimSelectOptions;
 
-var _this;
-var logger;
-var logText;
+  var _this;
+  var logger;
+  var logText;
 
   // ---------------------------------------------------------------------------
-  // Main object
+  // main
   // ---------------------------------------------------------------------------
   return {
 
@@ -123,9 +123,6 @@ var logText;
       slimSelectSettings  = $.extend({}, {{slim_select_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
       slimSelectOptions   = $.extend(true, {}, slimSelectDefaults, slimSelectSettings);
 
-      // -----------------------------------------------------------------------
-      // initializer
-      // -----------------------------------------------------------------------
       _this   = j1.adapter.iconPickerPage;
       logger  = log4javascript.getLogger('j1.adapter.iconPicker');
 
@@ -144,8 +141,10 @@ var logText;
 
         // stop default actions on picker button
         const pickerButton = document.getElementById('icon_picker');
-        pickerButton.addEventListener('click', (event) => {
-          event.preventDefault();
+        pickerButton.addEventListener('click', (e) => {
+          // suppress default actions|bubble up
+          e.preventDefault();
+          e.stopPropagation();
         }); // END pickerButton (click)
 
         // setup slimSelect events|iconPicker options
@@ -180,6 +179,9 @@ var logText;
         }
       } // END init_select_events
 
+      // -----------------------------------------------------------------------
+      // module initializer
+      // -----------------------------------------------------------------------
       var dependencies_met_page_ready = setInterval (() => {
         var pageState   = $('#content').css("display");
         var pageVisible = (pageState === 'block') ? true : false;
@@ -228,19 +230,19 @@ var logText;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
-      //  Process commands|actions
+      //  process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
 
         //
-        // Place handling of command|action here
+        // place handling of command|action here
         //
 
         logger.info('\n' + message.text);
       }
 
       //
-      // Place handling of other command|action here
+      // place handling of other command|action here
       //
 
       return true;
@@ -248,7 +250,7 @@ var logText;
 
     // -------------------------------------------------------------------------
     // setState()
-    // Sets the current (processing) state of the module
+    // sets the current (processing) state of the module
     // -------------------------------------------------------------------------
     setState: (stat) => {
       _this.state = stat;
@@ -262,7 +264,7 @@ var logText;
       return _this.state;
     } // END getState
 
-  }; // END return
+  }; // END main (return)
 })(j1, window);
 
 {% endcapture %}

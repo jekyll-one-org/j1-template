@@ -46,7 +46,7 @@ regenerate:                             true
 
 {% comment %} Set config options (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign masonry_options  = masonry_defaults | merge: masonry_settings %}
+{% assign masonry_options   = masonry_defaults | merge: masonry_settings %}
 
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -81,41 +81,49 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.masonry = (function (j1, window) {
+j1.adapter.masonry = ((j1, window) => {
 
-{% comment %} Set global variables
--------------------------------------------------------------------------------- {% endcomment %}
-var environment     = '{{environment}}';
-var cookie_names    = j1.getCookieNames();
-var user_state      = j1.readCookie(cookie_names.user_state);
-var viewport_width  = $(window).width();
-var state           = 'not_started';
-var masonryDefaults;
-var masonrySettings;
-var masonryOptions;
-var themes_allowed;
-var theme_enabled;
-var theme;
-var _this;
-var logger;
-var logText;
+  {% comment %} Set global variables
+  ------------------------------------------------------------------------------ {% endcomment %}
+  var environment     = '{{environment}}';
+  var cookie_names    = j1.getCookieNames();
+  var user_state      = j1.readCookie(cookie_names.user_state);
+  var viewport_width  = $(window).width();
+  var state           = 'not_started';
+  var masonryDefaults;
+  var masonrySettings;
+  var masonryOptions;
+
+  var themes_allowed;
+  var theme_enabled;
+  var theme;
+
+  var _this;
+  var logger;
+  var logText;
+
+  // date|time
+  var startTime;
+  var endTime;
+  var startTimeModule;
+  var endTimeModule;
+  var timeSeconds;
 
   // ---------------------------------------------------------------------------
-  // Main object
+  // main
   // ---------------------------------------------------------------------------
   return {
 
     // -------------------------------------------------------------------------
-    // init()
     // adapter initializer
     // -------------------------------------------------------------------------
-    init: function (options) {
+    init: (options) => {
       var xhrLoadState      = 'pending';                                        // (initial) load state for the HTML portion of the slider
       var load_dependencies = {};
       var dependency;
 
       // -----------------------------------------------------------------------
-      // Default module settings
+      // default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
         module_name: 'j1.adapter.masonry',
@@ -123,7 +131,7 @@ var logText;
       }, options);
 
       // -----------------------------------------------------------------------
-      // Global variable settings
+      // global variable settings
       // -----------------------------------------------------------------------
       _this  = j1.adapter.masonry;
       theme  = user_state.theme_name;
@@ -139,15 +147,16 @@ var logText;
       _this.loadGridHTML(masonryOptions, masonryOptions.grids);
 
       // -----------------------------------------------------------------------
-      // initializer
+      // module initializer
       // -----------------------------------------------------------------------
       var dependencies_met_page_ready = setInterval (() => {
-        var pageState       = $('#content').css("display");
-        var pageVisible     = (pageState == 'block') ? true: false;
-        var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
-        var atticFinished   = (j1.adapter.attic.getState() == 'finished') ? true: false;
+        var pageState      = $('#content').css("display");
+        var pageVisible    = (pageState === 'block') ? true: false;
+        var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
-        if (j1CoreFinished && pageVisible && atticFinished) {
+        if (j1CoreFinished && pageVisible) {
+          startTimeModule = Date.now();
+
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module is being initialized');
@@ -155,7 +164,7 @@ var logText;
           {% for grid in masonry_settings.grids %}
             {% if grid.enabled %}
               {% assign grid_id = grid.id %}
-              logger.info('\n' + 'found masonry grid on id: ' + '{{grid_id}}');
+              logger.debug('\n' + 'found masonry grid on id: ' + '{{grid_id}}');
 
               {% comment %} load default grid options
               ------------------------------------------------------------------ {% endcomment %}
@@ -196,28 +205,26 @@ var logText;
                 // check if HTML portion of the grid is loaded successfully
                 xhrLoadState = j1.xhrDOMState['#{{grid.id}}_parent'];
                 if (xhrLoadState === 'success') {
-                  setTimeout( () => {
+                  setTimeout(() => {
                     var $grid_{{grid_id}} = $('#{{grid_id}}');
-                    logger.info('\n' + 'initialize grid on id: ' + '{{grid_id}}');
+                    logger.debug('\n' + 'initialize grid on id: ' + '{{grid_id}}');
 
                     // grid event handler
-                    logger.info('\n' + 'install event handlers for grid on id: ' + '{{grid_id}}');
-                    $grid_{{grid_id}}.on('layoutComplete', function() {
+                    logger.debug('\n' + 'install event handlers for grid on id: ' + '{{grid_id}}');
+                    $grid_{{grid_id}}.on('layoutComplete', () => {
                       // initializing (grid layout) completed
                       logger.debug('\n' + 'initializing layout completed for grid on id: ' + '{{grid_id}}');
 
                       // correct position for artice modals (previwes)
                       logger.debug('\n' + 'adjust positions of all modals on id: {{grid_id.id}}');
                       var preview_modals = $("#{{grid_id}} > .article-modal");
-                      $.each($(preview_modals), function(index, modal) {
-                          $(modal).attr('style', 'left: 0%');
-                      });
+                      $.each($(preview_modals), (index, modal) => {
+                        $(modal).attr('style', 'left: 0%');
+                      }); // END $each
+                    }); // ENF on layoutComplete
 
-                    });
-
-                    // setup the grid
-                    //
-                    logger.info('\n' + 'grid is being setup on id: ' + '{{grid.id}}');
+                    // setup grid
+                    logger.debug('\n' + 'grid is being setup on id: ' + '{{grid.id}}');
                     var $grid_{{grid_id}} = $grid_{{grid_id}}.masonry({
                       percentPosition:        {{percent_position}},
                       horizontalOrder:        {{horizontal_order}},
@@ -231,15 +238,13 @@ var logText;
                     });
 
                     // run code after all images are loaded with the grid
-                    //
-                    $grid_{{grid_id}}.imagesLoaded(function() {
+                    $grid_{{grid_id}}.imagesLoaded(() => {
                       console.debug("masonry: images loaded on {{grid_id}}");
 
                       {% if grid.lightbox.type == 'lg' %}
                       console.log("masonry: gallery detected on id: {{grid_id}}");
 
-                      // setup the lightbox
-                      //
+                      // setup lightbox
                       var lg      = document.getElementById("{{grid_id}}");
                       var gallery = lightGallery(lg, {
                         "plugins":  [{{grid.lightGallery.plugins}}],
@@ -307,6 +312,7 @@ var logText;
               }, 10); // END dependencies_met_html_loaded
 
             {% else %}
+
               logger.info('\n' + 'found grid disabled on id: {{grid.id}}');
               {% if masonryOptions.hideDisabled %}
                 // hide a grid if disabled
@@ -316,11 +322,17 @@ var logText;
             {% endif %} // ENDIF grid enabled
 
           {% endfor %} // ENDFOR (all) grids
-          logger.info('\n' + 'initializing module finished');
-          clearInterval(dependencies_met_page_ready);
-        }
-      }, 10);
 
+          _this.setState('finished');
+          logger.debug('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'initializing module: finished');
+
+          endTimeModule = Date.now();
+          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+
+          clearInterval(dependencies_met_page_ready);
+        } // END if pageVisible
+      }, 10); // END dependencies_met_page_ready
     }, // END init
 
     // -------------------------------------------------------------------------
@@ -329,7 +341,7 @@ var logText;
     // NOTE: Make sure the placeholder DIV is available in the content
     // page e.g. using the asciidoc extension masonry::
     // -------------------------------------------------------------------------
-    loadGridHTML: function (options, grid) {
+    loadGridHTML: (options, grid) => {
       var numGrids      = Object.keys(grid).length;
       var active_grids  = numGrids;
       var xhr_data_path = options.xhr_data_path + '/index.html';
@@ -338,7 +350,7 @@ var logText;
       console.debug('number of grids found: ' + numGrids);
 
       _this.setState('load_data');
-      Object.keys(grid).forEach(function(key) {
+      Object.keys(grid).forEach((key) => {
         if (grid[key].enabled) {
           xhr_container_id = grid[key].id + '_parent';
 
@@ -361,26 +373,26 @@ var logText;
     // messageHandler()
     // manage messages send from other J1 modules
     // -------------------------------------------------------------------------
-    messageHandler: function (sender, message) {
+    messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
-      //  Process commands|actions
+      //  process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
 
         //
-        // Place handling of command|action here
+        // place handling of command|action here
         //
 
         logger.info('\n' + message.text);
       }
 
       //
-      // Place handling of other command|action here
+      // place handling of other command|action here
       //
 
       return true;
@@ -388,9 +400,9 @@ var logText;
 
     // -------------------------------------------------------------------------
     // setState()
-    // Sets the current (processing) state of the module
+    // sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: function (stat) {
+    setState: (stat) => {
       _this.state = stat;
     }, // END setState
 
@@ -398,11 +410,11 @@ var logText;
     // getState()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: function () {
+    getState: () => {
       return _this.state;
     } // END getState
 
-  }; // END return
+  }; // END main (return)
 })(j1, window);
 
 {% endcapture %}

@@ -27,27 +27,27 @@ regenerate:                             true
 
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment       = site.environment %}
-{% assign asset_path        = "/assets/themes/j1" %}
+{% assign environment             = site.environment %}
+{% assign asset_path              = "/assets/themes/j1" %}
 
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config   = site.data.j1_config %}
-{% assign blocks            = site.data.blocks %}
-{% assign modules           = site.data.modules %}
+{% assign template_config         = site.data.j1_config %}
+{% assign blocks                  = site.data.blocks %}
+{% assign modules                 = site.data.modules %}
 
 {% comment %} Set config data (unused)
 --------------------------------------------------------------------------------
-{% assign custom_module_defaults = modules.defaults.custom_module.defaults %}
-{% assign custom_module_settings = modules.custom_module.settings %}
+{% assign custom_module_defaults  = modules.defaults.custom_module.defaults %}
+{% assign custom_module_settings  = modules.custom_module.settings %}
 -------------------------------------------------------------------------------- {% endcomment %}
 
 {% comment %} Set config options (unused)
 --------------------------------------------------------------------------------
-{% assign custom_module_options  = custom_module_defaults | merge: custom_module_settings %}
+{% assign custom_module_options   = custom_module_defaults | merge: custom_module_settings %}
 -------------------------------------------------------------------------------- {% endcomment %}
 
 {% comment %} Detect prod mode
@@ -111,7 +111,7 @@ j1.adapter.customModule = ((j1, window) => {
   return {
 
     // -------------------------------------------------------------------------
-    // initializer
+    // adapter initializer
     // -------------------------------------------------------------------------
     init: (options) => {
 
@@ -138,7 +138,7 @@ j1.adapter.customModule = ((j1, window) => {
       }
 
       // -----------------------------------------------------------------------
-      // initializer
+      // module initializer
       // -----------------------------------------------------------------------
       var dependencies_met_j1_finished = setInterval(() => {
         var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
@@ -166,10 +166,10 @@ j1.adapter.customModule = ((j1, window) => {
 
     // -------------------------------------------------------------------------
     // custom_module_1
-    // Called by ???
+    // called by ???
     // -------------------------------------------------------------------------
     custom_module_1: (options) => {
-      var logger  = log4javascript.getLogger('j1.adapter.customModule.custom_module_1');
+      var logger = log4javascript.getLogger('j1.adapter.customModule.custom_module_1');
 
       logText = '\n' + 'entered custom function: custom_module_1';
       logger.info(logText);
@@ -178,8 +178,8 @@ j1.adapter.customModule = ((j1, window) => {
     },
 
     // -------------------------------------------------------------------------
-    // messageHandler
-    // Manage messages send from other J1 modules
+    // messageHandler()
+    // manage messages send from other J1 modules
     // -------------------------------------------------------------------------
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
@@ -188,19 +188,19 @@ j1.adapter.customModule = ((j1, window) => {
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
-      //  Process commands|actions
+      //  process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
 
         //
-        // Place handling of command|action here
+        // place handling of command|action here
         //
 
         logger.info('\n' + message.text);
       }
 
       //
-      // Place handling of other command|action here
+      // place handling of other command|action here
       //
 
       return true;
@@ -208,7 +208,7 @@ j1.adapter.customModule = ((j1, window) => {
 
     // -------------------------------------------------------------------------
     // setState()
-    // Sets the current (processing) state of the module
+    // sets the current (processing) state of the module
     // -------------------------------------------------------------------------
     setState: (stat) => {
       _this.state = stat;
@@ -222,7 +222,7 @@ j1.adapter.customModule = ((j1, window) => {
       return _this.state;
     } // END getState
 
-  }; // END return
+  }; // END main (return)
 })(j1, window);
 
 {% endcapture %}

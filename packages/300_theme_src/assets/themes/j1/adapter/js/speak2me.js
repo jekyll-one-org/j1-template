@@ -89,94 +89,91 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.speak2me = (function (j1, window) {
+j1.adapter.speak2me = ((j1, window) => {
 
-{% comment %} Set global variables
--------------------------------------------------------------------------------- {% endcomment %}
-const scrollBehavior    = 'smooth';
+  {% comment %} Set global variables
+  ------------------------------------------------------------------------------ {% endcomment %}
+  const scrollBehavior    = 'smooth';
 
-var environment         = '{{environment}}';
-var cookie_names        = j1.getCookieNames();
-var user_state          = j1.readCookie(cookie_names.user_state);
-var state               = 'not_started';
-var isFirefox           = /Firefox/i.test(navigator.userAgent);
-var chrome              = /chrome/i.test( navigator.userAgent );
-var isEdge              = /Edg/i.test(navigator.userAgent);
-var isOpera             = /OPR/i.test(navigator.userAgent);
-var isSafari            = /Safari/i.test(navigator.userAgent);
-var isAvast             = /Avast/i.test(navigator.userAgent);
-var isChrome            = ((chrome) && (!isEdge));
-var ttsDisabled         = false;
-var mobilesDisabled     = false;
-var browsersDisabled    = [];
-var isMobile            = (window.orientation !== undefined) ? true :false;       // NOTE: window.orientation is DEPRECATED
-// var isMobile         = (screen.orientation.type == 'portrait-secondary') ? true : false;
+  var environment         = '{{environment}}';
+  var cookie_names        = j1.getCookieNames();
+  var user_state          = j1.readCookie(cookie_names.user_state);
+  var state               = 'not_started';
+  var isFirefox           = /Firefox/i.test(navigator.userAgent);
+  var chrome              = /chrome/i.test( navigator.userAgent );
+  var isEdge              = /Edg/i.test(navigator.userAgent);
+  var isOpera             = /OPR/i.test(navigator.userAgent);
+  var isSafari            = /Safari/i.test(navigator.userAgent);
+  var isAvast             = /Avast/i.test(navigator.userAgent);
+  var isChrome            = ((chrome) && (!isEdge));
+  var ttsDisabled         = false;
+  var mobilesDisabled     = false;
+  var browsersDisabled    = [];
+  var isMobile            = (window.orientation !== undefined) ? true :false;       // NOTE: window.orientation is DEPRECATED
+  // var isMobile         = (screen.orientation.type == 'portrait-secondary') ? true : false;
 
-// synthetic puase
-var isPaused            = false;
-var lastSpokenChunk     = false;
-var lastScrollPosition  = false;
+  // synthetic puase
+  var isPaused            = false;
+  var lastSpokenChunk     = false;
+  var lastScrollPosition  = false;
 
-var isRunning           = true;
+  var isRunning           = true;
 
-var frontmatterOptions;
-var speak2meDefaults;
-var speak2meSettings;
-var speak2meOptions;
-var speak2meModal;
+  var frontmatterOptions;
+  var speak2meDefaults;
+  var speak2meSettings;
+  var speak2meOptions;
+  var speak2meModal;
 
-var chromeWorkaround;
-var chromeWorkaroundPause
-var chromeWorkaroundResume;
-var $buttonPause;
-var $buttonResume;
-var intervalId;
-var _this;
-var logger;
-var logText;
+  var chromeWorkaround;
+  var chromeWorkaroundPause
+  var chromeWorkaroundResume;
+  var $buttonPause;
+  var $buttonResume;
+  var intervalId;
 
-// -----------------------------------------------------------------------------
-// global event handler
-// -----------------------------------------------------------------------------
-var Events = {
-  documentReady: function (onDocumentReady) {
-    if (document.readyState !== 'loading') {
-      onDocumentReady();
-    } else {
-      document.addEventListener('DOMContentLoaded', onDocumentReady);
-    }
-  }
-};
+  var _this;
+  var logger;
+  var logText;
+
+  // date|time
+  var startTime;
+  var endTime;
+  var startTimeModule;
+  var endTimeModule;
+  var timeSeconds;
 
   // ---------------------------------------------------------------------------
-  // Main object
+  // helper functions
+  // ---------------------------------------------------------------------------
+
+  // global event handler
+  var Events = {
+    documentReady: (onDocumentReady) => {
+      if (document.readyState !== 'loading') {
+        onDocumentReady();
+      } else {
+        document.addEventListener('DOMContentLoaded', onDocumentReady);
+      }
+    }
+  };
+
+  // ---------------------------------------------------------------------------
+  // main
   // ---------------------------------------------------------------------------
   return {
 
     // -------------------------------------------------------------------------
-    // global helper functions
+    // helper functions
     // -------------------------------------------------------------------------
-    //
-    // See: https://gist.github.com/carloscabo/0ec69aaa42216c7f12efd861e110cb8b
-    // function isSafariIos() {
-    //   var is_ios    = /iP(ad|od|hone)/i.test(window.navigator.userAgent);
-    //   var is_safari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
-    //
-    //   if (is_ios && is_safari) {
-    //     return true;
-    //   } else {
-    //     return false;
-    //   }
-    // };
 
     // -------------------------------------------------------------------------
-    // init()
     // adapter initializer
     // -------------------------------------------------------------------------
-    init: function (options) {
+    init: (options) => {
 
       // -----------------------------------------------------------------------
-      // Default module settings
+      // default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
         module_name: 'j1.adapter.speak2me',
@@ -184,15 +181,13 @@ var Events = {
       }, options);
 
       // -----------------------------------------------------------------------
-      // Global variable settings
+      // global variable settings
       // -----------------------------------------------------------------------
 
       // create settings object from frontmatter
-      //
       frontmatterOptions = options != null ? $.extend({}, options) : {};
 
       // create settings object from module options
-      //
       speak2meDefaults = $.extend({}, {{speak2me_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
       speak2meSettings = $.extend({}, {{speak2me_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
       speak2meOptions  = $.extend(true, {}, speak2meDefaults, speak2meSettings, frontmatterOptions);
@@ -209,15 +204,19 @@ var Events = {
       logger.info('\n' + 'module is being initialized');
 
       // -----------------------------------------------------------------------
-      // initializer
+      // module initializer
       // -----------------------------------------------------------------------
-      var dependencies_met_page_ready = setInterval (() => {
-        var pageState       = $('#content').css("display");
-        var pageVisible     = (pageState == 'block') ? true : false;
-        var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
-        var atticFinished   = (j1.adapter.attic.getState() == 'finished') ? true: false;
+      var dependencies_met_page_ready = setInterval(() => {
+        var pageState      = $('#content').css("display");
+        var pageVisible    = (pageState === 'block') ? true : false;
+        var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
-        if (j1CoreFinished && pageVisible && atticFinished) {
+        if (j1CoreFinished && pageVisible) {
+          startTimeModule = Date.now();
+
+          _this.setState('started');
+          logger.debug('\n' + 'set module state to: ' + _this.getState());
+          logger.info('\n' + 'initializing module: started');
 
           if (mobilesDisabled && isMobile) {
             console.log('module speak2me is disabled for mobile browsers');
@@ -246,7 +245,6 @@ var Events = {
           }
 
           // Avast Secure Browser always disabled
-          //
           var avastDisabled = (browsersDisabled.includes('Avast')) ? true : false;
           if (avastDisabled && isAvast) {
             console.log('module speak2me is not supported for the Avast Secure browser');
@@ -281,9 +279,10 @@ var Events = {
             speak2meModal.setAttribute('aria-labelledby', speak2meOptions.dialogContainerID);
             document.body.append(speak2meModal);
 
-            // -------------------------------------------------------------------
+            // -----------------------------------------------------------------
             // data loader
-            // -------------------------------------------------------------------
+            // -----------------------------------------------------------------
+            logger.info('\n' + 'load modal');
             j1.loadHTML ({
               xhr_container_id:   'speak2me_container',
               xhr_data_path:      '/assets/data/speak2me/index.html',
@@ -293,6 +292,7 @@ var Events = {
             );
           }
 
+          logger.info('\n' + 'initialize modal');
           // -------------------------------------------------------------------
           // on 'show'
           // -------------------------------------------------------------------
@@ -301,7 +301,7 @@ var Events = {
           }); // END modal on 'show'
 
           // -------------------------------------------------------------------
-          // on 'shown'
+          // on shown
           // -------------------------------------------------------------------
           $('#speak2me_container').on('shown.bs.modal', function () {
             this.$buttonSpeak = $('#speak_button');
@@ -310,10 +310,10 @@ var Events = {
             // setup workaround for chromium based browsers
             // to enable infinite speech output
             //
-            this.$buttonSpeak.click (() => {
+            this.$buttonSpeak.click(function () {
               if (isChrome) {
                 logger.info('\n' + 'speak: setup pause workaround for chromium based browsers');
-                chromeWorkaround = setInterval(function () {
+                chromeWorkaround = setInterval(() => {
                   var isSpeaking  = $().speak2me('isSpeaking');
 
                   logger.debug('\n' + 'speak: isSpeaking|isPaused: ' + isSpeaking + '|' + isPaused);
@@ -330,8 +330,7 @@ var Events = {
             });
 
             // stop workaround for chromium based browsers
-            //
-            this.$buttonStop.click (() => {
+            this.$buttonStop.click(function () {
               logger.info('\n' + 'speak: remove pause workaround for chromium based browsers');
               // wait 3 sec to make sure speech output is stopped
               setTimeout (() => {
@@ -346,13 +345,12 @@ var Events = {
                 }
               }, 3000);
             });
-
           }); // END modal on 'shown'
 
           // -------------------------------------------------------------------
-          // on 'hidden' (close)
+          // on hidden (close)
           // -------------------------------------------------------------------
-          $('#speak2me_container').on('hidden.bs.modal', () => {
+          $('#speak2me_container').on('hidden.bs.modal', function () {
             //
             // do something here
             //
@@ -362,17 +360,19 @@ var Events = {
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module initialization finished');
 
-          clearInterval(dependencies_met_page_ready);
-        }
-      }, 10);
+          endTimeModule = Date.now();
+          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
+          clearInterval(dependencies_met_page_ready);
+        } // END pageVisible
+      }, 10); // END dependencies_met_page_ready
     }, // END init
 
     // -------------------------------------------------------------------------
     // create()
     // create a HTML select element for all (valid) voices found
     // -------------------------------------------------------------------------
-    create: function (obj) {
+    create: (obj) => {
       var isSelectEmpty = ($('#voiceSelect').length == 1) ? false: true;
       var numVoices;
 
@@ -391,7 +391,7 @@ var Events = {
     // showDialog()
     // display the tts settings dialog
     // -------------------------------------------------------------------------
-    showDialog: function () {
+    showDialog: () => {
       logger.debug('\n' + "showDialog");
 
       $('#speak2me_container').modal({
@@ -406,7 +406,7 @@ var Events = {
     // update()
     // update the value to the right of the input sliders
     // -------------------------------------------------------------------------
-    update: function (obj, value) {
+    update: (obj, value) => {
       var n = parseFloat(value).toFixed(1)
       $(obj).parent().find('span').text(n);
     }, // END update
@@ -415,7 +415,7 @@ var Events = {
     // speak()
     // calls the 'speak' functiion of the converter
     // -------------------------------------------------------------------------
-    speak: function (obj) {
+    speak: (obj) => {
       // Get the parameter values from the input sliders
       //
       var rate    = parseFloat(document.getElementById('rate').value);
@@ -449,7 +449,6 @@ var Events = {
       $('#pause_button').show();
 
       // hide buttons NOT needed
-      //
       $('#speak_button').hide();
       $('#resume_button').hide();
 
@@ -464,7 +463,7 @@ var Events = {
     // pause()
     // Calls the 'pause' function of the converter
     // -------------------------------------------------------------------------
-    pause: function () {
+    pause: () => {
       // remove speak indication;
       $('.mdib-speaker').removeClass('mdib-spin');
 
@@ -475,7 +474,6 @@ var Events = {
         $().speak2me('pause');
       } else {
         // synthetic pause-resume for chromium-based browsers
-        //
         lastSpokenChunk     = $().speak2me('isSpoken');
         lastScrollPosition  = $().speak2me('isScrolled');
         $().speak2me('stop');
@@ -484,41 +482,36 @@ var Events = {
       $('#resume_button').show();
 
       // hide buttons NOT needed
-      //
       $('#pause_button').hide();
-
     }, // END pause
 
     // -------------------------------------------------------------------------
     // resume()
     // Calls the 'resume' function of the converter
     // -------------------------------------------------------------------------
-    resume: function () {
+    resume: () => {
       $('.mdib-speaker').addClass('mdib-spin');
       if (!isChrome) {
         $().speak2me('resume');
       } else {
         // synthetic pause-resume for chromium-based browsers
-        //
         _this.speak('{{speak2me_options.speechSelector}}');
       }
 
       $('#pause_button').show();
 
       // hide buttons NOT needed
-      //
       $('#resume_button').hide();
 
       // remove pause indication
       $('.mdib-speaker').removeClass('md-orange');
-
     }, // END resume
 
     // -------------------------------------------------------------------------
     // stop()
     // Calls the 'stop' function of the converter
     // -------------------------------------------------------------------------
-    stop: function () {
+    stop: () => {
       $().speak2me('stop')
       // remove speak indication;
       $('.mdib-speaker').removeClass('mdib-spin');
@@ -534,33 +527,32 @@ var Events = {
       // jadams, 2023-09-28;
       // solution required, when selected language in voice
       // selector (dialog) has NOT changed if translation was changed
-
     }, // END stop
 
     // -------------------------------------------------------------------------
     // messageHandler()
     // manage messages send from other J1 modules
     // -------------------------------------------------------------------------
-    messageHandler: function (sender, message) {
+    messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
-      //  Process commands|actions
+      //  process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
 
         //
-        // Place handling of command|action here
+        // place handling of command|action here
         //
 
         logger.info('\n' + message.text);
       }
 
       //
-      // Place handling of other command|action here
+      // place handling of other command|action here
       //
 
       return true;
@@ -568,9 +560,9 @@ var Events = {
 
     // -------------------------------------------------------------------------
     // setState()
-    // Sets the current (processing) state of the module
+    // sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: function (stat) {
+    setState: (stat) => {
       _this.state = stat;
     }, // END setState
 
@@ -578,11 +570,11 @@ var Events = {
     // getState()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: function () {
+    getState: () => {
       return _this.state;
     } // END getState
 
-  }; // END return
+  }; // END main (return)
 })(j1, window);
 
 {% endcapture %}

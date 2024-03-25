@@ -105,12 +105,12 @@ j1.adapter.algolia = ((j1, window) => {
   return {
 
     // -------------------------------------------------------------------------
-    // Initializer
+    // module initializer
     // -------------------------------------------------------------------------
     init: (options) => {
 
       // -----------------------------------------------------------------------
-      // Default module settings
+      // default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
         module_name: 'j1.adapter.algolia',
@@ -118,7 +118,7 @@ j1.adapter.algolia = ((j1, window) => {
       }, options);
 
       // -----------------------------------------------------------------------
-      // Global variable settings
+      // global variable settings
       // -----------------------------------------------------------------------
       _this   = j1.adapter.algolia;
       logger  = log4javascript.getLogger('j1.adapter.algolia');
@@ -129,7 +129,7 @@ j1.adapter.algolia = ((j1, window) => {
       logger.debug('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
 
-      {% comment %} Load module config from yml data
+      {% comment %} Load module config from yaml data file
       -------------------------------------------------------------------------- {% endcomment %}
       // Load  module DEFAULTS|CONFIG
       /* eslint-disable */
@@ -148,20 +148,15 @@ j1.adapter.algolia = ((j1, window) => {
       });
 
       var hitTemplate = (hit) => {
-        // state = 'start search';
-        // logger.debug('\n' + 'state: ' + state);
-        // var re = new RegExp('^\/posts');
-        // var re = new RegExp('^\/pages');
         var re = new RegExp('^\/pages|^\/posts|^\/collections');
         if (re.test(hit.url)) {
           var date = '';
           if (hit.date) {
             date = moment.unix(hit.date).format('MMM D, YYYY');
           }
-          // var url = `/jekyll-algolia-example${hit.url}#${hit.anchor}`;
-          var url = hit.url;
 
-          const title = hit._highlightResult.title.value;
+          var url         = hit.url;
+          const title     = hit._highlightResult.title.value;
           var breadcrumbs = '';
 
           if (hit._highlightResult.headings) {
@@ -188,6 +183,7 @@ j1.adapter.algolia = ((j1, window) => {
             </li>
           `;
         }
+
         // state = 'finished search';
         // logger.debug('\n' + 'state: ' + state);
       };
@@ -208,7 +204,7 @@ j1.adapter.algolia = ((j1, window) => {
           instantsearch.widgets.clearAll({
             container: '#clear-all',
             templates: {
-              link: 'Reset TAGS'
+              link:    'Reset TAGS'
             },
             clearsQuery: false,
             autoHideContainer: false
@@ -261,19 +257,18 @@ j1.adapter.algolia = ((j1, window) => {
           })
         );
 
-        /*
-        search.addWidget(
-          instantsearch.widgets.hitsPerPageSelector({
-            container: '#hits-per-page-selector',
-            items: [
-              {value: 3, label: '3 per page', default: true},
-              {value: 6, label: '6 per page'},
-              {value: 12, label: '12 per page'},
-            ]
-          })
-        );
-        */
-      }
+        // search.addWidget(
+        //   instantsearch.widgets.hitsPerPageSelector({
+        //     container: '#hits-per-page-selector',
+        //     items: [
+        //       {value: 3, label: '3 per page', default: true},
+        //       {value: 6, label: '6 per page'},
+        //       {value: 12, label: '12 per page'},
+        //     ]
+        //   })
+        // );
+
+      } // END if moduleOptions enabled
 
       if (moduleOptions.enabled === true) {
         search.start();
@@ -290,7 +285,7 @@ j1.adapter.algolia = ((j1, window) => {
         _this.setState('finished');
         logger.debug('\n' + 'state: ' + _this.getState());
         logger.warn('\n' + 'module disabled');
-      }
+      } // END if moduleOptions enabled
 
       return true;
     }, // END init

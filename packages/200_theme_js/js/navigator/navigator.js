@@ -68,7 +68,7 @@ module.exports = function navigator ( options ) {
     init: function( defaultOptions, menuOptions ) {
       logger  = log4javascript.getLogger('j1.core.navigator');
 
-      logger.info('\n' + 'initializing module: started');
+      logger.debug('\n' + 'initializing module: started');
 
       // -----------------------------------------------------------------------
       // Create a Wrapper for the nav system
@@ -79,9 +79,9 @@ module.exports = function navigator ( options ) {
       this.navbarSticky();
       this.eventHandler(defaultOptions); // jadams, 2021-07-03: initialize events early
 
-      logger.info('\n' + 'initializing module: finished');
+      logger.debug('\n' + 'initializing module: finished');
 
-      message.type    = 'command';
+      message.type    = 'state';
       message.action  = 'core_initialized';
       message.text    = 'navigator core initialized';
       j1.sendMessage('j1.core.navigator', 'j1.adapter.navigator', message);
@@ -105,7 +105,7 @@ module.exports = function navigator ( options ) {
       var scrollOffset;
       var json_data;
 
-      logger.info('\n' + 'initializing eventHandler: started');
+      logger.debug('\n' + 'initializing eventHandler: started');
 
       // jadams: unused code (for now).: manages HTML5 server side events
       // for incoming messages from Git Server send e.g. on a 'pull request'
@@ -420,7 +420,7 @@ module.exports = function navigator ( options ) {
 
       }); // End manage events for all quicklinks
 
-      logger.info('\n' + 'initializing eventHandler: finished');
+      logger.debug('\n' + 'initializing eventHandler: finished');
 
     }, // END eventHandler
 

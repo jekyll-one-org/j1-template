@@ -40,12 +40,12 @@ regenerate:                             true
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign lightbox_defaults  = modules.defaults.lightbox.defaults %}
-{% assign lightbox_settings  = modules.lightbox.settings %}
+{% assign lightbox_defaults = modules.defaults.lightbox.defaults %}
+{% assign lightbox_settings = modules.lightbox.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign lightbox_options   = lightbox_defaults | merge: lightbox_settings %}
+{% assign lightbox_options  = lightbox_defaults | merge: lightbox_settings %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -82,7 +82,7 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.lightbox = (function (j1, window) {
+j1.adapter.lightbox = ((j1, window) => {
 
   {% comment %} Global variables
   ------------------------------------------------------------------------------ {% endcomment %}
@@ -92,26 +92,34 @@ j1.adapter.lightbox = (function (j1, window) {
   var lightboxSettings;
   var lightboxOptions;
   var frontmatterOptions;
+
   var _this;
   var logger;
   var logText;
 
+  // date|time
+  var startTime;
+  var endTime;
+  var startTimeModule;
+  var endTimeModule;
+  var timeSeconds;
+
   // ---------------------------------------------------------------------------
-  // Helper functions
+  // helper functions
   // ---------------------------------------------------------------------------
 
   // ---------------------------------------------------------------------------
-  // Main object
+  // main
   // ---------------------------------------------------------------------------
   return {
 
     // -------------------------------------------------------------------------
-    // Initializer
+    // adapter initializer
     // -------------------------------------------------------------------------
-    init: function (options) {
+    init: (options) => {
 
       // -----------------------------------------------------------------------
-      // Default module settings
+      // default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
         module_name: 'j1.adapter.lightbox',
@@ -119,26 +127,30 @@ j1.adapter.lightbox = (function (j1, window) {
       }, options);
 
       // -----------------------------------------------------------------------
-      // Global variable settings
+      // global variable settings
       // -----------------------------------------------------------------------
       _this   = j1.adapter.lightbox;
       logger  = log4javascript.getLogger('j1.adapter.lightbox');
 
       // create settings object from frontmatter (page settings)
-      frontmatterOptions    = options != null ? $.extend({}, options) : {};
+      frontmatterOptions    = options !== null ? $.extend({}, options) : {};
 
-      // Load  module DEFAULTS|CONFIG
+      // Load module DEFAULTS|CONFIG
       lightboxDefaults      = $.extend({}, {{lightbox_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
       lightboxSettings      = $.extend({}, {{lightbox_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
       lightboxOptions       = $.extend(true, {}, lightboxDefaults, lightboxSettings, frontmatterOptions);
 
+      // -----------------------------------------------------------------------
+      // module initializer
+      // -----------------------------------------------------------------------
       var dependencies_met_page_ready = setInterval (() => {
-        var pageState       = $('#content').css("display");
-        var pageVisible     = (pageState == 'block') ? true: false;
-        var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
-        var lbV2Finished    = ($('#lightbox').length) ? true : false;
+        var pageState      = $('#content').css("display");
+        var pageVisible    = (pageState === 'block') ? true: false;
+        var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
+        var lbV2Finished   = ($('#lightbox').length) ? true : false;
 
          if (j1CoreFinished && pageVisible && lbV2Finished) {
+           startTimeModule = Date.now();
 
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());
@@ -163,36 +175,39 @@ j1.adapter.lightbox = (function (j1, window) {
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'initializing module finished');
 
+          endTimeModule = Date.now();
+          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+
           clearInterval(dependencies_met_page_ready);
-        } // END dependencies_met_page_ready
-      }, 10);
+        } // END if pageVisible
+      }, 10); // END dependencies_met_page_ready
 
     }, // END init lightbox
 
     // -------------------------------------------------------------------------
-    // messageHandler: MessageHandler for J1 CookieConsent module
-    // Manage messages send from other J1 modules
+    // messageHandler()
+    // manage messages send from other J1 modules
     // -------------------------------------------------------------------------
-    messageHandler: function (sender, message) {
+    messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
-      //  Process commands|actions
+      //  process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
 
         //
-        // Place handling of command|action here
+        // place handling of command|action here
         //
 
         logger.info('\n' + message.text);
       }
 
       //
-      // Place handling of other command|action here
+      // place handling of other command|action here
       //
 
       return true;
@@ -200,9 +215,9 @@ j1.adapter.lightbox = (function (j1, window) {
 
     // -------------------------------------------------------------------------
     // setState()
-    // Sets the current (processing) state of the module
+    // sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: function (stat) {
+    setState: (stat) => {
       _this.state = stat;
     }, // END setState
 
@@ -210,11 +225,11 @@ j1.adapter.lightbox = (function (j1, window) {
     // getState()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: function () {
+    getState: () => {
       return _this.state;
     } // END getState
 
-  }; // END return
+  }; // END main (return)
 })(j1, window);
 
 {% endcapture %}

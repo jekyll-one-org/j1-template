@@ -83,7 +83,7 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.attic = (function (j1, window) {
+j1.adapter.attic = ((j1, window) => {
 
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
@@ -105,7 +105,7 @@ j1.adapter.attic = (function (j1, window) {
     // -------------------------------------------------------------------------
     // Initializer
     // -------------------------------------------------------------------------
-    init: function (options) {
+    init: (options) => {
 
       // -----------------------------------------------------------------------
       // Default module settings
@@ -144,7 +144,7 @@ j1.adapter.attic = (function (j1, window) {
 
       var dependencies_met_page_ready = setInterval (() => {
         var pageState   = $('#no_flicker').css("display");
-        var pageVisible = (pageState == 'block') ? true: false;
+        var pageVisible = (pageState === 'block') ? true: false;
 
         // run on 'pageVisible'
         //
@@ -176,7 +176,7 @@ j1.adapter.attic = (function (j1, window) {
     // -------------------------------------------------------------------------
     // Initialize all header supported
     // -------------------------------------------------------------------------
-    createAllAttics: function () {
+    createAllAttics: () => {
       var frontmatterOptions  = _this.frontmatterOptions;
 
       // merge all attic options
@@ -206,7 +206,7 @@ j1.adapter.attic = (function (j1, window) {
             atticFilters        = $.extend(true, {}, atticOptionsFilters, atticItemFilters);
             filterArray         = [];
 
-            $.each(atticFilters, function(idx2, val2) {
+            $.each(atticFilters, (idx2, val2) => {
               var str = idx2 + '(' + val2 + ')';
               filterArray.push(str);
             });
@@ -255,16 +255,16 @@ j1.adapter.attic = (function (j1, window) {
             //
             if (atticOptions.pauseOnHover) {
               $('#attic_id').hover (
-                function() {
+                () => {
                   $('#{{attic_id}}').backstretch('pause'); },
-                function() {
+                () => {
                   $('#{{attic_id}}').backstretch('resume'); }
               );
             }
 
             // run callback backstretch.before
             //
-            $(window).on('backstretch.before', function (e, instance, index) {
+            $(window).on('backstretch.before', (e, instance, index) => {
               var evt                 = e;
               var inst                = instance;
               var idx                 = index;
@@ -277,7 +277,7 @@ j1.adapter.attic = (function (j1, window) {
               _this.setState('backstretch_before');
 
               if (index === backstretch_instance_data.images.length -1) {
-                if (atticOptions.circuit == false) {
+                if (atticOptions.circuit === false) {
                   // Stop the slideshow after reached the last image
                   $('#{{attic_id}}').backstretch('pause');
                 }
@@ -305,7 +305,7 @@ j1.adapter.attic = (function (j1, window) {
             // NOTE: add a 'caption' or 'badge' if configured
             // SEE:  https://github.com/jquery-backstretch/jquery-backstretch/issues/194
             //
-            $(window).on('backstretch.after', function (e, instance, index) {
+            $(window).on('backstretch.after', (e, instance, index) => {
               var textOverlayTitle    = instance.images[index].title
               var textOverlayTagline  = instance.images[index].tagline;
               var atticOptions        = _this.atticOptions;
@@ -315,11 +315,11 @@ j1.adapter.attic = (function (j1, window) {
               // apply FRONTMATTER settings for title|tagline if
               // NOT set with the FIRST backstretch (image) instance
               //
-              if (index == 0) {
-                if (typeof instance.images[index].title == 'undefined') {
+              if (index === 0) {
+                if (typeof instance.images[index].title === 'undefined') {
                   textOverlayTitle    = frontmatterOptions.title;
                 }
-                if (typeof instance.images[index].tagline == 'undefined') {
+                if (typeof instance.images[index].tagline === 'undefined') {
                   textOverlayTagline  = frontmatterOptions.tagline;
                 }
               }
@@ -595,7 +595,7 @@ j1.adapter.attic = (function (j1, window) {
 
             // add r-text|raised_level settings
             //
-            if (atticOptions.r_text == 'enabled') { $('#{{attic_id}}').addClass('r-text'); }
+            if (atticOptions.r_text === 'enabled') { $('#{{attic_id}}').addClass('r-text'); }
             var raised_level = 'raised-z' +atticOptions.raised_level;
 
             $('#{{attic_id}}').addClass(raised_level);
@@ -662,7 +662,7 @@ j1.adapter.attic = (function (j1, window) {
 
             // start RUNNER on page 'ready'|module state 'initialized'
             //
-            $(function() {
+            $(() => {
               var dependencies_met_attic_ready = setInterval (() => {
                 if (_this.getState() === 'initialized') {
                   logger.info('\n' + 'initialize attic on id {{attic_id}}: started');
@@ -705,7 +705,7 @@ j1.adapter.attic = (function (j1, window) {
     // messageHandler: MessageHandler for J1 CookieConsent module
     // Manage messages send from other J1 modules
     // -------------------------------------------------------------------------
-    messageHandler: function (sender, message) {
+    messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
@@ -730,7 +730,7 @@ j1.adapter.attic = (function (j1, window) {
     // setState()
     // Sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: function (stat) {
+    setState: (stat) => {
       _this.state = stat;
     }, // END setState
 
@@ -738,7 +738,7 @@ j1.adapter.attic = (function (j1, window) {
     // getState()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: function () {
+    getState: () => {
       return _this.state;
     } // END getState
 

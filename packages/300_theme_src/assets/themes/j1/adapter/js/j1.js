@@ -61,8 +61,8 @@ regenerate:                             true
 {% assign cookie_defaults           = modules.defaults.cookies.defaults %}
 {% assign cookie_settings           = modules.cookies.settings %}
 
-{% assign themer_defaults           = modules.defaults.themer.defaults %}
-{% assign themer_settings           = modules.themer.settings %}
+{% assign themes_defaults           = modules.defaults.themes.defaults %}
+{% assign themes_settings           = modules.themes.settings %}
 
 {% assign scroller_defaults         = modules.defaults.scroller.defaults %}
 {% assign scroller_settings         = modules.scroller.settings %}
@@ -76,7 +76,7 @@ regenerate:                             true
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign toccer_options            = toccer_defaults | merge: toccer_settings %}
-{% assign themer_options            = themer_defaults| merge: themer_settings %}
+{% assign themes_options            = themes_defaults| merge: themes_settings %}
 {% assign cookie_options            = cookie_defaults | merge: cookie_settings %}
 {% assign scroller_options          = scroller_defaults | merge: scroller_settings %}
 {% assign footer_options            = footer_defaults | merge: footer_settings %}
@@ -89,9 +89,9 @@ regenerate:                             true
 {% assign banner_data_path          = banner_defaults.data_path %}
 {% assign panel_data_path           = panel_defaults.data_path %}
 
-{% assign themer_enabled            = modules.themer_options.enabled %}
-{% assign themer_reloadPageOnChange = modules.themer_options.reloadPageOnChange %}
-{% assign themer_hideOnReload       = modules.themer_options.hideOnReload %}
+{% assign themes_enabled            = modules.themes_options.enabled %}
+{% assign themes_reloadPageOnChange = modules.themes_options.reloadPageOnChange %}
+{% assign themes_hideOnReload       = modules.themes_options.hideOnReload %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -373,7 +373,7 @@ var j1 = ((options) => {
       var _this               = j1;
       var curr_state          = 'started';
       var gaCookies           = j1.findCookie('_ga');
-      var themerOptions       = $.extend({}, {{themer_options | replace: '=>', ':' | replace: 'nil', '""' }});
+      var themesOptions       = $.extend({}, {{themes_options | replace: '=>', ':' | replace: 'nil', '""' }});
 
       // current template version
       // template_version  = j1.getTemplateVersion();
@@ -558,7 +558,7 @@ var j1 = ((options) => {
             // -----------------------------------------------------------------
             // load|initialize page resources for block elements
             // NOTE: asynchronous calls should be rewitten to xhrData
-            // NOTE: Find $('#no_flicker').hide() conterpart in themer adapter
+            // NOTE: Find $('#no_flicker').hide() conterpart in themes adapter
             // -----------------------------------------------------------------
             var dependencies_met_page_ready = setInterval (() => {
               var pageState       = $('#no_flicker').css("display");
@@ -726,7 +726,7 @@ var j1 = ((options) => {
       // -----------------------------------------------------------------------
       // load|initialize page resources for block elements
       // NOTE: asynchronous calls should be rewitten to xhrData
-      // NOTE: Find $('#no_flicker').hide() conterpart in themer adapter
+      // NOTE: Find $('#no_flicker').hide() conterpart in themes adapter
       // -----------------------------------------------------------------------
       var dependencies_met_page_ready = setInterval (() => {
         var pageState       = $('#no_flicker').css("display");
@@ -1256,7 +1256,7 @@ var j1 = ((options) => {
             $('head').append(body_animation_fadein);
           }
 
-          // display the page loaded is managed by module "themer"
+          // display the page loaded is managed by module "themes"
           // $('#no_flicker').css('display', 'block');
           // $('#no_flicker').show();
 
@@ -1320,7 +1320,7 @@ var j1 = ((options) => {
             $('#quickLinksSignInOutButton').css('display', 'block');
           }
 
-          // TODO: should MOVED to Themer ???
+          // TODO: should MOVED to themes ???
           // jadams, 2021-07-25: hide|show themes menu on cookie consent
           // (analysis|personalization) settings. BootSwatch is a 3rd party
           // is using e.g GA. Because NO control is possible on 3rd parties,
@@ -1407,7 +1407,7 @@ var j1 = ((options) => {
           $('head').append(body_animation_fadein);
         }
 
-        // display the page loaded is managed by module "themer"
+        // display the page loaded is managed by module "themes"
         // $('#no_flicker').css('display', 'block');
         // $('#no_flicker').show();
 
@@ -1493,7 +1493,7 @@ var j1 = ((options) => {
           $('#quickLinksCookieButton').css('display', 'none');
         }
 
-        // TODO: should MOVED to Themer ???
+        // TODO: should MOVED to themes ???
         // jadams, 2021-07-25: hide|show themes menu on cookie consent
         // (analysis|personalization) settings. BootSwatch is a 3rd party
         // is using e.g GA. Because NO control is possible on 3rd parties,
@@ -1549,20 +1549,20 @@ var j1 = ((options) => {
 
         // initiate smooth scroller if page is ready and visible
         var dependencies_met_page_ready = setInterval (() => {
-          var pageState   = $('#no_flicker').css("display");
-          var pageVisible = (pageState == 'block') ? true: false;
-          var atticFinished   = (j1.adapter.attic.getState() == 'finished') ? true: false;
+          var pageState      = $('#no_flicker').css("display");
+          var pageVisible    = (pageState == 'block') ? true: false;
+          var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
+          var atticFinished  = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-
-          if (j1.getState() === 'finished' && pageVisible && atticFinished) {
+          if (j1CoreFinished && pageVisible && atticFinished) {
             setTimeout(() => {
               // scroll to an anchor in current page if given in URL
               j1.scrollToAnchor();
             }, {{template_config.page_on_load_timeout}});
 
             clearInterval(dependencies_met_page_ready);
-          }
-        }, 10);
+          } // END if pageVisible
+        }, 10); // END dependencies_met_page_ready
 
         // set|log status
         state = 'finished';
@@ -3202,8 +3202,8 @@ var j1 = ((options) => {
     }, // END getTimeLeft
 
     // -------------------------------------------------------------------------
-    // getMessage
-    // Get a log message from the log message catalog object
+    // getMessage()
+    // get a log message from the log message catalog object
     // -------------------------------------------------------------------------
     getMessage: (level, message, property) => {
       var message = j1.messages[level][message]['message'][property];
@@ -3212,7 +3212,7 @@ var j1 = ((options) => {
     }, // END getMessage
 
     // -------------------------------------------------------------------------
-    // Send message
+    // sendMessage()
     // -------------------------------------------------------------------------
     sendMessage: (sender, receiver, message) => {
       var logger        = log4javascript.getLogger('j1.sendMessage');
@@ -3232,8 +3232,8 @@ var j1 = ((options) => {
     }, // END sendMessage
 
     // -------------------------------------------------------------------------
-    // messageHandler: MessageHandler for J1 CookieConsent module
-    // Manage messages send from other J1 modules
+    // messageHandler()
+    // manage messages send from other J1 modules
     // -------------------------------------------------------------------------
     messageHandler: (sender, message) => {
       // var json_message  = JSON.stringify(message, undefined, 2);             // multiline
@@ -3243,7 +3243,7 @@ var j1 = ((options) => {
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
-      //  Process commands|actions
+      //  process commands|actions
       // -----------------------------------------------------------------------
       if ( message.type === 'command' && message.action === 'module_initialized' ) {
         _this.setState('finished');
@@ -3251,7 +3251,7 @@ var j1 = ((options) => {
       }
 
       //
-      // Place handling of other command|action here
+      // place handling of other command|action here
       //
 
       return true;
@@ -3259,7 +3259,7 @@ var j1 = ((options) => {
 
     // -------------------------------------------------------------------------
     // setState()
-    // Set the current (processing) state of the module
+    // det the current (processing) state of the module
     // -------------------------------------------------------------------------
     setState: (stat) => {
       state = stat;
@@ -3267,24 +3267,14 @@ var j1 = ((options) => {
 
     // -------------------------------------------------------------------------
     // getState()
-    // Returns the current (processing) state of the module
+    // returns the current (processing) state of the module
     // -------------------------------------------------------------------------
     getState: () => {
       return state;
     } // END getState
 
-  }; // END return
+  }; // END main (return)
 })(j1, window);
-
-{% comment %} NOTE: Unexpected token: punc (;) errors if compressed
---------------------------------------------------------------------------------
-{% if production %}
-  {{ cache | minifyJS }}
-{% else %}
-  {{ cache | strip_empty_lines }}
-{% endif %}
-{% assign cache = nil %}
--------------------------------------------------------------------------------- {% endcomment %}
 
 {% endcapture %}
 {% if production %}

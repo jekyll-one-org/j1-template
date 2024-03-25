@@ -84,35 +84,42 @@ TODO: Check|Fix the (Liquid) merge issue for scroller_options
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.scroller = (function (j1, window) {
+j1.adapter.scroller = ((j1, window) => {
 
-{% comment %} Set global variables
--------------------------------------------------------------------------------- {% endcomment %}
-var environment   = '{{environment}}';
-var language      = '{{site.language}}';
-var user_agent    = platform.ua;
-var state         = 'not_started';
-var scrollerDefaults;
-var scrollerSettings;
-var scrollerOptions;
-var _this;
-var logger;
-var logText;
-var lastPageInfo;
+  {% comment %} Set global variables
+  ------------------------------------------------------------------------------ {% endcomment %}
+  var environment   = '{{environment}}';
+  var language      = '{{site.language}}';
+  var user_agent    = platform.ua;
+  var state         = 'not_started';
+  var scrollerDefaults;
+  var scrollerSettings;
+  var scrollerOptions;
+  var lastPageInfo;
+
+  var _this;
+  var logger;
+  var logText;
+
+  // date|time
+  var startTime;
+  var endTime;
+  var startTimeModule;
+  var endTimeModule;
+  var timeSeconds;
 
   // ---------------------------------------------------------------------------
-  // Main object
+  // main
   // ---------------------------------------------------------------------------
   return {
 
     // -------------------------------------------------------------------------
-    // init()
     // adapter initializer
     // -------------------------------------------------------------------------
-    init: function (options) {
+    init: (options) => {
 
       // -----------------------------------------------------------------------
-      // Default module settings
+      // default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
         module_name: 'j1.adapter.scroller',
@@ -120,13 +127,12 @@ var lastPageInfo;
       }, options);
 
       // -----------------------------------------------------------------------
-      // Global variable settings
+      // global variable settings
       // -----------------------------------------------------------------------
-      _this = j1.adapter.scroller;
-      logger = log4javascript.getLogger('j1.adapter.scroller');
+      _this   = j1.adapter.scroller;
+      logger  = log4javascript.getLogger('j1.adapter.scroller');
 
-      // load  module DEFAULTS|CONFIG
-      //
+      // load module DEFAULTS|CONFIG
       scrollerDefaults = $.extend({}, {{scroller_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
       scrollerSettings = $.extend({}, {{scroller_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
       scrollerOptions  = $.extend(true, {}, scrollerDefaults, scrollerSettings);
@@ -137,34 +143,40 @@ var lastPageInfo;
       logger.info('\n' + 'module is being initialized');
 
       // -----------------------------------------------------------------------
-      // initializer
+      // module initializer
       // -----------------------------------------------------------------------
-      var dependencies_met_page_ready = setInterval (() => {
+      var dependencies_met_page_ready = setInterval(() => {
         var pageState       = $('#content').css("display");
-        var pageVisible     = (pageState == 'block') ? true: false;
-        var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
+        var pageVisible     = (pageState === 'block') ? true: false;
+        var j1CoreFinished  = (j1.getState() === 'finished') ? true : false;
 
         if (j1CoreFinished && pageVisible) {
+          startTimeModule = Date.now();
+
+          _this.setState('started');
+          logger.debug('\n' + 'set module state to: ' + _this.getState());
+          logger.info('\n' + 'initializing module: started');
+
+          logger.info('\n' + 'initialize scrollers');
           _this.generate_scrollers();
+
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module initialized successfully');
 
-          clearInterval(dependencies_met_page_ready);
-        }
-      }, 10);
+          endTimeModule = Date.now();
+          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
+          clearInterval(dependencies_met_page_ready);
+        } // END if pageVisible
+      }, 10); // END dependency_met_page_ready
     }, // END init
 
     // -------------------------------------------------------------------------
     // generate_scrollers()
     // generate scrollers configured|enabled
     // -------------------------------------------------------------------------
-    generate_scrollers: function () {
-      logger = log4javascript.getLogger('j1.adapter.scroller');
-
-      logText = '\n' + 'scrollers are being initialized';
-      logger.info(logText);
+    generate_scrollers: () => {
 
       {% comment %} generate scrollers of type 'infiniteScroll'
       -------------------------------------------------------------------------- {% endcomment %}
@@ -186,7 +198,7 @@ var lastPageInfo;
 
       // scroller_id: {{ scroller_id }}
       //
-      logText = '\n' + 'scroller of type {{item.scroller.type}} is being initialized on: ' + '{{scroller_id}}';
+      logText = '\n' + 'scroller of type {{item.scroller.type}} initialized on: ' + '{{scroller_id}}';
       logger.info(logText);
 
       var container = '#' + '{{container}}';
@@ -235,7 +247,7 @@ var lastPageInfo;
 
       // scroller_id: {{ scroller_id }}
       //
-      logText = '\n' + 'scroller of type {{item.scroller.type}} is being initialized on: ' + '{{scroller_id}}';
+      logText = '\n' + 'scroller of type {{item.scroller.type}} initialized on: ' + '{{scroller_id}}';
       logger.info(logText);
 
       // create an (scroller) instance of 'showOnScroll'
@@ -253,33 +265,32 @@ var lastPageInfo;
       {% endif %}
       // END scroller_id: {{ scroller_id }}
       {% endif %} {% endfor %}
-      // END generate scrollers
-    },
+    }, // END generate scrollers
 
     // -------------------------------------------------------------------------
     // messageHandler()
     // manage messages send from other J1 modules
     // -------------------------------------------------------------------------
-    messageHandler: function (sender, message) {
+    messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
-      //  Process commands|actions
+      //  process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
 
         //
-        // Place handling of command|action here
+        // place handling of command|action here
         //
 
         logger.info('\n' + message.text);
       }
 
       //
-      // Place handling of other command|action here
+      // place handling of other command|action here
       //
 
       return true;
@@ -287,9 +298,9 @@ var lastPageInfo;
 
     // -------------------------------------------------------------------------
     // setState()
-    // Sets the current (processing) state of the module
+    // sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: function (stat) {
+    setState: (stat) => {
       _this.state = stat;
     }, // END setState
 
@@ -297,11 +308,11 @@ var lastPageInfo;
     // getState()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: function () {
+    getState: () => {
       return _this.state;
     } // END getState
 
-  }; // END return
+  }; // END main (return)
 })(j1, window);
 
 {% endcapture %}

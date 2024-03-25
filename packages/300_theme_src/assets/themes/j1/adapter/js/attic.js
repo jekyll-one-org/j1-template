@@ -90,25 +90,34 @@ j1.adapter.attic = ((j1, window) => {
   var environment   = '{{environment}}';
   var state         = 'not_started';
   var moduleOptions = {};
-  var _this;
-  var logger;
-  var logText;
+
   var atticFilters;
   var filterArray;
   var filterStr;
 
+  var _this;
+  var logger;
+  var logText;
+
+  // date|time
+  var startTime;
+  var endTime;
+  var startTimeModule;
+  var endTimeModule;
+  var timeSeconds;
+
   // ---------------------------------------------------------------------------
-  // Main object
+  // main
   // ---------------------------------------------------------------------------
   return {
 
     // -------------------------------------------------------------------------
-    // Initializer
+    // adapter initializer
     // -------------------------------------------------------------------------
     init: (options) => {
 
       // -----------------------------------------------------------------------
-      // Default module settings
+      // default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
         module_name: 'j1.adapter.attic',
@@ -116,7 +125,7 @@ j1.adapter.attic = ((j1, window) => {
       }, options);
 
       // -----------------------------------------------------------------------
-      // Global variable settings
+      // global variable settings
       // -----------------------------------------------------------------------
       _this   = j1.adapter.attic;
       logger  = log4javascript.getLogger('j1.adapter.attic');
@@ -132,23 +141,26 @@ j1.adapter.attic = ((j1, window) => {
       var atticSettings = $.extend({}, {{attic_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
       var atticOptions  = $.extend(true, {}, atticDefaults, atticSettings, frontmatterOptions);
 
-      // Save frontmatterOptions and atticOptions in the j1 namespace
+      // save frontmatterOptions and atticOptions in the j1 namespace
       // to be used later by j1.template.init() to load the header
       //
       _this['frontmatterOptions'] = frontmatterOptions;
       _this['atticOptions']       = atticOptions;
 
-      _this.setState('started');
-      logger.debug('\n' + 'state: ' + _this.getState());
-      logger.info('\n' + 'module is being initialized');
-
+      // -----------------------------------------------------------------------
+      // adapter initializer
+      // -----------------------------------------------------------------------
       var dependencies_met_page_ready = setInterval (() => {
         var pageState   = $('#no_flicker').css("display");
         var pageVisible = (pageState === 'block') ? true: false;
 
-        // run on 'pageVisible'
-        //
         if (pageVisible) {
+          startTimeModule = Date.now();
+
+          _this.setState('started');
+          logger.debug('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'module is being initialized');
+
           {% if attic_options.enabled %}
           logger.info('\n' + 'module initializaton: started');
 
@@ -174,7 +186,8 @@ j1.adapter.attic = ((j1, window) => {
     }, // END init
 
     // -------------------------------------------------------------------------
-    // Initialize all header supported
+    // createAllAttics()
+    // initialize all header supported
     // -------------------------------------------------------------------------
     createAllAttics: () => {
       var frontmatterOptions  = _this.frontmatterOptions;
@@ -188,8 +201,7 @@ j1.adapter.attic = ((j1, window) => {
         {% if item.attic.enabled %}
           {% assign attic_id = item.attic.id %}
 
-          // Create RUNNER for id: {{attic_id}}
-          //
+          // create RUNNER for id: {{attic_id}}
           function {{attic_id}}_runner (atticOptions) {
             var atticOptionsFilters = {};
             var atticItemFilters    = {};
@@ -213,7 +225,6 @@ j1.adapter.attic = ((j1, window) => {
             filterStr = filterArray.join(' ');
 
             // fire backstretch for all slides on attic_id
-            //
             if ($('#{{attic_id}}').length) {
               $('#{{attic_id}}').backstretch(
                 atticOptions.slides, {
@@ -248,11 +259,10 @@ j1.adapter.attic = ((j1, window) => {
               $('.backstretch').addClass(atticOptions.spinner);
             }
 
-            // Collect backstretch instance data for Backstretch callbacks
+            // collect backstretch instance data for Backstretch callbacks
             var backstretch_instance_data = $('#{{attic_id}}').data('backstretch');
 
-            // Add event for pauseOnHover
-            //
+            // add event for pauseOnHover
             if (atticOptions.pauseOnHover) {
               $('#attic_id').hover (
                 () => {
@@ -262,15 +272,14 @@ j1.adapter.attic = ((j1, window) => {
               );
             }
 
-            // run callback backstretch.before
-            //
+            // run callback backstretch before
             $(window).on('backstretch.before', (e, instance, index) => {
-              var evt                 = e;
-              var inst                = instance;
-              var idx                 = index;
-              var atticOptions        = _this.atticOptions;
-              var textOverlayTitle    = instance.images[index].title
-              var textOverlayTagline  = instance.images[index].tagline;
+              var evt                = e;
+              var inst               = instance;
+              var idx                = index;
+              var atticOptions       = _this.atticOptions;
+              var textOverlayTitle   = instance.images[index].title
+              var textOverlayTagline = instance.images[index].tagline;
               var textOverlayHTML;
 
               // console.log('module attic - set state: backstretch_before');
@@ -367,7 +376,6 @@ j1.adapter.attic = ((j1, window) => {
               }
 
               // TODO: Add additional styles to head-title-text|head-tagline (e.g. text-center)
-              //
               textOverlayHTML = ''
                 + '<div id="head-title" class="head-title animate__animated ">'
                 + '  <h2 id="head-title-text" class="notoc text-' + atticOptions.title_align + ' text-emphasis-stronger">' + textOverlayTitle + '</h2>'
@@ -377,11 +385,9 @@ j1.adapter.attic = ((j1, window) => {
                 + '</div>';
 
               // hide textOverlay while animate classes are being applied
-              //
               $('.textOverlay').html(textOverlayHTML).hide();
 
               // collect individual title options
-              //
               var title_animate             = !!my_attic.title_animate ? my_attic.title_animate : atticOptions.title_animate;
               var title_animate_delay       = !!my_attic.title_animate_delay ? my_attic.title_animate_delay : atticOptions.title_animate_delay;
               var title_animate_duration    = !!my_attic.title_animate_duration ? my_attic.title_animate_duration : atticOptions.title_animate_duration;
@@ -391,7 +397,6 @@ j1.adapter.attic = ((j1, window) => {
               $('#head-title').addClass(title_animate_duration);
 
               // collect individual tagline options
-              //
               var tagline_animate           = !!my_attic.tagline_animate ? my_attic.tagline_animate : atticOptions.tagline_animate;
               var tagline_animate_delay     = !!my_attic.tagline_animate_delay ? my_attic.tagline_animate_delay : atticOptions.tagline_animate_delay;
               var tagline_animate_duration  = !!my_attic.tagline_animate_duration ? my_attic.tagline_animate_duration : atticOptions.tagline_animate_duration;
@@ -401,19 +406,16 @@ j1.adapter.attic = ((j1, window) => {
               $('#head-tagline').addClass(tagline_animate_duration);
 
               // show configured textOverlay
-              //
               $('.textOverlay').show();
               $('.textOverlay').css('opacity', '1');
 
               // jadams, 2022-08-19: show a badge only if configured
-              //
               if (typeof instance.images[index].badge != 'undefined') {
                 $('.attic-caption').show();
                 $('.attic-caption').css('opacity', '1');
               }
 
               // show page if attic finalized
-              //
               $('#no_flicker').css('display', 'block');
 
               // jadams, 2022-08-09:
@@ -426,15 +428,15 @@ j1.adapter.attic = ((j1, window) => {
 
              _this.setState('finished');
              logger.debug('\n' + 'state: ' + _this.getState());
-              logger.info('\n' + 'initialize attic on id {{attic_id}}: finished');
+             logger.info('\n' + 'initialize attic on id {{attic_id}}: finished');
              logger.info('\n' + 'module initializaton: finished');
 
+             endTimeModule = Date.now();
+             logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
             }); // END callback backstretch.after
-
           } // END if attic_id exists
 
           // run attic found in page: {{attic_id}}
-          //
           if ($('#{{attic_id}}').length) {
             // apply CSS styles
             // NOTE: unclear why title_size|tagline_size evaluated to 1 if NOT set
@@ -699,11 +701,11 @@ j1.adapter.attic = ((j1, window) => {
 
       return true;
 
-    }, // END apply CSS styles|start ATTIC RUNNER
+    }, // END createAllAttics
 
     // -------------------------------------------------------------------------
-    // messageHandler: MessageHandler for J1 CookieConsent module
-    // Manage messages send from other J1 modules
+    // messageHandler()
+    // manage messages send from other J1 modules
     // -------------------------------------------------------------------------
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
@@ -712,15 +714,19 @@ j1.adapter.attic = ((j1, window) => {
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
-      //  Process commands|actions
+      //  process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
-        status = 'completed';
+
+        //
+        // place handling of command|action here
+        //
+
         logger.info('\n' + message.text);
       }
 
       //
-      // Place handling of other command|action here
+      // place handling of other command|action here
       //
 
       return true;
@@ -728,7 +734,7 @@ j1.adapter.attic = ((j1, window) => {
 
     // -------------------------------------------------------------------------
     // setState()
-    // Sets the current (processing) state of the module
+    // sets the current (processing) state of the module
     // -------------------------------------------------------------------------
     setState: (stat) => {
       _this.state = stat;
@@ -742,7 +748,7 @@ j1.adapter.attic = ((j1, window) => {
       return _this.state;
     } // END getState
 
-  }; // END return
+  }; // END main (return)
 })(j1, window);
 
 {% endcapture %}

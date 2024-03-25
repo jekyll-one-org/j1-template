@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/themer.js
+ # ~/assets/themes/j1/adapter/js/themes.js
  # Liquid template to adapt theme functions
  #
  # Product/Info:
@@ -43,14 +43,14 @@ regenerate:                             true
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign themer_defaults   = modules.defaults.themer.defaults %}
-{% assign themer_settings   = modules.themer.settings %}
+{% assign themes_defaults   = modules.defaults.themes.defaults %}
+{% assign themes_settings   = modules.themes.settings %}
 {% assign footer_defaults   = blocks.defaults.footer.defaults %}
 {% assign footer_settings   = blocks.footer.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign themer_options    = themer_defaults| merge: themer_settings %}
+{% assign themes_options    = themes_defaults| merge: themes_settings %}
 {% assign footer_options    = footer_defaults | merge: footer_settings %}
 {% assign footer            = 'active_footer' %}
 {% assign footer_id         = footer_options.active_footer %}
@@ -74,8 +74,8 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/themer.js
- # JS Adapter for J1 themer (bootstrapThemeSwitcher)
+ # ~/assets/themes/j1/adapter/js/themes.js
+ # JS Adapter for J1 themes (bootstrapThemeSwitcher)
  #
  # Product/Info:
  # https://jekyll.one
@@ -105,7 +105,7 @@ regenerate:                             true
 // -----------------------------------------------------------------------------
 
 'use strict';
-j1.adapter.themer = ((j1, window) => {
+j1.adapter.themes = (function (j1, window) {
 
   // ---------------------------------------------------------------------------
   // globals
@@ -131,12 +131,13 @@ j1.adapter.themer = ((j1, window) => {
   var user_state_cookie;
   var theme_css_html;
   var cookie_written;
-  var themerDefaults;
-  var themerSettings;
-  var themerOptions;
+  var themesDefaults;
+  var themesSettings;
+  var themesOptions;
   var max_count;
   var j1Cookies;
   var gaCookies;
+
   var url;
   var baseUrl;
   var error_page;
@@ -144,13 +145,6 @@ j1.adapter.themer = ((j1, window) => {
   var _this;
   var logger;
   var logText;
-
-  // date|time
-  var startTime;
-  var endTime;
-  var startTimeModule;
-  var endTimeModule;
-  var timeSeconds;
 
   // ---------------------------------------------------------------------------
   // helper functions
@@ -171,7 +165,7 @@ j1.adapter.themer = ((j1, window) => {
   // see: https://stackoverflow.com/questions/4301968/checking-a-url-in-jquery-javascript
   // see: https://stackoverflow.com/questions/16481598/prevent-unhandled-jquery-ajax-error
   //
-  var urlExists = (url, callback) => {
+  var urlExists = function(url, callback) {
       if ( ! $.isFunction(callback)) {
          throw Error('Not a valid callback');
       }
@@ -185,34 +179,34 @@ j1.adapter.themer = ((j1, window) => {
   };
 
   // ---------------------------------------------------------------------------
-  // main
+  // Main object
   // ---------------------------------------------------------------------------
   return {
     // -------------------------------------------------------------------------
     // initializer
     // -------------------------------------------------------------------------
-    init: (options) => {
+    init: function (options) {
 
       // -----------------------------------------------------------------------
       // Default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
-        module_name: 'j1.adapter.themer',
+        module_name: 'j1.adapter.themes',
         generated:   '{{site.time}}'
       }, options);
 
       // -----------------------------------------------------------------------
       // Global variable settings
       // -----------------------------------------------------------------------
-      _this           = j1.adapter.themer;
-      logger          = log4javascript.getLogger('j1.adapter.themer');
+      _this           = j1.adapter.themes;
+      logger          = log4javascript.getLogger('j1.adapter.themes');
 
       // Load  module DEFAULTS|CONFIG
-      themerDefaults  = $.extend({}, {{themer_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      themerSettings  = $.extend({}, {{themer_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      themerOptions   = $.extend(true, {}, themerDefaults, themerSettings);
+      themesDefaults  = $.extend({}, {{themes_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      themesSettings  = $.extend({}, {{themes_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      themesOptions   = $.extend(true, {}, themesDefaults, themesSettings);
 
-      max_count       = themerOptions.retries;
+      max_count       = themesOptions.retries;
       url             = new liteURL(window.location.href);
       baseUrl         = url.origin;
       error_page      = url.origin + '/204.html';
@@ -232,8 +226,6 @@ j1.adapter.themer = ((j1, window) => {
       $('#content').hide();
       $('.{{footer}}').hide();
 
-      startTimeModule = Date.now();
-
       // jadams, 2021-07-25: problem seems NOT an timing issue on the iPad
       // platform. (General) Dependency should be REMOVED!!!
       // TODO: Isolate redirect for iPad ONLY!!!
@@ -241,29 +233,20 @@ j1.adapter.themer = ((j1, window) => {
       // jadams, 2021-07-11: added dependecy on the user state cookie
       // Found timing issues testing mobile devices (iPad)
       //
-      var dependency_met_page_ready = setInterval (() => {
-        var pageState      = $('#content').css("display");
-        var pageVisible    = (pageState == 'block') ? true : false;
-        var j1CoreFinished = (j1.getState() == 'finished') ? true : false;
-        var atticFinished  = (j1.adapter.attic.getState() == 'finished') ? true: false;
+      var dependencies_met_user_state_available = setInterval (() => {
+        user_state_detected = j1.existsCookie(cookie_names.user_state);
 
-        if (j1CoreFinished && pageVisible && atticFinished) {
+        // counter how often the check should be done for the existence
+        // of the user state cookie
+        interval_count += 1;
+        if (user_state_detected) {
+           user_state   = j1.readCookie(cookie_names.user_state);
+           user_consent = j1.readCookie(cookie_names.user_consent);
 
-          _this.setState('started');
-          logger.debug('\n' + 'set module state to: ' + _this.getState());
-          logger.info('\n' + 'initializing module: started');
-
-          // counter how often the check should be done for the existence
-          // of the user state cookie
-          interval_count += 1;
-
-          user_state   = j1.readCookie(cookie_names.user_state);
-          user_consent = j1.readCookie(cookie_names.user_consent);
-
-          logger.debug('\n' + 'cookie ' +  cookie_names.user_state + ' successfully loaded after: ' + interval_count * 25 + ' ms');
+           logger.debug('\n' + 'cookie ' +  cookie_names.user_state + ' successfully loaded after: ' + interval_count * 25 + ' ms');
 
            // initial theme data
-          if (user_state.theme_css === '') {
+           if (user_state.theme_css === '') {
              user_state.theme_name       = default_theme_name;
              user_state.theme_css        = default_theme_css;
              user_state.theme_author     = default_theme_author;
@@ -279,48 +262,48 @@ j1.adapter.themer = ((j1, window) => {
              if (!cookie_written) {
                logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_consent);
              }
-          }
+           }
 
            // set the theme switcher state
-          user_state.theme_switcher = themerOptions.enabled;
-          if (themerOptions.enabled) {
+           user_state.theme_switcher = themesOptions.enabled;
+           if (themesOptions.enabled) {
              // enable BS ThemeSwitcher
-             logger.debug('\n' + 'themes detected as: ' + themerOptions.enabled);
-             logger.debug('\n' + 'remote themes are being initialized');
+             logger.info('\n' + 'themes detected as: ' + themesOptions.enabled);
+             logger.info('\n' + 'remote themes are being initialized');
 
              /* eslint-disable */
              // load list of remote themes
              $('#remote_themes').bootstrapThemeSwitcher.defaults = {
-               debug:                    themerOptions.debug,
-               saveToCookie:             themerOptions.saveToCookie,
-               cssThemeLink:             themerOptions.cssThemeLink,
-               cookieThemeName:          themerOptions.cookieThemeName,
-               cookieDefaultThemeName:   themerOptions.cookieDefaultThemeName,
-               cookieThemeCss:           themerOptions.cookieThemeCss,
-               cookieThemeExtensionCss:  themerOptions.cookieThemeExtensionCss,
-               cookieExpiration:         themerOptions.cookieExpiration,
-               cookiePath:               themerOptions.cookiePath,
-               defaultCssFile:           themerOptions.defaultCssFile,
-               bootswatchApiUrl:         themerOptions.bootswatchApiUrl,
-               bootswatchApiVersion:     themerOptions.bootswatchApiVersion,
-               loadFromBootswatch:       themerOptions.loadFromBootswatch,
-               localFeed:                themerOptions.localThemes,
-               excludeBootswatch:        themerOptions.excludeBootswatch,
-               includeBootswatch:        themerOptions.includeBootswatch,
-               skipIncludeBootswatch:    themerOptions.skipIncludeBootswatch
+               debug:                    themesOptions.debug,
+               saveToCookie:             themesOptions.saveToCookie,
+               cssThemeLink:             themesOptions.cssThemeLink,
+               cookieThemeName:          themesOptions.cookieThemeName,
+               cookieDefaultThemeName:   themesOptions.cookieDefaultThemeName,
+               cookieThemeCss:           themesOptions.cookieThemeCss,
+               cookieThemeExtensionCss:  themesOptions.cookieThemeExtensionCss,
+               cookieExpiration:         themesOptions.cookieExpiration,
+               cookiePath:               themesOptions.cookiePath,
+               defaultCssFile:           themesOptions.defaultCssFile,
+               bootswatchApiUrl:         themesOptions.bootswatchApiUrl,
+               bootswatchApiVersion:     themesOptions.bootswatchApiVersion,
+               loadFromBootswatch:       themesOptions.loadFromBootswatch,
+               localFeed:                themesOptions.localThemes,
+               excludeBootswatch:        themesOptions.excludeBootswatch,
+               includeBootswatch:        themesOptions.includeBootswatch,
+               skipIncludeBootswatch:    themesOptions.skipIncludeBootswatch
              };
              /* eslint-enable */
-          } else {
+           } else {
              logger.debug('\n' + 'themes detected as: disabled');
              logger.debug('\n' + 'no remote themes are available');
           }
 
           // validate theme to be loaded
-          urlExists(user_state.theme_css, (success) => {
+          urlExists(user_state.theme_css, function(success) {
              // load  theme
              if (success) {
                // continue processing if page is ready
-               var dependencies_met_theme_loaded = setInterval(() => {
+               var dependencies_met_theme_loaded = setInterval (function () {
                  if (j1.getState() == 'finished') {
                    theme_css_html = '<link rel="stylesheet" id="' + id + '" href="' + user_state.theme_css + '" type="text/css">';
                    $('head').append(theme_css_html);
@@ -361,9 +344,9 @@ j1.adapter.themer = ((j1, window) => {
              }
            });
 
-          clearInterval(dependency_met_page_ready);
-        } // END pageVisible
-      }, 10); // END dependency_met_page_ready
+          clearInterval(dependencies_met_user_state_available);
+        }
+      }, 10); // END dependencies_met_user_state_available
 
       // set final module state if theme loaded
       var dependencies_met_theme_applied = setInterval (() => {
@@ -378,11 +361,9 @@ j1.adapter.themer = ((j1, window) => {
           logger.debug('\n' + 'theme CSS loaded: ' + user_state.theme_css);
 
           _this.setState('finished');
+
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module initialized successfully');
-
-          endTimeModule = Date.now();
-          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_theme_applied);
         }
@@ -395,7 +376,7 @@ j1.adapter.themer = ((j1, window) => {
     // messageHandler
     // Manage messages send from other J1 modules
     // -------------------------------------------------------------------------
-    messageHandler: (sender, message) => {
+    messageHandler: function (sender, message) {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
@@ -418,7 +399,7 @@ j1.adapter.themer = ((j1, window) => {
     // setState()
     // Sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: (stat) => {
+    setState: function (stat) {
       _this.state = stat;
     }, // END setState
 
@@ -426,7 +407,7 @@ j1.adapter.themer = ((j1, window) => {
     // getState()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: () => {
+    getState: function () {
       return _this.state;
     } // END getState
 

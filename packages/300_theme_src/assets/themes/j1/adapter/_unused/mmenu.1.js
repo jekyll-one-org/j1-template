@@ -141,12 +141,12 @@ j1.adapter.mmenu = ((j1, window) => {
   return {
 
     // -------------------------------------------------------------------------
-    // module initializer
+    // adapter initializer
     // -------------------------------------------------------------------------
     init: (options) => {
 
       // -----------------------------------------------------------------------
-      // Default module settings
+      // default module settings
       // -----------------------------------------------------------------------
       var settings  = $.extend({
         module_name: 'j1.adapter.mmenu',
@@ -154,7 +154,7 @@ j1.adapter.mmenu = ((j1, window) => {
       }, options);
 
       // -----------------------------------------------------------------------
-      // Global variable settings
+      // global variable settings
       // -----------------------------------------------------------------------
       _this         = j1.adapter.mmenu;
       logger        = log4javascript.getLogger('j1.adapter.mmenu');
@@ -183,12 +183,12 @@ j1.adapter.mmenu = ((j1, window) => {
       if (options != null) { var frontmatterOptions = $.extend({}, options); }
 
       // -----------------------------------------------------------------------
-      // initializer
+      // module initializer
       // -----------------------------------------------------------------------
       var dependency_met_page_ready = setInterval (() => {
         var pageState      = $('#content').css("display");
-        var pageVisible    = (pageState == 'block') ? true : false;
-        var j1CoreFinished = (j1.getState() == 'finished') ? true : false;
+        var pageVisible    = (pageState === 'block') ? true : false;
+        var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
         if (j1CoreFinished && pageVisible) {
           startTimeModule = Date.now();
@@ -296,6 +296,7 @@ j1.adapter.mmenu = ((j1, window) => {
         var dependencies_met_{{menu_id}}_loaded = setInterval (() => {
           if (j1.xhrDataState['#{{menu_id}}'] == 'success' ) {
             logger.debug('\n' + 'met dependencies for: {{menu_id}}');
+
             const menu_selector = document.querySelector('#{{menu_id}}');
             const mmenu_{{menu_id}} = new MmenuLight (
               menu_selector,
@@ -322,7 +323,11 @@ j1.adapter.mmenu = ((j1, window) => {
             // make sure the QL menu is shown, if mmenu is closed
             // by clicking the mmenu backdrop
             //
-            $('.mm-ocd__backdrop').click(() => {
+            $('.mm-ocd__backdrop').click(function (e) {
+              // suppress default actions|bubble up
+              e.preventDefault();
+              e.stopPropagation();
+
               $('#quicklinks').show();
               return false
             });
@@ -330,13 +335,16 @@ j1.adapter.mmenu = ((j1, window) => {
             // Toggle Bars (Hamburger) for the NavBar to open|close
             // the mmenu drawer
             //
-            $('{{item.menu.content.button}}').each((e) => {
+            $('{{item.menu.content.button}}').each(function (e) {
               var $this = $(this);
               var clicked;
 
-              $this.on('click', (e) => {
-                const button_{{menu_id}} = this;
+              $this.on('click', function (e) {
+                // suppress default actions|bubble up
                 e.preventDefault();
+                e.stopPropagation();
+
+                const button_{{menu_id}} = this;
                 // toggle mmenu open|clse
                 clicked = $('body.mm-ocd-opened').length ? true : false;
                 if (clicked) {
@@ -352,7 +360,6 @@ j1.adapter.mmenu = ((j1, window) => {
             });
 
             // jadams, 2020-09-30: loading the menues (themes) if enabled
-            //
             if (themerEnabled) {
               // load REMOTE themes from Bootswatch API (localFeed EMPTY!)
               $('#remote_themes_mmenu').bootstrapThemeSwitcher({
@@ -367,10 +374,8 @@ j1.adapter.mmenu = ((j1, window) => {
 
             $('#{{item.menu.content.id}}').show();
             logger.debug('\n' + 'initializing mmenu finished on id: #{{menu_id}}');
-            logger.debug('\n' + 'met dependencies for: {{menu_id}} loaded');
+
             clearInterval(dependencies_met_{{menu_id}}_loaded);
-            $('#{{item.menu.content.id}}').show();
-            logger.debug('\n' + 'initializing mmenu finished on id: #{{menu_id}}');
           }; // END mmenu_loaded
         }, 10); // END dependencies_met_mmenu_loaded
         {% endif %} // ENDIF content_type: NAVIGATION
@@ -385,9 +390,9 @@ j1.adapter.mmenu = ((j1, window) => {
           // NOTE: Run load check (j1.xhrDataState) before initialization
           //
           logger.debug('\n' + 'initialize mmenu on id: #{{menu_id}}');
+
           var dependencies_met_{{menu_id}}_loaded = setInterval (() => {
-            if (j1.xhrDataState['#{{menu_id}}'] == 'success' &&
-                $('{{item.menu.content.button}}').length) {
+            if (j1.xhrDataState['#{{menu_id}}'] == 'success' && $('{{item.menu.content.button}}').length) {
               logger.debug('\n' + 'met dependencies for: xhrData/{{menu_id}}');
 
               const menu_selector = document.querySelector('#{{menu_id}}');
@@ -422,17 +427,20 @@ j1.adapter.mmenu = ((j1, window) => {
               });
 
               // button for the MMenu tocbar to open|close the toc drawer
-              //
-              $('{{item.menu.content.button}}').each((e) => {
+              $('{{item.menu.content.button}}').each(function (e) {
                 var $this = $(this);
-                $this.on('click', (e) => {
+                $this.on('click', function (e) {
                   var button_{{menu_id}} = this;
                   var hasClass;
+
+                  // suppress default actions|bubble up
+                  e.preventDefault();
+                  e.stopPropagation();
 
                   // check if the button should be activated
                   // e.g for TOC only if class js-toc-content is found
                   //
-                  if ('{{item.menu.content.button_activated}}' != 'always') {
+                  if ('{{item.menu.content.button_activated}}' !== 'always') {
                     hasClass = $('main').hasClass('{{item.menu.content.button_activated}}');
                   } else {
                     hasClass = true;
@@ -443,9 +451,11 @@ j1.adapter.mmenu = ((j1, window) => {
                   } // END if hasclass
                 });
               });
+
               logger.debug('\n' + 'met dependencies for: {{menu_id}} loaded');
-              clearInterval(dependencies_met_{{menu_id}}_loaded);
               $('#{{item.menu.content.id}}').show();
+
+              clearInterval(dependencies_met_{{menu_id}}_loaded);
           }; // END if menu_loaded
         }, 10); // END dependencies_met_mmenu_loaded
         logger.debug('\n' + 'initializing mmenu finished on id: #{{menu_id}}');

@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
-# ~/_data/modules/defaults/themer.yml
-# Default configuration settings for J1 Themer
+# ~/_data/modules/defaults/themes.yml
+# Default configuration settings for J1 themes
 #
 # Product/Info:
 # https://jekyll.one
@@ -15,9 +15,9 @@
 # Description
 #
 description:
-  title:                                Themer
+  title:                                Themes
   scope:                                Default settings
-  location:                             _data/modules/defaults/themer.yml
+  location:                             _data/modules/defaults/themes.yml
 
 # ------------------------------------------------------------------------------
 # Default configuration settings
@@ -25,12 +25,12 @@ description:
 defaults:
 
   # ----------------------------------------------------------------------------
-  # Themer options
+  # Themes options
   # ----------------------------------------------------------------------------
   #
   #   enabled
   #   --------------------------------------------------------------------------
-  #   Enables|Disables the use of J1 Themer
+  #   Enables|Disables the use of J1 Themes
   #
   #     values:                         boolean (true|false)
   #     default:                        false
@@ -48,7 +48,7 @@ defaults:
   saveToCookie:                         true
 
   # ----------------------------------------------------------------------------
-  # Themer settings
+  # Themes settings
   # ----------------------------------------------------------------------------
   #
   #   cssThemeLink

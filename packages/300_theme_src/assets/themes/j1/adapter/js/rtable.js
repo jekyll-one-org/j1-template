@@ -40,12 +40,12 @@ regenerate:                             true
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign rtable_defaults = modules.defaults.rtable.defaults %}
-{% assign rtable_settings = modules.rtable.settings %}
+{% assign rtable_defaults   = modules.defaults.rtable.defaults %}
+{% assign rtable_settings   = modules.rtable.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign rtable_options  = rtable_defaults | merge: rtable_settings %}
+{% assign rtable_options    = rtable_defaults | merge: rtable_settings %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -77,7 +77,7 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.rtable = (function (j1, window) {
+j1.adapter.rtable = ((j1, window) => {
 
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
@@ -86,26 +86,34 @@ j1.adapter.rtable = (function (j1, window) {
   var rtableDefaults;
   var rtableSettings;
   var rtableOptions;
+
   var _this;
   var logger;
   var logText;
 
+  // date|time
+  var startTime;
+  var endTime;
+  var startTimeModule;
+  var endTimeModule;
+  var timeSeconds;
+
   // ---------------------------------------------------------------------------
-  // Helper functions
+  // helper functions
   // ---------------------------------------------------------------------------
 
   // ---------------------------------------------------------------------------
-  // Main object
+  // main
   // ---------------------------------------------------------------------------
   return {
 
     // -------------------------------------------------------------------------
-    // Initializer
+    // adapter initializer
     // -------------------------------------------------------------------------
-    init: function (options) {
+    init: (options) => {
 
       // -----------------------------------------------------------------------
-      // Default module settings
+      // default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
         module_name: 'j1.adapter.rtable',
@@ -123,7 +131,7 @@ j1.adapter.rtable = (function (j1, window) {
       var breakpoint;
 
       // -----------------------------------------------------------------------
-      // Global variable settings
+      // global variable settings
       // -----------------------------------------------------------------------
       _this   = j1.adapter.rtable;
       logger  = log4javascript.getLogger('j1.adapter.rtable');
@@ -138,20 +146,26 @@ j1.adapter.rtable = (function (j1, window) {
       logger.debug('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
 
-      var dependencies_met_j1_finished = setInterval(function() {
-        if (j1.getState() == 'finished') {
+      // -----------------------------------------------------------------------
+      // module initializer
+      // -----------------------------------------------------------------------
+      var dependency_met_page_ready = setInterval(() => {
+        var pageState      = $('#content').css("display");
+        var pageVisible    = (pageState === 'block') ? true : false;
+        var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
-          // -------------------------------------------------------------------
-          // rtable initializer
-          // -------------------------------------------------------------------
-          var log_text = '\n' + 'rtable is being initialized';
-          logger.info(log_text);
+        if (j1CoreFinished && pageVisible) {
+          startTimeModule = Date.now();
+
+          _this.setState('started');
+          logger.debug('\n' + 'set module state to: ' + _this.getState());
+          logger.info('\n' + 'initializing module: started');
 
           // Add data attributes for tablesaw to all tables of a page
           // as Asciidoctor has NO option to pass 'data attributes'
           // See: https://stackoverflow.com/questions/50600405/how-to-add-custom-data-attributes-with-asciidoctor
           //
-          $('table').each(function(){
+          $('table').each(function () {
             var curTable = $(this);
             var log_text;
             // jadams, 2020-09-16: class 'rtable' indicate use of 'tablesaw'
@@ -188,7 +202,7 @@ j1.adapter.rtable = (function (j1, window) {
                 curTable.find('colgroup').show();
                 logger.debug(log_text);
               }
-            } // END if hasClass 'rtable'
+            } // END if hasClass rtable
 
             // add needed div element needed for BS to move the table found
             // for BS responsiveness
@@ -197,10 +211,10 @@ j1.adapter.rtable = (function (j1, window) {
               // see: https://stackoverflow.com/questions/2596833/how-to-move-child-element-from-one-parent-to-another-using-jquery
               // see: https://github.com/NV/jquery-regexp-classes
               //
-              const re                  = /table-responsive[-]*\w*/;
-              const myID                = 'b-table-' + Math.floor(Math.random() * 10000) + 1;
-              var myClasses             = $(curTable).attr("class");
-              var responsiveClassFound  = myClasses.match(re);
+              const re                 = /table-responsive[-]*\w*/;
+              const myID               = 'b-table-' + Math.floor(Math.random() * 10000) + 1;
+              var myClasses            = $(curTable).attr("class");
+              var responsiveClassFound = myClasses.match(re);
               var responsiveClass;
 
               if (responsiveClassFound) {
@@ -212,56 +226,56 @@ j1.adapter.rtable = (function (j1, window) {
               }
 
               // remove responsive class from the table
-              //
               $(curTable).removeClass(/table-responsive[-]*\w+/);
               $(curTable).addClass('table');
 
               // add needed div element needed for BS
-              //
-              jQuery('<div>', {
+              $('<div>', {
                 id: myID,
                 class: responsiveClass
               }).insertBefore($(curTable));
 
               // move the table found for BS responsiveness
-              //
               $('#' + myID ).append($(curTable));
             } // END if hasClass 'table-responsive'
           });
 
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'initializing module: finished');
 
-          clearInterval(dependencies_met_j1_finished);
-        } // END dependencies_met_j1_finished
-      }, 10);
+          endTimeModule = Date.now();
+          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
+          clearInterval(dependency_met_page_ready);
+        } // END if pageVisible
+      }, 10); // END dependency_met_page_ready
     }, // END init
 
     // -------------------------------------------------------------------------
-    // messageHandler:
-    // Manage messages send from other J1 modules
+    // messageHandler()
+    // manage messages send from other J1 modules
     // -------------------------------------------------------------------------
-    messageHandler: function (sender, message) {
+    messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
-      //  Process commands|actions
+      //  process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
 
         //
-        // Place handling of command|action here
+        // place handling of command|action here
         //
 
         logger.info('\n' + message.text);
       }
 
       //
-      // Place handling of other command|action here
+      // place handling of other command|action here
       //
 
       return true;
@@ -269,9 +283,9 @@ j1.adapter.rtable = (function (j1, window) {
 
     // -------------------------------------------------------------------------
     // setState()
-    // Sets the current (processing) state of the module
+    // sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: function (stat) {
+    setState: (stat) => {
       _this.state = stat;
     }, // END setState
 
@@ -279,11 +293,11 @@ j1.adapter.rtable = (function (j1, window) {
     // getState()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: function () {
+    getState: () => {
       return _this.state;
     } // END getState
 
-  }; // END return
+  }; // END main (return)
 })(j1, window);
 
 {% endcapture %}

@@ -342,7 +342,7 @@ resources:
   # ----------------------------------------------------------------------------
   # J1 Core, Main CSS styles and JS API for J1 Theme
   #
-  # NOTE Theme CSS loaded via module 'themer'
+  # NOTE Theme CSS loaded via module 'themes'
   # NOTE: load always 'unolight' as a 'bese' (e.g. for unodark, but should be removed)
   #
   - name:                               J1 Theme Core
@@ -608,17 +608,17 @@ resources:
         init_function:                  [ j1.adapter.mmenu.init ]
 
   # ----------------------------------------------------------------------------
-  # Themer, JS implementation to integrate themes from Bootswatch
+  # Themes, JS implementation to integrate themes from Bootswatch
   # based on the bootstrapThemeSwitcher API
   #
   # See: https://github.com/jguadagno/bootstrapThemeSwitcher
   #
-  - name:                               J1 Themer
+  - name:                               J1 Themes
     resource:
       enabled:                          true
 
-      id:                               themer
-      comment:                          Module Themer
+      id:                               themes
+      comment:                          Module Themes
       region:                           head
       layout:                           [ all ]
       required:                         always
@@ -629,9 +629,9 @@ resources:
 
       data:
         css:                            []
-        files:                          [ adapter/js/themer.js ]
+        files:                          [ adapter/js/themes.js ]
         js:                             []
-        init_function:                  [ j1.adapter.themer.init ]
+        init_function:                  [ j1.adapter.themes.init ]
 
   # ----------------------------------------------------------------------------
   # Toccer, JS implementation to create TOCs from HTML headline elements

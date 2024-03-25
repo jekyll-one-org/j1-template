@@ -177,9 +177,9 @@ j1.adapter.iframer = ((j1, window) => {
       }, 10); // END dependencies_met_page_ready
     }, // END init
 
-    // -----------------------------------------------------------------------
+    // -------------------------------------------------------------------------
     // Load AJAX data and initialize the jg gallery
-    // -----------------------------------------------------------------------
+    // -------------------------------------------------------------------------
     initialize: (options) => {
       var iframerOptions    = options;
       var xhrLoadState      = 'pending';                                        // (initial) load state for the HTML portion of the slider
@@ -314,8 +314,8 @@ j1.adapter.iframer = ((j1, window) => {
     }, // END getXhrState
 
     // -------------------------------------------------------------------------
-    // messageHandler: MessageHandler for J1 CookieConsent module
-    // Manage messages send from other J1 modules
+    // messageHandler()
+    // manage messages send from other J1 modules
     // -------------------------------------------------------------------------
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
@@ -324,19 +324,19 @@ j1.adapter.iframer = ((j1, window) => {
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
-      //  Process commands|actions
+      //  process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
 
         //
-        // Place handling of command|action here
+        // place handling of command|action here
         //
 
         logger.info('\n' + message.text);
       }
 
       //
-      // Place handling of other command|action here
+      // place handling of other command|action here
       //
 
       return true;
@@ -344,21 +344,21 @@ j1.adapter.iframer = ((j1, window) => {
 
     // -------------------------------------------------------------------------
     // setState()
-    // Sets the current (processing) state of the module
+    // sets the current (processing) state of the module
     // -------------------------------------------------------------------------
     setState: (stat) => {
       _this.state = stat;
     }, // END setState
 
     // -------------------------------------------------------------------------
-    // getState
+    // getState()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState:  () => {
-      return j1.adapter.navigator.state;
+    getState: () => {
+      return _this.state;
     } // END getState
 
-  }; // END return
+  }; // END main (return)
 })(j1, window);
 
 {% endcapture %}

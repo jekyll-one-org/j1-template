@@ -87,54 +87,53 @@ regenerate:                             true
 'use strict';
 j1.adapter.analytics = ((j1, window) => {
 
-{% comment %} Set global variables
--------------------------------------------------------------------------------- {% endcomment %}
-var url               = new liteURL(window.location.href);
-var hostname          = url.hostname;
-var environment       = '{{environment}}';
-var gaScript          = document.createElement('script');
-var cookie_names      = j1.getCookieNames();
-var date              = new Date();
-var timestamp_now     = date.toISOString();
-var skipHost          = false;
-var state             = 'not_started';
-var analyticsDefaults;
-var analyticsSettings;
-var analyticsOptions;
-var providerID;
-var skipAllHosts;
-var optInOut;
-var anonymizeIP;
-var validProviderID;
-var skipHosts;
-var gaCookies;
-var user_consent;
-var gaExists;
+  {% comment %} Set global variables
+  ------------------------------------------------------------------------------ {% endcomment %}
+  var url               = new liteURL(window.location.href);
+  var hostname          = url.hostname;
+  var environment       = '{{environment}}';
+  var gaScript          = document.createElement('script');
+  var cookie_names      = j1.getCookieNames();
+  var date              = new Date();
+  var timestamp_now     = date.toISOString();
+  var skipHost          = false;
+  var state             = 'not_started';
+  var analyticsDefaults;
+  var analyticsSettings;
+  var analyticsOptions;
+  var providerID;
+  var skipAllHosts;
+  var optInOut;
+  var anonymizeIP;
+  var validProviderID;
+  var skipHosts;
+  var gaCookies;
+  var user_consent;
+  var gaExists;
 
-var _this;
-var logger;
-var logText;
+  var _this;
+  var logger;
+  var logText;
 
-// date|time
-var startTime;
-var endTime;
-var startTimeModule;
-var endTimeModule;
-var timeSeconds;
+  // date|time
+  var startTime;
+  var endTime;
+  var startTimeModule;
+  var endTimeModule;
+  var timeSeconds;
 
   // ---------------------------------------------------------------------------
-  // Main object
+  // main
   // ---------------------------------------------------------------------------
   return {
 
     // -------------------------------------------------------------------------
-    // init()
     // adapter initializer
     // -------------------------------------------------------------------------
     init: (options) => {
 
       // -----------------------------------------------------------------------
-      // initializer
+      // module initializer
       // -----------------------------------------------------------------------
       var dependencies_met_page_ready = setInterval (() => {
         var pageState      = $('#content').css("display");
@@ -213,7 +212,7 @@ var timeSeconds;
               document.head.appendChild(gaScript);
             }
 
-            user_consent  = j1.readCookie(cookie_names.user_consent);
+            user_consent = j1.readCookie(cookie_names.user_consent);
             if (user_consent.analysis && !skipHost ) {
               if (validProviderID) {
                 logger.info('\n' + 'user consent on analytics: ' + user_consent.analysis);

@@ -6,8 +6,8 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/rouge.js
- # Liquid template to adapt J1 Highlighter (Rouge)
+ # ~/assets/themes/j1/adapter/js/themeToggler.js
+ # Liquid template to adapt the Theme Toggler module
  #
  # Product/Info:
  # https://jekyll.one
@@ -18,6 +18,7 @@ regenerate:                             true
  # -----------------------------------------------------------------------------
  # Test data:
  #  {{ liquid_var | debug }}
+ #  wave_options:  {{ wave_options | debug }}
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
@@ -26,16 +27,30 @@ regenerate:                             true
 
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment       = site.environment %}
-{% assign template_version  = site.version %}
-{% assign asset_path        = "/assets/themes/j1" %}
+{% assign environment        = site.environment %}
+{% assign asset_path         = "/assets/themes/j1" %}
 
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config   = site.data.j1_config %}
+{% assign template_config    = site.data.j1_config %}
+{% assign blocks             = site.data.blocks %}
+{% assign modules            = site.data.modules %}
+
+{% comment %} Set config data (settings only)
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign toggler_defaults   = modules.defaults.theme_toggler.defaults %}
+{% assign toggler_settings   = modules.theme_toggler.settings %}
+
+{% comment %} Set config options (settings only)
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign toggler_options    = toggler_defaults | merge: toggler_settings %}
+
+{% comment %} Variables
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign comments           = toggler_options.enabled %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -46,8 +61,8 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/rouge.js
- # J1 Adapter for rouge
+ # ~/assets/themes/j1/adapter/js/themeToggler.js
+ # J1 Adapter for the Theme Toggler module
  #
  # Product/Info:
  # https://jekyll.one
@@ -57,8 +72,7 @@ regenerate:                             true
  # J1 Template is licensed under the MIT License.
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
- # Note:
- #  https://github.com/jirutka/asciidoctor-rouge/issues/9
+ # NOTE: Wave styles defind in /assets/data/panel.html, key 'wave'
  # -----------------------------------------------------------------------------
  #  Adapter generated: {{site.time}}
  # -----------------------------------------------------------------------------
@@ -68,23 +82,29 @@ regenerate:                             true
 // ESLint shimming
 // -----------------------------------------------------------------------------
 /* eslint indent: "off"                                                       */
-/* eslint quotes: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.rouge = ((j1, window) => {
+j1.adapter.themeToggler = ((j1, window) => {
 
-  // ---------------------------------------------------------------------------
-  // globals
-  // ---------------------------------------------------------------------------
-  var environment             = '{{environment}}';
-  var moduleOptions           = {};
-  var user_state              = {};
-  var cookie_names            = j1.getCookieNames();
-  var cookie_user_state_name  = cookie_names.user_state;
-  var state                   = 'not_started';
-  var user_state_detected;
-  var themeCss;
-  var darkTheme;
+  {% comment %} Set global variables
+  ------------------------------------------------------------------------------ {% endcomment %}
+  var environment           = '{{environment}}';
+  var cookie_names          = j1.getCookieNames();
+  var user_state            = j1.readCookie(cookie_names.user_state);
+  var viewport_width        = $(window).width();
+  var url                   = new liteURL(window.location.href);
+  var secure                = (url.protocol.includes('https')) ? true : false;
+  var cookie_names          = j1.getCookieNames();
+  var state                 = 'not_started';
+  var user_state           = {};
+  var light_theme_css;
+  var dark_theme_css;
+  var light_theme_name;
+  var dark_theme_name;
+  var togglerDefaults;
+  var togglerSettings;
+  var togglerOptions;
+  var frontmatterOptions;
 
   var _this;
   var logger;
@@ -97,84 +117,94 @@ j1.adapter.rouge = ((j1, window) => {
   var endTimeModule;
   var timeSeconds;
 
-  var templateOptions = $.extend({}, {{template_config | replace: 'nil', 'null' | replace: '=>', ':' }});
-
   // ---------------------------------------------------------------------------
-  // Helper functions
-  // ---------------------------------------------------------------------------
-
-  // ---------------------------------------------------------------------------
-  // Main object
+  // main
   // ---------------------------------------------------------------------------
   return {
 
     // -------------------------------------------------------------------------
-    // helper functions
-    // -------------------------------------------------------------------------
-
-    // -------------------------------------------------------------------------
-    // Initializer
+    // adapter initializer
     // -------------------------------------------------------------------------
     init: (options) => {
-
       // -----------------------------------------------------------------------
-      // Default module settings
+      // default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
-        module_name: 'j1.adapter.rouge',
+        module_name: 'j1.adapter.themeToggler',
         generated:   '{{site.time}}'
       }, options);
 
       // -----------------------------------------------------------------------
-      // Global variable settings
+      // global variable settings
       // -----------------------------------------------------------------------
-      _this   = j1.adapter.rouge;
-      logger  = log4javascript.getLogger('j1.adapter.rouge');
+
+      // create settings object from frontmatter
+      frontmatterOptions  = options != null ? $.extend({}, options) : {};
+
+      logger = log4javascript.getLogger('j1.adapter.themeToggler');
+      _this  = j1.adapter.themeToggler;
+
+      // create settings object from module options
+      togglerDefaults     = $.extend({}, {{toggler_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      togglerSettings     = $.extend({}, {{toggler_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      togglerOptions      = $.extend(true, {}, togglerDefaults, togglerSettings, frontmatterOptions);
+
+      // toggle themes
+      light_theme_name    = togglerOptions.themes.light.name;
+      light_theme_css     = togglerOptions.themes.light.css_file;
+      dark_theme_name     = togglerOptions.themes.dark.name;
+      dark_theme_css      = togglerOptions.themes.dark.css_file;;
 
       // -----------------------------------------------------------------------
-      // initializer
+      // module initializer
       // -----------------------------------------------------------------------
-      var dependency_met_page_ready = setInterval(() => {
+      var dependencies_met_page_ready = setInterval (() => {
         var pageState      = $('#content').css("display");
-        var pageVisible    = (pageState == 'block') ? true : false;
-        var j1CoreFinished = (j1.getState() == 'finished') ? true : false;
+        var pageVisible    = (pageState === 'block') ? true : false;
+        var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
         if (j1CoreFinished && pageVisible) {
           startTimeModule = Date.now();
+
+          user_state = j1.readCookie(cookie_names.user_state);
 
           _this.setState('started');
           logger.debug('\n' + 'set module state to: ' + _this.getState());
           logger.info('\n' + 'initializing module: started');
 
-          // Detect|Set J1 UserState
-          user_state_detected = j1.existsCookie(cookie_user_state_name);
-          if (user_state_detected) {
-            user_state  = j1.readCookie(cookie_user_state_name);
-            themeCss    = user_state.theme_css;
-            darkTheme   = themeCss.includes('dark') ||
-                          themeCss.includes('cyborg') ||
-                          themeCss.includes('darkly') ||
-                          themeCss.includes('slate') ||
-                          themeCss.includes('superhero');
-          } else {
-            log_text = '\n' + 'user_state cookie not found';
-            logger.warn(log_text);
+          // toggle themeToggler icon to 'dark' if required
+          if ($('#quickLinksThemeTogglerButton').length) {
+            if (user_state.theme_name == dark_theme_name) {
+              $('#quickLinksThemeTogglerButton a i').toggleClass('mdib-lightbulb mdib-lightbulb-outline');
+            }
           }
 
-          $('.dropdown-menu a').click(() => {
-            $('#selected-theme').html('Current selection: <div class="md-gray-900 mt-1 p-2" style="background-color: #BDBDBD; font-weight: 700;">' +$(this).text() + '</div>');
-          });
+          $('#quickLinksThemeTogglerButton').click(function () {
+            if (user_state.theme_name == light_theme_name) {
+              user_state.theme_name = dark_theme_name;
+              user_state.theme_css  = dark_theme_css;
+              user_state.theme_icon = 'mdib-lightbulb';
+            } else {
+              user_state.theme_name = light_theme_name;
+              user_state.theme_css  = light_theme_css;
+              user_state.theme_icon = 'mdib-lightbulb-outline';
+            }
+            logger.info('\n' + 'switch theme to: ' + user_state.theme_name);
 
-          // disable (Google) translation for all highlight HTML elements
-          // used for rouge
-          // see: https://www.codingexercises.com/replace-all-instances-of-css-class-in-vanilla-js
-          //
-          var highlight = document.getElementsByClassName('highlight');
-          [...highlight].forEach((x) => {
-           if (!x.className.includes('notranslate')) {
-             x.className += " notranslate"
-           }
-          });
+            user_state.writer = 'themeToggler';
+            var cookie_written = j1.writeCookie({
+              name:     cookie_names.user_state,
+              data:     user_state,
+              secure:   secure,
+              expires:  365
+            });
+
+            if (!cookie_written) {
+              logger.error('\n' + 'failed write to cookie: ' + cookie_names.user_consent);
+            } else {
+              location.reload(true);
+            }
+          }); // END button click
 
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
@@ -183,55 +213,14 @@ j1.adapter.rouge = ((j1, window) => {
           endTimeModule = Date.now();
           logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
-          clearInterval(dependency_met_page_ready);
+          clearInterval(dependencies_met_page_ready);
         } // END pageVisible
-      }, 10); // END dependency_met_page_ready
-
-      var dependencies_met_rouge_finished = setInterval(() => {
-        var moduleFinished = (j1.adapter.rouge.getState() === 'finished') ? true : false;
-
-        if (moduleFinished) {
-          if (darkTheme) {
-            j1.adapter.rouge.reaplyStyles(templateOptions.rouge.theme_dark);
-          } else {
-            j1.adapter.rouge.reaplyStyles(templateOptions.rouge.theme_light);
-          }
-
-          clearInterval(dependencies_met_rouge_finished);
-        } //  END if darkTheme
-      }, 10); // END dependencies_met_rouge_finished
-
+      }, 10); // END dependencies_met_page_ready
     }, // END init
 
     // -------------------------------------------------------------------------
-    // load|apply new rouge theme
-    // -------------------------------------------------------------------------
-    reaplyStyles: (themename) => {
-      _this.removeAllRougeStyles();
-      _this.addStyle(themename);
-      return true;
-    },
-
-    // -------------------------------------------------------------------------
-    // remove existing rouge theme CSS (from section <head>)
-    // -------------------------------------------------------------------------
-    removeAllRougeStyles: () => {
-      $('link[rel=stylesheet][href*="/assets/themes/j1/modules/rouge"]').remove();
-    },
-
-    // -------------------------------------------------------------------------
-    // add rouge theme CSS (to section <head>)
-    // -------------------------------------------------------------------------
-    addStyle: (themename) => {
-      $('<link>').attr('rel','stylesheet')
-      .attr('type','text/css')
-      .attr('href','/assets/themes/j1/modules/rouge/css/' +themename+ '/theme.min.css')
-      .appendTo('head');
-    },
-
-    // -------------------------------------------------------------------------
-    // messageHandler: MessageHandler for J1 CookieConsent module
-    // Manage messages send from other J1 modules
+    // messageHandler()
+    // manage messages send from other J1 modules
     // -------------------------------------------------------------------------
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
@@ -240,19 +229,19 @@ j1.adapter.rouge = ((j1, window) => {
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
-      //  Process commands|actions
+      //  process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
 
         //
-        // Place handling of command|action here
+        // place handling of command|action here
         //
 
         logger.info('\n' + message.text);
       }
 
       //
-      // Place handling of other command|action here
+      // place handling of other command|action here
       //
 
       return true;
@@ -260,7 +249,7 @@ j1.adapter.rouge = ((j1, window) => {
 
     // -------------------------------------------------------------------------
     // setState()
-    // Sets the current (processing) state of the module
+    // sets the current (processing) state of the module
     // -------------------------------------------------------------------------
     setState: (stat) => {
       _this.state = stat;
@@ -268,13 +257,13 @@ j1.adapter.rouge = ((j1, window) => {
 
     // -------------------------------------------------------------------------
     // getState()
-    // Returns the current (processing) state of the module
+    // returns the current (processing) state of the module
     // -------------------------------------------------------------------------
     getState: () => {
       return _this.state;
     } // END getState
 
-  }; // END return
+  }; // END main (return)
 })(j1, window);
 
 {% endcapture %}

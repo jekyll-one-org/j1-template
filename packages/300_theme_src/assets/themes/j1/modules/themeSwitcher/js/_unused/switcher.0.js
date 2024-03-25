@@ -5,7 +5,7 @@
  #
  # Product/Info:
  # https://jekyll.one
- # https://github.com/jguadagno/ThemeSwitcher
+ # https://github.com/jguadagno/bootstrapThemeSwitcher
  #
  # Copyright (C) 2023, 2024 Juergen Adams
  # Copyright (C) 2014 Joseph Guadagno
@@ -13,7 +13,7 @@
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # Bootstrap Theme Switcher is licensed under the MIT License.
- # See: https://github.com/jguadagno/ThemeSwitcher
+ # See: https://github.com/jguadagno/bootstrapThemeSwitcher
  # -----------------------------------------------------------------------------
  # NOTE: This modules is MODIFIED to be used with MobileMenu (mmenuLight).
  #       The original version cannot be used with J1 for theme menu creation!
@@ -36,7 +36,7 @@
 
 /**
 * jQuery Twitter Bootstrap Theme Switcher v1.1.5
-* https://github.com/jguadagno/ThemeSwitcher
+* https://github.com/jguadagno/bootstrapThemeSwitcher
 *
 * Copyright 2014, Joseph Guadagno
 * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
@@ -44,6 +44,8 @@
 
 'use strict';
 ;(function ($, window, document, undefined) {
+  var old          = $.fn.bootstrapThemeSwitcher;
+
   var cookie_names = j1.getCookieNames();
   var gaCookies    = j1.findCookie('_ga');
   var j1Cookies    = j1.findCookie('j1');
@@ -60,10 +62,10 @@
 
   // Constructor
   // ---------------------------------------------------------------------------
-  var ThemeSwitcher = function (element, options) {
+  var BootstrapThemeSwitcher = function (element, options) {
 
     this.$element = $(element);
-    this.settings = $.extend({}, $.fn.ThemeSwitcher.defaults, options);
+    this.settings = $.extend({}, $.fn.bootstrapThemeSwitcher.defaults, options);
     this.themesList = [];
 
     // loading local themes
@@ -73,15 +75,15 @@
 
   // Prototype
   // ---------------------------------------------------------------------------
-  ThemeSwitcher.prototype = {
+  BootstrapThemeSwitcher.prototype = {
     clear: function () {
-      logger.debug('\n' + 'ThemeSwitcher.clear');
+      logger.debug('\n' + 'bootstrapThemeSwitcher.clear');
       return this.$element.each(function () {
         this.$element.empty();
       });
     },
     update: function () {
-      logger.debug('\n' + 'ThemeSwitcher.update');
+      logger.debug('\n' + 'bootstrapThemeSwitcher.update');
       this.getThemes();
     },
 
@@ -113,7 +115,7 @@
     switchTheme: function (name, cssFile) {
 
       var $this      = $(this);
-      var settings   = $.extend({}, $.fn.ThemeSwitcher.defaults, $this.data('ThemeSwitcher'));
+      var settings   = $.extend({}, $.fn.bootstrapThemeSwitcher.defaults, $this.data('bootstrapThemeSwitcher'));
       var id         = settings.cssThemeLink;
       var debug      = settings.debug;
       var includeCSS = this.settings.includeBootswatch;
@@ -186,7 +188,7 @@
         return false;
       }
 
-      var settings = $.extend({}, $.fn.ThemeSwitcher.defaults, options);
+      var settings = $.extend({}, $.fn.bootstrapThemeSwitcher.defaults, options);
 
       // detect|set user state cookie
       user_state_detected = j1.existsCookie (cookie_names.user_state);
@@ -257,7 +259,7 @@
 
       if (this.$element.is('ul')) {
         var $this    = $(this);
-        var settings = $.extend({}, $.fn.ThemeSwitcher.defaults, $this.data('ThemeSwitcher'));
+        var settings = $.extend({}, $.fn.bootstrapThemeSwitcher.defaults, $this.data('bootstrapThemeSwitcher'));
         var id       = settings.cssThemeLink;
         var debug    = settings.debug;
         var themeName;
@@ -404,15 +406,15 @@
 
   // Plugin definition
   // ---------------------------------------------------------------------------
-  $.fn.ThemeSwitcher = function (option) {
+  $.fn.bootstrapThemeSwitcher = function (option) {
     var args      = Array.prototype.slice.call(arguments, 1);
     var $this     = $(this);
-    var data      = $this.data('ThemeSwitcher');
+    var data      = $this.data('bootstrapThemeSwitcher');
     var options   = typeof option === 'object' && option;
     var methodReturn;
 
     if (!data) {
-      $this.data('ThemeSwitcher', (data = new ThemeSwitcher(this, options) ));
+      $this.data('bootstrapThemeSwitcher', (data = new BootstrapThemeSwitcher(this, options) ));
     }
     if (typeof option === 'string') {
       methodReturn = data[option].apply(data, args);
@@ -420,7 +422,7 @@
     return (typeof methodReturn === 'undefined') ? $this : methodReturn;
   };
 
-  $.fn.ThemeSwitcher.defaults = {
+  $.fn.bootstrapThemeSwitcher.defaults = {
     debug:                  false,
     saveToCookie:           true,
     cssThemeLink:           'bootstrapTheme',
@@ -436,5 +438,10 @@
     excludeBootswatch:      ''
   };
 
-  $.fn.ThemeSwitcher.Constructor = ThemeSwitcher;
+  $.fn.bootstrapThemeSwitcher.Constructor = BootstrapThemeSwitcher;
+  $.fn.bootstrapThemeSwitcher.noConflict  = function () {
+    $.fn.BootstrapThemeSwitcher = old;
+    return this;
+  };
+
 })(jQuery, window, document);

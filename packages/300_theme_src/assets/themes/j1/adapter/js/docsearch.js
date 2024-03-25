@@ -113,7 +113,7 @@ var timeSeconds;
   return {
 
     // -------------------------------------------------------------------------
-    // initializer
+    // adapter initializer
     // -------------------------------------------------------------------------
     init: () => {
 
@@ -139,7 +139,7 @@ var timeSeconds;
       document.body.append(modal_container);
 
       // -----------------------------------------------------------------------
-      // initializer
+      // module initializer
       // -----------------------------------------------------------------------
       var dependencies_met_page_ready = setInterval (() => {
         var pageState      = $('#content').css("display");
@@ -244,19 +244,19 @@ var timeSeconds;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
-      //  Process commands|actions
+      //  process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
 
         //
-        // Place handling of command|action here
+        // place handling of command|action here
         //
 
         logger.info('\n' + message.text);
       }
 
       //
-      // Place handling of other command|action here
+      // place handling of other command|action here
       //
 
       return true;
@@ -264,7 +264,7 @@ var timeSeconds;
 
     // -------------------------------------------------------------------------
     // setState()
-    // Sets the current (processing) state of the module
+    // sets the current (processing) state of the module
     // -------------------------------------------------------------------------
     setState: (stat) => {
       _this.state = stat;
@@ -278,7 +278,7 @@ var timeSeconds;
       return _this.state;
     } // END getState
 
-  }; // END return
+  }; // END main (return)
 })(j1, window);
 
 {% endcapture %}

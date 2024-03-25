@@ -43,8 +43,8 @@ regenerate:                             true
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign lunr_search_options    = lunr_search_defaults | merge: lunr_search_settings %}
-{% assign topsearch_options      = lunr_search_options.topsearch %}
+{% assign lunr_search_options   = lunr_search_defaults | merge: lunr_search_settings %}
+{% assign topsearch_options     = lunr_search_options.topsearch %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -76,7 +76,7 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.lunr = (function (j1, window) {
+j1.adapter.lunr = ((j1, window) => {
 
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
@@ -113,6 +113,8 @@ j1.adapter.lunr = (function (j1, window) {
   var allowSearchHistoryDuplicates;
   var allowSearchHistoryUpdatesOnMax;
 
+  var searchHstoryFromCookie;
+
   // date|time
   var startTime;
   var endTime;
@@ -121,18 +123,18 @@ j1.adapter.lunr = (function (j1, window) {
   var timeSeconds;
 
   // ---------------------------------------------------------------------------
-  // Helper functions
+  // helper functions
   // ---------------------------------------------------------------------------
 
   // ---------------------------------------------------------------------------
-  // Main object
+  // main
   // ---------------------------------------------------------------------------
   return {
 
     // -------------------------------------------------------------------------
-    // Initializer
+    // adapter initializer
     // -------------------------------------------------------------------------
-    init: function (options) {
+    init: (options) => {
 
       // -----------------------------------------------------------------------
       // default module settings
@@ -163,25 +165,24 @@ j1.adapter.lunr = (function (j1, window) {
       hostname            = url.hostname;
       auto_domain         = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
       secure              = (url.protocol.includes('https')) ? true : false;
-      searchHstoryEnabled = (topSearchOptions.search_history_enabled === true) ? true : false;      
+      searchHstoryEnabled = (topSearchOptions.search_history_enabled === true) ? true : false;
 
       // -----------------------------------------------------------------------
-      // lunr initializer
+      // module initializer
       // -----------------------------------------------------------------------
-      var dependencies_met_j1_finished = setInterval (() => {
-        var j1CoreFinished          = (j1.getState() === 'finished') ? true : false;
-        var slimSelectFinished      = (j1.adapter.slimSelect.getState() === 'finished') ? true : false;
-        var searchHstoryFromCookie  = (topSearchOptions.prompt_history_from_cookie === true) ? true : false;        
+      var dependencies_met_lunr_finished = setInterval (() => {
+        var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
-        if (j1CoreFinished && slimSelectFinished) {
-
-          startTimeModule = Date.now();
+        if (j1CoreFinished) {
+          startTimeModule        = Date.now();
+          searchHstoryFromCookie = (topSearchOptions.prompt_history_from_cookie === true) ? true : false;
 
           // initialize state flag
           _this.setState('started');
           logger.debug('\n' + 'set module state to: ' + _this.getState());
           logger.info('\n' + 'initializing module: started');
 
+          logger.info('\n' + 'initializing search engine');
           $(searchOptions.search_input).lunrSearch({
             index_file: searchOptions.index_file,
             results:    searchOptions.results,
@@ -190,10 +191,13 @@ j1.adapter.lunr = (function (j1, window) {
             emptyMsg:   searchOptions.emptyMsg
           });
 
+          logger.info('\n' + 'initializing event handlers (search history)');
           _this.eventHandler();
 
           // initialize history array from cookie
           if (searchHstoryEnabled && searchHstoryFromCookie) {
+
+            logger.info('\n' + 'initializing search history from cookie');
 
             // limit the history
             searchHistoryMax                = topSearchOptions.search_history_max;
@@ -232,18 +236,17 @@ j1.adapter.lunr = (function (j1, window) {
           logger.info('\n' + 'initializing module: finished');
 
           endTimeModule = Date.now();
-          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');  
+          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
-          clearInterval(dependencies_met_j1_finished);
-        } // END dependencies_met_j1_finished
-      }, 10);
-
+          clearInterval(dependencies_met_lunr_finished);
+        } // END j1CoreFinished
+      }, 10); // END dependencies_met_lunr_finished
     }, // END init
 
     // -------------------------------------------------------------------------
     // eventHandler
     // -------------------------------------------------------------------------
-    eventHandler: function () {
+    eventHandler: () => {
       const topSearchModalID      = '#' + 'searchModal';
       var data                    = [];
       var option                  = {};
@@ -259,7 +262,7 @@ j1.adapter.lunr = (function (j1, window) {
           $slimSelect             = selectList.slim;
 
           // update|set slimSelect data elements
-          textHistory.forEach(function(historyText) {
+          textHistory.forEach((historyText) => {
             option = {
               text: historyText,
               display: true,
@@ -280,7 +283,7 @@ j1.adapter.lunr = (function (j1, window) {
       });
 
       // hide|clear results from top search
-      $('#clear-topsearch').on('click', function() {
+      $('#clear-topsearch').on('click', () => {
         $(this).addClass('d-none').prevAll(':input').val('');
         $('#search-results').hide();
         $('#search-results').html('');
@@ -289,37 +292,29 @@ j1.adapter.lunr = (function (j1, window) {
     }, // END eventHandler
 
     // -------------------------------------------------------------------------
-    // int2float()
-    // convert an integer to float using given precision (default: 2 decimals)
+    // messageHandler()
+    // manage messages send from other J1 modules
     // -------------------------------------------------------------------------
-    int2float: function (number, precision=2) {
-      return number.toFixed(precision);
-    },
-
-    // -------------------------------------------------------------------------
-    // messageHandler: MessageHandler for J1 CookieConsent module
-    // Manage messages send from other J1 modules
-    // -------------------------------------------------------------------------
-    messageHandler: function (sender, message) {
+    messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
-      //  Process commands|actions
+      //  process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
 
         //
-        // Place handling of command|action here
+        // place handling of command|action here
         //
 
         logger.info('\n' + message.text);
       }
 
       //
-      // Place handling of other command|action here
+      // place handling of other command|action here
       //
 
       return true;
@@ -327,9 +322,9 @@ j1.adapter.lunr = (function (j1, window) {
 
     // -------------------------------------------------------------------------
     // setState()
-    // Sets the current (processing) state of the module
+    // sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: function (stat) {
+    setState: (stat) => {
       _this.state = stat;
     }, // END setState
 
@@ -337,11 +332,11 @@ j1.adapter.lunr = (function (j1, window) {
     // getState()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: function () {
+    getState: () => {
       return _this.state;
     } // END getState
 
-  }; // END return
+  }; // END main (return)
 })(j1, window);
 
 {% endcapture %}

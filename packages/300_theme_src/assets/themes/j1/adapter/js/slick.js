@@ -82,14 +82,13 @@ regenerate:                             true
 /* eslint quotes: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.slick = (function (j1, window) {
-//  var environment                 = '{{environment}}';
+j1.adapter.slick = ((j1, window) => {
+
+  {% comment %} Set global variables
+  ------------------------------------------------------------------------------ {% endcomment %}
   var responsiveSettings          = [];
   var carouselResponsiveSettings  = [];
-//  var state                       = 'not_started';
-  var _this;
-  var logger;
-  var logText;
+
   var atticDefaults;
   var atticSettings;
   var atticOptions;
@@ -102,19 +101,32 @@ j1.adapter.slick = (function (j1, window) {
   var carouselOptions;
   var carouselSettings;
 
+  var slideImageHeight;
+
+  var _this;
+  var logger;
+  var logText;
+
+  // date|time
+  var startTime;
+  var endTime;
+  var startTimeModule;
+  var endTimeModule;
+  var timeSeconds;
+
   // ---------------------------------------------------------------------------
-  // Helper functions
+  // helper functions
   // ---------------------------------------------------------------------------
 
   // ---------------------------------------------------------------------------
-  // Main object
+  // main
   // ---------------------------------------------------------------------------
   return {
 
     // -------------------------------------------------------------------------
-    // Initializer
+    // adapter initializer
     // -------------------------------------------------------------------------
-    init: function (options) {
+    init: (options) => {
       var xhrLoadState                  = 'pending';                            // (initial) load state for the HTML portion of the carousel
       var load_dependencies             = {};                                   // dynamic variable
       var carouselResponsiveSettingsOBJ = {};                                   // initial object for responsive settings
@@ -125,14 +137,14 @@ j1.adapter.slick = (function (j1, window) {
       var slick_lightbox_enabled;
 
       // -----------------------------------------------------------------------
-      // Default module settings
+      // default module settings
       // -----------------------------------------------------------------------
       var settings  = $.extend({
         module_name: 'j1.adapter.cookieConsent',
         generated:   '{{site.time}}'
       }, options);
 
-      // Load  module DEFAULTS|CONFIG
+      // Load module DEFAULTS|CONFIG
       atticDefaults         = $.extend({}, {{attic_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
       atticSettings         = $.extend({}, {{attic_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
       atticOptions          = $.extend(true, {}, atticDefaults, atticSettings);
@@ -145,41 +157,41 @@ j1.adapter.slick = (function (j1, window) {
       slickOptions          = $.extend(true, {}, slickDefaults, slickSettings);
 
       // -----------------------------------------------------------------------
-      // Global variable settings
+      // global variable settings
       // -----------------------------------------------------------------------
       _this                 = j1.adapter.slick;
       logger                = log4javascript.getLogger('j1.adapter.slick');
 
-      _this.setState('started');
-      logger.debug('\n' + 'state: ' + _this.getState());
-      logger.info('\n' + 'module is being initialized');
-
       // load HTML portion for all carousels
-      // console.debug('loading HTML portion for all carousels configured');
       _this.loadCarouselHTML(slickOptions, slickOptions.carousels);
 
-      // Re-Init all carousels in a page if window is resized (if enabled)
+      // re-Init all carousels in a page if window is resized (if enabled)
       if (reload_on_resize) {
-        window.onresize = function() {
+        window.onresize = () => {
           location.reload();
         }
       }
 
       // -----------------------------------------------------------------------
-      // initializer
+      // module initializer
       // -----------------------------------------------------------------------
-      // make sure the 'content' section is visible BEFORE setting-up sliders
-      //
       var dependencies_met_page_ready = setInterval (() => {
-        var contentState    = $('#content').css("display");
-        var contentVisible  = (contentState == 'block') ? true: false;
+        var pageState      = $('#content').css("display");
+        var pageVisible    = (pageState == 'block') ? true : false;
+        var j1CoreFinished = (j1.getState() == 'finished') ? true : false;
 
-        if (j1.getState () === 'finished' && contentVisible) {
+        if (j1CoreFinished && pageVisible) {
+          startTimeModule = Date.now();
+
+          _this.setState('started');
+          logger.debug('\n' + 'set module state to: ' + _this.getState());
+          logger.info('\n' + 'initializing module: started');
+
           {% for carousel in slick_settings.carousels %} {% if carousel.enabled %}
-          logger.info ('\n' + 'carousel is being initialized on id: ' + '{{carousel.id}}');
+          logger.info ('\n' + 'initialize carousel on id: ' + '{{carousel.id}}');
 
           {% if carousel.options.responsive %}
-          logger.info ('\n' + 'collect responsive settings for carousel on id: ' + '{{carousel.id}}');
+          logger.debug ('\n' + 'collect responsive settings for carousel on id: ' + '{{carousel.id}}');
           // collect breakpoint settings from carousel config
           responsiveSettings = $.extend({}, {{carousel.responsive | replace: 'nil', 'null' | replace: '=>', ':' }});
           // generate carousel breakpoint settings as YAML data structure
@@ -216,7 +228,7 @@ j1.adapter.slick = (function (j1, window) {
           load_dependencies['dependencies_met_html_loaded_{{carousel.id}}'] = setInterval (() => {
             // check if HTML portion of the carousel is loaded successfully (loadcarouselHTML)
             xhrLoadState = j1.xhrDOMState['#{{carousel.id}}_parent'];
-            if ( xhrLoadState === 'success' ) {
+            if (xhrLoadState === 'success') {
 
               // collect general carousel settings
               carouselOptions  = $.extend({}, {{carousel.options | replace: 'nil', 'null' | replace: '=>', ':' }});
@@ -229,7 +241,7 @@ j1.adapter.slick = (function (j1, window) {
               logger.debug('\n' + 'responsive settings on carousel id #{{carousel.id}}: ' + '\n' + carouselResponsiveSettingsSTRING);
 
               $('.{{carousel.id | replace: '_','-' }}').on ('init', (event, slick) => {
-                logger.info('\n' + 'carousel initialized on id: {{carousel.id}}');
+                logger.debug('\n' + 'carousel initialized on id: {{carousel.id}}');
 
                 slick_lightbox_enabled = '{{carousel.lightbox.enabled}}';
 
@@ -241,7 +253,7 @@ j1.adapter.slick = (function (j1, window) {
                 }
 
                 if (slick_lightbox_enabled) {
-                  logger.info('\n' + 'initialize lightbox on id: {{carousel.id}}');
+                  logger.debug('\n' + 'initialize lightbox on id: {{carousel.id}}');
 
                   // See: http://mreq.github.io/slick-lightbox/demo/
                   $('#{{carousel.id}}').slickLightbox ({
@@ -257,31 +269,18 @@ j1.adapter.slick = (function (j1, window) {
                   });
                 } // END carousel lightbox enabled
 
-                logger.info ('\n' + 'adjust positions of slick lightbox arrows on id: {{carousel.id}}');
+                logger.debug ('\n' + 'adjust positions of slick lightbox arrows on id: {{carousel.id}}');
                 var buttons = $("#{{carousel.id}} > button");
                 var arrowTopPos = Math.round (document.documentElement.clientHeight/2)
 
-                // jadams, 2023-09-01: not used anymore
-                //
-                // re-calculate right arrow position based on gutter settings
-                // var percentage_right = 3 + carouselSettings.gutters;
-                // $.each($(buttons), function(index, button) {
-                //
-                //   if (button.textContent.includes("Next")) {
-                //     $(button).attr('style', 'right: ' + percentage_right + '%');
-                //   }
-                // });
-
                 // add CSS style for individual top position for all carousels
-                //
                 if ($('#{{carousel.id}}_caption')) {
-                  logger.info ('\n' + 'adjust top position of arrows on id: {{carousel.id}}');
+                  logger.debug ('\n' + 'adjust top position of arrows on id: {{carousel.id}}');
                   var buttons = $("#{{carousel.id}} > button");
                   $.each ($(buttons), (index, button) => {
                     $(button).addClass ('slick-arrow-{{carousel.id}}');
                   });
                 }
-
               }); // END on carousel init
 
               function debounce(callback, timeout = 300) {
@@ -299,26 +298,25 @@ j1.adapter.slick = (function (j1, window) {
               }
 
               // calculate individual arrow positions for all carousels
-              //
               function positionSlickArrows (e) {
                 var dependencies_met_page_ready = setInterval (() => {
-                  var contentState    = $('#content').css("display");
-                  var ContentVisible  = (contentState == 'block') ? true: false;
-                  var slideImageHeight;
+                  var pageState      = $('#content').css("display");
+                  var pageVisible    = (pageState === 'block') ? true : false;
+                  var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
-                  if (j1.getState() === 'finished' && ContentVisible) {
+                  if (j1CoreFinished && pageVisible) {
                     const carousel_type = '{{carousel.type}}';
                     const $slick        = $('.{{carousel.id | replace: '_','-' }}');
                     const $slides       = $slick.find('.slick-slide');
                     const $currentSlide = $slides.filter ((index, slide) => $(slide).hasClass ('slick-current'));
 
-                    if (carousel_type == 'example') {
+                    if (carousel_type === 'example') {
                       slideImageHeight = ($currentSlide.find ('{{carousel.style}}').height()/2) - 25;
                     } else {
                       slideImageHeight = ($currentSlide.find ('img').height()/2) - 25;
                     }
 
-                    logger.info ('\n' + 'adjust top arrow position (centered) by ' + slideImageHeight + ' on id: {{carousel.id}}');
+                    logger.debug ('\n' + 'adjust top arrow position (centered) by ' + slideImageHeight + ' on id: {{carousel.id}}');
                     $('.slick-arrow-{{carousel.id}}').css ('top', slideImageHeight + 'px');
                     clearInterval (dependencies_met_page_ready);
                   }
@@ -326,11 +324,10 @@ j1.adapter.slick = (function (j1, window) {
               }
 
               // set individual arrow positions for a carousel
-              //
               $('.{{carousel.id | replace: '_','-' }}').on ('init afterChange', positionSlickArrows);
 
               // setup the carousel
-              logger.info ('\n' + 'carousel is being setup on id: ' + '{{carousel.id}}');
+              logger.debug ('\n' + 'carousel is being setup on id: ' + '{{carousel.id}}');
               $('.{{carousel.id | replace: '_','-' }}').slick ({
                 accessibility:              carouselSettings.accessibility,
                 adaptiveHeight:             carouselSettings.adaptiveHeight,
@@ -381,18 +378,20 @@ j1.adapter.slick = (function (j1, window) {
               // $(window).resize(debounce(positionSlickArrows, 100));
 
               clearInterval (load_dependencies['dependencies_met_html_loaded_{{carousel.id}}']);
-            }
-          }, 10); // END
+            } // END if xhrLoadState success
+          }, 10); // END dependencies_met_html_loaded carousel.id
           {% endif %} {% endfor %} // ENDFOR (all) carousels
 
           _this.setState ('finished');
           logger.debug ('\n' + 'state: ' + _this.getState());
           logger.info ('\n' + 'module initialization finished');
 
-          clearInterval (dependencies_met_page_ready);
-        }
-      }, 10);
+          endTimeModule = Date.now();
+          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
+          clearInterval (dependencies_met_page_ready);
+        } // END if pageVisible
+      }, 10); // END dependency_met_page_ready
     }, // END init
 
     // -------------------------------------------------------------------------
@@ -402,7 +401,7 @@ j1.adapter.slick = (function (j1, window) {
     // NOTE: Make sure the placeholder is available in the content page
     // eg. using the asciidoc extension mastercarousel::
     // -------------------------------------------------------------------------
-    loadCarouselHTML: function (options, carousel) {
+    loadCarouselHTML: (options, carousel) => {
       var numcarousels      = Object.keys(carousel).length;
       var active_carousels  = numcarousels;
       var xhr_data_path   = options.xhr_data_path + '/index.html';
@@ -431,29 +430,29 @@ j1.adapter.slick = (function (j1, window) {
     }, // END loadcarouselHTML
 
     // -------------------------------------------------------------------------
-    // messageHandler: MessageHandler for J1 CookieConsent module
-    // Manage messages send from other J1 modules
+    // messageHandler()
+    // manage messages send from other J1 modules
     // -------------------------------------------------------------------------
-    messageHandler: function (sender, message) {
+    messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
-      //  Process commands|actions
+      //  process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
 
         //
-        // Place handling of command|action here
+        // place handling of command|action here
         //
 
         logger.info('\n' + message.text);
       }
 
       //
-      // Place handling of other command|action here
+      // place handling of other command|action here
       //
 
       return true;
@@ -461,9 +460,9 @@ j1.adapter.slick = (function (j1, window) {
 
     // -------------------------------------------------------------------------
     // setState()
-    // Sets the current (processing) state of the module
+    // sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: function (stat) {
+    setState: (stat) => {
       _this.state = stat;
     }, // END setState
 
@@ -471,11 +470,11 @@ j1.adapter.slick = (function (j1, window) {
     // getState()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: function () {
+    getState: () => {
       return _this.state;
     } // END getState
 
-  }; // END return
+  }; // END main (return)
 })(j1, window);
 
 {% endcapture %}

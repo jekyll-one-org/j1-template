@@ -78,7 +78,7 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.rangeSlider = ((j1, window) => {
+j1.adapter.rangeSlider = (function (j1, window) {
 
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
@@ -117,7 +117,7 @@ j1.adapter.rangeSlider = ((j1, window) => {
     // -------------------------------------------------------------------------
     // Initializer
     // -------------------------------------------------------------------------
-    init: (options) => {
+    init: function (options) {
 
       // -----------------------------------------------------------------------
       // Default module settings
@@ -138,7 +138,7 @@ j1.adapter.rangeSlider = ((j1, window) => {
       rangeSliderSettings = $.extend({}, {{range_slider_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
       rangeSliderOptions  = $.extend(true, {}, rangeSliderDefaults, rangeSliderSettings);
 
-      var dependencies_met_j1_finished = setInterval(() => {
+      var dependencies_met_j1_finished = setInterval(function() {
         if (j1.getState() == 'finished') {
 
           logger.info('\n' + 'module is being initialized');
@@ -147,7 +147,7 @@ j1.adapter.rangeSlider = ((j1, window) => {
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());
 
-          var dependencies_met_elms_loaded = setInterval(() => {
+          var dependencies_met_elms_loaded = setInterval(function() {
             elms = document.querySelectorAll('.range-slider');
             if (elms.length) {
               logger.info('\n' + 'number of rangeSlider elements found: ' + elms.length);
@@ -186,7 +186,7 @@ j1.adapter.rangeSlider = ((j1, window) => {
                 {% if item.slider.options.cbOnUpdate %}       {% assign cbOnUpdate      = item.slider.options.cbOnUpdate %}       {% endif %}
 
 
-                elms.forEach((elm) => {
+                elms.forEach(function (elm) {
                   var id      = elm.id;
                   var parent  = document.getElementById(id);
 
@@ -222,7 +222,7 @@ j1.adapter.rangeSlider = ((j1, window) => {
                     label.innerHTML = '{{label}}';
                     insert(label, parent);
 
-                    slider_{{slider_id}}.noUiSlider.on('update', (values, handle) => {
+                    slider_{{slider_id}}.noUiSlider.on('update', function (values, handle) {
                       var logger = log4javascript.getLogger('j1.adapter.rangeSlider.cbOnUpdate');
                       logger.debug('\n' + 'current value: ' + values[handle]);
                     });
@@ -256,7 +256,7 @@ j1.adapter.rangeSlider = ((j1, window) => {
     // Called by the rangeSlider CORE module when and dropdown element
     // is clicked
     // -------------------------------------------------------------------------
-    cbOnclick: (event) => {
+    cbOnclick: function (event) {
       var logger  = log4javascript.getLogger('j1.adapter.rangeSlider.cbOnClick');
       var itemEl = $(event.target).closest('li')[0];
 
@@ -270,7 +270,7 @@ j1.adapter.rangeSlider = ((j1, window) => {
     // cbOnOpen()
     // Called by the rangeSlider CORE module when dropdown get opened
     // -------------------------------------------------------------------------
-    cbOnOpen: (elm) => {
+    cbOnOpen: function (elm) {
       var logger  = log4javascript.getLogger('j1.adapter.rangeSlider.cbOnOpen');
       var id      = elm.id;
 
@@ -283,7 +283,7 @@ j1.adapter.rangeSlider = ((j1, window) => {
     // cbOnClose()
     // Called by the rangeSlider CORE module when dropdown get closed
     // -------------------------------------------------------------------------
-    cbOnClose: (elm) => {
+    cbOnClose: function (elm) {
       var logger    = log4javascript.getLogger('j1.adapter.rangeSlider.cbOnClose');
       var id        = elm.id;
       var listItems = '#' + elm.id + " li";
@@ -312,7 +312,7 @@ j1.adapter.rangeSlider = ((j1, window) => {
     // messageHandler
     // Manage messages send from other J1 modules
     // -------------------------------------------------------------------------
-    messageHandler: (sender, message) => {
+    messageHandler: function (sender, message) {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
@@ -341,7 +341,7 @@ j1.adapter.rangeSlider = ((j1, window) => {
     // setState()
     // Sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: (stat) => {
+    setState: function (stat) {
       _this.state = stat;
     }, // END setState
 
@@ -349,7 +349,7 @@ j1.adapter.rangeSlider = ((j1, window) => {
     // getState()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: () => {
+    getState: function () {
       return _this.state;
     } // END getState
 

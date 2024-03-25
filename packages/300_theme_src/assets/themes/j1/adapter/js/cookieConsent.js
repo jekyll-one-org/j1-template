@@ -129,23 +129,23 @@ j1.adapter.cookieConsent = ((j1, window) => {
   var timeSeconds;
 
   // ---------------------------------------------------------------------------
-  // Helper functions
+  // helper functions
   // ---------------------------------------------------------------------------
   // NOTE: RegEx for tracking_id: ^(G|UA|YT|MO)-[a-zA-Z0-9-]+$
   // See: https://stackoverflow.com/questions/20411767/how-to-validate-google-analytics-tracking-id-using-a-javascript-function/20412153
 
   // ---------------------------------------------------------------------------
-  // Main object
+  // main
   // ---------------------------------------------------------------------------
   return {
 
     // -------------------------------------------------------------------------
-    // Initializer
+    // adapter initializer
     // -------------------------------------------------------------------------
     init: (options) => {
 
       // -----------------------------------------------------------------------
-      // Default module settings
+      // default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
         module_name: 'j1.adapter.cookieConsent',
@@ -153,7 +153,7 @@ j1.adapter.cookieConsent = ((j1, window) => {
       }, options);
 
       // -----------------------------------------------------------------------
-      // Global variable settings
+      // global variable settings
       // -----------------------------------------------------------------------
       _this             = j1.adapter.cookieConsent;
       logger            = log4javascript.getLogger('j1.adapter.cookieConsent');
@@ -176,17 +176,6 @@ j1.adapter.cookieConsent = ((j1, window) => {
       cookieConsentSettings = $.extend({}, {{consent_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
       cookieConsentOptions  = $.extend(true, {}, cookieConsentDefaults, cookieConsentSettings);
 
-      {% comment %} Load module config from yml data
-      -------------------------------------------------------------------------- {% endcomment %}
-      // Load  module DEFAULTS|CONFIG
-      /* eslint-disable */
-      // moduleOptions = $.extend({}, {{consent_options | replace: '=>', ':' | replace: 'nil', '""'}});
-      /* eslint-enable */
-
-      // if (typeof settings !== 'undefined') {
-      //   moduleOptions = $.extend({}, moduleOptions, settings);
-      //
-
       if (navigatorLanguage.indexOf("-") !== -1) {
         navigatorLanguage = navigatorLanguage.split("-")[0];
       }
@@ -203,7 +192,7 @@ j1.adapter.cookieConsent = ((j1, window) => {
       expireCookiesOnRequiredOnly = (cookieOptions.expireCookiesOnRequiredOnly === 'true') ? true: false;
 
       // -----------------------------------------------------------------------
-      // initializer
+      // module initializer
       // -----------------------------------------------------------------------
       var dependencies_met_page_ready = setInterval((options) => {
         var pageState      = $('#content').css("display");
@@ -231,7 +220,7 @@ j1.adapter.cookieConsent = ((j1, window) => {
             // disable the themes menus
             $('#themes_menu').css('display', 'none');
             $('#themes_mmenu').css('display', 'none');
-            logger.warn('\n' + 'disable module: Themer');
+            logger.warn('\n' + 'disable module: Themes');
 
             // disable the quick link for (Google) Translation
             $('#quickLinksTranslateButton').css('display', 'none');
@@ -251,7 +240,7 @@ j1.adapter.cookieConsent = ((j1, window) => {
             domainAttribute = cookieOptions.domain;
           }
 
-          // Failsafe: if 'None' is given for samesite in non-secure
+          // failsafe: if 'None' is given for samesite in non-secure
           // environments open access to cookies to subdomains
           // ---------------------------------------------------------------------
           if (same_site === 'None' && !secure) {
@@ -263,7 +252,6 @@ j1.adapter.cookieConsent = ((j1, window) => {
           // -------------------------------------------------------------------
 
           if (cookieConsentOptions.enabled) {
-            logger.debug('\n' + 'state: ' + _this.getState());
             logger.info('\n' + 'initialize core module');
 
             j1.cookieConsent = new CookieConsent ({
@@ -282,7 +270,7 @@ j1.adapter.cookieConsent = ((j1, window) => {
             });
           } else {
             logger.warn('\n' + 'module is disabled');
-          }
+          } // END if cookieConsentOptions enabled
 
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
@@ -298,7 +286,7 @@ j1.adapter.cookieConsent = ((j1, window) => {
 
     // -------------------------------------------------------------------------
     // cbCookie()
-    // Called (callback) by CookieConsent module after the user has
+    // callback for CookieConsent module after the user has
     // made his selection
     // -------------------------------------------------------------------------
     cbCookie: () => {
@@ -323,7 +311,7 @@ j1.adapter.cookieConsent = ((j1, window) => {
         $('#quickLinksCookieButton').css('display', 'block');
       }
 
-      // Manage Google Analytics OptIn/Out
+      // manage Google Analytics OptIn/Out
       // See: https://github.com/luciomartinez/gtag-opt-in/wiki
       if (tracking_enabled && tracking_id_valid) {
         // Managing cookie life-time
@@ -336,8 +324,8 @@ j1.adapter.cookieConsent = ((j1, window) => {
         if (!user_consent.analysis || !user_consent.personalization) {
 
           // overload cookie consent settings
-          user_translate.analysis        = user_consent.analysis;
-          user_translate.personalization = user_consent.personalization;
+          user_translate.analysis           = user_consent.analysis;
+          user_translate.personalization    = user_consent.personalization;
           // disable translation service
           user_translate.translationEnabled = false;
 
@@ -358,7 +346,7 @@ j1.adapter.cookieConsent = ((j1, window) => {
           location.reload(true);
         }
       } else {
-        // Failsafe: Make (really) sure the all GA|GAS cookies removed
+        // failsafe: Make (really) sure the all GA|GAS cookies removed
         // left from a previous session/page view for better privacy compliance
         // ---------------------------------------------------------------------
 
@@ -387,7 +375,7 @@ j1.adapter.cookieConsent = ((j1, window) => {
           }
         });
 
-        // Managing cookie life-time. If cookie settings allows only
+        // managing cookie life-time. If cookie settings allows only
         // "required" cookies, all "persistent" cookies (Comments|Ads|Translation)
         // get expired to "session" for better GDPR compliance. The GDPR
         // regulations|privacy does NOT require any consent on using cookies
@@ -395,8 +383,8 @@ j1.adapter.cookieConsent = ((j1, window) => {
         // ---------------------------------------------------------------------
         if (!user_consent.analysis || !user_consent.personalization) {
           // overload cookie consent settings
-          user_translate.analysis        = user_consent.analysis;
-          user_translate.personalization = user_consent.personalization;
+          user_translate.analysis           = user_consent.analysis;
+          user_translate.personalization    = user_consent.personalization;
           // disable translation service
           user_translate.translationEnabled = false;
 
@@ -422,8 +410,8 @@ j1.adapter.cookieConsent = ((j1, window) => {
     }, // END cbCookie
 
     // -------------------------------------------------------------------------
-    // messageHandler: MessageHandler for J1 CookieConsent module
-    // Manage messages send from other J1 modules
+    // messageHandler()
+    // manage messages send from other J1 modules
     // -------------------------------------------------------------------------
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
@@ -432,19 +420,19 @@ j1.adapter.cookieConsent = ((j1, window) => {
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
-      //  Process commands|actions
+      //  process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
 
         //
-        // Place handling of command|action here
+        // place handling of command|action here
         //
 
         logger.info('\n' + message.text);
       }
 
       //
-      // Place handling of other command|action here
+      // place handling of other command|action here
       //
 
       return true;
@@ -452,7 +440,7 @@ j1.adapter.cookieConsent = ((j1, window) => {
 
     // -------------------------------------------------------------------------
     // setState()
-    // Sets the current (processing) state of the module
+    // sets the current (processing) state of the module
     // -------------------------------------------------------------------------
     setState: (stat) => {
       _this.state = stat;
@@ -466,9 +454,13 @@ j1.adapter.cookieConsent = ((j1, window) => {
       return _this.state;
     } // END getState
 
-  }; // END return
+  }; // END main (return)
 })(j1, window);
 
 {% endcapture %}
-{{ cache | strip_empty_lines }}
+{% if production %}
+  {{ cache | minifyJS }}
+{% else %}
+  {{ cache | strip_empty_lines }}
+{% endif %}
 {% assign cache = nil %}

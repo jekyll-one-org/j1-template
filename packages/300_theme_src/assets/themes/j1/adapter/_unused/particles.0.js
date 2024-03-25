@@ -2,16 +2,15 @@
 regenerate:                             true
 ---
 
-{% capture cache %}
+{%- capture cache %}
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/lightbox.js
- # Liquid template to adapt Lightbox Core functions
+ # ~/assets/themes/j1/adapter/js/particles.js
+ # Liquid template to adapt the particles module
  #
  # Product/Info:
  # https://jekyll.one
- #
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
@@ -19,6 +18,7 @@ regenerate:                             true
  # -----------------------------------------------------------------------------
  # Test data:
  #  {{ liquid_var | debug }}
+ #  particles_options:  {{ particles_options | debug }}
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
@@ -28,24 +28,29 @@ regenerate:                             true
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign environment       = site.environment %}
-{% assign template_version  = site.version %}
+{% assign asset_path        = '/assets/themes/j1' %}
 
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config   = site.data.j1_config %}
-{% assign modules           = site.data.modules %}
+{% assign template_config    = site.data.j1_config %}
+{% assign blocks             = site.data.blocks %}
+{% assign modules            = site.data.modules %}
 
-{% comment %} Set config data
+{% comment %} Set config data (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign lightbox_defaults  = modules.defaults.lightbox.defaults %}
-{% assign lightbox_settings  = modules.lightbox.settings %}
+{% assign particles_defaults = modules.defaults.particles.defaults %}
+{% assign particles_settings = modules.particles.settings %}
 
-{% comment %} Set config options
+{% comment %} Set config options (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign lightbox_options   = lightbox_defaults | merge: lightbox_settings %}
+{% assign particles_options  = particles_defaults | merge: particles_settings %}
+
+{% comment %} Variables
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign comments          = particles_options.enabled %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -56,23 +61,18 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/lightbox.js
- # JS Adapter for J1 Lightbox
+ # ~/assets/themes/j1/adapter/js/particles.js
+ # J1 Adapter for the particles module
  #
  # Product/Info:
  # https://jekyll.one
- # https://github.com/lokesh/lightbox2/
  #
  # Copyright (C) 2023, 2024 Juergen Adams
- # Copyright (C) 2007, 2018 Lokesh Dhakar
  #
  # J1 Template is licensed under the MIT License.
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
- # Lightbox V2 is licensed under the MIT License.
- # For details, see https://github.com/lokesh/lightbox2/
- #
  # -----------------------------------------------------------------------------
- # Adapter generated: {{site.time}}
+ #  Adapter generated: {{site.time}}
  # -----------------------------------------------------------------------------
 */
 
@@ -82,31 +82,20 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.lightbox = ((j1, window) => {
+j1.adapter.particles = (function (j1, window) {
 
-  {% comment %} Global variables
-  ------------------------------------------------------------------------------ {% endcomment %}
-  var environment  = '{{environment}}';
-  var state        = 'not_started';
-  var lightboxDefaults;
-  var lightboxSettings;
-  var lightboxOptions;
-  var frontmatterOptions;
-
-  var _this;
-  var logger;
-  var logText;
-
-  // date|time
-  var startTime;
-  var endTime;
-  var startTimeModule;
-  var endTimeModule;
-  var timeSeconds;
-
-  // ---------------------------------------------------------------------------
-  // Helper functions
-  // ---------------------------------------------------------------------------
+{% comment %} Set global variables
+-------------------------------------------------------------------------------- {% endcomment %}
+var environment     = '{{environment}}';
+var cookie_names    = j1.getCookieNames();
+var state           = 'not_started';
+var particleDefaults;
+var particleSettings;
+var particleOptions;
+var frontmatterOptions;
+var _this;
+var logger;
+var logText;
 
   // ---------------------------------------------------------------------------
   // Main object
@@ -114,78 +103,110 @@ j1.adapter.lightbox = ((j1, window) => {
   return {
 
     // -------------------------------------------------------------------------
-    // Initializer
+    // init()
+    // adapter initializer
     // -------------------------------------------------------------------------
-    init: (options) => {
+    init: function (options) {
 
       // -----------------------------------------------------------------------
       // Default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
-        module_name: 'j1.adapter.lightbox',
+        module_name: 'j1.adapter.particles',
         generated:   '{{site.time}}'
       }, options);
 
       // -----------------------------------------------------------------------
       // Global variable settings
       // -----------------------------------------------------------------------
-      _this   = j1.adapter.lightbox;
-      logger  = log4javascript.getLogger('j1.adapter.lightbox');
 
-      // create settings object from frontmatter (page settings)
-      frontmatterOptions    = options != null ? $.extend({}, options) : {};
+      // create settings object from frontmatter
+      frontmatterOptions  = options != null ? $.extend({}, options) : {};
 
       // Load  module DEFAULTS|CONFIG
-      lightboxDefaults      = $.extend({}, {{lightbox_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      lightboxSettings      = $.extend({}, {{lightbox_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      lightboxOptions       = $.extend(true, {}, lightboxDefaults, lightboxSettings, frontmatterOptions);
+      particleDefaults = $.extend({}, {{particles_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      particleSettings = $.extend({}, {{particles_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      particleOptions  = $.extend(true, {}, particleDefaults, particleSettings, frontmatterOptions);
 
-      var dependencies_met_page_ready = setInterval (() => {
-        var pageState       = $('#content').css("display");
-        var pageVisible     = (pageState == 'block') ? true: false;
-        var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
-        var lbV2Finished    = ($('#lightbox').length) ? true : false;
+      _this  = j1.adapter.particles;
+      logger = log4javascript.getLogger('j1.adapter.particles');
 
-         if (j1CoreFinished && pageVisible && lbV2Finished) {
-           startTimeModule = Date.now();
+      // -----------------------------------------------------------------------
+      // initializer
+      // -----------------------------------------------------------------------
+      var dependencies_met_page_ready = setInterval (function (options) {
+
+        if ( j1.getState() === 'finished' ) {
+          var obj;
+          var data;
+          var allConfigs;
+          var particlesJSON;
+          var objParticles;
+          var particleID;
+          var particleContainer;
+          var dataUrl = particleDefaults['xhr_data_path'];
 
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized');
+          logger.info('\n' + 'module is being initialized')
 
-          lightbox.option({
-            alwaysShowNavOnTouchDevices:  lightboxOptions.alwaysShowNavOnTouchDevices,
-            albumLabel:                   lightboxOptions.albumLabel,
-            disableScrolling:             lightboxOptions.disableScrolling,
-            fadeDuration:                 lightboxOptions.fadeDuration,
-            fitImagesInViewport:          lightboxOptions.fitImagesInViewport,
-            imageFadeDuration:            lightboxOptions.imageFadeDuration,
-            maxWidth:                     lightboxOptions.maxWidth,
-            maxHeight:                    lightboxOptions.maxHeight,
-            positionFromTop:              lightboxOptions.positionFromTop,
-            resizeDuration:               lightboxOptions.resizeDuration,
-            showImageNumberLabel:         lightboxOptions.showImageNumberLabel,
-            wrapAround:                   lightboxOptions.wrapAround
-          });
+          {% for item in particles_settings.particles %}
+            {% if item.particle.enabled %}
 
-          _this.setState('finished');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'initializing module finished');
+              {% assign particle_id     = item.particle.id %}
+              {% assign canvas_selector = item.particle.canvas_selector %}
 
-          endTimeModule = Date.now();
-          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+              particleID          = '{{ item.particle.id }}';
+              particleContainer   = '{{ item.particle.canvas_selector }}';
+              $(particleContainer).attr('id', particleID);
+
+              var dependencies_met_attic_ready = setInterval (function (options) {
+                if ($('#' + particleID).length != 0) {
+                  logger.info('\n' + 'container found: ' + '#' + particleID);
+
+                  // load particles config from yaml data file (dataUrl)
+                  $.get(dataUrl)
+                  .done(function (data) {
+                    allConfigs = yaml.loadAll(data, 'utf8');
+
+                    {% for item in particles_settings.particles %}
+                      {% if item.particle.enabled %}
+
+                      {% assign particle_id = item.particle.id %}
+                      particleID = '{{ particle_id }}';
+
+                      if (particleID == 'snowflake') {
+                        // pass the data >>object<<
+                        objParticles = allConfigs[0][particleID][0];
+                        particlesJS(particleID, objParticles);
+                      }
+
+                    {% endif %}
+                  {% endfor %}
+                  })
+                  .fail(function () {
+                    logger.error('\n' + 'loading data: failed');
+                  });
+
+                } else {
+                  logger.warn('\n' + 'container id not found: ' + '#' + particleID);
+                }
+                clearInterval(dependencies_met_attic_ready);
+              }, 10);
+            {% endif %}
+          {% endfor %}
 
           clearInterval(dependencies_met_page_ready);
-        } // END if pageVisible
-      }, 10); // END dependencies_met_page_ready
+        }
+      }, 10);
 
-    }, // END init lightbox
+    }, // END init
 
     // -------------------------------------------------------------------------
-    // messageHandler: MessageHandler for J1 CookieConsent module
-    // Manage messages send from other J1 modules
+    // messageHandler()
+    // manage messages send from other J1 modules
     // -------------------------------------------------------------------------
-    messageHandler: (sender, message) => {
+    messageHandler: function (sender, message) {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
@@ -214,7 +235,7 @@ j1.adapter.lightbox = ((j1, window) => {
     // setState()
     // Sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: (stat) => {
+    setState: function (stat) {
       _this.state = stat;
     }, // END setState
 
@@ -222,17 +243,17 @@ j1.adapter.lightbox = ((j1, window) => {
     // getState()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: () => {
+    getState: function () {
       return _this.state;
     } // END getState
 
   }; // END return
 })(j1, window);
 
-{% endcapture %}
-{% if production %}
+{% endcapture -%}
+{%- if production -%}
   {{ cache | minifyJS }}
-{% else %}
+{%- else -%}
   {{ cache | strip_empty_lines }}
-{% endif %}
+{%- endif- %}
 {% assign cache = nil %}

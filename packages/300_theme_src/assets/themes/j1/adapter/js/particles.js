@@ -27,8 +27,8 @@ regenerate:                             true
 
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment       = site.environment %}
-{% assign asset_path        = '/assets/themes/j1' %}
+{% assign environment        = site.environment %}
+{% assign asset_path         = '/assets/themes/j1' %}
 
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
@@ -50,7 +50,7 @@ regenerate:                             true
 
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign comments          = particles_options.enabled %}
+{% assign comments           = particles_options.enabled %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -82,34 +82,41 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.particles = (function (j1, window) {
+j1.adapter.particles = ((j1, window) => {
 
-{% comment %} Set global variables
--------------------------------------------------------------------------------- {% endcomment %}
-var environment     = '{{environment}}';
-var cookie_names    = j1.getCookieNames();
-var state           = 'not_started';
-var particleDefaults;
-var particleSettings;
-var particleOptions;
-var frontmatterOptions;
-var _this;
-var logger;
-var logText;
+  {% comment %} Set global variables
+  ------------------------------------------------------------------------------ {% endcomment %}
+  var environment         = '{{environment}}';
+  var cookie_names        = j1.getCookieNames();
+  var state               = 'not_started';
+  var particleDefaults;
+  var particleSettings;
+  var particleOptions;
+  var frontmatterOptions;
+
+  var _this;
+  var logger;
+  var logText;
+
+  // date|time
+  var startTime;
+  var endTime;
+  var startTimeModule;
+  var endTimeModule;
+  var timeSeconds;
 
   // ---------------------------------------------------------------------------
-  // Main object
+  // main
   // ---------------------------------------------------------------------------
   return {
 
     // -------------------------------------------------------------------------
-    // init()
     // adapter initializer
     // -------------------------------------------------------------------------
-    init: function (options) {
+    init: (options) => {
 
       // -----------------------------------------------------------------------
-      // Default module settings
+      // default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
         module_name: 'j1.adapter.particles',
@@ -117,7 +124,7 @@ var logText;
       }, options);
 
       // -----------------------------------------------------------------------
-      // Global variable settings
+      // global variable settings
       // -----------------------------------------------------------------------
 
       // create settings object from frontmatter
@@ -132,11 +139,16 @@ var logText;
       logger = log4javascript.getLogger('j1.adapter.particles');
 
       // -----------------------------------------------------------------------
-      // initializer
+      // module initializer
       // -----------------------------------------------------------------------
-      var dependencies_met_page_ready = setInterval (function (options) {
+      var dependencies_met_page_ready = setInterval ((options) => {
+        var pageState      = $('#content').css("display");
+        var pageVisible    = (pageState === 'block') ? true : false;
+        var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
-        if ( j1.getState() === 'finished' ) {
+        if (j1CoreFinished) {
+          startTimeModule = Date.now();
+
           var obj;
           var data;
           var allConfigs;
@@ -148,7 +160,7 @@ var logText;
 
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized')
+          logger.info('\n' + 'module is being initialized');
 
           {% for item in particles_settings.particles %}
             {% if item.particle.enabled %}
@@ -160,13 +172,13 @@ var logText;
               particleContainer   = '{{ item.particle.canvas_selector }}';
               $(particleContainer).attr('id', particleID);
 
-              var dependencies_met_attic_ready = setInterval (function (options) {
+              var dependencies_met_attic_ready = setInterval((options) => {
                 if ($('#' + particleID).length != 0) {
                   logger.info('\n' + 'container found: ' + '#' + particleID);
 
                   // load particles config from yaml data file (dataUrl)
                   $.get(dataUrl)
-                  .done(function (data) {
+                  .done((data) => {
                     allConfigs = yaml.loadAll(data, 'utf8');
 
                     {% for item in particles_settings.particles %}
@@ -184,48 +196,55 @@ var logText;
                     {% endif %}
                   {% endfor %}
                   })
-                  .fail(function () {
+                  .fail(() => {
                     logger.error('\n' + 'loading data: failed');
                   });
 
                 } else {
                   logger.warn('\n' + 'container id not found: ' + '#' + particleID);
                 }
+
                 clearInterval(dependencies_met_attic_ready);
               }, 10);
             {% endif %}
           {% endfor %}
 
-          clearInterval(dependencies_met_page_ready);
-        }
-      }, 10);
+          _this.setState('finished');
+          logger.debug('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'initializing module finished');
 
+          endTimeModule = Date.now();
+          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+
+          clearInterval(dependencies_met_page_ready);
+        } // END if j1CoreFinished
+      }, 10); // END dependencies_met_page_ready
     }, // END init
 
     // -------------------------------------------------------------------------
     // messageHandler()
     // manage messages send from other J1 modules
     // -------------------------------------------------------------------------
-    messageHandler: function (sender, message) {
+    messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
-      //  Process commands|actions
+      //  process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
 
         //
-        // Place handling of command|action here
+        // place handling of command|action here
         //
 
         logger.info('\n' + message.text);
       }
 
       //
-      // Place handling of other command|action here
+      // place handling of other command|action here
       //
 
       return true;
@@ -233,9 +252,9 @@ var logText;
 
     // -------------------------------------------------------------------------
     // setState()
-    // Sets the current (processing) state of the module
+    // sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: function (stat) {
+    setState: (stat) => {
       _this.state = stat;
     }, // END setState
 
@@ -243,11 +262,11 @@ var logText;
     // getState()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: function () {
+    getState: () => {
       return _this.state;
     } // END getState
 
-  }; // END return
+  }; // END main (return)
 })(j1, window);
 
 {% endcapture -%}

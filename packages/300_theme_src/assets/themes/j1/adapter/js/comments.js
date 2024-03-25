@@ -27,8 +27,8 @@ regenerate:                             true
 
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment         = site.environment %}
-{% assign asset_path          = "/assets/themes/j1" %}
+{% assign environment        = site.environment %}
+{% assign asset_path         = "/assets/themes/j1" %}
 
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
@@ -41,17 +41,17 @@ regenerate:                             true
 
 {% comment %} Set config data (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign comments_defaults   = modules.defaults.comments.defaults %}
-{% assign comments_settings   = modules.comments.settings %}
+{% assign comments_defaults  = modules.defaults.comments.defaults %}
+{% assign comments_settings  = modules.comments.settings %}
 
 {% comment %} Set config options (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign comments_options    = comments_defaults | merge: comments_settings %}
+{% assign comments_options   = comments_defaults | merge: comments_settings %}
 
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign comments            = comments_options.enabled %}
-{% assign comments_provider   = comments_options.provider %}
+{% assign comments           = comments_options.enabled %}
+{% assign comments_provider  = comments_options.provider %}
 
 {% if comments_provider == 'disqus' %}
   {% assign site_id = comments_options.disqus.site_id %}
@@ -117,28 +117,36 @@ regenerate:                             true
 'use strict';
 j1.adapter.comments = ((j1, window) => {
 
-{% comment %} Set global variables
--------------------------------------------------------------------------------- {% endcomment %}
-var environment       = '{{environment}}';
-var date              = new Date();
-var timestamp_now     = date.toISOString();
-var cookie_names      = j1.getCookieNames();
-var comments_provider = '{{comments_provider}}';
-var dqApiScript       = document.createElement('script');
-var hvApiScript       = document.createElement('script');
-var hvCallbackScript  = document.createElement('script');
-var comments_headline = '{{comments_headline}}';
-var state             = 'not_started';
-var providerID;
-var validProviderID;
-var commentsDefaults;
-var commentsSettings;
-var commentsOptions;
-var frontmatterOptions;
-var user_consent;
-var _this;
-var logger;
-var logText;
+  {% comment %} Set global variables
+  ------------------------------------------------------------------------------ {% endcomment %}
+  var environment       = '{{environment}}';
+  var date              = new Date();
+  var timestamp_now     = date.toISOString();
+  var cookie_names      = j1.getCookieNames();
+  var comments_provider = '{{comments_provider}}';
+  var dqApiScript       = document.createElement('script');
+  var hvApiScript       = document.createElement('script');
+  var hvCallbackScript  = document.createElement('script');
+  var comments_headline = '{{comments_headline}}';
+  var state             = 'not_started';
+  var providerID;
+  var validProviderID;
+  var commentsDefaults;
+  var commentsSettings;
+  var commentsOptions;
+  var frontmatterOptions;
+  var user_consent;
+
+  var _this;
+  var logger;
+  var logText;
+
+  // date|time
+  var startTime;
+  var endTime;
+  var startTimeModule;
+  var endTimeModule;
+  var timeSeconds;
 
   // ---------------------------------------------------------------------------
   // main
@@ -147,7 +155,6 @@ var logText;
 
     // -------------------------------------------------------------------------
     // adapter initializer
-    // see: https://talk.hyvor.com/docs
     // -------------------------------------------------------------------------
     init: (options) => {
       // -----------------------------------------------------------------------
@@ -213,7 +220,7 @@ var logText;
 
             // place|remove initialization code
             // -----------------------------------------------------------------
-            user_consent  = j1.readCookie(cookie_names.user_consent);
+            user_consent = j1.readCookie(cookie_names.user_consent);
             if (user_consent.personalization) {
               // enable Hyvor Talk
               // ---------------------------------------------------------------
@@ -255,17 +262,16 @@ var logText;
               }, 10);
             } else {
               // disable Hyvor Talk
-              // ---------------------------------------------------------------
               logger.info('\n' + 'user consent on comments: ' + user_consent.personalization);
               logger.debug('\n' + 'disable Hyvor Talk on site id: ' + providerID);
 
               // remove Hyvor Talk resources
-              // ---------------------------------------------------------------
               $('#leave-a-comment').remove();
               $('#hyvor-embed').remove();
               $('#hyvor-callback').remove();
               $('#hyvor-talk-view').remove();
             }
+
             clearInterval(dependencies_met_page_ready);
           } // END if getState 'finished'
         }, 10);
@@ -290,14 +296,12 @@ var logText;
             }
 
             // initialize state flag, issue init message
-            // -----------------------------------------------------------------
             _this.setState('started');
             logger.debug('\n' + 'state: ' + _this.getState());
             logger.info('\n' + 'module is being initialized for provider: ' + comments_provider);
 
             // place|remove initialization code
-            // -----------------------------------------------------------------
-            user_consent  = j1.readCookie(cookie_names.user_consent);
+            user_consent = j1.readCookie(cookie_names.user_consent);
             if (user_consent.personalization) {
               $('#main-content').append('<h2 id="leave-a-comment" class="mt-4">{{comments_headline}}</h2>');
               logger.info('\n' + 'user consent on comments: ' + user_consent.personalization);
@@ -392,19 +396,19 @@ var logText;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
-      //  Process commands|actions
+      //  process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
 
         //
-        // Place handling of command|action here
+        // place handling of command|action here
         //
 
         logger.info('\n' + message.text);
       }
 
       //
-      // Place handling of other command|action here
+      // place handling of other command|action here
       //
 
       return true;
@@ -412,7 +416,7 @@ var logText;
 
     // -------------------------------------------------------------------------
     // setState()
-    // Sets the current (processing) state of the module
+    // sets the current (processing) state of the module
     // -------------------------------------------------------------------------
     setState: (stat) => {
       _this.state = stat;
@@ -426,7 +430,7 @@ var logText;
       return _this.state;
     } // END getState
 
-  }; // END return
+  }; // END main (return)
 })(j1, window);
 
 {% endcapture %}

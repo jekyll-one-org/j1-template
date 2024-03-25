@@ -46,7 +46,7 @@ regenerate:                             true
 
 {% comment %} Set config options (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign lazy_loader_options = lazy_loader_defaults | merge: lazy_loader_settings %}
+{% assign lazy_loader_options  = lazy_loader_defaults | merge: lazy_loader_settings %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -78,7 +78,7 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.lazyLoader = (function (j1, window) {
+j1.adapter.lazyLoader = ((j1, window) => {
 
 {% comment %} Set global variables
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -86,27 +86,35 @@ var environment     = '{{environment}}';
 var cookie_names    = j1.getCookieNames();
 var user_state      = j1.readCookie(cookie_names.user_state);
 var state           = 'not_started';
+
 var lazyLoaderDefaults;
 var lazyLoaderSettings;
 var lazyLoaderOptions;
 var frontmatterOptions;
+
 var _this;
 var logger;
 var logText;
 
+// date|time
+var startTime;
+var endTime;
+var startTimeModule;
+var endTimeModule;
+var timeSeconds;
+
   // ---------------------------------------------------------------------------
-  // Main object
+  // main
   // ---------------------------------------------------------------------------
   return {
 
     // -------------------------------------------------------------------------
-    // init()
     // adapter initializer
     // -------------------------------------------------------------------------
-    init: function (options) {
+    init: (options) => {
 
       // -----------------------------------------------------------------------
-      // Default module settings
+      // default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
         module_name: 'j1.adapter.lazyLoader',
@@ -114,7 +122,7 @@ var logText;
       }, options);
 
       // -----------------------------------------------------------------------
-      // Global variable settings
+      // global variable settings
       // -----------------------------------------------------------------------
 
       // create settings object from module options
@@ -126,22 +134,31 @@ var logText;
       _this  = j1.adapter.lazyLoader;
       logger = log4javascript.getLogger('j1.adapter.lazyLoader');
 
-      var dependencies_met_lazy_loader = setInterval(function() {
-        var pageFinished = (j1.getState() == 'finished') ? true: false;
+      // -------------------------------------------------------------------------
+      // module initializer
+      // ---------------------------------------------------------------------
+      var dependency_met_j1_core_ready = setInterval(() => {
+        var j1CoreFinished = (j1.getState() === 'finished') ? true: false;
 
-        if (pageFinished) {
+        if (j1CoreFinished) {
+          startTimeModule = Date.now();
 
           _this.setState('started');
-          logger.info('\n' + 'initialize moodule lazyLoader: started');
+          logger.debug('\n' + 'set module state to: ' + _this.getState());
+          logger.info('\n' + 'initializing module: started');
 
           _this.registerLoaders(lazyLoaderOptions);
 
           _this.setState('finished');
-          logger.info('\n' + 'initialize moodule lazyLoader: finished');
-          clearInterval(dependencies_met_lazy_loader);
-        }
-      }, 10);
+          logger.debug('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'initializing module: finished');
 
+          endTimeModule = Date.now();
+          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+
+          clearInterval(dependency_met_j1_core_ready);
+        } // END if pageVisible
+      }, 10); // END dependency_met_j1_core_ready
     }, // END init
 
     // -------------------------------------------------------------------------
@@ -156,7 +173,7 @@ var logText;
     //
     // -------------------------------------------------------------------------
     //
-    registerLoaders: function () {
+    registerLoaders: () => {
       {% for loader in lazy_loader_options.loaders %} {% if loader.enabled %}
         j1.lazyCSS().observe({
           src:        '{{loader.src}}',
@@ -171,26 +188,26 @@ var logText;
     // messageHandler()
     // manage messages send from other J1 modules
     // -------------------------------------------------------------------------
-    messageHandler: function (sender, message) {
+    messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
-      //  Process commands|actions
+      //  process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
 
         //
-        // Place handling of command|action here
+        // place handling of command|action here
         //
 
         logger.info('\n' + message.text);
       }
 
       //
-      // Place handling of other command|action here
+      // place handling of other command|action here
       //
 
       return true;
@@ -198,9 +215,9 @@ var logText;
 
     // -------------------------------------------------------------------------
     // setState()
-    // Sets the current (processing) state of the module
+    // sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: function (stat) {
+    setState: (stat) => {
       _this.state = stat;
     }, // END setState
 
@@ -208,11 +225,11 @@ var logText;
     // getState()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: function () {
+    getState: () => {
       return _this.state;
     } // END getState
 
-  }; // END return
+  }; // END main (return)
 })(j1, window);
 
 {% endcapture %}

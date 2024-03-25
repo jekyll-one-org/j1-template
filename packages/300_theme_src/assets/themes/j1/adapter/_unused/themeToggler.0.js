@@ -84,7 +84,7 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.themeToggler = ((j1, window) => {
+j1.adapter.themeToggler = (function (j1, window) {
 
 {% comment %} Set global variables
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -105,17 +105,9 @@ var togglerDefaults;
 var togglerSettings;
 var togglerOptions;
 var frontmatterOptions;
-
 var _this;
 var logger;
 var logText;
-
-// date|time
-var startTime;
-var endTime;
-var startTimeModule;
-var endTimeModule;
-var timeSeconds;
 
   // ---------------------------------------------------------------------------
   // Main object
@@ -126,7 +118,9 @@ var timeSeconds;
     // init()
     // adapter initializer
     // -------------------------------------------------------------------------
-    init: (options) => {
+    init: function (options) {
+
+
       // -----------------------------------------------------------------------
       // Default module settings
       // -----------------------------------------------------------------------
@@ -166,70 +160,62 @@ var timeSeconds;
         var pageState       = $('#content').css("display");
         var pageVisible     = (pageState == 'block') ? true : false;
         var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
+        var atticFinished   = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-        if (j1CoreFinished && pageVisible) {
-          startTimeModule = Date.now();
+        if (j1CoreFinished && pageVisible && atticFinished) {
+            logger.info('\n' + 'initialize module: started');
+            user_state = j1.readCookie(cookie_names.user_state);
 
-          _this.setState('started');
-          logger.debug('\n' + 'set module state to: ' + _this.getState());
-          logger.info('\n' + 'initializing module: started');
-
-          user_state = j1.readCookie(cookie_names.user_state);
-
-          // toggle themeToggler icon to 'dark' if required
-          //
-          if ($('#quickLinksThemeTogglerButton').length) {
-            if (user_state.theme_name == dark_theme_name) {
-              $('#quickLinksThemeTogglerButton a i').toggleClass('mdib-lightbulb mdib-lightbulb-outline');
-            }
-          }
-
-          $('#quickLinksThemeTogglerButton').click(() => {
-            if (user_state.theme_name == light_theme_name) {
-              user_state.theme_name = dark_theme_name;
-              user_state.theme_css  = dark_theme_css;
-              user_state.theme_icon = 'mdib-lightbulb';
-            } else {
-              user_state.theme_name = light_theme_name;
-              user_state.theme_css  = light_theme_css;
-              user_state.theme_icon = 'mdib-lightbulb-outline';
+            // toggle themeToggler icon to 'dark' if required
+            //
+            if ($('#quickLinksThemeTogglerButton').length) {
+              if (user_state.theme_name == dark_theme_name) {
+                $('#quickLinksThemeTogglerButton a i').toggleClass('mdib-lightbulb mdib-lightbulb-outline');
+              }
             }
 
-            logger.info('\n' + 'switch theme to: ' + user_state.theme_name);
+            $('#quickLinksThemeTogglerButton').click(function() {
+              if (user_state.theme_name == light_theme_name) {
+                user_state.theme_name = dark_theme_name;
+                user_state.theme_css  = dark_theme_css;
+                user_state.theme_icon = 'mdib-lightbulb';
+              } else {
+                user_state.theme_name = light_theme_name;
+                user_state.theme_css  = light_theme_css;
+                user_state.theme_icon = 'mdib-lightbulb-outline';
+              }
 
-            user_state.writer = 'themeToggler';
-            var cookie_written = j1.writeCookie({
-              name:     cookie_names.user_state,
-              data:     user_state,
-              secure:   secure,
-              expires:  365
-            });
+              logger.info('\n' + 'switch theme to: ' + user_state.theme_name);
 
-            if (!cookie_written) {
-              logger.error('\n' + 'failed write to cookie: ' + cookie_names.user_consent);
-            } else {
-              location.reload(true);
-            }
-          }); // END button click
+              user_state.writer = 'themeToggler';
+              var cookie_written = j1.writeCookie({
+                name:     cookie_names.user_state,
+                data:     user_state,
+                secure:   secure,
+                expires:  365
+              });
 
-          _this.setState('finished');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'initializing module: finished');
+              if (!cookie_written) {
+                logger.error('\n' + 'failed write to cookie: ' + cookie_names.user_consent);
+              } else {
+                location.reload(true);
+              }
+            }); // END button click
 
-          endTimeModule = Date.now();
-          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+            _this.setState('finished');
+            logger.debug('\n' + 'state: ' + _this.getState());
+            logger.info('\n' + 'initializing module: finished');
 
-          clearInterval(dependencies_met_page_ready);
-        } // END pageVisible
-      }, 10); // END dependencies_met_page_ready
-
+            clearInterval(dependencies_met_page_ready);
+        }
+      }, 10);
     }, // END init
 
     // -------------------------------------------------------------------------
     // messageHandler()
     // manage messages send from other J1 modules
     // -------------------------------------------------------------------------
-    messageHandler: (sender, message) => {
+    messageHandler: function (sender, message) {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
@@ -258,7 +244,7 @@ var timeSeconds;
     // setState()
     // Sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: (stat) => {
+    setState: function (stat) {
       _this.state = stat;
     }, // END setState
 
@@ -266,7 +252,7 @@ var timeSeconds;
     // getState()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: () => {
+    getState: function () {
       return _this.state;
     } // END getState
 

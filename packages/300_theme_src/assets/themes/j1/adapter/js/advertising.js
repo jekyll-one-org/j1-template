@@ -89,62 +89,61 @@ regenerate:                             true
 'use strict';
 j1.adapter.advertising = ((j1, window) => {
 
-{% comment %} Set global variables
--------------------------------------------------------------------------------- {% endcomment %}
-var environment           = '{{environment}}';
-var production            = (environment.includes('prod') ? true : false);
-var development           = (environment.includes('dev') ? true : false);
-var date                  = new Date();
-var timestamp_now         = date.toISOString();
-var gasScript             = document.createElement('script');
-var gasDiv                = document.createElement('div');
-var gasIns                = document.createElement('ins');
-var adInitializerScript   = document.createElement('script');
-var advertisingProvider   = 'Google Adsense';
-var state                 = 'not_started';
-var layout;
-var advertisingDefaults;
-var advertisingSettings;
-var advertisingOptions;
-var frontmatterOptions;
-var autoHideOnUnfilled;
-var addBorderOnUnfilled;
-var checkTrackingProtection;
-var showErrorPageOnBlocked;
-var adInitializerScriptText;
-var tracking_protection;
-var url;
-var baseUrl;
-var hostname;
-var cookie_names;
-var user_consent;
-var publisherID;
-var validpublisherID;
+  {% comment %} Set global variables
+  ----------------------------------------------------------------------------- {% endcomment %}
+  var environment           = '{{environment}}';
+  var production            = (environment.includes('prod') ? true : false);
+  var development           = (environment.includes('dev') ? true : false);
+  var date                  = new Date();
+  var timestamp_now         = date.toISOString();
+  var gasScript             = document.createElement('script');
+  var gasDiv                = document.createElement('div');
+  var gasIns                = document.createElement('ins');
+  var adInitializerScript   = document.createElement('script');
+  var advertisingProvider   = 'Google Adsense';
+  var state                 = 'not_started';
+  var layout;
+  var advertisingDefaults;
+  var advertisingSettings;
+  var advertisingOptions;
+  var frontmatterOptions;
+  var autoHideOnUnfilled;
+  var addBorderOnUnfilled;
+  var checkTrackingProtection;
+  var showErrorPageOnBlocked;
+  var adInitializerScriptText;
+  var tracking_protection;
+  var url;
+  var baseUrl;
+  var hostname;
+  var cookie_names;
+  var user_consent;
+  var publisherID;
+  var validpublisherID;
 
-var _this;
-var logger;
-var logText;
+  var _this;
+  var logger;
+  var logText;
 
-// date|time
-var startTime;
-var endTime;
-var startTimeModule;
-var endTimeModule;
-var timeSeconds;
+  // date|time
+  var startTime;
+  var endTime;
+  var startTimeModule;
+  var endTimeModule;
+  var timeSeconds;
 
   // ---------------------------------------------------------------------------
-  // Main object
+  // main
   // ---------------------------------------------------------------------------
   return {
 
     // -------------------------------------------------------------------------
-    // init()
     // adapter initializer
     // -------------------------------------------------------------------------
     init: (options) => {
 
       // -----------------------------------------------------------------------
-      // Default module settings
+      // default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
         module_name: 'j1.adapter.advertising',
@@ -152,7 +151,7 @@ var timeSeconds;
       }, options);
 
       // -----------------------------------------------------------------------
-      // Global variable settings
+      // global variable settings
       // -----------------------------------------------------------------------
       logger                  = log4javascript.getLogger('j1.adapter.advertising');
       _this                   = j1.adapter.advertising;
@@ -179,12 +178,12 @@ var timeSeconds;
       showErrorPageOnBlocked  = advertisingOptions.google.showErrorPageOnBlocked;
 
       // -----------------------------------------------------------------------
-      // initializer
+      // module initializer
       // -----------------------------------------------------------------------
       var dependencies_met_page_ready = setInterval (() => {
         var pageState       = $('#content').css("display");
-        var pageVisible     = (pageState == 'block') ? true: false;
-        var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
+        var pageVisible     = (pageState === 'block') ? true: false;
+        var j1CoreFinished  = (j1.getState() === 'finished') ? true : false;
 
         if (j1CoreFinished && pageVisible) {
           startTimeModule = Date.now();
@@ -303,7 +302,6 @@ var timeSeconds;
             var gasCookies = j1.findCookie('__g');
             gasCookies.forEach((item) => {
               // remove Google Ad cookies
-              //
               if (hostname == 'localhost') {
                 j1.removeCookie({ name: item, domain: false, secure: false });
               } else {
@@ -312,7 +310,6 @@ var timeSeconds;
             });
 
             // manage tracking protection
-            //
             if (checkTrackingProtection) {
               if (!user_consent.personalization) {
                 if (development) {
@@ -379,7 +376,7 @@ var timeSeconds;
             if (user_consent.personalization) {
               var currentDiv = document.getElementById(ad.id);
 
-              if (currentDiv !== null && ad.enabled && ad.layout == layout) {
+              if (currentDiv !== null && ad.enabled && ad.layout === layout) {
                 var ins = document.createElement('ins');
 
                 currentDiv.appendChild(ins);
@@ -393,15 +390,15 @@ var timeSeconds;
                 document.getElementById(insID).setAttribute('data-ad-slot', ad.slot);
                 document.getElementById(insID).setAttribute('data-ad-format', ad.ad_format);
 
-                if (ad.ad_layout == 'display') {
+                if (ad.ad_layout === 'display') {
                   document.getElementById(insID).setAttribute('data-full-width-responsive', ad.ad_responsive);
                 }
 
-                // if (ad.ad_layout == 'in-article') {
+                // if (ad.ad_layout === 'in-article') {
                 //   document.getElementById(insID).setAttribute('data-ad-format', ad.ad_format);
                 // }
 
-                if (ad.ad_layout == 'multiplex') {
+                if (ad.ad_layout === 'multiplex') {
                   document.getElementById(insID).setAttribute('data-matched-content-ui-typ', ad.ui_type);
                   document.getElementById(insID).setAttribute('data-matched-content-columns-num', ad.ui_columns);
                   document.getElementById(insID).setAttribute('data-matched-content-rows-num', ad.ui_rows);
@@ -409,7 +406,7 @@ var timeSeconds;
 
                 ads_initialized ++;
               } else {
-                if (ad.layout == layout) {
+                if (ad.layout === layout) {
                   logger.warn('\n' + 'ad disabled on id ' + ad.id + ' for slot: ' + ad.slot);
                 }
               }
@@ -447,10 +444,8 @@ var timeSeconds;
 
           clearInterval(dependencies_met_page_visible);
         } // END contentVisible|ads_found
-
       }, 10); // END dependencies_met_page_visible
-
-    }, // END ad_initializer
+    }, // END init
 
     // -------------------------------------------------------------------------
     // ad_monitor()
@@ -571,10 +566,8 @@ var timeSeconds;
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      if (development) {
-        logText = '\n' + 'received message from ' + sender + ': ' + json_message;
-        logger.debug(logText);
-      }
+      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logger.debug(logText);
 
       // -----------------------------------------------------------------------
       //  Process commands|actions

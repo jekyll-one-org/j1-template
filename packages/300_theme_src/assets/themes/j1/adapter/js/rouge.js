@@ -44,7 +44,6 @@ regenerate:                             true
   {% assign production = true %}
 {% endif %}
 
-
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/adapter/js/rouge.js
@@ -72,11 +71,10 @@ regenerate:                             true
 /* eslint quotes: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.rouge = (function (j1, window) {
+j1.adapter.rouge = ((j1, window) => {
 
-  // ---------------------------------------------------------------------------
-  // globals
-  // ---------------------------------------------------------------------------
+  {% comment %} Set global variables
+  ------------------------------------------------------------------------------ {% endcomment %}
   var environment             = '{{environment}}';
   var moduleOptions           = {};
   var user_state              = {};
@@ -85,19 +83,27 @@ j1.adapter.rouge = (function (j1, window) {
   var state                   = 'not_started';
   var user_state_detected;
   var themeCss;
+  var darkTheme;
+
   var _this;
   var logger;
   var logText;
-  var darkTheme;
+
+  // date|time
+  var startTime;
+  var endTime;
+  var startTimeModule;
+  var endTimeModule;
+  var timeSeconds;
 
   var templateOptions = $.extend({}, {{template_config | replace: 'nil', 'null' | replace: '=>', ':' }});
 
   // ---------------------------------------------------------------------------
-  // Helper functions
+  // helper functions
   // ---------------------------------------------------------------------------
 
   // ---------------------------------------------------------------------------
-  // Main object
+  // main
   // ---------------------------------------------------------------------------
   return {
 
@@ -106,12 +112,12 @@ j1.adapter.rouge = (function (j1, window) {
     // -------------------------------------------------------------------------
 
     // -------------------------------------------------------------------------
-    // Initializer
+    // adapter initializer
     // -------------------------------------------------------------------------
-    init: function (options) {
+    init: (options) => {
 
       // -----------------------------------------------------------------------
-      // Default module settings
+      // default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
         module_name: 'j1.adapter.rouge',
@@ -119,23 +125,25 @@ j1.adapter.rouge = (function (j1, window) {
       }, options);
 
       // -----------------------------------------------------------------------
-      // Global variable settings
+      // global variable settings
       // -----------------------------------------------------------------------
       _this   = j1.adapter.rouge;
       logger  = log4javascript.getLogger('j1.adapter.rouge');
 
-
       // -----------------------------------------------------------------------
-      // rouge initializer
+      // module initializer
       // -----------------------------------------------------------------------
+      var dependency_met_page_ready = setInterval(() => {
+        var pageState      = $('#content').css("display");
+        var pageVisible    = (pageState === 'block') ? true : false;
+        var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
-      var dependencies_met_j1_finished = setInterval(function() {
-        if (j1.getState() == 'finished') {
+        if (j1CoreFinished && pageVisible) {
+          startTimeModule = Date.now();
 
-          // initialize state flag
           _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized');
+          logger.debug('\n' + 'set module state to: ' + _this.getState());
+          logger.info('\n' + 'initializing module: started');
 
           // Detect|Set J1 UserState
           user_state_detected = j1.existsCookie(cookie_user_state_name);
@@ -152,7 +160,7 @@ j1.adapter.rouge = (function (j1, window) {
             logger.warn(log_text);
           }
 
-          $('.dropdown-menu a').click(function(){
+          $('.dropdown-menu a').click(() => {
             $('#selected-theme').html('Current selection: <div class="md-gray-900 mt-1 p-2" style="background-color: #BDBDBD; font-weight: 700;">' +$(this).text() + '</div>');
           });
 
@@ -161,7 +169,7 @@ j1.adapter.rouge = (function (j1, window) {
           // see: https://www.codingexercises.com/replace-all-instances-of-css-class-in-vanilla-js
           //
           var highlight = document.getElementsByClassName('highlight');
-          [...highlight].forEach(function(x) {
+          [...highlight].forEach((x) => {
            if (!x.className.includes('notranslate')) {
              x.className += " notranslate"
            }
@@ -169,45 +177,53 @@ j1.adapter.rouge = (function (j1, window) {
 
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'initializing module finished');
+          logger.info('\n' + 'initializing module: finished');
 
-          clearInterval(dependencies_met_j1_finished);
-        } // END dependencies_met_j1_finished
-      }, 10);
+          endTimeModule = Date.now();
+          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
-      var dependencies_met_rouge_theme_loaded = setInterval (function () {
-        if (j1.adapter.rouge.getState() === 'finished') {
-          if ( darkTheme ) {
+          clearInterval(dependency_met_page_ready);
+        } // END if pageVisible
+      }, 10); // END dependency_met_page_ready
+
+      var dependencies_met_rouge_finished = setInterval(() => {
+        var moduleFinished = (j1.adapter.rouge.getState() === 'finished') ? true : false;
+
+        if (moduleFinished) {
+          if (darkTheme) {
             j1.adapter.rouge.reaplyStyles(templateOptions.rouge.theme_dark);
           } else {
             j1.adapter.rouge.reaplyStyles(templateOptions.rouge.theme_light);
           }
-          clearInterval(dependencies_met_rouge_theme_loaded);
-        }
-      }, 10); // END 'dependencies_met_rouge_theme_loaded'
 
+          clearInterval(dependencies_met_rouge_finished);
+        } //  END if darkTheme
+      }, 10); // END dependencies_met_rouge_finished
     }, // END init
 
     // -------------------------------------------------------------------------
+    // reaplyStyles()
     // load|apply new rouge theme
     // -------------------------------------------------------------------------
-    reaplyStyles: function (themename) {
+    reaplyStyles: (themename) => {
       _this.removeAllRougeStyles();
       _this.addStyle(themename);
       return true;
     },
 
     // -------------------------------------------------------------------------
+    // removeAllRougeStyles()
     // remove existing rouge theme CSS (from section <head>)
     // -------------------------------------------------------------------------
-    removeAllRougeStyles: function () {
+    removeAllRougeStyles: () => {
       $('link[rel=stylesheet][href*="/assets/themes/j1/modules/rouge"]').remove();
     },
 
     // -------------------------------------------------------------------------
+    // addStyle()
     // add rouge theme CSS (to section <head>)
     // -------------------------------------------------------------------------
-    addStyle: function (themename) {
+    addStyle: (themename) => {
       $('<link>').attr('rel','stylesheet')
       .attr('type','text/css')
       .attr('href','/assets/themes/j1/modules/rouge/css/' +themename+ '/theme.min.css')
@@ -215,29 +231,29 @@ j1.adapter.rouge = (function (j1, window) {
     },
 
     // -------------------------------------------------------------------------
-    // messageHandler: MessageHandler for J1 CookieConsent module
-    // Manage messages send from other J1 modules
+    // messageHandler()
+    // manage messages send from other J1 modules
     // -------------------------------------------------------------------------
-    messageHandler: function (sender, message) {
+    messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
-      //  Process commands|actions
+      //  process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
 
         //
-        // Place handling of command|action here
+        // place handling of command|action here
         //
 
         logger.info('\n' + message.text);
       }
 
       //
-      // Place handling of other command|action here
+      // place handling of other command|action here
       //
 
       return true;
@@ -245,9 +261,9 @@ j1.adapter.rouge = (function (j1, window) {
 
     // -------------------------------------------------------------------------
     // setState()
-    // Sets the current (processing) state of the module
+    // sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: function (stat) {
+    setState: (stat) => {
       _this.state = stat;
     }, // END setState
 
@@ -255,11 +271,11 @@ j1.adapter.rouge = (function (j1, window) {
     // getState()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: function () {
+    getState: () => {
       return _this.state;
     } // END getState
 
-  }; // END return
+  }; // END main (return)
 })(j1, window);
 
 {% endcapture %}

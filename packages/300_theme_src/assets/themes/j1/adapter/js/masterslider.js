@@ -73,7 +73,7 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.masterslider = (function (j1, window) {
+j1.adapter.masterslider = ((j1, window) => {
 
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
@@ -88,23 +88,31 @@ j1.adapter.masterslider = (function (j1, window) {
   var masterSliderDefaults;
   var masterSliderSettings;
   var masterSliderOptions;
+
   var _this;
   var logger;
   var logText;
 
+  // date|time
+  var startTime;
+  var endTime;
+  var startTimeModule;
+  var endTimeModule;
+  var timeSeconds;
+
   // ---------------------------------------------------------------------------
-  // Helper functions
+  // helper functions
   // ---------------------------------------------------------------------------
 
   // ---------------------------------------------------------------------------
-  // Main object
+  // main
   // ---------------------------------------------------------------------------
   return {
 
     // -------------------------------------------------------------------------
-    // Initializer
+    // adapter initializer
     // -------------------------------------------------------------------------
-    init: function (options) {
+    init: (options) => {
       var msSliderManager;
 
       if (sliderManager) {
@@ -118,7 +126,7 @@ j1.adapter.masterslider = (function (j1, window) {
       j1.masterslider.instances = j1.masterslider.instances || [];
 
       // -----------------------------------------------------------------------
-      // Default module settings
+      // default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
         module_name: 'j1.adapter.masterslider',
@@ -131,7 +139,7 @@ j1.adapter.masterslider = (function (j1, window) {
       masterSliderOptions = $.extend({}, masterSliderDefaults, masterSliderSettings);
 
       // -----------------------------------------------------------------------
-      // Global variable settings
+      // global variable settings
       // -----------------------------------------------------------------------
       _this   = j1.adapter.masterslider;
       logger  = log4javascript.getLogger('j1.adapter.masterslider');
@@ -149,50 +157,52 @@ j1.adapter.masterslider = (function (j1, window) {
       _this.createSliderInstances(masterSliderOptions.sliders, msSliderManager);
 
       // -----------------------------------------------------------------------
-      // initializer
+      // module initializer
       // -----------------------------------------------------------------------
+      var dependency_met_page_ready = setInterval(() => {
+        var pageState      = $('#content').css("display");
+        var pageVisible    = (pageState === 'block') ? true : false;
+        var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
+        var dataLoaded     = (_this.getState() === 'data_loaded') ? true : false;
 
-      // initialize sliders configured if HTML portion (of sliders) loaded
-      //
-      var dependencies_met_data_loaded = setInterval(function() {
-        var dataLoaded = (_this.getState() == 'data_loaded') ? true : false;
+        if (pageVisible && j1CoreFinished && dataLoaded) {
+          startTimeModule = Date.now();
 
-        if (dataLoaded) {
+          _this.setState('started');
+          logger.debug('\n' + 'set module state to: ' + _this.getState());
+          logger.info('\n' + 'initializing module: started');
 
-          logger.info('\n' + 'ms module version detected: ' + moduleVersion);
-          logger.info('\n' + 'module is being initialized');
-          // console.debug('MS slider module is being initialized');
+          logger.debug('\n' + 'ms module version detected: ' + moduleVersion);
+          logger.debug('\n' + 'module is being initialized');
+
           _this.initSliders(masterSliderOptions, masterSliderOptions.sliders, msSliderManager, saveSliderConfig);
 
-          clearInterval(dependencies_met_data_loaded);
-        } // END dependencies_met_data_loaded
-      }, 10);
+          clearInterval(dependency_met_page_ready);
+        } // END pageVisible|dataLoaded
+      }, 10); // END dependency_met_page_ready
 
       // make sure the 'content' section is visible BEFORE setting-up sliders
-      //
       var dependencies_met_module_finished = setInterval (() => {
-        var pageState           = $('#content').css("display");
-        var pageVisible         = (pageState == 'block') ? true: false;
-        var atticFinished       = (j1.adapter.attic.getState() == 'finished') ? true: false;
-        var slidersInitialized  = (_this.getState() == 'sliders_initialized') ? true: false;
+        var slidersInitialized = (_this.getState() === 'sliders_initialized') ? true: false;
 
-        if (pageVisible && atticFinished && slidersInitialized) {
+        if (slidersInitialized) {
 
             // TODO: Check why a timeout is required to load the Slider Manager
             setTimeout(() => {
               if (sliderManager) document.body.appendChild(msSliderManager);
 
-              // final state|messages
               _this.setState('finished');
               logger.debug('\n' + 'state: ' + _this.getState());
-              logger.info('\n' + 'initializing module finished');
+              logger.info('\n' + 'initializing module: finished');
+
+              endTimeModule = Date.now();
+              logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
             }, masterSliderOptions.slider_manager_load_timeout);
 
             clearInterval(dependencies_met_module_finished);
-        } // END dependencies_met_j1_core_finished
-      }, 10);
-
+        } // END if slidersInitialized
+      }, 10); // END dependencies_met_j1_core_finished
     }, // END init
 
     // -------------------------------------------------------------------------
@@ -202,14 +212,14 @@ j1.adapter.masterslider = (function (j1, window) {
     // NOTE: Make sure the placeholder is available in the content page
     // eg. using the asciidoc extension masterslider::
     // -------------------------------------------------------------------------
-    loadSliderHTML: function (options, slider) {
+    loadSliderHTML: (options, slider) => {
       var numSliders      = Object.keys(slider).length;
       var active_sliders  = numSliders;
       var xhr_data_path   = options.xhr_data_path + '/index.html';
       var xhr_container_id;
 
       _this.setState('load_data');
-      Object.keys(slider).forEach(function(key) {
+      Object.keys(slider).forEach((key) => {
         if (slider[key].enabled) {
           xhr_container_id = 'p_' + slider[key].id;
           j1.loadHTML({
@@ -229,13 +239,13 @@ j1.adapter.masterslider = (function (j1, window) {
     // createSliderInstances()
     // create an 'MasterSlider' instance for all sliders configured
     // -------------------------------------------------------------------------
-    createSliderInstances: function (sliders, sliderManager) {
+    createSliderInstances: (sliders, sliderManager) => {
       var msSliderManager = sliderManager;
       var numSliders      = Object.keys(sliders).length;
       var msSliderManagerItem;
 
       var i=0;
-      Object.keys(sliders).forEach(function(key) {
+      Object.keys(sliders).forEach((key) => {
         i++;
         if (sliderManager) {
           msSliderManagerItem        = '  var masterslider_' + i + ' = new MasterSlider();' + '\n';
@@ -251,7 +261,7 @@ j1.adapter.masterslider = (function (j1, window) {
     // initialze all master sliders found in page. Dynamically apply properties
     // for methods 'setup' and 'control'.
     // -------------------------------------------------------------------------
-    initSliders: function (options, slider, sliderManager, save_config) {
+    initSliders: (options, slider, sliderManager, save_config) => {
       var msSliderManager = sliderManager;
       var newline         = '\n';
 
@@ -266,13 +276,13 @@ j1.adapter.masterslider = (function (j1, window) {
         logger.info('\n' + 'generate slider controls');
 
         if (sliderManager) msSliderManager.innerHTML += newline;
-        Object.keys(slider).forEach(function(key) {
+        Object.keys(slider).forEach((key) => {
           i++;                                                                  // instance index
           index = parseInt(key);                                                // object index
 
           if (slider[index].enabled) {
             if (slider[index].controls) {
-              Object.keys(slider[index].controls).forEach(function(key) {
+              Object.keys(slider[index].controls).forEach((key) => {
                 var msSliderManagerItem = '\n';
                 logger.debug('\n' + 'slider control found id|key: ' + slider[index].id + '|' + key);
 
@@ -311,13 +321,13 @@ j1.adapter.masterslider = (function (j1, window) {
         logger.debug('\n' + 'generate slider plugins');
 
         if (sliderManager) msSliderManager.innerHTML += newline;
-        Object.keys(slider).forEach(function(key) {
+        Object.keys(slider).forEach((key) => {
           index = parseInt(key); // object index
           i++;  // instance index
 
           if (slider[index].enabled) {
             if (slider[index].plugins) {
-              Object.keys(slider[index].plugins).forEach(function(key) {
+              Object.keys(slider[index].plugins).forEach((key) => {
                 var msSliderManagerItem = '\n';
                 logger.info('\n' + 'slider plugin found id|key: ' + slider[index].id + '|' + key);
 
@@ -368,18 +378,18 @@ j1.adapter.masterslider = (function (j1, window) {
 
         if (sliderManager) msSliderManager.innerHTML += newline;
         var i=0;
-        Object.keys(slider).forEach(function(key) {
+        Object.keys(slider).forEach((key) => {
           var msSliderManagerItem = '\n';
           i++;                                                                  // instance index
           index = parseInt(key);                                                // object index
           if (slider[index].enabled) {
-            logger.info('\n' + 'slider is being initialized on id: ' + slider[key].id);
+            logger.debug('\n' + 'slider is being initialized on id: ' + slider[key].id);
 
             // merge settings, defaults into 'setup'
             setup = $.extend({}, settings.options, slider[index].options);
 
             // log the filter object if enabled
-            if (setup.filters != null) {
+            if (setup.filters !== null) {
               var filterSettings = JSON.stringify(setup.filters).replace(/"/g, '');
               logger.debug('\n' + 'filters found: ' + filterSettings.replace(/{/g, '').replace(/}/g, ''));
             }
@@ -431,17 +441,17 @@ j1.adapter.masterslider = (function (j1, window) {
     // registerEvents()
     // Currently NOT used (experimental)
     // -------------------------------------------------------------------------
-    registerEvents: function (options, slider) {
+    registerEvents: (options, slider) => {
       var index;
 
       var i=0;
-      Object.keys(slider).forEach(function(key) {
+      Object.keys(slider).forEach((key) => {
         index = parseInt(key); // object index
         i++;  // instance index
 
         logger.debug('\n' + 'slider events are being initialized on id: ' + index);
 
-        slider[index].api.addEventListener(MSSliderEvent.WAITING, function(e) {
+        slider[index].api.addEventListener(MSSliderEvent.WAITING, (e) => {
           var controller      = e.target.view.controller;
           var controllerValue = e.target.view.controller.value;
           var isLoading       = e.target.currentSlide.$loading.length;
@@ -457,29 +467,29 @@ j1.adapter.masterslider = (function (j1, window) {
     }, // END registerEvents
 
     // -------------------------------------------------------------------------
-    // messageHandler: MessageHandler for J1 CookieConsent module
-    // Manage messages send from other J1 modules
+    // messageHandler()
+    // manage messages send from other J1 modules
     // -------------------------------------------------------------------------
-    messageHandler: function (sender, message) {
+    messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
-      //  Process commands|actions
+      //  process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
 
         //
-        // Place handling of command|action here
+        // place handling of command|action here
         //
 
         logger.info('\n' + message.text);
       }
 
       //
-      // Place handling of other command|action here
+      // place handling of other command|action here
       //
 
       return true;
@@ -487,9 +497,9 @@ j1.adapter.masterslider = (function (j1, window) {
 
     // -------------------------------------------------------------------------
     // setState()
-    // Sets the current (processing) state of the module
+    // sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: function (stat) {
+    setState: (stat) => {
       _this.state = stat;
     }, // END setState
 
@@ -497,12 +507,11 @@ j1.adapter.masterslider = (function (j1, window) {
     // getState()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: function () {
+    getState: () => {
       return _this.state;
     } // END getState
 
-  }; // END return
-
+  }; // END main (return)
 })(j1, window);
 
 {% endcapture %}

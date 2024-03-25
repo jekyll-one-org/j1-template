@@ -68,8 +68,8 @@ j1.adapter.clipboard = ((j1, window) => {
   // ---------------------------------------------------------------------------
   // globals
   // ---------------------------------------------------------------------------
-  var environment   = '{{environment}}';
-  var state         = 'not_started';
+  var environment         = '{{environment}}';
+  var state               = 'not_started';
   var clipboardDefaults;
   var clipboardSettings;
   var clipboardOptions;
@@ -96,7 +96,7 @@ j1.adapter.clipboard = ((j1, window) => {
   return {
 
     // -------------------------------------------------------------------------
-    // module initializer
+    // adapter initializer
     // -------------------------------------------------------------------------
     init: (options) => {
 
@@ -115,7 +115,7 @@ j1.adapter.clipboard = ((j1, window) => {
       logger   = log4javascript.getLogger('j1.adapter.clipboard');
       language = '{{site.language}}';
 
-      // Load  module DEFAULTS|CONFIG
+      // load module DEFAULTS|CONFIG
       clipboardDefaults = $.extend({},   {{analytics_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
       clipboardSettings = $.extend({},   {{analytics_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
       clipboardOptions  = $.extend(true, {}, clipboardDefaults, clipboardSettings);
@@ -139,7 +139,9 @@ j1.adapter.clipboard = ((j1, window) => {
         btnResponseText = 'copied!';
       }
 
-      // initialize ClipboardJS if page is loaded
+      // -----------------------------------------------------------------------
+      // module initializer
+      // -----------------------------------------------------------------------
       var dependencies_met_j1_finished = setInterval(() => {
         var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
@@ -174,10 +176,8 @@ j1.adapter.clipboard = ((j1, window) => {
     }, // END init
 
     // -------------------------------------------------------------------------
-    // initClipboard
-    // Create copy-to-clipboard for all pages
-    // NOTE: Added check on isNotebook to skip clipboard button on
-    //       Notebooks
+    // initClipboard()
+    // create copy-to-clipboard for all pages
     // -------------------------------------------------------------------------
     initClipButtons: () => {
       var btnHtml = '<div class="j1-clipboard"><span class="btn-clipboard" data-bs-toggle="tooltip" data-bs-placement="left" title="' + btnTitle +'">' + btnText + '</span></div>';
@@ -200,10 +200,11 @@ j1.adapter.clipboard = ((j1, window) => {
     }, // END initClipboard
 
     // -------------------------------------------------------------------------
-    // Event handler
+    // initEventHandler()
+    // initialize button events
     // -------------------------------------------------------------------------
     initEventHandler: (clipboard) => {
-      // Manage clipboard events
+      // manage clipboard events
       clipboard.on('success', (e) => {
         $(e.trigger).attr('title', btnResponseText).tooltip('_fixTitle').tooltip('show').attr('title', btnTitle).tooltip('_fixTitle');
         var logger = log4javascript.getLogger('j1.initClipboard');
@@ -225,36 +226,32 @@ j1.adapter.clipboard = ((j1, window) => {
         logger.warn(logText);
         $(e.trigger).attr('title', fallbackMsg).tooltip('_fixTitle').tooltip('show').attr('title', 'copy to clipboard').tooltip('_fixTitle');
       });
-    },
+    }, // END initEventHandler
 
     // -------------------------------------------------------------------------
-    // messageHandler
-    // Manage messages (paylods) send from other J1 modules
+    // messageHandler()
+    // manage messages send from other J1 modules
     // -------------------------------------------------------------------------
     messageHandler: (sender, message) => {
-      // var json_message = JSON.stringify(message, undefined, 2);              // multiline
-      var json_message = JSON.stringify(message);
+      var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
-      //  Process commands|actions
+      //  process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
 
         //
-        // Place handling of command|action here
+        // place handling of command|action here
         //
 
         logger.info('\n' + message.text);
       }
-      if (message.type === 'command' && message.action === 'status') {
-        logger.info('\n' + 'messageHandler: received - ' + message.action);
-      }
 
       //
-      // Place handling of other command|action here
+      // place handling of other command|action here
       //
 
       return true;
@@ -262,7 +259,7 @@ j1.adapter.clipboard = ((j1, window) => {
 
     // -------------------------------------------------------------------------
     // setState()
-    // Sets the current (processing) state of the module
+    // sets the current (processing) state of the module
     // -------------------------------------------------------------------------
     setState: (stat) => {
       _this.state = stat;
@@ -276,7 +273,7 @@ j1.adapter.clipboard = ((j1, window) => {
       return _this.state;
     } // END getState
 
-  }; // END return
+  }; // END main (return)
 })(j1, window);
 
 {% endcapture %}

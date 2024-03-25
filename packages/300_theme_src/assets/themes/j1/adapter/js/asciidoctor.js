@@ -78,23 +78,23 @@ j1.adapter.asciidoctor = ((j1, window) => {
   var startTimeModule;
   var endTimeModule;
   var timeSeconds;
-  
+
   // ---------------------------------------------------------------------------
-  // Helper functions
+  // helper functions
   // ---------------------------------------------------------------------------
 
   // ---------------------------------------------------------------------------
-  // Main object
+  // main
   // ---------------------------------------------------------------------------
   return {
 
     // -------------------------------------------------------------------------
-    // Initializer
+    // adapter initializer
     // -------------------------------------------------------------------------
     init: (options) => {
 
       // -----------------------------------------------------------------------
-      // Default module settings
+      // default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
         module_name: 'j1.adapter.rtable',
@@ -102,17 +102,14 @@ j1.adapter.asciidoctor = ((j1, window) => {
       }, options);
 
       // -----------------------------------------------------------------------
-      // Global variable settings
+      // global variable settings
       // -----------------------------------------------------------------------
       _this   = j1.adapter.asciidoctor;
       logger  = log4javascript.getLogger('j1.adapter.asciidoctor');
 
       // -----------------------------------------------------------------------
-      // asciidoctor initializer
+      // module initializer
       // -----------------------------------------------------------------------
-      var log_text = '\n' + 'asciidoctor is being initialized';
-      logger.info(log_text);
-
       var dependencies_met_j1_finished = setInterval(() => {
         var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 

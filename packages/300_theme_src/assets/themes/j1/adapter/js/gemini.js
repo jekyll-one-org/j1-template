@@ -27,17 +27,17 @@ regenerate:                             true
 
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment         = site.environment %}
-{% assign asset_path          = "/assets/themes/j1" %}
+{% assign environment          = site.environment %}
+{% assign asset_path           = "/assets/themes/j1" %}
 
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config     = site.data.j1_config %}
-{% assign blocks              = site.data.blocks %}
-{% assign modules             = site.data.modules %}
+{% assign template_config      = site.data.j1_config %}
+{% assign blocks               = site.data.blocks %}
+{% assign modules              = site.data.modules %}
 
 {% comment %} Set config data (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -48,12 +48,12 @@ regenerate:                             true
 
 {% comment %} Set config options (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign slim_select_options = slim_select_defaults | merge: slim_select_settings %}
-{% assign gemini_options      = gemini_defaults | merge: gemini_settings %}
+{% assign slim_select_options  = slim_select_defaults | merge: slim_select_settings %}
+{% assign gemini_options       = gemini_defaults | merge: gemini_settings %}
 
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign comments            = gemini_options.enabled %}
+{% assign comments             = gemini_options.enabled %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -89,91 +89,91 @@ regenerate:                             true
 'use strict';
 j1.adapter.gemini = ((j1, window) => {
 
-{% comment %} Set global variables
--------------------------------------------------------------------------------- {% endcomment %}
-var environment       = '{{environment}}';
-var state             = 'not_started';
-var leafletScript     = document.createElement('script');
-var geocoderScript    = document.createElement('script');
-var safetySettings    = [];
-var generationConfig  = {} ;
-var genAIError        = false;
-var genAIErrorType    = '';
-var response          = '';
-var modal_error_text  = '';
-var modulesLoaded     = false;
-var textHistory       = []; // Array to store the history of entered text
-var historyIndex      = -1; // Index to keep track of the current position in the history
-var chat_prompt       = {};
-var maxRetries        = 3;
-var logStartOnce      = false;
+  {% comment %} Set global variables
+  ------------------------------------------------------------------------------ {% endcomment %}
+  var environment       = '{{environment}}';
+  var state             = 'not_started';
+  var leafletScript     = document.createElement('script');
+  var geocoderScript    = document.createElement('script');
+  var safetySettings    = [];
+  var generationConfig  = {} ;
+  var genAIError        = false;
+  var genAIErrorType    = '';
+  var response          = '';
+  var modal_error_text  = '';
+  var modulesLoaded     = false;
+  var textHistory       = []; // Array to store the history of entered text
+  var historyIndex      = -1; // Index to keep track of the current position in the history
+  var chat_prompt       = {};
+  var maxRetries        = 3;
+  var logStartOnce      = false;
 
-var url;
-var baseUrl;
-var cookie_names;
-var cookie_written;
-var hostname;
-var auto_domain;
-var check_cookie_option_domain;
-var cookie_domain;
-var secure;
+  var url;
+  var baseUrl;
+  var cookie_names;
+  var cookie_written;
+  var hostname;
+  var auto_domain;
+  var check_cookie_option_domain;
+  var cookie_domain;
+  var secure;
 
-var gemini_model;
-var apiKey;
-var validApiKey;
-var genAI;
-var result;
-var retryCount;
+  var gemini_model;
+  var apiKey;
+  var validApiKey;
+  var genAI;
+  var result;
+  var retryCount;
 
-var latitude;
-var longitude;
-var country;
-var city;
+  var latitude;
+  var longitude;
+  var country;
+  var city;
 
-var newItem;
-var itemExists;
+  var newItem;
+  var itemExists;
 
-var selectList;
-var $slimSelect;
-var textarea;
-var promptHistoryMax;
-var promptHstoryEnabled;
-var promptHistoryFromCookie;
-var allowPromptHistoryUpdatesOnMax;
+  var selectList;
+  var $slimSelect;
+  var textarea;
+  var promptHistoryMax;
+  var promptHstoryEnabled;
+  var promptHistoryFromCookie;
+  var allowPromptHistoryUpdatesOnMax;
 
-var _this;
-var logger;
-var logText;
+  var _this;
+  var logger;
+  var logText;
 
-// values taken from API
-var HarmCategory, HarmBlockThreshold;
+  // values taken from API
+  var HarmCategory, HarmBlockThreshold;
 
-// date|time
-var startTime;
-var endTime;
-var startTimeModule;
-var endTimeModule;
-var timeSeconds;
+  // date|time
+  var startTime;
+  var endTime;
+  var startTimeModule;
+  var endTimeModule;
+  var timeSeconds;
 
-var eventListenersReady;
+  var eventListenersReady;
 
-// -----------------------------------------------------------------------------
-// Module variable settings
-// -----------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------
+  // Module variable settings
+  // ---------------------------------------------------------------------------
 
-// create settings object from module options
-//
-var slimSelectDefaults  = $.extend({}, {{slim_select_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-var slimSelectSettings  = $.extend({}, {{slim_select_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-var slimSelectOptions   = $.extend(true, {}, slimSelectDefaults, slimSelectSettings);
+  // create settings object from module options
+  //
+  var slimSelectDefaults  = $.extend({}, {{slim_select_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+  var slimSelectSettings  = $.extend({}, {{slim_select_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+  var slimSelectOptions   = $.extend(true, {}, slimSelectDefaults, slimSelectSettings);
 
-var geminiDefaults      = $.extend({}, {{gemini_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-var geminiSettings      = $.extend({}, {{gemini_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-var geminiOptions       = $.extend(true, {}, geminiDefaults, geminiSettings);
+  var geminiDefaults      = $.extend({}, {{gemini_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+  var geminiSettings      = $.extend({}, {{gemini_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+  var geminiOptions       = $.extend(true, {}, geminiDefaults, geminiSettings);
 
-const defaultPrompt     = geminiOptions.prompt.default;
-const httpError400      = geminiOptions.errors.http400;
-const httpError500      = geminiOptions.errors.http500;
+  const defaultPrompt     = geminiOptions.prompt.default;
+  const httpError400      = geminiOptions.errors.http400;
+  const httpError500      = geminiOptions.errors.http500;
 
   // ---------------------------------------------------------------------------
   // helper functions
@@ -531,7 +531,7 @@ const httpError500      = geminiOptions.errors.http500;
   return {
 
     // -------------------------------------------------------------------------
-    // adapter initializer
+    // module initializer
     // -------------------------------------------------------------------------
     init: (options) => {
 
@@ -567,7 +567,7 @@ const httpError500      = geminiOptions.errors.http500;
       _this.loadUI();
 
       // -----------------------------------------------------------------------
-      // initializer
+      // module initializer
       // -----------------------------------------------------------------------
       var dependencies_met_page_ready = setInterval (() => {
         var pageState           = $('#content').css("display");
@@ -701,7 +701,7 @@ const httpError500      = geminiOptions.errors.http500;
 
     // -------------------------------------------------------------------------
     // loadModules()
-    // Module loader
+    // load required modules
     // -------------------------------------------------------------------------
     loadModules: () => {
 
@@ -795,7 +795,7 @@ const httpError500      = geminiOptions.errors.http500;
     // -------------------------------------------------------------------------
     // setupSlimSelectEventHandlers()
     // sel all used select events
-    // See: https://slimselectjs.com/
+    // see: https://slimselectjs.com/
     // -------------------------------------------------------------------------
     setupSlimSelectEventHandlers: () => {
       var select  = document.getElementById(geminiOptions.prompt_history_id);
@@ -895,67 +895,8 @@ const httpError500      = geminiOptions.errors.http500;
     }, // END setupSlimSelectEventHandlers()
 
     // -------------------------------------------------------------------------
-    // int2float()
-    // convert an integer to float using given precision (default: 2 decimals)
-    // -------------------------------------------------------------------------
-    int2float: (number, precision=2) => {
-      return number.toFixed(precision);
-    },
-
-    // -------------------------------------------------------------------------
-    // getTimeLeft()
-    // calulates the time left
-    // -------------------------------------------------------------------------
-    getTimeLeft: (endDate) => {
-      // Get the current date and time
-      const now = new Date();
-
-      // Get the milliseconds of both dates
-      const endTime = endDate.getTime();
-      const currentTime = now.getTime();
-
-      // Calculate the difference in milliseconds
-      const difference = endTime - currentTime;
-
-      // Check if the end date has passed (difference is negative)
-      if (difference < 0) {
-        return 'Time has passed!';
-      }
-
-      // Calculate remaining days using milliseconds in a day
-      const daysLeft = Math.floor(difference / (1000 * 60 * 60 * 24));
-
-      // Calculate remaining hours using milliseconds in an hour
-      const hoursLeft = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-
-      // Calculate remaining minutes using milliseconds in a minute
-      const minutesLeft = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-
-      // Calculate remaining seconds using milliseconds in a second
-      const secondsLeft = Math.floor((difference % (1000 * 60)) / 1000);
-
-      // Return a formatted string showing remaining time
-      return `${daysLeft} days, ${hoursLeft} hours, ${minutesLeft} minutes, ${secondsLeft} seconds left`;
-    }, // END getTimeLeft
-
-    // -------------------------------------------------------------------------
-    // deleteSlimOption()
-    // delete an option from SlimSelect
-    // -------------------------------------------------------------------------
-    deleteSlimOption: (slimSelect, optionValue) => {
-      // Find the option to delete
-      var optionToDelete = document.querySelector('#mySelect option[value="' + optionValue + '"]');
-
-      // Remove the option from the select
-      optionToDelete.remove();
-
-      // Update SlimSelect
-      slimSelect.render();
-    },
-
-    // -------------------------------------------------------------------------
     // setupUIButtonEventHandlers())
-    // Add events for all hitsory elements for deletion
+    // add events for all history elements for deletion
     // -------------------------------------------------------------------------
     setupUIButtonEventHandlers: () => {
 
@@ -1174,7 +1115,6 @@ const httpError500      = geminiOptions.errors.http500;
         }); // END click dismissClearHistoryButton
 
       }); // END click clearButton
-
     }, // END setupUIButtonEventHandlers
 
     // -------------------------------------------------------------------------
@@ -1188,19 +1128,19 @@ const httpError500      = geminiOptions.errors.http500;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
-      //  Process commands|actions
+      //  process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
 
         //
-        // Place handling of command|action here
+        // place handling of command|action here
         //
 
         logger.info('\n' + message.text);
       }
 
       //
-      // Place handling of other command|action here
+      // place handling of other command|action here
       //
 
       return true;
@@ -1208,7 +1148,7 @@ const httpError500      = geminiOptions.errors.http500;
 
     // -------------------------------------------------------------------------
     // setState()
-    // Sets the current (processing) state of the module
+    // sets the current (processing) state of the module
     // -------------------------------------------------------------------------
     setState: (stat) => {
       _this.state = stat;
@@ -1222,7 +1162,7 @@ const httpError500      = geminiOptions.errors.http500;
       return _this.state;
     } // END getState
 
-  }; // END return
+  }; // END main (return)
 })(j1, window);
 
 {% endcapture %}

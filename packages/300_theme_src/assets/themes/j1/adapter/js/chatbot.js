@@ -133,7 +133,7 @@ var timeSeconds;
     init: (options) => {
 
       // -----------------------------------------------------------------------
-      // initializer
+      // adapter initializer
       // -----------------------------------------------------------------------
       var dependencies_met_page_ready = setInterval (() => {
         var pageState      = $('#content').css("display");
@@ -152,7 +152,7 @@ var timeSeconds;
             chatOptions  = $.extend(true, {}, chatDefaults, chatSettings);
 
             // -----------------------------------------------------------------
-            // Global variable settings
+            // global variable settings
             // -----------------------------------------------------------------
             _this   = j1.adapter.chatbot;
             logger  = log4javascript.getLogger('j1.adapter.chatbot');
@@ -170,19 +170,23 @@ var timeSeconds;
               clearInterval(dependencies_met_page_ready);
             }
 
-            // [INFO   ] [j1.adapter.chatbot                 ] [ detected chat provider (j1_config): {{chat_provider}}} ]
-            // [INFO   ] [j1.adapter.chatbot                 ] [ start processing load region head, layout: {{page.layout}} ]
-            {% case chat_provider %}
-            {% when "webwhiz" %}
-            // [INFO   ] [j1.adapter.chatbot                 ] [ place provider: WebWhiz ]
-
             // -----------------------------------------------------------------
-            // Default module settings
+            // default module settings
             // -----------------------------------------------------------------
             var settings = $.extend({
               module_name: 'j1.adapter.chatbot',
               generated:   '{{site.time}}'
             }, options);
+
+            // -----------------------------------------------------------------
+            // module initializer
+            // -----------------------------------------------------------------
+
+            // [INFO   ] [j1.adapter.chatbot                 ] [ detected chat provider (j1_config): {{chat_provider}}} ]
+            // [INFO   ] [j1.adapter.chatbot                 ] [ start processing load region head, layout: {{page.layout}} ]
+            {% case chat_provider %}
+            {% when "webwhiz" %}
+            // [INFO   ] [j1.adapter.chatbot                 ] [ place provider: WebWhiz ]
 
             // initialize state flag
             _this.setState('started');
@@ -458,19 +462,19 @@ var timeSeconds;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
-      //  Process commands|actions
+      //  process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
 
         //
-        // Place handling of command|action here
+        // place handling of command|action here
         //
 
         logger.info('\n' + message.text);
       }
 
       //
-      // Place handling of other command|action here
+      // place handling of other command|action here
       //
 
       return true;
@@ -478,7 +482,7 @@ var timeSeconds;
 
     // -------------------------------------------------------------------------
     // setState()
-    // Sets the current (processing) state of the module
+    // sets the current (processing) state of the module
     // -------------------------------------------------------------------------
     setState: (stat) => {
       _this.state = stat;
@@ -492,7 +496,7 @@ var timeSeconds;
       return _this.state;
     } // END getState
 
-  }; // END return
+  }; // END main (return)
 })(j1, window);
 
 {% endcapture %}

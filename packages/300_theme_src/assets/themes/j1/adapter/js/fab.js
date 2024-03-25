@@ -53,7 +53,7 @@ regenerate:                             true
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/adapter/js/fab.js
- # JS Adapter for J1 FAB (Floating Action Button)
+ # JS Adapter for J1 FABs (Floating Action Buttons)
  #
  # Product/Info:
  # http://jekyll.one
@@ -62,6 +62,9 @@ regenerate:                             true
  #
  # J1 Template is licensed under the MIT License.
  # For details, see http://jekyll.one
+ # -----------------------------------------------------------------------------
+ # TODO: check why 'found toc in page: disabled' detected (some times)
+ #       if a toc IS configured
  # -----------------------------------------------------------------------------
  # Adapter generated: {{site.time}}
  # -----------------------------------------------------------------------------
@@ -76,14 +79,14 @@ regenerate:                             true
 j1.adapter.fab = ((j1, window) => {
 
   // ---------------------------------------------------------------------------
-  // Global variable settings
+  // global variable settings
   // ---------------------------------------------------------------------------
-  var isMobile      = j1.core.isMobile();
-  var environment   = '{{environment}}';
-  var dclFinished   = false;
-  var moduleOptions = {};
-  var cookie_names  = j1.getCookieNames();
-  var state         = 'not_started';
+  var isMobile          = j1.core.isMobile();
+  var environment       = '{{environment}}';
+  var dclFinished       = false;
+  var moduleOptions     = {};
+  var cookie_names      = j1.getCookieNames();
+  var state             = 'not_started';
   var fabDefaults;
   var fabSettings;
   var fabOptions;
@@ -117,7 +120,7 @@ j1.adapter.fab = ((j1, window) => {
   return {
 
     // -------------------------------------------------------------------------
-    // module initializer
+    // adapter initializer
     // -------------------------------------------------------------------------
     init: (options) => {
 
@@ -150,7 +153,7 @@ j1.adapter.fab = ((j1, window) => {
       _this['moduleOptions'] = fabOptions;
 
       // -----------------------------------------------------------------------
-      // initializer
+      // module initializer
       // -----------------------------------------------------------------------
       var dependency_met_page_ready = setInterval(() => {
         var pageState      = $('#content').css("display");
@@ -198,7 +201,6 @@ j1.adapter.fab = ((j1, window) => {
         var fabLoaded = (j1.xhrDOMState['#' + fabOptions.xhr_container_id] === 'success') ? true: false;
 
         if (fabLoaded) {
-
           _this.setState('loaded');
           logger.info('\n' + 'set module state to: ' + _this.getState());
           logger.info('\n' + 'HTML data for FAB: ' + _this.getState());
@@ -214,12 +216,12 @@ j1.adapter.fab = ((j1, window) => {
           logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_fab_initialized);
-        }
+        } // END if fabLoaded
       }, 10); // END dependencies_met_fab_initialized
-    }, // END dataLoader
+    }, // END fabLoader
 
     // -------------------------------------------------------------------------
-    // Button Initializer
+    // buttonInitializer()
     // -------------------------------------------------------------------------
     buttonInitializer: (fabOptions) => {
       var $fabContainer         = $('#' + fabOptions.xhr_container_id);
@@ -369,10 +371,12 @@ j1.adapter.fab = ((j1, window) => {
     }, // END buttonInitializer
 
     // -------------------------------------------------------------------------
-    // Eventhandler
+    // event handler
+    // -------------------------------------------------------------------------
 
     // -------------------------------------------------------------------------
-    // open mmenu TOC
+    // open_mmenu_toc()
+    // open TOC in mobile menu
     // -------------------------------------------------------------------------
     open_mmenu_toc: () => {
         // Event configured with Navigator module (navigator.yml)
@@ -384,7 +388,8 @@ j1.adapter.fab = ((j1, window) => {
     },  // END open_mmenu_toc
 
     // -------------------------------------------------------------------------
-    // reload page
+    // reload_page()
+    // reload current page
     // -------------------------------------------------------------------------
     reload_page: () => {
       // reload current page (skip cache)
@@ -392,7 +397,8 @@ j1.adapter.fab = ((j1, window) => {
     }, // END reload_page
 
     // -------------------------------------------------------------------------
-    // scroll to previous section
+    // scroll_previous_section()
+    // scroll to previous section in page
     // -------------------------------------------------------------------------
     scroll_previous_section: (nodes) => {
       var previous_header_id;
@@ -406,7 +412,7 @@ j1.adapter.fab = ((j1, window) => {
       var toccerScrollDuration = {{toccer_options.scrollSmoothDuration}};
       var toccerScrollOffset   = {{toccer_options.scrollSmoothOffset}};
 
-      // Scroll offset correction if mobile or window width <= 992
+      // scroll offset correction if mobile or window width <= 992
       // For smaller window sizes, the height of the menubar changes.
       // if (j1.core.isMobile() || $(window).width() <= 992) { scrollOffset += 30; }
       // calculate offset for correct (smooth) scroll position.
@@ -452,7 +458,8 @@ j1.adapter.fab = ((j1, window) => {
     }, // END scroll_previous_section
 
     // -------------------------------------------------------------------------
-    // scroll to next section
+    // scroll_next_section()
+    // scroll to next section in page
     // -------------------------------------------------------------------------
     scroll_next_section: (nodes) => {
       var next_header_id;
@@ -513,7 +520,8 @@ j1.adapter.fab = ((j1, window) => {
     }, // END scroll_next_section
 
     // -------------------------------------------------------------------------
-    // scroll to top
+    // scroll_to_top()
+    // scroll to top of current pqge
     // -------------------------------------------------------------------------
     scroll_to_top: () => {
       var dest = 0;
@@ -526,7 +534,8 @@ j1.adapter.fab = ((j1, window) => {
     }, // END scroll_top
 
     // -------------------------------------------------------------------------
-    // scroll to bottom
+    // scroll_to_bottom()
+    // scroll to bottom of current page
     // -------------------------------------------------------------------------
     scroll_to_bottom: () => {
       var $page           = $(document);
@@ -543,12 +552,14 @@ j1.adapter.fab = ((j1, window) => {
     }, // END scroll_bottom
 
     // -------------------------------------------------------------------------
-    // scroll to comments (Disqus)
+    // scroll_to_comments()
+    // scroll to comments headline in current page (if comments enabled)
     // -------------------------------------------------------------------------
     scroll_to_comments: () => {
     }, // END scroll_comments
 
     // -------------------------------------------------------------------------
+    // alert_me()
     // create generic alert
     // -------------------------------------------------------------------------
     alert_me: () => {
@@ -556,33 +567,29 @@ j1.adapter.fab = ((j1, window) => {
     }, // END alert_me
 
     // -------------------------------------------------------------------------
-    // messageHandler
-    // Manage messages (paylods) send from other J1 modules
+    // messageHandler()
+    // manage messages send from other J1 modules
     // -------------------------------------------------------------------------
     messageHandler: (sender, message) => {
-      // var json_message = JSON.stringify(message, undefined, 2);              // multiline
-      var json_message = JSON.stringify(message);
+      var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
-      //  Process commands|actions
+      //  process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
 
         //
-        // Place handling of command|action here
+        // place handling of command|action here
         //
 
         logger.info('\n' + message.text);
       }
-      if (message.type === 'command' && message.action === 'status') {
-        logger.info('\n' + 'messageHandler: received - ' + message.action);
-      }
 
       //
-      // Place handling of other command|action here
+      // place handling of other command|action here
       //
 
       return true;
@@ -590,7 +597,7 @@ j1.adapter.fab = ((j1, window) => {
 
     // -------------------------------------------------------------------------
     // setState()
-    // Sets the current (processing) state of the module
+    // sets the current (processing) state of the module
     // -------------------------------------------------------------------------
     setState: (stat) => {
       _this.state = stat;
@@ -604,7 +611,7 @@ j1.adapter.fab = ((j1, window) => {
       return _this.state;
     } // END getState
 
-  }; // END return
+  }; // END main (return)
 })(j1, window);
 
 {% endcapture %}

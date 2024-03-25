@@ -50,8 +50,8 @@ regenerate:                             true
 {% assign template_config               = site.data.template_settings %}
 {% assign navigator_defaults            = modules.defaults.navigator.defaults %}
 {% assign navigator_settings            = modules.navigator.settings %}
-{% assign themes_defaults               = modules.defaults.themes.defaults %}
-{% assign themes_settings               = modules.themes.settings %}
+{% assign themer_defaults               = modules.defaults.themer.defaults %}
+{% assign themer_settings               = modules.themer.settings %}
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -61,7 +61,7 @@ regenerate:                             true
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign navigator_options             = navigator_defaults | merge: navigator_settings %}
-{% assign themes_options                = themes_defaults | merge: themes_settings %}
+{% assign themer_options                = themer_defaults | merge: themer_settings %}
 {% assign nav_mmenu_options             = nav_mmenu_defaults | merge: nav_mmenu_settings %}
 {% assign nav_mmenu_id                  = navigator_defaults.nav_mmenu.xhr_container_id %}
 {% assign nav_navbar_media_breakpoint   = navigator_defaults.nav_bar.media_breakpoint %}
@@ -103,32 +103,25 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.mmenu = ((j1, window) => {
+j1.adapter.mmenu = (function (j1, window) {
 
-  {% comment %} Set global variables
-  ------------------------------------------------------------------------------ {% endcomment %}
+  // ---------------------------------------------------------------------------
+  // globals
+  // ---------------------------------------------------------------------------
   var environment     = '{{environment}}';
   var dclFinished     = false;
   var moduleOptions   = {};
   var navMenuOptions  = {};
-  var themesOptions   = {};
+  var themerOptions   = {};
   var cookie_names    = j1.getCookieNames();
-  var themesEnabled   = {{themes_options.enabled}};
+  var themerEnabled   = {{themer_options.enabled}};
   var state           = 'not_started';
   var user_state;
   var user_session;
   var user_data;
-
   var _this;
   var logger;
   var logText;
-
-  // date|time
-  var startTime;
-  var endTime;
-  var startTimeModule;
-  var endTimeModule;
-  var timeSeconds;
 
   // ---------------------------------------------------------------------------
   // helper functions
@@ -140,12 +133,12 @@ j1.adapter.mmenu = ((j1, window) => {
   return {
 
     // -------------------------------------------------------------------------
-    // adapter initializer
+    // module initializer
     // -------------------------------------------------------------------------
-    init: (options) => {
+    init: function (options) {
 
       // -----------------------------------------------------------------------
-      // default module settings
+      // Default module settings
       // -----------------------------------------------------------------------
       var settings  = $.extend({
         module_name: 'j1.adapter.mmenu',
@@ -153,7 +146,7 @@ j1.adapter.mmenu = ((j1, window) => {
       }, options);
 
       // -----------------------------------------------------------------------
-      // global variable settings
+      // Global variable settings
       // -----------------------------------------------------------------------
       _this         = j1.adapter.mmenu;
       logger        = log4javascript.getLogger('j1.adapter.mmenu');
@@ -168,7 +161,7 @@ j1.adapter.mmenu = ((j1, window) => {
       // -----------------------------------------------------------------------
       /* eslint-disable */
       navMenuOptions = $.extend({}, {{nav_mmenu_options | replace: '=>', ':' }});
-      themesOptions  = $.extend({}, {{themes_options | replace: '=>', ':' | replace: 'nil', '""' }});
+      themerOptions  = $.extend({}, {{themer_options | replace: '=>', ':' | replace: 'nil', '""' }});
       /* eslint-enable */
       var xhr_data_path;
       var menu_id;
@@ -181,38 +174,22 @@ j1.adapter.mmenu = ((j1, window) => {
       //
       if (options != null) { var frontmatterOptions = $.extend({}, options); }
 
-      // -----------------------------------------------------------------------
-      // module initializer
-      // -----------------------------------------------------------------------
-      var dependency_met_page_ready = setInterval (() => {
-        var pageState      = $('#content').css("display");
-        var pageVisible    = (pageState === 'block') ? true : false;
-        var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
-
-        if (j1CoreFinished && pageVisible) {
-          startTimeModule = Date.now();
-
-          _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized');
-
-          _this.mmenuLoader(navMenuOptions);
-
-          clearInterval(dependency_met_page_ready);
-        } // END if pageVisible
-      }, 10); // END dependency_met_page_ready
+      _this.setState('started');
+      logger.debug('\n' + 'state: ' + _this.getState());
+      logger.info('\n' + 'module is being initialized');
+      _this.mmenuLoader(navMenuOptions);
     }, // END init
 
     // -------------------------------------------------------------------------
     // MMenu Loader
     // -------------------------------------------------------------------------
-    mmenuLoader: (mmOptions) => {
+    mmenuLoader: function (mmOptions) {
       var menu_id;
       var xhr_data_path;
 
       _this.setState('loading');
-      logger.debug('\n' + 'status: ' + _this.getState());
-      logger.debug('\n' + 'load HTML data for navs and drawers');
+      logger.info('\n' + 'status: ' + _this.getState());
+      logger.info('\n' + 'load HTML data for navs and drawers');
 
       {% assign id_list = "" %}
 
@@ -254,20 +231,16 @@ j1.adapter.mmenu = ((j1, window) => {
 
       logger.info('\n' + 'initialize navs and drawers');
       _this.mmenuInitializer(mmOptions);
-
       _this.setState('finished');
       logger.debug('\n' + 'state: ' + _this.getState());
-      logger.info('\n' + 'initializing module: finished');
-
-      endTimeModule = Date.now();
-      logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+      logger.info('\n' + 'module initialized successfully');
 
     }, // END dataLoader
 
     // -------------------------------------------------------------------------
     // MMenu Initializer
     // -------------------------------------------------------------------------
-    mmenuInitializer: (mmOptions) => {
+    mmenuInitializer: function (mmOptions) {
       var menu_id;
       var xhr_data_path;
 
@@ -290,11 +263,10 @@ j1.adapter.mmenu = ((j1, window) => {
         // ---------------------------------------------------------------------
         // NOTE: Run load check (j1.xhrDataState) before initialization
         //
-        logger.debug('\n' + 'initialize mmenu on id: #{{menu_id}}');
-        var dependencies_met_{{menu_id}}_loaded = setInterval (() => {
+        logger.info('\n' + 'initialize mmenu on id: #{{menu_id}}');
+        var dependencies_met_{{menu_id}}_loaded = setInterval (function () {
           if (j1.xhrDataState['#{{menu_id}}'] == 'success' ) {
             logger.debug('\n' + 'met dependencies for: {{menu_id}}');
-
             const menu_selector = document.querySelector('#{{menu_id}}');
             const mmenu_{{menu_id}} = new MmenuLight (
               menu_selector,
@@ -321,11 +293,7 @@ j1.adapter.mmenu = ((j1, window) => {
             // make sure the QL menu is shown, if mmenu is closed
             // by clicking the mmenu backdrop
             //
-            $('.mm-ocd__backdrop').click(function (e) {
-              // suppress default actions|bubble up
-              e.preventDefault();
-              e.stopPropagation();
-
+            $('.mm-ocd__backdrop').click(function() {
               $('#quicklinks').show();
               return false
             });
@@ -333,16 +301,13 @@ j1.adapter.mmenu = ((j1, window) => {
             // Toggle Bars (Hamburger) for the NavBar to open|close
             // the mmenu drawer
             //
-            $('{{item.menu.content.button}}').each(function (e) {
+            $('{{item.menu.content.button}}').each(function(e) {
               var $this = $(this);
               var clicked;
 
-              $this.on('click', function (e) {
-                // suppress default actions|bubble up
-                e.preventDefault();
-                e.stopPropagation();
-
+              $this.on('click', function(e) {
                 const button_{{menu_id}} = this;
+                e.preventDefault();
                 // toggle mmenu open|clse
                 clicked = $('body.mm-ocd-opened').length ? true : false;
                 if (clicked) {
@@ -358,22 +323,25 @@ j1.adapter.mmenu = ((j1, window) => {
             });
 
             // jadams, 2020-09-30: loading the menues (themes) if enabled
-            if (themesEnabled) {
+            //
+            if (themerEnabled) {
               // load REMOTE themes from Bootswatch API (localFeed EMPTY!)
-              $('#remote_themes_mmenu').ThemeSwitcher({
+              $('#remote_themes_mmenu').bootstrapThemeSwitcher({
                 localFeed: '',
-                bootswatchApiVersion: themesOptions.bootswatchApiVersion
+                bootswatchApiVersion: themerOptions.bootswatchApiVersion
               });
               // load LOCAL themes from JSON data
-              $('#local_themes_mmenu').ThemeSwitcher({
-                localFeed: themesOptions.localThemes
+              $('#local_themes_mmenu').bootstrapThemeSwitcher({
+                localFeed: themerOptions.localThemes
               });
             }
 
             $('#{{item.menu.content.id}}').show();
-            logger.debug('\n' + 'initializing mmenu finished on id: #{{menu_id}}');
-
+            logger.info('\n' + 'initializing mmenu finished on id: #{{menu_id}}');
+            logger.debug('\n' + 'met dependencies for: {{menu_id}} loaded');
             clearInterval(dependencies_met_{{menu_id}}_loaded);
+            $('#{{item.menu.content.id}}').show();
+            logger.info('\n' + 'initializing mmenu finished on id: #{{menu_id}}');
           }; // END mmenu_loaded
         }, 10); // END dependencies_met_mmenu_loaded
         {% endif %} // ENDIF content_type: NAVIGATION
@@ -387,10 +355,10 @@ j1.adapter.mmenu = ((j1, window) => {
           // TODO: Check if Toggle button make sense/should be implemented
           // NOTE: Run load check (j1.xhrDataState) before initialization
           //
-          logger.debug('\n' + 'initialize mmenu on id: #{{menu_id}}');
-
-          var dependencies_met_{{menu_id}}_loaded = setInterval (() => {
-            if (j1.xhrDataState['#{{menu_id}}'] == 'success' && $('{{item.menu.content.button}}').length) {
+          logger.info('\n' + 'initialize mmenu on id: #{{menu_id}}');
+          var dependencies_met_{{menu_id}}_loaded = setInterval (function () {
+            if (j1.xhrDataState['#{{menu_id}}'] == 'success' &&
+                $('{{item.menu.content.button}}').length) {
               logger.debug('\n' + 'met dependencies for: xhrData/{{menu_id}}');
 
               const menu_selector = document.querySelector('#{{menu_id}}');
@@ -413,8 +381,8 @@ j1.adapter.mmenu = ((j1, window) => {
               // monitor for state changes on the drawer
               //
               $('#drawer_{{menu_id}}').attrchange({
-                trackValues:  true,
-                callback:     (event)  => {
+                trackValues: true,
+                callback: function (event) {
                   logger.debug('\n' + 'hide|show the nav menu');
                   // switch off|on the (main) nav menu
                   $('#' + 'navigator_nav_navbar').toggle();
@@ -425,20 +393,17 @@ j1.adapter.mmenu = ((j1, window) => {
               });
 
               // button for the MMenu tocbar to open|close the toc drawer
-              $('{{item.menu.content.button}}').each(function (e) {
+              //
+              $('{{item.menu.content.button}}').each(function(e) {
                 var $this = $(this);
-                $this.on('click', function (e) {
+                $this.on('click', function(e) {
                   var button_{{menu_id}} = this;
                   var hasClass;
-
-                  // suppress default actions|bubble up
-                  e.preventDefault();
-                  e.stopPropagation();
 
                   // check if the button should be activated
                   // e.g for TOC only if class js-toc-content is found
                   //
-                  if ('{{item.menu.content.button_activated}}' !== 'always') {
+                  if ('{{item.menu.content.button_activated}}' != 'always') {
                     hasClass = $('main').hasClass('{{item.menu.content.button_activated}}');
                   } else {
                     hasClass = true;
@@ -449,14 +414,12 @@ j1.adapter.mmenu = ((j1, window) => {
                   } // END if hasclass
                 });
               });
-
               logger.debug('\n' + 'met dependencies for: {{menu_id}} loaded');
-              $('#{{item.menu.content.id}}').show();
-
               clearInterval(dependencies_met_{{menu_id}}_loaded);
+              $('#{{item.menu.content.id}}').show();
           }; // END if menu_loaded
         }, 10); // END dependencies_met_mmenu_loaded
-        logger.debug('\n' + 'initializing mmenu finished on id: #{{menu_id}}');
+        logger.info('\n' + 'initializing mmenu finished on id: #{{menu_id}}');
         {% endif %} // ENDIF content_type: DRAWER
         } // END menus|drawers
       {% endif %} // ENDIF menu enabled
@@ -464,29 +427,33 @@ j1.adapter.mmenu = ((j1, window) => {
     }, // END mmenuInitializer
 
     // -------------------------------------------------------------------------
-    // messageHandler()
-    // manage messages send from other J1 modules
+    // messageHandler
+    // Manage messages (paylods) send from other J1 modules
     // -------------------------------------------------------------------------
-    messageHandler: (sender, message) => {
-      var json_message = JSON.stringify(message, undefined, 2);
+    messageHandler: function (sender, message) {
+      // var json_message = JSON.stringify(message, undefined, 2);              // multiline
+      var json_message = JSON.stringify(message);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
-      //  process commands|actions
+      //  Process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
 
         //
-        // place handling of command|action here
+        // Place handling of command|action here
         //
 
         logger.info('\n' + message.text);
       }
+      if (message.type === 'command' && message.action === 'status') {
+        logger.info('\n' + 'messageHandler: received - ' + message.action);
+      }
 
       //
-      // place handling of other command|action here
+      // Place handling of other command|action here
       //
 
       return true;
@@ -494,9 +461,9 @@ j1.adapter.mmenu = ((j1, window) => {
 
     // -------------------------------------------------------------------------
     // setState()
-    // sets the current (processing) state of the module
+    // Sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: (stat) => {
+    setState: function (stat) {
       _this.state = stat;
     }, // END setState
 
@@ -504,11 +471,11 @@ j1.adapter.mmenu = ((j1, window) => {
     // getState()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: () => {
+    getState: function () {
       return _this.state;
     } // END getState
 
-  }; // END main (return)
+  }; // END return
 })(j1, window);
 
 {% endcapture %}
