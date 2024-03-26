@@ -95,7 +95,7 @@ topsearch_options.enabled: {{topsearch_options.enabled | debug}}
 
             {% if history_enabled %}
             <!-- SEARCH History -->
-            <div id="search_history_select_wrapper"></div>
+            <div id="search_history_select_wrapper" style="margin-left: 2.5rem; margin-right: 4rem"></div>
             <!-- END SEARCH History -->
             {% endif %}
 
@@ -106,11 +106,10 @@ topsearch_options.enabled: {{topsearch_options.enabled | debug}}
                 <div class="input-group">
                   <span class="input-group-addon"><i class="mdib mdib-magnify mdib-2x mb-2" style="color:#9E9E9E"></i></span>
                   <input id="search-query" class="form-control" type="text" name="q" placeholder="{{placeholder}}" autocomplete="off">
-                  <span id="clear-topsearch" class="form-clear form-clear-searcher d-none" style="margin-top: 1.15rem; cursor: pointer"> <i class="mdib mdib-format-clear mdib-24px" style="color:#9E9E9E"></i> </span>
+                  <span id="clear-topsearch" class="form-clear form-clear-searcher d-none" style="cursor: pointer; margin-top: 1.15rem"> <i class="mdib mdib-format-clear mdib-24px" style="color:#9E9E9E"></i> </span>
                   {% if history_enabled %}
-                  <span id="send-to-history" style="margin-top: 1.15rem; margin-left: .75rem"> <i class="mdib mdib-send mdib-24px" style="color:#9E9E9E"></i> </span>
+                  <span id="send-to-history" style="cursor: pointer; margin-top: 1.15rem; margin-left: .75rem"> <i class="mdib mdib-send mdib-24px" style="color:#9E9E9E"></i> </span>
                   {% endif %}
-                  <!-- button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="margin-top: 24px;"></button -->
                 </div>
               </div>
               <!-- END INPUT Form -->

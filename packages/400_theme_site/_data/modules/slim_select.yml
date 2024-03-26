@@ -92,7 +92,7 @@ settings:
     # Search history (site search)
     #
     - select:                           search_history
-      enabled:                          false
+      enabled:                          true
 
       # CONTAINER settings
       # ------------------------------------------------------------------------

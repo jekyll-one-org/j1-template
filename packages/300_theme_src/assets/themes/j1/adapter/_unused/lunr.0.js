@@ -86,19 +86,17 @@ j1.adapter.lunr = ((j1, window) => {
   var searchSettings;
   var searchOptions;
   var topSearchOptions;
-  var select;
+  var selectList;
   var $slimSelect;
   var newItem;
   var itemExists;
 
+  var cookie_names;
   var url;
   var baseUrl;
   var hostname;
   var auto_domain;
   var secure;
-
-  var cookie_names;
-  var cookie_written;
 
   var _this;
   var logger;
@@ -107,18 +105,16 @@ j1.adapter.lunr = ((j1, window) => {
 
   var textHistory       = []; // Array to store the history of entered text
   var historyIndex      = -1; // Index to keep track of the current position in the history
-  var searchHistory     = {};
+  var search_prompt     = {};
   var queryInput;
 
   var $searchHstoryWrapper;
   var searchHstoryWrapperID;
   var searchHistoryMax;
-  var searchHistoryEnabled;
+  var searchHstoryEnabled;
   var allowSearchHistoryDuplicates;
   var allowSearchHistoryUpdatesOnMax;
-  var searchHistoryFromCookie;
-
-  var eventListenersReady;
+  var searchHstoryFromCookie;
 
   // date|time
   var startTime;
@@ -130,115 +126,6 @@ j1.adapter.lunr = ((j1, window) => {
   // ---------------------------------------------------------------------------
   // helper functions
   // ---------------------------------------------------------------------------
-
-  function addSearchHistoryEventListeners(slimSelectData) {
-    var index = 1;
-    slimSelectData.forEach (() => {
-      var span        = 'opt_search_history_' + index;
-      var spanElement = document.getElementById(span);
-
-      var dependencies_met_span_ready = setInterval (() => {
-        var spanElementReady = (($(spanElement).length) !== 0) ? true : false;
-        if (spanElementReady) {
-          logger.debug('\n' + 'add eventListener to: ' + span);
-          spanElement.addEventListener('click', spanElementEventListener);
-
-          clearInterval(dependencies_met_span_ready);
-        }
-      }, 10);
-      index++;
-    }); // END forEach data
-  } // END addSearchHistoryEventListeners
-
-  function spanElementEventListener(event) {
-    var optionText    = event.currentTarget.nextSibling.data;
-    var slimData      = $slimSelect.getData();
-    var textHistory   = [];
-    var searchHistory = j1.existsCookie(cookie_names.search_prompt)
-      ? j1.readCookie(cookie_names.search_prompt)
-      : {};
-    var foundItem;
-    var newHistory;
-    var newData;
-
-    // suppress default actions|bubble up
-    event.preventDefault();
-    event.stopPropagation();
-
-    // update slimSelect data
-    foundItem = -1;
-    for (var i = 0; i < slimData.length; i++) {
-      if (slimData[i].text === optionText) {
-        foundItem = i;
-        break;
-      }
-    }
-
-    if (foundItem !== -1) {
-      delete slimData[foundItem];
-
-      // create new reindexed data object
-      newData = Object.values(slimData);
-      // update the select
-      $slimSelect.setData(newData);
-    }
-
-    // update search history data
-    foundItem = -1;
-    // convert searchHistory object to array
-    textHistory = Object.values(searchHistory);
-    for (var i = 0; i < textHistory.length; i++) {
-      if (textHistory[i] === optionText) {
-        foundItem = i;
-        break;
-      }
-    }
-
-    if (foundItem !== -1) {
-      delete textHistory[foundItem];
-
-      // create new reindexed data object
-      newHistory = Object.values(textHistory);
-
-      // remove duplicates from history
-      if (newHistory.length > 1) {
-        // create a 'Set' from the history array to automatically remove duplicates
-        var uniqueArray = [...new Set(newHistory)];
-        newHistory      = Object.values(uniqueArray);
-      } // END if allowHistoryDupicates
-
-      // update searchHistory
-      if (searchHistoryFromCookie) {
-        logger.debug('\n' + 'save search history to cookie');
-        j1.removeCookie({
-          name:   cookie_names.search_prompt,
-          domain: auto_domain,
-          secure: secure
-        });
-
-        if (newHistory.length > 0) {
-          cookie_written = j1.writeCookie({
-            name:   cookie_names.search_prompt,
-            data:   newHistory,
-            secure: secure
-          });
-        } else {
-          cookie_written = j1.writeCookie({
-            name:   cookie_names.search_prompt,
-            data:   {},
-            secure: secure
-          });
-          logger.info('\n' + 'spanElementEventListener, hide prompt history on last element');
-          $("#search_history_select_wrapper").hide();
-        } // END if length
-      } // END if searchHistoryFromCookie
-    }
-
-    logger.info('\n' + 'spanElementEventListener, option deleted:\n' + optionText);
-
-    // close currently required to re-add history prompt events on next beforeOpen
-    $slimSelect.close();
-  } // END  spanElementEventListener
 
   // ---------------------------------------------------------------------------
   // main
@@ -274,103 +161,23 @@ j1.adapter.lunr = ((j1, window) => {
       // top search variable settings
       // -----------------------------------------------------------------------
       cookie_names        = j1.getCookieNames();
-      url                     = new liteURL(window.location.href);
-      baseUrl                 = url.origin;
-      hostname                = url.hostname;
-      auto_domain             = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
-      secure                  = (url.protocol.includes('https')) ? true : false;
-      searchHistoryEnabled    = (topSearchOptions.search_history_enabled === true) ? true : false;
-      searchHistoryFromCookie = (topSearchOptions.search_history_from_cookie === true) ? true : false;
+      url                 = new liteURL(window.location.href);
+      baseUrl             = url.origin;
+      hostname            = url.hostname;
+      auto_domain         = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
+      secure              = (url.protocol.includes('https')) ? true : false;
+      searchHstoryEnabled = (topSearchOptions.search_history_enabled === true) ? true : false;
 
-      // -----------------------------------------------------------------------
-      // select initializer
-      // -----------------------------------------------------------------------
-      var dependencies_met_select_ready = setInterval(() => {
-        var slimSelectFinished = (Object.keys(j1.adapter.slimSelect.select).length) ? true : false;
-
-        if (slimSelectFinished) {
-          logger.debug('\n' + 'initializing select data');
-
-          // initialize history array from cookie
-          if (searchHistoryEnabled && searchHistoryFromCookie) {
-
-            select      = document.getElementById('search_history');
-            $slimSelect = select.slim;
-
-            // limit the prompt history
-            searchHistoryMax               = topSearchOptions.search_history_max;
-
-            // allow|reject history updates if promptHistoryMax reached
-            allowSearchHistoryUpdatesOnMax = topSearchOptions.allow_history_updates_on_max;
-
-            logger.debug('\n' + 'read search history from cookie');
-            var data    = [];
-            var option  = {};
-            searchHistory = j1.existsCookie(cookie_names.search_prompt)
-              ? j1.readCookie(cookie_names.search_prompt)
-              : {};
-
-            // convert searchHistory object to array
-            textHistory = Object.values(searchHistory);
-
-            // remove duplicates from history
-            if (textHistory.length > 1) {
-              var textHistoryLenght = textHistory.length;
-              var uniqueArray       = [...new Set(textHistory)];                // create a 'Set' from the history array to automatically remove duplicates
-
-              textHistory = uniqueArray;
-              if (textHistoryLenght > textHistory.length) {
-                logger.debug('\n' + 'removed duplicates from history array: ' + (textHistoryLenght - textHistory.length) + ' element|s');
-              }
-            } // END if !allowHistoryDupicates
-
-            // update|set slimSelect data elements
-            var index   = 1;
-            var data    = [];
-            var option  = {};
-            var html;
-            textHistory.forEach((historyText) => {
-              html   = '<span id="opt_' + topSearchOptions.search_history_id + '_' + index + '" class="ss-option-delete">' + '<i class="mdib mdib-close mdib-16px ml-1 mr-2"></i></span>' + historyText;
-              option = {
-                text:     historyText,
-                html:     html,
-                display:  true,
-                selected: false,
-                disabled: false
-              }
-              data.push(option);
-              index++
-            }); // END forEach
-            $slimSelect.setData(data);
-
-            // hide|show history container
-            // if (textHistory.length) {
-            //   $("#search_history_select_wrapper").show();
-            // } else {
-            //   $("#search_history_select_wrapper").hide();
-            // }
-
-            // -------------------------------------------------------------
-            // setup Slim select eventHandlers
-            // -------------------------------------------------------------
-            //
-            _this.setupSlimSelectEventHandlers();
-
-          } // if promptHistoryEnabled
-
-          clearInterval(dependencies_met_select_ready);
-        } // END selectReady
-      }, 10); // END dependencies_met_select_ready
 
       // -----------------------------------------------------------------------
       // module initializer
       // -----------------------------------------------------------------------
       var dependencies_met_lunr_finished = setInterval (() => {
-        var j1CoreFinished     = (j1.getState() === 'finished') ? true : false;
-        var slimSelectFinished = (Object.keys(j1.adapter.slimSelect.select).length) ? true : false;
+        var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
         if (j1CoreFinished) {
-          startTimeModule   = Date.now();
+          startTimeModule        = Date.now();
+          searchHstoryFromCookie = (topSearchOptions.prompt_history_from_cookie === true) ? true : false;
 
           // get|clear queryInput element (prompt)
           queryInput        = document.getElementById('search-query');
@@ -390,11 +197,11 @@ j1.adapter.lunr = ((j1, window) => {
             emptyMsg:   searchOptions.emptyMsg
           });
 
-          logger.info('\n' + 'initializing UI event handlers (modal)');
-          _this.uiEventHandler();
+          logger.info('\n' + 'initializing event handlers (search history)');
+          _this.eventHandler();
 
           // initialize history array from cookie
-          if (searchHistoryEnabled && searchHistoryFromCookie) {
+          if (searchHstoryEnabled && searchHstoryFromCookie) {
 
             logger.info('\n' + 'initializing search history from cookie');
 
@@ -407,22 +214,15 @@ j1.adapter.lunr = ((j1, window) => {
             // allow|reject history updates if searchHistoryMax reached
             allowSearchHistoryUpdatesOnMax  = topSearchOptions.allow_history_updates_on_max;
 
-            logger.debug('\n' + 'read search history from cookie');
+            logger.debug('\n' + 'read prompt history from cookie');
             var data      = [];
             var option    = {};
-            searchHistory = j1.existsCookie(cookie_names.search_prompt)
+            search_prompt = j1.existsCookie(cookie_names.search_prompt)
               ? j1.readCookie(cookie_names.search_prompt)
               : {};
 
             // convert search prompt object to array
-            textHistory = Object.values(searchHistory);
-
-            // hide|show history container
-            if (textHistory.length) {
-              $("#search_history_select_wrapper").show();
-            } else {
-              $("#search_history_select_wrapper").hide();
-            }
+            textHistory = Object.values();
 
             // remove duplicates from history
             if (!allowSearchHistoryDuplicates && textHistory.length > 1) {
@@ -434,7 +234,8 @@ j1.adapter.lunr = ((j1, window) => {
                 logger.debug('\n' + 'removed duplicates from history array: ' + (textHistoryLenght - textHistory.length) + ' element|s');
               }
             } // END if !allowHistoryDupicates
-          } // END if searchHistoryEnabled
+
+          } // END if searchHstoryEnabled
 
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
@@ -444,14 +245,14 @@ j1.adapter.lunr = ((j1, window) => {
           logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_lunr_finished);
-        } // END j1CoreFinished && slimSelectFinished
+        } // END j1CoreFinished
       }, 10); // END dependencies_met_lunr_finished
     }, // END init
 
     // -------------------------------------------------------------------------
-    // uiEventHandler (topSearchModal)
+    // eventHandler (topSearchModal)
     // -------------------------------------------------------------------------
-    uiEventHandler: () => {
+    eventHandler: () => {
       const topSearchModalID = '#' + 'searchModal';
       var data               = [];
       var option             = {};
@@ -459,14 +260,14 @@ j1.adapter.lunr = ((j1, window) => {
       $(topSearchModalID).on('shown.bs.modal', (e) => {
         logger.debug('\n' + 'search modal shown');
 
-        if (searchHistoryEnabled) {
+        if (searchHstoryEnabled) {
           $searchHstoryWrapper  = document.getElementById(searchHistorySelectWrapper);
           searchHstoryWrapperID = '#' + $searchHstoryWrapper.id;
-          select                = document.getElementById('search_history');
-          $slimSelect           = select.slim;
+          selectList            = document.getElementById('search_history');
+          $slimSelect           = selectList.slim;
 
-          var searchHistory = j1.existsCookie(cookie_names.search_prompt)
-            ? j1.readCookie(cookie_names.search_prompt)
+          var searchHistory = j1.existsCookie(cookie_names.)
+            ? j1.readCookie(cookie_names.)
             : {};
 
           // set textHistory array
@@ -478,7 +279,7 @@ j1.adapter.lunr = ((j1, window) => {
           var option  = {};
           var html;
           textHistory.forEach ((historyText) => {
-            html    = '<span id="opt_' + topSearchOptions.search_history_id + '_' + index + '" class="ss-option-delete">' + '<i class="mdib mdib-close mdib-16px ml-1 mr-2"></i></span>' + historyText;
+            html    = '<span id="opt_' + geminiOptions.prompt_history_id + '_' + index + '" class="ss-option-delete">' + '<i class="mdib mdib-close mdib-16px ml-1 mr-2"></i></span>' + historyText;
             option  = {
               text:     historyText,
               html:     html,
@@ -496,13 +297,13 @@ j1.adapter.lunr = ((j1, window) => {
             logger.debug('\n' + 'show search history on id: ' + searchHstoryWrapperID);
             $(searchHstoryWrapperID).show();
           }
-        } // END if searchHistoryEnabled
+        } // END if searchHstoryEnabled
       }); // END on shown modal
 
       // on modal 'hidden' add search query to history
       $(topSearchModalID).on('hidden.bs.modal', (e) => {
         logger.debug('\n' + 'search modal hidden');
-        if (searchHistoryEnabled) {
+        if (searchHstoryEnabled) {
           var currentSearchQuery = $('#search-query').val();
           option = {
             text:     currentSearchQuery,
@@ -513,16 +314,19 @@ j1.adapter.lunr = ((j1, window) => {
           data.push(option);
           $slimSelect.setData(data);
           // add current currentSearchQuery to history
-        } // end if searchHistoryEnabled
+        } // end if searchHstoryEnabled
       }); // END on hidden modal
 
       // add current search query to history
       $('#send-to-history').on('click', () => {
         var currentQuery = $('#search-query').val();
-        var historySet   = false;
 
-        if (searchHistoryFromCookie) {
-          var searchHistory = j1.existsCookie(cookie_names.search_prompt)
+
+
+
+
+        if (searchHstoryFromCookie) {
+          var searchHistory = j1.existsCookie(cookie_names.)
             ? j1.readCookie(cookie_names.search_prompt)
             : {};
 
@@ -531,7 +335,8 @@ j1.adapter.lunr = ((j1, window) => {
         } // END re-read current history from cookie
 
         // set initial prompt from input (input)
-        prompt = queryInput.value.replace(/\s+$/g, '');
+          prompt = queryInput.value.replace(/\s+$/g, '');
+        }
 
         // check if current prompt alreay exists in history
         index = textHistory.indexOf(prompt);
@@ -541,13 +346,17 @@ j1.adapter.lunr = ((j1, window) => {
           logger.debug(logText);
         }
 
-        // update history on searchHistoryMax
-        if (textHistory.length === searchHistoryMax && allowSearchHistoryUpdatesOnMax && !itemExists && !historySet) {
+        // update history on promptHistoryMax
+        if (textHistory.length === promptHistoryMax && allowPromptHistoryUpdatesOnMax && !itemExists && !historySet) {
           // place the CURRENT history element FIRST for replacement
           textHistory.reverse();
           if (queryInput.value.length > 0) {
             // cleanup input value for trailing whitespaces
             newItem = queryInput.value.replace(/\s+$/g, '');
+          } else if (queryInput.value.length === 0) {
+            // use default prompt
+            newItem = defaultPrompt.replace(/\s+$/g, '');
+            logger.debug('\n' + 'sendButton, use default prompt:\n' + newItem);
           }
 
           logger.debug('\n' + 'sendButton, update item in history:\n' + textHistory[0]);
@@ -556,15 +365,18 @@ j1.adapter.lunr = ((j1, window) => {
           logger.debug('\n' + 'sendButton, add new item to history:\n' + textHistory[0]);
 
           historySet = true;
-        } // END update history on searchHistoryMax
+        } // END update history on promptHistoryMax
 
         // add new item to history
-        if (textHistory.length < searchHistoryMax && !itemExists && !historySet) {
+        if (textHistory.length < promptHistoryMax && !itemExists && !historySet) {
           if (queryInput.value.length > 0) {
             // cleanup input value for trailing whitespaces
             newItem = queryInput.value.replace(/\s+$/g, '');
+          } else if (queryInput.value.length === 0) {
+            // use default prompt
+            newItem = defaultPrompt.replace(/\s+$/g, '');
+            logger.debug('\n' + 'sendButton, use default prompt:\n' + newItem);
           }
-
           logger.debug('\n' + 'sendButton, add new item to history:\n' + newItem);
           textHistory.push(newItem);
 
@@ -600,7 +412,7 @@ j1.adapter.lunr = ((j1, window) => {
         var option  = {};
         var html;
         textHistory.forEach ((historyText) => {
-          html    = '<span id="opt_' + topSearchOptions.search_history_id + '_' + index + '" class="ss-option-delete">' + '<i class="mdib mdib-close mdib-16px ml-1 mr-2"></i></span>' + historyText;
+          html    = '<span id="opt_' + geminiOptions.prompt_history_id + '_' + index + '" class="ss-option-delete">' + '<i class="mdib mdib-close mdib-16px ml-1 mr-2"></i></span>' + historyText;
           option  = {
             text:     historyText,
             html:     html,
@@ -616,23 +428,33 @@ j1.adapter.lunr = ((j1, window) => {
 
         // display history container
         if (textHistory.length > 0) {
-          $("#search_history_select_wrapper").show();
+          $("#prompt_history_container").show();
         }
 
         // write current history to cookie
-        if (searchHistoryFromCookie) {
+        if (promptHistoryFromCookie) {
           logger.debug('\n' + 'sendButton, save prompt history to cookie');
           j1.removeCookie({
-            name:   cookie_names.search_prompt,
+            name:   cookie_names.chat_prompt,
             domain: auto_domain,
             secure: secure
           });
           cookie_written = j1.writeCookie({
-            name:   cookie_names.search_prompt,
+            name:   cookie_names.chat_prompt,
             data:   textHistory,
             secure: secure
           });
         } // END write current history to cookie
+      } // END if promptHstoryEnabled
+
+
+
+
+
+
+
+
+
       }); // END on click
 
       // clear|hide input|search results
@@ -641,109 +463,8 @@ j1.adapter.lunr = ((j1, window) => {
         $('#search-results').html('');
         $('#search-results').hide();
       }); // END on click
-    }, // END uiEventHandler (topSearchModal)
 
-    // -------------------------------------------------------------------------
-    // setupSlimSelectEventHandlers()
-    // set all used select events
-    // see: https://slimselectjs.com/
-    // -------------------------------------------------------------------------
-    setupSlimSelectEventHandlers: () => {
-      var select      = document.getElementById('search_history');
-      var $slimSelect = select.slim;
-      var slimValues;
-      var data;
-      var prompt;
-
-      $slimSelect.events.beforeOpen = (e) => {
-        // get all options
-        const slimValues   = $slimSelect.getData();
-        eventListenersReady = false;
-
-        logger.debug('\n' + 'slimSelect.beforeOpen, processing: started');
-
-        // re-read searchHistory from cookie for initial values
-        if (searchHistoryFromCookie) {
-          var searchHistory = j1.existsCookie(cookie_names.search_prompt)
-            ? j1.readCookie(cookie_names.search_prompt)
-            : {};
-
-          // set textHistory array
-          textHistory = Object.values(searchHistory);
-
-          // create|set slimSelect data elements
-          var index   = 1;
-          var data    = [];
-          var option  = {};
-          var html;
-          textHistory.forEach ((historyText) => {
-            html    = '<span id="opt_' + topSearchOptions.search_history_id + '_' + index + '" class="ss-option-delete">' + '<i class="mdib mdib-close mdib-16px ml-1 mr-2"></i></span>' + historyText;
-            option  = {
-              text:     historyText,
-              html:     html,
-              display:  true,
-              selected: false,
-              disabled: false
-            }
-            data.push(option);
-            index++;
-          }); // END forEach
-          $slimSelect.setData(data);
-
-        } // END re-read current history from cookie
-
-        // set searchHistory EventListeners (for option deletion)
-        if (slimValues.length) {
-          logger.debug('\n' + 'slimSelect.beforeOpen, number of eventListeners to process: #' + slimValues.length);
-          addSearchHistoryEventListeners(slimValues);
-        }
-
-        // wait until searchHistory eventListener|s is|are placed
-        var listenerIndex = 1;
-        slimValues.forEach( () => {
-          var span             = 'opt_prompt_history_' + listenerIndex;
-          var spanElement      = document.getElementById(span);
-          var dependencies_met_listeners_ready = setInterval (() => {
-            var spanElementReady = (($(spanElement).length) !== 0) ? true : false;
-            if (spanElementReady) {
-              if (listenerIndex === slimValues.length) {
-                eventListenersReady = true;
-                logger.debug('\n' + 'slimSelect.beforeOpen, all eventListeners ready');
-              } // END if listenerIndex
-            } // END if spanElementReady
-            if (!eventListenersReady) {
-              listenerIndex++;
-            } else {
-              clearInterval(dependencies_met_listeners_ready);
-            }
-          }, 10);
-        }); // END forEach data
-
-        var dependencies_beforeOpen_met_ready = setInterval (() => {
-          if (eventListenersReady) {
-            logger.debug('\n' + 'slimSelect.beforeOpen, processing: finished');
-
-            clearInterval(dependencies_beforeOpen_met_ready);
-          }
-        }, 10);
-      } // END event beforeOpen
-
-      $slimSelect.events.afterClose = (e) => {
-        // get selected value (NOTE: one||no selection possible)
-        const slimValue = $slimSelect.getSelected();
-
-        // set prompt on selection
-        if (slimValue.length) {
-          prompt = slimValue[0];
-          document.getElementById('search-query').value = prompt;
-          logger.debug('\n' + 'slimSelect.afterClose, selection from history: ' + prompt);
-        } else {
-          logger.debug('\n' + 'slimSelect.afterClose, selection from history: empty');
-          document.getElementById('search-query').value = '';
-        }
-      } // END event afterClose
-
-    }, // END setupSlimSelectEventHandlers()
+    }, // END eventHandler (topSearchModal)
 
     // -------------------------------------------------------------------------
     // messageHandler()

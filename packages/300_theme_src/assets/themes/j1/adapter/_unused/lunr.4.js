@@ -344,11 +344,11 @@ j1.adapter.lunr = ((j1, window) => {
             $slimSelect.setData(data);
 
             // hide|show history container
-            // if (textHistory.length) {
-            //   $("#search_history_select_wrapper").show();
-            // } else {
-            //   $("#search_history_select_wrapper").hide();
-            // }
+            if (textHistory.length) {
+              $("#search_history_select_wrapper").show();
+            } else {
+              $("#search_history_select_wrapper").hide();
+            }
 
             // -------------------------------------------------------------
             // setup Slim select eventHandlers

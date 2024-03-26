@@ -40,7 +40,7 @@ settings:
     # --------------------------------------------------------------------------
     #
     search_history_max:                 10
-    search_history_enabled:             false
+    search_history_enabled:             true
     search_history_from_cookie:         true
 
 # ------------------------------------------------------------------------------

@@ -72,6 +72,9 @@ defaults:
     allow_history_duplicates:           false
     allow_history_updates_on_max:       false
 
+    search_history_id:                  search_history
+    search_history_wrapper_id:          search_history_select_wrapper
+
     container_id:                       search_modal
     type:                               quicksearch                             # quicksearch | elasticsearch
     icon_family:                        mdib

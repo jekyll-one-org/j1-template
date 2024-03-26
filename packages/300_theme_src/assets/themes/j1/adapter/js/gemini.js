@@ -137,7 +137,7 @@ j1.adapter.gemini = ((j1, window) => {
   var $slimSelect;
   var textarea;
   var promptHistoryMax;
-  var promptHstoryEnabled;
+  var promptHistoryEnabled;
   var promptHistoryFromCookie;
   var allowPromptHistoryUpdatesOnMax;
 
@@ -158,7 +158,7 @@ j1.adapter.gemini = ((j1, window) => {
   var eventListenersReady;
 
   // ---------------------------------------------------------------------------
-  // Module variable settings
+  // module variable settings
   // ---------------------------------------------------------------------------
 
   // create settings object from module options
@@ -178,7 +178,7 @@ j1.adapter.gemini = ((j1, window) => {
   // ---------------------------------------------------------------------------
   // helper functions
   // ---------------------------------------------------------------------------
-  //
+
   function addPromptHistoryEventListeners(slimSelectData) {
     var index = 1;
     slimSelectData.forEach (() => {
@@ -554,7 +554,7 @@ j1.adapter.gemini = ((j1, window) => {
       hostname                = url.hostname;
       auto_domain             = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
       secure                  = (url.protocol.includes('https')) ? true : false;
-      promptHstoryEnabled     = geminiOptions.prompt_history_enabled;
+      promptHistoryEnabled    = geminiOptions.prompt_history_enabled;
       promptHistoryFromCookie = geminiOptions.prompt_history_from_cookie;
 
       var data;
@@ -570,11 +570,12 @@ j1.adapter.gemini = ((j1, window) => {
       // module initializer
       // -----------------------------------------------------------------------
       var dependencies_met_page_ready = setInterval (() => {
-        var pageState           = $('#content').css("display");
-        var pageVisible         = (pageState === 'block') ? true : false;
-        var j1CoreFinished      = (j1.getState() === 'finished') ? true : false;
-        var slimSelectFinished  = (j1.adapter.slimSelect.getState() === 'finished') ? true : false;
-        var uiLoaded            = (j1.xhrDOMState['#gemini_ui'] === 'success') ? true : false;
+        var pageState          = $('#content').css("display");
+        var pageVisible        = (pageState === 'block') ? true : false;
+        var j1CoreFinished     = (j1.getState() === 'finished') ? true : false;
+//      var slimSelectFinished = (j1.adapter.slimSelect.getState() === 'finished') ? true : false;
+        var slimSelectFinished = (Object.keys(j1.adapter.slimSelect.select).length) ? true : false;
+        var uiLoaded           = (j1.xhrDOMState['#gemini_ui'] === 'success') ? true : false;
 
         // check page ready state
         if (j1CoreFinished && pageVisible && slimSelectFinished && uiLoaded && modulesLoaded) {
@@ -610,7 +611,7 @@ j1.adapter.gemini = ((j1, window) => {
               logger.debug('\n' + 'initializing select data');
 
               // initialize history array from cookie
-              if (promptHstoryEnabled && promptHistoryFromCookie) {
+              if (promptHistoryEnabled && promptHistoryFromCookie) {
                 // get slimSelect object for the history (placed by slimSelect adapter)
                 // selectList                      = document.getElementById('prompt_history');
                 $slimSelect                     =  j1.adapter.slimSelect.select[geminiOptions.prompt_history_id];
@@ -675,7 +676,7 @@ j1.adapter.gemini = ((j1, window) => {
               } else {
                 // disable|hide clear history button
                 $("#clear").hide();
-              } // if promptHstoryEnabled
+              } // if promptHistoryEnabled
 
               clearInterval(dependencies_met_select_ready);
             } // END if modules loaded
@@ -907,7 +908,7 @@ j1.adapter.gemini = ((j1, window) => {
         event.preventDefault();
         event.stopPropagation();
 
-        if (promptHstoryEnabled) {
+        if (promptHistoryEnabled) {
           var historySet = false;
 
           // re-read current history from cookie for initial values
@@ -1036,7 +1037,7 @@ j1.adapter.gemini = ((j1, window) => {
               secure: secure
             });
           } // END write current history to cookie
-        } // END if promptHstoryEnabled
+        } // END if promptHistoryEnabled
 
         // clear results
         document.getElementById('md_result').innerHTML = '';
