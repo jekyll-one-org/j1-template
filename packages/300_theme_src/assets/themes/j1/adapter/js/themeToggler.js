@@ -159,11 +159,12 @@ j1.adapter.themeToggler = ((j1, window) => {
       // module initializer
       // -----------------------------------------------------------------------
       var dependencies_met_page_ready = setInterval (() => {
-        var pageState      = $('#content').css("display");
-        var pageVisible    = (pageState === 'block') ? true : false;
-        var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
+        var pageState         = $('#content').css("display");
+        var pageVisible       = (pageState === 'block') ? true : false;
+        var j1CoreFinished    = (j1.getState() === 'finished') ? true : false;
+        var navigatorFinished = (j1.adapter.navigator.getState() === 'finished') ? true: false;
 
-        if (j1CoreFinished && pageVisible) {
+        if (j1CoreFinished && pageVisible && navigatorFinished) {
           startTimeModule = Date.now();
 
           user_state = j1.readCookie(cookie_names.user_state);
@@ -172,15 +173,19 @@ j1.adapter.themeToggler = ((j1, window) => {
           logger.debug('\n' + 'set module state to: ' + _this.getState());
           logger.info('\n' + 'initializing module: started');
 
+          // -------------------------------------------------------------------
+          // Event Mgmt SHOULD moved ta navigator core
+          // -------------------------------------------------------------------
+
           // toggle themeToggler icon to 'dark' if required
           if ($('#quickLinksThemeTogglerButton').length) {
-            if (user_state.theme_name == dark_theme_name) {
+            if (user_state.theme_name === dark_theme_name) {
               $('#quickLinksThemeTogglerButton a i').toggleClass('mdib-lightbulb mdib-lightbulb-outline');
             }
           }
 
           $('#quickLinksThemeTogglerButton').click(function () {
-            if (user_state.theme_name == light_theme_name) {
+            if (user_state.theme_name === light_theme_name) {
               user_state.theme_name = dark_theme_name;
               user_state.theme_css  = dark_theme_css;
               user_state.theme_icon = 'mdib-lightbulb';

@@ -32,7 +32,6 @@ topsearch_options.enabled: {{topsearch_options.enabled | debug}}
 {% assign topsearch_id            = topsearch_options.container_id %}
 {% assign icon_family             = topsearch_options.icon_family | downcase %}
 {% assign placeholder             = topsearch_options.placeholder %}
-{% assign history_enabled         = topsearch_options.search_history_enabled %}
 {% assign search_heading_lead     = topsearch_options.search_heading_lead %}
 {% assign result_heading_lead     = topsearch_options.result_heading_lead %}
 {% assign search_icon             = topsearch_options.search_icon %}
@@ -70,7 +69,6 @@ topsearch_options.enabled: {{topsearch_options.enabled | debug}}
 {% if topsearch_options.enabled %}
 
   {% comment %} Modal Top Search
-  history_enabled: {{ history_enabled | debug }}
   ------------------------------------------------------------------------------ {% endcomment %}
   {% if quick_search %}
     <!-- [INFO   ] [~/includes/themes/j1/modules/searcher/procedures/topsearch.proc ] [ PLACE: modal top search: searchModal ] -->
@@ -93,23 +91,21 @@ topsearch_options.enabled: {{topsearch_options.enabled | debug}}
           <!-- MODAL Body -->
           <div class="modal-body">
 
-            {% if history_enabled %}
+            {% comment %} topsearch_options.history_enabled: {{ topsearch_options.history_enabled | debug }} {% endcomment %}
+
             <!-- SEARCH History -->
             <div id="search_history_select_wrapper"></div>
             <!-- END SEARCH History -->
-            {% endif %}
 
             <!-- SEARCH Container -->
             <div id="navigator_nav_topsearch" class="top-search mr-4">
+
               <!-- INPUT Form -->
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="mdib mdib-magnify mdib-2x mb-2" style="color:#9E9E9E"></i></span>
                   <input id="search-query" class="form-control" type="text" name="q" placeholder="{{placeholder}}" autocomplete="off">
-                  <span id="clear-topsearch" class="form-clear form-clear-searcher d-none" style="margin-top: 1.15rem; cursor: pointer"> <i class="mdib mdib-format-clear mdib-24px" style="color:#9E9E9E"></i> </span>
-                  {% if history_enabled %}
-                  <span id="send-to-history" style="margin-top: 1.15rem; margin-left: .75rem"> <i class="mdib mdib-send mdib-24px" style="color:#9E9E9E"></i> </span>
-                  {% endif %}
+                  <span id="clear-topsearch" class="form-clear form-clear-searcher d-none" style="margin-top: 1.15rem"> <i class="mdib mdib-format-clear mdib-24px" style="color:#9E9E9E"></i> </span>
                   <!-- button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="margin-top: 24px;"></button -->
                 </div>
               </div>

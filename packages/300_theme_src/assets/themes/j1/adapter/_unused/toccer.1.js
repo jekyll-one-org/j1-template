@@ -205,7 +205,7 @@ j1.adapter.toccer = (() => {
     // -------------------------------------------------------------------------
     initToccerCore: (options) => {
       var scrollOffsetCorrection  = scrollerOptions.smoothscroll.offsetCorrection;
-      var scrollOffset            = j1.getScrollOffset(scrollOffsetCorrection) + scrollOffsetCorrection;
+      var scrollOffset            = j1.getScrollOffset(scrollOffsetCorrection);
 
       _this.setState('running');
       logger.debug('\n' + 'state: ' + _this.getState());
@@ -239,22 +239,18 @@ j1.adapter.toccer = (() => {
             positionFixedClass:     'is-position-fixed',
             fixedSidebarOffset:     'auto',
             scrollContainer:        null,
-            scrollSmooth:           false,                                      // options.scrollSmooth,
-            scrollSmoothDuration:   0,                                          // options.scrollSmoothDuration,
-            scrollSmoothOffset:     0,                                          // scrollOffset,
-            onClick:                (event) => {
-                                      // jadams 2024-03-16: workaroud|browser's history
-                                      var currentURL = event.currentTarget.href;
-                                      // add current URL (anchor) to browser's history
-                                      history.pushState(null, null, currentURL);
-
-                                      // jadams 2024-03-16: use smooth scrolling from J1
-                                      // NOTE: all scrolling functions from tocbot DISABLED
-                                      setTimeout(() => {
-                                        j1.scrollToAnchor(currentURL);
-                                      }, 1500);
-                                    },
+            scrollSmooth:           options.scrollSmooth,
+            scrollSmoothDuration:   options.scrollSmoothDuration,
+            scrollSmoothOffset:     scrollOffset,
+//          scrollEndCallback:      function (event) {
+//                                    // jadams
+//                                    var bla =  '';
+//                                  },
             headingsOffset:         1,
+//          headingObjectCallback:  function (event) {
+//                                    // jadams
+//                                    var bla =  '';
+//                                  },
             throttleTimeout:        options.throttleTimeout
           });
           /* eslint-enable */

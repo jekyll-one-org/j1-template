@@ -68,10 +68,9 @@ defaults:
 
     search_history_max:                 30
     search_history_enabled:             false
+    search_history_from_cookie:         false
     allow_history_duplicates:           false
     allow_history_updates_on_max:       false
-    save_prompt_history_to_cookie:      false
-    read_prompt_history_from_cookie:    false
 
     container_id:                       search_modal
     type:                               quicksearch                             # quicksearch | elasticsearch

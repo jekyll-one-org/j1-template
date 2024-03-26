@@ -60,9 +60,9 @@ module.exports = {
   // there are only 6 heading levels and number 0 will collapse them all.
   // The sections that are hidden will open
   // and close as you scroll to headings within them.
-  collapseDepth: 3, // 0
+  collapseDepth: 0,
   // Smooth scrolling enabled.
-  scrollSmooth: false, // true,
+  scrollSmooth: false, //true,
   // Smooth scroll duration.
   scrollSmoothDuration: 0, // 420,
   // Smooth scroll offset.

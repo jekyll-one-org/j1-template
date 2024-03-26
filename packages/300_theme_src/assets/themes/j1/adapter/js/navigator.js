@@ -175,6 +175,14 @@ j1.adapter.navigator = ((j1, window) => {
   var user_session_merged         = {};
   var session_state               = {};
 
+  // switcher|state
+  var desktopThemesLocalLoaded    =  false;
+  var desktopThemesRemoteLoaded   =  false;
+  var mobileThemesLocalLoaded     =  false;
+  var mobileThemesRemoteLoaded    =  false;
+  var switcher;
+  var switcher_menu;
+
   var authClientEnabled;
   var appDetected;
   var json_data;
@@ -359,33 +367,6 @@ j1.adapter.navigator = ((j1, window) => {
         }, 10); // END dependencies_met_navigator_core_initialized
       } // END if themesEnabled
 
-
-
-      // -----------------------------------------------------------------------
-      // module initializer
-      // -----------------------------------------------------------------------
-      // load theme menu if themes enabled
-      // if (themesEnabled) {
-      //   logger.info('\n' + 'themes detected: enabled');
-      //
-      //   var dependencies_met_module_initialized = setInterval(() => {
-      //     var localThemesloaded  = (document.getElementById("local_themes").getElementsByTagName("li").length) ? true: false;
-      //     var remoteThemesloaded = (document.getElementById("remote_themes").getElementsByTagName("li").length) ? true: false;
-      //
-      //     if (localThemesloaded && remoteThemesloaded) {
-      //
-      //       //
-      //       // ???
-      //       //
-      //
-      //       clearInterval(dependencies_met_module_initialized);
-      //     } // END if localThemesloaded && remoteThemesloaded
-      //   }, 10); // END dependencies_met_module_initialized
-      // } else {
-      //   logger.info('\n' + 'themes detected: disabled');
-      // } // END if themesEnabled
-
-
       // -------------------------------------------------------------------
       // final initialization
       // -------------------------------------------------------------------
@@ -394,9 +375,7 @@ j1.adapter.navigator = ((j1, window) => {
         var pageVisible        = (pageState === 'block') ? true: false;
         var j1CoreFinished     = (j1.getState() === 'finished') ? true: false;
         var themesFinished     = (j1.adapter.themes.getState() === 'finished') ? true: false;
-        var localThemesloaded  = (document.getElementById("local_themes").getElementsByTagName("li").length) ? true: false;
-        var remoteThemesloaded = (document.getElementById("remote_themes").getElementsByTagName("li").length) ? true: false;
-        var themeMenuLoaded    = (localThemesloaded && remoteThemesloaded) ? true: false;
+        var themeMenuLoaded    = (desktopThemesLocalLoaded && desktopThemesRemoteLoaded) ? true: false;
 
         if (pageVisible && j1CoreFinished && themesFinished && themeMenuLoaded) {
 
@@ -413,34 +392,6 @@ j1.adapter.navigator = ((j1, window) => {
             navDefaults, navBarOptions, navMenuOptions,
             navQuicklinksOptions
           );
-
-          // setTimeout(() => {
-          //   // apply Navigator configuration settings
-          //   logger.info('\n' + 'apply configuration settings');
-          //   _this.applyNavigatorSettings (
-          //     navDefaults, navBarOptions,
-          //     navMenuOptions, navQuicklinksOptions
-          //   );
-          //
-          //   // apply general|global theme CSS settings
-          //   logger.info('\n' + 'apply CSS styles');
-          //   _this.applyThemeSettings (
-          //     navDefaults, navBarOptions, navMenuOptions,
-          //     navQuicklinksOptions
-          //   );
-          // }, {{template_config.page_on_load_timeout}} );
-
-          // (static) delay applying styles until added CSS data
-          // of the theme is processed by the browser
-          // TODO: Check why a timeout is required to load dynamic styles in a page
-          // setTimeout(() => {
-          //   // apply general|global theme CSS settings
-          //   logger.debug('\n' + 'initializing dynamic CSS styles');
-          //   _this.applyThemeSettings (
-          //     navDefaults, navBarOptions, navMenuOptions,
-          //     navQuicklinksOptions
-          //   );
-          // }, {{template_config.page_on_load_timeout}} );
 
           // detect J1 App state
           appDetected       = j1.appDetected();
@@ -1136,10 +1087,39 @@ j1.adapter.navigator = ((j1, window) => {
       // -----------------------------------------------------------------------
       //  process commands|actions
       // -----------------------------------------------------------------------
-      if (sender === 'j1.core.navigator' && message.type === 'state' && message.action === 'core_initialized') {
-        navigatorCoreInitialized = true;
-        logger.info('\n' + message.text);
-      }
+      if (sender === 'j1.navigator.core') {
+
+        if (message.type === 'state' && message.action === 'core_initialized') {
+          navigatorCoreInitialized = true;
+          logger.info('\n' + message.text);
+        }
+      } // END if sender j1.navigator.core
+
+      if (sender === 'j1.themes.switcher') {
+        switcher      = (message.action.includes("desktop")) ? 'desktop'  : 'mobile';
+        switcher_menu = (message.text.includes("local_themes")) ? 'local' : 'remote';
+
+        if (switcher === 'desktop') {
+          if (switcher_menu === 'local') {
+            desktopThemesLocalLoaded  = true;
+          } else {
+            desktopThemesRemoteLoaded = true;
+          }
+        } // END if switcher desktop
+
+        if (switcher === 'mobile') {
+          if (switcher_menu === 'local') {
+            mobileThemesLocalLoaded  = true;
+          } else {
+            mobileThemesRemoteLoaded = true;
+          }
+        } // END if switcher mobile
+
+        if (message.type === 'state' && message.action === 'desktop') {
+          navigatorCoreInitialized = true;
+          logger.info('\n' + message.text);
+        }
+      } // END if sender j1.themes.switcher
 
       return true;
     }, // END messageHandler

@@ -86,13 +86,13 @@ settings:
       #
       id:                               prompt_history
       name:                             prompt-history
-#     items:                            <select id="prompt_history" name="prompt-history"></select>
       items:                            <select multiple="" id="prompt_history" name="prompt-history"></select>
+
     # --------------------------------------------------------------------------
     # Search history (site search)
     #
     - select:                           search_history
-      enabled:                          true
+      enabled:                          false
 
       # CONTAINER settings
       # ------------------------------------------------------------------------

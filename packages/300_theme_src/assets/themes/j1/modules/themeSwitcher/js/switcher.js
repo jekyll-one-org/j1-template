@@ -52,11 +52,14 @@
   var domain       = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
   var secure       = (url.protocol.includes('https')) ? true : false;
   var logger       = log4javascript.getLogger('j1.themes.switcher');
+  var message      = {};
 
   var user_state;
   var user_state_json;
   var user_state_cookie;
   var user_state_detected;
+
+  var menu_type;
 
   // Constructor
   // ---------------------------------------------------------------------------
@@ -111,7 +114,6 @@
     // to load theme CSS from cookies, finally.
     // -------------------------------------------------------------------------
     switchTheme: function (name, cssFile) {
-
       var $this      = $(this);
       var settings   = $.extend({}, $.fn.ThemeSwitcher.defaults, $this.data('ThemeSwitcher'));
       var id         = settings.cssThemeLink;
@@ -316,6 +318,13 @@
             });
             base.$element.append(li);
         }); // END $.each
+
+        menu_type       = (base.$element[0].className.includes("dropdown-menu")) ? 'desktop'  : 'mobile';
+        message.type    = 'state';
+        message.action  = 'menu loaded for : ' + menu_type;
+        message.text    = 'menu loaded on id: ' + base.$element[0].id;
+        j1.sendMessage('j1.themes.switcher', 'j1.adapter.navigator', message);
+
         // END if element is 'ul'
       } else if (this.$element.is('select')) {
         logger.info('\n' + 'bootstrapThemeSelector: SELECT element selected');

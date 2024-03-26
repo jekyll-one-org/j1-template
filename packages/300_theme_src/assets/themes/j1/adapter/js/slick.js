@@ -179,8 +179,9 @@ j1.adapter.slick = ((j1, window) => {
         var pageState      = $('#content').css("display");
         var pageVisible    = (pageState == 'block') ? true : false;
         var j1CoreFinished = (j1.getState() == 'finished') ? true : false;
+        var atticFinished  = (j1.adapter.attic.getState() == 'finished') ? true : false;
 
-        if (j1CoreFinished && pageVisible) {
+        if (j1CoreFinished && pageVisible && atticFinished) {
           startTimeModule = Date.now();
 
           _this.setState('started');
@@ -240,7 +241,7 @@ j1.adapter.slick = ((j1, window) => {
               carouselResponsiveSettingsSTRING  = JSON.stringify(carouselResponsiveSettingsOBJ, null, 4);
               logger.debug('\n' + 'responsive settings on carousel id #{{carousel.id}}: ' + '\n' + carouselResponsiveSettingsSTRING);
 
-              $('.{{carousel.id | replace: '_','-' }}').on ('init', (event, slick) => {
+              $('.{{carousel.id | replace: '_','-' }}').on('init', function (event, slick) {
                 logger.debug('\n' + 'carousel initialized on id: {{carousel.id}}');
 
                 slick_lightbox_enabled = '{{carousel.lightbox.enabled}}';
@@ -277,7 +278,7 @@ j1.adapter.slick = ((j1, window) => {
                 if ($('#{{carousel.id}}_caption')) {
                   logger.debug ('\n' + 'adjust top position of arrows on id: {{carousel.id}}');
                   var buttons = $("#{{carousel.id}} > button");
-                  $.each ($(buttons), (index, button) => {
+                  $.each ($(buttons), function (index, button) {
                     $(button).addClass ('slick-arrow-{{carousel.id}}');
                   });
                 }
@@ -324,7 +325,7 @@ j1.adapter.slick = ((j1, window) => {
               }
 
               // set individual arrow positions for a carousel
-              $('.{{carousel.id | replace: '_','-' }}').on ('init afterChange', positionSlickArrows);
+              $('.{{carousel.id | replace: '_','-' }}').on('init afterChange', positionSlickArrows);
 
               // setup the carousel
               logger.debug ('\n' + 'carousel is being setup on id: ' + '{{carousel.id}}');

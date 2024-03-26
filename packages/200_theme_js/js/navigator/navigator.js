@@ -44,7 +44,10 @@ module.exports = function navigator ( options ) {
   // ---------------------------------------------------------------------------
   // global vars
   // ---------------------------------------------------------------------------
-  var message = {};
+  var cookie_names = j1.getCookieNames();
+  var user_state   = j1.readCookie(cookie_names.user_state);
+  var message      = {};
+
   var state;
   var logger;
   var logText;
@@ -58,7 +61,7 @@ module.exports = function navigator ( options ) {
   }, options );
 
   // ---------------------------------------------------------------------------
-  // main object
+  // main
   // ---------------------------------------------------------------------------
   return {
 
@@ -66,7 +69,7 @@ module.exports = function navigator ( options ) {
     // module initializer
     // -------------------------------------------------------------------------
     init: function( defaultOptions, menuOptions ) {
-      logger  = log4javascript.getLogger('j1.core.navigator');
+      logger = log4javascript.getLogger('j1.navigator.core');
 
       logger.debug('\n' + 'initializing module: started');
 
@@ -84,7 +87,7 @@ module.exports = function navigator ( options ) {
       message.type    = 'state';
       message.action  = 'core_initialized';
       message.text    = 'navigator core initialized';
-      j1.sendMessage('j1.core.navigator', 'j1.adapter.navigator', message);
+      j1.sendMessage('j1.navigator.core', 'j1.adapter.navigator', message);
 
       return true;
     },
@@ -94,7 +97,6 @@ module.exports = function navigator ( options ) {
     // -------------------------------------------------------------------------
     eventHandler: function(options) {
       var defaultOptions    = options;
-//    var logger            = log4javascript.getLogger('j1.core.navigator.eventHandler');
       var $getNav           = $('nav.navbar.navigator');
       var scrollDuration    = 300;
       var page_link;
@@ -354,6 +356,15 @@ module.exports = function navigator ( options ) {
       // https://stackoverflow.com/questions/5963669/whats-the-difference-between-event-stoppropagation-and-event-preventdefault
       // -----------------------------------------------------------------------
       $('.quicklink-nav').each(function() {
+
+        // ---------------------------------------------------------------------
+        // ThemeToggler
+        //
+
+        // -------------------------------------------------------------------
+        // Event Mgmt from themeToggler SHOULD placed here
+        // -------------------------------------------------------------------
+
         // ---------------------------------------------------------------------
         // QuickSearch
         //

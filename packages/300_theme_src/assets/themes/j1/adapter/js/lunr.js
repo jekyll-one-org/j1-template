@@ -244,28 +244,27 @@ j1.adapter.lunr = ((j1, window) => {
     }, // END init
 
     // -------------------------------------------------------------------------
-    // eventHandler
+    // eventHandler (topSearchModal)
     // -------------------------------------------------------------------------
     eventHandler: () => {
-      const topSearchModalID      = '#' + 'searchModal';
-      var data                    = [];
-      var option                  = {};
+      const topSearchModalID = '#' + 'searchModal';
+      var data               = [];
+      var option             = {};
 
-      $(topSearchModalID).on('shown.bs.modal', () => {
+      $(topSearchModalID).on('shown.bs.modal', (e) => {
         logger.debug('\n' + 'search modal shown');
 
         if (searchHstoryEnabled) {
-          $searchHstoryWrapper    = document.getElementById(searchHistorySelectWrapper);
-          searchHstoryWrapperID   = '#' + $searchHstoryWrapper.id;
-
-          selectList              = document.getElementById('search_history');
-          $slimSelect             = selectList.slim;
+          $searchHstoryWrapper  = document.getElementById(searchHistorySelectWrapper);
+          searchHstoryWrapperID = '#' + $searchHstoryWrapper.id;
+          selectList            = document.getElementById('search_history');
+          $slimSelect           = selectList.slim;
 
           // update|set slimSelect data elements
           textHistory.forEach((historyText) => {
             option = {
-              text: historyText,
-              display: true,
+              text:     historyText,
+              display:  true,
               selected: false,
               disabled: false
             }
@@ -278,18 +277,34 @@ j1.adapter.lunr = ((j1, window) => {
             logger.debug('\n' + 'show search history on id: ' + searchHstoryWrapperID);
             $(searchHstoryWrapperID).show();
           }
-        }
+        } // END if searchHstoryEnabled
+      }); // END on shown modal
 
-      });
+      // on modal 'hidden' add search query to history
+      $(topSearchModalID).on('hidden.bs.modal', (e) => {
+        logger.debug('\n' + 'search modal hidden');
+        if (searchHstoryEnabled) {
+          var currentSearchQuery = $('#search-query').val();
+          option = {
+            text:     currentSearchQuery,
+            display:  true,
+            selected: false,
+            disabled: false
+          }
+          data.push(option);
+          $slimSelect.setData(data);
+          // add current currentSearchQuery to history
+        } // end if searchHstoryEnabled
+      }); // END on hidden modal
 
-      // hide|clear results from top search
+      // clear|hide input|search results
       $('#clear-topsearch').on('click', () => {
-        $(this).addClass('d-none').prevAll(':input').val('');
-        $('#search-results').hide();
+        $('#search-query').val('');
         $('#search-results').html('');
-      });
+        $('#search-results').hide();
+      }); // END on click
 
-    }, // END eventHandler
+    }, // END eventHandler (topSearchModal)
 
     // -------------------------------------------------------------------------
     // messageHandler()

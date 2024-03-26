@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
  #  ~/js/tocbot/tocbot.js
- #  Tocbot v4.25.0 implementation for J1 Theme
+ #  Tocbot v4.12.0 implementation for J1 Theme
  #
  #  Product/Info:
  #  https://jekyll.one
@@ -9,7 +9,7 @@
  #  https://github.com/tscanlin/tocbot
  #
  #  Copyright (C) 2023, 2024 Juergen Adams
- #  Copyright (C) 2016 - 2024 Tim Scanlin
+ #  Copyright (C) 2016 Tim Scanlin
  #
  #  J1 Theme is licensed under MIT License.
  #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
@@ -22,10 +22,6 @@
 */
 
 // -----------------------------------------------------------------------------
-// jadams, 2024-03-26: DISBALED all scrolling functions
-// -----------------------------------------------------------------------------
-
-// -----------------------------------------------------------------------------
 // ESLint shimming
 // -----------------------------------------------------------------------------
 /* eslint indent: "off"                                                       */
@@ -33,10 +29,9 @@
 /* eslint semi: "off"                                                         */
 // -----------------------------------------------------------------------------
 
-/* eslint no-var: off */
 /**
  * Tocbot
- * Tocbot creates a table of contents based on HTML headings on a page,
+ * Tocbot creates a toble of contents based on HTML headings on a page,
  * this allows users to easily jump to different sections of the document.
  * Tocbot was inspired by tocify (http://gregfranko.com/jquery.tocify.js/).
  * The main differences are that it works natively without any need for jquery or jquery UI).
@@ -54,7 +49,7 @@
   } else {
     root.tocbot = factory(root)
   }
-})(typeof global !== 'undefined' ? global : window || global, function (root) {
+})(typeof global !== 'undefined' ? global : this.window || this.global, function (root) {
   'use strict'
 
   // Default options.
@@ -116,37 +111,16 @@
     }
   }
 
-  function getContentElement (options) {
-    try {
-      return options.contentElement || document.querySelector(options.contentSelector)
-    } catch (e) {
-      console.warn('Contents element not found: ' + options.contentSelector) // eslint-disable-line
-      return null
-    }
-  }
-
-  function getTocElement (options) {
-    try {
-      return options.tocElement || document.querySelector(options.tocSelector)
-    } catch (e) {
-      console.warn('TOC element not found: ' + options.tocSelector) // eslint-disable-line
-      return null
-    }
-  }
-
   /**
    * Destroy tocbot.
    */
   tocbot.destroy = function () {
-    var tocElement = getTocElement(options)
-    if (tocElement === null) {
-      return
-    }
-
     if (!options.skipRendering) {
       // Clear HTML.
-      if (tocElement) {
-        tocElement.innerHTML = ''
+      try {
+        document.querySelector(options.tocSelector).innerHTML = ''
+      } catch (e) {
+        console.warn('Element not found: ' + options.tocSelector); // eslint-disable-line
       }
     }
 
@@ -183,11 +157,11 @@
     this.state = {}
 
     // Init smooth scroll if enabled (default).
-    // if (options.scrollSmooth) {
-    //   options.duration = options.scrollSmoothDuration
-    //   options.offset = options.scrollSmoothOffset
-    //   tocbot.scrollSmooth = require('./scroll-smooth').initSmoothScrolling(options)
-    // }
+    if (options.scrollSmooth) {
+      options.duration = options.scrollSmoothDuration
+      options.offset = options.scrollSmoothOffset
+      tocbot.scrollSmooth = require('./scroll-smooth').initSmoothScrolling(options)
+    }
 
     // Pass options to these modules.
     buildHtml = BuildHtml(options)
@@ -196,23 +170,12 @@
     // For testing purposes.
     this._buildHtml = buildHtml
     this._parseContent = parseContent
-    this._headingsArray = headingsArray
 
     // Destroy it if it exists first.
     tocbot.destroy()
 
-    var contentElement = getContentElement(options)
-    if (contentElement === null) {
-      return
-    }
-
-    var tocElement = getTocElement(options)
-    if (tocElement === null) {
-      return
-    }
-
     // Get headings array.
-    headingsArray = parseContent.selectHeadings(contentElement, options.headingSelector)
+    headingsArray = parseContent.selectHeadings(options.contentSelector, options.headingSelector)
     // Return if no headings are found.
     if (headingsArray === null) {
       return
@@ -224,54 +187,49 @@
 
     // Render.
     if (!options.skipRendering) {
-      buildHtml.render(tocElement, nestedHeadings)
-    } else {
-      // No need to attach listeners if skipRendering is true, this was causing errors.
-      return this
+      buildHtml.render(options.tocSelector, nestedHeadings)
     }
 
     // Update Sidebar and bind listeners.
-    // this._scrollListener = throttle(function (e) {
-    //   buildHtml.updateToc(headingsArray)
-    //   !options.disableTocScrollSync && updateTocScroll(options)
-    //   var isTop = e && e.target && e.target.scrollingElement && e.target.scrollingElement.scrollTop === 0
-    //   if ((e && (e.eventPhase === 0 || e.currentTarget === null)) || isTop) {
-    //     buildHtml.updateToc(headingsArray)
-    //     if (options.scrollEndCallback) {
-    //       options.scrollEndCallback(e)
-    //     }
-    //   }
-    // }, options.throttleTimeout)
-
-    // this._scrollListener()
-    // if (options.scrollContainer && document.querySelector(options.scrollContainer)) {
-    //   document.querySelector(options.scrollContainer).addEventListener('scroll', this._scrollListener, false)
-    //   document.querySelector(options.scrollContainer).addEventListener('resize', this._scrollListener, false)
-    // } else {
-    //   document.addEventListener('scroll', this._scrollListener, false)
-    //   document.addEventListener('resize', this._scrollListener, false)
-    // }
+    this._scrollListener = throttle(function (e) {
+      buildHtml.updateToc(headingsArray)
+      !options.disableTocScrollSync && updateTocScroll(options)
+      var isTop = e && e.target && e.target.scrollingElement && e.target.scrollingElement.scrollTop === 0
+      if ((e && (e.eventPhase === 0 || e.currentTarget === null)) || isTop) {
+        buildHtml.updateToc(headingsArray)
+        if (options.scrollEndCallback) {
+          options.scrollEndCallback(e)
+        }
+      }
+    }, options.throttleTimeout)
+    this._scrollListener()
+    if (options.scrollContainer && document.querySelector(options.scrollContainer)) {
+      document.querySelector(options.scrollContainer).addEventListener('scroll', this._scrollListener, false)
+      document.querySelector(options.scrollContainer).addEventListener('resize', this._scrollListener, false)
+    } else {
+      document.addEventListener('scroll', this._scrollListener, false)
+      document.addEventListener('resize', this._scrollListener, false)
+    }
 
     // Bind click listeners to disable animation.
-    // var timeout = null
-    // this._clickListener = throttle(function (event) {
-    //
-    //   if (options.scrollSmooth) {
-    //     buildHtml.disableTocAnimation(event)
-    //   }
-    //   buildHtml.updateToc(headingsArray)
-    //   // Timeout to re-enable the animation.
-    //   timeout && clearTimeout(timeout)
-    //   timeout = setTimeout(function () {
-    //     buildHtml.enableTocAnimation()
-    //   }, options.scrollSmoothDuration)
-    // }, options.throttleTimeout)
-    //
-    // if (options.scrollContainer && document.querySelector(options.scrollContainer)) {
-    //   document.querySelector(options.scrollContainer).addEventListener('click', this._clickListener, false)
-    // } else {
-    //   document.addEventListener('click', this._clickListener, false)
-    // }
+    var timeout = null
+    this._clickListener = throttle(function (event) {
+      if (options.scrollSmooth) {
+        buildHtml.disableTocAnimation(event)
+      }
+      buildHtml.updateToc(headingsArray)
+      // Timeout to re-enable the animation.
+      timeout && clearTimeout(timeout)
+      timeout = setTimeout(function () {
+        buildHtml.enableTocAnimation()
+      }, options.scrollSmoothDuration)
+    }, options.throttleTimeout)
+
+    if (options.scrollContainer && document.querySelector(options.scrollContainer)) {
+      document.querySelector(options.scrollContainer).addEventListener('click', this._clickListener, false)
+    } else {
+      document.addEventListener('click', this._clickListener, false)
+    }
 
     return this
   }

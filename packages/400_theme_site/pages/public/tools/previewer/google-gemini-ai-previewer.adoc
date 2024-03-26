@@ -303,8 +303,10 @@ The end of the story should motivate the child to believe in themselves.
 Ich möchte einen Salat für eine Grillparty machen.
 Die Gäste mögen Feta, allerdings keine Nüsse und Oliven.
 Die Zubereitung sollte leicht zu verstehen sein.
-Bitte alle Angaben der Zutaten in Gramm.
-Weitere Ideen zum Rezept und zum Anrichten des Salats sind hilfreich.
+Das Rezept soll 6 Portionen ergeben.
+Eine Portion in Gramm soll etwa 200 Gramm betragen.
+Bitte alle Angaben der Zutaten und das Gesamtgewicht des Salats in Gramm.
+Weitere Ideen zum Rezept und zum Anrichten sind hilfreich.
 ----
 
 .Translations I

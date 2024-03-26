@@ -22,10 +22,6 @@
 */
 
 // -----------------------------------------------------------------------------
-// jadams, 2024-03-26: DISBALED all scrolling functions
-// -----------------------------------------------------------------------------
-
-// -----------------------------------------------------------------------------
 // ESLint shimming
 // -----------------------------------------------------------------------------
 /* eslint indent: "off"                                                       */
@@ -183,11 +179,11 @@
     this.state = {}
 
     // Init smooth scroll if enabled (default).
-    // if (options.scrollSmooth) {
-    //   options.duration = options.scrollSmoothDuration
-    //   options.offset = options.scrollSmoothOffset
-    //   tocbot.scrollSmooth = require('./scroll-smooth').initSmoothScrolling(options)
-    // }
+    if (options.scrollSmooth) {
+      options.duration = options.scrollSmoothDuration
+      options.offset = options.scrollSmoothOffset
+      tocbot.scrollSmooth = require('./scroll-smooth').initSmoothScrolling(options)
+    }
 
     // Pass options to these modules.
     buildHtml = BuildHtml(options)
@@ -231,47 +227,46 @@
     }
 
     // Update Sidebar and bind listeners.
-    // this._scrollListener = throttle(function (e) {
-    //   buildHtml.updateToc(headingsArray)
-    //   !options.disableTocScrollSync && updateTocScroll(options)
-    //   var isTop = e && e.target && e.target.scrollingElement && e.target.scrollingElement.scrollTop === 0
-    //   if ((e && (e.eventPhase === 0 || e.currentTarget === null)) || isTop) {
-    //     buildHtml.updateToc(headingsArray)
-    //     if (options.scrollEndCallback) {
-    //       options.scrollEndCallback(e)
-    //     }
-    //   }
-    // }, options.throttleTimeout)
-
-    // this._scrollListener()
-    // if (options.scrollContainer && document.querySelector(options.scrollContainer)) {
-    //   document.querySelector(options.scrollContainer).addEventListener('scroll', this._scrollListener, false)
-    //   document.querySelector(options.scrollContainer).addEventListener('resize', this._scrollListener, false)
-    // } else {
-    //   document.addEventListener('scroll', this._scrollListener, false)
-    //   document.addEventListener('resize', this._scrollListener, false)
-    // }
+    this._scrollListener = throttle(function (e) {
+      buildHtml.updateToc(headingsArray)
+      !options.disableTocScrollSync && updateTocScroll(options)
+      var isTop = e && e.target && e.target.scrollingElement && e.target.scrollingElement.scrollTop === 0
+      if ((e && (e.eventPhase === 0 || e.currentTarget === null)) || isTop) {
+        buildHtml.updateToc(headingsArray)
+        if (options.scrollEndCallback) {
+          options.scrollEndCallback(e)
+        }
+      }
+    }, options.throttleTimeout)
+    this._scrollListener()
+    if (options.scrollContainer && document.querySelector(options.scrollContainer)) {
+      document.querySelector(options.scrollContainer).addEventListener('scroll', this._scrollListener, false)
+      document.querySelector(options.scrollContainer).addEventListener('resize', this._scrollListener, false)
+    } else {
+      document.addEventListener('scroll', this._scrollListener, false)
+      document.addEventListener('resize', this._scrollListener, false)
+    }
 
     // Bind click listeners to disable animation.
-    // var timeout = null
-    // this._clickListener = throttle(function (event) {
-    //
-    //   if (options.scrollSmooth) {
-    //     buildHtml.disableTocAnimation(event)
-    //   }
-    //   buildHtml.updateToc(headingsArray)
-    //   // Timeout to re-enable the animation.
-    //   timeout && clearTimeout(timeout)
-    //   timeout = setTimeout(function () {
-    //     buildHtml.enableTocAnimation()
-    //   }, options.scrollSmoothDuration)
-    // }, options.throttleTimeout)
-    //
-    // if (options.scrollContainer && document.querySelector(options.scrollContainer)) {
-    //   document.querySelector(options.scrollContainer).addEventListener('click', this._clickListener, false)
-    // } else {
-    //   document.addEventListener('click', this._clickListener, false)
-    // }
+    var timeout = null
+    this._clickListener = throttle(function (event) {
+
+      if (options.scrollSmooth) {
+        buildHtml.disableTocAnimation(event)
+      }
+      buildHtml.updateToc(headingsArray)
+      // Timeout to re-enable the animation.
+      timeout && clearTimeout(timeout)
+      timeout = setTimeout(function () {
+        buildHtml.enableTocAnimation()
+      }, options.scrollSmoothDuration)
+    }, options.throttleTimeout)
+
+    if (options.scrollContainer && document.querySelector(options.scrollContainer)) {
+      document.querySelector(options.scrollContainer).addEventListener('click', this._clickListener, false)
+    } else {
+      document.addEventListener('click', this._clickListener, false)
+    }
 
     return this
   }

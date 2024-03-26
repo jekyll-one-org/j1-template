@@ -96,7 +96,7 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.toccer = (() => {
+j1.adapter.toccer = (function () {
 
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
@@ -109,17 +109,9 @@ j1.adapter.toccer = (() => {
   var toccerSettings      = {};
   var toccerOptions       = {};
   var frontmatterOptions  = {};
-
   var _this;
   var logger;
   var logText;
-
-  // date|time
-  var startTime;
-  var endTime;
-  var startTimeModule;
-  var endTimeModule;
-  var timeSeconds;
 
   // ---------------------------------------------------------------------------
   // helper functions
@@ -131,12 +123,12 @@ j1.adapter.toccer = (() => {
   return {
 
     // -------------------------------------------------------------------------
-    // adapter initializer
+    // initializer
     // -------------------------------------------------------------------------
-    init: (options) => {
+    init: function (options) {
 
       // -----------------------------------------------------------------------
-      // default module settings
+      // Default module settings
       // -----------------------------------------------------------------------
       var settings  = $.extend({
         module_name: 'j1.adapter.toccer',
@@ -144,77 +136,68 @@ j1.adapter.toccer = (() => {
       }, options);
 
       // -----------------------------------------------------------------------
-      // global variable settings
+      // Global variable settings
       // -----------------------------------------------------------------------
-      _this              = j1.adapter.toccer;
-      logger             = log4javascript.getLogger('j1.adapter.toccer');
+      _this               = j1.adapter.toccer;
+      logger              = log4javascript.getLogger('j1.adapter.toccer');
 
       // create settings object from frontmatter
-      frontmatterOptions = options != null ? $.extend({}, options) : {};
+      frontmatterOptions  = options != null ? $.extend({}, options) : {};
 
       // Load module DEFAULTS|CONFIG
-      toccerDefaults     = $.extend({}, {{toccer_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      toccerSettings     = $.extend({}, {{toccer_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      toccerOptions      = $.extend(true, {}, toccerDefaults, toccerSettings, frontmatterOptions);
+      toccerDefaults      = $.extend({}, {{toccer_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      toccerSettings      = $.extend({}, {{toccer_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      toccerOptions       = $.extend(true, {}, toccerDefaults, toccerSettings, frontmatterOptions);
 
       // Load scroller module DEFAULTS|CONFIG
-      scrollerDefaults   = $.extend({}, {{scroller_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      scrollerSettings   = $.extend({}, {{scroller_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      scrollerOptions    = $.extend(true, {}, scrollerDefaults, scrollerSettings);
+      scrollerDefaults    = $.extend({}, {{scroller_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      scrollerSettings    = $.extend({}, {{scroller_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      scrollerOptions     = $.extend(true, {}, scrollerDefaults, scrollerSettings);
 
       // initialize state flag
-      // _this.setState('started');
-      // logger.debug('\n' + 'state: ' + _this.getState());
-      // logger.info('\n' + 'module is being initialized');
+      _this.setState('started');
+      logger.debug('\n' + 'state: ' + _this.getState());
+      logger.info('\n' + 'module is being initialized');
 
-      // -----------------------------------------------------------------------
-      // module initializer
-      // -----------------------------------------------------------------------
-      var dependencies_met_toccer = setInterval (() => {
-        var pageState      = $('#content').css("display");
-        var pageVisible    = (pageState == 'block') ? true: false;
-        var j1CoreFinished = (j1.getState() == 'finished') ? true : false;
-        var toccerEnabled  = (j1.stringToBoolean(toccerOptions.toc)) ? true : false;
+      // save config settings into the toccer object for later access
+      _this['moduleOptions'] = toccerOptions;
 
-        if (toccerEnabled && j1CoreFinished && pageVisible) {
-          startTimeModule = Date.now();
+      if (j1.stringToBoolean(toccerOptions.toc)) {
+        var dependencies_met_navigator = setInterval (() => {
+          var pageState       = $('#content').css("display");
+          var pageVisible     = (pageState == 'block') ? true: false;
+          var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
 
-          _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized');
+          if (j1CoreFinished && pageVisible) {
 
-          _this.initToccerCore(toccerOptions);
+            _this.initToccerCore(toccerOptions);
+            _this.setState('finished');
 
-          // save config settings into the toccer object for later access
-          _this['moduleOptions'] = toccerOptions;
+            logger.debug('\n' + 'state: ' + _this.getState());
+            logger.info('\n' + 'module initialized successfully');
+            logger.debug('\n' + 'met dependencies for: j1');
 
-          _this.setState('finished');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'initializing module finished');
-
-          endTimeModule = Date.now();
-          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
-
-          clearInterval(dependencies_met_toccer);
-        } // END
-      }, 10); // END
+            clearInterval(dependencies_met_navigator);
+          }
+        }, 10);
+      }
     }, // END init
 
     // -------------------------------------------------------------------------
     // Initialize the toccer on page
     // -------------------------------------------------------------------------
-    initToccerCore: (options) => {
+    initToccerCore: function (options) {
       var scrollOffsetCorrection  = scrollerOptions.smoothscroll.offsetCorrection;
-      var scrollOffset            = j1.getScrollOffset(scrollOffsetCorrection) + scrollOffsetCorrection;
+      var scrollOffset            = j1.getScrollOffset(scrollOffsetCorrection);
 
       _this.setState('running');
       logger.debug('\n' + 'state: ' + _this.getState());
 
       // tocbot get fired if HTML portion is loaded (AJAX load finished)
+      //
       var dependencies_met_ajax_load_finished = setInterval (() => {
-        var ajaxLoadFinished = ($('#toc_mmenu').length) ? true : false;
 
-        if (ajaxLoadFinished) {
+        if ($('#toc_mmenu').length) {
           /* eslint-disable */
           tocbot.init({
             log:                    options.log,
@@ -239,26 +222,13 @@ j1.adapter.toccer = (() => {
             positionFixedClass:     'is-position-fixed',
             fixedSidebarOffset:     'auto',
             scrollContainer:        null,
-            scrollSmooth:           false,                                      // options.scrollSmooth,
-            scrollSmoothDuration:   0,                                          // options.scrollSmoothDuration,
-            scrollSmoothOffset:     0,                                          // scrollOffset,
-            onClick:                (event) => {
-                                      // jadams 2024-03-16: workaroud|browser's history
-                                      var currentURL = event.currentTarget.href;
-                                      // add current URL (anchor) to browser's history
-                                      history.pushState(null, null, currentURL);
-
-                                      // jadams 2024-03-16: use smooth scrolling from J1
-                                      // NOTE: all scrolling functions from tocbot DISABLED
-                                      setTimeout(() => {
-                                        j1.scrollToAnchor(currentURL);
-                                      }, 1500);
-                                    },
+            scrollSmooth:           options.scrollSmooth,
+            scrollSmoothDuration:   options.scrollSmoothDuration,
+            scrollSmoothOffset:     scrollOffset,
             headingsOffset:         1,
             throttleTimeout:        options.throttleTimeout
           });
           /* eslint-enable */
-
           logger.debug('\n' + 'met dependencies for: loadHTML');
           clearInterval(dependencies_met_ajax_load_finished);
         } // END AJAX load finished
@@ -267,29 +237,29 @@ j1.adapter.toccer = (() => {
     }, // END initToccerCore
 
     // -------------------------------------------------------------------------
-    // messageHandler()
-    // manage messages send from other J1 modules
+    // messageHandler: MessageHandler for J1 NAV module
+    // Manage messages (paylods) send from other J1 modules
     // -------------------------------------------------------------------------
-    messageHandler: (sender, message) => {
+    messageHandler: function (sender, message) {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
-      //  process commands|actions
+      //  Process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
 
         //
-        // place handling of command|action here
+        // Place handling of command|action here
         //
 
         logger.info('\n' + message.text);
       }
 
       //
-      // place handling of other command|action here
+      // Place handling of other command|action here
       //
 
       return true;
@@ -297,9 +267,9 @@ j1.adapter.toccer = (() => {
 
     // -------------------------------------------------------------------------
     // setState()
-    // sets the current (processing) state of the module
+    // Sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: (stat) => {
+    setState: function (stat) {
       _this.state = stat;
     }, // END setState
 
@@ -307,11 +277,11 @@ j1.adapter.toccer = (() => {
     // getState()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: () => {
+    getState: function () {
       return _this.state;
     } // END getState
 
-  }; // END main (return)
+  }; // END return
 })(j1, window);
 
 {% endcapture %}
