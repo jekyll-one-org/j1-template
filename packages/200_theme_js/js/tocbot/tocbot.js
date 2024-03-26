@@ -30,10 +30,10 @@
 // -----------------------------------------------------------------------------
 /* eslint indent: "off"                                                       */
 /* eslint no-undef: "off"                                                     */
+/* eslint no-unused-vars: "off"                                               */
 /* eslint semi: "off"                                                         */
 // -----------------------------------------------------------------------------
 
-/* eslint no-var: off */
 /**
  * Tocbot
  * Tocbot creates a table of contents based on HTML headings on a page,

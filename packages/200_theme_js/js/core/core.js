@@ -134,8 +134,8 @@ module.exports = (function (options) {
     // -------------------------------------------------------------------------
     parseHeadings: function () {
       var headings = parseContent.selectHeadings(
-        ".js-toc-content",
-        "h2, h3, h4, h5, h6"
+        '.js-toc-content',
+        'h2, h3, h4, h5, h6'
       );
       return headings;
     }, // END parseContent

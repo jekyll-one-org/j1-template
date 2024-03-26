@@ -12,6 +12,12 @@
 /* eslint semi: "off"                                                         */
 // -----------------------------------------------------------------------------
 
+/* eslint indent: "off"                                                       */
+/* eslint no-undef: "off"                                                     */
+/* eslint semi: "off"                                                         */
+// -----------------------------------------------------------------------------
+
+
 module.exports = function (options) {
   var forEach = [].forEach
   var some = [].some
