@@ -18,8 +18,7 @@ image:
 group:                                  Featured
 series:                                 Featured
 
-#tts:                                    false
-fab_menu_id:                            open_toc
+fab_menu_id:                            default
 comments:                               false
 regenerate:                             false
 

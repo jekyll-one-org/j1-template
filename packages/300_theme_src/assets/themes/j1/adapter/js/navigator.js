@@ -414,11 +414,6 @@ j1.adapter.navigator = ((j1, window) => {
             // Manage sticky NAV bars
             j1.core.navigator.navbarSticky();
 
-            // TODO: Check why a timeout is required to manage sticky NAV bars on RESIZE a page
-            // setTimeout(() => {
-            //   j1.core.navigator.navbarSticky();
-            // }, 500);
-
             // Scroll the page one pixel back and forth to get
             // the right position for the toccer
             $(window).scrollTop($(window).scrollTop()+1);
@@ -433,7 +428,7 @@ j1.adapter.navigator = ((j1, window) => {
           logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_module_initialized);
-        } // ENF if
+        } // END if
       }, 10); // END dependencies_met_module_initialized
     }, // END init
 
@@ -450,6 +445,7 @@ j1.adapter.navigator = ((j1, window) => {
       _this.modalEventHandler(auth_config);
 
       if (j1.appDetected() && j1.authEnabled()) {
+
         // Toggle/Set SignIn/SignOut icon|link in QuickLinks
         // See: https://stackoverflow.com/questions/13524107/how-to-set-data-attributes-in-html-elements
         if (user_session.authenticated === 'true') {
@@ -1095,7 +1091,7 @@ j1.adapter.navigator = ((j1, window) => {
         }
       } // END if sender j1.navigator.core
 
-      if (sender === 'j1.themes.switcher') {
+      if (sender === 'ThemeSwitcher') {
         switcher      = (message.action.includes("desktop")) ? 'desktop'  : 'mobile';
         switcher_menu = (message.text.includes("local_themes")) ? 'local' : 'remote';
 
