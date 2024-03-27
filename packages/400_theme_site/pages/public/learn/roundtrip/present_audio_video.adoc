@@ -32,7 +32,6 @@ permalink:                              /pages/public/learn/roundtrip/present_au
 resources:                              [
                                           animate,
                                           lightgallery, gallery, rouge,
-#                                         tiktocplayer,
                                           videojs, vimeoplayer
                                         ]
 resource_options:

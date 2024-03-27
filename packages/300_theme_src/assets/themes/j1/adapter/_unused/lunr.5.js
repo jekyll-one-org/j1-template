@@ -464,7 +464,7 @@ j1.adapter.lunr = ((j1, window) => {
       searchIput.addEventListener("input", (event) => {
         var prompt                = event.target.value;
         var clearTopSearchState   = $('#clear-topsearch').css("display");
-        var clearTopSearchHidden  = (clearTopSearchState === 'block') ? false : true;
+        var clearTopSearchHidden  = (sendToHistoryState === 'block') ? false : true;
 
         if (prompt.length >= 3) {
           if (clearTopSearchHidden) {

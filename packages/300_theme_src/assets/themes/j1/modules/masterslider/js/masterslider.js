@@ -2581,7 +2581,7 @@ MSSliderEvent.DESTROY               = 'ms_destroy';
 
     "use strict";
 
-    window.MasterSlider = function(){
+    window.MasterSlider = function() {
 
         // Default Options
         this.options = {

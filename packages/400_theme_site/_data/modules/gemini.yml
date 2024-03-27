@@ -69,7 +69,7 @@ settings:
   # ----------------------------------------------------------------------------
   #
   api_options:
-    apiKey:                             AIzaSyAtiLEW4oQiOJtGiPsdsGwMHi8O__7cqjU # <your-api-key>
+    apiKey:                             <your-api-key>
 
 # ------------------------------------------------------------------------------
 # END config

@@ -1,16 +1,16 @@
 ---
 title:                                  Speak2Me
-title_extention:                        Content samples for the TTS module
+title_extention:                        Samples for the TTS module
 tagline:                                Content samples
 
-date:                                   2023-07-26
+date:                                   2024-02-15
 #last_modified:                         2023-01-01
 
 description: >
                                         Speak2Me, a speech synthesise module for J1 Template, enables a so-called
                                         Text-To-Speech converter. The converter functionality allows users to sit
                                         back and listen to the browser read aloud the important contents on a
-                                        Web page.
+                                        webpage.
 keywords: >
                                         open source, free, template, jekyll, jekyllone, web,
                                         sites, static, jamstack, bootstrap,
@@ -27,15 +27,21 @@ tags:                                   [ Speech Synthesise, SST, Speak2Me, Prev
 book:
   cover:                                /assets/images/collections/books/biography/a_life_in_questions.jpg
 
+toc:                                    true
 tts:                                    true
 comments:                               false
+exclude_from_search:                    false
+fab_menu_id:                            open_toc
+personalization:                        true
 regenerate:                             false
 permalink:                              /pages/public/tools/previewer/speak2me/
 
 resources:                              [
-                                          animate, clipboard, carousel, comments,
-                                          justifiedGallery, lightbox, lightGallery,
-                                          masterslider, rouge, slick
+                                          animate,
+                                          clipboard, carousel, comments,
+                                          gallery, lightbox, lightgallery,
+                                          masonry, masterslider, rouge, slick,
+                                          videojs, vimeoplayer
                                         ]
 resource_options:
   - toccer:
@@ -75,13 +81,14 @@ resource_options:
 // https://github.com/acoti/articulate.js
 // https://codepen.io/meetselva/pen/EVaLmP
 //
+
 [role="dropcap"]
 Speak2Me, a speech synthesise module for J1 Template, enables a so-called
 Text-To-Speech converter. The converter functionality allows users to sit
 back and listen to the browser read aloud the important contents on a web
 page.
 
-This page provides typical content elements used for web pages. Run the
+This page provides typical content elements used for webpages. Run the
 converter to experience how those content elements are spoken.
 
 [role="mb-4"]
@@ -104,7 +111,7 @@ Note that *Text-To-Speech* conversion is *not* available on mobile devices.
 
 [role="mt-4"]
 mdi:clock-time-five-outline[24px, md-gray mr-2]
-*15-30 Minutes* to read
+*15-30 Minutes* to read.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
@@ -125,7 +132,7 @@ their complexity.
 [role="mt-4"]
 === Structured text
 
-Blocks in web pages that contain structured text refer to specific *sections*
+Blocks in webpages that contain structured text refer to specific *sections*
 or *elements* of content that are organized and formatted in a structured
 manner to improve readability and accessibility. These text blocks are
 designed to provide a clear and organized presentation for human users to
@@ -137,6 +144,7 @@ Typical elements are:
 * highlighted text blocks
 * embedded code blocks
 
+[role="mt-4"]
 ==== Technical terms
 
 Technological terms are specialized words or phrases used in a particular
@@ -148,19 +156,22 @@ experts.
 Because of current limitations of the synthesise module *Speak2Me*, words
 are marked as *specialized* words are *not* spoken.
 
-The following _Rouge_ themes are used for J1 Template:
+The following _Rouge_ themes are used for J1 Template (specialized words are
+not spoken):
 
-* light theme -- based on the Igor theme `igorpro`
-* dark theme -- based on the Monokai theme `monokai.sublime`
+* light theme — based on the Igor theme `igorpro`
+* dark theme — based on the Monokai theme `monokai.sublime`
 
+[role="mt-4"]
 ==== Highlighted text
 
-Text blocks highlighted in web pages refer to sections of text that have
+Text blocks highlighted in webpages refer to sections of text that have
 been visually emphasized to stand out from the surrounding content. These
 blocks are typically formatted using different styles, such as changing
 the background color, applying a border, or using bold or italic fonts to
 make them more noticeable and draw attention to important information.
 
+[role="mt-4 mb-5"]
 .Output example
 ----
 Startup the site ..
@@ -176,7 +187,7 @@ Configuration file: ...
 [role="mt-4"]
 ==== Code blocks
 
-In web pages, a code block refers to a section of code typically enclosed
+In webpages, a code block refers to a section of code typically enclosed
 within special HTML or programming language tags to indicate that the content
 inside should be interpreted as code and not regular text. These code blocks
 are often used to display and format HTML, CSS, JavaScript, or other
@@ -204,6 +215,7 @@ programming code snippets on a webpage.
 }
 ----
 
+[role="mt-4 mb-5"]
 .Javascript code
 [source, javascript]
 ----
@@ -225,28 +237,51 @@ function styleSheetLoaded(styleSheet) {
 [role="mt-4"]
 ==== Quotations
 
-Quotations in web pages are used to visually highlight an excerpt. They
-are designed to stand out from the regular text and clarify that the
-content is from another person, website, or any external source.
+Elements that povide quotations in webpages are used to visually highlight an
+excerpt. They are designed to stand out from the regular text and clarify that
+the content is from another person, website, or any external source.
 
-[quote, Jean-Paul Sartre]
+Example of a *single* line quote:
+
+"Don't do stupid things twice. The selection is too big for that."
+-- Jean-Paul Sartre
+
+Example of a *multiline* line written quote:
+
+[quote, Albert Einstein]
 ____
-Don't do stupid things twice. The selection is too big for that.
+What frightens me is not the destructive power of the bomb,
+but the explosive power of the human heart for evil.
 ____
 
+[role="mt-4"]
+==== Parallax Quote
+
+To show a more eye-catching quote, a parallax quote can be used.
+
+++++
+<div id="banner_home_parallax" class="elevated-z0"></div>
+++++
+
+[role="mt-4"]
+Parallax quotes are used typically on landing pages to present e.g. the
+general idea of a website or can be used as an delimiter element on
+webpages.
 
 [role="mt-4"]
 === Ordered text
 
 Headlines and paragraphs are commonly used to structure the content of a
-web page, making it more readable. See such a structure below that is
+webpage, making it more readable. See such a structure below that is
 typically used in larger text like articles, or books.
 
+[role="mt-4"]
 ==== Chapter One
 
     Tyrion Lannister stood resolute upon the prow of the majestic vessel,
 the Wind's Grace, its timeworn planks creaking beneath his weight.
 
+[role="mt-4"]
 ===== Section One
 
     It was a gusty tempest, much like the swirling turmoil that had
@@ -256,53 +291,57 @@ Westeros.
 [role="mt-5"]
 == Links
 
-Links are an essential part of all web pages. They allow users to navigate
-between different *pages* and *websites*. In HTML, links are created using
-the anchor tag `<a>`. The anchor tag defines a hyperlink, a *clickable element*,
-that takes the user to *another* web page or a specific location on the *same page*.
+Elements for linking are an essential part of all webpages. They allow users
+to navigate between different *pages* and *websites*. In HTML, links are
+created by using the anchor tag `<a>`. The anchor tag defines a hyperlink, a
+*clickable* element, that takes the user to *another* webpage or a specific
+location on the *same* page.
 
 [role="mt-4"]
 === Inline Links
 
-Inline links are hyperlinks embedded directly within the content of a paragraph
-or any other text element on a web page. These links allow users to navigate
-to other web pages, resources, or sections of the same page by clicking on
-the linked *text* element.
+Links are place inline a text are hyperlinks embedded directly within the
+content of a paragraph or any other text element on a webpage. Inline links
+allow users to navigate to other webpages, resources, or sections of the same
+page by clicking on the linked *text* element.
 
+[role="mt-4"]
 ==== Inline Link Example
 
-All websites created by _Jekyll_ are based on Themes, a template
-system to ease the creation process of web pages, design, styles, navigation
-elements and more. For a wide range of website types, the
-link:{url-jamstack-club--j1-theme}[J1 Theme, {browser-window--new}] accessible
-at the Jamstack Club can be used. Check the preview function and, if the Jekyll
-Theme meet your needs, you can create a example web from here:
-link:{url-j1--rocketstart}[Rocketstart - Create A Internet Site In Minutes, {browser-window--new}].
+All websites created by _Jekyll_ are based on Themes, a template system to
+ease the creation process of webpages, design, styles, navigation elements
+and more. For a wide range of website types, the
+link:{url-jamstack-club--j1-theme}[J1 Theme, {browser-window--new}]
+accessible at the Jamstack Club can be used. Check the preview function and,
+if the Jekyll Theme meet your needs, you can create a example web from here:
+link:{url-j1--rocketstart}[Rocketstart, {browser-window--new}] to create a
+site on the Internet in minutes.
 
 [role="mt-4"]
 === Link Block
 
-A *block of links* refers to a section in a webpage containing a collection
+A *block* of links refers to a section in a webpage containing a collection
 of organized hyperlinks. These links lead to different pages, resources, or
 external websites. Such blocks are commonly used to present links to point
 the reader to related content resources.
 
+[role="mt-4"]
 ==== Link Block Example
 
 Find more to know: +
 mdi:link-variant[24px, md-gray mr-2 ml-3]
-link:{url-jamstack-club--j1-theme}[J1 Theme at Jamstack Club, {browser-window--new}] +
+J1 Theme at link:{url-jamstack-club--j1-theme}[Jamstack Club, {browser-window--new}] +
 mdi:link-variant[24px, md-gray mr-2 ml-3]
-link:{url-jamstack-club--themes}[Popular SSGs and Themes at Jamstack Club, {browser-window--new}] +
+Popular SSGs and Themes at link:{url-jamstack-club--themes}[Jamstack Club, {browser-window--new}] +
 mdi:link-variant[24px, md-gray mr-2 ml-3]
-link:{url-jekyll-themes--home}[Popular SSGs and Themes at Jekyll Themes, {browser-window--new}]
+Popular SSGs and Themes at link:{url-jekyll-themes--home}[Jekyll Themes, {browser-window--new}]
 
 [role="mt-5"]
 == Information Blocks
 
-Information elements draw the reader to certain statements by labeling them
-as priorities displayed in separate blocks. The J1 template system provides
-five types shown by the following examples.
+Elements for users' information draw the reader to certain statements by
+labeling them as priorities displayed in separate blocks. The J1 template
+system provides five types shown by the following examples.
 
 [NOTE]
 ====
@@ -340,10 +379,10 @@ harm, or consequences for the wrong usage.
 [role="mt-5"]
 == Tables
 
-Table elements are used to organize and display data in a structured format.
-Tables consist of rows and columns, and they are primarily used to present
-tabular data such as technical data and other types of information that
-require a grid-like layout.
+Elements displayed as tables are used to organize and present data in a
+structured format. Tables consist of rows and columns, and they are primarily
+used to present tabular data such as technical data and other types of
+information that require a grid-like layout.
 
 .Files and Folders
 [cols="4a, 8a", width="100%", options="header", role="rtable mt-4"]
@@ -365,15 +404,15 @@ date: `title.MARKUP`.
 [role="mt-5"]
 == Lists
 
-Lists are used to organize and present information in a structured and
-easily readable format. The element is commonly used for creating navigation
-menus and content outlines, steps in a process, and various other scenarios
-where a structured presentation of information is required.
+List elements are used to organize and present information in a structured
+and easily readable format. Those elements are commonly used for creating
+navigation menus and content outlines, steps in a process, and various other
+scenarios where a structured presentation of information is required.
 
 [role="mt-4"]
 === Unordered list
 
-An unordered list represents a collection of items where the order of the
+A unordered list represents a collection of items where the order of the
 items is not significant. The list elements are typically displayed with
 bullet points, or other marker symbols, preceding each item.
 
@@ -386,7 +425,7 @@ An unordered list may look-alike:
 [role="mt-4"]
 === Ordered list
 
-An ordered list is a way to present a list of items in a specific order,
+A ordered list is a way to present a list of items in a specific order,
 where each item is preceded by a sequential number or letter. It's often
 used when you want to display information step-by-step or hierarchically.
 
@@ -401,7 +440,7 @@ Here's an example of how an ordered list is displayed:
 
 A definition list is a element used to create a list of terms and their
 corresponding definitions. It typically present a glossary, a set of
-key-value pairs, or any situation where you must associate terms with
+key-value pairs, or any situation where you have to associate terms with
 their explanations.
 
 [role="mt-4"]
@@ -420,14 +459,14 @@ only loads plain HTML files.
 [role="mt-5"]
 == Images
 
-There are two general image types used on web pages: block and inline
+There are two general types of image used on webpages: block and inline
 images.
 
 [role="mt-4"]
 === Inline image
 
-An inline image is displayed in the flow of another element, such as a
-paragraph block.
+An image placed *inline* is displayed in the flow of another element, such
+as a paragraph block.
 
 [role="mt-4"]
 image:{{page.book.cover}}[height=480, role="mr-4 mb-2 float-left"]
@@ -454,28 +493,27 @@ In that book, Paxman tells some terrific stories and laughs at much of the
 silliness in the world. A Life in Questions charts the life of the greatest
 political interviewer of our time.
 
-
 [role="mt-4"]
 === Block image
 
-A block image is displayed as a discrete element on its own line in a
-document. Web pages use block images for various purposes to enhance
-visual appeal, convey information, and improve the overall user
-experience.
+A *block* image is displayed as a *discrete* element on its own line in a
+document. Webpages use block images for various purposes to enhance
+visual appeal, convey information, and improve the overall user experience.
 
 image::/assets/images/pages/panels/responsive-text-1920x800.jpg[{{page.title}}, width=1280, role="mb-4"]
 
+[role="mt-4 mb-5"]
 [NOTE]
 ====
-Carefully chosen and well-placed images can significantly enhance
-the overall effectiveness of a web page.
+Carefully chosen and well-placed images can significantly enhance the overall
+effectiveness of a webpage.
 ====
 
 [role="mt-4"]
 [#lightbox2]
 == Lightbox
 
-Lightboxes are UI elements commonly used in web pages for various purposes.
+Lightboxes are UI elements commonly used in webpages for various purposes.
 They serve as a way to display content or interact with users without
 requiring them to navigate away from the current page. This UI element
 is typically designed to grab the user's attention and provide a focused
@@ -492,9 +530,9 @@ lightbox::example-group[ 395, {data-images-group}, group, role="mb-4 wm-800" ]
 [role="mt-5"]
 == Carousel
 
-Standard carousels dor J1 Template are based on OWL Carousel *V1* in the
-latest version. OWL Carousel is a clean and neat _jQuery_ slider plugin for
-creating fully responsive and touch-enabled carousels.
+Standard carousels for J1 Template are based on OWL Carousel *V1* in the
+latest version. This carousel is a clean and neat _jQuery_ slider plugin
+for creating fully responsive and touch-enabled carousels.
 
 [role="mt-4"]
 === Text Carousel
@@ -507,18 +545,18 @@ simple text, for example.
 .Simple text
 carousel::demo_text_carousel[role="mb-4"]
 
-Important statements or topics can be placed on top of an article or
-a paragraph to give them better visibility. In one line, you can present
+Important statements or topics can be placed on top of an article or a
+paragraph to give them better visibility. In one line, you can present
 many facts to know animated for the reader's attention within a single
 line. No much space is needed!
 
 [role="mt-4"]
 === Parallax text
 
-A more eye-minded type of text-based slide show is a parallax text slider. If
-you want to emphasize your statements focussing the meaning, this kind of a
-slide show may be interesting. Image-based slide shows may draw off the
-reader's attention from the text, therefore a pure text-based presentation
+A more eye-minded type of text-based slide show is a parallax text slider.
+If you want to emphasize your statements focussing the meaning, this kind
+of a slide show may be interesting. Image-based slide shows may draw off
+the reader's attention from the text, therefore a pure text-based presentation
 maybe the better choice.
 
 .Parallax effect
@@ -561,11 +599,11 @@ slick::collection_carousel_biography[role="mb-5"]
 [role="mt-4"]
 == Slider
 
-_Masterslider_ is a Query plugin fully integrated into the J1 Template.
-Jekyll One uses the *free* version of Masterslider well-known as *MS Lite*.
-The lite version does *not* support all features of the *full* product.
-The functionality of *filters*, *layouts* are limited and *no* overlay
-techniques are supported by the MS Lite version.
+The tool _Masterslider_ is a Query plugin fully integrated into the J1
+Template. JekyllOne uses the *free* version of Masterslider well-known as
+*MS Lite*. The lite version does *not* support all features of the *full*
+product. The functionality of *filters*, *layouts* are limited and *no*
+overlay techniques are supported by the MS Lite version.
 
 [role="mt-4"]
 === Slider using Thumbs
@@ -585,11 +623,118 @@ masterslider::ms_00007[role="mt-4 mb-5"]
 == Galleries
 
 The J1 module link:{url-justified-gallery--home}[JustifiedGallery, {browser-window--new}]
-is a great tool to create *responsive* and high-quality *justified* image
-galleries. Jekyll One combines the gallery with a lightbox to enlarge the
-images of a gallery. See the gallery in action. And for sure, all what you see
-is even *responsive*. Change the size of your current browser width to see what
-will happen!
+is a great tool to create responsive and high-quality *justified* image
+galleries. JekyllOne combines the gallery with a lightbox to enlarge the
+images of a gallery. See the gallery in action. And for sure, all what you
+see is even *responsive*.
+
+[role="mt-4"]
+[TIP]
+====
+Change the size of your current browser width to see what will happen!
+====
 
 .Masonry grid Gallery
-gallery::jg_customizer[role="mb-5"]
+gallery::jg_old_times[role="mb-5"]
+
+
+[role="mt-5"]
+== Masonry Grid
+
+The J1 Masonry module is a great tool to create dynamic image galleries.
+Image galleries are popular on many websites, and masonry can be a useful
+tool for creating dynamic and visually appealing galleries.
+
+[role="mb-5"]
+[TIP]
+====
+Change the size of your current browser width to see what will happen!
+====
+
+.Image Cards
+masonry::image_fixed_height_lb[]
+
+[role="mt-4"]
+By using masonry, you can create a gallery that displays images of different
+sizes in an aesthetically pleasing and functional way.
+
+
+[role="mt-5"]
+== Audio Players
+
+Audio players can be embedded in webpages very easy by using the HTML5 audio
+tag `<audio>`. Browsers have a built-in multimedia framework for decoding
+and playing audio content directly within a webpage.
+
+.Ambient Piano
+audio::/assets/audio/sound-effects/ambient-piano.mp3[role="mt-4 mb-5"]
+
+
+[role="mt-4"]
+== Video Players
+
+Players for videos to be embedded in webpages are software components that
+integrate and play videos directly within a webpage or application. These
+players are essential for websites, blogs, and apps that want to display video
+content without requiring users to download the video file or use any external
+media player.
+
+Embedded video players provide a seamless and user-friendly way to present
+video content to your audience.
+
+[role="mt-4"]
+=== HTML5
+
+HTML5 Video opens the doors to your way of presenting video content. All
+modern browsers support the video tag `<video>` for the HTML5. Browsers have
+a built-in multimedia framework already for decoding and displaying video
+content. No need to use such proprietary software components anymore.
+
+.HTML5 Player
+video::/assets/videos/gallery/html5/video1.mp4[poster="/assets/videos/gallery/video1-poster.jpg" role="mt-4 mb-5"]
+
+[role="mt-4"]
+=== VideoJS
+
+VideoJS is an Open Source JavaScript framework and library for building
+custom video players for the web. It provides a flexible and customizable
+platform for displaying and controlling video content on websites and web
+applications.
+
+.VideoJS
+videojs::/assets/videos/gallery/html5/video1.mp4[poster="/assets/videos/gallery/video1-poster.jpg" role="mt-4 mb-5"]
+
+[role="mt-5"]
+=== YouTube
+
+YouTube is a popular online video-sharing platform that allows users to
+upload, view, share, and comment on videos. It was created in February 2005
+and acquired by Google in November 2006. YouTube provides a platform for
+people and organizations to publish various video content on the Web.
+
+.Last Carpool Karaoke
+youtube::nV8UZJNBY6Y[poster="/assets/videos/gallery/video_adele_last_carpool_caraoke_poster.jpg" role="mt-4 mb-5"]
+
+[role="mt-5"]
+=== Wistia
+
+Wistia is a marketing software and video hosting platform made for B2B
+marketers with free or paid plans. While Wistia may not be the
+*Big Man on Campus* like Vimeo, it still brings valuable functionality
+to the table for marketers and should be seriously considered as a viable
+video platform.
+
+.Wistia Video
+wistia::29b0fbf547[role="mt-5 mb-4"]
+
+[role="mt-5"]
+=== Vimeo
+
+Vimeo is an online video-sharing platform that allows users to upload,
+share, and view videos. It was founded in 2004 by a group of filmmakers
+and has since grown into a popular platform for individuals and businesses
+to showcase their videos. Vimeo is known for its emphasis on high-quality
+video content, creative expression, and a supportive community of creators.
+
+.Forever 21 Channel
+vimeo::179528528[role="mt-5 mb-7"]
