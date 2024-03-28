@@ -30,9 +30,9 @@ p.result-item-text {
 }
 
 span#clear-topsearch > i:hover {
-  color: #424242 !important;
+  color: var(--md-gray-500) !important;
 }
 
 span#send-to-history > i:hover {
-  color: #424242 !important;
+  color: var(--md-gray-500) !important;
 }

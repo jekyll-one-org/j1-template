@@ -210,14 +210,14 @@ settings:
             boxed:                      true
             margin-top:                 -150                                    # slideinfo position (pixel from slide top)
             title:                      The Art of Life
-            title_color:                var(--bs-gray-400)
+            title_color:                var(--md-gray-400)
             title_animated:             fadeInRight
             title_upcase:               false
             tagline:                    places to enjoy
-            tagline_color:              false                                   # false or or color: var(--bs-gray-600)
+            tagline_color:              false                                   # false or or color: var(--md-gray-600)
             tagline_animated:           fadeInLeft
             tagline_upcase:             false
-            description_color:          var(--bs-gray-500)
+            description_color:          var(--md-gray-500)
             description_animated:       fadeInRight
             description: >
                                         Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -235,14 +235,14 @@ settings:
             boxed:                      true
             margin-top:                 -150                                    # slideinfo position (pixel from slide top)
             title:                      The Art of Life
-            title_color:                var(--bs-gray-400)
+            title_color:                var(--md-gray-400)
             title_animated:             fadeInRight
             title_upcase:               false
             tagline:                    places to enjoy
-            tagline_color:              false                                   # false or or color: var(--bs-gray-600)
+            tagline_color:              false                                   # false or or color: var(--md-gray-600)
             tagline_animated:           fadeInLeft
             tagline_upcase:             false
-            description_color:          var(--bs-gray-500)
+            description_color:          var(--md-gray-500)
             description_animated:       fadeInRight
             description: >
                                         Consectetur adipisicing elit, sed do eiusmod tempor incididunt.
@@ -260,14 +260,14 @@ settings:
             boxed:                      true
             margin-top:                 -150                                    # slideinfo position (pixel from slide top)
             title:                      The Art of Life
-            title_color:                var(--bs-gray-400)
+            title_color:                var(--md-gray-400)
             title_animated:             fadeInRight
             title_upcase:               false
             tagline:                    places to enjoy
-            tagline_color:              false                                   # false or or color: var(--bs-gray-600)
+            tagline_color:              false                                   # false or or color: var(--md-gray-600)
             tagline_animated:           fadeInLeft
             tagline_upcase:             false
-            description_color:          var(--bs-gray-500)
+            description_color:          var(--md-gray-500)
             description_animated:       fadeInRight
             description: >
                                         Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -783,7 +783,7 @@ settings:
             rtext:                      300                                     # false or [100 .. 500]
             boxed:                      false
             title:                      Slider for bloggers
-            title_color:                var(--bs-gray-100)
+            title_color:                var(--md-gray-100)
             title_animated:             fadeInLeft
             title_upcase:               false
             tagline:                    false
@@ -815,11 +815,11 @@ settings:
             rtext:                      400                                     # false or [100 .. 500]
             boxed:                      false
             title:                      We love architecture websites
-            title_color:                var(--bs-gray-100)
+            title_color:                var(--md-gray-100)
             title_animated:             fadeInLeft
             title_upcase:               false
             tagline:                    false
-            tagline_color:              false                                   # false or or color: var(--bs-gray-100)
+            tagline_color:              false                                   # false or or color: var(--md-gray-100)
             tagline_animated:           false
             tagline_upcase:             false
             description:                false
@@ -847,11 +847,11 @@ settings:
             rtext:                      400                                     # false or [100 .. 500]
             boxed:                      false
             title:                      New Buildings, New Designs!
-            title_color:                var(--bs-gray-100)
+            title_color:                var(--md-gray-100)
             title_animated:             fadeInLeft
             title_upcase:               false
             tagline:                    false
-            # false or or color: var(--bs-gray-100)# '#7a7a7a'
+            # false or or color: var(--md-gray-100)# '#7a7a7a'
             tagline_animated:           false
             tagline_upcase:             false
             description:                false
@@ -879,11 +879,11 @@ settings:
             rtext:                      400                                     # false or [100 .. 500]
             boxed:                      false
             title:                      Greatest Modern Architect Designs
-            title_color:                var(--bs-gray-100)
+            title_color:                var(--md-gray-100)
             title_animated:             fadeInLeft
             title_upcase:               false
             tagline:                    false
-            tagline_color:              false                                   # false or or color: var(--bs-gray-100)
+            tagline_color:              false                                   # false or or color: var(--md-gray-100)
             tagline_animated:           false
             tagline_upcase:             false
             description:                false
@@ -948,14 +948,14 @@ settings:
             rtext:                      300                                     # false or [100 .. 500]
             boxed:                      false
             title:                      Childhood Memories
-            title_color:                var(--bs-gray-900)
+            title_color:                var(--md-gray-900)
             title_animated:             false
             title_upcase:               true
             tagline:                    John Wiliam
             tagline_color:              var(--bs-blue)
             tagline_animated:           false
             tagline_upcase:             false
-            description_color:          var(--bs-gray-700)
+            description_color:          var(--md-gray-700)
             description_animated:       false
             description: >
                                         Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
@@ -973,14 +973,14 @@ settings:
             rtext:                      300                                     # false or [100 .. 500]
             boxed:                      false
             title:                      Consectetuer adipiscing elit
-            title_color:                var(--bs-gray-900)
+            title_color:                var(--md-gray-900)
             title_animated:             fadeInRight
             title_upcase:               true
             tagline:                    John Wiliam
             tagline_color:              var(--bs-blue)
             tagline_animated:           false
             tagline_upcase:             true
-            description_color:          var(--bs-gray-700)
+            description_color:          var(--md-gray-700)
             description_animated:       false
             description: >
                                         Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
@@ -998,14 +998,14 @@ settings:
             rtext:                      300                                     # false or [100 .. 500]
             boxed:                      false
             title:                      Suspendissue ut pulvinar mauris
-            title_color:                var(--bs-gray-900)
+            title_color:                var(--md-gray-900)
             title_animated:             fadeInRight
             title_upcase:               true
             tagline:                    John Wiliam
             tagline_color:              var(--bs-blue)
             tagline_animated:           false
             tagline_upcase:             true
-            description_color:          var(--bs-gray-700)
+            description_color:          var(--md-gray-700)
             description_animated:       false
             description: >
                                         Lorem ipsum dolor sit amet, consectetur adipisicing elit,
@@ -1023,14 +1023,14 @@ settings:
             rtext:                      300                                     # false or [100 .. 500]
             boxed:                      false
             title:                      Sed dabibus sit amet felis
-            title_color:                var(--bs-gray-900)
+            title_color:                var(--md-gray-900)
             title_animated:             fadeInRight
             title_upcase:               true
             tagline:                    Gregory Wilson
             tagline_color:              var(--bs-blue)
             tagline_animated:           false
             tagline_upcase:             true
-            description_color:          var(--bs-gray-700)
+            description_color:          var(--md-gray-700)
             description_animated:       false
             description: >
                                         Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
@@ -1048,14 +1048,14 @@ settings:
             rtext:                      300                                     # false or [100 .. 500]
             boxed:                      false
             title:                      Cheetags on the edge
-            title_color:                var(--bs-gray-900)
+            title_color:                var(--md-gray-900)
             title_animated:             fadeInRight
             title_upcase:               true
             tagline:                    Gregory Wilson
             tagline_color:              var(--bs-blue)
             tagline_animated:           false
             tagline_upcase:             true
-            description_color:          var(--bs-gray-700)
+            description_color:          var(--md-gray-700)
             description_animated:       false
             description: >
                                         Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
@@ -1073,14 +1073,14 @@ settings:
             rtext:                      300                                     # false or [100 .. 500]
             boxed:                      false
             title:                      Consecteur adipiscing elit
-            title_color:                var(--bs-gray-900)
+            title_color:                var(--md-gray-900)
             title_animated:             fadeInRight
             title_upcase:               true
             tagline:                    Gregory Wilson
             tagline_color:              var(--bs-blue)
             tagline_animated:           false
             tagline_upcase:             true
-            description_color:          var(--bs-gray-700)
+            description_color:          var(--md-gray-700)
             description_animated:       false
             description: >
                                         Lorem ipsum dolor sit amet, consec tetuer adipiscing elit,

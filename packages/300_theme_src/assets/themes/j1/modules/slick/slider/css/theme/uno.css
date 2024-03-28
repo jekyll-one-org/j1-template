@@ -29,8 +29,8 @@ a.article-link:hover {
 /* Example slider
 -------------------------------------------------------------------------------- */
 h2.slide-item, h3.slide-item {
-    background: var(--bs-gray-400);
-    color: var(--bs-gray-800);
+    background: var(--md-gray-400);
+    color: var(--md-gray-800);
     line-height: 150px;
     margin-right: 1%;
     margin-top:  0px;
@@ -62,11 +62,11 @@ h2.slide-item, h3.slide-item {
 }
 
 .card [class*="header-"], .card [class*="content-"] {
-  color: var(--bs-gray-400) !important;
+  color: var(--md-gray-400) !important;
 }
 
 .card .card-title a {
-  color: var(--bs-gray-400) !important;
+  color: var(--md-gray-400) !important;
 }
 
 .card .card-title > a:focus,

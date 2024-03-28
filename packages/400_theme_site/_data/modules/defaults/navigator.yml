@@ -84,12 +84,12 @@ defaults:
     fixed:                              true
     style:                              overlay
     color:                              light
-    nav_item_color:                     var(--bs-gray-900)
-    nav_item_color_hover:               var(--bs-gray-300)
-    nav_item_background_image:          'linear-gradient(var(--bs-gray-300), var(--bs-gray-900) 40%, var(--bs-gray-900));'
+    nav_item_color:                     var(--md-gray-900)
+    nav_item_color_hover:               var(--md-gray-300)
+    nav_item_background_image:          'linear-gradient(var(--md-gray-300), var(--md-gray-900) 40%, var(--md-gray-900));'
     position:                           left
     bottom_line_height:                 1
-    bottom_line_color:                  var(--bs-gray-300)
+    bottom_line_color:                  var(--md-gray-300)
     background_color_full:              'rgba(255, 255, 255, 0.8)'              # rgba(0, 0, 0, 0.8) lighten-800
     background_color_scrolled:          'var(--bs-primary)'                     # default: theme|bs-primary
 
@@ -133,10 +133,10 @@ defaults:
     megamenu_font_size:                 small
     icon_family:                        mdib
     icon_style:                         mdib                                    # far regular icon
-    icon_color:                         var(--bs-gray-500)
+    icon_color:                         var(--md-gray-500)
     icon_size:                          mdib-sm
-    menu_item_color:                    var(--bs-gray-900)
-    menu_item_color_hover:              var(--bs-gray-300)
+    menu_item_color:                    var(--md-gray-900)
+    menu_item_color_hover:              var(--md-gray-300)
     dropdown_style:                     raised
     dropdown_color:                     var(--bs-blue)
     dropdown_left:                      12                                      # px
@@ -150,12 +150,12 @@ defaults:
     dropdown_font_size:                 small
     dropdown_padding_x:                 18                                      # rem
     dropdown_padding_y:                 10                                      # px
-    dropdown_item_color:                var(--bs-gray-900)
+    dropdown_item_color:                var(--md-gray-900)
     dropdown_border_color:              var(--bs-blue)
     dropdown_border_top:                0                                       # 3, px
     dropdown_border_radius:             2                                       # px
-    dropdown_background_color_hover:    var(--bs-gray-300)
-    dropdown_background_color_active:   var(--bs-gray-500)
+    dropdown_background_color_hover:    var(--md-gray-300)
+    dropdown_background_color_active:   var(--md-gray-500)
 
   # ----------------------------------------------------------------------------
   # NavQuicklinks
@@ -168,8 +168,8 @@ defaults:
     xhr_data_path:                      /assets/data/quicklinks/index.html
 
     icon_family:                        mdib
-    icon_color:                         var(--bs-gray-900)
-    icon_color_hover:                   var(--bs-gray-500)
+    icon_color:                         var(--md-gray-900)
+    icon_color_hover:                   var(--md-gray-500)
     icon_size:                          mdib-2x
 
     # Link buttons

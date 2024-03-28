@@ -24,8 +24,6 @@ topsearch_options.enabled: {{topsearch_options.enabled | debug}}
 
 {% comment %} Liquid procedures
 -------------------------------------------------------------------------------- {% endcomment %}
-{% capture select_color     %}themes/{{site.template.name}}/procedures/global/select_color.proc{% endcapture %}
-{% capture select_icon_size %}themes/{{site.template.name}}/procedures/global/select_icon_size.proc{% endcapture %}
 
 {% comment %} Set quicksearch properties
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -57,12 +55,6 @@ topsearch_options.enabled: {{topsearch_options.enabled | debug}}
 {% else %}
   {% assign icon_family = 'mdi' %}
 {% endif %}
-
-{% include {{select_color}} color=topsearch_options.icon_color fallback="#9E9E9E" %}
-{% capture icon_color %}style="color:{{color}}"{% endcapture %}
-
-{% include {{select_icon_size}} family=topsearch_options.icon_family size=topsearch_options.icon_size %}
-{% assign icon_size = size %}
 
 
 {% comment %} Main
@@ -101,10 +93,10 @@ topsearch_options.enabled: {{topsearch_options.enabled | debug}}
               <!-- INPUT Form -->
               <div class="form-group">
                 <div class="input-group">
-                  <span class="input-group-addon"><i class="mdib mdib-magnify mdib-2x mb-2" style="color:#9E9E9E"></i></span>
+                  <span class="input-group-addon"><i class="mdib mdib-magnify mdib-2x mb-2" style="color: var(--bs-gray-900)"></i></span>
                   <input id="search-query" class="form-control" type="text" name="q" placeholder="{{placeholder}}" autocomplete="off">
-                  <span id="clear-topsearch" class="form-clear form-clear-searcher d-none" style="display: none; cursor: pointer; margin-top: 1.15rem"> <i class="mdib mdib-format-clear mdib-24px" style="color:#9E9E9E"></i> </span>
-                  <span id="send-to-history" style="display: none; cursor: pointer; margin-top: 1.15rem; margin-left: .75rem"> <i class="mdib mdib-send mdib-24px" style="color:#9E9E9E"></i> </span>
+                  <span id="clear-topsearch" class="form-clear form-clear-searcher d-none" style="display: none; cursor: pointer; margin-top: 1.15rem"> <i class="mdib mdib-format-clear mdib-24px" style="color: var(--bs-gray-900)"></i> </span>
+                  <span id="send-to-history" style="display: none; cursor: pointer; margin-top: 1.15rem; margin-left: .75rem"> <i class="mdib mdib-send mdib-24px" style="color: var(--bs-gray-900)"></i> </span>
                 </div>
               </div>
               <!-- END INPUT Form -->

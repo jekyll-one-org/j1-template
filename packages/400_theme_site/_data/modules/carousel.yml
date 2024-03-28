@@ -200,7 +200,7 @@ settings:
         type:                           text
         parallax:                       true
         padding:                        75px 0 75px 75px
-        text_color:                     var(--bs-gray-300)
+        text_color:                     var(--md-gray-300)
         font_size:                      1.5rem
         font_weight:                    500
         background:                     /assets/images/quotes/default.jpg       # /assets/images/modules/attics/ideas-start-here-1920x1280-bw.jpg

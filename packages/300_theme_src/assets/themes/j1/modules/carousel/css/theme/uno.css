@@ -52,7 +52,7 @@ padding-left: 1px;
 
 .owl-carousel .item p {
   margin: 3px;
-  color: var(--bs-gray-700);
+  color: var(--md-gray-700);
 }
 
 .owl-carousel .item img {
@@ -72,8 +72,8 @@ padding-left: 1px;
  ------------------------------------------------------------------------------- */
 
 .owl-btn {
-  color: var(--bs-gray);
-  background: var(--bs-gray-100);
+  color: var(--md-gray);
+  background: var(--md-gray-100);
   cursor: pointer;
   font-size: 18px;
   padding: 2px 9px;
@@ -91,7 +91,7 @@ padding-left: 1px;
 }
 
 .owl-theme .owl-controls .owl-buttons div {
-    color: var(--bs-gray-900);
+    color: var(--md-gray-900);
     display: inline-block;
     zoom: 1;
     margin: 5px;

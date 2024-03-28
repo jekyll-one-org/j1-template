@@ -114,7 +114,7 @@ defaults:
       dir:                              h
       inset:                            false
       align:                            bottom
-      color:                            var(--bs-gray-800)
+      color:                            var(--md-gray-800)
       hideUnder:                        null
       margin:                           10
       width:                            4
@@ -123,7 +123,7 @@ defaults:
       enabled:                          false
       autohide:                         false
       overVideo:                        true
-      color:                            var(--bs-gray-300)
+      color:                            var(--md-gray-300)
       radius:                           4
       stroke:                           10
       hideUnder:                        null
