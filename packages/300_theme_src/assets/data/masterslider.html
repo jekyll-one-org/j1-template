@@ -120,10 +120,10 @@ module_version:               {{module_version | debug}}
 
   {% comment %} Set base icons and sizes
   ------------------------------------------------------------------------------ {% endcomment %}
-  {% assign slider_icon_family         = slider.icon_family %}
-  {% assign slider_icon_class          = slider.icon_class %}
-  {% assign slider_icon_color          = slider.icon_color %}
-  {% assign slider_icon_size           = slider.icon_size %}
+  {% assign slider_icon_family    = slider.icon_family %}
+  {% assign slider_icon_class     = slider.icon_class %}
+  {% assign slider_icon_color     = slider.icon_color %}
+  {% assign slider_icon_size      = slider.icon_size %}
 
   {% assign icon_family = slider_icon_family | strip | downcase %}
 
@@ -131,7 +131,7 @@ module_version:               {{module_version | debug}}
     {% assign slider_icon_family  = 'fa' %}
     {% assign slider_icon_class   = slider_icon_class %}
   {% elsif icon_family == 'mdi' %}
-    {% assign slider_icon_class  = 'mdi' %}
+    {% assign slider_icon_class   = 'mdi' %}
   {% else %}
     {% assign slider_icon_family  = 'mdi' %}
     {% assign slider_icon_class   = 'mdi' %}
@@ -189,13 +189,13 @@ module_version:               {{module_version | debug}}
         src="{{slide.background_image}}"
         alt="{{slide.alt}}" title="{{slide.title}}"
         data-src="{{slide.foreground_image}}"
-      />
+      >
 
       {% if slide.thumb_image %}
       <img
         class="ms-thumb" src="{{slide.thumb_image}}"
         alt="thumb_image_{{slider.id}}"
-      />
+      >
       {% endif %}
 
       {% comment %} Place Thumb Info
@@ -299,7 +299,7 @@ module_version:               {{module_version | debug}}
         {% endif %}
 
         {% if slide.slideinfo.boxed %}
-        <div class="j1-ms-info-boxed">
+        <div class="j1-ms-info-boxed" style="margin-top: {{slide.slideinfo.margin-top}}px !important">
         {% else %}
         <div class="j1-ms-info">
         {% endif %}

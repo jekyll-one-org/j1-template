@@ -77,7 +77,7 @@ defaults:
     container_id:                       search_modal
     type:                               quicksearch                             # quicksearch | elasticsearch
     icon_family:                        mdib
-    icon_color:                         "#FFFFFF"                               # md-white
+    icon_color:                         var(--bs-white)
     icon_size:                          mdib-2x
     search_icon:                        magnify
     clear_icon:                         format-clear

@@ -872,7 +872,7 @@ settings:
           autoplay:                     0
           byline:                       0
           portrait:                     0
-          color:                        CCCCCC
+          color:                        var(--bs-gray-100)
           muted:                        0
 
       # ------------------------------------------------------------------------

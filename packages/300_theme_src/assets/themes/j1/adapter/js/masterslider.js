@@ -77,13 +77,13 @@ j1.adapter.masterslider = ((j1, window) => {
 
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
-  var environment       = '{{environment}}';
-  var moduleVersion     = '{{module_version}}';
-  var sliderManager     = j1.stringToBoolean('{{slider_manager}}');
-  var lightboxEnabled   = j1.stringToBoolean('{{lightbox_enabled}}');
-  var saveSliderConfig  = j1.stringToBoolean('{{save_slider_config}}');
-  var newline           = '\n';
-  var state             = 'not_started';
+  var environment             = '{{environment}}';
+  var moduleVersion           = '{{module_version}}';
+  var sliderManager           = j1.stringToBoolean('{{slider_manager}}');
+  var lightboxEnabled         = j1.stringToBoolean('{{lightbox_enabled}}');
+  var saveSliderConfig        = j1.stringToBoolean('{{save_slider_config}}');
+  var newline                 = '\n';
+  var state                   = 'not_started';
 
   var masterSliderDefaults;
   var masterSliderSettings;
@@ -315,6 +315,7 @@ j1.adapter.masterslider = ((j1, window) => {
         const pluginOptions = options.plugins;
         var msSliderManager = sliderManager;
         var plugins         = {};
+
         var pluginSettings;
         var index;
         var i=0;
@@ -425,6 +426,7 @@ j1.adapter.masterslider = ((j1, window) => {
       var settings  = $.extend({}, options, slider);
       var control   = {};
       var setup     = {};
+
       var log_text;
 
       _this.setState('initialize_sliders');

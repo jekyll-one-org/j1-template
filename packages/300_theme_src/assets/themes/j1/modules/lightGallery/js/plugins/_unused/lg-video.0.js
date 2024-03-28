@@ -545,9 +545,10 @@
               .find('.lg-video-object')
               .first()
 
+            // jadams
             // zoom and chapter tracks only available for HTML5 video
             //
-            if (this.core.galleryItems[this.core.index].video !== undefined && videoInfo.html5) {
+            if (videoInfo.html5) {
               videoData = JSON.parse(this.core.galleryItems[this.core.index].video);
               if (videoData.tracks !== undefined && videoData.tracks.length > 0) {
                 for (var i=0; i<videoData.tracks.length; i++) {
@@ -559,7 +560,7 @@
               } // END if videoData.tracks
 
               videoId       = $videoElement.selector.id;
-              videojsPlayer = videojs(videoId);
+//            videojsPlayer = videojs(videoId);
 
               // jadams, 2023-12-11: added VideoJS zoomPlugin
               // ---------------------------------------------------------------
@@ -567,7 +568,7 @@
 
               //  jadams, 2024-01-22: added video start position
               // ---------------------------------------------------------------
-              if (zoomPlugin !== undefined && this.settings.videojsOptions.videoStart) {
+              if (!zoomPlugin !== undefined && this.settings.videojsOptions.videoStart) {
                 videoStart = this.settings.videojsOptions.videoStart[index];
                 videojsPlayer.on("play", function() {
                   var startFromSecond = new Date('1970-01-01T' + videoStart + 'Z').getTime() / 1000;

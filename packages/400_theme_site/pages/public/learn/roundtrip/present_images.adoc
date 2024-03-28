@@ -124,39 +124,39 @@ under the link:{url-j1-docs--lightbox-module}[Lightbox module, {browser-window--
 ====
 
 [role="mt-5"]
-=== Default Lightbox
+=== J1 Lightbox
 
 Find below an example of using the the default lightbox used for standalone
 images. See how individual images are linked.
 
 .Lightbox for standalone images
-lightbox::example-standalone[ 800, {data-images-standalone}, role="mt-4 mb-4" ]
+lightbox::example-standalone[800, {data-images-standalone}, role="mt-4 mb-5"]
 
 The J1 lightbox module supports groups of images as well. Click on the image
 group below to see how a group is managed.
 
 .Lightbox for grouped images
-lightbox::example-group[ 395, {data-images-group}, group, role="mt-4 mb-4 wm-800" ]
+lightbox::example-group[395, {data-images-group}, group, role="mt-4 mb-4 wm-800"]
 
 
 [role="mt-5"]
-=== lightGallery
+=== J1 lightGallery
 
 lightGallery provides more complex image data functions than the default
 lightbox. The module supports a gallery-style thumbnail preview plus image
 resizing, a download dialog, sharing provider support, and more helpful.
+Check what lightGallery can do this by the following example.
 
+.J1 Gallery + lightGallery
+gallery::jg_old_times[role="mt-4 mb-4"]
+
+.lightGallery - Gallery or Lightbox
 [NOTE]
 ====
 The name lightGallery implies a sort of a gallery, but the library is a
 *lightbox*, and provides enhannced functionality on image-based data rather
 than enlarged displaying of images.
 ====
-
-Check what lightGallery can do this by the following example.
-
-.J1 Gallery + lightGallery
-gallery::jg_old_times[]
 
 [role="mt-5"]
 == J1 Carousel
@@ -229,7 +229,7 @@ This example shows some pictures having individual caption text and supports
 a lightbox to enlarge images full size.
 
 .Image Carousel + Lightbox
-carousel::demo_cats[role="mb-3"]
+carousel::demo_cats[role="mt-4 mb-5"]
 
 The J1 module lightbox is a simple Lightbox but offers a bunch of impressive
 features for displaying images. For example, the lightbox can display all
@@ -279,7 +279,7 @@ can also include animation effects, such as fade-in or slide-in transitions
 between images, to make the presentation more engaging and visually appealing.
 
 .Carousel + Arrows + Dots + Captions + Lightbox
-slick::image_carousel_full[]
+slick::image_carousel_full[role="mt-4 mb-5"]
 
 [role="mt-4"]
 === Carousel from Collections
@@ -291,7 +291,7 @@ carousels for collections display the article image and a link to the article
 as a caption.
 
 .Collection Biography + Arrows + Dots + Gutters
-slick::collection_carousel_biography[]
+slick::collection_carousel_biography[role="mt-4 mb-5"]
 
 [role="mt-4"]
 === Carousel from Posts
@@ -312,20 +312,20 @@ date.
 slick::post_carousel_featured[]
 ----
 
-.Post Carousel (Featured Posts)
-slick::post_carousel_featured[]
+.Posts Carousel
+slick::post_carousel_featured[role="mt-5 mb-5"]
 
 [role="mt-4"]
-=== More about Slick Carousels
-
-[role="mb-4"]
+.More about Slick Carousels
+[TIP]
+====
 If you're interested to learn more about _Slick_, go previewer page
 link:{url-j1-slick-previewer}[Slick Previewer, {browser-window--new}],
-
+====
 
 [role="mt-5"]
 [[masterSlider]]
-== Masterslider
+== J1 Masterslider
 
 Masterslider is a jQuery plugin fully integrated into the J1 Template.
 Jekyll One uses the *free* version of Masterslider well-known as MS Lite.
@@ -373,7 +373,7 @@ lightboxes on sliders out-of-the-box.
 ====
 
 .Slider using Controls + Filters + Lightbox
-masterslider::ms_00002[role="mt-4 mb-4"]
+masterslider::ms_00002[role="mt-5 mb-5"]
 
 [TIP]
 ====
@@ -443,9 +443,10 @@ creating dynamic galleries.
 By using the Masonry module, you can create a gallery that displays images of
 different sizes in an aesthetically pleasing and functional way.
 
-.Masonry Grid of Images + Lightbox
-masonry::image_fixed_height_lb[role="mt-4 mb-4"]
+.Grid of Images
+masonry::image_fixed_height_lb[role="mt-4 mb-5"]
 
+.More about Masonry
 [TIP]
 ====
 Find more on how the Masonry module can be used on the
