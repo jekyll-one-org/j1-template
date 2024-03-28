@@ -61,15 +61,13 @@ settings:
   # ----------------------------------------------------------------------------
   #
   prompt_history_enabled:               true
-  prompt_history_from_cookie:           true
-  allow_prompt_history_updates_on_max:  true
 
   # ----------------------------------------------------------------------------
   # API options
   # ----------------------------------------------------------------------------
   #
   api_options:
-    apiKey:                             <your-api-key>
+    apiKey:                             AIzaSyAtiLEW4oQiOJtGiPsdsGwMHi8O__7cqjU # <your-api-key>
 
 # ------------------------------------------------------------------------------
 # END config

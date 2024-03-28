@@ -891,6 +891,9 @@ j1.adapter.gemini = ((j1, window) => {
           logger.debug('\n' + 'slimSelect.afterClose, selection from history: empty');
           document.getElementById('prompt').value = '';
         }
+
+        // remove selection from select
+        $slimSelect.setSelected('', false);
       } // END event afterClose
 
     }, // END setupSlimSelectEventHandlers()

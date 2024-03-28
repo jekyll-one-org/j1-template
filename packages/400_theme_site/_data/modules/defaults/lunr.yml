@@ -68,9 +68,8 @@ defaults:
 
     search_history_max:                 30
     search_history_enabled:             false
-    search_history_from_cookie:         false
-    allow_history_duplicates:           false
-    allow_history_updates_on_max:       false
+    search_history_from_cookie:         true
+    allow_history_updates_on_max:       true
 
     search_history_id:                  search_history
     search_history_wrapper_id:          search_history_select_wrapper

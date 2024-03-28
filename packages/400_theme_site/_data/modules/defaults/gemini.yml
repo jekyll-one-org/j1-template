@@ -248,8 +248,8 @@ defaults:
   #
   prompt_history_max:                   30
   prompt_history_enabled:               false
-  prompt_history_from_cookie:           false
-  allow_prompt_history_updates_on_max:  false
+  prompt_history_from_cookie:           true
+  allow_prompt_history_updates_on_max:  true
 
   # UI prompt (input)
   # ----------------------------------------------------------------------------
@@ -271,7 +271,7 @@ defaults:
       name:                             Process prompt
     reset:
       id:                               reset
-      name:                             Reset prompt
+      name:                             Clear prompt
     clear:
       id:                               clear
       name:                             Clear last prompts

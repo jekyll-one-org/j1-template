@@ -542,10 +542,6 @@ j1.adapter.lunr = ((j1, window) => {
       {% if search_history_enabled %}
       // add current search query to history
       $('#send-to-history').on('click', () => {
-        // suppress default actions|bubble up
-        event.preventDefault();
-        event.stopPropagation();
-
         var currentQuery = $('#search-query').val();
         var historySet   = false;
 
@@ -668,10 +664,6 @@ j1.adapter.lunr = ((j1, window) => {
 
       // clear|hide input|search results
       $('#clear-topsearch').on('click', () => {
-        // suppress default actions|bubble up
-        event.preventDefault();
-        event.stopPropagation();
-
         $('#search-query').val('');
         $('#search-results').html('');
         $('#search-results').hide();
@@ -787,8 +779,8 @@ j1.adapter.lunr = ((j1, window) => {
           logger.debug('\n' + 'slimSelect.afterClose, selection from history: empty');
         }
 
-        // remove selection from select
-        $slimSelect.setSelected('', false);
+      // remove selection deon select
+       $slimSelect.setSelected('', false)
       } // END event afterClose
 
     }, // END setupSlimSelectEventHandlers()

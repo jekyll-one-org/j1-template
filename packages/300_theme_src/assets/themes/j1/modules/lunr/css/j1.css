@@ -19,14 +19,20 @@
   background-color: unset;
   overflow-y: scroll!important;
   margin-top: .25rem;
-  /* margin-right: 3rem; */
   margin-bottom: .25rem;
-  /* margin-left: 1rem; */
 }
 
 p.result-item-text {
-    font-size: .875rem;
-    margin-bottom: .5rem;
-    text-align: justify;
-    line-height: 1.25rem;
+  font-size: .875rem;
+  margin-bottom: .5rem;
+  text-align: justify;
+  line-height: 1.25rem;
+}
+
+span#clear-topsearch > i:hover {
+  color: #424242 !important;
+}
+
+span#send-to-history > i:hover {
+  color: #424242 !important;
 }
