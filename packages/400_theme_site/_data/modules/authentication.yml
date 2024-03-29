@@ -84,7 +84,7 @@ settings:
       activated:                        [ github, disqus ]
 
       disqus:
-        provider_url:                   https://disqus.com
+        provider_url:                   //disqus.com
         strategy:                       member
         scope:                          []
         users:                          [ all ]
@@ -102,7 +102,7 @@ settings:
               blacklist:                []
 
       github:
-        provider_url:                   https://github.com
+        provider_url:                   //github.com
         strategy:                       member
         scope:                          []
         users:                          [ all ]

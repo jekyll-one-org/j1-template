@@ -158,8 +158,8 @@ defaults:
   menu_icon_color:                      var(--md-gray-500)
   menu_icon_size:                       mdib-sm
   cssThemeLink:                         bootstrapTheme
-  defaultCssFile:                       https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css
-  bootswatchApiUrl:                     https://bootswatch.com/api
+  defaultCssFile:                       //cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css
+  bootswatchApiUrl:                     //bootswatch.com/api
   bootswatchApiVersion:                 5
   loadFromBootswatch:                   true
   localThemes:                          /assets/data/themes.json
