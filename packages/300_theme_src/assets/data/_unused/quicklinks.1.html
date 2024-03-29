@@ -8,7 +8,7 @@ exclude_from_search:                    true
 {% comment %}
  # -----------------------------------------------------------------------------
  # ~/assets/data/quicklinks.html
- # Liquid PROCEDURE template to create the HTML portion of the quicklinks bar
+ # Liquid PROCEDURE template to create the HTML portion of the quicklink bar
  # NOTE: Loaded dynamically by J1 NAV Manager module (AJAX)
  #
  # Product/Info:
@@ -26,15 +26,16 @@ exclude_from_search:                    true
 
 {% comment %} Liquid procedures
 -------------------------------------------------------------------------------- {% endcomment %}
-{% capture select_color     %}themes/{{site.template.name}}/procedures/global/select_color.proc{% endcapture %}
 {% capture select_icon_size %}themes/{{site.template.name}}/procedures/global/select_icon_size.proc{% endcapture %}
-
-{% assign apps                      = site.data.apps %}
-{% assign modules                   = site.data.modules %}
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign j1_config                 = site.data.j1_config %}
+{% assign apps                      = site.data.apps %}
+{% assign modules                   = site.data.modules %}
+
+{% comment %} Set config data
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign authentication_defaults   = modules.defaults.authentication.defaults %}
 {% assign authentication_settings   = modules.authentication.settings %}
 {% assign navigator_defaults        = modules.defaults.navigator.defaults %}
@@ -53,16 +54,6 @@ exclude_from_search:                    true
 {% assign toggler_defaults          = modules.defaults.theme_toggler.defaults %}
 {% assign toggler_settings          = modules.theme_toggler.settings %}
 
-{% comment %} Modules disabled
---------------------------------------------------------------------------------
-{% assign nbi_defaults              = modules.defaults.nbinteract.defaults %}
-{% assign cc_app_config_defaults    = apps.defaults.cc.defaults %}
-{% assign cc_app_config_settings    = apps.cc.settings %}
---------------------------------------------------------------------------------
-{% endcomment %}
-
-{% comment %} Set config data
--------------------------------------------------------------------------------- {% endcomment %}
 {% assign environment               = site.environment %}
 
 {% assign nav_quicklinks_defaults   = navigator_defaults.nav_quicklinks %}
@@ -78,12 +69,6 @@ exclude_from_search:                    true
 {% assign toggler_options           = toggler_defaults | merge: toggler_settings %}
 {% assign translator_options        = translator_defaults | merge: translator_settings %}
 {% assign speak2me_options          = speak2me_defaults | merge: speak2me_settings %}
-
-{% comment %} Control Center disabled
---------------------------------------------------------------------------------
-{% assign cc_app_config_options     = cc_app_config_defaults | merge: cc_app_config_settings %}
---------------------------------------------------------------------------------
-{% endcomment %}
 
 {% comment %} Set authentication properties
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -150,7 +135,6 @@ exclude_from_search:                    true
 {% assign theme_toggler_action      = quicklinks_options.theme_toggler_action %}
 {% assign theme_toggler_label       = quicklinks_options.theme_toggler_label %}
 
-
 {% comment %} Unused buttons
 --------------------------------------------------------------------------------
 {% assign r_text_icon               = quicklinks_options.r_text_icon %}
@@ -167,7 +151,6 @@ exclude_from_search:                    true
 --------------------------------------------------------------------------------
 {% endcomment %}
 
-
 {% comment %} Legacy buttons
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign signin_icon               = auth_client_config.signin_icon %}
@@ -178,18 +161,8 @@ exclude_from_search:                    true
 {% assign control_center_url        = cc_app_config_options.quicklinks_url %}
 
 {% comment %} Show|Hide QuickLink icons
-<!-- authentication_enabled: {{ authentication_enabled | debug }} -->
-show_quicksearch_icon:       {{ show_quicksearch_icon | debug }}
 -------------------------------------------------------------------------------- {% endcomment %}
-{% comment %} {% assign show_quicksearch_icon = lunr_search_options.enabled %} {% endcomment %}
-
-{% assign show_quicksearch_icon = false %}
-{% if lunr_search_options.enabled %}
-  {% assign show_quicksearch_icon = true %}
-{% endif %}
-
-show_quicksearch_icon: {{ show_quicksearch_icon | debug }}
-
+{% assign show_quicksearch_icon     = lunr_search_options.enabled %}
 {% assign show_docsearch_icon       = doc_search_options.enabled %}
 {% assign show_translator_icon      = translator_options.enabled %}
 {% assign show_speak2me_icon        = speak2me_options.enabled %}
@@ -264,9 +237,9 @@ show_quicksearch_icon: {{ show_quicksearch_icon | debug }}
 
 {% comment %} Main
 ================================================================================ {% endcomment %}
-<!-- head -->
+<!-- [INFO   ][~/assets/data/quicklinks.html               ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
+<!-- [INFO   ][~/assets/data/quicklinks.html               ] [ fick dich ins knie] -->
 <head>
-  <!-- [INFO   ][~/assets/data/quicklinks.html              ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
   <meta name="robots" content="noindex, nofollow">
 </head>
 
@@ -311,7 +284,7 @@ show_quicksearch_icon: {{ show_quicksearch_icon | debug }}
 
 </ul>
 
-<!-- [INFO   ] [~/assets/data/quicklinks.html               ] [Add test element] -->
+<!-- Test element -->
 <div id="nav_test_element" class="nav-primary" style="display: none"></div>
 
 {% endcapture %}

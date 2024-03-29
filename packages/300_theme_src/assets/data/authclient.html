@@ -26,8 +26,6 @@ exclude_from_search:                    true
 
 {% comment %} Liquid procedures
 -------------------------------------------------------------------------------- {% endcomment %}
-{% capture select_color     %}themes/{{site.template.name}}/procedures/global/select_color.proc{% endcapture %}
-{% capture select_icon_size %}themes/{{site.template.name}}/procedures/global/select_icon_size.proc{% endcapture %}
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -123,18 +121,13 @@ exclude_from_search:                    true
   {% assign icon_family = 'mdi' %}
 {% endif %}
 
-{% include {{select_color}} color=authclient_options.icon_color fallback="#9E9E9E" %}
-{% capture icon_color %}style="color:{{color}}"{% endcapture %}
-
-{% include {{select_icon_size}} family=authclient_options.icon_family size=authclient_options.icon_size %}
-{% assign icon_size = size %}
-
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}
 {% endif %}
+
 
 {% comment %} Main
 ================================================================================ {% endcomment %}

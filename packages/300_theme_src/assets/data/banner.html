@@ -30,9 +30,6 @@ exclude_from_search:                    true
 {% comment %} Liquid procedures
 -------------------------------------------------------------------------------- {% endcomment %}
 {% capture get_wave           %}themes/{{site.template.name}}/procedures/blocks/get_wave.proc{% endcapture %}
-
-{% capture select_color       %}themes/{{site.template.name}}/procedures/global/select_color.proc{% endcapture %}
-{% capture select_icon_size   %}themes/{{site.template.name}}/procedures/global/select_icon_size.proc{% endcapture %}
 {% capture create_bs_button   %}themes/{{site.template.name}}/procedures/global/create_bs_button.proc{% endcapture %}
 {% capture news_box           %}themes/{{site.template.name}}/modules/footers/boxes/news_box.proc{% endcapture %}
 
@@ -40,7 +37,6 @@ exclude_from_search:                    true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign environment               = site.environment %}
 {% assign debug                     = false %}
-
 
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
@@ -74,6 +70,7 @@ exclude_from_search:                    true
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}
 {% endif %}
+
 
 {% comment %} Main
 ================================================================================ {% endcomment %}
@@ -207,9 +204,6 @@ exclude_from_search:                    true
             {% else %}
               {% assign card_icon_color = '' %}
             {% endif %}
-
-            {% include {{select_icon_size}} family=icon_family size=icon_size %}
-            {% assign icon_size = size %}
 
             {% if card_width %}
               {% assign card_enabled = true %}

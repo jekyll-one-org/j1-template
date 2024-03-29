@@ -27,9 +27,6 @@ exclude_from_search:                    true
 
 {% comment %} Liquid procedures
 -------------------------------------------------------------------------------- {% endcomment %}
-{% capture select_color     %}themes/{{site.template.name}}/procedures/global/select_color.proc{% endcapture %}
-{% capture select_icon_size %}themes/{{site.template.name}}/procedures/global/select_icon_size.proc{% endcapture %}
-
 
 {% comment %} Liquid var initialization
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -145,18 +142,13 @@ exclude_from_search:                    true
   {% assign nav_menu_icon_style     = nav_menu_icon_style %}
 {% endif %}
 
-{% include {{select_color}} color=nav_menu_icon_color fallback="#9E9E9E" %}
-{% assign nav_menu_icon_color = color %}
-
-{% include {{select_icon_size}} family=nav_menu_icon_family size=nav_menu_icon_size %}
-{% assign nav_menu_icon_size = size %}
-
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}
 {% endif %}
+
 
 {% comment %} Main
 See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-mathjax-processing-from-certain-html-elements

@@ -29,7 +29,7 @@ exclude_from_search:                    true
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment           = site.environment %}
+{% assign environment = site.environment %}
 
 {% comment %} language detection
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -55,6 +55,7 @@ exclude_from_search:                    true
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}
 {% endif %}
+
 
 {% comment %} Main
 ================================================================================ {% endcomment %}

@@ -25,10 +25,7 @@ exclude_from_search:                    true
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
-{% comment %} Liquid procedures (currently unused)
---------------------------------------------------------------------------------
-{% capture select_color     %}themes/{{site.template.name}}/procedures/global/select_color.proc{% endcapture %}
-{% capture select_icon_size %}themes/{{site.template.name}}/procedures/global/select_icon_size.proc{% endcapture %}
+{% comment %} Liquid procedures
 -------------------------------------------------------------------------------- {% endcomment %}
 
 {% comment %} Liquid var initialization
@@ -83,21 +80,13 @@ fab_defaults: {{fab_defaults | debug}}
   {% assign fab_menu_icon_style     = fab_menu_icon_style %}
 {% endif %}
 
-{% comment %} unused
---------------------------------------------------------------------------------
-{% include {{select_color}} color=fab_menu_icon_color fallback="#9E9E9E" %}
-{% assign fab_menu_icon_color = color %}
-
-{% include {{select_icon_size}} family=fab_menu_icon_family size=fab_menu_icon_size %}
-{% assign fab_menu_icon_size = size %}
--------------------------------------------------------------------------------- {% endcomment %}
-
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}
 {% endif %}
+
 
 {% comment %} Main
 ================================================================================ {% endcomment %}

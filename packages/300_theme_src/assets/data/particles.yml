@@ -45,20 +45,19 @@ exclude_from_search:                    true
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign modules                   = site.data.modules %}
+{% assign modules                = site.data.modules %}
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment               = site.environment %}
+{% assign environment            = site.environment %}
 
-{% assign particles_defaults        = modules.defaults.particles.defaults %}
-{% assign particles_settings        = modules.particles.settings %}
-{% assign particles_default_data    = modules.defaults.particles.defaults.particle_data %}
-
+{% assign particles_defaults     = modules.defaults.particles.defaults %}
+{% assign particles_settings     = modules.particles.settings %}
+{% assign particles_default_data = modules.defaults.particles.defaults.particle_data %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign particles_config    = particles_defaults | merge: particles_settings %}
+{% assign particles_config       = particles_defaults | merge: particles_settings %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -67,8 +66,9 @@ exclude_from_search:                    true
   {% assign production = true %}
 {% endif %}
 
+
 {% comment %} Main
-particles_data.particles.number.value:   {{ particles_data.particles.number.value }}
+particles_data.particles.number.value: {{ particles_data.particles.number.value }}
 ================================================================================ {% endcomment %}
 
 {% for item in particles_settings.particles %}

@@ -26,10 +26,7 @@ exclude_from_search:                    true
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
-{% comment %} Liquid procedures (currently unused)
---------------------------------------------------------------------------------
-{% capture select_color     %}themes/{{site.template.name}}/procedures/global/select_color.proc{% endcapture %}
-{% capture select_icon_size %}themes/{{site.template.name}}/procedures/global/select_icon_size.proc{% endcapture %}
+{% comment %} Liquid procedures
 -------------------------------------------------------------------------------- {% endcomment %}
 
 {% comment %} Liquid var initialization
@@ -37,19 +34,19 @@ exclude_from_search:                    true
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config     = site.data.j1_config %}
-{% assign modules             = site.data.modules %}
+{% assign template_config   = site.data.j1_config %}
+{% assign modules           = site.data.modules %}
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment           = site.environment %}
-{% assign carousel_defaults     = modules.defaults.slick.defaults %}
-{% assign carousel_settings     = modules.slick.settings %}
+{% assign environment       = site.environment %}
+{% assign carousel_defaults = modules.defaults.slick.defaults %}
+{% assign carousel_settings = modules.slick.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign carousel_options      = carousel_defaults | merge: carousel_settings %}
-{% assign carousels             = carousel_settings.carousels %}
+{% assign carousel_options  = carousel_defaults | merge: carousel_settings %}
+{% assign carousels         = carousel_settings.carousels %}
 
 {% comment %} Configure permalink settings
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -64,6 +61,7 @@ exclude_from_search:                    true
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}
 {% endif %}
+
 
 {% comment %} Main
 ================================================================================ {% endcomment %}
