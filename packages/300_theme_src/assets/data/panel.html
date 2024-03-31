@@ -821,7 +821,7 @@ exclude_from_search:                    true
 
         {% comment %} extract scroller config (HoH)
         ------------------------------------------------------------------------ {% endcomment %}
-        {% assign scroller_config.enabled  = false %}
+        {% assign scroller_config.enabled = false %}
         {% for scroller in scroller_config_scrollers %}
           {% for element in scroller %}
             {% assign elm_key   = element[0] %}
@@ -831,7 +831,7 @@ exclude_from_search:                    true
               {% assign setting_key   = setting[0] %}
               {% assign setting_value = setting[1] %}
               {% if setting_value == panel_settings.id %}
-                {% assign scroller_config  = elm_value %}
+                {% assign scroller_config = elm_value %}
                 {% break %}
               {% endif %}
             {% endfor %}
@@ -910,7 +910,7 @@ exclude_from_search:                    true
 
               <!-- [INFO   ] [~/assets/data/panel.html              ] [ blocktype detected as: {{card_block}} ] -->
               {% if card_block == 'card-list' %}
-              <div class="preview_content">
+              <div id="{{panel_settings.id}}" class="preview_content">
                 <ul id="{{panel_settings.id}}-scroll-group" class="scroll-group scroll-group-horizontal align-items-stretch flex-wrap">
                   <!-- [INFO   ] [~/assets/data/panel.html              ] [ write post items (card_block == 'card-list')] -->
                 {% for post in site.posts %}
@@ -981,7 +981,7 @@ exclude_from_search:                    true
 
               {% if card_block == 'card-deck' %}
               <!-- Recent posts -->
-              <div class="row card-deck">
+              <div id="{{panel_settings.id}}" class="row card-deck">
                 <!-- [INFO   ] [~/assets/data/panel.html              ] [ write post items (card_block == 'card-deck')] -->
               {% for post in site.posts %} {% for category in post.categories %}
                 {% if posts_written == posts_max %} {% assign last_post_written = true %} {% break %}{% endif %}

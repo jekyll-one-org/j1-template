@@ -92,6 +92,7 @@ j1.adapter.scroller = ((j1, window) => {
   var language      = '{{site.language}}';
   var user_agent    = platform.ua;
   var state         = 'not_started';
+
   var scrollerDefaults;
   var scrollerSettings;
   var scrollerOptions;
@@ -149,8 +150,9 @@ j1.adapter.scroller = ((j1, window) => {
         var pageState       = $('#content').css("display");
         var pageVisible     = (pageState === 'block') ? true: false;
         var j1CoreFinished  = (j1.getState() === 'finished') ? true : false;
+        var atticFinished   = (j1.adapter.attic.getState() == 'finished') ? true : false;
 
-        if (j1CoreFinished && pageVisible) {
+        if (j1CoreFinished && pageVisible && atticFinished) {
           startTimeModule = Date.now();
 
           _this.setState('started');
@@ -159,13 +161,6 @@ j1.adapter.scroller = ((j1, window) => {
 
           logger.info('\n' + 'initialize scrollers');
           _this.generate_scrollers();
-
-          _this.setState('finished');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module initialized successfully');
-
-          endTimeModule = Date.now();
-          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_page_ready);
         } // END if pageVisible
@@ -178,93 +173,120 @@ j1.adapter.scroller = ((j1, window) => {
     // -------------------------------------------------------------------------
     generate_scrollers: () => {
 
+      var wrapper_dependencies = {};
+      var dependency;
+
       {% comment %} generate scrollers of type 'infiniteScroll'
       -------------------------------------------------------------------------- {% endcomment %}
 
       {% for item in scroller_options.scrollers %} {% if item.scroller.enabled %}
+      logger.info('\n' + 'scroller {{item.scroller.id}} is being initialized on wrapper: {{item.scroller.container}}');
 
-      {% if item.scroller.type == 'infiniteScroll' %}
+      // create dynamic loader variable to setup
+      dependency = 'dependency_met_wrapper_ready_{{item.scroller.container}}';
+      wrapper_dependencies[dependency] = '';
 
-      {% assign scroller_id     = item.scroller.id %}
-      {% assign scroller_type   = item.scroller.type %}
-      {% assign container       = item.scroller.container %}
-      {% assign pagePath        = item.scroller.pagePath  %}
-      {% assign elementScroll   = item.scroller.elementScroll %}
-      {% assign scrollOffset    = item.scroller.scrollOffset %}
-      {% assign lastPage        = item.scroller.lastPage %}
-      {% assign infoLastPage    = item.scroller.infoLastPage %}
-      {% assign lastPageInfo_en = item.scroller.lastPageInfo_en %}
-      {% assign lastPageInfo_de = item.scroller.lastPageInfo_de %}
+      wrapper_dependencies['dependency_met_wrapper_ready_{{item.scroller.container}}'] = setInterval(() => {
+        var scrollerID     = document.getElementById('{{item.scroller.container}}');
+        var scrollerExists = (scrollerID !== undefined || scrollerID !== null ) ? true: false;
 
-      // scroller_id: {{ scroller_id }}
-      //
-      logText = '\n' + 'scroller of type {{item.scroller.type}} initialized on: ' + '{{scroller_id}}';
-      logger.info(logText);
+        // process the wrapper if extsts
+        if (scrollerExists) {
+          {% if item.scroller.type == 'infiniteScroll' %}
 
-      var container = '#' + '{{container}}';
-      var pagePath  = '{{pagePath}}';
+          {% assign scroller_id     = item.scroller.id %}
+          {% assign scroller_type   = item.scroller.type %}
+          {% assign container       = item.scroller.container %}
+          {% assign pagePath        = item.scroller.pagePath  %}
+          {% assign elementScroll   = item.scroller.elementScroll %}
+          {% assign scrollOffset    = item.scroller.scrollOffset %}
+          {% assign lastPage        = item.scroller.lastPage %}
+          {% assign infoLastPage    = item.scroller.infoLastPage %}
+          {% assign lastPageInfo_en = item.scroller.lastPageInfo_en %}
+          {% assign lastPageInfo_de = item.scroller.lastPageInfo_de %}
 
-      if (language === 'en') {
-        lastPageInfo =  '<div class="page-scroll-last"><p class="infinite-scroll-last">';
-        lastPageInfo += '{{lastPageInfo_en|strip_newlines}}';
-        lastPageInfo += '</p></div>';
-      } else if (language === 'de') {
-        lastPageInfo =  '<div class="page-scroll-last"><p class="infinite-scroll-last">';
-        lastPageInfo += '{{lastPageInfo_de|strip_newlines}}';
-        lastPageInfo += '</p></div>';
-      } else {
-        lastPageInfo =  '<div class="page-scroll-last"><p class="infinite-scroll-last">';
-        lastPageInfo += '{{lastPageInfo_en|strip_newlines}}';
-        lastPageInfo += '</p></div>';
-      }
+          var container = '#' + '{{container}}';
+          var pagePath  = '{{pagePath}}';
 
-      // create an (scroller) instance of 'infiniteScroll'
-      //
-      if ($(container).length) {
-        $(container).scroller({
-          id:             '{{scroller_id}}',
-          type:           '{{scroller_type}}',
-          pagePath:       '{{pagePath}}',
-          elementScroll:  {{elementScroll}},
-          scrollOffset:   {{scrollOffset}},
-          lastPage:       {{lastPage}},
-          infoLastPage:   {{infoLastPage}},
-          lastPageInfo:   lastPageInfo,
-        });
-      }
+          var dependencies_met_container_exists = setInterval(() => {
+            var containerExists = ($(container).length) ? true : false;
 
-      {% endif %}
+              if (containerExists) {
+                // create an (scroller) instance of infiniteScroll
+                logText = '\n' + 'scroller of type {{item.scroller.type}} initialized on: ' + '{{scroller_id}}';
+                logger.info(logText);
 
-      {% if item.scroller.type == 'showOnScroll' %}
+                if (language === 'en') {
+                  lastPageInfo =  '<div class="page-scroll-last"><p class="infinite-scroll-last">';
+                  lastPageInfo += '{{lastPageInfo_en|strip_newlines}}';
+                  lastPageInfo += '</p></div>';
+                } else if (language === 'de') {
+                  lastPageInfo =  '<div class="page-scroll-last"><p class="infinite-scroll-last">';
+                  lastPageInfo += '{{lastPageInfo_de|strip_newlines}}';
+                  lastPageInfo += '</p></div>';
+                } else {
+                  lastPageInfo =  '<div class="page-scroll-last"><p class="infinite-scroll-last">';
+                  lastPageInfo += '{{lastPageInfo_en|strip_newlines}}';
+                  lastPageInfo += '</p></div>';
+                }
 
-      {% assign scroller_id     = item.scroller.id %}
-      {% assign scroller_type   = item.scroller.type %}
-      {% assign container       = item.scroller.container %}
-      {% assign showDelay       = item.scroller.showDelay %}
-      {% assign scrollOffset    = item.scroller.scrollOffset  %}
+                $(container).scroller({
+                  id:             '{{scroller_id}}',
+                  type:           '{{scroller_type}}',
+                  pagePath:       '{{pagePath}}',
+                  elementScroll:  {{elementScroll}},
+                  scrollOffset:   {{scrollOffset}},
+                  lastPage:       {{lastPage}},
+                  infoLastPage:   {{infoLastPage}},
+                  lastPageInfo:   lastPageInfo,
+                });
 
-      var container = '#' + '{{container}}';
+                _this.setState('finished');
+                logger.debug('\n' + 'state: ' + _this.getState());
+                logger.info('\n' + 'module initialized successfully');
 
-      // scroller_id: {{ scroller_id }}
-      //
-      logText = '\n' + 'scroller of type {{item.scroller.type}} initialized on: ' + '{{scroller_id}}';
-      logger.info(logText);
+                endTimeModule = Date.now();
+                logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
-      // create an (scroller) instance of 'showOnScroll'
-      //
-      if ($(container).length) {
-        $(container).scroller({
-          id:             '{{scroller_id}}',
-          type:           '{{scroller_type}}',
-          container:      '{{container}}',
-          showDelay:      {{showDelay}},
-          scrollOffset:   {{scrollOffset}},
-        });
-      }
+                clearInterval(dependencies_met_container_exists);
+            } // END containerExists
+          }, 10); // END dependencies_met_container_exists
 
-      {% endif %}
-      // END scroller_id: {{ scroller_id }}
+          {% endif %}
+
+          {% if item.scroller.type == 'showOnScroll' %}
+
+          {% assign scroller_id     = item.scroller.id %}
+          {% assign scroller_type   = item.scroller.type %}
+          {% assign container       = item.scroller.container %}
+          {% assign showDelay       = item.scroller.showDelay %}
+          {% assign scrollOffset    = item.scroller.scrollOffset  %}
+
+          var container = '#' + '{{container}}';
+
+          // scroller_id: {{ scroller_id }}
+          logText = '\n' + 'scroller of type {{item.scroller.type}} initialized on: ' + '{{scroller_id}}';
+          logger.info(logText);
+
+          // create an (scroller) instance of 'showOnScroll'
+          if ($(container).length) {
+            $(container).scroller({
+              id:             '{{scroller_id}}',
+              type:           '{{scroller_type}}',
+              container:      '{{container}}',
+              showDelay:      {{showDelay}},
+              scrollOffset:   {{scrollOffset}},
+            });
+          }
+
+          {% endif %}
+          // END scroller_id: {{ scroller_id }}
+
+          clearInterval(wrapper_dependencies['dependency_met_wrapper_ready_{{item.scroller.container}}']);
+        } // END if scrollerExists
+      }, 10); // END dependencies_met_scroller_exists
       {% endif %} {% endfor %}
+
     }, // END generate scrollers
 
     // -------------------------------------------------------------------------

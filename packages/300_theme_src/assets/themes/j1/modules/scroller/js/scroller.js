@@ -23,10 +23,8 @@
 ;(function($, window, document, undefined) {
   'use strict';
 
-  // create the defaults
-  //
-  var pluginName = 'scroller',
-  defaults = {
+  // plugin defaults
+  var pluginName = 'scroller', defaults = {
     type:                 'infiniteScroll',
     scrollOffset:         100,
     elementScroll:        false,
@@ -34,37 +32,33 @@
     lastPage:             false,
     infoLastPage:         false,
     loadStatus:           false,
-    onInit:               function (){},                                        // callback after plugin has initialized
-    onBeforeLoad:         function (){},                                        // callback before new items are loaded
-    onAfterLoad:          function (){}                                         // callback after new items are loaded
+    onInit:               function () {},                                       // callback after plugin has initialized
+    onBeforeLoad:         function () {},                                       // callback before new items are loaded
+    onAfterLoad:          function () {}                                        // callback after new items are loaded
   };
 
   // plugin constructor
-  //
   function Plugin (element, options) {
     this.element            = element;
     this.settings           = $.extend( {}, defaults, options);
     this.settings.elementID = '#' + this.element.id;
 
     // call the initializer
-    //
     this.init(this.settings);
-  }
+  } // END function Plugin
 
   // avoid plugin prototype conflicts
-  //
   $.extend(Plugin.prototype, {
 
     // -------------------------------------------------------------------------
-    // init()
-    // plugin initializer
+    // puglin initializer
     // -------------------------------------------------------------------------
     init: function(options) {
       var logger = log4javascript.getLogger('j1.scroller.core');
       var _this  = this;
 
-      logger.info('\n' + 'initializing plugin: started');
-      logger.info('\n' + 'state: started');
+      logger.debug('\n' + 'initializing plugin: started');
+      logger.debug('\n' + 'state: started');
 
       if (options.elementScroll) {
         _this.scroller = _this.element;
@@ -72,33 +66,39 @@
         _this.scroller = window;
       }
 
-      // registerScrollEvent delayed until page_ready state
-      //
+      // -----------------------------------------------------------------------
+      // module initializer
+      // -----------------------------------------------------------------------
       var dependencies_met_page_ready = setInterval (function () {
-        if (j1.getState() === 'finished') {
+        var pageState       = $('#content').css("display");
+        var pageVisible     = (pageState === 'block') ? true: false;
+        var j1CoreFinished  = (j1.getState() === 'finished') ? true : false;
+
+        if (j1CoreFinished && pageVisible) {
 
           // initialize infinite scroll
-          //
-          if ( options.type === 'infiniteScroll') {
-            logger.info('\n' + 'processing mode: ' + options.type);
-            logger.info('\n' + 'loading items from path: ' + options.pagePath);
-            logger.info('\n' + 'monitoring element set to: ' + this.scroller);
+          if (options.type === 'infiniteScroll') {
+            logger.debug('\n' + 'processing mode: ' + options.type);
+            logger.debug('\n' + 'loading items from path: ' + options.pagePath);
+            logger.debug('\n' + 'monitoring element set to: ' + _this.scroller);
             _this.registerScrollEvent(options);
           }
+
           // initialize show on scroll
-          //
-          if ( options.type === 'showOnScroll') {
-            logger.info('\n' + 'processing mode: ' + options.type);
-            logger.info('\n' + 'loading items from path: ' + options.pagePath);
-            logger.info('\n' + 'monitoring element set to: ' + this.scroller);
+          if (options.type === 'showOnScroll') {
+            logger.debug('\n' + 'processing mode: ' + options.type);
+            logger.debug('\n' + 'loading items from path: ' + options.pagePath);
+            logger.debug('\n' + 'monitoring element set to: ' + _this.scroller);
             _this.registerScrollEvent(options);
           }
-          logger.info('\n' + 'initializing plugin: finished');
-          logger.info('\n' + 'state: finished');
+
+          logger.debug('\n' + 'initializing plugin: finished');
+          logger.debug('\n' + 'state: finished');
+
           clearInterval(dependencies_met_page_ready);
-        }
-      }, 25);
-    },
+        } // END if pageVisible
+      }, 25); // END dependencies_met_page_ready
+    }, // END init
 
     // -------------------------------------------------------------------------
     // isInViewport()
@@ -106,10 +106,10 @@
     // -------------------------------------------------------------------------
     isInViewport: function (elm, offset) {
       // if the element doesn't exist, abort
-      //
     	if( elm.length == 0 ) {
     		return;
     	}
+
     	var $window          = jQuery(window);
     	var viewport_top     = $window.scrollTop();
     	var viewport_height  = $window.height();
@@ -122,7 +122,7 @@
     	return (top >= viewport_top && top < viewport_bottom) ||
     	(bottom > viewport_top && bottom <= viewport_bottom) ||
     	(height > viewport_height && top <= viewport_top && bottom >= viewport_bottom);
-    },
+    }, // END isInViewport
 
     // -------------------------------------------------------------------------
     // bottomReached()
@@ -157,10 +157,9 @@
         (height > viewport_height && top <= viewport_top && bottom >= viewport_bottom);
       } else {
         // check scroll position of the (overall) window
-        //
         return (window.innerHeight + window.pageYOffset + options.scrollOffset >= document.body.offsetHeight);
-      }
-    },
+      } // END if elementScroll
+    }, // END isBottomReached
 
     // -------------------------------------------------------------------------
     // detectScroll()
@@ -172,10 +171,8 @@
       var _this  = this;
 
       // scroller type 'infiniteScroll'
-      //
       if (options.type === 'infiniteScroll') {
         // register event function DYNAMICALLY
-        //
         _this[options.id] = function (event) {
           var options = _this.settings;
 
@@ -191,32 +188,29 @@
               return false;
             }
             _this.getNewPost(options);
-          }
-        };
+          } // END if BottomReached
+        }; // END event
 
         window.addEventListener('scroll', _this[options.id]);
         logger.debug('\n' + 'scroll event registered: ' + options.type);
-      }
+      } // END if type infiniteScroll
 
       // scroller type 'showOnScroll'
-      //
       if (options.type === 'showOnScroll') {
         // register event function DYNAMICALLY
-        //
         _this[options.id] = function (event) {
           if (_this.isInViewport ($('#' + options.id ), options.scrollOffset)) {
       			logger.debug('\n' + 'specified container is in view: ' + options.id);
             $('.' + options.id).show(options.showDelay);
             window.removeEventListener('scroll', _this[options.id]);
             logger.debug('\n' + 'scroll event showOnScroll: removed');
-          }
-        }
+          } // END if isInViewport
+        } // END event
 
       	window.addEventListener('scroll', _this[options.id]);
         logger.debug('\n' + 'scroll event registered: ' + options.type);
-      }
-
-    },
+      } // END if type showOnScrol
+    }, // END registerScrollEvent
 
     // -------------------------------------------------------------------------
     // getNewPost()
@@ -231,17 +225,14 @@
       logger.debug('\n' + 'loading new posts');
 
       // initialze loader flag
-      //
       if (this.itemsLoaded === false) return false;
 
       // set loader flag (false == not loaded
-      //
       this.itemsLoaded = false;
 
       // display spinner while loading
-      //
       if (options.loadStatus) {
-        logger.info('\n' + 'show: spinner');
+        logger.debug('\n' + 'show: spinner');
         $('.loader-ellips').show();
       }
 
@@ -253,11 +244,11 @@
             var childItems = _this.getChildItemsByAjaxHTML(options, xmlhttp.responseText);
             _this.appendNewItems(childItems);
 
-            logger.info('\n' + 'loading new items: successful');
+            logger.debug('\n' + 'loading new items: successful');
 
             // hide the spinner after loading
             if (options.loadStatus) {
-                logger.info('\n' + 'hide: spinner');
+                logger.debug('\n' + 'hide: spinner');
                 $('.loader-ellips').hide();
             }
 
@@ -267,19 +258,21 @@
           } else {
             // hide the spinner
             if (options.loadStatus) {
-                logger.info('\n' + 'hide: spinner');
+                logger.debug('\n' + 'hide: spinner');
                 $('.loader-ellips').hide();
             }
 
             logger.error('\n' + 'loading new items failed, HTTP response: ' + xmlhttp.status );
             _this.itemsLoaded = false;
-          }
-        }
-      };
-      logger.info('\n' + 'loading new items from path: ' + options.pagePath + options.firstPage);
+          } // END if xmlhttp. tatus 200
+        } // END if if xmlhttp readyState
+      }; // END onreadystatechange
+
+      logger.debug('\n' + 'loading new items from path: ' + options.pagePath + options.firstPage);
       xmlhttp.open("GET", location.origin + options.pagePath + options.firstPage + '/index.html', true);
+
       xmlhttp.send();
-    },
+    }, // END getNewPost
 
     // -------------------------------------------------------------------------
     // getChildItemsByAjaxHTML()
@@ -292,8 +285,9 @@
       logger.debug('\n' + 'load new items');
       newHTML.innerHTML = HTMLText;
       var childItems    = newHTML.querySelectorAll(options.elementID + ' > *');
+
       return childItems;
-    },
+    }, // END getChildItemsByAjaxHTML
 
     // -------------------------------------------------------------------------
     // appendNewItems()
@@ -309,21 +303,18 @@
         var elmID = _this.element.id
         document.getElementById(elmID).appendChild(item);
         logger.debug('\n' + 'new item appended');
-      });
+      }); // END forEach
 
       // no dropcaps if translation enabled
-      //
       if (user_translate.translationEnabled) {
-        logger.info('\n' + 'translation enabled: ' + user_translate.translationEnabled);
-        logger.info('\n' + 'skipped processing of dropcaps');
+        logger.debug('\n' + 'translation enabled: ' + user_translate.translationEnabled);
+        logger.debug('\n' + 'skipped processing of dropcaps');
       } else {
         // initialize dropcaps
-        //
-        logger.info('\n' + 'post processing: createDropCap');
+        logger.debug('\n' + 'post processing: createDropCap');
         j1.core.createDropCap();
-      }
-
-    },
+      } // END if translationEnabled
+    }, // END appendNewItems
 
     // -------------------------------------------------------------------------
     // infoLastPage()
@@ -340,7 +331,6 @@
   }); // END prototype
 
   // wrapper around the constructor to prevent multiple instantiations
-  //
   $.fn [pluginName] = function(options) {
     return this.each(function() {
       if (!$.data( this, "plugin_" + pluginName)) {
@@ -348,6 +338,6 @@
         pluginName, new Plugin(this, options));
       }
     });
-  };
+  }; // END
 
 })(jQuery, window, document);
