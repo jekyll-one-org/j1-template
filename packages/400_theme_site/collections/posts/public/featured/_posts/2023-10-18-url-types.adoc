@@ -1,7 +1,7 @@
 ---
 title:                                  URLs
-title_extention:                        Protocol Scheme
-tagline:                                Protocol Scheme
+title_extention:                        Protocol scheme
+tagline:                                Protocol scheme
 
 #date:                                  2023-01-01
 #last_modified:                         2023-01-01
@@ -25,7 +25,7 @@ regenerate:                             false
 resources:                              [ animate ]
 resource_options:
   - attic:
-      padding_top:                      600
+      padding_top:                      630
       slides:
         - url:                          /assets/images/modules/attics/1920x1280/j1-starter-mockup-1.jpg
           alt:                          J1 Starter Mockup
@@ -40,7 +40,7 @@ resource_options:
 // -----------------------------------------------------------------------------
 // :page--attr:                         <attr-value>
 :badges-enabled:                        false
-:url-codinghorror--understanding-mvc:   https://blog.codinghorror.com/understanding-model-view-controller
+:url-codinghorror--understanding-mvc:   //blog.codinghorror.com/understanding-model-view-controller
 
 // Place an excerpt at the most top position
 // -----------------------------------------------------------------------------

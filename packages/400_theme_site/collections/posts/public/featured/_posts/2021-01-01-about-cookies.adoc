@@ -1,7 +1,7 @@
 ---
 title:                                  Cookies
-title_extention:                        Good To Know About Cookies
-tagline:                                About Cookies
+title_extention:                        Data for Site Control
+tagline:                                Data for Site Control
 
 #date:                                  2023-01-01
 #last_modified:                         2023-01-01
@@ -26,7 +26,7 @@ regenerate:                             false
 resources:                              [ animate ]
 resource_options:
   - attic:
-      padding_top:                      600
+      padding_top:                      630
       slides:
         - url:                          /assets/images/modules/attics/cookies-1920x1200.jpg
           alt:                          Photo by Miroslava on Unsplash
