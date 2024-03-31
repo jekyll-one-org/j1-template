@@ -85,7 +85,7 @@ asks your browser to create on your computer or mobile device. A cookie allows
 the website to store your actions or preferences over time.
 
 All modern browsers support cookies. However, users can configure a browser
-to decline them. Moreover, all users can delete all or selected cookie files 
+to decline them. Moreover, all users can delete all or selected cookie files
 whenever they like.
 
 Find below how cookies are typically used for.
@@ -190,13 +190,13 @@ Users can take control when cookies are used or not. You can delete all
 cookies that are already on your computer, and you
 can set most browsers to prevent them from being placed.
 
-[role="mb-4"]
-If you do this, however, you may have to manually adjust some preferences
-every time you visit a site, and some services and functionalities may not
-work.
-
 [TIP]
 ====
 For more information how cookies are used, visit the page
 link:{url-about-cookies--home}[AboutCookies, {browser-window--new}].
 ====
+
+[role="mb-7"]
+If you do this, however, you may have to manually adjust some preferences
+every time you visit a site, and some services and functionalities may not
+work.

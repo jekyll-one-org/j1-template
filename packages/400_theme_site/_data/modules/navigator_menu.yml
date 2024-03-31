@@ -460,11 +460,11 @@
 #        icon:                          robot
 #        target:                        _blank
 
-      - title:                          J1 Icon Picker
-        href:                           //jekyll.one/pages/public/test_icon_picker/
-        icon:                           emoticon-cool-outline
+      - title:                          J1 Geolocation
+        href:                           //jekyll.one/pages/public/tools/previewer/geolocation/
+        icon:                           google-maps
         target:                         _blank
-      - title:                          J1 Google Gemini
+      - title:                          J1 Gemini
         href:                           //jekyll.one/pages/public/tools/previewer/google-gemini-ai/
         icon:                           robot
         target:                         _blank
@@ -474,10 +474,6 @@
         target:                         _blank
       - title:                          J1 Masonry
         href:                           //jekyll.one/pages/public/tools/previewer/masonry/
-        icon:                           view-dashboard-variant
-        target:                         _blank
-      - title:                          J1 LightGallery
-        href:                           //jekyll.one/pages/public/tools/previewer/lightgallery/
         icon:                           view-dashboard-variant
         target:                         _blank
       - title:                          J1 VideoJS
@@ -492,25 +488,25 @@
         href:                           //jekyll.one/pages/public/tools/previewer/slick/
         icon:                           view-carousel
         target:                         _blank
-      - title:                          J1 Masterslider
+      - title:                          J1 Master Slider
         href:                           //jekyll.one/pages/public/tools/previewer/masterslider/
-        icon:                           gesture-swipe
+        icon:                           view-carousel
         target:                         _blank
-      - title:                          J1 Country Flag Icons
+      - title:                          J1 Font Icons
+        href:                           //jekyll.one/pages/public/tools/previewer/icon-picker/
+        icon:                           emoticon-cool-outline
+        target:                         _blank
+      - title:                          J1 Flag Icons
         href:                           //jekyll.one/pages/public/tools/previewer/country_flags/
         icon:                           flag
         target:                         _blank
-      - title:                          J1 Code Highlighter
+      - title:                          J1 Highlighter
         href:                           //jekyll.one/pages/public/tools/previewer/rouge/
         icon:                           code-parentheses
         target:                         _blank
-      - title:                          J1 Color Palette
+      - title:                          J1 Colors
         href:                           //jekyll.one/pages/public/tools/previewer/color_palette/
         icon:                           format-color-fill
-        target:                         _blank
-      - title:                          J1 Geolocation Preview
-        href:                           //jekyll.one/pages/public/tools/previewer/geolocation/
-        icon:                           google-maps
         target:                         _blank
 
     # --------------------------------------------------------------------------

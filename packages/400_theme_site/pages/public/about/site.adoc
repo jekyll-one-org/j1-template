@@ -77,4 +77,5 @@ help visitors put a face to the names behind a website. The best place to
 include a bit of information about you and your team is on your homepage with
 an About page so that no one will miss it.
 
+[role="mb-7"]
 Good luck presenting your site, your project to the world!

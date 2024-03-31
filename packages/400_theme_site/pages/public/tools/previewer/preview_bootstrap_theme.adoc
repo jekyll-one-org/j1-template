@@ -1,7 +1,7 @@
 ---
 title:                                  Theme Preview
-title_extention:                        Preview Bootstrap theme for J1 Template
-tagline:                                Explore Current Styles
+title_extention:                        Preview styles
+tagline:                                Preview styles
 
 date:                                   2023-09-21
 #last_modified:                         2023-01-01
@@ -3003,7 +3003,7 @@ link:{url-bs-docs--components-popovers}[Bootstrap Docs {char-emdash} Popovers, {
 </div>
 ++++
 
-[role="mt-5"]
+[role="mt-5 mb-7"]
 .Example HTML code for Popovers
 [source, html]
 ----

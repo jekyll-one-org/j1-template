@@ -208,11 +208,14 @@ j1.adapter.iconPickerPage = ((j1, window) => {
             } // END if modules loaded
           }, 10); // END if modules loaded
 
+          // currently, a dummy headline is required to place the
+          // select in the page correcty (after the picker button)
+          //
           const dummy = document.getElementById('dummy');
           dummy.remove();
 
           var wrapperContainer = document.getElementById('icon_library_select_wrapper');
-          wrapperContainer.classList.add('mb-10');
+          wrapperContainer.classList.add('mb-7');
 
           clearInterval(dependencies_met_page_ready);
         } // END if page loaded

@@ -137,4 +137,5 @@ It took me ages. Now in 2023, I can present the latest version of J1 Template
 for the public. Hopefully, most of the objectives I had on my mind are
 achieved.
 
+[role="mb-7"]
 Happy Jekylling!

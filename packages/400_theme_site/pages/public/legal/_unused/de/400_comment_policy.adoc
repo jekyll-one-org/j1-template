@@ -1,6 +1,6 @@
 ---
-title:                                  Comment Policy
-tagline:                                Discuss With Respect
+title:                                  Kommentarrichtlinie
+tagline:                                Diskutieren mit Respkct
 
 date:                                   2024-01-19
 #last_modified:                         2024-01-19
@@ -19,7 +19,7 @@ robots:
   follow:                               true
 
 image:
-  path:                                 /assets/images/modules/attics/1920x1280/ifonnx-toys.jpg
+  path:                                 /assets/images/modules/attics/1920x1280/j1-starter-mockup-1.jpg
   width:                                1920
   height:                               1200
 
@@ -32,15 +32,9 @@ resources:                              [ animate, rouge ]
 resource_options:
   - attic:
       padding_top:                      630
-#     padding_bottom:                   100
-#     margin_bottom:                    180
       slides:
-        - url:                          /assets/images/modules/attics/1920x1280/ifonnx-toys.jpg
-          alt:                          IFONNX Toys
-          badge:
-            type:                       unsplash
-            author:                     IFONNX Toys
-            href:                       //unsplash.com/de/@danroc0414
+        - url:                          /assets/images/modules/attics/1920x1280/j1-starter-mockup-1.jpg
+          alt:                          J1 Starter Mockup
 ---
 
 // Page Initializer
@@ -119,6 +113,7 @@ in Blogbeiträgen veröffentlichen. Kommentare können manchmal eine negative
 Wendung nehmen oder Spam-Links enthalten. Aus diesem Grund ist notwendig, dass
 Nutzer diese Kommentarrichtlinie akzeptieren.
 
+[role="mt-4"]
 === Kommentare sind willkommen
 
 Kommentare sind auf dieser Website willkommen und erwünscht, aber es gibt

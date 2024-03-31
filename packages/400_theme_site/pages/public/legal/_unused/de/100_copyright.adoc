@@ -20,7 +20,7 @@ robots:
   follow:                               true
 
 image:
-  path:                                 /assets/images/modules/attics/1920x1280/ifonnx-toys.jpg
+  path:                                 /assets/images/modules/attics/1920x1280/j1-starter-mockup-1.jpg
   width:                                1920
   height:                               1200
 
@@ -33,15 +33,9 @@ resources:                              [ animate, rouge ]
 resource_options:
   - attic:
       padding_top:                      630
-#     padding_bottom:                   100
-#     margin_bottom:                    180
       slides:
-        - url:                          /assets/images/modules/attics/1920x1280/ifonnx-toys.jpg
-          alt:                          IFONNX Toys
-          badge:
-            type:                       unsplash
-            author:                     IFONNX Toys
-            href:                       //unsplash.com/de/@danroc0414
+        - url:                          /assets/images/modules/attics/1920x1280/j1-starter-mockup-1.jpg
+          alt:                          J1 Starter Mockup
 ---
 
 // Page Initializer
@@ -104,6 +98,7 @@ und Gewissen erstellt. Dennoch übernimmt der Anbieter dieser Website keine
 Verantwortung für die Aktualität, Vollständigkeit und Richtigkeit der
 bereitgestellten Seiten und Inhalte.
 
+[role="mt-4"]
 === Haftung für Inhalte
 
 Als Inhaltsanbieter sind wir gemäß § 7 für eigene Inhalte verantwortlich nach
@@ -116,6 +111,7 @@ nach den allgemeinen Gesetzen bleiben unberührt. Eine diesbezügliche Haftung
 besteht jedoch erst ab dem Zeitpunkt der Kenntnis eines konkreten Verstoßes.
 Beim Erkennen von Verstößen werden wir diesen Inhalt umgehend entfernen.
 
+[role="mt-4"]
 === Haftung für verlinkte Seiten
 
 Unser Angebot kann Links zu externen Webseiten Dritter enthalten. Auf den
@@ -123,11 +119,10 @@ dieser Inhalte haben wir keinen Einfluss. Deshalb können wir für diese fremden
 Inhalte keine Haftung übernehmen. Für die Inhalte der verlinkten Seiten
 die jeweiligen Anbieter oder Betreiber der Seiten die Haftung.
 
+[role="mb-7"]
 Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung auf den Seiten nicht
 erkennbar. Eine inhaltliche Kontrolle der verlinkten Seiten erfolgt ohne konkrete
 Haftung. Beim Erkennen von Verstößen werden wir diesen Inhalt umgehend entfernen.
 Stellen Sie Verstößen fremder Inhalte fest, bitten wir um einen entsprechenden
 Hinweis.
 endif::[]
-
-[role="mb-7"]

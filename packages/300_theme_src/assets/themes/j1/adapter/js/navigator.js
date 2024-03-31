@@ -374,10 +374,15 @@ j1.adapter.navigator = ((j1, window) => {
         var pageState          = $('#content').css("display");
         var pageVisible        = (pageState === 'block') ? true: false;
         var j1CoreFinished     = (j1.getState() === 'finished') ? true: false;
+
+        {% if themes_options.enabled %}
         var themesFinished     = (j1.adapter.themes.getState() === 'finished') ? true: false;
         var themeMenuLoaded    = (desktopThemesLocalLoaded && desktopThemesRemoteLoaded) ? true: false;
 
         if (pageVisible && j1CoreFinished && themesFinished && themeMenuLoaded) {
+        {% else %}
+        if (pageVisible && j1CoreFinished) {
+        {% endif %}
 
           // apply Navigator configuration settings
           logger.info('\n' + 'apply configuration settings');
@@ -827,7 +832,6 @@ j1.adapter.navigator = ((j1, window) => {
       style  = '<style>';
       style += '  .nav-icon {';
       style += '    color: ' + navQuicklinksOptions.icon_color + ';';
-      quicklinks
       style += '  }';
       style += '</style>';
       $('head').append(style);

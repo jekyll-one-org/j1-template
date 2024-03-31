@@ -73,11 +73,6 @@ $dropdown-menu-min-width:                         250px;
 // -------------------------------------------------
 // @media (min-width: 1400px) { ... }
 
-// jadams, 2020-07-29: replaced default $bg-primary value from BS by $nav-primary
-// NOTE: Dynamically set by navigator adapter using property "nav_primary_color"
-// jadams, 2020-09-01: is this var really needed for a color?
-//                     should replaced by global color ($blue)
-//
 $nav-primary:                                     $blue;
 
 // Fonts
@@ -105,18 +100,18 @@ li.nav-item > a {
 // General Nav Icons
 // -----------------------------------------------------------------------------
 .nav-icon {
-    color: $gray-700;
+    color: $gray-900;
 }
 
 .nav-icon:hover {
-    color: $gray-400;
+    color: $gray-500;
 }
 
 // General Nav Colors
 // -----------------------------------------------------------------------------
 // default|general color for navbar and nav-menus
 .nav-primary {
-    background-color: $nav-primary;                                             // md-blue-900
+    background-color: $nav-primary;
 }
 
 // Stop scrolling helper classes
