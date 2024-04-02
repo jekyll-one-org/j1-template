@@ -113,9 +113,7 @@ j1.adapter.gemini = ((j1, window) => {
   var cookie_names;
   var cookie_written;
   var hostname;
-  var auto_domain;
-  var check_cookie_option_domain;
-  var cookie_domain;
+  var domain;
   var secure;
 
   var gemini_model;
@@ -228,7 +226,12 @@ j1.adapter.gemini = ((j1, window) => {
       // create new reindexed data object
       newData = Object.values(slimData);
       // update the select
-      $slimSelect.setData(newData);
+      // failsafe
+      if ($slimSelect !== undefined || $slimSelect !== null) {
+        $slimSelect.setData(newData);
+      } else {
+        logger.error('\n' + 'FATAL: slimSelect NOT available');
+      } // END create|set slimSelect data elements
     }
 
     // update prompt history data
@@ -258,34 +261,42 @@ j1.adapter.gemini = ((j1, window) => {
       // update the prompt history
       if (promptHistoryFromCookie) {
         logger.debug('\n' + 'save prompt history to cookie');
-        j1.removeCookie({
-          name:   cookie_names.chat_prompt,
-          domain: auto_domain,
-          secure: secure
-        });
 
         if (newHistory.length > 0) {
-          cookie_written = j1.writeCookie({
-            name:   cookie_names.chat_prompt,
-            data:   newHistory,
-            secure: secure
+
+          // remove BEFORE write
+          j1.removeCookie({
+            name: cookie_names.chat_prompt
           });
+          cookie_written = j1.writeCookie({
+            name:     cookie_names.chat_prompt,
+            data:     newHistory,
+            secure:   secure
+          });
+
+          $("#clear").show()
         } else {
-          cookie_written = j1.writeCookie({
-            name:   cookie_names.chat_prompt,
-            data:   {},
-            secure: secure
+          j1.removeCookie({
+            name: cookie_names.chat_prompt
           });
+
           logger.info('\n' + 'spanElementEventListener, hide prompt history on last element');
           $("#prompt_history_container").hide();
+          $("#clear").hide()
         } // END if length
       } // END if promptHistoryFromCookie
     }
 
     logger.info('\n' + 'spanElementEventListener, option deleted:\n' + optionText);
 
-    // close currently required to re-add history prompt events on next beforeOpen
-    $slimSelect.close();
+    // failsafe
+    if ($slimSelect === undefined || $slimSelect === null) {
+      logger.error('\n' + 'FATAL: slimSelect NOT available');
+    } else {
+      // close currently required to re-add history prompt events on next beforeOpen
+      $slimSelect.close();
+    }
+
   } // END  spanElementEventListener
 
   // Log the geolocation position
@@ -534,7 +545,6 @@ j1.adapter.gemini = ((j1, window) => {
     // module initializer
     // -------------------------------------------------------------------------
     init: (options) => {
-
       // -----------------------------------------------------------------------
       // default module settings
       // -----------------------------------------------------------------------
@@ -552,7 +562,7 @@ j1.adapter.gemini = ((j1, window) => {
       url                     = new liteURL(window.location.href);
       baseUrl                 = url.origin;
       hostname                = url.hostname;
-      auto_domain             = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
+      domain                  = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
       secure                  = (url.protocol.includes('https')) ? true : false;
       promptHistoryEnabled    = geminiOptions.prompt_history_enabled;
       promptHistoryFromCookie = geminiOptions.prompt_history_from_cookie;
@@ -570,15 +580,13 @@ j1.adapter.gemini = ((j1, window) => {
       // module initializer
       // -----------------------------------------------------------------------
       var dependencies_met_page_ready = setInterval (() => {
-        var pageState          = $('#content').css("display");
-        var pageVisible        = (pageState === 'block') ? true : false;
-        var j1CoreFinished     = (j1.getState() === 'finished') ? true : false;
-//      var slimSelectFinished = (j1.adapter.slimSelect.getState() === 'finished') ? true : false;
-        var slimSelectFinished = (Object.keys(j1.adapter.slimSelect.select).length) ? true : false;
-        var uiLoaded           = (j1.xhrDOMState['#gemini_ui'] === 'success') ? true : false;
+        var flickerState = $('#no_flicker').css("display");
+        var pageState    = $('#content').css("display");
+        var pageVisible  = (flickerState === 'block' && pageState === 'block') ? true : false;
+        var selectReady  = (document.getElementById(geminiOptions.prompt_history_id)) ? true : false;
+        var uiLoaded     = (j1.xhrDOMState['#gemini_ui'] === 'success') ? true : false;
 
-        // check page ready state
-        if (j1CoreFinished && pageVisible && slimSelectFinished && uiLoaded && modulesLoaded) {
+        if (pageVisible && selectReady && uiLoaded && modulesLoaded) {
           startTimeModule = Date.now();
 
           _this.setState('started');
@@ -601,86 +609,91 @@ j1.adapter.gemini = ((j1, window) => {
 
           // get|clear textarea element (prompt)
           textarea        = document.getElementById(geminiOptions.prompt_id);
-          textarea.value  = '';
+          textarea.value = '';
 
-          var dependencies_met_select_ready = setInterval(() => {
-            var selectState         = $('#container_prompt_history_select_wrapper').length;
-            var selectReady         = (selectState > 0) ? true : false;
+          logger.debug('\n' + 'initializing select data');
 
-            if (selectReady) {
-              logger.debug('\n' + 'initializing select data');
+          // initialize history array from cookie
+          if (promptHistoryEnabled && promptHistoryFromCookie) {
 
-              // initialize history array from cookie
-              if (promptHistoryEnabled && promptHistoryFromCookie) {
-                // get slimSelect object for the history (placed by slimSelect adapter)
-                // selectList                      = document.getElementById('prompt_history');
-                $slimSelect                     =  j1.adapter.slimSelect.select[geminiOptions.prompt_history_id];
+            // get slimSelect object
+            selectList  = document.getElementById(geminiOptions.prompt_history_id);
+            $slimSelect = selectList.slim;
 
-                // limit the prompt history
-                promptHistoryMax                = geminiOptions.prompt_history_max;
+            // failsafe
+            if ($slimSelect === undefined || $slimSelect === null) {
+              logger.error('\n' + 'FATAL: slimSelect NOT available');
+            }
+            // END get slimSelect object
 
-                // allow|reject history updates if promptHistoryMax reached
-                allowPromptHistoryUpdatesOnMax  = geminiOptions.allow_prompt_history_updates_on_max;
+            // limit the prompt history
+            promptHistoryMax = geminiOptions.prompt_history_max;
 
-                logger.debug('\n' + 'read prompt history from cookie');
-                var data    = [];
-                var option  = {};
-                chat_prompt = j1.existsCookie(cookie_names.chat_prompt)
-                  ? j1.readCookie(cookie_names.chat_prompt)
-                  : {};
+            // allow|reject history updates if promptHistoryMax reached
+            allowPromptHistoryUpdatesOnMax = geminiOptions.allow_prompt_history_updates_on_max;
 
-                // convert chat prompt object to array
-                textHistory = Object.values(chat_prompt);
+            logger.debug('\n' + 'read prompt history from cookie');
+            var data    = [];
+            var option  = {};
+            chat_prompt = j1.existsCookie(cookie_names.chat_prompt)
+              ? j1.readCookie(cookie_names.chat_prompt)
+              : {};
 
-                // remove duplicates from history
-                if (textHistory.length > 1) {
-                  var textHistoryLenght = textHistory.length;
-                  var uniqueArray       = [...new Set(textHistory)];                // create a 'Set' from the history array to automatically remove duplicates
+            // convert chat prompt object to array
+            textHistory = Object.values(chat_prompt);
 
-                  textHistory = uniqueArray;
-                  if (textHistoryLenght > textHistory.length) {
-                    logger.debug('\n' + 'removed duplicates from history array: ' + (textHistoryLenght - textHistory.length) + ' element|s');
-                  }
-                } // END if !allowHistoryDupicates
+            // remove duplicates from history
+            if (textHistory.length > 1) {
+              var textHistoryLenght = textHistory.length;
+              var uniqueArray       = [...new Set(textHistory)];                // create a 'Set' from the history array to automatically remove duplicates
 
-                // update|set slimSelect data elements
-                var index   = 1;
-                var data    = [];
-                var option  = {};
-                var html;
-                textHistory.forEach((historyText) => {
-                  html   = '<span id="opt_' + geminiOptions.prompt_history_id + '_' + index + '" class="ss-option-delete">' + '<i class="mdib mdib-close mdib-16px ml-1 mr-2"></i></span>' + historyText;
-                  option = {
-                    text:     historyText,
-                    html:     html,
-                    display:  true,
-                    selected: false,
-                    disabled: false
-                  }
-                  data.push(option);
-                  index++
-                }); // END forEach
-                $slimSelect.setData(data);
+              textHistory = uniqueArray;
+              if (textHistoryLenght > textHistory.length) {
+                logger.debug('\n' + 'removed duplicates from history array: ' + (textHistoryLenght - textHistory.length) + ' element|s');
+              }
+            } // END if !allowHistoryDupicates
 
-                // display history container
-                if (textHistory.length > 0) {
-                  $("#prompt_history_container").show();
-                }
+            // update|set slimSelect data elements
+            var index   = 1;
+            var data    = [];
+            var option  = {};
+            var html;
+            textHistory.forEach((historyText) => {
+              html   = '<span id="opt_' + geminiOptions.prompt_history_id + '_' + index + '" class="ss-option-delete">' + '<i class="mdib mdib-close mdib-16px ml-1 mr-2"></i></span>' + historyText;
+              option = {
+                text:     historyText,
+                html:     html,
+                display:  true,
+                selected: false,
+                disabled: false
+              }
+              data.push(option);
+              index++
+            }); // END forEach
 
-                // -------------------------------------------------------------
-                // setup Slim select eventHandlers
-                // -------------------------------------------------------------
-                //
-                _this.setupSlimSelectEventHandlers();
+            // failsafe
+            if ($slimSelect !== undefined || $slimSelect !== null) {
+              $slimSelect.setData(data);
+            } else {
+              logger.error('\n' + 'FATAL: slimSelect NOT available');
+            } // END create|set slimSelect data elements
 
-              } else {
-                // disable|hide clear history button
-                $("#clear").hide();
-              } // if promptHistoryEnabled
+            // display history container
+            if (textHistory.length > 0) {
+              $("#prompt_history_container").show();
+              $("#clear").show();
+            }
 
-              clearInterval(dependencies_met_select_ready);
-            } // END if modules loaded
-          }, 10); // END dependencies_met_select_ready
+            // -------------------------------------------------------------
+            // setup Slim select eventHandlers
+            // -------------------------------------------------------------
+            //
+            _this.setupSlimSelectEventHandlers();
+
+          } else {
+            // disable|hide clear history button
+            $("#clear").hide();
+          } // if promptHistoryEnabled
 
           // -------------------------------------------------------------------
           // setup UI button eventHandlers
@@ -784,11 +797,13 @@ j1.adapter.gemini = ((j1, window) => {
       );
 
       var dependencies_met_data_loaded = setInterval(() => {
-        if (j1.xhrDOMState['#gemini_ui'] === 'success') {
+        var uiLoaded = (j1.xhrDOMState['#gemini_ui'] === 'success') ? true : false;
+
+        if (uiLoaded) {
           logger.debug('\n' + 'Loading UI: successful');
 
           clearInterval(dependencies_met_data_loaded);
-        } // END if xhrDOMState
+        } // END if uiLoaded
       }, 10);
 
     }, // END loadUI
@@ -838,7 +853,13 @@ j1.adapter.gemini = ((j1, window) => {
             data.push(option);
             index++;
           }); // END forEach
-          $slimSelect.setData(data);
+
+          // failsafe
+          if ($slimSelect !== undefined || $slimSelect !== null) {
+            $slimSelect.setData(data);
+          } else {
+            logger.error('\n' + 'FATAL: slimSelect NOT available');
+          } // END create|set slimSelect data elements
 
         } // END re-read current history from cookie
 
@@ -851,10 +872,12 @@ j1.adapter.gemini = ((j1, window) => {
         // wait until prompt history eventListener|s is|are placed
         var listenerIndex = 1;
         slimValues.forEach( () => {
-          var span             = 'opt_prompt_history_' + listenerIndex;
-          var spanElement      = document.getElementById(span);
+          var span        = 'opt_prompt_history_' + listenerIndex;
+          var spanElement = document.getElementById(span);
+
           var dependencies_met_listeners_ready = setInterval (() => {
-            var spanElementReady = (($(spanElement).length) !== 0) ? true : false;
+            var spanElementReady = ($(spanElement).length) ? true : false;
+
             if (spanElementReady) {
               if (listenerIndex === slimValues.length) {
                 eventListenersReady = true;
@@ -892,8 +915,19 @@ j1.adapter.gemini = ((j1, window) => {
           document.getElementById('prompt').value = '';
         }
 
-        // remove selection from select
-        $slimSelect.setSelected('', false);
+        // failsafe
+        if ($slimSelect === undefined || $slimSelect === null) {
+          logger.error('\n' + 'FATAL: slimSelect NOT available');
+        } else {
+          // failsafe
+          if ($slimSelect === undefined || $slimSelect === null) {
+            logger.error('\n' + 'FATAL: slimSelect NOT available');
+          } else {
+            // remove selection from select
+            $slimSelect.setSelected('', false);
+          }
+        }
+
       } // END event afterClose
 
     }, // END setupSlimSelectEventHandlers()
@@ -1018,26 +1052,34 @@ j1.adapter.gemini = ((j1, window) => {
             data.push(option);
             index++;
           }); // END forEach
-          $slimSelect.setData(data);
           // END create|set slimSelect data elements
+
+          // failsafe
+          if ($slimSelect !== undefined || $slimSelect !== null) {
+            $slimSelect.setData(data);
+          } else {
+            logger.error('\n' + 'FATAL: slimSelect NOT available');
+          } // END create|set slimSelect data elements
 
           // display history container
           if (textHistory.length > 0) {
             $("#prompt_history_container").show();
+            $("#clear").show();
           }
 
           // write current history to cookie
           if (promptHistoryFromCookie) {
             logger.debug('\n' + 'sendButton, save prompt history to cookie');
+
+            // remove BEFORE write
             j1.removeCookie({
-              name:   cookie_names.chat_prompt,
-              domain: auto_domain,
-              secure: secure
+              name: cookie_names.chat_prompt
             });
+
             cookie_written = j1.writeCookie({
-              name:   cookie_names.chat_prompt,
-              data:   textHistory,
-              secure: secure
+              name:     cookie_names.chat_prompt,
+              data:     textHistory,
+              secure:   secure
             });
           } // END write current history to cookie
         } // END if promptHistoryEnabled
@@ -1092,21 +1134,15 @@ j1.adapter.gemini = ((j1, window) => {
             logStartOnce = true;
           }
 
-          // write empty history to cookie
+          // clear history
           textHistory = [];
-          if (promptHistoryFromCookie) {
-            j1.removeCookie({
-              name:   cookie_names.chat_prompt,
-              domain: auto_domain,
-              secure: secure
-            });
-            cookie_written = j1.writeCookie({
-              name:     cookie_names.chat_prompt,
-              data:     {},
-              secure:   secure
-            });
-          }
+
+          j1.removeCookie({
+            name: cookie_names.chat_prompt
+          });
+
           $("#prompt_history_container").hide();
+          $("#clear").hide();
         }); // END click accecptClearHistory
 
         // skip clear history

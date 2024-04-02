@@ -212,12 +212,10 @@ var timeSeconds;
               _this.select.{{select.id}} = $select_{{select.id}};
 
               logger.debug('\n' + 'initializing finished select: {{select.id}}');
-            } else {
-              logger.debug('\n' + 'wrapper not found: {{select.wrapper_id}}');
-            } // END if wrapperReady
 
-            clearInterval(wrapper_dependencies['dependency_met_wrapper_ready_{{select.id}}']);
-          }, 10); // END dependency_met_wrapper_ready_
+              clearInterval(wrapper_dependencies['dependency_met_wrapper_ready_{{select.id}}']);
+            } // END if wrapperReady
+          }, 10); // END dependency_met_wrapper_ready
           {% endif %} {% endfor %}
           // END (for) all selects
 
