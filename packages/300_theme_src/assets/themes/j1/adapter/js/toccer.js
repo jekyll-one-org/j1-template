@@ -102,6 +102,7 @@ j1.adapter.toccer = (() => {
   ------------------------------------------------------------------------------ {% endcomment %}
   var environment         = '{{environment}}';
   var state               = 'not_started';
+
   var scrollerSettings    = {};
   var scrollerOptions     = {};
   var scrollerDefaults    = {};

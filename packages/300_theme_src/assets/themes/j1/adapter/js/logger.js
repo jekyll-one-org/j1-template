@@ -93,6 +93,7 @@ j1.adapter.logger = ((j1, window) => {
   var state                 = 'not_started';
   var utilServerOptions     = {};
   var ajaxAppenderOptions   = {};
+
   var loggerDefaults;
   var loggerSettings;
   var loggerOptions;

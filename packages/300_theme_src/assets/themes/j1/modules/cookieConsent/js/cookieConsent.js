@@ -89,12 +89,13 @@ function CookieConsent(props) {
   this.props.cookieSecure = cookieSecure;
 
   var Cookie = {
-    set: function (name, value, days, cookieSameSite, cookieDomain, cookieSecure) {
+    set: (name, value, days, cookieSameSite, cookieDomain, cookieSecure) => {
       var value_encoded = window.btoa(value);
-      var expires = '; expires=Thu, 01 Jan 1970 00:00:00 UTC';
+      var expires       = '; expires=Thu, 01 Jan 1970 00:00:00 UTC';
 
-      if (days>0) {
+      if (days > 0) {
         var date = new Date();
+
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
         expires = "; expires=" + date.toUTCString();
       }
@@ -117,22 +118,27 @@ function CookieConsent(props) {
           document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + ';';
         }
       }
+
     },
-    get: function (name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) === ' ') {
-        c = c.substring(1, c.length);
+
+    get: (name) => {
+      var nameEQ = name + "=";
+      var ca     = document.cookie.split(';');
+
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) === ' ') {
+          c = c.substring(1, c.length);
+        }
+
+        if (c.indexOf(nameEQ) === 0) {
+          var value_encoded = c.substring(nameEQ.length, c.length);
+          var value         = window.atob(value_encoded);
+          return value;
+        }
       }
-      if (c.indexOf(nameEQ) === 0) {
-        var value_encoded = c.substring(nameEQ.length, c.length);
-        var value         = window.atob(value_encoded);
-        return value;
-      }
-    }
-    return undefined;
+
+      return undefined;
     }
   };
 

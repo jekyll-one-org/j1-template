@@ -90,6 +90,7 @@ j1.adapter.translator = (function (j1, window) {
   var environment       = '{{environment}}';
   var state             = 'not_started';
   var user_translate    = {};
+
   var translatorDefaults;
   var translatorSettings;
   var translatorOptions;

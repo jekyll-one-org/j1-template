@@ -85,6 +85,7 @@ j1.adapter.dropdowns = ((j1, window) => {
   var environment           = '{{environment}}';
   var instances             = [];
   var state                 = 'not_started';
+
   var dropdownsDefaults;
   var dropdownsSettings;
   var dropdownsOptions;

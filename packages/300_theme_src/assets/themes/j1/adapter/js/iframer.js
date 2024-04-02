@@ -84,8 +84,9 @@ j1.adapter.iframer = ((j1, window) => {
 
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
-  var environment   = '{{environment}}';
-  var state         = 'not_started';
+  var environment       = '{{environment}}';
+  var state             = 'not_started';
+
   var iframerDefaults;
   var iframerSettings;
   var iframerOptions;

@@ -90,6 +90,7 @@ j1.adapter.masonry = ((j1, window) => {
   var user_state      = j1.readCookie(cookie_names.user_state);
   var viewport_width  = $(window).width();
   var state           = 'not_started';
+
   var masonryDefaults;
   var masonrySettings;
   var masonryOptions;

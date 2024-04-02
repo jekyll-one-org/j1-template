@@ -129,6 +129,7 @@ j1.adapter.comments = ((j1, window) => {
   var hvCallbackScript  = document.createElement('script');
   var comments_headline = '{{comments_headline}}';
   var state             = 'not_started';
+
   var providerID;
   var validProviderID;
   var commentsDefaults;

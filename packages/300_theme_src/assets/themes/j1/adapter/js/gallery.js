@@ -89,6 +89,7 @@ j1.adapter.gallery = ((j1, window) => {
   var environment   = '{{environment}}';
   var state         = 'not_started';
   var play_button   = '/assets/themes/j1/modules/lightGallery/css/themes/uno/icons/play-button.png';
+
   var url;
   var origin;
   var galleryDefaults;

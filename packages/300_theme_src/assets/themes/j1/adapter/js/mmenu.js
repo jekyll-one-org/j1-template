@@ -115,6 +115,7 @@ j1.adapter.mmenu = ((j1, window) => {
   var cookie_names    = j1.getCookieNames();
   var themesEnabled   = {{themes_options.enabled}};
   var state           = 'not_started';
+
   var user_state;
   var user_session;
   var user_data;

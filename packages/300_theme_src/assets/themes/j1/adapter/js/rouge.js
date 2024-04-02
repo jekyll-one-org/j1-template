@@ -81,6 +81,7 @@ j1.adapter.rouge = ((j1, window) => {
   var cookie_names            = j1.getCookieNames();
   var cookie_user_state_name  = cookie_names.user_state;
   var state                   = 'not_started';
+
   var user_state_detected;
   var themeCss;
   var darkTheme;

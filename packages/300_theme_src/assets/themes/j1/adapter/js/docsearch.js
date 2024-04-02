@@ -89,6 +89,7 @@ j1.adapter.docsearch = ((j1, window) => {
 var environment           = '{{environment}}';
 var state                 = 'not_started';
 var cookie_names          = j1.getCookieNames();
+
 var docsearchDefaults;
 var docsearchSettings;
 var docsearchOptions;

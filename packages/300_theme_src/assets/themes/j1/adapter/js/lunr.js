@@ -211,11 +211,9 @@ j1.adapter.lunr = ((j1, window) => {
       // update searchHistory
       if (searchHistoryFromCookie) {
         logger.debug('\n' + 'save search history to cookie');
-        j1.removeCookie({
-          name:   cookie_names.search_prompt,
-          domain: auto_domain,
-          secure: secure
-        });
+
+        // remove BEFORE write
+        j1.removeCookie({ name: cookie_names.search_prompt });
 
         if (newHistory.length > 0) {
           cookie_written = j1.writeCookie({
@@ -652,11 +650,9 @@ j1.adapter.lunr = ((j1, window) => {
         // write current history to cookie
         if (searchHistoryFromCookie) {
           logger.debug('\n' + 'sendButton, save prompt history to cookie');
-          j1.removeCookie({
-            name:   cookie_names.search_prompt,
-            domain: auto_domain,
-            secure: secure
-          });
+
+          // remove BEFORE write
+          j1.removeCookie({ name: cookie_names.search_prompt });
           cookie_written = j1.writeCookie({
             name:   cookie_names.search_prompt,
             data:   textHistory,

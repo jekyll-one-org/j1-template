@@ -86,8 +86,9 @@ j1.adapter.lightbox = ((j1, window) => {
 
   {% comment %} Global variables
   ------------------------------------------------------------------------------ {% endcomment %}
-  var environment  = '{{environment}}';
-  var state        = 'not_started';
+  var environment       = '{{environment}}';
+  var state             = 'not_started';
+
   var lightboxDefaults;
   var lightboxSettings;
   var lightboxOptions;

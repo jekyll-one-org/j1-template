@@ -168,8 +168,8 @@ j1.adapter.navigator = ((j1, window) => {
   var cookie_names                = j1.getCookieNames();
   var cookie_user_session_name    = cookie_names.user_session;
 
-  var navigatorCoreInitialized  = false;
-  var themesEnabled             = {{themes_options.enabled}};
+  var navigatorCoreInitialized    = false;
+  var themesEnabled               = {{themes_options.enabled}};
 
   var user_session                = {};
   var user_session_merged         = {};

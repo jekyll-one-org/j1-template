@@ -265,9 +265,7 @@ j1.adapter.gemini = ((j1, window) => {
         if (newHistory.length > 0) {
 
           // remove BEFORE write
-          j1.removeCookie({
-            name: cookie_names.chat_prompt
-          });
+          j1.removeCookie({ name: cookie_names.chat_prompt });
           cookie_written = j1.writeCookie({
             name:     cookie_names.chat_prompt,
             data:     newHistory,
@@ -276,9 +274,7 @@ j1.adapter.gemini = ((j1, window) => {
 
           $("#clear").show()
         } else {
-          j1.removeCookie({
-            name: cookie_names.chat_prompt
-          });
+          j1.removeCookie({ name: cookie_names.chat_prompt });
 
           logger.info('\n' + 'spanElementEventListener, hide prompt history on last element');
           $("#prompt_history_container").hide();
@@ -1072,10 +1068,7 @@ j1.adapter.gemini = ((j1, window) => {
             logger.debug('\n' + 'sendButton, save prompt history to cookie');
 
             // remove BEFORE write
-            j1.removeCookie({
-              name: cookie_names.chat_prompt
-            });
-
+            j1.removeCookie({ name: cookie_names.chat_prompt });
             cookie_written = j1.writeCookie({
               name:     cookie_names.chat_prompt,
               data:     textHistory,
@@ -1136,10 +1129,7 @@ j1.adapter.gemini = ((j1, window) => {
 
           // clear history
           textHistory = [];
-
-          j1.removeCookie({
-            name: cookie_names.chat_prompt
-          });
+          j1.removeCookie({ name: cookie_names.chat_prompt });
 
           $("#prompt_history_container").hide();
           $("#clear").hide();

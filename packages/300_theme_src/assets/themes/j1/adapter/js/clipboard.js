@@ -70,6 +70,7 @@ j1.adapter.clipboard = ((j1, window) => {
   // ---------------------------------------------------------------------------
   var environment         = '{{environment}}';
   var state               = 'not_started';
+
   var clipboardDefaults;
   var clipboardSettings;
   var clipboardOptions;

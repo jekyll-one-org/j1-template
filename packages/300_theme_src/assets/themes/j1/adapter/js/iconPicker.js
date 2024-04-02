@@ -90,12 +90,14 @@ j1.adapter.iconPicker = ((j1, window) => {
 -------------------------------------------------------------------------------- {% endcomment %}
 var environment           = '{{environment}}';
 var state                 = 'not_started';
+
 var iconPickerDefaults;
 var iconPickerSettings;
 var iconPickerOptions;
 var frontmatterOptions;
 var icon_picker;
 var icon_picker_button_id;
+
 var _this;
 var logger;
 var logText;

@@ -80,7 +80,7 @@ j1.adapter.iconPickerPage = ((j1, window) => {
 
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
-  const selectID  = 'icon_library';
+  const selectID          = 'icon_library';
 
   var iconPickerDefaults;
   var iconPickerSettings;

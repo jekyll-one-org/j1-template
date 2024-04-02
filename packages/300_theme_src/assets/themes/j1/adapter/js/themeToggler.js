@@ -97,6 +97,7 @@ j1.adapter.themeToggler = ((j1, window) => {
   var cookie_names          = j1.getCookieNames();
   var state                 = 'not_started';
   var user_state            = {};
+
   var light_theme_css;
   var dark_theme_css;
   var light_theme_name;

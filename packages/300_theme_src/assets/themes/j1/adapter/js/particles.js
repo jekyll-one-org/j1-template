@@ -89,6 +89,7 @@ j1.adapter.particles = ((j1, window) => {
   var environment         = '{{environment}}';
   var cookie_names        = j1.getCookieNames();
   var state               = 'not_started';
+
   var particleDefaults;
   var particleSettings;
   var particleOptions;

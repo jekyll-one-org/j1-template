@@ -84,10 +84,11 @@ j1.adapter.customModule = ((j1, window) => {
 
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
-  var environment   = '{{environment}}';
-  var moduleOptions = {};
-  var instances     = [];
-  var state         = 'not_started';
+  var environment       = '{{environment}}';
+  var moduleOptions     = {};
+  var instances         = [];
+  var state             = 'not_started';
+
   var frontmatterOptions;
 
   var _this;

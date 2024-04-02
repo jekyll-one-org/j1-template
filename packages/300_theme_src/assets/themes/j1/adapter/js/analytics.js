@@ -185,11 +185,7 @@ j1.adapter.analytics = ((j1, window) => {
             gaCookies = j1.findCookie('_ga');
             gaCookies.forEach((item) => {
               logger.debug('\n' + 'delete cookie created by Google Analytics: ' + item);
-              if (hostname == 'localhost') {
-                j1.removeCookie({ name: item, domain: false, secure: false });
-              } else {
-                j1.removeCookie({ name: item, domain: '.' + hostname, secure: false });
-              }
+              j1.removeCookie({ name: item });
             });
 
             gaExists  = document.getElementById('google-tag-manager') === null ? false : true;

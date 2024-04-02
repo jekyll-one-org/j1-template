@@ -116,7 +116,6 @@ j1.adapter.themes = (function (j1, window) {
   var user_state                = {};
   var user_consent              = {};
   var cookie_names              = j1.getCookieNames();
-//var user_state_detected       = false;
   var styleLoaded               = false;
   var id                        = 'default';
   var state                     = 'not_started';
