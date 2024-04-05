@@ -127,8 +127,8 @@ defaults:
 
     icon_family:                        MDI
     style:                              light
-    background_color_1:                 md_gray_50
-    background_color_2:                 md_gray_50
+    background_color_1:                 var(--md-gray-50)
+    background_color_2:                 var(--md-gray-50)
 
     cards:
       card:
@@ -147,27 +147,27 @@ defaults:
               text:                     Button-1
               class:                    btn-primary btn-flex
               icon:                     image
-              icon_color:               md_white
+              icon_color:               var(--md-white)
               icon_size:                lg
-              href:                     #!
+              href:                     "#"
               target:                   _blank
 
           - button:
               text:                     Button-2
               class:                    btn-primary btn-flex
               icon:                     image
-              icon_color:               md_white
+              icon_color:               var(--md-white)
               icon_size:                lg
-              href:                     #!
+              href:                     "#"
               target:                   _blank
 
           - button:
               text:                     Button-3
               class:                    btn-danger btn-flex
               icon:                     image
-              icon_color:               md_white
+              icon_color:               var(--md-white)
               icon_size:                lg
-              href:                     #!
+              href:                     "#"
               target:                   _blank
 
 
@@ -212,8 +212,8 @@ defaults:
     type:                               parallax
 
     style:                              dark
-    background_color_1:                 md_gray_300
-    background_color_2:                 md_gray_50
+    background_color_1:                 var(--md-gray-300)
+    background_color_2:                 var(--md-gray-50)
 
     cards:
 
@@ -237,9 +237,9 @@ defaults:
             text:                       Button
             class:                      btn-primary btn-flex
             icon:                       image
-            icon_color:                 md_white
+            icon_color:                 var(--md-white)
             icon_size:                  lg
-            href:                       #!
+            href:                       "#"
             target:                     _blank
 
 

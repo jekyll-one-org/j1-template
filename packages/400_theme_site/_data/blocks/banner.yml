@@ -85,15 +85,15 @@ settings:
             enabled:                    false
             height:                     3                                       # [1 .. 9]
             style:                      wave-1                                  # default
-            color:                      "#DCDCDC"
-            background_color:           "#F5F5F5"
+            color:                      var(--md-gray-50)
+            background_color:           var(--md-gray-100)
             transform:                  false                                   # false or rotate|flip-x|flip-y and combinations
           bottom:
             enabled:                    false
             height:                     3
             style:                      wave-4
-            color:                      "#DCDCDC"
-            background_color:           "#F5F5F5"
+            color:                      var(--md-gray-50)
+            background_color:           var(--md-gray-100)
             transform:                  rotate
 
         cards:
@@ -213,7 +213,7 @@ settings:
                                           <span class="text-primary">Better</span>
                                         </strong>
 
-              text_color:               "#E0E0E0"
+              text_color:               var(--md-gray-300)
               gridify:                  true
               size_y:                   450
               darken:                   6

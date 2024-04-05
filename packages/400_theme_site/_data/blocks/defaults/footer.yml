@@ -41,7 +41,7 @@ defaults:
     id:                                 default-footer
     comment:                            Default Footer
     wave:                               false
-    wave_color:                         "#212121"
+    wave_color:                         var(--md-gray-700)
 
     # --------------------------------------------------------------------------
     # ISSUE settings

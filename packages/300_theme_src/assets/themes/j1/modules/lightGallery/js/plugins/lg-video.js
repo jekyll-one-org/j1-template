@@ -411,7 +411,7 @@
                 var wistiaId = 'lg-wistia' + index;
                 var playerParams = param(this.settings.wistiaPlayerParams);
                 playerParams = playerParams ? '?' + playerParams : '';
-                video = "<iframe allow=\"autoplay\" id=\"" + wistiaId + "\" src=\"//fast.wistia.net/embed/iframe/" + (videoInfo.wistia[4] + playerParams) + "\" " + videoTitle + " class=\"wistia_embed lg-video-object lg-wistia " + addClass + "\" name=\"wistia_embed\" " + commonIframeProps + "></iframe>";
+                video = "<iframe allow=\"autoplay\" id=\"" + wistiaId + "\" src=\"//fast.wistia.net/embed/" + videoInfo.wistia[3] + (videoInfo.wistia[4] + playerParams) + "\" " + videoTitle + " class=\"wistia_embed lg-video-object lg-wistia " + addClass + "\" name=\"wistia_embed\" " + commonIframeProps + "></iframe>";
             }
             // jadams: added Dailymotion Player
             else if (videoInfo.dailymotion) {

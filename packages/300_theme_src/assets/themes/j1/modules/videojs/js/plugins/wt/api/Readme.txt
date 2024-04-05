@@ -1,5 +1,6 @@
 See: https://wistia.com/support/developers/e-v1
 See: https://wistia.com/support/developers/player-api
+See: https://docs.wistia.com/docs/all-about-e-v1
 
 For most of our embeds, E-v1.js is essential for the Wistia player to
 function. If you’re using an Inline, Standard or Popover embed code,

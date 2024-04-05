@@ -146,7 +146,7 @@ var timeSeconds;
         var pageVisible    = (pageState === 'block') ? true : false;
         var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
-        if (j1CoreFinished && pageVisible) {
+        if (j1CoreFinished) {
           startTimeModule = Date.now();
 
           _this.setState('started');

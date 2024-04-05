@@ -390,170 +390,170 @@ settings:
     # --------------------------------------------------------------------------
     # Online VIDEO (YouTube)
     #
-    - gallery:
-      enabled:                          true
-
-      id:                               jg_video_online_youtube
-      type:                             video
-      video:                            youtube
-      image_base_path:                  /assets/videos/gallery
-      thumb_base_path:                  /assets/videos/gallery
-
-      # ------------------------------------------------------------------------
-      # Justified Gallery settings
-      # ------------------------------------------------------------------------
-      #
-      gallery_options:
-        rowHeight:                      200
-        gutters:                        3
-
-      # ------------------------------------------------------------------------
-      # Lightbox|lightGallery settings
-      # ------------------------------------------------------------------------
-      #
-      lightbox:
-        enabled:                        true
-        type:                           lg
-
-      lightGallery:
-        plugins:                        lgThumbnail, lgVideo
-
-        options:
-          licenseKey:                   0000-0000-000-0000
-          download:                     false
-          alignThumbnails:              left
-          animateThumb:                 true
-          autoplayFirstVideo:           true
-          videojs:                      false
-
-        videojsOptions:
-          enabled:                      false
-
-        playerParams:
-          enabled:                      true
-          start:                        ["00:00:50", "00:00:50"]                # start time video1, vido2
-          autoplay:                     0
-          controls:                     0
-          enablejsapi:                  1
-          hl:                           en
-          loop:                         0
-          mute:                         0
-          playsinline:                  1
-          wmode:                        opaque
-
-      # ------------------------------------------------------------------------
-      # CSS filter options
-      #
-      filters:
-        enabled:                        false
-        grayscale:                      0
-        contrast:                       1
-        brightness:                     1
-
-      # ------------------------------------------------------------------------
-      # Video settings
-      # ------------------------------------------------------------------------
-      #
-      videos:
-
-        - video:                        # video 1
-          enabled:                      true
-
-          id:                           X5Cfi7U4eL4
-          name:                         Carpool Karaoke Lady Gaga
-          type:                         youtube
-          size:                         "1280-720"
-          source:                       "//youtube.com/watch?v=X5Cfi7U4eL4"
-          pinterest_prefix:             Pin video
-          tweet_prefix:                 Try video
-          description: >
-                                        <h5>Carpool Karaoke</h5>
-                                        <h6>
-                                          Lady Gaga joins James for a drive through Los Angeles
-                                          singing her classics and tracks from her new album.
-                                        </h6>
-                                        <br>
-          caption:
-            text:                       "Carpool Karaoke &middot; Lady Gaga"
-          poster:
-            source:                     video_gaga-poster.jpg
-
-          playerParams:
-            enabled:                    false
-
-        - video:                        # video 2
-          enabled:                      true
-
-          name:                         Carpool Karaoke Adele
-          type:                         youtube
-          size:                         "1280-720"
-          source:                       "//youtube.com/watch?v=Nck6BZga7TQ"
-          pinterest_prefix:             Pin video
-          tweet_prefix:                 Try video
-          description: >
-                                        <h5>Carpool Karaoke</h5>
-                                        <h6>
-                                          James Corden is about the holidays in London and gets Adele
-                                          off for a ride through the city. On the way they sing some
-                                          of their biggest hits and Adele raps Nicki Minaj's <b>monster</b>
-                                        </h6>
-                                        <br>
-          caption:
-            text:                       "Carpool Karaoke &middot; Adele"
-          poster:
-            source:                     video_adele-poster.jpg
-
-          playerParams:
-            enabled:                    true
-            start:                      50
-
-        - video:                        # video 3
-          enabled:                      true
-
-          name:                         Carpool Karaoke Gwen Stefani
-          type:                         youtube
-          size:                         "1280-720"
-          source:                       "//youtube.com/watch?v=F2SXmzk8ve4"
-          pinterest_prefix:             Pin video
-          tweet_prefix:                 Try video
-          description: >
-                                        <h5>Carpool Karaoke</h5>
-                                        <h6>
-                                          Gwen Stefani, Julia Roberts, George Clooney and James Corden
-                                          singing Holla back girl, there's nothing left to see
-                                        </h6>
-                                        <br>
-          poster:
-            source:                     video_gwen-poster.jpg
-          caption:
-            text:                       "Carpool Karaoke &middot; Gwen Stefani"
-
-          playerParams:                 false
-
-        - video:                        # video 4
-          enabled:                      true
-
-          name:                         Carpool Karaoke Michelle Obama
-          type:                         youtube
-          size:                         "1280-720"
-          source:                       "//youtube.com/watch?v=ln3wAdRAim4"
-          pinterest_prefix:             Pin video
-          tweet_prefix:                 Try video
-          description: >
-                                        <h5>Carpool Karaoke</h5>
-                                        <h6>
-                                          James Corden's White House tour takes an unthinkable turn
-                                          when First Lady Michelle Obama joins him for a drive around
-                                          the grounds singing Stevie Wonder and Beyonce
-                                        </h6>
-                                        <br>
-          caption:
-            text:                       "Carpool Karaoke &middot; Michelle Obama"
-          poster:
-            source:                     video_michelle-poster.jpg
-
-          playerParams:
-            enabled:                    false
+    # - gallery:
+    #   enabled:                          true
+    #
+    #   id:                               jg_video_online_youtube
+    #   type:                             video
+    #   video:                            youtube
+    #   image_base_path:                  /assets/videos/gallery
+    #   thumb_base_path:                  /assets/videos/gallery
+    #
+    #   # ------------------------------------------------------------------------
+    #   # Justified Gallery settings
+    #   # ------------------------------------------------------------------------
+    #   #
+    #   gallery_options:
+    #     rowHeight:                      200
+    #     gutters:                        3
+    #
+    #   # ------------------------------------------------------------------------
+    #   # Lightbox|lightGallery settings
+    #   # ------------------------------------------------------------------------
+    #   #
+    #   lightbox:
+    #     enabled:                        true
+    #     type:                           lg
+    #
+    #   lightGallery:
+    #     plugins:                        lgThumbnail, lgVideo
+    #
+    #     options:
+    #       licenseKey:                   0000-0000-000-0000
+    #       download:                     false
+    #       alignThumbnails:              left
+    #       animateThumb:                 true
+    #       autoplayFirstVideo:           true
+    #       videojs:                      false
+    #
+    #     videojsOptions:
+    #       enabled:                      false
+    #
+    #     playerParams:
+    #       enabled:                      true
+    #       start:                        ["00:00:50", "00:00:50"]                # start time video1, vido2
+    #       autoplay:                     0
+    #       controls:                     0
+    #       enablejsapi:                  1
+    #       hl:                           en
+    #       loop:                         0
+    #       mute:                         0
+    #       playsinline:                  1
+    #       wmode:                        opaque
+    #
+    #   # ------------------------------------------------------------------------
+    #   # CSS filter options
+    #   #
+    #   filters:
+    #     enabled:                        false
+    #     grayscale:                      0
+    #     contrast:                       1
+    #     brightness:                     1
+    #
+    #   # ------------------------------------------------------------------------
+    #   # Video settings
+    #   # ------------------------------------------------------------------------
+    #   #
+    #   videos:
+    #
+    #     - video:                        # video 1
+    #       enabled:                      true
+    #
+    #       id:                           X5Cfi7U4eL4
+    #       name:                         Carpool Karaoke Lady Gaga
+    #       type:                         youtube
+    #       size:                         "1280-720"
+    #       source:                       "//youtube.com/watch?v=X5Cfi7U4eL4"
+    #       pinterest_prefix:             Pin video
+    #       tweet_prefix:                 Try video
+    #       description: >
+    #                                     <h5>Carpool Karaoke</h5>
+    #                                     <h6>
+    #                                       Lady Gaga joins James for a drive through Los Angeles
+    #                                       singing her classics and tracks from her new album.
+    #                                     </h6>
+    #                                     <br>
+    #       caption:
+    #         text:                       "Carpool Karaoke &middot; Lady Gaga"
+    #       poster:
+    #         source:                     video_gaga-poster.jpg
+    #
+    #       playerParams:
+    #         enabled:                    false
+    #
+    #     - video:                        # video 2
+    #       enabled:                      true
+    #
+    #       name:                         Carpool Karaoke Adele
+    #       type:                         youtube
+    #       size:                         "1280-720"
+    #       source:                       "//youtube.com/watch?v=Nck6BZga7TQ"
+    #       pinterest_prefix:             Pin video
+    #       tweet_prefix:                 Try video
+    #       description: >
+    #                                     <h5>Carpool Karaoke</h5>
+    #                                     <h6>
+    #                                       James Corden is about the holidays in London and gets Adele
+    #                                       off for a ride through the city. On the way they sing some
+    #                                       of their biggest hits and Adele raps Nicki Minaj's <b>monster</b>
+    #                                     </h6>
+    #                                     <br>
+    #       caption:
+    #         text:                       "Carpool Karaoke &middot; Adele"
+    #       poster:
+    #         source:                     video_adele-poster.jpg
+    #
+    #       playerParams:
+    #         enabled:                    true
+    #         start:                      50
+    #
+    #     - video:                        # video 3
+    #       enabled:                      true
+    #
+    #       name:                         Carpool Karaoke Gwen Stefani
+    #       type:                         youtube
+    #       size:                         "1280-720"
+    #       source:                       "//youtube.com/watch?v=F2SXmzk8ve4"
+    #       pinterest_prefix:             Pin video
+    #       tweet_prefix:                 Try video
+    #       description: >
+    #                                     <h5>Carpool Karaoke</h5>
+    #                                     <h6>
+    #                                       Gwen Stefani, Julia Roberts, George Clooney and James Corden
+    #                                       singing Holla back girl, there's nothing left to see
+    #                                     </h6>
+    #                                     <br>
+    #       poster:
+    #         source:                     video_gwen-poster.jpg
+    #       caption:
+    #         text:                       "Carpool Karaoke &middot; Gwen Stefani"
+    #
+    #       playerParams:                 false
+    #
+    #     - video:                        # video 4
+    #       enabled:                      true
+    #
+    #       name:                         Carpool Karaoke Michelle Obama
+    #       type:                         youtube
+    #       size:                         "1280-720"
+    #       source:                       "//youtube.com/watch?v=ln3wAdRAim4"
+    #       pinterest_prefix:             Pin video
+    #       tweet_prefix:                 Try video
+    #       description: >
+    #                                     <h5>Carpool Karaoke</h5>
+    #                                     <h6>
+    #                                       James Corden's White House tour takes an unthinkable turn
+    #                                       when First Lady Michelle Obama joins him for a drive around
+    #                                       the grounds singing Stevie Wonder and Beyonce
+    #                                     </h6>
+    #                                     <br>
+    #       caption:
+    #         text:                       "Carpool Karaoke &middot; Michelle Obama"
+    #       poster:
+    #         source:                     video_michelle-poster.jpg
+    #
+    #       playerParams:
+    #         enabled:                    false
 
     # --------------------------------------------------------------------------
     # Online VIDEO (YouTube)
@@ -881,7 +881,7 @@ settings:
 
         playerParams:
           enabled:                      false
-          autoplay:                     0
+          autoplay:                     1
           byline:                       0
           portrait:                     0
           color:                        var(--md-gray-100)
@@ -946,7 +946,7 @@ settings:
             source:                     stay-colorful-poster.jpg
 
     # --------------------------------------------------------------------------
-    # Online VIDEO (DailyMotion)
+    # Online VIDEO (Dailymotion)
     #
     - gallery:
       enabled:                          true
@@ -1040,6 +1040,102 @@ settings:
             text:                       "SELF Channel &middot; Pilates Core Workout"
           poster:
             source:                     pilates.jpg
+
+    # --------------------------------------------------------------------------
+    # Online VIDEO (Wistia)
+    #
+    - gallery:
+      enabled:                          true
+
+      id:                               jg_video_online_wistia
+      type:                             video
+      video:                            wistia
+      image_base_path:                  /assets/videos/gallery/wistia
+      thumb_base_path:                  /assets/videos/gallery/wistia
+
+      # ------------------------------------------------------------------------
+      # Justified Gallery settings
+      # ------------------------------------------------------------------------
+      #
+      gallery_options:
+        rowHeight:                      250
+        gutters:                        3
+
+      # ------------------------------------------------------------------------
+      # Lightbox|lightGallery settings
+      # ------------------------------------------------------------------------
+      #
+      lightbox:
+        enabled:                        true
+        type:                           lg
+
+      lightGallery:
+        plugins:                        lgThumbnail, lgVideo
+
+        options:
+          licenseKey:                   0000-0000-000-0000
+          download:                     false
+          alignThumbnails:              left
+          animateThumb:                 true
+          autoplayFirstVideo:           true
+          videojs:                      false
+
+        videojsOptions:
+          enabled:                      false
+
+        playerParams:
+          enabled:                      false
+
+      # ------------------------------------------------------------------------
+      # CSS filter options
+      #
+      filters:
+        enabled:                        false
+        grayscale:                      0
+        contrast:                       1
+        brightness:                     1
+
+      # ------------------------------------------------------------------------
+      # Video settings
+      # ------------------------------------------------------------------------
+      #
+      videos:
+
+        - video:                        # video 1
+          enabled:                      true
+
+          name:                         Intro
+          type:                         wistia
+          size:                         "1280-720"
+          source:                       "//fast.wistia.com/embed/iframe/29b0fbf547"
+          pinterest_prefix:             Pin video
+          tweet_prefix:                 Try video
+          description: >
+                                        <h5>Introduction</h5>
+                                        <h6>What can be done on Wistia</h6>
+                                        <br>
+          caption:
+            text:                       "Introduction &middot; What can be done on Wistia"
+          poster:
+            source:                      video-1-poster.webp
+
+        - video:                        # video 2
+          enabled:                      true
+
+          name:                         Thank You
+          type:                         wistia
+          size:                         "1280-720"
+          source:                       "//fast.wistia.com/embed/iframe/mwhrulrucj"
+          pinterest_prefix:             Pin video
+          tweet_prefix:                 Try video
+          description: >
+                                        <h5>Thank You</h5>
+                                        <h6>Sample Video on Wistia</h6>
+                                        <br>
+          caption:
+            text:                       "Thank You &middot; Sample Video on Wistia"
+          poster:
+            source:                      video-2.poster.jpg
 
     # --------------------------------------------------------------------------
     # Online VIDEO (TikTok)

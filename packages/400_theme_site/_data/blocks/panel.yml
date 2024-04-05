@@ -88,15 +88,15 @@ settings:
             enabled:                    false
             height:                     2                                     # [1 .. 9]
             style:                      wave-1                                # default
-            color:                      "#EEEEEE"                             # "#dcdcdc"
-            background_color:           "#FAFAFA"                             # auto|rgb_value, "#FAFAFA"
+            color:                      var(--md-gray-200)
+            background_color:           var(--md-gray-50)                             # auto|rgb_value, var(--md-gray-50)
             transform:                  false                                 # false or rotate|flip-x|flip-y and combinations
           bottom:
             enabled:                    false
             height:                     2
             style:                      wave-4
-            color:                      "#EEEEEE"
-            background_color:           "#FAFAFA"
+            color:                      var(--md-gray-200)
+            background_color:           var(--md-gray-50)
             transform:                  flip-y flip-x
 
         cards:
@@ -235,15 +235,15 @@ settings:
             enabled:                    defaultCssFile
             height:                     4                                     # [1 .. 9]
             style:                      wave-4                                # default
-            color:                      "#EEEEEE"
-            background_color:           "#FAFAFA"
+            color:                      var(--md-gray-200)
+            background_color:           var(--md-gray-50)
             transform:                  false                                 # false or rotate|flip-x|flip-y and combinations
           bottom:
             enabled:                    false
             height:                     2
             style:                      wave-4
-            color:                      "#EEEEEE"
-            background_color:           "#FAFAFA"
+            color:                      var(--md-gray-200)
+            background_color:           var(--md-gray-50)
             transform:                  rotate
 
         cards:
@@ -438,15 +438,15 @@ settings:
             enabled:                    false
             height:                     2                                     # [1 .. 9]
             style:                      wave-1                                # default
-            color:                      "#EEEEEE"
-            background_color:           "#FAFAFA"
+            color:                      var(--md-gray-200)
+            background_color:           var(--md-gray-50)
             transform:                  false                                 # false or rotate|flip-x|flip-y and combinations
           bottom:
             enabled:                    false
             height:                     2
             style:                      wave-4
-            color:                      "#EEEEEE"
-            background_color:           "#FAFAFA"
+            color:                      var(--md-gray-200)
+            background_color:           var(--md-gray-50)
             transform:                  rotate
 
         cards:
@@ -458,7 +458,7 @@ settings:
               icon:                     globe-model
               icon_family:              mdib
               icon_size:                mdib-6x
-              icon_color:               md-white
+              icon_color:               var(--bs-white)
               href:                     /pages/public/features/general_features/
               title:                    Jekyll One
               tagline:                  General Features
@@ -590,7 +590,7 @@ settings:
               icon:                     gift
               icon_family:              mdib
               icon_size:                mdib-6x
-              icon_color:               md-white
+              icon_color:               var(--bs-white)
               href:                     /pages/public/features/template_features/
               title:                    Jekyll One
               tagline:                  Theme Features
@@ -748,17 +748,17 @@ settings:
         wave:
           top:
             enabled:                    false
-            height:                     2                                     # [1 .. 9]
-            style:                      wave-1                                # default
-            color:                      "#EEEEEE"
-            background_color:           "#FAFAFA"
-            transform:                  false                                 # false or rotate|flip-x|flip-y and combinations
+            height:                     2                                       # [1 .. 9]
+            style:                      wave-1                                  # default
+            color:                      var(--md-gray-200)
+            background_color:           var(--md-gray-50)
+            transform:                  false                                   # false or rotate|flip-x|flip-y and combinations
           bottom:
             enabled:                    false
             height:                     2
             style:                      wave-4
-            color:                      "#EEEEEE"
-            background_color:           "#FAFAFA"
+            color:                      var(--md-gray-200)
+            background_color:           var(--md-gray-50)
             transform:                  rotate
 
         cards:

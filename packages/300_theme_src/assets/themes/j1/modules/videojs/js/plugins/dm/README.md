@@ -3,6 +3,8 @@
 ## Install
 You can use bower (`bower install @lawchihon/videojs-dailymotion`), npm (`npm install @lawchihon/videojs-dailymotion`) or the source and build it using `npm run build`. Then, the only file you need is dist/Dailymotion.min.js.
 
+https://github.com/lawchihon/videojs-dailymotion
+
 ## Version Note
 It only support v5 - v7
 

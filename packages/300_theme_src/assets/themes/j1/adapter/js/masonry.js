@@ -144,7 +144,6 @@ j1.adapter.masonry = ((j1, window) => {
       masonryOptions =  $.extend(true, {}, masonryDefaults, masonrySettings);
 
       // load HTML portion for all grids
-      console.debug('loading HTML portion for all Masonry grids configured');
       _this.loadGridHTML(masonryOptions, masonryOptions.grids);
 
       // -----------------------------------------------------------------------
@@ -154,6 +153,7 @@ j1.adapter.masonry = ((j1, window) => {
         var pageState      = $('#content').css("display");
         var pageVisible    = (pageState === 'block') ? true: false;
         var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
+        var atticFinished  = (j1.adapter.attic.getState() == 'finished') ? true : false;
 
         if (j1CoreFinished && pageVisible) {
           startTimeModule = Date.now();
@@ -240,10 +240,10 @@ j1.adapter.masonry = ((j1, window) => {
 
                     // run code after all images are loaded with the grid
                     $grid_{{grid_id}}.imagesLoaded(() => {
-                      console.debug("masonry: images loaded on {{grid_id}}");
+                      logger.debug('\n' + 'images loaded on id: {{grid_id}}');
 
                       {% if grid.lightbox.type == 'lg' %}
-                      console.log("masonry: gallery detected on id: {{grid_id}}");
+                      logger.debug('\n' + 'gallery detected on id: {{grid_id}}');
 
                       // setup lightbox
                       var lg      = document.getElementById("{{grid_id}}");

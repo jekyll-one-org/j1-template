@@ -1,6 +1,6 @@
 /**
  * @license
- * Video.js 8.11.1 <http://videojs.com/>
+ * Video.js 8.11.8 <http://videojs.com/>
  * Copyright Brightcove, Inc. <https://www.brightcove.com/>
  * Available under Apache License Version 2.0
  * <https://github.com/videojs/video.js/blob/main/LICENSE>
@@ -9,7 +9,7 @@
  * Available under Apache License Version 2.0
  * <https://github.com/mozilla/vtt.js/blob/main/LICENSE>
  *
- * https://vjs.zencdn.net/8.11.1/video.js 
+ * https://vjs.zencdn.net/8.11.8/video.js
  */
 
 (function (global, factory) {
@@ -18,7 +18,7 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.videojs = factory());
 })(this, (function () { 'use strict';
 
-  var version$5 = "8.11.1";
+  var version$5 = "8.11.8";
 
   /**
    * An Object that contains lifecycle hooks as keys which point to an array
@@ -6101,7 +6101,8 @@
         'aria-describedby': `${this.id()}_description`,
         'aria-hidden': 'true',
         'aria-label': this.label(),
-        'role': 'dialog'
+        'role': 'dialog',
+        'aria-live': 'polite'
       });
     }
     dispose() {
@@ -6155,48 +6156,52 @@
      * @fires ModalDialog#modalopen
      */
     open() {
-      if (!this.opened_) {
-        const player = this.player();
-
-        /**
-          * Fired just before a `ModalDialog` is opened.
-          *
-          * @event ModalDialog#beforemodalopen
-          * @type {Event}
-          */
-        this.trigger('beforemodalopen');
-        this.opened_ = true;
-
-        // Fill content if the modal has never opened before and
-        // never been filled.
-        if (this.options_.fillAlways || !this.hasBeenOpened_ && !this.hasBeenFilled_) {
+      if (this.opened_) {
+        if (this.options_.fillAlways) {
           this.fill();
         }
-
-        // If the player was playing, pause it and take note of its previously
-        // playing state.
-        this.wasPlaying_ = !player.paused();
-        if (this.options_.pauseOnOpen && this.wasPlaying_) {
-          player.pause();
-        }
-        this.on('keydown', this.handleKeyDown_);
-
-        // Hide controls and note if they were enabled.
-        this.hadControls_ = player.controls();
-        player.controls(false);
-        this.show();
-        this.conditionalFocus_();
-        this.el().setAttribute('aria-hidden', 'false');
-
-        /**
-          * Fired just after a `ModalDialog` is opened.
-          *
-          * @event ModalDialog#modalopen
-          * @type {Event}
-          */
-        this.trigger('modalopen');
-        this.hasBeenOpened_ = true;
+        return;
       }
+      const player = this.player();
+
+      /**
+        * Fired just before a `ModalDialog` is opened.
+        *
+        * @event ModalDialog#beforemodalopen
+        * @type {Event}
+        */
+      this.trigger('beforemodalopen');
+      this.opened_ = true;
+
+      // Fill content if the modal has never opened before and
+      // never been filled.
+      if (this.options_.fillAlways || !this.hasBeenOpened_ && !this.hasBeenFilled_) {
+        this.fill();
+      }
+
+      // If the player was playing, pause it and take note of its previously
+      // playing state.
+      this.wasPlaying_ = !player.paused();
+      if (this.options_.pauseOnOpen && this.wasPlaying_) {
+        player.pause();
+      }
+      this.on('keydown', this.handleKeyDown_);
+
+      // Hide controls and note if they were enabled.
+      this.hadControls_ = player.controls();
+      player.controls(false);
+      this.show();
+      this.conditionalFocus_();
+      this.el().setAttribute('aria-hidden', 'false');
+
+      /**
+        * Fired just after a `ModalDialog` is opened.
+        *
+        * @event ModalDialog#modalopen
+        * @type {Event}
+        */
+      this.trigger('modalopen');
+      this.hasBeenOpened_ = true;
     }
 
     /**
@@ -19070,7 +19075,6 @@
     constructor(player, options) {
       super(player, options);
       this.on(player, 'error', e => {
-        this.close();
         this.open(e);
       });
     }
@@ -25315,7 +25319,10 @@
           pipWindow.document.body.appendChild(this.el_);
           pipWindow.document.body.classList.add('vjs-pip-window');
           this.player_.isInPictureInPicture(true);
-          this.player_.trigger('enterpictureinpicture');
+          this.player_.trigger({
+            type: 'enterpictureinpicture',
+            pipWindow
+          });
 
           // Listen for the PiP closing event to move the video back.
           pipWindow.addEventListener('pagehide', event => {
@@ -27206,7 +27213,7 @@
      * Values other than arrays are ignored.
      *
      * @fires Player#playbackrateschange
-     * @param {number[]} newRates
+     * @param {number[]} [newRates]
      *                   The new rates that the playback rates menu should update to.
      *                   An empty array will hide the menu
      * @return {number[]} When used as a getter will return the current playback rates
@@ -28000,7 +28007,25 @@
     SegmentAppendError: 'segment-append-error',
     VttLoadError: 'vtt-load-error',
     VttCueParsingError: 'vtt-cue-parsing-error',
-    EMEKeySessionCreationError: 'eme-key-session-creation-error'
+    // Errors used in contrib-ads:
+    AdsBeforePrerollError: 'ads-before-preroll-error',
+    AdsPrerollError: 'ads-preroll-error',
+    AdsMidrollError: 'ads-midroll-error',
+    AdsPostrollError: 'ads-postroll-error',
+    AdsMacroReplacementFailed: 'ads-macro-replacement-failed',
+    AdsResumeContentFailed: 'ads-resume-content-failed',
+    // Errors used in contrib-eme:
+    EMEEncryptedError: 'eme-encrypted-error',
+    MSKeyError: 'ms-key-error',
+    WebkitKeyError: 'webkit-key-error',
+    EMEFailedToRequestMediaKeySystemAccess: 'eme-failed-request-media-key-system-access',
+    EMEFailedToCreateMediaKeys: 'eme-failed-create-media-keys',
+    EMEFailedToAttachMediaKeysToVideoElement: 'eme-failed-attach-media-keys-to-video',
+    EMEFailedToCreateMediaKeySession: 'eme-failed-create-media-key-session',
+    EMEFailedToSetServerCertificate: 'eme-failed-set-server-certificate',
+    EMEFailedToGenerateLicenseRequest: 'eme-failed-generate-license-request',
+    EMEFailedToUpdateSessionWithReceivedLicenseKeys: 'eme-failed-update-session',
+    EMEFailedToCloseSession: 'eme-failed-close-session'
   };
 
   /**
@@ -28546,7 +28571,7 @@
   videojs.Error = VjsErrors;
 
   createCommonjsModule(function (module, exports) {
-    /*! @name videojs-contrib-quality-levels @version 4.0.0 @license Apache-2.0 */
+    /*! @name videojs-contrib-quality-levels @version 4.1.0 @license Apache-2.0 */
     (function (global, factory) {
       module.exports = factory(videojs) ;
     })(commonjsGlobal, function (videojs) {
@@ -28636,8 +28661,7 @@
        * @extends videojs.EventTarget
        * @class QualityLevelList
        */
-
-      class QualityLevelList extends videojs__default['default'].EventTarget {
+      class QualityLevelList extends videojs__default["default"].EventTarget {
         /**
          * Creates a QualityLevelList.
          */
@@ -28647,25 +28671,25 @@
 
           list.levels_ = [];
           list.selectedIndex_ = -1;
+
           /**
            * Get the index of the currently selected QualityLevel.
            *
            * @returns {number} The index of the selected QualityLevel. -1 if none selected.
            * @readonly
            */
-
           Object.defineProperty(list, 'selectedIndex', {
             get() {
               return list.selectedIndex_;
             }
           });
+
           /**
            * Get the length of the list of QualityLevels.
            *
            * @returns {number} The length of the list.
            * @readonly
            */
-
           Object.defineProperty(list, 'length', {
             get() {
               return list.levels_.length;
@@ -28674,6 +28698,7 @@
           list[Symbol.iterator] = () => list.levels_.values();
           return list;
         }
+
         /**
          * Adds a quality level to the list.
          *
@@ -28687,10 +28712,10 @@
          * @return {QualityLevel} the QualityLevel added to the list
          * @method addQualityLevel
          */
-
         addQualityLevel(representation) {
-          let qualityLevel = this.getQualityLevelById(representation.id); // Do not add duplicate quality levels
+          let qualityLevel = this.getQualityLevelById(representation.id);
 
+          // Do not add duplicate quality levels
           if (qualityLevel) {
             return qualityLevel;
           }
@@ -28710,6 +28735,7 @@
           });
           return qualityLevel;
         }
+
         /**
          * Removes a quality level from the list.
          *
@@ -28717,7 +28743,6 @@
          * @return {QualityLevel|null} the QualityLevel removed or null if nothing removed
          * @method removeQualityLevel
          */
-
         removeQualityLevel(qualityLevel) {
           let removed = null;
           for (let i = 0, l = this.length; i < l; i++) {
@@ -28739,6 +28764,7 @@
           }
           return removed;
         }
+
         /**
          * Searches for a QualityLevel with the given id.
          *
@@ -28746,7 +28772,6 @@
          * @return {QualityLevel|null} The QualityLevel with id, or null if not found.
          * @method getQualityLevelById
          */
-
         getQualityLevelById(id) {
           for (let i = 0, l = this.length; i < l; i++) {
             const level = this[i];
@@ -28756,33 +28781,34 @@
           }
           return null;
         }
+
         /**
          * Resets the list of QualityLevels to empty
          *
          * @method dispose
          */
-
         dispose() {
           this.selectedIndex_ = -1;
           this.levels_.length = 0;
         }
       }
+
       /**
        * change - The selected QualityLevel has changed.
        * addqualitylevel - A QualityLevel has been added to the QualityLevelList.
        * removequalitylevel - A QualityLevel has been removed from the QualityLevelList.
        */
-
       QualityLevelList.prototype.allowedEvents_ = {
         change: 'change',
         addqualitylevel: 'addqualitylevel',
         removequalitylevel: 'removequalitylevel'
-      }; // emulate attribute EventHandler support to allow for feature detection
+      };
 
+      // emulate attribute EventHandler support to allow for feature detection
       for (const event in QualityLevelList.prototype.allowedEvents_) {
         QualityLevelList.prototype['on' + event] = null;
       }
-      var version = "4.0.0";
+      var version = "4.1.0";
 
       /**
        * Initialization function for the qualityLevels plugin. Sets up the QualityLevelList and
@@ -28792,7 +28818,6 @@
        * @param {Object} options Plugin options object.
        * @return {QualityLevelList} a list of QualityLevels
        */
-
       const initPlugin = function (player, options) {
         const originalPluginFn = player.qualityLevels;
         const qualityLevelList = new QualityLevelList();
@@ -28806,6 +28831,7 @@
         player.qualityLevels.VERSION = version;
         return qualityLevelList;
       };
+
       /**
        * A video.js plugin.
        *
@@ -28817,13 +28843,14 @@
        * @param {Object} options Plugin options object
        * @return {QualityLevelList} a list of QualityLevels
        */
-
       const qualityLevels = function (options) {
-        return initPlugin(this, videojs__default['default'].obj.merge({}, options));
-      }; // Register the plugin with video.js.
+        return initPlugin(this, videojs__default["default"].obj.merge({}, options));
+      };
 
-      videojs__default['default'].registerPlugin('qualityLevels', qualityLevels); // Include the version number.
+      // Register the plugin with video.js.
+      videojs__default["default"].registerPlugin('qualityLevels', qualityLevels);
 
+      // Include the version number.
       qualityLevels.VERSION = version;
       return qualityLevels;
     });
@@ -39295,7 +39322,7 @@
   };
   var clock_1 = clock.ONE_SECOND_IN_TS;
 
-  /*! @name @videojs/http-streaming @version 3.10.0 @license Apache-2.0 */
+  /*! @name @videojs/http-streaming @version 3.12.0 @license Apache-2.0 */
 
   /**
    * @file resolve-url.js - Handling how URLs are resolved and manipulated
@@ -39351,6 +39378,26 @@
     const context = videojs.time || videojs;
     const fn = context.createTimeRanges || context.createTimeRanges;
     return fn.apply(context, args);
+  }
+  /**
+   * Converts provided buffered ranges to a descriptive string
+   *
+   * @param {TimeRanges} buffered - received buffered time ranges
+   *
+   * @return {string} - descriptive string
+   */
+
+  function bufferedRangesToString(buffered) {
+    if (buffered.length === 0) {
+      return 'Buffered Ranges are empty';
+    }
+    let bufferedRangesStr = 'Buffered Ranges: \n';
+    for (let i = 0; i < buffered.length; i++) {
+      const start = buffered.start(i);
+      const end = buffered.end(i);
+      bufferedRangesStr += `${start} --> ${end}. Duration (${end - start})\n`;
+    }
+    return bufferedRangesStr;
   }
 
   /**
@@ -41119,7 +41166,8 @@
       this.state = 'HAVE_CURRENT_METADATA';
       this.request = this.vhs_.xhr({
         uri,
-        withCredentials: this.withCredentials
+        withCredentials: this.withCredentials,
+        requestType: 'hls-playlist'
       }, (error, req) => {
         // disposed
         if (!this.request) {
@@ -41150,7 +41198,10 @@
         status: xhr.status,
         message: `HLS playlist request error at URL: ${uri}.`,
         responseText: xhr.responseText,
-        code: xhr.status >= 500 ? 4 : 2
+        code: xhr.status >= 500 ? 4 : 2,
+        metadata: {
+          errorType: videojs.Error.HlsPlaylistRequestError
+        }
       };
       this.trigger('error');
     }
@@ -41335,7 +41386,8 @@
       this.pendingMedia_ = playlist;
       this.request = this.vhs_.xhr({
         uri: playlist.resolvedUri,
-        withCredentials: this.withCredentials
+        withCredentials: this.withCredentials,
+        requestType: 'hls-playlist'
       }, (error, req) => {
         // disposed
         if (!this.request) {
@@ -41463,7 +41515,8 @@
 
       this.request = this.vhs_.xhr({
         uri: this.src,
-        withCredentials: this.withCredentials
+        withCredentials: this.withCredentials,
+        requestType: 'hls-playlist'
       }, (error, req) => {
         // disposed
         if (!this.request) {
@@ -41477,7 +41530,10 @@
             message: `HLS playlist request error at URL: ${this.src}.`,
             responseText: req.responseText,
             // MEDIA_ERR_NETWORK
-            code: 2
+            code: 2,
+            metadata: {
+              errorType: videojs.Error.HlsPlaylistRequestError
+            }
           };
           if (this.state === 'HAVE_NOTHING') {
             this.started = false;
@@ -41800,9 +41856,7 @@
   /**
    * @file xhr.js
    */
-  const {
-    xhr: videojsXHR
-  } = videojs;
+
   const callbackWrapper = function (request, error, response, callback) {
     const reqResponse = request.responseType === 'arraybuffer' ? request.response : request.responseText;
     if (!error && reqResponse) {
@@ -41885,7 +41939,7 @@
       } // Use the standard videojs.xhr() method unless `videojs.Vhs.xhr` has been overriden
       // TODO: switch back to videojs.Vhs.xhr.name === 'XhrFunction' when we drop IE11
 
-      const xhrMethod = videojs.Vhs.xhr.original === true ? videojsXHR : videojs.Vhs.xhr; // call all registered onRequest hooks, assign new options.
+      const xhrMethod = videojs.Vhs.xhr.original === true ? videojs.xhr : videojs.Vhs.xhr; // call all registered onRequest hooks, assign new options.
 
       const beforeRequestOptions = callAllRequestHooks(_requestCallbackSet, options); // Remove the beforeRequest function from the hooks set so stale beforeRequest functions are not called.
 
@@ -42747,7 +42801,8 @@
           message: 'DASH request error at URL: ' + request.uri,
           response: request.response,
           // MEDIA_ERR_NETWORK
-          code: 2
+          code: 2,
+          metadata: err.metadata
         };
         if (startingState) {
           this.state = startingState;
@@ -42772,6 +42827,7 @@
 
       const uri = resolveManifestRedirect(playlist.sidx.resolvedUri);
       const fin = (err, request) => {
+        // TODO: add error metdata here once we create an error type in video.js
         if (this.requestErrored_(err, request, startingState)) {
           return;
         }
@@ -42780,7 +42836,10 @@
         try {
           sidx = parseSidx_1(toUint8(request.response).subarray(8));
         } catch (e) {
-          // sidx parsing failed.
+          e.metadata = {
+            errorType: videojs.Error.DashManifestSidxParsingError
+          }; // sidx parsing failed.
+
           this.requestErrored_(e, request, startingState);
           return;
         }
@@ -42796,9 +42855,10 @@
           return fin(err, request);
         }
         if (!container || container !== 'mp4') {
+          const sidxContainer = container || 'unknown';
           return fin({
             status: request.status,
-            message: `Unsupported ${container || 'unknown'} container type for sidx segment at URL: ${uri}`,
+            message: `Unsupported ${sidxContainer} container type for sidx segment at URL: ${uri}`,
             // response is just bytes in this case
             // but we really don't want to return that.
             response: '',
@@ -42806,7 +42866,11 @@
             internal: true,
             playlistExclusionDuration: Infinity,
             // MEDIA_ERR_NETWORK
-            code: 2
+            code: 2,
+            metadata: {
+              errorType: videojs.Error.UnsupportedSidxContainer,
+              sidxContainer
+            }
           }, request);
         } // if we already downloaded the sidx bytes in the container request, use them
 
@@ -42987,7 +43051,8 @@
     requestMain_(cb) {
       this.request = this.vhs_.xhr({
         uri: this.mainPlaylistLoader_.srcUrl,
-        withCredentials: this.withCredentials
+        withCredentials: this.withCredentials,
+        requestType: 'dash-manifest'
       }, (error, req) => {
         if (this.requestErrored_(error, req)) {
           if (this.state === 'HAVE_NOTHING') {
@@ -43036,7 +43101,8 @@
       this.request = this.vhs_.xhr({
         uri: resolveUrl(this.mainPlaylistLoader_.srcUrl, utcTiming.value),
         method: utcTiming.method,
-        withCredentials: this.withCredentials
+        withCredentials: this.withCredentials,
+        requestType: 'dash-clock-sync'
       }, (error, req) => {
         // disposed
         if (!this.request) {
@@ -46356,8 +46422,10 @@
               row = this.rollUpRows_ - 1;
             }
             this.setRollUp(packet.pts, row);
-          }
-          if (row !== this.row_) {
+          } // Ensure the row is between 0 and 14, otherwise use the most
+          // recent or default row.
+
+          if (row !== this.row_ && row >= 0 && row <= 14) {
             // formatting is only persistent for current row
             this.clearFormatting(packet.pts);
             this.row_ = row;
@@ -52286,10 +52354,15 @@
 
     if (type !== 'mp4') {
       const uri = segment.map.resolvedUri || segment.map.uri;
+      const mediaType = type || 'unknown';
       return callback({
         internal: true,
-        message: `Found unsupported ${type || 'unknown'} container for initialization segment at URL: ${uri}`,
-        code: REQUEST_ERRORS.FAILURE
+        message: `Found unsupported ${mediaType} container for initialization segment at URL: ${uri}`,
+        code: REQUEST_ERRORS.FAILURE,
+        metadata: {
+          errorType: videojs.Error.UnsupportedMediaInitialization,
+          mediaType
+        }
       });
     }
     workerCallback({
@@ -53066,7 +53139,8 @@
       }
       const keyRequestOptions = merge(xhrOptions, {
         uri: segment.key.resolvedUri,
-        responseType: 'arraybuffer'
+        responseType: 'arraybuffer',
+        requestType: 'segment-key'
       });
       const keyRequestCallback = handleKeyResponse(segment, objects, finishProcessingFn);
       const keyXhr = xhr(keyRequestOptions, keyRequestCallback);
@@ -53078,7 +53152,8 @@
       if (differentMapKey) {
         const mapKeyRequestOptions = merge(xhrOptions, {
           uri: segment.map.key.resolvedUri,
-          responseType: 'arraybuffer'
+          responseType: 'arraybuffer',
+          requestType: 'segment-key'
         });
         const mapKeyRequestCallback = handleKeyResponse(segment, [segment.map.key], finishProcessingFn);
         const mapKeyXhr = xhr(mapKeyRequestOptions, mapKeyRequestCallback);
@@ -53087,7 +53162,8 @@
       const initSegmentOptions = merge(xhrOptions, {
         uri: segment.map.resolvedUri,
         responseType: 'arraybuffer',
-        headers: segmentXhrHeaders(segment.map)
+        headers: segmentXhrHeaders(segment.map),
+        requestType: 'segment-media-initialization'
       });
       const initSegmentRequestCallback = handleInitSegmentResponse({
         segment,
@@ -53099,7 +53175,8 @@
     const segmentRequestOptions = merge(xhrOptions, {
       uri: segment.part && segment.part.resolvedUri || segment.resolvedUri,
       responseType: 'arraybuffer',
-      headers: segmentXhrHeaders(segment)
+      headers: segmentXhrHeaders(segment),
+      requestType: 'segment'
     });
     const segmentRequestCallback = handleSegmentResponse({
       segment,
@@ -53510,7 +53587,10 @@
    */
 
   const lastBandwidthSelector = function () {
-    const pixelRatio = this.useDevicePixelRatio ? window.devicePixelRatio || 1 : 1;
+    let pixelRatio = this.useDevicePixelRatio ? window.devicePixelRatio || 1 : 1;
+    if (!isNaN(this.customPixelRatio)) {
+      pixelRatio = this.customPixelRatio;
+    }
     return simpleSelector(this.playlists.main, this.systemBandwidth, parseInt(safeGetComputedStyle(this.tech_.el(), 'width'), 10) * pixelRatio, parseInt(safeGetComputedStyle(this.tech_.el(), 'height'), 10) * pixelRatio, this.limitRenditionByPlayerDimensions, this.playlistController_);
   };
   /**
@@ -53535,7 +53615,10 @@
       throw new Error('Moving average bandwidth decay must be between 0 and 1.');
     }
     return function () {
-      const pixelRatio = this.useDevicePixelRatio ? window.devicePixelRatio || 1 : 1;
+      let pixelRatio = this.useDevicePixelRatio ? window.devicePixelRatio || 1 : 1;
+      if (!isNaN(this.customPixelRatio)) {
+        pixelRatio = this.customPixelRatio;
+      }
       if (average < 0) {
         average = this.systemBandwidth;
         lastSystemBandwidth = this.systemBandwidth;
@@ -53673,6 +53756,23 @@
     }
     return tempBuffer;
   };
+  /**
+   * Example:
+   * https://host.com/path1/path2/path3/segment.ts?arg1=val1
+   * -->
+   * path3/segment.ts
+   *
+   * @param resolvedUri
+   * @return {string}
+   */
+
+  function compactSegmentUrlDescription(resolvedUri) {
+    try {
+      return new URL(resolvedUri).pathname.split('/').slice(-2).join('/');
+    } catch (e) {
+      return '';
+    }
+  }
 
   /**
    * @file text-tracks.js
@@ -54726,6 +54826,18 @@
         });
       }
     }
+    /**
+     * TODO: Current sync controller consists of many hls-specific strategies
+     * media sequence sync is also hls-specific, and we would like to be protocol-agnostic on this level
+     * this should be a part of the sync-controller and sync controller should expect different strategy list based on the protocol.
+     *
+     * @return {MediaSequenceSync|null}
+     * @private
+     */
+
+    get mediaSequenceSync_() {
+      return this.syncController_.getMediaSequenceSync(this.loaderType_);
+    }
     createTransmuxer_() {
       return segmentTransmuxer.createTransmuxer({
         remux: false,
@@ -55048,7 +55160,13 @@
         }
       }
       this.logger_(`playlist update [${oldId} => ${newPlaylist.id || newPlaylist.uri}]`);
-      this.syncController_.updateMediaSequenceMap(newPlaylist, this.currentTime_(), this.loaderType_); // in VOD, this is always a rendition switch (or we updated our syncInfo above)
+      if (this.mediaSequenceSync_) {
+        this.mediaSequenceSync_.update(newPlaylist, this.currentTime_());
+        this.logger_(`Playlist update:
+currentTime: ${this.currentTime_()}
+bufferedEnd: ${lastBufferedEnd(this.buffered_())}
+`, this.mediaSequenceSync_.diagnostics);
+      } // in VOD, this is always a rendition switch (or we updated our syncInfo above)
       // in LIVE, we always want to update with new playlists (including refreshes)
 
       this.trigger('syncinfoupdate'); // if we were unpaused but waiting for a playlist, start
@@ -55193,6 +55311,9 @@
 
     resetLoader() {
       this.fetchAtBuffer_ = false;
+      if (this.mediaSequenceSync_) {
+        this.mediaSequenceSync_.resetAppendedStatus();
+      }
       this.resyncLoader();
     }
     /**
@@ -55208,8 +55329,12 @@
       this.mediaIndex = null;
       this.partIndex = null;
       this.syncPoint_ = null;
-      this.isPendingTimestampOffset_ = false;
-      this.shouldForceTimestampOffsetAfterResync_ = true;
+      this.isPendingTimestampOffset_ = false; // this is mainly to sync timing-info when switching between renditions with and without timestamp-rollover,
+      // so we don't want it for DASH
+
+      if (this.sourceType_ === 'hls') {
+        this.shouldForceTimestampOffsetAfterResync_ = true;
+      }
       this.callQueue_ = [];
       this.loadQueue_ = [];
       this.metadataQueue_.id3 = [];
@@ -55408,20 +55533,45 @@
           next.mediaIndex = this.mediaIndex + 1;
         }
       } else {
-        // Find the segment containing the end of the buffer or current time.
-        const {
-          segmentIndex,
-          startTime,
-          partIndex
-        } = Playlist.getMediaInfoForTime({
-          exactManifestTimings: this.exactManifestTimings,
-          playlist: this.playlist_,
-          currentTime: this.fetchAtBuffer_ ? bufferedEnd : this.currentTime_(),
-          startingPartIndex: this.syncPoint_.partIndex,
-          startingSegmentIndex: this.syncPoint_.segmentIndex,
-          startTime: this.syncPoint_.time
-        });
-        next.getMediaInfoForTime = this.fetchAtBuffer_ ? `bufferedEnd ${bufferedEnd}` : `currentTime ${this.currentTime_()}`;
+        let segmentIndex;
+        let partIndex;
+        let startTime;
+        const targetTime = this.fetchAtBuffer_ ? bufferedEnd : this.currentTime_();
+        if (this.mediaSequenceSync_) {
+          this.logger_(`chooseNextRequest_ request after Quality Switch:
+For TargetTime: ${targetTime}.
+CurrentTime: ${this.currentTime_()}
+BufferedEnd: ${bufferedEnd}
+Fetch At Buffer: ${this.fetchAtBuffer_}
+`, this.mediaSequenceSync_.diagnostics);
+        }
+        if (this.mediaSequenceSync_ && this.mediaSequenceSync_.isReliable) {
+          const syncInfo = this.getSyncInfoFromMediaSequenceSync_(targetTime);
+          if (!syncInfo) {
+            this.logger_('chooseNextRequest_ - no sync info found using media sequence sync'); // no match
+
+            return null;
+          }
+          this.logger_(`chooseNextRequest_ mediaSequence syncInfo (${syncInfo.start} --> ${syncInfo.end})`);
+          segmentIndex = syncInfo.segmentIndex;
+          partIndex = syncInfo.partIndex;
+          startTime = syncInfo.start;
+        } else {
+          this.logger_('chooseNextRequest_ - fallback to a regular segment selection algorithm, based on a syncPoint.'); // fallback
+
+          const mediaInfoForTime = Playlist.getMediaInfoForTime({
+            exactManifestTimings: this.exactManifestTimings,
+            playlist: this.playlist_,
+            currentTime: targetTime,
+            startingPartIndex: this.syncPoint_.partIndex,
+            startingSegmentIndex: this.syncPoint_.segmentIndex,
+            startTime: this.syncPoint_.time
+          });
+          segmentIndex = mediaInfoForTime.segmentIndex;
+          partIndex = mediaInfoForTime.partIndex;
+          startTime = mediaInfoForTime.startTime;
+        }
+        next.getMediaInfoForTime = this.fetchAtBuffer_ ? `bufferedEnd ${targetTime}` : `currentTime ${targetTime}`;
         next.mediaIndex = segmentIndex;
         next.startOfSegment = startTime;
         next.partIndex = partIndex;
@@ -55476,6 +55626,37 @@
         this.logger_('choose next request. Force timestamp offset after loader resync');
       }
       return this.generateSegmentInfo_(next);
+    }
+    getSyncInfoFromMediaSequenceSync_(targetTime) {
+      if (!this.mediaSequenceSync_) {
+        return null;
+      } // we should pull the target time to the least available time if we drop out of sync for any reason
+
+      const finalTargetTime = Math.max(targetTime, this.mediaSequenceSync_.start);
+      if (targetTime !== finalTargetTime) {
+        this.logger_(`getSyncInfoFromMediaSequenceSync_. Pulled target time from ${targetTime} to ${finalTargetTime}`);
+      }
+      const mediaSequenceSyncInfo = this.mediaSequenceSync_.getSyncInfoForTime(finalTargetTime);
+      if (!mediaSequenceSyncInfo) {
+        // no match at all
+        return null;
+      }
+      if (!mediaSequenceSyncInfo.isAppended) {
+        // has a perfect match
+        return mediaSequenceSyncInfo;
+      } // has match, but segment was already appended.
+      // attempt to auto-advance to the nearest next segment:
+
+      const nextMediaSequenceSyncInfo = this.mediaSequenceSync_.getSyncInfoForTime(mediaSequenceSyncInfo.end);
+      if (!nextMediaSequenceSyncInfo) {
+        // no match at all
+        return null;
+      }
+      if (nextMediaSequenceSyncInfo.isAppended) {
+        this.logger_('getSyncInfoFromMediaSequenceSync_: We encounter unexpected scenario where next media sequence sync info is also appended!');
+      } // got match with the nearest next segment
+
+      return nextMediaSequenceSyncInfo;
     }
     generateSegmentInfo_(options) {
       const {
@@ -56082,7 +56263,10 @@
         this.logger_('On QUOTA_EXCEEDED_ERR, single segment too large to append to ' + 'buffer, triggering an error. ' + `Appended byte length: ${bytes.byteLength}, ` + `audio buffer: ${timeRangesToArray(audioBuffered).join(', ')}, ` + `video buffer: ${timeRangesToArray(videoBuffered).join(', ')}, `);
         this.error({
           message: 'Quota exceeded error with append of a single segment of content',
-          excludeUntil: Infinity
+          excludeUntil: Infinity,
+          metadata: {
+            errorType: videojs.Error.SegmentExceedsSourceBufferQuota
+          }
         });
         this.trigger('error');
         return;
@@ -56141,13 +56325,18 @@
 
         return;
       }
-      this.logger_('Received non QUOTA_EXCEEDED_ERR on append', error);
-      this.error(`${type} append of ${bytes.length}b failed for segment ` + `#${segmentInfo.mediaIndex} in playlist ${segmentInfo.playlist.id}`); // If an append errors, we often can't recover.
+      this.logger_('Received non QUOTA_EXCEEDED_ERR on append', error); // If an append errors, we often can't recover.
       // (see https://w3c.github.io/media-source/#sourcebuffer-append-error).
       //
       // Trigger a special error so that it can be handled separately from normal,
       // recoverable errors.
 
+      this.error({
+        message: `${type} append of ${bytes.length}b failed for segment ` + `#${segmentInfo.mediaIndex} in playlist ${segmentInfo.playlist.id}`,
+        metadata: {
+          errorType: videojs.Error.SegmentAppendError
+        }
+      });
       this.trigger('appenderror');
     }
     appendToSourceBuffer_({
@@ -56285,7 +56474,9 @@
       // the first timeline
       segmentInfo.timeline > 0;
       const isEndOfTimeline = isEndOfStream || isWalkingForward && isDiscontinuity;
-      this.logger_(`Requesting ${segmentInfoString(segmentInfo)}`); // If there's an init segment associated with this segment, but it is not cached (identified by a lack of bytes),
+      this.logger_(`Requesting
+${compactSegmentUrlDescription(segmentInfo.uri)}
+${segmentInfoString(segmentInfo)}`); // If there's an init segment associated with this segment, but it is not cached (identified by a lack of bytes),
       // then this init segment has never been seen before and should be appended.
       //
       // At this point the content type (audio/video or both) is not yet known, but it should be safe to set
@@ -56552,7 +56743,10 @@
       if (!trackInfo) {
         this.error({
           message: 'No starting media returned, likely due to an unsupported media format.',
-          playlistExclusionDuration: Infinity
+          playlistExclusionDuration: Infinity,
+          metadata: {
+            errorType: videojs.Error.SegmentUnsupportedMediaFormat
+          }
         });
         this.trigger('error');
         return;
@@ -56625,7 +56819,10 @@
       if (illegalMediaSwitchError) {
         this.error({
           message: illegalMediaSwitchError,
-          playlistExclusionDuration: Infinity
+          playlistExclusionDuration: Infinity,
+          metadata: {
+            errorType: videojs.Error.SegmentSwitchError
+          }
         });
         this.trigger('error');
         return true;
@@ -56723,7 +56920,14 @@
         }
         return;
       }
-      const segmentInfo = this.pendingSegment_; // Now that the end of the segment has been reached, we can set the end time. It's
+      const segmentInfo = this.pendingSegment_;
+      if (segmentInfo.part && segmentInfo.part.syncInfo) {
+        // low-latency flow
+        segmentInfo.part.syncInfo.markAppended();
+      } else if (segmentInfo.segment.syncInfo) {
+        // normal flow
+        segmentInfo.segment.syncInfo.markAppended();
+      } // Now that the end of the segment has been reached, we can set the end time. It's
       // best to wait until all appends are done so we're sure that the primary media is
       // finished (and we have its end time).
 
@@ -57126,8 +57330,13 @@
       if (!inSourceBuffers(sourceUpdater.mediaSource, sourceBuffer)) {
         return;
       } // do not update codec if we don't need to.
+      // Only update if we change the codec base.
+      // For example, going from avc1.640028 to avc1.64001f does not require a changeType call.
 
-      if (sourceUpdater.codecs[type] === codec) {
+      const newCodecBase = codec.substring(0, codec.indexOf('.'));
+      const oldCodec = sourceUpdater.codecs[type];
+      const oldCodecBase = oldCodec.substring(0, oldCodec.indexOf('.'));
+      if (oldCodecBase === newCodecBase) {
         return;
       }
       sourceUpdater.logger_(`changing ${type}Buffer codec from ${sourceUpdater.codecs[type]} to ${codec}`); // check if change to the provided type is supported
@@ -57162,6 +57371,9 @@
     // updateend events on source buffers. This does not appear to be in the spec. As such,
     // if we encounter an updateend without a corresponding pending action from our queue
     // for that source buffer type, process the next action.
+    const bufferedRangesForType = sourceUpdater[`${type}Buffered`]();
+    const descriptiveString = bufferedRangesToString(bufferedRangesForType);
+    sourceUpdater.logger_(`received "updateend" event for ${type} Source Buffer: `, descriptiveString);
     if (sourceUpdater.queuePending[type]) {
       const doneFn = sourceUpdater.queuePending[type].doneFn;
       sourceUpdater.queuePending[type] = null;
@@ -57720,7 +57932,6 @@
 
       this.mediaSource_ = null;
       this.subtitlesTrack_ = null;
-      this.loaderType_ = 'subtitle';
       this.featuresNativeTextTracks_ = settings.featuresNativeTextTracks;
       this.loadVttJs = settings.loadVttJs; // The VTT segment will have its own time mappings. Saving VTT segment timing info in
       // the sync controller leads to improper behavior.
@@ -57959,7 +58170,10 @@
         // script will be loaded once but multiple listeners will be added to the queue, which is expected.
 
         this.loadVttJs().then(() => this.segmentRequestFinished_(error, simpleSegment, result), () => this.stopForError({
-          message: 'Error loading vtt.js'
+          message: 'Error loading vtt.js',
+          metadata: {
+            errorType: videojs.Error.VttLoadError
+          }
         }));
         return;
       }
@@ -57968,7 +58182,10 @@
         this.parseVTTCues_(segmentInfo);
       } catch (e) {
         this.stopForError({
-          message: e.message
+          message: e.message,
+          metadata: {
+            errorType: videojs.Error.VttCueParsingError
+          }
         });
         return;
       }
@@ -58236,6 +58453,211 @@
       mediaTime += segment.duration;
     }
   };
+  class SyncInfo {
+    /**
+     * @param {number} start - media sequence start
+     * @param {number} end - media sequence end
+     * @param {number} segmentIndex - index for associated segment
+     * @param {number|null} [partIndex] - index for associated part
+     * @param {boolean} [appended] - appended indicator
+     *
+     */
+    constructor({
+      start,
+      end,
+      segmentIndex,
+      partIndex = null,
+      appended = false
+    }) {
+      this.start_ = start;
+      this.end_ = end;
+      this.segmentIndex_ = segmentIndex;
+      this.partIndex_ = partIndex;
+      this.appended_ = appended;
+    }
+    isInRange(targetTime) {
+      return targetTime >= this.start && targetTime < this.end;
+    }
+    markAppended() {
+      this.appended_ = true;
+    }
+    resetAppendedStatus() {
+      this.appended_ = false;
+    }
+    get isAppended() {
+      return this.appended_;
+    }
+    get start() {
+      return this.start_;
+    }
+    get end() {
+      return this.end_;
+    }
+    get segmentIndex() {
+      return this.segmentIndex_;
+    }
+    get partIndex() {
+      return this.partIndex_;
+    }
+  }
+  class SyncInfoData {
+    /**
+     *
+     * @param {SyncInfo} segmentSyncInfo - sync info for a given segment
+     * @param {Array<SyncInfo>} [partsSyncInfo] - sync infos for a list of parts for a given segment
+     */
+    constructor(segmentSyncInfo, partsSyncInfo = []) {
+      this.segmentSyncInfo_ = segmentSyncInfo;
+      this.partsSyncInfo_ = partsSyncInfo;
+    }
+    get segmentSyncInfo() {
+      return this.segmentSyncInfo_;
+    }
+    get partsSyncInfo() {
+      return this.partsSyncInfo_;
+    }
+    get hasPartsSyncInfo() {
+      return this.partsSyncInfo_.length > 0;
+    }
+    resetAppendStatus() {
+      this.segmentSyncInfo_.resetAppendedStatus();
+      this.partsSyncInfo_.forEach(partSyncInfo => partSyncInfo.resetAppendedStatus());
+    }
+  }
+  class MediaSequenceSync {
+    constructor() {
+      /**
+       * @type {Map<number, SyncInfoData>}
+       * @private
+       */
+      this.storage_ = new Map();
+      this.diagnostics_ = '';
+      this.isReliable_ = false;
+      this.start_ = -Infinity;
+      this.end_ = Infinity;
+    }
+    get start() {
+      return this.start_;
+    }
+    get end() {
+      return this.end_;
+    }
+    get diagnostics() {
+      return this.diagnostics_;
+    }
+    get isReliable() {
+      return this.isReliable_;
+    }
+    resetAppendedStatus() {
+      this.storage_.forEach(syncInfoData => syncInfoData.resetAppendStatus());
+    }
+    /**
+     * update sync storage
+     *
+     * @param {Object} playlist
+     * @param {number} currentTime
+     *
+     * @return {void}
+     */
+
+    update(playlist, currentTime) {
+      const {
+        mediaSequence,
+        segments
+      } = playlist;
+      this.isReliable_ = this.isReliablePlaylist_(mediaSequence, segments);
+      if (!this.isReliable_) {
+        return;
+      }
+      return this.updateStorage_(segments, mediaSequence, this.calculateBaseTime_(mediaSequence, currentTime));
+    }
+    /**
+     * @param {number} targetTime
+     * @return {SyncInfo|null}
+     */
+
+    getSyncInfoForTime(targetTime) {
+      for (const {
+        segmentSyncInfo,
+        partsSyncInfo
+      } of this.storage_.values()) {
+        // Normal segment flow:
+        if (!partsSyncInfo.length) {
+          if (segmentSyncInfo.isInRange(targetTime)) {
+            return segmentSyncInfo;
+          }
+        } else {
+          // Low latency flow:
+          for (const partSyncInfo of partsSyncInfo) {
+            if (partSyncInfo.isInRange(targetTime)) {
+              return partSyncInfo;
+            }
+          }
+        }
+      }
+      return null;
+    }
+    updateStorage_(segments, startingMediaSequence, startingTime) {
+      const newStorage = new Map();
+      let newDiagnostics = '\n';
+      let currentStart = startingTime;
+      let currentMediaSequence = startingMediaSequence;
+      this.start_ = currentStart;
+      segments.forEach((segment, segmentIndex) => {
+        const prevSyncInfoData = this.storage_.get(currentMediaSequence);
+        const segmentStart = currentStart;
+        const segmentEnd = segmentStart + segment.duration;
+        const segmentIsAppended = Boolean(prevSyncInfoData && prevSyncInfoData.segmentSyncInfo && prevSyncInfoData.segmentSyncInfo.isAppended);
+        const segmentSyncInfo = new SyncInfo({
+          start: segmentStart,
+          end: segmentEnd,
+          appended: segmentIsAppended,
+          segmentIndex
+        });
+        segment.syncInfo = segmentSyncInfo;
+        let currentPartStart = currentStart;
+        const partsSyncInfo = (segment.parts || []).map((part, partIndex) => {
+          const partStart = currentPartStart;
+          const partEnd = currentPartStart + part.duration;
+          const partIsAppended = Boolean(prevSyncInfoData && prevSyncInfoData.partsSyncInfo && prevSyncInfoData.partsSyncInfo[partIndex] && prevSyncInfoData.partsSyncInfo[partIndex].isAppended);
+          const partSyncInfo = new SyncInfo({
+            start: partStart,
+            end: partEnd,
+            appended: partIsAppended,
+            segmentIndex,
+            partIndex
+          });
+          currentPartStart = partEnd;
+          newDiagnostics += `Media Sequence: ${currentMediaSequence}.${partIndex} | Range: ${partStart} --> ${partEnd} | Appended: ${partIsAppended}\n`;
+          part.syncInfo = partSyncInfo;
+          return partSyncInfo;
+        });
+        newStorage.set(currentMediaSequence, new SyncInfoData(segmentSyncInfo, partsSyncInfo));
+        newDiagnostics += `${compactSegmentUrlDescription(segment.resolvedUri)} | Media Sequence: ${currentMediaSequence} | Range: ${segmentStart} --> ${segmentEnd} | Appended: ${segmentIsAppended}\n`;
+        currentMediaSequence++;
+        currentStart = segmentEnd;
+      });
+      this.end_ = currentStart;
+      this.storage_ = newStorage;
+      this.diagnostics_ = newDiagnostics;
+    }
+    calculateBaseTime_(mediaSequence, fallback) {
+      if (!this.storage_.size) {
+        // Initial setup flow.
+        return 0;
+      }
+      if (this.storage_.has(mediaSequence)) {
+        // Normal flow.
+        return this.storage_.get(mediaSequence).segmentSyncInfo.start;
+      } // Fallback flow.
+      // There is a gap between last recorded playlist and a new one received.
+
+      return fallback;
+    }
+    isReliablePlaylist_(mediaSequence, segments) {
+      return mediaSequence !== undefined && mediaSequence !== null && Array.isArray(segments) && segments.length;
+    }
+  }
 
   /**
    * @file sync-controller.js
@@ -58275,57 +58697,22 @@
      * @param {string} type
      */
     run: (syncController, playlist, duration, currentTimeline, currentTime, type) => {
-      if (!type) {
+      const mediaSequenceSync = syncController.getMediaSequenceSync(type);
+      if (!mediaSequenceSync) {
         return null;
       }
-      const mediaSequenceMap = syncController.getMediaSequenceMap(type);
-      if (!mediaSequenceMap || mediaSequenceMap.size === 0) {
+      if (!mediaSequenceSync.isReliable) {
         return null;
       }
-      if (playlist.mediaSequence === undefined || !Array.isArray(playlist.segments) || !playlist.segments.length) {
+      const syncInfo = mediaSequenceSync.getSyncInfoForTime(currentTime);
+      if (!syncInfo) {
         return null;
       }
-      let currentMediaSequence = playlist.mediaSequence;
-      let segmentIndex = 0;
-      for (const segment of playlist.segments) {
-        const range = mediaSequenceMap.get(currentMediaSequence);
-        if (!range) {
-          // unexpected case
-          // we expect this playlist to be the same playlist in the map
-          // just break from the loop and move forward to the next strategy
-          break;
-        }
-        if (currentTime >= range.start && currentTime < range.end) {
-          // we found segment
-          if (Array.isArray(segment.parts) && segment.parts.length) {
-            let currentPartStart = range.start;
-            let partIndex = 0;
-            for (const part of segment.parts) {
-              const start = currentPartStart;
-              const end = start + part.duration;
-              if (currentTime >= start && currentTime < end) {
-                return {
-                  time: range.start,
-                  segmentIndex,
-                  partIndex
-                };
-              }
-              partIndex++;
-              currentPartStart = end;
-            }
-          } // no parts found, return sync point for segment
-
-          return {
-            time: range.start,
-            segmentIndex,
-            partIndex: null
-          };
-        }
-        segmentIndex++;
-        currentMediaSequence++;
-      } // we didn't find any segments for provided current time
-
-      return null;
+      return {
+        time: syncInfo.start,
+        partIndex: syncInfo.partIndex,
+        segmentIndex: syncInfo.segmentIndex
+      };
     }
   },
   // Stategy "ProgramDateTime": We have a program-date-time tag in this playlist
@@ -58465,73 +58852,26 @@
 
       this.timelines = [];
       this.discontinuities = [];
-      this.timelineToDatetimeMappings = {};
-      /**
-       * @type {Map<string, Map<number, { start: number, end: number }>>}
-       * @private
-       */
+      this.timelineToDatetimeMappings = {}; // TODO: this map should be only available for HLS. Since only HLS has MediaSequence.
+      //  For some reason this map helps with syncing between quality switch for MPEG-DASH as well.
+      //  Moreover if we disable this map for MPEG-DASH - quality switch will be broken.
+      //  MPEG-DASH should have its own separate sync strategy
 
-      this.mediaSequenceStorage_ = new Map();
+      this.mediaSequenceStorage_ = {
+        main: new MediaSequenceSync(),
+        audio: new MediaSequenceSync(),
+        vtt: new MediaSequenceSync()
+      };
       this.logger_ = logger('SyncController');
     }
     /**
-     * Get media sequence map by type
      *
-     * @param {string} type - segment loader type
-     * @return {Map<number, { start: number, end: number }> | undefined}
+     * @param {string} loaderType
+     * @return {MediaSequenceSync|null}
      */
 
-    getMediaSequenceMap(type) {
-      return this.mediaSequenceStorage_.get(type);
-    }
-    /**
-     * Update Media Sequence Map -> <MediaSequence, Range>
-     *
-     * @param {Object} playlist - parsed playlist
-     * @param {number} currentTime - current player's time
-     * @param {string} type - segment loader type
-     * @return {void}
-     */
-
-    updateMediaSequenceMap(playlist, currentTime, type) {
-      // we should not process this playlist if it does not have mediaSequence or segments
-      if (playlist.mediaSequence === undefined || !Array.isArray(playlist.segments) || !playlist.segments.length) {
-        return;
-      }
-      const currentMap = this.getMediaSequenceMap(type);
-      const result = new Map();
-      let currentMediaSequence = playlist.mediaSequence;
-      let currentBaseTime;
-      if (!currentMap) {
-        // first playlist setup:
-        currentBaseTime = 0;
-      } else if (currentMap.has(playlist.mediaSequence)) {
-        // further playlists setup:
-        currentBaseTime = currentMap.get(playlist.mediaSequence).start;
-      } else {
-        // it seems like we have a gap between playlists, use current time as a fallback:
-        this.logger_(`MediaSequence sync for ${type} segment loader - received a gap between playlists.
-Fallback base time to: ${currentTime}.
-Received media sequence: ${currentMediaSequence}.
-Current map: `, currentMap);
-        currentBaseTime = currentTime;
-      }
-      this.logger_(`MediaSequence sync for ${type} segment loader.
-Received media sequence: ${currentMediaSequence}.
-base time is ${currentBaseTime}
-Current map: `, currentMap);
-      playlist.segments.forEach(segment => {
-        const start = currentBaseTime;
-        const end = start + segment.duration;
-        const range = {
-          start,
-          end
-        };
-        result.set(currentMediaSequence, range);
-        currentMediaSequence++;
-        currentBaseTime = end;
-      });
-      this.mediaSequenceStorage_.set(type, result);
+    getMediaSequenceSync(loaderType) {
+      return this.mediaSequenceStorage_[loaderType] || null;
     }
     /**
      * Find a sync-point for the playlist specified
@@ -58614,7 +58954,7 @@ Current map: `, currentMap);
       if (!playlist || !playlist.segments) {
         return null;
       }
-      const syncPoints = this.runStrategies_(playlist, duration, playlist.discontinuitySequence, 0, 'main'); // Without sync-points, there is not enough information to determine the expired time
+      const syncPoints = this.runStrategies_(playlist, duration, playlist.discontinuitySequence, 0); // Without sync-points, there is not enough information to determine the expired time
 
       if (!syncPoints.length) {
         return null;
@@ -60573,7 +60913,8 @@ Current map: `, currentMap);
         return;
       }
       this.request_ = this.xhr_({
-        uri
+        uri,
+        requestType: 'content-steering-manifest'
       }, (error, errorInfo) => {
         if (error) {
           // If the client receives HTTP 410 Gone in response to a manifest request,
@@ -63671,8 +64012,8 @@ Current map: `, currentMap);
   const reloadSourceOnError = function (options) {
     initPlugin(this, options);
   };
-  var version$4 = "3.10.0";
-  var version$3 = "7.0.2";
+  var version$4 = "3.12.0";
+  var version$3 = "7.0.3";
   var version$2 = "1.3.0";
   var version$1 = "7.1.0";
   var version = "4.0.1";
@@ -64277,13 +64618,18 @@ Current map: `, currentMap);
 
       this.options_.enableLowInitialPlaylist = this.options_.enableLowInitialPlaylist && this.options_.bandwidth === Config.INITIAL_BANDWIDTH; // grab options passed to player.src
 
-      ['withCredentials', 'useDevicePixelRatio', 'limitRenditionByPlayerDimensions', 'bandwidth', 'customTagParsers', 'customTagMappers', 'cacheEncryptionKeys', 'playlistSelector', 'initialPlaylistSelector', 'bufferBasedABR', 'liveRangeSafeTimeDelta', 'llhls', 'useForcedSubtitles', 'useNetworkInformationApi', 'useDtsForTimestampOffset', 'exactManifestTimings', 'leastPixelDiffSelector'].forEach(option => {
+      ['withCredentials', 'useDevicePixelRatio', 'customPixelRatio', 'limitRenditionByPlayerDimensions', 'bandwidth', 'customTagParsers', 'customTagMappers', 'cacheEncryptionKeys', 'playlistSelector', 'initialPlaylistSelector', 'bufferBasedABR', 'liveRangeSafeTimeDelta', 'llhls', 'useForcedSubtitles', 'useNetworkInformationApi', 'useDtsForTimestampOffset', 'exactManifestTimings', 'leastPixelDiffSelector'].forEach(option => {
         if (typeof this.source_[option] !== 'undefined') {
           this.options_[option] = this.source_[option];
         }
       });
       this.limitRenditionByPlayerDimensions = this.options_.limitRenditionByPlayerDimensions;
       this.useDevicePixelRatio = this.options_.useDevicePixelRatio;
+      const customPixelRatio = this.options_.customPixelRatio; // Ensure the custom pixel ratio is a number greater than or equal to 0
+
+      if (typeof customPixelRatio === 'number' && customPixelRatio >= 0) {
+        this.customPixelRatio = customPixelRatio;
+      }
     } // alias for public method to set options
 
     setOptions(options = {}) {
@@ -64570,7 +64916,10 @@ Current map: `, currentMap);
         this.logger_('error while creating EME key session', err);
         this.player_.error({
           message: 'Failed to initialize media keys for EME',
-          code: 3
+          code: 3,
+          metadata: {
+            errorType: videojs.Error.EMEKeySessionCreationError
+          }
         });
       });
     }
