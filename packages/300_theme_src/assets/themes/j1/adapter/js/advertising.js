@@ -14,7 +14,7 @@ regenerate:                             true
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
  # Test data:
  #  {{ liquid_var | debug }}
@@ -75,7 +75,7 @@ regenerate:                             true
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
  #  Adapter generated: {{site.time}}
  # -----------------------------------------------------------------------------
@@ -103,6 +103,7 @@ j1.adapter.advertising = ((j1, window) => {
   var advertisingProvider   = 'Google Adsense';
   var state                 = 'not_started';
   var layout;
+
   var advertisingDefaults;
   var advertisingSettings;
   var advertisingOptions;
@@ -224,7 +225,6 @@ j1.adapter.advertising = ((j1, window) => {
             }
 
             // add Google Adsense API dynamically in head section loaded async
-            //
             logger.info('\n' + 'add Google AdsenseAPI in section: head');
 
             gasScript.async = true;
@@ -236,7 +236,6 @@ j1.adapter.advertising = ((j1, window) => {
             logger.info('\n' + 'adsense api initialized');
 
             // setup monitor for state changes on all ads configured
-            //
             setTimeout(() => {
               var ads_found = (document.getElementsByClassName('adsbygoogle').length > 0) ? true : false;
               if (ads_found > 0) {
@@ -248,7 +247,6 @@ j1.adapter.advertising = ((j1, window) => {
             }, 1000);
 
             // run protection check
-            //
             if (checkTrackingProtection) {
               logger.debug('\n' + 'run checks for tracking protection');
 
@@ -288,7 +286,6 @@ j1.adapter.advertising = ((j1, window) => {
 
           } else {
             // user consent on personalization "false"
-            //
            if (production) {
               console.debug('cookies for personalization rejected');
               console.debug('initialization of module advertising skipped');
@@ -298,15 +295,10 @@ j1.adapter.advertising = ((j1, window) => {
             }
 
             // if consent is rejected, detect and remove Adsense cookies
-            //
             var gasCookies = j1.findCookie('__g');
             gasCookies.forEach((item) => {
               // remove Google Ad cookies
-              if (hostname == 'localhost') {
-                j1.removeCookie({ name: item, domain: false, secure: false });
-              } else {
-                j1.removeCookie({ name: item, domain: '.' + hostname, secure: false });
-              }
+              j1.removeCookie({ name: item });
             });
 
             // manage tracking protection

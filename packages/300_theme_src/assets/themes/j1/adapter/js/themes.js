@@ -15,7 +15,7 @@ regenerate:                             true
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  #
  # -----------------------------------------------------------------------------
  # Test data:
@@ -85,7 +85,7 @@ regenerate:                             true
  # Copyright (C) 2014 Joseph Guadagno
  #
  # J1 Template is licensed under the MIT License.
- # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # ThemeSwitcher is licensed under the MIT License.
  # For details, see https://github.com/jguadagno/ThemeSwitcher/blob/master/LICENSE
  # -----------------------------------------------------------------------------
@@ -116,7 +116,6 @@ j1.adapter.themes = (function (j1, window) {
   var user_state                = {};
   var user_consent              = {};
   var cookie_names              = j1.getCookieNames();
-//var user_state_detected       = false;
   var styleLoaded               = false;
   var id                        = 'default';
   var state                     = 'not_started';

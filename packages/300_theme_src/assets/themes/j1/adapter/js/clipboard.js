@@ -15,7 +15,7 @@ regenerate:                             true
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
  # Test data:
  #  {{ liquid_var | debug }}
@@ -70,6 +70,7 @@ j1.adapter.clipboard = ((j1, window) => {
   // ---------------------------------------------------------------------------
   var environment         = '{{environment}}';
   var state               = 'not_started';
+
   var clipboardDefaults;
   var clipboardSettings;
   var clipboardOptions;

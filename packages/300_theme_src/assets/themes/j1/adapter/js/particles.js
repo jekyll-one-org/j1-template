@@ -14,7 +14,7 @@ regenerate:                             true
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
  # Test data:
  #  {{ liquid_var | debug }}
@@ -70,7 +70,7 @@ regenerate:                             true
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
  #  Adapter generated: {{site.time}}
  # -----------------------------------------------------------------------------
@@ -89,6 +89,7 @@ j1.adapter.particles = ((j1, window) => {
   var environment         = '{{environment}}';
   var cookie_names        = j1.getCookieNames();
   var state               = 'not_started';
+
   var particleDefaults;
   var particleSettings;
   var particleOptions;
@@ -145,8 +146,9 @@ j1.adapter.particles = ((j1, window) => {
         var pageState      = $('#content').css("display");
         var pageVisible    = (pageState === 'block') ? true : false;
         var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
+        var atticFinished  = (j1.adapter.attic.getState() == 'finished') ? true : false;
 
-        if (j1CoreFinished) {
+        if (j1CoreFinished && pageVisible && atticFinished) {
           startTimeModule = Date.now();
 
           var obj;

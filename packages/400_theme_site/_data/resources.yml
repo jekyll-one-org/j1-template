@@ -8,7 +8,7 @@
 # Copyright (C) 2023, 2024 Juergen Adams
 #
 # J1 Template is licensed under the MIT License.
-# See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+# See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
 # ------------------------------------------------------------------------------
 # NOTE:
 #   By J1 Theme, "Liquid Procedures" are being used intensively. To load
@@ -1630,6 +1630,32 @@ resources:
         files:                          [ adapter/js/waves.js ]
         js:                             []
         init_function:                  [ j1.adapter.waves.init ]
+
+  # ----------------------------------------------------------------------------
+  # jsCookies
+  # JavaScript API for handling cookies
+  #
+  # See: https://github.com/js-cookie/js-cookie/
+  #
+  - name:                               jsCookie
+    resource:
+      enabled:                          false
+
+      id:                               js-cookie
+      comment:                          Module jsCookie
+      region:                           head
+      layout:                           [ all ]
+      required:                         ondemand
+      preload:                          false
+      script_load:                      defer
+      dependencies:                     false
+      pass_init_data:                   false
+
+      data:
+        css:                            []
+        files:                          []
+        js:                             [ modules/js-cookies/js/js.cookie ]
+        init_function:                  []
 
   # ----------------------------------------------------------------------------
   # Particles

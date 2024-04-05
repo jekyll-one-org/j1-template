@@ -14,7 +14,7 @@ regenerate:                             true
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
  # Test data:
  #  {{ liquid_var | debug }}
@@ -73,7 +73,7 @@ regenerate:                             true
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
  #  Adapter generated: {{site.time}}
  # -----------------------------------------------------------------------------
@@ -185,11 +185,7 @@ j1.adapter.analytics = ((j1, window) => {
             gaCookies = j1.findCookie('_ga');
             gaCookies.forEach((item) => {
               logger.debug('\n' + 'delete cookie created by Google Analytics: ' + item);
-              if (hostname == 'localhost') {
-                j1.removeCookie({ name: item, domain: false, secure: false });
-              } else {
-                j1.removeCookie({ name: item, domain: '.' + hostname, secure: false });
-              }
+              j1.removeCookie({ name: item });
             });
 
             gaExists  = document.getElementById('google-tag-manager') === null ? false : true;

@@ -10,7 +10,7 @@
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # lightGallery is licensed under the GPLv3 license
  # See: https://github.com/sachinchoolur/lightGallery/blob/master/LICENSE
  # -----------------------------------------------------------------------------
@@ -411,7 +411,7 @@
                 var wistiaId = 'lg-wistia' + index;
                 var playerParams = param(this.settings.wistiaPlayerParams);
                 playerParams = playerParams ? '?' + playerParams : '';
-                video = "<iframe allow=\"autoplay\" id=\"" + wistiaId + "\" src=\"//fast.wistia.net/embed/iframe/" + (videoInfo.wistia[4] + playerParams) + "\" " + videoTitle + " class=\"wistia_embed lg-video-object lg-wistia " + addClass + "\" name=\"wistia_embed\" " + commonIframeProps + "></iframe>";
+                video = "<iframe allow=\"autoplay\" id=\"" + wistiaId + "\" src=\"//fast.wistia.net/embed/" + videoInfo.wistia[3] + (videoInfo.wistia[4] + playerParams) + "\" " + videoTitle + " class=\"wistia_embed lg-video-object lg-wistia " + addClass + "\" name=\"wistia_embed\" " + commonIframeProps + "></iframe>";
             }
             // jadams: added Dailymotion Player
             else if (videoInfo.dailymotion) {

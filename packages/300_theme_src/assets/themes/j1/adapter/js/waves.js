@@ -14,7 +14,7 @@ regenerate:                             true
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
  # Test data:
  #  {{ liquid_var | debug }}
@@ -70,7 +70,7 @@ regenerate:                             true
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
  # NOTE: Wave styles defind in /assets/data/panel.html, key 'wave'
  # -----------------------------------------------------------------------------
@@ -93,6 +93,7 @@ j1.adapter.waves = ((j1, window) => {
   var user_state          = j1.readCookie(cookie_names.user_state);
   var viewport_width      = $(window).width();
   var state               = 'not_started';
+
   var waveDefaults;
   var waveSettings;
   var waveOptions;

@@ -11,7 +11,7 @@
  # Copyright (C) 2023 Gilles Migliori
  #
  # J1 Template is licensed under the MIT License.
- # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
 */
 const iconPickerUrl = document.currentScript.src.replace(/js\/([a-z\.-]+)$/gm, '');

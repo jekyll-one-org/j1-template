@@ -14,7 +14,7 @@ regenerate:                             true
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
  # Test data:
  #  {{ liquid_var | debug }}
@@ -62,7 +62,7 @@ regenerate:                             true
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
  # NOTE: iconPicker styles defind in /assets/data/panel.html, key 'iconPicker'
  # -----------------------------------------------------------------------------
@@ -80,7 +80,7 @@ j1.adapter.iconPickerPage = ((j1, window) => {
 
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
-  const selectID  = 'icon_library';
+  const selectID          = 'icon_library';
 
   var iconPickerDefaults;
   var iconPickerSettings;

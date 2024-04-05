@@ -14,7 +14,7 @@ regenerate:                             true
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
  # Test data:
  #  {{ liquid_var | debug }}
@@ -69,7 +69,7 @@ regenerate:                             true
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
  #  Adapter generated: {{site.time}}
  # -----------------------------------------------------------------------------
@@ -90,6 +90,7 @@ j1.adapter.masonry = ((j1, window) => {
   var user_state      = j1.readCookie(cookie_names.user_state);
   var viewport_width  = $(window).width();
   var state           = 'not_started';
+
   var masonryDefaults;
   var masonrySettings;
   var masonryOptions;
@@ -143,7 +144,6 @@ j1.adapter.masonry = ((j1, window) => {
       masonryOptions =  $.extend(true, {}, masonryDefaults, masonrySettings);
 
       // load HTML portion for all grids
-      console.debug('loading HTML portion for all Masonry grids configured');
       _this.loadGridHTML(masonryOptions, masonryOptions.grids);
 
       // -----------------------------------------------------------------------
@@ -153,6 +153,7 @@ j1.adapter.masonry = ((j1, window) => {
         var pageState      = $('#content').css("display");
         var pageVisible    = (pageState === 'block') ? true: false;
         var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
+        var atticFinished  = (j1.adapter.attic.getState() == 'finished') ? true : false;
 
         if (j1CoreFinished && pageVisible) {
           startTimeModule = Date.now();
@@ -239,10 +240,10 @@ j1.adapter.masonry = ((j1, window) => {
 
                     // run code after all images are loaded with the grid
                     $grid_{{grid_id}}.imagesLoaded(() => {
-                      console.debug("masonry: images loaded on {{grid_id}}");
+                      logger.debug('\n' + 'images loaded on id: {{grid_id}}');
 
                       {% if grid.lightbox.type == 'lg' %}
-                      console.log("masonry: gallery detected on id: {{grid_id}}");
+                      logger.debug('\n' + 'gallery detected on id: {{grid_id}}');
 
                       // setup lightbox
                       var lg      = document.getElementById("{{grid_id}}");

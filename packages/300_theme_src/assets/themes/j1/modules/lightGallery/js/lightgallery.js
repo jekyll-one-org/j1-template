@@ -10,7 +10,7 @@
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # lightGallery is licensed under the GPLv3 license
  # See: https://github.com/sachinchoolur/lightGallery/blob/master/LICENSE
  # -----------------------------------------------------------------------------
@@ -825,12 +825,13 @@
                 }
             }
 
-            var youtube = src.match(/\/\/(?:www\.)?youtu(?:\.be|be\.com|be-nocookie\.com)\/(?:watch\?v=|embed\/)?([a-z0-9\-\_\%]+)([\&|?][\S]*)*/i);
-            var vimeo   = src.match(/\/\/(?:www\.)?(?:player\.)?vimeo.com\/(?:video\/)?([0-9a-z\-_]+)(.*)?/i);
+            var youtube     = src.match(/\/\/(?:www\.)?youtu(?:\.be|be\.com|be-nocookie\.com)\/(?:watch\?v=|embed\/)?([a-z0-9\-\_\%]+)([\&|?][\S]*)*/i);
+            var vimeo       = src.match(/\/\/(?:www\.)?(?:player\.)?vimeo.com\/(?:video\/)?([0-9a-z\-_]+)(.*)?/i);
 
-            // jadams, added wistia|tiktoc
-            var wistia  = src.match(/https?:\/\/(.+)?(wistia\.com|wi\.st)\/(medias|embed)\/([0-9a-z\-_]+)(.*)/);
-            var tiktoc  = src.match(/\/\/(?:www\.)?tiktok.com\/embed\/?([0-9a-z\-_]+)(.*)?/);
+            // jadams, added dailymotion|wistia|tiktoc
+            var dailymotion = src.match(/\/\/(?:www\.)?dai(?:\.ly)\/(?:video\/)?([0-9a-z\-_]+)(.*)?/);
+            var tiktoc      = src.match(/\/\/(?:www\.)?tiktok.com\/embed\/?([0-9a-z\-_]+)(.*)?/);
+            var wistia      = src.match(/\/\/(?:fast\.)?(wistia\.com|wi\.st)\/(medias|embed)\/([0-9a-z\-_]+)(.*)/);
 
             if (youtube) {
                 return {
@@ -840,6 +841,11 @@
             else if (vimeo) {
                 return {
                     vimeo: vimeo,
+                };
+            }
+            else if (dailymotion) {
+                return {
+                    dailymotion: dailymotion,
                 };
             }
             else if (wistia) {

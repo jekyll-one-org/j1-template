@@ -14,7 +14,7 @@ regenerate:                             true
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
  # Test data:
  #  {{ liquid_var | debug }}
@@ -55,7 +55,7 @@ regenerate:                             true
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
  # Note:
  #  https://github.com/jirutka/asciidoctor-rouge/issues/9
@@ -81,6 +81,7 @@ j1.adapter.rouge = ((j1, window) => {
   var cookie_names            = j1.getCookieNames();
   var cookie_user_state_name  = cookie_names.user_state;
   var state                   = 'not_started';
+
   var user_state_detected;
   var themeCss;
   var darkTheme;

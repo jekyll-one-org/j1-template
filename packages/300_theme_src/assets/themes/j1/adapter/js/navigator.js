@@ -15,7 +15,7 @@ regenerate:                             true
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
  # Test data:
  #  {{ liquid_var | debug }}
@@ -168,8 +168,8 @@ j1.adapter.navigator = ((j1, window) => {
   var cookie_names                = j1.getCookieNames();
   var cookie_user_session_name    = cookie_names.user_session;
 
-  var navigatorCoreInitialized  = false;
-  var themesEnabled             = {{themes_options.enabled}};
+  var navigatorCoreInitialized    = false;
+  var themesEnabled               = {{themes_options.enabled}};
 
   var user_session                = {};
   var user_session_merged         = {};

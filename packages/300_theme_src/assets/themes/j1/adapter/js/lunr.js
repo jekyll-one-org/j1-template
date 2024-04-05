@@ -14,7 +14,7 @@ regenerate:                             true
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
  # Test data:
  #  {{ liquid_var | debug }}
@@ -65,7 +65,7 @@ regenerate:                             true
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
  #  Adapter generated: {{site.time}}
  # -----------------------------------------------------------------------------
@@ -211,11 +211,9 @@ j1.adapter.lunr = ((j1, window) => {
       // update searchHistory
       if (searchHistoryFromCookie) {
         logger.debug('\n' + 'save search history to cookie');
-        j1.removeCookie({
-          name:   cookie_names.search_prompt,
-          domain: auto_domain,
-          secure: secure
-        });
+
+        // remove BEFORE write
+        j1.removeCookie({ name: cookie_names.search_prompt });
 
         if (newHistory.length > 0) {
           cookie_written = j1.writeCookie({
@@ -652,11 +650,9 @@ j1.adapter.lunr = ((j1, window) => {
         // write current history to cookie
         if (searchHistoryFromCookie) {
           logger.debug('\n' + 'sendButton, save prompt history to cookie');
-          j1.removeCookie({
-            name:   cookie_names.search_prompt,
-            domain: auto_domain,
-            secure: secure
-          });
+
+          // remove BEFORE write
+          j1.removeCookie({ name: cookie_names.search_prompt });
           cookie_written = j1.writeCookie({
             name:   cookie_names.search_prompt,
             data:   textHistory,

@@ -15,7 +15,7 @@ regenerate:                             true
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
  # Test data:
  #  {{ liquid_var | debug }}
@@ -67,7 +67,7 @@ regenerate:                             true
  # Copyright (C) 2007, 2018 Lokesh Dhakar
  #
  # J1 Template is licensed under the MIT License.
- # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # Lightbox V2 is licensed under the MIT License.
  # For details, see https://github.com/lokesh/lightbox2/
  #
@@ -86,8 +86,9 @@ j1.adapter.lightbox = ((j1, window) => {
 
   {% comment %} Global variables
   ------------------------------------------------------------------------------ {% endcomment %}
-  var environment  = '{{environment}}';
-  var state        = 'not_started';
+  var environment       = '{{environment}}';
+  var state             = 'not_started';
+
   var lightboxDefaults;
   var lightboxSettings;
   var lightboxOptions;

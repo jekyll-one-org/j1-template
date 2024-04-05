@@ -15,7 +15,7 @@ regenerate:                             true
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
@@ -66,7 +66,7 @@ regenerate:                             true
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # Justified Gallery is licensed under the MIT license
  # See: https://github.com/miromannino/Justified-Gallery/blob/master/LICENSE
  # lightGallery is licensed under the GPLv3 license
@@ -89,6 +89,7 @@ j1.adapter.gallery = ((j1, window) => {
   var environment   = '{{environment}}';
   var state         = 'not_started';
   var play_button   = '/assets/themes/j1/modules/lightGallery/css/themes/uno/icons/play-button.png';
+
   var url;
   var origin;
   var galleryDefaults;

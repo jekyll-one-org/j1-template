@@ -15,7 +15,7 @@ regenerate:                             true
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
  # Test data:
  #  {{ liquid_var | debug }}
@@ -87,6 +87,7 @@ j1.adapter.fab = ((j1, window) => {
   var moduleOptions     = {};
   var cookie_names      = j1.getCookieNames();
   var state             = 'not_started';
+
   var fabDefaults;
   var fabSettings;
   var fabOptions;

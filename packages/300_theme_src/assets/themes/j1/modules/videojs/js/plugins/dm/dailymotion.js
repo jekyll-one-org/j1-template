@@ -587,12 +587,9 @@
 
   Dailymotion.sdkReadyQueue = [];
 
-  if (typeof document !== 'undefined'){
-//  loadScript('/assets/themes/j1/modules/videojs/js/plugins/dm/api/dailymotion.min.js', apiLoaded);
-//  loadScript('https://geo.dailymotion.com/player.js', apiLoaded);
-//  loadScript('//static1.dmcdn.net/playerv5/dmp.infopack.52dea8cf991168130bab.js', apiLoaded);
-//  loadScript('https://api.dmcdn.net/all.js', apiLoaded);
-    loadScript('//api.dmcdn.net/all.js', apiLoaded);
+  if (typeof document !== 'undefined') {
+//  loadScript('//api.dmcdn.net/all.js', apiLoaded);
+    loadScript('/assets/themes/j1/modules/videojs/js/plugins/dm/api/dailymotion.sdk.min.js', apiLoaded);
     injectCss();
   }
 

@@ -16,7 +16,7 @@ regenerate:                             true
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # Tocbot is licensed under under the MIT License.
  # For details, see https://tscanlin.github.io/tocbot
  # -----------------------------------------------------------------------------
@@ -82,7 +82,7 @@ regenerate:                             true
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # Tocbot is licensed under under the MIT License.
  # For details, see https://tscanlin.github.io/tocbot
  # -----------------------------------------------------------------------------
@@ -102,6 +102,7 @@ j1.adapter.toccer = (() => {
   ------------------------------------------------------------------------------ {% endcomment %}
   var environment         = '{{environment}}';
   var state               = 'not_started';
+
   var scrollerSettings    = {};
   var scrollerOptions     = {};
   var scrollerDefaults    = {};

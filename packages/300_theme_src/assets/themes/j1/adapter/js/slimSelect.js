@@ -14,7 +14,7 @@ regenerate:                             true
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
  # Test data:
  #  {{ liquid_var | debug }}
@@ -70,7 +70,7 @@ regenerate:                             true
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
  # NOTE: Wave styles defind in /assets/data/panel.html, key 'wave'
  # -----------------------------------------------------------------------------
@@ -146,7 +146,7 @@ var timeSeconds;
         var pageVisible    = (pageState === 'block') ? true : false;
         var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
-        if (j1CoreFinished && pageVisible) {
+        if (j1CoreFinished) {
           startTimeModule = Date.now();
 
           _this.setState('started');
@@ -212,12 +212,10 @@ var timeSeconds;
               _this.select.{{select.id}} = $select_{{select.id}};
 
               logger.debug('\n' + 'initializing finished select: {{select.id}}');
-            } else {
-              logger.debug('\n' + 'wrapper not found: {{select.wrapper_id}}');
-            } // END if wrapperReady
 
-            clearInterval(wrapper_dependencies['dependency_met_wrapper_ready_{{select.id}}']);
-          }, 10); // END dependency_met_wrapper_ready_
+              clearInterval(wrapper_dependencies['dependency_met_wrapper_ready_{{select.id}}']);
+            } // END if wrapperReady
+          }, 10); // END dependency_met_wrapper_ready
           {% endif %} {% endfor %}
           // END (for) all selects
 

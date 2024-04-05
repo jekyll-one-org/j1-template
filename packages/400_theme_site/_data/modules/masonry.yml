@@ -574,9 +574,10 @@ settings:
             enabled:                    true
             options:
               autoPlay:                 true
-              byline:                   0
-              portrait:                 0
-              color:                    var(--md-gray-100)
+              muted:                    true
+#             byline:                   0
+#             portrait:                 0
+#             color:                    var(--md-gray-100)
 
           wistiaPlayer:
             enabled:                    true
@@ -590,9 +591,9 @@ settings:
             enabled:                    true
             options:
               autoPlay:                 true
-              modestbranding:           1
-              showinfo:                 0
-              controls:                 0
+              muted:                    true
+              showinfo:                 true
+              controls:                 true
 
       # ------------------------------------------------------------------------
       # Lightbox settings
@@ -608,9 +609,13 @@ settings:
         plugins:                        lgThumbnail, lgVideo
 
         options:
+          licenseKey:                   0000-0000-000-0000
           download:                     false
           alignThumbnails:              left
-          autoplayFirstVideo:           true
+#         addClass:                     lg-uno-thumbnails                         # customized thumbnails
+#         appendThumbnailsTo:           .lg-outer                                 # required for customized thumbnails
+#         animateThumb:                 false                                     # required for customized thumbnails
+#         allowMediaOverlap:            true                                      # required for customized thumbnails
 
       # ------------------------------------------------------------------------
       # caption options
@@ -690,7 +695,7 @@ settings:
           name:                         Thank You
           type:                         wistia
           size:                         "1280-720"
-          source:                       "//private-sharing.wistia.com/medias/mwhrulrucj"
+          source:                       "//fast.wistia.com/embed/iframe/mwhrulrucj"
           pinterest_prefix:             Pin video
           tweet_prefix:                 Try video
           description: >

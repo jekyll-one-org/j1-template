@@ -9,7 +9,7 @@
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Theme is licensed under the MIT License
- # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
 */
 .search-results{max-height:450px;width:98%;background-color:unset;overflow-y:scroll !important;margin-top:.25rem;margin-bottom:.25rem}p.result-item-text{font-size:.875rem;margin-bottom:.5rem;text-align:justify;line-height:1.25rem}span#clear-topsearch>i:hover{color:#424242 !important}span#send-to-history>i:hover{color:#424242 !important}

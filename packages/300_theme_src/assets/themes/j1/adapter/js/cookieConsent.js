@@ -15,7 +15,7 @@ regenerate:                             true
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
  # Test data:
  #  {{ liquid_var | debug }}
@@ -355,11 +355,7 @@ j1.adapter.cookieConsent = ((j1, window) => {
         // ---------------------------------------------------------------------
         gaCookies.forEach((item) => {
           logger.warn('\n' + 'delete GA cookie: ' + item);
-          if (hostname === 'localhost') {
-            j1.removeCookie({ name: item, domain: false, secure: false });
-          } else {
-            j1.removeCookie({ name: item, domain: '.' + hostname, secure: false });
-          }
+          j1.removeCookie({ name: item });
         });
 
         // remove cookies on invalid GAS config or left from a previous
@@ -368,11 +364,9 @@ j1.adapter.cookieConsent = ((j1, window) => {
         gasCookies.forEach((item) => {
           // Remove cookies from Google Ads
           logger.warn('\n' + 'delete GAS cookie: ' + item);
-          if (hostname === 'localhost') {
-            j1.removeCookie({ name: item, domain: false, secure: false });
-          } else {
-            j1.removeCookie({ name: item, domain: '.' + hostname, secure: false });
-          }
+          j1.removeCookie({
+            name: item
+          });
         });
 
         // managing cookie life-time. If cookie settings allows only

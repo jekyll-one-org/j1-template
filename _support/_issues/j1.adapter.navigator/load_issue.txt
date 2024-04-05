@@ -1,0 +1,8 @@
+log4javascript.js:1880 [23:20:50.107] [kigrw7d6x69] [WARN ] [j1.adapter.navigator                                        ] [navigator.js:234]
+remote themes loading: failed
+[http://localhost:41000/assets/themes/j1/adapter/js/navigator.js:234]
+
+log4javascript.js:1880 [23:20:50.107] [kigrw7d6x69] [WARN ] [j1.adapter.navigator                                        ] [navigator.js:235]
+continue processing
+[http://localhost:41000/assets/themes/j1/adapter/js/navigator.js:235]
+﻿

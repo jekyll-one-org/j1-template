@@ -1,7 +1,7 @@
 ---
 title:                                  Audio and Video
-title_extention:                        Playing HTML5 Audio and Video using J1 Template
-tagline:                                Playing Audio and Video files
+title_extention:                        Playing media files
+tagline:                                Playing media files
 
 date:                                   2020-11-04
 #last_modified:                         2023-01-01
@@ -37,32 +37,24 @@ resources:                              [
 resource_options:
   - attic:
       slides:
-
         # Broadway Underground - still image (animate default)
         - url:                          /assets/videos/headers/present_videos/still/underground-broadway.jpg
           alt:                          Broadway Underground
           title:                        Audio and Video
-          tagline:                      Playing Audio and Video files
-          alignY:                       top
-          animateFirst:                 false
-
-        # Broadway Underground - FAYETTE ST, moved file to Github/LFS
+          tagline:                      Playing media files
+        # Broadway Underground - FAYETTE ST
         - url:                          /assets/videos/headers/present_videos/underground-broadway.mp4
           alt:                          Broadway Underground Video
           title:                        Audio and Video
-          tagline:                      Playing Audio and Video files
-          alignY:                       0
+          tagline:                      Playing media files
           isVideo:                      true
           loop:                         false
-          duration:                     12000
-
+          duration:                     6000
         # Broadway Underground - still image (animate random)
         - url:                          /assets/videos/headers/present_videos/still/underground-broadway.jpg
           alt:                          Broadway Underground
           title:                        Audio and Video
-          tagline:                      Playing Audio and Video files
-          alignY:                       top
-          transition:                   push_left|push_right|cover_up|cover_down|fade|fadeInOut
+          tagline:                      Playing media files
 ---
 
 // Page Initializer
@@ -153,17 +145,18 @@ Embedded video players provide a seamless and user-friendly way to present
 video content to your audience.
 
 [role="mt-4"]
-=== HTML5 Player
+=== HTML5
 
 Modern browsers support the video tag `<video>` for the current version of
 HTML. The browsers support a framework for decoding and displaying video
 content.
 
 .MP4 Video, Peck Pocketed
+// video::/assets/videos/gallery/html5/video1.mp4[start="00:00:03" poster="/assets/videos/gallery/video1-poster.jpg" role="mt-4 mb-5"]
 video::/assets/videos/gallery/html5/video1.mp4[poster="/assets/videos/gallery/video1-poster.jpg" role="mt-4 mb-5"]
 
 [role="mt-4"]
-=== VideoJS Player
+=== VideoJS
 
 VideoJS is an Open Source JavaScript framework and library for building
 custom video players for the web. It provides a flexible and customizable
@@ -171,12 +164,11 @@ platform for displaying and controlling MPEG 4 video content on websites
 and web applications.
 
 .MP4 Video, Rolling Wild
-// videojs::/assets/videos/gallery/html5/video2.mp4[start="00:00:50" poster="/assets/videos/gallery/video2-poster.jpg" role="mt-4 mb-5"]
 videojs::/assets/videos/gallery/html5/video2.mp4[poster="/assets/videos/gallery/video2-poster.jpg" role="mt-4 mb-5"]
 
 
 [role="mt-5"]
-=== YouTube on VideoJS
+=== YouTube
 
 YouTube is a popular online video-sharing platform that allows users to
 upload, view, share, and comment on videos. The platform provides services
@@ -186,9 +178,8 @@ for people and organizations to publish various video content.
 youtube::20gXikNRjbo[poster="/assets/videos/gallery/voice_kids_nl_2021/video_poster.jpg" role="mt-4 mb-5"]
 
 
-/////
 [role="mt-4"]
-=== Dailymotion on VideoJS
+=== Dailymotion
 
 The Dailymotion platform is a monetization solution that allows to directly
 connect to high-quality advertisers through a proprietary Advertising system.
@@ -197,20 +188,19 @@ every video.
 
 .SELF Channel
 dailymotion::x87ycik[role="mt-4 mb-5"]
-/////
 
-/////
+
+////
 ++++
 <iframe frameborder="0" width="480" height="270"
     src="//www.dailymotion.com/embed/video/x87ycik"
     allowfullscreen allow="autoplay">
 </iframe>
 ++++
-/////
-
+////
 
 [role="mt-4"]
-=== Wistia on VideoJS
+=== Wistia
 
 Wistia is a marketing software and video hosting platform made for B2B
 marketers with free or paid plans available. While Wistia may not be the
@@ -220,10 +210,12 @@ video platform.
 
 .Wistia Video
 wistia::29b0fbf547[role="mt-4 mb-4"]
+// wistia::mwhrulrucj[role="mt-4 mb-4"]
 
 
+//////
 [role="mt-5"]
-=== Vimeo on VideoJS
+=== Vimeo
 
 Vimeo is an sharing platform that allows users to upload, share, and view
 video content. It was founded in 2004 by a group of filmmakers and has
@@ -233,6 +225,7 @@ and creative expression.
 
 .Forever 21 Channel
 vimeo::179528528[role="mt-4 mb-5"]
+//////
 
 
 [role="mt-5"]
@@ -247,15 +240,16 @@ Find below examples of video galleries of locally stored (MP4) video resources
 and video content provided online via YouTube.
 
 [role="mt-4"]
-=== Masonry Grid
+=== Masonry
 
-Masonry for J1 is a great tool to create dynamic video galleries as well.
-By using the Masonry module, you can create a gallery that displays video of
-different type.
+Masonry for J1 is a great tool to create dynamic video galleries. By using
+the Masonry module, you can create a gallery that displays videos of
+*different* type.
 
-.Grid of Videos
+.Mixed Video
 masonry::mixed_video_example[role="mt-4 mb-5"]
 
+[role="mb-5"]
 .More about Masonry
 [TIP]
 ====
@@ -264,7 +258,7 @@ link:{url-j1-masonry-previewer}[Masonry Preview, {browser-window--new}] page.
 ====
 
 [role="mt-4"]
-=== MP4 Video
+=== Local Media
 
 Videos created by a digicam or a mobile can be played by J1 Template using
 the lightGallery integration. Present videos you have made at it's best.
@@ -277,20 +271,19 @@ playing time of around ~*3-5 minutes* for HD 1080p (1920x1080) or
 up to ~*10 minutes* for HD 720p (1280x720) resolution.
 ====
 
-.MP4 Videos
+.MP4 Video
 gallery::jg_video_html5[role="mt-4 mb-4"]
 
-[role="mb-4"]
+[role="mb-4 mb-5"]
 [NOTE]
 ====
 The HTML5 specification does *not* define which audio and video *formats*
-browsers should support. J1 lightGallery can play all standard types of
-video for the Web like *MP4*, *WebM*, or *Ogg*.
+browsers should support. The J1 LightGallery module can play all standard
+HTML5 Video formats, such as MP4, WebM, or Ogg, on all modern browsers.
 ====
 
-
-[role="mt-5"]
-=== YouTube Video
+[role="mt-4"]
+=== YouTube
 
 [role="mb-4"]
 The community at link:{url-youtube--home}[YouTube, {browser-window--new}] is
@@ -304,16 +297,8 @@ _James Corden_ of *The Late Late Show* at CBS, Los Angeles.
 .Carpool Karaoke
 gallery::jg_video_online_youtube_james_and_adele[role="mb-5"]
 
-// [role="mt-4"]
-// === TikToc Video
-//
-// Bla ...
-//
-// .TikToc Videos
-// gallery::jg_video_online_tiktoc[role="mb-5"]
-
 [role="mt-4"]
-=== Vimeo Video
+=== Vimeo
 
 [role="mb-4"]
 link:{url-vimeo--home}[Vimeo, {browser-window--new}] is a video-sharing
@@ -337,10 +322,8 @@ space for private projects to present video content without advertising.
 .Fashion
 gallery::jg_video_online_vimeo[role="mb-5"]
 
-
-/////
-[role="mt-5"]
-=== DailyMotion Video Galleries
+[role="mt-4"]
+=== DailyMotion
 
 link:{url-dailymotion--home}[Dailymotion, {browser-window--new}] is a French
 video-sharing technology platform primarily owned by
@@ -348,35 +331,14 @@ link:{url-vivendi--home}[Vivendi, {browser-window--new}]. The platform is
 available worldwide in 183 languages and 43 localised versions featuring local
 home pages and local content.
 
-[role="mt-4 mb-4"]
 The platform is a *monetization* solution that allows allows to directly
 connect to high-quality advertisers through a proprietary Advertising system.
 Like YouTube, videos can be watched for free, but ads are shown on each and
 every video.
 
-[role="mt-4 mb-4"]
-Dailymotion allows users to search videos by *tags*, topic *channels*, or
-user-created *groups*. Users can upload videos of up to 2 gigabytes and a
-length of 60 minutes. If a user is a MotionMaker or MotionPartner, a program
-for particularly creative users or partners, they can upload videos of
-unlimited length.
-
-.Asciidoc Markup
-[source, apib, role="noclip mt-4 mb-4"]
-----
-gallery::jg_video_online_dailymotion[]
-----
-
-.SELF Magazine
+.SELF Chanel
 gallery::jg_video_online_dailymotion[role="mt-4 mb-5"]
 
-[NOTE]
-====
-Like YouTube, DailyMotion is a commercial platform using *advertising*
-on all video content. On every video, an ad clip is presented of 15 to
-30 seconds in length.
-====
-/////
 
 [role="mt-5"]
 == What next

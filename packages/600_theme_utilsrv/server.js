@@ -13,7 +13,7 @@
  # Copyright (C) 2020 Václav Klecanda
  #
  # J1 Template is licensed under the MIT License.
- # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # Netlify-cms-github-oauth-provider is licensed under UNKNOWN License.
  # See: https://github.com/vencax/netlify-cms-github-oauth-provider/blob/master/README.md
  # -----------------------------------------------------------------------------

@@ -12,7 +12,7 @@
  #  Copyright (C) 2016 adamnurdin01
  #
  #  J1 Theme is licensed under MIT License.
- #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  #  Bootsnav is licensed under MIT License.
  #  See: https://github.com/adamnurdin01/navigator
  #
