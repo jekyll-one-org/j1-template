@@ -12,7 +12,7 @@
  #  Copyright (C) 2016 - 2024 Tim Scanlin
  #
  #  J1 Theme is licensed under MIT License.
- #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  #  Tocbot is licensed under the MIT License.
  #  For details, https://github.com/tscanlin/tocbot/blob/master/LICENSE
  # -----------------------------------------------------------------------------

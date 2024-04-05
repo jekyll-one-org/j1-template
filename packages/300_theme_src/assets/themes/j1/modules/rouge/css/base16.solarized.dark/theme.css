@@ -11,7 +11,7 @@
  #  Copyright (c) 2012 Jeanine Adkisson
  #
  #  J1 Template is licensed under the MIT License.
- #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  #  Rouge is licensed under the MIT License.
  #  See: https://github.com/rouge-ruby/rouge/blob/master/LICENSE
  # -----------------------------------------------------------------------------

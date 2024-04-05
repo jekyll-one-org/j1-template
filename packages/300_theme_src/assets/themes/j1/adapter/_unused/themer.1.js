@@ -15,7 +15,7 @@ regenerate:                             true
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  #
  # -----------------------------------------------------------------------------
  # Test data:
@@ -85,7 +85,7 @@ regenerate:                             true
  # Copyright (C) 2014 Joseph Guadagno
  #
  # J1 Template is licensed under the MIT License.
- # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # bootstrapThemeSwitcher is licensed under the MIT License.
  # For details, see https://github.com/jguadagno/bootstrapThemeSwitcher/blob/master/LICENSE
  # -----------------------------------------------------------------------------

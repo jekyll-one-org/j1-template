@@ -10,7 +10,7 @@
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Theme is licensed under MIT License.
- # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
  # TODO: Improve lanuage settings
  # TODO: Improve auto-hide functionality for the results block

@@ -76,4 +76,4 @@ Bug reports and pull requests are welcome at
 ## License
 
 The RubyGem is available as Open Source under the terms of the 
-[MIT License](https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md).
+[MIT License](https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE).

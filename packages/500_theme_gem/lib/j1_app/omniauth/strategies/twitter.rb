@@ -10,7 +10,7 @@
 # Copyright (C) 2012 Mark Dodwell
 #
 # J1 Theme is licensed under the MIT License
-# See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+# See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
 #
 # omniauth-patreon-v2 is licensed under the MIT License
 # See: https://github.com/doumart/omniauth-patreon-v2#license

@@ -15,7 +15,7 @@ regenerate:                             true
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
@@ -65,7 +65,7 @@ regenerate:                             true
  #  Copyright (C) 2013-2023  David J. Bradshaw
  #
  #  J1 Template is licensed under the MIT License.
- #  For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ #  For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  #  iFrameResizer is licensed under under the MIT License.
  #  For details, see http://davidjbradshaw.github.io/iframe-resizer/
  #
