@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/modules/videojs/js/plugins/zoom.js
- # Provides the VideoJS (V8) plugin Zoom, Version 1.2.0
+ # Provides the zoom plugin of version 1.2.0 for Video.js V8 and newer
  # See: https://github.com/theonlyducks/videojs-zoom
  #
  # Product/Info:

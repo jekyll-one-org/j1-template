@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/modules/videojs/js/wt/wistia.js
- # Provides Wistia Playback Technology (Tech) for Video.js V8 and newer
+ # Provides Wistia Playback Technology for Video.js V8 and newer
  # See: https://github.com/edly-io/videojs-wistia
  #
  #  Product/Info:
@@ -36,9 +36,6 @@
     var _isOnMobile = videojs.browser.IS_IOS || videojs.browser.IS_NATIVE_ANDROID;
     var Tech        = videojs.getTech('Tech');
 
-    var startTimeModule;
-    var endTimeModule;
-
     class Wistia extends Tech {
 
       constructor(options, ready) {
@@ -66,13 +63,13 @@
 
       dispose() {
         if (this.wistiaPlayer) {
-          // dispose of the Wistia Player
+          //Dispose of the Wistia Player
           if (this.wistiaPlayer) {
             this.wistiaPlayer.pause();
             this.wistiaPlayer.remove();
           }
         } else {
-          // Wistia API hasn't finished loading or the player is already disposed
+          //Wistia API hasn't finished loading or the player is already disposed
           var index = Wistia.apiReadyQueue.indexOf(this);
           if (index !== -1) {
             Wistia.apiReadyQueue.splice(index, 1);
@@ -135,44 +132,52 @@
           onReady: function(video) {
             this_.wistiaPlayer = video;
             this_.onPlayerReady();
-            this_.wistiaPlayer.bind('end', this_.onPlaybackEnded.bind(this_));
+            this_.wistiaPlayer.bind('end', this_.onPlaybackEnded.bind(this_));  // HFNniLtyyEK_wistia_api
           }
         });
-
-        logger.debug('\n' + 'created player ID on: ' + this.videoId);
-      } // END initWistiaPlayer
+      }
 
       onPlayerReady() {
         var wt_player = document.getElementById(this.options_.playerId + '_wistia_api');
         var currState;
 
-        // workaround toggle play|pause for Wistia Tech (click on video)
-        wt_player.addEventListener('click', (event) => {
-          currState = this.wistiaPlayer.state();
-
+        wt_player.addEventListener('click', (e) => {
           // suppress default actions|bubble up
           event.preventDefault();
           event.stopPropagation();
 
-          // trigger play on state beforeplay (FIRST play)
-          if (currState === 'beforeplay') {
+          // implement toggle play|pause
+          // logger.info('\n' + 'implement toggle play|pause');
+          // this.wistiaPlayer.state() === 'paused' || this.wistiaPlayer.state() === 'ended';
+          currState = this.wistiaPlayer.state();
+          logger.info('\n' + 'player state (before): ' + currState);
+
+          if (currState === 'beforeplay' && currState === 'paused' || currState === 'ended' ) {
             this.wistiaPlayer.play();
-            this.trigger('play');
-            logger.debug('\n' + 'triggered play on state: ' + currState);
-          }
 
-          // update player states
-          if (currState === 'playing' ) {
-            this.trigger('play');
-          }
 
-          if (currState === 'paused' ) {
+            var dependencies_met_is_playing = setInterval (() => {
+              var playerState = this.wistiaPlayer.state();
+              var isPlaying   = (playerState === 'paying') ? true : false;
+
+              if (isPlaying) {
+                logger.info('\n' + 'player state (after): ' + currState);
+                this.trigger('play');
+                clearInterval(dependencies_met_is_playing);
+
+                return;
+              } // END pageVisible
+            }, 10); // END dependencies_met_page_ready
+
+          } else if (currState === 'playing' ) {
+            this.wistiaPlayer.pause();
             this.trigger('pause');
           }
+
+          currState = this.wistiaPlayer.state();
+          logger.info('\n' + 'player state (after): ' + currState);
         });
 
-        // default actions
-        // ---------------------------------------------------------------------
         if (this.options_.muted) {
           this.wistiaPlayer.mute();
         }
@@ -183,7 +188,7 @@
         if (this.playOnReady) {
           this.play();
         }
-      } // END onPlayerReady
+      }
 
       onPlaybackEnded() {
         this.trigger('ended');
@@ -336,16 +341,10 @@
 
     function apiLoaded() {
       Wistia.isApiReady = true;
-      logger.debug('\n' + 'API loaded successfully');
       for (var i = 0; i < Wistia.apiReadyQueue.length; ++i) {
         Wistia.apiReadyQueue[i].initWistiaPlayer();
       }
-      logger.debug('\n' + 'created all players from queue: #' + i);
-
-      endTimeModule = Date.now();
-      logger.debug('\n' + 'initializing plugin: finished');
-      logger.debug('\n' + 'plugin initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
-    } // END apiLoaded
+    }
 
     function loadScript(src, callback) {
       var loaded = false;
@@ -368,10 +367,12 @@
         }
       };
       tag.src = src;
-    } // END
+    }
 
     function injectCss() {
-      var css = '.vjs-wistia-mobile .vjs-big-play-button {display: none;}';
+      var css =
+//      '.vjs-theme-uno .vjs-big-play-button { display: block }' +
+        '.vjs-wistia-mobile .vjs-big-play-button { display: none; }';
 
       var head = document.head || document.getElementsByTagName('head')[0];
 
@@ -384,43 +385,20 @@
         style.appendChild(document.createTextNode(css));
       }
 
-      logger.debug('\n' + 'added additional CSS styles');
       head.appendChild(style);
-    } // END injectCss
+    }
 
     Wistia.apiReadyQueue = [];
 
-    // if (typeof document !== 'undefined'){
-    //   loadScript('//fast.wistia.com/assets/external/E-v1.js', apiLoaded);
-    //   injectCss();
-    // }
+    if (typeof document !== 'undefined'){
+      loadScript('//fast.wistia.com/assets/external/E-v1.js', apiLoaded);
+      injectCss();
+    }
 
-    // initialize plugin if page ready
-    // -------------------------------------------------------------------------
-    var dependencies_met_page_ready = setInterval (() => {
-      var pageState      = $('#content').css("display");
-      var pageVisible    = (pageState === 'block') ? true : false;
-      var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
-      var atticFinished  = (j1.adapter.attic.getState() == 'finished') ? true : false;
-
-      if (j1CoreFinished && pageVisible && atticFinished) {
-        startTimeModule = Date.now();
-
-        logger.debug('\n' + 'initializing plugin: started');
-        logger.debug('\n' + 'version of videoJS detected: ' + videojs.VERSION);
-
-        loadScript('//fast.wistia.com/assets/external/E-v1.js', apiLoaded);
-        injectCss();
-
-        clearInterval(dependencies_met_page_ready);
-      } // END pageVisible
-    }, 10); // END dependencies_met_page_ready
-
-    // Check VJS versions to register Wistia TECH
+    // Older versions of VJS5 doesn't have the registerTech function
     if (typeof videojs.registerTech !== 'undefined') {
       videojs.registerTech('Wistia', Wistia);
     } else {
-      console.error('\n' + 'invalid version of videoJS detected: ' + videojs.VERSION);
+      videojs.registerComponent('Wistia', Wistia);
     }
-
   }));

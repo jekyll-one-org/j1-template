@@ -1,40 +1,22 @@
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/modules/videojs/js/dailymotion/dailymotion.js
- # Provides Dailymotion Playback Technology for Video.js V8 and newer
+ # Provides Dailymotion Playback Technology (Tech) for Video.js V8 and newer
  #
- #  Product/Info:
- #  http://jekyll.one
+ # Product/Info:
+ # http://jekyll.one
  #
-  # Copyright (C) John Law
- #  Copyright (C) 2023, 2024 Juergen Adams
+ # Copyright (C) John Law
+ # Copyright (C) 2023, 2024 Juergen Adams
  #
- #  J1 Theme is licensed under MIT License.
- #  See: https://github.com/jekyll-one/J1 Theme/blob/master/LICENSE
+ # videojs-dailymotion is licensed under MIT License.
+ # See: https://github.com/lawchihon/videojs-dailymotion/blob/master/LICENSE
+ # J1 Theme is licensed under MIT License.
+ # See: https://github.com/jekyll-one/J1 Theme/blob/master/LICENSE
  # -----------------------------------------------------------------------------
 */
 
-/*
-  Copyright (c) John Law <chihonlaw@gmail.com>
-
-  Permission is hereby granted, free of charge, to any person obtaining a copy
-  of this software and associated documentation files (the "Software"), to deal
-  in the Software without restriction, including without limitation the rights
-  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-  copies of the Software, and to permit persons to whom the Software is
-  furnished to do so, subject to the following conditions:
-
-  The above copyright notice and this permission notice shall be included in all
-  copies or substantial portions of the Software.
-
-  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-  SOFTWARE.
-*/
+/* Version 1.0, updated version for videoJS V8 + J1 Template */
 
 /*global define, DM*/
 (function (root, factory) {
@@ -50,8 +32,13 @@
   }
 }(this, function(videojs) {
  'use strict';
+
+  var logger      = log4javascript.getLogger('videoJS.plugin.dailymotion');
   var _isOnMobile = videojs.browser.IS_IOS || videojs.browser.IS_ANDROID;
-  var Tech = videojs.getTech('Tech');
+  var Tech        = videojs.getTech('Tech');
+
+  var startTimeModule;
+  var endTimeModule;
 
   class Dailymotion extends Tech {
 
@@ -146,6 +133,7 @@
       if (this.dmPlayer) {
         return;
       }
+
       this.dmPlayer = new DM.player(
         document.getElementById(this.options_.techId),
         this.getPlayerConfig()
@@ -187,6 +175,8 @@
       this.dmPlayer.addEventListener('volumechange', function() {
         vm.trigger('volumechange');
       });
+
+      logger.debug('\n' + 'created player ID on: ' + vm.dmPlayer.id);
     }
 
     autoplay(autoplay) {
@@ -529,11 +519,18 @@
   };
 
   function apiLoaded() {
+    logger.debug('\n' + 'API loaded successfully');
+
     Dailymotion.isSdkReady = true;
 
     for (var i = 0; i < Dailymotion.sdkReadyQueue.length; ++i) {
       Dailymotion.sdkReadyQueue[i].initDMPlayer();
     }
+    logger.debug('\n' + 'created all players from queue: #' + i);
+
+    endTimeModule = Date.now();
+    logger.debug('\n' + 'initializing plugin: finished');
+    logger.debug('\n' + 'plugin initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
   }
 
   function loadScript(src, callback) {
@@ -580,6 +577,7 @@
     }
 
     head.appendChild(style);
+    logger.debug('\n' + 'added additional CSS styles');
   }
 
   // Include the version number
@@ -587,11 +585,33 @@
 
   Dailymotion.sdkReadyQueue = [];
 
-  if (typeof document !== 'undefined') {
-//  loadScript('//api.dmcdn.net/all.js', apiLoaded);
-    loadScript('/assets/themes/j1/modules/videojs/js/plugins/dm/api/dailymotion.sdk.min.js', apiLoaded);
-    injectCss();
-  }
+//   if (typeof document !== 'undefined') {
+// //  loadScript('//api.dmcdn.net/all.js', apiLoaded);
+//     loadScript('/assets/themes/j1/modules/videojs/js/plugins/dm/api/dailymotion.sdk.min.js', apiLoaded);
+//     injectCss();
+//   }
+
+  // initialize plugin if page ready
+  // -------------------------------------------------------------------------
+  var dependencies_met_page_ready = setInterval (() => {
+    var pageState      = $('#content').css("display");
+    var pageVisible    = (pageState === 'block') ? true : false;
+    var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
+    var atticFinished  = (j1.adapter.attic.getState() == 'finished') ? true : false;
+
+    if (j1CoreFinished && pageVisible && atticFinished) {
+      startTimeModule = Date.now();
+
+      logger.debug('\n' + 'initializing plugin: started');
+      logger.debug('\n' + 'version of videoJS detected: ' + videojs.VERSION);
+
+      // loadScript('//api.dmcdn.net/all.js', apiLoaded);
+      loadScript('/assets/themes/j1/modules/videojs/js/plugins/dm/api/dailymotion.sdk.min.js', apiLoaded);
+      injectCss();
+
+      clearInterval(dependencies_met_page_ready);
+    } // END pageVisible
+  }, 10); // END dependencies_met_page_ready
 
   // Older versions of VJS5 doesn't have the registerTech function
   if (typeof videojs.registerTech !== 'undefined') {

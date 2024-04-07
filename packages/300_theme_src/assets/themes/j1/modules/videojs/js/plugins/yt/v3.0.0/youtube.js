@@ -1,22 +1,42 @@
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/modules/videojs/js/yt/youtube.js
- # Provides YouTube Playback Technology (Tech) for Video.js V8 and newer
+ # Provides YiuTube Playback Technology (Tech) for Video.js V8 and newer
  #
- # Product/Info:
- # http://jekyll.one
+ #  Product/Info:
+ #  http://jekyll.one
  #
- # Copyright (C) 2023, 2024 Juergen Adams
- # Copyright (C) 2014-2015 Gary Katsevman, Benoit Tremblay
+ #  Copyright (C) 2023, 2024 Juergen Adams
+ #  Copyright (C) 2014-2015 Benoit Tremblay
  #
- # YouTube Playback Technology (Tech) is licensed under MIT License.
- # See: https://github.com/videojs/videojs-youtube/blob/main/README.md
- # J1 Theme is licensed under MIT License.
- # See: https://github.com/jekyll-one/J1 Theme/blob/master/LICENSE
+ #  J1 Theme is licensed under MIT License.
+ #  See: https://github.com/jekyll-one/J1 Theme/blob/master/LICENSE
  # -----------------------------------------------------------------------------
 */
 
-/* Version 3.0.1, modified version for J1 Template */
+/*
+  The MIT License (MIT)
+
+  Copyright (c) 2014-2015 Benoit Tremblay <trembl.ben@gmail.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  THE SOFTWARE.
+*/
 
 /*global define, YT*/
 (function (root, factory) {
@@ -33,12 +53,8 @@
 }(this, function(videojs) {
   'use strict';
 
-  var logger      = log4javascript.getLogger('videoJS.plugin.youtube');
-  var _isOnMobile = videojs.browser.IS_IOS || videojs.browser.IS_NATIVE_ANDROID;
-  var Tech        = videojs.getTech('Tech');
-
-  var startTimeModule;
-  var endTimeModule;
+  var _isOnMobile = videojs.browser.IS_IOS || videojs.browser.IS_ANDROID;
+  var Tech = videojs.getTech('Tech');
 
   class Youtube extends Tech {
 
@@ -119,8 +135,14 @@
       return divWrapper;
     }
 
+    // prevent "Failed to execute 'postMessage' on 'DOMWindow'"
+    // by setting "origin" with "playerVars"
+    // see: https://stackoverflow.com/questions/27573017/failed-to-execute-postmessage-on-domwindow-https-www-youtube-com-http
+    //
     initYTPlayer() {
+      const origin = window.location.origin;
       var playerVars = {
+        origin: origin,
         controls: 0,
         modestbranding: 1,
         rel: 0,
@@ -237,6 +259,7 @@
       var playerConfig = {
         videoId: this.activeVideoId,
         playerVars: playerVars,
+
         events: {
           onReady: this.onPlayerReady.bind(this),
           onPlaybackQualityChange: this.onPlayerPlaybackQualityChange.bind(this),
@@ -252,9 +275,7 @@
       }
 
       this.ytPlayer = new YT.Player(this.options_.techId, playerConfig);
-
-      logger.debug('\n' + 'created player ID on: ' + this.ytPlayer.id);
-    } // END initYTPlayer
+    }
 
     onPlayerReady() {
       if (this.options_.muted) {
@@ -545,13 +566,13 @@
     }
 
     // jadams, 2023-10-01: videojs.createTimeRange() deprecated in VideoJS 9
+    //
     seekable() {
       if(!this.ytPlayer) {
-//      return videojs.createTimeRange();
+        // return videojs.createTimeRange();
         return videojs.time.createTimeRanges();
       }
-
-//    return videojs.createTimeRange(0, this.ytPlayer.getDuration());
+      // return videojs.createTimeRange(0, this.ytPlayer.getDuration());
       return videojs.time.createTimeRanges(0, this.ytPlayer.getDuration());
     }
 
@@ -625,16 +646,17 @@
     }
 
     // jadams, 2023-10-01: videojs.createTimeRange() deprecated in VideoJS 9
+    //
     buffered() {
       if(!this.ytPlayer || !this.ytPlayer.getVideoLoadedFraction) {
-//      return videojs.createTimeRange();
+        // return videojs.createTimeRange();
         return videojs.time.createTimeRanges();
       }
 
       var bufferedEnd = this.ytPlayer.getVideoLoadedFraction() * this.ytPlayer.getDuration();
 
-//    return videojs.createTimeRange(0, bufferedEnd);
-      return videojs.time.createTimeRanges(0, this.ytPlayer.getDuration());
+      // return videojs.createTimeRange(0, bufferedEnd);
+      return videojs.time.createTimeRanges(0, bufferedEnd);
     }
 
     // TODO: Can we really do something with this on YouTUbe?
@@ -740,18 +762,12 @@
   function apiLoaded() {
     YT.ready(function() {
       Youtube.isApiReady = true;
-      logger.debug('\n' + 'API loaded successfully');
 
       for (var i = 0; i < Youtube.apiReadyQueue.length; ++i) {
         Youtube.apiReadyQueue[i].initYTPlayer();
       }
-      logger.debug('\n' + 'created all players from queue: #' + i);
-
-      endTimeModule = Date.now();
-      logger.debug('\n' + 'initializing plugin: finished');
-      logger.debug('\n' + 'plugin initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
     });
-  } // END apiLoaded
+  }
 
   function loadScript(src, callback) {
     var loaded = false;
@@ -797,42 +813,20 @@
     }
 
     head.appendChild(style);
-    logger.debug('\n' + 'added additional CSS styles');
-  } // END injectCss
+  }
 
   Youtube.apiReadyQueue = [];
 
-  // if (typeof document !== 'undefined'){
-  //   loadScript('https://www.youtube.com/iframe_api', apiLoaded);
-  //   injectCss();
-  // }
+  if (typeof document !== 'undefined'){
+//  loadScript('/assets/themes/j1/modules/videojs/js/plugins/yt/api/youtube.min.js', apiLoaded);
+    loadScript('//www.youtube.com/iframe_api', apiLoaded);
+    injectCss();
+  }
 
-  // initialize plugin if page ready
-  // -------------------------------------------------------------------------
-  var dependencies_met_page_ready = setInterval (() => {
-    var pageState      = $('#content').css("display");
-    var pageVisible    = (pageState === 'block') ? true : false;
-    var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
-    var atticFinished  = (j1.adapter.attic.getState() == 'finished') ? true : false;
-
-    if (j1CoreFinished && pageVisible && atticFinished) {
-      startTimeModule = Date.now();
-
-      logger.debug('\n' + 'initializing plugin: started');
-      logger.debug('\n' + 'version of videoJS detected: ' + videojs.VERSION);
-
-      loadScript('https://www.youtube.com/iframe_api', apiLoaded);
-      injectCss();
-
-      clearInterval(dependencies_met_page_ready);
-    } // END pageVisible
-  }, 10); // END dependencies_met_page_ready
-
-  // Check VJS versions to register Youtube TECH
+  // Older versions of VJS5 doesn't have the registerTech function
   if (typeof videojs.registerTech !== 'undefined') {
     videojs.registerTech('Youtube', Youtube);
   } else {
-    console.error('\n' + 'invalid version of videoJS detected: ' + videojs.VERSION);
+    videojs.registerComponent('Youtube', Youtube);
   }
-
 }));

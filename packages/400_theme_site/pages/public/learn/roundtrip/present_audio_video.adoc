@@ -7,8 +7,8 @@ date:                                   2020-11-04
 #last_modified:                         2023-01-01
 
 description: >
-                                        The J1 Template support playing video on web pages
-                                        by HTML5 Video, the new standard of HTML to show
+                                        The J1 Template supports playing video on web pages
+                                        by HTML5 Video, the current standard of HTML to show
                                         videos on web pages.
 keywords: >
                                         open source, free, template, jekyll, jekyllone, web,
@@ -35,6 +35,8 @@ resources:                              [
                                           videojs, vimeoplayer
                                         ]
 resource_options:
+  - toccer:
+      collapseDepth:                    4
   - attic:
       slides:
         # Broadway Underground - still image (animate default)
@@ -79,26 +81,25 @@ resource_options:
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [role="dropcap"]
-The J1 Template system support playing audio and video on web pages by HTML5,
-the new standard of HTML to play audio and video files on webpages natively
-without the need of any external player.
+The J1 Template system supports playing audio and video on web pages using
+HTML5, the current standard. Visitors can play audio and video files without
+the need for an external player.
 
-Modern browsers support the audio tag `<audio>` and the video tag `<video>`
-for the current HTML standard. The previous proprietary software like
-_Flash Player_, _Quicktime_, or _Silverlight_ is no longer needed as J1
-provides HTML Audio and Video and VideoJS support for local video and from
-online sources on the Internet.
+Modern browsers support the audio `<audio>` and video tag `<video>`. The
+previous proprietary software, like _Flash Player_, _Quicktime_, _Silverlight_
+is no longer needed as the J1 Template provides audio and video support for
+local video files and online sources.
 
 mdi:clock-time-five-outline[24px, md-gray mt-5 mr-2]
 *10-15 Minutes* to read
 
 
 [role="mt-5"]
-== HTML5 Audio
+== Audio
 
-Audio players can be embedded in Web pages very easy by using the HTML5 audio
-tag `<audio>`. Browsers have a built-in multimedia framework for decoding
-and playing audio content directly within a webpage.
+Audio players can easily be embedded in web pages using the *audio* tag
+`<audio>.` Browsers have a built-in framework for decoding and playing audio
+content directly within a webpage.
 
 .Ambient Piano
 audio::/assets/audio/sound-effects/ambient-piano.mp3[role="mt-4 mb-5"]
@@ -106,50 +107,32 @@ audio::/assets/audio/sound-effects/ambient-piano.mp3[role="mt-4 mb-5"]
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 [role="mt-5"]
-== HTML5 Video
+== Video
 
-HTML5 video opens the doors to your way of presenting video content on your
-web. All modern browsers support the video tag `<video>`. Browsers have a
-built-in multimedia framework already for decoding and displaying video
-content. No need to use proprietary software components anymore.
+HTML5 video opens the doors to how to present video content on your web.
+All modern browsers support the video tag `<video>.` Browsers already have
+a built-in multimedia framework for decoding and displaying video content.
 
 Two types of video sources are supported:
 
 * Video files from local folders (your webspace)
-* Video files from online sources (on the Internet) like YouTube, Vimeo, etc.
-
-[role="mb-4"]
-The combination of a gallery and a lightbox is entirely usable for all
-the video content you want to present on your site. You can place galleries
-elsewhere with your content. You can use them for blogs by putting them into
-your article's content.
-
-[CAUTION]
-====
-The module lightGallery can be used for free for private use, but a
-*commercial license* is required for business or commercial websites. See
-link:{url-light-gallery--license}[LightGallery Licenses, {browser-window--new}]
-how to use lightGallery for *commercial* websites and projects.
-====
+* Video files from Online sources (on the Internet) like YouTube, Wistia,
+  Dailymotion etc.
 
 [role="mt-5"]
-== Standalone Players
+== Standalone Video Players
 
-Video players embedded in Web pages are software components that integrate
-and play videos directly within a web page or application. These players
-are essential for websites, blogs, and apps that want to display video content
-without requiring users to download the video file or use any external
-media player.
-
-Embedded video players provide a seamless and user-friendly way to present
-video content to your audience.
+Standalone video players embedded in websites are software components that
+integrate and play video sources directly within a page or application. These
+players are essential for all current sites and apps. Embedded players provide
+a seamless and user-friendly way to present multimedia content to your audience.
 
 [role="mt-4"]
-=== HTML5
+=== Built-in Player
 
-Modern browsers support the video tag `<video>` for the current version of
-HTML. The browsers support a framework for decoding and displaying video
-content.
+All modern browsers universally support the video tag `<video>`. This tag
+offers an out-of-the-box framework for decoding and displaying video content
+without loading *external players*.
 
 .MP4 Video, Peck Pocketed
 // video::/assets/videos/gallery/html5/video1.mp4[start="00:00:03" poster="/assets/videos/gallery/video1-poster.jpg" role="mt-4 mb-5"]
@@ -158,17 +141,28 @@ video::/assets/videos/gallery/html5/video1.mp4[poster="/assets/videos/gallery/vi
 [role="mt-4"]
 === VideoJS
 
-VideoJS is an Open Source JavaScript framework and library for building
-custom video players for the web. It provides a flexible and customizable
-platform for displaying and controlling MPEG 4 video content on websites
-and web applications.
+VideoJS is a *free-to-use* open-source JavaScript framework for building
+custom video players for the web. Implementing VideoJS for the J1 Template
+supports local video and several platforms, such as YouTube, Vimeo, Wistia,
+or Dailymotion, for presenting videos *online*.
+
+For *online sources*, VideoJS uses plugins, such as the so-called VJS
+Playback Technology. With the help of *plugins*, it is possible to present
+*different media* using the *same player*, the same look and feel for a
+better user experience.
+
+[role="mt-4"]
+==== Local Video
+
+VideoJS provides a flexible and customizable platform for displaying and
+controlling MPEG 4 video content on websites and web applications.
 
 .MP4 Video, Rolling Wild
 videojs::/assets/videos/gallery/html5/video2.mp4[poster="/assets/videos/gallery/video2-poster.jpg" role="mt-4 mb-5"]
 
 
 [role="mt-5"]
-=== YouTube
+==== YouTube
 
 YouTube is a popular online video-sharing platform that allows users to
 upload, view, share, and comment on videos. The platform provides services
@@ -177,36 +171,29 @@ for people and organizations to publish various video content.
 .The Voice Kids NL 2021 - Emma Kok
 youtube::20gXikNRjbo[poster="/assets/videos/gallery/voice_kids_nl_2021/video_poster.jpg" role="mt-4 mb-5"]
 
+// .Carpool Karaoke Adele
+// youtube::Nck6BZga7TQ[poster="/assets/videos/gallery/video_adele-poster.jpg" role="mt-4 mb-5"]
+
 
 [role="mt-4"]
-=== Dailymotion
+==== Dailymotion
 
-The Dailymotion platform is a monetization solution that allows to directly
-connect to high-quality advertisers through a proprietary Advertising system.
-Like YouTube, videos can be watched for free, but ads are shown on each and
-every video.
+The Dailymotion platform is a monetization solution directly connecting to
+high-quality advertisers through a proprietary advertising system.
+Like YouTube, videos can be watched for free, but ads are shown on every
+video.
 
 .SELF Channel
 dailymotion::x87ycik[role="mt-4 mb-5"]
 
 
-////
-++++
-<iframe frameborder="0" width="480" height="270"
-    src="//www.dailymotion.com/embed/video/x87ycik"
-    allowfullscreen allow="autoplay">
-</iframe>
-++++
-////
-
 [role="mt-4"]
-=== Wistia
+==== Wistia
 
-Wistia is a marketing software and video hosting platform made for B2B
-marketers with free or paid plans available. While Wistia may not be the
-*Big Man on Campus* like Vimeo, it still brings valuable functionality
-to the table for marketers and should be seriously considered as a viable
-video platform.
+Wistia is a marketing software and video hosting platform for business-to-business
+marketers. Free or paid plans are available. While Wistia may not be the
+*Big Man on Campus*, like Vimeo, still brings valuable functionality and
+should be considered a viable video platform.
 
 .Wistia Video
 wistia::29b0fbf547[role="mt-4 mb-4"]
@@ -215,7 +202,7 @@ wistia::29b0fbf547[role="mt-4 mb-4"]
 
 //////
 [role="mt-5"]
-=== Vimeo
+==== Vimeo
 
 Vimeo is an sharing platform that allows users to upload, share, and view
 video content. It was founded in 2004 by a group of filmmakers and has
@@ -231,20 +218,33 @@ vimeo::179528528[role="mt-4 mb-5"]
 [role="mt-5"]
 == Galleries of Video
 
-Video galleries are collections to display videos organized around a specific
-theme, topic, or purpose. The gallery module (lightGallery) for J1 Template is
-a fast, modular, and responsive plugin to create beautiful-looking, featured
-image and video galleries.
+Video galleries are collections that display videos organized around a
+specific theme, topic, or purpose. The gallery module (lightGallery) for
+J1 Template is a fast, modular, and responsive plugin for creating
+beautiful-looking, featured image and video galleries.
+
+[role="mb-4"]
+The combination of a gallery and a lightbox is entirely usable for all
+the video content you want to present on your site. You can place galleries
+elsewhere with your content. You can use them for blogs by putting them into
+your article's content.
+
+[CAUTION]
+====
+The module lightGallery can be used for free for private use, but a
+*commercial license* is required for business or commercial websites. See
+link:{url-light-gallery--license}[LightGallery Licenses, {browser-window--new}]
+how to use lightGallery for *commercial* websites and projects.
+====
 
 Find below examples of video galleries of locally stored (MP4) video resources
-and video content provided online via YouTube.
+and video content provided online.
 
 [role="mt-4"]
 === Masonry
 
-Masonry for J1 is a great tool to create dynamic video galleries. By using
-the Masonry module, you can create a gallery that displays videos of
-*different* type.
+Masonry for J1 Template is a great tool for creating dynamic video galleries.
+The module makes creating a gallery to display videos of different types easy.
 
 .Mixed Video
 masonry::mixed_video_example[role="mt-4 mb-5"]
@@ -265,31 +265,23 @@ the lightGallery integration. Present videos you have made at it's best.
 
 [NOTE]
 ====
-The current file size of Local Video is *limited* to *50MB* (Git LFS limit).
-Using a modern MP4 Encoder (H264|H265 compression), a video will have a
-playing time of around ~*3-5 minutes* for HD 1080p (1920x1080) or
-up to ~*10 minutes* for HD 720p (1280x720) resolution.
+The current file *size* of local video media files is limited to *50 MegaByte*.
+Using a modern MP4 Encoder for video compression, a video will play around
+*3-5 minutes* for HD 1080p (1920x1080 pixel) or up to *10 minutes* for
+HD 720p (1280x720 pixel).
 ====
 
 .MP4 Video
-gallery::jg_video_html5[role="mt-4 mb-4"]
-
-[role="mb-4 mb-5"]
-[NOTE]
-====
-The HTML5 specification does *not* define which audio and video *formats*
-browsers should support. The J1 LightGallery module can play all standard
-HTML5 Video formats, such as MP4, WebM, or Ogg, on all modern browsers.
-====
+gallery::jg_video_html5[role="mt-4 mb-5"]
 
 [role="mt-4"]
 === YouTube
 
 [role="mb-4"]
-The community at link:{url-youtube--home}[YouTube, {browser-window--new}] is
-large, with over 1 billion users that watch hundreds of millions of hours of
-content every day. The number of channels on YouTube is enormous. For TV
-Stations, it's a must to publish videos of their shows on YouTube.
+The community at link:{url-youtube--home}[YouTube, {browser-window--new}]
+is large, with over 1 billion users that watch hundreds of millions of
+hours of content every day. The number of YouTube channels is enormous.
+For TV Stations, it's a must to publish videos of their shows on YouTube.
 
 Find below a classic channel *Carpool Karaoke* presented by the frontman
 _James Corden_ of *The Late Late Show* at CBS, Los Angeles.
@@ -304,20 +296,21 @@ gallery::jg_video_online_youtube_james_and_adele[role="mb-5"]
 link:{url-vimeo--home}[Vimeo, {browser-window--new}] is a video-sharing
 platform that includes features such as live-streaming and customization.
 Vimeo provides many tools for video creation, editing, and broadcasting.
-The platform provides you with an excellent channel to present high-quality,
+The platform enables the operators of websites to present high-quality,
 professional videos and reach audiences worldwide.
 
 [NOTE]
 ====
-A great plus using Vimeo is that *no advertising* is used on that
-platform.
+A plus using Vimeo is that *no advertising* is used on that platform. The
+visitors can focus on the video without being distracted.
 ====
 
 [role="mt-4 mb-4"]
-Vimeo does offer a basic free membership, but it limits you to 500MB maximum
-storage per week. Alternately, you can book on paid plans: Plus, PRO, Business.
-Each membership has varied storage limits, but the free plan offers sufficient
-space for private projects to present video content without advertising.
+Vimeo offers a basic free membership, but it limits you to 500MB of maximum
+weekly storage. Alternatively, you can book a paid plan: Plus, PRO, and
+Business. Each membership has varied storage limits, but the free plan
+offers sufficient space for private projects to present video content
+without advertising.
 
 .Fashion
 gallery::jg_video_online_vimeo[role="mb-5"]
@@ -325,11 +318,9 @@ gallery::jg_video_online_vimeo[role="mb-5"]
 [role="mt-4"]
 === DailyMotion
 
-link:{url-dailymotion--home}[Dailymotion, {browser-window--new}] is a French
-video-sharing technology platform primarily owned by
-link:{url-vivendi--home}[Vivendi, {browser-window--new}]. The platform is
-available worldwide in 183 languages and 43 localised versions featuring local
-home pages and local content.
+link:{url-dailymotion--home}[Dailymotion, {browser-window--new}] is a
+video-sharing platform. The platform is available worldwide in 180+
+languages, featuring websites for their video content.
 
 The platform is a *monetization* solution that allows allows to directly
 connect to high-quality advertisers through a proprietary Advertising system.
@@ -343,21 +334,21 @@ gallery::jg_video_online_dailymotion[role="mt-4 mb-5"]
 [role="mt-5"]
 == What next
 
-Images and videos are pretty visual. And it can be impressive, for sure.
-But the most visual component on all web pages is text, for all sites on
-the Internet.
+Images and videos are pretty visual, and they can be impressive, for sure.
+However, the most visual component on all web pages is text for all sites
+on the Internet.
 
 Sadly, one common flaw in many templates and frameworks is a lack of support
 for *responsive text*. While other elements on a page resize fluidly, the
-text still resizes fixed. To avoid this issue, especially for heavily
-text-focused pages, J1 Template supports a fluidly scaled text that changes
+text is still fixed. To avoid this issue, especially for heavily text-focused
+pages, the J1 Template supports a fluidly scaled text that changes
 in size and line height to optimize readability for the user.
 
-The JekyllOne Template places the character font as one of the most crucial
-*branding element* for any website. Typography matters for any media presenting
+The JekyllOne Template J1 places the character font as one of the most crucial
+*branding elements* for any website. Typography matters for any media presenting
 text. The text will take on an important role of acting as plain text and as
-something like images. To see how text could be presented great for modern
-responsive webs.
+something like images. To see how text could be presented is great for modern
+responsive websites.
 
 [role="mb-7"]
 Find out how it works and go for:

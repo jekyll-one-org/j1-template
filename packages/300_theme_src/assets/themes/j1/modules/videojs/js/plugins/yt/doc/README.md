@@ -1,4 +1,5 @@
 # YouTube Playback Technology<br />for [Video.js](https://github.com/videojs/video.js)
+See: https://github.com/videojs/videojs-youtube
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/videojs/videojs-youtube.svg)](https://greenkeeper.io/)
 

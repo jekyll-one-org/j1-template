@@ -16,6 +16,6 @@ Wistia player. More specifically, it’s the Wistia JavaScript library
 which loads all the player code, builds the player on a webpage, and
 enables you to access all the player features that Wistia has to offer.
 
-It looks like this:
+It looks like so:
 
 <script src="https://fast.wistia.com/assets/external/E-v1.js" async> </script>

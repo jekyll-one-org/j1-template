@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/modules/videojs/js/wt/wistia.js
- # Provides Wistia Playback Technology (Tech) for Video.js V8 and newer
+ # Provides Wistia Playback Technology for Video.js V8 and newer
  # See: https://github.com/edly-io/videojs-wistia
  #
  #  Product/Info:
@@ -138,40 +138,40 @@
             this_.wistiaPlayer.bind('end', this_.onPlaybackEnded.bind(this_));
           }
         });
-
         logger.debug('\n' + 'created player ID on: ' + this.videoId);
-      } // END initWistiaPlayer
+      }
 
       onPlayerReady() {
         var wt_player = document.getElementById(this.options_.playerId + '_wistia_api');
         var currState;
 
-        // workaround toggle play|pause for Wistia Tech (click on video)
+        // implement FIRST play on beforeplay
         wt_player.addEventListener('click', (event) => {
-          currState = this.wistiaPlayer.state();
-
           // suppress default actions|bubble up
           event.preventDefault();
           event.stopPropagation();
 
-          // trigger play on state beforeplay (FIRST play)
+          currState = this.wistiaPlayer.state();
+          logger.info('\n' + 'player state (before): ' + currState);
+
           if (currState === 'beforeplay') {
             this.wistiaPlayer.play();
             this.trigger('play');
-            logger.debug('\n' + 'triggered play on state: ' + currState);
-          }
 
-          // update player states
-          if (currState === 'playing' ) {
+            currState = this.wistiaPlayer.state();
+            logger.debug('\n' + 'started player (beforeplay) on: ' + currState);
+          } // END if beforeplay
+
+          if (currState === 'playing') {
+            // this.wistiaPlayer.play();
             this.trigger('play');
-          }
 
-          if (currState === 'paused' ) {
-            this.trigger('pause');
-          }
+            currState = this.wistiaPlayer.state();
+            logger.debug('\n' + 'triggered player (playing) on: ' + currState);
+          } // END if beforeplay
         });
 
-        // default actions
+        // default actions onPlayerReady
         // ---------------------------------------------------------------------
         if (this.options_.muted) {
           this.wistiaPlayer.mute();
