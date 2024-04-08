@@ -20,6 +20,7 @@
 */
 
 /*! @vimeo/player v2.21.0 | (c) 2024 Vimeo | MIT License | https://github.com/vimeo/player.js */
+
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
@@ -3547,6 +3548,7 @@
     }]);
     return Player;
   }(); // Setup embed only if this is not a node environment
+
   if (!isNode) {
     screenfull = initializeScreenfull();
     initializeEmbeds();

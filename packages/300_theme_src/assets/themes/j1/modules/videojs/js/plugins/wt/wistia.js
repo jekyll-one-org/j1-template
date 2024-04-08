@@ -18,6 +18,7 @@
  # -----------------------------------------------------------------------------
 */
 
+/* global define, Wistia */
 (function (root, factory) {
     if(typeof exports==='object' && typeof module!=='undefined') {
       var videojs = require('video.js');
@@ -139,7 +140,7 @@
           }
         });
 
-        logger.debug('\n' + 'created player ID on: ' + this.videoId);
+        logger.debug('\n' + 'created ' + this.name_ + ' player on ID: ' + this.videoId);
       } // END initWistiaPlayer
 
       onPlayerReady() {

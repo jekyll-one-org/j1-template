@@ -305,6 +305,7 @@
 
       buffered() {
         const progress = this._vimeoState.progress;
+
         return videojs.time.createTimeRanges(0, progress.percent * progress.duration);
       } // END
 
@@ -516,6 +517,25 @@
       }
       cssInjected = true;
 
+      // const css = `
+      //   .vjs-vimeo iframe {
+      //     position: absolute;
+      //     top: 0;
+      //     left: 0;
+      //     width: 100%;
+      //     height: 100%;
+      //   }
+      //
+      //   .vjs-control-bar { display: block; }
+      //   .vjs-vimeo .vjs-iframe-blocker { display: none; }
+      //   .vjs-vimeo.vjs-user-inactive .vjs-iframe-blocker { display: block; }
+      //   .vjs-vimeo .vjs-poster { background-size: cover; }'
+      //   .vjs-vimeo-mobile .vjs-big-play-button { display: none; }
+      //
+      //   .vjs-vimeo .vjs-duration { display: none; }
+      //   .vjs-vimeo .vjs-remaining-time { display: none; }
+      // `;
+
       const css = `
         .vjs-vimeo iframe {
           position: absolute;
@@ -524,6 +544,10 @@
           width: 100%;
           height: 100%;
         }
+
+        .vjs-vimeo .vjs-iframe-blocker { display: none; }
+        .vjs-vimeo.vjs-user-inactive .vjs-iframe-blocker { display: block; }
+        .vjs-vimeo .vjs-poster { background-size: cover; }'
         .vjs-vimeo-mobile .vjs-big-play-button { display: none; }
       `;
 

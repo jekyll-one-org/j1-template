@@ -22811,8 +22811,8 @@
       // Set isAudio based on whether or not an audio tag was used
       this.isAudio(tag.nodeName.toLowerCase() === 'audio');
 
-      // Update controls className. Can't do this when the controls are initially
-      // set because the element doesn't exist yet.
+      // Update controls className. Can't do this when the controls are
+      // initially set because the element doesn't exist yet.
       if (this.controls()) {
         this.addClass('vjs-controls-enabled');
       } else {

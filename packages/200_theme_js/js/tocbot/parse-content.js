@@ -1,22 +1,9 @@
-/*
- # -----------------------------------------------------------------------------
- #  ~/js/tocbot/parse-content.js
- #  Tocbot v4.25.0 implementation for J1 Theme
- #
- #  Product/Info:
- #  https://jekyll.one
- #  https://tscanlin.github.io/tocbot
- #  https://github.com/tscanlin/tocbot
- #
- #  Copyright (C) 2023, 2024 Juergen Adams
- #  Copyright (C) 2016 - 2024 Tim Scanlin
- #
- #  J1 Theme is licensed under MIT License.
- #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
- #  Tocbot is licensed under the MIT License.
- #  For details, https://github.com/tscanlin/tocbot/blob/master/LICENSE
- # -----------------------------------------------------------------------------
-*/
+/**
+ * This file is responsible for parsing the content from the DOM and making
+ * sure data is nested properly.
+ *
+ * @author Tim Scanlin
+ */
 
 // -----------------------------------------------------------------------------
 // ESLint shimming
@@ -25,13 +12,6 @@
 /* eslint no-undef: "off"                                                     */
 /* eslint semi: "off"                                                         */
 // -----------------------------------------------------------------------------
-
-/**
- * This file is responsible for parsing the content from the DOM and making
- * sure data is nested properly.
- *
- * @author Tim Scanlin
- */
 
 module.exports = function parseContent (options) {
   var reduce = [].reduce
@@ -51,24 +31,7 @@ module.exports = function parseContent (options) {
    * @return {Number}
    */
   function getHeadingLevel (heading) {
-    return +heading.nodeName.toUpperCase().replace('H', '')
-  }
-
-  /**
-   * Determine whether the object is an HTML Element.
-   * Also works inside iframes. HTML Elements might be created by the parent document.
-   * @param {Object} maybeElement
-   * @return {Number}
-   */
-  function isHTMLElement (maybeElement) {
-    try {
-      return (
-        maybeElement instanceof window.HTMLElement ||
-        maybeElement instanceof window.parent.HTMLElement
-      )
-    } catch (e) {
-      return maybeElement instanceof window.HTMLElement
-    }
+    return +heading.nodeName.split('H').join('')
   }
 
   /**
@@ -80,20 +43,18 @@ module.exports = function parseContent (options) {
     // each node is processed twice by this method because nestHeadingsArray() and addNode() calls it
     // first time heading is real DOM node element, second time it is obj
     // that is causing problem so I am processing only original DOM node
-    if (!isHTMLElement(heading)) return heading
+    if (!(heading instanceof window.HTMLElement)) return heading
 
     if (options.ignoreHiddenElements && (!heading.offsetHeight || !heading.offsetParent)) {
       return null
     }
 
-    const headingLabel = heading.getAttribute('data-heading-label') ||
-      (options.headingLabelCallback ? String(options.headingLabelCallback(heading.innerText)) : (heading.innerText || heading.textContent).trim())
     var obj = {
       id: heading.id,
       children: [],
       nodeName: heading.nodeName,
       headingLevel: getHeadingLevel(heading),
-      textContent: headingLabel
+      textContent: options.headingLabelCallback ? String(options.headingLabelCallback(heading.textContent)) : heading.textContent.trim()
     }
 
     if (options.includeHtml) {
@@ -125,10 +86,7 @@ module.exports = function parseContent (options) {
 
     while (counter > 0) {
       lastItem = getLastItem(array)
-      // Handle case where there are multiple h5+ in a row.
-      if (lastItem && level === lastItem.headingLevel) {
-        break
-      } else if (lastItem && lastItem.children !== undefined) {
+      if (lastItem && lastItem.children !== undefined) {
         array = lastItem.children
       }
       counter--
@@ -144,11 +102,11 @@ module.exports = function parseContent (options) {
 
   /**
    * Select headings in content area, exclude any selector in options.ignoreSelector
-   * @param {HTMLElement} contentElement
+   * @param {String} contentSelector
    * @param {Array} headingSelector
    * @return {Array}
    */
-  function selectHeadings (contentElement, headingSelector) {
+  function selectHeadings (contentSelector, headingSelector) {
     var selectors = headingSelector
     if (options.ignoreSelector) {
       selectors = headingSelector.split(',')
@@ -157,9 +115,10 @@ module.exports = function parseContent (options) {
         })
     }
     try {
-      return contentElement.querySelectorAll(selectors)
+      return document.querySelector(contentSelector)
+        .querySelectorAll(selectors)
     } catch (e) {
-      console.warn('Headers not found with selector: ' + selectors); // eslint-disable-line
+      console.warn('Element not found: ' + contentSelector); // eslint-disable-line
       return null
     }
   }
@@ -182,7 +141,7 @@ module.exports = function parseContent (options) {
   }
 
   return {
-    nestHeadingsArray,
-    selectHeadings
+    nestHeadingsArray: nestHeadingsArray,
+    selectHeadings: selectHeadings
   }
 }

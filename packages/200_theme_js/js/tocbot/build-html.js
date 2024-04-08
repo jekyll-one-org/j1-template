@@ -1,42 +1,27 @@
-/*
- # -----------------------------------------------------------------------------
- #  ~/js/tocbot/build-html.js
- #  Tocbot v4.25.0 implementation for J1 Theme
- #
- #  Product/Info:
- #  https://jekyll.one
- #  https://tscanlin.github.io/tocbot
- #  https://github.com/tscanlin/tocbot
- #
- #  Copyright (C) 2023, 2024 Juergen Adams
- #  Copyright (C) 2016 - 2024 Tim Scanlin
- #
- #  J1 Theme is licensed under MIT License.
- #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
- #  Tocbot is licensed under the MIT License.
- #  For details, https://github.com/tscanlin/tocbot/blob/master/LICENSE
- # -----------------------------------------------------------------------------
-*/
-
 /**
  * This file is responsible for building the DOM and updating DOM state.
  *
  * @author Tim Scanlin
  */
 
- // -----------------------------------------------------------------------------
- // ESLint shimming
- // -----------------------------------------------------------------------------
- /* eslint indent: "off"                                                       */
- /* eslint no-undef: "off"                                                     */
- /* eslint semi: "off"                                                         */
- // -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// ESLint shimming
+// -----------------------------------------------------------------------------
+/* eslint indent: "off"                                                       */
+/* eslint no-undef: "off"                                                     */
+/* eslint semi: "off"                                                         */
+// -----------------------------------------------------------------------------
+
+/* eslint indent: "off"                                                       */
+/* eslint no-undef: "off"                                                     */
+/* eslint semi: "off"                                                         */
+// -----------------------------------------------------------------------------
+
 
 module.exports = function (options) {
   var forEach = [].forEach
   var some = [].some
   var body = document.body
-  var tocElement
   var currentlyHighlighting = true
   var SPACE_CHAR = ' '
 
@@ -58,12 +43,12 @@ module.exports = function (options) {
   }
 
   /**
-   * Render nested heading array data into a given element.
-   * @param {HTMLElement} parent Optional. If provided updates the {@see tocElement} to match.
+   * Render nested heading array data into a given selector.
+   * @param {String} selector
    * @param {Array} data
    * @return {HTMLElement}
    */
-  function render (parent, data) {
+  function render (selector, data) {
     var collapsed = false
     var container = createList(collapsed)
 
@@ -71,24 +56,25 @@ module.exports = function (options) {
       createEl(d, container)
     })
 
-    // Return if no TOC element is provided or known.
-    tocElement = parent || tocElement
-    if (tocElement === null) {
+    var parent = document.querySelector(selector)
+
+    // Return if no parent is found.
+    if (parent === null) {
       return
     }
 
     // Remove existing child if it exists.
-    if (tocElement.firstChild) {
-      tocElement.removeChild(tocElement.firstChild)
+    if (parent.firstChild) {
+      parent.removeChild(parent.firstChild)
     }
 
     // Just return the parent and don't append the list if no links are found.
     if (data.length === 0) {
-      return tocElement
+      return parent
     }
 
     // Append the Elements that have been created
-    return tocElement.appendChild(container)
+    return parent.appendChild(container)
   }
 
   /**
@@ -107,16 +93,12 @@ module.exports = function (options) {
       a.onclick = options.onClick
     }
 
-    if (options.includeTitleTags) {
-      a.setAttribute('title', data.textContent)
-    }
-
     if (options.includeHtml && data.childNodes.length) {
       forEach.call(data.childNodes, function (node) {
         a.appendChild(node.cloneNode(true))
       })
     } else {
-      // Default behavior. Set to textContent to keep tests happy.
+      // Default behavior.
       a.textContent = data.textContent
     }
     a.setAttribute('href', options.basePath + '#' + data.id)
@@ -135,11 +117,11 @@ module.exports = function (options) {
   function createList (isCollapsed) {
     var listElement = (options.orderedList) ? 'ol' : 'ul'
     var list = document.createElement(listElement)
-    var classes = options.listClass + SPACE_CHAR + options.extraListClasses
+    var classes = options.listClass +
+      SPACE_CHAR + options.extraListClasses
     if (isCollapsed) {
-      // No plus/equals here fixes compilcation issue.
-      classes = classes + SPACE_CHAR + options.collapsibleClass
-      classes = classes + SPACE_CHAR + options.isCollapsedClass
+      classes += SPACE_CHAR + options.collapsibleClass
+      classes += SPACE_CHAR + options.isCollapsedClass
     }
     list.setAttribute('class', classes)
     return list
@@ -159,7 +141,7 @@ module.exports = function (options) {
     var posFixedEl = document.querySelector(options.positionFixedSelector)
 
     if (options.fixedSidebarOffset === 'auto') {
-      options.fixedSidebarOffset = tocElement.offsetTop
+      options.fixedSidebarOffset = document.querySelector(options.tocSelector).offsetTop
     }
 
     if (top > options.fixedSidebarOffset) {
@@ -167,18 +149,18 @@ module.exports = function (options) {
         posFixedEl.className += SPACE_CHAR + options.positionFixedClass
       }
     } else {
-      posFixedEl.className = posFixedEl.className.replace(SPACE_CHAR + options.positionFixedClass, '')
+      posFixedEl.className = posFixedEl.className.split(SPACE_CHAR + options.positionFixedClass).join('')
     }
   }
 
   /**
    * Get top position of heading
-   * @param {HTMLElement} obj
-   * @return {int} position
+   * @param {HTMLElement}
+   * @return {integer} position
    */
   function getHeadingTopPos (obj) {
     var position = 0
-    if (obj !== null) {
+    if (obj !== document.querySelector(options.contentSelector && obj != null)) {
       position = obj.offsetTop
       if (options.hasInnerContainers) { position += getHeadingTopPos(obj.offsetParent) }
     }
@@ -186,20 +168,7 @@ module.exports = function (options) {
   }
 
   /**
-   * Update className only when changed.
-   * @param {HTMLElement} obj
-   * @param {string} className
-   * @return {HTMLElement} obj
-   */
-  function updateClassname (obj, className) {
-    if (obj && obj.className !== className) {
-      obj.className = className
-    }
-    return obj
-  }
-
-  /**
-   * Update TOC highlighting and collapsed groupings.
+   * Update TOC highlighting and collapsed groups
    */
   function updateToc (headingsArray) {
     // If a fixed content container was set
@@ -215,59 +184,58 @@ module.exports = function (options) {
       updateFixedSidebarClass()
     }
 
-    // Get the top most heading currently visible on the page so we know what to highlight.
-    var headings = headingsArray
-    var topHeader
-    // Using some instead of each so that we can escape early.
+    // Get the most TOP heading currently visible on the page to
+    // identify what element to be highlighted
+    var headings = headingsArray;
+    var topHeader;
+    var headingTopPos;
+
+    // Using some instead of each so that we can escape early
     if (currentlyHighlighting &&
-      tocElement !== null &&
+      document.querySelector(options.tocSelector) !== null &&
       headings.length > 0) {
       some.call(headings, function (heading, i) {
-        if (getHeadingTopPos(heading) > top + options.headingsOffset + 10) {
-          // Don't allow negative index value.
-          var index = (i === 0) ? i : i - 1
-          topHeader = headings[index]
+        headingTopPos = getHeadingTopPos(heading)
+        if (headingTopPos > top + options.headingsOffset + 10) {
+          // Don't allow negative index value
+          // var index = (i === 0) ? i : i - 1;
+          // topHeader = headings[index];
+          // jadams, index correction seems NOT needed
+          topHeader = headings[i];
           return true
         } else if (i === headings.length - 1) {
-          // This allows scrolling for the last heading on the page.
+          // This allows scrolling for the last heading on the page
           topHeader = headings[headings.length - 1]
           return true
         }
       })
 
-      var oldActiveTocLink = tocElement.querySelector('.' + options.activeLinkClass)
-      var activeTocLink = tocElement
-        .querySelector('.' + options.linkClass +
-          '.node-name--' + topHeader.nodeName +
-          '[href="' + options.basePath + '#' + topHeader.id.replace(/([ #;&,.+*~':"!^$[\]()=>|/\\@])/g, '\\$1') + '"]')
-      // Performance improvement to only change the classes
-      // for the toc if a new link should be highlighted.
-      if (oldActiveTocLink === activeTocLink) {
-        return
-      }
-
       // Remove the active class from the other tocLinks.
-      var tocLinks = tocElement
+      var tocLinks = document.querySelector(options.tocSelector)
         .querySelectorAll('.' + options.linkClass)
       forEach.call(tocLinks, function (tocLink) {
-        updateClassname(tocLink, tocLink.className.replace(SPACE_CHAR + options.activeLinkClass, ''))
+        tocLink.className = tocLink.className.split(SPACE_CHAR + options.activeLinkClass).join('')
       })
-      var tocLis = tocElement
+      var tocLis = document.querySelector(options.tocSelector)
         .querySelectorAll('.' + options.listItemClass)
       forEach.call(tocLis, function (tocLi) {
-        updateClassname(tocLi, tocLi.className.replace(SPACE_CHAR + options.activeListItemClass, ''))
+        tocLi.className = tocLi.className.split(SPACE_CHAR + options.activeListItemClass).join('')
       })
 
       // Add the active class to the active tocLink.
-      if (activeTocLink && activeTocLink.className.indexOf(options.activeLinkClass) === -1) {
+      var activeTocLink = document.querySelector(options.tocSelector)
+        .querySelector('.' + options.linkClass +
+          '.node-name--' + topHeader.nodeName +
+          '[href="' + options.basePath + '#' + topHeader.id.replace(/([ #;&,.+*~':"!^$[\]()=>|/@])/g, '\\$1') + '"]')
+      if (activeTocLink.className.indexOf(options.activeLinkClass) === -1) {
         activeTocLink.className += SPACE_CHAR + options.activeLinkClass
       }
-      var li = activeTocLink && activeTocLink.parentNode
+      var li = activeTocLink.parentNode
       if (li && li.className.indexOf(options.activeListItemClass) === -1) {
         li.className += SPACE_CHAR + options.activeListItemClass
       }
 
-      var tocLists = tocElement
+      var tocLists = document.querySelector(options.tocSelector)
         .querySelectorAll('.' + options.listClass + '.' + options.collapsibleClass)
 
       // Collapse the other collapsible lists.
@@ -278,21 +246,21 @@ module.exports = function (options) {
       })
 
       // Expand the active link's collapsible list and its sibling if applicable.
-      if (activeTocLink && activeTocLink.nextSibling && activeTocLink.nextSibling.className.indexOf(options.isCollapsedClass) !== -1) {
-        updateClassname(activeTocLink.nextSibling, activeTocLink.nextSibling.className.replace(SPACE_CHAR + options.isCollapsedClass, ''))
+      if (activeTocLink.nextSibling && activeTocLink.nextSibling.className.indexOf(options.isCollapsedClass) !== -1) {
+        activeTocLink.nextSibling.className = activeTocLink.nextSibling.className.split(SPACE_CHAR + options.isCollapsedClass).join('')
       }
-      removeCollapsedFromParents(activeTocLink && activeTocLink.parentNode.parentNode)
+      removeCollapsedFromParents(activeTocLink.parentNode.parentNode)
     }
   }
 
   /**
-   * Remove collapsed class from parent elements.
+   * Remove collpased class from parent elements.
    * @param {HTMLElement} element
    * @return {HTMLElement}
    */
   function removeCollapsedFromParents (element) {
-    if (element && element.className.indexOf(options.collapsibleClass) !== -1 && element.className.indexOf(options.isCollapsedClass) !== -1) {
-      updateClassname(element, element.className.replace(SPACE_CHAR + options.isCollapsedClass, ''))
+    if (element.className.indexOf(options.collapsibleClass) !== -1 && element.className.indexOf(options.isCollapsedClass) !== -1) {
+      element.className = element.className.split(SPACE_CHAR + options.isCollapsedClass).join('')
       return removeCollapsedFromParents(element.parentNode.parentNode)
     }
     return element
@@ -320,9 +288,9 @@ module.exports = function (options) {
   }
 
   return {
-    enableTocAnimation,
-    disableTocAnimation,
-    render,
-    updateToc
+    enableTocAnimation: enableTocAnimation,
+    disableTocAnimation: disableTocAnimation,
+    render: render,
+    updateToc: updateToc
   }
 }

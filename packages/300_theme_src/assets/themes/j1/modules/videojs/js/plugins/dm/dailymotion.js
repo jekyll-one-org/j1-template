@@ -6,7 +6,7 @@
  # Product/Info:
  # http://jekyll.one
  #
- # Copyright (C) John Law
+ # Copyright (C) 2020 John Law
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # videojs-dailymotion is licensed under MIT License.
@@ -48,8 +48,8 @@
       this.setPoster(options.poster);
       this.setSrc(this.options_.source, true);
 
-      // Set the vjs-dailymotion class to the player
-      // Parent is not set yet so we have to wait a tick
+      // set the vjs-dailymotion class to the player's parent node,
+      // when is not set, wait a tick
       var vm = this;
       setTimeout(function() {
         if (this.el_) {
@@ -66,7 +66,7 @@
           }
         }
       }.bind(this));
-    }
+    } // END Constructor
 
     getPlayerParams() {
       var playerParams = {
@@ -80,12 +80,15 @@
       // Let the user set any Dailymotion parameter
       // https://developer.dailymotion.com/player/#player-parameters
       // To use Dailymotion controls, you must use dmControls instead
-
-      var params = ['api', 'autoplay', 'autoplay-mute', 'id', 'mute', 'origin', 'quality', 'queue-autoplay-next',
-      'queue-enable', 'sharing-enable', 'start', 'subtitles-default', 'syndication', 'ui-highlight', 'ui-logo',
-      'ui-start-screen-info', 'ui-theme', 'apimode', 'playlist'];
-
+      var params = [
+        'api', 'autoplay', 'autoplay-mute', 'id', 'mute', 'origin',
+        'quality', 'queue-autoplay-next', 'queue-enable', 'sharing-enable',
+        'start', 'subtitles-default', 'syndication', 'ui-highlight',
+        'ui-logo','ui-start-screen-info', 'ui-theme', 'apimode',
+        'playlist'
+      ];
       var options = this.options_;
+
       params.forEach(function(param) {
         if (typeof options[param] === 'undefined') {
           return;
@@ -111,13 +114,13 @@
       }
 
       return playerParams;
-    }
+    } // END getPlayerParams
 
     getPlayerConfig() {
       var playerConfig = {
-        width: '100%',
-        height: '100%',
-        params: this.getPlayerParams()
+        width:    '100%',
+        height:   '100%',
+        params:   this.getPlayerParams()
       };
 
       if (this.url && typeof this.url.video !== 'undefined') {
@@ -127,7 +130,7 @@
       }
 
       return playerConfig;
-    }
+    } // END getPlayerConfig
 
     initDMPlayer() {
       if (this.dmPlayer) {
@@ -176,8 +179,9 @@
         vm.trigger('volumechange');
       });
 
-      logger.debug('\n' + 'created player ID on: ' + vm.dmPlayer.id);
-    }
+      this.triggerReady();
+      logger.debug('\n' + 'created ' + this.name_ + ' player on ID: ' + vm.dmPlayer.id);
+    } // END initDMPlayer
 
     autoplay(autoplay) {
       if (typeof autoplay !== 'undefined') {
@@ -185,11 +189,11 @@
       }
 
       return this.options_.autoplay;
-    }
+    } // END autoplay
 
     setAutoplay(val) {
       return this.options_.autoplay = val;
-    }
+    } // END setAutoplay
 
     buffered() {
       if(!this.dmPlayer || !this.dmPlayer.bufferedTime) {
@@ -197,7 +201,7 @@
       }
 
       return videojs.time.createTimeRanges(0, this.dmPlayer.bufferedTime);
-    }
+    } // END buffered
 
     createEl() {
       var div = document.createElement('div');
@@ -208,33 +212,20 @@
       var divWrapper = document.createElement('div');
       divWrapper.appendChild(div);
 
-      if (!_isOnMobile && !this.options_.dmControls) {
-
-        // var divBlocker = document.createElement('div');
-        // divBlocker.setAttribute('class', 'vjs-iframe-blocker');
-        // divBlocker.setAttribute('style', 'position:absolute;top:0;left:0;width:100%;height:100%');
-        //
-        // // In case the blocker is still there and we want to pause
-        // divBlocker.onclick = function() {
-        //   this.pause();
-        // }.bind(this);
-        //
-        // divWrapper.appendChild(divBlocker);
-      }
-
       return divWrapper;
-    }
+    } // END createEl
 
     currentSrc() {
       return this.source && this.source.src;
-    }
+    } // END currentSrc
 
     currentTime(seconds) {
       if (typeof seconds !== 'undefined') {
         return this.setCurrentTime(seconds);
       }
+
       return this.dmPlayer && this.dmPlayer.currentTime;
-    }
+    } // END currentTime
 
     setCurrentTime(seconds) {
       if (!this.dmPlayer || !this.dmPlayer.seek) {
@@ -242,7 +233,7 @@
       }
 
       return this.dmPlayer.seek(seconds);
-    }
+    } // END setCurrentTime
 
     dispose() {
       if (DM && DM.destroy) {
@@ -265,76 +256,82 @@
       // Needs to be called after the Dailymotion player is destroyed,
       // otherwise there will be a undefined reference exception
       Tech.prototype.dispose.call(this);
-    }
+    } // END dispose
 
     duration(seconds) {
       if (typeof seconds !== 'undefined') {
         return this.setDuration(seconds);
       }
+
       return this.dmPlayer ? this.dmPlayer.duration : 0;
-    }
+    } // END duration
 
     setDuration(seconds) {
       if (!this.dmPlayer || !this.dmPlayer.seek) {
         return;
       }
+
       return this.dmPlayer.seek(seconds);
-    }
+    } // END setDuration
 
     ended() {
       return this.dmPlayer && this.dmPlayer.ended;
-    }
+    } // END
 
     enterFullWindow() {
       if (!this.dmPlayer || !this.dmPlayer.setFullscreen) {
         return;
       }
+
       return this.dmPlayer.setFullscreen(true);
-    }
+    } // END enterFullWindow
 
     error() {
       return this.dmPlayer && this.dmPlayer.error;
-    }
+    } // END error
 
     exitFullscreen() {
       if (!this.dmPlayer || !this.dmPlayer.setFullscreen) {
         return;
       }
+
       return this.dmPlayer.setFullscreen(false);
-    }
+    } // END exitFullscreen
 
     isFullscreen() {
       return this.dmPlayer && this.dmPlayer.fullscreen;
-    }
+    } // END isFullscreen
 
-    // Not supported by Dailymotion
+    // not supported by Dailymotion
     language() {
       return undefined;
-    }
+    } // END language
 
-    // Not supported by Dailymotion
+    // not supported by Dailymotion
     languages() {
       return undefined;
-    }
+    } // END languages
 
     load() {
       if (!this.dmPlayer || !this.dmPlayer.load) {
         return;
       }
-      return this.dmPlayer.load(this.getPlayerConfig());
-    }
 
-    // Not supported by Dailymotion
+      return this.dmPlayer.load(this.getPlayerConfig());
+    } // END load
+
+    // not supported by Dailymotion
     loop() {
       return undefined;
-    }
+    } // END loop
 
     muted(muted) {
       if (typeof muted !== undefined) {
         return this.setMuted(muted);
       }
+
       return this.dmPlayer && this.dmPlayer.mute;
-    }
+    } // END muted
 
     setMuted(mute) {
       if (typeof mute === 'undefined' || !this.dmPlayer || !this.dmPlayer.setMuted) {
@@ -347,12 +344,9 @@
       } else {
         this.setVolume(this.volumeBeforeMute);
       }
+
       this.dmPlayer.setMuted(mute);
-      // var vm = this;
-      // setTimeout( function(){
-      //   vm.trigger('volumechange');
-      // }, 50);
-    }
+    } // END setMuted
 
     networkState() {
       if (!this.dmPlayer || this.dmPlayer.error) {
@@ -362,7 +356,7 @@
       if (this.dmPlayer.seeking) {
         return 2; //NETWORK_LOADING
       }
-    }
+    } // END networkState
 
     pause() {
       if (!this.dmPlayer || !this.dmPlayer.pause) {
@@ -370,11 +364,11 @@
       }
 
       return this.dmPlayer.pause();
-    }
+    } // END pause
 
     paused() {
       return this.dmPlayer && this.dmPlayer.paused;
-    }
+    } // END paused
 
     play() {
       if (!this.isApiReady || !this.dmPlayer || !this.dmPlayer.play) {
@@ -384,24 +378,23 @@
       this.trigger('loadStart');
       this.trigger('waiting');
       return this.dmPlayer.play();
-    }
+    } // END play
 
-    // Playback rate is not support by Dailymotion
+    // not supported by Dailymotion
     playbackRate() {
       return 1;
-    }
+    } // END playbackRate
 
-    // Not supported by Dailymotion
+    // not supported by Dailymotion
     poster() {
       return undefined;
-    }
+    } // END poster
 
-    // Not supported by Dailymotion
+    // not supported by Dailymotion
     preload() {
       return undefined;
-    }
+    } // END preload
 
-    // TODO: Confirm if it can be more detail
     readyState() {
       if (!this.dmPlayer || this.dmPlayer.error) {
         return 0; //NETWORK_EMPTY
@@ -411,38 +404,35 @@
         return 1; //HAVE_METADATA
       }
       return 4; //HAVE_ENOUGH_DATA
-    }
+    } // END readyState
 
     remainingTime() {
       return this.dmPlayer && (this.dmPlayer.duration - this.dmPlayer.currentTime);
-    }
+    } // END remainingTime
 
     requestFullscreen() {
       return this.enterFullWindow();
-    }
+    } // END requestFullscreen
 
     enterFullScreen() {
       return this.enterFullWindow();
-    }
+    } // END enterFullScreen
 
     reset() {
       this.load();
-    }
+    } // END reset
 
-    // jadams, 2023-10-01: videojs.createTimeRange() deprecated in VideoJS 9
-    //
     seekable() {
       if(!this.ytPlayer) {
-        // return videojs.createTimeRange();
         return videojs.time.createTimeRanges();
       }
-      // return videojs.createTimeRange(0, this.ytPlayer.getDuration());
+
       return videojs.time.createTimeRanges(0, this.ytPlayer.getDuration());
-    }
+    } // END seekable
 
     seeking() {
       return this.dmPlayer && this.dmPlayer.seeking;
-    }
+    } // END seeking
 
     src(source) {
       if (typeof source !== 'undefined') {
@@ -450,7 +440,7 @@
       }
 
       return this.source;
-    }
+    } // END src
 
     setSrc(source) {
       if (typeof source === 'undefined') {
@@ -465,15 +455,15 @@
         this.load();
       }
       return this.source;
-    }
+    } // END setSrc
 
     supportsFullScreen() {
       return true;
-    }
+    } // END supportsFullScreen
 
     volume() {
       return this.dmPlayer ? this.dmPlayer.volume : 1;
-    }
+    } // END volume
 
     setVolume(percentAsDecimal) {
       if (!this.dmPlayer || !this.dmPlayer.setMuted || !this.dmPlayer.setVolume) {
@@ -482,9 +472,9 @@
 
       this.dmPlayer.setMuted(false);
       this.dmPlayer.setVolume(percentAsDecimal);
-    }
+    } // END setVolume
 
-  }
+  } // END class Dailymotion
 
   Dailymotion.isSupported = function() {
     return true;
@@ -534,14 +524,16 @@
   }
 
   function loadScript(src, callback) {
-    var loaded = false;
-    var tag = document.createElement('script');
+    var loaded         = false;
+    var tag            = document.createElement('script');
     var firstScriptTag = document.getElementsByTagName('script')[0];
+
     if (!firstScriptTag) {
       // when loaded in jest without jsdom setup it doesn't get any element.
       // In jest it doesn't really make sense to do anything, because no one is watching dailymotion in jest
       return;
     }
+
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     tag.onload = function () {
       if (!loaded) {
@@ -549,14 +541,16 @@
         callback();
       }
     };
+
     tag.onreadystatechange = function () {
       if (!loaded && (this.readyState === 'complete' || this.readyState === 'loaded')) {
         loaded = true;
         callback();
       }
     };
+
     tag.src = src;
-  }
+  } // END loadScript
 
   function injectCss() {
     var css = // iframe blocker to catch mouse events
@@ -578,7 +572,7 @@
 
     head.appendChild(style);
     logger.debug('\n' + 'added additional CSS styles');
-  }
+  } // END injectCss
 
   // Include the version number
   Dailymotion.VERSION = '1.0.0';

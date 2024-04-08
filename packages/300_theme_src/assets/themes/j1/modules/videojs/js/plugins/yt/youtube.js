@@ -18,7 +18,7 @@
 
 /* Version 3.0.1, modified version for J1 Template */
 
-/*global define, YT*/
+/* global define, YT */
 (function (root, factory) {
   if(typeof exports==='object' && typeof module!=='undefined') {
     var videojs = require('video.js');
@@ -253,7 +253,7 @@
 
       this.ytPlayer = new YT.Player(this.options_.techId, playerConfig);
 
-      logger.debug('\n' + 'created player ID on: ' + this.ytPlayer.id);
+      logger.debug('\n' + 'created ' + this.name_ + ' player on ID: ' + this.ytPlayer.id);
     } // END initYTPlayer
 
     onPlayerReady() {
