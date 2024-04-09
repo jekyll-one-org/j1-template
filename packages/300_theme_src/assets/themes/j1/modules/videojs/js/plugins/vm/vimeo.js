@@ -29,7 +29,7 @@
   'use strict';
 
    var logger      = log4javascript.getLogger('videoJS.plugin.vimeo');
-   var _isOnMobile = videojs.browser.IS_IOS || videojs.browser.IS_ANDROID;
+   var isOnMobile  = videojs.browser.IS_IOS || videojs.browser.IS_ANDROID;
    var Tech        = videojs.getTech('Tech');
    var cssInjected = false;
 
@@ -62,7 +62,7 @@
           if (this.el_) {
             this.el_.parentNode.className += ' vjs-vimeo';
 
-            if (_isOnMobile) {
+            if (isOnMobile) {
               this.el_.parentNode.className += ' vjs-vimeo-mobile';
             }
 
@@ -74,7 +74,7 @@
           }
         }.bind(this));
 
-      } // END Constructor
+      } // END constructor
 
       initVMPlayer() {
         const vimeoOptions = {
@@ -127,7 +127,6 @@
           });
 
           this.vmPlayer.on(e, (ready) => {
-            this._vimeoState.currState = 'beforeplay';
             this.vmPlayer.getVideoEmbedCode()
             .then (function(embedCode) {
               var code = embedCode;
@@ -167,53 +166,13 @@
         });
         // END API events
 
-        var player     = videojs(this.options_.playerId);
-        var vjs_player = document.getElementById(this.options_.playerId);
-        var vm_player  = document.getElementById(this.options_.playerId + '_vimeo_api');
-        var currState;
-
-        // initialize click event when player ready
-        // ---------------------------------------------------------------------
-        var dependencies_met_player_ready = setInterval (() => {
-          var playerReady = (this._vimeoState.currState === 'beforeplay') ? true : false;
-
-          if (playerReady) {
-            // workaround toggle play|pause for Wistia Tech (click on video)
-            vm_player.addEventListener('click', (event) => {
-              currState = this._vimeoState.currState;
-
-              // suppress default actions|bubble up
-              event.preventDefault();
-              event.stopPropagation();
-
-              // trigger play on state beforeplay (FIRST play)
-              if (currState === 'beforeplay') {
-                this.vmPlayer.play();
-                this.trigger('play');
-                logger.debug('\n' + 'triggered play on state: ' + currState);
-              }
-
-              // update player states
-              if (currState === 'playing' ) {
-                this.trigger('play');
-              }
-
-              if (currState === 'paused' ) {
-                this.trigger('pause');
-              }
-            }); // END vm_player click
-
-            clearInterval(dependencies_met_player_ready);
-          } // END playerReady
-        }, 10); // END dependencies_met_page_ready
-
         this.triggerReady();
-        logger.debug('\n' + 'created ' + this.name_ + ' player on ID: ' + this.vmPlayer.element.id);
+//      logger.debug('\n' + 'created ' + this.name_ + ' player on ID: ' + this.vmPlayer.element.id);
+      logger.debug('\n' + 'created ' + this.name_ + ' player');
       } // END initVMPlayer
 
       initVimeoState() {
-        const state = this._vimeoState = {
-          currState:    'not set',
+        var state = this._vimeoState = {
           ended:        false,
           playing:      false,
           muted:        false,
@@ -233,14 +192,37 @@
       } // END initVimeoState
 
       createEl() {
-        const div = videojs.dom.createEl('div', {
-          id: this.options_.techId
-        });
+        var div = document.createElement('div');
+        div.setAttribute('id', this.options_.techId);
+        div.setAttribute('style', 'width:100%; height:100%; top:0; left:0; position:absolute');
+        div.setAttribute('class', 'vjs-tech');
 
-        div.style.cssText = 'width:100%;height:100%;top:0;left:0;position:absolute';
-        div.className = 'vjs-vimeo';
+        var techWrapper = document.createElement('div');
+        techWrapper.setAttribute('class', 'vjs-tech-wrapper');
+        techWrapper.appendChild(div);
 
-        return div;
+        var divOverlay = document.createElement('div');
+        divOverlay.setAttribute('class', 'vjs-tech-overlay');
+        divOverlay.setAttribute('style', 'cursor: pointer; position:absolute; z-index: 5; top:0; left:0; width:100%; height:100%');
+        techWrapper.appendChild(divOverlay);
+
+        // toggle play|pause for Vimeo when native control is DISABLED
+        divOverlay.onclick = function() {
+          // suppress default actions|bubble up
+          event.preventDefault();
+          event.stopPropagation();
+
+          if (!this._vimeoState.playing) {
+            this.vmPlayer.play();
+            this.trigger('play');
+          }
+          if (this._vimeoState.playing) {
+            this.vmPlayer.pause();
+            this.trigger('pause');
+          }
+        }.bind(this); // END click overlay
+
+        return techWrapper;
       } // END createEl
 
       controls() {
@@ -288,20 +270,34 @@
         });
       } // END setVolume
 
-      muted() {} // END muted
-
-      setMuted(mute) {
-        var isMuted = !this._vimeoState.muted;  // toggle mute state
-        var _this   = this;
-
-        this.vmPlayer.setMuted(isMuted).then((muted) => {
-
-          _this._vimeoState.muted = muted;
+      muted() {
+        var player = videojs(this.options_.playerId);
+        this.vmPlayer.getMuted().then((muted) => {
+          // muted = whether muted is turned on or not
+          // if (muted) {
+          //   player.muted(true);
+          // }
           return muted;
         }).catch(function(error) {
           // an error occurred
         });
-      }
+      } // END muted
+
+      setMuted(mute) {
+        var player  = videojs(this.options_.playerId);
+        var isMuted = !this._vimeoState.muted;  // toggle mute state
+        var _this   = this;
+
+        this.vmPlayer.setMuted(isMuted).then((muted) => {
+          _this._vimeoState.muted = muted;
+          // if (muted) {
+          //   player.muted(true);
+          // }
+          return muted;
+        }).catch(function(error) {
+          // an error occurred
+        });
+      } // END setMuted
 
       buffered() {
         const progress = this._vimeoState.progress;
@@ -314,12 +310,10 @@
 
       pause() {
         this.vmPlayer.pause();
-        this._vimeoState.currState = 'paused';
       } // END
 
       play() {
         this.vmPlayer.play();
-        this._vimeoState.currState = 'playing';
       } // END
 
       ended() {
@@ -354,7 +348,7 @@
       // }
 
       currentTime() {
-        this.vmPlayer.getCurrentTime().then(function(seconds) {
+        this.vmPlayer.getCurrentTime().then((seconds) => {
           // seconds = the current playback position
           return seconds;
         }).catch(function(error) {
@@ -441,7 +435,7 @@
       // } // END
 
       duration() {
-        this.vmPlayer.getDuration().then(function(duration) {
+        this.vmPlayer.getDuration().then((duration) => {
           // duration = the duration of the video in seconds
           return duration;
         }).catch(function(error) {
@@ -453,7 +447,7 @@
 
     Vimeo.prototype.featuresTimeupdateEvents = true;
 
-    Vimeo.isSupported = function() {
+    Vimeo.isSupported = () => {
       return true;
     };
 
@@ -467,12 +461,10 @@
      * @param  {String} type    The mimetype to check
      * @return {String}         'maybe', or '' (empty string)
      */
-    Vimeo.nativeSourceHandler.canPlayType = function(source) {
+    Vimeo.nativeSourceHandler.canPlayType = (source) => {
       if (source === 'video/vimeo') {
         return 'maybe';
       }
-
-      return '';
     };
 
     /*
@@ -482,23 +474,21 @@
      * @return {String}         'maybe', or '' (empty string)
      * @note: Copied over from YouTube — not sure this is relevant
      */
-    Vimeo.nativeSourceHandler.canHandleSource = function(source) {
+    Vimeo.nativeSourceHandler.canHandleSource = (source) => {
       if (source.type) {
         return Vimeo.nativeSourceHandler.canPlayType(source.type);
       } else if (source.src) {
         return Vimeo.nativeSourceHandler.canPlayType(source.src);
       }
-
-      return '';
     };
 
     // @note: Copied over from YouTube — not sure this is relevant
-    Vimeo.nativeSourceHandler.handleSource = function(source, tech) {
+    Vimeo.nativeSourceHandler.handleSource = (source, tech) => {
       tech.src(source.src);
     };
 
     // @note: Copied over from YouTube — not sure this is relevant
-    Vimeo.nativeSourceHandler.dispose = function() { };
+    Vimeo.nativeSourceHandler.dispose = () => {};
 
     Vimeo.registerSourceHandler(Vimeo.nativeSourceHandler);
 
@@ -574,7 +564,7 @@
         }
       };
 
-      tag.onreadystatechange = function () {
+      tag.onreadystatechange = () => {
         if (!loaded && (this.readyState === 'complete' || this.readyState === 'loaded')) {
           loaded = true;
           callback();
