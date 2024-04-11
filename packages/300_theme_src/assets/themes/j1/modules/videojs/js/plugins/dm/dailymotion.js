@@ -276,7 +276,7 @@
 
     ended() {
       return this.dmPlayer && this.dmPlayer.ended;
-    } // END
+    } // END ended
 
     enterFullWindow() {
       if (!this.dmPlayer || !this.dmPlayer.setFullscreen) {
@@ -521,7 +521,7 @@
     endTimeModule = Date.now();
     logger.debug('\n' + 'initializing plugin: finished');
     logger.debug('\n' + 'plugin initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
-  }
+  } // END apiLoaded
 
   function loadScript(src, callback) {
     var loaded         = false;
@@ -579,21 +579,14 @@
 
   Dailymotion.sdkReadyQueue = [];
 
-//   if (typeof document !== 'undefined') {
-// //  loadScript('//api.dmcdn.net/all.js', apiLoaded);
-//     loadScript('/assets/themes/j1/modules/videojs/js/plugins/dm/api/dailymotion.sdk.min.js', apiLoaded);
-//     injectCss();
-//   }
-
   // initialize plugin if page ready
   // -------------------------------------------------------------------------
   var dependencies_met_page_ready = setInterval (() => {
     var pageState      = $('#content').css("display");
     var pageVisible    = (pageState === 'block') ? true : false;
     var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
-    var atticFinished  = (j1.adapter.attic.getState() == 'finished') ? true : false;
 
-    if (j1CoreFinished && pageVisible && atticFinished) {
+    if (j1CoreFinished && pageVisible) {
       startTimeModule = Date.now();
 
       logger.debug('\n' + 'initializing plugin: started');

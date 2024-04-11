@@ -1,0 +1,99 @@
+---
+title:                                  Video
+title_extention:                        Playing Video
+tagline:                                Playing Video
+
+date:                                   2024-04-09
+#last_modified:                         2024-01-01
+
+description: >
+                                        The J1 Template support playing video on web pages
+                                        by HTML5 Video, the new standard of HTML to show
+                                        videos on web pages.
+keywords: >
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap,
+                                        html, html5, video, support, flash player,
+                                        quicktime, silverlight
+
+categories:                             [ Roundtrip ]
+tags:                                   [ Module, Video ]
+
+image:
+  path:                                 /assets/images/icons/videojs/videojs-poster.png
+  width:                                1920
+  height:                               1280
+
+regenerate:                             false
+personalization:                        true
+permalink:                              /pages/public/vimeo_tester/
+
+resources:                              [
+                                          animate,
+                                          videojs, vimeoplayer
+                                        ]
+resource_options:
+  - attic:
+      slides:
+        - url:                          /assets/images/icons/videojs/videojs-poster.png
+          alt:                          VideoJS Poster
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:images-dir:                            {imagesdir}/pages/roundtrip/100_present_images
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+The J1 Template support playing audio on web pages by HTML5 Video, the new
+standard of HTML to show videos on webpages. Modern browsers support the
+audio tag `<audio>` for the new HTML5 audio audio standard.
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+[role="mt-4"]
+== Wistia
+
+Wistia is a marketing software and video hosting platform for business-to-business
+marketers. Free or paid plans are available. While Wistia may not be the
+*Big Man on Campus*, like Vimeo, still brings valuable functionality and
+should be considered a viable video platform.
+
+.Wistia Video
+wistia::29b0fbf547[role="mt-4 mb-4"]
+
+
+[role="mt-4"]
+== Vimeo
+
+Vimeo is an sharing platform that allows users to upload, share, and view
+video content. It was founded in 2004 by a group of filmmakers and has
+since grown into a popular platform for individuals and businesses to
+showcase their videos.
+
+.Forever 21 Channel
+vimeo::179528528[role="mt-4 mb-5"]
+
+[role="mb-7"]
+.Video controls
+[CAUTION]
+====
+For the *VJS Vimeo Tech*, native vjs controls (controllbar) are currently
+*NOT* supported. Instead, the controllbar of the Vimeo Player is shown.
+====

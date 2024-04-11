@@ -65,7 +65,7 @@
           }
         }
       }.bind(this));
-    }
+    } // END constructor
 
     dispose() {
       if (this.ytPlayer) {
@@ -92,7 +92,7 @@
 
       //Needs to be called after the YouTube player is destroyed, otherwise there will be a null reference exception
       Tech.prototype.dispose.call(this);
-    }
+    } // END dispose
 
     createEl() {
       var div = document.createElement('div');
@@ -117,7 +117,7 @@
       }
 
       return divWrapper;
-    }
+    } // END createEl
 
     initYTPlayer() {
       var playerVars = {
@@ -253,7 +253,7 @@
 
       this.ytPlayer = new YT.Player(this.options_.techId, playerConfig);
 
-      logger.debug('\n' + 'created ' + this.name_ + ' player on ID: ' + this.ytPlayer.id);
+      logger.debug('\n' + 'created ' + this.name_ + ' player on ID: ' + this.el_.firstChild.id);
     } // END initYTPlayer
 
     onPlayerReady() {
@@ -275,15 +275,15 @@
         this.cueVideoById_(this.url.videoId);
         this.activeVideoId = this.url.videoId;
       }
-    }
+    } // END onPlayerReady
 
     onPlayerPlaybackQualityChange() {
-
-    }
+      // do nothing
+    } // END onPlayerPlaybackQualityChange
 
     onPlayerPlaybackRateChange() {
       this.trigger('ratechange');
-    }
+    } // END onPlayerPlaybackRateChange
 
     onPlayerStateChange(e) {
       var state = e.data;
@@ -331,17 +331,17 @@
           this.player_.trigger('waiting');
           break;
       }
-    }
+    } // END onPlayerStateChange
 
     onPlayerVolumeChange() {
       this.trigger('volumechange');
-    }
+    } // END onPlayerVolumeChange
 
     onPlayerError(e) {
       this.errorNumber = e.data;
       this.trigger('pause');
       this.trigger('error');
-    }
+    } // END onPlayerError
 
     error() {
       var code = 1000 + this.errorNumber; // as smaller codes are reserved
@@ -362,7 +362,7 @@
       }
 
       return { code: code, message: 'YouTube unknown error (' + this.errorNumber + ')' };
-    }
+    } // END error
 
     loadVideoById_(id) {
       var options = {
@@ -375,7 +375,7 @@
         options.endSeconds = this.options_.end;
       }
       this.ytPlayer.loadVideoById(options);
-    }
+    } // END loadVideoById_
 
     cueVideoById_(id) {
       var options = {
@@ -388,7 +388,7 @@
         options.endSeconds = this.options_.end;
       }
       this.ytPlayer.cueVideoById(options);
-    }
+    } // END cueVideoById_
 
     src(src) {
       if (src) {
@@ -396,7 +396,7 @@
       }
 
       return this.source;
-    }
+    } // END src
 
     poster() {
       // You can't start programmaticlly a video with a mobile
@@ -406,11 +406,11 @@
       }
 
       return this.poster_;
-    }
+    } // END poster
 
     setPoster(poster) {
       this.poster_ = poster;
-    }
+    } // END setPoster
 
     setSrc(source) {
       if (!source || !source.src) {
@@ -446,23 +446,23 @@
           this.cueOnReady = true;
         }
       }
-    }
+    } // END setSrc
 
     autoplay() {
       return this.options_.autoplay;
-    }
+    } // END autoplay
 
     setAutoplay(val) {
       this.options_.autoplay = val;
-    }
+    } // END setAutoplay
 
     loop() {
       return this.options_.loop;
-    }
+    } // END
 
     setLoop(val) {
       this.options_.loop = val;
-    }
+    } // END loop
 
     play() {
       if (!this.url || !this.url.videoId) {
@@ -491,23 +491,23 @@
         this.trigger('waiting');
         this.playOnReady = true;
       }
-    }
+    } // END play
 
     pause() {
       if (this.ytPlayer) {
         this.ytPlayer.pauseVideo();
       }
-    }
+    } // END pause
 
     paused() {
       return (this.ytPlayer) ?
           (this.lastState !== YT.PlayerState.PLAYING && this.lastState !== YT.PlayerState.BUFFERING)
           : true;
-    }
+    } // END
 
     currentTime() {
       return this.ytPlayer ? this.ytPlayer.getCurrentTime() : 0;
-    }
+    } // END paused
 
     setCurrentTime(seconds) {
       if (this.lastState === YT.PlayerState.PAUSED) {
@@ -538,22 +538,19 @@
           }
         }.bind(this), 250);
       }
-    }
+    } // END setCurrentTime
 
     seeking() {
       return this.isSeeking;
-    }
+    } // END seeking
 
-    // jadams, 2023-10-01: videojs.createTimeRange() deprecated in VideoJS 9
     seekable() {
       if(!this.ytPlayer) {
-//      return videojs.createTimeRange();
         return videojs.time.createTimeRanges();
       }
 
-//    return videojs.createTimeRange(0, this.ytPlayer.getDuration());
       return videojs.time.createTimeRanges(0, this.ytPlayer.getDuration());
-    }
+    } // END seekable
 
     onSeeked() {
       clearInterval(this.checkSeekedInPauseInterval);
@@ -564,11 +561,11 @@
       }
 
       this.trigger('seeked');
-    }
+    } // END
 
     playbackRate() {
       return this.ytPlayer ? this.ytPlayer.getPlaybackRate() : 1;
-    }
+    } // END
 
     setPlaybackRate(suggestedRate) {
       if (!this.ytPlayer) {
@@ -576,23 +573,23 @@
       }
 
       this.ytPlayer.setPlaybackRate(suggestedRate);
-    }
+    } // END onSeeked
 
     duration() {
       return this.ytPlayer ? this.ytPlayer.getDuration() : 0;
-    }
+    } // END duration
 
     currentSrc() {
       return this.source && this.source.src;
-    }
+    } // END
 
     ended() {
       return this.ytPlayer ? (this.lastState === YT.PlayerState.ENDED) : false;
-    }
+    } // END ended
 
     volume() {
       return this.ytPlayer ? this.ytPlayer.getVolume() / 100.0 : 1;
-    }
+    } // END volume
 
     setVolume(percentAsDecimal) {
       if (!this.ytPlayer) {
@@ -600,11 +597,11 @@
       }
 
       this.ytPlayer.setVolume(percentAsDecimal * 100.0);
-    }
+    } // END setVolume
 
     muted() {
       return this.ytPlayer ? this.ytPlayer.isMuted() : false;
-    }
+    } // END muted
 
     setMuted(mute) {
       if (!this.ytPlayer) {
@@ -622,25 +619,22 @@
       this.setTimeout( function(){
         this.trigger('volumechange');
       }, 50);
-    }
+    } // END setMuted
 
-    // jadams, 2023-10-01: videojs.createTimeRange() deprecated in VideoJS 9
     buffered() {
       if(!this.ytPlayer || !this.ytPlayer.getVideoLoadedFraction) {
-//      return videojs.createTimeRange();
         return videojs.time.createTimeRanges();
       }
-
       var bufferedEnd = this.ytPlayer.getVideoLoadedFraction() * this.ytPlayer.getDuration();
 
-//    return videojs.createTimeRange(0, bufferedEnd);
       return videojs.time.createTimeRanges(0, this.ytPlayer.getDuration());
-    }
+    } // END buffered
 
     // TODO: Can we really do something with this on YouTUbe?
     preload() {}
     load() {}
     reset() {}
+
     networkState() {
       if (!this.ytPlayer) {
         return 0; //NETWORK_EMPTY
@@ -653,7 +647,8 @@
         default:
           return 1; //NETWORK_IDLE
       }
-    }
+    } // END networkState
+
     readyState() {
       if (!this.ytPlayer) {
         return 0; //HAVE_NOTHING
@@ -668,17 +663,17 @@
         default:
           return 4; //HAVE_ENOUGH_DATA
       }
-    }
+    } // END readyState
 
     supportsFullScreen() {
       return document.fullscreenEnabled ||
           document.webkitFullscreenEnabled ||
           document.mozFullScreenEnabled ||
           document.msFullscreenEnabled;
-    }
+    } // END supportsFullScreen
 
     // Tries to get the highest resolution thumbnail available for the video
-    checkHighResPoster(){
+    checkHighResPoster() {
       var uri = 'https://img.youtube.com/vi/' + this.url.videoId + '/maxresdefault.jpg';
 
       try {
@@ -700,8 +695,9 @@
         image.src = uri;
       }
       catch(e){}
-    }
-  }
+    } // END  checkHighResPoster
+
+  } // END  class YouTube
 
   Youtube.isSupported = function() {
     return true;
@@ -776,7 +772,7 @@
       }
     };
     tag.src = src;
-  }
+  } // END loadScript
 
   function injectCss() {
     var css = // iframe blocker to catch mouse events
@@ -801,11 +797,6 @@
   } // END injectCss
 
   Youtube.apiReadyQueue = [];
-
-  // if (typeof document !== 'undefined'){
-  //   loadScript('https://www.youtube.com/iframe_api', apiLoaded);
-  //   injectCss();
-  // }
 
   // initialize plugin if page ready
   // -------------------------------------------------------------------------

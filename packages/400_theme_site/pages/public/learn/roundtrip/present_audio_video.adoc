@@ -174,7 +174,6 @@ youtube::20gXikNRjbo[poster="/assets/videos/gallery/voice_kids_nl_2021/video_pos
 // .Carpool Karaoke Adele
 // youtube::Nck6BZga7TQ[poster="/assets/videos/gallery/video_adele-poster.jpg" role="mt-4 mb-5"]
 
-
 [role="mt-4"]
 ==== Dailymotion
 
@@ -211,6 +210,13 @@ and creative expression.
 .Forever 21 Channel
 vimeo::179528528[role="mt-4 mb-5"]
 
+[role="mb-7"]
+.Video controls
+[CAUTION]
+====
+For the *VJS Vimeo Tech*, native vjs controls (controllbar) are currently
+*NOT* supported. Instead, the controllbar of the Vimeo Player is shown.
+====
 
 [role="mt-5"]
 == Galleries of Video

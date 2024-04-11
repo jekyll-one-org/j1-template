@@ -67,10 +67,10 @@ picture > img {
 
 /* Manage time display
  ------------------------------------------------------------------------------- */
-.vjs-theme-uno .vjs-current-time { display: none; }
-.vjs-theme-uno .vjs-time-divider { display: none; }
-.vjs-theme-uno .vjs-duration { display: block; }
-.vjs-theme-uno .vjs-remaining-time { display: block; }
+.vjs-theme-uno .vjs-current-time    { display: none; }
+.vjs-theme-uno .vjs-time-divider    { display: none; }
+.vjs-theme-uno .vjs-duration        { display: block; }
+.vjs-theme-uno .vjs-remaining-time  { display: block; }
 
 
 /* Manage controls
@@ -85,19 +85,19 @@ picture > img {
 }
 
  /* Circled big play button */
- .vjs-theme-uno .vjs-big-play-button .vjs-icon-placeholder:before {
-   border: 5px solid #EEEEEE;
-   border-radius: 50%;
-   content: "\f101";
-   display: inline-block;
-   width: 120px;
-   height: 120px;
-   position: absolute;
-   top: 50%;
-   left: 50%;
-   transform: translate(-50%, -50%);
-   pointer-events: none;
- }
+.vjs-theme-uno .vjs-big-play-button .vjs-icon-placeholder:before {
+  border: 5px solid #EEEEEE;
+  border-radius: 50%;
+  content: "\f101";
+  display: inline-block;
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
 
 /*
 .vjs-theme-uno.vjs-big-play-button:focus,

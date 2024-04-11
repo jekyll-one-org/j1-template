@@ -94,7 +94,10 @@
           portrait:     false,
           title:        false,
           pip:          false,
-          vimeo_logo:   false
+          vimeo_logo:   false,
+//        dnt:          false,
+//        transparent:  false,
+//        keyboard:     false,
         };
 
         // jadams: VJS controlbar
@@ -324,6 +327,10 @@
         var player = videojs(this.options_.playerId);
         this.vmPlayer.getMuted().then((muted) => {
           // muted = whether muted is turned on or not
+          // if (muted) {
+          //   player.muted(true);
+          // }
+          return muted;
         }).catch(function(error) {
           // an error occurred
         });
@@ -336,6 +343,10 @@
 
         this.vmPlayer.setMuted(isMuted).then((muted) => {
           _this._vimeoState.muted = muted;
+          // if (muted) {
+          //   player.muted(true);
+          // }
+          return muted;
         }).catch(function(error) {
           // an error occurred
         });
@@ -365,19 +376,6 @@
         return this._vimeoState.ended;
       } // END ended
 
-      // currentTime() {
-      //   var currentTime = this.vmPlayer ? this.vmPlayer.getCurrentTime() : 0;
-      //   return currentTime;
-      // }
-
-      currentTime() {
-        this.vmPlayer.getCurrentTime().then((seconds) => {
-          // seconds = the current playback position
-          return seconds;
-        }).catch(function(error) {
-          // an error occurred
-        });
-      } // END currentTime
 
       // currentTime() {
       //   return this._vimeoState.progress.seconds;
@@ -399,6 +397,20 @@
       //       }
       //   });
       // } // END setCurrentTime
+
+      // currentTime() {
+      //   var currentTime = this.vmPlayer ? this.vmPlayer.getCurrentTime() : 0;
+      //   return currentTime;
+      // }
+
+      currentTime() {
+        this.vmPlayer.getCurrentTime().then((seconds) => {
+          // seconds = the current playback position
+          return seconds;
+        }).catch(function(error) {
+          // an error occurred
+        });
+      } // END currentTime
 
       setCurrentTime(seconds) {
         if (this.lastState === vmPlayer.getPaused()) {
@@ -468,6 +480,15 @@
 
         this.vmPlayer.setPlaybackRate(suggestedRate);
       } // END setPlaybackRate
+
+      // duration() {
+      //   var duration = this.vmPlayer ? this.vmPlayer.getDuration() : 0;
+      //   return duration;
+      // }
+
+      // duration() {
+      //   return this._vimeoState.progress.duration;
+      // } // END
 
       duration() {
         this.vmPlayer.getDuration().then((duration) => {
@@ -625,8 +646,10 @@
 
         // load script loaded from local because of NemeSpace conflicts (Vimeo -> VM)
         loadScript('/assets/themes/j1/modules/videojs/js/plugins/vm/api/vimeo.js', apiLoaded);
+  //    loadScript('https://player.vimeo.com/api/player.js', apiLoaded);
 
         injectCss();
+
         clearInterval(dependencies_met_page_ready);
       } // END pageVisible
     }, 10); // END dependencies_met_page_ready

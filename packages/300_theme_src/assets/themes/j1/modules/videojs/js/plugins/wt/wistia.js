@@ -140,7 +140,7 @@
           }
         });
 
-        logger.debug('\n' + 'created ' + this.name_ + ' player on ID: ' + this.videoId);
+        logger.debug('\n' + 'created ' + this.name_ + ' player on ID: ' + this.el_.firstChild.id);
       } // END initWistiaPlayer
 
       onPlayerReady() {
