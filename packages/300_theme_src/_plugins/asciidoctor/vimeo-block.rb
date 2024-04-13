@@ -19,7 +19,7 @@ include Asciidoctor
 #
 # Usage:
 #
-#   vimeo::video_id[theme="vjs_theme_name" role="CSS classes"]
+#   vimeo::video_id[poster="image" theme="vjs_theme" role="CSS classes"]
 #
 # Example:
 #
@@ -37,16 +37,20 @@ Asciidoctor::Extensions.register do
     use_dsl
 
     named :vimeo
-    name_positional_attributes 'theme', 'role'
-    default_attrs 'theme' => 'uno',
+    name_positional_attributes 'poster', 'theme', 'role'
+    default_attrs 'poster' => '/assets/videos/poster/vimeo/banner/vimeo-blue.jpg',
+                  'theme' => 'uno',
                   'role' => 'mt-3 mb-3'
 
     def process parent, target, attributes
 
       chars         = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
-      video_id      = (0...11).map { chars[rand(chars.length)] }.join
+      video_id      = (0...11).map {chars[rand(chars.length)]}.join
+
       title_html    = (attributes.has_key? 'title') ? %(<div class="video-title">#{attributes['title']}</div>\n) : nil
-      theme_name    = (theme = attributes['theme'])  ? %(#{theme}) : nil
+      poster_image  = (poster = attributes['poster']) ? %(#{poster}) : nil
+      poster_attr   = %(poster="#{poster_image}")
+      theme_name    = (theme = attributes['theme']) ? %(#{theme}) : nil
 
       html = %(
         <div class="vimeo-player #{attributes['role']}">
@@ -55,6 +59,7 @@ Asciidoctor::Extensions.register do
             id="#{video_id}"
             class="video-js vjs-theme-#{theme_name}"
             width="640" height="360"
+            #{poster_attr}
             aria-label="#{attributes['title']}"
             data-setup='{
               "fluid" : true,

@@ -23,7 +23,7 @@ image:
 
 regenerate:                             false
 
-resources:                              [ animate ]
+resources:                              []
 resource_options:
   - toccer:
       collapseDepth:                    3

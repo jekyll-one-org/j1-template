@@ -549,7 +549,16 @@
           width: 100%;
           height: 100%;
         }
+
         .vjs-vimeo-mobile .vjs-big-play-button { display: none; }
+
+        video::-webkit-media-controls-panel { display: none !important; opacity: 0 !important; }
+        video::-webkit-media-controls-start-playback-button { display: flex !important; opacity: 1 !important; }
+
+        .player.hide-controls-mode video::-webkit-media-controls-play-button { display: none !important; }
+        .player .vp-video-wrapper .vp-telecine.hide-webkit-controls video::-webkit-media-controls-play-button { display: none !important; }
+        .player .vp-video-wrapper .vp-telecine.hide-webkit-controls video::-webkit-media-controls-play-button { display: none !important; }
+        .player .vp-video-wrapper .vp-telecine.hide-webkit-controls video::-webkit-media-controls-start-playback-button { display: none !important; }
       `;
 
       const head  = document.head || document.getElementsByTagName('head')[0];
@@ -615,9 +624,8 @@
       var pageState      = $('#content').css("display");
       var pageVisible    = (pageState === 'block') ? true : false;
       var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
-      var atticFinished  = (j1.adapter.attic.getState() == 'finished') ? true : false;
 
-      if (j1CoreFinished && pageVisible && atticFinished) {
+      if (j1CoreFinished && pageVisible) {
         startTimeModule = Date.now();
 
         logger.debug('\n' + 'initializing plugin: started');

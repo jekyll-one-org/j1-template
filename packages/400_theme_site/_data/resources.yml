@@ -381,12 +381,12 @@ resources:
   #
   # See: https://getbootstrap.com/docs/5.0/getting-started/introduction/
   #
-  - name:                               Bootstrap JS
+  - name:                               Bootstrap V5 (JS)
     resource:
       enabled:                          true
 
-      id:                               bs5
-      comment:                          Module Bootstrap JS
+      id:                               bs-5
+      comment:                          Module Bootstrap V5 (JS)
       region:                           head
       layout:                           [ all ]
       required:                         always
@@ -459,7 +459,7 @@ resources:
     resource:
       enabled:                          true
 
-      id:                               ga-opt-in
+      id:                               ga-optin
       comment:                          Module GA OptIn
       region:                           head
       layout:                           [ all ]
@@ -486,7 +486,7 @@ resources:
       enabled:                          true
 
       id:                               logger
-      comment:                          Module J1 Logger
+      comment:                          Module Logger
       region:                           head
       layout:                           [ all ]
       required:                         always
@@ -507,7 +507,7 @@ resources:
   #
   # See: https://github.com/jquery-backstretch/jquery-backstretch
   #
-  - name:                               Backstretch
+  - name:                               J1 Backstretch
     resource:
       enabled:                          true
 
@@ -584,7 +584,7 @@ resources:
   #
   # See: https://github.com/FrDH/mmenu-light
   #
-  - name:                               MMenu
+  - name:                               J1 MMenu
     resource:
       enabled:                          true
 
@@ -665,12 +665,12 @@ resources:
   #
   # See: https://github.com/shaack/bootstrap-cookie-banner
   #
-  - name:                               J1 CookieConsent
+  - name:                               J1 Cookie Consent
     resource:
       enabled:                          true
 
-      id:                               cookieConsent
-      comment:                          Module J1 CookieConsent
+      id:                               cookie-consent
+      comment:                          Module Cookie Consent
       region:                           head
       layout:                           [ home, page, post ]
       required:                         always
@@ -691,7 +691,7 @@ resources:
   #
   # See: https://lunrjs.com/
   #
-  - name:                               Lunr
+  - name:                               J1 Lunr
     resource:
       enabled:                          true
 
@@ -720,12 +720,12 @@ resources:
   # ----------------------------------------------------------------------------
   # Floating Action Buttons, JS API to create FABs
   #
-  - name:                               J1 Floating Action Buttons
+  - name:                               J1 FAB (Floating Action Buttons)
     resource:
       enabled:                          true
 
       id:                               fab
-      comment:                          Module J1 Floating Action Buttons
+      comment:                          Module FAB
       region:                           head
       layout:                           [ home, page, post ]
       required:                         always
@@ -777,11 +777,11 @@ resources:
   #
   # See: https://bootswatch.com/
   #
-  - name:                               themeSwitcher
+  - name:                               J1 Theme Switcher
     resource:
       enabled:                          true
 
-      id:                               theme_switcher
+      id:                               theme-switcher
       comment:                          Module Theme Switcher
       region:                           head
       layout:                           [ home, page, post ]
@@ -807,8 +807,8 @@ resources:
     resource:
       enabled:                          true
 
-      id:                               rtable
-      comment:                          Module J1 Responsive Tables
+      id:                               responsive-tables
+      comment:                          Module Responsive Tables
       region:                           head
       layout:                           [ home, page, post ]
       required:                         always
@@ -831,7 +831,7 @@ resources:
       enabled:                          true
 
       id:                               asciidoctor
-      comment:                          Module J1 Asciidoctor
+      comment:                          Module Asciidoctor
       region:                           head
       layout:                           [ home, page, post, collection, blog_archive, app ]
       required:                         always
@@ -849,14 +849,14 @@ resources:
   # ----------------------------------------------------------------------------
   # rtextResizer (currently NOT used)
   #
-  - name:                               J1 RText Resizer
+  - name:                               J1 Text Resizer
     resource:
       enabled:                          false
 
-      id:                               rtextresizer
-      comment:                          Module J1 RText Resizer
+      id:                               text-resizer
+      comment:                          Module Text Resizer
       region:                           head
-      layout:                           [ home, page, post, collection, blog_archive ]
+      layout:                           [ all ]
       required:                         always                                  # always | ondemand
       preload:                          false
       script_load:
@@ -875,12 +875,12 @@ resources:
   #
   # See: https://github.com/marghoobsuleman/ms-Dropdown
   #
-  - name:                               J1 MsDropdown
+  - name:                               J1 MS Dropdown
     resource:
       enabled:                          true
 
-      id:                               msDropdown
-      comment:                          Module J1 MsDropdown
+      id:                               ms-dropdown
+      comment:                          Module MS Dropdown
       region:                           head
       layout:                           [ home, page, post ]
       required:                         always
@@ -905,9 +905,9 @@ resources:
       enabled:                          true
 
       id:                               translator
-      comment:                          Module J1 Translator
+      comment:                          Module Translator
       region:                           head
-      layout:                           [ home, page, post ]
+      layout:                           [ all ]
       required:                         always
       preload:                          false
       script_load:                      defer
@@ -957,8 +957,8 @@ resources:
     resource:
       enabled:                          false
 
-      id:                               CustomModule
-      comment:                          Module J1 Custom Module
+      id:                               custom-module
+      comment:                          Module Custom Module
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
@@ -976,12 +976,12 @@ resources:
   # ----------------------------------------------------------------------------
   # Custom functions
   #
-  - name:                               Custom Functions
+  - name:                               J1 Custom Function
     resource:
       enabled:                          false
 
-      id:                               customFunctions
-      comment:                          Module Custom Functions
+      id:                               custom-function
+      comment:                          Module Custom Function
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
@@ -1000,14 +1000,14 @@ resources:
   # Rouge, pure Ruby themeable code highlighter
   # See: http://rouge.jneen.net/
   #
-  - name:                               Rouge Highlighter Themes
+  - name:                               J1 Rouge (Highlighter)
     resource:
       enabled:                          true
 
       id:                               rouge
-      comment:                          Module Rouge Highlighter Themes
+      comment:                          Module Rouge
       region:                           head
-      layout:                           [ home, page, post, collection, blog_archive, raw, app ]
+      layout:                           [ all ]
       required:                         ondemand
       preload:                          false
       script_load:                      defer
@@ -1028,15 +1028,15 @@ resources:
   #
   # See: https://animate.style/
   #
-  - name:                               AnimateCSS
+  - name:                               J1 AnimateCSS
     resource:
       enabled:                          true
 
-      id:                               animate
+      id:                               animate-css
       comment:                          Module AnimateCSS
       region:                           head
       layout:                           [ all ]
-      required:                         ondemand
+      required:                         always
       preload:                          false
       script_load:                      defer
       dependencies:                     false
@@ -1056,10 +1056,10 @@ resources:
   #
   - name:                               J1 IFramer
     resource:
-      enabled:                          true
+      enabled:                          false
 
       id:                               iframer
-      comment:                          Module J1 IFramer
+      comment:                          Module IFramer
       layout:                           [ home, page, post ]
       region:                           head
       required:                         ondemand
@@ -1084,8 +1084,8 @@ resources:
       enabled:                          true
 
       id:                               lightbox
-      comment:                          Module Lightbox V2
-      layout:                           [ home, page, post, collection, blog_archive ]
+      comment:                          Module Lightbox
+      layout:                           [ all ]
       region:                           head
       required:                         ondemand
       preload:                          false
@@ -1114,7 +1114,7 @@ resources:
       id:                               iconify
       comment:                          Module Iconify framework
       region:                           head
-      layout:                           [ home, page, post, collection, blog_archive ]
+      layout:                           [ all ]
       required:                         ondemand
       preload:                          false
       script_load:                      defer
@@ -1132,14 +1132,14 @@ resources:
   #
   # See: https://www.algolia.com/doc/
   #
-  - name:                               Algolia API (JS)
+  - name:                               J1 Algolia Search (Algolia InstantSearch)
     resource:
       enabled:                          false
 
-      id:                               Module Algolia API
-      comment:                          Resources used by Algolia Instantsearch
+      id:                               algolia-search
+      comment:                          Module Algolia Search
       region:                           head
-      layout:                           [ home, page, post, collection ]
+      layout:                           [ all ]
       required:                         ondemand
       preload:                          false
       script_load:                      defer
@@ -1166,7 +1166,7 @@ resources:
       enabled:                          true
 
       id:                               clipboard
-      comment:                          Module J1 Clipboard
+      comment:                          Module Clipboard
       region:                           head
       layout:                           [ home, page, post ]
       required:                         always
@@ -1189,7 +1189,7 @@ resources:
       enabled:                          true
 
       id:                               carousel
-      comment:                          Module J1 Carousel
+      comment:                          Module Carousel
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
@@ -1211,12 +1211,12 @@ resources:
   # ----------------------------------------------------------------------------
   # MasterSlider, lite|free version 2.85.13 - Feb 2022
   #
-  - name:                               Master Slider Lite
+  - name:                               J1 Master Slider (Lite)
     resource:
       enabled:                          true
 
-      id:                               masterslider
-      comment:                          Module Master Slider Lite
+      id:                               master-slider
+      comment:                          Module Master Slider
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
@@ -1240,12 +1240,12 @@ resources:
   # ----------------------------------------------------------------------------
   # MasterSlider Pro
   #
-  - name:                               Master Slider Professional
+  - name:                               J1 Master Slider (Professional)
     resource:
       enabled:                          false
 
-      id:                               mastersliderpro
-      comment:                          Module Master Slider Pro
+      id:                               master-slider-pro
+      comment:                          Module Master Slider Professional
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
@@ -1289,9 +1289,9 @@ resources:
       enabled:                          true
 
       id:                               gallery
-      comment:                          Module J1 Gallery
+      comment:                          Module Gallery
       region:                           head
-      layout:                           [ home, page, post, collection, blog_archive, raw, app ]
+      layout:                           [ home, page, post ]
       required:                         ondemand
       preload:                          false
       script_load:                      defer
@@ -1353,9 +1353,9 @@ resources:
         init_function:                  []
 
   # ----------------------------------------------------------------------------
-  # VideoJS Player, JS API|Player for HTML5 video content
+  # VideoJS, JS API
   #
-  - name:                               VideoJS
+  - name:                               J1 VideoJS
     resource:
       enabled:                          true
 
@@ -1391,13 +1391,13 @@ resources:
         init_function:                  []
 
   # ----------------------------------------------------------------------------
-  # TikTok Player, Version v1.0.11
+  # TikToc Player, Version v1.0.11
   #
   - name:                               TikToc Player
     resource:
       enabled:                          true
 
-      id:                               tiktokplayer
+      id:                               tiktoc-player
       comment:                          Module TikToc Player
       region:                           head
       layout:                           [ home, page, post ]
@@ -1409,18 +1409,18 @@ resources:
 
       data:
         css:                            []
-        files:                          [ modules/tiktocPlayer/js/player.min.js ]
+        files:                          [ modules/videoPlayer/tiktoc/js/player.min.js ]
         js:                             []
         init_function:                  []
 
   # ----------------------------------------------------------------------------
-  # Dailymotion Player, Version v-0.0.3352-rc1 for Dailymotion Video content
+  # Dailymotion Player, Version v-0.0.3524-rc1 (may required by lightGallery)
   #
   - name:                               Dailymotion Player
     resource:
       enabled:                          true
 
-      id:                               dailymotionplayer
+      id:                               dailymotion-player
       comment:                          Module Dailymotion Player
       region:                           head
       layout:                           [ home, page, post ]
@@ -1432,18 +1432,18 @@ resources:
 
       data:
         css:                            []
-        files:                          [ modules/videojs/js/plugins/vm/api/dailymotion.player.min.js ]
+        files:                          [ modules/videoPlayer/dailymotion/js/player.min.js ]
         js:                             []
         init_function:                  []
 
   # ----------------------------------------------------------------------------
-  # Vimeo Player, JS API|Player for Vimeo Video content
+  # Vimeo Player, Version v2.22.0  (may required by lightGallery)
   #
   - name:                               Vimeo Player
     resource:
       enabled:                          true
 
-      id:                               vimeoplayer
+      id:                               vimeo-player
       comment:                          Module Vimeo Player
       region:                           head
       layout:                           [ home, page, post ]
@@ -1455,18 +1455,18 @@ resources:
 
       data:
         css:                            []
-        files:                          [ modules/videojs/js/plugins/vm/api/player.min.js ]
+        files:                          [ modules/videoPlayer/vimeo/js/player.min.js ]
         js:                             []
         init_function:                  []
 
   # ----------------------------------------------------------------------------
-  # Wistia Player, JS API|Player for Wistia Video content
+  # Wistia Player, Version E-v1 (may required by lightGallery)
   #
   - name:                               Wistia Player
     resource:
       enabled:                          true
 
-      id:                               wistiaplayer
+      id:                               wistia-player
       comment:                          Module Wistia Player
       region:                           head
       layout:                           [ home, page, post ]
@@ -1478,7 +1478,7 @@ resources:
 
       data:
         css:                            []
-        files:                          [ modules/videojs/js/plugins/wt/api/wistia.min.js]
+        files:                          [ modules/videoPlayer/wistia/js/player.min.js ]
         js:                             []
         init_function:                  []
 
@@ -1491,8 +1491,8 @@ resources:
     resource:
       enabled:                          false
 
-      id:                               rangeslider
-      comment:                          Module J1 Range Slider
+      id:                               range-slider
+      comment:                          Module Range Slider
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
@@ -1515,9 +1515,9 @@ resources:
       enabled:                          true
 
       id:                               scroller
-      comment:                          Module J1 Scroller
+      comment:                          Module Scroller
       region:                           head
-      layout:                           [ home, page, post, collection, blog_archive ]
+      layout:                           [ all ]
       required:                         ondemand                                # always | ondemand
       preload:                          false
       script_load:                      defer
@@ -1535,14 +1535,14 @@ resources:
   #
   # See: https://www.google.com/intl/de_de/adsense/start/
   #
-  - name:                               Advertising
+  - name:                               J1 Advertising
     resource:
       enabled:                          false
 
       id:                               advertising
       comment:                          Module Advertising
       region:                           head
-      layout:                           [ home, page, post ]
+      layout:                           [ all ]
       required:                         ondemand
       preload:                          false
       script_load:                      defer
@@ -1558,14 +1558,14 @@ resources:
   # ----------------------------------------------------------------------------
   # Comments, JS implementation to provide access on comment providers
   #
-  - name:                               Comments
+  - name:                               J1 Comments
     resource:
       enabled:                          false
 
       id:                               comments
       comment:                          Module Comments
       region:                           head
-      layout:                           [ page, post ]
+      layout:                           [ all ]
       required:                         ondemand
       preload:                          false
       script_load:                      defer
@@ -1592,7 +1592,7 @@ resources:
     resource:
       enabled:                          false
 
-      id:                               require
+      id:                               require-js
       comment:                          Module RequireJS
       region:                           head
       layout:                           [ all ]
@@ -1611,7 +1611,7 @@ resources:
   # ----------------------------------------------------------------------------
   # Waves
   #
-  - name:                               Waves
+  - name:                               J1 Waves
     resource:
       enabled:                          false
 
@@ -1660,7 +1660,7 @@ resources:
   # ----------------------------------------------------------------------------
   # Particles
   #
-  - name:                               Particles
+  - name:                               J1 Particles
     resource:
       enabled:                          false
 
@@ -1686,12 +1686,12 @@ resources:
   #
   # See: https://github.com/kenwheeler/slick/
   #
-  - name:                               Slick
+  - name:                               Slick Slider
     resource:
       enabled:                          true
 
-      id:                               slick
-      comment:                          Module Slick
+      id:                               slick-slider
+      comment:                          Module Slick Slider
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
@@ -1720,7 +1720,7 @@ resources:
   #
   # See: https://github.com/desandro/masonry
   #
-  - name:                               Masonry
+  - name:                               J1 Masonry
     resource:
       enabled:                          true
 
@@ -1749,12 +1749,12 @@ resources:
   #
   # See: https://github.com/migliori/universal-icon-picker
   #
-  - name:                               IconPicker
+  - name:                               J1 Icon Picker
     resource:
       enabled:                          true
 
-      id:                               iconpicker
-      comment:                          Module IconPicker
+      id:                               icon-picker
+      comment:                          Module J1 Icon Picker
       region:                           head
       layout:                           [ page ]
       required:                         ondemand
@@ -1782,12 +1782,12 @@ resources:
   # Theme Toggler
   # Configurable JS Toggler to switch between themes
   #
-  - name:                               Theme Toggler
+  - name:                               J1 Theme Toggler
     resource:
       enabled:                          true
 
-      id:                               theme_toggler
-      comment:                          Module Theme Toggler
+      id:                               theme-toggler
+      comment:                          Module heme Toggler
       region:                           head
       layout:                           [ home, page, post ]
       required:                         always
@@ -1806,12 +1806,12 @@ resources:
   # dynamicLoader
   # Configurable JS
   #
-  - name:                               lazyCSSLoader
+  - name:                               J1 CSS Loader
     resource:
       enabled:                          true
 
-      id:                               lazy_loader
-      comment:                          Module lazyCSSLoader
+      id:                               css-loader
+      comment:                          Module CSS Loader
       region:                           head
       layout:                           [ all ]
       required:                         always
@@ -1832,12 +1832,12 @@ resources:
   # NOTE: Modified version for J1
   # NOTE: Adapted|old (1.3.5) version for cash.js from Materialize
   #
-  - name:                               Dropdowns
+  - name:                               J1 Dropdowns
     resource:
       enabled:                          false
 
       id:                               dropdowns
-      comment:                          Module Dropdown Menus
+      comment:                          Module J1 Dropdown Menus
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
@@ -1860,12 +1860,12 @@ resources:
   # https://github.com/brianvoe/slim-select
   # Advanced select dropdown menus
   #
-  - name:                               slimSelect
+  - name:                               J1 Slim Select
     resource:
       enabled:                          true
 
-      id:                               slim_select
-      comment:                          Module slimSelect
+      id:                               slim-select
+      comment:                          Module Slim Select
       region:                           head
       layout:                           [ home, page, post ]
       required:                         always
@@ -1884,15 +1884,15 @@ resources:
   # Chatbot AI
   # Chatbot settings
   #
-  - name:                               Chatbot
+  - name:                               J1 Chatbot
     resource:
       enabled:                          false
 
-      id:                               chatbot
+      id:                               chat-bot
       comment:                          Module Chatbot
       region:                           head
-      layout:                           [ home, page, post ]
-      required:                         always
+      layout:                           [ all ]
+      required:                         ondemand
       preload:                          false
       script_load:
       dependencies:                     false
@@ -1908,15 +1908,15 @@ resources:
   # Docsearch
   #
   #
-  - name:                               DocSearch
+  - name:                               J1 DocSearch
     resource:
       enabled:                          false
 
-      id:                               docsearch
-      comment:                          Module docsearch
+      id:                               doc-search
+      comment:                          Module DocSearch
       region:                           head
-      layout:                           [ home, page, post ]
-      required:                         always
+      layout:                           [ all ]
+      required:                         ondemand
       preload:                          false
       script_load:                      defer
       dependencies:                     false
@@ -1932,12 +1932,12 @@ resources:
   # Gemini API
   # Google Gemini API
   #
-  - name:                               Gemini API
+  - name:                               J1 Gemini
     resource:
       enabled:                          true
 
       id:                               gemini
-      comment:                          Module Gemini API
+      comment:                          Module Gemini
       region:                           head
       layout:                           [ page ]
       required:                         ondemand

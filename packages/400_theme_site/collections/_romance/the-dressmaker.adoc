@@ -31,7 +31,7 @@ fab_menu_id:                            default
 scrollbar:                              false
 regenerate:                             false
 
-resources:                              [ animate ]
+resources:                              []
 resource_options:
   - attic:
       padding_top:                      600

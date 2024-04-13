@@ -29,10 +29,7 @@ comments:                               false
 regenerate:                             false
 permalink:                              /pages/public/tools/previewer/current_theme/
 
-resources:                              [
-                                          animate, rouge,
-                                          bmd
-                                        ]
+resources:                              [ bmd, rouge ]
 resource_options:
   - toccer:
       collapseDepth:                    4

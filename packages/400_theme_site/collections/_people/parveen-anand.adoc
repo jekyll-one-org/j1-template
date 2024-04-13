@@ -34,7 +34,7 @@ sitemap:                                false
 personalization:                        false
 exclude_from_search:                    true
 
-resources:                              [ animate ]
+resources:                              []
 resource_options:
 ---
 

@@ -268,9 +268,9 @@ settings:
       id:                               jg_video_html5
       type:                             video
       video:                            html5
-      video_base_path:                  /assets/videos/gallery/html5
-      image_base_path:                  /assets/videos/gallery
-      thumb_base_path:                  /assets/videos/gallery
+      video_base_path:                  /assets/videos/html5
+      image_base_path:                  /assets/videos/poster/html5
+      thumb_base_path:                  /assets/videos/poster/html5
 
       # ------------------------------------------------------------------------
       # Justified Gallery settings
@@ -342,7 +342,7 @@ settings:
           name:                         Peck Pocketed
           type:                         html5
           size:                         "1280-720"
-          source:                       video1.mp4
+          source:                       peck_pocketed.mp4
           pinterest_prefix:             Pin video
           tweet_prefix:                 Try video
           description: >
@@ -352,7 +352,7 @@ settings:
           caption:
             text:                       "Peck Pocketed &middot; Student Academy Award winning Cartoon Clip"
           poster:
-            source:                     video1-poster.jpg
+            source:                     peck_pocketed.jpg
 
           tracks:
             - track:
@@ -360,14 +360,14 @@ settings:
               kind:                     captions
               srclang:                  en                                      # Code for the language of the text track
               label:                    English                                 # Descriptive text for the track that will used in the user interface (player)
-              src:                      /assets/videos/vtt/captions/video1.vtt
+              src:                      /assets/videos/tracks/html5/peck_pocketed/captions/video.vtt
 
             - track:
               default:                  true                                    # Indicates that the track is to be enabled if the user's preferences do not indicate that another track would be more appropriate
               kind:                     chapters
               srclang:                  en                                      # Code for the language of the text track
               label:                    Chapters                                # Descriptive text for the track that will used in the user interface (player)
-              src:                      /assets/videos/vtt/chapters/video1.vtt
+              src:                      /assets/videos/tracks/html5/peck_pocketed/chapters/video.vtt
 
         - video:                        # video 2
           enabled:                      true
@@ -375,7 +375,7 @@ settings:
           name:                         Rollin Wild
           type:                         html5
           size:                         "1280-720"
-          source:                       video2.mp4
+          source:                       rolling_wild.mp4
           pinterest_prefix:             Pin video
           tweet_prefix:                 Try video
           description: >
@@ -385,175 +385,7 @@ settings:
           caption:
             text:                       "Rollin` Wild &middot; Short Funny animated video clip created at the Film Academy"
           poster:
-            source:                     video2-poster.jpg
-
-    # --------------------------------------------------------------------------
-    # Online VIDEO (YouTube)
-    #
-    # - gallery:
-    #   enabled:                          true
-    #
-    #   id:                               jg_video_online_youtube
-    #   type:                             video
-    #   video:                            youtube
-    #   image_base_path:                  /assets/videos/gallery
-    #   thumb_base_path:                  /assets/videos/gallery
-    #
-    #   # ------------------------------------------------------------------------
-    #   # Justified Gallery settings
-    #   # ------------------------------------------------------------------------
-    #   #
-    #   gallery_options:
-    #     rowHeight:                      200
-    #     gutters:                        3
-    #
-    #   # ------------------------------------------------------------------------
-    #   # Lightbox|lightGallery settings
-    #   # ------------------------------------------------------------------------
-    #   #
-    #   lightbox:
-    #     enabled:                        true
-    #     type:                           lg
-    #
-    #   lightGallery:
-    #     plugins:                        lgThumbnail, lgVideo
-    #
-    #     options:
-    #       licenseKey:                   0000-0000-000-0000
-    #       download:                     false
-    #       alignThumbnails:              left
-    #       animateThumb:                 true
-    #       autoplayFirstVideo:           true
-    #       videojs:                      false
-    #
-    #     videojsOptions:
-    #       enabled:                      false
-    #
-    #     playerParams:
-    #       enabled:                      true
-    #       start:                        ["00:00:50", "00:00:50"]                # start time video1, vido2
-    #       autoplay:                     0
-    #       controls:                     0
-    #       enablejsapi:                  1
-    #       hl:                           en
-    #       loop:                         0
-    #       mute:                         0
-    #       playsinline:                  1
-    #       wmode:                        opaque
-    #
-    #   # ------------------------------------------------------------------------
-    #   # CSS filter options
-    #   #
-    #   filters:
-    #     enabled:                        false
-    #     grayscale:                      0
-    #     contrast:                       1
-    #     brightness:                     1
-    #
-    #   # ------------------------------------------------------------------------
-    #   # Video settings
-    #   # ------------------------------------------------------------------------
-    #   #
-    #   videos:
-    #
-    #     - video:                        # video 1
-    #       enabled:                      true
-    #
-    #       id:                           X5Cfi7U4eL4
-    #       name:                         Carpool Karaoke Lady Gaga
-    #       type:                         youtube
-    #       size:                         "1280-720"
-    #       source:                       "//youtube.com/watch?v=X5Cfi7U4eL4"
-    #       pinterest_prefix:             Pin video
-    #       tweet_prefix:                 Try video
-    #       description: >
-    #                                     <h5>Carpool Karaoke</h5>
-    #                                     <h6>
-    #                                       Lady Gaga joins James for a drive through Los Angeles
-    #                                       singing her classics and tracks from her new album.
-    #                                     </h6>
-    #                                     <br>
-    #       caption:
-    #         text:                       "Carpool Karaoke &middot; Lady Gaga"
-    #       poster:
-    #         source:                     video_gaga-poster.jpg
-    #
-    #       playerParams:
-    #         enabled:                    false
-    #
-    #     - video:                        # video 2
-    #       enabled:                      true
-    #
-    #       name:                         Carpool Karaoke Adele
-    #       type:                         youtube
-    #       size:                         "1280-720"
-    #       source:                       "//youtube.com/watch?v=Nck6BZga7TQ"
-    #       pinterest_prefix:             Pin video
-    #       tweet_prefix:                 Try video
-    #       description: >
-    #                                     <h5>Carpool Karaoke</h5>
-    #                                     <h6>
-    #                                       James Corden is about the holidays in London and gets Adele
-    #                                       off for a ride through the city. On the way they sing some
-    #                                       of their biggest hits and Adele raps Nicki Minaj's <b>monster</b>
-    #                                     </h6>
-    #                                     <br>
-    #       caption:
-    #         text:                       "Carpool Karaoke &middot; Adele"
-    #       poster:
-    #         source:                     video_adele-poster.jpg
-    #
-    #       playerParams:
-    #         enabled:                    true
-    #         start:                      50
-    #
-    #     - video:                        # video 3
-    #       enabled:                      true
-    #
-    #       name:                         Carpool Karaoke Gwen Stefani
-    #       type:                         youtube
-    #       size:                         "1280-720"
-    #       source:                       "//youtube.com/watch?v=F2SXmzk8ve4"
-    #       pinterest_prefix:             Pin video
-    #       tweet_prefix:                 Try video
-    #       description: >
-    #                                     <h5>Carpool Karaoke</h5>
-    #                                     <h6>
-    #                                       Gwen Stefani, Julia Roberts, George Clooney and James Corden
-    #                                       singing Holla back girl, there's nothing left to see
-    #                                     </h6>
-    #                                     <br>
-    #       poster:
-    #         source:                     video_gwen-poster.jpg
-    #       caption:
-    #         text:                       "Carpool Karaoke &middot; Gwen Stefani"
-    #
-    #       playerParams:                 false
-    #
-    #     - video:                        # video 4
-    #       enabled:                      true
-    #
-    #       name:                         Carpool Karaoke Michelle Obama
-    #       type:                         youtube
-    #       size:                         "1280-720"
-    #       source:                       "//youtube.com/watch?v=ln3wAdRAim4"
-    #       pinterest_prefix:             Pin video
-    #       tweet_prefix:                 Try video
-    #       description: >
-    #                                     <h5>Carpool Karaoke</h5>
-    #                                     <h6>
-    #                                       James Corden's White House tour takes an unthinkable turn
-    #                                       when First Lady Michelle Obama joins him for a drive around
-    #                                       the grounds singing Stevie Wonder and Beyonce
-    #                                     </h6>
-    #                                     <br>
-    #       caption:
-    #         text:                       "Carpool Karaoke &middot; Michelle Obama"
-    #       poster:
-    #         source:                     video_michelle-poster.jpg
-    #
-    #       playerParams:
-    #         enabled:                    false
+            source:                     rolling_wild.jpg
 
     # --------------------------------------------------------------------------
     # Online VIDEO (YouTube)
@@ -564,8 +396,8 @@ settings:
       id:                               jg_video_online_youtube_james_and_adele
       type:                             video
       video:                            youtube
-      image_base_path:                  /assets/videos/gallery
-      thumb_base_path:                  /assets/videos/gallery
+      image_base_path:                  /assets/videos/poster/youtube/carpool_caraoke
+      thumb_base_path:                  /assets/videos/poster/youtube/carpool_caraoke
 
       # ------------------------------------------------------------------------
       # Justified Gallery settings
@@ -628,14 +460,14 @@ settings:
         - video:                        # video 1
           enabled:                      true
 
-          name:                         Carpool Karaoke Lady Gaga
+          name:                         Carpool Karaoke James and Adele
           type:                         youtube
           size:                         "1280-720"
           source:                       "//youtube.com/watch?v=Nck6BZga7TQ"
           pinterest_prefix:             Pin video
           tweet_prefix:                 Try video
           description: >
-                                        <h5>Carpool Karaoke</h5>
+                                        <h5>Carpool Karaoke 2015</h5>
                                         <h6>
                                         December 2015 - James is on holidays is about the holidays in
                                         London and gets Adele off for a ride through the city. On the way
@@ -643,9 +475,9 @@ settings:
                                         </h6>
                                         <br>
           caption:
-            text:                       "Carpool Karaoke &middot; James and Adele"
+            text:                       "Carpool Karaoke 2015 &middot; James and Adele"
           poster:
-            source:                     video_adele-poster.jpg
+            source:                     adele.jpg
 
           playerParams:
             start:                      50                                      # seconds to start
@@ -660,185 +492,22 @@ settings:
           pinterest_prefix:             Pin video
           tweet_prefix:                 Try video
           description: >
-                                        <h5>Carpool Karaoke</h5>
+                                        <h5>Carpool Karaoke 2023</h5>
                                         <h6>
                                           April 2023 - Adele wakeup James at home for the last Late Night Show,
                                           for the last Carpool Caraoke ever.
                                         </h6>
                                         <br>
           caption:
-            text:                       "Carpool Karaoke &middot; Last Carpool Karaoke"
+            text:                       "Carpool Karaoke 2023 &middot; Last Carpool Karaoke"
           poster:
-            source:                     video_adele_last_carpool_caraoke_poster.jpg
+            source:                     adele_last.jpg
 
           playerParams:
             start:                      50                                      # seconds to start
 
     # --------------------------------------------------------------------------
-    # Online VIDEO 2 (YouTube)
-    #
-    - gallery:
-      enabled:                          true
-
-      id:                               jg_video_online_youtube_voice_kids
-      type:                             video
-      video:                            youtube
-      image_base_path:                  /assets/videos/gallery/voice_kids_de_2021
-      thumb_base_path:                  /assets/videos/gallery/voice_kids_de_2021
-
-      # ------------------------------------------------------------------------
-      # Justified Gallery settings
-      # ------------------------------------------------------------------------
-      #
-      gallery_options:
-        rowHeight:                      200
-        gutters:                        3
-
-      # ------------------------------------------------------------------------
-      # Lightbox|lightGallery settings
-      # ------------------------------------------------------------------------
-      #
-      lightbox:
-        enabled:                        true
-        type:                           lg
-
-      lightGallery:
-        plugins:                        lgThumbnail, lgVideo
-
-        options:
-          licenseKey:                   0000-0000-000-0000
-          download:                     false
-          alignThumbnails:              left
-          animateThumb:                 true
-          autoplayFirstVideo:           true
-          videojs:                      false
-
-        videojsOptions:
-          enabled:                      false
-
-#       See: https://stackoverflow.com/questions/40685142/youtube-autoplay-does-not-work-with-iframe
-        playerParams:
-          enabled:                      true
-          autoplay:                     1                                       # autoplay = 1 only available for YouTube when muted.
-#         controls:                     1                                       # default = 0
-#         enablejsapi:                  1                                       # default = 1
-#         hl:                           en                                      # default = en
-#         loop:                         0                                       # default = 0
-          mute:                         0                                       # default = 1
-#         playsinline:                  1                                       # for mobile|iOS only
-#         wmode:                        opaque                                  # default = opaque
-
-      # ------------------------------------------------------------------------
-      # CSS filter options
-      #
-      filters:
-        enabled:                        false
-        grayscale:                      0
-        contrast:                       1
-        brightness:                     1
-
-      # ------------------------------------------------------------------------
-      # Video settings
-      # ------------------------------------------------------------------------
-      #
-      videos:
-
-        - video:                        # video 1
-          enabled:                      true
-
-          name:                         Voice Kids Constance
-          type:                         youtube
-          size:                         "1280-720"
-          source:                       "//youtube.com/watch?v=aQqPgLMgO-I"
-          pinterest_prefix:             Pin video
-          tweet_prefix:                 Try video
-          description: >
-                                        <h5>
-                                          The Voice Kids Germany 2021 &middot; Constance
-                                        </h5>
-                                        <h6>
-                                          The 14-year-old Constance has dreamed of being on The Voice Kids stage
-                                          for a very long time. Your dream has finally come true! She performs a
-                                          breathtaking version of Sia's song Alive.
-                                        </h6>
-                                        <br>
-          caption:
-            text:                       "Voice Kids Germany 2021 &middot; Constance"
-          poster:
-            source:                     constance.jpg
-
-        - video:                        # video 2
-          enabled:                      true
-
-          name:                         Voice Kids Elisa
-          type:                         youtube
-          size:                         "1280-720"
-          source:                       "//youtube.com/watch?v=Bl6tkAgaP1g"
-          pinterest_prefix:             Pin video
-          tweet_prefix:                 Try video
-          description: >
-                                        <h5>
-                                          The Voice Kids Germany 2021 &middot; Elisa
-                                        </h5>
-                                        <h6>
-                                          The 14-year-old Elisa is fascinated by the classics of pop music.
-                                          Her version of Hey Jude from The Beatles comes with a lot of feeling.
-                                        </h6>
-                                        <br>
-          caption:
-            text:                       "Voice Kids Germany 2021 &middot; Elisa"
-          poster:
-            source:                     elisa.jpg
-
-        - video:                        # video 3
-          enabled:                      true
-
-          name:                         Voice Kids Ben
-          type:                         youtube
-          size:                         "1280-720"
-          source:                       "//youtube.com/watch?v=GuiOYCv9NTI"
-          pinterest_prefix:             Pin video
-          tweet_prefix:                 Try video
-          description: >
-                                        <h5>
-                                          The Voice Kids Germany 2021 &middot; Ben
-                                        </h5>
-                                        <h6>
-                                          The 14-year-old Ben pours all of his emotions into his performance
-                                          of Maroon 5's Sunday Morning. He wants to show what he's made of.
-                                        </h6>
-                                        <br>
-          caption:
-            text:                       "Voice Kids Germany 2021 &middot; Ben"
-          poster:
-            source:                     ben.jpg
-
-        - video:                        # video 3
-          enabled:                      true
-
-          name:                         Voice Kids The Battle
-          type:                         youtube
-          size:                         "1280-720"
-          source:                       "//youtube.com/watch?v=1bvE2mgJ22I"
-          pinterest_prefix:             Pin video
-          tweet_prefix:                 Try video
-          description: >
-                                        <h5>
-                                          The Voice Kids Germany 2021 &middot; The Battle
-                                        </h5>
-                                        <h6>
-                                          The battle of the three young people is a real emotional battle.
-                                          Elisa's husky voice, Constanze's unbelievable power, and Ben's
-                                          rhythm come into their own in Adele's James Bond theme song Skyfall.
-                                        </h6>
-                                        <br>
-          caption:
-            text:                       "Voice Kids Germany 2021 &middot; The Battle"
-          poster:
-            source:                     battle.jpg
-
-    # --------------------------------------------------------------------------
-    # Online VIDEO 3 (Vimeo)
+    # Online VIDEO (Vimeo)
     #
     - gallery:
       enabled:                          true
@@ -846,8 +515,8 @@ settings:
       id:                               jg_video_online_vimeo
       type:                             video
       video:                            vimeo
-      image_base_path:                  /assets/videos/gallery
-      thumb_base_path:                  /assets/videos/gallery
+      image_base_path:                  /assets/videos/poster/vimeo
+      thumb_base_path:                  /assets/videos/poster/vimeo
 
       # ------------------------------------------------------------------------
       # Justified Gallery settings
@@ -912,17 +581,13 @@ settings:
           pinterest_prefix:             Pin video
           tweet_prefix:                 Try video
           description: >
-                                        <h5>
-                                          Forever 21
-                                        </h5>
-                                        <h6>
-                                          Kick It Old School
-                                        </h6>
+                                        <h5>Forever 21</h5>
+                                        <h6>Kick It Old School</h6>
                                         <br>
           caption:
             text:                       "Forever 21 &middot; Kick It Old School"
           poster:
-            source:                     kick-it-old-school-poster.jpg
+            source:                     kick_it_old_school.jpg
 
           playerParams:
             start:                      50                                      # seconds to start
@@ -943,7 +608,8 @@ settings:
           caption:
             text:                       "Forever 21 &middot; Stay Colorful, Babe!"
           poster:
-            source:                     stay-colorful-poster.jpg
+            source:                     stay_colorful.jpg
+
 
     # --------------------------------------------------------------------------
     # Online VIDEO (Dailymotion)
@@ -954,8 +620,8 @@ settings:
       id:                               jg_video_online_dailymotion
       type:                             video
       video:                            dailymotion
-      image_base_path:                  /assets/videos/gallery/dailymotion
-      thumb_base_path:                  /assets/videos/gallery/dailymotion
+      image_base_path:                  /assets/videos/poster/dailymotion
+      thumb_base_path:                  /assets/videos/poster/dailymotion
 
       # ------------------------------------------------------------------------
       # Justified Gallery settings
@@ -1040,223 +706,6 @@ settings:
             text:                       "SELF Channel &middot; Pilates Core Workout"
           poster:
             source:                     pilates.jpg
-
-    # --------------------------------------------------------------------------
-    # Online VIDEO (Wistia)
-    #
-    - gallery:
-      enabled:                          true
-
-      id:                               jg_video_online_wistia
-      type:                             video
-      video:                            wistia
-      image_base_path:                  /assets/videos/gallery/wistia
-      thumb_base_path:                  /assets/videos/gallery/wistia
-
-      # ------------------------------------------------------------------------
-      # Justified Gallery settings
-      # ------------------------------------------------------------------------
-      #
-      gallery_options:
-        rowHeight:                      250
-        gutters:                        3
-
-      # ------------------------------------------------------------------------
-      # Lightbox|lightGallery settings
-      # ------------------------------------------------------------------------
-      #
-      lightbox:
-        enabled:                        true
-        type:                           lg
-
-      lightGallery:
-        plugins:                        lgThumbnail, lgVideo
-
-        options:
-          licenseKey:                   0000-0000-000-0000
-          download:                     false
-          alignThumbnails:              left
-          animateThumb:                 true
-          autoplayFirstVideo:           true
-          videojs:                      false
-
-        videojsOptions:
-          enabled:                      false
-
-        playerParams:
-          enabled:                      false
-
-      # ------------------------------------------------------------------------
-      # CSS filter options
-      #
-      filters:
-        enabled:                        false
-        grayscale:                      0
-        contrast:                       1
-        brightness:                     1
-
-      # ------------------------------------------------------------------------
-      # Video settings
-      # ------------------------------------------------------------------------
-      #
-      videos:
-
-        - video:                        # video 1
-          enabled:                      true
-
-          name:                         Intro
-          type:                         wistia
-          size:                         "1280-720"
-          source:                       "//fast.wistia.com/embed/iframe/29b0fbf547"
-          pinterest_prefix:             Pin video
-          tweet_prefix:                 Try video
-          description: >
-                                        <h5>Introduction</h5>
-                                        <h6>What can be done on Wistia</h6>
-                                        <br>
-          caption:
-            text:                       "Introduction &middot; What can be done on Wistia"
-          poster:
-            source:                      video-1-poster.webp
-
-        - video:                        # video 2
-          enabled:                      true
-
-          name:                         Thank You
-          type:                         wistia
-          size:                         "1280-720"
-          source:                       "//fast.wistia.com/embed/iframe/mwhrulrucj"
-          pinterest_prefix:             Pin video
-          tweet_prefix:                 Try video
-          description: >
-                                        <h5>Thank You</h5>
-                                        <h6>Sample Video on Wistia</h6>
-                                        <br>
-          caption:
-            text:                       "Thank You &middot; Sample Video on Wistia"
-          poster:
-            source:                      video-2.poster.jpg
-
-    # --------------------------------------------------------------------------
-    # Online VIDEO (TikTok)
-    #
-    - gallery:
-      enabled:                          true
-
-      id:                               jg_video_online_tiktoc
-      type:                             video
-      video:                            tiktoc
-      image_base_path:                  /assets/videos/gallery
-      thumb_base_path:                  /assets/videos/gallery
-
-      # ------------------------------------------------------------------------
-      # Justified Gallery settings
-      # ------------------------------------------------------------------------
-      #
-      gallery_options:
-        rowHeight:                      480
-        gutters:                        3
-
-      # ------------------------------------------------------------------------
-      # Lightbox|lightGallery settings
-      # ------------------------------------------------------------------------
-      #
-      lightbox:
-        enabled:                        true
-        type:                           lg
-
-      lightGallery:
-        plugins:                        lgThumbnail, lgVideo
-
-        options:
-          licenseKey:                   0000-0000-000-0000
-          download:                     false
-          alignThumbnails:              left
-#         addClass:                     lg-uno-thumbnails                       # customized thumbnails
-#         appendThumbnailsTo:           .lg-outer                               # required for customized thumbnails
-#         animateThumb:                 false                                   # required for customized thumbnails
-#         allowMediaOverlap:            true                                    # required for customized thumbnails
-
-          animateThumb:                 true
-          autoplayFirstVideo:           true
-          videojs:                      false
-
-        videojsOptions:
-          enabled:                      false
-
-        playerParams:
-          enabled:                      false
-          autoplay:                     0
-          muted:                        0
-
-      # ------------------------------------------------------------------------
-      # CSS filter options
-      #
-      filters:
-        enabled:                        false
-        grayscale:                      0
-        contrast:                       1
-        brightness:                     1
-
-      # ------------------------------------------------------------------------
-      # Video settings
-      # ------------------------------------------------------------------------
-      #
-      videos:
-
-        - video:                        # video 1
-          enabled:                      true
-
-          name:                         Gesund
-          type:                         tiktoc
-          size:                         "300-575"
-          source:                       "//tiktok.com/embed/6901614235709869314"
-          pinterest_prefix:             Pin video
-          tweet_prefix:                 Try video
-          description: >
-                                        <h5>Gianna Bacio</h5>
-                                        <h6>Warum 2x wöchentlich Sex gesund ist</h6>
-                                        <br>
-          caption:
-            text:                       "Gianna Bacio &middot; Warum 2x wöchentlich Sex gesund ist"
-          poster:
-            source:                     gianna_1.jpg
-
-        - video:                        # video 2
-          enabled:                      true
-
-          name:                         Vergesslichkeit
-          type:                         tiktoc
-          size:                         "300-575"
-          source:                       "//tiktok.com/embed/6938375143181913349"
-          pinterest_prefix:             Pin video
-          tweet_prefix:                 Try video
-          description: >
-                                        <h5>Gianna Bacio</h5>
-                                        <h6>Sex hilft gegen Vergesslichkeit?!</h6>
-                                        <br>
-          caption:
-            text:                       "Gianna Bacio &middot; Sex hilft gegen Vergesslichkeit?!"
-          poster:
-            source:                     gianna_2.jpg
-
-        - video:                        # video 3
-          enabled:                      true
-
-          name:                         Denken
-          type:                         tiktoc
-          size:                         "300-575"
-          source:                       "//tiktok.com/embed/6919457437510569218"
-          pinterest_prefix:             Pin video
-          tweet_prefix:                 Try video
-          description: >
-                                        <h5>Gianna Bacio</h5>
-                                        <h6>Daran denken die Meisten beim Sex!</h6>
-                                        <br>
-          caption:
-            text:                       "Gianna Bacio &middot; Daran denken die Meisten beim Sex!"
-          poster:
-            source:                     gianna_3.jpg
 
 # ------------------------------------------------------------------------------
 # END config

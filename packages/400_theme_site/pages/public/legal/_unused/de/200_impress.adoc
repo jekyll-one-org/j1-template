@@ -31,7 +31,7 @@ toc:                                    false
 regenerate:                             false
 permalink:                              /pages/public/legal/de/impress/
 
-resources:                              [ animate, rouge ]
+resources:                              [ rouge ]
 resource_options:
   - attic:
       padding_top:                      630

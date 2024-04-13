@@ -28,7 +28,7 @@ image:
 regenerate:                             false
 permalink:                              /pages/public/learn/roundtrip/modals/
 
-resources:                              [ animate, rouge ]
+resources:                              [ rouge ]
 resource_options:
   - attic:
       slides:

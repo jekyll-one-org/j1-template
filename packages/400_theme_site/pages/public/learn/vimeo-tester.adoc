@@ -28,10 +28,7 @@ regenerate:                             false
 personalization:                        true
 permalink:                              /pages/public/vimeo_tester/
 
-resources:                              [
-                                          animate,
-                                          videojs, vimeoplayer
-                                        ]
+resources:                              [ videojs ]
 resource_options:
   - attic:
       slides:
@@ -67,7 +64,7 @@ audio tag `<audio>` for the new HTML5 audio audio standard.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-[role="mt-4"]
+[role="mt-5"]
 == Wistia
 
 Wistia is a marketing software and video hosting platform for business-to-business
@@ -75,11 +72,12 @@ marketers. Free or paid plans are available. While Wistia may not be the
 *Big Man on Campus*, like Vimeo, still brings valuable functionality and
 should be considered a viable video platform.
 
-.Wistia Video
-wistia::29b0fbf547[role="mt-4 mb-4"]
+.Platform Intro
+wistia::29b0fbf547[poster="/assets/videos/gallery/wistia-poster.jpg" role="mt-4 mb-4"]
+// wistia::29b0fbf547[role="mt-4 mb-4"]
 
 
-[role="mt-4"]
+[role="mt-5"]
 == Vimeo
 
 Vimeo is an sharing platform that allows users to upload, share, and view
@@ -88,6 +86,7 @@ since grown into a popular platform for individuals and businesses to
 showcase their videos.
 
 .Forever 21 Channel
+// vimeo::179528528[poster="/assets/videos/poster/vimeo/forever_21.jpg" role="mt-4 mb-5"]
 vimeo::179528528[role="mt-4 mb-5"]
 
 [role="mb-7"]

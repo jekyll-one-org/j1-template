@@ -27,7 +27,7 @@ image:
 regenerate:                             false
 permalink:                              /pages/public/learn/roundtrip/mdi_icon_font/
 
-resources:                              [ animate, iconify ]
+resources:                              [ iconify ]
 resource_options:
   - attic:
       slides:

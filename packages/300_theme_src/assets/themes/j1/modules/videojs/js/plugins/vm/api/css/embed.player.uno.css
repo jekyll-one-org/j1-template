@@ -1,0 +1,21 @@
+video::-webkit-media-controls-panel {
+   display: none !important;
+   opacity: 0 !important;
+}
+
+.player.hide-controls-mode video::-webkit-media-controls-play-button {
+	display: none !important;
+}
+
+
+.player .vp-video-wrapper .vp-telecine.hide-webkit-controls video::-webkit-media-controls-play-button {
+	display: none !important;
+}
+
+.player .vp-video-wrapper .vp-telecine.hide-webkit-controls video::-webkit-media-controls-play-button {
+	display: none !important;
+}
+
+.player .vp-video-wrapper .vp-telecine.hide-webkit-controls video::-webkit-media-controls-start-playback-button {
+	display: none !important;
+}

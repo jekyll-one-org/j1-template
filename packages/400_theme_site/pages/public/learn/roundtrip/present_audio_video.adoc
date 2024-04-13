@@ -30,9 +30,8 @@ regenerate:                             false
 permalink:                              /pages/public/learn/roundtrip/present_audio_video/
 
 resources:                              [
-                                          animate,
-                                          gallery, lightgallery, masonry, rouge,
-                                          videojs, vimeoplayer
+                                          gallery, lightgallery, masonry,
+                                          rouge, videojs, vimeo-player
                                         ]
 resource_options:
   - toccer:
@@ -135,8 +134,9 @@ offers an out-of-the-box framework for decoding and displaying video content
 without loading *external players*.
 
 .MP4 Video, Peck Pocketed
-// video::/assets/videos/gallery/html5/video1.mp4[start="00:00:03" poster="/assets/videos/gallery/video1-poster.jpg" role="mt-4 mb-5"]
-video::/assets/videos/gallery/html5/video1.mp4[poster="/assets/videos/gallery/video1-poster.jpg" role="mt-4 mb-5"]
+// video::/assets/videos//html5/peck_pocketed[start="00:00:03" poster="/assets/videos/poster/html5/peck_pocketed.jpg" role="mt-4 mb-5"]
+video::/assets/videos//html5/peck_pocketed.mp4[poster="/assets/videos/poster/html5/peck_pocketed.jpg" role="mt-4 mb-5"]
+
 
 [role="mt-4"]
 === VideoJS
@@ -158,7 +158,7 @@ VideoJS provides a flexible and customizable platform for displaying and
 controlling MPEG 4 video content on websites and web applications.
 
 .MP4 Video, Rolling Wild
-videojs::/assets/videos/gallery/html5/video2.mp4[poster="/assets/videos/gallery/video2-poster.jpg" role="mt-4 mb-5"]
+videojs::/assets/videos//html5/rolling_wild.mp4[poster="/assets/videos/poster/html5/rolling_wild.jpg" role="mt-4 mb-5"]
 
 
 [role="mt-5"]
@@ -169,10 +169,7 @@ upload, view, share, and comment on videos. The platform provides services
 for people and organizations to publish various video content.
 
 .The Voice Kids NL 2021 - Emma Kok
-youtube::20gXikNRjbo[poster="/assets/videos/gallery/voice_kids_nl_2021/video_poster.jpg" role="mt-4 mb-5"]
-
-// .Carpool Karaoke Adele
-// youtube::Nck6BZga7TQ[poster="/assets/videos/gallery/video_adele-poster.jpg" role="mt-4 mb-5"]
+youtube::20gXikNRjbo[poster="/assets/videos/poster/youtube/voice_kids/banner/best_of.jpg" role="mt-4 mb-5"]
 
 [role="mt-4"]
 ==== Dailymotion
@@ -194,9 +191,10 @@ marketers. Free or paid plans are available. While Wistia may not be the
 *Big Man on Campus*, like Vimeo, still brings valuable functionality and
 should be considered a viable video platform.
 
-.Wistia Video
+.Platform Intro
 wistia::29b0fbf547[role="mt-4 mb-4"]
-// wistia::mwhrulrucj[role="mt-4 mb-4"]
+// wistia::29b0fbf547[poster="/assets/videos//wistia-poster.jpg" role="mt-4 mb-4"]
+// wistia::mwhrulrucj[poster="/assets/videos//wistia-poster.jpg" role="mt-4 mb-4"]
 
 [role="mt-4"]
 ==== Vimeo
@@ -207,8 +205,8 @@ since grown into a popular platform for individuals and businesses to
 showcase their videos. Vimeo is known for its emphasis on high-quality videos
 and creative expression.
 
-.Forever 21 Channel
-vimeo::179528528[role="mt-4 mb-5"]
+.Forever 21 - Kick It Old School
+vimeo::179528528[poster="/assets/videos/poster/vimeo/kick_it_old_school.jpg" role="mt-4 mb-5"]
 
 [role="mb-7"]
 .Video controls
@@ -217,6 +215,7 @@ vimeo::179528528[role="mt-4 mb-5"]
 For the *VJS Vimeo Tech*, native vjs controls (controllbar) are currently
 *NOT* supported. Instead, the controllbar of the Vimeo Player is shown.
 ====
+
 
 [role="mt-5"]
 == Galleries of Video
@@ -315,7 +314,7 @@ Business. Each membership has varied storage limits, but the free plan
 offers sufficient space for private projects to present video content
 without advertising.
 
-.Fashion
+.Forever 21
 gallery::jg_video_online_vimeo[role="mb-5"]
 
 [role="mt-4"]

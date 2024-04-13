@@ -638,8 +638,8 @@ settings:
       # ------------------------------------------------------------------------
       #
       html5:
-        video_base_path:                /assets/videos/gallery/html5
-        poster_base_path:               /assets/videos/gallery
+        video_base_path:                /assets/videos/html5
+        poster_base_path:               /assets/videos/poster/html5
 
       # ------------------------------------------------------------------------
       # videos
@@ -679,13 +679,11 @@ settings:
           tweet_prefix:                 Try video
           description: >
                                         <h5>Amazing Nature</h5>
-                                        <h6>
-                                          Video by <a target='_blank' href='//vimeo.com/charliekaye'>Charlie Kaye.</a> on Vimeo
-                                        </h6>
+                                        <h6>Video by <a target='_blank' href='//vimeo.com/charliekaye'>Charlie Kaye.</a> on Vimeo</h6>
                                         <br>
           poster:
             style:                      img-responsive
-            source:                     "//www.lightgalleryjs.com/images/demo/vimeo-video-poster.jpg"
+            source:                     "//lightgalleryjs.com/images/demo/vimeo-video-poster.jpg"
           caption:
             position:                   bottom
             text:                       "Vimeo Video &middot; Amazing Nature"
@@ -714,18 +712,16 @@ settings:
           name:                         Peck Pocketed
           type:                         html5
           size:                         "1280-720"
-          source:                       video1.mp4
+          source:                       peck_pocketed.mp4
           pinterest_prefix:             Pin video
           tweet_prefix:                 Try video
           description: >
                                         <h5>Peck Pocketed by Kevin Herron</h5>
-                                        <h6>
-                                          Student Academy Award winning cartoon clip on VideoJS
-                                        </h6>
+                                        <h6>Student Academy Award winning cartoon clip on VideoJS</h6>
                                         <br>
           poster:
             style:                      img-responsive
-            source:                     video1-poster.jpg
+            source:                     peck_pocketed.jpg
           caption:
             position:                   bottom
             text:                       "MP4 Video &middot; Peck Pocketed"

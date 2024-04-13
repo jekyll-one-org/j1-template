@@ -23,7 +23,7 @@ fab_menu_id:                            open_toc
 comments:                               false
 regenerate:                             false
 
-resources:                              [ animate, lightbox ]
+resources:                              [ lightbox ]
 resource_options:
   - attic:
       padding_top:                      630

@@ -27,10 +27,7 @@ comments:                               false
 regenerate:                             false
 permalink:                              /pages/public/learn/where_to_go/
 
-resources:                              [
-                                          animate, comments,
-                                          rouge
-                                        ]
+resources:                              [ rouge ]
 resource_options:
   - attic:
       slides:

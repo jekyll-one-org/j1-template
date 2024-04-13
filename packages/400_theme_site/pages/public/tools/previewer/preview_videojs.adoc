@@ -35,9 +35,8 @@ regenerate:                             false
 permalink:                              /pages/public/tools/previewer/videojs/
 
 resources:                              [
-                                          advertising, animate,
                                           lightgallery, gallery, rouge,
-                                          videojs, vimeoplayer
+                                          videojs, vimeo-player
                                         ]
 resource_options:
   - attic:
