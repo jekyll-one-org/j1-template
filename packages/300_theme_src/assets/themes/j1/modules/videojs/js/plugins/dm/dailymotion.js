@@ -89,7 +89,7 @@
       ];
       var options = this.options_;
 
-      params.forEach(function(param) {
+      params.forEach((param) => {
         if (typeof options[param] === 'undefined') {
           return;
         }
@@ -108,7 +108,7 @@
       // Allow undocumented options to be passed along via customVars
       if (typeof this.options_.customVars !== 'undefined') {
         var customVars = this.options_.customVars;
-        Object.keys(customVars).forEach(function(key) {
+        Object.keys(customVars).forEach((key) => {
           playerParams[key] = customVars[key];
         });
       }
@@ -143,39 +143,39 @@
       );
       var vm = this;
       this.isApiReady = false;
-      this.dmPlayer.addEventListener('apiready', function() {
+      this.dmPlayer.addEventListener('apiready', () => {
         vm.triggerReady();
         vm.isApiReady = true;
       });
-      this.dmPlayer.addEventListener('durationchange', function() {
+      this.dmPlayer.addEventListener('durationchange', () => {
         vm.trigger('durationchange');
       });
-      this.dmPlayer.addEventListener('end', function() {
+      this.dmPlayer.addEventListener('end', () => {
         vm.trigger('ended');
       });
-      this.dmPlayer.addEventListener('error', function() {
+      this.dmPlayer.addEventListener('error', () => {
         vm.trigger('error');
       });
-      this.dmPlayer.addEventListener('loadedmetadata', function() {
+      this.dmPlayer.addEventListener('loadedmetadata', () => {
         vm.trigger('loadeddata');
         vm.trigger('loadedmetadata');
       });
-      this.dmPlayer.addEventListener('pause', function() {
+      this.dmPlayer.addEventListener('pause', ()  =>{
         vm.trigger('pause');
       });
-      this.dmPlayer.addEventListener('play', function() {
+      this.dmPlayer.addEventListener('play', () => {
         vm.trigger('loadStart');
         vm.trigger('play');
         vm.trigger('playing');
         vm.trigger('waiting');
       });
-      this.dmPlayer.addEventListener('playback_ready', function() {
+      this.dmPlayer.addEventListener('playback_ready', () => {
         vm.trigger('loadeddata');
       });
-      this.dmPlayer.addEventListener('timeupdate', function() {
+      this.dmPlayer.addEventListener('timeupdate', () => {
         vm.trigger('timeupdate');
       });
-      this.dmPlayer.addEventListener('volumechange', function() {
+      this.dmPlayer.addEventListener('volumechange', () => {
         vm.trigger('volumechange');
       });
 
@@ -476,19 +476,19 @@
 
   } // END class Dailymotion
 
-  Dailymotion.isSupported = function() {
+  Dailymotion.isSupported = () => {
     return true;
   };
 
-  Dailymotion.canPlaySource = function(e) {
-    return Dailymotion.canPlayType(e.type);
+  Dailymotion.canPlaySource = (event) => {
+    return Dailymotion.canPlayType(event.type);
   };
 
-  Dailymotion.canPlayType = function(e) {
-    return (e === 'video/dailymotion');
+  Dailymotion.canPlayType = (event) => {
+    return (event === 'video/dailymotion');
   };
 
-  Dailymotion.parseUrl = function(url) {
+  Dailymotion.parseUrl = (url) => {
     var result = {};
 
     var regex = /video\/[^?|^\/]*/;
@@ -535,14 +535,14 @@
     }
 
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    tag.onload = function () {
+    tag.onload = () => {
       if (!loaded) {
         loaded = true;
         callback();
       }
     };
 
-    tag.onreadystatechange = function () {
+    tag.onreadystatechange = () => {
       if (!loaded && (this.readyState === 'complete' || this.readyState === 'loaded')) {
         loaded = true;
         callback();

@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------
-# ~/_plugins/asciidoctor-extensions/vimeo-block.rb
+# ~/_plugins/asciidoctor-extensions/wistia-block.rb
 # Asciidoctor extension for Vimeo Video
 #
 # Product/Info:
@@ -19,12 +19,12 @@ include Asciidoctor
 #
 # Usage:
 #
-#   vimeo::video_id[poster="image" theme="vjs_theme" role="CSS classes"]
+#   wistia::video_id[theme="vjs_theme_name" role="CSS classes"]
 #
 # Example:
 #
 #   .Video title
-#   vimeo::179528528[theme="city" role="mt-5 mb-5"]
+#   wistia::179528528[theme="city" role="mt-5 mb-5"]
 #
 # ------------------------------------------------------------------------------
 # See:
@@ -33,31 +33,27 @@ include Asciidoctor
 
 Asciidoctor::Extensions.register do
 
-  class VimeoBlockMacro < Extensions::BlockMacroProcessor
+  class WistiaBlockMacro < Extensions::BlockMacroProcessor
     use_dsl
 
-    named :vimeo
+    named :wistia
     name_positional_attributes 'poster', 'theme', 'role'
-    default_attrs 'poster' => '/assets/videos/poster/vimeo/banner/vimeo-blue.jpg',
+    default_attrs 'poster' => '/assets/videos/poster/wistia/wistia-blue.jpg',
                   'theme' => 'uno',
                   'role' => 'mt-3 mb-3'
 
     def process parent, target, attributes
 
       chars         = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
-      video_id      = (0...11).map {chars[rand(chars.length)]}.join
+      video_id      = (0...11).map { chars[rand(chars.length)] }.join
 
       title_html    = (attributes.has_key? 'title') ? %(<div class="video-title">#{attributes['title']}</div>\n) : nil
       poster_image  = (poster = attributes['poster']) ? %(#{poster}) : nil
+      poster_attr   = %(poster="#{poster_image}")
       theme_name    = (theme = attributes['theme']) ? %(#{theme}) : nil
 
-      poster_attr   = %(poster="#{poster_image}")
-      if attributes['poster'] == 'auto'
-        poster_attr = ''
-      end
-
       html = %(
-        <div class="vimeo-player #{attributes['role']}">
+        <div class="wistia-player #{attributes['role']}">
           #{title_html}
           <video
             id="#{video_id}"
@@ -68,12 +64,16 @@ Asciidoctor::Extensions.register do
             data-setup='{
               "fluid" : true,
               "techOrder": [
-                "vimeo", "html5"
+                "wistia", "html5"
               ],
               "sources": [{
-                "type": "video/vimeo",
-                "src": "//vimeo.com/#{target}"
+                "type": "video/wistia",
+                "src": "#{target}"
               }],
+              "wistia": {
+                "playback_css_class": "wistia_embed wistia_async_29b0fbf547",
+                "autoplay": false
+              },
               "controlBar": {
                 "pictureInPictureToggle": false
               }
@@ -86,5 +86,5 @@ Asciidoctor::Extensions.register do
     end
   end
 
-  block_macro VimeoBlockMacro
+  block_macro WistiaBlockMacro
 end

@@ -63,7 +63,7 @@
             }
           }
         }.bind(this));
-      }
+      } // END constructor
 
       dispose() {
         if (this.wistiaPlayer) {
@@ -85,7 +85,7 @@
           .replace(' vjs-wistia', '')
           .replace(' vjs-wistia-mobile', '');
         this.el_.parentNode.removeChild(this.el_);
-      }
+      } // END dispose
 
       createEl() {
         var div = document.createElement('div');
@@ -97,7 +97,7 @@
         divWrapper.appendChild(div);
 
         return divWrapper;
-      }
+      } // END createEl
 
       initWistiaPlayer() {
         var playerConfig = {
@@ -140,7 +140,7 @@
           }
         });
 
-        logger.debug('\n' + 'created ' + this.name_ + ' player on ID: ' + this.videoId);
+        logger.debug('\n' + 'created ' + this.name_ + ' player on ID: ' + this.el_.firstChild.id);
       } // END initWistiaPlayer
 
       onPlayerReady() {
@@ -189,20 +189,15 @@
 
       onPlaybackEnded() {
         this.trigger('ended');
-      }
+      } // END onPlaybackEnded
 
       src(src) {
-        if (src) {
-          this.setSrc({ src: src });
-        }
-
+        this.setSrc({ src: src });
         return this.source;
-      }
+      } // END src
 
       setSrc(source) {
-        if (!source || !source.src) {
-          return;
-        }
+        if (!source || !source.src) { return; }
 
         delete this.errorName;
         this.source = source;
@@ -214,28 +209,26 @@
             this.playOnReady = true;
           }
         }
-      }
+      } // END setSrc
 
       autoplay() {
         return this.options_.autoplay;
-      }
+      } // END autoplay
 
       setAutoplay(val) {
         this.options_.autoplay = val;
-      }
+      } // END setAutoplay
 
       loop() {
         return this.options_.loop;
-      }
+      } // END loop
 
       setLoop(val) {
         this.options_.loop = val;
-      }
+      } // END setLoop
 
       play() {
-        if (!this.videoId) {
-          return;
-        }
+        if (!this.videoId) { return; }
 
         if (this.isReady_) {
           this.wistiaPlayer.play();
@@ -244,85 +237,65 @@
           this.trigger('waiting');
           this.playOnReady = true;
         }
-      }
+      } // END play
 
       pause() {
-        if (this.wistiaPlayer) {
-          this.wistiaPlayer.pause();
-          this.trigger('pause');
-        }
-      }
+        this.wistiaPlayer.pause();
+        this.trigger('pause');
+      } // END pause
 
       paused() {
-        if (this.wistiaPlayer) {
-          return this.wistiaPlayer.state() === 'paused' || this.wistiaPlayer.state() === 'ended';
-        }
-      }
+        return this.wistiaPlayer.state() === 'paused' || this.wistiaPlayer.state() === 'ended';
+      } // END paused
 
       currentTime() {
-        if (this.wistiaPlayer) {
-          return this.wistiaPlayer.time();
-        }
-      }
+        return this.wistiaPlayer.time();
+      } // END currentTime
 
       setCurrentTime(seconds) {
-        if (this.wistiaPlayer) {
-          this.wistiaPlayer.time(seconds);
-        }
-      }
+        this.wistiaPlayer.time(seconds);
+      } // END setCurrentTime
 
       duration() {
-        if (this.wistiaPlayer) {
-          return this.wistiaPlayer.duration();
-        }
-      }
+        return this.wistiaPlayer.duration();
+      } // END duration
 
       currentSrc() {
         return this.source && this.source.src;
-      }
+      } // END currentSrc
 
       ended() {
-        if (this.wistiaPlayer) {
-          return this.wistiaPlayer.state() === 'ended';
-        }
-      }
+        return this.wistiaPlayer.state() === 'ended';
+      } // END ended
 
       volume() {
-        if (this.wistiaPlayer) {
-          return this.wistiaPlayer.volume();
-        }
-      }
+        return this.wistiaPlayer.volume();
+      } // END volume
 
       setVolume(percentAsDecimal) {
-        if (this.wistiaPlayer) {
-          this.wistiaPlayer.volume(percentAsDecimal);
-          this.trigger('volumechange');
-        }
-      }
+        this.wistiaPlayer.volume(percentAsDecimal);
+        this.trigger('volumechange');
+      } // END setVolume
 
       muted() {
-        if (this.wistiaPlayer) {
-          return this.wistiaPlayer.isMuted();
-        }
-      }
+        return this.wistiaPlayer.isMuted();
+      } // END muted
 
       setMuted(mute) {
-        if (this.wistiaPlayer) {
-          if (mute === true) {
-            this.wistiaPlayer.mute();
-          }
-          else {
-            this.wistiaPlayer.unmute();
-          }
-          this.trigger('volumechange');
+        if (mute === true) {
+          this.wistiaPlayer.mute();
+        } else {
+          this.wistiaPlayer.unmute();
         }
-      }
+
+        this.trigger('volumechange');
+      } // END setMuted
 
       supportsFullScreen() {
         return true;
-      }
+      } // END supportsFullScreen
 
-    }
+    } // END class Wistia
 
     Wistia.isSupported = function() {
       return true;
@@ -353,9 +326,8 @@
       var loaded = false;
       var tag = document.createElement('script');
       var firstScriptTag = document.getElementsByTagName('script')[0];
-      if (!firstScriptTag) {
-        return;
-      }
+      if (!firstScriptTag) { return; }
+
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
       tag.onload = function () {
         if (!loaded) {
@@ -363,18 +335,19 @@
           callback();
         }
       };
+
       tag.onreadystatechange = function () {
         if (!loaded && (this.readyState === 'complete' || this.readyState === 'loaded')) {
           loaded = true;
           callback();
         }
       };
+
       tag.src = src;
-    } // END
+    } // END loadScript
 
     function injectCss() {
-      var css = '.vjs-wistia-mobile .vjs-big-play-button {display: none;}';
-
+      var css  = '.vjs-wistia-mobile .vjs-big-play-button {display: none;}';
       var head = document.head || document.getElementsByTagName('head')[0];
 
       var style = document.createElement('style');
@@ -392,20 +365,14 @@
 
     Wistia.apiReadyQueue = [];
 
-    // if (typeof document !== 'undefined'){
-    //   loadScript('//fast.wistia.com/assets/external/E-v1.js', apiLoaded);
-    //   injectCss();
-    // }
-
-    // initialize pluginlastVolume if page ready
+    // initialize plugin when page ready
     // -------------------------------------------------------------------------
     var dependencies_met_page_ready = setInterval (() => {
       var pageState      = $('#content').css("display");
       var pageVisible    = (pageState === 'block') ? true : false;
       var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
-      var atticFinished  = (j1.adapter.attic.getState() == 'finished') ? true : false;
 
-      if (j1CoreFinished && pageVisible && atticFinished) {
+      if (j1CoreFinished && pageVisible) {
         startTimeModule = Date.now();
 
         logger.debug('\n' + 'initializing plugin: started');
@@ -418,11 +385,11 @@
       } // END pageVisible
     }, 10); // END dependencies_met_page_ready
 
-    // Check VJS versions to register Wistia TECH
+    // check VJS version to register Wistia TECH
     if (typeof videojs.registerTech !== 'undefined') {
       videojs.registerTech('Wistia', Wistia);
     } else {
       console.error('\n' + 'invalid version of videoJS detected: ' + videojs.VERSION);
-    }
+    } // END check VJS version
 
   }));

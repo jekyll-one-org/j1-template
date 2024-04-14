@@ -33,9 +33,11 @@
   }(this, function(videojs) {
     'use strict';
 
-    var logger      = log4javascript.getLogger('videoJS.plugin.wistia');
-    var _isOnMobile = videojs.browser.IS_IOS || videojs.browser.IS_NATIVE_ANDROID;
-    var Tech        = videojs.getTech('Tech');
+    var logger        = log4javascript.getLogger('videoJS.plugin.wistia');
+    var _isOnMobile   = videojs.browser.IS_IOS || videojs.browser.IS_NATIVE_ANDROID;
+    var Tech          = videojs.getTech('Tech');
+    var vjsControlbar = true;
+    var wtPlayerState;
 
     var startTimeModule;
     var endTimeModule;
@@ -47,6 +49,13 @@
 
         this.setPoster(options.poster);
         this.setSrc(this.options_.source, true);
+
+        // jadams: VJS controlbar
+        var divElement = document.getElementById(options.playerId);
+        divElement.classList.remove("vjs-controls-disabled");
+        divElement.classList.add("vjs-controls-enabled");
+        divElement.classList.remove("vjs-user-inactive");
+        divElement.classList.add("vjs-user-active");
 
         this.setTimeout(function() {
           if (this.el_) {
@@ -90,7 +99,7 @@
       createEl() {
         var div = document.createElement('div');
         div.setAttribute('id', this.options_.techId);
-        div.setAttribute('style', 'width:100%;height:100%;top:0;left:0;position:absolute');
+        div.setAttribute('style', 'position:absolute;width:100%;height:100%;top:0;left:0');
         div.setAttribute('class', 'vjs-tech ' + this.options_.playback_css_class);
 
         var divWrapper = document.createElement('div');
@@ -129,13 +138,14 @@
         }
 
         var this_ = this;
+        // add video handle to the wistia queue
         window._wq = window._wq || [];
         _wq.push({
           id: this.videoId,
           options: playerConfig,
-          onReady: function(video) {
+          onReady: (video) => {
             this_.wistiaPlayer = video;
-            this_.onPlayerReady();
+            this_.onPlayerReady(this_.options_);
             this_.wistiaPlayer.bind('end', this_.onPlaybackEnded.bind(this_));
           }
         });
@@ -143,35 +153,42 @@
         logger.debug('\n' + 'created ' + this.name_ + ' player on ID: ' + this.el_.firstChild.id);
       } // END initWistiaPlayer
 
-      onPlayerReady() {
-        var wt_player = document.getElementById(this.options_.playerId + '_wistia_api');
-        var currState;
+      onPlayerReady(options) {
+        var poster    = options.poster;
+        var techID    = options.techId;
+        var wt_player = document.getElementById(techID);
+        var wt_embed  = document.getElementsByClassName("w-vulcan-v2");
+        var vjsPoster = document.getElementsByClassName('vjs-poster');
 
-        // workaround toggle play|pause for Wistia Tech (click on video itself)
-        wt_player.addEventListener('click', (event) => {
-          currState = this.wistiaPlayer.state();
+        // workaround: remove all pointer cursors from poster images
+        for (var i = 0; i < vjsPoster.length; i++) {
+          vjsPoster[i].style.cursor = 'default';
+        } // END for vjsPoster
 
-          // suppress default actions|bubble up
-          event.preventDefault();
-          event.stopPropagation();
+        if (poster !== '') {
+          // workaround toggle play|pause for Wistia Tech (click on video itself)
+          wt_player.addEventListener('click', (event) => {
+            wtPlayerState = this.wistiaPlayer.state();
 
-          // trigger play on state beforeplay (initiate FIRST play)
-          if (currState === 'beforeplay') {
-            this.wistiaPlayer.play();
-            this.trigger('play');
-            logger.debug('\n' + 'triggered play on state: ' + currState);
-          }
+            logger.debug('\n' + 'wt player state: ' + wtPlayerState);
+          }); // END EventListener 'click'
+        } else {
+          // workaround toggle play|pause for Wistia Tech (click on video itself)
+          //
+          wt_player.addEventListener('click', (event) => {
+            wtPlayerState = this.wistiaPlayer.state();
 
-          // update player state
-          if (currState === 'playing' ) {
-            this.trigger('play');
-          }
+            logger.debug('\n' + 'wt player state: ' + wtPlayerState);
 
-          // update player state
-          if (currState === 'paused' ) {
-            this.trigger('pause');
-          }
-        }); // END EventListener 'click'
+            // trigger play on state beforeplay (initiate FIRST play)
+            if (wtPlayerState === 'beforeplay') {
+              this.wistiaPlayer.play();
+              this.trigger('play');
+              logger.debug('\n' + 'triggered play on state: ' + wtPlayerState);
+            }
+          }); // END EventListener 'click'
+
+        } // END if poster
 
         // default actions
         // ---------------------------------------------------------------------
@@ -210,6 +227,10 @@
           }
         }
       } // END setSrc
+
+      setPoster(poster) {
+        this.poster_ = poster;
+      } // END setPoster
 
       autoplay() {
         return this.options_.autoplay;
@@ -297,25 +318,27 @@
 
     } // END class Wistia
 
-    Wistia.isSupported = function() {
+    Wistia.isSupported = () => {
       return true;
     };
 
-    Wistia.canPlaySource = function(e) {
-      return Wistia.canPlayType(e.type);
+    Wistia.canPlaySource = (event) => {
+      return Wistia.canPlayType(event.type);
     };
 
-    Wistia.canPlayType = function(e) {
-      return (e === 'video/wistia');
+    Wistia.canPlayType = (event) => {
+      return (event === 'video/wistia');
     };
 
     function apiLoaded() {
       Wistia.isApiReady = true;
       logger.debug('\n' + 'API loaded successfully');
+
+      // NOTE: skip first element in ready queue as it is used internally
       for (var i = 0; i < Wistia.apiReadyQueue.length; ++i) {
         Wistia.apiReadyQueue[i].initWistiaPlayer();
       }
-      logger.debug('\n' + 'created all players from queue: #' + i);
+      logger.debug('\n' + 'added players to ready queue: #' + i);
 
       endTimeModule = Date.now();
       logger.debug('\n' + 'initializing plugin: finished');
@@ -329,14 +352,14 @@
       if (!firstScriptTag) { return; }
 
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-      tag.onload = function () {
+      tag.onload = () => {
         if (!loaded) {
           loaded = true;
           callback();
         }
       };
 
-      tag.onreadystatechange = function () {
+      tag.onreadystatechange = () => {
         if (!loaded && (this.readyState === 'complete' || this.readyState === 'loaded')) {
           loaded = true;
           callback();

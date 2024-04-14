@@ -226,7 +226,7 @@
       // Allow undocumented options to be passed along via customVars
       if (typeof this.options_.customVars !== 'undefined') {
         var customVars = this.options_.customVars;
-        Object.keys(customVars).forEach(function(key) {
+        Object.keys(customVars).forEach((key) => {
           playerVars[key] = customVars[key];
         });
       }
@@ -390,14 +390,6 @@
       this.ytPlayer.cueVideoById(options);
     } // END cueVideoById_
 
-    src(src) {
-      if (src) {
-        this.setSrc({ src: src });
-      }
-
-      return this.source;
-    } // END src
-
     poster() {
       // You can't start programmaticlly a video with a mobile
       // through the iframe so we hide the poster and the play button (with CSS)
@@ -411,6 +403,14 @@
     setPoster(poster) {
       this.poster_ = poster;
     } // END setPoster
+
+    src(src) {
+      if (src) {
+        this.setSrc({ src: src });
+      }
+
+      return this.source;
+    } // END src
 
     setSrc(source) {
       if (!source || !source.src) {
@@ -616,7 +616,7 @@
       } else {
         this.ytPlayer.unMute();
       }
-      this.setTimeout( function(){
+      this.setTimeout(() => {
         this.trigger('volumechange');
       }, 50);
     } // END setMuted
@@ -678,7 +678,7 @@
 
       try {
         var image = new Image();
-        image.onload = function(){
+        image.onload = function() {
           // Onload may still be called if YouTube returns the 120x90 error thumbnail
           if('naturalHeight' in image){
             if (image.naturalHeight <= 90 || image.naturalWidth <= 120) {
@@ -687,31 +687,30 @@
           } else if(image.height <= 90 || image.width <= 120) {
             return;
           }
-
           this.poster_ = uri;
           this.trigger('posterchange');
         }.bind(this);
-        image.onerror = function(){};
-        image.src = uri;
+        image.onerror = function() {};
+        image.src     = uri;
       }
-      catch(e){}
+      catch(event){}
     } // END  checkHighResPoster
 
   } // END  class YouTube
 
-  Youtube.isSupported = function() {
+  Youtube.isSupported = () => {
     return true;
   };
 
-  Youtube.canPlaySource = function(e) {
-    return Youtube.canPlayType(e.type);
+  Youtube.canPlaySource = (event) => {
+    return Youtube.canPlayType(event.type);
   };
 
-  Youtube.canPlayType = function(e) {
-    return (e === 'video/youtube');
+  Youtube.canPlayType = (event) => {
+    return (event === 'video/youtube');
   };
 
-  Youtube.parseUrl = function(url) {
+  Youtube.parseUrl = (url) => {
     var result = {
       videoId: null
     };
@@ -734,7 +733,7 @@
   };
 
   function apiLoaded() {
-    YT.ready(function() {
+    YT.ready(() => {
       Youtube.isApiReady = true;
       logger.debug('\n' + 'API loaded successfully');
 
@@ -759,13 +758,13 @@
       return;
     }
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    tag.onload = function () {
+    tag.onload = () => {
       if (!loaded) {
         loaded = true;
         callback();
       }
     };
-    tag.onreadystatechange = function () {
+    tag.onreadystatechange = () => {
       if (!loaded && (this.readyState === 'complete' || this.readyState === 'loaded')) {
         loaded = true;
         callback();

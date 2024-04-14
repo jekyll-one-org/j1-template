@@ -49,7 +49,12 @@ Asciidoctor::Extensions.register do
 
       title_html    = (attributes.has_key? 'title') ? %(<div class="video-title">#{attributes['title']}</div>\n) : nil
       poster_image  = (poster = attributes['poster']) ? %(#{poster}) : nil
+
       poster_attr   = %(poster="#{poster_image}")
+      if attributes['poster'] == 'auto'
+        poster_attr = ''
+      end
+
       theme_name    = (theme = attributes['theme']) ? %(#{theme}) : nil
 
       html = %(
@@ -59,6 +64,7 @@ Asciidoctor::Extensions.register do
             id="#{video_id}"
             class="video-js vjs-theme-#{theme_name}"
             width="640" height="360"
+            #{poster_attr}
             aria-label="#{attributes['title']}"
             data-setup='{
               "fluid" : true,

@@ -38,7 +38,7 @@ Asciidoctor::Extensions.register do
 
     named :wistia
     name_positional_attributes 'poster', 'theme', 'role'
-    default_attrs 'poster' => '/assets/images/icons/videojs/videojs-poster.png',
+    default_attrs 'poster' => '/assets/videos/poster/wistia/banner/wistia-blue.jpg',
                   'theme' => 'uno',
                   'role' => 'mt-3 mb-3'
 
@@ -49,6 +49,7 @@ Asciidoctor::Extensions.register do
 
       title_html    = (attributes.has_key? 'title') ? %(<div class="video-title">#{attributes['title']}</div>\n) : nil
       poster_image  = (poster = attributes['poster']) ? %(#{poster}) : nil
+      poster_attr   = %(poster="#{poster_image}")
       theme_name    = (theme = attributes['theme']) ? %(#{theme}) : nil
 
       html = %(
@@ -58,7 +59,7 @@ Asciidoctor::Extensions.register do
             id="#{video_id}"
             class="video-js vjs-theme-#{theme_name}"
             width="640" height="360"
-            poster="#{poster_image}"
+            #{poster_attr}
             aria-label="#{attributes['title']}"
             data-setup='{
               "fluid" : true,
