@@ -1,6 +1,6 @@
 /**
  * @license
- * Video.js 8.11.8 <http://videojs.com/>
+ * Video.js 8.12.0 <http://videojs.com/>
  * Copyright Brightcove, Inc. <https://www.brightcove.com/>
  * Available under Apache License Version 2.0
  * <https://github.com/videojs/video.js/blob/main/LICENSE>
@@ -9,7 +9,7 @@
  * Available under Apache License Version 2.0
  * <https://github.com/mozilla/vtt.js/blob/main/LICENSE>
  *
- * https://vjs.zencdn.net/8.11.8/video.js
+ * https://vjs.zencdn.net/8.12.0/video.js 
  */
 
 (function (global, factory) {
@@ -18,7 +18,7 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.videojs = factory());
 })(this, (function () { 'use strict';
 
-  var version$5 = "8.11.8";
+  var version$5 = "8.12.0";
 
   /**
    * An Object that contains lifecycle hooks as keys which point to an array
@@ -784,6 +784,14 @@
   let IS_WEBOS = false;
 
   /**
+   * Whether or not this is a Smart TV (Tizen or WebOS) device.
+   *
+   * @static
+   * @type {Boolean}
+   */
+  let IS_SMART_TV = false;
+
+  /**
    * Whether or not this device is touch-enabled.
    *
    * @static
@@ -857,7 +865,8 @@
     }();
     IS_TIZEN = /Tizen/i.test(USER_AGENT);
     IS_WEBOS = /Web0S/i.test(USER_AGENT);
-    IS_SAFARI = /Safari/i.test(USER_AGENT) && !IS_CHROME && !IS_ANDROID && !IS_EDGE && !IS_TIZEN && !IS_WEBOS;
+    IS_SMART_TV = IS_TIZEN || IS_WEBOS;
+    IS_SAFARI = /Safari/i.test(USER_AGENT) && !IS_CHROME && !IS_ANDROID && !IS_EDGE && !IS_SMART_TV;
     IS_WINDOWS = /Windows/i.test(USER_AGENT);
     IS_IPAD = /iPad/i.test(USER_AGENT) || IS_SAFARI && TOUCH_ENABLED && !/iPhone/i.test(USER_AGENT);
     IS_IPHONE = /iPhone/i.test(USER_AGENT) && !IS_IPAD;
@@ -900,6 +909,7 @@
     get IS_IPHONE () { return IS_IPHONE; },
     get IS_TIZEN () { return IS_TIZEN; },
     get IS_WEBOS () { return IS_WEBOS; },
+    get IS_SMART_TV () { return IS_SMART_TV; },
     TOUCH_ENABLED: TOUCH_ENABLED,
     IS_IOS: IS_IOS,
     IS_ANY_SAFARI: IS_ANY_SAFARI
@@ -14553,14 +14563,23 @@
       // of the player. We calculate any gap between the left edge of the player
       // and the left edge of the `SeekBar` and add the number of pixels in the
       // `SeekBar` before hitting the `seekBarPoint`
-      const spaceLeftOfPoint = seekBarRect.left - playerRect.left + seekBarPointPx;
+      let spaceLeftOfPoint = seekBarRect.left - playerRect.left + seekBarPointPx;
 
       // This is the space right of the `seekBarPoint` available within the bounds
       // of the player. We calculate the number of pixels from the `seekBarPoint`
       // to the right edge of the `SeekBar` and add to that any gap between the
       // right edge of the `SeekBar` and the player.
-      const spaceRightOfPoint = seekBarRect.width - seekBarPointPx + (playerRect.right - seekBarRect.right);
+      let spaceRightOfPoint = seekBarRect.width - seekBarPointPx + (playerRect.right - seekBarRect.right);
 
+      // spaceRightOfPoint is always NaN for mouse time display
+      // because the seekbarRect does not have a right property. This causes
+      // the mouse tool tip to be truncated when it's close to the right edge of the player.
+      // In such cases, we ignore the `playerRect.right - seekBarRect.right` value when calculating.
+      // For the sake of consistency, we ignore seekBarRect.left - playerRect.left for the left edge.
+      if (!spaceRightOfPoint) {
+        spaceRightOfPoint = seekBarRect.width - seekBarPointPx;
+        spaceLeftOfPoint = seekBarPointPx;
+      }
       // This is the number of pixels by which the tooltip will need to be pulled
       // further to the right to center it over the `seekBarPoint`.
       let pullTooltipBy = tooltipRect.width / 2;
@@ -16611,7 +16630,7 @@
       this.skipTime = this.getSkipForwardTime();
       if (this.skipTime && this.validOptions.includes(this.skipTime)) {
         this.setIcon(`forward-${this.skipTime}`);
-        this.controlText(this.localize('Skip forward {1} seconds', [this.skipTime]));
+        this.controlText(this.localize('Skip forward {1} seconds', [this.skipTime.toLocaleString(player.language())]));
         this.show();
       } else {
         this.hide();
@@ -16677,7 +16696,7 @@
       this.skipTime = this.getSkipBackwardTime();
       if (this.skipTime && this.validOptions.includes(this.skipTime)) {
         this.setIcon(`replay-${this.skipTime}`);
-        this.controlText(this.localize('Skip backward {1} seconds', [this.skipTime]));
+        this.controlText(this.localize('Skip backward {1} seconds', [this.skipTime.toLocaleString(player.language())]));
         this.show();
       } else {
         this.hide();
@@ -22811,8 +22830,8 @@
       // Set isAudio based on whether or not an audio tag was used
       this.isAudio(tag.nodeName.toLowerCase() === 'audio');
 
-      // Update controls className. Can't do this when the controls are
-      // initially set because the element doesn't exist yet.
+      // Update controls className. Can't do this when the controls are initially
+      // set because the element doesn't exist yet.
       if (this.controls()) {
         this.addClass('vjs-controls-enabled');
       } else {
@@ -23027,6 +23046,10 @@
       tag.player = el.player = this;
       // Default state of video is paused
       this.addClass('vjs-paused');
+      const deviceClassNames = ['IS_SMART_TV', 'IS_TIZEN', 'IS_WEBOS', 'IS_ANDROID', 'IS_IPAD', 'IS_IPHONE'].filter(key => browser[key]).map(key => {
+        return 'vjs-device-' + key.substring(3).toLowerCase().replace(/\_/g, '-');
+      });
+      this.addClass(...deviceClassNames);
 
       // Add a style element in the player that we'll use to set the width/height
       // of the player in a way that's still overridable by CSS, just like the
@@ -28015,9 +28038,6 @@
     AdsMacroReplacementFailed: 'ads-macro-replacement-failed',
     AdsResumeContentFailed: 'ads-resume-content-failed',
     // Errors used in contrib-eme:
-    EMEEncryptedError: 'eme-encrypted-error',
-    MSKeyError: 'ms-key-error',
-    WebkitKeyError: 'webkit-key-error',
     EMEFailedToRequestMediaKeySystemAccess: 'eme-failed-request-media-key-system-access',
     EMEFailedToCreateMediaKeys: 'eme-failed-create-media-keys',
     EMEFailedToAttachMediaKeysToVideoElement: 'eme-failed-attach-media-keys-to-video',
@@ -28025,7 +28045,9 @@
     EMEFailedToSetServerCertificate: 'eme-failed-set-server-certificate',
     EMEFailedToGenerateLicenseRequest: 'eme-failed-generate-license-request',
     EMEFailedToUpdateSessionWithReceivedLicenseKeys: 'eme-failed-update-session',
-    EMEFailedToCloseSession: 'eme-failed-close-session'
+    EMEFailedToCloseSession: 'eme-failed-close-session',
+    EMEFailedToRemoveKeysFromSession: 'eme-failed-remove-keys',
+    EMEFailedToLoadSessionBySessionId: 'eme-failed-load-session'
   };
 
   /**
@@ -39322,7 +39344,7 @@
   };
   var clock_1 = clock.ONE_SECOND_IN_TS;
 
-  /*! @name @videojs/http-streaming @version 3.12.0 @license Apache-2.0 */
+  /*! @name @videojs/http-streaming @version 3.12.1 @license Apache-2.0 */
 
   /**
    * @file resolve-url.js - Handling how URLs are resolved and manipulated
@@ -55330,9 +55352,11 @@ bufferedEnd: ${lastBufferedEnd(this.buffered_())}
       this.partIndex = null;
       this.syncPoint_ = null;
       this.isPendingTimestampOffset_ = false; // this is mainly to sync timing-info when switching between renditions with and without timestamp-rollover,
-      // so we don't want it for DASH
+      // so we don't want it for DASH or fragmented mp4 segments.
 
-      if (this.sourceType_ === 'hls') {
+      const isFmp4 = this.currentMediaInfo_ && this.currentMediaInfo_.isFmp4;
+      const isHlsTs = this.sourceType_ === 'hls' && !isFmp4;
+      if (isHlsTs) {
         this.shouldForceTimestampOffsetAfterResync_ = true;
       }
       this.callQueue_ = [];
@@ -63293,7 +63317,7 @@ ${segmentInfoString(segmentInfo)}`); // If there's an init segment associated wi
     }
     if (enable !== currentlyEnabled && !incompatible) {
       // Ensure the outside world knows about our changes
-      changePlaylistFn();
+      changePlaylistFn(playlist);
       if (enable) {
         loader.trigger('renditionenabled');
       } else {
@@ -64012,7 +64036,7 @@ ${segmentInfoString(segmentInfo)}`); // If there's an init segment associated wi
   const reloadSourceOnError = function (options) {
     initPlugin(this, options);
   };
-  var version$4 = "3.12.0";
+  var version$4 = "3.12.1";
   var version$3 = "7.0.3";
   var version$2 = "1.3.0";
   var version$1 = "7.1.0";

@@ -370,7 +370,10 @@
     } // END loadScript
 
     function injectCss() {
-      var css  = '.vjs-wistia-mobile .vjs-big-play-button {display: none;}';
+      const css = `
+        .vjs-wistia-mobile .vjs-big-play-button { display: none; }
+      `;
+
       var head = document.head || document.getElementsByTagName('head')[0];
 
       var style = document.createElement('style');

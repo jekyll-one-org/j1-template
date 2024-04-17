@@ -571,16 +571,9 @@
           width: 100%;
           height: 100%;
         }
-
-        .vjs-vimeo-mobile .vjs-big-play-button { display: none; }
-
-        video::-webkit-media-controls-panel { display: none !important; opacity: 0 !important; }
-        video::-webkit-media-controls-start-playback-button { display: flex !important; opacity: 1 !important; }
-
-        .player.hide-controls-mode video::-webkit-media-controls-play-button { display: none !important; }
-        .player .vp-video-wrapper .vp-telecine.hide-webkit-controls video::-webkit-media-controls-play-button { display: none !important; }
-        .player .vp-video-wrapper .vp-telecine.hide-webkit-controls video::-webkit-media-controls-play-button { display: none !important; }
-        .player .vp-video-wrapper .vp-telecine.hide-webkit-controls video::-webkit-media-controls-start-playback-button { display: none !important; }
+        .vjs-vimeo-mobile .vjs-big-play-button {
+          display: none;
+        }
       `;
 
       const head  = document.head || document.getElementsByTagName('head')[0];

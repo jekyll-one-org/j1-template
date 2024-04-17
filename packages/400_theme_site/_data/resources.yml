@@ -1008,7 +1008,7 @@ resources:
       comment:                          Module Rouge
       region:                           head
       layout:                           [ all ]
-      required:                         ondemand
+      required:                         always
       preload:                          false
       script_load:                      defer
       dependencies:                     false
@@ -1954,6 +1954,29 @@ resources:
                                         ]
         js:                             []
         init_function:                  [ j1.adapter.gemini.init ]
+
+  # ----------------------------------------------------------------------------
+  # AmplitudeJS
+  #
+  - name:                               J1 AmplitudeJS
+    resource:
+      enabled:                          true
+
+      id:                               amplitude-js
+      comment:                          Module AmplitudeJS
+      region:                           head
+      layout:                           [ home, page, post ]
+      required:                         ondemand
+      preload:                          false
+      script_load:                      defer
+      dependencies:                     false
+      pass_init_data:                   false
+
+      data:
+        css:                            [ modules/amplitudejs/css/theme/uno ]
+        files:                          []
+        js:                             [ modules/amplitudejs/js/amplitude ]
+        init_function:                  []
 
 # ------------------------------------------------------------------------------
 # END config

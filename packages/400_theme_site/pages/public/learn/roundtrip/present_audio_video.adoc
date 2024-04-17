@@ -93,9 +93,12 @@ mdi:clock-time-five-outline[24px, md-gray mt-5 mr-2]
 *10-15 Minutes* to read
 
 
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
 [role="mt-5"]
 == Audio
-
+// See: https://docs.asciidoctor.org/asciidoc/latest/macros/audio-and-video/
+//
 Audio players can easily be embedded in web pages using the *audio* tag
 `<audio>.` Browsers have a built-in framework for decoding and playing audio
 content directly within a webpage.
@@ -103,11 +106,11 @@ content directly within a webpage.
 .Ambient Piano
 audio::/assets/audio/sound-effects/ambient-piano.mp3[role="mt-4 mb-5"]
 
-// Include sub-documents (if any)
-// -----------------------------------------------------------------------------
+
 [role="mt-5"]
 == Video
-
+// See: https://docs.asciidoctor.org/asciidoc/latest/macros/audio-and-video/
+//
 HTML5 video opens the doors to how to present video content on your web.
 All modern browsers support the video tag `<video>.` Browsers already have
 a built-in multimedia framework for decoding and displaying video content.
@@ -117,6 +120,7 @@ Two types of video sources are supported:
 * Video files from local folders (your webspace)
 * Video files from Online sources (on the Internet) like YouTube, Wistia,
   Dailymotion etc.
+
 
 [role="mt-5"]
 == Standalone Video Players
@@ -134,9 +138,7 @@ offers an out-of-the-box framework for decoding and displaying video content
 without loading *external players*.
 
 .MP4 Video, Peck Pocketed
-// video::/assets/videos//html5/peck_pocketed[start="00:00:03" poster="/assets/videos/poster/html5/peck_pocketed.jpg" role="mt-4 mb-5"]
-video::/assets/videos//html5/peck_pocketed.mp4[poster="/assets/videos/poster/html5/peck_pocketed.jpg" role="mt-4 mb-5"]
-
+video::/assets/videos//html5/peck_pocketed.mp4[poster="/assets/videos/poster/html5/peck_pocketed.jpg", opts="" role="mt-4 mb-5"]
 
 [role="mt-4"]
 === VideoJS
@@ -158,8 +160,7 @@ VideoJS provides a flexible and customizable platform for displaying and
 controlling MPEG 4 video content on websites and web applications.
 
 .MP4 Video, Rolling Wild
-videojs::/assets/videos//html5/rolling_wild.mp4[poster="/assets/videos/poster/html5/rolling_wild.jpg" role="mt-4 mb-5"]
-
+videojs::/assets/videos//html5/rolling_wild.mp4[poster="/assets/videos/poster/html5/rolling_wild.jpg", opts="" role="mt-4 mb-5"]
 
 [role="mt-5"]
 ==== YouTube
@@ -181,7 +182,6 @@ video.
 
 .SELF Channel
 dailymotion::x87ycik[role="mt-4 mb-5"]
-
 
 [role="mt-4"]
 ==== Wistia
