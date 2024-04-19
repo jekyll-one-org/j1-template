@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="23px"
+   height="20px"
+   viewBox="0 0 23 20"
+   version="1.1"
+   id="svg14"
+   sodipodi:docname="shuffle-on.0.svg"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)">
+  <metadata
+     id="metadata18">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1678"
+     inkscape:window-height="1184"
+     id="namedview16"
+     showgrid="false"
+     inkscape:zoom="36.75"
+     inkscape:cx="11.5"
+     inkscape:cy="10"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg14" />
+  <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+  <title
+     id="title2">Fill 83</title>
+  <desc
+     id="desc4">Created with Sketch.</desc>
+  <defs
+     id="defs6" />
+  <path
+     d="m 15.553062,11.78012 -2.014287,1.752908 4.471429,3.891207 -2.928571,2.548554 h 7.857143 V 13.135204 L 20.02449,15.671327 15.553062,11.78012 M 15.081633,0.08163267 17.995919,2.6177551 0.08163261,18.219881 2.0959183,19.972789 20.02449,4.3830953 22.938776,6.9192177 V 0.08163267 M 9.4959182,6.5089626 2.0959183,0.08163267 0.08163261,1.8345409 7.4673468,8.2618708 Z"
+     id="path2"
+     style="stroke-width:1.33267" />
+</svg>

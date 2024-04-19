@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="24px"
+   height="19px"
+   viewBox="0 0 24 19"
+   version="1.1"
+   id="svg14"
+   sodipodi:docname="repeat-off.0.svg"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)">
+  <metadata
+     id="metadata18">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1839"
+     inkscape:window-height="1285"
+     id="namedview16"
+     showgrid="false"
+     inkscape:zoom="38.684211"
+     inkscape:cx="12"
+     inkscape:cy="9.5"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg14" />
+  <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+  <title
+     id="title2">Fill 39</title>
+  <desc
+     id="desc4">Created with Sketch.</desc>
+  <defs
+     id="defs6" />
+  <path
+     d="M 0.0387755,3.1841448 1.6496598,1.9892334 22.691837,17.720666 21.093538,18.924987 17.318028,16.102361 H 6.3312925 v 2.822626 L 1.2972789,15.161486 6.3312925,11.397985 v 2.822626 H 14.801021 L 6.3312925,7.8885207 V 8.5753596 H 3.8142857 V 6.0067703 L 0.0387755,3.1841448 M 18.916327,10.45711 h 2.517007 v 3.932858 l -2.517007,-1.88175 V 10.45711 m 0,-7.5270015 V 0.10748299 L 23.950341,3.8709837 18.916327,7.6344844 V 4.8118589 H 8.6217687 L 6.1047619,2.9301085 Z"
+     id="path2"
+     style="stroke-width:1.08816;fill:#666666" />
+</svg>

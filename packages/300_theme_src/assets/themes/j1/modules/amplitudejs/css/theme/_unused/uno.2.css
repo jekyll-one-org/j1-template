@@ -17,7 +17,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* 0. Colors
+/* Colors
  ------------------------------------------------------------------------------- */
 :root {
   --ajs-theme-uno--blue:                #2196F3;
@@ -42,16 +42,6 @@
 
 /* 1. Base
  ------------------------------------------------------------------------------- */
-.player-title {
-  text-rendering: optimizeLegibility;
-  text-align: left;
-  line-height: 1.25;
-  font-size: 1.125rem;
-  font-weight: 500;
-  margin-top: 1.75rem;
-  margin-bottom: .5rem;
-}
-
 /* Hide scrollbar for Chrome, Safari and Opera */
 div#amplitude-player {
   ::-webkit-scrollbar {
@@ -106,6 +96,7 @@ div#amplitude-left img.album-art {
   width: 100%;
 }
 
+/* jadams */
 div#amplitude-left div#player-left-bottom {
   flex: 1;
   background-color: var(--ajs-theme-uno--gray-100);
@@ -136,6 +127,7 @@ div#amplitude-right {
   width: 50%;
   display: flex;
   flex-direction: column;
+  /* jadams */
   background: var(--ajs-theme-uno--gray-100);
 }
 
@@ -148,8 +140,7 @@ div#amplitude-right div.song div.song-now-playing-icon-container {
   float: left;
   width: 20px;
   height: 20px;
-  margin-right: 20px;
-  margin-left: 5px;
+  margin-right: 10px;
 }
 
 div#amplitude-right div.song div.song-now-playing-icon-container img.now-playing {
@@ -159,14 +150,14 @@ div#amplitude-right div.song div.song-now-playing-icon-container img.now-playing
 
 div#amplitude-right div.song div.play-button-container {
   display: none;
-  background: url("/assets/themes/j1/modules/amplitudejs/icons/list-play-light.png") no-repeat;
+  background: url("https://521dimensions.com/img/open-source/amplitudejs/blue-player/list-play-light.png") no-repeat;
   width: 22px;
   height: 22px;
   margin-top: 10px;
 }
 
 div#amplitude-right div.song div.play-button-container:hover {
-  background: url("/assets/themes/j1/modules/amplitudejs/icons/list-play-hover.png") no-repeat;
+  background: url("https://521dimensions.com/img/open-source/amplitudejs/blue-player/list-play-hover.png") no-repeat;
 }
 
 div#amplitude-right div.song.amplitude-active-song-container div.song-now-playing-icon-container img.now-playing {
@@ -177,12 +168,12 @@ div#amplitude-right div.song.amplitude-active-song-container:hover div.play-butt
   display: none;
 }
 
-div#amplitude-right div.song div.audio-meta-data {
+div#amplitude-right div.song div.song-meta-data {
   float: left;
-  width: calc(100% - 125px);
+  width: calc(100% - 110px);
 }
 
-div#amplitude-right div.song div.audio-meta-data span.audio-title {
+div#amplitude-right div.song div.song-meta-data span.song-title {
   color: var(--ajs-theme-uno--gray-800);
   font-size: 16px;
   display: block;
@@ -192,7 +183,7 @@ div#amplitude-right div.song div.audio-meta-data span.audio-title {
   text-overflow: ellipsis;
 }
 
-div#amplitude-right div.song div.audio-meta-data span.audio-artist {
+div#amplitude-right div.song div.song-meta-data span.song-artist {
   color: var(--ajs-theme-uno--blue-gray);
   font-size: 14px;
   font-weight: bold;
@@ -203,19 +194,19 @@ div#amplitude-right div.song div.audio-meta-data span.audio-artist {
   text-overflow: ellipsis;
 }
 
-div#amplitude-right div.song img.audio-info-grey {
+div#amplitude-right div.song img.bandinfo-grey {
   float: left;
   display: block;
   margin-top: 10px;
 }
 
-div#amplitude-right div.song img.audio-info-white {
+div#amplitude-right div.song img.bandinfo-white {
   float: left;
   display: none;
   margin-top: 10px;
 }
 
-div#amplitude-right div.song span.audio-duration {
+div#amplitude-right div.song span.song-duration {
   float: left;
   width: 55px;
   text-align: center;
@@ -522,6 +513,7 @@ div#progress-container input[type=range]:focus::-ms-fill-upper {
 }
 
 div#control-container {
+  /* jadams */
   margin-top: 40px;
 }
 
@@ -530,23 +522,6 @@ div#control-container div#repeat-container {
   float: left;
   padding-top: 20px;
 }
-
-/* jadams
-div#control-container div#repeat-container div#list {
-  width: 23px;
-  height: 19px;
-  cursor: pointer;
-  float: right;
-}
-
-div#control-container div#repeat-container div#list.amplitude-list-off {
-  background: url("/assets/themes/j1/modules/amplitudejs/icons/check.svg");
-}
-
-div#control-container div#repeat-container div#list.amplitude-list-on {
-  background: url("/assets/themes/j1/modules/amplitudejs/icons/check-all.svg");
-}
-*/
 
 div#control-container div#repeat-container div#repeat {
   width: 24px;
@@ -604,6 +579,7 @@ div#control-container div#central-control-container div#central-controls div#pre
   background: url("/assets/themes/j1/modules/amplitudejs/icons/prev.svg");
   background-repeat: no-repeat;
   float: left;
+  /* jadams */
   margin-top: 10px;
   margin-right: 5px;
 }
@@ -632,6 +608,7 @@ div#control-container div#central-control-container div#central-controls div#nex
   background: url("/assets/themes/j1/modules/amplitudejs/icons/next.svg");
   background-repeat: no-repeat;
   float: left;
+  /*jafams */
   margin-top: -50px;
   margin-left: 110px;
 }
@@ -905,7 +882,7 @@ div#meta-container span.song-name {
   text-overflow: ellipsis;
 }
 
-div#meta-container div.audio-artist-album {
+div#meta-container div.song-artist-album {
   color: var(--ajs-theme-uno--blue-gray);
   font-size: 14px;
   font-weight: 700;
@@ -916,7 +893,7 @@ div#meta-container div.audio-artist-album {
   text-overflow: ellipsis;
 }
 
-div#meta-container div.audio-artist-album span {
+div#meta-container div.song-artist-album span {
   display: block;
 }
 

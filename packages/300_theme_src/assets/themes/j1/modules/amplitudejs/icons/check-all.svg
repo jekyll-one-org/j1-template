@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="24px"
+   height="19px"
+   viewBox="0 0 24 19"
+   version="1.1"
+   id="svg14"
+   sodipodi:docname="check-all.svg"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)">
+  <metadata
+     id="metadata18">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Fill 39</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1839"
+     inkscape:window-height="1285"
+     id="namedview16"
+     showgrid="false"
+     inkscape:zoom="38.684211"
+     inkscape:cx="12"
+     inkscape:cy="9.5"
+     inkscape:window-x="618"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg14"
+     inkscape:document-rotation="0" />
+  <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+  <title
+     id="title2">Fill 39</title>
+  <desc
+     id="desc4">Created with Sketch.</desc>
+  <defs
+     id="defs6" />
+  <path
+     d="M 0.08520394,10.75739 5.8492295,17.026026 7.303125,15.433636 1.5494108,9.1762136 M 22.594807,1.9768148 11.685434,13.852459 7.3959269,9.1762136 5.9214087,10.75739 11.685434,17.026026 24.059014,3.5692053 m -5.836205,0 -1.453896,-1.5923905 -6.547686,7.1209007 1.464207,1.5811765 z"
+     id="path2"
+     style="stroke-width:1.07532;fill:#666666" />
+</svg>

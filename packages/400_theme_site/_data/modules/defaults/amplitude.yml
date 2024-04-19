@@ -1,0 +1,52 @@
+# ------------------------------------------------------------------------------
+# ~/_data/modules/defaults/amplitude.yml
+# Default configuration for J1 Amplitude
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2023, 2024 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# Description
+#
+description:
+  title:                                AmplitudeJS
+  scope:                                Default settings
+  location:                             _data/apps/defaults/amplitude.yml
+
+# ------------------------------------------------------------------------------
+# User configuration settings
+#
+defaults:
+
+  # ----------------------------------------------------------------------------
+  # GENERAL player settings
+  #
+  # xhr_container_id
+  # ----------------------------------------------------------------------------
+  # Enables|Disables the use of a gallery
+  #
+  # xhr_data_path
+  # ----------------------------------------------------------------------------
+  # The HTML portion of a grid are being read from a HTML file generated
+  # automatically from its configuration for all galleries configured.
+  # AJAX methods are used to supply the needed HTML code at the time
+  # a gallery is initialized by the JS adapter.
+  #
+  #   values:                           string
+  #   default:                          /assets/data/amplitude.html
+  #
+  # ----------------------------------------------------------------------------
+  #
+  enabled:                              false
+
+  xhr_data_path:                        /assets/data/amplitude
+  xhr_container_id:                     back_to_black_parent
+
+# ------------------------------------------------------------------------------
+# END config

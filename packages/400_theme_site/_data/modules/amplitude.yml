@@ -1,0 +1,77 @@
+# ------------------------------------------------------------------------------
+# ~/_data/modules/amplitude.yml
+# User Configuration of the AmplitudeJS Module
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2023, 2024 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# Description
+#
+description:
+  title:                                AmplitudeJS
+  scope:                                User settings
+  location:                             _data/modules/amplitude.yml
+
+# ------------------------------------------------------------------------------
+# User settings
+#
+settings:
+  enabled:                              true
+
+  # ----------------------------------------------------------------------------
+  # PLAYER
+  # ----------------------------------------------------------------------------
+  players:
+
+    # --------------------------------------------------------------------------
+    # EXAMPLE player
+    #
+    - plaver:
+      enabled:                          true
+      player_id:                        back_to_black
+
+      album:                            &album
+        name:                           Back To Black
+        artist:                         Amy Winehouse
+        cover_image:                    /assets/audio/cover/back_to_black.jpg
+        audio_base:                     /assets/audio/album/back_to_black
+
+    # ------------------------------------------------------------------------
+      # Audio items
+      #
+      items:
+        - item:
+          enabled:                      true
+          <<:                           *album
+          title:                        Rehab
+          audio:                        Rehab.mp3
+        - item:
+          enabled:                      true
+          <<:                           *album
+          title:                        You Know I'm No Good
+          audio:                        You Know I'm No Good.mp3
+        - item:
+          enabled:                      true
+          <<:                           *album
+          title:                        Me & Mr Jones
+          audio:                        Me & Mr Jones.mp3
+        - item:
+          enabled:                      true
+          <<:                           *album
+          title:                        Just Friends
+          audio:                        Just Friends.mp3
+        - item:
+          enabled:                      true
+          <<:                           *album
+          title:                        Back To Black
+          audio:                        Back To Black.mp3
+
+# ------------------------------------------------------------------------------
+# END config
