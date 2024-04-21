@@ -1,0 +1,495 @@
+---
+title:                                  Eve's Diary
+title_extention:                        By Mark Twain
+tagline:                                By Mark Twain
+
+date:                                   2024-04-17
+#last_modified:                         2024-01-01
+
+description: >
+                                        Amplitude is a JavaScript library to control the design of audio media
+                                        elements on web pages. The concept allows designers to fully control the
+                                        look and feel of audio players without deep scripting knowledge.
+keywords: >
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap, html, html5, audio,
+                                        Amplitude
+
+categories:                             [ Testpage ]
+tags:                                   [ Audio. Amplitude ]
+
+image:
+  path:                                 /assets/images/icons/videojs/videojs-poster.png
+  width:                                1920
+  height:                               1280
+
+regenerate:                             false
+personalization:                        true
+permalink:                              /pages/public/eves_diary/
+
+resources:                              [ amplitude-js ]
+resource_options:
+  - toccer:
+      collapseDepth:                    3
+  - attic:
+      slides:
+        - url:                          /assets/images/modules/attics/1920x1280/alexey-ruban.jpg
+          alt:                          Photo by Alexey Ruban on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Alexey Ruban
+            href:                       //unsplash.com/de/@intelligenciya
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:images-dir:                            {imagesdir}/pages/roundtrip/100_present_images
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+Project Gutenberg's Eve's Diary, Complete, by Mark Twain (Samuel Clemens)
+
+This eBook is for the use of anyone anywhere at no cost and with
+almost no restrictions whatsoever.  You may copy it, give it away or
+re-use it under the terms of the Project Gutenberg License included
+with this eBook or online at www.gutenberg.org
+
+////
+Title: Eve's Diary, Complete
+Author: Mark Twain (Samuel Clemens)
+Release Date: June 14, 2004 [EBook #8525]
+Last Updated: February 23, 2018
+Language: English
+Produced by David Widger and Cindy Rosenthal
+////
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+[role="mt-5"]
+
+== Montag
+
+Dieses neue Geschöpf mit dem langen Haar fängt an, mir sehr im Wege zu sein.
+Es ist immer hinter mir her und lungert beständig um mich herum. Ich mag das
+nicht; ich bin nicht an Gesellschaft gewöhnt. Ich wünschte, es bliebe bei
+den übrigen Tieren.
+
+Es ist heute bewölkt. Denke, wir werden Regen haben. Wir? Wer ist wir? Woher
+habe ich das Wort? Ich erinnere mich jetzt – das neue Geschöpf braucht es
+immer.
+
+== Dienstag
+
+Habe den großen Wasserfall untersucht. Er ist das Beste auf dem ganzen
+Grundstück, sollt’ ich meinen. Das neue Geschöpf nennt ihn den *Niagara-Fall*.
+Habe auch nicht die blasseste Ahnung, weswegen. Wenn es sagt, das Ding sehe
+aus wie *Niagara*, so hat das keinen Sinn. Es ist nur so ein Einfall, nur
+leeres Geschwätz. Ich selber komme gar nicht mehr dazu, irgend etwas zu
+benennen.
+
+Das neue Geschöpf tauft alles, was uns gerade in die Quere kommt, ehe ich
+auch nur den geringsten Einwand dagegen erheben kann. Und das immer unter
+einem und demselben Vorwand, daß es so *aussehe*.
+
+== Mittwoch
+
+Habe mir einen Unterschlupf gegen den Regen gebaut. Aber ich konnte ihn
+nicht friedlich für mich behalten. Das neue Geschöpf war gleichfalls
+sofort drinnen. Als ich es hinauszudrängen versuchte, vergoß es Wasser aus
+den beiden Löchern, mit welchen es sieht, wischte es mit dem Rücken seiner
+Pfoten fort und gab dabei Töne von sich, wie verschiedene der andern Tiere,
+sobald ihnen etwas weh tut oder sie sich fürchten.
+
+Wenn es nur nicht sprechen wollte! Es schwatzt beständig. Das klingt fast
+wie Hohn und Spott, als wollte ich mich über das arme Geschöpf lustig machen.
+Aber die Absicht liegt mir fern. Ich habe die menschliche Stimme nie zuvor
+gehört, und jeder neue und fremde Laut, welcher das feierliche Schweigen in
+dieser träumerischen Einsamkeit unterbricht, beleidigt mein Ohr, wie eine
+falsche Note.
+
+Und obendrein ist dieser neue Laut immer so nahe bei mir, er ist dicht an
+meiner Schulter, dicht an meinem Ohr, erst auf dieser, dann auf der andern
+Seite; und ich war nur gewöhnt Laute zu hören, die mehr oder weniger entfernt
+von mir sind.
+
+== Freitag
+
+Das Benennen geht unaufhaltsam weiter, ich mag dagegen tun was ich will. Ich
+hatte für das große Grundstück hier einen sehr guten Namen erfunden, der
+hübsch war und musikalisch zugleich – Garten von Eden. Ich gebrauche den
+Namen jetzt noch, aber nicht öffentlich, nur verstohlen.
+
+Das neue Geschöpf sagt, man sehe in der ganzen Landschaft nur Wald, Felsen
+und Wasser; sie erinnere nicht im mindesten an einen Garten sondern sehe aus
+wie ein Park und wie nichts anderes. So hat es ihm denn, ohne mich weiter zu
+fragen, den Namen Niagarafall-Park gegeben. Das ist eigenmächtig genug, sollte
+ich meinen. Und schon kann man auf dem Grase eine Tafel mit der bekannten
+Warnung sehen: *Es ist verboten den Rasen zu betreten!*
+
+Mein Leben ist nicht mehr so glücklich wie früher.
+
+== Samstag
+
+Das neue Geschöpf ißt zu viel Früchte. Wir werden wahrscheinlich bald Mangel
+daran haben. Schon wieder *Wir*. Das ist sein Wort und meins jetzt auch
+bereits vom ewigen Hören.
+
+Ziemlich neblig heute früh. Ich selbst gehe nicht in den Nebel hinaus. Aber
+das neue Geschöpf tut es. Es geht in allen Wettern aus und kommt dann mit
+schmutzigen Füßen wieder hereingestampft. Dabei spricht es fortwährend, und
+früher war es hier so angenehm und ruhig.
+
+== Sonntag
+
+Hab ihn glücklich hinter mir. Dieser Tag wird immer ermüdender. Der Sonntag
+wurde im letzten November zum Ruhetag gewählt und abgesondert. Früher hatte
+ich in jeder Woche schon sechs solche Tage. Und heute? Heute morgen fand
+ich das neue Geschöpf, wie es mit Erdklumpen nach dem verbotenen Baum warf,
+um die Aepfel herunterzuholen.
+
+== Montag
+
+Das neue Geschöpf sagt: sein Name sei Eva. Das ist ganz recht, und ich will
+nichts dagegen einwenden. Es sagt, der Name sei dazu da, damit ich es rufen
+könne, wenn ich es bei mir zu haben wünsche. Darauf erwiderte ich, daß der
+Name dann überflüssig sei.
+
+Dies Wort hob mich augenscheinlich in der Achtung des neuen Geschöpfs. Und
+wirklich das Wort *überflüssig* ist sehr gut und von allgemeiner Bedeutung;
+es verdient bei jeder Gelegenheit wiederholt zu werden. Darauf sagte mir das
+Geschöpf, daß es gar kein *Es*, sondern eine *Sie* sei.
+
+Das ist zum mindesten zweifelhaft; aber mir ist’s einerlei; sie mag sein was
+sie will, wenn sie nur ihrer Wege gehen und nicht beständig reden wollte!
+
+== Dienstag
+
+Sie sagt, dieser Park würde eine äußerst erquickende und reinliche Sommerfrische
+abgeben, für den Fall sich Gäste dafür finden ließen. Sommerfrische – was heißt
+das? Offenbar wieder so ’ne neue Erfindung ihres rastlosen Hirns und ihres noch
+ruheloseren Mundes – Worte ohne jeden Sinn.
+
+Was ist eine Sommerfrische? Aber besser, ich frage sie gar nicht erst danach.
+Sie hat ohnehin eine wahre Sucht alles zu erklären.
+
+== Freitag
+
+Sie hat es für gut befunden, mich zu bitten, nicht mehr über den Wasserfall
+zu gehen, wie ich es mir angewöhnt hatte. Wem geschieht denn damit etwas
+zuleide? Sie sagt es mache sie schaudern. Ich möchte nur wissen warum? Ich
+habe es immer gethan, seit ich hier bin. Das Hineinspringen, das Untertauchen
+und die Aufregung dabei macht mir den größten Spaß. Und dann die Kühle, wenn
+es sonst heiß ist!
+
+Ich habe auch immer gedacht, daß der Fall gerade deswegen da wäre. Wenigstens
+hat er – soweit ich sehen kann – sonst keinen Zweck, und irgend einen Zweck
+muß er doch haben. Und jetzt kommt sie und sagt, die ganze Geschichte wäre
+nur um der malerischen Scenerie willen da – wie das Rhinoceros und das
+Mastodon.
+
+Bin darauf in einem Faß über den Fall hinuntergesegelt. Auch das war nicht
+nach ihrem Geschmack. Dann in einer Waschbutte; sie war noch immer nicht
+zufrieden. Ich schwamm durch den Strudel unterhalb des Falls und durch die
+Stromschnellen oberhalb des Falls in einem nagelneuen Schwimmanzug von
+Feigenblättern, der dabei fast in Fetzen ging.
+
+Da bekam ich endlose Vorwürfe wegen meiner Verschwendungssucht. Ich fühle
+mich hier von allen Seiten eingeengt. Ein Ortswechsel wird mir gut tun.
+
+== Samstag
+
+Am Abend des letzten Dienstag bin ich durchgebrannt und habe mir dann,
+nachdem ich zwei Tage drauflosgewandert war, einen neuen Unterschlupf gebaut,
+an einer ganz abgelegenen Stelle. Aber wie sehr ich auch bemüht gewesen war,
+meine Spuren zu verwischen und zu verbergen. Sie hat mich doch aufgespürt,
+mit Hilfe eines Tieres, welches sie gezähmt hat und *Wolf* nennt.
+
+Sie stürzte plötzlich zu mir herein, machte wieder das klägliche Geräusch,
+das ich nicht hören mag, und ließ das Wasser aus den beiden Löchern, mit
+denen sie sieht, hervorschießen. Es blieb mir nichts anderes übrig, als mit
+ihr zurückzugehen. Aber ich werde sofort wieder ausreißen, wenn sich die
+Gelegenheit bietet.
+
+Sie giebt sich mit allerlei ganz überflüssigen Dingen ab. Unter anderm
+versucht sie, herauszubekommen, warum die Tiere, welche Löwen und Tiger
+heißen, auf diesem großen Grundstück von Gras und Blumen leben, während
+sie doch nach ihrer Meinung eine Art Zähne haben, die deutlich beweist,
+daß sie bestimmt sind einander aufzufressen. Das ist einfach Narrheit.
+
+== Sonntag
+
+Habe ihn glücklich hinter mir.
+
+== Montag
+
+Ich glaube jetzt dahintergekommen zu sein, wozu die Woche da ist: sie soll
+einem Zeit geben, um sich von der Ermüdung des Sonntags zu erholen. Das ist
+gar keine schlechte Idee. Ich habe Eva schon wieder an dem verbotenen Baum
+erwischt.
+
+Sie war hinaufgeklettert und ich warf mit Erdklumpen nach ihr, bis sie
+herunterkam und sagte, es hätte ’s ja niemand gesehen. Ich glaube, sie hält
+das für eine genügende Rechtfertigung, um die gefährlichsten Dinge zu tun.
+Sagte ihr es auch ins Gesicht. Das Wort Rechtfertigung erregte ihre Bewunderung
+und zugleich, wie mir schien, ihren Neid, der immer sehr leicht erregt ist.
+Es ist aber auch ein sehr gutes Wort.
+
+== Dienstag
+
+Das Neueste, was sie mir gesagt hat, ist, daß sie aus einer von meinem Körper
+genommenen Rippe gemacht sei. Das scheint mir eine gewagte Behauptung. Mir hat
+doch nie eine Rippe gefehlt!
+
+Besonderes Kopfzerbrechen macht ihr seit einiger Zeit der junge Habicht, mit
+dem sie sich so viel abgiebt. Sie sagt, er könne kein Gras vertragen, und
+fürchtet daher, ihn nicht aufziehen zu können, weil er, wie sie sich einbildet,
+verwestes Fleisch zur Nahrung haben müsse. Ein Habicht sollte sich, meiner
+Meinung, mit dem begnügen was vorhanden ist. Man kann doch nicht bloß dem
+Habicht zuliebe die ganze Ordnung der Dinge umkehren.
+
+== Samstag
+
+Gestern fiel sie in den Teich, als sie sich zu weit vorbog, um sich im Wasser
+zu betrachten. Sie tut das immer, sobald sie an einen Teich kommt, nur ist
+sie bis jetzt noch nicht hineingefallen. Sie hat so viel Wasser geschluckt,
+daß sie beinahe erstickte.
+
+Das sei ein höchst unbehagliches Gefühl, erklärte sie, als sie wieder draußen
+war. Es machte sie auch traurig wegen der Geschöpfe, welche im Wasser leben
+müssen, und die sie Fische nennt. Sie hat nämlich noch immer nicht aufgehört,
+allen möglichen Dingen ganz unnütze Namen anzuhängen. Sie kommen gar nicht,
+wenn sie den Namen ruft, aber das verschlägt ihr nicht das geringste; sie ist
+nun einmal solche Thörin!
+
+Die Folge war, daß sie gestern abend eine ganze Menge Fische einfing,
+hereinbrachte und, damit sie warm werden möchten, in mein Bett that. Aber
+ich habe sie seitdem beobachtet und die Wahrnehmung gemacht, daß sie durchaus
+nicht glücklicher schienen als vordem. Nur viel stiller sind sie den ganzen
+Tag gewesen.
+
+Und wenn es wieder Nacht wird, werde ich sie einfach vor die Türe werfen und
+nicht wieder mit ihnen schlafen, denn sie sind unangenehm schleimig und
+naßkalt, und das Liegen zwischen ihnen ist, namentlich wenn man nichts anhat,
+höchst unbehaglich.
+
+== Sonntag
+
+Habe ihn glücklich hinter mir.
+
+== Dienstag
+
+Jetzt hat sie sich mit einer Schlange eingelassen. Die andern Tiere sind
+froh, weil sie beständig an ihnen herumhantierte und sie nicht in Ruhe ließ.
+Auch ich freue mich darüber, weil die Schlange gleichfalls spricht und ich
+mich etwas erholen kann.
+
+== Freitag
+
+Sie sagt mir, die Schlange habe ihr geraten, die Frucht von dem Baum zu
+kosten, und ihr versprochen, daß das Ergebnis eine große, schöne und edle
+Fortentwicklung sein werde. Ich sagte ihr, es würde noch etwas anderes daraus
+entstehen. Der Tod würde in die Welt kommen. Aber das war ein großer Mißgriff
+von mir, und ich hätte ungleich besser gethan, die Bemerkung für mich zu
+behalten. Es brachte sie nur auf den Gedanken, daß sie dann den kranken
+Habicht gesund machen und den trübselig einherschleichenden Löwen und Tigern
+frisches Fleisch zur Nahrung verschaffen könnte.
+
+Ich riet ihr noch einmal aufs dringendste, von dem Baum fortzubleiben. Sie
+sagte, sie wollte es nicht. Ich sehe allerlei Unannehmlichkeiten voraus und
+denke wieder ans Auswandern.
+
+== Mittwoch
+
+Ich habe eine bunte Zeit hinter mir. An jenem Abend bin ich ausgerissen und
+die ganze Nacht hindurch geritten so schnell mein Pferd nur laufen konnte,
+in der Hoffnung, aus dem Park herauszukommen und ein anderes Land zu
+erreichen, bevor die ganze Not hereinbrach.
+
+Aber das sollte mir nicht gelingen. Eine Stunde nach Sonnenaufgang hatte ich
+die Grenze noch immer nicht erreicht. Dafür befand ich mich auf einer
+grasigen, mit Blumen bedeckten Ebene, auf der Tausende von Tieren versammelt
+waren, teils schlafend, teils weidend, teils miteinander spielend, wie das
+bei den Tieren Brauch war.
+
+Aber plötzlich stießen sie allesamt ein entsetzliches Gebrüll und Geheul aus,
+und schon im nächsten Augenblick lief auf der ganzen Ebene alles wirr
+durcheinander. Wie rasend fielen die Tiere über einander her und zerfleischten
+sich gegenseitig. Ich hätte so etwas nie für möglich gehalten, doch wußte
+ich sofort, was es zu bedeuten hatte.
+
+Eva hatte von der verbotenen Frucht gegessen, und im selben Augenblick war
+auch der Tod in die Welt gekommen! Die Tiger stürzten sich auf mein Pferd
+und zerrissen es, ohne sich weder an meine Bitten noch an meine Befehle
+zu kehren. Ja, sie würden mich selber gefressen haben, hätte ich mich nicht
+schnell aus dem Staube gemacht.
+
+Jenseits der Grenze des Parks fand ich diesen Platz und hier habe ich mich
+seitdem auch ein paar Tage äußerst behaglich befunden, bis – sie mich auch
+hier entdeckt hatte und plötzlich vor mir stand. Das Merkwürdigste dabei
+war, daß mir das eigentlich gar nicht so unangenehm schien, wie ich es mir
+vorher vielleicht vorgestellt hatte. Auch sie fand den Platz gar nicht
+übel und hatte natürlich wieder sofort einen Namen für ihn – weil er gerade
+so aussah.
+
+Schließlich war ich sogar ganz froh, daß sie mich gefunden hatte, da es
+hier herum weder Früchte noch Beeren gab, wie drüben im Park, und sie ein
+paar von den Aepfeln des verbotenen Baumes mitgebracht hatte. Ich war so
+hungrig, daß ich mich genötigt sah, sie zu verspeisen. Eigentlich ging es
+gegen meine Grundsätze. Aber ich habe damals entdeckt, daß der Mensch seinen
+Grundsätzen nur treu zu bleiben pflegt, wenn er genug zu essen hat.
+
+Auch etwas Neues habe ich an ihr entdeckt. Sie kam in einer Art Umhüllung
+von Zweigen und Laubgewinden, und als ich sie fragte, was dieser neue
+Unsinn bedeuten solle, ihr das ganze grüne Zeug herunterriß und es auf die
+Erde warf. Da zitterte sie an allen Gliedern, und wurde rot im Gesicht. Ich
+hatte noch nie jemanden zittern und rot werden sehen, es schien mir nicht
+nur unschön, sondern geradezu blödsinnig.
+
+Sie sagte aber auf meine Frage nur: ich würde das bald an mir selbst erfahren.
+Und darin hatte sie recht. Denn trotz meines Hungers legte ich den Apfel
+halb angebissen beiseite. Es war obendrein der feinste, den ich je gekostet
+habe, noch dazu bei so vorgeschrittener Jahreszeit – und fing an, mich
+selber mit dem Grünzeug zu behängen, das ich ihr eben vom Leibe gerissen
+hatte.
+
+Dann sah ich sie an, wie sie so dastand und befahl ihr mit Entrüstung, noch
+mehr Zweige und Blätter zu holen, weil es sonst ein wahrer Skandal sei. Sie
+gehorchte mir mit Eifer und dann schlichen wir beide nach dem Platz zurück,
+wo die wilden Tiere vorhin die Vernichtungsschlacht gekämpft hatten und
+sammelten einige von den Fellen.
+
+Ich befahl ihr, daraus für uns ein paar Anzüge zusammenzunähen, in denen wir
+uns öffentlich zeigen könnten. Sie sind hart und unbequem, aber jedenfalls
+nach der neuesten Mode, und das ist ja schließlich bei Kleidern die
+Hauptsache.
+
+Ich finde neuerdings auch, daß sie eine ganz gute Gesellschafterin ist. Ohne
+sie würde ich jetzt recht einsam und traurig sein, nachdem ich meinen
+Grundbesitz verloren habe. Ueberdies hat sie mir eben gesagt, daß wir nach
+der neuen Ordnung der Dinge fortan für unsern Lebensunterhalt arbeiten müssen.
+Da kann sie sich nützlich machen. Sie wird arbeiten und ich werde die Aufsicht
+führen.
+
+== Nächstes Jahr
+
+Wir haben es Kain getauft, sie hat es eingefangen, während ich weiter draußen
+im Land war, um zu jagen und Fallen zu stellen. Sie fing es, wie sie mir bei
+meiner Rückkehr erzählte, im Tannengehölz, ein paar Meilen südlich von der
+Erdwohnung, die wir uns angelegt haben.
+
+Es sieht uns gewissermaßen ähnlich und ist vielleicht irgendwie mit uns
+verwandt. Wenigstens glaubt dies Eva, aber meiner Meinung nach ist es ein
+Irrtum. Der gewaltige Unterschied in der Größe allein rechtfertigt schon
+die Annahme, daß es nur eine andere, noch neue Art Tier ist. Vielleicht ein
+Fisch.
+
+Als ich es aber ins Wasser warf, um mir Gewißheit zu schaffen, sank es
+sofort unter, worauf sie ihm nachsprang und es herauszog, ohne mir die nötige
+Zeit zu lassen, die Sache durch meinen Versuch zu entscheiden. Ich bin aber
+noch immer der Ueberzeugung, daß es ein Fisch ist, während es ihr so
+gleichgültig zu sein scheint, was es ist, daß sie es mir um keinen Preis
+zu einem neuen Versuch überlassen will.
+
+Das verstehe ich nicht. Mir ist an ihr neuerdings überhaupt mancherlei
+unverständlich. Seit sie das Geschöpf im Hause hat, scheint ihre Natur
+verändert. Auf Versuche läßt sie sich schlechterdings nicht mehr ein.
+Sie hat auch noch nie auf ein Tier so große Stücke gehalten, wie auf dieses,
+doch weiß sie mir keinen Grund dafür anzugeben.
+
+Ich glaube wirklich sie hat ihre fünf Sinne nicht mehr beisammen. Bisweilen
+trägt sie den Fisch halbe Nächte lang in ihren Armen umher, wenn er jammert
+und winselt, weil er ins Wasser will, und wenn ich ihn dann nach dem nächsten
+Teich tragen und hinein werfen möchte, so wehrt sie sich so sehr dagegen,
+wie nur je, als sie noch bei Verstande war.
+
+Bei solchen Gelegenheiten kommt ihr dann wieder das Wasser aus den Gucklöchern
+in ihrem Gesicht. Sie drückt den Fisch an ihre Brust, klopft ihn leise auf
+den Rücken, macht mit ihrem Munde allerlei Töne, die ihn beruhigen sollen,
+und ist ganz närrisch vor Sorge und Angst um das Geschöpf. Ich habe sie früher
+dergleichen nie mit einem andern Fisch, oder sonst irgend einem Tiere tun
+sehen, und ich mache mir viel Kopfzerbrechens darüber.
+
+Ehe wir von unserm Grundstück vertrieben wurden, hat sie wohl auch von
+Zeit zu Zeit junge Tiger herumgetragen und ihr Spiel mit ihnen getrieben,
+aber doch nicht immerfort und niemals bei Nacht. Auch hat sie sich’s nie so
+zu Herzen genommen, wenn ihnen das Frühstück nicht gut bekam.
+
+== Sonntag
+
+Am Sonntag scheint sie sich’s zur Regel zu machen, nicht zu arbeiten, sondern
+ganz erschöpft von der Wochenarbeit dazuliegen und den Fisch auf sich
+herumkriechen zu lassen. Dabei bringt sie allerlei Töne mit dem Munde
+hervor und behauptet, das belustige ihn; sie steckt sich auch seine kleinen
+Pfoten oder Vorderflossen in den Mund und er fängt an zu lachen.
+
+Mein Lebtag habe noch keinen Fisch lachen sehen, und dabei kommen mir
+allerlei Zweifel … Der Sonntag gefällt mir jetzt selber ganz gut. Es ermüdet
+ja Körper und Geist zugleich, wenn man die Woche über fortwährend die Arbeit
+anderer beaufsichtigen muß. Da sollte es noch mehr Sonntage geben. In den
+früheren Zeiten, auf dem großen Grundstück, waren die Sonntage kaum zum
+Aushalten, jetzt fangen sie an, mir ganz gelegen zu kommen.
+
+== Mittwoch
+
+Es ist kein Fisch. Das weiß ich jetzt – aber darum kann ich noch lange nicht
+begreifen, was es eigentlich ist. Wenn es was haben will und bekommt es
+nicht gleich, macht es den tollsten und abscheulichsten Lärm. Wenn es aber
+hat, was es will, oder sonst zufrieden ist, sagt es *Gugu* oder etwas der Art.
+
+Es ist kein Mensch, denn es kann nicht gehen. Es ist kein Vogel, sonst könnte
+es fliegen. Es ist kein Frosch, denn es hüpft nicht; und auch keine Schlange,
+weil es nicht kriechen kann. Daß es kein Fisch ist, weiß ich ebenfalls ganz
+bestimmt, obgleich ich nicht dazu kommen kann, es schwimmen zu lassen.
+Wenn Eva es nicht auf den Armen hat, liegt es meist am Boden auf dem Rücken
+und streckt die Füße in die Luft. Das habe ich noch bei keinem Tier gesehen.
+Ich glaube es muß ein Riesenkäfer sein. Wenn es stirbt will ich es
+auseinandernehmen, um seine innere Einrichtung zu untersuchen. Ich muß der
+Sache doch auf den Grund kommen.
+
+== Drei Monate später
+
+Die Geschichte wird immer rätselhafter. Ich kann kaum noch schlafen, weil sie mir so im Kopfe herumgeht. Das Geschöpf liegt nicht mehr am Boden, sondern kriecht nun auf seinen vier Füßen herum. Aber es unterscheidet sich[26] wesentlich von den übrigen Vierfüßlern, denn seine Vorderbeine sind ungewöhnlich kurz. So ragt denn der Hauptteil seiner Person ganz unverhältnismäßig in die Höhe, was durchaus nichts Anziehendes hat. Im übrigen ist es ganz so gebaut wie wir, doch beweist schon die Art seiner Fortbewegung, daß es nicht zu unserer Gattung gehört. Die Kürze der Vorder- und die Länge der Hinterbeine deuten darauf hin, daß es aus der Känguruh-Familie stammt. Doch unterscheidet es sich auch hier wieder von dem wirklichen Känguruh, denn es kann nicht hüpfen wie dieses. Es muß eine seltsame und interessante Abart sein, die bisher noch nicht katalogisiert worden ist. Da ich dieselbe entdeckt habe, halte ich mich auch für berechtigt, mir den Ruhm dieser Entdeckung für alle Zeiten dadurch zu sichern, daß ich dem neuen Geschöpf meinen Namen beilege. Ich habe es Kaengurum Adamiensis getauft.
+
+Es muß ein ganz junges Exemplar gewesen sein, als Eva es in dem Tannengehölz fing, denn es ist seitdem beständig gewachsen. Jetzt ist es wohl fünfmal so groß wie damals, und wenn es etwas haben will und es nicht gleich bekommt, macht es dreißigmal mehr Lärm als früher. Zwang und Gewalt[27] vermögen nichts dagegen auszurichten, im Gegenteil, sie machen die Sache immer nur schlimmer. Darum habe ich das Zwangs-System, mit dem ich es eine Zeit lang versuchte, wieder aufgegeben, zumal ich ihr gegenüber ohnehin damit einen besonders schwierigen Stand hatte. Sie besänftigt es immer mit Zureden und Schöntun und meistens damit, daß sie ihm alles giebt, was sie ihm zuerst rundweg abgeschlagen hat.
+
+Wie ich schon bemerkt habe, war ich nicht zu Hause, als sie es brachte. Sie sagte mir, sie habe es im Walde gefunden. Es ist unbegreiflich, daß es das Einzige seiner Art sein sollte, aber ich habe mich die ganze Zeit über müde und lahm gesucht, um ein zweites Exemplar zu finden, teils um es unserer Sammlung hinzuzufügen, teils als Spielgefährten für unseres. Es würde dann gewiß stiller sein und sich leichter zähmen lassen. Aber ich kann keines entdecken; auch nicht die leiseste Spur habe ich aufgefunden. Merkwürdig! Es kann doch gar nicht anders leben als auf dem Erdboden und wenn es sich vorwärts bewegt, müßte es doch eine Fährte hinterlassen. Ich habe wohl ein Dutzend Fallen und Schlingen gelegt, aber nichts dadurch erreicht. Alle[28] kleinen Tiere kann ich fangen, nur dieses nicht. Sie gehen meist aus Neugierde in die Falle, nur um zu sehen, wozu die Milch eigentlich dort aufgestellt ist, glaube ich. Trinken tun sie die Milch nie, sie werfen sie höchstens um.
+
+== Drei Monate später
+
+Unser adamitisches Känguruh wächst noch immer fort, was höchst seltsam und beunruhigend ist. Ich habe noch nie gesehen, daß ein Känguruh so lange braucht, um seine volle Größe zu erreichen. Es hat jetzt einen Pelz auf dem Kopf; gar nicht wie einen Känguruhpelz, sondern viel eher wie unser eigenes Haar, nur daß es sich feiner und weicher anfühlt, und statt schwarz rot ist. Wenn das noch lange so fort geht, verliere ich nächstens den Verstand über die tollen und unberechenbaren Sprünge in der Entwicklung dieses unklassifizierten zoologischen Naturspiels. Könnte ich nur ein zweites fangen, – doch das ist eine ganz vergebliche Hoffnung. Es ist eine neue Art und von dieser das einzige Exemplar, – soviel steht jetzt fest. Seit vorgestern ist mir auch noch der letzte Zweifel geschwunden. Ich hatte ein wirkliches Känguruh gefangen und mit nach Hause gebracht, in dem Gedanken, daß das unserige in seiner Einsamkeit froh[29] sein würde, wenigstens ein ihm einigermaßen verwandtes Tier zu begegnen. Unter Wildfremden, die nichts von seiner Art und Weise und seinen Wünschen und Begierden verstehen, mußte es doch darin, wie ich glaubte, einen kleinen Trost finden. Aber welchen Mißgriff hatte ich begangen. Es fiel bei dem bloßen Anblick des eingefangenen Känguruhs in solche Krämpfe, daß ich sofort wußte, es habe noch kein derartiges Geschöpf gesehen. Mir tut das kleine Tier leid, denn es schreit bei der geringsten Gelegenheit und ich kann nichts tun, um es glücklich zu machen oder zu sorgen, daß es sich bei uns wie unter seinesgleichen fühlt – und doch möchte ich es selbst jetzt gar nicht mehr missen. Wenn ich es nur wenigstens zähmen könnte, – aber auch das ist ganz außer Frage. Und je mehr ich es versuche, um so schlimmer scheine ich es zu machen. Es schneidet mir geradezu ins Herz, das kleine Ding bei seinen Anfällen von Kummer und stürmischer Leidenschaft zu sehen. Eigentlich möchte ich, wir wären es wieder los; doch wage ich gar nicht den Wunsch auszusprechen. Denn erstens ist es mir doch nicht ganz ernst damit und zweitens würde Eva von einem solchen Vorschlag kein Wort hören wollen. Das scheint sehr[30] grausam und selbstsüchtig von ihr, – aber vielleicht hat sie doch recht. Es würde dann am Ende noch einsamer sein als vorher. Ist es mir nicht gelungen ein zweites Exemplar seiner Gattung zu finden, so müßte es selber gewiß auch vergebens danach suchen.
+
+== Fünf Monate später
+
+Es ist kein Känguruh! Nein, es kann sich seit wenigen Tagen selbst auf den Hinterbeinen aufrecht erhalten, wenn es sich gleichzeitig mit einer seiner Vorderpfoten an ihrem hingestreckten Finger festhält. Ueber ein paar Schritte kommt es dabei freilich noch nicht hinaus, sondern fällt dabei jedesmal bald wieder auf alle Viere zurück. Aber das genügt, um uns die Gewißheit zu verschaffen, daß es kein Känguruh ist. Viel wahrscheinlicher, daß es eine Art Bär ist. Nur hat es keinen Schwanz und, – wenigstens bis jetzt, – kein haariges Fell, außer auf dem Kopf. Uebrigens sind die Bären gefährlich – ich weiß das von jener Vernichtungsschlacht her. Ich werde diesem hier, so gerne ich ihn auch manchmal habe, nicht mehr lange erlauben, sich ohne Maulkorb herumzutreiben. Neulich habe ich wieder einen Versuch gemacht, Eva ein richtiges, ausgewachsenes Känguruh zu versprechen, für welches sie dann dieses laufen lassen könnte. Aber alles, was[31] ich damit erreichte, war, daß es aus den Sehlöchern in ihrem Gesicht förmlich wie Feuer sprühte und sie seitdem den kleinen Bären noch weniger als je von der Hand läßt. Ich fürchte, sie wird uns durch ihre Thorheit in neue Gefahr bringen. Seit sie den Verstand verloren hat, ist sie wie umgewandelt.
+
+Vierzehn Tage später. Ich habe seinen Mund untersucht. Noch ist es unschädlich; es hat erst einen Zahn. Auch einen Schwanz hat es noch immer nicht. Aber dafür macht es mehr Lärm als je zuvor. Und namentlich in der Nacht. In den letzten beiden Nächten war es so arg, daß ich ausgezogen bin. Aber morgen gehe ich zum Frühstück hinüber, und dann sehe ich nach, ob es noch mehr Zähne bekommen hat. Wenn es erst einmal den ganzen Mund voll Zähne hat, wird es die höchste Zeit sein, Maßregeln zu ergreifen, – Schwanz oder nicht Schwanz – denn ein Bär braucht keinen Schwanz, um gefährlich zu sein.
+
+Vier Monate später. Ich bin wieder auf einem längeren Jagd- und Fischausflug fortgewesen. Etwa einen Monat lang. In der Zwischenzeit hatte der Bär gelernt, sich ohne Hilfe und auf den Hinterbeinen allein fortzuhelfen und etwas, das wie *Poppa* und *Momma* klang, zu sagen. Es ist sicherlich eine[32] ganz neue Art. Diese Töne, die sich ganz wie Worte anhören, mögen etwas rein Zufälliges sein und an sich gar nichts zu bedeuten haben. Aber selbst dann ist die Sache noch immer merkwürdig genug, und jedenfalls etwas, was kein anderer Bär kann. Diese Aehnlichkeit mit menschlicher Rede, dazu das Fehlen des Pelzes und der vollständige Mangel eines Schwanzes, beweisen zur Genüge, daß es nicht nur eine besondere, sondern eine ganz neue Art Bär ist. Inzwischen beabsichtige ich, seinetwegen auf eine neue Forschungsexpedition auszugehen und die großen Wälder weiter im Norden nach einem zweiten Exemplar zu durchsuchen.
+
+Drei Monate später. Es war ein langer und langweiliger Jagdausflug, von dem ich da eben zurückgekehrt bin. Aber er war ganz und gar erfolglos. Was hat sie aber in der Zwischenzeit gethan? Ohne sich vom Platze zu rühren und sich im mindesten anzustrengen hat sie unterdessen gerade auf dem neuen Grundstück ein zweites Exemplar eingefangen! Hat man je von solchem Glück gehört?
+
+Tags darauf. Ich habe das neue Geschöpf genau mit dem alten verglichen, und es ist gar kein Zweifel, daß sie vom gleichen Schlage sind. Ich äußerte den[33] Wunsch, eines von ihnen für meine Sammlung auszustopfen. Aber sie ist gegen das Ausstopfen im allgemeinen eingenommen, und in diesem Falle wollte sie erst recht nichts davon wissen. So habe ich denn die Absicht wieder aufgeben müssen, obgleich ich denke, daß ich unter allen Umständen darauf hätte bestehen sollen. Man denke sich, daß sie plötzlich wieder abhanden kämen, und stelle sich den Verlust für die Wissenschaft vor, wenn nichts von ihnen zurückbliebe!
+
+Das ältere von beiden ist auch das weitaus zahmere. Es kann sogar plappern und lachen, wie ein Papagei. Und da auch Papageien so viel um uns herum sind, bin ich überzeugt, daß es das alles, und die Gabe der Nachahmung überhaupt, von ihnen gelernt hat. Na, wer weiß, – vielleicht kommt es zuletzt noch heraus, daß es selbst eine Art Papagei ist. Ich würde mich gar nicht darüber wundern, wenn ich bedenke, was es alles schon gewesen ist seit jenen ersten Tagen, als ich es für einen Fisch hielt. Das neue ist grade so häßlich wie das andere zuerst war; es hat gelblich-rote Fleischfarbe und auf dem Kopf nur hier und da einen ganz leisen Ansatz von Pelz. Sie hat ihm auch schon einen Namen gegeben – Abel nennt sie es.
+
+Zehn Jahre später. Es sind Jungens! Wir wissen das jetzt schon seit geraumer Zeit. Nur ihre anfängliche Winzigkeit und Gestaltlosigkeit hat uns so lange irre geführt. Wir hatten es noch nicht erlebt, daher unsere lange Ungewißheit. Jetzt haben wir uns bereits daran gewöhnt, – auch ein paar Mädel sind schon angekommen.
+
+Abel ist ein guter Junge. Aber wenn Kain ein Bär geblieben wäre, so würde das besser für ihn gewesen sein.
+
+Was mich anlangt, so sehe ich nach allen diesen Jahren ein, daß ich Eva im Anfang unrecht gethan habe. Es ist besser, außerhalb des Gartens mit ihr zu leben, als im Garten ohne sie. Ich meinte zuerst, sie spräche zuviel. Aber jetzt würde es mich aufs tiefste betrüben, wenn diese Stimme verstummen und ich sie mein Lebtag nicht mehr hören sollte. Gesegnet sei der Apfelbiß, der uns zuerst einander so nahe gebracht hat, daß ich ihre Holdseligkeit und die Güte ihres Herzens erkennen lernte!

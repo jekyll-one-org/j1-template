@@ -52,18 +52,22 @@
   margin-bottom: .5rem;
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
+/* Hide scrollbar for Chrome, Edge, Opera and Safari (???) */
+/*
 div#amplitude-player {
   ::-webkit-scrollbar {
     display: none;
   }
 }
+*/
 
-/* Hide scrollbar for IE, Edge and Firefox */
+/* Hide scrollbar for Firefox */
+/*
 div#amplitude-player {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+*/
 
 /* 2. Components
  ------------------------------------------------------------------------------- */
@@ -73,28 +77,77 @@ div#amplitude-player {
   max-width: fit-content;
 }
 
+
+/*
+See: https://getbootstrap.com/docs/5.0/layout/breakpoints/
+Breakpoint	 Class infix	 Dimensions
+-------------------------------------
+X-Small	         None	     <576px
+Small	            sm	     ≥576px
+Medium	          md	     ≥768px
+Large	            lg	     ≥992px
+Extra large	      xl	     ≥1200px
+Extra extra large	xxl	    ≥1400px
+-------------------------------------
+
+// X-Small devices (portrait phones, less than 576px)
+@media (max-width: 575.98px) { ... }
+
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 767.98px) { ... }
+
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991.98px) { ... }
+
+// Large devices (desktops, less than 1200px)
+@media (max-width: 1199.98px) { ... }
+
+// X-Large devices (large desktops, less than 1400px)
+@media (max-width: 1399.98px) { ... }
+
+// XX-Large devices (larger desktops)
+// No media query since the xxl breakpoint has no upper bound on its width
+
+*/
+
+
+/* Bootstrap media query breakpoints
+ ------------------------------------------------------------------------------- */
 /* Small only */
 @media screen and (max-width: 39.9375em) {
   div#amplitude-player {
     flex-direction: column;
   }
+  div#amplitude-player {
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  }  
 }
 
 /* Medium only */
 @media screen and (min-width: 40em) and (max-width: 63.9375em) {
   div#amplitude-player {
-    max-height: none;
+    /* max-height: none; */
+    max-height: 800px;
   }
 }
 
 /* Large and up */
 @media screen and (min-width: 64em) {
   div#amplitude-player {
-    max-height: none;
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  div#amplitude-player {
+    /* max-height: none; */
+    max-height: 1200px;
   }
 }
 
 div#amplitude-left {
+  overflow-y: clip; /* jadams */
   padding: 0px;
   border-right: 1px solid var(--ajs-theme-uno--blue-gray-100);
   width: 50%;

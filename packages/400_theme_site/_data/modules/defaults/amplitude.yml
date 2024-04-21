@@ -25,12 +25,14 @@ description:
 defaults:
 
   # ----------------------------------------------------------------------------
-  # GENERAL player settings
-  #
-  # xhr_container_id
+  # enabled
   # ----------------------------------------------------------------------------
-  # Enables|Disables the use of a gallery
+  # Enables or disables the module
   #
+  # values:                           true|false
+  # default:                          false
+  #
+  # ----------------------------------------------------------------------------
   # xhr_data_path
   # ----------------------------------------------------------------------------
   # The HTML portion of a grid are being read from a HTML file generated
@@ -44,9 +46,7 @@ defaults:
   # ----------------------------------------------------------------------------
   #
   enabled:                              false
-
   xhr_data_path:                        /assets/data/amplitude
-  xhr_container_id:                     back_to_black_parent
 
 # ------------------------------------------------------------------------------
 # END config

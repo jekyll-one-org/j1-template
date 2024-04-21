@@ -30,7 +30,7 @@ permalink:                              /pages/public/amplitude_tester/
 resources:                              [ amplitude-js ]
 resource_options:
   - toccer:
-      collapseDepth:                    2
+      collapseDepth:                    3
   - attic:
       slides:
         - url:                          /assets/images/modules/attics/1920x1280/alexey-ruban.jpg
@@ -79,6 +79,7 @@ elements individually.
 // See: https://521dimensions.com/open-source/amplitudejs/docs
 // See: https://github.com/mediaelement/mediaelement-plugins
 // See: https://github.com/serversideup/amplitudejs/
+// See: https://github.com/serversideup/amplitudejs-player-examples/
 
 Amplitude is a JavaScript library to control the design of audio media
 elements on web pages. The concept allows designers to fully control the
@@ -89,6 +90,9 @@ look and feel of audio players without deep scripting knowledge.
 Amplitude players are mobile-friendly. Touch events will be applied for
 mobile devices instead of clicking on the appropriate elements.
 ====
+
+[role="mt-5"]
+=== Amy Winehouse · Back To Black
 
 The J1 Template implements a custom player based on the (default) theme Uno.
 The color scheme used matches the look and feel of the template.
