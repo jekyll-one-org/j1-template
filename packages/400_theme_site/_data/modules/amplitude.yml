@@ -110,14 +110,14 @@ settings:
       #
       player_id:                        back_to_black
 
-#     repeat:                           false
-#     shuffle:    	                    false
-#     title_info:                       true
-#     pause_on_next_title:              false
-#     delay_on_next_title:              250
+      # repeat:                           false
+      # shuffle:    	                    false
+      # title_info:                       true
+      # pause_on_next_title:              false
+      # delay_on_next_title:              250
 
       # ------------------------------------------------------------------------
-      # ALBUM settings (reused for AUDIO settings)
+      # ALBUM settings (re-used from AUDIO settings)
       # ------------------------------------------------------------------------
       album:                            &album
 
@@ -161,7 +161,7 @@ settings:
         cover_image:                    /assets/audio/cover/amy_winehouse/back_to_black.jpg
 
       # ------------------------------------------------------------------------
-      # AUDIO (title) settings (some properties reused from ALBUM settings)
+      # AUDIO (title) settings (some properties re-used from ALBUM settings)
       # ------------------------------------------------------------------------
       items:
 
