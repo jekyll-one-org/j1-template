@@ -69,127 +69,373 @@ amplitude_defaults: {{amplitude_defaults | debug}}
   <meta name="robots" content="noindex, nofollow">
 </head>
 
-{% comment %} Large Player instance
+{% comment %} Create player instances
 -------------------------------------------------------------------------------- {% endcomment %}
 {% for player in amplitude_options.players %} {% if player.enabled %}
-  {% assign player_items  = player.items %}
-  {% assign player_id     = player.player_id %}
+  {% assign player_enabled = player.enabled %}
+  {% assign player_id      = player.player_id %}
+  {% assign player_items   = player.items %}
 
-  {% capture large_player__left_side %}
-    <img data-amplitude-song-info="cover_art_url" class="album-art" />
-    <div class="amplitude-visualization" id="large-visualization"></div>
-    <div id="player-left-bottom">
-      <div id="time-container">
-        <span class="current-time">
-          <span class="amplitude-current-minutes"></span> : <span class="amplitude-current-seconds"></span>
-        </span>
-        <div id="progress-container">
-          <div class="amplitude-wave-form"></div>
-          <input type="range" class="amplitude-song-slider"/>
-          <progress id="song-played-progress" class="amplitude-song-played-progress"></progress>
-          <progress id="song-buffered-progress" class="amplitude-buffered-progress" value="0"></progress>
-        </div>
-        <span class="duration">
-          <span class="amplitude-duration-minutes"></span> : <span class="amplitude-duration-seconds"></span>
-        </span>
-      </div>
-      <div id="control-container">
-        <div id="repeat-container">
-          {% if player.repeat %}
-          <div id="repeat"  class="amplitude-repeat amplitude-repeat-on"></div>
-          {% else %}
-          <div id="repeat"  class="amplitude-repeat amplitude-repeat-off"></div>
-          {% endif %}
-          {% if player.shuffle %}
-          <div id="shuffle" class="amplitude-shuffle amplitude-shuffle-on"></div>
-          {% else %}
-          <div id="shuffle" class="amplitude-shuffle amplitude-shuffle-off"></div>
-          {% endif %}
-        </div>
-        <div id="central-control-container">
-          <div id="central-controls">
-            <div class="amplitude-prev" id="previous"></div>
-            <div class="amplitude-play-pause" id="play-pause"></div>
-            <div class="amplitude-next" id="next"></div>
-          </div>
-        </div>
-        <div id="volume-container">
-          <div class="volume-controls">
-            <div class="amplitude-mute amplitude-not-muted"></div>
-            <input type="range" class="amplitude-volume-slider" />
-            <div class="ms-range-fix"></div>
-          </div>
-        </div>
-      </div>
-      <div id="meta-container">
-        <span data-amplitude-song-info="name" class="song-name"></span>
-        <div class="audio-artist-album">
-          <span data-amplitude-song-info="artist"></span>
-          <span data-amplitude-song-info="album"></span>
-        </div>
-      </div>
-    </div>
-  {% endcapture %}
+  {% comment %} Detect|Set (default) player settings
+  ------------------------------------------------------------------------------ {% endcomment %}
+  {% if player.repeat %}
+    {% assign player_repeat = player.player_type %}
+  {% else %}
+    {% assign player_repeat = amplitude_defaults.player_type %}
+  {% endif %}
 
-  <!-- Player Instance: {{player_id}} -->
-  <div id="{{player_id}}" class="uno-player">
+  {% if player.shuffle %}
+    {% assign player_shuffle = player.shuffle %}
+  {% else %}
+    {% assign player_shuffle = amplitude_defaults.shuffle %}
+  {% endif %}
 
-    {% comment %} player defaults
-    player.title_info: {{player.title_info | debug}}
+  {% if player.title_info %}
+    {% assign player_title_info = player.shuffle %}
+  {% else %}
+    {% assign player_title_info = amplitude_defaults.title_info %}
+  {% endif %}
+
+  {% if player.title_info %}
+    {% assign player_title_info = player.shuffle %}
+  {% else %}
+    {% assign player_title_info = amplitude_defaults.title_info %}
+  {% endif %}
+
+  {% if player.scrollbars %}
+    {% assign player_scrollbars = player.scrollbars %}
+  {% else %}
+    {% assign player_scrollbars = amplitude_defaults.scrollbars %}
+  {% endif %}
+
+  {% if player_scrollbars %}
+    {% assign player_scrollbar_class = '' %}
+  {% else %}
+    {% assign player_scrollbar_class = 'hide-scrollbar' %}
+  {% endif %}
+
+  {% if player.player_type %}
+    {% assign player_type = player.player_type %}
+  {% else %}
+    {% assign player_type = amplitude_defaults.player_type %}
+  {% endif %}
+
+  {% comment %} collect player instances
+  ------------------------------------------------------------------------------ {% endcomment %}
+  {% case player_type %}
+
+    {% comment %} collect single song player
     ---------------------------------------------------------------------------- {% endcomment %}
-    {% if player.repeat == nil %}      player.repeat     = false {% endif %}
-    {% if player.shuffle == nil %}     player.shuffle    = false {% endif %}
-    {% if player.title_info == nil %}  player.title_info = true  {% endif %}
+    {% when 'single_song' %}
 
-    <!-- Player Container -->
-    <div id="audio-player-container" class="mb-5">
-      <!-- Player -->
-      <div id="amplitude-player">
+    {% if player_enabled %}
+    <div id="{{player_id}}" class="uno-player">
+      <div id="single-song-player-container" class="mb-5">
+        <!-- Player -->
+        <div id="single-song-player" class="single-song-player">
+          <img data-amplitude-song-info="cover_art_url"/>
 
-        <!-- Large Player|Left Side -->
-        <div id="amplitude-left">
-        {{large_player__left_side}}
+          <div class="bottom-container">
+            <progress id="single-song-player-progress" class="amplitude-song-played-progress"></progress>
+
+            <div class="time-container">
+              <span class="current-time">
+                <span class="amplitude-current-minutes"></span>:<span class="amplitude-current-seconds"></span>
+              </span>
+              <span class="duration">
+                <span class="amplitude-duration-minutes"></span>:<span class="amplitude-duration-seconds"></span>
+              </span>
+            </div> <!-- END time container -->
+
+            {% for item in player_items %}{% if item.enabled %}
+            {% if {{forloop.index0}} == 1 %}
+              {% break %}
+            {% endif %}
+            <div class="single-song-player control-container">
+              <div id="play-pause" class="amplitude-play-pause"></div>
+              <div class="meta-container single-song-player">
+                <span data-amplitude-song-info="name" class="song-name"></span>
+
+                <span class="single-song-player-song-artist-album">
+                  <span data-amplitude-song-info="artist" data-amplitude-song-index="{{forloop.index0}}"></span>
+                  <span data-amplitude-song-info="album" data-amplitude-song-index="{{forloop.index0}}" style="margin-top: 5px; margin-bottom: 15px"></span>
+                </span>
+
+                <div id="volume-container" class="single-song-player-volume-container">
+                  <img src="/assets/themes/j1/modules/amplitudejs/icons/volume.svg">
+                  <input type="range" class="single-song-player amplitude-volume-slider" step=".1">
+                </div>
+              </div> <!-- END meta-container -->
+              {% endif %}{% endfor %}
+            </div> <!-- END control-container -->
+
+          </div> <!-- END bottom-container -->
+
+        </div> <!-- END single-song-player -->
+      </div> <!-- END player-container -->
+    </div> <!-- END player instance -->
+    {% endif %}
+
+    {% comment %} Reset element variables (already processed)
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% assign amplitude_settings = nil %}
+
+    {% comment %} END single song player player
+    ---------------------------------------------------------------------------- {% endcomment %}
+
+
+    {% comment %} collect flat player
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% when 'flat' %}
+
+    {% if player_enabled %}
+    <!-- Player Instance: {{player_id}} of type {{player_type}} -->
+    <div id="{{player_id}}" class="uno-player">
+      <div id="flat-black-player-container">
+
+        <div id="list-screen" class="slide-in-top">
+
+          <div id="list-screen-header" class="hide-playlist">
+            <img id="up-arrow" src="/assets/themes/j1/modules/amplitudejs/icons/up.svg"/>
+            Hide Playlist
+          </div> <!-- END player-header (toggle) -->
+
+          <div id="list-screen-footer" class="flat-player">
+            <div id="list-screen-meta-container">
+              <span data-amplitude-song-info="name" class="song-name"></span>
+              <div class="song-artist-album">
+                <span data-amplitude-song-info="artist" data-amplitude-song-index="0"></span>
+                <span class="song-artist-album-delimiter">·</span>
+                <span data-amplitude-song-info="album" data-amplitude-song-index="0"></span>
+              </div>
+            </div>
+            <div class="list-controls">
+              <div class="list-previous amplitude-prev"></div>
+              <div class="list-play-pause amplitude-play-pause"></div>
+              <div class="list-next amplitude-next"></div>
+            </div>
+          </div> <!-- END list-screen-footer -->
+
+          <div id="list" class="{{player_scrollbar_class}}">
+
+            {% for item in player_items %}{% if item.enabled %}
+            <div class="song amplitude-song-container amplitude-play-pause" data-amplitude-song-index="{{forloop.index0}}">
+              <span class="song-number-now-playing">
+              <span class="number">{{forloop.index}}</span>
+              <img class="now-playing" src="/assets/themes/j1/modules/amplitudejs/icons/black/now-playing.svg"/>
+              </span>
+              <div class="song-meta-container">
+                <span class="song-name" data-amplitude-song-info="name" data-amplitude-song-index="{{forloop.index0}}"></span>
+                <span class="song-artist-album">
+                  <span data-amplitude-song-info="artist" data-amplitude-song-index="{{forloop.index0}}"></span>
+                  <span class="song-artist-album-delimiter">·</span>
+                  <span data-amplitude-song-info="album" data-amplitude-song-index="{{forloop.index0}}"></span>
+                </span>
+              </div>
+              <span class="song-duration">{{item.duration}}<span>
+            </div>
+            {% endif %}{% endfor %}
+
+          </div> <!-- END  playlist -->
+
+        </div> <!-- END playlist container -->
+
+        <div id="player-screen" class="flat-player">
+
+          <div class="player-header down-header">
+            <img id="down" src="/assets/themes/j1/modules/amplitudejs/icons/down.svg"/>
+            Show Playlist
+          </div> <!-- END player-header (toggle) -->
+
+          <div id="player-top">
+            <img data-amplitude-song-info="cover_art_url"/>
+          </div> <!-- END player-cover -->
+
+          <div id="player-progress-bar-container">
+            <progress id="flat-player-progress" class="amplitude-song-played-progress"></progress>
+          </div> <!-- END player-progress-bar -->
+
+          <div id="player-middle">
+            <div id="control-container" class="flat-control-container">
+              <div id="shuffle-container">
+                <div class="amplitude-shuffle amplitude-shuffle-off" id="shuffle"></div>
+              </div>
+              <div id="prev-container">
+                <div class="amplitude-prev" id="previous"></div>
+              </div>
+              <div id="play-pause-container">
+                <div class="amplitude-play-pause" id="play-pause"></div>
+              </div>
+              <div id="next-container">
+                <div class="amplitude-next" id="next"></div>
+              </div>
+              <div id="repeat-container">
+                <div class="amplitude-repeat" id="repeat"></div>
+              </div>
+            </div> <!-- END control-container -->
+
+            <div id="volume-container" class="flat-player-volume-container">
+              <img src="/assets/themes/j1/modules/amplitudejs/icons/volume.svg">
+              <input type="range" class="amplitude-volume-slider flat-player-volume-slider" step=".1">
+            </div> <!-- END volume-container -->
+
+          </div> <!-- END player controls -->
+
+          <div id="player-bottom">
+            <div id="time-container">
+              <span class="amplitude-current-time time-container"></span>
+              <span class="amplitude-duration-time time-container"></span>
+            </div> <!-- END time-container -->
+
+            <div id="meta-container">
+              <span data-amplitude-song-info="name" class="song-name" style="margin-bottom: 5px"></span>
+              <!-- div class="song-artist-album" -->
+              <div class="audio-artist-album">
+                <span data-amplitude-song-info="artist"></span>
+                <span data-amplitude-song-info="album"></span>
+              </div>
+            </div> <!-- END meta data  -->
+          </div> <!-- END title info  -->
+        </div> <!-- END player  -->
+
+      </div> <!-- END player container -->
+    </div> <!-- END player instance -->
+    {% endif %}
+
+    {% comment %} Reset element variables (already processed)
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% assign amplitude_settings = nil %}
+
+    {% comment %} END flat player
+    ---------------------------------------------------------------------------- {% endcomment %}
+
+
+    {% comment %} collect expanded player
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% when 'expanded' %}
+
+    {% if player_enabled %}
+    {% capture large_player__left_side %}
+      <img data-amplitude-song-info="cover_art_url" class="album-art" />
+      <div class="amplitude-visualization" id="large-visualization"></div>
+      <div id="player-left-bottom">
+        <div id="time-container">
+          <span class="current-time">
+            <span class="amplitude-current-minutes"></span> : <span class="amplitude-current-seconds"></span>
+          </span>
+          <div id="progress-container">
+            <div class="amplitude-wave-form"></div>
+            <input type="range" class="amplitude-song-slider"/>
+            <progress id="song-played-progress" class="amplitude-song-played-progress"></progress>
+            <progress id="song-buffered-progress" class="amplitude-buffered-progress" value="0"></progress>
+          </div>
+          <span class="duration">
+            <span class="amplitude-duration-minutes"></span> : <span class="amplitude-duration-seconds"></span>
+          </span>
         </div>
-        <!-- END Large Player|Left Side -->
-
-        <!-- Large Player|Right Side -->
-        <div id="amplitude-right">
-          {% for item in player_items %}{% if item.enabled %}
-          <!-- Audio item -->
-          <div class="song amplitude-song-container amplitude-play-pause" data-amplitude-song-index="{{forloop.index0}}">
-
-            <div class="song-now-playing-icon-container">
-              <div class="play-button-container"></div>
-              <img class="now-playing" src="/assets/themes/j1/modules/amplitudejs/icons/now-playing.svg" />
+        <div id="control-container">
+          <div id="repeat-container">
+            {% if player_repeat %}
+            <div id="repeat"  class="amplitude-repeat amplitude-repeat-on"></div>
+            {% else %}
+            <div id="repeat"  class="amplitude-repeat amplitude-repeat-off"></div>
+            {% endif %}
+            {% if player_shuffle %}
+            <div id="shuffle" class="amplitude-shuffle amplitude-shuffle-on"></div>
+            {% else %}
+            <div id="shuffle" class="amplitude-shuffle amplitude-shuffle-off"></div>
+            {% endif %}
+          </div>
+          <div id="central-control-container">
+            <div id="central-controls">
+              <div class="amplitude-prev" id="previous"></div>
+              <div class="amplitude-play-pause" id="play-pause"></div>
+              <div class="amplitude-next" id="next"></div>
             </div>
-
-            <div class="audio-meta-data">
-              <span class="audio-title">{{item.title}}</span>
-              <span class="audio-artist">{{item.artist}}</span>
+          </div>
+          <div id="volume-container">
+            <div class="volume-controls">
+              <div class="amplitude-mute amplitude-not-muted"></div>
+              <input type="range" class="amplitude-volume-slider" />
+              <div class="ms-range-fix"></div>
             </div>
+          </div>
+        </div>
+        <div id="meta-container">
+          <span data-amplitude-song-info="name" class="song-name"></span>
+          <div class="audio-artist-album">
+            <span data-amplitude-song-info="artist"></span>
+            <span data-amplitude-song-info="album"></span>
+          </div>
+        </div>
+      </div>
+    {% endcapture %}
 
-            <a href="{{item.title_info}}" class="audio-info-link" target="_blank">
-              {% if player.title_info %}
-              <img class="audio-info-grey" src="/assets/themes/j1/modules/amplitudejs/icons/audio-info-grey.svg"   style="display: block" />
-              <img class="audio-info-white" src="/assets/themes/j1/modules/amplitudejs/icons/audio-info-white.svg" style="display: none" />
-              {% else %}
-              <img class="audio-info-grey" src="/assets/themes/j1/modules/amplitudejs/icons/audio-info-grey.svg"   style="display: none" />
-              <img class="audio-info-white" src="/assets/themes/j1/modules/amplitudejs/icons/audio-info-white.svg" style="display: none" />
-              {% endif %}
-            </a>
+    <!-- Player Instance: {{player_id}} of type {{player_type}} -->
+    <div id="{{player_id}}" class="uno-player">
 
-            <span class="audio-duration">{{item.duration}}</span>
-          </div> <!-- END Audio item -->
-          {% endif %}{% endfor %}
-        </div> <!-- END Large Player|Right Side -->
+      <!-- Player Container -->
+      <div id="audio-player-container" class="mb-5">
+        <!-- Player -->
+        <div id="amplitude-player">
 
-      </div>  <!-- END Player -->
-    </div> <!-- END Player Container -->
-  </div> <!-- END Player Instance: {{player_id}} -->
+          <!-- Large Player|Left Side -->
+          <div id="amplitude-left">
+          {{large_player__left_side}}
+          </div>
+          <!-- END Large Player|Left Side -->
+
+          <!-- Large Player|Right Side -->
+          <div id="amplitude-right" class="{{player_scrollbar_class}}">
+            <div id="playlist-header" class="player-expanded">Playlist</div>
+
+            {% for item in player_items %}{% if item.enabled %}
+            <!-- Audio item -->
+            <div class="song amplitude-song-container amplitude-play-pause" data-amplitude-song-index="{{forloop.index0}}">
+
+              <div class="song-now-playing-icon-container">
+                <div class="play-button-container"></div>
+                <img class="now-playing" src="/assets/themes/j1/modules/amplitudejs/icons/now-playing.svg" />
+              </div>
+
+              <div class="audio-meta-data">
+                <span class="audio-title">{{item.title}}</span>
+                <span class="audio-artist">{{item.artist}}</span>
+              </div>
+
+              <a href="{{item.title_info}}" class="audio-info-link" target="_blank">
+                {% if player_title_info %}
+                <img class="audio-info-grey" src="/assets/themes/j1/modules/amplitudejs/icons/audio-info-grey.svg"   style="display: block" />
+                <img class="audio-info-white" src="/assets/themes/j1/modules/amplitudejs/icons/audio-info-white.svg" style="display: none" />
+                {% else %}
+                <img class="audio-info-grey" src="/assets/themes/j1/modules/amplitudejs/icons/audio-info-grey.svg"   style="display: none" />
+                <img class="audio-info-white" src="/assets/themes/j1/modules/amplitudejs/icons/audio-info-white.svg" style="display: none" />
+                {% endif %}
+              </a>
+
+              <span class="audio-duration">{{item.duration}}</span>
+            </div> <!-- END Audio item -->
+            {% endif %}{% endfor %}
+          </div> <!-- END Large Player|Right Side -->
+
+        </div>  <!-- END Player -->
+      </div> <!-- END Player Container -->
+    </div> <!-- END Player Instance: {{player_id}} -->
+    {% endif %}
+
+    {% comment %} Reset element variables (already processed)
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% assign amplitude_settings = nil %}
+
+    {% comment %} END expanded player
+    ---------------------------------------------------------------------------- {% endcomment %}
+
+  {% endcase %}
 
 {% endif %} {% endfor %}
-{% comment %} END Large Player instance {% endcomment %}
 
+{% comment %} END player instances
+-------------------------------------------------------------------------------- {% endcomment %}
 
 {% endcapture %}
 

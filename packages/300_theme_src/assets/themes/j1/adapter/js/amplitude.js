@@ -109,25 +109,23 @@ j1.adapter.amplitude = ((j1, window) => {
   var endTimeModule;
   var timeSeconds;
 
-  // player instance
-  // ---------------------------------------------------------------------------
-  var amplitudeInitialized    = false;
-
-  // player config
+  // player instance settings
   // ---------------------------------------------------------------------------
   var playerID;
+  var amplitudeInitialized    = false;
 
-  // defaults
-  // --------
-  var playerVolume            = '50';
-  var playerRepeat            = false;
-  var playerShuffle           = false;
-  var playerTitleInfo         = false;
-  var playerDelayOnNextTitle  = '100';
-  var playerPauseOnNextTitle  = false;
+  // player defaults
+  // --------------
+  var playerType              = '{{amplitude_defaults.player_type}}';
+  var playerVolume            = '{{amplitude_defaults.volume}}';
+  var playerRepeat            = ('{{amplitude_defaults.repeat}}' === 'true') ? true : false;
+  var playerShuffle           = ('{{amplitude_defaults.shuffle}}' === 'true') ? true : false;
+  var playerTitleInfo         = ('{{amplitude_defaults.title_info}}' === 'true') ? true : false;
+  var playerPauseOnNextTitle  = ('{{amplitude_defaults.pause_on_next_title}}' === 'true') ? true : false;
+  var playerDelayOnNextTitle  = '{{amplitude_defaults.delay_on_next_title}}';
 
-  // settings
-  // --------
+  // player settings
+  // ---------------
   var amplitudePlayerState;
   var amplitudeDefaults;
   var amplitudeSettings;
@@ -174,8 +172,9 @@ j1.adapter.amplitude = ((j1, window) => {
         var pageState      = $('#content').css("display");
         var pageVisible    = (pageState === 'block') ? true : false;
         var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
+        var atticFinished  = (j1.adapter.attic.getState() == 'finished') ? true : false;
 
-        if (j1CoreFinished && pageVisible) {
+        if (j1CoreFinished && pageVisible && atticFinished) {
           startTimeModule = Date.now();
 
           _this.setState('started');
@@ -187,28 +186,22 @@ j1.adapter.amplitude = ((j1, window) => {
           // -------------------------------------------------------------------
           {% for player in amplitude_options.players %} {% if player.enabled %}
             {% assign player_items  = player.items %}
+            {% assign player_index  = forloop.index0 %}
             {% assign player_id     = player.player_id %}
             {% assign xhr_data_path = amplitude_options.xhr_data_path %}
             {% capture xhr_container_id %}{{player_id}}_parent{% endcapture %}
 
-            playerID              = '{{player.player_id}}';
+            playerID = '{{player.player_id}}';
+            logger.info('\n' + 'found player on id: ' + '#' + '{{player_id}}');
 
             // load|set (default) values
             playerVolume            = ('{{player.volume}}' !== '') ? '{{player.volume}}' : playerVolume;
-            playerRepeat            = ('{{player.repeat}}' !== '') ? '{{player.repeat}}' : playerRepeat;
-            playerShuffle           = ('{{player.shuffle}}' !== '') ? '{{player.shuffle}}' : playerShuffle;
-            playerTitleInfo         = ('{{player.title_info}}' !== '') ? '{{player.title_info}}' : playerTitleInfo;
-            playerPauseOnNextTitle  = ('{{player.delay_on_next_title}}' !== '') ? '{{player.pause_on_next_title}}' : playerPauseOnNextTitle;
-            playerDelayOnNextTitle  = ('{{player.delay_on_next_title}}' !== '') ? '{{player.delay_on_next_title}}' : playerDelayOnNextTitle;
-
-            // convert text to boolean
-            playerRepeat            = ('{{player.repeat}}' == 'true') ? true : false;
-            playerShuffle           = ('{{player.repeat}}' == 'true') ? true : false;
-            playerTitleInfo         = ('{{player.title_info}}' == 'true') ? true : false;
-            playerPauseOnNextTitle  = ('{{player.delay_on_next_title}}' == 'true') ? true : false;
-            playerDelayOnNextTitle  = ('{{player.delay_on_next_title}}' == 'true') ? true : false;
-
-            logger.info('\n' + 'found player on id: ' + '#' + '{{player_id}}');
+            playerRepeat            = ('{{player.repeat}}' === 'true') ? true : playerRepeat;
+            playerShuffle           = ('{{player.shuffle}}' === 'true') ? true : playerShuffle;
+            playerType              = ('{{player.player_type}}' !== '') ? '{{player.player_type}}' : playerType;
+            playerTitleInfo         = ('{{player.title_info}}' === 'true') ? true : playerTitleInfo;
+            playerPauseOnNextTitle  = ('{{player.delay_on_next_title}}' === 'true') ? true : playerPauseOnNextTitle;
+            playerDelayOnNextTitle  = ('{{player.delay_on_next_title}}' === 'true') ? true : playerDelayOnNextTitle;
 
             var uiLoaderSettings = {
               player_id:          '{{player_id}}',
@@ -217,13 +210,15 @@ j1.adapter.amplitude = ((j1, window) => {
             }
             _this.uiLoader(uiLoaderSettings);
 
-            // dynamic loader variable to setup the playeron ID {{player_id}}
+            // dynamic loader variable to setup the player on ID {{player_id}}
             dependency = 'dependencies_met_html_loaded_{{player_id}}';
             load_dependencies[dependency] = '';
 
             // -----------------------------------------------------------------
             // initialize amplitude instance (when player UI loaded)
             // -----------------------------------------------------------------
+            // jadams: timeout seems NOT nessesary
+            // setTimeout(() => {
             load_dependencies['dependencies_met_html_loaded_{{player_id}}'] = setInterval (() => {
               // check if HTML portion of the player is loaded successfully
               xhrLoadState = j1.xhrDOMState['#' + '{{xhr_container_id}}'];
@@ -247,17 +242,94 @@ j1.adapter.amplitude = ((j1, window) => {
                 // -------------------------------------------------------------
                 logger.info('\n' + 'initialize player on ID #{{player_id}}: started');
                 const playerItems = $.extend({}, {{player_items | replace: 'nil', 'null' | replace: '=>', ':' }});
-                _this.initApi(playerItems);
+
+                // cleanup playerItems
+                var playerItemsEnabled = {};
+                for (var i = 0; i < Object.keys(playerItems).length; i++) {
+                  if (playerItems[i].enabled) {
+                    playerItemsEnabled[i.toString()] = playerItems[i];
+                  } // END if enabled
+                } // END for playerItems
+
+                _this.initApi(playerItemsEnabled);
 
                 var dependencies_met_api_initialized = setInterval (() => {
                   if (amplitudeInitialized) {
                     amplitudePlayerState = Amplitude.getPlayerState();
+
+                    // single song player: click on the progress bar
+                    if (document.getElementById('single-song-player-container') !== null) {
+                      document.getElementById('single-song-player-progress').addEventListener('click', function(event) {
+                        var offset = this.getBoundingClientRect();
+                        var xpos   = event.pageX - offset.left;
+
+                        Amplitude.setSongPlayedPercentage(
+                          (parseFloat(xpos)/parseFloat(this.offsetWidth))*100);
+                      });
+                    } // END if single-song-player-progress
+
+                    // flat player: click down arrow to show the list screen
+                    if (document.getElementById('flat-black-player-container') !== null) {
+                      document.getElementsByClassName('down-header')[0].addEventListener('click', function() {
+                        var list = document.getElementById('list');
+                        list.style.height = ( parseInt( document.getElementById('flat-black-player-container').offsetHeight ) - 135 ) + 'px';
+
+                        document.getElementById('list-screen').classList.remove('slide-out-top');
+                        document.getElementById('list-screen').classList.add('slide-in-top');
+                        document.getElementById('list-screen').style.display = "block";
+
+                        // disable scrolling
+                        if ($('body').hasClass('stop-scrolling')) {
+                          return false;
+                        } else {
+                          $('body').addClass('stop-scrolling');
+                        }
+                      });
+
+                      // flat player: click up arrow to hide the list screen
+                      document.getElementsByClassName('hide-playlist')[0].addEventListener('click', function() {
+                        document.getElementById('list-screen').classList.remove('slide-in-top');
+                        document.getElementById('list-screen').classList.add('slide-out-top');
+                        document.getElementById('list-screen').style.display = "none";
+
+                        // enable scrolling
+                        if ($('body').hasClass('stop-scrolling')) {
+                          $('body').removeClass('stop-scrolling');
+                        }
+                      });
+
+                      // flat player: click on the progress bar
+                      document.getElementById('flat-player-progress').addEventListener('click', function(event) {
+                        var offset = this.getBoundingClientRect();
+                        var xpos   = event.pageX - offset.left;
+
+                        Amplitude.setSongPlayedPercentage(
+                          (parseFloat(xpos)/parseFloat(this.offsetWidth))*100);
+                      });
+                    } // END if flat-black-player-container
+
+                    // jadams, 2021-03-05: manage scrolling on playlist (Expanded Player|Right)
+                    if (document.getElementById('amplitude-right') !== null) {
+                      document.getElementById('amplitude-right').addEventListener('mouseenter', function() {
+                        if ($('body').hasClass('stop-scrolling')) {
+                          return false;
+                        } else {
+                          $('body').addClass('stop-scrolling');
+                        }
+                      });
+                      document.getElementById('amplitude-right').addEventListener('mouseleave', function() {
+                        if ($('body').hasClass('stop-scrolling')) {
+                          $('body').removeClass('stop-scrolling');
+                        }
+                      });
+                    } // END manage scrolling on playlist (Expanded Player|Right)
 
                     // global player settings
                     // ---------------------------------------------------------
                     logger.info('\n' + 'set delay between titles: ' + playerDelayOnNextTitle + 'ms');
                     logger.info('\n' + 'set repeat (album): ' + playerRepeat);
                     logger.info('\n' + 'set shuffle (album): ' + playerShuffle);
+
                     // set delay between titles (songs)
                     Amplitude.setDelay(playerDelayOnNextTitle);
                     // set repeat (album)
@@ -285,6 +357,7 @@ j1.adapter.amplitude = ((j1, window) => {
                 clearInterval(load_dependencies['dependencies_met_html_loaded_{{player_id}}']);
               }
             }, 10); // END dependencies_met_html_loaded
+//          }, 100 + ({{player_index}} * 50));
           {% endif %} {% endfor %}
           // initialize amplitude instance (Liquid)
 
@@ -322,10 +395,11 @@ j1.adapter.amplitude = ((j1, window) => {
           var item = audio_items[i];
           var song = {};
 
-          // remap config settings|amplitude song items
+          // map config settings|amplitude song items
           // -------------------------------------------------------------------
           for (const key in item) {
-            if (key === 'audio_base' || key === 'item' || key === 'enabled') {
+            // skip properties NOT needed for a song
+            if (key === 'item' || key === 'audio_base' || key === 'enabled') {
               continue;
             } else if (key === 'audio') {
               song.url = audio_items[i].audio_base + '/' + item[key];
@@ -355,6 +429,11 @@ j1.adapter.amplitude = ((j1, window) => {
       } // END for items
 
       Amplitude.init({
+        bindings: {
+          37:     'prev',
+          39:     'next',
+          32:     'play_pause'
+        },
         songs: songs,
         callbacks: {
           // See: https://521dimensions.com/open-source/amplitudejs/docs
@@ -432,46 +511,100 @@ j1.adapter.amplitude = ((j1, window) => {
       for (var i = 0; i < songs.length; i++) {
         // ensure that on mouseover, CSS styles don't get messed up for active songs
         songs[i].addEventListener('mouseover', function() {
-          this.style.backgroundColor = '#00A0FF';
-          this.querySelectorAll('.audio-meta-data .audio-title')[0].style.color  = '#FFFFFF';
-          this.querySelectorAll('.audio-meta-data .audio-artist')[0].style.color = '#FFFFFF';
 
+          if ($('body').hasClass('stop-scrolling')){
+            return false;
+          } else {
+            $('body').addClass('stop-scrolling');
+          }
+
+          this.style.backgroundColor = '#00A0FF';
+
+          if (this.querySelectorAll('.audio-meta-data .audio-title')[0] !== undefined) {
+            this.querySelectorAll('.audio-meta-data .audio-title')[0].style.color  = '#FFFFFF';
+          }
+          if (this.querySelectorAll('.audio-meta-data .audio-artist')[0] !== undefined) {
+            this.querySelectorAll('.audio-meta-data .audio-artist')[0].style.color = '#FFFFFF';
+          }
+
+          // mini play button in playlist
           if (!this.classList.contains('amplitude-active-song-container')) {
-            this.querySelectorAll('.play-button-container')[0].style.display = 'block';
-          } // END if ???
+            if (this.querySelectorAll('.play-button-container')[0] !== undefined) {
+              this.querySelectorAll('.play-button-container')[0].style.display = 'block';
+            }
+          } // END mini play button in playlist
 
           if (playerTitleInfo) {
-            this.querySelectorAll('img.audio-info-grey')[0].style.display  = 'none';
-            this.querySelectorAll('img.audio-info-white')[0].style.display = 'block';
+            if (this.querySelectorAll('img.audio-info-grey')[0] !== undefined) {
+              this.querySelectorAll('img.audio-info-grey')[0].style.display  = 'none';
+            }
+            if (this.querySelectorAll('img.audio-info-white')[0] !== undefined) {
+              this.querySelectorAll('img.audio-info-white')[0].style.display = 'block';
+            }
           } else {
-            this.querySelectorAll('img.audio-info-grey')[0].style.display  = 'none';
-            this.querySelectorAll('img.audio-info-white')[0].style.display = 'none';
+            if (this.querySelectorAll('img.audio-info-grey')[0] !== undefined) {
+              this.querySelectorAll('img.audio-info-grey')[0].style.display  = 'none';
+            }
+            if (this.querySelectorAll('img.audio-info-white')[0] !== undefined) {
+              this.querySelectorAll('img.audio-info-white')[0].style.display = 'none';
+            }
           } // END if playerTitleInfo
 
-          this.querySelectorAll('.audio-duration')[0].style.color = '#FFFFFF';
+          if (this.querySelectorAll('.audio-duration')[0] !== undefined) {
+            this.querySelectorAll('.audio-duration')[0].style.color = '#FFFFFF';
+          }
         });
 
         // ensure that on mouseout, CSS styles don't get messed up for active songs
         songs[i].addEventListener('mouseout', function() {
           this.style.backgroundColor = '#FFFFFF';
-          this.querySelectorAll('.audio-meta-data .audio-title')[0].style.color  = '#272726';
-          this.querySelectorAll('.audio-meta-data .audio-artist')[0].style.color = '#607D8B';
-          this.querySelectorAll('.play-button-container')[0].style.display = 'none';
+          if (this.querySelectorAll('.audio-meta-data .audio-title')[0] !== undefined) {
+            this.querySelectorAll('.audio-meta-data .audio-title')[0].style.color  = '#272726';
+          }
+          if (this.querySelectorAll('.audio-meta-data .audio-artist')[0] !== undefined) {
+            this.querySelectorAll('.audio-meta-data .audio-artist')[0].style.color = '#607D8B';
+          }
+          if (this.querySelectorAll('.play-button-container')[0] !== undefined) {
+            this.querySelectorAll('.play-button-container')[0].style.display = 'none';
+          }
 
           if (playerTitleInfo) {
-            this.querySelectorAll('img.audio-info-grey')[0].style.display  = 'block';
-            this.querySelectorAll('img.audio-info-white')[0].style.display = 'none';
+            if (this.querySelectorAll('img.audio-info-grey')[0] !== undefined) {
+              this.querySelectorAll('img.audio-info-grey')[0].style.display  = 'block';
+            }
+            if (this.querySelectorAll('img.audio-info-white')[0] !== undefined) {
+              this.querySelectorAll('img.audio-info-white')[0].style.display = 'none';
+            }
           } else {
-            this.querySelectorAll('img.audio-info-grey')[0].style.display  = 'none';
-            this.querySelectorAll('img.audio-info-white')[0].style.display = 'none';
+            if (this.querySelectorAll('img.audio-info-grey')[0] !== undefined) {
+              this.querySelectorAll('img.audio-info-grey')[0].style.display  = 'none';
+            }
+            if (this.querySelectorAll('img.audio-info-white')[0] !== undefined) {
+              this.querySelectorAll('img.audio-info-white')[0].style.display = 'none';
+            }
           } // END if playerTitleInfo
 
-          this.querySelectorAll('.audio-duration')[0].style.color = '#607D8B';
+          if (this.querySelectorAll('.audio-duration')[0] !== undefined) {
+            this.querySelectorAll('.audio-duration')[0].style.color = '#607D8B';
+          }
+
+          if ($('body').hasClass('stop-scrolling')){
+            return false;
+          } else {
+            $('body').addClass('stop-scrolling');
+          }
         });
 
         // show|hide the (mini) play button when the song is clicked
         songs[i].addEventListener('click', function () {
-          this.querySelectorAll('.play-button-container')[0].style.display = 'none';
+          if (this.querySelectorAll('.play-button-container')[0] !== undefined) {
+            this.querySelectorAll('.play-button-container')[0].style.display = 'none';
+          }
+          if ($('body').hasClass('stop-scrolling')){
+            return false;
+          } else {
+            $('body').addClass('stop-scrolling');
+          }
         });
       }
 

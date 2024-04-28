@@ -1,0 +1,2 @@
+See: https://github.com/serversideup/amplitudejs/issues/317
+See: https://stackoverflow.com/questions/55026293/google-chrome-javascript-issue-in-getting-user-audio-the-audiocontext-was-not

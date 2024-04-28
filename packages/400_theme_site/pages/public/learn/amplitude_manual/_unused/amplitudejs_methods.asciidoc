@@ -1,0 +1,645 @@
+== Public Functions
+
+
+There are a variety of public functions that AmplitudeJS exposes to the
+user. These methods allow the user to change config variables, add new
+songs, play now, etc.
+
+=== link:#get-config[#] Get Config
+
+Returns the current AmplitudeJS configuration.
+
+[source,language-javascript]
+----
+Amplitude.getConfig();
+----
+
+=== link:#bind-new-elements[#] Bind New Elements
+
+The bind new elements function should be called whenever a new song
+element is added to the page. This will bind all of the event handlers
+for that element.
+
+[source,language-javascript]
+----
+Amplitude.bindNewElements()
+----
+
+=== link:#get-active-playlist[#] Get Active Playlist
+
+This method will return the key of the active playlist.
+
+[source,language-javascript]
+----
+Amplitude.getActivePlaylist()
+----
+
+=== link:#get-playback-speed[#] Get Playback Speed
+
+Returns the current playback speed for the player.
+
+[source,language-javascript]
+----
+Amplitude.getPlaybackSpeed()
+----
+
+=== link:#get-repeat[#] Get Repeat
+
+Returns the state of the global repeat status for the player.
+
+[source,language-javascript]
+----
+Amplitude.getRepeat()
+----
+
+=== link:#get-repeat-playlist[#] Get Repeat Playlist
+
+Returns the state of the repeat status for the playlist.
+
+[source,language-javascript]
+----
+Amplitude.getRepeatPlaylist( playlistKey )
+----
+
+=== link:#get-shuffle[#] Get Shuffle
+
+Returns the current state of the global shuffle status for the player.
+
+[source,language-javascript]
+----
+Amplitude.getShuffle()
+----
+
+=== link:#get-shuffle-playlist[#] Get Shuffle Playlist
+
+Returns the state of the shuffle flag for a playlist.
+
+[source,language-javascript]
+----
+Amplitude.getShufflePlaylist( playlistKey )
+----
+
+=== link:#set-shuffle[#] Set Shuffle
+
+Sets the global shuffle state for AmplitudeJS.
+
+[source,language-javascript]
+----
+Amplitude.setShuffle( shuffleState )
+----
+
+=== link:#set-shuffle-playlist[#] Set Shuffle Playlist
+
+Sets the shuffle state for a playlist.
+
+[source,language-javascript]
+----
+Amplitude.setShufflePlaylist( playlistKey, shuffleState )
+----
+
+=== link:#set-repeat[#] Set Repeat
+
+Sets the global repeat status for AmplitudeJS
+
+[source,language-javascript]
+----
+Amplitude.setRepeat( repeatState )
+----
+
+=== link:#set-repeat-song[#] Set Repeat Song
+
+Sets the global state to determine if we should repeat the individual
+song upon completion.
+
+[source,language-javascript]
+----
+Amplitude.setRepeatSong( repeatSongState )
+----
+
+=== link:#set-repeat-playlist[#] Set Repeat Playlist
+
+Sets the repeat for the playlist.
+
+[source,language-javascript]
+----
+Amplitude.setRepeatPlaylist( playlistKey, repeatState )
+----
+
+=== link:#get-default-album-art[#] Get Default Album Art
+
+Returns the default album art URL set in the player.
+
+[source,language-javascript]
+----
+Amplitude.getDefaultAlbumArt()
+----
+
+=== link:#set-default-album-art[#] Set Default Album Art
+
+Sets the default album art for the player to the URL provided.
+
+[source,language-javascript]
+----
+Amplitude.setDefaultAlbumArt( url )
+----
+
+[[get-default-album-art-2]]
+=== link:#get-default-album-art-2[#] Get Default Album Art
+
+Returns the URL of the default album art for the player.
+
+[source,language-javascript]
+----
+Amplitude.getDefaultAlbumArt()
+----
+
+=== link:#get-default-playlist-art[#] Get Default Playlist Art
+
+Gets the default art for a playlist.
+
+[source,language-javascript]
+----
+Amplitude.getDefaultPlaylistArt()
+----
+
+=== link:#set-default-playlist-art[#] Set Default Playlist Art
+
+Sets the default playlist art.
+
+[source,language-javascript]
+----
+Amplitude.setDefaultPlaylistArt( url )
+----
+
+=== link:#set-debug[#] Set Debug
+
+To change the debug mode setting, you can call the setDebug method any
+time and start to receive data about the state of the player or turn off
+debugging.
+
+[source,language-javascript]
+----
+Amplitude.setDebug( {bool} );
+----
+
+=== link:#get-active-song-metadata[#] Get Active Song Metadata
+
+Returns the active song's metadata as a JSON object.
+
+[source,language-javascript]
+----
+Amplitude.getActiveSongMetadata();
+----
+
+=== link:#get-active-playlist-metadata[#] Get Active Playlist Metadata
+
+Gets the active playlist's metadata as a JSON object.
+
+[source,language-javascript]
+----
+Amplitude.getActivePlaylistMetadata();
+----
+
+=== link:#get-song-at-index[#] Get Song At Index
+
+Returns a song's metadata at a specific index.
+
+[source,language-javascript]
+----
+Amplitude.getSongAtIndex( {index} );
+----
+
+=== link:#get-song-at-playlist-index[#] Get Song At Playlist Index
+
+Returns a song at a playlist's index.
+
+[source,language-javascript]
+----
+Amplitude.getSongAtPlaylistIndex( {playlistIndex}, {index} );
+----
+
+=== link:#add-song[#] Add Song
+
+Adds a song to the AmplitudeJS player. You will need to write a method
+yourself to add the visual side of things to fit your custom design, and
+then call the bindNewElements() method to make sure it works.
+
+This method returns the index of the song added to the player.
+
+[source,language-javascript]
+----
+Amplitude.addSong( {song_object} );
+----
+
+=== link:#prepend-song[#] Prepend Song
+
+Adds a song to the beginning of the AmplitudeJS player. After
+pre-pending the song, you will have to bindNewElements() method to make
+sure that any visuals are updated as well.
+
+This method returns the index of the song added to the player.
+
+[source,language-javascript]
+----
+Amplitude.prependSong( {song_object} );
+----
+
+=== link:#add-song-to-playlist[#] Add Song To Playlist
+
+Adds a song to a specific playlist within AmplitudeJS. Once the song is
+added you will need to update the visual side of the player yourself.
+After you update the visual side, run the `Amplitude.bindNewElements()`
+method to make sure the functionality is there for the new element.
+
+[source,language-javascript]
+----
+Amplitude.addSongToPlaylist( songObject, playlistKey )
+----
+
+=== link:#remove-song[#] Remove Song
+
+Removes a song from the global song array. You will have to remove the
+containing element by yourself.
+
+[source,language-javascript]
+----
+Amplitude.removeSong( indexOfSong )
+----
+
+=== link:#remove-song-from-playlist[#] Remove Song From Playlist
+
+Removes a song from a playlist. You will have to update the visual side
+by yourself.
+
+[source,language-javascript]
+----
+Amplitude.removeSongFromPlaylist( indexOfSongInPlaylist, playlistKey )
+----
+
+=== link:#play-song-at-index[#] Play Song At Index
+
+Plays whatever song is set in the config at the specified index.
+
+[source,language-javascript]
+----
+Amplitude.playSongAtIndex( songIndex )
+----
+
+=== link:#play-playlist-song-at-index[#] Play Playlist Song At Index
+
+Plays the song in a playlist at the specified index.
+
+[source,language-javascript]
+----
+Amplitude.playPlaylistSongAtIndex( playlistIndex, playlistKey )
+----
+
+=== link:#play-now[#] Play Now
+
+In AmplitudeJS 2.0 this was referred to as 'Dynamic Mode'. Now you can
+just pass a song to AmplitudeJS and it will automatically play. If there
+are visual elements, then they will sync as well.
+
+[source,language-javascript]
+----
+Amplitude.playNow( {song_object} );
+----
+
+=== link:#play[#] Play
+
+This simply plays whatever song is active.
+
+[source,language-javascript]
+----
+Amplitude.play()
+----
+
+=== link:#pause[#] Pause
+
+This simply pauses whatever song is active.
+
+[source,language-javascript]
+----
+Amplitude.pause()
+----
+
+=== link:#stop[#] Stop
+
+This simply stops whatever song is active.
+
+[source,language-javascript]
+----
+Amplitude.stop()
+----
+
+=== link:#next[#] Next
+
+Plays the next song either in the playlist or globally.
+
+[source,language-javascript]
+----
+Amplitude.next( playlistKey = null )
+----
+
+=== link:#prev[#] Prev
+
+Plays the previous song either in the playlist or globally.
+
+[source,language-javascript]
+----
+Amplitude.prev( playlistKey = null )
+----
+
+=== link:#get-audio[#] Get Audio
+
+This returns the actual audio element. This is mainly used for writing
+extensions but exposes the core of AmplitudeJS. This returns the audio
+element used by AmplitudeJS.
+
+[source,language-javascript]
+----
+Amplitude.getAudio()
+----
+
+=== link:#get-songs[#] Get songs
+
+This method returns all of the songs defined in AmplitudeJS. It can be
+used for a variety of different functions. It's extremely helpful if you
+are AJAX loading songs and want to see the contents of the song array.
+
+[source,language-javascript]
+----
+Amplitude.getSongs()
+----
+
+=== link:#get-songs-in-playlist[#] Get Songs In Playlist
+
+This method returns all of the songs in a playlist. Since the user
+defines a playlist with a key and the indexes of the songs, this will
+map the keys to the songs and return all of the songs in the playlist.
+
+[source,language-javascript]
+----
+Amplitude.getSongsInPlaylist( playlistKey )
+----
+
+=== link:#get-songs-state[#] Get Songs State
+
+This method returns the current order of the songs. It can be used for
+determining what song is next. If shuffle is on, it will return the
+shuffled list of songs.
+
+[source,language-javascript]
+----
+Amplitude.getSongsState()
+----
+
+=== link:#get-songs-state-playlist[#] Get Songs State Playlist
+
+This method returns the current order of the songs in a playlist. If
+needed this can be used to determine the next song in a playlist. This
+accounts for whether the playlist has been shuffled or not.
+
+[source,language-javascript]
+----
+Amplitude.getSongsStatePlaylist( playlist )
+----
+
+=== link:#get-active-index[#] Get Active Index
+
+This method returns the index of the active song in the songs array.
+
+[source,language-javascript]
+----
+Amplitude.getActiveIndex()
+----
+
+=== link:#get-active-index-state[#] Get Active Index State
+
+This method returns the index of the active song in the songs array but
+accounts for if shuffle has been enabled or not.
+
+[source,language-javascript]
+----
+Amplitude.getActiveIndexState()
+----
+
+=== link:#get-version[#] Get Version
+
+This method returns the version of AmplitudeJS being used.
+
+[source,language-javascript]
+----
+Amplitude.getVersion()
+----
+
+=== link:#get-buffered[#] Get Buffered
+
+This method returns the buffered percentage of the now playing song.
+This can be used to show how much of the song has been buffered and
+ready to be played.
+
+[source,language-javascript]
+----
+Amplitude.getBuffered()
+----
+
+=== link:#get-song-played-percentage[#] Get Song Played Percentage
+
+This method returns the percentage of the song played. When implementing
+a 3rd party tracking element, you can set the percentage of the element
+to the percentage played of the song.
+
+[source,language-javascript]
+----
+Amplitude.getSongPlayedPercentage()
+----
+
+You can combine this method with the time_update callback and whenever
+the time updates your method can call
+Amplitude.getSongPlayedPercentage() and you can set your tracking
+element correctly.
+
+=== link:#get-song-played-seconds[#] Get Song Played Seconds
+
+This method returns the current seconds the user is into the song.
+
+[source,language-javascript]
+----
+Amplitude.getSongPlayedSeconds()
+----
+
+=== link:#get-song-duration[#] Get Song Duration
+
+Returns the duration of the current song.
+
+[source,language-javascript]
+----
+Amplitude.getSongDuration()
+----
+
+=== link:#set-song-played-percentage[#] Set Song Played Percentage
+
+This method allows you to set the percentage of the active song. The
+method accepts a float between 0 and 100 for the percentage of the song
+to be set to.
+
+[source,language-javascript]
+----
+Amplitude.setSongPlayedPercentage( percentage )
+----
+
+=== link:#skip-to[#] Skip To
+
+Allows the user to skip to a specific location in the song whether that
+song is in a playlist or not.
+
+[source,language-javascript]
+----
+Amplitude.skipTo( seconds, songIndex, playlist = null )
+----
+
+=== link:#set-delay[#] Set Delay
+
+If you have multiple songs that your player is using you can change the
+amount of time you have as a delay between the songs. When one song
+ends, what is set will be the amount of time delayed before the next
+song starts.
+
+[source,language-javascript]
+----
+Amplitude.setDelay( milliseconds )
+----
+
+=== link:#get-delay[#] Get Delay
+
+Gets the current delay between songs in milliseconds.
+
+[source,language-javascript]
+----
+Amplitude.getDelay();
+----
+
+=== link:#set-song-meta-data[#] Set Song Meta Data
+
+You can set the meta data for any song in your song objects. This is
+helpful if you are doing a live stream and have a call back that returns
+the information of what song is currently playing.
+
+[source,language-javascript]
+----
+Amplitude.setSongMetaData( index, metaData )
+----
+
+The first parameter `index` is the index of the song in the songs array
+you are setting the meta data for. The `metaData` is an object that
+contains meta data similar to a song object. The keys that get passed
+will be updated on the song object at the index. The only key that can
+not be updated is the `url`.
+
+=== link:#set-playlist-meta-data[#] Set Playlist Meta Data
+
+You can set the metadata for the playlist. Similar to the songs object,
+you can do it for a playlist object.
+
+[source,language-javascript]
+----
+Amplitude.setPlaylistMetaData( playlist, metaData )
+----
+
+The first argument `playlist` is the key of the playlist we are setting
+the meta data for and the second object `metaData` is the object
+containing all of the keys we are updating.
+
+=== link:#get-analyser[#] Get Analyser
+
+Returns the Web Audio API Analyser. This allows for the user to bind to
+the active audio through the web audio API.
+
+[source,language-javascript]
+----
+Amplitude.getAnalyser()
+----
+
+=== link:#get-player-state[#] Get Player State
+
+Returns the current state of the player whether it's `playing`,
+`paused`, or `stopped`.
+
+[source,language-javascript]
+----
+Amplitude.getPlayerState()
+----
+
+=== link:#add-playlist[#] Add Playlist
+
+This method allows you to add a playlist to AmplitudeJS. To do this, you
+need a unique key for your playlist, the data describing your playlist
+such as `title`, `author`, etc. and an array of song objects for your
+playlist.
+
+[source,language-javascript]
+----
+Amplitude.addPlaylist( key, data, songs );
+----
+
+The first argument is the `key`. Remember this is a JSON key and should
+be formatted as such.
+
+The second argument is all of the data describing the playlist such as
+`name`, `title`, `author`, etc. in the form of a JSON object.
+
+Finally, the third argument is an array of song objects. These are the
+songs that will be added to the playlist.
+
+=== link:#register-visualization[#] Register Visualization
+
+The other way to register a visualization is through the public
+`Amplitude.registerVisualization( visualization, preferences )` method.
+The first parameter being the object included with the visualization
+file and the second parameter being a JSON object containing any of the
+parameters needed to overwrite defaults provided by the visualization.
+
+[source,language-javascript]
+----
+  Amplitude.registerVisualization( visualization, preferences );
+----
+
+=== link:#set-global-visualization[#] Set Global Visualization
+
+You can set the global visualization through the public method like
+this:
+
+[source,language-javascript]
+----
+  Amplitude.setGlobalVisualization( visualizationKey );
+----
+
+=== link:#set-playlist-visualization[#] Set Playlist Visualization
+
+You can set the visualization through the public facing method like
+this:
+
+[source,language-javascript]
+----
+  Amplitude.setPlaylistVisualization( playlist_key, visualization_key );
+----
+
+=== link:#set-individual-song-visualization[#] Set Individual Song Visualization
+
+You can set the visualization for an individual song like so:
+
+[source,language-javascript]
+----
+  Amplitude.setSongVisualization( songIndex, visualizationKey );
+----
+
+=== link:#set-individual-song-in-playlist-visualization[#] Set Individual Song In Playlist Visualization
+
+You can set the visualization for an individual song in a playlist
+using:
+
+[source,language-javascript]
+----
+Amplitude.setSongInPlaylistVisualization( playlistKey, songIndex, visualizationKey );
+----

@@ -1,0 +1,333 @@
+---
+title:                                  Amplitude
+title_extention:                        Custom Audio players
+tagline:                                Custom Audio Players
+
+date:                                   2024-04-17
+#last_modified:                         2024-01-01
+
+description: >
+                                        Amplitude is a JavaScript library to control the design of audio media
+                                        elements on web pages. The concept allows designers to fully control the
+                                        look and feel of audio players without deep scripting knowledge.
+keywords: >
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap, html, html5, audio,
+                                        Amplitude
+
+categories:                             [ Testpage ]
+tags:                                   [ Audio. Amplitude ]
+
+image:
+  path:                                 /assets/images/icons/videojs/videojs-poster.png
+  width:                                1920
+  height:                               1280
+
+regenerate:                             false
+personalization:                        true
+permalink:                              /pages/public/amplitude_tester/
+
+resources:                              [ amplitude-js ]
+resource_options:
+  - toccer:
+      collapseDepth:                    2
+  - attic:
+      slides:
+        - url:                          /assets/images/modules/attics/1920x1280/alexey-ruban.jpg
+          alt:                          Photo by Alexey Ruban on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Alexey Ruban
+            href:                       //unsplash.com/de/@intelligenciya
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:images-dir:                            {imagesdir}/pages/roundtrip/100_present_images
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// See: https://521dimensions.com/open-source/amplitudejs/docs
+// See: https://github.com/mediaelement/mediaelement-plugins
+// See: https://github.com/serversideup/amplitudejs/
+
+[role="dropcap"]
+The audio tag in HTML5 is a great way to add audio media to web pages.
+However, the browser fully controls the audio playback interface, which
+can limit or even break a page's design if audio media is used.
+
+AmplitudeJS for the J1 Template offers a straightforward solution for web
+developers. It allows them to easily customize the appearance of their audio
+players without the need for complex scripting. By leveraging J1 Template
+and Amplitude's API, web designers can craft unique interfaces that define
+the visual and functional aspects of a player's audio control elements.
+
+
+mdi:clock-time-five-outline[24px, md-gray mr-2]
+*5 Minutes* to read
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+[role="mt-4"]
+The J1 Template implements custom players based on the (default) theme Uno.
+The color scheme used matches the look and feel of the template to preserve
+the page design.
+
+Three types of AmplitudeJS players are build-in for the J1 template system:
+
+* Single Song Player
+* Flat Player (the default audio plaayer)
+* Expanded Player
+
+[role="mt-4"]
+[NOTE]
+====
+Amplitude players for the J1 Template are mobile-friendly. Instead of
+clicking on the appropriate elements, touch events are applied to all
+mobile devices.
+====
+
+////
+[role="mt-5"]
+== Single Song Player
+
+Balla Balla ..
+
+++++
+<div id="single-song-player-container" class="mb-5">
+  <!-- Player -->
+  <div id="single-song-player" class="single-song-player">
+    <img data-amplitude-song-info="cover_art_url"/>
+
+    <div class="bottom-container">
+      <progress id="single-song-player-progress" class="amplitude-song-played-progress"></progress>
+
+      <div class="time-container">
+        <span class="current-time">
+          <span class="amplitude-current-minutes"></span>:<span class="amplitude-current-seconds"></span>
+        </span>
+        <span class="duration">
+          <span class="amplitude-duration-minutes"></span>:<span class="amplitude-duration-seconds"></span>
+        </span>
+      </div> <!-- END time-scontainerr -->
+
+      <div class="single-song-player control-container">
+        <div id="play-pause" class="amplitude-play-pause"></div>
+        <div class="meta-container single-song-player">
+          <span data-amplitude-song-info="name" class="song-name"></span>
+
+          <span class="single-song-player-song-artist-album">
+            <span data-amplitude-song-info="artist" data-amplitude-song-index="0">Amy Winehouse</span>
+            <span data-amplitude-song-info="album" data-amplitude-song-index="0" style="margin-top: 5px; margin-bottom: 15px">Back To Black</span>
+          </span>
+
+          <div id="volume-container" class="single-song-player-volume-container">
+            <img src="/assets/themes/j1/modules/amplitudejs/icons/volume.svg">
+            <input type="range" class="single-song-player amplitude-volume-slider" step=".1">
+          </div>
+        </div> <!-- END meta-container -->
+      </div> <!-- END control-container -->
+
+    </div> <!-- END bottom-container -->
+
+  </div> <!-- END single-song-player -->
+</div> <!-- END player-container -->
+++++
+////
+
+
+
+
+[role="mt-5"]
+== Flat Player
+
+Balla Balla ..
+
+.Dance Floor · Royalty Free Music
+amplitude::free_disco_flat[role="mt-3 mb-5"]
+
+
+////
+++++
+<div id="free_disco" class="uno-player">
+  <div id="flat-black-player-container">
+
+    <div id="list-screen" class="slide-in-top">
+
+      <div id="list-screen-header" class="hide-playlist">
+        <img id="up-arrow" src="/assets/themes/j1/modules/amplitudejs/icons/up.svg"/>
+        Hide Playlist
+      </div> <!-- END player-header (toggle) -->
+
+      <div id="list-screen-footer" class="flat-player">
+        <div id="list-screen-meta-container">
+          <span data-amplitude-song-info="name" class="song-name"></span>
+          <div class="song-artist-album">
+            <span data-amplitude-song-info="artist" data-amplitude-song-index="0"></span>
+            <span class="song-artist-album-delimiter">·</span>
+            <span data-amplitude-song-info="album" data-amplitude-song-index="0"></span>
+          </div>
+        </div>
+        <div class="list-controls">
+          <div class="list-previous amplitude-prev"></div>
+          <div class="list-play-pause amplitude-play-pause"></div>
+          <div class="list-next amplitude-next"></div>
+        </div>
+      </div> <!-- END list-screen-footer -->
+
+      <div id="list" class="hide-scrollbar">
+        <div class="song amplitude-song-container amplitude-play-pause" data-amplitude-song-index="0">
+          <span class="song-number-now-playing">
+          <span class="number">1</span>
+          <img class="now-playing" src="/assets/themes/j1/modules/amplitudejs/icons/black/now-playing.svg"/>
+          </span>
+          <div class="song-meta-container">
+            <span class="song-name" data-amplitude-song-info="name" data-amplitude-song-index="0"></span>
+            <span class="song-artist-album">
+              <span data-amplitude-song-info="artist" data-amplitude-song-index="0"></span>
+              <span class="song-artist-album-delimiter">·</span>
+              <span data-amplitude-song-info="album" data-amplitude-song-index="0"></span>
+            </span>
+          </div>
+          <span class="song-duration">3:30<span>
+        </div>
+        <div class="song amplitude-song-container amplitude-play-pause" data-amplitude-song-index="1">
+          <span class="song-number-now-playing">
+          <span class="number">2</span>
+          <img class="now-playing" src="/assets/themes/j1/modules/amplitudejs/icons/black/now-playing.svg"/>
+          </span>
+          <div class="song-meta-container">
+            <span class="song-name" data-amplitude-song-info="name" data-amplitude-song-index="1"></span>
+            <span class="song-artist-album">
+              <span data-amplitude-song-info="artist" data-amplitude-song-index="1"></span>
+              <span class="song-artist-album-delimiter">·</span>
+              <span data-amplitude-song-info="album" data-amplitude-song-index="1"></span>
+            </span>
+          </div>
+          <span class="song-duration">4:17<span>
+        </div>
+        <div class="song amplitude-song-container amplitude-play-pause" data-amplitude-song-index="2">
+          <span class="song-number-now-playing">
+          <span class="number">3</span>
+          <img class="now-playing" src="/assets/themes/j1/modules/amplitudejs/icons/black/now-playing.svg"/>
+          </span>
+          <div class="song-meta-container">
+            <span class="song-name" data-amplitude-song-info="name" data-amplitude-song-index="2"></span>
+            <span class="song-artist-album">
+              <span data-amplitude-song-info="artist" data-amplitude-song-index="2"></span>
+              <span class="song-artist-album-delimiter">·</span>
+              <span data-amplitude-song-info="album" data-amplitude-song-index="2"></span>
+            </span>
+          </div>
+          <span class="song-duration">2:33<span>
+        </div>
+      </div> <!-- END  playlist -->
+
+    </div> <!-- END playlist container -->
+
+    <div id="player-screen" class="flat-player">
+
+      <div class="player-header down-header">
+        <img id="down" src="/assets/themes/j1/modules/amplitudejs/icons/down.svg"/>
+        Show Playlist
+      </div> <!-- END player-header (toggle) -->
+
+      <div id="player-top">
+        <img data-amplitude-song-info="cover_art_url"/>
+      </div> <!-- END player-cover -->
+
+      <div id="player-progress-bar-container">
+        <progress id="flat-player-progress" class="amplitude-song-played-progress"></progress>
+      </div> <!-- END player-progress-bar -->
+
+      <div id="player-middle">
+        <div id="control-container" class="flat-control-container">
+          <div id="shuffle-container">
+            <div class="amplitude-shuffle amplitude-shuffle-off" id="shuffle"></div>
+          </div>
+          <div id="prev-container">
+            <div class="amplitude-prev" id="previous"></div>
+          </div>
+          <div id="play-pause-container">
+            <div class="amplitude-play-pause" id="play-pause"></div>
+          </div>
+          <div id="next-container">
+            <div class="amplitude-next" id="next"></div>
+          </div>
+          <div id="repeat-container">
+            <div class="amplitude-repeat" id="repeat"></div>
+          </div>
+        </div> <!-- END control-container -->
+
+        <div id="volume-container" class="flat-player-volume-container">
+          <img src="/assets/themes/j1/modules/amplitudejs/icons/volume.svg">
+          <input type="range" class="amplitude-volume-slider flat-player-volume-slider" step=".1">
+        </div> <!-- END volume-container -->
+
+      </div> <!-- END player controls -->
+
+      <div id="player-bottom">
+        <div id="time-container">
+          <span class="amplitude-current-time time-container"></span>
+          <span class="amplitude-duration-time time-container"></span>
+        </div> <!-- END time-container -->
+
+        <div id="meta-container">
+          <span data-amplitude-song-info="name" class="song-name" style="margin-bottom: 5px"></span>
+          <!-- div class="song-artist-album" -->
+          <div class="audio-artist-album">
+            <span data-amplitude-song-info="artist"></span>
+            <span data-amplitude-song-info="album"></span>
+          </div>
+        </div> <!-- END meta data  -->
+      </div> <!-- END title info  -->
+    </div> <!-- END player  -->
+
+  </div> <!-- END player container -->
+</div> <!-- END player instance -->
+++++
+////
+
+
+[role="mt-5"]
+== Expanded Player
+
+Bla, bla ...
+
+
+.Dance Floor · Royalty Free Music
+amplitude::free_disco_expanded[role="mt-3 mb-5"]
+
+// .Pop Music · Royalty Free Music
+// amplitude::free_pop[role="mt-3 mb-5"]
+
+[role="mt-5"]
+== Player configuration
+
+lorem:sentences[5]
+
+[role="mt-4"]
+=== Macro `amplitude::`
+
+lorem:sentences[7]
+
+[role="mt-4"]
+=== Module settings
+
+[role="mb-7"]
+lorem:sentences[7]

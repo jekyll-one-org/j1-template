@@ -1,0 +1,52 @@
+// ~/document_base_folder/_includes
+//  Asciidoc attribute includes:                 attributes.asciidoc
+// -----------------------------------------------------------------------------
+
+// URLs - Internal references and/or sources on the Internet
+// -----------------------------------------------------------------------------
+tag::urls[]
+
+:uri-font-roboto-ttf:                             //github.com/google/roboto/tree/master/out/RobotoTTF
+:uri-font-droid-sans-fallback-ttf:                //github.com/android/platform_frameworks_base/blob/master/data/fonts/DroidSansFallback.ttf
+:uri-font-noto-serif:                             //www.google.com/get/noto/#/family/noto-serif
+:uri-font-m-plus-fonts:                           //mplus-fonts.osdn.jp/about-en.html
+
+end::urls[]
+
+
+// FOOTNOTES, local asciidoc attributes (variables)
+// -----------------------------------------------------------------------------
+tag::footnotes[]
+end::footnotes[]
+
+
+// Tags - Asciidoc attributes used internally
+// -----------------------------------------------------------------------------
+tag::tags[]
+// :images-dir:                                      pages/manuals/asciidoctor_pdf
+end::tags[]
+
+
+// Data - Data elements for Asciidoctor extensions
+// -----------------------------------------------------------------------------
+tag::data[]
+:data-images-example--pdf-screenshot:             "assets/images/pages/asciidoc_skeletons/example-pdf-screenshot.jpg, PDF document rendered in a PDF viewer"
+end::data[]
+
+
+// Images - Images from local include/images folder
+// -----------------------------------------------------------------------------
+tag::images[]
+end::images[]
+
+
+// PRODUCTS, local product information (e.g. release)
+// -----------------------------------------------------------------------------
+tag::products[]
+end::products[]
+
+
+// AUTHORS, local author information (e.g. article)
+// -----------------------------------------------------------------------------
+tag::authors[]
+end::authors[]

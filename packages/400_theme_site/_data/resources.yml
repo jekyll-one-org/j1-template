@@ -1973,7 +1973,12 @@ resources:
       pass_init_data:                   false
 
       data:
-        css:                            [ modules/amplitudejs/css/theme/uno ]
+        css:                            [
+                                          modules/amplitudejs/css/theme/uno/amplitude,
+                                          modules/amplitudejs/css/theme/uno/player/expanded,
+                                          modules/amplitudejs/css/theme/uno/player/flat,
+                                          modules/amplitudejs/css/theme/uno/player/single_song
+                                        ]
         files:                          [ adapter/js/amplitude.js ]
         js:                             [ modules/amplitudejs/js/amplitude ]
         init_function:                  [ j1.adapter.amplitude.init ]

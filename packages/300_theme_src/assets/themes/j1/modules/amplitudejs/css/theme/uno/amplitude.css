@@ -1,0 +1,60 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/themes/j1/modules/amplitudejs/css/theme/unu/amplitude.css
+ # AmplitudeJS, Global Theme Styles
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2023, 2024 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+/* 0. Colors
+ ------------------------------------------------------------------------------- */
+:root {
+  --ajs-theme-uno--blue:                #2196F3;
+  --ajs-theme-uno--blue-50:             #E3F2FD;
+  --ajs-theme-uno--blue-100:            #BBDEFB;
+  --ajs-theme-uno--blue-200:            #90CAF9;
+  --ajs-theme-uno--blue-300:            #64B5F6;
+  --ajs-theme-uno--blue-400:            #42A5F5;
+  --ajs-theme-uno--blue-500:            #2196F3;
+  --ajs-theme-uno--blue-600:            #1E88E5;
+  --ajs-theme-uno--blue-700:            #1976D2;
+  --ajs-theme-uno--blue-800:            #1565C0;
+  --ajs-theme-uno--blue-900:            #0D47A1;
+
+  --ajs-theme-uno--gray:                #9E9E9E;
+  --ajs-theme-uno--gray-50:             #FAFAFA;
+  --ajs-theme-uno--gray-100:            #F5F5F5;
+  --ajs-theme-uno--gray-200:            #EEEEEE;
+  --ajs-theme-uno--gray-300:            #E0E0E0;
+  --ajs-theme-uno--gray-400:            #BDBDBD;
+  --ajs-theme-uno--gray-500:            #9E9E9E;
+  --ajs-theme-uno--gray-600:            #757575;
+  --ajs-theme-uno--gray-700:            #616161;
+  --ajs-theme-uno--gray-800:            #424242;
+  --ajs-theme-uno--gray-900:            #212121;
+
+  --ajs-theme-uno--blue-gray:           #607D8B;
+  --ajs-theme-uno--blue-gray-50:        #ECEFF1;
+  --ajs-theme-uno--blue-gray-100:       #CFD8DC;
+  --ajs-theme-uno--blue-gray-200:       #B0BEC5;
+  --ajs-theme-uno--blue-gray-300:       #90A4AE;
+  --ajs-theme-uno--blue-gray-400:       #78909C;
+  --ajs-theme-uno--blue-gray-500:       #607D8B;
+  --ajs-theme-uno--blue-gray-600:       #546E7A;
+  --ajs-theme-uno--blue-gray-700:       #455A64;
+  --ajs-theme-uno--blue-gray-800:       #37474F;
+  --ajs-theme-uno--blue-gray-900:       #263238;
+
+  --ajs-theme-uno--white:               #FFFFFF;
+  --ajs-theme-uno--black:               #000000;
+}
+
+/* 1. Global
+------------------------------------------------------------------------------- */

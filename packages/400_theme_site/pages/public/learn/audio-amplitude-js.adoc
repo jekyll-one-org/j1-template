@@ -1,6 +1,6 @@
 ---
 title:                                  Amplitude
-title_extention:                        Custom Audio Players
+title_extention:                        Custom Audio players
 tagline:                                Custom Audio Players
 
 date:                                   2024-04-17
@@ -30,7 +30,7 @@ permalink:                              /pages/public/amplitude_tester/
 resources:                              [ amplitude-js ]
 resource_options:
   - toccer:
-      collapseDepth:                    3
+      collapseDepth:                    2
   - attic:
       slides:
         - url:                          /assets/images/modules/attics/1920x1280/alexey-ruban.jpg
@@ -62,44 +62,75 @@ resource_options:
 
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-[role="dropcap"]
-Amplitude allows designers to fully control their audio players' look and
-feel without understanding advanced scripting.
-
-The audio tag `<audio>` in HTML5 is a great way to add audio to web pages.
-However, the browser controls the audio playback interface, which can be very
-limiting. Amplitude steps in and enables designers for the power to create
-interfaces using themes to define the look and feel of the audio control
-elements individually.
-
-// Include sub-documents (if any)
-// -----------------------------------------------------------------------------
-[role="mt-5"]
-== J1 Audio Player
 // See: https://521dimensions.com/open-source/amplitudejs/docs
 // See: https://github.com/mediaelement/mediaelement-plugins
 // See: https://github.com/serversideup/amplitudejs/
-// See: https://github.com/serversideup/amplitudejs-player-examples/
 
-Amplitude is a JavaScript library to control the design of audio media
-elements on web pages. The concept allows designers to fully control the
-look and feel of audio players without deep scripting knowledge.
+[role="dropcap"]
+The audio tag in HTML5 is a great way to add audio media to web pages.
+However, the browser fully controls the audio playback interface, which
+can limit or even break a page's design if audio media is used.
 
+AmplitudeJS for the J1 Template offers a straightforward solution for web
+developers. It allows them to easily customize the appearance of their audio
+players without the need for complex scripting. By leveraging J1 Template
+and Amplitude's API, web designers can craft unique interfaces that define
+the visual and functional aspects of a player's audio control elements.
+
+
+mdi:clock-time-five-outline[24px, md-gray mr-2]
+*5 Minutes* to read
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+[role="mt-4"]
+The J1 Template implements custom players based on the (default) theme Uno.
+The color scheme used matches the look and feel of the template to preserve
+the page design.
+
+Three types of AmplitudeJS players are build-in for the J1 template system:
+
+* Single Song Player
+* Flat Player (the default audio plaayer)
+* Expanded Player
+
+[role="mt-4"]
 [NOTE]
 ====
-Amplitude players are mobile-friendly. Touch events will be applied for
-mobile devices instead of clicking on the appropriate elements.
+Amplitude players for the J1 Template are mobile-friendly. Instead of
+clicking on the appropriate elements, touch events are applied to all
+mobile devices.
 ====
 
+
 [role="mt-5"]
-=== Amy Winehouse · Back To Black
+== Single Song Player
 
-The J1 Template implements a custom player based on the (default) theme Uno.
-The color scheme used matches the look and feel of the template.
+Balla Balla ..
 
-.Amy Winehouse · Back To Black
-amplitude::back_to_black[role="mt-3 mb-5"]
+.Dance Floor · Royalty Free Music
+amplitude::free_disco_single_song[role="mt-3 mb-5"]
 
+
+[role="mt-5"]
+== Flat Player
+
+Balla Balla ..
+
+.Dance Floor · Royalty Free Music
+amplitude::free_disco_flat[role="mt-3 mb-5"]
+
+
+[role="mt-5"]
+== Expanded Player
+
+Bla, bla ...
+
+.Dance Floor · Royalty Free Music
+amplitude::free_disco_expanded[role="mt-3 mb-5"]
+
+// .Pop Music · Royalty Free Music
+// amplitude::free_pop[role="mt-3 mb-5"]
 
 [role="mt-5"]
 == Player configuration

@@ -31,7 +31,76 @@ settings:
   # ----------------------------------------------------------------------------
   players:
 
-    # EXAMPLE player 1 (Disco EXPANDED)
+    # --------------------------------------------------------------------------
+    # enabled
+    # --------------------------------------------------------------------------
+    # Enables or disables a player.
+    #
+    # values:                           true|false
+    # default:                          true
+    #
+    # --------------------------------------------------------------------------
+    # player_id
+    # --------------------------------------------------------------------------
+    # UNIQUE player id. Used by the module adapter to create a player.
+    #
+    # values:                           string
+    # default:                          no default
+    #
+    # --------------------------------------------------------------------------
+    # volume
+    # --------------------------------------------------------------------------
+    # Set (initial) volume value (player control|right).
+    #
+    # values:                           [0 .. 100]
+    # default:                          50
+    #
+    # --------------------------------------------------------------------------
+    # repeat
+    # --------------------------------------------------------------------------
+    # Enable or disable repeating titles (player control|right).
+    #
+    # values:                           true|false
+    # default:                          false
+    #
+    # --------------------------------------------------------------------------
+    # shuffle
+    # --------------------------------------------------------------------------
+    # Enable or disable shuffle titles (player control|right).
+    # When set to 'false', titles are played the order of the albun.
+    # When set to 'true', titles are played 'random' except the 'fist' item.
+    #
+    # values:                           true|false
+    # default:                          false
+    #
+    # --------------------------------------------------------------------------
+    # title_info
+    # --------------------------------------------------------------------------
+    # Enables or disables the info button on titles (player control|left).
+    #
+    # values:                           true|false
+    # default:                          false
+    #
+    # --------------------------------------------------------------------------
+    # pause_on_next_title
+    # --------------------------------------------------------------------------
+    # For default, the player continues playing on the next title.
+    # To 'pause' on 'next title', set pause_on_next_title to 'true'.
+    #
+    # values:                           true|false
+    # default:                          false
+    #
+    # --------------------------------------------------------------------------
+    # delay_on_next_title
+    # --------------------------------------------------------------------------
+    # Delay, time measured in milli seconds, between titles played.
+    #
+    # values:                           string (time|ms)
+    # default:                          500
+    #
+    # --------------------------------------------------------------------------
+
+    # EXAMPLE player 1 (Disco)
     # --------------------------------------------------------------------------
     #
     - plaver:
@@ -40,9 +109,13 @@ settings:
       # ------------------------------------------------------------------------
       # PLAYER settings
       #
-      player_id:                        free_disco_expanded
-      player_type:                      expanded
+      player_id:                        free_disco
+
+      # repeat:                         false
+      # shuffle:    	                  false
       title_info:                       true
+      # pause_on_next_title:            false
+      # delay_on_next_title:            250
 
       # ------------------------------------------------------------------------
       # ALBUM settings
@@ -102,7 +175,7 @@ settings:
       # ------------------------------------------------------------------------
       # TITLE settings (playlist)
       # ------------------------------------------------------------------------
-      items:                            &playlist_free_disco
+      items:
 
         # ----------------------------------------------------------------------
         # enabled
@@ -273,317 +346,22 @@ settings:
           title_info:                   //sfx.productioncrate.com
           duration:                     "2:38"
 
-
-    # EXAMPLE player 2 (Disco, FLAT)
+    # EXAMPLE player 2 (Pop)
     # --------------------------------------------------------------------------
     #
     - plaver:
       enabled:                          true
-
-      # ------------------------------------------------------------------------
-      # PLAYER settings
-      #
-      player_id:                        free_disco_flat
-      title_info:                       true
-
-      # ------------------------------------------------------------------------
-      # ALBUM settings
-      # ------------------------------------------------------------------------
-      album:
-        <<:                             *album_free_disco
-
-      # ------------------------------------------------------------------------
-      # TITLE settings (playlist)
-      # ------------------------------------------------------------------------
-      items:
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        Dancefloor Fever
-          audio:                        SoundsCrate-Dancefloor_Fever.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "2:27"
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        Dance On Dance Off
-          audio:                        SoundsCrate-Dance_On_Dance_Off.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "2:14"
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        Disco Flamingo
-          audio:                        SoundsCrate-Disco_Flamingo.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "2:19"
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        Downtown
-          audio:                        SoundsCrate-Downtown.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "2:48"
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        Electric Boogie
-          audio:                        SoundsCrate-Electric_Boogie.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "2:19"
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        Grand Central
-          audio:                        SoundsCrate-Grand_Central.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "2:33"
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        In The Pocket
-          audio:                        SoundsCrate-In_The_Pocket.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "2:58"
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        Lounge Life
-          audio:                        SoundsCrate-Lounge_Life.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "2:34"
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        Made For This
-          audio:                        SoundsCrate-Made_For_This.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "2:13"
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        Midnight Express
-          audio:                        SoundsCrate-Midnight_Express.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "2:30"
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        Nightrun
-          audio:                        SoundsCrate-Nightrun.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "2:58"
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        Saturday Night
-          audio:                        SoundsCrate-Saturday_Night.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "2:02"
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        Studio 45
-          audio:                        SoundsCrate-Studio_45.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "1:56"
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        Yes Sir I Can Disco
-          audio:                        SoundsCrate-Yes_Sir_I_Can_Disco.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "2:21"
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        Fashion Show
-          audio:                        soundscrate-fashion-show.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "3:08"
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        Loungy Disco
-          audio:                        soundscrate-loungy-disco.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "3:04"
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        Oakland Style
-          audio:                        soundscrate-oakland-style.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "3:19"
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        Funkish Vibe
-          audio:                        soundscrate-funkish-vibe.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "2:38"
-
-
-    # EXAMPLE player 3 (Disco, Single Song Player )
-    # --------------------------------------------------------------------------
-    #
-    - plaver:
-      enabled:                          true
-
-      # ------------------------------------------------------------------------
-      # PLAYER settings
-      #
-      player_id:                        free_disco_single_song
-      player_type:                      single_song
-
-      # ------------------------------------------------------------------------
-      # ALBUM settings
-      # ------------------------------------------------------------------------
-      album:
-        <<:                             *album_free_disco
-
-      # ------------------------------------------------------------------------
-      # TITLE settings (playlist)
-      # ------------------------------------------------------------------------
-      items:
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        Dancefloor Fever
-          audio:                        SoundsCrate-Dancefloor_Fever.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "2:27"
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        Dance On Dance Off
-          audio:                        SoundsCrate-Dance_On_Dance_Off.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "2:14"
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        Disco Flamingo
-          audio:                        SoundsCrate-Disco_Flamingo.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "2:19"
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        Downtown
-          audio:                        SoundsCrate-Downtown.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "2:48"
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        Electric Boogie
-          audio:                        SoundsCrate-Electric_Boogie.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "2:19"
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        Grand Central
-          audio:                        SoundsCrate-Grand_Central.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "2:33"
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        In The Pocket
-          audio:                        SoundsCrate-In_The_Pocket.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "2:58"
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        Lounge Life
-          audio:                        SoundsCrate-Lounge_Life.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "2:34"
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        Made For This
-          audio:                        SoundsCrate-Made_For_This.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "2:13"
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        Midnight Express
-          audio:                        SoundsCrate-Midnight_Express.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "2:30"
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        Nightrun
-          audio:                        SoundsCrate-Nightrun.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "2:58"
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        Saturday Night
-          audio:                        SoundsCrate-Saturday_Night.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "2:02"
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        Studio 45
-          audio:                        SoundsCrate-Studio_45.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "1:56"
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        Yes Sir I Can Disco
-          audio:                        SoundsCrate-Yes_Sir_I_Can_Disco.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "2:21"
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        Fashion Show
-          audio:                        soundscrate-fashion-show.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "3:08"
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        Loungy Disco
-          audio:                        soundscrate-loungy-disco.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "3:04"
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        Oakland Style
-          audio:                        soundscrate-oakland-style.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "3:19"
-        - item:
-          enabled:                      true
-          <<:                           *album_free_disco
-          title:                        Funkish Vibe
-          audio:                        soundscrate-funkish-vibe.mp3
-          title_info:                   //sfx.productioncrate.com
-          duration:                     "2:38"
-
-    # EXAMPLE player 4 (Pop, EXPANDED)
-    # --------------------------------------------------------------------------
-    #
-    - plaver:
-      enabled:                          false
 
       # ------------------------------------------------------------------------
       # PLAYER settings
       #
       player_id:                        free_pop
-      title_info:                       false
+
+      # repeat:                         false
+      # shuffle:    	                  false
+      title_info:                       true
+      # pause_on_next_title:            false
+      # delay_on_next_title:            250
 
       # ------------------------------------------------------------------------
       # ALBUM settings
@@ -610,7 +388,7 @@ settings:
         - item:
           enabled:                      true
           <<:                           *album_free_pop
-          title:                        Late Feelings
+          title:                        Late Feels
           audio:                        SoundsCrate-Late_Feels.mp3
           title_info:                   //sfx.productioncrate.com
           duration:                     "2:25"
@@ -631,7 +409,7 @@ settings:
         - item:
           enabled:                      true
           <<:                           *album_free_pop
-          title:                        Young Feelings
+          title:                        Young Feels
           audio:                        SoundsCrate-Young_Feels.mp3
           title_info:                   //sfx.productioncrate.com
           duration:                     "2:11"
@@ -642,6 +420,138 @@ settings:
           audio:                        SoundsCrate-Wonders.mp3
           title_info:                   //sfx.productioncrate.com
           duration:                     "2:31"
+
+
+    # PLAYER 3 (Amy Winehouse|Back To Black)
+    # --------------------------------------------------------------------------
+    #
+    - plaver:
+      enabled:                          false
+
+      # ------------------------------------------------------------------------
+      # PLAYER settings
+      #
+      player_id:                        back_to_black
+
+      # repeat:                         false
+      # shuffle:    	                  false
+      title_info:                       true
+      # pause_on_next_title:            false
+      # delay_on_next_title:            250
+
+      # ------------------------------------------------------------------------
+      # ALBUM settings
+      # ------------------------------------------------------------------------
+      album:                            &album_back_to_black
+        name:                           Back To Black
+        artist:                         Amy Winehouse
+        playlist:                       back_to_black
+        audio_base:                     /assets/audio/album/back_to_black
+        cover_image:                    /assets/audio/cover/amy_winehouse/back_to_black.jpg
+
+      # ------------------------------------------------------------------------
+      # TITLE settings (playlist)
+      # ------------------------------------------------------------------------
+      items:
+
+        - item:
+          enabled:                      true
+          <<:                           *album_back_to_black
+          title:                        Rehab
+          audio:                        Rehab.mp3
+          title_info:                   //sfx.productioncrate.com
+          duration:                     "3:34"
+        - item:
+          enabled:                      false
+          <<:                           *album_back_to_black
+          title:                        You Know I'm No Good
+          audio:                        You Know I'm No Good.mp3
+          title_info:                    //sfx.productioncrate.com
+          duration:                     "4:17"
+        - item:
+          enabled:                      false
+          <<:                           *album_back_to_black
+          title:                        Me & Mr Jones
+          audio:                        Me & Mr Jones.mp3
+          title_info:                    //sfx.productioncrate.com
+          duration:                     "2:33"
+        - item:
+          enabled:                      false
+          <<:                           *album_back_to_black
+          title:                        Just Friends
+          audio:                        Just Friends.mp3
+          title_info:                    //sfx.productioncrate.com
+          duration:                     "3:13"
+        - item:
+          enabled:                      false
+          <<:                           *album_back_to_black
+          title:                        Back To Black
+          audio:                        Back To Black.mp3
+          title_info:                    //sfx.productioncrate.com
+          duration:                     "4:01"
+        - item:
+          enabled:                      false
+          <<:                           *album_back_to_black
+          title:                        Love Is A Losing Game
+          audio:                        Love Is A Losing Game.mp3
+          title_info:                    //sfx.productioncrate.com
+          duration:                     "2:35"
+        - item:
+          enabled:                      false
+          <<:                           *album_back_to_black
+          title:                        Tears Dry On Their Own
+          audio:                        Tears Dry On Their Own.mp3
+          title_info:                    //sfx.productioncrate.com
+          duration:                     "3:06"
+        - item:
+          enabled:                      false
+          <<:                           *album_back_to_black
+          title:                        Wake Up Alone
+          audio:                        Wake Up Alone.mp3
+          title_info:                    //sfx.productioncrate.com
+          duration:                     "3:42"
+        - item:
+          enabled:                      false
+          <<:                           *album_back_to_black
+          title:                        Some Unholy War
+          audio:                        Some Unholy War.mp3
+          title_info:                    //sfx.productioncrate.com
+          duration:                     "2:22"
+        - item:
+          enabled:                      false
+          <<:                           *album_back_to_black
+          title:                        He Can Only Hold Her
+          audio:                        He Can Only Hold Her.mp3
+          title_info:                    //sfx.productioncrate.com
+          duration:                     "3:19"
+        - item:
+          enabled:                      false
+          <<:                           *album_back_to_black
+          title:                        You Know I'm No Good - Remix
+          audio:                        You Know I'm No Good - Remix.mp3
+          title_info:                    //sfx.productioncrate.com
+          duration:                     "3:22"
+        - item:
+          enabled:                      false
+          <<:                           *album_back_to_black
+          title:                        Intro - Stronger Than Me
+          audio:                        Intro - Stronger Than Me.mp3
+          title_info:                    //sfx.productioncrate.com
+          duration:                     "3:54"
+        - item:
+          enabled:                      false
+          <<:                           *album_back_to_black
+          title:                        You Sent Me Flying Cherry
+          audio:                        You Sent Me Flying Cherry.mp3
+          title_info:                    //sfx.productioncrate.com
+          duration:                     "6:50"
+        - item:
+          enabled:                      false
+          <<:                           *album_back_to_black
+          title:                        Fuck Me Pumps
+          audio:                        Fuck Me Pumps.mp3
+          title_info:                    //sfx.productioncrate.com
+          duration:                     "3:21"
 
 # ------------------------------------------------------------------------------
 # END config
