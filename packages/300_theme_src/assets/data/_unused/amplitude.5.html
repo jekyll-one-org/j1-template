@@ -183,7 +183,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
 
     {% comment %} Reset element variables (already processed)
     ---------------------------------------------------------------------------- {% endcomment %}
-    {% assign amplitude_settings = nil %}
+    {% assign amplitude_settings = false%}
 
     {% comment %} END mini player player
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {% endcomment %}
@@ -308,7 +308,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
 
     {% comment %} Reset element variables (already processed)
     ---------------------------------------------------------------------------- {% endcomment %}
-    {% assign amplitude_settings = nil %}
+    {% assign amplitude_settings = false%}
 
     {% comment %} END compact player
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {% endcomment %}
@@ -428,7 +428,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
 
     {% comment %} Reset element variables (already processed)
     ---------------------------------------------------------------------------- {% endcomment %}
-    {% assign amplitude_settings = nil %}
+    {% assign amplitude_settings = false%}
 
     {% comment %} END large player
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {% endcomment %}
@@ -448,4 +448,4 @@ amplitude_defaults: {{amplitude_defaults | debug}}
 {%- else -%}
   {{ cache | remove:'<html><body>' | remove:'</body></html>' | strip_empty_lines }}
 {%- endif -%}
-{%- assign cache = nil -%}
+{%- assign cache = false -%}

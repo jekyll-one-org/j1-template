@@ -46,4 +46,4 @@ exclude_from_search:                    true
 
 {% endcapture %}
 {{ cache | encodeBase64 }}
-{% assign cache = nil %}
+{% assign cache = false%}

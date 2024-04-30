@@ -191,4 +191,4 @@ particles_data.particles.number.value: {{ particles_data.particles.number.value 
 
 {% endcapture -%}
 {{ cache | strip_empty_lines }}
-{% assign cache = nil %}
+{% assign cache = false%}

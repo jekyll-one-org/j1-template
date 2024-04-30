@@ -359,4 +359,4 @@ amplitude_defaults: {{amplitude_defaults | debug}}
 {% else %}
   {{ cache | remove:'<html><body>' | remove:'</body></html>' | strip_empty_lines }}
 {% endif %}
-{% assign cache = nil %}
+{% assign cache = false%}

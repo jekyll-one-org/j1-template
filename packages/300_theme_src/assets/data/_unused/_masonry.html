@@ -461,4 +461,4 @@ exclude_from_search:                    true
 {% else %}
   {{ cache | remove:'<html><body>' | remove:'</body></html>' | strip_empty_lines }}
 {% endif %}
-{% assign cache = nil %}
+{% assign cache = false%}

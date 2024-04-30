@@ -240,4 +240,4 @@ exclude_from_search:                    true
 {% else %}
   {{ cache | strip_empty_lines }}
 {% endif %}
-{% assign cache = nil %}
+{% assign cache = false%}

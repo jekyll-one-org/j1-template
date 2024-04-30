@@ -153,7 +153,7 @@ exclude_from_search:                    true
 
         {% comment %} Reset element variables (already processed)
         ------------------------------------------------------------------------ {% endcomment %}
-        {% assign banner_settings = nil %}
+        {% assign banner_settings = false%}
 
 
         {% comment %} Collect TEASER banner
@@ -316,7 +316,7 @@ exclude_from_search:                    true
 
         {% comment %} Reset element variables (already processed)
         ------------------------------------------------------------------------ {% endcomment %}
-        {% assign banner_settings = nil %}
+        {% assign banner_settings = false%}
 
         {% comment %} END TEASER banner
         ------------------------------------------------------------------------ {% endcomment %}
@@ -374,7 +374,7 @@ exclude_from_search:                    true
 
         {% comment %} Reset element variables (already processed)
         ------------------------------------------------------------------------ {% endcomment %}
-        {% assign banner_settings = nil %}
+        {% assign banner_settings = false%}
 
         {% comment %} END IMAGE banner
         ------------------------------------------------------------------------ {% endcomment %}
@@ -459,7 +459,7 @@ exclude_from_search:                    true
 
           {% comment %} Reset element variables (already processed)
           ---------------------------------------------------------------------- {% endcomment %}
-          {% assign banner_settings = nil %}
+          {% assign banner_settings = false%}
 
           {% comment %} END PARALLAX banner
           ---------------------------------------------------------------------- {% endcomment %}
@@ -497,7 +497,7 @@ exclude_from_search:                    true
 
       {% comment %} Reset element variables (already processed)
       -------------------------------------------------------------------------- {% endcomment %}
-      {% assign banner_settings = nil %}
+      {% assign banner_settings = false%}
 
       {% comment %} END EXEPTION banner
       -------------------------------------------------------------------------- {% endcomment %}
@@ -516,4 +516,4 @@ exclude_from_search:                    true
 {% else %}
   {{ cache | remove:'<html><body>' | remove:'</body></html>' | strip_empty_lines }}
 {% endif %}
-{% assign cache = nil %}
+{% assign cache = false%}

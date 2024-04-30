@@ -164,7 +164,7 @@ exclude_from_search:                    true
 
                     {% comment %} Reset element variable
                     -------------------------------------------------------------- {% endcomment %}
-                    {% assign footer_options.boxes = nil %}
+                    {% assign footer_options.boxes = false%}
 
                   {% comment %} PLACE NewsBox
                   ---------------------------------------------------------------- {% endcomment %}
@@ -175,7 +175,7 @@ exclude_from_search:                    true
 
                     {% comment %} Reset element variable
                     -------------------------------------------------------------- {% endcomment %}
-                    {% assign footer_options.boxes = nil %}
+                    {% assign footer_options.boxes = false%}
 
                   {% comment %} PLACE LinksBox
                   --------------------------------------------------------------- {% endcomment %}
@@ -186,7 +186,7 @@ exclude_from_search:                    true
 
                     {% comment %} Reset element variable
                     -------------------------------------------------------------- {% endcomment %}
-                    {% assign footer_options.boxes = nil %}
+                    {% assign footer_options.boxes = false%}
 
                   {% comment %} PLACE ContactsBox
                   --------------------------------------------------------------- {% endcomment %}
@@ -197,7 +197,7 @@ exclude_from_search:                    true
 
                     {% comment %} Reset element variable
                     -------------------------------------------------------------- {% endcomment %}
-                    {% assign footer_options.boxes = nil %}
+                    {% assign footer_options.boxes = false%}
 
                   {% else %}
                     {% comment %} Collect EXCEPTION
@@ -263,7 +263,7 @@ exclude_from_search:                    true
 
           {% comment %} Reset element variables (already processed)
           ------------------------------------------------------------------------ {% endcomment %}
-          {% assign footer_settings = nil %}
+          {% assign footer_settings = false%}
 
         {% endif %}
 
@@ -284,4 +284,4 @@ exclude_from_search:                    true
 
 {% comment %} Reset page cache
 -------------------------------------------------------------------------------- {% endcomment %}
-{%- assign cache = nil -%}
+{%- assign cache = false -%}

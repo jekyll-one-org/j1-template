@@ -123,13 +123,13 @@ exclude_from_search:                    true
                       {% capture icon %}<i class="{{icon_family}} {{icon_family}}-{{link.icon}} {{icon_size}} {{icon_color}} mr-2"></i>{% endcapture %}
                     {% endif %}
 
-                    {% if link.target == nil or link.target == "" or link.target == "none" %}
+                    {% if link.target == false or link.target == "" or link.target == "none" %}
                       {% assign target = "" %}
                     {% else %}
                       {% capture target %}target="{{link.target}}"{% endcapture %}
                     {% endif %}
 
-                    {% if link.value == nil or link.value == "" or link.value == "none" %}
+                    {% if link.value == false or link.value == "" or link.value == "none" %}
                       {% assign link_text = link.title %}
                     {% else %}
                       {% if link.value contains '??' %}
@@ -153,11 +153,11 @@ exclude_from_search:                    true
 
             {% comment %} Reset element variables
             -------------------------------------------------------------------- {% endcomment %}
-            {% assign enabled = nil %}
-            {% assign type    = nil %}
-            {% assign title   = nil %}
-            {% assign type    = nil %}
-            {% assign links   = nil %}
+            {% assign enabled = false%}
+            {% assign type    = false%}
+            {% assign title   = false%}
+            {% assign type    = false%}
+            {% assign links   = false%}
 
             {% comment %} Collect THEME info
             -------------------------------------------------------------------- {% endcomment %}
@@ -174,13 +174,13 @@ exclude_from_search:                    true
                     {% capture icon %}<i class="{{icon_family}} {{icon_family}}-{{link.icon}} {{icon_size}} {{icon_color}} mr-2"></i>{% endcapture %}
                   {% endif %}
 
-                  {% if link.target == nil or link.target == "" or link.target == "none" %}
+                  {% if link.target == false or link.target == "" or link.target == "none" %}
                     {% assign target = "" %}
                   {% else %}
                     {% capture target %}target="{{link.target}}"{% endcapture %}
                   {% endif %}
 
-                  {% if link.value == nil or link.value == "" or link.value == "none" %}
+                  {% if link.value == false or link.value == "" or link.value == "none" %}
                     {% assign link_text = link.title %}
                   {% else %}
                     {% if link.value contains '??' %}
@@ -204,11 +204,11 @@ exclude_from_search:                    true
 
             {% comment %} Reset element variables
             -------------------------------------------------------------------- {% endcomment %}
-            {% assign enabled = nil %}
-            {% assign type    = nil %}
-            {% assign title   = nil %}
-            {% assign type    = nil %}
-            {% assign links   = nil %}
+            {% assign enabled = false%}
+            {% assign type    = false%}
+            {% assign title   = false%}
+            {% assign type    = false%}
+            {% assign links   = false%}
 
             {% comment %} Collect SITE info
             -------------------------------------------------------------------- {% endcomment %}
@@ -224,13 +224,13 @@ exclude_from_search:                    true
                       {% capture icon %}<i class="{{icon_family}} {{icon_family}}-{{link.icon}} {{icon_size}} {{icon_color}} mr-2"></i>{% endcapture %}
                     {% endif %}
 
-                    {% if link.target == nil or link.target == "" or link.target == "none" %}
+                    {% if link.target == false or link.target == "" or link.target == "none" %}
                       {% assign target = "" %}
                     {% else %}
                       {% capture target %}target="{{link.target}}"{% endcapture %}
                     {% endif %}
 
-                    {% if link.value == nil or link.value == "" or link.value == "none" %}
+                    {% if link.value == false or link.value == "" or link.value == "none" %}
                       {% assign link_text = link.title %}
                     {% else %}
                       {% capture link_text %}"{{link.title}}: {{link.title}}"{% endcapture %}
@@ -247,11 +247,11 @@ exclude_from_search:                    true
 
             {% comment %} Reset element variables
             -------------------------------------------------------------------- {% endcomment %}
-            {% assign enabled = nil %}
-            {% assign type    = nil %}
-            {% assign title   = nil %}
-            {% assign type    = nil %}
-            {% assign links   = nil %}
+            {% assign enabled = false%}
+            {% assign type    = false%}
+            {% assign title   = false%}
+            {% assign type    = false%}
+            {% assign links   = false%}
 
           {% endcase %}
         {% endif %}
@@ -275,4 +275,4 @@ exclude_from_search:                    true
 
 {% comment %} Reset page cache
 -------------------------------------------------------------------------------- {% endcomment %}
-{%- assign cache = nil -%}
+{%- assign cache = false -%}

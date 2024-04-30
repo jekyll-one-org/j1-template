@@ -296,7 +296,7 @@ exclude_from_search:                    true
                         {% if key == 'text' %}            {% assign card_text             = value | strip_newlines %}  {% endif %}
                         {% if key == 'buttons' %}         {% assign card_buttons          = value %}                   {% endif %}
                       {% endfor %}
-                      {% if card_enabled == false %} {% assign card_items = card_items|minus:1 %} {% assign card_enabled = nil %} {% endif %}
+                      {% if card_enabled == false %} {% assign card_items = card_items|minus:1 %} {% assign card_enabled = false%} {% endif %}
                     {% endfor %}
                     {% assign col_size = 12|divided_by:card_items %}
 
@@ -402,8 +402,8 @@ exclude_from_search:                    true
 
             {% comment %} Reset element variables (already processed)
             -------------------------------------------------------------------- {% endcomment %}
-            {% assign panel_settings = nil %}
-            {% assign card_enabled   = nil %}
+            {% assign panel_settings = false%}
+            {% assign card_enabled   = false%}
 
 
             {% comment %} Collect PLAN panel
@@ -487,7 +487,7 @@ exclude_from_search:                    true
                       {% if key == 'enabled' %} {% assign card_enabled = value %} {% endif %}
                     {% endfor %}
                     {% if card_enabled == false %}
-                    {% assign card_items = card_items|minus:1 %} {% assign card_enabled = nil %} {% endif %}
+                    {% assign card_items = card_items|minus:1 %} {% assign card_enabled = false%} {% endif %}
                   {% endfor %}
                 {% endfor %}
 
@@ -599,7 +599,7 @@ exclude_from_search:                    true
 
             {% comment %} Reset element variables (already processed)
             -------------------------------------------------------------------- {% endcomment %}
-            {% assign panel_settings = nil %}
+            {% assign panel_settings = false%}
 
             {% comment %} END PLAN panel
             -------------------------------------------------------------------- {% endcomment %}
@@ -680,7 +680,7 @@ exclude_from_search:                    true
                       {% if key == 'enabled' %} {% assign card_enabled = value %} {% endif %}
                     {% endfor %}
                     {% if card_enabled == false %}
-                    {% assign card_items = card_items|minus:1 %} {% assign card_enabled = nil %} {% endif %}
+                    {% assign card_items = card_items|minus:1 %} {% assign card_enabled = false%} {% endif %}
                   {% endfor %}
                 {% endfor %}
 
@@ -801,7 +801,7 @@ exclude_from_search:                    true
 
             {% comment %} Reset element variables (already processed)
             -------------------------------------------------------------------- {% endcomment %}
-            {% assign panel_settings = nil %}
+            {% assign panel_settings = false%}
 
             {% comment %} END SERVICES panel
             -------------------------------------------------------------------- {% endcomment %}
@@ -1064,7 +1064,7 @@ exclude_from_search:                    true
 
             {% comment %} Reset element variables (already processed)
             -------------------------------------------------------------------- {% endcomment %}
-            {% assign panel_settings = nil %}
+            {% assign panel_settings = false%}
 
             {% comment %} END NEWS panel
             -------------------------------------------------------------------- {% endcomment %}
@@ -1102,7 +1102,7 @@ exclude_from_search:                    true
 
             {% comment %} Reset element variables (already processed)
             -------------------------------------------------------------------- {% endcomment %}
-            {% assign panel_settings = nil %}
+            {% assign panel_settings = false%}
 
             {% comment %} END EXEPTION panel
             -------------------------------------------------------------------- {% endcomment %}
@@ -1127,4 +1127,4 @@ exclude_from_search:                    true
 
 {% comment %} Reset page cache
 -------------------------------------------------------------------------------- {% endcomment %}
-{%- assign cache = nil -%}
+{%- assign cache = false -%}

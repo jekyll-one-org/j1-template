@@ -45,4 +45,4 @@ exclude_from_search:                    true
 
 {% endcapture %}
 {{ cache | strip_empty_lines }}
-{% assign cache = nil %}
+{% assign cache = false%}
