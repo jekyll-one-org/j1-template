@@ -112,8 +112,6 @@ j1.adapter.amplitude = ((j1, window) => {
   // player instance settings
   // ---------------------------------------------------------------------------
   var playerID;
-  var playList;
-  var playListTitle;
   var amplitudeInitialized    = false;
 
   // player defaults
@@ -193,12 +191,8 @@ j1.adapter.amplitude = ((j1, window) => {
             {% assign xhr_data_path = amplitude_options.xhr_data_path %}
             {% capture xhr_container_id %}{{player_id}}_parent{% endcapture %}
 
-            playerID      = '{{player.player_id}}';
-            playList      = '{{player.playlist}}';
-            playListTitle = '{{player.playlist_title}}';
-
-            logger.info('\n' + 'found player on id: #' + playerID);
-            logger.info('\n' + 'set playlist {{player.playlist}} on id #{{player_id}}: ' + playListTitle);
+            playerID = '{{player.player_id}}';
+            logger.info('\n' + 'found player on id: ' + '#' + '{{player_id}}');
 
             // load|set (default) values
             playerVolume            = ('{{player.volume}}' !== '') ? '{{player.volume}}' : playerVolume;
@@ -257,28 +251,28 @@ j1.adapter.amplitude = ((j1, window) => {
                   } // END if enabled
                 } // END for playerItems
 
-                _this.initApi(playList, playListTitle, playerItemsEnabled);
+                _this.initApi(playerItemsEnabled);
 
                 var dependencies_met_api_initialized = setInterval (() => {
                   if (amplitudeInitialized) {
                     amplitudePlayerState = Amplitude.getPlayerState();
 
-                    // mini player: click on the progress bar
-                    if (document.getElementById('mini-player-container') !== null) {
-                      document.getElementById('mini-player-progress').addEventListener('click', function(event) {
+                    // single song player: click on the progress bar
+                    if (document.getElementById('single-song-player-container') !== null) {
+                      document.getElementById('single-song-player-progress').addEventListener('click', function(event) {
                         var offset = this.getBoundingClientRect();
                         var xpos   = event.pageX - offset.left;
 
                         Amplitude.setSongPlayedPercentage(
                           (parseFloat(xpos)/parseFloat(this.offsetWidth))*100);
                       });
-                    } // END if mini player progress
+                    } // END if single-song-player-progress
 
-                    // compact player: click down arrow to show the list screen
-                    if (document.getElementById('compact-player-container') !== null) {
+                    // flat player: click down arrow to show the list screen
+                    if (document.getElementById('flat-black-player-container') !== null) {
                       document.getElementsByClassName('down-header')[0].addEventListener('click', function() {
                         var list = document.getElementById('list');
-                        list.style.height = ( parseInt( document.getElementById('compact-player-container').offsetHeight ) - 135 ) + 'px';
+                        list.style.height = ( parseInt( document.getElementById('flat-black-player-container').offsetHeight ) - 135 ) + 'px';
 
                         document.getElementById('list-screen').classList.remove('slide-out-top');
                         document.getElementById('list-screen').classList.add('slide-in-top');
@@ -292,7 +286,7 @@ j1.adapter.amplitude = ((j1, window) => {
                         }
                       });
 
-                      // compact player: click up arrow to hide the list screen
+                      // flat player: click up arrow to hide the list screen
                       document.getElementsByClassName('hide-playlist')[0].addEventListener('click', function() {
                         document.getElementById('list-screen').classList.remove('slide-in-top');
                         document.getElementById('list-screen').classList.add('slide-out-top');
@@ -304,15 +298,15 @@ j1.adapter.amplitude = ((j1, window) => {
                         }
                       });
 
-                      // compact player: click on the progress bar
-                      document.getElementById('compact-player-progress').addEventListener('click', function(event) {
+                      // flat player: click on the progress bar
+                      document.getElementById('flat-player-progress').addEventListener('click', function(event) {
                         var offset = this.getBoundingClientRect();
                         var xpos   = event.pageX - offset.left;
 
                         Amplitude.setSongPlayedPercentage(
                           (parseFloat(xpos)/parseFloat(this.offsetWidth))*100);
                       });
-                    } // END if compact-player-container
+                    } // END if flat-black-player-container
 
                     // jadams, 2021-03-05: manage scrolling on playlist (Expanded Player|Right)
                     if (document.getElementById('amplitude-right') !== null) {
@@ -342,8 +336,6 @@ j1.adapter.amplitude = ((j1, window) => {
                     Amplitude.setRepeat(playerRepeat)
                     // set shuffle (album)
                     Amplitude.setShuffle(playerShuffle)
-
-                    // var activePlayList = Amplitude.getSongsInPlaylist(playList);
 
                     // set finished messages
                     // ---------------------------------------------------------
@@ -395,10 +387,8 @@ j1.adapter.amplitude = ((j1, window) => {
     // -------------------------------------------------------------------------
     // initApi
     // -------------------------------------------------------------------------
-    initApi: (playlist, playlist_title, audio_items) => {
-      var playList      = playlist;
-      var playListTitle = playlist_title;
-      var songs         = [];
+    initApi: (audio_items) => {
+      var songs = [];
 
       for (var i = 0; i < Object.keys(audio_items).length; i++) {
         if (audio_items[i].enabled) {
@@ -438,43 +428,18 @@ j1.adapter.amplitude = ((j1, window) => {
         songs.push(song);
       } // END for items
 
-     // See: https://521dimensions.com/open-source/amplitudejs/docs
       Amplitude.init({
         bindings: {
           37:     'prev',
           39:     'next',
           32:     'play_pause'
         },
-
         songs: songs,
-
-        // playlists: {
-        //   [playlist]: {
-        //     title: playListTitle,
-        //     songs: [1, 2, 3]
-        //   },
-        // },
-
-        playlists: {
-          [playlist]: {
-            title: playListTitle,
-            songs: [1, 2, 3]
-          },
-        },
-
         callbacks: {
-
+          // See: https://521dimensions.com/open-source/amplitudejs/docs
           initialized: function() {
             // successfully initialized
             amplitudeInitialized = true;
-            var activePlayListSongs = Amplitude.getSongsInPlaylist(playList);
-            Amplitude.addPlaylist({
-              key:      playlist, // Unique key for your playlist
-              title:    playListTitle,
-              songs:    activePlayListSongs
-            });
-            Amplitude.bindNewElements();
-            var bla = '';
           },
 
           onInitError: function() {

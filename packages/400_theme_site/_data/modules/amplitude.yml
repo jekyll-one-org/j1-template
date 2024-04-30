@@ -40,9 +40,11 @@ settings:
       # ------------------------------------------------------------------------
       # PLAYER settings
       #
-      player_id:                        free_disco_expanded
-      player_type:                      expanded
+      player_id:                        free_disco_large
+      player_type:                      large
       title_info:                       true
+      playlist:                         free_disco
+      playlist_title:                   Dancefloor Fever
 
       # ------------------------------------------------------------------------
       # ALBUM settings
@@ -95,7 +97,6 @@ settings:
         #
         name:                           Free Disco
         artist:                         Royalty Free
-        playlist:                       free_disco
         audio_base:                     //p.productioncrate.com/stock-hd/audio
         cover_image:                    /assets/audio/cover/royalty_free/free_disco_sounds.jpg
 
@@ -283,8 +284,11 @@ settings:
       # ------------------------------------------------------------------------
       # PLAYER settings
       #
-      player_id:                        free_disco_flat
+      player_id:                        free_disco_compact
+      player_type:                      compact
       title_info:                       true
+      playlist:                         free_disco
+      playlist_title:                   Dancefloor Fever
 
       # ------------------------------------------------------------------------
       # ALBUM settings
@@ -433,8 +437,10 @@ settings:
       # ------------------------------------------------------------------------
       # PLAYER settings
       #
-      player_id:                        free_disco_single_song
-      player_type:                      single_song
+      player_id:                        free_disco_mini
+      player_type:                      mini
+      playlist:                         free_disco
+      playlist_title:                   Dancefloor Fever
 
       # ------------------------------------------------------------------------
       # ALBUM settings
@@ -582,8 +588,10 @@ settings:
       # ------------------------------------------------------------------------
       # PLAYER settings
       #
-      player_id:                        free_pop
+      player_id:                        free_pop_compact
       title_info:                       false
+      playlist:                         free_pop
+      playlist_title:                   Feelings
 
       # ------------------------------------------------------------------------
       # ALBUM settings
@@ -591,7 +599,6 @@ settings:
       album:                            &album_free_pop
         name:                           Free Pop
         artist:                         Royalty Free
-        playlist:                       free_pop
         audio_base:                     //p.productioncrate.com/stock-hd/audio
         cover_image:                    /assets/audio/cover/royalty_free/free_pop_sounds.jpg
 

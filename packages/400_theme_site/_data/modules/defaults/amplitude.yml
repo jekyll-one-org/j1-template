@@ -44,13 +44,13 @@ defaults:
   #   default:                          /assets/data/amplitude.html
   #
   # ----------------------------------------------------------------------------
-  # type
+  # player_type
   # ----------------------------------------------------------------------------
   # Sets the the type of player to be created. J1 Template supports three
   # player types: mini, flat and expanded.
   #
-  # values:                           single_song|flat|expanded
-  # default:                          flat
+  # values:                           mini|compact|large
+  # default:                          compact
   #
   # ----------------------------------------------------------------------------
   # player_id
@@ -122,7 +122,7 @@ defaults:
   # ----------------------------------------------------------------------------
   # player defaults
   # ----------------------------------------------------------------------------
-  player_type:                          flat
+  player_type:                          compact
   scrollbars:                           false
   volume:                               50
   repeat:                               false

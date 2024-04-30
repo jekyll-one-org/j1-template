@@ -3,7 +3,7 @@ regenerate:                             true
 exclude_from_search:                    true
 ---
 
-{% capture cache %}
+{%- capture cache -%}
 
 {% comment %}
  # -----------------------------------------------------------------------------
@@ -237,60 +237,69 @@ exclude_from_search:                    true
 
 {% comment %} Main
 ================================================================================ {% endcomment %}
-<!-- [INFO   ][~/assets/data/quicklinks.html               ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
-<!-- [INFO   ][~/assets/data/quicklinks.html               ] [ fick dich ins knie] -->
-<head>
-  <meta name="robots" content="noindex, nofollow">
-</head>
+<!DOCTYPE {{site.doctype}}>
+<html lang="{{site.language}}">
+  <head>
+    <!-- [INFO   ][~/assets/data/quicklinks.html               ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="navigator (quicklinks)" content="module data file">
+  </head>
+  <body>
+    <!-- [INFO   ] [~/assets/data/quicklinks.html               ] [AuthManager detected as: {{ show_auth_manager_icon }}] -->
+    <!-- [INFO   ] [~/assets/data/quicklinks.html               ] [CookieConsent detected as: {{ consent_enabled }}] -->
+    <!-- [INFO   ] [~/assets/data/quicklinks.html               ] [Show CookieConsent icon detected as: {{ show_cookieconsent_icon }}] -->
+    <!-- [INFO   ] [~/assets/data/quicklinks.html               ] [Show ControlCenter icon detected as: {{ show_control_center_icon }}] -->
+    <!-- [INFO   ] [~/assets/data/quicklinks.html               ] [Set icon familiy as: {{ icon_family }}] -->
+    <!-- [INFO   ] [~/assets/data/quicklinks.html               ] [Set icon size as: {{ icon_size }}] -->
 
-<!-- [INFO   ] [~/assets/data/quicklinks.html               ] [AuthManager detected as: {{ show_auth_manager_icon }}] -->
-<!-- [INFO   ] [~/assets/data/quicklinks.html               ] [CookieConsent detected as: {{ consent_enabled }}] -->
-<!-- [INFO   ] [~/assets/data/quicklinks.html               ] [Show CookieConsent icon detected as: {{ show_cookieconsent_icon }}] -->
-<!-- [INFO   ] [~/assets/data/quicklinks.html               ] [Show ControlCenter icon detected as: {{ show_control_center_icon }}] -->
-<!-- [INFO   ] [~/assets/data/quicklinks.html               ] [Set icon familiy as: {{ icon_family }}] -->
-<!-- [INFO   ] [~/assets/data/quicklinks.html               ] [Set icon size as: {{ icon_size }}] -->
+    <ul id="{{quicklinks_options.xhr_data_element}}" class="navbar-nav show">
 
-<ul id="{{quicklinks_options.xhr_data_element}}" class="navbar-nav show">
+      {% comment %} Link buttons
+      ------------------------------------------------------------------------------ {% endcomment %}
+      {% if home_url != "none" %}<li id="quickLinksHomeButton" class="nav-icon"><a id="home_id" href="{{home_url}}" aria-label="{{home_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{home_icon}} {{icon_size}}"></i></a></li>{% endif %}
+      {% if disqus_url != "none" %}<li id="quickLinksDisqusButton" class="nav-icon"><a id="disqus_id" href="{{disqus_url}}" aria-label="{{disqus_label}}" target="blank"><i class="nav-icon {{icon_family}} {{icon_family}}-{{disqus_icon}} {{icon_size}}"></i></a></li>{% endif %}
+      {% if github_url != "none" %}<li id="quickLinksGithubButton" class="nav-icon"><a id="github_id" href="{{github_url}}" aria-label="{{github_label}}" target="blank"><i class="nav-icon {{icon_family}} {{icon_family}}-{{github_icon}} {{icon_size}}"></i></a></li>{% endif %}
+      {% if patreon_url != "none" %}<li id="quickLinksPatreonButton" class="nav-icon"><a id="patreon_id" href="{{patreon_url}}" aria-label="{{patreon_label}}" target="blank"><i class="nav-icon {{icon_family}} {{icon_family}}-{{patreon_icon}} {{icon_size}}"></i></a></li>{% endif %}
+      {% if facebook_url != "none" %}<li id="quickLinksFacebookButton" class="nav-icon"><a id="facebook_id" href="{{facebook_url}}" aria-label="{{facebook_label}}" target="blank"><i class="nav-icon {{icon_family}} {{icon_family}}-{{facebook_icon}} {{icon_size}}"></i></a></li>{% endif %}
+      {% if twitter_url != "none" %}<li id="quickLinksTwitterButton" class="nav-icon"><a id="twitter_id" href="{{twitter_url}}" aria-label="{{twitter_label}}" target="blank"><i class="nav-icon {{icon_family}} {{icon_family}}-{{twitter_icon}} {{icon_size}}"></i></a></li>{% endif %}
+      {% if buymeacoffee_url != "none" %}<li id="quickLinksBuyMeAcoffeebutton" class="nav-icon"><a id="buymeacoffee_id" href="{{buymeacoffee_url}}" target="blank" aria-label="{{buymeacoffee_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{buymeacoffee_icon}} {{icon_size}}"></i></a></li>{% endif %}
 
-  {% comment %} Link buttons
-  ------------------------------------------------------------------------------ {% endcomment %}
-  {% if home_url != "none" %}<li id="quickLinksHomeButton" class="nav-icon"><a id="home_id" href="{{home_url}}" aria-label="{{home_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{home_icon}} {{icon_size}}"></i></a></li>{% endif %}
-  {% if disqus_url != "none" %}<li id="quickLinksDisqusButton" class="nav-icon"><a id="disqus_id" href="{{disqus_url}}" aria-label="{{disqus_label}}" target="blank"><i class="nav-icon {{icon_family}} {{icon_family}}-{{disqus_icon}} {{icon_size}}"></i></a></li>{% endif %}
-  {% if github_url != "none" %}<li id="quickLinksGithubButton" class="nav-icon"><a id="github_id" href="{{github_url}}" aria-label="{{github_label}}" target="blank"><i class="nav-icon {{icon_family}} {{icon_family}}-{{github_icon}} {{icon_size}}"></i></a></li>{% endif %}
-  {% if patreon_url != "none" %}<li id="quickLinksPatreonButton" class="nav-icon"><a id="patreon_id" href="{{patreon_url}}" aria-label="{{patreon_label}}" target="blank"><i class="nav-icon {{icon_family}} {{icon_family}}-{{patreon_icon}} {{icon_size}}"></i></a></li>{% endif %}
-  {% if facebook_url != "none" %}<li id="quickLinksFacebookButton" class="nav-icon"><a id="facebook_id" href="{{facebook_url}}" aria-label="{{facebook_label}}" target="blank"><i class="nav-icon {{icon_family}} {{icon_family}}-{{facebook_icon}} {{icon_size}}"></i></a></li>{% endif %}
-  {% if twitter_url != "none" %}<li id="quickLinksTwitterButton" class="nav-icon"><a id="twitter_id" href="{{twitter_url}}" aria-label="{{twitter_label}}" target="blank"><i class="nav-icon {{icon_family}} {{icon_family}}-{{twitter_icon}} {{icon_size}}"></i></a></li>{% endif %}
-  {% if buymeacoffee_url != "none" %}<li id="quickLinksBuyMeAcoffeebutton" class="nav-icon"><a id="buymeacoffee_id" href="{{buymeacoffee_url}}" target="blank" aria-label="{{buymeacoffee_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{buymeacoffee_icon}} {{icon_size}}"></i></a></li>{% endif %}
+      {% comment %} Action buttons
+      ------------------------------------------------------------------------------ {% endcomment %}
+      {% if show_quicksearch_icon %}<li id="quickLinksSearchButton" class="nav-icon {{quicksearch_action}}"><a href="#" aria-label="{{quicksearch_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{quicksearch_icon}} {{icon_size}}"></i></a></li>{% endif %}
+      {% if show_docsearch_icon %}<li id="quickLinksDocSearchButton" class="nav-icon {{docsearch_action}}"><a href="#" aria-label="{{docsearch_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{docsearch_icon}} {{icon_size}}"></i></a></li>{% endif %}
+      {% if show_auth_manager_icon %}<li id="quickLinksSignInOutButton" class="nav-icon sign-inout" style="display: none;"><a class="nav-icon" id="navLinkSignInOut" aria-label="SignOut" href="#" data-bs-toggle="modal" data-bs-target="#{{signin_modal_id}}"><i id="iconSignInOut" class="nav-icon {{icon_family}} {{icon_family}}-{{signin_icon}} {{icon_size}}"></i></a></li>{% endif %}
+      {% if show_cookieconsent_icon %}<li id="quickLinksCookieButton" class="nav-icon {{cookies_action}}" style="display: block;"><a href="#" aria-label="{{cookies_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{cookies_icon}} {{icon_size}}"></i></a></li>{% endif %}
+      {% if show_translator_icon %}<li id="quickLinksTranslateButton" class="nav-icon {{translate_action}}" style="display: block;"><a href="#" aria-label="{{translate_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{translate_icon}} {{icon_size}}"></i></a></li>{% endif %}
+      {% if show_speak2me_icon %}<li id="quickLinksSpeakButton" class="nav-icon {{speak2me_action}}" style="display: block;"><a href="#" aria-label="{{speak2me_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{speak2me_icon}} {{icon_size}}"></i></a></li>{% endif %}
+      {% if show_theme_toggler_icon %}<li id="quickLinksThemeTogglerButton" class="nav-icon {{theme_toggler_action}}" style="display: block;"><a href="#" aria-label="{{theme_toggler_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{theme_toggler_icon}} {{icon_size}}"></i></a></li>{% endif %}
 
-  {% comment %} Action buttons
-  ------------------------------------------------------------------------------ {% endcomment %}
-  {% if show_quicksearch_icon %}<li id="quickLinksSearchButton" class="nav-icon {{quicksearch_action}}"><a href="#" aria-label="{{quicksearch_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{quicksearch_icon}} {{icon_size}}"></i></a></li>{% endif %}
-  {% if show_docsearch_icon %}<li id="quickLinksDocSearchButton" class="nav-icon {{docsearch_action}}"><a href="#" aria-label="{{docsearch_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{docsearch_icon}} {{icon_size}}"></i></a></li>{% endif %}
-  {% if show_auth_manager_icon %}<li id="quickLinksSignInOutButton" class="nav-icon sign-inout" style="display: none;"><a class="nav-icon" id="navLinkSignInOut" aria-label="SignOut" href="#" data-bs-toggle="modal" data-bs-target="#{{signin_modal_id}}"><i id="iconSignInOut" class="nav-icon {{icon_family}} {{icon_family}}-{{signin_icon}} {{icon_size}}"></i></a></li>{% endif %}
-  {% if show_cookieconsent_icon %}<li id="quickLinksCookieButton" class="nav-icon {{cookies_action}}" style="display: block;"><a href="#" aria-label="{{cookies_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{cookies_icon}} {{icon_size}}"></i></a></li>{% endif %}
-  {% if show_translator_icon %}<li id="quickLinksTranslateButton" class="nav-icon {{translate_action}}" style="display: block;"><a href="#" aria-label="{{translate_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{translate_icon}} {{icon_size}}"></i></a></li>{% endif %}
-  {% if show_speak2me_icon %}<li id="quickLinksSpeakButton" class="nav-icon {{speak2me_action}}" style="display: block;"><a href="#" aria-label="{{speak2me_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{speak2me_icon}} {{icon_size}}"></i></a></li>{% endif %}
-  {% if show_theme_toggler_icon %}<li id="quickLinksThemeTogglerButton" class="nav-icon {{theme_toggler_action}}" style="display: block;"><a href="#" aria-label="{{theme_toggler_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{theme_toggler_icon}} {{icon_size}}"></i></a></li>{% endif %}
+      {% comment %} Unused
+      ------------------------------------------------------------------------------
+      {% if show_r_text_icon %}<li id="quickLinksRTextButton" class="nav-icon {{r_text_action}}" style="display: block;"><a class="nav-icon" href="#" aria-label="{{r_text_label}}" data-bs-toggle="modal" data-bs-target="#fluidModalRTextResizer"><i class="nav-icon {{icon_family}} {{icon_family}}-{{r_text_icon}} {{icon_size}}"></i></a></li>{% endif %}
+      {% if show_notebooks_icon %}<li id="quickLinksNotebookseButton" class="nav-icon {{notebooks_action}}" style="display: none;"><a href="#" aria-label="{{translate_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{notebooks_icon}} {{icon_size}}"></i></a></li>{% endif %}
+      {% if show_control_center_icon %}<li id="quickLinksControlCenterButton" class="nav-icon control-center" style="display: block;"><a class="nav-icon" href="{{control_center_url}}" aria-label="ControlCenter"><i class="nav-icon {{icon_family}} {{icon_family}}-{{control_center_icon}} {{icon_size}}"></i></a></li>{% endif %}
+      {% if show_google_translate_icon %}<li id="quickLinksLanguageButton" class="nav-icon translator"><a class="nav-icon" href="#void" aria-label="Translator"><i class="nav-icon {{icon_family}} {{icon_family}}-{{translator_icon}} {{icon_size}}"></i></a></li>{% endif %}
+      {% if show_google_translate_lang %}<li id="quickLinksTranslateLangButton" sclass="nav-icon" style="display: block;"><a href="javascript:j1.translator.showDialog()" aria-label="Google Translate"><i class="nav-icon flag-icon flag-icon-{{translate_lang}} rectangle size-md"></i></a></li>{% endif %}
+      ------------------------------------------------------------------------------
+      {% endcomment %}
 
-  {% comment %} Unused
-  ------------------------------------------------------------------------------
-  {% if show_r_text_icon %}<li id="quickLinksRTextButton" class="nav-icon {{r_text_action}}" style="display: block;"><a class="nav-icon" href="#" aria-label="{{r_text_label}}" data-bs-toggle="modal" data-bs-target="#fluidModalRTextResizer"><i class="nav-icon {{icon_family}} {{icon_family}}-{{r_text_icon}} {{icon_size}}"></i></a></li>{% endif %}
-  {% if show_notebooks_icon %}<li id="quickLinksNotebookseButton" class="nav-icon {{notebooks_action}}" style="display: none;"><a href="#" aria-label="{{translate_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{notebooks_icon}} {{icon_size}}"></i></a></li>{% endif %}
-  {% if show_control_center_icon %}<li id="quickLinksControlCenterButton" class="nav-icon control-center" style="display: block;"><a class="nav-icon" href="{{control_center_url}}" aria-label="ControlCenter"><i class="nav-icon {{icon_family}} {{icon_family}}-{{control_center_icon}} {{icon_size}}"></i></a></li>{% endif %}
-  {% if show_google_translate_icon %}<li id="quickLinksLanguageButton" class="nav-icon translator"><a class="nav-icon" href="#void" aria-label="Translator"><i class="nav-icon {{icon_family}} {{icon_family}}-{{translator_icon}} {{icon_size}}"></i></a></li>{% endif %}
-  {% if show_google_translate_lang %}<li id="quickLinksTranslateLangButton" sclass="nav-icon" style="display: block;"><a href="javascript:j1.translator.showDialog()" aria-label="Google Translate"><i class="nav-icon flag-icon flag-icon-{{translate_lang}} rectangle size-md"></i></a></li>{% endif %}
-  ------------------------------------------------------------------------------
-  {% endcomment %}
+    </ul>
 
-</ul>
+    <!-- Test element -->
+    <div id="nav_test_element" class="nav-primary" style="display: none"></div>
+  </body>
+</html>
+{%- endcapture -%}
 
-<!-- Test element -->
-<div id="nav_test_element" class="nav-primary" style="display: none"></div>
-
-{% endcapture %}
-{% if production %}
-  {% capture _LINE_FEED %}{% endcapture %}{% if site.compress_html.ignore.envs contains jekyll.environment %}{{ cache | strip_html_comments }}{% else %}{% capture _content %}{{ cache | strip_html_comments }}{% endcapture %}{% assign _profile = site.compress_html.profile %}{% if site.compress_html.endings == "all" %}{% assign _endings = "html head body li dt dd p rt rp optgroup option colgroup caption thead tbody tfoot tr td th" | split: " " %}{% else %}{% assign _endings = site.compress_html.endings %}{% endif %}{% for _element in _endings %}{% capture _end %}</{{ _element }}>{% endcapture %}{% assign _content = _content | remove: _end %}{% endfor %}{% if _profile and _endings %}{% assign _profile_endings = _content | size | plus: 1 %}{% endif %}{% for _element in site.compress_html.startings %}{% capture _start %}<{{ _element }}>{% endcapture %}{% assign _content = _content | remove: _start %}{% endfor %}{% if _profile and site.compress_html.startings %}{% assign _profile_startings = _content | size | plus: 1 %}{% endif %}{% if site.compress_html.comments == "all" %}{% assign _comments = "<!-- -->" | split: " " %}{% else %}{% assign _comments = site.compress_html.comments %}{% endif %}{% if _comments.size == 2 %}{% capture _comment_befores %}.{{ _content }}{% endcapture %}{% assign _comment_befores = _comment_befores | split: _comments.first %}{% for _comment_before in _comment_befores %}{% if forloop.first %}{% continue %}{% endif %}{% capture _comment_outside %}{% if _carry %}{{ _comments.first }}{% endif %}{{ _comment_before }}{% endcapture %}{% capture _comment %}{% unless _carry %}{{ _comments.first }}{% endunless %}{{ _comment_outside | split: _comments.last | first }}{% if _comment_outside contains _comments.last %}{{ _comments.last }}{% assign _carry = false %}{% else %}{% assign _carry = true %}{% endif %}{% endcapture %}{% assign _content = _content | remove_first: _comment %}{% endfor %}{% if _profile %}{% assign _profile_comments = _content | size | plus: 1 %}{% endif %}{% endif %}{% assign _pre_befores = _content | split: "<pre" %}{% assign _content = "" %}{% for _pre_before in _pre_befores %}{% assign _pres = _pre_before | split: "</pre>" %}{% assign _pres_after = "" %}{% if _pres.size != 0 %}{% if site.compress_html.blanklines %}{% assign _lines = _pres.last | split: _LINE_FEED %}{% capture _pres_after %}{% for _line in _lines %}{% assign _trimmed = _line | split: " " | join: " " %}{% if _trimmed != empty or forloop.last %}{% unless forloop.first %}{{ _LINE_FEED }}{% endunless %}{{ _line }}{% endif %}{% endfor %}{% endcapture %}{% else %}{% assign _pres_after = _pres.last | split: " " | join: " " %}{% endif %}{% endif %}{% capture _content %}{{ _content }}{% if _pre_before contains "</pre>" %}<pre{{ _pres.first }}</pre>{% endif %}{% unless _pre_before contains "</pre>" and _pres.size == 1 %}{{ _pres_after }}{% endunless %}{% endcapture %}{% endfor %}{% if _profile %}{% assign _profile_collapse = _content | size | plus: 1 %}{% endif %}{% if site.compress_html.clippings == "all" %}{% assign _clippings = "html head title base link meta style body article section nav aside h1 h2 h3 h4 h5 h6 hgroup header footer address p hr blockquote ol ul li dl dt dd figure figcaption main div table caption colgroup col tbody thead tfoot tr td th" | split: " " %}{% else %}{% assign _clippings = site.compress_html.clippings %}{% endif %}{% for _element in _clippings %}{% assign _edges = " <e;<e; </e>;</e>;</e> ;</e>" | replace: "e", _element | split: ";" %}{% assign _content = _content | replace: _edges[0], _edges[1] | replace: _edges[2], _edges[3] | replace: _edges[4], _edges[5] %}{% endfor %}{% if _profile and _clippings %}{% assign _profile_clippings = _content | size | plus: 1 %}{% endif %}{{ _content }}{% if _profile %} <table id="compress_html_profile_{{ site.time | date: "%Y%m%d" }}" class="compress_html_profile"> <thead> <tr> <td>Step <td>Bytes <tbody> <tr> <td>raw <td>{{ cache | strip_html_comments | size }}{% if _profile_endings %} <tr> <td>endings <td>{{ _profile_endings }}{% endif %}{% if _profile_startings %} <tr> <td>startings <td>{{ _profile_startings }}{% endif %}{% if _profile_comments %} <tr> <td>comments <td>{{ _profile_comments }}{% endif %}{% if _profile_collapse %} <tr> <td>collapse <td>{{ _profile_collapse }}{% endif %}{% if _profile_clippings %} <tr> <td>clippings <td>{{ _profile_clippings }}{% endif %} </table>{% endif %}{% endif %}
-{% else %}
+{% comment %} Beatify|Compress page
+-------------------------------------------------------------------------------- {% endcomment %}
+{%- if production -%}
+  {% capture _LINE_FEED %}{% endcapture %}{% if site.compress_html.ignore.envs contains jekyll.environment %}{{ cache | strip_html_comments }}{% else %}{% capture _content %}{{ cache | strip_html_comments }}{% endcapture %}{% assign _profile = site.compress_html.profile %}{% if site.compress_html.endings == "all" %}{% assign _endings = "html head body li dt dd p rt rp optgroup option colgroup caption thead tbody tfoot tr td th" | split: " " %}{% else %}{% assign _endings = site.compress_html.endings %}{% endif %}{% for _element in _endings %}{% capture _END %}</{{ _element }}>{% endcapture %}{% assign _content = _content | remove: _END %}{% endfor %}{% if _profile and _endings %}{% assign _profile_endings = _content | size | plus: 1 %}{% endif %}{% for _element in site.compress_html.startings %}{% capture _start %}<{{ _element }}>{% endcapture %}{% assign _content = _content | remove: _start %}{% endfor %}{% if _profile and site.compress_html.startings %}{% assign _profile_startings = _content | size | plus: 1 %}{% endif %}{% if site.compress_html.comments == "all" %}{% assign _comments = "<!-- -->" | split: " " %}{% else %}{% assign _comments = site.compress_html.comments %}{% endif %}{% if _comments.size == 2 %}{% capture _comment_befores %}.{{ _content }}{% endcapture %}{% assign _comment_befores = _comment_befores | split: _comments.first %}{% for _comment_before in _comment_befores %}{% if forloop.first %}{% continue %}{% endif %}{% capture _comment_outside %}{% if _carry %}{{ _comments.first }}{% endif %}{{ _comment_before }}{% endcapture %}{% capture _comment %}{% unless _carry %}{{ _comments.first }}{% endunless %}{{ _comment_outside | split: _comments.last | first }}{% if _comment_outside contains _comments.last %}{{ _comments.last }}{% assign _carry = false %}{% else %}{% assign _carry = true %}{% endif %}{% endcapture %}{% assign _content = _content | remove_first: _comment %}{% endfor %}{% if _profile %}{% assign _profile_comments = _content | size | plus: 1 %}{% endif %}{% endif %}{% assign _pre_befores = _content | split: "<pre" %}{% assign _content = "" %}{% for _pre_before in _pre_befores %}{% assign _pres = _pre_before | split: "</pre>" %}{% assign _pres_after = "" %}{% if _pres.size != 0 %}{% if site.compress_html.blanklines %}{% assign _lines = _pres.last | split: _LINE_FEED %}{% capture _pres_after %}{% for _line in _lines %}{% assign _trimmed = _line | split: " " | join: " " %}{% if _trimmed != empty or forloop.last %}{% unless forloop.first %}{{ _LINE_FEED }}{% endunless %}{{ _line }}{% endif %}{% endfor %}{% endcapture %}{% else %}{% assign _pres_after = _pres.last | split: " " | join: " " %}{% endif %}{% endif %}{% capture _content %}{{ _content }}{% if _pre_before contains "</pre>" %}<pre{{ _pres.first }}</pre>{% endif %}{% unless _pre_before contains "</pre>" and _pres.size == 1 %}{{ _pres_after }}{% endunless %}{% endcapture %}{% endfor %}{% if _profile %}{% assign _profile_collapse = _content | size | plus: 1 %}{% endif %}{% if site.compress_html.clippings == "all" %}{% assign _clippings = "html head title base link meta style body article section nav aside h1 h2 h3 h4 h5 h6 hgroup header footer address p hr blockquote ol ul li dl dt dd figure figcaption main div table caption colgroup col tbody thead tfoot tr td th" | split: " " %}{% else %}{% assign _clippings = site.compress_html.clippings %}{% endif %}{% for _element in _clippings %}{% assign _edges = " <e;<e; </e>;</e>;</e> ;</e>" | replace: "e", _element | split: ";" %}{% assign _content = _content | replace: _edges[0], _edges[1] | replace: _edges[2], _edges[3] | replace: _edges[4], _edges[5] %}{% endfor %}{% if _profile and _clippings %}{% assign _profile_clippings = _content | size | plus: 1 %}{% endif %}{{ _content }}{% if _profile %} <table id="compress_html_profile_{{ site.time | date: "%Y%m%d" }}" class="compress_html_profile"> <thead> <tr> <td>Step <td>Bytes <tbody> <tr> <td>raw <td>{{ cache | strip_html_comments | size }}{% if _profile_endings %} <tr> <td>endings <td>{{ _profile_endings }}{% endif %}{% if _profile_startings %} <tr> <td>startings <td>{{ _profile_startings }}{% endif %}{% if _profile_comments %} <tr> <td>comments <td>{{ _profile_comments }}{% endif %}{% if _profile_collapse %} <tr> <td>collapse <td>{{ _profile_collapse }}{% endif %}{% if _profile_clippings %} <tr> <td>clippings <td>{{ _profile_clippings }}{% endif %} </table>{% endif %}{% endif %}
+{%- else -%}
   {{ cache | remove:'<html><body>' | remove:'</body></html>' | strip_empty_lines }}
-{% endif %}
-{% assign cache = nil %}
+{%- endif -%}
+
+{% comment %} Reset page cache
+-------------------------------------------------------------------------------- {% endcomment %}
+{%- assign cache = nil -%}

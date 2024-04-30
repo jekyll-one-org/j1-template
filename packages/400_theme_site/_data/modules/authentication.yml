@@ -133,7 +133,6 @@ settings:
                                         to authenticate with the provider *selected*. If signed in
                                         *successfully*, you get back to this site for the page requested.
 
-
                                         NOTE: To get access to secured pages of this site,
                                         authentication with a provider is needed only *once*.
 
@@ -143,7 +142,6 @@ settings:
                                         After signing out from this site, you'll be *redirected*
                                         to the *provider* you're currently authenticated. From your
                                         home page at the *provider*, you can *sign out* completely.
-
 
                                         NOTE: In order to signing out *completely*, check the switch
                                         below to *on*.
@@ -157,7 +155,6 @@ settings:
       id:                               2
       title:                            Github
       text:                             SignIn to Github. Get access to all *PROTECTED* content pages of this site.
-
 
 # ------------------------------------------------------------------------------
 # END config

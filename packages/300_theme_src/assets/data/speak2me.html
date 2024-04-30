@@ -3,7 +3,7 @@ regenerate:                             true
 exclude_from_search:                    true
 ---
 
-{% capture cache %}
+{%- capture cache -%}
 
 {% comment %}
  # -----------------------------------------------------------------------------
@@ -58,165 +58,171 @@ exclude_from_search:                    true
 
 {% comment %} Main
 ================================================================================ {% endcomment %}
-<!-- [INFO   ] [~/assets/data/translator.html                ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
-<head>
-  <meta name="robots" content="noindex, nofollow">
-</head>
+<!DOCTYPE {{site.doctype}}>
+<html lang="{{site.language}}">
+  <head>
+    <!-- [INFO   ] [~/assets/data/translator.html                ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="speak2me (ui|modal)" content="module data file">
+  </head>
+  <body>
+    {% comment %} Modal Speak2Me
+    ---------------------------------------------------------------------------- {% endcomment %}
+    <!-- start modal container -->
+    <div id="speak2me-modal-data">
+      <!-- start modal -->
+      <div id="speak2me-modal"
+        class="modal-dialog modal-frame modal-top modal-notify modal-primary"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1" role="document">
+        <!-- start modal content  -->
+        <div class="modal-content">
 
-
-{% comment %} Modal Speak2Me
--------------------------------------------------------------------------------- {% endcomment %}
-
-<!-- start modal container -->
-<div id="speak2me-modal-data">
-  <!-- start modal -->
-  <div id="speak2me-modal"
-    class="modal-dialog modal-frame modal-top modal-notify modal-primary"
-    data-bs-backdrop="static"
-    data-bs-keyboard="false"
-    tabindex="-1" role="document">
-    <!-- start modal content  -->
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <p class="lead">{{speak2me_options.modal.title}}</p>
-      </div>
-
-      <!-- start modal body  -->
-      <div class="container mt-4">
-
-        <!-- start settings -->
-        <div class="settings-area mb-5" data-speak2me-ignore>
-          <h2 class="ml-2 mt-4 mb-4">{{speak2me_options.modal.settings.voice_settings_title}}</h2>
-          <div class="mb-3">
-            <div>
-              <!-- speed selector -->
-              <label class="form-label mr-3" for="rate">{{speak2me_options.modal.settings.voice_speed_label}}</label>
-              <input id="rate" class="form-range" style="height: unset"
-                name="rate"
-                type="range"
-                min="{{speak2me_options.modal.settings.voice_speed_min}}"
-                max="{{speak2me_options.modal.settings.voice_speed_max}}"
-                step="{{speak2me_options.modal.settings.voice_speed_step}}"
-                value="{{speak2me_options.modal.settings.voice_speed_value}}"
-                oninput="j1.adapter.speak2me.update(this, value)"
-                onchange="j1.adapter.speak2me.update(this, value)"
-              />
-              <span class="val ml-3">{{speak2me_options.modal.settings.voice_speed_value}}</span>
-            </div>
-            <div>
-              <!-- pitch selector -->
-              <label for="pitch" class="form-label mr-3">{{speak2me_options.modal.settings.voice_pitch_label}}</label>
-              <input id="pitch" class="form-range" style="height: unset"
-                name="pitch"
-                type="range"
-                min="{{speak2me_options.modal.settings.voice_pitch_min}}"
-                max="{{speak2me_options.modal.settings.voice_pitch_max}}"
-                step="{{speak2me_options.modal.settings.voice_pitch_step}}"
-                value="{{speak2me_options.modal.settings.voice_pitch_value}}"
-                oninput="j1.adapter.speak2me.update(this, value)"
-                onchange="j1.adapter.speak2me.update(this, value)"
-              />
-              <span class="val ml-3">{{speak2me_options.modal.settings.voice_pitch_value}}</span>
-            </div>
-            <div>
-              <!-- volume selector -->
-              <label for="volume" class="form-label mr-3">{{speak2me_options.modal.settings.voice_volume_label}}</label>
-              <input id="volume" class="form-range" style="height: unset"
-                name="volume"
-                type="range"
-                min="{{speak2me_options.modal.settings.voice_volume_min}}"
-                max="{{speak2me_options.modal.settings.voice_volume_max}}"
-                step="{{speak2me_options.modal.settings.voice_volume_step}}"
-                value="{{speak2me_options.modal.settings.voice_volume_value}}"
-                oninput="j1.adapter.speak2me.update(this, value)"
-                nchange="j1.adapter.speak2me.update(this, value)"
-              />
-              <span class="val ml-3">{{speak2me_options.modal.settings.voice_volume_value}}</span>
-            </div>
-
-            <div id="voiceSelector" class="ml-2 mt-3" ></div>
-
+          <div class="modal-header">
+            <p class="lead">{{speak2me_options.modal.title}}</p>
           </div>
 
-          <h2 class="ml-2 mt-5 mb-3">{{speak2me_options.modal.settings.voice_control_title}}</h2>
-          <!-- start control buttons -->
-          <div class="ml-2">
+          <!-- start modal body  -->
+          <div class="container mt-4">
 
-            <!-- speak button -->
-            <button type="button"
-              id="speak_button"
-              class="btn btn-{{speak2me_options.modal.settings.speak_button_style}} btn-sm"
-              style="min-width: 180px;"
-              onclick="j1.adapter.speak2me.speak('{{speak2me_options.speechSelector}}')"
-              data-bs-dismiss="modal">
-              <i class="mdib mdib-speaker mdib-sm mr-2"></i>
-              {{speak2me_options.modal.settings.speak_button_text}}
-            </button>
+            <!-- start settings -->
+            <div class="settings-area mb-5" data-speak2me-ignore>
+              <h2 class="ml-2 mt-4 mb-4">{{speak2me_options.modal.settings.voice_settings_title}}</h2>
+              <div class="mb-3">
+                <div>
+                  <!-- speed selector -->
+                  <label class="form-label mr-3" for="rate">{{speak2me_options.modal.settings.voice_speed_label}}</label>
+                  <input id="rate" class="form-range" style="height: unset"
+                    name="rate"
+                    type="range"
+                    min="{{speak2me_options.modal.settings.voice_speed_min}}"
+                    max="{{speak2me_options.modal.settings.voice_speed_max}}"
+                    step="{{speak2me_options.modal.settings.voice_speed_step}}"
+                    value="{{speak2me_options.modal.settings.voice_speed_value}}"
+                    oninput="j1.adapter.speak2me.update(this, value)"
+                    onchange="j1.adapter.speak2me.update(this, value)"
+                  />
+                  <span class="val ml-3">{{speak2me_options.modal.settings.voice_speed_value}}</span>
+                </div>
+                <div>
+                  <!-- pitch selector -->
+                  <label for="pitch" class="form-label mr-3">{{speak2me_options.modal.settings.voice_pitch_label}}</label>
+                  <input id="pitch" class="form-range" style="height: unset"
+                    name="pitch"
+                    type="range"
+                    min="{{speak2me_options.modal.settings.voice_pitch_min}}"
+                    max="{{speak2me_options.modal.settings.voice_pitch_max}}"
+                    step="{{speak2me_options.modal.settings.voice_pitch_step}}"
+                    value="{{speak2me_options.modal.settings.voice_pitch_value}}"
+                    oninput="j1.adapter.speak2me.update(this, value)"
+                    onchange="j1.adapter.speak2me.update(this, value)"
+                  />
+                  <span class="val ml-3">{{speak2me_options.modal.settings.voice_pitch_value}}</span>
+                </div>
+                <div>
+                  <!-- volume selector -->
+                  <label for="volume" class="form-label mr-3">{{speak2me_options.modal.settings.voice_volume_label}}</label>
+                  <input id="volume" class="form-range" style="height: unset"
+                    name="volume"
+                    type="range"
+                    min="{{speak2me_options.modal.settings.voice_volume_min}}"
+                    max="{{speak2me_options.modal.settings.voice_volume_max}}"
+                    step="{{speak2me_options.modal.settings.voice_volume_step}}"
+                    value="{{speak2me_options.modal.settings.voice_volume_value}}"
+                    oninput="j1.adapter.speak2me.update(this, value)"
+                    nchange="j1.adapter.speak2me.update(this, value)"
+                  />
+                  <span class="val ml-3">{{speak2me_options.modal.settings.voice_volume_value}}</span>
+                </div>
 
-            <!-- stop button -->
-            <button type="button"
-              id="stop_button"
-              class="btn btn-{{speak2me_options.modal.settings.stop_button_style}} btn-sm"
-              style="min-width: 180px; display: none;"
-              onclick="j1.adapter.speak2me.stop()"
-              data-bs-dismiss="modal">
-              <i class="mdib mdib-speaker-off mdib-sm mr-2"></i>
-              {{speak2me_options.modal.settings.stop_button_text}}
-            </button>
+                <div id="voiceSelector" class="ml-2 mt-3" ></div>
 
-            <!-- pause button -->
-            <button type="button"
-              id="pause_button"
-              class="btn btn-{{speak2me_options.modal.settings.pause_button_style}} btn-sm"
-              style="min-width: 180px; display: none;"
-              onclick="j1.adapter.speak2me.pause()"
-              data-bs-dismiss="modal">
-              <i class="mdib mdib-pause mdib-sm mr-2"></i>
-              {{speak2me_options.modal.settings.pause_button_text}}
-            </button>
+              </div>
 
-            <!-- resume button -->
-            <button type="button"
-              id="resume_button"
-              class="btn btn-{{speak2me_options.modal.settings.resume_button_style}} btn-sm"
-              style="min-width: 180px; display: none;"
-              onclick="j1.adapter.speak2me.resume()"
-              data-bs-dismiss="modal">
-              <i class="mdib mdib-play-pause mdib-sm mr-2"></i>
-              {{speak2me_options.modal.settings.resume_button_text}}
-            </button>
+              <h2 class="ml-2 mt-5 mb-3">{{speak2me_options.modal.settings.voice_control_title}}</h2>
+              <!-- start control buttons -->
+              <div class="ml-2">
 
-            <!-- exit (modal) button -->
-            <button type="button"
-              id="exit_button"
-              class="btn btn-{{speak2me_options.modal.settings.exit_button_style}}  btn-sm"
-              style="min-width: 180px;"
-              data-bs-dismiss="modal">
-              <i class="mdib mdib-close mdib-sm mr-2"></i>
-              {{speak2me_options.modal.settings.exit_button_text}}
-            </button>
+                <!-- speak button -->
+                <button type="button"
+                  id="speak_button"
+                  class="btn btn-{{speak2me_options.modal.settings.speak_button_style}} btn-sm"
+                  style="min-width: 180px;"
+                  onclick="j1.adapter.speak2me.speak('{{speak2me_options.speechSelector}}')"
+                  data-bs-dismiss="modal">
+                  <i class="mdib mdib-speaker mdib-sm mr-2"></i>
+                  {{speak2me_options.modal.settings.speak_button_text}}
+                </button>
+
+                <!-- stop button -->
+                <button type="button"
+                  id="stop_button"
+                  class="btn btn-{{speak2me_options.modal.settings.stop_button_style}} btn-sm"
+                  style="min-width: 180px; display: none;"
+                  onclick="j1.adapter.speak2me.stop()"
+                  data-bs-dismiss="modal">
+                  <i class="mdib mdib-speaker-off mdib-sm mr-2"></i>
+                  {{speak2me_options.modal.settings.stop_button_text}}
+                </button>
+
+                <!-- pause button -->
+                <button type="button"
+                  id="pause_button"
+                  class="btn btn-{{speak2me_options.modal.settings.pause_button_style}} btn-sm"
+                  style="min-width: 180px; display: none;"
+                  onclick="j1.adapter.speak2me.pause()"
+                  data-bs-dismiss="modal">
+                  <i class="mdib mdib-pause mdib-sm mr-2"></i>
+                  {{speak2me_options.modal.settings.pause_button_text}}
+                </button>
+
+                <!-- resume button -->
+                <button type="button"
+                  id="resume_button"
+                  class="btn btn-{{speak2me_options.modal.settings.resume_button_style}} btn-sm"
+                  style="min-width: 180px; display: none;"
+                  onclick="j1.adapter.speak2me.resume()"
+                  data-bs-dismiss="modal">
+                  <i class="mdib mdib-play-pause mdib-sm mr-2"></i>
+                  {{speak2me_options.modal.settings.resume_button_text}}
+                </button>
+
+                <!-- exit (modal) button -->
+                <button type="button"
+                  id="exit_button"
+                  class="btn btn-{{speak2me_options.modal.settings.exit_button_style}}  btn-sm"
+                  style="min-width: 180px;"
+                  data-bs-dismiss="modal">
+                  <i class="mdib mdib-close mdib-sm mr-2"></i>
+                  {{speak2me_options.modal.settings.exit_button_text}}
+                </button>
+              </div>
+              <!-- end control buttons -->
+            </div>
+            <!-- end settings -->
           </div>
-          <!-- end control buttons -->
+          <!-- end modal body  -->
         </div>
-        <!-- end settings -->
+        <!-- end modal content  -->
       </div>
-      <!-- end modal body  -->
+      <!-- end modal -->
     </div>
-    <!-- end modal content  -->
-  </div>
-  <!-- end modal -->
-</div>
-<!-- end modal container -->
+    <!-- end modal container -->
+    {% comment %} END Modal Speak2Me
+    --------------------------------------------------------------------------- {% endcomment %}
+  </body>
+</html>
+{%- endcapture -%}
 
-{% comment %} END Modal Speak2Me
+{% comment %} Beatify|Compress page
 -------------------------------------------------------------------------------- {% endcomment %}
-
-{% endcapture %}
-
-{% if production %}
-  {% capture _LINE_FEED %}{% endcapture %}{% if site.compress_html.ignore.envs contains jekyll.environment %}{{ cache | strip_html_comments }}{% else %}{% capture _content %}{{ cache | strip_html_comments }}{% endcapture %}{% assign _profile = site.compress_html.profile %}{% if site.compress_html.endings == "all" %}{% assign _endings = "html head body li dt dd p rt rp optgroup option colgroup caption thead tbody tfoot tr td th" | split: " " %}{% else %}{% assign _endings = site.compress_html.endings %}{% endif %}{% for _element in _endings %}{% capture _end %}</{{ _element }}>{% endcapture %}{% assign _content = _content | remove: _end %}{% endfor %}{% if _profile and _endings %}{% assign _profile_endings = _content | size | plus: 1 %}{% endif %}{% for _element in site.compress_html.startings %}{% capture _start %}<{{ _element }}>{% endcapture %}{% assign _content = _content | remove: _start %}{% endfor %}{% if _profile and site.compress_html.startings %}{% assign _profile_startings = _content | size | plus: 1 %}{% endif %}{% if site.compress_html.comments == "all" %}{% assign _comments = "<!-- -->" | split: " " %}{% else %}{% assign _comments = site.compress_html.comments %}{% endif %}{% if _comments.size == 2 %}{% capture _comment_befores %}.{{ _content }}{% endcapture %}{% assign _comment_befores = _comment_befores | split: _comments.first %}{% for _comment_before in _comment_befores %}{% if forloop.first %}{% continue %}{% endif %}{% capture _comment_outside %}{% if _carry %}{{ _comments.first }}{% endif %}{{ _comment_before }}{% endcapture %}{% capture _comment %}{% unless _carry %}{{ _comments.first }}{% endunless %}{{ _comment_outside | split: _comments.last | first }}{% if _comment_outside contains _comments.last %}{{ _comments.last }}{% assign _carry = false %}{% else %}{% assign _carry = true %}{% endif %}{% endcapture %}{% assign _content = _content | remove_first: _comment %}{% endfor %}{% if _profile %}{% assign _profile_comments = _content | size | plus: 1 %}{% endif %}{% endif %}{% assign _pre_befores = _content | split: "<pre" %}{% assign _content = "" %}{% for _pre_before in _pre_befores %}{% assign _pres = _pre_before | split: "</pre>" %}{% assign _pres_after = "" %}{% if _pres.size != 0 %}{% if site.compress_html.blanklines %}{% assign _lines = _pres.last | split: _LINE_FEED %}{% capture _pres_after %}{% for _line in _lines %}{% assign _trimmed = _line | split: " " | join: " " %}{% if _trimmed != empty or forloop.last %}{% unless forloop.first %}{{ _LINE_FEED }}{% endunless %}{{ _line }}{% endif %}{% endfor %}{% endcapture %}{% else %}{% assign _pres_after = _pres.last | split: " " | join: " " %}{% endif %}{% endif %}{% capture _content %}{{ _content }}{% if _pre_before contains "</pre>" %}<pre{{ _pres.first }}</pre>{% endif %}{% unless _pre_before contains "</pre>" and _pres.size == 1 %}{{ _pres_after }}{% endunless %}{% endcapture %}{% endfor %}{% if _profile %}{% assign _profile_collapse = _content | size | plus: 1 %}{% endif %}{% if site.compress_html.clippings == "all" %}{% assign _clippings = "html head title base link meta style body article section nav aside h1 h2 h3 h4 h5 h6 hgroup header footer address p hr blockquote ol ul li dl dt dd figure figcaption main div table caption colgroup col tbody thead tfoot tr td th" | split: " " %}{% else %}{% assign _clippings = site.compress_html.clippings %}{% endif %}{% for _element in _clippings %}{% assign _edges = " <e;<e; </e>;</e>;</e> ;</e>" | replace: "e", _element | split: ";" %}{% assign _content = _content | replace: _edges[0], _edges[1] | replace: _edges[2], _edges[3] | replace: _edges[4], _edges[5] %}{% endfor %}{% if _profile and _clippings %}{% assign _profile_clippings = _content | size | plus: 1 %}{% endif %}{{ _content }}{% if _profile %} <table id="compress_html_profile_{{ site.time | date: "%Y%m%d" }}" class="compress_html_profile"> <thead> <tr> <td>Step <td>Bytes <tbody> <tr> <td>raw <td>{{ cache | strip_html_comments | size }}{% if _profile_endings %} <tr> <td>endings <td>{{ _profile_endings }}{% endif %}{% if _profile_startings %} <tr> <td>startings <td>{{ _profile_startings }}{% endif %}{% if _profile_comments %} <tr> <td>comments <td>{{ _profile_comments }}{% endif %}{% if _profile_collapse %} <tr> <td>collapse <td>{{ _profile_collapse }}{% endif %}{% if _profile_clippings %} <tr> <td>clippings <td>{{ _profile_clippings }}{% endif %} </table>{% endif %}{% endif %}
-{% else %}
+{%- if production -%}
+  {% capture _LINE_FEED %}{% endcapture %}{% if site.compress_html.ignore.envs contains jekyll.environment %}{{ cache | strip_html_comments }}{% else %}{% capture _content %}{{ cache | strip_html_comments }}{% endcapture %}{% assign _profile = site.compress_html.profile %}{% if site.compress_html.endings == "all" %}{% assign _endings = "html head body li dt dd p rt rp optgroup option colgroup caption thead tbody tfoot tr td th" | split: " " %}{% else %}{% assign _endings = site.compress_html.endings %}{% endif %}{% for _element in _endings %}{% capture _END %}</{{ _element }}>{% endcapture %}{% assign _content = _content | remove: _END %}{% endfor %}{% if _profile and _endings %}{% assign _profile_endings = _content | size | plus: 1 %}{% endif %}{% for _element in site.compress_html.startings %}{% capture _start %}<{{ _element }}>{% endcapture %}{% assign _content = _content | remove: _start %}{% endfor %}{% if _profile and site.compress_html.startings %}{% assign _profile_startings = _content | size | plus: 1 %}{% endif %}{% if site.compress_html.comments == "all" %}{% assign _comments = "<!-- -->" | split: " " %}{% else %}{% assign _comments = site.compress_html.comments %}{% endif %}{% if _comments.size == 2 %}{% capture _comment_befores %}.{{ _content }}{% endcapture %}{% assign _comment_befores = _comment_befores | split: _comments.first %}{% for _comment_before in _comment_befores %}{% if forloop.first %}{% continue %}{% endif %}{% capture _comment_outside %}{% if _carry %}{{ _comments.first }}{% endif %}{{ _comment_before }}{% endcapture %}{% capture _comment %}{% unless _carry %}{{ _comments.first }}{% endunless %}{{ _comment_outside | split: _comments.last | first }}{% if _comment_outside contains _comments.last %}{{ _comments.last }}{% assign _carry = false %}{% else %}{% assign _carry = true %}{% endif %}{% endcapture %}{% assign _content = _content | remove_first: _comment %}{% endfor %}{% if _profile %}{% assign _profile_comments = _content | size | plus: 1 %}{% endif %}{% endif %}{% assign _pre_befores = _content | split: "<pre" %}{% assign _content = "" %}{% for _pre_before in _pre_befores %}{% assign _pres = _pre_before | split: "</pre>" %}{% assign _pres_after = "" %}{% if _pres.size != 0 %}{% if site.compress_html.blanklines %}{% assign _lines = _pres.last | split: _LINE_FEED %}{% capture _pres_after %}{% for _line in _lines %}{% assign _trimmed = _line | split: " " | join: " " %}{% if _trimmed != empty or forloop.last %}{% unless forloop.first %}{{ _LINE_FEED }}{% endunless %}{{ _line }}{% endif %}{% endfor %}{% endcapture %}{% else %}{% assign _pres_after = _pres.last | split: " " | join: " " %}{% endif %}{% endif %}{% capture _content %}{{ _content }}{% if _pre_before contains "</pre>" %}<pre{{ _pres.first }}</pre>{% endif %}{% unless _pre_before contains "</pre>" and _pres.size == 1 %}{{ _pres_after }}{% endunless %}{% endcapture %}{% endfor %}{% if _profile %}{% assign _profile_collapse = _content | size | plus: 1 %}{% endif %}{% if site.compress_html.clippings == "all" %}{% assign _clippings = "html head title base link meta style body article section nav aside h1 h2 h3 h4 h5 h6 hgroup header footer address p hr blockquote ol ul li dl dt dd figure figcaption main div table caption colgroup col tbody thead tfoot tr td th" | split: " " %}{% else %}{% assign _clippings = site.compress_html.clippings %}{% endif %}{% for _element in _clippings %}{% assign _edges = " <e;<e; </e>;</e>;</e> ;</e>" | replace: "e", _element | split: ";" %}{% assign _content = _content | replace: _edges[0], _edges[1] | replace: _edges[2], _edges[3] | replace: _edges[4], _edges[5] %}{% endfor %}{% if _profile and _clippings %}{% assign _profile_clippings = _content | size | plus: 1 %}{% endif %}{{ _content }}{% if _profile %} <table id="compress_html_profile_{{ site.time | date: "%Y%m%d" }}" class="compress_html_profile"> <thead> <tr> <td>Step <td>Bytes <tbody> <tr> <td>raw <td>{{ cache | strip_html_comments | size }}{% if _profile_endings %} <tr> <td>endings <td>{{ _profile_endings }}{% endif %}{% if _profile_startings %} <tr> <td>startings <td>{{ _profile_startings }}{% endif %}{% if _profile_comments %} <tr> <td>comments <td>{{ _profile_comments }}{% endif %}{% if _profile_collapse %} <tr> <td>collapse <td>{{ _profile_collapse }}{% endif %}{% if _profile_clippings %} <tr> <td>clippings <td>{{ _profile_clippings }}{% endif %} </table>{% endif %}{% endif %}
+{%- else -%}
   {{ cache | remove:'<html><body>' | remove:'</body></html>' | strip_empty_lines }}
-{% endif %}
-{% assign cache = nil %}
+{%- endif -%}
+
+{% comment %} Reset page cache
+-------------------------------------------------------------------------------- {% endcomment %}
+{%- assign cache = nil -%}

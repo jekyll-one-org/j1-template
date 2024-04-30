@@ -1,6 +1,7 @@
 ## Is it possible to configure multiple players (instances) for AmplitudeJS on the same (web) page?
 
 See: https://521dimensions.com/open-source/amplitudejs/docs
+See: https://521dimensions.com/open-source/amplitudejs/docs/configuration/playlists.html
 
 See: https://github.com/serversideup/amplitudejs/issues/189
 See: https://codepen.io/serversideup/pen/JVYXBe
@@ -34,7 +35,8 @@ Here are some resources that might be helpful:
 A GitHub discussion with an example implementation of multiple
 instances: https://serversideup.net/open-source/spin/docs/guide/adding-common-services
 
-Remember, while these methods allow multiple players, keep in mind potential conflicts like overlapping audio or unintended control actions.
+Remember, while these methods allow multiple players, keep in mind potential
+conflicts like overlapping audio or unintended control actions.
 
 
 

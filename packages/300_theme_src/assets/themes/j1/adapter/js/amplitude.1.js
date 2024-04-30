@@ -275,10 +275,10 @@ j1.adapter.amplitude = ((j1, window) => {
                     } // END if mini player progress
 
                     // compact player: click down arrow to show the list screen
-                    if (document.getElementById('compact-player-container') !== null) {
+                    if (document.getElementById('flat-black-player-container') !== null) {
                       document.getElementsByClassName('down-header')[0].addEventListener('click', function() {
                         var list = document.getElementById('list');
-                        list.style.height = ( parseInt( document.getElementById('compact-player-container').offsetHeight ) - 135 ) + 'px';
+                        list.style.height = ( parseInt( document.getElementById('flat-black-player-container').offsetHeight ) - 135 ) + 'px';
 
                         document.getElementById('list-screen').classList.remove('slide-out-top');
                         document.getElementById('list-screen').classList.add('slide-in-top');
@@ -305,14 +305,14 @@ j1.adapter.amplitude = ((j1, window) => {
                       });
 
                       // compact player: click on the progress bar
-                      document.getElementById('compact-player-progress').addEventListener('click', function(event) {
+                      document.getElementById('flat-player-progress').addEventListener('click', function(event) {
                         var offset = this.getBoundingClientRect();
                         var xpos   = event.pageX - offset.left;
 
                         Amplitude.setSongPlayedPercentage(
                           (parseFloat(xpos)/parseFloat(this.offsetWidth))*100);
                       });
-                    } // END if compact-player-container
+                    } // END if flat-black-player-container
 
                     // jadams, 2021-03-05: manage scrolling on playlist (Expanded Player|Right)
                     if (document.getElementById('amplitude-right') !== null) {
@@ -445,35 +445,19 @@ j1.adapter.amplitude = ((j1, window) => {
           39:     'next',
           32:     'play_pause'
         },
-
         songs: songs,
-
-        // playlists: {
+        // "playlists": {
         //   [playlist]: {
         //     title: playListTitle,
         //     songs: [1, 2, 3]
         //   },
         // },
-
-        playlists: {
-          [playlist]: {
-            title: playListTitle,
-            songs: [1, 2, 3]
-          },
-        },
-
         callbacks: {
 
           initialized: function() {
             // successfully initialized
             amplitudeInitialized = true;
             var activePlayListSongs = Amplitude.getSongsInPlaylist(playList);
-            Amplitude.addPlaylist({
-              key:      playlist, // Unique key for your playlist
-              title:    playListTitle,
-              songs:    activePlayListSongs
-            });
-            Amplitude.bindNewElements();
             var bla = '';
           },
 

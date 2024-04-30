@@ -90,9 +90,9 @@ the page design.
 
 Three types of AmplitudeJS players are build-in for the J1 template system:
 
-* Single Song Player
-* Flat Player (the default audio plaayer)
-* Expanded Player
+* Mini Player
+* Compact Player (the default audio plaayer)
+* Large Player
 
 [role="mt-4"]
 [NOTE]
@@ -104,33 +104,56 @@ mobile devices.
 
 
 [role="mt-5"]
-== Single Song Player
+== Mini Player
 
-Balla Balla ..
+In the context of complex components on a web page, like an audio player, a
+mini player refers to a minimized or compact version of the full player.
+It typically offers basic playback controls, such as pause, play, and
+volume adjustment, while taking up less screen space.
 
-.Dance Floor · Royalty Free Music
-amplitude::free_disco_single_song[role="mt-3 mb-5"]
+Mini-players are beneficial when you want to listen to audio in the
+background without dedicating the entire screen to the player. They are
+commonly found on music streaming services, podcast platforms, and websites
+with embedded audio content.
+
+.Dance Floor · Royalty Free Music (mini)
+amplitude::free_disco_mini[role="mt-3 mb-5"]
 
 
 [role="mt-5"]
-== Flat Player
+== Compact Player
 
-Balla Balla ..
+A complex component like an audio player on a web page, *compact*
+typically refers to a design or layout that minimizes the component's
+space while maintaining its functionality and usability.
 
-.Dance Floor · Royalty Free Music
-amplitude::free_disco_flat[role="mt-3 mb-5"]
+The *compact design* for an audio player is an efficient approach that
+involves condensing the player controls and display elements into a smaller
+area. It uses icons or symbols instead of text labels where possible, and
+possibly hides less frequently used features behind menus or dropdowns to
+reduce clutter, thereby instilling confidence in its effectiveness.
+
+A *compact* design allows the audio player to fit neatly within the web
+page's layout without overwhelming or dominating the content around it.
+The design aims to balance functionality and space efficiency, ensuring
+users can easily access and control the audio playback without sacrificing
+too much screen space.
+
+.Dance Floor · Royalty Free Music (compact)
+amplitude::free_disco_compact[role="mt-3 mb-5"]
 
 
 [role="mt-5"]
-== Expanded Player
+== Large Player
 
 Bla, bla ...
 
-.Dance Floor · Royalty Free Music
-amplitude::free_disco_expanded[role="mt-3 mb-5"]
+.Dance Floor · Royalty Free Music (large)
+amplitude::free_disco_large[role="mt-3 mb-5"]
 
-// .Pop Music · Royalty Free Music
-// amplitude::free_pop[role="mt-3 mb-5"]
+// .Pop Music · Royalty Free Music (compact)
+// amplitude::free_pop_compact[role="mt-3 mb-5"]
+
 
 [role="mt-5"]
 == Player configuration

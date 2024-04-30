@@ -1975,13 +1975,14 @@ resources:
       data:
         css:                            [
                                           modules/amplitudejs/css/theme/uno/amplitude,
-                                          modules/amplitudejs/css/theme/uno/player/expanded,
-                                          modules/amplitudejs/css/theme/uno/player/flat,
-                                          modules/amplitudejs/css/theme/uno/player/single_song
+                                          modules/amplitudejs/css/theme/uno/player/compact,
+                                          modules/amplitudejs/css/theme/uno/player/large,
+                                          modules/amplitudejs/css/theme/uno/player/mini
                                         ]
         files:                          [ adapter/js/amplitude.js ]
         js:                             [ modules/amplitudejs/js/amplitude ]
         init_function:                  [ j1.adapter.amplitude.init ]
+
 
 # ------------------------------------------------------------------------------
 # END config

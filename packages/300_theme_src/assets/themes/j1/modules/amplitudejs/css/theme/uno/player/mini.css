@@ -22,7 +22,7 @@
 
 /* 2. Components
 ------------------------------------------------------------------------------- */
-.single-song-player-volume-container {
+.mini-player-volume-container {
   display: flex;
   margin-left: -68px;
   padding-bottom: 12px;
@@ -55,18 +55,18 @@ div#volume-container input[type=range]::-moz-range-thumb {
   cursor: pointer;
 }
 
-div.single-song-player.meta-container {
+div.mini-player.meta-container {
    width: calc(60% + 60px) !important;
    padding-bottom: 16px;
 }
 
-div.single-song-player.control-container {
+div.mini-player.control-container {
    margin-top: 5px;
    /* padding-bottom: 16px; */
 }
 
 /*  jadams */
-input[type=range].single-song-player.amplitude-volume-slider {
+input[type=range].mini-player.amplitude-volume-slider {
   width: calc(60% - 34px);
   float: left;
   margin-top: 0px !important;
@@ -233,13 +233,13 @@ div.bottom-container {
 
 /* Large Only
 ------------------------------------------------------------------------------- */
-div#single-song-player {
+div#mini-player {
    /* width: 100%; */
    max-width: 475px;
    -webkit-font-smoothing: antialiased;
 }
 
-div#single-song-player img[data-amplitude-song-info="cover_art_url"] {
+div#mini-player img[data-amplitude-song-info="cover_art_url"] {
    width: 100%;
    /* border-top-right-radius: 10px;
    border-top-left-radius: 10px; */

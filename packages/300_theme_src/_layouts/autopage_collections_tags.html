@@ -66,9 +66,7 @@ resource_options:                       []
     {% endfor %}
   </ul>
 
-  <!--
-    Showing buttons to move to the next and to the previous list of posts (pager buttons).
-  -->
+  <!-- Showing buttons to move to the next and to the previous list of posts (pager buttons) -->
   {% if paginator.total_pages > 1 %}
   <ul class="pager">
       {% if paginator.previous_page %}

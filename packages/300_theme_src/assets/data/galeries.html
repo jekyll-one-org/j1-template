@@ -3,7 +3,7 @@ regenerate:                             true
 exclude_from_search:                    true
 ---
 
-{% capture cache %}
+{%- capture cache -%}
 
 {% comment %}
  # -----------------------------------------------------------------------------
@@ -65,17 +65,18 @@ exclude_from_search:                    true
 
 {% comment %} Main
 ================================================================================ {% endcomment %}
-<!-- [INFO   ] [~/assets/data/galleries.html                   ]  [ set meta data (robots) to exclude HTML datafiles from index ] -->
-<head>
-  <meta name="robots" content="noindex, nofollow">
-</head>
-
-{% comment %} galleries {{galleries | debug}} {% endcomment %}
-
-{% comment %} Collect Galleries
--------------------------------------------------------------------------------- {% endcomment %}
-{% for gallery in galleries %}
-  {% if gallery.enabled %}
+<!DOCTYPE {{site.doctype}}>
+<html lang="{{site.language}}">
+  <head>
+    <!-- [INFO   ] [~/assets/data/galleries.html                   ]  [ set meta data (robots) to exclude HTML datafiles from index ] -->
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="gallery" content="module data file">
+  </head>
+  <body>
+  {% comment %} Collect Galleries
+  galleries {{galleries | debug}}
+  ------------------------------------------------------------------------------ {% endcomment %}
+  {% for gallery in galleries %} {% if gallery.enabled %}
 
     {% comment %} Image Galleries
     ---------------------------------------------------------------------------- {% endcomment %}
@@ -94,7 +95,6 @@ exclude_from_search:                    true
           {% capture image_filters %}{{image_filters}} {{filter[0]}}({{filter[1]}}){% endcapture %}
         {% endfor %}
       {% endif %}
-
 
       <!-- Image Gallery -->
       <div id="{{gallery.id}}">
@@ -132,108 +132,113 @@ exclude_from_search:                    true
       <!-- /Image Gallery -->
     {% endif %}
 
-      {% comment %} VIDEO Galleries
-      -------------------------------------------------------------------------- {% endcomment %}
-      {% if gallery.type == 'video' %}
-      {% assign play-button = '/assets/themes/j1/modules/lightGallery/css/themes/uno/icons/play-button.png' %}
+    {% comment %} VIDEO Galleries
+    -------------------------------------------------------------------------- {% endcomment %}
+    {% if gallery.type == 'video' %}
+    {% assign play-button = '/assets/themes/j1/modules/lightGallery/css/themes/uno/icons/play-button.png' %}
 
-      {% comment %} Collect CSS image filters
-      -------------------------------------------------------------------------- {% endcomment %}
-      {% assign css_filters   = gallery_options.filters | merge: gallery.filters %}
-      {% assign image_filters = 'filter:' %}
+    {% comment %} Collect CSS image filters
+    -------------------------------------------------------------------------- {% endcomment %}
+    {% assign css_filters   = gallery_options.filters | merge: gallery.filters %}
+    {% assign image_filters = 'filter:' %}
 
-      {% if css_filters.enabled %}
-        {% for filter in css_filters %}
-          {% if filter[0] contains 'enabled' %}
-            {% continue %}
-          {% endif %}
-          {% capture image_filters %}{{image_filters}} {{filter[0]}}({{filter[1]}}){% endcapture %}
-        {% endfor %}
-      {% endif %}
-
-      <!-- Video Gallery -->
-      <div id="{{gallery.id}}" class="gallery justified-gallery">
-        {% for video in gallery.videos %}
-
-        {% if video.type == 'youtube' or video.type == 'vimeo' or video.type == 'tiktoc' or video.type == 'wistia' or video.type == 'dailymotion' %}
-        {% assign description = video.description|strip|strip_newlines %}
-        {% assign alt         = description|strip_html %}
-
-          <!-- {{video.type}} video -->
-          <a class="lg-item"
-            data-lg-size="{{video.size}}"
-            data-pinterest-text="{{video.pinterest_prefix}} {{video.name}} at {{video.source}}"
-            data-tweet-text="{{video.tweet_prefix}} {{video.name}} at {{video.source}}"
-            data-src="{{video.source}}"
-            data-poster="{{gallery.image_base_path}}/{{video.poster.source}}"
-            data-sub-html="{{description}}">
-            <img class="speak2me-ignore"
-              src="{{gallery.image_base_path}}/{{video.poster.source}}"
-              img alt="{{video.caption.text}}">
-          	<span>
-          		<img
-          			class="justified-gallery img-overlay speak2me-ignore"
-          			src="{{play-button}}"
-          			alt="Play Button">
-          	</span>
-          </a>
-
-        {% elsif video.type == 'html5' %}
-        {% assign description = video.description|strip|strip_newlines %}
-        {% assign alt         = description|strip_html %}
-        {% assign video_split = video.source | split: '.' %}
-        {% assign extention   = video_split[1] %}
-
-          <!-- {{video.type}} video -->
-          <a class="lg-item speak2me-ignore"
-            data-lg-size="{{video.size}}"
-            data-pinterest-text="{{video.pinterest_prefix}} {{video.name}} at {{video.source}}"
-            data-tweet-text="{{video.tweet_prefix}} {{video.name}} at {{video.source}}"
-            data-poster="{{gallery.image_base_path}}/{{video.poster.source}}"
-            data-sub-html="{{description}}"
-            data-video='{
-              "source": [{
-                 "src":   "{{gallery.video_base_path}}/{{video.source}}",
-                 "type":  "video/{{extention}}"
-              }],
-              "tracks": [
-                 {% for track in video.tracks %}
-                 {
-                   {% for attribute in track %}
-                     {% if attribute[0] == 'track' %} {% continue %} {% endif %}
-                     {{attribute[0] | json}}: {{attribute[1] | json}}{% if forloop.last %}{% else %},{% endif %}
-                   {% endfor %}
-                 }{% if forloop.last %}{% else %},{% endif %}
-                 {% endfor %}
-              ]
-            }'>
-          	<img class="speak2me-ignore"
-              src="{{gallery.image_base_path}}/{{video.poster.source}}"
-              img alt="{{video.caption.text}}">
-          	<span>
-          		<img
-          			class="justified-gallery img-overlay speak2me-ignore"
-          			src="{{play-button}}"
-          			alt="Play Button">
-          	</span>
-          </a>
-
+    {% if css_filters.enabled %}
+      {% for filter in css_filters %}
+        {% if filter[0] contains 'enabled' %}
+          {% continue %}
         {% endif %}
-        {% endfor %}
-      </div>
-      <!-- /Video Gallery -->
+        {% capture image_filters %}{{image_filters}} {{filter[0]}}({{filter[1]}}){% endcapture %}
+      {% endfor %}
     {% endif %}
 
-  {% endif %}
-{% endfor %}
-<!--!-- [INFO   ] [~/assets/data/galleries.html                   ]  [end collecting all grid items] -->
+    <!-- Video Gallery -->
+    <div id="{{gallery.id}}" class="gallery justified-gallery">
+      {% for video in gallery.videos %}
 
+      {% if video.type == 'youtube' or video.type == 'vimeo' or video.type == 'tiktoc' or video.type == 'wistia' or video.type == 'dailymotion' %}
+      {% assign description = video.description|strip|strip_newlines %}
+      {% assign alt         = description|strip_html %}
 
-{% endcapture %}
+        <!-- {{video.type}} video -->
+        <a class="lg-item"
+          data-lg-size="{{video.size}}"
+          data-pinterest-text="{{video.pinterest_prefix}} {{video.name}} at {{video.source}}"
+          data-tweet-text="{{video.tweet_prefix}} {{video.name}} at {{video.source}}"
+          data-src="{{video.source}}"
+          data-poster="{{gallery.image_base_path}}/{{video.poster.source}}"
+          data-sub-html="{{description}}">
+          <img class="speak2me-ignore"
+            src="{{gallery.image_base_path}}/{{video.poster.source}}"
+            img alt="{{video.caption.text}}">
+        	<span>
+        		<img
+        			class="justified-gallery img-overlay speak2me-ignore"
+        			src="{{play-button}}"
+        			alt="Play Button">
+        	</span>
+        </a>
 
-{% if production %}
-  {% capture _LINE_FEED %}{% endcapture %}{% if site.compress_html.ignore.envs contains jekyll.environment %}{{ cache | strip_html_comments }}{% else %}{% capture _content %}{{ cache | strip_html_comments }}{% endcapture %}{% assign _profile = site.compress_html.profile %}{% if site.compress_html.endings == "all" %}{% assign _endings = "html head body li dt dd p rt rp optgroup option colgroup caption thead tbody tfoot tr td th" | split: " " %}{% else %}{% assign _endings = site.compress_html.endings %}{% endif %}{% for _element in _endings %}{% capture _end %}</{{ _element }}>{% endcapture %}{% assign _content = _content | remove: _end %}{% endfor %}{% if _profile and _endings %}{% assign _profile_endings = _content | size | plus: 1 %}{% endif %}{% for _element in site.compress_html.startings %}{% capture _start %}<{{ _element }}>{% endcapture %}{% assign _content = _content | remove: _start %}{% endfor %}{% if _profile and site.compress_html.startings %}{% assign _profile_startings = _content | size | plus: 1 %}{% endif %}{% if site.compress_html.comments == "all" %}{% assign _comments = "<!-- -->" | split: " " %}{% else %}{% assign _comments = site.compress_html.comments %}{% endif %}{% if _comments.size == 2 %}{% capture _comment_befores %}.{{ _content }}{% endcapture %}{% assign _comment_befores = _comment_befores | split: _comments.first %}{% for _comment_before in _comment_befores %}{% if forloop.first %}{% continue %}{% endif %}{% capture _comment_outside %}{% if _carry %}{{ _comments.first }}{% endif %}{{ _comment_before }}{% endcapture %}{% capture _comment %}{% unless _carry %}{{ _comments.first }}{% endunless %}{{ _comment_outside | split: _comments.last | first }}{% if _comment_outside contains _comments.last %}{{ _comments.last }}{% assign _carry = false %}{% else %}{% assign _carry = true %}{% endif %}{% endcapture %}{% assign _content = _content | remove_first: _comment %}{% endfor %}{% if _profile %}{% assign _profile_comments = _content | size | plus: 1 %}{% endif %}{% endif %}{% assign _pre_befores = _content | split: "<pre" %}{% assign _content = "" %}{% for _pre_before in _pre_befores %}{% assign _pres = _pre_before | split: "</pre>" %}{% assign _pres_after = "" %}{% if _pres.size != 0 %}{% if site.compress_html.blanklines %}{% assign _lines = _pres.last | split: _LINE_FEED %}{% capture _pres_after %}{% for _line in _lines %}{% assign _trimmed = _line | split: " " | join: " " %}{% if _trimmed != empty or forloop.last %}{% unless forloop.first %}{{ _LINE_FEED }}{% endunless %}{{ _line }}{% endif %}{% endfor %}{% endcapture %}{% else %}{% assign _pres_after = _pres.last | split: " " | join: " " %}{% endif %}{% endif %}{% capture _content %}{{ _content }}{% if _pre_before contains "</pre>" %}<pre{{ _pres.first }}</pre>{% endif %}{% unless _pre_before contains "</pre>" and _pres.size == 1 %}{{ _pres_after }}{% endunless %}{% endcapture %}{% endfor %}{% if _profile %}{% assign _profile_collapse = _content | size | plus: 1 %}{% endif %}{% if site.compress_html.clippings == "all" %}{% assign _clippings = "html head title base link meta style body article section nav aside h1 h2 h3 h4 h5 h6 hgroup header footer address p hr blockquote ol ul li dl dt dd figure figcaption main div table caption colgroup col tbody thead tfoot tr td th" | split: " " %}{% else %}{% assign _clippings = site.compress_html.clippings %}{% endif %}{% for _element in _clippings %}{% assign _edges = " <e;<e; </e>;</e>;</e> ;</e>" | replace: "e", _element | split: ";" %}{% assign _content = _content | replace: _edges[0], _edges[1] | replace: _edges[2], _edges[3] | replace: _edges[4], _edges[5] %}{% endfor %}{% if _profile and _clippings %}{% assign _profile_clippings = _content | size | plus: 1 %}{% endif %}{{ _content }}{% if _profile %} <table id="compress_html_profile_{{ site.time | date: "%Y%m%d" }}" class="compress_html_profile"> <thead> <tr> <td>Step <td>Bytes <tbody> <tr> <td>raw <td>{{ cache | strip_html_comments | size }}{% if _profile_endings %} <tr> <td>endings <td>{{ _profile_endings }}{% endif %}{% if _profile_startings %} <tr> <td>startings <td>{{ _profile_startings }}{% endif %}{% if _profile_comments %} <tr> <td>comments <td>{{ _profile_comments }}{% endif %}{% if _profile_collapse %} <tr> <td>collapse <td>{{ _profile_collapse }}{% endif %}{% if _profile_clippings %} <tr> <td>clippings <td>{{ _profile_clippings }}{% endif %} </table>{% endif %}{% endif %}
-{% else %}
+      {% elsif video.type == 'html5' %}
+      {% assign description = video.description|strip|strip_newlines %}
+      {% assign alt         = description|strip_html %}
+      {% assign video_split = video.source | split: '.' %}
+      {% assign extention   = video_split[1] %}
+
+        <!-- {{video.type}} video -->
+        <a class="lg-item speak2me-ignore"
+          data-lg-size="{{video.size}}"
+          data-pinterest-text="{{video.pinterest_prefix}} {{video.name}} at {{video.source}}"
+          data-tweet-text="{{video.tweet_prefix}} {{video.name}} at {{video.source}}"
+          data-poster="{{gallery.image_base_path}}/{{video.poster.source}}"
+          data-sub-html="{{description}}"
+          data-video='{
+            "source": [{
+               "src":   "{{gallery.video_base_path}}/{{video.source}}",
+               "type":  "video/{{extention}}"
+            }],
+            "tracks": [
+               {% for track in video.tracks %}
+               {
+                 {% for attribute in track %}
+                   {% if attribute[0] == 'track' %} {% continue %} {% endif %}
+                   {{attribute[0] | json}}: {{attribute[1] | json}}{% if forloop.last %}{% else %},{% endif %}
+                 {% endfor %}
+               }{% if forloop.last %}{% else %},{% endif %}
+               {% endfor %}
+            ]
+          }'>
+        	<img class="speak2me-ignore"
+            src="{{gallery.image_base_path}}/{{video.poster.source}}"
+            img alt="{{video.caption.text}}">
+        	<span>
+        		<img
+        			class="justified-gallery img-overlay speak2me-ignore"
+        			src="{{play-button}}"
+        			alt="Play Button">
+        	</span>
+        </a>
+
+      {% endif %}
+      {% endfor %}
+    </div>
+
+    {% endif %}
+    <!-- /Video Gallery -->
+
+  {% endif %} {% endfor %}
+  <!--!-- [INFO   ] [~/assets/data/galleries.html                   ]  [end collecting all grid items] -->
+  </body>
+</html>
+{%- endcapture -%}
+
+{% comment %} Beatify|Compress page
+-------------------------------------------------------------------------------- {% endcomment %}
+{%- if production -%}
+  {% capture _LINE_FEED %}{% endcapture %}{% if site.compress_html.ignore.envs contains jekyll.environment %}{{ cache | strip_html_comments }}{% else %}{% capture _content %}{{ cache | strip_html_comments }}{% endcapture %}{% assign _profile = site.compress_html.profile %}{% if site.compress_html.endings == "all" %}{% assign _endings = "html head body li dt dd p rt rp optgroup option colgroup caption thead tbody tfoot tr td th" | split: " " %}{% else %}{% assign _endings = site.compress_html.endings %}{% endif %}{% for _element in _endings %}{% capture _END %}</{{ _element }}>{% endcapture %}{% assign _content = _content | remove: _END %}{% endfor %}{% if _profile and _endings %}{% assign _profile_endings = _content | size | plus: 1 %}{% endif %}{% for _element in site.compress_html.startings %}{% capture _start %}<{{ _element }}>{% endcapture %}{% assign _content = _content | remove: _start %}{% endfor %}{% if _profile and site.compress_html.startings %}{% assign _profile_startings = _content | size | plus: 1 %}{% endif %}{% if site.compress_html.comments == "all" %}{% assign _comments = "<!-- -->" | split: " " %}{% else %}{% assign _comments = site.compress_html.comments %}{% endif %}{% if _comments.size == 2 %}{% capture _comment_befores %}.{{ _content }}{% endcapture %}{% assign _comment_befores = _comment_befores | split: _comments.first %}{% for _comment_before in _comment_befores %}{% if forloop.first %}{% continue %}{% endif %}{% capture _comment_outside %}{% if _carry %}{{ _comments.first }}{% endif %}{{ _comment_before }}{% endcapture %}{% capture _comment %}{% unless _carry %}{{ _comments.first }}{% endunless %}{{ _comment_outside | split: _comments.last | first }}{% if _comment_outside contains _comments.last %}{{ _comments.last }}{% assign _carry = false %}{% else %}{% assign _carry = true %}{% endif %}{% endcapture %}{% assign _content = _content | remove_first: _comment %}{% endfor %}{% if _profile %}{% assign _profile_comments = _content | size | plus: 1 %}{% endif %}{% endif %}{% assign _pre_befores = _content | split: "<pre" %}{% assign _content = "" %}{% for _pre_before in _pre_befores %}{% assign _pres = _pre_before | split: "</pre>" %}{% assign _pres_after = "" %}{% if _pres.size != 0 %}{% if site.compress_html.blanklines %}{% assign _lines = _pres.last | split: _LINE_FEED %}{% capture _pres_after %}{% for _line in _lines %}{% assign _trimmed = _line | split: " " | join: " " %}{% if _trimmed != empty or forloop.last %}{% unless forloop.first %}{{ _LINE_FEED }}{% endunless %}{{ _line }}{% endif %}{% endfor %}{% endcapture %}{% else %}{% assign _pres_after = _pres.last | split: " " | join: " " %}{% endif %}{% endif %}{% capture _content %}{{ _content }}{% if _pre_before contains "</pre>" %}<pre{{ _pres.first }}</pre>{% endif %}{% unless _pre_before contains "</pre>" and _pres.size == 1 %}{{ _pres_after }}{% endunless %}{% endcapture %}{% endfor %}{% if _profile %}{% assign _profile_collapse = _content | size | plus: 1 %}{% endif %}{% if site.compress_html.clippings == "all" %}{% assign _clippings = "html head title base link meta style body article section nav aside h1 h2 h3 h4 h5 h6 hgroup header footer address p hr blockquote ol ul li dl dt dd figure figcaption main div table caption colgroup col tbody thead tfoot tr td th" | split: " " %}{% else %}{% assign _clippings = site.compress_html.clippings %}{% endif %}{% for _element in _clippings %}{% assign _edges = " <e;<e; </e>;</e>;</e> ;</e>" | replace: "e", _element | split: ";" %}{% assign _content = _content | replace: _edges[0], _edges[1] | replace: _edges[2], _edges[3] | replace: _edges[4], _edges[5] %}{% endfor %}{% if _profile and _clippings %}{% assign _profile_clippings = _content | size | plus: 1 %}{% endif %}{{ _content }}{% if _profile %} <table id="compress_html_profile_{{ site.time | date: "%Y%m%d" }}" class="compress_html_profile"> <thead> <tr> <td>Step <td>Bytes <tbody> <tr> <td>raw <td>{{ cache | strip_html_comments | size }}{% if _profile_endings %} <tr> <td>endings <td>{{ _profile_endings }}{% endif %}{% if _profile_startings %} <tr> <td>startings <td>{{ _profile_startings }}{% endif %}{% if _profile_comments %} <tr> <td>comments <td>{{ _profile_comments }}{% endif %}{% if _profile_collapse %} <tr> <td>collapse <td>{{ _profile_collapse }}{% endif %}{% if _profile_clippings %} <tr> <td>clippings <td>{{ _profile_clippings }}{% endif %} </table>{% endif %}{% endif %}
+{%- else -%}
   {{ cache | remove:'<html><body>' | remove:'</body></html>' | strip_empty_lines }}
-{% endif %}
-{% assign cache = nil %}
+{%- endif -%}
+
+{% comment %} Reset page cache
+-------------------------------------------------------------------------------- {% endcomment %}
+{%- assign cache = nil -%}
