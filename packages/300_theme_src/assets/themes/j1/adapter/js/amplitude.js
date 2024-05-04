@@ -2,7 +2,7 @@
 regenerate:                             true
 ---
 
-{% capture cache %}
+{%- capture cache -%}
 
 {% comment %}
  # -----------------------------------------------------------------------------
@@ -95,43 +95,52 @@ j1.adapter.amplitude = ((j1, window) => {
   // module settings
   // ---------------------------------------------------------------------------
 
-  // defaults
-  // --------
+  // control|logging
+  // ---------------
   var _this;
   var logger;
   var logText;
+  var toJSON;
 
-  // date|time
-  //----------
+  // date|time monitoring
+  //---------------------
   var startTime;
   var endTime;
   var startTimeModule;
   var endTimeModule;
   var timeSeconds;
 
-  // player instance settings
-  // ---------------------------------------------------------------------------
-  var playerID;
+  // amplitude api settings
+  // ----------------------
+  var playLists       = {};
+  var playersUILoaded = { state: false };
+  var apiInitialized  = { state: false };
   var playList;
+  var playerID;
   var playListTitle;
-  var amplitudeInitialized    = false;
-
-  // player defaults
-  // --------------
-  var playerType              = '{{amplitude_defaults.player_type}}';
-  var playerVolume            = '{{amplitude_defaults.volume}}';
-  var playerRepeat            = ('{{amplitude_defaults.repeat}}' === 'true') ? true : false;
-  var playerShuffle           = ('{{amplitude_defaults.shuffle}}' === 'true') ? true : false;
-  var playerTitleInfo         = ('{{amplitude_defaults.title_info}}' === 'true') ? true : false;
-  var playerPauseOnNextTitle  = ('{{amplitude_defaults.pause_on_next_title}}' === 'true') ? true : false;
-  var playerDelayOnNextTitle  = '{{amplitude_defaults.delay_on_next_title}}';
-
-  // player settings
-  // ---------------
   var amplitudePlayerState;
   var amplitudeDefaults;
   var amplitudeSettings;
   var amplitudeOptions;
+
+  // amplitude player (instance) settings
+  // ------------------------------------
+  var xhrLoadState;
+  var dependency;
+  var playerCounter             = 0;
+  var load_dependencies         = {};
+  var playersProcessed          = [];
+  var playersHtmlLoaded         = false;
+  var processingPlayersFinished = false;
+  var playerType                = '{{amplitude_defaults.player_type}}';
+  var playerVolume              = '{{amplitude_defaults.volume}}';
+  var playerRepeat              = ('{{amplitude_defaults.repeat}}' === 'true') ? true : false;
+  var playerShuffle             = ('{{amplitude_defaults.shuffle}}' === 'true') ? true : false;
+  var playerTitleInfo           = ('{{amplitude_defaults.title_info}}' === 'true') ? true : false;
+  var playerPlayNextTitle       = ('{{amplitude_defaults.play_next_title}}' === 'true') ? true : false;
+  var playerPauseNextTitle      = ('{{amplitude_defaults.pause_next_title}}' === 'true') ? true : false;
+  var playerDelayNextTitle      = '{{amplitude_defaults.delay_next_title}}';
+  var playerWaveformSampleRate  = '{{amplitude_defaults.waveform_sample_rate}}';
 
 
   // ---------------------------------------------------------------------------
@@ -143,9 +152,6 @@ j1.adapter.amplitude = ((j1, window) => {
     // adapter initializer
     // -------------------------------------------------------------------------
     init: (options) => {
-      var xhrLoadState        = 'pending';
-      var load_dependencies   = {};
-      var dependency;
 
       // -----------------------------------------------------------------------
       // default module settings
@@ -158,14 +164,16 @@ j1.adapter.amplitude = ((j1, window) => {
       // -----------------------------------------------------------------------
       // global variable settings
       // -----------------------------------------------------------------------
-
-      // create settings object from module options
       amplitudeDefaults = $.extend({}, {{amplitude_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
       amplitudeSettings = $.extend({}, {{amplitude_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
       amplitudeOptions  = $.extend(true, {}, amplitudeDefaults, amplitudeSettings);
 
+      // -----------------------------------------------------------------------
+      // control|logging settings
+      // -----------------------------------------------------------------------
       _this             = j1.adapter.amplitude;
       logger            = log4javascript.getLogger('j1.adapter.amplitude');
+
 
       // -----------------------------------------------------------------------
       // module initializer
@@ -180,15 +188,385 @@ j1.adapter.amplitude = ((j1, window) => {
           startTimeModule = Date.now();
 
           _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState());
+          logger.debug('\n' + 'module state: ' + _this.getState());
           logger.info('\n' + 'module is being initialized');
 
           // -------------------------------------------------------------------
-          // initialize amplitude instances
+          // Create songs|global playlist (API)
           // -------------------------------------------------------------------
+          logger.info('\n' + 'creating global playlist|songs (API): started');
+          const songs = [
+            {
+              "enabled":        "true",
+              "name":           "Dancefloor Fever",
+              "artist":         "Royalty Free",
+              "album":          "Free Disco",
+              "url":            "//p.productioncrate.com/stock-hd/audio/SoundsCrate-Dancefloor_Fever.mp3",
+              "cover_art_url":  "/assets/audio/cover/royalty_free/free_disco_sounds.jpg"
+            }
+          ];
+          logger.info('\n' + 'creating global playlist|songs (API): finished');
+
+          // -------------------------------------------------------------------
+          // Create playlists (API)
+          // -------------------------------------------------------------------
+          _this.playlistLoader(playLists);
+//        JJSON    = JSON.stringify(playLists, null, 2);
+//        playLists = toJSON;
+
+          // -------------------------------------------------------------------
+          // load players HTML portion (UI)
+          // -------------------------------------------------------------------
+          _this.playerHtmlLoader(playersUILoaded);
+
+          // -------------------------------------------------------------------
+          // inititialize api (amplitude)
+          // -------------------------------------------------------------------
+          var dependencies_met_api_initialized = setInterval (() => {
+            if (Object.keys(playLists).length && playersUILoaded.state) {
+              _this.initApi(songs, playLists);
+              apiInitialized.state = true;
+
+              clearInterval(dependencies_met_api_initialized);
+            } // END if apiInitialized
+          }, 10); // END dependencies_met_api_initialized
+
+          // -------------------------------------------------------------------
+          // initialize player specific UI events
+          // -------------------------------------------------------------------
+          _this.initPlayerUiEvents()
+
+          clearInterval(dependencies_met_page_ready);
+        } // END pageVisible
+      }, 10); // END dependencies_met_page_ready
+    }, // END init
+
+    // -------------------------------------------------------------------------
+    // Create songs|global playlist (API)
+    // -------------------------------------------------------------------------
+    somgLoader: (songs) => {
+
+      // -----------------------------------------------------------------------
+      // initialize amplitude playlist
+      // -----------------------------------------------------------------------
+      logger.info('\n' + 'creating playlists (API): started');
+
+      {% for player in amplitude_options.players %} {% if player.enabled %}
+        {% assign player_items   = player.items %}
+        {% assign player_id      = player.player_id %}
+
+        var songs       = [];
+        var playerItems = $.extend({}, {{player_items | replace: 'nil', 'null' | replace: '=>', ':' }});
+
+        for (var i = 0; i < Object.keys(song_items).length; i++) {
+          if (song_items[i].enabled === 'true') {
+            var item = song_items[i];
+            var song = {};
+
+            // map config settings|amplitude song items
+            // -----------------------------------------------------------------
+            for (const key in item) {
+              // skip properties NOT needed for a song
+              if (key === 'item' || key === 'audio_base' || key === 'enabled') {
+                continue;
+              } else if (key === 'audio') {
+                song.url = item.audio_base + '/' + item[key];
+                continue;
+              } else if (key === 'title') {
+                song.name = item[key];
+                continue;
+              } else if (key === 'name') {
+                song.album = item[key];
+                continue;
+              } else if (key === 'cover_image') {
+                song.cover_art_url = item[key];
+                continue;
+              } else if (key === 'title_info') {
+                if (playerTitleInfo) {
+                  song.title_info = item[key];
+                } else {
+                  song.title_info = '';
+                } // END if playerTitleInfo
+                continue;
+              } else {
+                song[key] = item[key];
+              } // END if key
+            } // END for item
+          } // END id enabled
+
+          // toJSON = JSON.stringify(song, null, 2);
+          // song  = toJSON;
+          songs.push(song);
+        } // END for
+
+      {% endif %} {% endfor %}
+
+      logger.info('\n' + 'creating playlists (API): finished');
+    }, // END somgLoader
+
+    // -------------------------------------------------------------------------
+    // Playlist Loader (API)
+    // -------------------------------------------------------------------------
+    playlistLoader: (playlist) => {
+
+      // -----------------------------------------------------------------------
+      // initialize amplitude playlist
+      // -----------------------------------------------------------------------
+      logger.info('\n' + 'creating playlists (API): started');
+
+      {% for player in amplitude_options.players %} {% if player.enabled %}
+        {% assign player_items   = player.items %}
+        {% assign player_id      = player.player_id %}
+        {% assign playlist_name  = player.playlist %}
+        {% assign playlist_title = player.playlist_title %}
+
+        var songs       = [];
+        var playerItems = $.extend({}, {{player_items | replace: 'nil', 'null' | replace: '=>', ':' }});
+
+        for (var i = 0; i < Object.keys(playerItems).length; i++) {
+
+            // prevent multiple processing of already existing playlist
+          if (playlist["{{playlist_name}}"] !== undefined) {
+            break;
+          } // END if playlist exists
+
+          if (playerItems[i].enabled) {
+            var item = playerItems[i];
+            var song = {};
+
+            // map config settings|amplitude song items
+            // -----------------------------------------------------------------
+            for (const key in item) {
+              // skip properties NOT needed for a song
+              if (key === 'item' || key === 'audio_base' || key === 'enabled') {
+                continue;
+              } else if (key === 'audio') {
+                song.url = item.audio_base + '/' + item[key];
+                continue;
+              } else if (key === 'title') {
+                song.name = item[key];
+                continue;
+              } else if (key === 'name') {
+                song.album = item[key];
+                continue;
+              } else if (key === 'cover_image') {
+                song.cover_art_url = item[key];
+                continue;
+              } else if (key === 'title_info') {
+                if (playerTitleInfo) {
+                  song.title_info = item[key];
+                } else {
+                  song.title_info = '';
+                } // END if playerTitleInfo
+                continue;
+              } else {
+                song[key] = item[key];
+              } // END if key
+            } // END for item
+          } // END id enabled
+          songs.push(song);
+        } // END for items
+
+        // prevent multiple processing of already existing playlist
+        // ---------------------------------------------------------------------
+        if (playlist["{{playlist_name}}"] === undefined) {
+          playlist["{{playlist_name}}"]       = {};
+          playlist["{{playlist_name}}"].title = '{{playlist_title}}'
+          playlist["{{playlist_name}}"].songs = [];
+          playlist["{{playlist_name}}"].songs = songs;
+
+          logger.debug('\n' + 'loading playlist {{playlist_name}}: finished');
+        } // END if playlist exists
+
+        {% endif %} {% endfor %}
+
+        logger.info('\n' + 'creating playlists (API): finished');
+    }, // END playlistLoader
+
+    // -------------------------------------------------------------------------
+    // load players HTML portion (UI)
+    // -------------------------------------------------------------------------
+    playerHtmlLoader: (playersLoaded) => {
+
+      // -----------------------------------------------------------------------
+      // initialize HTML portion (UI) for all players configured|enabled
+      // -----------------------------------------------------------------------
+      logger.info('\n' + 'loading players (UI): started');
+
+      {% for player in amplitude_options.players %} {% if player.enabled %}
+        {% assign player_id     = player.player_id %}
+        {% assign xhr_data_path = amplitude_options.xhr_data_path %}
+        {% capture xhr_container_id %}{{player_id}}_parent{% endcapture %}
+
+        playerCounter++;
+        logger.debug('\n' + 'load player UI on ID #{{player_id}}: started');
+
+        j1.loadHTML({
+          xhr_container_id: '{{xhr_container_id}}',
+          xhr_data_path:    '{{xhr_data_path}}',
+          xhr_data_element: '{{player_id}}'
+          },
+          'j1.adapter.amplitude',
+          'data_loaded'
+        );
+
+        // dynamic loader variable to setup the player on ID {{player_id}}
+        dependency = 'dependencies_met_html_loaded_{{player_id}}';
+        load_dependencies[dependency] = '';
+
+        // ---------------------------------------------------------------------
+        // initialize amplitude instance (when player UI loaded)
+        // ---------------------------------------------------------------------
+        load_dependencies['dependencies_met_html_loaded_{{player_id}}'] = setInterval (() => {
+          // check if HTML portion of the player is loaded successfully
+          xhrLoadState = j1.xhrDOMState['#' + '{{xhr_container_id}}'];
+
+          if (xhrLoadState === 'success') {
+            playersProcessed.push('{{xhr_container_id}}');
+            logger.debug('\n' + 'load player UI on ID #{{player_id}}: finished');
+
+            clearInterval(load_dependencies['dependencies_met_html_loaded_{{player_id}}']);
+          }
+        }, 10); // END dependencies_met_html_loaded
+
+      {% endif %} {% endfor %}
+
+      load_dependencies['dependencies_met_players_loaded'] = setInterval (() => {
+
+        if (playersProcessed.length === playerCounter) {
+          processingPlayersFinished = true;
+        }
+
+        if (processingPlayersFinished) {
+          logger.info('\n' + 'loading players (UI): finished');
+
+          clearInterval(load_dependencies['dependencies_met_players_loaded']);
+          playersLoaded.state = true;
+        }
+      }, 10); // END dependencies_met_players_loaded
+
+    }, // END playerHtmlLoader
+
+    // -------------------------------------------------------------------------
+    // initApi
+    // -------------------------------------------------------------------------
+    initApi: (songs, playlists) => {
+      logger.info('\n' + 'initialze API: started');
+
+      // for (var i = 0; i < Object.keys(song_items).length; i++) {
+      //   if (song_items[i].enabled === 'true') {
+      //     var item = song_items[i];
+      //     var song = {};
+      //
+      //     // map config settings|amplitude song items
+      //     // -------------------------------------------------------------------
+      //     for (const key in item) {
+      //       // skip properties NOT needed for a song
+      //       if (key === 'item' || key === 'audio_base' || key === 'enabled') {
+      //         continue;
+      //       } else if (key === 'audio') {
+      //         song.url = item.audio_base + '/' + item[key];
+      //         continue;
+      //       } else if (key === 'title') {
+      //         song.name = item[key];
+      //         continue;
+      //       } else if (key === 'name') {
+      //         song.album = item[key];
+      //         continue;
+      //       } else if (key === 'cover_image') {
+      //         song.cover_art_url = item[key];
+      //         continue;
+      //       } else if (key === 'title_info') {
+      //         if (playerTitleInfo) {
+      //           song.title_info = item[key];
+      //         } else {
+      //           song.title_info = '';
+      //         } // END if playerTitleInfo
+      //         continue;
+      //       } else {
+      //         song[key] = item[key];
+      //       } // END if key
+      //     } // END for item
+      //   } // END id enabled
+      //
+      //   // toJSON = JSON.stringify(song, null, 2);
+      //   // song  = toJSON;
+      //   songs.push(song);
+      //
+      // } // END for items
+
+     // See: https://521dimensions.com/open-source/amplitudejs/docs
+      Amplitude.init({
+        bindings: {
+          32:       'play_pause',
+          37:       'prev',
+          39:       'next'
+        },
+        songs:      songs,
+        playLists:  playlists,
+        callbacks: {
+          initialized: function() {
+            // indicate api successfully initialized
+            logger.info('\n' + 'initialze API: finished');
+            apiInitialized.state = true;
+          },
+          onInitError: function() {
+            // indicate api failed on initialization
+            apiInitialized.state = false;
+            console.error('\n' + 'Amplitude API failed on initialization');
+          },
+          play: function() {
+            var songMetaData = Amplitude.getActiveSongMetadata();
+            logger.debug('\n' + 'playing title: ' + songMetaData.name);
+            document.getElementById('album-art').style.visibility = 'hidden';
+            document.getElementById('large-visualization').style.visibility = 'visible';
+          },
+          pause: function() {
+            var songMetaData = Amplitude.getActiveSongMetadata();
+            logger.debug('\n' + 'pause title: ' + songMetaData.name);
+            document.getElementById('album-art').style.visibility = 'visible';
+            document.getElementById('large-visualization').style.visibility = 'hidden';
+          },
+          stop: function() {
+            logger.warn('\n' + 'audio has been stopped');
+          },
+          song_change: function() {
+            var songMetaData = Amplitude.getActiveSongMetadata();
+            logger.debug('\n' + 'changed to title: ' + songMetaData.name);
+          },
+          next: function() {
+            var songMetaData = Amplitude.getActiveSongMetadata();
+            if (playerPauseNextTitle) {
+              amplitudePlayerState = Amplitude.getPlayerState();
+//            if (amplitudePlayerState === 'playing' || amplitudePlayerState === 'stopped' || amplitudePlayerState === 'paused') {
+              if (amplitudePlayerState === 'playing' || amplitudePlayerState === 'stopped' ) {
+                setTimeout(() => {
+                  // pause playback of next title
+                  logger.debug('\n' + 'paused on next title: ' + songMetaData.name);
+                  Amplitude.pause();
+                }, 150);
+              } // END if playing
+            } // END if pause on next title
+          }
+        },
+        waveforms: {
+          sample_rate:  playerWaveformSampleRate
+        },
+        continue_next:  playerPlayNextTitle,
+        volume:         playerVolume
+      });
+    }, // END initApi
+
+    // -------------------------------------------------------------------------
+    // initPlayerUiEvents
+    // -------------------------------------------------------------------------
+    initPlayerUiEvents: () => {
+      var dependencies_met_player_instances_initialized = setInterval (() => {
+        if (apiInitialized.state) {
+          logger.info('\n' + 'initialize player specific UI events: started');
+
           {% for player in amplitude_options.players %} {% if player.enabled %}
             {% assign player_items  = player.items %}
-            {% assign player_index  = forloop.index0 %}
             {% assign player_id     = player.player_id %}
             {% assign xhr_data_path = amplitude_options.xhr_data_path %}
             {% capture xhr_container_id %}{{player_id}}_parent{% endcapture %}
@@ -197,71 +575,56 @@ j1.adapter.amplitude = ((j1, window) => {
             playList      = '{{player.playlist}}';
             playListTitle = '{{player.playlist_title}}';
 
-            logger.info('\n' + 'found player on id: #' + playerID);
-            logger.info('\n' + 'set playlist {{player.playlist}} on id #{{player_id}}: ' + playListTitle);
+            logger.debug('\n' + 'set playlist {{player.playlist}} on id #{{player_id}} with title: ' + playListTitle);
 
-            // load|set (default) values
-            playerVolume            = ('{{player.volume}}' !== '') ? '{{player.volume}}' : playerVolume;
-            playerRepeat            = ('{{player.repeat}}' === 'true') ? true : playerRepeat;
-            playerShuffle           = ('{{player.shuffle}}' === 'true') ? true : playerShuffle;
-            playerType              = ('{{player.player_type}}' !== '') ? '{{player.player_type}}' : playerType;
-            playerTitleInfo         = ('{{player.title_info}}' === 'true') ? true : playerTitleInfo;
-            playerPauseOnNextTitle  = ('{{player.delay_on_next_title}}' === 'true') ? true : playerPauseOnNextTitle;
-            playerDelayOnNextTitle  = ('{{player.delay_on_next_title}}' === 'true') ? true : playerDelayOnNextTitle;
-
-            var uiLoaderSettings = {
-              player_id:          '{{player_id}}',
-              xhr_container_id:   '{{xhr_container_id}}',
-              xhr_data_path:      '{{xhr_data_path}}'
-            }
-            _this.uiLoader(uiLoaderSettings);
+            // Set default values
+            // -----------------------------------------------------------------
+            playerVolume              = ('{{player.volume}}' !== '') ? '{{player.volume}}' : playerVolume;
+            playerRepeat              = ('{{player.repeat}}' === 'true') ? true : playerRepeat;
+            playerShuffle             = ('{{player.shuffle}}' === 'true') ? true : playerShuffle;
+            playerType                = ('{{player.player_type}}' !== '') ? '{{player.player_type}}' : playerType;
+            playerTitleInfo           = ('{{player.title_info}}' === 'true') ? true : playerTitleInfo;
+            playerPlayNextTitle       = ('{{player.play_next_title}}' === 'true') ? true : playerPlayNextTitle;
+            playerPauseNextTitle      = ('{{player.delay_next_title}}' === 'true') ? true : playerPauseNextTitle;
+            playerDelayNextTitle      = ('{{player.delay_next_title}}' === 'true') ? true : playerDelayNextTitle;
+            playerWaveformSampleRate  = ('{{player.waveform_sample_rate}}' !== '') ? '{{player.waveform_sample_rate}}' : playerWaveformSampleRate;
 
             // dynamic loader variable to setup the player on ID {{player_id}}
-            dependency = 'dependencies_met_html_loaded_{{player_id}}';
+            dependency = 'dependencies_met_player_loaded_{{player_id}}';
             load_dependencies[dependency] = '';
 
             // -----------------------------------------------------------------
-            // initialize amplitude instance (when player UI loaded)
+            // initialize player instance (when player UI is loaded)
             // -----------------------------------------------------------------
-            // jadams: timeout seems NOT nessesary
-            // setTimeout(() => {
-            load_dependencies['dependencies_met_html_loaded_{{player_id}}'] = setInterval (() => {
+            load_dependencies['dependencies_met_player_loaded_{{player_id}}'] = setInterval (() => {
               // check if HTML portion of the player is loaded successfully
-              xhrLoadState = j1.xhrDOMState['#' + '{{xhr_container_id}}'];
+              var xhrLoadState = j1.xhrDOMState['#' + '{{xhr_container_id}}'];
 
               if (xhrLoadState === 'success') {
-                logger.info('\n' + 'load playerUI on ID ' + '#' + '{{player_id}}' + ': finished');
 
-                // player|right (playlist): set audio info (per item)
+                // player|right (playlist): set audio info link (per item)
                 // -------------------------------------------------------------
                 if (playerTitleInfo) {
-                  var audioInfoLinks = document.getElementsByClassName('audio-info-link');
-                  _this.audioInfo(audioInfoLinks);
+                  var infoLinks = document.getElementsByClassName('audio-info-link');
+                  _this.setAudioInfo(infoLinks);
                 }
 
-                // player|right (playlist): set highlight|play on selected song
+                // player|right: set highlight|play on selected song
                 // -------------------------------------------------------------
                 var songElements = document.getElementsByClassName('song');
                 _this.songEvents(songElements);
 
                 // setup amplitude instance
                 // -------------------------------------------------------------
-                logger.info('\n' + 'initialize player on ID #{{player_id}}: started');
-                const playerItems = $.extend({}, {{player_items | replace: 'nil', 'null' | replace: '=>', ':' }});
-
-                // cleanup playerItems
-                var playerItemsEnabled = {};
-                for (var i = 0; i < Object.keys(playerItems).length; i++) {
-                  if (playerItems[i].enabled) {
-                    playerItemsEnabled[i.toString()] = playerItems[i];
-                  } // END if enabled
-                } // END for playerItems
-
-                _this.initApi(playList, playListTitle, playerItemsEnabled);
+                logger.debug('\n' + 'setup player specific UI events on ID #{{player_id}}: started');
 
                 var dependencies_met_api_initialized = setInterval (() => {
-                  if (amplitudeInitialized) {
+                  if (apiInitialized.state) {
                     amplitudePlayerState = Amplitude.getPlayerState();
+
+                    // ---------------------------------------------------------
+                    // setup player specific UI events
+                    // ---------------------------------------------------------
 
                     // mini player: click on the progress bar
                     if (document.getElementById('mini-player-container') !== null) {
@@ -330,218 +693,69 @@ j1.adapter.amplitude = ((j1, window) => {
                       });
                     } // END manage scrolling on playlist (Expanded Player|Right)
 
-                    // global player settings
                     // ---------------------------------------------------------
-                    logger.info('\n' + 'set delay between titles: ' + playerDelayOnNextTitle + 'ms');
-                    logger.info('\n' + 'set repeat (album): ' + playerRepeat);
-                    logger.info('\n' + 'set shuffle (album): ' + playerShuffle);
+                    // setup configured player features
+                    // ---------------------------------------------------------
+                    logger.debug('\n' + 'set play next title: ' + playerPlayNextTitle);
+                    logger.debug('\n' + 'set delay between titles: ' + playerDelayNextTitle + 'ms');
+                    logger.debug('\n' + 'set repeat (album): ' + playerRepeat);
+                    logger.debug('\n' + 'set shuffle (album): ' + playerShuffle);
 
                     // set delay between titles (songs)
-                    Amplitude.setDelay(playerDelayOnNextTitle);
+                    Amplitude.setDelay(playerDelayNextTitle);
                     // set repeat (album)
                     Amplitude.setRepeat(playerRepeat)
                     // set shuffle (album)
                     Amplitude.setShuffle(playerShuffle)
 
-                    // var activePlayList = Amplitude.getSongsInPlaylist(playList);
-
                     // set finished messages
                     // ---------------------------------------------------------
-                    //
-                    logger.info('\n' + 'initialize player on ID #{{player_id}}: finished');
                     logger.debug('\n' + 'current player state: ' + amplitudePlayerState);
+                    logger.debug('\n' + 'setup player specific UI events on ID #{{player_id}}: finished');
 
                     _this.setState('finished');
-                    logger.debug('\n' + 'state: ' + _this.getState());
+                    logger.debug('\n' + 'module state: ' + _this.getState());
                     logger.info('\n' + 'module initialized successfully');
 
                     endTimeModule = Date.now();
                     logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
                     clearInterval(dependencies_met_api_initialized);
-                  } // END if amplitudeInitialized
+                  } // END if apiInitialized
                 }, 10); // END dependencies_met_api_initialized
 
-                clearInterval(load_dependencies['dependencies_met_html_loaded_{{player_id}}']);
-              }
+                clearInterval(load_dependencies['dependencies_met_player_loaded_{{player_id}}']);
+              } // END if xhrLoadState success
             }, 10); // END dependencies_met_html_loaded
-//          }, 100 + ({{player_index}} * 50));
+
           {% endif %} {% endfor %}
-          // initialize amplitude instance (Liquid)
+          logger.info('\n' + 'initialize player specific UI events: finished');
 
-          clearInterval(dependencies_met_page_ready);
-        } // END pageVisible
-      }, 10); // END dependencies_met_page_ready
-    }, // END init
-
-    // -------------------------------------------------------------------------
-    // UI Loader
-    // -------------------------------------------------------------------------
-    uiLoader: (options) => {
-      _this.setState('loading');
-      logger.debug('\n' + 'set module state to: ' + _this.getState());
-      logger.info('\n' + 'load playerUI on ID ' + '#' + options.player_id + ': started');
-
-      j1.loadHTML({
-        xhr_container_id: options.xhr_container_id,
-        xhr_data_path:    options.xhr_data_path,
-        xhr_data_element: options.player_id
-        },
-        'j1.adapter.amplitude',
-        'data_loaded'
-      );
-    }, // END uiLoader
+          clearInterval(dependencies_met_player_instances_initialized);
+        } // END if apiInitialized
+      }, 10);
+      // END initialize player specific UI events
+    }, // END initPlayerUiEvents
 
     // -------------------------------------------------------------------------
-    // initApi
+    // setAudioInfo
     // -------------------------------------------------------------------------
-    initApi: (playlist, playlist_title, audio_items) => {
-      var playList      = playlist;
-      var playListTitle = playlist_title;
-      var songs         = [];
-
-      for (var i = 0; i < Object.keys(audio_items).length; i++) {
-        if (audio_items[i].enabled) {
-          var item = audio_items[i];
-          var song = {};
-
-          // map config settings|amplitude song items
-          // -------------------------------------------------------------------
-          for (const key in item) {
-            // skip properties NOT needed for a song
-            if (key === 'item' || key === 'audio_base' || key === 'enabled') {
-              continue;
-            } else if (key === 'audio') {
-              song.url = audio_items[i].audio_base + '/' + item[key];
-              continue;
-            } else if (key === 'title') {
-              song.name = item[key];
-              continue;
-            } else if (key === 'name') {
-              song.album = item[key];
-              continue;
-            } else if (key === 'cover_image') {
-              song.cover_art_url = item[key];
-              continue;
-            } else if (key === 'title_info') {
-              if (playerTitleInfo) {
-                song.title_info = item[key];
-              } else {
-                song.title_info = '';
-              } // END if playerTitleInfo
-              continue;
-            }else {
-              song[key] = item[key];
-            } // END if key
-          } // END for item
-        } // END id enabled
-        songs.push(song);
-      } // END for items
-
-     // See: https://521dimensions.com/open-source/amplitudejs/docs
-      Amplitude.init({
-        bindings: {
-          37:     'prev',
-          39:     'next',
-          32:     'play_pause'
-        },
-
-        songs: songs,
-
-        // playlists: {
-        //   [playlist]: {
-        //     title: playListTitle,
-        //     songs: [1, 2, 3]
-        //   },
-        // },
-
-        playlists: {
-          [playlist]: {
-            title: playListTitle,
-            songs: [1, 2, 3]
-          },
-        },
-
-        callbacks: {
-
-          initialized: function() {
-            // successfully initialized
-            amplitudeInitialized = true;
-            var activePlayListSongs = Amplitude.getSongsInPlaylist(playList);
-            Amplitude.addPlaylist({
-              key:      playlist, // Unique key for your playlist
-              title:    playListTitle,
-              songs:    activePlayListSongs
-            });
-            Amplitude.bindNewElements();
-            var bla = '';
-          },
-
-          onInitError: function() {
-            // failed on initializarion
-            console.error('\n' + 'Amplitude failed on initialization');
-          },
-
-          play: function() {
-            var songMetaData = Amplitude.getActiveSongMetadata();
-            logger.debug('\n' + 'playing title: ' + songMetaData.name);
-            document.getElementById('album-art').style.visibility = 'hidden';
-            document.getElementById('large-visualization').style.visibility = 'visible';
-          },
-
-          pause: function() {
-            var songMetaData = Amplitude.getActiveSongMetadata();
-            logger.debug('\n' + 'pause title: ' + songMetaData.name);
-            document.getElementById('album-art').style.visibility = 'visible';
-            document.getElementById('large-visualization').style.visibility = 'hidden';
-          },
-
-          song_change: function() {
-            var songMetaData = Amplitude.getActiveSongMetadata();
-            logger.debug('\n' + 'changed to title: ' + songMetaData.name);
-          },
-
-          next: function() {
-            var songMetaData = Amplitude.getActiveSongMetadata();
-            if (playerPauseOnNextTitle) {
-              // check current playback state
-              amplitudePlayerState = Amplitude.getPlayerState();
-              if (amplitudePlayerState === 'playing' || amplitudePlayerState === 'stopped' || amplitudePlayerState === 'paused') {
-                // pause playback of next title
-                setTimeout(() => {
-                  logger.debug('\n' + 'paused on next title: ' + songMetaData.name);
-                  Amplitude.pause();
-                }, 150);
-              } // END if amplitudePlayerState
-            } // END if playerPauseOnNextTitle
-          }
-        },
-        waveforms: {
-          sample_rate: 50
-        },
-        volume: playerVolume
-      });
-    }, // END initApi
-
-    // -------------------------------------------------------------------------
-    // audioInfo
-    // -------------------------------------------------------------------------
-    audioInfo: (audioInfo) => {
+    setAudioInfo: (audioInfo) => {
       // jadams: ???
-      // when the audioInfo link is pressed, stop all propagation so
+      // when the audioInfo link is clicked, stop all propagation so
       // AmplitudeJS doesn't play the song.
       for (var i = 0; i < audioInfo.length; i++) {
         audioInfo[i].addEventListener('click', function (event) {
           event.stopPropagation();
         });
       }
-    }, // END audioInfo
+    }, // END setAudioInfo
 
     // -------------------------------------------------------------------------
     // songEvents
     // -------------------------------------------------------------------------
     songEvents: (songs) => {
-      logger.info('\n' + 'initialize all title events for player on ID: ' + '#' + playerID);
+      logger.debug('\n' + 'initializing title events for player on ID ' + '#' + playerID + ': started');
 
       for (var i = 0; i < songs.length; i++) {
         // ensure that on mouseover, CSS styles don't get messed up for active songs
@@ -642,7 +856,7 @@ j1.adapter.amplitude = ((j1, window) => {
           }
         });
       }
-
+      logger.debug('\n' + 'initializing title events for player on ID ' + '#' + playerID + ': finished');
     }, // END songEvents
 
     // -------------------------------------------------------------------------
@@ -693,10 +907,12 @@ j1.adapter.amplitude = ((j1, window) => {
   }; // END main (return)
 })(j1, window);
 
-{% endcapture %}
-{% if production %}
-  {{ cache | minifyJS }}
-{% else %}
-  {{ cache | strip_empty_lines }}
-{% endif %}
-{% assign cache = nil %}
+{%- endcapture -%}
+
+{%- if production -%}
+  {{ cache|minifyJS }}
+{%- else -%}
+  {{ cache|strip_empty_lines }}
+{%- endif -%}
+
+{%- assign cache = false -%}

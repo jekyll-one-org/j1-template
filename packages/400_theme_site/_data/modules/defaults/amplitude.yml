@@ -95,16 +95,16 @@ defaults:
   # default:                          false
   #
   # ----------------------------------------------------------------------------
-  # pause_on_next_title
+  # pause_next_title
   # ----------------------------------------------------------------------------
   # For default, the player continues playing on the next title.
-  # To 'pause' on 'next title', set pause_on_next_title to 'true'.
+  # To 'pause' on 'next title', set pause_next_title to 'true'.
   #
   # values:                           true|false
   # default:                          false
   #
   # ----------------------------------------------------------------------------
-  # delay_on_next_title
+  # delay_next_title
   # ----------------------------------------------------------------------------
   # Delay on playing next title (measured in milli seconds).
   #
@@ -128,8 +128,10 @@ defaults:
   repeat:                               false
   shuffle:    	                        false
   title_info:                           false
-  pause_on_next_title:                  false
-  delay_on_next_title:                  250
+  play_next_title:                      true
+  pause_next_title:                     false
+  delay_next_title:                     250
+  waveform_sample_rate:                 50
 
 # ------------------------------------------------------------------------------
 # END config

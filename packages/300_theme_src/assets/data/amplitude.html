@@ -75,9 +75,10 @@ amplitude_defaults: {{amplitude_defaults | debug}}
   {% comment %} Create player instances
   -------------------------------------------------------------------------------- {% endcomment %}
   {% for player in amplitude_options.players %} {% if player.enabled %}
-    {% assign player_enabled = player.enabled %}
-    {% assign player_id      = player.player_id %}
-    {% assign player_items   = player.items %}
+    {% assign player_enabled  = player.enabled %}
+    {% assign player_id       = player.player_id %}
+    {% assign player_playlist = player.playlist %}
+    {% assign player_items    = player.items %}
 
     {% comment %} Detect|Set (default) player settings
     ------------------------------------------------------------------------------ {% endcomment %}
@@ -127,6 +128,78 @@ amplitude_defaults: {{amplitude_defaults | debug}}
     {% comment %} collect player instances
     ============================================================================== {% endcomment %}
     {% case player_type %}
+
+      {% comment %} collect playlist player
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {% endcomment %}
+      {% when 'playlist_player' %} {% if player_enabled %}
+      <div id="{{player_id}}">
+        <div class="uno-player">
+          <div id="black-player">
+            <div id="black-player-playlist" class="hide-scrollbar">
+              <div class="black-player-song amplitude-song-container amplitude-play-pause"
+                data-amplitude-song-index="0"
+                data-amplitude-playlist="emancipator">
+                <img src="/assets/audio/cover/album-art/soon-it-will-be-cold-enough.jpg">
+                <div class="song-meta-container">
+                  <span class="individual-song-name">First Snow</span>
+                  <span class="individual-song-artist">Emancipator</span>
+                </div>
+              </div>
+              <div class="black-player-song amplitude-song-container amplitude-play-pause"
+                data-amplitude-song-index="1"
+                data-amplitude-playlist="emancipator">
+                <img src="/assets/audio/cover/album-art/from-dusk-to-dawn.jpg">
+                <div class="song-meta-container">
+                  <span class="individual-song-name">Dusk To Dawn</span>
+                  <span class="individual-song-artist">Emancipator</span>
+                </div>
+              </div>
+              <div class="black-player-song amplitude-song-container amplitude-play-pause"
+                data-amplitude-song-index="2"
+                data-amplitude-playlist="emancipator">
+                <img src="/assets/audio/cover/album-art/soon-it-will-be-cold-enough.jpg">
+                <div class="song-meta-container">
+                  <span class="individual-song-name">Anthem</span>
+                  <span class="individual-song-artist">Emancipator</span>
+                </div>
+              </div>
+            </div>
+
+            <div id="black-player-controls">
+              <img data-amplitude-song-info="cover_art_url" data-amplitude-playlist="emancipator" class="playlist-album-art"/>
+              <div class="black-player-controls-container">
+                <span data-amplitude-song-info="name" data-amplitude-playlist="emancipator" class="song-name"></span>
+                <span data-amplitude-song-info="artist" data-amplitude-playlist="emancipator" class="song-artist"></span>
+
+                <div id="progress-container-black">
+                  <input type="range" class="amplitude-song-slider" data-amplitude-playlist="emancipator"/>
+                  <progress id="song-played-progress-black" class="amplitude-song-played-progress" data-amplitude-playlist="emancipator"></progress>
+                  <progress id="song-buffered-progress-black" class="amplitude-buffered-progress" value="0"></progress>
+                </div>
+
+                <div>
+                  <div class="amplitude-shuffle amplitude-shuffle-off" data-amplitude-playlist="emancipator" id="shuffle-black"></div>
+                  <div class="amplitude-prev" data-amplitude-playlist="emancipator" id="previous-black"></div>
+                  <div class="amplitude-play-pause" data-amplitude-playlist="emancipator" id="play-pause-black"></div>
+                  <div class="amplitude-next" data-amplitude-playlist="emancipator" id="next-black"></div>
+                  <div class="amplitude-repeat" data-amplitude-playlist="emancipator" id="repeat-black"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- END Player Instance: {{player_id}} -->
+      {% endif %}
+
+      {% comment %} Reset element variables (already processed)
+      -------------------------------------------------------------------------- {% endcomment %}
+      {% assign amplitude_settings = false%}
+
+      {% comment %} END playlist player
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {% endcomment %}
+
 
       {% comment %} collect mini player
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {% endcomment %}
@@ -424,6 +497,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
         </div> <!-- END Player Container -->
       </div>
       <!-- END Player Instance: {{player_id}} -->
+      </div>
       {% endif %}
 
       {% comment %} Reset element variables (already processed)

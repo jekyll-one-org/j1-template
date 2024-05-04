@@ -31,11 +31,62 @@ settings:
   # ----------------------------------------------------------------------------
   players:
 
-    # EXAMPLE player 1 (Disco EXPANDED)
+    # PLAYLIST player
     # --------------------------------------------------------------------------
     #
     - plaver:
       enabled:                          true
+
+      # ------------------------------------------------------------------------
+      # PLAYER settings
+      #
+      player_id:                        playlist_player
+      player_type:                      playlist_player
+      title_info:                       false
+      playlist:                         emancipator
+      playlist_title:                   Emancipator
+
+      # ------------------------------------------------------------------------
+      # ALBUM settings
+      # ------------------------------------------------------------------------
+      album:                            &album_playlist_player
+        name:                           Emancipator
+        artist:                         Royalty Free
+        audio_base:                     /assets/audio/album/royalty_free/emancipator
+        cover_image:                    /assets/audio/cover/royalty_free/free_disco_sounds.jpg
+
+      # ------------------------------------------------------------------------
+      # TITLE (song) settings
+      # ------------------------------------------------------------------------
+      items:
+        - item:
+          enabled:                      true
+          <<:                           *album_playlist_player
+          title:                        First Snow
+          audio:                        FirstSnow-Emancipator.mp3
+          title_info:                   //sfx.productioncrate.com
+          duration:                     "2:27"
+        - item:
+          enabled:                      true
+          <<:                           *album_playlist_player
+          title:                        Dusk To Dawn
+          audio:                        DuskToDawn-Emancipator.mp3
+          title_info:                   //sfx.productioncrate.com
+          duration:                     "2:14"
+        - item:
+          enabled:                      true
+          <<:                           *album_playlist_player
+          title:                        Anthem
+          audio:                        Anthem-Emancipator.mp3
+          title_info:                   //sfx.productioncrate.com
+          duration:                     "2:19"
+
+
+    # EXAMPLE player 1 (Disco EXPANDED)
+    # --------------------------------------------------------------------------
+    #
+    - plaver:
+      enabled:                          false
 
       # ------------------------------------------------------------------------
       # PLAYER settings
@@ -101,7 +152,7 @@ settings:
         cover_image:                    /assets/audio/cover/royalty_free/free_disco_sounds.jpg
 
       # ------------------------------------------------------------------------
-      # TITLE settings (playlist)
+      # TITLE (song) settings
       # ------------------------------------------------------------------------
       items:                            &playlist_free_disco
 
@@ -279,7 +330,7 @@ settings:
     # --------------------------------------------------------------------------
     #
     - plaver:
-      enabled:                          true
+      enabled:                          false
 
       # ------------------------------------------------------------------------
       # PLAYER settings
@@ -297,7 +348,7 @@ settings:
         <<:                             *album_free_disco
 
       # ------------------------------------------------------------------------
-      # TITLE settings (playlist)
+      # TITLE (song) settings
       # ------------------------------------------------------------------------
       items:
         - item:
@@ -432,7 +483,7 @@ settings:
     # --------------------------------------------------------------------------
     #
     - plaver:
-      enabled:                          true
+      enabled:                          false
 
       # ------------------------------------------------------------------------
       # PLAYER settings
@@ -449,7 +500,7 @@ settings:
         <<:                             *album_free_disco
 
       # ------------------------------------------------------------------------
-      # TITLE settings (playlist)
+      # TITLE (song) settings
       # ------------------------------------------------------------------------
       items:
         - item:
@@ -579,7 +630,7 @@ settings:
           title_info:                   //sfx.productioncrate.com
           duration:                     "2:38"
 
-    # EXAMPLE player 4 (Pop, EXPANDED)
+    # EXAMPLE player 4 (Pop, COMPACT)
     # --------------------------------------------------------------------------
     #
     - plaver:
@@ -589,6 +640,7 @@ settings:
       # PLAYER settings
       #
       player_id:                        free_pop_compact
+      player_type:                      compact
       title_info:                       false
       playlist:                         free_pop
       playlist_title:                   Feelings
@@ -603,7 +655,7 @@ settings:
         cover_image:                    /assets/audio/cover/royalty_free/free_pop_sounds.jpg
 
       # ------------------------------------------------------------------------
-      # TITLE settings (playlist)
+      # TITLE (song) settings
       # ------------------------------------------------------------------------
       items:
 
