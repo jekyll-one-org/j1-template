@@ -2,7 +2,7 @@
 regenerate:                             true
 ---
 
-{% capture cache %}
+{%- capture cache -%}
 
 {% comment %}
  # -----------------------------------------------------------------------------
@@ -441,10 +441,12 @@ j1.adapter.themes = (function (j1, window) {
   }; // END main (return)
 })(j1, window);
 
-{% endcapture %}
-{% if production %}
-  {{cache| minifyJS }}
-{% else %}
-  {{cache| strip_empty_lines }}
-{% endif %}
-{% assign cache = nil %}
+{%- endcapture -%}
+
+{%- if production -%}
+  {{ cache|minifyJS }}
+{%- else -%}
+  {{ cache|strip_empty_lines }}
+{%- endif -%}
+
+{%- assign cache = false -%}

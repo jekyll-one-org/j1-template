@@ -2,7 +2,7 @@
 regenerate:                             true
 ---
 
-{% capture cache %}
+{%- capture cache -%}
 
 {% comment %}
  # -----------------------------------------------------------------------------
@@ -3276,10 +3276,12 @@ var j1 = ((options) => {
   }; // END main (return)
 })(j1, window);
 
-{% endcapture %}
-{% if production %}
-  {{ cache | strip_empty_lines }}
-{% else %}
-  {{ cache | strip_empty_lines }}
-{% endif %}
-{% assign cache = nil %}
+{%- endcapture -%}
+
+{%- if production -%}
+  {{ cache|minifyJS }}
+{%- else -%}
+  {{ cache|strip_empty_lines }}
+{%- endif -%}
+
+{%- assign cache = false -%}

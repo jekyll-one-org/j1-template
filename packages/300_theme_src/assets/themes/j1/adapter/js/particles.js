@@ -2,7 +2,7 @@
 regenerate:                             true
 ---
 
-{%- capture cache %}
+{%- capture cache -%}
 
 {% comment %}
  # -----------------------------------------------------------------------------
@@ -271,10 +271,12 @@ j1.adapter.particles = ((j1, window) => {
   }; // END main (return)
 })(j1, window);
 
-{% endcapture -%}
+{%- endcapture -%}
+
 {%- if production -%}
-  {{ cache | minifyJS }}
+  {{ cache|minifyJS }}
 {%- else -%}
-  {{ cache | strip_empty_lines }}
-{%- endif- %}
-{% assign cache = nil %}
+  {{ cache|strip_empty_lines }}
+{%- endif -%}
+
+{%- assign cache = false -%}
