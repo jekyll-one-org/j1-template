@@ -40,8 +40,8 @@ settings:
       # ------------------------------------------------------------------------
       # PLAYER settings
       #
-      player_id:                        playlist_player
-      player_type:                      playlist_player
+      player_id:                        compact_gray
+      player_type:                      compact_gray
       title_info:                       false
       playlist:                         emancipator
       playlist_title:                   Emancipator
@@ -49,11 +49,11 @@ settings:
       # ------------------------------------------------------------------------
       # ALBUM settings
       # ------------------------------------------------------------------------
-      album:                            &album_playlist_player
-        name:                           Emancipator
-        artist:                         Royalty Free
+      album:                            &album_compact_gray
+        name:                           Dusk To Dawn
+        artist:                         Emancipator
         audio_base:                     /assets/audio/album/royalty_free/emancipator
-        cover_image:                    /assets/audio/cover/royalty_free/free_disco_sounds.jpg
+        cover_image:                    /assets/audio/cover/album-art/from-dusk-to-dawn.jpg
 
       # ------------------------------------------------------------------------
       # TITLE (song) settings
@@ -61,28 +61,28 @@ settings:
       items:
         - item:
           enabled:                      true
-          <<:                           *album_playlist_player
+          <<:                           *album_compact_gray
           title:                        First Snow
           audio:                        FirstSnow-Emancipator.mp3
           title_info:                   //sfx.productioncrate.com
           duration:                     "2:27"
         - item:
           enabled:                      true
-          <<:                           *album_playlist_player
+          <<:                           *album_compact_gray
           title:                        Dusk To Dawn
           audio:                        DuskToDawn-Emancipator.mp3
           title_info:                   //sfx.productioncrate.com
           duration:                     "2:14"
         - item:
           enabled:                      true
-          <<:                           *album_playlist_player
+          <<:                           *album_compact_gray
           title:                        Anthem
           audio:                        Anthem-Emancipator.mp3
           title_info:                   //sfx.productioncrate.com
           duration:                     "2:19"
 
 
-    # EXAMPLE player 1 (Disco EXPANDED)
+    # EXAMPLE player 1 (Disco, LARGE player)
     # --------------------------------------------------------------------------
     #
     - plaver:
@@ -326,7 +326,7 @@ settings:
           duration:                     "2:38"
 
 
-    # EXAMPLE player 2 (Disco, FLAT)
+    # EXAMPLE player 2 (Disco, COMPACT Player)
     # --------------------------------------------------------------------------
     #
     - plaver:
@@ -479,7 +479,7 @@ settings:
           duration:                     "2:38"
 
 
-    # EXAMPLE player 3 (Disco, Single Song Player )
+    # EXAMPLE player 3 (Disco, MINI Player )
     # --------------------------------------------------------------------------
     #
     - plaver:
@@ -630,11 +630,12 @@ settings:
           title_info:                   //sfx.productioncrate.com
           duration:                     "2:38"
 
-    # EXAMPLE player 4 (Pop, COMPACT)
+
+    # EXAMPLE player 4 (Pop, COMPACT player)
     # --------------------------------------------------------------------------
     #
     - plaver:
-      enabled:                          false
+      enabled:                          true
 
       # ------------------------------------------------------------------------
       # PLAYER settings

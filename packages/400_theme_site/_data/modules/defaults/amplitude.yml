@@ -124,14 +124,17 @@ defaults:
   # ----------------------------------------------------------------------------
   player_type:                          compact
   scrollbars:                           false
-  volume:                               50
+  volume:
+    value:                              50
+    decrement:                          10
+    increment:                          10
   repeat:                               false
   shuffle:    	                        false
   title_info:                           false
   play_next_title:                      true
   pause_next_title:                     false
   delay_next_title:                     250
-  waveform_sample_rate:                 50
+  waveform_sample_rate:                 200
 
 # ------------------------------------------------------------------------------
 # END config

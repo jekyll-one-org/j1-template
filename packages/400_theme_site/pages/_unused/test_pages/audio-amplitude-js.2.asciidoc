@@ -79,7 +79,7 @@ the visual and functional aspects of a player's audio control elements.
 
 
 mdi:clock-time-five-outline[24px, md-gray mr-2]
-*5-10 Minutes* to read
+*5 Minutes* to read
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
@@ -104,12 +104,60 @@ mobile devices.
 
 
 [role="mt-5"]
-== Gray Player
+== Gray Player (compact variant)
 
 Bla, bla ..
 
 .Emancipator · Gray Player
 amplitude::compact_gray[role="mt-4"]
+
+
+++++
+<script>
+  setTimeout(() => {
+    Amplitude.init({
+      songs: [
+        {
+          "name": "First Snow",
+          "artist": "Emancipator",
+          "album": "Soon It Will Be Cold Enough",
+          "url": "/assets/audio/album/royalty_free/emancipator/FirstSnow-Emancipator.mp3",
+          "cover_art_url": "/assets/audio/cover/album-art/soon-it-will-be-cold-enough.jpg"
+        },
+      ],
+      playlists: {
+        "emancipator": {
+          "songs": [
+            {
+              "name": "First Snow",
+              "artist": "Emancipator",
+              "album": "Soon It Will Be Cold Enough",
+              "url": "/assets/audio/album/royalty_free/emancipator/FirstSnow-Emancipator.mp3",
+              "cover_art_url": "/assets/audio/cover/album-art/soon-it-will-be-cold-enough.jpg"
+            },
+            {
+              "name": "Dusk To Dawn",
+              "artist": "Emancipator",
+              "album": "Dusk To Dawn",
+              "url": "/assets/audio/album/royalty_free/emancipator/DuskToDawn-Emancipator.mp3",
+              "cover_art_url": "/assets/audio/cover/album-art/from-dusk-to-dawn.jpg"
+            },
+            {
+              "name": "Anthem",
+              "artist": "Emancipator",
+              "album": "Soon It Will Be Cold Enough",
+              "url": "/assets/audio/album/royalty_free/emancipator/Anthem-Emancipator.mp3",
+              "cover_art_url": "/assets/audio/cover/album-art/soon-it-will-be-cold-enough.jpg"
+            }
+          ]
+        }
+      }
+    });
+  }, 1500);
+</script>
+++++
+
+
 
 ////
 [role="mt-5"]
@@ -129,7 +177,7 @@ with embedded audio content.
 amplitude::free_disco_mini[role="mt-3 mb-5"]
 ////
 
-
+////
 [role="mt-5"]
 == Compact Player
 
@@ -137,7 +185,6 @@ A complex component like an audio player on a web page, *compact*
 typically refers to a design or layout that minimizes the component's
 space while maintaining its functionality and usability.
 
-////
 The *compact design* for an audio player is an efficient approach that
 involves condensing the player controls and display elements into a smaller
 area. It uses icons or symbols instead of text labels where possible, and
@@ -149,14 +196,13 @@ page's layout without overwhelming or dominating the content around it.
 The design aims to balance functionality and space efficiency, ensuring
 users can easily access and control the audio playback without sacrificing
 too much screen space.
+
+.Dance Floor · Royalty Free Music (compact)
+amplitude::free_disco_compact[role="mt-3 mb-5"]
+
+// .Pop Music · Royalty Free Music (compact)
+// amplitude::free_pop_compact[role="mt-3 mb-5"]
 ////
-
-// .Dance Floor · Royalty Free Music (compact)
-// amplitude::free_disco_compact[role="mt-3 mb-5"]
-
-.Pop Music · Royalty Free Music (compact)
-amplitude::free_pop_compact[role="mt-3 mb-5"]
-
 
 ////
 [role="mt-5"]
@@ -167,7 +213,6 @@ Bla, bla ...
 .Dance Floor · Royalty Free Music (large)
 amplitude::free_disco_large[role="mt-3 mb-5"]
 ////
-
 
 [role="mt-5"]
 == Player configuration
