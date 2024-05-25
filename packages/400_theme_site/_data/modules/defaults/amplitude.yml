@@ -25,116 +25,220 @@ description:
 defaults:
 
   # ----------------------------------------------------------------------------
-  # enabled
-  # ----------------------------------------------------------------------------
-  # Enables or disables the module
-  #
-  # values:                           true|false
-  # default:                          false
-  #
-  # ----------------------------------------------------------------------------
-  # xhr_data_path
-  # ----------------------------------------------------------------------------
-  # The HTML portion of a grid are being read from a HTML file generated
-  # automatically from its configuration for all galleries configured.
-  # AJAX methods are used to supply the needed HTML code at the time
-  # a gallery is initialized by the JS adapter.
-  #
-  #   values:                           string
-  #   default:                          /assets/data/amplitude.html
-  #
-  # ----------------------------------------------------------------------------
-  # player_type
-  # ----------------------------------------------------------------------------
-  # Sets the the type of player to be created. J1 Template supports three
-  # player types: mini, flat and expanded.
-  #
-  # values:                           mini|compact|large
-  # default:                          compact
-  #
-  # ----------------------------------------------------------------------------
-  # player_id
-  # ----------------------------------------------------------------------------
-  # UNIQUE player id. Used by the module adapter to create a player.
-  #
-  # values:                           string
-  # default:                          no default
-  #
-  # ----------------------------------------------------------------------------
-  # volume
-  # ----------------------------------------------------------------------------
-  # Set (initial) volume value (player control|right).
-  #
-  # values:                           [0 .. 100]
-  # default:                          50
-  #
-  # ----------------------------------------------------------------------------
-  # repeat
-  # ----------------------------------------------------------------------------
-  # Enable or disable repeating titles (player control|right).
-  #
-  # values:                           true|false
-  # default:                          false
-  #
-  # ----------------------------------------------------------------------------
-  # shuffle
-  # ----------------------------------------------------------------------------
-  # Enable or disable shuffle titles (player control|right).
-  # When set to 'false', titles are played the order of the albun.
-  # When set to 'true', titles are played 'random' except the 'fist' item.
-  #
-  # values:                           true|false
-  # default:                          false
-  #
-  # ----------------------------------------------------------------------------
-  # title_info
-  # ----------------------------------------------------------------------------
-  # Enables or disables the info button on titles (player control|left).
-  #
-  # values:                           true|false
-  # default:                          false
-  #
-  # ----------------------------------------------------------------------------
-  # pause_next_title
-  # ----------------------------------------------------------------------------
-  # For default, the player continues playing on the next title.
-  # To 'pause' on 'next title', set pause_next_title to 'true'.
-  #
-  # values:                           true|false
-  # default:                          false
-  #
-  # ----------------------------------------------------------------------------
-  # delay_next_title
-  # ----------------------------------------------------------------------------
-  # Delay on playing next title (measured in milli seconds).
-  #
-  # values:                           integer (ms)
-  # default:                          500
-  #
-  # --------------------------------------------------------------------------
-
-  # ----------------------------------------------------------------------------
   # gloabl defaults
   # ----------------------------------------------------------------------------
   enabled:                              false
   xhr_data_path:                        /assets/data/amplitude
 
   # ----------------------------------------------------------------------------
-  # player defaults
+  # PLAYLIST defaults
   # ----------------------------------------------------------------------------
-  player_type:                          compact
-  scrollbars:                           false
-  volume:
-    value:                              50
-    decrement:                          10
-    increment:                          10
-  repeat:                               false
-  shuffle:    	                        false
-  title_info:                           false
-  play_next_title:                      true
-  pause_next_title:                     false
-  delay_next_title:                     250
-  waveform_sample_rate:                 200
+  playlist:
+
+    # --------------------------------------------------------------------------
+    # ALBUM settings
+    # --------------------------------------------------------------------------
+    album:
+
+      # ------------------------------------------------------------------------
+      # name
+      # ------------------------------------------------------------------------
+      # Name of the album.
+      #
+      # values:                       string
+      # default:                      no default
+      #
+      # ------------------------------------------------------------------------
+      # artist
+      # ------------------------------------------------------------------------
+      # Name of the artist.
+      #
+      # values:                       string
+      # default:                      no default
+      #
+      # ------------------------------------------------------------------------
+      # playlist
+      # ------------------------------------------------------------------------
+      # UNIQUE name of the playlist. Required to create MUTIPLE player
+      # instances for AmplitudeJS,
+      #
+      # values:                       string
+      # default:                      no default
+      #
+      # ------------------------------------------------------------------------
+      # audio_base
+      # ------------------------------------------------------------------------
+      # Base folder or URL. Specifies the the base forlder or URL for
+      # the audio files to be loaded.
+      #
+      # values:                       string|URL
+      # default:                      no default
+      #
+      # ------------------------------------------------------------------------
+      # cover_image
+      # ------------------------------------------------------------------------
+      # The album cover image (path).
+      #
+      # values:                       string
+      # default:                      no default
+      #
+      # ------------------------------------------------------------------------
+
+    # --------------------------------------------------------------------------
+    # TITLE settings (songs)
+    # --------------------------------------------------------------------------
+    items:
+
+      # ------------------------------------------------------------------------
+      # enabled
+      # ------------------------------------------------------------------------
+      # Enables or disables a title.
+      #
+      # values:                       true|false
+      # default:                      true
+      #
+      # ------------------------------------------------------------------------
+      # title
+      # ------------------------------------------------------------------------
+      # Name of the title.
+      #
+      # values:                       string
+      # default:                      no default
+      #
+      # ------------------------------------------------------------------------
+      # audio
+      # ------------------------------------------------------------------------
+      # Name|URL of the audio file..
+      #
+      # values:                       string
+      # default:                      no default
+      #
+      # ------------------------------------------------------------------------
+      # title_info
+      # ------------------------------------------------------------------------
+      # Link on title info.
+      #
+      # values:                       string
+      # default:                      no default
+      #
+      # ------------------------------------------------------------------------
+      # duration
+      # ------------------------------------------------------------------------
+      # Duration info for a title.
+      #
+      # values:                       string (minutes:seconds)
+      # default:                      no default
+      #
+      # ------------------------------------------------------------------------
+
+
+  # ----------------------------------------------------------------------------
+  # PLAYER defaults
+  # ----------------------------------------------------------------------------
+  player:
+
+    # --------------------------------------------------------------------------
+    # enabled
+    # --------------------------------------------------------------------------
+    # Enables or disables the module
+    #
+    # values:                           true|false
+    # default:                          false
+    #
+    # --------------------------------------------------------------------------
+    # xhr_data_path
+    # --------------------------------------------------------------------------
+    # The HTML portion of a grid are being read from a HTML file generated
+    # automatically from its configuration for all galleries configured.
+    # AJAX methods are used to supply the needed HTML code at the time
+    # a gallery is initialized by the JS adapter.
+    #
+    #   values:                           string
+    #   default:                          /assets/data/amplitude.html
+    #
+    # --------------------------------------------------------------------------
+    # player_type
+    # --------------------------------------------------------------------------
+    # Sets the the type of player to be created. J1 Template supports three
+    # player types: mini, flat and expanded.
+    #
+    # values:                           mini|compact|large
+    # default:                          compact
+    #
+    # --------------------------------------------------------------------------
+    # player_id
+    # --------------------------------------------------------------------------
+    # UNIQUE player id. Used by the module adapter to create a player.
+    #
+    # values:                           string
+    # default:                          no default
+    #
+    # --------------------------------------------------------------------------
+    # volume
+    # --------------------------------------------------------------------------
+    # Set (initial) volume value (player control|right).
+    #
+    # values:                           [0 .. 100]
+    # default:                          50
+    #
+    # --------------------------------------------------------------------------
+    # repeat
+    # --------------------------------------------------------------------------
+    # Enable or disable repeating titles (player control|right).
+    #
+    # values:                           true|false
+    # default:                          false
+    #
+    # --------------------------------------------------------------------------
+    # shuffle
+    # --------------------------------------------------------------------------
+    # Enable or disable shuffle titles (player control|right).
+    # When set to 'false', titles are played the order of the albun.
+    # When set to 'true', titles are played 'random' except the 'fist' item.
+    #
+    # values:                           true|false
+    # default:                          false
+    #
+    # --------------------------------------------------------------------------
+    # title_info
+    # --------------------------------------------------------------------------
+    # Enables or disables the info button on titles (player control|left).
+    #
+    # values:                           true|false
+    # default:                          false
+    #
+    # --------------------------------------------------------------------------
+    # pause_next_title
+    # --------------------------------------------------------------------------
+    # For default, the player continues playing on the next title.
+    # To 'pause' on 'next title', set pause_next_title to 'true'.
+    #
+    # values:                           true|false
+    # default:                          false
+    #
+    # --------------------------------------------------------------------------
+    # delay_next_title
+    # --------------------------------------------------------------------------
+    # Delay on playing next title (measured in milli seconds).
+    #
+    # values:                           integer (ms)
+    # default:                          500
+    #
+    # --------------------------------------------------------------------------
+    #
+    type:                                 compact
+    hide_scrollbar:                       false
+    volume:
+      value:                              50
+      decrement:                          10
+      increment:                          10
+    repeat:                               false
+    shuffle:                              false
+    title_info:                           false
+    play_next_title:                      true
+    pause_next_title:                     false
+    delay_next_title:                     250
+    waveform_sample_rate:                 200
 
 # ------------------------------------------------------------------------------
 # END config

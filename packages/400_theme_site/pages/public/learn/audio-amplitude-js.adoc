@@ -1,5 +1,5 @@
 ---
-title:                                  Amplitude
+title:                                  AmplitudeJS
 title_extention:                        Custom Audio players
 tagline:                                Custom Audio Players
 
@@ -7,7 +7,7 @@ date:                                   2024-04-17
 #last_modified:                         2024-01-01
 
 description: >
-                                        Amplitude is a JavaScript library to control the design of audio media
+                                        AmplitudeJS is a JavaScript library to control the design of audio media
                                         elements on web pages. The concept allows designers to fully control the
                                         look and feel of audio players without deep scripting knowledge.
 keywords: >
@@ -16,7 +16,7 @@ keywords: >
                                         Amplitude
 
 categories:                             [ Testpage ]
-tags:                                   [ Audio. Amplitude ]
+tags:                                   [ Audio, AmplitudeJS ]
 
 image:
   path:                                 /assets/images/icons/videojs/videojs-poster.png
@@ -27,7 +27,7 @@ regenerate:                             false
 personalization:                        true
 permalink:                              /pages/public/amplitude_tester/
 
-resources:                              [ amplitude-js ]
+resources:                              [ amplitudejs ]
 resource_options:
   - toccer:
       collapseDepth:                    2
@@ -77,9 +77,9 @@ players without the need for complex scripting. By leveraging J1 Template
 and Amplitude's API, web designers can craft unique interfaces that define
 the visual and functional aspects of a player's audio control elements.
 
-
 mdi:clock-time-five-outline[24px, md-gray mr-2]
 *5-10 Minutes* to read
+
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
@@ -102,16 +102,17 @@ clicking on the appropriate elements, touch events are applied to all
 mobile devices.
 ====
 
-
+////
 [role="mt-5"]
 == Gray Player
 
 Bla, bla ..
 
-.Emancipator · Gray Player
+.Pop Music · Royalty Free Music (compact_gray)
 amplitude::compact_gray[role="mt-4"]
-
 ////
+
+
 [role="mt-5"]
 == Mini Player
 
@@ -126,8 +127,64 @@ commonly found on music streaming services, podcast platforms, and websites
 with embedded audio content.
 
 .Dance Floor · Royalty Free Music (mini)
-amplitude::free_disco_mini[role="mt-3 mb-5"]
-////
+amplitude::free_pop_mini[role="mt-3 mb-5"]
+
+++++
+<style>
+
+div#mini-player {
+  max-width: 475px;
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--ajs-theme-uno--blue-gray-900);
+}
+
+div.time-container {
+  font-family: "Lato", sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  color: #fff;
+  height: 18px;
+  margin-top: 10px;
+  width: calc(100% - 30px);
+  margin-left: 20px;
+}
+
+div.mini-player.meta-container {
+  width: calc(60% + 60px);
+}
+
+div.mini-player.control-container {
+  margin-top: 5px;
+}
+
+div.control-container div.meta-container {
+  float: left;
+  text-align: center;
+  color: white;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+.mini-player-volume-container {
+  display: flex;
+  margin-left: 25px;
+  padding-bottom: 15px;
+  padding-top: 5px;
+  width: calc(100% - 34px);
+}
+
+input[type=range].mini-player.amplitude-volume-slider {
+  width: calc(90% - 18px);
+  float: left;
+  /* margin-top: 0px !important; */
+  /* margin-left: 0px !important; */
+  background: inherit;
+  -webkit-appearance: none;
+  margin-top: 0px;
+  margin-left: 5px;
+}
+</style>
+++++
 
 
 [role="mt-5"]
@@ -158,17 +215,105 @@ too much screen space.
 amplitude::free_pop_compact[role="mt-3 mb-5"]
 
 
-////
 [role="mt-5"]
 == Large Player
 
 Bla, bla ...
 
-.Dance Floor · Royalty Free Music (large)
-amplitude::free_disco_large[role="mt-3 mb-5"]
+.Pop Music · Royalty Free Music (large)
+amplitude::free_pop_large[role="mt-3 mb-5"]
+
+
+
+++++
+<style>
+
+div#large-player-controls {
+  height: 65px;
+}
+
+div#large-player-controls div.large-player-controls-container {
+  text-align: center;
+}
+
+div#large-player-controls div.large-player-controls-container div#shuffle-black {
+  display: inline-block;
+  width: 15px;
+  height: 14px;
+  cursor: pointer;
+  vertical-align: middle;
+  margin-right: 25px;
+  margin-left: -16px;
+}
+
+div#large-player-controls div.large-player-controls-container div#shuffle-black.amplitude-shuffle-off {
+  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-shuffle-off.svg");
+}
+
+div#large-player-controls div.large-player-controls-container div#shuffle-black.amplitude-shuffle-on {
+  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-shuffle-on.svg");
+}
+
+div#large-player-controls div.large-player-controls-container div#previous-black {
+  display: inline-block;
+  height: 19px;
+  width: 16px;
+  cursor: pointer;
+  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-previous.svg");
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+div#large-player-controls div.large-player-controls-container div#play-pause-black {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  vertical-align: middle;f
+  margin-right: 10px;
+}
+
+div#large-player-controls div.large-player-controls-container div#play-pause-black.amplitude-paused {
+  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-play.svg");
+}
+
+div#large-player-controls div.large-player-controls-container div#play-pause-black.amplitude-playing {
+  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-pause.svg");
+}
+
+div#large-player-controls div.large-player-controls-container div#next-black {
+  display: inline-block;
+  height: 19px;
+  width: 16px;
+  cursor: pointer;
+  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-next.svg");
+  vertical-align: middle;
+  margin-right: 25px;
+  margin-left: 10px;
+}
+
+div#large-player-controls div.large-player-controls-container div#repeat-black {
+  display: inline-block;
+  width: 15px;
+  height: 16px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+div#large-player-controls div.large-player-controls-container div#repeat-black.amplitude-repeat-off {
+  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-repeat-off.svg");
+}
+
+div#large-player-controls div.large-player-controls-container div#repeat-black.amplitude-repeat-on {
+  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-repeat-on.svg");
+}
+
+</style>
+++++
+
+
+
 ////
-
-
 [role="mt-5"]
 == Player configuration
 
@@ -184,3 +329,4 @@ lorem:sentences[7]
 
 [role="mb-7"]
 lorem:sentences[7]
+////

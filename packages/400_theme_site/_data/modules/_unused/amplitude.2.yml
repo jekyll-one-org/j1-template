@@ -31,7 +31,6 @@ settings:
   # ----------------------------------------------------------------------------
   playlists:
 
-    # --------------------------------------------------------------------------
     # Dusk To Dawn - Emancipator
     # --------------------------------------------------------------------------
     #
@@ -45,6 +44,51 @@ settings:
       # ALBUM settings
       # ------------------------------------------------------------------------
       album:                            &album_dusk_to_dawn
+
+        # ----------------------------------------------------------------------
+        # name
+        # ----------------------------------------------------------------------
+        # Name of the album.
+        #
+        # values:                       string
+        # default:                      no default
+        #
+        # ----------------------------------------------------------------------
+        # artist
+        # ----------------------------------------------------------------------
+        # Name of the artist.
+        #
+        # values:                       string
+        # default:                      no default
+        #
+        # ----------------------------------------------------------------------
+        # playlist
+        # ----------------------------------------------------------------------
+        # UNIQUE name of the playlist. Required to create MUTIPLE player
+        # instances for AmplitudeJS,
+        #
+        # values:                       string
+        # default:                      no default
+        #
+        # ----------------------------------------------------------------------
+        # audio_base
+        # ----------------------------------------------------------------------
+        # Base folder or URL. Specifies the the base forlder or URL for
+        # the audio files to be loaded.
+        #
+        # values:                       string|URL
+        # default:                      no default
+        #
+        # ----------------------------------------------------------------------
+        # cover_image
+        # ----------------------------------------------------------------------
+        # The album cover image (path).
+        #
+        # values:                       string
+        # default:                      no default
+        #
+        # ----------------------------------------------------------------------
+        #
         name:                           Dusk To Dawn
         artist:                         Emancipator
         audio_base:                     /assets/audio/album/royalty_free/emancipator
@@ -54,6 +98,49 @@ settings:
       # TITLE settings (songs)
       # ------------------------------------------------------------------------
       items:
+
+        # ----------------------------------------------------------------------
+        # enabled
+        # ----------------------------------------------------------------------
+        # Enables or disables a title.
+        #
+        # values:                       true|false
+        # default:                      true
+        #
+        # ----------------------------------------------------------------------
+        # title
+        # ----------------------------------------------------------------------
+        # Name of the title.
+        #
+        # values:                       string
+        # default:                      no default
+        #
+        # ----------------------------------------------------------------------
+        # audio
+        # ----------------------------------------------------------------------
+        # Name|URL of the audio file..
+        #
+        # values:                       string
+        # default:                      no default
+        #
+        # ----------------------------------------------------------------------
+        # title_info
+        # ----------------------------------------------------------------------
+        # Link on title info.
+        #
+        # values:                       string
+        # default:                      no default
+        #
+        # ----------------------------------------------------------------------
+        # duration
+        # ----------------------------------------------------------------------
+        # Duration info for a title.
+        #
+        # values:                       string (minutes:seconds)
+        # default:                      no default
+        #
+        # ----------------------------------------------------------------------
+        #
         - item:
           enabled:                      true
           <<:                           *album_dusk_to_dawn
@@ -77,7 +164,6 @@ settings:
           duration:                     "2:19"
 
 
-    # --------------------------------------------------------------------------
     # Free Pop - Royalty Free
     # --------------------------------------------------------------------------
     #
@@ -144,12 +230,11 @@ settings:
           duration:                     "2:31"
 
 
-    # --------------------------------------------------------------------------
     # Free Disco - Royalty Free
     # --------------------------------------------------------------------------
     #
     - playlist:
-      enabled:                          false
+      enabled:                          true
 
       name:                             free_disco
       title:                            Free Disco
@@ -294,33 +379,12 @@ settings:
           title_info:                   //sfx.productioncrate.com
           duration:                     "2:38"
 
-
   # ----------------------------------------------------------------------------
   # PLAYER configurations
   # ----------------------------------------------------------------------------
   players:
 
-    # --------------------------------------------------------------------------
-    # MINI player
-    # --------------------------------------------------------------------------
-    #
-    - plaver:
-      enabled:                          true
-
-      # ------------------------------------------------------------------------
-      # PLAYER settings
-      #
-      id:                               free_pop_mini
-      type:                             mini
-
-      playlist:                         free_pop
-      playlist_title:                   Free Pop
-      title_info:                       false
-      hide_scrollbar:                   true
-
-
-    # --------------------------------------------------------------------------
-    # GRAY player, Free Pop
+    # PLAYLIST player
     # --------------------------------------------------------------------------
     #
     - plaver:
@@ -329,17 +393,92 @@ settings:
       # ------------------------------------------------------------------------
       # PLAYER settings
       #
-      id:                               compact_gray
-      type:                             compact_gray
-
-      playlist:                         free_pop
-      playlist_title:                   Free Pop
+      player_id:                        compact_gray
+      player_type:                      compact_gray
       title_info:                       false
-      hide_scrollbar:                   true
+      playlist:                         emancipator
+      playlist_title:                   Emancipator
+
+      # ------------------------------------------------------------------------
+      # ALBUM settings
+      # ------------------------------------------------------------------------
+      album:                            &album_compact_gray
+        name:                           Dusk To Dawn
+        artist:                         Emancipator
+        audio_base:                     /assets/audio/album/royalty_free/emancipator
+        cover_image:                    /assets/audio/cover/album-art/from-dusk-to-dawn.jpg
 
 
+    # EXAMPLE player 1 (Disco, LARGE player)
     # --------------------------------------------------------------------------
-    # COMPACT player, Free Pop
+    #
+    - plaver:
+      enabled:                          false
+
+      # ------------------------------------------------------------------------
+      # PLAYER settings
+      #
+      player_id:                        free_disco_large
+      player_type:                      large
+      title_info:                       true
+      playlist:                         free_disco
+      playlist_title:                   Dancefloor Fever
+
+      # ------------------------------------------------------------------------
+      # ALBUM settings
+      # ------------------------------------------------------------------------
+      album:
+
+
+        name:                           Free Disco
+        artist:                         Royalty Free
+        audio_base:                     //p.productioncrate.com/stock-hd/audio
+        cover_image:                    /assets/audio/cover/royalty_free/free_disco_sounds.jpg
+
+
+    # EXAMPLE player 2 (Disco, COMPACT Player)
+    # --------------------------------------------------------------------------
+    #
+    - plaver:
+      enabled:                          false
+
+      # ------------------------------------------------------------------------
+      # PLAYER settings
+      #
+      player_id:                        free_disco_compact
+      player_type:                      compact
+      title_info:                       true
+      playlist:                         free_disco
+      playlist_title:                   Dancefloor Fever
+
+      # ------------------------------------------------------------------------
+      # ALBUM settings
+      # ------------------------------------------------------------------------
+      album:
+        <<:                             *album_free_disco
+
+
+    # EXAMPLE player 3 (Disco, MINI Player )
+    # --------------------------------------------------------------------------
+    #
+    - plaver:
+      enabled:                          false
+
+      # ------------------------------------------------------------------------
+      # PLAYER settings
+      #
+      player_id:                        free_disco_mini
+      player_type:                      mini
+      playlist:                         free_disco
+      playlist_title:                   Dancefloor Fever
+
+      # ------------------------------------------------------------------------
+      # ALBUM settings
+      # ------------------------------------------------------------------------
+      album:
+        <<:                             *album_free_disco
+
+    # EXAMPLE player 4 (Pop, COMPACT player)
     # --------------------------------------------------------------------------
     #
     - plaver:
@@ -348,32 +487,20 @@ settings:
       # ------------------------------------------------------------------------
       # PLAYER settings
       #
-      id:                               free_pop_compact
-      type:                             compact
-
-      playlist:                         free_pop
-      playlist_title:                   Free Pop
+      player_id:                        free_pop_compact
+      player_type:                      compact
       title_info:                       false
-      hide_scrollbar:                   true
-
-
-    # --------------------------------------------------------------------------
-    # LARGE player, Free Pop
-    # --------------------------------------------------------------------------
-    #
-    - plaver:
-      enabled:                          true
+      playlist:                         free_pop
+      playlist_title:                   Feelings
 
       # ------------------------------------------------------------------------
-      # PLAYER settings
-      #
-      id:                               free_pop_large
-      type:                             large
-
-      playlist:                         free_pop
-      playlist_title:                   Free Pop
-      title_info:                       false
-      hide_scrollbar:                   true
+      # ALBUM settings
+      # ------------------------------------------------------------------------
+      album:
+        name:                           Free Pop
+        artist:                         Royalty Free
+        audio_base:                     //p.productioncrate.com/stock-hd/audio
+        cover_image:                    /assets/audio/cover/royalty_free/free_pop_sounds.jpg
 
 # ------------------------------------------------------------------------------
 # END config

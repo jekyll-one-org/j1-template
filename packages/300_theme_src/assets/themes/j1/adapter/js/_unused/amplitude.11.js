@@ -133,17 +133,17 @@ j1.adapter.amplitude = ((j1, window) => {
   var playersProcessed          = [];
   var playersHtmlLoaded         = false;
   var processingPlayersFinished = false;
-  var playerType                = '{{amplitude_defaults.player.type}}';
-  var playerVolumeValue         = '{{amplitude_defaults.player.volume.value}}';
-  var playerVolumeDecrement     = '{{amplitude_defaults.player.volume.decrement}}';
-  var playerVolumeIncrement     = '{{amplitude_defaults.player.volume.increment}}';
-  var playerRepeat              = ('{{amplitude_defaults.player.repeat}}' === 'true') ? true : false;
-  var playerShuffle             = ('{{amplitude_defaults.player.shuffle}}' === 'true') ? true : false;
-  var playerTitleInfo           = ('{{amplitude_defaults.player.title_info}}' === 'true') ? true : false;
-  var playerPlayNextTitle       = ('{{amplitude_defaults.player.play_next_title}}' === 'true') ? true : false;
-  var playerPauseNextTitle      = ('{{amplitude_defaults.player.pause_next_title}}' === 'true') ? true : false;
-  var playerDelayNextTitle      = '{{amplitude_defaults.player.delay_next_title}}';
-  var playerWaveformSampleRate  = '{{amplitude_defaults.player.waveform_sample_rate}}';
+  var playerType                = '{{amplitude_defaults.player_type}}';
+  var playerVolumeValue         = '{{amplitude_defaults.volume.value}}';
+  var playerVolumeDecrement     = '{{amplitude_defaults.volume.decrement}}';
+  var playerVolumeIncrement     = '{{amplitude_defaults.volume.increment}}';
+  var playerRepeat              = ('{{amplitude_defaults.repeat}}' === 'true') ? true : false;
+  var playerShuffle             = ('{{amplitude_defaults.shuffle}}' === 'true') ? true : false;
+  var playerTitleInfo           = ('{{amplitude_defaults.title_info}}' === 'true') ? true : false;
+  var playerPlayNextTitle       = ('{{amplitude_defaults.play_next_title}}' === 'true') ? true : false;
+  var playerPauseNextTitle      = ('{{amplitude_defaults.pause_next_title}}' === 'true') ? true : false;
+  var playerDelayNextTitle      = '{{amplitude_defaults.delay_next_title}}';
+  var playerWaveformSampleRate  = '{{amplitude_defaults.waveform_sample_rate}}';
 
 
   // ---------------------------------------------------------------------------
@@ -293,53 +293,47 @@ j1.adapter.amplitude = ((j1, window) => {
     // load players HTML portion (UI)
     // -------------------------------------------------------------------------
     playerHtmlLoader: (playersLoaded) => {
-      var playerExistsInPage;
 
       // -----------------------------------------------------------------------
       // initialize HTML portion (UI) for all players configured|enabled
       // -----------------------------------------------------------------------
-      logger.info('\n' + 'loading player HTML components (UI): started');
+      logger.info('\n' + 'loading players (UI): started');
 
       {% for player in amplitude_options.players %} {% if player.enabled %}
-        {% assign player_id     = player.id %}
+        {% assign player_id     = player.player_id %}
         {% assign xhr_data_path = amplitude_options.xhr_data_path %}
         {% capture xhr_container_id %}{{player_id}}_parent{% endcapture %}
 
-        // load players only that are configured in current page
-        //
-        playerExistsInPage = ($('#' + '{{xhr_container_id}}')[0] !== undefined) ? true : false;
-        if (playerExistsInPage) {
-          playerCounter++;
-          logger.debug('\n' + 'load player UI on ID #{{player_id}}: started');
+        playerCounter++;
+        logger.debug('\n' + 'load player UI on ID #{{player_id}}: started');
 
-          j1.loadHTML({
-            xhr_container_id: '{{xhr_container_id}}',
-            xhr_data_path:    '{{xhr_data_path}}',
-            xhr_data_element: '{{player_id}}'
-            },
-            'j1.adapter.amplitude',
-            'data_loaded'
-          );
+        j1.loadHTML({
+          xhr_container_id: '{{xhr_container_id}}',
+          xhr_data_path:    '{{xhr_data_path}}',
+          xhr_data_element: '{{player_id}}'
+          },
+          'j1.adapter.amplitude',
+          'data_loaded'
+        );
 
-          // dynamic loader variable to setup the player on ID {{player_id}}
-          dependency = 'dependencies_met_html_loaded_{{player_id}}';
-          load_dependencies[dependency] = '';
+        // dynamic loader variable to setup the player on ID {{player_id}}
+        dependency = 'dependencies_met_html_loaded_{{player_id}}';
+        load_dependencies[dependency] = '';
 
-          // ---------------------------------------------------------------------
-          // initialize amplitude instance (when player UI loaded)
-          // ---------------------------------------------------------------------
-          load_dependencies['dependencies_met_html_loaded_{{player_id}}'] = setInterval (() => {
-            // check if HTML portion of the player is loaded successfully
-            xhrLoadState = j1.xhrDOMState['#' + '{{xhr_container_id}}'];
+        // ---------------------------------------------------------------------
+        // initialize amplitude instance (when player UI loaded)
+        // ---------------------------------------------------------------------
+        load_dependencies['dependencies_met_html_loaded_{{player_id}}'] = setInterval (() => {
+          // check if HTML portion of the player is loaded successfully
+          xhrLoadState = j1.xhrDOMState['#' + '{{xhr_container_id}}'];
 
-            if (xhrLoadState === 'success') {
-              playersProcessed.push('{{xhr_container_id}}');
-              logger.debug('\n' + 'load player UI on ID #{{player_id}}: finished');
+          if (xhrLoadState === 'success') {
+            playersProcessed.push('{{xhr_container_id}}');
+            logger.debug('\n' + 'load player UI on ID #{{player_id}}: finished');
 
-              clearInterval(load_dependencies['dependencies_met_html_loaded_{{player_id}}']);
-            }
-          }, 10); // END dependencies_met_html_loaded
-        } // END if playerExistsInPage
+            clearInterval(load_dependencies['dependencies_met_html_loaded_{{player_id}}']);
+          }
+        }, 10); // END dependencies_met_html_loaded
 
       {% endif %} {% endfor %}
 
@@ -350,7 +344,7 @@ j1.adapter.amplitude = ((j1, window) => {
         }
 
         if (processingPlayersFinished) {
-          logger.info('\n' + 'loading player HTML components (UI): finished');
+          logger.info('\n' + 'loading players (UI): finished');
 
           clearInterval(load_dependencies['dependencies_met_players_loaded']);
           playersLoaded.state = true;
@@ -492,11 +486,12 @@ j1.adapter.amplitude = ((j1, window) => {
           logger.info('\n' + 'initialize player specific UI events: started');
 
           {% for player in amplitude_options.players %} {% if player.enabled %}
-            {% assign player_id     = player.id %}
+            {% assign player_items  = player.items %}
+            {% assign player_id     = player.player_id %}
             {% assign xhr_data_path = amplitude_options.xhr_data_path %}
             {% capture xhr_container_id %}{{player_id}}_parent{% endcapture %}
 
-            playerID      = '{{player.id}}';
+            playerID      = '{{player.player_id}}';
             playList      = '{{player.playlist}}';
             playListTitle = '{{player.playlist_title}}';
 
@@ -556,9 +551,9 @@ j1.adapter.amplitude = ((j1, window) => {
                         var list = document.getElementById('list');
                         list.style.height = ( parseInt( document.getElementById('compact-player-container').offsetHeight ) - 135 ) + 'px';
 
-                        document.getElementById('playlist-screen').classList.remove('slide-out-top');
-                        document.getElementById('playlist-screen').classList.add('slide-in-top');
-                        document.getElementById('playlist-screen').style.display = "block";
+                        document.getElementById('list-screen').classList.remove('slide-out-top');
+                        document.getElementById('list-screen').classList.add('slide-in-top');
+                        document.getElementById('list-screen').style.display = "block";
 
                         // disable scrolling
                         if ($('body').hasClass('stop-scrolling')) {
@@ -570,9 +565,9 @@ j1.adapter.amplitude = ((j1, window) => {
 
                       // compact player: click up arrow to hide the list screen
                       document.getElementsByClassName('hide-playlist')[0].addEventListener('click', function() {
-                        document.getElementById('playlist-screen').classList.remove('slide-in-top');
-                        document.getElementById('playlist-screen').classList.add('slide-out-top');
-                        document.getElementById('playlist-screen').style.display = "none";
+                        document.getElementById('list-screen').classList.remove('slide-in-top');
+                        document.getElementById('list-screen').classList.add('slide-out-top');
+                        document.getElementById('list-screen').style.display = "none";
 
                         // enable scrolling
                         if ($('body').hasClass('stop-scrolling')) {

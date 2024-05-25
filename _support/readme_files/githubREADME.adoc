@@ -35,3 +35,49 @@ Options inherited from parent commands
 
 
 gh auth login --hostname github.com/jekyll-one-org/digitization
+
+
+How to add a demo url in the Github about us section?
+
+1.Navigate to Your Repository:
+
+Go to GitHub and navigate to the repository where you want to add the demo URL.
+
+2.Access Repository Settings:
+
+On the main page of the repository, click on the "Settings" tab. This is
+usually located towards the right side of the page, just above the code files
+list.
+
+3.Edit the "About" Section:
+
+In the "Settings" page, scroll down to the "Options" section.
+Look for the "About" section. This is where you can add details about your
+repository, including the description, website, and topics.
+
+4. Add the Demo URL:
+
+In the "About" section, you will see fields for "Description" and "Website". The "Website" field is where you can add your demo URL.
+Enter your demo URL in the "Website" field.
+
+5. Save Changes:
+
+Once you have entered the URL, scroll down to the bottom of the page and click on the "Save changes" button to apply your updates.
+
+6. Verify the URL:
+
+Go back to the main page of your repository to ensure that the demo URL is now displayed in the "About" section, which is usually on the right-hand sidebar.
+
+
+Here is a step-by-step illustration:
+
+1. Navigate to Repository
+
+2. Go to Settings
+
+3. Find the "About" Section in Settings
+
+4. Add URL and Save
+
+
+After following these steps, your demo URL should be visible in the "About" section of your GitHub repository.

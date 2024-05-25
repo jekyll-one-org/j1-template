@@ -7,9 +7,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="52px"
-   height="52px"
-   viewBox="0 0 52 52"
+   width="60"
+   height="60"
+   viewBox="0 0 60 60"
    version="1.1"
    id="svg15"
    sodipodi:docname="black-play.svg"
@@ -35,19 +35,20 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1266"
-     inkscape:window-height="1173"
+     inkscape:window-width="1975"
+     inkscape:window-height="1239"
      id="namedview17"
      showgrid="false"
      inkscape:showpageshadow="false"
      inkscape:pagecheckerboard="true"
-     inkscape:zoom="14.134615"
-     inkscape:cx="26"
-     inkscape:cy="26"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:zoom="16.616667"
+     inkscape:cx="30"
+     inkscape:cy="32.407222"
+     inkscape:window-x="163"
+     inkscape:window-y="33"
      inkscape:window-maximized="0"
-     inkscape:current-layer="svg15" />
+     inkscape:current-layer="svg15"
+     inkscape:document-rotation="0" />
   <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
   <title
      id="title2">play-btn</title>
@@ -60,29 +61,30 @@
      stroke="none"
      stroke-width="1"
      fill="none"
-     fill-rule="evenodd">
+     fill-rule="evenodd"
+     transform="matrix(1.1542577,0,0,1.1500242,0.02416529,0.15549175)">
     <g
        id="Spotify-Mini-Player-Concept"
-       transform="translate(-439.000000, -475.000000)">
+       transform="translate(-439,-475)">
       <g
          id="Player"
-         transform="translate(284.000000, 410.000000)">
+         transform="translate(284,410)">
         <g
            id="Controls"
-           transform="translate(70.000000, 66.000000)">
+           transform="translate(70,66)">
           <g
              id="play-btn"
-             transform="translate(86.000000, 0.000000)">
+             transform="translate(86)">
             <circle
                id="Oval-3"
-               stroke="#FFFFFF"
+               stroke="#ffffff"
                cx="25"
                cy="25"
                r="25" />
             <path
-               d="M21.0508333,14.2608333 L33.6408333,24.1108333 C33.9283333,24.3633333 34.165,24.6108333 34.165,25.0066667 L34.165,25.0066667 C34.165,25.4016667 33.9966667,25.6416667 33.6408333,25.9016667 L21.0508333,35.7525 C20.8416667,35.8958333 20.0125,35.9575 20.0016667,35.0358333 L20.0016667,14.9766667 C20.0025,14.1241667 20.76,14.0566667 21.0508333,14.2608333 L21.0508333,14.2608333 Z"
+               d="m 21.050833,14.260833 12.59,9.85 c 0.2875,0.2525 0.524167,0.5 0.524167,0.895834 v 0 c 0,0.395 -0.168333,0.635 -0.524167,0.895 l -12.59,9.850833 c -0.209166,0.143333 -1.038333,0.205 -1.049166,-0.716667 V 14.976667 c 8.33e-4,-0.8525 0.758333,-0.92 1.049166,-0.715834 z"
                id="path-1"
-               fill="#FFFFFF" />
+               fill="#ffffff" />
           </g>
         </g>
       </g>

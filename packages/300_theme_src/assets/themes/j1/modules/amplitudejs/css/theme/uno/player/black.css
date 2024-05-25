@@ -33,7 +33,7 @@ div#black-player-playlist {
 }
 
 div#black-player-controls {
-  height: 130px;
+  height: 140px;
 }
 
 div#black-player-controls img.playlist-album-art {
@@ -96,23 +96,6 @@ div#black-player-controls div.black-player-controls-container div#progress-conta
   border: none;
 }
 
-@media all and (-ms-high-contrast: none) {
-
-  div#black-player-controls div.black-player-controls-container div#progress-container-black *::-ms-backdrop,
-  div#black-player-controls div.black-player-controls-container div#progress-container-black progress#song-played-progress-black {
-    color: #FFFFFF;
-    border: none;
-    background-color: #E1E1E1;
-  }
-}
-
-@supports (-ms-ime-align: auto) {
-  div#black-player-controls div.black-player-controls-container div#progress-container-black progress#song-played-progress-black {
-    color: #FFFFFF;
-    border: none;
-  }
-}
-
 div#black-player-controls div.black-player-controls-container div#progress-container-black progress#song-played-progress-black[value]::-webkit-progress-bar {
   background: none;
   border-radius: 5px;
@@ -169,6 +152,104 @@ div#black-player-controls div.black-player-controls-container div#progress-conta
 
 div#black-player-controls div.black-player-controls-container div#progress-container-black progress::-ms-fill {
   border: none;
+}
+
+div#black-player-controls div.black-player-controls-container div#progress-container-black input[type=range]:focus::-ms-fill-lower {
+  background: #FFFFFF;
+}
+
+div#black-player-controls div.black-player-controls-container div#progress-container-black input[type=range]:focus::-ms-fill-upper {
+  background: #FFFFFF;
+}
+
+div#black-player-controls div.black-player-controls-container div#shuffle-black {
+  display: inline-block;
+  width: 15px;
+  height: 14px;
+  cursor: pointer;
+  vertical-align: middle;
+  margin-right: 25px;
+  margin-left: -16px;
+}
+
+div#black-player-controls div.black-player-controls-container div#shuffle-black.amplitude-shuffle-off {
+  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-shuffle-off.svg");
+}
+
+div#black-player-controls div.black-player-controls-container div#shuffle-black.amplitude-shuffle-on {
+  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-shuffle-on.svg");
+}
+
+div#black-player-controls div.black-player-controls-container div#previous-black {
+  display: inline-block;
+  height: 19px;
+  width: 16px;
+  cursor: pointer;
+  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-previous.svg");
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+div#black-player-controls div.black-player-controls-container div#play-pause-black {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  vertical-align: middle;f
+  margin-right: 10px;
+}
+
+div#black-player-controls div.black-player-controls-container div#play-pause-black.amplitude-paused {
+  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-play.svg");
+}
+
+div#black-player-controls div.black-player-controls-container div#play-pause-black.amplitude-playing {
+  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-pause.svg");
+}
+
+div#black-player-controls div.black-player-controls-container div#next-black {
+  display: inline-block;
+  height: 19px;
+  width: 16px;
+  cursor: pointer;
+  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-next.svg");
+  vertical-align: middle;
+  margin-right: 25px;
+  margin-left: 10px;
+}
+
+div#black-player-controls div.black-player-controls-container div#repeat-black {
+  display: inline-block;
+  width: 15px;
+  height: 16px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+div#black-player-controls div.black-player-controls-container div#repeat-black.amplitude-repeat-off {
+  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-repeat-off.svg");
+}
+
+div#black-player-controls div.black-player-controls-container div#repeat-black.amplitude-repeat-on {
+  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-repeat-on.svg");
+}
+
+/*
+@supports (-ms-ime-align: auto) {
+  div#black-player-controls div.black-player-controls-container div#progress-container-black progress#song-played-progress-black {
+    color: #FFFFFF;
+    border: none;
+  }
+}
+
+@media all and (-ms-high-contrast: none) {
+
+  div#black-player-controls div.black-player-controls-container div#progress-container-black *::-ms-backdrop,
+  div#black-player-controls div.black-player-controls-container div#progress-container-black progress#song-played-progress-black {
+    color: #FFFFFF;
+    border: none;
+    background-color: #E1E1E1;
+  }
 }
 
 @-moz-document url-prefix() {
@@ -334,85 +415,7 @@ div#black-player-controls div.black-player-controls-container div#progress-conta
     margin-top: 3px;
   }
 }
-
-div#black-player-controls div.black-player-controls-container div#progress-container-black input[type=range]:focus::-ms-fill-lower {
-  background: #FFFFFF;
-}
-
-div#black-player-controls div.black-player-controls-container div#progress-container-black input[type=range]:focus::-ms-fill-upper {
-  background: #FFFFFF;
-}
-
-div#black-player-controls div.black-player-controls-container div#shuffle-black {
-  display: inline-block;
-  width: 15px;
-  height: 14px;
-  cursor: pointer;
-  vertical-align: middle;
-  margin-right: 25px;
-  margin-left: -16px;
-}
-
-div#black-player-controls div.black-player-controls-container div#shuffle-black.amplitude-shuffle-off {
-  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-shuffle-off.svg");
-}
-
-div#black-player-controls div.black-player-controls-container div#shuffle-black.amplitude-shuffle-on {
-  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-shuffle-on.svg");
-}
-
-div#black-player-controls div.black-player-controls-container div#previous-black {
-  display: inline-block;
-  height: 19px;
-  width: 16px;
-  cursor: pointer;
-  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-previous.svg");
-  vertical-align: middle;
-  margin-right: 10px;
-}
-
-div#black-player-controls div.black-player-controls-container div#play-pause-black {
-  display: inline-block;
-  width: 52px;
-  height: 52px;
-  cursor: pointer;
-  vertical-align: middle;
-  margin-right: 10px;
-}
-
-div#black-player-controls div.black-player-controls-container div#play-pause-black.amplitude-paused {
-  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-play.svg");
-}
-
-div#black-player-controls div.black-player-controls-container div#play-pause-black.amplitude-playing {
-  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-pause.svg");
-}
-
-div#black-player-controls div.black-player-controls-container div#next-black {
-  display: inline-block;
-  height: 19px;
-  width: 16px;
-  cursor: pointer;
-  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-next.svg");
-  vertical-align: middle;
-  margin-right: 25px;
-}
-
-div#black-player-controls div.black-player-controls-container div#repeat-black {
-  display: inline-block;
-  width: 15px;
-  height: 16px;
-  cursor: pointer;
-  vertical-align: middle;
-}
-
-div#black-player-controls div.black-player-controls-container div#repeat-black.amplitude-repeat-off {
-  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-repeat-off.svg");
-}
-
-div#black-player-controls div.black-player-controls-container div#repeat-black.amplitude-repeat-on {
-  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-repeat-on.svg");
-}
+*/
 
 div.black-player-song {
   border-bottom: 1px solid #979797;
@@ -482,7 +485,6 @@ body span.playlist-title {
   font-family: "Lato", sans-serif;
   width: 100%;
 }
-*/
 
 @media screen and (max-width: 39.9375em) {
   body div.example-container {
@@ -503,6 +505,7 @@ body span.playlist-title {
     padding-left: 20px;
   }
 }
+*/
 
 /* 4. Pages
 -------------------------------------------------------------------------------- */

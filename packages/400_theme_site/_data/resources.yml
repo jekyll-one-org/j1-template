@@ -1962,7 +1962,7 @@ resources:
     resource:
       enabled:                          true
 
-      id:                               amplitude-js
+      id:                               amplitudejs
       comment:                          Module AmplitudeJS
       region:                           head
       layout:                           [ home, page, post ]
