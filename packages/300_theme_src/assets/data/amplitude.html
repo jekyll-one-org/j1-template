@@ -8,7 +8,7 @@ exclude_from_search:                    true
 {% comment %}
  # -----------------------------------------------------------------------------
  # ~/assets/data/amplitude.html
- # Liquid procedure to generate UI HTML portion for AmplitudeJS
+ # Liquid procedure to generate HTML (UI) portion for AmplitudeJS v4 Players
  #
  # Product/Info:
  # https://jekyll.one
@@ -68,7 +68,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
 <html lang="{{site.language}}">
 
   <head>
-    <title>HTML portion (UI) for AmplitudeJS players</title>
+    <title>HTML portion (UI) for AmplitudeJS v4 Players</title>
     <!-- [INFO   ] [~/assets/data/amplitude.html                 ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
     <meta name="robots" content="noindex, nofollow">
     <meta name="amplitude" content="module data file">
@@ -232,27 +232,30 @@ amplitude_defaults: {{amplitude_defaults | debug}}
 
             <progress id="mini-player-progress" class="amplitude-song-played-progress"></progress>
 
-            <div class="time-container">
-              <span class="current-time">
-                <span class="amplitude-current-minutes"></span>:<span class="amplitude-current-seconds"></span>
-              </span>
-              <span class="duration">
-                <span class="amplitude-duration-minutes"></span>:<span class="amplitude-duration-seconds"></span>
-              </span>
-            </div> <!-- END time container -->
-
             {% for item in playlist_items %} {% if item.enabled %}
             <!-- collect a SINGLE item (title) -->
             {% if forloop.index0 == 1 %} {% break %} {% endif %}
+
+            <div class="time-container">
+              <span class="current-time">
+                <span class="amplitude-current-minutes" data-amplitude-song-index="{{forloop.index0}}" data-amplitude-playlist="{{player_playlist}}"></span>:<span class="amplitude-current-seconds" data-amplitude-song-index="{{forloop.index0}}" data-amplitude-playlist="{{player_playlist}}"></span>
+              </span>
+              <span class="duration">
+                <span class="amplitude-duration-minutes" data-amplitude-song-index="{{forloop.index0}}" data-amplitude-playlist="{{player_playlist}}"></span>:<span class="amplitude-duration-seconds" data-amplitude-song-index="{{forloop.index0}}" data-amplitude-playlist="{{player_playlist}}"></span>
+              </span>
+            </div> <!-- END time container -->
+
             <div class="mini-player control-container" data-amplitude-playlist="{{player_playlist}}">
-              <div id="play-pause" class="amplitude-play-pause"></div>
-              <div class="meta-container mini-player">
-                <span data-amplitude-playlist="{{player_playlist}}" data-amplitude-song-info="name" class="song-name"></span>
-                <span class="mini-player-song-artist-album">
-                  <span data-amplitude-playlist="{{player_playlist}}" data-amplitude-song-info="artist" data-amplitude-song-index="{{forloop.index0}}"></span>
-                  <span data-amplitude-playlist="{{player_playlist}}" data-amplitude-song-info="album" data-amplitude-song-index="{{forloop.index0}}" style="margin-top: 5px; margin-bottom: 15px"></span>
-                </span>
-              </div> <!-- END meta-container -->
+              <div id="play-pause" class="amplitude-play-pause" data-amplitude-playlist="{{player_playlist}}"></div>
+              <!-- div class="meta-container mini-player" -->
+              <div id="meta-container">
+                <span class="song-name" data-amplitude-playlist="{{player_playlist}}" data-amplitude-song-info="name" style="margin-bottom: 5px"></span>
+                <!-- div class="song-artist-album" -->
+                <div class="audio-artist-album">
+                  <span data-amplitude-playlist="{{player_playlist}}" data-amplitude-song-info="artist"></span>
+                  <span data-amplitude-playlist="{{player_playlist}}" data-amplitude-song-info="album"></span>
+                </div>
+              </div> <!-- END meta container -->
               {% endif %} {% endfor %}
               <div id="volume-container" class="mini-player-volume-container">
                 <img src="/assets/themes/j1/modules/amplitudejs/icons/volume.svg" alt="volume icon">
@@ -382,8 +385,9 @@ amplitude_defaults: {{amplitude_defaults | debug}}
 
             <div id="player-bottom">
               <div id="time-container_compact-player">
-                <span class="amplitude-current-time time-container"></span>
-                <span class="amplitude-duration-time time-container"></span>
+                <span class="amplitude-current-time time-container" data-amplitude-playlist="{{player_playlist}}"></span>
+                <span class="amplitude-current-time" data-amplitude-playlist="{playlist_key}"></span>
+                <span class="amplitude-duration-time time-container" data-amplitude-playlist="{{player_playlist}}"></span>
               </div> <!-- END time-container -->
 
               <div id="meta-container">
@@ -426,14 +430,17 @@ amplitude_defaults: {{amplitude_defaults | debug}}
           alt="album cover"
         >
 
-        <div id="large-visualization" class="amplitude-visualization"></div>
+        <div id="player-progress-bar-container">
+          <progress id="large-player-progress" class="amplitude-song-played-progress"></progress>
+        </div> <!-- END player-progress-bar -->
+
         <div id="player-left-bottom">
-          <div id="time-container">
+          <!-- div id="time-container">
             <span class="current-time">
               <span class="amplitude-current-minutes"></span> : <span class="amplitude-current-seconds"></span>
             </span>
             <div id="progress-container">
-              <div class="amplitude-wave-form"></div>
+              <div class="amplitude-wave-form" data-amplitude-song-index="0" data-amplitude-playlist="{{player_playlist}}"></div>
               <input type="range" class="amplitude-song-slider">
               <progress id="song-played-progress" class="amplitude-song-played-progress"></progress>
               <progress id="song-buffered-progress" class="amplitude-buffered-progress" value="0"></progress>
@@ -441,8 +448,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
             <span class="duration">
               <span class="amplitude-duration-minutes"></span> : <span class="amplitude-duration-seconds"></span>
             </span>
-          </div>
-
+          </div -->
 
           <div id="control-container">
 
@@ -488,13 +494,31 @@ amplitude_defaults: {{amplitude_defaults | debug}}
 
           </div>
 
-          <div id="meta-container">
+          <!-- div id="meta-container">
             <span data-amplitude-playlist="{{player_playlist}}" data-amplitude-song-info="name" class="song-name"></span>
             <div class="audio-artist-album">
               <span data-amplitude-playlist="{{player_playlist}}" data-amplitude-song-info="artist"></span>
               <span data-amplitude-playlist="{{player_playlist}}" data-amplitude-song-info="album"></span>
             </div>
-          </div>
+          </div -->
+
+          <div id="player-bottom">
+            <div id="time-container_compact-player">
+              <span class="amplitude-current-time time-container"></span>
+              <span class="amplitude-duration-time time-container"></span>
+            </div>
+            <!-- END time-container -->
+
+            <div id="meta-container">
+              <span class="song-name" data-amplitude-playlist="{{player_playlist}}" data-amplitude-song-info="name" style="margin-bottom: 5px"></span>
+              <!-- div class="song-artist-album" -->
+              <div class="audio-artist-album">
+                <span data-amplitude-playlist="{{player_playlist}}" data-amplitude-song-info="artist"></span>
+                <span data-amplitude-playlist="{{player_playlist}}" data-amplitude-song-info="album"></span>
+              </div>
+            </div> <!-- END meta container -->
+          </div> <!-- END player bottom -->
+
         </div>
       {% endcapture %}
 

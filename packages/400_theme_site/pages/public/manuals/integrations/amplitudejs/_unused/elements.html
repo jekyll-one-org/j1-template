@@ -1,0 +1,541 @@
+<div class="content">
+<h1 id="elements-introduction"><a href="#elements-introduction" aria-hidden="true" class="header-anchor">#</a> Elements Introduction</h1>
+<div class="carbon-ads">
+<script id="_carbonads_js" src="//cdn.carbonads.com/carbon.js?serve=CE7IP23L&amp;placement=521dimensionscom"></script>
+<div id="carbonads">
+<span>
+<span class="carbon-wrap">
+<a href="https://srv.carbonads.net/ads/click/x/GTND427JCAYI65QJF6Y4YKQUC6SDKK77CVYILZ3JCAYIK2QLF67IT2JKCYSIK2JECKSI4K7WCEBITKQECK7IVK3KC6SI427JCYSIKK3EHJNCLSIZ" class="carbon-img" target="_blank" rel="noopener sponsored">
+<img src="https://srv.carbonads.net/static/30242/c70c3a4593191dc15345e56b6d3c7bb9df2681ec" alt="ads via Carbon" border="0" height="100" width="130" data-no-statview="no" style="max-width: 130px;">
+</a>
+<a href="https://srv.carbonads.net/ads/click/x/GTND427JCAYI65QJF6Y4YKQUC6SDKK77CVYILZ3JCAYIK2QLF67IT2JKCYSIK2JECKSI4K7WCEBITKQECK7IVK3KC6SI427JCYSIKK3EHJNCLSIZ" class="carbon-text" target="_blank" rel="noopener sponsored">
+
+  <div class="content">
+     <h1 id="interactive-elements"><a href="#interactive-elements" aria-hidden="true" class="header-anchor">#</a> Interactive Elements</h1>
+     <div class="carbon-ads">
+        <script id="_carbonads_js" src="//cdn.carbonads.com/carbon.js?serve=CE7IP23L&amp;placement=521dimensionscom"></script>
+        <div id="carbonads"><span>
+           <span class="carbon-wrap">
+           <a href="https://srv.carbonads.net/ads/click/x/GTND427JCAYI65QJF6Y4YKQUC6SDKK7WFT7DPZ3JCAYIK2QIF6SI55QKCYSIK2JECKSI4K7WCEBITKQECEYDL2JKC6SI427JCYSIKK3EHJNCLSIZ" class="carbon-img" target="_blank" rel="noopener sponsored">
+           <img src="https://srv.carbonads.net/static/30242/4f7f59796c5dda8f5dfc63a40583dfde7cebb050" alt="ads via Carbon" border="0" height="100" width="130" data-no-statview="no" style="max-width: 130px;">
+           </a>
+           <a href="https://srv.carbonads.net/ads/click/x/GTND427JCAYI65QJF6Y4YKQUC6SDKK7WFT7DPZ3JCAYIK2QIF6SI55QKCYSIK2JECKSI4K7WCEBITKQECEYDL2JKC6SI427JCYSIKK3EHJNCLSIZ" class="carbon-text" target="_blank" rel="noopener sponsored">
+           Design and Development tips in your inbox. Every weekday.
+           </a>
+           </span>
+           <a href="http://carbonads.net/?utm_source=521dimensionscom&amp;utm_medium=ad_via_link&amp;utm_campaign=in_unit&amp;utm_term=carbon" class="carbon-poweredby" target="_blank" rel="noopener sponsored">ads via Carbon</a>
+           </span>
+        </div>
+     </div>
+     <p>The interactive elements of AmplitudeJS have event handlers bound to them that
+        responds to a touch or click from a user. These elements build the functionality
+        of the player you are designing. The scoping of these elements is handled by
+        attributes that define the level of functionality each element has such as
+        global, playlist, individual song or individual song in playlist. These are outlined in detail for each element.
+     </p>
+     <h2 id="play-button"><a href="#play-button" aria-hidden="true" class="header-anchor">#</a> Play Button</h2>
+     <p>There are 4 different levels for a play button.</p>
+     <ol>
+        <li>Global Play - Plays the current song whether it's an individual song or in a
+           playlist
+        </li>
+        <li>Playlist Play - Plays the current song in the playlist.</li>
+        <li>Song Play - Plays an individual song by itself.</li>
+        <li>Plays an individual song in a playlist.</li>
+     </ol>
+     <p>The play button responds to the 'click' event on a desktop or a 'touchstart'
+        event on mobile.
+     </p>
+     <h3 id="global-play-button"><a href="#global-play-button" aria-hidden="true" class="header-anchor">#</a> Global Play Button</h3>
+     <p>The global play button will play the active song whether or not the song is an
+        individual song or in a playlist. To add a global play button simply an HTML
+        element with the class <code>amplitude-play</code>.
+     </p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-play<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+     <h3 id="playlist-play-button"><a href="#playlist-play-button" aria-hidden="true" class="header-anchor">#</a> Playlist Play Button</h3>
+     <p>The playlist play button will play the active song in the playlist or it will
+        play the first song in the playlist if the playlist is out of scope (meaning
+        another playlist was being played or it's the first playlist being played). To
+        add a playlist play button, add an HTML element with the class of
+        <code>amplitude-play</code> and the attribute <code>data-amplitude-playlist="playlist_index"</code>.
+     </p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-play<span class="token punctuation">"</span></span> <span class="token attr-name">data-amplitude-playlist</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{playlist_index}<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+     <h3 id="individual-song-play-button"><a href="#individual-song-play-button" aria-hidden="true" class="header-anchor">#</a> Individual Song Play Button</h3>
+     <p>The individual song play button will play the song defined by the <code>data-amplitude-song-index="{song_index}"</code> attribute.</p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-play<span class="token punctuation">"</span></span> <span class="token attr-name">data-amplitude-song-index</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{song_index}<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+     <h3 id="individual-song-in-playlist-button"><a href="#individual-song-in-playlist-button" aria-hidden="true" class="header-anchor">#</a> Individual Song In Playlist Button</h3>
+     <p>The individual playlist button is a combination of the attributes <code>data-amplitude-song-index="{song_index}"</code> and <code>data-amplitude-playlist="{playlist}"</code>. This will play an individual song in a playlist as defined.</p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-play<span class="token punctuation">"</span></span> <span class="token attr-name">data-amplitude-song-index</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>1<span class="token punctuation">"</span></span> <span class="token attr-name">data-amplitude-playlist</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>test_playlist<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+     <h2 id="pause-button"><a href="#pause-button" aria-hidden="true" class="header-anchor">#</a> Pause Button</h2>
+     <p>The pause button has 4 different levels.</p>
+     <ol>
+        <li>Global Pause - Pauses the active song no matter if it's individual or in a
+           playlist.
+        </li>
+        <li>Playlist Pause - Pauses the active song in the playlist.</li>
+        <li>Song Pause - Pauses an individual song.</li>
+        <li>Song In Playlist Pause - Pauses an individual song in a playlist.</li>
+     </ol>
+     <p>The pause button responds to the 'click' event on a desktop or a 'touchstart'
+        event on mobile.
+     </p>
+     <h3 id="global-pause"><a href="#global-pause" aria-hidden="true" class="header-anchor">#</a> Global Pause</h3>
+     <p>The global pause button will pause whatever song is currently playing. To add a
+        global pause button simply add an HTML element with the class of 'amplitude-pause'.
+     </p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-pause<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+     <h3 id="playlist-pause"><a href="#playlist-pause" aria-hidden="true" class="header-anchor">#</a> Playlist Pause</h3>
+     <p>The playlist pause button will pause the active song in the playlist. It only
+        works if the playlist defined in the attribute is playing the song.
+     </p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-pause<span class="token punctuation">"</span></span> <span class="token attr-name">data-amplitude-playlist</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{playlist}<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+     <h3 id="individual-song-pause"><a href="#individual-song-pause" aria-hidden="true" class="header-anchor">#</a> Individual Song Pause</h3>
+     <p>The individual song pause button will pause the song defined by the attribute <code>data-amplitude-song-index="song_index"</code>.</p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-pause<span class="token punctuation">"</span></span> <span class="token attr-name">data-amplitude-song-index</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{song_index}<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+     <h3 id="individual-song-in-playlist-pause"><a href="#individual-song-in-playlist-pause" aria-hidden="true" class="header-anchor">#</a> Individual Song In Playlist Pause</h3>
+     <p>If you want to pause an individual song in a playlist, you need to add both the <code>data-amplitude-song-index="{song_index}"</code> and the <code>data-amplitude-playlist="{playlist}"</code> attributes.</p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-pause<span class="token punctuation">"</span></span> <span class="token attr-name">data-amplitude-song-index</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{song_index}<span class="token punctuation">"</span></span> <span class="token attr-name">data-amplitude-playlist</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{playlist}<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+     <h2 id="play-pause-button"><a href="#play-pause-button" aria-hidden="true" class="header-anchor">#</a> Play Pause Button</h2>
+     <p>The play/pause button is probably the most common button to be implemented when
+        working with AmplitudeJS. Depending on the global state, playlist state and/or
+        song state, this element will get a class that is <code>amplitude-playing</code> or
+        <code>amplitude-paused</code> that can be styled accordingly. It's common to set a play or
+        pause button image as a background in CSS so when the interaction occurs, the
+        proper button appears.
+     </p>
+     <p>There are 3 levels of Play/Pause buttons.</p>
+     <ol>
+        <li>Global Play/Pause - Plays or pauses the active song no matter if it's
+           independent or part of a playlist.
+        </li>
+        <li>Playlist Play/Pause - Plays or pauses the active song in the scope of the playlist.</li>
+        <li>Song Play/Pause - Plays or pauses an individual song.</li>
+        <li>Song In Playlist Play/Pause - Plays or pauses an individual song in the playlist.</li>
+     </ol>
+     <h3 id="global-play-pause"><a href="#global-play-pause" aria-hidden="true" class="header-anchor">#</a> Global Play/Pause</h3>
+     <p>The global play pause button plays or pauses the current song depending on the
+        state of the AmplitudeJS player. This button does not account for whether the
+        song is in a playlist or an individual song, it's whatever song is active the
+        functionality works on.
+     </p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-play-pause<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+     <h3 id="playlist-play-pause"><a href="#playlist-play-pause" aria-hidden="true" class="header-anchor">#</a> Playlist Play/Pause</h3>
+     <p>The playlist play pause button plays or pauses the current song in a playlist.
+        If a song is being played outside of a playlist when clicked, the playlist will
+        play the first song in the playlist assigned to the button clicked and pause the
+        other song. To add a playlist play pause button add an element with the class of <code>amplitude-play-pause</code> an attribute of <code>data-amplitude-playlist="{playlist-index}</code>.
+     </p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-play-pause<span class="token punctuation">"</span></span> <span class="token attr-name">data-amplitude-playlist</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{playlist}<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+     <h3 id="song-play-pause"><a href="#song-play-pause" aria-hidden="true" class="header-anchor">#</a> Song Play/Pause</h3>
+     <p>The song play pause button plays or pauses an individual song when clicked.</p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-play-pause<span class="token punctuation">"</span></span> <span class="token attr-name">data-amplitude-song-index</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{song_index}<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+     <h3 id="song-in-playlist-play-pause"><a href="#song-in-playlist-play-pause" aria-hidden="true" class="header-anchor">#</a> Song In Playlist Play/Pause</h3>
+     <p>The song in playlist play pause button plays or pauses an individual song in a playlist when clicked. This is defined by a combination of the <code>data-amplitude-song-index="{song_index}"</code> attributes and the <code>data-amplitude-playlist="{playlist}"</code> attributes.</p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-play-pause<span class="token punctuation">"</span></span> <span class="token attr-name">data-amplitude-song-index</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{song_index}<span class="token punctuation">"</span></span> <span class="token attr-name">data-amplitude-playlist</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{playlist}<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+     <h2 id="stop-button"><a href="#stop-button" aria-hidden="true" class="header-anchor">#</a> Stop Button</h2>
+     <p>There is only one level for the stop button:</p>
+     <ol>
+        <li>Global - Stops whatever song is playing.</li>
+     </ol>
+     <p>The stop button simply stops the active song. On a desktop, this will respond to
+        the 'click' event and a 'touchstart' on mobile. To add a stop button simply add
+        the following HTML element:
+     </p>
+     <h3 id="global-stop-button"><a href="#global-stop-button" aria-hidden="true" class="header-anchor">#</a> Global Stop Button</h3>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-stop<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+     <h2 id="mute-button"><a href="#mute-button" aria-hidden="true" class="header-anchor">#</a> Mute Button</h2>
+     <p>There is only one level for the mute button:</p>
+     <ol>
+        <li>Global - Mutes the current song.</li>
+     </ol>
+     <p>The mute button is another global element that mutes the active song. On a
+        desktop, this element will respond to the 'click' event and a 'touchstart' on
+        mobile.
+        There are two classes that get added to the mute button so you can style it
+        according to the state of the player.
+     </p>
+     <p>When the player is not muted the class <code>amplitude-not-muted</code> is added to the
+        element and <code>amplitude-muted</code> is added when the player is muted.
+     </p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-mute<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+     <h2 id="volume-up"><a href="#volume-up" aria-hidden="true" class="header-anchor">#</a> Volume Up</h2>
+     <p>There is only one level for the volume up button:</p>
+     <ol>
+        <li>Global - Increases the volume by the amount specified on init. Default 5%.</li>
+     </ol>
+     <p>The volume up button increments the volume by the amount defined in the config.
+        By default the increment is 5. To change the increment you must adjust the
+        volume_increment setting in the <code>Amplitude.init()</code> method. This element will
+        respond to a <code>click</code> on desktop or a <code>touchstart</code> event on mobile. On iPhones,
+        the user can not adjust the volume through the web page. To add a volume up
+        element add:
+     </p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-volume-up<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+     <h2 id="volume-down"><a href="#volume-down" aria-hidden="true" class="header-anchor">#</a> Volume Down</h2>
+     <p>There is only one level for the volume down button:</p>
+     <ol>
+        <li>Global - Decreases the volume by the amount specified on init. Default 5%.</li>
+     </ol>
+     <p>The volume down button decrements the volume by the amount defined in the
+        config. By default the decrement is 5. To change the increment you must adjust
+        the volume_decrement setting in the <code>Amplitude.init()</code> method. This element will
+        respond to a 'click' on desktop or a 'touchstart' event on mobile. On iPhones,
+        the user can not adjust the volume through the web page. To add a volume up
+        element add:
+     </p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-volume-down<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+     <h2 id="volume-slider"><a href="#volume-slider" aria-hidden="true" class="header-anchor">#</a> Volume Slider</h2>
+     <p>There is only one level for the volume slider:</p>
+     <ol>
+        <li>Global - Increases or Decreases the volume by sliding the range element.</li>
+     </ol>
+     <p>The volume slider MUST be an HTML 5 range input element. This allows the user to
+        slide the volume to where they want. On desktop and mobile,
+        this element listens to a 'change' or 'input' event. It will not work on iPhones
+        since iOS doesn't allow the user to adjust the volume through anything but the
+        volume up and down hardware buttons. To add a volume slider, add the following
+        HTML:
+     </p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>range<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-volume-slider<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+  </code></pre>
+     </div>
+     <h2 id="next-button"><a href="#next-button" aria-hidden="true" class="header-anchor">#</a> Next Button</h2>
+     <p>AmplitudeJS extends functionality for the audio tag by allowing designers and
+        developers to build playlists. When a next button has been added AmplitudeJS
+        will go to the next song in the state of the player.
+     </p>
+     <p>There are two levels of the next button.</p>
+     <ol>
+        <li>Global Next - Will go to the next song in the state no matter what state
+           the player is in. If the player is playing a specific playlist, the global next button will go to the next song in the list.
+        </li>
+        <li>Playlist Next - Will go to the next song in the playlist.</li>
+     </ol>
+     <p>The next button will either go sequentially down the indexes or the next index
+        in the shuffled songs array. If the player is playing a playlist, then the
+        global next button will operate on that playlist.
+     </p>
+     <h3 id="global-next-button"><a href="#global-next-button" aria-hidden="true" class="header-anchor">#</a> Global Next Button</h3>
+     <p>To add a global next button add the following HTML:</p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-next<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+     <h3 id="playlist-next-button"><a href="#playlist-next-button" aria-hidden="true" class="header-anchor">#</a> Playlist Next Button</h3>
+     <p>To add a playlist next button add the following HTML:</p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-next<span class="token punctuation">"</span></span> <span class="token attr-name">data-amplitude-playlist</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{playlist_key}<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+     <p>The playlist next button has a <code>data-amplitude-playlist</code> attribute with the key for the playlist it's corresponding to.</p>
+     <p>A quick note on the playlist next buttons. If you have two playlists (A &amp; B), and you are playing playlist A, but press a next button that is relating to playlist B, the next button won't do anything.</p>
+     <h2 id="previous-button"><a href="#previous-button" aria-hidden="true" class="header-anchor">#</a> Previous Button</h2>
+     <p>Similar to the next button, the previous button goes to the previous song in the
+        state of the player. There are two levels of the previous button.
+     </p>
+     <ol>
+        <li>Global Previous - Will go to the previous song in the state no matter what state the player is in.</li>
+        <li>Playlist Previous - Will go to the previous song in the playlist no matter the state.</li>
+     </ol>
+     <p>The previous button will go sequentially down the indexes or to the previous
+        index in the shuffled songs array. If the player is playing a playlist,
+        the global previous button will operate on that playlist.
+     </p>
+     <h3 id="global-previous-button"><a href="#global-previous-button" aria-hidden="true" class="header-anchor">#</a> Global Previous Button</h3>
+     <p>To add a global previous button add the following HTML:</p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-prev<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+     <h3 id="playlist-previous-button"><a href="#playlist-previous-button" aria-hidden="true" class="header-anchor">#</a> Playlist Previous Button</h3>
+     <p>To add a playlist previous button add the following HTML:</p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-prev<span class="token punctuation">"</span></span> <span class="token attr-name">data-amplitude-playlist</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{playlist_key}<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+     <p>The playlist previous button has a <code>data-amplitude-playlist</code> attribute with the key for the playlist it's corresponding to. Similar to the next buttons, if you have two playlists and you click a previous button scoped to the inactive playlist, then it won't do anything.</p>
+     <h2 id="shuffle-button"><a href="#shuffle-button" aria-hidden="true" class="header-anchor">#</a> Shuffle Button</h2>
+     <p>The shuffle button has two levels:</p>
+     <ol>
+        <li>Global Shuffle Button - Shuffles the songs array. This is used outside the scope of the playlist.</li>
+        <li>Playlist Shuffle Button - Shuffles all of the songs in a playlist. This state is kept on a per-playlist basis.</li>
+     </ol>
+     <p>The shuffle button is also an extension of functionality added by AmplitudeJS. It allows the developer/user to shuffle songs in a playlist or on a global level.</p>
+     <p>Playlists can have shuffle states independent of other playlists. When a song ends or the user goes to the next song, AmplitudeJS will know whether or not the playlist should go to the next sequential user defined song or the next song in the shuffle array.  When a playlist is shuffled or the global songs are shuffled a class of <code>amplitude-shuffle-on</code> is applied to the element where if shuffle is turned off <code>ampltiude-shuffle-off</code> is applied to the element.</p>
+     <h3 id="global-shuffle-button"><a href="#global-shuffle-button" aria-hidden="true" class="header-anchor">#</a> Global Shuffle Button</h3>
+     <p>To add a shuffle button add the following HTML:</p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-shuffle<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+     <h3 id="playlist-shuffle-button"><a href="#playlist-shuffle-button" aria-hidden="true" class="header-anchor">#</a> Playlist Shuffle Button</h3>
+     <p>To add a playlist shuffle button add the following HTML:</p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-shuffle<span class="token punctuation">"</span></span> <span class="token attr-name">data-amplitude-playlist</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{playlist_key}<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+     <p>This shuffle button contains the attribute that defines the playlist key. This
+        will shuffle only the playlist defined.
+     </p>
+     <h2 id="repeat-button"><a href="#repeat-button" aria-hidden="true" class="header-anchor">#</a> Repeat Button</h2>
+     <p>The repeat button, when active, will repeat the entire songs array when the last song has been played.</p>
+     <p>There are two levels to the Repeat Button:</p>
+     <ol>
+        <li>Global Repeat - Repeats the songs in the songs array when the last song has finished.</li>
+        <li>Playlist Repeat - Repeats the playlist when the last song in the playlist has finished.</li>
+     </ol>
+     <p>The buttons can be styled based off of the state of the classes applied to the button. When repeat is not on, the button will have a class of <code>amplitude-repeat-off</code> applied to the element and when repeat is on, the class <code>amplitude-repeat-on</code> applied to the element.</p>
+     <h3 id="global-repeat-button"><a href="#global-repeat-button" aria-hidden="true" class="header-anchor">#</a> Global Repeat Button</h3>
+     <p>To add the repeat button, add the following HTML:</p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-repeat<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+     <h3 id="playlist-repeat-button"><a href="#playlist-repeat-button" aria-hidden="true" class="header-anchor">#</a> Playlist Repeat Button</h3>
+     <p>To add a playlist repeat button, add the following HTML:</p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-repeat<span class="token punctuation">"</span></span> <span class="token attr-name">data-amplitude-playlist</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{playlist_key}<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+     <h2 id="repeat-song"><a href="#repeat-song" aria-hidden="true" class="header-anchor">#</a> Repeat Song</h2>
+     <p>There is only one level of the repeat song button:</p>
+     <ol>
+        <li>Global - Repeats the current song when eneded.</li>
+     </ol>
+     <p>The repeat song button, when active, will repeat the individual song when the song has ended. The button can be styled based off of the sate of classes
+        applied to the button. When the repeat is not on, the button will have a class
+        of <code>amplitude-repeat-song-off</code> and when on, <code>amplitude-repeat-song-on</code>.
+     </p>
+     <h3 id="global-repeat-song-button"><a href="#global-repeat-song-button" aria-hidden="true" class="header-anchor">#</a> Global Repeat Song Button</h3>
+     <p>To add the repeat song button, add the following HTML:</p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-repeat-song<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+     <h2 id="playback-speed-button"><a href="#playback-speed-button" aria-hidden="true" class="header-anchor">#</a> Playback Speed Button</h2>
+     <p>There is only one level for the playback speed button:</p>
+     <ol>
+        <li>Global - Determines how fast the audio should play back through AmplitudeJS.</li>
+     </ol>
+     <p>The playback speed button controls how fast the audio is played back through
+        AmplitudeJS. There are 3 speeds.
+     </p>
+     <ol>
+        <li>'1.0' which is the base speed.</li>
+        <li>'1.5' which is 1.5x as fast</li>
+        <li>'2.0' which is 2x as fast</li>
+     </ol>
+     <p>When clicked, the playback speed button will add a class representing the speed
+        the player is playing back at. The classes can be styled as well and are as
+        follows:
+     </p>
+     <ul>
+        <li>'1.0' = 'amplitude-playback-speed-10'</li>
+        <li>'1.5' = 'amplitude-playback-speed-15'</li>
+        <li>'2.0' = 'amplitude-playback-speed-20'</li>
+     </ul>
+     <h3 id="global-playback-speed-button"><a href="#global-playback-speed-button" aria-hidden="true" class="header-anchor">#</a> Global Playback Speed Button</h3>
+     <p>To add a playback speed button simply add the following HTML:</p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-playback-speed<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+     <h2 id="skip-to-link"><a href="#skip-to-link" aria-hidden="true" class="header-anchor">#</a> Skip To Link</h2>
+     <p>There are 2 levels for the skip to link:</p>
+     <ol>
+        <li>Individual Song - Skips to time defined for a song an individual song in the songs array.</li>
+        <li>Individual Song In Playlist - Skips to a time defined for an individual song in a playlist.</li>
+     </ol>
+     <p>The skip to links allow the user to define spots in the audio like bookmarks
+        that can be skipped to. They can reference a song in a playlist or an individual
+        song depending on the attributes. If you want to link to a song in a playlist,
+        you have to add the attribute <code>data-amplitude-song-index="index"</code> and <code>data-amplitude-playlist="playlist"</code>. To make the skip work, you will also have to
+        add an attribute <code>data-amplitude-location="seconds"</code> to link to in the song.
+     </p>
+     <h3 id="individual-song-link"><a href="#individual-song-link" aria-hidden="true" class="header-anchor">#</a> Individual Song Link</h3>
+     <p>An example song link would be:</p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-skip-to<span class="token punctuation">"</span></span> <span class="token attr-name">data-amplitude-song-index</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{song_index}<span class="token punctuation">"</span></span> <span class="token attr-name">data-amplitude-location</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>30<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+     <p>This link will go to the song at the index defined and the location of the seconds defined by the <code>data-amplitude-location</code> attribute into the song.</p>
+     <h3 id="individual-song-in-playlist-link"><a href="#individual-song-in-playlist-link" aria-hidden="true" class="header-anchor">#</a> Individual Song In Playlist Link</h3>
+     <p>An example of an individual song in playlist link would be:</p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-skip-to<span class="token punctuation">"</span></span> <span class="token attr-name">data-amplitude-song-index</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{song_index}<span class="token punctuation">"</span></span> <span class="token attr-name">data-amplitude-location</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>30<span class="token punctuation">"</span></span> <span class="token attr-name">data-amplitude-playlist</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{playlist}<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+     <p>This will skip to 30 seconds into a song in the playlist defined. Remember, the index of the song in the playlist is scoped to the playlist!</p>
+     <h2 id="song-tracking-slider-html-5-range"><a href="#song-tracking-slider-html-5-range" aria-hidden="true" class="header-anchor">#</a> Song Tracking Slider (HTML 5 Range)</h2>
+     <p>There are 4 levels to the song tracking slider:</p>
+     <ol>
+        <li>Global - This tracks whatever song is playing.</li>
+        <li>Playlist - This tracks the song currently playing in the playlist.</li>
+        <li>Individual Song - This tracks an individual song.</li>
+        <li>Individual Song In Playlist - This tracks an individual song within a playlist.</li>
+     </ol>
+     <p>Song tracking sliders are implemented with the HTML 5 range element. This provides a semantic way to navigate through a song. The HTML 5 range element provides functionality and you can style it, even if it's a pain. However, if you are motivated, you can implement a custom song slider using some of the callbacks and public facing methods.</p>
+     <p>
+        Note that features like the tracking slider and progress bar depend on the
+        browser being able to request the audio file in arbitrary chunks. Firefox can
+        work around lack of support from the server, but for these features to work
+        properly, your server must support
+        <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Range" target="_blank" rel="noopener noreferrer">
+           Content-Range HTTP headers
+           <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound">
+              <path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path>
+              <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon>
+           </svg>
+        </a>
+        .
+     </p>
+     <h3 id="global-song-slider"><a href="#global-song-slider" aria-hidden="true" class="header-anchor">#</a> Global Song Slider</h3>
+     <p>To add a global song slider, add the following element:</p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>range<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-song-slider<span class="token punctuation">"</span></span> <span class="token attr-name">step</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>.1<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+  </code></pre>
+     </div>
+     <p>The class name is <code>amplitude-song-slider</code>.  the <code>step</code> attribute makes fine tuning the slider to react more to the current state of the song more fluid.</p>
+     <h3 id="playlist-song-slider"><a href="#playlist-song-slider" aria-hidden="true" class="header-anchor">#</a> Playlist Song Slider</h3>
+     <p>If you want to do an individual playlist, you can add the attribute of <code>data-amplitude-playlist="{playlist_key}"</code>.</p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>range<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-song-slider<span class="token punctuation">"</span></span> <span class="token attr-name">data-amplitude-playlist</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{playlist_key}<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+  </code></pre>
+     </div>
+     <h3 id="individual-song-slider"><a href="#individual-song-slider" aria-hidden="true" class="header-anchor">#</a> Individual Song Slider</h3>
+     <p>You can also add a song slider for an individual song like this:</p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>range<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-song-slider<span class="token punctuation">"</span></span> <span class="token attr-name">data-amplitude-song-index</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{song_index}<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+  </code></pre>
+     </div>
+     <h3 id="individual-song-in-playlist-slider"><a href="#individual-song-in-playlist-slider" aria-hidden="true" class="header-anchor">#</a> Individual Song In Playlist Slider</h3>
+     <p>You can also add a song slider for an individual song in a playlist like this:</p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>range<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-song-slider<span class="token punctuation">"</span></span> <span class="token attr-name">data-amplitude-playlist</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{playlist_key}<span class="token punctuation">"</span></span> <span class="token attr-name">data-amplitude-song-index</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{song_index}<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+  </code></pre>
+     </div>
+     <h2 id="song-progress-bar"><a href="#song-progress-bar" aria-hidden="true" class="header-anchor">#</a> Song Progress Bar</h2>
+     <p>There are 4 levels where you can add a song progress bar:</p>
+     <ol>
+        <li>Global - Displays the current progress for the audio being played.</li>
+        <li>Playlist - Displays the current progress if the current song is in the playlist.</li>
+        <li>Individual Song - Displays the current progress for an individual song.</li>
+        <li>Individual Song In Playlist - Displays the individual song current progress for a song in the playlist.</li>
+     </ol>
+     <p>
+        The song progress bar must be implemented with the HTML 5 progress element. This allows you full customization over the design. These operate the same as the range except you will have to implement your own slider event handling. I wrote a quick tutorial on that here:
+        <a href="https://serversideup.net/set-song-played-percentage-amplitudejs/" target="_blank" rel="noopener noreferrer">
+           https://serversideup.net/set-song-played-percentage-amplitudejs/
+           <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound">
+              <path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path>
+              <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon>
+           </svg>
+        </a>
+        .
+     </p>
+     <h3 id="global-song-progress-bar"><a href="#global-song-progress-bar" aria-hidden="true" class="header-anchor">#</a> Global Song Progress Bar</h3>
+     <p>To add a song progress bar, add the following:</p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>progress</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-song-played-progress<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>progress</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+     <h3 id="playlist-song-progress-bar"><a href="#playlist-song-progress-bar" aria-hidden="true" class="header-anchor">#</a> Playlist Song Progress Bar</h3>
+     <p>To add a playlist song progress bar, add the following:</p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>progress</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-song-played-progress<span class="token punctuation">"</span></span> <span class="token attr-name">data-amplitude-playlist</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{playlist_key}<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>progress</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+     <h3 id="individual-song-progress-bar"><a href="#individual-song-progress-bar" aria-hidden="true" class="header-anchor">#</a> Individual Song Progress Bar</h3>
+     <p>To add an individual song progress bar, add the following:</p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>progress</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-song-played-progress<span class="token punctuation">"</span></span> <span class="token attr-name">data-amplitude-song-index</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{song_index}<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>progress</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+     <h3 id="individual-song-in-playlist-progress-bar"><a href="#individual-song-in-playlist-progress-bar" aria-hidden="true" class="header-anchor">#</a> Individual Song In Playlist Progress Bar</h3>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>progress</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-song-played-progress<span class="token punctuation">"</span></span> <span class="token attr-name">data-amplitude-playlist</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{playlist_key}<span class="token punctuation">"</span></span> <span class="token attr-name">data-amplitude-song-index</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{song_index}<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>progress</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+     <h2 id="song-buffered-progress-bar"><a href="#song-buffered-progress-bar" aria-hidden="true" class="header-anchor">#</a> Song Buffered Progress Bar</h2>
+     <p>There are 4 levels for a song buffered progress bar:</p>
+     <ol>
+        <li>Global - Displays the percentage of the song buffered for the current song.</li>
+        <li>Playlist - Displays the percentage of the song buffered for the current playlist song.</li>
+        <li>Individual Song - Displays the percentage of the song buffered for an individual song.</li>
+        <li>Individual Song In Playlist - Displays the percentage of the song buffered for an individual song in a playlist.</li>
+     </ol>
+     <p>The Song Buffered Progress Bar has to be an HTML 5 progress element. This is the proper semantic element for this use case. This allows for a visual display of how much of the song has been buffered. You can do some CSS techniques to overlay this progress element over the song-played-progress element to make an all in one, or you could leave it by itself.</p>
+     <h3 id="global-song-buffered-progress-bar"><a href="#global-song-buffered-progress-bar" aria-hidden="true" class="header-anchor">#</a> Global Song Buffered Progress Bar</h3>
+     <p>To add a song buffered progress element, add the following:</p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>progress</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-buffered-progress<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>progress</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+     <h3 id="playlist-song-buffered-progress-bar"><a href="#playlist-song-buffered-progress-bar" aria-hidden="true" class="header-anchor">#</a> Playlist Song Buffered Progress Bar</h3>
+     <p>To add a playlist song buffered progress element, add the following:</p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>progress</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-buffered-progress<span class="token punctuation">"</span></span> <span class="token attr-name">data-amplitude-playlist</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{playlist_key}<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>progress</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+     <h3 id="individual-song-buffered-progress-bar"><a href="#individual-song-buffered-progress-bar" aria-hidden="true" class="header-anchor">#</a> Individual Song Buffered Progress Bar</h3>
+     <p>To add an individual song buffered progress element, add the following:</p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>progress</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-buffered-progress<span class="token punctuation">"</span></span> <span class="token attr-name">data-amplitude-song-index</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{song_index}<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>progress</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+     <h3 id="individual-song-in-playlist-buffered-progress-bar"><a href="#individual-song-in-playlist-buffered-progress-bar" aria-hidden="true" class="header-anchor">#</a> Individual Song In Playlist Buffered Progress Bar</h3>
+     <p>To add an individual song in playlist buffered progress element, add the following:</p>
+     <div class="language-html extra-class">
+        <pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>progress</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amplitude-buffered-progress<span class="token punctuation">"</span></span> <span class="token attr-name">data-amplitude-song-index</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{song_index}<span class="token punctuation">"</span></span> <span class="token attr-name">data-amplitude-playlist</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{playlist_key}<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>progress</span><span class="token punctuation">&gt;</span></span>
+  </code></pre>
+     </div>
+  </div>

@@ -1978,12 +1978,12 @@ resources:
                                           modules/amplitudejs/css/theme/uno/player/black,
                                           modules/amplitudejs/css/theme/uno/player/compact,
                                           modules/amplitudejs/css/theme/uno/player/large,
+                                          modules/amplitudejs/css/theme/uno/player/micro,
                                           modules/amplitudejs/css/theme/uno/player/mini
                                         ]
         files:                          [ adapter/js/amplitude.js ]
         js:                             [ modules/amplitudejs/js/amplitude ]
         init_function:                  [ j1.adapter.amplitude.init ]
-
 
 # ------------------------------------------------------------------------------
 # END config

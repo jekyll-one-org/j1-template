@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/modules/amplitudejs/css/theme/uno/player/large.css
- # AmplitudeJS v.4.0.0, Expanded Player
+ # AmplitudeJS v4 Large Player
  #
  # Product/Info:
  # https://jekyll.one
@@ -168,10 +168,10 @@ div#amplitude-left img.album-art {
 div#amplitude-left div#player-left-bottom {
   flex: 1;
   background-color: var(--ajs-theme-uno--blue-gray-900);
-  padding-top: 50px;
+  /* padding-top: 50px;
   padding-right: 10px;
   padding-bottom: 30px;
-  padding-left: 10px;
+  padding-left: 10px; */
 }
 
 div#amplitude-left div#player-left-bottom div#volume-container:after {
@@ -306,9 +306,6 @@ div#progress-container {
   position: relative;
   height: 20px;
   cursor: pointer;
-  /*
-    IE 11
-  */
 }
 
 div#progress-container:hover input[type=range].amplitude-song-slider::-webkit-slider-thumb {
@@ -944,6 +941,10 @@ input[type=range].amplitude-volume-slider:focus::-ms-fill-upper {
 
 input[type=range].amplitude-volume-slider::-ms-tooltip {
   display: none;
+}
+
+div#time-container {
+  margin-top: 30px;
 }
 
 div#time-container span.current-time {

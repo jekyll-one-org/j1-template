@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/modules/amplitudejs/css/theme/uno/player/compact.css
- # Compact Player
+ # AmplitudeJS v4 Compact Player
  #
  # Product/Info:
  # https://jekyll.one
@@ -367,6 +367,7 @@ div#player-bottom div#time-container_compact-player {
   background-color: #000;
   font-size: 14px;
   font-weight: bold;
+  margin-bottom: 25px;
 }
 
 div#player-bottom div#time-container_compact-player span.amplitude-duration-time {

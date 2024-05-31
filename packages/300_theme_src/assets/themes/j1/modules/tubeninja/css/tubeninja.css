@@ -1,0 +1,344 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 180px;
+}
+
+a, a:hover {
+    text-decoration: none;
+}
+
+a, .btn-link {
+    color: #337ab7;
+}
+
+a:hover, a:focus, .btn-link:hover, .btn-link:focus {
+    color: #23527c;
+}
+
+
+.jumbotron {
+    background-position: center;
+    background-size: cover;
+    background-color: #676767;
+    color: white;
+    text-shadow: 0px 0px 20px rgba(0, 0, 0, 1);
+    padding-bottom: 2em;
+    padding-top: 2em;
+    margin-bottom: 10px;
+}
+
+.jumbotron .container {
+    min-height: 230px;
+}
+
+.jumbotron .h1, .jumbotron .main, .jumbotron .h2, .jumbotron .h3, .jumbotron h1, .jumbotron h2, .permtext, .navbar-brand {
+    font-family: 'Permanent Marker', cursive;
+    display: block;
+    line-height: 1em;
+}
+
+.jumbotron span.h1 {
+    font-size: 63px;
+}
+
+.jumbotron .main {
+    margin-top: 20px;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.jumbotron .h2 {
+    margin-top: 0;
+    margin-bottom: 1.5em;
+}
+
+.jumbotron form {
+    margin: auto;
+    width: 60%;
+}
+
+@media screen and (max-width: 992px) {
+    .jumbotron form {
+        width: 100%;
+    }
+}
+
+.jumbotron .help-block {
+    margin: 0;
+    text-align: left;
+}
+
+.jumbotron .help-block .btn-link {
+    font-family: 'Permanent Marker', cursive;
+    color: white;
+    color: rgba(255, 255, 255, 0.8);
+    text-shadow: 0 0 20px rgba(0, 0, 0, 1);
+}
+
+.footer {
+    height: 180px;
+    margin-top: 1em;
+    border-top: 1px solid lightgrey;
+    position: absolute;
+    padding-top: 0.5em;
+    bottom: 0;
+    width: 100%;
+    background-color: #f5f5f5;
+}
+
+
+.toc + .share {
+    padding-right: 1em;
+}
+
+div.share:before {
+    content: attr(title);
+    position: absolute;
+    margin-top: -1.2em;
+    font-weight: bold;
+}
+
+div.share {
+    display: flex;
+    margin-bottom: 1.5em;
+}
+
+.share a {
+    color: white;
+    padding: 0.4em;
+    font-size: 1.5em;
+    display: inline-flex;
+    flex-grow: 1;
+    text-align: center;
+    min-height: 2em;
+    text-decoration: none;
+    opacity: 0.8;
+}
+
+.share a:hover {
+    opacity: 1;
+}
+
+.share a .fab, .share a .fas {
+    margin: auto;
+}
+
+.reddit, .reddit:hover {
+    background-color: #FF4006 !important;
+}
+
+.email, .email:hover {
+    background-color: #4CAF50 !important;
+}
+
+ul.share-buttons {
+    list-style: none;
+    padding: 0;
+    z-index: 9;
+    float: right;
+}
+
+ul.share-buttons li {
+    display: inline-block;
+    margin-bottom: 0.5em;
+}
+
+a.social {
+    min-width: 35px;
+    min-height: 34px;
+    display: inline-block;
+    color: white;
+    font-size: 1.5em;
+    padding: 2px 4px;
+    margin-left: 2px;
+    border-radius: 3px;
+}
+
+a.ts .fa {
+    width: 1.48em;
+    color: white;
+}
+
+a.ts:hover {
+    box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.8);
+    color: #e7e7e7 !important;
+}
+
+.stumble, .stumble:hover {
+    background-color: #EB4823 !important;
+}
+
+.pin, .pin:hover {
+    background-color: #cb2027 !important;
+}
+
+a.fb, a.fb:hover {
+    background-color: #3b5998 !important;
+}
+
+.twitter, .twitter:hover {
+    background-color: #00aced !important;
+}
+
+.vk, .vk:hover {
+    background-color: #45668e !important;
+}
+
+.ts.linkedin, .ts.linkedin:hover {
+    background-color: #007bb6 !important;
+}
+
+.okru, .okru:hover {
+    background-color: #DF8832 !important;
+}
+
+.mix, .mix:hover {
+    background-color: #fd8235 !important;
+}
+
+h5 a, h5 a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+.agelimit {
+    min-height: 200px;
+}
+
+.agelimit *, .age-prompt {
+    display: none;
+}
+
+.agelimit div.age-prompt, .agelimit div.age-prompt * {
+    margin: auto;
+    display: inline-block;
+}
+
+.agelimit div.age-prompt .checkbox {
+    margin-top: 10px;
+}
+
+.agelimit div.age-prompt input {
+    margin-top: 4px;
+    margin-left: -20px;
+}
+
+.agelimit div.age-prompt {
+    margin-top: 2em;
+    display: block;
+}
+
+.movie {
+    padding: 1em 0;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: .25rem;
+    position: relative;
+    margin-bottom: 2em;
+}
+
+a.playlist .fa-spin, a.playlist .fetching, a.playlist.fetching .fetch, a.playlist.fetching .fa-arrow-right {
+    display: none;
+}
+
+a.playlist.fetching .fa-spin, a.playlist.fetching .fetching {
+    display: inline-block;
+}
+
+.thumbnail {
+    padding-bottom: 1em;
+    padding-top: 1em;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.thumbnail {
+    margin: auto;
+}
+
+a.ts {
+    padding: 2px 7px 2px 4px !important;
+    text-align: right;
+    color: white !important;
+    font-size: 12px;
+    line-height: 20px;
+    margin-right: 15px;
+    display: block;
+    text-decoration: none;
+    border-radius: 1px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+}
+
+a.ts .fab {
+    width: 1.48em;
+    color: white;
+}
+
+a.ts:hover {
+    box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.8);
+    color: #e7e7e7 !important;
+}
+
+nav .rotatedtext {
+    display: inline-block;
+    vertical-align: bottom;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 87%;
+    transform: rotate(-19deg);
+    color: rgba(255, 255, 255, 0.8);
+    margin-right: 0.5em;
+}
+
+@media screen and (max-width: 992px) {
+    .bookmarkletitem {
+        display: none;
+    }
+
+    .sm-inline, .sm-inline li {
+        display: inline-block;
+    }
+}
+
+ul.toc {
+    background-color: #F5F5F5;
+    border: 1px dashed orangered;
+    padding: 1em;
+}
+
+.banner-img {
+    display: block;
+    max-width: 53.25rem;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+
+.vdplus-ad {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    background: linear-gradient(45deg, #ff825b 0%, #f57186 100%);
+    border-radius: .25rem;
+    padding: .75rem 1rem;
+    margin-bottom: 1rem;
+}
+
+.vdplus-ad__text {
+    color: #ffffff;
+    margin: 0 15px 0 0;
+}
+
+.vdplus-ad__button {
+    display: flex;
+    background-color: rgba(29, 29, 31, 1);
+    padding: 6px 12px;
+    border-radius: 6.25rem;
+    color: #ffffff;
+    text-align: center;
+}
+
+.vdplus-ad__button:hover {
+    color: #ffffff;
+}

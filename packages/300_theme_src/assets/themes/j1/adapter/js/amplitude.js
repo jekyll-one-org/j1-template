@@ -7,7 +7,7 @@ regenerate:                             true
 {% comment %}
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/adapter/js/amplitude.js
- # Liquid template to adapt the AmplitudeJS module
+ # Liquid template to adapt the AmplitudeJS v4 module
  #
  # Product/Info:
  # https://jekyll.one
@@ -590,7 +590,16 @@ j1.adapter.amplitude = ((j1, window) => {
                       });
                     } // END if compact-player-container
 
-                    // jadams, 2021-03-05: manage scrolling on playlist (Expanded Player|Right)
+                    // large player: click on the progress bar
+                    document.getElementById('large-player-progress').addEventListener('click', function(event) {
+                      var offset = this.getBoundingClientRect();
+                      var xpos   = event.pageX - offset.left;
+
+                      Amplitude.setSongPlayedPercentage(
+                        (parseFloat(xpos)/parseFloat(this.offsetWidth))*100);
+                    });
+
+                    // jadams, 2021-03-05: manage scrolling on playlist (Large Player|Right)
                     if (document.getElementById('amplitude-right') !== null) {
                       document.getElementById('amplitude-right').addEventListener('mouseenter', function() {
                         if ($('body').hasClass('stop-scrolling')) {

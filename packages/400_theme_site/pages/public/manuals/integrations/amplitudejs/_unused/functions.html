@@ -1,0 +1,461 @@
+<div class="content">
+   <h1 id="public-functions"><a href="#public-functions" aria-hidden="true" class="header-anchor">#</a> Public Functions</h1>
+   <div class="carbon-ads">
+      <script id="_carbonads_js" src="//cdn.carbonads.com/carbon.js?serve=CE7IP23L&amp;placement=521dimensionscom"></script>
+      <div id="carbonads"><span>
+         <span class="carbon-wrap">
+         <a href="https://srv.carbonads.net/ads/click/x/GTND427JCAYICKJYCV74YKQUC6SIPK77CAADKZ3JCAYI52QECWYIP5QKCYSIK2JECKSI4K7WCEBITKQEC6AIPKQKC6SI427JCAYI6K3EHJNCLSIZ" class="carbon-img" target="_blank" rel="noopener sponsored">
+         <img src="https://srv.carbonads.net/static/30242/d2ce9d569f5af686a03dfbebb343f38eb801fe67" alt="ads via Carbon" border="0" height="100" width="130" data-no-statview="no" style="max-width: 130px;">
+         </a>
+         <a href="https://srv.carbonads.net/ads/click/x/GTND427JCAYICKJYCV74YKQUC6SIPK77CAADKZ3JCAYI52QECWYIP5QKCYSIK2JECKSI4K7WCEBITKQEC6AIPKQKC6SI427JCAYI6K3EHJNCLSIZ" class="carbon-text" target="_blank" rel="noopener sponsored">
+         Your new development career awaits. Check out the latest listings.
+         </a>
+         </span>
+         <a href="http://carbonads.net/?utm_source=521dimensionscom&amp;utm_medium=ad_via_link&amp;utm_campaign=in_unit&amp;utm_term=carbon" class="carbon-poweredby" target="_blank" rel="noopener sponsored">ads via Carbon</a>
+         </span>
+      </div>
+   </div>
+   <p>There are a variety of public functions that AmplitudeJS exposes to the user.
+      These methods allow the user to change config variables, add new songs, play
+      now, etc.
+   </p>
+   <h2 id="get-config"><a href="#get-config" aria-hidden="true" class="header-anchor">#</a> Get Config</h2>
+   <p>Returns the current AmplitudeJS configuration.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">getConfig</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+   </div>
+   <h2 id="bind-new-elements"><a href="#bind-new-elements" aria-hidden="true" class="header-anchor">#</a> Bind New Elements</h2>
+   <p>The bind new elements function should be called whenever a new song element is
+      added to the page. This will bind all of the event handlers for that element.
+   </p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">bindNewElements</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="get-active-playlist"><a href="#get-active-playlist" aria-hidden="true" class="header-anchor">#</a> Get Active Playlist</h2>
+   <p>This method will return the key of the active playlist.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">getActivePlaylist</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="get-playback-speed"><a href="#get-playback-speed" aria-hidden="true" class="header-anchor">#</a> Get Playback Speed</h2>
+   <p>Returns the current playback speed for the player.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">getPlaybackSpeed</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="get-repeat"><a href="#get-repeat" aria-hidden="true" class="header-anchor">#</a> Get Repeat</h2>
+   <p>Returns the state of the global repeat status for the player.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">getRepeat</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="get-repeat-playlist"><a href="#get-repeat-playlist" aria-hidden="true" class="header-anchor">#</a> Get Repeat Playlist</h2>
+   <p>Returns the state of the repeat status for the playlist.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">getRepeatPlaylist</span><span class="token punctuation">(</span> playlistKey <span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="get-shuffle"><a href="#get-shuffle" aria-hidden="true" class="header-anchor">#</a> Get Shuffle</h2>
+   <p>Returns the current state of the global shuffle status for the player.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">getShuffle</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="get-shuffle-playlist"><a href="#get-shuffle-playlist" aria-hidden="true" class="header-anchor">#</a> Get Shuffle Playlist</h2>
+   <p>Returns the state of the shuffle flag for a playlist.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">getShufflePlaylist</span><span class="token punctuation">(</span> playlistKey <span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="set-shuffle"><a href="#set-shuffle" aria-hidden="true" class="header-anchor">#</a> Set Shuffle</h2>
+   <p>Sets the global shuffle state for AmplitudeJS.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">setShuffle</span><span class="token punctuation">(</span> shuffleState <span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="set-shuffle-playlist"><a href="#set-shuffle-playlist" aria-hidden="true" class="header-anchor">#</a> Set Shuffle Playlist</h2>
+   <p>Sets the shuffle state for a playlist.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">setShufflePlaylist</span><span class="token punctuation">(</span> playlistKey<span class="token punctuation">,</span> shuffleState <span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="set-repeat"><a href="#set-repeat" aria-hidden="true" class="header-anchor">#</a> Set Repeat</h2>
+   <p>Sets the global repeat status for AmplitudeJS</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">setRepeat</span><span class="token punctuation">(</span> repeatState <span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="set-repeat-song"><a href="#set-repeat-song" aria-hidden="true" class="header-anchor">#</a> Set Repeat Song</h2>
+   <p>Sets the global state to determine if we should repeat the individual song upon
+      completion.
+   </p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">setRepeatSong</span><span class="token punctuation">(</span> repeatSongState <span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="set-repeat-playlist"><a href="#set-repeat-playlist" aria-hidden="true" class="header-anchor">#</a> Set Repeat Playlist</h2>
+   <p>Sets the repeat for the playlist.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">setRepeatPlaylist</span><span class="token punctuation">(</span> playlistKey<span class="token punctuation">,</span> repeatState <span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="get-default-album-art"><a href="#get-default-album-art" aria-hidden="true" class="header-anchor">#</a> Get Default Album Art</h2>
+   <p>Returns the default album art URL set in the player.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">getDefaultAlbumArt</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="set-default-album-art"><a href="#set-default-album-art" aria-hidden="true" class="header-anchor">#</a> Set Default Album Art</h2>
+   <p>Sets the default album art for the player to the URL provided.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">setDefaultAlbumArt</span><span class="token punctuation">(</span> url <span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="get-default-album-art-2"><a href="#get-default-album-art-2" aria-hidden="true" class="header-anchor">#</a> Get Default Album Art</h2>
+   <p>Returns the URL of the default album art for the player.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">getDefaultAlbumArt</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="get-default-playlist-art"><a href="#get-default-playlist-art" aria-hidden="true" class="header-anchor">#</a> Get Default Playlist Art</h2>
+   <p>Gets the default art for a playlist.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">getDefaultPlaylistArt</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="set-default-playlist-art"><a href="#set-default-playlist-art" aria-hidden="true" class="header-anchor">#</a> Set Default Playlist Art</h2>
+   <p>Sets the default playlist art.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">setDefaultPlaylistArt</span><span class="token punctuation">(</span> url <span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="set-debug"><a href="#set-debug" aria-hidden="true" class="header-anchor">#</a> Set Debug</h2>
+   <p>To change the debug mode setting, you can call the setDebug method any time and
+      start to receive data about the state of the player or turn off debugging.
+   </p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">setDebug</span><span class="token punctuation">(</span> <span class="token punctuation">{</span>bool<span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+   </div>
+   <h2 id="get-active-song-metadata"><a href="#get-active-song-metadata" aria-hidden="true" class="header-anchor">#</a> Get Active Song Metadata</h2>
+   <p>Returns the active song's metadata as a JSON object.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">getActiveSongMetadata</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+   </div>
+   <h2 id="get-active-playlist-metadata"><a href="#get-active-playlist-metadata" aria-hidden="true" class="header-anchor">#</a> Get Active Playlist Metadata</h2>
+   <p>Gets the active playlist's metadata as a JSON object.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">getActivePlaylistMetadata</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+   </div>
+   <h2 id="get-song-at-index"><a href="#get-song-at-index" aria-hidden="true" class="header-anchor">#</a> Get Song At Index</h2>
+   <p>Returns a song's metadata at a specific index.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">getSongAtIndex</span><span class="token punctuation">(</span> <span class="token punctuation">{</span>index<span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+   </div>
+   <h2 id="get-song-at-playlist-index"><a href="#get-song-at-playlist-index" aria-hidden="true" class="header-anchor">#</a> Get Song At Playlist Index</h2>
+   <p>Returns a song at a playlist's index.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">getSongAtPlaylistIndex</span><span class="token punctuation">(</span> <span class="token punctuation">{</span>playlistIndex<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>index<span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+   </div>
+   <h2 id="add-song"><a href="#add-song" aria-hidden="true" class="header-anchor">#</a> Add Song</h2>
+   <p>Adds a song to the AmplitudeJS player. You will need to write a method yourself
+      to add the visual side of things to fit your custom design, and then call the
+      bindNewElements() method to make sure it works.
+   </p>
+   <p>This method returns the index of the song added to the player.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">addSong</span><span class="token punctuation">(</span> <span class="token punctuation">{</span>song_object<span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+   </div>
+   <h2 id="prepend-song"><a href="#prepend-song" aria-hidden="true" class="header-anchor">#</a> Prepend Song</h2>
+   <p>Adds a song to the beginning of the AmplitudeJS player. After pre-pending the song, you will have to bindNewElements() method to make sure that any visuals are updated as well.</p>
+   <p>This method returns the index of the song added to the player.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">prependSong</span><span class="token punctuation">(</span> <span class="token punctuation">{</span>song_object<span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+   </div>
+   <h2 id="add-song-to-playlist"><a href="#add-song-to-playlist" aria-hidden="true" class="header-anchor">#</a> Add Song To Playlist</h2>
+   <p>Adds a song to a specific playlist within AmplitudeJS. Once the song is added
+      you will need to update the visual side of the player yourself.  After you
+      update the visual side, run the <code>Amplitude.bindNewElements()</code> method to make
+      sure the functionality is there for the new element.
+   </p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">addSongToPlaylist</span><span class="token punctuation">(</span> songObject<span class="token punctuation">,</span> playlistKey <span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="remove-song"><a href="#remove-song" aria-hidden="true" class="header-anchor">#</a> Remove Song</h2>
+   <p>Removes a song from the global song array. You will have to remove the
+      containing element by yourself.
+   </p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">removeSong</span><span class="token punctuation">(</span> indexOfSong <span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="remove-song-from-playlist"><a href="#remove-song-from-playlist" aria-hidden="true" class="header-anchor">#</a> Remove Song From Playlist</h2>
+   <p>Removes a song from a playlist. You will have to update the visual side by
+      yourself.
+   </p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">removeSongFromPlaylist</span><span class="token punctuation">(</span> indexOfSongInPlaylist<span class="token punctuation">,</span> playlistKey <span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="play-song-at-index"><a href="#play-song-at-index" aria-hidden="true" class="header-anchor">#</a> Play Song At Index</h2>
+   <p>Plays whatever song is set in the config at the specified index.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">playSongAtIndex</span><span class="token punctuation">(</span> songIndex <span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="play-playlist-song-at-index"><a href="#play-playlist-song-at-index" aria-hidden="true" class="header-anchor">#</a> Play Playlist Song At Index</h2>
+   <p>Plays the song in a playlist at the specified index.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">playPlaylistSongAtIndex</span><span class="token punctuation">(</span> playlistIndex<span class="token punctuation">,</span> playlistKey <span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="play-now"><a href="#play-now" aria-hidden="true" class="header-anchor">#</a> Play Now</h2>
+   <p>In AmplitudeJS 2.0 this was referred to as 'Dynamic Mode'. Now you can just pass
+      a song to AmplitudeJS and it will automatically play. If there are visual
+      elements, then they will sync as well.
+   </p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">playNow</span><span class="token punctuation">(</span> <span class="token punctuation">{</span>song_object<span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+   </div>
+   <h2 id="play"><a href="#play" aria-hidden="true" class="header-anchor">#</a> Play</h2>
+   <p>This simply plays whatever song is active.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">play</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="pause"><a href="#pause" aria-hidden="true" class="header-anchor">#</a> Pause</h2>
+   <p>This simply pauses whatever song is active.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">pause</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="stop"><a href="#stop" aria-hidden="true" class="header-anchor">#</a> Stop</h2>
+   <p>This simply stops whatever song is active.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="next"><a href="#next" aria-hidden="true" class="header-anchor">#</a> Next</h2>
+   <p>Plays the next song either in the playlist or globally.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span> playlistKey <span class="token operator">=</span> <span class="token keyword">null</span> <span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="prev"><a href="#prev" aria-hidden="true" class="header-anchor">#</a> Prev</h2>
+   <p>Plays the previous song either in the playlist or globally.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">prev</span><span class="token punctuation">(</span> playlistKey <span class="token operator">=</span> <span class="token keyword">null</span> <span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="get-audio"><a href="#get-audio" aria-hidden="true" class="header-anchor">#</a> Get Audio</h2>
+   <p>This returns the actual audio element. This is mainly used for writing
+      extensions but exposes the core of AmplitudeJS. This returns the audio element
+      used by AmplitudeJS.
+   </p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">getAudio</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="get-songs"><a href="#get-songs" aria-hidden="true" class="header-anchor">#</a> Get songs</h2>
+   <p>This method returns all of the songs defined in AmplitudeJS. It can be used for
+      a variety of different functions. It's extremely helpful if you are AJAX loading
+      songs and want to see the contents of the song array.
+   </p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">getSongs</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="get-songs-in-playlist"><a href="#get-songs-in-playlist" aria-hidden="true" class="header-anchor">#</a> Get Songs In Playlist</h2>
+   <p>This method returns all of the songs in a playlist. Since the user defines a
+      playlist with a key and the indexes of the songs, this will map the keys to the
+      songs and return all of the songs in the playlist.
+   </p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">getSongsInPlaylist</span><span class="token punctuation">(</span> playlistKey <span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="get-songs-state"><a href="#get-songs-state" aria-hidden="true" class="header-anchor">#</a> Get Songs State</h2>
+   <p>This method returns the current order of the songs. It can be used for
+      determining what song is next. If shuffle is on, it will return the shuffled
+      list of songs.
+   </p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">getSongsState</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="get-songs-state-playlist"><a href="#get-songs-state-playlist" aria-hidden="true" class="header-anchor">#</a> Get Songs State Playlist</h2>
+   <p>This method returns the current order of the songs in a playlist. If needed this
+      can be used to determine the next song in a playlist. This accounts for whether
+      the playlist has been shuffled or not.
+   </p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">getSongsStatePlaylist</span><span class="token punctuation">(</span> playlist <span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="get-active-index"><a href="#get-active-index" aria-hidden="true" class="header-anchor">#</a> Get Active Index</h2>
+   <p>This method returns the index of the active song in the songs array.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">getActiveIndex</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="get-active-index-state"><a href="#get-active-index-state" aria-hidden="true" class="header-anchor">#</a> Get Active Index State</h2>
+   <p>This method returns the index of the active song in the songs array but accounts
+      for if shuffle has been enabled or not.
+   </p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">getActiveIndexState</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="get-version"><a href="#get-version" aria-hidden="true" class="header-anchor">#</a> Get Version</h2>
+   <p>This method returns the version of AmplitudeJS being used.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">getVersion</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="get-buffered"><a href="#get-buffered" aria-hidden="true" class="header-anchor">#</a> Get Buffered</h2>
+   <p>This method returns the buffered percentage of the now playing song. This can be
+      used to show how much of the song has been buffered and ready to be played.
+   </p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">getBuffered</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="get-song-played-percentage"><a href="#get-song-played-percentage" aria-hidden="true" class="header-anchor">#</a> Get Song Played Percentage</h2>
+   <p>This method returns the percentage of the song played. When implementing a 3rd
+      party tracking element, you can set the percentage of the element to the
+      percentage played of the song.
+   </p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">getSongPlayedPercentage</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <p>You can combine this method with the time_update callback and whenever the time
+      updates your method can call Amplitude.getSongPlayedPercentage() and you can set
+      your tracking element correctly.
+   </p>
+   <h2 id="get-song-played-seconds"><a href="#get-song-played-seconds" aria-hidden="true" class="header-anchor">#</a> Get Song Played Seconds</h2>
+   <p>This method returns the current seconds the user is into the song.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">getSongPlayedSeconds</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="get-song-duration"><a href="#get-song-duration" aria-hidden="true" class="header-anchor">#</a> Get Song Duration</h2>
+   <p>Returns the duration of the current song.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">getSongDuration</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="set-song-played-percentage"><a href="#set-song-played-percentage" aria-hidden="true" class="header-anchor">#</a> Set Song Played Percentage</h2>
+   <p>This method allows you to set the percentage of the active song. The method
+      accepts a float between 0 and 100 for the percentage of the song to be set to.
+   </p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">setSongPlayedPercentage</span><span class="token punctuation">(</span> percentage <span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="skip-to"><a href="#skip-to" aria-hidden="true" class="header-anchor">#</a> Skip To</h2>
+   <p>Allows the user to skip to a specific location in the song whether that song is
+      in a playlist or not.
+   </p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">skipTo</span><span class="token punctuation">(</span> seconds<span class="token punctuation">,</span> songIndex<span class="token punctuation">,</span> playlist <span class="token operator">=</span> <span class="token keyword">null</span> <span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="set-delay"><a href="#set-delay" aria-hidden="true" class="header-anchor">#</a> Set Delay</h2>
+   <p>If you have multiple songs that your player is using you can change the amount
+      of time you have as a delay between the songs. When one song ends, what is set
+      will be the amount of time delayed before the next song starts.
+   </p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">setDelay</span><span class="token punctuation">(</span> milliseconds <span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="get-delay"><a href="#get-delay" aria-hidden="true" class="header-anchor">#</a> Get Delay</h2>
+   <p>Gets the current delay between songs in milliseconds.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">getDelay</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+   </div>
+   <h2 id="set-song-meta-data"><a href="#set-song-meta-data" aria-hidden="true" class="header-anchor">#</a> Set Song Meta Data</h2>
+   <p>You can set the meta data for any song in your song objects. This is helpful if
+      you are doing a live stream and have a call back that returns the information of
+      what song is currently playing.
+   </p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">setSongMetaData</span><span class="token punctuation">(</span> index<span class="token punctuation">,</span> metaData <span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <p>The first parameter <code>index</code> is the index of the song in the songs array you are
+      setting the meta data for. The <code>metaData</code> is an object that contains meta data
+      similar to a song object. The keys that get passed will be updated on the song
+      object at the index.  The only key that can not be updated is the <code>url</code>.
+   </p>
+   <h2 id="set-playlist-meta-data"><a href="#set-playlist-meta-data" aria-hidden="true" class="header-anchor">#</a> Set Playlist Meta Data</h2>
+   <p>You can set the metadata for the playlist. Similar to the songs object, you can do it for a playlist object.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">setPlaylistMetaData</span><span class="token punctuation">(</span> playlist<span class="token punctuation">,</span> metaData <span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <p>The first argument <code>playlist</code> is the key of the playlist we are setting the meta data for and the second object <code>metaData</code> is the object containing all of the keys we are updating.</p>
+   <h2 id="get-analyser"><a href="#get-analyser" aria-hidden="true" class="header-anchor">#</a> Get Analyser</h2>
+   <p>Returns the Web Audio API Analyser. This allows for the user to bind to the active audio through the web audio API.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">getAnalyser</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="get-player-state"><a href="#get-player-state" aria-hidden="true" class="header-anchor">#</a> Get Player State</h2>
+   <p>Returns the current state of the player whether it's <code>playing</code>, <code>paused</code>, or <code>stopped</code>.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">getPlayerState</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+   </div>
+   <h2 id="add-playlist"><a href="#add-playlist" aria-hidden="true" class="header-anchor">#</a> Add Playlist</h2>
+   <p>This method allows you to add a playlist to AmplitudeJS. To do this, you need a unique key for your playlist, the data describing your playlist such as <code>title</code>, <code>author</code>, etc. and an array of song objects for your playlist.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">addPlaylist</span><span class="token punctuation">(</span> key<span class="token punctuation">,</span> data<span class="token punctuation">,</span> songs <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+   </div>
+   <p>The first argument is the <code>key</code>. Remember this is a JSON key and should be formatted as such.</p>
+   <p>The second argument is all of the data describing the playlist such as <code>name</code>, <code>title</code>, <code>author</code>, etc. in the form of a JSON object.</p>
+   <p>Finally, the third argument is an array of song objects. These are the songs that will be added to the playlist.</p>
+   <h2 id="register-visualization"><a href="#register-visualization" aria-hidden="true" class="header-anchor">#</a> Register Visualization</h2>
+   <p>The other way to register a visualization is through the public <code>Amplitude.registerVisualization( visualization, preferences )</code> method. The first parameter being the object included with the visualization file and the second parameter being a JSON object containing any of the parameters needed to overwrite defaults provided by the visualization.</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>  Amplitude<span class="token punctuation">.</span><span class="token function">registerVisualization</span><span class="token punctuation">(</span> visualization<span class="token punctuation">,</span> preferences <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+   </div>
+   <h2 id="set-global-visualization"><a href="#set-global-visualization" aria-hidden="true" class="header-anchor">#</a> Set Global Visualization</h2>
+   <p>You can set the global visualization through the public method like this:</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>  Amplitude<span class="token punctuation">.</span><span class="token function">setGlobalVisualization</span><span class="token punctuation">(</span> visualizationKey <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+   </div>
+   <h2 id="set-playlist-visualization"><a href="#set-playlist-visualization" aria-hidden="true" class="header-anchor">#</a> Set Playlist Visualization</h2>
+   <p>You can set the visualization through the public facing method like this:</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>  Amplitude<span class="token punctuation">.</span><span class="token function">setPlaylistVisualization</span><span class="token punctuation">(</span> playlist_key<span class="token punctuation">,</span> visualization_key <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+   </div>
+   <h2 id="set-individual-song-visualization"><a href="#set-individual-song-visualization" aria-hidden="true" class="header-anchor">#</a> Set Individual Song Visualization</h2>
+   <p>You can set the visualization for an individual song like so:</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>  Amplitude<span class="token punctuation">.</span><span class="token function">setSongVisualization</span><span class="token punctuation">(</span> songIndex<span class="token punctuation">,</span> visualizationKey <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+   </div>
+   <h2 id="set-individual-song-in-playlist-visualization"><a href="#set-individual-song-in-playlist-visualization" aria-hidden="true" class="header-anchor">#</a> Set Individual Song In Playlist Visualization</h2>
+   <p>You can set the visualization for an individual song in a playlist using:</p>
+   <div class="language-javascript extra-class">
+      <pre class="language-javascript"><code>Amplitude<span class="token punctuation">.</span><span class="token function">setSongInPlaylistVisualization</span><span class="token punctuation">(</span> playlistKey<span class="token punctuation">,</span> songIndex<span class="token punctuation">,</span> visualizationKey <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+   </div>
+</div>

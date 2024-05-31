@@ -1,7 +1,7 @@
 ---
-title:                                  AmplitudeJS
-title_extention:                        Custom Audio players
-tagline:                                Custom Audio Players
+title:                                  Amplitude
+title_extention:                        Preview Audio players
+tagline:                                Preview Audio Players
 
 date:                                   2024-04-17
 #last_modified:                         2024-01-01
@@ -25,7 +25,7 @@ image:
 
 regenerate:                             false
 personalization:                        true
-permalink:                              /pages/public/amplitude_tester/
+permalink:                              /pages/public/tools/previewer/amplitudejs/
 
 resources:                              [ amplitudejs ]
 resource_options:
@@ -102,6 +102,8 @@ clicking on the appropriate elements, touch events are applied to all
 mobile devices.
 ====
 
+
+
 ////
 [role="mt-5"]
 == Gray Player
@@ -135,7 +137,34 @@ amplitude::free_pop_mini[role="mt-3 mb-5"]
 div#mini-player {
   max-width: 475px;
   -webkit-font-smoothing: antialiased;
-  background-color: var(--ajs-theme-uno--blue-gray-900);
+  background-color: var(--ajs-theme-uno--black);
+}
+
+div#meta-container {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+div.control-container div.amplitude-play-pause {
+  width: 40px;
+  height: 55px;
+  cursor: pointer;
+  float: left;
+  margin-top: 15px;
+  margin-left: 24px;
+}
+
+div.control-container div.amplitude-play-pause.amplitude-paused {
+   /* background: url("/assets/themes/j1/modules/amplitudejs/icons/black/play.svg"); */
+   background: url("/assets/themes/j1/modules/amplitudejs/icons/small/play.svg") no-repeat;
+   background-size: cover;
+}
+
+div.control-container div.amplitude-play-pause.amplitude-playing {
+   /* background: url("/assets/themes/j1/modules/amplitudejs/icons/black/pause.svg"); */
+   background: url("/assets/themes/j1/modules/amplitudejs/icons/small/pause.svg") no-repeat;
+   background-size: cover;
 }
 
 div.time-container {
@@ -168,13 +197,13 @@ div.control-container div.meta-container {
 .mini-player-volume-container {
   display: flex;
   margin-left: 25px;
-  padding-bottom: 15px;
+  padding-bottom: 20px;
   padding-top: 5px;
   width: calc(100% - 34px);
 }
 
 input[type=range].mini-player.amplitude-volume-slider {
-  width: calc(90% - 18px);
+  width: calc(90% + 18px);
   float: left;
   /* margin-top: 0px !important; */
   /* margin-left: 0px !important; */
@@ -183,6 +212,18 @@ input[type=range].mini-player.amplitude-volume-slider {
   margin-top: 0px;
   margin-left: 5px;
 }
+
+.mini-player-song-artist-album {
+    font-family: "Lato", sans-serif;
+    color: var(--ajs-theme-uno--blue-gray-300);
+    font-size: 18px;
+    font-weight: bold;
+    font-family: "Lato", sans-serif;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 </style>
 ++++
 
@@ -247,14 +288,14 @@ div#large-player-controls div.large-player-controls-container div#shuffle-black 
 }
 
 div#large-player-controls div.large-player-controls-container div#shuffle-black.amplitude-shuffle-off {
-  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-shuffle-off.svg");
+  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-shuffle-off.svg") no-repeat;
 }
 
 div#large-player-controls div.large-player-controls-container div#shuffle-black.amplitude-shuffle-on {
-  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-shuffle-on.svg");
+  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-shuffle-on.svg") no-repeat;
 }
 
-div#large-player-controls div.large-player-controls-container div#previous-black {
+/* div#large-player-controls div.large-player-controls-container div#previous-black {
   display: inline-block;
   height: 19px;
   width: 16px;
@@ -262,6 +303,16 @@ div#large-player-controls div.large-player-controls-container div#previous-black
   background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-previous.svg");
   vertical-align: middle;
   margin-right: 10px;
+} */
+
+div#large-player-controls div.large-player-controls-container div#previous-black {
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+    cursor: pointer;
+    background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/previous-hover.svg") no-repeat;
+    vertical-align: middle;
+    margin-right: 10px;
 }
 
 div#large-player-controls div.large-player-controls-container div#play-pause-black {
@@ -274,14 +325,14 @@ div#large-player-controls div.large-player-controls-container div#play-pause-bla
 }
 
 div#large-player-controls div.large-player-controls-container div#play-pause-black.amplitude-paused {
-  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-play.svg");
+  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-play.svg") no-repeat;
 }
 
 div#large-player-controls div.large-player-controls-container div#play-pause-black.amplitude-playing {
-  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-pause.svg");
+  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-pause.svg") no-repeat;
 }
 
-div#large-player-controls div.large-player-controls-container div#next-black {
+/* div#large-player-controls div.large-player-controls-container div#next-black {
   display: inline-block;
   height: 19px;
   width: 16px;
@@ -290,8 +341,18 @@ div#large-player-controls div.large-player-controls-container div#next-black {
   vertical-align: middle;
   margin-right: 25px;
   margin-left: 10px;
-}
+} */
 
+div#large-player-controls div.large-player-controls-container div#next-black {
+  display: inline-block;
+  height: 24px;
+  width: 25px;
+  cursor: pointer;
+  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/next-hover.svg") no-repeat;
+  vertical-align: middle;
+  margin-right: 25px;
+  margin-left: 10px;
+}
 div#large-player-controls div.large-player-controls-container div#repeat-black {
   display: inline-block;
   width: 15px;
@@ -301,11 +362,11 @@ div#large-player-controls div.large-player-controls-container div#repeat-black {
 }
 
 div#large-player-controls div.large-player-controls-container div#repeat-black.amplitude-repeat-off {
-  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-repeat-off.svg");
+  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-repeat-off.svg") no-repeat;
 }
 
 div#large-player-controls div.large-player-controls-container div#repeat-black.amplitude-repeat-on {
-  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-repeat-on.svg");
+  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-repeat-on.svg") no-repeat;
 }
 
 </style>
