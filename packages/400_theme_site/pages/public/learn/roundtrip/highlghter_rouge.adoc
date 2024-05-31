@@ -20,7 +20,7 @@ categories:                             [ Roundtrip ]
 tags:                                   [ Module, Rouge ]
 
 image:
-  path:                                 /assets/images/modules/attics/1920x1280/mohammad-rahmani.jpg
+  path:                                 /assets/image/modules/attics/1920x1280/mohammad-rahmani.jpg
   width:                                1920
   height:                               1280
 
@@ -31,7 +31,7 @@ resources:                              [ rouge ]
 resource_options:
   - attic:
       slides:
-        - url:                          /assets/images/modules/attics/1920x1280/mohammad-rahmani.jpg
+        - url:                          /assets/image/modules/attics/1920x1280/mohammad-rahmani.jpg
           alt:                          Photo by Mohammad Rahmani on Unsplash
           badge:
             type:                       unsplash

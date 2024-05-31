@@ -99,8 +99,8 @@ settings:
         title:                          Example of LightGallery Lightbox
         show_delay:                     250
         css_classes:                    mb-3
-        images_path:                    /assets/images/modules/gallery/mega_cities
-        thumb_path:                     /assets/images/modules/gallery/mega_cities
+        images_path:                    /assets/image/modules/gallery/mega_cities
+        thumb_path:                     /assets/image/modules/gallery/mega_cities
         images:                         [
                                           banter-snaps_b.jpg,
                                           denys-nevozhai-1_b.jpg
@@ -130,8 +130,8 @@ settings:
         show_delay:                     200
         title:                          GrandPa around the 1930th
         css_classes:                    mb-3
-        images_path:                    /assets/images/modules/gallery/old_times
-        thumb_path:                     /assets/images/modules/gallery/old_times
+        images_path:                    /assets/image/modules/gallery/old_times
+        thumb_path:                     /assets/image/modules/gallery/old_times
         images:                         [
                                           image_01.jpg, image_02.jpg,
                                           image_03.jpg, image_04.jpg
@@ -161,8 +161,8 @@ settings:
   #     title:                          Masonry grid layout of Justified Gallery
         show_delay:                     250
         css_classes:                    mb-3
-        images_path:                    /assets/images/modules/gallery/mega_cities
-        thumb_path:                     /assets/images/modules/gallery/mega_cities
+        images_path:                    /assets/image/modules/gallery/mega_cities
+        thumb_path:                     /assets/image/modules/gallery/mega_cities
         images:                         [
                                           banter-snaps_b.jpg,
                                           denys-nevozhai-1_b.jpg,

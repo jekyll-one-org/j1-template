@@ -243,7 +243,7 @@ j1.adapter.carousel = ((j1, window) => {
                   {% if background %}
                   $('head').append('<style>#{{slider_id}}{background:url({{background}}) 50% 0 repeat fixed}</style>');
                   {% else %}
-                  $('head').append('<style>#{{slider_id}}{background:url(/assets/images/quotes/default.png) 50% 0 repeat fixed}</style>');
+                  $('head').append('<style>#{{slider_id}}{background:url(/assets/image/quotes/default.png) 50% 0 repeat fixed}</style>');
                   {% endif %}
 
                   {% if darken %}
@@ -271,7 +271,7 @@ j1.adapter.carousel = ((j1, window) => {
                   {% endif %}
 
                   {% if gridify %}
-                  $('head').append('<style>#{{slider_id}}:before{top:0;left:0;width:100%;height:100%;content:" ";position:absolute;background:url(/assets/images/modules/patterns/gridtile.png) repeat;}</style>');
+                  $('head').append('<style>#{{slider_id}}:before{top:0;left:0;width:100%;height:100%;content:" ";position:absolute;background:url(/assets/image/modules/patterns/gridtile.png) repeat;}</style>');
                   {% endif %}
 
                 {% endif %}

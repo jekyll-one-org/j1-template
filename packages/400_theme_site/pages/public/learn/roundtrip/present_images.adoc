@@ -23,7 +23,7 @@ categories:                             [ Roundtrip ]
 tags:                                   [ Module, Carousel, Lightbox, Image, Slider, Slick ]
 
 image:
-  path:                                 /assets/images/modules/attics/1920x1280/quino-al-2.jpg
+  path:                                 /assets/image/modules/attics/1920x1280/quino-al-2.jpg
   width:                                1920
   height:                               1280
 
@@ -39,7 +39,7 @@ resource_options:
       collapseDepth:                    4
   - attic:
       slides:
-        - url:                          /assets/images/modules/attics/1920x1280/quino-al-2.jpg
+        - url:                          /assets/image/modules/attics/1920x1280/quino-al-2.jpg
           alt:                          Photo by Quino Al Angel on Unsplash
           badge:
             type:                       unsplash

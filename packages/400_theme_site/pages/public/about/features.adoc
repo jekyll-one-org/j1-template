@@ -20,7 +20,7 @@ categories:                             [ About ]
 tags:                                   [ J1, Features ]
 
 image:
-  path:                                 /assets/images/modules/attics/1920x1280/j1-starter-mockup-1.jpg
+  path:                                 /assets/image/modules/attics/1920x1280/j1-starter-mockup-1.jpg
   width:                                1920
   height:                               1280
 
@@ -31,7 +31,7 @@ resources:                              [ animate, lightbox ]
 resource_options:
   - attic:
       slides:
-        - url:                          /assets/images/modules/attics/1920x1280/j1-starter-mockup-1.jpg
+        - url:                          /assets/image/modules/attics/1920x1280/j1-starter-mockup-1.jpg
           alt:                          J1 Starter Mockup
 ---
 

@@ -26,7 +26,7 @@ resource_options:
       padding_bottom:                   50
       opacity:                          0.5
       slides:
-        - url:                          /assets/images/pages/roundtrip/images-1920x1280-bw.jpg
+        - url:                          /assets/image/pages/roundtrip/images-1920x1280-bw.jpg
           alt:                          Photo by Ricardo Gomez Angel on Unsplash
           badge:
             type:                       unsplash
@@ -65,7 +65,7 @@ resource_options:
   <ul class="list-group list-group-horizontal align-items-stretch flex-wrap">
       <li class="list-group-item items-2 p-0">
         <article class="card raised-z3 p-0">
-          <img class="img-fluid img-object--cover" src="/assets/images/modules/attics/rirri-1920x1280.jpg" alt="Polaroid">
+          <img class="img-fluid img-object--cover" src="/assets/image/modules/attics/rirri-1920x1280.jpg" alt="Polaroid">
           <h3 class="card-header bg-primary notoc">Polaroid</h3>
           <div class="card-body r-text-300">
             <div class="paragraph dropcap">
@@ -84,7 +84,7 @@ resource_options:
       </li>
       <li class="list-group-item items-2 p-0">
         <article class="card raised-z3 p-0">
-          <img class="img-fluid img-object--cover" src="/assets/images/modules/attics/franck-1920x1280.jpg" alt="TikTok">
+          <img class="img-fluid img-object--cover" src="/assets/image/modules/attics/franck-1920x1280.jpg" alt="TikTok">
           <h3 class="card-header bg-primary notoc">TikTok</h3>
           <div class="card-body r-text-300">
             <div class="paragraph dropcap">

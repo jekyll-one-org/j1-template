@@ -20,7 +20,7 @@ categories:                             [ Roundtrip ]
 tags:                                   [ Module, Video ]
 
 image:
-  path:                                 /assets/images/icons/videojs/videojs-poster.png
+  path:                                 /assets/image/icons/videojs/videojs-poster.png
   width:                                1920
   height:                               1280
 
@@ -36,7 +36,7 @@ resources:                              [
 resource_options:
   - attic:
       slides:
-        - url:                          /assets/images/icons/videojs/videojs-poster.png
+        - url:                          /assets/image/icons/videojs/videojs-poster.png
           alt:                          VideoJS Poster
 ---
 

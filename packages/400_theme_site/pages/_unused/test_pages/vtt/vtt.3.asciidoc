@@ -15,7 +15,7 @@ categories:                             [ WebCams ]
 tags:                                   [ anal, solo, video ]
 
 image:
-  path:                                 /assets/images/modules/attics/1920x1280/quino-al-2.jpg
+  path:                                 /assets/image/modules/attics/1920x1280/quino-al-2.jpg
   width:                                1920
   height:                               1280
 
@@ -30,7 +30,7 @@ resources:                              [ animate, lightgallery, gallery, videoj
 resource_options:
   - attic:
       slides:
-        - url:                          /assets/images/modules/attics/1920x1280/quino-al-2.jpg
+        - url:                          /assets/image/modules/attics/1920x1280/quino-al-2.jpg
           alt:                          Photo by Quino Al Angel on Unsplash
           badge:
             type:                       unsplash

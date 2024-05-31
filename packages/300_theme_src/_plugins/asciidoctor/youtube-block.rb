@@ -24,7 +24,7 @@ include Asciidoctor
 # Example:
 #
 #   .Video title
-#   youtube::nV8UZJNBY6Y[poster="/assets/images/icons/videojs/videojs-poster.png" theme="city" role="mt-5 mb-5"]
+#   youtube::nV8UZJNBY6Y[poster="/assets/image/icons/videojs/videojs-poster.png" theme="city" role="mt-5 mb-5"]
 #
 # ------------------------------------------------------------------------------
 # See:
@@ -47,7 +47,7 @@ Asciidoctor::Extensions.register do
 
     named :youtube
     name_positional_attributes 'poster', 'theme', 'role'
-    default_attrs 'poster' => '/assets/images/icons/videojs/videojs-poster.png',
+    default_attrs 'poster' => '/assets/image/icons/videojs/videojs-poster.png',
                   'theme' => 'uno',
                   'role' => 'mt-3 mb-3'
 

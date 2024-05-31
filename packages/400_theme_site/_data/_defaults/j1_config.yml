@@ -346,7 +346,7 @@ preload:
                                           ]
   image:
     preload:                              false
-    files:                                [ /assets/images/modules/icons/j1/j1-512x512.png ]
+    files:                                [ /assets/image/modules/icons/j1/j1-512x512.png ]
 
 # ------------------------------------------------------------------------------
 # PRECONNECT settings

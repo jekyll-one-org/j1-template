@@ -53,6 +53,6 @@ jadams, 2019-08-23: no variables should be used for initial setup
   {% if site.data.j1_config.image_path %}
     {% assign image_path = site.data.j1_config.image_path %}
   {% else %}
-    {% capture image_path %}{{ base_path }}/assets/images/{{ page.theme.name }}{% endcapture %}
+    {% capture image_path %}{{ base_path }}/assets/image/{{ page.theme.name }}{% endcapture %}
   {% endif %}
 {% endif %}

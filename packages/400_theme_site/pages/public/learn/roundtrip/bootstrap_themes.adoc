@@ -21,7 +21,7 @@ categories:                             [ Roundtrip ]
 tags:                                   [ Bootstrap, Module, Theme ]
 
 image:
-  path:                                 /assets/images/modules/attics/themes-1920x1280-bw.jpg
+  path:                                 /assets/image/modules/attics/themes-1920x1280-bw.jpg
   width:                                1920
   height:                               1280
 
@@ -32,7 +32,7 @@ resources:                              [ lightbox, rouge ]
 resource_options:
   - attic:
       slides:
-        - url:                          /assets/images/modules/attics/themes-1920x1280-bw.jpg
+        - url:                          /assets/image/modules/attics/themes-1920x1280-bw.jpg
           alt:                          Photo by Clem Onojeghuo on Unsplash
           badge:
             type:                       unsplash

@@ -21,7 +21,7 @@ categories:                             [ Roundtrip ]
 tags:                                   [ Bootstrap, Modal, Extension ]
 
 image:
-  path:                                 /assets/images/pages/roundtrip/bootstrap-1920x1000-bw.jpg
+  path:                                 /assets/image/pages/roundtrip/bootstrap-1920x1000-bw.jpg
   width:                                1920
   height:                               1280
 
@@ -32,7 +32,7 @@ resources:                              [ rouge ]
 resource_options:
   - attic:
       slides:
-        - url:                          /assets/images/pages/roundtrip/bootstrap-1920x1000-bw.jpg
+        - url:                          /assets/image/pages/roundtrip/bootstrap-1920x1000-bw.jpg
           alt:                          Bootstrap Framework Logo
 ---
 

@@ -36,7 +36,7 @@ Asciidoctor::Extensions.register do
     name_positional_attributes 'type', 'controls', 'poster', 'role'
     default_attrs 'type' => 'mp4',
                   'controls' => "controls",
-                  'poster'   => '/assets/images/icons/videojs/videojs-poster.png',
+                  'poster'   => '/assets/image/icons/videojs/videojs-poster.png',
                   'role'     => 'mt-3 mb-3'
 
     def process parent, target, attributes

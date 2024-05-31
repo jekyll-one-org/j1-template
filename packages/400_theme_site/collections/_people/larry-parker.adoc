@@ -9,7 +9,7 @@ categories:                             [ Person ]
 tags:                                   [ Business, Private ]
 
 image:
-  path:                                 assets/images/collections/people/larry-parker.jpg
+  path:                                 assets/image/collections/people/larry-parker.jpg
   width:                                1920
   height:                               1280
   alt:                                  Diana Petersen

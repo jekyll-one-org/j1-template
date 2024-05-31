@@ -23,7 +23,7 @@ resource_options:
       padding_bottom:                   50
       opacity:                          0.5
       slides:
-        - url:                          /assets/images/pages/roundtrip/images-1920x1280-bw.jpg
+        - url:                          /assets/image/pages/roundtrip/images-1920x1280-bw.jpg
           alt:                          Photo by Ricardo Gomez Angel on Unsplash
           badge:
             type:                       unsplash
@@ -65,7 +65,7 @@ lorem:sentences[5]
   	<!-- [INFO   ] [j1.assets.data.panel.html             ] [ write post items ] -->
   	<li id="home_news_panel-scroll-item" class="list-group-item items-2 p-0">
   	  <article class="card card-same-height raised-z3 mb-3">
-  		<img class="img-fluid img-object--cover g-height-200" src="/assets/images/modules/attics/katie-moum-1920x1280.jpg" alt="Welcome">
+  		<img class="img-fluid img-object--cover g-height-200" src="/assets/image/modules/attics/katie-moum-1920x1280.jpg" alt="Welcome">
   		<h3 class="card-header bg-primary notoc">Welcome</h3>
   		<!-- Body|Excerpt -->
   		<div class="card-body r-text-300 mt-4">
@@ -92,7 +92,7 @@ lorem:sentences[5]
   	<li id="home_news_panel-scroll-item" class="list-group-item items-2 p-0">
 
   	  <article class="card card-same-height raised-z3 mb-3">
-  		<img class="img-fluid img-object--cover g-height-200" src="/assets/images/modules/attics/1920x1280/j1-starter-mockup-1.jpg" alt="J1 Theme">
+  		<img class="img-fluid img-object--cover g-height-200" src="/assets/image/modules/attics/1920x1280/j1-starter-mockup-1.jpg" alt="J1 Theme">
   		<h3 class="card-header bg-primary notoc">J1 Theme</h3>
   		<!-- Body|Excerpt -->
   		<div class="card-body r-text-300 mt-4">

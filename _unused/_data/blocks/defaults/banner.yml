@@ -54,7 +54,7 @@ defaults:
   #   Pixel image used to gridify the background image of the banner.
   #
   #   values:                         image path|name (string)
-  #   default:                        /assets/images/modules/patterns/gridtile.png
+  #   default:                        /assets/image/modules/patterns/gridtile.png
   #
   #   darken
   #   --------------------------------------------------------------------------
@@ -72,17 +72,17 @@ defaults:
   #   the panels configuration (j1_panels.yml).
   #
   #   values:                         image path|name (string)
-  #   default:                        /assets/images/quotes/default.png
+  #   default:                        /assets/image/quotes/default.png
   # ----------------------------------------------------------------------------
   #
   parallax_settings:
 
     gridify:                          true
-    gridifier:                        /assets/images/modules/patterns/gridtile.png
+    gridifier:                        /assets/image/modules/patterns/gridtile.png
     text_color:                       rgba_lighten
     cite_color:                       rgba_lighten
     darken:                           3
-    background:                       /assets/images/quotes/default.png
+    background:                       /assets/image/quotes/default.png
     background_pos_x:                 50%
     background_pos_y:                 0
 
@@ -92,7 +92,7 @@ defaults:
   # ----------------------------------------------------------------------------
   #
   image_settings:
-    gridifier:                        /assets/images/modules/patterns/gridtile.png
+    gridifier:                        /assets/image/modules/patterns/gridtile.png
 
 
   # ----------------------------------------------------------------------------
@@ -229,7 +229,7 @@ defaults:
         gridify:                        true
         size_y:                         300
         darken:                         7
-        background_image:               /assets/images/quotes/people.png
+        background_image:               /assets/image/quotes/people.png
 
         buttons:
 

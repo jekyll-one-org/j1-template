@@ -19,7 +19,7 @@ categories:                             [ Previewer ]
 tags:                                   [ Module, Geolocation, API ]
 
 image:
-  path:                                 /assets/images/modules/attics/1920x1280/markus-spiske.jpg
+  path:                                 /assets/image/modules/attics/1920x1280/markus-spiske.jpg
   width:                                1920
   height:                               1280
 
@@ -39,7 +39,7 @@ resource_options:
         contrast:                       1
         brightness:                     0.8
       slides:
-        - url:                          /assets/images/modules/attics/1920x1280/markus-spiske.jpg
+        - url:                          /assets/image/modules/attics/1920x1280/markus-spiske.jpg
           alt:                          Photo by Markus Spiske on Unsplash
           badge:
             type:                       unsplash

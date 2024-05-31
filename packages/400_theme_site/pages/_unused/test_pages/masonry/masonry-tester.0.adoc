@@ -24,7 +24,7 @@ resource_options:
       padding_bottom:                   50
       opacity:                          0.5
       slides:
-        - url:                          /assets/images/pages/roundtrip/images-1920x1280-bw.jpg
+        - url:                          /assets/image/pages/roundtrip/images-1920x1280-bw.jpg
           alt:                          Photo by Ricardo Gomez Angel on Unsplash
           badge:
             type:                       unsplash
@@ -72,7 +72,7 @@ and Masonry's positioning.
 
     <div class="col-sm-6 col-lg-4 mb-4">
       <div class="card">
-        <img class="img-fluid img-object--cover" src="/assets/images/modules/attics/katie-moum-1920x1280.jpg" alt="Welcome to J1" style="filter: grayscale(1) contrast(1) brightness(1);">
+        <img class="img-fluid img-object--cover" src="/assets/image/modules/attics/katie-moum-1920x1280.jpg" alt="Welcome to J1" style="filter: grayscale(1) contrast(1) brightness(1);">
 
         <div class="card-body">
           <h5 class="card-title">Card title that wraps to a new line</h5>
@@ -96,7 +96,7 @@ and Masonry's positioning.
 
     <div class="col-sm-6 col-lg-4 mb-4">
       <div class="card">
-        <img class="img-fluid img-object--cover" src="/assets/images/modules/attics/katie-moum-1920x1280.jpg" alt="Welcome to J1" style="filter: grayscale(1) contrast(1) brightness(1);">
+        <img class="img-fluid img-object--cover" src="/assets/image/modules/attics/katie-moum-1920x1280.jpg" alt="Welcome to J1" style="filter: grayscale(1) contrast(1) brightness(1);">
 
         <div class="card-body">
           <h5 class="card-title">Card title</h5>
@@ -108,7 +108,7 @@ and Masonry's positioning.
 
     <div class="col-sm-6 col-lg-4 mb-4">
       <article class="card">
-      	<img class="img-fluid img-object--cover g-height-200" src="/assets/images/modules/attics/katie-moum-1920x1280.jpg" alt="Welcome to J1" style="filter: grayscale(1) contrast(1) brightness(1);">
+      	<img class="img-fluid img-object--cover g-height-200" src="/assets/image/modules/attics/katie-moum-1920x1280.jpg" alt="Welcome to J1" style="filter: grayscale(1) contrast(1) brightness(1);">
       	<h3 class="card-header bg-primary notoc notranslate">Welcome to J1</h3>
       	<!-- Body|Excerpt -->
       	<div class="card-body r-text-300 mt-0">
@@ -164,7 +164,7 @@ and Masonry's positioning.
 
     <div class="col-sm-6 col-lg-4 mb-4">
       <div class="card">
-        <img class="img-fluid img-object--cover" src="/assets/images/modules/attics/katie-moum-1920x1280.jpg" alt="Welcome to J1" style="filter: grayscale(1) contrast(1) brightness(1);">
+        <img class="img-fluid img-object--cover" src="/assets/image/modules/attics/katie-moum-1920x1280.jpg" alt="Welcome to J1" style="filter: grayscale(1) contrast(1) brightness(1);">
       </div>
     </div>
 

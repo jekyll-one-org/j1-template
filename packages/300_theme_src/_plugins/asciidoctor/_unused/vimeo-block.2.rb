@@ -38,7 +38,7 @@ Asciidoctor::Extensions.register do
 
     named :vimeo
     name_positional_attributes 'poster', 'theme', 'role'
-    default_attrs 'poster' => '/assets/images/icons/videojs/videojs-poster.png',
+    default_attrs 'poster' => '/assets/image/icons/videojs/videojs-poster.png',
                   'theme' => 'uno',
                   'role' => 'mt-3 mb-3'
 

@@ -29,7 +29,7 @@ resource_options:
       padding_bottom:                   50
       opacity:                          0.5
       slides:
-        - url:                          /assets/images/modules/attics/banner/admin-dashboard-bootstrap-1280x800-bw.jpg
+        - url:                          /assets/image/modules/attics/banner/admin-dashboard-bootstrap-1280x800-bw.jpg
           alt:                          admin-dashboard-bootstrap-1280x800-bw
 ---
 

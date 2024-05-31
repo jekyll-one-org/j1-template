@@ -20,7 +20,7 @@ categories:                             [ Roundtrip ]
 tags:                                   [ Module, Icon ]
 
 image:
-  path:                                 assets/images/pages/roundtrip/icon-fonts-1920x1280-bw.jpg
+  path:                                 assets/image/pages/roundtrip/icon-fonts-1920x1280-bw.jpg
   width:                                1920
   height:                               1280
 
@@ -31,7 +31,7 @@ resources:                              [ iconify ]
 resource_options:
   - attic:
       slides:
-        - url:                          /assets/images/pages/roundtrip/icon-fonts-1920x1280-bw.jpg
+        - url:                          /assets/image/pages/roundtrip/icon-fonts-1920x1280-bw.jpg
           alt:                          Photo by Harpal Singh on Unsplash
           badge:
             type:                       unsplash

@@ -23,7 +23,7 @@ resource_options:
       padding_bottom:                   50
       opacity:                          0.5
       slides:
-        - url:                          /assets/images/modules/attics/gift-from-hand-1920x1280.jpg
+        - url:                          /assets/image/modules/attics/gift-from-hand-1920x1280.jpg
           alt:                          gift-from-hand-1920x1280.jpg
 ---
 

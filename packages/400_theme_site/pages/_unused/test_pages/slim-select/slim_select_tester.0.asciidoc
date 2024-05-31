@@ -13,7 +13,7 @@ categories:                             [ Info ]
 tags:                                   [ Places, Introduction ]
 
 image:
-  path:                                 /assets/images/modules/attics/1920x1280/j1-starter-mockup-1.jpg
+  path:                                 /assets/image/modules/attics/1920x1280/j1-starter-mockup-1.jpg
   width:                                1920
   height:                               1280
   alt:                                  Photo by Alexander Redl on Unsplash
@@ -30,7 +30,7 @@ resource_options:
       padding_bottom:                   50
       opacity:                          0.5
       slides:
-        - url:                          /assets/images/modules/attics/1920x1280/j1-starter-mockup-1.jpg
+        - url:                          /assets/image/modules/attics/1920x1280/j1-starter-mockup-1.jpg
           alt:                          Photo by Alexander Redl on Unsplash
           badge:
             type:                       unsplash

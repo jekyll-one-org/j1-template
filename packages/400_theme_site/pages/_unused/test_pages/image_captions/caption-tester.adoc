@@ -21,7 +21,7 @@ resources:                              [ animate, clipboard, lightbox, rouge ]
 resource_options:
   - attic:
       slides:
-        - url:                          /assets/images/modules/attics/themes-1920x1280-bw.jpg
+        - url:                          /assets/image/modules/attics/themes-1920x1280-bw.jpg
           alt:                          Photo by Clem Onojeghuo on Unsplash
           badge:
             type:                       unsplash

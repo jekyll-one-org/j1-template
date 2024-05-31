@@ -38,7 +38,7 @@ backend:
 # ------------------------------------------------------------------------------
 # site (production) settings
 #
-# logo_url:                             http://localhost:5000/assets/images/icons/j1/scalable/j1.svg
+# logo_url:                             http://localhost:5000/assets/image/icons/j1/scalable/j1.svg
 # site_url:                             http://localhost:5000/
 # display_url:                          http://localhost:5000/
 #
@@ -52,7 +52,7 @@ show_preview_links:                     false
 #   config:
 #     publicKey: demopublickey
 #
-media_folder:                           packages/300_theme_src/assets/images/public
+media_folder:                           packages/300_theme_src/assets/image/public
 public_folder:                          packages/300_theme_src/assets/uploads/
 
 # ------------------------------------------------------------------------------

@@ -17,7 +17,7 @@ keywords: >
                                         speech synthesise, sst, j1 module, speak2me, jquery
 
 image:
-  path:                                 /assets/images/pages/roundtrip/images-1920x1280-bw.jpg
+  path:                                 /assets/image/pages/roundtrip/images-1920x1280-bw.jpg
   width:                                1920
   height:                               1280
 
@@ -25,7 +25,7 @@ categories:                             [ Module ]
 tags:                                   [ Speech Synthesise, SST, Speak2Me, Preview ]
 
 book:
-  cover:                                /assets/images/collections/books/biography/a_life_in_questions.jpg
+  cover:                                /assets/image/collections/books/biography/a_life_in_questions.jpg
 
 toc:                                    true
 tts:                                    true
@@ -48,7 +48,7 @@ resource_options:
       collapseDepth:                    4
   - attic:
       slides:
-        - url:                          /assets/images/pages/roundtrip/images-1920x1280-bw.jpg
+        - url:                          /assets/image/pages/roundtrip/images-1920x1280-bw.jpg
           alt:                          Photo by Ricardo Gomez Angel on Unsplash
           badge:
             type:                       unsplash
@@ -500,7 +500,7 @@ A *block* image is displayed as a *discrete* element on its own line in a
 document. Webpages use block images for various purposes to enhance
 visual appeal, convey information, and improve the overall user experience.
 
-image::/assets/images/pages/panels/responsive-text-1920x800.jpg[{{page.title}}, width=1280, role="mb-4"]
+image::/assets/image/pages/panels/responsive-text-1920x800.jpg[{{page.title}}, width=1280, role="mb-4"]
 
 [role="mt-4 mb-5"]
 [NOTE]

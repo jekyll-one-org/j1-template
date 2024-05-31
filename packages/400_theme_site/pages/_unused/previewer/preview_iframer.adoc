@@ -20,7 +20,7 @@ categories:                             [ Previewer ]
 tags:                                   [ Module, iFramer ]
 
 image:
-  path:                                 /assets/images/modules/attics/jessica-ruscello-1920x1280.jpg
+  path:                                 /assets/image/modules/attics/jessica-ruscello-1920x1280.jpg
   width:                                1920
   height:                               1280
 
@@ -37,7 +37,7 @@ resource_options:
       padding_bottom:                   50
       opacity:                          0.5
       slides:
-        - url:                          /assets/images/modules/attics/jessica-ruscello-1920x1280.jpg
+        - url:                          /assets/image/modules/attics/jessica-ruscello-1920x1280.jpg
           alt:                          Photo by Jessica Ruscello Unsplash
           badge:
             type:                       unsplash

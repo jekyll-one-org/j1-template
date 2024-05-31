@@ -17,7 +17,7 @@ categories:                             [ Books ]
 tags:                                   [ Fantasy, Preview ]
 
 image:
-  path:                                 /assets/images/modules/attics/giammarco-boscaro-1920x1280.jpg
+  path:                                 /assets/image/modules/attics/giammarco-boscaro-1920x1280.jpg
   width:                                1920
   height:                               1280
 
@@ -34,7 +34,7 @@ resources:                              [ masonry, rouge ]
 resource_options:
   - attic:
       slides:
-        - url:                          /assets/images/modules/attics/giammarco-boscaro-1920x1280.jpg
+        - url:                          /assets/image/modules/attics/giammarco-boscaro-1920x1280.jpg
           alt:                          Photo by Giammarco on Unsplash
           badge:
             type:                       unsplash

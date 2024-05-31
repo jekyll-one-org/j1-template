@@ -45,7 +45,7 @@ resource_options:
       padding_bottom:                   50
       opacity:                          0.5
       slides:
-        - url:                          /assets/images/modules/attics/john-schnobrich-2-1920x1280.jpg
+        - url:                          /assets/image/modules/attics/john-schnobrich-2-1920x1280.jpg
           alt:                          Photo by John Schnobrich on Unsplash
           badge:
             type:                       unsplash
@@ -80,8 +80,8 @@ resource_options:
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-// image:/assets/images/badges/myBinder.png[Binder, link="https://mybinder.org/", {browser-window--new}]
-// image:/assets/images/badges/docsBinder.png[Binder, link="https://mybinder.readthedocs.io/en/latest/", {browser-window--new}]
+// image:/assets/image/badges/myBinder.png[Binder, link="https://mybinder.org/", {browser-window--new}]
+// image:/assets/image/badges/docsBinder.png[Binder, link="https://mybinder.readthedocs.io/en/latest/", {browser-window--new}]
 
 ifeval::[{binder-badges-enabled} == true]
 image:https://mybinder.org/badge_logo.svg[Binder, link="{binder-app-launch--tree}", {browser-window--new}]

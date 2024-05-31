@@ -42,8 +42,8 @@ settings:
 
       id:                               jg_old_times
       type:                             image
-      image_base_path:                  /assets/images/modules/gallery/old_times
-      thumb_base_path:                  /assets/images/modules/gallery/old_times
+      image_base_path:                  /assets/image/modules/gallery/old_times
+      thumb_base_path:                  /assets/image/modules/gallery/old_times
 
       # ------------------------------------------------------------------------
       # Justified Gallery settings
@@ -114,8 +114,8 @@ settings:
 
       id:                               jg_mega_cities
       type:                             image
-      image_base_path:                  /assets/images/modules/gallery/mega_cities
-      thumb_base_path:                  /assets/images/modules/gallery/mega_cities
+      image_base_path:                  /assets/image/modules/gallery/mega_cities
+      thumb_base_path:                  /assets/image/modules/gallery/mega_cities
 
       # ------------------------------------------------------------------------
       # Justified Gallery settings

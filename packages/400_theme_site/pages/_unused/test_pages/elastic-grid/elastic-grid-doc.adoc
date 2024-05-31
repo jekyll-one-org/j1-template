@@ -23,7 +23,7 @@ resource_options:
       padding_bottom:                   50
       opacity:                          0.5
       slides:
-        - url:                          /assets/images/pages/roundtrip/images-1920x1280-bw.jpg
+        - url:                          /assets/image/pages/roundtrip/images-1920x1280-bw.jpg
           alt:                          Photo by Ricardo Gomez Angel on Unsplash
           badge:
             type:                       unsplash
@@ -200,7 +200,7 @@ resource_options:
         <hr class="notop">
       </div>
       <p>
-        <img alt="" src="assets/images/explanation.jpg">
+        <img alt="" src="assets/image/explanation.jpg">
       </p>
     </section>
     <section id="the_options">

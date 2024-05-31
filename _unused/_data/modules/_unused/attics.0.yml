@@ -165,7 +165,7 @@ settings:
 #        transitionDuration:            2500
 #        animateFirst:                  false
 #        slides:
-#          - url:                       "/assets/images/modules/attics/pagehead-default-1200.jpg"
+#          - url:                       "/assets/image/modules/attics/pagehead-default-1200.jpg"
 #            alt:                       "J1 Master Header - Default image for Layout PAGE"
 #            caption:                   "Caption for the header image with a link"
 #            caption_href:              "#"

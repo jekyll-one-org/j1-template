@@ -220,7 +220,7 @@ For Bootstrap icons use `tools/bootstrap-icons-list.html`. It scrapes the latest
 
 ## Screenshots
 
-![Universal Icon Picker Screenshot](https://universal-icon-picker.miglisoft.com/demo/assets/images/screenshot.png)
+![Universal Icon Picker Screenshot](https://universal-icon-picker.miglisoft.com/demo/assets/image/screenshot.png)
 
 ## Contributing
 

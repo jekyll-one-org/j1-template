@@ -19,7 +19,7 @@ categories:                             [ Roundtrip ]
 tags:                                   [ Bootstrap, Tables, Extension ]
 
 image:
-  path:                                 /assets/images/pages/roundtrip/tables-1920x1280-bw.jpg
+  path:                                 /assets/image/pages/roundtrip/tables-1920x1280-bw.jpg
   width:                                1920
   height:                               1280
 
@@ -30,7 +30,7 @@ resources:                              [ rouge ]
 resource_options:
   - attic:
       slides:
-        - url:                          /assets/images/pages/roundtrip/tables-1920x1280-bw.jpg
+        - url:                          /assets/image/pages/roundtrip/tables-1920x1280-bw.jpg
           alt:                          Photo by Markus Spiske on Unsplash
           badge:
             type:                       unsplash

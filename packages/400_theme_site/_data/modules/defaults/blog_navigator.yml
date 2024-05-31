@@ -141,7 +141,7 @@ description:
 defaults:
 
   readmore_text:                        read
-  post_image:                           /assets/images/modules/attics/christa-dodoo-1920x1280.jpg
+  post_image:                           /assets/image/modules/attics/christa-dodoo-1920x1280.jpg
   previewer:                            timeline
 
   filters:
