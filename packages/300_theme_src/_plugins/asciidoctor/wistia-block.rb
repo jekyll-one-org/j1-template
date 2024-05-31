@@ -38,7 +38,7 @@ Asciidoctor::Extensions.register do
 
     named :wistia
     name_positional_attributes 'poster', 'theme', 'role'
-    default_attrs 'poster' => '/assets/videos/poster/wistia/wistia-blue.jpg',
+    default_attrs 'poster' => '/assets/video/poster/wistia/wistia-blue.jpg',
                   'theme' => 'uno',
                   'role' => 'mt-3 mb-3'
 

@@ -21,7 +21,7 @@ categories:                             [ Roundtrip ]
 tags:                                   [ Module, Video ]
 
 image:
-  path:                                 /assets/videos/headers/present_videos/still/underground-broadway.jpg
+  path:                                 /assets/video/headers/present_videos/still/underground-broadway.jpg
   width:                                1920
   height:                               1280
 
@@ -39,12 +39,12 @@ resource_options:
   - attic:
       slides:
         # Broadway Underground - still image (animate default)
-        - url:                          /assets/videos/headers/present_videos/still/underground-broadway.jpg
+        - url:                          /assets/video/headers/present_videos/still/underground-broadway.jpg
           alt:                          Broadway Underground
           title:                        Audio and Video
           tagline:                      Playing media files
         # Broadway Underground - FAYETTE ST
-        - url:                          /assets/videos/headers/present_videos/underground-broadway.mp4
+        - url:                          /assets/video/headers/present_videos/underground-broadway.mp4
           alt:                          Broadway Underground Video
           title:                        Audio and Video
           tagline:                      Playing media files
@@ -52,7 +52,7 @@ resource_options:
           loop:                         false
           duration:                     6000
         # Broadway Underground - still image (animate random)
-        - url:                          /assets/videos/headers/present_videos/still/underground-broadway.jpg
+        - url:                          /assets/video/headers/present_videos/still/underground-broadway.jpg
           alt:                          Broadway Underground
           title:                        Audio and Video
           tagline:                      Playing media files
@@ -138,7 +138,7 @@ offers an out-of-the-box framework for decoding and displaying video content
 without loading *external players*.
 
 .MP4 Video, Peck Pocketed
-video::/assets/videos//html5/peck_pocketed.mp4[poster="/assets/videos/poster/html5/peck_pocketed.jpg", opts="" role="mt-4 mb-5"]
+video::/assets/video//html5/peck_pocketed.mp4[poster="/assets/video/poster/html5/peck_pocketed.jpg", opts="" role="mt-4 mb-5"]
 
 [role="mt-4"]
 === VideoJS
@@ -160,7 +160,7 @@ VideoJS provides a flexible and customizable platform for displaying and
 controlling MPEG 4 video content on websites and web applications.
 
 .MP4 Video, Rolling Wild
-videojs::/assets/videos//html5/rolling_wild.mp4[poster="/assets/videos/poster/html5/rolling_wild.jpg", opts="" role="mt-4 mb-5"]
+videojs::/assets/video//html5/rolling_wild.mp4[poster="/assets/video/poster/html5/rolling_wild.jpg", opts="" role="mt-4 mb-5"]
 
 [role="mt-5"]
 ==== YouTube
@@ -170,7 +170,7 @@ upload, view, share, and comment on videos. The platform provides services
 for people and organizations to publish various video content.
 
 .The Voice Kids NL 2021 - Emma Kok
-youtube::20gXikNRjbo[poster="/assets/videos/poster/youtube/voice_kids/banner/best_of.jpg" role="mt-4 mb-5"]
+youtube::20gXikNRjbo[poster="/assets/video/poster/youtube/voice_kids/banner/best_of.jpg" role="mt-4 mb-5"]
 
 
 [role="mt-4"]
@@ -193,7 +193,7 @@ marketers. Free or paid plans are available. While Wistia may not be the
 should be considered a viable video platform.
 
 .Platform Intro
-// wistia::29b0fbf547[poster="/assets/videos/poster/wistia/wistia-black.jpg" role="mt-4 mb-4"]
+// wistia::29b0fbf547[poster="/assets/video/poster/wistia/wistia-black.jpg" role="mt-4 mb-4"]
 wistia::29b0fbf547[poster="auto" role="mt-4 mb-4"]
 // wistia::29b0fbf547[role="mt-4 mb-4"]
 
@@ -207,7 +207,7 @@ showcase their videos. Vimeo is known for its emphasis on high-quality videos
 and creative expression.
 
 .Forever 21 - Kick It Old School
-vimeo::179528528[poster="/assets/videos/poster/vimeo/kick_it_old_school.jpg" role="mt-4 mb-5"]
+vimeo::179528528[poster="/assets/video/poster/vimeo/kick_it_old_school.jpg" role="mt-4 mb-5"]
 // vimeo::179528528[poster="auto" role="mt-4 mb-5"]
 // vimeo::179528528[role="mt-4 mb-5"]
 

@@ -23,7 +23,7 @@ include Asciidoctor
 # Example:
 #
 #   .Video title
-#   video::/assets/videos/gallery/html5/video2.mp4[poster="/assets/videos/gallery/video2-poster.jpg" role="mt-5 mb-5"]
+#   video::/assets/video/gallery/html5/video2.mp4[poster="/assets/video/gallery/video2-poster.jpg" role="mt-5 mb-5"]
 #
 # ------------------------------------------------------------------------------
 

@@ -691,7 +691,7 @@ a built-in multimedia framework already for decoding and displaying video
 content. No need to use such proprietary software components anymore.
 
 .HTML5 Player
-video::/assets/videos/gallery/html5/video1.mp4[poster="/assets/videos/gallery/video1-poster.jpg" role="mt-4 mb-5"]
+video::/assets/video/gallery/html5/video1.mp4[poster="/assets/video/gallery/video1-poster.jpg" role="mt-4 mb-5"]
 
 [role="mt-4"]
 === VideoJS
@@ -702,7 +702,7 @@ platform for displaying and controlling video content on websites and web
 applications.
 
 .VideoJS
-videojs::/assets/videos/gallery/html5/video1.mp4[poster="/assets/videos/gallery/video1-poster.jpg" role="mt-4 mb-5"]
+videojs::/assets/video/gallery/html5/video1.mp4[poster="/assets/video/gallery/video1-poster.jpg" role="mt-4 mb-5"]
 
 [role="mt-5"]
 === YouTube
@@ -713,7 +713,7 @@ and acquired by Google in November 2006. YouTube provides a platform for
 people and organizations to publish various video content on the Web.
 
 .Last Carpool Karaoke
-youtube::nV8UZJNBY6Y[poster="/assets/videos/gallery/video_adele_last_carpool_caraoke_poster.jpg" role="mt-4 mb-5"]
+youtube::nV8UZJNBY6Y[poster="/assets/video/gallery/video_adele_last_carpool_caraoke_poster.jpg" role="mt-4 mb-5"]
 
 [role="mt-5"]
 === Wistia

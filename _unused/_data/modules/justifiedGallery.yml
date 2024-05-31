@@ -219,9 +219,9 @@ settings:
         show_delay:                     300
         title:                          false                                   # HTML5 Video Gallery
         theme:                          city
-        video_path:                     /assets/videos/gallery/html5
-        image_path:                     /assets/videos/gallery
-        thumb_path:                     /assets/videos/gallery
+        video_path:                     /assets/video/gallery/html5
+        image_path:                     /assets/video/gallery
+        thumb_path:                     /assets/video/gallery
         videos:                         [
                                           video1.mp4,
                                           video2.mp4
@@ -259,8 +259,8 @@ settings:
         show_delay:                     300
         title:                          false                                   # YouTube Video Gallery
         css_classes:
-        image_path:                     /assets/videos/gallery
-        thumb_path:                     /assets/videos/gallery
+        image_path:                     /assets/video/gallery
+        thumb_path:                     /assets/video/gallery
         videos:                         [
                                           "//youtube.com/watch?v=X5Cfi7U4eL4",
                                           "//youtube.com/watch?v=Nck6BZga7TQ",
@@ -304,8 +304,8 @@ settings:
         show_delay:                     300
         title:                          false                                   # YouTube Video Gallery
         css_classes:
-        image_path:                     /assets/videos/gallery/voice_kids_de_2021
-        thumb_path:                     /assets/videos/gallery/voice_kids_de_2021
+        image_path:                     /assets/video/gallery/voice_kids_de_2021
+        thumb_path:                     /assets/video/gallery/voice_kids_de_2021
         videos:                         [
                                           "//youtube.com/watch?v=aQqPgLMgO-I",
                                           "//youtube.com/watch?v=Bl6tkAgaP1g",
@@ -356,8 +356,8 @@ settings:
         show_delay:                     300
         title:                          false
         css_classes:
-        image_path:                     /assets/videos/gallery/voice_kids_de_2021
-        thumb_path:                     /assets/videos/gallery/voice_kids_de_2021
+        image_path:                     /assets/video/gallery/voice_kids_de_2021
+        thumb_path:                     /assets/video/gallery/voice_kids_de_2021
         videos:                         [
                                           "//youtube.com/watch?v=GuiOYCv9NTI",
                                           "//youtube.com/watch?v=1bvE2mgJ22I"
@@ -400,8 +400,8 @@ settings:
         thumb_bordered:                 true
         thumb_animate:                  true
         css_classes:
-        image_path:                     /assets/videos/gallery
-        thumb_path:                     /assets/videos/gallery
+        image_path:                     /assets/video/gallery
+        thumb_path:                     /assets/video/gallery
         videos:                         [
                                           "//vimeo.com/179528528",
                                           "//vimeo.com/202117650",
@@ -445,8 +445,8 @@ settings:
         thumb_bordered:                 true
         thumb_animate:                  true
         css_classes:
-        image_path:                     /assets/videos/gallery
-        thumb_path:                     /assets/videos/gallery
+        image_path:                     /assets/video/gallery
+        thumb_path:                     /assets/video/gallery
         videos:                         [
                                           "//vimeo.com/179528528",
                                           "//vimeo.com/202117650"
@@ -487,8 +487,8 @@ settings:
         thumb_bordered:                 true
         thumb_animate:                  true
         css_classes:
-        image_path:                     /assets/videos/gallery/dailymotion
-        thumb_path:                     /assets/videos/gallery/dailymotion
+        image_path:                     /assets/video/gallery/dailymotion
+        thumb_path:                     /assets/video/gallery/dailymotion
         videos:                         [
                                           "//dai.ly/x887s09",
                                           "//dai.ly/x87ycik"
@@ -527,8 +527,8 @@ settings:
         thumb_bordered:                 true
         thumb_animate:                  true
         css_classes:
-        image_path:                     /assets/videos/gallery/vk
-        thumb_path:                     /assets/videos/gallery/vk
+        image_path:                     /assets/video/gallery/vk
+        thumb_path:                     /assets/video/gallery/vk
         videos:                         [
                                           "//vk.com/video_ext.php?oid=-114944820&id=456242413&hash=ef5be3f71500f8df",
                                           "//vk.com/video_ext.php?oid=-114944820&id=456239717&hash=f6651448bfb14b90"

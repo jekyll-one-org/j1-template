@@ -96,7 +96,7 @@ The two get emotional reflecting about their friendship and the times they've
 been there for each other.
 
 .Adele joins James Cordon for the last Carpool Caraoke
-youtube::nV8UZJNBY6Y[poster="/assets/videos/gallery/video_adele_last_carpool_caraoke_poster.jpg"]
+youtube::nV8UZJNBY6Y[poster="/assets/video/gallery/video_adele_last_carpool_caraoke_poster.jpg"]
 
 [role="mt-4"]
 More than 8 years after our premiere, we say goodbye to The Late Late Show
@@ -112,7 +112,7 @@ Please enjoy in full and thank you for sharing in so many memories with us.
   class="video-js vjs-theme-uno"
   controls
   width="640" height="360"
-  poster="/assets/videos/gallery/video_james_carpool_caraoke_poster.jpg"
+  poster="/assets/video/gallery/video_james_carpool_caraoke_poster.jpg"
   data-setup='{
     "techOrder": [
       "youtube", "html5"

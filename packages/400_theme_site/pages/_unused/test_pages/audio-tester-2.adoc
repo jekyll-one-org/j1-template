@@ -107,7 +107,7 @@ audio::https://wdrmedien-a.akamaihd.net/medp/podcast/weltweit/fsk0/305/3058000/w
 ++++
 
 .Video Solo-Sex
-videojs::https://nrodlzdf-a.akamaihd.net/none/3sat/24/01/240111_sendung_wido/5/240111_sendung_wido_6660k_p37v17.mp4[poster="/assets/videos/gallery/solo-sex.jpg" role="mt-4 mb-5"]
+videojs::https://nrodlzdf-a.akamaihd.net/none/3sat/24/01/240111_sendung_wido/5/240111_sendung_wido_6660k_p37v17.mp4[poster="/assets/video/gallery/solo-sex.jpg" role="mt-4 mb-5"]
 
 ++++
 <div class="audio-player mt-4">

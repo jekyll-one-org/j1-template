@@ -116,7 +116,7 @@ flv + live/local video encoded with h264/h265.It's decoder comes from
   hasvideo
   hasaudio
 >
-  <source src="//localhost:40000/assets/videos/gallery/h265/5s_265.flv" type='video/x-flv'/>
+  <source src="//localhost:40000/assets/video/gallery/h265/5s_265.flv" type='video/x-flv'/>
 </video>
 
 <script>

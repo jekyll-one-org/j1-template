@@ -72,12 +72,12 @@ resource_options:
 		"fluid" : true,
 		"sources": [{
 			"type": "video/mp4",
-			"src": "/assets/videos/gallery/html5/video1.mp4"
+			"src": "/assets/video/gallery/html5/video1.mp4"
 		}],
     "tracks": [{
       "default":    true,
        "kind":      "chapters",
-       "src":       "/assets/videos/gallery/vtt/chapters/video1.vtt",
+       "src":       "/assets/video/gallery/vtt/chapters/video1.vtt",
        "srclang=":  "en",
        "label":     "Chapters"
     }],

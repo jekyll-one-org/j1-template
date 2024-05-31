@@ -24,7 +24,7 @@ include Asciidoctor
 # Example:
 #
 #   .MP4 Video, Rolling Wild
-#   videojs::/assets/videos/gallery/html5/video2.mp4[start="00:00:50" poster="/assets/videos/gallery/video1-poster.jpg" role="mt-4 mb-5"]
+#   videojs::/assets/video/gallery/html5/video2.mp4[start="00:00:50" poster="/assets/video/gallery/video1-poster.jpg" role="mt-4 mb-5"]
 #
 # ------------------------------------------------------------------------------
 # See:
@@ -39,7 +39,7 @@ Asciidoctor::Extensions.register do
     named :videojs
     name_positional_attributes 'start', 'poster', 'theme', 'zoom', 'role'
     default_attrs 'start' => '00:00:00',
-                  'poster' => '/assets/videos/gallery/videojs-poster.png',
+                  'poster' => '/assets/video/gallery/videojs-poster.png',
                   'theme' => 'uno',
                   'zoom' => false,
                   'role' => 'mt-3 mb-3'

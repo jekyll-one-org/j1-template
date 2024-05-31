@@ -73,7 +73,7 @@ marketers. Free or paid plans are available. While Wistia may not be the
 should be considered a viable video platform.
 
 .Platform Intro
-// wistia::29b0fbf547[poster="/assets/videos/poster/wistia/wistia-black.jpg" role="mt-4 mb-4"]
+// wistia::29b0fbf547[poster="/assets/video/poster/wistia/wistia-black.jpg" role="mt-4 mb-4"]
 wistia::29b0fbf547[poster="auto" role="mt-4 mb-4"]
 // wistia::29b0fbf547[role="mt-4 mb-4"]
 
@@ -87,7 +87,7 @@ since grown into a popular platform for individuals and businesses to
 showcase their videos.
 
 .Forever 21 - Kick It Old School
-// vimeo::179528528[poster="/assets/videos/poster/vimeo/kick_it_old_school.jpg" role="mt-4 mb-5"]
+// vimeo::179528528[poster="/assets/video/poster/vimeo/kick_it_old_school.jpg" role="mt-4 mb-5"]
 vimeo::179528528[poster="auto" role="mt-4 mb-5"]
 // vimeo::179528528[role="mt-4 mb-5"]
 

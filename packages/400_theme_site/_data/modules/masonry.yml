@@ -638,8 +638,8 @@ settings:
       # ------------------------------------------------------------------------
       #
       html5:
-        video_base_path:                /assets/videos/html5
-        poster_base_path:               /assets/videos/poster/html5
+        video_base_path:                /assets/video/html5
+        poster_base_path:               /assets/video/poster/html5
 
       # ------------------------------------------------------------------------
       # videos
