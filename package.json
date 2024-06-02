@@ -100,7 +100,7 @@
     "setup:detect-os": "echo detect operating system .. && cross-var cross-env if-env OS=Windows_NT && cross-var echo \"operating system detected: $OS\" || OS=$(echo $(getos)) && echo \"operating system detected: $OS\"",
     "setup:links": "shx echo && echo create links for shared resources .. && lerna run --parallel setup-links && shx echo",
     "setup:build": "lerna run --parallel build",
-    "setup-start": "shx echo && echo setup development system for first use ..",
+    "setup-start": "npm --silent install shx && shx echo && echo setup development system for first use ..",
     "setup-create-log-folders": "shx echo && echo create project folders .. && run-s -s setup-create-folders:*",
     "setup-create-folders:log-folder": "shx mkdir packages/400_theme_site/log",
     "setup-create-folders:archived-folder": "shx mkdir packages/400_theme_site/log/archived",
