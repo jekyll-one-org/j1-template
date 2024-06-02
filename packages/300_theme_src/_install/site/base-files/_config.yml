@@ -103,7 +103,7 @@ theme:                                  j1-template
 # Sets the theme "path" of J1 Theme for the ~/assets/themes
 # folder. To not conflict with other template systems, all
 # template assets for J1 Theme are stored under the default
-# path "/assets/themes/j1".
+# path "/assets/theme/j1".
 #
 # NOTE:
 #   Do NOT change template.name to other values.

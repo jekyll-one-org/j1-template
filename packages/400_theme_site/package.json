@@ -103,8 +103,8 @@
     "build": "run-s -s jekyll_build:*",
 
     "lint": "run-s -s lint:*",
-    "lint:cp-es-lint-conf": "shx rm -f _site/assets/themes/j1/adapter/js/.eslintrc.json && shx cp .eslintrc.json _site/assets/themes/j1/adapter/js",
-    "lint:adapter_js": "eslint --color _site/assets/themes/j1/adapter/js/*.js",
+    "lint:cp-es-lint-conf": "shx rm -f _site/assets/theme/j1/adapter/js/.eslintrc.json && shx cp .eslintrc.json _site/assets/theme/j1/adapter/js",
+    "lint:adapter_js": "eslint --color _site/assets/theme/j1/adapter/js/*.js",
 
     "rebuild": "run-s -s rebuild:*",
     "rebuild:clean": "bundle exec jekyll clean",
@@ -135,7 +135,7 @@
     "switch-links": "if-env OS=darwin && run-s -s link-osx || run-s -s link-default",
     "link-default": "run-p -s link-default:*",
     "link-osx": "run-p -s link-osx:*",
-    "link-default:apps": "shx ln -s ../300_theme_src/apps ./apps",
+    "link-default:apps": "shx ln -s ../300_theme_src/assets/app ./apps",
     "link-default:assets": "shx ln -s ../300_theme_src/assets ./assets",
     "link-default:includes": "shx ln -s ../300_theme_src/_includes ./_includes",
     "link-default:layouts": "shx ln -s ../300_theme_src/_layouts ./_layouts",
@@ -143,7 +143,7 @@
     "link-default:sass": "shx ln -s ../100_theme_css/scss ./_sass",
     "link-default:install_files": "shx ln -s ../300_theme_src/_install ./_install",
     "link-osx:link-type": "echo use explicit symlinks for MacOS",
-    "link-osx:apps": "shx ln -s ../300_theme_src/apps ./apps",
+    "link-osx:apps": "shx ln -s ../300_theme_src/assets/app ./apps",
     "link-osx:assets": "shx ln -s ../300_theme_src/assets ./assets",
     "link-osx:includes": "shx ln -s ../300_theme_src/_includes ./_includes",
     "link-osx:layouts": "shx ln -s ../300_theme_src/_layouts ./_layouts",

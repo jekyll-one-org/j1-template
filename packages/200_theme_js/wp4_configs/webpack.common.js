@@ -31,7 +31,7 @@ const jekyllEnv =                       process.env.JEKYLL_ENV || 'development';
 
 const jsBuildPath =                     path.join(__dirname, ROOT, '../200_theme_js/dist');
 const jsSourcePath =                    path.join(__dirname, ROOT, '../200_theme_js');
-const jsPublicPath =                    '/assets/themes/j1/core/js';
+const jsPublicPath =                    '/assets/theme/j1/core/js';
 
 const jsTemplatIndex =                  'template.js';
 const jsTemplatIndexIn =                path.join(jsSourcePath, jsTemplatIndex);

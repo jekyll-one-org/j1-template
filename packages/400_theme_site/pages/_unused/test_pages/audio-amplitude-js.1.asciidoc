@@ -137,7 +137,7 @@ Balla Balla ..
           </span>
 
           <div id="volume-container" class="single-song-player-volume-container">
-            <img src="/assets/themes/j1/modules/amplitudejs/icons/volume.svg">
+            <img src="/assets/theme/j1/modules/amplitudejs/icons/volume.svg">
             <input type="range" class="single-song-player amplitude-volume-slider" step=".1">
           </div>
         </div> <!-- END meta-container -->
@@ -170,7 +170,7 @@ amplitude::free_disco_flat[role="mt-3 mb-5"]
     <div id="list-screen" class="slide-in-top">
 
       <div id="list-screen-header" class="hide-playlist">
-        <img id="up-arrow" src="/assets/themes/j1/modules/amplitudejs/icons/up.svg"/>
+        <img id="up-arrow" src="/assets/theme/j1/modules/amplitudejs/icons/up.svg"/>
         Hide Playlist
       </div> <!-- END player-header (toggle) -->
 
@@ -194,7 +194,7 @@ amplitude::free_disco_flat[role="mt-3 mb-5"]
         <div class="song amplitude-song-container amplitude-play-pause" data-amplitude-song-index="0">
           <span class="song-number-now-playing">
           <span class="number">1</span>
-          <img class="now-playing" src="/assets/themes/j1/modules/amplitudejs/icons/black/now-playing.svg"/>
+          <img class="now-playing" src="/assets/theme/j1/modules/amplitudejs/icons/black/now-playing.svg"/>
           </span>
           <div class="song-meta-container">
             <span class="song-name" data-amplitude-song-info="name" data-amplitude-song-index="0"></span>
@@ -209,7 +209,7 @@ amplitude::free_disco_flat[role="mt-3 mb-5"]
         <div class="song amplitude-song-container amplitude-play-pause" data-amplitude-song-index="1">
           <span class="song-number-now-playing">
           <span class="number">2</span>
-          <img class="now-playing" src="/assets/themes/j1/modules/amplitudejs/icons/black/now-playing.svg"/>
+          <img class="now-playing" src="/assets/theme/j1/modules/amplitudejs/icons/black/now-playing.svg"/>
           </span>
           <div class="song-meta-container">
             <span class="song-name" data-amplitude-song-info="name" data-amplitude-song-index="1"></span>
@@ -224,7 +224,7 @@ amplitude::free_disco_flat[role="mt-3 mb-5"]
         <div class="song amplitude-song-container amplitude-play-pause" data-amplitude-song-index="2">
           <span class="song-number-now-playing">
           <span class="number">3</span>
-          <img class="now-playing" src="/assets/themes/j1/modules/amplitudejs/icons/black/now-playing.svg"/>
+          <img class="now-playing" src="/assets/theme/j1/modules/amplitudejs/icons/black/now-playing.svg"/>
           </span>
           <div class="song-meta-container">
             <span class="song-name" data-amplitude-song-info="name" data-amplitude-song-index="2"></span>
@@ -243,7 +243,7 @@ amplitude::free_disco_flat[role="mt-3 mb-5"]
     <div id="player-screen" class="flat-player">
 
       <div class="player-header down-header">
-        <img id="down" src="/assets/themes/j1/modules/amplitudejs/icons/down.svg"/>
+        <img id="down" src="/assets/theme/j1/modules/amplitudejs/icons/down.svg"/>
         Show Playlist
       </div> <!-- END player-header (toggle) -->
 
@@ -275,7 +275,7 @@ amplitude::free_disco_flat[role="mt-3 mb-5"]
         </div> <!-- END control-container -->
 
         <div id="volume-container" class="flat-player-volume-container">
-          <img src="/assets/themes/j1/modules/amplitudejs/icons/volume.svg">
+          <img src="/assets/theme/j1/modules/amplitudejs/icons/volume.svg">
           <input type="range" class="amplitude-volume-slider flat-player-volume-slider" step=".1">
         </div> <!-- END volume-container -->
 

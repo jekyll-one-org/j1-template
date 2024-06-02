@@ -68,13 +68,13 @@ masterslider::ms_00001[role="mt-3 mb-5"]
 <div id="p_ms_00001" class="master-slider-parent mt-3 mb-5">
   <div id="ms_00001" class="master-slider ms-skin-light-3">
     <div class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="cat-1" title="cat-1" data-src="/assets/image/modules/masterslider/cats/cat-1.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="cat-1" title="cat-1" data-src="/assets/image/modules/masterslider/cats/cat-1.jpg">
     </div>
     <div class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="cat-2" title="cat-2" data-src="/assets/image/modules/masterslider/cats/cat-2.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="cat-2" title="cat-2" data-src="/assets/image/modules/masterslider/cats/cat-2.jpg">
     </div>
     <div class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="cat-3" title="cat-3" data-src="/assets/image/modules/masterslider/cats/cat-3.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="cat-3" title="cat-3" data-src="/assets/image/modules/masterslider/cats/cat-3.jpg">
     </div>
   </div>
 </div>
@@ -95,13 +95,13 @@ masterslider::ms_00002[role="mt-3 mb-5"]
 <div id="p_ms_00002" class="master-slider-parent mt-3 mb-5">
   <div id="ms_00002" class="master-slider ms-skin-default">
     <div class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="cities-1" title="cities-1" data-src="/assets/image/modules/masterslider/mega_cities/andreas-brucker.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="cities-1" title="cities-1" data-src="/assets/image/modules/masterslider/mega_cities/andreas-brucker.jpg">
     </div>
     <div class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="cities-2" title="cities-2" data-src="/assets/image/modules/masterslider/mega_cities/denys-nevozhai-1.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="cities-2" title="cities-2" data-src="/assets/image/modules/masterslider/mega_cities/denys-nevozhai-1.jpg">
     </div>
     <div class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="cities-3" title="cities-3" data-src="/assets/image/modules/masterslider/mega_cities/denys-nevozhai-2.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="cities-3" title="cities-3" data-src="/assets/image/modules/masterslider/mega_cities/denys-nevozhai-2.jpg">
     </div>
   </div>
 </div>
@@ -123,7 +123,7 @@ masterslider::ms_00003[role="mt-3 mb-5"]
 
   <div id="ms_00003" class="master-slider ms-skin-default  ">
     <div class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-restaurant" title="ms-free-food-restaurant" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-restaurant.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-restaurant" title="ms-free-food-restaurant" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-restaurant.jpg">
       <!-- MasterSlider Info -->
       <div class="ms-info">
         <div class="j1-ms-info-boxed">
@@ -134,7 +134,7 @@ masterslider::ms_00003[role="mt-3 mb-5"]
       </div>
     </div>
     <div class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-hamburger" title="ms-free-food-hamburger" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-hamburger.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-hamburger" title="ms-free-food-hamburger" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-hamburger.jpg">
       <!-- MasterSlider Info -->
       <div class="ms-info">
         <div class="j1-ms-info-boxed">
@@ -145,7 +145,7 @@ masterslider::ms_00003[role="mt-3 mb-5"]
       </div>
     </div>
     <div class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-family-2" title="ms-free-food-family-2" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-2.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-family-2" title="ms-free-food-family-2" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-2.jpg">
       <!-- MasterSlider Info -->
       <div class="ms-info">
         <div class="j1-ms-info-boxed">
@@ -176,31 +176,31 @@ masterslider::ms_00004[role="mt-3 mb-5"]
 
   <div id="ms_00004" class="master-slider ms-skin-light-2">
     <div class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-animals-1" title="ms-free-animals-1" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-1.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="ms-free-animals-1" title="ms-free-animals-1" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-1.jpg">
       <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-1-100x80.jpg" alt="thumb_image_ms_00004">
     </div>
     <div class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-animals-2" title="ms-free-animals-2" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-2.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="ms-free-animals-2" title="ms-free-animals-2" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-2.jpg">
       <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-2-100x80.jpg" alt="thumb_image_ms_00004">
     </div>
     <div class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-animals-3" title="ms-free-animals-3" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-3.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="ms-free-animals-3" title="ms-free-animals-3" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-3.jpg">
       <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-3-100x80.jpg" alt="thumb_image_ms_00004">
     </div>
     <div class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-animals-4" title="ms-free-animals-4" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-4.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="ms-free-animals-4" title="ms-free-animals-4" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-4.jpg">
       <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-4-100x80.jpg" alt="thumb_image_ms_00004">
     </div>
     <div class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-animals-5" title="ms-free-animals-5" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-5.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="ms-free-animals-5" title="ms-free-animals-5" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-5.jpg">
       <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-5-100x80.jpg" alt="thumb_image_ms_00004">
     </div>
     <div class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-animals-6" title="ms-free-animals-6" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-6.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="ms-free-animals-6" title="ms-free-animals-6" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-6.jpg">
       <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-6-100x80.jpg" alt="thumb_image_ms_00004">
     </div>
     <div class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-animals-7" title="ms-free-animals-7" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-7.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="ms-free-animals-7" title="ms-free-animals-7" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-7.jpg">
       <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-7-100x80.jpg" alt="thumb_image_ms_00004">
     </div>
   </div>
@@ -225,43 +225,43 @@ masterslider::ms_00005[role="mt-3 mb-5"]
 
   <div id="ms_00005" class="master-slider ms-skin-default">
     <div class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-restaurant" title="ms-free-food-restaurant" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-restaurant.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-restaurant" title="ms-free-food-restaurant" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-restaurant.jpg">
       <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-restaurant-140x80.jpg" alt="thumb_image_ms_00005">
     </div>
     <div class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-family" title="ms-free-food-family" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-family" title="ms-free-food-family" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family.jpg">
       <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-140x80.jpg" alt="thumb_image_ms_00005">
     </div>
     <div class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-woman-hand" title="ms-free-food-woman-hand" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-woman-hand.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-woman-hand" title="ms-free-food-woman-hand" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-woman-hand.jpg">
       <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-woman-hand-140x80.jpg" alt="thumb_image_ms_00005">
     </div>
     <div class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-family-2" title="ms-free-food-family-2" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-2.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-family-2" title="ms-free-food-family-2" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-2.jpg">
       <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-2-140x80.jpg" alt="thumb_image_ms_00005">
     </div>
     <div class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-family-3" title="ms-free-food-family-3" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-3.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-family-3" title="ms-free-food-family-3" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-3.jpg">
       <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-3-140x80.jpg" alt="thumb_image_ms_00005">
     </div>
     <div class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-hamburger" title="ms-free-food-hamburger" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-hamburger.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-hamburger" title="ms-free-food-hamburger" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-hamburger.jpg">
       <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-hamburger-140x80.jpg" alt="thumb_image_ms_00005">
     </div>
     <div class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-pizza" title="ms-free-food-pizza" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-pizza.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-pizza" title="ms-free-food-pizza" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-pizza.jpg">
       <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-pizza-140x80.jpg" alt="thumb_image_ms_00005">
     </div>
     <div class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-single-man" title="ms-free-food-single-man" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-single-man.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-single-man" title="ms-free-food-single-man" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-single-man.jpg">
       <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-single-man-140x80.jpg" alt="thumb_image_ms_00005">
     </div>
     <div class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-single-woman" title="ms-free-food-single-woman" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-single-woman.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-single-woman" title="ms-free-food-single-woman" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-single-woman.jpg">
       <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-single-woman-140x80.jpg" alt="thumb_image_ms_00005">
     </div>
     <div class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-table" title="ms-free-food-table" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-table.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-table" title="ms-free-food-table" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-table.jpg">
       <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-table-140x80.jpg" alt="thumb_image_ms_00005">
     </div>
   </div>
@@ -286,7 +286,7 @@ masterslider::ms_00007[role="mt-3 mb-5"]
 
 <div id="ms_00006" class="master-slider ms-skin-default ms-layout-partialview">
   <div class="ms-slide">
-    <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="Special slider for bloggers" title="Special slider for bloggers" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider6-bg-slide2-1024x622.jpg">
+    <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="Special slider for bloggers" title="Special slider for bloggers" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider6-bg-slide2-1024x622.jpg">
     <!-- MasterSlider Info -->
     <div class="ms-info">
       <div class="j1-ms-info">
@@ -298,7 +298,7 @@ masterslider::ms_00007[role="mt-3 mb-5"]
     </div>
   </div>
   <div class="ms-slide">
-    <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="We love architecture websites" title="We love architecture websites" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-3.jpg">
+    <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="We love architecture websites" title="We love architecture websites" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-3.jpg">
     <!-- MasterSlider Info -->
     <div class="ms-info">
       <div class="j1-ms-info">
@@ -310,7 +310,7 @@ masterslider::ms_00007[role="mt-3 mb-5"]
     </div>
   </div>
   <div class="ms-slide">
-    <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="New Buildings, New Designs!" title="New Buildings, New Designs!" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-2.jpg">
+    <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="New Buildings, New Designs!" title="New Buildings, New Designs!" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-2.jpg">
     <!-- MasterSlider Info -->
     <div class="ms-info">
       <div class="j1-ms-info">
@@ -322,7 +322,7 @@ masterslider::ms_00007[role="mt-3 mb-5"]
     </div>
   </div>
   <div class="ms-slide">
-    <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="Greatest Modern Architect Designs" title="Greatest Modern Architect Designs" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-1.jpg">
+    <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="Greatest Modern Architect Designs" title="Greatest Modern Architect Designs" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-1.jpg">
     <!-- MasterSlider Info -->
     <div class="ms-info">
       <div class="j1-ms-info">
@@ -356,7 +356,7 @@ masterslider::ms_00007[role="mt-3 mb-5"]
 
   <div id="ms_00007" class="master-slider ms-skin-default ms-layout-partialview">
     <div class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="childhood-memories" title="childhood-memories" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2013/10/6-2.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="childhood-memories" title="childhood-memories" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2013/10/6-2.jpg">
       <!-- MasterSlider Info -->
       <div class="ms-info">
         <div class="j1-ms-info">
@@ -368,7 +368,7 @@ masterslider::ms_00007[role="mt-3 mb-5"]
       </div>
     </div>
     <div class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="consectetuer-adipiscing" title="consectetuer-adipiscing" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2013/10/5-2.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="consectetuer-adipiscing" title="consectetuer-adipiscing" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2013/10/5-2.jpg">
       <!-- MasterSlider Info -->
       <div class="ms-info">
         <div class="j1-ms-info">
@@ -380,7 +380,7 @@ masterslider::ms_00007[role="mt-3 mb-5"]
       </div>
     </div>
     <div class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="nonummy-nibh" title="nonummy-nibh" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2013/10/6-3.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="nonummy-nibh" title="nonummy-nibh" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2013/10/6-3.jpg">
       <!-- MasterSlider Info -->
       <div class="ms-info">
         <div class="j1-ms-info">
@@ -392,7 +392,7 @@ masterslider::ms_00007[role="mt-3 mb-5"]
       </div>
     </div>
     <div class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="nibh-euismod" title="nibh-euismod" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2013/10/8.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="nibh-euismod" title="nibh-euismod" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2013/10/8.jpg">
       <!-- MasterSlider Info -->
       <div class="ms-info">
         <div class="j1-ms-info">
@@ -404,7 +404,7 @@ masterslider::ms_00007[role="mt-3 mb-5"]
       </div>
     </div>
     <div class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="cheetags" title="cheetags" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2013/10/8-1.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="cheetags" title="cheetags" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2013/10/8-1.jpg">
       <!-- MasterSlider Info -->
       <div class="ms-info">
         <div class="j1-ms-info">
@@ -416,7 +416,7 @@ masterslider::ms_00007[role="mt-3 mb-5"]
       </div>
     </div>
     <div class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="wp-content-uploads" title="" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2013/10/1-2.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="wp-content-uploads" title="" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2013/10/1-2.jpg">
       <!-- MasterSlider Info -->
       <div class="ms-info">
         <div class="j1-ms-info">

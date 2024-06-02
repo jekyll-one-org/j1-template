@@ -70,8 +70,8 @@ alternative.
 
 ++++
 <ul id="nav_theme_switch">
-  <li><a href="#" rel="/assets/themes/j1/core/css/themes/unolight/bootstrap.css" data-theme="UnoLight">UnoLight</a></li>
-  <li><a href="#" rel="/assets/themes/j1/core/css/themes/unodark/bootstrap.css"  data-theme="UnoDark">UnoDark</a></li>
+  <li><a href="#" rel="/assets/theme/j1/core/css/themes/unolight/bootstrap.css" data-theme="UnoLight">UnoLight</a></li>
+  <li><a href="#" rel="/assets/theme/j1/core/css/themes/unodark/bootstrap.css"  data-theme="UnoDark">UnoDark</a></li>
 </ul>
 ++++
 

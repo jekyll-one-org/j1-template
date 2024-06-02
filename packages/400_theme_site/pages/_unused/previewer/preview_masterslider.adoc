@@ -208,7 +208,7 @@ settings:
           alt:                          Cat 1
           title:                        Cat 1
           foreground_image:             /assets/image/modules/masterslider/slider_1/cat-1.jpg
-          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          background_image:             /assets/theme/j1/modules/masterslider/css/blank.gif
           thumb_image:                  false
           slideinfo:                    false
 

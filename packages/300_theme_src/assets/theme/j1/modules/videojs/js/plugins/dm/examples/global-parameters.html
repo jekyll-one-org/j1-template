@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="../../../../css/videojs.min.css" />
+  </head>
+  <body>
+    <video
+      id="vid1"
+      class="video-js vjs-default-skin"
+      width="640" height="264"
+      data-setup='{ "techOrder": ["dailymotion"], "sources": [{ "type": "video/dailymotion", "src": "https://www.dailymotion.com/video/x7t3la2"}] }'
+    >
+    </video>
+
+    <script src="../../../../js/video.js"></script>
+    <script src="../../../../js/plugins/dm/dailymotion.js"></script>
+
+    <script>
+    // You can use any Dailymotion player parameters
+    // https://developer.dailymotion.com/player/#player-parameters
+    // To use Dailymotion controls, you must use cmControls instead
+    videojs.setGlobalOptions({
+      dailymotion: {
+        dmControls: true,
+      }
+    });
+    </script>
+
+  </body>
+</html>

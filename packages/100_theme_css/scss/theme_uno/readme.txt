@@ -19,7 +19,7 @@ Theme Uno is the default theme|skin for J1 Theme. This themes has a
 
 The (SASS) index "light-theme.scss" references all (scss) files needed to
 generate a *full* custom theme for J1 Theme. The *main* output file is
-located in ~/assets/themes/j1/core/css/custom.scss.
+located in ~/assets/theme/j1/core/css/custom.scss.
 
 NOTE:
 

@@ -41,7 +41,7 @@ jadams, 2019-08-23: no variables should be used for initial setup
   {% if site.data.j1_config.asset_path %}
     {% assign asset_path = site.data.j1_config.asset_path %}
   {% else %}
-    {% capture asset_path %}{{ base_path }}/assets/themes/{{ page.theme.name }}{% endcapture %}
+    {% capture asset_path %}{{ base_path }}/assets/theme/{{ page.theme.name }}{% endcapture %}
   {% endif %}
 
   {% if site.data.j1_config.app_path %}

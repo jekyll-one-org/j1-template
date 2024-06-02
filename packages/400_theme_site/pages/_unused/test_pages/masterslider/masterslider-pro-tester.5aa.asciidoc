@@ -65,7 +65,7 @@ lorem:sentences[5]
   <!-- MasterSlider Main -->
   <div id="MS62a70f2f113eb" class="master-slider ms-skin-default" >
     <div  class="ms-slide  ms-slide-post-4252" data-delay="10" data-fill-mode="fill"   >
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="Special slider for bloggers" title="Special slider for bloggers"
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="Special slider for bloggers" title="Special slider for bloggers"
       data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider6-bg-slide2-1024x622.jpg">
       <div class="ms-info">
         <div style="text-align: center;">
@@ -76,7 +76,7 @@ lorem:sentences[5]
       </div>
     </div>
     <div  class="ms-slide  ms-slide-post-4251" data-delay="10" data-fill-mode="fill"   >
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="Everything is customizable!" title="Everything is customizable!"
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="Everything is customizable!" title="Everything is customizable!"
       data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider6-bg-1-1024x622.jpg">
       <div class="ms-info">
         <div style="text-align: center;">
@@ -87,7 +87,7 @@ lorem:sentences[5]
       </div>
     </div>
     <div  class="ms-slide  ms-slide-post-4246" data-delay="10" data-fill-mode="fill"   >
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="Share your moments with your visitors" title="Share your moments with your visitors" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider6-bg-slide3-1024x622.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="Share your moments with your visitors" title="Share your moments with your visitors" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider6-bg-slide3-1024x622.jpg">
       <div class="ms-info">
         <div style="text-align: center;">
           <h4 class="notoc" style="text-align: center; font-size: 20px; font-weight: 600; margin-bottom: 0;"><a class="link-no-decoration" style="color: #4dc8e4; text-decoration: none;" href="https://www.masterslider.com/share-moments-website-visitors/">Share your moments with your visitors</a></h4>
@@ -97,7 +97,7 @@ lorem:sentences[5]
       </div>
     </div>
     <div  class="ms-slide  ms-slide-post-4239" data-delay="10" data-fill-mode="fill"   >
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="We love interior design websites" title="We love interior design websites" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-3.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="We love interior design websites" title="We love interior design websites" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-3.jpg">
       <div class="ms-info">
         <div style="text-align: center;">
           <h4 class="notoc" style="text-align: center; font-size: 20px; font-weight: 600; margin-bottom: 0;"><a class="link-no-decoration" style="color: #4dc8e4; text-decoration: none;" href="https://www.masterslider.com/love-interior-design-websites/">We love interior design websites</a></h4>
@@ -107,7 +107,7 @@ lorem:sentences[5]
       </div>
     </div>
     <div  class="ms-slide  ms-slide-post-4238" data-delay="10" data-fill-mode="fill"   >
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="New Buildings, New Designs!" title="New Buildings, New Designs!" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-2.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="New Buildings, New Designs!" title="New Buildings, New Designs!" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-2.jpg">
       <div class="ms-info">
         <div style="text-align: center;">
           <h4 class="notoc" style="text-align: center; font-size: 20px; font-weight: 600; margin-bottom: 0;"><a class="link-no-decoration" style="color: #4dc8e4; text-decoration: none;" href="https://www.masterslider.com/new-buildings-new-designs/">New Buildings, New Designs!</a></h4>
@@ -117,7 +117,7 @@ lorem:sentences[5]
       </div>
     </div>
     <div  class="ms-slide  ms-slide-post-4233" data-delay="10" data-fill-mode="fill"   >
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="Greatest Modern Architect Designs" title="Greatest Modern Architect Designs" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-1.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="Greatest Modern Architect Designs" title="Greatest Modern Architect Designs" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-1.jpg">
       <div class="ms-info">
         <div style="text-align: center;">
           <h4 class="notoc" style="text-align: center; font-size: 20px; font-weight: 600; margin-bottom: 0;"><a class="link-no-decoration" style="color: #4dc8e4; text-decoration: none;" href="https://www.masterslider.com/greatest-modern-architect-designs/">Greatest Modern Architect Designs</a></h4>
@@ -143,7 +143,7 @@ lorem:sentences[5]
   <!-- MasterSlider Main -->
   <div id="MS62a73daae4e59" class="master-slider ms-skin-default" >
     <div  class="ms-slide" data-delay="3" data-fill-mode="fill"   >
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="" title=""
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="" title=""
       data-src="/assets/image/modules/masterslider/slider_7/6-2.jpg">
       <div class="ms-info">
         <h3 class="notoc" style="font-weight: 300; color: #222222; text-align: center;">CHILDHOOD MEMORIES</h3>
@@ -152,7 +152,7 @@ lorem:sentences[5]
       </div>
     </div>
     <div  class="ms-slide" data-delay="3" data-fill-mode="fill"   >
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="" title=""
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="" title=""
       data-src="/assets/image/modules/masterslider/slider_7/5-2.jpg">
       <div class="ms-info">
         <h3 class="notoc" style="font-weight: 300; color: #222222; text-align: center;">CONSECTETUR ADIPISCING ELIT</h3>
@@ -161,7 +161,7 @@ lorem:sentences[5]
       </div>
     </div>
     <div  class="ms-slide" data-delay="3" data-fill-mode="fill"   >
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="" title=""
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="" title=""
       data-src="/assets/image/modules/masterslider/slider_7/6-3.jpg">
       <div class="ms-info">
         <h3 class="notoc" style="font-weight: 300; color: #222222; text-align: center;">SUSPENDISSE UT PULVINAR MAURIS</h3>
@@ -170,7 +170,7 @@ lorem:sentences[5]
       </div>
     </div>
     <div  class="ms-slide" data-delay="3" data-fill-mode="fill"   >
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="" title=""
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="" title=""
       data-src="/assets/image/modules/masterslider/slider_7/8.jpg">
       <div class="ms-info">
         <h3 class="notoc" style="font-weight: 300; color: #222222; text-align: center;">SED DAPIBUS SIT AMET FELIS</h3>
@@ -179,7 +179,7 @@ lorem:sentences[5]
       </div>
     </div>
     <div  class="ms-slide" data-delay="3" data-fill-mode="fill"   >
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="" title=""
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="" title=""
       data-src="/assets/image/modules/masterslider/slider_7/8-1.jpg">
       <div class="ms-info">
         <h3 class="notoc" style="font-weight: 300; color: #222222; text-align: center;">CHEETAHS ON THE EDGE</h3>
@@ -188,7 +188,7 @@ lorem:sentences[5]
       </div>
     </div>
     <div  class="ms-slide" data-delay="3" data-fill-mode="fill"   >
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="" title=""
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="" title=""
       data-src="/assets/image/modules/masterslider/slider_7/1-2.jpg">
       <div class="ms-info">
         <h3 class="notoc" style="font-weight: 300; color: #222222; text-align: center;">CONSECTETUR ADIPISCING ELIT</h3>

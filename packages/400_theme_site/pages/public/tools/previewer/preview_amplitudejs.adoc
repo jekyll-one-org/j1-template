@@ -156,14 +156,14 @@ div.control-container div.amplitude-play-pause {
 }
 
 div.control-container div.amplitude-play-pause.amplitude-paused {
-   /* background: url("/assets/themes/j1/modules/amplitudejs/icons/black/play.svg"); */
-   background: url("/assets/themes/j1/modules/amplitudejs/icons/small/play.svg") no-repeat;
+   /* background: url("/assets/theme/j1/modules/amplitudejs/icons/black/play.svg"); */
+   background: url("/assets/theme/j1/modules/amplitudejs/icons/small/play.svg") no-repeat;
    background-size: cover;
 }
 
 div.control-container div.amplitude-play-pause.amplitude-playing {
-   /* background: url("/assets/themes/j1/modules/amplitudejs/icons/black/pause.svg"); */
-   background: url("/assets/themes/j1/modules/amplitudejs/icons/small/pause.svg") no-repeat;
+   /* background: url("/assets/theme/j1/modules/amplitudejs/icons/black/pause.svg"); */
+   background: url("/assets/theme/j1/modules/amplitudejs/icons/small/pause.svg") no-repeat;
    background-size: cover;
 }
 
@@ -288,11 +288,11 @@ div#large-player-controls div.large-player-controls-container div#shuffle-black 
 }
 
 div#large-player-controls div.large-player-controls-container div#shuffle-black.amplitude-shuffle-off {
-  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-shuffle-off.svg") no-repeat;
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/black-shuffle-off.svg") no-repeat;
 }
 
 div#large-player-controls div.large-player-controls-container div#shuffle-black.amplitude-shuffle-on {
-  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-shuffle-on.svg") no-repeat;
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/black-shuffle-on.svg") no-repeat;
 }
 
 /* div#large-player-controls div.large-player-controls-container div#previous-black {
@@ -300,7 +300,7 @@ div#large-player-controls div.large-player-controls-container div#shuffle-black.
   height: 19px;
   width: 16px;
   cursor: pointer;
-  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-previous.svg");
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/black-previous.svg");
   vertical-align: middle;
   margin-right: 10px;
 } */
@@ -310,7 +310,7 @@ div#large-player-controls div.large-player-controls-container div#previous-black
     height: 24px;
     width: 24px;
     cursor: pointer;
-    background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/previous-hover.svg") no-repeat;
+    background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/previous-hover.svg") no-repeat;
     vertical-align: middle;
     margin-right: 10px;
 }
@@ -325,11 +325,11 @@ div#large-player-controls div.large-player-controls-container div#play-pause-bla
 }
 
 div#large-player-controls div.large-player-controls-container div#play-pause-black.amplitude-paused {
-  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-play.svg") no-repeat;
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/black-play.svg") no-repeat;
 }
 
 div#large-player-controls div.large-player-controls-container div#play-pause-black.amplitude-playing {
-  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-pause.svg") no-repeat;
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/black-pause.svg") no-repeat;
 }
 
 /* div#large-player-controls div.large-player-controls-container div#next-black {
@@ -337,7 +337,7 @@ div#large-player-controls div.large-player-controls-container div#play-pause-bla
   height: 19px;
   width: 16px;
   cursor: pointer;
-  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-next.svg");
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/black-next.svg");
   vertical-align: middle;
   margin-right: 25px;
   margin-left: 10px;
@@ -348,7 +348,7 @@ div#large-player-controls div.large-player-controls-container div#next-black {
   height: 24px;
   width: 25px;
   cursor: pointer;
-  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/next-hover.svg") no-repeat;
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/next-hover.svg") no-repeat;
   vertical-align: middle;
   margin-right: 25px;
   margin-left: 10px;
@@ -362,11 +362,11 @@ div#large-player-controls div.large-player-controls-container div#repeat-black {
 }
 
 div#large-player-controls div.large-player-controls-container div#repeat-black.amplitude-repeat-off {
-  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-repeat-off.svg") no-repeat;
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/black-repeat-off.svg") no-repeat;
 }
 
 div#large-player-controls div.large-player-controls-container div#repeat-black.amplitude-repeat-on {
-  background: url("/assets/themes/j1/modules/amplitudejs/icons/black-player/black-repeat-on.svg") no-repeat;
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/black-repeat-on.svg") no-repeat;
 }
 
 </style>

@@ -686,7 +686,7 @@ app.post('/log2disk', (req, res) => {
     timestamp   = new Date(msgDate2Int).toISOString().slice(0, 23).replace('T', ' ');
 
     // [10:05:12.666] [INFO ] [j1.logger.writer                   ] [logger.js:154] [state: finished]
-    // [http://localhost:41000/assets/themes/j1/adapter/js/logger.js:154]
+    // [http://localhost:41000/assets/theme/j1/adapter/js/logger.js:154]
     logLine = sprintf('[%s] [%s] [%-5s] [%-60s] [%-40s] %s\n', timestamp, pageID, req.body.level, path, req.body.logger, req.body.message);
   } else {
     logLine = req.body + '\n';

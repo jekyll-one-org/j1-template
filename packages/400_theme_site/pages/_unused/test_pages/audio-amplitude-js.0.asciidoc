@@ -113,7 +113,7 @@ Balla Balla ..
           </span>
 
           <div id="volume-container" class="single-song-player-volume-container">
-            <img src="/assets/themes/j1/modules/amplitudejs/icons/volume.svg">
+            <img src="/assets/theme/j1/modules/amplitudejs/icons/volume.svg">
             <input type="range" class="single-song-player amplitude-volume-slider" step=".1">
           </div>
 
@@ -208,12 +208,12 @@ div.control-container div.amplitude-play-pause {
 }
 
 div.control-container div.amplitude-play-pause.amplitude-paused {
-   background: url("/assets/themes/j1/modules/amplitudejs/icons/black/play.svg");
+   background: url("/assets/theme/j1/modules/amplitudejs/icons/black/play.svg");
    background-size: cover;
 }
 
 div.control-container div.amplitude-play-pause.amplitude-playing {
-   background: url("/assets/themes/j1/modules/amplitudejs/icons/black/pause.svg");
+   background: url("/assets/theme/j1/modules/amplitudejs/icons/black/pause.svg");
    background-size: cover;
 }
 
@@ -405,7 +405,7 @@ Balla Balla ..
   <div id="list-screen" class="slide-in-top">
 
     <div id="list-screen-header" class="hide-playlist">
-      <img id="up-arrow" src="/assets/themes/j1/modules/amplitudejs/icons/up.svg"/>
+      <img id="up-arrow" src="/assets/theme/j1/modules/amplitudejs/icons/up.svg"/>
       Hide Playlist
     </div>
 
@@ -414,7 +414,7 @@ Balla Balla ..
       <div class="song amplitude-song-container amplitude-play-pause" data-amplitude-song-index="0">
         <span class="song-number-now-playing">
         <span class="number">1</span>
-        <img class="now-playing" src="/assets/themes/j1/modules/amplitudejs/icons/black/now-playing.svg"/>
+        <img class="now-playing" src="/assets/theme/j1/modules/amplitudejs/icons/black/now-playing.svg"/>
         </span>
         <div class="song-meta-container">
           <span class="song-name" data-amplitude-song-info="name" data-amplitude-song-index="0"></span>
@@ -429,7 +429,7 @@ Balla Balla ..
       <div class="song amplitude-song-container amplitude-play-pause" data-amplitude-song-index="1">
         <span class="song-number-now-playing">
         <span class="number">2</span>
-        <img class="now-playing" src="/assets/themes/j1/modules/amplitudejs/icons/black/now-playing.svg"/>
+        <img class="now-playing" src="/assets/theme/j1/modules/amplitudejs/icons/black/now-playing.svg"/>
         </span>
         <div class="song-meta-container">
           <span class="song-name" data-amplitude-song-info="name" data-amplitude-song-index="1"></span>
@@ -444,7 +444,7 @@ Balla Balla ..
       <div class="song amplitude-song-container amplitude-play-pause" data-amplitude-song-index="2">
         <span class="song-number-now-playing">
         <span class="number">3</span>
-        <img class="now-playing" src="/assets/themes/j1/modules/amplitudejs/icons/black/now-playing.svg"/>
+        <img class="now-playing" src="/assets/theme/j1/modules/amplitudejs/icons/black/now-playing.svg"/>
         </span>
         <div class="song-meta-container">
           <span class="song-name" data-amplitude-song-info="name" data-amplitude-song-index="2"></span>
@@ -479,7 +479,7 @@ Balla Balla ..
   <div id="player-screen" class="flat-player">
 
     <div class="player-header down-header">
-      <img id="down" src="/assets/themes/j1/modules/amplitudejs/icons/down.svg"/>
+      <img id="down" src="/assets/theme/j1/modules/amplitudejs/icons/down.svg"/>
       Show Playlist
     </div>
 
@@ -511,12 +511,12 @@ Balla Balla ..
       </div>
 
       <div id="volume-container" class="flat-player-volume-container">
-        <img src="/assets/themes/j1/modules/amplitudejs/icons/volume.svg">
+        <img src="/assets/theme/j1/modules/amplitudejs/icons/volume.svg">
         <input type="range" class="single-song-player amplitude-volume-slider" step=".1">
       </div>
 
       <!-- div id="volume-container" class="flat-player-volume-container">
-        <img src="/assets/themes/j1/modules/amplitudejs/icons/volume.svg"/>
+        <img src="/assets/theme/j1/modules/amplitudejs/icons/volume.svg"/>
         <input type="range" class="flat-player amplitude-volume-slider" step=".1"/>
       </div -->
     </div>
@@ -772,7 +772,7 @@ div#list-screen div#list-screen-footer div.list-controls div.list-previous {
   width: 15px;
   height: 17px;
   /* background-image: url("https://521dimensions.com/img/open-source/amplitudejs/examples/flat-black/small-previous.svg"); */
-  background-image:  url("/assets/themes/j1/modules/amplitudejs/icons/small/previous.svg");
+  background-image:  url("/assets/theme/j1/modules/amplitudejs/icons/small/previous.svg");
   background-repeat: no-repeat;
   float: left;
   margin-right: 15px;
@@ -789,12 +789,12 @@ div#list-screen div#list-screen-footer div.list-controls div.list-play-pause {
 
 div#list-screen div#list-screen-footer div.list-controls div.list-play-pause.amplitude-playing {
   /* background-image: url("https://521dimensions.com/img/open-source/amplitudejs/examples/flat-black/small-pause.svg"); */
-  background-image:  url("/assets/themes/j1/modules/amplitudejs/icons/small/pause.svg");
+  background-image:  url("/assets/theme/j1/modules/amplitudejs/icons/small/pause.svg");
 }
 
 div#list-screen div#list-screen-footer div.list-controls div.list-play-pause.amplitude-paused {
   /* background-image: url("https://521dimensions.com/img/open-source/amplitudejs/examples/flat-black/small-play.svg"); */
-  background-image:  url("/assets/themes/j1/modules/amplitudejs/icons/small/play.svg");
+  background-image:  url("/assets/theme/j1/modules/amplitudejs/icons/small/play.svg");
 }
 
 div#list-screen div#list-screen-footer div.list-controls div.list-next {
@@ -802,7 +802,7 @@ div#list-screen div#list-screen-footer div.list-controls div.list-next {
   width: 15px;
   height: 17px;
   /* background-image: url("https://521dimensions.com/img/open-source/amplitudejs/examples/flat-black/small-next.svg"); */
-  background-image:  url("/assets/themes/j1/modules/amplitudejs/icons/small/next.svg");
+  background-image:  url("/assets/theme/j1/modules/amplitudejs/icons/small/next.svg");
   background-repeat: no-repeat;
   float: left;
   margin-left: 15px;
