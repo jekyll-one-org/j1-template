@@ -1,0 +1,38 @@
+Wie kann ich die Variable PATH unter Windows an der Kommandozeile erweitern?
+
+Es gibt zwei Möglichkeiten, die Variable PATH unter Windows an der
+Kommandozeile zu erweitern:
+
+Permanente Erweiterung:
+
+Öffnen Sie die Systemsteuerung.
+Klicken Sie auf System und Sicherheit.
+Wählen Sie System.
+Klicken Sie auf Erweiterte Systemeinstellungen im linken Bereich.
+Wählen Sie die Registerkarte Umgebungsvariablen.
+Im Abschnitt Systemvariablen suchen Sie die Variable PATH und wählen sie aus.
+Klicken Sie auf die Schaltfläche Bearbeiten.
+Im Feld Variablenwert fügen Sie den neuen Pfad am Ende des vorhandenen Pfads an. Trennen Sie mehrere Pfade mit einem Semikolon (;).
+Klicken Sie auf OK, um die Änderungen zu speichern.
+Starten Sie Ihren Computer neu, damit die Änderungen wirksam werden.
+
+Temporäre Erweiterung:
+
+Öffnen Sie die Eingabeaufforderung.
+Führen Sie den folgenden Befehl aus, um den neuen Pfad temporär zur Variablen PATH hinzuzufügen:
+set PATH=%PATH%;C:\neuer\pfad
+Ersetzen Sie C:\neuer\pfad durch den tatsächlichen Pfad, den Sie hinzufügen möchten.
+
+Beispiel:
+
+  set PATH=%PATH%;D:\j1\github\j1-theme\j1-template\node_modules\.bin
+
+
+Hinweis:
+
+Achten Sie darauf, dass Sie den Pfad korrekt angeben. Ein falsch angegebener Pfad kann dazu führen, dass Programme nicht mehr funktionieren.
+Die temporäre Erweiterung der Variable PATH ist nur für die aktuelle Eingabeaufforderungssitzung wirksam. Wenn Sie die Eingabeaufforderung schließen und erneut öffnen, müssen Sie den Pfad erneut hinzufügen.
+Zusätzliche Informationen:
+
+Weitere Informationen zu Umgebungsvariablen in Windows finden Sie in der Microsoft-Dokumentation.
+Sie können auch PowerShell verwenden, um die Variable PATH zu ändern. Weitere Informationen finden Sie in der Microsoft-Dokumentation zu PowerShell.
