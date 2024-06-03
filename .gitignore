@@ -86,18 +86,17 @@ packages/200_theme_js/package-lock.json
 
 
 # Unneeded files for package 300_theme_src
+# Ignore (generated ???) asset files for a theme ???
 # ------------------------------------------------------------------------------
-packages/300_theme_src/assets/themes/j1/core/css/
+packages/300_theme_src/assets/theme/j1/core/css/**
+packages/300_theme_src/assets/theme/j1/core/js/template/**
 
-packages/300_theme_src/assets/themes/j1/core/js/template*
-
-packages/300_theme_src/assets/themes/j1/modules/nbinteract-core/js/nbinteract/j1-nbinteract-core*
-
-# packages/300_theme_src/assets/theme/j1/modules/log4javascript/docs
+# packages/300_theme_src/assets/theme/j1/modules/nbinteract-core/**
+# packages/300_theme_src/assets/theme/j1/modules/log4javascript/docs/**
 
 
 # Unneeded files for package 400_theme_site
-# Ignore symbolic links as simple files!!!
+# Ignore "symbolic" links as simple files !!!
 # ------------------------------------------------------------------------------
 packages/400_theme_site/_includes
 

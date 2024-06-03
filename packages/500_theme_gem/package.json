@@ -84,7 +84,7 @@
     "template-gem-folder:includes": "shx mkdir -p ./_includes/themes && shx cp -r ../300_theme_src/_includes/themes ./_includes",
     "template-gem-folder:layouts": "shx cp -r ../300_theme_src/_layouts ./_layouts",
     "template-gem-folder:apps": "shx cp -r ../300_theme_src/assets/app ./apps",
-    "template-gem-folder:assets-themes-core": "shx mkdir -p ./assets/theme/j1 && shx cp -r ../300_theme_src/assets/themes ./assets/",
+    "template-gem-folder:assets-themes-core": "shx mkdir -p ./assets/theme/j1 && shx cp -r ../300_theme_src/assets/theme ./assets/",
     "template-gem-folder:utilsrv": "shx mkdir ./lib/starter_web/utilsrv",
     "template-gem-folder:_includes": "shx cp -r ../300_theme_src/_includes ./lib/starter_web",
     "template-gem-files": "run-s template-gem-site-files:*",

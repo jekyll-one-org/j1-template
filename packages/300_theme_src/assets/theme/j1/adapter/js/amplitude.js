@@ -635,13 +635,6 @@ j1.adapter.amplitude = ((j1, window) => {
                     logger.debug('\n' + 'current player state: ' + amplitudePlayerState);
                     logger.debug('\n' + 'setup player specific UI events on ID #{{player_id}}: finished');
 
-                    _this.setState('finished');
-                    logger.debug('\n' + 'module state: ' + _this.getState());
-                    logger.info('\n' + 'module initialized successfully');
-
-                    endTimeModule = Date.now();
-                    logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
-
                     clearInterval(dependencies_met_api_initialized);
                   } // END if apiInitialized
                 }, 10); // END dependencies_met_api_initialized
@@ -652,6 +645,13 @@ j1.adapter.amplitude = ((j1, window) => {
 
           {% endif %} {% endfor %}
           logger.info('\n' + 'initialize player specific UI events: finished');
+
+          _this.setState('finished');
+          logger.debug('\n' + 'module state: ' + _this.getState());
+          logger.info('\n' + 'module initialized successfully');
+
+          endTimeModule = Date.now();
+          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_player_instances_initialized);
         } // END if apiInitialized
