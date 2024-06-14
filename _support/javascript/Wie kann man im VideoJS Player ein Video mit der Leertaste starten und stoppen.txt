@@ -1,0 +1,52 @@
+Wie kann man im VideoJS Player ein Video mit der Leertaste starten und stoppen?
+
+See: https://github.com/ctd1500/videojs-hotkeys
+
+
+So starten und stoppen Sie ein Video mit der Leertaste im VideoJS Player:
+
+Fügen Sie die folgende JavaScript-Zeile in Ihr HTML-Dokument ein:
+
+HTML
+<script>
+  videojs.Player.prototype.ready(function() {
+    var player = this;
+
+    player.on('play', function() {
+      console.log('Video wird abgespielt');
+    });
+
+    player.on('pause', function() {
+      console.log('Video wird angehalten');
+    });
+
+    document.addEventListener('keydown', function(event) {
+      if (event.keyCode === 32) { // Leertaste
+        if (player.paused()) {
+          player.play();
+        } else {
+          player.pause();
+        }
+      }
+    });
+  });
+</script>
+
+Erläuterung:
+
+Diese JavaScript-Zeile wird ausgeführt, wenn der VideoJS Player bereit ist.
+Sie erstellt eine Variable player, die auf die aktuelle VideoJS-Player-Instanz verweist.
+Sie fügt zwei Event-Listener hinzu:
+Einer wird ausgelöst, wenn das Video abgespielt wird.
+Einer wird ausgelöst, wenn das Video angehalten wird.
+Sie fügt einen Event-Listener hinzu, der auf Tastaturereignisse lauscht.
+Wenn die Leertaste gedrückt wird, wird die Funktion togglePlayPause() aufgerufen.
+Die Funktion togglePlayPause() prüft, ob das Video angehalten ist.
+Wenn ja, wird es abgespielt.
+Wenn nein, wird es angehalten.
+
+
+Zusätzliche Hinweise:
+
+Sie können die Tastencodes in der Funktion togglePlayPause() ändern, um andere Tasten zum Starten und Stoppen des Videos zu verwenden.
+Sie können weitere Event-Listener hinzufügen, um andere Tastenfunktionen zu implementieren, z. B. Vor- und Zurückspulen.

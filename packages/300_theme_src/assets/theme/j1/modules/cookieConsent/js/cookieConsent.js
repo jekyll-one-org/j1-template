@@ -13,7 +13,7 @@
  #  bootstrap-cookie-banner is licensed under MIT License.
  #  See: https://github.com/shaack/bootstrap-cookie-banner/blob/master/LICENSE
  #  J1 Theme is licensed under MIT License.
- #  See: https://github.com/jekyll-one/J1 Theme/blob/master/LICENSE
+ #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
  # TODO:
  #

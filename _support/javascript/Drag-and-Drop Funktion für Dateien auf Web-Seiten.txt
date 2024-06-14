@@ -1,0 +1,81 @@
+Ist eine Drag-and-Drop Funktion für Dateien auch aus Web-Seiten möglich?
+Falls Ja, wie kann man die Funktion mit Javascript realisieren?
+Gibt es Beispiele?
+
+Ja, das Drag-and-Drop von Dateien aus Webseiten ist mit Javascript möglich.
+Die HTML5-Drag-and-Drop-API bietet dafür die notwendigen Ereignisse und
+Eigenschaften.
+
+So funktioniert's:
+
+1.  Dropzone definieren:
+    Markieren Sie einen Bereich auf Ihrer Webseite als Dropzone mit
+    dem Attribut draggable="true". Dies kann ein div-Element, ein Bild
+    oder ein anderer beliebiger Bereich sein.
+
+2.  Drag-Events abfangen:
+    Registrieren Sie Event-Listener für die Drag-Events in der Dropzone.
+    Wichtige Events sind:
+
+    dragenter: Wird ausgelöst, wenn eine Datei über die Dropzone gezogen wird.
+    dragover: Wird ständig ausgelöst, während die Datei über die Dropzone gezogen wird.
+    drop: Wird ausgelöst, wenn die Datei in der Dropzone abgelegt wird.
+
+3.  Dateien aus dem Event lesen:
+    Im drop-Event können Sie die abgelegten Dateien aus dem dataTransfer
+    Objekt lesen.
+
+4.  Dateien weiterverarbeiten:
+  Je nach Ihren Anforderungen können Sie die hochgeladenen Dateien nun
+  weiterverarbeiten.
+
+  Hochladen auf den Server: Nutzen Sie eine XMLHttpRequest- oder Fetch-API, um die Dateien an einen Server zu senden.
+  Lokale Verarbeitung: Lesen Sie den Dateiinhalt mit dem FileReader-API, um die Daten in Ihrer Javascript-Anwendung zu verwenden.
+
+Beispiel:
+
+Dieses vereinfachte Beispiel zeigt, wie Sie eine Dropzone für Bilder
+erstellen und die geladenen Bilder anzeigen:
+
+HTML
+<div id="dropzone" draggable="true">
+  Legen Sie hier Bilder ab
+</div>
+
+<script>
+  const dropzone = document.getElementById('dropzone');
+
+  dropzone.addEventListener('drop', (event) => {
+    event.preventDefault();
+
+    const files = event.dataTransfer.files;
+    for (const file of files) {
+      if (file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const img = document.createElement('img');
+          img.src = event.target.result;
+          document.body.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+  });
+</script>
+
+Weitere Informationen und Ressourcen:
+
+HTML5 Drag-and-Drop API: https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API
+Javascript DnD Library: https://github.com/topics/drag-and-drop
+Drag-and-Drop mit HTML und Javascript: https://javascript-snippets.autify.com/snippets/mouse/drag_and_drop_by_drag_event/
+Drag and Drop für Dateien: https://www.youtube.com/watch?v=TIvCca31KJc
+
+
+Beachten Sie:
+
+Die Drag-and-Drop-Funktionalität unterliegt den Sicherheitsrichtlinien
+des Browsers. Dateizugriffe aus dem Web sind nur mit ausdrücklicher
+Zustimmung des Benutzers möglich.
+
+Moderne Bibliotheken wie jQuery UI oder React DnD bieten vereinfachte
+APIs und zusätzliche Funktionen für Drag-and-Drop-Szenarien.

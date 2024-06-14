@@ -584,6 +584,13 @@
                   rotate: zoomPlugin.settings.rotate,
                   zoom:   zoomPlugin.settings.zoom
                 });
+
+                videojsPlayer.hotkeys({
+                  volumeStep: 0.1,
+                  seekStep: 5,
+                  enableModifiersForNumbers: false
+                });
+
               } // END if zoomPlugin enabled
             } // END if videoInfo.html
 

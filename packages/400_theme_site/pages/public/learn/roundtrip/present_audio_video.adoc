@@ -172,6 +172,14 @@ for people and organizations to publish various video content.
 .The Voice Kids NL 2021 - Emma Kok
 youtube::20gXikNRjbo[poster="/assets/video/poster/youtube/voice_kids/banner/best_of.jpg" role="mt-4 mb-5"]
 
+// .Andre Rieu Maastricht 2023 - Emma Kok
+// youtube::KdIhq1tb8Co[poster="/assets/video/poster/youtube/voice_kids/banner/best_of.jpg" role="mt-4 mb-5"]
+//
+// .BGT 2024 - Sydnie Christmas wins GOLDEN BUZZER
+// youtube::pjyy4tYZFDc[poster="/assets/video/poster/youtube/voice_kids/banner/best_of.jpg" role="mt-4 mb-5"]
+//
+// .BGT 2024 - Sydnie Christmas All Performances
+// youtube::9qRNdZ6G6B4[poster="/assets/video/poster/youtube/voice_kids/banner/best_of.jpg" role="mt-4 mb-5"]
 
 [role="mt-4"]
 ==== Dailymotion

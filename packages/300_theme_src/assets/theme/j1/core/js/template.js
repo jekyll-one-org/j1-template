@@ -1641,7 +1641,7 @@ module.exports = anime;
  #  Copyright (C) 2023, 2024 Juergen Adams
  #
  #  J1 Theme is licensed under MIT License.
- #  See: https://github.com/jekyll-one/J1 Theme/blob/master/LICENSE
+ #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
  #  NOTE:
  # -----------------------------------------------------------------------------
