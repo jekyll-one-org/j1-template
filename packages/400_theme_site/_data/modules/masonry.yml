@@ -565,6 +565,20 @@ settings:
               preload:                  false
               autoplayFirstVideo:       true
 
+            plugins:
+              zoom:
+                enabled:                true
+                options:
+                  moveX:                0
+                  moveY:                0
+                  rotate:               0
+                  zoom:                 1
+
+              hotkeys:
+                enabled:                true
+                options:
+                  enableModifiersForNumbers: false
+
             controls:                   true
             controlBar:
               remainingTimeDisplay:     true

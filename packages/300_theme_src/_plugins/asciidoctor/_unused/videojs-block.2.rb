@@ -69,6 +69,13 @@ Asciidoctor::Extensions.register do
                 "type": "video/mp4",
                 "src": "#{target}"
               }],
+              plugins: {
+                hotkeys: {
+                  volumeStep: 0.1,
+                  seekStep: 5,
+                  enableModifiersForNumbers: false
+                },
+              },
               "controlBar": {
                 "pictureInPictureToggle": false,
                 "volumePanel": {
@@ -89,22 +96,14 @@ Asciidoctor::Extensions.register do
               if (j1CoreFinished && pageVisible) {
                 var appliedOnce = false;
                 videojs("#{video_id}").ready(function() {
+
+                  // videojsPlayer.hotkeys({
+                  //   volumeStep: 0.1,
+                  //   seekStep: 5,
+                  //   enableModifiersForNumbers: false
+                  // });
+
                   var videojsPlayer = this;
-
-                  // add hotkeys plugin
-                  videojsPlayer.hotkeys({
-                    enableModifiersForNumbers: false
-                  });
-
-                  // add zoom plugin
-                  videojsPlayer.zoomPlugin({
-                    moveX:  0,
-                    moveY:  0,
-                    rotate: 0,
-                    zoom:   1
-                  });
-
-                  // set start position of current video
                   videojsPlayer.on("play", function() {
                     var startFromSecond = new Date('1970-01-01T' + "#{attributes['start']}" + 'Z').getTime() / 1000;
                     if (!appliedOnce) {
