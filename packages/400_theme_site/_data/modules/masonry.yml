@@ -564,25 +564,28 @@ settings:
               muted:                    false
               preload:                  false
               autoplayFirstVideo:       true
+              playbackRates:            [0.25, 0.5, 1, 1.5, 2]
 
-            plugins:
-              zoom:
+            controls:                   true
+            controlBar:
+              remainingTimeDisplay:     true
+              pictureInPictureToggle:   false
+              playbackRates:            [0.25, 0.5, 1, 1.5, 2]
+              volumePanel:
+                inline:                 false
+
+              hotkeysPlugin:
+                enabled:                true
+                options:
+                  volumeStep:           0.2
+
+              zoomPlugin:
                 enabled:                true
                 options:
                   moveX:                0
                   moveY:                0
                   rotate:               0
                   zoom:                 1
-
-              hotkeys:
-                enabled:                true
-                options:
-                  enableModifiersForNumbers: false
-
-            controls:                   true
-            controlBar:
-              remainingTimeDisplay:     true
-              pictureInPictureToggle:   false
 
           vimeoPlayer:
             enabled:                    true

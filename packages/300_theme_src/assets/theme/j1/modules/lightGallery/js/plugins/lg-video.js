@@ -529,14 +529,34 @@
         };
 
         Video.prototype.controlVideo = function (index, action) {
-            var trackSrc, $videoElement, videoInfo, videoStart, videoData, videoId, videojsPlayer, zoomPlugin;
+            var trackSrc,
+                $videoElement, videoInfo, videoStart, videoData, videoId,
+                videojsPlayer, zoomPlugin;
 
-            var chapterTracksEnabled = false;
-            var zoomPluginDefaults   = {
-              moveX:  0,
-              moveY:  0,
-              rotate: 0,
-              zoom:   1
+            var playbackRatesDefaults    = '[0.25, 0.5, 1, 1.5, 2]';
+            var chapterTracksEnabled     = false;
+
+            var hotkeysPluginDefaults    = {
+              volumeStep:                 0.1,
+              seekStep:                   5,
+              enableMute:                 true,
+              enableVolumeScroll:         true,
+              enableHoverScroll:          false,
+              enableFullscreen:           true,
+              enableNumbers:              true,
+              enableJogStyle:             false,
+              alwaysCaptureHotkeys:       false,
+              captureDocumentHotkeys:     false,
+              enableModifiersForNumbers:  false,
+              enableInactiveFocus:        true,
+              skipInitialFocus:           false
+            };
+
+            var zoomPluginDefaults       = {
+              moveX:                      0,
+              moveY:                      0,
+              rotate:                     0,
+              zoom:                       1
             };
 
             videoInfo     = this.core.galleryItems[index].__slideVideoInfo || {};
@@ -545,7 +565,7 @@
               .find('.lg-video-object')
               .first()
 
-            // zoom and chapter tracks only available for HTML5 video
+            // chapter tracks only available for VJS
             //
             if (this.core.galleryItems[this.core.index].video !== undefined && videoInfo.html5) {
               videoData = JSON.parse(this.core.galleryItems[this.core.index].video);
@@ -561,13 +581,16 @@
               videoId       = $videoElement.selector.id;
               videojsPlayer = videojs(videoId);
 
-              // jadams, 2023-12-11: added VideoJS zoomPlugin
+              // jadams, 2024-06-16: added VJS Plugins hotkeys|zoom, playbackRates
               // ---------------------------------------------------------------
-              var zoomPlugin = this.settings.videojsOptions.zoomPlugin;
+              var hotkeysPlugin = this.settings.videojsOptions.controlBar.hotkeysPlugin;
+              var zoomPlugin    = this.settings.videojsOptions.controlBar.zoomPlugin;
+              var playbackRates = (this.settings.videojsOptions.controlBar.playbackRates !== undefined) ? this.settings.videojsOptions.controlBar.playbackRates : playbackRatesDefaults;
+
 
               //  jadams, 2024-01-22: added video start position
               // ---------------------------------------------------------------
-              if (zoomPlugin !== undefined && this.settings.videojsOptions.videoStart) {
+              if (this.settings.videojsOptions.videoStart !== undefined) {
                 videoStart = this.settings.videojsOptions.videoStart[index];
                 videojsPlayer.on("play", function() {
                   var startFromSecond = new Date('1970-01-01T' + videoStart + 'Z').getTime() / 1000;
@@ -576,29 +599,37 @@
                 }); // END on "play"
               } // END if videoStart
 
-              if (zoomPlugin !== undefined && zoomPlugin.enabled) {
-                zoomPlugin.settings = __assign(__assign({}, zoomPluginDefaults), zoomPlugin.options);
-                videojsPlayer.zoomPlugin({
-                  moveX:  zoomPlugin.settings.moveX,
-                  moveY:  zoomPlugin.settings.moveY,
-                  rotate: zoomPlugin.settings.rotate,
-                  zoom:   zoomPlugin.settings.zoom
-                });
+              // add playbackRates (only available for VJS)
+              videojsPlayer.playbackRates(playbackRates);
 
+              // add hotkeysPlugin (only available for VJS)
+              if (hotkeysPlugin !== undefined && hotkeysPlugin.enabled) {
+                hotkeysPlugin.options = __assign(__assign({}, hotkeysPluginDefaults), hotkeysPlugin.options);
                 videojsPlayer.hotkeys({
-                  enableModifiersForNumbers: false
+                  enableModifiersForNumbers: hotkeysPlugin.options.enableModifiersForNumbers
                 });
+              } // END if hotkeysPlugin enabled
 
+              // add zoomPlugin (only available for VJS)
+              if (zoomPlugin !== undefined && zoomPlugin.enabled) {
+                zoomPlugin.options = __assign(__assign({}, zoomPluginDefaults), zoomPlugin.options);
+                videojsPlayer.zoomPlugin({
+                  moveX:  zoomPlugin.options.moveX,
+                  moveY:  zoomPlugin.options.moveY,
+                  rotate: zoomPlugin.options.rotate,
+                  zoom:   zoomPlugin.options.zoom
+                });
               } // END if zoomPlugin enabled
+
             } // END if videoInfo.html
 
-            // jadams, 2023-12-11: added chapter track processing
+            // jadams, 2023-12-11: added chapter track processing (only available for VJS)
             // -----------------------------------------------------------------
             if (chapterTracksEnabled) {
               var parser  = new WebVTTParser();
               var markers = [];
 
-              function cb_load (data /* , textStatus, jqXHR */ ) {
+              function cb_load (data /* ,textStatus, jqXHR */ ) {
                 var tree = parser.parse(data, 'metadata');
                 var marker;
 

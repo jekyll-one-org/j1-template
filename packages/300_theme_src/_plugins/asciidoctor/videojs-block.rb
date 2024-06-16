@@ -91,6 +91,9 @@ Asciidoctor::Extensions.register do
                 videojs("#{video_id}").ready(function() {
                   var videojsPlayer = this;
 
+                  // add playbackRates
+                  videojsPlayer.playbackRates([0.5, 1, 1.5, 2]);
+
                   // add hotkeys plugin
                   videojsPlayer.hotkeys({
                     enableModifiersForNumbers: false

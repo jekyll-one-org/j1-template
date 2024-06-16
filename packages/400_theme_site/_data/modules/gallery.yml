@@ -308,18 +308,35 @@ settings:
           muted:                        false
           preload:                      true
           playbackRates:                [0.25, 0.5, 1, 1.5, 2]
-          zoomPlugin:
-            enabled:                    true
-#           options:
-#             moveX:                    0
-#             moveY:                    0
-#             rotate:                   0
-#             zoom:                     1
+
+#           zoomPlugin:
+#             enabled:                    true
+# #           options:
+# #             moveX:                    0
+# #             moveY:                    0
+# #             rotate:                   0
+# #             zoom:                     1
+
           controlBar:
+            playbackRates:              [0.25, 0.5, 1, 1.5, 2]
             remainingTimeDisplay:       true
             pictureInPictureToggle:     false
+
             volumePanel:
               inline:                   false
+
+            hotkeysPlugin:
+              enabled:                  true
+              options:
+                volumeStep:             0.2
+
+            zoomPlugin:
+              enabled:                  true
+              options:
+                moveX:                  0
+                moveY:                  0
+                rotate:                 0
+                zoom:                   1
 
       # ------------------------------------------------------------------------
       # CSS filter options

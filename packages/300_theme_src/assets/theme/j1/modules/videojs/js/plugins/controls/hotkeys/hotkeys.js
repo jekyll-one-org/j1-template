@@ -59,7 +59,7 @@
       alwaysCaptureHotkeys: false,
       captureDocumentHotkeys: false,
       documentHotkeysFocusElementFilter: function () { return false },
-      enableModifiersForNumbers: true,
+      enableModifiersForNumbers: false,
       enableInactiveFocus: true,
       skipInitialFocus: false,
       playPauseKey: playPauseKey,
