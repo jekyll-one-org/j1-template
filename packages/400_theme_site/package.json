@@ -2,7 +2,7 @@
   "private": true,
   "name": "site",
   "version": "2024.3.0",
-  "description": "Web/Content sources for J1 Starter",
+  "description": "Project sources for the J1 Starter web",
   "main": "_config.yml",
   "config": {
     "bundler": "jekyll"

@@ -27,14 +27,14 @@ module J1
           if J1::Utils::is_project?
             bundle_install(path, options)
             if options['skip-patches']
-              J1.logger.info "#{timestamp} - SETUP: Install build-in patches skipped ..."
+              J1.logger.info "#{timestamp} - SETUP: installing build-in patches skipped."
             else
               patch_install(options)
             end
 
             timestamp = Time.now.strftime("%Y-%m-%d %H:%M:%S")
-            J1.logger.info "#{timestamp} - SETUP: Initialize the project ..."
-            J1.logger.info "#{timestamp} - SETUP: Be patient, this will take a while ..."
+            J1.logger.info "#{timestamp} - SETUP: initializing the project .."
+            J1.logger.info "#{timestamp} - SETUP: be patient, this will take a while .."
             # process, output = J1::Utils::Exec.run('npm', 'run', 'setup')
             # output.to_s.each_line do |line|
             #   J1.logger.info('SETUP:', line.strip) unless line.to_s.empty?
@@ -42,8 +42,8 @@ module J1
             process = J1::Utils::Exec2.run('SETUP','npm', 'run', 'setup')
             if process.success?
               timestamp = Time.now.strftime("%Y-%m-%d %H:%M:%S")
-              J1.logger.info "#{timestamp} - SETUP: Initializing the project finished successfully."
-              J1.logger.info "#{timestamp} - SETUP: To open your site, run: j1 site"
+              J1.logger.info "#{timestamp} - SETUP: initializing the project finished successfully."
+              J1.logger.info "#{timestamp} - SETUP: to open your site, run: j1 site"
             else
               raise SystemExit
               end
@@ -57,12 +57,12 @@ module J1
         def bundle_install(path, options)
           timestamp = Time.now.strftime("%Y-%m-%d %H:%M:%S")
           J1::External.require_with_graceful_fail 'bundler'
-          J1.logger.info "#{timestamp} - SETUP: Running bundle install in #{path} ..."
+          J1.logger.info "#{timestamp} - SETUP: running bundle install on path: #{path}."
           Dir.chdir(path) do
             if options['system']
-              J1.logger.info "#{timestamp} - SETUP: Install bundle in Ruby gem SYSTEM folder ..."
+              J1.logger.info "#{timestamp} - SETUP: installing bundle in ruby gem SYSTEM folder."
             else
-              J1.logger.info "#{timestamp} - SETUP: Install bundle in USER gem folder ~/.gem ..."
+              J1.logger.info "#{timestamp} - SETUP: installing bundle in ruby gem USER folder."
               process = J1::Utils::Exec2.run('SETUP','bundle', 'config', 'set', '--local', 'path', '~/.gem')
               raise SystemExit unless process.success?
             end
@@ -90,12 +90,12 @@ module J1
             system_path = result[1]
 
             if options['system']
-              J1.logger.info "#{timestamp} - SETUP: Install patches in SYSTEM folder ..."
-              J1.logger.info "#{timestamp} - SETUP: Install patches on path #{system_path} ..."
+              J1.logger.info "#{timestamp} - SETUP: installing patches on SYSTEM gem folder."
+              J1.logger.info "#{timestamp} - SETUP: Install patches on path: #{system_path} .."
               dest = system_path + '/gems/' + patch_gem_eventmachine + '/lib'
             else
-              J1.logger.info "#{timestamp} - SETUP: Install patches in USER gem folder ~/.gem ..."
-              J1.logger.info "#{timestamp} - SETUP: Install patches on path #{user_path} ..."
+              J1.logger.info "#{timestamp} - SETUP: installing patches on USER gem folder."
+              J1.logger.info "#{timestamp} - SETUP: installing patches on path: #{user_path} .."
               dest = user_path + '/gems/' + patch_gem_eventmachine + '/lib'
             end
             src = patch_eventmachine_source_path
@@ -111,7 +111,7 @@ module J1
               if Dir.exist?(dest)
                 FileUtils.cp(src, dest)
               else
-                J1.logger.info "#{timestamp} - SETUP: Skipped install patches for execjs-2.7.0 ..."
+                J1.logger.info "#{timestamp} - SETUP: installing patches skipped for execjs v2.7.0."
               end
             end
 

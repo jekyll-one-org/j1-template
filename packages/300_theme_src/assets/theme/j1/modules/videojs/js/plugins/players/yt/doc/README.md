@@ -14,7 +14,7 @@ Use branch `vjs4` if you still using old VideoJS `v4.x`.
 <!DOCTYPE html>
 <html>
 <head>
-  <link type="text/css" rel="stylesheet" href="../../../../css/videojs.min.css" />
+  <link type="text/css" rel="stylesheet" href="../../../../../css/videojs.min.css" />
 </head>
 <body>
   <video

@@ -3,11 +3,11 @@ require "singleton"
 module J1
   module Utils
     extend self
-    autoload :Ansi, "j1/utils/ansi"
-    autoload :Exec1, "j1/utils/exec1"
-    autoload :Exec2, "j1/utils/exec2"
-    autoload :Platforms, "j1/utils/platforms"
-    autoload :WinTZ, "j1/utils/win_tz"
+    autoload :Ansi,       "j1/utils/ansi"
+    autoload :Exec1,      "j1/utils/exec1"
+    autoload :Exec2,      "j1/utils/exec2"
+    autoload :Platforms,  "j1/utils/platforms"
+    autoload :WinTZ,      "j1/utils/win_tz"
 
     class GracefulQuit
       include Singleton
@@ -25,7 +25,7 @@ module J1
         }
       end
 
-      def self.check(message = "Quitting")
+      def self.check(message = "quitting")
         if self.instance.breaker
           yield if block_given?
           puts message
@@ -34,31 +34,45 @@ module J1
       end
     end
 
-    # Constants for use in #slugify
-    SLUGIFY_MODES = %w(raw default pretty ascii).freeze
-    SLUGIFY_RAW_REGEXP = Regexp.new('\\s+').freeze
-    SLUGIFY_DEFAULT_REGEXP = Regexp.new("[^[:alnum:]]+").freeze
-    SLUGIFY_PRETTY_REGEXP = Regexp.new("[^[:alnum:]._~!$&'()+,;=@]+").freeze
-    SLUGIFY_ASCII_REGEXP = Regexp.new("[^[A-Za-z0-9]]+").freeze
+    # Constants to be used in #slugify
+    SLUGIFY_MODES           = %w(raw default pretty ascii).freeze
+    SLUGIFY_RAW_REGEXP      = Regexp.new('\\s+').freeze
+    SLUGIFY_DEFAULT_REGEXP  = Regexp.new("[^[:alnum:]]+").freeze
+    SLUGIFY_PRETTY_REGEXP   = Regexp.new("[^[:alnum:]._~!$&'()+,;=@]+").freeze
+    SLUGIFY_ASCII_REGEXP    = Regexp.new("[^[A-Za-z0-9]]+").freeze
 
     def is_project?
       path = File.expand_path(Dir.pwd)
-      puts "Check consistency of the J1 project ..."
+      timestamp = Time.now.strftime("%Y-%m-%d %H:%M:%S")
+      puts "#{timestamp} - PREFLIGHT: check consistency of the J1 project folder .."
       if File.exist?(path + '/package.json') && File.exist?(path + '/_config.yml')
+        puts "#{timestamp} - PREFLIGHT: consistency checks successful .."
+        puts "#{timestamp} - PREFLIGHT: consistency checks done."
         return true
       else
-        puts "\e[31m" + "FATAL: Path #{path} seems not a J1 project folder" + "\e[0m"
+        puts "#{timestamp} - PREFLIGHT: consistency checks failed .."
+        puts "#{timestamp} - PREFLIGHT: project on path #{path} seems not a valid project folder .."
+        puts "#{timestamp} - PREFLIGHT: consistency checks done."
+        return false
       end
     end
 
     def is_project_setup?
       path = File.expand_path(Dir.pwd)
-      puts "Check setup state of the J1 project ..."
+      timestamp = Time.now.strftime("%Y-%m-%d %H:%M:%S")
+      puts "#{timestamp} - PREFLIGHT: check setup state of the J1 project .."
       if File.exist?(path + '/package-lock.json') && File.exist?(path + '/Gemfile.lock')
+        puts "#{timestamp} - PREFLIGHT: setup checks successful .."
+        puts "#{timestamp} - PREFLIGHT: setup checks done."
+        puts " "
         return true
       else
-        puts "\e[31m" + "FATAL: Project in path #{path} seems not initialized" + "\e[0m"
-        puts "INFO: Consider to run 'j1 setup' in order to prepare the project for first use"
+        puts "#{timestamp} - PREFLIGHT: setup checks failed .."
+        puts "#{timestamp} - PREFLIGHT: project in path #{path} seems not initialized .."
+        puts "#{timestamp} - PREFLIGHT: consider to run 'j1 setup' first in order to prepare the project for first use .."
+        puts "#{timestamp} - PREFLIGHT: setup checks done."
+        puts " "
+        return false
       end
     end
 
@@ -181,10 +195,10 @@ module J1
     #
     # Returns the parsed date if successful, throws a FatalException
     # if not
-    def parse_date(input, msg = "Input could not be parsed.")
+    def parse_date(input, msg = "input could not parsed.")
       Time.parse(input).localtime
     rescue ArgumentError
-      raise Errors::InvalidDateError, "Invalid date '#{input}': #{msg}"
+      raise Errors::InvalidDateError, "invalid date '#{input}': #{msg}"
     end
 
     # Determines whether a given file has

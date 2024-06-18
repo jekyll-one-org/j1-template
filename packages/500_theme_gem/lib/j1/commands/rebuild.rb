@@ -19,12 +19,13 @@ module J1
         def process(args, options = {})
           if J1::Utils::is_project?
             if J1::Utils::is_project_setup?
-              J1.logger.info "REBUILD: Rebuild the projects website ..."
-              J1.logger.info "REBUILD: Be patient, this will take a while ..."
+              timestamp = Time.now.strftime("%Y-%m-%d %H:%M:%S")
+              J1.logger.info "#{timestamp} - REBUILD: rebuild the projects website .."
+              J1.logger.info "#{timestamp} - REBUILD: be patient, this will take a while .."
               process = J1::Utils::Exec2.run('REBUILD','npm', 'run', 'rebuild')
               if process.success?
-                J1.logger.info "REBUILD: The projects website has been rebuild successfully."
-                J1.logger.info "REBUILD: To open the site, run: j1 site"
+                J1.logger.info "#{timestamp} - REBUILD: the project has been rebuild successfully."
+                J1.logger.info "#{timestamp} - REBUILD: to open the site, run: j1 site"
               else
                 raise SystemExit
               end

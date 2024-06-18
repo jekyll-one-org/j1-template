@@ -20,7 +20,7 @@ module J1
           timestamp = Time.now.strftime("%Y-%m-%d %H:%M:%S")
           if J1::Utils::is_project?
             if J1::Utils::is_project_setup?
-              J1.logger.info "#{timestamp} - APP: Starting up your site ..."
+              J1.logger.info "#{timestamp} - APP: starting up your site .."
               process = J1::Utils::Exec2.run('APP','npm', 'run', 'j1-app')
             else
               raise SystemExit

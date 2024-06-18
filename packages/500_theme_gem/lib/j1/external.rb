@@ -22,7 +22,7 @@ module J1
           begin
             require name
           rescue LoadError
-            J1.logger.debug "Couldn't load #{name}. Skipping."
+            J1.logger.debug "could not load #{name}, skipped."
             yield(name) if block_given?
             false
           end

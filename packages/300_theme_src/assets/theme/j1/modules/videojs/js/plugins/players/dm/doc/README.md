@@ -13,7 +13,7 @@ It only support v5 - v7
 <!DOCTYPE html>
 <html>
 <head>
-  <link type="text/css" rel="stylesheet" href="../../../../css/videojs.min.css" />
+  <link type="text/css" rel="stylesheet" href="../../../../../css/videojs.min.css" />
 </head>
 <body>
   <video
