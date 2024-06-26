@@ -16,12 +16,12 @@
  # -----------------------------------------------------------------------------
 */
 
-/*
+/*!
  * lightgallery | 2.7.2 | September 20th 2023
  * http://www.lightgalleryjs.com/
  * Copyright (c) 2020 Sachin Neravath;
  * @license GPLv3
-*/
+ */
 
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
@@ -578,108 +578,101 @@
                 }
               } // END if videoData.tracks
 
-              if ($videoElement.selector !== undefined) {
-                videoId       = $videoElement.selector.id;
-                videojsPlayer = videojs(videoId);
-              } else {
-                videojsPlayer = 'unknown';
-              }
+              videoId       = $videoElement.selector.id;
+              videojsPlayer = videojs(videoId);
 
-              if (videojsPlayer !== 'unknown') {
+              // jadams, 2024-06-16: added VJS Plugins hotkeys|zoom, playbackRates
+              // ---------------------------------------------------------------
+              var hotkeysPlugin = this.settings.videojsOptions.controlBar.hotkeysPlugin;
+              var zoomPlugin    = this.settings.videojsOptions.controlBar.zoomPlugin;
+              var playbackRates = (this.settings.videojsOptions.controlBar.playbackRates !== undefined) ? this.settings.videojsOptions.controlBar.playbackRates : playbackRatesDefaults;
 
-                // jadams, 2024-06-16: added VJS Plugins hotkeys|zoom, playbackRates
-                // ---------------------------------------------------------------
-                var hotkeysPlugin = this.settings.videojsOptions.controlBar.hotkeysPlugin;
-                var zoomPlugin    = this.settings.videojsOptions.controlBar.zoomPlugin;
-                var playbackRates = (this.settings.videojsOptions.controlBar.playbackRates !== undefined) ? this.settings.videojsOptions.controlBar.playbackRates : playbackRatesDefaults;
 
-                //  jadams, 2024-01-22: added video start position
-                // ---------------------------------------------------------------
-                if (this.settings.videojsOptions.videoStart !== undefined) {
-                  videoStart = this.settings.videojsOptions.videoStart[index];
-                  videojsPlayer.on("play", function() {
-                    var startFromSecond = new Date('1970-01-01T' + videoStart + 'Z').getTime() / 1000;
-                    videojsPlayer.currentTime(startFromSecond);
+              //  jadams, 2024-01-22: added video start position
+              // ---------------------------------------------------------------
+              if (this.settings.videojsOptions.videoStart !== undefined) {
+                videoStart = this.settings.videojsOptions.videoStart[index];
+                videojsPlayer.on("play", function() {
+                  var startFromSecond = new Date('1970-01-01T' + videoStart + 'Z').getTime() / 1000;
+                  videojsPlayer.currentTime(startFromSecond);
 
-                  }); // END on "play"
-                } // END if videoStart
+                }); // END on "play"
+              } // END if videoStart
 
-                // add playbackRates (only available for VJS)
-                videojsPlayer.playbackRates(playbackRates);
+              // add playbackRates (only available for VJS)
+              videojsPlayer.playbackRates(playbackRates);
 
-                // add hotkeysPlugin (only available for VJS)
-                if (hotkeysPlugin !== undefined && hotkeysPlugin.enabled) {
-                  hotkeysPlugin.options = __assign(__assign({}, hotkeysPluginDefaults), hotkeysPlugin.options);
-                  videojsPlayer.hotkeys({
-                    enableModifiersForNumbers: hotkeysPlugin.options.enableModifiersForNumbers
-                  });
-                } // END if hotkeysPlugin enabled
+              // add hotkeysPlugin (only available for VJS)
+              if (hotkeysPlugin !== undefined && hotkeysPlugin.enabled) {
+                hotkeysPlugin.options = __assign(__assign({}, hotkeysPluginDefaults), hotkeysPlugin.options);
+                videojsPlayer.hotkeys({
+                  enableModifiersForNumbers: hotkeysPlugin.options.enableModifiersForNumbers
+                });
+              } // END if hotkeysPlugin enabled
 
-                // add zoomPlugin (only available for VJS)
-                if (zoomPlugin !== undefined && zoomPlugin.enabled) {
-                  zoomPlugin.options = __assign(__assign({}, zoomPluginDefaults), zoomPlugin.options);
-                  videojsPlayer.zoomPlugin({
-                    moveX:  zoomPlugin.options.moveX,
-                    moveY:  zoomPlugin.options.moveY,
-                    rotate: zoomPlugin.options.rotate,
-                    zoom:   zoomPlugin.options.zoom
-                  });
-                } // END if zoomPlugin enabled
+              // add zoomPlugin (only available for VJS)
+              if (zoomPlugin !== undefined && zoomPlugin.enabled) {
+                zoomPlugin.options = __assign(__assign({}, zoomPluginDefaults), zoomPlugin.options);
+                videojsPlayer.zoomPlugin({
+                  moveX:  zoomPlugin.options.moveX,
+                  moveY:  zoomPlugin.options.moveY,
+                  rotate: zoomPlugin.options.rotate,
+                  zoom:   zoomPlugin.options.zoom
+                });
+              } // END if zoomPlugin enabled
 
-                // jadams, 2023-12-11: added chapter track processing (only available for VJS)
-                // -----------------------------------------------------------------
-                if (chapterTracksEnabled) {
-                  var parser  = new WebVTTParser();
-                  var markers = [];
+            } // END if videoInfo.html
 
-                  function cb_load (data /* ,textStatus, jqXHR */ ) {
-                    var tree = parser.parse(data, 'metadata');
-                    var marker;
+            // jadams, 2023-12-11: added chapter track processing (only available for VJS)
+            // -----------------------------------------------------------------
+            if (chapterTracksEnabled) {
+              var parser  = new WebVTTParser();
+              var markers = [];
 
-                    // add chapter tracks to markers array
-                    for (var i=0; i<tree.cues.length; i++) {
-                      marker = { time: tree.cues[i].startTime, label: tree.cues[i].text };
-                      markers.push(marker);
+              function cb_load (data /* ,textStatus, jqXHR */ ) {
+                var tree = parser.parse(data, 'metadata');
+                var marker;
+
+                // add chapter tracks to markers array
+                for (var i=0; i<tree.cues.length; i++) {
+                  marker = { time: tree.cues[i].startTime, label: tree.cues[i].text };
+                  markers.push(marker);
+                }
+              }; // END callback
+
+              // load chapter tracks
+              loadVtt(trackSrc, cb_load);
+
+              // add chapter tracks on play
+              videojsPlayer.on("play", function() {
+                videojsPlayer.currentTime(videoStart);
+
+                var total    = videojsPlayer.duration();
+                var timeline = $(videojsPlayer.controlBar.progressControl.children_[0].el_);
+
+                // add chapter tracks on timeline (delayed)
+                setTimeout (function() {
+                  var markers_loaded = setInterval (function () {
+                    if (markers.length) {
+                      for (var i=0; i<markers.length; i++) {
+                        var left = (markers[i].time / total * 100) + '%';
+                        var time = markers[i].time;
+                        var el   = $('<div class="vjs-chapter-marker" style="left: ' +left+ '" data-time="' +time+ '"> <span>' +markers[i].label+ '</span></div>');
+
+                        el.click(function() {
+                          videojsPlayer.currentTime($(this).data('time'));
+                        });
+
+                        timeline.append(el);
+                      }
+                      clearInterval(markers_loaded);
                     }
-                  }; // END callback
+                  }, 10);
+                }, 1000 );
 
-                  // load chapter tracks
-                  loadVtt(trackSrc, cb_load);
+              }); // END on "play"
 
-                  // add chapter tracks on play
-                  videojsPlayer.on("play", function() {
-                    videojsPlayer.currentTime(videoStart);
-
-                    var total    = videojsPlayer.duration();
-                    var timeline = $(videojsPlayer.controlBar.progressControl.children_[0].el_);
-
-                    // add chapter tracks on timeline (delayed)
-                    setTimeout (function() {
-                      var markers_loaded = setInterval (function () {
-                        if (markers.length) {
-                          for (var i=0; i<markers.length; i++) {
-                            var left = (markers[i].time / total * 100) + '%';
-                            var time = markers[i].time;
-                            var el   = $('<div class="vjs-chapter-marker" style="left: ' +left+ '" data-time="' +time+ '"> <span>' +markers[i].label+ '</span></div>');
-
-                            el.click(function() {
-                              videojsPlayer.currentTime($(this).data('time'));
-                            });
-
-                            timeline.append(el);
-                          }
-                          clearInterval(markers_loaded);
-                        }
-                      }, 10);
-                    }, 1000 );
-
-                  }); // END on "play"
-
-                } // END if chapterTracksEnabled
-
-              } // END if videojsPlayer is defined
-
-            } // END if videoInfo.html5
+            } // END if chapterTracksEnabled
 
             if (!$videoElement.get())
                 return;

@@ -14962,8 +14962,6 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*!
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
-(() => {
 /*
  # -----------------------------------------------------------------------------
  #  ~/src/template.js
@@ -15116,7 +15114,5 @@ const J1AdocResultViewer = __webpack_require__(7784);
 
 // -----------------------------------------------------------------------------
 // END
-})();
-
 /******/ })()
 ;

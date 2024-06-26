@@ -24,7 +24,7 @@
  *
  * Copyright (c) 2015 Chris Dougherty
  * Licensed under the Apache-2.0 license.
- */
+*/
 
 ;(function(root, factory) {
   if (typeof window !== 'undefined' && window.videojs) {
@@ -81,7 +81,10 @@
       cFullscreen = 7;
 
     // Use built-in merge function from Video.js v5.0+ or v4.4.0+
-    var mergeOptions = videojs.mergeOptions || videojs.util.mergeOptions;
+    // videojs.mergeOptions is deprecated in V8 and will be removed in V9
+    // var mergeOptions = videojs.mergeOptions || videojs.obj.merge;
+    var mergeOptions = (videojs.VERSION <= "7.10.0") ? videojs.mergeOptions : videojs.obj.merge;
+
     options = mergeOptions(def_options, options || {});
 
     var volumeStep = options.volumeStep,
@@ -99,7 +102,7 @@
       enableInactiveFocus = options.enableInactiveFocus,
       skipInitialFocus = options.skipInitialFocus;
 
-    var videojsVer = videojs.VERSION;
+//  var videojsVer = videojs.VERSION;
 
     // Set default player tabindex to handle keydown and doubleclick events
     if (!pEl.hasAttribute('tabIndex')) {
@@ -296,7 +299,7 @@
 
     var doubleClick = function doubleClick(event) {
       // Video.js added double-click fullscreen with 7.1.0 and newer
-      if (videojsVer != null && videojsVer <= "7.1.0") {
+      if (videojs.VERSION != null && videojs.VERSION <= "7.1.0") {
         // When controls are disabled, hotkeys will be disabled as well
         if (player.controls()) {
 

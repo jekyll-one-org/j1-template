@@ -253,6 +253,7 @@
 	    modal.innerHTML = content.getContent();
 	    return modal;
 	  }
+
 	  listeners() {
 	    let buttons = this.player.getElementsByClassName('vjs-zoom-duck__button');
 	    buttons = Array.from(buttons);
@@ -261,22 +262,26 @@
 	      button.onclick = () => this.function[action]();
 	    });
 	  }
+
 	  toggle() {
 	    const [modal] = this.player.getElementsByClassName('vjs-zoom-duck__container');
 	    modal.classList.toggle('open');
 	    this.plugin.listeners.click();
 	  }
+
 	  open() {
 	    const [modal] = this.player.getElementsByClassName('vjs-zoom-duck__container');
 	    modal.classList.add('open');
 	    this.plugin.listeners.click();
 	  }
+
 	  close() {
 	    const [modal] = this.player.getElementsByClassName('vjs-zoom-duck__container');
 	    modal.classList.remove('open');
 	    this.plugin.listeners.click();
 	  }
-	}
+
+	} // END class ZoomModal
 
 	class ZoomButton extends Button {
 	  constructor(player, options) {
@@ -315,18 +320,30 @@
 	      click: () => {},
 	      change: () => {}
 	    };
+
+      // Use built-in merge function from Video.js v5.0+ or v4.4.0+
+      // videojs.mergeOptions is deprecated in V8 and will be removed in V9
+      var mergeOptions = (videojs.VERSION <= "7.10.0") ? videojs.mergeOptions : videojs.obj.merge;
+
+      this.state = mergeOptions(DEFAULT_OPTIONS, options);
+
 	    this.player.style.overflow = 'hidden';
-	    this.state = videojs.mergeOptions(DEFAULT_OPTIONS, options);
 	    this.state.flip = "+";
 	    this.state.moveCount = Math.round((this.state.zoom - 1) / ZOOM_SALT);
 	    player.getChild('ControlBar').addChild('ZoomButton');
+
 	    player.addChild('ZoomModal', {
 	      plugin: this,
 	      state: this.state
 	    });
+
 	    this._observer = Observer.getInstance();
 	    this._setTransform();
-	  }
+	  } // END constructor
+
+    // =========================================================================
+    // methods
+    // =========================================================================
 
 	  zoom(value) {
 	    if (value <= 0) {
@@ -336,26 +353,32 @@
 	    this.state.moveCount = Math.round((this.state.zoom - 1) / ZOOM_SALT);
 	    this._setTransform();
 	  }
+
 	  rotate(value) {
 	    this.state.rotate = value;
 	    this._setTransform();
 	  }
+
 	  move(x, y) {
 	    this.state.moveX = x;
 	    this.state.moveY = y;
 	    this._setTransform();
 	  }
+
 	  flip(signal) {
 	    this.state.flip = signal;
 	    this._setTransform();
 	  }
+
 	  toggle() {
 	    const [modal] = this.player.getElementsByClassName('vjs-zoom-duck__container');
 	    modal.classList.toggle('open');
 	  }
+
 	  listen(listener, callback) {
 	    this.listeners[listener] = callback;
 	  }
+
 	  _notify() {
 	    this._observer.notify('change', this.state);
 	  }
@@ -370,6 +393,8 @@
 	  }
 	}
 
+  // register components|plugin
+  //
 	videojs.registerComponent('ZoomModal', ZoomModal);
 	videojs.registerComponent('ZoomButton', ZoomButton);
 	videojs.registerPlugin('zoomPlugin', ZoomPlugin);

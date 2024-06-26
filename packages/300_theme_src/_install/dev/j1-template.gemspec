@@ -1,15 +1,16 @@
 # ------------------------------------------------------------------------------
-# ~/packages/500_theme_gem/j1-template.gemspec
-# Provides Gem Spec information to create the gem-based Template
-# for J1 Theme
+#  J1: ~/packages/500_theme_gem/j1-template.gemspec
+#  Provides Gem Spec information to create the gem-based Template
+#  for J1 Theme
 #
-# Product/Info:
-# https://jekyll.one
+#  Product/Info:
+#  https://jekyll.one
 #
-# Copyright (C) 2023, 2024 Juergen Adams
+#  Copyright (C) 2023, 2024 Juergen Adams
 #
-# J1 Template is licensed under the MIT License.
-# See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+#  J1 Template is licensed under the MIT License.
+#  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+#
 # ------------------------------------------------------------------------------
 # NOTE:
 #   Removed spec.add_runtime_dependency 'activesupport'. Conflicts with
@@ -73,10 +74,10 @@ Gem::Specification.new do |spec|
   #
   # spec.add_runtime_dependency 'sinatra-cross_origin', '~> 0.3.1'
 
-  # Dependencies: Logging
+  # Dependencies:Required for J1 logger based on log4r (middleware)
   #
   spec.add_runtime_dependency 'log4r', '~> 1.1', '>= 1.1.10'
-  spec.add_runtime_dependency 'date', '~> 2.0'
+  spec.add_runtime_dependency 'date', '~> 3.0'
 
   # Dependencies: Authentication
   #
