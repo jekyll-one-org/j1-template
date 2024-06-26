@@ -501,7 +501,7 @@
       - title:                          J1 Amplitude
         href:                           /pages/public/tools/previewer/amplitudejs/
         icon:                           speaker
-  
+
       - title:                          J1 Geolocation
         href:                           //jekyll.one/pages/public/tools/previewer/geolocation/
         icon:                           google-maps
@@ -674,6 +674,13 @@
           href:                         //www.npmjs.com/
           target:                       _blank
           icon:                         language-javascript
+
+        - title:                        jQuery
+          href:                         //jquery.com/
+          target:                       _blank
+          icon:                         jquery
+
+
         - title:                        Bootstrap Home
           href:                         //getbootstrap.com/
           target:                       _blank
@@ -722,10 +729,14 @@
           href:                         //wiki.selfhtml.org/
           target:                       _blank
           icon:                         language-html5
-        - title:                        LearnCSS
+        - title:                        Learn CSS
           href:                         //developer.mozilla.org/en-US/docs/Learn/CSS
           target:                       _blank
           icon:                         language-css3
+        - title:                        Learn Javascript
+          href:                         https://developer.mozilla.org/en-US/docs/Learn/JavaScript
+          target:                       _blank
+          icon:                         language-javascript
         - title:                        Asciidoc Language
           href:                         //docs.asciidoctor.org/asciidoc/latest/
           target:                       _blank
@@ -753,6 +764,10 @@
           icon:                         cached
         - title:                        AppDevTools
           href:                         //appdevtools.com/
+          target:                       _blank
+          icon:                         cached
+        - title:                        Minify JS Online
+          href:                         //minify-js.com/
           target:                       _blank
           icon:                         cached
         - title:                        W3C Validator
