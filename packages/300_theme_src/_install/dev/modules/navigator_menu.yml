@@ -659,12 +659,10 @@
           href:                         //www.npmjs.com/
           target:                       _blank
           icon:                         language-javascript
-
         - title:                        jQuery
           href:                         //jquery.com/
           target:                       _blank
           icon:                         jquery
-
         - title:                        Bootstrap Home
           href:                         //getbootstrap.com/
           target:                       _blank
