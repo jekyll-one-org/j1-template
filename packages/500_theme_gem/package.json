@@ -79,6 +79,7 @@
     "starter-git-repo:user": "git config user.name \"Dummy Name\"",
     "starter-git-repo:commit": "git add . && cross-var git commit -am \"Initial version '$npm_package_rubygem_gemversion'\" > git-add.log",
     "template-gem-create": "cross-var echo \"create gem version: $npm_package_rubygem_gemversion\" && gem build j1-template.gemspec",
+
     "template-gem-folders": "run-s template-gem-folder:*",
     "template-gem-folder:starter": "shx mkdir ./lib/starter_web",
     "template-gem-folder:includes": "shx mkdir -p ./_includes/themes && shx cp -r ../300_theme_src/_includes/themes ./_includes",
@@ -87,6 +88,7 @@
     "template-gem-folder:assets-themes-core": "shx mkdir -p ./assets/theme/j1 && shx cp -r ../300_theme_src/assets/theme ./assets/",
     "template-gem-folder:utilsrv": "shx mkdir ./lib/starter_web/utilsrv",
     "template-gem-folder:_includes": "shx cp -r ../300_theme_src/_includes ./lib/starter_web",
+
     "template-gem-files": "run-s template-gem-site-files:*",
     "template-gem-site-files:data": "shx mkdir ./lib/starter_web/_data && shx cp -r ../400_theme_site/_data/* ./lib/starter_web/_data/",
     "template-gem-site-files:plugins": "shx cp -r ../300_theme_src/_plugins ./lib/starter_web/_plugins",
@@ -99,6 +101,7 @@
     "template-gem-site-files:site-base-files": "shx cp -rf ../300_theme_src/_install/site/base-files/* ./lib/starter_web",
     "template-gem-site-files:site-template-config": "shx cp -f ../300_theme_src/_install/site/config/j1_config.yml ./lib/starter_web/_data/",
     "template-gem-site-files:site-base-gemfile": "shx mv ./lib/starter_web/production.gem ./lib/starter_web/Gemfile",
+
     "posttemplate-gem-files": "run-s posttemplate-gem-site-files:*",
     "posttemplate-gem-site-files:data-remove": "shx rm -f lib/starter_web/_data/modules/cc.yml",
     "posttemplate-gem-site-files:assets-remove": "shx rm -rf ./lib/starter_web/assets/error_pages && shx rm -rf ./lib/starter_web/assets/data",
@@ -107,12 +110,16 @@
     "posttemplate-gem-site-files:posts-remove": "shx rm -f ./lib/starter_web/collections/_posts/featured/*-welcome-to-j1.adoc",
     "posttemplate-gem-site-files:pages-remove": "shx rm -rf ./lib/starter_web/pages/public/jupyter/* && shx rm -rf ./lib/starter_web/pages/_test* && shx rm -rf ./lib/starter_web/pages/public/se",
     "posttemplate-gem-site-files:pages-copy-previewers": "shx cp -r ../400_theme_site/pages/public/tools/previewer/* ./lib/starter_web/pages/public/tools/previewer/",
-    "posttemplate-gem-site-files:utilsrv-remove": "shx rm -rf ./lib/starter_web/utilsrv/node_modules && shx rm -f ./lib/starter_web/utilsrv/yarn.lock && shx rm -f ./lib/starter_web/utilsrv/package-lock.json",
+
     "posttemplate-gem-site-files:about-remove": "shx rm -rf ./lib/starter_web/pages/public/about",
+    "posttemplate-gem-site-files:app-files-remove": "shx rm -rf ./lib/starter_web/assets/app",
+    "posttemplate-gem-site-files:collections-remove-faq": "shx rm -rf ./lib/starter_web/collections/posts/public/faq",
+    "posttemplate-gem-site-files:template-files-remove": "shx rm -rf ./lib/starter_web/assets/theme",
+    "posttemplate-gem-site-files:utilsrv-remove": "shx rm -rf ./lib/starter_web/utilsrv/node_modules && shx rm -f ./lib/starter_web/utilsrv/yarn.lock && shx rm -f ./lib/starter_web/utilsrv/package-lock.json",
+
     "posttemplate-gem-site-files:about-copy": "shx mkdir ./lib/starter_web/pages/public/about && shx cp -f ../300_theme_src/_install/templates/pages/about_site.adoc ./lib/starter_web/pages/public/about/site.adoc",
     "posttemplate-gem-site-files:pages-copy-reporting-issues": "shx cp -f ../400_theme_site/pages/public/about/reporting_issues.adoc ./lib/starter_web/pages/public/about",
     "posttemplate-gem-site-files:pages-copy-features": "shx cp -f ../400_theme_site/pages/public/about/features.adoc ./lib/starter_web/pages/public/about",
-    "posttemplate-gem-site-files:collections-remove-faq": "shx rm -rf ./lib/starter_web/collections/posts/public/faq",
     "template-gem-permissions": "run-p -s template-gem-permission:*",
     "template-gem-permission:batch": "shx chmod a+x ./lib/starter_web/*sh",
     "template-gem-permission:j1_exe": "shx chmod a+x ./exe/j1",
