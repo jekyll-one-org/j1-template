@@ -141,7 +141,7 @@ country_data_path:                      /assets/data/countries.json
 
 
 # ==============================================================================
-# COOKIES
+# COOKIEs
 #
 # ------------------------------------------------------------------------------
 cookies:
@@ -413,12 +413,12 @@ preload:
 
   js:
     preload:                            false
-    js:                                  [
+    js:                                 [
                                           /assets/theme/j1/modules/bmd/js/bmd,
                                           /assets/theme/j1/modules/backstretch/js/backstretch,
                                           /assets/theme/j1/core/js/template
                                         ]
-    files:                               [
+    files:                              [
                                           /assets/theme/j1/adapter/js/attic.js,
                                           /assets/theme/j1/adapter/js/logger.js,
                                           /assets/theme/j1/adapter/js/bmd.js,
@@ -437,7 +437,7 @@ preload:
 # ------------------------------------------------------------------------------
 preconnect:
   enabled:                              true
-  urls:                                 [ "https://bootswatch.com" ]
+  urls:                                 [ //bootswatch.com ]
 
 # ------------------------------------------------------------------------------
 # END config

@@ -46,12 +46,14 @@
     "app": "run-p -s app:*",
     "app:rackup": "cross-env INTERFACE=$npm_package_config_jekyll_app_interface PORT=$npm_package_config_jekyll_app_port bundle exec puma -C _data/puma/config.rb",
     "app:open": "npm run delay-3s && cross-var open-cli $npm_package_config_jekyll_app_url",
+
     "build": "run-s -s build:*",
     "build:info": "echo build site incremental ..",
     "build:do": "bundle exec jekyll b --incremental",
     "postbuild": "run-s -s postbuild:*",
     "postbuild:finished": "echo .. build finished.",
     "postbuild:hint": "echo to open the site, run: yarn site",
+
     "bundle": "run-s -s bundler:*",
     "bundler:info": "echo create bundle ..",
     "bundler:clean": "shx rm -f Gemfile.lock",
@@ -62,6 +64,7 @@
     "bundle_vendor:info": "echo bundle rubies using vendor path ..",
     "bundle_vendor:set-path": "bundle config set --local path ./vendor",
     "bundle_vendor:bundle": "bundle install",
+
     "clean": "run-s -s clean-site && run-s clean:*",
     "clean-site": "echo clean up site files .. && bundle exec jekyll clean",
     "clean:start": "echo clean up projects files ..",
@@ -70,24 +73,31 @@
     "clean:etc-folder": "echo remove etc folder .. && shx rm -rf etc",
     "clean:logfiles": "echo remove various log files .. && shx rm -f *.log",
     "clean:locks": "echo remove lock files .. && shx rm -f *.lock && shx rm -f package-lock.json",
+
     "delay-1s": "node ./node_modules/npm-delay 1000",
     "delay-2s": "node ./node_modules/npm-delay 2000",
     "delay-3s": "node ./node_modules/npm-delay 3000",
     "delay-5s": "node ./node_modules/npm-delay 5000",
+
     "j1-app": "run-p -s app:*",
+
     "j1-site": "run-p -s j1-site:*",
     "j1-site:jekyll": "echo startup the site .. && cross-var bundle exec jekyll serve --config $npm_package_config_jekyll_config_file --port $npm_package_config_jekyll_port --livereload-port $npm_package_config_jekyll_livereload_port $npm_package_config_jekyll_option_incremental $npm_package_config_jekyll_option_livereload $npm_package_config_jekyll_option_initial_build $npm_package_config_jekyll_option_watch --open 2>jekyll.log",
+
     "rebuild": "run-s -s rebuild:* && run-s -s post-rebuild:*",
     "rebuild:info": "echo rebuild site incremental ..",
     "rebuild:clean": "echo clean up site files .. && bundle exec jekyll clean",
     "rebuild:do": "bundle exec jekyll b --incremental",
+
     "post-rebuild": "run-s -s postrebuild:*",
     "post-rebuild:finished": "echo .. rebuild finished.",
     "post-rebuild:hint": "echo to open the site, run: yarn site",
+
     "reset": "run-s -s reset:*",
     "reset:start": "echo reset project to factory state ..",
     "reset:base-clean-files": "echo cleaning up .. && npm --silent run clean",
     "reset:finished": "echo done.",
+
     "setup": "npm --silent run setup-start && npm --silent run setup-base && run-s -s setup:*",
     "setup-start": "echo prepare project control && npm --silent install shx && echo done. && shx echo && echo setup development system for first use ..",
     "setup-base": "echo installing base modules .. && echo installing base project modules .. > install.log && npm install shx npm-run-all cross-var cross-env >> install.log && echo done. >> install.log && shx echo >> install.log && echo done.",
@@ -98,10 +108,7 @@
     "setup:create-log-folder": "echo create log folder .. && shx mkdir ./log",
     "setup:create-log-archived-folder": "echo create archived log folder .. && shx mkdir ./log/archived",
     "setup:create-etc-folder": "echo create etc folder .. && shx mkdir ./etc && echo done.",
-
-    "__setup:node-modules-base": "echo Bootstrap project modules .. && echo J1 Project modules: >> install.log && npm --silent install >> install.log",
     "setup:node-modules": "shx echo && echo installing main project modules .. && shx echo >> install.log && echo installing main project modules .. >> install.log && npm --silent install >> install.log && echo done. >> install.log && shx echo >> install.log && echo done.",
-
     "setup:detect-os": "echo detect OS .. && cross-var if-env OS=Windows_NT && cross-var echo \"os detected: $OS\" || OS=$(echo $(getos)) && echo \"os detected: $OS\" && echo done.",
     "setup:site": "run-s -s build"
   },
