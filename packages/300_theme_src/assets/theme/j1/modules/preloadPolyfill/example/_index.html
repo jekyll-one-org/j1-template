@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- ie9 polyfills -->
+        <script src="https://www.promisejs.org/polyfills/promise-6.1.0.js"></script>
+        <script>
+        (function() {
+          if (typeof window.CustomEvent === "function") return false; //If not IE
+
+          function CustomEvent(event, params) {
+            params = params || { bubbles: false, cancelable: false, detail: undefined };
+            var evt = document.createEvent("CustomEvent");
+            evt.initCustomEvent(
+              event,
+              params.bubbles,
+              params.cancelable,
+              params.detail
+            );
+            return evt;
+          }
+
+          CustomEvent.prototype = window.Event.prototype;
+
+          window.CustomEvent = CustomEvent;
+        })();
+        </script>
+
+        <link rel="preload" name="Raleway" as="font" type="font/woff2" crossorigin href="font.woff2"/>
+        <link rel="preload" name="Raleway" weight="700" as="font" type="font/woff2" crossorigin href="other-font.woff2"/>
+        <script>
+          //INLINE//
+        </script>
+        <script src="/dist/preload-polyfill.dev.js"></script>
+        <script src="/dist/preload-polyfill-invoke.dev.js"></script>
+    </head>
+
+    <body>
+        <!-- deduplication -->
+        <link rel="preload" as="script" href="foo.js" onload="invokePreload.onScriptLoad(this)" onerror="invokePreload.onScriptError(this)" />
+        <link rel="preload" as="script" href="foo.js" onload="invokePreload.onScriptLoad(this)" onerror="invokePreload.onScriptError(this)" />
+        <!-- js -->
+        <link rel="preload" as="script" href="baz.js" onload="invokePreload.onScriptLoad(this)" onerror="invokePreload.onScriptError(this)" />
+        <link rel="preload" as="script" href="bar.js" onload="invokePreload.onScriptLoad(this)" onerror="invokePreload.onScriptError(this)" />
+
+        <!-- image -->
+        <link rel="preload" as="image" href="img_fjords.jpg" onload="invokePreload.onLoad(this)" />
+        <img id="img" style="width:100%"/>
+
+        <!-- style -->
+        <link rel="preload" as="style" href="foo.css" onload="invokePreload.onStyleLoad(this)"/>
+        <link rel="preload" as="style" href="foo.css" onload="invokePreload.onStyleLoad(this)"/>
+        <link rel="preload" as="document" href="." onload="invokePreload.onLoad(this)"/>
+        <link rel="preload" as="fetch" href="." onload="invokePreload.onLoad(this)"/>
+
+        <!-- webfont -->
+        <h1 style="font-weight: normal">webfont</h1>
+        <h1 style="font-weight: bold;">fancy webfont</h1>
+        
+        <!-- module/nomodule -->
+        <link rel="preload" critical as="script" module href="module.js" onload="invokePreload.onScriptLoad(this)" onerror="invokePreload.onScriptError(this)" />
+        <link rel="nomodule" critical as="script" href="nomodule.js" onload="invokePreload.onScriptLoad(this)" onerror="invokePreload.onScriptError(this)" />
+
+        <script>
+          document.addEventListener("AllScriptsExecuted", function() {
+            console.log("all preloads executed");
+          })
+        </script>
+      </body>
+</html>

@@ -1,0 +1,95 @@
+---
+title:                                  Video
+title_extention:                        Playing Video
+tagline:                                Playing Video
+
+date:                                   2024-04-09
+#last_modified:                         2024-01-01
+
+description: >
+                                        The J1 Template support playing video on web pages
+                                        by HTML5 Video, the new standard of HTML to show
+                                        videos on web pages.
+keywords: >
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap,
+                                        html, html5, video, support, flash player,
+                                        quicktime, silverlight
+
+categories:                             [ Roundtrip ]
+tags:                                   [ Module, Video ]
+
+image:
+  path:                                 /assets/image/icons/videojs/videojs-poster.png
+  width:                                1920
+  height:                               1280
+
+regenerate:                             false
+personalization:                        true
+permalink:                              /pages/public/dm_tester/
+
+resources:                              [ videojs ]
+resource_options:
+  - attic:
+      slides:
+        - url:                          /assets/image/icons/videojs/videojs-poster.png
+          alt:                          VideoJS Poster
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+The J1 Template support playing audio on web pages by HTML5 Video, the new
+standard of HTML to show videos on webpages. Modern browsers support the
+audio tag `<audio>` for the new HTML5 audio audio standard.
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+[role="mt-5"]
+== Dailymotion
+
+The Dailymotion platform is a monetization solution directly connecting to
+high-quality advertisers through a proprietary advertising system.
+Like YouTube, videos can be watched for free, but ads are shown on every
+video.
+
+.SELF Channel
+dailymotion::x87ycik[role="mt-4 mb-8"]
+
+++++
+<!-- link rel="preload" critical as="script" href="jquery.js" -->
+
+<script>
+  $(document).ready(function() {
+
+    performance.getEntriesByType('resource').forEach(function(entry) {
+      if (entry.type === 'preload') {
+        console.log('Preload-Event geladen:', entry.name);
+      }
+    });
+
+    window.addEventListener('preload', function(event) {
+      console.log('Preload-Event geladen:', event.url);
+    });
+
+   });
+</script>
+++++

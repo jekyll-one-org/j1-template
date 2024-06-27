@@ -19,6 +19,7 @@
 # ------------------------------------------------------------------------------
 # RESOURCE configuration settings for SYNCHRONOUS (sync) and
 # ASYNCHRONOUS (async|defer) LOAD for all LAYOUTS and (content) PAGES
+#
 # See: https://javascript.info/script-async-defer
 
 # ------------------------------------------------------------------------------
@@ -69,11 +70,8 @@
 #   Example:
 #
 #    [
-#      { local:  "framework/jquery/base/jquery-3.2.1",
-#        remote: "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery"
-#      },
-#      { local:  "framework/jquery/cookie/js/cookie-1.4.1",
-#        remote: "https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie"
+#      { local:  "modules/jquery/js/jquery",
+#        remote: "//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery"
 #      },
 #      ...
 #    ]
@@ -178,7 +176,7 @@
 #
 #   type:                               string
 #   values:                             always|ondemand
-#   default:                            always
+#   default:                            no default
 #
 # script_load
 # ------------------------------------------------------------------------------
@@ -187,7 +185,7 @@
 #
 #   type:                               string
 #   values:                             async|defer|empty
-#   default:                            defer
+#   default:                            no default
 #
 #   NOTE:
 #   Modern web browsers support the ASYNC and DEFER attributes
@@ -213,7 +211,7 @@
 #
 #   type:                               boolean
 #   values:                             true|false
-#   default:                            true
+#   default:                            false
 #
 # data
 # ------------------------------------------------------------------------------
@@ -279,7 +277,6 @@
 #      region:                          head|body-footer
 #      layout:                          [ layout_name(s)|all ]
 #      required:                        always|ondemand
-#      preload:                         false|true
 #      script_load:                     sync|defer|async
 #      pass_init_data:                  true|false
 #
@@ -354,7 +351,6 @@ resources:
       region:                           head
       layout:                           [ all ]
       required:                         always
-      preload:                          false
       script_load:
       dependencies:                     false
       pass_init_data:                   true
@@ -390,7 +386,6 @@ resources:
       region:                           head
       layout:                           [ all ]
       required:                         always
-      preload:                          false
       script_load:
       dependencies:                     false
       pass_init_data:                   false
@@ -414,7 +409,6 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         always
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   true
@@ -439,7 +433,6 @@ resources:
       region:                           head
       layout:                           [ all ]
       required:                         ondemand
-      preload:                          false
       script_load:
       dependencies:                     false
       pass_init_data:                   false
@@ -464,7 +457,6 @@ resources:
       region:                           head
       layout:                           [ all ]
       required:                         always
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -490,7 +482,6 @@ resources:
       region:                           head
       layout:                           [ all ]
       required:                         always
-      preload:                          false
       script_load:
       dependencies:                     false
       pass_init_data:                   false
@@ -516,7 +507,6 @@ resources:
       region:                           head
       layout:                           [ all ]
       required:                         always
-      preload:                          false
       script_load:
       dependencies:                     false
       pass_init_data:                   false
@@ -542,7 +532,6 @@ resources:
       region:                           head
       layout:                           [ all ]
       required:                         always
-      preload:                          false
       script_load:
       dependencies:                     false
       pass_init_data:                   true
@@ -568,7 +557,6 @@ resources:
       region:                           head
       layout:                           [ all ]
       required:                         always
-      preload:                          false
       script_load:
       dependencies:                     false
       pass_init_data:                   false
@@ -593,7 +581,6 @@ resources:
       region:                           head
       layout:                           [ all ]
       required:                         always
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -622,7 +609,6 @@ resources:
       region:                           head
       layout:                           [ all ]
       required:                         always
-      preload:                          false
       script_load:
       dependencies:                     false
       pass_init_data:                   false
@@ -648,7 +634,6 @@ resources:
       layout:                           [ page, post, collection, blog_archive ]
       region:                           head
       required:                         always
-      preload:                          false
       script_load:
       dependencies:                     false
       pass_init_data:                   true
@@ -674,7 +659,6 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         always
-      preload:                          false
       script_load:
       dependencies:                     false
       pass_init_data:                   false
@@ -700,7 +684,6 @@ resources:
       region:                           head
       layout:                           [ all ]
       required:                         always
-      preload:                          false
       script_load:
       dependencies:                     false
       pass_init_data:                   false
@@ -720,7 +703,7 @@ resources:
   # ----------------------------------------------------------------------------
   # Floating Action Buttons, JS API to create FABs
   #
-  - name:                               J1 FAB (Floating Action Buttons)
+  - name:                               J1 FAB
     resource:
       enabled:                          true
 
@@ -729,19 +712,46 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         always
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   true
 
       data:
-        css:                            []                                      # styles moved to Template CSS
+        css:                            []
         files:                          [ adapter/js/fab.js ]
         js:                             [
-                                          modules/fab/js/cash,                  # adapted|old (1.3.5) version from Materialize
-                                          modules/fab/js/fab                    # modified version for J1 (former: button.js)
+                                          modules/fab/js/cash,
+                                          modules/fab/js/fab
                                         ]
         init_function:                  [ j1.adapter.fab.init ]
+
+  # ----------------------------------------------------------------------------
+  # preload-polyfill
+  #
+  # See: https://github.com/digitalkaoz/preload-polyfill
+  #
+  - name:                               Preload Polyfill
+    resource:
+      enabled:                          false
+
+      id:                               preload-polyfill
+      comment:                          Module Preload Polyfill
+      region:                           head
+      layout:                           [all]
+      required:                         always
+      script_load:
+      dependencies:                     false
+      pass_init_data:                   false
+
+      data:
+        css:                            []
+        files:                          []
+        js:                             [
+                                          modules/preloadPolyfill/js/preload-polyfill,
+                                          modules/preloadPolyfill/js/preload-polyfill-invoke,
+                                          modules/preloadPolyfill/js/preload-polyfill-inline
+                                        ]
+        init_function:                  []
 
   # ----------------------------------------------------------------------------
   # jQueryUI, curated set of user interface interactions, effects, widgets,
@@ -758,7 +768,6 @@ resources:
       region:                           head
       layout:                           [ all ]
       required:                         ondemand
-      preload:                          false
       script_load:
       dependencies:                     false
       pass_init_data:                   false
@@ -786,7 +795,6 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         always
-      preload:                          false
       script_load:
       dependencies:                     false
       pass_init_data:                   false
@@ -835,7 +843,6 @@ resources:
       region:                           head
       layout:                           [ home, page, post, collection, blog_archive, app ]
       required:                         always
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -857,8 +864,7 @@ resources:
       comment:                          Module Text Resizer
       region:                           head
       layout:                           [ all ]
-      required:                         always                                  # always | ondemand
-      preload:                          false
+      required:                         always
       script_load:
       dependencies:                     false
       pass_init_data:                   false
@@ -884,7 +890,6 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         always
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -909,7 +914,6 @@ resources:
       region:                           head
       layout:                           [ all ]
       required:                         always
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -934,7 +938,6 @@ resources:
       region:                           head
       layout:                           [ all ]
       required:                         always
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -962,7 +965,6 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -985,7 +987,6 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -1009,7 +1010,6 @@ resources:
       region:                           head
       layout:                           [ all ]
       required:                         always
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -1037,7 +1037,6 @@ resources:
       region:                           head
       layout:                           [ all ]
       required:                         always
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -1063,7 +1062,6 @@ resources:
       layout:                           [ home, page, post ]
       region:                           head
       required:                         ondemand
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   true
@@ -1088,7 +1086,6 @@ resources:
       layout:                           [ all ]
       region:                           head
       required:                         ondemand
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   true
@@ -1116,7 +1113,6 @@ resources:
       region:                           head
       layout:                           [ all ]
       required:                         ondemand
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -1141,7 +1137,6 @@ resources:
       region:                           head
       layout:                           [ all ]
       required:                         ondemand
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -1149,9 +1144,9 @@ resources:
       data:
         files:                          [
                                           adapter/js/algolia.js,
-                                          "https://cdn.jsdelivr.net/npm/instantsearch.js@2.6.0/dist/instantsearch-theme-algolia.min.css",
-                                          "https://cdn.jsdelivr.net/npm/instantsearch.js@2.6.0/dist/instantsearch.min.css",
-                                          "https://cdn.jsdelivr.net/npm/instantsearch.js@2.6.0/dist/instantsearch.min.js"
+                                          //cdn.jsdelivr.net/npm/instantsearch.js@2.6.0/dist/instantsearch-theme-algolia.min.css,
+                                          //cdn.jsdelivr.net/npm/instantsearch.js@2.6.0/dist/instantsearch.min.css,
+                                          //cdn.jsdelivr.net/npm/instantsearch.js@2.6.0/dist/instantsearch.min.js
                                         ]
         init_function:                  [ j1.adapter.algolia.init ]
 
@@ -1170,7 +1165,6 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         always
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -1193,7 +1187,6 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   true
@@ -1220,7 +1213,6 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -1249,7 +1241,6 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -1293,7 +1284,6 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   true
@@ -1322,7 +1312,6 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -1364,7 +1353,6 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -1403,7 +1391,6 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -1426,7 +1413,6 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -1449,7 +1435,6 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -1472,7 +1457,6 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -1497,7 +1481,6 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -1519,8 +1502,7 @@ resources:
       comment:                          Module Scroller
       region:                           head
       layout:                           [ all ]
-      required:                         ondemand                                # always | ondemand
-      preload:                          false
+      required:                         ondemand
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -1545,7 +1527,6 @@ resources:
       region:                           head
       layout:                           [ all ]
       required:                         ondemand
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   true
@@ -1568,7 +1549,6 @@ resources:
       region:                           head
       layout:                           [ all ]
       required:                         ondemand
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   true
@@ -1598,7 +1578,6 @@ resources:
       region:                           head
       layout:                           [ all ]
       required:                         ondemand
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -1621,7 +1600,6 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         always
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -1647,7 +1625,6 @@ resources:
       region:                           head
       layout:                           [ all ]
       required:                         ondemand
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -1670,7 +1647,6 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -1696,7 +1672,6 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -1730,7 +1705,6 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -1759,7 +1733,6 @@ resources:
       region:                           head
       layout:                           [ page ]
       required:                         ondemand
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -1792,7 +1765,6 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         always
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -1816,7 +1788,6 @@ resources:
       region:                           head
       layout:                           [ all ]
       required:                         always
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -1842,7 +1813,6 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -1858,8 +1828,9 @@ resources:
 
   # ----------------------------------------------------------------------------
   # slimSelect
-  # https://github.com/brianvoe/slim-select
   # Advanced select dropdown menus
+  #
+  # See: https://github.com/brianvoe/slim-select
   #
   - name:                               J1 Slim Select
     resource:
@@ -1870,7 +1841,6 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         always
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -1894,7 +1864,6 @@ resources:
       region:                           head
       layout:                           [ all ]
       required:                         ondemand
-      preload:                          false
       script_load:
       dependencies:                     false
       pass_init_data:                   false
@@ -1918,7 +1887,6 @@ resources:
       region:                           head
       layout:                           [ all ]
       required:                         ondemand
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -1942,7 +1910,6 @@ resources:
       region:                           head
       layout:                           [ page ]
       required:                         ondemand
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -1968,7 +1935,6 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
-      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false

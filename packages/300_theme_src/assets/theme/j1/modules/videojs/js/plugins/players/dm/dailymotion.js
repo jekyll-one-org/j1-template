@@ -134,6 +134,20 @@
 
     initDMPlayer() {
       if (this.dmPlayer) {
+
+        // jadams, 2024-06-26:
+        this.dmPlayer.dmPlayerState = {
+          ended:        false,
+          playing:      false,
+          muted:        false,
+          volume:       0,
+          progress: {
+            seconds:    0,
+            percent:    0,
+            duration:   0
+          }
+        };
+
         return;
       }
 
@@ -164,6 +178,9 @@
         vm.trigger('pause');
       });
       this.dmPlayer.addEventListener('play', () => {
+        // jadams, 2024-06-26:
+        // this.dmPlayer.dmPlayerState.playing = true;
+
         vm.trigger('loadStart');
         vm.trigger('play');
         vm.trigger('playing');
@@ -465,13 +482,29 @@
       return this.dmPlayer ? this.dmPlayer.volume : 1;
     } // END volume
 
+    // if (DMPlayerState.playing === true) {
+    //   setVolume(percentAsDecimal) {
+    //     if (!this.dmPlayer || !this.dmPlayer.setMuted || !this.dmPlayer.setVolume) {
+    //       return;
+    //     }
+    //
+    //     this.dmPlayer.setMuted(false);
+    //     this.dmPlayer.setVolume(percentAsDecimal);
+    //   } // END setVolume
+    // }
+
     setVolume(percentAsDecimal) {
       if (!this.dmPlayer || !this.dmPlayer.setMuted || !this.dmPlayer.setVolume) {
         return;
       }
 
-      this.dmPlayer.setMuted(false);
-      this.dmPlayer.setVolume(percentAsDecimal);
+//    jadams, 2024-06-26:
+//    if (this.dmPlayer.dmPlayerState.playing === true) {
+      if (this.dmPlayer.apiReady) {
+        this.dmPlayer.setMuted(false);
+        this.dmPlayer.setVolume(percentAsDecimal);
+      }
+
     } // END setVolume
 
   } // END class Dailymotion
