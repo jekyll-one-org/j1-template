@@ -142,13 +142,11 @@ Extra extra large	xxl	    ≥1400px
 
 /* Large and up */
 @media screen and (min-width: 64em) {
+  /* jadams */
   div#amplitude-player {
     /* ::-webkit-scrollbar {
       display: none;
     } */
-  }
-  div#amplitude-player {
-    /* jadams */
   }
 }
 

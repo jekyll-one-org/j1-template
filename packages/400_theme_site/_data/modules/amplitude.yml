@@ -294,6 +294,85 @@ settings:
           title_info:                   //sfx.productioncrate.com
           duration:                     "2:38"
 
+    # --------------------------------------------------------------------------
+    # 3e - 3Elements
+    # --------------------------------------------------------------------------
+    #
+    - playlist:
+      enabled:                          true
+
+      name:                             3e
+      title:                            3Elements
+
+      # ------------------------------------------------------------------------
+      # ALBUM settings
+      # ------------------------------------------------------------------------
+      album:                            &album_3e
+        name:                           3Elements
+        artist:                         Earth, Wind & Fire Cover Band
+        audio_base:                     /assets/audio/album/3e
+#       cover_image:                    /assets/audio/cover/3e/cover.jpg
+        cover_image:                    /assets/audio/cover/3e/cover.9.jpg
+
+      # ------------------------------------------------------------------------
+      # TITLE settings (songs)
+      # ------------------------------------------------------------------------
+      items:
+
+        # title 01
+        - item:
+          enabled:                      true
+          <<:                           *album_3e
+          title:                        In The Stone
+          audio:                        01 In The Stone.mp3
+          title_info:                   //www.3elements-band.com
+          duration:                     "4:28"
+
+        # title 02
+        - item:
+          enabled:                      true
+          <<:                           *album_3e
+          title:                        Can't Let Go
+          audio:                        02 Can't Let Go.mp3
+          title_info:                   //www.3elements-band.com
+          duration:                     "3:25"
+
+        # title 03
+        - item:
+          enabled:                      true
+          <<:                           *album_3e
+          title:                        Jupiter
+          audio:                        03 Jupiter.mp3
+          title_info:                   //www.3elements-band.com
+          duration:                     "6:14"
+
+        # title 04
+        - item:
+          enabled:                      true
+          <<:                           *album_3e
+          title:                        Winter Wonderland
+          audio:                        04 Winter Wonderland.mp3
+          title_info:                   //www.3elements-band.com
+          duration:                     "3:41"
+
+        # title 05
+        - item:
+          enabled:                      true
+          <<:                           *album_3e
+          title:                        Fantasy
+          audio:                        05 Fantasy.mp3
+          title_info:                   //www.3elements-band.com
+          duration:                     "3:44"
+
+        # title 06
+        - item:
+          enabled:                      true
+          <<:                           *album_3e
+          title:                        After The Love Has Gone
+          audio:                        06 After The Love Has Gone.mp3
+          title_info:                   //www.3elements-band.com
+          duration:                     "4:36"
+
 
   # ----------------------------------------------------------------------------
   # PLAYER configurations
@@ -373,6 +452,61 @@ settings:
       playlist:                         free_pop
       playlist_title:                   Free Pop
       title_info:                       false
+      hide_scrollbar:                   true
+
+
+    # --------------------------------------------------------------------------
+    # MINI player, 3Elements
+    # --------------------------------------------------------------------------
+    #
+    - plaver:
+      enabled:                          true
+
+      # ------------------------------------------------------------------------
+      # PLAYER settings
+      #
+      id:                               3e_mini
+      type:                             mini
+
+      playlist:                         3e
+      playlist_title:                   3Elements Pop
+      title_info:                       false
+      hide_scrollbar:                   true
+
+    # --------------------------------------------------------------------------
+    # COMPACT player, 3Elements
+    # --------------------------------------------------------------------------
+    #
+    - plaver:
+      enabled:                          true
+
+      # ------------------------------------------------------------------------
+      # PLAYER settings
+      #
+      id:                               3e_compact
+      type:                             compact
+
+      playlist:                         3e
+      playlist_title:                   3Elements
+      title_info:                       false
+      hide_scrollbar:                   true
+
+    # --------------------------------------------------------------------------
+    # LARGE player, 3Elements
+    # --------------------------------------------------------------------------
+    #
+    - plaver:
+      enabled:                          true
+
+      # ------------------------------------------------------------------------
+      # PLAYER settings
+      #
+      id:                               3e_large
+      type:                             large
+
+      playlist:                         3e
+      playlist_title:                   3Elements
+      title_info:                       true
       hide_scrollbar:                   true
 
 # ------------------------------------------------------------------------------

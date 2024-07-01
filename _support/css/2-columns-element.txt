@@ -1,0 +1,88 @@
+Ich verwende einen HTML div Container mit zwei Spalten. Die linke Spalte
+enthält ein statisches Element, die linke spalte eine dynamische Liste.
+
+Wie kann ich mit Hilfe von CSS beide Spalten gleich hoch slalieren?
+
+Es gibt verschiedene Möglichkeiten, um zwei Spalten in einem HTML-Div-Container
+mit CSS gleich hoch zu skalieren, wenn eine Spalte statischen Inhalt und die
+andere Spalte eine dynamische Liste enthält.
+
+Hier sind drei gängige Methoden:
+
+1. CSS Flexbox:
+
+Flexbox ist eine moderne Layout-Technik, die sich gut für die Erstellung
+von Spaltenlayouts mit gleicher Höhe eignet. Die folgende CSS-Anweisung kann
+verwendet werden, um die Spalten gleich hoch zu skalieren:
+
+CSS
+.container {
+  display: flex;
+}
+
+.spalte1, .spalte2 {
+  flex: 1;
+}
+
+In diesem Beispiel wird dem .container-Element ein display: flex-Wert
+zugewiesen, wodurch es in ein Flexbox-Layout umgewandelt wird. Den .spalte1-
+und .spalte2-Elementen wird ein flex: 1-Wert zugewiesen, wodurch ihnen die
+gleiche Größe zugewiesen wird.
+
+
+2. CSS Grid Layout:
+
+CSS Grid Layout ist eine weitere moderne Layout-Technik, die sich für die
+Erstellung von Spaltenlayouts mit gleicher Höhe eignet. Die folgenden
+CSS-Anweisungen können verwendet werden, um die Spalten gleich hoch zu
+skalieren:
+
+CSS
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+In diesem Beispiel wird dem .container-Element ein display: grid-Wert
+zugewiesen, wodurch es in ein Grid-Layout umgewandelt wird.
+Die grid-template-columns-Eigenschaft wird verwendet, um zwei
+Spalten mit gleicher Breite zu definieren.
+
+3. CSS-Tabellen:
+
+CSS-Tabellen können ebenfalls verwendet werden, um Spaltenlayouts mit
+gleicher Höhe zu erstellen. Die folgende CSS-Anweisung kann verwendet
+werden, um die Spalten gleich hoch zu skalieren:
+
+CSS
+.container {
+  display: table;
+}
+
+.spalte1, .spalte2 {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+In diesem Beispiel wird dem .container-Element ein display: table-Wert
+zugewiesen, wodurch es in eine Tabelle umgewandelt wird. Den .spalte1-
+und .spalte2-Elementen wird ein display: table-cell-Wert zugewiesen,
+wodurch sie zu Tabellenzellen werden.
+
+Die vertical-align: middle-Eigenschaft wird verwendet, um den Inhalt der
+Zellen in der Mitte vertikal auszurichten.
+
+
+Zusätzliche Überlegungen
+
+Minimale Höhe:
+  Es kann sein, dass Sie eine minimale Höhe für die Spalten
+  festlegen möchten, um sicherzustellen, dass sie immer eine
+  bestimmte Höhe haben, auch wenn sie keinen Inhalt enthalten.
+  Dies kann mithilfe der Eigenschaft min-height erreicht werden.
+
+Reaktionsfähigkeit:
+
+  Wenn Sie möchten, dass Ihre Spalten auf verschiedenen Bildschirmgrößen
+  gleich hoch bleiben, müssen Sie Ihre CSS-Regeln reaktionsfähig gestalten.
+  Dies kann mithilfe von Media Queries erreicht werden.

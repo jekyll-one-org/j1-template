@@ -490,6 +490,7 @@ j1.adapter.amplitude = ((j1, window) => {
       var dependencies_met_player_instances_initialized = setInterval (() => {
         if (apiInitialized.state) {
           logger.info('\n' + 'initialize player specific UI events: started');
+          var w = window.innerWidth;
 
           {% for player in amplitude_options.players %} {% if player.enabled %}
             {% assign player_id     = player.id %}
@@ -560,13 +561,16 @@ j1.adapter.amplitude = ((j1, window) => {
                         document.getElementById('playlist-screen').classList.add('slide-in-top');
                         document.getElementById('playlist-screen').style.display = "block";
 
-                        // disable scrolling
-                        if ($('body').hasClass('stop-scrolling')) {
-                          return false;
-                        } else {
-                          $('body').addClass('stop-scrolling');
+                        // disable scrolling if window viweport eqals BS Medium and above
+                        if (window.innerWidth >= 720) {
+                          if ($('body').hasClass('stop-scrolling')) {
+                            return false;
+                          } else {
+                            $('body').addClass('stop-scrolling');
+                          }
                         }
-                      });
+
+                      }); // EBD EventListener 'click' (compact player|click down arrow)
 
                       // compact player: click up arrow to hide the list screen
                       document.getElementsByClassName('hide-playlist')[0].addEventListener('click', function() {
@@ -602,17 +606,24 @@ j1.adapter.amplitude = ((j1, window) => {
                     // jadams, 2021-03-05: manage scrolling on playlist (Large Player|Right)
                     if (document.getElementById('amplitude-right') !== null) {
                       document.getElementById('amplitude-right').addEventListener('mouseenter', function() {
-                        if ($('body').hasClass('stop-scrolling')) {
-                          return false;
-                        } else {
-                          $('body').addClass('stop-scrolling');
+
+                        // disable scrolling if window viweport eqals BS Medium and above
+                        if (window.innerWidth >= 720) {
+                          if ($('body').hasClass('stop-scrolling')) {
+                            return false;
+                          } else {
+                            $('body').addClass('stop-scrolling');
+                          }
                         }
-                      });
+
+                      }); // END EventListener 'mouseenter' (Large Player|Right)
+
                       document.getElementById('amplitude-right').addEventListener('mouseleave', function() {
                         if ($('body').hasClass('stop-scrolling')) {
                           $('body').removeClass('stop-scrolling');
                         }
-                      });
+                      }); // END EventListener 'mouseleave' (Large Player|Right)
+
                     } // END manage scrolling on playlist (Expanded Player|Right)
 
                     // ---------------------------------------------------------
@@ -683,10 +694,13 @@ j1.adapter.amplitude = ((j1, window) => {
         // ensure that on mouseover, CSS styles don't get messed up for active songs
         songs[i].addEventListener('mouseover', function() {
 
-          if ($('body').hasClass('stop-scrolling')){
-            return false;
-          } else {
-            $('body').addClass('stop-scrolling');
+          // disable scrolling if window viweport eqals BS Medium and above
+          if (window.innerWidth >= 720) {
+            if ($('body').hasClass('stop-scrolling')) {
+              return false;
+            } else {
+              $('body').addClass('stop-scrolling');
+            }
           }
 
           this.style.backgroundColor = '#00A0FF';
@@ -724,11 +738,13 @@ j1.adapter.amplitude = ((j1, window) => {
           if (this.querySelectorAll('.audio-duration')[0] !== undefined) {
             this.querySelectorAll('.audio-duration')[0].style.color = '#FFFFFF';
           }
-        });
+
+        }); // END EventListener 'mouseover' (songlist)
 
         // ensure that on mouseout, CSS styles don't get messed up for active songs
         songs[i].addEventListener('mouseout', function() {
           this.style.backgroundColor = '#FFFFFF';
+
           if (this.querySelectorAll('.audio-meta-data .audio-title')[0] !== undefined) {
             this.querySelectorAll('.audio-meta-data .audio-title')[0].style.color  = '#272726';
           }
@@ -759,25 +775,35 @@ j1.adapter.amplitude = ((j1, window) => {
             this.querySelectorAll('.audio-duration')[0].style.color = '#607D8B';
           }
 
-          if ($('body').hasClass('stop-scrolling')){
-            return false;
-          } else {
-            $('body').addClass('stop-scrolling');
+          // disable scrolling if window viweport eqals BS Medium and above
+          if (window.innerWidth >= 720) {
+            if ($('body').hasClass('stop-scrolling')) {
+              return false;
+            } else {
+              $('body').addClass('stop-scrolling');
+            }
           }
-        });
+
+        }); // END EventListener 'mouseout' (songlist)
 
         // show|hide the (mini) play button when the song is clicked
         songs[i].addEventListener('click', function () {
           if (this.querySelectorAll('.play-button-container')[0] !== undefined) {
             this.querySelectorAll('.play-button-container')[0].style.display = 'none';
           }
-          if ($('body').hasClass('stop-scrolling')){
-            return false;
-          } else {
-            $('body').addClass('stop-scrolling');
+
+          // disable scrolling if window viweport eqals BS Medium and above
+          if (window.innerWidth >= 720) {
+            if ($('body').hasClass('stop-scrolling')) {
+              return false;
+            } else {
+              $('body').addClass('stop-scrolling');
+            }
           }
-        });
+
+        }); // END EventListener 'click' (songlist)
       }
+
       logger.debug('\n' + 'initializing title events for player on ID ' + '#' + playerID + ': finished');
     }, // END songEvents
 
