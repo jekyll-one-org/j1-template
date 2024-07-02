@@ -693,6 +693,7 @@ j1.adapter.amplitude = ((j1, window) => {
       for (var i = 0; i < songs.length; i++) {
         // ensure that on mouseover, CSS styles don't get messed up for active songs
         songs[i].addEventListener('mouseover', function() {
+          // this.style.backgroundColor = '#00A0FF';
 
           // disable scrolling if window viweport eqals BS Medium and above
           if (window.innerWidth >= 720) {
@@ -702,8 +703,6 @@ j1.adapter.amplitude = ((j1, window) => {
               $('body').addClass('stop-scrolling');
             }
           }
-
-          this.style.backgroundColor = '#00A0FF';
 
           if (this.querySelectorAll('.audio-meta-data .audio-title')[0] !== undefined) {
             this.querySelectorAll('.audio-meta-data .audio-title')[0].style.color  = '#FFFFFF';
@@ -743,7 +742,7 @@ j1.adapter.amplitude = ((j1, window) => {
 
         // ensure that on mouseout, CSS styles don't get messed up for active songs
         songs[i].addEventListener('mouseout', function() {
-          this.style.backgroundColor = '#FFFFFF';
+          // this.style.backgroundColor = '#FFFFFF';
 
           if (this.querySelectorAll('.audio-meta-data .audio-title')[0] !== undefined) {
             this.querySelectorAll('.audio-meta-data .audio-title')[0].style.color  = '#272726';

@@ -537,7 +537,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
 
             <!-- Large Player|Right Side (playlist) -->
             <div id="amplitude-right" class="{{player_scrollbar_class}}" data-amplitude-playlist="{{player_playlist}}">
-              <div id="playlist-header" class="player-expanded">Playlist</div>
+              <!-- div id="playlist-header" class="player-expanded">Playlist</div -->
 
               {% for item in playlist_items %}{% if item.enabled %}
               <!-- Audio item -->
@@ -547,7 +547,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
 
                 <div class="song-now-playing-icon-container" data-amplitude-playlist="{{player_playlist}}">
                   <div class="play-button-container"></div>
-                  <img class="now-playing" src="/assets/theme/j1/modules/amplitudejs/icons/now-playing.svg" alt="now-playing">
+                  <img class="now-playing" src="/assets/theme/j1/modules/amplitudejs/icons/black/now-playing.svg" alt="now-playing">
                 </div>
 
                 <div class="audio-meta-data" data-amplitude-playlist="{{player_playlist}}">

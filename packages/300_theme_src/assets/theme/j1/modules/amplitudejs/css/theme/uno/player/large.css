@@ -49,9 +49,11 @@ div#playlist-header.player-expanded {
     font-family: "Lato", sans-serif;
 }
 
+/*
 div#amplitude-right div.song:hover {
-    background-color: var(--ajs-theme-uno--gray-300) !important;
+  background-color: var(--ajs-theme-uno--gray-300) !important;
 }
+*/
 
 /* Scroller style (should for player|right, but currently NOT working|used)
    ----------------------------------------------------------------------------- */
@@ -150,14 +152,16 @@ Extra extra large	xxl	    ≥1400px
   }
 }
 
+/*
 div#amplitude-left {
-  overflow-y: clip; /* jadams */
-  padding: 0px;
-  border-right: 1px solid var(--ajs-theme-uno--blue-gray-100);
-  width: 50%;
   display: flex;
   flex-direction: column;
+  overflow-y: clip;
+  padding: 0px;
+  width: 50%;
+  border-right: 1px solid var(--ajs-theme-uno--blue-gray-100);
 }
+*/
 
 div#amplitude-left img.album-art {
   width: 100%;
@@ -190,19 +194,23 @@ div#amplitude-left div#player-left-bottom div#volume-container:after {
   }
 }
 
+/*
 div#amplitude-right {
+  display: flex;
+  flex-direction: column;
   padding: 0px;
   overflow-y: scroll;
   width: 50%;
-  display: flex;
-  flex-direction: column;
   background: var(--ajs-theme-uno--gray-100);
 }
+*/
 
+/*
 div#amplitude-right div.song {
   cursor: pointer;
   padding: 10px;
 }
+*/
 
 div#amplitude-right div.song div.song-now-playing-icon-container {
   float: left;
@@ -229,9 +237,11 @@ div#amplitude-right div.song div.play-button-container:hover {
   background: url("/assets/theme/j1/modules/amplitudejs/icons/list-play-hover.png") no-repeat;
 }
 
+/*
 div#amplitude-right div.song.amplitude-active-song-container div.song-now-playing-icon-container img.now-playing {
   display: block;
 }
+*/
 
 div#amplitude-right div.song.amplitude-active-song-container:hover div.play-button-container {
   display: none;
@@ -242,6 +252,7 @@ div#amplitude-right div.song div.audio-meta-data {
   width: calc(100% - 125px);
 }
 
+/*
 div#amplitude-right div.song div.audio-meta-data span.audio-title {
   color: var(--ajs-theme-uno--gray-800);
   font-size: 16px;
@@ -251,6 +262,7 @@ div#amplitude-right div.song div.audio-meta-data span.audio-title {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+*/
 
 div#amplitude-right div.song div.audio-meta-data span.audio-artist {
   color: var(--ajs-theme-uno--blue-gray);

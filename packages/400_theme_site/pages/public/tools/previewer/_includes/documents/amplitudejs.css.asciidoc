@@ -1,6 +1,10 @@
-
 ++++
 <style>
+
+/*
+# MINI Player
+# ------------------------------------------------------------------------------
+*/
 
 div#mini-player {
   max-width: 475px;
@@ -92,9 +96,57 @@ input[type=range].mini-player.amplitude-volume-slider {
     text-overflow: ellipsis;
 }
 
-</style>
+/*
+# LARGE Player
+# ------------------------------------------------------------------------------
+*/
 
-<style>
+div#amplitude-left {
+    display: flex;
+    flex-direction: column;
+    overflow-y: clip;
+    padding: 0px;
+    width: 50%;
+    background-color: #242b33 !important;
+/*  border-right: 1px solid var(--ajs-theme-uno--blue-gray-100); */
+}
+
+div#amplitude-right {
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+    overflow-y: scroll;
+    width: 50%;
+    background-color: #242b33 !important;
+/*  background: var(--ajs-theme-uno--gray-100); */
+}
+
+div#amplitude-right div.song {
+    cursor: pointer;
+    padding: 10px;
+/*  background-color: #242b33 !important; */
+    background-color: #242b33;
+}
+
+div#amplitude-right div.song:hover {
+    background-color: var(--ajs-theme-uno--blue-500);
+}
+
+div#amplitude-right div.song div.audio-meta-data span.audio-title {
+    color: var(--ajs-theme-uno--blue-gray-100) !important;
+    font-size: 20px;
+    display: block;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+div#amplitude-right div.song.amplitude-active-song-container div.song-now-playing-icon-container img.now-playing {
+  display: block;
+  height: 16px;
+  width: 16px;
+}
 
 div#large-player-controls {
   height: 65px;
@@ -200,7 +252,6 @@ div#large-player-controls div.large-player-controls-container div#repeat-black.a
 div#amplitude-left, div#amplitude-right {
   flex: 1;
 }
-
 
 </style>
 ++++
