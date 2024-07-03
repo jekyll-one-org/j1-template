@@ -89,13 +89,15 @@ div#playlist-screen div#list {
   overflow-y: scroll;
 }
 
+/*
 div#playlist-screen div#list div.song {
   padding: 15px;
-  background-color: #242b33 !important;
   margin-bottom: 1px;
   cursor: pointer;
   line-height: 24px;
+  background-color: var(--ajs-theme-uno--dark-silver) !important;
 }
+*/
 
 div#playlist-screen div#list div.song span.song-number-now-playing {
   display: inline-block;
@@ -115,16 +117,21 @@ div#playlist-screen div#list div.song span.song-number-now-playing img.now-playi
   display: none;
 }
 
+/*
 div#playlist-screen div#list div.song.amplitude-active-song-container {
   background-color: #30363e !important;
 }
+*/
 
+/*
 div#playlist-screen div#list div.song.amplitude-active-song-container span.song-number-now-playing img.now-playing {
   display: inline-block;
   height: 16px;
   width: 16px;
 }
+*/
 
+/*
 div#playlist-screen div#list div.song.amplitude-active-song-container span.song-number-now-playing span.number {
   display: none;
 }
@@ -135,7 +142,9 @@ div#playlist-screen div#list div.song div.song-meta-container {
   vertical-align: middle;
   width: calc(100% - 80px);
 }
+*/
 
+/*
 div#playlist-screen div#list div.song div.song-meta-container span.song-name {
   font-family: "Lato", sans-serif;
   font-size: 20px;
@@ -157,17 +166,20 @@ div#playlist-screen div#list div.song div.song-meta-container span.song-artist-a
 div#playlist-screen div#list div.song span.song-duration {
   display: inline-block;
   opacity: 0.5;
+  width: 35px;
   font-family: "Lato", sans-serif;
   font-size: 18px;
-  color: #fff;
   letter-spacing: 0.5px;
-  width: 35px;
   text-align: center;
+  color: #fff;
 }
+*/
 
+/*
 div#playlist-screen div#list div.song span.song-artist-album {
   color: #5277b0;
 }
+*/
 
 div#playlist-screen-controls.compact-player {
   position: sticky;

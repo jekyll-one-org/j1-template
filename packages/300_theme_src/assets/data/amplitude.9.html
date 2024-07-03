@@ -314,13 +314,10 @@ amplitude_defaults: {{amplitude_defaults | debug}}
               <div class="song amplitude-song-container amplitude-play-pause"
                 data-amplitude-song-index="{{forloop.index0}}"
                 data-amplitude-playlist="{{player_playlist}}">
-
                 <span class="song-number-now-playing">
-                  <span class="title-number">{{forloop.index}}
-                    <img class="now-playing" src="/assets/theme/j1/modules/amplitudejs/icons/black/now-playing.svg" alt="now-playing">
-                  </span>
+                  <span class="number">{{forloop.index}}</span>
+                  <img class="now-playing" src="/assets/theme/j1/modules/amplitudejs/icons/black/now-playing.svg" alt="now-playing">
                 </span>
-
                 <div class="playlist-song-meta song-meta-container" data-amplitude-playlist="{{player_playlist}}">
                   <span class="song-name">{{item.title}}</span>
                   <span class="song-artist-album">
@@ -329,8 +326,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
                     <span>{{item.artist}}</span>
                   </span>
                 </div>
-
-                <span class="audio-duration">{{item.duration}}</span>
+                <span class="song-duration">{{item.duration}}</span>
               </div> <!-- END list item -->
               {% endif %} {% endfor %}
             </div> <!-- END  playlist -->
@@ -550,26 +546,32 @@ amplitude_defaults: {{amplitude_defaults | debug}}
               data-amplitude-playlist="{{player_playlist}}">
 
                 <div class="song-now-playing-icon-container" data-amplitude-playlist="{{player_playlist}}">
-                  <span class="title-number">{{forloop.index}}
-                    <img class="now-playing" src="/assets/theme/j1/modules/amplitudejs/icons/black/now-playing.svg" alt="now-playing">
-                  </span>
+                  <span class="number" style="margin-top: 10px;">{{forloop.index}}</span>
+                  <img class="now-playing" src="/assets/theme/j1/modules/amplitudejs/icons/black/now-playing.svg" alt="now-playing">
                 </div>
+
+                <!-- div class="song-now-playing-icon-container" data-amplitude-playlist="{{player_playlist}}">
+                  <div class="play-button-container"></div>
+                  <span class="number" style="margin-top: 10px;">{{forloop.index}}</span>
+                  <img class="now-playing" src="/assets/theme/j1/modules/amplitudejs/icons/black/now-playing.svg" alt="now-playing">
+                </div -->
+
+                <!-- span class="song-number-now-playing">
+                  <span class="number">{{forloop.index}}</span>
+                  <img class="now-playing" src="/assets/theme/j1/modules/amplitudejs/icons/black/now-playing.svg" alt="now-playing">
+                </span -->
 
                 <div class="audio-meta-data" data-amplitude-playlist="{{player_playlist}}">
                   <span class="audio-title">{{item.title}}</span>
-                  <span class="audio-artist">
-                    <span>{{item.name}}</span>
-                    <span class="song-artist-album-delimiter">·</span>
-                    <span>{{item.artist}}</span>
-                  </span>
+                  <span class="audio-artist">{{item.artist}}</span>
                 </div>
 
                 <a href="{{item.title_info}}" class="audio-info-link" target="_blank">
                   {% if player_title_info %}
-                  <img class="audio-info-blue" src="/assets/theme/j1/modules/amplitudejs/icons/audio-info-blue.svg"   alt="audio-info" style="display: block">
+                  <img class="audio-info-grey" src="/assets/theme/j1/modules/amplitudejs/icons/audio-info-grey.svg"   alt="audio-info" style="display: block">
                   <img class="audio-info-white" src="/assets/theme/j1/modules/amplitudejs/icons/audio-info-white.svg" alt="audio-info" style="display: none">
                   {% else %}
-                  <img class="audio-info-blue" src="/assets/theme/j1/modules/amplitudejs/icons/audio-info-blue.svg"   alt="audio-info" style="display: none">
+                  <img class="audio-info-grey" src="/assets/theme/j1/modules/amplitudejs/icons/audio-info-grey.svg"   alt="audio-info" style="display: none">
                   <img class="audio-info-white" src="/assets/theme/j1/modules/amplitudejs/icons/audio-info-white.svg" alt="audio-info" style="display: none">
                   {% endif %}
                 </a>

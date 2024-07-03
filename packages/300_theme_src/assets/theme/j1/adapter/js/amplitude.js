@@ -704,39 +704,39 @@ j1.adapter.amplitude = ((j1, window) => {
             }
           }
 
-          if (this.querySelectorAll('.audio-meta-data .audio-title')[0] !== undefined) {
-            this.querySelectorAll('.audio-meta-data .audio-title')[0].style.color  = '#FFFFFF';
-          }
-          if (this.querySelectorAll('.audio-meta-data .audio-artist')[0] !== undefined) {
-            this.querySelectorAll('.audio-meta-data .audio-artist')[0].style.color = '#FFFFFF';
-          }
+          // if (this.querySelectorAll('.audio-meta-data .audio-title')[0] !== undefined) {
+          //   this.querySelectorAll('.audio-meta-data .audio-title')[0].style.color  = '#FFFFFF';
+          // }
+          // if (this.querySelectorAll('.audio-meta-data .audio-artist')[0] !== undefined) {
+          //   this.querySelectorAll('.audio-meta-data .audio-artist')[0].style.color = '#FFFFFF';
+          // }
 
-          // mini play button in playlist
+          // active song indicator (mini play button) in playlist
           if (!this.classList.contains('amplitude-active-song-container')) {
             if (this.querySelectorAll('.play-button-container')[0] !== undefined) {
               this.querySelectorAll('.play-button-container')[0].style.display = 'block';
             }
           } // END mini play button in playlist
 
-          if (playerTitleInfo) {
-            if (this.querySelectorAll('img.audio-info-grey')[0] !== undefined) {
-              this.querySelectorAll('img.audio-info-grey')[0].style.display  = 'none';
-            }
-            if (this.querySelectorAll('img.audio-info-white')[0] !== undefined) {
-              this.querySelectorAll('img.audio-info-white')[0].style.display = 'block';
-            }
-          } else {
-            if (this.querySelectorAll('img.audio-info-grey')[0] !== undefined) {
-              this.querySelectorAll('img.audio-info-grey')[0].style.display  = 'none';
-            }
-            if (this.querySelectorAll('img.audio-info-white')[0] !== undefined) {
-              this.querySelectorAll('img.audio-info-white')[0].style.display = 'none';
-            }
-          } // END if playerTitleInfo
+          // if (playerTitleInfo) {
+          //   if (this.querySelectorAll('img.audio-info-blue')[0] !== undefined) {
+          //     this.querySelectorAll('img.audio-info-blue')[0].style.display  = 'none';
+          //   }
+          //   if (this.querySelectorAll('img.audio-info-white')[0] !== undefined) {
+          //     this.querySelectorAll('img.audio-info-white')[0].style.display = 'block';
+          //   }
+          // } else {
+          //   if (this.querySelectorAll('img.audio-info-blue')[0] !== undefined) {
+          //     this.querySelectorAll('img.audio-info-blue')[0].style.display  = 'none';
+          //   }
+          //   if (this.querySelectorAll('img.audio-info-white')[0] !== undefined) {
+          //     this.querySelectorAll('img.audio-info-white')[0].style.display = 'none';
+          //   }
+          // } // END if playerTitleInfo
 
-          if (this.querySelectorAll('.audio-duration')[0] !== undefined) {
-            this.querySelectorAll('.audio-duration')[0].style.color = '#FFFFFF';
-          }
+          // if (this.querySelectorAll('.audio-duration')[0] !== undefined) {
+          //   this.querySelectorAll('.audio-duration')[0].style.color = '#FFFFFF';
+          // }
 
         }); // END EventListener 'mouseover' (songlist)
 
@@ -744,35 +744,36 @@ j1.adapter.amplitude = ((j1, window) => {
         songs[i].addEventListener('mouseout', function() {
           // this.style.backgroundColor = '#FFFFFF';
 
-          if (this.querySelectorAll('.audio-meta-data .audio-title')[0] !== undefined) {
-            this.querySelectorAll('.audio-meta-data .audio-title')[0].style.color  = '#272726';
-          }
-          if (this.querySelectorAll('.audio-meta-data .audio-artist')[0] !== undefined) {
-            this.querySelectorAll('.audio-meta-data .audio-artist')[0].style.color = '#607D8B';
-          }
+          // if (this.querySelectorAll('.audio-meta-data .audio-title')[0] !== undefined) {
+          //   this.querySelectorAll('.audio-meta-data .audio-title')[0].style.color  = '#272726';
+          // }
+          // if (this.querySelectorAll('.audio-meta-data .audio-artist')[0] !== undefined) {
+          //   this.querySelectorAll('.audio-meta-data .audio-artist')[0].style.color = '#607D8B';
+          // }
+
           if (this.querySelectorAll('.play-button-container')[0] !== undefined) {
             this.querySelectorAll('.play-button-container')[0].style.display = 'none';
           }
 
-          if (playerTitleInfo) {
-            if (this.querySelectorAll('img.audio-info-grey')[0] !== undefined) {
-              this.querySelectorAll('img.audio-info-grey')[0].style.display  = 'block';
-            }
-            if (this.querySelectorAll('img.audio-info-white')[0] !== undefined) {
-              this.querySelectorAll('img.audio-info-white')[0].style.display = 'none';
-            }
-          } else {
-            if (this.querySelectorAll('img.audio-info-grey')[0] !== undefined) {
-              this.querySelectorAll('img.audio-info-grey')[0].style.display  = 'none';
-            }
-            if (this.querySelectorAll('img.audio-info-white')[0] !== undefined) {
-              this.querySelectorAll('img.audio-info-white')[0].style.display = 'none';
-            }
-          } // END if playerTitleInfo
+          // if (playerTitleInfo) {
+          //   if (this.querySelectorAll('img.audio-info-blue')[0] !== undefined) {
+          //     this.querySelectorAll('img.audio-info-blue')[0].style.display  = 'block';
+          //   }
+          //   if (this.querySelectorAll('img.audio-info-white')[0] !== undefined) {
+          //     this.querySelectorAll('img.audio-info-white')[0].style.display = 'none';
+          //   }
+          // } else {
+          //   if (this.querySelectorAll('img.audio-info-blue')[0] !== undefined) {
+          //     this.querySelectorAll('img.audio-info-blue')[0].style.display  = 'none';
+          //   }
+          //   if (this.querySelectorAll('img.audio-info-white')[0] !== undefined) {
+          //     this.querySelectorAll('img.audio-info-white')[0].style.display = 'none';
+          //   }
+          // } // END if playerTitleInfo
 
-          if (this.querySelectorAll('.audio-duration')[0] !== undefined) {
-            this.querySelectorAll('.audio-duration')[0].style.color = '#607D8B';
-          }
+          // if (this.querySelectorAll('.audio-duration')[0] !== undefined) {
+          //   this.querySelectorAll('.audio-duration')[0].style.color = '#607D8B';
+          // }
 
           // disable scrolling if window viweport eqals BS Medium and above
           if (window.innerWidth >= 720) {
