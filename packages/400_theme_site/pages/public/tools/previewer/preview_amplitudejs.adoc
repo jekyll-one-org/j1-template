@@ -1,7 +1,7 @@
 ---
-title:                                  Amplitude
-title_extention:                        Custom Audio Players
-tagline:                                Custom Audio Players
+title:                                  AmplitudeJS
+title_extention:                        Audio Player
+tagline:                                Customizable Audio Player
 
 date:                                   2024-04-17
 #last_modified:                         2024-01-01
@@ -128,7 +128,7 @@ with embedded audio content.
 // .Dance Floor · Royalty Free Music (mini)
 // amplitude::free_pop_mini[role="mt-3 mb-5"]
 
-.3Elements · Earth, Wind & Fire
+.ƎElements · Earth, Wind & Fire Cover Band
 amplitude::3e_mini[role="mt-3 mb-5"]
 
 lorem:sentences[5]
@@ -161,7 +161,7 @@ too much screen space.
 // .Pop Music · Royalty Free Music (compact)
 // amplitude::free_pop_compact[role="mt-3 mb-5"]
 
-.3Elements · Earth, Wind & Fire
+.ƎElements · Earth, Wind & Fire Cover Band
 amplitude::3e_compact[role="mt-3 mb-5"]
 
 
@@ -173,7 +173,7 @@ lorem:sentences[5]
 // .Pop Music · Royalty Free Music (large)
 // amplitude::free_pop_large[role="mt-3 mb-5"]
 
-.3Elements · Earth, Wind & Fire
+.ƎElements · Earth, Wind & Fire Cover Band
 amplitude::3e_large[role="mt-3 mb-5"]
 
 [role="mb-8"]

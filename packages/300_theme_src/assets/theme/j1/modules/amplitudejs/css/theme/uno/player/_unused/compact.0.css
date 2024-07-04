@@ -231,7 +231,8 @@ div#playlist-screen div#playlist-screen-controls div.list-controls div.list-prev
   float: left;
   margin-right: 15px;
   margin-top: 4px;
-  background-image:  url("/assets/theme/j1/modules/amplitudejs/icons/black-player/small/previous.svg");
+  /* background-image: url("https://521dimensions.com/img/open-source/amplitudejs/examples/flat-black/small-previous.svg"); */
+  background-image:  url("/assets/theme/j1/modules/amplitudejs/icons/small/previous.svg");
 }
 
 div#playlist-screen div#playlist-screen-controls div.list-controls div.list-play-pause {
@@ -243,11 +244,13 @@ div#playlist-screen div#playlist-screen-controls div.list-controls div.list-play
 }
 
 div#playlist-screen div#playlist-screen-controls div.list-controls div.list-play-pause.amplitude-playing {
-  background-image:  url("/assets/theme/j1/modules/amplitudejs/icons/black-player/small/pause.svg");
+  /* background-image: url("https://521dimensions.com/img/open-source/amplitudejs/examples/flat-black/small-pause.svg"); */
+  background-image:  url("/assets/theme/j1/modules/amplitudejs/icons/small/pause.svg");
 }
 
 div#playlist-screen div#playlist-screen-controls div.list-controls div.list-play-pause.amplitude-paused {
-  background-image:  url("/assets/theme/j1/modules/amplitudejs/icons/black-player/small/play.svg");
+  /* background-image: url("https://521dimensions.com/img/open-source/amplitudejs/examples/flat-black/small-play.svg"); */
+  background-image:  url("/assets/theme/j1/modules/amplitudejs/icons/small/play.svg");
 }
 
 div#playlist-screen div#playlist-screen-controls div.list-controls div.list-next {
@@ -258,7 +261,8 @@ div#playlist-screen div#playlist-screen-controls div.list-controls div.list-next
   float: left;
   margin-left: 15px;
   margin-top: 4px;
-  background-image:  url("/assets/theme/j1/modules/amplitudejs/icons/black-player/small/next.svg");
+  /* background-image: url("https://521dimensions.com/img/open-source/amplitudejs/examples/flat-black/small-next.svg"); */
+  background-image:  url("/assets/theme/j1/modules/amplitudejs/icons/small/next.svg");
 }
 
 div.player-header {
@@ -451,11 +455,21 @@ div#player-middle div#control-container_compact-player div#shuffle-container div
 }
 
 div#player-middle div#control-container_compact-player div#shuffle-container div#shuffle.amplitude-shuffle-off {
-  background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/shuffle-disabled.svg") no-repeat;
+  background: url("https://521dimensions.com/img/open-source/amplitudejs/examples/flat-black/shuffle.svg") no-repeat;
+}
+
+div#player-middle div#control-container_compact-player div#shuffle-container div#shuffle.amplitude-shuffle-off:hover {
+  opacity: 0.8;
+  background: url("https://521dimensions.com/img/open-source/amplitudejs/examples/flat-black/shuffle-on.svg") no-repeat;
 }
 
 div#player-middle div#control-container_compact-player div#shuffle-container div#shuffle.amplitude-shuffle-on {
-  background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/shuffle-enabled.svg") no-repeat;
+  opacity: 1;
+  background: url("https://521dimensions.com/img/open-source/amplitudejs/examples/flat-black/shuffle-on.svg") no-repeat;
+}
+
+div#player-middle div#control-container_compact-player div#shuffle-container div#shuffle.amplitude-shuffle-on:hover {
+  opacity: 1;
 }
 
 div#player-middle div#control-container_compact-player div#prev-container {
@@ -470,11 +484,13 @@ div#player-middle div#control-container_compact-player div#prev-container div#pr
   height: 24px;
   cursor: pointer;
   margin: auto;
-  background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/previous-hover.svg") no-repeat;
+ /* background: url("https://521dimensions.com/img/open-source/amplitudejs/examples/flat-black/previous.svg") no-repeat; */
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/previous.svg") no-repeat;
 }
 
 div#player-middle div#control-container_compact-player div#prev-container div#previous:hover {
-  opacity: .5;
+  /* background: url("https://521dimensions.com/img/open-source/amplitudejs/examples/flat-black/previous-hover.svg") no-repeat; */
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/previous-hover.svg") no-repeat;
 }
 
 div#player-middle div#control-container_compact-player div#play-pause-container {
@@ -514,11 +530,13 @@ div#player-middle div#control-container_compact-player div#next-container div#ne
   height: 24px;
   cursor: pointer;
   margin: auto;
-  background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/next-hover.svg") no-repeat;
+  /* background: url("https://521dimensions.com/img/open-source/amplitudejs/examples/flat-black/next.svg") no-repeat; */
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/next.svg") no-repeat;
 }
 
 div#player-middle div#control-container_compact-player div#next-container div#next:hover {
-  opacity: .5;
+  /* background: url("https://521dimensions.com/img/open-source/amplitudejs/examples/flat-black/next-hover.svg") no-repeat; */
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/next-hover.svg") no-repeat;
 }
 
 div#player-middle div#control-container_compact-player div#repeat-container_compact-player {
@@ -529,40 +547,38 @@ div#player-middle div#control-container_compact-player div#repeat-container_comp
 }
 
 div#player-middle div#control-container_compact-player div#repeat-container_compact-player div#repeat_compact-player {
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 20px;
   cursor: pointer;
   margin: auto;
-  background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/repeat-disabled.svg") no-repeat;
+  opacity: 0.7;
+  background: url("https://521dimensions.com/img/open-source/amplitudejs/examples/flat-black/repeat.svg") no-repeat;
 }
 
 div#player-middle div#control-container_compact-player div#repeat-container_compact-player div#repeat_compact-player:hover {
-  opacity: .5;
+  opacity: 0.8;
+  background: url("https://521dimensions.com/img/open-source/amplitudejs/examples/flat-black/repeat-on.svg") no-repeat;
 }
 
 div#player-middle div#control-container_compact-player div#repeat-container_compact-player div#repeat_compact-player.amplitude-repeat-on {
-  background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/repeat-enabled.svg") no-repeat;
+  opacity: 1;
+  background: url("https://521dimensions.com/img/open-source/amplitudejs/examples/flat-black/repeat-on.svg") no-repeat;
 }
 
-/*
 div#player-middle div#control-container_compact-player div#repeat-container_compact-player div#repeat_compact-player.amplitude-repeat-on:hover {
-  opacity: .5;
+  opacity: 1;
 }
-*/
 
-/* clearfix player controls */
 div#player-middle div#control-container_compact-player::after {
   content: "";
   display: table;
   clear: both;
 }
 
-/*
-div#player-middle div#volume-container {
+/* div#player-middle div#volume-container {
  padding-bottom: 26px;
  text-align: center;
-}
-*/
+} */
 
 div#player-middle div#volume-container img {
   display: block;

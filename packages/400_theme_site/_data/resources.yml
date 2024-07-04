@@ -1942,10 +1942,8 @@ resources:
       data:
         css:                            [
                                           modules/amplitudejs/css/theme/uno/amplitude,
-                                          modules/amplitudejs/css/theme/uno/player/black,
                                           modules/amplitudejs/css/theme/uno/player/compact,
                                           modules/amplitudejs/css/theme/uno/player/large,
-                                          modules/amplitudejs/css/theme/uno/player/micro,
                                           modules/amplitudejs/css/theme/uno/player/mini
                                         ]
         files:                          [ adapter/js/amplitude.js ]

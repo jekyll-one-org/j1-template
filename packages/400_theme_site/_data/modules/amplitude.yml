@@ -308,11 +308,11 @@ settings:
       # ALBUM settings
       # ------------------------------------------------------------------------
       album:                            &album_3e
-        name:                           3Elements
-        artist:                         Earth, Wind & Fire Cover Band
+        name:                           ƎElements
+        artist:                         Earth, Wind & Fire
         audio_base:                     /assets/audio/album/3e
 #       cover_image:                    /assets/audio/cover/3e/cover.jpg
-        cover_image:                    /assets/audio/cover/3e/cover.9.jpg
+        cover_image:                    /assets/audio/cover/3e/ƎElements.jpg
 
       # ------------------------------------------------------------------------
       # TITLE settings (songs)
@@ -488,7 +488,7 @@ settings:
 
       playlist:                         3e
       playlist_title:                   3Elements
-      title_info:                       false
+      title_info:                       true
       hide_scrollbar:                   true
 
     # --------------------------------------------------------------------------

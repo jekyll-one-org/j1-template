@@ -258,7 +258,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
               </div> <!-- END meta container -->
               {% endif %} {% endfor %}
               <div id="volume-container" class="mini-player-volume-container">
-                <img src="/assets/theme/j1/modules/amplitudejs/icons/black-player/volume.svg" alt="volume icon">
+                <img src="/assets/theme/j1/modules/amplitudejs/icons/volume.svg" alt="volume icon">
                 <input type="range" class="mini-player amplitude-volume-slider" step=".1">
               </div>
             </div> <!-- END control-container -->
@@ -289,7 +289,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
           <div id="playlist-screen" class="slide-in-top">
 
             <div id="playlist-screen-header" class="hide-playlist">
-              <img id="up-arrow" src="/assets/theme/j1/modules/amplitudejs/icons/black-player/up.svg" alt="up arrow">
+              <img id="up-arrow" src="/assets/theme/j1/modules/amplitudejs/icons/up.svg" alt="up arrow">
               Hide Playlist
             </div> <!-- END playlist-screen header (toggle) -->
 
@@ -319,7 +319,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
 
                 <span class="song-number-now-playing">
                   <span class="title-number">{{forloop.index}}
-                    <img class="now-playing" src="/assets/theme/j1/modules/amplitudejs/icons/black-player/now-playing.svg" alt="now-playing">
+                    <img class="now-playing" src="/assets/theme/j1/modules/amplitudejs/icons/black/now-playing.svg" alt="now-playing">
                   </span>
                 </span>
 
@@ -332,16 +332,6 @@ amplitude_defaults: {{amplitude_defaults | debug}}
                   </span>
                 </div>
 
-                <a href="{{item.title_info}}" class="audio-info-link" target="_blank">
-                  {% if player_title_info %}
-                  <img class="audio-info-blue" src="/assets/theme/j1/modules/amplitudejs/icons/black-player/audio-info-blue.svg"   alt="audio-info" style="display: block">
-                  <img class="audio-info-white" src="/assets/theme/j1/modules/amplitudejs/icons/black-player/audio-info-white.svg" alt="audio-info" style="display: none">
-                  {% else %}
-                  <img class="audio-info-blue" src="/assets/theme/j1/modules/amplitudejs/icons/black-player/audio-info-blue.svg"   alt="audio-info" style="display: none">
-                  <img class="audio-info-white" src="/assets/theme/j1/modules/amplitudejs/icons/black-player/audio-info-white.svg" alt="audio-info" style="display: none">
-                  {% endif %}
-                </a>
-
                 <span class="audio-duration">{{item.duration}}</span>
               </div> <!-- END list item -->
               {% endif %} {% endfor %}
@@ -353,7 +343,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
 
             <div class="player-header down-header">
               Playlist
-              <img id="down" src="/assets/theme/j1/modules/amplitudejs/icons/black-player/down.svg" alt="down arrow">
+              <img id="down" src="/assets/theme/j1/modules/amplitudejs/icons/down.svg" alt="down arrow">
             </div> <!-- END player-header (toggle) -->
 
             <!-- div id="player-top">
@@ -393,7 +383,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
               </div> <!-- END control-container_compact-player -->
 
               <div id="volume-container" class="compact-player-volume-container">
-                <img src="/assets/theme/j1/modules/amplitudejs/icons/black-player/volume.svg" alt="volume icon">
+                <img src="/assets/theme/j1/modules/amplitudejs/icons/volume.svg" alt="volume icon">
                 <input type="range" class="amplitude-volume-slider compact-player-volume-slider" step=".1">
               </div> <!-- END volume-container -->
 
@@ -451,38 +441,80 @@ amplitude_defaults: {{amplitude_defaults | debug}}
         </div> <!-- END player-progress-bar -->
 
         <div id="player-left-bottom">
+          <!-- div id="time-container">
+            <span class="current-time">
+              <span class="amplitude-current-minutes"></span> : <span class="amplitude-current-seconds"></span>
+            </span>
+            <div id="progress-container">
+              <div class="amplitude-wave-form" data-amplitude-song-index="0" data-amplitude-playlist="{{player_playlist}}"></div>
+              <input type="range" class="amplitude-song-slider">
+              <progress id="song-played-progress" class="amplitude-song-played-progress"></progress>
+              <progress id="song-buffered-progress" class="amplitude-buffered-progress" value="0"></progress>
+            </div>
+            <span class="duration">
+              <span class="amplitude-duration-minutes"></span> : <span class="amplitude-duration-seconds"></span>
+            </span>
+          </div -->
+
           <div id="control-container">
 
+            <!--div id="repeat-container">
+              {% if player_repeat %}
+              <div id="repeat"  class="amplitude-repeat amplitude-repeat-on"></div>
+              {% else %}
+              <div id="repeat"  class="amplitude-repeat amplitude-repeat-off"></div>
+              {% endif %}
+              {% if player_shuffle %}
+              <div id="shuffle" class="amplitude-shuffle amplitude-shuffle-on"></div>
+              {% else %}
+              <div id="shuffle" class="amplitude-shuffle amplitude-shuffle-off"></div>
+              {% endif %}
+            </div -->
+
+            <!--div id="central-control-container">
+              <div id="central-controls">
+                <div id="previous" class="amplitude-prev"></div>
+                <div id="play-pause" class="amplitude-play-pause"></div>
+                <div id="next" class="amplitude-next"></div>
+              </div>
+            </div -->
+
             <div id="large-player-controls">
-              <div class="large-player-controls-container" data-amplitude-playlist="{{player_playlist}}">
-                <div>
-                  <div id="shuffle-black"     class="amplitude-shuffle amplitude-shuffle-off" data-amplitude-playlist="{{player_playlist}}"></div>
-                  <div id="previous-black"    class="amplitude-prev" data-amplitude-playlist="{{player_playlist}}"></div>
-                  <div id="play-pause-black"  class="amplitude-play-pause amplitude-paused" data-amplitude-playlist="{{player_playlist}}"></div>
-                  <div id="next-black"        class="amplitude-next" data-amplitude-playlist="{{player_playlist}}"></div>
-                  <div id="repeat-black"      class="amplitude-repeat amplitude-repeat-off" data-amplitude-playlist="{{player_playlist}}"></div>
-                </div>
-                <div id="volume-container">
-                  <div class="volume-controls">
-                    <div class="amplitude-mute amplitude-not-muted"></div>
-                    <input type="range" class="amplitude-volume-slider">
-                    <div class="ms-range-fix"></div>
+                <div class="large-player-controls-container" data-amplitude-playlist="{{player_playlist}}">
+                  <div>
+                    <div id="shuffle-black"     class="amplitude-shuffle amplitude-shuffle-off" data-amplitude-playlist="{{player_playlist}}"></div>
+                    <div id="previous-black"    class="amplitude-prev" data-amplitude-playlist="{{player_playlist}}"></div>
+                    <div id="play-pause-black"  class="amplitude-play-pause amplitude-paused" data-amplitude-playlist="{{player_playlist}}"></div>
+                    <div id="next-black"        class="amplitude-next" data-amplitude-playlist="{{player_playlist}}"></div>
+                    <div id="repeat-black"      class="amplitude-repeat amplitude-repeat-off" data-amplitude-playlist="{{player_playlist}}"></div>
+                  </div>
+                  <div id="volume-container">
+                    <div class="volume-controls">
+                      <div class="amplitude-mute amplitude-not-muted"></div>
+                      <input type="range" class="amplitude-volume-slider">
+                      <div class="ms-range-fix"></div>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <!-- END large-player controls container -->
             </div>
-            <!-- END large-player controls -->
 
           </div>
-          <!-- END large-player control-container -->
+
+          <!-- div id="meta-container">
+            <span data-amplitude-playlist="{{player_playlist}}" data-amplitude-song-info="name" class="song-name"></span>
+            <div class="audio-artist-album">
+              <span data-amplitude-playlist="{{player_playlist}}" data-amplitude-song-info="artist"></span>
+              <span data-amplitude-playlist="{{player_playlist}}" data-amplitude-song-info="album"></span>
+            </div>
+          </div -->
 
           <div id="player-bottom">
             <!-- large player -->
             <div id="time-container_compact-player">
               <span class="amplitude-current-time time-container" data-amplitude-playlist="{{player_playlist}}"></span>
               <span class="amplitude-duration-time time-container" data-amplitude-playlist="{{player_playlist}}"></span>
-            </div> <!-- END time-container -->
+            </div>
+            <!-- END time-container -->
 
             <div id="meta-container">
               <span class="song-name" data-amplitude-playlist="{{player_playlist}}" data-amplitude-song-info="name" style="margin-bottom: 5px"></span>
@@ -522,7 +554,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
 
                 <div class="song-now-playing-icon-container" data-amplitude-playlist="{{player_playlist}}">
                   <span class="title-number">{{forloop.index}}
-                    <img class="now-playing" src="/assets/theme/j1/modules/amplitudejs/icons/black-player/now-playing.svg" alt="now-playing">
+                    <img class="now-playing" src="/assets/theme/j1/modules/amplitudejs/icons/black/now-playing.svg" alt="now-playing">
                   </span>
                 </div>
 
@@ -537,11 +569,11 @@ amplitude_defaults: {{amplitude_defaults | debug}}
 
                 <a href="{{item.title_info}}" class="audio-info-link" target="_blank">
                   {% if player_title_info %}
-                  <img class="audio-info-blue" src="/assets/theme/j1/modules/amplitudejs/icons/black-player/audio-info-blue.svg"   alt="audio-info" style="display: block">
-                  <img class="audio-info-white" src="/assets/theme/j1/modules/amplitudejs/icons/black-player/audio-info-white.svg" alt="audio-info" style="display: none">
+                  <img class="audio-info-blue" src="/assets/theme/j1/modules/amplitudejs/icons/audio-info-blue.svg"   alt="audio-info" style="display: block">
+                  <img class="audio-info-white" src="/assets/theme/j1/modules/amplitudejs/icons/audio-info-white.svg" alt="audio-info" style="display: none">
                   {% else %}
-                  <img class="audio-info-blue" src="/assets/theme/j1/modules/amplitudejs/icons/black-player/audio-info-blue.svg"   alt="audio-info" style="display: none">
-                  <img class="audio-info-white" src="/assets/theme/j1/modules/amplitudejs/icons/black-player/audio-info-white.svg" alt="audio-info" style="display: none">
+                  <img class="audio-info-blue" src="/assets/theme/j1/modules/amplitudejs/icons/audio-info-blue.svg"   alt="audio-info" style="display: none">
+                  <img class="audio-info-white" src="/assets/theme/j1/modules/amplitudejs/icons/audio-info-white.svg" alt="audio-info" style="display: none">
                   {% endif %}
                 </a>
 

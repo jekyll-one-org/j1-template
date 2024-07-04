@@ -1,10 +1,8 @@
 ++++
 <style>
 
-/*
-# MINI Player
-# ------------------------------------------------------------------------------
-*/
+/* MINI Player
+# ------------------------------------------------------------------------------ */
 
 div#mini-player {
   max-width: 475px;
@@ -19,24 +17,27 @@ div#meta-container {
 }
 
 div.control-container div.amplitude-play-pause {
-  width: 40px;
-  height: 55px;
+  width: 60px;
+  height: 60px;
   cursor: pointer;
   float: left;
   margin-top: 15px;
   margin-left: 24px;
 }
 
+div.control-container div.amplitude-play-pause:hover {
+  opacity: .5;
+
+}
+
 div.control-container div.amplitude-play-pause.amplitude-paused {
-   /* background: url("/assets/theme/j1/modules/amplitudejs/icons/black/play.svg"); */
-   background: url("/assets/theme/j1/modules/amplitudejs/icons/small/play.svg") no-repeat;
-   background-size: cover;
+  background-size: cover;
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/large/play.svg") no-repeat;
 }
 
 div.control-container div.amplitude-play-pause.amplitude-playing {
-   /* background: url("/assets/theme/j1/modules/amplitudejs/icons/black/pause.svg"); */
-   background: url("/assets/theme/j1/modules/amplitudejs/icons/small/pause.svg") no-repeat;
-   background-size: cover;
+  background-size: cover;
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/large/pause.svg") no-repeat;
 }
 
 div.time-container {
@@ -96,10 +97,8 @@ input[type=range].mini-player.amplitude-volume-slider {
     text-overflow: ellipsis;
 }
 
-/*
-# COMPACT Player
-# ------------------------------------------------------------------------------
-*/
+/* COMPACT Player
+# ------------------------------------------------------------------------------ */
 
 div#playlist-screen div#list div.song {
   padding: 15px;
@@ -118,7 +117,7 @@ div#playlist-screen div#list div.song.amplitude-active-song-container span.song-
   height: 16px;
   width: 16px;
   margin-top: 5px;
-  margin-left: 3px;
+  margin-left: 10px;
 }
 
 div#playlist-screen div#list div.song.amplitude-active-song-container span.song-number-now-playing span.number {
@@ -127,9 +126,9 @@ div#playlist-screen div#list div.song.amplitude-active-song-container span.song-
 
 div#playlist-screen div#list div.song div.song-meta-container {
   display: inline-block;
-  margin-left: 8px;
+  margin-left: 20px;
   vertical-align: middle;
-  width: calc(100% - 80px);
+  width: calc(100% - 120px);
 }
 
 div#playlist-screen div#list div.song div.song-meta-container span.song-name {
@@ -150,6 +149,13 @@ div#playlist-screen div#list div.song div.song-meta-container span.song-artist-a
   color: var(--ajs-theme-uno--gray-300);
 }
 
+div#playlist-screen div#list div.song span.audio-duration {
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  line-height: 28px;
+  color: var(--ajs-theme-uno--gray-300);
+}
+
 div#playlist-screen div#list div.song span.song-duration {
   display: inline-block;
   opacity: 0.5;
@@ -162,10 +168,24 @@ div#playlist-screen div#list div.song span.song-duration {
 }
 
 
-/*
-# LARGE Player
-# ------------------------------------------------------------------------------
-*/
+div#playlist-screen div#list div.song img.audio-info-blue {
+  float: right;
+  display: block;
+  margin-top: 10px;
+}
+
+div#playlist-screen div#list div.song img.audio-info-white {
+  float: right;
+  display: none;
+  margin-top: 10px;
+}
+
+div#player-middle div#control-container_compact-player {
+  display: block;
+}
+
+/* LARGE Player
+# ------------------------------------------------------------------------------ */
 
 div#amplitude-left {
     display: flex;
@@ -260,20 +280,24 @@ div#large-player-controls div.large-player-controls-container {
 
 div#large-player-controls div.large-player-controls-container div#shuffle-black {
   display: inline-block;
-  width: 15px;
-  height: 14px;
+  width: 24px;
+  height: 24px;
   cursor: pointer;
   vertical-align: middle;
   margin-right: 25px;
   margin-left: -16px;
 }
 
+div#large-player-controls div.large-player-controls-container div#shuffle-black:hover {
+  opacity: .5;
+}
+
 div#large-player-controls div.large-player-controls-container div#shuffle-black.amplitude-shuffle-off {
-  background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/black-shuffle-off.svg") no-repeat;
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/shuffle-disabled.svg") no-repeat;
 }
 
 div#large-player-controls div.large-player-controls-container div#shuffle-black.amplitude-shuffle-on {
-  background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/black-shuffle-on.svg") no-repeat;
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/shuffle-enabled.svg") no-repeat;
 }
 
 /* div#large-player-controls div.large-player-controls-container div#previous-black {
@@ -287,13 +311,17 @@ div#large-player-controls div.large-player-controls-container div#shuffle-black.
 } */
 
 div#large-player-controls div.large-player-controls-container div#previous-black {
-    display: inline-block;
-    height: 24px;
-    width: 24px;
-    cursor: pointer;
-    background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/previous-hover.svg") no-repeat;
-    vertical-align: middle;
-    margin-right: 10px;
+  display: inline-block;
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
+  vertical-align: middle;
+  margin-right: 20px;
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/previous-hover.svg") no-repeat;
+}
+
+div#large-player-controls div.large-player-controls-container div#previous-black:hover {
+  opacity: .5;
 }
 
 div#large-player-controls div.large-player-controls-container div#play-pause-black {
@@ -303,6 +331,10 @@ div#large-player-controls div.large-player-controls-container div#play-pause-bla
   cursor: pointer;
   vertical-align: middle;f
   margin-right: 10px;
+}
+
+div#large-player-controls div.large-player-controls-container div#play-pause-black:hover {
+  opacity: .5;
 }
 
 div#large-player-controls div.large-player-controls-container div#play-pause-black.amplitude-paused {
@@ -329,36 +361,46 @@ div#large-player-controls div.large-player-controls-container div#next-black {
   height: 24px;
   width: 25px;
   cursor: pointer;
-  background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/next-hover.svg") no-repeat;
   vertical-align: middle;
   margin-right: 25px;
-  margin-left: 10px;
+  margin-left: 20px;
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/next-hover.svg") no-repeat;
+}
+
+div#large-player-controls div.large-player-controls-container div#next-black:hover {
+  opacity: .5;
 }
 
 div#large-player-controls div.large-player-controls-container div#repeat-black {
   display: inline-block;
-  width: 15px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
   cursor: pointer;
   vertical-align: middle;
 }
 
+div#large-player-controls div.large-player-controls-container div#repeat-black:hover {
+  opacity: .5;
+}
+
 div#large-player-controls div.large-player-controls-container div#repeat-black.amplitude-repeat-off {
-  background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/black-repeat-off.svg") no-repeat;
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/repeat-disabled.svg") no-repeat;
 }
 
 div#large-player-controls div.large-player-controls-container div#repeat-black.amplitude-repeat-on {
-  background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/black-repeat-on.svg") no-repeat;
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/repeat-enabled.svg") no-repeat;
 }
 
 div#amplitude-right div.song span.audio-duration {
   float: left;
-  width: 55px;
+  margin-left: 5px;
+  width: 50px;
+  font-family: "Lato", sans-serif;
   text-align: center;
   line-height: 45px;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
-  color: var(--ajs-theme-uno--blue-gray-300);
+  color: var(--ajs-theme-uno--gray-300);
 }
 
 /* jadams 2024-07-01: scale (both) columns to the same height */
