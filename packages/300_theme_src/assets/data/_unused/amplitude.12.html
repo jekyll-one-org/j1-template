@@ -81,7 +81,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
   {% for player in amplitude_options.players %} {% if player.enabled %}
     {% assign player_enabled  = player.enabled %}
     {% assign player_id       = player.id %}
-    {% assign player_playlist = player.playlist.name | strip %}
+    {% assign player_playlist = player.playlist.name %}
 
 
     {% comment %} detect|set player settings
@@ -117,19 +117,18 @@ amplitude_defaults: {{amplitude_defaults | debug}}
 
     {% comment %} collect playlist items
     ---------------------------------------------------------------------------- {% endcomment %}
-      <!-- START collect playlist items for player on ID: {{player_id}} -->
+    <!-- START collect playlist items -->
     {% for playlist in amplitude_options.playlists %} {% if playlist.enabled %}
-      {% assign playlist_name = playlist.name | strip %}
-
-      {% if playlist_name == player_playlist %}
-      <!-- Playlist collected: {{player_playlist}} -->
+      {% if playlist.name == player_playlist %}
         {% assign playlist_items = playlist.items %}
-        {% break %}
       {% else %}
+        <!--  playlist.name: {{playlist.name}} -->
+        {% assign playlist_items = false %}
+        {% assign playlist.name  = false %}
         {% continue %}
       {% endif %}
     {% endif %} {% endfor %}
-      <!-- END collect playlist items -->
+    <!-- END collect playlist items -->
 
 
     {% comment %} collect player instances
@@ -139,7 +138,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
       {% comment %} MINI player
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {% endcomment %}
       {% when 'mini' %} {% if player_enabled %}
-      <!-- START create player instance on ID: {{player_id}} of type: {{player_type}} -->
+      <!-- Player Instance: {{player_id}} of type {{player_type}} -->
       <div id="{{player_id}}" class="uno-player">
         <div id="mini-player-container" class="mb-5">
           <!-- Player -->
@@ -183,8 +182,14 @@ amplitude_defaults: {{amplitude_defaults | debug}}
           </div> <!-- END mini player -->
         </div> <!-- END player-container -->
       </div>
-      <!-- END create player instance on ID: {{player_id}} -->
+      <!-- END Player Instance: {{player_id}} -->
       {% endif %}
+
+      {% comment %} Reset element variables (already processed)
+      -------------------------------------------------------------------------- {% endcomment %}
+      {% assign amplitude_settings = false %}
+      {% assign player_playlist    = false %}
+      {% assign playlist_items     = false %}
 
       {% comment %} END MINI player
       ========================================================================== {% endcomment %}
@@ -193,7 +198,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
       {% comment %} COMPACT player
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {% endcomment %}
       {% when 'compact' %}{% if player_enabled %}
-      <!-- START create player instance on ID: {{player_id}} of type: {{player_type}} -->
+      <!-- Player Instance: {{player_id}} of type {{player_type}} -->
       <div id="{{player_id}}" class="uno-player">
         <div id="compact-player-container">
 
@@ -329,8 +334,14 @@ amplitude_defaults: {{amplitude_defaults | debug}}
 
         </div> <!-- END compact player container -->
       </div>
-      <!-- END create player instance on id: {{player_id}} -->
+      <!-- END Player Instance: {{player_id}} -->
       {% endif %}
+
+      {% comment %} Reset element variables (already processed)
+      -------------------------------------------------------------------------- {% endcomment %}
+      {% assign amplitude_settings = false %}
+      {% assign player_playlist    = false %}
+      {% assign playlist_items     = false %}
 
       {% comment %} END COMPACT player
       ========================================================================== {% endcomment %}
@@ -339,7 +350,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
       {% comment %} LARGE player
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {% endcomment %}
       {% when 'large' %} {% if player_enabled %}
-      <!-- START create player instance on ID: {{player_id}} of type: {{player_type}} -->
+      <!-- Player Instance: {{player_id}} of type {{player_type}} -->
       {% capture large_player__left_side %}
         <!-- jadams, TODO: set album cover image explicitely by property "src" -->
         <!-- img data-amplitude-song-info="cover_art_url" class="album-art" alt="album cover" -->
@@ -474,23 +485,25 @@ amplitude_defaults: {{amplitude_defaults | debug}}
           </div>  <!-- END Player -->
         </div> <!-- END Player Container -->
       </div>
-      <!-- END create player instance on ID: {{player_id}} -->
+      <!-- END Player Instance: {{player_id}} -->
       {% endif %}
 
+      {% comment %} Reset element variables (already processed)
+      --------------------------------------------------------------------------
+      {% assign amplitude_settings = false %}
+      {% assign player_playlist    = false %}
+      {% assign playlist_items     = false %}
+      -------------------------------------------------------------------------- {% endcomment %}
+
+      
       {% comment %} END LARGE player
       ========================================================================== {% endcomment %}
 
     {% endcase %}
 
-    {% comment %} Reset element variables (already processed)
-    -------------------------------------------------------------------------- {% endcomment %}
-    {% assign amplitude_settings = false %}
-    {% assign player_playlist    = false %}
-    {% assign playlist_items     = false %}
-
   {% endif %} {% endfor %}
 
-  {% comment %} END create player instances
+  {% comment %} END player instances
   ============================================================================== {% endcomment %}
   </body>
 

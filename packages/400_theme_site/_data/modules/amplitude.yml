@@ -23,7 +23,6 @@ description:
 # User settings
 #
 settings:
-  enabled:                              true
 
   # ============================================================================
   # PLAYLIST configuration
@@ -35,7 +34,7 @@ settings:
     # --------------------------------------------------------------------------
     #
     - playlist:
-      enabled:                          true
+      enabled:                          false
 
       name:                             emancipator
       title:                            Emancipator
@@ -53,6 +52,8 @@ settings:
       # TITLE settings (songs)
       # ------------------------------------------------------------------------
       items:
+
+        # title 01
         - item:
           enabled:                      true
           <<:                           *album_dusk_to_dawn
@@ -60,6 +61,8 @@ settings:
           audio:                        FirstSnow-Emancipator.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "2:27"
+
+        # title 02
         - item:
           enabled:                      true
           <<:                           *album_dusk_to_dawn
@@ -67,6 +70,8 @@ settings:
           audio:                        DuskToDawn-Emancipator.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "2:14"
+
+        # title 03
         - item:
           enabled:                      true
           <<:                           *album_dusk_to_dawn
@@ -98,6 +103,8 @@ settings:
       # TITLE settings (songs)
       # ------------------------------------------------------------------------
       items:
+
+        # title 01
         - item:
           enabled:                      true
           <<:                           *album_free_pop
@@ -105,6 +112,8 @@ settings:
           audio:                        SoundsCrate-Sway.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "2:15"
+
+        # title 02
         - item:
           enabled:                      true
           <<:                           *album_free_pop
@@ -112,6 +121,8 @@ settings:
           audio:                        SoundsCrate-Late_Feels.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "2:25"
+
+        # title 03
         - item:
           enabled:                      true
           <<:                           *album_free_pop
@@ -119,6 +130,8 @@ settings:
           audio:                        SoundsCrate-Got_A_Feeling.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "2:24"
+
+        # title 04
         - item:
           enabled:                      true
           <<:                           *album_free_pop
@@ -126,6 +139,8 @@ settings:
           audio:                        SoundsCrate-Pop_Strike.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "2:25"
+
+        # title 05
         - item:
           enabled:                      true
           <<:                           *album_free_pop
@@ -133,6 +148,8 @@ settings:
           audio:                        SoundsCrate-Young_Feels.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "2:11"
+
+        # title 06
         - item:
           enabled:                      true
           <<:                           *album_free_pop
@@ -147,7 +164,7 @@ settings:
     # --------------------------------------------------------------------------
     #
     - playlist:
-      enabled:                          false
+      enabled:                          true
 
       name:                             free_disco
       title:                            Free Disco
@@ -165,6 +182,8 @@ settings:
       # TITLE settings (songs)
       # ------------------------------------------------------------------------
       items:
+
+        # title 01
         - item:
           enabled:                      true
           <<:                           *album_free_disco
@@ -172,6 +191,8 @@ settings:
           audio:                        SoundsCrate-Dancefloor_Fever.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "2:27"
+
+        # title 02
         - item:
           enabled:                      true
           <<:                           *album_free_disco
@@ -179,6 +200,8 @@ settings:
           audio:                        SoundsCrate-Dance_On_Dance_Off.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "2:14"
+
+        # title 03
         - item:
           enabled:                      true
           <<:                           *album_free_disco
@@ -186,6 +209,8 @@ settings:
           audio:                        SoundsCrate-Disco_Flamingo.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "2:19"
+
+        # title 04
         - item:
           enabled:                      true
           <<:                           *album_free_disco
@@ -193,6 +218,8 @@ settings:
           audio:                        SoundsCrate-Downtown.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "2:48"
+
+        # title 05
         - item:
           enabled:                      true
           <<:                           *album_free_disco
@@ -200,6 +227,8 @@ settings:
           audio:                        SoundsCrate-Electric_Boogie.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "2:19"
+
+        # title 06
         - item:
           enabled:                      true
           <<:                           *album_free_disco
@@ -207,6 +236,8 @@ settings:
           audio:                        SoundsCrate-Grand_Central.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "2:33"
+
+        # title 07
         - item:
           enabled:                      true
           <<:                           *album_free_disco
@@ -214,6 +245,8 @@ settings:
           audio:                        SoundsCrate-In_The_Pocket.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "2:58"
+
+        # title 08
         - item:
           enabled:                      true
           <<:                           *album_free_disco
@@ -221,6 +254,8 @@ settings:
           audio:                        SoundsCrate-Lounge_Life.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "2:34"
+
+        # title 09
         - item:
           enabled:                      true
           <<:                           *album_free_disco
@@ -228,6 +263,8 @@ settings:
           audio:                        SoundsCrate-Made_For_This.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "2:13"
+
+        # title 10
         - item:
           enabled:                      true
           <<:                           *album_free_disco
@@ -235,6 +272,8 @@ settings:
           audio:                        SoundsCrate-Midnight_Express.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "2:30"
+
+        # title 11
         - item:
           enabled:                      true
           <<:                           *album_free_disco
@@ -242,6 +281,8 @@ settings:
           audio:                        SoundsCrate-Nightrun.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "2:58"
+
+        # title 12
         - item:
           enabled:                      true
           <<:                           *album_free_disco
@@ -249,6 +290,8 @@ settings:
           audio:                        SoundsCrate-Saturday_Night.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "2:02"
+
+        # title 13
         - item:
           enabled:                      true
           <<:                           *album_free_disco
@@ -256,6 +299,8 @@ settings:
           audio:                        SoundsCrate-Studio_45.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "1:56"
+
+        # title 14
         - item:
           enabled:                      true
           <<:                           *album_free_disco
@@ -263,6 +308,8 @@ settings:
           audio:                        SoundsCrate-Yes_Sir_I_Can_Disco.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "2:21"
+
+        # title 15
         - item:
           enabled:                      true
           <<:                           *album_free_disco
@@ -270,6 +317,8 @@ settings:
           audio:                        soundscrate-fashion-show.mp3
           audio_info:                   /sfx.productioncrate.com
           duration:                     "3:08"
+
+        # title 16
         - item:
           enabled:                      true
           <<:                           *album_free_disco
@@ -277,6 +326,8 @@ settings:
           audio:                        soundscrate-loungy-disco.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "3:04"
+
+        # title 17
         - item:
           enabled:                      true
           <<:                           *album_free_disco
@@ -284,6 +335,8 @@ settings:
           audio:                        soundscrate-oakland-style.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "3:19"
+
+        # title 18
         - item:
           enabled:                      true
           <<:                           *album_free_disco
@@ -432,6 +485,66 @@ settings:
       playlist:
         name:                           free_pop
         title:                          Free Pop
+        audio_info:                     false
+        controls:                       true
+        scrollbar:                      false
+
+    # --------------------------------------------------------------------------
+    # MINI player, Free Disco
+    # --------------------------------------------------------------------------
+    #
+    - plaver:
+      enabled:                          true
+
+      # ------------------------------------------------------------------------
+      # PLAYER settings
+      #
+      id:                               free_disco_mini
+      type:                             mini
+
+      playlist:
+        name:                           free_disco
+        title:                          Free Disco
+        audio_info:                     false
+        controls:                       true
+        scrollbar:                      false
+
+    # --------------------------------------------------------------------------
+    # COMPACT player, Free Disco
+    # --------------------------------------------------------------------------
+    #
+    - plaver:
+      enabled:                          true
+
+      # ------------------------------------------------------------------------
+      # PLAYER settings
+      #
+      id:                               free_disco_compact
+      type:                             compact
+
+      playlist:
+        name:                           free_disco
+        title:                          Free Disco
+        audio_info:                     false
+        controls:                       true
+        scrollbar:                      false
+
+    # --------------------------------------------------------------------------
+    # LARGE player, Free Disco
+    # --------------------------------------------------------------------------
+    #
+    - plaver:
+      enabled:                          true
+
+      # ------------------------------------------------------------------------
+      # PLAYER settings
+      #
+      id:                               free_disco_large
+      type:                             large
+
+      playlist:
+        name:                           free_disco
+        title:                          Free Disco
         audio_info:                     false
         controls:                       true
         scrollbar:                      false
