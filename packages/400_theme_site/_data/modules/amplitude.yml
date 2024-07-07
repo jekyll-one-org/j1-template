@@ -22,12 +22,11 @@ description:
 # ------------------------------------------------------------------------------
 # User settings
 #
-
 settings:
   enabled:                              true
 
-  # ----------------------------------------------------------------------------
-  # PLAYLIST configurations
+  # ============================================================================
+  # PLAYLIST configuration
   # ----------------------------------------------------------------------------
   playlists:
 
@@ -59,23 +58,22 @@ settings:
           <<:                           *album_dusk_to_dawn
           title:                        First Snow
           audio:                        FirstSnow-Emancipator.mp3
-          title_info:                   //sfx.productioncrate.com
+          audio_info:                   //sfx.productioncrate.com
           duration:                     "2:27"
         - item:
           enabled:                      true
           <<:                           *album_dusk_to_dawn
           title:                        Dusk To Dawn
           audio:                        DuskToDawn-Emancipator.mp3
-          title_info:                   //sfx.productioncrate.com
+          audio_info:                   //sfx.productioncrate.com
           duration:                     "2:14"
         - item:
           enabled:                      true
           <<:                           *album_dusk_to_dawn
           title:                        Anthem
           audio:                        Anthem-Emancipator.mp3
-          title_info:                   //sfx.productioncrate.com
+          audio_info:                   //sfx.productioncrate.com
           duration:                     "2:19"
-
 
     # --------------------------------------------------------------------------
     # Free Pop - Royalty Free
@@ -105,42 +103,42 @@ settings:
           <<:                           *album_free_pop
           title:                        Sway
           audio:                        SoundsCrate-Sway.mp3
-          title_info:                   //sfx.productioncrate.com
+          audio_info:                   //sfx.productioncrate.com
           duration:                     "2:15"
         - item:
           enabled:                      true
           <<:                           *album_free_pop
           title:                        Late Feelings
           audio:                        SoundsCrate-Late_Feels.mp3
-          title_info:                   //sfx.productioncrate.com
+          audio_info:                   //sfx.productioncrate.com
           duration:                     "2:25"
         - item:
           enabled:                      true
           <<:                           *album_free_pop
           title:                        Got A Feeling
           audio:                        SoundsCrate-Got_A_Feeling.mp3
-          title_info:                   //sfx.productioncrate.com
+          audio_info:                   //sfx.productioncrate.com
           duration:                     "2:24"
         - item:
           enabled:                      true
           <<:                           *album_free_pop
           title:                        Strike
           audio:                        SoundsCrate-Pop_Strike.mp3
-          title_info:                   //sfx.productioncrate.com
+          audio_info:                   //sfx.productioncrate.com
           duration:                     "2:25"
         - item:
           enabled:                      true
           <<:                           *album_free_pop
           title:                        Young Feelings
           audio:                        SoundsCrate-Young_Feels.mp3
-          title_info:                   //sfx.productioncrate.com
+          audio_info:                   //sfx.productioncrate.com
           duration:                     "2:11"
         - item:
           enabled:                      true
           <<:                           *album_free_pop
           title:                        Wonders
           audio:                        SoundsCrate-Wonders.mp3
-          title_info:                   //sfx.productioncrate.com
+          audio_info:                   //sfx.productioncrate.com
           duration:                     "2:31"
 
 
@@ -172,126 +170,126 @@ settings:
           <<:                           *album_free_disco
           title:                        Dancefloor Fever
           audio:                        SoundsCrate-Dancefloor_Fever.mp3
-          title_info:                   //sfx.productioncrate.com
+          audio_info:                   //sfx.productioncrate.com
           duration:                     "2:27"
         - item:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        Dance On Dance Off
           audio:                        SoundsCrate-Dance_On_Dance_Off.mp3
-          title_info:                   //sfx.productioncrate.com
+          audio_info:                   //sfx.productioncrate.com
           duration:                     "2:14"
         - item:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        Disco Flamingo
           audio:                        SoundsCrate-Disco_Flamingo.mp3
-          title_info:                   //sfx.productioncrate.com
+          audio_info:                   //sfx.productioncrate.com
           duration:                     "2:19"
         - item:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        Downtown
           audio:                        SoundsCrate-Downtown.mp3
-          title_info:                   //sfx.productioncrate.com
+          audio_info:                   //sfx.productioncrate.com
           duration:                     "2:48"
         - item:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        Electric Boogie
           audio:                        SoundsCrate-Electric_Boogie.mp3
-          title_info:                   //sfx.productioncrate.com
+          audio_info:                   //sfx.productioncrate.com
           duration:                     "2:19"
         - item:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        Grand Central
           audio:                        SoundsCrate-Grand_Central.mp3
-          title_info:                   //sfx.productioncrate.com
+          audio_info:                   //sfx.productioncrate.com
           duration:                     "2:33"
         - item:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        In The Pocket
           audio:                        SoundsCrate-In_The_Pocket.mp3
-          title_info:                   //sfx.productioncrate.com
+          audio_info:                   //sfx.productioncrate.com
           duration:                     "2:58"
         - item:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        Lounge Life
           audio:                        SoundsCrate-Lounge_Life.mp3
-          title_info:                   //sfx.productioncrate.com
+          audio_info:                   //sfx.productioncrate.com
           duration:                     "2:34"
         - item:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        Made For This
           audio:                        SoundsCrate-Made_For_This.mp3
-          title_info:                   //sfx.productioncrate.com
+          audio_info:                   //sfx.productioncrate.com
           duration:                     "2:13"
         - item:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        Midnight Express
           audio:                        SoundsCrate-Midnight_Express.mp3
-          title_info:                   //sfx.productioncrate.com
+          audio_info:                   //sfx.productioncrate.com
           duration:                     "2:30"
         - item:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        Nightrun
           audio:                        SoundsCrate-Nightrun.mp3
-          title_info:                   //sfx.productioncrate.com
+          audio_info:                   //sfx.productioncrate.com
           duration:                     "2:58"
         - item:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        Saturday Night
           audio:                        SoundsCrate-Saturday_Night.mp3
-          title_info:                   //sfx.productioncrate.com
+          audio_info:                   //sfx.productioncrate.com
           duration:                     "2:02"
         - item:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        Studio 45
           audio:                        SoundsCrate-Studio_45.mp3
-          title_info:                   //sfx.productioncrate.com
+          audio_info:                   //sfx.productioncrate.com
           duration:                     "1:56"
         - item:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        Yes Sir I Can Disco
           audio:                        SoundsCrate-Yes_Sir_I_Can_Disco.mp3
-          title_info:                   //sfx.productioncrate.com
+          audio_info:                   //sfx.productioncrate.com
           duration:                     "2:21"
         - item:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        Fashion Show
           audio:                        soundscrate-fashion-show.mp3
-          title_info:                   /sfx.productioncrate.com
+          audio_info:                   /sfx.productioncrate.com
           duration:                     "3:08"
         - item:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        Loungy Disco
           audio:                        soundscrate-loungy-disco.mp3
-          title_info:                   //sfx.productioncrate.com
+          audio_info:                   //sfx.productioncrate.com
           duration:                     "3:04"
         - item:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        Oakland Style
           audio:                        soundscrate-oakland-style.mp3
-          title_info:                   //sfx.productioncrate.com
+          audio_info:                   //sfx.productioncrate.com
           duration:                     "3:19"
         - item:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        Funkish Vibe
           audio:                        soundscrate-funkish-vibe.mp3
-          title_info:                   //sfx.productioncrate.com
+          audio_info:                   //sfx.productioncrate.com
           duration:                     "2:38"
 
     # --------------------------------------------------------------------------
@@ -311,7 +309,6 @@ settings:
         name:                           ƎElements
         artist:                         Earth, Wind & Fire
         audio_base:                     /assets/audio/album/3e
-#       cover_image:                    /assets/audio/cover/3e/cover.jpg
         cover_image:                    /assets/audio/cover/3e/ƎElements.jpg
 
       # ------------------------------------------------------------------------
@@ -325,7 +322,7 @@ settings:
           <<:                           *album_3e
           title:                        In The Stone
           audio:                        01 In The Stone.mp3
-          title_info:                   //www.3elements-band.com
+          audio_info:                   //www.3elements-band.com
           duration:                     "4:28"
 
         # title 02
@@ -334,7 +331,7 @@ settings:
           <<:                           *album_3e
           title:                        Can't Let Go
           audio:                        02 Can't Let Go.mp3
-          title_info:                   //www.3elements-band.com
+          audio_info:                   //www.3elements-band.com
           duration:                     "3:25"
 
         # title 03
@@ -343,7 +340,7 @@ settings:
           <<:                           *album_3e
           title:                        Jupiter
           audio:                        03 Jupiter.mp3
-          title_info:                   //www.3elements-band.com
+          audio_info:                   //www.3elements-band.com
           duration:                     "6:14"
 
         # title 04
@@ -352,7 +349,7 @@ settings:
           <<:                           *album_3e
           title:                        Winter Wonderland
           audio:                        04 Winter Wonderland.mp3
-          title_info:                   //www.3elements-band.com
+          audio_info:                   //www.3elements-band.com
           duration:                     "3:41"
 
         # title 05
@@ -361,7 +358,7 @@ settings:
           <<:                           *album_3e
           title:                        Fantasy
           audio:                        05 Fantasy.mp3
-          title_info:                   //www.3elements-band.com
+          audio_info:                   //www.3elements-band.com
           duration:                     "3:44"
 
         # title 06
@@ -370,17 +367,17 @@ settings:
           <<:                           *album_3e
           title:                        After The Love Has Gone
           audio:                        06 After The Love Has Gone.mp3
-          title_info:                   //www.3elements-band.com
+          audio_info:                   //www.3elements-band.com
           duration:                     "4:36"
 
 
-  # ----------------------------------------------------------------------------
-  # PLAYER configurations
+  # ============================================================================
+  # PLAYER configuration
   # ----------------------------------------------------------------------------
   players:
 
     # --------------------------------------------------------------------------
-    # MINI player
+    # MINI player, Free Pop
     # --------------------------------------------------------------------------
     #
     - plaver:
@@ -392,30 +389,12 @@ settings:
       id:                               free_pop_mini
       type:                             mini
 
-      playlist:                         free_pop
-      playlist_title:                   Free Pop
-      title_info:                       false
-      hide_scrollbar:                   true
-
-
-    # --------------------------------------------------------------------------
-    # GRAY player, Free Pop
-    # --------------------------------------------------------------------------
-    #
-    - plaver:
-      enabled:                          true
-
-      # ------------------------------------------------------------------------
-      # PLAYER settings
-      #
-      id:                               compact_gray
-      type:                             compact_gray
-
-      playlist:                         free_pop
-      playlist_title:                   Free Pop
-      title_info:                       false
-      hide_scrollbar:                   true
-
+      playlist:
+        name:                           free_pop
+        title:                          Free Pop
+        audio_info:                     false
+        controls:                       true
+        scrollbar:                      false
 
     # --------------------------------------------------------------------------
     # COMPACT player, Free Pop
@@ -430,11 +409,12 @@ settings:
       id:                               free_pop_compact
       type:                             compact
 
-      playlist:                         free_pop
-      playlist_title:                   Free Pop
-      title_info:                       false
-      hide_scrollbar:                   true
-
+      playlist:
+        name:                           free_pop
+        title:                          Free Pop
+        audio_info:                     false
+        controls:                       true
+        scrollbar:                      false
 
     # --------------------------------------------------------------------------
     # LARGE player, Free Pop
@@ -449,11 +429,12 @@ settings:
       id:                               free_pop_large
       type:                             large
 
-      playlist:                         free_pop
-      playlist_title:                   Free Pop
-      title_info:                       false
-      hide_scrollbar:                   true
-
+      playlist:
+        name:                           free_pop
+        title:                          Free Pop
+        audio_info:                     false
+        controls:                       true
+        scrollbar:                      false
 
     # --------------------------------------------------------------------------
     # MINI player, 3Elements
@@ -468,10 +449,12 @@ settings:
       id:                               3e_mini
       type:                             mini
 
-      playlist:                         3e
-      playlist_title:                   3Elements Pop
-      title_info:                       false
-      hide_scrollbar:                   true
+      playlist:
+        name:                           3e
+        title:                          3Elements
+        audio_info:                     true
+        controls:                       true
+        scrollbar:                      false
 
     # --------------------------------------------------------------------------
     # COMPACT player, 3Elements
@@ -486,10 +469,12 @@ settings:
       id:                               3e_compact
       type:                             compact
 
-      playlist:                         3e
-      playlist_title:                   3Elements
-      title_info:                       true
-      hide_scrollbar:                   true
+      playlist:
+        name:                           3e
+        title:                          3Elements
+        audio_info:                     true
+        controls:                       true
+        scrollbar:                      false
 
     # --------------------------------------------------------------------------
     # LARGE player, 3Elements
@@ -504,10 +489,12 @@ settings:
       id:                               3e_large
       type:                             large
 
-      playlist:                         3e
-      playlist_title:                   3Elements
-      title_info:                       true
-      hide_scrollbar:                   true
+      playlist:
+        name:                           3e
+        title:                          3Elements
+        audio_info:                     true
+        controls:                       true
+        scrollbar:                      false
 
 # ------------------------------------------------------------------------------
 # END config

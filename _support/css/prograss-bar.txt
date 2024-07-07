@@ -1,0 +1,108 @@
+Wie kann man mit Hilfe von CSS die Farben eines Progress-Bar Elements
+für die Browser Firefox, Microsoft Edge und Chrome anpassen?
+
+Die Standardfarben einer Progress-Bar können je nach Browser variieren.
+Um ein einheitliches Aussehen in allen gängigen Browsern wie Firefox,
+Microsoft Edge und Chrome zu gewährleisten, müssen Sie CSS verwenden,
+um die Farben individuell anzupassen.
+
+1. Grundlegende CSS-Regeln
+
+Die folgenden CSS-Regeln ermöglichen die Anpassung der Hintergrundfarbe
+der Progress-Bar und der Farbe des Fortschrittsbalkens:
+
+
+/* Hintergrundfarbe der Progress-Bar */
+progress {
+  background-color: #e0e0e0; /* Hellgrau */
+}
+
+/* Farbe des Fortschrittsbalkens */
+progress::-webkit-progress-value {
+  background-color: #4CAF50; /* Grün */
+}
+
+progress::-moz-progress-bar {
+  background-color: #4CAF50; /* Grün */
+}
+
+progress::-ms-fill {
+  background-color: #4CAF50; /* Grün */
+}
+
+
+Erläuterung:
+
+progress wählt das <progress>-Element aus.
+background-color definiert die Hintergrundfarbe der Progress-Bar.
+::-webkit-progress-value wählt den Fortschrittsbalken in Chrome und Safari aus.
+::-moz-progress-bar wählt den Fortschrittsbalken in Firefox aus.
+::-ms-fill wählt den Fortschrittsbalken in Microsoft Edge und Internet Explorer aus.
+
+Hinweis: Die Platzhalter -webkit-, -moz- und -ms- sind vorangestellte
+Vendor-Präfixe, die sicherstellen, dass die CSS-Regeln in allen Browsern
+korrekt funktionieren.
+
+2. Farbverlauf für den Fortschrittsbalken
+
+Sie können einen Farbverlauf verwenden, um dem Fortschrittsbalken einen
+dynamischeren Look zu verleihen. Fügen Sie dazu folgende CSS-Regeln
+hinzu:
+
+
+progress::-webkit-progress-value {
+  background: linear-gradient(
+    to right,
+    #4CAF50 0%,
+    #FFCE00 50%,
+    #FF7F00 100%
+  );
+}
+
+progress::-moz-progress-bar {
+  background: linear-gradient(
+    to right,
+    #4CAF50 0%,
+    #FFCE00 50%,
+    #FF7F00 100%
+  );
+}
+
+progress::-ms-fill {
+  background: linear-gradient(
+    to right,
+    #4CAF50 0%,
+    #FFCE00 50%,
+    #FF7F00 100%
+  );
+}
+
+Erläuterung:
+
+linear-gradient definiert einen linearen Farbverlauf.
+Die Werte innerhalb der Klammern geben die Farben und ihre Positionen im Verlauf an. In diesem Beispiel wechselt der Verlauf von Grün (#4CAF50) über Orange (#FFCE00) zu Rot (#FF7F00).
+
+3. Anpassung der Größe und des Stils
+
+Neben den Farben können Sie auch die Größe, die Ränder und andere visuelle
+Aspekte der Progress-Bar mithilfe von CSS anpassen. Weitere Informationen
+finden Sie in der CSS-Dokumentation: https://www.w3schools.com/cssref/index.php
+
+Beispiel:
+
+progress {
+  width: 500px; /* Breite der Progress-Bar */
+  height: 20px; /* Höhe der Progress-Bar */
+  border-radius: 5px; /* Abgerundete Ecken */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Schatteneffekt */
+}
+
+Hinweis: Diese Beispiele dienen nur als Ausgangspunkt. Sie können die
+CSS-Regeln beliebig anpassen, um das gewünschte Aussehen für Ihre Progress-Bar
+zu erreichen.
+
+Ressourcen:
+
+https://www.w3schools.com/w3css/w3css_progressbar.asp
+https://css-tricks.com/css3-progress-bars/
+https://stackoverflow.com/questions/62584282/progress-bar-color-change

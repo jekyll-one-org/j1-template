@@ -81,7 +81,9 @@ mdi:clock-time-five-outline[24px, md-gray mr-2]
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-include::{documentdir}/amplitudejs.css.asciidoc[]
+// include::{documentdir}/amplitudejs.compact.css.asciidoc[]
+// include::{documentdir}/amplitudejs.large.css.asciidoc[]
+// include::{documentdir}/amplitudejs.mini.css.asciidoc[]
 
 [role="mt-4"]
 The J1 Template implements custom players based on the (default) theme Uno.
@@ -91,7 +93,7 @@ the page design.
 Three types of AmplitudeJS players are build-in for the J1 template system:
 
 * Mini Player
-* Compact Player (the default audio plaayer)
+* Compact Player (default plaayer)
 * Large Player
 
 [role="mt-4"]
@@ -102,15 +104,6 @@ clicking on the appropriate elements, touch events are applied to all
 mobile devices.
 ====
 
-////
-[role="mt-5"]
-== Gray Player
-
-Bla, bla ..
-
-.Pop Music · Royalty Free Music (compact_gray)
-amplitude::compact_gray[role="mt-4"]
-////
 
 [role="mt-5"]
 == Mini Player
@@ -125,10 +118,10 @@ background without dedicating the entire screen to the player. They are
 commonly found on music streaming services, podcast platforms, and websites
 with embedded audio content.
 
-// .Dance Floor · Royalty Free Music (mini)
+// .Dance Floor · Royalty Free Music
 // amplitude::free_pop_mini[role="mt-3 mb-5"]
 
-.ƎElements · Earth, Wind & Fire Cover Band
+.ƎElements · Earth, Wind & Fire Show Band
 amplitude::3e_mini[role="mt-3 mb-5"]
 
 lorem:sentences[5]
@@ -158,10 +151,10 @@ too much screen space.
 // .Dance Floor · Royalty Free Music (compact)
 // amplitude::free_disco_compact[role="mt-3 mb-5"]
 
-// .Pop Music · Royalty Free Music (compact)
+// .Pop Music · Royalty Free Music
 // amplitude::free_pop_compact[role="mt-3 mb-5"]
 
-.ƎElements · Earth, Wind & Fire Cover Band
+.ƎElements · Earth, Wind & Fire Show Band
 amplitude::3e_compact[role="mt-3 mb-5"]
 
 
@@ -170,11 +163,23 @@ amplitude::3e_compact[role="mt-3 mb-5"]
 
 lorem:sentences[5]
 
-// .Pop Music · Royalty Free Music (large)
-// amplitude::free_pop_large[role="mt-3 mb-5"]
+[role="mt-4"]
+=== Three Elements
 
-.ƎElements · Earth, Wind & Fire Cover Band
+lorem:sentences[5]
+
+.ƎElements · Earth, Wind & Fire Show Band
 amplitude::3e_large[role="mt-3 mb-5"]
 
-[role="mb-8"]
-lorem:sentences[5]
+lorem:sentences[3]
+
+// [role="mt-4"]
+// === Royalty Free Music
+//
+// lorem:sentences[5]
+//
+// .Pop Music · Royalty Free Music
+// amplitude::free_pop_large[role="mt-3 mb-5"]
+//
+// [role="mb-8"]
+// lorem:sentences[3]

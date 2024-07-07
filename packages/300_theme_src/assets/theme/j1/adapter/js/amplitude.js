@@ -133,17 +133,19 @@ j1.adapter.amplitude = ((j1, window) => {
   var playersProcessed          = [];
   var playersHtmlLoaded         = false;
   var processingPlayersFinished = false;
+  var playerAudioInfo           = ('{{amplitude_defaults.playlist.audio_info}}' === 'true') ? true : false;
   var playerType                = '{{amplitude_defaults.player.type}}';
   var playerVolumeValue         = '{{amplitude_defaults.player.volume.value}}';
   var playerVolumeDecrement     = '{{amplitude_defaults.player.volume.decrement}}';
   var playerVolumeIncrement     = '{{amplitude_defaults.player.volume.increment}}';
   var playerRepeat              = ('{{amplitude_defaults.player.repeat}}' === 'true') ? true : false;
   var playerShuffle             = ('{{amplitude_defaults.player.shuffle}}' === 'true') ? true : false;
-  var playerTitleInfo           = ('{{amplitude_defaults.player.title_info}}' === 'true') ? true : false;
   var playerPlayNextTitle       = ('{{amplitude_defaults.player.play_next_title}}' === 'true') ? true : false;
   var playerPauseNextTitle      = ('{{amplitude_defaults.player.pause_next_title}}' === 'true') ? true : false;
   var playerDelayNextTitle      = '{{amplitude_defaults.player.delay_next_title}}';
-  var playerWaveformSampleRate  = '{{amplitude_defaults.player.waveform_sample_rate}}';
+
+  // unused settings
+  // var playerWaveformSampleRate  = '{{amplitude_defaults.player.waveform_sample_rate}}';
 
 
   // ---------------------------------------------------------------------------
@@ -268,12 +270,12 @@ j1.adapter.amplitude = ((j1, window) => {
               } else if (key === 'cover_image') {
                 song.cover_art_url = item[key];
                 continue;
-              } else if (key === 'title_info') {
-                if (playerTitleInfo) {
-                  song.title_info = item[key];
+              } else if (key === 'audio_info') {
+                if (playerAudioInfo) {
+                  song.audio_info = item[key];
                 } else {
-                  song.title_info = '';
-                } // END if playerTitleInfo
+                  song.audio_info = '';
+                } // END if playerAudioInfo
                 continue;
               } else {
                 song[key] = item[key];
@@ -473,9 +475,9 @@ j1.adapter.amplitude = ((j1, window) => {
             } // END if pause on next title
           }
         }, // END callbacks
-        waveforms: {
-          sample_rate:    playerWaveformSampleRate
-        },
+        // waveforms: {
+        //   sample_rate:    playerWaveformSampleRate
+        // },
         continue_next:    playerPlayNextTitle,
         volume:           playerVolumeValue,
         volume_decrement: playerVolumeDecrement,
@@ -499,7 +501,8 @@ j1.adapter.amplitude = ((j1, window) => {
 
             playerID      = '{{player.id}}';
             playList      = '{{player.playlist}}';
-            playListTitle = '{{player.playlist_title}}';
+//          playListTitle = '{{player.playlist_title}}';
+            playListTitle = '{{player.playlist.title}}';
 
             logger.debug('\n' + 'set playlist {{player.playlist}} on id #{{player_id}} with title: ' + playListTitle);
 
@@ -518,7 +521,7 @@ j1.adapter.amplitude = ((j1, window) => {
 
                 // player|right (playlist): set audio info link (per item)
                 // -------------------------------------------------------------
-                if (playerTitleInfo) {
+                if (playerAudioInfo) {
                   var infoLinks = document.getElementsByClassName('audio-info-link');
                   _this.setAudioInfo(infoLinks);
                 }
@@ -718,7 +721,7 @@ j1.adapter.amplitude = ((j1, window) => {
             }
           } // END mini play button in playlist
 
-          // if (playerTitleInfo) {
+          // if (playerAudioInfo) {
           //   if (this.querySelectorAll('img.audio-info-blue')[0] !== undefined) {
           //     this.querySelectorAll('img.audio-info-blue')[0].style.display  = 'none';
           //   }
@@ -732,7 +735,7 @@ j1.adapter.amplitude = ((j1, window) => {
           //   if (this.querySelectorAll('img.audio-info-white')[0] !== undefined) {
           //     this.querySelectorAll('img.audio-info-white')[0].style.display = 'none';
           //   }
-          // } // END if playerTitleInfo
+          // } // END if playerAudioInfo
 
           // if (this.querySelectorAll('.audio-duration')[0] !== undefined) {
           //   this.querySelectorAll('.audio-duration')[0].style.color = '#FFFFFF';
@@ -755,7 +758,7 @@ j1.adapter.amplitude = ((j1, window) => {
             this.querySelectorAll('.play-button-container')[0].style.display = 'none';
           }
 
-          // if (playerTitleInfo) {
+          // if (playerAudioInfo) {
           //   if (this.querySelectorAll('img.audio-info-blue')[0] !== undefined) {
           //     this.querySelectorAll('img.audio-info-blue')[0].style.display  = 'block';
           //   }
@@ -769,7 +772,7 @@ j1.adapter.amplitude = ((j1, window) => {
           //   if (this.querySelectorAll('img.audio-info-white')[0] !== undefined) {
           //     this.querySelectorAll('img.audio-info-white')[0].style.display = 'none';
           //   }
-          // } // END if playerTitleInfo
+          // } // END if playerAudioInfo
 
           // if (this.querySelectorAll('.audio-duration')[0] !== undefined) {
           //   this.querySelectorAll('.audio-duration')[0].style.color = '#607D8B';

@@ -83,7 +83,6 @@ amplitude_defaults: {{amplitude_defaults | debug}}
     {% assign player_id       = player.id %}
     {% assign player_playlist = player.playlist.name %}
 
-
     {% comment %} detect|set player settings
     ---------------------------------------------------------------------------- {% endcomment %}
     {% if player.type %}
@@ -113,6 +112,22 @@ amplitude_defaults: {{amplitude_defaults | debug}}
     {% else %}
       {% assign player_audio_info = amplitude_defaults.player.playlist.audio_info %}
     {% endif %}
+
+
+    {% comment %} unused settings
+    ****************************************************************************
+    {% if player.repeat %}
+      {% assign player_repeat = player.repeat %}
+    {% else %}
+      {% assign player_repeat = amplitude_defaults.player.repeat %}
+    {% endif %}
+
+    {% if player.shuffle %}
+      {% assign player_shuffle = player.shuffle %}
+    {% else %}
+      {% assign player_shuffle = amplitude_defaults.player.shuffle %}
+    {% endif %}
+    **************************************************************************** {% endcomment %}
 
 
     {% comment %} collect playlist items

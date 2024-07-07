@@ -13,8 +13,11 @@
  # -----------------------------------------------------------------------------
 */
 
-/* 0. Colors
- ------------------------------------------------------------------------------- */
+/* 1. Base
+# --------------------------------------------------------- */
+
+/* Colors
+# --------------------------------------------------------- */
 :root {
   --ajs-theme-uno--blue:                #2196F3;
   --ajs-theme-uno--blue-50:             #E3F2FD;
@@ -52,13 +55,265 @@
   --ajs-theme-uno--blue-gray-800:       #37474F;
   --ajs-theme-uno--blue-gray-900:       #263238;
 
+  --ajs-theme-uno--silver-200:          #748295;
+  --ajs-theme-uno--silver-500:          #586372;
+  --ajs-theme-uno--silver-700:          #141920;
+  --ajs-theme-uno--silver-800:          #242b33;
+
   --ajs-theme-uno--light-silver:        #748295;
   --ajs-theme-uno--medium-silver:       #586372;
-  --ajs-theme-uno--dark-silver:         #242b33;
+  --ajs-theme-uno--dark-silver:         #141920;
+  --ajs-theme-uno--darker-silver:       #242b33;
 
   --ajs-theme-uno--white:               #FFFFFF;
   --ajs-theme-uno--black:               #000000;
 }
 
-/* 1. Global
-------------------------------------------------------------------------------- */
+/* Styles
+# --------------------------------------------------------- */
+.player-title {
+  text-rendering: optimizeLegibility;
+  text-align: left;
+  line-height: 1.25;
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin-top: 1.75rem;
+  margin-bottom: .5rem;
+}
+
+/* 2. Components
+# --------------------------------------------------------- */
+
+/* Slider (input type 'range')
+# --------------------------------------------------------- */
+input[type=range].amplitude-volume-slider {
+  -webkit-appearance: none; /* Disable default style for Chrome, Safari, Edge */
+  -moz-appearance: none; /* Disable default style for Firefox */
+  float: left;
+  height: 1px;
+  margin-top: 10px;
+  margin-left: 5px;
+  background: transparent;
+}
+
+/* jadams: range slider styles (track|thumb)
+# --------------------------------------------------------- */
+input[type=range].amplitude-volume-slider::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 1px;
+  background: var(--ajs-theme-uno--blue-gray-100);
+}
+
+input[type=range].amplitude-volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  border-radius: 16px;
+  margin-top: -8px;
+  border: none;
+  background-color: var(--ajs-theme-uno--blue);
+}
+
+input[type=range].amplitude-volume-slider::-webkit-slider-thumb:focus {
+  outline: none;
+}
+
+input[type=range].amplitude-volume-slider::-webkit-slider-thumb:hover {
+  background-color: var(--ajs-theme-uno--blue-700);
+}
+
+input[type=range].amplitude-volume-slider::-moz-range-track {
+  width: 100%;
+  height: 1px;
+  background-color: var(--ajs-theme-uno--blue-gray-100);
+}
+
+input[type=range].amplitude-volume-slider::-moz-range-thumb {
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  margin-top: -8px;
+  border-radius: 16px;
+  border: none;
+  background-color: var(--ajs-theme-uno--blue);
+}
+
+input[type=range].amplitude-volume-slider::-moz-range-thumb:focus {
+  outline: none;
+}
+
+input[type=range].amplitude-volume-slider::-moz-range-thumb:hover {
+  background-color: var(--ajs-theme-uno--blue-700);
+}
+
+/* Small only
+# --------------------------------------------------------- */
+@media screen and (max-width: 39.9375em) {
+
+  input[type=range].amplitude-volume-slider::-webkit-slider-thumb {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    margin-top: -15px;
+  }
+
+  input[type=range].amplitude-volume-slider::-moz-range-thumb {
+    width: 30px;
+    height: 30px;
+    margin-top: -15px;
+    border-radius: 30px;
+  }
+}
+
+/* Progress-Bar
+# --------------------------------------------------------- */
+progress.amplitude-song-played-progress {
+  display: block;
+  cursor: pointer;
+  width: 100%;
+  height: 8px;
+  border: none;
+  background-color: var(--ajs-theme-uno--silver-500);
+  -webkit-appearance: none; /* Disable default style for Chrome, Safari, Edge */
+  -moz-appearance: none; /* Disable default style for Firefox */
+}
+
+progress::-webkit-progress-value {
+  background-color: var(--ajs-theme-uno--blue);
+}
+
+progress::-moz-progress-bar {
+  background-color: var(--ajs-theme-uno--blue);
+}
+
+progress::-ms-fill {
+  background-color: var(--ajs-theme-uno--blue);
+}
+
+/* Small only
+# --------------------------------------------------------- */
+@media screen and (max-width: 39.9375em) {
+  progress.amplitude-song-played-progress {
+    width: 100%;
+    height: 16px;
+  }
+}
+
+/* MINI Player
+# --------------------------------------------------------- */
+.mini-player-volume-container {
+  margin-left: 26px;
+  padding-bottom: 20px;
+  padding-top: 5px;
+  width: calc(100% - 43px);
+}
+
+.mini-player-song-artist-album {
+  font-family: "Lato", sans-serif;
+  color: var(--ajs-theme-uno--blue-gray-300);
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "Lato", sans-serif;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* COMPACT Player
+# --------------------------------------------------------- */
+.compact-player {
+  max-width: 475px;
+}
+
+.flat-control-container_compact-player {
+  margin-top: 0px !important;
+}
+
+.compact-player-volume-container {
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+/* 3. Layout
+# --------------------------------------------------------- */
+
+/* 4. Pages
+# --------------------------------------------------------- */
+
+/* 5. Themes
+# --------------------------------------------------------- */
+
+/* 6. Utils
+# --------------------------------------------------------- */
+
+/* 7. Vendors
+# --------------------------------------------------------- */
+
+/* 8. Animations
+# --------------------------------------------------------- */
+.slide-in-top {
+  -webkit-animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@-webkit-keyframes slide-in-top {
+ 0% {
+  -webkit-transform: translateY(-10px);
+  transform: translateY(-10px);
+  opacity: 0;
+ }
+
+ 100% {
+   -webkit-transform: translateY(0);
+   transform: translateY(0);
+   opacity: 1;
+ }
+}
+
+@keyframes slide-in-top {
+  0% {
+   -webkit-transform: translateY(-10px);
+   transform: translateY(-10px);
+   opacity: 0;
+  }
+
+  100% {
+   -webkit-transform: translateY(0);
+   transform: translateY(0);
+   opacity: 1;
+  }
+}
+
+.slide-out-top {
+  -webkit-animation: slide-out-top 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+  animation: slide-out-top 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+}
+
+@-webkit-keyframes slide-out-top {
+ 0% {
+   -webkit-transform: translateY(0);
+   transform: translateY(0);
+   opacity: 1;
+ }
+
+ 100% {
+   -webkit-transform: translateY(-10px);
+   transform: translateY(-10px);
+   opacity: 0;
+ }
+}
+
+@keyframes slide-out-top {
+ 0% {
+   -webkit-transform: translateY(0);
+   transform: translateY(0);
+   opacity: 1;
+ }
+
+ 100% {
+   -webkit-transform: translateY(-10px);
+   transform: translateY(-10px);
+   opacity: 0;
+ }
+}

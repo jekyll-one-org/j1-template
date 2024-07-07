@@ -39,98 +39,102 @@ defaults:
     # ALBUM settings
     # --------------------------------------------------------------------------
     album:
-
-      # ------------------------------------------------------------------------
-      # name
-      # ------------------------------------------------------------------------
-      # Name of the album.
-      #
-      # values:                       string
-      # default:                      no default
-      #
-      # ------------------------------------------------------------------------
-      # artist
-      # ------------------------------------------------------------------------
-      # Name of the artist.
-      #
-      # values:                       string
-      # default:                      no default
-      #
-      # ------------------------------------------------------------------------
-      # playlist
-      # ------------------------------------------------------------------------
-      # UNIQUE name of the playlist. Required to create MUTIPLE player
-      # instances for AmplitudeJS,
-      #
-      # values:                       string
-      # default:                      no default
-      #
-      # ------------------------------------------------------------------------
-      # audio_base
-      # ------------------------------------------------------------------------
-      # Base folder or URL. Specifies the the base forlder or URL for
-      # the audio files to be loaded.
-      #
-      # values:                       string|URL
-      # default:                      no default
-      #
-      # ------------------------------------------------------------------------
-      # cover_image
-      # ------------------------------------------------------------------------
-      # The album cover image (path).
-      #
-      # values:                       string
-      # default:                      no default
-      #
-      # ------------------------------------------------------------------------
+    # ------------------------------------------------------------------------
+    # name
+    # ------------------------------------------------------------------------
+    # Name of the album.
+    #
+    # values:                         string
+    # default:                        no default
+    #
+    # ------------------------------------------------------------------------
+    # artist
+    # ------------------------------------------------------------------------
+    # Name of the artist.
+    #
+    # values:                           string
+    # default:                          no default
+    #
+    # ------------------------------------------------------------------------
+    # playlist
+    # ------------------------------------------------------------------------
+    # UNIQUE name of the playlist. Required to create MUTIPLE player
+    # instances for AmplitudeJS,
+    #
+    # values:                           string
+    # default:                          no default
+    #
+    # ------------------------------------------------------------------------
+    # audio_base
+    # ------------------------------------------------------------------------
+    # Base folder or URL. Specifies the the base forlder or URL for
+    # the audio files to be loaded.
+    #
+    # values:                           string|URL
+    # default:                          no default
+    #
+    # ------------------------------------------------------------------------
+    # cover_image
+    # ------------------------------------------------------------------------
+    # The album cover image (path).
+    #
+    # values:                           string
+    # default:                          no default
+    #
+    # ------------------------------------------------------------------------
 
     # --------------------------------------------------------------------------
     # TITLE settings (songs)
     # --------------------------------------------------------------------------
     items:
+    # ------------------------------------------------------------------------
+    # enabled
+    # ------------------------------------------------------------------------
+    # Enables or disables a title.
+    #
+    # values:                           true|false
+    # default:                          true
+    #
+    # ------------------------------------------------------------------------
+    # title
+    # ------------------------------------------------------------------------
+    # Name of the title.
+    #
+    # values:                           string
+    # default:                          no default
+    #
+    # ------------------------------------------------------------------------
+    # audio
+    # ------------------------------------------------------------------------
+    # Name|URL of the audio file..
+    #
+    # values:                           string
+    # default:                          no default
+    #
+    # ------------------------------------------------------------------------
+    # title_info
+    # ------------------------------------------------------------------------
+    # Link on title info.
+    #
+    # values:                           string
+    # default:                          no default
+    #
+    # ------------------------------------------------------------------------
+    # duration
+    # ------------------------------------------------------------------------
+    # Duration info for a title.
+    #
+    # values:                           string (minutes:seconds)
+    # default:                          no default
+    #
+    # ------------------------------------------------------------------------
 
-      # ------------------------------------------------------------------------
-      # enabled
-      # ------------------------------------------------------------------------
-      # Enables or disables a title.
-      #
-      # values:                       true|false
-      # default:                      true
-      #
-      # ------------------------------------------------------------------------
-      # title
-      # ------------------------------------------------------------------------
-      # Name of the title.
-      #
-      # values:                       string
-      # default:                      no default
-      #
-      # ------------------------------------------------------------------------
-      # audio
-      # ------------------------------------------------------------------------
-      # Name|URL of the audio file..
-      #
-      # values:                       string
-      # default:                      no default
-      #
-      # ------------------------------------------------------------------------
-      # title_info
-      # ------------------------------------------------------------------------
-      # Link on title info.
-      #
-      # values:                       string
-      # default:                      no default
-      #
-      # ------------------------------------------------------------------------
-      # duration
-      # ------------------------------------------------------------------------
-      # Duration info for a title.
-      #
-      # values:                       string (minutes:seconds)
-      # default:                      no default
-      #
-      # ------------------------------------------------------------------------
-
+    # --------------------------------------------------------------------------
+    # PLAYLIST defaults
+    #
+    audio_info:                           false
+    controls:                             false
+    scrollbar:                            true
 
   # ----------------------------------------------------------------------------
   # PLAYER defaults
@@ -153,8 +157,8 @@ defaults:
     # AJAX methods are used to supply the needed HTML code at the time
     # a gallery is initialized by the JS adapter.
     #
-    #   values:                           string
-    #   default:                          /assets/data/amplitude.html
+    #   values:                         string
+    #   default:                        /assets/data/amplitude.html
     #
     # --------------------------------------------------------------------------
     # player_type
@@ -168,7 +172,7 @@ defaults:
     # --------------------------------------------------------------------------
     # player_id
     # --------------------------------------------------------------------------
-    # UNIQUE player id. Used by the module adapter to create a player.
+    # Unique player id. Used by the module adapter to create a player instance.
     #
     # values:                           string
     # default:                          no default
@@ -176,33 +180,49 @@ defaults:
     # --------------------------------------------------------------------------
     # volume
     # --------------------------------------------------------------------------
-    # Set (initial) volume value (player control|right).
+    # value
+    # -----
+    #   Sets the (initial) volume value.
     #
-    # values:                           [0 .. 100]
-    # default:                          50
+    #   values:                         [0 .. 100]
+    #   default:                        50
+    #
+    # increment
+    # ---------
+    #   Sets the increment step (value) for the slider.
+    #
+    #   values:                         [1 .. 10]
+    #   default:                        1
+    #
+    # decrement
+    # ---------
+    #   Sets the decrement step (value) for the slider.
+    #
+    #   values:                         [1 .. 10]
+    #   default:                        1
     #
     # --------------------------------------------------------------------------
     # repeat
     # --------------------------------------------------------------------------
-    # Enable or disable repeating titles (player control|right).
+    # Enable or disable repeating the playlist.
     #
-    # values:                           true|false
-    # default:                          false
+    # values:                           off|on
+    # default:                          off
     #
     # --------------------------------------------------------------------------
     # shuffle
     # --------------------------------------------------------------------------
-    # Enable or disable shuffle titles (player control|right).
-    # When set to 'false', titles are played the order of the albun.
-    # When set to 'true', titles are played 'random' except the 'fist' item.
+    # Enable or disable to shuffle on titles in the playlist.
+    # When set to 'off', titles are played the order of the albun.
+    # When set to 'on', titles are played 'random' except the 'fist' item.
     #
-    # values:                           true|false
-    # default:                          false
+    # values:                           off|on
+    # default:                          off
     #
     # --------------------------------------------------------------------------
-    # title_info
+    # audio_info
     # --------------------------------------------------------------------------
-    # Enables or disables the info button on titles (player control|left).
+    # Enables or disables the info button on titles in a playlist.
     #
     # values:                           true|false
     # default:                          false
@@ -225,20 +245,22 @@ defaults:
     # default:                          500
     #
     # --------------------------------------------------------------------------
+
+    # --------------------------------------------------------------------------
+    # PLAYER defaults
     #
-    type:                                 compact
-    hide_scrollbar:                       false
+    type:                               compact
+
+    repeat:                             off
+    shuffle:                            off
+    play_next_title:                    true
+    pause_next_title:                   false
+    delay_next_title:                   250
+
     volume:
-      value:                              50
-      decrement:                          10
-      increment:                          10
-    repeat:                               false
-    shuffle:                              false
-    title_info:                           false
-    play_next_title:                      true
-    pause_next_title:                     false
-    delay_next_title:                     250
-    waveform_sample_rate:                 200
+      value:                            50
+      decrement:                        1
+      increment:                        1
 
 # ------------------------------------------------------------------------------
 # END config
