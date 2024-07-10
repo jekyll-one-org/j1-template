@@ -1,5 +1,10 @@
-Ich verwende einen HTML div Container mit zwei Spalten. Die linke Spalte
-enthält ein statisches Element, die linke spalte eine dynamische Liste.
+Ich verwende einen HTML Div Container mit zwei Spalten. Die linke Spalte
+enthält ein statisches Element fester Höhe, die linke Spalte eine dynamische
+Liste variabler Länge bzw. Höhe.
+
+Wie kann ich mit Hilfe von CSS die linke Spalte gleich hoch der rechten
+Spalte skalieren?
+
 
 Wie kann ich mit Hilfe von CSS beide Spalten gleich hoch slalieren?
 

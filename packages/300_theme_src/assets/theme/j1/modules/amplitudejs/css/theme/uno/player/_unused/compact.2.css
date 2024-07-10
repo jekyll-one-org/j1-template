@@ -241,7 +241,6 @@ div#playlist-screen-controls.compact-player {
   height: 80px;
   padding: 15px;
   max-width: -webkit-fill-available;
-  max-width: -moz-available;
   font-family: "Lato", sans-serif;
   color: var(--ajs-theme-uno--white);
   background-color: var(--ajs-theme-uno--black);
@@ -519,7 +518,7 @@ div#meta-container div.audio-artist-album span {
   display: block;
 }
 
-.compact-player-container {
+div#compact-player-container {
   position: relative;
   max-width: max-content;
   min-height: 800px;
@@ -538,7 +537,7 @@ input[type=range].amplitude-volume-slider.compact-player-volume-slider {
     background: #192029 !important;
   }
 
-  .compact-player-container div#player-middle div#volume-container input[type="range"].amplitude-volume-slider.compact-player {
+  div#compact-player-container div#player-middle div#volume-container input[type="range"].amplitude-volume-slider.compact-player {
     margin-top: -8px;
     background-color: var(--ajs-theme-uno--gray-900) !important;
     background: #192029 !important;

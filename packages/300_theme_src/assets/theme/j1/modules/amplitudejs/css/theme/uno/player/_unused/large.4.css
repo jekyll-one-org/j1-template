@@ -469,10 +469,6 @@ div#large-player-controls div.large-player-controls-container div#repeat-contain
 @media screen and (max-width: 39.9375em) {
   div#large-player {
     flex-direction: column;
-    max-height: -webkit-fill-available;
-    max-width: -webkit-fill-available;
-    max-height: -moz-available;
-    max-width: -moz-available;
   }
 
   div#large-player div#amplitude-right {

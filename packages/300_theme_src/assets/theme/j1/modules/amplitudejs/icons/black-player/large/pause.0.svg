@@ -7,12 +7,12 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="100"
-   height="100"
-   viewBox="0 0 100 100"
+   width="60"
+   height="60"
+   viewBox="0 0 60 60"
    version="1.1"
    id="svg11"
-   sodipodi:docname="play.svg"
+   sodipodi:docname="pause.svg"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)">
   <metadata
      id="metadata15">
@@ -42,9 +42,9 @@
      showborder="true"
      inkscape:pagecheckerboard="true"
      inkscape:showpageshadow="false"
-     inkscape:zoom="10.04"
-     inkscape:cx="50"
-     inkscape:cy="51.164869"
+     inkscape:zoom="15.416667"
+     inkscape:cx="24"
+     inkscape:cy="27.429638"
      inkscape:window-x="283"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
@@ -62,20 +62,19 @@
   <defs
      id="defs6" />
   <g
-     id="Page-1"
-     stroke="none"
-     stroke-width="1"
-     fill="none"
-     fill-rule="evenodd"
-     transform="matrix(3.8358368,0,8.6968604e-8,3.7660944,10.000003,5)">
+     id="Playlist-view"
+     transform="matrix(2.2222229,0,0,2.1666676,-685.55578,-1448.834)"
+     fill="#ffffff">
     <g
-       id="small-play"
-       fill-rule="nonzero"
-       fill="#ffffff">
-      <polygon
-         id="Play"
-         transform="rotate(180,8.472727,11.948718)"
-         points="16.945455,23.897436 16.945455,0 0,11.948718 " />
+       id="Group"
+       transform="translate(270,671)">
+      <g
+         id="Main-Control"
+         transform="translate(43)">
+        <path
+           d="M 0,24 H 6 V 0 H 0 Z m 12,0 h 6 V 0 h -6 z"
+           id="Pause" />
+      </g>
     </g>
   </g>
 </svg>

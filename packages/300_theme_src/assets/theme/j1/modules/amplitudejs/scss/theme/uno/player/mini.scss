@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/modules/amplitudejs/scss/theme/uno/player/mini.scss
- # AmplitudeJS v4 Mini Player for J1 templ
+ # AmplitudeJS v4 Mini Player for J1 template
  #
  # Product/Info:
  # https://jekyll.one
@@ -15,39 +15,84 @@
 
 // Variables
 // ---------------------------------------------------------
-$font-family_1:       "Lato", sans-serif;
+$font-family_1:         "Lato", sans-serif;
 
-$color_1:             var(--ajs-theme-uno--white);
+$color_1:               var(--ajs-theme-uno--gray-100);
+$color_2:               var(--ajs-theme-uno--blue-gray-300);
+$color_3:               var(--ajs-theme-uno--white);
 
-$background-color_1:  var(--ajs-theme-uno--black);
-$background-color_2:  var(--ajs-theme-uno--blue-gray-900);
+$background-color_1:    var(--ajs-theme-uno--black);
+
 
 // Styles
 // ---------------------------------------------------------
-div#mini-player {
+
+.mini-player {
 	-webkit-font-smoothing: antialiased;
-	max-width: 475px;
+	width: 475px;
 	background-color: $background-color_1;
-	img[data-amplitude-song-info="cover_art_url"] {
-		width: 100%;
-	}
 }
-div.bottom-container {
-	background-color: $background-color_2;
+.mini-player-container {
+	display: block;
 }
-div#meta-container {
+.mini-player-meta-container {
 	text-align: center;
 	margin-top: 10px;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
+	span.song-name {
+		display: block;
+		color: $color_1;
+		font-size: 24px;
+		font-family: $font-family_1;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	span.artist {
+		display: block;
+		color: $color_2;
+		font-size: 18px;
+		font-weight: bold;
+		font-family: $font-family_1;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	span.album {
+		display: block;
+		color: $color_2;
+		font-size: 18px;
+		font-weight: bold;
+		font-family: $font-family_1;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+}
+.mini-player-volume-container {
+	margin-left: 26px;
+	padding-bottom: 20px;
+	padding-top: 5px;
+	width: calc(100% - 43px);
+}
+.mini-player-song-artist-album {
+	font-family: $font-family_1;
+	color: $color_2;
+	font-size: 18px;
+	font-weight: bold;
+	font-family: $font-family_1;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 div.control-container {
 	div.amplitude-play-pause {
-		width: 60px;
-		height: 60px;
+		width: 100px;
+		height: 100px;
 		cursor: pointer;
 		float: left;
-		margin-top: 15px;
-		margin-left: 24px;
+		margin-top: 8px;
+		margin-left: 16px;
 		&:hover {
 			opacity: 0.5;
 		}
@@ -65,25 +110,7 @@ div.control-container {
 		text-align: center;
 		margin-top: 5px;
 		margin-left: 5px;
-		color: $color_1;
-	}
-}
-div.time-container {
-	font-family: $font-family_1;
-	font-weight: bold;
-	font-size: 14px;
-	color: $color_1;
-	height: 18px;
-	margin-top: 10px;
-	width: calc(100% - 30px);
-	margin-left: 20px;
-	span.current-time {
-		float: left;
-		margin-left: 5px;
-	}
-	span.duration {
-		float: right;
-		margin-right: 5px;
+		color: $color_3;
 	}
 }
 div.mini-player.meta-container {
@@ -96,4 +123,10 @@ input[type=range].mini-player.amplitude-volume-slider {
 	margin-top: -14px;
 	margin-left: 24px;
 	width: 95%;
+}
+@media screen and (max-width: 39.9375em) {
+	.mini-player {
+		max-width: -webkit-fill-available;
+		max-width: -moz-available;
+	}
 }

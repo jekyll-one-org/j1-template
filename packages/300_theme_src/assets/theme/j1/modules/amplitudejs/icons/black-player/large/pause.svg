@@ -7,9 +7,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="60"
-   height="60"
-   viewBox="0 0 60 60"
+   width="100"
+   height="100"
+   viewBox="0 0 100 100"
    version="1.1"
    id="svg11"
    sodipodi:docname="pause.svg"
@@ -42,9 +42,9 @@
      showborder="true"
      inkscape:pagecheckerboard="true"
      inkscape:showpageshadow="false"
-     inkscape:zoom="15.416667"
-     inkscape:cx="24"
-     inkscape:cy="27.429638"
+     inkscape:zoom="10.04"
+     inkscape:cx="50"
+     inkscape:cy="50"
      inkscape:window-x="283"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
@@ -63,7 +63,7 @@
      id="defs6" />
   <g
      id="Playlist-view"
-     transform="matrix(2.2222229,0,0,2.1666676,-685.55578,-1448.834)"
+     transform="matrix(3.6111102,0,0,3.7500017,-1120.2775,-2511.2512)"
      fill="#ffffff">
     <g
        id="Group"

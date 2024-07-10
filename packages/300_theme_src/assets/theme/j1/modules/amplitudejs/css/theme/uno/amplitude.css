@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/modules/amplitudejs/css/theme/unu/amplitude.css
- # AmplitudeJS v4 Global Theme Styles
+ # AmplitudeJS v4 Global Theme Styles (used by all players)
  #
  # Product/Info:
  # https://jekyll.one
@@ -79,6 +79,31 @@
   font-weight: 500;
   margin-top: 1.75rem;
   margin-bottom: .5rem;
+}
+
+.amplitude-time-container {
+  font-family: "Lato", sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  color: var(--ajs-theme-uno--white);
+  height: 18px;
+  margin-top: 10px;
+  width: calc(100% - 30px);
+  margin-left: 20px;
+}
+
+.amplitude-time-container span.current-time {
+  float: left;
+  margin-left: 5px;
+}
+
+.amplitude-time-container span.duration {
+  float: right;
+  margin-right: 5px;
+}
+
+.amplitude-player {
+  max-width: max-content;
 }
 
 /* 2. Components
@@ -200,36 +225,18 @@ progress::-ms-fill {
   }
 }
 
-/* MINI Player
-# --------------------------------------------------------- */
-.mini-player-volume-container {
-  margin-left: 26px;
-  padding-bottom: 20px;
-  padding-top: 5px;
-  width: calc(100% - 43px);
-}
-
-.mini-player-song-artist-album {
-  font-family: "Lato", sans-serif;
-  color: var(--ajs-theme-uno--blue-gray-300);
-  font-size: 18px;
-  font-weight: bold;
-  font-family: "Lato", sans-serif;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 
 /* COMPACT Player
+# --------------------------------------------------------- */
+
+/* 1. Base
 # --------------------------------------------------------- */
 .compact-player {
   max-width: 475px;
 }
 
-.flat-control-container_compact-player {
-  margin-top: 0px !important;
-}
-
+/* 2. Components
+# --------------------------------------------------------- */
 .compact-player-volume-container {
   margin-bottom: 10px;
   margin-top: 20px;
@@ -317,3 +324,45 @@ progress::-ms-fill {
    opacity: 0;
  }
 }
+
+
+/* LARGE Player
+# --------------------------------------------------------- */
+
+/* 1. Base
+# --------------------------------------------------------- */
+
+.title-list {
+  display: block;
+  max-height: 700px;
+  overflow-y: scroll;
+}
+
+/* Small only
+# --------------------------------------------------------- */
+@media screen and (max-width: 39.9375em) {
+  .title-list {
+    max-height: 570px;
+  }
+}
+
+/* 2. Components
+# --------------------------------------------------------- */
+
+/* 3. Layout
+# --------------------------------------------------------- */
+
+/* 4. Pages
+# --------------------------------------------------------- */
+
+/* 5. Themes
+# --------------------------------------------------------- */
+
+/* 6. Utils
+# --------------------------------------------------------- */
+
+/* 7. Vendors
+# --------------------------------------------------------- */
+
+/* 8. Animations
+# --------------------------------------------------------- */

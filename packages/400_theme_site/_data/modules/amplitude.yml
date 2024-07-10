@@ -362,7 +362,7 @@ settings:
         name:                           ƎElements
         artist:                         Earth, Wind & Fire
         audio_base:                     /assets/audio/album/3e
-        cover_image:                    /assets/audio/cover/3e/ƎElements.jpg
+        cover_image:                    /assets/audio/cover/3e/cover.jpg
 
       # ------------------------------------------------------------------------
       # TITLE settings (songs)
@@ -447,7 +447,7 @@ settings:
         title:                          Free Pop
         audio_info:                     false
         controls:                       true
-        scrollbar:                      false
+        scrollbar:                      true
 
     # --------------------------------------------------------------------------
     # COMPACT player, Free Pop
@@ -467,7 +467,7 @@ settings:
         title:                          Free Pop
         audio_info:                     false
         controls:                       true
-        scrollbar:                      false
+        scrollbar:                      true
 
     # --------------------------------------------------------------------------
     # LARGE player, Free Pop
@@ -487,7 +487,7 @@ settings:
         title:                          Free Pop
         audio_info:                     false
         controls:                       true
-        scrollbar:                      false
+        scrollbar:                      true
 
     # --------------------------------------------------------------------------
     # MINI player, Free Disco
@@ -507,7 +507,7 @@ settings:
         title:                          Free Disco
         audio_info:                     false
         controls:                       true
-        scrollbar:                      false
+        scrollbar:                      true
 
     # --------------------------------------------------------------------------
     # COMPACT player, Free Disco
@@ -527,7 +527,7 @@ settings:
         title:                          Free Disco
         audio_info:                     false
         controls:                       true
-        scrollbar:                      false
+        scrollbar:                      true
 
     # --------------------------------------------------------------------------
     # LARGE player, Free Disco
@@ -545,9 +545,9 @@ settings:
       playlist:
         name:                           free_disco
         title:                          Free Disco
-        audio_info:                     false
+        audio_info:                     true
         controls:                       true
-        scrollbar:                      false
+        scrollbar:                      true
 
     # --------------------------------------------------------------------------
     # MINI player, 3Elements
@@ -567,7 +567,7 @@ settings:
         title:                          3Elements
         audio_info:                     true
         controls:                       true
-        scrollbar:                      false
+        scrollbar:                      true
 
     # --------------------------------------------------------------------------
     # COMPACT player, 3Elements
@@ -587,7 +587,7 @@ settings:
         title:                          3Elements
         audio_info:                     true
         controls:                       true
-        scrollbar:                      false
+        scrollbar:                      true
 
     # --------------------------------------------------------------------------
     # LARGE player, 3Elements
@@ -607,7 +607,7 @@ settings:
         title:                          3Elements
         audio_info:                     true
         controls:                       true
-        scrollbar:                      false
+        scrollbar:                      true
 
 # ------------------------------------------------------------------------------
 # END config

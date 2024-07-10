@@ -42,7 +42,7 @@ $background-color_4: var(--ajs-theme-uno--medium-silver);
 /* jadams: playlist controls (prev|play-pause|next */
 /* jadams: player controls (shuffle|prev|play-pause|next|repeat) */
 /* jadams 2024-07-01: scale (both) columns to the same height */
-div#amplitude-player {
+div#large-player {
 	display: flex;
 	max-width: fit-content;
 	background: var(--ajs-theme-uno--white);
@@ -438,7 +438,7 @@ div#large-player-controls {
 	}
 }
 @media screen and (max-width: 39.9375em) {
-	div#amplitude-player {
+	div#large-player {
 		flex-direction: column;
 		div#amplitude-right {
 			width: 100%;

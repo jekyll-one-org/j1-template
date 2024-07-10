@@ -492,10 +492,6 @@ j1.adapter.amplitude = ((j1, window) => {
     // initPlayerUiEvents
     // -------------------------------------------------------------------------
     initPlayerUiEvents: () => {
-      var miniPlayerUIeventsEnabled     = false;
-      var compactPlayerUIeventsEnabled  = false;
-      var largePlayerUIeventsEnabled    = false;
-
       var dependencies_met_player_instances_initialized = setInterval (() => {
         if (apiInitialized.state) {
             logger.info('\n' + 'initialize player specific UI events: started');
@@ -546,35 +542,25 @@ j1.adapter.amplitude = ((j1, window) => {
                     amplitudePlayerState = Amplitude.getPlayerState();
 
                     // ---------------------------------------------------------
-                    // START mini player UI events
+                    // setup mini player UI events
                     //
-                    if (document.getElementById(playerID) !== null && !miniPlayerUIeventsEnabled) {
-                      miniPlayerUIeventsEnabled = true;
+                    if (document.getElementById('mini-player-container') !== null) {
 
                       // click on progress bar
-                      // -------------------------------------------------------
+                      document.getElementById('mini-player-progress').addEventListener('click', function(event) {
+                        var offset = this.getBoundingClientRect();
+                        var xpos   = event.pageX - offset.left;
 
-                      // getElementsByClassName returns an Array-like object
-                      var progressBars = document.getElementsByClassName("mini-player-progress");
-
-                      // add listeners to all progress bars found
-                      for (var i=0; i<progressBars.length; i++) {
-                          progressBars[i].addEventListener('click', function(event) {
-                            var offset = this.getBoundingClientRect();
-                            var xpos   = event.pageX - offset.left;
-
-                            Amplitude.setSongPlayedPercentage(
-                              (parseFloat(xpos)/parseFloat(this.offsetWidth))*100);
-                          });
-                      }
+                        Amplitude.setSongPlayedPercentage(
+                          (parseFloat(xpos)/parseFloat(this.offsetWidth))*100);
+                      });
 
                     } // END mini player UI events
 
                     // ---------------------------------------------------------
                     // setup compact player specific UI events
                     //
-                    if (document.getElementById('compact-player-container') !== null && !compactPlayerUIeventsEnabled) {
-                      compactPlayerUIeventsEnabled = true;
+                    if (document.getElementById('compact-player-container') !== null) {
 
                       // click on progress bar
                       document.getElementById('compact-player-progress').addEventListener('click', function(event) {
@@ -606,7 +592,7 @@ j1.adapter.amplitude = ((j1, window) => {
                         document.getElementById('playlist-screen').classList.add('slide-in-top');
                         document.getElementById('playlist-screen').style.display = "block";
 
-                        // disable scrolling (if window viewport >= BS Medium and above)
+                        // disable scrolling (if window viweport equals BS Medium and above)
                         if (window.innerWidth >= 720) {
                           if ($('body').hasClass('stop-scrolling')) {
                             return false;
@@ -634,8 +620,7 @@ j1.adapter.amplitude = ((j1, window) => {
                     // ---------------------------------------------------------
                     // setup large player specific UI events
                     //
-                    if (document.getElementById('large-player-container') !== null && !largePlayerUIeventsEnabled) {
-                      largePlayerUIeventsEnabled = true;
+                    if (document.getElementById('large-player-container') !== null) {
 
                       // click on progress bar
                       document.getElementById('large-player-progress').addEventListener('click', function(event) {
@@ -661,14 +646,14 @@ j1.adapter.amplitude = ((j1, window) => {
                       // enable|disable scrolling on playlist (player|right)
                       if (document.getElementById('amplitude-right') !== null) {
                         document.getElementById('amplitude-right').addEventListener('mouseenter', function() {
-                          // disable scrolling (if window viewport >= BS Medium and above)
-                          if (window.innerWidth >= 720) {
-                            if ($('body').hasClass('stop-scrolling')) {
-                              return false;
-                            } else {
-                              $('body').addClass('stop-scrolling');
-                            }
-                          }
+                          // disable scrolling (if window viweport equals BS Medium and above)
+                          // if (window.innerWidth >= 720) {
+                          //   if ($('body').hasClass('stop-scrolling')) {
+                          //     return false;
+                          //   } else {
+                          //     $('body').addClass('stop-scrolling');
+                          //   }
+                          // }
                         }); // END EventListener 'mouseenter'
                         // enable scrolling
                         document.getElementById('amplitude-right').addEventListener('mouseleave', function() {
@@ -747,19 +732,96 @@ j1.adapter.amplitude = ((j1, window) => {
       for (var i = 0; i < songs.length; i++) {
         // ensure that on mouseover, CSS styles don't get messed up for active songs
         songs[i].addEventListener('mouseover', function() {
+          // this.style.backgroundColor = '#00A0FF';
+
+          // disable scrolling if window viweport eqals BS Medium and above
+          // if (window.innerWidth >= 720) {
+          //   if ($('body').hasClass('stop-scrolling')) {
+          //     return false;
+          //   } else {
+          //     $('body').addClass('stop-scrolling');
+          //   }
+          // }
+
+          // if (this.querySelectorAll('.audio-meta-data .audio-title')[0] !== undefined) {
+          //   this.querySelectorAll('.audio-meta-data .audio-title')[0].style.color  = '#FFFFFF';
+          // }
+          // if (this.querySelectorAll('.audio-meta-data .audio-artist')[0] !== undefined) {
+          //   this.querySelectorAll('.audio-meta-data .audio-artist')[0].style.color = '#FFFFFF';
+          // }
+
           // active song indicator (mini play button) in playlist
           if (!this.classList.contains('amplitude-active-song-container')) {
             if (this.querySelectorAll('.play-button-container')[0] !== undefined) {
               this.querySelectorAll('.play-button-container')[0].style.display = 'block';
             }
           } // END mini play button in playlist
+
+          // if (playerAudioInfo) {
+          //   if (this.querySelectorAll('img.audio-info-blue')[0] !== undefined) {
+          //     this.querySelectorAll('img.audio-info-blue')[0].style.display  = 'none';
+          //   }
+          //   if (this.querySelectorAll('img.audio-info-white')[0] !== undefined) {
+          //     this.querySelectorAll('img.audio-info-white')[0].style.display = 'block';
+          //   }
+          // } else {
+          //   if (this.querySelectorAll('img.audio-info-blue')[0] !== undefined) {
+          //     this.querySelectorAll('img.audio-info-blue')[0].style.display  = 'none';
+          //   }
+          //   if (this.querySelectorAll('img.audio-info-white')[0] !== undefined) {
+          //     this.querySelectorAll('img.audio-info-white')[0].style.display = 'none';
+          //   }
+          // } // END if playerAudioInfo
+
+          // if (this.querySelectorAll('.audio-duration')[0] !== undefined) {
+          //   this.querySelectorAll('.audio-duration')[0].style.color = '#FFFFFF';
+          // }
+
         }); // END EventListener 'mouseover' (songlist)
 
         // ensure that on mouseout, CSS styles don't get messed up for active songs
         songs[i].addEventListener('mouseout', function() {
+          // this.style.backgroundColor = '#FFFFFF';
+
+          // if (this.querySelectorAll('.audio-meta-data .audio-title')[0] !== undefined) {
+          //   this.querySelectorAll('.audio-meta-data .audio-title')[0].style.color  = '#272726';
+          // }
+          // if (this.querySelectorAll('.audio-meta-data .audio-artist')[0] !== undefined) {
+          //   this.querySelectorAll('.audio-meta-data .audio-artist')[0].style.color = '#607D8B';
+          // }
+
           if (this.querySelectorAll('.play-button-container')[0] !== undefined) {
             this.querySelectorAll('.play-button-container')[0].style.display = 'none';
           }
+
+          // if (playerAudioInfo) {
+          //   if (this.querySelectorAll('img.audio-info-blue')[0] !== undefined) {
+          //     this.querySelectorAll('img.audio-info-blue')[0].style.display  = 'block';
+          //   }
+          //   if (this.querySelectorAll('img.audio-info-white')[0] !== undefined) {
+          //     this.querySelectorAll('img.audio-info-white')[0].style.display = 'none';
+          //   }
+          // } else {
+          //   if (this.querySelectorAll('img.audio-info-blue')[0] !== undefined) {
+          //     this.querySelectorAll('img.audio-info-blue')[0].style.display  = 'none';
+          //   }
+          //   if (this.querySelectorAll('img.audio-info-white')[0] !== undefined) {
+          //     this.querySelectorAll('img.audio-info-white')[0].style.display = 'none';
+          //   }
+          // } // END if playerAudioInfo
+
+          // if (this.querySelectorAll('.audio-duration')[0] !== undefined) {
+          //   this.querySelectorAll('.audio-duration')[0].style.color = '#607D8B';
+          // }
+
+          // disable scrolling if window viweport eqals BS Medium and above
+          // if (window.innerWidth >= 720) {
+          //   if ($('body').hasClass('stop-scrolling')) {
+          //     $('body').removeClass('stop-scrolling');
+          //     return false;
+          //   }
+          // }
+
         }); // END EventListener 'mouseout' (songlist)
 
         // show|hide the (mini) play button when the song is clicked
@@ -767,6 +829,16 @@ j1.adapter.amplitude = ((j1, window) => {
           if (this.querySelectorAll('.play-button-container')[0] !== undefined) {
             this.querySelectorAll('.play-button-container')[0].style.display = 'none';
           }
+
+          // disable scrolling if window viweport eqals BS Medium and above
+          // if (window.innerWidth >= 720) {
+          //   if ($('body').hasClass('stop-scrolling')) {
+          //     return false;
+          //   } else {
+          //     $('body').addClass('stop-scrolling');
+          //   }
+          // }
+
         }); // END EventListener 'click' (songlist)
       }
 
