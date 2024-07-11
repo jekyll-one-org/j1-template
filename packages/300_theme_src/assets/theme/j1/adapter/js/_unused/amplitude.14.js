@@ -82,7 +82,7 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 
-"use strict";
+'use strict';
 j1.adapter.amplitude = ((j1, window) => {
 
   // göobal settings
@@ -226,7 +226,7 @@ j1.adapter.amplitude = ((j1, window) => {
           // -------------------------------------------------------------------
           var dependencies_met_api_initialized = setInterval (() => {
             if (apiInitialized.state) {
-              _this.initPlayerUiEvents();
+              _this.initPlayerUiEvents()
 
               clearInterval(dependencies_met_api_initialized);
             } // END if apiInitialized
@@ -492,6 +492,9 @@ j1.adapter.amplitude = ((j1, window) => {
     // initPlayerUiEvents
     // -------------------------------------------------------------------------
     initPlayerUiEvents: () => {
+      var miniPlayerUIeventsEnabled     = false;
+      var compactPlayerUIeventsEnabled  = false;
+      var largePlayerUIeventsEnabled    = false;
 
       var dependencies_met_player_instances_initialized = setInterval (() => {
         if (apiInitialized.state) {
@@ -542,11 +545,11 @@ j1.adapter.amplitude = ((j1, window) => {
                   if (apiInitialized.state) {
                     amplitudePlayerState = Amplitude.getPlayerState();
 
-                    {% if player.id contains 'mini' %}
                     // ---------------------------------------------------------
                     // START mini player UI events
                     //
-                    if (document.getElementById(playerID) !== null) {
+                    if (document.getElementById(playerID) !== null && !miniPlayerUIeventsEnabled) {
+                      miniPlayerUIeventsEnabled = true;
 
                       // click on progress bar
                       // -------------------------------------------------------
@@ -566,52 +569,83 @@ j1.adapter.amplitude = ((j1, window) => {
                       }
 
                     } // END mini player UI events
-                    {% endif %}
 
-                    {% if player.id contains 'compact' %}
                     // ---------------------------------------------------------
                     // START compact player UI events
                     //
-                    if (document.getElementById(playerID) !== null) {
+                    if (document.getElementById(playerID) !== null && !compactPlayerUIeventsEnabled) {
+                      compactPlayerUIeventsEnabled = true;
 
                       // show|hide playlist
                       // -------------------------------------------------------
 
                       // show playlist
-                      var showPlaylist = document.getElementById("show_playlist_{{player.id}}");
+                      var showPlaylist = document.getElementsByClassName("show-playlist");
 
-                      showPlaylist.addEventListener('click', function(event) {
-                        var playlistScreen = document.getElementById("playlist_screen_{{player.id}}");
+                      // add listeners to all elements found
+                      for (var i=0; i<showPlaylist.length; i++) {
 
-                        playlistScreen.classList.remove('slide-out-top');
-                        playlistScreen.classList.add('slide-in-top');
-                        playlistScreen.style.display = "block";
+                        showPlaylist[i].addEventListener('click', function(event) {
+                          // var playlistScreen = document.getElementsByClassName("playlist-screen");
+                          var playlistScreen = document.getElementById("playlist_screen");
 
-                        // disable scrolling (if window viewport >= BS Medium and above)
-                        if (window.innerWidth >= 720) {
-                          if ($('body').hasClass('stop-scrolling')) {
-                            return false;
-                          } else {
-                            $('body').addClass('stop-scrolling');
+                          // document.getElementById('playlist-screen').classList.remove('slide-out-top');
+                          // document.getElementById('playlist-screen').classList.add('slide-in-top');
+                          // document.getElementById('playlist-screen').style.display = "block";
+
+                          playlistScreen.classList.remove('slide-out-top');
+                          playlistScreen.classList.add('slide-in-top');
+                          playlistScreen.style.display = "block";
+
+                          // for (var i=0; i<playlistScreen.length; i++) {
+                          //   playlistScreen[i].classList.remove('slide-out-top');
+                          //   playlistScreen[i].classList.add('slide-in-top');
+                          //   playlistScreen[i].style.display = "block";
+                          // }
+
+                          // disable scrolling (if window viewport >= BS Medium and above)
+                          if (window.innerWidth >= 720) {
+                            if ($('body').hasClass('stop-scrolling')) {
+                              return false;
+                            } else {
+                              $('body').addClass('stop-scrolling');
+                            }
                           }
-                        }
-                      }); // END EventListener 'click' (compact player|show playlist)
+                        }); // END EventListener 'click' (compact player|show playlist)
+                      }
 
                       // hide playlist
-                      var hidePlaylist = document.getElementById("hide_playlist_{{player.id}}");
+                      var hidePlaylist = document.getElementsByClassName("hide-playlist");
 
-                      hidePlaylist.addEventListener('click', function(event) {
-                        var playlistScreen = document.getElementById("playlist_screen_{{player.id}}");
+                      // add listeners to all elements found
+                      for (var i=0; i<hidePlaylist.length; i++) {
 
-                        playlistScreen.classList.remove('slide-in-top');
-                        playlistScreen.classList.add('slislide-out-top');
-                        playlistScreen.style.display = "none";
+                        hidePlaylist[i].addEventListener('click', function(event) {
+                          // var playlistScreen = document.getElementsByClassName("playlist-screen");
+                          var playlistScreen = document.getElementById("playlist_screen");
 
-                        // enable scrolling
-                        if ($('body').hasClass('stop-scrolling')) {
-                          $('body').removeClass('stop-scrolling');
-                        }
-                      }); // END EventListener 'click' (compact player|show playlist)
+                          // document.getElementById('playlist-screen').classList.remove('slide-in-top');
+                          // document.getElementById('playlist-screen').classList.add('slide-out-top');
+                          // document.getElementById('playlist-screen').style.display = "none";
+
+                          playlistScreen.classList.remove('slide-in-top');
+                          playlistScreen.classList.add('slislide-out-top');
+                          playlistScreen.style.display = "none";
+
+
+
+                          // for (var i=0; i<playlistScreen.length; i++) {
+                          //   playlistScreen[i].classList.remove('slide-in-top');
+                          //   playlistScreen[i].classList.add('slide-out-top');
+                          //   playlistScreen[i].style.display = "none";
+                          // }
+
+                          // enable scrolling
+                          if ($('body').hasClass('stop-scrolling')) {
+                            $('body').removeClass('stop-scrolling');
+                          }
+                        }); // END EventListener 'click' (compact player|show playlist)
+                      }
 
                       // click on progress bar
                       // -------------------------------------------------------
@@ -621,13 +655,13 @@ j1.adapter.amplitude = ((j1, window) => {
 
                       // add listeners to all progress bars found
                       for (var i=0; i<progressBars.length; i++) {
-                        progressBars[i].addEventListener('click', function(event) {
-                          var offset = this.getBoundingClientRect();
-                          var xpos   = event.pageX - offset.left;
+                          progressBars[i].addEventListener('click', function(event) {
+                            var offset = this.getBoundingClientRect();
+                            var xpos   = event.pageX - offset.left;
 
-                          Amplitude.setSongPlayedPercentage(
-                            (parseFloat(xpos)/parseFloat(this.offsetWidth))*100);
-                        });
+                            Amplitude.setSongPlayedPercentage(
+                              (parseFloat(xpos)/parseFloat(this.offsetWidth))*100);
+                          });
                       }
 
                       // click on shuffle icon
@@ -643,13 +677,12 @@ j1.adapter.amplitude = ((j1, window) => {
                       });
 
                     } // END compact player UI events
-                    {% endif %}
 
-                    {% if player.id contains 'large' %}
                     // ---------------------------------------------------------
                     // START large player specific UI events
                     //
-                    if (document.getElementById('large-player-container')) {
+                    if (document.getElementById('large-player-container') !== null && !largePlayerUIeventsEnabled) {
+                      largePlayerUIeventsEnabled = true;
 
                       // click on progress bar
                       document.getElementById('large-player-progress').addEventListener('click', function(event) {
@@ -673,11 +706,9 @@ j1.adapter.amplitude = ((j1, window) => {
                       });
 
                       // enable|disable scrolling on playlist (player|right)
-                      // -------------------------------------------------------
                       if (document.getElementById('amplitude-right') !== null) {
-
-                        // disable scrolling (if window viewport >= BS Medium and above)
                         document.getElementById('amplitude-right').addEventListener('mouseenter', function() {
+                          // disable scrolling (if window viewport >= BS Medium and above)
                           if (window.innerWidth >= 720) {
                             if ($('body').hasClass('stop-scrolling')) {
                               return false;
@@ -686,22 +717,19 @@ j1.adapter.amplitude = ((j1, window) => {
                             }
                           }
                         }); // END EventListener 'mouseenter'
-
                         // enable scrolling
                         document.getElementById('amplitude-right').addEventListener('mouseleave', function() {
                           if ($('body').hasClass('stop-scrolling')) {
                             $('body').removeClass('stop-scrolling');
                           }
                         }); // END EventListener 'mouseleave'
-
                       } // END enable|disable scrolling on playlist
 
                     } // END large player UI events
-                    {% endif %}
 
                     // ---------------------------------------------------------
-                    // START configured player features
-
+                    // setup configured player features
+                    // ---------------------------------------------------------
                     logger.debug('\n' + 'set play next title: ' + playerPlayNextTitle);
                     logger.debug('\n' + 'set delay between titles: ' + playerDelayNextTitle + 'ms');
                     logger.debug('\n' + 'set repeat (album): ' + playerRepeat);
@@ -710,14 +738,11 @@ j1.adapter.amplitude = ((j1, window) => {
                     // set delay between titles (songs)
                     Amplitude.setDelay(playerDelayNextTitle);
                     // set repeat (album)
-                    Amplitude.setRepeat(playerRepeat);
+                    Amplitude.setRepeat(playerRepeat)
                     // set shuffle (album)
-                    Amplitude.setShuffle(playerShuffle);
+                    Amplitude.setShuffle(playerShuffle)
 
-                    // ---------------------------------------------------------
-                    // END configured player features
-
-                    // finished messages
+                    // set finished messages
                     // ---------------------------------------------------------
                     logger.debug('\n' + 'current player state: ' + amplitudePlayerState);
                     logger.debug('\n' + 'setup player specific UI events on ID #{{player_id}}: finished');
@@ -731,7 +756,6 @@ j1.adapter.amplitude = ((j1, window) => {
             }, 10); // END dependencies_met_html_loaded
 
           {% endif %} {% endfor %}
-
           logger.info('\n' + 'initialize player specific UI events: finished');
 
           _this.setState('finished');
@@ -743,16 +767,18 @@ j1.adapter.amplitude = ((j1, window) => {
 
           clearInterval(dependencies_met_player_instances_initialized);
         } // END if apiInitialized
-      }, 10); // END initialize player specific UI events
+      }, 10);
+      // END initialize player specific UI events
     }, // END initPlayerUiEvents
 
     // -------------------------------------------------------------------------
-    // START setAudioInfo
+    // setAudioInfo
+    // -------------------------------------------------------------------------
     setAudioInfo: (audioInfo) => {
-      // jadams: ??? new config setting 'pause_on_audio_info' ???
+      // jadams: ???
       // when the audioInfo link is clicked, stop all propagation so
       // AmplitudeJS doesn't play the song.
-      for (var i=0; i<audioInfo.length; i++) {
+      for (var i = 0; i < audioInfo.length; i++) {
         audioInfo[i].addEventListener('click', function (event) {
           event.stopPropagation();
         });

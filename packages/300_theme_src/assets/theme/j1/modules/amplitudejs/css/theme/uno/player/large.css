@@ -51,12 +51,6 @@ div#amplitude-left div#player-left-bottom {
   background-color: var(--ajs-theme-uno--blue-gray-900);
 }
 
-div#amplitude-left div#player-left-bottom div#volume-container:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
 div#amplitude-right {
   display: flex;
   flex-direction: column;
@@ -131,6 +125,7 @@ div#amplitude-right div.song img.audio-info-white {
   margin-right: 10px;
 }
 
+/* clearfix */
 div#amplitude-right div.song:after {
   content: "";
   display: table;
@@ -161,7 +156,7 @@ div#amplitude-right div.song span.audio-duration {
   color: var(--ajs-theme-uno--gray-300);
 }
 
-div#amplitude-right div#playlist-screen-controls div#playlist-screen-meta-container span.song-name {
+div#amplitude-right div.playlist-screen-controls div.playlist-screen-meta-container span.song-name {
   font-family: "Lato", sans-serif;
   font-size: 22px;
   color: var(--ajs-theme-uno--white);
@@ -170,7 +165,7 @@ div#amplitude-right div#playlist-screen-controls div#playlist-screen-meta-contai
   margin-left: 38px;
 }
 
-div#amplitude-right div#playlist-screen-controls div#playlist-screen-meta-container div.song-artist-album {
+div#amplitude-right div.playlist-screen-controls div.playlist-screen-meta-container div.song-artist-album {
   opacity: 0.5;
   font-family: "Lato", sans-serif;
   font-size: 16px;
@@ -180,13 +175,13 @@ div#amplitude-right div#playlist-screen-controls div#playlist-screen-meta-contai
   margin-left: 38px;
 }
 
-div#amplitude-right div#playlist-screen-controls div.list-controls {
+div#amplitude-right div.playlist-screen-controls div.list-controls {
   float: right;
   width: 90px;
-  margin-top: -32px;
+  margin-top: 14px;
 }
 
-div#amplitude-right div#playlist-screen-controls div.list-controls div.list-previous {
+div#amplitude-right div.playlist-screen-controls div.list-controls div.list-previous {
   float: left;
   cursor: pointer;
   width: 15px;
@@ -197,32 +192,32 @@ div#amplitude-right div#playlist-screen-controls div.list-controls div.list-prev
   background-image: url(/assets/theme/j1/modules/amplitudejs/icons/black-player/small/previous.svg);
 }
 
-div#amplitude-right div#playlist-screen-controls div.list-controls div.list-previous:hover {
+div#amplitude-right div.playlist-screen-controls div.list-controls div.list-previous:hover {
   opacity: .5;
 }
 
-div#amplitude-right div#playlist-screen-controls div.list-controls div.list-play-pause.amplitude-paused {
+div#amplitude-right div.playlist-screen-controls div.list-controls div.list-play-pause.amplitude-paused {
   background-repeat: no-repeat;
   background-image: url(/assets/theme/j1/modules/amplitudejs/icons/black-player/small/play.svg);
 }
 
-div#amplitude-right div#playlist-screen-controls div.list-controls div.list-play-pause {
+div#amplitude-right div.playlist-screen-controls div.list-controls div.list-play-pause {
   float: left;
   cursor: pointer;
   width: 17px;
   height: 24px;
 }
 
-div#amplitude-right div#playlist-screen-controls div.list-controls div.list-play-pause:hover {
+div#amplitude-right div.playlist-screen-controls div.list-controls div.list-play-pause:hover {
   opacity: .5;
 }
 
-div#amplitude-right div#playlist-screen-controls div.list-controls div.list-play-pause.amplitude-playing {
+div#amplitude-right div.playlist-screen-controls div.list-controls div.list-play-pause.amplitude-playing {
   background-repeat: no-repeat;
   background-image: url(/assets/theme/j1/modules/amplitudejs/icons/black-player/small/pause.svg);
 }
 
-div#amplitude-right div#playlist-screen-controls div.list-controls div.list-next {
+div#amplitude-right div.playlist-screen-controls div.list-controls div.list-next {
   float: left;
   cursor: pointer;
   width: 15px;
@@ -233,7 +228,7 @@ div#amplitude-right div#playlist-screen-controls div.list-controls div.list-next
   background-image: url(/assets/theme/j1/modules/amplitudejs/icons/black-player/small/next.svg);
 }
 
-div#amplitude-right div#playlist-screen-controls div.list-controls div.list-next:hover {
+div#amplitude-right div.playlist-screen-controls div.list-controls div.list-next:hover {
   opacity: .5;
 }
 
@@ -246,20 +241,41 @@ div#control-container {
   margin-bottom: 20px;
 }
 
+/* clearfix */
+div#control-container:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 div#control-container div#repeat-container {
   width: 25%;
   float: left;
   padding-top: 20px;
 }
 
-div#control-container div#volume-container {
+/* clearfix */
+div#control-container div#repeat-container:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+div#control-container div.volume-container {
   width: 88%;
   float: left;
   margin-top: 20px;
   margin-left: 12px;
 }
 
-div#control-container div#volume-container div.volume-controls input[type=range] {
+/* clearfix */
+div#control-container div.volume-container:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+div#control-container div.volume-container div.volume-controls input[type=range] {
   width: calc(100% - 45px);
 }
 
@@ -278,14 +294,15 @@ div#control-container div.amplitude-mute.amplitude-muted {
   background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/mute.svg") no-repeat;
 }
 
-div#control-container:after {
+div#time-container {
+  margin-top: 30px;
+}
+
+/* clearfix */
+div#time-container:after {
   content: "";
   display: table;
   clear: both;
-}
-
-div#time-container {
-  margin-top: 30px;
 }
 
 div#time-container span.current-time {
@@ -306,15 +323,16 @@ div#time-container span.duration {
   text-align: center;
 }
 
-div#time-container:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
 div#meta-container {
   text-align: center;
   margin-top: 20px;
+}
+
+/* clearfix */
+div#meta-container:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
 div#meta-container span.song-name {

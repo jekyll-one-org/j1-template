@@ -85,7 +85,7 @@ settings:
     # --------------------------------------------------------------------------
     #
     - playlist:
-      enabled:                          true
+      enabled:                          false
 
       name:                             free_pop
       title:                            Free Pop
@@ -434,7 +434,7 @@ settings:
     # --------------------------------------------------------------------------
     #
     - plaver:
-      enabled:                          true
+      enabled:                          false
 
       # ------------------------------------------------------------------------
       # PLAYER settings
@@ -454,7 +454,7 @@ settings:
     # --------------------------------------------------------------------------
     #
     - plaver:
-      enabled:                          true
+      enabled:                          false
 
       # ------------------------------------------------------------------------
       # PLAYER settings
@@ -474,7 +474,7 @@ settings:
     # --------------------------------------------------------------------------
     #
     - plaver:
-      enabled:                          true
+      enabled:                          false
 
       # ------------------------------------------------------------------------
       # PLAYER settings
@@ -525,7 +525,7 @@ settings:
       playlist:
         name:                           free_disco
         title:                          Free Disco
-        audio_info:                     false
+        audio_info:                     true
         controls:                       true
         scrollbar:                      true
 
