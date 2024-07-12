@@ -16,7 +16,7 @@
 .compact-player-container {
   position: relative;
   max-width: max-content;
-  min-height: 800px;
+  /* min-height: 800px; */
   overflow-y: clip;
 }
 
@@ -385,6 +385,14 @@ div.compact-player-player-middle div.volume-container:after {
   clear: both;
 }
 
+div.compact-player-player-middle div.volume-controls div.amplitude-mute.amplitude-not-muted {
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/volume.svg") no-repeat;
+}
+
+div.compact-player-player-middle div.volume-controls div.amplitude-mute.amplitude-muted {
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/mute.svg") no-repeat;
+}
+
 div.meta-container {
   text-align: center;
   margin-top: 20px;
@@ -428,7 +436,15 @@ div.meta-container div.audio-artist-album span {
   display: block;
 }
 
+/*
 input[type=range].amplitude-volume-slider.compact-player-volume-slider {
   width: calc(100% - 60px);
   margin-top: 8px;
+}
+*/
+
+input[type=range].amplitude-volume-slider.compact-player-volume-slider {
+  width: calc(100% - 53px);
+  margin-top: -12px;
+  margin-left: 29px;
 }

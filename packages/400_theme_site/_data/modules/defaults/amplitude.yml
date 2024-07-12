@@ -133,7 +133,6 @@ defaults:
     #
     audio_info:                           false
     controls:                             false
-    scrollbar:                            true
 
   # ----------------------------------------------------------------------------
   # PLAYER defaults

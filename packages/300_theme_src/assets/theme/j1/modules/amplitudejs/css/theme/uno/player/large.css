@@ -20,7 +20,7 @@ div#large-player {
   background: var(--ajs-theme-uno--white);
 }
 
-div#playlist-header.player-expanded {
+/* div#playlist-header.large-player-playlist-header {
   position: sticky;
   cursor: default;
   top: 0;
@@ -30,7 +30,7 @@ div#playlist-header.player-expanded {
   text-align: center;
   color: var(--ajs-theme-uno--white);
   background-color: var(--ajs-theme-uno--dark-silver);
-}
+} */
 
 div#amplitude-left {
   display: flex;
@@ -237,7 +237,7 @@ div#amplitude-right div.song.amplitude-song-container.amplitude-play-pause.ampli
 }
 
 div#control-container {
-  margin-top: 40px;
+  margin-top: 20px;
   margin-bottom: 20px;
 }
 
@@ -283,6 +283,7 @@ div#control-container div.amplitude-mute {
   cursor: pointer;
   width: 25px;
   height: 19px;
+  margin-left: 20px;
   float: left;
 }
 
@@ -390,7 +391,7 @@ div#large-player-controls div.large-player-controls-container {
   text-align: center;
 }
 
-div#large-player-controls div.large-player-controls-container div#shuffle-container_large-player {
+div#large-player-controls div.large-player-controls-container div#shuffle_container_large_player {
   display: inline-block;
   width: 24px;
   height: 24px;
@@ -400,15 +401,15 @@ div#large-player-controls div.large-player-controls-container div#shuffle-contai
   margin-left: -16px;
 }
 
-div#large-player-controls div.large-player-controls-container div#shuffle-container_large-player:hover {
+div#large-player-controls div.large-player-controls-container div#shuffle_container_large_player:hover {
   opacity: .5;
 }
 
-div#large-player-controls div.large-player-controls-container div#shuffle-container_large-player.amplitude-shuffle-off {
+div#large-player-controls div.large-player-controls-container div#shuffle_container_large_player.amplitude-shuffle-off {
   background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/shuffle-disabled.svg") no-repeat;
 }
 
-div#large-player-controls div.large-player-controls-container div#shuffle-container_large-player.amplitude-shuffle-on {
+div#large-player-controls div.large-player-controls-container div#shuffle_container_large_player.amplitude-shuffle-on {
   background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/shuffle-enabled.svg") no-repeat;
 }
 
@@ -432,7 +433,6 @@ div#large-player-controls div.large-player-controls-container div#play-pause-bla
   height: 60px;
   cursor: pointer;
   vertical-align: middle;
-  margin-right: 10px;
 }
 
 div#large-player-controls div.large-player-controls-container div#play-pause-black:hover {
@@ -462,7 +462,7 @@ div#large-player-controls div.large-player-controls-container div#next-black:hov
   opacity: .5;
 }
 
-div#large-player-controls div.large-player-controls-container div#repeat-container_large-player {
+div#large-player-controls div.large-player-controls-container div#repeat_container_large_player {
   display: inline-block;
   width: 24px;
   height: 24px;
@@ -470,15 +470,15 @@ div#large-player-controls div.large-player-controls-container div#repeat-contain
   vertical-align: middle;
 }
 
-div#large-player-controls div.large-player-controls-container div#repeat-container_large-player:hover {
+div#large-player-controls div.large-player-controls-container div#repeat_container_large_player:hover {
   opacity: .5;
 }
 
-div#large-player-controls div.large-player-controls-container div#repeat-container_large-player.amplitude-repeat-off {
+div#large-player-controls div.large-player-controls-container div#repeat_container_large_player.amplitude-repeat-off {
   background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/repeat-disabled.svg") no-repeat;
 }
 
-div#large-player-controls div.large-player-controls-container div#repeat-container_large-player.amplitude-repeat-on {
+div#large-player-controls div.large-player-controls-container div#repeat_container_large_player.amplitude-repeat-on {
   background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/repeat-enabled.svg") no-repeat;
 }
 

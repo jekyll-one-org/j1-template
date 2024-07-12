@@ -181,22 +181,22 @@ amplitude::3e_compact[role="mt-3 mb-5"]
 lorem:sentences[5]
 
 [role="mt-4"]
-=== Three Elements
-
-lorem:sentences[5]
-
-.ƎElements · Earth, Wind & Fire Show Band
-amplitude::3e_large[role="mt-3 mb-5"]
-
-lorem:sentences[3]
-
-[role="mt-4"]
 === Royalty Free Music
 
 lorem:sentences[5]
 
 .DISCO · Royalty Free Music
 amplitude::free_disco_large[role="mt-3 mb-5"]
+
+lorem:sentences[3]
+
+[role="mt-4"]
+=== Three Elements
+
+lorem:sentences[5]
+
+.ƎElements · Earth, Wind & Fire Show Band
+amplitude::3e_large[role="mt-3 mb-5"]
 
 [role="mb-8"]
 lorem:sentences[3]

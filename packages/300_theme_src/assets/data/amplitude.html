@@ -98,6 +98,8 @@ amplitude_defaults: {{amplitude_defaults | debug}}
       {% assign playlist_controls = amplitude_defaults.player.playlist.controls %}
     {% endif %}
 
+    {% comment %} unused
+    ----------------------------------------------------------------------------
     {% unless player.playlist.scrollbar %}
       {% assign player_scrollbar_class = 'hide-scrollbar' %}
     {% else %}
@@ -107,7 +109,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
         {% assign player_scrollbar_class = '' %}
       {% endunless %}
     {% endunless %}
-
+    ---------------------------------------------------------------------------- {% endcomment %}
     {% if player.playlist.audio_info %}
       {% assign player_audio_info = player.playlist.audio_info %}
     {% else %}
@@ -259,7 +261,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
             </div> <!-- END playlist controls -->
             {% endif %}
 
-            <div class="compact-player-title-list">
+            <div id="compact_player_title_list_{{player_playlist}}" class="compact-player-title-list">
               {% for item in playlist_items %} {% if item.enabled %}
               <div class="song amplitude-song-container amplitude-play-pause"
                 data-amplitude-song-index="{{forloop.index0}}"
@@ -339,9 +341,17 @@ amplitude_defaults: {{amplitude_defaults | debug}}
               </div> <!-- END control-container compact-player -->
 
               <div class="compact-player-volume-container">
-                <img src="/assets/theme/j1/modules/amplitudejs/icons/black-player/volume.svg" alt="volume icon">
+                <div class="amplitude-mute amplitude-not-muted"></div>
                 <input type="range" class="amplitude-volume-slider compact-player-volume-slider" step="1" aria-label="Amplitude Volume Slider">
               </div> <!-- END volume-container -->
+
+              <!-- div class="compact-player-volume-container">
+                <div class="volume-controls">
+                  <div class="amplitude-mute amplitude-not-muted"></div>
+                  <input type="range" class="amplitude-volume-slider compact-player-volume-slider" step="1" aria-label="Amplitude Volume Slider">
+                </div>
+              </div --> <!-- END volume-container -->
+
 
             </div> <!-- END player controls -->
 
@@ -393,17 +403,16 @@ amplitude_defaults: {{amplitude_defaults | debug}}
             <div id="large-player-controls">
               <div class="large-player-controls-container" data-amplitude-playlist="{{player_playlist}}">
                 <div>
-                  <div id="shuffle-container_large-player"     class="amplitude-shuffle amplitude-shuffle-off" data-amplitude-playlist="{{player_playlist}}"></div>
+                  <div id="shuffle_container_large_player"     class="amplitude-shuffle amplitude-shuffle-off" data-amplitude-playlist="{{player_playlist}}"></div>
                   <div id="previous-black"    class="amplitude-prev" data-amplitude-playlist="{{player_playlist}}"></div>
                   <div id="play-pause-black"  class="amplitude-play-pause amplitude-paused" data-amplitude-playlist="{{player_playlist}}"></div>
                   <div id="next-black"        class="amplitude-next" data-amplitude-playlist="{{player_playlist}}"></div>
-                  <div id="repeat-container_large-player"      class="amplitude-repeat amplitude-repeat-off" data-amplitude-playlist="{{player_playlist}}"></div>
+                  <div id="repeat_container_large_player"      class="amplitude-repeat amplitude-repeat-off" data-amplitude-playlist="{{player_playlist}}"></div>
                 </div>
                 <div class="compact-player-volume-container">
                   <div class="volume-controls">
                     <div class="amplitude-mute amplitude-not-muted"></div>
                     <input type="range" class="amplitude-volume-slider" step="1" aria-label="Amplitude Volume Slider">
-                    <div class="ms-range-fix"></div>
                   </div>
                 </div>
               </div>
@@ -446,12 +455,13 @@ amplitude_defaults: {{amplitude_defaults | debug}}
             <!-- END Large Player|Left Side -->
 
             <!-- Large Player|Right Side (playlist) -->
-            <div id="amplitude-right" class="{{player_scrollbar_class}}" data-amplitude-playlist="{{player_playlist}}">
-              <div id="playlist-header" class="player-expanded">Playlist</div>
+            <!-- div id="amplitude-right" class="{{player_scrollbar_class}}" data-amplitude-playlist="{{player_playlist}}" -->
+            <div id="amplitude-right" class="hide-scrollbar" data-amplitude-playlist="{{player_playlist}}">
+              <div id="playlist_header_{{player_id}}" class="large-player-playlist-header">Playlist</div>
 
               <!-- jadams, 2024-07-06: controls configurable in player -->
               {% if playlist_controls %}
-              <div class="playlist-screen-controls compact-player">
+              <div class="playlist-screen-controls large-player">
                 <div class="playlist-screen-meta-container">
                   <span class="song-name" data-amplitude-playlist="{{player_playlist}}" data-amplitude-song-info="name"></span>
                   <div class="song-artist-album">
@@ -466,7 +476,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
               </div> <!-- END playlist controls -->
               {% endif %}
 
-              <div class="title-list">
+              <div id="large_player_title_list_{{player_playlist}}" class="large-player-title-list">
                 {% for item in playlist_items %}{% if item.enabled %}
                 <!-- Audio item -->
                 <div class="song amplitude-song-container amplitude-play-pause"

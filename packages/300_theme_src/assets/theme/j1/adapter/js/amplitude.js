@@ -120,6 +120,7 @@ j1.adapter.amplitude = ((j1, window) => {
   var playerID;
   var playerType;
   var playListTitle;
+  var playListName;
   var amplitudePlayerState;
   var amplitudeDefaults;
   var amplitudeSettings;
@@ -505,6 +506,7 @@ j1.adapter.amplitude = ((j1, window) => {
             playerID      = '{{player.id}}';
             playerType    = '{{player.type}}';
             playList      = '{{player.playlist}}';
+            playListName  = '{{player.playlist.name}}'
             playListTitle = '{{player.playlist.title}}';
 
             logger.debug('\n' + 'set playlist {{player.playlist}} on id #{{player_id}} with title: ' + playListTitle);
@@ -574,27 +576,45 @@ j1.adapter.amplitude = ((j1, window) => {
                     //
                     if (document.getElementById(playerID) !== null) {
 
+                      // show|hide scrollbar in playlist
+                      // -------------------------------------------------------
+                      const songsInPlaylist = Amplitude.getSongsInPlaylist(playListName);
+
+                      if (songsInPlaylist.length <= 8) {
+                        const titleListCompactPlayer = document.getElementById('compact_player_title_list_' + playListName);
+                        titleListCompactPlayer.classList.add('hide-scrollbar');
+                      }
+
                       // show|hide playlist
                       // -------------------------------------------------------
 
                       // show playlist
                       var showPlaylist = document.getElementById("show_playlist_{{player.id}}");
 
-                      showPlaylist.addEventListener('click', function(event) {
-                        var playlistScreen = document.getElementById("playlist_screen_{{player.id}}");
+                        showPlaylist.addEventListener('click', function(event) {
 
-                        playlistScreen.classList.remove('slide-out-top');
-                        playlistScreen.classList.add('slide-in-top');
-                        playlistScreen.style.display = "block";
+                          // scroll to player top position
+                          const srollOffset       = -130;
+                          // const targetDiv         = document.getElementById('show_playlist_' + playListName + '_compact');
+                          const targetDiv         = document.getElementById("show_playlist_{{player.id}}");
+                          const targetDivPosition = targetDiv.offsetParent.offsetTop;
+                          window.scrollTo(0, targetDivPosition + srollOffset);
 
-                        // disable scrolling (if window viewport >= BS Medium and above)
-                        if (window.innerWidth >= 720) {
-                          if ($('body').hasClass('stop-scrolling')) {
-                            return false;
-                          } else {
-                            $('body').addClass('stop-scrolling');
+                          // open playlist
+                          var playlistScreen = document.getElementById("playlist_screen_{{player.id}}");
+
+                          playlistScreen.classList.remove('slide-out-top');
+                          playlistScreen.classList.add('slide-in-top');
+                          playlistScreen.style.display = "block";
+
+                          // disable scrolling (if window viewport >= BS Medium and above)
+                          if (window.innerWidth >= 720) {
+                            if ($('body').hasClass('stop-scrolling')) {
+                              return false;
+                            } else {
+                              $('body').addClass('stop-scrolling');
+                            }
                           }
-                        }
                       }); // END EventListener 'click' (compact player|show playlist)
 
                       // hide playlist
@@ -661,23 +681,52 @@ j1.adapter.amplitude = ((j1, window) => {
                       });
 
                       // click on shuffle icon
-                      document.getElementById('shuffle-container_large-player').addEventListener('click', function(event) {
-                        var shuffleState = (document.getElementById('shuffle-container_large-player').className.includes('amplitude-shuffle-on')) ? true : false;
+                      document.getElementById('shuffle_container_large_player').addEventListener('click', function(event) {
+                        var shuffleState = (document.getElementById('shuffle_container_large_player').className.includes('amplitude-shuffle-on')) ? true : false;
                         Amplitude.setShuffle(shuffleState)
                       });
 
                       // click on repeat icon
-                      document.getElementById('repeat-container_large-player').addEventListener('click', function(event) {
-                        var repeatState = (document.getElementById('repeat-container_large-player').className.includes('amplitude-repeat-on')) ? true : false;
+                      document.getElementById('repeat_container_large_player').addEventListener('click', function(event) {
+                        var repeatState = (document.getElementById('repeat_container_large_player').className.includes('amplitude-repeat-on')) ? true : false;
                         Amplitude.setRepeat(repeatState)
                       });
 
-                      // enable|disable scrolling on playlist (player|right)
+                      // enable|disable scrolling on playlist
                       // -------------------------------------------------------
                       if (document.getElementById('amplitude-right') !== null) {
 
+                        // show|hide scrollbar in playlist
+                        // -------------------------------------------------------
+                        const songsInPlaylist = Amplitude.getSongsInPlaylist(playListName);
+
+                        if (songsInPlaylist.length <= 8) {
+                          const titleListLargePlayer = document.getElementById('large_player_title_list_' + playListName);
+                          titleListLargePlayer.classList.add('hide-scrollbar');
+                        }
+
+                        // scroll to player top position
+                        // -------------------------------------------------------
+                        var playlistHeader = document.getElementById("playlist_header_{{player.id}}");
+
+                        playlistHeader.addEventListener('click', function(event) {
+                          var srollOffset;
+
+                          if (window.innerWidth >= 720) {
+                            srollOffset = -130;
+                          } else {
+                            srollOffset = -30;
+                          }
+
+                          const targetDiv         = document.getElementById("playlist_header_{{player.id}}");
+                          const targetDivPosition = targetDiv.offsetTop;
+
+                          window.scrollTo(0, targetDivPosition + srollOffset);
+                        }); // END EventListener 'click'
+
                         // disable scrolling (if window viewport >= BS Medium and above)
                         document.getElementById('amplitude-right').addEventListener('mouseenter', function() {
+                        // document.getElementById('large_player_title_list_' + playListName).addEventListener('mouseenter', function() {
                           if (window.innerWidth >= 720) {
                             if ($('body').hasClass('stop-scrolling')) {
                               return false;
@@ -689,6 +738,7 @@ j1.adapter.amplitude = ((j1, window) => {
 
                         // enable scrolling
                         document.getElementById('amplitude-right').addEventListener('mouseleave', function() {
+                        // document.getElementById('large_player_title_list_' + playListName).addEventListener('mouseleave', function() {
                           if ($('body').hasClass('stop-scrolling')) {
                             $('body').removeClass('stop-scrolling');
                           }
