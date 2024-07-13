@@ -143,8 +143,6 @@ amplitude_defaults: {{amplitude_defaults | debug}}
       {% when 'mini' %}{% if player_enabled %}
       <!-- START create player instance on ID: {{player_id}} of type: {{player_type}} -->
       <div id="{{player_id}}" class="mini-player">
-
-        <!-- mini-player container -->
         <div class="mini-player-container">
 
           <!-- progress bar -->
@@ -152,72 +150,76 @@ amplitude_defaults: {{amplitude_defaults | debug}}
             class="mini-player-progress amplitude-song-played-progress"
             data-amplitude-playlist="{{player_playlist}}">
           </progress>
-          <!-- END progress bar -->
 
+          <!-- playlist, collect a SINGLE item (title)  -->
+          {% for item in playlist_items %}{% if item.enabled %}{% if forloop.index0 == 1 %}{% break %}{% endif %}
           <!-- time container -->
           <div class="time-container">
             <span class="current-time">
               <span
                 class="amplitude-current-minutes"
+                data-amplitude-song-index="{{forloop.index0}}"
                 data-amplitude-playlist="{{player_playlist}}">
               </span>
               :
               <span
                 class="amplitude-current-seconds"
+                data-amplitude-song-index="{{forloop.index0}}"
                 data-amplitude-playlist="{{player_playlist}}">
               </span>
             </span>
             <span class="duration">
               <span
                 class="amplitude-duration-minutes"
+                data-amplitude-song-index="{{forloop.index0}}"
                 data-amplitude-playlist="{{player_playlist}}">
               </span>
               :
               <span
                 class="amplitude-duration-seconds"
+                data-amplitude-song-index="{{forloop.index0}}"
                 data-amplitude-playlist="{{player_playlist}}">
               </span>
             </span>
-          </div>
-          <!-- END time container -->
+          </div> <!-- END time container -->
 
-          <!-- control container -->
-          <div class="mini-player control-container">
-
+          <!-- controls -->
+          <div class="mini-player control-container" data-amplitude-playlist="{{player_playlist}}">
             <div id="play-pause" class="amplitude-play-pause" data-amplitude-playlist="{{player_playlist}}"></div>
+            <div class="mini-player-meta-container">
 
-            <!-- meta (data) container -->
-            <div class="meta-container mini-player">
               <span
                 class="song-name"
                 data-amplitude-playlist="{{player_playlist}}"
-                data-amplitude-song-info="name">
+                data-amplitude-song-info="name"
+                style="margin-bottom: 5px">
               </span>
-              <div class="audio-artist-album">
-                <span
-                  data-amplitude-playlist="{{player_playlist}}"
-                  data-amplitude-song-info="artist">
-                </span>
-                <span
-                  data-amplitude-playlist="{{player_playlist}}"
-                  data-amplitude-song-info="album">
-                </span>
-              </div>
-            </div> <!-- END meta container -->
 
-            <!-- volume container -->
+              <span
+                class="artist"
+                data-amplitude-playlist="{{player_playlist}}"
+                data-amplitude-song-info="artist">
+              </span>
+
+              <span
+                class="album"
+                data-amplitude-playlist="{{player_playlist}}"
+                data-amplitude-song-info="album">
+              </span>
+
+            </div> <!-- END meta container -->
+            {% endif %}{% endfor %}
+
+            <!-- volume control (global, all player) -->
+            <!-- jadams, TODO: make range STEPS configurable -->
             <div class="mini-player-volume-container">
               <img src="/assets/theme/j1/modules/amplitudejs/icons/black-player/volume.svg" alt="Volume Icon">
-              <!-- jadams, TODO: make range STEPS configurable -->
               <input type="range" class="mini-player amplitude-volume-slider" step="1" aria-label="Amplitude Volume Slider">
             </div>
-            <!-- END volume container -->
 
-          </div>
-          <!-- END control container  -->
+          </div> <!-- END controls  -->
 
-        </div>
-        <!-- END mini-player container -->
+        </div> <!-- END player -->
 
       </div>
       <!-- END create player instance on ID: {{player_id}} -->
@@ -262,11 +264,11 @@ amplitude_defaults: {{amplitude_defaults | debug}}
             <div id="compact_player_title_list_{{player_playlist}}" class="compact-player-title-list">
               {% for item in playlist_items %} {% if item.enabled %}
               <div class="song amplitude-song-container amplitude-play-pause"
+                data-amplitude-song-index="{{forloop.index0}}"
                 data-amplitude-playlist="{{player_playlist}}">
 
                 <span class="song-number-now-playing">
-                  <span class="title-number">
-                    {{forloop.index}}
+                  <span class="title-number">{{forloop.index}}
                     <img class="now-playing" src="/assets/theme/j1/modules/amplitudejs/icons/black-player/now-playing.svg" alt="now-playing">
                   </span>
                 </span>
@@ -343,57 +345,27 @@ amplitude_defaults: {{amplitude_defaults | debug}}
                 <input type="range" class="amplitude-volume-slider compact-player-volume-slider" step="1" aria-label="Amplitude Volume Slider">
               </div> <!-- END volume-container -->
 
+              <!-- div class="compact-player-volume-container">
+                <div class="volume-controls">
+                  <div class="amplitude-mute amplitude-not-muted"></div>
+                  <input type="range" class="amplitude-volume-slider compact-player-volume-slider" step="1" aria-label="Amplitude Volume Slider">
+                </div>
+              </div --> <!-- END volume-container -->
+
+
             </div> <!-- END player controls -->
 
             <div class="player-bottom">
-
-              <!-- div class="time-container-compact-player">
+              <div class="time-container-compact-player">
                 <span class="amplitude-current-time time-container" data-amplitude-playlist="{{player_playlist}}"></span>
                 <span class="amplitude-duration-time time-container" data-amplitude-playlist="{{player_playlist}}"></span>
-              </div --> <!-- END time-container -->
+              </div> <!-- END time-container -->
 
-              <!-- time container -->
-              <div class="time-container">
-                <span class="current-time">
-                  <span
-                    class="amplitude-current-minutes"
-                    data-amplitude-playlist="{{player_playlist}}">
-                  </span>
-                  :
-                  <span
-                    class="amplitude-current-seconds"
-                    data-amplitude-playlist="{{player_playlist}}">
-                  </span>
-                </span>
-                <span class="duration">
-                  <span
-                    class="amplitude-duration-minutes"
-                    data-amplitude-playlist="{{player_playlist}}">
-                  </span>
-                  :
-                  <span
-                    class="amplitude-duration-seconds"
-                    data-amplitude-playlist="{{player_playlist}}">
-                  </span>
-                </span>
-              </div>
-              <!-- END time container -->
-
-              <div class="meta-container compact-player">
-                <span
-                  class="song-name"
-                  data-amplitude-playlist="{{player_playlist}}"
-                  data-amplitude-song-info="name">
-                </span>
+              <div class="meta-container">
+                <span class="song-name" data-amplitude-playlist="{{player_playlist}}" data-amplitude-song-info="name" style="margin-bottom: 5px"></span>
                 <div class="audio-artist-album">
-                  <span
-                    data-amplitude-playlist="{{player_playlist}}"
-                    data-amplitude-song-info="artist">
-                  </span>
-                  <span
-                    data-amplitude-playlist="{{player_playlist}}"
-                    data-amplitude-song-info="album">
-                  </span>
+                  <span data-amplitude-playlist="{{player_playlist}}" data-amplitude-song-info="artist"></span>
+                  <span data-amplitude-playlist="{{player_playlist}}" data-amplitude-song-info="album"></span>
                 </div>
               </div> <!-- END meta container -->
             </div> <!-- END player bottom -->
@@ -457,54 +429,16 @@ amplitude_defaults: {{amplitude_defaults | debug}}
           <!-- END large-player control-container -->
 
           <div class="player-bottom">
-
-            <!-- div class="time-container-compact-player">
+            <div class="time-container-compact-player">
               <span class="amplitude-current-time time-container" data-amplitude-playlist="{{player_playlist}}"></span>
               <span class="amplitude-duration-time time-container" data-amplitude-playlist="{{player_playlist}}"></span>
-            </div --> <!-- END time-container -->
+            </div> <!-- END time-container -->
 
-            <!-- time container -->
-            <div class="time-container">
-              <span class="current-time">
-                <span
-                  class="amplitude-current-minutes"
-                  data-amplitude-playlist="{{player_playlist}}">
-                </span>
-                :
-                <span
-                  class="amplitude-current-seconds"
-                  data-amplitude-playlist="{{player_playlist}}">
-                </span>
-              </span>
-              <span class="duration">
-                <span
-                  class="amplitude-duration-minutes"
-                  data-amplitude-playlist="{{player_playlist}}">
-                </span>
-                :
-                <span
-                  class="amplitude-duration-seconds"
-                  data-amplitude-playlist="{{player_playlist}}">
-                </span>
-              </span>
-            </div>
-            <!-- END time container -->
-
-            <div class="meta-container large-player">
-              <span
-                class="song-name"
-                data-amplitude-playlist="{{player_playlist}}"
-                data-amplitude-song-info="name">
-              </span>
+            <div class="meta-container">
+              <span class="song-name" data-amplitude-playlist="{{player_playlist}}" data-amplitude-song-info="name" style="margin-bottom: 5px"></span>
               <div class="audio-artist-album">
-                <span
-                  data-amplitude-playlist="{{player_playlist}}"
-                  data-amplitude-song-info="artist">
-                </span>
-                <span
-                  data-amplitude-playlist="{{player_playlist}}"
-                  data-amplitude-song-info="album">
-                </span>
+                <span data-amplitude-playlist="{{player_playlist}}" data-amplitude-song-info="artist"></span>
+                <span data-amplitude-playlist="{{player_playlist}}" data-amplitude-song-info="album"></span>
               </div>
             </div> <!-- END meta container -->
           </div> <!-- END player bottom -->
@@ -517,7 +451,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
         <!-- large player container -->
         <div id="large-player-container" class="mb-5">
           <!-- Player -->
-          <div id="large-player" class="large-player">
+          <div id="large-player">
 
             <!-- Large Player|Left Side -->
             <div id="amplitude-left">

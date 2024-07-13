@@ -672,13 +672,28 @@ j1.adapter.amplitude = ((j1, window) => {
                     if (document.getElementById('large-player-container')) {
 
                       // click on progress bar
-                      document.getElementById('large-player-progress').addEventListener('click', function(event) {
-                        var offset = this.getBoundingClientRect();
-                        var xpos   = event.pageX - offset.left;
+                      // -------------------------------------------------------
+                      var progressBars = document.getElementsByClassName("large-player-progress");
 
-                        Amplitude.setSongPlayedPercentage(
-                          (parseFloat(xpos)/parseFloat(this.offsetWidth))*100);
-                      });
+                      // add listeners to all progress bars found
+                      for (var i=0; i<progressBars.length; i++) {
+                        progressBars[i].addEventListener('click', function(event) {
+                          var offset = this.getBoundingClientRect();
+                          var xpos   = event.pageX - offset.left;
+
+                          Amplitude.setSongPlayedPercentage(
+                            (parseFloat(xpos)/parseFloat(this.offsetWidth))*100);
+                        });
+                      }
+
+                      // click on progress bar
+                      // document.getElementById('large_player_progress_{{player.id}}').addEventListener('click', function(event) {
+                      //   var offset = this.getBoundingClientRect();
+                      //   var xpos   = event.pageX - offset.left;
+                      //
+                      //   Amplitude.setSongPlayedPercentage(
+                      //     (parseFloat(xpos)/parseFloat(this.offsetWidth))*100);
+                      // });
 
                       // click on shuffle icon
                       document.getElementById('shuffle_container_large_player').addEventListener('click', function(event) {

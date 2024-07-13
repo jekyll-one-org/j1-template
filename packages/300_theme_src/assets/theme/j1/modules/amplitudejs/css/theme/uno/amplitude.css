@@ -71,6 +71,15 @@
 
 /* Styles
 # --------------------------------------------------------- */
+
+.amplitude-player {
+  max-width: max-content;
+}
+
+.audio-player-theme-uno {
+  max-width: max-content;
+}
+
 .player-title {
   text-rendering: optimizeLegibility;
   text-align: left;
@@ -81,7 +90,12 @@
   margin-bottom: .5rem;
 }
 
-.amplitude-time-container {
+
+/* 2. Components
+# --------------------------------------------------------- */
+
+/*
+.time-container {
   font-family: "Lato", sans-serif;
   font-weight: bold;
   font-size: 14px;
@@ -91,23 +105,35 @@
   width: calc(100% - 30px);
   margin-left: 20px;
 }
+*/
 
-.amplitude-time-container span.current-time {
-  float: left;
-  margin-left: 5px;
-}
-
-.amplitude-time-container span.duration {
-  float: right;
-  margin-right: 5px;
-}
-
-.amplitude-player {
-  max-width: max-content;
-}
-
-/* 2. Components
+/* time container
 # --------------------------------------------------------- */
+.time-container {
+  height: 40px;
+  padding: 10px 20px 10px 20px;
+  font-family: "Lato", sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  color: var(--ajs-theme-uno--white);
+}
+
+.time-container span.current-time {
+  float: left;
+  /* margin-left: 5px; */
+}
+
+.time-container span.duration {
+  float: right;
+  /* margin-right: 5px; */
+}
+
+/* control container
+# --------------------------------------------------------- */
+.control-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 
 .playlist-screen-controls {
   cursor: default;
@@ -122,11 +148,59 @@
   background-color: var(--ajs-theme-uno--black);
 }
 
-/* Slider (input type 'range')
+/* meta (data) container
+# --------------------------------------------------------- */
+.meta-container {
+  text-align: center;
+}
+
+.meta-container.mini-player {
+  float: left;
+  height: 110px;
+  margin-top: 5px;
+}
+
+.meta-container.compact-player {
+  height: 120px;
+}
+
+.meta-container.large-player {
+  height: 120px;
+}
+
+.meta-container .song-name {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 24px;
+  font-family: "Lato", sans-serif;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--ajs-theme-uno--gray-100);
+}
+
+.meta-container .audio-artist-album {
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "Lato", sans-serif;
+  white-space: nowrap;
+  /*
+  overflow: hidden;
+  text-overflow: ellipsis;
+  */
+  color: var(--ajs-theme-uno--blue-gray-300);
+}
+
+.meta-container .audio-artist-album span {
+  display: block;
+}
+
+
+/* input elements (range slider)
 # --------------------------------------------------------- */
 input[type=range].amplitude-volume-slider {
   -webkit-appearance: none; /* Disable default style for Chrome, Safari, Edge */
-  -moz-appearance: none; /* Disable default style for Firefox */
+  -moz-appearance: none;    /* Disable default style for Firefox */
   float: left;
   height: 1px;
   margin-top: 10px;
@@ -135,7 +209,13 @@ input[type=range].amplitude-volume-slider {
   background: transparent;
 }
 
-/* jadams: range slider styles (track|thumb)
+input[type=range].amplitude-volume-slider.compact-player-volume-slider {
+  width: calc(100% - 53px);
+  margin-top: -12px;
+  margin-left: 29px;
+}
+
+/* track|thumb
 # --------------------------------------------------------- */
 input[type=range].amplitude-volume-slider::-webkit-slider-runnable-track {
   width: 100%;
@@ -205,9 +285,11 @@ input[type=range].amplitude-volume-slider::-moz-range-thumb:hover {
   }
 }
 
-/* Progress-Bar
+/* progress bars
 # --------------------------------------------------------- */
-progress.amplitude-song-played-progress {
+progress.mini-player-progress,
+progress.compact-player-progress,
+progress.large-player-progress {
   display: block;
   cursor: pointer;
   width: 100%;
@@ -233,11 +315,18 @@ progress::-ms-fill {
 /* Small only
 # --------------------------------------------------------- */
 @media screen and (max-width: 39.9375em) {
-  progress.amplitude-song-played-progress {
+  progress.mini-player-progress,
+  progress.compact-player-progress,
+  progress.large-player-progress {
     width: 100%;
     height: 16px;
   }
 }
+
+
+/* MINI Player
+# --------------------------------------------------------- */
+
 
 /* COMPACT Player
 # --------------------------------------------------------- */
@@ -436,9 +525,9 @@ progress::-ms-fill {
 /* 1. Base
 # --------------------------------------------------------- */
 
-.large-player {
+/* .large-player {
   min-width: 475px;
-}
+} */
 
 .large-player-playlist-header {
   cursor: pointer;

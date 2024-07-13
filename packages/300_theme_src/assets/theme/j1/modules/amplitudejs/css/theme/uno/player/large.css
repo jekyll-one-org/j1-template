@@ -13,8 +13,9 @@
  # -----------------------------------------------------------------------------
 */
 
-div#large-player {
+div#large-player{
   display: flex;
+  min-width: 475px;
   max-width: fit-content;
   max-height: 780px;
   background: var(--ajs-theme-uno--white);
@@ -295,17 +296,20 @@ div#control-container div.amplitude-mute.amplitude-muted {
   background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/mute.svg") no-repeat;
 }
 
+/*
 div#time-container {
   margin-top: 30px;
 }
+*/
 
 /* clearfix */
-div#time-container:after {
+/* div#time-container:after {
   content: "";
   display: table;
   clear: both;
-}
+} */
 
+/*
 div#time-container span.current-time {
   color: var(--ajs-theme-uno--blue-gray);
   font-size: 14px;
@@ -323,20 +327,21 @@ div#time-container span.duration {
   width: 15%;
   text-align: center;
 }
+*/
 
-div#meta-container {
+/* div#meta-container {
   text-align: center;
   margin-top: 20px;
-}
+} */
 
 /* clearfix */
-div#meta-container:after {
+/* div#meta-container:after {
   content: "";
   display: table;
   clear: both;
-}
+} */
 
-div#meta-container span.song-name {
+/* div#meta-container span.song-name {
   display: block;
   color: var(--ajs-theme-uno--gray-100);
   font-size: 24px;
@@ -372,7 +377,7 @@ div#meta-container div.audio-artist-album {
 
 div#meta-container div.audio-artist-album span {
   display: block;
-}
+} */
 
 span.title-number {
   display: inline-flex;
@@ -383,7 +388,7 @@ span.title-number {
   letter-spacing: 0.5px;
 }
 
-div#large-player-controls {
+ div#large-player-controls {
   height: 65px;
 }
 
