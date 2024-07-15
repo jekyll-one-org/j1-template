@@ -297,10 +297,8 @@ amplitude_defaults: {{amplitude_defaults | debug}}
 
           </div> <!-- END list screen -->
 
-          <!-- START compact player -->
           <div class="compact-player">
 
-            <!-- START COMPACT player TOP -->
             <div id="show_playlist_{{player_id}}" class="compact-player-header show-playlist">
               Playlist
               <img class="compact-player-header-arrows" src="/assets/theme/j1/modules/amplitudejs/icons/black-player/down.svg" alt="Down Arrow">
@@ -320,65 +318,40 @@ amplitude_defaults: {{amplitude_defaults | debug}}
               class="compact-player-progress amplitude-song-played-progress"
               data-amplitude-playlist="{{player_playlist}}">
             </progress>
-            <!-- END COMPACT player TOP -->
 
-            <!-- START COMPACT player MIDDLE -->
-            <div class="player-left-middle">
-              <!-- START controls container -->
-              <div id="control-container">
-                <div id="large-player-controls">
-
-                  <div class="large-player-controls-container">
-                    <div
-                      id="shuffle_container_compact_player"
-                      class="amplitude-shuffle amplitude-shuffle-off"
-                      data-amplitude-playlist="{{player_playlist}}">
-                    </div>
-                    <div
-                      id="previous-black"
-                      class="amplitude-prev"
-                      data-amplitude-playlist="{{player_playlist}}">
-                    </div>
-                    <div
-                      id="play-pause-black"
-                      class="amplitude-play-pause amplitude-paused"
-                      data-amplitude-playlist="{{player_playlist}}">
-                    </div>
-                    <div
-                      id="next-black"
-                      class="amplitude-next"
-                      data-amplitude-playlist="{{player_playlist}}">
-                    </div>
-                    <div id="repeat_container_compact_player">
-              			  <div
-              				  id="compact_player_repeat"
-              				  class="amplitude-repeat"
-              				  data-amplitude-playlist="{{player_playlist}}">
-              			  </div>
-              			</div>
-
-                    <!-- START volume container -->
-                    <div class="compact-player-volume-container">
-                      <div class="volume-controls">
-                        <div class="amplitude-mute amplitude-not-muted"></div>
-                        <input
-                          type="range"
-                          class="amplitude-volume-slider"
-                          step="1"
-                          aria-label="Amplitude Volume Slider">
-                      </div>
-                    </div>
-                    <!-- END volume container -->
-                  </div>
-                  <!-- END large player controls container -->
+            <div class="compact-player-player-middle">
+              <div class="compact-player-control-container">
+                <div id="compact-player-shuffle-container" class="compact-player-shuffle-container">
+                  <div id="compact-player-shuffle" class="amplitude-shuffle amplitude-shuffle-off" data-amplitude-playlist="{{player_playlist}}"></div>
                 </div>
-                <!-- END controls container -->
-              </div>
-            </div>
-            <!-- END LARGE player left MIDDLE -->
+                <div class="compact-player-prev-container">
+                  <div class="amplitude-prev compact-player-control-previous" data-amplitude-playlist="{{player_playlist}}"></div>
+                </div>
+                <div class="compact-player-play-pause-container">
+                  <div class="amplitude-play-pause compact-player-control-play-pause" data-amplitude-playlist="{{player_playlist}}"></div>
+                </div>
+                <div id="next-container">
+                  <div id="next" class="amplitude-next" data-amplitude-playlist="{{player_playlist}}"></div>
+                </div>
+                <div id="repeat-container_compact-player">
+                  <div id="repeat_compact-player" class="amplitude-repeat" data-amplitude-playlist="{{player_playlist}}"></div>
+                </div>
+              </div> <!-- END control-container compact-player -->
 
-            <!-- START COMPACT player BOTTOM -->
+              <div class="compact-player-volume-container">
+                <div class="amplitude-mute amplitude-not-muted"></div>
+                <input type="range" class="amplitude-volume-slider compact-player-volume-slider" step="1" aria-label="Amplitude Volume Slider">
+              </div> <!-- END volume-container -->
+
+            </div> <!-- END player controls -->
+
             <div class="player-bottom">
+
+              <!-- div class="time-container-compact-player">
+                <span class="amplitude-current-time time-container" data-amplitude-playlist="{{player_playlist}}"></span>
+                <span class="amplitude-duration-time time-container" data-amplitude-playlist="{{player_playlist}}"></span>
+              </div --> <!-- END time-container -->
+
               <!-- time container -->
               <div class="time-container">
                 <span class="current-time">
@@ -406,7 +379,6 @@ amplitude_defaults: {{amplitude_defaults | debug}}
               </div>
               <!-- END time container -->
 
-              <!-- START meta container -->
               <div class="meta-container compact-player">
                 <span
                   class="song-name"
@@ -423,12 +395,9 @@ amplitude_defaults: {{amplitude_defaults | debug}}
                     data-amplitude-song-info="album">
                   </span>
                 </div>
-              </div>
-              <!-- END meta container -->
-            </div>
-            <!-- START COMPACT player BOTTOM -->
-          </div>
-          <!-- END compact player -->
+              </div> <!-- END meta container -->
+            </div> <!-- END player bottom -->
+          </div> <!-- END player screen -->
 
         </div> <!-- END compact player container -->
       </div>
@@ -466,48 +435,22 @@ amplitude_defaults: {{amplitude_defaults | debug}}
           <!-- START controls container -->
           <div id="control-container">
             <div id="large-player-controls">
-
-              <div class="large-player-controls-container">
-                <div
-                  id="shuffle_container_large_player"
-                  class="amplitude-shuffle amplitude-shuffle-off"
-                  data-amplitude-playlist="{{player_playlist}}">
+              <div class="large-player-controls-container" data-amplitude-playlist="{{player_playlist}}">
+                <div>
+                  <div id="shuffle_container_large_player"     class="amplitude-shuffle amplitude-shuffle-off" data-amplitude-playlist="{{player_playlist}}"></div>
+                  <div id="previous-black"    class="amplitude-prev" data-amplitude-playlist="{{player_playlist}}"></div>
+                  <div id="play-pause-black"  class="amplitude-play-pause amplitude-paused" data-amplitude-playlist="{{player_playlist}}"></div>
+                  <div id="next-black"        class="amplitude-next" data-amplitude-playlist="{{player_playlist}}"></div>
+                  <div id="repeat_container_large_player"      class="amplitude-repeat amplitude-repeat-off" data-amplitude-playlist="{{player_playlist}}"></div>
                 </div>
-                <div
-                  id="previous-black"
-                  class="amplitude-prev"
-                  data-amplitude-playlist="{{player_playlist}}">
-                </div>
-                <div
-                  id="play-pause-black"
-                  class="amplitude-play-pause amplitude-paused"
-                  data-amplitude-playlist="{{player_playlist}}">
-                </div>
-                <div
-                  id="next-black"
-                  class="amplitude-next"
-                  data-amplitude-playlist="{{player_playlist}}">
-                </div>
-                <div
-                  id="repeat_container_large_player"
-                  class="amplitude-repeat amplitude-repeat-off"
-                  data-amplitude-playlist="{{player_playlist}}">
-                </div>
-
-                <!-- START volume container -->
                 <div class="compact-player-volume-container">
                   <div class="volume-controls">
                     <div class="amplitude-mute amplitude-not-muted"></div>
-                    <input
-                      type="range"
-                      class="amplitude-volume-slider"
-                      step="1"
-                      aria-label="Amplitude Volume Slider">
+                    <input type="range" class="amplitude-volume-slider" step="1" aria-label="Amplitude Volume Slider">
                   </div>
                 </div>
-                <!-- END volume container -->
               </div>
-              <!-- END large player controls container -->
+              <!-- END large-player controls container -->
             </div>
             <!-- END controls container -->
           </div>
@@ -601,10 +544,9 @@ amplitude_defaults: {{amplitude_defaults | debug}}
               <div id="large_player_title_list_{{player_playlist}}" class="large-player-title-list">
                 {% for item in playlist_items %}{% if item.enabled %}
                 <!-- Audio item -->
-                <div
-                  class="song amplitude-song-container amplitude-play-pause"
-                  data-amplitude-song-index="{{forloop.index0}}"
-                  data-amplitude-playlist="{{player_playlist}}">
+                <div class="song amplitude-song-container amplitude-play-pause"
+                data-amplitude-song-index="{{forloop.index0}}"
+                data-amplitude-playlist="{{player_playlist}}">
 
                   <div class="song-now-playing-icon-container" data-amplitude-playlist="{{player_playlist}}">
                     <span class="title-number">{{forloop.index}}

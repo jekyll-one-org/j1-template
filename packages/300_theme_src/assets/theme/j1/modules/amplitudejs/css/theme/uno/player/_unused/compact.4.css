@@ -13,17 +13,12 @@
  # -----------------------------------------------------------------------------
 */
 
-div#compact_player_controls {
- height: 65px;
+.compact-player-container {
+  position: relative;
+  max-width: max-content;
+  /* min-height: 800px; */
+  overflow-y: clip;
 }
-
-div#compact_player_controls div.large-player-controls-container {
-  text-align: center;
-}
-
-
-
-
 
 div.compact-player-playlist {
   background-color: var(--ajs-theme-uno--black);

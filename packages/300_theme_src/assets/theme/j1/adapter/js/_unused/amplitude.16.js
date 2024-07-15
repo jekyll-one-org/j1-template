@@ -705,14 +705,14 @@ j1.adapter.amplitude = ((j1, window) => {
                       }
 
                       // click on shuffle icon
-                      document.getElementById('shuffle_container_compact_player').addEventListener('click', function(event) {
-                        var shuffleState = (document.getElementById('shuffle_container_compact_player').className.includes('amplitude-shuffle-on')) ? true : false;
+                      document.getElementById('compact_player_shuffle_container').addEventListener('click', function(event) {
+                        var shuffleState = (document.getElementById('compact_player_shuffle').className.includes('amplitude-shuffle-on')) ? true : false;
                         Amplitude.setShuffle(shuffleState)
                       });
 
                       // click on repeat icon
-                      document.getElementById('repeat_container_compact_player').addEventListener('click', function(event) {
-                        var repeatState = (document.getElementById('repeat_container_compact_player').className.includes('amplitude-repeat-on')) ? true : false;
+                      document.getElementById('compact_player_repeat_container').addEventListener('click', function(event) {
+                        var repeatState = (document.getElementById('compact_player_repeat').className.includes('amplitude-repeat-on')) ? true : false;
                         Amplitude.setRepeat(repeatState)
                       });
 

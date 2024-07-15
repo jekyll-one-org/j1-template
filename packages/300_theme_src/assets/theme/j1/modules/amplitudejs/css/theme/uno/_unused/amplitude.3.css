@@ -333,12 +333,6 @@ progress::-ms-fill {
   max-width: 475px;
 }
 
-.compact-player-container {
-  position: relative;
-  max-width: max-content;
-  overflow-y: clip;
-}
-
 .compact-player-title-list {
   display: block;
   height: 550px;
