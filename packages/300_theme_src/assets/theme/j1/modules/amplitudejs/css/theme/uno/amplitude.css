@@ -150,11 +150,13 @@
   text-align: center;
 }
 
+/*
 .meta-container.mini-player {
   float: left;
   height: 110px;
   margin-top: 5px;
 }
+*/
 
 .meta-container.compact-player {
   height: 120px;
@@ -333,6 +335,9 @@ progress::-ms-fill {
   max-width: 475px;
 }
 
+/* 2. Components
+# --------------------------------------------------------- */
+
 .compact-player-container {
   position: relative;
   max-width: max-content;
@@ -434,9 +439,16 @@ progress::-ms-fill {
   margin-top: 20px;
 }
 
-/* 2. Components
-# --------------------------------------------------------- */
+.compact-player-header-arrows {
+  position: absolute;
+  top: 23px;
+  left: 15px;
+}
 
+.playlist-screen-meta-container {
+  width: calc(100% - 123px);
+  float: left;
+}
 /* 3. Layout
 # --------------------------------------------------------- */
 
@@ -564,17 +576,6 @@ progress::-ms-fill {
 
 /* 2. Components
 # --------------------------------------------------------- */
-
-.compact-player-header-arrows {
-  position: absolute;
-  top: 23px;
-  left: 15px;
-}
-
-.playlist-screen-meta-container {
-  width: calc(100% - 123px);
-  float: left;
-}
 
 /* 3. Layout
 # --------------------------------------------------------- */

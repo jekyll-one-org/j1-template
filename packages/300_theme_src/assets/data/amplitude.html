@@ -144,7 +144,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
       <!-- START create player instance on ID: {{player_id}} of type: {{player_type}} -->
       <div id="{{player_id}}" class="mini-player">
 
-        <!-- mini-player container -->
+        <!-- mini player container -->
         <div class="mini-player-container">
 
           <!-- progress bar -->
@@ -183,38 +183,50 @@ amplitude_defaults: {{amplitude_defaults | debug}}
 
           <!-- control container -->
           <div class="mini-player control-container">
-
-            <div id="play-pause" class="amplitude-play-pause" data-amplitude-playlist="{{player_playlist}}"></div>
-
-            <!-- meta (data) container -->
-            <div class="meta-container mini-player">
-              <span
-                class="song-name"
-                data-amplitude-playlist="{{player_playlist}}"
-                data-amplitude-song-info="name">
-              </span>
-              <div class="audio-artist-album">
-                <span
-                  data-amplitude-playlist="{{player_playlist}}"
-                  data-amplitude-song-info="artist">
-                </span>
-                <span
-                  data-amplitude-playlist="{{player_playlist}}"
-                  data-amplitude-song-info="album">
-                </span>
-              </div>
-            </div> <!-- END meta container -->
-
-            <!-- volume container -->
-            <div class="mini-player-volume-container">
-              <img src="/assets/theme/j1/modules/amplitudejs/icons/black-player/volume.svg" alt="Volume Icon">
-              <!-- jadams, TODO: make range STEPS configurable -->
-              <input type="range" class="mini-player amplitude-volume-slider" step="1" aria-label="Amplitude Volume Slider">
+            <div
+              id="next-black"
+              class="amplitude-next"
+              data-amplitude-playlist="{{player_playlist}}">
             </div>
-            <!-- END volume container -->
-
+            <div
+              id="previous-black"
+              class="amplitude-prev"
+              data-amplitude-playlist="{{player_playlist}}">
+            </div>
+            <div
+              id="play-pause"
+              class="amplitude-play-pause"
+              data-amplitude-playlist="{{player_playlist}}">
+            </div>
           </div>
           <!-- END control container  -->
+
+          <!-- meta (data) container -->
+          <div class="mini-player meta-container">
+            <span
+              class="song-name"
+              data-amplitude-playlist="{{player_playlist}}"
+              data-amplitude-song-info="name">
+            </span>
+            <div class="audio-artist-album">
+              <span
+                data-amplitude-playlist="{{player_playlist}}"
+                data-amplitude-song-info="artist">
+              </span>
+              <span
+                data-amplitude-playlist="{{player_playlist}}"
+                data-amplitude-song-info="album">
+              </span>
+            </div>
+          </div> <!-- END meta container -->
+
+          <!-- volume container -->
+          <div class="mini-player volume-container">
+            <img src="/assets/theme/j1/modules/amplitudejs/icons/black-player/volume.svg" alt="Volume Icon">
+            <!-- jadams, TODO: make range STEPS configurable -->
+            <input type="range" class="mini-player amplitude-volume-slider" step="1" aria-label="Amplitude Volume Slider">
+          </div>
+          <!-- END volume container -->
 
         </div>
         <!-- END mini-player container -->
