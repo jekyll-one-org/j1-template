@@ -720,10 +720,9 @@ j1.adapter.amplitude = ((j1, window) => {
                     {% endif %}
 
                     {% if player.id contains 'large' %}
-                    // ---------------------------------------------------------
-                    // START large player specific UI events
+                    // START large player UI events
                     //
-                    if (document.getElementById('large-player-container')) {
+                    if (document.getElementById(playerID) !== null) {
 
                       // click on progress bar
                       // -------------------------------------------------------

@@ -13,13 +13,76 @@
  # -----------------------------------------------------------------------------
 */
 
-div#large-player{
+/* 1. Base
+# --------------------------------------------------------- */
+
+.large-player {
+  -webkit-font-smoothing: antialiased; /* Chrome, Safari, Edge */
+}
+
+.large-player-container {
   display: flex;
   min-width: 475px;
   max-width: fit-content;
   max-height: 780px;
   background: var(--ajs-theme-uno--white);
 }
+
+.player-left-top img {
+  max-height: 475px;
+  max-width: 475px;
+}
+
+.large-player-playlist-header {
+  cursor: pointer;
+  top: 0;
+  position: sticky;
+  width: 100%;
+  padding: 15px;
+  font-family: "Lato", sans-serif;
+  text-align: center;
+  color: var(--ajs-theme-uno--white);
+  background-color: var(--ajs-theme-uno--dark-silver);
+}
+
+.large-player-title-list {
+  display: block;
+  max-height: 600px;
+  overflow-y: scroll;
+}
+
+.meta-container.large-player {
+  height: 120px;
+}
+
+.playlist-screen-meta-container {
+  width: calc(100% - 123px);
+  float: left;
+}
+
+.playlist-screen-controls {
+  cursor: default;
+  top: 0;
+  position: sticky;
+  height: 80px;
+  padding: 15px;
+  max-width: -webkit-fill-available;
+  max-width: -moz-available;
+  font-family: "Lato", sans-serif;
+  color: var(--ajs-theme-uno--white);
+  background-color: var(--ajs-theme-uno--black);
+}
+
+/* 2. Components
+# --------------------------------------------------------- */
+
+/* div#large-player {
+  display: flex;
+  min-width: 475px;
+  max-width: fit-content;
+  max-height: 780px;
+  background: var(--ajs-theme-uno--white);
+} */
 
 div#large_player_left {
   display: flex;
@@ -181,10 +244,13 @@ div.playlist-screen-controls
 div.playlist-screen-meta-container
 span.song-name {
   font-family: "Lato", sans-serif;
-  font-size: 22px;
+  font-size: 18px;
   letter-spacing: 0.5px;
   line-height: 24px;
   margin-left: 38px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   color: var(--ajs-theme-uno--white);
 }
 
@@ -438,7 +504,7 @@ div.large-player-controls-container
 div#next-black {
   display: inline-block;
   height: 24px;
-  width: 25px;
+  width: 24px;
   cursor: pointer;
   vertical-align: middle;
   margin-right: 25px;
@@ -480,10 +546,20 @@ div#repeat_container_large_player.amplitude-repeat-on {
   background: url("/assets/theme/j1/modules/amplitudejs/icons/black-player/repeat-enabled.svg") no-repeat;
 }
 
+/* 3. Layout
+# --------------------------------------------------------- */
+
 /* Small only
 # --------------------------------------------------------- */
 @media screen and (max-width: 39.9375em) {
-  div#large-player {
+  .lage-player {
+    max-width: -webkit-fill-available; /* Chrome, Safari, Edge */
+    max-width: -moz-available; /* Firefox */
+  }
+}
+
+@media screen and (max-width: 39.9375em) {
+  div.large-player-container {
     flex-direction: column;
     max-height: -webkit-fill-available;
     max-width: -webkit-fill-available;
@@ -491,20 +567,41 @@ div#repeat_container_large_player.amplitude-repeat-on {
     max-width: -moz-available;
   }
 
-  div#large-player
+  div.large-player-container
   div#large_player_right {
     width: 100%;
   }
 
-  div#large-player
+  div.large-player-container
   div#large_player_left {
     width: 100%;
   }
 
-  div#large-player
+  div.large-player-container
   div#large_player_left
   img[amplitude-song-info="cover_art_url"] {
     width: auto;
     height: auto;
   }
 }
+
+@media screen and (max-width: 39.9375em) {
+  .compact-player-title-list {
+    max-height: 500px;
+  }
+}
+
+/* 4. Pages
+# --------------------------------------------------------- */
+
+/* 5. Themes
+# --------------------------------------------------------- */
+
+/* 6. Utils
+# --------------------------------------------------------- */
+
+/* 7. Vendors
+# --------------------------------------------------------- */
+
+/* 8. Animations
+# --------------------------------------------------------- */

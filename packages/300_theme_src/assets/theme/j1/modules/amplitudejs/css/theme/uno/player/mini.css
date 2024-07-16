@@ -13,6 +13,9 @@
  # -----------------------------------------------------------------------------
 */
 
+/* 1. Base
+# --------------------------------------------------------- */
+
 .mini-player {
   -webkit-font-smoothing: antialiased; /* Chrome, Safari, Edge */
 }
@@ -22,64 +25,8 @@
   background-color: var(--ajs-theme-uno--black);
 }
 
-
-/*
-.mini-player.meta-container {
-  height: 110px;
-}
-
-.mini-player-meta-container {
-  text-align: center;
-  margin-top: 10px;
-  margin-bottom: 20px;
-}
-
-.mini-player-meta-container
-span.song-name {
-  display: block;
-  font-size: 24px;
-  font-family: "Lato", sans-serif;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: var(--ajs-theme-uno--gray-100);
-}
-
-.mini-player-meta-container
-span.artist {
-  display: block;
-  font-size: 18px;
-  font-weight: bold;
-  font-family: "Lato", sans-serif;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: var(--ajs-theme-uno--blue-gray-300);
-}
-
-.mini-player-meta-container
-span.album {
-  display: block;
-  font-size: 18px;
-  font-weight: bold;
-  font-family: "Lato", sans-serif;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: var(--ajs-theme-uno--blue-gray-300);
-}
-
-.mini-player-song-artist-album {
-  font-family: "Lato", sans-serif;
-  font-size: 18px;
-  font-weight: bold;
-  font-family: "Lato", sans-serif;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: var(--ajs-theme-uno--blue-gray-300);
-}
-*/
+/* 2. Components
+# --------------------------------------------------------- */
 
 .mini-player.control-container
 div#previous-black {
@@ -153,8 +100,6 @@ div.amplitude-play-pause.amplitude-playing {
   display: block;
 }
 
-
-
 .mini-player.volume-container {
   margin-left: 26px;
   padding-bottom: 20px;
@@ -168,6 +113,9 @@ input[type=range].mini-player.amplitude-volume-slider {
   width: 95%;
 }
 
+/* 3. Layout
+# --------------------------------------------------------- */
+
 /* Small only
 # --------------------------------------------------------- */
 @media screen and (max-width: 39.9375em) {
@@ -176,3 +124,18 @@ input[type=range].mini-player.amplitude-volume-slider {
     max-width: -moz-available; /* Firefox */
   }
 }
+
+/* 4. Pages
+# --------------------------------------------------------- */
+
+/* 5. Themes
+# --------------------------------------------------------- */
+
+/* 6. Utils
+# --------------------------------------------------------- */
+
+/* 7. Vendors
+# --------------------------------------------------------- */
+
+/* 8. Animations
+# --------------------------------------------------------- */
