@@ -122,7 +122,7 @@ websites with embedded audio content.
 .Emancipator · Dusk To Dawn
 amplitude::free_emancipator_mini[role="mt-3 mb-5"]
 
-.DISCO · Royalty Free Music
+.Royalty Free Music · Disco 80th
 amplitude::free_disco_mini[role="mt-3 mb-5"]
 
 lorem:sentences[5]
@@ -151,7 +151,7 @@ too much screen space.
 .Emancipator · Dusk To Dawn
 amplitude::free_emancipator_compact[role="mt-3 mb-5"]
 
-.DISCO · Royalty Free Music
+.Royalty Free Music · Disco 80th
 amplitude::free_disco_compact[role="mt-3 mb-5"]
 
 lorem:sentences[5]
@@ -165,7 +165,7 @@ lorem:sentences[5]
 .Emancipator · Dusk To Dawn
 amplitude::free_emancipator_large[role="mt-3 mb-5"]
 
-.DISCO · Royalty Free Music
+.Royalty Free Music · Disco 80th
 amplitude::free_disco_large[role="mt-3 mb-5"]
 
 [role="mb-8"]
