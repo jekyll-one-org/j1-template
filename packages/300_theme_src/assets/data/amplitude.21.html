@@ -184,17 +184,17 @@ amplitude_defaults: {{amplitude_defaults | debug}}
           <!-- control container -->
           <div class="mini-player control-container">
             <div
-              id="mini_player_next"
+              id="next-black"
               class="amplitude-next"
               data-amplitude-playlist="{{player_playlist}}">
             </div>
             <div
-              id="mini_player_previous"
+              id="previous-black"
               class="amplitude-prev"
               data-amplitude-playlist="{{player_playlist}}">
             </div>
             <div
-              id="mini_player_play_pause"
+              id="play-pause"
               class="amplitude-play-pause"
               data-amplitude-playlist="{{player_playlist}}">
             </div>
@@ -247,6 +247,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
         <div class="compact-player-container">
 
           <div id="playlist_screen_{{player_id}}" class="compact-player-playlist slide-in-top">
+          <!-- div id="playlist_screen_{{player_id}}" class="playlist_screen_{{player_id}} compact-player-playlist slide-in-top" -->
 
             <div id="hide_playlist_{{player_id}}" class="compact-player-header hide-playlist">
               <img class="compact-player-header-arrows" src="/assets/theme/j1/modules/amplitudejs/icons/black-player/up.svg" alt="Up Arrow">
@@ -270,13 +271,9 @@ amplitude_defaults: {{amplitude_defaults | debug}}
             </div> <!-- END playlist controls -->
             {% endif %}
 
-            <!-- START playlist items -->
             <div id="compact_player_title_list_{{player_playlist}}" class="compact-player-title-list">
               {% for item in playlist_items %} {% if item.enabled %}
-              <!-- START list item -->
-              <div
-                class="song amplitude-song-container amplitude-play-pause"
-                data-amplitude-song-index="{{forloop.index0}}"
+              <div class="song amplitude-song-container amplitude-play-pause"
                 data-amplitude-playlist="{{player_playlist}}">
 
                 <span class="song-number-now-playing">
@@ -306,11 +303,9 @@ amplitude_defaults: {{amplitude_defaults | debug}}
                 </a>
 
                 <span class="audio-duration">{{item.duration}}</span>
-              </div>
-              <!-- END list item -->
+              </div> <!-- END list item -->
               {% endif %} {% endfor %}
-
-            </div> <!-- END  playlist items -->
+            </div> <!-- END  playlist -->
 
           </div> <!-- END list screen -->
 
@@ -340,37 +335,39 @@ amplitude_defaults: {{amplitude_defaults | debug}}
             <!-- END COMPACT player TOP -->
 
             <!-- START COMPACT player MIDDLE -->
-            <div class="compact-player-middle">
+            <div class="player-left-middle">
               <!-- START controls container -->
-              <div id="compact_player_control_container">
-                <div id="compact_player_controls">
+              <div id="control-container">
+                <div id="large-player-controls">
 
-                  <div class="compact-player-controls-container">
+                  <div class="large-player-controls-container">
                     <div
-                      id="compact_player_shuffle"
+                      id="shuffle_container_compact_player"
                       class="amplitude-shuffle amplitude-shuffle-off"
                       data-amplitude-playlist="{{player_playlist}}">
                     </div>
                     <div
-                      id="compact_player_previous"
+                      id="previous-black"
                       class="amplitude-prev"
                       data-amplitude-playlist="{{player_playlist}}">
                     </div>
                     <div
-                      id="compact_player_play_pause"
+                      id="play-pause-black"
                       class="amplitude-play-pause amplitude-paused"
                       data-amplitude-playlist="{{player_playlist}}">
                     </div>
                     <div
-                      id="compact_player_next"
+                      id="next-black"
                       class="amplitude-next"
                       data-amplitude-playlist="{{player_playlist}}">
                     </div>
-            			  <div
-            				  id="compact_player_repeat"
-            				  class="amplitude-repeat amplitude-repeat-off"
-            				  data-amplitude-playlist="{{player_playlist}}">
-            			  </div>
+                    <div id="repeat_container_compact_player">
+              			  <div
+              				  id="compact_player_repeat"
+              				  class="amplitude-repeat"
+              				  data-amplitude-playlist="{{player_playlist}}">
+              			  </div>
+              			</div>
 
                     <!-- START volume container -->
                     <div class="compact-player-volume-container">
@@ -385,7 +382,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
                     </div>
                     <!-- END volume container -->
                   </div>
-
+                  <!-- END large player controls container -->
                 </div>
                 <!-- END controls container -->
               </div>
@@ -479,27 +476,27 @@ amplitude_defaults: {{amplitude_defaults | debug}}
         <!-- START LARGE player left MIDDLE -->
         <div class="player-left-middle">
           <!-- START controls container -->
-          <div id="large_player_control_container">
-            <div id="large_player_controls">
+          <div id="control-container">
+            <div id="large-player-controls">
 
               <div class="large-player-controls-container">
                 <div
-                  id="large_player_shuffle"
+                  id="shuffle_container_large_player"
                   class="amplitude-shuffle amplitude-shuffle-off"
                   data-amplitude-playlist="{{player_playlist}}">
                 </div>
                 <div
-                  id="large_player_previous"
+                  id="previous-black"
                   class="amplitude-prev"
                   data-amplitude-playlist="{{player_playlist}}">
                 </div>
                 <div
-                  id="large_player_play_pause"
+                  id="play-pause-black"
                   class="amplitude-play-pause amplitude-paused"
                   data-amplitude-playlist="{{player_playlist}}">
                 </div>
                 <div
-                  id="large_player_next"
+                  id="next-black"
                   class="amplitude-next"
                   data-amplitude-playlist="{{player_playlist}}">
                 </div>
@@ -613,10 +610,9 @@ amplitude_defaults: {{amplitude_defaults | debug}}
               </div> <!-- END playlist controls -->
               {% endif %}
 
-              <!-- START playlist items -->
               <div id="large_player_title_list_{{player_playlist}}" class="large-player-title-list">
                 {% for item in playlist_items %}{% if item.enabled %}
-                <!-- START list item -->
+                <!-- Audio item -->
                 <div
                   class="song amplitude-song-container amplitude-play-pause"
                   data-amplitude-song-index="{{forloop.index0}}"
@@ -648,11 +644,9 @@ amplitude_defaults: {{amplitude_defaults | debug}}
                   </a>
 
                   <span class="audio-duration">{{item.duration}}</span>
-                </div>
-                <!-- END list item -->
+                </div> <!-- END Audio item -->
                 {% endif %}{% endfor %}
               </div>
-              <!-- EBD playlist items -->
 
             </div> <!-- END Large Player|Right Side -->
 

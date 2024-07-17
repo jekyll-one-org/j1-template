@@ -647,12 +647,12 @@ j1.adapter.amplitude = ((j1, window) => {
                       var showPlaylist = document.getElementById("show_playlist_{{player.id}}");
 
                         showPlaylist.addEventListener('click', function(event) {
+                          var scrollOffset = (window.innerWidth >= 720) ? -130 : -110;
 
-                          // scroll to player top position
-                          const srollOffset       = -130;
+                          // scroll player to top position
                           const targetDiv         = document.getElementById("show_playlist_{{player.id}}");
                           const targetDivPosition = targetDiv.offsetParent.offsetTop;
-                          window.scrollTo(0, targetDivPosition + srollOffset);
+                          window.scrollTo(0, targetDivPosition + scrollOffset);
 
                           // open playlist
                           var playlistScreen = document.getElementById("playlist_screen_{{player.id}}");
@@ -660,6 +660,7 @@ j1.adapter.amplitude = ((j1, window) => {
                           playlistScreen.classList.remove('slide-out-top');
                           playlistScreen.classList.add('slide-in-top');
                           playlistScreen.style.display = "block";
+                          playlistScreen.style.zIndex = "999";
 
                           // disable scrolling (if window viewport >= BS Medium and above)
                           if (window.innerWidth >= 720) {
@@ -680,6 +681,7 @@ j1.adapter.amplitude = ((j1, window) => {
                         playlistScreen.classList.remove('slide-in-top');
                         playlistScreen.classList.add('slislide-out-top');
                         playlistScreen.style.display = "none";
+                        playlistScreen.style.zIndex = "1";
 
                         // enable scrolling
                         if ($('body').hasClass('stop-scrolling')) {
@@ -705,14 +707,14 @@ j1.adapter.amplitude = ((j1, window) => {
                       }
 
                       // click on shuffle icon
-                      document.getElementById('shuffle_container_compact_player').addEventListener('click', function(event) {
-                        var shuffleState = (document.getElementById('shuffle_container_compact_player').className.includes('amplitude-shuffle-on')) ? true : false;
+                      document.getElementById('compact_player_shuffle').addEventListener('click', function(event) {
+                        var shuffleState = (document.getElementById('compact_player_shuffle').className.includes('amplitude-shuffle-on')) ? true : false;
                         Amplitude.setShuffle(shuffleState)
                       });
 
                       // click on repeat icon
-                      document.getElementById('repeat_container_compact_player').addEventListener('click', function(event) {
-                        var repeatState = (document.getElementById('repeat_container_compact_player').className.includes('amplitude-repeat-on')) ? true : false;
+                      document.getElementById('compact_player_repeat').addEventListener('click', function(event) {
+                        var repeatState = (document.getElementById('compact_player_repeat').className.includes('amplitude-repeat-on')) ? true : false;
                         Amplitude.setRepeat(repeatState)
                       });
 
@@ -740,8 +742,8 @@ j1.adapter.amplitude = ((j1, window) => {
                       }
 
                       // click on shuffle icon
-                      document.getElementById('shuffle_container_large_player').addEventListener('click', function(event) {
-                        var shuffleState = (document.getElementById('shuffle_container_large_player').className.includes('amplitude-shuffle-on')) ? true : false;
+                      document.getElementById('large_player_shuffle').addEventListener('click', function(event) {
+                        var shuffleState = (document.getElementById('large_player_shuffle').className.includes('amplitude-shuffle-on')) ? true : false;
                         Amplitude.setShuffle(shuffleState)
                       });
 
@@ -769,18 +771,12 @@ j1.adapter.amplitude = ((j1, window) => {
                         var playlistHeader = document.getElementById("playlist_header_{{player.id}}");
 
                         playlistHeader.addEventListener('click', function(event) {
-                          var srollOffset;
+                          var scrollOffset = (window.innerWidth >= 720) ? -130 : -110;
 
-                          if (window.innerWidth >= 720) {
-                            srollOffset = -130;
-                          } else {
-                            srollOffset = -30;
-                          }
-
+                          // scroll player to top position
                           const targetDiv         = document.getElementById("playlist_header_{{player.id}}");
                           const targetDivPosition = targetDiv.offsetTop;
-
-                          window.scrollTo(0, targetDivPosition + srollOffset);
+                          window.scrollTo(0, targetDivPosition + scrollOffset);
                         }); // END EventListener 'click'
 
                         // disable scrolling (if window viewport >= BS Medium and above)
