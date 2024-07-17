@@ -1,22 +1,23 @@
 ---
-title:                                  AmplitudeJS
-title_extention:                        Audio Player
-tagline:                                Customizable Audio Player
+title:                                  Amplitude
+title_extention:                        Custom Audio Player
+tagline:                                Custom Audio Player
 
 date:                                   2024-04-17
 #last_modified:                         2024-01-01
 
 description: >
-                                        AmplitudeJS is a JavaScript library to control the design of audio media
-                                        players on web pages. The concept allows designers to fully control the
-                                        look and feel of audio players without deep scripting knowledge.
+                                        AmplitudeJS is a JavaScript library to control the design
+                                        of audio media players on web pages. The concept allows
+                                        designers to fully control the look and feel of players
+                                        without deep scripting knowledge.
 keywords: >
                                         open source, free, template, jekyll, jekyllone, web,
                                         sites, static, jamstack, bootstrap, html, html5, audio,
-                                        Amplitude
+                                        AmplitudeJS, Amplitude
 
 categories:                             [ Previewer ]
-tags:                                   [ AmplitudeJS, Audio ]
+tags:                                   [ Amplitude, Audio ]
 
 image:
   path:                                 /assets/image/icons/videojs/videojs-poster.png
@@ -66,9 +67,9 @@ resource_options:
 // See: https://github.com/serversideup/amplitudejs/
 
 [role="dropcap"]
-The audio tag in HTML5 is a great way to add audio media to web pages.
-However, the browser fully controls the audio playback interface, which
-can limit or even break a page's design if audio media is used.
+The Audio tag `<audio>` in HTML5 is a great way to add audio media to web
+pages. However, the browser fully controls the audio playback interface,
+which can limit or even break a page's design if audio media is used.
 
 AmplitudeJS for the J1 Template offers a straightforward solution for web
 developers. It allows them to easily customize the appearance of their audio
@@ -93,7 +94,7 @@ the page design.
 Three types of AmplitudeJS players are build-in for the J1 template system:
 
 * Mini Player
-* Compact Player (default plaayer)
+* Compact Player (default payer)
 * Large Player
 
 [role="mt-4"]
@@ -108,34 +109,23 @@ mobile devices.
 [role="mt-5"]
 == Mini Player
 
-In the context of complex components on a web page, like an audio player, a
-mini player refers to a minimized or compact version of the full player.
-It typically offers basic playback controls, such as pause, play, and
+In the context of complex components on a web page, like an audio player,
+a mini player refers to a minimized version of full players. It typically
+offers basic playback controls, such as pause, play, and
 volume adjustment, while taking up less screen space.
 
-Mini-players are beneficial when you want to listen to audio in the
-background without dedicating the entire screen to the player. They are
-commonly found on music streaming services, podcast platforms, and websites
-with embedded audio content.
+Mini players are beneficial when you want to listen to audio in the
+background without dedicating the entire screen to the player. They
+are commonly found on music streaming services, podcast platforms, and
+websites with embedded audio content.
 
-[role="mt-4"]
-=== Royalty Free Music
-
-lorem:sentences[5]
+.Emancipator · Dusk To Dawn
+amplitude::free_emancipator_mini[role="mt-3 mb-5"]
 
 .DISCO · Royalty Free Music
 amplitude::free_disco_mini[role="mt-3 mb-5"]
 
-[role="mt-4"]
-=== Three Elements
-
 lorem:sentences[5]
-
-.ƎElements · Earth, Wind & Fire Show Band
-amplitude::3e_mini[role="mt-3 mb-5"]
-
-lorem:sentences[5]
-
 
 [role="mt-5"]
 == Compact Player
@@ -158,21 +148,13 @@ users can easily access and control the audio playback without sacrificing
 too much screen space.
 ////
 
-[role="mt-4"]
-=== Royalty Free Music
-
-lorem:sentences[5]
+.Emancipator · Dusk To Dawn
+amplitude::free_emancipator_compact[role="mt-3 mb-5"]
 
 .DISCO · Royalty Free Music
 amplitude::free_disco_compact[role="mt-3 mb-5"]
 
-[role="mt-4"]
-=== Three Elements
-
 lorem:sentences[5]
-
-.ƎElements · Earth, Wind & Fire Show Band
-amplitude::3e_compact[role="mt-3 mb-5"]
 
 
 [role="mt-5"]
@@ -180,23 +162,11 @@ amplitude::3e_compact[role="mt-3 mb-5"]
 
 lorem:sentences[5]
 
-[role="mt-4"]
-=== Royalty Free Music
-
-lorem:sentences[5]
+.Emancipator · Dusk To Dawn
+amplitude::free_emancipator_large[role="mt-3 mb-5"]
 
 .DISCO · Royalty Free Music
 amplitude::free_disco_large[role="mt-3 mb-5"]
-
-lorem:sentences[3]
-
-[role="mt-4"]
-=== Three Elements
-
-lorem:sentences[5]
-
-.ƎElements · Earth, Wind & Fire Show Band
-amplitude::3e_large[role="mt-3 mb-5"]
 
 [role="mb-8"]
 lorem:sentences[3]

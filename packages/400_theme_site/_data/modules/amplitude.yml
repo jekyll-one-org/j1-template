@@ -30,11 +30,11 @@ settings:
   playlists:
 
     # --------------------------------------------------------------------------
-    # Dusk To Dawn - Emancipator
+    # Emancipator
     # --------------------------------------------------------------------------
     #
     - playlist:
-      enabled:                          false
+      enabled:                          true
 
       name:                             emancipator
       title:                            Emancipator
@@ -42,11 +42,12 @@ settings:
       # ------------------------------------------------------------------------
       # ALBUM settings
       # ------------------------------------------------------------------------
-      album:                            &album_dusk_to_dawn
-        name:                           Dusk To Dawn
+      album:                            &album_from_dusk_to_dawn
+        name:                           From Dusk To Dawn
         artist:                         Emancipator
-        audio_base:                     /assets/audio/album/royalty_free/emancipator
-        cover_image:                    /assets/audio/cover/album-art/from-dusk-to-dawn.jpg
+#       audio_base:                     //521dimensions.com/song
+        audio_base:                     /assets/audio/album/emancipator/from-dusk-to-dawn
+        cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
 
       # ------------------------------------------------------------------------
       # TITLE settings (songs)
@@ -56,108 +57,42 @@ settings:
         # title 01
         - item:
           enabled:                      true
-          <<:                           *album_dusk_to_dawn
-          title:                        First Snow
-          audio:                        FirstSnow-Emancipator.mp3
-          audio_info:                   //sfx.productioncrate.com
-          duration:                     "2:27"
-
-        # title 02
-        - item:
-          enabled:                      true
-          <<:                           *album_dusk_to_dawn
+          <<:                           *album_from_dusk_to_dawn
           title:                        Dusk To Dawn
-          audio:                        DuskToDawn-Emancipator.mp3
-          audio_info:                   //sfx.productioncrate.com
-          duration:                     "2:14"
-
-        # title 03
-        - item:
-          enabled:                      true
-          <<:                           *album_dusk_to_dawn
-          title:                        Anthem
-          audio:                        Anthem-Emancipator.mp3
-          audio_info:                   //sfx.productioncrate.com
-          duration:                     "2:19"
-
-    # --------------------------------------------------------------------------
-    # Free Pop - Royalty Free
-    # --------------------------------------------------------------------------
-    #
-    - playlist:
-      enabled:                          false
-
-      name:                             free_pop
-      title:                            Free Pop
-
-      # ------------------------------------------------------------------------
-      # ALBUM settings
-      # ------------------------------------------------------------------------
-      album:                            &album_free_pop
-        name:                           Free Pop
-        artist:                         Royalty Free
-        audio_base:                     //p.productioncrate.com/stock-hd/audio
-        cover_image:                    /assets/audio/cover/royalty_free/free_pop_sounds.jpg
-
-      # ------------------------------------------------------------------------
-      # TITLE settings (songs)
-      # ------------------------------------------------------------------------
-      items:
-
-        # title 01
-        - item:
-          enabled:                      true
-          <<:                           *album_free_pop
-          title:                        Sway
-          audio:                        SoundsCrate-Sway.mp3
-          audio_info:                   //sfx.productioncrate.com
-          duration:                     "2:15"
+          audio:                        DuskToDawn.mp3
+          audio_info:                   //emancipator.bandcamp.com/
+          cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn/from-dusk-to-dawn.jpg
+          duration:                     "5:25"
 
         # title 02
         - item:
           enabled:                      true
-          <<:                           *album_free_pop
-          title:                        Late Feelings
-          audio:                        SoundsCrate-Late_Feels.mp3
-          audio_info:                   //sfx.productioncrate.com
-          duration:                     "2:25"
+          <<:                           *album_from_dusk_to_dawn
+          title:                        First Snow
+          audio:                        FirstSnow.mp3
+          audio_info:                   //emancipator.bandcamp.com/
+          cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn/soon-it-will-be-cold-enough.jpg
+          duration:                     "5:12"
 
         # title 03
         - item:
           enabled:                      true
-          <<:                           *album_free_pop
-          title:                        Got A Feeling
-          audio:                        SoundsCrate-Got_A_Feeling.mp3
-          audio_info:                   //sfx.productioncrate.com
-          duration:                     "2:24"
+          <<:                           *album_from_dusk_to_dawn
+          title:                        Anthem
+          audio:                        Anthem.mp3
+          audio_info:                   //emancipator.bandcamp.com/
+          cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn/anthem.jpg
+          duration:                     "5:40"
 
         # title 04
         - item:
           enabled:                      true
-          <<:                           *album_free_pop
-          title:                        Strike
-          audio:                        SoundsCrate-Pop_Strike.mp3
-          audio_info:                   //sfx.productioncrate.com
-          duration:                     "2:25"
-
-        # title 05
-        - item:
-          enabled:                      true
-          <<:                           *album_free_pop
-          title:                        Young Feelings
-          audio:                        SoundsCrate-Young_Feels.mp3
-          audio_info:                   //sfx.productioncrate.com
-          duration:                     "2:11"
-
-        # title 06
-        - item:
-          enabled:                      true
-          <<:                           *album_free_pop
-          title:                        Wonders
-          audio:                        SoundsCrate-Wonders.mp3
-          audio_info:                   //sfx.productioncrate.com
-          duration:                     "2:31"
-
+          <<:                           *album_from_dusk_to_dawn
+          title:                        Safe In The Steep Cliffs
+          audio:                        SafeInTheSteepCliffs.mp3
+          audio_info:                   //emancipator.bandcamp.com/
+          cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn/safe-in-the-steep-cliffs.jpg
+          duration:                     "4:35"
 
     # --------------------------------------------------------------------------
     # Free Disco - Royalty Free
@@ -345,146 +280,11 @@ settings:
           audio_info:                   //sfx.productioncrate.com
           duration:                     "2:38"
 
-    # --------------------------------------------------------------------------
-    # 3e - 3Elements
-    # --------------------------------------------------------------------------
-    #
-    - playlist:
-      enabled:                          true
-
-      name:                             3e
-      title:                            3Elements
-
-      # ------------------------------------------------------------------------
-      # ALBUM settings
-      # ------------------------------------------------------------------------
-      album:                            &album_3e
-        name:                           ƎElements
-        artist:                         Earth, Wind & Fire
-        audio_base:                     /assets/audio/album/3e
-        cover_image:                    /assets/audio/cover/3e/cover.jpg
-
-      # ------------------------------------------------------------------------
-      # TITLE settings (songs)
-      # ------------------------------------------------------------------------
-      items:
-
-        # title 01
-        - item:
-          enabled:                      true
-          <<:                           *album_3e
-          title:                        In The Stone
-          audio:                        01 In The Stone.mp3
-          audio_info:                   //www.3elements-band.com
-          duration:                     "4:28"
-
-        # title 02
-        - item:
-          enabled:                      true
-          <<:                           *album_3e
-          title:                        Can't Let Go
-          audio:                        02 Can't Let Go.mp3
-          audio_info:                   //www.3elements-band.com
-          duration:                     "3:25"
-
-        # title 03
-        - item:
-          enabled:                      true
-          <<:                           *album_3e
-          title:                        Jupiter
-          audio:                        03 Jupiter.mp3
-          audio_info:                   //www.3elements-band.com
-          duration:                     "6:14"
-
-        # title 04
-        - item:
-          enabled:                      true
-          <<:                           *album_3e
-          title:                        Winter Wonderland
-          audio:                        04 Winter Wonderland.mp3
-          audio_info:                   //www.3elements-band.com
-          duration:                     "3:41"
-
-        # title 05
-        - item:
-          enabled:                      true
-          <<:                           *album_3e
-          title:                        Fantasy
-          audio:                        05 Fantasy.mp3
-          audio_info:                   //www.3elements-band.com
-          duration:                     "3:44"
-
-        # title 06
-        - item:
-          enabled:                      true
-          <<:                           *album_3e
-          title:                        After The Love Has Gone
-          audio:                        06 After The Love Has Gone.mp3
-          audio_info:                   //www.3elements-band.com
-          duration:                     "4:36"
-
 
   # ============================================================================
   # PLAYER configuration
   # ----------------------------------------------------------------------------
   players:
-
-    # --------------------------------------------------------------------------
-    # MINI player, Free Pop
-    # --------------------------------------------------------------------------
-    #
-    - plaver:
-      enabled:                          false
-
-      # ------------------------------------------------------------------------
-      # PLAYER settings
-      #
-      id:                               free_pop_mini
-      type:                             mini
-
-      playlist:
-        name:                           free_pop
-        title:                          Free Pop
-        audio_info:                     false
-        controls:                       true
-
-    # --------------------------------------------------------------------------
-    # COMPACT player, Free Pop
-    # --------------------------------------------------------------------------
-    #
-    - plaver:
-      enabled:                          false
-
-      # ------------------------------------------------------------------------
-      # PLAYER settings
-      #
-      id:                               free_pop_compact
-      type:                             compact
-
-      playlist:
-        name:                           free_pop
-        title:                          Free Pop
-        audio_info:                     false
-        controls:                       true
-
-    # --------------------------------------------------------------------------
-    # LARGE player, Free Pop
-    # --------------------------------------------------------------------------
-    #
-    - plaver:
-      enabled:                          false
-
-      # ------------------------------------------------------------------------
-      # PLAYER settings
-      #
-      id:                               free_pop_large
-      type:                             large
-
-      playlist:
-        name:                           free_pop
-        title:                          Free Pop
-        audio_info:                     false
-        controls:                       true
 
     # --------------------------------------------------------------------------
     # MINI player, Free Disco
@@ -544,7 +344,7 @@ settings:
         controls:                       true
 
     # --------------------------------------------------------------------------
-    # MINI player, 3Elements
+    # MINI player, Emancipator
     # --------------------------------------------------------------------------
     #
     - plaver:
@@ -553,17 +353,17 @@ settings:
       # ------------------------------------------------------------------------
       # PLAYER settings
       #
-      id:                               3e_mini
+      id:                               free_emancipator_mini
       type:                             mini
 
       playlist:
-        name:                           3e
-        title:                          3Elements
-        audio_info:                     true
+        name:                           emancipator
+        title:                          Emancipator
+        audio_info:                     false
         controls:                       true
 
     # --------------------------------------------------------------------------
-    # COMPACT player, 3Elements
+    # COMPACT player, Emancipator
     # --------------------------------------------------------------------------
     #
     - plaver:
@@ -572,17 +372,17 @@ settings:
       # ------------------------------------------------------------------------
       # PLAYER settings
       #
-      id:                               3e_compact
+      id:                               free_emancipator_compact
       type:                             compact
 
       playlist:
-        name:                           3e
-        title:                          3Elements
+        name:                           emancipator
+        title:                          Emancipator
         audio_info:                     true
         controls:                       true
 
     # --------------------------------------------------------------------------
-    # LARGE player, 3Elements
+    # LARGE player, Emancipator
     # --------------------------------------------------------------------------
     #
     - plaver:
@@ -591,12 +391,12 @@ settings:
       # ------------------------------------------------------------------------
       # PLAYER settings
       #
-      id:                               3e_large
+      id:                               free_emancipator_large
       type:                             large
 
       playlist:
-        name:                           3e
-        title:                          3Elements
+        name:                           emancipator
+        title:                          Emancipator
         audio_info:                     true
         controls:                       true
 
