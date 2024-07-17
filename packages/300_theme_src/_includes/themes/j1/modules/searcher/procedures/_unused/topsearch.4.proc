@@ -85,7 +85,7 @@ topsearch_options.enabled: {{topsearch_options.enabled | debug}}
           <div class="modal-body">
 
             <!-- SEARCH History -->
-            <div id="search_history_select_wrapper"></div>
+            <div id="search_history_select_wrapper" style="display: none; margin-left: 2.5rem; margin-right: 5.125rem"></div>
             <!-- END SEARCH History -->
 
             <!-- SEARCH Container -->
@@ -93,17 +93,17 @@ topsearch_options.enabled: {{topsearch_options.enabled | debug}}
               <!-- INPUT Form -->
               <div class="form-group">
                 <div class="input-group">
-                  <span class="input-group-addon"><i class="mdib mdib-magnify mdib-2x mr-2"></i></span>
+                  <span class="input-group-addon"><i class="mdib mdib-magnify mdib-2x mb-2" style="color: var(--bs-gray-900)"></i></span>
                   <input id="search-query" class="form-control" type="text" name="q" placeholder="{{placeholder}}" autocomplete="off">
-                  <span id="clear-topsearch" class="form-clear form-clear-searcher d-none"> <i class="mdib mdib-format-clear mdib-24px"></i> </span>
-                  <span id="send-to-history"> <i class="mdib mdib-send mdib-24px" ></i> </span>
+                  <span id="clear-topsearch" class="form-clear form-clear-searcher d-none" style="display: none; cursor: pointer; margin-top: 1.15rem"> <i class="mdib mdib-format-clear mdib-24px" style="color: var(--bs-gray-900)"></i> </span>
+                  <span id="send-to-history" style="display: none; cursor: pointer; margin-top: 1.15rem; margin-left: .75rem"> <i class="mdib mdib-send mdib-24px" style="color: var(--bs-gray-900)"></i> </span>
                 </div>
               </div>
               <!-- END INPUT Form -->
 
               <!-- SEARCH Results -->
               <div class="search-results hide-scrollbar mt-5">
-                <div id="search-results"></div>
+                <div id="search-results" style="display: none"></div>
               </div>
               <!-- END SEARCH Results -->
 
@@ -124,7 +124,7 @@ topsearch_options.enabled: {{topsearch_options.enabled | debug}}
     <!-- MUSTACHE Template -->
     {% raw %}
     <script id="search-results-template" type="text/mustache">
-      <ul class="list-search-results">
+      <ul style="list-style: none; margin-left: .5rem; margin-right: 4.25rem">
       {{#docs}}
         <li>
           <h4 class="result-item"> <a class="link-no-decoration" href="{{url}}" target="_blank">{{title}} · {{tagline}}</a> </h4>

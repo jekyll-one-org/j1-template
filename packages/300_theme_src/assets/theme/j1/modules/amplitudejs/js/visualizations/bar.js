@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/modules/amplitudejs/js/visualizations/bar.js
- # AmplitudeJS v4 Visualization (FX)
+ # AmplitudeJS v5.3.2 Visualization (FX)
  #
  # Product/Info:
  # https://jekyll.one

@@ -1,0 +1,87 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/theme/j1/modules/lunr/css/theme/uno.css
+ # Provides styles for J1 Module lunr (result styles)
+ #
+ # Product/Info:
+ # http://jekyll.one
+ #
+ # Copyright (C) 2023, 2024 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+/* See: _includes\themes\j1\modules\searcher\procedures\topsearch.proc */
+
+/* search results
+------------------------------------------------- */
+div#search-results {
+  display: none;
+}
+
+.search-results {
+  max-height: 450px;
+  width: 98%;
+  background-color: unset;
+  overflow-y: scroll!important;
+  margin-top: .25rem;
+  margin-bottom: .25rem;
+}
+
+.list-search-results {
+  list-style: none;
+  margin-left: .5rem;
+  margin-right: 4.25rem;
+}
+
+p.result-item-text {
+  font-size: .875rem;
+  margin-bottom: .5rem;
+  text-align: justify;
+  line-height: 1.25rem;
+}
+
+
+/* input form
+------------------------------------------------- */
+span.input-group-addon > i {
+  color: var(--bs-gray-500);
+}
+
+span#clear-topsearch {
+  display: none;
+  cursor: pointer;
+  margin-top: 1.15rem;
+  margin-left: 10px;
+}
+
+span#clear-topsearch > i {
+  color: var(--bs-gray-500);
+}
+
+span#clear-topsearch > i:hover {
+  color: var(--md-gray-700) !important;
+}
+
+span#send-to-history {
+  display: none;
+  cursor: pointer;
+  margin-top: 1.15rem;
+  margin-left: .75rem;
+}
+
+span#send-to-history > i {
+  color: var(--bs-gray-500);
+}
+
+span#send-to-history > i:hover {
+  color: var(--md-gray-700) !important;
+}
+
+div#search_history_select_wrapper {
+  display: none;
+  margin-left: 2.5rem;
+  margin-right: 1.5rem;
+}

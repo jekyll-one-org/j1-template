@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/modules/amplitudejs/js/amplitudejs.js
- # AmplitudeJS v4 Visualization Template (FX)
+ # AmplitudeJS v5.3.2 Visualization Template (FX)
  #
  # Product/Info:
  # https://jekyll.one

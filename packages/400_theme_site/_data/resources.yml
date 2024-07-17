@@ -689,7 +689,7 @@ resources:
       pass_init_data:                   false
 
       data:
-        css:                            [ modules/lunr/css/j1 ]
+        css:                            [ modules/lunr/css/theme/uno ]
         files:                          [ adapter/js/lunr.js ]
         js:                             [
                                           modules/lunr/js/lunr,
@@ -1941,10 +1941,10 @@ resources:
 
       data:
         css:                            [
-                                          modules/amplitudejs/css/theme/uno/amplitude,
-                                          modules/amplitudejs/css/theme/uno/player/compact,
-                                          modules/amplitudejs/css/theme/uno/player/large,
-                                          modules/amplitudejs/css/theme/uno/player/mini
+                                          modules/amplitudejs/css/theme/uno/dark/amplitude,
+                                          modules/amplitudejs/css/theme/uno/dark/player/compact,
+                                          modules/amplitudejs/css/theme/uno/dark/player/large,
+                                          modules/amplitudejs/css/theme/uno/dark/player/mini
                                         ]
         files:                          [ adapter/js/amplitude.js ]
         js:                             [ modules/amplitudejs/js/amplitude ]

@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/modules/amplitudejs/js/amplitudejs.js
- # AmplitudeJS v4
+ # AmplitudeJS v5.3.2
  #
  # Product/Info:
  # https://jekyll.one
@@ -13440,3 +13440,4 @@ module.exports = {"name":"amplitudejs","version":"5.3.2","description":"A JavaSc
 /***/ })
 /******/ ]);
 });
+//# sourceMappingURL=amplitude.map
