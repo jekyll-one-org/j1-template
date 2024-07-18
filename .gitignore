@@ -4,6 +4,7 @@ node_modules/
 
 package-lock.json
 
+.jekyll-metadata
 
 # Unneeded files created by you or helper processes
 # Ignore symbolic links as simple files!!!

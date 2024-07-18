@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "j1-theme",
-  "version": "2024.3.0",
+  "version": "2024.3.1",
   "description": "Gem-based Template for Jekyll",
   "homepage": "https://jekyll.one",
   "author": {
@@ -31,7 +31,7 @@
     "loglevel": "silent"
   },
   "engines": {
-    "node": ">=16.0",
+    "node": ">=18.0",
     "npm": ">=8.0",
     "yarn": ">=1.22"
   },

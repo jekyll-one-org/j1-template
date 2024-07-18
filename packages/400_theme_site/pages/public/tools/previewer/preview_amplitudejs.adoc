@@ -67,8 +67,8 @@ resource_options:
 // See: https://github.com/serversideup/amplitudejs/
 
 [role="dropcap"]
-The Audio tag `<audio>` in HTML5 is a great way to add audio media to web
-pages. However, the browser fully controls the audio playback interface,
+The Audio tag in HTML5 is a great way to add audio media to web pages.
+However, the browser fully controls the audio playback interface,
 which can limit or even break a page's design if audio media is used.
 
 AmplitudeJS for the J1 Template offers a straightforward solution for web
