@@ -319,7 +319,17 @@ amplitude_defaults: {{amplitude_defaults | debug}}
 
             <!-- START COMPACT player TOP -->
             <div id="show_playlist_{{player_id}}" class="compact-player-header show-playlist">
-              Playlist
+              <span>
+                <span
+                  data-amplitude-playlist="{{player_playlist}}"
+                  data-amplitude-song-info="artist">
+                </span>
+                <span class="song-artist-album-delimiter">·</span>
+                <span
+                  data-amplitude-playlist="{{player_playlist}}"
+                  data-amplitude-song-info="album">
+                </span>
+            </span>
               <img class="compact-player-header-arrows" src="/assets/theme/j1/modules/amplitudejs/icons/player/dark/down.svg" alt="Down Arrow">
             </div> <!-- END compact player header (toggle playlist) -->
 
@@ -461,6 +471,20 @@ amplitude_defaults: {{amplitude_defaults | debug}}
       {% capture large_player_left_side %}
         <!-- START LARGE player left TOP -->
         <div div class="player-left-top">
+          <div class="large-player-playlist-header">
+            <span class="audio-artist">
+              <span
+                data-amplitude-playlist="{{player_playlist}}"
+                data-amplitude-song-info="artist">
+              </span>
+              <span class="song-artist-album-delimiter">·</span>
+              <span
+                data-amplitude-playlist="{{player_playlist}}"
+                data-amplitude-song-info="album">
+              </span>
+            </span>
+          </div>
+
           <!-- DEFAULT album cover image (replaced by AJS API based on playlist) -->
           <img
             src="/assets/audio/cover/default/placeholder-blue.jpg"

@@ -468,9 +468,11 @@ li.dropdown.nav-sub-item:before {
     // margin-left: 0;
     // margin-right: -20px;                                                        // jadams: changed because of div header, org: margin-right: -15px;
     // margin-right: 1.5rem;                                                       // jadams, 2020-07-02: set higher right space because of missing nav toggle button
+    // jadams, 2024-07-18: new navbar layout
   	float: right;
   	position: relative;
-  	display: inline-block;
+    padding-right: 1.5rem;
+  	// display: inline-block;
   	> ul {
   		list-style: none;
       overflow: hidden;
@@ -739,9 +741,13 @@ li.dropdown.nav-sub-item:before {
 		}
 		&.navbar.navigator {
 			background-color: $nav-primary;
+
+      // jadams, 2024-07-18: new navbar layout (small screens)
       .navbar-brand {
-  			padding: 0.5rem 1rem;
+        display: none;
+  			// padding: 0.5rem 1rem;
   		}
+
 			.navbar-collapse {
 				border: none;
 				margin-bottom: 0;
@@ -755,13 +761,14 @@ li.dropdown.nav-sub-item:before {
 					}
 				}
 			}
+      // jadams, 2024-07-18: new navbar layout (small screens)
 			.navbar-nav {
-				// float: none !important;
-        padding-top: 5px;
-				padding-left: 15px;
-				padding-right: 35px;
-        flex-direction: row;
         display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        padding-top: 5px;
+				// padding-left: 15px;
+				// padding-right: 35px;
 				> li {
 					float: none;
 					> a {

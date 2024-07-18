@@ -1,7 +1,7 @@
 ---
-title:                                  Audio and Video
-title_extention:                        Playing media files
-tagline:                                Playing media files
+title:                                  Video Player
+title_extention:                        Playing Video files
+tagline:                                Playing Video files
 
 date:                                   2020-11-04
 #last_modified:                         2023-01-01
@@ -17,8 +17,8 @@ keywords: >
                                         quicktime, silverlight, videojs,
                                         vimeo, dailymotion, wistia, youtube
 
-categories:                             [ Roundtrip ]
-tags:                                   [ Module, Video ]
+categories:                             [ Tour ]
+tags:                                   [ Video, Module ]
 
 image:
   path:                                 /assets/video/headers/present_videos/still/underground-broadway.jpg
@@ -27,7 +27,7 @@ image:
 
 personalization:                        true
 regenerate:                             false
-permalink:                              /pages/public/learn/roundtrip/present_audio_video/
+permalink:                              /pages/public/learn/roundtrip/present_video/
 
 resources:                              [
                                           gallery, lightgallery, masonry,
@@ -84,10 +84,10 @@ The J1 Template system supports playing audio and video on web pages using
 HTML5, the current standard. Visitors can play audio and video files without
 the need for an external player.
 
-Modern browsers support the audio `<audio>` and video tag `<video>`. The
-previous proprietary software, like _Flash Player_, _Quicktime_, _Silverlight_
-is no longer needed as the J1 Template provides audio and video support for
-local video files and online sources.
+Modern browsers support the video tag `<video>`. The previous proprietary
+software, like _Flash Player_, _Quicktime_, _Silverlight_ is no longer needed
+as the J1 Template provides audio and video support for local video files
+and online sources.
 
 mdi:clock-time-five-outline[24px, md-gray mt-5 mr-2]
 *10-15 Minutes* to read
@@ -95,20 +95,9 @@ mdi:clock-time-five-outline[24px, md-gray mt-5 mr-2]
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-[role="mt-5"]
-== Audio
-// See: https://docs.asciidoctor.org/asciidoc/latest/macros/audio-and-video/
-//
-Audio players can easily be embedded in web pages using the *audio* tag
-`<audio>.` Browsers have a built-in framework for decoding and playing audio
-content directly within a webpage.
-
-.Ambient Piano
-audio::/assets/audio/sound-effects/ambient-piano.mp3[role="mt-4 mb-5"]
-
 
 [role="mt-5"]
-== Video
+== HTML 5 Player
 // See: https://docs.asciidoctor.org/asciidoc/latest/macros/audio-and-video/
 //
 HTML5 video opens the doors to how to present video content on your web.
@@ -121,17 +110,10 @@ Two types of video sources are supported:
 * Video files from Online sources (on the Internet) like YouTube, Wistia,
   Dailymotion etc.
 
-
-[role="mt-5"]
-== Standalone Video Players
-
 Standalone video players embedded in websites are software components that
 integrate and play video sources directly within a page or application. These
 players are essential for all current sites and apps. Embedded players provide
 a seamless and user-friendly way to present multimedia content to your audience.
-
-[role="mt-4"]
-=== Built-in Player
 
 All modern browsers universally support the video tag `<video>`. This tag
 offers an out-of-the-box framework for decoding and displaying video content
@@ -140,8 +122,9 @@ without loading *external players*.
 .MP4 Video, Peck Pocketed
 video::/assets/video//html5/peck_pocketed.mp4[poster="/assets/video/poster/html5/peck_pocketed.jpg", opts="" role="mt-4 mb-5"]
 
-[role="mt-4"]
-=== VideoJS
+
+[role="mt-5"]
+== VideoJS Player
 
 VideoJS is a *free-to-use* open-source JavaScript framework for building
 custom video players for the web. Implementing VideoJS for the J1 Template
@@ -154,7 +137,7 @@ Playback Technology. With the help of *plugins*, it is possible to present
 better user experience.
 
 [role="mt-4"]
-==== Local Video
+=== Local Video
 
 VideoJS provides a flexible and customizable platform for displaying and
 controlling MPEG 4 video content on websites and web applications.
@@ -163,7 +146,7 @@ controlling MPEG 4 video content on websites and web applications.
 videojs::/assets/video//html5/rolling_wild.mp4[poster="/assets/video/poster/html5/rolling_wild.jpg", opts="" role="mt-4 mb-5"]
 
 [role="mt-5"]
-==== YouTube
+=== YouTube
 
 YouTube is a popular online video-sharing platform that allows users to
 upload, view, share, and comment on videos. The platform provides services
@@ -182,7 +165,7 @@ youtube::20gXikNRjbo[poster="/assets/video/poster/youtube/voice_kids/banner/best
 // youtube::9qRNdZ6G6B4[poster="/assets/video/poster/youtube/voice_kids/banner/best_of.jpg" role="mt-4 mb-5"]
 
 [role="mt-4"]
-==== Dailymotion
+=== Dailymotion
 
 The Dailymotion platform is a monetization solution directly connecting to
 high-quality advertisers through a proprietary advertising system.
@@ -193,7 +176,7 @@ video.
 dailymotion::x87ycik[role="mt-4 mb-5"]
 
 [role="mt-4"]
-==== Wistia
+=== Wistia
 
 Wistia is a marketing software and video hosting platform for business-to-business
 marketers. Free or paid plans are available. While Wistia may not be the
@@ -206,7 +189,7 @@ wistia::29b0fbf547[poster="auto" role="mt-4 mb-4"]
 // wistia::29b0fbf547[role="mt-4 mb-4"]
 
 [role="mt-4"]
-==== Vimeo
+=== Vimeo
 
 Vimeo is an sharing platform that allows users to upload, share, and view
 video content. It was founded in 2004 by a group of filmmakers and has

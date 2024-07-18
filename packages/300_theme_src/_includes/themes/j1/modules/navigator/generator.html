@@ -164,9 +164,12 @@
   {% comment %} Place|Hide Quicklinks container (HTML data loaded via AJAX)
   ------------------------------------------------------------------------------ {% endcomment %}
   <!-- [INFO   ] [~/_includes/themes/j1/modules/navigator/generator.html ] [ check for quicklinks ] -->
+
   {% if quicklinks_options.enabled %}
   <!-- [INFO   ] [~/_includes/themes/j1/modules/navigator/generator.html ] [ place container for: quicklinks ] -->
-  <div id="{{nav_quicklinks_id}}" class="quicklink-nav collapse navbar-collapse justify-content-end pr-4"></div>
+  <!-- jadams, 2024-07-18: new navbar layout  -->
+  <!-- div id="{{nav_quicklinks_id}}" class="quicklink-nav collapse navbar-collapse justify-content-end pr-4"></div -->
+  <div id="{{nav_quicklinks_id}}" class="quicklink-nav collapse navbar-collapse justify-content-end"></div>
   {% endif %}
 
 </nav>

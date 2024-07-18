@@ -2,9 +2,9 @@
 # ------------------------------------------------------------------------------
 node_modules/
 
-yarn.lock
+.jekyll-metadata
 
-package-lock.json
+_site/**
 
 
 # Unneeded files created by you or helper processes

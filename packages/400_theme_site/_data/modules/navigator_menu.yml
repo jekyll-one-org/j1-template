@@ -18,6 +18,48 @@
 # ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------
+# Menu TOUR
+#
+- item:                                 Tour
+  sublevel:
+
+    - title:                            Embed Audio
+      href:                             /pages/public/learn/roundtrip/present_audio/
+      icon:                             volume-high
+    - title:                            Embed Video
+      href:                             /pages/public/learn/roundtrip/present_video/
+      icon:                             video
+    - title:                            Embed Images
+      href:                             /pages/public/learn/roundtrip/present_images/
+      icon:                             image
+
+    - title:                            Typography
+      href:                             /pages/public/learn/roundtrip/typography/
+      icon:                             format-text
+    - title:                            Icons
+      href:                             /pages/public/learn/roundtrip/mdi_icon_font/
+      icon:                             fan
+    - title:                            Extensions
+      href:                             /pages/public/learn/roundtrip/asciidoc_extensions/
+      icon:                             format-annotation-plus
+    - title:                            Modals
+      href:                             /pages/public/learn/roundtrip/modals/
+      icon:                             image
+    - title:                            Tables
+      href:                             /pages/public/learn/roundtrip/responsive_tables/
+      icon:                             table
+
+    - title:                            Themes
+      href:                             /pages/public/learn/roundtrip/themes/
+      icon:                             theme-light-dark
+    - title:                            Highligher
+      href:                             /pages/public/learn/roundtrip/rouge/
+      icon:                             code-parentheses
+    - title:                            Search
+      href:                             /pages/public/learn/roundtrip/quicksearch/
+      icon:                             magnify
+
+# ------------------------------------------------------------------------------
 # Menu LEARN
 #
 - item:                                 Learn
@@ -38,40 +80,40 @@
     # --------------------------------------------------------------------------
     # Roundtrip
     #
-    - title:                            Roundtrip
-      icon:                             briefcase-search-outline
-      dropdown:
-
-        - title:                        Image
-          href:                         /pages/public/learn/roundtrip/present_images/
-          icon:                         image
-        - title:                        Audio and Video
-          href:                         /pages/public/learn/roundtrip/present_audio_video/
-          icon:                         video
-        - title:                        Typography
-          href:                         /pages/public/learn/roundtrip/typography/
-          icon:                         format-text
-        - title:                        Icons
-          href:                         /pages/public/learn/roundtrip/mdi_icon_font/
-          icon:                         fan
-        - title:                        Extensions
-          href:                         /pages/public/learn/roundtrip/asciidoc_extensions/
-          icon:                         format-annotation-plus
-        - title:                        Modals
-          href:                         /pages/public/learn/roundtrip/modals/
-          icon:                         image
-        - title:                        Tables
-          href:                         /pages/public/learn/roundtrip/responsive_tables/
-          icon:                         table
-        - title:                        Themes
-          href:                         /pages/public/learn/roundtrip/themes/
-          icon:                         theme-light-dark
-        - title:                        Highligher
-          href:                         /pages/public/learn/roundtrip/rouge/
-          icon:                         code-parentheses
-        - title:                        Search
-          href:                         /pages/public/learn/roundtrip/quicksearch/
-          icon:                         magnify
+    # - title:                            Roundtrip
+    #   icon:                             briefcase-search-outline
+    #   dropdown:
+    #
+    #     - title:                        Image
+    #       href:                         /pages/public/learn/roundtrip/present_images/
+    #       icon:                         image
+    #     - title:                        Audio and Video
+    #       href:                         /pages/public/learn/roundtrip/present_audio_video/
+    #       icon:                         video
+    #     - title:                        Typography
+    #       href:                         /pages/public/learn/roundtrip/typography/
+    #       icon:                         format-text
+    #     - title:                        Icons
+    #       href:                         /pages/public/learn/roundtrip/mdi_icon_font/
+    #       icon:                         fan
+    #     - title:                        Extensions
+    #       href:                         /pages/public/learn/roundtrip/asciidoc_extensions/
+    #       icon:                         format-annotation-plus
+    #     - title:                        Modals
+    #       href:                         /pages/public/learn/roundtrip/modals/
+    #       icon:                         image
+    #     - title:                        Tables
+    #       href:                         /pages/public/learn/roundtrip/responsive_tables/
+    #       icon:                         table
+    #     - title:                        Themes
+    #       href:                         /pages/public/learn/roundtrip/themes/
+    #       icon:                         theme-light-dark
+    #     - title:                        Highligher
+    #       href:                         /pages/public/learn/roundtrip/rouge/
+    #       icon:                         code-parentheses
+    #     - title:                        Search
+    #       href:                         /pages/public/learn/roundtrip/quicksearch/
+    #       icon:                         magnify
 
     # --------------------------------------------------------------------------
     # Collections

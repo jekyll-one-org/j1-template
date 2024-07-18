@@ -22,8 +22,6 @@
 
 .mini-player-container {
   width: 475px;
-  border: solid 1px;
-  border-color: var(--ajs-theme-uno--medium-silver);
   background-color: var(--ajs-theme-uno--black);
 }
 
