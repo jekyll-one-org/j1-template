@@ -176,8 +176,69 @@ j1.adapter.themeToggler = ((j1, window) => {
 
           // -------------------------------------------------------------------
           // Event Mgmt SHOULD moved ta navigator core
+          // -------------------------------------------------------------------
+
+          // toggle themeToggler icon to 'dark' if required
+          if ($('#quickLinksThemeTogglerButton').length) {
+            if (user_state.theme_name === dark_theme_name) {
+              $('#quickLinksThemeTogglerButton a i').toggleClass('mdib-lightbulb mdib-lightbulb-outline');
+            }
+          }
+
+          // click on theme toggle icon
+          document.getElementById('quickLinksThemeTogglerButton').addEventListener('click', function(event) {
+            if (user_state.theme_name === light_theme_name) {
+              user_state.theme_name = dark_theme_name;
+              user_state.theme_css  = dark_theme_css;
+              user_state.theme_icon = 'mdib-lightbulb';
+            } else {
+              user_state.theme_name = light_theme_name;
+              user_state.theme_css  = light_theme_css;
+              user_state.theme_icon = 'mdib-lightbulb-outline';
+            }
+            logger.info('\n' + 'switch theme to: ' + user_state.theme_name);
+
+            user_state.writer = 'themeToggler';
+            var cookie_written = j1.writeCookie({
+              name:     cookie_names.user_state,
+              data:     user_state,
+              secure:   secure,
+              expires:  365
+            });
+
+            if (!cookie_written) {
+              logger.error('\n' + 'failed write to cookie: ' + cookie_names.user_consent);
+            } else {
+              location.reload(true);
+            }
+          });
+
+          // $('#quickLinksThemeTogglerButton').click(function () {
+          //   if (user_state.theme_name === light_theme_name) {
+          //     user_state.theme_name = dark_theme_name;
+          //     user_state.theme_css  = dark_theme_css;
+          //     user_state.theme_icon = 'mdib-lightbulb';
+          //   } else {
+          //     user_state.theme_name = light_theme_name;
+          //     user_state.theme_css  = light_theme_css;
+          //     user_state.theme_icon = 'mdib-lightbulb-outline';
+          //   }
+          //   logger.info('\n' + 'switch theme to: ' + user_state.theme_name);
           //
-          _this.initThemeTogglerEvent();
+          //   user_state.writer = 'themeToggler';
+          //   var cookie_written = j1.writeCookie({
+          //     name:     cookie_names.user_state,
+          //     data:     user_state,
+          //     secure:   secure,
+          //     expires:  365
+          //   });
+          //
+          //   if (!cookie_written) {
+          //     logger.error('\n' + 'failed write to cookie: ' + cookie_names.user_consent);
+          //   } else {
+          //     location.reload(true);
+          //   }
+          // }); // END button click
 
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
@@ -190,48 +251,6 @@ j1.adapter.themeToggler = ((j1, window) => {
         } // END pageVisible
       }, 10); // END dependencies_met_page_ready
     }, // END init
-
-    // -------------------------------------------------------------------------
-    // initThemeTogglerEvent
-    // -------------------------------------------------------------------------
-    initThemeTogglerEvent: () => {
-
-      // toggle themeToggler icon to 'dark' if required
-      if ($('#quickLinksThemeTogglerButton').length) {
-        if (user_state.theme_name === dark_theme_name) {
-          $('#quickLinksThemeTogglerButton a i').toggleClass('mdib-lightbulb mdib-lightbulb-outline');
-        }
-      }
-
-      // START EventListener 'click' (theme toggle icon)
-      document.getElementById('quickLinksThemeTogglerButton').addEventListener('click', function(event) {
-        if (user_state.theme_name === light_theme_name) {
-          user_state.theme_name = dark_theme_name;
-          user_state.theme_css  = dark_theme_css;
-          user_state.theme_icon = 'mdib-lightbulb';
-        } else {
-          user_state.theme_name = light_theme_name;
-          user_state.theme_css  = light_theme_css;
-          user_state.theme_icon = 'mdib-lightbulb-outline';
-        }
-        logger.info('\n' + 'switch theme to: ' + user_state.theme_name);
-
-        user_state.writer = 'themeToggler';
-        var cookie_written = j1.writeCookie({
-          name:     cookie_names.user_state,
-          data:     user_state,
-          secure:   secure,
-          expires:  365
-        });
-
-        if (!cookie_written) {
-          logger.error('\n' + 'failed write to cookie: ' + cookie_names.user_consent);
-        } else {
-          location.reload(true);
-        }
-      });
-      // END EventListener 'mouseover' (songlist)
-    },
 
     // -------------------------------------------------------------------------
     // messageHandler()

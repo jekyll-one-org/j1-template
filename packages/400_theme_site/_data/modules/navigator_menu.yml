@@ -796,18 +796,18 @@
 # ------------------------------------------------------------------------------
 # Menu Themes
 #
-- item:                                 Theme
-  theme_select:
-    - preview:                          enabled
-      title:                            Preview
-      href:                             /pages/public/tools/previewer/current_theme/
-      icon:                             eye
-    - local_themes:                     enabled
-      title:                            Jekyll One
-      icon:                             alpha-j-box
-    - bootswatch_themes:                enabled
-      title:                            Bootswatch
-      icon:                             bootstrap
+# - item:                                 Theme
+#   theme_select:
+#     - preview:                          enabled
+#       title:                            Preview
+#       href:                             /pages/public/tools/previewer/current_theme/
+#       icon:                             eye
+#     - local_themes:                     enabled
+#       title:                            Jekyll One
+#       icon:                             alpha-j-box
+#     - bootswatch_themes:                enabled
+#       title:                            Bootswatch
+#       icon:                             bootstrap
 
 # ------------------------------------------------------------------------------
 # Menu ABOUT
