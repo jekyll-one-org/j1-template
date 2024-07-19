@@ -41,21 +41,21 @@ resource_options:
         # Broadway Underground - still image (animate default)
         - url:                          /assets/video/headers/present_videos/still/underground-broadway.jpg
           alt:                          Broadway Underground
-          title:                        Audio and Video
-          tagline:                      Playing media files
+          title:                        Video Player
+          tagline:                      Playing Video files
         # Broadway Underground - FAYETTE ST
         - url:                          /assets/video/headers/present_videos/underground-broadway.mp4
           alt:                          Broadway Underground Video
-          title:                        Audio and Video
-          tagline:                      Playing media files
+          title:                        Video Player
+          tagline:                      Playing Video files
           isVideo:                      true
           loop:                         false
           duration:                     6000
         # Broadway Underground - still image (animate random)
         - url:                          /assets/video/headers/present_videos/still/underground-broadway.jpg
           alt:                          Broadway Underground
-          title:                        Audio and Video
-          tagline:                      Playing media files
+          title:                        Video Player
+          tagline:                      Playing Video files
 ---
 
 // Page Initializer
