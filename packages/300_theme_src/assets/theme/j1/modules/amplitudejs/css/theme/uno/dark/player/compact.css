@@ -31,7 +31,6 @@
   height: 120px;
 }
 
-
 /* 2. Components
 # --------------------------------------------------------- */
 
@@ -316,7 +315,6 @@ div.amplitude-mute.amplitude-muted {
   background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/mute.svg") no-repeat;
 }
 
-
 /* player BOTTOM
 # --------------------------------------------------------- */
 div.player-bottom {
@@ -326,6 +324,14 @@ div.player-bottom {
 
 /* 3. Layout
 # --------------------------------------------------------- */
+
+/* Small only
+# --------------------------------------------------------- */
+@media screen and (max-width: 39.9375em) {
+  input[type=range].amplitude-volume-slider {
+    width: calc(100% - 100px);
+  }
+}
 
 /* 4. Pages
 # --------------------------------------------------------- */
@@ -629,7 +635,6 @@ div.list-next:hover {
 
 /* 7. Vendors
 # --------------------------------------------------------- */
-
 
 /* 8. Animations
 # --------------------------------------------------------- */
