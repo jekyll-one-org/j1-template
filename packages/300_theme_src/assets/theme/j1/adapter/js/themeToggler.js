@@ -160,12 +160,12 @@ j1.adapter.themeToggler = ((j1, window) => {
       // module initializer
       // -----------------------------------------------------------------------
       var dependencies_met_page_ready = setInterval (() => {
-        var pageState         = $('#content').css("display");
-        var pageVisible       = (pageState === 'block') ? true : false;
-        var j1CoreFinished    = (j1.getState() === 'finished') ? true : false;
-        var navigatorFinished = (j1.adapter.navigator.getState() === 'finished') ? true: false;
+        var pageState           = $('#content').css("display");
+        var pageVisible         = (pageState === 'block') ? true : false;
+        var j1CoreFinished      = (j1.getState() === 'finished') ? true : false;
+        var toggleButtonExists  = (document.getElementById('quickLinksThemeTogglerButton') === null ? false : true)
 
-        if (j1CoreFinished && pageVisible && navigatorFinished) {
+        if (j1CoreFinished && pageVisible && toggleButtonExists) {
           startTimeModule = Date.now();
 
           user_state = j1.readCookie(cookie_names.user_state);
