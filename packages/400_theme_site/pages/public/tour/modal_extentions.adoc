@@ -21,18 +21,18 @@ categories:                             [ Roundtrip ]
 tags:                                   [ Bootstrap, Modal, Extension ]
 
 image:
-  path:                                 /assets/image/pages/roundtrip/bootstrap-1920x1000-bw.jpg
+  path:                                 /assets/image/pages/tour/bootstrap-1920x1000-bw.jpg
   width:                                1920
   height:                               1280
 
 regenerate:                             false
-permalink:                              /pages/public/learn/roundtrip/modals/
+permalink:                              /pages/public/tour/modals/
 
 resources:                              [ rouge ]
 resource_options:
   - attic:
       slides:
-        - url:                          /assets/image/pages/roundtrip/bootstrap-1920x1000-bw.jpg
+        - url:                          /assets/image/pages/tour/bootstrap-1920x1000-bw.jpg
           alt:                          Bootstrap Framework Logo
 ---
 
@@ -110,4 +110,4 @@ fully responsive!
 
 [role="mb-7"]
 Check out from here what
-link:{url-roundtrip--responsive-tables}[Responsive Tables] can do!
+link:{url-tour--responsive-tables}[Responsive Tables] can do!

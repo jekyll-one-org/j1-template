@@ -23,40 +23,40 @@
 - item:                                 Tour
   sublevel:
 
+    - title:                            Manage Images
+      href:                             /pages/public/tour/present_images/
+      icon:                             image
     - title:                            Playing Audio
-      href:                             /pages/public/learn/roundtrip/present_audio/
+      href:                             /pages/public/tour/present_audio/
       icon:                             volume-high
     - title:                            Playing Video
-      href:                             /pages/public/learn/roundtrip/present_video/
+      href:                             /pages/public/tour/present_video/
       icon:                             video
-    - title:                            Embed Images
-      href:                             /pages/public/learn/roundtrip/present_images/
-      icon:                             image
 
     - title:                            Typography
-      href:                             /pages/public/learn/roundtrip/typography/
+      href:                             /pages/public/tour/typography/
       icon:                             format-text
     - title:                            Icons
-      href:                             /pages/public/learn/roundtrip/mdi_icon_font/
+      href:                             /pages/public/tour/mdi_icon_font/
       icon:                             fan
     - title:                            Extensions
-      href:                             /pages/public/learn/roundtrip/asciidoc_extensions/
+      href:                             /pages/public/tour/asciidoc_extensions/
       icon:                             format-annotation-plus
     - title:                            Modals
-      href:                             /pages/public/learn/roundtrip/modals/
+      href:                             /pages/public/tour/modals/
       icon:                             image
     - title:                            Tables
-      href:                             /pages/public/learn/roundtrip/responsive_tables/
+      href:                             /pages/public/tour/responsive_tables/
       icon:                             table
 
     - title:                            Themes
-      href:                             /pages/public/learn/roundtrip/themes/
+      href:                             /pages/public/tour/themes/
       icon:                             theme-light-dark
     - title:                            Highligher
-      href:                             /pages/public/learn/roundtrip/rouge/
+      href:                             /pages/public/tour/rouge/
       icon:                             code-parentheses
     - title:                            Search
-      href:                             /pages/public/learn/roundtrip/quicksearch/
+      href:                             /pages/public/tour/quicksearch/
       icon:                             magnify
 
 # ------------------------------------------------------------------------------
@@ -796,18 +796,18 @@
 # ------------------------------------------------------------------------------
 # Menu Themes
 #
-# - item:                                 Theme
-#   theme_select:
-#     - preview:                          enabled
-#       title:                            Preview
-#       href:                             /pages/public/tools/previewer/current_theme/
-#       icon:                             eye
-#     - local_themes:                     enabled
-#       title:                            Jekyll One
-#       icon:                             alpha-j-box
-#     - bootswatch_themes:                enabled
-#       title:                            Bootswatch
-#       icon:                             bootstrap
+- item:                                 Theme
+  theme_select:
+    - preview:                          enabled
+      title:                            Preview
+      href:                             /pages/public/tools/previewer/current_theme/
+      icon:                             eye
+    - local_themes:                     enabled
+      title:                            Jekyll One
+      icon:                             alpha-j-box
+    - bootswatch_themes:                enabled
+      title:                            Bootswatch
+      icon:                             bootstrap
 
 # ------------------------------------------------------------------------------
 # Menu ABOUT

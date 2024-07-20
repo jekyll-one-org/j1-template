@@ -13,7 +13,7 @@ MDI and FA icons are very good in design and have a rich set of different
 icons for many categories used for the Web.
 
 See mooe details for Material Design Icons and FontAwesome Icons on
-http://localhost:41000/pages/public/learn/roundtrip/mdi_icon_font/.
+http://localhost:41000/pages/public/tour/mdi_icon_font/.
 
 
 What are Asciidoc Paragraphs?
@@ -722,7 +722,7 @@ Frontmatter example:
   ...
   canonical:                              true
   regenerate:                             false
-  permalink:                              /pages/public/learn/roundtrip/rouge/
+  permalink:                              /pages/public/tour/rouge/
   ...
 ---
 

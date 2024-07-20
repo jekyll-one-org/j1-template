@@ -4,16 +4,11 @@ node_modules/
 
 package-lock.json
 
-.jekyll-metadata
 
 # Unneeded files created by you or helper processes
-# Ignore symbolic links as simple files!!!
+# Ignore symbolic links as simple files !!!
 # ------------------------------------------------------------------------------
 log
-
-Gemfile
-
-Gemfile.lock
 
 tmp/
 
@@ -151,7 +146,6 @@ packages/400_theme_site/.jekyll-cache/
 packages/400_theme_site/_data/private*.yml
 
 packages/400_theme_site/collections/posts/public/faq/*
-
 
 
 # Unneeded files for package 500_theme_gem

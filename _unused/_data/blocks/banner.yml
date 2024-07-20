@@ -142,7 +142,7 @@ settings:
                     icon:               briefcase-search-outline
                     icon_color:
                     icon_size:          3x
-                    href:               /pages/public/learn/roundtrip/present_images/
+                    href:               /pages/public/tour/present_images/
                     target:
 
                 - name:                 Rocketstart

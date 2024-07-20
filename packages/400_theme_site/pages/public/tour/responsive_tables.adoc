@@ -19,18 +19,18 @@ categories:                             [ Roundtrip ]
 tags:                                   [ Bootstrap, Tables, Extension ]
 
 image:
-  path:                                 /assets/image/pages/roundtrip/tables-1920x1280-bw.jpg
+  path:                                 /assets/image/pages/tour/tables-1920x1280-bw.jpg
   width:                                1920
   height:                               1280
 
 regenerate:                             false
-permalink:                              /pages/public/learn/roundtrip/responsive_tables/
+permalink:                              /pages/public/tour/responsive_tables/
 
 resources:                              [ rouge ]
 resource_options:
   - attic:
       slides:
-        - url:                          /assets/image/pages/roundtrip/tables-1920x1280-bw.jpg
+        - url:                          /assets/image/pages/tour/tables-1920x1280-bw.jpg
           alt:                          Photo by Markus Spiske on Unsplash
           badge:
             type:                       unsplash
@@ -88,7 +88,7 @@ J1 Template system:
 |`rtable`
 |*Bootstap Table*
 |Bootstap tables are used by J1 Template for default. Those tables are using
-the *responsive text* feature (see link:{url-roundtrip--typography}[Typography])
+the *responsive text* feature (see link:{url-tour--typography}[Typography])
 and classic Bootstrap table styles with no additional CSS classes applied.
 For smaller viewports, the text scales down and should automatically fit the
 cells. The default text size for tables is level 300 `r-text-300` for
@@ -308,4 +308,4 @@ content individually for a seamless integration in existing webs.
 [role="mb-7"]
 Check out what the *Theme Feature* can do for modern static websites.
 Experience the functionality checking the preview page at
-link:{url-roundtrip--themes}[Bootstrap Themes]!
+link:{url-tour--themes}[Bootstrap Themes]!

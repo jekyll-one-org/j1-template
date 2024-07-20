@@ -26,7 +26,7 @@ image:
   height:                               1280
 
 regenerate:                             false
-permalink:                              /pages/public/learn/roundtrip/themes/
+permalink:                              /pages/public/tour/themes/
 
 resources:                              [ lightbox, rouge ]
 resource_options:
@@ -101,4 +101,4 @@ current browsers.
 
 [role="mb-7"]
 To check the code highlighter J1 Template offers, go for the
-link:{url-roundtrip--rouge-hightlighter}[Rouge Code Highlighter].
+link:{url-tour--rouge-hightlighter}[Rouge Code Highlighter].

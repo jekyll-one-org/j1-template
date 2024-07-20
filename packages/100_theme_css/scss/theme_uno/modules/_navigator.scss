@@ -114,6 +114,10 @@ li.nav-item > a {
     background-color: $nav-primary;
 }
 
+nav.navbar.navigator .navbar-brand {
+  cursor: auto;
+}
+
 // Stop scrolling helper classes
 // -----------------------------------------------------------------------------
 // See:

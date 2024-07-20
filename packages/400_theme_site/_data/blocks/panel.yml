@@ -406,7 +406,7 @@ settings:
 
         position:                       left                                    # left | center
         title:                          Jekyll One
-        tagline:                        featured theme for jekyll
+        tagline:                        powerful theme for jekyll
         description_properties:         mt-3 mr-3 mb-3
         description: >
                                         <p class="dropcap">

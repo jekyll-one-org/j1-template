@@ -28,7 +28,7 @@ resource_options:
       padding_bottom:                   50
       opacity:                          0.5
       slides:
-        - url:                          /assets/image/pages/roundtrip/images-1920x1280-bw.jpg
+        - url:                          /assets/image/pages/tour/images-1920x1280-bw.jpg
           alt:                          Photo by Ricardo Gomez Angel on Unsplash
           badge:
             type:                       unsplash

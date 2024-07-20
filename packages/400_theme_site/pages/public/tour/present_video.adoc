@@ -27,7 +27,7 @@ image:
 
 personalization:                        true
 regenerate:                             false
-permalink:                              /pages/public/learn/roundtrip/present_video/
+permalink:                              /pages/public/tour/present_video/
 
 resources:                              [
                                           gallery, lightgallery, masonry,
@@ -348,4 +348,4 @@ responsive websites.
 
 [role="mb-7"]
 Find out how it works and go for:
-link:{url-roundtrip--typography}[Typography], then.
+link:{url-tour--typography}[Typography], then.

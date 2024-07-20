@@ -25,7 +25,7 @@ image:
   height:                               1280
 
 regenerate:                             true
-permalink:                              /pages/public/learn/roundtrip/rouge/
+permalink:                              /pages/public/tour/rouge/
 
 resources:                              [ rouge ]
 resource_options:
@@ -218,4 +218,4 @@ efforts are good reasons your readers will return.
 
 [role="mb-7"]
 Learn what is searching a J1 based websites all about at
-link:{url-roundtrip--quicksearch}[Search Engine].
+link:{url-tour--quicksearch}[Search Engine].

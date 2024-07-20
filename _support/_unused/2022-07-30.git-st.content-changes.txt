@@ -51,9 +51,9 @@ Changes not staged for commit:
 
 	modified:   pages/public/learn/kickstart/j1_in_a_day/_includes/attributes.asciidoc
 
-	modified:   pages/public/learn/roundtrip/100_present_images.adoc
-	modified:   pages/public/learn/roundtrip/400_asciidoc_extensions.adoc
-	modified:   pages/public/learn/roundtrip/_includes/attributes.asciidoc
+	modified:   pages/public/tour/100_present_images.adoc
+	modified:   pages/public/tour/400_asciidoc_extensions.adoc
+	modified:   pages/public/tour/_includes/attributes.asciidoc
 
 	modified:   pages/public/manuals/attic/_includes/attributes.asciidoc
 	modified:   pages/public/manuals/carousel/_includes/documents/100_owl_carousel_library.asciidoc

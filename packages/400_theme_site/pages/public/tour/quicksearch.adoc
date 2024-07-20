@@ -29,7 +29,7 @@ image:
   height:                               1280
 
 regenerate:                             false
-permalink:                              /pages/public/learn/roundtrip/quicksearch/
+permalink:                              /pages/public/tour/quicksearch/
 
 resources:                              [ lightbox, rouge ]
 resource_options:
@@ -149,7 +149,7 @@ A document data set might look like this:
   "id": 3,
   "title": "Roundtrip",
   "tagline": "present images",
-  "url": "/pages/public/learn/roundtrip/present_images/",
+  "url": "/pages/public/tour/present_images/",
   "date": "2020-11-03 +0100",
   "tags": [
     "Introduction",

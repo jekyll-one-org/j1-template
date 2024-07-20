@@ -20,14 +20,14 @@ categories:                             [ Roundtrip ]
 tags:                                   [ Asciidoc, Extension ]
 
 image:
-  path:                                 /assets/image/pages/roundtrip/puzzle-1920x1280-bw.jpg
+  path:                                 /assets/image/pages/tour/puzzle-1920x1280-bw.jpg
   width:                                1920
   height:                               1280
 
 tts:                                    true
 comments:                               false
 regenerate:                             false
-permalink:                              /pages/public/learn/roundtrip/asciidoc_extensions/
+permalink:                              /pages/public/tour/asciidoc_extensions/
 
 resources:                              [
                                           gallery, iconify, lightbox,
@@ -36,7 +36,7 @@ resources:                              [
 resource_options:
   - attic:
       slides:
-        - url:                          /assets/image/pages/roundtrip/puzzle-1920x1280-bw.jpg
+        - url:                          /assets/image/pages/tour/puzzle-1920x1280-bw.jpg
           alt:                          puzzle-1920x1280-bw
 ---
 
@@ -803,6 +803,6 @@ attention.
 
 [role="mb-7"]
 Have a look at the preview page
-link:{url-roundtrip--extended-modals}[Advanced Bootstrap Modals] to explore
+link:{url-tour--extended-modals}[Advanced Bootstrap Modals] to explore
 the possibilities of the *extended* Bootstrap features provided by J1 Template
 for your new website.

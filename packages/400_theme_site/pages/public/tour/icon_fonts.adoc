@@ -20,18 +20,18 @@ categories:                             [ Roundtrip ]
 tags:                                   [ Module, Icon ]
 
 image:
-  path:                                 assets/image/pages/roundtrip/icon-fonts-1920x1280-bw.jpg
+  path:                                 assets/image/pages/tour/icon-fonts-1920x1280-bw.jpg
   width:                                1920
   height:                               1280
 
 regenerate:                             false
-permalink:                              /pages/public/learn/roundtrip/mdi_icon_font/
+permalink:                              /pages/public/tour/mdi_icon_font/
 
 resources:                              [ iconify ]
 resource_options:
   - attic:
       slides:
-        - url:                          /assets/image/pages/roundtrip/icon-fonts-1920x1280-bw.jpg
+        - url:                          /assets/image/pages/tour/icon-fonts-1920x1280-bw.jpg
           alt:                          Photo by Harpal Singh on Unsplash
           badge:
             type:                       unsplash
@@ -246,7 +246,7 @@ mdi:heart[5x md-red-900 mdi-pulsed]
 Using Material Design Icons is easy as the inline macro `mdi:` for Asciidoc
 is available to place icons automatically wherever you want. See more about
 this in section
-link:{url-roundtrip--asciidoc-extensions}#icon-fonts[Asciidoc Extensions].
+link:{url-tour--asciidoc-extensions}#icon-fonts[Asciidoc Extensions].
 
 [NOTE]
 ====
@@ -443,7 +443,7 @@ parts:
 Using FontAwesome with Asciidoc is quite easy to use as two inline
 macros `fab:` and `fas:` are available to place icons where ever you want.
 See more about this in section
-link:{url-roundtrip--asciidoc-extensions}#icon-fonts[Asciidoc Extensions].
+link:{url-tour--asciidoc-extensions}#icon-fonts[Asciidoc Extensions].
 ====
 
 Find below examples of both sets and how to use with J1 Template.
@@ -651,7 +651,7 @@ the page link:{url-iconify--icon-sets}[Iconify-Framework Icon Sets, {browser-win
 Using Iconify-Framework icons with J1 Template is quite easy. An inline macro
 `iconify:` for Asciidoc is available to place icons where ever you want.
 See more about this in section
-link:{url-roundtrip--asciidoc-extensions}#icon-fonts[Asciidoc Extensions].
+link:{url-tour--asciidoc-extensions}#icon-fonts[Asciidoc Extensions].
 ====
 
 Currently, over 40,000 vector icons are available for many different use cases.
@@ -748,4 +748,4 @@ Asciidoc block elements. I'm sure, you'll love it.
 
 [role="mb-7"]
 Check the more J1 Template offer and go for
-link:{url-roundtrip--asciidoc-extensions}[Asciidoc Extensions] made for J1!
+link:{url-tour--asciidoc-extensions}[Asciidoc Extensions] made for J1!

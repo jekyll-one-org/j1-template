@@ -17,7 +17,7 @@ keywords: >
                                         speech synthesise, sst, j1 module, speak2me, jquery
 
 image:
-  path:                                 /assets/image/pages/roundtrip/images-1920x1280-bw.jpg
+  path:                                 /assets/image/pages/tour/images-1920x1280-bw.jpg
   width:                                1920
   height:                               1280
 
@@ -48,7 +48,7 @@ resource_options:
       collapseDepth:                    4
   - attic:
       slides:
-        - url:                          /assets/image/pages/roundtrip/images-1920x1280-bw.jpg
+        - url:                          /assets/image/pages/tour/images-1920x1280-bw.jpg
           alt:                          Photo by Ricardo Gomez Angel on Unsplash
           badge:
             type:                       unsplash
@@ -200,7 +200,7 @@ programming code snippets on a webpage.
   "id": 3,
   "title": "Roundtrip",
   "tagline": "present images",
-  "url": "/pages/public/learn/roundtrip/present_images/",
+  "url": "/pages/public/tour/present_images/",
   "date": "2020-11-03 +0100",
   "tags": [
     "Introduction",

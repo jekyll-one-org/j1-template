@@ -234,17 +234,17 @@ tag::urls[]
 :url-j1--rocketstart:                             //jekyll.one/pages/public/learn/rocketstart
 :url-j1--rocketstart-deployment-reference:        //jekyll.one/pages/public/learn/rocketstart/#deployment-reference
 
-:url-j1-roundtrip--present-images:                /pages/public/learn/roundtrip/present_images/
+:url-j1-roundtrip--present-images:                /pages/public/tour/present_images/
 
 :url-j1-learn--whats-up:                          //jekyll.one/pages/public/learn/whats_up/
-:url-j1-learn--present-images:                    //jekyll.one/pages/public/learn/roundtrip/present_images/
-:url-j1-learn--present-videos:                    //jekyll.one/pages/public/learn/roundtrip/present_videos/
-:url-j1-learn--typography:                        //jekyll.one/pages/public/learn/roundtrip/typography/
-:url-j1-learn--icon-fonts:                        //jekyll.one/pages/public/learn/roundtrip/mdi_icon_font/
-:url-j1-learn--asciidoc_extensions:               //jekyll.one/pages/public/learn/roundtrip/asciidoc_extensions/
-:url-j1-learn--extended-modals:                   //jekyll.one/pages/public/learn/roundtrip/modals/
-:url-j1-learn--responsive-tables:                 //jekyll.one/pages/public/learn/roundtrip/responsive_tables/
-:url-j1-learn--themes:                            //jekyll.one/pages/public/learn/roundtrip/themes/
+:url-j1-learn--present-images:                    //jekyll.one/pages/public/tour/present_images/
+:url-j1-learn--present-videos:                    //jekyll.one/pages/public/tour/present_videos/
+:url-j1-learn--typography:                        //jekyll.one/pages/public/tour/typography/
+:url-j1-learn--icon-fonts:                        //jekyll.one/pages/public/tour/mdi_icon_font/
+:url-j1-learn--asciidoc_extensions:               //jekyll.one/pages/public/tour/asciidoc_extensions/
+:url-j1-learn--extended-modals:                   //jekyll.one/pages/public/tour/modals/
+:url-j1-learn--responsive-tables:                 //jekyll.one/pages/public/tour/responsive_tables/
+:url-j1-learn--themes:                            //jekyll.one/pages/public/tour/themes/
 
 :url-j1-binder-repo--requirements-txt:            //github.com/jekyll-one/j1-binder-repo
 :url-j1-binder-repo--environment-yml:             //github.com/jekyll-one/j1-binder-nbinteract

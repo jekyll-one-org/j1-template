@@ -177,16 +177,16 @@ settings:
             type:                       about
             enabled:                    true
 
-            title:                      Starter
+            title:                      J1 Template
             title_translation:          notranslate
-            tagline:                    powerful template for jekyll
+            tagline:                    powerful theme for jekyll
             text: >
-                                        The Starter Web of J1 Template is a full-featured template
-                                        for Jekyll to create modern dynamic websites. The template
-                                        system provides a clean implementation for starting new projects.
+                                        The build-in web of J1 Template is a full-featured theme for Jekyll
+                                        to create modern dynamic websites based on Bootstrap V5.
+                                        The theme provides a clean implementation for starting new projects
+                                        of any type.
                                         <br><br>
-                                        J1 Template is Open Source, and all the modules included are
-                                        also free to use.
+                                        Jekyll One is open-source and free to use for private and business use.
 
             justify:                    false
 

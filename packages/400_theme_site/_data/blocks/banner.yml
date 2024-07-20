@@ -105,12 +105,12 @@ settings:
               type:                     text
               position:                 left                                    # left | center
               title:                    J1
-              tagline:                  <b>modern static websites</b>
+              tagline:                  <b>creating modern websites</b>
               translate_description:    notranslate                             # translate|notranslate
               description_properties:   mt-3 mb-3
               description: >
                                         <p class="dropcap">
-                                          The Starter Web of J1 Template is a full-featured template for Jekyll to
+                                          The build-in Web of J1 Template is a full-featured template for Jekyll to
                                           create modern dynamic websites. The template system provides a clean
                                           implementation for starting new projects. Jekyll One is open source,
                                           and the modules packed are also free to use.
@@ -142,7 +142,7 @@ settings:
                     icon:               briefcase-search-outline
                     icon_color:
                     icon_size:          3x
-                    href:               /pages/public/learn/roundtrip/present_images/
+                    href:               /pages/public/tour/present_images/
                     target:
 
                 - name:                 Rocketstart
