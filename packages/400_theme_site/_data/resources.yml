@@ -341,6 +341,7 @@ resources:
   #
   # NOTE Theme CSS loaded via module 'themes'
   # NOTE: load always 'unolight' as a 'bese' (e.g. for unodark, but should be removed)
+  # NOTE: Changed J1 Theme Core resources for template.js bcecause of potential AV Scanner issues of min version
   #
   - name:                               J1 Theme Core
     resource:

@@ -84,7 +84,7 @@ regenerate:                             true
 // -----------------------------------------------------------------------------
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
-'use strict';
+"use strict";
 j1.adapter.analytics = ((j1, window) => {
 
   {% comment %} Set global variables

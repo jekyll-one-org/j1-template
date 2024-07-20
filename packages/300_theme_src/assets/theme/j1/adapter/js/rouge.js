@@ -70,7 +70,7 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 /* eslint quotes: "off"                                                       */
 // -----------------------------------------------------------------------------
-'use strict';
+"use strict";
 j1.adapter.rouge = ((j1, window) => {
 
   {% comment %} Set global variables

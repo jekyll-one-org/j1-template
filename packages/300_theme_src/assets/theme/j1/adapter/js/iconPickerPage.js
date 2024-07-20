@@ -75,7 +75,7 @@ regenerate:                             true
 // -----------------------------------------------------------------------------
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
-'use strict';
+"use strict";
 j1.adapter.iconPickerPage = ((j1, window) => {
 
   {% comment %} Set global variables

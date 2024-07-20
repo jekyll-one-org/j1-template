@@ -83,7 +83,7 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 /* eslint quotes: "off"                                                       */
 // -----------------------------------------------------------------------------
-'use strict';
+"use strict";
 j1.adapter.cookieConsent = ((j1, window) => {
   var environment           = '{{environment}}';
   var tracking_enabled      = ('{{tracking_enabled}}' === 'true') ? true: false;

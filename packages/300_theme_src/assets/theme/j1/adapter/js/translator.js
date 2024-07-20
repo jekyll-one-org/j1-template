@@ -84,7 +84,7 @@ regenerate:                             true
 // https://github.com/marghoobsuleman/ms-Dropdown
 // https://www.marghoobsuleman.com/image-dropdown/help
 // https://www.marghoobsuleman.com/image-dropdown/advanced-help
-'use strict';
+"use strict";
 
 j1.adapter.translator = (function (j1, window) {
   var environment       = '{{environment}}';

@@ -55,8 +55,8 @@ window.platform                         = require('platform');
 // -----------------------------------------------------------------------------
 // window.deeplTranslator               = require('./js/deepl-translator');     // J1 Module deeplAPI used instead
 // window.j1.fab                        = require('./js/fab/fab.js');           // cannot used until NOT rewritten to jQuery
+// window.ejs                           = require('./js/ejs/ejs.js');
 
-window.ejs                              = require('./js/ejs/ejs.js');
 window.j1.adapter                       = require('./js/adapter/adapter.js');
 window.j1.anime                         = require('./js/anime/anime.js');       // added for fab
 window.j1.lazyCSS                       = require('./js/lazyCSS/lazyCSS.js');

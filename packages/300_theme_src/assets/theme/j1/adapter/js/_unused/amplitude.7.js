@@ -82,7 +82,7 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 
-'use strict';
+"use strict";
 j1.adapter.amplitude = ((j1, window) => {
 
   // göobal settings

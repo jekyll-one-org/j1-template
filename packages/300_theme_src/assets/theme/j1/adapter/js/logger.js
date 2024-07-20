@@ -81,7 +81,7 @@ regenerate:                             true
 // -----------------------------------------------------------------------------
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
-'use strict';
+"use strict";
 j1.adapter.logger = ((j1, window) => {
 
   {% comment %} Global variables

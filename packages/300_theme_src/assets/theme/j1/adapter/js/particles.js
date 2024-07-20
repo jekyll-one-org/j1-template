@@ -81,7 +81,7 @@ regenerate:                             true
 // -----------------------------------------------------------------------------
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
-'use strict';
+"use strict";
 j1.adapter.particles = ((j1, window) => {
 
   {% comment %} Set global variables

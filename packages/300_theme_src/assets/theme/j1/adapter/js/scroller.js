@@ -83,7 +83,7 @@ TODO: Check|Fix the (Liquid) merge issue for scroller_options
 // -----------------------------------------------------------------------------
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
-'use strict';
+"use strict";
 j1.adapter.scroller = ((j1, window) => {
 
   {% comment %} Set global variables

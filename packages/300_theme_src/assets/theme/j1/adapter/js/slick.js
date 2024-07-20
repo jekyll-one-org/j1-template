@@ -81,7 +81,7 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 /* eslint quotes: "off"                                                       */
 // -----------------------------------------------------------------------------
-'use strict';
+"use strict";
 j1.adapter.slick = ((j1, window) => {
 
   {% comment %} Set global variables

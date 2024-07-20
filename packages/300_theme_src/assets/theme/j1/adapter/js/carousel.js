@@ -85,7 +85,7 @@ regenerate:                             true
 // -----------------------------------------------------------------------------
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
-'use strict';
+"use strict";
 j1.adapter.carousel = ((j1, window) => {
   var environment   = '{{environment}}';
   var dragging      = false;

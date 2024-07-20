@@ -104,7 +104,7 @@ regenerate:                             true
 /* eslint quotes: "off"                                                       */
 // -----------------------------------------------------------------------------
 
-'use strict';
+"use strict";
 j1.adapter.themes = (function (j1, window) {
 
   {% comment %} Set global variables
