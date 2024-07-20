@@ -1,9 +1,10 @@
-/**
+/*
  * This file is responsible for parsing the content from the DOM and making
  * sure data is nested properly.
  *
  * @author Tim Scanlin
- */
+*/
+"use strict";
 
 // -----------------------------------------------------------------------------
 // ESLint shimming

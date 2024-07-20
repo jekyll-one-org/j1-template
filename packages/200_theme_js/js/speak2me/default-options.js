@@ -5,6 +5,7 @@
 /* eslint no-undef: "off"                                                     */
 /* eslint no-unused-vars: "off"                                               */
 // -----------------------------------------------------------------------------
+"use strict";
 
 module.exports = {
 

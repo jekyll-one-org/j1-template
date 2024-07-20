@@ -20,6 +20,7 @@
  #    "eslint:tocbot": "eslint --ignore-path .eslintignore src/tocbot/js"
  # -----------------------------------------------------------------------------
 */
+"use strict";
 
 // -----------------------------------------------------------------------------
 // ESLint shimming
@@ -50,8 +51,6 @@
     root.tocbot = factory(root)
   }
 })(typeof global !== 'undefined' ? global : this.window || this.global, function (root) {
-  'use strict'
-
   // Default options.
   var defaultOptions = require('./default-options.js')
   // Object to store current options.

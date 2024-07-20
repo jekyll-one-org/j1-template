@@ -5,6 +5,7 @@
 /* eslint no-undef: "off"                                                     */
 /* eslint semi: "off"                                                         */
 // -----------------------------------------------------------------------------
+"use strict";
 
 module.exports = function updateTocScroll(options) {
   var toc = document.querySelector(options.tocSelector);

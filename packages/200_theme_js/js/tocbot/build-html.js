@@ -1,8 +1,9 @@
-/**
+/*
  * This file is responsible for building the DOM and updating DOM state.
  *
  * @author Tim Scanlin
- */
+*/
+"use strict";
 
 // -----------------------------------------------------------------------------
 // ESLint shimming

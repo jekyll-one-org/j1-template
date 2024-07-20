@@ -16,6 +16,7 @@
  # See: https://github.com/acoti/articulate.js/blob/master/LICENSE
  # -----------------------------------------------------------------------------
 */
+"use strict";
 
 /* Articulate.js (1.1.0). (C) 2017 Adam Coti.
   MIT @license: en.wikipedia.org/wiki/MIT_License
@@ -29,7 +30,6 @@
 */
 
 (function($) {
-'use strict';
 
   const defaultOptions       = require('./default-options.js');
   const ParseContent         = require('./parse-content.js');
