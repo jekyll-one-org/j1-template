@@ -21,6 +21,7 @@ you go to the Jekyll Way.
 
 Have fun!
 
+
 # Live Demo
 
 The template comes with a Web included, a skeleton for your new Web site.
@@ -238,6 +239,7 @@ Install latest NPM and Yarn packages for NodeJS:
   npm install -g yarn@latest
 ```
 
+
 # Setting up the project
 
 Running the J1 Theme project is very simple:
@@ -288,7 +290,6 @@ the generation of CSS and JS files, or creating the buildin starter web.
 All **base** development *tasks* are defined with the top-level project
 configuration; no need to dive into all the package-level configurations.
 All is managed by Lerna, based on simple top-level *tasks*.
-
 
 ## Initialize the project
 
