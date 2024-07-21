@@ -104,15 +104,15 @@ settings:
               width:                    12
               type:                     text
               position:                 left                                    # left | center
-              title:                    J1
-              tagline:                  <b>creating modern websites</b>
+              title:                    J1 Template
+              tagline:                  <b>create modern websites</b>
               translate_description:    notranslate                             # translate|notranslate
               description_properties:   mt-3 mb-3
               description: >
                                         <p class="dropcap">
                                           The build-in Web of J1 Template is a full-featured template for Jekyll to
                                           create modern dynamic websites. The template system provides a clean
-                                          implementation for starting new projects. Jekyll One is open source,
+                                          implementation for starting new projects. J1 Template is open source,
                                           and the modules packed are also free to use.
                                         </p>
                                         <p>
