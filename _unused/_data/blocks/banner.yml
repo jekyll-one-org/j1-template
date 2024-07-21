@@ -110,14 +110,14 @@ settings:
               description_properties:   mt-3 mb-3
               description: >
                                         <p class="dropcap">
-                                          The Starter Theme of JekyllOne is a full-featured template for Jekyll to
+                                          The build-in Theme of JekyllOne is a full-featured template for Jekyll to
                                           create modern dynamic websites. The template system gives hobbyists
                                           and professionals a clean implementation for starting new projects.
                                           JekyllOne is open source, and the modules packed are also free
                                           to use. No license issues for private or professional purposes.
                                         </p>
                                         <p>
-                                          J1 Starter Theme is designed to be lightweight and easily customizable.
+                                          J1 Template is designed to be lightweight and easily customizable.
                                           It comes with a basic structure and styling out of the box so that you
                                           can create a website quickly and easily, without having to worry about
                                           the code. It features a modern, minimalist design with a focus on usability

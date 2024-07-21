@@ -1,15 +1,14 @@
 ---
-title:                                  Starter
-tagline:                                About This Site
+title:                                  J1 Template
+tagline:                                About this Site
 
 date:                                   2022-01-01
 #last_modified:                         2023-01-01
 
 description: >
-                                        J1 Template is a Bootstrap V5 website template for the static
-                                        site generator Jekyll. Things you should know about
-                                        this site, the people, the software
-                                        and the services provided by this project.
+                                        J1 Template is a Bootstrap V5 template for Jekyll.
+                                        Find what is good to know about this site, the people,
+                                        the software and the services provided by this project.
 keywords: >
                                         Jekyll, Theme, JekyllOne, J1, About, Project, Site
 
@@ -34,7 +33,7 @@ resource_options:
       padding_top:                      600
       slides:
         - url:                          /assets/image/modules/attics/1920x1280/j1-starter-mockup-1.jpg
-          alt:                          J1 Templates Mockup
+          alt:                          J1 Template Mockup
 ---
 
 // Page Initializer

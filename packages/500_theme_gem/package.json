@@ -2,7 +2,7 @@
   "private": true,
   "name": "gem",
   "version": "2024.3.6",
-  "description": "RubyGem sources for J1 Starter",
+  "description": "RubyGem sources for J1 Template",
   "main": "j1-template.gemspec",
   "config": {
     "bundler": "gem"
