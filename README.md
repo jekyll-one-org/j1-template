@@ -6,7 +6,7 @@ the best of OpenSource software for the Web and the Web site generator
 private or professional use. Explore this site to learn what's possible if
 you go to the Jekyll Way.
 
-![Screenshot](https://github.com/jekyll-one-org/j1-template/raw/main/starter-screenshot.jpg "J1 Template Web")
+![Screenshot](https://github.com/jekyll-one-org/j1-template/raw/main/j1-template-screenshot.jpg "J1 Template")
 
 * Fully Responsive. J1 Theme supports modern web browsers on all
   devices for best results on PCs, Tablets, and SmartPhones.
@@ -29,6 +29,7 @@ be modified for your needs. The built-in Starter Web can be visited live
 at [Netlify](https://starter.jekyll.one/).
 
 **Have fun exploring what a modern static web, a Jekyll site can do**!
+
 
 # Features
 
@@ -74,12 +75,13 @@ issues for private or professional use.
 * GDPR compatible cookie consent module included
 * Translator module (Google, Deepl) included
 * Clipboard module included
-* Floating Action ButtoLaptopns included
+* Floating Action Buttons included
 * Navigation modules included
 * Lightbox modules included
 * Gallery modules included
-* Carousel module included
-* Video modules included
+* Carousel modules included
+* Audio Player modules included (AmplitudeJS)
+* Video Player modules included (VideoJS)
 
 ## Addons and Integrations
 
@@ -88,7 +90,7 @@ issues for private or professional use.
 * Comment provider support for Hyvor and Disqus
 * Google Analytics support
 * Deploy on Github Pages (source only), Netlify and Heroku ready
-* Support for Jupyter Notebooks
+
 
 # Supported platforms
 
@@ -108,10 +110,9 @@ platforms.
 To run the Development System for J1 Theme, the following languages and
 tools expected to be in place with your OS:
 
-* Ruby language, version v4
-* Python language, version > 2.7 <1>
-* Javascript language (NodeJS), version >= 14.x < 15.x
-* NPM, version >= 6.14
+* Ruby language, version v3
+* Javascript (NodeJS), version >= 18
+* NPM, version >= 8.5
 * YARN, version >= 1.22
 * Git, version >= 2.29
 
