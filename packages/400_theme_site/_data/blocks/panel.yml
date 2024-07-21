@@ -406,7 +406,7 @@ settings:
 
         position:                       left                                    # left | center
         title:                          J1 Template
-        tagline:                        bootstrap v5 theme for Jekyll
+        tagline:                        free bootstrap V5 theme for jekyll
         description_properties:         mt-3 mr-3 mb-3
         description: >
                                         <p class="dropcap">

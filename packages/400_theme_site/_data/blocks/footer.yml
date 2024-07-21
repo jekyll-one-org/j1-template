@@ -85,7 +85,7 @@ settings:
             href:                       "#"
 #           href:                       //www.facebook.com/<your_profile>/
           twitter:
-            enabled:                    true
+            enabled:                    false
             href:                       "#"
 #           href:                       //twitter.com/<your_profile>/
           xing:
@@ -179,10 +179,10 @@ settings:
 
             title:                      J1 Template
             title_translation:          notranslate
-            tagline:                    bootstrap v5 theme for Jekyll
+            tagline:                    free bootstrap V5 theme for jekyll
             text: >
-                                        The build-in web of J1 Template is a full-featured theme for Jekyll
-                                        to create modern dynamic websites based on Bootstrap V5.
+                                        The build-in web of J1 Template is a full-featured theme
+                                        for Jekyll to create modern dynamic websites based on Bootstrap V5.
                                         The theme provides a clean implementation for starting new projects
                                         of any type.
                                         <br><br>
