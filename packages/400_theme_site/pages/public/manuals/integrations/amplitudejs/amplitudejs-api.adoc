@@ -1,7 +1,7 @@
 ---
 title:                                  AmplitudeJS API
-title_extention:                        Control Audio Players
-tagline:                                Control Audio Players
+title_extention:                        Integration for J1 Template
+tagline:                                User Guide
 
 date:                                   2024-04-17
 #last_modified:                         2024-01-01

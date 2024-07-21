@@ -116,7 +116,12 @@ exclude_from_search:                    true
         <div class="col-xl-{{grid.responsive.xl}} col-lg-{{grid.responsive.lg}} col-md-{{grid.responsive.md}} col-sm-{{grid.responsive.sm}} col-{{grid.responsive.xs}}" style=";padding-bottom: {{grid.gutters}}px; padding-left: {{grid.gutters}}px;">
 
           <article class="card bg-dark text-center text-white border-0 rounded-0 bottom">
-            <img class="card-img {{grid.image_styles}}" src="{{post.image.path | relative_url}}" alt="{{post.title}}" style="{{image_filters}}; height: {{grid.image_height}};">
+            <img
+              class="card-img {{grid.image_styles}}"
+              src="{{post.image.path | relative_url}}"
+              aria-label="{{post.title}}"
+              style="{{image_filters}}; height: {{grid.image_height}};">
+
             <div class="card-content mt-5">
 
               {% if post %}
@@ -129,10 +134,11 @@ exclude_from_search:                    true
               ---------------------------------------------------------------- {% endcomment %}
               {% for category in categories %}
               {% if category contains post.category %}
-              <a  class="masonry-article-link d-block text-white text-uppercase link-no-decoration {{translate}}"
-                  href="/pages/public/blog/navigator/archive/categoryview/#{{grid.group | slugify}}"
-                  target="{{target}}"
-                  style="font-size: 32px;">
+              <a
+                href="/pages/public/blog/navigator/archive/categoryview/#{{grid.group | slugify}}"
+                class="masonry-article-link d-block text-white text-uppercase link-no-decoration {{translate}}"
+                target="{{target}}"
+                style="font-size: 32px;">
                 {{grid.group}}
               </a>
               {% endif %}
@@ -151,10 +157,11 @@ exclude_from_search:                    true
 
               <!-- Post link (caption) -->
               <h4 class="caption notoc">
-                <a class="masonry-article-link {{translate}}"
-                   href="{{post.url}}"
-                   target="{{target}}"
-                   style="font-size: 32px;">
+                <a
+                  href="{{post.url}}"
+                  class="masonry-article-link {{translate}}"
+                  target="{{target}}"
+                  style="font-size: 32px;">
                    {{post.tags[0]}}
                 </a>
               </h4>
@@ -215,20 +222,36 @@ exclude_from_search:                    true
         <!-- (Masonry) Article item -->
         <div id="{{article.title | downcase | replace: ' ' ,'_'}}" class="masonry-article-item masonry-article-item--w400">
           {% if grid.preview %}
-          <a class="masonry-article-link" data-bs-toggle="modal" href="#articleModal_{{grid.id}}_{{forloop.index}}">
+          <a
+            href="#articleModal_{{grid.id}}_{{forloop.index}}"
+            class="masonry-article-link"
+            data-bs-toggle="modal">
             <div class="masonry-article-hover">
               <div class="masonry-article-hover-content">
                 <i class="mdib mdib-plus mdib-10x"></i>
               </div>
             </div>
-            <img class="{{grid.image_styles}}" src="{{article.image.path}}" alt="{{article.title}}" style="{{image_filters}}; height: {{grid.image_height}}; width: {{grid.image_width}}">
+            <img
+              class="{{grid.image_styles}}"
+              src="{{article.image.path}}"
+              aria-label="{{article.title}}"
+              style="{{image_filters}}; height: {{grid.image_height}}; width: {{grid.image_width}}">
           </a>
           {% else %}
-            <img class="{{grid.image_styles}}" src="{{article.image.path}}" alt="{{article.title}}" style="{{image_filters}}; height: {{grid.image_height}}; width: {{grid.image_width}}">
+            <img
+              class="{{grid.image_styles}}"
+              src="{{article.image.path}}"
+              aria-label="{{article.title}}"
+              style="{{image_filters}}; height: {{grid.image_height}}; width: {{grid.image_width}}">
           {% endif %}
           <div class="masonry-article-caption">
             <div class="masonry-article-caption-heading">
-              <a class="masonry-article-link {{translate}}" href="{{article.url}}" target="{{target}}">{{article.title}}</a>
+              <a
+                href="{{article.url}}"
+                class="masonry-article-link {{translate}}"
+                target="{{target}}">
+                {{article.title}}
+              </a>
             </div>
             <div class="masonry-article-caption-subheading">{{article.tags[0]}}</div>
           </div>
@@ -243,7 +266,7 @@ exclude_from_search:                    true
           <div class="modal-content">
 
             <!-- div class="close-modal" data-bs-dismiss="modal">
-              <img src="{{'/assets/image/icons/controls/close-icon.svg' | relative_url}}" alt="Close modal">
+              <img src="{{'/assets/image/icons/controls/close-icon.svg' | relative_url}}" aria-label="Close modal">
             </div -->
 
             <div class="close-modal" data-bs-dismiss="modal" aria-label="Close">
@@ -257,7 +280,7 @@ exclude_from_search:                    true
                     <!-- Project details-->
                     <h2 class="text-uppercase notoc {{translate}}">{{article.title}}</h2>
                     <p class="item-intro">{{article.tagline}}</p>
-                    <!-- img class="img-fluid d-block mx-auto" src="{{article.image.path | relative_url}}" alt="{{article.title}}" -->
+                    <!-- img class="img-fluid d-block mx-auto" src="{{article.image.path | relative_url}}" aria-label="{{article.title}}" -->
                     <p>{{article.description}}</p>
                     <ul class="list-inline">
                       <!-- li>
@@ -321,11 +344,16 @@ exclude_from_search:                    true
             {% if grid.lightbox.type == 'lb' %}
             <div class="{{grid.caption.position}}">
               <a
-                 href="{{grid.image_base_path}}/{{image.file}}"
-                 data-lightbox="{{grid.id}}-image-group"
-                 data-caption="{{image.caption}}"
-                 data-title="{{image.caption}}">
-                 <img id="{{forloop.index}}" class="{{grid.image_styles}}" src="{{grid.image_base_path}}/{{image.file}}" alt="{{image.caption}}" style="{{image_filters}}; height: {{grid.image_height}}">
+                href="{{grid.image_base_path}}/{{image.file}}"
+                data-lightbox="{{grid.id}}-image-group"
+                data-caption="{{image.caption}}"
+                data-title="{{image.caption}}">
+                 <img
+                  id="{{forloop.index}}"
+                  class="{{grid.image_styles}}"
+                  src="{{grid.image_base_path}}/{{image.file}}"
+                  aria-label="{{image.caption}}"
+                  style="{{image_filters}}; height: {{grid.image_height}}">
               </a>
               {% if grid.caption.enabled %}
               <div class="caption">{{image.caption}}</div>
@@ -335,12 +363,14 @@ exclude_from_search:                    true
             <!-- place lightGalley code -->
             <!-- see: https://www.lightgalleryjs.com/docs/getting-started/#the-markup -->
             <div class="{{grid.caption.position}}">
-              <a class="lg-item" href="{{grid.image_base_path}}/{{image.file}}">
+              <a
+                href="{{grid.image_base_path}}/{{image.file}}"
+                class="lg-item">
                 <img
                   id="{{forloop.index}}"
                   class="img-responsive"
                   src="{{grid.image_base_path}}/{{image.file}}"
-                  alt="{{image.caption}}">
+                  aria-label="{{image.caption}}">
               </a>
               {% if grid.caption.enabled %}
               <div class="caption">{{image.caption}}</div>
@@ -348,7 +378,11 @@ exclude_from_search:                    true
             </div>
             {% else %}
             <div class="{{grid.caption.position}}">
-              <img id="{{forloop.index}}" class="{{grid.image_styles}}" src="{{grid.image_base_path}}/{{image.file}}" alt="{{image.caption}}">
+              <img
+                id="{{forloop.index}}"
+                class="{{grid.image_styles}}"
+                src="{{grid.image_base_path}}/{{image.file}}"
+                aria-label="{{image.caption}}">
               {% if grid.caption.enabled %}
               <div class="caption">{{image.caption}}</div>
               {% endif %}
@@ -387,7 +421,9 @@ exclude_from_search:                    true
         <div class="col-xl-{{grid.responsive.xl}} col-lg-{{grid.responsive.lg}} col-md-{{grid.responsive.md}} col-sm-{{grid.responsive.sm}} col-{{grid.responsive.xs}}" style="padding-bottom: {{grid.gutters}}px; padding-left: {{grid.gutters}}px;">
           <div class="card {{video.caption.position}}">
             <!-- {{video.type}} video -->
-            <a class="lg-item"
+            <a
+              href="#"
+              class="lg-item"
               data-lg-size="{{video.size}}"
               data-pinterest-text="{{video.pinterest_prefix}} {{video.name}} at {{video.source}}"
               data-tweet-text="{{video.tweet_prefix}} {{video.name}} at {{video.source}}"
@@ -398,7 +434,8 @@ exclude_from_search:                    true
                 <img
                   id="{{video.name | replace: ' ','_' | replace: '-','_' | downcase}}"
                   class="{{video.poster.style}}"
-                  src="{{video.poster.source}}">
+                  src="{{video.poster.source}}"
+                  aria-label="{{video.name}}">
                  <span></span>
               </div>
             </a>
@@ -411,7 +448,9 @@ exclude_from_search:                    true
         <div class="col-xl-{{grid.responsive.xl}} col-lg-{{grid.responsive.lg}} col-md-{{grid.responsive.md}} col-sm-{{grid.responsive.sm}} col-{{grid.responsive.xs}}" style="padding-bottom: {{grid.gutters}}px; padding-left: {{grid.gutters}}px;">
           <div class="card {{video.caption.position}}">
             <!-- {{video.type}} video -->
-            <a class="lg-item"
+            <a
+              href="#"
+              class="lg-item"
               data-lg-size="{{video.size}}"
               data-pinterest-text="{{video.pinterest_prefix}} {{video.name}} at {{video.source}}"
               data-tweet-text="{{video.tweet_prefix}} {{video.name}} at {{video.source}}"
@@ -432,7 +471,8 @@ exclude_from_search:                    true
                 <img
                   id="{{video.name | replace: ' ','_' | replace: '-','_' | downcase}}"
                   class="{{video.poster.style}}"
-                  src="{{grid.html5.poster_base_path}}/{{video.poster.source}}">
+                  src="{{grid.html5.poster_base_path}}/{{video.poster.source}}"
+                  aria-label="{{video.name}}">
                  <span></span>
               </div>
             </a>

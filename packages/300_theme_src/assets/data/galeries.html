@@ -105,24 +105,27 @@ exclude_from_search:                    true
         {% if gallery.lightbox.enabled %}
         {% if gallery.lightbox.type == 'lb' %}
         <a
-           href="{{gallery.image_base_path}}/{{image.file}}"
-           data-lightbox="{{gallery.id}}-image-group"
-           data-caption="{{caption}}"
-           data-title="{{caption}}">
-             <img id="{{gallery.id}}_{{forloop.index}}"
+          href="{{gallery.image_base_path}}/{{image.file}}"
+          data-lightbox="{{gallery.id}}-image-group"
+          data-caption="{{caption}}"
+          data-title="{{caption}}">
+             <img
+              id="{{gallery.id}}_{{forloop.index}}"
               class="{{gallery.image_styles}}"
               src="{{gallery.image_base_path}}/{{image.file}}"
-              alt="{{caption}}"
+              aria-label="{{caption}}"
               style="{{image_filters}};">
         </a>
         {% elsif gallery.lightbox.type == 'lg' %}
-        <a class="lg-item"
+        <a
           href="{{gallery.image_base_path}}/{{image.file}}"
+          class="lg-item"
           data-sub-html="{{description}}">
-          <img id="{{gallery.id}}_{{forloop.index}}"
+          <img
+            id="{{gallery.id}}_{{forloop.index}}"
             class="{{gallery.image_styles}}"
             src="{{gallery.image_base_path}}/{{image.file}}"
-            alt="{{caption}}"
+            aria-label="{{caption}}"
             style="{{image_filters}};">
         </a>
         {% endif %}
@@ -160,21 +163,24 @@ exclude_from_search:                    true
       {% assign alt         = description|strip_html %}
 
         <!-- {{video.type}} video -->
-        <a class="lg-item"
+        <a
+          href="#"
+          class="lg-item"
           data-lg-size="{{video.size}}"
           data-pinterest-text="{{video.pinterest_prefix}} {{video.name}} at {{video.source}}"
           data-tweet-text="{{video.tweet_prefix}} {{video.name}} at {{video.source}}"
           data-src="{{video.source}}"
           data-poster="{{gallery.image_base_path}}/{{video.poster.source}}"
           data-sub-html="{{description}}">
-          <img class="speak2me-ignore"
+          <img
+            class="{{gallery.image_styles}}"
             src="{{gallery.image_base_path}}/{{video.poster.source}}"
-            img alt="{{video.caption.text}}">
+            aria-label="{{video.caption.text}}">
         	<span>
         		<img
-        			class="justified-gallery img-overlay speak2me-ignore"
-        			src="{{play-button}}"
-        			alt="Play Button">
+              class="justified-gallery img-overlay speak2me-ignore"
+              src="{{play-button}}"
+        			aria-label="Play Button">
         	</span>
         </a>
 
@@ -185,7 +191,9 @@ exclude_from_search:                    true
       {% assign extention   = video_split[1] %}
 
         <!-- {{video.type}} video -->
-        <a class="lg-item speak2me-ignore"
+        <a
+          href="#"
+          class="lg-item speak2me-ignore"
           data-lg-size="{{video.size}}"
           data-pinterest-text="{{video.pinterest_prefix}} {{video.name}} at {{video.source}}"
           data-tweet-text="{{video.tweet_prefix}} {{video.name}} at {{video.source}}"
@@ -207,14 +215,15 @@ exclude_from_search:                    true
                {% endfor %}
             ]
           }'>
-        	<img class="speak2me-ignore"
+        	<img
+            class="speak2me-ignore"
             src="{{gallery.image_base_path}}/{{video.poster.source}}"
-            img alt="{{video.caption.text}}">
+            aria-label="{{video.caption.text}}">
         	<span>
         		<img
-        			class="justified-gallery img-overlay speak2me-ignore"
-        			src="{{play-button}}"
-        			alt="Play Button">
+              class="justified-gallery img-overlay speak2me-ignore"
+              src="{{play-button}}"
+        			aria-label="Play Button">
         	</span>
         </a>
 

@@ -1,0 +1,629 @@
+== In this article
+
+[[content]]
+== <audio>: The Embed Audio element
+
+The *`<audio>`* link:/en-US/docs/Web/HTML[HTML] element is used to embed
+sound content in documents. It may contain one or more audio sources,
+represented using the `src` attribute or the
+link:/en-US/docs/Web/HTML/Element/source[`<source>`] element: the
+browser will choose the most suitable one. It can also be the
+destination for streamed media, using a
+link:/en-US/docs/Web/API/MediaStream[`MediaStream`].
+
+The content inside the opening and closing `<audio></audio>` tags is
+shown as a fallback in browsers that don't support the element.
+
+=== link:#attributes[Attributes]
+
+This element's attributes include the
+link:/en-US/docs/Web/HTML/Global_attributes[global attributes].
+
+link:#autoplay[`autoplay`]::
+  A Boolean attribute: if specified, the audio will automatically begin
+  playback as soon as it can do so, without waiting for the entire audio
+  file to finish downloading.
+  +
+  [[sect1]]
+  *Note:* Sites that automatically play audio (or videos with an audio
+  track) can be an unpleasant experience for users, so should be avoided
+  when possible. If you must offer autoplay functionality, you should
+  make it opt-in (requiring a user to specifically enable it). However,
+  this can be useful when creating media elements whose source will be
+  set at a later time, under user control. See our
+  link:/en-US/docs/Web/Media/Autoplay_guide[autoplay guide] for
+  additional information about how to properly use autoplay.
+link:#controls[`controls`]::
+  If this attribute is present, the browser will offer controls to allow
+  the user to control audio playback, including volume, seeking, and
+  pause/resume playback.
+link:#controlslist[`controlslist`]::
+  The
+  https://wicg.github.io/controls-list/explainer.html[`controlslist`]
+  attribute, when specified, helps the browser select what controls to
+  show for the `audio` element whenever the browser shows its own set of
+  controls (that is, when the `controls` attribute is specified).
+  +
+  The allowed values are `nodownload`, `nofullscreen` and
+  `noremoteplayback`.
+link:/en-US/docs/Web/HTML/Attributes/crossorigin[`crossorigin`]::
+  This link:/en-US/docs/Glossary/Enumerated[enumerated] attribute
+  indicates whether to use CORS to fetch the related audio file.
+  link:/en-US/docs/Web/HTML/CORS_enabled_image[CORS-enabled resources]
+  can be reused in the
+  link:/en-US/docs/Web/HTML/Element/canvas[`<canvas>`] element without
+  being _tainted_. The allowed values are:
+  +
+  link:#anonymous[`anonymous`];;
+    Sends a cross-origin request without a credential. In other words,
+    it sends the `Origin:` HTTP header without a cookie, X.509
+    certificate, or performing HTTP Basic authentication. If the server
+    does not give credentials to the origin site (by not setting the
+    `Access-Control-Allow-Origin:` HTTP header), the resource will be
+    _tainted_, and its usage restricted.
+  link:#use-credentials[`use-credentials`];;
+    Sends a cross-origin request with a credential. In other words, it
+    sends the `Origin:` HTTP header with a cookie, a certificate, or
+    performing HTTP Basic authentication. If the server does not give
+    credentials to the origin site (through
+    `Access-Control-Allow-Credentials:` HTTP header), the resource will
+    be _tainted_ and its usage restricted.
+  +
+  When not present, the resource is fetched without a CORS request (i.e.
+  without sending the `Origin:` HTTP header), preventing its non-tainted
+  use in link:/en-US/docs/Web/HTML/Element/canvas[`<canvas>`] elements.
+  If invalid, it is handled as if the enumerated keyword *anonymous* was
+  used. See link:/en-US/docs/Web/HTML/Attributes/crossorigin[CORS
+  settings attributes] for additional information.
+link:#disableremoteplayback[`disableremoteplayback`]::
+  A Boolean attribute used to disable the capability of remote playback
+  in devices that are attached using wired (HDMI, DVI, etc.) and
+  wireless technologies (Miracast, Chromecast, DLNA, AirPlay, etc.). See
+  https://www.w3.org/TR/remote-playback/#the-disableremoteplayback-attribute[this
+  proposed specification] for more information.
+  +
+  In Safari, you can use
+  https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/AirPlayGuide/OptingInorOutofAirPlay/OptingInorOutofAirPlay.html[`x-webkit-airplay="deny"`]
+  as a fallback.
+link:#loop[`loop`]::
+  A Boolean attribute: if specified, the audio player will automatically
+  seek back to the start upon reaching the end of the audio.
+link:#muted[`muted`]::
+  A Boolean attribute that indicates whether the audio will be initially
+  silenced. Its default value is `false`.
+link:#preload[`preload`]::
+  This link:/en-US/docs/Glossary/Enumerated[enumerated] attribute is
+  intended to provide a hint to the browser about what the author thinks
+  will lead to the best user experience. It may have one of the
+  following values:
+  +
+  * `none`: Indicates that the audio should not be preloaded.
+  * `metadata`: Indicates that only audio metadata (e.g. length) is
+  fetched.
+  * `auto`: Indicates that the whole audio file can be downloaded, even
+  if the user is not expected to use it.
+  * _empty string_: A synonym of the `auto` value.
+  +
+  The default value is different for each browser. The spec advises it
+  to be set to `metadata`.
+  +
+  [[sect2]]
+  *Note:*
+
+  * The `autoplay` attribute has precedence over `preload`. If
+  `autoplay` is specified, the browser would obviously need to start
+  downloading the audio for playback.
+  * The browser is not forced by the specification to follow the value
+  of this attribute; it is a mere hint.
+link:#src[`src`]::
+  The URL of the audio to embed. This is subject to
+  link:/en-US/docs/Web/HTTP/CORS[HTTP access controls]. This is
+  optional; you may instead use the
+  link:/en-US/docs/Web/HTML/Element/source[`<source>`] element within
+  the audio block to specify the audio to embed.
+
+=== link:#events[Events]
+
+[cols=",",options="header",]
+|===
+|Event name |Fired when
+|link:/en-US/docs/Web/API/ScriptProcessorNode/audioprocess_event[`audioprocess`]
+|The input buffer of a
+link:/en-US/docs/Web/API/ScriptProcessorNode[`ScriptProcessorNode`] is
+ready to be processed.
+
+|link:/en-US/docs/Web/API/HTMLMediaElement/canplay_event[`canplay`] |The
+browser can play the media, but estimates that not enough data has been
+loaded to play the media up to its end without having to stop for
+further buffering of content.
+
+|link:/en-US/docs/Web/API/HTMLMediaElement/canplaythrough_event[`canplaythrough`]
+|The browser estimates it can play the media up to its end without
+stopping for content buffering.
+
+|link:/en-US/docs/Web/API/OfflineAudioContext/complete_event[`complete`]
+|The rendering of an
+link:/en-US/docs/Web/API/OfflineAudioContext[`OfflineAudioContext`] is
+terminated.
+
+|link:/en-US/docs/Web/API/HTMLMediaElement/durationchange_event[`durationchange`]
+|The `duration` attribute has been updated.
+
+|link:/en-US/docs/Web/API/HTMLMediaElement/emptied_event[`emptied`] |The
+media has become empty; for example, this event is sent if the media has
+already been loaded (or partially loaded), and the
+link:/en-US/docs/Web/API/HTMLMediaElement/load[`HTMLMediaElement.load`]
+method is called to reload it.
+
+|link:/en-US/docs/Web/API/HTMLMediaElement/ended_event[`ended`]
+|Playback has stopped because the end of the media was reached.
+
+|link:/en-US/docs/Web/API/HTMLMediaElement/loadeddata_event[`loadeddata`]
+|The first frame of the media has finished loading.
+
+|link:/en-US/docs/Web/API/HTMLMediaElement/loadedmetadata_event[`loadedmetadata`]
+|The metadata has been loaded.
+
+|link:/en-US/docs/Web/API/HTMLMediaElement/loadstart_event[`loadstart`]
+|Fired when the browser has started to load the resource.
+
+|link:/en-US/docs/Web/API/HTMLMediaElement/pause_event[`pause`]
+|Playback has been paused.
+
+|link:/en-US/docs/Web/API/HTMLMediaElement/play_event[`play`] |Playback
+has begun.
+
+|link:/en-US/docs/Web/API/HTMLMediaElement/playing_event[`playing`]
+|Playback is ready to start after having been paused or delayed due to
+lack of data.
+
+|link:/en-US/docs/Web/API/HTMLMediaElement/ratechange_event[`ratechange`]
+|The playback rate has changed.
+
+|link:/en-US/docs/Web/API/HTMLMediaElement/seeked_event[`seeked`] |A
+_seek_ operation completed.
+
+|link:/en-US/docs/Web/API/HTMLMediaElement/seeking_event[`seeking`] |A
+_seek_ operation began.
+
+|link:/en-US/docs/Web/API/HTMLMediaElement/stalled_event[`stalled`] |The
+user agent is trying to fetch media data, but data is unexpectedly not
+forthcoming.
+
+|link:/en-US/docs/Web/API/HTMLMediaElement/suspend_event[`suspend`]
+|Media data loading has been suspended.
+
+|link:/en-US/docs/Web/API/HTMLMediaElement/timeupdate_event[`timeupdate`]
+|The time indicated by the `currentTime` attribute has been updated.
+
+|link:/en-US/docs/Web/API/HTMLMediaElement/volumechange_event[`volumechange`]
+|The volume has changed.
+
+|link:/en-US/docs/Web/API/HTMLMediaElement/waiting_event[`waiting`]
+|Playback has stopped because of a temporary lack of data
+|===
+
+[[usage_notes]]
+=== link:#usage_notes[Usage notes]
+
+Browsers don't all support the same
+link:/en-US/docs/Web/Media/Formats/Containers[file types] and
+link:/en-US/docs/Web/Media/Formats/Audio_codecs[audio codecs]; you can
+provide multiple sources inside nested
+link:/en-US/docs/Web/HTML/Element/source[`<source>`] elements, and the
+browser will then use the first one it understands:
+
+[.language-name]#html#
+
+[source,brush:,html,notranslate]
+----
+<audio controls>
+  <source src="myAudio.mp3" type="audio/mpeg" />
+  <source src="myAudio.ogg" type="audio/ogg" />
+  <p>
+    Download <a href="myAudio.mp3" download="myAudio.mp3">MP3</a> or
+    <a href="myAudio.ogg" download="myAudio.ogg">OGG</a> audio.
+  </p>
+</audio>
+----
+
+We offer a substantive and thorough
+link:/en-US/docs/Web/Media/Formats[guide to media file types] and the
+link:/en-US/docs/Web/Media/Formats/Audio_codecs[audio codecs that can be
+used within them]. Also available is
+link:/en-US/docs/Web/Media/Formats/Video_codecs[a guide to the codecs
+supported for video].
+
+Other usage notes:
+
+* If you don't specify the `controls` attribute, the audio player won't
+include the browser's default controls. You can, however, create your
+own custom controls using JavaScript and the
+link:/en-US/docs/Web/API/HTMLMediaElement[`HTMLMediaElement`] API.
+* To allow precise control over your audio content, `HTMLMediaElement`s
+fire many different
+link:/en-US/docs/Web/API/HTMLMediaElement#events[events]. This also
+provides a way to monitor the audio's fetching process so you can watch
+for errors or detect when enough is available to begin to play or
+manipulate it.
+* You can also use the link:/en-US/docs/Web/API/Web_Audio_API[Web Audio
+API] to directly generate and manipulate audio streams from JavaScript
+code rather than streaming pre-existing audio files.
+* `<audio>` elements can't have subtitles or captions associated with
+them in the same way that `<video>` elements can. See
+https://www.iandevlin.com/blog/2015/12/html5/webvtt-and-audio/[WebVTT
+and Audio] by Ian Devlin for some useful information and workarounds.
+* To test the fallback content on browsers that support the element, you
+can replace `<audio>` with a non-existing element like `<notanaudio>`.
+
+A good general source of information on using HTML `<audio>` is the
+link:/en-US/docs/Learn/HTML/Multimedia_and_embedding/Video_and_audio_content[Video
+and audio content] beginner's tutorial.
+
+[[styling_with_css]]
+=== link:#styling_with_css[Styling with CSS]
+
+The `<audio>` element has no intrinsic visual output of its own unless
+the `controls` attribute is specified, in which case the browser's
+default controls are shown.
+
+The default controls have a link:/en-US/docs/Web/CSS/display[`display`]
+value of `inline` by default, and it is often a good idea to set the
+value to `block` to improve control over positioning and layout, unless
+you want it to sit within a text block or similar.
+
+You can style the default controls with properties that affect the block
+as a single unit, so for example you can give it a
+link:/en-US/docs/Web/CSS/border[`border`] and
+link:/en-US/docs/Web/CSS/border-radius[`border-radius`],
+link:/en-US/docs/Web/CSS/padding[`padding`],
+link:/en-US/docs/Web/CSS/margin[`margin`], etc. You can't however style
+the individual components inside the audio player (e.g. change the
+button size or icons, change the font, etc.), and the controls are
+different across the different browsers.
+
+To get a consistent look and feel across browsers, you'll need to create
+custom controls; these can be marked up and styled in whatever way you
+want, and then JavaScript can be used along with the
+link:/en-US/docs/Web/API/HTMLMediaElement[`HTMLMediaElement`] API to
+wire up their functionality.
+
+link:/en-US/docs/Web/Media/Audio_and_video_delivery/Video_player_styling_basics[Video
+player styling basics] provides some useful styling techniques — it is
+written in the context of `<video>`, but much of it is equally
+applicable to `<audio>`.
+
+[[detecting_addition_and_removal_of_tracks]]
+=== link:#detecting_addition_and_removal_of_tracks[Detecting addition and removal of tracks]
+
+You can detect when tracks are added to and removed from an `<audio>`
+element using the
+link:/en-US/docs/Web/API/AudioTrackList/addtrack_event[`addtrack`] and
+link:/en-US/docs/Web/API/AudioTrackList/removetrack_event[`removetrack`]
+events. However, these events aren't sent directly to the `<audio>`
+element itself. Instead, they're sent to the track list object within
+the `<audio>` element's
+link:/en-US/docs/Web/API/HTMLMediaElement[`HTMLMediaElement`] that
+corresponds to the type of track that was added to the element:
+
+link:/en-US/docs/Web/API/HTMLMediaElement/audioTracks[`HTMLMediaElement.audioTracks`]::
+  An link:/en-US/docs/Web/API/AudioTrackList[`AudioTrackList`]
+  containing all of the media element's audio tracks. You can add a
+  listener for `addtrack` to this object to be alerted when new audio
+  tracks are added to the element.
+link:/en-US/docs/Web/API/HTMLMediaElement/videoTracks[`HTMLMediaElement.videoTracks`]::
+  Add an `addtrack` listener to this
+  link:/en-US/docs/Web/API/VideoTrackList[`VideoTrackList`] object to be
+  informed when video tracks are added to the element.
+link:/en-US/docs/Web/API/HTMLMediaElement/textTracks[`HTMLMediaElement.textTracks`]::
+  Add an `addtrack` event listener to this
+  link:/en-US/docs/Web/API/TextTrackList[`TextTrackList`] to be notified
+  when new text tracks are added to the element.
+
+[[sect3]]
+*Note:* Even though it's an `<audio>` element, it still has video and
+text track lists, and can in fact be used to present video, although the
+user interface implications can be odd.
+
+For example, to detect when audio tracks are added to or removed from an
+`<audio>` element, you can use code like this:
+
+[.language-name]#js#
+
+[source,brush:,js,notranslate]
+----
+const elem = document.querySelector("audio");
+
+elem.audioTrackList.onaddtrack = (event) => {
+  trackEditor.addTrack(event.track);
+};
+
+elem.audioTrackList.onremovetrack = (event) => {
+  trackEditor.removeTrack(event.track);
+};
+----
+
+This code watches for audio tracks to be added to and removed from the
+element, and calls a hypothetical function on a track editor to register
+and remove the track from the editor's list of available tracks.
+
+You can also use
+link:/en-US/docs/Web/API/EventTarget/addEventListener[`addEventListener()`]
+to listen for the
+link:/en-US/docs/Web/API/AudioTrackList/addtrack_event[`addtrack`] and
+link:/en-US/docs/Web/API/AudioTrackList/removetrack_event[`removetrack`]
+events.
+
+=== link:#accessibility[Accessibility]
+
+Audio with spoken dialog should provide both captions and transcripts
+that accurately describe its content. Captions, which are specified
+using link:/en-US/docs/Web/API/WebVTT_API[WebVTT], allow people who are
+hearing impaired to understand an audio recording's content as the
+recording is being played, while transcripts allow people who need
+additional time to be able to review the recording's content at a pace
+and format that is comfortable for them.
+
+If automatic captioning services are used, it is important to review the
+generated content to ensure it accurately represents the source audio.
+
+The `<audio>` element doesn't directly support WebVTT. You will have to
+find a library or framework that provides the capability for you, or
+write the code to display captions yourself. One option is to play your
+audio using a link:/en-US/docs/Web/HTML/Element/video[`<video>`]
+element, which does support WebVTT.
+
+In addition to spoken dialog, subtitles and transcripts should also
+identify music and sound effects that communicate important information.
+This includes emotion and tone. For example, in the WebVTT below, note
+the use of square brackets to provide tone and emotional insight to the
+viewer; this can help establish the mood otherwise provided using music,
+nonverbal sounds and crucial sound effects, and so forth.
+
+[source,brush:,plain,notranslate]
+----
+1
+00:00:00 --> 00:00:45
+[Energetic techno music]
+
+2
+00:00:46 --> 00:00:51
+Welcome to the Time Keeper's podcast! In this episode we're discussing which Swisswatch is a wrist switchwatch?
+
+16
+00:00:52 --> 00:01:02
+[Laughing] Sorry! I mean, which wristwatch is a Swiss wristwatch?
+----
+
+Also it's a good practice to provide some content (such as the direct
+download link) as a fallback for viewers who use a browser in which the
+`<audio>` element is not supported:
+
+[.language-name]#html#
+
+[source,brush:,html,notranslate]
+----
+<audio controls>
+  <source src="myAudio.mp3" type="audio/mpeg" />
+  <source src="myAudio.ogg" type="audio/ogg" />
+  <p>
+    Download <a href="myAudio.mp3">MP3</a> or
+    <a href="myAudio.ogg" download="myAudio.ogg">OGG</a> audio.
+  </p>
+</audio>
+----
+
+* link:/en-US/docs/Web/API/WebVTT_API[Web Video Text Tracks Format
+(WebVTT)]
+* https://webaim.org/techniques/captions/[WebAIM: Captions, Transcripts,
+and Audio Descriptions]
+* link:/en-US/docs/Web/Accessibility/Understanding_WCAG/Perceivable#guideline_1.2_%E2%80%94_providing_text_alternatives_for_time-based_media[MDN
+Understanding WCAG, Guideline 1.2 explanations]
+* https://www.w3.org/TR/UNDERSTANDING-WCAG20/media-equiv-av-only-alt.html[Understanding
+Success Criterion 1.2.1 | W3C Understanding WCAG 2.0]
+* https://www.w3.org/TR/UNDERSTANDING-WCAG20/media-equiv-captions.html[Understanding
+Success Criterion 1.2.2 | W3C Understanding WCAG 2.0]
+
+=== link:#examples[Examples]
+
+[[basic_usage]]
+=== link:#basic_usage[Basic usage]
+
+The following example shows simple usage of the `<audio>` element to
+play an OGG file. It will autoplay due to the `autoplay` attribute—if
+the page has permission to do so—and also includes fallback content.
+
+[.language-name]#html#
+
+[source,brush:,html,notranslate]
+----
+<!-- Simple audio playback -->
+<audio src="AudioTest.ogg" autoplay>
+  <a href="AudioTest.ogg" download="AudioTest.ogg">Download OGG audio</a>.
+</audio>
+----
+
+For details on when autoplay works, how to get permission to use
+autoplay, and how and when it's appropriate to use autoplay, see our
+link:/en-US/docs/Web/Media/Autoplay_guide[autoplay guide].
+
+[[audio_element_with_source_element]]
+=== link:#audio_element_with_source_element[<audio> element with <source> element]
+
+This example specifies which audio track to embed using the `src`
+attribute on a nested `<source>` element rather than directly on the
+`<audio>` element. It is always useful to include the file's MIME type
+inside the `type` attribute, as the browser is able to instantly tell if
+it can play that file, and not waste time on it if not.
+
+[.language-name]#html#
+
+[source,brush:,html,notranslate]
+----
+<audio controls>
+  <source src="foo.wav" type="audio/wav" />
+  <a href="foo.wav" download="foo.wav">Download WAV audio</a>.
+</audio>
+----
+
+[[audio_with_multiple_source_elements]]
+=== link:#audio_with_multiple_source_elements[<audio> with multiple <source> elements]
+
+This example includes multiple `<source>` elements. The browser tries to
+load the first source element (Opus) if it is able to play it; if not it
+falls back to the second (Vorbis) and finally back to MP3:
+
+[.language-name]#html#
+
+[source,brush:,html,notranslate]
+----
+<audio controls>
+  <source src="foo.opus" type="audio/ogg; codecs=opus" />
+  <source src="foo.ogg" type="audio/ogg; codecs=vorbis" />
+  <source src="foo.mp3" type="audio/mpeg" />
+</audio>
+----
+
+[[technical_summary]]
+=== link:#technical_summary[Technical summary]
+
+[width="100%",cols="50%,50%",]
+|===
+|link:/en-US/docs/Web/HTML/Content_categories[Content categories]
+|link:/en-US/docs/Web/HTML/Content_categories#flow_content[Flow
+content], phrasing content, embedded content. If it has a
+link:#controls[`controls`] attribute: interactive content and palpable
+content.
+
+|Permitted content |If the element has a link:#src[`src`] attribute:
+zero or more link:/en-US/docs/Web/HTML/Element/track[`<track>`] elements
+followed by transparent content that contains no
+link:/en-US/docs/Web/HTML/Element/audio[`<audio>`] or
+link:/en-US/docs/Web/HTML/Element/video[`<video>`] media elements. +
+Else: zero or more link:/en-US/docs/Web/HTML/Element/source[`<source>`]
+elements followed by zero or more
+link:/en-US/docs/Web/HTML/Element/track[`<track>`] elements followed by
+transparent content that contains no
+link:/en-US/docs/Web/HTML/Element/audio[`<audio>`] or
+link:/en-US/docs/Web/HTML/Element/video[`<video>`] media elements.
+
+|Tag omission |None, both the starting and ending tag are mandatory.
+
+|Permitted parents |Any element that accepts embedded content.
+
+|Implicit ARIA role
+|https://www.w3.org/TR/html-aria/#dfn-no-corresponding-role[No
+corresponding role]
+
+|Permitted ARIA roles
+|link:/en-US/docs/Web/Accessibility/ARIA/Roles/application_role[`application`]
+
+|DOM interface
+|link:/en-US/docs/Web/API/HTMLAudioElement[`HTMLAudioElement`]
+|===
+
+=== link:#specifications[Specifications]
+
+[width="100%",cols="100%",options="header",]
+|===
+|Specification
+|https://html.spec.whatwg.org/multipage/media.html#the-audio-element[HTML
+Standard +
+[.small]## the-audio-element#]
+|===
+
+[[browser_compatibility]]
+=== link:#browser_compatibility[Browser compatibility]
+
+BCD tables only load in the browser with JavaScript enabled. Enable
+JavaScript to view data.
+
+[[see_also]]
+=== link:#see_also[See also]
+
+* link:/en-US/docs/Web/Media[Web media technologies]
+** link:/en-US/docs/Web/Media/Formats/Containers[Media container formats
+(file types)]
+** link:/en-US/docs/Web/Media/Formats/Audio_codecs[Guide to audio codecs
+used on the web]
+* link:/en-US/docs/Web/API/Web_Audio_API[Web Audio API]
+* link:/en-US/docs/Web/API/HTMLAudioElement[`HTMLAudioElement`]
+* link:/en-US/docs/Web/HTML/Element/source[`<source>`]
+* link:/en-US/docs/Web/HTML/Element/video[`<video>`]
+* link:/en-US/docs/Learn/HTML/Multimedia_and_embedding/Video_and_audio_content[Learning
+area: Video and audio content]
+* link:/en-US/docs/Web/Media/Audio_and_video_delivery/Cross-browser_audio_basics[Cross-browser
+audio basics]
+
+image:data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjIiIGhlaWdodD0iMTYyIiB2aWV3Ym94PSIwIDAgMTYyIDE2MiIgZmlsbD0ibm9uZSIgcm9sZT0ibm9uZSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxtYXNrIGlkPSJiIiBmaWxsPSIjZmZmIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggZD0iTTk3LjIwMyA0Ny4wNGM4LjExMy03Ljg4NiAxOC4wMDQtMTMuODcxIDI4LjkwNi0xNy40OTJhNzggNzggMCAwIDEgMzMuOTY5LTMuMzljMTEuNDQzIDEuMzkgMjIuNDAxIDUuMjk1IDMyLjAyNCAxMS40MTFzMTcuNjU2IDE0LjI4IDIzLjQ3NiAyMy44NmM1LjgxOSA5LjU3OSA5LjI2OSAyMC4zMTggMTAuMDgzIDMxLjM4NWE2OS44NSA2OS44NSAwIDAgMS01LjM4NyAzMi40NGMtNC4zNTggMTAuMjcyLTExLjExNSAxOS40NDMtMTkuNzQ3IDI2LjgwMS04LjYzMiA3LjM1OS0xOC45MDggMTIuNzA5LTMwLjAzNCAxNS42MzdsLTYuMTctMjEuNjk4YzcuNjY2LTIuMDE3IDE0Ljc0Ni01LjcwMyAyMC42OTQtMTAuNzczIDUuOTQ4LTUuMDcxIDEwLjYwMy0xMS4zODkgMTMuNjA2LTE4LjQ2N2E0OC4xNCA0OC4xNCAwIDAgMCAzLjcxMi0yMi4zNTJjLS41NjEtNy42MjUtMi45MzgtMTUuMDI1LTYuOTQ4LTIxLjYyNXMtOS41NDQtMTIuMjI2LTE2LjE3NS0xNi40NC0xNC4xODEtNi45MDQtMjIuMDY1LTcuODYzYTUzLjc1IDUzLjc1IDAgMCAwLTIzLjQwNSAyLjMzNmMtNy41MTMgMi40OTUtMTQuMzI3IDYuNjItMTkuOTE4IDEyLjA1M3oiPjwvcGF0aD4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9tYXNrPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBzdHJva2U9InVybCgjYSkiIHN0cm9rZS1kYXNoYXJyYXk9IjYsIDYiIHN0cm9rZS13aWR0aD0iMiIgZD0iTTk3LjIwMyA0Ny4wNGM4LjExMy03Ljg4NiAxOC4wMDQtMTMuODcxIDI4LjkwNi0xNy40OTJhNzggNzggMCAwIDEgMzMuOTY5LTMuMzljMTEuNDQzIDEuMzkgMjIuNDAxIDUuMjk1IDMyLjAyNCAxMS40MTFzMTcuNjU2IDE0LjI4IDIzLjQ3NiAyMy44NmM1LjgxOSA5LjU3OSA5LjI2OSAyMC4zMTggMTAuMDgzIDMxLjM4NWE2OS44NSA2OS44NSAwIDAgMS01LjM4NyAzMi40NGMtNC4zNTggMTAuMjcyLTExLjExNSAxOS40NDMtMTkuNzQ3IDI2LjgwMS04LjYzMiA3LjM1OS0xOC45MDggMTIuNzA5LTMwLjAzNCAxNS42MzdsLTYuMTctMjEuNjk4YzcuNjY2LTIuMDE3IDE0Ljc0Ni01LjcwMyAyMC42OTQtMTAuNzczIDUuOTQ4LTUuMDcxIDEwLjYwMy0xMS4zODkgMTMuNjA2LTE4LjQ2N2E0OC4xNCA0OC4xNCAwIDAgMCAzLjcxMi0yMi4zNTJjLS41NjEtNy42MjUtMi45MzgtMTUuMDI1LTYuOTQ4LTIxLjYyNXMtOS41NDQtMTIuMjI2LTE2LjE3NS0xNi40NC0xNC4xODEtNi45MDQtMjIuMDY1LTcuODYzYTUzLjc1IDUzLjc1IDAgMCAwLTIzLjQwNSAyLjMzNmMtNy41MTMgMi40OTUtMTQuMzI3IDYuNjItMTkuOTE4IDEyLjA1M3oiIG1hc2s9InVybCgjYikiIHN0eWxlPSJzdHJva2U6dXJsKCNhKSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTYzLjk5MiAtMjUuNTg3KSI+PC9wYXRoPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZWxsaXBzZSBjeD0iOC4wNjYiIGN5PSIxMTEuNTk3IiBmaWxsPSJ2YXIoLS1iYWNrZ3JvdW5kLXRlcnRpYXJ5KSIgcng9IjUzLjY3NyIgcnk9IjUzLjY5OSIgdHJhbnNmb3JtPSJtYXRyaXgoLjcxNzA3IC0uNjk3IC43MjQzIC42ODk1IDAgMCkiPjwvZWxsaXBzZT4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGcgY2xpcC1wYXRoPSJ1cmwoI2MpIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNjMuOTkyIC0yNS41ODcpIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggZmlsbD0iIzlhYmZmNSIgZD0ibTE0NC4yNTYgMTM3LjM3OSAzMi45MDYgMTIuNDM0YTQuNDEgNC40MSAwIDAgMSAyLjU1OSA1LjY2N2wtOS4zMjYgMjQuNjc5YTQuNDEgNC40MSAwIDAgMS01LjY2NyAyLjU1OWwtOC4yMjYtMy4xMDgtMi4zMzIgNi4xN2MtLjQ2NiAxLjIzMy0uMzc1IDEuODgzLTEuNjA5IDEuNDE3bC0yLjI1My0uNTI3Yy0uNDExLS4xNTUtLjk1LS41OTQtMS4yMDYtMS4xNjFsLTQuNzM0LTEwLjQ4NC0xMi41NDUtNC43NDFhNC40MSA0LjQxIDAgMCAxLTIuNTU5LTUuNjY3bDkuMzI1LTI0LjY3OWE0LjQxIDQuNDEgMCAwIDEgNS42NjctMi41NTltOS45NjEgMjkuNjE3IDguMjI3IDMuMTA4IDMuMjY0LTguNjM4LS40OTgtNi43NjgtNC4xMTMtMS41NTUuNTQ4IDcuMjU4LTQuMzE5LTEuNjMyem0tMTIuMzM5LTQuNjYzIDguMjI2IDMuMTA4IDMuMjY0LTguNjM3LS40OTgtNi43NjktNC4xMTMtMS41NTQuNTQ4IDcuMjU3LTQuMzE5LTEuNjMyeiI+PC9wYXRoPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxnIGNsaXAtcGF0aD0idXJsKCNkKSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTYzLjk5MiAtMjUuNTg3KSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIGZpbGw9IiM4MWIwZjMiIGQ9Ik0xMzUuMzUgNjAuMTM2IDg2LjY3IDQxLjY1NGMtMy4zNDYtMS4yNy03LjEyNC40MjgtOC4zOTQgMy43NzVMNjQuNDE0IDgxLjkzOGMtMS4yNyAzLjM0Ny40MjggNy4xMjUgMy43NzQgOC4zOTVsMTIuMTcgNC42Mi0zLjQ2NSA5LjEyOGMtLjY5MyAxLjgyNi0xLjQzMiAyLjQ1Ny4zOTQgMy4xNWwzLjAxNCAxLjYyNWMuNjA5LjIzMSAxLjYzNy4yNzQgMi40NzctLjEwNGwxNS41My02Ljk4MyAxOC41NiA3LjA0N2MzLjM0NiAxLjI3IDcuMTI0LS40MjggOC4zOTUtMy43NzVsMTMuODYyLTM2LjUxYzEuMjctMy4zNDYtLjQyOC03LjEyNC0zLjc3NS04LjM5NU05NS4yNjEgODMuMjA3bC0xMi4xNy00LjYyIDQuODUyLTEyLjc3OSA3LjE5LTcuMDE3IDYuMDg1IDIuMzEtNy43MjUgNy41MSA2LjM4OSAyLjQyNnptMTguMjU1IDYuOTMtMTIuMTctNC42MiA0Ljg1Mi0xMi43NzggNy4xODktNy4wMTcgNi4wODUgMi4zMS03LjcyNSA3LjUxIDYuMzkgMi40MjZ6Ij48L3BhdGg+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRlZnM+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxjbGlwcGF0aCBpZD0iYyI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIGZpbGw9IiNmZmYiIGQ9Im0xOTguNjM4IDE0Ni41ODYtNjUuMDU2LTI0LjU4My0yNC41ODMgNjUuMDU3IDY1LjA1NiAyNC41ODJ6Ij48L3BhdGg+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvY2xpcHBhdGg+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxjbGlwcGF0aCBpZD0iZCI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIGZpbGw9IiNmZmYiIGQ9Im02Ni40MzggMTQuMDU1IDk2LjI0MiAzNi41NC0zNi41NCA5Ni4yNDMtOTYuMjQzLTM2LjU0eiI+PC9wYXRoPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2NsaXBwYXRoPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8bGluZWFyZ3JhZGllbnQgaWQ9ImEiIHgxPSI5Ny4yMDMiIHgyPSIxOTkuOTk1IiB5MT0iNDcuMDQiIHkyPSIxNTIuNzkzIiBncmFkaWVudHVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxzdG9wIHN0b3AtY29sb3I9IiMwODZERkMiPjwvc3RvcD4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHN0b3Agb2Zmc2V0PSIwLjI0NiIgc3RvcC1jb2xvcj0iIzJDODFGQSI+PC9zdG9wPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8c3RvcCBvZmZzZXQ9IjAuNTE2IiBzdG9wLWNvbG9yPSIjNTQ5N0Y4Ij48L3N0b3A+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxzdG9wIG9mZnNldD0iMC44MjEiIHN0b3AtY29sb3I9IiM4MEIwRjYiPjwvc3RvcD4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjOUFCRkY1Ij48L3N0b3A+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvbGluZWFyZ3JhZGllbnQ+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZGVmcz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9zdmc+[image]
+
+=== Help improve MDN
+
+Was this page helpful to you?
+
+[.button-wrap]#[.icon .icon-thumbs-up]####Yes#
+
+[.button-wrap]#[.icon .icon-thumbs-down]####No#
+
+https://github.com/mdn/content/blob/main/CONTRIBUTING.md[Learn how to
+contribute].
+
+This page was last modified on Jul 1, 2024 by
+link:/en-US/docs/Web/HTML/Element/audio/contributors.txt[MDN
+contributors].
+
+[[on-github]]
+https://github.com/mdn/content/blob/main/files/en-us/web/html/element/audio/index.md?plain=1[View
+this page on GitHub] •
+https://github.com/mdn/content/issues/new?template=page-report.yml&mdn-url=https%3A%2F%2Fdeveloper.mozilla.org%2Fen-US%2Fdocs%2FWeb%2FHTML%2FElement%2Faudio&metadata=%3C%21--+Do+not+make+changes+below+this+line+--%3E%0A%3Cdetails%3E%0A%3Csummary%3EPage+report+details%3C%2Fsummary%3E%0A%0A*+Folder%3A+%60en-us%2Fweb%2Fhtml%2Felement%2Faudio%60%0A*+MDN+URL%3A+https%3A%2F%2Fdeveloper.mozilla.org%2Fen-US%2Fdocs%2FWeb%2FHTML%2FElement%2Faudio%0A*+GitHub+URL%3A+https%3A%2F%2Fgithub.com%2Fmdn%2Fcontent%2Fblob%2Fmain%2Ffiles%2Fen-us%2Fweb%2Fhtml%2Felement%2Faudio%2Findex.md%0A*+Last+commit%3A+https%3A%2F%2Fgithub.com%2Fmdn%2Fcontent%2Fcommit%2F991385e7cfb9ac8589332b07aadcc4b38edea512%0A*+Document+last+modified%3A+2024-07-01T15%3A32%3A02.000Z%0A%0A%3C%2Fdetails%3E[Report
+a problem with this content]
+
+link:/[image:data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iMTciIHZpZXdib3g9IjAgMCA0OCAxNyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgICAgICAgICAgICAgICAgICAgICAgPHRpdGxlIGlkPSJtZG4tZm9vdGVyLWxvZ28tc3ZnIj5NRE4gbG9nbzwvdGl0bGU+CiAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIGQ9Ik0yMC4wNCAxNi41MTJIMTUuNTA0VjEwLjQxNkMxNS41MDQgOS40ODggMTUuMzQ0IDguODI0IDE1LjAyNCA4LjQyNEMxNC43MiA4LjAyNCAxNC4yNjQgNy44MjQgMTMuNjU2IDcuODI0QzEyLjkyIDcuODI0IDEyLjM4NCA4LjA2NCAxMi4wNDggOC41NDRDMTEuNzI4IDkuMDI0IDExLjU2OCA5LjY0IDExLjU2OCAxMC4zOTJWMTQuMTg0SDEzLjAwOFYxNi41MTJIOC40NzJWMTAuNDE2QzguNDcyIDkuNDg4IDguMzEyIDguODI0IDcuOTkyIDguNDI0QzcuNjg4IDguMDI0IDcuMjMyIDcuODI0IDYuNjI0IDcuODI0QzUuODcyIDcuODI0IDUuMzM2IDguMDY0IDUuMDE2IDguNTQ0QzQuNjk2IDkuMDI0IDQuNTM2IDkuNjQgNC41MzYgMTAuMzkyVjE0LjE4NEg2LjZWMTYuNTEySDBWMTQuMTg0SDEuNDRWOC4wNEgwLjAyNFY1LjY4OEg0LjUzNlY3LjMyQzUuMjI0IDYuMDg4IDYuMzIgNS40NzIgNy44MjQgNS40NzJDOC42MDggNS40NzIgOS4zMjggNS42NjQgOS45ODQgNi4wNDhDMTAuNjQgNi40MzIgMTEuMDk2IDcuMDE2IDExLjM1MiA3LjhDMTEuOTkyIDYuMjQ4IDEzLjE2OCA1LjQ3MiAxNC44OCA1LjQ3MkMxNS44NTYgNS40NzIgMTYuNzIgNS43NzYgMTcuNDcyIDYuMzg0QzE4LjIyNCA2Ljk5MiAxOC42IDcuOTM2IDE4LjYgOS4yMTZWMTQuMTg0SDIwLjA0VjE2LjUxMloiIGZpbGw9ImN1cnJlbnRDb2xvciI+PC9wYXRoPgogICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBkPSJNMzMuNjcxNCAxNi41MTJIMjkuMTM1NFYxNC40OTZDMjguODMxNCAxNS4xMiAyOC4zODM0IDE1LjY1NiAyNy43OTE0IDE2LjEwNEMyNy4xOTk0IDE2LjUzNiAyNi40MTU0IDE2Ljc1MiAyNS40Mzk0IDE2Ljc1MkMyNC4wMTU0IDE2Ljc1MiAyMi44OTU0IDE2LjI2NCAyMi4wNzk0IDE1LjI4OEMyMS4yNjM0IDE0LjMxMiAyMC44NTU0IDEyLjk4NCAyMC44NTU0IDExLjMwNEMyMC44NTU0IDkuNjg4IDIxLjI1NTQgOC4zMTIgMjIuMDU1NCA3LjE3NkMyMi44NTU0IDYuMDQgMjQuMDYzNCA1LjQ3MiAyNS42Nzk0IDUuNDcyQzI2LjU1OTQgNS40NzIgMjcuMjc5NCA1LjY0OCAyNy44Mzk0IDZDMjguMzk5NCA2LjM1MiAyOC44MzE0IDYuOCAyOS4xMzU0IDcuMzQ0VjIuMzUySDI2Ljk3NTRWMEgzMi4yMzE0VjE0LjE4NEgzMy42NzE0VjE2LjUxMlpNMjkuMTM1NCAxMS4wNFYxMC43NzZDMjkuMTM1NCA5Ljg4IDI4Ljg5NTQgOS4xODQgMjguNDE1NCA4LjY4OEMyNy45NTE0IDguMTc2IDI3LjM2NzQgNy45MiAyNi42NjM0IDcuOTJDMjUuOTc1NCA3LjkyIDI1LjM2NzQgOC4xNzYgMjQuODM5NCA4LjY4OEMyNC4zMjc0IDkuMiAyNC4wNzE0IDEwLjAwOCAyNC4wNzE0IDExLjExMkMyNC4wNzE0IDEyLjE1MiAyNC4zMTE0IDEyLjk0NCAyNC43OTE0IDEzLjQ4OEMyNS4yNzE0IDE0LjAzMiAyNS44Mzk0IDE0LjMwNCAyNi40OTU0IDE0LjMwNEMyNy4zMTE0IDE0LjMwNCAyNy45NTE0IDEzLjk2IDI4LjQxNTQgMTMuMjcyQzI4Ljg5NTQgMTIuNTg0IDI5LjEzNTQgMTEuODQgMjkuMTM1NCAxMS4wNFoiIGZpbGw9ImN1cnJlbnRDb2xvciI+PC9wYXRoPgogICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBkPSJNNDcuOTU4OSAxNi41MTJINDEuOTgyOVYxNC4xODRINDMuNDIyOVYxMC40MTZDNDMuNDIyOSA5LjQ4OCA0My4yNjI5IDguODI0IDQyLjk0MjkgOC40MjRDNDIuNjM4OSA4LjAyNCA0Mi4xODI5IDcuODI0IDQxLjU3NDkgNy44MjRDNDAuODM4OSA3LjgyNCA0MC4yNzA5IDguMDU2IDM5Ljg3MDkgOC41MkMzOS40NzA5IDguOTY4IDM5LjI2MjkgOS41NiAzOS4yNDY5IDEwLjI5NlYxNC4xODRINDAuNjg2OVYxNi41MTJIMzQuNzEwOVYxNC4xODRIMzYuMTUwOVY4LjA0SDM0LjU5MDlWNS42ODhIMzkuMjQ2OVY3LjM0NEMzOS45NjY5IDYuMDk2IDQxLjEyNjkgNS40NzIgNDIuNzI2OSA1LjQ3MkM0My43NTA5IDUuNDcyIDQ0LjYzODkgNS43NzYgNDUuMzkwOSA2LjM4NEM0Ni4xNDI5IDYuOTkyIDQ2LjUxODkgNy45MzYgNDYuNTE4OSA5LjIxNlYxNC4xODRINDcuOTU4OVYxNi41MTJaIiBmaWxsPSJjdXJyZW50Q29sb3IiPjwvcGF0aD4KICAgICAgICAgICAgICAgICAgICAgPC9zdmc+[image]]
+
+Your blueprint for a better internet.
+
+* https://mozilla.social/@mdn[[.visually-hidden]#MDN on Mastodon#]
+* https://twitter.com/mozdevnet[[.visually-hidden]#MDN on X (formerly
+Twitter)#]
+* https://github.com/mdn/[[.visually-hidden]#MDN on GitHub#]
+* link:/en-US/blog/rss.xml[[.visually-hidden]#MDN Blog RSS Feed#]
+
+== MDN
+
+* link:/en-US/about[About]
+* link:/en-US/blog/[Blog]
+* https://www.mozilla.org/en-US/careers/listings/?team=ProdOps[Careers]
+* link:/en-US/advertising[Advertise with us]
+
+== Support
+
+* https://support.mozilla.org/products/mdn-plus[Product help]
+* link:/en-US/docs/MDN/Community/Issues[Report an issue]
+
+== Our communities
+
+* link:/en-US/community[MDN Community]
+* https://discourse.mozilla.org/c/mdn/236[MDN Forum]
+* link:/discord[MDN Chat]
+
+== Developers
+
+* link:/en-US/docs/Web[Web Technologies]
+* link:/en-US/docs/Learn[Learn Web Development]
+* link:/en-US/plus[MDN Plus]
+* https://hacks.mozilla.org/[Hacks Blog]
+
+https://www.mozilla.org/[image:data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTEyIiBoZWlnaHQ9IjMyIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgICAgICAgICAgICAgICAgICAgICA8dGl0bGUgaWQ9Im1vemlsbGEtZm9vdGVyLWxvZ28tc3ZnIj5Nb3ppbGxhIGxvZ288L3RpdGxlPgogICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBkPSJNNDEuNzUzIDE0LjIxOGMtMi4wNDggMC0zLjMyNCAxLjUyMi0zLjMyNCA0LjE1NyAwIDIuNDIzIDEuMTE5IDQuMjg2IDMuMjkgNC4yODYgMi4wODIgMCAzLjQ0Ny0xLjY3OCAzLjQ0Ny00LjM0NyAwLTIuODI2LTEuNTIyLTQuMDk2LTMuNDEzLTQuMDk2Wm01NC44OSA3LjA0NGMwIC45MDEuNDM3IDEuNjE4IDEuNjQ1IDEuNjE4IDEuNDI3IDAgMi45NDktMS4wMjQgMy4wNDQtMy4zNTItLjY0OS0uMDk1LTEuMzY1LS4xODUtMi4wMi0uMTg1LTEuNDI2LS4wMDUtMi42NjguMzk3LTIuNjY4IDEuOTJaIiBmaWxsPSJjdXJyZW50Q29sb3IiPjwvcGF0aD4KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggZD0iTTAgMHYzMmgxMTEuOTA4VjBIMFptMzIuNTYgMjUuNDI2aC01Ljg3di03Ljg4NGMwLTIuNDIzLS44MDYtMy4zNTItMi4zOS0zLjM1Mi0xLjkyNCAwLTIuNzAyIDEuMzY1LTIuNzAyIDMuMzI0djQuODY4aDEuODY0djMuMDQ0aC01Ljg2NHYtNy44ODRjMC0yLjQyMy0uODA2LTMuMzUyLTIuMzktMy4zNTItMS45MjQgMC0yLjcwMiAxLjM2NS0yLjcwMiAzLjMyNHY0Ljg2OGgyLjY2OXYzLjA0NEg2LjY0MnYtMy4wNDRoMS44NjN2LTcuOTE4SDYuNjQyVjExLjQyaDUuODY0djIuMTFjLjgzOS0xLjQ4OSAyLjMtMi4zOSA0LjI1Mi0yLjM5IDIuMDIgMCAzLjg3OC45NjMgNC41NjYgMy4wMS43NzgtMS44NjIgMi4zNjEtMy4wMSA0LjU2Ni0zLjAxIDIuNTEyIDAgNC44MTIgMS41MjIgNC44MTIgNC44NHY2LjQwMmgxLjg2M3YzLjA0NGgtLjAwNVptOS4wMzYuMzA3Yy00LjMxNCAwLTcuMjk2LTIuNjM1LTcuMjk2LTcuMTA2IDAtNC4wOTYgMi40ODQtNy40ODEgNy41MTQtNy40ODFzNy40ODEgMy4zOCA3LjQ4MSA3LjI5YzAgNC40NzItMy4yMjggNy4yOTctNy42OTkgNy4yOTdabTIyLjU3OC0uMzA3SDUxLjk0MmwtLjQwMy0yLjExIDcuNy04Ljg0NmgtNC4zNzZsLS42MjEgMi4xNy0yLjg4OC0uMzEzLjQ5OC00LjkwN2gxMi4yOTRsLjMxMyAyLjExLTcuNzY3IDguODUyaDQuNTMzbC42NTQtMi4xNzIgMy4xNjcuMzA4LS44NzIgNC45MDhabTcuOTkgMGgtNC4xOTF2LTUuMDNoNC4xOXY1LjAzWm0wLTguOTc2aC00LjE5MXYtNS4wM2g0LjE5djUuMDNabTIuNjE4IDguOTc2IDYuMDU0LTIxLjM1OGgzLjk0NWwtNi4wNTQgMjEuMzU4aC0zLjk0NVptOC4xMzYgMCA2LjA0OC0yMS4zNThoMy45NDVsLTYuMDU0IDIxLjM1OGgtMy45MzlabTIxLjQ4Ni4zMDdjLTEuODYzIDAtMi44ODctMS4wODUtMy4wNzItMi43OTItLjgwNSAxLjQyNy0yLjIzMiAyLjc5Mi00LjQ5OCAyLjc5Mi0yLjAyIDAtNC4zMTQtMS4wODUtNC4zMTQtNC4wMDYgMC0zLjQ0NyAzLjMyMy00LjI1MyA2LjUxOC00LjI1My43NzggMCAxLjU4NC4wMzQgMi4zLjEyNHYtLjQ2NWMwLTEuNDI3LS4wMzQtMy4xMzMtMi4zLTMuMTMzLS44NCAwLTEuNDg4LjA2MS0yLjE0My40MDJsLS40NTMgMS41NzgtMy4xOTUtLjM0LjU0OS0zLjIyNGMyLjQ1LS45OTYgMy42OTItMS4yNyA1Ljk5Mi0xLjI3IDMuMDEgMCA1LjU1NiAxLjU1IDUuNTU2IDQuNzV2Ni4wODNjMCAuODA1LjMxNCAxLjA4NS45NjMgMS4wODUuMTg0IDAgLjM3NS0uMDM0LjU4Ny0uMDk1bC4wMzQgMi4xMWE1LjQzMiA1LjQzMiAwIDAgMS0yLjUyNC42NTRaIiBmaWxsPSJjdXJyZW50Q29sb3IiPjwvcGF0aD4KICAgICAgICAgICAgICAgICAgICAgPC9zdmc+[image]]
+
+* https://www.mozilla.org/privacy/websites/[Website Privacy Notice]
+* https://www.mozilla.org/privacy/websites/#cookies[Cookies]
+* https://www.mozilla.org/about/legal/terms/mozilla[Legal]
+* https://www.mozilla.org/about/governance/policies/participation/[Community
+Participation Guidelines]
+
+Visit https://www.mozilla.org[Mozilla Corporation’s] not-for-profit
+parent, the https://foundation.mozilla.org/[Mozilla Foundation]. +
+Portions of this content are ©1998–2024 by individual mozilla.org
+contributors. Content available under
+link:/en-US/docs/MDN/Writing_guidelines/Attrib_copyright_license[a
+Creative Commons license].

@@ -1,0 +1,76 @@
+Welche Wirkung hat die direktive "use strict" für Javascipt Programme?
+
+Die Direktive use strict in JavaScript aktiviert den strikten Modus, der
+die Programmierung in mehrerer Hinsicht sicherer und sauberer gestaltet.
+Sie wurde mit ECMAScript 5 (2009) eingeführt und bringt folgende wesentliche
+Auswirkungen mit sich:
+
+1. Strengere Fehlerbehandlung:
+
+Deklarationspflicht für Variablen: Im strikten Modus müssen Variablen
+explizit mit var, let oder const deklariert werden, bevor sie verwendet
+werden können. Andernfalls wird ein Fehler ausgegeben. Dies verhindert
+die unbeabsichtigte Erstellung von globalen Variablen durch Tippfehler
+und fördert klarere Code-Strukturen.
+
+Verbot von undeklarierten Bezeichnern: Die Verwendung von Bezeichnern, die
+nicht als Variablen, Funktionen oder Parameter deklariert wurden, führt
+im strikten Modus zu einem Fehler. Dies hilft, Tippfehler und unbeabsichtigte
+Zugriffe auf nicht existierende Objekte zu vermeiden.
+
+Verbot von reservierten Worten: Schlüsselwörter, die für zukünftige
+JavaScript-Versionen reserviert sind, können im strikten Modus nicht als
+Variablennamen, Funktionsnamen oder Eigenschaftsnamen verwendet werden. Dies verhindert Konflikte mit neuen Sprachfunktionen und gewährleistet die Zukunftsfähigkeit des Codes.
+
+2. Verhindern unsicherer Aktionen:
+
+Einschränkung des globalen Objekts: Der direkte Zugriff auf das globale
+Objekt (window) über this wird im strikten Modus eingeschränkt. Dies fördert
+sauberere Code-Praktiken und reduziert die Gefahr unbeabsichtigter Änderungen
+an globalen Variablen.
+
+Verbot von with-Anweisung: Die with-Anweisung, mit der der Kontext eines
+Objekts für Codeblöcke festgelegt werden kann, ist im strikten Modus verboten.
+Sie gilt als unsicher und kann zu unerwarteten Verhalten führen.
+
+Einschränkung von eval: Die eval-Funktion, mit der dynamisch JavaScript-Code
+ausgeführt werden kann, wird im strikten Modus eingeschränkt. Dies erhöht die
+Sicherheit und verhindert die Ausführung von potenziell schädlichem Code.
+
+3. Verbesserter Code-Stil:
+
+Erkennung von fehlenden Semikolons: Im strikten Modus werden fehlende
+Semikolons am Ende von Codezeilen als Fehler markiert. Dies fördert eine
+konsistente Code-Formatierung und erleichtert die Fehlersuche.
+
+Verbesserte Lesbarkeit: Durch die konsequente Anwendung von Deklarationen
+und die Vermeidung von impliziten globalen Variablen wird der Code im
+strikten Modus insgesamt sauberer und leichter lesbar.
+
+
+Fazit
+--------------------------------------------------------------------------------
+
+Die Verwendung der Direktive use strict wird generell empfohlen, da sie zu
+robusterem, sichererem und saubererem JavaScript-Code führt. Sie hilft dabei,
+häufige Programmierfehler zu vermeiden und fördert einen klareren und
+wartungsfreundlicheren Code-Stil.
+
+Moderne JavaScript-Entwicklungsumgebungen aktivieren den strikten Modus
+standardmäßig, so dass Entwickler ihn in der Regel aktiv einschalten müssen,
+um ihn zu deaktivieren.
+
+Zusätzliche Informationen:
+
+Die Direktive use strict kann sowohl am Anfang eines Skripts als auch am
+Anfang einer Funktion stehen. Der strikte Modus gilt nur für den Codebereich,
+in dem er aktiviert wird. Es gibt einige wenige Ausnahmen vom strikten Modus,
+z. B. in eingebettetem JavaScript in HTML-Dateien.
+
+
+Ressourcen
+--------------------------------------------------------------------------------
+
+MDN Web Docs: use strict
+JavaScript: Was ist „use strict“? https://statistikguru.de/javascript/javascript-was-ist-use-strict.html
+„use strict“ – der Strict Mode – welche Vorteile hat er? https://hellocoding.de/blog/coding-language/javascript/use-strict-mode

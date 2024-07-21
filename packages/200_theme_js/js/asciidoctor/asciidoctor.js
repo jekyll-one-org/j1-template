@@ -45,7 +45,8 @@ module.exports = function asciidoctor (options) {
 
       var moduleOptions       = options;
       var logger              = log4javascript.getLogger('j1.core.asciidoctor');
-
+      var logText;
+      
       var moduleDefaults = {
         dummyOption:       false,                                               // placeholder
       };

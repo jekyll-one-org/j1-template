@@ -1,7 +1,7 @@
 ---
-title:                                  Google Gemini
-title_extention:                        Gemini API Integration for J1 Template
-tagline:                                User Guide for J1 Template
+title:                                  Google Gemini API
+title_extention:                        Integration for J1 Template
+tagline:                                User Guide
 
 date:                                   2022-08-14
 

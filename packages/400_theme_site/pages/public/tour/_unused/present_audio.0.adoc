@@ -48,6 +48,7 @@ resource_options:
 // =============================================================================
 // Enable the Liquid Preprocessor
 :page-liquid:
+:url-html-audio--plugin:                //localhost/pages/public/tour/present_audio/
 
 // Set (local) page attributes here
 // -----------------------------------------------------------------------------
@@ -63,7 +64,6 @@ resource_options:
 {% include {{load_attributes}} scope="all" %}
 
 // See: https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Audio_codecs
-// See: https://docs.asciidoctor.org/asciidoc/latest/macros/audio-and-video/
 //
 [role="dropcap"]
 The Audio tag in HTML5 is a great way to add audio media to web pages.
@@ -80,6 +80,9 @@ mdi:clock-time-five-outline[24px, md-gray mt-4 mb-5 mr-2]
 *5-10 Minutes* to read
 
 
+// See: https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Audio_codecs
+// See: https://docs.asciidoctor.org/asciidoc/latest/macros/audio-and-video/
+//
 [role="mt-5"]
 == HTML 5 Audio
 
@@ -89,6 +92,34 @@ content directly within a webpage.
 
 .Ambient Piano
 audio::/assets/audio/sound-effects/ambient-piano.mp3[role="mt-4 mb-5"]
+
+The block audio macro `audio::` enables you to embed audio streams into your
+documents. Using the macro, embed self-hosted audio files or audio sources
+from the Internet are supported.
+
+.Basic audio file include
+[source, js]
+----
+audio::ambient-piano.mp3[]
+----
+
+You can control the audio settings using additional attributes on the
+macro. For instance, you can offset the start time of playback using the
+start attribute `start` and enable autoplay using the `autoplay` option.
+
+.Set attributes for local audio playback
+[source, js]
+----
+audio::mbient-pianov[start=60,opts=autoplay]
+----
+
+The native HTML5 <audio> element does not provide built-in functionality for
+direct playlist playback. While it can play a single audio file, it does not
+allow you to manage and control a sequence of audio data.
+
+If playlist playback is required, see section <<AmplitudeJS Audio>> for more
+powerful audio players available for J1 Template.
+
 
 
 [role="mt-5"]
@@ -133,7 +164,6 @@ amplitude::free_emancipator_mini[role="mt-3 mb-5"]
 amplitude::free_disco_mini[role="mt-3 mb-5"]
 
 lorem:sentences[5]
-
 
 [role="mt-5"]
 == Compact Player

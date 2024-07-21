@@ -1,0 +1,55 @@
+Einige ARIA-Elternrollen müssen bestimmte untergeordnete Rollen enthalten,
+um ihre beabsichtigten Zugänglichkeitsfunktionen auszuführen.
+
+Welche Rollen sind dies für Input Elemente vom Typ search?
+
+Gemini
+--------------------------------------------------------------------------------
+
+Um die volle Zugänglichkeit für Sucheingabefelder (Typ "search") zu
+gewährleisten, erfordern einige ARIA-Elternrollen bestimmte untergeordnete
+Rollen. Diese Rollen arbeiten zusammen, um Benutzern mit Screenreadern und
+anderen assistierenden Technologien eine optimale Nutzererfahrung zu bieten.
+
+Essentielle Unterrollen:
+
+* combobox:
+  Diese Rolle kennzeichnet das Eingabefeld als interaktives Element,
+  in dem Benutzer Suchbegriffe eingeben und auswählen können.
+* listbox:
+  Diese Rolle definiert die Liste der verfügbaren Suchvorschläge oder
+  Suchergebnisse, die Benutzern zur Auswahl präsentiert werden.
+* option:
+  Jede Option in der Vorschlags- oder Ergebnisliste wird durch diese
+  Rolle als eigenständiges Element mit wählbarem Wert gekennzeichnet.
+
+Optionale Unterrollen:
+
+* autocomplete:
+  Diese Rolle deutet darauf hin, dass das Eingabefeld basierend auf der
+  eingegebenen Zeichenfolge automatische Vervollständigungsvorschläge
+  generieren kann.
+
+* searchbox: Diese Rolle kennzeichnet das Eingabefeld speziell für die
+  Sucheingabe, um Screenreadern zusätzlichen Kontext zu bieten.
+
+Beispiel:
+
+HTML
+<div role="combobox" aria-autocomplete="list" aria-haspopup="listbox">
+  <input type="search" role="searchbox" aria-labelledby="search-label" id="search-input">
+  <ul role="listbox" aria-labelledby="search-results">
+    <li role="option">Suchbegriff 1</li>
+    <li role="option">Suchbegriff 2</li>
+    <li role="option">Suchbegriff 3</li>
+  </ul>
+</div>
+
+
+Hinweis
+--------------------------------------------------------------------------------
+
+Die Implementierung dieser Rollen kann je nach verwendetem JavaScript
+Framework oder Bibliotheken variieren. Es ist wichtig, die spezifische
+Dokumentation Ihrer gewählten Technologie zu konsultieren, um sicherzustellen,
+dass die Barrierefreiheit korrekt implementiert wird.

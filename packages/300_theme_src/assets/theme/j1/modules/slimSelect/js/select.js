@@ -401,12 +401,18 @@
              this.main.main.setAttribute('aria-controls', this.content.main.id);
              this.main.main.setAttribute('aria-expanded', 'false');
              this.content.main.setAttribute('role', 'listbox');
+
+             // jadams, 2024-07-20
+             this.content.main.setAttribute('aria-label', 'listbox');
          }
          mainDiv() {
              var _a;
              const main = document.createElement('div');
              main.dataset.id = this.settings.id;
              main.setAttribute('aria-label', this.settings.ariaLabel);
+             // jadams, 2024-07-20
+             // main.setAttribute('aria-labelledby', 'combobox');
+
              main.tabIndex = 0;
              main.onkeydown = (e) => {
                  switch (e.key) {
@@ -748,6 +754,7 @@
                  main.classList.add(this.classes.hide);
                  input.readOnly = true;
              }
+
              input.type = 'search';
              input.placeholder = this.settings.searchPlaceholder;
              input.tabIndex = -1;
@@ -755,6 +762,10 @@
              input.setAttribute('autocapitalize', 'off');
              input.setAttribute('autocomplete', 'off');
              input.setAttribute('autocorrect', 'off');
+
+             // jadams, 2024-07-20
+             // input.setAttribute('aria-labelledby', 'combobox');
+
              input.oninput = debounce((e) => {
                  this.callbacks.search(e.target.value);
              }, 100);
@@ -1086,6 +1097,10 @@
              optionEl.id = option.id;
              optionEl.classList.add(this.classes.option);
              optionEl.setAttribute('role', 'option');
+
+             // jadams, 2024-07-20
+             optionEl.setAttribute('aria-labelledby', 'option');
+
              if (option.class) {
                  option.class.split(' ').forEach((dataClass) => {
                      optionEl.classList.add(dataClass);
