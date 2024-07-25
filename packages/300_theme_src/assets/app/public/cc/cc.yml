@@ -30,7 +30,7 @@ backend:
   repo:                                 jekyll-one-org/J1 Theme
   # e.g master | develop
   branch:                               master
-  # url of 'external' oauth client (e.g. j1 utility server at: http://localhost:44444)  
+  # url of 'external' oauth client (e.g. j1 utility server at: http://localhost:44444)
   # base_url:                           http://localhost:44444                  # web
   # base_url:                           http://localhost:5000                   # app
   base_url:
@@ -89,10 +89,10 @@ collections:
         fields:
 
           # --------------------------------------------------------------------
-          # about (used for J1 CC only)
+          # Description
           #
-          - label:  about
-            name:   about_config
+          - label:  Description
+            name:   description
             widget: object
             fields:
               - { label: title,                         name: title,    widget: string, hint: General site settings to customize how a site is built }
@@ -530,10 +530,10 @@ collections:
         fields:
 
           # --------------------------------------------------------------------
-          # About this configuration (used for J1 CC only)
+          # Description
           #
-          - label:  about
-            name:   about_config
+          - label:  Description
+            name:   description
             widget: object
             fields:
               - { label: title,     name: title,    widget: string, hint: General J1 Theme settings to specify ALL resources used by a site or a layout }
@@ -617,10 +617,10 @@ collections:
         fields:
 
           # --------------------------------------------------------------------
-          # About this configuration (used for J1 CC only)
+          # Description
           #
-          - label:  about
-            name:   about_config
+          - label:  Description
+            name:   description
             widget: object
             fields:
               - { label: title,     name: title,    widget: string, hint: General J1 Theme settings to specify ALL resources used by a site or a layout }
@@ -821,10 +821,10 @@ collections:
         fields:
 
           # --------------------------------------------------------------------
-          # About this configuration (used for J1 CC only)
+          # Description
           #
-          - label:  about
-            name:   about_config
+          - label:  Description
+            name:   description
             widget: object
             fields:
               - { label: title,     name: title,    widget: string, hint: General J1 Theme settings to specify ALL resources used by a site or a layout }
@@ -1019,10 +1019,10 @@ collections:
         fields:
 
           # --------------------------------------------------------------------
-          # About this configuration (used for J1 CC only)
+          # Description
           #
-          - label:  about
-            name:   about_config
+          - label:  Description
+            name:   description
             widget: object
             fields:
               - { label: title,     name: title,    widget: string, hint: General J1 Theme settings to specify ALL resources used by a site or a layout }
@@ -1200,10 +1200,10 @@ collections:
         fields:
 
           # --------------------------------------------------------------------
-          # About this configuration (used for J1 CC only)
+          # Description
           #
-          - label:  about
-            name:   about_config
+          - label:  Description
+            name:   description
             widget: object
             fields:
               - { label: module name, name: title,    widget: string, hint: Manages dialogs to accept or decline on Cookies }
@@ -1265,10 +1265,10 @@ collections:
         fields:
 
           # --------------------------------------------------------------------
-          # About this configuration (used for J1 CC only)
+          # Description
           #
-          - label:  about
-            name:   about_config
+          - label:  Description
+            name:   description
             widget: object
             fields:
               - { label: module name, name: title,    widget: string, hint: Simple site search based on automatically generated idex data }
@@ -1305,10 +1305,10 @@ collections:
         fields:
 
           # --------------------------------------------------------------------
-          # About this configuration (used for J1 CC only)
+          # Description
           #
-          - label:  about
-            name:   about_config
+          - label:  Description
+            name:   description
             widget: object
             fields:
               - { label: module name, name: title,    widget: string, hint: "Multi purpose navigation builder, based on the Bootstrap V4 Framework. Provides functions to create a menu naviagation, quicklinks, sidebars and more"  }
@@ -1493,10 +1493,10 @@ collections:
         fields:
 
           # --------------------------------------------------------------------
-          # About this configuration (used for J1 CC only)
+          # Description
           #
-          - label:  about
-            name:   about_config
+          - label:  Description
+            name:   description
             widget: object
             fields:
               - { label: module name, name: title,    widget: string, hint: Provides a button displayed at the bottom of every page to scroll to the top }
@@ -1543,10 +1543,10 @@ collections:
         fields:
 
           # --------------------------------------------------------------------
-          # About this configuration (used for J1 CC only)
+          # Description
           #
-          - label:  about
-            name:   about_config
+          - label:  Description
+            name:   description
             widget: object
             fields:
               - { label: module name, name: title,    widget: string, hint: Simple site search based on automatically generated idex data }

@@ -12,7 +12,7 @@
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
  # Test data:
- #    liquid_var:  {{ liquid_var | debug }}
+ #    liquid_var:  {{liquid_var | debug}}
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
@@ -43,6 +43,14 @@
 {% assign environment       = site.environment %}
 {% assign template_version  = site.version %}
 
+{% if site.slogan %}
+  {% assign slogan = site.slogan  %}
+{% elsif page.slogan %}
+  {% assign slogan = page.slogan %}
+{% endif %}
+
+{% comment %} initialize site variables
+-------------------------------------------------------------------------------- {% endcomment %}
 {% case site.environment %}
   {% when 'production' %}
     {% assign ext_css = 'min.css' %}
@@ -61,10 +69,24 @@
   {% assign keywords = page.keywords %}
 {% endif %}
 
+{% if site.title %}
+  {% assign title = site.title  %}
+{% elsif page.title %}
+  {% assign title = page.title %}
+{% endif %}
+
+{% if site.description %}
+  {% assign description = site.description  %}
+{% elsif page.description %}
+  {% assign description = page.description %}
+{% endif %}
 
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ start meta-data processing: place meta tags (taken from site config|page frontmatter) ] -->
+
+<!-- Webpage Title -->
+<title>{{title}}</title>
 
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ page|content encoding ] -->
 <meta http-equiv="Content-Type" content="text/html;charset={{site.coding}}">
@@ -114,7 +136,7 @@
   {% capture robots_follow %}<meta name="robots" content="nofollow">{% endcapture %}
 {% endif %}
 
-{% comment %} page.robots.index:  {{ page.robots.index | debug }} {% endcomment %}
+{% comment %} page.robots.index:  {{page.robots.index | debug}} {% endcomment %}
 
 {% comment %} Set page as original (canonical link)
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -217,7 +239,6 @@
 <!-- Google fonts -->
 <!-- link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700" / -->
 
-
 {% comment %} J1 SEO processing
 -------------------------------------------------------------------------------- {% endcomment %}
 <!-- [INFO  ] [j1.layout.meta_data_generator.html    ] [ start SEO Optimization ] -->
@@ -309,6 +330,11 @@
 
 {% comment %} SEO Tag processing
 -------------------------------------------------------------------------------- {% endcomment %}
+<!-- Global SEO Meta Tags -->
+<meta name="description" content="{{slogan}} {{description}}">
+
+<!-- J1 SEO Meta Tags -->
+<!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ START meta-data processing ] -->
 {% if seo_tag_options.enabled %}
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ add J1 SEO Tags ] -->
 {% seo %}
@@ -316,5 +342,4 @@
 {% else %}
 <!-- [WARN   ] [j1.layout.meta_data_generator.html    ] [ J1 SEO Tags detected DISABLED ] -->
 {% endif %}
-
-<!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ end meta-data processing ] -->
+<!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ END meta-data processing ] -->
