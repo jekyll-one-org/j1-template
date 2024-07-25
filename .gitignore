@@ -1,7 +1,6 @@
 # Unneeded files used/created by NPM
 # ------------------------------------------------------------------------------
 node_modules/
-
 package-lock.json
 
 
@@ -9,37 +8,21 @@ package-lock.json
 # Ignore symbolic links as simple files !!!
 # ------------------------------------------------------------------------------
 log
-
 tmp/
-
 \.bundle/
-
 \.idea/
-
 \.jekyll-cache/
-
 \.vscode/
-
 \.sass-cache/
-
 **/*.old
-
 **/*.tmp
-
 **/*.log
-
 **/*.current
-
 **/*.pdf
-
 **/*.swp
-
 **/*_backup
-
 **/\.ipynb_checkpoints/
-
 **/notebooks/j1/*.mp4
-
 **/notebooks/j1-bokeh-tutorial/*.html
 **/notebooks/j1-bokeh-tutorial/*.png
 **/notebooks/j1-bokeh-tutorial/*.svg
@@ -54,26 +37,18 @@ private.yml
 # Unneeded files for package 100_theme_css
 # ------------------------------------------------------------------------------
 packages/100_theme_css/dist/
-
 packages/100_theme_css/node_modules/
-
 packages/100_theme_css/yarn.lock
-
 packages/100_theme_css/package-lock.json
-
 packages/100_theme_css/report*.json
 
 
 # Unneeded files for package 200_theme_js
 # ------------------------------------------------------------------------------
 packages/200_theme_js/dist/
-
 packages/200_theme_js/log/
-
 packages/200_theme_js/node_modules/
-
 packages/200_theme_js/yarn.lock
-
 packages/200_theme_js/package-lock.json
 
 
@@ -81,7 +56,6 @@ packages/200_theme_js/package-lock.json
 # Ignore (generated ???) asset files for a theme ???
 # ------------------------------------------------------------------------------
 packages/300_theme_src/assets/theme/j1/core/css/**
-
 packages/300_theme_src/assets/theme/j1/core/js/**
 
 
@@ -89,85 +63,49 @@ packages/300_theme_src/assets/theme/j1/core/js/**
 # Ignore "symbolic" links as simple files !!!
 # ------------------------------------------------------------------------------
 packages/400_theme_site/_includes
-
 packages/400_theme_site/_layouts
-
 packages/400_theme_site/_plugins
-
 packages/400_theme_site/_install
-
 packages/400_theme_site/_config.yml
-
 packages/400_theme_site/apps
-
 packages/400_theme_site/assets
-
 packages/400_theme_site/_data/j1_config.yml
-
 packages/400_theme_site/_data/modules/cc.yml
-
 packages/400_theme_site/_data/_unused/
+packages/400_theme_site/Gemfile
 
 
 # Ignore files and folders
 # ------------------------------------------------------------------------------
 packages/400_theme_site/.idea/
-
 packages/400_theme_site/.eslintrc.json
-
 packages/400_theme_site/.sass-cache/
-
 packages/400_theme_site/.jekyll-cache/
-
 packages/400_theme_site/_sass/
-
 packages/400_theme_site/node_modules/
-
 packages/400_theme_site/vendor/
-
 packages/400_theme_site/_site/
-
 packages/400_theme_site/_tmp/
-
 packages/400_theme_site/.bundle/
-
 packages/400_theme_site/yarn.lock
-
 packages/400_theme_site/package-lock.json
-
 packages/400_theme_site/Gemfile.lock
-
 packages/400_theme_site/.jekyll-metadata
-
 packages/400_theme_site/.jekyll-cache/
-
-#packages/400_theme_site/_config.yml
-
 packages/400_theme_site/_data/private*.yml
-
 packages/400_theme_site/collections/posts/public/faq/*
 
 
 # Unneeded files for package 500_theme_gem
 # ------------------------------------------------------------------------------
 packages/500_theme_gem/.bundle/
-
 packages/500_theme_gem/.idea/
-
 packages/500_theme_gem/apps/
-
 packages/500_theme_gem/_*/
-
 packages/500_theme_gem/node_modules/
-
 packages/500_theme_gem/assets/
-
 packages/500_theme_gem/.git/
-
 packages/500_theme_gem/yarn.lock
-
 packages/500_theme_gem/package-lock.json
-
 packages/500_theme_gem/lib/starter_web/
-
 packages/500_theme_gem/**/_unused
