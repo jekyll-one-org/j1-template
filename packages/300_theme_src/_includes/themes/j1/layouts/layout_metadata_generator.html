@@ -43,10 +43,10 @@
 {% assign environment       = site.environment %}
 {% assign template_version  = site.version %}
 
-{% if site.slogan %}
-  {% assign slogan = site.slogan  %}
-{% elsif page.slogan %}
-  {% assign slogan = page.slogan %}
+{% if page.slogan %}
+  {% assign slogan = page.slogan  %}
+{% elsif site.slogan %}
+  {% assign slogan = site.slogan %}
 {% endif %}
 
 {% comment %} initialize site variables
@@ -75,10 +75,10 @@
   {% assign title = page.title %}
 {% endif %}
 
-{% if site.description %}
-  {% assign description = site.description  %}
-{% elsif page.description %}
-  {% assign description = page.description %}
+{% if page.description %}
+  {% assign description = page.description  %}
+{% elsif site.description %}
+  {% assign description = site.description %}
 {% endif %}
 
 {% comment %} Main

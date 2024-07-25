@@ -1,15 +1,15 @@
 ---
 title:                                  Audio Player
-title_extention:                        Playing Audio files
-tagline:                                Playing Audio files
+title_extention:                        Playback Audio
+tagline:                                Playback Audio
 
 date:                                   2024-04-16
 #last_modified:                         2024-01-01
 
 description: >
-                                        HTML 5 has brought sanity to audio support in the browser
-                                        by adding the audio tag element and by introducing several
-                                        standard audio formats.
+                                        J1 Template provides playing audio on web pages
+                                        by HTML5 and supports custom players created
+                                        by AmplitudeJS to playback audio individually.
 keywords: >
                                         open source, free, template, jekyll, jekyllone, web,
                                         sites, static, jamstack, bootstrap, html, html5,

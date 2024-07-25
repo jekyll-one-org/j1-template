@@ -1,23 +1,21 @@
 ---
-title:                                  Manage Images
+title:                                  Image
 title_extention:                        Manage Images using J1 Template
-tagline:                                Present Image Files
+tagline:                                Present Images
 
 date:                                   2020-11-03
 #last_modified:                         2023-01-01
 
 description: >
-                                        J1 Template support valuable features to manage your image-based
-                                        content using lightboxes, carousels, sliders, and galleries.
-                                        The image modules of J1 Template offer a wide range of complex
-                                        functionality based on powerful Open Source libraries like
-                                        Lightbox V2, Master Slider, lightGallery, or Justified Gallery
-                                        for high-end, masonry-styled preview maps.
+                                        The image modules supported by J1 Template offer valuable
+                                        features based on powerful Open Source libraries like
+                                        Masterslider, lightGallery, or Justified Gallery for high-end,
+                                        masonry-styled preview maps.
 keywords: >
                                         open source, free, template, jekyll, jekyllone, web,
                                         sites, static, jamstack, bootstrap,
                                         image, lightbox, carousel, slider, gallery,
-                                        lightbox2, master slider, lightgallery, justifiedgallery
+                                        masterslider, lightgallery, justifiedgallery
 
 categories:                             [ Roundtrip ]
 tags:                                   [ Module, Carousel, Lightbox, Image, Slider, Slick ]

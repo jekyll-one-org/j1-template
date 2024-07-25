@@ -23,13 +23,13 @@
 - item:                                 Tour
   sublevel:
 
-    - title:                            Manage Images
+    - title:                            Image
       href:                             /pages/public/tour/present_images/
       icon:                             image
-    - title:                            Playing Audio
+    - title:                            Audio
       href:                             /pages/public/tour/present_audio/
       icon:                             volume-high
-    - title:                            Playing Video
+    - title:                            Video
       href:                             /pages/public/tour/present_video/
       icon:                             video
 

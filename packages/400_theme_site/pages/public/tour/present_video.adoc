@@ -1,15 +1,15 @@
 ---
 title:                                  Video Player
-title_extention:                        Playing Video files
-tagline:                                Playing Video files
+title_extention:                        Playback Video
+tagline:                                Playback Video
 
 date:                                   2020-11-04
 #last_modified:                         2023-01-01
 
 description: >
-                                        The J1 Template supports playing video on web pages
-                                        by HTML5 Video, the current standard of HTML to show
-                                        videos on web pages.
+                                        J1 Template provides playing video on web pages
+                                        by HTML5 Video and supports custom players created
+                                        by VidoeJS to playback video individually.
 keywords: >
                                         open source, free, template, jekyll, jekyllone, web,
                                         sites, static, jamstack, bootstrap,
@@ -42,12 +42,12 @@ resource_options:
         - url:                          /assets/video/headers/present_videos/still/underground-broadway.jpg
           alt:                          Broadway Underground
           title:                        Video Player
-          tagline:                      Playing Video files
+          tagline:                      Playback Video
         # Broadway Underground - FAYETTE ST
         - url:                          /assets/video/headers/present_videos/underground-broadway.mp4
           alt:                          Broadway Underground Video
           title:                        Video Player
-          tagline:                      Playing Video files
+          tagline:                      Playback Video
           isVideo:                      true
           loop:                         false
           duration:                     6000
@@ -55,7 +55,7 @@ resource_options:
         - url:                          /assets/video/headers/present_videos/still/underground-broadway.jpg
           alt:                          Broadway Underground
           title:                        Video Player
-          tagline:                      Playing Video files
+          tagline:                      Playback Video
 ---
 
 // Page Initializer

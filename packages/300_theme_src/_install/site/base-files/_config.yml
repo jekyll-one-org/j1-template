@@ -229,8 +229,11 @@ description: >
                                         software for the Web. Jekyll One is open source,
                                         free to use, and the modules packed as well.
 keywords: >
-                                        open source, free, template, jekyll, jekyllone, web,
-                                        sites, static, jamstack, bootstap
+                                        free, open, source, open source, free, bootstap,
+                                        theme, template, jekyll, jekyll one, web, sites,
+                                        website, landing page, portfolio, directory,
+                                        ecommerce, documentation, jamstack,
+                                        deploy, netlify
 
 # Crawling/Indexing ENABLED for default. Settings managed page-wise using
 # front matter defaults or by page default settings to make sure that only
