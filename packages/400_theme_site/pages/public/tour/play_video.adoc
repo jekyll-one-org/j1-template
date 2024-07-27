@@ -1,6 +1,6 @@
 ---
 title:                                  Video Player
-title_extention:                        Playback Video
+title_extention:                        Playback Video using J1 Template
 tagline:                                Playback Video
 
 date:                                   2020-11-04

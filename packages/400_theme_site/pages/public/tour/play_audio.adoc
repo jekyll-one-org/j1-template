@@ -1,6 +1,6 @@
 ---
 title:                                  Audio Player
-title_extention:                        Playback Audio
+title_extention:                        Playback Audio using J1 Template
 tagline:                                Playback Audio
 
 date:                                   2024-04-16

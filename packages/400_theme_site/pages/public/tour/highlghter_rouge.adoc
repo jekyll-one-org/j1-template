@@ -1,7 +1,7 @@
 ---
 title:                                  Rouge
-title_extention:                        Ruby themeable syntax highlighter for J1 Template
-tagline:                                Code Highlighter
+title_extention:                        Themeable Syntax Highlighter for J1 Template
+tagline:                                Themeable Syntax Highlighter
 
 date:                                   2023-07-08
 #last_modified:                         2023-01-01

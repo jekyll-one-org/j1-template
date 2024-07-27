@@ -1,7 +1,7 @@
 ---
 title:                                  Extensions
-title_extention:                        Enhance Asciidoc Markup Language
-tagline:                                Asciidoc Markup
+title_extention:                        Enhanced Asciidoc Markups for J1 Template
+tagline:                                Enhanced Asciidoc Markups
 
 date:                                   2023-09-01
 #last_modified:                         2023-01-01

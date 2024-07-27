@@ -1,7 +1,7 @@
 ---
 title:                                  Typography
-title_extention:                        Crucial branding element for J1 Template
-tagline:                                Crucial Branding Element
+title_extention:                        Branding element for J1 Template
+tagline:                                Crucial Branding Element for Your Web
 
 date:                                   2020-11-05
 #last_modified:                         2023-01-01

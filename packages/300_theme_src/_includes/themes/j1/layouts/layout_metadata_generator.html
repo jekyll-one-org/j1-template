@@ -42,12 +42,7 @@
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign environment       = site.environment %}
 {% assign template_version  = site.version %}
-
-{% if page.slogan %}
-  {% assign slogan = page.slogan  %}
-{% elsif site.slogan %}
-  {% assign slogan = site.slogan %}
-{% endif %}
+{% assign title_separator   = ' · ' %}
 
 {% comment %} initialize site variables
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -63,17 +58,31 @@
     {% assign ext_js  = 'js' %}
 {% endcase %}
 
-{% if site.keywords %}
-  {% assign keywords = site.keywords  %}
-{% elsif page.keywords %}
-  {% assign keywords = page.keywords %}
+{% if page.keywords %}
+  {% assign keywords = page.keywords  %}
+{% elsif site.keywords %}
+  {% assign keywords = site.keywords %}
 {% endif %}
 
-{% if site.title %}
-  {% assign title = site.title  %}
-{% elsif page.title %}
-  {% assign title = page.title %}
+{% if page.slogan %}
+  {% assign slogan = page.slogan  %}
+{% elsif site.slogan %}
+  {% assign slogan = site.slogan %}
 {% endif %}
+
+{% if page.title %}
+  {% assign title = page.title  %}
+{% elsif site.title %}
+  {% assign title = site.title %}
+{% endif %}
+
+{% if page.title_extention %}
+  {% assign title_extention = page.title_extention %}
+{% elsif site.title_extention %}
+  {% assign title_extention = site.title_extention %}
+{% endif %}
+
+{% capture full_title %} {{title}} {{title_separator}} {{title_extention}} {% endcapture %}
 
 {% if page.description %}
   {% assign description = page.description  %}
@@ -81,12 +90,15 @@
   {% assign description = site.description %}
 {% endif %}
 
+{% capture full_description %} {{slogan}} {{description}} {% endcapture %}
+
+
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ start meta-data processing: place meta tags (taken from site config|page frontmatter) ] -->
 
 <!-- Webpage Title -->
-<title>{{title}}</title>
+<title>{{full_title|strip}}</title>
 
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ page|content encoding ] -->
 <meta http-equiv="Content-Type" content="text/html;charset={{site.coding}}">
@@ -331,7 +343,7 @@
 {% comment %} SEO Tag processing
 -------------------------------------------------------------------------------- {% endcomment %}
 <!-- Global SEO Meta Tags -->
-<meta name="description" content="{{slogan}} {{description}}">
+<meta name="description" content="{{full_description|strip}}">
 
 <!-- J1 SEO Meta Tags -->
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ START meta-data processing ] -->

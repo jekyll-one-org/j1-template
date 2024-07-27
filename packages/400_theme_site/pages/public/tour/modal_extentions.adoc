@@ -1,7 +1,7 @@
 ---
 title:                                  Advanced Modals
-title_extention:                        Advanced Bootstrap Modals for J1 Template
-tagline:                                Improve Visitor Experience
+title_extention:                        Advanced Bootstrap V5 Modals for J1 Template
+tagline:                                Best Visitor Experience for Your Web
 
 date:                                   2020-11-08
 #last_modified:                         2023-01-01

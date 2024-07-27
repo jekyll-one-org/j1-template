@@ -1,7 +1,7 @@
 ---
-title:                                  Bootstrap Themes
-title_extention:                        Individual Bootstrap Styles for J1 Template Webs
-tagline:                                Individual CSS Styles for J1 Webs
+title:                                  Themes
+title_extention:                        Bootstrap V5 Themes for J1 Template
+tagline:                                Individual Themes for Your Web
 
 date:                                   2020-11-10
 #last_modified:                         2023-01-01

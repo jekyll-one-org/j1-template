@@ -1,6 +1,6 @@
 ---
 title:                                  Image
-title_extention:                        Manage Images using J1 Template
+title_extention:                        Present Images using J1 Template
 tagline:                                Present Images
 
 date:                                   2020-11-03

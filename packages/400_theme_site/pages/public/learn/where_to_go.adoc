@@ -1,7 +1,7 @@
 ---
 title:                                  Where to go
-title_extention:                        Info pages for J1 Template
-tagline:                                Fasten Your Way
+title_extention:                        Info Pages for J1 Template
+tagline:                                Fasten Your Way to J1 Template
 
 date:                                   2023-01-01
 #last_modified:                         2023-01-01
