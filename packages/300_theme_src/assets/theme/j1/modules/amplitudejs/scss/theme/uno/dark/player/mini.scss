@@ -15,22 +15,19 @@
 
 // Variables
 // ---------------------------------------------------------
-$font-family_1:         "Lato", sans-serif;
+$font-family:         "Lato", sans-serif;
 
-$color_1:               var(--ajs-theme-uno--gray-100);
-$color_2:               var(--ajs-theme-uno--blue-gray-300);
-$color_3:               var(--ajs-theme-uno--white);
-
-$background-color_1:    var(--ajs-theme-uno--black);
+$color:               var(--ajs-theme-uno--white);
+$background-color:    var(--ajs-theme-uno--black);
+$background-color:    var(--ajs-theme-uno--medium-silver);
 
 
 // Styles
 // ---------------------------------------------------------
-
 .mini-player {
 	-webkit-font-smoothing: antialiased;
 	width: 475px;
-	background-color: $background-color_1;
+	background-color: $background-color;
 }
 .mini-player-container {
 	display: block;
@@ -41,9 +38,9 @@ $background-color_1:    var(--ajs-theme-uno--black);
 	margin-bottom: 20px;
 	span.song-name {
 		display: block;
-		color: $color_1;
+		color: $color;
 		font-size: 24px;
-		font-family: $font-family_1;
+		font-family: $font-family;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -53,7 +50,7 @@ $background-color_1:    var(--ajs-theme-uno--black);
 		color: $color_2;
 		font-size: 18px;
 		font-weight: bold;
-		font-family: $font-family_1;
+		font-family: $font-family;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -63,7 +60,7 @@ $background-color_1:    var(--ajs-theme-uno--black);
 		color: $color_2;
 		font-size: 18px;
 		font-weight: bold;
-		font-family: $font-family_1;
+		font-family: $font-family;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -76,11 +73,11 @@ $background-color_1:    var(--ajs-theme-uno--black);
 	width: calc(100% - 43px);
 }
 .mini-player-song-artist-album {
-	font-family: $font-family_1;
+	font-family: $font-family;
 	color: $color_2;
 	font-size: 18px;
 	font-weight: bold;
-	font-family: $font-family_1;
+	font-family: $font-family;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;

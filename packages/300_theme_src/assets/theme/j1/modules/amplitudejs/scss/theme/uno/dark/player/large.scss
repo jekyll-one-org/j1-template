@@ -15,33 +15,24 @@
 
 // Variables
 // ---------------------------------------------------------
-$font-family: "Lato", sans-serif;
+$font-family:         "Lato", sans-serif;
 
-$color_1: var(--ajs-theme-uno--white);
-$color_2: var(--ajs-theme-uno--gray-300);
-$color_3: var(--ajs-theme-uno--blue-gray);
-$color_4: var(--ajs-theme-uno--gray-100);
-$color_5: var(--ajs-theme-uno--blue-gray-300);
-$color_6: var(--ajs-theme-uno--blue);
-$color_7: var(--ajs-theme-uno--gray-200);
+$color_1:             var(--ajs-theme-uno--white);
+$color_2:             var(--ajs-theme-uno--gray-200);
+$color_3:             var(--ajs-theme-uno--gray-300);
+$color_4:             var(--ajs-theme-uno--blue);
 
-$background-color_1: var(--ajs-theme-uno--dark-silver);
-$background-color_2: var(--ajs-theme-uno--blue-gray-900);
-$background-color_3: var(--ajs-theme-uno--darker-silver);
-$background-color_4: var(--ajs-theme-uno--medium-silver);
+$background-color_1:  var(--ajs-theme-uno--dark-silver);
+$background-color_2:  var(--ajs-theme-uno--black);
+$background-color_3:  var(--ajs-theme-uno--darker-silver);
+$background-color_4:  var(--ajs-theme-uno--blue-gray-900);
+$background-color_5:  var(--ajs-theme-uno--medium-silver);
+
+$border-color_1:      var(--ajs-theme-uno--medium-silver);
+
 
 // Styles
 // ---------------------------------------------------------
-/* Bootstrap media query breakpoints
- --------------------------------------------------- */
-/* Small only */
-/* Medium only */
-/* Large and up */
-/* clearfix control container */
-/* jadams: should rplaced by: song-artist-album */
-/* jadams: playlist controls (prev|play-pause|next */
-/* jadams: player controls (shuffle|prev|play-pause|next|repeat) */
-/* jadams 2024-07-01: scale (both) columns to the same height */
 div#large-player {
 	display: flex;
 	max-width: fit-content;
