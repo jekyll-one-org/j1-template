@@ -144,17 +144,17 @@ amplitude_defaults: {{amplitude_defaults | debug}}
       <!-- START create player instance on ID: {{player_id}} of type: {{player_type}} -->
       <div id="{{player_id}}" class="mini-player">
 
-        <!-- mini player container -->
+        <!-- START mini player container -->
         <div class="mini-player-container">
 
-          <!-- progress bar -->
+          <!-- START progress bar -->
           <progress
             class="mini-player-progress amplitude-song-played-progress"
             data-amplitude-playlist="{{player_playlist}}">
           </progress>
           <!-- END progress bar -->
 
-          <!-- time container -->
+          <!-- START time container -->
           <div class="time-container">
             <span class="current-time">
               <span
@@ -181,16 +181,11 @@ amplitude_defaults: {{amplitude_defaults | debug}}
           </div>
           <!-- END time container -->
 
-          <!-- control container -->
+          <!-- START control container -->
           <div class="mini-player control-container">
             <div
-              id="mini_player_next"
-              class="amplitude-next"
-              data-amplitude-playlist="{{player_playlist}}">
-            </div>
-            <div
               id="mini_player_previous"
-              class="amplitude-prev"
+              class="amplitude-play-pause"
               data-amplitude-playlist="{{player_playlist}}">
             </div>
             <div
@@ -198,10 +193,15 @@ amplitude_defaults: {{amplitude_defaults | debug}}
               class="amplitude-play-pause"
               data-amplitude-playlist="{{player_playlist}}">
             </div>
+            <div
+              id="mini_player_next"
+              class="amplitude-prev"
+              data-amplitude-playlist="{{player_playlist}}">
+            </div>
           </div>
           <!-- END control container  -->
 
-          <!-- meta (data) container -->
+          <!-- START meta (data) container -->
           <div class="mini-player meta-container">
             <span
               class="song-name"
@@ -220,7 +220,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
             </div>
           </div> <!-- END meta container -->
 
-          <!-- volume container -->
+          <!-- START volume container -->
           <div class="mini-player volume-container">
             <img src="/assets/theme/j1/modules/amplitudejs/icons/player/dark/volume.svg" alt="Volume Icon">
             <!-- jadams, TODO: make range STEPS configurable -->

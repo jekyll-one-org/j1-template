@@ -627,6 +627,25 @@ div.list-next:hover {
   opacity: 0.5;
 }
 
+/* 3. Layout
+# --------------------------------------------------------- */
+
+/* Small only
+# --------------------------------------------------------- */
+@media screen and (max-width: 39.9375em) {
+
+  /* jadams, workaround to limit player width on smart phones */
+  div.compact-player-playlist
+  div.playlist-screen-controls
+  div.playlist-screen-meta-container
+  span.song-name {
+    margin-left: 0;
+  }
+}
+
+/* 4. Pages
+# --------------------------------------------------------- */
+
 /* 5. Themes
 # --------------------------------------------------------- */
 
