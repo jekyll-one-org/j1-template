@@ -176,9 +176,6 @@ amplitude::free_emancipator_large[role="mt-3 mb-5"]
 .Royalty Free Music · Disco 80th
 amplitude::free_disco_large[role="mt-3 mb-5"]
 
-[role="mb-8"]
-lorem:sentences[3]
-
 
 [role="mt-5"]
 == What next
