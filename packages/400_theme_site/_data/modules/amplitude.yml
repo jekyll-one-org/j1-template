@@ -95,20 +95,20 @@ settings:
           duration:                     "4:35"
 
     # --------------------------------------------------------------------------
-    # Free Disco - Royalty Free
+    # Disco 80th - Royalty Free
     # --------------------------------------------------------------------------
     #
     - playlist:
       enabled:                          true
 
       name:                             free_disco
-      title:                            Free Disco
+      title:                            Disco 80th
 
       # ------------------------------------------------------------------------
       # ALBUM settings
       # ------------------------------------------------------------------------
       album:                            &album_free_disco
-        name:                           Free Disco
+        name:                           Disco 80th
         artist:                         Royalty Free
         audio_base:                     //p.productioncrate.com/stock-hd/audio
         cover_image:                    /assets/audio/cover/royalty_free/free_disco_sounds.jpg
@@ -287,7 +287,7 @@ settings:
   players:
 
     # --------------------------------------------------------------------------
-    # MINI player, Free Disco
+    # MINI player, Disco 80th
     # --------------------------------------------------------------------------
     #
     - plaver:
@@ -301,12 +301,12 @@ settings:
 
       playlist:
         name:                           free_disco
-        title:                          Free Disco
+        title:                          Disco 80th
         audio_info:                     false
         controls:                       true
 
     # --------------------------------------------------------------------------
-    # COMPACT player, Free Disco
+    # COMPACT player, Disco 80th
     # --------------------------------------------------------------------------
     #
     - plaver:
@@ -320,12 +320,12 @@ settings:
 
       playlist:
         name:                           free_disco
-        title:                          Free Disco
+        title:                          Disco 80th
         audio_info:                     true
         controls:                       true
 
     # --------------------------------------------------------------------------
-    # LARGE player, Free Disco
+    # LARGE player, Disco 80th
     # --------------------------------------------------------------------------
     #
     - plaver:
@@ -339,7 +339,7 @@ settings:
 
       playlist:
         name:                           free_disco
-        title:                          Free Disco
+        title:                          Disco 80th
         audio_info:                     true
         controls:                       true
 
