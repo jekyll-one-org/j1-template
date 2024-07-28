@@ -95,7 +95,7 @@ settings:
           duration:                     "4:35"
 
     # --------------------------------------------------------------------------
-    # Disco 80th - Royalty Free
+    # Disco 80th - Royalty Free Music
     # --------------------------------------------------------------------------
     #
     - playlist:
@@ -109,7 +109,7 @@ settings:
       # ------------------------------------------------------------------------
       album:                            &album_free_disco
         name:                           Disco 80th
-        artist:                         Royalty Free
+        artist:                         Royalty Free Music
         audio_base:                     //p.productioncrate.com/stock-hd/audio
         cover_image:                    /assets/audio/cover/royalty_free/free_disco_sounds.jpg
 
