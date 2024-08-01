@@ -1,10 +1,8 @@
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/modules/videojs/css/theme/uno.css
- # Provides player styles for J1 Theme Uno
- # -----------------------------------------------------------------------------
- # NOTE
- # Video.js (V8) Theme Uno based on theme fantasy, version 1.0.1
+ # Provides player styles for theme Uno
+ # Theme Uno is based on theme fantasy, version 1.0.1
  # See: https://www.mux.com/blog/the-new-video-js-themes
  # -----------------------------------------------------------------------------
  #
@@ -18,7 +16,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Colors
+/* colors
  ------------------------------------------------------------------------------- */
 .vjs-theme-uno {
   --vjs-theme-uno--blue-300:  #64B5F6;
@@ -30,7 +28,7 @@
   --vjs-theme-uno--secondary: #fff
 }
 
-/* Captions|Subtitles
+/* captions|subtitles
  ------------------------------------------------------------------------------- */
 .video-js .vjs-text-track-display div {
   font-size: 1.75rem;
@@ -44,17 +42,14 @@
 	text-shadow: 1px 1px 2px #000;
 }
 
-/* Images
+/* images
  ------------------------------------------------------------------------------- */
-
-/* Set img elements (poster) to 'fluid' */
 picture > img {
   max-width: 100%;
   height: auto;
 }
 
-
-/* Controlbar|Controls
+/* controlbar|controls
  ------------------------------------------------------------------------------- */
 .vjs-theme-uno .vjs-control-bar {
   height: 50px;
@@ -69,40 +64,40 @@ picture > img {
   transition: visibility 1s, opacity 1s;
 }
 
-/* Adjust control position for playback rate (centered) */
+/* adjust control position for playback rate (centered) */
 .vjs-playback-rate {
   margin-top: 10px !important;
 }
 
-/* Manage time display */
+/* manage time display */
 .vjs-theme-uno .vjs-current-time    { display: none; }
 .vjs-theme-uno .vjs-time-divider    { display: none; }
 .vjs-theme-uno .vjs-duration        { display: block; }
 .vjs-theme-uno .vjs-remaining-time  { display: block; }
 
- /* Big play button */
-.vjs-theme-uno .vjs-big-play-button {
-  background: none;
-  line-height: 110px;
-  font-size: 100px;
-  border: none;
-  color: var(--vjs-theme-uno--gray-200);
-  z-index: 10;
+/* required for the mini-play-button in player controlbar */
+.vjs-icon-play:before {
+  content: "\f101";
 }
 
- /* Circled Big play button */
-.vjs-theme-uno .vjs-big-play-button .vjs-icon-placeholder:before {
-  border: 5px solid #EEEEEE;
-  border-radius: 50%;
-  content: "\f101";
-  display: inline-block;
-  width: 120px;
-  height: 120px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
+.vjs-theme-uno .vjs-big-play-button {
+  top: 30%;
+  left: 40%;
+  width: 240px;
+  height: 240px;
+  font-size: 0px;
+  z-index: 1;
+  background: url(/assets/theme/j1/modules/videojs/assets/icons/big-play-button.svg) no-repeat;
+}
+
+.vjs-theme-uno .vjs-big-play-button:hover {
+  top: 30%;
+  left: 40%;
+  width: 240px;
+  height: 240px;
+  font-size: 0px;
+  z-index: 1;
+  background: url(/assets/theme/j1/modules/videojs/assets/icons/big-play-button-hover.svg) no-repeat;
 }
 
 .vjs-theme-uno.vjs-big-play-button:focus,

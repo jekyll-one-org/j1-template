@@ -3271,7 +3271,11 @@ var j1 = ((options) => {
     // -------------------------------------------------------------------------
     getState: () => {
       return state;
-    } // END getState
+    }, // END getState
+
+    isValidCaption: (caption) => {
+      return (typeof caption !== 'undefined' && caption.length > 0);
+    }
 
   }; // END main (return)
 })(j1, window);

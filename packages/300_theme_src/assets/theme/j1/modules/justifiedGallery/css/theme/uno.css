@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/modules/justified_gallery/css/theme/uno.css
- # Provides JustifiedGallery styles for Theme Uno
+ # Provides JustifiedGallery custom styles for theme Uno
  #
  # Product/Info:
  # https://jekyll.one
@@ -13,7 +13,17 @@
  # -----------------------------------------------------------------------------
 */
 
- /* Gallery title */
+/* caption text
+   ----------------------------------------------------------------------------- */
+.justified-gallery > a > .jg-caption.jg-caption-visible,
+.justified-gallery > div > .jg-caption.jg-caption-visible,
+.justified-gallery > figure > .jg-caption.jg-caption-visible {
+  filter: "alpha(opacity=100)";
+  opacity: 1.0;
+}
+
+/* gallery title
+   ----------------------------------------------------------------------------- */
  .jg-gallery-title {
    /* color: #424242; */
    line-height: 1.25rem;
@@ -22,17 +32,24 @@
    margin-bottom: .5rem;
  }
 
+/* image overlay (play button)
+   ----------------------------------------------------------------------------- */
 .justified-gallery img.img-overlay {
-    height: 64px;
-    width: 64px;
-    bottom: 0;
-    left: 50%;
-    margin-left: -35px;
-    margin-top: -35px;
-    position: absolute;
-    right: 0;
-    top: 50%;
-    -webkit-transition: background-color 0.15s ease 0s;
-    -o-transition: background-color 0.15s ease 0s;
-    transition: background-color 0.15s ease 0s;
+  top: 50%;
+  left: 50%;
+  height: 120px;
+  width: 120px;
+  margin-left: -60px;
+  margin-top: -60px;
+  -webkit-transition: background-color 0.15s ease 0s;
+  -o-transition: background-color 0.15s ease 0s;
+  transition: background-color 0.15s ease 0s;
+}
+
+/* caption text
+   ----------------------------------------------------------------------------- */
+.justified-gallery > a > .jg-caption,
+.justified-gallery > div > .jg-caption,
+.justified-gallery > figure > .jg-caption {
+  padding: 10px 5px 10px 5px;
 }

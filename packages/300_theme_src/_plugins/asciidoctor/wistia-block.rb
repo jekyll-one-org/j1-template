@@ -65,6 +65,7 @@ Asciidoctor::Extensions.register do
             class="video-js vjs-theme-#{theme_name}"
             width="640" height="360"
             #{poster_attr}
+            alt="#{attributes['title']}"
             aria-label="#{attributes['title']}"
             data-setup='{
               "fluid" : true,
@@ -80,7 +81,10 @@ Asciidoctor::Extensions.register do
                 "autoplay": false
               },
               "controlBar": {
-                "pictureInPictureToggle": false
+                "pictureInPictureToggle": false,
+                "volumePanel": {
+                  "inline": false
+                }
               }
             }'
           > </video>

@@ -118,7 +118,7 @@ All modern browsers universally support the video tag `<video>`. This tag
 offers an out-of-the-box framework for decoding and displaying video content
 without loading *external players*.
 
-.MP4 Video, Peck Pocketed
+.MP4 Video · Peck Pocketed
 video::/assets/video//html5/peck_pocketed.mp4[poster="/assets/video/poster/html5/peck_pocketed.jpg", opts="" role="mt-4 mb-5"]
 
 
@@ -141,7 +141,7 @@ better user experience.
 VideoJS provides a flexible and customizable platform for displaying and
 controlling MPEG 4 video content on websites and web applications.
 
-.MP4 Video, Rolling Wild
+.MP4 Video · Rolling Wild
 videojs::/assets/video//html5/rolling_wild.mp4[poster="/assets/video/poster/html5/rolling_wild.jpg", opts="" role="mt-4 mb-5"]
 
 [role="mt-5"]
@@ -151,8 +151,12 @@ YouTube is a popular online video-sharing platform that allows users to
 upload, view, share, and comment on videos. The platform provides services
 for people and organizations to publish various video content.
 
-.The Voice Kids NL 2021 - Emma Kok
-youtube::20gXikNRjbo[poster="/assets/video/poster/youtube/voice_kids/banner/best_of.jpg" role="mt-4 mb-5"]
+// .The Voice Kids NL 2021 - Emma Kok
+// youtube::20gXikNRjbo[poster="/assets/video/poster/youtube/voice_kids/banner/best_of.jpg" role="mt-4 mb-5"]
+
+.Fortnight (feat. Post Malone, Official Music Video) · Taylor Swift
+// youtube::i8_w_m6HLJ0[poster="/assets/video/poster/youtube/taylor_swift/cover-2.jpg" role="mt-4 mb-5"]
+youtube::q3zqJs7JUCQ[poster="//img.youtube.com/vi/q3zqJs7JUCQ/maxresdefault.jpg" role="mt-4 mb-5"]
 
 // .Andre Rieu Maastricht 2023 - Emma Kok
 // youtube::KdIhq1tb8Co[poster="/assets/video/poster/youtube/voice_kids/banner/best_of.jpg" role="mt-4 mb-5"]
@@ -171,7 +175,7 @@ high-quality advertisers through a proprietary advertising system.
 Like YouTube, videos can be watched for free, but ads are shown on every
 video.
 
-.SELF Channel
+.SELF Channel · Beginner Mat Pilates
 dailymotion::x87ycik[role="mt-4 mb-5"]
 
 [role="mt-4"]
@@ -196,7 +200,7 @@ since grown into a popular platform for individuals and businesses to
 showcase their videos. Vimeo is known for its emphasis on high-quality videos
 and creative expression.
 
-.Forever 21 - Kick It Old School
+.Forever 21 · Kick It Old School
 vimeo::179528528[poster="/assets/video/poster/vimeo/kick_it_old_school.jpg" role="mt-4 mb-5"]
 // vimeo::179528528[poster="auto" role="mt-4 mb-5"]
 // vimeo::179528528[role="mt-4 mb-5"]
@@ -253,7 +257,8 @@ link:{url-j1-masonry-previewer}[Masonry Preview, {browser-window--new}] page.
 ====
 
 [role="mt-4"]
-=== Local Media
+[[local-video-2]]
+=== Local video
 
 Videos created by a digicam or a mobile can be played by J1 Template using
 the lightGallery integration. Present videos you have made at it's best.
@@ -276,13 +281,28 @@ gallery::jg_video_html5[role="mt-4 mb-5"]
 The community at link:{url-youtube--home}[YouTube, {browser-window--new}]
 is large, with over 1 billion users that watch hundreds of millions of
 hours of content every day. The number of YouTube channels is enormous.
-For TV Stations, it's a must to publish videos of their shows on YouTube.
+Today, it's a must for TV stations or musicians to publish videos of their
+shows or songs on YouTube.
 
-Find below a classic channel *Carpool Karaoke* presented by the frontman
-_James Corden_ of *The Late Late Show* at CBS, Los Angeles.
+Below a classic channel *Carpool Karaoke* featured by frontman _James Corden_
+of *The Late Late Show* at CBS, Los Angeles.
 
-.Carpool Karaoke
+.James Corden · Carpool Karaoke
 gallery::jg_video_online_youtube_james_and_adele[role="mb-5"]
+
+A really great channel at YouTube is presented by _Taylor Swift_ for her
+new studio album *The Tortured Poets Department: The Anthology*, released on
+April 19, 2024.
+
+.The Tortured Poets Department · Taylor Swift
+gallery::jg_video_online_taylor_swift[role="mt-5 mb-4"]
+
+[role="mb-5"]
+[TIP]
+====
+An *anthology* is a collection of selected texts or, in a broader sense,
+a thematic compilation of literary or musical works.
+====
 
 [role="mt-4"]
 === Vimeo

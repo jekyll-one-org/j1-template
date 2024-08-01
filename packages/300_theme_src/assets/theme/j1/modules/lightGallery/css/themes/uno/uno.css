@@ -16,7 +16,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Global styles
+/* global styles
    ----------------------------------------------------------------------------- */
 .img-responsive {
   width: 100%;
@@ -41,10 +41,10 @@
 }
 
 
-/* Custom timeline chapter markers
+/* custom chapter markers (timeline)
    ----------------------------------------------------------------------------- */
 
-/* marker (bullet) */
+/* marker bullet */
 .vjs-chapter-marker {
 	position: absolute;
 	background: #0D47A1;
@@ -53,51 +53,50 @@
 	margin-left: -3px;
 }
 
-/* title (text) */
+/* marker text */
 .vjs-chapter-marker span {
   position: absolute;
   bottom: 50px;
   opacity: 0;
   margin-left: -20px;
-  z-index: 90;
   background: rgba(0,0,0,.8);
   padding: 8px;
   font-size: 10px;
+  z-index: 90;
 }
 
 .vjs-chapter-marker:hover span {
   opacity: 1;
 }
 
-
-/* Custom icons
+/* custom anchor
    ----------------------------------------------------------------------------- */
-.lg-uno-video-icon span {
-  display: block;
+
+/* jadams, 2024-08-01: try tp remove pointer cursor */
+div.card.bottom > a.lg-item {
+  cursor: default;
+}
+
+/* custom icons
+   ----------------------------------------------------------------------------- */
+
+/* vjs big-play-button */
+span.big-play-button {
   position: absolute;
+  cursor: pointer;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
   z-index: 1;
-  background: url(icons/play-button.png) no-repeat center center;
+  background: url(icons/play-button.svg) no-repeat center center;
 }
 
-.lg-video-icon span {
-  display: block;
-  position: absolute;
-  overflow: hidden;
-  max-height: 50%;
-  top: 15px;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: 1;
-  background: url(icons/play-button.png) no-repeat center center;
+span.big-play-button:hover {
+  background: url(icons/play-button-hover.svg) no-repeat center center;
 }
 
-
-/* Custom thumbnails
+/* custom thumbnails
    ----------------------------------------------------------------------------- */
  .lg-uno-thumbnails .lg-outer {
    width: auto;

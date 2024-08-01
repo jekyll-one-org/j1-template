@@ -1,0 +1,81 @@
+Für YouTube Videos stehen auf den Servern img.youtube.com Poster Images
+in verscheidenen Auflösugen bereit. Es existieren Auflösungen wie
+maxresdefault.jpg oder sddefault.jpg.
+
+Welche Formate und Auflösungen sind generell vefügbar?
+
+Gemini
+--------------------------------------------------------------------------------
+Die genaue Auswahl an Formaten und Auflösungen, die YouTube für
+Posterbilder (auch Thumbnails genannt) anbietet, kann sich im Laufe
+der Zeit ändern. Jedoch sind einige gängige Formate und Auflösungen
+bekannt:
+
+JPEG (Joint Photographic Experts Group): JPEG ist das am häufigsten
+verwendete Format für Posterbilder, da es eine gute Balance zwischen
+Kompressionsrate und Bildqualität bietet.
+
+Auflösungen
+-----------
+
+* maxresdefault.jpg:
+  Dies ist in der Regel die höchste verfügbare Auflösung und entspricht
+  oft der maximalen Auflösung des ursprünglichen Videos.
+* hqdefault.jpg:
+  Eine hohe Auflösung, die für größere Bildschirme geeignet ist.
+
+* mqdefault.jpg:
+  Eine mittlere Auflösung, die für kleinere Bildschirme oder Vorschauen
+  verwendet wird.
+
+* sddefault.jpg:
+  Eine Standardauflösung, die für ältere Geräte oder langsamere
+  Internetverbindungen optimiert ist.
+
+
+Weitere mögliche Formate und Auflösungen
+--------------------------------------------------------------------------------
+
+Andere JPEG-Varianten: Es können weitere JPEG-Varianten mit spezifischen
+Namen oder numerischen Bezeichnungen existieren, die für bestimmte Zwecke
+optimiert sind.
+
+Andere Bildformate: In seltenen Fällen könnten auch andere Bildformate wie
+PNG oder GIF verwendet werden, insbesondere für animierte Thumbnails.
+
+Adaptive Bitraten: YouTube verwendet oft adaptive Bitraten, um die
+Bildqualität automatisch an die Verbindungsgeschwindigkeit des Benutzers
+anzupassen. Dies bedeutet, dass die tatsächlich angezeigte Auflösung je
+nach Gerät und Netzwerkbedingungen variieren kann.
+
+Warum gibt es verschiedene Auflösungen?
+
+* Flexibilität:
+  YouTube bietet verschiedene Auflösungen an, um sicherzustellen, dass
+  die Posterbilder auf einer Vielzahl von Geräten und Bildschirmen gut
+  aussehen.
+
+* Bandbreite:
+  Höhere Auflösungen erfordern mehr Bandbreite, während niedrigere
+  Auflösungen für Benutzer mit langsameren Internetverbindungen optimiert
+  sind.
+
+* Suchmaschinenoptimierung (SEO): Hochwertige Posterbilder können dazu
+  beitragen, die Sichtbarkeit eines Videos in den Suchergebnissen zu
+    verbessern.
+
+Wie finde ich die verfügbaren Auflösungen für ein bestimmtes Video?
+
+Um die genauen Auflösungen für ein bestimmtes Video herauszufinden,
+kannst du versuchen, die URL des Posterbilds zu manipulieren. Ersetze
+beispielsweise in der URL "maxresdefault.jpg" durch "hqdefault.jpg",
+"mqdefault.jpg" oder "sddefault.jpg". Wenn die Datei existiert, wird
+sie angezeigt.
+
+Hinweis
+--------------------------------------------------------------------------------
+
+Die Verfügbarkeit und Benennung der Posterbilder kann sich ändern, da
+YouTube seine Plattform ständig weiterentwickelt. Es ist daher ratsam,
+die aktuelle Dokumentation von YouTube zu konsultieren, um die neuesten
+Informationen zu erhalten.

@@ -37,8 +37,9 @@ Asciidoctor::Extensions.register do
     use_dsl
 
     named :vimeo
-    name_positional_attributes 'poster', 'theme', 'role'
-    default_attrs 'poster' => '/assets/video/poster/vimeo/banner/vimeo-blue.jpg',
+    name_positional_attributes 'caption', 'poster', 'theme', 'role'
+    default_attrs 'caption' => 'true',
+                  'poster' => '/assets/video/poster/vimeo/banner/vimeo-blue.jpg',
                   'theme' => 'uno',
                   'role' => 'mt-3 mb-3'
 
@@ -50,6 +51,7 @@ Asciidoctor::Extensions.register do
       title_html    = (attributes.has_key? 'title') ? %(<div class="video-title">#{attributes['title']}</div>\n) : nil
       poster_image  = (poster = attributes['poster']) ? %(#{poster}) : nil
       theme_name    = (theme = attributes['theme']) ? %(#{theme}) : nil
+      caption_enabled = (caption  = attributes['caption'])  ? true : false
 
       poster_attr   = %(poster="#{poster_image}")
       if attributes['poster'] == 'auto'
@@ -57,13 +59,14 @@ Asciidoctor::Extensions.register do
       end
 
       html = %(
-        <div class="vimeo-player #{attributes['role']}">
+        <div class="vimeo-player bottom #{attributes['role']}">
           #{title_html}
           <video
             id="#{video_id}"
             class="video-js vjs-theme-#{theme_name}"
             width="640" height="360"
             #{poster_attr}
+            alt="#{attributes['title']}"
             aria-label="#{attributes['title']}"
             data-setup='{
               "fluid" : true,
@@ -75,11 +78,49 @@ Asciidoctor::Extensions.register do
                 "src": "//vimeo.com/#{target}"
               }],
               "controlBar": {
-                "pictureInPictureToggle": false
+                "pictureInPictureToggle": false,
+                "volumePanel": {
+                  "inline": false
+                }
               }
             }'
           > </video>
         </div>
+
+        <script>
+          $(function() {
+
+            function addCaptionAfterImage(imageSrc) {
+              const image = document.querySelector(`img[src="${imageSrc}"]`);
+
+              if (image) {
+                // create div|caption container
+                const newDiv = document.createElement('div');
+                newDiv.classList.add('caption');
+                newDiv.textContent = '#{attributes['title']}';
+
+                // insert div|caption container AFTER the image
+                image.parentNode.insertBefore(newDiv, image.nextSibling);
+              } else {
+                console.error(`Kein Bild mit src="${imageSrc}" gefunden.`);
+              }
+            }
+
+            var dependencies_met_page_ready = setInterval (function (options) {
+              var pageState      = $('#content').css("display");
+              var pageVisible    = (pageState == 'block') ? true : false;
+              var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
+
+              if (j1CoreFinished && pageVisible) {
+                if ('#{caption_enabled}' === 'true') {
+                  addCaptionAfterImage('#{poster_image}');
+                }
+
+                clearInterval(dependencies_met_page_ready);
+              }
+            }, 10);
+          });
+        </script>
       )
 
       create_pass_block parent, html, attributes, subs: nil

@@ -37,8 +37,9 @@ Asciidoctor::Extensions.register do
     use_dsl
 
     named :videojs
-    name_positional_attributes 'start', 'poster', 'theme', 'zoom', 'role'
-    default_attrs 'start' => '00:00:00',
+    name_positional_attributes 'caption', 'start', 'poster', 'theme', 'zoom', 'role'
+    default_attrs 'caption' => 'true',
+                  'start' => '00:00:00',
                   'poster' => '/assets/video/gallery/videojs-poster.png',
                   'theme' => 'uno',
                   'zoom' => false,
@@ -46,15 +47,16 @@ Asciidoctor::Extensions.register do
 
     def process parent, target, attributes
 
-      chars         = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
-      video_id      = (0...11).map { chars[rand(chars.length)] }.join
+      chars           = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
+      video_id        = (0...11).map { chars[rand(chars.length)] }.join
 
-      title_html    = (attributes.has_key? 'title') ? %(<div class="video-title">#{attributes['title']}</div>\n) : nil
-      poster_image  = (poster = attributes['poster']) ? %(#{poster}) : nil
-      theme_name    = (theme  = attributes['theme'])  ? %(#{theme}) : nil
+      title_html      = (attributes.has_key? 'title') ? %(<div class="video-title">#{attributes['title']}</div>\n) : %(<div class="video-title">VideoJS Video</div>\n)
+      poster_image    = (poster = attributes['poster']) ? %(#{poster}) : nil
+      theme_name      = (theme  = attributes['theme'])  ? %(#{theme}) : nil
+      caption_enabled = (caption  = attributes['caption'])  ? true : false
 
       html = %(
-        <div class="videojs-player #{attributes['role']}">
+        <div class="videojs-player bottom #{attributes['role']}">
           #{title_html}
           <video
             id="#{video_id}"
@@ -62,6 +64,7 @@ Asciidoctor::Extensions.register do
             controls
             width="640" height="360"
             poster="#{poster_image}"
+            alt="#{attributes['title']}"
             aria-label="#{attributes['title']}"
             data-setup='{
               "fluid" : true,
@@ -81,12 +84,34 @@ Asciidoctor::Extensions.register do
 
         <script>
           $(function() {
+
+            function addCaptionAfterImage(imageSrc) {
+              const image = document.querySelector(`img[src="${imageSrc}"]`);
+
+              if (image) {
+                // create div|caption container
+                const newDiv = document.createElement('div');
+                newDiv.classList.add('caption');
+                newDiv.textContent = '#{attributes['title']}';
+
+                // insert div|caption container AFTER the image
+                image.parentNode.insertBefore(newDiv, image.nextSibling);
+              } else {
+                console.error(`Kein Bild mit src="${imageSrc}" gefunden.`);
+              }
+            }
+
             var dependencies_met_page_ready = setInterval (function (options) {
               var pageState      = $('#content').css("display");
               var pageVisible    = (pageState == 'block') ? true : false;
               var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
               if (j1CoreFinished && pageVisible) {
+
+                if ('#{caption_enabled}' === 'true') {
+                  addCaptionAfterImage('#{poster_image}');
+                }
+
                 var appliedOnce = false;
                 videojs("#{video_id}").ready(function() {
                   var videojsPlayer = this;

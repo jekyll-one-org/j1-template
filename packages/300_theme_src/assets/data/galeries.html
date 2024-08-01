@@ -96,49 +96,51 @@ exclude_from_search:                    true
         {% endfor %}
       {% endif %}
 
-      <!-- Image Gallery -->
+      <!-- START Image Galleries -->
       <div id="{{gallery.id}}">
       {% for image in gallery.images %}
-        {% assign caption     = image.caption.text|strip|strip_newlines %}
-        {% assign description = image.description|strip|strip_newlines %}
+        {% assign caption     = image.caption_text %}
+        {% assign description = image.description %}
 
         {% if gallery.lightbox.enabled %}
         {% if gallery.lightbox.type == 'lb' %}
         <a
           href="{{gallery.image_base_path}}/{{image.file}}"
           data-lightbox="{{gallery.id}}-image-group"
-          data-caption="{{caption}}"
-          data-title="{{caption}}">
+          data-caption="{{caption|strip|strip_newlines}}"
+          data-title="{{caption|strip|strip_newlines}}">
              <img
               id="{{gallery.id}}_{{forloop.index}}"
               class="{{gallery.image_styles}}"
               src="{{gallery.image_base_path}}/{{image.file}}"
-              aria-label="{{caption}}"
+              alt="{{caption|strip|strip_newlines}}"
+              aria-label="{{caption|strip|strip_newlines}}"
               style="{{image_filters}};">
         </a>
         {% elsif gallery.lightbox.type == 'lg' %}
         <a
           href="{{gallery.image_base_path}}/{{image.file}}"
           class="lg-item"
-          data-sub-html="{{description}}">
+          data-sub-html="{{description|strip|strip_newlines}}">
           <img
             id="{{gallery.id}}_{{forloop.index}}"
             class="{{gallery.image_styles}}"
             src="{{gallery.image_base_path}}/{{image.file}}"
-            aria-label="{{caption}}"
+            alt="{{caption|strip|strip_newlines}}"
+            aria-label="{{caption|strip|strip_newlines}}"
             style="{{image_filters}};">
         </a>
         {% endif %}
         {% endif %}
       {% endfor %}
       </div>
-      <!-- /Image Gallery -->
+      <!-- END Image Galleries -->
     {% endif %}
 
     {% comment %} VIDEO Galleries
     -------------------------------------------------------------------------- {% endcomment %}
     {% if gallery.type == 'video' %}
-    {% assign play-button = '/assets/theme/j1/modules/lightGallery/css/themes/uno/icons/play-button.png' %}
+    {% assign play-button = '/assets/theme/j1/modules/lightGallery/css/themes/uno/icons/play-button.svg' %}
 
     {% comment %} Collect CSS image filters
     -------------------------------------------------------------------------- {% endcomment %}
@@ -154,15 +156,15 @@ exclude_from_search:                    true
       {% endfor %}
     {% endif %}
 
-    <!-- Video Gallery -->
+    <!-- START Video Galleries -->
     <div id="{{gallery.id}}" class="gallery justified-gallery">
       {% for video in gallery.videos %}
 
       {% if video.type == 'youtube' or video.type == 'vimeo' or video.type == 'tiktoc' or video.type == 'wistia' or video.type == 'dailymotion' %}
-      {% assign description = video.description|strip|strip_newlines %}
-      {% assign alt         = description|strip_html %}
+      {% assign description = video.description %}
+      {% assign alt         = video.caption_text %}
 
-        <!-- {{video.type}} video -->
+        <!-- START {{video.type}} video -->
         <a
           href="#"
           class="lg-item"
@@ -170,35 +172,35 @@ exclude_from_search:                    true
           data-pinterest-text="{{video.pinterest_prefix}} {{video.name}} at {{video.source}}"
           data-tweet-text="{{video.tweet_prefix}} {{video.name}} at {{video.source}}"
           data-src="{{video.source}}"
-          data-poster="{{gallery.image_base_path}}/{{video.poster.source}}"
-          data-sub-html="{{description}}">
+          data-poster="{{gallery.image_base_path}}/{{video.poster_image}}"
+          data-sub-html="{{description|strip|strip_newlines}}">
+
           <img
             class="{{gallery.image_styles}}"
-            src="{{gallery.image_base_path}}/{{video.poster.source}}"
-            aria-label="{{video.caption.text}}">
-        	<span>
-        		<img
-              class="justified-gallery img-overlay speak2me-ignore"
-              src="{{play-button}}"
-        			aria-label="Play Button">
-        	</span>
+            src="{{gallery.image_base_path}}/{{video.poster_image}}"
+            alt="{{alt|strip|strip_newlines}}"
+            aria-label="{{alt|strip|strip_newlines}}">
+
+        	<span class="big-play-button"></span>
+
         </a>
+        <!-- END {{video.type}} video -->
 
       {% elsif video.type == 'html5' %}
-      {% assign description = video.description|strip|strip_newlines %}
-      {% assign alt         = description|strip_html %}
+      {% assign description = video.description %}
+      {% assign alt         = video.caption_text %}
       {% assign video_split = video.source | split: '.' %}
       {% assign extention   = video_split[1] %}
 
-        <!-- {{video.type}} video -->
+        <!-- START {{video.type}} video -->
         <a
           href="#"
           class="lg-item speak2me-ignore"
           data-lg-size="{{video.size}}"
           data-pinterest-text="{{video.pinterest_prefix}} {{video.name}} at {{video.source}}"
           data-tweet-text="{{video.tweet_prefix}} {{video.name}} at {{video.source}}"
-          data-poster="{{gallery.image_base_path}}/{{video.poster.source}}"
-          data-sub-html="{{description}}"
+          data-poster="{{gallery.image_base_path}}/{{video.poster_image}}"
+          data-sub-html="{{description|strip|strip_newlines}}"
           data-video='{
             "source": [{
                "src":   "{{gallery.video_base_path}}/{{video.source}}",
@@ -215,27 +217,26 @@ exclude_from_search:                    true
                {% endfor %}
             ]
           }'>
+
         	<img
             class="speak2me-ignore"
-            src="{{gallery.image_base_path}}/{{video.poster.source}}"
-            aria-label="{{video.caption.text}}">
-        	<span>
-        		<img
-              class="justified-gallery img-overlay speak2me-ignore"
-              src="{{play-button}}"
-        			aria-label="Play Button">
-        	</span>
-        </a>
+            src="{{gallery.image_base_path}}/{{video.poster_image}}"
+            alt="{{alt|strip|strip_newlines}}"
+            aria-label="{{alt|strip|strip_newlines}}">
 
-      {% endif %}
-      {% endfor %}
+        	<span class="big-play-button"></span>
+
+        </a>
+        <!-- START {{video.type}} video -->
+
+      {% endif %} {% endfor %}
     </div>
+    <!-- END Video Galleries -->
 
     {% endif %}
-    <!-- /Video Gallery -->
 
   {% endif %} {% endfor %}
-  <!--!-- [INFO   ] [~/assets/data/galleries.html                   ]  [end collecting all grid items] -->
+  <!-- [INFO   ] [~/assets/data/galleries.html                   ]  [end collecting all grid items] -->
   </body>
 </html>
 {%- endcapture -%}

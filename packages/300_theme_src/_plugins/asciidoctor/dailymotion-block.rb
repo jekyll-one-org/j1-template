@@ -50,7 +50,7 @@ Asciidoctor::Extensions.register do
       theme_name    = (theme = attributes['theme'])  ? %(#{theme}) : nil
 
       html = %(
-        <div class="dailymotion-player #{attributes['role']}">
+        <div class="dailymotion-player bottom #{attributes['role']}">
           #{title_html}
           <video
             id="#{video_id}"
@@ -68,12 +68,47 @@ Asciidoctor::Extensions.register do
                 "src": "//dailymotion.com/video/#{target}"
               }],
               "controlBar": {
-                "pictureInPictureToggle": false
+                "pictureInPictureToggle": false,
+                "volumePanel": {
+                  "inline": false
+                }
               }
             }'
           > </video>
         </div>
+
+        <script>
+          $(function() {
+
+            function addCaptionAfterImage(imageSrc) {
+              const image = document.querySelector(`img[src="${imageSrc}"]`);
+
+              if (image) {
+                // create div|caption container
+                const newDiv = document.createElement('div');
+                newDiv.classList.add('caption');
+                newDiv.textContent = '#{attributes['title']}';
+
+                // insert div|caption container AFTER the image
+                image.parentNode.insertBefore(newDiv, image.nextSibling);
+              } else {
+                console.error(`Kein Bild mit src="${imageSrc}" gefunden.`);
+              }
+            }
+
+            var dependencies_met_page_ready = setInterval (function (options) {
+              var pageState      = $('#content').css("display");
+              var pageVisible    = (pageState == 'block') ? true : false;
+              var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
+
+              if (j1CoreFinished && pageVisible) {
+                clearInterval(dependencies_met_page_ready);
+              }
+            }, 10);
+          });
+        </script>
       )
+
       create_pass_block parent, html, attributes, subs: nil
     end
   end

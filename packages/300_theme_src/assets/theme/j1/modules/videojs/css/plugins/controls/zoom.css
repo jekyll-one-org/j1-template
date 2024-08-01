@@ -23,8 +23,8 @@
 	font-style: normal;
 	font-weight: 400;
 	font-display: block;
-	src: url("../../../assets/material-icons.woff2") format("woff2"),
-	url("../../../assets/material-icons.woff") format("woff");
+	src: url("../../../assets/icons/material-icons.woff2") format("woff2"),
+	url("../../../assets/icons/material-icons.woff") format("woff");
 }
 
 .video-js .vjs-zoom-icons {

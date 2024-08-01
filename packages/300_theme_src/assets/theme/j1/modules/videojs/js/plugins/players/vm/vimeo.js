@@ -262,7 +262,8 @@
 
         var techOverlay = document.createElement('div');
         techOverlay.setAttribute('class', 'vjs-tech-overlay');
-        techOverlay.setAttribute('style', 'cursor: pointer; position:absolute; z-index: 1; top:0; left:0; width:100%; height:100%');
+//      techOverlay.setAttribute('style', 'cursor: pointer; position:absolute; z-index: 1; top:0; left:0; width:100%; height:100%');
+        techOverlay.setAttribute('style', 'position:absolute; z-index: 1; top:0; left:0; width:100%; height:100%');
         techWrapper.appendChild(techOverlay);
 
         if (vjsControlbar) {

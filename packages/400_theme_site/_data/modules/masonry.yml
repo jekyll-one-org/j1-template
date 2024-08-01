@@ -668,8 +668,8 @@ settings:
         - video:
           name:                         Planet Earth II
           type:                         youtube
-          size:                         "1280-720"
-          source:                       "//youtu.be/IUN664s7N-c"
+          size:                         1280-720
+          source:                       //youtu.be/IUN664s7N-c
           pinterest_prefix:             Pin video
           tweet_prefix:                 Try video
           description: >
@@ -682,17 +682,17 @@ settings:
                                         <br>
           poster:
             style:                      img-responsive
-            source:                     "//img.youtube.com/vi/IUN664s7N-c/maxresdefault.jpg"
+            source:                     //img.youtube.com/vi/IUN664s7N-c/maxresdefault.jpg
           caption:
             position:                   bottom
-            text:                       "YouTube Video &middot; Beauty of Nature"
+            text:                       YouTube Video &middot; Beauty of Nature
 
 #       video 2
         - video:
           name:                         Nature Video by Charlie Kaye
           type:                         vimeo
-          size:                         "1280-720"
-          source:                       "//vimeo.com/112836958"
+          size:                         1280-720
+          source:                       //vimeo.com/112836958
           pinterest_prefix:             Pin video
           tweet_prefix:                 Try video
           description: >
@@ -701,17 +701,17 @@ settings:
                                         <br>
           poster:
             style:                      img-responsive
-            source:                     "//lightgalleryjs.com/images/demo/vimeo-video-poster.jpg"
+            source:                     //lightgalleryjs.com/images/demo/vimeo-video-poster.jpg
           caption:
             position:                   bottom
-            text:                       "Vimeo Video &middot; Amazing Nature"
+            text:                       Vimeo Video &middot; Amazing Nature
 
 #       video 3
         - video:
           name:                         Thank You
           type:                         wistia
-          size:                         "1280-720"
-          source:                       "//fast.wistia.com/embed/iframe/mwhrulrucj"
+          size:                         1280-720
+          source:                       //fast.wistia.com/embed/iframe/mwhrulrucj
           pinterest_prefix:             Pin video
           tweet_prefix:                 Try video
           description: >
@@ -720,16 +720,16 @@ settings:
                                         <br>
           poster:
             style:                      img-responsive
-            source:                     "//www.lightgalleryjs.com/images/demo/wistia-video-poster.jpeg"
+            source:                     //www.lightgalleryjs.com/images/demo/wistia-video-poster.jpeg
           caption:
             position:                   bottom
-            text:                       "Wistia Video &middot; Thank You"
+            text:                       Wistia Video &middot; Thank You
 
 #       video 4
         - video:
           name:                         Peck Pocketed
           type:                         html5
-          size:                         "1280-720"
+          size:                         1280-720
           source:                       peck_pocketed.mp4
           pinterest_prefix:             Pin video
           tweet_prefix:                 Try video
@@ -742,7 +742,7 @@ settings:
             source:                     peck_pocketed.jpg
           caption:
             position:                   bottom
-            text:                       "MP4 Video &middot; Peck Pocketed"
+            text:                       MP4 Video &middot; Peck Pocketed
 
 # ------------------------------------------------------------------------------
 # END config

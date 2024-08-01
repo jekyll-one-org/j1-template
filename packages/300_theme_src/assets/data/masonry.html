@@ -74,11 +74,11 @@ exclude_from_search:                    true
   </head>
   <body>
   {% comment %} Collect grids
-  ---------------------------------------------------------------------------- {% endcomment %}
+  ------------------------------------------------------------------------------ {% endcomment %}
   {% for grid in grids %} {% if grid.enabled %}
 
     {% comment %} POSTS grids
-    -------------------------------------------------------------------------- {% endcomment %}
+    ---------------------------------------------------------------------------- {% endcomment %}
     {% if grid.type == 'post' %}
 
       <!-- Posts|Group -->
@@ -99,7 +99,7 @@ exclude_from_search:                    true
         {% endif %}
 
         {% comment %} Collect CSS image filters
-        ---------------------------------------------------------------------- {% endcomment %}
+        ------------------------------------------------------------------------ {% endcomment %}
         {% assign css_filters   = masonry_options.filters | merge: grid.filters %}
         {% assign image_filters = 'filter:' %}
 
@@ -131,7 +131,7 @@ exclude_from_search:                    true
               {% endif %}
 
               {% comment %} categories: {{categories | debug}}
-              ---------------------------------------------------------------- {% endcomment %}
+              ------------------------------------------------------------------ {% endcomment %}
               {% for category in categories %}
               {% if category contains post.category %}
               <a
@@ -178,15 +178,15 @@ exclude_from_search:                    true
 
 
     {% comment %} COLLECTION grids
-    -------------------------------------------------------------------------- {% endcomment %}
+    ---------------------------------------------------------------------------- {% endcomment %}
     {% if grid.type == 'collection' %}
 
     {% comment %} Set collection data
-    -------------------------------------------------------------------------- {% endcomment %}
+    ---------------------------------------------------------------------------- {% endcomment %}
     {% assign collection_name   = grid.collection %}
 
     {% comment %} Collect collection documents
-    -------------------------------------------------------------------------- {% endcomment %}
+    ---------------------------------------------------------------------------- {% endcomment %}
     {% for collection in site.collections %}
       {% if collection.label contains collection_name %}
         {% assign articles = collection.docs %}
@@ -204,7 +204,7 @@ exclude_from_search:                    true
       {% endif %}
 
       {% comment %} Collect CSS image filters
-      ------------------------------------------------------------------------ {% endcomment %}
+      -------------------------------------------------------------------------- {% endcomment %}
       {% assign css_filters   = masonry_options.filters | merge: grid.filters %}
       {% assign image_filters = 'filter:' %}
 
@@ -318,11 +318,11 @@ exclude_from_search:                    true
     {% endif %}
 
     {% comment %} Image Grids
-    -------------------------------------------------------------------------- {% endcomment %}
+    ---------------------------------------------------------------------------- {% endcomment %}
     {% if grid.type == 'image' %}
 
       {% comment %} Collect CSS image filters
-      ------------------------------------------------------------------------ {% endcomment %}
+      -------------------------------------------------------------------------- {% endcomment %}
       {% assign css_filters   = masonry_options.filters | merge: grid.filters %}
       {% assign image_filters = 'filter:' %}
 
@@ -396,12 +396,12 @@ exclude_from_search:                    true
       <!-- /Image Grid -->
     {% endif %}
 
-    {% comment %} VIDEO grids
-    -------------------------------------------------------------------------- {% endcomment %}
+    {% comment %} VIDEO Grid
+    ---------------------------------------------------------------------------- {% endcomment %}
     {% if grid.type == 'video' %}
 
     {% comment %} Collect CSS image filters
-    -------------------------------------------------------------------------- {% endcomment %}
+    ---------------------------------------------------------------------------- {% endcomment %}
     {% assign css_filters   = masonry_options.filters | merge: grid.filters %}
     {% assign image_filters = 'filter:' %}
 
@@ -414,13 +414,13 @@ exclude_from_search:                    true
         {% endfor %}
       {% endif %}
 
-      <!-- Card Video Grid -->
+      <!-- START Video Grid -->
       <div id="{{grid.id}}" class="row {{grid.id | replace: '_','-' }} g-0">
         {% for video in grid.videos %}
         {% if video.type == 'youtube' or video.type == 'vimeo' or video.type == 'wistia' %}
         <div class="col-xl-{{grid.responsive.xl}} col-lg-{{grid.responsive.lg}} col-md-{{grid.responsive.md}} col-sm-{{grid.responsive.sm}} col-{{grid.responsive.xs}}" style="padding-bottom: {{grid.gutters}}px; padding-left: {{grid.gutters}}px;">
           <div class="card {{video.caption.position}}">
-            <!-- {{video.type}} video -->
+            <!-- START {{video.type}} video -->
             <a
               href="#"
               class="lg-item"
@@ -430,15 +430,17 @@ exclude_from_search:                    true
               data-src="{{video.source}}"
               data-poster="{{video.poster.source}}"
               data-sub-html="{{video.description|strip|strip_newlines}}">
-              <div class="lg-uno-video-icon">
-                <img
-                  id="{{video.name | replace: ' ','_' | replace: '-','_' | downcase}}"
-                  class="{{video.poster.style}}"
-                  src="{{video.poster.source}}"
-                  aria-label="{{video.name}}">
-                 <span></span>
+                <div class="lg-uno-video-icon">
+                  <img
+                    id="{{video.name | replace: ' ','_' | replace: '-','_' | downcase}}"
+                    class="{{video.poster.style}}"
+                    src="{{video.poster.source}}"
+                    aria-label="{{video.name}}">
+
+                   <span class="big-play-button"></span>
               </div>
             </a>
+            <!-- END {{video.type}} video -->
             <div class="caption">{{video.caption.text}}</div>
           </div>
         </div>
@@ -447,7 +449,7 @@ exclude_from_search:                    true
         {% assign video_split = video.source | split: '.' %}
         <div class="col-xl-{{grid.responsive.xl}} col-lg-{{grid.responsive.lg}} col-md-{{grid.responsive.md}} col-sm-{{grid.responsive.sm}} col-{{grid.responsive.xs}}" style="padding-bottom: {{grid.gutters}}px; padding-left: {{grid.gutters}}px;">
           <div class="card {{video.caption.position}}">
-            <!-- {{video.type}} video -->
+            <!-- START {{video.type}} video -->
             <a
               href="#"
               class="lg-item"
@@ -467,22 +469,24 @@ exclude_from_search:                    true
                    {% endfor %}
                 }
               }'>
-              <div class="lg-uno-video-icon">
-                <img
-                  id="{{video.name | replace: ' ','_' | replace: '-','_' | downcase}}"
-                  class="{{video.poster.style}}"
-                  src="{{grid.html5.poster_base_path}}/{{video.poster.source}}"
-                  aria-label="{{video.name}}">
-                 <span></span>
-              </div>
+                <div class="lg-uno-video-icon">
+                  <img
+                    id="{{video.name | replace: ' ','_' | replace: '-','_' | downcase}}"
+                    class="{{video.poster.style}}"
+                    src="{{grid.html5.poster_base_path}}/{{video.poster.source}}"
+                    aria-label="{{video.name}}">
+
+                   <span class="big-play-button"></span>
+                 </div>
             </a>
+            <!-- END {{video.type}} video -->
             <div class="caption">{{video.caption.text}}</div>
           </div>
         </div>
         {% endif %}
         {% endfor %}
       </div>
-     <!-- /Video Grid -->
+     <!-- END Video Grid -->
     {% endif %}
 
     {% endif %} {% endfor %}
