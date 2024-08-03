@@ -45,15 +45,15 @@ Asciidoctor::Extensions.register do
 
     def process parent, target, attributes
 
-      chars         = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
-      video_id      = (0...11).map {chars[rand(chars.length)]}.join
+      chars           = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
+      video_id        = (0...11).map {chars[rand(chars.length)]}.join
 
-      title_html    = (attributes.has_key? 'title') ? %(<div class="video-title">#{attributes['title']}</div>\n) : nil
-      poster_image  = (poster = attributes['poster']) ? %(#{poster}) : nil
-      theme_name    = (theme = attributes['theme']) ? %(#{theme}) : nil
+      title_html      = (attributes.has_key? 'title') ? %(<div class="video-title">#{attributes['title']}</div>\n) : nil
+      poster_image    = (poster = attributes['poster']) ? %(#{poster}) : nil
+      theme_name      = (theme = attributes['theme']) ? %(#{theme}) : nil
       caption_enabled = (caption  = attributes['caption'])  ? true : false
 
-      poster_attr   = %(poster="#{poster_image}")
+      poster_attr     = %(poster="#{poster_image}")
       if attributes['poster'] == 'auto'
         poster_attr = ''
       end
@@ -115,6 +115,19 @@ Asciidoctor::Extensions.register do
                 if ('#{caption_enabled}' === 'true') {
                   addCaptionAfterImage('#{poster_image}');
                 }
+
+                // scroll to player top position
+                // -------------------------------------------------------------
+                var vjs_player = document.getElementById("#{video_id}");
+
+                vjs_player.addEventListener('click', function(event) {
+                  var scrollOffset = (window.innerWidth >= 720) ? -130 : -110;
+
+                  // scroll player to top position
+                  const targetDiv         = document.getElementById("#{video_id}");
+                  const targetDivPosition = targetDiv.offsetTop;
+                  window.scrollTo(0, targetDivPosition + scrollOffset);
+                }); // END EventListener 'click'
 
                 clearInterval(dependencies_met_page_ready);
               }

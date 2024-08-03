@@ -701,29 +701,30 @@ settings:
                                         <br>
           poster:
             style:                      img-responsive
-            source:                     //lightgalleryjs.com/images/demo/vimeo-video-poster.jpg
+            source:                     /assets/video/poster/vimeo/amazing_nature.jpg
           caption:
             position:                   bottom
             text:                       Vimeo Video &middot; Amazing Nature
 
 #       video 3
         - video:
-          name:                         Thank You
-          type:                         wistia
+          name:                         Beginner Mat Pilates
+          type:                         dailymotion
           size:                         1280-720
-          source:                       //fast.wistia.com/embed/iframe/mwhrulrucj
+          source:                       //dai.ly/x87ycik
           pinterest_prefix:             Pin video
           tweet_prefix:                 Try video
           description: >
-                                        <h5>Thank You!</h5>
-                                        <h6>Sample Video on Wistia</h6>
+                                        <h5>SELF Channel</h5>
+                                        <h6>Beginner Mat Pilates</h6>
                                         <br>
           poster:
             style:                      img-responsive
-            source:                     //www.lightgalleryjs.com/images/demo/wistia-video-poster.jpeg
+            source:                     /assets/video/poster/dailymotion/pilates.jpg
+
           caption:
             position:                   bottom
-            text:                       Wistia Video &middot; Thank You
+            text:                       "Dailymotion Video &middot; SELF Channel: Beginner Mat Pilates"
 
 #       video 4
         - video:
@@ -742,7 +743,7 @@ settings:
             source:                     peck_pocketed.jpg
           caption:
             position:                   bottom
-            text:                       MP4 Video &middot; Peck Pocketed
+            text:                       Local MP4 Video &middot; Peck Pocketed
 
 # ------------------------------------------------------------------------------
 # END config

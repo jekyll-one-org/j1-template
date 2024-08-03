@@ -417,7 +417,7 @@ exclude_from_search:                    true
       <!-- START Video Grid -->
       <div id="{{grid.id}}" class="row {{grid.id | replace: '_','-' }} g-0">
         {% for video in grid.videos %}
-        {% if video.type == 'youtube' or video.type == 'vimeo' or video.type == 'wistia' %}
+        {% if video.type == 'youtube' or video.type == 'dailymotion' or video.type == 'vimeo' or video.type == 'wistia' %}
         <div class="col-xl-{{grid.responsive.xl}} col-lg-{{grid.responsive.lg}} col-md-{{grid.responsive.md}} col-sm-{{grid.responsive.sm}} col-{{grid.responsive.xs}}" style="padding-bottom: {{grid.gutters}}px; padding-left: {{grid.gutters}}px;">
           <div class="card {{video.caption.position}}">
             <!-- START {{video.type}} video -->

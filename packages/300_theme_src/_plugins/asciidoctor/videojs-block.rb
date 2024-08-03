@@ -133,6 +133,7 @@ Asciidoctor::Extensions.register do
                   });
 
                   // set start position of current video
+                  // -----------------------------------------------------------
                   videojsPlayer.on("play", function() {
                     var startFromSecond = new Date('1970-01-01T' + "#{attributes['start']}" + 'Z').getTime() / 1000;
                     if (!appliedOnce) {
@@ -141,6 +142,19 @@ Asciidoctor::Extensions.register do
                     }
                   });
                 });
+
+                // scroll to player top position
+                // -------------------------------------------------------------
+                var vjs_player = document.getElementById("#{video_id}");
+
+                vjs_player.addEventListener('click', function(event) {
+                  var scrollOffset = (window.innerWidth >= 720) ? -130 : -110;
+
+                  // scroll player to top position
+                  const targetDiv         = document.getElementById("#{video_id}");
+                  const targetDivPosition = targetDiv.offsetTop;
+                  window.scrollTo(0, targetDivPosition + scrollOffset);
+                }); // END EventListener 'click'
 
                 clearInterval(dependencies_met_page_ready);
               }

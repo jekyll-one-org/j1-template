@@ -116,12 +116,25 @@ Asciidoctor::Extensions.register do
 
               if (j1CoreFinished && pageVisible) {
                 addCaptionAfterImage('#{poster_image}');
+
+                // scroll to player top position
+                // -------------------------------------------------------------
+                var vjs_player = document.getElementById("#{video_id}");
+
+                vjs_player.addEventListener('click', function(event) {
+                  var scrollOffset = (window.innerWidth >= 720) ? -130 : -110;
+
+                  // scroll player to top position
+                  const targetDiv         = document.getElementById("#{video_id}");
+                  const targetDivPosition = targetDiv.offsetTop;
+                  window.scrollTo(0, targetDivPosition + scrollOffset);
+                }); // END EventListener 'click'
+                             
                 clearInterval(dependencies_met_page_ready);
               }
             }, 10);
           });
         </script>
-
       )
 
       create_pass_block parent, html, attributes, subs: nil

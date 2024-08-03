@@ -18,19 +18,18 @@ Kompressionsrate und Bildqualität bietet.
 Auflösungen
 -----------
 
-* maxresdefault.jpg:
-  Dies ist in der Regel die höchste verfügbare Auflösung und entspricht
+* maxresdefault.jpg (1280 x 720):
+  Dies ist die höchste verfügbare Auflösung und entspricht
   oft der maximalen Auflösung des ursprünglichen Videos.
-* hqdefault.jpg:
-  Eine hohe Auflösung, die für größere Bildschirme geeignet ist.
 
-* mqdefault.jpg:
-  Eine mittlere Auflösung, die für kleinere Bildschirme oder Vorschauen
-  verwendet wird.
+* sddefault.jpg (640 x 480):
+  Standardauflösung. Die Auflösung beträgt: 640x480 Pixel.
 
-* sddefault.jpg:
-  Eine Standardauflösung, die für ältere Geräte oder langsamere
-  Internetverbindungen optimiert ist.
+* hqdefault.jpg (480 x 360):
+  Hohe Qualität. Die Auflösung beträgt: 480x360 Pixel.
+
+* mqdefault.jpg (320 x 180):
+  Mittlere Qualität. Die Auflösung beträgt: 320x180 Pixel.
 
 
 Weitere mögliche Formate und Auflösungen

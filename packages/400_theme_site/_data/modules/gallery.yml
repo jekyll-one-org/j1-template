@@ -450,13 +450,13 @@ settings:
           type:                         youtube
           size:                         1280-720
           source:                       //youtube.com/watch?v=q3zqJs7JUCQ
-          poster_image:                 q3zqJs7JUCQ/mqdefault.jpg
+          poster_image:                 q3zqJs7JUCQ/maxresdefault.jpg
           pinterest_prefix:             Pin video
           tweet_prefix:                 Try video
-          caption_text:                 Fortnight (feat. Post Malone &middot; Official Music Video)
+          caption_text:                 Fortnight (feat. Post Malone) &middot; Official Music Video
           description: >
                                         <h5>Tylor Swift</h5>
-                                        <h6>Fortnight (feat. Post Malone &middot; Official Music Video)</h6>
+                                        <h6>Fortnight (feat. Post Malone) &middot; Official Music Video</h6>
                                         <br>
 
         - video:                        # video 2
@@ -466,13 +466,13 @@ settings:
           type:                         youtube
           size:                         1280-720
           source:                       //youtube.com/watch?v=0GQ_QeZxdzo
-          poster_image:                 0GQ_QeZxdzo/mqdefault.jpg
+          poster_image:                 0GQ_QeZxdzo/maxresdefault.jpg
           pinterest_prefix:             Pin video
           tweet_prefix:                 Try video
-          caption_text:                 Fortnight (feat. Post Malone &middot; Behind the Scenes)
+          caption_text:                 Fortnight (feat. Post Malone) &middot; Behind the Scenes
           description: >
                                         <h5>Tylor Swift</h5>
-                                        <h6>Fortnight (feat. Post Malone &middot; Behind the Scenes)</h6>
+                                        <h6>Fortnight (feat. Post Malone) &middot; Behind the Scenes</h6>
                                         <br>
 
 #         - video:                        # video 2

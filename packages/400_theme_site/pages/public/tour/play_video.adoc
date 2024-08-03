@@ -144,28 +144,15 @@ controlling MPEG 4 video content on websites and web applications.
 .MP4 Video · Rolling Wild
 videojs::/assets/video//html5/rolling_wild.mp4[poster="/assets/video/poster/html5/rolling_wild.jpg", opts="" role="mt-4 mb-5"]
 
-[role="mt-5"]
+[role="mt-4"]
 === YouTube
 
 YouTube is a popular online video-sharing platform that allows users to
 upload, view, share, and comment on videos. The platform provides services
 for people and organizations to publish various video content.
 
-// .The Voice Kids NL 2021 - Emma Kok
-// youtube::20gXikNRjbo[poster="/assets/video/poster/youtube/voice_kids/banner/best_of.jpg" role="mt-4 mb-5"]
-
 .Fortnight (feat. Post Malone, Official Music Video) · Taylor Swift
-// youtube::i8_w_m6HLJ0[poster="/assets/video/poster/youtube/taylor_swift/cover-2.jpg" role="mt-4 mb-5"]
 youtube::q3zqJs7JUCQ[poster="//img.youtube.com/vi/q3zqJs7JUCQ/maxresdefault.jpg" role="mt-4 mb-5"]
-
-// .Andre Rieu Maastricht 2023 - Emma Kok
-// youtube::KdIhq1tb8Co[poster="/assets/video/poster/youtube/voice_kids/banner/best_of.jpg" role="mt-4 mb-5"]
-//
-// .BGT 2024 - Sydnie Christmas wins GOLDEN BUZZER
-// youtube::pjyy4tYZFDc[poster="/assets/video/poster/youtube/voice_kids/banner/best_of.jpg" role="mt-4 mb-5"]
-//
-// .BGT 2024 - Sydnie Christmas All Performances
-// youtube::9qRNdZ6G6B4[poster="/assets/video/poster/youtube/voice_kids/banner/best_of.jpg" role="mt-4 mb-5"]
 
 [role="mt-4"]
 === Dailymotion
@@ -176,20 +163,7 @@ Like YouTube, videos can be watched for free, but ads are shown on every
 video.
 
 .SELF Channel · Beginner Mat Pilates
-dailymotion::x87ycik[role="mt-4 mb-5"]
-
-[role="mt-4"]
-=== Wistia
-
-Wistia is a marketing software and video hosting platform for business-to-business
-marketers. Free or paid plans are available. While Wistia may not be the
-*Big Man on Campus*, like Vimeo, still brings valuable functionality and
-should be considered a viable video platform.
-
-.Platform Intro
-// wistia::29b0fbf547[poster="/assets/video/poster/wistia/wistia-black.jpg" role="mt-4 mb-4"]
-wistia::29b0fbf547[poster="auto" role="mt-4 mb-4"]
-// wistia::29b0fbf547[role="mt-4 mb-4"]
+dailymotion::x87ycik[poster="/assets/video/poster/dailymotion/pilates.jpg" role="mt-4 mb-5"]
 
 [role="mt-4"]
 === Vimeo
@@ -205,7 +179,6 @@ vimeo::179528528[poster="/assets/video/poster/vimeo/kick_it_old_school.jpg" role
 // vimeo::179528528[poster="auto" role="mt-4 mb-5"]
 // vimeo::179528528[role="mt-4 mb-5"]
 
-[role="mb-7"]
 .Video controls
 [CAUTION]
 ====
@@ -271,7 +244,7 @@ Using a modern MP4 Encoder for video compression, a video will play around
 HD 720p (1280x720 pixel).
 ====
 
-.MP4 Video
+.Local MP4 Video
 gallery::jg_video_html5[role="mt-4 mb-5"]
 
 [role="mt-4"]
@@ -284,11 +257,11 @@ hours of content every day. The number of YouTube channels is enormous.
 Today, it's a must for TV stations or musicians to publish videos of their
 shows or songs on YouTube.
 
-Below a classic channel *Carpool Karaoke* featured by frontman _James Corden_
-of *The Late Late Show* at CBS, Los Angeles.
-
-.James Corden · Carpool Karaoke
-gallery::jg_video_online_youtube_james_and_adele[role="mb-5"]
+// Below a classic channel *Carpool Karaoke* featured by frontman _James Corden_
+// of *The Late Late Show* at CBS, Los Angeles.
+//
+// .James Corden · Carpool Karaoke
+// gallery::jg_video_online_youtube_james_and_adele[role="mb-5"]
 
 A really great channel at YouTube is presented by _Taylor Swift_ for her
 new studio album *The Tortured Poets Department: The Anthology*, released on
@@ -331,7 +304,7 @@ without advertising.
 gallery::jg_video_online_vimeo[role="mb-5"]
 
 [role="mt-4"]
-=== DailyMotion
+=== Dailymotion
 
 link:{url-dailymotion--home}[Dailymotion, {browser-window--new}] is a
 video-sharing platform. The platform is available worldwide in 180+

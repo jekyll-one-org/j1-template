@@ -1,0 +1,97 @@
+Wie kann man mit Hilfe von JavaScript die Auflösung eines Bildes bestimmen?
+
+
+Gemini
+--------------------------------------------------------------------------------
+
+JavaScript bietet uns mehrere Wege, um die Auflösung eines Bildes zu ermitteln.
+Hier sind einige gängige Methoden.
+
+1. Über das image-Element
+
+* naturalWidth und naturalHeight:
+  Diese Eigenschaften liefern die ursprüngliche Größe des Bildes,
+  unabhängig von der aktuellen Darstellung auf der Seite.
+
+* width und height: Diese Eigenschaften geben die aktuelle Breite und Höhe
+  des Bildes in Pixeln an, die auf der Seite angezeigt wird.
+
+
+const myImage = document.getElementById('myImage');
+
+console.log('Ursprüngliche Größe:', myImage.naturalWidth, 'x', myImage.naturalHeight);
+console.log('Aktuelle Größe:', myImage.width, 'x', myImage.height);
+
+
+2. Mit dem HTML5 Canvas-Element
+
+* drawImage()
+  Diese Methode ermöglicht es, ein Bild auf ein Canvas-Element zu zeichnen.
+
+* canvas.width und canvas.height:
+  Diese Eigenschaften geben die Breite und Höhe des Canvas-Elements an.
+
+const canvas = document.getElementById('myCanvas');
+const ctx = canvas.getContext('2d');
+const myImage = document.getElementById('myImage');
+
+ctx.drawImage(myImage, 0, 0);
+
+console.log('Bildgröße:', canvas.width, 'x', canvas.height);
+Verwende den Code mit Vorsicht.
+
+3. Mit dem FileReader
+
+* readAsDataURL():
+  Diese Methode liest die Datei als Data-URL.
+
+* onload: Ein Ereignis, das ausgelöst wird, wenn das Lesen der
+  Datei abgeschlossen ist.
+  
+* result: Enthält die Data-URL des Bildes.
+
+const input = document.getElementById('imageInput');
+const image = new Image();
+
+input.addEventListener('change', (event) => {
+  const file    = event.target.files[0];
+  const reader  = new FileReader();
+
+  reader.onload = (event) => {
+    image.onload = () => {
+      console.log('Bildgröße:', image.naturalWidth, 'x', image.naturalHeight);
+    };
+    image.src = event.target.result;
+  };
+
+  reader.readAsDataURL(fileURL);
+});
+
+
+Wichtige Punkte
+--------------------------------------------------------------------------------
+
+Browser-Kompatibilität: Die meisten modernen Browser unterstützen diese Methoden. Für ältere Browser könnten Polyfills oder alternative Lösungen erforderlich sein.
+Asynchrone Operationen: Beim Lesen von Dateien mit FileReader sind asynchrone Operationen beteiligt. Daher ist es wichtig, die onload-Ereignisse zu verwenden, um sicherzustellen, dass die Daten vollständig geladen sind, bevor die Bildgröße abgerufen wird.
+Bildmanipulationen: Wenn das Bild vor der Größenbestimmung manipuliert wird (z.B. skaliert oder gedreht), können sich die Ergebnisse ändern.
+Welches Verfahren ist das richtige für dich?
+
+Direkter Zugriff auf ein Bild-Element: Methode 1
+Dynamisches Laden von Bildern: Methode 3
+Pixelmanipulationen: Methode 2
+
+Zusätzliche Überlegungen
+------------------------
+
+Hoch aufgelöste Bilder: Für sehr große Bilder kann das Laden und die Verarbeitung im Browser zu Leistungsproblemen führen.
+Server-seitige Verarbeitung: Für komplexere Bildanalysen oder -verarbeitungen kann es sinnvoll sein, die Bildverarbeitung auf den Server zu verlagern.
+Möchtest du ein konkretes Beispiel sehen oder hast du weitere Fragen?
+Lass es mich wissen!
+
+Beispielhafte HTML-Struktur
+---------------------------
+
+HTML
+<img id="myImage" src="meinBild.jpg" alt="Mein Bild">
+<canvas id="myCanvas"></canvas>
+<input id="imageInput" type="file">

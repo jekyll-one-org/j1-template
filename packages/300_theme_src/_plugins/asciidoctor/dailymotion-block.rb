@@ -37,17 +37,25 @@ Asciidoctor::Extensions.register do
     use_dsl
 
     named :dailymotion
-    name_positional_attributes 'theme', 'role'
-    default_attrs 'theme' => 'uno',
+    name_positional_attributes 'caption', 'theme', 'role'
+    default_attrs 'caption' => 'true',
+                  'theme' => 'uno',
                   'role' => 'mt-3 mb-3'
 
     def process parent, target, attributes
 
-      chars         = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
-      video_id      = (0...11).map { chars[rand(chars.length)] }.join
+      chars           = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
+      video_id        = (0...11).map { chars[rand(chars.length)] }.join
 
-      title_html    = (attributes.has_key? 'title') ? %(<div class="video-title">#{attributes['title']}</div>\n) : nil
-      theme_name    = (theme = attributes['theme'])  ? %(#{theme}) : nil
+      title_html      = (attributes.has_key? 'title') ? %(<div class="video-title">#{attributes['title']}</div>\n) : nil
+      poster_image    = (poster = attributes['poster']) ? %(#{poster}) : nil
+      theme_name      = (theme = attributes['theme'])  ? %(#{theme}) : nil
+      caption_enabled = (caption  = attributes['caption'])  ? true : false
+
+      poster_attr     = %(poster="#{poster_image}")
+      if attributes['poster'] == 'auto'
+        poster_attr = ''
+      end
 
       html = %(
         <div class="dailymotion-player bottom #{attributes['role']}">
@@ -57,6 +65,7 @@ Asciidoctor::Extensions.register do
             class="video-js vjs-theme-#{theme_name}"
             controls
             width="640" height="360"
+            #{poster_attr}
             aria-label="#{attributes['title']}"
             data-setup='{
               "fluid" : true,
@@ -102,6 +111,24 @@ Asciidoctor::Extensions.register do
               var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
               if (j1CoreFinished && pageVisible) {
+
+                if ('#{caption_enabled}' === 'true' &&  '#{poster_image}' !== 'auto') {
+                  addCaptionAfterImage('#{poster_image}');
+                }
+
+                // scroll to player top position
+                // -------------------------------------------------------------
+                var vjs_player = document.getElementById("#{video_id}");
+
+                vjs_player.addEventListener('click', function(event) {
+                  var scrollOffset = (window.innerWidth >= 720) ? -130 : -110;
+
+                  // scroll player to top position
+                  const targetDiv         = document.getElementById("#{video_id}");
+                  const targetDivPosition = targetDiv.offsetTop;
+                  window.scrollTo(0, targetDivPosition + scrollOffset);
+                }); // END EventListener 'click'
+
                 clearInterval(dependencies_met_page_ready);
               }
             }, 10);
