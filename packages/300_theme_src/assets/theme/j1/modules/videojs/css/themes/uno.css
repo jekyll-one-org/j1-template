@@ -180,3 +180,33 @@ picture > img {
   border: none;
   top: -.35em
 }
+
+
+/* 3. Layout
+# --------------------------------------------------------- */
+
+/* Small only
+# --------------------------------------------------------- */
+@media screen and (max-width: 39.9375em) {
+
+  .vjs-theme-uno .vjs-big-play-button {
+    top: 35%;
+    left: 45%;
+    width: 120px;
+    height: 120px;
+    /* font-size: 0px; */
+    z-index: 1;
+    background: url(/assets/theme/j1/modules/videojs/assets/icons/small/big-play-button.svg) no-repeat;
+  }
+
+  .vjs-theme-uno .vjs-big-play-button:hover {
+    top: 35%;
+    left: 45%;
+    width: 120px;
+    height: 120px;
+    /* font-size: 0px; */
+    z-index: 1;
+    background: url(/assets/theme/j1/modules/videojs/assets/icons/small/big-play-button-hover.svg) no-repeat;
+  }
+
+}

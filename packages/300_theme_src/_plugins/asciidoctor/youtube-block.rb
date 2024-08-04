@@ -78,7 +78,7 @@ Asciidoctor::Extensions.register do
               ],
               "sources": [{
                 "type": "video/youtube",
-                "src": "//youtube-nocookie.com/watch?v=#{target}"
+                "src": "//youtube.com/watch?v=#{target}"
               }],
               "controlBar": {
                 "pictureInPictureToggle": false,
@@ -129,7 +129,7 @@ Asciidoctor::Extensions.register do
                   const targetDivPosition = targetDiv.offsetTop;
                   window.scrollTo(0, targetDivPosition + scrollOffset);
                 }); // END EventListener 'click'
-                             
+
                 clearInterval(dependencies_met_page_ready);
               }
             }, 10);
