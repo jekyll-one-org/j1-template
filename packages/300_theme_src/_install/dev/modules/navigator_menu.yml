@@ -27,10 +27,10 @@
       href:                             /pages/public/tour/present_images/
       icon:                             image
     - title:                            Audio
-      href:                             /pages/public/tour/present_audio/
+      href:                             /pages/public/tour/playback_audio/
       icon:                             volume-high
     - title:                            Video
-      href:                             /pages/public/tour/present_video/
+      href:                             /pages/public/tour/playback_video/
       icon:                             video
 
     - title:                            Typography

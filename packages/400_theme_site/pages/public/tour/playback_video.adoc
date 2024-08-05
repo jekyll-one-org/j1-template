@@ -25,9 +25,10 @@ image:
   width:                                1920
   height:                               1280
 
+compress:                               false
 personalization:                        true
 regenerate:                             false
-permalink:                              /pages/public/tour/present_video/
+permalink:                              /pages/public/tour/playback_video/
 
 resources:                              [
                                           gallery, lightgallery, masonry,

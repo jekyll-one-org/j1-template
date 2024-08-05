@@ -28,7 +28,7 @@ comments:                               false
 exclude_from_search:                    false
 regenerate:                             false
 personalization:                        true
-permalink:                              /pages/public/tour/present_audio/
+permalink:                              /pages/public/tour/playback_audio/
 
 resources:                              [ amplitudejs ]
 resource_options:
