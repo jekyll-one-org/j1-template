@@ -39,22 +39,9 @@ resource_options:
       collapseDepth:                    3
   - attic:
       slides:
-        # Broadway Underground - still image (animate default)
-        - url:                          /assets/video/headers/present_videos/still/underground-broadway.jpg
-          alt:                          Broadway Underground
-          title:                        Video Player
-          tagline:                      Playback Video
-        # Broadway Underground - FAYETTE ST
-        - url:                          /assets/video/headers/present_videos/underground-broadway.mp4
-          alt:                          Broadway Underground Video
-          title:                        Video Player
-          tagline:                      Playback Video
-          isVideo:                      true
-          loop:                         false
-          duration:                     6000
-        # Broadway Underground - still image (animate random)
-        - url:                          /assets/video/headers/present_videos/still/underground-broadway.jpg
-          alt:                          Broadway Underground
+        # Tylor Swift Concert Munich 2024
+        - url:                          //img.youtube.com/vi/Zu7EA3aA9Z4/maxresdefault.jpg
+          alt:                          Tylor Swift Concert Munich 2024
           title:                        Video Player
           tagline:                      Playback Video
 ---
@@ -152,8 +139,34 @@ YouTube is a popular online video-sharing platform that allows users to
 upload, view, share, and comment on videos. The platform provides services
 for people and organizations to publish various video content.
 
-.Fortnight (feat. Post Malone, Official Music Video) · Taylor Swift
-youtube::q3zqJs7JUCQ[poster="//img.youtube.com/vi/q3zqJs7JUCQ/maxresdefault.jpg" role="mt-4 mb-5"]
+See below Adele's opening concert in Munich's specially built open-air arena,
+and tens of thousands celebrated with her. It is an extraordinary concert
+series: a pop-up stadium tailored to her needs was built specifically for her
+and long catwalks bring Adele closer to her fans.
+
+The arena, shaped like an amphitheater, is decorated in black and white and
+is dominated by a 220-meter-long and 17-meter-high screen. Find below the first
+45 minutes of her opening concert in August 2024 at the Adele World, Munich.
+
+.Adele Concert, August 2024 · Adele World Munich
+youtube::KIvU5etrbSM[poster="//img.youtube.com/vi/KIvU5etrbSM/maxresdefault.jpg" role="mt-4 mb-5"]
+
+Pop icon Taylor Swift thrilled more than 70,000 fans at a sold-out concert
+at the Olympic Stadium in Munich. But the enthusiasm for the US star
+extended far beyond the stadium.
+
+Taylor Swift recognized the unusual situation in Munich and, at the
+beginning of her concert, greeted not only the fans in the stadium
+but also the thousands who had gathered in the park in front of the
+stadium.
+
+That evening, Taylor Swift took her fans through her long career. For
+over three hours, the pop queen played 45 songs, album by album, the
+so-called Eras. Taylor Swift concluded the show with a spectacular
+fireworks display. See impressions of this emotional event below.
+
+.Taylor Swift Concert, August 2024 · Olympic Stadium in Munich
+youtube::Zu7EA3aA9Z4[poster="//img.youtube.com/vi/Zu7EA3aA9Z4/maxresdefault.jpg" role="mt-4 mb-5"]
 
 [role="mt-4"]
 === Dailymotion

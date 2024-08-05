@@ -393,7 +393,7 @@ li.dropdown.nav-sub-item:before {
   			}
   			&.navbar-fixed {
   				position: fixed;
-          z-index: 99;
+          z-index: 999;
   				&.navbar-transparent {
   					.logo-scrolled {
   						display: none;
