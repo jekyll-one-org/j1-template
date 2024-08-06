@@ -46,8 +46,9 @@ Asciidoctor::Extensions.register do
     use_dsl
 
     named :youtube
-    name_positional_attributes 'caption', 'poster', 'theme', 'role'
+    name_positional_attributes 'caption', 'start', 'poster', 'theme', 'role'
     default_attrs 'caption' => 'true',
+                  'start'   => '00:00:00',
                   'poster'  => '/assets/image/icons/videojs/videojs-poster.png',
                   'theme'   => 'uno',
                   'role'    => 'mt-3 mb-3'
@@ -111,12 +112,24 @@ Asciidoctor::Extensions.register do
               }
             } // END addCaptionAfterImage
 
+            var appliedOnce = false;
             videojs("#{video_id}").ready(function() {
-              var vjs_player = document.getElementById("#{video_id}");
+              var vjs_player    = document.getElementById("#{video_id}");
+              var videojsPlayer = this;
 
               if ('#{caption_enabled}' === 'true') {
                 addCaptionAfterImage('#{poster_image}');
               }
+
+              // set start position of current video
+              // ---------------------------------------------------------------
+              videojsPlayer.on("play", function() {
+                var startFromSecond = new Date('1970-01-01T' + "#{attributes['start']}" + 'Z').getTime() / 1000;
+                if (!appliedOnce) {
+                  videojsPlayer.currentTime(startFromSecond);
+                  appliedOnce = true;
+                }
+              }); // END start position
 
               // scroll to player top position
               // ---------------------------------------------------------------
