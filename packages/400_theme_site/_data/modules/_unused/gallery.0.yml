@@ -413,33 +413,7 @@ settings:
           videojs:                      false
 
         videojsOptions:
-          enabled:                      true
-
-          muted:                        false
-          preload:                      true
-#         videoStart:                   ["00:00:30", "00:01:30"]                  # start time (hh:mm:ss) for [video1, video2]
-
-          controls:                     true
-          controlBar:
-            playbackRates:              [0.25, 0.5, 1, 1.5, 2]
-            remainingTimeDisplay:       true
-            pictureInPictureToggle:     false
-
-            volumePanel:
-              inline:                   false
-
-            hotkeysPlugin:
-              enabled:                  true
-              options:
-                volumeStep:             0.2
-
-            zoomPlugin:
-              enabled:                  true
-              options:
-                moveX:                  0
-                moveY:                  0
-                rotate:                 0
-                zoom:                   1
+          enabled:                      false
 
 #       See: https://stackoverflow.com/questions/40685142/youtube-autoplay-does-not-work-with-iframe
         playerParams:
