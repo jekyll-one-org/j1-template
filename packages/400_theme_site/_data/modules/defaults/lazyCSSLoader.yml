@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
-# ~/_data/modules/lazyLoader.yml
-# User Configuration of the lazyLoader Module
+# ~/_data/modules/defaults/lazyLoader.yml
+# Default Configuration of the lazyLoader Module
 #
 # Product/Info:
 # https://jekyll.one
@@ -10,23 +10,20 @@
 # J1 Template is licensed under the MIT License.
 # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
 # ------------------------------------------------------------------------------
-# NOTE:
-#
-# ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------
 # Description
 #
 description:
-  title:                                lazyLoader
-  scope:                                User settings
-  location:                             _data/modules/lazyLoader.yml
+  title:                                lazyCSSLoader
+  scope:                                Default settings
+  location:                             _data/modules/defaults/lazyCSSLoader.yml
 
 # ------------------------------------------------------------------------------
-# User settings
+# Default settings
 #
-settings:
-  enabled:                              true
+defaults:
+  enabled:                              false
 
 # ------------------------------------------------------------------------------
 # END config

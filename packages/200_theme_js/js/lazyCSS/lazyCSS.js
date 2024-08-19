@@ -14,7 +14,7 @@
 */
 "use strict";
 
-module.exports = function lazyCSS () {
+module.exports = function lazyCSSLoader () {
   let options = {};
 
   const observe = (opt) => {

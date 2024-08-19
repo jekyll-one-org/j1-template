@@ -59,7 +59,7 @@ window.platform                         = require('platform');
 
 window.j1.adapter                       = require('./js/adapter/adapter.js');
 window.j1.anime                         = require('./js/anime/anime.js');       // added for fab
-window.j1.lazyCSS                       = require('./js/lazyCSS/lazyCSS.js');
+window.j1.lazyCSSLoader                 = require('./js/lazyCSS/lazyCSS.js');
 window.j1.core                          = require('./js/core/core.js');
 window.j1.core.parseContent             = require('./js/speak2me/parse-content.js');
 window.j1.core.navigator                = require('./js/navigator/navigator.js');
