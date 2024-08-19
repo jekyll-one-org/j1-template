@@ -1821,7 +1821,12 @@ resources:
         files:                          [ adapter/js/lazyLoader.js ]
         js:                             [
                                           modules/lazyLoader/js/jquery.lazy,
-                                          modules/lazyLoader/js/plugins/jquery.lazy.av
+                                          modules/lazyLoader/js/plugins/jquery.lazy.ajax,
+                                          modules/lazyLoader/js/plugins/jquery.lazy.av,
+                                          modules/lazyLoader/js/plugins/jquery.lazy.iframe,
+                                          modules/lazyLoader/js/plugins/jquery.lazy.script,
+                                          modules/lazyLoader/js/plugins/jquery.lazy.vimeo,
+                                          modules/lazyLoader/js/plugins/jquery.lazy.youtube
                                         ]
         init_function:                  [ j1.adapter.lazyLoader.init ]
 
