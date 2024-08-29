@@ -6,8 +6,8 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/lazyLoader.js
- # Liquid template to adapt the lazyLoader module(core)
+ # ~/assets/theme/j1/adapter/js/lazyCSSLoaderLoader.js
+ # Liquid template to adapt the lazyCSSLoader module(core)
  #
  # Product/Info:
  # https://jekyll.one
@@ -41,12 +41,12 @@ regenerate:                             true
 
 {% comment %} Set config data (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign lazy_loader_defaults = modules.defaults.lazyLoader.defaults %}
-{% assign lazy_loader_settings = modules.lazyLoader.settings %}
+{% assign lazy_css_loader_defaults = modules.defaults.lazyCSSLoader.defaults %}
+{% assign lazy_css_loader_settings = modules.lazyCSSLoader.settings %}
 
 {% comment %} Set config options (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign lazy_loader_options  = lazy_loader_defaults | merge: lazy_loader_settings %}
+{% assign lazy_css_loader_options  = lazy_css_loader_defaults | merge: lazy_css_loader_settings %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -57,8 +57,8 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/lazyLoader.js
- # J1 Adapter for the lazyLoader module (core: lazyCSS)
+ # ~/assets/theme/j1/adapter/js/lazyCSSLoader.js
+ # J1 Adapter for the lazyCSSLoader module (core: lazyCSS)
  #
  # Product/Info:
  # https://jekyll.one
@@ -78,7 +78,7 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 "use strict";
-j1.adapter.lazyLoader = ((j1, window) => {
+j1.adapter.lazyCSSLoader = ((j1, window) => {
 
 {% comment %} Set global variables
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -87,9 +87,9 @@ var cookie_names    = j1.getCookieNames();
 var user_state      = j1.readCookie(cookie_names.user_state);
 var state           = 'not_started';
 
-var lazyLoaderDefaults;
-var lazyLoaderSettings;
-var lazyLoaderOptions;
+var lazyCSSLoaderDefaults;
+var lazyCSSLoaderSettings;
+var lazyCSSLoaderOptions;
 var frontmatterOptions;
 
 var _this;
@@ -117,7 +117,7 @@ var timeSeconds;
       // default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
-        module_name: 'j1.adapter.lazyLoader',
+        module_name: 'j1.adapter.lazyCSSLoader',
         generated:   '{{site.time}}'
       }, options);
 
@@ -127,47 +127,27 @@ var timeSeconds;
 
       // create settings object from module options
       //
-      lazyLoaderDefaults = $.extend({}, {{lazy_loader_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      lazyLoaderSettings = $.extend({}, {{lazy_loader_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      lazyLoaderOptions  = $.extend(true, {}, lazyLoaderDefaults, lazyLoaderSettings);
+      lazyCSSLoaderDefaults = $.extend({}, {{lazy_css_loader_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      lazyCSSLoaderSettings = $.extend({}, {{lazy_css_loader_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      lazyCSSLoaderOptions  = $.extend(true, {}, lazyCSSLoaderDefaults, lazyCSSLoaderSettings);
 
-      _this  = j1.adapter.lazyLoader;
-      logger = log4javascript.getLogger('j1.adapter.lazyLoader');
+      _this  = j1.adapter.lazyCSSLoader;
+      logger = log4javascript.getLogger('j1.adapter.lazyCSSLoader');
 
       // -------------------------------------------------------------------------
       // module initializer
       // ---------------------------------------------------------------------
       var dependency_met_j1_core_ready = setInterval(() => {
-        var pageState       = $('#content').css("display");
-        var pageVisible     = (pageState === 'block') ? true : false;
-        var j1CoreFinished  = (j1.getState() === 'finished') ? true : false;
-        // var atticFinished   = (j1.adapter.attic.getState() == 'finished') ? true : false;
-//      var footerState     = j1.getXhrDataState('#{{footer_id}}');
-//      var footerVisible   = (footerState === 'block') ? true : false;
-//      var footerloaded    = ($('#footer_uno.active_footer')[0].clientHeight > 100) ? true : false;
+        var j1CoreFinished = (j1.getState() === 'finished') ? true: false;
 
-//      if (true) {
-//      if (j1CoreFinished && pageVisible) {
-        if (j1CoreFinished && pageVisible) {
+        if (j1CoreFinished) {
           startTimeModule = Date.now();
 
           _this.setState('started');
           logger.debug('\n' + 'set module state to: ' + _this.getState());
           logger.info('\n' + 'initializing module: started');
 
-          // var imgInstance = $("img.lazy").Lazy (
-          //   {
-          //     chainable:  false,
-          //     threshold:  500
-          //   }
-          // );
-
-          var imgInstance_1       = $("img.lazy").Lazy({threshold:  10});
-          var imgInstance_2       = $('div.lazy').Lazy({threshold:  10});
-          var buttonInstance_1    = $('ul.lazy').Lazy({threshold:  10});
-          var audioInstance       = $("audio").Lazy();
-          var videoInstance       = $("video").Lazy();
-//        var backstretchInstance = $(".backstretch-item").Lazy();
+          _this.registerLoaders(lazyCSSLoaderOptions);
 
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
@@ -180,6 +160,29 @@ var timeSeconds;
         } // END if pageVisible
       }, 10); // END dependency_met_j1_core_ready
     }, // END init
+
+    // -------------------------------------------------------------------------
+    // registerLoaders()
+    // Lazy load CSS to speed up page rendering
+    //
+    // Requires the following settings:
+    //
+    //    src:        the 'location' of the CSS file
+    //    selector:   the 'selector' that triggers the observer
+    //    rootMargin: the 'margin' before the load is trigged
+    //
+    // -------------------------------------------------------------------------
+    //
+    registerLoaders: () => {
+      {% for loader in lazy_css_loader_options.loaders %} {% if loader.enabled %}
+        j1.lazyCSSLoader().observe({
+          src:        '{{loader.src}}',
+          selector:   '{{loader.selector}}',
+          rootMargin: '{{loader.rootMargin}}'
+        });
+        logger.info('\n' + 'register lazy loading for: {{loader.description}}');
+      {% endif %} {% endfor %}
+    }, // END registerLoaders
 
     // -------------------------------------------------------------------------
     // messageHandler()

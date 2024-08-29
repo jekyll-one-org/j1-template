@@ -1,0 +1,194 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/_includes/themes/j1/procedures/layouts/resource_writer.proc
+ # Liquid PROCEDURE to place HTML resources for every LAYOUT
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2023, 2024 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #    liquid_var:  {{ liquid_var | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+{% capture select_location %}themes/{{site.template.name}}/procedures/global/select_location.proc{% endcapture %}
+
+{% comment %} variables
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign environment       = site.environment %}
+{% assign placement         = include.region %}
+{% assign resource_globals  = include.global %}
+{% assign resource_settings = include.resource %}
+
+{% comment %} helpers
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign is_placed = false %}
+
+{% if page.debug2 %}
+<!-- [DEBUG  ] [j1.layout.resource_writer.proc        ] [ process resource: {{resource_settings}} ] -->
+{% endif %}
+
+{% comment %} main
+-------------------------------------------------------------------------------- {% endcomment %}
+{% for global in resource_globals %}
+  {% assign key   = global[0] %}
+  {% assign value = global[1] %}
+  {% if key == 'base_path' %} {% assign base_path = value %} {% endif %}
+  {% if key == 'location' %}  {% assign location = value %}  {% endif %}
+{% endfor %}
+
+{% if page.debug %}
+<!-- [DEBUG  ] [j1.layout.resource_writer.proc        ] [ placement detected as: {{is_placed}} ] -->
+{% endif %}
+
+{% if resource_settings.script_load == 'sync' %} {% assign resource_settings.script_load = '' %} {% endif %}
+
+{% if resource_settings.enabled and placement == 'head' %}
+
+  {% assign layout_valid = false %}
+  {% for layout in resource_settings.layout %}
+    {% assign layout = layout|downcase %}
+    {% if layout == page.layout or layout == "all" %} {% assign layout_valid = true %} {% endif %}
+  {% endfor %}
+
+  {% assign resource_valid = false %}
+  {% if resource_settings.required == 'always' %}
+    {% assign resource_valid = true %}
+  {% else %}
+    {% for resource in page.resources %}
+      {% if resource == resource_settings.id %} {% assign resource_valid = true %} {% endif %}
+    {% endfor %}
+  {% endif %}
+
+  {% comment %} resource placement
+  ------------------------------------------------------------------------------ {% endcomment %}
+  {% if layout_valid and resource_valid and is_placed == false %}
+
+    {% comment %} process all data keys
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% for data_var in resource_settings.data %}
+
+      {% assign data_key   = data_var[0] %}
+      {% assign data_value = data_var[1] %}
+
+      {% if page.debug %}
+      <!-- [DEBUG  ] [j1.layout.resource_writer.proc        ] [ placement detected as: {{is_placed}} ] -->
+      <!-- [DEBUG  ] [j1.layout.resource_writer.proc        ] [ process data_key: {{data_key}} ] -->
+      {% endif %}
+
+      {% if page.debug %}
+      <!-- [DEBUG  ] [j1.layout.resource_writer.proc        ] [ process data_value: {{data_value}} ] -->
+      {% endif %}
+
+      {% comment %} process data key 'files'
+      -------------------------------------------------------------------------- {% endcomment %}
+      {% if data_key == 'files' %}
+
+        <!-- [INFO   ] [j1.layout.resource_writer.proc        ] [ layout: {{layout}}, {{resource_settings.comment}} ] -->
+        <!-- [INFO   ] [j1.layout.resource_writer.proc        ] [ layout: {{layout}}, place general file resources for resource_settings.id: {{resource_settings.id}} ] -->
+
+        {% for file in data_value %}
+
+          {% assign splitted_resource = file | split: ":" %}
+          {% assign url_detected = splitted_resource | size %}
+
+          {% assign splitted_resource = file | split: "." %}
+          {% assign split_count = splitted_resource | size %}
+
+            {% if split_count > 1 %}
+              {% assign resource_ext = splitted_resource | last %}
+
+              {% case resource_ext %}
+                {% when 'json' %}
+                  {% if url_detected > 1 %}
+                    <script {{resource_settings.script_load}} type="application/json" src="{{file}}"></script>
+                  {% else %}
+                    <script {{resource_settings.script_load}} type="application/json" src="{{base_path}}/{{file}}"></script>
+                  {% endif %}
+                  {% when 'js' %}
+                    {% if url_detected > 1 %}
+                      <script {{resource_settings.script_load}}  src="{{file}}"></script>
+                    {% else %}
+                      <script {{resource_settings.script_load}}  src="{{base_path}}/{{file}}"></script>
+                    {% endif %}
+                {% when 'css' %}
+                  {% if url_detected > 1 %}
+                    <link rel="stylesheet" href="{{file}}">
+                  {% else %}
+                    <link rel="stylesheet" href="{{base_path}}/{{file}}">
+                  {% endif %}
+                {% else %}
+                  <--! UNKNOWN resource type detected for: "{{file}}" -->
+              {% endcase %}
+            {% else %}
+              {% if url_detected > 1 %}
+                <link rel="stylesheet" href="{{file}}">
+              {% else %}
+                <link rel="stylesheet" href="{{base_path}}/{{file}}">
+              {% endif %}
+            {% endif %}
+
+        {% endfor %}
+      {% endif %}
+
+      {% comment %} process data key 'css'
+      -------------------------------------------------------------------------- {% endcomment %}
+      {% if data_key == 'css' %}
+        {% for locator in data_value %}
+
+          <!-- [INFO   ] [j1.layout.resource_writer.proc        ] [ layout: {{layout}}, {{resource_settings.comment}} ] -->
+          <!-- [INFO   ] [j1.layout.resource_writer.proc        ] [ layout: {{layout}}, place {{data_key}} files for resource ID: {{resource_settings.id}} ] -->
+
+          {% include {{select_location}} location=location locator=locator %}
+          {% assign my_location = {{location_source}} %}
+
+          {% if environment == 'development' %}
+            {% if location == 'remote' %} <link rel="stylesheet" href="{{my_location}}.css"> {% endif %}
+            {% if location == 'local'  %} <link rel="stylesheet" href="{{my_location}}.css"> {% endif %}
+          {% else %}
+            {% if location == 'remote' %} <link rel="stylesheet" href="{{my_location}}.min.css"> {% endif %}
+            {% if location == 'local'  %} <link rel="stylesheet" href="{{my_location}}.min.css"> {% endif %}
+          {% endif %}
+
+        {% endfor %}
+      {% endif %}
+
+      {% comment %} process data key 'js'
+      -------------------------------------------------------------------------- {% endcomment %}
+      {% if data_key == 'js' %}
+        {% for locator in data_value %}
+
+          <!-- [INFO   ] [j1.layout.resource_writer.proc        ] [ layout: {{layout}} {{resource_settings.comment}} ] -->
+          <!-- [INFO   ] [j1.layout.resource_writer.proc        ] [ layout {{layout}}, place {{data_key}} files for resource ID: {{resource_settings.id}} ] -->
+
+          {% include {{select_location}} location=location locator=locator %}
+          {% assign my_location = {{location_source}} %}
+
+          {% if environment == 'development' %}
+            {% if location == 'remote' %} <script {{resource_settings.script_load}}  src="{{my_location}}.js"></script> {% endif %}
+            {% if location == 'local'  %} <script {{resource_settings.script_load}}  src="{{my_location}}.js"></script> {% endif %}
+          {% else %}
+            {% if location == 'remote' %} <script {{resource_settings.script_load}}  src="{{my_location}}.min.js"></script> {% endif %}
+            {% if location == 'local'  %} <script {{resource_settings.script_load}}  src="{{my_location}}.min.js"></script> {% endif %}
+          {% endif %}
+
+        {% endfor %}
+      {% endif %}
+
+    {% endfor %}
+
+    {% comment %} END process all data keys
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% assign is_placed = true %}
+
+    <!-- [INFO   ] [j1.layout.resource_writer.proc        ] [ placement for all data_keys finished ] -->
+
+  {% endif %}
+{% endif %}

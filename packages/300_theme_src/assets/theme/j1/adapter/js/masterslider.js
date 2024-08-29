@@ -164,9 +164,9 @@ j1.adapter.masterslider = ((j1, window) => {
         var pageVisible    = (pageState === 'block') ? true : false;
         var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
         var dataLoaded     = (_this.getState() === 'data_loaded') ? true : false;
-        var atticFinished  = (j1.adapter.attic.getState() == 'finished') ? true : false;
+        // var atticFinished  = (j1.adapter.attic.getState() == 'finished') ? true : false;
 
-        if (pageVisible && j1CoreFinished && dataLoaded && atticFinished) {
+        if (pageVisible && j1CoreFinished && dataLoaded) {
           startTimeModule = Date.now();
 
           _this.setState('started');

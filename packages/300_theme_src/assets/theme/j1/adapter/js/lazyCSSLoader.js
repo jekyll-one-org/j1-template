@@ -7,7 +7,7 @@ regenerate:                             true
 {% comment %}
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/adapter/js/lazyCSSLoaderLoader.js
- # Liquid template to adapt the lazyCSSLoader module(core)
+ # Liquid template to adapt the lazyCSSLoader module (core)
  #
  # Product/Info:
  # https://jekyll.one
@@ -175,7 +175,7 @@ var timeSeconds;
     //
     registerLoaders: () => {
       {% for loader in lazy_css_loader_options.loaders %} {% if loader.enabled %}
-        j1.lazyCSSLoader().observe({
+        _this.lazyCSSLoader().observe({
           src:        '{{loader.src}}',
           selector:   '{{loader.selector}}',
           rootMargin: '{{loader.rootMargin}}'
@@ -183,6 +183,53 @@ var timeSeconds;
         logger.info('\n' + 'register lazy loading for: {{loader.description}}');
       {% endif %} {% endfor %}
     }, // END registerLoaders
+
+    // -------------------------------------------------------------------------
+    // lazyCSSLoader()
+    // Lazy load CSS to speed up page rendering
+    //
+    lazyCSSLoader: () => {
+      let options = {};
+
+      const observe = (opt) => {
+        options = opt;
+
+        // sessionStorage NOT used
+        //
+        // (('IntersectionObserver' in window && !sessionStorage[options.selector]) ? fnCssObserver : fnCssDomLink)();
+        (('IntersectionObserver' in window) ? fnCssObserver : doNothing) ();
+      }
+
+      const doNothing = () => {
+        observe = false;
+      }
+
+      const fnCssDomLink = () => {
+          let link = document.createElement('link');
+          let id = 'lazy' + options.selector;
+          link.id = id.replace('.', '_');;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          link.href = options.src;
+          document.head.appendChild(link);
+      }
+
+      const fnCssObserver = () => {
+          let selectors = document.querySelectorAll(options.selector);
+          let observer = new IntersectionObserver((entry, observer) => {
+              if (entry[0].intersectionRatio > 0) {
+                  fnCssDomLink();
+                  sessionStorage[options.selector] = true;
+                  observer.disconnect();
+              }
+          }, { rootMargin: options.rootMargin });
+          selectors.forEach(selector => {
+              observer.observe(selector);
+          });
+      }
+
+      return { observe };
+    },
 
     // -------------------------------------------------------------------------
     // messageHandler()

@@ -564,9 +564,9 @@ var j1 = ((options) => {
               var pageState       = $('#no_flicker').css("display");
               var pageVisible     = (pageState == 'block') ? true : false;
               var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
-              var atticFinished   = (j1.adapter.attic.getState() == 'finished') ? true: false;
+              // var atticFinished   = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-              if (j1CoreFinished && pageVisible && atticFinished) {
+              if (j1CoreFinished && pageVisible) {
                 startTimeModule = Date.now();
 
                 banner_blocks   = document.querySelectorAll('[id^="banner"]').length;
@@ -732,9 +732,9 @@ var j1 = ((options) => {
         var pageState       = $('#no_flicker').css("display");
         var pageVisible     = (pageState == 'block') ? true : false;
         var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
-        var atticFinished   = (j1.adapter.attic.getState() == 'finished') ? true: false;
+        // var atticFinished   = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-        if (pageVisible && atticFinished) {
+        if (pageVisible) {
           startTimeModule = Date.now();
 
           logger.info('\n' + 'page is being initialized');
@@ -1355,9 +1355,9 @@ var j1 = ((options) => {
             var pageState       = $('#no_flicker').css("display");
             var pageVisible     = (pageState == 'block') ? true: false;
             var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
-            var atticFinished   = (j1.adapter.attic.getState() == 'finished') ? true: false;
+            // var atticFinished   = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-            if (j1CoreFinished && pageVisible && atticFinished) {
+            if (j1CoreFinished && pageVisible) {
               setTimeout(() => {
                 // scroll to an anchor in current page if given in URL
                 j1.scrollToAnchor();
@@ -1552,9 +1552,9 @@ var j1 = ((options) => {
           var pageState      = $('#no_flicker').css("display");
           var pageVisible    = (pageState == 'block') ? true: false;
           var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
-          var atticFinished  = (j1.adapter.attic.getState() == 'finished') ? true: false;
+          // var atticFinished  = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-          if (j1CoreFinished && pageVisible && atticFinished) {
+          if (j1CoreFinished && pageVisible) {
             setTimeout(() => {
               // scroll to an anchor in current page if given in URL
               j1.scrollToAnchor();

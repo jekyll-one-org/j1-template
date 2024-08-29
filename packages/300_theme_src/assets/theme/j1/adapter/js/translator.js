@@ -197,9 +197,9 @@ j1.adapter.translator = (function (j1, window) {
         var pageState       = $('#content').css("display");
         var pageVisible     = (pageState == 'block') ? true: false;
         var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
-        var atticFinished   = (j1.adapter.attic.getState() == 'finished') ? true : false;
+        // var atticFinished   = (j1.adapter.attic.getState() == 'finished') ? true : false;
 
-        if (j1CoreFinished && pageVisible && atticFinished) {
+        if (j1CoreFinished && pageVisible) {
 
           var expires       = '{{cookie_options.expires}}';
           var same_site     = '{{cookie_options.same_site}}';

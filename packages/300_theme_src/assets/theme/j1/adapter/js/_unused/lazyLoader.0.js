@@ -141,14 +141,13 @@ var timeSeconds;
         var pageState       = $('#content').css("display");
         var pageVisible     = (pageState === 'block') ? true : false;
         var j1CoreFinished  = (j1.getState() === 'finished') ? true : false;
-        // var atticFinished   = (j1.adapter.attic.getState() == 'finished') ? true : false;
+        var atticFinished   = (j1.adapter.attic.getState() == 'finished') ? true : false;
 //      var footerState     = j1.getXhrDataState('#{{footer_id}}');
 //      var footerVisible   = (footerState === 'block') ? true : false;
 //      var footerloaded    = ($('#footer_uno.active_footer')[0].clientHeight > 100) ? true : false;
 
+        if (j1CoreFinished && pageVisible && atticFinished) {
 //      if (true) {
-//      if (j1CoreFinished && pageVisible) {
-        if (j1CoreFinished && pageVisible) {
           startTimeModule = Date.now();
 
           _this.setState('started');

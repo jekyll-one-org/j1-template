@@ -40,6 +40,7 @@ NO need to load this again
 -------------------------------------------------------------------------------- {% endcomment %}
 
 {% comment %} variables
+{% assign depends                     = '' %}
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign placement                   = include.region %}
 {% assign resource_globals            = include.global %}
@@ -47,8 +48,6 @@ NO need to load this again
 
 {% assign dependency_check_cycle      = resource_globals.dependency_check_cycle %}
 {% assign dependency_check_max_count  = resource_globals.dependency_check_timeout %}
-
-{% assign depends                     = '' %}
 
 {% comment %} helpers
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -65,21 +64,19 @@ NO need to load this again
 
 {% if resource_settings.enabled and placement == 'body-footer' %}
 
-  {% comment %} collect module dependency conditions (if any)
-  ------------------------------------------------------------------------------ {% endcomment %}
-  {% if resource_settings.dependencies %}
-    <!-- [INFO   ] [j1.layout.module_writer.proc          ] [ dependencies detected: {{resource_settings.dependencies | split:','}} ] -->
+  {% comment %} collect module dependency conditions|settings (unused)
+  ------------------------------------------------------------------------------
+  <!-- [INFO   ] [j1.layout.module_writer.proc          ] [ dependencies detected: {{resource_settings.dependencies | split:','}} ] -->
 
-    {% comment %} create dependency conditions (depends)
-    ---------------------------------------------------------------------------- {% endcomment %}
+  {% if resource_settings.dependencies %}
     {% for dependency in resource_settings.dependencies %}
       {% capture depends %}{{depends|append:{{adapter_prefix}}{{dependency}}{{state_condition}}{% endcapture %}
       {% if forloop.last %}{% else %}{% capture depends %}{{depends|append:' && '}}{% endcapture %}{% endif %}
     {% endfor %}
   {% endif %}
+  ------------------------------------------------------------------------------ {% endcomment %}
 
-  {% comment %} NOTE:
-  Module default values collected by J1 Adapter
+  {% comment %} Module default values collected by J1 Adapter
   ------------------------------------------------------------------------------ {% endcomment %}
 
   {% comment %} collect frontmatter|page options (page)
@@ -109,17 +106,17 @@ NO need to load this again
   {% if layout_valid and resource_valid and resource_settings.enabled %}
 
     {% comment %} process all data keys
-    <!-- [INFO   ] [j1.layout.module_writer.proc          ] [ data_value: '{{data_value}}' ] -->
     ---------------------------------------------------------------------------- {% endcomment %}
     {% for data_var in resource_settings.data %}
-      {% assign data_key = data_var[0] %}
 
-      {% comment %} NOTE: data_var[1] is of taype ARRAY
-      -------------------------------------------------------------------------- {% endcomment %}
-      {% if data_var[1] == empty %}
-        {% assign data_value = false %}
+      {% assign data_key       = data_var[0] %}
+
+      {% if data_var[1] != '' %}
+        {% assign data_value   = data_var[1] %}
+        <!-- [INFO   ] [j1.layout.module_writer.proc          ] [ found data-value: '{{data_value}}' ] -->
       {% else %}
-        {% assign data_value = data_var[1] %}
+        {% assign data_value   = false %}
+        <!-- [INFO   ] [j1.layout.module_writer.proc          ] [ set data-value: '{{data_value}}' ] -->
       {% endif %}
 
       {% comment %}
@@ -129,97 +126,27 @@ NO need to load this again
       wrong adapter placements
       -------------------------------------------------------------------------- {% endcomment %}
 
-      {% if data_key == 'init_function' and data_value and resource_settings.id != "j1_footer" %}
+      {% if data_value and data_key == 'init_function' and resource_settings.id != "j1_footer" %}
 
-        <!-- [INFO   ] [j1.layout.module_writer.proc          ] [ place J1 adapter for resource ID: {{resource_settings.id}} ] -->
+        <!-- [INFO   ] [j1.layout.module_writer.proc          ] [ place J1 adapter for resource ID: '{{resource_settings.id}}', value: '{{data_value}}' ] -->
         <script>
           $(function() {
             {% comment %} place initializer|s
             -------------------------------------------------------------------- {% endcomment %}
             {% for init_function in data_value %}
-
-              {% comment %} pass module specific frontmatter options
-              ------------------------------------------------------------------ {% endcomment %}
               {% if frontmatter_options %}
+
                 // [INFO   ] [j1.layout.module_writer.proc          ] [ pass module specific frontmatter options for: {{resource_settings.id}} ]
                 {% capture frontmatter_options %}{{frontmatter_options}}, {"layout": "{{page.layout}}", "title": "{{page.title}}", "tagline": "{{page.tagline}}", "scrollbar": "{{page.scrollbar}}", "toc": "{{page.toc}}", "comments": "{{page.comments}}"}{% endcapture %}
-                var settings = $.extend({}, {{frontmatter_options}});
 
-                {% comment %} create resource_settings.dependencies (if any)
-                ---------------------------------------------------------------- {% endcomment %}
-                {% if resource_settings.dependencies %}
-                  var interval_count = 0;
-                  var dependencies_met_{{resource_settings.id}} = setInterval(function() {
-                  var max_count      = {{dependency_check_max_count}};
-                    interval_count += 1;
-                    if ( {{depends}} ) {
-                      {{init_function}} (settings);
-                      clearInterval(dependencies_met_{{resource_settings.id}});
-                      }
-                    if (interval_count > max_count) {
-                      clearInterval(dependencies_met_{{resource_settings.id}});
-                      {{init_function}} (settings);
-                    }
-                  }, {{dependency_check_cycle}});
-                {% else %}
-                  {{init_function}} (settings);
-                {% endif %}
+                var settings = $.extend({}, {{frontmatter_options}});
+                {{init_function}} (settings);
+
               {% else %}
                 {% comment %} no module specific frontmatter options
                 ---------------------------------------------------------------- {% endcomment %}
+                {{init_function}} ();
 
-                {% comment %} pass default settings
-                ---------------------------------------------------------------- {% endcomment %}
-                {% if resource_settings.pass_init_data %}
-
-                  // [INFO   ] [j1.layout.module_writer.proc          ] [ pass init data for: {{resource_settings.id}} ]
-                  {% capture settings %}{"tts": "{{page.tts}}", "layout": "{{page.layout}}", "title": "{{page.title}}", "tagline": "{{page.tagline}}", "fab_menu_id": "{{page.fab_menu_id}}", "scrollbar": "{{page.scrollbar}}", "toc": "{{page.toc}}", "comments": "{{page.comments}}", "scrollDynamicPagesTopOnChange": "{{page.scrollDynamicPagesTopOnChange}}"}{% endcapture %}
-                  var settings = $.extend({}, {{settings}});
-
-                  {% comment %} create resource_settings.dependencies (if any)
-                  -------------------------------------------------------------- {% endcomment %}
-                  {% if resource_settings.dependencies %}
-                    // Initialize module if resource_settings.dependencies reached state 'finished'
-                    var interval_count = 0;
-                    var max_count      = {{dependency_check_max_count}};
-                    var dependencies_met_{{resource_settings.id}} = setInterval(function() {
-                      interval_count += 1;
-                      if ( {{depends}} ) {
-                        {{init_function}} (settings);
-                        clearInterval(dependencies_met_{{resource_settings.id}});
-                        }
-                      if (interval_count > max_count) {
-                        clearInterval(dependencies_met_{{resource_settings.id}});
-                        {{init_function}} (settings);
-                      }
-                    }, {{dependency_check_cycle}});
-                  {% else %}
-                    {{init_function}} (settings);
-                  {% endif %}
-                {% else %}
-                  {% comment %} no default settings
-                  -------------------------------------------------------------- {% endcomment %}
-
-                  {% comment %} create resource_settings.dependencies (if any)
-                  -------------------------------------------------------------- {% endcomment %}
-                  {% if resource_settings.dependencies %}
-                    var interval_count = 0;
-                    var max_count      = {{dependency_check_max_count}};
-                    var dependencies_met_{{resource_settings.id}} = setInterval(function() {
-                      interval_count += 1;
-                      if ({{depends}}) {
-                        {{init_function}}();
-                        clearInterval(dependencies_met_{{resource_settings.id}});
-                        }
-                      if (interval_count > max_count) {
-                        clearInterval(dependencies_met_{{resource_settings.id}});
-                        {{init_function}}();
-                      }
-                    }, {{dependency_check_cycle}});
-                  {% else %}
-                    {{init_function}}();
-                  {% endif %}
-                {% endif %}
               {% endif %}
             {% endfor %}
            });

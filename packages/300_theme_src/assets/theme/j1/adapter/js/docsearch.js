@@ -146,9 +146,9 @@ var timeSeconds;
         var pageState      = $('#content').css("display");
         var pageVisible    = (pageState === 'block') ? true : false;
         var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
-        var atticFinished  = (j1.adapter.attic.getState() === 'finished') ? true: false;
+        // var atticFinished  = (j1.adapter.attic.getState() === 'finished') ? true: false;
 
-        if (j1CoreFinished && pageVisible && atticFinished) {
+        if (j1CoreFinished && pageVisible) {
           startTimeModule = Date.now();
 
           _this.setState('started');

@@ -53,7 +53,7 @@ environment:                            development
 # ------------------------------------------------------------------------------
 # Sets the build version of the site
 #
-version:                                2024.3.8
+version:                                2024.3.14
 
 # copyright
 # ------------------------------------------------------------------------------
@@ -216,7 +216,7 @@ doctype:                                html
 # ------------------------------------------------------------------------------
 #
 title:                                  J1 Template
-title_extention:                        Free Bootstrap V5 theme for Jekyll
+title_extention:                        Free Bootstrap V5 Theme for Jekyll
 
 slogan:                                 Free Jekyll Template based on Bootstrap V5 for websites,
                                         landing pages, blogs, portfolios, directories, ecommerce

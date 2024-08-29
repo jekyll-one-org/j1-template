@@ -242,7 +242,7 @@ j1.adapter.themes = (function (j1, window) {
 //      var pageState           = $('#no_flicker').css("display");
         var pageVisible         = (pageState === 'block') ? true : false;
         var j1CoreFinished      = (j1.getState() === 'finished') ? true : false;
-        var atticFinished       = (j1.adapter.attic.getState() === 'finished') ? true: false;
+//      var atticFinished       = (j1.adapter.attic.getState() === 'finished') ? true: false;
 //      var userStateDetected   = j1.existsCookie(cookie_names.user_state);
 
         // counter how often the check should be done for the existence

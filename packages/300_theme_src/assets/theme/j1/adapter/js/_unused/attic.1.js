@@ -154,7 +154,8 @@ j1.adapter.attic = ((j1, window) => {
         var pageState   = $('#no_flicker').css("display");
         var pageVisible = (pageState === 'block') ? true: false;
 
-        if (pageVisible) {
+//      if (pageVisible) {
+        if (true) {
           startTimeModule = Date.now();
 
           _this.setState('started');
@@ -169,7 +170,7 @@ j1.adapter.attic = ((j1, window) => {
             // jadams, 2023-05-12: page visible while loading the attic
             // cause high numbers for cumulative layout shift (CLS)
             //
-            // logger.debug('\n' + 'hide attic on initialization');
+            logger.debug('\n' + 'hide attic on initialization');
             // $('#no_flicker').css('display', 'none');
           }
 
@@ -416,7 +417,7 @@ j1.adapter.attic = ((j1, window) => {
               }
 
               // show page if attic finalized
-              $('#no_flicker').css('display', 'block');
+              //$('#no_flicker').css('display', 'block');
 
               // jadams, 2022-08-09:
               // resize the (background-)image to make sure the 'attic'
@@ -424,7 +425,7 @@ j1.adapter.attic = ((j1, window) => {
               // expands 'multiline' on small viewports
               // e.g. on mobile devices
               //
-              $('#{{attic_id}}').backstretch('resize');
+              // $('#{{attic_id}}').backstretch('resize');
 
              _this.setState('finished');
              logger.debug('\n' + 'state: ' + _this.getState());
@@ -675,7 +676,7 @@ j1.adapter.attic = ((j1, window) => {
             // });
 
             logger.info('\n' + 'initialize attic on id {{attic_id}}: started');
-            {{attic_id}}_runner (atticOptions);
+            {attic_id}}_runner (atticOptions);
 
           } // END apply CSS styles|start ATTIC RUNNER
 
@@ -691,7 +692,7 @@ j1.adapter.attic = ((j1, window) => {
           $('#no_flicker').addClass('mt-3');
 
           logger.warn('\n' + 'attic on id {{attic_id}}: disabled');
-          $('#no_flicker').css('display', 'block');
+          // $('#no_flicker').css('display', 'block');
         {% endif %} // END if header enabled
       {% endfor %} // END for item in header_config.attics
 

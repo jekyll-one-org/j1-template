@@ -160,9 +160,9 @@ j1.adapter.fab = ((j1, window) => {
         var pageState      = $('#content').css("display");
         var pageVisible    = (pageState === 'block') ? true : false;
         var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
-        var atticFinished  = (j1.adapter.attic.getState() === 'finished') ? true: false;
+        // var atticFinished  = (j1.adapter.attic.getState() === 'finished') ? true: false;
 
-        if (pageVisible && j1CoreFinished && atticFinished) {
+        if (pageVisible && j1CoreFinished) {
           startTimeModule = Date.now();
 
           _this.setState('started');

@@ -277,7 +277,7 @@
 #      region:                          head|body-footer
 #      layout:                          [ layout_name(s)|all ]
 #      required:                        always|ondemand
-#      script_load:                     sync|defer|async
+#      script_load:                     defer|async
 #      pass_init_data:                  true|false
 #
 #      data:
@@ -353,7 +353,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   true
 
       data:
@@ -388,7 +388,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -411,7 +411,7 @@ resources:
       layout:                           [ home, page, post ]
       required:                         always
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   true
 
       data:
@@ -434,8 +434,8 @@ resources:
       region:                           head
       layout:                           [ all ]
       required:                         ondemand
-      script_load:                      defer  #async
-      dependencies:                     false
+      script_load:                      defer
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -459,7 +459,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -484,7 +484,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -509,7 +509,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -534,7 +534,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   true
 
       data:
@@ -559,7 +559,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -583,7 +583,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -611,7 +611,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -636,7 +636,7 @@ resources:
       region:                           head
       required:                         always
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   true
 
       data:
@@ -661,7 +661,7 @@ resources:
       layout:                           [ home, page, post ]
       required:                         always
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -686,7 +686,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -714,7 +714,7 @@ resources:
       layout:                           [ home, page, post ]
       required:                         always
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   true
 
       data:
@@ -741,7 +741,7 @@ resources:
       layout:                           [all]
       required:                         always
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -770,7 +770,7 @@ resources:
       layout:                           [ all ]
       required:                         ondemand
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -797,7 +797,7 @@ resources:
       layout:                           [ home, page, post ]
       required:                         always
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -822,7 +822,7 @@ resources:
       layout:                           [ home, page, post ]
       required:                         always
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -844,7 +844,7 @@ resources:
       layout:                           [ home, page, post, collection, blog_archive, app ]
       required:                         always
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -866,7 +866,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -891,7 +891,7 @@ resources:
       layout:                           [ home, page, post ]
       required:                         always
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -915,7 +915,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -939,7 +939,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -965,8 +965,8 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
-      script_load:                      defer  #async
-      dependencies:                     false
+      script_load:                      defer
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -988,7 +988,7 @@ resources:
       layout:                           [ home, page, post ]
       required:                         ondemand
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -1011,7 +1011,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -1038,7 +1038,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -1063,7 +1063,7 @@ resources:
       region:                           head
       required:                         ondemand
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   true
 
       data:
@@ -1086,8 +1086,8 @@ resources:
       layout:                           [ all ]
       region:                           head
       required:                         ondemand
-      script_load:                      defer  #async
-      dependencies:                     false
+      script_load:                      defer
+#     dependencies:                     false
       pass_init_data:                   true
 
       data:
@@ -1113,8 +1113,8 @@ resources:
       region:                           head
       layout:                           [ all ]
       required:                         ondemand
-      script_load:                      defer  #async
-      dependencies:                     false
+      script_load:                      defer
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -1138,7 +1138,7 @@ resources:
       layout:                           [ all ]
       required:                         ondemand
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -1166,7 +1166,7 @@ resources:
       layout:                           [ home, page, post ]
       required:                         always
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -1187,8 +1187,8 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
-      script_load:                      defer  #async
-      dependencies:                     false
+      script_load:                      defer
+#     dependencies:                     false
       pass_init_data:                   true
 
       data:
@@ -1213,8 +1213,8 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
-      script_load:                      defer  #async
-      dependencies:                     false
+      script_load:                      defer
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -1242,7 +1242,7 @@ resources:
       layout:                           [ home, page, post ]
       required:                         ondemand
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -1284,8 +1284,8 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
-      script_load:                      defer  #async
-      dependencies:                     false
+      script_load:                      defer
+#     dependencies:                     false
       pass_init_data:                   true
 
       data:
@@ -1312,8 +1312,8 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
-      script_load:                      defer  #async
-      dependencies:                     false
+      script_load:                      defer
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -1353,8 +1353,8 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
-      script_load:                      defer  #async
-      dependencies:                     false
+      script_load:                      defer
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -1392,8 +1392,8 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
-      script_load:                      defer  #async
-      dependencies:                     false
+      script_load:                      defer
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -1414,8 +1414,8 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
-      script_load:                      defer  #async
-      dependencies:                     false
+      script_load:                      defer
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -1436,8 +1436,8 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
-      script_load:                      defer  #async
-      dependencies:                     false
+      script_load:                      defer
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -1458,8 +1458,8 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
-      script_load:                      defer  #async
-      dependencies:                     false
+      script_load:                      defer
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -1482,8 +1482,8 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
-      script_load:                      defer  #async
-      dependencies:                     false
+      script_load:                      defer
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -1504,8 +1504,8 @@ resources:
       region:                           head
       layout:                           [ all ]
       required:                         ondemand
-      script_load:                      defer  #async
-      dependencies:                     false
+      script_load:                      defer
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -1528,8 +1528,8 @@ resources:
       region:                           head
       layout:                           [ all ]
       required:                         ondemand
-      script_load:                      defer  #async
-      dependencies:                     false
+      script_load:                      defer
+#     dependencies:                     false
       pass_init_data:                   true
 
       data:
@@ -1550,8 +1550,8 @@ resources:
       region:                           head
       layout:                           [ all ]
       required:                         ondemand
-      script_load:                      defer  #async
-      dependencies:                     false
+      script_load:                      defer
+#     dependencies:                     false
       pass_init_data:                   true
 
       data:
@@ -1580,7 +1580,7 @@ resources:
       layout:                           [ all ]
       required:                         ondemand
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -1602,7 +1602,7 @@ resources:
       layout:                           [ home, page, post ]
       required:                         always
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -1627,7 +1627,7 @@ resources:
       layout:                           [ all ]
       required:                         ondemand
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -1649,7 +1649,7 @@ resources:
       layout:                           [ home, page, post ]
       required:                         ondemand
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -1673,8 +1673,8 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
-      script_load:                      defer  #async
-      dependencies:                     false
+      script_load:                      defer
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -1706,8 +1706,8 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
-      script_load:                      defer  #async
-      dependencies:                     false
+      script_load:                      defer
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -1734,8 +1734,8 @@ resources:
       region:                           head
       layout:                           [ page ]
       required:                         ondemand
-      script_load:                      defer  #async
-      dependencies:                     false
+      script_load:                      defer
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -1767,7 +1767,7 @@ resources:
       layout:                           [ home, page, post ]
       required:                         always
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -1790,12 +1790,12 @@ resources:
       layout:                           [ all ]
       required:                         always
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
         css:                            []
-        files:                          [adapter/js/lazyCSSLoader.js ]
+        files:                          [ adapter/js/lazyCSSLoader.js ]
         js:                             []
         init_function:                  [ j1.adapter.lazyCSSLoader.init ]
 
@@ -1813,7 +1813,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -1846,7 +1846,7 @@ resources:
       layout:                           [ home, page, post ]
       required:                         ondemand
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -1874,7 +1874,7 @@ resources:
       layout:                           [ home, page, post ]
       required:                         always
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -1897,7 +1897,7 @@ resources:
       layout:                           [ all ]
       required:                         ondemand
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -1920,7 +1920,7 @@ resources:
       layout:                           [ all ]
       required:                         ondemand
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -1942,8 +1942,8 @@ resources:
       region:                           head
       layout:                           [ page ]
       required:                         ondemand
-      script_load:                      defer  #async
-      dependencies:                     false
+      script_load:                      defer
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -1967,8 +1967,8 @@ resources:
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
-      script_load:                      defer  #async
-      dependencies:                     false
+      script_load:                      defer
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
@@ -1995,7 +1995,7 @@ resources:
       layout:                           [ home, page, post ]
       required:                         always
       script_load:
-      dependencies:                     false
+#     dependencies:                     false
       pass_init_data:                   false
 
       data:
