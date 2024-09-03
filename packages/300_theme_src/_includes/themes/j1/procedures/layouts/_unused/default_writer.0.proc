@@ -76,26 +76,7 @@
             {% capture path %}{{base}}/{{path}}/{{file}}{% endcapture %}
             {% include {{ path }} region='head' %}
           {% endif %}
-        {% endif %}
-      {% comment %} end placement: 'head'
-      -------------------------------------------------------------------------- {% endcomment %}
-      <!-- [INFO   ] [j1.layout.default_writer.proc         ] [ layout: '{{page.layout}}', end placement: 'head' ] -->
-
-        {% comment %} Collect the BODY region
-        ------------------------------------------------------------------------ {% endcomment %}
-        {% when 'body' %}
-          {% if placement == 'body' %}
-            <!-- [INFO   ] [j1.layout.default_writer.proc         ] [ start processing: load region body, layout: {{page.layout}} ] -->
-            {% if type == 'async' %}
-              <div id="{{ id }}" class="{{ class }}"></div>
-            {% elsif type == 'sync' %}
-              {% capture path %}{{base}}/{{path}}/{{file}}{% endcapture %}
-              {% include {{ path }} region='body' %}
-            {% endif %}
-          {% endif %}
-        {% comment %} end placement: 'body'
-        ------------------------------------------------------------------------ {% endcomment %}
-        <!-- [INFO   ] [j1.layout.default_writer.proc         ] [ layout: '{{page.layout}}', end placement: 'body' ] -->
+        {% endif %} {% comment %} END placement {% endcomment %}
 
       {% comment %} Collect the BODY-NAVIGATION region
       -------------------------------------------------------------------------- {% endcomment %}
@@ -109,9 +90,6 @@
             {% include {{ path }} region='body-navigation' %}
           {% endif %}
         {% endif %}
-      {% comment %} end placement: 'body-navigation'
-      ------------------------------------------------------------------------ {% endcomment %}
-      <!-- [INFO   ] [j1.layout.default_writer.proc         ] [ layout: '{{page.layout}}', end placement: 'body-navigation' ] -->
 
       {% comment %} Collect the BODY-HEADER region
       -------------------------------------------------------------------------- {% endcomment %}
@@ -125,10 +103,7 @@
             {% capture path %}{{base}}/{{path}}/{{file}}{% endcapture %}
             {% include {{ path }} region='body-header' %}
           {% endif %}
-        {% endif %}
-      {% comment %} end placement: 'body-header'
-      ------------------------------------------------------------------------ {% endcomment %}
-      <!-- [INFO   ] [j1.layout.default_writer.proc         ] [ layout: '{{page.layout}}', end placement: 'body-header' ] -->
+        {% endif %} {% comment %} END if placement {% endcomment %}
 
       {% comment %} Collect the BODY-FOOTER region
       -------------------------------------------------------------------------- {% endcomment %}
@@ -141,10 +116,7 @@
             {% capture path %}{{base}}/{{path}}/{{file}}{% endcapture %}
             {% include {{ path }} region='body-footer' %}
           {% endif %}
-        {% endif %}
-      {% comment %} end placement: 'body-footer'
-      ------------------------------------------------------------------------ {% endcomment %}
-      <!-- [INFO   ] [j1.layout.default_writer.proc         ] [ layout: '{{page.layout}}', end placement: 'body-footer' ] -->
+        {% endif %} {% comment %} END if placement {% endcomment %}
 
       {% else %}
           {% comment %} Exception: Unknown region
@@ -175,10 +147,8 @@
           </div>
 
       {% endcase %}
-    {% endif %}
-    {% comment %} END if (lane) enabled {% endcomment %}
-
-    <!-- [INFO   ] [j1.layout.default_writer.proc         ] [ layout: '{{page.layout}}', end processing: load regions ] -->
+    {% endif %} {% comment %} END if (lane) enabled {% endcomment %}
+    <!-- [INFO   ] [j1.layout.default_writer.proc         ] [ end processing: load region head, layout: {{page.layout}} ] -->
   {% endfor %}
 {% endfor %}
 
@@ -187,5 +157,4 @@
 <!-- [INFO   ] [j1.layout.default_writer.proc         ] [ placement for all lane items finished ] -->
 <!-- [DEBUG  ] [j1.layout.default_writer.proc         ] [ reset all lane items ] -->
 <!-- [INFO   ] [j1.layout.default_writer.proc         ] [ end processing ] -->
-
-{% assign items = false %}
+{% assign items = nil %}

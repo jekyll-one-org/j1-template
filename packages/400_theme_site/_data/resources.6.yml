@@ -341,12 +341,12 @@ resources:
   # NOTE: load always 'unolight' as a 'bese' (e.g. for unodark, but should be removed)
   # NOTE: Changed J1 Theme Core resources for template.js bcecause of potential AV Scanner issues of min version
   #
-  - name:                               J1 Template Core
+  - name:                               J1 Theme Core
     resource:
       enabled:                          true
 
       id:                               core
-      comment:                          J1 Template Core
+      comment:                          Module J1 Theme Core
       region:                           head
       layout:                           [ all ]
       required:                         always
@@ -403,7 +403,7 @@ resources:
 
       id:                               speak2me
       comment:                          Module speak2me
-      region:                           body-footer
+      region:                           body
       layout:                           [ home, page, post ]
       required:                         always
       script_load:                      sync
@@ -426,7 +426,7 @@ resources:
 
       id:                               bmd
       comment:                          Module BMD
-      region:                           body-footer
+      region:                           body
       layout:                           [ all ]
       required:                         ondemand
       script_load:                      defer
@@ -449,7 +449,7 @@ resources:
 
       id:                               ga-optin
       comment:                          Module GA OptIn
-      region:                           body-footer
+      region:                           head
       layout:                           [ all ]
       required:                         always
       script_load:                      sync
@@ -473,7 +473,7 @@ resources:
 
       id:                               logger
       comment:                          Module Logger
-      region:                           body-footer
+      region:                           head
       layout:                           [ all ]
       required:                         always
       script_load:                      sync
@@ -497,7 +497,7 @@ resources:
 
       id:                               backstretch
       comment:                          Module Backstretch
-      region:                           body-footer
+      region:                           head
       layout:                           [ all ]
       required:                         always
       script_load:                      sync
@@ -521,7 +521,7 @@ resources:
 
       id:                               attic
       comment:                          Module Attic
-      region:                           body-footer
+      region:                           head
       layout:                           [ all ]
       required:                         always
       script_load:                      sync
@@ -545,7 +545,7 @@ resources:
 
       id:                               navigator
       comment:                          Module Navigator
-      region:                           body-footer
+      region:                           head
       layout:                           [ all ]
       required:                         always
       script_load:                      sync
@@ -568,7 +568,7 @@ resources:
 
       id:                               mmenu
       comment:                          Module MMenu
-      region:                           body-footer
+      region:                           head
       layout:                           [ all ]
       required:                         always
       script_load:                      sync
@@ -595,7 +595,7 @@ resources:
 
       id:                               themes
       comment:                          Module Themes
-      region:                           body-footer
+      region:                           head
       layout:                           [ all ]
       required:                         always
       script_load:                      sync
@@ -620,7 +620,7 @@ resources:
       id:                               toccer
       comment:                          Module Toccer
       layout:                           [ page, post, collection, blog_archive ]
-      region:                           body-footer
+      region:                           head
       required:                         always
       script_load:                      sync
       pass_init_data:                   true
@@ -643,7 +643,7 @@ resources:
 
       id:                               cookie-consent
       comment:                          Module Cookie Consent
-      region:                           body-footer
+      region:                           head
       layout:                           [ home, page, post ]
       required:                         always
       script_load:                      sync
@@ -667,7 +667,7 @@ resources:
 
       id:                               lunr
       comment:                          Module Lunr
-      region:                           body-footer
+      region:                           head
       layout:                           [ all ]
       required:                         always
       script_load:                      sync
@@ -694,7 +694,7 @@ resources:
 
       id:                               fab
       comment:                          Module FAB
-      region:                           body-footer
+      region:                           head
       layout:                           [ page, post, home ]
       required:                         always
       script_load:                      sync
@@ -720,7 +720,7 @@ resources:
 
       id:                               preload-polyfill
       comment:                          Module Preload Polyfill
-      region:                           body-footer
+      region:                           head
       layout:                           [all]
       required:                         always
       script_load:                      sync
@@ -748,7 +748,7 @@ resources:
 
       id:                               jquery-ui
       comment:                          Module jQueryUI
-      region:                           body-footer
+      region:                           head
       layout:                           [ all ]
       required:                         ondemand
       script_load:                      sync
@@ -774,7 +774,7 @@ resources:
 
       id:                               theme-switcher
       comment:                          Module Theme Switcher
-      region:                           body-footer
+      region:                           head
       layout:                           [ home, page, post ]
       required:                         always
       script_load:                      sync
@@ -798,7 +798,7 @@ resources:
 
       id:                               responsive-tables
       comment:                          Module Responsive Tables
-      region:                           body-footer
+      region:                           body
       layout:                           [ home, page, post ]
       required:                         always
       script_load:                      sync
@@ -819,7 +819,7 @@ resources:
 
       id:                               asciidoctor
       comment:                          Module Asciidoctor
-      region:                           body-footer
+      region:                           head
       layout:                           [ home, page, post, collection, blog_archive, app ]
       required:                         always
       script_load:                      sync
@@ -840,7 +840,7 @@ resources:
 
       id:                               text-resizer
       comment:                          Module Text Resizer
-      region:                           body-footer
+      region:                           head
       layout:                           [ all ]
       required:                         always
       script_load:                      sync
@@ -864,7 +864,7 @@ resources:
 
       id:                               ms-dropdown
       comment:                          Module MS Dropdown
-      region:                           body-footer
+      region:                           head
       layout:                           [ home, page, post ]
       required:                         always
       script_load:                      sync
@@ -887,7 +887,7 @@ resources:
 
       id:                               translator
       comment:                          Module Translator
-      region:                           body-footer
+      region:                           head
       layout:                           [ all ]
       required:                         always
       script_load:                      sync
@@ -910,7 +910,7 @@ resources:
 
       id:                               analytics
       comment:                          Module Analytics
-      region:                           body-footer
+      region:                           head
       layout:                           [ all ]
       required:                         always
       script_load:                      sync
@@ -936,7 +936,7 @@ resources:
 
       id:                               custom-module
       comment:                          Module Custom Module
-      region:                           body-footer
+      region:                           body
       layout:                           [ home, page, post ]
       required:                         ondemand
       script_load:                      defer
@@ -957,7 +957,7 @@ resources:
 
       id:                               custom-function
       comment:                          Module Custom Function
-      region:                           body-footer
+      region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
       script_load:                      sync
@@ -979,7 +979,7 @@ resources:
 
       id:                               rouge
       comment:                          Module Rouge
-      region:                           body-footer
+      region:                           head
       layout:                           [ all ]
       required:                         always
       script_load:                      sync
@@ -1005,7 +1005,7 @@ resources:
 
       id:                               animate-css
       comment:                          Module AnimateCSS
-      region:                           body-footer
+      region:                           head
       layout:                           [ all ]
       required:                         always
       script_load:                      sync
@@ -1030,7 +1030,7 @@ resources:
       id:                               iframer
       comment:                          Module IFramer
       layout:                           [ home, page, post ]
-      region:                           body-footer
+      region:                           head
       required:                         ondemand
       script_load:                      sync
       pass_init_data:                   true
@@ -1053,7 +1053,7 @@ resources:
       id:                               lightbox
       comment:                          Module Lightbox
       layout:                           [ all ]
-      region:                           body-footer
+      region:                           body
       required:                         ondemand
       script_load:                      defer
       pass_init_data:                   true
@@ -1078,7 +1078,7 @@ resources:
 
       id:                               iconify
       comment:                          Module Iconify framework
-      region:                           body-footer
+      region:                           body
       layout:                           [ all ]
       required:                         ondemand
       script_load:                      defer
@@ -1101,7 +1101,7 @@ resources:
 
       id:                               algolia-search
       comment:                          Module Algolia Search
-      region:                           body-footer
+      region:                           head
       layout:                           [ all ]
       required:                         ondemand
       script_load:                      sync
@@ -1128,7 +1128,7 @@ resources:
 
       id:                               clipboard
       comment:                          Module Clipboard
-      region:                           body-footer
+      region:                           head
       layout:                           [ home, page, post ]
       required:                         always
       script_load:                      sync
@@ -1149,7 +1149,7 @@ resources:
 
       id:                               carousel
       comment:                          Module Carousel
-      region:                           body-footer
+      region:                           body
       layout:                           [ home, page, post ]
       required:                         ondemand
       script_load:                      defer
@@ -1174,7 +1174,7 @@ resources:
 
       id:                               master-slider
       comment:                          Module Master Slider
-      region:                           body-footer
+      region:                           body
       layout:                           [ home, page, post ]
       required:                         ondemand
       script_load:                      defer
@@ -1201,7 +1201,7 @@ resources:
 
       id:                               master-slider-pro
       comment:                          Module Master Slider Professional
-      region:                           body-footer
+      region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
       script_load:                      sync
@@ -1243,7 +1243,7 @@ resources:
 
       id:                               gallery
       comment:                          Module Gallery
-      region:                           body-footer
+      region:                           body
       layout:                           [ home, page, post ]
       required:                         ondemand
       script_load:                      defer
@@ -1270,7 +1270,7 @@ resources:
 
       id:                               lightgallery
       comment:                          Module J1 lightGallery V2
-      region:                           body-footer
+      region:                           body
       layout:                           [ home, page, post ]
       required:                         ondemand
       script_load:                      defer
@@ -1310,7 +1310,7 @@ resources:
 
       id:                               videojs
       comment:                          Module VideoJS
-      region:                           body-footer
+      region:                           body
       layout:                           [ home, page, post ]
       required:                         ondemand
       script_load:                      defer
@@ -1348,7 +1348,7 @@ resources:
 
       id:                               tiktoc-player
       comment:                          Module TikToc Player
-      region:                           body-footer
+      region:                           body
       layout:                           [ home, page, post ]
       required:                         ondemand
       script_load:                      defer
@@ -1369,7 +1369,7 @@ resources:
 
       id:                               dailymotion-player
       comment:                          Module Dailymotion Player
-      region:                           body-footer
+      region:                           body
       layout:                           [ home, page, post ]
       required:                         ondemand
       script_load:                      defer
@@ -1390,7 +1390,7 @@ resources:
 
       id:                               vimeo-player
       comment:                          Module Vimeo Player
-      region:                           body-footer
+      region:                           body
       layout:                           [ home, page, post ]
       required:                         ondemand
       script_load:                      defer
@@ -1411,7 +1411,7 @@ resources:
 
       id:                               wistia-player
       comment:                          Module Wistia Player
-      region:                           body-footer
+      region:                           body
       layout:                           [ home, page, post ]
       required:                         ondemand
       script_load:                      defer
@@ -1434,7 +1434,7 @@ resources:
 
       id:                               range-slider
       comment:                          Module Range Slider
-      region:                           body-footer
+      region:                           body
       layout:                           [ home, page, post ]
       required:                         ondemand
       script_load:                      defer
@@ -1455,7 +1455,7 @@ resources:
 
       id:                               scroller
       comment:                          Module Scroller
-      region:                           body-footer
+      region:                           body
       layout:                           [ all ]
       required:                         ondemand
       script_load:                      defer
@@ -1478,7 +1478,7 @@ resources:
 
       id:                               advertising
       comment:                          Module Advertising
-      region:                           body-footer
+      region:                           body
       layout:                           [ all ]
       required:                         ondemand
       script_load:                      defer
@@ -1499,7 +1499,7 @@ resources:
 
       id:                               comments
       comment:                          Module Comments
-      region:                           body-footer
+      region:                           body
       layout:                           [ all ]
       required:                         ondemand
       script_load:                      defer
@@ -1527,7 +1527,7 @@ resources:
 
       id:                               require-js
       comment:                          Module RequireJS
-      region:                           body-footer
+      region:                           head
       layout:                           [ all ]
       required:                         ondemand
       script_load:                      sync
@@ -1548,7 +1548,7 @@ resources:
 
       id:                               waves
       comment:                          Module Waves
-      region:                           body-footer
+      region:                           head
       layout:                           [ home, page, post ]
       required:                         always
       script_load:                      sync
@@ -1572,7 +1572,7 @@ resources:
 
       id:                               js-cookie
       comment:                          Module jsCookie
-      region:                           body-footer
+      region:                           head
       layout:                           [ all ]
       required:                         ondemand
       script_load:                      sync
@@ -1593,7 +1593,7 @@ resources:
 
       id:                               particles
       comment:                          Module Particles
-      region:                           body-footer
+      region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
       script_load:                      sync
@@ -1617,7 +1617,7 @@ resources:
 
       id:                               slick-slider
       comment:                          Module Slick Slider
-      region:                           body-footer
+      region:                           body
       layout:                           [ home, page, post ]
       required:                         ondemand
       script_load:                      defer
@@ -1649,7 +1649,7 @@ resources:
 
       id:                               masonry
       comment:                          Module Masonry
-      region:                           body-footer
+      region:                           body
       layout:                           [ home, page, post ]
       required:                         ondemand
       script_load:                      defer
@@ -1676,7 +1676,7 @@ resources:
 
       id:                               icon-picker
       comment:                          Module J1 Icon Picker
-      region:                           body-footer
+      region:                           body
       layout:                           [ page ]
       required:                         ondemand
       script_load:                      defer
@@ -1707,7 +1707,7 @@ resources:
 
       id:                               theme-toggler
       comment:                          Module heme Toggler
-      region:                           body-footer
+      region:                           head
       layout:                           [ home, page, post ]
       required:                         always
       script_load:                      sync
@@ -1729,7 +1729,7 @@ resources:
 
       id:                               lazy-css-loader
       comment:                          Module lazyCSSLoader
-      region:                           body-footer
+      region:                           head
       layout:                           [ all ]
       required:                         always
       script_load:                      sync
@@ -1751,7 +1751,7 @@ resources:
 
       id:                               lazy-loader
       comment:                          Module lazyLoader
-      region:                           body-footer
+      region:                           head
       layout:                           [ all ]
       required:                         always
       script_load:                      sync
@@ -1783,7 +1783,7 @@ resources:
 
       id:                               dropdowns
       comment:                          Module J1 Dropdown Menus
-      region:                           body-footer
+      region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
       script_load:                      sync
@@ -1810,7 +1810,7 @@ resources:
 
       id:                               slim-select
       comment:                          Module Slim Select
-      region:                           body-footer
+      region:                           body
       layout:                           [ home, page, post ]
       required:                         always
       script_load:                      sync
@@ -1832,7 +1832,7 @@ resources:
 
       id:                               chat-bot
       comment:                          Module Chatbot
-      region:                           body-footer
+      region:                           head
       layout:                           [ all ]
       required:                         ondemand
       script_load:                      sync
@@ -1854,7 +1854,7 @@ resources:
 
       id:                               doc-search
       comment:                          Module DocSearch
-      region:                           body-footer
+      region:                           head
       layout:                           [ all ]
       required:                         ondemand
       script_load:                      sync
@@ -1876,7 +1876,7 @@ resources:
 
       id:                               gemini
       comment:                          Module Gemini
-      region:                           body-footer
+      region:                           body
       layout:                           [ page ]
       required:                         ondemand
       script_load:                      defer
@@ -1900,7 +1900,7 @@ resources:
 
       id:                               amplitudejs
       comment:                          Module AmplitudeJS
-      region:                           body-footer
+      region:                           body
       layout:                           [ home, page, post ]
       required:                         ondemand
       script_load:                      defer
@@ -1926,7 +1926,7 @@ resources:
 
       id:                               scrollbars
       comment:                          Module jqueryScrollbar
-      region:                           body-footer
+      region:                           body
       layout:                           [ home, page, post ]
       required:                         always
       script_load:                      defer

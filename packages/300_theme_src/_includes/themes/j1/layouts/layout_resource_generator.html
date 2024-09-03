@@ -11,9 +11,6 @@
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
- # NOTE:
- #   Do NOT add any RESOURCES here. Go for ...
- # -----------------------------------------------------------------------------
  # Test data:
  #    liquid_var:  {{ liquid_var | debug }}
  # -----------------------------------------------------------------------------
@@ -42,7 +39,7 @@
     {% if element[0] == 'resource' %}
       {% assign resource = element[1] %}
       <!-- [INFO   ] [j1.layout_resource_generator.html     ] [ process resource: {{resource.id}} ] -->
-      {% include {{ resource_writer }} region=placement global=globals resource=resource %}
+      {% include {{resource_writer}} region=placement global=globals resource=resource %}
     {% endif %}
   {% endfor %}
 {% endfor %}

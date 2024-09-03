@@ -72,7 +72,7 @@
           {% when 'body-main' %}
 
             {% if placement == 'body-main' %}
-              <!-- [INFO   ] [j1.layout.content_writer.proc         ] [ load region: 'body-main', layout: '{{page.layout}}' ] -->
+              <!-- [INFO   ] [j1.layout.content_writer.proc         ] [ load region 'body-main' for layout: {{page.layout}} ] -->
               {% if type == 'async' %}
                 <div id="{{id}}" class="{{class}}"></div>
               {% elsif type == 'sync' %}
@@ -86,7 +86,7 @@
           {% when 'body-footer' %}
 
             {% if placement == 'body-footer' %}
-              <!-- [INFO   ] [j1.layout.content_writer.proc         ] [ load region: 'body-footer', layout: '{{page.layout}}' ] -->
+              <!-- [INFO   ] [j1.layout.content_writer.proc         ] [ load region body-footer for layout: {{page.layout}} ] -->
               {% if type == 'async' %}
                 <div id="{{id}}" class="{{class}}"></div>
               {% elsif type == 'sync' %}
@@ -107,5 +107,4 @@
 <!-- [INFO   ] [j1.layout.content_writer.proc         ] [ placement for all lane items finished ] -->
 <!-- [DEBUG  ] [j1.layout.content_writer.proc         ] [ reset all lane items ] -->
 <!-- [INFO   ] [j1.layout.content_writer.proc         ] [ end processing ] -->
-
-{% assign items = false %}
+{% assign items = nil %}

@@ -190,30 +190,30 @@ lanes:
       id:                               footer_uno
       region:                           body-footer
       type:                             async
-      class:                            active_footer
+      class:                            lazy active_footer
 
   # ----------------------------------------------------------------------------
-  # RESOURCE loader (BODY-FOOTER region)
+  # RESOURCE loader (BODY region)
   #
   - lane:
       enabled:                          true
-      region:                           body-footer
+      region:                           body
       type:                             sync
       base:                             _includes/themes/j1
       path:                             layouts
       file:                             layout_resource_generator.html
 
   # ----------------------------------------------------------------------------
-  # MODULE loader (BODY-FOOTER region)
-  # Generate all module initializers for modules specified for a page.
+  # MODULE container
+  # Generate all initializers for the JS components specified for a page.
   #
-  - lane:
-      enabled:                          true
-      region:                           body-footer
-      type:                             sync
-      base:                             _includes/themes/j1
-      path:                             layouts
-      file:                             layout_module_generator.html
+  # - lane:
+  #     enabled:                          true
+  #     region:                           body
+  #     type:                             sync
+  #     base:                             _includes/themes/j1
+  #     path:                             layouts
+  #     file:                             layout_module_generator.html
 
 # ------------------------------------------------------------------------------
 # END config

@@ -1,0 +1,55 @@
+Where to load js files in a web  page for best performance an do not block page
+rendering?
+
+To load JavaScript files in a web page for optimal performance and avoid
+blocking page rendering, consider these strategies:
+
+1. Defer loading:
+
+Use the defer attribute on your <script> tag:
+
+HTML
+<script defer src="your-script.js"></script>
+
+This tells the browser to download the script asynchronously while parsing
+the HTML. The script will execute after the HTML has been parsed, but before
+the DOMContentLoaded event fires.
+
+2. Async loading:
+
+Use the async attribute on your <script> tag:
+
+HTML
+<script async src="your-script.js"></script>
+
+This tells the browser to download the script asynchronously and execute it
+as soon as it's available, without blocking the page rendering.
+However, the script may execute before the HTML has been fully parsed,
+potentially causing issues if it depends on elements that haven't been
+loaded yet.
+
+3. Load scripts at the bottom of the <body>:
+
+Place your <script> tags at the very bottom of your <body> content.
+This ensures that the HTML is parsed and rendered before the scripts are executed, minimizing the blocking effect.
+
+4. Minimize script size:
+
+Optimize your JavaScript code for size by:
+Minifying it to remove unnecessary characters.
+Compressing it using tools like Gzip.
+Using a bundler like Webpack to combine multiple scripts into a single file.
+
+5. Use a CDN:
+
+Deliver your JavaScript files from a Content Delivery Network (CDN) to improve loading speed and reduce server load.
+
+6. Prioritize critical scripts:
+
+Identify the scripts that are essential for the initial page load and load them synchronously.
+Load non-critical scripts asynchronously or defer their loading.
+
+7. Use a script loader:
+
+Consider using a script loader library like RequireJS or SystemJS to manage script dependencies and load them asynchronously.
+By following these guidelines, you can significantly improve the performance of your web page and provide a better user experience.

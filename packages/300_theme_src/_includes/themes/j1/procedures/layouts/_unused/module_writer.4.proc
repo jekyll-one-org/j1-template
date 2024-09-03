@@ -48,6 +48,8 @@ NO need to load this again
 {% assign dependency_check_cycle      = resource_globals.dependency_check_cycle %}
 {% assign dependency_check_max_count  = resource_globals.dependency_check_timeout %}
 
+{% assign depends                     = '' %}
+
 {% comment %} helpers
 -------------------------------------------------------------------------------- {% endcomment %}
 {% capture adapter_prefix %}j1.adapter.{% endcapture %}
@@ -63,7 +65,21 @@ NO need to load this again
 
 {% if resource_settings.enabled and placement == 'body-footer' %}
 
-  {% comment %} Module default values collected by J1 Adapter
+  {% comment %} collect module dependency conditions (if any)
+  ------------------------------------------------------------------------------ {% endcomment %}
+  {% if resource_settings.dependencies %}
+    <!-- [INFO   ] [j1.layout.module_writer.proc          ] [ dependencies detected: {{resource_settings.dependencies | split:','}} ] -->
+
+    {% comment %} create dependency conditions (depends)
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% for dependency in resource_settings.dependencies %}
+      {% capture depends %}{{depends|append:{{adapter_prefix}}{{dependency}}{{state_condition}}{% endcapture %}
+      {% if forloop.last %}{% else %}{% capture depends %}{{depends|append:' && '}}{% endcapture %}{% endif %}
+    {% endfor %}
+  {% endif %}
+
+  {% comment %} NOTE:
+  Module default values collected by J1 Adapter
   ------------------------------------------------------------------------------ {% endcomment %}
 
   {% comment %} collect frontmatter|page options (page)
@@ -88,6 +104,7 @@ NO need to load this again
       {% if resource == resource_settings.id %} {% assign resource_valid = true %}  {% endif %}
     {% endfor %}
   {% endif %}
+
 
   {% if layout_valid and resource_valid and resource_settings.enabled %}
 
@@ -130,6 +147,26 @@ NO need to load this again
 
                 {{init_function}} (settings);
 
+                {% comment %} create resource_settings.dependencies (if any)
+                ----------------------------------------------------------------
+                {% if resource_settings.dependencies %}
+                  var interval_count = 0;
+                  var dependencies_met_{{resource_settings.id}} = setInterval(function() {
+                  var max_count      = {{dependency_check_max_count}};
+                    interval_count += 1;
+                    if ( {{depends}} ) {
+                      {{init_function}} (settings);
+                      clearInterval(dependencies_met_{{resource_settings.id}});
+                      }
+                    if (interval_count > max_count) {
+                      clearInterval(dependencies_met_{{resource_settings.id}});
+                      {{init_function}} (settings);
+                    }
+                  }, {{dependency_check_cycle}});
+                {% else %}
+                  {{init_function}} (settings);
+                {% endif %}
+                ---------------------------------------------------------------- {% endcomment %}
               {% else %}
                 {% comment %} no module specific frontmatter options
                 ---------------------------------------------------------------- {% endcomment %}
@@ -144,12 +181,35 @@ NO need to load this again
 
                   {{init_function}} (settings);
 
+                  {% comment %} create resource_settings.dependencies (if any)
+                  --------------------------------------------------------------
+                  {% if resource_settings.dependencies %}
+                    // Initialize module if resource_settings.dependencies reached state 'finished'
+                    var interval_count = 0;
+                    var max_count      = {{dependency_check_max_count}};
+                    var dependencies_met_{{resource_settings.id}} = setInterval(function() {
+                      interval_count += 1;
+                      if ( {{depends}} ) {
+                        {{init_function}} (settings);
+                        clearInterval(dependencies_met_{{resource_settings.id}});
+                        }
+                      if (interval_count > max_count) {
+                        clearInterval(dependencies_met_{{resource_settings.id}});
+                        {{init_function}} (settings);
+                      }
+                    }, {{dependency_check_cycle}});
+                  {% else %}
+                    {{init_function}} (settings);
+                  {% endif %}
+                  -------------------------------------------------------------- {% endcomment %}
                 {% else %}
                   {% comment %} NO DEFAULT settings
                   -------------------------------------------------------------- {% endcomment %}
 
                   {{init_function}}();
 
+
+                  
                 {% endif %}
               {% endif %}
             {% endfor %}
@@ -165,16 +225,18 @@ NO need to load this again
     <!-- [DEBUG  ] [j1.layout.module_writer.proc          ] [ reset all data_keys ] -->
 
     {% comment %} reset all data keys
+    ----------------------------------------------------------------------------
+    {% assign is_placed       = true %}
+    {% assign name            = nil %}
+    {% assign resource_settings.enabled         = nil %}
+    {% assign resource_settings.id              = nil %}
+    {% assign resource_settings.comment         = nil %}
+    {% assign resource_settings.layout         = nil %}
+    {% assign resource_settings.required        = nil %}
+    {% assign resource_settings.pass_init_data  = nil %}
+    {% assign resource_settings.dependencies    = nil %}
+    {% assign depends         = nil %}
+    {% assign resource_settings.data            = nil %}
     ---------------------------------------------------------------------------- {% endcomment %}
-    {% assign is_placed                         = true  %}
-    {% assign name                              = false %}
-    {% assign resource_settings.enabled         = false %}
-    {% assign resource_settings.id              = false %}
-    {% assign resource_settings.comment         = false %}
-    {% assign resource_settings.layout          = false %}
-    {% assign resource_settings.required        = false %}
-    {% assign resource_settings.pass_init_data  = false %}
-    {% assign resource_settings.data            = false %}
-
   {% endif %}
 {% endif %}

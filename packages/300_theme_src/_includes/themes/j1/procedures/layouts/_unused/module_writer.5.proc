@@ -165,16 +165,18 @@ NO need to load this again
     <!-- [DEBUG  ] [j1.layout.module_writer.proc          ] [ reset all data_keys ] -->
 
     {% comment %} reset all data keys
+    ----------------------------------------------------------------------------
+    {% assign is_placed       = true %}
+    {% assign name            = nil %}
+    {% assign resource_settings.enabled         = nil %}
+    {% assign resource_settings.id              = nil %}
+    {% assign resource_settings.comment         = nil %}
+    {% assign resource_settings.layout         = nil %}
+    {% assign resource_settings.required        = nil %}
+    {% assign resource_settings.pass_init_data  = nil %}
+    {% assign resource_settings.dependencies    = nil %}
+    {% assign depends         = nil %}
+    {% assign resource_settings.data            = nil %}
     ---------------------------------------------------------------------------- {% endcomment %}
-    {% assign is_placed                         = true  %}
-    {% assign name                              = false %}
-    {% assign resource_settings.enabled         = false %}
-    {% assign resource_settings.id              = false %}
-    {% assign resource_settings.comment         = false %}
-    {% assign resource_settings.layout          = false %}
-    {% assign resource_settings.required        = false %}
-    {% assign resource_settings.pass_init_data  = false %}
-    {% assign resource_settings.data            = false %}
-
   {% endif %}
 {% endif %}
