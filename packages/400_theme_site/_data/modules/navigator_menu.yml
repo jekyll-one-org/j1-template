@@ -457,6 +457,17 @@
   sublevel:
 
     # --------------------------------------------------------------------------
+    # Tester
+    #
+    - title:                            Tester
+      icon:                             eye
+      dropdown:
+
+      - title:                          Test Video Integrations
+        href:                           /pages/public/video_tester/
+        icon:                           video
+
+    # --------------------------------------------------------------------------
     # Previewer
     #
     - title:                            Previewer

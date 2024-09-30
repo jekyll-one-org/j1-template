@@ -1,6 +1,5 @@
 /*! js-cookie v3.0.5 | MIT */
-;
-(function (global, factory) {
+;(function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, (function () {
@@ -8,7 +7,8 @@
     var exports = global.Cookies = factory();
     exports.noConflict = function () { global.Cookies = current; return exports; };
   })());
-})(this, (function () { 'use strict';
+})(this, (function () {
+  "use strict";
 
   /* eslint-disable no-var */
   function assign (target) {

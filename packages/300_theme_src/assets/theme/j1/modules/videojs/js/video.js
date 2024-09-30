@@ -9,7 +9,7 @@
  * Available under Apache License Version 2.0
  * <https://github.com/mozilla/vtt.js/blob/main/LICENSE>
  *
- * https://vjs.zencdn.net/8.12.0/video.js 
+ * https://vjs.zencdn.net/8.12.0/video.js
  */
 
 (function (global, factory) {
@@ -22803,7 +22803,7 @@
         });
       }
 
-      // Enable debug mode to fire debugon event for all plugins.
+      // Enable debug mode to fire debug on event for all plugins.
       if (options.debug) {
         this.debug(true);
       }

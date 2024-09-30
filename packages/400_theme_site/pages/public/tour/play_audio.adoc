@@ -52,7 +52,11 @@ resource_options:
 // Set (local) page attributes here
 // -----------------------------------------------------------------------------
 // :page--attr:                         <attr-value>
-
+:time-num--string:                      5-10
+:time-en--string:                       Minutes
+:time-en--description:                  to read
+:time-de--string:                       Minuten
+:time-de--description:                  Lesezeit
 
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
@@ -76,10 +80,16 @@ players without the need for complex scripting. By leveraging J1 Template
 and Amplitude's API, web designers can craft unique interfaces that define
 the visual and functional aspects of a player's audio control elements.
 
-mdi:clock-time-five-outline[24px, md-gray mt-4 mb-5 mr-2]
-*5-10 Minutes* to read
+[subs=attributes]
+++++
+<div class="video-title">
+  <i class="mdib mdib-clock-outline mdib-24px mr-2"></i>
+  {time-num--string} {time-en--string} {time-en--description}
+</div>
+++++
 
-
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
 [role="mt-5"]
 == HTML 5 Audio
 

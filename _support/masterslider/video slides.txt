@@ -1,0 +1,102 @@
+Adding an Embed Video
+--------------------------------------------------------------------------------
+https://env.averta.net/en/step/adding-an-embed-video/
+
+Beside the background video, slides support embed videos, too. Each slide
+can contain one video that adds a play button over the slide and users
+can start playing the video by clicking on the button.
+
+Both embedded videos, like video from YouTube and Vimeo, and self-hosted
+video are supported by Master Slider.
+
+
+Embed video
+--------------------------------------------------------------------------------
+
+To add an embed video to the slide, you need to add the video URL as an
+anchor element with ms-slide-video class name. The anchor element should
+be a direct child element of the slide.
+
+	<div id="masterslider" class="master-slider">
+		<div class="ms-slide">
+			<a
+        href="https://www.youtube.com/watch?v=4dRR_0GzJgU"
+        class="ms-slide-video">
+      </a>
+		</div>
+		<!-- .... -->
+	</div>
+
+Note: Like the example above, you can set the link to the video page if
+the video is from YouTube or Vimeo. For other services you need to use the
+embed link address instead.
+
+
+Self-hosted video
+--------------------------------------------------------------------------------
+
+To add a self-hosted video as a slide video in the markup, you can define it
+by HTML video element. Add it as a direct child element of the slide with
+ms-slide-video class name.
+
+Then you need to specify the type of video player with data-player-type
+attribute of the video element.
+
+Master Slider supports MediaElement.js and Plyr.js and browsers’ native
+players to play self-hosted videos. To set the player type for each of the
+supported video players, you can use the following values for data-player-type
+attribute.
+
+mejs   – Specifies MediaElement.js video player.
+plyr   – Specifies Plyr.js video player.
+native – Determines the browser’s native video player. This type is not
+         recommended since the native video player is not available in all
+         browsers.
+
+The following example shows how to add the self-hosted video:
+
+	<div id="masterslider" class="master-slider">
+		<div class="ms-slide">
+			<video controls class="ms-slide-video" data-player-type="plyr">
+      	<source src=".../path/to/video.mp4" type="video/mp4"/>
+      	<source src=".../path/to/video.ogg" type="video/ogg"/>
+      </video>
+		</div>
+		<!-- .... -->
+	</div>
+
+Important: Custom video players like MediaElement.js or Plyr.js are not
+included in the slider source. Therefore, their assets are required to be
+imported to the page.
+
+
+Autoplay
+--------
+
+You can set slide video to start playing automatically. The video starts
+playing after selecting the slide. To enable it, you need to add
+data-autplay="true" attribute to the video element.
+
+	<div id="masterslider" class="master-slider">
+		<div class="ms-slide">
+			<video controls class="ms-slide-video" data-player-type="plyr" data-autoplay="true">
+            	<source src=".../path/to/video.mp4" type="video/mp4"/>
+            	<source src=".../path/to/video.ogg" type="video/ogg"/>
+            </video>
+		</div>
+		<div class="ms-slide">
+			<a href="https://www.youtube.com/watch?v=4dRR_0GzJgU" class="ms-slide-video" data-autoplay="true"></a>
+		</div>
+		<!-- .... -->
+	</div>
+
+Note: Autoplay may not work in some mobile devices since some mobile browsers
+ignore it.
+
+
+Go next after video ended
+--------------------------
+
+You can set the slider changes to the next slide after the video ends.
+To enable this option set data-goto-next="true" attribute to the video
+element.

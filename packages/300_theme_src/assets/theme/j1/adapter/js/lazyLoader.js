@@ -7,7 +7,7 @@ regenerate:                             true
 {% comment %}
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/adapter/js/lazyLoader.js
- # Liquid template to adapt the lazyLoader module(core)
+ # Liquid template to adapt the J1 lazyLoader module
  #
  # Product/Info:
  # https://jekyll.one
@@ -58,7 +58,7 @@ regenerate:                             true
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/adapter/js/lazyLoader.js
- # J1 Adapter for the lazyLoader module (core: lazyCSS)
+ # J1 Adapter for the J1 lazyLoader module
  #
  # Product/Info:
  # https://jekyll.one
@@ -77,7 +77,7 @@ regenerate:                             true
 // -----------------------------------------------------------------------------
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
-"use strict";
+`use strict`;
 j1.adapter.lazyLoader = ((j1, window) => {
 
 {% comment %} Set global variables
@@ -138,36 +138,16 @@ var timeSeconds;
       // module initializer
       // ---------------------------------------------------------------------
       var dependency_met_j1_core_ready = setInterval(() => {
-        var pageState       = $('#content').css("display");
-        var pageVisible     = (pageState === 'block') ? true : false;
-        var j1CoreFinished  = (j1.getState() === 'finished') ? true : false;
-        // var atticFinished   = (j1.adapter.attic.getState() == 'finished') ? true : false;
-//      var footerState     = j1.getXhrDataState('#{{footer_id}}');
-//      var footerVisible   = (footerState === 'block') ? true : false;
-//      var footerloaded    = ($('#footer_uno.active_footer')[0].clientHeight > 100) ? true : false;
+        var j1CoreFinished = (j1.getState() === 'finished') ? true: false;
 
-//      if (true) {
-//      if (j1CoreFinished && pageVisible) {
-        if (j1CoreFinished && pageVisible) {
+        if (j1CoreFinished) {
           startTimeModule = Date.now();
 
           _this.setState('started');
           logger.debug('\n' + 'set module state to: ' + _this.getState());
           logger.info('\n' + 'initializing module: started');
 
-          // var imgInstance = $("img.lazy").Lazy (
-          //   {
-          //     chainable:  false,
-          //     threshold:  500
-          //   }
-          // );
-
-          var imgInstance_1       = $("img.lazy").Lazy({threshold:  10});
-          var imgInstance_2       = $('div.lazy').Lazy({threshold:  10});
-          var buttonInstance_1    = $('ul.lazy').Lazy({threshold:  10});
-          var audioInstance       = $("audio").Lazy();
-          var videoInstance       = $("video").Lazy();
-//        var backstretchInstance = $(".backstretch-item").Lazy();
+          _this.registerLoaders(lazyLoaderOptions);
 
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
@@ -180,6 +160,79 @@ var timeSeconds;
         } // END if pageVisible
       }, 10); // END dependency_met_j1_core_ready
     }, // END init
+
+    // -------------------------------------------------------------------------
+    // registerLoaders()
+    // Lazy load CSS to speed up page rendering
+    //
+    // Requires the following settings:
+    //
+    //    src:        the 'location' of the CSS file
+    //    selector:   the 'selector' that triggers the observer
+    //    rootMargin: the 'margin' before the load is trigged
+    //
+    // -------------------------------------------------------------------------
+    //
+    registerLoaders: () => {
+      {% for loader in lazy_loader_options.loaders %} {% if loader.enabled %}
+
+        {% if loader.type == 'css' %}
+          _this.cssLoader().observe({
+            src:        '{{loader.src}}',
+            selector:   '{{loader.selector}}',
+            rootMargin: '{{loader.rootMargin}}'
+          });
+          logger.info('\n' + 'register lazy loading for: {{loader.description}}');
+        {% endif %}
+
+      {% endif %} {% endfor %}
+    }, // END registerLoaders
+
+    // -------------------------------------------------------------------------
+    // cssLoader()
+    // Lazy load CSS to speed up page rendering
+    //
+    cssLoader: () => {
+      let options = {};
+
+      const observe = (opt) => {
+        options = opt;
+
+        (('IntersectionObserver' in window) ? cssObserver : doNothing) ();
+      }
+
+      const doNothing = () => {
+        observe = false;
+      }
+
+      const cssDomLink = () => {
+          let link = document.createElement('link');
+          let id = 'lazy' + options.selector;
+          link.id = id.replace('.', '_');;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          link.href = options.src;
+          document.head.appendChild(link);
+          logger.info('\n' + 'lazy load of type ' + link.rel + ': ' + link.href);
+      }
+
+      const cssObserver = () => {
+          let selectors = document.querySelectorAll(options.selector);
+          let observer = new IntersectionObserver((entry, observer) => {
+            if (entry[0].intersectionRatio > 0) {
+                cssDomLink();
+                sessionStorage[options.selector] = true;
+                observer.disconnect();
+            }
+          }, { rootMargin: options.rootMargin });
+
+          selectors.forEach(selector => {
+              observer.observe(selector);
+          });
+      }
+
+      return { observe };
+    },
 
     // -------------------------------------------------------------------------
     // messageHandler()

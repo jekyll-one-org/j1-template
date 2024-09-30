@@ -1,0 +1,264 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/theme/j1/modules/amplitudejs/css/theme/uno/player/large.css
+ # AmplitudeJS v5.3.2 Large Player
+ #
+ # Product/Info:
+ # https://jekyll.one
+ # https://github.com/serversideup/amplitudejs
+ #
+ # Copyright (C) 2021 521 Dimensions
+ # Copyright (C) 2023, 2024 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ # Amplitudejs is licensed under the MIT License.
+ # See: https://github.com/serversideup/amplitudejs/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+/* 1. Base
+ ---------------------------------------------------------- */
+
+/* 2. Components
+ ---------------------------------------------------------- */
+div#amplitude-player {
+  display: flex;
+  max-width: fit-content;
+  background: var(--ajs-theme-uno--white);
+}
+
+div#playlist-header.player-expanded {
+  position: sticky;
+  cursor: default;
+  top: 0;
+  width: 100%;
+  padding: 15px;
+  font-family: "Lato", sans-serif;
+  text-align: center;
+  color: var(--ajs-theme-uno--white);
+  background-color: var(--ajs-theme-uno--dark-silver);
+}
+
+/* Bootstrap media query breakpoints
+ --------------------------------------------------- */
+/* Small only */
+@media screen and (max-width: 39.9375em) {
+  div#amplitude-player {
+    flex-direction: column;
+  }
+  div#amplitude-player {
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  div#amplitude-player div#amplitude-right {
+    width: 100%;
+  }
+  div#amplitude-player div#amplitude-left {
+    width: 100%;
+  }
+  div#amplitude-player div#amplitude-left img[amplitude-song-info="cover_art_url"] {
+    width: auto;
+    height: auto;
+  }
+}
+
+/* Medium only */
+@media screen and (min-width: 40em) and (max-width: 63.9375em) {
+  div#amplitude-player {
+    /* jadams */
+  }
+}
+
+/* Large and up */
+@media screen and (min-width: 64em) {
+  div#amplitude-player {
+    /* ::-webkit-scrollbar {
+      display: none;
+    } */
+  }
+}
+
+div#amplitude-left img.album-art {
+  width: 100%;
+}
+
+div#amplitude-left div#player-left-bottom {
+  flex: 1;
+  background-color: var(--ajs-theme-uno--blue-gray-900);
+}
+
+div#amplitude-left div#player-left-bottom div#volume-container:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+div#amplitude-right div.song.amplitude-active-song-container:hover div.play-button-container {
+  display: none;
+}
+
+div#amplitude-right div.song div.audio-meta-data {
+  float: left;
+  width: calc(100% - 145px);
+}
+
+div#amplitude-right div.song div.audio-meta-data span.audio-artist {
+  display: block;
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--ajs-theme-uno--gray-300);
+}
+
+div#amplitude-right div.song img.audio-info-blue {
+  float: right;
+  display: block;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+div#amplitude-right div.song img.audio-info-white {
+  float: right;
+  display: none;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+div#amplitude-right div.song:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+div#control-container {
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+div#control-container div#repeat-container {
+  width: 25%;
+  float: left;
+  padding-top: 20px;
+}
+
+div#control-container div#volume-container {
+  width: 88%;
+  float: left;
+  margin-top: 20px;
+  margin-left: 12px;
+}
+
+div#control-container div.amplitude-mute {
+  cursor: pointer;
+  width: 25px;
+  height: 19px;
+  float: left;
+}
+
+div#control-container div.amplitude-mute.amplitude-not-muted {
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/volume.svg") no-repeat;
+}
+
+div#control-container div.amplitude-mute.amplitude-muted {
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/mute.svg") no-repeat;
+}
+
+/* clearfix control container */
+div#control-container:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+div#time-container {
+  margin-top: 30px;
+}
+
+div#time-container span.current-time {
+  color: var(--ajs-theme-uno--blue-gray);
+  font-size: 14px;
+  font-weight: bold;
+  float: left;
+  width: 15%;
+  text-align: center;
+}
+
+div#time-container span.duration {
+  color: var(--ajs-theme-uno--blue-gray);
+  font-size: 14px;
+  font-weight: bold;
+  float: left;
+  width: 15%;
+  text-align: center;
+}
+
+div#time-container:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+div#meta-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+div#meta-container span.song-name {
+  display: block;
+  color: var(--ajs-theme-uno--gray-100);
+  font-size: 24px;
+  font-family: "Lato", sans-serif;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+div#meta-container div.song-artist-album {
+  color: var(--ajs-theme-uno--blue-gray-300);
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "Lato", sans-serif;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+div#meta-container div.song-artist-album span {
+  display: block;
+}
+
+/* jadams: should rplaced by: song-artist-album */
+div#meta-container div.audio-artist-album {
+  color: var(--ajs-theme-uno--blue-gray-300);
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "Lato", sans-serif;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+div#meta-container div.audio-artist-album span {
+  display: block;
+}
+
+/* 3. Layout
+ ---------------------------------------------------------- */
+
+/* 4. Pages
+ ---------------------------------------------------------- */
+
+/* 5. Themes
+ ---------------------------------------------------------- */
+
+/* 6. Utils
+ ---------------------------------------------------------- */
+
+/* 7. Vendors
+ ---------------------------------------------------------- */
+
+/* 8. Animations
+ ---------------------------------------------------------- */

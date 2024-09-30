@@ -62,7 +62,7 @@
   cursor: default;
   top: 0;
   position: sticky;
-  height: 80px;
+  height: 90px;
   padding: 15px;
   max-width: -webkit-fill-available;
   max-width: -moz-available;
@@ -135,7 +135,7 @@ div.song-now-playing-icon-container
 img.now-playing {
   display: block;
   margin-top: 5px;
-  margin-left: 8px;
+  margin-left: 4px;
   height: 16px;
   width: 16px;
 }
@@ -171,7 +171,8 @@ div.song
 div.audio-meta-data
 span.audio-title {
   font-family: "Lato", sans-serif;
-  font-size: 20px;
+  /* font-size: 20px; */
+  font-size: 16px;
   line-height: 20px;
   letter-spacing: 0.47px;
   white-space: nowrap;
@@ -183,8 +184,9 @@ div.song
 img.audio-info-blue {
   float: right;
   display: block;
-  margin-top: 10px;
-  margin-right: 10px;
+  /* margin-top: 10px; */
+  margin-top: 28px;
+  margin-right: 5px;
 }
 
 div#large_player_right
@@ -225,7 +227,8 @@ div#large_player_right
 div.song
 span.audio-duration {
   float: left;
-  margin-left: 5px;
+  margin-top: 18px;
+  margin-left: -5px;
   width: 50px;
   font-family: "Lato", sans-serif;
   text-align: center;
@@ -243,7 +246,7 @@ span.song-name {
   font-size: 18px;
   letter-spacing: 0.5px;
   line-height: 24px;
-  margin-left: 38px;
+  /* margin-left: 38px; */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -259,7 +262,7 @@ div.song-artist-album {
   font-size: 16px;
   letter-spacing: 0.5px;
   line-height: 16px;
-  margin-left: 38px;
+  /* margin-left: 38px; */
   color: var(--ajs-theme-uno--white);
 }
 
@@ -268,7 +271,8 @@ div.playlist-screen-controls
 div.list-controls {
   float: right;
   width: 90px;
-  margin-top: 14px;
+  /* margin-top: 14px; */
+  margin-top: 38px;
 }
 
 div#large_player_right

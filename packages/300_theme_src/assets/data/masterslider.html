@@ -44,11 +44,21 @@ exclude_from_search:                    true
 {% assign slider_settings     = modules.masterslider.settings %}
 
 {% comment %} Set config options
-module_version:               {{module_version | debug}}
+slider_options: {{slider_options.options | debug}}
+module_version: {{module_version | debug}}
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign slider_options      = slider_defaults | merge: slider_settings %}
 {% assign sliders             = slider_settings.sliders %}
 {% assign module_version      = slider_options.module_version %}
+
+{% comment %} Detect slider modes
+--------------------------------------------------------------------------------
+slider_mode:  {{slider_mode | debug}}
+video_mode:   {{video_mode | debug}}
+
+{% assign slider_mode         = slider_options.options.sliderMode %}
+{% assign video_mode          = slider_options.options.videoMode %}
+-------------------------------------------------------------------------------- {% endcomment %}
 
 
 {% comment %} Configure permalink settings
@@ -143,12 +153,15 @@ module_version:               {{module_version | debug}}
     ---------------------------------------------------------------------------- {% endcomment %}
     <!-- [INFO   ] [~/assets/data/masterslider.html               ]  [Place 'LightGallery' data for id: {{slider.id}}] -->
     <div id="lightgallery_{{slider.id}}" class="lightgallery-container" style="display: none;">
+
       {% for slide in slider.slides %}
+      {% if slide.type == 'image' %}
       <img
         id="{{slider.id}}_{{forloop.index}}"
         src="{{slide.foreground_image}}"
         alt="{{slide.alt}}" title="{{slide.title}}"
       />
+      {% endif %}
       {% endfor %}
     </div>
 
@@ -167,27 +180,136 @@ module_version:               {{module_version | debug}}
           aria-label="Show Lightbox"
           rel="alternate"
           data-lightbox="{{slider.id}}"
-          data-title="{{slide.title}}"
-        >
+          data-title="{{slide.title}}">
           <i class="mdib mdib-image mdib-2x md-gray-600"></i>
         </a>
       </div>
       {% endif %}
 
-      {% comment %} Place images
+      {% comment %} Place slides (image|video)
+      slide.type:  {{slide.type}}
       -------------------------------------------------------------------------- {% endcomment %}
+      {% if slide.type == 'image' %}
       <img
         class="{{slider.id}}-lg-item"
         src="{{slide.background_image}}"
         alt="{{slide.alt}}" title="{{slide.title}}"
         data-src="{{slide.foreground_image}}"
-      >
+      />
+      {% endif %}
+
+      {% if slide.type == 'video' %}
+      <!-- img
+        class="{{slider.id}}-lg-item"
+        alt="{{slide.alt}}" title="{{slide.title}}"
+        data-src="{{slide.poster_image}}"
+      / -->
+			<a
+        class="ms-slide-video"
+        href="{{slide.video_url}}">
+      </a>
+      {% endif %}
+
+      {% comment %}
+      --------------------------------------------------------------------------
+      {% if slide.type == 'video' %}
+      <video
+        id="{{slider.id}}"
+        class="video-js vjs-theme-uno"
+        controls
+        width="640" height="360"
+        poster="{{poster_image}}"
+        alt="{{slide.alt}}"
+        aria-label="{{slide.alt}}"
+        data-setup='{
+          "fluid" : true,
+          "techOrder": [
+        	"youtube", "html5"
+          ],
+          "sources": [{
+        	"type": "video/youtube",
+        	"src": "{{slide.video_url}}"
+          }],
+          "controlBar": {
+        	"pictureInPictureToggle": false,
+        	"volumePanel": {
+        	  "inline": false
+        	}
+        }
+      }'>
+      </video>
+      {% endif %}
+      -------------------------------------------------------------------------- {% endcomment %}
+
+      {% comment %}
+      --------------------------------------------------------------------------
+      {% if slide.type == 'video' %}
+      <div>
+      	<div class="youtube-player bottom">
+      	  <div class="video-title"> <i class="mdib mdi-bs-primary mdib-youtube-tv mdib-18px mr-1"></i> Fortnight (feat. Post Malone, Official Music Video) · Taylor Swift </div>
+      	  <video id="cDv6v6LwLqL" class="video-js vjs-theme-uno" controls width="640" height="360" poster="//img.youtube.com/vi/q3zqJs7JUCQ/maxresdefault.jpg" alt="Fortnight (feat. Post Malone, Official Music Video) · Taylor Swift" aria-label="Fortnight (feat. Post Malone, Official Music Video) · Taylor Swift" data-setup='{
+      	  "fluid" : true,
+      	  "techOrder": [
+      		  "youtube", "html5"
+      	  ],
+      	  "sources": [{
+        		"type": "video/youtube",
+        		"src": "//youtube.com/watch?v=q3zqJs7JUCQ"
+      	  }],
+      	  "controlBar": {
+        		"pictureInPictureToggle": false,
+        		"volumePanel": {
+        		  "inline": false
+        		}
+      	  }
+      	}'> </video>
+      	</div>
+      	<script>
+      	  $(function() {
+        		function addCaptionAfterImage(imageSrc) {
+        		  const image = document.querySelector(`img[src="${imageSrc}"]`);
+        		  if (image) {
+        			// create div|caption container
+        			const newDiv = document.createElement('div');
+        			newDiv.classList.add('caption');
+        			newDiv.textContent = 'Fortnight (feat. Post Malone, Official Music Video) · Taylor Swift';
+        			// insert div|caption container AFTER the image
+        			image.parentNode.insertBefore(newDiv, image.nextSibling);
+        		  } else {
+        			console.error(`Kein Bild mit src="${imageSrc}" gefunden.`);
+        		  }
+        		}
+        		var dependencies_met_page_ready = setInterval (function (options) {
+        		  var pageState      = $('#content').css("display");
+        		  var pageVisible    = (pageState == 'block') ? true : false;
+        		  var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
+        		  if (j1CoreFinished && pageVisible) {
+        			addCaptionAfterImage('//img.youtube.com/vi/q3zqJs7JUCQ/maxresdefault.jpg');
+        			// scroll to player top position
+        			// -------------------------------------------------------------
+        			var vjs_player = document.getElementById("cDv6v6LwLqL");
+        			vjs_player.addEventListener('click', function(event) {
+        			  var scrollOffset = (window.innerWidth >= 720) ? -130 : -110;
+        			  // scroll player to top position
+        			  const targetDiv         = document.getElementById("cDv6v6LwLqL");
+        			  const targetDivPosition = targetDiv.offsetTop;
+        			  window.scrollTo(0, targetDivPosition + scrollOffset);
+        			}); // END EventListener 'click'
+
+        			clearInterval(dependencies_met_page_ready);
+        		  }
+      		  }, 10);
+      	  });
+      	</script>
+      </div>
+      {% endif %}
+      -------------------------------------------------------------------------- {% endcomment %}
 
       {% if slide.thumb_image %}
       <img
         class="ms-thumb" src="{{slide.thumb_image}}"
         alt="thumb_image_{{slider.id}}"
-      >
+      />
       {% endif %}
 
       {% comment %} Place Thumb Info
@@ -213,7 +335,6 @@ module_version:               {{module_version | debug}}
         {% endif %}
       </div>
       {% endif %}
-
 
       {% comment %} Place Slide Info
       -------------------------------------------------------------------------- {% endcomment %}

@@ -1,0 +1,540 @@
+---
+regenerate:                             true
+exclude_from_search:                    true
+---
+{%- capture cache -%}
+
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/assets/data/banner.html
+ # Liquid procedure to generate HTML (data) for all BANNER configured for
+ # (fragmented) AJAX load
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2023, 2024 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ # -----------------------------------------------------------------------------
+ # NOTE: All banner id's are prefixed by 'banner_'
+ #
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #    {{ variable | debug }}
+ #
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+{% capture get_wave           %}themes/{{site.template.name}}/procedures/blocks/get_wave.proc{% endcapture %}
+{% capture create_bs_button   %}themes/{{site.template.name}}/procedures/global/create_bs_button.proc{% endcapture %}
+{% capture news_box           %}themes/{{site.template.name}}/modules/footers/boxes/news_box.proc{% endcapture %}
+
+{% comment %} Set global settings
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign environment               = site.environment %}
+{% assign debug                     = false %}
+
+{% comment %} Process YML config data
+================================================================================ {% endcomment %}
+
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign template_config           = site.data.j1_config %}
+{% assign blocks                    = site.data.blocks %}
+{% assign banner_config_defaults    = blocks.defaults.banner %}
+{% assign banner_config_settings    = blocks.banner %}
+{% assign bs_config                 = template_config.bootstrap %}
+
+{% comment %} Set config data
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign bs_card_deck              = bs_config.cards.card-deck %}
+{% assign banner_config_defaults    = banner_config_defaults.defaults %}
+{% assign banner_config_settings    = banner_config_settings.settings %}
+
+{% comment %} Set config options
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign parallax_options          = banner_config_defaults.parallax_settings | merge: banner_config_settings.parallax_settings %}
+{% assign image_options             = banner_config_defaults.image_settings | merge: banner_config_settings.image_settings %}
+
+{% comment %} Set HELPER variables
+-------------------------------------------------------------------------------- {% endcomment %}
+{% capture banner_config_file_name %}~/_data/blocks/banner.yml{% endcapture %}
+
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign production = false %}
+{% if environment == 'prod' or environment == 'production' %}
+  {% assign production = true %}
+{% endif %}
+
+
+{% comment %} Main
+================================================================================ {% endcomment %}
+<!DOCTYPE {{site.doctype}}>
+<html lang="{{site.language}}">
+  <head>
+    <!-- [INFO   ] [~/assets/data/banner.html                 ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="banner" content="block data file">
+  </head>
+  <body>
+{% comment %} Main
+================================================================================ {% endcomment %}
+{% for items in banner_config_settings %}
+  {% assign key             = items[0] %}
+  {% assign value           = items[1] %}
+  {% assign banner_config   = value %}
+
+  {% for items in banner_config %}
+    {% for banners in items %}
+    {% if debug %} banners: {{ banners }} {% endif %}
+
+    {% comment %} parse settings for MAIN keys
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% for banner in banners %}
+      {% assign data_type = banner | is_type %}
+      {% if data_type == 'hash' %}
+        {% assign banner_settings = banner %}
+        {% assign id              = banner_settings.id %}
+        {% assign enabled         = banner_settings.enabled %}
+        {% assign badges          = banner_settings.badges %}
+        {% assign type            = banner_settings.type %}
+        {% assign icon_family     = banner_settings.icon_family | downcase %}
+        {% assign style           = banner_settings.style %}
+        {% assign raised          = banner_settings.raised %}
+        {% assign lane_span       = banner_settings.lane_span %}
+        {% assign buttons         = banner_settings.buttons %}
+        {% assign cards           = banner_settings.cards %}
+        {% assign wave_properties = banner_settings.wave %}
+        {% assign properties      = banner_settings.properties %}
+    {% endif %}{% endfor %}
+
+    {% if lane_span == 'fixed' %}
+      {% assign container_class = 'container' %}
+    {% elsif lane_span == 'fluid' %}
+      {% assign container_class = 'container-fluid' %}
+    {% else %}
+      {% assign container_class = 'container' %}
+    {% endif %}
+
+
+    {% comment %}
+    START generate HTML portion for wave elements (DISABLED)
+    ----------------------------------------------------------------------------
+
+    {% comment %} generate the HTML portion for the TOP wave element
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% if wave_properties.top.enabled %}
+      {% include {{get_wave}} position="top" wave=wave_properties.top %}
+      {% assign banner_wave_top = _wave %}
+    {% endif %}
+
+    {% comment %} generate the HTML portion for the BOTTOM wave element
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% if wave_properties.bottom.enabled %}
+      {% include {{get_wave}} position="bottom" wave=wave_properties.bottom %}
+      {% assign banner_wave_bottom = _wave %}
+    {% endif %}
+
+    END generate HTML portion for wave elements (DISABLED)
+    ----------------------------------------------------------------------------
+    {% endcomment %}
+
+
+    {% comment %}
+    START collecting banner instances
+    ----------------------------------------------------------------------------
+    {% endcomment %}
+
+    {% if banner_settings.enabled %} {% case banner_settings.type %}
+
+      <!-- BANNER ID: {{banner_settings.id}}} -->
+      {% comment %} DIVIDER banner
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {% endcomment %}
+      {% when 'divider' %}
+      {% assign banner_options = banner_config_defaults.divider | merge: banner_settings %}
+      {% if debug %}<!-- banner_options:  {{banner_options}} -->{% endif %}
+      <div id="{{banner_settings.id}}">
+        <div class="row banner-divider"></div>
+      </div> <!-- End banner {{ id }} -->
+
+      {% comment %} Reset element variables (already processed)
+      -------------------------------------------------------------------------- {% endcomment %}
+      {% assign banner_settings = false%}
+
+      {% comment %} END DIVIDER banner
+      -------------------------------------------------------------------------- {% endcomment %}
+
+
+      {% comment %} TEASER banner
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {% endcomment %}
+      {% when 'teaser' %}
+      {% assign banner_options = banner_config_defaults.teaser | merge: banner_settings %}
+      {% if debug %}<!-- banner_options:  {{banner_options}} -->{% endif %}
+
+      <!-- section id="teaser_{{banner_settings.id}}" -->
+      <div id="{{banner_settings.id}}_content">
+
+        {% if wave_properties.top.enabled %}
+          {{banner_wave_top}}
+        {% endif %}
+
+        <!-- Main Container -->
+        <div class="container {{banner_settings.properties}}">
+        {% assign card_items = cards | size %}
+        {% for card in cards %}
+
+          {% for items in card %}
+            {% for item in items[1] %}
+              {% assign key   = item[0] %}
+              {% assign value = item[1] %}
+              {% if key == 'enabled' %}                 {% assign card_enabled                = value %}                 {% endif %}
+              {% if key == 'width' %}                   {% assign card_width                  = value %}                 {% endif %}
+              {% if key == 'type' %}                    {% assign card_type                   = value %}                 {% endif %}
+              {% if key == 'icon' %}                    {% assign icon                        = value %}                 {% endif %}
+              {% if key == 'icon_size' %}               {% assign icon_size                   = value %}                 {% endif %}
+              {% if key == 'icon_color' %}              {% assign icon_color                  = value %}                 {% endif %}
+              {% if key == 'image_path' %}              {% assign card_image_path             = value %}                 {% endif %}
+              {% if key == 'description_properties' %}  {% assign card_properties             = value %}                 {% endif %}
+              {% if key == 'position' %}                {% assign heading_position            = value | strip_newlines%} {% endif %}
+              {% if key == 'title' %}                   {% assign card_title                  = value | strip_newlines%} {% endif %}
+              {% if key == 'tagline' %}                 {% assign card_tagline                = value | strip_newlines%} {% endif %}
+              {% if key == 'translate_description' %}   {% assign card_translate_description  = value %}                 {% endif %}
+              {% if key == 'description' %}             {% assign card_description            = value | strip_newlines%} {% endif %}
+              {% if key == 'text' %}                    {% assign card_text                   = value | strip_newlines%} {% endif %}
+              {% if key == 'buttons' %}                 {% assign card_buttons                = value %}                 {% endif %}
+            {% endfor %}
+            {% if card_enabled == false %} {% assign card_items = card_items | minus:1 %} {% endif %}
+          {% endfor %}
+
+          {% if card_icon_color %}
+            {% include {{select_color}} color=card_icon_color fallback="#fff" %}
+            {% assign card_icon_color = color %}
+            {% capture card_icon_color %}style="color:{{card_icon_color}}" %}{% endcapture %}
+          {% else %}
+            {% assign card_icon_color = '' %}
+          {% endif %}
+
+          {% if card_width %}
+            {% assign card_enabled = true %}
+            {% assign card_width_md = card_width %}
+          {% else %}
+            {% assign card_width_md = 12 | divided_by: card_items %}
+          {% endif %}
+
+          {% comment %} TODO: Add payment_url to config
+          -------------------------------------------------------------------- {% endcomment %}
+          {% assign patreon_enabled     = true %}
+          {% assign patreon_home        = 'https://www.patreon.com' %}
+          {% assign pledge_url          = 'join' %}
+          {% assign vanity              = 'jekyll_one' %}
+          {% assign pledge_button_text  = 'Become a Patron' %}
+
+          {% capture payment_url %}{{patreon_home}}/{{pledge_url}}/{{vanity}}{% endcapture %}
+
+          {% if card_type == 'text' and card_enabled %}
+
+          {% if badges %}
+          <div class="mb-3 speak2me-ignore">
+            <p>
+              <span>
+                <a href="https://badge.fury.io/rb/j1-template" target="_blank" class="image lazy" rel="noopener noreferrer">
+                  <img src="https://badge.fury.io/rb/j1-template.svg" alt="Current Gem Version">
+                </a>
+                </span>
+              <span>
+                <img src="https://img.shields.io/gem/dt/j1-template" alt="Current Gem Downloads">
+              </span>
+            </p>
+          </div>
+          {% endif %}
+
+          <!-- Heading -->
+          <div class="noclass">
+            <div>
+
+              {% comment %} TODO:
+              -----------------------------------------------------------------
+              <!-- Sticker -->
+              <div class="sticker speak2me-ignore" style="margin-top: -20px; right: 470px; display: block;">
+                <a
+              		  id="banner-sticker-new-version"
+              		  class="link-no-decoration sticker-wrapper"
+              		  href="https://rubygems.org/gems/j1-template"
+              		  target="blank"
+              		  rel="noopener noreferrer">
+              		<img
+              			class="sticker-image"
+              			src="/assets/image/sticker/600x600/sticker-new-version.png"
+              			alt="Get new version 2023.3.2"
+              			title="Get new version 2023.3.2"
+              			style="width: 140px; height: 120px;"
+              		>
+                </a>
+              </div>
+              ---------------------------------------------------------------- {% endcomment %}
+
+              {% if heading_position == 'left' %}
+              <div>
+                <h2 id="{{card_title}}" class="g-font-weight-500 mb-0 {{card_translate_description}}">{{card_title}}</h2>
+                <p class="tagline mb-0 {{card_translate_description}}">{{card_tagline}}</p>
+                <div class="d-inline-block g-width-50 g-height-2 bg-primary mb-2"></div>
+              </div>
+              {% endif %}
+
+              {% if heading_position == 'center' %}
+              <div class="text-center mb-2">
+              	<h2 id="{{card_title}}" class="mb-0 {{card_translate_description}}">{{card_title}}</h2>
+              	<p class="h4 mb-0 text-muted {{card_translate_description}}"><i>{{card_tagline}}</i></p>
+              	<div class="d-inline-block g-width-50 g-height-2 bg-primary mb-2"></div>
+              </div>
+              {% endif %}
+
+            </div>
+          </div>
+          <!-- End Heading -->
+
+          <!-- Body -->
+          <div>
+            <div class="{{card_properties}}">{{card_description}}</div>
+            {% if card_buttons %}
+            <!-- Footer|Button row -->
+            <div class="speak2me-ignore mt-5">
+              {% for button_hash in card_buttons %}
+                {% include {{create_bs_button}} button_data=button_hash button_type="link" %}
+                {{bs_button_html}}
+              {% endfor %}
+            </div>
+            {% endif %}
+          </div>
+          <!-- END Body -->
+          {% endif %}
+          <!-- End Card -->
+
+        {% endfor %}
+        {% comment %} END cards
+        ---------------------------------------------------------------------- {% endcomment %}
+        </div>
+        <!-- End Main Container -->
+
+      </div> <!-- End banner {{ id }} -->
+
+      {% comment %} Reset element variables (already processed)
+      -------------------------------------------------------------------------- {% endcomment %}
+      {% assign banner_settings = false%}
+
+      {% comment %} END TEASER banner
+      -------------------------------------------------------------------------- {% endcomment %}
+
+
+      {% comment %} IMAGE banner
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {% endcomment %}
+      {% when 'image' %}
+
+      {% comment %} Set image banner DEFAULTS
+      gridifier:  {{ gridifier | debug }}
+      ------------------------------------------------------------------------ {% endcomment %}
+      {% assign gridifier = image_options.gridifier %}
+
+      <div id="{{banner_settings.id}}_content" class="{{banner_settings.properties}}">
+      {% assign banner_options = banner_config_defaults.image | merge: banner_settings %}
+      {% if debug %}<!-- banner_options:  {{banner_options}} -->{% endif %}
+
+        {% capture opacity %}calc( {{banner_settings.image.opacity}}/100 ){% endcapture %}
+
+        {% if banner_settings.image.justify %}
+          {% assign background-position = 'center' %}
+        {% else %}
+          {% assign background-position = 'inherit' %}
+        {% endif %}
+
+        <style>
+          .{{banner_settings.id}}-image {
+            background:url("{{banner_settings.image.picture}}");
+            height: {{banner_settings.image.height}}px;
+            background-position: {{background-position}};
+            background-repeat: no-repeat; background-size: cover;
+            {% if banner_settings.image.opacity > 0 %}
+              opacity: {{opacity}};
+            {% endif %}
+            {% if banner_settings.image.brightness > 0 %}
+              filter: brightness({{banner_settings.image.brightness}}%);
+            {% endif %}
+          }
+          .{{banner_settings.id}}-image:before {
+            width:100%;
+            height:100%;
+            content:" ";
+            {% if banner_settings.image.gridify %}
+              background: url("{{gridifier}}") repeat;
+            {% endif %}
+          }
+          </style>
+
+        <div class="panel-fluid">
+          <div class="row no-gutters {{banner_settings.id}}-image"></div>
+        </div>
+
+      </div> <!-- End banner {{ id }} -->
+
+      {% comment %} Reset element variables (already processed)
+      -------------------------------------------------------------------------- {% endcomment %}
+      {% assign banner_settings = false%}
+
+      {% comment %} END IMAGE banner
+      -------------------------------------------------------------------------- {% endcomment %}
+
+
+      {% comment %} PARALLAX banner
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {% endcomment %}
+      {% when 'parallax' %}
+      <div id="{{banner_settings.id}}_content" class="parallax">
+      {% assign banner_options = banner_config_defaults.parallax | merge: banner_settings %}
+      {% if debug %}<!-- banner_options:  {{banner_options}} -->{% endif %}
+
+        {% for card in cards %}
+
+          {% for items in card %} {% for item in items[1] %}
+            {% assign key   = item[0] %}
+            {% assign value = item[1] %}
+            {% if key == 'enabled' %}               {% assign card_enabled               = value %}                   {% endif %}
+            {% if key == 'type' %}                  {% assign card_type                  = value %}                   {% endif %}
+            {% if key == 'cite_text_size' %}        {% assign card_cite_text_size        = value %}                   {% endif %}
+            {% if key == 'cite_text_quotes' %}      {% assign card_cite_text_quotes      = value %}                   {% endif %}
+            {% if key == 'cite_text' %}             {% assign card_text                  = value | strip_newlines %}  {% endif %}
+            {% if key == 'cite' %}                  {% assign card_cite                  = value | strip_newlines %}  {% endif %}
+            {% if key == 'text_color' %}            {% assign card_text_color            = value %}                   {% endif %}
+            {% if key == 'gridify' %}               {% assign card_gridify               = value %}                   {% endif %}
+            {% if key == 'gridifier' %}             {% assign card_gridifier             = value %}                   {% endif %}
+            {% if key == 'darken' %}                {% assign card_darken                = value %}                   {% endif %}
+            {% if key == 'size_y' %}                {% assign card_background_size       = value %}                   {% endif %}
+            {% if key == 'background_image' %}      {% assign card_background_image      = value %}                   {% endif %}
+          {% endfor %} {% endfor %}
+
+          {% if card_type == 'quote' and card_enabled %}
+
+            {% comment %} Set parallax DEFAULTS
+            ------------------------------------------------------------------ {% endcomment %}
+            {% assign background_image  = parallax_options.background %}
+            {% assign gridify           = parallax_options.gridify %}
+            {% assign gridifier         = parallax_options.gridifier %}
+            {% assign darken            = parallax_options.darken %}
+
+            {% comment %} Set banner VALUES
+            ------------------------------------------------------------------ {% endcomment %}
+            {% if card_gridify %}               {% assign gridify           = card_gridify %}               {% endif %}
+            {% if card_gridifier %}             {% assign gridifier         = card_gridifier %}             {% endif %}
+            {% if card_darken %}                {% assign darken            = card_darken %}                {% endif %}
+            {% if card_text_color %}            {% assign text_color        = card_text_color %}            {% endif %}
+            {% if card_background_size %}       {% assign size_y            = card_background_size %}       {% endif %}
+            {% if card_background_image %}      {% assign background_image  = card_background_image %}      {% endif %}
+
+            {% capture darken %}0.{{darken}}{% endcapture %}
+
+            {% comment %} Add individual STYLE tags
+            ------------------------------------------------------------------ {% endcomment %}
+            <!-- [INFO   ] [~/assets/data/banner.html                 ] [ Add individual styles for the parallax banner ] -->
+            <style>
+                .{{banner_settings.id}}-parallaxBg{background:url("{{background_image}}"); min-height: {{size_y}}px; background-attachment: fixed; background-position: center;  background-repeat: no-repeat; background-size: cover; }
+                .{{banner_settings.id}}-parallax-quote{color:#fff;padding:100px 0;position:relative;text-align:center}
+                .{{banner_settings.id}}-parallax-quote:before{top:0;left:0;width:100%;height:100%;content:" ";position:absolute;{% if gridify == true %}background: url("{{gridifier}}") repeat;{% endif %}}
+                .{{banner_settings.id}}-parallax-quote:after{top:0;left:0;width:100%;height:100%;content:" ";position:absolute;background:rgba(0,0,0,{{darken}})}
+                .{{banner_settings.id}}-parallax-quote-in{z-index: 2;position:absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; padding: 20px; text-align: center; font-family: "Roboto Slab", Helvetica, Arial, sans-serif; }
+                .{{banner_settings.id}}-parallax-quote-in p{color:{{text_color}};font-size:{{card_cite_text_size}};text-transform:uppercase;line-height: 1.25;}
+                {% if card_text and card_cite_text_quotes %}
+                .{{banner_settings.id}}-parallax-quote-in p:after,.{{banner_settings.id}}-parallax-quote-in p:before{content:' " ';}
+                {% endif %}
+
+            </style>
+
+            <div class="panel-fluid {{banner_settings.properties}}">
+              <div class="row no-gutters {{banner_settings.id}}-parallax-quote {{banner_settings.id}}-parallaxBg parallax-quoteblock">
+                <div class="col-md-12 col-xs-12 {{banner_settings.id}}-parallax-quote-in quote-text">
+                  {% if card_text %} <p>{{card_text}}</p> {% endif %}
+                  {% if card_cite %} <p class="fs-3 text-end"><i>{{card_cite}}</i></p> {% endif %}
+                </div>
+              </div>
+            </div>
+
+            {% endif %} {% endfor %}
+            {% comment %} END cards
+            ------------------------------------------------------------------ {% endcomment %}
+      </div> <!-- End banner {{ id }} -->
+
+      {% comment %} Reset element variables (already processed)
+      -------------------------------------------------------------------------- {% endcomment %}
+      {% assign banner_settings = false%}
+
+      {% comment %} END PARALLAX banner
+      -------------------------------------------------------------------------- {% endcomment %}
+
+      {% comment %} EXCEPTION banner
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {% endcomment %}
+      {% else %}
+      {% comment %} Collect EXCEPTION banner: given type NOT found
+      -------------------------------------------------------------------------- {% endcomment %}
+      {% unless banner_settings.id == 'exception_container' %}
+      <div id="exception_container">
+        <div id="{{banner_settings.id}}" class="container-fluid no-padding">
+          <div class="col-md-12 col-sm-12 col-xs-12 no-padding">
+            <div class="box">
+              <div class="content content-danger">
+                <h2 id="exception" class="notoc">
+                  <i class="mdib mdib-alarm-light mdib-3x md-red mr-1"></i>
+                  Banner of type <big>{{banner_settings.type}}</big> not found
+                </h2>
+                <h3 class="notoc box-title">Check your configuration at {{banner_config_file_name}}</h3>
+                <div class="box-description">
+                  Don't worry about this. Maybe you've a typo in the banner configuration.
+                  Check the banner config file for the unknown type. <br />
+                  Check for something wrong like:
+                  <div class="mt-2 mb-2">
+                    <b>id:        {{banner_settings.id}}</b>  <br />
+                    <b>type:     {{banner_settings.type}}</b> <br />
+                    <b>comment:  {{banner_settings.comment}}</b>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> <!-- End banner {{banner_settings.id}} -->
+      </div> <!-- End exception_container -->
+      {% endunless %}
+
+      {% comment %} Reset element variables (already processed)
+      -------------------------------------------------------------------------- {% endcomment %}
+      {% assign banner_settings = false%}
+
+      {% comment %} END EXEPTION banner
+      -------------------------------------------------------------------------- {% endcomment %}
+
+    {% endcase %} {% endif %}
+
+    {% comment %}
+    END collecting banner instances
+    ----------------------------------------------------------------------------
+    {% endcomment %}
+
+    {% endfor %}  {% comment %} END banners {% endcomment %}
+  {% endfor %}  {% comment %} END banner_config {% endcomment %}
+{% endfor %}  {% comment %} END banner_config_settings {% endcomment %}
+
+  </body>
+</html>
+{%- endcapture -%}
+
+{% comment %} Beatify|Compress page
+-------------------------------------------------------------------------------- {% endcomment %}
+{%- if production -%}
+  {% capture _LINE_FEED %}{% endcapture %}{% if site.compress_html.ignore.envs contains jekyll.environment %}{{ cache | strip_html_comments }}{% else %}{% capture _content %}{{ cache | strip_html_comments }}{% endcapture %}{% assign _profile = site.compress_html.profile %}{% if site.compress_html.endings == "all" %}{% assign _endings = "html head body li dt dd p rt rp optgroup option colgroup caption thead tbody tfoot tr td th" | split: " " %}{% else %}{% assign _endings = site.compress_html.endings %}{% endif %}{% for _element in _endings %}{% capture _end %}</{{ _element }}>{% endcapture %}{% assign _content = _content | remove: _end %}{% endfor %}{% if _profile and _endings %}{% assign _profile_endings = _content | size | plus: 1 %}{% endif %}{% for _element in site.compress_html.startings %}{% capture _start %}<{{ _element }}>{% endcapture %}{% assign _content = _content | remove: _start %}{% endfor %}{% if _profile and site.compress_html.startings %}{% assign _profile_startings = _content | size | plus: 1 %}{% endif %}{% if site.compress_html.comments == "all" %}{% assign _comments = "<!-- -->" | split: " " %}{% else %}{% assign _comments = site.compress_html.comments %}{% endif %}{% if _comments.size == 2 %}{% capture _comment_befores %}.{{ _content }}{% endcapture %}{% assign _comment_befores = _comment_befores | split: _comments.first %}{% for _comment_before in _comment_befores %}{% if forloop.first %}{% continue %}{% endif %}{% capture _comment_outside %}{% if _carry %}{{ _comments.first }}{% endif %}{{ _comment_before }}{% endcapture %}{% capture _comment %}{% unless _carry %}{{ _comments.first }}{% endunless %}{{ _comment_outside | split: _comments.last | first }}{% if _comment_outside contains _comments.last %}{{ _comments.last }}{% assign _carry = false %}{% else %}{% assign _carry = true %}{% endif %}{% endcapture %}{% assign _content = _content | remove_first: _comment %}{% endfor %}{% if _profile %}{% assign _profile_comments = _content | size | plus: 1 %}{% endif %}{% endif %}{% assign _pre_befores = _content | split: "<pre" %}{% assign _content = "" %}{% for _pre_before in _pre_befores %}{% assign _pres = _pre_before | split: "</pre>" %}{% assign _pres_after = "" %}{% if _pres.size != 0 %}{% if site.compress_html.blanklines %}{% assign _lines = _pres.last | split: _LINE_FEED %}{% capture _pres_after %}{% for _line in _lines %}{% assign _trimmed = _line | split: " " | join: " " %}{% if _trimmed != empty or forloop.last %}{% unless forloop.first %}{{ _LINE_FEED }}{% endunless %}{{ _line }}{% endif %}{% endfor %}{% endcapture %}{% else %}{% assign _pres_after = _pres.last | split: " " | join: " " %}{% endif %}{% endif %}{% capture _content %}{{ _content }}{% if _pre_before contains "</pre>" %}<pre{{ _pres.first }}</pre>{% endif %}{% unless _pre_before contains "</pre>" and _pres.size == 1 %}{{ _pres_after }}{% endunless %}{% endcapture %}{% endfor %}{% if _profile %}{% assign _profile_collapse = _content | size | plus: 1 %}{% endif %}{% if site.compress_html.clippings == "all" %}{% assign _clippings = "html head title base link meta style body article section nav aside h1 h2 h3 h4 h5 h6 hgroup header footer address p hr blockquote ol ul li dl dt dd figure figcaption main div table caption colgroup col tbody thead tfoot tr td th" | split: " " %}{% else %}{% assign _clippings = site.compress_html.clippings %}{% endif %}{% for _element in _clippings %}{% assign _edges = " <e;<e; </e>;</e>;</e> ;</e>" | replace: "e", _element | split: ";" %}{% assign _content = _content | replace: _edges[0], _edges[1] | replace: _edges[2], _edges[3] | replace: _edges[4], _edges[5] %}{% endfor %}{% if _profile and _clippings %}{% assign _profile_clippings = _content | size | plus: 1 %}{% endif %}{{ _content }}{% if _profile %} <table id="compress_html_profile_{{ site.time | date: "%Y%m%d" }}" class="compress_html_profile"> <thead> <tr> <td>Step <td>Bytes <tbody> <tr> <td>raw <td>{{ cache | strip_html_comments | size }}{% if _profile_endings %} <tr> <td>endings <td>{{ _profile_endings }}{% endif %}{% if _profile_startings %} <tr> <td>startings <td>{{ _profile_startings }}{% endif %}{% if _profile_comments %} <tr> <td>comments <td>{{ _profile_comments }}{% endif %}{% if _profile_collapse %} <tr> <td>collapse <td>{{ _profile_collapse }}{% endif %}{% if _profile_clippings %} <tr> <td>clippings <td>{{ _profile_clippings }}{% endif %} </table>{% endif %}{% endif %}
+{%- else -%}
+  {{ cache | remove:'<html><body>' | remove:'</body></html>' | strip_empty_lines }}
+{%- endif -%}
+
+{% comment %} Reset page cache
+-------------------------------------------------------------------------------- {% endcomment %}
+{%- assign cache = false -%}

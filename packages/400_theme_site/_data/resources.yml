@@ -1720,15 +1720,15 @@ resources:
         init_function:                  [ j1.adapter.themeToggler.init ]
 
   # ----------------------------------------------------------------------------
-  # lazyCSSLoader
-  # Load CSS files on demand.
+  # J1 lazy Loader
+  # Load resources if required|requested
   #
-  - name:                               J1 lazyCSSLoader
+  - name:                               J1 lazyLoader
     resource:
       enabled:                          true
 
-      id:                               lazy-css-loader
-      comment:                          Module lazyCSSLoader
+      id:                               lazy-loader
+      comment:                          Module J1 lazyLoader
       region:                           body-footer
       layout:                           [ all ]
       required:                         always
@@ -1737,21 +1737,21 @@ resources:
 
       data:
         css:                            []
-        files:                          [ adapter/js/lazyCSSLoader.js ]
+        files:                          [ adapter/js/lazyLoader.js ]
         js:                             []
-        init_function:                  [ j1.adapter.lazyCSSLoader.init ]
+        init_function:                  [ j1.adapter.lazyLoader.init ]
 
   # ----------------------------------------------------------------------------
-  # lazyCSSLoader
-  # Load CSS files on demand.
+  # jQuery Lazy
+  # Load CSS|JS and general files if required|requested
   #
-  - name:                               J1 lazyLoader
+  - name:                               jQuery Lazy
     resource:
-      enabled:                          true
+      enabled:                          false
 
-      id:                               lazy-loader
-      comment:                          Module lazyLoader
-      region:                           body-footer
+      id:                               jquery-lazy-loader
+      comment:                          Module jQuery Lazy
+      region:                           head
       layout:                           [ all ]
       required:                         always
       script_load:                      sync

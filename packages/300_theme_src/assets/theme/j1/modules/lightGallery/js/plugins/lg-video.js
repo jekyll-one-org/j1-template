@@ -385,75 +385,159 @@
             this.controlVideo(index, 'pause');
         };
 
+        // jadams
         Video.prototype.getVideoHtml = function (src, addClass, index, html5Video) {
-            var video = '';
-            var videoInfo = this.core.galleryItems[index].__slideVideoInfo || {};
-            var currentGalleryItem = this.core.galleryItems[index];
-            var videoTitle = currentGalleryItem.title || currentGalleryItem.alt;
-            videoTitle = videoTitle ? 'title="' + videoTitle + '"' : '';
-            var commonIframeProps = "allowtransparency=\"true\"\n            frameborder=\"0\"\n            scrolling=\"no\"\n            allowfullscreen\n            mozallowfullscreen\n            webkitallowfullscreen\n            msallowfullscreen";
-            if (videoInfo.youtube) {
-                var videoId = 'lg-youtube' + index;
-                var youTubeParams = getYouTubeParams(videoInfo, this.settings.youTubePlayerParams);
-                var isYouTubeNoCookieURL = isYouTubeNoCookie(src);
-                var youtubeURL = isYouTubeNoCookieURL
-                    ? '//www.youtube-nocookie.com/'
-                    : '//www.youtube.com/';
-                video = "<iframe allow=\"autoplay\" id=" + videoId + " class=\"lg-video-object lg-youtube " + addClass + "\" " + videoTitle + " src=\"" + youtubeURL + "embed/" + (videoInfo.youtube[1] + youTubeParams) + "\" " + commonIframeProps + "></iframe>";
-            }
-            else if (videoInfo.vimeo) {
-                var videoId = 'lg-vimeo' + index;
-                var playerParams = getVimeoURLParams(this.settings.vimeoPlayerParams, videoInfo);
-                video = "<iframe allow=\"autoplay\" id=" + videoId + " class=\"lg-video-object lg-vimeo " + addClass + "\" " + videoTitle + " src=\"//player.vimeo.com/video/" + (videoInfo.vimeo[1] + playerParams) + "\" " + commonIframeProps + "></iframe>";
-            }
-            // jadams: added Wistia Player
-            else if (videoInfo.wistia) {
-                var wistiaId = 'lg-wistia' + index;
-                var playerParams = param(this.settings.wistiaPlayerParams);
-                playerParams = playerParams ? '?' + playerParams : '';
-                video = "<iframe allow=\"autoplay\" id=\"" + wistiaId + "\" src=\"//fast.wistia.net/embed/" + videoInfo.wistia[3] + (videoInfo.wistia[4] + playerParams) + "\" " + videoTitle + " class=\"wistia_embed lg-video-object lg-wistia " + addClass + "\" name=\"wistia_embed\" " + commonIframeProps + "></iframe>";
-            }
-            // jadams: added Dailymotion Player
-            else if (videoInfo.dailymotion) {
-                var dailymotionId = 'lg-dailymotion' + index;
-                var playerParams = param(this.settings.dailymotionPlayerParams);
-                playerParams = playerParams ? '?' + playerParams : '';
-                video = "<iframe allow=\"autoplay\" id=\"" + dailymotionId + "\" src=\"//www.dailymotion.com/embed/video/" + (videoInfo.dailymotion[1] + playerParams) + "\" " + videoTitle + " class=\"dailymotion_embed lg-video-object lg-dailymotion " + addClass + "\" name=\"dailymotion_embed\" " + commonIframeProps + "></iframe>";
-            }
-            // jadams, 2024-01-22: added TicToc Player
-            else if (videoInfo.tiktoc) {
-                var tictocId = 'lg-tictoc' + index;
-                var playerParams = getTikTokURLParams(this.settings.TicTocPlayerParams);
-                video = "<iframe allow=\"autoplay\" id=" + videoId + " class=\"lg-video-object lg-tictoc " + addClass + "\" " + videoTitle + " src=\"//tiktok.com/embed/" + (videoInfo.tiktoc[1]) + "\" " + videoTitle + commonIframeProps + "></iframe>";
-            }
-            else if (videoInfo.html5) {
-                var html5VideoMarkup = '';
-                for (var i = 0; i < html5Video.source.length; i++) {
-                    html5VideoMarkup += "<source src=\"" + html5Video.source[i].src + "\" type=\"" + html5Video.source[i].type + "\">";
+          var video = '';
+          var videoInfo = this.core.galleryItems[index].__slideVideoInfo || {};
+          var currentGalleryItem = this.core.galleryItems[index];
+          var videoTitle = currentGalleryItem.title || currentGalleryItem.alt;
+          videoTitle = videoTitle ? 'title="' + videoTitle + '"' : '';
+          var commonIframeProps = "allowtransparency=\"true\"\n            frameborder=\"0\"\n            scrolling=\"no\"\n            allowfullscreen\n            mozallowfullscreen\n            webkitallowfullscreen\n            msallowfullscreen";
+
+          if (videoInfo.youtube) {
+            var videoId = 'lg-youtube' + index;
+            var youTubeParams = getYouTubeParams(videoInfo, this.settings.youTubePlayerParams);
+            var isYouTubeNoCookieURL = isYouTubeNoCookie(src);
+            var youtubeURL = isYouTubeNoCookieURL
+                ? '//www.youtube-nocookie.com/'
+                : '//www.youtube.com/';
+
+            // var video = `
+            //   <video
+            //     id="${videoId}"
+            //   	class="lg-video-object lg-youtube vjs-theme-uno video-js">
+            //     data-setup='{
+            //       "fluid" : true,
+            //       "techOrder": [
+            //     	"youtube", "html5"
+            //     ],
+            //     "sources": [{
+            //     	"type": "video/youtube",
+            //     	"src": "//youtube.com/watch?v=nV8UZJNBY6"
+            //     }],
+            //     "controlBar": {
+            //     	"pictureInPictureToggle": false,
+            //     	"volumePanel": {
+            //     	  "inline": false
+            //   	   }
+            //     }
+            //   }'>
+            //   	Your browser does not support HTML5 video
+            //   </video>
+            // `;
+
+            var video_new = `
+              <iframe
+                id="${videoId}"
+                class="lg-video-object lg-youtube ${addClass}"
+                allow="autoplay"
+                title="${videoTitle}""
+                src="${youtubeURL}/embed${videoInfo.youtube[1]}${youTubeParams}"
+                ${commonIframeProps}>
+              </iframe>
+            `;
+
+            video = "<iframe allow=\"autoplay\" id=" + videoId + " class=\"lg-video-object lg-youtube " + addClass + "\" " + videoTitle + " src=\"" + youtubeURL + "embed/" + (videoInfo.youtube[1] + youTubeParams) + "\" " + commonIframeProps + "></iframe>";
+
+          }
+          else if (videoInfo.vimeo) {
+            var videoId = 'lg-vimeo' + index;
+            var playerParams = getVimeoURLParams(this.settings.vimeoPlayerParams, videoInfo);
+
+            video = "<iframe allow=\"autoplay\" id=" + videoId + " class=\"lg-video-object lg-vimeo " + addClass + "\" " + videoTitle + " src=\"//player.vimeo.com/video/" + (videoInfo.vimeo[1] + playerParams) + "\" " + commonIframeProps + "></iframe>";
+          }
+          // jadams: added Wistia Player
+          else if (videoInfo.wistia) {
+            var wistiaId = 'lg-wistia' + index;
+            var playerParams = param(this.settings.wistiaPlayerParams);
+            playerParams = playerParams ? '?' + playerParams : '';
+
+            video = "<iframe allow=\"autoplay\" id=\"" + wistiaId + "\" src=\"//fast.wistia.net/embed/" + videoInfo.wistia[3] + (videoInfo.wistia[4] + playerParams) + "\" " + videoTitle + " class=\"wistia_embed lg-video-object lg-wistia " + addClass + "\" name=\"wistia_embed\" " + commonIframeProps + "></iframe>";
+          }
+          // jadams: added Dailymotion Player
+          else if (videoInfo.dailymotion) {
+            var dailymotionId = 'lg-dailymotion' + index;
+            var playerParams = param(this.settings.dailymotionPlayerParams);
+            playerParams = playerParams ? '?' + playerParams : '';
+
+            video = "<iframe allow=\"autoplay\" id=\"" + dailymotionId + "\" src=\"//www.dailymotion.com/embed/video/" + (videoInfo.dailymotion[1] + playerParams) + "\" " + videoTitle + " class=\"dailymotion_embed lg-video-object lg-dailymotion " + addClass + "\" name=\"dailymotion_embed\" " + commonIframeProps + "></iframe>";
+          }
+          // jadams, 2024-01-22: added TicToc Player
+          else if (videoInfo.tiktoc) {
+            var tictocId = 'lg-tictoc' + index;
+            var playerParams = getTikTokURLParams(this.settings.TicTocPlayerParams);
+
+            video = "<iframe allow=\"autoplay\" id=" + videoId + " class=\"lg-video-object lg-tictoc " + addClass + "\" " + videoTitle + " src=\"//tiktok.com/embed/" + (videoInfo.tiktoc[1]) + "\" " + videoTitle + commonIframeProps + "></iframe>";
+          }
+          else if (videoInfo.html5) {
+              var html5VideoMarkup = '';
+              for (var i = 0; i < html5Video.source.length; i++) {
+                html5VideoMarkup += "<source src=\"" + html5Video.source[i].src + "\" type=\"" + html5Video.source[i].type + "\">";
+              }
+              if (html5Video.tracks) {
+                var _loop_1 = function (i) {
+                  var trackAttributes = '';
+                  var track = html5Video.tracks[i];
+                  Object.keys(track || {}).forEach(function (key) {
+                      trackAttributes += key + "=\"" + track[key] + "\" ";
+                  });
+                  html5VideoMarkup += "<track " + trackAttributes + ">";
+                };
+                for (var i = 0; i < html5Video.tracks.length; i++) {
+                  _loop_1(i);
                 }
-                if (html5Video.tracks) {
-                    var _loop_1 = function (i) {
-                        var trackAttributes = '';
-                        var track = html5Video.tracks[i];
-                        Object.keys(track || {}).forEach(function (key) {
-                            trackAttributes += key + "=\"" + track[key] + "\" ";
-                        });
-                        html5VideoMarkup += "<track " + trackAttributes + ">";
-                    };
-                    for (var i = 0; i < html5Video.tracks.length; i++) {
-                        _loop_1(i);
-                    }
-                }
-                var html5VideoAttrs_1 = '';
-                var videoAttributes_1 = html5Video.attributes || {};
-                Object.keys(videoAttributes_1 || {}).forEach(function (key) {
-                    html5VideoAttrs_1 += key + "=\"" + videoAttributes_1[key] + "\" ";
-                });
-                video = "<video class=\"lg-video-object lg-html5 " + (this.settings.videojs && this.settings.videojsTheme
-                    ? this.settings.videojsTheme + ' '
-                    : '') + " " + (this.settings.videojs ? ' video-js' : '') + "\" " + html5VideoAttrs_1 + ">\n                " + html5VideoMarkup + "\n                Your browser does not support HTML5 video.\n            </video>";
-            }
-            return video;
+              }
+
+              var html5VideoAttrs_1 = '';
+              var videoAttributes_1 = html5Video.attributes || {};
+              var html5VideoAttrs   = html5VideoAttrs_1;
+
+              Object.keys(videoAttributes_1 || {}).forEach(function (key) {
+                html5VideoAttrs_1 += key + "=\"" + videoAttributes_1[key] + "\" ";
+              });
+
+              var videojsTheme    = (this.settings.videojsTheme) ? this.settings.videojsTheme : '';
+              var videojsSettings = (this.settings.videojs) ? 'video-js' : '';
+
+              // jadams: template string
+              video = `
+                <video class="lg-video-object lg-html5 ${videojsTheme} ${videojsSettings} " ${html5VideoAttrs}>
+                  ${html5VideoMarkup}
+                  Your browser does not support HTML5 video.
+               </video>
+              `;
+
+              // var video = `
+              //   <video
+              //     id="${videoId}"
+              //   	class="lg-video-object lg-youtube vjs-theme-uno video-js">
+              //     data-setup='{
+              //       "fluid" : true,
+              //       "techOrder": [
+              //     	"youtube", "html5"
+              //     ],
+              //     "sources": [{
+              //     	"type": "video/youtube",
+              //     	"src": "//youtube.com/watch?v=nV8UZJNBY6"
+              //     }],
+              //     "controlBar": {
+              //     	"pictureInPictureToggle": false,
+              //     	"volumePanel": {
+              //     	  "inline": false
+              //   	   }
+              //     }
+              //   }'>
+              //   	Your browser does not support HTML5 video
+              //   </video>
+              // `;
+
+              // video = "<video class=\"lg-video-object lg-html5 " + (this.settings.videojs && this.settings.videojsTheme
+              //     ? this.settings.videojsTheme + ' '
+              //     : '') + " " + (this.settings.videojs ? ' video-js' : '') + "\" " + html5VideoAttrs_1 + ">\n                " + html5VideoMarkup + "\n                Your browser does not support HTML5 video.\n            </video>";
+
+          }
+
+          return video;
         };
 
         /**

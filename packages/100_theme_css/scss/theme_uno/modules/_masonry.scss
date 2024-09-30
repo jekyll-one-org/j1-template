@@ -124,11 +124,12 @@ a.masonry-article-link:hover {
 }
 
 .masonry-title {
-    text-rendering: optimizeLegibility;
-    text-align: left;
-    line-height: 1.25;
-    font-size: 1.125rem;
-    font-weight: 500;
-    margin-top: 1.75rem;
-    margin-bottom: .5rem;
+  display: flex;
+  align-items: center;
+  text-rendering: optimizeLegibility;
+  text-align: left;
+  line-height: 1.25;
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin-bottom: .5rem;
 }

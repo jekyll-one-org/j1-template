@@ -42,8 +42,9 @@
 * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
 */
 
-'use strict';
 ;(function ($, window, document, undefined) {
+"use strict";
+
   var cookie_names = j1.getCookieNames();
   var gaCookies    = j1.findCookie('_ga');
   var j1Cookies    = j1.findCookie('j1');

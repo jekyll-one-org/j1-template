@@ -1,0 +1,147 @@
+See: http://jquery.eisbehr.de/lazy/example_load-background-images
+
+See: https://www.conroyp.com/articles/improve-load-time-performance-lazily-loading-background-images
+
+See: https://stackoverflow.com/questions/60839271/lazy-load-for-background-images
+
+I am trying to lazyload a background image. In order to do this I added the
+lazy load plugin of jquery: jquery-lazy. We install it with npm i jquery-lazy.
+
+In order to have lazyloaded images I just need to add the class lazy like below:
+
+<img data-src="image.png" class="lazy"> with the js below:
+
+<script>
+  $(function($) {
+    $("img.lazy").Lazy();
+});
+</script>
+
+And it is working correctly.
+
+Unfortunately, I don't know how to do for background images like that:
+
+<div style="background-image: url(background.jpg)">
+
+Indeed here the background image is added in a <div> in the style field.
+
+I am wondering if I can lazyload a background image the same way I did
+with basic images like <img>. I tried to do it by adding <div class="lazy">
+but it is not working.
+
+Interesting question, so I did a little lookup for "div as a background
+for another div" (wondering if there was a way to set a div with something
+like your "lazy" class as the background) and I found this, it might not
+be "the answer" but it may point you in the right direction:
+
+https://stackoverflow.com/questions/25970787/use-a-div-as-a-background-for-another-element
+
+
+Tim Consolazio
+--------------
+What's your clientele? This code seems a bit dated. Do you really need to support browsers down to IE8? –
+Thomas
+ CommentedMar 24, 2020 at 21:22
+I edited my question! –
+Camille BOUQUET
+ CommentedMar 25, 2020 at 19:03
+Add a comment
+
+Report this ad
+2 Answers
+Sorted by:
+
+Highest score (default)
+0
+
+jQuery(function(){
+    jQuery('.lazy').lazy({
+        scrollDirection: 'vertical',
+        effect: 'fadeIn',
+        visibleOnly: true,
+        //-------------------------------------------------
+        bgLoader: function(element) {
+            var small_bg = jQuery(element).css('background-image').match( /^url\(\"(.*?)\"\)$/i )[1];
+            setTimeout(function() {
+                var large_bg = small_bg.replace('40/80', '200/400');
+                jQuery(element).css('background-image', 'url('+large_bg+')');
+                jQuery(element).addClass('loaded');
+                //element.load();
+            }, 500);
+        },
+        //-------------------------------------------------
+    });
+});
+.lazy{
+    height: 200px;
+    width: 250px;
+    filter: blur(4px);
+    transition: filter 2s ease-in;
+
+    background-color: #ccc;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    color: #fff;
+    font-size: 3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.lazy.loaded{
+  filter: none;
+}
+.lazy.bg1{background-image: url(https://picsum.photos/id/1/40/80);}
+.lazy.bg2{background-image: url(https://picsum.photos/id/2/40/80);}
+.lazy.bg3{background-image: url(https://picsum.photos/id/3/40/80);}
+.lazy.bg4{background-image: url(https://picsum.photos/id/4/40/80);}
+.lazy.bg5{background-image: url(https://picsum.photos/id/5/40/80);}
+.lazy.bg6{background-image: url(https://picsum.photos/id/6/40/80);}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
+
+
+<div class="lazy bg1" data-loader="bgLoader"> 1 </div>
+<div class="lazy bg2" data-loader="bgLoader"> 2 </div>
+<div class="lazy bg3" data-loader="bgLoader"> 3 </div>
+<div class="lazy bg4" data-loader="bgLoader"> 4 </div>
+<div class="lazy bg5" data-loader="bgLoader"> 5 </div>
+<div class="lazy bg6" data-loader="bgLoader"> 6 </div>
+Expand snippet
+Share
+Edit
+Follow
+edited May 21, 2021 at 15:27
+answered May 21, 2021 at 15:14
+Hisham Dalal's user avatar
+Hisham Dalal
+59344 silver badges1111 bronze badges
+Add a comment
+0
+
+You can use jquery-lazy for any html tags:
+
+<div class="lazy" style="display: block; background-image: url('http://jquery.eisbehr.de/lazy/images/3.jpg?t=1585165700');"></div>
+
+$(function() {
+    $('.lazy').lazy();
+});
+See example on site (example has wrong html tab, but you can see source on page): http://jquery.eisbehr.de/lazy/example_load-background-images
+
+Share
+Edit
+Follow
+answered Mar 25, 2020 at 19:53
+Denis Stukalov's user avatar
+Denis Stukalov
+1,24411 gold badge77 silver badges1111 bronze badges
+I want to lazy load my image in order to increase the performance of my website. In order to measure this performance I am using the Audit feature next to Console when you inspect a web-page. I did what you advised me to do but my background image is still not lazy-loaded. Indeed, the audit keeps advising me to lazy load this background image... –
+Camille BOUQUET
+ CommentedMar 25, 2020 at 20:09
+Add a comment
+Your Answer
+
+
+Community wiki

@@ -1,0 +1,108 @@
+Was ist ein IntersectionObserver?
+
+Gemini
+--------------------------------------------------------------------------------
+
+
+Ein IntersectionObserver ist ein mächtiges Werkzeug zur Beobachtung von
+Elementen auf einer Webseite. Der IntersectionObserver ist eine JavaScript-API,
+die es ermöglicht, asynchron zu beobachten, ob und wie weit sich ein bestimmtes
+Element mit einem anderen Element, oft dem Viewport (dem sichtbaren Bereich
+des Browsers), überschneidet.
+
+Wofür wird er verwendet?
+
+Lazy Loading:
+  Bilder, Videos oder andere Ressourcen werden erst geladen, wenn
+  sie in den sichtbaren Bereich scrollen. Dies verbessert die Ladezeiten
+  der Seite, insbesondere bei Seiten mit vielen Medieninhalten.
+
+Animationen:
+  Animationen können ausgelöst werden, sobald ein Element in den Viewport
+  eintritt oder ihn verlässt.
+
+Infinite Scroll:
+  Neue Inhalte können automatisch geladen werden, wenn der Benutzer am
+  Ende der Seite angelangt ist und ein bestimmtes Element den Viewport
+  erreicht.
+
+Performance-Optimierung:
+  Durch gezieltes Laden von Ressourcen kann die Performance einer Webseite
+  deutlich verbessert werden.
+
+
+Wie funktioniert der IntersectionObserver?
+
+Erstellung eines IntersectionObserver:
+
+JavaScript
+const observer = new IntersectionObserver(callback);
+
+Der Callback ist eine Funktion, die ausgeführt wird, wenn sich die
+Überschneidung ändert.
+
+Beobachten eines Elements:
+
+JavaScript
+observer.observe(element);
+
+Das Element, das beobachtet werden soll, wird übergeben.
+
+Callback-Funktion:
+  In der Callback-Funktion erhält man Informationen über die Überschneidung,
+  wie z.B.: isIntersecting: Ob das Element sich mit dem Root (z.B. Viewport)
+  überschneidet.
+
+intersectionRatio:
+  Wie viel Prozent des Elements sich mit dem Root überschneidet.
+
+Beispiel:
+
+JavaScript
+const images = document.querySelectorAll('img');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.src = entry.target.dataset.src;  
+    }
+  });
+});
+
+images.forEach(image => {
+  observer.observe(image);
+});
+
+
+In diesem Beispiel werden alle <img>-Elemente beobachtet. Wenn ein
+Bild in den Viewport kommt, wird das eigentliche Bild geladen.
+
+Vorteile des IntersectionObserver:
+
+Effizient:
+  Der Observer arbeitet asynchron und verbraucht nur dann Ressourcen,
+  wenn sich etwas ändert.
+
+Flexibel:
+  Man kann verschiedene Schwellenwerte (Thresholds) definieren, um
+  genau zu bestimmen, wann eine Aktion ausgeführt werden soll.
+
+Einfach zu verwenden:
+  Die API ist relativ einfach zu verstehen und zu implementieren.
+
+
+Zusammenfassung
+--------------------------------------------------------------------------------
+
+Der IntersectionObserver ist ein mächtiges Werkzeug, um das Verhalten von
+Webanwendungen zu optimieren und eine bessere Benutzererfahrung zu schaffen.
+Er ermöglicht es, auf eine effiziente und flexible Weise zu reagieren, wenn
+Elemente auf einer Seite sichtbar werden oder verschwinden.
+
+Möchtest du ein konkretes Beispiel sehen oder hast du weitere Fragen zum
+IntersectionObserver?
+
+Zusätzliche Informationen
+--------------------------
+
+MDN Web Docs:         https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API  
+Mediaevent-Tutorial:  https://www.mediaevent.de/javascript/intersection-observer.html

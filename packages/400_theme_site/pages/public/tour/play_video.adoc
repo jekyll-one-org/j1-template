@@ -66,6 +66,11 @@ resource_options:
 // Set (local) page attributes here
 // -----------------------------------------------------------------------------
 // :page--attr:                         <attr-value>
+:time-num--string:                      5-10
+:time-en--string:                       Minutes
+:time-en--description:                  to read
+:time-de--string:                       Minuten
+:time-de--description:                  Lesezeit
 
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
@@ -88,13 +93,17 @@ software, like _Flash Player_, _Quicktime_, _Silverlight_ is no longer needed
 as the J1 Template provides audio and video support for local video files
 and online sources.
 
-mdi:clock-time-five-outline[24px, md-gray mt-5 mr-2]
-*10-15 Minutes* to read
+[subs=attributes]
+++++
+<div class="video-title">
+  <i class="mdib mdib-clock-outline mdib-24px mr-2"></i>
+  {time-num--string} {time-en--string} {time-en--description}
+</div>
+++++
 
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-
 [role="mt-5"]
 == HTML 5 Player
 // See: https://docs.asciidoctor.org/asciidoc/latest/macros/audio-and-video/

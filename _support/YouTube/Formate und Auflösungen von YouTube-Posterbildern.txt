@@ -1,6 +1,10 @@
 Für YouTube Videos stehen auf den Servern img.youtube.com Poster Images
-in verscheidenen Auflösugen bereit. Es existieren Auflösungen wie
-maxresdefault.jpg oder sddefault.jpg.
+in verscheidenen Auflösugen bereit, z.B:
+
+  https://img.youtube.com/vi/yhXAJVp5nOc/maxresdefault.jpg
+
+
+Es existieren Auflösungen wie maxresdefault.jpg oder sddefault.jpg.
 
 Welche Formate und Auflösungen sind generell vefügbar?
 

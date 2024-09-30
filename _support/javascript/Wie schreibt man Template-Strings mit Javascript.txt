@@ -1,0 +1,70 @@
+Variablen in Templates mit JavaScript
+
+
+Gemini
+--------------------------------------------------------------------------------
+
+Template-Strings sind eine leistungsstarke Funktion in JavaScript, die es
+ermöglicht, Variablen direkt in Strings einzubetten. Das macht das Erstellen
+dynamischer Inhalte, wie zum Beispiel HTML-Elemente, viel einfacher und
+übersichtlicher.
+
+Template-Strings werden mit Backticks (``) umschlossen und erlauben es,
+Variablen innerhalb des Strings mit ${variable}` einzubetten.
+
+Syntax
+JavaScript
+let name = "Max Mustermann";
+let greeting = `Hallo, ${name}!`;
+console.log(greeting); // Ausgabe: Hallo, Max Mustermann!
+Verwende den Code mit Vorsicht.
+
+Beispiel: Erstellen eines HTML-Elements
+
+JavaScript
+let product = {
+  name: "T-Shirt",
+  price: 19.99
+};
+
+let html = `
+  <div class="product">
+    <h2>${product.name}</h2>
+    <p>Preis: ${product.price} €</p>
+  </div>
+`;
+
+document.body.innerHTML = html;
+Verwende den Code mit Vorsicht.
+
+Vorteile von Template-Strings
+Bessere Lesbarkeit: Durch die direkte Einbettung von Variablen wird der Code übersichtlicher und leichter zu verstehen.
+Weniger Konkatenation: Im Vergleich zur herkömmlichen Konkatenation von Strings mit dem +-Operator sind Template-Strings oft kürzer und eleganter.
+Mehrere Zeilen: Template-Strings können sich über mehrere Zeilen erstrecken, was bei längeren HTML-Strukturen von Vorteil ist.
+Ausdrücke: Innerhalb der ${}-Klammern können beliebige JavaScript-Ausdrücke verwendet werden.
+Weitere Möglichkeiten
+Tagged Template Literals: Mit sogenannten "tagged template literals" können Funktionen auf die Teile eines Template-Strings angewendet werden, um beispielsweise formatierte Ausgaben zu erzeugen oder spezielle String-Manipulationen durchzuführen.
+JavaScript
+function highlight(strings, ...values) {
+  let str = '';
+  for (let i = 0; i < values.length; i++) {
+    str += strings[i] + `<span class="highlight">${values[i]}</span>`;
+  }
+  str += strings[values.length];
+  return str;
+}
+
+let name = "Welt";
+let greeting = highlight`Hallo, ${name}!`;
+Verwende den Code mit Vorsicht.
+
+Zusammenfassung
+Template-Strings sind ein mächtiges Werkzeug in JavaScript, um dynamische Inhalte zu erstellen. Sie machen den Code lesbarer, reduzieren die Komplexität und bieten flexible Möglichkeiten zur String-Manipulation.
+
+Wichtige Punkte, die du dir merken solltest:
+
+Backticks: Template-Strings werden mit Backticks (`) umschlossen.
+Variable Einbettung: Variablen werden innerhalb von ${} eingebettet.
+Ausdrücke: Innerhalb der ${} können beliebige JavaScript-Ausdrücke verwendet werden.
+Mehrere Zeilen: Template-Strings können sich über mehrere Zeilen erstrecken.
+Tagged Template Literals: Für fortgeschrittene Anwendungen können tagged template literals eingesetzt werden.

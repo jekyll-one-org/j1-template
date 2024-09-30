@@ -1,0 +1,137 @@
+Use JavaScript to Extract Audio Resources From Videos
+Alexander Parks
+// https://byte-explorer.medium.com/use-javascript-to-extract-audio-resources-from-videos-4a48234cfddf
+
+1. Take the example of selecting local files
+
+Assuming that the locally selected file is a file, we can convert the file
+to an arraybuffer and then use decodeAudioData to convert it to an audioBuffer.
+With the audioBuffer, we can do whatever we want with the audio, including
+splitting, copying, splicing, and merging, which naturally also includes the
+extraction of resources.
+
+const reader = new FileReader();
+reader.onload = function (event) {
+    const arrBuffer = event.target.result;
+    const audioCtx = new AudioContext();
+    audioCtx.decodeAudioData(arrBuffer, function(audioBuffer) {
+        // do something
+    });
+};
+reader.readAsArrayBuffer(file);
+
+The core implementation is that simple.
+
+2. If it is an online URL address
+
+If it is an online URL MP4/WebM video address, the implementation is
+similar. You can use the fetch method to obtain video resources. Remember
+to return the arraybuffer type.
+
+The code shows:
+
+fetch(url).then(res => res.arrayBuffer()).then(buffer => {
+    const audioCtx = new AudioContext();
+    audioCtx.decodeAudioData(buffer, function(audioBuffer) {
+        // do something
+    });
+});
+
+3. Extract audio files from AudioBuffer
+
+If you want to play AudioBuffer data, you can use the createBufferSource
+method, as shown in the code (audioCtx reuses the above context):
+
+const source = audioCtx.createBufferSource();
+source.buffer = audioBuffer;
+source.connect(audioCtx.destination);
+source.start();
+
+If you want to set the volume, you can use a GainNode instance, such as
+new GainNode(audioCtx), or audioCtx.createGain() to create a gainNode.
+
+The code shows:
+
+const audioCtx = new AudioContext();
+const source = audioCtx.createBufferSource();
+const gainNode = audioCtx.createGain();
+gainNode.gain.value = 0.2;
+gainNode.connect(audioCtx.destination);
+source.buffer = audioBuffer;
+source.connect(gainNode);
+source.start();
+
+However, the playback of the bufferSource resource is one-time. It will be
+automatically destroyed after the playback is completed or the stop() method
+is executed. You need to reassign the buffer value.
+This needs to be noted.
+
+A more robust approach
+
+Of course, there is a more robust and easier-to-understand method, which is
+to directly convert the audioBuffer data into WAV audio resources. The
+conversion method is public in the industry and is less than a hundred lines
+of code. It is not shown here!
+
+4. If you just want to play the video as audio
+
+Then just play it directly. Both the <audio> element and the Web Audio API
+support direct playback of video files.
+
+So, if you have a network MP4 URL address that you want to play as a video,
+simply:
+
+const url = 'xxxx.mp4';
+const audio = new Audio();
+audio.src = url;
+audio.play();
+
+If it is a local video file, you can convert the file to a Base64 address or
+Blob address for playback, for example:
+
+file.onchange = function (event) {
+    const file = event.target.files[0];
+    const url = URL.createObjectURL(file);
+    const audio = new Audio();
+    audio.src = url;
+    audio.play();
+};
+
+Isn’t it just a surprise? 😎
+
+5. Let’s talk about something else.
+
+Think about it and see if there is anything else you can add. Oh, by the way,
+videos are often large files, and using fetch to read them often takes a long
+time. It would be best to have a progress reminder effect.
+
+The following code should help you:
+
+fetch(videourl)
+  .then((res) => {
+    const contentLength = res.headers.get("content-length");
+    const reader = res.body.getReader();
+    let lengthReceived = 0;
+    let chunks = [];
+    reader.read().then(function processText({ done, value }) {
+      if (done) {
+        const chuckAll = new Uint8Array(lengthReceived);
+        let position = 0;
+        for (const chunk of chunks) {
+          chuckAll.set(chunk, position);
+          position += chunk.length;
+        }
+        const buffer = chuckAll.buffer;
+        return;
+      }
+      chunks.push(value);
+      lengthReceived += value.length;
+      const progress = Math.round((100 * lengthReceived) / contentLength);
+      return reader.read().then(processText);
+    });
+  })
+  .catch((err) => {
+    console.error("requet video error: ", err);
+  });
+
+If the video is within 50M, I think a little loading icon is enough.

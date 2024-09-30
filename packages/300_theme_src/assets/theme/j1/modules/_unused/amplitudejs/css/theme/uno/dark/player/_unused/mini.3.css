@@ -1,0 +1,151 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/theme/j1/modules/amplitudejs/css/theme/uno/dark/player/mini.css
+ # AmplitudeJS v5.3.2 Mini Player for J1 template
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2023, 2024 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+/* 1. Base
+# --------------------------------------------------------- */
+
+.mini-player {
+  -webkit-font-smoothing: antialiased; /* Chrome, Safari, Edge */
+}
+
+.mini-player-container {
+  width: 475px;
+  background-color: var(--ajs-theme-uno--black);
+}
+
+.mini-player.control-container.meta-container {
+  text-align: center;
+  margin-left: 90px;
+  color: var(--ajs-theme-uno--white);
+}
+
+.mini-player.meta-container {
+  width: calc(100% - 118px);
+}
+
+.mini-player.control-container {
+  display: block;
+}
+
+.mini-player.volume-container {
+  padding-top: 10px;
+  margin-left: 25px;
+  padding-bottom: 20px;
+  width: calc(100% - 43px);
+}
+
+/* 2. Components
+# --------------------------------------------------------- */
+
+.mini-player.control-container
+div#mini_player_previous {
+  float: right;
+  cursor: pointer;
+  height: 24px;
+  width: 24px;
+  margin-top: 8px;
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/previous.svg") no-repeat;
+}
+
+.mini-player.control-container
+div#mini_player_previous:hover {
+  opacity: .5;
+}
+
+.mini-player.control-container
+div#mini_player_next {
+  float: right;
+  cursor: pointer;
+  height: 24px;
+  width: 24px;
+  margin-top: 8px;
+  margin-right: 20px;
+  margin-left: 12px;
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/next.svg") no-repeat;
+}
+
+.mini-player.control-container
+div#mini_player_next:hover {
+  opacity: .5;
+}
+
+.mini-player.control-container
+div.amplitude-play-pause {
+  float: left;
+  display: inline-block;
+  cursor: pointer;
+  width: 150px;
+  height: 100px;
+  margin-left: 16px;
+}
+
+.mini-player.control-container
+div.amplitude-play-pause:hover {
+  opacity: 0.5;
+}
+
+.mini-player.control-container
+div.amplitude-play-pause.amplitude-paused {
+  background-size: cover;
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/large/play.svg") no-repeat;
+}
+.mini-player.control-container
+div.amplitude-play-pause.amplitude-playing {
+  background-size: cover;
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/large/pause.svg") no-repeat;
+}
+
+input[type=range].mini-player.amplitude-volume-slider {
+  margin-top: -14px;
+  margin-left: 24px;
+  width: 95%;
+}
+
+/* 3. Layout
+# --------------------------------------------------------- */
+
+/* Small only
+# --------------------------------------------------------- */
+@media screen and (max-width: 39.9375em) {
+
+  /* jadams, workaround to limit player width on smart phones */
+  .mini-player-container {
+    max-width: 390px;
+  }
+
+  .mini-player {
+    max-width: -webkit-fill-available; /* Chrome, Safari, Edge */
+    max-width: -moz-available; /* Firefox */
+  }
+
+  .mini-player.volume-container {
+    padding-top: 20px;
+  }
+}
+
+/* 4. Pages
+# --------------------------------------------------------- */
+
+/* 5. Themes
+# --------------------------------------------------------- */
+
+/* 6. Utils
+# --------------------------------------------------------- */
+
+/* 7. Vendors
+# --------------------------------------------------------- */
+
+/* 8. Animations
+# --------------------------------------------------------- */

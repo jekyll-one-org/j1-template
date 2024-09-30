@@ -80,12 +80,13 @@
 }
 
 .player-title {
+  display: flex;
+  align-items: center;
   text-rendering: optimizeLegibility;
   text-align: left;
   line-height: 1.25;
   font-size: 1.125rem;
   font-weight: 500;
-  margin-top: 1.75rem;
   margin-bottom: .5rem;
 }
 
@@ -137,7 +138,8 @@
 
 .meta-container .song-name {
   display: block;
-  margin-bottom: 5px;
+  /* margin-bottom: 5px; */
+  margin: 0 15px 8px 15px;
   font-size: 24px;
   font-family: "Lato", sans-serif;
   white-space: nowrap;
