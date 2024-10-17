@@ -191,6 +191,20 @@ exclude_from_search:                    true
             {% assign icon_family = 'mdi' %}
           {% endif %}
 
+          {% comment %} generate the HTML portion for the TOP wave element
+          ---------------------------------------------------------------------- {% endcomment %}
+          {% if wave_properties.top.enabled %}
+            {% include {{get_wave}} position="top" wave=wave_properties.top %}
+            {% assign panel_wave_top = _wave %}
+          {% endif %}
+
+          {% comment %} generate the HTML portion for the BOTTOM wave element
+          ---------------------------------------------------------------------- {% endcomment %}
+          {% if wave_properties.bottom.enabled %}
+            {% include {{get_wave}} position="bottom" wave=wave_properties.bottom %}
+            {% assign panel_wave_bottom = _wave %}
+          {% endif %}
+
           {% comment %} process current panel
           ---------------------------------------------------------------------- {% endcomment %}
           {% if panel_settings.enabled %}
@@ -198,12 +212,16 @@ exclude_from_search:                    true
             {% case panel_settings.type %}
 
             {% comment %} Collect INTRO panel
-            ==================================================================== {% endcomment %}
+            -------------------------------------------------------------------- {% endcomment %}
             {% when 'intro' %}
             {% assign panel_options = panel_config_defaults.intro | merge: panel_settings %}
 
             <!-- Panel {{panel_settings.id}} -->
             <div id="{{panel_settings.id}}_content">
+
+              {% if wave_properties.top.enabled %}
+                {{panel_wave_top}}
+              {% endif %}
 
               <!-- Main Container -->
               <div class="container {{panel_settings.properties}}">
@@ -278,7 +296,7 @@ exclude_from_search:                    true
                         {% if key == 'text' %}            {% assign card_text             = value | strip_newlines %}  {% endif %}
                         {% if key == 'buttons' %}         {% assign card_buttons          = value %}                   {% endif %}
                       {% endfor %}
-                      {% if card_enabled == false %} {% assign card_items = card_items|minus:1 %} {% assign card_enabled = false %} {% endif %}
+                      {% if card_enabled == false %} {% assign card_items = card_items|minus:1 %} {% assign card_enabled = false%} {% endif %}
                     {% endfor %}
                     {% assign col_size = 12|divided_by:card_items %}
 
@@ -374,18 +392,22 @@ exclude_from_search:                    true
               </div>
               <!-- END main container -->
 
+              {% if wave_properties.bottom.enabled %}
+                {{panel_wave_bottom}}
+              {% endif %}
+
             </div>
 
             <!-- END Panel {{panel_settings.id}} -->
 
             {% comment %} Reset element variables (already processed)
             -------------------------------------------------------------------- {% endcomment %}
-            {% assign panel_settings = false %}
-            {% assign card_enabled   = false %}
+            {% assign panel_settings = false%}
+            {% assign card_enabled   = false%}
 
 
             {% comment %} Collect PLAN panel
-            ==================================================================== {% endcomment %}
+            -------------------------------------------------------------------- {% endcomment %}
             {% when 'plan' %}
             {% assign panel_options     = panel_config_defaults.plan | merge: panel_settings %}
             {% assign plan_details_page = panel_options.plan_details_page %}
@@ -419,6 +441,10 @@ exclude_from_search:                    true
 
             <!-- Panel {{panel_settings.id}} -->
             <div id="{{panel_settings.id}}_content">
+
+              {% if wave_properties.top.enabled %}
+                {{panel_wave_top}}
+              {% endif %}
 
               <!-- Main Container -->
               <div class="container {{panel_settings.properties}}">
@@ -461,7 +487,7 @@ exclude_from_search:                    true
                       {% if key == 'enabled' %} {% assign card_enabled = value %} {% endif %}
                     {% endfor %}
                     {% if card_enabled == false %}
-                    {% assign card_items = card_items|minus:1 %} {% assign card_enabled = false %} {% endif %}
+                    {% assign card_items = card_items|minus:1 %} {% assign card_enabled = false%} {% endif %}
                   {% endfor %}
                 {% endfor %}
 
@@ -565,18 +591,25 @@ exclude_from_search:                    true
 
               </div> <!-- END main container -->
 
+              {% if wave_properties.bottom.enabled %}
+                {{panel_wave_bottom}}
+              {% endif %}
+
             </div> <!-- END Panel {{panel_settings.id}} -->
 
             {% comment %} Reset element variables (already processed)
             -------------------------------------------------------------------- {% endcomment %}
-            {% assign panel_settings = false %}
+            {% assign panel_settings = false%}
 
             {% comment %} END PLAN panel
             -------------------------------------------------------------------- {% endcomment %}
 
 
             {% comment %} Collect SERVICE panel
-            ==================================================================== {% endcomment %}
+            panel_defaults:  {{panel_config_defaults.service}}
+            panel_settings:  {{panel_settings}}
+             panel_options:  {{panel_options}}
+            -------------------------------------------------------------------- {% endcomment %}
             {% when 'service' %}
             {% assign panel_options = panel_config_defaults.service | merge: panel_settings %}
 
@@ -602,6 +635,10 @@ exclude_from_search:                    true
 
             <!-- Panel {{panel_settings.id}} -->
             <div id="{{panel_settings.id}}_content">
+
+              {% if wave_properties.top.enabled %}
+                {{panel_wave_top}}
+              {% endif %}
 
               <!-- Main Container -->
               <div class="container {{panel_settings.properties}}">
@@ -643,7 +680,7 @@ exclude_from_search:                    true
                       {% if key == 'enabled' %} {% assign card_enabled = value %} {% endif %}
                     {% endfor %}
                     {% if card_enabled == false %}
-                    {% assign card_items = card_items|minus:1 %} {% assign card_enabled = false %} {% endif %}
+                    {% assign card_items = card_items|minus:1 %} {% assign card_enabled = false%} {% endif %}
                   {% endfor %}
                 {% endfor %}
 
@@ -755,19 +792,23 @@ exclude_from_search:                    true
               </div>
               <!-- End Main Container -->
 
+              {% if wave_properties.bottom.enabled %}
+                {{panel_wave_bottom}}
+              {% endif %}
+
             </div>
             <!-- END Panel {{panel_settings.id}} -->
 
             {% comment %} Reset element variables (already processed)
             -------------------------------------------------------------------- {% endcomment %}
-            {% assign panel_settings = false %}
+            {% assign panel_settings = false%}
 
             {% comment %} END SERVICES panel
             -------------------------------------------------------------------- {% endcomment %}
 
 
             {% comment %} Collect NEWS panel
-            ==================================================================== {% endcomment %}
+            -------------------------------------------------------------------- {% endcomment %}
             {% when 'news' %}
 
             {% assign panel_options = panel_config_defaults.news|merge: panel_settings %}
@@ -794,6 +835,10 @@ exclude_from_search:                    true
 
             <!-- Panel {{panel_settings.id}} -->
             <div id="{{panel_settings.id}}_content">
+
+              {% if wave_properties.top.enabled %}
+                {{panel_wave_top}}
+              {% endif %}
 
               <!-- Main Container -->
               <div class="container {{panel_settings.properties}}">
@@ -851,9 +896,9 @@ exclude_from_search:                    true
                     {% assign card_block = "card-deck" %}
                   {% endif %}
 
-                  <div id="previewer" class="previewer-headline">
+                  <div class="previewer-headline">
                     <div class="post-headline">
-                  	<h2 id="post-headline" class="notoc notranslate mt-3">Vorschau</h2>
+                  	<h2 id="post-headline" class="notoc mt-4">Preview</h2>
                     </div>
                   </div>
 
@@ -1010,19 +1055,23 @@ exclude_from_search:                    true
               </div>
               <!-- End Main Container -->
 
+              {% if wave_properties.bottom.enabled %}
+                {{panel_wave_bottom}}
+              {% endif %}
+
             </div>
             <!-- End news panel: {{panel_settings.id}} -->
 
             {% comment %} Reset element variables (already processed)
             -------------------------------------------------------------------- {% endcomment %}
-            {% assign panel_settings = false %}
+            {% assign panel_settings = false%}
 
             {% comment %} END NEWS panel
             -------------------------------------------------------------------- {% endcomment %}
 
             {% else %}
             {% comment %} Collect EXCEPTION panel: given type NOT found
-            ==================================================================== {% endcomment %}
+            -------------------------------------------------------------------- {% endcomment %}
             {% unless panel_settings.id == 'exception_container' %}
             <div id="{{panel_settings.id}}_content">
               <div class="container-fluid no-padding">
@@ -1053,7 +1102,7 @@ exclude_from_search:                    true
 
             {% comment %} Reset element variables (already processed)
             -------------------------------------------------------------------- {% endcomment %}
-            {% assign panel_settings = false %}
+            {% assign panel_settings = false%}
 
             {% comment %} END EXEPTION panel
             -------------------------------------------------------------------- {% endcomment %}

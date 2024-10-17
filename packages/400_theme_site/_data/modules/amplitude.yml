@@ -29,6 +29,53 @@ settings:
   # ----------------------------------------------------------------------------
   playlists:
 
+
+    # --------------------------------------------------------------------------
+    # Emancipator
+    # --------------------------------------------------------------------------
+    #
+    - playlist:
+      enabled:                          false
+
+      name:                             amplitude_ytp
+      title:                            Amplitude YT
+
+      # ------------------------------------------------------------------------
+      # ALBUM settings
+      # ------------------------------------------------------------------------
+      album:                            &album_amplitude_ytp
+        name:                           Amplitude YT
+        artist:                         YouTube
+#       audio_base:                     //521dimensions.com/song
+        audio_base:                     /assets/audio/album/emancipator/from-dusk-to-dawn
+        cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
+
+      # ------------------------------------------------------------------------
+      # TITLE settings (songs)
+      # ------------------------------------------------------------------------
+      items:
+
+        # title 01
+        - item:
+          enabled:                      true
+          <<:                           *album_amplitude_ytp
+          title:                        Dusk To Dawn
+          audio:                        DuskToDawn.mp3
+          audio_info:                   //emancipator.bandcamp.com/
+          cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn/from-dusk-to-dawn.jpg
+          duration:                     "5:25"
+
+        # title 02
+        - item:
+          enabled:                      true
+          <<:                           *album_amplitude_ytp
+          title:                        First Snow
+          audio:                        FirstSnow.mp3
+          audio_info:                   //emancipator.bandcamp.com/
+          cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn/soon-it-will-be-cold-enough.jpg
+          duration:                     "5:12"
+
+
     # --------------------------------------------------------------------------
     # Emancipator
     # --------------------------------------------------------------------------
@@ -399,6 +446,26 @@ settings:
         title:                          Emancipator
         audio_info:                     true
         controls:                       true
+
+
+    # --------------------------------------------------------------------------
+    # LARGE player, Amplitude YT
+    # --------------------------------------------------------------------------
+    #
+    # - plaver:
+    #   enabled:                          true
+    #
+    #   # ------------------------------------------------------------------------
+    #   # PLAYER settings
+    #   #
+    #   id:                               amplitude_ytp_large
+    #   type:                             large
+    #
+    #   playlist:
+    #     name:                           amplitude_ytp
+    #     title:                          Amplitude YT
+    #     audio_info:                     true
+    #     controls:                       true
 
 # ------------------------------------------------------------------------------
 # END config

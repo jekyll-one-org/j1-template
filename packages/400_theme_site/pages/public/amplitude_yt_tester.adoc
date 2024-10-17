@@ -1,7 +1,7 @@
 ---
-title:                                  Video Tester
-title_extention:                        Test Video Integrations
-tagline:                                Test Video Integration
+title:                                  Amplitude YT Tester
+title_extention:                        YT Video Integration
+tagline:                                YT Video Integration
 
 date:                                   2024-09-21
 #last_modified:                         2024-01-01
@@ -27,9 +27,12 @@ image:
 attic:                                  false
 regenerate:                             false
 personalization:                        true
-permalink:                              /pages/public/video_tester/
+permalink:                              /pages/public/amplitude_yt_tester/
 
-resources:                              [ gallery, lightgallery, master-slider, videojs ]
+resources:                              [
+                                          amplitudejs, videojs,
+                                          gallery, lightgallery, master-slider
+                                        ]
 resource_options:
   - attic:
       slides:
@@ -130,7 +133,7 @@ https://www.labnol.org/internet/embed-part-of-youtube-video/27948/[embeda part, 
 of the video.
 
 [role="mt-5"]
-=== Player
+=== YT Player
 ++++
 <!-- 1. The <iframe> (and video player) will replace this <div> tag.            -->
 <!-- =========================================================================== -->
@@ -149,7 +152,7 @@ $(function() {
   var techScript;
 
   var tech    = document.createElement('script');
-  tech.src    = "/assets/theme/j1/modules/amplitudejs/js/plugins/tech/youtube.js";
+  tech.src    = "/assets/theme/j1/modules/amplitudejs/js/tech/youtube.js";
   techScript  = document.getElementsByTagName('script')[0];
 
   techScript.parentNode.insertBefore(tech, techScript);
@@ -158,6 +161,15 @@ $(function() {
 
 </script>
 ++++
+
+[role="mt-5"]
+=== Amplitude Player
+
+lorem:sentences[5]
+
+.Amplitude YT · YT Audio
+amplitude::amplitude_ytp_large[role="mt-3 mb-5"]
+
 
 
 ////
