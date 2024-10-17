@@ -146,6 +146,9 @@ j1.adapter.amplitude = ((j1, window) => {
   var playerPauseNextTitle      = ('{{amplitude_defaults.player.pause_next_title}}' === 'true') ? true : false;
   var playerDelayNextTitle      = '{{amplitude_defaults.player.delay_next_title}}';
 
+  var playerSkipSeconds         = 10;
+
+
   // unused settings
   // var playerWaveformSampleRate  = '{{amplitude_defaults.player.waveform_sample_rate}}';
 
@@ -227,38 +230,6 @@ j1.adapter.amplitude = ((j1, window) => {
           // -------------------------------------------------------------------
           var dependencies_met_api_initialized = setInterval (() => {
             if (apiInitialized.state) {
-
-              // click on next button
-              // -------------------------------------------------------
-              // var nextButtons = document.getElementsByClassName("amplitude-next");
-              //
-              // // add listeners to all next buttonn found
-              // for (var i=0; i<nextButtons.length; i++) {
-              //   nextButtons[i].addEventListener('click', function(event) {
-              //     event.stopPropagation();
-              //
-              //     var activeTitleIndex  = Amplitude.getActiveIndex();
-              //     var playerState       = Amplitude.getPlayerState();
-              //     logger.debug('\n' + 'next player state: ' + playerState + ' on index=' + activeTitleIndex);
-              //   });
-              // }
-
-              // click on previous button
-              // -------------------------------------------------------
-              // var previousButtons = document.getElementsByClassName("amplitude-prev");
-              //
-              // // add listeners to all previous buttonn found
-              // for (var i=0; i<previousButtons.length; i++) {
-              //   previousButtons[i].addEventListener('click', function(event) {
-              //     event.stopPropagation();
-              //
-              //     var activeTitleIndex  = Amplitude.getActiveIndex();
-              //     var playerState       = Amplitude.getPlayerState();
-              //     logger.debug('\n' + 'previous player state: ' + playerState + ' on index=' + activeTitleIndex);
-              //
-              //   });
-              // }
-
               _this.initPlayerUiEvents();
 
               clearInterval(dependencies_met_api_initialized);
@@ -703,39 +674,40 @@ j1.adapter.amplitude = ((j1, window) => {
 
                           Amplitude.setSongPlayedPercentage(
                             (parseFloat(xpos)/parseFloat(this.offsetWidth))*100);
-                        });
+                        }); // END EventListener 'click'
                       }
 
                       // click on skip forward|backward (compact player)
                       // See: https://github.com/serversideup/amplitudejs/issues/384
                       // -------------------------------------------------------
-                      var compactPlayerSkipForwardButtons = document.getElementsByClassName("compact-player-skip-forward");
+
                       // add listeners to all SkipForwardButtons found
+                      var compactPlayerSkipForwardButtons = document.getElementsByClassName("compact-player-skip-forward");
                       for (var i=0; i<compactPlayerSkipForwardButtons.length; i++) {
                         compactPlayerSkipForwardButtons[i].addEventListener('click', function(event) {
-                          const seconds     = 10;
+                          // const seconds     = 10;
                           const duration    = Amplitude.getSongDuration();
                           const currentTime = parseFloat(Amplitude.getSongPlayedSeconds());
-                          const targetTime  = parseFloat(currentTime + seconds);
+                          const targetTime  = parseFloat(currentTime + playerSkipSeconds);
 
                           if (currentTime > 0) {
                             Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
-                          }
+                          } // END EventListener 'click'
                         });
                       }
 
-                      var compactPlayerSkipBackwardButtons = document.getElementsByClassName("compact-player-skip-backward");
                       // add listeners to all SkipBackwardButtons found
+                      var compactPlayerSkipBackwardButtons = document.getElementsByClassName("compact-player-skip-backward");
                       for (var i=0; i<compactPlayerSkipBackwardButtons.length; i++) {
                         compactPlayerSkipBackwardButtons[i].addEventListener('click', function(event) {
-                          const seconds     = 10;
+                          // const seconds     = 10;
                           const duration    = Amplitude.getSongDuration();
                           const currentTime = parseFloat(Amplitude.getSongPlayedSeconds());
-                          const targetTime  = parseFloat(currentTime - seconds);
+                          const targetTime  = parseFloat(currentTime - playerSkipSeconds);
 
                           if (currentTime > 0) {
                             Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
-                          }
+                          } // END EventListener 'click'
                         });
                       }
 
@@ -743,13 +715,13 @@ j1.adapter.amplitude = ((j1, window) => {
                       document.getElementById('compact_player_shuffle').addEventListener('click', function(event) {
                         var shuffleState = (document.getElementById('compact_player_shuffle').className.includes('amplitude-shuffle-on')) ? true : false;
                         Amplitude.setShuffle(shuffleState)
-                      });
+                      }); // END EventListener 'click'
 
                       // click on repeat icon
                       document.getElementById('compact_player_repeat').addEventListener('click', function(event) {
                         var repeatState = (document.getElementById('compact_player_repeat').className.includes('amplitude-repeat-on')) ? true : false;
                         Amplitude.setRepeat(repeatState)
-                      });
+                      }); // END EventListener 'click'
 
                     } // END compact player UI events
                     {% endif %}
@@ -759,11 +731,9 @@ j1.adapter.amplitude = ((j1, window) => {
                     //
                     if (document.getElementById(playerID) !== null) {
 
-                      // click on progress bar
+                      // add listeners to all progress bars found
                       // -------------------------------------------------------
                       var progressBars = document.getElementsByClassName("large-player-progress");
-
-                      // add listeners to all progress bars found
                       for (var i=0; i<progressBars.length; i++) {
                         progressBars[i].addEventListener('click', function(event) {
                           var offset = this.getBoundingClientRect();
@@ -771,39 +741,40 @@ j1.adapter.amplitude = ((j1, window) => {
 
                           Amplitude.setSongPlayedPercentage(
                             (parseFloat(xpos)/parseFloat(this.offsetWidth))*100);
-                        });
+                        }); // END EventListener 'click'
                       }
 
                       // click on skip forward|backward (large player)
                       // See: https://github.com/serversideup/amplitudejs/issues/384
                       // -------------------------------------------------------
-                      var largePlayerSkipForwardButtons = document.getElementsByClassName("large-player-skip-forward");
+
                       // add listeners to all SkipForwardButtons found
+                      var largePlayerSkipForwardButtons = document.getElementsByClassName("large-player-skip-forward");
                       for (var i=0; i<largePlayerSkipForwardButtons.length; i++) {
                         largePlayerSkipForwardButtons[i].addEventListener('click', function(event) {
-                          const seconds     = 10;
+                          // const seconds     = 10;
                           const duration    = Amplitude.getSongDuration();
                           const currentTime = parseFloat(Amplitude.getSongPlayedSeconds());
-                          const targetTime  = parseFloat(currentTime + seconds);
+                          const targetTime  = parseFloat(currentTime + playerSkipSeconds);
 
                           if (currentTime > 0) {
                             Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
-                          }
+                          } // END EventListener 'click'
                         });
                       }
 
-                      var largePlayerSkipBackwardButtons = document.getElementsByClassName("large-player-skip-backward");
                       // add listeners to all SkipBackwardButtons found
+                      var largePlayerSkipBackwardButtons = document.getElementsByClassName("large-player-skip-backward");
                       for (var i=0; i<largePlayerSkipBackwardButtons.length; i++) {
                         largePlayerSkipBackwardButtons[i].addEventListener('click', function(event) {
-                          const seconds     = 10;
+                          // const seconds     = 10;
                           const duration    = Amplitude.getSongDuration();
                           const currentTime = parseFloat(Amplitude.getSongPlayedSeconds());
-                          const targetTime  = parseFloat(currentTime - seconds);
+                          const targetTime  = parseFloat(currentTime - playerSkipSeconds);
 
                           if (currentTime > 0) {
                             Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
-                          }
+                          } // END EventListener 'click'
                         });
                       }
 
@@ -811,13 +782,13 @@ j1.adapter.amplitude = ((j1, window) => {
                       document.getElementById('large_player_shuffle').addEventListener('click', function(event) {
                         var shuffleState = (document.getElementById('large_player_shuffle').className.includes('amplitude-shuffle-on')) ? true : false;
                         Amplitude.setShuffle(shuffleState)
-                      });
+                      }); // END EventListener 'click'
 
                       // click on repeat icon
                       document.getElementById('repeat_container_large_player').addEventListener('click', function(event) {
                         var repeatState = (document.getElementById('repeat_container_large_player').className.includes('amplitude-repeat-on')) ? true : false;
                         Amplitude.setRepeat(repeatState)
-                      });
+                      }); // END EventListener 'click'
 
                       // enable|disable scrolling on playlist
                       // -------------------------------------------------------
