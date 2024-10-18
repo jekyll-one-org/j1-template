@@ -309,41 +309,42 @@ j1.adapter.amplitude = ((j1, window) => {
       logger.info('\n' + 'loading player HTML components (UI): started');
 
       {% for player in amplitude_options.players %} {% if player.enabled %}
+        {% assign player_id     = player.id %}
         {% assign xhr_data_path = amplitude_options.xhr_data_path %}
-        {% capture xhr_container_id %}{{player.id}}_parent{% endcapture %}
+        {% capture xhr_container_id %}{{player_id}}_parent{% endcapture %}
 
         // load players only that are configured in current page
         //
         playerExistsInPage = ($('#' + '{{xhr_container_id}}')[0] !== undefined) ? true : false;
         if (playerExistsInPage) {
           playerCounter++;
-          logger.debug('\n' + 'load player UI on ID #{{player.id}}: started');
+          logger.debug('\n' + 'load player UI on ID #{{player_id}}: started');
 
           j1.loadHTML({
             xhr_container_id: '{{xhr_container_id}}',
             xhr_data_path:    '{{xhr_data_path}}',
-            xhr_data_element: '{{player.id}}'
+            xhr_data_element: '{{player_id}}'
             },
             'j1.adapter.amplitude',
             'data_loaded'
           );
 
-          // dynamic loader variable to setup the player on ID {{player.id}}
-          dependency = 'dependencies_met_html_loaded_{{player.id}}';
+          // dynamic loader variable to setup the player on ID {{player_id}}
+          dependency = 'dependencies_met_html_loaded_{{player_id}}';
           load_dependencies[dependency] = '';
 
           // ---------------------------------------------------------------------
           // initialize amplitude instance (when player UI loaded)
           // ---------------------------------------------------------------------
-          load_dependencies['dependencies_met_html_loaded_{{player.id}}'] = setInterval (() => {
+          load_dependencies['dependencies_met_html_loaded_{{player_id}}'] = setInterval (() => {
             // check if HTML portion of the player is loaded successfully
             xhrLoadState = j1.xhrDOMState['#' + '{{xhr_container_id}}'];
 
             if (xhrLoadState === 'success') {
               playersProcessed.push('{{xhr_container_id}}');
-              logger.debug('\n' + 'load player UI on ID #{{player.id}}: finished');
+              logger.debug('\n' + 'load player UI on ID #{{player_id}}: finished');
 
-              clearInterval(load_dependencies['dependencies_met_html_loaded_{{player.id}}']);
+              clearInterval(load_dependencies['dependencies_met_html_loaded_{{player_id}}']);
             }
           }, 10); // END dependencies_met_html_loaded
         } // END if playerExistsInPage
@@ -523,8 +524,9 @@ j1.adapter.amplitude = ((j1, window) => {
             logger.info('\n' + 'initialize player specific UI events: started');
 
           {% for player in amplitude_options.players %} {% if player.enabled %}
+            {% assign player_id     = player.id %}
             {% assign xhr_data_path = amplitude_options.xhr_data_path %}
-            {% capture xhr_container_id %}{{player.id}}_parent{% endcapture %}
+            {% capture xhr_container_id %}{{player_id}}_parent{% endcapture %}
 
             playerID      = '{{player.id}}';
             playerType    = '{{player.type}}';
@@ -532,16 +534,16 @@ j1.adapter.amplitude = ((j1, window) => {
             playListName  = '{{player.playlist.name}}'
             playListTitle = '{{player.playlist.title}}';
 
-            logger.debug('\n' + 'set playlist {{player.playlist}} on id #{{player.id}} with title: ' + playListTitle);
+            logger.debug('\n' + 'set playlist {{player.playlist}} on id #{{player_id}} with title: ' + playListTitle);
 
-            // dynamic loader variable to setup the player on ID {{player.id}}
-            dependency = 'dependencies_met_player_loaded_{{player.id}}';
+            // dynamic loader variable to setup the player on ID {{player_id}}
+            dependency = 'dependencies_met_player_loaded_{{player_id}}';
             load_dependencies[dependency] = '';
 
             // -----------------------------------------------------------------
             // initialize player instance (when player UI is loaded)
             // -----------------------------------------------------------------
-            load_dependencies['dependencies_met_player_loaded_{{player.id}}'] = setInterval (() => {
+            load_dependencies['dependencies_met_player_loaded_{{player_id}}'] = setInterval (() => {
               // check if HTML portion of the player is loaded successfully
               var xhrLoadState = j1.xhrDOMState['#' + '{{xhr_container_id}}'];
 
@@ -561,7 +563,7 @@ j1.adapter.amplitude = ((j1, window) => {
 
                 // player specific UI events
                 // -------------------------------------------------------------
-                logger.debug('\n' + 'setup player specific UI events on ID #{{player.id}}: started');
+                logger.debug('\n' + 'setup player specific UI events on ID #{{player_id}}: started');
 
                 var dependencies_met_api_initialized = setInterval (() => {
                   if (apiInitialized.state) {
@@ -571,7 +573,7 @@ j1.adapter.amplitude = ((j1, window) => {
                     // ---------------------------------------------------------
                     // START mini player UI events
                     //
-                    if (document.getElementById('{{player.id}}') !== null) {
+                    if (document.getElementById(playerID) !== null) {
 
                       // click on progress bar
                       // -------------------------------------------------------
@@ -597,7 +599,7 @@ j1.adapter.amplitude = ((j1, window) => {
                     // ---------------------------------------------------------
                     // START compact player UI events
                     //
-                    if (document.getElementById('{{player.id}}') !== null) {
+                    if (document.getElementById(playerID) !== null) {
 
                       // show|hide scrollbar in playlist
                       // -------------------------------------------------------
@@ -726,7 +728,7 @@ j1.adapter.amplitude = ((j1, window) => {
                     {% if player.id contains 'large' %}
                     // START large player UI events
                     //
-                    if (document.getElementById('{{player.id}}') !== null) {
+                    if (document.getElementById(playerID) !== null) {
 
                       // add listeners to all progress bars found
                       // -------------------------------------------------------
@@ -857,13 +859,13 @@ j1.adapter.amplitude = ((j1, window) => {
                     // finished messages
                     // ---------------------------------------------------------
                     logger.debug('\n' + 'current player state: ' + amplitudePlayerState);
-                    logger.debug('\n' + 'setup player specific UI events on ID #{{player.id}}: finished');
+                    logger.debug('\n' + 'setup player specific UI events on ID #{{player_id}}: finished');
 
                     clearInterval(dependencies_met_api_initialized);
                   } // END if apiInitialized
                 }, 10); // END dependencies_met_api_initialized
 
-                clearInterval(load_dependencies['dependencies_met_player_loaded_{{player.id}}']);
+                clearInterval(load_dependencies['dependencies_met_player_loaded_{{player_id}}']);
               } // END if xhrLoadState success
             }, 10); // END dependencies_met_html_loaded
 
