@@ -681,32 +681,36 @@ j1.adapter.amplitude = ((j1, window) => {
                       // add listeners to all SkipForwardButtons found
                       var compactPlayerSkipForwardButtons = document.getElementsByClassName("compact-player-skip-forward");
                       for (var i=0; i<compactPlayerSkipForwardButtons.length; i++) {
-                        compactPlayerSkipForwardButtons[i].addEventListener('click', function(event) {
-                          const skipOffset  = parseFloat(playerSkipSeconds);
-                          const duration    = Amplitude.getSongDuration();
-                          const currentTime = parseFloat(Amplitude.getSongPlayedSeconds());
-                          const targetTime  = parseFloat(currentTime + skipOffset);
+                        if (compactPlayerSkipForwardButtons[i].id === 'skip-forward_{{player.id}}') {
+                          compactPlayerSkipForwardButtons[i].addEventListener('click', function(event) {
+                            const skipOffset  = parseFloat(playerSkipSeconds);
+                            const duration    = Amplitude.getSongDuration();
+                            const currentTime = parseFloat(Amplitude.getSongPlayedSeconds());
+                            const targetTime  = parseFloat(currentTime + skipOffset);
 
-                          if (currentTime > 0) {
-                            Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
-                          } // END EventListener 'click'
-                        });
-                      }
+                            if (currentTime > 0) {
+                              Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
+                            } // END EventListener 'click'
+                          });
+                        } // END if ID
+                      } // END for SkipForwardButtons
 
                       // add listeners to all SkipBackwardButtons found
                       var compactPlayerSkipBackwardButtons = document.getElementsByClassName("compact-player-skip-backward");
                       for (var i=0; i<compactPlayerSkipBackwardButtons.length; i++) {
-                        compactPlayerSkipBackwardButtons[i].addEventListener('click', function(event) {
-                          const skipOffset  = parseFloat(playerSkipSeconds);
-                          const duration    = Amplitude.getSongDuration();
-                          const currentTime = parseFloat(Amplitude.getSongPlayedSeconds());
-                          const targetTime  = parseFloat(currentTime - skipOffset);
+                        if (compactPlayerSkipBackwardButtons[i].id === 'skip-backward_{{player.id}}') {
+                          compactPlayerSkipBackwardButtons[i].addEventListener('click', function(event) {
+                            const skipOffset  = parseFloat(playerSkipSeconds);
+                            const duration    = Amplitude.getSongDuration();
+                            const currentTime = parseFloat(Amplitude.getSongPlayedSeconds());
+                            const targetTime  = parseFloat(currentTime - skipOffset);
 
-                          if (currentTime > 0) {
-                            Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
-                          } // END EventListener 'click'
-                        });
-                      }
+                            if (currentTime > 0) {
+                              Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
+                            } // END EventListener 'click'
+                          });
+                        } // END if ID
+                      } // END for SkipBackwardButtons
 
                       // click on shuffle icon
                       document.getElementById('compact_player_shuffle').addEventListener('click', function(event) {
@@ -748,32 +752,36 @@ j1.adapter.amplitude = ((j1, window) => {
                       // add listeners to all SkipForwardButtons found
                       var largePlayerSkipForwardButtons = document.getElementsByClassName("large-player-skip-forward");
                       for (var i=0; i<largePlayerSkipForwardButtons.length; i++) {
-                        largePlayerSkipForwardButtons[i].addEventListener('click', function(event) {
-                          const skipOffset  = parseFloat(playerSkipSeconds);
-                          const duration    = Amplitude.getSongDuration();
-                          const currentTime = parseFloat(Amplitude.getSongPlayedSeconds());
-                          const targetTime  = parseFloat(currentTime + skipOffset);
+                        if (largePlayerSkipForwardButtons[i].id === 'skip-forward_{{player.id}}') {
+                          largePlayerSkipForwardButtons[i].addEventListener('click', function(event) {
+                            const skipOffset  = parseFloat(playerSkipSeconds);
+                            const duration    = Amplitude.getSongDuration();
+                            const currentTime = parseFloat(Amplitude.getSongPlayedSeconds());
+                            const targetTime  = parseFloat(currentTime + skipOffset);
 
-                          if (currentTime > 0) {
-                            Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
-                          } // END EventListener 'click'
-                        });
-                      }
+                            if (currentTime > 0) {
+                              Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
+                            } // END EventListener 'click
+                          });
+                        } // END if ID
+                      } // END for SkipForwardButtons
 
                       // add listeners to all SkipBackwardButtons found
                       var largePlayerSkipBackwardButtons = document.getElementsByClassName("large-player-skip-backward");
                       for (var i=0; i<largePlayerSkipBackwardButtons.length; i++) {
-                        largePlayerSkipBackwardButtons[i].addEventListener('click', function(event) {
-                          const skipOffset  = parseFloat(playerSkipSeconds);
-                          const duration    = Amplitude.getSongDuration();
-                          const currentTime = parseFloat(Amplitude.getSongPlayedSeconds());
-                          const targetTime  = parseFloat(currentTime - skipOffset);
+                        if (largePlayerSkipBackwardButtons[i].id === 'skip-backward_{{player.id}}') {
+                          largePlayerSkipBackwardButtons[i].addEventListener('click', function(event) {
+                            const skipOffset  = parseFloat(playerSkipSeconds);
+                            const duration    = Amplitude.getSongDuration();
+                            const currentTime = parseFloat(Amplitude.getSongPlayedSeconds());
+                            const targetTime  = parseFloat(currentTime - skipOffset);
 
-                          if (currentTime > 0) {
-                            Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
-                          } // END EventListener 'click'
-                        });
-                      }
+                            if (currentTime > 0) {
+                              Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
+                            } // END EventListener 'click'
+                          });
+                        } // END if ID
+                      } // END for SkipBackwardButtons
 
                       // click on shuffle icon
                       document.getElementById('large_player_shuffle').addEventListener('click', function(event) {

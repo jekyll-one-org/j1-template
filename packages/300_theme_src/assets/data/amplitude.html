@@ -394,13 +394,19 @@ amplitude_defaults: {{amplitude_defaults | debug}}
                       class="amplitude-prev"
                       data-amplitude-playlist="{{player_playlist}}">
                     </div>
-                    <div class="compact-player-skip-backward"></div>
+                    <div
+                      id="skip-backward_{{player_id}}"
+                      class="compact-player-skip-backward">
+                   </div>
                     <div
                       id="compact_player_play_pause"
                       class="amplitude-play-pause amplitude-paused"
                       data-amplitude-playlist="{{player_playlist}}">
                     </div>
-                    <div class="compact-player-skip-forward"></div>
+                    <div
+                      id="skip-forward_{{player_id}}"
+                      class="compact-player-skip-forward">
+                    </div>
                     <div
                       id="compact_player_next"
                       class="amplitude-next"
@@ -563,13 +569,19 @@ amplitude_defaults: {{amplitude_defaults | debug}}
                   class="amplitude-prev"
                   data-amplitude-playlist="{{player_playlist}}">
                 </div>
-                <div class="large-player-skip-backward"></div>
+                <div
+                  id="skip-backward_{{player_id}}"
+                  class="large-player-skip-backward">
+                </div>
                 <div
                   id="large_player_play_pause"
                   class="amplitude-play-pause amplitude-paused"
                   data-amplitude-playlist="{{player_playlist}}">
                 </div>
-                <div class="large-player-skip-forward"></div>
+                <div
+                  id="skip-forward_{{player_id}}"
+                  class="large-player-skip-forward">
+                </div>
                 <div
                   id="large_player_next"
                   class="amplitude-next"
