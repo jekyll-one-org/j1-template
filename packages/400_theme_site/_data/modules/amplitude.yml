@@ -346,6 +346,15 @@ settings:
       id:                               free_disco_mini
       type:                             mini
 
+      # ------------------------------------------------------------------------
+      # TIME settings
+      display_hours:                    false
+
+      # ------------------------------------------------------------------------
+      # CONTROL settings
+      shuffle:                          true
+      repeat:                           true
+
       playlist:
         name:                           free_disco
         title:                          Disco 80th
@@ -364,6 +373,15 @@ settings:
       #
       id:                               free_disco_compact
       type:                             compact
+
+      # ------------------------------------------------------------------------
+      # TIME settings
+      display_hours:                    false
+
+      # ------------------------------------------------------------------------
+      # CONTROL settings
+      shuffle:                          true
+      repeat:                           true
 
       playlist:
         name:                           free_disco
@@ -384,6 +402,15 @@ settings:
       id:                               free_disco_large
       type:                             large
 
+      # ------------------------------------------------------------------------
+      # TIME settings
+      display_hours:                    false
+
+      # ------------------------------------------------------------------------
+      # CONTROL settings
+      shuffle:                          true
+      repeat:                           true
+
       playlist:
         name:                           free_disco
         title:                          Disco 80th
@@ -396,6 +423,15 @@ settings:
     #
     - plaver:
       enabled:                          true
+
+      # ------------------------------------------------------------------------
+      # TIME settings
+      display_hours:                    false
+
+      # ------------------------------------------------------------------------
+      # CONTROL settings
+      shuffle:                          true
+      repeat:                           true
 
       # ------------------------------------------------------------------------
       # PLAYER settings
@@ -417,6 +453,15 @@ settings:
       enabled:                          true
 
       # ------------------------------------------------------------------------
+      # TIME settings
+      display_hours:                    false
+
+      # ------------------------------------------------------------------------
+      # CONTROL settings
+      shuffle:                          true
+      repeat:                           true
+
+      # ------------------------------------------------------------------------
       # PLAYER settings
       #
       id:                               free_emancipator_compact
@@ -436,6 +481,15 @@ settings:
       enabled:                          true
 
       # ------------------------------------------------------------------------
+      # TIME settings
+      display_hours:                    false
+
+      # ------------------------------------------------------------------------
+      # CONTROL settings
+      shuffle:                          true
+      repeat:                           true
+
+      # ------------------------------------------------------------------------
       # PLAYER settings
       #
       id:                               free_emancipator_large
@@ -446,7 +500,6 @@ settings:
         title:                          Emancipator
         audio_info:                     true
         controls:                       true
-
 
     # --------------------------------------------------------------------------
     # LARGE player, Amplitude YT

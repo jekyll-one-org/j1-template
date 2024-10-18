@@ -83,7 +83,6 @@ amplitude_defaults: {{amplitude_defaults | debug}}
     {% assign player_id       = player.id %}
     {% assign player_playlist = player.playlist.name | strip %}
 
-
     {% comment %} detect|set player settings
     ---------------------------------------------------------------------------- {% endcomment %}
     {% if player.type %}
@@ -98,6 +97,27 @@ amplitude_defaults: {{amplitude_defaults | debug}}
       {% assign playlist_controls = amplitude_defaults.player.playlist.controls %}
     {% endif %}
 
+    {% assign display_hours = false %}
+    {% if player.display_hours %}
+      {% assign display_hours   = true %}
+    {% endif %}
+
+    {% assign shuffle = false %}
+    {% if player.shuffle %}
+      {% assign shuffle   = true %}
+    {% endif %}
+
+    {% assign repeat = false %}
+    {% if player.repeat %}
+      {% assign repeat   = true %}
+    {% endif %}
+
+    {% if player.playlist.audio_info %}
+      {% assign player_audio_info = player.playlist.audio_info %}
+    {% else %}
+      {% assign player_audio_info = amplitude_defaults.player.playlist.audio_info %}
+    {% endif %}
+
     {% comment %} unused
     ----------------------------------------------------------------------------
     {% unless player.playlist.scrollbar %}
@@ -110,12 +130,6 @@ amplitude_defaults: {{amplitude_defaults | debug}}
       {% endunless %}
     {% endunless %}
     ---------------------------------------------------------------------------- {% endcomment %}
-    {% if player.playlist.audio_info %}
-      {% assign player_audio_info = player.playlist.audio_info %}
-    {% else %}
-      {% assign player_audio_info = amplitude_defaults.player.playlist.audio_info %}
-    {% endif %}
-
 
     {% comment %} collect playlist items
     ---------------------------------------------------------------------------- {% endcomment %}
@@ -157,6 +171,13 @@ amplitude_defaults: {{amplitude_defaults | debug}}
           <!-- START time container -->
           <div class="time-container">
             <span class="current-time">
+              {% if display_hours %}
+              <span
+                class="amplitude-current-hours"
+                data-amplitude-playlist="{{player_playlist}}">
+              </span>
+              :
+              {% endif %}
               <span
                 class="amplitude-current-minutes"
                 data-amplitude-playlist="{{player_playlist}}">
@@ -168,6 +189,13 @@ amplitude_defaults: {{amplitude_defaults | debug}}
               </span>
             </span>
             <span class="duration">
+              {% if display_hours %}
+              <span
+                class="amplitude-duration-hours"
+                data-amplitude-playlist="{{player_playlist}}">
+              </span>
+              :
+              {% endif %}
               <span
                 class="amplitude-duration-minutes"
                 data-amplitude-playlist="{{player_playlist}}">
@@ -410,6 +438,13 @@ amplitude_defaults: {{amplitude_defaults | debug}}
               <!-- time container -->
               <div class="time-container">
                 <span class="current-time">
+                  {% if display_hours %}
+                  <span
+                    class="amplitude-current-hours"
+                    data-amplitude-playlist="{{player_playlist}}">
+                  </span>
+                  :
+                  {% endif %}
                   <span
                     class="amplitude-current-minutes"
                     data-amplitude-playlist="{{player_playlist}}">
@@ -421,6 +456,13 @@ amplitude_defaults: {{amplitude_defaults | debug}}
                   </span>
                 </span>
                 <span class="duration">
+                  {% if display_hours %}
+                  <span
+                    class="amplitude-duration-hours"
+                    data-amplitude-playlist="{{player_playlist}}">
+                  </span>
+                  :
+                  {% endif %}
                   <span
                     class="amplitude-duration-minutes"
                     data-amplitude-playlist="{{player_playlist}}">
@@ -455,6 +497,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
               <!-- END meta container -->
             </div>
             <!-- START COMPACT player BOTTOM -->
+
           </div>
           <!-- END compact player -->
 
@@ -564,6 +607,13 @@ amplitude_defaults: {{amplitude_defaults | debug}}
           <!-- time container -->
           <div class="time-container">
             <span class="current-time">
+              {% if display_hours %}
+              <span
+                class="amplitude-current-hours"
+                data-amplitude-playlist="{{player_playlist}}">
+              </span>
+              :
+              {% endif %}
               <span
                 class="amplitude-current-minutes"
                 data-amplitude-playlist="{{player_playlist}}">
@@ -575,6 +625,13 @@ amplitude_defaults: {{amplitude_defaults | debug}}
               </span>
             </span>
             <span class="duration">
+              {% if display_hours %}
+              <span
+                class="amplitude-duration-hours"
+                data-amplitude-playlist="{{player_playlist}}">
+              </span>
+              :
+              {% endif %}
               <span
                 class="amplitude-duration-minutes"
                 data-amplitude-playlist="{{player_playlist}}">

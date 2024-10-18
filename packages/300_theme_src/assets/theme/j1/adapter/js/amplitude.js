@@ -146,8 +146,7 @@ j1.adapter.amplitude = ((j1, window) => {
   var playerPauseNextTitle      = ('{{amplitude_defaults.player.pause_next_title}}' === 'true') ? true : false;
   var playerDelayNextTitle      = '{{amplitude_defaults.player.delay_next_title}}';
 
-  var playerSkipSeconds         = 10;
-
+  var playerSkipSeconds         = '{{amplitude_defaults.player.player_skip_seconds}}.00';
 
   // unused settings
   // var playerWaveformSampleRate  = '{{amplitude_defaults.player.waveform_sample_rate}}';
@@ -685,10 +684,10 @@ j1.adapter.amplitude = ((j1, window) => {
                       var compactPlayerSkipForwardButtons = document.getElementsByClassName("compact-player-skip-forward");
                       for (var i=0; i<compactPlayerSkipForwardButtons.length; i++) {
                         compactPlayerSkipForwardButtons[i].addEventListener('click', function(event) {
-                          // const seconds     = 10;
+                          const skipOffset  = parseFloat(playerSkipSeconds);
                           const duration    = Amplitude.getSongDuration();
                           const currentTime = parseFloat(Amplitude.getSongPlayedSeconds());
-                          const targetTime  = parseFloat(currentTime + playerSkipSeconds);
+                          const targetTime  = parseFloat(currentTime + skipOffset);
 
                           if (currentTime > 0) {
                             Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
@@ -700,10 +699,10 @@ j1.adapter.amplitude = ((j1, window) => {
                       var compactPlayerSkipBackwardButtons = document.getElementsByClassName("compact-player-skip-backward");
                       for (var i=0; i<compactPlayerSkipBackwardButtons.length; i++) {
                         compactPlayerSkipBackwardButtons[i].addEventListener('click', function(event) {
-                          // const seconds     = 10;
+                          const skipOffset  = parseFloat(playerSkipSeconds);
                           const duration    = Amplitude.getSongDuration();
                           const currentTime = parseFloat(Amplitude.getSongPlayedSeconds());
-                          const targetTime  = parseFloat(currentTime - playerSkipSeconds);
+                          const targetTime  = parseFloat(currentTime - skipOffset);
 
                           if (currentTime > 0) {
                             Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
@@ -752,10 +751,10 @@ j1.adapter.amplitude = ((j1, window) => {
                       var largePlayerSkipForwardButtons = document.getElementsByClassName("large-player-skip-forward");
                       for (var i=0; i<largePlayerSkipForwardButtons.length; i++) {
                         largePlayerSkipForwardButtons[i].addEventListener('click', function(event) {
-                          // const seconds     = 10;
+                          const skipOffset  = parseFloat(playerSkipSeconds);
                           const duration    = Amplitude.getSongDuration();
                           const currentTime = parseFloat(Amplitude.getSongPlayedSeconds());
-                          const targetTime  = parseFloat(currentTime + playerSkipSeconds);
+                          const targetTime  = parseFloat(currentTime + skipOffset);
 
                           if (currentTime > 0) {
                             Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
@@ -767,10 +766,10 @@ j1.adapter.amplitude = ((j1, window) => {
                       var largePlayerSkipBackwardButtons = document.getElementsByClassName("large-player-skip-backward");
                       for (var i=0; i<largePlayerSkipBackwardButtons.length; i++) {
                         largePlayerSkipBackwardButtons[i].addEventListener('click', function(event) {
-                          // const seconds     = 10;
+                          const skipOffset  = parseFloat(playerSkipSeconds);
                           const duration    = Amplitude.getSongDuration();
                           const currentTime = parseFloat(Amplitude.getSongPlayedSeconds());
-                          const targetTime  = parseFloat(currentTime - playerSkipSeconds);
+                          const targetTime  = parseFloat(currentTime - skipOffset);
 
                           if (currentTime > 0) {
                             Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);

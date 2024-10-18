@@ -254,6 +254,7 @@ defaults:
     play_next_title:                    true
     pause_next_title:                   false
     delay_next_title:                   250
+    player_skip_seconds:                10
 
     volume:
       value:                            50
