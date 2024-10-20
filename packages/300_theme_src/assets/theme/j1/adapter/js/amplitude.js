@@ -554,10 +554,11 @@ j1.adapter.amplitude = ((j1, window) => {
                   _this.setAudioInfo(infoLinks);
                 }
 
+                // jadams, 2024-10-19: (song) events DISABLED
                 // set song (title) specific UI events
                 // -------------------------------------------------------------
-                var songElements = document.getElementsByClassName('song');
-                _this.songEvents(songElements);
+                // var songElements = document.getElementsByClassName('song');
+                // _this.songEvents(songElements);
 
                 // player specific UI events
                 // -------------------------------------------------------------
@@ -712,17 +713,23 @@ j1.adapter.amplitude = ((j1, window) => {
                         } // END if ID
                       } // END for SkipBackwardButtons
 
-                      // click on shuffle icon
-                      document.getElementById('compact_player_shuffle').addEventListener('click', function(event) {
-                        var shuffleState = (document.getElementById('compact_player_shuffle').className.includes('amplitude-shuffle-on')) ? true : false;
-                        Amplitude.setShuffle(shuffleState)
-                      }); // END EventListener 'click'
+                      // click on shuffle button
+                      var compactPlayerShuffleButton = document.getElementById('compact_player_shuffle');
+                      if (compactPlayerShuffleButton) {
+                        compactPlayerShuffleButton.addEventListener('click', function(event) {
+                          var shuffleState = (document.getElementById('compact_player_shuffle').className.includes('amplitude-shuffle-on')) ? true : false;
+                          Amplitude.setShuffle(shuffleState)
+                        }); // END EventListener 'click'
+                      } // END compactPlayerShuffleButton
 
-                      // click on repeat icon
-                      document.getElementById('compact_player_repeat').addEventListener('click', function(event) {
-                        var repeatState = (document.getElementById('compact_player_repeat').className.includes('amplitude-repeat-on')) ? true : false;
-                        Amplitude.setRepeat(repeatState)
-                      }); // END EventListener 'click'
+                      // click on repeat button
+                      var compactPlayerRepeatButton = document.getElementById('compact_player_repeat');
+                      if (compactPlayerRepeatButton) {
+                        compactPlayerRepeatButton.addEventListener('click', function(event) {
+                          var repeatState = (document.getElementById('compact_player_repeat').className.includes('amplitude-repeat-on')) ? true : false;
+                          Amplitude.setRepeat(repeatState)
+                        }); // END EventListener 'click'
+                      } // END compactPlayerRepeatButton
 
                     } // END compact player UI events
                     {% endif %}
@@ -783,17 +790,23 @@ j1.adapter.amplitude = ((j1, window) => {
                         } // END if ID
                       } // END for SkipBackwardButtons
 
-                      // click on shuffle icon
-                      document.getElementById('large_player_shuffle').addEventListener('click', function(event) {
-                        var shuffleState = (document.getElementById('large_player_shuffle').className.includes('amplitude-shuffle-on')) ? true : false;
-                        Amplitude.setShuffle(shuffleState)
-                      }); // END EventListener 'click'
+                      // click on shuffle button
+                      var largePlayerShuffleButton = document.getElementById('large_player_shuffle');
+                      if (largePlayerShuffleButton) {
+                        largePlayerShuffleButton.addEventListener('click', function(event) {
+                          var shuffleState = (document.getElementById('large_player_shuffle').className.includes('amplitude-shuffle-on')) ? true : false;
+                          Amplitude.setShuffle(shuffleState)
+                        }); // END EventListener 'click'
+                      } // END largePlayerShuffleButton
 
-                      // click on repeat icon
-                      document.getElementById('repeat_container_large_player').addEventListener('click', function(event) {
-                        var repeatState = (document.getElementById('repeat_container_large_player').className.includes('amplitude-repeat-on')) ? true : false;
-                        Amplitude.setRepeat(repeatState)
-                      }); // END EventListener 'click'
+                      // click on repeat button
+                      var largePlayerRepeatButton = document.getElementById('large_player_repeat');
+                      if (largePlayerShuffleButton) {
+                        largePlayerRepeatButton.addEventListener('click', function(event) {
+                          var repeatState = (document.getElementById('large_player_repeat').className.includes('amplitude-repeat-on')) ? true : false;
+                          Amplitude.setRepeat(repeatState)
+                        }); // END EventListener 'click'
+                      } // END largePlayerRepeatButton
 
                       // enable|disable scrolling on playlist
                       // -------------------------------------------------------

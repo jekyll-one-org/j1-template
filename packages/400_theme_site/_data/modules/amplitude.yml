@@ -350,11 +350,6 @@ settings:
       # TIME settings
       display_hours:                    false
 
-      # ------------------------------------------------------------------------
-      # CONTROL settings
-      shuffle:                          true
-      repeat:                           true
-
       playlist:
         name:                           free_disco
         title:                          Disco 80th
@@ -379,9 +374,10 @@ settings:
       display_hours:                    false
 
       # ------------------------------------------------------------------------
-      # CONTROL settings
-      shuffle:                          true
-      repeat:                           true
+      # CONTROL BUTTON settings
+      #
+      shuffle_button:                   true
+      repeat_button:                    true
 
       playlist:
         name:                           free_disco
@@ -407,9 +403,10 @@ settings:
       display_hours:                    false
 
       # ------------------------------------------------------------------------
-      # CONTROL settings
-      shuffle:                          true
-      repeat:                           true
+      # CONTROL BUTTON settings
+      #
+      shuffle_button:                   true
+      repeat_button:                    true
 
       playlist:
         name:                           free_disco
@@ -427,11 +424,6 @@ settings:
       # ------------------------------------------------------------------------
       # TIME settings
       display_hours:                    false
-
-      # ------------------------------------------------------------------------
-      # CONTROL settings
-      shuffle:                          true
-      repeat:                           true
 
       # ------------------------------------------------------------------------
       # PLAYER settings
@@ -457,9 +449,10 @@ settings:
       display_hours:                    false
 
       # ------------------------------------------------------------------------
-      # CONTROL settings
-      shuffle:                          true
-      repeat:                           true
+      # CONTROL BUTTON settings
+      #
+      shuffle_button:                   true
+      repeat_button:                    true
 
       # ------------------------------------------------------------------------
       # PLAYER settings
@@ -485,9 +478,10 @@ settings:
       display_hours:                    false
 
       # ------------------------------------------------------------------------
-      # CONTROL settings
-      shuffle:                          true
-      repeat:                           true
+      # CONTROL BUTTON settings
+      #
+      shuffle_button:                   true
+      repeat_button:                    true
 
       # ------------------------------------------------------------------------
       # PLAYER settings
@@ -518,7 +512,7 @@ settings:
     #     name:                           amplitude_ytp
     #     title:                          Amplitude YT
     #     audio_info:                     true
-    #     controls:                       true
+    #      controls:                       true
 
 # ------------------------------------------------------------------------------
 # END config

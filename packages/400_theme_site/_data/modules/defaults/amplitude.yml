@@ -132,7 +132,7 @@ defaults:
     # PLAYLIST defaults
     #
     audio_info:                           false
-    controls:                             false
+    controls:                             true
 
   # ----------------------------------------------------------------------------
   # PLAYER defaults
@@ -257,12 +257,18 @@ defaults:
     #
     type:                               compact
 
-    repeat:                             off
-    shuffle:                            off
     play_next_title:                    true
     pause_next_title:                   false
     delay_next_title:                   250
     player_skip_seconds:                10
+
+    # --------------------------------------------------------------------------
+    # CONTROL BUTTON settings
+    #
+#   shuffle_repeat_button:              true
+    shuffle_button:                     false
+    repeat_button:                      false
+    skip_forward_backward_button:       true
 
     volume:
       value:                            50

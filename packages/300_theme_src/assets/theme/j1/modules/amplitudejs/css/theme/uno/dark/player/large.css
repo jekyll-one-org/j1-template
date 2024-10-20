@@ -574,7 +574,7 @@ div#large_player_next:hover {
 
 div#large_player_controls
 div.large-player-controls-container
-div#repeat_container_large_player {
+div#large_player_repeat {
   display: inline-block;
   width: 24px;
   height: 24px;
@@ -584,19 +584,19 @@ div#repeat_container_large_player {
 
 div#large_player_controls
 div.large-player-controls-container
-div#repeat_container_large_player:hover {
+div#large_player_repeat:hover {
   opacity: .5;
 }
 
 div#large_player_controls
 div.large-player-controls-container
-div#repeat_container_large_player.amplitude-repeat-off {
+div#large_player_repeat.amplitude-repeat-off {
   background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/repeat-off.svg") no-repeat;
 }
 
 div#large_player_controls
 div.large-player-controls-container
-div#repeat_container_large_player.amplitude-repeat-on {
+div#large_player_repeat.amplitude-repeat-on {
   background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/repeat-on.svg") no-repeat;
 }
 
