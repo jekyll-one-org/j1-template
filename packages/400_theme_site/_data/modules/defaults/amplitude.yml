@@ -268,7 +268,7 @@ defaults:
 #   shuffle_repeat_button:              true
     shuffle_button:                     false
     repeat_button:                      false
-    skip_forward_backward_button:       true
+    skip_forward_backward_button:       false
 
     volume:
       value:                            50

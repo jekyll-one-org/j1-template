@@ -378,6 +378,7 @@ settings:
       #
       shuffle_button:                   true
       repeat_button:                    true
+      skip_forward_backward_button:     true
 
       playlist:
         name:                           free_disco
@@ -407,6 +408,7 @@ settings:
       #
       shuffle_button:                   true
       repeat_button:                    true
+      skip_forward_backward_button:     true
 
       playlist:
         name:                           free_disco
@@ -453,6 +455,7 @@ settings:
       #
       shuffle_button:                   true
       repeat_button:                    true
+      skip_forward_backward_button:     true
 
       # ------------------------------------------------------------------------
       # PLAYER settings
@@ -482,6 +485,7 @@ settings:
       #
       shuffle_button:                   true
       repeat_button:                    true
+      skip_forward_backward_button:     true
 
       # ------------------------------------------------------------------------
       # PLAYER settings
