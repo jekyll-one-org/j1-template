@@ -127,7 +127,6 @@ j1.adapter.amplitude = ((j1, window) => {
   var amplitudeOptions;
 
   // amplitude player (instance) settings
-  // NOTE: slider VALUE is set by Adapter|Amplitude API
   // ------------------------------------
   var xhrLoadState;
   var dependency;
@@ -218,6 +217,7 @@ j1.adapter.amplitude = ((j1, window) => {
           var dependencies_met_players_loaded = setInterval (() => {
             if (playersUILoaded.state) {
               _this.initApi(songs);
+              // _this.initApiPlayerSettings(songs);
 
               clearInterval(dependencies_met_players_loaded);
             } // END if playersUILoaded
@@ -426,8 +426,7 @@ j1.adapter.amplitude = ((j1, window) => {
 
       {% endif %} {% endfor %}
 
-      // See:  https://521dimensions.com/open-source/amplitudejs/docs
-      // NOTE: slider VALUE (volume) is set by DEFAULT settings (player)
+      // See: https://521dimensions.com/open-source/amplitudejs/docs
       Amplitude.init({
         bindings: {
           33:  'play_pause',

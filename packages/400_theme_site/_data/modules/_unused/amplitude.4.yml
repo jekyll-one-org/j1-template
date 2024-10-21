@@ -346,6 +346,11 @@ settings:
       song_progress_bar:                true
       volume_slider:
         enabled:                        true
+        min_value:                      0
+        max_value:                      100
+        preset_value:                   30
+        slider_step:                    10
+
       # ------------------------------------------------------------------------
       # PLAYER settings
       #
@@ -385,7 +390,11 @@ settings:
       song_progress_bar:                true
       skip_forward_backward_button:     true
       volume_slider:
-        enabled:                        false
+        enabled:                        true
+        min_value:                      0
+        max_value:                      100
+        preset_value:                   20
+        slider_step:                    10
 
       playlist:
         name:                           free_disco
@@ -416,7 +425,11 @@ settings:
       song_progress_bar:                true
       skip_forward_backward_button:     true
       volume_slider:
-        enabled:                        false
+        enabled:                        true
+        min_value:                      0
+        max_value:                      100
+        preset_value:                   20
+        slider_step:                    10
 
       playlist:
         name:                           free_disco
@@ -441,6 +454,10 @@ settings:
       song_progress_bar:                true
       volume_slider:
         enabled:                        true
+        min_value:                      0
+        max_value:                      100
+        preset_value:                   20
+        slider_step:                    10
 
       # ------------------------------------------------------------------------
       # PLAYER settings
@@ -462,10 +479,20 @@ settings:
       enabled:                          true
 
       # ------------------------------------------------------------------------
+      # TIME settings
+      display_hours:                    false
+
+      # ------------------------------------------------------------------------
       # CONTROL BUTTON settings
       #
       song_progress_bar:                true
       skip_forward_backward_button:     true
+      volume_slider:
+        enabled:                        true
+        min_value:                      0
+        max_value:                      100
+        preset_value:                   20
+        slider_step:                    10
 
       # ------------------------------------------------------------------------
       # PLAYER settings
@@ -496,7 +523,11 @@ settings:
       song_progress_bar:                true
       skip_forward_backward_button:     true
       volume_slider:
-        enabled:                        false
+        enabled:                        true
+        min_value:                      0
+        max_value:                      100
+        preset_value:                   20
+        slider_step:                    10
 
       # ------------------------------------------------------------------------
       # PLAYER settings

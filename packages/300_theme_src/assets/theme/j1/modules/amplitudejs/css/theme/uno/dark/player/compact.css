@@ -195,7 +195,7 @@ div#compact_player_previous {
   width: 24px;
   margin-right: 20px;
   vertical-align: middle;
-  background: url(/assets/theme/j1/modules/amplitudejs/icons/player/dark/previous.svg) no-repeat;
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/previous.svg") no-repeat;
 }
 
 div.compact-player-middle
@@ -213,7 +213,7 @@ div.compact-player-skip-backward {
   width: 24px;
   margin-right: 20px;
   vertical-align: middle;
-  background: url(/assets/theme/j1/modules/amplitudejs/icons/player/dark/skip-backward-10.svg) no-repeat;
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/skip-backward.svg") no-repeat;
 }
 
 div.compact-player-middle
@@ -257,10 +257,9 @@ div.compact-player-skip-forward {
   cursor: pointer;
   height: 24px;
   width: 24px;
-  /* margin-right: 25px; */
   margin-left: 20px;
   vertical-align: middle;
-  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/skip-forward-10.svg") no-repeat;
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/skip-forward.svg") no-repeat;
 }
 
 div.compact-player-middle

@@ -257,23 +257,29 @@ defaults:
     #
     type:                               compact
 
+    display_hours:                      false
     play_next_title:                    true
     pause_next_title:                   false
     delay_next_title:                   250
-    player_skip_seconds:                10
+    forward_backward_skip_seconds:      10
 
     # --------------------------------------------------------------------------
     # CONTROL BUTTON settings
     #
-#   shuffle_repeat_button:              true
     shuffle_button:                     false
     repeat_button:                      false
+    song_progress_bar:                  false
     skip_forward_backward_button:       false
+    volume_slider:
+      enabled:                          false
+      min_value:                        0
+      max_value:                        100
+      preset_value:                     50
+      slider_step:                      1
 
-    volume:
-      value:                            50
-      decrement:                        1
-      increment:                        1
+    playlist:
+      controls:                         true
+      audio_info:                       false
 
 # ------------------------------------------------------------------------------
 # END config

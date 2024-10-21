@@ -285,7 +285,7 @@ div.list-previous {
   height: 17px;
   margin-right: 15px;
   margin-top: 4px;
-  background: url(/assets/theme/j1/modules/amplitudejs/icons/player/dark/small/previous.svg) no-repeat;
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/small/previous.svg") no-repeat;
 }
 
 div#large_player_right
@@ -295,29 +295,11 @@ div.list-previous:hover {
   opacity: .5;
 }
 
-div.compact-player-middle
-div.compact-player-controls-container
-div#large_player_right_skip_backward_10 {
-  display: inline-block;
-  cursor: pointer;
-  height: 24px;
-  width: 24px;
-  margin-right: 20px;
-  vertical-align: middle;
-  background: url(/assets/theme/j1/modules/amplitudejs/icons/player/dark/skip-backward-10.svg) no-repeat;
-}
-
-div.compact-player-middle
-div.compact-player-controls-container
-div#large_player_right_skip_backward_10:hover {
-  opacity: 0.5;
-}
-
 div#large_player_right
 div.playlist-screen-controls
 div.list-controls
 div.list-play-pause.amplitude-paused {
-  background: url(/assets/theme/j1/modules/amplitudejs/icons/player/dark/small/play.svg) no-repeat;
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/small/play.svg") no-repeat;
 }
 
 div#large_player_right
@@ -341,7 +323,7 @@ div#large_player_right
 div.playlist-screen-controls
 div.list-controls
 div.list-play-pause.amplitude-playing {
-  background: url(/assets/theme/j1/modules/amplitudejs/icons/player/dark/small/pause.svg) no-repeat;
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/small/pause.svg") no-repeat;
 }
 
 div#large_player_right
@@ -354,7 +336,7 @@ div.list-next {
   height: 17px;
   margin-left: 15px;
   margin-top: 4px;
-  background: url(/assets/theme/j1/modules/amplitudejs/icons/player/dark/small/next.svg)no-repeat;
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/small/next.svg")no-repeat;
 }
 
 div#large_player_right
@@ -497,7 +479,7 @@ div.large-player-skip-backward {
   width: 24px;
   margin-right: 20px;
   vertical-align: middle;
-  background: url(/assets/theme/j1/modules/amplitudejs/icons/player/dark/skip-backward-10.svg) no-repeat;
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/skip-backward.svg") no-repeat;
 }
 
 div#large_player_controls
@@ -535,10 +517,9 @@ div.large-player-skip-forward {
   cursor: pointer;
   height: 24px;
   width: 24px;
-  /* margin-right: 25px; */
   margin-left: 20px;
   vertical-align: middle;
-  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/skip-forward-10.svg") no-repeat;
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/skip-forward.svg") no-repeat;
 }
 
 div#large_player_controls

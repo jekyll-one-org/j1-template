@@ -346,6 +346,7 @@ settings:
       song_progress_bar:                true
       volume_slider:
         enabled:                        true
+
       # ------------------------------------------------------------------------
       # PLAYER settings
       #
@@ -385,7 +386,7 @@ settings:
       song_progress_bar:                true
       skip_forward_backward_button:     true
       volume_slider:
-        enabled:                        false
+        enabled:                        true
 
       playlist:
         name:                           free_disco
@@ -416,7 +417,7 @@ settings:
       song_progress_bar:                true
       skip_forward_backward_button:     true
       volume_slider:
-        enabled:                        false
+        enabled:                        true
 
       playlist:
         name:                           free_disco
@@ -462,10 +463,16 @@ settings:
       enabled:                          true
 
       # ------------------------------------------------------------------------
+      # TIME settings
+      display_hours:                    false
+
+      # ------------------------------------------------------------------------
       # CONTROL BUTTON settings
       #
       song_progress_bar:                true
       skip_forward_backward_button:     true
+      volume_slider:
+        enabled:                        true
 
       # ------------------------------------------------------------------------
       # PLAYER settings
@@ -496,7 +503,7 @@ settings:
       song_progress_bar:                true
       skip_forward_backward_button:     true
       volume_slider:
-        enabled:                        false
+        enabled:                        true
 
       # ------------------------------------------------------------------------
       # PLAYER settings

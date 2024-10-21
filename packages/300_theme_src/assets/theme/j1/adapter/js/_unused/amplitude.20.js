@@ -127,7 +127,6 @@ j1.adapter.amplitude = ((j1, window) => {
   var amplitudeOptions;
 
   // amplitude player (instance) settings
-  // NOTE: slider VALUE is set by Adapter|Amplitude API
   // ------------------------------------
   var xhrLoadState;
   var dependency;
@@ -150,6 +149,8 @@ j1.adapter.amplitude = ((j1, window) => {
   // unused settings
   // ---------------------------------------------------------------------------
   // var playerWaveformSampleRate       = '{{amplitude_defaults.player.waveform_sample_rate}}';
+  // var playerVolumeValueDefault       = '{{amplitude_defaults.player.volume_slider.preset_value}}';
+  // var playerVolumeValueSetting       = '{{amplitude_settings.volume_slider}}';
 
   // ---------------------------------------------------------------------------
   // main
@@ -218,6 +219,7 @@ j1.adapter.amplitude = ((j1, window) => {
           var dependencies_met_players_loaded = setInterval (() => {
             if (playersUILoaded.state) {
               _this.initApi(songs);
+              // _this.initApiPlayerSettings(songs);
 
               clearInterval(dependencies_met_players_loaded);
             } // END if playersUILoaded
@@ -426,8 +428,7 @@ j1.adapter.amplitude = ((j1, window) => {
 
       {% endif %} {% endfor %}
 
-      // See:  https://521dimensions.com/open-source/amplitudejs/docs
-      // NOTE: slider VALUE (volume) is set by DEFAULT settings (player)
+      // See: https://521dimensions.com/open-source/amplitudejs/docs
       Amplitude.init({
         bindings: {
           33:  'play_pause',
@@ -515,6 +516,27 @@ j1.adapter.amplitude = ((j1, window) => {
     }, // END initApi
 
     // -------------------------------------------------------------------------
+    // initApiPlayerSettings
+    // -------------------------------------------------------------------------
+    initApiPlayerSettings: (songlist) => {
+      logger.info('\n' + 'initialze Player API settings: started');
+
+      {% for player in amplitude_options.players %} {% if player.enabled %}
+        if (document.getElementById('volume_slider_{{player.id}}') !== null) {
+          var volumeSliderPresetValue         = '{{player.volume_slider.preset_value}}';
+          var playerVolumeValue_{{player.id}} = (volumeSliderPresetValue) ? volumeSliderPresetValue : '{{amplitude_defaults.player.volume_slider.preset_value}}';
+
+          Amplitude.init({
+            volume:           playerVolumeValue_{{player.id}},
+            volume_decrement: playerVolumeSliderStep,
+            volume_increment: playerVolumeSliderStep
+          }); // END Amplitude init
+        } // END if getElementById
+      {% endif %} {% endfor %}
+      logger.info('\n' + 'initialze Player API settings: finished');
+    }, // END initApiPlayerSettings
+
+    // -------------------------------------------------------------------------
     // initPlayerUiEvents
     // -------------------------------------------------------------------------
     initPlayerUiEvents: () => {
@@ -574,6 +596,12 @@ j1.adapter.amplitude = ((j1, window) => {
                     // START mini player UI events
                     //
                     if (document.getElementById('{{player.id}}') !== null) {
+
+                      // if (document.getElementById('volume_slider_{{player.id}}') !== null) {
+                      //   var player_id               = '{{player.id}}';
+                      //   var volumeSliderPresetValue = '{{player.volume_slider.preset_value}}';
+                      //   playerVolumeValue           = (volumeSliderPresetValue) ? volumeSliderPresetValue : '{{amplitude_defaults.player.volume_slider.preset_value}}';
+                      // }
 
                       // click on progress bar
                       // -------------------------------------------------------
@@ -739,6 +767,9 @@ j1.adapter.amplitude = ((j1, window) => {
                     // START large player UI events
                     //
                     if (document.getElementById('{{player.id}}') !== null) {
+
+                      // var playerVolumeValueDefault       = '{{amplitude_defaults.player.volume_slider.preset_value}}';
+                      // var playerVolumeValueSetting       = '{{amplitude_settings.volume_slider}}';
 
                       // add listeners to all progress bars found
                       // -------------------------------------------------------

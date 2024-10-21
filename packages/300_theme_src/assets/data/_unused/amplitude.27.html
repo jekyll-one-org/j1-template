@@ -85,6 +85,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
 
     {% comment %} player default settings
     ---------------------------------------------------------------------------- {% endcomment %}
+    {% assign playlist_controls             = amplitude_defaults.player.playlist.controls %}
     {% assign song_progress_bar             = amplitude_defaults.player.song_progress_bar %}
     {% assign display_hours                 = amplitude_defaults.player.display_hours %}
     {% assign volume_slider                 = amplitude_defaults.player.volume_slider.enabled %}
@@ -94,8 +95,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
     {% assign shuffle_repeat_button         = amplitude_defaults.player.shuffle_repeat_button %}
     {% assign shuffle_button                = amplitude_defaults.player.shuffle_button %}
     {% assign skip_forward_backward_button  = amplitude_defaults.player.skip_forward_backward_button %}
-    {% assign playlist_controls             = amplitude_defaults.player.playlist.controls %}
-    {% assign playlist_audio_info           = amplitude_defaults.player.playlist.audio_info %}
+    {% assign player_audio_info             = amplitude_defaults.player.playlist.audio_info %}
 
     {% comment %} player settings
     ---------------------------------------------------------------------------- {% endcomment %}
