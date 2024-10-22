@@ -123,12 +123,18 @@ integrate and play video sources directly within a page or application. These
 players are essential for all current sites and apps. Embedded players provide
 a seamless and user-friendly way to present multimedia content to your audience.
 
+[role="mb-4"]
 All modern browsers universally support the video tag `<video>`. This tag
 offers an out-of-the-box framework for decoding and displaying video content
 without loading *external players*.
 
-.MP4 Video · Peck Pocketed
-video::/assets/video//html5/peck_pocketed.mp4[poster="/assets/video/poster/html5/peck_pocketed.jpg", opts="" role="mt-4 mb-5"]
+++++
+<div class="video-title">
+  <i class="mdib mdib-youtube-tv mdib-24px mr-2"></i>
+  Peck Pocketed · MP4 Video
+</div>
+++++
+video::/assets/video//html5/peck_pocketed.mp4[poster="/assets/video/poster/html5/peck_pocketed.jpg", opts="" role="mt-1 mb-5"]
 
 
 [role="mt-5"]
@@ -150,7 +156,7 @@ better user experience.
 VideoJS provides a flexible and customizable platform for displaying and
 controlling MPEG 4 video content on websites and web applications.
 
-.MP4 Video · Rolling Wild
+.Rolling Wild · MP4 Video
 videojs::/assets/video//html5/rolling_wild.mp4[poster="/assets/video/poster/html5/rolling_wild.jpg", opts="" role="mt-4 mb-5"]
 
 [role="mt-4"]
@@ -160,8 +166,11 @@ YouTube is a popular online video-sharing platform that allows users to
 upload, view, share, and comment on videos. The platform provides services
 for people and organizations to publish various video content.
 
-.Fortnight (feat. Post Malone, Official Music Video) · Taylor Swift
-youtube::q3zqJs7JUCQ[poster="//img.youtube.com/vi/q3zqJs7JUCQ/maxresdefault.jpg" role="mt-4 mb-5"]
+.Best Auditions · AGT 2024
+youtube::4VSBJU52UvM[poster="//img.youtube.com/vi/4VSBJU52UvM/maxresdefault.jpg" role="mt-4 mb-5"]
+
+// .Fortnight (feat. Post Malone, Official Music Video) · Taylor Swift
+// youtube::q3zqJs7JUCQ[poster="//img.youtube.com/vi/q3zqJs7JUCQ/maxresdefault.jpg" role="mt-4 mb-5"]
 
 [role="mt-4"]
 === Dailymotion
@@ -171,7 +180,7 @@ high-quality advertisers through a proprietary advertising system.
 Like YouTube, videos can be watched for free, but ads are shown on every
 video.
 
-.SELF Channel · Beginner Mat Pilates
+.Beginner Mat Pilates · SELF Channel
 dailymotion::x87ycik[poster="/assets/video/poster/dailymotion/pilates.jpg" role="mt-4 mb-5"]
 
 [role="mt-4"]
@@ -183,7 +192,7 @@ since grown into a popular platform for individuals and businesses to
 showcase their videos. Vimeo is known for its emphasis on high-quality videos
 and creative expression.
 
-.Forever 21 · Kick It Old School
+.Kick It Old School · Forever 21
 vimeo::179528528[poster="/assets/video/poster/vimeo/kick_it_old_school.jpg" role="mt-4 mb-5"]
 // vimeo::179528528[poster="auto" role="mt-4 mb-5"]
 // vimeo::179528528[role="mt-4 mb-5"]
