@@ -140,6 +140,7 @@ of the video.
 <div style="display:flex;justify-content:center;align-items:center;">
   <div id="youtube-audio1" data-video="WxcWO9O4DSM" data-autoplay="0" data-loop="1"></div>
   <div id="youtube-audio2" data-video="zAmDwCz2BOs" data-autoplay="0" data-loop="1"></div>
+  <!-- div id="youtube-audio2"></div -->
   <div id="youtube-audio3" data-video="ryxAe4B_3Pg" data-autoplay="0" data-loop="1"></div>
   <div id="youtube-audio4" data-video="wI1Rr29OCJM" data-autoplay="0" data-loop="1"></div>
 </div>
@@ -167,10 +168,8 @@ $(function() {
 
 lorem:sentences[5]
 
-.Amplitude YT · YT Audio
-amplitude::amplitude_ytp_large[role="mt-3 mb-5"]
-
-
+.Mimi Rutherfurt · Maritim Verlag (YouTube)
+amplitude::mimi_rutherfurt_yt_large[role="mt-4 mb-8"]
 
 ////
 [[ms_video]]

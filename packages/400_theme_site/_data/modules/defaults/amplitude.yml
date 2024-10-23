@@ -256,6 +256,7 @@ defaults:
     # PLAYER defaults
     #
     type:                               compact
+    source:                             audio
 
     display_hours:                      false
     play_next_title:                    true

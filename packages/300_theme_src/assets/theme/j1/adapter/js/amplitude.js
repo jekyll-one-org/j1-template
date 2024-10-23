@@ -113,6 +113,9 @@ j1.adapter.amplitude = ((j1, window) => {
 
   // amplitude api settings
   // ----------------------
+  var ytpSongIndex    = "0";
+  var ytpAutoPlay     = false;
+  var ytpLoop         = true;
   var playLists       = {};
   var playersUILoaded = { state: false };
   var apiInitialized  = { state: false };
@@ -125,6 +128,7 @@ j1.adapter.amplitude = ((j1, window) => {
   var amplitudeDefaults;
   var amplitudeSettings;
   var amplitudeOptions;
+  var ytPlayer;
 
   // amplitude player (instance) settings
   // NOTE: slider VALUE is set by Adapter|Amplitude API
@@ -211,6 +215,7 @@ j1.adapter.amplitude = ((j1, window) => {
           // load all players (HTML|UI)
           // -------------------------------------------------------------------
           _this.playerHtmlLoader(playersUILoaded);
+          // _this.ytAudioInit("bla");
 
           // -------------------------------------------------------------------
           // inititialize amplitude api
@@ -218,6 +223,11 @@ j1.adapter.amplitude = ((j1, window) => {
           var dependencies_met_players_loaded = setInterval (() => {
             if (playersUILoaded.state) {
               _this.initApi(songs);
+              _this.ytAudioInit({
+                ytpVideoID:   "qEhzpBJpUq0",
+                ytpAutoPlay:  ytpAutoPlay,
+                ytpLoop:      ytpLoop
+              });
 
               clearInterval(dependencies_met_players_loaded);
             } // END if playersUILoaded
@@ -604,10 +614,11 @@ j1.adapter.amplitude = ((j1, window) => {
                       // show|hide scrollbar in playlist
                       // -------------------------------------------------------
                       const songsInPlaylist = Amplitude.getSongsInPlaylist(playListName);
-
                       if (songsInPlaylist.length <= 8) {
                         const titleListCompactPlayer = document.getElementById('compact_player_title_list_' + playListName);
-                        titleListCompactPlayer.classList.add('hide-scrollbar');
+                        if (titleListCompactPlayer !== null) {
+                          titleListCompactPlayer.classList.add('hide-scrollbar');
+                        }
                       }
 
                       // show|hide playlist
@@ -615,7 +626,7 @@ j1.adapter.amplitude = ((j1, window) => {
 
                       // show playlist
                       var showPlaylist = document.getElementById("show_playlist_{{player.id}}");
-
+                      if (showPlaylist !== null) {
                         showPlaylist.addEventListener('click', function(event) {
                           var scrollOffset = (window.innerWidth >= 720) ? -130 : -110;
 
@@ -640,24 +651,26 @@ j1.adapter.amplitude = ((j1, window) => {
                               $('body').addClass('stop-scrolling');
                             }
                           }
-                      }); // END EventListener 'click' (compact player|show playlist)
+                        }); // END EventListener 'click' (compact player|show playlist)
+                     }
 
                       // hide playlist
                       var hidePlaylist = document.getElementById("hide_playlist_{{player.id}}");
+                      if (hidePlaylist !== null) {
+                        hidePlaylist.addEventListener('click', function(event) {
+                          var playlistScreen = document.getElementById("playlist_screen_{{player.id}}");
 
-                      hidePlaylist.addEventListener('click', function(event) {
-                        var playlistScreen = document.getElementById("playlist_screen_{{player.id}}");
+                          playlistScreen.classList.remove('slide-in-top');
+                          playlistScreen.classList.add('slislide-out-top');
+                          playlistScreen.style.display = "none";
+                          playlistScreen.style.zIndex = "1";
 
-                        playlistScreen.classList.remove('slide-in-top');
-                        playlistScreen.classList.add('slislide-out-top');
-                        playlistScreen.style.display = "none";
-                        playlistScreen.style.zIndex = "1";
-
-                        // enable scrolling
-                        if ($('body').hasClass('stop-scrolling')) {
-                          $('body').removeClass('stop-scrolling');
-                        }
-                      }); // END EventListener 'click' (compact player|show playlist)
+                          // enable scrolling
+                          if ($('body').hasClass('stop-scrolling')) {
+                            $('body').removeClass('stop-scrolling');
+                          }
+                        }); // END EventListener 'click' (compact player|show playlist)
+                      }
 
                       // click on progress bar
                       // -------------------------------------------------------
@@ -740,6 +753,52 @@ j1.adapter.amplitude = ((j1, window) => {
                     //
                     if (document.getElementById('{{player.id}}') !== null) {
 
+                      // listener overloads for Youtube video (large player)
+                      // -------------------------------------------------------
+
+                      // click on prev button
+                      var largePlayerPreviousButton = document.getElementById('large_player_previous');
+                      if (largePlayerPreviousButton && largePlayerPreviousButton.getAttribute("data-amplitude-source") === 'youtube') {
+                        largePlayerPreviousButton.addEventListener('click', function(event) {
+                          var playlist  = this.getAttribute("data-amplitude-playlist");
+                          var songIndex = ytpSongIndex;                          // Amplitude.getActiveIndex();
+
+                        }); // END EventListener 'click'
+                      }
+
+                      // click on play_pause button
+                      var largePlayerPlayButton = document.getElementById('large_player_play_pause');
+                      if (largePlayerPlayButton && largePlayerPlayButton.getAttribute("data-amplitude-source") === 'youtube') {
+                        largePlayerPlayButton.addEventListener('click', function(event) {
+                          var playlist      = this.getAttribute("data-amplitude-playlist");
+                          var songMetaData  = Amplitude.getSongAtIndex(ytpSongIndex);
+                          var songURL       = songMetaData.url;
+                          // Amplitude.getActiveIndex();
+                          var songIndex     = ytpSongIndex;
+                        }); // END EventListener 'click'
+                      }
+
+                      // click on next button
+                      var largePlayerNextButton = document.getElementById('large_player_next');
+                      if (largePlayerNextButton && largePlayerPlayButton.getAttribute("data-amplitude-source") === 'youtube') {
+                        largePlayerNextButton.addEventListener('click', function(event) {
+                          var playlist  = this.getAttribute("data-amplitude-playlist");
+                          var songIndex = ytpSongIndex;                          // Amplitude.getActiveIndex();
+                        }); // END EventListener 'click'
+                      }
+
+                      // click on song container
+                      var largetPlayerSongContainer = document.getElementsByClassName("song amplitude-song-container");
+                      for (var i=0; i<largetPlayerSongContainer.length; i++) {
+                        if (largetPlayerSongContainer[i].dataset.amplitudeSource === 'youtube') {
+                          largetPlayerSongContainer[i].addEventListener('click', function(event) {
+                            var playlist        = this.getAttribute("data-amplitude-playlist");
+                            var playlistLength  = largetPlayerSongContainer.length;
+                            ytpSongIndex         = this.getAttribute("data-amplitude-song-index");
+                          });
+                        } // END if Attribute
+                      } // END for
+
                       // add listeners to all progress bars found
                       // -------------------------------------------------------
                       var progressBars = document.getElementsByClassName("large-player-progress");
@@ -761,16 +820,30 @@ j1.adapter.amplitude = ((j1, window) => {
                       var largePlayerSkipForwardButtons = document.getElementsByClassName("large-player-skip-forward");
                       for (var i=0; i<largePlayerSkipForwardButtons.length; i++) {
                         if (largePlayerSkipForwardButtons[i].id === 'skip-forward_{{player.id}}') {
-                          largePlayerSkipForwardButtons[i].addEventListener('click', function(event) {
-                            const skipOffset  = parseFloat(playerForwardBackwardSkipSeconds);
-                            const duration    = Amplitude.getSongDuration();
-                            const currentTime = parseFloat(Amplitude.getSongPlayedSeconds());
-                            const targetTime  = parseFloat(currentTime + skipOffset);
+                          if (largePlayerSkipForwardButtons[i].dataset.amplitudeSource === 'youtube') {
+                            largePlayerSkipForwardButtons[i].addEventListener('click', function(event) {
+                              const skipOffset  = parseFloat(playerForwardBackwardSkipSeconds);
+                              //const duration    = Amplitude.getSongDuration();
+                              //const currentTime = parseFloat(Amplitude.getSongPlayedSeconds());
+                              //const targetTime  = parseFloat(currentTime + skipOffset);
 
-                            if (currentTime > 0) {
-                              Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
-                            } // END EventListener 'click
-                          });
+                              // if (currentTime > 0) {
+                              //   Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
+                              // }
+                            }); // END EventListener 'click
+                          } else {
+                            largePlayerSkipForwardButtons[i].addEventListener('click', function(event) {
+                              const skipOffset  = parseFloat(playerForwardBackwardSkipSeconds);
+                              const duration    = Amplitude.getSongDuration();
+                              const currentTime = parseFloat(Amplitude.getSongPlayedSeconds());
+                              const targetTime  = parseFloat(currentTime + skipOffset);
+
+                              if (currentTime > 0) {
+                                Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
+                              }
+                            }); // END EventListener 'click
+                          }
+
                         } // END if ID
                       } // END for SkipForwardButtons
 
@@ -778,16 +851,23 @@ j1.adapter.amplitude = ((j1, window) => {
                       var largePlayerSkipBackwardButtons = document.getElementsByClassName("large-player-skip-backward");
                       for (var i=0; i<largePlayerSkipBackwardButtons.length; i++) {
                         if (largePlayerSkipBackwardButtons[i].id === 'skip-backward_{{player.id}}') {
-                          largePlayerSkipBackwardButtons[i].addEventListener('click', function(event) {
-                            const skipOffset  = parseFloat(playerForwardBackwardSkipSeconds);
-                            const duration    = Amplitude.getSongDuration();
-                            const currentTime = parseFloat(Amplitude.getSongPlayedSeconds());
-                            const targetTime  = parseFloat(currentTime - skipOffset);
+                          if (largePlayerSkipBackwardButtons[i].dataset.amplitudeSource === 'youtube') {
+                            largePlayerSkipBackwardButtons[i].addEventListener('click', function(event) {
+                              const skipOffset  = parseFloat(playerForwardBackwardSkipSeconds);
+                            }); // END EventListener 'click'
+                          } else {
+                            largePlayerSkipBackwardButtons[i].addEventListener('click', function(event) {
+                              const skipOffset  = parseFloat(playerForwardBackwardSkipSeconds);
+                              const duration    = Amplitude.getSongDuration();
+                              const currentTime = parseFloat(Amplitude.getSongPlayedSeconds());
+                              const targetTime  = parseFloat(currentTime - skipOffset);
 
-                            if (currentTime > 0) {
-                              Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
-                            } // END EventListener 'click'
-                          });
+                              if (currentTime > 0) {
+                                Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
+                              }
+                            }); // END EventListener 'click'
+                          }
+
                         } // END if ID
                       } // END for SkipBackwardButtons
 
@@ -819,7 +899,9 @@ j1.adapter.amplitude = ((j1, window) => {
 
                         if (songsInPlaylist.length <= 8) {
                           const titleListLargePlayer = document.getElementById('large_player_title_list_' + playListName);
-                          titleListLargePlayer.classList.add('hide-scrollbar');
+                          if (titleListLargePlayer !== null) {
+                            titleListLargePlayer.classList.add('hide-scrollbar');
+                          }
                         }
 
                         // scroll to player top position
@@ -952,6 +1034,71 @@ j1.adapter.amplitude = ((j1, window) => {
 
       logger.debug('\n' + 'initializing title events for player on ID ' + '#' + playerID + ': finished');
     }, // END songEvents
+
+
+    ytAudioInit: (options) => {
+      var ytpSettings = options;
+
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.
+      function onYouTubeIframeAPIReady() {
+
+        // var ytCtrl = document.getElementById("youtube-audio");
+        // ytCtrl.innerHTML = '<img id="youtube-icon1" src=""/><div id="youtube-ytPlayer"></div>';
+        // ytCtrl.style.cssText = 'width:150px;margin:2em auto;cursor:pointer;cursor:hand;display:none';
+        // ytCtrl.onclick = toggleAudio1;
+
+        ytPlayer = new YT.Player('ytAudioPlayer', {
+          height: '0',
+          width: '0',
+          videoId: ytCtrl.dataset.video,
+          playerVars: {
+            autoplay: 0,
+            loop: 1,
+          },
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+      }
+
+      function onPlayerReady(event) {
+        ytPlayer.setPlaybackQuality("small");
+        // document.getElementById("youtube-audio").style.display = "block";
+        // togglePlayButton1(ytPlayer.getPlayerState() !== 5);
+      }
+
+      function onPlayerStateChange(event) {
+        if (event.data === 0) {
+          var bla = 'blupp'
+          // togglePlayButton1(false);
+        }
+      }
+
+      // Create a new div element
+      const ytpContainer = document.createElement('div');
+
+      // Set attributes for the div container
+      ytpContainer.id = 'youtube_audio';
+//    ytpContainer.className = 'container';
+//    ytpContainer.setAttribute("data-video", "WxcWO9O4DSM");
+//    ytpContainer.setAttribute("data-autoplay", "0");
+//    ytpContainer.setAttribute("data-loop", "1");
+//    ytpContainer.innerHTML = 'data-video="WxcWO9O4DSM" data-autoplay="0" data-loop="1"';
+
+      // Append the div container to the end of the body
+      document.body.appendChild(ytpContainer);
+
+      // 2. This code loads the IFrame Player API code asynchronously.
+      var firstScriptTag;
+
+      var tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    }, // END ytAudioInit
 
     // -------------------------------------------------------------------------
     // messageHandler()

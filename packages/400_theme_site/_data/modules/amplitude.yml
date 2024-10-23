@@ -35,19 +35,18 @@ settings:
     # --------------------------------------------------------------------------
     #
     - playlist:
-      enabled:                          false
+      enabled:                          true
 
-      name:                             amplitude_ytp
-      title:                            Amplitude YT
+      name:                             mimi_rutherfurt_yt
+      title:                            Mimi Rutherfurt
 
       # ------------------------------------------------------------------------
       # ALBUM settings
       # ------------------------------------------------------------------------
-      album:                            &album_amplitude_ytp
-        name:                           Amplitude YT
-        artist:                         YouTube
-#       audio_base:                     //521dimensions.com/song
-        audio_base:                     /assets/audio/album/emancipator/from-dusk-to-dawn
+      album:                            &album_mimi_rutherfurt_yt
+        name:                           Mimi Rutherfurt
+        artist:                         Maritim Verlag
+        audio_base:                     //youtube.com
         cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
 
       # ------------------------------------------------------------------------
@@ -58,21 +57,21 @@ settings:
         # title 01
         - item:
           enabled:                      true
-          <<:                           *album_amplitude_ytp
-          title:                        Dusk To Dawn
-          audio:                        DuskToDawn.mp3
-          audio_info:                   //emancipator.bandcamp.com/
-          cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn/from-dusk-to-dawn.jpg
+          <<:                           *album_mimi_rutherfurt_yt
+          title:                        Alte Zeiten
+          audio:                        watch?v=qEhzpBJpUq0
+          audio_info:                   //www.youtube.com/@MaritimVerlag
+          cover_image:                  //img.youtube.com/vi/qEhzpBJpUq0/maxresdefault.jpg
           duration:                     "5:25"
 
         # title 02
         - item:
           enabled:                      true
-          <<:                           *album_amplitude_ytp
-          title:                        First Snow
-          audio:                        FirstSnow.mp3
-          audio_info:                   //emancipator.bandcamp.com/
-          cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn/soon-it-will-be-cold-enough.jpg
+          <<:                           *album_mimi_rutherfurt_yt
+          title:                        Nacht-Express
+          audio:                        watch?v=I4VTc8nQxDs
+          audio_info:                   //www.youtube.com/@MaritimVerlag
+          cover_image:                  //img.youtube.com/vi/I4VTc8nQxDs/maxresdefault.jpg
           duration:                     "5:12"
 
 
@@ -510,24 +509,41 @@ settings:
         audio_info:                     true
         controls:                       true
 
+
     # --------------------------------------------------------------------------
-    # LARGE player, Amplitude YT
+    # LARGE player, Mimi Rutherfurt
     # --------------------------------------------------------------------------
     #
-    # - plaver:
-    #   enabled:                          true
-    #
-    #   # ------------------------------------------------------------------------
-    #   # PLAYER settings
-    #   #
-    #   id:                               amplitude_ytp_large
-    #   type:                             large
-    #
-    #   playlist:
-    #     name:                           amplitude_ytp
-    #     title:                          Amplitude YT
-    #     audio_info:                     true
-    #      controls:                       true
+    - plaver:
+      enabled:                          true
+
+      # ------------------------------------------------------------------------
+      # SOURCE settings
+      source:                           video
+
+      # ------------------------------------------------------------------------
+      # TIME settings
+      display_hours:                    true
+
+      # ------------------------------------------------------------------------
+      # CONTROL BUTTON settings
+      #
+      song_progress_bar:                false
+      skip_forward_backward_button:     true
+      volume_slider:
+        enabled:                        false
+
+      # ------------------------------------------------------------------------
+      # PLAYER settings
+      #
+      id:                               mimi_rutherfurt_yt_large
+      type:                             large
+
+      playlist:
+        name:                           mimi_rutherfurt_yt
+        title:                          Mimi Rutherfurt
+        controls:                       false
+        audio_info:                     false
 
 # ------------------------------------------------------------------------------
 # END config

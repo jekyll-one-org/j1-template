@@ -7408,8 +7408,7 @@ var Next = function () {
       /*
         Gets the playlist attribute from the element.
       */
-      var playlist  = this.getAttribute("data-amplitude-playlist");
-      var source    = this.getAttribute("data-amplitude-source");
+      var playlist = this.getAttribute("data-amplitude-playlist");
 
       /*
         If the playlist is null, we handle the global next.
@@ -7422,11 +7421,7 @@ var Next = function () {
         If the playlist is set, we handle the playlist next.
       */
       if (playlist != null) {
-        if (source === 'youtube' ) {
-          return false;
-        } else {
-          handlePlaylistNext(playlist);
-        }
+        handlePlaylistNext(playlist);
       }
     }
   }
@@ -8101,12 +8096,11 @@ var PlayPause = function () {
     */
     if (!_config2.default.is_touch_moving) {
       /*
-        Get the playlist and song from the element. It's alright if these are null.
+        Get the playlist and song from the element. It's alright if these
+        are null.
       */
-      var playlist  = this.getAttribute("data-amplitude-playlist");
-      var source    = this.getAttribute("data-amplitude-source");
-      var song      = this.getAttribute("data-amplitude-song-index");
-
+      var playlist = this.getAttribute("data-amplitude-playlist");
+      var song = this.getAttribute("data-amplitude-song-index");
 
       /*
         Handle a global play pause button
@@ -8119,11 +8113,7 @@ var PlayPause = function () {
         Handle a playlist play pause button
       */
       if (playlist != null && song == null) {
-        if (source === 'youtube' ) {
-          return false;
-        } else {
-          handlePlaylistPlayPause(playlist);
-        }
+        handlePlaylistPlayPause(playlist);
       }
 
       /*
@@ -8137,11 +8127,7 @@ var PlayPause = function () {
         Handle a song in playlist play pause button
       */
       if (playlist != null && song != null) {
-        if (source === 'youtube' ) {
-          return false;
-        } else {
-          handleSongInPlaylistPlayPause(playlist, song);
-        }
+        handleSongInPlaylistPlayPause(playlist, song);
       }
     }
   }
@@ -8514,8 +8500,7 @@ var Prev = function () {
       /*
         Gets the playlist attribute from the element.
       */
-      var playlist  = this.getAttribute("data-amplitude-playlist");
-      var source    = this.getAttribute("data-amplitude-source");
+      var playlist = this.getAttribute("data-amplitude-playlist");
 
       /*
         If the playlist is null, we handle the global prev.
@@ -8528,11 +8513,7 @@ var Prev = function () {
         If the playlist is set, we handle the playlist prev.
       */
       if (playlist != null) {
-        if (source === 'youtube' ) {
-          return false;
-        } else {
-          handlePlaylistPrev(playlist);
-        }
+        handlePlaylistPrev(playlist);
       }
     }
   }
@@ -8722,8 +8703,7 @@ var Repeat = function () {
       /*
         Gets the playlist attribute from the element.
       */
-      var playlist  = this.getAttribute("data-amplitude-playlist");
-      var source    = this.getAttribute("data-amplitude-source");
+      var playlist = this.getAttribute("data-amplitude-playlist");
 
       /*
         If the playlist is null, we handle the global repeat.
@@ -8736,11 +8716,7 @@ var Repeat = function () {
         If the playlist is set, we handle the playlist repeat.
       */
       if (playlist != null) {
-        if (source === 'youtube' ) {
-          return false;
-        } else {
-          handlePlaylistRepeat(playlist);
-        }
+        handlePlaylistRepeat(playlist);
       }
     }
   }
@@ -8935,8 +8911,7 @@ var Shuffle = function () {
       /*
         Get the playlist attribute
       */
-      var playlist  = this.getAttribute("data-amplitude-playlist");
-      var source    = this.getAttribute("data-amplitude-source");
+      var playlist = this.getAttribute("data-amplitude-playlist");
 
       /*
       Check to see if the shuffle button belongs to a playlist
@@ -8944,11 +8919,7 @@ var Shuffle = function () {
       if (playlist == null) {
         handleGlobalShuffle();
       } else {
-        if (source === 'youtube' ) {
-          return false;
-        } else {
-          handlePlaylistShuffle(playlist);
-        }
+        handlePlaylistShuffle(playlist);
       }
     }
   }
@@ -9082,11 +9053,9 @@ var SkipTo = function () {
       /*
         Extracts the needed attributes from the element.
       */
-      var playlist  = this.getAttribute("data-amplitude-playlist");
-      var source    = this.getAttribute("data-amplitude-source");
-
+      var playlist = this.getAttribute("data-amplitude-playlist");
       var songIndex = this.getAttribute("data-amplitude-song-index");
-      var location  = this.getAttribute("data-amplitude-location");
+      var location = this.getAttribute("data-amplitude-location");
 
       /*
         If the location is null, write a message. We can't skip to a location
@@ -9114,11 +9083,7 @@ var SkipTo = function () {
         if (playlist == null) {
           handleSkipToSong(parseInt(songIndex), parseInt(location));
         } else {
-          if (source === 'youtube' ) {
-            return false;
-          } else {
-            handleSkipToPlaylist(playlist, parseInt(songIndex), parseInt(location));
-          }
+          handleSkipToPlaylist(playlist, parseInt(songIndex), parseInt(location));
         }
       }
     }
@@ -9277,9 +9242,8 @@ var SongSlider = function () {
     /*
       Gets the attributes for playlist and index for the element.
     */
-    var playlist  = this.getAttribute("data-amplitude-playlist");
-    var source    = this.getAttribute("data-amplitude-source");
-    var song      = this.getAttribute("data-amplitude-song-index");
+    var playlist = this.getAttribute("data-amplitude-playlist");
+    var song = this.getAttribute("data-amplitude-song-index");
 
     /*
       If no playlist or song is defined, then it's a global song slider.
@@ -9292,11 +9256,7 @@ var SongSlider = function () {
       If a playlist but no song is defined, then it's playlist slider.
     */
     if (playlist != null && song == null) {
-      if (source === 'youtube' ) {
-        return false;
-      } else {
-        handlePlaylistSongSlider(computedTime, locationPercentage, playlist);
-      }
+      handlePlaylistSongSlider(computedTime, locationPercentage, playlist);
     }
 
     /*
@@ -9311,11 +9271,7 @@ var SongSlider = function () {
       slider.
     */
     if (playlist != null && song != null) {
-      if (source === 'youtube' ) {
-        return false;
-      } else {
-        handleSongInPlaylistSongSlider(computedTime, locationPercentage, playlist, song);
-      }
+      handleSongInPlaylistSongSlider(computedTime, locationPercentage, playlist, song);
     }
   }
 
