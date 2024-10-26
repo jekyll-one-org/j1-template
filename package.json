@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "j1-theme",
-  "version": "2024.3.15",
+  "version": "2024.3.8",
   "description": "Gem-based Template for Jekyll",
   "homepage": "https://jekyll.one",
   "author": {
@@ -109,7 +109,7 @@
     "setup:env": "shx echo && cross-var echo \"configure environment ..\" && run-s -s set-env:*",
     "setup:tip": "shx echo && echo run \"yarn site\" to open the web.",
     "set-env:npm-loglevel": "cross-var cross-env npm_config_loglevel=$npm_package_npm_loglevel",
-    "set-env:npm-node-path": "cross-var cross-env  npm config set scripts-prepend-node-path=$npm_package_npm_prepend_nodepath",
+    "_set-env:npm-node-path": "cross-var cross-env  npm config set scripts-prepend-node-path=$npm_package_npm_prepend_nodepath",
     "set-env:mode": "cross-var cross-env npm_config_mode=$npm_package_config_mode && echo done.",
     "parent-script": "cross-env BUNDLE_VENDORIZE=$npm_package_jekyll_vendorize run-s -s child-script",
     "child-script": "cross-env if-env BUNDLE_VENDORIZE=true && echo bundle vendorized || echo bundle global"

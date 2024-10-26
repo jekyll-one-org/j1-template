@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "css",
-  "version": "2024.3.15",
+  "version": "2024.3.14",
   "description": "CSS bundle for J1 Theme",
   "main": "theme_uno.scss",
   "config": {
@@ -40,28 +40,19 @@
     "postrebuild": "npm run deploy",
     "build_css": "run-p -s theme_css:*",
     "uglify_css": "run-p -s uglify_css:*",
-
-    "theme_css:theme_bootstrap": "node-sass --importer=node_modules/node-sass-tilde-importer theme-bootstrap.scss dist/themes/bootstrap/bootstrap.css 2>log/theme_bootstrap.log",
-    "theme_css:theme_uno_light": "node-sass --importer=node_modules/node-sass-tilde-importer theme-uno.scss dist/themes/unolight/bootstrap.css 2>log/theme_uno_light.log",
-    "theme_css:theme_uno_dark": "node-sass --importer=node_modules/node-sass-tilde-importer theme-uno-dark.scss dist/themes/unodark/bootstrap.css 2>log/theme_uno_dark.log",
-    "_theme_css:theme_agency": "node-sass --importer=node_modules/node-sass-tilde-importer theme-agency.scss dist/themes/agency/bootstrap.css 2>log/theme_agency.log",
-    "_theme_css:theme_vapor": "node-sass --importer=node_modules/node-sass-tilde-importer theme_vapor.scss dist/themes/theme_vapor/bootstrap.css 2>log/theme_vapor.log",
-
-    "theme_css:icons_fontawesome": "node-sass --importer=node_modules/node-sass-tilde-importer icons-fontawesome.scss dist/icon-fonts/fontawesome.css 2>log/fontawesome.log",
-    "theme_css:icons_iconify": "node-sass --importer=node_modules/node-sass-tilde-importer icons-iconify.scss dist/icon-fonts/iconify.css 2>log/iconify.log",
-    "theme_css:icons_mdi_base": "node-sass --importer=node_modules/node-sass-tilde-importer icons-materialdesign-base.scss dist/icon-fonts/mdib.css 2>log/mdib-icons.log",
-    "theme_css:icons_mdi_regular": "node-sass --importer=node_modules/node-sass-tilde-importer icons-materialdesign-regular.scss dist/icon-fonts/mdi.css 2>log/mdi-icons.log",
-    "theme_css:icons_mdi_light": "node-sass --importer=node_modules/node-sass-tilde-importer icons-materialdesign-light.scss dist/icon-fonts/mdil.css 2>log/mdil-icons.log",
-    "theme_css:animate": "node-sass --importer=node_modules/node-sass-tilde-importer animate.scss dist/animate.css 2>log/animate.log",
-    "theme_css:vendor": "node-sass --importer=node_modules/node-sass-tilde-importer vendor.scss dist/vendor.css 2>log/vendor.log",
-
+    "theme_css:theme_bootstrap": "sass --style expanded --embed-sources --no-color theme-bootstrap.scss dist/themes/bootstrap/bootstrap.css 2>log/theme_bootstrap.log",
+    "theme_css:theme_uno_light": "sass --style expanded --embed-sources --no-color theme-uno.scss dist/themes/unolight/bootstrap.css 2>log/theme_uno_light.log",
+    "theme_css:theme_uno_dark": "sass --style expanded --embed-sources --no-color theme-uno-dark.scss dist/themes/unodark/bootstrap.css 2>log/theme_uno_dark.log",
+    "theme_css:icons_fontawesome": "sass --style expanded --embed-sources --no-color icons-fontawesome.scss dist/icon-fonts/fontawesome.css 2>log/fontawesome.log",
+    "theme_css:icons_iconify": "sass --style expanded --embed-sources --no-color icons-iconify.scss dist/icon-fonts/iconify.css 2>log/iconify.log",
+    "theme_css:icons_mdi_base": "sass --style expanded --embed-sources --no-color icons-materialdesign-base.scss dist/icon-fonts/mdib.css 2>log/mdib-icons.log",
+    "theme_css:icons_mdi_light": "sass icons-materialdesign-light.scss dist/icon-fonts/mdil.css 2>log/mdil-icons.log",
+    "theme_css:icons_mdi_regular": "sass --style expanded --embed-sources --no-color icons-materialdesign-regular.scss dist/icon-fonts/mdi.css 2>log/mdi-icons.log",
+    "theme_css:animate": "sass --style expanded --embed-sources --no-color animate.scss dist/animate.css 2>log/animate.log",
+    "theme_css:vendor": "sass --style expanded --embed-sources --no-color vendor.scss dist/vendor.css 2>log/vendor.log",
     "uglify_css:theme_bootstrap": "postcss dist/themes/bootstrap/bootstrap.css -o dist/themes/bootstrap/bootstrap.min.css",
     "uglify_css:theme_uno_light": "postcss dist/themes/unolight/bootstrap.css -o dist/themes/unolight/bootstrap.min.css",
     "uglify_css:theme_uno_dark": "postcss dist/themes/unodark/bootstrap.css -o dist/themes/unodark/bootstrap.min.css",
-    "_uglify_css:theme_agency": "postcss dist/themes/agency/bootstrap.css -o dist/themes/agency/bootstrap.min.css",
-    "_uglify_css:theme_vapor": "postcss dist/themes/theme_vapor/bootstrap.css -o dist/themes/theme_vapor/bootstrap.min.css",
-
-    "_uglify_css:nbinteract-tutorial": "postcss dist/nbinteract-tutorial/styles.css -o dist/nbinteract-tutorial/styles.min.css",
     "uglify_css:icons_fontawesome": "postcss dist/icon-fonts/fontawesome.css -o dist/icon-fonts/fontawesome.min.css",
     "uglify_css:icons_iconify": "postcss dist/icon-fonts/iconify.css -o dist/icon-fonts/iconify.min.css",
     "uglify_css:icons_mdi_base": "postcss dist/icon-fonts/mdib.css -o dist/icon-fonts/mdib.min.css",
@@ -69,16 +60,14 @@
     "uglify_css:icons_mdi_light": "postcss dist/icon-fonts/mdil.css -o dist/icon-fonts/mdil.min.css",
     "uglify_css:animate": "postcss dist/animate.css -o dist/animate.min.css",
     "uglify_css:vendor": "postcss dist/vendor.css -o dist/vendor.min.css",
-
     "deploy": "shx mkdir -p ../300_theme_src/assets/theme/j1/core/css && shx cp -rf dist/* ../300_theme_src/assets/theme/j1/core/css"
   },
   "dependencies": {
     "cssnano": "^5.0.10",
-    "node-sass": "^7.0.1",
-    "node-sass-tilde-importer": "^1.0.0",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.2.6",
     "postcss-cli": "^8.3.1",
+    "sass": "1.80.4",
     "shx": "^0.3.3"
   },
   "devDependencies": {

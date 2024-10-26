@@ -178,16 +178,17 @@ $label-color-focus:                     $blue !default;
     }
   }
 
-  .is-focused,
   // may or may not be a form-group or bmd-form-group
-  &.is-focused {
-    // on focus set borders and labels to the validation color
+  //.is-focused,
 
+  // on focus set borders and labels to the validation color
+  .is-focused {
     // Use the BS provided mixin for the bulk of the color
     // jadams, 2019-03-10: built failed because of:
     // "Mixin form-validation-state is missing argument $icon."
     // Added dummy argument ""
     // org: @include form-validation-state("valid", $label-color);
+    //
     @include form-validation-state("valid", $label-color, "");
 
     [class^='bmd-label'],
@@ -314,9 +315,7 @@ $label-color-focus:                     $blue !default;
   }
 
   // floating focused/filled will look like static
-  &.is-focused,
   .is-focused,
-  &.is-filled,
   .is-filled {
     .bmd-label-floating {
       @include bmd-label-static($label-static-top, $static-font-size);

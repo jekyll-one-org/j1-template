@@ -14,7 +14,7 @@
 */
 
 module.exports = function lazyCSSLoader () {
-"use strict";
+'use strict';
 
   let options = {};
 

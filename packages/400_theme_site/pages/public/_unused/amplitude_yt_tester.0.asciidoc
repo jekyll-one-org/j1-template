@@ -170,15 +170,16 @@ lorem:sentences[5]
 .Mimi Rutherfurt · Maritim Verlag (YouTube)
 amplitude::mimi_rutherfurt_yt_large[role="mt-4 mb-8"]
 
+////
 ++++
 <script>
   $(function() {
 
-    // Load the IFrame Player API code asynchronously.
+    // Load the IFrame Player API code asynchronously
     var techScript;
 
     var tech    = document.createElement('script');
-    tech.src    = "/assets/theme/j1/modules/amplitudejs/js/tech/ytp.js";
+    tech.src    = "/assets/theme/j1/modules/amplitudejs/js/tech/ytPlayerInit.js";
     techScript  = document.getElementsByTagName('script')[0];
 
     techScript.parentNode.insertBefore(tech, techScript);
@@ -186,6 +187,8 @@ amplitude::mimi_rutherfurt_yt_large[role="mt-4 mb-8"]
   });
 </script>
 ++++
+////
+
 ////
 [[ms_video]]
 == MS Slider using YouTube Video

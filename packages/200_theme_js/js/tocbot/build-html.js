@@ -3,7 +3,7 @@
  *
  * @author Tim Scanlin
 */
-"use strict";
+'use strict';
 
 // -----------------------------------------------------------------------------
 // ESLint shimming

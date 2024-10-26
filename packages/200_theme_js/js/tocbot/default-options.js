@@ -5,7 +5,7 @@
 /* eslint no-undef: "off"                                                     */
 /* eslint no-unused-vars: "off"                                               */
 // -----------------------------------------------------------------------------
-"use strict";
+'use strict';
 
 module.exports = {
   // Where to render the table of contents.

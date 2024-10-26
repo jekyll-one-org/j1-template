@@ -5,7 +5,7 @@
  * Copyright 2006, 2014 Klaus Hartl
  * Released under the MIT license
 */
-"use strict";
+'use strict';
 
 (function (factory) {
 	if (typeof define === 'function' && define.amd) {

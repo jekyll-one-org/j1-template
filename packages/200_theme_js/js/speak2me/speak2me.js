@@ -16,7 +16,7 @@
  # See: https://github.com/acoti/articulate.js/blob/master/LICENSE
  # -----------------------------------------------------------------------------
 */
-"use strict";
+'use strict';
 
 /* Articulate.js (1.1.0). (C) 2017 Adam Coti.
   MIT @license: en.wikipedia.org/wiki/MIT_License

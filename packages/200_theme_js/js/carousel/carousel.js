@@ -7,7 +7,7 @@
  *  Licensed under MIT
  *
 */
-"use strict";
+'use strict';
 
 /*JS Lint helpers: */
 /*global dragMove: false, dragEnd: false, $, jQuery, alert, window, document */

@@ -12,7 +12,7 @@
 /* eslint no-undef: "off"                                                     */
 /* eslint semi: "off"                                                         */
 // -----------------------------------------------------------------------------
-"use strict";
+'use strict';
 
 module.exports = function parseContent (options) {
   var reduce = [].reduce

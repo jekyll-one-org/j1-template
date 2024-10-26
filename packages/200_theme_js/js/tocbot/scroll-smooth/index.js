@@ -17,7 +17,7 @@
  #  For details, https://github.com/tscanlin/tocbot/blob/master/LICENSE
  # -----------------------------------------------------------------------------
 */
-"use strict";
+'use strict';
 
 // -----------------------------------------------------------------------------
 // ESLint shimming

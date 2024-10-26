@@ -16,7 +16,7 @@
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
 */
-"use strict";
+'use strict';
 
 ;(function($) {
 

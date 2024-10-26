@@ -642,7 +642,7 @@ Template.prototype = {
     }
 
     if (opts.strict) {
-      src = '"use strict";\n' + src;
+      src = 'use strict;\n' + src;
     }
     if (opts.debug) {
       console.log(src);

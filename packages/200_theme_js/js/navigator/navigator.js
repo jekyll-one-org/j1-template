@@ -23,7 +23,7 @@
  #    Current, only base function are tested with BS4 (was coded for BS3)
  # -----------------------------------------------------------------------------
 */
-"use strict";
+'use strict';
 
 // -----------------------------------------------------------------------------
 // ESLint shimming
