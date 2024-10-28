@@ -98,7 +98,7 @@ Gem::Specification.new do |spec|
   #
   spec.add_runtime_dependency 'bump', '~> 0.8'
 
-  # Dependencies: Development Tools (currentlyNOT used)
+  # Dependencies: Development Tools (currently NOT used)
   #
   # spec.add_runtime_dependency 'pry', '~> 0.10'
   # spec.add_runtime_dependency 'rack-test', '~> 0.6'

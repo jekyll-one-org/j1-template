@@ -33,9 +33,11 @@
     "clean": "run-p -s clean:* && run-p -s clean-bundle:*",
     "create": "run-s template-gem",
     "setup": "run-s bundle_install:*",
+    
     "install--local": "run-s -s install-local:*",
     "install--shared": "run-s -s install-shared:*",
     "install--remote": "run-s -s install-remote:*",
+    
     "bundle_install:info": "echo bundle development rubies ..",
     "bundle_install:gemfile": "shx cp -f ../300_theme_src/_install/dev/j1-template.Gemfile ./Gemfile",
     "bundle_install:clean": "shx rm -rf Gemfile.lock",
@@ -46,17 +48,22 @@
     "bundle_install_user:set-path": "bundle config set --local path ~/.gem",
     "bundle_install_user:info": "echo installing development rubies using user path ..",
     "bundle_install_user:do": "cross-var cross-env BUNDLE_GEMFILE=$npm_package_rubygem_gemfile bundle install",
+    
     "install-local:info": "cross-var echo run gem install for j1-template-$npm_package_rubygem_gemversion on local system",
     "install-local:check": "cross-var cross-env BUNDLE_USERIZE=$npm_package_ruby_userize if-env BUNDLE_USERIZE=true && run-s -s install-local_user:* || run-s -s install-local_system:*",
     "install-local_system:info": "echo installing gems using system path ..",
     "install-local_system:do": " j1-template --local --no-user-install --no-document",
     "install-local_user:info": "echo installing gems using user path ..",
-    "install-local_user:do": "cross-var gem install j1-template-$npm_package_rubygem_gemversion.gem --local --user-install --no-document",
+    "_install-local_user:do": "cross-var gem install j1-template-$npm_package_rubygem_gemversion.gem --local --user-install --no-document",
+    
+    "install-local_user:do": "cross-var gem install j1-template-$npm_package_rubygem_gemversion.gem --no-document",
+    
     "install-remote:info": "cross-var echo run gem install for j1-template-$npm_package_rubygem_gemversion on remote (RubyGems)",
     "install-remote:do": "cross-var gem push j1-template-$npm_package_rubygem_gemversion.gem",
     "install-shared:info": "cross-var echo installing gem j1-template-$npm_package_rubygem_gemversion.$npm_package_rubygem_gemext on shared disk G:\\ ..",
     "install-shared:do": "cross-var shx cp -f ./j1-template-$npm_package_rubygem_gemversion.$npm_package_rubygem_gemext G:\\Install",
     "install-shared:done": "cross-var echo installed gem j1-template-$npm_package_rubygem_gemversion.$npm_package_rubygem_gemext on G:\\Install.",
+    
     "clean:gems": "shx rm -f *.gem",
     "clean:git-repo": "shx rm -rf .git",
     "clean:lock-files": "shx rm -f *.lock && shx rm -rf package-lock.json",
@@ -67,17 +74,21 @@
     "clean:starter-web": "shx rm -rf ./lib/starter_web",
     "clean-bundle:gemfile": "shx rm -rf Gemfile.lock",
     "clean-bundle:bundle": "shx rm -rf .bundle",
+    
     "rebuild": "run-p rebuild:*",
     "rebuild:css": "lerna --scope css run build",
     "rebuild:js": "lerna --scope js run build",
+    
     "pretemplate-gem": "run-p -s clean:* && run-s rebuild && run-s template-gem-folders && run-s template-gem-files && run-s template-gem-templates",
     "template-gem": "run-s bundle_install:* && run-s starter-git-repo && run-s template-gem-create",
     "posttemplate-gem": "echo cleanup files and folders .. && shx rm -rf **/_unused && shx rm -rf .git && echo done.",
+    
     "starter-git-repo": "run-s starter-git-repo:*",
     "starter-git-repo:create": "git init",
     "starter-git-repo:email": "git config user.email \"dummy@dummy.site\"",
     "starter-git-repo:user": "git config user.name \"Dummy Name\"",
     "starter-git-repo:commit": "git add . && cross-var git commit -am \"Initial version '$npm_package_rubygem_gemversion'\" > git-add.log",
+    
     "template-gem-create": "cross-var echo \"create gem version: $npm_package_rubygem_gemversion\" && gem build j1-template.gemspec",
 
     "template-gem-folders": "run-s template-gem-folder:*",
@@ -120,9 +131,11 @@
     "posttemplate-gem-site-files:about-copy": "shx mkdir ./lib/starter_web/pages/public/about && shx cp -f ../300_theme_src/_install/templates/pages/about_site.adoc ./lib/starter_web/pages/public/about/site.adoc",
     "posttemplate-gem-site-files:pages-copy-reporting-issues": "shx cp -f ../400_theme_site/pages/public/about/reporting_issues.adoc ./lib/starter_web/pages/public/about",
     "posttemplate-gem-site-files:pages-copy-features": "shx cp -f ../400_theme_site/pages/public/about/features.adoc ./lib/starter_web/pages/public/about",
+    
     "template-gem-permissions": "run-p -s template-gem-permission:*",
     "template-gem-permission:batch": "shx chmod a+x ./lib/starter_web/*sh",
     "template-gem-permission:j1_exe": "shx chmod a+x ./exe/j1",
+    
     "template-gem-templates": "run-p -s template-gem-template:*",
     "template-gem-template:posts": "shx cp ../300_theme_src/_install/templates/posts/0000-00-00-welcome-to-j1.adoc.erb lib/starter_web/collections/posts/public/featured/_posts",
     "template-gem-template:clean": "shx rm -f lib/starter_web/collections/posts/public/featured/_posts/*welcome-to-j1.adoc"
@@ -130,6 +143,7 @@
   "dependencies": {
     "cross-env": "^7.0.3",
     "cross-var": "^1.1.0",
+    "if-env": "^1.0",
     "npm-run-all": "^4.1.5",
     "shx": "^0.3.4"
   }
