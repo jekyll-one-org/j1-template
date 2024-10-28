@@ -63,3 +63,29 @@ required to meet a dependency. If a gem is installed elsewhere in GEM_PATH
 the cleanup command won’t delete it.
 
 If no gems are named all gems in GEM_HOME are cleaned.
+
+
+
+
+Testing
+--------------------------------------------------------------------------------
+gem install bump --no-document
+--
+Using rubygems directory: C:/Users/w11/.gem/ruby/3.2.0
+Successfully installed bump-0.10.0
+1 gem installed
+
+gem install j1-template-2024.3.14.gem --no-document
+--
+Using rubygems directory: C:/Users/w11/.gem/ruby/3.2.0
+Successfully installed ffi-1.17.0-x64-mingw-ucrt
+Successfully installed google-protobuf-4.28.3-x64-mingw-ucrt
+Successfully installed sass-embedded-1.80.4-x64-mingw-ucrt
+Successfully installed j1-template-2024.3.14
+4 gems installed
+
+
+
+gem install --install-dir C:/Users/w11/.gem/ruby/3.2.0 --no-document j1-template-2024.3.14.gem
+
+gem install --user-install --no-document j1-template-2024.3.14.gem

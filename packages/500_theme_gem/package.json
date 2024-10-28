@@ -49,7 +49,7 @@
     "install-local:info": "cross-var echo run gem install for j1-template-$npm_package_rubygem_gemversion on local system",
     "install-local:check": "cross-var cross-env BUNDLE_USERIZE=$npm_package_ruby_userize if-env BUNDLE_USERIZE=true && run-s -s install-local_user:* || run-s -s install-local_system:*",
     "install-local_system:info": "echo installing gems using system path ..",
-    "install-local_system:do": "gem install j1-template --local --no-user-install --no-document",
+    "install-local_system:do": " j1-template --local --no-user-install --no-document",
     "install-local_user:info": "echo installing gems using user path ..",
     "install-local_user:do": "cross-var gem install j1-template-$npm_package_rubygem_gemversion.gem --local --user-install --no-document",
     "install-remote:info": "cross-var echo run gem install for j1-template-$npm_package_rubygem_gemversion on remote (RubyGems)",

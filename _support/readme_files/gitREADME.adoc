@@ -29,6 +29,7 @@
 
 == Git Aliases (~/.gitconfig)
 
+[alias]
 	aa 	= add .
 	st 	= status
 	sts = status -b -s
