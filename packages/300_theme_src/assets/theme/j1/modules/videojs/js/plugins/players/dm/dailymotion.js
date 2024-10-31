@@ -627,8 +627,8 @@
       logger.debug('\n' + 'initializing plugin: started');
       logger.debug('\n' + 'version of videoJS detected: ' + videojs.VERSION);
 
-      // loadScript('//api.dmcdn.net/all.js', apiLoaded);
-      loadScript('/assets/theme/j1/modules/videojs/js/plugins/players/dm/api/dailymotion.sdk.min.js', apiLoaded);
+      loadScript('//api.dmcdn.net/all.js', apiLoaded);
+      // loadScript('/assets/theme/j1/modules/videojs/js/plugins/players/dm/api/dailymotion.sdk.min.js', apiLoaded);
       injectCss();
 
       clearInterval(dependencies_met_page_ready);

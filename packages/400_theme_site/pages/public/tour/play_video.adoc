@@ -31,7 +31,7 @@ permalink:                              /pages/public/tour/present_video/
 
 resources:                              [
                                           gallery, lightgallery, masonry,
-                                          rouge, videojs, vimeo-player
+                                          videojs, vimeo-player
                                         ]
 resource_options:
   - toccer:
@@ -115,8 +115,7 @@ a built-in multimedia framework for decoding and displaying video content.
 Two types of video sources are supported:
 
 * Video files from local folders (your webspace)
-* Video files from Online sources (on the Internet) like YouTube, Wistia,
-  Dailymotion etc.
+* Video files from online sources (on the Internet) like YouTube, Vimeo, etc.
 
 Standalone video players embedded in websites are software components that
 integrate and play video sources directly within a page or application. These
@@ -138,7 +137,7 @@ video::/assets/video//html5/peck_pocketed.mp4[poster="/assets/video/poster/html5
 
 
 [role="mt-5"]
-== VideoJS Player
+== VideoJS
 
 VideoJS is a *free-to-use* open-source JavaScript framework for building
 custom video players for the web. Implementing VideoJS for the J1 Template
@@ -166,12 +165,27 @@ YouTube is a popular online video-sharing platform that allows users to
 upload, view, share, and comment on videos. The platform provides services
 for people and organizations to publish various video content.
 
-.Best Auditions · AGT 2024
+The season 19 (2024) of _America's Got Talent_ (AGT) is special. In the long
+history of AGT, only a few *Goldern Buzzers* were given. In 2024, this is
+different - for good reasons. See a compilation on YouTube of the very best
+auditions ever.
+
+.AGT 2024 · Best Auditions
 youtube::4VSBJU52UvM[poster="//img.youtube.com/vi/4VSBJU52UvM/maxresdefault.jpg" role="mt-4 mb-5"]
+
+Dog Dancing is presented quite often on stage. Like AGT season 18,
+Adrian Stoica presented his dog Hurricane https://www.youtube.com/watch?v=ENGRnUN1UKQ)[Youtube, {browser-window--new}].
+But see Roni Sagi - an Israeli dog trainer - and her dog Rhythm.
+This is Dog Dancing the next level.
+
+.Roni Sagi & Rhythm · ALL Performances (AGT 2024)
+youtube::1J2qz6B-PFY[poster="//img.youtube.com/vi/1J2qz6B-PFY/maxresdefault.jpg" role="mt-4 mb-5"]
 
 // .Fortnight (feat. Post Malone, Official Music Video) · Taylor Swift
 // youtube::q3zqJs7JUCQ[poster="//img.youtube.com/vi/q3zqJs7JUCQ/maxresdefault.jpg" role="mt-4 mb-5"]
 
+
+////
 [role="mt-4"]
 === Dailymotion
 
@@ -182,15 +196,17 @@ video.
 
 .Beginner Mat Pilates · SELF Channel
 dailymotion::x87ycik[poster="/assets/video/poster/dailymotion/pilates.jpg" role="mt-4 mb-5"]
+////
+
 
 [role="mt-4"]
 === Vimeo
-
+ 
 Vimeo is an sharing platform that allows users to upload, share, and view
 video content. It was founded in 2004 by a group of filmmakers and has
 since grown into a popular platform for individuals and businesses to
-showcase their videos. Vimeo is known for its emphasis on high-quality videos
-and creative expression.
+showcase their videos. Vimeo is known for its emphasis on high-quality 
+video and creative expression.
 
 .Kick It Old School · Forever 21
 vimeo::179528528[poster="/assets/video/poster/vimeo/kick_it_old_school.jpg" role="mt-4 mb-5"]
