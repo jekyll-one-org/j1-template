@@ -393,7 +393,7 @@ settings:
       #
       id:                               free_disco_compact
       type:                             compact
-      audio_info:                       true
+      audio_rating:                     true
 
       # ------------------------------------------------------------------------
       # TIME settings
@@ -561,6 +561,7 @@ settings:
       #
       id:                               mimi_rutherfurt_yt_large
       type:                             large
+      #audio_rating:                     true
 
       playlist:
         name:                           mimi_rutherfurt_yt
