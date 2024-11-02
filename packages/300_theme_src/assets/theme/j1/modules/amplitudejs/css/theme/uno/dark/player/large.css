@@ -59,10 +59,10 @@
 }
 
 .playlist-screen-controls {
+  /* top: 0; */
+  /* position: sticky; */
   cursor: default;
-  top: 0;
-  position: sticky;
-  height: 90px;
+  height: 95px;
   padding: 15px;
   max-width: -webkit-fill-available;
   max-width: -moz-available;
@@ -189,19 +189,18 @@ span.audio-rating {
   align-items: center;
 	float: right;
   font-size: 16px;
-	margin-right: -36px;
+  margin-top: -28px;
+	margin-right: -106px;
 	color: var(--ajs-theme-uno--gray-400);
 }
-
 
 div#large_player_right
 div.song
 img.audio-info-blue {
   float: right;
   display: block;
-  /* margin-top: 10px; */
-  margin-top: 28px;
-  margin-right: 5px;
+  margin-top: 30px;
+  margin-right: -2px;
 }
 
 div#large_player_right
@@ -209,8 +208,8 @@ div.song
 img.audio-info-white {
   float: right;
   display: none;
-  margin-top: 10px;
-  margin-right: 10px;
+  margin-top: 30px;
+  margin-right: -2px;
 }
 
 /* clearfix */
@@ -299,8 +298,8 @@ div.playlist-screen-controls
 div.list-controls {
   float: right;
   width: 90px;
-  margin-top: 32px;
-  margin-right: 16px;
+  margin-top: 40px;
+  margin-right: -12px;
 }
 
 div#large_player_right
