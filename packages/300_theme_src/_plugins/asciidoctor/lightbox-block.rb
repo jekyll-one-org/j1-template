@@ -43,8 +43,8 @@ Asciidoctor::Extensions.register do
       html_block    = Builder::XmlMarkup.new(:indent => 2)
       imagesdir     = parent.attr 'imagesdir'
       images_hash   = Hash[*attributes['image_data'].split(',')]
+      title_html    = (attributes.has_key? 'title') ? %(<div class="lightbox-title"> <i class="mdib mdib-lightbulb-on  mdib-24px mr-2"></i> #{attributes['title']} </div>\n) : nil
 
-      title_html    = (attributes.has_key? 'title') ? %(<div class="lightbox-title">#{attributes['title']}</div>\n) : nil
       role          = (attributes.has_key? 'role') ? role : ''
       grouped       = (attributes.has_key? 'group') ? true : false
 

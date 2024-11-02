@@ -35,7 +35,8 @@ Asciidoctor::Extensions.register do
 
     def process parent, target, attributes
 
-      title_html  = (attributes.has_key? 'title') ? %(<div class="carousel-title">#{attributes['title']}</div>\n) : nil
+      title_html  = (attributes.has_key? 'title') ? %(<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> #{attributes['title']} </div>\n) : nil
+
       html        = %(
         <div class="#{attributes['role']}">
           #{title_html}

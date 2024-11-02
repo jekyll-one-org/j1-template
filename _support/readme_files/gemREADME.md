@@ -65,7 +65,21 @@ the cleanup command won’t delete it.
 If no gems are named all gems in GEM_HOME are cleaned.
 
 
+# List all gem LOCAL|REMOTE
 
+gem list <gem-name> --local|--remote --all
+
+List all installed Gems on local system:
+
+``` sh
+  gem list j1-template --local --all
+```
+
+List all available Gems on remote (e.g RubyGems):
+
+``` sh
+  gem list j1-template --remote --all
+```
 
 Testing
 --------------------------------------------------------------------------------

@@ -87,6 +87,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
     ---------------------------------------------------------------------------- {% endcomment %}
     {% assign source_media                  = amplitude_defaults.player.source %}
     {% assign song_progress_bar             = amplitude_defaults.player.song_progress_bar %}
+    {% assign audio_rating                  = amplitude_defaults.player.audio_rating %}
     {% assign display_hours                 = amplitude_defaults.player.display_hours %}
     {% assign volume_slider                 = amplitude_defaults.player.volume_slider.enabled %}
     {% assign volume_slider_min             = amplitude_defaults.player.volume_slider.min_value %}
@@ -148,6 +149,13 @@ amplitude_defaults: {{amplitude_defaults | debug}}
     {% if player.playlist.audio_info %}
       {% assign player_audio_info = player.playlist.audio_info %}
     {% endif %}
+
+    {% if player.audio_rating %}
+      {% assign player_audio_rating = player.audio_rating %}
+    {% else %}
+      {% assign player_audio_rating = audio_rating %}
+    {% endif %}
+
 
     {% comment %} unused
     ----------------------------------------------------------------------------
@@ -335,7 +343,9 @@ amplitude_defaults: {{amplitude_defaults | debug}}
                   <span
                     data-amplitude-playlist="{{player_playlist}}"
                     data-amplitude-source="{{source_media_attribute}}"
-                    data-amplitude-song-info="artist" data-amplitude-song-index="0"></span>
+                    data-amplitude-song-info="artist"
+                    data-amplitude-song-index="0">
+                  </span>
                 </div>
               </div>
               <div class="list-controls">
@@ -385,6 +395,14 @@ amplitude_defaults: {{amplitude_defaults | debug}}
                   data-amplitude-source="{{source_media_attribute}}"
                   data-amplitude-playlist="{{player_playlist}}">
                   <span class="song-name">{{item.title}}</span>
+
+                  {% if player_audio_rating %}
+                  <span class="audio-rating">
+                    {{item.rating}}
+                    <i class="mdib mdib-star md-gray-400 mdib-24px mb-1"></i>
+                  </span>
+                  {% endif %}
+
                   <span class="song-artist-album">
                     <span>{{item.name}}</span>
                     <span class="song-artist-album-delimiter">·</span>
@@ -866,6 +884,12 @@ amplitude_defaults: {{amplitude_defaults | debug}}
                     data-amplitude-playlist="{{player_playlist}}"
                     data-amplitude-song-info="name">
                   </span>
+                  <!-- span
+                    class="audio-rating"
+                    data-amplitude-playlist="{{player_playlist}}">
+                    {{player_playlist}}.{{item.rating}}
+                    <i class="mdib mdib-star md-gray-400 mdib-24px"></i>
+                  </span -->
                   <div class="song-artist-album">
                     <span
                       data-amplitude-source="{{source_media_attribute}}"
@@ -919,6 +943,14 @@ amplitude_defaults: {{amplitude_defaults | debug}}
                     class="audio-meta-data"
                     data-amplitude-playlist="{{player_playlist}}">
                     <span class="audio-title">{{item.title}}</span>
+
+                    {% if player_audio_rating %}
+                    <span class="audio-rating">
+                      {{item.rating}}
+                      <i class="mdib mdib-star md-gray-400 mdib-24px mb-1"></i>
+                    </span>
+                    {% endif %}´
+
                     <span class="audio-artist">
                       <span>{{item.name}}</span>
                       <span class="song-artist-album-delimiter">·</span>

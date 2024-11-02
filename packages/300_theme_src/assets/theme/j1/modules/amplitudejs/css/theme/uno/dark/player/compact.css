@@ -460,10 +460,23 @@ div.song-meta-container
 span.song-name {
   display: block;
   font-family: "Lato", sans-serif;
-  font-size: 20px;
-  line-height: 20px;
-  letter-spacing: 0.47px;
+  font-size: 18px;
+  line-height: 24px;
   color: var(--ajs-theme-uno--blue);
+}
+
+div.compact-player-playlist
+div.compact-player-title-list
+div.song
+div.song-meta-container
+span.audio-rating {
+  display: flex;
+  align-items: center;
+  float: right;
+  font-size: 18px;
+  margin-top: -32px;
+  margin-right: -38px;
+  color: var(--ajs-theme-uno--gray-400);
 }
 
 div.compact-player-playlist
@@ -584,7 +597,7 @@ div.playlist-screen-controls
 div.list-controls {
   float: right;
   width: 90px;
-  margin-top: 8px;
+  margin-top: 32px;
 }
 
 div.compact-player-playlist

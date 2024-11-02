@@ -298,8 +298,8 @@ settings:
 
         thumblist:
           enabled:                      true
-          width:                        140
-          height:                       80
+          height:                       180
+          width:                        250
           type:                         thumbs
           autohide:                     false
           dir:                          v
@@ -310,8 +310,8 @@ settings:
       #
       options:
 
-        width:                          1200
-        height:                         600
+        width:                          1000
+        height:                         500
 
       # ------------------------------------------------------------------------
       # Slides
@@ -653,8 +653,8 @@ settings:
 
         thumblist:
           enabled:                      true
-          height:                       160
-          width:                        240
+          height:                       180
+          width:                        280
           type:                         tabs
           autohide:                     false
           dir:                          v

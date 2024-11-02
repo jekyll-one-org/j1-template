@@ -25,7 +25,7 @@ image:
   width:                                1920
   height:                               1280
 
-compress:                               false
+compress:                               true
 regenerate:                             false
 permalink:                              /pages/public/tour/present_images/
 
@@ -132,7 +132,7 @@ under the link:{url-j1-docs--lightbox-module}[Lightbox module, {browser-window--
 ====
 
 [role="mt-5"]
-=== J1 Lightbox
+=== Lightboxes
 
 Find below an example of using the the default lightbox used for standalone
 images. See how individual images are linked.
@@ -148,14 +148,14 @@ lightbox::example-group[395, {data-images-group}, group, role="mt-4 mb-4 wm-800"
 
 
 [role="mt-5"]
-=== J1 lightGallery
+=== lightGallery
 
 lightGallery provides more complex image data functions than the default
 lightbox. The module supports a gallery-style thumbnail preview plus image
 resizing, a download dialog, sharing provider support, and more helpful.
 Check what lightGallery can do this by the following example.
 
-.J1 Gallery + lightGallery
+.Gallery + lightGallery
 gallery::jg_old_times[role="mt-4 mb-4"]
 
 .lightGallery - Gallery or Lightbox
@@ -257,7 +257,7 @@ carousel::demo_oneslide[role="mb-4"]
 
 
 [role="mt-5"]
-== J1 Slick Carousel
+== Slick Slider
 
 [role="mb-4"]
 Slick is a popular jQuery plugin for creating responsive and fully
@@ -333,7 +333,7 @@ link:{url-j1-slick-previewer}[Slick Previewer, {browser-window--new}],
 
 [role="mt-5"]
 [[masterSlider]]
-== J1 Masterslider
+== Masterslider
 
 Masterslider is a jQuery plugin fully integrated into the J1 Template.
 Jekyll One uses the *free* version of Masterslider well-known as MS Lite.
@@ -366,7 +366,7 @@ link:{url-j1-docs--masterslider-module}[Master Slider module, {browser-window--n
 ====
 
 [role="mt-5"]
-=== Featured MS Slider
+=== Featured Slider
 
 The following slider uses the CSS filter feature of Master Slider. Filters
 can be used, for example, to *transform* the *style* of the images presented
@@ -391,11 +391,11 @@ slides to see the *colored* images configured for the slider.
 
 [role="mt-5"]
 [[text_elements]]
-=== MS Slider using Text Elements
+=== Slider using Text Elements
 
 One of the major features of sliders is to present additional animated
 elements, like text data, connected to the images presented by an slideshow.
-MS Slider additionally provides functions to combine images and text by
+Masterslider additionally provides functions to combine images and text by
 so-called *MSInfo* blocks out-of-the-box.
 
 .Slider using Images + Text
@@ -420,7 +420,7 @@ masterslider::ms_00007[role="mt-4 mb-5"]
 ////
 [role="mt-4"]
 [[ms_video]]
-=== MS Slider using Video
+=== Masterslider using Video
 
 lorem:sentences[5]
 
@@ -431,7 +431,7 @@ masterslider::ms_00010[role="mt-4 mb-5"]
 
 [role="mt-4"]
 [[partialview]]
-=== MS Slider using Layout PartialView
+=== Slider using a Layout
 
 The following slider presents a slideshow that combines an MSInfo element
 at the bottom and the MS Layout `partialview`. A slideshow typically presents
@@ -448,13 +448,13 @@ masterslider::ms_00009[role="mt-4 mb-5"]
 If you're interested to learn more about Master Slider, go for the following
 documents:
 
-* MS Slider link:{url-j1-masterslider-previewer}[Previewer, {browser-window--new}]
-* MS Slider link:{url-j1-docs--masterslider-module}[Module documentation, {browser-window--new}]
+* Masterslider link:{url-j1-masterslider-previewer}[Previewer, {browser-window--new}]
+* Masterslider link:{url-j1-docs--masterslider-module}[Module documentation, {browser-window--new}]
 ====
 
 
 [role="mt-5"]
-== J1 Masonry
+== Masonry
 
 Masonry for J1 is a great tool to create dynamic image galleries. Image
 galleries are popular on many websites, and masonry can be a useful tool for
@@ -475,7 +475,7 @@ link:{url-j1-masonry-previewer}[Masonry Preview, {browser-window--new}] page.
 
 
 [role="mt-5"]
-== J1 Gallery
+== Justified Gallery
 
 link:{url-justified-gallery--home}[JustifiedGallery, {browser-window--new}]
 is a great _jQuery_ Plugin to create responsive, infinite, and high-quality
@@ -495,7 +495,7 @@ It works by placing elements in an optimal position based on available
 horizontal and vertical space. Sort of like mason fitting stones in a wall.
 For sure, you'll have seen it in action all over the Internet.
 
-.J1 Gallery of Images + lightGallery
+.Gallery of Images + lightGallery
 gallery::jg_mega_cities[role="mt-4 mb-4"]
 
 

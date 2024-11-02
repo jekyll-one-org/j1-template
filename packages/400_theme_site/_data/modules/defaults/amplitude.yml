@@ -258,6 +258,7 @@ defaults:
     type:                               compact
     source:                             audio
 
+    audio_rating:                       false
     display_hours:                      false
     play_next_title:                    true
     pause_next_title:                   false

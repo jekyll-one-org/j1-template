@@ -29,9 +29,8 @@ settings:
   # ----------------------------------------------------------------------------
   playlists:
 
-
     # --------------------------------------------------------------------------
-    # Emancipator
+    # Mimi Rutherfurt
     # --------------------------------------------------------------------------
     #
     - playlist:
@@ -105,6 +104,7 @@ settings:
           enabled:                      true
           <<:                           *album_from_dusk_to_dawn
           title:                        Dusk To Dawn
+          rating:                       2
           audio:                        DuskToDawn.mp3
           audio_info:                   //emancipator.bandcamp.com/
           cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn/from-dusk-to-dawn.jpg
@@ -115,6 +115,7 @@ settings:
           enabled:                      true
           <<:                           *album_from_dusk_to_dawn
           title:                        First Snow
+          rating:                       2
           audio:                        FirstSnow.mp3
           audio_info:                   //emancipator.bandcamp.com/
           cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn/soon-it-will-be-cold-enough.jpg
@@ -125,6 +126,7 @@ settings:
           enabled:                      true
           <<:                           *album_from_dusk_to_dawn
           title:                        Anthem
+          rating:                       2
           audio:                        Anthem.mp3
           audio_info:                   //emancipator.bandcamp.com/
           cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn/anthem.jpg
@@ -135,6 +137,7 @@ settings:
           enabled:                      true
           <<:                           *album_from_dusk_to_dawn
           title:                        Safe In The Steep Cliffs
+          rating:                       2
           audio:                        SafeInTheSteepCliffs.mp3
           audio_info:                   //emancipator.bandcamp.com/
           cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn/safe-in-the-steep-cliffs.jpg
@@ -169,6 +172,7 @@ settings:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        Dancefloor Fever
+          rating:                       1
           audio:                        SoundsCrate-Dancefloor_Fever.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "2:27"
@@ -178,6 +182,7 @@ settings:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        Dance On Dance Off
+          rating:                       1
           audio:                        SoundsCrate-Dance_On_Dance_Off.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "2:14"
@@ -187,6 +192,7 @@ settings:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        Disco Flamingo
+          rating:                       1
           audio:                        SoundsCrate-Disco_Flamingo.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "2:19"
@@ -196,6 +202,7 @@ settings:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        Downtown
+          rating:                       1
           audio:                        SoundsCrate-Downtown.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "2:48"
@@ -205,6 +212,7 @@ settings:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        Electric Boogie
+          rating:                       1
           audio:                        SoundsCrate-Electric_Boogie.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "2:19"
@@ -214,6 +222,7 @@ settings:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        Grand Central
+          rating:                       1
           audio:                        SoundsCrate-Grand_Central.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "2:33"
@@ -223,6 +232,7 @@ settings:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        In The Pocket
+          rating:                       1
           audio:                        SoundsCrate-In_The_Pocket.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "2:58"
@@ -232,6 +242,7 @@ settings:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        Lounge Life
+          rating:                       1
           audio:                        SoundsCrate-Lounge_Life.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "2:34"
@@ -241,6 +252,7 @@ settings:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        Made For This
+          rating:                       1
           audio:                        SoundsCrate-Made_For_This.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "2:13"
@@ -250,6 +262,7 @@ settings:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        Midnight Express
+          rating:                       1
           audio:                        SoundsCrate-Midnight_Express.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "2:30"
@@ -259,6 +272,7 @@ settings:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        Nightrun
+          rating:                       1
           audio:                        SoundsCrate-Nightrun.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "2:58"
@@ -268,6 +282,7 @@ settings:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        Saturday Night
+          rating:                       1
           audio:                        SoundsCrate-Saturday_Night.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "2:02"
@@ -277,6 +292,7 @@ settings:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        Studio 45
+          rating:                       1
           audio:                        SoundsCrate-Studio_45.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "1:56"
@@ -286,6 +302,7 @@ settings:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        Yes Sir I Can Disco
+          rating:                       1
           audio:                        SoundsCrate-Yes_Sir_I_Can_Disco.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "2:21"
@@ -295,6 +312,7 @@ settings:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        Fashion Show
+          rating:                       1
           audio:                        soundscrate-fashion-show.mp3
           audio_info:                   /sfx.productioncrate.com
           duration:                     "3:08"
@@ -304,6 +322,7 @@ settings:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        Loungy Disco
+          rating:                       1
           audio:                        soundscrate-loungy-disco.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "3:04"
@@ -313,6 +332,7 @@ settings:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        Oakland Style
+          rating:                       1
           audio:                        soundscrate-oakland-style.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "3:19"
@@ -322,6 +342,7 @@ settings:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        Funkish Vibe
+          rating:                       1
           audio:                        soundscrate-funkish-vibe.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "2:38"
@@ -358,7 +379,6 @@ settings:
       playlist:
         name:                           free_disco
         title:                          Disco 80th
-        audio_info:                     false
         controls:                       true
 
     # --------------------------------------------------------------------------
@@ -373,6 +393,7 @@ settings:
       #
       id:                               free_disco_compact
       type:                             compact
+      audio_info:                       true
 
       # ------------------------------------------------------------------------
       # TIME settings
@@ -389,7 +410,6 @@ settings:
       playlist:
         name:                           free_disco
         title:                          Disco 80th
-        audio_info:                     true
         controls:                       true
 
     # --------------------------------------------------------------------------
@@ -404,6 +424,7 @@ settings:
       #
       id:                               free_disco_large
       type:                             large
+      audio_rating:                     true
 
       # ------------------------------------------------------------------------
       # TIME settings
@@ -471,6 +492,7 @@ settings:
       #
       id:                               free_emancipator_compact
       type:                             compact
+      audio_rating:                     true
 
       playlist:
         name:                           emancipator
@@ -502,6 +524,7 @@ settings:
       #
       id:                               free_emancipator_large
       type:                             large
+      audio_rating:                     true
 
       playlist:
         name:                           emancipator
