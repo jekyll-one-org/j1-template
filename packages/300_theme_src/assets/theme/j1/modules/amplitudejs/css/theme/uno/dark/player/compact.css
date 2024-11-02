@@ -411,7 +411,7 @@ div.compact-player-title-list
 div.song {
   padding: 15px;
   cursor: pointer;
-  line-height: 24px;
+  line-height: 20px;
   background-color: var(--ajs-theme-uno--darker-silver);
 }
 
@@ -449,10 +449,11 @@ div.song
 div.song-meta-container {
   display: inline-block;
   margin-left: 20px;
-  vertical-align: middle;
+  /* vertical-align: middle; */
   width: calc(100% - 120px);
 }
 
+/*
 div.compact-player-playlist
 div.compact-player-title-list
 div.song
@@ -462,6 +463,22 @@ span.song-name {
   font-family: "Lato", sans-serif;
   font-size: 18px;
   line-height: 24px;
+  color: var(--ajs-theme-uno--blue);
+}
+*/
+
+div.compact-player-playlist
+div.compact-player-title-list
+div.song
+div.song-meta-container
+span.song-name {
+  display: block;
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.47px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   color: var(--ajs-theme-uno--blue);
 }
 
@@ -474,8 +491,8 @@ span.audio-rating {
   align-items: center;
   float: right;
   font-size: 18px;
-  margin-top: -32px;
-  margin-right: -38px;
+  margin-top: -20px;
+  margin-right: -80px;
   color: var(--ajs-theme-uno--gray-400);
 }
 
@@ -487,7 +504,6 @@ span.song-artist-album {
   display: block;
   font-family: "Lato", sans-serif;
   font-size: 16px;
-  line-height: 28px;
   letter-spacing: 0.47px;
   color: var(--ajs-theme-uno--gray-300);
 }
@@ -498,7 +514,7 @@ div.song
 span.audio-duration {
   font-family: "Lato", sans-serif;
   font-size: 16px;
-  line-height: 28px;
+  margin-left: 50px;
   color: var(--ajs-theme-uno--gray-300);
 }
 
@@ -522,7 +538,7 @@ div.song
 img.audio-info-blue {
   float: right;
   display: block;
-  margin-top: 10px;
+  margin-top: 30px;
 }
 
 div.compact-player-playlist
@@ -548,7 +564,7 @@ img.now-playing {
   display: inline-block;
   height: 16px;
   width: 16px;
-  margin-top: 5px;
+  margin-top: 2px;
   margin-left: 10px;
 }
 
@@ -567,7 +583,7 @@ div.playlist-screen-meta-container {
   width: calc(100% - 123px);
 }
 
-div.compact-player-playlist
+/* div.compact-player-playlist
 div.playlist-screen-controls
 div.playlist-screen-meta-container
 span.song-name {
@@ -576,6 +592,20 @@ span.song-name {
   letter-spacing: 0.5px;
   line-height: 24px;
   margin-left: 38px;
+  color: var(--ajs-theme-uno--white);
+} */
+
+div.compact-player-playlist
+div.playlist-screen-controls
+div.playlist-screen-meta-container
+span.song-name {
+  font-family: "Lato", sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  line-height: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   color: var(--ajs-theme-uno--white);
 }
 
@@ -588,7 +618,7 @@ div.song-artist-album {
   font-size: 16px;
   letter-spacing: 0.5px;
   line-height: 16px;
-  margin-left: 38px;
+  /* margin-left: 38px; */
   color: var(--ajs-theme-uno--white);
 }
 
@@ -597,7 +627,7 @@ div.playlist-screen-controls
 div.list-controls {
   float: right;
   width: 90px;
-  margin-top: 32px;
+  margin-top: 40px;
 }
 
 div.compact-player-playlist

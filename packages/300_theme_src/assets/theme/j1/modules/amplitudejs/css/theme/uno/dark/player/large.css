@@ -59,10 +59,8 @@
 }
 
 .playlist-screen-controls {
-  /* top: 0; */
-  /* position: sticky; */
   cursor: default;
-  height: 95px;
+  height: 100px;
   padding: 15px;
   max-width: -webkit-fill-available;
   max-width: -moz-available;
@@ -81,6 +79,7 @@ div#large_player_left {
   overflow-y: clip;
   padding: 0px;
   width: 50%;
+  min-width: 400px;
   border: solid 1px;
   border-color: var(--ajs-theme-uno--medium-silver);
   background-color: var(--ajs-theme-uno--darker-silver) !important;
@@ -104,6 +103,7 @@ div#large_player_right {
   padding: 0px;
   overflow-y: scroll;
   width: 50%;
+  min-width: 400px;
   border-top: solid 1px;
   border-right: solid 1px;
   border-bottom: solid 1px;
@@ -130,14 +130,25 @@ span.number {
 }
 
 div#large_player_right
-div.song.amplitude-active-song-container
+div.song
 div.song-now-playing-icon-container
 img.now-playing {
-  display: block;
+  display: none;
   margin-top: 5px;
   margin-left: 4px;
   height: 16px;
   width: 16px;
+}
+
+div#large_player_right
+div.song.amplitude-active-song-container
+div.song-now-playing-icon-container
+img.now-playing {
+  display: block;
+}
+
+div.audio-meta-container.amplitude-playing > img.now-playing {
+  display: block;
 }
 
 div#large_player_right
@@ -154,12 +165,27 @@ div.audio-meta-data {
   width: calc(100% - 145px);
 }
 
+/* div#large_player_right
+div.song
+div.audio-meta-data
+span.audio-artist {
+  display: block;
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--ajs-theme-uno--gray-300);
+} */
+
 div#large_player_right
 div.song
 div.audio-meta-data
 span.audio-artist {
   display: block;
   font-size: 16px;
+  margin-top: -23px;
+  line-height: 16px;
+  margin-left: -10px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -171,10 +197,10 @@ div.song
 div.audio-meta-data
 span.audio-title {
   display: block;
+  margin-left: -10px;
   font-family: "Lato", sans-serif;
   font-size: 16px;
   line-height: 20px;
-  /* letter-spacing: 0.47px; */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -220,7 +246,7 @@ div.song:after {
   clear: both;
 }
 
-div#large_player_right
+/* div#large_player_right
 div.song
 div.song-now-playing-icon-container {
   float: left;
@@ -228,16 +254,19 @@ div.song-now-playing-icon-container {
   height: 20px;
   margin-top: 12px;
   margin-right: 20px;
-}
+} */
 
 div#large_player_right
-div.song
-div.song-now-playing-icon-container
-img.now-playing {
-  display: none;
+div.song 
+div.song-now-playing-icon-container {
+  float: left;
+  width: 26px;
+  height: 20px;
+  margin-top: 20px;
+  margin-right: 20px;
 }
 
-div#large_player_right
+/* div#large_player_right
 div.song
 span.audio-duration {
   float: left;
@@ -247,6 +276,17 @@ span.audio-duration {
   font-family: "Lato", sans-serif;
   text-align: center;
   line-height: 45px;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ajs-theme-uno--gray-300);
+} */
+
+div#large_player_right
+div.song span.audio-duration {
+  float: left;
+  margin-top: 40px;
+  margin-left: -277px;
+  font-family: "Lato", sans-serif;
   font-size: 16px;
   font-weight: 500;
   color: var(--ajs-theme-uno--gray-300);
