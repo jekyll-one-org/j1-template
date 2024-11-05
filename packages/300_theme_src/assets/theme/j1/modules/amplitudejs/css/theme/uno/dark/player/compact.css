@@ -15,8 +15,10 @@
 
 /* 1. Base
 # --------------------------------------------------------- */
+
 .compact-player {
-  max-width: 475px;
+  width: 500px;
+  height: auto;
   border: solid 1px;
   border-color: var(--ajs-theme-uno--medium-silver);
 }
@@ -34,15 +36,18 @@
 /* 2. Components
 # --------------------------------------------------------- */
 
-/* player TOP
+/* Player TOP
 # --------------------------------------------------------- */
 div.player-top {
   position: relative;
 }
 
+/* jadams, 2024-11-04: Overload user agent styles for width|height */
 div.player-top
 img[data-amplitude-song-info="cover_art_url"] {
-  width: 100%;
+  width: 498px;    /* size of cover image (rendered) - 1px borders left|right */
+  height: auto;
+  object-fit: cover;
 }
 
 div.compact-player-header {
@@ -65,12 +70,11 @@ div.compact-player-header {
   background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/up.svg") no-repeat;
 }
 
-
 .compact-player-header-arrows.arrow-up {
   background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/down.svg") no-repeat;
 }
 
-/* player MIDDLE
+/* Player MIDDLE
 # --------------------------------------------------------- */
 div#compact_player_control_container {
   margin-top: 20px;
@@ -153,7 +157,6 @@ div#compact_player_shuffle {
   width: 24px;
   height: 24px;
   vertical-align: middle;
-  /* margin-right: 25px; */
 }
 
 div.compact-player-middle
@@ -350,7 +353,7 @@ div.amplitude-mute.amplitude-muted {
   background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/mute.svg") no-repeat;
 }
 
-/* player BOTTOM
+/* Player BOTTOM
 # --------------------------------------------------------- */
 div.player-bottom {
   background-color: var(--ajs-theme-uno--black);
@@ -358,18 +361,57 @@ div.player-bottom {
 
 
 /* 3. Layout
+# ------------------------------------------------------------------------------ */
+
+/*
+Bootstrap (BS) grid breakpoints
+  SN:     576px           Mobile
+  MD:     768px           Small Desktop|Tablet
+  LG:     992px           Desktop
+  XL:     1200px          Large Desktop
+  XXL:    1400px          X Large Desktop
+ */
+
+ /* max-width: -webkit-fill-available;  Chrome, Safari, Edge */
+ /* max-width: -moz-available;          Firefox              */
+
+
+/* BS SM (Mobile)
 # --------------------------------------------------------- */
 
-/* Small only
-# --------------------------------------------------------- */
-@media screen and (max-width: 39.9375em) {
+@media screen and (max-width: 576px) {
+
+  /* jadams, workaround to limit player width on smart phones */
+  .compact-player {
+    max-width: -webkit-fill-available; /* Chrome, Safari, Edge */
+    max-width: -moz-available; /* Firefox */
+  }
+
+  div.player-top img[data-amplitude-song-info="cover_art_url"] {
+    max-width: -webkit-fill-available; /* Chrome, Safari, Edge */
+    max-width: -moz-available; /* Firefox */
+  }
+
   input[type=range].amplitude-volume-slider {
     width: calc(100% - 100px);
   }
+
+  /* jadams, workaround to limit player width on smart phones */
+/*   div.compact-player-playlist
+  div.playlist-screen-controls
+  div.playlist-screen-meta-container
+  span.song-name {
+    margin-left: 0;
+  } */
+
+  div.compact-player-playlist {
+    width: calc(100% - 1px); 
+  }
 }
 
+
 /* 4. Pages
-# --------------------------------------------------------- */
+# ------------------------------------------------------------------------------ */
 
 /* playlist
 # --------------------------------------------------------- */
@@ -389,15 +431,15 @@ div.compact-player-volume-container {
 }
 
 div.compact-player-playlist {
-  background-color: var(--ajs-theme-uno--black);
+  display: none;
   position: absolute;
   top: 0;
   right: 0;
   left: 0;
   bottom: 0;
-  z-index: 9999;
-  display: none;
-  max-width: 475px;
+  /* width: -webkit-fill-available; */
+  width: calc(100% + 1px); /* jadams, workaround */
+  background-color: var(--ajs-theme-uno--black);
 }
 
 div.compact-player-playlist
@@ -417,10 +459,13 @@ div.song {
 
 div.compact-player-playlist
 div.compact-player-title-list
-div.song span.song-number-now-playing {
-  display: inline-block;
-  width: 24px;
-  text-align: center;
+div.song
+span.song-number-now-playing {
+  float: left;
+  width: 5px;
+  height: 20px;
+  margin-top: 8px;
+  margin-right: 12px;
 }
 
 div.compact-player-playlist
@@ -431,7 +476,6 @@ span.number {
   opacity: 0.5;
   font-family: "Lato", sans-serif;
   font-size: 14px;
-  letter-spacing: 0.5px;
   color: var(--ajs-theme-uno--white);
 }
 
@@ -448,34 +492,20 @@ div.compact-player-title-list
 div.song
 div.song-meta-container {
   display: inline-block;
-  margin-left: 20px;
-  /* vertical-align: middle; */
+  /* margin-left: 20px; */
   width: calc(100% - 120px);
 }
 
-/*
 div.compact-player-playlist
 div.compact-player-title-list
 div.song
 div.song-meta-container
 span.song-name {
   display: block;
+  width: calc(100% - 40px);
+  margin-left: 10px;
   font-family: "Lato", sans-serif;
   font-size: 18px;
-  line-height: 24px;
-  color: var(--ajs-theme-uno--blue);
-}
-*/
-
-div.compact-player-playlist
-div.compact-player-title-list
-div.song
-div.song-meta-container
-span.song-name {
-  display: block;
-  font-family: "Lato", sans-serif;
-  font-size: 16px;
-  letter-spacing: 0.47px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -491,8 +521,8 @@ span.audio-rating {
   align-items: center;
   float: right;
   font-size: 18px;
-  margin-top: -20px;
-  margin-right: -80px;
+  margin-top: -24px;
+  margin-right: -20px;
   color: var(--ajs-theme-uno--gray-400);
 }
 
@@ -502,9 +532,9 @@ div.song
 div.song-meta-container
 span.song-artist-album {
   display: block;
+  margin-left: 10px;
   font-family: "Lato", sans-serif;
   font-size: 16px;
-  letter-spacing: 0.47px;
   color: var(--ajs-theme-uno--gray-300);
 }
 
@@ -512,9 +542,11 @@ div.compact-player-playlist
 div.compact-player-title-list
 div.song
 span.audio-duration {
+  float: right;
+  margin-top: -46px;
+  margin-right: -108px;
   font-family: "Lato", sans-serif;
   font-size: 16px;
-  margin-left: 50px;
   color: var(--ajs-theme-uno--gray-300);
 }
 
@@ -527,7 +559,6 @@ span.song-duration {
   width: 35px;
   font-family: "Lato", sans-serif;
   font-size: 18px;
-  letter-spacing: 0.5px;
   text-align: center;
   color: var(--ajs-theme-uno--white);
 }
@@ -535,19 +566,10 @@ span.song-duration {
 div.compact-player-playlist
 div.compact-player-title-list
 div.song
-img.audio-info-blue {
+span.audio-info {
   float: right;
-  display: block;
-  margin-top: 30px;
-}
-
-div.compact-player-playlist
-div.compact-player-title-list
-div.song
-img.audio-info-white {
-  float: right;
-  display: none;
-  margin-top: 10px;
+  margin-top: -24px;
+  margin-right: -110px;
 }
 
 div.compact-player-playlist
@@ -565,7 +587,7 @@ img.now-playing {
   height: 16px;
   width: 16px;
   margin-top: 2px;
-  margin-left: 10px;
+  margin-left: 4px;
 }
 
 div.compact-player-playlist
@@ -583,25 +605,12 @@ div.playlist-screen-meta-container {
   width: calc(100% - 123px);
 }
 
-/* div.compact-player-playlist
-div.playlist-screen-controls
-div.playlist-screen-meta-container
-span.song-name {
-  font-family: "Lato", sans-serif;
-  font-size: 22px;
-  letter-spacing: 0.5px;
-  line-height: 24px;
-  margin-left: 38px;
-  color: var(--ajs-theme-uno--white);
-} */
-
 div.compact-player-playlist
 div.playlist-screen-controls
 div.playlist-screen-meta-container
 span.song-name {
   font-family: "Lato", sans-serif;
   font-size: 18px;
-  letter-spacing: 0.5px;
   line-height: 24px;
   white-space: nowrap;
   overflow: hidden;
@@ -615,10 +624,8 @@ div.playlist-screen-meta-container
 div.song-artist-album {
   opacity: 0.5;
   font-family: "Lato", sans-serif;
-  font-size: 16px;
-  letter-spacing: 0.5px;
-  line-height: 16px;
-  /* margin-left: 38px; */
+  font-size: 15px;
+  line-height: 18px;
   color: var(--ajs-theme-uno--white);
 }
 
@@ -626,8 +633,8 @@ div.compact-player-playlist
 div.playlist-screen-controls
 div.list-controls {
   float: right;
-  width: 90px;
-  margin-top: 40px;
+  margin-top: 48px;
+  /* margin-right: 12px; */
 }
 
 div.compact-player-playlist
@@ -705,36 +712,19 @@ div.list-next:hover {
   opacity: 0.5;
 }
 
-/* 3. Layout
-# --------------------------------------------------------- */
-
-/* Small only
-# --------------------------------------------------------- */
-@media screen and (max-width: 39.9375em) {
-
-  /* jadams, workaround to limit player width on smart phones */
-  div.compact-player-playlist
-  div.playlist-screen-controls
-  div.playlist-screen-meta-container
-  span.song-name {
-    margin-left: 0;
-  }
-}
-
-/* 4. Pages
-# --------------------------------------------------------- */
 
 /* 5. Themes
-# --------------------------------------------------------- */
+# ------------------------------------------------------------------------------ */
 
 /* 6. Utils
-# --------------------------------------------------------- */
+# ------------------------------------------------------------------------------ */
 
 /* 7. Vendors
-# --------------------------------------------------------- */
+# ------------------------------------------------------------------------------ */
+
 
 /* 8. Animations
-# --------------------------------------------------------- */
+# ------------------------------------------------------------------------------ */
 
 .slide-in-top {
   -webkit-animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;

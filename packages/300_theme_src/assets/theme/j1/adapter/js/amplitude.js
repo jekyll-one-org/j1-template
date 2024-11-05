@@ -545,20 +545,25 @@ j1.adapter.amplitude = ((j1, window) => {
     // initPlayerUiEvents
     // -------------------------------------------------------------------------
     initPlayerUiEvents: () => {
+      var playerExistsInPage;
 
       var dependencies_met_player_instances_initialized = setInterval (() => {
         if (apiInitialized.state) {
             logger.info('\n' + 'initialize player specific UI events: started');
 
+          var parentContainer = (document.getElementById('{{xhr_container_id}}') !== null) ? true : false;
+          var parentContainerExist = ($('#' + '{{xhr_container_id}}')[0] !== undefined) ? true : false;
+          
           {% for player in amplitude_options.players %} {% if player.enabled %}
             {% assign xhr_data_path = amplitude_options.xhr_data_path %}
             {% capture xhr_container_id %}{{player.id}}_parent{% endcapture %}
 
-            playerID      = '{{player.id}}';
-            playerType    = '{{player.type}}';
-            playList      = '{{player.playlist}}';
-            playListName  = '{{player.playlist.name}}'
-            playListTitle = '{{player.playlist.title}}';
+            playerID            = '{{player.id}}';
+            playerType          = '{{player.type}}';
+            playList            = '{{player.playlist}}';
+            playListName        = '{{player.playlist.name}}'
+            playListTitle       = '{{player.playlist.title}}';
+            playerExistsInPage  = ($('#' + '{{xhr_container_id}}')[0] !== undefined) ? true : false;
 
             logger.debug('\n' + 'set playlist {{player.playlist}} on id #{{player.id}} with title: ' + playListTitle);
 
@@ -573,7 +578,7 @@ j1.adapter.amplitude = ((j1, window) => {
               // check if HTML portion of the player is loaded successfully
               var xhrLoadState = j1.xhrDOMState['#' + '{{xhr_container_id}}'];
 
-              if (xhrLoadState === 'success') {
+              if (xhrLoadState === 'success' && playerExistsInPage) {
 
                 // set song (title) specific audio info links
                 // -------------------------------------------------------------
@@ -658,7 +663,7 @@ j1.adapter.amplitude = ((j1, window) => {
                           playlistScreen.classList.remove('slide-out-top');
                           playlistScreen.classList.add('slide-in-top');
                           playlistScreen.style.display = "block";
-                          playlistScreen.style.zIndex = "999";
+                          playlistScreen.style.zIndex = "199";
 
                           // disable scrolling (if window viewport >= BS Medium and above)
                           if (window.innerWidth >= 720) {

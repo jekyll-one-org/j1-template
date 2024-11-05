@@ -71,6 +71,15 @@
 
 /* Styles
 # --------------------------------------------------------- */
+
+a {
+  border-bottom: unset;
+}
+
+.album-cover-image {
+  display: block;
+}
+
 .amplitude-player {
   max-width: max-content;
 }
@@ -148,7 +157,7 @@
 }
 
 .meta-container .audio-artist-album {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   font-family: "Lato", sans-serif;
   white-space: nowrap;
@@ -232,25 +241,6 @@ input[type=range].amplitude-volume-slider::-moz-range-thumb:hover {
   background-color: var(--ajs-theme-uno--blue-700);
 }
 
-/* Small only
-# --------------------------------------------------------- */
-@media screen and (max-width: 39.9375em) {
-
-  input[type=range].amplitude-volume-slider::-webkit-slider-thumb {
-    width: 30px;
-    height: 30px;
-    border-radius: 30px;
-    margin-top: -15px;
-  }
-
-  input[type=range].amplitude-volume-slider::-moz-range-thumb {
-    width: 30px;
-    height: 30px;
-    margin-top: -15px;
-    border-radius: 30px;
-  }
-}
-
 /* progress bars
 # --------------------------------------------------------- */
 progress.mini-player-progress,
@@ -278,12 +268,51 @@ progress::-ms-fill {
   background-color: var(--ajs-theme-uno--blue);
 }
 
-/* Small only
+
+/* 3. Layout
+# ------------------------------------------------------------------------------ */
+
+/*
+Bootstrap grid breakpoints
+  SN:     576px           Mobile
+  MD:     768px           Small Desktop|Tablet
+  LG:     992px           Default Desktop
+  XL:     1200px          Large Desktop
+  XXL:    1400px          X Large Desktop
+ */
+
+ /* max-width: -webkit-fill-available;  Chrome, Safari, Edge */
+ /* max-width: -moz-available;          Firefox              */
+
+/* BS SM (Mobile)
 # --------------------------------------------------------- */
-@media screen and (max-width: 39.9375em) {
+
+@media screen and (max-width: 576px) {
+
+  input[type=range].amplitude-volume-slider::-webkit-slider-thumb {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    margin-top: -15px;
+  }
+
+  input[type=range].amplitude-volume-slider::-moz-range-thumb {
+    width: 30px;
+    height: 30px;
+    margin-top: -15px;
+    border-radius: 30px;
+  }
+
   progress.mini-player-progress,
   progress.compact-player-progress,
   progress.large-player-progress {
     height: 16px;
   }
+
+  .meta-container .song-name,
+  .meta-container .audio-artist-album {
+    font-size: 16px;
+    letter-spacing: unset;
+  }
+
 }

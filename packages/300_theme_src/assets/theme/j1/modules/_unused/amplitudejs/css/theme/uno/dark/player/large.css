@@ -14,7 +14,7 @@
 */
 
 /* 1. Base
-# --------------------------------------------------------- */
+# ------------------------------------------------------------------------------ */
 
 .large-player {
   -webkit-font-smoothing: antialiased; /* Chrome, Safari, Edge */
@@ -22,7 +22,8 @@
 
 .large-player-container {
     display: flex;
-    max-width: fit-content;
+    width: fit-content;
+    /* max-width: fit-content; */
     background: var(--ajs-theme-uno--white);
 }
 
@@ -70,7 +71,7 @@
 }
 
 /* 2. Components
-# --------------------------------------------------------- */
+# ------------------------------------------------------------------------------ */
 
 div#large_player_left {
   display: flex;
@@ -117,7 +118,7 @@ div.play-button-container {
 
 div#large_player_right
 div.song.amplitude-active-song-container
-div.song-now-playing-icon-container
+div.song-number-now-playing
 span.number {
   display: inline-flex;
   opacity: 0.5;
@@ -129,7 +130,7 @@ span.number {
 
 div#large_player_right
 div.song.amplitude-active-song-container
-div.song-now-playing-icon-container
+div.song-number-now-playing
 img.now-playing {
   display: block;
   margin-top: 5px;
@@ -168,10 +169,9 @@ div#large_player_right
 div.song
 div.audio-meta-data
 span.audio-artist {
-  /* display: block; */
   font-size: 16px;
   line-height: 16px;
-  margin-left: -10px;
+  margin-left: 3px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -183,6 +183,7 @@ div.song
 div.audio-meta-data
 span.audio-title {
   display: block;
+  width: calc(100% - 25px);
   font-family: "Lato", sans-serif;
   font-size: 16px;
   line-height: 20px;
@@ -198,19 +199,28 @@ div.audio-meta-data
 span.audio-rating {
   display: flex;
   align-items: center;
-	float: right;
+  float: right;
   font-size: 16px;
-  margin-top: -28px;
-	margin-right: -106px;
-	color: var(--ajs-theme-uno--gray-400);
+  margin-top: -27px;
+  margin-right: -106px;
+  color: var(--ajs-theme-uno--gray-400);
 }
 
 div#large_player_right
 div.song
+div.audio-meta-data
+span.audio-info {
+  float: right;
+  margin-top: 4px;
+  margin-right: -106px;
+}
+
+/*
+div#large_player_right
+div.song
 img.audio-info-blue {
   float: right;
-  display: block;
-  margin-top: 30px;
+  margin-top: 24px;
   margin-right: -2px;
 }
 
@@ -222,6 +232,7 @@ img.audio-info-white {
   margin-top: 30px;
   margin-right: -2px;
 }
+*/
 
 /* clearfix */
 div#large_player_right
@@ -231,29 +242,19 @@ div.song:after {
   clear: both;
 }
 
-/* div#large_player_right
-div.song
-div.song-now-playing-icon-container {
-  float: left;
-  width: 26px;
-  height: 20px;
-  margin-top: 12px;
-  margin-right: 20px;
-} */
-
 div#large_player_right
 div.song 
-div.song-now-playing-icon-container {
+div.song-number-now-playing {
   float: left;
   width: 26px;
   height: 20px;
-  margin-top: 20px;
+  margin-top: 8px;
   margin-right: 20px;
 }
 
 div#large_player_right
 div.song
-div.song-now-playing-icon-container
+div.song-number-now-playing
 img.now-playing {
   display: none;
 }
@@ -276,11 +277,9 @@ span.audio-duration {
 div#large_player_right
 div.song span.audio-duration {
   float: left;
-  margin-top: 44px;
-  margin-left: -285px;
+  margin-left: -5px;
   font-family: "Lato", sans-serif;
   font-size: 16px;
-  font-weight: 500;
   color: var(--ajs-theme-uno--gray-300);
 }
 
@@ -290,28 +289,13 @@ div.playlist-screen-meta-container
 span.song-name {
   font-family: "Lato", sans-serif;
   font-size: 18px;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.47px;
   line-height: 24px;
-  /* margin-left: 38px; */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   color: var(--ajs-theme-uno--white);
 }
-
-/*
-div#large_player_right
-div.playlist-screen-controls
-div.playlist-screen-meta-container
-span.audio-rating {
-  display: flex;
-  align-items: center;
-	float: right;
-  font-size: 18px;
-	margin-right: -46px;
-	color: var(--ajs-theme-uno--gray-400);
-}
-*/
 
 div#large_player_right
 div.playlist-screen-controls
@@ -321,7 +305,7 @@ div.song-artist-album {
   font-family: "Lato", sans-serif;
   font-size: 16px;
   letter-spacing: 0.5px;
-  line-height: 16px;
+  line-height: 18px;
   color: var(--ajs-theme-uno--white);
 }
 
@@ -641,14 +625,31 @@ div#large_player_repeat.amplitude-repeat-on {
 }
 
 /* 3. Layout
+# ------------------------------------------------------------------------------ */
+
+/*
+Bootstrap grid breakpoints
+  xs:     0,
+  sm:     576px
+  md:     768px
+  lg:     992px
+  xl:     1200px
+  xxl:    1400px
+ */
+
+ /* max-width: -webkit-fill-available;  Chrome, Safari, Edge */
+ /* max-width: -moz-available;          Firefox              */
+
+
+/* Below BS lg
 # --------------------------------------------------------- */
 
-/* Small only
-# --------------------------------------------------------- */
-@media screen and (max-width: 39.9375em) {
-  .lage-player {
-    max-width: -webkit-fill-available; /* Chrome, Safari, Edge */
-    max-width: -moz-available; /* Firefox */
+@media screen and (max-width: 992px),
+screen and (max-width: 768px),
+screen and (max-width: 576px) {
+
+  .large-player {
+    max-width: 475px;
   }
 
   .compact-player-title-list {
@@ -687,19 +688,21 @@ div#large_player_repeat.amplitude-repeat-on {
     width: auto;
     height: auto;
   }
+
 }
 
+
 /* 4. Pages
-# --------------------------------------------------------- */
+# ------------------------------------------------------------------------------ */
 
 /* 5. Themes
-# --------------------------------------------------------- */
+# ------------------------------------------------------------------------------ */
 
 /* 6. Utils
-# --------------------------------------------------------- */
+# ------------------------------------------------------------------------------ */
 
 /* 7. Vendors
-# --------------------------------------------------------- */
+# ------------------------------------------------------------------------------ */
 
 /* 8. Animations
-# --------------------------------------------------------- */
+# ------------------------------------------------------------------------------ */

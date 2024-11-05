@@ -1,0 +1,589 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/theme/j1/modules/amplitudejs/css/theme/uno/amplitude.css
+ # AmplitudeJS v5.3.2 Global Theme Styles (used by all players)
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2023, 2024 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+/* 1. Base
+# --------------------------------------------------------- */
+
+/* Colors
+# --------------------------------------------------------- */
+:root {
+  --ajs-theme-uno--blue:                #2196F3;
+  --ajs-theme-uno--blue-50:             #E3F2FD;
+  --ajs-theme-uno--blue-100:            #BBDEFB;
+  --ajs-theme-uno--blue-200:            #90CAF9;
+  --ajs-theme-uno--blue-300:            #64B5F6;
+  --ajs-theme-uno--blue-400:            #42A5F5;
+  --ajs-theme-uno--blue-500:            #2196F3;
+  --ajs-theme-uno--blue-600:            #1E88E5;
+  --ajs-theme-uno--blue-700:            #1976D2;
+  --ajs-theme-uno--blue-800:            #1565C0;
+  --ajs-theme-uno--blue-900:            #0D47A1;
+
+  --ajs-theme-uno--gray:                #9E9E9E;
+  --ajs-theme-uno--gray-50:             #FAFAFA;
+  --ajs-theme-uno--gray-100:            #F5F5F5;
+  --ajs-theme-uno--gray-200:            #EEEEEE;
+  --ajs-theme-uno--gray-300:            #E0E0E0;
+  --ajs-theme-uno--gray-400:            #BDBDBD;
+  --ajs-theme-uno--gray-500:            #9E9E9E;
+  --ajs-theme-uno--gray-600:            #757575;
+  --ajs-theme-uno--gray-700:            #616161;
+  --ajs-theme-uno--gray-800:            #424242;
+  --ajs-theme-uno--gray-900:            #212121;
+
+  --ajs-theme-uno--blue-gray:           #607D8B;
+  --ajs-theme-uno--blue-gray-50:        #ECEFF1;
+  --ajs-theme-uno--blue-gray-100:       #CFD8DC;
+  --ajs-theme-uno--blue-gray-200:       #B0BEC5;
+  --ajs-theme-uno--blue-gray-300:       #90A4AE;
+  --ajs-theme-uno--blue-gray-400:       #78909C;
+  --ajs-theme-uno--blue-gray-500:       #607D8B;
+  --ajs-theme-uno--blue-gray-600:       #546E7A;
+  --ajs-theme-uno--blue-gray-700:       #455A64;
+  --ajs-theme-uno--blue-gray-800:       #37474F;
+  --ajs-theme-uno--blue-gray-900:       #263238;
+
+  --ajs-theme-uno--silver-200:          #748295;
+  --ajs-theme-uno--silver-500:          #586372;
+  --ajs-theme-uno--silver-700:          #141920;
+  --ajs-theme-uno--silver-800:          #242b33;
+
+  --ajs-theme-uno--light-silver:        #748295;
+  --ajs-theme-uno--medium-silver:       #586372;
+  --ajs-theme-uno--dark-silver:         #141920;
+  --ajs-theme-uno--darker-silver:       #242b33;
+
+  --ajs-theme-uno--white:               #FFFFFF;
+  --ajs-theme-uno--black:               #000000;
+}
+
+/* Styles
+# --------------------------------------------------------- */
+
+.amplitude-player {
+  max-width: max-content;
+}
+
+.audio-player-theme-uno {
+  max-width: max-content;
+}
+
+.player-title {
+  text-rendering: optimizeLegibility;
+  text-align: left;
+  line-height: 1.25;
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin-top: 1.75rem;
+  margin-bottom: .5rem;
+}
+
+
+/* 2. Components
+# --------------------------------------------------------- */
+
+/*
+.time-container {
+  font-family: "Lato", sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  color: var(--ajs-theme-uno--white);
+  height: 18px;
+  margin-top: 10px;
+  width: calc(100% - 30px);
+  margin-left: 20px;
+}
+*/
+
+/* time container
+# --------------------------------------------------------- */
+.time-container {
+  height: 40px;
+  padding: 10px 20px 10px 20px;
+  font-family: "Lato", sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  color: var(--ajs-theme-uno--white);
+}
+
+.time-container span.current-time {
+  float: left;
+  /* margin-left: 5px; */
+}
+
+.time-container span.duration {
+  float: right;
+  /* margin-right: 5px; */
+}
+
+/* control container
+# --------------------------------------------------------- */
+
+.playlist-screen-controls {
+  cursor: default;
+  top: 0;
+  position: sticky;
+  height: 80px;
+  padding: 15px;
+  max-width: -webkit-fill-available;
+  max-width: -moz-available;
+  font-family: "Lato", sans-serif;
+  color: var(--ajs-theme-uno--white);
+  background-color: var(--ajs-theme-uno--black);
+}
+
+/* meta (data) container
+# --------------------------------------------------------- */
+.meta-container {
+  text-align: center;
+}
+
+.meta-container.mini-player {
+  float: left;
+  height: 110px;
+  margin-top: 5px;
+}
+
+.meta-container.compact-player {
+  height: 120px;
+}
+
+.meta-container.large-player {
+  height: 120px;
+}
+
+.meta-container .song-name {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 24px;
+  font-family: "Lato", sans-serif;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--ajs-theme-uno--gray-100);
+}
+
+.meta-container .audio-artist-album {
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "Lato", sans-serif;
+  white-space: nowrap;
+  /*
+  overflow: hidden;
+  text-overflow: ellipsis;
+  */
+  color: var(--ajs-theme-uno--blue-gray-300);
+}
+
+.meta-container .audio-artist-album span {
+  display: block;
+}
+
+
+/* input elements (range slider)
+# --------------------------------------------------------- */
+input[type=range].amplitude-volume-slider {
+  -webkit-appearance: none; /* Disable default style for Chrome, Safari, Edge */
+  -moz-appearance: none;    /* Disable default style for Firefox */
+  float: left;
+  height: 1px;
+  margin-top: 10px;
+  margin-left: 5px;
+  width: calc(100% - 118px);
+  background: transparent;
+}
+
+input[type=range].amplitude-volume-slider.compact-player-volume-slider {
+  width: calc(100% - 53px);
+  margin-top: -12px;
+  margin-left: 29px;
+}
+
+/* track|thumb
+# --------------------------------------------------------- */
+input[type=range].amplitude-volume-slider::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 1px;
+  background: var(--ajs-theme-uno--blue-gray-100);
+}
+
+input[type=range].amplitude-volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  border-radius: 16px;
+  margin-top: -8px;
+  border: none;
+  background-color: var(--ajs-theme-uno--blue);
+}
+
+input[type=range].amplitude-volume-slider::-webkit-slider-thumb:focus {
+  outline: none;
+}
+
+input[type=range].amplitude-volume-slider::-webkit-slider-thumb:hover {
+  background-color: var(--ajs-theme-uno--blue-700);
+}
+
+input[type=range].amplitude-volume-slider::-moz-range-track {
+  width: 100%;
+  height: 1px;
+  background-color: var(--ajs-theme-uno--blue-gray-100);
+}
+
+input[type=range].amplitude-volume-slider::-moz-range-thumb {
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  margin-top: -8px;
+  border-radius: 16px;
+  border: none;
+  background-color: var(--ajs-theme-uno--blue);
+}
+
+input[type=range].amplitude-volume-slider::-moz-range-thumb:focus {
+  outline: none;
+}
+
+input[type=range].amplitude-volume-slider::-moz-range-thumb:hover {
+  background-color: var(--ajs-theme-uno--blue-700);
+}
+
+/* Small only
+# --------------------------------------------------------- */
+@media screen and (max-width: 39.9375em) {
+
+  input[type=range].amplitude-volume-slider::-webkit-slider-thumb {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    margin-top: -15px;
+  }
+
+  input[type=range].amplitude-volume-slider::-moz-range-thumb {
+    width: 30px;
+    height: 30px;
+    margin-top: -15px;
+    border-radius: 30px;
+  }
+}
+
+/* progress bars
+# --------------------------------------------------------- */
+progress.mini-player-progress,
+progress.compact-player-progress,
+progress.large-player-progress {
+  display: block;
+  cursor: pointer;
+  width: 100%;
+  height: 8px;
+  border: none;
+  background-color: var(--ajs-theme-uno--silver-500);
+  -webkit-appearance: none; /* Disable default style for Chrome, Safari, Edge */
+  -moz-appearance: none; /* Disable default style for Firefox */
+}
+
+progress::-webkit-progress-value {
+  background-color: var(--ajs-theme-uno--blue);
+}
+
+progress::-moz-progress-bar {
+  background-color: var(--ajs-theme-uno--blue);
+}
+
+progress::-ms-fill {
+  background-color: var(--ajs-theme-uno--blue);
+}
+
+/* Small only
+# --------------------------------------------------------- */
+@media screen and (max-width: 39.9375em) {
+  progress.mini-player-progress,
+  progress.compact-player-progress,
+  progress.large-player-progress {
+    width: 100%;
+    height: 16px;
+  }
+}
+
+
+/* MINI Player
+# --------------------------------------------------------- */
+
+
+/* COMPACT Player
+# --------------------------------------------------------- */
+
+/* 1. Base
+# --------------------------------------------------------- */
+.compact-player {
+  max-width: 475px;
+}
+
+.compact-player-title-list {
+  display: block;
+  height: 550px;
+  overflow-y: scroll;
+}
+
+.compact-player-player-middle {
+  padding: 20px 25px 5px 25px;
+  background-color: var(--ajs-theme-uno--blue-gray-900);
+}
+
+.compact-player-shuffle-container {
+  float: left;
+  width: 20%;
+  height: 60px;
+  padding-top: 21px;
+}
+
+.compact-player-prev-container {
+  float: left;
+  width: 20%;
+  height: 60px;
+  padding-top: 18px;
+}
+
+.compact-player-control-previous {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  margin: auto;
+  background: url(/assets/theme/j1/modules/amplitudejs/icons/player/dark/previous-hover.svg) no-repeat;
+}
+
+.compact-player-control-previous:hover {
+  opacity: 0.5;
+}
+
+.compact-player-play-pause-container {
+  float: left;
+  width: 20%;
+  height: 60px;
+}
+
+.compact-player-control-play-pause {
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  margin: auto;
+}
+
+.compact-player-control-play-pause:hover {
+  opacity: 0.5;
+}
+
+.compact-player-control-play-pause.amplitude-playing {
+  background: url(/assets/theme/j1/modules/amplitudejs/icons/player/dark/black-pause.svg) no-repeat;
+}
+
+.compact-player-control-play-pause.amplitude-paused {
+  background: url(/assets/theme/j1/modules/amplitudejs/icons/player/dark/black-play.svg) no-repeat;
+}
+
+.compact-player-next-container {
+  float: left;
+  width: 20%;
+  height: 60px;
+  padding-top: 18px;
+}
+
+.compact-player-control-next {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  margin: auto;
+  background: url(/assets/theme/j1/modules/amplitudejs/icons/player/dark/next-hover.svg) no-repeat;
+}
+
+.compact-player-control-next:hover {
+  opacity: 0.5;
+}
+
+.compact-player-control-container {
+  display: block;
+}
+
+.compact-player-volume-container {
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.volume-container {
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+/* 2. Components
+# --------------------------------------------------------- */
+
+/* 3. Layout
+# --------------------------------------------------------- */
+
+/* 4. Pages
+# --------------------------------------------------------- */
+
+/* 5. Themes
+# --------------------------------------------------------- */
+
+/* 6. Utils
+# --------------------------------------------------------- */
+
+/* 7. Vendors
+# --------------------------------------------------------- */
+
+/* 8. Animations
+# --------------------------------------------------------- */
+.slide-in-top {
+  -webkit-animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@-webkit-keyframes slide-in-top {
+ 0% {
+  -webkit-transform: translateY(-10px);
+  transform: translateY(-10px);
+  opacity: 0;
+ }
+
+ 100% {
+   -webkit-transform: translateY(0);
+   transform: translateY(0);
+   opacity: 1;
+ }
+}
+
+@keyframes slide-in-top {
+  0% {
+   -webkit-transform: translateY(-10px);
+   transform: translateY(-10px);
+   opacity: 0;
+  }
+
+  100% {
+   -webkit-transform: translateY(0);
+   transform: translateY(0);
+   opacity: 1;
+  }
+}
+
+.slide-out-top {
+  -webkit-animation: slide-out-top 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+  animation: slide-out-top 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+}
+
+@-webkit-keyframes slide-out-top {
+ 0% {
+   -webkit-transform: translateY(0);
+   transform: translateY(0);
+   opacity: 1;
+ }
+
+ 100% {
+   -webkit-transform: translateY(-10px);
+   transform: translateY(-10px);
+   opacity: 0;
+ }
+}
+
+@keyframes slide-out-top {
+ 0% {
+   -webkit-transform: translateY(0);
+   transform: translateY(0);
+   opacity: 1;
+ }
+
+ 100% {
+   -webkit-transform: translateY(-10px);
+   transform: translateY(-10px);
+   opacity: 0;
+ }
+}
+
+
+/* LARGE Player
+# --------------------------------------------------------- */
+
+/* 1. Base
+# --------------------------------------------------------- */
+
+.large-player {
+  min-width: 475px;
+}
+
+.player-left-top img {
+  max-height: 475px;
+  max-width: 475px;
+}
+
+.large-player-playlist-header {
+  cursor: pointer;
+  top: 0;
+  position: sticky;
+  width: 100%;
+  padding: 15px;
+  font-family: "Lato", sans-serif;
+  text-align: center;
+  color: var(--ajs-theme-uno--white);
+  background-color: var(--ajs-theme-uno--dark-silver);
+}
+
+.large-player-title-list {
+  display: block;
+  max-height: 600px;
+  overflow-y: scroll;
+}
+
+/* Small only
+# --------------------------------------------------------- */
+@media screen and (max-width: 39.9375em) {
+  .compact-player-title-list {
+    max-height: 500px;
+  }
+}
+
+/* 2. Components
+# --------------------------------------------------------- */
+
+.compact-player-header-arrows {
+  position: absolute;
+  top: 23px;
+  left: 15px;
+}
+
+.playlist-screen-meta-container {
+  width: calc(100% - 123px);
+  float: left;
+}
+
+/* 3. Layout
+# --------------------------------------------------------- */
+
+/* 4. Pages
+# --------------------------------------------------------- */
+
+/* 5. Themes
+# --------------------------------------------------------- */
+
+/* 6. Utils
+# --------------------------------------------------------- */
+
+/* 7. Vendors
+# --------------------------------------------------------- */
+
+/* 8. Animations
+# --------------------------------------------------------- */

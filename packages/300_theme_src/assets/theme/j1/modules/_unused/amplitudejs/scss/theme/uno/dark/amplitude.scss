@@ -1,0 +1,266 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/theme/j1/modules/amplitudejs/scss/theme/unu/amplitude.scss
+ # AmplitudeJS v5.3.2 Global Theme Styles for J1 Template
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2023, 2024 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+// Variables
+// ---------------------------------------------------------
+$font-family:         "Lato", sans-serif;
+
+$color_1:             var(--ajs-theme-uno--white);
+$color_2:             var(--ajs-theme-uno--gray-100);
+$color_3:             var(--ajs-theme-uno--blue-gray-300);
+
+$background-color_1:  var(--ajs-theme-uno--black);
+$background-color_2:  var(--ajs-theme-uno--blue);
+$background-color_3:  var(--ajs-theme-uno--blue-700);
+$background-color_4:  var(--ajs-theme-uno--blue-gray-100);
+$background-color_5:  var(--ajs-theme-uno--silver-500);
+
+// Styles
+// ---------------------------------------------------------
+&:root {
+	--ajs-theme-uno--blue:           #2196F3;
+	--ajs-theme-uno--blue-50:        #E3F2FD;
+	--ajs-theme-uno--blue-100:       #BBDEFB;
+	--ajs-theme-uno--blue-200:       #90CAF9;
+	--ajs-theme-uno--blue-300:       #64B5F6;
+	--ajs-theme-uno--blue-400:       #42A5F5;
+	--ajs-theme-uno--blue-500:       #2196F3;
+	--ajs-theme-uno--blue-600:       #1E88E5;
+	--ajs-theme-uno--blue-700:       #1976D2;
+	--ajs-theme-uno--blue-800:       #1565C0;
+	--ajs-theme-uno--blue-900:       #0D47A1;
+	--ajs-theme-uno--gray:           #9E9E9E;
+	--ajs-theme-uno--gray-50:        #FAFAFA;
+	--ajs-theme-uno--gray-100:       #F5F5F5;
+	--ajs-theme-uno--gray-200:       #EEEEEE;
+	--ajs-theme-uno--gray-300:       #E0E0E0;
+	--ajs-theme-uno--gray-400:       #BDBDBD;
+	--ajs-theme-uno--gray-500:       #9E9E9E;
+	--ajs-theme-uno--gray-600:       #757575;
+	--ajs-theme-uno--gray-700:       #616161;
+	--ajs-theme-uno--gray-800:       #424242;
+	--ajs-theme-uno--gray-900:       #212121;
+	--ajs-theme-uno--blue-gray:      #607D8B;
+	--ajs-theme-uno--blue-gray-50:   #ECEFF1;
+	--ajs-theme-uno--blue-gray-100:  #CFD8DC;
+	--ajs-theme-uno--blue-gray-200:  #B0BEC5;
+	--ajs-theme-uno--blue-gray-300:  #90A4AE;
+	--ajs-theme-uno--blue-gray-400:  #78909C;
+	--ajs-theme-uno--blue-gray-500:  #607D8B;
+	--ajs-theme-uno--blue-gray-600:  #546E7A;
+	--ajs-theme-uno--blue-gray-700:  #455A64;
+	--ajs-theme-uno--blue-gray-800:  #37474F;
+	--ajs-theme-uno--blue-gray-900:  #263238;
+	--ajs-theme-uno--silver-200:     #748295;
+	--ajs-theme-uno--silver-500:     #586372;
+	--ajs-theme-uno--silver-700:     #141920;
+	--ajs-theme-uno--silver-800:     #242b33;
+	--ajs-theme-uno--light-silver:   #748295;
+	--ajs-theme-uno--medium-silver:  #586372;
+	--ajs-theme-uno--dark-silver:    #141920;
+	--ajs-theme-uno--darker-silver:  #242b33;
+	--ajs-theme-uno--white:          #FFFFFF;
+	--ajs-theme-uno--black:          #000000;
+}
+
+.amplitude-player {
+	max-width: max-content;
+}
+.audio-player-theme-uno {
+	max-width: max-content;
+}
+.player-title {
+	text-rendering: optimizeLegibility;
+	text-align: left;
+	line-height: 1.25;
+	font-size: 1.125rem;
+	font-weight: 500;
+	margin-top: 1.75rem;
+	margin-bottom: .5rem;
+}
+.time-container {
+	height: 40px;
+	padding: 10px 20px 10px 20px;
+	font-family: $font-family;
+	font-weight: bold;
+	font-size: 14px;
+	color: $color_1;
+	span.current-time {
+		float: left;
+	}
+	span.duration {
+		float: right;
+	}
+}
+.playlist-screen-controls {
+	cursor: default;
+	top: 0;
+	position: sticky;
+	height: 80px;
+	padding: 15px;
+	max-width: -webkit-fill-available;
+	max-width: -moz-available;
+	font-family: $font-family;
+	color: $color_1;
+	background-color: $background-color_1;
+}
+.meta-container {
+	text-align: center;
+	border-top: 0px !important;
+	.song-name {
+		display: block;
+		margin-bottom: 5px;
+		font-size: 24px;
+		font-family: $font-family;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		color: $color_2;
+	}
+	.audio-artist-album {
+		font-size: 18px;
+		font-weight: bold;
+		font-family: $font-family;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		color: $color_3;
+		span {
+			display: block;
+		}
+	}
+}
+input[type=range].amplitude-volume-slider {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	float: left;
+	height: 1px;
+	margin-top: 10px;
+	margin-left: 5px;
+	width: calc(100% - 100px);
+	background: transparent;
+	&::-webkit-slider-runnable-track {
+		width: 100%;
+		height: 1px;
+		background: var(--ajs-theme-uno--blue-gray-100);
+	}
+	&::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		cursor: pointer;
+		width: 16px;
+		height: 16px;
+		border-radius: 16px;
+		margin-top: -8px;
+		border: none;
+		background-color: $background-color_2;
+		&:focus {
+			outline: none;
+		}
+		&:hover {
+			background-color: $background-color_3;
+		}
+	}
+	&::-moz-range-track {
+		width: 100%;
+		height: 1px;
+		background-color: $background-color_4;
+	}
+	&::-moz-range-thumb {
+		cursor: pointer;
+		width: 16px;
+		height: 16px;
+		margin-top: -8px;
+		border-radius: 16px;
+		border: none;
+		background-color: $background-color_2;
+		&:focus {
+			outline: none;
+		}
+		&:hover {
+			background-color: $background-color_3;
+		}
+	}
+}
+input[type=range].amplitude-volume-slider.compact-player-volume-slider {
+	width: calc(100% - 53px);
+	margin-top: -12px;
+	margin-left: 29px;
+}
+progress.mini-player-progress {
+	display: block;
+	cursor: pointer;
+	width: 100%;
+	height: 8px;
+	border: none;
+	background-color: $background-color_5;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+progress.compact-player-progress {
+	display: block;
+	cursor: pointer;
+	width: 100%;
+	height: 8px;
+	border: none;
+	background-color: $background-color_5;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+progress.large-player-progress {
+	display: block;
+	cursor: pointer;
+	width: 100%;
+	height: 8px;
+	border: none;
+	background-color: $background-color_5;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+progress {
+	&::-webkit-progress-value {
+		background-color: $background-color_2;
+	}
+	&::-moz-progress-bar {
+		background-color: $background-color_2;
+	}
+	&::-ms-fill {
+		background-color: $background-color_2;
+	}
+}
+@media screen and (max-width: 39.9375em) {
+	input[type=range].amplitude-volume-slider {
+		&::-webkit-slider-thumb {
+			width: 30px;
+			height: 30px;
+			border-radius: 30px;
+			margin-top: -15px;
+		}
+		&::-moz-range-thumb {
+			width: 30px;
+			height: 30px;
+			margin-top: -15px;
+			border-radius: 30px;
+		}
+	}
+	progress.mini-player-progress {
+		height: 16px;
+	}
+	progress.compact-player-progress {
+		height: 16px;
+	}
+	progress.large-player-progress {
+		height: 16px;
+	}
+}

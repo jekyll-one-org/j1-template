@@ -148,23 +148,14 @@ lorem:sentences[5]
 [role="mt-5"]
 == Compact Player
 
-A complex component like an audio player on a web page, *compact*
-typically refers to a design or layout that minimizes the component's
-space while maintaining its functionality and usability.
+The design of a *Compact player* is an efficient approach that involves
+condensing the player controls and display elements into a smaller area.
+It allows the audio player to fit neatly within the web page's layout without
+overwhelming or dominating the content around it.
 
-////
-The *compact design* for an audio player is an efficient approach that
-involves condensing the player controls and display elements into a smaller
-area. It uses icons or symbols instead of text labels where possible, and
-possibly hides less frequently used features behind menus or dropdowns to
-reduce clutter, thereby instilling confidence in its effectiveness.
-
-A *compact* design allows the audio player to fit neatly within the web
-page's layout without overwhelming or dominating the content around it.
-The design aims to balance functionality and space efficiency, ensuring
-users can easily access and control the audio playback without sacrificing
-too much screen space.
-////
+The player aims to balance functionality and space efficiency, ensuring users
+can easily access and control the audio playback without sacrificing too much
+screen space or placing  multiple players side-by-side.
 
 .Emancipator · From Dusk To Dawn
 amplitude::free_emancipator_compact[role="mt-3 mb-5"]
@@ -172,36 +163,57 @@ amplitude::free_emancipator_compact[role="mt-3 mb-5"]
 .Royalty Free Music · Disco 80th
 amplitude::free_disco_compact[role="mt-3 mb-5"]
 
-lorem:sentences[5]
+// .Spontanorama 2024
+// amplitude::spontanorama_2024_compact[role="mt-4 mb-5"]
 
 
 [role="mt-5"]
 == Large Player
 
-lorem:sentences[5]
+A complex component, like an audio player on a web page, typically refers to
+a design or layout that minimizes the component's space while maintaining its
+functionality and usability.
+
+// .Spontanorama 2024
+// amplitude::spontanorama_2024_large[role="mt-4 mb-5"]
+
+// lorem:sentences[3]
 
 .Emancipator · From Dusk To Dawn
-amplitude::free_emancipator_large[role="mt-3 mb-5"]
+amplitude::free_emancipator_large[role="mt-4 mb-5"]
+
+lorem:sentences[5]
 
 .Royalty Free Music · Disco 80th
-amplitude::free_disco_large[role="mt-3 mb-5"]
+amplitude::free_disco_large[role="mt-4 mb-5"]
+
+
+////
+[role="mt-5"]
+== Youtube Audio Player
+
+lorem:sentences[5]
+
+.Hörspiele · Mimi Rutherfurt
+amplitude::mimi_rutherfurt_yt_large[role="mt-4 mb-5"]
+////
 
 
 [role="mt-5"]
 == What next
 
 I hope, you've enjoyed exploring the possibilities J1 offers for playing
-digital audio content. But much, much more can the J1 do for your web in
-terms of multimedia.
+digital audio content. But much, much more can the J1 Templte do for your
+web in terms of multimedia.
 
-The J1 Template support playing video on web pages by using the
-HTML5 video support, the new standard of HTML. HTML5 implements a
-pure HTML way to show play video on the web. Modern browsers
-support the the video tag `<video>` for the current HTML5 standard.
+The Template support playing video on web pages by using the *HTML5* video
+support, the new standard of HTML. It implements a pure HTML way to playback
+videos on the web. All Modern browsers support the the HTML video tag `<video>`
+for the current HTML standard.
 
 The previous proprietary de facto standard software like a Flash Player,
 Quicktime, or Silverlight is no longer needed as the Theme JekyllOne provides
 HTML5 video for local content and from online sources on the Internet.
 
-[role="mb-7"]
+[role="mb-8"]
 Incredible? See the next example page link:{url-tour--present-video}[Video Player].
