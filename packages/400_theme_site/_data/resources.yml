@@ -357,6 +357,7 @@ resources:
         css:                            [
                                           core/css/themes/unolight/bootstrap,
                                           core/css/icon-fonts/mdib,
+                                          core/css/icon-fonts/fontawesome,
                                           core/css/vendor
                                         ]
         files:                          [ adapter/js/j1.js ]

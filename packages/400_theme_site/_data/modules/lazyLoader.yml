@@ -88,14 +88,14 @@ settings:
       selector:                         .mdi
       rootMargin:                       150px
 
-    - loader:
-      enabled:                          true
-      type:                             css
-      description:                      FA Icon CSS (all)
+  # - loader:
+  #   enabled:                          true
+  #   type:                             css
+  #   description:                      FA Icon CSS (all)
 
-      src:                              /assets/theme/j1/core/css/icon-fonts/fontawesome.min.css
-      selector:                         .fa
-      rootMargin:                       150px
+  #   src:                              /assets/theme/j1/core/css/icon-fonts/fontawesome.min.css
+  #   selector:                         .fa
+  #   rootMargin:                       150px
 
     - loader:
       enabled:                          true

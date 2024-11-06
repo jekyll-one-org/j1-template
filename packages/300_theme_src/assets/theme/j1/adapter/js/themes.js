@@ -263,9 +263,47 @@ j1.adapter.themes = (function (j1, window) {
           logger.info('\n' + 'hide page until theme is loaded');
           $('#no_flicker').hide();
 
-          // logger.info('\n' + 'cookie ' +  cookie_names.user_state + ' successfully loaded after: ' + interval_count * 25 + ' ms');
+          logger.info('\n' + 'cookie ' +  cookie_names.user_state + ' successfully loaded after: ' + interval_count * 25 + ' ms');
 
-          // initial theme data
+          // load previously selected theme from cookie (preferred)
+          // if (user_state.theme_css !== '') {
+          //   user_state.theme_name       = default_theme_name;
+          //   user_state.theme_css        = default_theme_css;
+          //   user_state.theme_author     = default_theme_author;
+          //   user_state.theme_author_url = default_theme_author_url;
+
+          //   cookie_written = j1.writeCookie({
+          //     name:     cookie_names.user_state,
+          //     data:     user_state,
+          //     secure:   secure,
+          //     expires:  365
+          //   });
+
+          //   if (!cookie_written) {
+          //     logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_consent);
+          //   }
+          // } // END load previously selected theme
+
+          // load default theme (j1_config and NO theme given with (user_state) cookie
+          // if (user_state.theme_css === '' && default_theme_css.theme_css !== '') {
+          //   user_state.theme_name       = default_theme_name;
+          //   user_state.theme_css        = default_theme_css;
+          //   user_state.theme_author     = default_theme_author;
+          //   user_state.theme_author_url = default_theme_author_url;
+
+          //   cookie_written = j1.writeCookie({
+          //     name:     cookie_names.user_state,
+          //     data:     user_state,
+          //     secure:   secure,
+          //     expires:  365
+          //   });
+
+          //   if (!cookie_written) {
+          //     logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_consent);
+          //   }
+          // } // END load default theme
+
+          // load default theme if NO theme given with (user_state) cookie
           if (user_state.theme_css === '') {
             user_state.theme_name       = default_theme_name;
             user_state.theme_css        = default_theme_css;
@@ -282,7 +320,7 @@ j1.adapter.themes = (function (j1, window) {
             if (!cookie_written) {
              logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_consent);
             }
-          } // END if user_state theme_css === ''
+          } // END oad default theme
 
           // set the theme switcher state
           user_state.theme_switcher = themesOptions.enabled;

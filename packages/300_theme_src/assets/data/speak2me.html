@@ -144,17 +144,6 @@ exclude_from_search:                    true
               <!-- start control buttons -->
               <div class="ml-2">
 
-                <!-- speak button -->
-                <button type="button"
-                  id="speak_button"
-                  class="btn btn-{{speak2me_options.modal.settings.speak_button_style}} btn-sm"
-                  style="min-width: 180px;"
-                  onclick="j1.adapter.speak2me.speak('{{speak2me_options.speechSelector}}')"
-                  data-bs-dismiss="modal">
-                  <i class="mdib mdib-speaker mdib-sm mr-2"></i>
-                  {{speak2me_options.modal.settings.speak_button_text}}
-                </button>
-
                 <!-- stop button -->
                 <button type="button"
                   id="stop_button"
@@ -164,6 +153,17 @@ exclude_from_search:                    true
                   data-bs-dismiss="modal">
                   <i class="mdib mdib-speaker-off mdib-sm mr-2"></i>
                   {{speak2me_options.modal.settings.stop_button_text}}
+                </button>
+
+                <!-- speak button -->
+                <button type="button"
+                  id="speak_button"
+                  class="btn btn-{{speak2me_options.modal.settings.speak_button_style}} btn-sm"
+                  style="min-width: 180px;"
+                  onclick="j1.adapter.speak2me.speak('{{speak2me_options.speechSelector}}')"
+                  data-bs-dismiss="modal">
+                  <i class="mdib mdib-speaker mdib-sm mr-2"></i>
+                  {{speak2me_options.modal.settings.speak_button_text}}
                 </button>
 
                 <!-- pause button -->
