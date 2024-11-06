@@ -80,7 +80,7 @@ div#large_player_left {
   flex-grow: 1;
   /* make flex colums same in width (overall) */
   width: 50%;
-  /* respect size of cover image (rendered) */                   
+  /* respect size of cover image (rendered) */
   /* min-width: 500px;                */
   max-width: fit-content;
   border: solid 1px;

@@ -545,7 +545,6 @@ j1.adapter.amplitude = ((j1, window) => {
     // initPlayerUiEvents
     // -------------------------------------------------------------------------
     initPlayerUiEvents: () => {
-      var playerExistsInPage;
 
       var dependencies_met_player_instances_initialized = setInterval (() => {
         if (apiInitialized.state) {
@@ -563,8 +562,7 @@ j1.adapter.amplitude = ((j1, window) => {
             playList            = '{{player.playlist}}';
             playListName        = '{{player.playlist.name}}'
             playListTitle       = '{{player.playlist.title}}';
-            playerExistsInPage  = ($('#' + '{{xhr_container_id}}')[0] !== undefined) ? true : false;
-
+            
             logger.debug('\n' + 'set playlist {{player.playlist}} on id #{{player.id}} with title: ' + playListTitle);
 
             // dynamic loader variable to setup the player on ID {{player.id}}
@@ -576,9 +574,11 @@ j1.adapter.amplitude = ((j1, window) => {
             // -----------------------------------------------------------------
             load_dependencies['dependencies_met_player_loaded_{{player.id}}'] = setInterval (() => {
               // check if HTML portion of the player is loaded successfully
-              var xhrLoadState = j1.xhrDOMState['#' + '{{xhr_container_id}}'];
+              var xhrLoadState        = j1.xhrDOMState['#' + '{{xhr_container_id}}'];
+              var playerExistsInPage  = ($('#' + '{{xhr_container_id}}')[0] !== undefined) ? true : false;
 
               if (xhrLoadState === 'success' && playerExistsInPage) {
+//            if (xhrLoadState === 'success') {
 
                 // set song (title) specific audio info links
                 // -------------------------------------------------------------
