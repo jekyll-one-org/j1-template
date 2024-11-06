@@ -312,7 +312,6 @@ Bootstrap grid breakpoints
   .meta-container .song-name,
   .meta-container .audio-artist-album {
     font-size: 16px;
-    letter-spacing: unset;
   }
 
 }

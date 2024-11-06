@@ -78,8 +78,11 @@ div#large_player_left {
   flex: 1;
   flex-direction: column;
   flex-grow: 1;
-  width: 50%;                     /* make flex colums same in width (overall) */
-  min-width: 500px;               /* respect size of cover image (rendered) */
+  /* make flex colums same in width (overall) */
+  width: 50%;
+  /* respect size of cover image (rendered) */                   
+  /* min-width: 500px;                */
+  max-width: fit-content;
   border: solid 1px;
   border-color: var(--ajs-theme-uno--medium-silver);
   background-color: var(--ajs-theme-uno--darker-silver) !important;
@@ -102,7 +105,7 @@ div#large_player_right {
   flex-direction: column;
   flex-grow: 1;
   width: 50%;                     /* make flex colums same in width (overall) */
-  min-width: 500px;               /* for symemtry resons of large_player_left */
+  min-width: 500px;
   border-top: solid 1px;
   border-right: solid 1px;
   border-bottom: solid 1px;
@@ -172,7 +175,7 @@ span.audio-title {
   display: block;
   width: calc(100% - 25px);
   font-family: "Lato", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 24px;
   white-space: nowrap;
   overflow: hidden;
@@ -198,8 +201,8 @@ div.song
 div.audio-meta-data
 span.audio-info {
   float: right;
-  margin-top: 4px;
-  margin-right: -100px;
+  /* margin-top: 4px; */
+  margin-right: -102px;
 }
 
 /* clearfix */
