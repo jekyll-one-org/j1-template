@@ -163,6 +163,11 @@ amplitude::free_emancipator_compact[role="mt-3 mb-5"]
 .Royalty Free Music · Disco 80th
 amplitude::free_disco_compact[role="mt-3 mb-5"]
 
+lorem:sentences[5]
+
+.Spontanorama 2024 (compact)
+amplitude::spontanorama_2024_compact[role="mt-4 mb-5"]
+
 
 [role="mt-5"]
 == Large Player
@@ -183,6 +188,11 @@ lorem:sentences[5]
 
 .Royalty Free Music · Disco 80th
 amplitude::free_disco_large[role="mt-4 mb-5"]
+
+lorem:sentences[5]
+
+.Spontanorama 2024 (large)
+amplitude::spontanorama_2024_large[role="mt-4 mb-5"]
 
 
 [role="mt-5"]

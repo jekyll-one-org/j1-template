@@ -26,7 +26,7 @@
     background: var(--ajs-theme-uno--white);
 }
 
-/* jadams, 2024-11-04: Overload user agent styles (img) for width|height */
+/* jadams, 2024-11-04: Overload user agent styles for width|height */
 .player-left-top img {
   width: 500px;
   height: auto;
@@ -77,10 +77,13 @@ div#large_player_left {
   display: flex;
   flex: 1;
   flex-direction: column;
-  /* jadams, 2014-11-07: width (overall) DISABLED on the left */
+  /* flex-grow: 1; */
+  /* make flex colums same in width (overall) */
   /* width: 50%; */
-  max-width: fit-content;
-  border: solid 1px;
+  /* respect size of cover image (rendered) */
+  /* min-width: 500px;                */
+  /* max-width: fit-content; */
+  /* border: solid 1px; */
   border-color: var(--ajs-theme-uno--medium-silver);
   background-color: var(--ajs-theme-uno--darker-silver) !important;
 }
@@ -158,6 +161,7 @@ div.audio-meta-data
 span.audio-artist {
   font-size: 16px;
   line-height: 18px;
+  /* margin-left: 3px; */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -197,6 +201,7 @@ div.song
 div.audio-meta-data
 span.audio-info {
   float: right;
+  /* margin-top: 4px; */
   margin-right: -102px;
 }
 
@@ -605,7 +610,8 @@ screen and (max-width: 576px) {
   }
 
   div#large_player_left {
-    max-width: unset;
+    /* display: block; */
+    /* min-width: unset; */
     border: solid 1px;
   }
 
@@ -627,6 +633,12 @@ screen and (max-width: 576px) {
     width: -moz-available;                            /* Firefox */
   }
 
+  /* div.large-player-container
+  div#large_player_left {
+    width: auto;
+    min-width: unset;
+  } */
+
   div#large_player_control_container {
     margin-top: 25px;
     margin-bottom: 25px;
@@ -642,6 +654,14 @@ screen and (max-width: 576px) {
   .playlist-screen-controls.large-player {
     display: none;
   }
+
+/*
+  div#large_player_right
+  div.song div.audio-meta-data
+  span.audio-info {
+    margin-top: -1px;
+  }
+*/
 
 }
 

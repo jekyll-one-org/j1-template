@@ -31,6 +31,7 @@
 
 .meta-container.compact-player {
   height: 120px;
+  border: 0px;       /* jadams 2024-11-06: workaround, prevent double borders */
 }
 
 /* 2. Components
@@ -396,14 +397,6 @@ Bootstrap (BS) grid breakpoints
     width: calc(100% - 100px);
   }
 
-  /* jadams, workaround to limit player width on smart phones */
-/*   div.compact-player-playlist
-  div.playlist-screen-controls
-  div.playlist-screen-meta-container
-  span.song-name {
-    margin-left: 0;
-  } */
-
   div.compact-player-playlist {
     width: calc(100% - 1px); 
   }
@@ -437,8 +430,9 @@ div.compact-player-playlist {
   right: 0;
   left: 0;
   bottom: 0;
-  /* width: -webkit-fill-available; */
-  width: calc(100% + 1px); /* jadams, workaround */
+  /* jadams 2024-11-07, workaround  (reason unclear) */
+  /* NOTE: make playlist 1 pixel wider to fit in width */
+  width: calc(100% + 1px); 
   background-color: var(--ajs-theme-uno--black);
 }
 
@@ -492,7 +486,6 @@ div.compact-player-title-list
 div.song
 div.song-meta-container {
   display: inline-block;
-  /* margin-left: 20px; */
   width: calc(100% - 120px);
 }
 
@@ -634,7 +627,6 @@ div.playlist-screen-controls
 div.list-controls {
   float: right;
   margin-top: 48px;
-  /* margin-right: 12px; */
 }
 
 div.compact-player-playlist
