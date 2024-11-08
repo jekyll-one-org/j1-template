@@ -42,13 +42,6 @@ resource_options:
 // Enable the Liquid Preprocessor
 :page-liquid:
 
-// Attribute settings for section control
-//
-:ytp_audio:                             false
-:ytp_example:                           false
-:ms_slider_video_examples:              false
-
-
 // Set (local) page attributes here
 // -----------------------------------------------------------------------------
 // :page--attr:                         <attr-value>
@@ -76,7 +69,6 @@ and from online sources on the Internet.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-ifeval::[{ytp_examples} == true]
 [role="mt-4"]
 == YouTube Audio
 
@@ -136,9 +128,8 @@ Here’s the annotated version of the source code. It can be extended to embed
 YouTube playlists, the default playback volume can be changed or you even
 https://www.labnol.org/internet/embed-part-of-youtube-video/27948/[embeda part, {browser-window--new}]
 of the video.
-endif::[]
 
-ifeval::[{ytp_example} == true]
+////
 [role="mt-5"]
 === YT Player
 ++++
@@ -161,7 +152,7 @@ ifeval::[{ytp_example} == true]
     var techScript;
 
     var tech    = document.createElement('script');
-    tech.src    = "/assets/theme/j1/modules/amplitudejs/js/tech/youtube_example.js";
+    tech.src    = "/assets/theme/j1/modules/amplitudejs/js/tech/youtube.js";
     techScript  = document.getElementsByTagName('script')[0];
 
     techScript.parentNode.insertBefore(tech, techScript);
@@ -169,7 +160,7 @@ ifeval::[{ytp_example} == true]
   });
 </script>
 ++++
-endif::[]
+////
 
 [role="mt-5"]
 == Amplitude Player
@@ -197,7 +188,7 @@ amplitude::mimi_rutherfurt_yt_large[role="mt-4 mb-8"]
 ++++
 
 
-ifeval::[{ms_slider_video_examples} == true]
+////
 [[ms_video]]
 == MS Slider using YouTube Video
 
@@ -208,7 +199,7 @@ masterslider::ms_00010[role="mt-4 mb-5"]
 
 
 [role="mt-5"]
-=== YouTube Video
+== YouTube Video
 
 YouTube is a popular online video-sharing platform that allows users to
 upload, view, share, and comment on videos. The platform provides services
@@ -219,13 +210,11 @@ youtube::q3zqJs7JUCQ[poster="//img.youtube.com/vi/q3zqJs7JUCQ/maxresdefault.jpg"
 
 
 [role="mt-5"]
-=== Local Video
+== Local Video
 
 VideoJS provides a flexible and customizable platform for displaying and
 controlling MPEG 4 video content on websites and web applications.
 
 .Video over VideoJS
 gallery::jg_video_html5_videojs[role="mt-4 mb-5"]
-
-endif::[]
-
+////

@@ -29,7 +29,8 @@
 /* jadams, 2024-11-04: Overload user agent styles (img) for width|height */
 .player-left-top img {
   width: 500px;
-  height: auto;
+  /* height: auto; */
+  height: 500px;
   object-fit: cover;
 }
 

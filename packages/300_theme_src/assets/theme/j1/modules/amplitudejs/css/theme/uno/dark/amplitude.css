@@ -78,6 +78,9 @@ a {
 
 .album-cover-image {
   display: block;
+  /* max-height: 500px; */
+  /* max-width: 500px; */
+  /* object-fit: cover; */
 }
 
 .amplitude-player {
