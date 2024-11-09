@@ -189,10 +189,10 @@ lorem:sentences[5]
 .Royalty Free Music · Disco 80th
 amplitude::free_disco_large[role="mt-4 mb-5"]
 
-lorem:sentences[5]
+// lorem:sentences[5]
 
-.Spontanorama 2024 (large)
-amplitude::spontanorama_2024_large[role="mt-4 mb-5"]
+// .Spontanorama 2024 (large)
+// amplitude::spontanorama_2024_large[role="mt-4 mb-5"]
 
 
 [role="mt-5"]

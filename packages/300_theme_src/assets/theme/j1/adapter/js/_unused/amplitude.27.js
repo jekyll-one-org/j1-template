@@ -964,24 +964,21 @@ j1.adapter.amplitude = ((j1, window) => {
                         largePlayerPlaylistHeader.addEventListener('click', function(event) {
                           var playerRight     = document.getElementById("{{player.id}}");
                           var playlistHeader  = document.getElementById("playlist_header_{{player.id}}");
-                          var scrollOffset    = (window.innerWidth >= 992) ? -130 : -43;
+                          var scrollOffset    = (window.innerWidth >= 992) ? -130 : -44;
 
                           // scroll player|playlist to top position (large player)
-                          //
                           const targetDivPlayerRight            = playerRight;
                           const targetDivPositionPlayerRight    = targetDivPlayerRight.offsetTop;
                           const targetDivPlaylistHeader         = playlistHeader;
                           const targetDivPositionplaylistHeader = targetDivPlaylistHeader.offsetTop;
 
-                          // NOTE: depending on WINDOW SIZE the relation changes to TOP POSITION (targetDivPosition)
-                          //
                           if (targetDivPositionPlayerRight > targetDivPositionplaylistHeader) {
                             window.scrollTo(0, targetDivPositionPlayerRight + targetDivPlaylistHeader.offsetParent.firstElementChild.clientHeight + scrollOffset);
                           } else {
-                            window.scrollTo(0, targetDivPositionplaylistHeader + scrollOffset);
+                            window.scrollTo(0, targetDivPlaylistHeader + scrollOffset);
                           }
 
-                        }); // END EventListener largePlayerPlaylistHeader 'click'
+                        }); // END EventListener 'click'
 
                         // disable scrolling (if window viewport >= BS Medium and above)
                         document.getElementById('large_player_right').addEventListener('mouseenter', function() {

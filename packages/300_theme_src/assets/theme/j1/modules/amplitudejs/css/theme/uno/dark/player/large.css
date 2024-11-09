@@ -601,13 +601,14 @@ screen and (max-width: 576px) {
     max-width: -moz-available;                        /* Firefox */
   }
 
-  .compact-player-title-list {
+/*   .compact-player-title-list {
     max-height: 500px;
-  }
+  } */
 
   div#large_player_left {
     max-width: unset;
     border: solid 1px;
+    border-color: var(--ajs-theme-uno--medium-silver);
   }
 
   div.large-player-container {
@@ -642,6 +643,19 @@ screen and (max-width: 576px) {
 
   .playlist-screen-controls.large-player {
     display: none;
+  }
+
+  div#large_player_right {
+    border-top: 0px;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+    border-left: 1px solid;
+    border-color: var(--ajs-theme-uno--medium-silver);
+  }
+
+  .large-player-title-list {
+    border-bottom: 1px solid;
+    border-color: var(--ajs-theme-uno--medium-silver);
   }
 
 }

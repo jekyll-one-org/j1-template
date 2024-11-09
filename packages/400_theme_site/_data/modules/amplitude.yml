@@ -34,7 +34,7 @@ settings:
     # --------------------------------------------------------------------------
     #
     - playlist:
-      enabled:                          true
+      enabled:                          false
 
       name:                             mimi_rutherfurt_yt
       title:                            Mimi Rutherfurt
@@ -539,7 +539,7 @@ settings:
     # --------------------------------------------------------------------------
     #
     - plaver:
-      enabled:                          true
+      enabled:                          false
 
       # ------------------------------------------------------------------------
       # SOURCE settings

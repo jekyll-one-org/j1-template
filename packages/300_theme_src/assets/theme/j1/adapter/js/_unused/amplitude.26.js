@@ -631,11 +631,10 @@ j1.adapter.amplitude = ((j1, window) => {
                     // ---------------------------------------------------------
                     // START compact player UI events
                     //
-//                  if (document.getElementById('large_player_right') !== null) {                       
                     if (document.getElementById('{{player.id}}') !== null) {
 
-                      // show|hide scrollbar in playlist (compact player)
-                      // -------------------------------------------------------                   
+                      // show|hide scrollbar in playlist
+                      // -------------------------------------------------------
                       const songsInPlaylist = Amplitude.getSongsInPlaylist(playListName);
                       if (songsInPlaylist.length <= 8) {
                         const titleListCompactPlayer = document.getElementById('compact_player_title_list_' + playListName);
@@ -839,7 +838,7 @@ j1.adapter.amplitude = ((j1, window) => {
                           largetPlayerSongContainer[i].addEventListener('click', function(event) {
                             var playlist        = this.getAttribute("data-amplitude-playlist");
                             var playlistLength  = largetPlayerSongContainer.length;
-                            ytpSongIndex        = this.getAttribute("data-amplitude-song-index");
+                            ytpSongIndex         = this.getAttribute("data-amplitude-song-index");
                           });
                         } // END if Attribute
                       } // END for
@@ -934,13 +933,12 @@ j1.adapter.amplitude = ((j1, window) => {
                         }); // END EventListener 'click'
                       } // END largePlayerRepeatButton
 
-                      // enable|disable scrolling on playlist (large player)
+                      // enable|disable scrolling on playlist
                       // -------------------------------------------------------
-//                    if (document.getElementById('large_player_right') !== null) {
                       if (document.getElementById('large_player_right') !== null) {
 
                         // show|hide scrollbar in playlist
-                        // -----------------------------------------------------
+                        // -------------------------------------------------------
                         const songsInPlaylist = Amplitude.getSongsInPlaylist(playListName);
 
                         if (songsInPlaylist.length <= 8) {
@@ -950,38 +948,22 @@ j1.adapter.amplitude = ((j1, window) => {
                           }
                         }
 
-                        // scroll to player top position (large player)
-                        //
-                        // Bootstrap grid breakpoints
-                        //   SN:     576px           Mobile
-                        //   MD:     768px           Small Desktop|Tablet
-                        //   LG:     992px           Default Desktop
-                        //   XL:     1200px          Large Desktop
-                        //   XXL:    1400px          X Large Desktop
-                        // -----------------------------------------------------
-                        var largePlayerPlaylistHeader = document.getElementById("playlist_header_{{player.id}}");
+                        // scroll to player top position
+                        // -------------------------------------------------------
+                        var playerRight     = document.getElementById("large_player_right_{{player_id}}");
+                        var playlistHeader  = document.getElementById("large-player-playlist-header_{{player.id}}");
+                        
+                        playlistHeader.addEventListener('click', function(event) {
+                          var scrollOffset = (window.innerWidth >= 720) ? -130 : -110;
 
-                        largePlayerPlaylistHeader.addEventListener('click', function(event) {
-                          var playerRight     = document.getElementById("{{player.id}}");
-                          var playlistHeader  = document.getElementById("playlist_header_{{player.id}}");
-                          var scrollOffset    = (window.innerWidth >= 992) ? -130 : -43;
+                          // scroll player to top position
+                          const targetDiv_0         = playerRight;
+                          const targetDivPosition_0 = targetDiv_0.offsetTop;
+                          const targetDiv           = playlistHeader;
+                          const targetDivPosition   = targetDiv.offsetTop;
 
-                          // scroll player|playlist to top position (large player)
-                          //
-                          const targetDivPlayerRight            = playerRight;
-                          const targetDivPositionPlayerRight    = targetDivPlayerRight.offsetTop;
-                          const targetDivPlaylistHeader         = playlistHeader;
-                          const targetDivPositionplaylistHeader = targetDivPlaylistHeader.offsetTop;
-
-                          // NOTE: depending on WINDOW SIZE the relation changes to TOP POSITION (targetDivPosition)
-                          //
-                          if (targetDivPositionPlayerRight > targetDivPositionplaylistHeader) {
-                            window.scrollTo(0, targetDivPositionPlayerRight + targetDivPlaylistHeader.offsetParent.firstElementChild.clientHeight + scrollOffset);
-                          } else {
-                            window.scrollTo(0, targetDivPositionplaylistHeader + scrollOffset);
-                          }
-
-                        }); // END EventListener largePlayerPlaylistHeader 'click'
+                          window.scrollTo(0, targetDivPosition + scrollOffset);
+                        }); // END EventListener 'click'
 
                         // disable scrolling (if window viewport >= BS Medium and above)
                         document.getElementById('large_player_right').addEventListener('mouseenter', function() {
