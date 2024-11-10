@@ -459,13 +459,13 @@
     # --------------------------------------------------------------------------
     # Tester
     #
-    - title:                            Tester
-      icon:                             eye
-      dropdown:
+    # - title:                            Tester
+    #   icon:                             eye
+    #   dropdown:
 
-      - title:                          Test Video Integrations
-        href:                           /pages/public/video_tester/
-        icon:                           video
+    #   - title:                          Test Video Integrations
+    #     href:                           /pages/public/video_tester/
+    #     icon:                           video
 
     # --------------------------------------------------------------------------
     # Previewer
@@ -498,9 +498,12 @@
 #        icon:                          robot
 #        target:                        _blank
 
-      - title:                          J1 Amplitude
+      - title:                          J1 AmplitudeJS
         href:                           /pages/public/tools/previewer/amplitudejs/
         icon:                           speaker
+      - title:                          J1 VideoJS
+        href:                           /pages/public/tools/previewer/videojs/
+        icon:                           video
 
       - title:                          J1 Geolocation
         href:                           //jekyll.one/pages/public/tools/previewer/geolocation/

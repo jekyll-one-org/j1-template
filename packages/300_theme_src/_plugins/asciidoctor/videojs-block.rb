@@ -74,6 +74,10 @@ Asciidoctor::Extensions.register do
               }],
               "controlBar": {
                 "pictureInPictureToggle": false,
+                "skipButtons": {
+                  "backward": 15,
+                  "forward": 15
+                },
                 "volumePanel": {
                   "inline": false
                 }
@@ -121,11 +125,47 @@ Asciidoctor::Extensions.register do
 
                   // add hotkeys plugin
                   videojsPlayer.hotkeys({
-                    enableModifiersForNumbers: false
+                    volumeStep: 0.1,
+                    seekStep: 15,
+                    enableMute: true,
+                    enableFullscreen: true,
+                    enableNumbers: false,
+                    enableVolumeScroll: true,
+                    enableHoverScroll: true,
+                    alwaysCaptureHotkeys: true,
+                    captureDocumentHotkeys: true,
+                    documentHotkeysFocusElementFilter: e => e.tagName.toLowerCase() === "body",
+
+                    // Mimic VLC seek behavior (default to: 15)
+                    seekStep: function(e) {
+                      if (e.ctrlKey && e.altKey) {
+                        return 5*60;
+                      } else if (e.ctrlKey) {
+                        return 60;
+                      } else if (e.altKey) {
+                        return 10;
+                      } else {
+                        return 15;
+                      }
+
+                    },
+
+                    // Enhance existing simple hotkey with a complex hotkey
+                    fullscreenKey: function(e) {
+                      // fullscreen with the F key or Ctrl+Enter
+                      return ((e.which === 70) || (e.ctrlKey && e.which === 13));
+                    },                    
+
+                  });
+
+                  // add skipButtons plugin
+                  videojsPlayer.skipButtons({
+                    forward:  10,
+                    backward: 10
                   });
 
                   // add zoom plugin
-                  videojsPlayer.zoomPlugin({
+                  videojsPlayer.zoomButtons({
                     moveX:  0,
                     moveY:  0,
                     rotate: 0,

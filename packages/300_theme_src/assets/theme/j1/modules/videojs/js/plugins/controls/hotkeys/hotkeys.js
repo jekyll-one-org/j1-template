@@ -464,5 +464,9 @@
   };
 
   var registerPlugin = videojs.registerPlugin || videojs.plugin;
+
+  // register plugin
+  //
   registerPlugin('hotkeys', hotkeys);
+
 }));

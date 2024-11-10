@@ -615,7 +615,8 @@
         Video.prototype.controlVideo = function (index, action) {
             var trackSrc,
                 $videoElement, videoInfo, videoStart, videoData, videoId,
-                videojsPlayer, zoomPlugin;
+                videojsPlayer, playbackRates,
+                hotkeysPlugin, skipButtonsPlugin, zoomPlugin;
 
             var playbackRatesDefaults    = '[0.25, 0.5, 1, 1.5, 2]';
             var chapterTracksEnabled     = false;
@@ -636,11 +637,16 @@
               skipInitialFocus:           false
             };
 
-            var zoomPluginDefaults       = {
-              moveX:                      0,
-              moveY:                      0,
-              rotate:                     0,
-              zoom:                       1
+            var skipButtonsPluginDefaults  = {
+              backward:                     10,
+              forward:                      10
+            };
+
+            var zoomPluginDefaults = {
+                moveX:                      0,
+                moveY:                      0,
+                rotate:                     0,
+                zoom:                       1
             };
 
             videoInfo     = this.core.galleryItems[index].__slideVideoInfo || {};
@@ -671,47 +677,81 @@
 
               if (videojsPlayer !== 'unknown') {
 
-                // jadams, 2024-06-16: added VJS Plugins hotkeys|zoom, playbackRates
-                // ---------------------------------------------------------------
-                var hotkeysPlugin = this.settings.videojsOptions.controlBar.hotkeysPlugin;
-                var zoomPlugin    = this.settings.videojsOptions.controlBar.zoomPlugin;
-                var playbackRates = (this.settings.videojsOptions.controlBar.playbackRates !== undefined) ? this.settings.videojsOptions.controlBar.playbackRates : playbackRatesDefaults;
+                // added VJS Plugins hotkeys|skipButtons|zoom, playbackRates
+                // -------------------------------------------------------------
+                hotkeysPlugin     = this.settings.videojsOptions.controlBar.hotkeysPlugin;
+                skipButtonsPlugin = this.settings.videojsOptions.controlBar.skipButtonsPlugin;
+                zoomPlugin        = this.settings.videojsOptions.controlBar.zoomPlugin;
+                playbackRates     = (this.settings.videojsOptions.controlBar.playbackRates !== undefined) ? this.settings.videojsOptions.controlBar.playbackRates : playbackRatesDefaults;
 
                 //  jadams, 2024-01-22: added video start position
-                // ---------------------------------------------------------------
+                // -------------------------------------------------------------
                 if (this.settings.videojsOptions.videoStart !== undefined) {
                   videoStart = this.settings.videojsOptions.videoStart[index];
                   videojsPlayer.on("play", function() {
                     var startFromSecond = new Date('1970-01-01T' + videoStart + 'Z').getTime() / 1000;
                     videojsPlayer.currentTime(startFromSecond);
 
-                  }); // END on "play"
+                  }); // END on event play
                 } // END if videoStart
 
                 // add playbackRates (only available for VJS)
                 videojsPlayer.playbackRates(playbackRates);
 
-                // add hotkeysPlugin (only available for VJS)
+                // add hotkeys Plugin (only available for VJS)
                 if (hotkeysPlugin !== undefined && hotkeysPlugin.enabled) {
                   hotkeysPlugin.options = __assign(__assign({}, hotkeysPluginDefaults), hotkeysPlugin.options);
                   videojsPlayer.hotkeys({
-                    enableModifiersForNumbers: hotkeysPlugin.options.enableModifiersForNumbers
+                    volumeStep: 0.1,
+                    seekStep: 15,
+                    enableMute: true,
+                    enableFullscreen: true,
+                    enableNumbers: false,
+                    enableVolumeScroll: true,
+                    enableHoverScroll: true,
+                    alwaysCaptureHotkeys: true,
+                    captureDocumentHotkeys: true,
+                    documentHotkeysFocusElementFilter: e => e.tagName.toLowerCase() === "body",
+
+                    // Mimic VLC seek behavior (default to: 15)
+                    seekStep: function(e) {
+                      if (e.ctrlKey && e.altKey) {
+                        return 5*60;
+                      } else if (e.ctrlKey) {
+                        return 60;
+                      } else if (e.altKey) {
+                        return 10;
+                      } else {
+                        return 15;
+                      }
+                    }
                   });
                 } // END if hotkeysPlugin enabled
 
-                // add zoomPlugin (only available for VJS)
+                // add skipButtons Plugin (only available for VJS)
+                // -------------------------------------------------------------
+                if (skipButtonsPlugin !== undefined && skipButtonsPlugin.enabled) {
+                    skipButtonsPlugin.options = __assign(__assign({}, skipButtonsPluginDefaults), skipButtonsPlugin.options);
+                    videojsPlayer.skipButtons({
+                      backward: skipButtonsPlugin.options.backward,
+                      forward:  skipButtonsPlugin.options.forward
+                    });
+                } // END if skipButtons Plugin enabled
+
+                // add zoom Plugin (only available for VJS)
+                // -------------------------------------------------------------
                 if (zoomPlugin !== undefined && zoomPlugin.enabled) {
                   zoomPlugin.options = __assign(__assign({}, zoomPluginDefaults), zoomPlugin.options);
-                  videojsPlayer.zoomPlugin({
+                  videojsPlayer.zoomButtons({
                     moveX:  zoomPlugin.options.moveX,
                     moveY:  zoomPlugin.options.moveY,
                     rotate: zoomPlugin.options.rotate,
                     zoom:   zoomPlugin.options.zoom
                   });
-                } // END if zoomPlugin enabled
+                } // END if zoom Plugin enabled
 
-                // jadams, 2023-12-11: added chapter track processing (only available for VJS)
-                // -----------------------------------------------------------------
+                // chapter track processing (only available for VJS)
+                // -------------------------------------------------------------
                 if (chapterTracksEnabled) {
                   var parser  = new WebVTTParser();
                   var markers = [];
@@ -725,9 +765,10 @@
                       marker = { time: tree.cues[i].startTime, label: tree.cues[i].text };
                       markers.push(marker);
                     }
-                  }; // END callback
+                  }; // END function cb_load 
 
                   // load chapter tracks
+                  // -----------------------------------------------------------
                   loadVtt(trackSrc, cb_load);
 
                   // add chapter tracks on play

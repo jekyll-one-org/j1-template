@@ -304,6 +304,12 @@ settings:
               options:
                 volumeStep:             0.2
 
+            skipButtonsPlugin:
+              enabled:                  true
+              options:
+                forward:                15
+                backward:               15
+ 
             zoomPlugin:
               enabled:                  true
               options:
@@ -898,18 +904,24 @@ settings:
             volumePanel:
               inline:                   false
 
-            # hotkeysPlugin:
-            #   enabled:                  true
-            #   options:
-            #     volumeStep:             0.2
-            #
-            # zoomPlugin:
-            #   enabled:                  true
-            #   options:
-            #     moveX:                  0
-            #     moveY:                  0
-            #     rotate:                 0
-            #     zoom:                   1
+          # hotkeysPlugin:
+          #   enabled:                  true
+          #   options:
+          #     volumeStep:             0.2
+          #
+          # skipButtonsPlugin:
+          #   enabled:                  true
+          #   options:
+          #     forward:                15
+          #     backward:               15
+          #
+          # zoomPlugin:
+          #   enabled:                  true
+          #   options:
+          #     moveX:                  0
+          #     moveY:                  0
+          #     rotate:                 0
+          #     zoom:                   1
 
       # ------------------------------------------------------------------------
       # CSS filter options

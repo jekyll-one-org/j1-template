@@ -25,23 +25,20 @@
 	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, global["@theonlyducks/videojs-zoom"] = factory(global.videojs));
 })(this, (function (videojs) { 'use strict'
 
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-  var videojs__default = /*#__PURE__*/_interopDefaultLegacy(videojs);
-
   const Button    = videojs.getComponent('Button');
   const Plugin    = videojs.getPlugin('plugin');
   const Component = videojs.getComponent('Component');
 
   const version   = '1.2.0';
-  const ZOOM_SALT = 0.2;
-  const DEFAULT_OPTIONS = {
-	zoom: 		1,
-	moveX: 		0,
-	moveY: 		0,
-	flip: 		"+",
-	rotate: 	0
-  };
+	const ZOOM_SALT = 0.2;
+
+	const DEFAULT_OPTIONS = {
+	  zoom: 1,
+	  moveX: 0,
+	  moveY: 0,
+	  flip: "+",
+	  rotate: 0
+	};
 
 	class Observer {
 	  static _instance = null;
@@ -313,7 +310,7 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
 	  }
 	}
 
-	class zoomButtons extends Plugin {
+	class ZoomPlugin extends Plugin {
 	  constructor(player) {
 	    let options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	    super(player, options);
@@ -400,7 +397,7 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
   //
 	videojs.registerComponent('ZoomModal', ZoomModal);
 	videojs.registerComponent('ZoomButton', ZoomButton);
-	videojs.registerPlugin('zoomButtons', zoomButtons);
+	videojs.registerPlugin('zoomPlugin', ZoomPlugin);
 
-	return zoomButtons;
+	return ZoomPlugin;
 }));

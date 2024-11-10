@@ -21,7 +21,7 @@ exclude_from_search:                    true
  # NOTE: All panel id's are prefixed by 'panel_'
  #
  # -----------------------------------------------------------------------------
- # Test data:
+ # Test data:More articles can be found 
  #    {{ variable | debug }}
  # -----------------------------------------------------------------------------
 {% endcomment %}
@@ -853,12 +853,13 @@ exclude_from_search:                    true
 
                   <div id="previewer" class="previewer-headline">
                     <div class="post-headline">
-                  	<h2 id="post-headline" class="notoc notranslate mt-3">Vorschau</h2>
+                  	<h2 id="post-headline" class="notoc notranslate mt-3">Preview</h2>
                     </div>
                   </div>
 
                   <!-- [INFO   ] [~/assets/data/panel.html              ] [ blocktype detected as: {{card_block}} ] -->
                   {% if card_block == 'card-list' %}
+                  <!-- Recent posts (card-list) -->
                   <div id="{{panel_settings.id}}" class="preview_content">
                     <ul id="{{panel_settings.id}}-scroll-group" class="scroll-group scroll-group-horizontal align-items-stretch flex-wrap">
                       <!-- [INFO   ] [~/assets/data/panel.html              ] [ write post items (card_block == 'card-list')] -->
@@ -929,7 +930,7 @@ exclude_from_search:                    true
                   {% endif %}
 
                   {% if card_block == 'card-deck' %}
-                  <!-- Recent posts -->
+                  <!-- Recent posts (card-deck) -->
                   <div id="{{panel_settings.id}}" class="row card-deck">
                     <!-- [INFO   ] [~/assets/data/panel.html              ] [ write post items (card_block == 'card-deck')] -->
                   {% for post in site.posts %} {% for category in post.categories %}

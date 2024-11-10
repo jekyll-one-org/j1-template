@@ -1320,6 +1320,7 @@ resources:
       data:
         css:                            [
                                           modules/videojs/css/videojs,
+                                          modules/videojs/css/plugins/controls/skipbuttons,
                                           modules/videojs/css/plugins/controls/zoom,
                                           modules/videojs/css/themes/city,
                                           modules/videojs/css/themes/fantasy,
@@ -1331,12 +1332,11 @@ resources:
         js:                             [
                                           modules/videojs/js/video,
                                           modules/videojs/js/plugins/controls/hotkeys/hotkeys,
+                                          modules/videojs/js/plugins/controls/skipbuttons/skipbuttons,
                                           modules/videojs/js/plugins/controls/zoom/zoom,
                                           modules/videojs/js/plugins/players/dm/dailymotion,
                                           modules/videojs/js/plugins/players/vm/vimeo,
                                           modules/videojs/js/plugins/players/yt/youtube
-
-
                                         ]
         init_function:                  []
 

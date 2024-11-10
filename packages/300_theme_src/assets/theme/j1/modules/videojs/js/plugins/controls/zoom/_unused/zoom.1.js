@@ -313,7 +313,7 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
 	  }
 	}
 
-	class zoomButtons extends Plugin {
+	class ZoomPlugin extends Plugin {
 	  constructor(player) {
 	    let options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	    super(player, options);
@@ -400,7 +400,7 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
   //
 	videojs.registerComponent('ZoomModal', ZoomModal);
 	videojs.registerComponent('ZoomButton', ZoomButton);
-	videojs.registerPlugin('zoomButtons', zoomButtons);
+	videojs.registerPlugin('zoomPlugin', ZoomPlugin);
 
 	return zoomButtons;
 }));
