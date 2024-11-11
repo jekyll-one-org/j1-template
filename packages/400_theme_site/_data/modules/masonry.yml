@@ -557,6 +557,8 @@ settings:
         player:
           enabled:                      true
 
+          # VideoJS
+          # --------------------------------------------------------------------
           videojsPlayer:
             enabled:                    true
 
@@ -580,6 +582,12 @@ settings:
                 options:
                   volumeStep:           0.2
 
+              skipButtonsPlugin:
+                enabled:                  true
+                options:
+                  forward:                15
+                  backward:               15
+
               zoomPlugin:
                 enabled:                true
                 options:
@@ -588,6 +596,8 @@ settings:
                   rotate:               0
                   zoom:                 1
 
+          # Vimeo
+          # --------------------------------------------------------------------
           vimeoPlayer:
             enabled:                    true
             options:
@@ -597,6 +607,9 @@ settings:
 #             portrait:                 0
 #             color:                    var(--md-gray-100)
 
+
+          # Wistia
+          # --------------------------------------------------------------------
           wistiaPlayer:
             enabled:                    true
             options:
@@ -605,6 +618,8 @@ settings:
               muted:                    false
               qualityControl:           false
 
+          # Youtube
+          # --------------------------------------------------------------------
           youTubePlayer:
             enabled:                    true
             options:

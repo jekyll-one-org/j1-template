@@ -46,6 +46,12 @@ resource_options:
 // :page--attr:                         <attr-value>
 :images-dir:                            {imagesdir}/pages/roundtrip/100_present_images
 
+// Attribute settings for section control
+//
+:ytp_fortnight:                         false
+:ytp_example:                           false
+
+
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
 {% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}

@@ -45,6 +45,7 @@ module.exports = function scrollSmooth ( options ) {
   }
 
   return {
+
     // -------------------------------------------------------------------------
     // Initialize scrollSmooth
     // -------------------------------------------------------------------------
@@ -69,9 +70,9 @@ module.exports = function scrollSmooth ( options ) {
       //   : options.location.href;
 
       this.scrollTo(target, {
-        duration: duration,
-        offset: offset,
-        callback: false
+        duration:   duration,
+        offset:     offset,
+        callback:   false
       });
     },
 
@@ -86,31 +87,37 @@ module.exports = function scrollSmooth ( options ) {
     scrollTo: function ( target, options ) {
       var start = window.pageYOffset;
       var opt = {
-        duration: options.duration,
-        offset: options.offset || 0,
-        callback: options.callback,
-        easing: options.easing || easeInOutQuad
+        duration:   options.duration,
+        offset:     options.offset || 0,
+        callback:   options.callback,
+        easing:     options.easing || easeInOutQuad
       };
 
       // calculate the tgt (HTML heading element including the hash)
       var tgt = document.querySelector('[id="' + decodeURI(target).split('#').join('') + '"]');
+
       var distance = typeof target === 'string'
         ? opt.offset + (
           target
             ? (tgt && tgt.getBoundingClientRect().top) || 0                     // handle non-existent links better.
             : -(document.documentElement.scrollTop || document.body.scrollTop))
         : target;
-      var duration = typeof opt.duration === 'function'
+
+        var duration = typeof opt.duration === 'function'
         ? opt.duration(distance)
         : opt.duration;
+
       var timeStart;
       var timeElapsed;
-
       requestAnimationFrame(function (time) { timeStart = time; loop(time); });
       function loop (time) {
         timeElapsed = time - timeStart;
         window.scrollTo(0, opt.easing(timeElapsed, start, distance, duration));
-        if (timeElapsed < duration) { requestAnimationFrame(loop); } else { postPositioning(); }
+        if (timeElapsed < duration) {
+          requestAnimationFrame(loop); }
+        else {
+          postPositioning();
+        }
       }
 
       function postPositioning () {
@@ -128,4 +135,5 @@ module.exports = function scrollSmooth ( options ) {
     } // END scrollTo
 
   }; // END return
+  
 }( jQuery );

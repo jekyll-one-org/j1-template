@@ -141,7 +141,7 @@ j1.adapter.masonry = ((j1, window) => {
       // Load  module DEFAULTS|CONFIG
       masonryDefaults = $.extend({}, {{masonry_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
       masonrySettings = $.extend({}, {{masonry_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      masonryOptions =  $.extend(true, {}, masonryDefaults, masonrySettings);
+      masonryOptions  =  $.extend(true, {}, masonryDefaults, masonrySettings);
 
       // load HTML portion for all grids
       _this.loadGridHTML(masonryOptions, masonryOptions.grids);
@@ -153,7 +153,7 @@ j1.adapter.masonry = ((j1, window) => {
         var pageState      = $('#content').css("display");
         var pageVisible    = (pageState === 'block') ? true: false;
         var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
-        // var atticFinished  = (j1.adapter.attic.getState() == 'finished') ? true : false;
+//      var atticFinished  = (j1.adapter.attic.getState() == 'finished') ? true : false;
 
         if (j1CoreFinished && pageVisible) {
           startTimeModule = Date.now();

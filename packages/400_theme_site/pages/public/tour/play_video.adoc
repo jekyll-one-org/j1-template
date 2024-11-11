@@ -57,6 +57,17 @@ resource_options:
 :time-de--string:                       Minuten
 :time-de--description:                  Lesezeit
 
+
+// Attribute settings for section control
+//
+:ytp_rhythm:                            true
+:ytp_sky_elements:                      true
+:dm_video:                              false
+:vm_video:                              true
+:masonry:                               true
+:dm_gallery:                            true
+:vm_gallery:                            true
+
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
 {% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
@@ -114,7 +125,7 @@ without loading *external players*.
 
 ++++
 <div class="video-title">
-  <i class="mdib mdib-youtube-tv mdib-24px mr-2"></i>
+  <i class="mdib mdib-video mdib-24px mr-2"></i>
   Peck Pocketed · MP4 Video
 </div>
 ++++
@@ -158,23 +169,27 @@ auditions ever.
 .Best Auditions · AGT 2024 
 youtube::4VSBJU52UvM[poster="//img.youtube.com/vi/4VSBJU52UvM/maxresdefault.jpg" role="mt-4 mb-5"]
 
+ifeval::[{ytp_rhythm} == true]
 Dog Dancing is presented quite often on stage. Like AGT season 18, Adrian Stoica
 presented his dog Hurricane https://www.youtube.com/watch?v=ENGRnUN1UKQ)[Youtube, {browser-window--new}].
 But see Roni Sagi - an Israeli dog trainer - and her dog Rhythm. This is Dog
 Traing the next level.
 
-.Roni Sagi & Rhythm - ALL Performances · AGT 2024 
+.Roni Sagi & Rhythm, ALL Performances · AGT 2024 
 youtube::1J2qz6B-PFY[poster="//img.youtube.com/vi/1J2qz6B-PFY/maxresdefault.jpg" role="mt-4 mb-5"]
+endif::[]
 
+ifeval::[{ytp_sky_elements} == true]
 Sky Elements uses the night sky as a canvas on which anything is possible.
 A large group of Drones is painting lights in the sky to reflect the most
 captivating narratives. 
 
-.Sky Elements - ALL Performances · AGT 2024 
+.Sky Elements, ALL Performances · AGT 2024 
 youtube::cN8IrZUhPtc[poster="//img.youtube.com/vi/cN8IrZUhPtc/maxresdefault.jpg" role="mt-4 mb-5"]
+endif::[]
 
 
-////
+ifeval::[{dm_video} == true]
 [role="mt-4"]
 === Dailymotion
 
@@ -185,9 +200,9 @@ video.
 
 .Beginner Mat Pilates · SELF Channel
 dailymotion::x87ycik[poster="/assets/video/poster/dailymotion/pilates.jpg" role="mt-4 mb-5"]
-////
+endif::[]
 
-
+ifeval::[{vm_video} == true]
 [role="mt-4"]
 === Vimeo
  
@@ -198,7 +213,7 @@ showcase their videos. Vimeo is known for its emphasis on high-quality
 video and creative expression.
 
 .Kick It Old School · Forever 21
-vimeo::179528528[poster="/assets/video/poster/vimeo/kick_it_old_school.jpg" role="mt-4 mb-5"]
+vimeo::179528528[poster="/assets/video/poster/vimeo/kick_it_old_school.jpg" role="mt-4 mb-4"]
 // vimeo::179528528[poster="auto" role="mt-4 mb-5"]
 // vimeo::179528528[role="mt-4 mb-5"]
 
@@ -208,7 +223,7 @@ vimeo::179528528[poster="/assets/video/poster/vimeo/kick_it_old_school.jpg" role
 For the *VJS Vimeo Tech*, native vjs controls (controllbar) are currently
 *NOT* supported. Instead, the controllbar of the Vimeo Player is shown.
 ====
-
+endif::[]
 
 [role="mt-5"]
 == Galleries of Video
@@ -235,6 +250,7 @@ how to use lightGallery for *commercial* websites and projects.
 Find below examples of video galleries of locally stored (MP4) video resources
 and video content provided online.
 
+ifeval::[{masonry} == true]
 [role="mt-4"]
 === Masonry
 
@@ -242,7 +258,7 @@ Masonry for J1 Template is a great tool for creating dynamic video galleries.
 The module makes creating a gallery to display videos of different types easy.
 
 .Mixed Video · Masonry + LightGallery
-masonry::mixed_video_example[role="mt-4 mb-5"]
+masonry::mixed_video_example[role="mt-4 mb-4"]
 
 [role="mb-5"]
 .More about Masonry
@@ -251,14 +267,16 @@ masonry::mixed_video_example[role="mt-4 mb-5"]
 Find more on how the Masonry module can be used on the
 link:{url-j1-masonry-previewer}[Masonry Preview, {browser-window--new}] page.
 ====
+endif::[]
 
 [role="mt-4"]
 [[local-video-2]]
-=== Local video
+=== Local Video
 
 Videos created by a digicam or a mobile can be played by J1 Template using
 the lightGallery integration. Present videos you have made at it's best.
 
+[role="mb-5"]
 [NOTE]
 ====
 The current file *size* of local video media files is limited to *50 MegaByte*.
@@ -270,10 +288,10 @@ HD 720p (1280x720 pixel).
 .Local MP4 Video · Justified Gallery + LightGallery
 gallery::jg_video_html5[role="mt-4 mb-5"]
 
+ifeval::[{yt_gallery} == true]
 [role="mt-4"]
 === YouTube
 
-[role="mb-4"]
 The community at link:{url-youtube--home}[YouTube, {browser-window--new}]
 is large, with over 1 billion users that watch hundreds of millions of
 hours of content every day. The number of YouTube channels is enormous.
@@ -285,7 +303,7 @@ new studio album *The Tortured Poets Department: The Anthology*, released on
 April 19, 2024.
 
 .Taylor Swift - The Tortured Poets Department · Justified Gallery + LightGallery
-gallery::jg_video_online_taylor_swift[role="mt-5 mb-4"]
+gallery::jg_video_online_taylor_swift[role="mt-4 mb-4"]
 
 [role="mb-5"]
 [TIP]
@@ -293,7 +311,9 @@ gallery::jg_video_online_taylor_swift[role="mt-5 mb-4"]
 An *anthology* is a collection of selected texts or, in a broader sense,
 a thematic compilation of literary or musical works.
 ====
+endif::[]
 
+ifeval::[{vm_gallery} == true]
 [role="mt-4"]
 === Vimeo
 
@@ -319,7 +339,9 @@ without advertising.
 
 .Forever 21 · Justified Gallery + LightGallery
 gallery::jg_video_online_vimeo[role="mb-5"]
+endif::[]
 
+ifeval::[{dm_gallery} == true]
 [role="mt-4"]
 === Dailymotion
 
@@ -334,7 +356,7 @@ every video.
 
 .SELF Chanel · Justified Gallery + LightGallery
 gallery::jg_video_online_dailymotion[role="mt-4 mb-5"]
-
+endif::[]
 
 [role="mt-5"]
 == What next
@@ -356,5 +378,4 @@ something like images. To see how text could be presented is great for modern
 responsive websites.
 
 [role="mb-7"]
-Find out how it works and go for:
-link:{url-tour--typography}[Typography], then.
+Find out how it works and go for link:{url-tour--typography}[Typography], then.
