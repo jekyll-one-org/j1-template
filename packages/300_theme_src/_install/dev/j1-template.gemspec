@@ -56,7 +56,8 @@ Gem::Specification.new do |spec|
 
   # Dependencies: Jekyll
   #
-  spec.add_runtime_dependency 'jekyll', '~> 4.0'
+  # spec.add_runtime_dependency 'jekyll', '~> 4.0'
+  spec.add_runtime_dependency 'jekyll', '= 4.3.3'
   spec.add_runtime_dependency 'pathutil', '~> 0.16'
   spec.add_runtime_dependency 'mercenary', '~> 0.3'
   spec.add_runtime_dependency 'colorator', '~> 1.0'

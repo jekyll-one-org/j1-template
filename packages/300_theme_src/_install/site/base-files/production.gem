@@ -41,7 +41,7 @@ source 'https://rubygems.org'
 # web application. This makes sure to use identical Ruby runtime environments
 # for BUILD and RUN (e.g. for Docker images or a Dyno on Heroku).
 #
-# ruby '3.1.2'
+# ruby '3.2.5'
 
 # ------------------------------------------------------------------------------
 # Jekyll
@@ -58,7 +58,8 @@ source 'https://rubygems.org'
 # For default, the Jekyll GEM is loaded from REMOTE
 # ------------------------------------------------------------------------------
 #
-gem 'jekyll', '~> 4.0'
+# gem 'jekyll', '~> 4.0'
+gem 'jekyll', '= 4.3.3'
 
 # ------------------------------------------------------------------------------
 # Install Webrick GEM (internally used Web Server) if Ruby V3 is used

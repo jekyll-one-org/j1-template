@@ -58,7 +58,8 @@ source 'https://rubygems.org'
 # For default, the Jekyll GEM is loaded from REMOTE
 # ------------------------------------------------------------------------------
 #
-gem 'jekyll', '~> 4.0'
+# gem 'jekyll', '~> 4.0'
+gem 'jekyll', '= 4.3.3'
 
 # ------------------------------------------------------------------------------
 # Install Webrick GEM (internally used Web Server) if Ruby V3 is used
