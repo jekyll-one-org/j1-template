@@ -18,14 +18,14 @@
  # -----------------------------------------------------------------------------
 */
 
-.video-js .vjs-seek-button {
+.video-js .vjs-next-item-button {
     cursor: pointer
 }
 
-.video-js .vjs-seek-button.skip-backward .vjs-icon-placeholder::before {
+.video-js .vjs-next-item-button.skip-backward .vjs-icon-placeholder::before {
     transform: rotate(-45deg)
 }
 
-.video-js .vjs-seek-button.skip-forward .vjs-icon-placeholder::before {
+.video-js .vjs-next-item-button.skip-forward .vjs-icon-placeholder::before {
     transform: scale(-1, 1) rotate(-45deg)
 }

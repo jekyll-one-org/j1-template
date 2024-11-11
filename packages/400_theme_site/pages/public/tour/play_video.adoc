@@ -39,24 +39,8 @@ resource_options:
       collapseDepth:                    3
   - attic:
       slides:
-        # Broadway Underground - still image (animate default)
-        - url:                          /assets/video/headers/present_videos/still/underground-broadway.jpg
-          alt:                          Broadway Underground
-          title:                        Video Player
-          tagline:                      Playback Video
-        # Broadway Underground - FAYETTE ST
-        - url:                          /assets/video/headers/present_videos/underground-broadway.mp4
-          alt:                          Broadway Underground Video
-          title:                        Video Player
-          tagline:                      Playback Video
-          isVideo:                      true
-          loop:                         false
-          duration:                     6000
-        # Broadway Underground - still image (animate random)
-        - url:                          /assets/video/headers/present_videos/still/underground-broadway.jpg
-          alt:                          Broadway Underground
-          title:                        Video Player
-          tagline:                      Playback Video
+        - url:                          /assets/image/modules/attics/lianhao-1920x1280.jpg
+          alt:                          Playback Video
 ---
 
 // Page Initializer
@@ -171,19 +155,23 @@ history of AGT, only a few *Goldern Buzzers* were given. In 2024, this is
 different - for good reasons. See a compilation on YouTube of the very best
 auditions ever.
 
-.AGT 2024 · Best Auditions
+.Best Auditions · AGT 2024 
 youtube::4VSBJU52UvM[poster="//img.youtube.com/vi/4VSBJU52UvM/maxresdefault.jpg" role="mt-4 mb-5"]
 
-Dog Dancing is presented quite often on stage. Like AGT season 18,
-Adrian Stoica presented his dog Hurricane https://www.youtube.com/watch?v=ENGRnUN1UKQ)[Youtube, {browser-window--new}].
-But see Roni Sagi - an Israeli dog trainer - and her dog Rhythm.
-This is Dog Dancing the next level.
+Dog Dancing is presented quite often on stage. Like AGT season 18, Adrian Stoica
+presented his dog Hurricane https://www.youtube.com/watch?v=ENGRnUN1UKQ)[Youtube, {browser-window--new}].
+But see Roni Sagi - an Israeli dog trainer - and her dog Rhythm. This is Dog
+Traing the next level.
 
-.Roni Sagi & Rhythm · ALL Performances (AGT 2024)
+.Roni Sagi & Rhythm - ALL Performances · AGT 2024 
 youtube::1J2qz6B-PFY[poster="//img.youtube.com/vi/1J2qz6B-PFY/maxresdefault.jpg" role="mt-4 mb-5"]
 
-// .Fortnight (feat. Post Malone, Official Music Video) · Taylor Swift
-// youtube::q3zqJs7JUCQ[poster="//img.youtube.com/vi/q3zqJs7JUCQ/maxresdefault.jpg" role="mt-4 mb-5"]
+Sky Elements uses the night sky as a canvas on which anything is possible.
+A large group of Drones is painting lights in the sky to reflect the most
+captivating narratives. 
+
+.Sky Elements - ALL Performances · AGT 2024 
+youtube::cN8IrZUhPtc[poster="//img.youtube.com/vi/cN8IrZUhPtc/maxresdefault.jpg" role="mt-4 mb-5"]
 
 
 ////

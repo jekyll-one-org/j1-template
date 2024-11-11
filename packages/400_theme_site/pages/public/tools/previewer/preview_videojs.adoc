@@ -209,6 +209,20 @@ controlling MPEG 4 video content on websites and web applications.
 .Rolling Wild · MP4 Video
 videojs::/assets/video//html5/rolling_wild.mp4[poster="/assets/video/poster/html5/rolling_wild.jpg", opts="" role="mt-4 mb-5"]
 
+[role="mt-4"]
+=== YouTube
+
+YouTube is a popular online video-sharing platform that allows users to
+upload, view, share, and comment on videos. The platform provides services
+for people and organizations to publish various video content.
+
+The season 19 (2024) of _America's Got Talent_ (AGT) is special. In the long
+history of AGT, only a few *Goldern Buzzers* were given. In 2024, this is
+different - for good reasons. See a compilation on YouTube of the very best
+auditions ever.
+
+.Fortnight (feat. Post Malone, Official Music Video) · Taylor Swift
+youtube::q3zqJs7JUCQ[poster="//img.youtube.com/vi/q3zqJs7JUCQ/maxresdefault.jpg" role="mt-4 mb-5"]
 
 ////
 [role="mt-5"]

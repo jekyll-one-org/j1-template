@@ -83,6 +83,7 @@
     constructor(player, options) {
       super(player, options);
       this.$('.vjs-icon-placeholder').classList.add('vjs-icon-replay');
+//    this.$('.vjs-icon-placeholder').classList.add('vjs-icon-next-item');
 
       if (this.options_.direction === 'forward') {
         this.controlText(this.localize('Seek forward {{seconds}} seconds').replace('{{seconds}}', this.options_.seconds));
