@@ -11,35 +11,39 @@
 # J1 Template is licensed under the MIT License.
 # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
 # ------------------------------------------------------------------------------
-
+# NOTE:
+# Make sure, the syntax used for the Gemfile is compatible with the
+# Ruby Gem Bundler
 # ------------------------------------------------------------------------------
 # NOTE:
 # To install all gem needed for Jekyll and J1 Theme:
 #   bundle install
-#
+# ------------------------------------------------------------------------------
 # TIP:
 # If all packages needed are installed, a list of all gem and dependencies
 # installed for the bundle canbe created by running:
 #   bundle list
-#
 # ------------------------------------------------------------------------------
 # NOTE:
 # If you see warnings like:
 #   WARN: Unresolved specs during Gem::Specification.reset
 # you may need to cleanup your bundle by running:
 #   gem cleanup
-#
 # ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------
-# Define the (download) source, Ruby GEMs are to be loaded from REMOTE
+# Define the source, Ruby GEMs are loaded (from remote)
 #
 source 'https://rubygems.org'
 
 # ------------------------------------------------------------------------------
 # Specify your Ruby version if the J1 Project is used as an container-based
 # web application. This makes sure to use identical Ruby runtime environments
-# for BUILD and RUN (e.g. for Docker images or a Dyno on Heroku).
+# for BUILD and RUN (e.g. for Docker images, builds on Netlify or Heroku).
+# ------------------------------------------------------------------------------
+# NOTE:
+# Ruby v3.3.x currently NOT tested
+# ------------------------------------------------------------------------------
 #
 # ruby '3.2.5'
 
@@ -57,16 +61,40 @@ source 'https://rubygems.org'
 # NOTE:
 # For default, the Jekyll GEM is loaded from REMOTE
 # ------------------------------------------------------------------------------
+# NOTE:
+# It seems the latest Jekyll version of 4.3.4 (Sep 2024) does NOT work
+# correctly on Windows. If Jekyll is run in mode 'serve' + 'livereload',
+# occasionally page reloads occur w/o any changes made to the site source.
+# ------------------------------------------------------------------------------
 #
-# gem 'jekyll', '~> 4.0'
 gem 'jekyll', '= 4.3.3'
+
+# On Windows platforms, install older Jekyll GEM
+#install_if -> { RUBY_PLATFORM =~ /mswin/ } do
+#  gem 'jekyll', '= 4.3.3'
+#end
+
+# On *nix and MacOS platforms, install latest Jekyll GEM
+#install_if -> { RUBY_PLATFORM =~ /(aix|darwin|linux|(net|free|open)bsd|cygwin|solaris|irix|hpux)/i } do
+#  gem 'jekyll', '~> 4.0'
+#end
 
 # ------------------------------------------------------------------------------
 # Install Webrick GEM (internally used Web Server) if Ruby V3 is used
 #
-#install_if -> { RUBY_VERSION =~ /3/ } do
-#  gem 'webrick', '~> 1.8.1'
-#end
+install_if -> { RUBY_VERSION =~ /3/ } do
+  gem 'webrick', '~> 1.9'
+end
+
+# ------------------------------------------------------------------------------
+# Install GEM csv to suppress warnings in version 3.3 used with Jekyll.
+#
+# NOTE: The GEM will no longer be part of the default gems starting
+# from Ruby 3.4.0
+#
+install_if -> { RUBY_VERSION =~ /3.3/ } do
+   gem 'csv', '~> 3.0'
+end
 
 # ------------------------------------------------------------------------------
 # PRODUCTION: Gem needed for the Jekyll and J1 prod environment

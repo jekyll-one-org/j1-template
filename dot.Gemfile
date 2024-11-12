@@ -1,47 +1,51 @@
 # ------------------------------------------------------------------------------
-# ~/Gemfile (runtime)
+# ~/Gemfile (development)
 # Provides package information to bundle all Ruby gem needed
 # for Jekyll and J1 Theme (managed by Ruby Gem Bundler)
 #
 # Product/Info:
 # https://jekyll.one
 #
-# Copyright (C) 2023 Juergen Adams
+# Copyright (C) 2023, 2024 Juergen Adams
 #
 # J1 Template is licensed under the MIT License.
 # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
 # ------------------------------------------------------------------------------
-
+# NOTE:
+# Make sure, the syntax used for the Gemfile is compatible with the
+# Ruby Gem Bundler
 # ------------------------------------------------------------------------------
 # NOTE:
 # To install all gem needed for Jekyll and J1 Theme:
 #   bundle install
-#
+# ------------------------------------------------------------------------------
 # TIP:
 # If all packages needed are installed, a list of all gem and dependencies
 # installed for the bundle canbe created by running:
 #   bundle list
-#
 # ------------------------------------------------------------------------------
 # NOTE:
 # If you see warnings like:
 #   WARN: Unresolved specs during Gem::Specification.reset
 # you may need to cleanup your bundle by running:
 #   gem cleanup
-#
 # ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------
-# Define the (download) source, Ruby GEMs are to be loaded from REMOTE
+# Define the source, Ruby GEMs are loaded (from remote)
 #
 source 'https://rubygems.org'
 
 # ------------------------------------------------------------------------------
 # Specify your Ruby version if the J1 Project is used as an container-based
 # web application. This makes sure to use identical Ruby runtime environments
-# for BUILD and RUN (e.g. for Docker images or a Dyno on Heroku).
+# for BUILD and RUN (e.g. for Docker images, builds on Netlify or Heroku).
+# ------------------------------------------------------------------------------
+# NOTE:
+# Ruby v3.3.x currently NOT tested
+# ------------------------------------------------------------------------------
 #
-# ruby '3.1.2'
+# ruby '3.2.5'
 
 # ------------------------------------------------------------------------------
 # Jekyll
@@ -57,30 +61,27 @@ source 'https://rubygems.org'
 # NOTE:
 # For default, the Jekyll GEM is loaded from REMOTE
 # ------------------------------------------------------------------------------
-#
-# gem 'jekyll', '~> 4.0'
-gem 'jekyll', '= 4.3.3'
+# NOTE:
+# It seems the latest Jekyll version of 4.3.4 (Sep 2024) does NOT work
+# correctly on Windows. If Jekyll is run in mode 'serve' + 'livereload',
+# occasionally page reloads occur w/o any changes made to the site source.
+# ------------------------------------------------------------------------------
+
+# On Windows platforms, install older Jekyll GEM
+install_if -> { RUBY_PLATFORM =~ /mswin/ } do
+  gem 'jekyll', '= 4.3.3'
+end
+
+# On *nix and MacOS platforms, install latest Jekyll GEM
+install_if -> { RUBY_PLATFORM =~ /(aix|darwin|linux|(net|free|open)bsd|cygwin|solaris|irix|hpux)/i } do
+  gem 'jekyll', '~> 4.0'
+end
 
 # ------------------------------------------------------------------------------
 # Install Webrick GEM (internally used Web Server) if Ruby V3 is used
 #
 # install_if -> { RUBY_VERSION =~ /3/ } do
 #   gem 'webrick', '~> 1.8.1'
-# end
-
-# ------------------------------------------------------------------------------
-# PRODUCTION: Gem needed for the Jekyll and J1 prod environment
-#
-
-# ------------------------------------------------------------------------------
-# Specify the THEME GEM used for the project
-
-# Loaded from RubyGems
-# gem 'j1-template', '~> 2024.3.16'
-
-# Loaded from gem.fury.io
-# source 'https://gem.fury.io/jekyll-one-org/' do
-#  gem 'j1-template', '~> 2024.3.16'
 # end
 
 # ------------------------------------------------------------------------------
@@ -139,8 +140,8 @@ group :jekyll_plugins do
   # Base Jekyll Plugins (required)
   #
   gem 'asciidoctor', '~> 2.0'
-  gem 'jekyll-asciidoc', '>= 3.0.0'
-  gem 'j1-paginator', '>= 2021.1.1'
+  gem 'jekyll-asciidoc', '>= 3.0'
+  gem 'j1-paginator', '>= 2024.1'
   #
   # Additional Supporting GEMs (optional)
   #
@@ -151,7 +152,7 @@ group :jekyll_plugins do
   # Additional Jekyll Plugins  (optional)
   #
   # gem 'jekyll-admin', '~> 0.11'
-  # gem 'jekyll-archives', '~> 2.2'
+  # gem 'jekyll-archives', '~> 2.2
   # gem 'jekyll-gist', '>= 1.5.0'
   # gem 'jekyll-redirect-from', '>= 0.16.0'
 end
@@ -170,10 +171,6 @@ end
 # gem 'scss_lint', '~> 0.56.0', require: false
 #
 # ------------------------------------------------------------------------------
-#
-# Required for Heroku, see support ticket: https://help.heroku.com/tickets/1198846
-# gem 'sass-embedded', '~> 1.57.1'
-
 gem 'sassc', '~> 2.4'
 gem 'bump', '~> 0.10'
 
