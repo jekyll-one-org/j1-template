@@ -46,21 +46,19 @@ Asciidoctor::Extensions.register do
     use_dsl
 
     named :youtube
-    name_positional_attributes 'poster', 'theme', 'custom_buttons', 'role'
+    name_positional_attributes 'poster', 'theme', 'role'
     default_attrs 'poster' => '/assets/image/icons/videojs/videojs-poster.png',
                   'theme' => 'uno',
-                  'custom_buttons' => true,
                   'role' => 'mt-3 mb-3'
 
     def process parent, target, attributes
 
-      chars           = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
-      video_id        = (0...11).map { chars[rand(chars.length)] }.join
+      chars         = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
+      video_id      = (0...11).map { chars[rand(chars.length)] }.join
 
-      title_html      = (attributes.has_key? 'title') ? %(<div class="video-title"> <i class="mdib mdib-video mdib-24px mr-2"></i> #{attributes['title']} </div>\n) : nil
-      poster_image    = (poster = attributes['poster']) ? %(#{poster}) : nil
-      theme_name      = (theme  = attributes['theme'])  ? %(#{theme}) : nil
-      custom_buttons  = (custom_buttons = attributes['custom_buttons']) ? %(#{custom_buttons}) : nil
+      title_html    = (attributes.has_key? 'title') ? %(<div class="video-title"> <i class="mdib mdib-video mdib-24px mr-2"></i> #{attributes['title']} </div>\n) : nil
+      poster_image  = (poster = attributes['poster']) ? %(#{poster}) : nil
+      theme_name    = (theme  = attributes['theme'])  ? %(#{theme}) : nil
 
       html = %(
         <div class="youtube-player bottom #{attributes['role']}">
@@ -115,96 +113,31 @@ Asciidoctor::Extensions.register do
               var pageState      = $('#content').css("display");
               var pageVisible    = (pageState == 'block') ? true : false;
               var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
+              var vjsPlayerExist = (document.getElementById("#{video_id}").length) ? true : false;
 
-              if (j1CoreFinished && pageVisible) {
-                addCaptionAfterImage('#{poster_image}');
+              addCaptionAfterImage('#{poster_image}');
+
+              if vjsPlayerExist) {
+//              addCaptionAfterImage('#{poster_image}');
 
                 // scroll to player top position
                 // -------------------------------------------------------------
-                var vjs_player = document.getElementById("#{video_id}");
+                var vjsPlayer = document.getElementById("#{video_id}");
 
-                vjs_player.addEventListener('click', function(event) {
-                  event.preventDefault();
-                  event.stopPropagation();
-
+                vjsPlayer.addEventListener('click', function(event) {
                   var scrollOffset = (window.innerWidth >= 720) ? -130 : -110;
 
                   // scroll player to top position
                   const targetDiv         = document.getElementById("#{video_id}");
                   const targetDivPosition = targetDiv.offsetTop;
+
                   window.scrollTo(0, targetDivPosition + scrollOffset);
                 }); // END EventListener 'click'
 
                 clearInterval(dependencies_met_page_ready);
               }
             }, 10);
-
-            // set custom controls on vjs player
-            // -----------------------------------------------------------------
-            var dependencies_met_vjs_player_exist = setInterval (function (options) {
-              var vjsPlayerExist          = document.getElementById("#{video_id}") ? true : false;
-              var vjsPlayerCustomButtons  = ("#{custom_buttons}" === 'true') ? true : false;
-
-              if (vjsPlayerExist && vjsPlayerCustomButtons) {
-                // apply custom controls on event 'player ready'
-                videojs("#{video_id}").ready(function() {
-                  var vjsPlayer = this;
-
-                  // add playbackRates
-                  //
-                  vjsPlayer.playbackRates([0.25, 0.5, 1, 1.5, 2]);
-  
-                  // add hotkeys plugin
-                  //
-                  vjsPlayer.hotkeys({
-                    volumeStep: 0.1,
-                    seekStep: 15,
-                    enableMute: true,
-                    enableFullscreen: true,
-                    enableNumbers: false,
-                    enableVolumeScroll: true,
-                    enableHoverScroll: true,
-                    alwaysCaptureHotkeys: true,
-                    captureDocumentHotkeys: true,
-                    documentHotkeysFocusElementFilter: e => e.tagName.toLowerCase() === "body",
-  
-                    // Mimic VLC seek behavior (default to: 15)
-                    //
-                    seekStep: function(e) {
-                      if (e.ctrlKey && e.altKey) {
-                        return 5*60;
-                      } else if (e.ctrlKey) {
-                        return 60;
-                      } else if (e.altKey) {
-                        return 10;
-                      } else {
-                        return 15;
-                      }
-                    },
-  
-                    // Enhance existing simple hotkey with a complex hotkey
-                    fullscreenKey: function(e) {
-                      // fullscreen with the F key or Ctrl+Enter
-                      return ((e.which === 70) || (e.ctrlKey && e.which === 13));
-                    }                 
-                  }); // END hotkeys plugin
-  
-                  // add skipButtons plugin
-                  //
-                  vjsPlayer.skipButtons({
-                    forward:  10,
-                    backward: 10
-                  }); // END skipButtons plugin                
-  
-                }); // END player ready (set custom controls)
-
-                clearInterval(dependencies_met_vjs_player_exist);
-              } // END if 'vjsPlayerExist'
-
-            }, 10); // END 'dependencies_met_vjs_player_exist'
-
-          }); // END 'document ready'
-
+          });
         </script>
       )
 

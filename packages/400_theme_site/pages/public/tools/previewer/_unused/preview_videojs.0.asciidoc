@@ -222,10 +222,9 @@ YouTube is a popular online video-sharing platform that allows users to
 upload, view, share, and comment on videos. The platform provides services
 for people and organizations to publish various video content.
 
-.Fortnight (feat. Post Malone, Official Music Video) · Taylor Swift
-youtube::q3zqJs7JUCQ[poster="//img.youtube.com/vi/q3zqJs7JUCQ/maxresdefault.jpg" role="mt-4 mb-5"]
+// .Fortnight (feat. Post Malone, Official Music Video) · Taylor Swift
+// youtube::q3zqJs7JUCQ[poster="//img.youtube.com/vi/q3zqJs7JUCQ/maxresdefault.jpg" role="mt-4 mb-5"]
 
-////
 ++++
 <div class="gallery-title">Adele · The Final Carpool Karaoke</div>
 <video
@@ -245,7 +244,11 @@ youtube::q3zqJs7JUCQ[poster="//img.youtube.com/vi/q3zqJs7JUCQ/maxresdefault.jpg"
       "src": "//youtube.com/watch?v=nV8UZJNBY6Y"
     }],
     "controlBar": {
-      "pictureInPictureToggle": false,               
+      "pictureInPictureToggle": false,
+      "skipButtons": {
+        "backward": 15,
+        "forward": 15
+      },                
       "volumePanel": {
         "inline": false
       }
@@ -256,158 +259,90 @@ youtube::q3zqJs7JUCQ[poster="//img.youtube.com/vi/q3zqJs7JUCQ/maxresdefault.jpg"
 ++++
 
 ++++
-<script id='control_videojs_youtube_james'>
+<script id='bla'>
+  $(function() {
 
-  function addCaptionAfterImage(imageSrc) {
-    const image = document.querySelector(`img[src="${imageSrc}"]`);
-    if (image) {
-    // create div|caption container
-    const newDiv = document.createElement('div');
-    newDiv.classList.add('caption');
-    newDiv.textContent = 'Adele · The Final Carpool Karaoke';
-    // insert div|caption container AFTER the image
-    image.parentNode.insertBefore(newDiv, image.nextSibling);
-    } else {
-    console.error(`Kein Bild mit src="${imageSrc}" gefunden.`);
-    }
-  }
-
-  // Tries to get the highest resolution thumbnail available for the video
-  function checkHighResPoster(imageSrc) {
-    var uri = imageSrc;
-
-    try {
-      var posterImage = new Image();
-      posterImage.onload = function() {
-        // Onload may still be called if YouTube returns the 120x90 error thumbnail
-        if('naturalHeight' in posterImage){
-          if (posterImage.naturalHeight <= 90 || posterImage.naturalWidth <= 120) {
-            return;
-          }
-        } else if(posterImage.height <= 90 || posterImage.width <= 120) {
-          return;
-        }
-        this.poster_ = uri;
-        this.trigger('posterchange');
-
-      }.bind(this); // END event onLoad
-
+    function addCaptionAfterImage(imageSrc) {
       const image = document.querySelector(`img[src="${imageSrc}"]`);
+
       if (image) {
         // create div|caption container
         const newDiv = document.createElement('div');
         newDiv.classList.add('caption');
         newDiv.textContent = 'Adele · The Final Carpool Karaoke';
+
         // insert div|caption container AFTER the image
-//      image.parentNode.insertBefore(newDiv, image.nextSibling);
-        image.parentNode.insertBefore(newDiv, image);
+        image.parentNode.insertBefore(newDiv, image.nextSibling);
       } else {
         console.error(`Kein Bild mit src="${imageSrc}" gefunden.`);
-      } // END if image
-      
-      image.onerror = function() {};
-      image.src     = uri;
+      }
+    }
 
-    } // END try
+    var dependencies_met_page_ready = setInterval (function (options) {
+      var pageState      = $('#content').css("display");
+      var pageVisible    = (pageState == 'block') ? true : false;
+      var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
-    catch(event){}
-  } // END  checkHighResPoster
+      if (j1CoreFinished && pageVisible) {
+         var captionImage = '//img.youtube.com/vi/nV8UZJNBY6Y/maxresdefault.jpg';
+            var dependencies_met_page_ready = setInterval (function (options) {
+              var pageState      = $('#content').css("display");
+              var pageVisible    = (pageState == 'block') ? true : false;
+              var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
-  var dependencies_met_page_ready = setInterval (function (options) {
-    var pageState      = $('#content').css("display");
-    var pageVisible    = (pageState == 'block') ? true : false;
-    var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
+              if (j1CoreFinished && pageVisible) {
 
-    if (j1CoreFinished && pageVisible) {
-      var captionImage = '//img.youtube.com/vi/nV8UZJNBY6Y/maxresdefault.jpg';
-      var vjs_player   = document.getElementById('videojs_youtube_james');
+                if (captionImage) {
+                  addCaptionAfterImage(captionImage);
+                }
 
-      // onClick, scroll player to top position
-      //
-      vjs_player.addEventListener('click', function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        var scrollOffset = (window.innerWidth >= 720) ? -130 : -110;
-        const targetDiv         = document.getElementById('videojs_youtube_james');
-        const targetDivPosition = targetDiv.offsetTop;
+                var appliedOnce = false;
+                videojs("videojs_youtube_james").ready(function() {
+                  var videojsPlayer = this;
 
-        window.scrollTo(0, targetDivPosition + scrollOffset);
-      }); // END EventListener onClick (scroll player to top position)
+                  // add playbackRates
+                  videojsPlayer.playbackRates([0.5, 1, 1.5, 2]);
 
-      //  on video ready
-      //
-      videojs("videojs_youtube_james").ready(function() {
-        var videojsPlayer = this;
+                  // add skipButtons plugin
+                  videojsPlayer.skipButtons({
+                    forward:  10,
+                    backward: 10
+                  });
 
-//        if (captionImage.includes('img.youtube.com')) {
-//          captionImage = checkHighResPoster(captionImage);
-//        } else {
-//          addCaptionAfterImage(captionImage);
-//        }
+                  // set start position of current video
+                  // -----------------------------------------------------------
+                  videojsPlayer.on("play", function() {
+                    var startFromSecond = new Date('1970-01-01T' + "#{attributes['start']}" + 'Z').getTime() / 1000;
+                    if (!appliedOnce) {
+                      videojsPlayer.currentTime(startFromSecond);
+                      appliedOnce = true;
+                    }
+                  });
 
-        // add playbackRates
-        videojsPlayer.playbackRates([0.25, 0.5, 1, 1.5, 2]);
+                });
 
-        // add hotkeys plugin
-        videojsPlayer.hotkeys({
-          volumeStep: 0.1,
-          seekStep: 15,
-          enableMute: true,
-          enableFullscreen: true,
-          enableNumbers: false,
-          enableVolumeScroll: true,
-          enableHoverScroll: true,
-          alwaysCaptureHotkeys: true,
-          captureDocumentHotkeys: true,
-          documentHotkeysFocusElementFilter: e => e.tagName.toLowerCase() === "body",
+        // scroll to player top position
+        // -------------------------------------------------------------
+        var vjs_player = document.getElementById('videojs_youtube_james');
 
-          // Mimic VLC seek behavior (default to: 15)
-          seekStep: function(e) {
-            if (e.ctrlKey && e.altKey) {
-              return 5*60;
-            } else if (e.ctrlKey) {
-              return 60;
-            } else if (e.altKey) {
-              return 10;
-            } else {
-              return 15;
-            }
-          },
+        vjs_player.addEventListener('click', function(event) {
+          event.preventDefault();
+          event.stopPropagation();
 
-          // Enhance existing simple hotkey with a complex hotkey
-          fullscreenKey: function(e) {
-            // fullscreen with the F key or Ctrl+Enter
-            return ((e.which === 70) || (e.ctrlKey && e.which === 13));
-          }                   
+          var scrollOffset = (window.innerWidth >= 720) ? -130 : -110;
 
-        });
+          // scroll player to top position
+          const targetDiv         = document.getElementById('videojs_youtube_james');
+          const targetDivPosition = targetDiv.offsetTop;
+          window.scrollTo(0, targetDivPosition + scrollOffset);
+        }); // END EventListener 'click'
 
-        // add skipButtons plugin
-        videojsPlayer.skipButtons({
-        forward:  10,
-        backward: 10
-        });
-
-        // set start position of current video
-        //
-        var appliedOnce = false;
-        videojsPlayer.on("play", function() {
-          var startFromSecond = new Date('1970-01-01T' + "#{attributes['start']}" + 'Z').getTime() / 1000;
-          if (!appliedOnce) {
-            videojsPlayer.currentTime(startFromSecond);
-            appliedOnce = true;
-          }
-        });
-
-      }); // END player ready (set custom controls)
-
-      clearInterval(dependencies_met_page_ready);
-    } // END if CoreFinished && pageVisible
-  }, 10); // END dependencies_met_page_ready
-
+        clearInterval(dependencies_met_page_ready);
+      }
+    }, 10);
+  });
 </script>
 ++++
-////
 
 ////
 [role="mt-5"]

@@ -27,7 +27,7 @@ regenerate:                             false
 personalization:                        true
 permalink:                              /pages/public/manuals/integrations/amplitudejs/amplitudejs_api/
 
-resources:                              [ amplitudejs ]
+resources:                              [ amplitudejs, rouge ]
 resource_options:
   - toccer:
       collapseDepth:                    3

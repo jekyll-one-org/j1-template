@@ -50,8 +50,8 @@ Bildqualität automatisch an die Verbindungsgeschwindigkeit des Benutzers
 anzupassen. Dies bedeutet, dass die tatsächlich angezeigte Auflösung je
 nach Gerät und Netzwerkbedingungen variieren kann.
 
-Standard-Thumbnails 1-3
-Mit den Thumbnail-Namen /1.jpg, /2.jpg, /3.jpg bekomme ich verschiedene
+Standard-Thumbnails 0-3
+Mit den Thumbnail-Namen /0.jpg, /1.jpg, /2.jpg, /3.jpg bekomme ich verschiedene
 Stellen aus dem Video ausgegeben.
 
 Warum gibt es verschiedene Auflösungen?

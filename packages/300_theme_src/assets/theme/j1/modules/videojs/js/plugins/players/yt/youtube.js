@@ -69,7 +69,7 @@
 
     dispose() {
       if (this.ytPlayer) {
-        //Dispose of the YouTube Player
+        // Dispose of the YouTube Player
         if (this.ytPlayer.stopVideo) {
           this.ytPlayer.stopVideo();
         }
@@ -77,7 +77,7 @@
           this.ytPlayer.destroy();
         }
       } else {
-        //YouTube API hasn't finished loading or the player is already disposed
+        // YouTube API hasn't finished loading or the player is already disposed
         var index = Youtube.apiReadyQueue.indexOf(this);
         if (index !== -1) {
           Youtube.apiReadyQueue.splice(index, 1);
@@ -90,7 +90,8 @@
           .replace(' vjs-youtube-mobile', '');
       this.el_.parentNode.removeChild(this.el_);
 
-      //Needs to be called after the YouTube player is destroyed, otherwise there will be a null reference exception
+      // Needs to be called after the YouTube player is destroyed,
+      // otherwise there will be a null reference exception
       Tech.prototype.dispose.call(this);
     } // END dispose
 
@@ -121,18 +122,18 @@
 
     initYTPlayer() {
       var playerVars = {
-        controls: 0,
-        modestbranding: 1,
-        rel: 0,
-        showinfo: 0,
-        loop: this.options_.loop ? 1 : 0
+        autoplay:         0,
+        controls:         0,
+        disablekb:        1,
+        rel:              0,
+        loop:             this.options_.loop ? 1 : 0
       };
 
       // Let the user set any YouTube parameter
       // https://developers.google.com/youtube/player_parameters?playerVersion=HTML5#Parameters
       // To use YouTube controls, you must use ytControls instead
       // To use the loop or autoplay, use the video.js settings
-
+      //
       if (typeof this.options_.autohide !== 'undefined') {
         playerVars.autohide = this.options_.autohide;
       }
@@ -154,7 +155,8 @@
       }
 
       if (!playerVars.controls) {
-        // Let video.js handle the fullscreen unless it is the YouTube native controls
+        // Let video.js handle the fullscreen unless it is the
+        // YouTube native controls
         playerVars.fs = 0;
       } else if (typeof this.options_.fs !== 'undefined') {
         playerVars.fs = this.options_.fs;
@@ -190,9 +192,10 @@
         playerVars.listType = this.options_.listType;
       }
 
-      if (typeof this.options_.modestbranding !== 'undefined') {
-        playerVars.modestbranding = this.options_.modestbranding;
-      }
+      // Deprecated
+      // if (typeof this.options_.modestbranding !== 'undefined') {
+      //   playerVars.modestbranding = this.options_.modestbranding;
+      // }
 
       if (typeof this.options_.playlist !== 'undefined') {
         playerVars.playlist = this.options_.playlist;
@@ -344,7 +347,7 @@
     } // END onPlayerError
 
     error() {
-      var code = 1000 + this.errorNumber; // as smaller codes are reserved
+      var code = 1000 + this.errorNumber; // lower codes are reserved
       switch (this.errorNumber) {
         case 5:
           return { code: code, message: 'Error while trying to play the video' };
@@ -391,8 +394,8 @@
     } // END cueVideoById_
 
     poster() {
-      // You can't start programmaticlly a video with a mobile
-      // through the iframe so we hide the poster and the play button (with CSS)
+      // You can't start programmaticlly a video with a mobile through 
+      // the iframe so needed to hide the poster and the play button (with CSS)
       if (_isOnMobile) {
         return null;
       }
@@ -424,10 +427,11 @@
       if (!this.options_.poster) {
         if (this.url.videoId) {
           // Set the low resolution first
-          this.poster_ = 'https://img.youtube.com/vi/' + this.url.videoId + '/0.jpg';
+//        this.poster_ = 'https://img.youtube.com/vi/' + this.url.videoId + '/0.jpg';
+          this.poster_ = 'https://img.youtube.com/vi/' + this.url.videoId + '/sddefault.jpg';
           this.trigger('posterchange');
 
-          // Check if their is a high res
+          // Check if their is a high res image
           this.checkHighResPoster();
         }
       }
@@ -690,9 +694,11 @@
           this.poster_ = uri;
           this.trigger('posterchange');
         }.bind(this);
+
         image.onerror = function() {};
         image.src     = uri;
       }
+
       catch(event){}
     } // END  checkHighResPoster
 

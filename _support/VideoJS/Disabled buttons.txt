@@ -1,0 +1,113 @@
+My custom buttons vor the VideoJS V8 Video Player are disabled
+by class vjs-hidden after initialization.
+Why the buttin is disabled by the VideoFS API?
+
+Gemini
+--------------------------------------------------------------------------------
+
+Understanding the vjs-hidden Class and Custom Button Disabling in VideoJS v8.
+The vjs-hidden class is a CSS class used by VideoJS to hide elements. When a
+button is assigned this class, it becomes visually hidden from the user.
+
+This can occur for several reasons:
+
+1. Conditional Visibility
+
+* Player State:
+    VideoJS might conditionally show or hide buttons based on the player's
+    current state (e.g., playing, paused, ended).
+
+* User Preferences:
+    Certain buttons might be hidden or shown based on user preferences
+    or settings.
+
+2. Custom Button Configuration
+
+* Incorrect Initialization:
+    Ensure that your custom button is correctly initialized and added to
+    the player's control bar.
+
+* Missing or Incorrect show() Method:
+    If your custom button component doesn't implement the show() method
+    correctly, it might remain hidden.
+
+3. CSS Conflicts
+
+Overriding Styles. Check if any custom CSS rules are unintentionally
+overriding the visibility of your button.
+
+
+Troubleshooting Tips:
+
+Inspect the DOM
+---------------
+
+Use your browser's developer tools to inspect the DOM and verify if the
+vjs-hidden class is indeed present on your custom button. Check the computed
+styles to identify any conflicting CSS rules.
+
+Review Custom Button Implementation
+-----------------------------------
+
+Ensure that your custom button component extends the Component class and
+correctly implements the necessary methods. Verify that the button is added
+to the control bar using the addChild() method.
+
+Check Player State and User Preferences
+---------------------------------------
+
+Consider the player's current state and any user preferences that might
+affect button visibility. You might need to conditionally show/hide the
+button based on these factors.
+
+Leverage VideoJS API:
+
+Use the VideoJS API to control the visibility of your custom button. The show() and hide() methods can be used to toggle visibility.
+Example:
+
+JavaScript
+// Assuming you have a custom button component:
+var MyCustomButton = videojs.extend({
+
+    init: function(player, options) {
+        videojs.Component.call(this, player, options);
+        // ... other initialization logic
+    },
+
+    handleClick: function() {
+        // Handle button click event
+    },
+
+    show: function() {
+        this.el().classList.remove('vjs-hidden');
+    },
+
+    hide: function() {
+        this.el().classList.add('vjs-hidden');
+    }
+
+});
+
+// Add the button to the control bar:
+player.controlBar.addChild('myCustomButton');
+
+
+By following these steps and carefully inspecting your code,
+you should be able to identify the root cause of the issue and resolve it.
+
+If you can provide more specific details about your custom button
+implementation and the VideoJS version you're using, I can offer more
+tailored advice.
+
+
+
+
+
+
+
+
+
+
+
+Gemini kann fehlerhafte Aussagen liefern, auch über Personen, also überprüfe die Antworten. Datenschutz und GeminiWird in einem neuen Fenster geöffnet
+
