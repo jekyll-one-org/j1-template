@@ -70,7 +70,7 @@ audio tag `<audio>` for the new HTML5 audio audio standard.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-
+[role="mt-5"]
 == Plugin `hotkeys`
 
 The *hotkeys* plugin for Video.js enables *keyboard hotkeys* when the
@@ -87,7 +87,7 @@ The *hotkeys* plugin for Video.js enables *keyboard hotkeys* when the
 * `Number keys` from *1-9* skip to a percentage of the video:
   1 is `10%` and 9 is `90%`.
 
-[role="mb-5"]
+[role="mt-4 mb-5"]
 [NOTE]
 ====
 Clicking any of the control buttons such as Play/Pause, Fullscreen,  or Mute,
@@ -131,10 +131,10 @@ accessibility, the `Tab` key may be used in combination with the
 * `alwaysCaptureHotkeys` (boolean): Forces the capture of hotkeys, even when
    control elements are focused.
 
-The *Enter*|*Return* key may be used instead to activate the control
-elements. (default: `false`) 
+The *Enter|Return* key may be used instead to activate the control
+elements (default: `false`).
 
-[role="mb-5"]
+[role="mt-4 mb-4"]
 [NOTE]
 ====
 This feature may break accessibility, and cause unexpected behavior.
