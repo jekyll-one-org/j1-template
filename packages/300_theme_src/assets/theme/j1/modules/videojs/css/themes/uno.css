@@ -42,26 +42,33 @@
 	text-shadow: 1px 1px 2px #000;
 }
 
-.vjs-poster {
-  height: 100%
-}
-
 /* images
  ------------------------------------------------------------------------------- */
 picture > img {
   max-width: 100%;
-  height: auto;
+/* jadams, 2024-11-11: ToDo (fix) */
+/* workaround, height: make image -1 pixel smaller */     
+/* height: calc(100% + 1px); */
+}
+
+.vjs-poster {
+  height: 100%;
+/* jadams, 2024-11-11: ToDo (fix) */
+/* workaround, height: make poster -5 pixel smaller */    
+/* height: calc(100% + 1px); */
 }
 
 /* controlbar|controls
  ------------------------------------------------------------------------------- */
 .vjs-theme-uno .vjs-control-bar {
-  height: 50px;
+  /* jadams, 2024-11-15: set control-bar heigth|position */
+  height: 55px;
+  top: calc(100% - 54px);
   background-color: var(--vjs-theme-uno--gray-900);
   z-index: 100;
 }
 
-/* auto hide VJS controlbar on video is paused */
+/* auto hide VJS controlbar when video is paused */
 .vjs-has-started.vjs-user-inactive.vjs-paused .vjs-control-bar {
   visibility: visible;
   opacity: 0;

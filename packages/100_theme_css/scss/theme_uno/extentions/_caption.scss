@@ -17,10 +17,10 @@
 .caption {
   display: none;                                                                /* hidden for default */
   position: absolute;                                                           /* positions set by translate */
-  // padding: 5px;                                                              /* space around a caption */
+  margin-top: 1px;                                                              /* place caption top position */
   padding: 10px 5px 10px 5px;                                                   /* space around a caption */
-  color: #E0E0E0;                                                               /* caption text color */
-  background: rgba(0, 0, 0, 1);                                                 /* caption background color */
+  color: #E0E0E0;                                                             /* caption text color */
+  background: rgba(0, 0, 0, 1);                                               /* caption background color */
   width: 100%;
   font-size: 12px;
   font-weight: 300;
@@ -28,6 +28,7 @@
   z-index: 1;
 }
 
+/* jadams, 2024-11-15: Unused
 .caption-video {
   display: none;
   position: absolute;
@@ -40,6 +41,7 @@
   font-family: sans-serif;
   z-index: 1;
 }
+*/
 
 // Positions
 // -----------------------------------------------------------------------------
@@ -75,7 +77,7 @@
 /* workaround: make cover images +1 pixel higher for caption text overlay */
 .bottom .caption {
 // top: 100%;
- top: calc(100% + 1px);
+// top: calc(100% + 1px);
  transform: translate(0, 0);
  -moz-transform: translate(0, 0);
  -webkit-transform: translate(0, 0);
