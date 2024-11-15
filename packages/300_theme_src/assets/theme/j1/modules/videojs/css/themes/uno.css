@@ -47,7 +47,8 @@
 /* jadams, 2024-11-11: ToDo (fix) */
 /* workaround: make cover images +1 pixel higher for caption text overlay */
 .vjs-poster {
-  height: calc(100% + 1px);
+  /* height: calc(100% + 1px); */
+  height: 100%
 }
 
 /* images

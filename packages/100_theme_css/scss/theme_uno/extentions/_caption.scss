@@ -71,8 +71,11 @@
 
 // Bottom
 // -----------------------------------------------------------------------------
+/* jadams, 2024-11-11: ToDo (fix) */
+/* workaround: make cover images +1 pixel higher for caption text overlay */
 .bottom .caption {
- top: 100%;
+// top: 100%;
+ top: calc(100% + 1px);
  transform: translate(0, 0);
  -moz-transform: translate(0, 0);
  -webkit-transform: translate(0, 0);
