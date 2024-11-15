@@ -28,8 +28,6 @@
   --vjs-theme-uno--secondary: #fff
 }
 
-
-
 /* captions|subtitles
  ------------------------------------------------------------------------------- */
 .video-js .vjs-text-track-display div {
@@ -44,10 +42,7 @@
 	text-shadow: 1px 1px 2px #000;
 }
 
-/* jadams, 2024-11-11: ToDo (fix) */
-/* workaround: make cover images +1 pixel higher for caption text overlay */
 .vjs-poster {
-  /* height: calc(100% + 1px); */
   height: 100%
 }
 
