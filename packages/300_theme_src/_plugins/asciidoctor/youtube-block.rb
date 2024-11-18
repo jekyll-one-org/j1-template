@@ -51,8 +51,10 @@ Asciidoctor::Extensions.register do
     use_dsl
 
     named :youtube
-    name_positional_attributes 'poster', 'theme', 'custom_buttons', 'role'
-    default_attrs 'poster' => '/assets/image/icons/videojs/videojs-poster.png',
+    name_positional_attributes 'caption', 'start','poster', 'theme', 'custom_buttons', 'role'
+    default_attrs 'caption' => 'true',
+                  'start' => '00:00:00',
+                  'poster' => '/assets/image/icons/videojs/videojs-poster.png',
                   'theme' => 'uno',
                   'custom_buttons' => true,
                   'role' => 'mt-3 mb-3'
@@ -87,6 +89,7 @@ Asciidoctor::Extensions.register do
       poster_image    = (poster = attributes['poster']) ? %(#{poster}) : nil
       theme_name      = (theme  = attributes['theme'])  ? %(#{theme}) : nil
       custom_buttons  = (custom_buttons = attributes['custom_buttons']) ? %(#{custom_buttons}) : nil
+      caption_enabled = (caption  = attributes['caption'])  ? true : false
 
       html = %(
         <div class="youtube-player bottom #{attributes['role']}">
@@ -122,12 +125,14 @@ Asciidoctor::Extensions.register do
           $(function() {
 
             // =================================================================
-            // take over VideoJS configuration data (from ruby)
+            // take over VideoJS configuration data (JSON data from Ruby)
             // -----------------------------------------------------------------            
             var videojsDefaultConfigJson = '#{videojsDefaultSettingsJson}';
             var videojsUserConfigJson    = '#{videojsUserSettingsJson}';
 
-            // create config objects from JSON
+            // =================================================================
+            // create config objects from JSON data
+            // -----------------------------------------------------------------             
             var videojsDefaultSettings   = JSON.parse(videojsDefaultConfigJson);
             var videojsUserSettings      = JSON.parse(videojsUserConfigJson);
 
@@ -135,12 +140,18 @@ Asciidoctor::Extensions.register do
             var videojsConfig = $.extend(true, {}, videojsDefaultSettings.defaults, videojsUserSettings.settings);
 
             // =================================================================
-            // VideoJS config settings
-            // -----------------------------------------------------------------            
-            const vjsPlaybackRates  = videojsConfig.playbackRates;
+            // VideoJS player settings
+            // -----------------------------------------------------------------
+            const vjsPlayerType     = 'ytp';
+            const vjsPlaybackRates  = videojsConfig.playbackRates.values;          
+
+            // =================================================================
+            // VideoJS plugin settings
+            // ----------------------------------------------------------------- 
             const piAutoCaption     = videojsConfig.plugins.autoCaption;
             const piHotKeys         = videojsConfig.plugins.hotKeys;
             const piSkipButtons     = videojsConfig.plugins.skipButtons;
+            const piZoomButtons     = videojsConfig.plugins.zoomButtons;
 
             // =================================================================
             // helper functions
@@ -162,7 +173,7 @@ Asciidoctor::Extensions.register do
             }
 
             // =================================================================
-            // initialize the VideoJS player
+            // initialize the VideoJS player (on page ready)
             // -----------------------------------------------------------------             
             var dependencies_met_page_ready = setInterval (function (options) {
               var pageState      = $('#content').css("display");
@@ -170,9 +181,13 @@ Asciidoctor::Extensions.register do
               var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
               if (j1CoreFinished && pageVisible) {
-                var vjs_player = document.getElementById("#{video_id}");
+                var vjs_player  = document.getElementById("#{video_id}");
+                var appliedOnce = false;
 
-                addCaptionAfterImage('#{poster_image}');
+                // add|skip captions (on poster image)
+                if ('#{caption_enabled}' === 'true') {
+                  addCaptionAfterImage('#{poster_image}');
+                }
 
                 // scroll page to the players top position
                 // -------------------------------------------------------------
@@ -204,48 +219,72 @@ Asciidoctor::Extensions.register do
                   //
                   vjsPlayer.playbackRates(vjsPlaybackRates);
 
-                  // add VideoJS hotKeys plugin
+                  // add|skip hotKeys plugin
                   //
-                  vjsPlayer.hotKeys({
-                    volumeStep: 0.1,
-                    seekStep: 15,
-                    enableMute: true,
-                    enableFullscreen: true,
-                    enableNumbers: false,
-                    enableVolumeScroll: true,
-                    enableHoverScroll: true,
-                    alwaysCaptureHotkeys: true,
-                    captureDocumentHotkeys: true,
-                    documentHotkeysFocusElementFilter: e => e.tagName.toLowerCase() === "body",
+                  if (piHotKeys.enabled) {
+                    vjsPlayer.hotKeys({
+                      volumeStep:                         piHotKeys.volumeStep,
+                      seekStep:                           piHotKeys.seekStep,
+                      enableMute:                         piHotKeys.enableMute,
+                      enableFullscreen:                   piHotKeys.enableFullscreen,
+                      enableNumbers:                      piHotKeys.enableNumbers,
+                      enableVolumeScroll:                 piHotKeys.enableVolumeScroll,
+                      enableHoverScroll:                  piHotKeys.enableHoverScroll,
+                      alwaysCaptureHotkeys:               piHotKeys.alwaysCaptureHotkeys,
+                      captureDocumentHotkeys:             piHotKeys.captureDocumentHotkeys,
+                      documentHotkeysFocusElementFilter:  e => e.tagName.toLowerCase() === "body",
 
-                    // Mimic seek behavior of VLC (default to: 15)
+                      // Mimic VLC seek behavior (default to: 15)
+                      seekStep: function(e) {
+                        if (e.ctrlKey && e.altKey) {
+                          return 5*60;
+                        } else if (e.ctrlKey) {
+                          return 60;
+                        } else if (e.altKey) {
+                          return 10;
+                        } else {
+                          return 15;
+                        }
+                      },
+
+                      // Enhance existing simple hotkey by complex hotkeys
+                      fullscreenKey: function(e) {
+                        // fullscreen with the F key or Ctrl+Enter
+                        return ((e.which === 70) || (e.ctrlKey && e.which === 13));
+                      },  
+
+                    }); // END VideoJS hotKeys plugin
+                  }
+
+                  // add|skip skipButtons plugin
+                  if (piSkipButtons.enabled) {
+                    var backwardIndex = piSkipButtons.backward;
+                    var forwardIndex  = piSkipButtons.forwardIndex;
+
+                    // property 'surroundPlayButton' takes precendence
                     //
-                    seekStep: function(e) {
-                      if (e.ctrlKey && e.altKey) {
-                        return 5*60;
-                      } else if (e.ctrlKey) {
-                        return 60;
-                      } else if (e.altKey) {
-                        return 10;
-                      } else {
-                        return 15;
-                      }
-                    },
+                    if (piSkipButtons.surroundPlayButton) {
+                      var backwardIndex = 0;
+                      var forwardIndex  = 1;
+                    }
 
-                    // Enhance existing simple hotkeys by complex hotkeys
-                    //
-                    fullscreenKey: function(e) {
-                      // fullscreen with the F key or Ctrl+Enter
-                      return ((e.which === 70) || (e.ctrlKey && e.which === 13));
-                    }                 
-                  }); // END VideoJS hotKeys plugin
+                    vjsPlayer.skipButtons({
+                      backwardIndex:  backwardIndex,
+                      forwardIndex:   forwardIndex,
+                      backward:       piSkipButtons.backward,
+                      forward:        piSkipButtons.forward,
+                    });
+                  }
 
-                  // add VideoJS skipButtons plugin
-                  //
-                  vjsPlayer.skipButtons({
-                    forward:  10,
-                    backward: 10
-                  }); // END VideoJS skipButtons plugin
+                  // add|skip zoomButtons plugin
+                  if (piZoomButtons.enabled && vjsPlayerType === 'native') {
+                    vjsPlayer.zoomButtons({
+                      moveX:  piZoomButtons.moveX,
+                      moveY:  piZoomButtons.moveY,
+                      rotate: piZoomButtons.rotate,
+                      zoom:   piZoomButtons.zoom
+                    });                    
+                  }
 
                 }); // END yt player ready (set custom controls)
 

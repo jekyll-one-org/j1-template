@@ -34,8 +34,8 @@
   const Button = videojs__default["default"].getComponent('Button'); // Default options for the plugin.
 
   const defaults = {
-    forwardIndex:  10,
-    backwardIndex: 10
+    forwardIndex:  1,
+    backwardIndex: 1
   };
 
   // Set up buttons when the player is ready

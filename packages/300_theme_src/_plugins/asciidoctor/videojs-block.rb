@@ -47,6 +47,26 @@ Asciidoctor::Extensions.register do
 
     def process parent, target, attributes
 
+      # ========================================================================
+      # load VideoJS configuration data (as NOT available in the website)
+      # ------------------------------------------------------------------------
+      #
+      current_path                = File.expand_path(Dir.getwd)
+      default_config_path         = File.join(current_path, '/_data/modules/defaults')
+      user_config_path            = File.join(current_path, '/_data/modules')
+
+      videojs_config_file_name    = 'videojs.yml'
+      videojs_default_config_file = File.join(default_config_path, videojs_config_file_name)
+      videojs_user_config_file    = File.join(user_config_path, videojs_config_file_name)
+
+      videojsDefaultSettings      = YAML::load(File.open(videojs_default_config_file))
+      videojsUserSettings         = YAML::load(File.open(videojs_user_config_file))
+      videojsDefaultSettingsJson  = videojsDefaultSettings.to_json;
+      videojsUserSettingsJson     = videojsUserSettings.to_json;
+
+      # ========================================================================
+      # set plugin specific data
+      # ------------------------------------------------------------------------
       chars           = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
       video_id        = (0...11).map { chars[rand(chars.length)] }.join
 
@@ -89,6 +109,35 @@ Asciidoctor::Extensions.register do
         <script>
           $(function() {
 
+            // =================================================================
+            // take over VideoJS configuration data (JSON data from Ruby)
+            // -----------------------------------------------------------------            
+            var videojsDefaultConfigJson = '#{videojsDefaultSettingsJson}';
+            var videojsUserConfigJson    = '#{videojsUserSettingsJson}';
+
+            // create config objects from JSON data
+            var videojsDefaultSettings   = JSON.parse(videojsDefaultConfigJson);
+            var videojsUserSettings      = JSON.parse(videojsUserConfigJson);
+
+            // merge config objects (jQuery)
+            var videojsConfig = $.extend(true, {}, videojsDefaultSettings.defaults, videojsUserSettings.settings);
+
+            // =================================================================
+            // VideoJS player settings
+            // -----------------------------------------------------------------            
+            const vjsPlaybackRates  = videojsConfig.playbackRates.values;
+
+            // =================================================================
+            // VideoJS plugin settings
+            // -----------------------------------------------------------------   
+            const piAutoCaption     = videojsConfig.plugins.autoCaption;
+            const piHotKeys         = videojsConfig.plugins.hotKeys;
+            const piSkipButtons     = videojsConfig.plugins.skipButtons;
+            const piZoomButtons     = videojsConfig.plugins.zoomButtons;
+
+            // =================================================================
+            // helper functions
+            // ----------------------------------------------------------------- 
             function addCaptionAfterImage(imageSrc) {
               const image = document.querySelector(`img[src="${imageSrc}"]`);
 
@@ -105,98 +154,114 @@ Asciidoctor::Extensions.register do
               }
             }
 
+            // =================================================================
+            // initialize the VideoJS player (on page ready)
+            // -----------------------------------------------------------------   
             var dependencies_met_page_ready = setInterval (function (options) {
               var pageState      = $('#content').css("display");
               var pageVisible    = (pageState == 'block') ? true : false;
               var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
               if (j1CoreFinished && pageVisible) {
-
+                var vjs_player  = document.getElementById("#{video_id}");
+                var appliedOnce = false;
+                
+                // add|skip captions (on poster image)
                 if ('#{caption_enabled}' === 'true') {
                   addCaptionAfterImage('#{poster_image}');
                 }
 
-                var appliedOnce = false;
+                // set VideoJS player settings
                 videojs("#{video_id}").ready(function() {
-                  var videojsPlayer = this;
+                  var vjsPlayer = this;
 
-                  // add playbackRates
-                  videojsPlayer.playbackRates([0.5, 1, 1.5, 2]);
+                  // add|skip playbackRates
+                  if (videojsConfig.playbackRates.enabled) {
+                    vjsPlayer.playbackRates(vjsPlaybackRates);
+                  }
 
-                  // add hotkeys plugin
-                  videojsPlayer.hotkeys({
-                    volumeStep: 0.1,
-                    seekStep: 15,
-                    enableMute: true,
-                    enableFullscreen: true,
-                    enableNumbers: false,
-                    enableVolumeScroll: true,
-                    enableHoverScroll: true,
-                    alwaysCaptureHotkeys: true,
-                    captureDocumentHotkeys: true,
-                    documentHotkeysFocusElementFilter: e => e.tagName.toLowerCase() === "body",
-
-                    // Mimic VLC seek behavior (default to: 15)
-                    seekStep: function(e) {
-                      if (e.ctrlKey && e.altKey) {
-                        return 5*60;
-                      } else if (e.ctrlKey) {
-                        return 60;
-                      } else if (e.altKey) {
-                        return 10;
-                      } else {
-                        return 15;
+                  // add|skip hotKeys plugin
+                  if (piHotKeys.enabled) {
+                    vjsPlayer.hotKeys({
+                      volumeStep:                         piHotKeys.volumeStep,
+                      seekStep:                           piHotKeys.seekStep,
+                      enableMute:                         piHotKeys.enableMute,
+                      enableFullscreen:                   piHotKeys.enableFullscreen,
+                      enableNumbers:                      piHotKeys.enableNumbers,
+                      enableVolumeScroll:                 piHotKeys.enableVolumeScroll,
+                      enableHoverScroll:                  piHotKeys.enableHoverScroll,
+                      alwaysCaptureHotkeys:               piHotKeys.alwaysCaptureHotkeys,
+                      captureDocumentHotkeys:             piHotKeys.captureDocumentHotkeys,
+                      documentHotkeysFocusElementFilter:  e => e.tagName.toLowerCase() === "body",
+  
+                      // Mimic VLC seek behavior (default to: 15)
+                      if (piHotKeys.mimicVlcSeek) {
+                        seekStep: function(e) {
+                          if (e.ctrlKey && e.altKey) {
+                            return 5*60;
+                          } else if (e.ctrlKey) {
+                            return 60;
+                          } else if (e.altKey) {
+                            return 10;
+                          } else {
+                            return 15;
+                          }
+                        },
                       }
+  
+                      // Enhance existing simple hotkey by complex hotkeys
+                      if (piHotKeys.fullScreenKey) {
+                        fullscreenKey: function(e) {
+                          // fullscreen with the F key or Ctrl+Enter
+                          return ((e.which === 70) || (e.ctrlKey && e.which === 13));
+                        },  
+                      }
+  
+                    });
+                  }
 
-                    },
+                  // add|skip skipButtons plugin
+                  if (piSkipButtons.enabled) {
+                    vjsPlayer.skipButtons({
+                      forward:  piSkipButtons.forward,
+                      backward: piSkipButtons.backward
+                    });
+                  }
 
-                    // Enhance existing simple hotkey with a complex hotkey
-                    fullscreenKey: function(e) {
-                      // fullscreen with the F key or Ctrl+Enter
-                      return ((e.which === 70) || (e.ctrlKey && e.which === 13));
-                    },                    
+                  // add|skip zoomButtons plugin
+                  if (piZoomButtons.enabled) {
+                    vjsPlayer.zoomButtons({
+                      moveX:  piZoomButtons.moveX,
+                      moveY:  piZoomButtons.moveY,
+                      rotate: piZoomButtons.rotate,
+                      zoom:   piZoomButtons.zoom
+                    });                    
+                  }
 
-                  });
-
-                  // add skipButtons plugin
-                  videojsPlayer.skipButtons({
-                    forward:  10,
-                    backward: 10
-                  });
-
-                  // add zoom plugin
-                  videojsPlayer.zoomButtons({
-                    moveX:  0,
-                    moveY:  0,
-                    rotate: 0,
-                    zoom:   1
-                  });
-
-                  // set start position of current video
+                  // set start position of current video (on play)
                   // -----------------------------------------------------------
-                  videojsPlayer.on("play", function() {
+                  vjsPlayer.on("play", function() {
                     var startFromSecond = new Date('1970-01-01T' + "#{attributes['start']}" + 'Z').getTime() / 1000;
                     if (!appliedOnce) {
-                      videojsPlayer.currentTime(startFromSecond);
+                      vjsPlayer.currentTime(startFromSecond);
                       appliedOnce = true;
                     }
                   });
                 });
 
-                // scroll to player top position
+                // scroll page to player top position
                 // -------------------------------------------------------------
                 var vjs_player = document.getElementById("#{video_id}");
 
                 vjs_player.addEventListener('click', function(event) {
-                  event.preventDefault();
-                  event.stopPropagation();
-
-                  var scrollOffset = (window.innerWidth >= 720) ? -130 : -110;
-
-                  // scroll player to top position
                   const targetDiv         = document.getElementById("#{video_id}");
-                  const targetDivPosition = targetDiv.offsetTop;
+                  const targetDivPosition = targetDiv.offsetTop;                  
+                  var scrollOffset        = (window.innerWidth >= 720) ? -130 : -110;
+
+                  // scroll page to the players top position
+                  // -------------------------------------------------------------                  
                   window.scrollTo(0, targetDivPosition + scrollOffset);
+
                 }); // END EventListener 'click'
 
                 clearInterval(dependencies_met_page_ready);

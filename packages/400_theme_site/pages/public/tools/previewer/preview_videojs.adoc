@@ -71,7 +71,33 @@ audio tag `<audio>` for the new HTML5 audio audio standard.
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 [role="mt-5"]
-== Plugin `hotkeys`
+== Plugins
+
+The J1 Template provides a collection of plugins to enhance VJS players, such
+as by providing useful functions like additional buttons or advanced keyboard
+support to control a player by defined keys (hotkeys).
+
+[role="mt-4"]
+=== autoCaption
+
+The plugin automatically enables the caption or subtitle track to match the
+player's language best. The plugin name needs to be revised, as it has
+nothing to do with automatically generating captions. Language codes are
+considered case-insensitive. If one or more tracks have a `kind` of `captions`
+or `subtitles` with an exactly matching language code, the first will be
+selected.
+
+If there is no exact match, the first `captions` or `subtitles` track where
+the first part of the language code matches is selected, so `en-US` would
+match `en` or `en-gb`. If there is no match based on language, the first
+`captions` or `subtitles` track with `default` = `true` will be selected.
+
+The player language itself is either explicitly set as an option or is
+derived from the closest element with a `lang` attribute. See https://docs.videojs.com/tutorial-languages.html#determining-player-language[Video.js docs, {browser-window--new}].
+
+
+[role="mt-4"]
+=== hotKeys
 
 The *hotkeys* plugin for Video.js enables *keyboard hotkeys* when the
 *player has focus*.
@@ -105,7 +131,7 @@ accessibility, the `Tab` key may be used in combination with the
 `Enter`|`Return` key to navigate and activate control buttons.
 
 [role="mt-4"]
-=== Options
+==== Options
 
 * `volumeStep` (decimal): The percentage to increase/decrease the volume
    level when using the Up and Down Arrow keys (default: `0.1`)
@@ -168,6 +194,162 @@ This isn't a feature for everyone, and enabling JogStyle will disable the
 volume hotkeys.
 ====
 
+[role="mt-4"]
+=== skipbuttons
+
+The plugin *skipbuttons* add *VJS seek buttons* to the control bar. These
+buttons allow the user to skip forward or back by a configured number of
+seconds.
+
+[role="mt-4"]
+==== Options
+
+* `forward`, if a number greater than 0, a seek forward button will be added
+  which seeks that number of seconds
+* `back`, if a number greater than 0, a seek back button will be added which
+  seeks that number of seconds
+* `forwardIndex`, the position in the control bar to insert the button.
+  Defaults to `1`.
+* `backwardIndex`, the position in the control bar to insert the button.
+  Defaults to `1`.
+
+[role="mt-4"]
+==== Control position
+
+`forwardIndex` and `backwardIndex` set the posiiton of the button in the control
+bar. Note if both a back and forward button are used, the forward button is
+inserted first.
+
+Assuming the standard control bar, the play button is at index `0`. With the
+default index of `1` for both, the forward button is inserted after the
+play button, then the back button is inserted after the play button and
+before the forward button. Setting `backwardIndex` to `0` would place the back
+button before the play button instead, so they surround the play button.
+
+[role="mt-4"]
+=== zoomButtons
+
+Adds a zoom button to player controlbar.
+
+[role="mt-4"]
+==== Methods
+
+lorem:sentences[5]
+
+[role="mt-4"]
+===== zoom(value): void
+
+Zoom function
+
+- **value**
+	- type: `Number`
+
+[source, js]
+----
+const zoomPlugin = video.zoomPlugin();
+zoomPlugin.zoom(2);
+----
+
+[role="mt-4"]
+===== rotate(value): void
+
+Rotate function
+
+- **value**
+	- type: `Number` in deg
+
+[source, js]
+----
+const zoomPlugin = video.zoomPlugin();
+zoomPlugin.rotate(180);
+----
+
+[role="mt-4"]
+===== move(x, y): void
+
+Rotate function
+
+- **x**
+	- type: `Number`
+- **y**
+	- type: `Number`
+
+[source, js]
+const zoomPlugin = video.zoomPlugin();
+zoomPlugin.move(0, 0);
+-----
+
+[role="mt-4"]
+===== toggle(): void
+
+Open and close modal function
+
+[source, js]
+----
+const zoomPlugin = video.zoomPlugin();
+zoomPlugin.toggle();
+----
+
+[role="mt-4"]
+===== flip(signal): void
+
+Flip video image
+
+- **x**
+	- type: `String` use + or - for flip image
+
+[source, js]
+----
+const zoomPlugin = video.zoomPlugin();
+zoomPlugin.flip("-");
+----
+
+[role="mt-4"]
+==== Options
+
+Example:
+[source, js]
+----
+const zoomPlugin = video.zoomPlugin({
+	showZoom: true,
+	showMove: true,
+	showRotate: true,
+	gestureHandler: false
+});
+----
+
+* `showZoom` show/hide +- zoom buttons. default `true`
+* `showMove` show/hide up, left, right, reset and down buttons. default `true`
+* `showRotate` show/hide rotate and flip buttons. default `true`
+* `gestureHandler` enable gesture zoom drag and drop, wheel. default `false`
+
+[role="mt-4"]
+==== Events
+
+lorem:sentences[5]
+
+[role="mt-4"]
+===== listen(event, callback): void
+
+Listen events of the zoom plugin
+
+- **event**
+	- type: `String`
+	- options:
+	  - `'change'` when click in buttons modal
+	  - `'click'` when modal is opened or closed
+- **callback**
+	- type: `Function`
+
+[source, js]
+----
+const zoomPlugin = video.zoomPlugin();
+zoomPlugin.listen('click', () => {
+    console.log('click');
+});
+----
+
+
 ////
 [role="mt-4"]
 == Built-in Player
@@ -193,8 +375,9 @@ video::/assets/video/html5/peck_pocketed.mp4[poster="/assets/video/poster/html5/
 ////
 
 
+
 [role="mt-5"]
-== VideoJS
+== Players
 
 VideoJS is a *free-to-use* open-source JavaScript framework for building
 custom video players for the web. Implementing VideoJS for the J1 Template

@@ -4,9 +4,6 @@
   "version": "2024.3.16",
   "description": "Project sources for J1 Template",
   "main": "_config.yml",
-  "config": {
-    "bundler": "jekyll"
-  },
   "homepage": "https://jekyll.one",
   "author": {
     "name": "Juergen Adams",
@@ -18,12 +15,13 @@
     "url": "https://github.com/jekyll-one-org/J1 Theme/issues"
   },
   "config": {
+    "bundler": "jekyll",
     "jekyll_app_interface": "0.0.0.0",
-    "jekyll_app_port": "30010",
-    "jekyll_app_url": "http://localhost:30010/",
+    "jekyll_app_port": "41010",
+    "jekyll_app_url": "http://localhost:41010/",
     "jekyll_config_file": "_config.yml",
-    "jekyll_port": "30000",
-    "jekyll_livereload_port": "30001",
+    "jekyll_port": "41000",
+    "jekyll_livereload_port": "41001",
     "jekyll_option_livereload": "--livereload",
     "jekyll_option_watch": "--watch",
     "jekyll_option_initial_build": "--skip-initial-build",

@@ -24,14 +24,20 @@ description:
 #
 defaults:
 
-  playbackRates:                        [ 0.25, 0.5, 1, 1.5, 2 ]
+  # ----------------------------------------------------------------------------
+  # VideoJS settings
+  # ----------------------------------------------------------------------------
+  playbackRates:
+    enabled:                            false
+    values:                             [ 0.25, 0.5, 1, 1.5, 2 ]
 
   # ----------------------------------------------------------------------------
-  # Player (Tech) options
+  # VideoJS Player (Tech) settings
   # ----------------------------------------------------------------------------
   players:
 
     youtube:
+
       autoplay:                         0
       controls:                         0
       cc_load_policy:                   0
@@ -44,7 +50,7 @@ defaults:
       loop:                             0
 
   # ----------------------------------------------------------------------------
-  # Plugin options
+  # VideoJS Plugin settings
   # ----------------------------------------------------------------------------
   plugins:
 
@@ -53,6 +59,7 @@ defaults:
 
     hotKeys:
       enabled:                          false
+
       volumeStep:                       0.1
       seekStep:                         15
       enableMute:                       true
@@ -65,8 +72,20 @@ defaults:
 
     skipButtons:
       enabled:                          false
+      surroundPlayButton:               false
+      
+      backwardIndex:                    1
+      forwardIndex:                     1
       forward:                          10
       backward:                         10
+
+    zoomButtons:
+      enabled:                          false
+
+      moveX:                            0
+      moveY:                            0
+      rotate:                           0
+      zoom:                             1
 
 # ------------------------------------------------------------------------------
 # END config
