@@ -1,0 +1,54 @@
+I have 2 variables var and @var in a Ruby source. What is the difference?
+
+Gemini
+--------------------------------------------------------------------------------
+
+In Ruby, var and @var represent different types of variables, each with its
+own scope and purpose:
+
+1. var (Local Variable):
+
+Scope: Limited to the current method or block.
+Usage: Used for temporary storage within a specific code block.
+Example:
+Ruby
+def my_method
+  var = 10
+  puts var  # Output: 10
+end
+
+
+2. @var (Instance Variable):
+
+Scope: Accessible within the entire instance of a class.
+Usage: Used to store data associated with a specific object.
+Example:
+Ruby
+class MyClass
+  def initialize
+    @var = 20
+  end
+
+  def my_method
+    puts @var  # Output: 20
+  end
+end
+
+
+Key Differences:
+
+Feature	var (Local Variable)	@var (Instance Variable)
+Scope	Method or block	Entire instance of a class
+Persistence	Temporary	Persistent throughout the object's lifetime
+Access	Directly within the scope	Using self or instance methods
+
+Summary
+-------
+
+* var  is for short-lived variables within a specific code block.
+
+* @var is for data that needs to be shared across multiple methods
+  within an object.
+
+By understanding these distinctions, you can effectively use the appropriate
+variable type in your Ruby code to manage data efficiently.

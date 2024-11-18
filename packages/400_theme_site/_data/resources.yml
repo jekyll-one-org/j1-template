@@ -1332,6 +1332,7 @@ resources:
         files:                          []
         js:                             [
                                           modules/videojs/js/video,
+                                          modules/videojs/js/plugins/controls/autocaption/autocaption,
                                           modules/videojs/js/plugins/controls/hotkeys/hotkeys,
                                           modules/videojs/js/plugins/controls/skipbuttons/skipbuttons,
                                           modules/videojs/js/plugins/controls/zoom/zoom,

@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
 # ~/_plugins/asciidoctor-extensions/youtube-block.rb
-# Asciidoctor extension for YouTube Videos
+# Asciidoctor extension for YouTube Video
 #
 # Product/Info:
 # https://jekyll.one
@@ -11,7 +11,15 @@
 # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
 # ------------------------------------------------------------------------------
 
-# Require Asciidoctor Extensions
+# Require RubyGems for managing yaml config files and data
+# ------------------------------------------------------------------------------
+require 'pathutil'
+require 'fileutils'
+require 'pathname'
+require 'json'
+require 'safe_yaml'
+
+# Require Asciidoctor Eextensions
 # ------------------------------------------------------------------------------
 require 'asciidoctor/extensions' unless RUBY_ENGINE == 'opal'
 include Asciidoctor
@@ -43,8 +51,24 @@ include Asciidoctor
 # See: https://www.datenschutz.org/youtube-nocookie/
 # ------------------------------------------------------------------------------
 
-# Register the Asciidoctor Extension
+#current_path                = File.expand_path(Dir.getwd)
+#default_config_path         = File.join(current_path, '/_data/modules/defaults')
+#user_config_path            = File.join(current_path, '/_data/modules')
+
+#videojs_config_file_name    = 'videojs.yml'
+#videojs_default_config_file = File.join(default_config_path, videojs_config_file_name)
+#videojs_user_config_file    = File.join(user_config_path, videojs_config_file_name)
+
+#@videojsDefaultSettings     = YAML.safe_load_file(videojs_default_config_file)
+#@videojsUserSettings        = YAML.safe_load_file(videojs_user_config_file)
+
+#videojsSettings             = @videojsUserSettings['settings'].merge(@videojsDefaultSettings['defaults'])
+
+# VideoJS config settings
 # ------------------------------------------------------------------------------
+#playbackRates               = videojsSettings['playbackRates']
+
+
 Asciidoctor::Extensions.register do
 
   class YouTubeBlockMacro < Extensions::BlockMacroProcessor
@@ -57,29 +81,8 @@ Asciidoctor::Extensions.register do
                   'custom_buttons' => true,
                   'role' => 'mt-3 mb-3'
 
-    def process parent, target, attributes    
+    def process parent, target, attributes
 
-      # ========================================================================
-      # load VideoJS configuration data (as NOT available in the website)
-      # ------------------------------------------------------------------------
-      #
-      current_path                = File.expand_path(Dir.getwd)
-      default_config_path         = File.join(current_path, '/_data/modules/defaults')
-      user_config_path            = File.join(current_path, '/_data/modules')
-
-      videojs_config_file_name    = 'videojs.yml'
-      videojs_default_config_file = File.join(default_config_path, videojs_config_file_name)
-      videojs_user_config_file    = File.join(user_config_path, videojs_config_file_name)
-
-      videojsDefaultSettings      = YAML::load(File.open(videojs_default_config_file))
-      videojsUserSettings         = YAML::load(File.open(videojs_user_config_file))
-      videojsDefaultSettingsJson  = videojsDefaultSettings.to_json;
-      videojsUserSettingsJson     = videojsUserSettings.to_json;
-
-      # ========================================================================
-      # set plugin specific data
-      # ------------------------------------------------------------------------
-      #
       chars           = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
       video_id        = (0...11).map { chars[rand(chars.length)] }.join
 
@@ -121,30 +124,6 @@ Asciidoctor::Extensions.register do
         <script>
           $(function() {
 
-            // =================================================================
-            // take over VideoJS configuration data (from ruby)
-            // -----------------------------------------------------------------            
-            var videojsDefaultConfigJson = '#{videojsDefaultSettingsJson}';
-            var videojsUserConfigJson    = '#{videojsUserSettingsJson}';
-
-            // create config objects from JSON
-            var videojsDefaultSettings   = JSON.parse(videojsDefaultConfigJson);
-            var videojsUserSettings      = JSON.parse(videojsUserConfigJson);
-
-            // merge config objects (jQuery)
-            var videojsConfig = $.extend(true, {}, videojsDefaultSettings.defaults, videojsUserSettings.settings);
-
-            // =================================================================
-            // VideoJS config settings
-            // -----------------------------------------------------------------            
-            const vjsPlaybackRates  = videojsConfig.playbackRates;
-            const piAutoCaption     = videojsConfig.plugins.autoCaption;
-            const piHotKeys         = videojsConfig.plugins.hotKeys;
-            const piSkipButtons     = videojsConfig.plugins.skipButtons;
-
-            // =================================================================
-            // helper functions
-            // -----------------------------------------------------------------            
             function addCaptionAfterImage(imageSrc) {
               const image = document.querySelector(`img[src="${imageSrc}"]`);
 
@@ -161,27 +140,27 @@ Asciidoctor::Extensions.register do
               }
             }
 
-            // =================================================================
-            // initialize the VideoJS player
-            // -----------------------------------------------------------------             
             var dependencies_met_page_ready = setInterval (function (options) {
               var pageState      = $('#content').css("display");
               var pageVisible    = (pageState == 'block') ? true : false;
               var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
               if (j1CoreFinished && pageVisible) {
-                var vjs_player = document.getElementById("#{video_id}");
-
                 addCaptionAfterImage('#{poster_image}');
 
-                // scroll page to the players top position
+                // scroll to player top position
                 // -------------------------------------------------------------
+                var vjs_player = document.getElementById("#{video_id}");
+
                 vjs_player.addEventListener('click', function(event) {
-                  const targetDiv         = document.getElementById("#{video_id}");
-                  const targetDivPosition = targetDiv.offsetTop;
-                  var scrollOffset        = (window.innerWidth >= 720) ? -130 : -110;
+                  event.preventDefault();
+                  event.stopPropagation();
+
+                  var scrollOffset = (window.innerWidth >= 720) ? -130 : -110;
 
                   // scroll player to top position
+                  const targetDiv         = document.getElementById("#{video_id}");
+                  const targetDivPosition = targetDiv.offsetTop;
                   window.scrollTo(0, targetDivPosition + scrollOffset);
                 }); // END EventListener 'click'
 
@@ -189,24 +168,33 @@ Asciidoctor::Extensions.register do
               }
             }, 10);
 
-            // customize the yt player (already) created
+            // set custom controls on vjs player
             // -----------------------------------------------------------------
             var dependencies_met_vjs_player_exist = setInterval (function (options) {
               var vjsPlayerExist          = document.getElementById("#{video_id}") ? true : false;
               var vjsPlayerCustomButtons  = ("#{custom_buttons}" === 'true') ? true : false;
 
               if (vjsPlayerExist && vjsPlayerCustomButtons) {
-                // apply player customization on 'player ready'
+
+                // apply custom controls on event 'player ready'
                 videojs("#{video_id}").ready(function() {
                   var vjsPlayer = this;
 
-                  // add VideoJS playbackRates
+                  // add playbackRates
                   //
-                  vjsPlayer.playbackRates(vjsPlaybackRates);
+                  vjsPlayer.playbackRates([0.25, 0.5, 1, 1.5, 2]);
+  
+                  // add autoCaption plugin
+                  //
+                  vjsPlayer.autoCaption({
+                    enabled: true,
+                  });
+                  // END autoCaption plugin
 
-                  // add VideoJS hotKeys plugin
+                  // add hotKeys plugin
                   //
                   vjsPlayer.hotKeys({
+                    enabled: true,
                     volumeStep: 0.1,
                     seekStep: 15,
                     enableMute: true,
@@ -217,8 +205,8 @@ Asciidoctor::Extensions.register do
                     alwaysCaptureHotkeys: true,
                     captureDocumentHotkeys: true,
                     documentHotkeysFocusElementFilter: e => e.tagName.toLowerCase() === "body",
-
-                    // Mimic seek behavior of VLC (default to: 15)
+  
+                    // Mimic VLC seek behavior (default to: 15)
                     //
                     seekStep: function(e) {
                       if (e.ctrlKey && e.altKey) {
@@ -231,23 +219,23 @@ Asciidoctor::Extensions.register do
                         return 15;
                       }
                     },
-
-                    // Enhance existing simple hotkeys by complex hotkeys
-                    //
+  
+                    // Enhance existing simple hotkey with a complex hotkey
                     fullscreenKey: function(e) {
                       // fullscreen with the F key or Ctrl+Enter
                       return ((e.which === 70) || (e.ctrlKey && e.which === 13));
                     }                 
-                  }); // END VideoJS hotKeys plugin
-
-                  // add VideoJS skipButtons plugin
+                  }); // END hotkeys plugin
+  
+                  // add skipButtons plugin
                   //
                   vjsPlayer.skipButtons({
+                    enabled:  true,
                     forward:  10,
                     backward: 10
-                  }); // END VideoJS skipButtons plugin
-
-                }); // END yt player ready (set custom controls)
+                  }); // END skipButtons plugin                
+  
+                }); // END player ready (set custom controls)
 
                 clearInterval(dependencies_met_vjs_player_exist);
               } // END if 'vjsPlayerExist'

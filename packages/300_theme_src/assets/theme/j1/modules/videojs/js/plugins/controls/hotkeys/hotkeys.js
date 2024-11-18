@@ -38,69 +38,76 @@
     module.exports = factory(videojs.default || videojs);
   }
 }(this, function (videojs) {
-  "use strict";
+  'use strict';
+
+  function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+  
+  var videojs__default = /*#__PURE__*/_interopDefaultLegacy(videojs);
+
   if (typeof window !== 'undefined') {
     window['videojs_hotkeys'] = { version: "0.2.28" };
   }
 
-  var hotkeys = function(options) {
-    var player = this;
-    var pEl = player.el();
-    var doc = document;
-    var def_options = {
-      volumeStep: 0.1,
-      seekStep: 5,
-      enableMute: true,
-      enableVolumeScroll: true,
-      enableHoverScroll: false,
-      enableFullscreen: true,
-      enableNumbers: true,
-      enableJogStyle: false,
-      alwaysCaptureHotkeys: false,
-      captureDocumentHotkeys: false,
-      documentHotkeysFocusElementFilter: function () { return false },
-      enableModifiersForNumbers: false,
-      enableInactiveFocus: true,
-      skipInitialFocus: false,
-      playPauseKey: playPauseKey,
-      rewindKey: rewindKey,
-      forwardKey: forwardKey,
-      volumeUpKey: volumeUpKey,
-      volumeDownKey: volumeDownKey,
-      muteKey: muteKey,
-      fullscreenKey: fullscreenKey,
-      customKeys: {}
+  var hotKeys = function(options) {
+    var player  = this;
+    var pEl     = player.el();
+    var doc     = document;
+
+    var default_settings = {
+      enabled:                            false,
+      volumeStep:                         0.1,
+      seekStep:                           5,
+      enableMute:                         true,
+      enableVolumeScroll:                 true,
+      enableHoverScroll:                  false,
+      enableFullscreen:                   true,
+      enableNumbers:                      true,
+      enableJogStyle:                     false,
+      alwaysCaptureHotkeys:               false,
+      captureDocumentHotkeys:             false,
+      documentHotkeysFocusElementFilter:  function () { return false },
+      enableModifiersForNumbers:          false,
+      enableInactiveFocus:                true,
+      skipInitialFocus:                   false,
+      playPauseKey:                       playPauseKey,
+      rewindKey:                          rewindKey,
+      forwardKey:                         forwardKey,
+      volumeUpKey:                        volumeUpKey,
+      volumeDownKey:                      volumeDownKey,
+      muteKey:                            muteKey,
+      fullscreenKey:                      fullscreenKey,
+      customKeys:                         {}
     };
 
-    var cPlay = 1,
-      cRewind = 2,
-      cForward = 3,
-      cVolumeUp = 4,
-      cVolumeDown = 5,
-      cMute = 6,
-      cFullscreen = 7;
+    var cPlay                             = 1,
+        cRewind                           = 2,
+        cForward                          = 3,
+        cVolumeUp                         = 4,
+        cVolumeDown                       = 5,
+        cMute                             = 6,
+        cFullscreen                       = 7;
 
     // Use built-in merge function from Video.js v5.0+ or v4.4.0+
     // videojs.mergeOptions is deprecated in V8 and will be removed in V9
     // var mergeOptions = videojs.mergeOptions || videojs.obj.merge;
     var mergeOptions = (videojs.VERSION <= "7.10.0") ? videojs.mergeOptions : videojs.obj.merge;
 
-    options = mergeOptions(def_options, options || {});
+    options = mergeOptions(default_settings, options || {});
 
-    var volumeStep = options.volumeStep,
-      seekStep = options.seekStep,
-      enableMute = options.enableMute,
-      enableVolumeScroll = options.enableVolumeScroll,
-      enableHoverScroll = options.enableHoverScroll,
-      enableFull = options.enableFullscreen,
-      enableNumbers = options.enableNumbers,
-      enableJogStyle = options.enableJogStyle,
-      alwaysCaptureHotkeys = options.alwaysCaptureHotkeys,
-      captureDocumentHotkeys = options.captureDocumentHotkeys,
-      documentHotkeysFocusElementFilter = options.documentHotkeysFocusElementFilter,
-      enableModifiersForNumbers = options.enableModifiersForNumbers,
-      enableInactiveFocus = options.enableInactiveFocus,
-      skipInitialFocus = options.skipInitialFocus;
+    var volumeStep                        = options.volumeStep,
+        seekStep                          = options.seekStep,
+        enableMute                        = options.enableMute,
+        enableVolumeScroll                = options.enableVolumeScroll,
+        enableHoverScroll                 = options.enableHoverScroll,
+        enableFull                        = options.enableFullscreen,
+        enableNumbers                     = options.enableNumbers,
+        enableJogStyle                    = options.enableJogStyle,
+        alwaysCaptureHotkeys              = options.alwaysCaptureHotkeys,
+        captureDocumentHotkeys            = options.captureDocumentHotkeys,
+        documentHotkeysFocusElementFilter = options.documentHotkeysFocusElementFilter,
+        enableModifiersForNumbers         = options.enableModifiersForNumbers,
+        enableInactiveFocus               = options.enableInactiveFocus,
+        skipInitialFocus                  = options.skipInitialFocus;
 
 //  var videojsVer = videojs.VERSION;
 
@@ -467,6 +474,6 @@
 
   // register plugin
   //
-  registerPlugin('hotkeys', hotkeys);
+  registerPlugin('hotKeys', hotKeys);
 
 }));

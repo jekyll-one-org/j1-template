@@ -49,6 +49,7 @@
     "@octokit/webhooks": "^6.1.0",
     "cross-var": "^1.1.0",
     "eslint": "^7.19.0",
+    "fs": "^0.0.1-security",
     "js-cookie": "^2.1.4",
     "js-yaml": "^4.1.0",
     "lite-url": "^1.0.5",

@@ -1,0 +1,72 @@
+# ------------------------------------------------------------------------------
+# ~/_data/modules/defaults/videojs.yml
+# Default configuration settings for J1 VideoJS module
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2023, 2024 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# Description
+#
+description:
+  title:                                J1 VideoJS
+  scope:                                Default settings
+  location:                             _data/modules/defaults/videojs.yml
+
+# ------------------------------------------------------------------------------
+# Default settings
+#
+defaults:
+
+  playbackRates:                        [ 0.25, 0.5, 1, 1.5, 2 ]
+
+  # ----------------------------------------------------------------------------
+  # Player (Tech) options
+  # ----------------------------------------------------------------------------
+  players:
+
+    youtube:
+      autoplay:                         0
+      controls:                         0
+      cc_load_policy:                   0
+      iv_load_policy:                   3
+      disablekb:                        1
+      enablejsapi:                      1
+      fs:                               0
+      rel:                              0
+      rel:                              0
+      loop:                             0
+
+  # ----------------------------------------------------------------------------
+  # Plugin options
+  # ----------------------------------------------------------------------------
+  plugins:
+
+    autoCaption:
+      enabled:                          false
+
+    hotKeys:
+      enabled:                          false
+      volumeStep:                       0.1
+      seekStep:                         15
+      enableMute:                       true
+      enableFullscreen:                 true
+      enableNumbers:                    false
+      enableVolumeScroll:               true
+      enableHoverScroll:                true
+      alwaysCaptureHotkeys:             true
+      captureDocumentHotkeys:           true
+
+    skipButtons:
+      enabled:                          false
+      forward:                          10
+      backward:                         10
+
+# ------------------------------------------------------------------------------
+# END config

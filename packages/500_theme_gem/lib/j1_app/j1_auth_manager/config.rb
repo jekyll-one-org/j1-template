@@ -158,10 +158,6 @@ module J1App
     end
   end
 
-
-
-
-
   # def self.provider_url(arg)
   #   provider_url = {
   #     'patreon'   => auth_config['provider']['provider_url']['patreon'],

@@ -20,12 +20,12 @@
 #   bundle install
 # ------------------------------------------------------------------------------
 # TIP:
-# If all packages needed are installed, a list of all gem and dependencies
+# When all packages needed are installed, a list of all gem and dependencies
 # installed for the bundle canbe created by running:
 #   bundle list
 # ------------------------------------------------------------------------------
 # NOTE:
-# If you see warnings like:
+# When you see warnings like:
 #   WARN: Unresolved specs during Gem::Specification.reset
 # you may need to cleanup your bundle by running:
 #   gem cleanup
@@ -37,57 +37,52 @@
 source 'https://rubygems.org'
 
 # ------------------------------------------------------------------------------
-# Specify your Ruby version if the J1 Project is used as an container-based
+# Specify your Ruby version when the J1 Project is used as an container-based
 # web application. This makes sure to use identical Ruby runtime environments
 # for BUILD and RUN (e.g. for Docker images, builds on Netlify or Heroku).
 # ------------------------------------------------------------------------------
-# NOTE:
-# Ruby v3.3.x currently NOT tested
-# ------------------------------------------------------------------------------
 #
-# ruby '3.2.5'
+# ruby '3.3.6'
 
 # ------------------------------------------------------------------------------
 # Jekyll
 # ------------------------------------------------------------------------------
 # NOTE:
-# J1 Theme is using Jekyll v4.0 and above
+# J1 Theme is using Jekyll v4
 #
 # ------------------------------------------------------------------------------
 # NOTE:
-# Use|Install a Jekyll version loaded from 'Github' (branch: master):
-#  gem 'jekyll', github: 'jekyll/jekyll'
-# ------------------------------------------------------------------------------
-# NOTE:
-# For default, the Jekyll GEM is loaded from REMOTE
-# ------------------------------------------------------------------------------
-# NOTE:
-# It seems the latest Jekyll version of 4.3.4 (Sep 2024) does NOT work
-# correctly on Windows. If Jekyll is run in mode 'serve' + 'livereload',
-# occasionally page reloads occur w/o any changes made to the site source.
+# Install Jekyll loaded from 'Github' (branch: master):
+#   gem 'jekyll', github: 'jekyll/jekyll'
+#
+# Install latest Jekyll V4 GEM from 'RubyGems' (remote)
+# gem 'jekyll', '~> 4.0'
+#
+# Install Jekyll version platform-specific:
+#
+# On Windows platforms, install e.g. older Jekyll GEM
+# install_if -> { RUBY_PLATFORM =~ /mswin/ } do
+#   gem 'jekyll', '= 4.3.3'
+# end
+#
+# On *nix and MacOS platforms, install e.g. latest Jekyll GEM
+# install_if -> { RUBY_PLATFORM =~ /(aix|darwin|linux|(net|free|open)bsd|cygwin|solaris|irix|hpux)/i } do
+#   gem 'jekyll', '~> 4.0'
+# end
+#
 # ------------------------------------------------------------------------------
 #
 gem 'jekyll', '= 4.3.3'
 
-# On Windows platforms, install older Jekyll GEM
-#install_if -> { RUBY_PLATFORM =~ /mswin/ } do
-#  gem 'jekyll', '= 4.3.3'
-#end
-
-# On *nix and MacOS platforms, install latest Jekyll GEM
-#install_if -> { RUBY_PLATFORM =~ /(aix|darwin|linux|(net|free|open)bsd|cygwin|solaris|irix|hpux)/i } do
-#  gem 'jekyll', '~> 4.0'
-#end
-
 # ------------------------------------------------------------------------------
-# Install Webrick GEM (internally used Web Server) if Ruby V3 is used
+# Install Webrick GEM (internally used Web Server) when Ruby V3 is used.
 #
 install_if -> { RUBY_VERSION =~ /3/ } do
   gem 'webrick', '~> 1.9'
 end
 
 # ------------------------------------------------------------------------------
-# Install GEM csv to suppress warnings in version 3.3 used with Jekyll.
+# Install GEM csv (to suppress warnings) when Ruby version >= 3.3 is used.
 #
 # NOTE: The GEM will no longer be part of the default gems starting
 # from Ruby 3.4.0
@@ -183,8 +178,9 @@ end
 # gem 'scss_lint', '~> 0.56.0', require: false
 #
 # ------------------------------------------------------------------------------
-gem 'sassc', '~> 2.4'
 gem 'bump', '~> 0.10'
+gem 'sassc', '~> 2.4'
+gem 'safe_yaml', '~> 1.0', '>= 1.0.5'
 
 # ------------------------------------------------------------------------------
 # Web Application specific RubyGems
@@ -194,7 +190,7 @@ gem 'bump', '~> 0.10'
 # Ruby Task Manager
 #
 # NOTE:
-# Enable the `rake` Gem if needed. For container-based apps, Rake can
+# Enable the `rake` Gem when needed. For container-based apps, Rake can
 # be used as a pre-processor engine running # tasks defined by a
 # Rakefile prior running the app|web.
 #
@@ -246,11 +242,11 @@ gem 'puma', '>= 6.0'
 # Runtime environment for applications
 #
 # NOTE:
-# If J1 is transformed into a (Rack and Sinatra based) Web
-# application, the site can be secured using user authentication
-# for accessing private pages. J1 is using the Omniauth stack for
-# authentication. For default, the Omniauth (authentication) strategies
-# for Github, Twitter, Facebook and Patreon are implemented.
+# When sformed into a (Rack and Sinatra based) Web application, the site 
+# can be secured using user authentication for accessing private pages.
+# J1 is using the Omniauth stack for authentication. For default, the
+# Omniauth (authentication) strategies for Github, Twitter, Facebook and
+# Patreon are implemented.
 #
 # ------------------------------------------------------------------------------
 gem 'rack', '~> 2.2', '>= 2.2.3'

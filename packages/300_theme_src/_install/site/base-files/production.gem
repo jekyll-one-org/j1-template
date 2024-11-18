@@ -45,49 +45,47 @@ source 'https://rubygems.org'
 # Ruby v3.3.x currently NOT tested
 # ------------------------------------------------------------------------------
 #
-# ruby '3.2.5'
+# ruby '3.3.6'
 
 # ------------------------------------------------------------------------------
 # Jekyll
 # ------------------------------------------------------------------------------
 # NOTE:
-# J1 Theme is using Jekyll v4.0 and above
+# J1 Theme is using Jekyll v4
 #
 # ------------------------------------------------------------------------------
 # NOTE:
-# Use|Install a Jekyll version loaded from 'Github' (branch: master):
-#  gem 'jekyll', github: 'jekyll/jekyll'
-# ------------------------------------------------------------------------------
-# NOTE:
-# For default, the Jekyll GEM is loaded from REMOTE
-# ------------------------------------------------------------------------------
-# NOTE:
-# It seems the latest Jekyll version of 4.3.4 (Sep 2024) does NOT work
-# correctly on Windows. If Jekyll is run in mode 'serve' + 'livereload',
-# occasionally page reloads occur w/o any changes made to the site source.
+# Install Jekyll loaded from 'Github' (branch: master):
+#   gem 'jekyll', github: 'jekyll/jekyll'
+#
+# Install latest Jekyll V4 GEM from 'RubyGems' (remote)
+# gem 'jekyll', '~> 4.0'
+#
+# Install Jekyll version platform-specific:
+#
+# On Windows platforms, install e.g. older Jekyll GEM
+# install_if -> { RUBY_PLATFORM =~ /mswin/ } do
+#   gem 'jekyll', '= 4.3.3'
+# end
+#
+# On *nix and MacOS platforms, install e.g. latest Jekyll GEM
+# install_if -> { RUBY_PLATFORM =~ /(aix|darwin|linux|(net|free|open)bsd|cygwin|solaris|irix|hpux)/i } do
+#   gem 'jekyll', '~> 4.0'
+# end
+#
 # ------------------------------------------------------------------------------
 #
-gem 'jekyll', '= 4.3.3'
-
-# On Windows platforms, install older Jekyll GEM
-#install_if -> { RUBY_PLATFORM =~ /mswin/ } do
-#  gem 'jekyll', '= 4.3.3'
-#end
-
-# On *nix and MacOS platforms, install latest Jekyll GEM
-#install_if -> { RUBY_PLATFORM =~ /(aix|darwin|linux|(net|free|open)bsd|cygwin|solaris|irix|hpux)/i } do
-#  gem 'jekyll', '~> 4.0'
-#end
+gem 'jekyll', '~> 4.0'
 
 # ------------------------------------------------------------------------------
-# Install Webrick GEM (internally used Web Server) if Ruby V3 is used
+# Install GEM csv to suppress warnings when Ruby version >= 3.3 is used.
 #
 install_if -> { RUBY_VERSION =~ /3/ } do
   gem 'webrick', '~> 1.9'
 end
 
 # ------------------------------------------------------------------------------
-# Install GEM csv to suppress warnings in version 3.3 used with Jekyll.
+# Install GEM csv (to suppress warnings) when Ruby version >= 3.3 is used.
 #
 # NOTE: The GEM will no longer be part of the default gems starting
 # from Ruby 3.4.0
@@ -198,12 +196,8 @@ end
 # gem 'scss_lint', '~> 0.56.0', require: false
 #
 # ------------------------------------------------------------------------------
-#
-# Required for Heroku, see support ticket: https://help.heroku.com/tickets/1198846
-# gem 'sass-embedded', '~> 1.57.1'
-
-gem 'sassc', '~> 2.4'
 gem 'bump', '~> 0.10'
+gem 'sassc', '~> 2.4'
 
 # ------------------------------------------------------------------------------
 # Web Application specific RubyGems

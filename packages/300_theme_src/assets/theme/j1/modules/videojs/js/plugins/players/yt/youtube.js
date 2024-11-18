@@ -121,27 +121,41 @@
     } // END createEl
 
     initYTPlayer() {
+
+      // Default YT Player settings
       var playerVars = {
         autoplay:         0,
         controls:         0,
+        cc_load_policy:   0,
+        iv_load_policy:   3,
         disablekb:        1,
+        enablejsapi:      1,
+        fs:               0,
         rel:              0,
-        loop:             this.options_.loop ? 1 : 0
+        rel:              0,
+        loop:             0
       };
 
       // Let the user set any YouTube parameter
       // https://developers.google.com/youtube/player_parameters?playerVersion=HTML5#Parameters
       // To use YouTube controls, you must use ytControls instead
-      // To use the loop or autoplay, use the video.js settings
+      // to use the loop or autoplay, use the video.js settings
       //
       if (typeof this.options_.autohide !== 'undefined') {
         playerVars.autohide = this.options_.autohide;
       }
 
-      if (typeof this.options_['cc_load_policy'] !== 'undefined') {
-        playerVars['cc_load_policy'] = this.options_['cc_load_policy'];
+      if (typeof this.options_.loop !== 'undefined') {
+        playerVars.loop = this.options_.loop;
       }
 
+      if (typeof this.options_['cc_load_policy'] !== 'undefined') {
+        playerVars.cc_load_policy = this.options_['cc_load_policy'];
+      }
+
+      if (typeof this.options_['cc_load_policy'] !== 'undefined') {
+        playerVars.iv_load_policy = this.options_['iv_load_policy'];
+      }
       if (typeof this.options_.ytControls !== 'undefined') {
         playerVars.controls = this.options_.ytControls;
       }
