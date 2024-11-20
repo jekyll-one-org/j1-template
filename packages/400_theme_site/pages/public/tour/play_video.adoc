@@ -146,7 +146,7 @@ Playback Technology. With the help of *plugins*, it is possible to present
 better user experience.
 
 [role="mt-4"]
-=== Local Video
+=== Native Video
 
 VideoJS provides a flexible and customizable platform for displaying and
 controlling MPEG 4 video content on websites and web applications.

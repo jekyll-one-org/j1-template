@@ -44,13 +44,15 @@ resource_options:
 // Set (local) page attributes here
 // -----------------------------------------------------------------------------
 // :page--attr:                         <attr-value>
-:images-dir:                            {imagesdir}/pages/roundtrip/100_present_images
+// :images-dir:                         {imagesdir}/pages/roundtrip/100_present_images
 
-// Attribute settings for section control
+// Attributes for section control
 //
-:ytp_fortnight:                         false
-:ytp_example:                           false
-
+:vjs_plugin_info:                       true
+:native_video:                          false
+:yt_video:                              true
+:vm_video:                              false
+:wt_video:                              fakse
 
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
@@ -70,31 +72,14 @@ audio tag `<audio>` for the new HTML5 audio audio standard.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
+
+ifeval::[{vjs_plugin_info} == true]
 [role="mt-5"]
-== Plugins
+== VJS Plugins
 
 The J1 Template provides a collection of plugins to enhance VJS players, such
 as by providing useful functions like additional buttons or advanced keyboard
 support to control a player by defined keys (hotkeys).
-
-[role="mt-4"]
-=== autoCaption
-
-The plugin automatically enables the caption or subtitle track to match the
-player's language best. The plugin name needs to be revised, as it has
-nothing to do with automatically generating captions. Language codes are
-considered case-insensitive. If one or more tracks have a `kind` of `captions`
-or `subtitles` with an exactly matching language code, the first will be
-selected.
-
-If there is no exact match, the first `captions` or `subtitles` track where
-the first part of the language code matches is selected, so `en-US` would
-match `en` or `en-gb`. If there is no match based on language, the first
-`captions` or `subtitles` track with `default` = `true` will be selected.
-
-The player language itself is either explicitly set as an option or is
-derived from the closest element with a `lang` attribute. See https://docs.videojs.com/tutorial-languages.html#determining-player-language[Video.js docs, {browser-window--new}].
-
 
 [role="mt-4"]
 === hotKeys
@@ -113,87 +98,6 @@ The *hotkeys* plugin for Video.js enables *keyboard hotkeys* when the
 * `Number keys` from *1-9* skip to a percentage of the video:
   1 is `10%` and 9 is `90%`.
 
-[role="mt-4 mb-5"]
-[NOTE]
-====
-Clicking any of the control buttons such as Play/Pause, Fullscreen,  or Mute,
-will remove focus on the player which appears to *break* the hotkeys.
-
-This is for accessibility reasons so that people who do not use or know about
-the hotkeys can still properly use the `Tab` key to highlight the control
-buttons and press `space` to toggle them.
-====
-
-*To restore focus*, just click on the video, or an empty part of the
-control bar at the bottom of the video player. *To override this behaviour*,
-set the flag `alwaysCaptureHotkeys` to `true`. This will *fix* hotkeys. For
-accessibility, the `Tab` key may be used in combination with the
-`Enter`|`Return` key to navigate and activate control buttons.
-
-[role="mt-4"]
-==== Options
-
-* `volumeStep` (decimal): The percentage to increase/decrease the volume
-   level when using the Up and Down Arrow keys (default: `0.1`)
-* `seekStep` (integer or function): The number of seconds to seek forward
-   and backwards when using the Right and Left Arrow keys, or a function
-   that generates an integer given the `KeyboardEvent` (default: `5`)
-* `enableMute` (boolean): Enables the volume mute to be toggle by pressing
-   the *M* key (default: `true`)
-* `enableVolumeScroll` (boolean): Enables increasing/decreasing the volume
-   by scrolling the mouse wheel (default: `true`)
-* `enableHoverScroll` (boolean): Only changes volume when the mouse is
-   hovering over the volume control elements. This works in connection with
-   `enableVolumeScroll` (default: `false`)
-* `enableFullscreen` (boolean): Enables toggling the video fullscreen by
-   pressing the *F* key (default: `true`)
-* `enableNumbers` (boolean): Enables seeking the video by pressing the number
-   keys (default `true`)
-* `enableModifiersForNumbers` (boolean): Enables the use of
-   Ctrl|Alt|Cmd + Number keys for skipping around in the video, instead of
-   switching browser tabs. This is enabled by default due to backwards
-   compatibility https://github.com/ctd1500/videojs-hotkeys/pull/35[PR #35]
-   (default: `true`)
-* `alwaysCaptureHotkeys` (boolean): Forces the capture of hotkeys, even when
-   control elements are focused.
-
-The *Enter|Return* key may be used instead to activate the control
-elements (default: `false`).
-
-[role="mt-4 mb-4"]
-[NOTE]
-====
-This feature may break accessibility, and cause unexpected behavior.
-====
-
-* `enableInactiveFocus` (boolean): This reassigns focus to the player when
-  the control bar fades out after a user has clicked a button on the
-  control bar (default: `true`)
-* `skipInitialFocus` (boolean): This stops focusing the player on initial
-  Play under unique autoplay situations. More information in
-  https://github.com/ctd1500/videojs-hotkeys/issues/44[Issue #44] (default: `false`)
-* `captureDocumentHotkeys` (boolean): Capture document keydown events to also
-  use hotkeys even if the player does not have focus. If you enable this option,
-  **you must** configure `documentHotkeysFocusElementFilter` (default: `false`)
-* `documentHotkeysFocusElementFilter` (function): Filter function to capture
-  document hotkeys (if `captureDocumentHotkeys` is enabled) depending on the
-  current focused element. For example, if you want to capture hotkeys when
-  the player is not focused and avoid conflicts when the user is focusing a
-  particular link: `documentHotkeysFocusElementFilter: e => e.tagName.toLowerCase() === 'body'` (default: `() => false`)
-* `enableJogStyle` (boolean): Enables seeking the video in a broadcast-style
-  jog by pressing the Up and Down Arrow keys.
-
-[WARNING]
-====
-`seekStep` will also need to be changed to get a proper broadcast-style jog.
- This feature and the changes for seekStep are explained a bit more in
- [PR #12](https://github.com/ctd1500/videojs-hotkeys/pull/12)
- Defaults to `false`.
-
-This isn't a feature for everyone, and enabling JogStyle will disable the
-volume hotkeys.
-====
-
 [role="mt-4"]
 === skipbuttons
 
@@ -201,156 +105,15 @@ The plugin *skipbuttons* add *VJS seek buttons* to the control bar. These
 buttons allow the user to skip forward or back by a configured number of
 seconds.
 
-[role="mt-4"]
-==== Options
-
-* `forward`, if a number greater than 0, a seek forward button will be added
-  which seeks that number of seconds
-* `back`, if a number greater than 0, a seek back button will be added which
-  seeks that number of seconds
-* `forwardIndex`, the position in the control bar to insert the button.
-  Defaults to `1`.
-* `backwardIndex`, the position in the control bar to insert the button.
-  Defaults to `1`.
-
-[role="mt-4"]
-==== Control position
-
-`forwardIndex` and `backwardIndex` set the posiiton of the button in the control
-bar. Note if both a back and forward button are used, the forward button is
-inserted first.
-
-Assuming the standard control bar, the play button is at index `0`. With the
-default index of `1` for both, the forward button is inserted after the
-play button, then the back button is inserted after the play button and
-before the forward button. Setting `backwardIndex` to `0` would place the back
-button before the play button instead, so they surround the play button.
 
 [role="mt-4"]
 === zoomButtons
 
 Adds a zoom button to player controlbar.
 
-[role="mt-4"]
-==== Methods
+endif::[]
 
-lorem:sentences[5]
-
-[role="mt-4"]
-===== zoom(value): void
-
-Zoom function
-
-- **value**
-	- type: `Number`
-
-[source, js]
-----
-const zoomPlugin = video.zoomPlugin();
-zoomPlugin.zoom(2);
-----
-
-[role="mt-4"]
-===== rotate(value): void
-
-Rotate function
-
-- **value**
-	- type: `Number` in deg
-
-[source, js]
-----
-const zoomPlugin = video.zoomPlugin();
-zoomPlugin.rotate(180);
-----
-
-[role="mt-4"]
-===== move(x, y): void
-
-Rotate function
-
-- **x**
-	- type: `Number`
-- **y**
-	- type: `Number`
-
-[source, js]
-const zoomPlugin = video.zoomPlugin();
-zoomPlugin.move(0, 0);
------
-
-[role="mt-4"]
-===== toggle(): void
-
-Open and close modal function
-
-[source, js]
-----
-const zoomPlugin = video.zoomPlugin();
-zoomPlugin.toggle();
-----
-
-[role="mt-4"]
-===== flip(signal): void
-
-Flip video image
-
-- **x**
-	- type: `String` use + or - for flip image
-
-[source, js]
-----
-const zoomPlugin = video.zoomPlugin();
-zoomPlugin.flip("-");
-----
-
-[role="mt-4"]
-==== Options
-
-Example:
-[source, js]
-----
-const zoomPlugin = video.zoomPlugin({
-	showZoom: true,
-	showMove: true,
-	showRotate: true,
-	gestureHandler: false
-});
-----
-
-* `showZoom` show/hide +- zoom buttons. default `true`
-* `showMove` show/hide up, left, right, reset and down buttons. default `true`
-* `showRotate` show/hide rotate and flip buttons. default `true`
-* `gestureHandler` enable gesture zoom drag and drop, wheel. default `false`
-
-[role="mt-4"]
-==== Events
-
-lorem:sentences[5]
-
-[role="mt-4"]
-===== listen(event, callback): void
-
-Listen events of the zoom plugin
-
-- **event**
-	- type: `String`
-	- options:
-	  - `'change'` when click in buttons modal
-	  - `'click'` when modal is opened or closed
-- **callback**
-	- type: `Function`
-
-[source, js]
-----
-const zoomPlugin = video.zoomPlugin();
-zoomPlugin.listen('click', () => {
-    console.log('click');
-});
-----
-
-
-////
+ifeval::[{build_in_video} == true]
 [role="mt-4"]
 == Built-in Player
 
@@ -360,24 +123,11 @@ without loading *external players*.
 
 .MP4 Video, Peck Pocketed
 video::/assets/video/html5/peck_pocketed.mp4[poster="/assets/video/poster/html5/peck_pocketed.jpg", opts="" role="mt-4 mb-5"]
-
-++++
-<div class="videoblock mb-5">
-  <div class="title">MP4 Video, Peck Pocketed</div>
-  <video controls
-    src="/assets/video/gallery/html5/video1.mp4"
-    poster="/assets/video/gallery/video1-poster.jpg">
-    Your browser does not support the video tag.
-  </video>
-</div>
-++++
-
-////
-
+endif::[]
 
 
 [role="mt-5"]
-== Players
+== VJS Players
 
 VideoJS is a *free-to-use* open-source JavaScript framework for building
 custom video players for the web. Implementing VideoJS for the J1 Template
@@ -389,15 +139,19 @@ Playback Technology. With the help of *plugins*, it is possible to present
 *different media* using the *same player*, the same look and feel for a
 better user experience.
 
-// [role="mt-4"]
-// === Local Video
+ifeval::[{native_video} == true]
+[role="mt-4"]
+=== Native Video
 
-// VideoJS provides a flexible and customizable platform for displaying and
-// controlling MPEG 4 video content on websites and web applications.
+VideoJS provides a flexible and customizable platform for displaying and
+controlling MPEG 4 video content on websites and web applications.
 
-// .Rolling Wild · MP4 Video
-// videojs::/assets/video//html5/rolling_wild.mp4[poster="/assets/video/poster/html5/rolling_wild.jpg", opts="" role="mt-4 mb-5"]
+.Rolling Wild · MP4 Video
+videojs::/assets/video//html5/rolling_wild.mp4[poster="/assets/video/poster/html5/rolling_wild.jpg", opts="" role="mt-4 mb-5"]
+endif::[]
 
+
+ifeval::[{yt_video} == true]
 [role="mt-4"]
 === YouTube
 
@@ -406,193 +160,11 @@ upload, view, share, and comment on videos. The platform provides services
 for people and organizations to publish various video content.
 
 .Fortnight (feat. Post Malone, Official Music Video) · Taylor Swift
-youtube::q3zqJs7JUCQ[poster="//img.youtube.com/vi/q3zqJs7JUCQ/maxresdefault.jpg" role="mt-4 mb-5"]
+// youtube::q3zqJs7JUCQ[start="00:01:00" poster="//img.youtube.com/vi/q3zqJs7JUCQ/maxresdefault.jpg" role="mt-4 mb-5"]
+youtube::q3zqJs7JUCQ[poster="//img.youtube.com/vi/q3zqJs7JUCQ/maxresdefault.jpg"]
+endif::[]
 
-////
-++++
-<div class="gallery-title">Adele · The Final Carpool Karaoke</div>
-<video
-  id="videojs_youtube_james"
-  class="video-js vjs-theme-uno"
-  controls
-  width="640" height="360"
-  poster="//img.youtube.com/vi/nV8UZJNBY6Y/maxresdefault.jpg"
-  data-setup='{
-    "fluid" : true,
-    "rel": 0,
-    "techOrder": [
-      "youtube", "html5"
-    ],
-    "sources": [{
-      "type": "video/youtube",
-      "src": "//youtube.com/watch?v=nV8UZJNBY6Y"
-    }],
-    "controlBar": {
-      "pictureInPictureToggle": false,               
-      "volumePanel": {
-        "inline": false
-      }
-    }
-  }'
->
-</video>
-++++
-
-++++
-<script id='control_videojs_youtube_james'>
-
-  function addCaptionAfterImage(imageSrc) {
-    const image = document.querySelector(`img[src="${imageSrc}"]`);
-    if (image) {
-    // create div|caption container
-    const newDiv = document.createElement('div');
-    newDiv.classList.add('caption');
-    newDiv.textContent = 'Adele · The Final Carpool Karaoke';
-    // insert div|caption container AFTER the image
-    image.parentNode.insertBefore(newDiv, image.nextSibling);
-    } else {
-    console.error(`Kein Bild mit src="${imageSrc}" gefunden.`);
-    }
-  }
-
-  // Tries to get the highest resolution thumbnail available for the video
-  function checkHighResPoster(imageSrc) {
-    var uri = imageSrc;
-
-    try {
-      var posterImage = new Image();
-      posterImage.onload = function() {
-        // Onload may still be called if YouTube returns the 120x90 error thumbnail
-        if('naturalHeight' in posterImage){
-          if (posterImage.naturalHeight <= 90 || posterImage.naturalWidth <= 120) {
-            return;
-          }
-        } else if(posterImage.height <= 90 || posterImage.width <= 120) {
-          return;
-        }
-        this.poster_ = uri;
-        this.trigger('posterchange');
-
-      }.bind(this); // END event onLoad
-
-      const image = document.querySelector(`img[src="${imageSrc}"]`);
-      if (image) {
-        // create div|caption container
-        const newDiv = document.createElement('div');
-        newDiv.classList.add('caption');
-        newDiv.textContent = 'Adele · The Final Carpool Karaoke';
-        // insert div|caption container AFTER the image
-//      image.parentNode.insertBefore(newDiv, image.nextSibling);
-        image.parentNode.insertBefore(newDiv, image);
-      } else {
-        console.error(`Kein Bild mit src="${imageSrc}" gefunden.`);
-      } // END if image
-      
-      image.onerror = function() {};
-      image.src     = uri;
-
-    } // END try
-
-    catch(event){}
-  } // END  checkHighResPoster
-
-  var dependencies_met_page_ready = setInterval (function (options) {
-    var pageState      = $('#content').css("display");
-    var pageVisible    = (pageState == 'block') ? true : false;
-    var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
-
-    if (j1CoreFinished && pageVisible) {
-      var captionImage = '//img.youtube.com/vi/nV8UZJNBY6Y/maxresdefault.jpg';
-      var vjs_player   = document.getElementById('videojs_youtube_james');
-
-      // onClick, scroll player to top position
-      //
-      vjs_player.addEventListener('click', function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        var scrollOffset = (window.innerWidth >= 720) ? -130 : -110;
-        const targetDiv         = document.getElementById('videojs_youtube_james');
-        const targetDivPosition = targetDiv.offsetTop;
-
-        window.scrollTo(0, targetDivPosition + scrollOffset);
-      }); // END EventListener onClick (scroll player to top position)
-
-      //  on video ready
-      //
-      videojs("videojs_youtube_james").ready(function() {
-        var videojsPlayer = this;
-
-//        if (captionImage.includes('img.youtube.com')) {
-//          captionImage = checkHighResPoster(captionImage);
-//        } else {
-//          addCaptionAfterImage(captionImage);
-//        }
-
-        // add playbackRates
-        videojsPlayer.playbackRates([0.25, 0.5, 1, 1.5, 2]);
-
-        // add hotkeys plugin
-        videojsPlayer.hotkeys({
-          volumeStep: 0.1,
-          seekStep: 15,
-          enableMute: true,
-          enableFullscreen: true,
-          enableNumbers: false,
-          enableVolumeScroll: true,
-          enableHoverScroll: true,
-          alwaysCaptureHotkeys: true,
-          captureDocumentHotkeys: true,
-          documentHotkeysFocusElementFilter: e => e.tagName.toLowerCase() === "body",
-
-          // Mimic VLC seek behavior (default to: 15)
-          seekStep: function(e) {
-            if (e.ctrlKey && e.altKey) {
-              return 5*60;
-            } else if (e.ctrlKey) {
-              return 60;
-            } else if (e.altKey) {
-              return 10;
-            } else {
-              return 15;
-            }
-          },
-
-          // Enhance existing simple hotkey with a complex hotkey
-          fullscreenKey: function(e) {
-            // fullscreen with the F key or Ctrl+Enter
-            return ((e.which === 70) || (e.ctrlKey && e.which === 13));
-          }                   
-
-        });
-
-        // add skipButtons plugin
-        videojsPlayer.skipButtons({
-        forward:  10,
-        backward: 10
-        });
-
-        // set start position of current video
-        //
-        var appliedOnce = false;
-        videojsPlayer.on("play", function() {
-          var startFromSecond = new Date('1970-01-01T' + "#{attributes['start']}" + 'Z').getTime() / 1000;
-          if (!appliedOnce) {
-            videojsPlayer.currentTime(startFromSecond);
-            appliedOnce = true;
-          }
-        });
-
-      }); // END player ready (set custom controls)
-
-      clearInterval(dependencies_met_page_ready);
-    } // END if CoreFinished && pageVisible
-  }, 10); // END dependencies_met_page_ready
-
-</script>
-++++
-////
-
-////
+ifeval::[{wt_video} == true]
 [role="mt-5"]
 == Wistia
 
@@ -605,8 +177,9 @@ should be considered a viable video platform.
 // wistia::29b0fbf547[poster="/assets/video/poster/wistia/wistia-black.jpg" role="mt-4 mb-4"]
 wistia::29b0fbf547[poster="auto" role="mt-4 mb-4"]
 // wistia::29b0fbf547[role="mt-4 mb-4"]
+endif::[]
 
-
+ifeval::[{vm_video} == true]
 [role="mt-5"]
 == Vimeo
 
@@ -627,4 +200,4 @@ vimeo::179528528[poster="/assets/video/poster/vimeo/kick_it_old_school.jpg" role
 For the *VJS Vimeo Tech*, native vjs controls (controllbar) are currently
 *NOT* supported. Instead, the controllbar of the Vimeo Player is shown.
 ====
-////
+endif::[]

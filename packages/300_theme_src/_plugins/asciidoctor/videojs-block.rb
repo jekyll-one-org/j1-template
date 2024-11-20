@@ -124,7 +124,8 @@ Asciidoctor::Extensions.register do
 
             // =================================================================
             // VideoJS player settings
-            // -----------------------------------------------------------------            
+            // -----------------------------------------------------------------
+            const vjsPlayerType     = 'native';
             const vjsPlaybackRates  = videojsConfig.playbackRates.values;
 
             // =================================================================
@@ -165,7 +166,7 @@ Asciidoctor::Extensions.register do
               if (j1CoreFinished && pageVisible) {
                 var vjs_player  = document.getElementById("#{video_id}");
                 var appliedOnce = false;
-                
+
                 // add|skip captions (on poster image)
                 if ('#{caption_enabled}' === 'true') {
                   addCaptionAfterImage('#{poster_image}');
@@ -176,11 +177,13 @@ Asciidoctor::Extensions.register do
                   var vjsPlayer = this;
 
                   // add|skip playbackRates
+                  //
                   if (videojsConfig.playbackRates.enabled) {
                     vjsPlayer.playbackRates(vjsPlaybackRates);
                   }
 
                   // add|skip hotKeys plugin
+                  //
                   if (piHotKeys.enabled) {
                     vjsPlayer.hotKeys({
                       volumeStep:                         piHotKeys.volumeStep,
@@ -193,43 +196,52 @@ Asciidoctor::Extensions.register do
                       alwaysCaptureHotkeys:               piHotKeys.alwaysCaptureHotkeys,
                       captureDocumentHotkeys:             piHotKeys.captureDocumentHotkeys,
                       documentHotkeysFocusElementFilter:  e => e.tagName.toLowerCase() === "body",
-  
+
                       // Mimic VLC seek behavior (default to: 15)
-                      if (piHotKeys.mimicVlcSeek) {
-                        seekStep: function(e) {
-                          if (e.ctrlKey && e.altKey) {
-                            return 5*60;
-                          } else if (e.ctrlKey) {
-                            return 60;
-                          } else if (e.altKey) {
-                            return 10;
-                          } else {
-                            return 15;
-                          }
-                        },
-                      }
-  
+                      seekStep: function(e) {
+                        if (e.ctrlKey && e.altKey) {
+                          return 5*60;
+                        } else if (e.ctrlKey) {
+                          return 60;
+                        } else if (e.altKey) {
+                          return 10;
+                        } else {
+                          return 15;
+                        }
+                      },
+
                       // Enhance existing simple hotkey by complex hotkeys
-                      if (piHotKeys.fullScreenKey) {
-                        fullscreenKey: function(e) {
-                          // fullscreen with the F key or Ctrl+Enter
-                          return ((e.which === 70) || (e.ctrlKey && e.which === 13));
-                        },  
-                      }
-  
+                      fullscreenKey: function(e) {
+                        // fullscreen with the F key or Ctrl+Enter
+                        return ((e.which === 70) || (e.ctrlKey && e.which === 13));
+                      },  
+
                     });
                   }
 
                   // add|skip skipButtons plugin
                   if (piSkipButtons.enabled) {
+                    var backwardIndex = piSkipButtons.backward;
+                    var forwardIndex  = piSkipButtons.forwardIndex;
+
+                    // property 'surroundPlayButton' takes precendence
+                    //
+                    if (piSkipButtons.surroundPlayButton) {
+                      var backwardIndex = 0;
+                      var forwardIndex  = 1;
+                    }
+
                     vjsPlayer.skipButtons({
-                      forward:  piSkipButtons.forward,
-                      backward: piSkipButtons.backward
+                      backwardIndex:  backwardIndex,
+                      forwardIndex:   forwardIndex,
+                      backward:       piSkipButtons.backward,
+                      forward:        piSkipButtons.forward,
                     });
                   }
 
                   // add|skip zoomButtons plugin
-                  if (piZoomButtons.enabled) {
+                  //
+                  if (piZoomButtons.enabled && vjsPlayerType === 'native') {
                     vjsPlayer.zoomButtons({
                       moveX:  piZoomButtons.moveX,
                       moveY:  piZoomButtons.moveY,
@@ -247,6 +259,7 @@ Asciidoctor::Extensions.register do
                       appliedOnce = true;
                     }
                   });
+
                 });
 
                 // scroll page to player top position

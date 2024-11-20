@@ -1,0 +1,28 @@
+
+How to disable captions (subtitles) on a youtube video using the
+Player API used for iframe Embeds?
+
+Gemini
+--------------------------------------------------------------------------------
+
+Unfortunately, there isn't a direct way to disable captions using the
+YouTube Player API.
+
+The Player API provides control over various aspects of the video player,
+but it doesn't offer granular control over caption visibility. This is likely
+because YouTube aims to provide an inclusive experience for all users,
+including those who rely on captions for accessibility.
+
+However, you can explore these indirect approaches:
+
+cc_load_policy:
+    This parameter can be used to control the initial visibility of captions.
+    However, it doesn't completely disable them. It only determines whether
+    captions are shown by default.
+    Users can still manually enable or disable them.
+
+Here's an example of how to embed a YouTube video with the cc_load_policy
+parameter set to 0, which means captions are initially hidden:
+
+HTML
+<iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID?cc_load_policy=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> 1    

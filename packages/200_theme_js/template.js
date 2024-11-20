@@ -65,6 +65,7 @@ window.j1.core.parseContent             = require('./js/speak2me/parse-content.j
 window.j1.core.navigator                = require('./js/navigator/navigator.js');
 window.j1.core.asciidoctor              = require('./js/asciidoctor/asciidoctor.js');
 window.j1.core.scrollSmooth             = require('./js/scroll-smooth/scroll-smooth.js');
+window.j1.modules                       = {};
 
 // Following source objects|modules are *implicetly* forced to be
 // exposed for run-time to the global namespace (window).

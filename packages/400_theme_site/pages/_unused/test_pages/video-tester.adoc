@@ -64,6 +64,8 @@ audio tag `<audio>` for the new HTML5 audio audio standard.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
+
+ifeval::[{build_in_video} == true]
 [role="mt-4"]
 == Built-in Player
 
@@ -73,20 +75,231 @@ without loading *external players*.
 
 .MP4 Video, Peck Pocketed
 video::/assets/video/html5/peck_pocketed.mp4[poster="/assets/video/poster/html5/peck_pocketed.jpg", opts="" role="mt-4 mb-5"]
+endif::[]
+
+
+[role="mt-5"]
+== VJS Players
+
+VideoJS is a *free-to-use* open-source JavaScript framework for building
+custom video players for the web. Implementing VideoJS for the J1 Template
+supports local video and several platforms, such as YouTube, Vimeo, Wistia,
+or Dailymotion, for presenting videos *online*.
+
+For *online sources*, VideoJS uses plugins, such as the so-called VJS
+Playback Technology. With the help of *plugins*, it is possible to present
+*different media* using the *same player*, the same look and feel for a
+better user experience.
+
+ifeval::[{native_video} == true]
+[role="mt-4"]
+=== Native Video
+
+VideoJS provides a flexible and customizable platform for displaying and
+controlling MPEG 4 video content on websites and web applications.
+
+.Rolling Wild · MP4 Video
+videojs::/assets/video//html5/rolling_wild.mp4[poster="/assets/video/poster/html5/rolling_wild.jpg", opts="" role="mt-4 mb-5"]
+endif::[]
+
+
+ifeval::[{yt_video} == true]
+[role="mt-4"]
+=== YouTube
+
+YouTube is a popular online video-sharing platform that allows users to
+upload, view, share, and comment on videos. The platform provides services
+for people and organizations to publish various video content.
+
+.Fortnight (feat. Post Malone, Official Music Video) · Taylor Swift
+youtube::q3zqJs7JUCQ[poster="//img.youtube.com/vi/q3zqJs7JUCQ/maxresdefault.jpg" role="mt-4 mb-5"]
+endif::[]
 
 ////
 ++++
-<div class="videoblock mb-5">
-  <div class="title">MP4 Video, Peck Pocketed</div>
-  <video controls
-    src="/assets/video/gallery/html5/video1.mp4"
-    poster="/assets/video/gallery/video1-poster.jpg">
-    Your browser does not support the video tag.
-  </video>
-</div>
+<div class="gallery-title">Adele · The Final Carpool Karaoke</div>
+<video
+  id="videojs_youtube_james"
+  class="video-js vjs-theme-uno"
+  controls
+  width="640" height="360"
+  poster="//img.youtube.com/vi/nV8UZJNBY6Y/maxresdefault.jpg"
+  data-setup='{
+    "fluid" : true,
+    "rel": 0,
+    "techOrder": [
+      "youtube", "html5"
+    ],
+    "sources": [{
+      "type": "video/youtube",
+      "src": "//youtube.com/watch?v=nV8UZJNBY6Y"
+    }],
+    "controlBar": {
+      "pictureInPictureToggle": false,               
+      "volumePanel": {
+        "inline": false
+      }
+    }
+  }'
+>
+</video>
+++++
+
+++++
+<script id='control_videojs_youtube_james'>
+
+  function addCaptionAfterImage(imageSrc) {
+    const image = document.querySelector(`img[src="${imageSrc}"]`);
+    if (image) {
+    // create div|caption container
+    const newDiv = document.createElement('div');
+    newDiv.classList.add('caption');
+    newDiv.textContent = 'Adele · The Final Carpool Karaoke';
+    // insert div|caption container AFTER the image
+    image.parentNode.insertBefore(newDiv, image.nextSibling);
+    } else {
+    console.error(`Kein Bild mit src="${imageSrc}" gefunden.`);
+    }
+  }
+
+  // Tries to get the highest resolution thumbnail available for the video
+  function checkHighResPoster(imageSrc) {
+    var uri = imageSrc;
+
+    try {
+      var posterImage = new Image();
+      posterImage.onload = function() {
+        // Onload may still be called if YouTube returns the 120x90 error thumbnail
+        if('naturalHeight' in posterImage){
+          if (posterImage.naturalHeight <= 90 || posterImage.naturalWidth <= 120) {
+            return;
+          }
+        } else if(posterImage.height <= 90 || posterImage.width <= 120) {
+          return;
+        }
+        this.poster_ = uri;
+        this.trigger('posterchange');
+
+      }.bind(this); // END event onLoad
+
+      const image = document.querySelector(`img[src="${imageSrc}"]`);
+      if (image) {
+        // create div|caption container
+        const newDiv = document.createElement('div');
+        newDiv.classList.add('caption');
+        newDiv.textContent = 'Adele · The Final Carpool Karaoke';
+        // insert div|caption container AFTER the image
+//      image.parentNode.insertBefore(newDiv, image.nextSibling);
+        image.parentNode.insertBefore(newDiv, image);
+      } else {
+        console.error(`Kein Bild mit src="${imageSrc}" gefunden.`);
+      } // END if image
+      
+      image.onerror = function() {};
+      image.src     = uri;
+
+    } // END try
+
+    catch(event){}
+  } // END  checkHighResPoster
+
+  var dependencies_met_page_ready = setInterval (function (options) {
+    var pageState      = $('#content').css("display");
+    var pageVisible    = (pageState == 'block') ? true : false;
+    var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
+
+    if (j1CoreFinished && pageVisible) {
+      var captionImage = '//img.youtube.com/vi/nV8UZJNBY6Y/maxresdefault.jpg';
+      var vjs_player   = document.getElementById('videojs_youtube_james');
+
+      // onClick, scroll player to top position
+      //
+      vjs_player.addEventListener('click', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var scrollOffset = (window.innerWidth >= 720) ? -130 : -110;
+        const targetDiv         = document.getElementById('videojs_youtube_james');
+        const targetDivPosition = targetDiv.offsetTop;
+
+        window.scrollTo(0, targetDivPosition + scrollOffset);
+      }); // END EventListener onClick (scroll player to top position)
+
+      //  on video ready
+      //
+      videojs("videojs_youtube_james").ready(function() {
+        var videojsPlayer = this;
+
+//        if (captionImage.includes('img.youtube.com')) {
+//          captionImage = checkHighResPoster(captionImage);
+//        } else {
+//          addCaptionAfterImage(captionImage);
+//        }
+
+        // add playbackRates
+        videojsPlayer.playbackRates([0.25, 0.5, 1, 1.5, 2]);
+
+        // add hotkeys plugin
+        videojsPlayer.hotkeys({
+          volumeStep: 0.1,
+          seekStep: 15,
+          enableMute: true,
+          enableFullscreen: true,
+          enableNumbers: false,
+          enableVolumeScroll: true,
+          enableHoverScroll: true,
+          alwaysCaptureHotkeys: true,
+          captureDocumentHotkeys: true,
+          documentHotkeysFocusElementFilter: e => e.tagName.toLowerCase() === "body",
+
+          // Mimic VLC seek behavior (default to: 15)
+          seekStep: function(e) {
+            if (e.ctrlKey && e.altKey) {
+              return 5*60;
+            } else if (e.ctrlKey) {
+              return 60;
+            } else if (e.altKey) {
+              return 10;
+            } else {
+              return 15;
+            }
+          },
+
+          // Enhance existing simple hotkey with a complex hotkey
+          fullscreenKey: function(e) {
+            // fullscreen with the F key or Ctrl+Enter
+            return ((e.which === 70) || (e.ctrlKey && e.which === 13));
+          }                   
+
+        });
+
+        // add skipButtons plugin
+        videojsPlayer.skipButtons({
+        forward:  10,
+        backward: 10
+        });
+
+        // set start position of current video
+        //
+        var appliedOnce = false;
+        videojsPlayer.on("play", function() {
+          var startFromSecond = new Date('1970-01-01T' + "#{attributes['start']}" + 'Z').getTime() / 1000;
+          if (!appliedOnce) {
+            videojsPlayer.currentTime(startFromSecond);
+            appliedOnce = true;
+          }
+        });
+
+      }); // END player ready (set custom controls)
+
+      clearInterval(dependencies_met_page_ready);
+    } // END if CoreFinished && pageVisible
+  }, 10); // END dependencies_met_page_ready
+
+</script>
 ++++
 ////
 
+ifeval::[{wt_video} == true]
 [role="mt-5"]
 == Wistia
 
@@ -99,8 +312,9 @@ should be considered a viable video platform.
 // wistia::29b0fbf547[poster="/assets/video/poster/wistia/wistia-black.jpg" role="mt-4 mb-4"]
 wistia::29b0fbf547[poster="auto" role="mt-4 mb-4"]
 // wistia::29b0fbf547[role="mt-4 mb-4"]
+endif::[]
 
-
+ifeval::[{vm_video} == true]
 [role="mt-5"]
 == Vimeo
 
@@ -121,3 +335,4 @@ vimeo::179528528[poster="/assets/video/poster/vimeo/kick_it_old_school.jpg" role
 For the *VJS Vimeo Tech*, native vjs controls (controllbar) are currently
 *NOT* supported. Instead, the controllbar of the Vimeo Player is shown.
 ====
+endif::[]

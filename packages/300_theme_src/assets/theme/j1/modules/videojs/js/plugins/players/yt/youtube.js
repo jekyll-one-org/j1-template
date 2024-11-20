@@ -122,25 +122,30 @@
 
     initYTPlayer() {
 
+      var vjsOptions    = j1.modules.videojs.options;
+      var playersParams = vjsOptions.players.youtube;
+
       // Default YT Player settings
       var playerVars = {
-        autoplay:         0,
-        controls:         0,
-        cc_load_policy:   0,
-        iv_load_policy:   3,
-        disablekb:        1,
-        enablejsapi:      1,
-        fs:               0,
-        rel:              0,
-        rel:              0,
-        loop:             0
+        autoplay:         playersParams.autoplay,
+        controls:         playersParams.controls,
+        cc_load_policy:   playersParams.cc_load_policy,
+        disablekb:        playersParams.disablekb,
+        enablejsapi:      playersParams.enablejsapi,    
+        fs:               playersParams.fs,
+        iv_load_policy:   playersParams.iv_load_policy,
+        loop:             playersParams.loop,
+        modestbranding:   playersParams.modestbranding,
+        rel:              playersParams.rel,
+        showinfo:         playersParams.showinfo
       };
 
       // Let the user set any YouTube parameter
       // https://developers.google.com/youtube/player_parameters?playerVersion=HTML5#Parameters
       // To use YouTube controls, you must use ytControls instead
       // to use the loop or autoplay, use the video.js settings
-      //
+      //------------------------------------------------------------------------
+
       if (typeof this.options_.autohide !== 'undefined') {
         playerVars.autohide = this.options_.autohide;
       }
@@ -207,9 +212,10 @@
       }
 
       // Deprecated
-      // if (typeof this.options_.modestbranding !== 'undefined') {
-      //   playerVars.modestbranding = this.options_.modestbranding;
-      // }
+      //
+      if (typeof this.options_.modestbranding !== 'undefined') {
+        playerVars.modestbranding = this.options_.modestbranding;
+      }
 
       if (typeof this.options_.playlist !== 'undefined') {
         playerVars.playlist = this.options_.playlist;
@@ -241,6 +247,7 @@
       }
 
       // Allow undocumented options to be passed along via customVars
+      //
       if (typeof this.options_.customVars !== 'undefined') {
         var customVars = this.options_.customVars;
         Object.keys(customVars).forEach((key) => {

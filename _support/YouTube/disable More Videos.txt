@@ -1,0 +1,49 @@
+
+How to remove/disable "More Videos" when pausing an embedded
+youtube video using custom JavaScript?
+
+Gemini
+--------------------------------------------------------------------------------
+
+
+Understanding the Challenge
+
+When you pause a YouTube video embedded on a webpage, a "More Videos" section
+often appears below the video player. This can be visually distracting,
+especially if you don't want users to be redirected to other videos.
+
+While there isn't a direct API to disable the "More Videos" section, we can
+leverage JavaScript to manipulate the DOM and CSS to achieve the desired
+effect.
+
+!!! Does NOT work !!!
+
+Identify the "More Videos" Element:
+
+Use browser developer tools to inspect the HTML structure of the YouTube
+player when paused. Look for a specific class or ID that uniquely identifies
+the "More Videos" section.
+
+Once you've identified the element, you can use JavaScript to set its display
+style to none (Hide the Element).
+
+JavaScript
+const moreVideosElement = document.getElementById('more-videos-id');
+if (moreVideosElement) {
+    moreVideosElement.style.display = 'none';
+}
+
+
+Example: Using YouTube's Player API
+
+If you're using YouTube's Player API to embed the video, you can combine
+it with the DOM manipulation technique:
+
+JavaScript
+// Assuming you've already initialized the player
+player.addEventListener('pause', function() {
+  const moreVideosElement = document.getElementById('more-videos-id');
+  if (moreVideosElement) {
+      moreVideosElement.style.display = 'none';
+  }
+});

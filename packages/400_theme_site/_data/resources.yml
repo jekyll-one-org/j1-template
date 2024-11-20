@@ -1329,7 +1329,7 @@ resources:
                                           modules/videojs/css/themes/sea,
                                           modules/videojs/css/themes/uno
                                         ]
-        files:                          []
+        files:                          [ adapter/js/videojs.js ]
         js:                             [
                                           modules/videojs/js/video,
                                           modules/videojs/js/plugins/controls/autocaption/autocaption,
@@ -1340,7 +1340,7 @@ resources:
                                           modules/videojs/js/plugins/players/vm/vimeo,
                                           modules/videojs/js/plugins/players/yt/youtube
                                         ]
-        init_function:                  []
+        init_function:                  [ j1.adapter.videojs.init]
 
   # ----------------------------------------------------------------------------
   # TikToc Player, Version v1.0.11
