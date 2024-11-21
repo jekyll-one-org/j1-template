@@ -288,7 +288,7 @@ settings:
 
           muted:                        false
           preload:                      true
-#         videoStart:                   ["00:00:30", "00:01:30"]                  # start time (hh:mm:ss) for [video1, video2]
+#         videoStart:                   ["00:00:30", "00:01:30"]                # start time (hh:mm:ss) for [video1, video2]
 
           controls:                     true
           controlBar:
@@ -307,8 +307,11 @@ settings:
             skipButtonsPlugin:
               enabled:                  true
               options:
-                forward:                15
-                backward:               15
+                forward:                5
+                backward:               5
+                backwardIndex:          0
+                forwardIndex:           1
+
  
             zoomPlugin:
               enabled:                  true
@@ -912,9 +915,11 @@ settings:
           # skipButtonsPlugin:
           #   enabled:                  true
           #   options:
-          #     forward:                15
-          #     backward:               15
-          #
+          #     forward:                5
+          #     backward:               5
+          #     backwardIndex:          0
+          #     forwardIndex:           1
+          # 
           # zoomPlugin:
           #   enabled:                  true
           #   options:

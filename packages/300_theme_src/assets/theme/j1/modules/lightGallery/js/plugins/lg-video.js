@@ -696,10 +696,12 @@
                 } // END if videoStart
 
                 // add playbackRates (only available for VJS)
-                videojsPlayer.playbackRates(playbackRates);
+                if (videojsPlayer.playbackRates !== undefined) {
+                    videojsPlayer.playbackRates(playbackRates);
+                }
 
                 // add hotkeys Plugin (only available for VJS)
-                if (hotkeysPlugin !== undefined && hotkeysPlugin.enabled) {
+                if (hotkeysPlugin !== undefined && hotkeysPlugin.enabled && videojsPlayer.hotkeys !== undefined) {
                   hotkeysPlugin.options = __assign(__assign({}, hotkeysPluginDefaults), hotkeysPlugin.options);
                   videojsPlayer.hotkeys({
                     volumeStep: 0.1,
@@ -730,17 +732,19 @@
 
                 // add skipButtons Plugin (only available for VJS)
                 // -------------------------------------------------------------
-                if (skipButtonsPlugin !== undefined && skipButtonsPlugin.enabled) {
+                if (skipButtonsPlugin !== undefined && skipButtonsPlugin.enabled && videojsPlayer.skipButtons !== undefined) {
                     skipButtonsPlugin.options = __assign(__assign({}, skipButtonsPluginDefaults), skipButtonsPlugin.options);
                     videojsPlayer.skipButtons({
-                      backward: skipButtonsPlugin.options.backward,
-                      forward:  skipButtonsPlugin.options.forward
+                      backward:         skipButtonsPlugin.options.backward,
+                      forward:          skipButtonsPlugin.options.forward,
+                      backwardIndex:    skipButtonsPlugin.options.backwardIndex,
+                      forwardIndex:     skipButtonsPlugin.options.forwardIndex
                     });
                 } // END if skipButtons Plugin enabled
 
                 // add zoom Plugin (only available for VJS)
                 // -------------------------------------------------------------
-                if (zoomPlugin !== undefined && zoomPlugin.enabled) {
+                if (zoomPlugin !== undefined && zoomPlugin.enabled && videojsPlayer.zoomButtons !== undefined) {
                   zoomPlugin.options = __assign(__assign({}, zoomPluginDefaults), zoomPlugin.options);
                   videojsPlayer.zoomButtons({
                     moveX:  zoomPlugin.options.moveX,
