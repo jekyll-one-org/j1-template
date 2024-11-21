@@ -55,8 +55,8 @@
 
     var default_settings = {
       enabled:                            false,
-      volumeStep:                         0.1,
       seekStep:                           5,
+      volumeStep:                         0.1,
       enableMute:                         true,
       enableVolumeScroll:                 true,
       enableHoverScroll:                  false,
@@ -65,7 +65,7 @@
       enableJogStyle:                     false,
       alwaysCaptureHotkeys:               false,
       captureDocumentHotkeys:             false,
-      documentHotkeysFocusElementFilter:  function () { return false },
+      hotkeysFocusElementFilter:          function () { return false },
       enableModifiersForNumbers:          false,
       enableInactiveFocus:                true,
       skipInitialFocus:                   false,
@@ -104,7 +104,7 @@
         enableJogStyle                    = options.enableJogStyle,
         alwaysCaptureHotkeys              = options.alwaysCaptureHotkeys,
         captureDocumentHotkeys            = options.captureDocumentHotkeys,
-        documentHotkeysFocusElementFilter = options.documentHotkeysFocusElementFilter,
+        hotkeysFocusElementFilter         = options.hotkeysFocusElementFilter,
         enableModifiersForNumbers         = options.enableModifiersForNumbers,
         enableInactiveFocus               = options.enableInactiveFocus,
         skipInitialFocus                  = options.skipInitialFocus;
@@ -166,7 +166,7 @@
         var activeEl = doc.activeElement;
         if (
           alwaysCaptureHotkeys ||
-          (captureDocumentHotkeys && documentHotkeysFocusElementFilter(activeEl)) ||
+          (captureDocumentHotkeys && hotkeysFocusElementFilter(activeEl)) ||
 
           activeEl == pEl ||
           activeEl == pEl.querySelector('.vjs-tech') ||

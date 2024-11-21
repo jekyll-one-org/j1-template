@@ -70,15 +70,20 @@ defaults:
     hotKeys:
       enabled:                          false
 
-      volumeStep:                       0.1
       seekStep:                         15
-      enableMute:                       true
+      volumeStep:                       0.1
+      
+      alwaysCaptureHotkeys:             true
+      captureDocumentHotkeys:           false                                   # Capture document keydown events even if the player does not have focus (default: false)
+#     hotkeysFocusElementFilter:        'e => e.tagName.toLowerCase() === "body"'
+      hotkeysFocusElementFilter:        'function () { return false }'          # default
       enableFullscreen:                 true
+      enableHoverScroll:                true
+      enableInactiveFocus:              true                                   
+      enableMute:                       true
       enableNumbers:                    false
       enableVolumeScroll:               true
-      enableHoverScroll:                true
-      alwaysCaptureHotkeys:             true
-      captureDocumentHotkeys:           true
+      skipInitialFocus:                 false                                   # stops focusing the player on initial Play (default: false)
 
     skipButtons:
       enabled:                          false

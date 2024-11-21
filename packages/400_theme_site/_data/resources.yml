@@ -1337,6 +1337,7 @@ resources:
                                           modules/videojs/js/plugins/controls/skipbuttons/skipbuttons,
                                           modules/videojs/js/plugins/controls/zoom/zoom,
                                           modules/videojs/js/plugins/players/dm/dailymotion,
+                                          modules/videojs/js/plugins/players/wt/wistia,
                                           modules/videojs/js/plugins/players/vm/vimeo,
                                           modules/videojs/js/plugins/players/yt/youtube
                                         ]

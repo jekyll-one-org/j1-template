@@ -50,9 +50,9 @@ resource_options:
 //
 :vjs_plugin_info:                       true
 :native_video:                          false
-:yt_video:                              true
+:yt_video:                              false
 :vm_video:                              false
-:wt_video:                              fakse
+:wt_video:                              true
 
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
@@ -166,7 +166,7 @@ endif::[]
 
 ifeval::[{wt_video} == true]
 [role="mt-5"]
-== Wistia
+=== Wistia
 
 Wistia is a marketing software and video hosting platform for business-to-business
 marketers. Free or paid plans are available. While Wistia may not be the

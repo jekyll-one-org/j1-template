@@ -38,9 +38,16 @@ settings:
     hotKeys:
       enabled:                          true
 
+      # Plugin options
+      # ------------------------------------------------------------------------
+      enableInactiveFocus:              false                                   # mutiple players on same page: reassign focus to the player when the control bar fades out
+
     skipButtons:
       enabled:                          true
-      surroundPlayButton:               true
+
+      # Plugin options
+      # ------------------------------------------------------------------------      
+      surroundPlayButton:               true                                    # surround buttons side-by-side the play button
 
     zoomButtons:
       enabled:                          true
