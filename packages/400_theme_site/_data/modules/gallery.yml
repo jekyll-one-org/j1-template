@@ -312,7 +312,6 @@ settings:
                 backwardIndex:          0
                 forwardIndex:           1
 
- 
             zoomPlugin:
               enabled:                  true
               options:

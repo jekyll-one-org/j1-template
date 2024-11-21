@@ -613,40 +613,43 @@
         };
 
         Video.prototype.controlVideo = function (index, action) {
+            const vjsOptions = j1.modules.videojs.options;
             var trackSrc,
                 $videoElement, videoInfo, videoStart, videoData, videoId,
                 videojsPlayer, playbackRates,
                 hotkeysPlugin, skipButtonsPlugin, zoomPlugin;
 
-            var playbackRatesDefaults    = '[0.25, 0.5, 1, 1.5, 2]';
+            var playbackRatesDefaults    = vjsOptions.playbackRates.values;
             var chapterTracksEnabled     = false;
 
             var hotkeysPluginDefaults    = {
-              volumeStep:                 0.1,
-              seekStep:                   5,
-              enableMute:                 true,
-              enableVolumeScroll:         true,
-              enableHoverScroll:          false,
-              enableFullscreen:           true,
-              enableNumbers:              true,
-              enableJogStyle:             false,
-              alwaysCaptureHotkeys:       false,
-              captureDocumentHotkeys:     false,
-              enableModifiersForNumbers:  false,
-              enableInactiveFocus:        true,
-              skipInitialFocus:           false
+                volumeStep:                 vjsOptions.plugins.hotKeys.volumeStep,
+                seekStep:                   vjsOptions.plugins.hotKeys.seekStep,
+                enableMute:                 vjsOptions.plugins.hotKeys.enableMute,
+                enableVolumeScroll:         vjsOptions.plugins.hotKeys.enableVolumeScroll,
+                enableHoverScroll:          vjsOptions.plugins.hotKeys.enableHoverScroll,
+                enableFullscreen:           vjsOptions.plugins.hotKeys.enableFullscreen,
+                enableNumbers:              vjsOptions.plugins.hotKeys.enableNumbers,
+                enableJogStyle:             vjsOptions.plugins.hotKeys.enableJogStyle,
+                alwaysCaptureHotkeys:       vjsOptions.plugins.hotKeys.alwaysCaptureHotkeys,
+                captureDocumentHotkeys:     vjsOptions.plugins.hotKeys.captureDocumentHotkeys,
+                enableModifiersForNumbers:  vjsOptions.plugins.hotKeys.enableModifiersForNumbers,
+                enableInactiveFocus:        vjsOptions.plugins.hotKeys.enableInactiveFocus,
+                skipInitialFocus:           vjsOptions.plugins.hotKeys.skipInitialFocus
             };
 
             var skipButtonsPluginDefaults  = {
-              backward:                     10,
-              forward:                      10
+              backward:                     vjsOptions.plugins.skipButtons.backward,
+              forward:                      vjsOptions.plugins.skipButtons.forward,
+              backwardIndex:                0,
+              forwardIndex:                 1
             };
 
             var zoomPluginDefaults = {
-                moveX:                      0,
-                moveY:                      0,
-                rotate:                     0,
-                zoom:                       1
+                moveX:                      vjsOptions.plugins.zoomButtons.moveX,
+                moveY:                      vjsOptions.plugins.zoomButtons.moveY,
+                rotate:                     vjsOptions.plugins.zoomButtons.rotate,
+                zoom:                       vjsOptions.plugins.zoomButtons.zoom
             };
 
             videoInfo     = this.core.galleryItems[index].__slideVideoInfo || {};
@@ -698,6 +701,8 @@
                 // add playbackRates (only available for VJS)
                 if (videojsPlayer.playbackRates !== undefined) {
                     videojsPlayer.playbackRates(playbackRates);
+                } else {
+
                 }
 
                 // add hotkeys Plugin (only available for VJS)

@@ -79,8 +79,10 @@ defaults:
       hotkeysFocusElementFilter:        'function () { return false }'          # default
       enableFullscreen:                 true
       enableHoverScroll:                true
-      enableInactiveFocus:              true                                   
+      enableInactiveFocus:              true
+      enableJogStyle:                   false                                 
       enableMute:                       true
+      enableModifiersForNumbers:        true
       enableNumbers:                    false
       enableVolumeScroll:               true
       skipInitialFocus:                 false                                   # stops focusing the player on initial Play (default: false)
