@@ -617,12 +617,12 @@
             var trackSrc,
                 $videoElement, videoInfo, videoStart, videoData, videoId,
                 videojsPlayer, playbackRates,
-                hotkeysPlugin, skipButtonsPlugin, zoomPlugin;
+                hotKeysPlugin, skipButtonsPlugin, zoomPlugin;
 
-            var playbackRatesDefaults    = vjsOptions.playbackRates.values;
-            var chapterTracksEnabled     = false;
+            var playbackRatesDefaults = vjsOptions.playbackRates.values;
+            var chapterTracksEnabled  = false;
 
-            var hotkeysPluginDefaults    = {
+            var hotKeysPluginDefaults    = {
                 volumeStep:                 vjsOptions.plugins.hotKeys.volumeStep,
                 seekStep:                   vjsOptions.plugins.hotKeys.seekStep,
                 enableMute:                 vjsOptions.plugins.hotKeys.enableMute,
@@ -639,10 +639,10 @@
             };
 
             var skipButtonsPluginDefaults  = {
-              backward:                     vjsOptions.plugins.skipButtons.backward,
-              forward:                      vjsOptions.plugins.skipButtons.forward,
-              backwardIndex:                0,
-              forwardIndex:                 1
+                backward:                     vjsOptions.plugins.skipButtons.backward,
+                forward:                      vjsOptions.plugins.skipButtons.forward,
+                backwardIndex:                0,
+                forwardIndex:                 1
             };
 
             var zoomPluginDefaults = {
@@ -661,157 +661,190 @@
             // chapter tracks only available for VJS
             //
             if (this.core.galleryItems[this.core.index].video !== undefined && videoInfo.html5) {
-              videoData = JSON.parse(this.core.galleryItems[this.core.index].video);
-              if (videoData.tracks !== undefined && videoData.tracks.length > 0) {
-                for (var i=0; i<videoData.tracks.length; i++) {
-                  if (videoData.tracks[i].kind == 'chapters') {
-                    trackSrc = videoData.tracks[i].src;
-                    chapterTracksEnabled = true;
-                  }
-                }
-              } // END if videoData.tracks
+                videoData = JSON.parse(this.core.galleryItems[this.core.index].video);
 
-              if ($videoElement.selector !== undefined) {
-                videoId       = $videoElement.selector.id;
-                videojsPlayer = videojs(videoId);
-              } else {
-                videojsPlayer = 'unknown';
-              }
-
-              if (videojsPlayer !== 'unknown') {
-
-                // added VJS Plugins hotkeys|skipButtons|zoom, playbackRates
-                // -------------------------------------------------------------
-                hotkeysPlugin     = this.settings.videojsOptions.controlBar.hotkeysPlugin;
-                skipButtonsPlugin = this.settings.videojsOptions.controlBar.skipButtonsPlugin;
-                zoomPlugin        = this.settings.videojsOptions.controlBar.zoomPlugin;
-                playbackRates     = (this.settings.videojsOptions.controlBar.playbackRates !== undefined) ? this.settings.videojsOptions.controlBar.playbackRates : playbackRatesDefaults;
-
-                //  jadams, 2024-01-22: added video start position
-                // -------------------------------------------------------------
-                if (this.settings.videojsOptions.videoStart !== undefined) {
-                  videoStart = this.settings.videojsOptions.videoStart[index];
-                  videojsPlayer.on("play", function() {
-                    var startFromSecond = new Date('1970-01-01T' + videoStart + 'Z').getTime() / 1000;
-                    videojsPlayer.currentTime(startFromSecond);
-
-                  }); // END on event play
-                } // END if videoStart
-
-                // add playbackRates (only available for VJS)
-                if (videojsPlayer.playbackRates !== undefined) {
-                    videojsPlayer.playbackRates(playbackRates);
-                } else {
-
-                }
-
-                // add hotkeys Plugin (only available for VJS)
-                if (hotkeysPlugin !== undefined && hotkeysPlugin.enabled && videojsPlayer.hotkeys !== undefined) {
-                  hotkeysPlugin.options = __assign(__assign({}, hotkeysPluginDefaults), hotkeysPlugin.options);
-                  videojsPlayer.hotkeys({
-                    volumeStep: 0.1,
-                    seekStep: 15,
-                    enableMute: true,
-                    enableFullscreen: true,
-                    enableNumbers: false,
-                    enableVolumeScroll: true,
-                    enableHoverScroll: true,
-                    alwaysCaptureHotkeys: true,
-                    captureDocumentHotkeys: true,
-                    documentHotkeysFocusElementFilter: e => e.tagName.toLowerCase() === "body",
-
-                    // Mimic VLC seek behavior (default to: 15)
-                    seekStep: function(e) {
-                      if (e.ctrlKey && e.altKey) {
-                        return 5*60;
-                      } else if (e.ctrlKey) {
-                        return 60;
-                      } else if (e.altKey) {
-                        return 10;
-                      } else {
-                        return 15;
-                      }
-                    }
-                  });
-                } // END if hotkeysPlugin enabled
-
-                // add skipButtons Plugin (only available for VJS)
-                // -------------------------------------------------------------
-                if (skipButtonsPlugin !== undefined && skipButtonsPlugin.enabled && videojsPlayer.skipButtons !== undefined) {
-                    skipButtonsPlugin.options = __assign(__assign({}, skipButtonsPluginDefaults), skipButtonsPlugin.options);
-                    videojsPlayer.skipButtons({
-                      backward:         skipButtonsPlugin.options.backward,
-                      forward:          skipButtonsPlugin.options.forward,
-                      backwardIndex:    skipButtonsPlugin.options.backwardIndex,
-                      forwardIndex:     skipButtonsPlugin.options.forwardIndex
-                    });
-                } // END if skipButtons Plugin enabled
-
-                // add zoom Plugin (only available for VJS)
-                // -------------------------------------------------------------
-                if (zoomPlugin !== undefined && zoomPlugin.enabled && videojsPlayer.zoomButtons !== undefined) {
-                  zoomPlugin.options = __assign(__assign({}, zoomPluginDefaults), zoomPlugin.options);
-                  videojsPlayer.zoomButtons({
-                    moveX:  zoomPlugin.options.moveX,
-                    moveY:  zoomPlugin.options.moveY,
-                    rotate: zoomPlugin.options.rotate,
-                    zoom:   zoomPlugin.options.zoom
-                  });
-                } // END if zoom Plugin enabled
-
-                // chapter track processing (only available for VJS)
-                // -------------------------------------------------------------
-                if (chapterTracksEnabled) {
-                  var parser  = new WebVTTParser();
-                  var markers = [];
-
-                  function cb_load (data /* ,textStatus, jqXHR */ ) {
-                    var tree = parser.parse(data, 'metadata');
-                    var marker;
-
-                    // add chapter tracks to markers array
-                    for (var i=0; i<tree.cues.length; i++) {
-                      marker = { time: tree.cues[i].startTime, label: tree.cues[i].text };
-                      markers.push(marker);
-                    }
-                  }; // END function cb_load 
-
-                  // load chapter tracks
-                  // -----------------------------------------------------------
-                  loadVtt(trackSrc, cb_load);
-
-                  // add chapter tracks on play
-                  videojsPlayer.on("play", function() {
-                    videojsPlayer.currentTime(videoStart);
-
-                    var total    = videojsPlayer.duration();
-                    var timeline = $(videojsPlayer.controlBar.progressControl.children_[0].el_);
-
-                    // add chapter tracks on timeline (delayed)
-                    setTimeout (function() {
-                      var markers_loaded = setInterval (function () {
-                        if (markers.length) {
-                          for (var i=0; i<markers.length; i++) {
-                            var left = (markers[i].time / total * 100) + '%';
-                            var time = markers[i].time;
-                            var el   = $('<div class="vjs-chapter-marker" style="left: ' +left+ '" data-time="' +time+ '"> <span>' +markers[i].label+ '</span></div>');
-
-                            el.click(function() {
-                              videojsPlayer.currentTime($(this).data('time'));
-                            });
-
-                            timeline.append(el);
-                          }
-                          clearInterval(markers_loaded);
+                if (videoData.tracks !== undefined && videoData.tracks.length > 0) {
+                    for (var i=0; i<videoData.tracks.length; i++) {
+                        if (videoData.tracks[i].kind == 'chapters') {
+                            trackSrc = videoData.tracks[i].src;
+                            chapterTracksEnabled = true;
                         }
-                      }, 10);
-                    }, 1000 );
+                    }
+                } // END if videoData.tracks
 
-                  }); // END on "play"
+                if ($videoElement.selector !== undefined) {
+                    videoId       = $videoElement.selector.id;
+                    videojsPlayer = videojs(videoId);
+                } else {
+                    videojsPlayer = 'unknown';
+                }
 
-                } // END if chapterTracksEnabled
+                if (videojsPlayer !== 'unknown') {
 
-              } // END if videojsPlayer is defined
+                    // added VJS Plugins hotKeys|skipButtons|zoom, playbackRates
+                    // -------------------------------------------------------------
+                    hotKeysPlugin     = this.settings.videojsOptions.controlBar.hotKeysPlugin;
+                    skipButtonsPlugin = this.settings.videojsOptions.controlBar.skipButtonsPlugin;
+                    zoomPlugin        = this.settings.videojsOptions.controlBar.zoomPlugin;
+                    playbackRates     = (this.settings.videojsOptions.controlBar.playbackRates !== undefined) ? this.settings.videojsOptions.controlBar.playbackRates : playbackRatesDefaults;
+
+                    //  jadams, 2024-01-22: added video start position
+                    // -------------------------------------------------------------
+                    if (this.settings.videojsOptions.videoStart !== undefined) {
+                        videoStart = this.settings.videojsOptions.videoStart[index];
+                         videojsPlayer.on("play", function() {
+                            var startFromSecond = new Date('1970-01-01T' + videoStart + 'Z').getTime() / 1000;
+                            videojsPlayer.currentTime(startFromSecond);
+                        }); // END on event play
+                    } // END if videoStart
+
+                    // add playbackRates (only available for VJS)
+                    if (videojsPlayer.playbackRates !== undefined) {
+                        videojsPlayer.playbackRates(playbackRates);
+                    }
+
+                    // add hotkeys Plugin (only available for VJS)
+                    if (hotKeysPlugin !== undefined && hotKeysPlugin.enabled && videojsPlayer.hotKeys !== undefined) {
+
+                        // merge objects
+                        hotKeysPlugin.options = __assign(__assign({}, hotKeysPluginDefaults), hotKeysPlugin.options);
+
+                        // prevent multiple plugin instances
+                        var hotKeysActive = false;
+                        if (videojsPlayer.activePlugins_ !== undefined && videojsPlayer.activePlugins_.hotKeys !== undefined) {
+                            hotKeysActive = videojsPlayer.activePlugins_.hotKeys;
+                        }
+
+                        if (!hotKeysActive) {
+                            videojsPlayer.hotKeys({
+                                volumeStep:                         hotKeysPlugin.options.volumeStep,
+                                seekStep:                           hotKeysPlugin.options.seekStep,
+                                enableMute:                         hotKeysPlugin.options.enableMute,
+                                enableFullscreen:                   hotKeysPlugin.options.enableFullscreen,
+                                enableNumbers:                      hotKeysPlugin.options.enableNumbers,
+                                enableVolumeScroll:                 hotKeysPlugin.options.enableVolumeScroll,
+                                enableHoverScroll:                  hotKeysPlugin.options.enableHoverScroll,
+                                alwaysCaptureHotkeys:               hotKeysPlugin.options.alwaysCaptureHotkeys,
+                                captureDocumentHotkeys:             hotKeysPlugin.options.captureDocumentHotkeys,
+                                documentHotkeysFocusElementFilter:  hotKeysPlugin.options.documentHotkeysFocusElementFilter,
+
+                                // Mimic VLC seek behavior (default to: 15)
+                                seekStep: function(e) {
+                                    if (e.ctrlKey && e.altKey) {
+                                        return 5*60;
+                                    } else if (e.ctrlKey) {
+                                        return 60;
+                                    } else if (e.altKey) {
+                                        return 10;
+                                    } else {
+                                        return 15;
+                                    }
+                                }
+
+                            });
+                        } // END if hotKeysActive
+
+                    } // END if hotKeysPlugin enabled
+
+                    // add skipButtons Plugin (only available for VJS)
+                    // -------------------------------------------------------------
+                    if (skipButtonsPlugin !== undefined && skipButtonsPlugin.enabled && videojsPlayer.skipButtons !== undefined) {
+                        // merge objects
+                        skipButtonsPlugin.options = __assign(__assign({}, skipButtonsPluginDefaults), skipButtonsPlugin.options);
+
+                        // prevent multiple plugin instances
+                        var skipButtonsActive = false;
+                        if (videojsPlayer.activePlugins_ !== undefined && videojsPlayer.activePlugins_.skipButtons !== undefined) {
+                            skipButtonsActive = videojsPlayer.activePlugins_.skipButtons;
+                        }
+
+                        if (!skipButtonsActive) {
+                            videojsPlayer.skipButtons({
+                                backward:         skipButtonsPlugin.options.backward,
+                                forward:          skipButtonsPlugin.options.forward,
+                                backwardIndex:    skipButtonsPlugin.options.backwardIndex,
+                                forwardIndex:     skipButtonsPlugin.options.forwardIndex
+                            });
+                        }
+
+                    } // END if skipButtons Plugin enabled
+
+                    // add zoom Plugin (only available for VJS)
+                    // -----------------------------------------------------------------
+                    if (zoomPlugin !== undefined && zoomPlugin.enabled && videojsPlayer.zoomButtons !== undefined) {
+                        // merge objects
+                        zoomPlugin.options = __assign(__assign({}, zoomPluginDefaults), zoomPlugin.options);
+
+                        // prevent multiple plugin instances
+                        var zoomButtonsActive = false;
+                        if (videojsPlayer.activePlugins_ !== undefined && videojsPlayer.activePlugins_.zoomButtons !== undefined) {
+                            zoomButtonsActive  = videojsPlayer.activePlugins_.zoomButtons;
+                        }
+                        
+                        if (!zoomButtonsActive) {
+                            videojsPlayer.zoomButtons({
+                                moveX:  zoomPlugin.options.moveX,
+                                moveY:  zoomPlugin.options.moveY,
+                                rotate: zoomPlugin.options.rotate,
+                                zoom:   zoomPlugin.options.zoom
+                            });
+                        }
+
+                    } // END if zoom Plugin enabled
+
+                    // chapter track processing (only available for VJS)
+                    // -----------------------------------------------------------------
+                    if (chapterTracksEnabled) {
+                        var parser  = new WebVTTParser();
+                        var markers = [];
+
+                        function cb_load (data /* ,textStatus, jqXHR */ ) {
+                            var tree = parser.parse(data, 'metadata');
+                            var marker;
+
+                            // add chapter tracks to markers array
+                            for (var i=0; i<tree.cues.length; i++) {
+                                marker = { time: tree.cues[i].startTime, label: tree.cues[i].text };
+                                markers.push(marker);
+                            }
+                        }; // END function cb_load 
+
+                        // load chapter tracks
+                        // -------------------------------------------------------------
+                        loadVtt(trackSrc, cb_load);
+
+                        // add chapter tracks on play
+                        videojsPlayer.on("play", function() {
+                            videojsPlayer.currentTime(videoStart);
+
+                            var total    = videojsPlayer.duration();
+                            var timeline = $(videojsPlayer.controlBar.progressControl.children_[0].el_);
+
+                            // add chapter tracks on timeline (delayed)
+                            setTimeout (function() {
+                                var markers_loaded = setInterval (function () {
+                                    if (markers.length) {
+                                        for (var i=0; i<markers.length; i++) {
+                                            var left = (markers[i].time / total * 100) + '%';
+                                            var time = markers[i].time;
+                                            var el   = $('<div class="vjs-chapter-marker" style="left: ' +left+ '" data-time="' +time+ '"> <span>' +markers[i].label+ '</span></div>');
+
+                                            el.click(function() {
+                                                videojsPlayer.currentTime($(this).data('time'));
+                                            });
+
+                                            timeline.append(el);
+                                        }
+                                        clearInterval(markers_loaded);
+                                    }
+                                }, 10); // END markers_loaded
+                            }, 1000 ); // END setTimeout
+
+                        }); // END on "play"
+
+                    } // END if chapterTracksEnabled
+
+                } // END if videojsPlayer is defined
 
             } // END if videoInfo.html5
 
@@ -861,7 +894,8 @@
                     console.warn('lightGallery: Make sure you have included //fast.wistia.com/assets/external/E-v1.js');
                 }
             }
-        };
+
+        }; // END controlVideo
 
         Video.prototype.loadVideoOnPosterClick = function ($el, forcePlay) {
             var _this = this;

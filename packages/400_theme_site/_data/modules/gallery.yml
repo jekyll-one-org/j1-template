@@ -299,7 +299,7 @@ settings:
             volumePanel:
               inline:                   false
 
-            hotkeysPlugin:
+            hotKeysPlugin:
               enabled:                  true
               options:
                 volumeStep:             0.2
@@ -906,7 +906,7 @@ settings:
             volumePanel:
               inline:                   false
 
-          # hotkeysPlugin:
+          # hotKeysPlugin:
           #   enabled:                  true
           #   options:
           #     volumeStep:             0.2

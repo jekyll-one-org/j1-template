@@ -41,6 +41,7 @@ settings:
       # Plugin options
       # ------------------------------------------------------------------------
       enableInactiveFocus:              false                                   # mutiple players on same page: reassign focus to the player when the control bar fades out
+#     hotkeysFocusElementFilter:        'e => e.tagName.toLowerCase() === "body"'      
 
     skipButtons:
       enabled:                          true

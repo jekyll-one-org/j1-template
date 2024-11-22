@@ -75,7 +75,6 @@ defaults:
       
       alwaysCaptureHotkeys:             true
       captureDocumentHotkeys:           false                                   # Capture document keydown events even if the player does not have focus (default: false)
-#     hotkeysFocusElementFilter:        'e => e.tagName.toLowerCase() === "body"'
       hotkeysFocusElementFilter:        'function () { return false }'          # default
       enableFullscreen:                 true
       enableHoverScroll:                true

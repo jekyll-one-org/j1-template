@@ -9,8 +9,7 @@ regenerate:                             true
  # ~/assets/theme/j1/adapter/js/videojs.js
  # Liquid template to adapt the videojs module
  #
- # Product/Info:
- # https://jekyll.one
+ # Product/Info://  # https://jekyll.one
  # Copyright (C) 2023, 2024 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
@@ -19,7 +18,7 @@ regenerate:                             true
  # Test data:
  #  {{ liquid_var | debug }}
  #  videojs_options:  {{ videojs_options | debug }}
- # -----------------------------------------------------------------------------
+ # --------------------------------------------------------------------------
 {% endcomment %}
 
 {% comment %} Liquid procedures
@@ -40,12 +39,12 @@ regenerate:                             true
 {% assign modules             = site.data.modules %}
 
 {% comment %} Set config data (settings only)
--------------------------------------------------------------------------------- {% endcomment %}
+------------------------------------------------------------------------------- {% endcomment %}
 {% assign videojs_defaults    = modules.defaults.videojs.defaults %}
 {% assign videojs_settings    = modules.videojs.settings %}
 
 {% comment %} Set config options (settings only)
--------------------------------------------------------------------------------- {% endcomment %}
+------------------------------------------------------------------------------- {% endcomment %}
 {% assign videojs_options        = videojs_defaults | merge: videojs_settings %}
 
 
