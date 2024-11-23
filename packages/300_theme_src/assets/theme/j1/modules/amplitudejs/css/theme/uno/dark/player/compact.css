@@ -118,7 +118,7 @@ div.amplitude-mute {
   cursor: pointer;
   width: 25px;
   height: 19px;
-  margin-left: 6px;
+  margin-left: 40px;
 }
 
 div#compact_player_control_container
@@ -460,7 +460,7 @@ span.song-number-now-playing {
   width: 5px;
   height: 20px;
   margin-top: 8px;
-  margin-right: 12px;
+  margin-right: 20px;
 }
 
 div.compact-player-playlist

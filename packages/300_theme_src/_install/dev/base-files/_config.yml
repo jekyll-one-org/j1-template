@@ -371,15 +371,13 @@ collections_dir:                        collections
 include:                                [ .htaccess ]
 exclude:                                [
                                           log, vendor, node_modules, utilsrv,
-                                          '.sass-cache', '.vscode', '.idea',
-                                          'pages/public/jupyter/notebooks/j1',
-                                          'pages/public/jupyter/notebooks/nbi-docs',
                                           History.markdown, README.md,
                                           changelog.md, Rakefile,
                                           Gemfile, Gemfile.lock, Guardfile,
                                           dev_config.yml, prod_config.yml,
-                                          yarn.lock, config.ru,
+                                          yarn.lock, config.ru, jekyll.log,
                                           package-lock.json, package.json,
+                                          '.sass-cache', '.vscode', '.idea',
                                           '*.ignore',
                                           '*.bat', '*.sh', '*.tmp', 'dot.*',
                                           '*.log', '*.ppt*', '*.pdf',

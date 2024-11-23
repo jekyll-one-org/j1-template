@@ -42,10 +42,10 @@
      inkscape:pagecheckerboard="true"
      inkscape:showpageshadow="false"
      inkscape:zoom="30.625"
-     inkscape:cx="32.620408"
+     inkscape:cx="15.314286"
      inkscape:cy="12"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:window-x="376"
+     inkscape:window-y="5"
      inkscape:window-maximized="0"
      inkscape:current-layer="svg13"
      inkscape:deskcolor="#d1d1d1" />
@@ -56,32 +56,8 @@
      id="desc4">Created with Sketch.</desc>
   <defs
      id="defs6" />
-  <g
-     id="Screens"
-     stroke="none"
-     stroke-width="1"
-     fill="none"
-     fill-rule="evenodd"
-     transform="matrix(0.9877551,0,0,0.98639455,0.16326531,0.19591837)">
-    <g
-       id="Player"
-       transform="translate(-88,-528)"
-       fill="#ffffff">
-      <g
-         id="Controls"
-         transform="translate(24,504)">
-        <g
-           id="Skip-Previous"
-           transform="translate(52,12)">
-          <path
-             d="m 12,12 h 4 v 24 h -4 z m 7,12 17,12 V 12 Z"
-             id="Shape" />
-        </g>
-      </g>
-    </g>
-  </g>
   <path
-     d="m 39.657143,19.379592 q -3.35,0 -5.675,-2.325 -2.325,-2.325 -2.325,-5.675 0,-3.3500002 2.325,-5.6750002 2.325,-2.325 5.675,-2.325 1.725,0 3.3,0.7125 1.575,0.7125 2.7,2.0375 v -2.75 h 2 v 7.0000002 h -7 V 8.3795918 h 4.2 q -0.8,-1.4 -2.1875,-2.2 -1.3875,-0.8 -3.0125,-0.8 -2.5,0 -4.25,1.75 -1.75,1.75 -1.75,4.2500002 0,2.5 1.75,4.25 1.75,1.75 4.25,1.75 1.925,0 3.475,-1.1 1.55,-1.1 2.175,-2.9 h 2.1 q -0.7,2.65 -2.85,4.325 -2.15,1.675 -4.9,1.675 z"
+     d="M 0.90204041,23.485714 V 0.74285713 H 4.5030938 V 23.485714 Z m 19.80579259,0 L 9.9046738,12.114286 20.707833,0.74285713 l 2.520738,2.65333327 -8.282422,8.7180956 8.282422,8.718095 z"
      id="path1"
-     style="stroke-width:0.025;fill:#ffffff" />
+     style="fill:#ffffff;stroke-width:0.0461819" />
 </svg>

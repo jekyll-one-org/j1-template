@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="28px"
+   height="20px"
+   viewBox="0 0 28 20"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="playlist-music.svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="false"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="true"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="true"
+     inkscape:zoom="57.55"
+     inkscape:cx="6.516073"
+     inkscape:cy="10"
+     inkscape:window-width="3424"
+     inkscape:window-height="1353"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg1">
+    <inkscape:grid
+       id="grid1"
+       units="px"
+       originx="0"
+       originy="0"
+       spacingx="1"
+       spacingy="1"
+       empcolor="#0099e5"
+       empopacity="0.30196078"
+       color="#0099e5"
+       opacity="0.14901961"
+       empspacing="5"
+       enabled="true"
+       visible="true" />
+    <inkscape:grid
+       id="grid2"
+       units="px"
+       originx="0"
+       originy="0"
+       spacingx="1"
+       spacingy="1"
+       empcolor="#0099e5"
+       empopacity="0.30196078"
+       color="#0099e5"
+       opacity="0.14901961"
+       empspacing="5"
+       enabled="true"
+       visible="true" />
+  </sodipodi:namedview>
+  <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+  <title
+     id="title1">show-playlist</title>
+  <desc
+     id="desc1">Created with Sketch.</desc>
+  <defs
+     id="defs1" />
+  <metadata
+     id="metadata1">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>show-playlist</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     d="m 17.408661,19.006082 q -1.57809,0 -2.682753,-1.125869 -1.104663,-1.125869 -1.104663,-2.734253 0,-1.608384 1.104663,-2.734253 1.104663,-1.125869 2.682753,-1.125869 0.34718,0 0.662798,0.04825 0.315618,0.04825 0.599674,0.20909 V 0.99218071 h 6.31236 V 3.5655951 H 21.196077 V 15.14596 q 0,1.608384 -1.104663,2.734253 -1.104663,1.125869 -2.682753,1.125869 z M 0.99652476,13.859253 V 11.285838 H 11.096301 v 2.573415 z m 0,-5.1468291 V 6.1390095 H 16.146189 v 2.5734144 z m 0,-5.1468288 V 0.99218071 H 16.146189 V 3.5655951 Z"
+     id="path1"
+     style="stroke-width:0.0318633;fill:#ffffff" />
+</svg>

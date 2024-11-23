@@ -87,10 +87,10 @@ j1.adapter.amplitude = ((j1, window) => {
 
   // göobal settings
   // ---------------------------------------------------------------------------
-  var environment             = '{{environment}}';
-  var cookie_names            = j1.getCookieNames();
-  var user_state              = j1.readCookie(cookie_names.user_state);
-  var state                   = 'not_started';
+  var environment   = '{{environment}}';
+  var cookie_names  = j1.getCookieNames();
+  var user_state    = j1.readCookie(cookie_names.user_state);
+  var state         = 'not_started';
 
   // module settings
   // ---------------------------------------------------------------------------
@@ -157,23 +157,6 @@ j1.adapter.amplitude = ((j1, window) => {
   // var playerWaveformSampleRate       = '{{amplitude_defaults.player.waveform_sample_rate}}';
 
   // ---------------------------------------------------------------------------
-  // YouTube Player Tech (loaded early, runs on Document Ready)
-  // ---------------------------------------------------------------------------
-  //
-  // $(function() {
-  //   // Load YTP API code asynchronously and create a player for later use
-  //   var techScript;
-  //   var tech    = document.createElement('script');
-  //
-  //   tech.id     = 'yt_player_init';
-  //   tech.src    = "/assets/theme/j1/modules/amplitudejs/js/tech/ytp.js";
-  //   techScript  = document.getElementsByTagName('script')[0];
-  //
-  //   // Append Tech script
-  //   techScript.parentNode.insertBefore(tech, techScript);
-  // });
-
-  // ---------------------------------------------------------------------------
   // helper functions
   // ---------------------------------------------------------------------------
 
@@ -207,7 +190,6 @@ j1.adapter.amplitude = ((j1, window) => {
       // -----------------------------------------------------------------------
       _this             = j1.adapter.amplitude;
       logger            = log4javascript.getLogger('j1.adapter.amplitude');
-
 
       // -----------------------------------------------------------------------
       // module initializer
@@ -355,7 +337,7 @@ j1.adapter.amplitude = ((j1, window) => {
           );
 
           // dynamic loader variable to setup the player on ID {{player.id}}
-          dependency = 'dependencies_met_html_loaded_{{player.id}}';
+          dependency                    = 'dependencies_met_html_loaded_{{player.id}}';
           load_dependencies[dependency] = '';
 
           // ---------------------------------------------------------------------
@@ -396,7 +378,6 @@ j1.adapter.amplitude = ((j1, window) => {
     // initApi
     // -------------------------------------------------------------------------
     initApi: (songlist) => {
-
       logger.info('\n' + 'initialze API: started');
 
       {% comment %} collect playlists
@@ -456,6 +437,7 @@ j1.adapter.amplitude = ((j1, window) => {
       // See:  https://521dimensions.com/open-source/amplitudejs/docs
       // NOTE: slider VALUE (volume) is set by DEFAULT settings (player)
       Amplitude.init({
+
         bindings: {
           33:  'play_pause',
           37:  'prev',
@@ -530,13 +512,16 @@ j1.adapter.amplitude = ((j1, window) => {
             } // END if pause on next title
           }
         }, // END callbacks
+
         // waveforms: {
         //   sample_rate:    playerWaveformSampleRate
         // },
+
         continue_next:    playerPlayNextTitle,
         volume:           playerVolumeValue,
         volume_decrement: playerVolumeSliderStep,
         volume_increment: playerVolumeSliderStep
+
       }); // END Amplitude init
 
     }, // END initApi
@@ -548,10 +533,10 @@ j1.adapter.amplitude = ((j1, window) => {
 
       var dependencies_met_player_instances_initialized = setInterval (() => {
         if (apiInitialized.state) {
-            logger.info('\n' + 'initialize player specific UI events: started');
-
           var parentContainer = (document.getElementById('{{xhr_container_id}}') !== null) ? true : false;
           var parentContainerExist = ($('#' + '{{xhr_container_id}}')[0] !== undefined) ? true : false;
+
+          logger.info('\n' + 'initialize player specific UI events: started');
           
           {% for player in amplitude_options.players %} {% if player.enabled %}
             {% assign xhr_data_path = amplitude_options.xhr_data_path %}
@@ -566,7 +551,7 @@ j1.adapter.amplitude = ((j1, window) => {
             logger.debug('\n' + 'set playlist {{player.playlist}} on id #{{player.id}} with title: ' + playListTitle);
 
             // dynamic loader variable to setup the player on ID {{player.id}}
-            dependency = 'dependencies_met_player_loaded_{{player.id}}';
+            dependency                    = 'dependencies_met_player_loaded_{{player.id}}';
             load_dependencies[dependency] = '';
 
             // -----------------------------------------------------------------
@@ -578,7 +563,6 @@ j1.adapter.amplitude = ((j1, window) => {
               var playerExistsInPage  = ($('#' + '{{xhr_container_id}}')[0] !== undefined) ? true : false;
 
               if (xhrLoadState === 'success' && playerExistsInPage) {
-//            if (xhrLoadState === 'success') {
 
                 // set song (title) specific audio info links
                 // -------------------------------------------------------------
@@ -630,8 +614,7 @@ j1.adapter.amplitude = ((j1, window) => {
                     {% if player.id contains 'compact' %}
                     // ---------------------------------------------------------
                     // START compact player UI events
-                    //
-//                  if (document.getElementById('large_player_right') !== null) {                       
+                    //                    
                     if (document.getElementById('{{player.id}}') !== null) {
 
                       // show|hide scrollbar in playlist (compact player)
@@ -675,28 +658,28 @@ j1.adapter.amplitude = ((j1, window) => {
                             }
                           }
                         }); // END EventListener 'click' (compact player|show playlist)
-                     }
+                     } // END if showPlaylist
 
-                      // hide playlist
-                      var hidePlaylist = document.getElementById("hide_playlist_{{player.id}}");
-                      if (hidePlaylist !== null) {
-                        hidePlaylist.addEventListener('click', function(event) {
-                          var playlistScreen = document.getElementById("playlist_screen_{{player.id}}");
+                    // hide playlist
+                    var hidePlaylist = document.getElementById("hide_playlist_{{player.id}}");
+                    if (hidePlaylist !== null) {
+                      hidePlaylist.addEventListener('click', function(event) {
+                        var playlistScreen = document.getElementById("playlist_screen_{{player.id}}");
 
-                          playlistScreen.classList.remove('slide-in-top');
-                          playlistScreen.classList.add('slislide-out-top');
-                          playlistScreen.style.display = "none";
-                          playlistScreen.style.zIndex = "1";
+                        playlistScreen.classList.remove('slide-in-top');
+                        playlistScreen.classList.add('slislide-out-top');
+                        playlistScreen.style.display = "none";
+                        playlistScreen.style.zIndex = "1";
 
-                          // enable scrolling
-                          if ($('body').hasClass('stop-scrolling')) {
-                            $('body').removeClass('stop-scrolling');
-                          }
-                        }); // END EventListener 'click' (compact player|show playlist)
-                      }
+                        // enable scrolling
+                        if ($('body').hasClass('stop-scrolling')) {
+                          $('body').removeClass('stop-scrolling');
+                        }
+                      }); // END EventListener 'click' (compact player|show playlist)
+                    } // END if hidePlaylist
 
-                      // click on progress bar
-                      // -------------------------------------------------------
+                    // click on progress bar
+                    // -------------------------------------------------------
 
                       // getElementsByClassName returns an Array-like object
                       var progressBars = document.getElementsByClassName("compact-player-progress");
@@ -710,7 +693,7 @@ j1.adapter.amplitude = ((j1, window) => {
                           Amplitude.setSongPlayedPercentage(
                             (parseFloat(xpos)/parseFloat(this.offsetWidth))*100);
                         }); // END EventListener 'click'
-                      }
+                      } // END for
 
                       // click on skip forward|backward (compact player)
                       // See: https://github.com/serversideup/amplitudejs/issues/384
@@ -728,8 +711,8 @@ j1.adapter.amplitude = ((j1, window) => {
 
                             if (currentTime > 0) {
                               Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
-                            } // END EventListener 'click'
-                          });
+                            }
+                          }); // END EventListener 'click'
                         } // END if ID
                       } // END for SkipForwardButtons
 
@@ -745,8 +728,8 @@ j1.adapter.amplitude = ((j1, window) => {
 
                             if (currentTime > 0) {
                               Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
-                            } // END EventListener 'click'
-                          });
+                            }
+                          }); // END EventListener 'click'
                         } // END if ID
                       } // END for SkipBackwardButtons
 
@@ -755,6 +738,7 @@ j1.adapter.amplitude = ((j1, window) => {
                       if (compactPlayerShuffleButton) {
                         compactPlayerShuffleButton.addEventListener('click', function(event) {
                           var shuffleState = (document.getElementById('compact_player_shuffle').className.includes('amplitude-shuffle-on')) ? true : false;
+
                           Amplitude.setShuffle(shuffleState)
                         }); // END EventListener 'click'
                       } // END compactPlayerShuffleButton
@@ -764,6 +748,7 @@ j1.adapter.amplitude = ((j1, window) => {
                       if (compactPlayerRepeatButton) {
                         compactPlayerRepeatButton.addEventListener('click', function(event) {
                           var repeatState = (document.getElementById('compact_player_repeat').className.includes('amplitude-repeat-on')) ? true : false;
+
                           Amplitude.setRepeat(repeatState)
                         }); // END EventListener 'click'
                       } // END compactPlayerRepeatButton
@@ -784,7 +769,7 @@ j1.adapter.amplitude = ((j1, window) => {
                       if (largePlayerPreviousButton && largePlayerPreviousButton.getAttribute("data-amplitude-source") === 'youtube') {
                         largePlayerPreviousButton.addEventListener('click', function(event) {
                           var playlist  = this.getAttribute("data-amplitude-playlist");
-                          var songIndex = ytpSongIndex;                          // Amplitude.getActiveIndex();
+                          var songIndex = ytpSongIndex;                         // Amplitude.getActiveIndex();
 
                         }); // END EventListener 'click'
                       }
@@ -828,7 +813,7 @@ j1.adapter.amplitude = ((j1, window) => {
                       if (largePlayerNextButton && largePlayerPlayButton.getAttribute("data-amplitude-source") === 'youtube') {
                         largePlayerNextButton.addEventListener('click', function(event) {
                           var playlist  = this.getAttribute("data-amplitude-playlist");
-                          var songIndex = ytpSongIndex;                          // Amplitude.getActiveIndex();
+                          var songIndex = ytpSongIndex;                         // Amplitude.getActiveIndex();
                         }); // END EventListener 'click'
                       }
 
@@ -840,7 +825,7 @@ j1.adapter.amplitude = ((j1, window) => {
                             var playlist        = this.getAttribute("data-amplitude-playlist");
                             var playlistLength  = largetPlayerSongContainer.length;
                             ytpSongIndex        = this.getAttribute("data-amplitude-song-index");
-                          });
+                          }); // END EventListener 'click'
                         } // END if Attribute
                       } // END for
 
@@ -855,7 +840,7 @@ j1.adapter.amplitude = ((j1, window) => {
                           Amplitude.setSongPlayedPercentage(
                             (parseFloat(xpos)/parseFloat(this.offsetWidth))*100);
                         }); // END EventListener 'click'
-                      }
+                      } // END for
 
                       // click on skip forward|backward (large player)
                       // See: https://github.com/serversideup/amplitudejs/issues/384
@@ -886,9 +871,8 @@ j1.adapter.amplitude = ((j1, window) => {
                               if (currentTime > 0) {
                                 Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
                               }
-                            }); // END EventListener 'click
-                          }
-
+                            }); // END EventListener 'click'
+                          } // END else
                         } // END if ID
                       } // END for SkipForwardButtons
 
@@ -911,8 +895,7 @@ j1.adapter.amplitude = ((j1, window) => {
                                 Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
                               }
                             }); // END EventListener 'click'
-                          }
-
+                          } // END else
                         } // END if ID
                       } // END for SkipBackwardButtons
 
@@ -932,11 +915,10 @@ j1.adapter.amplitude = ((j1, window) => {
                           var repeatState = (document.getElementById('large_player_repeat').className.includes('amplitude-repeat-on')) ? true : false;
                           Amplitude.setRepeat(repeatState)
                         }); // END EventListener 'click'
-                      } // END largePlayerRepeatButton
+                      } // END if largePlayerRepeatButton
 
                       // enable|disable scrolling on playlist (large player)
                       // -------------------------------------------------------
-//                    if (document.getElementById('large_player_right') !== null) {
                       if (document.getElementById('large_player_right') !== null) {
 
                         // show|hide scrollbar in playlist
@@ -1002,6 +984,21 @@ j1.adapter.amplitude = ((j1, window) => {
                         }); // END EventListener 'mouseleave'
 
                       } // END enable|disable scrolling on playlist
+
+                      // set volume slider presets (for the player)
+                      //
+                      var volumeSlider    = document.getElementById('volume_slider_{{player.id}}');
+                      const volumeMin     = parseInt('{{player.volume_slider.min_value}}'); 
+                      const volumeMax     = parseInt('{{player.volume_slider.max_value}}'); 
+                      const volumeValue   = parseInt('{{player.volume_slider.preset_value}}'); 
+                      const volumeStep    = parseInt('{{player.volume_slider.slider_step}}'); 
+
+                      // if player has NO slider presets, use amplitude defaults
+                      //
+                      volumeSlider.min    = (isNaN(volumeMin))   ? parseInt('{{amplitude_defaults.player.volume_slider.min_value}}')    : volumeMin;
+                      volumeSlider.max    = (isNaN(volumeMax))   ? parseInt('{{amplitude_defaults.player.volume_slider.max_value}}')    : volumeMax;
+                      volumeSlider.value  = (isNaN(volumeValue)) ? parseInt('{{amplitude_defaults.player.volume_slider.preset_value}}') : volumeValue;
+                      volumeSlider.step   = (isNaN(volumeStep))  ? parseInt('{{amplitude_defaults.player.volume_slider.slider_step}}')  : volumeStep;
 
                     } // END large player UI events
                     {% endif %}
