@@ -19,6 +19,9 @@
 /* Colors
 # --------------------------------------------------------- */
 :root {
+
+  /* Base colors
+  # ------------------------------------------------------- */
   --ajs-theme-uno--blue:                #2196F3;
   --ajs-theme-uno--blue-50:             #E3F2FD;
   --ajs-theme-uno--blue-100:            #BBDEFB;
@@ -67,6 +70,32 @@
 
   --ajs-theme-uno--white:               #FFFFFF;
   --ajs-theme-uno--black:               #000000;
+
+  /* Additional colors
+  # ------------------------------------------------------- */
+  --ajs-theme-uno--lighten-50:          rgba(255, 255, 255, 0.05);
+  --ajs-theme-uno--lighten-100:         rgba(255, 255, 255, 0.1);
+  --ajs-theme-uno--lighten-200:         rgba(255, 255, 255, 0.2);
+  --ajs-theme-uno--lighten-300:         rgba(255, 255, 255, 0.3);
+  --ajs-theme-uno--lighten-400:         rgba(255, 255, 255, 0.4);
+  --ajs-theme-uno--lighten-500:         rgba(255, 255, 255, 0.5);
+  --ajs-theme-uno--lighten-600:         rgba(255, 255, 255, 0.6);
+  --ajs-theme-uno--lighten-700:         rgba(255, 255, 255, 0.7);
+  --ajs-theme-uno--lighten-800:         rgba(255, 255, 255, 0.8);
+  --ajs-theme-uno--lighten-900:         rgba(255, 255, 255, 0.9);
+  --ajs-theme-uno--lighten:             rgba(255, 255, 255, 0.5);
+  
+  --ajs-theme-uno--darken-50:           rgba(0, 0, 0, 0.05);
+  --ajs-theme-uno--darken-100:          rgba(0, 0, 0, 0.1);
+  --ajs-theme-uno--darken-200:          rgba(0, 0, 0, 0.2);
+  --ajs-theme-uno--darken-300:          rgba(0, 0, 0, 0.3);
+  --ajs-theme-uno--darken-400:          rgba(0, 0, 0, 0.4);
+  --ajs-theme-uno--darken-500:          rgba(0, 0, 0, 0.5);
+  --ajs-theme-uno--darken-600:          rgba(0, 0, 0, 0.6);
+  --ajs-theme-uno--darken-700:          rgba(0, 0, 0, 0.7);
+  --ajs-theme-uno--darken-800:          rgba(0, 0, 0, 0.8);
+  --ajs-theme-uno--darken-900:          rgba(0, 0, 0, 0.9);
+  --ajs-theme-uno--darken:              rgba(0, 0, 0, 0.5);
 }
 
 /* Styles
@@ -105,6 +134,53 @@ a {
 
 /* 2. Components
 # --------------------------------------------------------- */
+
+/* Scroller styles
+------------------------------------------------------------ */
+.amplitude-scroller::-webkit-scrollbar {
+	width: 10px;
+	background-color: var(--ajs-theme-uno--gray-100);
+}
+
+.amplitude-scroller::-webkit-scrollbar-track {
+  border-radius: 0px;
+	-webkit-box-shadow: inset 0 0 6px var(--ajs-theme-uno--darken-300);
+	background-color: var(--ajs-theme-uno--gray-100);
+}
+
+.amplitude-scroller::-webkit-scrollbar-thumb {
+  border-radius: 0px;
+	background-color: var(--ajs-theme-uno--blue-gray-500);
+	background-image: -webkit-gradient(
+    linear,
+    0 0, 0 100%,
+		color-stop(.5, var(--ajs-theme-uno--lighten-200)),
+		color-stop(.5, transparent), to(transparent)
+  );
+}
+
+.amplitude-scroller-gradient::-webkit-scrollbar {
+	width: 10px;
+	background-color: var(--ajs-theme-uno--gray-100);
+}
+
+.amplitude-scroller-gradient::-webkit-scrollbar-track {
+  border-radius: 0px;
+	-webkit-box-shadow: inset 0 0 6px var(--ajs-theme-uno--darken-300);
+	background-color: var(--ajs-theme-uno--gray-100);
+}
+
+.amplitude-scroller-gradient::-webkit-scrollbar-thumb {
+	border-radius: 0px;
+	background-image: -webkit-gradient(
+    linear,
+		left bottom,
+		left top,
+		color-stop(0.44, var(--ajs-theme-uno--blue-300)),
+		color-stop(0.72, var(--ajs-theme-uno--blue)),
+		color-stop(0.86, var(--ajs-theme-uno--blue-900))
+  )
+}
 
 /* time container
 # --------------------------------------------------------- */

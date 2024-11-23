@@ -169,7 +169,7 @@ ul.scrollable-menu::-webkit-scrollbar-thumb {
 	background-color: $gray-100;
 }
 .scroller-6::-webkit-scrollbar-thumb {
-	background-color: $orange;
+	background-color: $indigo;
 	background-image: -webkit-linear-gradient(45deg,
 		$lighten-200 25%,
 		transparent 25%,
@@ -193,12 +193,14 @@ ul.scrollable-menu::-webkit-scrollbar-thumb {
 }
 .scroller-7::-webkit-scrollbar-thumb {
 	border-radius: 10px;
-	background-image: -webkit-gradient(linear,
+	background-image: -webkit-gradient(
+		linear,
 		left bottom,
 		left top,
 		color-stop(0.44, $indigo-300),
 		color-stop(0.72, $indigo),
-		color-stop(0.86, $indigo-900));
+		color-stop(0.86, $indigo-900)
+	);
 }
 
 // Scroller style 8

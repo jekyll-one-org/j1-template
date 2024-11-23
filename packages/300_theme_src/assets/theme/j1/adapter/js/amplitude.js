@@ -206,8 +206,6 @@ j1.adapter.amplitude = ((j1, window) => {
           logger.debug('\n' + 'module state: ' + _this.getState());
           logger.info('\n' + 'module is being initialized');
 
-          // jQuery('.scrollbar-rail').scrollbar();
-
           // -------------------------------------------------------------------
           // create global playlist (songs)
           // -------------------------------------------------------------------

@@ -85,7 +85,7 @@ resource_options:
 :indicators:                            true
 :indicators_alerts:                     true
 :indicators_badges:                     true
-:scrollbars:                            false
+:scrollbars:                            true
 :progress:                              true
 :progress_basic:                        true
 :progress_contextual_alternatives:      true
@@ -2119,7 +2119,7 @@ browser.
 }
 ----
 
-For the following flavours are implemented.
+The following scrollers are available for the J1 Template.
 
 [subs="attributes"]
 ++++
@@ -2169,10 +2169,9 @@ For the following flavours are implemented.
 </div>
 
 <!-- script>
-<!-- NOTE: $.browser.webkit does NOT exists !!! -->
-if (!$.browser.webkit) {
-  $('.wrapper').html('<p>Sorry! Non webkit browser detected. Scrollbars <b>not</b> displayed :</p>');
-}
+  if (!$.browser.webkit) {
+    $('.wrapper').html('<p>Sorry! Non webkit browser detected. Scrollbars <b>not</b> displayed :</p>');
+  }
 </script -->
 ++++
 endif::[]

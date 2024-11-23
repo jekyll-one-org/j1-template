@@ -1921,26 +1921,5 @@ resources:
         js:                             [ modules/amplitudejs/js/amplitude ]
         init_function:                  [ j1.adapter.amplitude.init ]
 
-  # ----------------------------------------------------------------------------
-  # jqueryScrollbar
-  #
-  - name:                               J1 jqueryScrollbar
-    resource:
-      enabled:                          false
-
-      id:                               scrollbars
-      comment:                          Module jqueryScrollbar
-      region:                           body-footer
-      layout:                           [ home, page, post ]
-      required:                         always
-      script_load:                      defer
-      pass_init_data:                   false
-
-      data:
-        css:                            [ modules/jqueryScrollbar/css/scrollbar ]
-        files:                          []
-        js:                             [ modules/jqueryScrollbar/js/scrollbar ]
-        init_function:                  []
-
 # ------------------------------------------------------------------------------
 # END config
