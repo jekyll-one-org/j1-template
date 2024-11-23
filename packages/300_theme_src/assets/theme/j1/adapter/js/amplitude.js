@@ -983,20 +983,22 @@ j1.adapter.amplitude = ((j1, window) => {
 
                       } // END enable|disable scrolling on playlist
 
-                      // set volume slider presets (for the player)
+                      // set volume slider presets (for the player when exists|enabled)
                       //
-                      var volumeSlider    = document.getElementById('volume_slider_{{player.id}}');
-                      const volumeMin     = parseInt('{{player.volume_slider.min_value}}'); 
-                      const volumeMax     = parseInt('{{player.volume_slider.max_value}}'); 
-                      const volumeValue   = parseInt('{{player.volume_slider.preset_value}}'); 
-                      const volumeStep    = parseInt('{{player.volume_slider.slider_step}}'); 
-
-                      // if player has NO slider presets, use amplitude defaults
-                      //
-                      volumeSlider.min    = (isNaN(volumeMin))   ? parseInt('{{amplitude_defaults.player.volume_slider.min_value}}')    : volumeMin;
-                      volumeSlider.max    = (isNaN(volumeMax))   ? parseInt('{{amplitude_defaults.player.volume_slider.max_value}}')    : volumeMax;
-                      volumeSlider.value  = (isNaN(volumeValue)) ? parseInt('{{amplitude_defaults.player.volume_slider.preset_value}}') : volumeValue;
-                      volumeSlider.step   = (isNaN(volumeStep))  ? parseInt('{{amplitude_defaults.player.volume_slider.slider_step}}')  : volumeStep;
+                      var volumeSlider = document.getElementById('volume_slider_{{player.id}}');
+                      if (volumeSlider !== null) {
+                        const volumeMin     = parseInt('{{player.volume_slider.min_value}}'); 
+                        const volumeMax     = parseInt('{{player.volume_slider.max_value}}'); 
+                        const volumeValue   = parseInt('{{player.volume_slider.preset_value}}'); 
+                        const volumeStep    = parseInt('{{player.volume_slider.slider_step}}'); 
+  
+                        // if player has NO slider presets, use amplitude defaults
+                        //
+                        volumeSlider.min    = (isNaN(volumeMin))   ? parseInt('{{amplitude_defaults.player.volume_slider.min_value}}')    : volumeMin;
+                        volumeSlider.max    = (isNaN(volumeMax))   ? parseInt('{{amplitude_defaults.player.volume_slider.max_value}}')    : volumeMax;
+                        volumeSlider.value  = (isNaN(volumeValue)) ? parseInt('{{amplitude_defaults.player.volume_slider.preset_value}}') : volumeValue;
+                        volumeSlider.step   = (isNaN(volumeStep))  ? parseInt('{{amplitude_defaults.player.volume_slider.slider_step}}')  : volumeStep; 
+                      } // END volumeSlider exists
 
                     } // END large player UI events
                     {% endif %}
