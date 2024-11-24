@@ -807,7 +807,7 @@ resources:
       pass_init_data:                   false
 
       data:
-        css:                            []
+        css:                            [ modules/rtable/css/theme/uno/rtable ]
         files:                          [ adapter/js/rtable.js ]
         js:                             [ modules/rtable/js/rtable ]
         init_function:                  [ j1.adapter.rtable.init ]
