@@ -44,9 +44,10 @@ resource_options:
 
 // Attribute settings for section control
 //
-:ytp_audio:                             false
+:ytp_api_description:                   false
 :ytp_example:                           false
-:ms_slider_video_examples:              false
+:ytp_audio_player:                      true
+:ms_slider_video_example:               false
 
 
 // Set (local) page attributes here
@@ -65,18 +66,13 @@ resource_options:
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [role="dropcap"]
-The J1 Template support playing video on web pages by HTML5 Video, the new
-standard of HTML to show videos on webpages.
-
-Modern browsers support the video tag `<video>` for the new HTML5 video
-standard. The previous proprietary de facto standard software like
-_Flash Player_, _Quicktime_, or _Silverlight_ is no longer needed as the
-Jekyll theme J1 provides HTML5 Video support for local video content
-and from online sources on the Internet.
+The J1 Template supports the AmpltidueJS module playing audio from (YouTube)
+video. The Template system provides a plugin (Tech) to mimic AmplzudeJS
+players to control the audio.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-ifeval::[{ytp_examples} == true]
+ifeval::[{ytp_api_description} == true]
 [role="mt-4"]
 == YouTube Audio
 
@@ -87,10 +83,9 @@ ifeval::[{ytp_examples} == true]
 // https://www.youtube.com/watch?v=ryxAe4B_3Pg
 // https://www.youtube.com/watch?v=wI1Rr29OCJM
 
-You can embed any YouTube video in your web pages and visitors on your
-site will be able to play and pause the video audio with a simple click.
-With this technique, you can also use a YouTube video as background audio
-that runs in a loop.
+You can embed any YouTube video on your web pages, and visitors can play
+and pause the audio with a simple click. This technique can also be used
+to use a YouTube video as background audio that runs in a loop.
 
 [TIP]
 ====
@@ -101,11 +96,11 @@ http://www.labnol.org/internet/youtube-audio-player/26740/[Embed YouTube as an A
 [role="mt-4"]
 === How to Embed YouTube Audio
 
-It takes just one step to embed a YouTube audio. Open any YouTube video
-and make a note of the YouTube Video ID (a string of 11 characters).
+It takes just one step to embed a YouTube audio. Open any YouTube video and
+make a note of the YouTube Video ID (a string of 11 characters).
 
-Next copy-paste the code below anywhere on your website and replace
-VIDEO_ID with actual ID of your YouTube video.
+Next, copy and paste the code below anywhere on your website, replacing
+VIDEO_ID with the actual ID of your YouTube video.
 
 [source, html]
 ----
@@ -114,50 +109,39 @@ VIDEO_ID with actual ID of your YouTube video.
 <script src="https://cdn.rawgit.com/labnol/files/master/yt.js"></script>
 ----
 
-There are few other configuration parameters that you can change depending
-on requirements. For instance, if you set data-autoplay to 1, the audio will
-begin playing immediately on page load. Likewise, set data-loop to 1 and the
-audio will play continuously in a never-ending loop until manually stopped.
+The following example is using the YouTube JavaScript API, which renders a
+regular YouTube player with the width and height set to *0 pixels*. When
+the user clicks the audio button, it toggles the existing YouTube player state,
+and the video begins to play or pauses.
 
-This internally renders the YouTube video using the IFRAME player and would
-thus work on both desktop and mobile browsers. The JavaScript files are hosted
-on Github while the images are hosted on Imgur. It is recommended that you
-copy the assets to your own server before deploying on a heavy-traffic website.
+Here’s the annotated version of the source code. It can be extended to embed
+YouTube playlists; the default playback volume can be changed, or you even
+https://www.labnol.org/internet/embed-part-of-youtube-video/27948/[embeda part, {browser-window--new}]
+of the video.
 
 [role="mt-4"]
 === Technical Details
 
-We are using the YouTube JavaScript API that renders a regular YouTube player
-but with the width and height set to *0 pixels*. When the user clicks the
-audio button, it toggles the existing YouTube player state and the video
-begins to play or pauses.
-
-Here’s the annotated version of the source code. It can be extended to embed
-YouTube playlists, the default playback volume can be changed or you even
-https://www.labnol.org/internet/embed-part-of-youtube-video/27948/[embeda part, {browser-window--new}]
-of the video.
+lorem:sentences[5]
 endif::[]
 
 ifeval::[{ytp_example} == true]
 [role="mt-5"]
-=== YT Player
+== YT Player Example
 ++++
-<!-- 1. The <iframe> (and video player) will replace this <div> tag.            -->
+<!-- the <iframe> (video player) will replace this <div> tag                    -->
 <!-- =========================================================================== -->
 <div style="display:flex;justify-content:center;align-items:center;">
   <div id="youtube-audio1" data-video="WxcWO9O4DSM" data-autoplay="0" data-loop="1"></div>
   <div id="youtube-audio2" data-video="zAmDwCz2BOs" data-autoplay="0" data-loop="1"></div>
-  <!-- div id="youtube-audio2"></div -->
   <div id="youtube-audio3" data-video="ryxAe4B_3Pg" data-autoplay="0" data-loop="1"></div>
   <div id="youtube-audio4" data-video="wI1Rr29OCJM" data-autoplay="0" data-loop="1"></div>
 </div>
-++++
 
-++++
 <script>
   $(function() {
 
-    // Load the IFrame Player API code asynchronously.
+    // load the IFrame Player API code (asynchronously)
     var techScript;
 
     var tech    = document.createElement('script');
@@ -171,33 +155,52 @@ ifeval::[{ytp_example} == true]
 ++++
 endif::[]
 
-[role="mt-5"]
-== Amplitude Player
 
-lorem:sentences[5]
+ifeval::[{ytp_audio_player} == true]
+[role="mt-5"]
+== Amplitude YT Player
+
+The example below demonstrates playing Audio tracks from YouTube Videos using
+an AmplitudJS (large) player. The J1 template uses a *plugin* (ytp) to extend
+the native functionality of the AmplitudeJS API.
+
+[role="mt-4 mb-5"]
+[CAUTION]
+====
+Playing audio tracks is currently supported only for videos from YouTube (YT).
+Note that the YT plugin embeds a YP player and mimics the AmplitudeJS player
+buttons and can only be used with the J1 Template.
+====
 
 .Mimi Rutherfurt · Maritim Verlag (YouTube)
 amplitude::mimi_rutherfurt_yt_large[role="mt-4 mb-8"]
 
 ++++
 <script>
-  $(function() {
+//  $(function() {
+      var dependencies_met_ajs_player_ready = setInterval (() => {
+        var ajsPlayerAvailable = ($('#mimi_rutherfurt_yt_large').length > 0) ? true : false;
 
-    // Load the IFrame Player API code asynchronously.
-    var techScript;
+        if (ajsPlayerAvailable) {
+          // load the AJS Player plugin (tech)
+          var techScript;
+          var tech    = document.createElement('script');
 
-    var tech    = document.createElement('script');
-    tech.src    = "/assets/theme/j1/modules/amplitudejs/js/tech/ytp.js";
-    techScript  = document.getElementsByTagName('script')[0];
+          tech.id     = 'tech_ytp';
+          tech.src    = "/assets/theme/j1/modules/amplitudejs/js/tech/ytp.js";
+          techScript  = document.getElementsByTagName('script')[0];
 
-    techScript.parentNode.insertBefore(tech, techScript);
+          techScript.parentNode.insertBefore(tech, techScript);
 
-  });
+          clearInterval(dependencies_met_ajs_player_ready);
+        } // END pageVisible
+      }, 10); // END dependencies_met_ajs_player_ready
+//}); 
 </script>
 ++++
 
 
-ifeval::[{ms_slider_video_examples} == true]
+ifeval::[{ms_slider_video_example} == true]
 [[ms_video]]
 == MS Slider using YouTube Video
 
@@ -226,6 +229,4 @@ controlling MPEG 4 video content on websites and web applications.
 
 .Video over VideoJS
 gallery::jg_video_html5_videojs[role="mt-4 mb-5"]
-
 endif::[]
-

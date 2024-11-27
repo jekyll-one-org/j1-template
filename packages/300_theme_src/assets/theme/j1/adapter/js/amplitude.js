@@ -85,7 +85,7 @@ regenerate:                             true
 "use strict";
 j1.adapter.amplitude = ((j1, window) => {
 
-  // göobal settings
+  // global settings
   // ---------------------------------------------------------------------------
   var environment   = '{{environment}}';
   var cookie_names  = j1.getCookieNames();
@@ -96,7 +96,7 @@ j1.adapter.amplitude = ((j1, window) => {
   // ---------------------------------------------------------------------------
 
   // control|logging
-  // ---------------
+  // ---------------------------------------------------------------------------
   var _this;
   var logger;
   var logText;
@@ -104,7 +104,7 @@ j1.adapter.amplitude = ((j1, window) => {
   var toText;
 
   // date|time monitoring
-  //---------------------
+  //----------------------------------------------------------------------------
   var startTime;
   var endTime;
   var startTimeModule;
@@ -112,7 +112,7 @@ j1.adapter.amplitude = ((j1, window) => {
   var timeSeconds;
 
   // amplitude api settings
-  // ----------------------
+  // ---------------------------------------------------------------------------
   var ytpSongIndex    = "0";
   var ytpAutoPlay     = false;
   var ytpLoop         = true;
@@ -133,7 +133,7 @@ j1.adapter.amplitude = ((j1, window) => {
 
   // amplitude player (instance) settings
   // NOTE: slider VALUE is set by Adapter|Amplitude API
-  // ------------------------------------
+  // ---------------------------------------------------------------------------
   var xhrLoadState;
   var dependency;
   var playerCounter                     = 0;
@@ -775,6 +775,19 @@ j1.adapter.amplitude = ((j1, window) => {
                       // click on play_pause button
                       var largePlayerPlayButton = document.getElementById('large_player_play_pause');
                       if (largePlayerPlayButton && largePlayerPlayButton.getAttribute("data-amplitude-source") === 'youtube') {
+
+                        // toggle Amplitude play button
+                        // largePlayerPlayButton.addEventListener('click', function(e) {
+                        //   e.preventDefault();
+                        //   if (largePlayerPlayButton.classList.contains('amplitude-paused')) {
+                        //     largePlayerPlayButton.classList.remove('amplitude-paused');
+                        //     largePlayerPlayButton.classList.add('amplitude-playing');
+                        //   } else {
+                        //     largePlayerPlayButton.classList.remove('amplitude-playing');
+                        //     largePlayerPlayButton.classList.add('amplitude-paused');
+                        //   }
+                        // });
+
                         largePlayerPlayButton.addEventListener('click', function(event) {
                           var playlist      = this.getAttribute("data-amplitude-playlist");
                           var songMetaData  = Amplitude.getSongAtIndex(ytpSongIndex);
@@ -782,9 +795,9 @@ j1.adapter.amplitude = ((j1, window) => {
                           var songIndex     = ytpSongIndex;
 
                           var dependencies_met_ytIframeAPIReady = setInterval (() => {
-                            if (j1.adapter.amplitude['iframeAPIReady']) {
+                            if (j1.adapter.amplitude['ytPlayerReady']) {
                               ytPlayer          = j1.adapter.amplitude['ytPlayer'];
-                              ytpPlaybackRate   = ytPlayer.getPlaybackRate()
+                              ytpPlaybackRate   = ytPlayer.getPlaybackRate();
 
                               // ytPlayer.loadVideoById({
                               //   'videoId': 'bHQqvYy5KYo',
@@ -797,7 +810,11 @@ j1.adapter.amplitude = ((j1, window) => {
                               //   startSeconds: 10
                               // )
 
-                              // ytPlayer.playVideo();
+                              if (ytPlayer.getPlayerState() == 1 || ytPlayer.getPlayerState() == 3) {
+                                ytPlayer.pauseVideo();
+                              } else {
+                                ytPlayer.playVideo();
+                              }
 
                               clearInterval(dependencies_met_ytIframeAPIReady);
                             } // END if playersUILoaded
@@ -849,16 +866,21 @@ j1.adapter.amplitude = ((j1, window) => {
                       for (var i=0; i<largePlayerSkipForwardButtons.length; i++) {
                         if (largePlayerSkipForwardButtons[i].id === 'skip-forward_{{player.id}}') {
                           if (largePlayerSkipForwardButtons[i].dataset.amplitudeSource === 'youtube') {
-                            largePlayerSkipForwardButtons[i].addEventListener('click', function(event) {
-                              const skipOffset  = parseFloat(playerForwardBackwardSkipSeconds);
-                              //const duration    = Amplitude.getSongDuration();
-                              //const currentTime = parseFloat(Amplitude.getSongPlayedSeconds());
-                              //const targetTime  = parseFloat(currentTime + skipOffset);
+                            // largePlayerSkipForwardButtons[i].addEventListener('click', function(event) {
+                            //   var ytPlayer     = j1.adapter.amplitude['ytPlayer'];
+                            //   var currentTime  = ytPlayer.getCurrentTime();
+                            //   const skipOffset = parseFloat(playerForwardBackwardSkipSeconds);
+                              
+                            //   ytPlayer.seekTo(currentTime + skipOffset, true)
 
-                              // if (currentTime > 0) {
-                              //   Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
-                              // }
-                            }); // END EventListener 'click
+                            //   //const duration    = Amplitude.getSongDuration();
+                            //   //const currentTime = parseFloat(Amplitude.getSongPlayedSeconds());
+                            //   //const targetTime  = parseFloat(currentTime + skipOffset);
+
+                            //   // if (currentTime > 0) {
+                            //   //   Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
+                            //   // }
+                            // }); // END Listener 'click' (SkipForwardButtons)
                           } else {
                             largePlayerSkipForwardButtons[i].addEventListener('click', function(event) {
                               const skipOffset  = parseFloat(playerForwardBackwardSkipSeconds);
@@ -880,7 +902,11 @@ j1.adapter.amplitude = ((j1, window) => {
                         if (largePlayerSkipBackwardButtons[i].id === 'skip-backward_{{player.id}}') {
                           if (largePlayerSkipBackwardButtons[i].dataset.amplitudeSource === 'youtube') {
                             largePlayerSkipBackwardButtons[i].addEventListener('click', function(event) {
-                              const skipOffset  = parseFloat(playerForwardBackwardSkipSeconds);
+                              var ytPlayer     = j1.adapter.amplitude['ytPlayer'];
+                              var currentTime  = ytPlayer.getCurrentTime();
+                              const skipOffset = parseFloat(playerForwardBackwardSkipSeconds);
+                              
+                              ytPlayer.seekTo(currentTime - skipOffset, true)
                             }); // END EventListener 'click'
                           } else {
                             largePlayerSkipBackwardButtons[i].addEventListener('click', function(event) {

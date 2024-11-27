@@ -34,7 +34,7 @@ settings:
     # --------------------------------------------------------------------------
     #
     - playlist:
-      enabled:                          false
+      enabled:                          true
 
       name:                             mimi_rutherfurt_yt
       title:                            Mimi Rutherfurt
@@ -544,7 +544,7 @@ settings:
     # --------------------------------------------------------------------------
     #
     - plaver:
-      enabled:                          false
+      enabled:                          true
 
       # ------------------------------------------------------------------------
       # SOURCE settings
@@ -557,10 +557,11 @@ settings:
       # ------------------------------------------------------------------------
       # CONTROL BUTTON settings
       #
-      song_progress_bar:                false
+      song_progress_bar:                true
       skip_forward_backward_button:     true
       volume_slider:
-        enabled:                        false
+        enabled:                        true
+        preset_value:                   46
 
       # ------------------------------------------------------------------------
       # PLAYER settings
@@ -572,8 +573,8 @@ settings:
       playlist:
         name:                           mimi_rutherfurt_yt
         title:                          Mimi Rutherfurt
-        controls:                       false
         audio_info:                     false
+        controls:                       false
 
 # ------------------------------------------------------------------------------
 # END config
