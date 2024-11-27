@@ -258,6 +258,17 @@ defaults:
     type:                               compact
     source:                             audio
 
+    plugin_manager:
+      enabled:                          false
+
+    waveforms:
+      enabled:                          false
+      sample_rate:                      0.25
+
+    visualization:
+      enabled:                          false
+      name:                             [ bar ]
+
     audio_rating:                       false
     display_hours:                      false
     play_next_title:                    true

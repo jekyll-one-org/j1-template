@@ -22,7 +22,7 @@
 	https://github.com/michaelbromley/soundcloud-visualizer
 */
 
-function MichaelBromleyVisualization(){
+function MichaelBromleyVisualization() {
 	/*
 		Sets the ID and Name of the visualization.
 	*/

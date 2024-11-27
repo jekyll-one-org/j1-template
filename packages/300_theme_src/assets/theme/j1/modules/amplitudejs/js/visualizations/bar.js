@@ -21,7 +21,7 @@
  * Simple visualization that shows the waveforms as a bar graph
 */
 
-function BarVisualization(){
+function BarVisualization() {
 	/*
 		Define the ID, name, and initialize the container. These are a part
 		of the visualization template and are necessary.

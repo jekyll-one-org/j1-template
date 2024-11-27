@@ -17,7 +17,7 @@
  # -----------------------------------------------------------------------------
 */
 
-function FrequencyAnalyzerVisualization(){
+function FrequencyAnalyzerVisualization() {
 	/*
 		Define the ID of your visualization. This is used to apply
 		visualizations to songs, playlists, and default. It is a JSON

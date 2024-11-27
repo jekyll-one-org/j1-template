@@ -175,30 +175,6 @@ buttons and can only be used with the J1 Template.
 .Mimi Rutherfurt · Maritim Verlag (YouTube)
 amplitude::mimi_rutherfurt_yt_large[role="mt-4 mb-8"]
 
-++++
-<script>
-//  $(function() {
-      var dependencies_met_ajs_player_ready = setInterval (() => {
-        var ajsPlayerAvailable = ($('#mimi_rutherfurt_yt_large').length > 0) ? true : false;
-
-        if (ajsPlayerAvailable) {
-          // load the AJS Player plugin (tech)
-          var techScript;
-          var tech    = document.createElement('script');
-
-          tech.id     = 'tech_ytp';
-          tech.src    = "/assets/theme/j1/modules/amplitudejs/js/tech/ytp.js";
-          techScript  = document.getElementsByTagName('script')[0];
-
-          techScript.parentNode.insertBefore(tech, techScript);
-
-          clearInterval(dependencies_met_ajs_player_ready);
-        } // END pageVisible
-      }, 10); // END dependencies_met_ajs_player_ready
-//}); 
-</script>
-++++
-
 
 ifeval::[{ms_slider_video_example} == true]
 [[ms_video]]
