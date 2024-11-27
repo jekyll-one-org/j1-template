@@ -549,7 +549,7 @@ settings:
 
       plugin_manager:
         enabled:                        true
-        plugins:                        [ ytp ]
+        plugins:                        ytp                                     # [ ytp ]
 
       # ------------------------------------------------------------------------
       # SOURCE settings

@@ -27,14 +27,14 @@
 
 // YT player settings
 // -----------------------------------------------------------------------------
-// const YT_PLAYER_STATE = {
-//   not_started:        -1,
-//   ended:               0,
-//   playing:             1,
-//   paused:              2,
-//   buffering:           3,
-//   video_cued:          5
-// };
+const YT_PLAYER_STATE = {
+  not_started:        -1,
+  ended:               0,
+  playing:             1,
+  paused:              2,
+  buffering:           3,
+  video_cued:          5
+};
 
 // YT API settings
 // -----------------------------------------------------------------------------

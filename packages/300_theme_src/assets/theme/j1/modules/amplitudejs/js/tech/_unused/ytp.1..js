@@ -27,14 +27,14 @@
 
 // YT player settings
 // -----------------------------------------------------------------------------
-// const YT_PLAYER_STATE = {
-//   not_started:        -1,
-//   ended:               0,
-//   playing:             1,
-//   paused:              2,
-//   buffering:           3,
-//   video_cued:          5
-// };
+const YT_PLAYER_STATE = {
+  not_started:        -1,
+  ended:               0,
+  playing:             1,
+  paused:              2,
+  buffering:           3,
+  video_cued:          5
+};
 
 // YT API settings
 // -----------------------------------------------------------------------------
@@ -86,8 +86,8 @@ function onYouTubeIframeAPIReady() {
       loop:             ytpSettings.ytpLoop
     },
     events: {
-      'onReady':        onPlayerReady1,
-      'onStateChange':  onPlayerStateChange1
+      'onReady':        onPlayerReady,
+      'onStateChange':  onPlayerStateChange
     }
   });
 
@@ -100,14 +100,15 @@ function onYouTubeIframeAPIReady() {
 function toggleAudio() {
   if (ytPlayer.getPlayerState() === YT_PLAYER_STATE.playing || ytPlayer.getPlayerState() === YT_PLAYER_STATE.buffering) {
     ytPlayer.pauseVideo();
-    togglePlayButton(false);
+    setAjsButtonEvents(false);
   } else {
     ytPlayer.playVideo();
-    togglePlayButton(true);
+    setAjsButtonEvents(true);
   }
 }
 
-function onPlayerReady1(event) {
+
+function onPlayerReady(event) {
   logger.info('\n' + 'AJS YouTube Player: ready');
 
   // save player references for later use
@@ -122,10 +123,18 @@ function onPlayerReady1(event) {
   logger.info('\n' + 'plugin|tech initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 }
 
-function onPlayerStateChange1(event) {
+// function onPlayerStateChange(event) {
+//   if (event.data === 0) {
+//     togglePlayButton(false);
+//   }
+// }
+
+
+function onPlayerStateChange(event) {
   if (event.data === 0) {
-    togglePlayButton(false);
+    var bla = 'blupp';
   }
+  setAjsButtonEvents(false);
 }
 
 
@@ -136,13 +145,13 @@ var largePlayerSkipForwardButtons   = document.getElementsByClassName("large-pla
 var largePlayerSkipBackwardButtons  = document.getElementsByClassName("large-player-skip-backward");
 var largePlayerPlayPauseButton      = document.getElementById('large_player_play_pause');
 
-// toggle Amplitude play|pause button
+// Amplitude play|pause button
 // -----------------------------------------------------------------------------
-function togglePlayButton(play) { 
+function setAjsButtonEvents(play) {
 
-  for (var i=0; i<largePlayerSkipForwardButtons.length; i++) {
-    if (largePlayerSkipForwardButtons[i].id === 'skip-forward_{{player.id}}') {
-      if (largePlayerSkipForwardButtons[i].dataset.amplitudeSource === 'youtube') {
+  for (var i=0; i<largePlayerPlayPauseButton.length; i++) {
+    if (largePlayerPlayPauseButton[i].id === 'skip-forward_{{player.id}}') {
+      if (largePlayerSkilargePlayerPlayPauseButtonpForwardButtons[i].dataset.amplitudeSource === 'youtube') {
         // toggle Amplitude play button
         if (largePlayerPlayPauseButton && largePlayerPlayPauseButton.getAttribute("data-amplitude-source") === 'youtube') {
           largePlayerPlayPauseButton.addEventListener('click', function(e) {
@@ -159,26 +168,29 @@ function togglePlayButton(play) {
       }
     }
   }
-} // END function togglePlayButton
 
+  // Amplitude skip forward|backward button
+  // ---------------------------------------------------------------------------
+  for (var i=0; i<largePlayerSkipForwardButtons.length; i++) {
+    if (largePlayerSkipForwardButtons[i].id === 'skip-forward_{{player.id}}') {
+      if (largePlayerSkipForwardButtons[i].dataset.amplitudeSource === 'youtube') {
+        largePlayerSkipForwardButtons[i].addEventListener('click', function(event) {
+          var ytPlayer     = j1.adapter.amplitude['ytPlayer'];
+          var currentTime  = ytPlayer.getCurrentTime();
+          const skipOffset = parseFloat(playerForwardBackwardSkipSeconds);
+          
+          ytPlayer.seekTo(currentTime + skipOffset, true)
 
-// Amplitude skip forward|backward buttons
-// -----------------------------------------------------------------------------
+          //const duration    = Amplitude.getSongDuration();
+          //const currentTime = parseFloat(Amplitude.getSongPlayedSeconds());
+          //const targetTime  = parseFloat(currentTime + skipOffset);
 
-/*
-largePlayerSkipForwardButtons[i].addEventListener('click', function(event) {
-  var ytPlayer     = j1.adapter.amplitude['ytPlayer'];
-  var currentTime  = ytPlayer.getCurrentTime();
-  const skipOffset = parseFloat(playerForwardBackwardSkipSeconds);
-  
-  ytPlayer.seekTo(currentTime + skipOffset, true)
+          // if (currentTime > 0) {
+          //   Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
+          // }
+        }); // END Listener 'click' SkipForwardButtons (AJS Player)
+      } // END if largePlayerSkipForwardButtons (AJS Player)
+    }
+  } // END for
 
-  //const duration    = Amplitude.getSongDuration();
-  //const currentTime = parseFloat(Amplitude.getSongPlayedSeconds());
-  //const targetTime  = parseFloat(currentTime + skipOffset);
-
-  // if (currentTime > 0) {
-  //   Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
-  // }
-}); // END Listener 'click' SkipForwardButtons (AJS Player)
-*/
+} // END function setAjsButtonEvents
