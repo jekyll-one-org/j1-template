@@ -204,10 +204,8 @@ j1.adapter.amplitude = ((j1, window) => {
       amplitudeSettings = $.extend({}, {{amplitude_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
       amplitudeOptions  = $.extend(true, {}, amplitudeDefaults, amplitudeSettings);
 
-      // save AJS player setiings for later use (e.g. the AJS plugins)
-      // j1.adapter.amplitude['amplitudeDefaults'] = amplitudeDefaults;
-      // j1.adapter.amplitude['amplitudeSettings'] = amplitudeSettings;
-      // j1.adapter.amplitude['amplitudeOptions']  = amplitudeOptions;
+      // save AJS player options for later use
+      j1.adapter.amplitude['amplitudeOptions'] = amplitudeOptions;
 
       // -----------------------------------------------------------------------
       // control|logging settings
@@ -613,33 +611,22 @@ j1.adapter.amplitude = ((j1, window) => {
                     //
                     if (document.getElementById('{{player.id}}') !== null) {
 
-                      // add listeners to all progress bars found (mini-player)
-                      // getElementsByClassName returns an Array-like object
+                      // click on progress bar
                       // -------------------------------------------------------
+
+                      // getElementsByClassName returns an Array-like object
                       var progressBars = document.getElementsByClassName("mini-player-progress");
+
+                      // add listeners to all progress bars found
                       for (var i=0; i<progressBars.length; i++) {
-                        if (progressBars[i].dataset.amplitudeSource === 'youtube') {
-                          // do nothing
-                        } else {
                           progressBars[i].addEventListener('click', function(event) {
                             var offset = this.getBoundingClientRect();
                             var xpos   = event.pageX - offset.left;
-  
+
                             Amplitude.setSongPlayedPercentage(
                               (parseFloat(xpos)/parseFloat(this.offsetWidth))*100);
-                          }); // END EventListener 'click'
-                        }
-                      } // END for
-
-                      // for (var i=0; i<progressBars.length; i++) {
-                      //     progressBars[i].addEventListener('click', function(event) {
-                      //       var offset = this.getBoundingClientRect();
-                      //       var xpos   = event.pageX - offset.left;
-
-                      //       Amplitude.setSongPlayedPercentage(
-                      //         (parseFloat(xpos)/parseFloat(this.offsetWidth))*100);
-                      //     });
-                      // }
+                          });
+                      }
 
                     } // END mini player UI events
                     {% endif %}
@@ -711,14 +698,14 @@ j1.adapter.amplitude = ((j1, window) => {
                       }); // END EventListener 'click' (compact player|show playlist)
                     } // END if hidePlaylist
 
-                    // add listeners to all progress bars found (compact-player)
-                    // getElementsByClassName returns an Array-like object
+                    // click on progress bar
                     // -------------------------------------------------------
-                    var progressBars = document.getElementsByClassName("compact-player-progress");
-                    for (var i=0; i<progressBars.length; i++) {
-                      if (progressBars[i].dataset.amplitudeSource === 'youtube') {
-                        // do nothing
-                      } else {
+
+                      // getElementsByClassName returns an Array-like object
+                      var progressBars = document.getElementsByClassName("compact-player-progress");
+
+                      // add listeners to all progress bars found
+                      for (var i=0; i<progressBars.length; i++) {
                         progressBars[i].addEventListener('click', function(event) {
                           var offset = this.getBoundingClientRect();
                           var xpos   = event.pageX - offset.left;
@@ -726,8 +713,7 @@ j1.adapter.amplitude = ((j1, window) => {
                           Amplitude.setSongPlayedPercentage(
                             (parseFloat(xpos)/parseFloat(this.offsetWidth))*100);
                         }); // END EventListener 'click'
-                      }
-                    } // END for
+                      } // END for
 
                       // click on skip forward|backward (compact player)
                       // See: https://github.com/serversideup/amplitudejs/issues/384
@@ -871,7 +857,7 @@ j1.adapter.amplitude = ((j1, window) => {
                       // click on song container
                       // var largetPlayerSongContainer = document.getElementsByClassName("song amplitude-song-container");
                       // for (var i=0; i<largetPlayerSongContainer.length; i++) {
-                      //   if (largetPlayerSongContainer[i].dataset.amplitudeSource === 'youtube') {
+                      //   if (largetPlayerSongContainer[i].mimikYTPUiEventsForAJS) {
                       //     largetPlayerSongContainer[i].addEventListener('click', function(event) {
                       //       var playlist        = this.getAttribute("data-amplitude-playlist");
                       //       var playlistLength  = largetPlayerSongContainer.length;
@@ -880,13 +866,15 @@ j1.adapter.amplitude = ((j1, window) => {
                       //   } // END if Attribute
                       // } // END for
 
-                      // add listeners to all progress bars found (large-player)
+                      // add listeners to all progress bars found
                       // -------------------------------------------------------
                       var progressBars = document.getElementsByClassName("large-player-progress");
                       for (var i=0; i<progressBars.length; i++) {
                         if (progressBars[i].dataset.amplitudeSource === 'youtube') {
                           // do nothing
-                        } else {
+                        } 
+                        else
+                        {
                           progressBars[i].addEventListener('click', function(event) {
                             var offset = this.getBoundingClientRect();
                             var xpos   = event.pageX - offset.left;
@@ -897,16 +885,6 @@ j1.adapter.amplitude = ((j1, window) => {
                         }
                       } // END for
 
-                      // for (var i=0; i<progressBars.length; i++) {
-                      //   progressBars[i].addEventListener('click', function(event) {
-                      //     var offset = this.getBoundingClientRect();
-                      //     var xpos   = event.pageX - offset.left;
-
-                      //     Amplitude.setSongPlayedPercentage(
-                      //       (parseFloat(xpos)/parseFloat(this.offsetWidth))*100);
-                      //   }); // END EventListener 'click'
-                      // } // END for
-
                       // click on skip forward|backward (large player)
                       // See: https://github.com/serversideup/amplitudejs/issues/384
                       // -------------------------------------------------------
@@ -916,9 +894,6 @@ j1.adapter.amplitude = ((j1, window) => {
                       for (var i=0; i<largePlayerSkipForwardButtons.length; i++) {
                         if (largePlayerSkipForwardButtons[i].id === 'skip-forward_{{player.id}}') {
                           if (largePlayerSkipForwardButtons[i].dataset.amplitudeSource === 'youtube') {
-
-                            // do nothing
-
                             // largePlayerSkipForwardButtons[i].addEventListener('click', function(event) {
                             //   var ytPlayer     = j1.adapter.amplitude['ytPlayer'];
                             //   var currentTime  = ytPlayer.getCurrentTime();
@@ -953,17 +928,14 @@ j1.adapter.amplitude = ((j1, window) => {
                       var largePlayerSkipBackwardButtons = document.getElementsByClassName("large-player-skip-backward");
                       for (var i=0; i<largePlayerSkipBackwardButtons.length; i++) {
                         if (largePlayerSkipBackwardButtons[i].id === 'skip-backward_{{player.id}}') {
-                          if (largePlayerSkipBackwardButtons[i].dataset.amplitudeSource === 'youtube') {
-
-                            // do nothing
-
-                            // largePlayerSkipBackwardButtons[i].addEventListener('click', function(event) {
-                            //   var ytPlayer     = j1.adapter.amplitude['ytPlayer'];
-                            //   var currentTime  = ytPlayer.getCurrentTime();
-                            //   const skipOffset = parseFloat(playerForwardBackwardSkipSeconds);
+                          // if (largePlayerSkipBackwardButtons[i].dataset.amplitudeSource === 'youtube') {
+                          //   largePlayerSkipBackwardButtons[i].addEventListener('click', function(event) {
+                          //     var ytPlayer     = j1.adapter.amplitude['ytPlayer'];
+                          //     var currentTime  = ytPlayer.getCurrentTime();
+                          //     const skipOffset = parseFloat(playerForwardBackwardSkipSeconds);
                               
-                            //   ytPlayer.seekTo(currentTime - skipOffset, true)
-                            // }); // END EventListener 'click'
+                          //     ytPlayer.seekTo(currentTime - skipOffset, true)
+                          //   }); // END EventListener 'click'
                           } else {
                             largePlayerSkipBackwardButtons[i].addEventListener('click', function(event) {
                               const skipOffset  = parseFloat(playerForwardBackwardSkipSeconds);
