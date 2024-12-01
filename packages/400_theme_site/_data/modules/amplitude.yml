@@ -30,6 +30,61 @@ settings:
   playlists:
 
     # --------------------------------------------------------------------------
+    # Manon Mélodie
+    # --------------------------------------------------------------------------
+    #
+    - playlist:
+      enabled:                          true
+
+      name:                             manon_melodie_yt
+      title:                            Manon Mélodie
+
+      # ------------------------------------------------------------------------
+      # ALBUM settings
+      # ------------------------------------------------------------------------
+      album:                            &album_manon_melodie_yt
+        name:                           TuneCore 2024
+        artist:                         Manon Mélodie
+        audio_base:                     //youtube.com
+        cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
+
+      # ------------------------------------------------------------------------
+      # TITLE settings (songs)
+      # ------------------------------------------------------------------------
+      items:
+
+        # title 01
+        - item:
+          enabled:                      true
+          <<:                           *album_manon_melodie_yt
+          title:                        Les Échos du Passé                      # Echos der Vergangenheit
+          audio:                        watch?v=_EYc5W3qy4s
+          audio_info:                   //youtube.com/watch?v=_EYc5W3qy4s
+          cover_image:                  //img.youtube.com/vi/_EYc5W3qy4s/maxresdefault.jpg
+          duration:                     "03:02"
+
+        # title 02
+        - item:
+          enabled:                      true
+          <<:                           *album_manon_melodie_yt
+          title:                        Fleur de Printemps                      # Frühlingsblume
+          audio:                        watch?v=OUjHRpNUqyw
+          audio_info:                   //youtube.com/watch?v=OUjHRpNUqyw
+          cover_image:                  //img.youtube.com/vi/OUjHRpNUqyw/maxresdefault.jpg
+          duration:                     "02:57"
+
+        # title 03
+        - item:
+          enabled:                      true
+          <<:                           *album_manon_melodie_yt
+          title:                        La Vie en Dance                         # Leben im Tanz
+          audio:                        watch?v=yttS9UNgZFk
+          audio_info:                   //youtube.com/watch?v=yttS9UNgZFk
+          cover_image:                  //img.youtube.com/vi/yttS9UNgZFk/maxresdefault.jpg
+          duration:                     "02:45"
+
+
+    # --------------------------------------------------------------------------
     # Mimi Rutherfurt
     # --------------------------------------------------------------------------
     #
@@ -53,6 +108,16 @@ settings:
       # ------------------------------------------------------------------------
       items:
 
+        # title 00
+        - item:
+          enabled:                      true
+          <<:                           *album_mimi_rutherfurt_yt
+          title:                        Les Échos du Passé
+          audio:                        watch?v=_EYc5W3qy4s
+          audio_info:                   //youtube.com/watch?v=_EYc5W3qy4s
+          cover_image:                  //img.youtube.com/vi/_EYc5W3qy4s/maxresdefault.jpg
+          duration:                     "03:02"
+
         # title 01
         - item:
           enabled:                      true
@@ -62,7 +127,6 @@ settings:
           audio_info:                   //www.youtube.com/@MaritimVerlag
           cover_image:                  //img.youtube.com/vi/qEhzpBJpUq0/maxresdefault.jpg
           duration:                     "5:25"
-
         # title 02
         - item:
           enabled:                      true
@@ -545,7 +609,7 @@ settings:
     # --------------------------------------------------------------------------
     #
     - player:
-      enabled:                          true
+      enabled:                          false
 
       plugin_manager:
         enabled:                        true
@@ -573,11 +637,53 @@ settings:
       #
       id:                               mimi_rutherfurt_yt_large
       type:                             large
-      #audio_rating:                     true
+#     audio_rating:                     true
 
       playlist:
         name:                           mimi_rutherfurt_yt
         title:                          Mimi Rutherfurt
+        audio_info:                     false
+        controls:                       false
+
+
+    # --------------------------------------------------------------------------
+    # LARGE player, Manon Mélodie
+    # --------------------------------------------------------------------------
+    #
+    - player:
+      enabled:                          true
+
+      plugin_manager:
+        enabled:                        true
+        plugins:                        [ ytp ]
+
+      # ------------------------------------------------------------------------
+      # SOURCE settings
+      source:                           video
+
+      # ------------------------------------------------------------------------
+      # TIME settings
+      display_hours:                    false
+
+      # ------------------------------------------------------------------------
+      # CONTROL BUTTON settings
+      #
+      song_progress_bar:                true
+      skip_forward_backward_button:     true
+      volume_slider:
+        enabled:                        true
+        preset_value:                   46
+
+      # ------------------------------------------------------------------------
+      # PLAYER settings
+      #
+      id:                               manon_melodie_yt_large
+      type:                             large
+#     audio_rating:                     true
+
+      playlist:
+        name:                           manon_melodie_yt
+        title:                          Manon Mélodie
         audio_info:                     false
         controls:                       false
 

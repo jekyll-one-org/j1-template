@@ -258,8 +258,15 @@ defaults:
     type:                               compact
     source:                             audio
 
+    yt_player:
+      height:                           0                                       # display player 'minimited'
+      width:                            0                                       # display player 'minimized'
+      autoplay:                         0                                       # prevent autostart, start playing using the AJS player start button
+      loop:                             1                                       # prevent autoloop, control looping by the AJS player
+
     plugin_manager:
       enabled:                          false
+      plugins:                          [ ytp ]
 
     waveforms:
       enabled:                          false

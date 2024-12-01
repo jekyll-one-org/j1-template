@@ -97,18 +97,8 @@ var ytPlayerReady     = false;
 var ytApiReady        = false;
 var logger            = log4javascript.getLogger('j1.adapter.amplitude.tech');
 
-// YT Player settings data (created dynamically)
-// -----------------------------------------------------------------------------
-// var ytPlayers         = {};
-// var ytPlayersMap      = new Map();
-
 // AmplitudeJS API settings
 // -----------------------------------------------------------------------------
-
-var dependency;
-var playerCounter     = 0;
-var load_dependencies = {};
-
 var ytpSongIndex      = "0";
 var ytpAutoPlay       = false;
 var ytpLoop           = true;
@@ -139,7 +129,7 @@ var progress;
   // main
   // ---------------------------------------------------------------------------
 
-  ytInitAPI();
+  ytpInit(amplitudeOptions);
 
   var dependencies_ytp_ready = setInterval (() => {
     var ytApiReady    = (j1.adapter.amplitude['ytApiReady']    !== undefined) ? j1.adapter.amplitude['ytApiReady']    : false;
@@ -155,7 +145,12 @@ var progress;
 
 
   // TODO: load individual player settings if multiple players in page
-  function ytInitAPI () {
+  function ytpInit (options) {
+    var settings = options;
+
+    // -------------------------------------------------------------------------
+    // main
+    // -------------------------------------------------------------------------
     startTimeModule = Date.now();
 
     logger.info('\n' + 'Initialize plugin|tech (ytp) : started');
@@ -168,7 +163,7 @@ var progress;
 
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-  } // END ytpInit()
+  } // END ytpInit
 
 
   // ---------------------------------------------------------------------------
@@ -180,108 +175,59 @@ var progress;
   function onYouTubeIframeAPIReady() {
     ytApiReady = true;
 
-    // var currentOptions =  $.extend({}, {{amplitude_options | replace: 'nil', 'null' | replace: '=>', ':' }});
+    // TODO: load individual player settings if multiple players in page
+    //
+    var ytpSettings     = {
+      ytpVideoID:       "_EYc5W3qy4s",
+      ytpAutoPlay:      0,
+      ytpLoop:          1
+    };
 
-    {% for player in amplitude_options.players %} {% if player.enabled %}
-    {% capture xhr_container_id %}{{player.id}}_parent{% endcapture %}
+    logger.info('\n' + 'AJS YouTube iFrame API: ready');
 
-    {% if player.source == empty %}
-      {% assign player_source = amplitude_defaults.player.source %}
-    {% else %}
-      {% assign player_source = player.source %}
-    {% endif %}
+    // create the YT Player hidden div (player container)
+    var ytpContainer            = document.getElementById('manon_melodie_yt_large_yt_video');
+    ytpContainer.innerHTML      = '<div id="ytPlayer"></div>';
+    ytpContainer.style.cssText  = 'display:none';
 
-    {% if player_source == 'video' %}
+    ytPlayer = new YT.Player('ytPlayer', {
+      height:             '0',
+      width:              '0',
+      videoId:            ytpSettings.ytpVideoID,
+      playerVars: {
+        autoplay:         ytpSettings.ytpAutoPlay,
+        loop:             ytpSettings.ytpLoop
+      },
+      events: {
+        'onReady':        onPlayerReady,
+        'onStateChange':  onPlayerStateChange
+      }
+    });
 
-      // load players of type 'video that are configured in current page
-      //
-      var playerExistsInPage = ($('#' + '{{xhr_container_id}}')[0] !== undefined) ? true : false;
-      if (playerExistsInPage) {        
-        var activeSongMetadata = Amplitude.getActiveSongMetadata();
-        playerCounter++;
+    // save YT API state for later use
+    j1.adapter.amplitude['ytApiReady'] = ytApiReady;
 
-        // load individual player settings (to manage multiple players in page)
-        //
-        var ytpVideoID          = activeSongMetadata.url.split('=')[1];
-        var ytpAutoPlay         = ('{{player.yt_player.autoplay}}'.length > 0) ? '{{player.yt_player.autoplay}}'  : '{{amplitude_defaults.player.yt_player.autoplay}}';
-        var ytpLoop             = ('{{player.yt_player.loop}}'.length > 0)     ? '{{player.yt_player.loop}}'      : '{{amplitude_defaults.player.yt_player.loop}}';
-        var ytpHeight           = ('{{player.yt_player.height}}'.length > 0)   ? '{{player.yt_player.height}}'    : '{{amplitude_defaults.player.yt_player.height}}';
-        var ytpWidth            = ('{{player.yt_player.width}}'.length > 0)    ? '{{player.yt_player.width}}'     : '{{amplitude_defaults.player.yt_player.width}}';
+  }
 
-        logger.info('\n' + 'AJS YouTube iFrame API: ready');
-        logger.info('\n' + 'configure player on ID: #{{player.id}}');
-
-        // create a hidden YT Player iFrame container
-        //
-        var ytpContainer            = document.getElementById('{{player.id}}_video');
-        ytpContainer.innerHTML      = '<div id="iframe_{{player.id}}"></div>';
-        ytpContainer.style.cssText  = 'display:none';
-
-        ytPlayer = new YT.Player('iframe_{{player.id}}', {
-          height:             ytpHeight,
-          width:              ytpWidth,
-          videoId:            ytpVideoID,
-          playerVars: {
-            autoplay:         ytpAutoPlay,
-            loop:             ytpLoop
-          },
-          events: {
-            'onReady':        {{player.id}}OnPlayerReady,
-            'onStateChange':  {{player.id}}OnPlayerStateChange
-          }
-        });
-
-        // save YT API state for later use
-        j1.adapter.amplitude['ytApiReady'] = ytApiReady;
-
-      } // END if playerExistsInPage()
-
-      // run base YT player initialization (on ready state)
-      // -----------------------------------------------------------------------
-      function {{player.id}}OnPlayerReady(event) {
-        logger.info('\n' + 'AJS YouTube Player: ready');
-
-        // save YT player references for later use
-        j1.adapter.amplitude['ytPlayerReady'] = true;
-        j1.adapter.amplitude['ytPlayer']      = ytPlayer; 
-
-        endTimeModule = Date.now();
-
-        logger.info('\n' + 'Initialize plugin|tech (ytp) : finished');
-
-        if (playerCounter > 0) {
-          logger.info('\n' + 'Found players of type video (YTP) in page: ' + playerCounter);
-        } else {
-          logger.warn('\n' + 'Found NO players of type video (YTP) in page');
-        }
-
-        logger.info('\n' + 'plugin|tech initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
-
-      } // END onPlayerReady()
-
-      // update YT player elements on state change (playing)
-      // -----------------------------------------------------------------------
-      function {{player.id}}OnPlayerStateChange(event) {
-
-        // When YTP is playing, update progressBar every second
-        //
-        if (event.data === YT_PLAYER_STATE.PLAYING) {
-          setInterval(updateProgressBarsYTP, 1000);
-        }
-
-      } // END onPlayerStateChange()
-
-    {% endif %} {% endif %} {% endfor %}
-
-  } // END onYouTubeIframeAPIReady ()
-
- 
+  // run base YT player initialization (on ready state)
   // ---------------------------------------------------------------------------
-  // Base AJS Player functions
-  // ---------------------------------------------------------------------------
+  function onPlayerReady(event) {
+    logger.info('\n' + 'AJS YouTube Player: ready');
 
-  // Returns the position as a percentage the user clicked in player progressbar
-  // NOTE: The percentage is out of [0 .. 1]
+    // save YT player references for later use
+    j1.adapter.amplitude['ytPlayerReady'] = true;
+    j1.adapter.amplitude['ytPlayer']      = ytPlayer; 
+
+    // set additional YT player settings (audio only)
+    ytPlayer.setPlaybackQuality('small');
+
+    endTimeModule = Date.now();
+    logger.info('\n' + 'Initialize plugin|tech (ytp) : finished');
+    logger.info('\n' + 'plugin|tech initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+  }
+
+  // Returns the percentage (of the position) the user clicked the progressbar
+  // NOTE: the percentage is out of a rage of [0 .. 1]
   // ---------------------------------------------------------------------------
   function getProgressBarSelectedPositionPercentage (event, progessBar) {
     var offset     = progessBar.getBoundingClientRect();
@@ -300,19 +246,31 @@ var progress;
     return time;
   }
 
-  // Update YTP specific progress data
+  // update YTP specific progress data
   // ---------------------------------------------------------------------------
   function updateProgressBarsYTP() {
     var progress;
     var progressBar = j1.adapter.amplitude['ytPlayerProgressBar'];
     
-    // calc procent value (float, 2 decimals [0.00 .. 1.00])
+    // calc procent value (float, 2 decimals)
     progress = parseFloat((ytPlayer.getCurrentTime() / ytPlayer.getDuration()).toFixed(2));
     
     // save YT player progress data for later use (e.g. events)
     j1.adapter.amplitude['ytPlayerProgress'] = progress;
 
     progressBar.value = progress;
+  }
+
+  // update YT player elements on state change (playing)
+  // ---------------------------------------------------------------------------
+  function onPlayerStateChange(event) {
+
+    // When YTP is playing, update progressBar every second
+    //
+    if (event.data === YT_PLAYER_STATE.PLAYING) {
+      setInterval(updateProgressBarsYTP, 1000);
+    }
+
   }
 
 
@@ -383,6 +341,7 @@ var progress;
   //
   function ytpGetCurrentSeconds (player) {
   }
+
 
 
   // ---------------------------------------------------------------------------

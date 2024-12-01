@@ -99,8 +99,8 @@ var logger            = log4javascript.getLogger('j1.adapter.amplitude.tech');
 
 // YT Player settings data (created dynamically)
 // -----------------------------------------------------------------------------
-// var ytPlayers         = {};
-// var ytPlayersMap      = new Map();
+var ytPlayers         = {};
+var ytPlayersMap      = new Map();
 
 // AmplitudeJS API settings
 // -----------------------------------------------------------------------------
@@ -139,7 +139,7 @@ var progress;
   // main
   // ---------------------------------------------------------------------------
 
-  ytInitAPI();
+  ytpInit(amplitudeOptions);
 
   var dependencies_ytp_ready = setInterval (() => {
     var ytApiReady    = (j1.adapter.amplitude['ytApiReady']    !== undefined) ? j1.adapter.amplitude['ytApiReady']    : false;
@@ -155,7 +155,12 @@ var progress;
 
 
   // TODO: load individual player settings if multiple players in page
-  function ytInitAPI () {
+  function ytpInit (options) {
+    var settings = options;
+
+    // -------------------------------------------------------------------------
+    // main
+    // -------------------------------------------------------------------------
     startTimeModule = Date.now();
 
     logger.info('\n' + 'Initialize plugin|tech (ytp) : started');
@@ -196,9 +201,12 @@ var progress;
       // load players of type 'video that are configured in current page
       //
       var playerExistsInPage = ($('#' + '{{xhr_container_id}}')[0] !== undefined) ? true : false;
-      if (playerExistsInPage) {        
+      if (playerExistsInPage) {
+        // var currentPlayerSettings =  $.extend({}, {{player | replace: 'nil', 'null' | replace: '=>', ':' }});        
         var activeSongMetadata = Amplitude.getActiveSongMetadata();
-        playerCounter++;
+        // var playerPlaylist      = $.extend({}, {{player.playlist | replace: 'nil', 'null' | replace: '=>', ':' }}); 
+        // var activePlaylist      = playerPlaylist.name;
+        
 
         // load individual player settings (to manage multiple players in page)
         //
@@ -207,6 +215,14 @@ var progress;
         var ytpLoop             = ('{{player.yt_player.loop}}'.length > 0)     ? '{{player.yt_player.loop}}'      : '{{amplitude_defaults.player.yt_player.loop}}';
         var ytpHeight           = ('{{player.yt_player.height}}'.length > 0)   ? '{{player.yt_player.height}}'    : '{{amplitude_defaults.player.yt_player.height}}';
         var ytpWidth            = ('{{player.yt_player.width}}'.length > 0)    ? '{{player.yt_player.width}}'     : '{{amplitude_defaults.player.yt_player.width}}';
+
+        playerCounter++;
+
+        // update ytPlayers
+        // ytPlayers = {
+        //   numPlayers: playerCounter,
+        //   '{{player.id}}': {{player.id}}
+        // };
 
         logger.info('\n' + 'AJS YouTube iFrame API: ready');
         logger.info('\n' + 'configure player on ID: #{{player.id}}');
@@ -246,21 +262,13 @@ var progress;
         j1.adapter.amplitude['ytPlayer']      = ytPlayer; 
 
         endTimeModule = Date.now();
-
         logger.info('\n' + 'Initialize plugin|tech (ytp) : finished');
-
-        if (playerCounter > 0) {
-          logger.info('\n' + 'Found players of type video (YTP) in page: ' + playerCounter);
-        } else {
-          logger.warn('\n' + 'Found NO players of type video (YTP) in page');
-        }
-
         logger.info('\n' + 'plugin|tech initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
       } // END onPlayerReady()
 
       // update YT player elements on state change (playing)
-      // -----------------------------------------------------------------------
+      // ---------------------------------------------------------------------------
       function {{player.id}}OnPlayerStateChange(event) {
 
         // When YTP is playing, update progressBar every second

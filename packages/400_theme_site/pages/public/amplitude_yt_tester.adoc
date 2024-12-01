@@ -172,8 +172,8 @@ Note that the YT plugin embeds a YP player and mimics the AmplitudeJS player
 buttons and can only be used with the J1 Template.
 ====
 
-.Mimi Rutherfurt · Maritim Verlag (YouTube)
-amplitude::mimi_rutherfurt_yt_large[role="mt-4 mb-8"]
+.Manon Mélodie · TuneCore 2024 (YouTube)
+amplitude::manon_melodie_yt_large[role="mt-4 mb-8"]
 
 
 ifeval::[{ms_slider_video_example} == true]

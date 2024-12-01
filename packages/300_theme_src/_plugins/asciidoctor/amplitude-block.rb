@@ -44,7 +44,7 @@ Asciidoctor::Extensions.register do
         <div class="audioblock #{attributes['role']}">
           #{title_html}
           <div id="#{target}_parent" class="amplitude-player"></div>
-          <div id="#{target}_yt_video" class="yt-player"></div>
+          <div id="#{target}_video" class="yt-player"></div>
         </div>
       )
 
