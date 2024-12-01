@@ -136,25 +136,10 @@ var progress;
 
 
   // ---------------------------------------------------------------------------
-  // main
+  // Base YT functions and events
   // ---------------------------------------------------------------------------
 
-  ytInitAPI();
-
-  var dependencies_ytp_ready = setInterval (() => {
-    var ytApiReady    = (j1.adapter.amplitude['ytApiReady']    !== undefined) ? j1.adapter.amplitude['ytApiReady']    : false;
-    var ytPlayerReady = (j1.adapter.amplitude['ytPlayerReady'] !== undefined) ? j1.adapter.amplitude['ytPlayerReady'] : false;
-
-    if (ytApiReady && ytPlayerReady) {
-      mimikYTPlayerUiEventsForAJS();
-
-      clearInterval(dependencies_ytp_ready);
-    } // END if
-
-  }, 10); // END dependencies_ytp_ready
-
-
-  // TODO: load individual player settings if multiple players in page
+  // load YT Iframe player API
   function ytInitAPI () {
     startTimeModule = Date.now();
 
@@ -167,15 +152,9 @@ var progress;
     firstScriptTag  = document.getElementsByTagName('script')[0];
 
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  }
 
-  } // END ytpInit()
-
-
-  // ---------------------------------------------------------------------------
-  // Base YTP functions
-  // ---------------------------------------------------------------------------
-
-  // Create an <iframe> player after the YT API downloaded|isReady
+  // Create a player after Iframe player API is ready to use
   // ---------------------------------------------------------------------------
   function onYouTubeIframeAPIReady() {
     ytApiReady = true;
@@ -198,6 +177,10 @@ var progress;
       var playerExistsInPage = ($('#' + '{{xhr_container_id}}')[0] !== undefined) ? true : false;
       if (playerExistsInPage) {        
         var activeSongMetadata = Amplitude.getActiveSongMetadata();
+        var playerSettings     =  $.extend({}, {{player | replace: 'nil', 'null' | replace: '=>', ':' }});
+        var playerType         = playerSettings.type
+
+        // increase number of found players in page by one
         playerCounter++;
 
         // load individual player settings (to manage multiple players in page)
@@ -233,6 +216,10 @@ var progress;
 
         // save YT API state for later use
         j1.adapter.amplitude['ytApiReady'] = ytApiReady;
+        // save YT Player options|settings for later use
+        j1.adapter.amplitude['ytPlayerDefaults'] = amplitudeDefaults.player;
+        j1.adapter.amplitude['ytPlayerSettings'] = playerSettings;
+
 
       } // END if playerExistsInPage()
 
@@ -275,7 +262,32 @@ var progress;
 
   } // END onYouTubeIframeAPIReady ()
 
- 
+
+  // ---------------------------------------------------------------------------
+  // main (plugin)
+  // ---------------------------------------------------------------------------
+
+  // load YT Iframe player API
+  //
+  ytInitAPI();
+
+  // setup YTPlayerUiEvents for AJS players
+  //
+  var dependencies_ytp_ready = setInterval (() => {
+    var ytApiReady    = (j1.adapter.amplitude['ytApiReady']    !== undefined) ? j1.adapter.amplitude['ytApiReady']    : false;
+    var ytPlayerReady = (j1.adapter.amplitude['ytPlayerReady'] !== undefined) ? j1.adapter.amplitude['ytPlayerReady'] : false;
+
+    if (ytApiReady && ytPlayerReady) {
+      var playerSettings =  $.extend({}, {{player | replace: 'nil', 'null' | replace: '=>', ':' }});
+      var playerType     = playerSettings.type
+      mimikYTPlayerUiEventsForAJS();
+
+      clearInterval(dependencies_ytp_ready);
+    } // END if
+
+  }, 10); // END dependencies_ytp_ready
+
+
   // ---------------------------------------------------------------------------
   // Base AJS Player functions
   // ---------------------------------------------------------------------------
@@ -317,7 +329,7 @@ var progress;
 
 
   // ---------------------------------------------------------------------------
-  // Mimik base AJS API functions
+  // Mimik Base AJS API functions
   // ---------------------------------------------------------------------------
 
   // Skip video to a time specified by time
@@ -386,146 +398,136 @@ var progress;
 
 
   // ---------------------------------------------------------------------------
-  // mimikYTPlayerUiEventsForAJS
-  // Overload AJS button events for YT video (large player)
-  // ---------------------------------------------------------------------------
+  // mimikYTPlayerUiEventsForAJS()
+  // Mimik AJS button events for YT video
+  function mimikYTPlayerUiEventsForAJS() {
+    var playerDefaults = j1.adapter.amplitude['ytPlayerDefaults'];
+    var playerSettings = j1.adapter.amplitude['ytPlayerSettings'];
 
-  function mimikYTPlayerUiEventsForAJS(ytPlayer) {
-    var largePlayerSkipForwardButtons   = document.getElementsByClassName("large-player-skip-forward");
-    var largePlayerSkipBackwardButtons  = document.getElementsByClassName("large-player-skip-backward");
-    var largePlayerPlayPauseButton      = document.getElementById('large_player_play_pause');
+    // -------------------------------------------------------------------------
+    // Large AJS players
+    if (j1.adapter.amplitude['ytPlayerSettings'].type === 'large') {
+      var largePlayerSkipForwardButtons   = document.getElementsByClassName("large-player-skip-forward");
+      var largePlayerSkipBackwardButtons  = document.getElementsByClassName("large-player-skip-backward");
+      var largePlayerPlayPauseButton      = document.getElementById('large_player_play_pause');
 
-    // Overload AJS play_pause button for YT
-    if (largePlayerPlayPauseButton) {
+      // Overload AJS play_pause button for YT
+      if (largePlayerPlayPauseButton) {
 
-      largePlayerPlayPauseButton.addEventListener('click', function(event) {
-        playlist      = this.getAttribute("data-amplitude-playlist");
-        songMetaData  = Amplitude.getSongAtIndex(ytpSongIndex);
-        songURL       = songMetaData.url;
-        songIndex     = ytpSongIndex;
+        largePlayerPlayPauseButton.addEventListener('click', function(event) {
+          playlist      = this.getAttribute("data-amplitude-playlist");
+          songMetaData  = Amplitude.getSongAtIndex(ytpSongIndex);
+          songURL       = songMetaData.url;
+          songIndex     = ytpSongIndex;
 
-        ytPlayer          = j1.adapter.amplitude['ytPlayer'];
-        ytpPlaybackRate   = ytPlayer.getPlaybackRate();
+          ytPlayer          = j1.adapter.amplitude['ytPlayer'];
+          ytpPlaybackRate   = ytPlayer.getPlaybackRate();
 
-        // toggle YT play|pause video
-        if (ytPlayer.getPlayerState() === YT_PLAYER_STATE.PLAYING || ytPlayer.getPlayerState() === YT_PLAYER_STATE.BUFFERING) {
-          ytPlayer.pauseVideo();
-        } else {
-          ytPlayer.playVideo();
-        }
+          // toggle YT play|pause video
+          if (ytPlayer.getPlayerState() === YT_PLAYER_STATE.PLAYING || ytPlayer.getPlayerState() === YT_PLAYER_STATE.BUFFERING) {
+            ytPlayer.pauseVideo();
+          } else {
+            ytPlayer.playVideo();
+          }
 
-        // toggle AJS play_pause button
-        if (largePlayerPlayPauseButton.classList.contains('amplitude-paused')) {
-          largePlayerPlayPauseButton.classList.remove('amplitude-paused');
-          largePlayerPlayPauseButton.classList.add('amplitude-playing');
-        } else {
-          largePlayerPlayPauseButton.classList.remove('amplitude-playing');
-          largePlayerPlayPauseButton.classList.add('amplitude-paused');
-        }
+          // toggle AJS play_pause button
+          if (largePlayerPlayPauseButton.classList.contains('amplitude-paused')) {
+            largePlayerPlayPauseButton.classList.remove('amplitude-paused');
+            largePlayerPlayPauseButton.classList.add('amplitude-playing');
+          } else {
+            largePlayerPlayPauseButton.classList.remove('amplitude-playing');
+            largePlayerPlayPauseButton.classList.add('amplitude-paused');
+          }
 
-        event.preventDefault();
-      }); // END EventListener largePlayerPlayPauseButton 'click'
-    } // END if largePlayerPlayPauseButton
+          event.preventDefault();
+        }); // END EventListener largePlayerPlayPauseButton 'click'
+      } // END if largePlayerPlayPauseButton
 
-    // Overload AJS largePlayerSkipBackwardButtons button for YT
+      // Overload AJS largePlayerSkipBackward button for YT
       for (var i=0; i<largePlayerSkipForwardButtons.length; i++) {
-      // TODO: load individual player settings if multiple players in page
-      //
-      var playerForwardBackwardSkipSeconds = 10;
-      //  if (largePlayerSkipForwardButtons[i].id === 'skip-forward_{{player.id}}') {
-          // TODO: Fix for multiple players in page
-          if (largePlayerSkipForwardButtons[i].id) {
-            largePlayerSkipForwardButtons[i].addEventListener('click', function(event) {
-              var ytPlayer = j1.adapter.amplitude['ytPlayer'];
-              if (ytPlayer.getPlayerState() === YT_PLAYER_STATE.PLAYING) {
-                var currentTime  = ytPlayer.getCurrentTime();
-                const skipOffset = parseFloat(playerForwardBackwardSkipSeconds);
-                
-                ytPlayer.seekTo(currentTime + skipOffset, true)
+        // load player settings
+        var playerForwardBackwardSkipSeconds = (playerSettings.forward_backward_skip_seconds === undefined) ? playerDefaults.forward_backward_skip_seconds : playerSettings.forward_backward_skip_seconds;
 
-                //const duration    = Amplitude.getSongDuration();
-                //const currentTime = parseFloat(Amplitude.getSongPlayedSeconds());
-                //const targetTime  = parseFloat(currentTime + skipOffset);
+        if (largePlayerSkipForwardButtons[i].id === 'skip-forward_' + playerSettings.id) {
+          largePlayerSkipForwardButtons[i].addEventListener('click', function(event) {
+            var ytPlayer = j1.adapter.amplitude['ytPlayer'];
 
-                // if (currentTime > 0) {
-                //   Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
-                // }
-              }
-
-              event.preventDefault();
-            }); // END Listener 'click' (SkipForwardButtons)
-          } // END if largePlayerSkipForwardButtons
-        } // END for  
-  //    END if skip-forward_{{player.id}}
-
-    // Overload AJS largePlayerSkipBackwardButtons button for YT
-    for (var i=0; i<largePlayerSkipBackwardButtons.length; i++) {
-      //  if (largePlayerSkipForwardButtons[i].id === 'skip-forward_{{player.id}}') {
-          // TODO: Fix for multiple players in page
-          if (largePlayerSkipBackwardButtons[i].id) {
-            largePlayerSkipBackwardButtons[i].addEventListener('click', function(event) {
-              var ytPlayer = j1.adapter.amplitude['ytPlayer'];
-              if (ytPlayer.getPlayerState() === YT_PLAYER_STATE.PLAYING) {
-                var currentTime  = ytPlayer.getCurrentTime();
-                const skipOffset = parseFloat(playerForwardBackwardSkipSeconds);
-                
-                ytPlayer.seekTo(currentTime - skipOffset, true)
-
-                //const duration    = Amplitude.getSongDuration();
-                //const currentTime = parseFloat(Amplitude.getSongPlayedSeconds());
-                //const targetTime  = parseFloat(currentTime + skipOffset);
-
-                // if (currentTime > 0) {
-                //   Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
-                // }
-              }
-              event.preventDefault();
-            }); // END Listener 'click' (SkipForwardButtons)
-          } // END if largePlayerSkipBackwardButton
-        } // END for  
-  //    END if skip-forward_{{player.id}}
-
-        // click on next button
-        // TODO: Fix for multiple players in page
-        // -----------------------------------------------------------------------
-        var largePlayerNextButton = document.getElementById('large_player_next');
-        if (largePlayerNextButton) {
-          largePlayerNextButton.addEventListener('click', function(event) {
-            var playlist  = this.getAttribute("data-amplitude-playlist");
-            var songIndex = ytpSongIndex;                                         // Amplitude.getActiveIndex();
-          }); // END EventListener 'click'
-        }
-
-        // click on song container
-        // TODO: Fix for multiple players in page
-        // -----------------------------------------------------------------------
-        var largetPlayerSongContainer = document.getElementsByClassName("song amplitude-song-container");
-        for (var i=0; i<largetPlayerSongContainer.length; i++) {
-          largetPlayerSongContainer[i].addEventListener('click', function(event) {
-            var playlist        = this.getAttribute("data-amplitude-playlist");
-            var playlistLength  = largetPlayerSongContainer.length;
-            ytpSongIndex        = this.getAttribute("data-amplitude-song-index");
-          }); // END EventListener 'click'
-        } // END for
-
-        // add listeners to all progress bars found
-        // TODO: Fix for multiple players in page
-        // -----------------------------------------------------------------------
-        var progressBars = document.getElementsByClassName("large-player-progress");
-        for (var i=0; i<progressBars.length; i++) {
-          j1.adapter.amplitude['ytPlayerProgressBar'] = progressBars[i];
-          progressBars[i].addEventListener('click', function(event) {
             if (ytPlayer.getPlayerState() === YT_PLAYER_STATE.PLAYING) {
-              var progressBar = this;
-              var percentage  = getProgressBarSelectedPositionPercentage(event, progressBar);
-              var time        = getTimeFromPercentage(ytPlayer, percentage);
+              var currentTime  = ytPlayer.getCurrentTime();
+              const skipOffset = parseFloat(playerForwardBackwardSkipSeconds);
 
-              ytpSeekTo(ytPlayer, time);
-            } // END if playing
+              ytPlayer.seekTo(currentTime + skipOffset, true)
+            }
 
             event.preventDefault();
-          }); // END EventListener 'click'
-        } // END for
+          }); // END Listener 'click'
+        } // END if skip-forward button
+      } // END for  
+
+      // Overload AJS largePlayerSkipBackward button for YT
+      for (var i=0; i<largePlayerSkipBackwardButtons.length; i++) {
+        // load player settings
+        var playerForwardBackwardSkipSeconds = (playerSettings.forward_backward_skip_seconds === undefined) ? playerDefaults.forward_backward_skip_seconds : playerSettings.forward_backward_skip_seconds;
+
+        if (largePlayerSkipBackwardButtons[i].id === 'skip-backward_' + playerSettings.id) {
+          largePlayerSkipBackwardButtons[i].addEventListener('click', function(event) {
+            var ytPlayer = j1.adapter.amplitude['ytPlayer'];
+
+            if (ytPlayer.getPlayerState() === YT_PLAYER_STATE.PLAYING) {
+              var currentTime  = ytPlayer.getCurrentTime();
+              const skipOffset = parseFloat(playerForwardBackwardSkipSeconds);
+              
+              ytPlayer.seekTo(currentTime - skipOffset, true)
+            }
+
+            event.preventDefault();
+          }); // END Listener 'click'
+        } // END if skip-backward button
+      } // END for  
+
+      // click on next button
+      // TODO: Fix for multiple players in page
+      // -----------------------------------------------------------------------
+      var largePlayerNextButton = document.getElementById('large_player_next');
+      if (largePlayerNextButton) {
+        largePlayerNextButton.addEventListener('click', function(event) {
+          var playlist  = this.getAttribute("data-amplitude-playlist");
+          var songIndex = ytpSongIndex;                                         // Amplitude.getActiveIndex();
+        }); // END EventListener 'click'
+      }
+
+      // click on song container
+      // TODO: Fix for multiple players in page
+      // -----------------------------------------------------------------------
+      var largetPlayerSongContainer = document.getElementsByClassName("song amplitude-song-container");
+      for (var i=0; i<largetPlayerSongContainer.length; i++) {
+        largetPlayerSongContainer[i].addEventListener('click', function(event) {
+          var playlist        = this.getAttribute("data-amplitude-playlist");
+          var playlistLength  = largetPlayerSongContainer.length;
+          ytpSongIndex        = this.getAttribute("data-amplitude-song-index");
+        }); // END EventListener 'click'
+      } // END for
+
+      // add listeners to all progress bars found
+      // TODO: Fix for multiple players in page
+      // -----------------------------------------------------------------------
+      var progressBars = document.getElementsByClassName("large-player-progress");
+      for (var i=0; i<progressBars.length; i++) {
+        j1.adapter.amplitude['ytPlayerProgressBar'] = progressBars[i];
+        progressBars[i].addEventListener('click', function(event) {
+          if (ytPlayer.getPlayerState() === YT_PLAYER_STATE.PLAYING) {
+            var progressBar = this;
+            var percentage  = getProgressBarSelectedPositionPercentage(event, progressBar);
+            var time        = getTimeFromPercentage(ytPlayer, percentage);
+
+            ytpSeekTo(ytPlayer, time);
+          } // END if playing
+
+          event.preventDefault();
+        }); // END EventListener 'click'
+      } // END for
+
+    } // END if(playerType large'
 
   } // END mimikYTPlayerUiEventsForAJS
 

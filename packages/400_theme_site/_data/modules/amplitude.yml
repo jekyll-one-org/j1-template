@@ -613,7 +613,7 @@ settings:
 
       plugin_manager:
         enabled:                        true
-        plugins:                        ytp                                     # [ ytp ]
+        plugins:                        [ ytp ]
 
       # ------------------------------------------------------------------------
       # SOURCE settings
@@ -628,6 +628,7 @@ settings:
       #
       song_progress_bar:                true
       skip_forward_backward_button:     true
+      forward_backward_skip_seconds:    60
       volume_slider:
         enabled:                        true
         preset_value:                   46
@@ -670,6 +671,7 @@ settings:
       #
       song_progress_bar:                true
       skip_forward_backward_button:     true
+      forward_backward_skip_seconds:    10
       volume_slider:
         enabled:                        true
         preset_value:                   46

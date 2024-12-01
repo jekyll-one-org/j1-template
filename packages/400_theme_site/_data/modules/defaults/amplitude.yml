@@ -266,7 +266,7 @@ defaults:
 
     plugin_manager:
       enabled:                          false
-      plugins:                          [ ytp ]
+      plugins:                          [ ytp ]                                 # prepared as an array to support multiple plugins (NOT supported yet)
 
     waveforms:
       enabled:                          false
@@ -274,14 +274,14 @@ defaults:
 
     visualization:
       enabled:                          false
-      name:                             [ bar ]
+      name:                             [ bar ]                                 # prepared as an array to support multiple visualizations (NOT supported yet)
 
     audio_rating:                       false
     display_hours:                      false
     play_next_title:                    true
     pause_next_title:                   false
     delay_next_title:                   250
-    forward_backward_skip_seconds:      10
+    forward_backward_skip_seconds:      15
 
     # --------------------------------------------------------------------------
     # CONTROL BUTTON settings
