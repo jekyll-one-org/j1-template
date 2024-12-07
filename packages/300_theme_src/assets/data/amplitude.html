@@ -928,7 +928,8 @@ amplitude_defaults: {{amplitude_defaults | debug}}
                   <div
                     class="list-next amplitude-next"
                     data-amplitude-source="{{source_media_attribute}}"
-                    data-amplitude-playlist="{{player_playlist}}"></div>
+                    data-amplitude-playlist="{{player_playlist}}">
+                  </div>
                 </div>
               </div> <!-- END playlist controls -->
               {% endif %}
@@ -959,7 +960,8 @@ amplitude_defaults: {{amplitude_defaults | debug}}
 
                   <div
                     class="audio-meta-data"
-                    data-amplitude-playlist="{{player_playlist}}">
+                    data-amplitude-playlist="{{player_playlist}}"
+                    data-amplitude-song-index="{{forloop.index0}}">
                     <span class="audio-title">{{item.title}}</span>
 
                     {% if player_audio_rating %}
