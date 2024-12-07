@@ -690,7 +690,6 @@ amplitude_defaults: {{amplitude_defaults | debug}}
           <!-- NOTE: album cover image (replaced by AJS API based on playlist) -->
           <div class="album-cover-image">
             <img
-              class="cover-image"
               src="/assets/audio/cover/default/placeholder-blue.jpg"
               data-amplitude-playlist="{{player_playlist}}"
               data-amplitude-source="{{source_media_attribute}}"
@@ -737,13 +736,12 @@ amplitude_defaults: {{amplitude_defaults | debug}}
                 <div
                   id="skip-backward_{{player_id}}"
                   class="large-player-skip-backward"
-                  data-amplitude-source="{{source_media_attribute}}"
-                  data-amplitude-playlist="{{player_playlist}}">
+                  data-amplitude-source="{{source_media_attribute}}">
                 </div>
                 {% endif %}
                 <div
                   id="large_player_play_pause"
-                  class="large-player-play-pause amplitude-play-pause amplitude-paused"
+                  class="amplitude-play-pause amplitude-paused"
                   data-amplitude-source="{{source_media_attribute}}"
                   data-amplitude-playlist="{{player_playlist}}">
                 </div>
@@ -751,8 +749,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
                 <div
                   id="skip-forward_{{player_id}}"
                   class="large-player-skip-forward"
-                  data-amplitude-source="{{source_media_attribute}}"
-                  data-amplitude-playlist="{{player_playlist}}">
+                  data-amplitude-source="{{source_media_attribute}}">
                 </div>
                 {% endif %}
                 <div

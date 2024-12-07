@@ -590,43 +590,40 @@ var progress;
       // -----------------------------------------------------------------------
       var largePlayerNextButton = document.getElementById('large_player_next');
       if (largePlayerNextButton) {
-        largePlayerNextButton.addEventListener('click', function(event) {
-          var ytpVideoID;
+        largePlayerNextButton.addEventListener('click', function(event) {          
           var playlist  = this.getAttribute("data-amplitude-playlist");
           var songIndex = parseInt(ytpSongIndex);
           var songs     = Amplitude.getSongsInPlaylist(playlist);
-          var ytPlayer  = j1.adapter.amplitude['ytPlayer'];
-          
 
-          // set song on next item
           songIndex++;
+          // ytpSongIndex  = this.getAttribute("data-amplitude-song-index");
+          ytPlayer      = j1.adapter.amplitude['ytPlayer'];
 
-          // collect (next) song data
+          // toggle YT play|pause video
+          // if (ytPlayer.getPlayerState() === YT_PLAYER_STATE.PLAYING || ytPlayer.getPlayerState() === YT_PLAYER_STATE.BUFFERING) {
+          //   ytPlayer.pauseVideo();
+          // } else {
+          //   ytPlayer.playVideo();
+          // }
+
+          // if (songIndex <= songs.length) {
           if (songIndex < songs.length) {
-            songMetaData  = songs[songIndex];
-            songIndex     = songMetaData.index;
-            songURL       = songMetaData.url;
-            ytpSongIndex  = songMetaData.index;
-            ytpVideoID    = songURL.split('=')[1];
+            //songIndex++;
+            songMetaData    = songs[songIndex];
+            songIndex       = songMetaData.index;
+            songURL         = songMetaData.url;
+            ytpSongIndex    = songMetaData.index;
+            var ytpVideoID  = songURL.split('=')[1];
           } else {
             songIndex = 0;
-            songMetaData  = songs[songIndex];
-            songURL       = songMetaData.url;
-            ytpSongIndex  = songMetaData.index;
-            ytpVideoID    = songURL.split('=')[1];
+            songMetaData    = songs[songIndex];
+            songURL         = songMetaData.url;
+            ytpSongIndex    = songMetaData.index;
+            var ytpVideoID  = songURL.split('=')[1];
           }
 
-          // load new video
+//        Amplitude.playPlaylistSongAtIndex(songIndex, playlist);
           ytPlayer.loadVideoById(ytpVideoID);
-
-          // load new cover image
-          var coverImage = document.querySelector(".cover-image");
-          coverImage.src = songMetaData.cover_art_url;
-
-          // replace new song name (meta-container)
-          var songName = document.getElementsByClassName("song-name");          
-          songName[0].innerHTML = songMetaData.name; // player-bottom
-          songName[1].innerHTML = songMetaData.name; // playlist-screen
 
           // toggle AJS play_pause button
           if (largePlayerPlayPauseButton.classList.contains('amplitude-paused')) {
@@ -637,9 +634,7 @@ var progress;
             largePlayerPlayPauseButton.classList.add('amplitude-paused');
           }
 
-          // set (next) song active in playlist
           setActive(true);
-
           event.preventDefault();          
         }); // END EventListener 'click'
       }

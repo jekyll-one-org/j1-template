@@ -175,6 +175,11 @@ buttons and can only be used with the J1 Template.
 .Manon Mélodie · TuneCore 2024 (YouTube)
 amplitude::manon_melodie_yt_large[role="mt-4 mb-8"]
 
+// lorem:sentences[5]
+
+// .Mimi Rutherfurt · Maritim Verlag (YouTube)
+// amplitude::mimi_rutherfurt_yt_large[role="mt-4 mb-8"]
+
 
 ifeval::[{ms_slider_video_example} == true]
 [[ms_video]]

@@ -1191,7 +1191,8 @@ j1.adapter.amplitude = ((j1, window) => {
     // 
     // -------------------------------------------------------------------------
     pluginManager: (plugin) => {
-      if (plugin === 'ytp') {
+//    if (plugin === 'ytp' && j1.adapter.amplitude['ytPlayerReady'] === undefined ) {
+      if (plugin === 'ytp') {        
         var tech;
         var techScript;
 

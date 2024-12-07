@@ -98,8 +98,8 @@
   --ajs-theme-uno--darken:              rgba(0, 0, 0, 0.5);
 }
 
-/* Styles
-# --------------------------------------------------------- */
+/* General styles
+# ------------------------------------------------------------------------------ */
 
 a {
   border-bottom: unset;
@@ -133,7 +133,7 @@ a {
 
 
 /* 2. Components
-# --------------------------------------------------------- */
+# ------------------------------------------------------------------------------ */
 
 /* Scroller styles
 ------------------------------------------------------------ */
@@ -203,6 +203,16 @@ a {
 
 /* control container
 # --------------------------------------------------------- */
+
+/* jadams, 2024-12-05: add play_pause button as a class */
+/* .amplitude-play-pause:hover {
+  opacity: .5;
+} */
+
+/* jadams, 2024-12-05: add play_pause button as a class */
+/* .amplitude-play-pause {
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/play.svg") no-repeat;
+} */
 
 .playlist-screen-controls {
   cursor: default;

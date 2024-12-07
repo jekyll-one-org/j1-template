@@ -490,17 +490,39 @@ div#large_player_play_pause {
   vertical-align: middle;
 }
 
+/* jadams, 2024-12-05: add play_pause button as a class */
+/*
+.amplitude-play-pause {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+*/
+
 div#large_player_controls
 div.large-player-controls-container
 div#large_player_play_pause:hover {
   opacity: .5;
 }
 
+/* jadams, 2024-12-05: add play_pause button as a class */
+/* .amplitude-play-pause:hover {
+  opacity: .5;
+} */
+
 div#large_player_controls
 div.large-player-controls-container
 div#large_player_play_pause.amplitude-paused {
   background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/play.svg") no-repeat;
 }
+
+/* jadams, 2024-12-05: add play_pause button as a class */
+/* .amplitude-play-pause {
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/play.svg") no-repeat;
+} */
+ /* /assets/theme/j1/modules/amplitudejs/icons/player/dark/now-playing.svg*/
 
 div#large_player_controls
 div.large-player-controls-container
