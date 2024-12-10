@@ -280,10 +280,12 @@ amplitude_defaults: {{amplitude_defaults | debug}}
             </span>
             <div class="audio-artist-album">
               <span
+                class="artist"
                 data-amplitude-playlist="{{player_playlist}}"
                 data-amplitude-song-info="artist">
               </span>
               <span
+                class="album"
                 data-amplitude-playlist="{{player_playlist}}"
                 data-amplitude-song-info="album">
               </span>
@@ -624,11 +626,13 @@ amplitude_defaults: {{amplitude_defaults | debug}}
                 </span>
                 <div class="audio-artist-album">
                   <span
+                    class="artist"
                     data-amplitude-source="{{source_media_attribute}}"
                     data-amplitude-playlist="{{player_playlist}}"
                     data-amplitude-song-info="artist">
                   </span>
                   <span
+                    class="album"
                     data-amplitude-source="{{source_media_attribute}}"
                     data-amplitude-playlist="{{player_playlist}}"
                     data-amplitude-song-info="album">
@@ -854,12 +858,14 @@ amplitude_defaults: {{amplitude_defaults | debug}}
             </span>
             <div class="audio-artist-album">
               <span
-              data-amplitude-source="{{source_media_attribute}}"
+                class="artist"
+                data-amplitude-source="{{source_media_attribute}}"
                 data-amplitude-playlist="{{player_playlist}}"
                 data-amplitude-song-info="artist">
               </span>
               <span
-              data-amplitude-source="{{source_media_attribute}}"
+                class="album"
+                data-amplitude-source="{{source_media_attribute}}"
                 data-amplitude-playlist="{{player_playlist}}"
                 data-amplitude-song-info="album">
               </span>
@@ -906,12 +912,13 @@ amplitude_defaults: {{amplitude_defaults | debug}}
                       data-amplitude-playlist="{{player_playlist}}"
                       data-amplitude-song-info="artist">
                     </span>
-                    <!-- span class="song-artist-album-delimiter">·</span>
+                    <!-- jadams, 2024-12-08: make album info configurable -->
+                    <span class="song-artist-album-delimiter">·</span>
                     <span
                       data-amplitude-source="audio"
                       data-amplitude-playlist="{{player_playlist}}"
                       data-amplitude-song-info="album">
-                    </span -->                    
+                    </span>                    
                   </div>
                 </div>
                 <div class="list-controls">

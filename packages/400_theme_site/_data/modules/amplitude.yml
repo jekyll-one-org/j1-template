@@ -57,17 +57,20 @@ settings:
         - item:
           enabled:                      true
           <<:                           *album_manon_melodie_yt
-          title:                        Les Échos du Passé                      # Echos der Vergangenheit
+          title:                        Les Échos du Passé                      # Echos der Vergangenheit          
           audio:                        watch?v=_EYc5W3qy4s
           audio_info:                   //youtube.com/watch?v=_EYc5W3qy4s
           cover_image:                  //img.youtube.com/vi/_EYc5W3qy4s/maxresdefault.jpg
-          duration:                     "03:02"
+          duration:                     "03:03"
 
         # title 02
         - item:
           enabled:                      true
           <<:                           *album_manon_melodie_yt
           title:                        Fleur de Printemps                      # Frühlingsblume
+#         title:                        Frühlingsblume                          # prapeared for change  (title|mixed playlist)
+#         name:                         No Album Name                           # prapeared for change  (album|mixed playlist)
+#         artist:                       Schnuckie                               # prapeared for change (artist|mixed playlist)
           audio:                        watch?v=OUjHRpNUqyw
           audio_info:                   //youtube.com/watch?v=OUjHRpNUqyw
           cover_image:                  //img.youtube.com/vi/OUjHRpNUqyw/maxresdefault.jpg

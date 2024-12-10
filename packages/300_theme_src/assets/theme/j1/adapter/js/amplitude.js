@@ -795,97 +795,23 @@ j1.adapter.amplitude = ((j1, window) => {
                     //
                     if (document.getElementById('{{player.id}}') !== null) {
 
-                      // listener overloads for Youtube video (large player)
+                      // NOTE: listener overloads for video managed by plugin
                       // -------------------------------------------------------
 
                       // click on prev button
                       var largePlayerPreviousButton = document.getElementById('large_player_previous');
                       if (largePlayerPreviousButton && largePlayerPreviousButton.getAttribute("data-amplitude-source") === 'youtube') {
-                        largePlayerPreviousButton.addEventListener('click', function(event) {
-                          var playlist  = this.getAttribute("data-amplitude-playlist");
-                          var songIndex = ytpSongIndex;                         // Amplitude.getActiveIndex();
-
-                        }); // END EventListener 'click'
+                        // do nothing (managed by plugin)
                       }
 
                       // click on play_pause button
                       var largePlayerPlayButton = document.getElementById('large_player_play_pause');
-                      // if (largePlayerPlayButton && largePlayerPlayButton.getAttribute("data-amplitude-source") === 'youtube') {
-
-                      //   // toggle Amplitude play button
-                      //   largePlayerPlayButton.addEventListener('click', function(e) {
-                      //     e.preventDefault();
-                      //     if (largePlayerPlayButton.classList.contains('amplitude-paused')) {
-                      //       largePlayerPlayButton.classList.remove('amplitude-paused');
-                      //       largePlayerPlayButton.classList.add('amplitude-playing');
-                      //     } else {
-                      //       largePlayerPlayButton.classList.remove('amplitude-playing');
-                      //       largePlayerPlayButton.classList.add('amplitude-paused');
-                      //     }
-                      //   });
-
-                      //   largePlayerPlayButton.addEventListener('click', function(event) {
-                      //     var playlist      = this.getAttribute("data-amplitude-playlist");
-                      //     var songMetaData  = Amplitude.getSongAtIndex(ytpSongIndex);
-                      //     var songURL       = songMetaData.url;
-                      //     var songIndex     = ytpSongIndex;
-
-                      //     var dependencies_met_ytIframeAPIReady = setInterval (() => {
-                      //       if (j1.adapter.amplitude['ytPlayerReady']) {
-                      //         ytPlayer          = j1.adapter.amplitude['ytPlayer'];
-                      //         ytpPlaybackRate   = ytPlayer.getPlaybackRate();
-
-                      //         // ytPlayer.loadVideoById({
-                      //         //   'videoId': 'bHQqvYy5KYo',
-                      //         //   'startSeconds': 5,
-                      //         //   'endSeconds': 60
-                      //         // });
-
-                      //         // ytPlayer.loadVideoByUrl(
-                      //         //   mediaContentUrl:  songURL,
-                      //         //   startSeconds: 10
-                      //         // )
-
-                      //         if (ytPlayer.getPlayerState() === YT_PLAYER_STATE.playing || ytPlayer.getPlayerState() === YT_PLAYER_STATE.buffering) {
-                      //           ytPlayer.pauseVideo();
-                      //         } else {
-                      //           ytPlayer.playVideo();
-                      //         }
-
-                      //         clearInterval(dependencies_met_ytIframeAPIReady);
-                      //       } // END if playersUILoaded
-                      //     }, 10); // END dependencies_met_ytIframeAPIReady
-
-                      //   }); // END EventListener 'click'
-                      // }
-
-                      // click on next button
-                      // var largePlayerNextButton = document.getElementById('large_player_next');
-                      // if (largePlayerNextButton && largePlayerPlayButton.getAttribute("data-amplitude-source") === 'youtube') {
-                      //   largePlayerNextButton.addEventListener('click', function(event) {
-                      //     var playlist  = this.getAttribute("data-amplitude-playlist");
-                      //     var songIndex = ytpSongIndex;                         // Amplitude.getActiveIndex();
-                      //   }); // END EventListener 'click'
-                      // }
-
-                      // click on song container
-                      // var largetPlayerSongContainer = document.getElementsByClassName("song amplitude-song-container");
-                      // for (var i=0; i<largetPlayerSongContainer.length; i++) {
-                      //   if (largetPlayerSongContainer[i].dataset.amplitudeSource === 'youtube') {
-                      //     largetPlayerSongContainer[i].addEventListener('click', function(event) {
-                      //       var playlist        = this.getAttribute("data-amplitude-playlist");
-                      //       var playlistLength  = largetPlayerSongContainer.length;
-                      //       ytpSongIndex        = this.getAttribute("data-amplitude-song-index");
-                      //     }); // END EventListener 'click'
-                      //   } // END if Attribute
-                      // } // END for
-
                       // add listeners to all progress bars found (large-player)
                       // -------------------------------------------------------
                       var progressBars = document.getElementsByClassName("large-player-progress");
                       for (var i=0; i<progressBars.length; i++) {
                         if (progressBars[i].dataset.amplitudeSource === 'youtube') {
-                          // do nothing
+                          // do nothing (managed by plugin)
                         } else {
                           progressBars[i].addEventListener('click', function(event) {
                             var offset = this.getBoundingClientRect();
@@ -897,16 +823,6 @@ j1.adapter.amplitude = ((j1, window) => {
                         }
                       } // END for
 
-                      // for (var i=0; i<progressBars.length; i++) {
-                      //   progressBars[i].addEventListener('click', function(event) {
-                      //     var offset = this.getBoundingClientRect();
-                      //     var xpos   = event.pageX - offset.left;
-
-                      //     Amplitude.setSongPlayedPercentage(
-                      //       (parseFloat(xpos)/parseFloat(this.offsetWidth))*100);
-                      //   }); // END EventListener 'click'
-                      // } // END for
-
                       // click on skip forward|backward (large player)
                       // See: https://github.com/serversideup/amplitudejs/issues/384
                       // -------------------------------------------------------
@@ -916,24 +832,7 @@ j1.adapter.amplitude = ((j1, window) => {
                       for (var i=0; i<largePlayerSkipForwardButtons.length; i++) {
                         if (largePlayerSkipForwardButtons[i].id === 'skip-forward_{{player.id}}') {
                           if (largePlayerSkipForwardButtons[i].dataset.amplitudeSource === 'youtube') {
-
-                            // do nothing
-
-                            // largePlayerSkipForwardButtons[i].addEventListener('click', function(event) {
-                            //   var ytPlayer     = j1.adapter.amplitude['ytPlayer'];
-                            //   var currentTime  = ytPlayer.getCurrentTime();
-                            //   const skipOffset = parseFloat(playerForwardBackwardSkipSeconds);
-                              
-                            //   ytPlayer.seekTo(currentTime + skipOffset, true)
-
-                            //   //const duration    = Amplitude.getSongDuration();
-                            //   //const currentTime = parseFloat(Amplitude.getSongPlayedSeconds());
-                            //   //const targetTime  = parseFloat(currentTime + skipOffset);
-
-                            //   // if (currentTime > 0) {
-                            //   //   Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
-                            //   // }
-                            // }); // END Listener 'click' (SkipForwardButtons)
+                            // do nothing (managed by plugin)
                           } else {
                             largePlayerSkipForwardButtons[i].addEventListener('click', function(event) {
                               const skipOffset  = parseFloat(playerForwardBackwardSkipSeconds);
@@ -954,16 +853,7 @@ j1.adapter.amplitude = ((j1, window) => {
                       for (var i=0; i<largePlayerSkipBackwardButtons.length; i++) {
                         if (largePlayerSkipBackwardButtons[i].id === 'skip-backward_{{player.id}}') {
                           if (largePlayerSkipBackwardButtons[i].dataset.amplitudeSource === 'youtube') {
-
-                            // do nothing
-
-                            // largePlayerSkipBackwardButtons[i].addEventListener('click', function(event) {
-                            //   var ytPlayer     = j1.adapter.amplitude['ytPlayer'];
-                            //   var currentTime  = ytPlayer.getCurrentTime();
-                            //   const skipOffset = parseFloat(playerForwardBackwardSkipSeconds);
-                              
-                            //   ytPlayer.seekTo(currentTime - skipOffset, true)
-                            // }); // END EventListener 'click'
+                            // do nothing (managed by plugin)
                           } else {
                             largePlayerSkipBackwardButtons[i].addEventListener('click', function(event) {
                               const skipOffset  = parseFloat(playerForwardBackwardSkipSeconds);

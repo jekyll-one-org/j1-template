@@ -160,20 +160,29 @@ ifeval::[{ytp_audio_player} == true]
 [role="mt-5"]
 == Amplitude YT Player
 
-The example below demonstrates playing Audio tracks from YouTube Videos using
-an AmplitudJS (large) player. The J1 template uses a *plugin* (ytp) to extend
-the native functionality of the AmplitudeJS API.
+The example below demonstrates playing only the *Audio* track from YouTube
+Video using an AmplitudJS player. The J1 template uses the video *plugin* ytp
+to extend the native functionality of the AmplitudeJS API to playback YouTube
+files for the audio part.
 
 [role="mt-4 mb-5"]
 [CAUTION]
 ====
 Playing audio tracks is currently supported only for videos from YouTube (YT).
-Note that the YT plugin embeds a YP player and mimics the AmplitudeJS player
-buttons and can only be used with the J1 Template.
+The YT plugin *ytp* embeds a YouTube (iframe) player and mimics the AmplitudeJS
+player buttons and controls to manage a *playlist* of videos the same as known
+for native audio files.
 ====
 
-.Manon Mélodie · TuneCore 2024 (YouTube)
-amplitude::manon_melodie_yt_large[role="mt-4 mb-8"]
+.Manon Mélodie · TuneCore 2024
+amplitude::manon_melodie_yt_large[role="mt-4 mb-4"]
+
+[NOTE]
+====
+AmplitudeJS YT Player can only be used with the J1 Template. Currently, only
+AJS players of type *large * are supported.
+====
+
 
 // lorem:sentences[5]
 
