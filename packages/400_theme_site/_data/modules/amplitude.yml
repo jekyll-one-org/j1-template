@@ -59,7 +59,7 @@ settings:
           <<:                           *album_manon_melodie_yt
           title:                        La Fête du cœur                         # Das Fest des Herzens
           audio:                        watch?v=fFn1GZIYC4Y
-          rating:                       2
+          rating:                       3
           audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
 #         audio_info:                   //youtube.com/watch?v=fFn1GZIYC4Y
           cover_image:                  //img.youtube.com/vi/fFn1GZIYC4Y/maxresdefault.jpg
