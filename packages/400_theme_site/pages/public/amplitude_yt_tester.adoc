@@ -188,6 +188,7 @@ AJS players of type *large * are supported.
 
 // .Mimi Rutherfurt · Maritim Verlag (YouTube)
 // amplitude::mimi_rutherfurt_yt_large[role="mt-4 mb-8"]
+endif::[]
 
 
 ifeval::[{ms_slider_video_example} == true]

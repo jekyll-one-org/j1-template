@@ -31,6 +31,7 @@ regenerate:                             false
 permalink:                              /pages/public/tour/present_video/
 
 resources:                              [
+                                          amplitudejs,
                                           gallery, lightgallery, masonry,
                                           videojs, vimeo-player
                                         ]
@@ -60,6 +61,7 @@ resource_options:
 
 // Attribute settings for section control
 //
+:ytp_audio:                             true
 :ytp_rhythm:                            true
 :ytp_sky_elements:                      true
 :dm_video:                              false
@@ -130,6 +132,34 @@ without loading *external players*.
 </div>
 ++++
 video::/assets/video//html5/peck_pocketed.mp4[poster="/assets/video/poster/html5/peck_pocketed.jpg", opts="" role="mt-1 mb-5"]
+
+ifeval::[{ytp_audio} == true]
+[role="mt-5"]
+== AmplitudeJS Video (Youtube)
+
+The example below demonstrates playing only the *Audio* track from YouTube
+Video using an AmplitudJS player. The J1 template uses the video *plugin* ytp
+to extend the native functionality of the AmplitudeJS API to playback YouTube
+files for the audio part.
+
+[role="mt-4 mb-5"]
+[CAUTION]
+====
+Playing audio tracks is currently supported only for videos from YouTube (YT).
+The YT plugin *ytp* embeds a YouTube (iframe) player and mimics the AmplitudeJS
+player buttons and controls to manage a *playlist* of videos the same as known
+for native audio files.
+====
+
+.Manon Mélodie · TuneCore 2024
+amplitude::manon_melodie_yt_large[role="mt-4 mb-4"]
+
+[NOTE]
+====
+AmplitudeJS YT Player can only be used with the J1 Template. Currently, only
+AJS players of type *large * are supported.
+====
+endif::[]
 
 
 [role="mt-5"]

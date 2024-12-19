@@ -307,11 +307,10 @@ j1.adapter.amplitude = ((j1, window) => {
                 song.cover_art_url = item[key];
                 continue;
               } else if (key === 'audio_info') {
-                if (playerAudioInfo) {
-                  song.audio_info = item[key];
-                } else {
-                  song.audio_info = '';
-                } // END if playerAudioInfo
+                song.audio_info = item[key];
+                continue;
+              } else if (key === 'rating') {
+                song.rating = item[key];
                 continue;
               } else {
                 song[key] = item[key];
@@ -424,6 +423,8 @@ j1.adapter.amplitude = ((j1, window) => {
             "artist":         "{{item.artist}}",
             "album":          "{{item.name}}",
             "url":            "{{item.audio_base}}/{{item.audio}}",
+            "audio_info":     "{{item.audio_info}}",
+            "rating":         "{{item.rating}}",
             "cover_art_url":  "{{item.cover_image}}"
           }{% if forloop.last %}{% else %},{% endif %}
           {% endcapture %}
