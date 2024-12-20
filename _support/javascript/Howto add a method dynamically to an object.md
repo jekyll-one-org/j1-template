@@ -271,3 +271,116 @@ the private privateMethod function inside the closure.
 
 This way, you achieve a form of privacy for dynamically added methods
 in JavaScript.
+
+
+Dynamisches Hinzufügen von verschachtelten Eigenschaften zu JavaScript-Objekten
+-------------------------------------------------------------------------------
+
+Manchmal ist es notwendig, Objekte dynamisch zu erweitern, insbesondere wenn
+die Struktur dieser Objekte nicht im Voraus vollständig bekannt ist. Dies gilt
+besonders für verschachtelte Objekte, wo Eigenschaften auf mehreren Ebenen
+hinzugefügt werden müssen.
+
+In JavaScript können Objekte erstellt werden, die verschachtelte Strukturen
+darstellen. Das bedeutet, dass eine Eigenschaft eines Objekts selbst wieder
+ein Objekt sein kann. Möchten man während der Laufzeit neue Eigenschaften zu
+diesen verschachtelten Strukturen hinzufügen, stehen verschiedene Techniken
+zur Verfügung.
+
+1. Direkter Zugriff
+-------------------
+
+let myObject = {};
+let nestedProperty = 'level2';
+let finalProperty = 'value';
+
+myObject[nestedProperty] = {};
+myObject[nestedProperty][finalProperty] = 'Hello, world!';
+
+Hier erstellen wir zunächst ein leeres Objekt myObject. Dann greifen wir
+direkt auf die verschachtelte Eigenschaft zu, indem wir ihren Namen als
+String in eckigen Klammern angeben.
+
+2. Mithilfe einer Schleife
+--------------------------
+
+let myObject = {};
+let path = ['level1', 'level2', 'final'];
+let value = 'Hello, world!';
+
+let current = myObject;
+for (let i = 0; i < path.length - 1; i++) {
+    current[path[i]] = current[path[i]] || {};
+    current = current[path[i]];
+}
+current[path[path.length - 1]] = value;
+
+Diese Methode ist flexibler, da sie es erlaubt, einen beliebigen Pfad zu
+einer Eigenschaft anzugeben. Die Schleife durchläuft den Pfad und erstellt
+fehlende Objekte, bis sie den endgültigen Wert zuweist.
+
+3. Mithilfe einer rekursiven Funktion
+-------------------------------------
+
+function setNestedValue(obj, path, value) {
+    if (path.length === 1) {
+        obj[path[0]] = value;
+    } else {
+        obj[path[0]] = obj[path[0]] || {};
+        setNestedValue(obj[path[0]], path.slice(1), value);
+    }
+}
+
+let myObject = {};
+let path = ['level1', 'level2', 'final'];
+let value = 'Hello, world!';
+setNestedValue(myObject, path, value);
+
+Eine rekursive Funktion bietet eine elegante Lösung für verschachtelte
+Strukturen beliebiger Tiefe. Sie durchläuft den Pfad rekursiv, bis sie den
+endgültigen Wert erreicht.
+
+
+Wichtige Punkte
+--------------------------------------------------------------------------------
+
+* Optional Chaining:
+  Mit dem optionalen Chaining (.) kann man sicher auf verschachtelte
+  Eigenschaften zugreifen, ohne dass ein Fehler ausgelöst wird, wenn ein
+  Zwischenobjekt NICHT existiert.
+
+* Spread Operator:
+  Der Spread Operator (...) kann verwendet werden, um ein Objekt in ein
+  anderes zu kopieren oder um mehrere Objekte zu einem zusammenzufügen.
+
+* Object.assign():
+  Mit Object.assign() kann man Eigenschaften eines Objekts in ein anderes
+  kopieren.
+
+
+Beispiel mit Chaining und Spread Operator
+-----------------------------------------
+
+let myObject = {};
+let path = ['level1', 'level2', 'final'];
+let value = 'Hello, world!';
+
+const nestedObject = { ...myObject };
+nestedObject[path[0]] = nestedObject[path[0]] || {};
+nestedObject[path[0]][path[1]] = nestedObject[path[0]][path[1]] || {};
+nestedObject[path[0]][path[1]][path[2]] = value;
+
+Wann welche Methode verwenden
+-----------------------------
+
+Direkter Zugriff: Für einfache Fälle, wenn der Pfad zur Eigenschaft bekannt ist.
+Schleife: Für flexible Lösungen, wenn der Pfad dynamisch erstellt wird oder variieren kann.
+Rekursive Funktion: Für beliebig tiefe verschachtelte Strukturen und eine elegante Lösung.
+Zusätzliche Überlegungen:
+
+Performance: Für sehr große Objekte oder häufige Änderungen kann die Performance eine Rolle spielen.
+Lesbarkeit: Wähle die Methode, die deinen Code am besten lesbar macht.
+Fehlerbehandlung: Überlege, wie du mit Fehlern umgehen möchtest, z.B. wenn ein Pfad nicht existiert.
+Zusammenfassung
+
+Das dynamische Hinzufügen von verschachtelten Eigenschaften zu JavaScript-Objekten ist eine leistungsstarke Technik, die in vielen Anwendungsfällen nützlich sein kann. Durch die Wahl der richtigen Methode kannst du deinen Code flexibler und anpassungsfähiger gestalten.

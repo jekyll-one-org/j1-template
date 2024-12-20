@@ -60,7 +60,8 @@ settings:
           title:                        La Fête du cœur                         # Das Fest des Herzens
           audio:                        watch?v=fFn1GZIYC4Y
           rating:                       3
-          audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
+          audio_info:                   //youtube.com/playlist?list=OLAK5uy_mmjefHkIN8Cvg5RGPpajKbMLDEazaFbT4
+#         audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
 #         audio_info:                   //youtube.com/watch?v=fFn1GZIYC4Y
           cover_image:                  //img.youtube.com/vi/fFn1GZIYC4Y/maxresdefault.jpg
           duration:                     "02:32"
@@ -75,7 +76,7 @@ settings:
 #         artist:                       Schnuckie                               # prapeared for change (artist|mixed playlist)
           audio:                        watch?v=OUjHRpNUqyw
           rating:                       3
-          audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
+          audio_info:                   //youtube.com/playlist?list=OLAK5uy_nVFdeHv7LWlUYKk2gwFjfO6WxX-GvD7Hs
           cover_image:                  //img.youtube.com/vi/OUjHRpNUqyw/maxresdefault.jpg
           duration:                     "02:57"
 
@@ -86,7 +87,7 @@ settings:
           title:                        Cote d'Azur                             # Cote d'Azur
           audio:                        watch?v=9Z9yNpsiBKs
           rating:                       3
-          audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
+          audio_info:                   //youtube.com/playlist?list=OLAK5uy_mWcvgY93sAOZcffnEJbCrrF4XSTtfE6BY
           cover_image:                  //img.youtube.com/vi/9Z9yNpsiBKs/maxresdefault.jpg
           duration:                     "02:42"
 
@@ -96,8 +97,8 @@ settings:
           <<:                           *album_manon_melodie_yt
           title:                        Les Échos du Passé                      # Echos der Vergangenheit          
           audio:                        watch?v=_EYc5W3qy4s
-          rating:                       3
-          audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
+          rating:                       4
+          audio_info:                   //youtube.com/playlist?list=OLAK5uy_m11FnQ_33QBAo6EJ64yk-N9pWzG68MQ_Q
           cover_image:                  //img.youtube.com/vi/_EYc5W3qy4s/maxresdefault.jpg
           duration:                     "03:03"
 
@@ -108,7 +109,7 @@ settings:
           title:                        Les Souvenirs                           # Die Erinnerungen
           audio:                        watch?v=i8ltW0WDcdQ
           rating:                       3
-          audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
+          audio_info:                   //youtube.com/playlist?list=OLAK5uy_lAC0NbwBvAihaCbcvTngkRSmCgxov-Mzo
           cover_image:                  //img.youtube.com/vi/i8ltW0WDcdQ/maxresdefault.jpg
           duration:                     "02:19"
 
@@ -119,7 +120,7 @@ settings:
           title:                        La Vie en Dance                         # Leben im Tanz
           audio:                        watch?v=yttS9UNgZFk
           rating:                       3
-          audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
+          audio_info:                   //youtube.com/playlist?list=OLAK5uy_mt77a4375yJP13dr29_cKr8zKNGANoWd8
           cover_image:                  //img.youtube.com/vi/yttS9UNgZFk/maxresdefault.jpg
           duration:                     "02:45"
 
@@ -157,7 +158,7 @@ settings:
           rating:                       3
           audio_info:                   //www.youtube.com/@MaritimVerlag
           cover_image:                  //img.youtube.com/vi/qEhzpBJpUq0/maxresdefault.jpg
-          duration:                     "5:25"
+          duration:                     "00:48:15"
           
         # title 02
         - item:
@@ -168,7 +169,7 @@ settings:
           rating:                       3
           audio_info:                   //www.youtube.com/@MaritimVerlag
           cover_image:                  //img.youtube.com/vi/I4VTc8nQxDs/maxresdefault.jpg
-          duration:                     "5:12"
+          duration:                     "00:59:35"
 
 
     # --------------------------------------------------------------------------
@@ -655,9 +656,9 @@ settings:
 
       id:                               mimi_rutherfurt_yt_large
       type:                             large
-      display_hours:                    true
       source:                           video
-
+      display_hours:                    true
+      
       # ------------------------------------------------------------------------
       # CONTROL settings
       #

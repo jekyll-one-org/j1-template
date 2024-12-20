@@ -212,13 +212,8 @@ j1.adapter.amplitude = ((j1, window) => {
       // -----------------------------------------------------------------------
       // control|logging settings
       // -----------------------------------------------------------------------
-      _this                     = j1.adapter.amplitude;
-      logger                    = log4javascript.getLogger('j1.adapter.amplitude');
-
-      // prepare data element for later use
-      j1.adapter.amplitude.data             = {};
-      j1.adapter.amplitude.data.ytpGlobals  = {};
-      j1.adapter.amplitude.data.ytPlayers   = {};
+      _this             = j1.adapter.amplitude;
+      logger            = log4javascript.getLogger('j1.adapter.amplitude');
 
       // -----------------------------------------------------------------------
       // module initializer
@@ -1030,7 +1025,7 @@ j1.adapter.amplitude = ((j1, window) => {
                   } // END if apiInitialized
                 }, 10); // END dependencies_met_api_initialized
 
-                playerExistsInPage   = (document.getElementById('{{player.id}}_parent') !== null) ? true : false;
+                playerExistsInPage   = (document.getElementById(playerID + '_parent') !== null) ? true : false;
                 pluginManagerEnabled = ('{{player.plugin_manager.enabled}}'.length > 0 && '{{player.plugin_manager.enabled}}' === 'true') ? true : playerDefaultPluginManager;
                 if (playerExistsInPage && pluginManagerEnabled) {
                   _this.pluginManager('{{player.plugin_manager.plugins}}');

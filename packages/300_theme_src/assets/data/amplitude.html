@@ -700,7 +700,9 @@ amplitude_defaults: {{amplitude_defaults | debug}}
         <!-- START LARGE player left TOP -->
         <div class="player-left-top">
 
-          <div class="large-player-playlist-header">
+          <div
+            id="large_player_title_header_{{player_id}}"
+            class="large-player-playlist-header">
             <span class="audio-artist">
               <span
                 data-amplitude-playlist="{{player_playlist}}"
@@ -772,7 +774,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
                 {% endif %}
                 <div
                   id="large_player_play_pause"
-                  class="large-player-play-pause amplitude-play-pause amplitude-paused"
+                  class="large-player-play-pause-{{player_id}} large-player-play-pause amplitude-play-pause amplitude-paused"
                   data-amplitude-source="{{source_media_attribute}}"
                   data-amplitude-playlist="{{player_playlist}}">
                 </div>

@@ -44,11 +44,12 @@ resource_options:
 
 // Attribute settings for section control
 //
-:ytp_api_description:                   false
-:ytp_example:                           false
-:ytp_audio_player:                      true
-:ms_slider_video_example:               false
+:ytp-api--description:                  false
+:ytp--example:                          false
+:ytp--audio-player:                     true
+:ms-slider-video--example:              false
 
+:manon-melodie--playlist:               //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
 
 // Set (local) page attributes here
 // -----------------------------------------------------------------------------
@@ -72,7 +73,7 @@ players to control the audio.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-ifeval::[{ytp_api_description} == true]
+ifeval::[{ytp-api--description} == true]
 [role="mt-4"]
 == YouTube Audio
 
@@ -125,7 +126,7 @@ of the video.
 lorem:sentences[5]
 endif::[]
 
-ifeval::[{ytp_example} == true]
+ifeval::[{ytp--example} == true]
 [role="mt-5"]
 == YT Player Example
 ++++
@@ -156,7 +157,7 @@ ifeval::[{ytp_example} == true]
 endif::[]
 
 
-ifeval::[{ytp_audio_player} == true]
+ifeval::[{ytp--audio-player} == true]
 [role="mt-5"]
 == Amplitude YT Player
 
@@ -166,32 +167,35 @@ to extend the native functionality of the AmplitudeJS API to playback YouTube
 files for the audio part.
 
 [role="mt-4 mb-5"]
+[TIP]
+====
+Find complete playlist for the example of Manon Mélodie on link:{manon-melodie--playlist}[YouTube, {browser-window--new}].
+====
+
+// .Manon Mélodie · YouTube 2024
+// amplitude::manon_melodie_yt_large[role="mt-4 mb-5"]
+
+[role="mb-8"]
 [CAUTION]
 ====
 Playing audio tracks is currently supported only for videos from YouTube (YT).
 The YT plugin *ytp* embeds a YouTube (iframe) player and mimics the AmplitudeJS
 player buttons and controls to manage a *playlist* of videos the same as known
 for native audio files.
-====
 
-.Manon Mélodie · TuneCore 2024
-amplitude::manon_melodie_yt_large[role="mt-4 mb-4"]
-
-[NOTE]
-====
 AmplitudeJS YT Player can only be used with the J1 Template. Currently, only
-AJS players of type *large * are supported.
+AJS players of type *large* are supported.
 ====
 
+lorem:sentences[5]
 
-// lorem:sentences[5]
+.Mimi Rutherfurt · Maritim Verlag (YouTube)
+amplitude::mimi_rutherfurt_yt_large[role="mt-4 mb-8"]
 
-// .Mimi Rutherfurt · Maritim Verlag (YouTube)
-// amplitude::mimi_rutherfurt_yt_large[role="mt-4 mb-8"]
 endif::[]
 
 
-ifeval::[{ms_slider_video_example} == true]
+ifeval::[{ms-slider-video--example} == true]
 [[ms_video]]
 == MS Slider using YouTube Video
 
