@@ -830,38 +830,33 @@ var progress;
   // Returns the duration of the video
   // ---------------------------------------------------------------------------
   function ytpGetDuration(player) {
-    var playerState = player.getPlayerState();
-
-    if (playerState === YT_PLAYER_STATE.PLAYING || playerState === YT_PLAYER_STATE.PAUSED || playerState === YT_PLAYER_STATE.CUED) {
+    if (player.getPlayerState === YT_PLAYER_STATE.PLAYING || player.getPlayerState === YT_PLAYER_STATE.CUED) {
       var duration = player.getDuration();
 
       return duration;
     } else {
-      return 0;
+      return false;
     }
   }
 
   // Returns the current time of the video played
   // --------------------------------------------------------------------------
   function ytpGetCurrentTime(player) {
-    var playerState = player.getPlayerState();
-
-    if (playerState === YT_PLAYER_STATE.PLAYING || playerState === YT_PLAYER_STATE.PAUSED || playerState === YT_PLAYER_STATE.CUED) {
+    if (player.getPlayerState === YT_PLAYER_STATE.PLAYING || player.getPlayerState === YT_PLAYER_STATE.CUED) {
       var currentTime = player.getCurrentTime();
 
       return currentTime;
     } else {
-      return 0;
+      return false;
     }
   }
 
   // Returns the duration hours of the video
   // ---------------------------------------------------------------------------
   function ytpGetDurationHours(player) {
-    var playerState, duration, hours, d, h;
+    var duration, hours, d, h;
 
-    playerState = player.getPlayerState();
-    if (playerState === YT_PLAYER_STATE.PLAYING || playerState === YT_PLAYER_STATE.PAUSED || playerState === YT_PLAYER_STATE.CUED ) {
+    if (player.getPlayerState === YT_PLAYER_STATE.PLAYING || player.getPlayerState === YT_PLAYER_STATE.CUED ) {
       duration  = ytpGetDuration(player);
       d         = Number(duration);
       h         = Math.floor(d / 3600);
@@ -869,17 +864,16 @@ var progress;
 
       return hours;
     } else {
-      return '00';
+      return false;
     }
   }
 
   // Returns the duration minutes of the video
   // ---------------------------------------------------------------------------
   function ytpGetDurationMinutes(player) {
-    var playerState, duration, minutes, d, m;
+    var duration, minutes, d, m;
 
-    playerState = player.getPlayerState();
-    if (playerState === YT_PLAYER_STATE.PLAYING || playerState === YT_PLAYER_STATE.PAUSED || playerState === YT_PLAYER_STATE.CUED) {
+    if (player.getPlayerState === YT_PLAYER_STATE.PLAYING || player.getPlayerState === YT_PLAYER_STATE.CUED) {
       duration  = ytpGetDuration(player);
       d         = Number(duration);
       m         = Math.floor(d % 3600 / 60);
@@ -887,17 +881,16 @@ var progress;
 
       return minutes;
     } else {
-      return '00';
+      return false;
     }    
   }
 
   // Returns the duration seconds of the video
   //
   function ytpGetDurationSeconds(player) {
-    var playerState, duration, seconds, d, s;
+    var duration, seconds, d, s;
 
-    playerState = player.getPlayerState();
-    if (playerState === YT_PLAYER_STATE.PLAYING || playerState === YT_PLAYER_STATE.PAUSED || playerState === YT_PLAYER_STATE.CUED ) {
+    if (player.getPlayerState === YT_PLAYER_STATE.PLAYING || player.getPlayerState === YT_PLAYER_STATE.CUED ) {
       duration  = ytpGetDuration(player);
       d         = Number(duration);
       s         = Math.floor(d % 60);
@@ -905,17 +898,16 @@ var progress;
 
       return seconds;
     } else {
-      return '00';
+      return false;
     }          
   }
 
   // Returns the current hours the user is into the video
   // ---------------------------------------------------------------------------
   function ytpGetCurrentHours(player) {
-    var playerState, currentTime, hours, d, h;
+    var currentTime, hours, d, h;
 
-    playerState = player.getPlayerState();
-    if (playerState === YT_PLAYER_STATE.PLAYING || playerState === YT_PLAYER_STATE.PAUSED || playerState === YT_PLAYER_STATE.CUED) {
+    if (player.getPlayerState === YT_PLAYER_STATE.PLAYING || player.getPlayerState === YT_PLAYER_STATE.CUED) {
       currentTime = ytpGetCurrentTime(player);
       d           = Number(currentTime);
       h           = Math.floor(d / 3600);
@@ -923,17 +915,16 @@ var progress;
 
       return hours;
     } else {
-      return '00';
+      return false;
     }      
   }
 
   // Returns the current minutes the user is into the video
   // ---------------------------------------------------------------------------
   function ytpGetCurrentMinutes (player) {
-    var playerState, currentTime, minutes, d, m;
+    var currentTime, minutes, d, m;
 
-    playerState = player.getPlayerState();
-    if (playerState === YT_PLAYER_STATE.PLAYING || playerState === YT_PLAYER_STATE.PAUSED || playerState === YT_PLAYER_STATE.CUED) {
+    if (player.getPlayerState === YT_PLAYER_STATE.PLAYING || player.getPlayerState === YT_PLAYER_STATE.CUED) {
       currentTime = ytpGetCurrentTime(player);
       d           = Number(currentTime);
       m           = Math.floor(d % 3600 / 60);
@@ -941,17 +932,15 @@ var progress;
 
       return minutes;
     } else {
-      return '00';
+      return false;
     }       
   }
 
   // Returns the current seconds the user is into the video
   //
   function ytpGetCurrentSeconds (player) {
-    var playerState, currentTime, seconds, d, s;
-
-    playerState = player.getPlayerState();
-    if (playerState === YT_PLAYER_STATE.PLAYING || playerState === YT_PLAYER_STATE.PAUSED || playerState === YT_PLAYER_STATE.CUED ) {
+    var currentTime, seconds, d, s;
+    if (player.getPlayerState === YT_PLAYER_STATE.PLAYING || player.getPlayerState === YT_PLAYER_STATE.CUED ) {
       currentTime = ytpGetCurrentTime(player);
       d           = Number(currentTime);
       s           = Math.floor(d % 60);
@@ -959,7 +948,7 @@ var progress;
 
       return seconds;
     } else {
-      return '00';
+      return false;
     }
   }
 

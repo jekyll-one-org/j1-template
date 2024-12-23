@@ -172,26 +172,25 @@ files for the audio part.
 Find complete playlist for the example of Manon Mélodie on link:{manon-melodie--playlist}[YouTube, {browser-window--new}].
 ====
 
-// .Manon Mélodie · YouTube 2024
-// amplitude::manon_melodie_yt_large[role="mt-4 mb-5"]
+.Manon Mélodie · YouTube 2024
+amplitude::manon_melodie_yt_large[role="mt-4 mb-5"]
 
 [role="mb-8"]
 [CAUTION]
 ====
 Playing audio tracks is currently supported only for videos from YouTube (YT).
 The YT plugin *ytp* embeds a YouTube (iframe) player and mimics the AmplitudeJS
-player buttons and controls to manage a *playlist* of videos the same as known
+player buttons and controls to manage a *playlist* of video the same as known
 for native audio files.
 
-AmplitudeJS YT Player can only be used with the J1 Template. Currently, only
-AJS players of type *large* are supported.
+Note, AmplitudeJS YT Player can only be used with the J1 Template. Currently,
+only AJS players of type *compact* and *large* are supported.
 ====
 
-lorem:sentences[5]
+// lorem:sentences[5]
 
-.Mimi Rutherfurt · Maritim Verlag (YouTube)
-amplitude::mimi_rutherfurt_yt_large[role="mt-4 mb-8"]
-
+// .Mimi Rutherfurt · Maritim Verlag (YouTube)
+// amplitude::mimi_rutherfurt_yt_large[role="mt-4 mb-8"]
 endif::[]
 
 
