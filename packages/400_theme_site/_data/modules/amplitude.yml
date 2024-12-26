@@ -658,7 +658,7 @@ settings:
       type:                             large
       source:                           video
       display_hours:                    true
-      
+
       # ------------------------------------------------------------------------
       # CONTROL settings
       #

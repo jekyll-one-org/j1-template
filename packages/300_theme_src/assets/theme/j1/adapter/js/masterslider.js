@@ -454,7 +454,8 @@ j1.adapter.masterslider = ((j1, window) => {
 
         logger.debug('\n' + 'slider events are being initialized on id: ' + index);
 
-        slider[index].api.addEventListener(MSSliderEvent.WAITING, (e) => {
+        // slider[index].api.addEventListener(MSSliderEvent.WAITING, (e) => {
+        slider[index].api.addEventListener(MSSliderEvent.WAITING, function(e) {
           var controller      = e.target.view.controller;
           var controllerValue = e.target.view.controller.value;
           var isLoading       = e.target.currentSlide.$loading.length;

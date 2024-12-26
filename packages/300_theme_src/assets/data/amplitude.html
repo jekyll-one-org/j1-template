@@ -733,6 +733,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
           <!-- START progress bar -->
           {% if song_progress_bar %}
           <progress
+            id="large_player_progress_{{player_id}}"
             class="large-player-progress amplitude-song-played-progress"
             data-amplitude-source="{{source_media_attribute}}"
             data-amplitude-playlist="{{player_playlist}}">
@@ -753,21 +754,21 @@ amplitude_defaults: {{amplitude_defaults | debug}}
                 {% if shuffle_button %}
                 <div
                   id="large_player_shuffle"
-                  class="amplitude-shuffle amplitude-shuffle-off"
+                  class="large-player-shuffle-{{player_id}} amplitude-shuffle amplitude-shuffle-off"
                   data-amplitude-source="{{source_media_attribute}}"
                   data-amplitude-playlist="{{player_playlist}}">
                 </div>
                 {% endif %}
                 <div
                   id="large_player_previous"
-                  class="amplitude-prev"
+                  class="large-player-previous-{{player_id}} amplitude-prev"
                   data-amplitude-source="{{source_media_attribute}}"
                   data-amplitude-playlist="{{player_playlist}}">
                 </div>
                 {% if skip_forward_backward_button %}
                 <div
                   id="skip-backward_{{player_id}}"
-                  class="large-player-skip-backward"
+                  class="large-player-skip-backward-{{player_id}} large-player-skip-backward"
                   data-amplitude-source="{{source_media_attribute}}"
                   data-amplitude-playlist="{{player_playlist}}">
                 </div>
@@ -781,21 +782,21 @@ amplitude_defaults: {{amplitude_defaults | debug}}
                 {% if skip_forward_backward_button %}
                 <div
                   id="skip-forward_{{player_id}}"
-                  class="large-player-skip-forward"
+                  class="large-player-skip-forward-{{player_id}} large-player-skip-forward"
                   data-amplitude-source="{{source_media_attribute}}"
                   data-amplitude-playlist="{{player_playlist}}">
                 </div>
                 {% endif %}
                 <div
                   id="large_player_next"
-                  class="amplitude-next"
+                  class="large-player-next-{{player_id}} amplitude-next"
                   data-amplitude-source="{{source_media_attribute}}"
                   data-amplitude-playlist="{{player_playlist}}">
                 </div>
                 {% if repeat_button %}
                 <div
                   id="large_player_repeat"
-                  class="amplitude-repeat amplitude-repeat-off"
+                  class="large-player-repeat-{{player_id}} amplitude-repeat amplitude-repeat-off"
                   data-amplitude-source="{{source_media_attribute}}"
                   data-amplitude-playlist="{{player_playlist}}">
                 </div>
