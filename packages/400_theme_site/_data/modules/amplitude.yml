@@ -155,7 +155,7 @@ settings:
           <<:                           *album_mimi_rutherfurt_yt
           title:                        Alte Zeiten
           audio:                        watch?v=qEhzpBJpUq0
-          rating:                       3
+          rating:                       2
           audio_info:                   //www.youtube.com/@MaritimVerlag
           cover_image:                  //img.youtube.com/vi/qEhzpBJpUq0/maxresdefault.jpg
           duration:                     "00:48:15"

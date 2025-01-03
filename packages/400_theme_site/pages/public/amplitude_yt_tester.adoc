@@ -68,7 +68,7 @@ resource_options:
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [role="dropcap"]
 The J1 Template supports the AmpltidueJS module playing audio from (YouTube)
-video. The Template system provides a plugin (Tech) to mimic AmplzudeJS
+video. The Template system provides a plugin (Tech) to mimic AmpliudeJS
 players to control the audio.
 
 // Include sub-documents (if any)
@@ -172,14 +172,14 @@ files for the audio part.
 Find complete playlist for the example of Manon Mélodie on link:{manon-melodie--playlist}[YouTube, {browser-window--new}].
 ====
 
-[role="mt-4"]
-[[manon_melodie]]
-=== Manon Mélodie
+// [role="mt-4"]
+// [[manon_melodie]]
+// === Manon Mélodie
 
-lorem:sentences[3]
+// lorem:sentences[3]
 
-.Manon Mélodie · YouTube 2024
-amplitude::manon_melodie_yt_large[role="mt-4 mb-5"]
+// .Manon Mélodie · YouTube 2024
+// amplitude::manon_melodie_yt_large[role="mt-4 mb-5"]
 
 [role="mt-4"]
 === Mimi Rutherfurt

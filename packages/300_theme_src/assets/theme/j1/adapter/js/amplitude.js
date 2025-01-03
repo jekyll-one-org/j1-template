@@ -156,6 +156,8 @@ j1.adapter.amplitude = ((j1, window) => {
   var pluginManagerEnabled;
   var playerExistsInPage;
 
+  var pluginManagerRunOnce = false;
+
   // YT player settings
 // -----------------------------------------------------------------------------
 // const YT_PLAYER_STATE = {
@@ -1032,8 +1034,12 @@ j1.adapter.amplitude = ((j1, window) => {
 
                 playerExistsInPage   = (document.getElementById('{{player.id}}_parent') !== null) ? true : false;
                 pluginManagerEnabled = ('{{player.plugin_manager.enabled}}'.length > 0 && '{{player.plugin_manager.enabled}}' === 'true') ? true : playerDefaultPluginManager;
-                if (playerExistsInPage && pluginManagerEnabled) {
+
+                if (playerExistsInPage && pluginManagerEnabled && !pluginManagerRunOnce) {
                   _this.pluginManager('{{player.plugin_manager.plugins}}');
+
+                  // make sure the plugin is loaded|run only ONCE
+                  pluginManagerRunOnce = true;
                 }
 
                 clearInterval(load_dependencies['dependencies_met_player_loaded_{{player.id}}']);
