@@ -126,7 +126,7 @@ settings:
 
 
     # --------------------------------------------------------------------------
-    #  Mimi Rutherfurt, Maritim Verlag
+    # Mimi Rutherfurt
     # --------------------------------------------------------------------------
     #
     - playlist:
@@ -155,11 +155,11 @@ settings:
           <<:                           *album_mimi_rutherfurt_yt
           title:                        Alte Zeiten
           audio:                        watch?v=qEhzpBJpUq0
-          rating:                       3
-          audio_info:                   //youtube.com/watch?v=qEhzpBJpUq0
+          rating:                       2
+          audio_info:                   //www.youtube.com/@MaritimVerlag
           cover_image:                  //img.youtube.com/vi/qEhzpBJpUq0/maxresdefault.jpg
           duration:                     "00:48:15"
-
+          
         # title 02
         - item:
           enabled:                      true
@@ -167,144 +167,9 @@ settings:
           title:                        Nacht-Express
           audio:                        watch?v=I4VTc8nQxDs
           rating:                       3
-          audio_info:                   //youtube.com/watch?v=I4VTc8nQxDs
+          audio_info:                   //www.youtube.com/@MaritimVerlag
           cover_image:                  //img.youtube.com/vi/I4VTc8nQxDs/maxresdefault.jpg
           duration:                     "00:59:35"
-  
-        # title 03
-        - item:
-          enabled:                      true
-          <<:                           *album_mimi_rutherfurt_yt
-          title:                        Puppenspielerin
-          audio:                        watch?v=WAI07l_v9FA
-          rating:                       3
-          audio_info:                   //youtube.com/watch?v=WAI07l_v9FA
-          cover_image:                  //img.youtube.com/vi/WAI07l_v9FA/maxresdefault.jpg
-          duration:                     "00:45:37"
-
-        # title 04
-        - item:
-          enabled:                      true
-          <<:                           *album_mimi_rutherfurt_yt
-          title:                        Todesliste
-          audio:                        watch?v=ADKSPZJDErY
-          rating:                       3
-          audio_info:                   //youtube.com/watch?v=ADKSPZJDErY
-          cover_image:                  //img.youtube.com/vi/ADKSPZJDErY/maxresdefault.jpg
-          duration:                     "00:49:57"
-
-        # title 05
-        - item:
-          enabled:                      true
-          <<:                           *album_mimi_rutherfurt_yt
-          title:                        Buckingham Palace
-          audio:                        watch?v=ce_8ez1rFP0
-          rating:                       3
-          audio_info:                   //youtube.com/watch?v=ce_8ez1rFP0
-          cover_image:                  //img.youtube.com/vi/ce_8ez1rFP0/maxresdefault.jpg
-          duration:                     "01:09:14"
-
-        # title 06
-        - item:
-          enabled:                      true
-          <<:                           *album_mimi_rutherfurt_yt
-          title:                        Flucht im Dunkeln
-          audio:                        watch?v=Isy7X_HFYKc
-          rating:                       3
-          audio_info:                   //youtube.com/watch?v=Isy7X_HFYKc
-          cover_image:                  //img.youtube.com/vi/Isy7X_HFYKc/hqdefault.jpg
-          duration:                     "00:43:42"
-
-        # title 07
-        - item:
-          enabled:                      true
-          <<:                           *album_mimi_rutherfurt_yt
-          title:                        Priestermord
-          audio:                        watch?v=Wm9HMq7u_eA
-          rating:                       3
-          audio_info:                   //youtube.com/watch?v=Wm9HMq7u_eA
-          cover_image:                  //img.youtube.com/vi/Wm9HMq7u_eA/hqdefault.jpg
-          duration:                     "00:55:01"
-
-        # title 08
-        - item:
-          enabled:                      true
-          <<:                           *album_mimi_rutherfurt_yt
-          title:                        Das indische Kind
-          audio:                        watch?v=IggoySTsG5s
-          rating:                       3
-          audio_info:                   //youtube.com/watch?v=IggoySTsG5s
-          cover_image:                  //img.youtube.com/vi/IggoySTsG5s/maxresdefault.jpg
-          duration:                     "00:50:21"
-
-        # title 09
-        - item:
-          enabled:                      true
-          <<:                           *album_mimi_rutherfurt_yt
-          title:                        Schwarze Rache
-          audio:                        watch?v=N853_AAE0Fg
-          rating:                       3
-          audio_info:                   //youtube.com/watch?v=N853_AAE0Fg
-          cover_image:                  //img.youtube.com/vi/N853_AAE0Fg/maxresdefault.jpg
-          duration:                     "00:54:40"
-
-        # title 10
-        - item:
-          enabled:                      true
-          <<:                           *album_mimi_rutherfurt_yt
-          title:                        Spuk im Herrenhaus
-          audio:                        watch?v=mBRbyVFIL0U
-          rating:                       3
-          audio_info:                   //youtube.com/watch?v=mBRbyVFIL0U
-          cover_image:                  //img.youtube.com/vi/mBRbyVFIL0U/hqdefault.jpg
-          duration:                     "01:19:16"
-
-
-    # --------------------------------------------------------------------------
-    # Die größten Fälle des BND, Maritim Verlag
-    # --------------------------------------------------------------------------
-    #
-    - playlist:
-      enabled:                          true
-
-      name:                             faelle_des_bnd_yt
-      title:                            Die größten Fälle des BND
-
-      # ------------------------------------------------------------------------
-      # ALBUM settings
-      # ------------------------------------------------------------------------
-      album:                            &faelle_des_bnd_yt
-        name:                           Die größten Fälle des BND
-        artist:                         Maritim Verlag
-        audio_base:                     //youtube.com
-        cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
-
-      # ------------------------------------------------------------------------
-      # TITLE settings (songs)
-      # ------------------------------------------------------------------------
-      items:
-
-        # title 01
-        - item:
-          enabled:                      true
-          <<:                           *faelle_des_bnd_yt
-          title:                        Der unverzichtbare Feind
-          audio:                        watch?v=Y56DTeGXOfs
-          rating:                       3
-          audio_info:                   //youtube.com/watch?v=Y56DTeGXOfs
-          cover_image:                  //img.youtube.com/vi/Y56DTeGXOfs/hqdefault.jpg
-          duration:                     "01:17:17"
-
-        # title 02
-        - item:
-          enabled:                      true
-          <<:                           *faelle_des_bnd_yt
-          title:                        Ein Diener vieler Herren
-          audio:                        watch?v=biZp6ko8x7E
-          rating:                       3
-          audio_info:                   //youtube.com/watch?v=biZp6ko8x7E
-          cover_image:                  //img.youtube.com/vi/biZp6ko8x7E/hqdefault.jpg
-          duration:                     "01:20:24"
 
 
     # --------------------------------------------------------------------------
@@ -779,49 +644,6 @@ settings:
 
 
     # --------------------------------------------------------------------------
-    # LARGE player, Manon Mélodie
-    # --------------------------------------------------------------------------
-    #
-    - player:
-
-      # ------------------------------------------------------------------------
-      # GENERAL settings
-      #    
-      enabled:                          true
-
-      id:                               manon_melodie_yt_large
-      type:                             large
-      source:                           video
-      display_hours:                    false
-
-      # ------------------------------------------------------------------------
-      # CONTROL settings
-      #
-      song_progress_bar:                true
-      skip_forward_backward_button:     true
-      forward_backward_skip_seconds:    10
-      volume_slider:
-        enabled:                        true
-        preset_value:                   46
-
-      # ------------------------------------------------------------------------
-      # PLUGIN settings
-      #
-      plugin_manager:
-        enabled:                        true
-        plugins:                        [ ytp ]
-
-      # ------------------------------------------------------------------------
-      # PLAYLIST settings
-      #      
-      playlist:
-        name:                           manon_melodie_yt
-        title:                          Manon Mélodie
-        audio_info:                     true
-        audio_rating:                   true
-
-
-    # --------------------------------------------------------------------------
     # LARGE player, Mimi Rutherfurt
     # --------------------------------------------------------------------------
     #
@@ -865,30 +687,27 @@ settings:
 
 
     # --------------------------------------------------------------------------
-    # LARGE player, Die größten Fälle des BND
+    # LARGE player, Manon Mélodie
     # --------------------------------------------------------------------------
     #
     - player:
 
       # ------------------------------------------------------------------------
       # GENERAL settings
-      #     
+      #    
       enabled:                          true
 
-      id:                               faelle_des_bnd_yt_large
+      id:                               manon_melodie_yt_large
       type:                             large
       source:                           video
-
-      # ------------------------------------------------------------------------
-      # TIME settings
-      display_hours:                    true
+      display_hours:                    false
 
       # ------------------------------------------------------------------------
       # CONTROL settings
       #
       song_progress_bar:                true
       skip_forward_backward_button:     true
-      forward_backward_skip_seconds:    60
+      forward_backward_skip_seconds:    10
       volume_slider:
         enabled:                        true
         preset_value:                   46
@@ -902,13 +721,13 @@ settings:
 
       # ------------------------------------------------------------------------
       # PLAYLIST settings
-      #
+      #      
       playlist:
-        name:                           faelle_des_bnd_yt
-        title:                          Die größten Fälle des BND
+        name:                           manon_melodie_yt
+        title:                          Manon Mélodie
         audio_info:                     true
-        audio_rating:                   true     
-
+        audio_rating:                   true
+#       controls:                       false
 
 # ------------------------------------------------------------------------------
 # END config

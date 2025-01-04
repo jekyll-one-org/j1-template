@@ -172,14 +172,14 @@ files for the audio part.
 Find complete playlist for the example of Manon Mélodie on link:{manon-melodie--playlist}[YouTube, {browser-window--new}].
 ====
 
-// [role="mt-4"]
-// [[manon_melodie]]
-// === Manon Mélodie
+[role="mt-4"]
+[[manon_melodie]]
+=== Manon Mélodie
 
-// lorem:sentences[3]
+lorem:sentences[3]
 
-// .Manon Mélodie · YouTube 2024
-// amplitude::manon_melodie_yt_large[role="mt-4 mb-5"]
+.Manon Mélodie · YouTube 2024
+amplitude::manon_melodie_yt_large[role="mt-4 mb-5"]
 
 [role="mt-4"]
 === Mimi Rutherfurt
@@ -187,7 +187,17 @@ Find complete playlist for the example of Manon Mélodie on link:{manon-melodie-
 lorem:sentences[3]
 
 .Mimi Rutherfurt · Maritim Verlag (YouTube)
-amplitude::mimi_rutherfurt_yt_large[role="mt-4 mb-8"]
+amplitude::mimi_rutherfurt_yt_large[role="mt-4 mb-5"]
+
+// [role="mt-4"]
+// [[faelle_des_bnd]]
+// === Die größten Fälle des BND
+
+// lorem:sentences[3]
+
+// .Die größten Fälle des BND · Maritim Verlag (YouTube)
+// amplitude::faelle_des_bnd_yt_large[role="mt-4 mb-5"]
+
 endif::[]
 
 [role="mb-8"]
