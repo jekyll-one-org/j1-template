@@ -295,7 +295,7 @@ are in a *single row*.
     <div class="row gx-1">
 
       <!-- BS Multi Slider (left) -->
-      <div id="gallery_slider" class="col-md-9">
+      <div class="col-md-9">
           <div id="swiper1" class="swiper swiper-container swiper--multi gallery-slider">
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
@@ -366,8 +366,7 @@ $(function() {
 
     if (atticFinished) {
 
-      // Initialize Swiper instances
-//    var thumbsSwiper = new Swiper('.col-md-3:last-child .swiper', {
+      // Initialize Thumb Swiper instance (right)
       var thumbsSwiper = new Swiper('#swiper2', {
         direction: 'vertical',
         spaceBetween: 3,
@@ -377,10 +376,15 @@ $(function() {
         // centeredSlidesBounds: true,
         // watchOverflow: true,
         // watchSlidesVisibility: true,
-        // watchSlidesProgress: true        
+        // watchSlidesProgress: true,
+        on: {
+          transitionStart: (swiper) => {
+            gallerySwiper.slideTo(thumbsSwiper.activeIndex);
+          }
+        }
       });
 
-//    var gallerySwiper = new Swiper('.col-md-9:first-child .swiper ', {
+      // Initialize Master Swiper instance (right)
       var gallerySwiper = new Swiper('#swiper1', {        
         direction: 'horizontal',
         grabCursor: true,
@@ -394,26 +398,23 @@ $(function() {
         },
         thumbs: {
           swiper: thumbsSwiper
-        }        
+        },
+        on: {
+          slideChangeTransitionStart: (swiper) => {
+            thumbsSwiper.slideTo(swiper.activeIndex);
+          }
+        },
+        on: {
+          click: (swiper, event) => {
+            console.log('Clicked on the slider, index: ', swiper.activeIndex);
+          }
+        }
       });
- 
-      // Event listener for grab event
-      // gallerySwiper.on('grab', function () {
-      //   this.el.style.cursor = 'grabbing'; 
-      // });
-
-      // Event listener for release event
-      // gallerySwiper.on('release', function () {
-      //   this.el.style.cursor = 'grab'; 
-      // })
 
       gallerySwiper.on('click', (swiper, event) => {
+        //console.log('Clicked on the slider, index: ', swiper.activeIndex);
+
         // See: http://mreq.github.io/slick-lightbox/
-        var activeIndex = swiper.activeIndex;
-
-        console.log('Clicked on the slider, index: ', activeIndex);
-
-
         // $('#gallery_slider').slickLightbox ({
         //   itemSelector: '> div > img'
         //   // caption:                  slickLightboxOptions.caption,
@@ -437,15 +438,6 @@ $(function() {
         // if (event.target.classList.contains('my-button')) {
         //   console.log('Clicked on the button!');
         // }
-
-      });
-
-      gallerySwiper.on('slideChangeTransitionStart', function() {
-        thumbsSwiper.slideTo(gallerySwiper.activeIndex);
-      });
-
-      thumbsSwiper.on('transitionStart', function(){
-        gallerySwiper.slideTo(thumbsSwiper.activeIndex);
       });
 
       clearInterval(dependencies_met_page_ready);
