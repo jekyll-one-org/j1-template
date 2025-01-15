@@ -1,0 +1,54 @@
+Wie kann man mehrere SwiperJS Slider mit Hilfe des Bootstrap Grid-Systems
+auf einer Seite nebeneinander plazieren?
+
+Die Initialisierung der Slider soll über IDs erfolgen.
+
+Gemini
+--------------------------------------------------------------------------------
+
+Kombinieren von SwiperJS und Bootstrap Grid. 
+Mehrere SwiperJS-Slider sollen mithilfe des Bootstrap Grid-Systems
+so auf einer Seite angeordnet werden, dass sie nebeneinander liegen.
+Die Initialisierung der Slider erfolgt über IDs.
+
+HTML-Struktur:
+
+* Grid-Container und -Rows:
+    Erstellen Sie einen Bootstrap-Grid-Container und teilen Sie ihn so
+    in Rows auf, um die Slider horizontal anzuordnen.
+
+* Column-Elemente:
+    In jeder Row platzieren Sie Column-Elemente, um die Breite der einzelnen
+    Slider zu bestimmen.
+
+* Swiper-Container:
+    Innerhalb jeder Column erstellen Sie einen Container für den jeweiligen
+    Swiper. Geben Sie jedem Container eine eindeutige ID, um ihn später in
+    JavaScript zu identifizieren.
+
+
+HTML
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div id="swiper1" class="swiper-container"></div>
+        </div>
+        <div class="col-md-6">
+            <div id="swiper2" class="swiper-container"></div>
+        </div>
+    </div>
+</div>
+
+
+JavaScript
+
+var swiper1 = new Swiper("#swiper1", {
+    // Swiper Optionen
+});
+
+var swiper2 = new Swiper("#swiper2", {
+    // Swiper Optionen
+});
+
+

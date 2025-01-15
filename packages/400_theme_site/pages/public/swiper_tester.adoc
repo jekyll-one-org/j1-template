@@ -296,7 +296,7 @@ are in a *single row*.
 
       <!-- BS Multi Slider (left) -->
       <div id="gallery_slider" class="col-md-9">
-          <div class="swiper swiper-container swiper--multi gallery-slider">
+          <div id="swiper1" class="swiper swiper-container swiper--multi gallery-slider">
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
                   <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" />
@@ -325,7 +325,7 @@ are in a *single row*.
 
       <!-- Thumbs Slider (right) -->
       <div class="col-md-3">
-          <div id="thumbs_slider_right" class="swiper swiper-container swiper--multi thumbs-slider--right">
+          <div id="swiper2" class="swiper swiper-container swiper--multi thumbs-slider--right">
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
                   <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" />
@@ -367,7 +367,8 @@ $(function() {
     if (atticFinished) {
 
       // Initialize Swiper instances
-      var thumbsSwiper = new Swiper('.col-md-3:last-child .swiper', {
+//    var thumbsSwiper = new Swiper('.col-md-3:last-child .swiper', {
+      var thumbsSwiper = new Swiper('#swiper2', {
         direction: 'vertical',
         spaceBetween: 3,
         slidesPerView: 3,
@@ -379,7 +380,8 @@ $(function() {
         // watchSlidesProgress: true        
       });
 
-      var gallerySwiper = new Swiper('.col-md-9:first-child .swiper ', {
+//    var gallerySwiper = new Swiper('.col-md-9:first-child .swiper ', {
+      var gallerySwiper = new Swiper('#swiper1', {        
         direction: 'horizontal',
         grabCursor: true,
         // watchOverflow: true,
