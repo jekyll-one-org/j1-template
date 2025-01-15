@@ -1,0 +1,43 @@
+ifeval::[{swiper--global-options} == true]
+[role="mt-5"]
+== Common Options
+// https://swiperjs.com/types/interfaces/types_swiper_options.SwiperOptions
+
+Find a *full list* of all swiper options, aka known as *properties*, with the
+https://swiperjs.com/swiper-api#parameters[Swiper Documentation, {browser-window--new}]
+and with the *Parameters* sections below.
+
+The *properties* for a Swiper slider are extensive, covering various aspects
+of its behavior and appearance. Here's a *summary* of the key *default*
+values.
+
+=== Core Behavior
+
+* <<direction>>:        _horizontal_  (Slides move horizontally)
+* <<effect>>:           _slide_       (Basic sliding transition)
+* <<spaceBetween>>:     0             (No space between slides by default)
+* <<slidesPerView>>:    1             (Only one slide visible at a time)
+* <<initialSlide>>:     0             (First slide is active initially)
+* <<centeredSlides>>:   `false`       (Active slide is not centered)
+* <<loop>>:             `false`       (Looping is disabled)
+
+=== User Interaction
+
+* <<allowTouchMove>>:   `true`        (Swiping is enabled)
+* <<grabCursor>>:       `false`       (Cursor doesn't change on hover)1   
+* <<keyboard>>:         `false`       (Keyboard navigation is disabled)
+* <<mousewheel>>:       `false`       (Mousewheel navigation is disabled)
+
+=== Appearance
+
+* <<autoHeight>>:       `false`       (Slider height doesn't adjust to slide content)
+* <<speed>>:             300          (Transition animation duration in milliseconds)
+
+=== Other Important Defaults
+
+* <<pagination>>:       *Disabled* by default
+* <<navigation>>:       *Disabled* by default
+* <<scrollbar>>:        *Disabled* by default
+* <<breakpoints>>:      *No breakpoints* defined by default
+
+endif::[]

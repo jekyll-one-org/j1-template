@@ -460,6 +460,14 @@
       href:                             /pages/public/amplitude_yt_tester/
       icon:                             test-tube
 
+    - title:                            Swiper Tester
+      href:                             /pages/public/swiper_tester/
+      icon:                             test-tube
+
+    - title:                            Swiper API
+      href:                             /pages/public/swiper_api/
+      icon:                             alpha-j-box
+
     # --------------------------------------------------------------------------
     # Tester
     #

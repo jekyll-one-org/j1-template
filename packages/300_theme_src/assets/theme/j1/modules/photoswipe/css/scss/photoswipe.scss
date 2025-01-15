@@ -1,0 +1,427 @@
+$color_1: var(--pswp-error-text-color);
+$color_2: var(--pswp-icon-color-secondary);
+$color_3: var(--pswp-icon-color);
+
+/*! PhotoSwipe main CSS by Dmytro Semenov | photoswipe.com */
+/*
+	Styles for basic PhotoSwipe (pswp) functionality (sliding area, open/close transitions)
+*/
+/* Prevents focus outline on the root element,
+  (it may be focused initially) */
+/* :active to override grabbing cursor */
+/* Prevent selection and tap highlights */
+/* Allow to click through pswp__content element, but not its children */
+/*
+
+  PhotoSwipe UI
+
+*/
+/*
+	Error message appears when image is not loaded
+	(JS option errorMsg controls markup)
+*/
+/*
+class pswp__hide-on-close is applied to elements that
+should hide (for example fade out) when PhotoSwipe is closed
+and show (for example fade in) when PhotoSwipe is opened
+ */
+/* class pswp--ui-visible is added when opening or closing transition starts */
+/* <button> styles, including css reset */
+/*
+	div element that matches size of large image,
+	large image loads on top of it,
+	used when msrc is not provided
+*/
+/*
+
+  Close button
+
+*/
+/*
+
+  Arrow buttons
+
+*/
+/* hide arrows on touch screens */
+/* show arrows only after mouse was used */
+/*
+
+  Zoom button
+
+*/
+/* "+" => "-" */
+/*
+
+  Loading indicator
+
+*/
+@keyframes pswp-clockwise {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+/*
+
+  "1 of 10" counter
+
+*/
+.pswp {
+	--pswp-bg: #000;
+	--pswp-placeholder-bg: #222;
+	--pswp-root-z-index: 100000;
+	--pswp-preloader-color: rgba(79, 79, 79, 0.4);
+	--pswp-preloader-color-secondary: rgba(255, 255, 255, 0.9);
+	--pswp-icon-color: #fff;
+	--pswp-icon-color-secondary: #4f4f4f;
+	--pswp-icon-stroke-color: #4f4f4f;
+	--pswp-icon-stroke-width: 2px;
+	--pswp-error-text-color: var(--pswp-icon-color);
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: var(--pswp-root-z-index);
+	display: none;
+	touch-action: none;
+	outline: 0;
+	opacity: 0.003;
+	contain: layout style size;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	transform: translateZ(0);
+	will-change: opacity;
+	overflow: hidden;
+	&:focus {
+		outline: 0;
+	}
+	* {
+		box-sizing: border-box;
+	}
+	img {
+		max-width: none;
+	}
+	.pswp__hide-on-close {
+		opacity: 0.005;
+		will-change: opacity;
+		transition: opacity var(--pswp-transition-duration) cubic-bezier(0.4, 0, 0.22, 1);
+		z-index: 10;
+		pointer-events: none;
+	}
+}
+.pswp--open {
+	display: block;
+}
+.pswp__bg {
+	transform: translateZ(0);
+	will-change: opacity;
+	opacity: 0.005;
+	background: var(--pswp-bg);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+.pswp__scroll-wrap {
+	overflow: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+.pswp__container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+.pswp__item {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	overflow: hidden;
+}
+.pswp__content {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	>* {
+		pointer-events: auto;
+	}
+}
+.pswp__img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	width: auto;
+	height: auto;
+	cursor: -webkit-zoom-out;
+	cursor: -moz-zoom-out;
+	cursor: zoom-out;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+.pswp__zoom-wrap {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	width: auto;
+	height: auto;
+}
+.pswp--click-to-zoom.pswp--zoom-allowed {
+	.pswp__img {
+		cursor: -webkit-zoom-in;
+		cursor: -moz-zoom-in;
+		cursor: zoom-in;
+	}
+}
+.pswp--click-to-zoom.pswp--zoomed-in {
+	.pswp__img {
+		cursor: move;
+		cursor: -webkit-grab;
+		cursor: -moz-grab;
+		cursor: grab;
+		&:active {
+			cursor: -webkit-grabbing;
+			cursor: -moz-grabbing;
+			cursor: grabbing;
+		}
+	}
+}
+.pswp--no-mouse-drag.pswp--zoomed-in {
+	.pswp__img {
+		cursor: -webkit-zoom-out;
+		cursor: -moz-zoom-out;
+		cursor: zoom-out;
+		&:active {
+			cursor: -webkit-zoom-out;
+			cursor: -moz-zoom-out;
+			cursor: zoom-out;
+		}
+	}
+}
+.pswp__button {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	position: relative;
+	display: block;
+	width: 50px;
+	height: 60px;
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+	cursor: pointer;
+	background: none;
+	border: 0;
+	box-shadow: none;
+	opacity: 0.85;
+	-webkit-appearance: none;
+	-webkit-touch-callout: none;
+	&:hover {
+		transition: none;
+		padding: 0;
+		background: none;
+		border: 0;
+		box-shadow: none;
+		opacity: 1;
+	}
+	&:active {
+		transition: none;
+		padding: 0;
+		background: none;
+		border: 0;
+		box-shadow: none;
+		opacity: 1;
+	}
+	&:focus {
+		transition: none;
+		padding: 0;
+		background: none;
+		border: 0;
+		box-shadow: none;
+		opacity: 1;
+	}
+	&:disabled {
+		opacity: 0.3;
+		cursor: auto;
+	}
+}
+.pswp__counter {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	height: 30px;
+	margin-top: 15px;
+	margin-inline-start: 20px;
+	font-size: 14px;
+	line-height: 30px;
+	color: $color_3;
+	text-shadow: 1px 1px 3px var(--pswp-icon-color-secondary);
+	opacity: 0.85;
+}
+.pswp__hidden {
+	display: none !important;
+}
+.pswp__error-msg-container {
+	display: grid;
+}
+.pswp__error-msg {
+	margin: auto;
+	font-size: 1em;
+	line-height: 1;
+	color: $color_1;
+}
+.pswp--ui-visible {
+	.pswp__hide-on-close {
+		opacity: 1;
+		pointer-events: auto;
+	}
+}
+.pswp__icn {
+	fill: var(--pswp-icon-color);
+	color: $color_2;
+	position: absolute;
+	top: 14px;
+	left: 9px;
+	width: 32px;
+	height: 32px;
+	overflow: hidden;
+	pointer-events: none;
+	&:focus {
+		outline: 0;
+	}
+}
+.pswp__icn-shadow {
+	stroke: var(--pswp-icon-stroke-color);
+	stroke-width: var(--pswp-icon-stroke-width);
+	fill: none;
+}
+div.pswp__img--placeholder {
+	background: var(--pswp-placeholder-bg);
+}
+.pswp__img--with-bg {
+	background: var(--pswp-placeholder-bg);
+}
+.pswp__top-bar {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 60px;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	z-index: 10;
+	pointer-events: none !important;
+	>* {
+		pointer-events: auto;
+		will-change: opacity;
+	}
+}
+.pswp__button--close {
+	margin-right: 6px;
+}
+.pswp__button--arrow {
+	position: absolute;
+	top: 0;
+	width: 75px;
+	height: 100px;
+	top: 50%;
+	margin-top: -50px;
+	&:disabled {
+		display: none;
+		cursor: default;
+	}
+	.pswp__icn {
+		top: 50%;
+		margin-top: -30px;
+		width: 60px;
+		height: 60px;
+		background: none;
+		border-radius: 0;
+	}
+}
+.pswp--one-slide {
+	.pswp__button--arrow {
+		display: none;
+	}
+	.pswp__counter {
+		display: none;
+	}
+}
+.pswp--touch {
+	.pswp__button--arrow {
+		visibility: hidden;
+	}
+}
+.pswp--has_mouse {
+	.pswp__button--arrow {
+		visibility: visible;
+	}
+}
+.pswp__button--arrow--prev {
+	right: auto;
+	left: 0px;
+}
+.pswp__button--arrow--next {
+	right: 0px;
+	.pswp__icn {
+		left: auto;
+		right: 14px;
+		transform: scale(-1, 1);
+	}
+}
+.pswp__button--zoom {
+	display: none;
+}
+.pswp--zoom-allowed {
+	.pswp__button--zoom {
+		display: block;
+	}
+}
+.pswp--zoomed-in {
+	.pswp__zoom-icn-bar-v {
+		display: none;
+	}
+}
+.pswp__preloader {
+	position: relative;
+	overflow: hidden;
+	width: 50px;
+	height: 60px;
+	margin-right: auto;
+	.pswp__icn {
+		opacity: 0;
+		transition: opacity 0.2s linear;
+		animation: pswp-clockwise 600ms linear infinite;
+	}
+}
+.pswp__preloader--active {
+	.pswp__icn {
+		opacity: 0.85;
+	}
+}

@@ -1921,5 +1921,29 @@ resources:
         js:                             [ modules/amplitudejs/js/amplitude ]
         init_function:                  [ j1.adapter.amplitude.init ]
 
+  # ----------------------------------------------------------------------------
+  # Swiper
+  #
+  - name:                               J1 Swiper
+    resource:
+      enabled:                          true
+
+      id:                               swiper
+      comment:                          Module Swiper
+      region:                           body-footer
+      layout:                           [ home, page, post ]
+      required:                         ondemand
+      script_load:                      defer
+      pass_init_data:                   false
+
+      data:
+        css:                            [
+                                          modules/swiper/css/theme/uno,
+                                          modules/swiper/css/swiper-bundle
+                                        ]
+        files:                          [ adapter/js/swiper.js ]
+        js:                             [ modules/swiper/js/swiper-bundle ]
+        init_function:                  [ j1.adapter.swiper.init ]
+
 # ------------------------------------------------------------------------------
 # END config

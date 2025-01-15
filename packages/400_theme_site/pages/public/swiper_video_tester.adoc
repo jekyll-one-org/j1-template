@@ -1,0 +1,390 @@
+---
+title:                                  Swiper Video Tester
+title_extention:                        Swiper Integration
+tagline:                                Swiper Integration
+
+date:                                   2025-01-07
+#last_modified:                         2025-01-01
+
+description: >
+
+keywords: >
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap,
+                                        html, html5, video, support, flash player,
+                                        quicktime, silverlight
+
+categories:                             [ Roundtrip ]
+tags:                                   [ Module, Swiper ]
+
+image:
+  path:                                 /assets/image/modules/attics/markus-spiske-1920x1280.jpg
+  width:                                1920
+  height:                               1280
+
+attic:                                  false
+regenerate:                             false
+personalization:                        true
+permalink:                              /pages/public/swiper_video_tester/
+
+resources:                              [ swiper, slick-slider, videojs ]
+resource_options:
+  - toccer:
+      collapseDepth:                    3
+  - attic:
+      slides:
+        - url:                          /assets/image/modules/attics/markus-spiske-1920x1280.jpg
+          alt:                          Swiper Tester
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Attribute settings for section control
+//
+:swiper--features:                      false
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+Swiper, the free and most modern mobile touch slider with hardware accelerated
+transitions and amazing native behavior. It is intended to be used in mobile
+websites, mobile web apps, and mobile native/hybrid apps.
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+lorem:sentences[5]
+
+[NOTE]
+====
+Swiper is not compatible with all platforms, it is a modern touch slider
+which is focused only on modern apps/platforms to bring the best experience
+and simplicity.
+====
+
+[role="mt-5"]
+== Examples
+// See: https://swiperjs.com/demos
+
+lorem:sentences[5]
+
+[role="mt-4"]
+[[slider-videojs]]
+=== Slider using VideoJS 
+
+lorem:sentences[3]
+
+++++
+<!-- Video Slider (master) -->
+<div class="swiper swiper-container master-slider">
+  <div class="swiper-wrapper">
+
+    <div class="swiper-slide swiper-no-swiping" data-slide-type="img">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" aria-label="ms-free-animals-1">
+    </div>    
+
+    <!-- div class="swiper-slide swiper-no-swiping" data-slide-type="vdo">
+      <video
+        id="peck_pocketed_video"
+        class="video-js vjs-theme-uno"
+        controls
+        width="640" height="360"
+        poster="/assets/video/poster/html5/peck_pocketed.jpg"
+        alt="title"
+        aria-label="title"
+        data-setup='{
+          "fluid" : true,
+          "sources": [{
+            "type": "video/mp4",
+            "src": "/assets/video//html5/peck_pocketed.mp4"
+          }],
+          "controlBar": {
+            "pictureInPictureToggle": false,
+            "skipButtons": {
+              "backward": 15,
+              "forward": 15
+            },
+            "volumePanel": {
+              "inline": false
+            }
+          }
+        }'
+      > </video>
+    </div -->
+
+    <div class="swiper-slide swiper-no-swiping" data-slide-type="vdo">
+      <video
+        id="peck_pocketed_video"
+        class="video-js vjs-theme-uno"
+        controls
+        width="640" height="360"
+        poster="//img.youtube.com/vi/nV8UZJNBY6Y/maxresdefault.jpg"
+        data-setup='{
+          "fluid" : true,
+          "rel": 0,
+          "techOrder": [
+            "youtube", "html5"
+          ],
+          "sources": [{
+            "type": "video/youtube",
+            "src": "//youtube.com/watch?v=nV8UZJNBY6Y"
+          }],
+          "controlBar": {
+            "pictureInPictureToggle": false,
+            "volumePanel": {
+              "inline": false
+            }
+          }
+        }'
+      >
+      </video>
+    </div>
+
+    <div class="swiper-slide swiper-no-swiping" data-slide-type="img">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg" aria-label="ms-free-animals-3">
+    </div>       
+    <div class="swiper-slide swiper-no-swiping" data-slide-type="img">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" />
+    </div>
+
+</div>
+
+<!-- Thumbs Slider (slave|bottom) -->
+<div class="swiper swiper-container thumbs-slider thumb-slider-bottom mt-1 mb-5">
+  <div class="swiper-wrapper">
+
+    <div class="swiper-slide" data-slide-type="img">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" aria-label="ms-free-animals-1">
+    </div>
+    <div class="swiper-slide" data-slide-type="img">
+      <!-- img src="/assets/video/poster/html5/peck_pocketed.jpg" aria-label="peck_pocketed" -->
+      <img src="//img.youtube.com/vi/nV8UZJNBY6Y/maxresdefault.jpg">
+    </div>
+    <div class="swiper-slide" data-slide-type="img">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg" aria-label="ms-free-animals-1">
+    </div>      
+    <div class="swiper-slide" data-slide-type="img">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" />
+    </div>
+
+  </div>
+</div>
+
+<script>
+$(function() {
+
+  // ---------------------------------------------------------------------------
+  // slider initializer
+  // ---------------------------------------------------------------------------
+  var dependencies_met_page_ready = setInterval (() => {
+    var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true : false;
+
+    if (atticFinished) {
+
+      const VIDEO_PLAYING_STATE = {
+        "PLAYING":  "PLAYING",
+        "PAUSE":    "PAUSE",
+        "ENDED":    "ENDED"
+      }; 
+
+      var vjsPlayer;
+      var vjsOptions;
+      var piSkipButtons;
+
+      var vjsPlayerType   = 'native';
+      var videoPlayStatus = VIDEO_PLAYING_STATE.PAUSE;
+
+      piSkipButtons = {
+        enabled:            true,
+        backward:           30,
+        forward:            30,
+        backwardIndex:      0,
+        forwardIndex:       0,
+        surroundPlayButton: true
+      };
+
+      // Thumbs Slider (slave|bottom)
+      // -----------------------------------------------------------------------
+      const thumbsSlider = new Swiper(".thumbs-slider", {
+        direction: 'horizontal',
+        spaceBetween: 3,
+        slidesPerView: 3,
+        grabCursor: true,
+        watchSlidesProgress: true,
+        on: {
+          transitionStart: (swiper) => {
+            var activeIndex = swiper.activeIndex;
+            masterSlider.slideTo(activeIndex);
+          }
+        }
+      });
+
+      // Initialize Master Slider
+      // -----------------------------------------------------------------------
+      // See: https://stackoverflow.com/questions/45468980/how-to-fix-event-conflicts-between-swiper-and-video-js
+      var masterSlider = new Swiper('.master-slider', {
+        autoHeight:       true,  // adapt height of the currently active slide.
+        direction:        'horizontal',
+        thumbs: {
+          swiper: thumbsSlider,
+        },
+        on: {
+          afterInit: (swiper) => {
+            // do something
+          },
+          slideChangeTransitionStart: (swiper) => {
+            thumbsSlider.slideTo(swiper.activeIndex);
+          },          
+          slideChangeTransitionEnd: (swiper) => {
+            var currentSlide      = $(swiper.slides[swiper.activeIndex]);
+            var currentSlideType  = currentSlide.data('slide-type');
+            // in case user click next before video ended
+            if (videoPlayStatus === VIDEO_PLAYING_STATE.PLAYING) {
+              vjsPlayer.pause();
+            }
+
+            switch (currentSlideType) {
+              case 'img':
+                // runNext();
+                break;
+              case 'vdo':
+                // vjsPlayer.currentTime(0);
+                // vjsPlayer.play();
+                videoPlayStatus = VIDEO_PLAYING_STATE.PLAYING;
+                break;
+              default:
+                throw new Error('invalid slide type');
+            }
+          }
+        }
+      });
+
+      // vjsPlayer.on('ended', function() {
+      //     next();
+      // });
+
+      // global function
+      // function prev() {
+      //   swiper.slidePrev();
+      // }
+
+      // function next() {
+      //   swiper.slideNext();
+      // }
+
+      // function runNext() {  
+      //   timeout = setTimeout(function () {
+      //     next()
+      //   }, waiting)
+      // }
+
+      // Initialize VideoJS player/s
+      // -----------------------------------------------------------------------
+      vjsOptions = {
+        plugins: {
+          skipButtons: {
+            backward:       30,
+            forward:        30,
+            backwardIndex:  0,
+            forwardIndex:   1
+          }
+        }
+      };
+      vjsPlayer = videojs('peck_pocketed_video', {});
+
+      // Add VJS plugins
+      // -----------------------------------------------------------------------
+      if (piSkipButtons.enabled) {
+        var backwardIndex = piSkipButtons.backwardIndex;
+        var forwardIndex  = piSkipButtons.forwardIndex;
+
+        // property 'surroundPlayButton' takes precendence
+        //
+        if (piSkipButtons.surroundPlayButton) {
+          var backwardIndex = 0;
+          var forwardIndex  = 1;
+        }
+
+        // plugin initialized with custom options
+        // See: https://videojs.com/guides/options/
+        vjsPlayer.skipButtons({
+          backwardIndex:  backwardIndex,
+          forwardIndex:   forwardIndex,
+          backward:       piSkipButtons.backward,
+          forward:        piSkipButtons.forward,
+        });
+      }
+
+      clearInterval(dependencies_met_page_ready);
+    } // END pageVisible
+  }, 10); // END dependencies_met_page_ready
+
+});
+</script>
+
+<style>
+
+/*
+.swiper-container {
+  overflow: hidden;
+}
+*/
+
+/*
+.swiper-container:active { 
+  cursor: grabbing; 
+}
+*/
+
+/*
+.thumbsSlider {
+  height: 20%;
+  box-sizing: border-box;
+}
+*/
+
+.thumbs-slider:active { 
+  cursor: grabbing; 
+}
+
+.thumbs-slider .swiper-slide {
+  height: 200px !important;
+  opacity: .6;
+}
+
+.thumbs-slider .swiper-slide-thumb-active {
+  opacity: 1;
+}
+
+
+.thumb-slider-top .swiper-slide,
+.thumb-slider-right .swiper-slide,
+.thumb-slider-bottom .swiper-slide,
+.thumb-slider-left .swiper-slide {
+  opacity: .6;
+}
+
+.thumb-slider-top .swiper-slide-thumb-active
+.thumb-slider-right .swiper-slide-thumb-active,
+.thumb-slider-bottom .swiper-slide-thumb-active,
+.thumb-slider-left .swiper-slide-thumb-active {
+  opacity: 1;
+}
+
+</style>
+++++

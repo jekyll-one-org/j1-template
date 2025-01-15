@@ -1,0 +1,3332 @@
+== Swiper API
+
+If you are upgrading from Swiper 9 to Swiper 10, check out
+link:/migration-guide-v10[Migration Guide to Swiper 10]
+
+=== Swiper Full HTML Layout
+
+[source, html]
+----
+<!-- Slider main container -->
+    <div class="swiper">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+    <!-- Slides -->
+    <div class="swiper-slide">Slide 1</div>
+    <div class="swiper-slide">Slide 2</div>
+    <div class="swiper-slide">Slide 3</div>
+    ...
+    </div>
+    <!-- If we need pagination -->
+    <div class="swiper-pagination"></div>
+
+    <!-- If we need navigation buttons -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+
+    <!-- If we need scrollbar -->
+    <div class="swiper-scrollbar"></div>
+    </div>
+    
+----
+
+// === link:#styles[]Styles
+
+// Swiper package contains different sets of CSS, Less and SCSS styles:
+
+// ==== link:#css-styles[]CSS Styles
+
+// CSS styles for bundle version:
+
+// * `+swiper-bundle.css+` - all Swiper styles including all modules styles
+// (like Navigation, Pagination, etc.)
+// * `+swiper-bundle.min.css+` - same as previous but minified
+
+// CSS styles for bundle version (package imports):
+
+// * `+swiper/css+` - all Swiper styles including all modules styles (like
+// Navigation, Pagination, etc.)
+// * `+swiper/css/bundle+` - same as previous but minified
+
+// CSS styles for core version and modules (package imports):
+
+// * `+swiper/css+` - only core Swiper styles
+// * `+swiper/css/a11y+` - styles required for A11y module
+// * `+swiper/css/autoplay+` - styles required for Autoplay module
+// * `+swiper/css/controller+` - styles required for Controller module
+// * `+swiper/css/effect-cards+` - styles required for Cards Effect module
+// * `+swiper/css/effect-coverflow+` - styles required for Coverflow Effect
+// module
+// * `+swiper/css/effect-creative+` - styles required for Creative Effect
+// module
+// * `+swiper/css/effect-cube+` - styles required for Cube Effect module
+// * `+swiper/css/effect-fade+` - styles required for Fade Effect module
+// * `+swiper/css/effect-flip+` - styles required for Flip Effect module
+// * `+swiper/css/free-mode+` - styles required for Free Mode module
+// * `+swiper/css/grid+` - styles required for Grid module
+// * `+swiper/css/hash-navigation+` - styles required for Hash Navigation
+// module
+// * `+swiper/css/history+` - styles required for History module
+// * `+swiper/css/keyboard+` - styles required for Keyboard module
+// * `+swiper/css/manipulation+` - styles required for Manipulation module
+// * `+swiper/css/mousewheel+` - styles required for Mousewheel module
+// * `+swiper/css/navigation+` - styles required for Navigation module
+// * `+swiper/css/pagination+` - styles required for Pagination module
+// * `+swiper/css/parallax+` - styles required for Parallax module
+// * `+swiper/css/scrollbar+` - styles required for Scrollbar module
+// * `+swiper/css/thumbs+` - styles required for Thumbs module
+// * `+swiper/css/virtual+` - styles required for Virtual module
+// * `+swiper/css/zoom+` - styles required for Zoom module
+
+// ==== link:#less-styles[]Less Styles
+
+// Less styles are separate styles for core version and modules (package
+// imports):
+
+// * `+swiper/less+` - only core Swiper styles
+// * `+swiper/less/bundle+` - all Swiper styles including all modules
+// styles (like Navigation, Pagination, etc.)
+// * `+swiper/less/a11y+` - styles required for A11y module
+// * `+swiper/less/autoplay+` - styles required for Autoplay module
+// * `+swiper/less/controller+` - styles required for Controller module
+// * `+swiper/less/effect-cards+` - styles required for Cards Effect module
+// * `+swiper/less/effect-coverflow+` - styles required for Coverflow
+// Effect module
+// * `+swiper/less/effect-creative+` - styles required for Creative Effect
+// module
+// * `+swiper/less/effect-cube+` - styles required for Cube Effect module
+// * `+swiper/less/effect-fade+` - styles required for Fade Effect module
+// * `+swiper/less/effect-flip+` - styles required for Flip Effect module
+// * `+swiper/less/free-mode+` - styles required for Free Mode module
+// * `+swiper/less/grid+` - styles required for Grid module
+// * `+swiper/less/hash-navigation+` - styles required for Hash Navigation
+// module
+// * `+swiper/less/history+` - styles required for History module
+// * `+swiper/less/keyboard+` - styles required for Keyboard module
+// * `+swiper/less/manipulation+` - styles required for Manipulation module
+// * `+swiper/less/mousewheel+` - styles required for Mousewheel module
+// * `+swiper/less/navigation+` - styles required for Navigation module
+// * `+swiper/less/pagination+` - styles required for Pagination module
+// * `+swiper/less/parallax+` - styles required for Parallax module
+// * `+swiper/less/scrollbar+` - styles required for Scrollbar module
+// * `+swiper/less/thumbs+` - styles required for Thumbs module
+// * `+swiper/less/virtual+` - styles required for Virtual module
+// * `+swiper/less/zoom+` - styles required for Zoom module
+
+// ==== link:#scss-styles[]SCSS Styles
+
+// SCSS styles are also separate styles for core version and modules
+// (package imports):
+
+// * `+swiper/scss+` - only core Swiper styles
+// * `+swiper/scss/bundle+` - all Swiper styles including all modules
+// styles (like Navigation, Pagination, etc.)
+// * `+swiper/scss/a11y+` - styles required for A11y module
+// * `+swiper/scss/autoplay+` - styles required for Autoplay module
+// * `+swiper/scss/controller+` - styles required for Controller module
+// * `+swiper/scss/effect-cards+` - styles required for Cards Effect module
+// * `+swiper/scss/effect-coverflow+` - styles required for Coverflow
+// Effect module
+// * `+swiper/scss/effect-creative+` - styles required for Creative Effect
+// module
+// * `+swiper/scss/effect-cube+` - styles required for Cube Effect module
+// * `+swiper/scss/effect-fade+` - styles required for Fade Effect module
+// * `+swiper/scss/effect-flip+` - styles required for Flip Effect module
+// * `+swiper/scss/free-mode+` - styles required for Free Mode module
+// * `+swiper/scss/grid+` - styles required for Grid module
+// * `+swiper/scss/hash-navigation+` - styles required for Hash Navigation
+// module
+// * `+swiper/scss/history+` - styles required for History module
+// * `+swiper/scss/keyboard+` - styles required for Keyboard module
+// * `+swiper/scss/manipulation+` - styles required for Manipulation module
+// * `+swiper/scss/mousewheel+` - styles required for Mousewheel module
+// * `+swiper/scss/navigation+` - styles required for Navigation module
+// * `+swiper/scss/pagination+` - styles required for Pagination module
+// * `+swiper/scss/parallax+` - styles required for Parallax module
+// * `+swiper/scss/scrollbar+` - styles required for Scrollbar module
+// * `+swiper/scss/thumbs+` - styles required for Thumbs module
+// * `+swiper/scss/virtual+` - styles required for Virtual module
+// * `+swiper/scss/zoom+` - styles required for Zoom module
+
+=== Initialize Swiper
+
+Now, when we have Swiper's HTML, we need to initialize it using the
+following function:
+
+new Swiper(swiperContainer, parameters)- initialize swiper with options
+
+* swiperContainer - HTMLElement or string (with CSS Selector) of swiper
+container HTML element. Required.
+* parameters - object - object with Swiper parameters. Optional.
+* *Method returns initialized Swiper instance*
+
+For example:
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+    speed: 400,
+    spaceBetween: 100,
+    });
+    
+----
+
+*After* you initialize Swiper it is possible to access to Swiper's
+instance on its HTMLElement. It is `+swiper+` property of Swiper's HTML
+container element:
+
+[source, js]
+----
+const swiper = document.querySelector('.swiper').swiper;
+
+    // Now you can use all slider methods like
+    swiper.slideNext();
+    
+----
+
+=== Parameters
+
+Let's look on list of all available parameters:
+
+[width="100%",cols="25%,25%,25%,25%",options="header",]
+|===
+|Name |Type |Default |Description
+|link:#param-a11y[a11y] |any | a|
+Object with a11y parameters or boolean `+true+` to enable with default
+settings.
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+      a11y: {
+        prevSlideMessage: 'Previous slide',
+        nextSlideMessage: 'Next slide',
+      },
+    });
+    
+----
+
+|link:#param-allowSlideNext[allowSlideNext] |boolean |true |Set to
+`+false+` to disable swiping to next slide direction (to right or
+bottom)
+
+|link:#param-allowSlidePrev[allowSlidePrev] |boolean |true |Set to
+`+false+` to disable swiping to previous slide direction (to left or
+top)
+
+|link:#param-allowTouchMove[allowTouchMove] |boolean |true |If
+`+false+`, then the only way to switch the slide is use of external API
+functions like slidePrev or slideNext
+
+|link:#param-autoHeight[autoHeight] |boolean |false |Set to `+true+` and
+slider wrapper will adapt its height to the height of the currently
+active slide
+
+|link:#param-autoplay[autoplay] |any | a|
+Object with autoplay parameters or boolean `+true+` to enable with
+default settings
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+     autoplay: {
+       delay: 5000,
+     },
+    });
+    
+----
+
+|link:#param-breakpoints[breakpoints] |object | a|
+Allows to set different parameter for different responsive breakpoints
+(screen sizes). Not all parameters can be changed in breakpoints, only
+those which do not require different layout and logic, like
+`+slidesPerView+`, `+slidesPerGroup+`, `+spaceBetween+`, `+grid.rows+`.
+Such parameters like `+loop+` and `+effect+` won't work
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+      // Default parameters
+      slidesPerView: 1,
+      spaceBetween: 10,
+      // Responsive breakpoints
+      breakpoints: {
+        // when window width is >= 320px
+        320: {
+          slidesPerView: 2,
+          spaceBetween: 20
+        },
+        // when window width is >= 480px
+        480: {
+          slidesPerView: 3,
+          spaceBetween: 30
+        },
+        // when window width is >= 640px
+        640: {
+          slidesPerView: 4,
+          spaceBetween: 40
+        }
+      }
+    })
+    
+----
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+      slidesPerView: 1,
+      spaceBetween: 10,
+      // using "ratio" endpoints
+      breakpoints: {
+        '@0.75': {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        '@1.00': {
+          slidesPerView: 3,
+          spaceBetween: 40,
+        },
+        '@1.50': {
+          slidesPerView: 4,
+          spaceBetween: 50,
+        },
+      }
+    });
+    
+----
+
+|link:#param-breakpointsBase[breakpointsBase] |any |'window' |Base for
+breakpoints (beta). Can be `+window+` or `+container+`. If set to
+`+window+` (by default) then breakpoint keys mean window width. If set
+to `+container+` then breakpoint keys treated as swiper container width
+
+|link:#param-cardsEffect[cardsEffect] |any | a|
+Object with Cards-effect parameters
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+      effect: 'cards',
+      cardsEffect: {
+        // ...
+      },
+    });
+    
+----
+
+|link:#param-centerInsufficientSlides[centerInsufficientSlides] |boolean
+|false |When enabled it center slides if the amount of slides less than
+`+slidesPerView+`. Not intended to be used `+loop+` mode and
+`+grid.rows+`
+
+|link:#param-centeredSlides[centeredSlides] |boolean |false |If
+`+true+`, then active slide will be centered, not always on the left
+side.
+
+|link:#param-centeredSlidesBounds[centeredSlidesBounds] |boolean |false
+|If `+true+`, then active slide will be centered without adding gaps at
+the beginning and end of slider. Required `+centeredSlides: true+`. Not
+intended to be used with `+loop+` or `+pagination+`
+
+|link:#param-containerModifierClass[containerModifierClass] |string
+|'swiper-' |The beginning of the modifier CSS class that can be added to
+swiper container depending on different parameters
+
+|link:#param-controller[controller] |any | a|
+Object with controller parameters or boolean `+true+` to enable with
+default settings
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+      controller: {
+        inverse: true,
+      },
+    });
+    
+----
+
+|link:#param-coverflowEffect[coverflowEffect] |any | a|
+Object with Coverflow-effect parameters.
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+      effect: 'coverflow',
+      coverflowEffect: {
+        rotate: 30,
+        slideShadows: false,
+      },
+    });
+    
+----
+
+|link:#param-createElements[createElements] |boolean |false |When
+enabled Swiper will automatically wrap slides with swiper-wrapper
+element, and will create required elements for navigation, pagination
+and scrollbar they are enabled (with their respective params object or
+with boolean `+true+`))
+
+|link:#param-creativeEffect[creativeEffect] |any | a|
+Object with Creative-effect parameters
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+      effect: 'creative',
+      creativeEffect: {
+        prev: {
+          // will set `translateZ(-400px)` on previous slides
+          translate: [0, 0, -400],
+        },
+        next: {
+          // will set `translateX(100%)` on next slides
+          translate: ['100%', 0, 0],
+        },
+      },
+    });
+    
+----
+
+|link:#param-cssMode[cssMode] |boolean |false a|
+When enabled it will use modern CSS Scroll Snap API. It doesn't support
+all of Swiper's features, but potentially should bring a much better
+performance in simple configurations.
+
+This is what is not supported when it is enabled:
+
+* Cube effect
+* `+speed+` parameter may not have no effect
+* All transition start/end related events (use `+slideChange+` instead)
+* `+slidesPerGroup+` has limited support
+* `+simulateTouch+` doesn't have effect and "dragging" with mouse
+doesn't work
+* `+resistance+` doesn't have any effect
+* `+allowSlidePrev/Next+`
+* `+swipeHandler+`
+
+In case if you use it with other effects, especially 3D effects, it is
+required to wrap slide's content with
+`+<div className="swiper-slide-transform">+` element. And if you use any
+custom styles on slides (like background colors, border radius, border,
+etc.), they should be set on `+swiper-slide-transform+` element instead.
+
+[source, html]
+----
+<div class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <!-- wrap slide content with transform element -->
+          <div class="swiper-slide-transform">
+            ... slide content ...
+          </div>
+        </div>
+        ...
+      </div>
+    </div>
+    <script>
+    const swiper = new Swiper('.swiper', {
+       effect: 'flip',
+       cssMode: true,
+     });
+    </script>
+    
+----
+
+|link:#param-cubeEffect[cubeEffect] |any | a|
+Object with Cube-effect parameters
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+      effect: 'cube',
+      cubeEffect: {
+        slideShadows: false,
+      },
+    });
+    
+----
+
+|link:#param-direction[direction] |'horizontal' \| 'vertical'
+|'horizontal' |Can be `+'horizontal'+` or `+'vertical'+` (for vertical
+slider).
+
+|link:#param-edgeSwipeDetection[edgeSwipeDetection] |string \| boolean
+|false |Enable to release Swiper events for swipe-back work in app. If
+set to `+'prevent'+` then it will prevent system swipe-back navigation
+instead. This feature works only with "touch" events (and not pointer
+events), so it will work on iOS/Android devices and won't work on
+Windows devices with pointer (touch) events.
+
+|link:#param-edgeSwipeThreshold[edgeSwipeThreshold] |number |20 |Area
+(in px) from left edge of the screen to release touch events for
+swipe-back in app
+
+|link:#param-effect[effect] |string |'slide' |Transition effect. Can be
+`+'slide'+`, `+'fade'+`, `+'cube'+`, `+'coverflow'+`, `+'flip'+`,
+`+'creative'+` or `+'cards'+`
+
+|link:#param-enabled[enabled] |boolean |true |Whether Swiper initially
+enabled. When Swiper is disabled, it will hide all navigation elements
+and won't respond to any events and interactions
+
+|link:#param-eventsPrefix[eventsPrefix] |string |`swiper` |Event name
+prefix for all DOM events emitted by Swiper Element (web component)
+
+|link:#param-fadeEffect[fadeEffect] |any | a|
+Object with Fade-effect parameters
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+      effect: 'fade',
+      fadeEffect: {
+        crossFade: true
+      },
+    });
+    
+----
+
+|link:#param-flipEffect[flipEffect] |any | a|
+Object with Flip-effect parameters
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+      effect: 'flip',
+      flipEffect: {
+        slideShadows: false,
+      },
+    });
+    
+----
+
+|link:#param-focusableElements[focusableElements] |string |'input,
+select, option, textarea, button, video, label' |CSS selector for
+focusable elements. Swiping will be disabled on such elements if they
+are "focused"
+
+|link:#param-followFinger[followFinger] |boolean |true |If disabled,
+then slider will be animated only when you release it, it will not move
+while you hold your finger on it
+
+|link:#param-freeMode[freeMode] |any | a|
+Enables free mode functionality. Object with free mode parameters or
+boolean `+true+` to enable with default settings.
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+      freeMode: true,
+    });
+    
+    const swiper = new Swiper('.swiper', {
+      freeMode: {
+        enabled: true,
+        sticky: true,
+      },
+    });
+    
+----
+
+|link:#param-grabCursor[grabCursor] |boolean |false |This option may a
+little improve desktop usability. If `+true+`, user will see the "grab"
+cursor when hover on Swiper
+
+|link:#param-grid[grid] |any | a|
+Object with grid parameters to enable "multirow" slider.
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+      grid: {
+        rows: 2,
+      },
+    });
+    
+----
+
+|link:#param-hashNavigation[hashNavigation] |any | a|
+Enables hash url navigation to for slides. Object with hash navigation
+parameters or boolean `+true+` to enable with default settings
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+      hashNavigation: {
+        replaceState: true,
+      },
+    });
+    
+----
+
+|link:#param-height[height] |null \| number |null a|
+Swiper height (in px). Parameter allows to force Swiper height. Useful
+only if you initialize Swiper when it is hidden and in SSR and Test
+environments for correct Swiper initialization
+
+____
+Setting this parameter will make Swiper not responsive
+____
+
+|link:#param-history[history] |any | a|
+Enables history push state where every slide will have its own url. In
+this parameter you have to specify main slides url like `+"slides"+` and
+specify every slide url using `+data-history+` attribute.
+
+Object with history navigation parameters or boolean `+true+` to enable
+with default settings
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+      history: {
+        replaceState: true,
+      },
+    });
+    
+----
+
+[source, html]
+----
+<!-- will produce "slides/slide1" url in browser history -->
+    <div class="swiper-slide" data-history="slide1"></div>
+    
+----
+
+|link:#param-init[init] |boolean |true |Whether Swiper should be
+initialised automatically when you create an instance. If disabled, then
+you need to init it manually by calling `+swiper.init()+`
+
+|link:#param-initialSlide[initialSlide] |number |0 |Index number of
+initial slide.
+
+|link:#param-injectStyles[injectStyles] |string[] | |Inject text styles
+to the shadow DOM. Only for usage with Swiper Element
+
+|link:#param-injectStylesUrls[injectStylesUrls] |string[] | |Inject
+styles `+<link>+`s to the shadow DOM. Only for usage with Swiper Element
+
+|link:#param-keyboard[keyboard] |any | a|
+Enables navigation through slides using keyboard. Object with keyboard
+parameters or boolean `+true+` to enable with default settings
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+      keyboard: {
+        enabled: true,
+        onlyInViewport: false,
+      },
+    });
+    
+----
+
+|link:#param-lazyPreloadPrevNext[lazyPreloadPrevNext] |number |0 |Number
+of next and previous slides to preload. Only applicable if using lazy
+loading.
+
+|link:#param-lazyPreloaderClass[lazyPreloaderClass] |string
+|'swiper-lazy-preloader' |CSS class name of lazy preloader
+
+|link:#param-longSwipes[longSwipes] |boolean |true |Set to `+false+` if
+you want to disable long swipes
+
+|link:#param-longSwipesMs[longSwipesMs] |number |300 |Minimal duration
+(in ms) to trigger swipe to next/previous slide during long swipes
+
+|link:#param-longSwipesRatio[longSwipesRatio] |number |0.5 |Ratio to
+trigger swipe to next/previous slide during long swipes
+
+|link:#param-loop[loop] |boolean |false a|
+Set to `+true+` to enable continuous loop mode
+
+Because of nature of how the loop mode works (it will rearrange slides),
+total number of slides must be:
+
+* more than or equal to `+slidesPerView+` + `+slidesPerGroup+`
+* even to `+slidesPerGroup+` (or use `+loopAddBlankSlides+` parameter)
+* even to `+grid.rows+` (or use `+loopAddBlankSlides+` parameter)
+
+|link:#param-loopAddBlankSlides[loopAddBlankSlides] |boolean |true
+|Automatically adds blank slides if you use Grid or `+slidesPerGroup+`
+and the total amount of slides is not even to `+slidesPerGroup+` or to
+`+grid.rows+`
+
+|link:#param-loopAdditionalSlides[loopAdditionalSlides] |number |0
+|Allows to increase amount of looped slides
+
+|link:#param-loopPreventsSliding[loopPreventsSliding] |boolean |true |If
+enabled then slideNext/Prev will do nothing while slider is animating in
+loop mode
+
+|link:#param-maxBackfaceHiddenSlides[maxBackfaceHiddenSlides] |number
+|10 a|
+If total number of slides less than specified here value, then Swiper
+will enable `+backface-visibility: hidden+` on slide elements to reduce
+visual "flicker" in Safari.
+
+____
+It is not recommended to enable it on large amount of slides as it will
+reduce performance
+____
+
+|link:#param-modules[modules] |any[] | a|
+Array with Swiper modules
+
+[source, js]
+----
+import Swiper from 'swiper';
+    import { Navigation, Pagination } from 'swiper/modules';
+    
+    const swiper = new Swiper('.swiper', {
+       modules: [ Navigation, Pagination ],
+     });
+    
+----
+
+|link:#param-mousewheel[mousewheel] |any | a|
+Enables navigation through slides using mouse wheel. Object with
+mousewheel parameters or boolean `+true+` to enable with default
+settings
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+      mousewheel: {
+        invert: true,
+      },
+    });
+    
+----
+
+|link:#param-navigation[navigation] |any | a|
+Object with navigation parameters or boolean `+true+` to enable with
+default settings.
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+    
+----
+
+|link:#param-nested[nested] |boolean |false |Set to `+true+` on Swiper
+for correct touch events interception. Use only on swipers that use same
+direction as the parent one
+
+|link:#param-noSwiping[noSwiping] |boolean |true |Enable/disable swiping
+on elements matched to class specified in `+noSwipingClass+`
+
+|link:#param-noSwipingClass[noSwipingClass] |string |'swiper-no-swiping'
+|Specify `+noSwiping+`'s element css class
+
+|link:#param-noSwipingSelector[noSwipingSelector] |string | |Can be used
+instead of `+noSwipingClass+` to specify elements to disable swiping on.
+For example `+'input'+` will disable swiping on all inputs
+
+|link:#param-normalizeSlideIndex[normalizeSlideIndex] |boolean |true
+|Normalize slide index.
+
+|link:#param-observeParents[observeParents] |boolean |false |Set to
+`+true+` if you also need to watch Mutations for Swiper parent elements
+
+|link:#param-observeSlideChildren[observeSlideChildren] |boolean |false
+|Set to `+true+` if you also need to watch Mutations for Swiper slide
+children elements
+
+|link:#param-observer[observer] |boolean |false |Set to `+true+` to
+enable Mutation Observer on Swiper and its elements. In this case Swiper
+will be updated (reinitialized) each time if you change its style (like
+hide/show) or modify its child elements (like adding/removing slides)
+
+|link:#param-on[on] |object | |Register event handlers
+
+|link:#param-onAny[onAny] |function([.text-primary]#handler#) | a|
+Add event listener that will be fired on all events
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+       onAny(eventName, ...args) {
+         console.log('Event: ', eventName);
+         console.log('Event data: ', args);
+       }
+     });
+    
+----
+
+|link:#param-oneWayMovement[oneWayMovement] |boolean |false |When
+enabled, will swipe slides only forward (one-way) regardless of swipe
+direction
+
+|link:#param-pagination[pagination] |any | a|
+Object with pagination parameters or boolean `+true+` to enable with
+default settings.
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+      pagination: {
+        el: '.swiper-pagination',
+        type: 'bullets',
+      },
+    });
+    
+----
+
+|link:#param-parallax[parallax] |any | a|
+Object with parallax parameters or boolean `+true+` to enable with
+default settings.
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+      parallax: true,
+    });
+    
+----
+
+|link:#param-passiveListeners[passiveListeners] |boolean |true |Passive
+event listeners will be used by default where possible to improve
+scrolling performance on mobile devices. But if you need to use
+`+e.preventDefault+` and you have conflict with it, then you should
+disable this parameter
+
+|link:#param-preventClicks[preventClicks] |boolean |true |Set to
+`+true+` to prevent accidental unwanted clicks on links during swiping
+
+|link:#param-preventClicksPropagation[preventClicksPropagation] |boolean
+|true |Set to `+true+` to stop clicks event propagation on links during
+swiping
+
+|link:#param-preventInteractionOnTransition[preventInteractionOnTransition]
+|boolean |false |When enabled it won't allow to change slides by swiping
+or navigation/pagination buttons during transition
+
+|link:#param-resistance[resistance] |boolean |true |Set to `+false+` if
+you want to disable resistant bounds
+
+|link:#param-resistanceRatio[resistanceRatio] |number |0.85 |This option
+allows you to control resistance ratio
+
+|link:#param-resizeObserver[resizeObserver] |boolean |true |When enabled
+it will use ResizeObserver (if supported by browser) on swiper container
+to detect container resize (instead of watching for window resize)
+
+|link:#param-rewind[rewind] |boolean |false a|
+Set to `+true+` to enable "rewind" mode. When enabled, clicking "next"
+navigation button (or calling `+.slideNext()+`) when on last slide will
+slide back to the first slide. Clicking "prev" navigation button (or
+calling `+.slidePrev()+`) when on first slide will slide forward to the
+last slide.
+
+____
+Should not be used together with `+loop+` mode
+____
+
+|link:#param-roundLengths[roundLengths] |boolean |false |Set to `+true+`
+to round values of slides width and height to prevent blurry texts on
+usual resolution screens (if you have such)
+
+|link:#param-runCallbacksOnInit[runCallbacksOnInit] |boolean |true |Fire
+Transition/SlideChange/Start/End events on swiper initialization. Such
+events will be fired on initialization in case of your initialSlide is
+not 0, or you use loop mode
+
+|link:#param-scrollbar[scrollbar] |any | a|
+Object with scrollbar parameters or boolean `+true+` to enable with
+default settings.
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+      scrollbar: {
+        el: '.swiper-scrollbar',
+        draggable: true,
+      },
+    });
+    
+----
+
+|link:#param-setWrapperSize[setWrapperSize] |boolean |false |Enabled
+this option and plugin will set width/height on swiper wrapper equal to
+total size of all slides. Mostly should be used as compatibility
+fallback option for browser that don't support flexbox layout well
+
+|link:#param-shortSwipes[shortSwipes] |boolean |true |Set to `+false+`
+if you want to disable short swipes
+
+|link:#param-simulateTouch[simulateTouch] |boolean |true |If `+true+`,
+Swiper will accept mouse events like touch events (click and drag to
+change slides)
+
+|link:#param-slideActiveClass[slideActiveClass] |string
+|'swiper-slide-active' a|
+CSS class name of currently active slide
+
+____
+By changing classes you will also need to change Swiper's CSS to reflect
+changed classes
+____
+
+____
+Not supported in Swiper React/Vue components
+____
+
+|link:#param-slideBlankClass[slideBlankClass] |string
+|'swiper-slide-blank' a|
+CSS class name of the blank slide added by the loop mode (when
+`+loopAddBlankSlides+` is enabled)
+
+____
+Not supported in Swiper React/Vue
+____
+
+|link:#param-slideClass[slideClass] |string |'swiper-slide' a|
+CSS class name of slide
+
+____
+By changing classes you will also need to change Swiper's CSS to reflect
+changed classes
+____
+
+____
+Not supported in Swiper React/Vue components
+____
+
+|link:#param-slideFullyVisibleClass[slideFullyVisibleClass] |string
+|'swiper-slide-fully-visible' a|
+CSS class name of fully (when whole slide is in the viewport) visible
+slide
+
+____
+Not supported in Swiper React/Vue
+____
+
+|link:#param-slideNextClass[slideNextClass] |string |'swiper-slide-next'
+a|
+CSS class name of slide which is right after currently active slide
+
+____
+By changing classes you will also need to change Swiper's CSS to reflect
+changed classes
+____
+
+____
+Not supported in Swiper React/Vue
+____
+
+|link:#param-slidePrevClass[slidePrevClass] |string |'swiper-slide-prev'
+a|
+CSS class name of slide which is right before currently active slide
+
+____
+By changing classes you will also need to change Swiper's CSS to reflect
+changed classes
+____
+
+____
+Not supported in Swiper React/Vue
+____
+
+|link:#param-slideToClickedSlide[slideToClickedSlide] |boolean |false
+|Set to `+true+` and click on any slide will produce transition to this
+slide
+
+|link:#param-slideVisibleClass[slideVisibleClass] |string
+|'swiper-slide-visible' a|
+CSS class name of currently/partially visible slide
+
+____
+By changing classes you will also need to change Swiper's CSS to reflect
+changed classes
+____
+
+____
+Not supported in Swiper React/Vue
+____
+
+|link:#param-slidesOffsetAfter[slidesOffsetAfter] |number |0 |Add (in
+px) additional slide offset in the end of the container (after all
+slides)
+
+|link:#param-slidesOffsetBefore[slidesOffsetBefore] |number |0 |Add (in
+px) additional slide offset in the beginning of the container (before
+all slides)
+
+|link:#param-slidesPerGroup[slidesPerGroup] |number |1 |Set numbers of
+slides to define and enable group sliding. Useful to use with
+slidesPerView > 1
+
+|link:#param-slidesPerGroupAuto[slidesPerGroupAuto] |boolean |false
+|This param intended to be used only with `+slidesPerView: 'auto'+` and
+`+slidesPerGroup: 1+`. When enabled, it will skip all slides in view on
+`+.slideNext()+` & `+.slidePrev()+` methods calls, on Navigation
+"buttons" clicks and in autoplay.
+
+|link:#param-slidesPerGroupSkip[slidesPerGroupSkip] |number |0 a|
+The parameter works in the following way: If `+slidesPerGroupSkip+`
+equals `+0+` (default), no slides are excluded from grouping, and the
+resulting behaviour is the same as without this change.
+
+If `+slidesPerGroupSkip+` is equal or greater than `+1+` the first X
+slides are treated as single groups, whereas all following slides are
+grouped by the `+slidesPerGroup+` value.
+
+|link:#param-slidesPerView[slidesPerView] |number \| 'auto' |1 a|
+Number of slides per view (slides visible at the same time on slider's
+container).
+
+____
+`+slidesPerView: 'auto'+` is currently not compatible with multirow
+mode, when `+grid.rows+` > 1
+____
+
+|link:#param-spaceBetween[spaceBetween] |string \| number |0 a|
+Distance between slides in px.
+
+____
+If you use "margin" css property to the elements which go into Swiper in
+which you pass "spaceBetween" into, navigation might not work properly.
+____
+
+|link:#param-speed[speed] |number |300 |Duration of transition between
+slides (in ms)
+
+|link:#param-swipeHandler[swipeHandler] |any |null |String with CSS
+selector or HTML element of the container with pagination that will work
+as only available handler for swiping
+
+|link:#param-swiperElementNodeName[swiperElementNodeName] |string
+|'SWIPER-CONTAINER' |The name of the swiper element node name; used for
+detecting web component rendering
+
+|link:#param-threshold[threshold] |number |5 |Threshold value in px. If
+"touch distance" will be lower than this value then swiper will not move
+
+|link:#param-thumbs[thumbs] |any | a|
+Object with thumbs component parameters
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+      ...
+      thumbs: {
+        swiper: thumbsSwiper
+      }
+    });
+    
+----
+
+|link:#param-touchAngle[touchAngle] |number |45 |Allowable angle (in
+degrees) to trigger touch move
+
+|link:#param-touchEventsTarget[touchEventsTarget] |'container' \|
+'wrapper' |'wrapper' |Target element to listen touch events on. Can be
+`+'container'+` (to listen for touch events on swiper) or
+`+'wrapper'+`(to listen for touch events on swiper-wrapper)
+
+|link:#param-touchMoveStopPropagation[touchMoveStopPropagation] |boolean
+|false |If enabled, then propagation of "touchmove" will be stopped
+
+|link:#param-touchRatio[touchRatio] |number |1 |Touch ratio
+
+|link:#param-touchReleaseOnEdges[touchReleaseOnEdges] |boolean |false
+|Enable to release touch events on slider edge position (beginning, end)
+to allow for further page scrolling. This feature works only with
+"touch" events (and not pointer events), so it will work on iOS/Android
+devices and won't work on Windows devices with pointer events. Also
+`+threshold+` parameter must be set to `+0+`
+
+|link:#param-touchStartForcePreventDefault[touchStartForcePreventDefault]
+|boolean |false |Force to always prevent default for `+touchstart+`
+(`+pointerdown+`) event
+
+|link:#param-touchStartPreventDefault[touchStartPreventDefault] |boolean
+|true |If disabled, `+pointerdown+` event won't be prevented
+
+|link:#param-uniqueNavElements[uniqueNavElements] |boolean |true |If
+enabled (by default) and navigation elements' parameters passed as a
+string (like `+".pagination"+`) then Swiper will look for such elements
+through child elements first. Applies for pagination, prev/next buttons
+and scrollbar elements
+
+|link:#param-updateOnWindowResize[updateOnWindowResize] |boolean |true
+|Swiper will recalculate slides position on window resize
+(orientationchange)
+
+|link:#param-url[url] |null \| string |null |Required for active slide
+detection when rendered on server-side and enabled history
+
+|link:#param-userAgent[userAgent] |null \| string |null |userAgent
+string. Required for browser/device detection when rendered on
+server-side
+
+|link:#param-virtual[virtual] |any | a|
+Enables virtual slides functionality. Object with virtual slides
+parameters or boolean `+true+` to enable with default settings.
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+      virtual: {
+        slides: ['Slide 1', 'Slide 2', 'Slide 3', 'Slide 4', 'Slide 5'],
+      },
+    });
+    
+----
+
+|link:#param-virtualTranslate[virtualTranslate] |boolean |false |Enabled
+this option and swiper will be operated as usual except it will not
+move, real translate values on wrapper will not be set. Useful when you
+may need to create custom slide transition
+
+|link:#param-watchOverflow[watchOverflow] |boolean |true |When enabled
+Swiper will be disabled and hide navigation buttons on case there are
+not enough slides for sliding.
+
+|link:#param-watchSlidesProgress[watchSlidesProgress] |boolean |false
+|Enable this feature to calculate each slides progress and visibility
+(slides in viewport will have additional visible class)
+
+|link:#param-width[width] |null \| number |null a|
+Swiper width (in px). Parameter allows to force Swiper width. Useful
+only if you initialize Swiper when it is hidden and in SSR and Test
+environments for correct Swiper initialization
+
+____
+Setting this parameter will make Swiper not responsive
+____
+
+|link:#param-wrapperClass[wrapperClass] |string |'swiper-wrapper' a|
+CSS class name of slides' wrapper
+
+____
+By changing classes you will also need to change Swiper's CSS to reflect
+changed classes
+____
+
+____
+Not supported in Swiper React/Vue
+____
+
+|link:#param-zoom[zoom] |any | a|
+Enables zooming functionality. Object with zoom parameters or boolean
+`+true+` to enable with default settings
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+      zoom: {
+        maxRatio: 5,
+      },
+    });
+    
+----
+
+|===
+
+
+
+[[methods--properties]]
+=== link:++#methods--properties++[]Methods & Properties
+
+After we initialize Slider we have its initialized instance in variable
+(like `+swiper+` variable in example above) with helpful methods and
+properties:
+
+[width="100%",cols="34%,33%,33%",]
+|===
+|Properties | |
+
+|link:#prop-swiper-a11y[swiper.a11y] |any |
+
+|link:#prop-swiper-activeIndex[swiper.activeIndex] |number a|
+Index number of currently active slide
+
+____
+Note, that in loop mode active index value will be always shifted on a
+number of looped slides
+____
+
+|link:#prop-swiper-allowSlideNext[swiper.allowSlideNext] |boolean
+|Disable / enable ability to slide to the next slides by assigning
+`+false+` / `+true+` to this property
+
+|link:#prop-swiper-allowSlidePrev[swiper.allowSlidePrev] |boolean
+|Disable / enable ability to slide to the previous slides by assigning
+`+false+` / `+true+` to this property
+
+|link:#prop-swiper-allowTouchMove[swiper.allowTouchMove] |boolean
+|Disable / enable ability move slider by grabbing it with mouse or by
+touching it with finger (on touch screens) by assigning `+false+` /
+`+true+` to this property
+
+|link:#prop-swiper-animating[swiper.animating] |boolean |`+true+` if
+swiper is in transition
+
+|link:#prop-swiper-autoplay[swiper.autoplay] |any |
+
+|link:#prop-swiper-cardsEffect[swiper.cardsEffect] |any |
+
+|link:#prop-swiper-clickedIndex[swiper.clickedIndex] |number |Index
+number of last clicked slide
+
+|link:#prop-swiper-clickedSlide[swiper.clickedSlide] |HTMLElement |Link
+to last clicked slide (HTMLElement)
+
+|link:#prop-swiper-controller[swiper.controller] |any |
+
+|link:#prop-swiper-coverflowEffect[swiper.coverflowEffect] |any |
+
+|link:#prop-swiper-creativeEffect[swiper.creativeEffect] |any |
+
+|link:#prop-swiper-cubeEffect[swiper.cubeEffect] |any |
+
+|link:#prop-swiper-defaults[swiper.defaults] |any |Swiper default
+options
+
+|link:#prop-swiper-el[swiper.el] |HTMLElement |Slider container HTML
+element
+
+|link:#prop-swiper-extendedDefaults[swiper.extendedDefaults] |any
+|Object with global Swiper extended options
+
+|link:#prop-swiper-fadeEffect[swiper.fadeEffect] |any |
+
+|link:#prop-swiper-flipEffect[swiper.flipEffect] |any |
+
+|link:#prop-swiper-freeMode[swiper.freeMode] |any |
+
+|link:#prop-swiper-hashNavigation[swiper.hashNavigation] |any |
+
+|link:#prop-swiper-height[swiper.height] |number |Height of container
+
+|link:#prop-swiper-history[swiper.history] |any |
+
+|link:#prop-swiper-isBeginning[swiper.isBeginning] |boolean |`+true+` if
+slider on most "left"/"top" position
+
+|link:#prop-swiper-isEnd[swiper.isEnd] |boolean |`+true+` if slider on
+most "right"/"bottom" position
+
+|link:#prop-swiper-isLocked[swiper.isLocked] |boolean |`+true+` if slide
+is "locked" (by `+watchOverflow+`) and slides can not be, e.g. when
+amount of slides is less that slides per view
+
+|link:#prop-swiper-keyboard[swiper.keyboard] |any |
+
+|link:#prop-swiper-mousewheel[swiper.mousewheel] |any |
+
+|link:#prop-swiper-navigation[swiper.navigation] |any |
+
+|link:#prop-swiper-originalParams[swiper.originalParams] |any |Object
+with original initialization parameters
+
+|link:#prop-swiper-pagination[swiper.pagination] |any |
+
+|link:#prop-swiper-parallax[swiper.parallax] |any |
+
+|link:#prop-swiper-params[swiper.params] |any |Object with passed
+initialization parameters
+
+|link:#prop-swiper-previousIndex[swiper.previousIndex] |number |Index
+number of previously active slide
+
+|link:#prop-swiper-progress[swiper.progress] |number |Current progress
+of wrapper translate (from 0 to 1)
+
+|link:#prop-swiper-realIndex[swiper.realIndex] |number |Index number of
+currently active slide considering rearranged slides in loop mode
+
+|link:#prop-swiper-scrollbar[swiper.scrollbar] |any |
+
+|link:#prop-swiper-slides[swiper.slides] |[.text-green]#HTMLElement[]#
+|Array of slides HTML elements. To get specific slide HTMLElement use
+`+swiper.slides[1]+`
+
+|link:#prop-swiper-slidesEl[swiper.slidesEl] |HTMLElement |Wrapper HTML
+element
+
+|link:#prop-swiper-slidesGrid[swiper.slidesGrid]
+|[.text-green]#number[]# |Slides grid
+
+|link:#prop-swiper-slidesSizesGrid[swiper.slidesSizesGrid]
+|[.text-green]#number[]# |Array of widths for slides
+
+|link:#prop-swiper-snapGrid[swiper.snapGrid] |[.text-green]#number[]#
+|Slides snap grid
+
+|link:#prop-swiper-snapIndex[swiper.snapIndex] |number |Index number of
+current snap in `+snapGrid+`
+
+|link:#prop-swiper-swipeDirection[swiper.swipeDirection] |'prev' \|
+'next' |Direction of sliding
+
+|link:#prop-swiper-thumbs[swiper.thumbs] |any |
+
+|link:#prop-swiper-touches[swiper.touches] |object a|
+Object with the following touch event properties:
+
+* `+swiper.touches.startX+`
+* `+swiper.touches.startY+`
+* `+swiper.touches.currentX+`
+* `+swiper.touches.currentY+`
+* `+swiper.touches.diff+`
+
+|link:#prop-swiper-translate[swiper.translate] |number |Current value of
+wrapper translate
+
+|link:#prop-swiper-virtual[swiper.virtual] |any |
+
+|link:#prop-swiper-width[swiper.width] |number |Width of container
+
+|link:#prop-swiper-wrapperEl[swiper.wrapperEl] |HTMLElement |Wrapper
+HTML element
+
+|link:#prop-swiper-zoom[swiper.zoom] |any |
+
+|Methods | |
+
+|link:#method-swiper-attachEvents[swiper.attachEvents()] | |Attach all
+events listeners again
+
+|link:#method-swiper-changeDirection[swiper.changeDirection([.text-orange]#direction#&#44;
+[.text-orange]#needUpdate#)] | a|
+Changes slider direction from horizontal to vertical and back.
+
+* [.text-orange .font-mono]#direction# -
+[.text-green .font-mono]#'horizontal' \| 'vertical'# - New direction. If
+not specified, then will automatically changed to opposite direction
+* [.text-orange .font-mono]#needUpdate# -
+[.text-green .font-mono]#boolean# - Will call swiper.update(). Default
+true
+
+|link:#method-swiper-changeLanguageDirection[swiper.changeLanguageDirection([.text-orange]#direction#)]
+| a|
+Changes slider language
+
+* [.text-orange .font-mono]#direction# - [.text-green .font-mono]#'rtl'
+\| 'ltr'# - New direction. Should be `rtl` or `ltr`
+
+|link:#method-swiper-destroy[swiper.destroy([.text-orange]#deleteInstance#&#44;
+[.text-orange]#cleanStyles#)] | a|
+Destroy slider instance and detach all events listeners
+
+* [.text-orange .font-mono]#deleteInstance# -
+[.text-green .font-mono]#boolean# - Set it to false (by default it is
+true) to not to delete Swiper instance
+* [.text-orange .font-mono]#cleanStyles# -
+[.text-green .font-mono]#boolean# - Set it to true (by default it is
+true) and all custom styles will be removed from slides, wrapper and
+container. Useful if you need to destroy Swiper and to init again with
+new options or in different direction
+
+|link:#method-swiper-detachEvents[swiper.detachEvents()] | |Detach all
+events listeners
+
+|link:#method-swiper-disable[swiper.disable()] | |Disable Swiper (if it
+was enabled). When Swiper is disabled, it will hide all navigation
+elements and won't respond to any events and interactions
+
+|link:#method-swiper-emit[swiper.emit([.text-orange]#event#&#44;
+[.text-orange]#args#)] | |Fire event on instance
+
+|link:#method-swiper-enable[swiper.enable()] | |Enable Swiper (if it was
+disabled)
+
+|link:#method-swiper-extendDefaults[swiper.extendDefaults([.text-orange]#options#)]
+| |Extend global Swiper defaults
+
+|link:#method-swiper-getTranslate[swiper.getTranslate()] | |Get current
+value of swiper wrapper css3 transform translate
+
+|link:#method-swiper-init[swiper.init([.text-orange]#el#)] | |Initialize
+slider
+
+|link:#method-swiper-maxTranslate[swiper.maxTranslate()] | |Get current
+maximal translate value
+
+|link:#method-swiper-minTranslate[swiper.minTranslate()] | |Get current
+minimal translate value
+
+|link:#method-swiper-off[swiper.off([.text-orange]#event#&#44;
+[.text-orange]#handler#)] | |Remove event handler
+
+|link:#method-swiper-offAny[swiper.offAny([.text-orange]#handler#)] |
+|Remove event listener that will be fired on all events
+
+|link:#method-swiper-on[swiper.on([.text-orange]#event#&#44;
+[.text-orange]#handler#)] | |Add event handler
+
+|link:#method-swiper-onAny[swiper.onAny([.text-orange]#handler#)] | |Add
+event listener that will be fired on all events
+
+|link:#method-swiper-once[swiper.once([.text-orange]#event#&#44;
+[.text-orange]#handler#)] | |Add event handler that will be removed
+after it was fired
+
+|link:#method-swiper-setGrabCursor[swiper.setGrabCursor()] | |Set grab
+cursor
+
+|link:#method-swiper-setProgress[swiper.setProgress([.text-orange]#progress#&#44;
+[.text-orange]#speed#)] | a|
+Set Swiper translate progress (from 0 to 1). Where 0 - its initial
+position (offset) on first slide, and 1 - its maximum position (offset)
+on last slide
+
+* [.text-orange .font-mono]#progress# - [.text-green .font-mono]#number#
+- Swiper translate progress (from 0 to 1).
+* [.text-orange .font-mono]#speed# - [.text-green .font-mono]#number# -
+Transition duration (in ms).
+
+|link:#method-swiper-setTranslate[swiper.setTranslate([.text-orange]#translate#)]
+| |Set custom css3 transform's translate value for swiper wrapper
+
+|link:#method-swiper-slideNext[swiper.slideNext([.text-orange]#speed#&#44;
+[.text-orange]#runCallbacks#)] | a|
+Run transition to next slide.
+
+* [.text-orange .font-mono]#speed# - [.text-green .font-mono]#number# -
+Transition duration (in ms).
+* [.text-orange .font-mono]#runCallbacks# -
+[.text-green .font-mono]#boolean# - Set it to false (by default it is
+true) and transition will not produce transition events.
+
+|link:#method-swiper-slidePrev[swiper.slidePrev([.text-orange]#speed#&#44;
+[.text-orange]#runCallbacks#)] | a|
+Run transition to previous slide.
+
+* [.text-orange .font-mono]#speed# - [.text-green .font-mono]#number# -
+Transition duration (in ms).
+* [.text-orange .font-mono]#runCallbacks# -
+[.text-green .font-mono]#boolean# - Set it to false (by default it is
+true) and transition will not produce transition events.
+
+|link:#method-swiper-slideReset[swiper.slideReset([.text-orange]#speed#&#44;
+[.text-orange]#runCallbacks#)] | a|
+Reset swiper position to currently active slide for the duration equal
+to 'speed' parameter.
+
+* [.text-orange .font-mono]#speed# - [.text-green .font-mono]#number# -
+Transition duration (in ms).
+* [.text-orange .font-mono]#runCallbacks# -
+[.text-green .font-mono]#boolean# - Set it to false (by default it is
+true) and transition will not produce transition events.
+
+|link:#method-swiper-slideTo[swiper.slideTo([.text-orange]#index#&#44;
+[.text-orange]#speed#&#44; [.text-orange]#runCallbacks#)] | a|
+Run transition to the slide with index number equal to 'index' parameter
+for the duration equal to 'speed' parameter.
+
+* [.text-orange .font-mono]#index# - [.text-green .font-mono]#number# -
+Index number of slide.
+* [.text-orange .font-mono]#speed# - [.text-green .font-mono]#number# -
+Transition duration (in ms).
+* [.text-orange .font-mono]#runCallbacks# -
+[.text-green .font-mono]#boolean# - Set it to false (by default it is
+true) and transition will not produce transition events.
+
+|link:#method-swiper-slideToClosest[swiper.slideToClosest([.text-orange]#speed#&#44;
+[.text-orange]#runCallbacks#)] | a|
+Reset swiper position to closest slide/snap point for the duration equal
+to 'speed' parameter.
+
+* [.text-orange .font-mono]#speed# - [.text-green .font-mono]#number# -
+Transition duration (in ms).
+* [.text-orange .font-mono]#runCallbacks# -
+[.text-green .font-mono]#boolean# - Set it to false (by default it is
+true) and transition will not produce transition events.
+
+|link:#method-swiper-slideToLoop[swiper.slideToLoop([.text-orange]#index#&#44;
+[.text-orange]#speed#&#44; [.text-orange]#runCallbacks#)] | a|
+Does the same as .slideTo but for the case when used with enabled loop.
+So this method will slide to slides with realIndex matching to passed
+index
+
+* [.text-orange .font-mono]#index# - [.text-green .font-mono]#number# -
+Index number of slide.
+* [.text-orange .font-mono]#speed# - [.text-green .font-mono]#number# -
+Transition duration (in ms).
+* [.text-orange .font-mono]#runCallbacks# -
+[.text-green .font-mono]#boolean# - Set it to false (by default it is
+true) and transition will not produce transition events.
+
+|link:#method-swiper-slidesPerViewDynamic[swiper.slidesPerViewDynamic()]
+| |Get dynamically calculated amount of slides per view, useful only
+when slidesPerView set to `+auto+`
+
+|link:#method-swiper-translateTo[swiper.translateTo([.text-orange]#translate#&#44;
+[.text-orange]#speed#&#44; [.text-orange]#runCallbacks#&#44;
+[.text-orange]#translateBounds#)] | a|
+Animate custom css3 transform's translate value for swiper wrapper
+
+* [.text-orange .font-mono]#translate# -
+[.text-green .font-mono]#number# - Translate value (in px)
+* [.text-orange .font-mono]#speed# - [.text-green .font-mono]#number# -
+Transition duration (in ms)
+* [.text-orange .font-mono]#runCallbacks# -
+[.text-green .font-mono]#boolean# - Set it to false (by default it is
+true) and transition will not produce transition events
+* [.text-orange .font-mono]#translateBounds# -
+[.text-green .font-mono]#boolean# - Set it to false (by default it is
+true) and transition value can extend beyond min and max translate
+
+|link:#method-swiper-unsetGrabCursor[swiper.unsetGrabCursor()] | |Unset
+grab cursor
+
+|link:#method-swiper-update[swiper.update()] | |You should call it after
+you add/remove slides manually, or after you hide/show it, or do any
+custom DOM modifications with Swiper This method also includes subcall
+of the following methods which you can use separately:
+
+|link:#method-swiper-updateAutoHeight[swiper.updateAutoHeight([.text-orange]#speed#)]
+| a|
+Force swiper to update its height (when autoHeight enabled) for the
+duration equal to 'speed' parameter
+
+* [.text-orange .font-mono]#speed# - [.text-green .font-mono]#number# -
+Transition duration (in ms).
+
+|link:#method-swiper-updateProgress[swiper.updateProgress()] |
+|recalculate swiper progress
+
+|link:#method-swiper-updateSize[swiper.updateSize()] | |recalculate size
+of swiper container
+
+|link:#method-swiper-updateSlides[swiper.updateSlides()] | |recalculate
+number of slides and their offsets. Useful after you add/remove slides
+with JavaScript
+
+|link:#method-swiper-updateSlidesClasses[swiper.updateSlidesClasses()] |
+|update active/prev/next classes on slides and bullets
+
+|link:#method-swiper-use[swiper.use([.text-orange]#modules#)] |
+|Installs modules on Swiper in runtime.
+|===
+
+
+
+
+=== link:#events[]Events
+
+Swiper comes with a bunch of useful events you can listen. Events can be
+assigned in two ways:
+
+. Using `+on+` parameter on swiper initialization:
++
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+    // ...
+    on: {
+    init: function () {
+    console.log('swiper initialized');
+    },
+    },
+    });
+    
+----
+. Using `+on+` method after swiper initialization.
++
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+    // ...
+    });
+    swiper.on('slideChange', function () {
+    console.log('slide changed');
+    });
+    
+----
+
+Please note, that `+this+` keyword within event handler always points to
+Swiper instance
+
+[width="100%",cols="34%,33%,33%",options="header",]
+|===
+|Name |Arguments |Description
+|link:#event-activeIndexChange[activeIndexChange] |(swiper) |Event will
+fired on active index change
+
+|link:#event-afterInit[afterInit] |(swiper) |Event will fired right
+after initialization
+
+|link:#event-beforeDestroy[beforeDestroy] |(swiper) |Event will be fired
+right before Swiper destroyed
+
+|link:#event-beforeInit[beforeInit] |(swiper) |Event will fired right
+before initialization
+
+|link:#event-beforeLoopFix[beforeLoopFix] |(swiper) |Event will be fired
+right before "loop fix"
+
+|link:#event-beforeResize[beforeResize] |(swiper) |Event will fired
+before resize handler
+
+|link:#event-beforeSlideChangeStart[beforeSlideChangeStart] |(swiper)
+|Event will fired before slide change transition start
+
+|link:#event-beforeTransitionStart[beforeTransitionStart] |(swiper,
+speed, internal) |Event will fired before transition start
+
+|link:#event-breakpoint[breakpoint] |(swiper, breakpointParams) |Event
+will be fired on breakpoint change
+
+|link:#event-changeDirection[changeDirection] |(swiper) |Event will
+fired on direction change
+
+|link:#event-click[click] |(swiper, event) |Event will be fired when
+user click/tap on Swiper. Receives `+pointerup+` event as an arguments.
+
+|link:#event-destroy[destroy] |(swiper) |Event will be fired on swiper
+destroy
+
+|link:#event-doubleClick[doubleClick] |(swiper, event) |Event will be
+fired when user double click/tap on Swiper
+
+|link:#event-doubleTap[doubleTap] |(swiper, event) |Event will be fired
+when user double tap on Swiper's container. Receives `+pointerup+` event
+as an arguments
+
+|link:#event-fromEdge[fromEdge] |(swiper) |Event will be fired when
+Swiper goes from beginning or end position
+
+|link:#event-init[init] |(swiper) a|
+Fired right after Swiper initialization.
+
+____
+Note that with `+swiper.on('init')+` syntax it will work only in case
+you set `+init: false+` parameter.
+____
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+      init: false,
+      // other parameters
+    });
+    swiper.on('init', function() {
+     // do something
+    });
+    // init Swiper
+    swiper.init();
+    
+----
+
+[source, js]
+----
+// Otherwise use it as the parameter:
+    const swiper = new Swiper('.swiper', {
+      // other parameters
+      on: {
+        init: function () {
+          // do something
+        },
+      }
+    });
+    
+----
+
+|link:#event-lock[lock] |(swiper) |Event will be fired when swiper is
+locked (when `+watchOverflow+` enabled)
+
+|link:#event-loopFix[loopFix] |(swiper) |Event will be fired after "loop
+fix"
+
+|link:#event-momentumBounce[momentumBounce] |(swiper) |Event will be
+fired on momentum bounce
+
+|link:#event-observerUpdate[observerUpdate] |(swiper) |Event will be
+fired if observer is enabled and it detects DOM mutations
+
+|link:#event-orientationchange[orientationchange] |(swiper) |Event will
+be fired on orientation change (e.g. landscape -> portrait)
+
+|link:#event-progress[progress] |(swiper, progress) |Event will be fired
+when Swiper progress is changed, as an arguments it receives progress
+that is always from 0 to 1
+
+|link:#event-reachBeginning[reachBeginning] |(swiper) |Event will be
+fired when Swiper reach its beginning (initial position)
+
+|link:#event-reachEnd[reachEnd] |(swiper) |Event will be fired when
+Swiper reach last slide
+
+|link:#event-realIndexChange[realIndexChange] |(swiper) |Event will
+fired on real index change
+
+|link:#event-resize[resize] |(swiper) |Event will be fired on window
+resize right before swiper's onresize manipulation
+
+|link:#event-setTransition[setTransition] |(swiper, transition) |Event
+will be fired everytime when swiper starts animation. Receives current
+transition duration (in ms) as an arguments
+
+|link:#event-setTranslate[setTranslate] |(swiper, translate) |Event will
+be fired when swiper's wrapper change its position. Receives current
+translate value as an arguments
+
+|link:#event-slideChange[slideChange] |(swiper) |Event will be fired
+when currently active slide is changed
+
+|link:#event-slideChangeTransitionEnd[slideChangeTransitionEnd]
+|(swiper) |Event will be fired after animation to other slide (next or
+previous).
+
+|link:#event-slideChangeTransitionStart[slideChangeTransitionStart]
+|(swiper) |Event will be fired in the beginning of animation to other
+slide (next or previous).
+
+|link:#event-slideNextTransitionEnd[slideNextTransitionEnd] |(swiper)
+|Same as "slideChangeTransitionEnd" but for "forward" direction only
+
+|link:#event-slideNextTransitionStart[slideNextTransitionStart]
+|(swiper) |Same as "slideChangeTransitionStart" but for "forward"
+direction only
+
+|link:#event-slidePrevTransitionEnd[slidePrevTransitionEnd] |(swiper)
+|Same as "slideChangeTransitionEnd" but for "backward" direction only
+
+|link:#event-slidePrevTransitionStart[slidePrevTransitionStart]
+|(swiper) |Same as "slideChangeTransitionStart" but for "backward"
+direction only
+
+|link:#event-slideResetTransitionEnd[slideResetTransitionEnd] |(swiper)
+|Event will be fired in the end of animation of resetting slide to
+current one
+
+|link:#event-slideResetTransitionStart[slideResetTransitionStart]
+|(swiper) |Event will be fired in the beginning of animation of
+resetting slide to current one
+
+|link:#event-sliderFirstMove[sliderFirstMove] |(swiper, event) |Event
+will be fired with first touch/drag move
+
+|link:#event-sliderMove[sliderMove] |(swiper, event) |Event will be
+fired when user touch and move finger over Swiper and move it. Receives
+`+pointermove+` event as an arguments.
+
+|link:#event-slidesGridLengthChange[slidesGridLengthChange] |(swiper)
+|Event will be fired when slides grid has changed
+
+|link:#event-slidesLengthChange[slidesLengthChange] |(swiper) |Event
+will be fired when number of slides has changed
+
+|link:#event-slidesUpdated[slidesUpdated] |(swiper) |Event will be fired
+after slides and their sizes are calculated and updated
+
+|link:#event-snapGridLengthChange[snapGridLengthChange] |(swiper) |Event
+will be fired when snap grid has changed
+
+|link:#event-snapIndexChange[snapIndexChange] |(swiper) |Event will
+fired on snap index change
+
+|link:#event-tap[tap] |(swiper, event) |Event will be fired when user
+click/tap on Swiper. Receives `+pointerup+` event as an arguments.
+
+|link:#event-toEdge[toEdge] |(swiper) |Event will be fired when Swiper
+goes to beginning or end position
+
+|link:#event-touchEnd[touchEnd] |(swiper, event) |Event will be fired
+when user release Swiper. Receives `+pointerup+` event as an arguments.
+
+|link:#event-touchMove[touchMove] |(swiper, event) |Event will be fired
+when user touch and move finger over Swiper. Receives `+pointermove+`
+event as an arguments.
+
+|link:#event-touchMoveOpposite[touchMoveOpposite] |(swiper, event)
+|Event will be fired when user touch and move finger over Swiper in
+direction opposite to direction parameter. Receives `+pointermove+`
+event as an arguments.
+
+|link:#event-touchStart[touchStart] |(swiper, event) |Event will be
+fired when user touch Swiper. Receives `+pointerdown+` event as an
+arguments.
+
+|link:#event-transitionEnd[transitionEnd] |(swiper) |Event will be fired
+after transition.
+
+|link:#event-transitionStart[transitionStart] |(swiper) |Event will be
+fired in the beginning of transition.
+
+|link:#event-unlock[unlock] |(swiper) |Event will be fired when swiper
+is unlocked (when `+watchOverflow+` enabled)
+
+|link:#event-update[update] |(swiper) |Event will be fired after
+swiper.update() call
+|===
+
+=== link:#modules[]Modules
+
+==== link:#navigation[]Navigation
+
+===== link:#navigation-parameters[]Navigation Parameters
+
+[cols=",,,",options="header",]
+|===
+|Name |Type |Default |Description
+|link:#param-disabledClass[disabledClass] |string
+|'swiper-button-disabled' |CSS class name added to navigation button
+when it becomes disabled
+
+|link:#param-enabled[enabled] |boolean | |Boolean property to use with
+breakpoints to enable/disable navigation on certain breakpoints
+
+|link:#param-hiddenClass[hiddenClass] |string |'swiper-button-hidden'
+|CSS class name added to navigation button when it becomes hidden
+
+|link:#param-hideOnClick[hideOnClick] |boolean |false |Toggle navigation
+buttons visibility after click on Slider's container
+
+|link:#param-lockClass[lockClass] |string |'swiper-button-lock' |CSS
+class name added to navigation button when it is disabled
+
+|link:#param-navigationDisabledClass[navigationDisabledClass] |string
+|'swiper-navigation-disabled' |CSS class name added on swiper container
+when navigation is disabled by breakpoint
+
+|link:#param-nextEl[nextEl] |any |null |String with CSS selector or HTML
+element of the element that will work like "next" button after click on
+it
+
+|link:#param-prevEl[prevEl] |any |null |String with CSS selector or HTML
+element of the element that will work like "prev" button after click on
+it
+|===
+
+===== link:#navigation-methods[]Navigation Methods
+
+[cols=",,",]
+|===
+|Properties | |
+
+|link:#prop-swiper-nextEl[swiper.nextEl] |HTMLElement |HTMLElement of
+"next" navigation button
+
+|link:#prop-swiper-prevEl[swiper.prevEl] |HTMLElement |HTMLElement of
+"previous" navigation button
+
+|Methods | |
+
+|link:#method-swiper-destroy[swiper.destroy()] | |Destroy navigation
+
+|link:#method-swiper-init[swiper.init()] | |Initialize navigation
+
+|link:#method-swiper-update[swiper.update()] | |Update navigation
+buttons state (enabled/disabled)
+|===
+
+===== link:#navigation-events[]Navigation Events
+
+[cols=",,",options="header",]
+|===
+|Name |Arguments |Description
+|link:#event-navigationHide[navigationHide] |(swiper) |Event will be
+fired on navigation hide
+
+|link:#event-navigationNext[navigationNext] |(swiper) |Event will be
+fired on navigation next button click
+
+|link:#event-navigationPrev[navigationPrev] |(swiper) |Event will be
+fired on navigation prev button click
+
+|link:#event-navigationShow[navigationShow] |(swiper) |Event will be
+fired on navigation show
+|===
+
+===== link:#navigation-css-custom-properties[]Navigation CSS Custom Properties
+
+[source,language-css]
+----
+ {
+    --swiper-navigation-size: 44px;
+    --swiper-navigation-top-offset: 50%;
+    --swiper-navigation-sides-offset: 10px;
+    --swiper-navigation-color: var(--swiper-theme-color);
+    }
+    
+----
+
+==== link:#pagination[]Pagination
+
+===== link:#pagination-parameters[]Pagination Parameters
+
+[width="100%",cols="25%,25%,25%,25%",options="header",]
+|===
+|Name |Type |Default |Description
+|link:#param-bulletActiveClass[bulletActiveClass] |string
+|'swiper-pagination-bullet-active' |CSS class name of currently active
+pagination bullet
+
+|link:#param-bulletClass[bulletClass] |string
+|'swiper-pagination-bullet' |CSS class name of single pagination bullet
+
+|link:#param-bulletElement[bulletElement] |string |'span' |Defines which
+HTML tag will be used to represent single pagination bullet. Only for
+`+'bullets'+` pagination type.
+
+|link:#param-clickable[clickable] |boolean |false |If `+true+` then
+clicking on pagination button will cause transition to appropriate
+slide. Only for bullets pagination type
+
+|link:#param-clickableClass[clickableClass] |string
+|'swiper-pagination-clickable' |CSS class name set to pagination when it
+is clickable
+
+|link:#param-currentClass[currentClass] |string
+|'swiper-pagination-current' |CSS class name of the element with
+currently active index in "fraction" pagination
+
+|link:#param-dynamicBullets[dynamicBullets] |boolean |false |Good to
+enable if you use bullets pagination with a lot of slides. So it will
+keep only few bullets visible at the same time.
+
+|link:#param-dynamicMainBullets[dynamicMainBullets] |number |1 |The
+number of main bullets visible when `+dynamicBullets+` enabled.
+
+|link:#param-el[el] |any |null |String with CSS selector or HTML element
+of the container with pagination
+
+|link:#param-enabled[enabled] |boolean | |Boolean property to use with
+breakpoints to enable/disable pagination on certain breakpoints
+
+|link:#param-formatFractionCurrent[formatFractionCurrent]
+|function([.text-primary]#number#) | |format fraction pagination current
+number. Function receives current number, and you need to return
+formatted value
+
+|link:#param-formatFractionTotal[formatFractionTotal]
+|function([.text-primary]#number#) | |format fraction pagination total
+number. Function receives total number, and you need to return formatted
+value
+
+|link:#param-hiddenClass[hiddenClass] |string
+|'swiper-pagination-hidden' |CSS class name of pagination when it
+becomes inactive
+
+|link:#param-hideOnClick[hideOnClick] |boolean |true |Toggle (hide/show)
+pagination container visibility after click on Slider's container
+
+|link:#param-horizontalClass[horizontalClass] |string
+|'swiper-pagination-horizontal' |CSS class name set to pagination in
+horizontal Swiper
+
+|link:#param-lockClass[lockClass] |string |'swiper-pagination-lock' |CSS
+class name set to pagination when it is disabled
+
+|link:#param-modifierClass[modifierClass] |string |'swiper-pagination-'
+|The beginning of the modifier CSS class name that will be added to
+pagination depending on parameters
+
+|link:#param-paginationDisabledClass[paginationDisabledClass] |string
+|'swiper-pagination-disabled' |CSS class name added on swiper container
+and pagination element when pagination is disabled by breakpoint
+
+|link:#param-progressbarFillClass[progressbarFillClass] |string
+|'swiper-pagination-progressbar-fill' |CSS class name of pagination
+progressbar fill element
+
+|link:#param-progressbarOpposite[progressbarOpposite] |boolean |false
+|Makes pagination progressbar opposite to Swiper's `+direction+`
+parameter, means vertical progressbar for horizontal swiper direction
+and horizontal progressbar for vertical swiper direction
+
+|link:#param-progressbarOppositeClass[progressbarOppositeClass] |string
+|'swiper-pagination-progressbar-opposite' |CSS class name of pagination
+progressbar opposite
+
+|link:#param-renderBullet[renderBullet]
+|function([.text-primary]#index#, [.text-primary]#className#) | a|
+This parameter allows totally customize pagination bullets, you need to
+pass here a function that accepts `+index+` number of pagination bullet
+and required element class name (`+className+`). Only for `+'bullets'+`
+pagination type
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+      //...
+      renderBullet: function (index, className) {
+        return '<span class="' + className + '">' + (index + 1) + '</span>';
+      }
+    });
+    
+----
+
+|link:#param-renderCustom[renderCustom]
+|function([.text-primary]#swiper#, [.text-primary]#current#,
+[.text-primary]#total#) | a|
+This parameter is required for `+'custom'+` pagination type where you
+have to specify how it should be rendered.
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+      //...
+      renderCustom: function (swiper, current, total) {
+        return current + ' of ' + total;
+      }
+    });
+    
+----
+
+|link:#param-renderFraction[renderFraction]
+|function([.text-primary]#currentClass#, [.text-primary]#totalClass#) |
+a|
+This parameter allows to customize "fraction" pagination html. Only for
+`+'fraction'+` pagination type
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+      //...
+      renderFraction: function (currentClass, totalClass) {
+          return '<span class="' + currentClass + '"></span>' +
+                  ' of ' +
+                  '<span class="' + totalClass + '"></span>';
+      }
+    });
+    
+----
+
+|link:#param-renderProgressbar[renderProgressbar]
+|function([.text-primary]#progressbarFillClass#) | a|
+This parameter allows to customize "progress" pagination. Only for
+`+'progress'+` pagination type
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+      //...
+      renderProgressbar: function (progressbarFillClass) {
+          return '<span class="' + progressbarFillClass + '"></span>';
+      }
+    });
+    
+----
+
+|link:#param-totalClass[totalClass] |string |'swiper-pagination-total'
+|CSS class name of the element with total number of "snaps" in
+"fraction" pagination
+
+|link:#param-type[type] |'progressbar' \| 'bullets' \| 'fraction' \|
+'custom' |'bullets' |String with type of pagination. Can be
+`+'bullets'+`, `+'fraction'+`, `+'progressbar'+` or `+'custom'+`
+
+|link:#param-verticalClass[verticalClass] |string
+|'swiper-pagination-vertical' |CSS class name set to pagination in
+vertical Swiper
+|===
+
+===== link:#pagination-methods[]Pagination Methods
+
+[cols=",,",]
+|===
+|Properties | |
+
+|link:#prop-swiper-bullets[swiper.bullets] |[.text-green]#HTMLElement[]#
+|Array of pagination bullets HTML elements. To get specific slide
+HTMLElement use `+swiper.pagination.bullets[1]+`.
+
+|link:#prop-swiper-el[swiper.el] |HTMLElement |HTMLElement of pagination
+container element
+
+|Methods | |
+
+|link:#method-swiper-destroy[swiper.destroy()] | |Destroy pagination
+
+|link:#method-swiper-init[swiper.init()] | |Initialize pagination
+
+|link:#method-swiper-render[swiper.render()] | |Render pagination layout
+
+|link:#method-swiper-update[swiper.update()] | |Update pagination state
+(enabled/disabled/active)
+|===
+
+===== link:#pagination-events[]Pagination Events
+
+[cols=",,",options="header",]
+|===
+|Name |Arguments |Description
+|link:#event-paginationHide[paginationHide] |(swiper) |Event will be
+fired on pagination hide
+
+|link:#event-paginationRender[paginationRender] |(swiper, paginationEl)
+|Event will be fired after pagination rendered
+
+|link:#event-paginationShow[paginationShow] |(swiper) |Event will be
+fired on pagination show
+
+|link:#event-paginationUpdate[paginationUpdate] |(swiper, paginationEl)
+|Event will be fired when pagination updated
+|===
+
+===== link:#pagination-css-custom-properties[]Pagination CSS Custom Properties
+
+[source,language-css]
+----
+ {
+    --swiper-pagination-color: var(--swiper-theme-color);
+    --swiper-pagination-left: auto;
+    --swiper-pagination-right: 8px;
+    --swiper-pagination-bottom: 8px;
+    --swiper-pagination-top: auto;
+    --swiper-pagination-fraction-color: inherit;
+    --swiper-pagination-progressbar-bg-color: rgba(0, 0, 0, 0.25);
+    --swiper-pagination-progressbar-size: 4px;
+    --swiper-pagination-bullet-size: 8px;
+    --swiper-pagination-bullet-width: 8px;
+    --swiper-pagination-bullet-height: 8px;
+    --swiper-pagination-bullet-inactive-color: #000;
+    --swiper-pagination-bullet-inactive-opacity: 0.2;
+    --swiper-pagination-bullet-opacity: 1;
+    --swiper-pagination-bullet-horizontal-gap: 4px;
+    --swiper-pagination-bullet-vertical-gap: 6px;
+    }
+    
+----
+
+==== link:#scrollbar[]Scrollbar
+
+===== link:#scrollbar-parameters[]Scrollbar Parameters
+
+[cols=",,,",options="header",]
+|===
+|Name |Type |Default |Description
+|link:#param-dragClass[dragClass] |string |'swiper-scrollbar-drag'
+|Scrollbar draggable element CSS class
+
+|link:#param-dragSize[dragSize] |number \| 'auto' |'auto' |Size of
+scrollbar draggable element in px
+
+|link:#param-draggable[draggable] |boolean |false |Set to `+true+` to
+enable make scrollbar draggable that allows you to control slider
+position
+
+|link:#param-el[el] |any |null |String with CSS selector or HTML element
+of the container with scrollbar.
+
+|link:#param-enabled[enabled] |boolean | |Boolean property to use with
+breakpoints to enable/disable scrollbar on certain breakpoints
+
+|link:#param-hide[hide] |boolean |true |Hide scrollbar automatically
+after user interaction
+
+|link:#param-horizontalClass[horizontalClass] |string
+|'swiper-scrollbar-horizontal' |CSS class name set to scrollbar in
+horizontal Swiper
+
+|link:#param-lockClass[lockClass] |string |'swiper-scrollbar-lock'
+|Scrollbar element additional CSS class when it is disabled
+
+|link:#param-scrollbarDisabledClass[scrollbarDisabledClass] |string
+|'swiper-scrollbar-disabled' |CSS class name added on swiper container
+and scrollbar element when scrollbar is disabled by breakpoint
+
+|link:#param-snapOnRelease[snapOnRelease] |boolean |false |Set to
+`+true+` to snap slider position to slides when you release scrollbar
+
+|link:#param-verticalClass[verticalClass] |string
+|'swiper-scrollbar-vertical' |CSS class name set to scrollbar in
+vertical Swiper
+|===
+
+===== link:#scrollbar-methods[]Scrollbar Methods
+
+[cols=",,",]
+|===
+|Properties | |
+
+|link:#prop-swiper-dragEl[swiper.dragEl] |HTMLElement |HTMLElement of
+Scrollbar draggable handler element
+
+|link:#prop-swiper-el[swiper.el] |HTMLElement |HTMLElement of Scrollbar
+container element
+
+|Methods | |
+
+|link:#method-swiper-destroy[swiper.destroy()] | |Destroy scrollbar
+
+|link:#method-swiper-init[swiper.init()] | |Initialize scrollbar
+
+|link:#method-swiper-setTranslate[swiper.setTranslate()] | |Updates
+scrollbar translate
+
+|link:#method-swiper-updateSize[swiper.updateSize()] | |Updates
+scrollbar track and handler sizes
+|===
+
+===== link:#scrollbar-events[]Scrollbar Events
+
+[cols=",,",options="header",]
+|===
+|Name |Arguments |Description
+|link:#event-scrollbarDragEnd[scrollbarDragEnd] |(swiper, event) |Event
+will be fired on draggable scrollbar drag end
+
+|link:#event-scrollbarDragMove[scrollbarDragMove] |(swiper, event)
+|Event will be fired on draggable scrollbar drag move
+
+|link:#event-scrollbarDragStart[scrollbarDragStart] |(swiper, event)
+|Event will be fired on draggable scrollbar drag start
+|===
+
+===== link:#scrollbar-css-custom-properties[]Scrollbar CSS Custom Properties
+
+[source,language-css]
+----
+ {
+    --swiper-scrollbar-border-radius: 10px;
+    --swiper-scrollbar-top: auto;
+    --swiper-scrollbar-bottom: 4px;
+    --swiper-scrollbar-left: auto;
+    --swiper-scrollbar-right: 4px;
+    --swiper-scrollbar-sides-offset: 1%;
+    --swiper-scrollbar-bg-color: rgba(0, 0, 0, 0.1);
+    --swiper-scrollbar-drag-bg-color: rgba(0, 0, 0, 0.5);
+    --swiper-scrollbar-size: 4px;
+    }
+    
+----
+
+==== link:#autoplay[]Autoplay
+
+===== link:#autoplay-parameters[]Autoplay Parameters
+
+[width="100%",cols="25%,25%,25%,25%",options="header",]
+|===
+|Name |Type |Default |Description
+|link:#param-delay[delay] |number |3000 a|
+Delay between transitions (in ms). If this parameter is not specified,
+auto play will be disabled
+
+If you need to specify different delay for specific slides you can do it
+by using`+data-swiper-autoplay+` (in ms) attribute on slide.
+
+[source, html]
+----
+<!-- hold this slide for 2 seconds -->
+    <div class="swiper-slide" data-swiper-autoplay="2000">
+    
+----
+
+|link:#param-disableOnInteraction[disableOnInteraction] |boolean |true
+|Set to `+false+` and autoplay will not be disabled after user
+interactions (swipes), it will be restarted every time after interaction
+
+|link:#param-pauseOnMouseEnter[pauseOnMouseEnter] |boolean |false |When
+enabled autoplay will be paused on pointer (mouse) enter over Swiper
+container.
+
+|link:#param-reverseDirection[reverseDirection] |boolean |false |Enables
+autoplay in reverse direction
+
+|link:#param-stopOnLastSlide[stopOnLastSlide] |boolean |false |Enable
+this parameter and autoplay will be stopped when it reaches last slide
+(has no effect in loop mode)
+
+|link:#param-waitForTransition[waitForTransition] |boolean |true |When
+enabled autoplay will wait for wrapper transition to continue. Can be
+disabled in case of using Virtual Translate when your slider may not
+have transition
+|===
+
+===== link:#autoplay-methods[]Autoplay Methods
+
+[cols=",,",]
+|===
+|Properties | |
+
+|link:#prop-swiper-paused[swiper.paused] |boolean |Whether autoplay is
+paused
+
+|link:#prop-swiper-running[swiper.running] |boolean |Whether autoplay
+enabled and running
+
+|link:#prop-swiper-timeLeft[swiper.timeLeft] |number |If autoplay is
+paused, it contains time left (in ms) before transition to next slide
+
+|Methods | |
+
+|link:#method-swiper-pause[swiper.pause()] | |Pause autoplay
+
+|link:#method-swiper-resume[swiper.resume()] | |Resume autoplay
+
+|link:#method-swiper-start[swiper.start()] | |Start autoplay
+
+|link:#method-swiper-stop[swiper.stop()] | |Stop autoplay
+|===
+
+===== link:#autoplay-events[]Autoplay Events
+
+[cols=",,",options="header",]
+|===
+|Name |Arguments |Description
+|link:#event-autoplay[autoplay] |(swiper) |Event will be fired when
+slide changed with autoplay
+
+|link:#event-autoplayPause[autoplayPause] |(swiper) |Event will be fired
+on autoplay pause
+
+|link:#event-autoplayResume[autoplayResume] |(swiper) |Event will be
+fired on autoplay resume
+
+|link:#event-autoplayStart[autoplayStart] |(swiper) |Event will be fired
+in when autoplay started
+
+|link:#event-autoplayStop[autoplayStop] |(swiper) |Event will be fired
+when autoplay stopped
+
+|link:#event-autoplayTimeLeft[autoplayTimeLeft] |(swiper, timeLeft,
+percentage) |Event triggers continuously while autoplay is enabled. It
+contains time left (in ms) before transition to next slide and
+percentage of that time related to autoplay delay
+|===
+
+==== link:#free-mode[]Free Mode
+
+===== link:#free-mode-parameters[]Free Mode Parameters
+
+[cols=",,,",options="header",]
+|===
+|Name |Type |Default |Description
+|link:#param-enabled[enabled] |boolean |false |Whether the free mode is
+enabled
+
+|link:#param-minimumVelocity[minimumVelocity] |number |0.02 |Minimum
+touchmove-velocity required to trigger free mode momentum
+
+|link:#param-momentum[momentum] |boolean |true |If enabled, then slide
+will keep moving for a while after you release it
+
+|link:#param-momentumBounce[momentumBounce] |boolean |true |Set to
+`+false+` if you want to disable momentum bounce in free mode
+
+|link:#param-momentumBounceRatio[momentumBounceRatio] |number |1 |Higher
+value produces larger momentum bounce effect
+
+|link:#param-momentumRatio[momentumRatio] |number |1 |Higher value
+produces larger momentum distance after you release slider
+
+|link:#param-momentumVelocityRatio[momentumVelocityRatio] |number |1
+|Higher value produces larger momentum velocity after you release slider
+
+|link:#param-sticky[sticky] |boolean |false |Set to enabled to enable
+snap to slides positions in free mode
+|===
+
+==== link:#grid[]Grid
+
+===== link:#grid-parameters[]Grid Parameters
+
+[width="100%",cols="25%,25%,25%,25%",options="header",]
+|===
+|Name |Type |Default |Description
+|link:#param-fill[fill] |'row' \| 'column' |'column' a|
+Can be `+'column'+` or `+'row'+`. Defines how slides should fill rows,
+by column or by row
+
+____
+if used with loop mode make sure number of slides is even specified in
+loop mode requirements, or enable `+loopAddBlankSlides+` parameter
+____
+
+|link:#param-rows[rows] |number |1 |Number of slides rows, for multirow
+layout
+|===
+
+==== link:#manipulation[]Manipulation
+
+Manipulation module adds useful Swiper methods to manipulate slides. It
+makes sense to use it only with Swiper Core version, not intended to be
+uses with Swiper React or Vue.
+
+===== link:#manipulation-methods[]Manipulation Methods
+
+[width="100%",cols="34%,33%,33%",]
+|===
+|Methods | |
+
+|link:#method-swiper-addSlide[swiper.addSlide([.text-orange]#index#&#44;
+[.text-orange]#slides#)] | a|
+Add new slides to the required index. slides could be HTMLElement or
+HTML string with new slide or array with such slides, for example:
+
+[source, js]
+----
+addSlide(1, '<div class="swiper-slide">Slide 10"</div>')
+    
+    addSlide(1, [
+     '<div class="swiper-slide">Slide 10"</div>',
+     '<div class="swiper-slide">Slide 11"</div>'
+    ]);
+    
+----
+
+|link:#method-swiper-appendSlide[swiper.appendSlide([.text-orange]#slides#)]
+| a|
+Add new slides to the end. slides could be HTMLElement or HTML string
+with new slide or array with such slides, for example:
+
+[source, js]
+----
+appendSlide('<div class="swiper-slide">Slide 10"</div>')
+    
+    appendSlide([
+     '<div class="swiper-slide">Slide 10"</div>',
+     '<div class="swiper-slide">Slide 11"</div>'
+    ]);
+    
+----
+
+|link:#method-swiper-prependSlide[swiper.prependSlide([.text-orange]#slides#)]
+| a|
+Add new slides to the beginning. slides could be HTMLElement or HTML
+string with new slide or array with such slides, for example:
+
+[source, js]
+----
+prependSlide('<div class="swiper-slide">Slide 0"</div>')
+    
+    prependSlide([
+     '<div class="swiper-slide">Slide 1"</div>',
+     '<div class="swiper-slide">Slide 2"</div>'
+    ]);
+    
+----
+
+|link:#method-swiper-removeAllSlides[swiper.removeAllSlides()] | |Remove
+all slides
+
+|link:#method-swiper-removeSlide[swiper.removeSlide([.text-orange]#slideIndex#)]
+| a|
+Remove selected slides. slideIndex could be a number with slide index to
+remove or array with indexes.
+
+[source, js]
+----
+removeSlide(0); // remove first slide
+    removeSlide([0, 1]); // remove first and second slides
+    removeAllSlides();    // Remove all slides
+    
+----
+
+|===
+
+==== link:#parallax[]Parallax
+
+Swiper supports parallax transition effects for swiper/slides nested
+elements. There are two types of parallax elements supported:
+
+* Direct child elements of `+swiper+`. Parallax effect for such elements
+will depend on total slider progress. Useful for parallax backgrounds
+* Slides child elements. Parallax effect for such elements will depend
+on slide progress
+
+To enable parallax effects you need to init Swiper with passed
+`+parallax:true+` parameter and add one of the following (or mix)
+attributes to required elements:
+
+* `+data-swiper-parallax+` - enable transform-translate parallax
+transition. This attribute may accept:
+** `+number+` - value in px (as for title, subtitle in example above) to
+move element depending on progress. In this case such element will be
+moved on ± this value in px depending on slide position (next or
+previous)
+** `+percentage+` - (as for "parallax-bg") to move element depending on
+progress and on its size. In this case such element will be moved on ±
+this percentage of its size (width in horizontal direction, and height
+in vertical direction) depending on slide position (next or previous).
+So if element has 400px width and you specified
+data-swiper-parallax="50%" then it will be moved on ± 200px
+* `+data-swiper-parallax-x+` - same but for x-axis direction
+* `+data-swiper-parallax-y+` - same but for y-axis direction
+* `+data-swiper-parallax-scale+` - scale ratio of the parallax element
+when it is in "inactive" (not on active slide) state
+* `+data-swiper-parallax-opacity+` - opacity of the parallax element
+when it is in "inactive" (not on active slide) state
+* `+data-swiper-parallax-duration+` - custom transition duration for
+parallax elements
+
+[source, html]
+----
+<div class="swiper">
+    <!-- Parallax background element -->
+    <div
+    class="parallax-bg"
+    style="background-image:url(path/to/image.jpg)"
+    data-swiper-parallax="-23%"
+    ></div>
+    <div class="swiper-wrapper">
+    <div class="swiper-slide">
+    <!-- Each slide has parallax title -->
+    <div class="title" data-swiper-parallax="-100">Slide 1</div>
+    <!-- Parallax subtitle -->
+    <div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
+    <!-- And parallax text with custom transition duration -->
+    <div
+    class="text"
+    data-swiper-parallax="-300"
+    data-swiper-parallax-duration="600"
+    >
+    <p>Lorem ipsum dolor sit amet, ...</p>
+    </div>
+    <!-- Opacity parallax -->
+    <div data-swiper-parallax-opacity="0.5">I will change opacity</div>
+    <!-- Scale parallax -->
+    <div data-swiper-parallax-scale="0.15">I will change scale</div>
+    </div>
+    ...
+    </div>
+    </div>
+    
+----
+
+===== link:#parallax-parameters[]Parallax Parameters
+
+[cols=",,,",options="header",]
+|===
+|Name |Type |Default |Description
+|link:#param-enabled[enabled] |boolean |false |Enable, if you want to
+use "parallaxed" elements inside of slider
+|===
+
+==== link:#lazy-loading[]Lazy Loading
+
+Since version 9 Swiper doesn't have a specific lazy loading API, as it
+relies on native browser lazy loading feature. To use lazy loading, we
+just need to set `+loading="lazy"+` on images and add preloader element:
+
+[source, html]
+----
+<div class="swiper">
+    <div class="swiper-wrapper">
+    <!-- Lazy image -->
+    <div class="swiper-slide">
+    <img src="path/to/picture-1.jpg" loading="lazy" />
+    <div class="swiper-lazy-preloader"></div>
+    </div>
+
+    <!-- Lazy image with srcset -->
+    <div class="swiper-slide">
+    <img
+    src="path/to/logo-small.png"
+    srcset="path/to/logo-large.png 2x"
+    loading="lazy"
+    />
+    <div class="swiper-lazy-preloader"></div>
+    </div>
+    </div>
+    </div>
+    
+----
+
+As you see:
+
+* Lazy image must have `+loading="lazy"+` attribute
+* Add animated preloader spinner to slide which will be removed
+automatically after image loaded:
+
+[source, html]
+----
+<div class="swiper-lazy-preloader"></div>
+    
+----
+
+Or white one for dark layout:
+
+[source, html]
+----
+<div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+    
+----
+
+==== link:#fade-effect[]Fade Effect
+
+Be sure to have the `+effect+` param set to `+'fade'+` in order for this
+to work.
+
+Note that `+crossFade+` should be set to `+true+` in order to avoid
+seeing content behind or underneath.
+
+===== link:#fade-effect-parameters[]Fade Effect Parameters
+
+[cols=",,,",options="header",]
+|===
+|Name |Type |Default |Description
+|link:#param-crossFade[crossFade] |boolean |false |Enables slides cross
+fade
+|===
+
+==== link:#coverflow-effect[]Coverflow Effect
+
+Be sure to have the `+effect+` param set to `+'coverflow'+` in order for
+this to work.
+
+===== link:#coverflow-effect-parameters[]Coverflow Effect Parameters
+
+[cols=",,,",options="header",]
+|===
+|Name |Type |Default |Description
+|link:#param-depth[depth] |number |100 |Depth offset in px (slides
+translate in Z axis)
+
+|link:#param-modifier[modifier] |number |1 |Effect multiplier
+
+|link:#param-rotate[rotate] |number |50 |Slide rotate in degrees
+
+|link:#param-scale[scale] |number |1 |Slide scale effect
+
+|link:#param-slideShadows[slideShadows] |boolean |true |Enables slides
+shadows
+
+|link:#param-stretch[stretch] |number |0 |Stretch space between slides
+(in px)
+|===
+
+==== link:#flip-effect[]Flip Effect
+
+Be sure to have the `+effect+` param set to `+'flip'+` in order for this
+to work.
+
+===== link:#flip-effect-parameters[]Flip Effect Parameters
+
+[cols=",,,",options="header",]
+|===
+|Name |Type |Default |Description
+|link:#param-limitRotation[limitRotation] |boolean |true |Limit edge
+slides rotation
+
+|link:#param-slideShadows[slideShadows] |boolean |true |Enables slides
+shadows
+|===
+
+==== link:#cube-effect[]Cube Effect
+
+Be sure to have the `+effect+` param set to `+'cube'+` in order for this
+to work.
+
+===== link:#cube-effect-parameters[]Cube Effect Parameters
+
+[cols=",,,",options="header",]
+|===
+|Name |Type |Default |Description
+|link:#param-shadow[shadow] |boolean |true |Enables main slider shadow
+
+|link:#param-shadowOffset[shadowOffset] |number |20 |Main shadow offset
+in px
+
+|link:#param-shadowScale[shadowScale] |number |0.94 |Main shadow scale
+ratio
+
+|link:#param-slideShadows[slideShadows] |boolean |true |Enables slides
+shadows
+|===
+
+==== link:#cards-effect[]Cards Effect
+
+Be sure to have the `+effect+` param set to `+'cards'+` in order for
+this to work.
+
+===== link:#cards-effect-parameters[]Cards Effect Parameters
+
+[cols=",,,",options="header",]
+|===
+|Name |Type |Default |Description
+|link:#param-perSlideOffset[perSlideOffset] |number |8 |Offset distance
+per slide (in px)
+
+|link:#param-perSlideRotate[perSlideRotate] |number |2 |Rotate angle per
+slide (in degrees)
+
+|link:#param-rotate[rotate] |boolean |true |Enables cards rotation
+
+|link:#param-slideShadows[slideShadows] |boolean |true |Enables slides
+shadows
+|===
+
+==== link:#creative-effect[]Creative Effect
+
+Be sure to have the `+effect+` param set to `+'creative'+` in order for
+this to work.
+
+===== link:#creative-effect-parameters[]Creative Effect Parameters
+
+[width="100%",cols="25%,25%,25%,25%",options="header",]
+|===
+|Name |Type |Default |Description
+|link:#param-limitProgress[limitProgress] |number |1 |Limit
+progress/offset to amount of side slides. If `+1+`, then slides all
+slides after prev/next will have same state. If `+2+`, then all slides
+after 2nd before/after active will have same state, etc.
+
+|link:#param-next[next] |CreativeEffectTransform | a|
+Next slide transformations.
+
+[source, js]
+----
+{
+      // Array with translate X, Y and Z values
+      translate: (string | number)[];
+      // Array with rotate X, Y and Z values (in deg)
+      rotate?: number[];
+      // Slide opacity
+      opacity?: number;
+      // Slide scale
+      scale?: number;
+      // Enables slide shadow
+      shadow?: boolean;
+      // Transform origin, e.g. `left bottom`
+      origin?: string;
+    }
+    
+----
+
+|link:#param-perspective[perspective] |boolean |true |Enable this
+parameter if your custom transforms require 3D transformations
+(`+translateZ+`, `+rotateX+`, `+rotateY+` )
+
+|link:#param-prev[prev] |CreativeEffectTransform | a|
+Previous slide transformations. Accepts object of the following type:
+
+[source, js]
+----
+{
+      // Array with translate X, Y and Z values
+      translate: (string | number)[];
+      // Array with rotate X, Y and Z values (in deg)
+      rotate?: number[];
+      // Slide opacity
+      opacity?: number;
+      // Slide scale
+      scale?: number;
+      // Enables slide shadow
+      shadow?: boolean;
+      // Transform origin, e.g. `left bottom`
+      origin?: string;
+    }
+    
+----
+
+|link:#param-progressMultiplier[progressMultiplier] |number |1 |Allows
+to multiply slides transformations and opacity.
+
+|link:#param-shadowPerProgress[shadowPerProgress] |boolean |false
+|Splits shadow "opacity" per slide based on `+limitProgress+` (only if
+transformation shadows enabled). E.g. setting `+limitProgress: 2+` and
+enabling `+shadowPerProgress+`, will set shadow opacity to `+0.5+` and
+`+1+` on two slides next to active. With this parameter disabled, all
+slides beside active will have shadow with `+1+` opacity
+|===
+
+==== link:#thumbs[]Thumbs
+
+In addition to link:#controller[Controller] component Swiper comes with
+Thumbs component that is designed to work with additional thumbs swiper
+in a more correct way than Controller which is used for syncing two
+swipers.
+
+===== link:#thumbs-parameters[]Thumbs Parameters
+
+[cols=",,,",options="header",]
+|===
+|Name |Type |Default |Description
+|link:#param-autoScrollOffset[autoScrollOffset] |number |0 |Allows to
+set on which thumbs active slide from edge it should automatically move
+scroll thumbs. For example, if set to 1 and last visible thumb will be
+activated (1 from edge) it will auto scroll thumbs
+
+|link:#param-multipleActiveThumbs[multipleActiveThumbs] |boolean |true
+|When enabled multiple thumbnail slides may get activated
+
+|link:#param-slideThumbActiveClass[slideThumbActiveClass] |string
+|'swiper-slide-thumb-active' |Additional class that will be added to
+activated thumbs swiper slide
+
+|link:#param-swiper[swiper] |any |null |Swiper instance of swiper used
+as thumbs or object with Swiper parameters to initialize thumbs swiper
+
+|link:#param-thumbsContainerClass[thumbsContainerClass] |string
+|'swiper-thumbs' |Additional class that will be added to thumbs swiper
+|===
+
+===== link:#thumbs-methods[]Thumbs Methods
+
+[cols=",,",]
+|===
+|Properties | |
+
+|link:#prop-swiper-swiper[swiper.swiper] |any |Swiper instance of thumbs
+swiper
+
+|Methods | |
+
+|link:#method-swiper-init[swiper.init()] | |Initialize thumbs
+
+|link:#method-swiper-update[swiper.update([.text-orange]#initial#)] |
+|Update thumbs
+|===
+
+==== link:#zoom[]Zoom
+
+Swiper supports zoom images functionality (similar to what you see on
+iOS when browsing single photo) where you can zoom-in image by pinch
+gesture and or by zoom-in/out by double tap on it. In this case,
+additional layout is required:
+
+[source, html]
+----
+<div class="swiper">
+    <div class="swiper-wrapper">
+    <div class="swiper-slide">
+    <div class="swiper-zoom-container">
+    <img src="path/to/image1.jpg" />
+    </div>
+    </div>
+    <div class="swiper-slide">
+    <div class="swiper-zoom-container">
+    <img src="path/to/image2.jpg" />
+    </div>
+    </div>
+    <div class="swiper-slide">Plain slide with text</div>
+    <div class="swiper-slide">
+    <!-- Override maxRatio parameter -->
+    <div class="swiper-zoom-container" data-swiper-zoom="5">
+    <img src="path/to/image1.jpg" />
+    </div>
+    </div>
+    </div>
+    </div>
+    
+----
+
+* All "zoomable" images should be wrapped with the div with
+`+swiper-zoom-container+` class.
+* By default it expects to zoom one of the `+img+`, `+picture+` or
+`+canvas+` element. If you want to make zoom on some other custom
+element, then just add `+swiper-zoom-target+` class to this element. For
+example:
++
+[source, html]
+----
+<div class="swiper">
+    <div class="swiper-wrapper">
+    <div class="swiper-slide">
+    <div class="swiper-zoom-container">
+    <!-- custom zoomable element -->
+    <div
+    class="swiper-zoom-target"
+    style="background-image: url(...)"
+    ></div>
+    </div>
+    </div>
+    </div>
+    </div>
+    
+----
+* You can override `+maxRatio+` parameter for specific slides by using
+`+data-swiper-zoom+` attribute on zoom container.
+
+===== link:#zoom-parameters[]Zoom Parameters
+
+[cols=",,,",options="header",]
+|===
+|Name |Type |Default |Description
+|link:#param-containerClass[containerClass] |string
+|'swiper-zoom-container' |CSS class name of zoom container
+
+|link:#param-limitToOriginalSize[limitToOriginalSize] |boolean |false
+|When set to true, the image will not be scaled past 100% of its
+original size
+
+|link:#param-maxRatio[maxRatio] |number |3 |Maximum image zoom
+multiplier
+
+|link:#param-minRatio[minRatio] |number |1 |Minimal image zoom
+multiplier
+
+|link:#param-panOnMouseMove[panOnMouseMove] |boolean |false |When set to
+true, a zoomed in image will automatically pan while moving the mouse
+over the image
+
+|link:#param-toggle[toggle] |boolean |true |Enable/disable zoom-in by
+slide's double tap
+
+|link:#param-zoomedSlideClass[zoomedSlideClass] |string
+|'swiper-slide-zoomed' |CSS class name of zoomed in container
+|===
+
+===== link:#zoom-methods[]Zoom Methods
+
+[cols=",,",]
+|===
+|Properties | |
+
+|link:#prop-swiper-enabled[swiper.enabled] |boolean |Whether the zoom
+module is enabled
+
+|link:#prop-swiper-scale[swiper.scale] |number |Current image scale
+ratio
+
+|Methods | |
+
+|link:#method-swiper-disable[swiper.disable()] | |Disable zoom module
+
+|link:#method-swiper-enable[swiper.enable()] | |Enable zoom module
+
+|link:#method-swiper-in[swiper.in([.text-orange]#ratio#)] | |Zoom in
+image of the currently active slide. Optionally accepts custom zoom
+ratio
+
+|link:#method-swiper-out[swiper.out()] | |Zoom out image of the
+currently active slide
+
+|link:#method-swiper-toggle[swiper.toggle([.text-orange]#event#)] |
+|Toggle image zoom of the currently active slide
+|===
+
+===== link:#zoom-events[]Zoom Events
+
+[cols=",,",options="header",]
+|===
+|Name |Arguments |Description
+|link:#event-zoomChange[zoomChange] |(swiper, scale, imageEl, slideEl)
+|Event will be fired on zoom change
+|===
+
+==== link:#keyboard-control[]Keyboard Control
+
+===== link:#keyboard-control-parameters[]Keyboard Control Parameters
+
+[cols=",,,",options="header",]
+|===
+|Name |Type |Default |Description
+|link:#param-enabled[enabled] |boolean |false |Set to `+true+` to enable
+keyboard control
+
+|link:#param-onlyInViewport[onlyInViewport] |boolean |true |When enabled
+it will control sliders that are currently in viewport
+
+|link:#param-pageUpDown[pageUpDown] |boolean |true |When enabled it will
+enable keyboard navigation by Page Up and Page Down keys
+|===
+
+===== link:#keyboard-control-methods[]Keyboard Control Methods
+
+[cols=",,",]
+|===
+|Properties | |
+
+|link:#prop-swiper-enabled[swiper.enabled] |boolean |Whether the
+keyboard control is enabled
+
+|Methods | |
+
+|link:#method-swiper-disable[swiper.disable()] | |Disable keyboard
+control
+
+|link:#method-swiper-enable[swiper.enable()] | |Enable keyboard control
+|===
+
+===== link:#keyboard-events[]Keyboard Events
+
+[cols=",,",options="header",]
+|===
+|Name |Arguments |Description
+|link:#event-keyPress[keyPress] |(swiper, keyCode) |Event will be fired
+on key press
+|===
+
+==== link:#mousewheel-control[]Mousewheel Control
+
+===== link:#mousewheel-control-parameters[]Mousewheel Control Parameters
+
+[cols=",,,",options="header",]
+|===
+|Name |Type |Default |Description
+|link:#param-enabled[enabled] |boolean |false |Set to `+true+` to enable
+mousewheel control
+
+|link:#param-eventsTarget[eventsTarget] |any |'container' |String with
+CSS selector or HTML element of the container accepting mousewheel
+events. By default it is swiper
+
+|link:#param-forceToAxis[forceToAxis] |boolean |false |Set to `+true+`
+to force mousewheel swipes to axis. So in horizontal mode mousewheel
+will work only with horizontal mousewheel scrolling, and only with
+vertical scrolling in vertical mode.
+
+|link:#param-invert[invert] |boolean |false |Set to `+true+` to invert
+sliding direction
+
+|link:#param-noMousewheelClass[noMousewheelClass] |string
+|'swiper-no-mousewheel' |Scrolling on elements with this class will be
+ignored
+
+|link:#param-releaseOnEdges[releaseOnEdges] |boolean |false |Set to
+`+true+` and swiper will release mousewheel event and allow page
+scrolling when swiper is on edge positions (in the beginning or in the
+end)
+
+|link:#param-sensitivity[sensitivity] |number |1 |Multiplier of
+mousewheel data, allows to tweak mouse wheel sensitivity
+
+|link:#param-thresholdDelta[thresholdDelta] |null \| number |null
+|Minimum mousewheel scroll delta to trigger swiper slide change
+
+|link:#param-thresholdTime[thresholdTime] |null \| number |null |Minimum
+mousewheel scroll time delta (in ms) to trigger swiper slide change
+|===
+
+===== link:#mousewheel-control-methods[]Mousewheel Control Methods
+
+[cols=",,",]
+|===
+|Properties | |
+
+|link:#prop-swiper-enabled[swiper.enabled] |boolean |Whether the
+mousewheel control is enabled
+
+|Methods | |
+
+|link:#method-swiper-disable[swiper.disable()] | |Disable mousewheel
+control
+
+|link:#method-swiper-enable[swiper.enable()] | |Enable mousewheel
+control
+|===
+
+===== link:#mousewheel-events[]Mousewheel Events
+
+[cols=",,",options="header",]
+|===
+|Name |Arguments |Description
+|link:#event-scroll[scroll] |(swiper, event) |Event will be fired on
+mousewheel scroll
+|===
+
+==== link:#virtual-slides[]Virtual Slides
+
+Virtual Slides module allows to keep just required amount of slides in
+DOM. It is very useful in terms in performance and memory issues if you
+have a lot of slides, especially slides with heavyweight DOM tree or
+images.
+
+Note that according to Virtual Slides realization it *doesn't work* with
+Grid module and `+slidesPerView: 'auto'+`
+
+===== link:#virtual-slides-parameters[]Virtual Slides Parameters
+
+[width="100%",cols="25%,25%,25%,25%",options="header",]
+|===
+|Name |Type |Default |Description
+|link:#param-addSlidesAfter[addSlidesAfter] |number |0 |Increases amount
+of pre-rendered slides after active slide
+
+|link:#param-addSlidesBefore[addSlidesBefore] |number |0 |Increases
+amount of pre-rendered slides before active slide
+
+|link:#param-cache[cache] |boolean |true |Enables DOM cache of rendering
+slides html elements. Once they are rendered they will be saved to cache
+and reused from it.
+
+|link:#param-enabled[enabled] |boolean |false |Whether the virtual
+slides are enabled
+
+|link:#param-renderExternal[renderExternal]
+|function([.text-primary]#data#) | a|
+Function for external rendering (e.g. using some other library to handle
+DOM manipulations and state like React.js or Vue.js). As an argument it
+accepts `+data+` object with the following properties:
+
+* `+offset+` - slides left/top offset in px
+* `+from+` - index of first slide required to be rendered
+* `+to+` - index of last slide required to be rendered
+* `+slides+` - array with slide items to be rendered
+
+|link:#param-renderExternalUpdate[renderExternalUpdate] |boolean |true
+|When enabled (by default) it will update Swiper layout right after
+renderExternal called. Useful to disable and update swiper manually when
+used with render libraries that renders asynchronously
+
+|link:#param-renderSlide[renderSlide] |function([.text-primary]#slide#,
+[.text-primary]#index#) | |Function to render slide. As an argument it
+accepts current slide item for `+slides+` array and index number of the
+current slide. Function must return an outer HTML of the swiper slide or
+slide HTML element.
+
+|link:#param-slides[slides] |T[] |[] |Array with slides
+|===
+
+===== link:#virtual-slides-methods[]Virtual Slides Methods
+
+[width="100%",cols="34%,33%,33%",]
+|===
+|Properties | |
+
+|link:#prop-swiper-cache[swiper.cache] |object |Object with cached
+slides HTML elements
+
+|link:#prop-swiper-from[swiper.from] |number |Index of first rendered
+slide
+
+|link:#prop-swiper-slides[swiper.slides] |[.text-green]#T[]# |Array with
+slide items passed by `+virtual.slides+` parameter
+
+|link:#prop-swiper-to[swiper.to] |number |Index of last rendered slide
+
+|Methods | |
+
+|link:#method-swiper-appendSlide[swiper.appendSlide([.text-orange]#slide#)]
+| a|
+Append slide. `+slides+` can be a single slide item or array with such
+slides.
+
+____
+Only for Core version (in React & Vue it should be done by modifying
+slides array/data/source)
+____
+
+|link:#method-swiper-prependSlide[swiper.prependSlide([.text-orange]#slide#)]
+| a|
+Prepend slide. `+slides+` can be a single slide item or array with such
+slides.
+
+____
+Only for Core version (in React & Vue it should be done by modifying
+slides array/data/source)
+____
+
+|link:#method-swiper-removeAllSlides[swiper.removeAllSlides()] | a|
+Remove all slides
+
+____
+Only for Core version (in React & Vue it should be done by modifying
+slides array/data/source)
+____
+
+|link:#method-swiper-removeSlide[swiper.removeSlide([.text-orange]#slideIndexes#)]
+| a|
+Remove specific slide or slides. `+slideIndexes+` can be a number with
+slide index to remove or array with indexes.
+
+____
+Only for Core version (in React & Vue it should be done by modifying
+slides array/data/source)
+____
+
+|link:#method-swiper-update[swiper.update([.text-orange]#force#)] |
+|Update virtual slides state
+|===
+
+===== link:#virtual-slides-dom[]Virtual Slides Dom
+
+Since version 9, Swiper virtual slides can work with slides originally
+rendered in DOM. On initialize it will remove them from DOM, cache and
+then re-use the ones which are required:
+
+[source, html]
+----
+<div class="swiper">
+    <div class="swiper-wrapper">
+    <div class="swiper-slide">Slide 1</div>
+    <div class="swiper-slide">Slide 2</div>
+    ...
+    <div class="swiper-slide">Slide 100</div>
+    </div>
+    </div>
+    <script>
+    const swiper = new Swiper('.swiper', {
+    virtual: {
+    enabled: true,
+    },
+    });
+    </script>
+    
+----
+
+==== link:#hash-navigation[]Hash Navigation
+
+Hash navigation is intended to have a link to specific slide that allows
+to load page with specific slide opened.
+
+To make it work, you need to enable it by passing
+`+hashNavigation:true+` parameter and adding slides hashes in
+`+data-hash+` attribute:
+
+[source, html]
+----
+<div class="swiper">
+    <div class="swiper-wrapper">
+    <div class="swiper-slide" data-hash="slide1">Slide 1</div>
+    <div class="swiper-slide" data-hash="slide2">Slide 2</div>
+    <div class="swiper-slide" data-hash="slide3">Slide 3</div>
+    <div class="swiper-slide" data-hash="slide4">Slide 4</div>
+    <div class="swiper-slide" data-hash="slide5">Slide 5</div>
+    ...
+    </div>
+    </div>
+    
+----
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+    //enable hash navigation
+    hashNavigation: true,
+    });
+    
+----
+
+===== link:#hash-navigation-parameters[]Hash Navigation Parameters
+
+[cols=",,,",options="header",]
+|===
+|Name |Type |Default |Description
+|link:#param-getSlideIndex[getSlideIndex]
+|function([.text-primary]#swiper#, [.text-primary]#hash#) | |Designed to
+be used with Virtual slides when it is impossible to find slide in DOM
+by hash (e.g. not yet rendered)
+
+|link:#param-replaceState[replaceState] |boolean |false |Works in
+addition to hashnav to replace current url state with the new one
+instead of adding it to history
+
+|link:#param-watchState[watchState] |boolean |false |Set to `+true+` to
+enable also navigation through slides (when hashnav is enabled) by
+browser history or by setting directly hash on document location
+|===
+
+===== link:#hash-navigation-events[]Hash Navigation Events
+
+[cols=",,",options="header",]
+|===
+|Name |Arguments |Description
+|link:#event-hashChange[hashChange] |(swiper) |Event will be fired on
+window hash change
+
+|link:#event-hashSet[hashSet] |(swiper) |Event will be fired when swiper
+updates the hash
+|===
+
+==== link:#history-navigation[]History Navigation
+
+===== link:#history-navigation-parameters[]History Navigation Parameters
+
+[cols=",,,",options="header",]
+|===
+|Name |Type |Default |Description
+|link:#param-enabled[enabled] |boolean |false |Enables History Plugin.
+
+|link:#param-keepQuery[keepQuery] |boolean |false |Keep query parameters
+when changing browser url.
+
+|link:#param-key[key] |string |'slides' |Url key for slides
+
+|link:#param-replaceState[replaceState] |boolean |false |Works in
+addition to hashnav or history to replace current url state with the new
+one instead of adding it to history
+
+|link:#param-root[root] |string |'' |Swiper page root, useful to specify
+when you use Swiper history mode not on root website page. For example
+can be `+https://my-website.com/+` or
+`+https://my-website.com/subpage/+` or `+/subpage/+`
+|===
+
+==== link:#controller[]Controller
+
+===== link:#controller-parameters[]Controller Parameters
+
+[cols=",,,",options="header",]
+|===
+|Name |Type |Default |Description
+|link:#param-by[by] |'slide' \| 'container' |'slide' |Defines a way how
+to control another slider: slide by slide (with respect to other
+slider's grid) or depending on all slides/container (depending on total
+slider percentage).
+
+|link:#param-control[control] |any | |Pass here another Swiper instance
+or array with Swiper instances that should be controlled by this Swiper.
+Also accepts string with CSS selector of Swiper element, or HTMLElement
+of Swiper element
+
+|link:#param-inverse[inverse] |boolean |false |Set to `+true+` and
+controlling will be in inverse direction
+|===
+
+===== link:#controller-methods[]Controller Methods
+
+[cols=",,",]
+|===
+|Properties | |
+
+|link:#prop-swiper-control[swiper.control] |any |Pass here another
+Swiper instance or array with Swiper instances that should be controlled
+by this Swiper
+|===
+
+==== link:#accessibility-a11y[]Accessibility (a11y)
+
+===== link:#accessibility-parameters[]Accessibility Parameters
+
+[cols=",,,",options="header",]
+|===
+|Name |Type |Default |Description
+|link:#param-containerMessage[containerMessage] |null \| string |null
+|Message for screen readers for outer swiper container
+
+|link:#param-containerRole[containerRole] |null \| string |null |Value
+of the "role" attribute to be set on the swiper container
+
+|link:#param-containerRoleDescriptionMessage[containerRoleDescriptionMessage]
+|null \| string |null |Message for screen readers describing the role of
+outer swiper container
+
+|link:#param-enabled[enabled] |boolean |true |Enables A11y
+
+|link:#param-firstSlideMessage[firstSlideMessage] |string |'This is the
+first slide' |Message for screen readers for previous button when swiper
+is on first slide
+
+|link:#param-id[id] |null \| string \| number |null |Value of `+id+`
+attribute to be set on swiper-wrapper. If `+null+` will be generated
+automatically
+
+|link:#param-itemRoleDescriptionMessage[itemRoleDescriptionMessage]
+|null \| string |null |Message for screen readers describing the role of
+slide element
+
+|link:#param-lastSlideMessage[lastSlideMessage] |string |'This is the
+last slide' |Message for screen readers for next button when swiper is
+on last slide
+
+|link:#param-nextSlideMessage[nextSlideMessage] |string |'Next slide'
+|Message for screen readers for next button
+
+|link:#param-notificationClass[notificationClass] |string
+|'swiper-notification' |CSS class name of A11y notification
+
+|link:#param-paginationBulletMessage[paginationBulletMessage] |string
+|'Go to slide \{\{index}}' |Message for screen readers for single
+pagination bullet
+
+|link:#param-prevSlideMessage[prevSlideMessage] |string |'Previous
+slide' |Message for screen readers for previous button
+
+|link:#param-scrollOnFocus[scrollOnFocus] |boolean |true |Enables
+scrolling to the slide that has been focused
+
+|link:#param-slideLabelMessage[slideLabelMessage] |string |'\{\{index}}
+/ \{\{slidesLength}}' |Message for screen readers describing the label
+of slide element
+
+|link:#param-slideRole[slideRole] |string |'group' |Value of swiper
+slide `+role+` attribute
+|===
+

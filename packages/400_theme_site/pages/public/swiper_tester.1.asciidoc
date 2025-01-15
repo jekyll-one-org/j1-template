@@ -1,0 +1,602 @@
+---
+title:                                  Swiper Tester
+title_extention:                        Swiper Integration
+tagline:                                Swiper Integration
+
+date:                                   2025-01-07
+#last_modified:                         2025-01-01
+
+description: >
+
+keywords: >
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap,
+                                        html, html5, video, support, flash player,
+                                        quicktime, silverlight
+
+categories:                             [ Roundtrip ]
+tags:                                   [ Module, Swiper ]
+
+image:
+  path:                                 /assets/image/modules/attics/markus-spiske-1920x1280.jpg
+  width:                                1920
+  height:                               1280
+
+attic:                                  false
+regenerate:                             false
+personalization:                        true
+permalink:                              /pages/public/swiper_tester/
+
+resources:                              [ swiper, slick-slider, videoja ]
+resource_options:
+  - attic:
+      slides:
+        - url:                          /assets/image/modules/attics/markus-spiske-1920x1280.jpg
+          alt:                          Swiper Tester
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Attribute settings for section control
+//
+:swiper--features:                      false
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+Swiper, the free and most modern mobile touch slider with hardware accelerated
+transitions and amazing native behavior. It is intended to be used in mobile
+websites, mobile web apps, and mobile native/hybrid apps.
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+lorem:sentences[5]
+
+[NOTE]
+====
+Swiper is not compatible with all platforms, it is a modern touch slider
+which is focused only on modern apps/platforms to bring the best experience
+and simplicity.
+====
+
+[role="mt-5"]
+== Examples
+// See: https://swiperjs.com/demos
+
+lorem:sentences[5]
+
+[role="mt-4"]
+=== Text Slider
+
+A slider is typically used for displaying images. Still, the implementation
+for the J1 Template supports a lot more sources to be displayed as a slide
+show — simple text for example.
+
+==== Base Text Carousel
+
+Important statements or topics can be placed on top of an article or a
+paragraph to give them better visibility. You can present facts to know
+animated for the readers attention.
+
+++++
+<div id="demo_text_carousel" class="swiper textSwiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <p>
+        <big>J1 is Open Source</big>
+        <br> 
+        <i>No pain for private or professional use</i>
+      </p>
+    </div>
+    <div class="swiper-slide">
+      <p>
+        <big>Explore this site</big>
+        <br> 
+        <i>Learn what's possible if you go the Jekyll Way</i>
+      </p>
+    </div>
+    <div class="swiper-slide">
+      <p>
+        <big>Create modern static sites</big>
+        <br> 
+        <i>Secure, powerful and fast!</i>
+      </p>
+    </div>
+  </div>
+
+  <!-- div class="swiper-pagination"></div -->
+
+  <div class="autoplay-progress">
+    <svg viewBox="0 0 48 48">
+      <circle cx="24" cy="24" r="20"></circle>
+    </svg>
+    <span></span>
+  </div>  
+</div>
+
+<style>
+#demo_text_carousel {
+    border-left: 3px solid #0072ff;
+}
+
+.thumbsSlider1 {
+    height: 20% !important;
+    box-sizing: border-box;
+    padding: 10px 0 !important;
+}
+
+.swiper-slide p {
+    margin-left: 15px;
+    text-align: left;
+    font-size: 1.5rem;
+    font-weight: 400;    
+    color: var(--md-gray-700);
+    background-color: var(--md-gray-50);
+}
+
+.autoplay-progress {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  z-index: 10;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: var(--swiper-theme-color);
+}
+
+.autoplay-progress svg {
+  --progress: 0;
+  position: absolute;
+  left: 0;
+  top: 0px;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  stroke-width: 4px;
+  stroke: var(--swiper-theme-color);
+  fill: none;
+  stroke-dashoffset: calc(125.6px * (1 - var(--progress)));
+  stroke-dasharray: 125.6;
+  transform: rotate(-90deg);
+}
+
+</style>
+
+<!-- Initialize Text Swiper -->
+<script>
+$(function() {
+  // ---------------------------------------------------------------------------
+  // slider initializer
+  // ---------------------------------------------------------------------------
+  var dependencies_met_page_ready = setInterval (() => {
+    var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true : false;
+
+    if (atticFinished) {
+      const progressCircle  = document.querySelector(".autoplay-progress svg");
+      const progressContent = document.querySelector(".autoplay-progress span");
+
+      const textSwiper = new Swiper('.textSwiper', {
+          // Optional parameters
+          direction: 'horizontal',
+          loop: true,
+
+          autoplay: {
+            delay: 3000,
+            pauseOnMouseEnter: true,
+            disableOnInteraction: false
+          },
+
+          // Pagination
+          pagination: {
+              el: '.swiper-pagination',
+          },
+
+          // Navigation arrows
+          navigation: {
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev',
+          },
+
+          on: {
+            // afterInit: function (swiper) {
+            //   // do sth
+            // },        
+            // autoplayTimeLeft(s, time, progress) {
+            //   progressCircle.style.setProperty("--progress", 1 - progress);
+            //   progressContent.textContent = `${Math.ceil(time / 1000)}s`;
+            // }
+          },
+
+          // Scrollbar
+          scrollbar: {
+              el: '.swiper-scrollbar',
+          }
+      }); 
+ 
+      clearInterval(dependencies_met_page_ready);
+    } // END pageVisible
+  }, 10); // END dependencies_met_page_ready
+});    
+</script>
+++++
+
+[role="mt-4"]
+[[thumb_images]]
+=== Slider using Thumb Elements
+
+To give the users *visual control* over a slideshow, Swiper sliders may provide
+UI elements by placing mini-images or short text elements (thumbs) side-by-side
+(on the left|right), or at the bottom of a slideshow. Find below examples how
+to control such sliders by thumbs.
+
+[role="mt-4"]
+====  Image Thumbs (bottom)
+
+lorem:sentences[3]
+
+++++
+<!-- Gallery Slider -->
+<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Image Thumbs · bottom</div>
+<div class="swiper swiper-container gallerySlider">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-7.jpg" />
+    </div>
+  </div>
+</div>
+
+<!-- Thumbs Slider -->
+<div thumbsSlider="" class="swiper swiper-container thumbsSlider mt-1 mb-5">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-7.jpg" />
+    </div>
+  </div>
+</div>
+
+<!-- Initialize Image Thumbs Slider (bottom) -->
+<script>
+$(function() {
+  // ---------------------------------------------------------------------------
+  // slider initializer
+  // ---------------------------------------------------------------------------
+  var dependencies_met_page_ready = setInterval (() => {
+    var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true : false;
+
+    if (atticFinished) {
+
+      const thumbsSlider = new Swiper(".thumbsSlider", {
+        direction: 'horizontal',
+        spaceBetween: 5,
+        slidesPerView: 3,
+        grabCursor: true,
+        // freeMode: true,
+        watchSlidesProgress: true,
+      });
+
+      const gallerySlider = new Swiper(".gallerySlider", {
+        direction: 'horizontal',
+        grabCursor: true,
+        thumbs: {
+          swiper: thumbsSlider,
+        },
+      });
+
+      gallerySlider.on('slideChangeTransitionStart', function() {
+        thumbsSlider.slideTo(gallerySlider.activeIndex);
+      });
+
+      thumbsSlider.on('transitionStart', function(){
+        gallerySlider.slideTo(thumbsSlider.activeIndex);
+      });
+
+      clearInterval(dependencies_met_page_ready);
+    } // END pageVisible
+  }, 10); // END dependencies_met_page_ready
+});    
+</script>
+
+<style>
+.swiper {
+  width: 100%;
+  height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.gallerySlider {
+  width: 100%;
+  height: 80%;
+}
+
+.thumbsSlider {
+  height: 20%;
+  box-sizing: border-box;
+  padding: 10px 0;
+}
+
+.thumbsSlider .swiper-slide {
+  width: 25%;
+  height: 100%;
+  opacity: .6;
+}
+
+.thumbsSlider .swiper-slide-thumb-active {
+  opacity: 1;
+}
+
+</style>
+++++
+
+[role="mt-4"]
+====  Image Thumbs (right)
+
+lorem:sentences[3]
+
+++++
+<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Image Thumbs · right</div>
+<div class="container g-0 mb-8">
+    <div class="row gx-1">
+
+      <!-- Gallery Slider (left) -->
+      <div id="gallery_slider" class="col-md-9">
+          <div class="swiper multiSwiper swiper-container">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-7.jpg" />
+                </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- Thumbs Slider (right) -->
+      <div class="col-md-3">
+          <div class="swiper multiSwiper swiper-container thumb-slider-right">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-7.jpg" />
+                </div>
+              </div>
+          </div>
+      </div>
+
+    </div>
+</div>
+
+<style>
+/*
+.swiper-container {
+  cursor: grab; 
+}
+*/
+
+.swiper-container:active { 
+  cursor: grabbing; 
+}
+
+.multiSwiper {
+  width: 100%; 
+  height: 400px;
+}
+
+/*
+.thumb-slider-left, .thumb-slider-right {
+  box-sizing: border-box;
+  padding: 10px 0;
+}
+*/
+
+.thumb-slider-left, .thumb-slider-right
+.swiper-slide {
+  opacity: .6;
+}
+
+.thumb-slider-left, .thumb-slider-right
+.swiper-slide-thumb-active {
+  opacity: 1;
+}
+
+/*
+.swiper-slide-thumb-active {
+  top: 50%;
+  left: 0;
+  margin-top: -12px;
+  border-right: solid 12px #EDEDED;
+  border-top: solid 12px transparent;
+  border-bottom: solid 12px transparent;
+}
+*/
+
+</style>
+
+
+<!-- Initialize Multi Swiper -->
+<script>
+$(function() {
+  // ---------------------------------------------------------------------------
+  // slider initializer
+  // ---------------------------------------------------------------------------
+  var dependencies_met_page_ready = setInterval (() => {
+    var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true : false;
+
+    if (atticFinished) {
+
+      // Initialize Swiper instances
+      var thumbsSwiper = new Swiper('.col-md-3:last-child .swiper', {
+        direction: 'vertical',
+        spaceBetween: 3,
+        slidesPerView: 3,
+        grabCursor: true,
+        // centeredSlides: true,
+        // centeredSlidesBounds: true,
+        // watchOverflow: true,
+        // watchSlidesVisibility: true,
+        // watchSlidesProgress: true        
+      });
+
+      var gallerySwiper = new Swiper('.col-md-9:first-child .swiper', {
+        direction: 'horizontal',
+        grabCursor: true,
+        // watchOverflow: true,
+        // watchSlidesVisibility: true,
+        // watchSlidesProgress: true,
+        // preventInteractionOnTransition: true,
+        effect: 'fade',
+          fadeEffect: {
+          crossFade: true
+        },
+        thumbs: {
+          swiper: thumbsSwiper
+        }        
+      });
+ 
+      // Event listener for grab event
+      // gallerySwiper.on('grab', function () {
+      //   this.el.style.cursor = 'grabbing'; 
+      // });
+
+      // Event listener for release event
+      // gallerySwiper.on('release', function () {
+      //   this.el.style.cursor = 'grab'; 
+      // })
+
+      gallerySwiper.on('click', (swiper, event) => {
+        // See: http://mreq.github.io/slick-lightbox/
+        var activeIndex = swiper.activeIndex;
+
+        console.log('Clicked on the slider, index: ', activeIndex);
+
+
+        // $('#gallery_slider').slickLightbox ({
+        //   itemSelector: '> div > img'
+        //   // caption:                  slickLightboxOptions.caption,
+        //   // useHistoryApi:            slickLightboxOptions.useHistoryApi,
+        //   // background:               slickLightboxOptions.background,
+        //   // closeOnEscape:            slickLightboxOptions.closeOnEscape,
+        //   // closeOnBackdropClick:     slickLightboxOptions.closeOnBackdropClick,
+        //   // navigateByKeyboard:       slickLightboxOptions.navigateByKeyboard,
+        //   // destroyTimeout:           slickLightboxOptions.destroyTimeout,
+        //   // imageMaxHeight:           slickLightboxOptions.imageMaxHeight,
+        //   // lazy:                     slickLightboxOptions.lazy,
+        // });
+
+        // $('#gallery_slider').slickLightbox().on({
+        //   'show.slickLightbox': function()    { console.log('A `show.slickLightbox` event triggered.'); },
+        //   'shown.slickLightbox': function()   { console.log('A `shown.slickLightbox` event triggered.'); },
+        //   'hide.slickLightbox': function()    { console.log('A `hide.slickLightbox` event triggered.'); },
+        //   'hidden.slickLightbox': function()  { console.log('A `hidden.slickLightbox` event triggered.'); }
+        // });
+
+        // if (event.target.classList.contains('my-button')) {
+        //   console.log('Clicked on the button!');
+        // }
+
+      });
+
+      gallerySwiper.on('slideChangeTransitionStart', function() {
+        thumbsSwiper.slideTo(gallerySwiper.activeIndex);
+      });
+
+      thumbsSwiper.on('transitionStart', function(){
+        gallerySwiper.slideTo(thumbsSwiper.activeIndex);
+      });
+
+      clearInterval(dependencies_met_page_ready);
+    } // END pageVisible
+  }, 10); // END dependencies_met_page_ready
+});    
+</script>
+++++
+

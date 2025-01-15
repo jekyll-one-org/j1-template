@@ -94,10 +94,6 @@ Asciidoctor::Extensions.register do
               }],
               "controlBar": {
                 "pictureInPictureToggle": false,
-                "skipButtons": {
-                  "backward": 15,
-                  "forward": 15
-                },
                 "volumePanel": {
                   "inline": false
                 }

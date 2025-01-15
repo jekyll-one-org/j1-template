@@ -61,7 +61,7 @@ resource_options:
 
 // Attribute settings for section control
 //
-:ytp_audio:                             true
+:ytp_audio:                             false
 :ytp_rhythm:                            true
 :ytp_sky_elements:                      true
 :dm_video:                              false

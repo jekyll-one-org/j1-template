@@ -721,7 +721,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
           <!-- NOTE: album cover image (replaced by AJS API based on playlist) -->
           <div class="album-cover-image">
             <img
-              class="cover-image"
+              class="cover-image-{{player_playlist}} cover-image"
               src="/assets/audio/cover/default/placeholder-blue.jpg"
               data-amplitude-playlist="{{player_playlist}}"
               data-amplitude-source="{{source_media_attribute}}"
@@ -734,7 +734,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
           {% if song_progress_bar %}
           <progress
             id="large_player_progress_{{player_id}}"
-            class="large-player-progress amplitude-song-played-progress"
+            class="large-player-progress-{{player_playlist}} large-player-progress amplitude-song-played-progress"
             data-amplitude-source="{{source_media_attribute}}"
             data-amplitude-playlist="{{player_playlist}}">
 
@@ -835,20 +835,20 @@ amplitude_defaults: {{amplitude_defaults | debug}}
             <span class="current-time">
               {% if display_hours %}
               <span
-                class="amplitude-current-hours"
+                class="amplitude-current-hours-{{player_playlist}} amplitude-current-hours"
                 data-amplitude-source="{{source_media_attribute}}"
                 data-amplitude-playlist="{{player_playlist}}">
               </span>
               :
               {% endif %}
               <span
-                class="amplitude-current-minutes"
+                class="amplitude-current-minutes-{{player_playlist}} amplitude-current-minutes"
                 data-amplitude-source="{{source_media_attribute}}"
                 data-amplitude-playlist="{{player_playlist}}">
               </span>
               :
               <span
-                class="amplitude-current-seconds"
+                class="amplitude-current-seconds-{{player_playlist}} amplitude-current-seconds"
                 data-amplitude-source="{{source_media_attribute}}"
                 data-amplitude-playlist="{{player_playlist}}">
               </span>
@@ -856,20 +856,20 @@ amplitude_defaults: {{amplitude_defaults | debug}}
             <span class="duration">
               {% if display_hours %}
               <span
-                class="amplitude-duration-hours"
+                class="amplitude-duration-hours-{{player_playlist}} amplitude-duration-hours"
                 data-amplitude-source="{{source_media_attribute}}"
                 data-amplitude-playlist="{{player_playlist}}">
               </span>
               :             
               {% endif %}
               <span
-                class="amplitude-duration-minutes"
+                class="amplitude-duration-minutes-{{player_playlist}} amplitude-duration-minutes"
                 data-amplitude-source="{{source_media_attribute}}"
                 data-amplitude-playlist="{{player_playlist}}">
               </span>
               :
               <span
-                class="amplitude-duration-seconds"
+                class="amplitude-duration-seconds-{{player_playlist}} amplitude-duration-seconds"
                 data-amplitude-source="{{source_media_attribute}}"
                 data-amplitude-playlist="{{player_playlist}}">
               </span>
@@ -879,20 +879,20 @@ amplitude_defaults: {{amplitude_defaults | debug}}
 
           <div class="meta-container large-player">
             <span
-              class="song-name"
+              class="song-name-{{player_playlist}} song-name"
               data-amplitude-source="{{source_media_attribute}}"
               data-amplitude-playlist="{{player_playlist}}"
               data-amplitude-song-info="name">
             </span>
             <div class="audio-artist-album">
               <span
-                class="artist"
+                class="artist-name-{{player_playlist}} artist"
                 data-amplitude-source="{{source_media_attribute}}"
                 data-amplitude-playlist="{{player_playlist}}"
                 data-amplitude-song-info="artist">
               </span>
               <span
-                class="album"
+                class="album-name-{{player_playlist}} album"
                 data-amplitude-source="{{source_media_attribute}}"
                 data-amplitude-playlist="{{player_playlist}}"
                 data-amplitude-song-info="album">
@@ -928,7 +928,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
               <div class="playlist-screen-controls large-player">
                 <div class="playlist-screen-meta-container">
                   <span
-                    class="song-name"
+                    class="song-name-{{player_playlist}} song-name"
                     data-amplitude-source="{{source_media_attribute}}"
                     data-amplitude-playlist="{{player_playlist}}"
                     data-amplitude-song-info="name">
@@ -939,7 +939,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
                   {% for item in playlist_items %} {% if item.enabled %}
                   {% if playlist_audio_info and forloop.first %}
                   <span class="audio-info">
-                    <a class="audio-info-link" href="{{item.audio_info}}" target="_blank">
+                    <a class="audio-info-link-{player_playlist}} audio-info-link" href="{{item.audio_info}}" target="_blank">
                       <i class="mdib mdib-information md-gray-400 mdib-24px"></i>
                     </a>
                   </span>
@@ -950,13 +950,13 @@ amplitude_defaults: {{amplitude_defaults | debug}}
                   <!-- load initial (first element) rating -->
                   {% if playlist_audio_rating and forloop.first %}
                     {% if item.rating %}
-                    <span class="audio-rating">
+                    <span class="audio-rating-{player_playlist}} audio-rating">
                       {{item.rating}}
                       <i class="mdib mdib-star md-gray-400 mdib-18px"></i>
                     </span>
                     {% else %}
                     <!-- place empty (span) element (placeholder) -->
-                    <span class="audio-rating"></span>
+                    <span class="audio-rating-{player_playlist}} audio-rating"></span>
                     {% endif %}
                   {% else %}
                     {% break %}
@@ -966,6 +966,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
 
                   <div class="song-artist-album">
                     <span
+                      class="song-artist-{{player_playlist}}"
                       data-amplitude-source="{{source_media_attribute}}"
                       data-amplitude-playlist="{{player_playlist}}"
                       data-amplitude-song-info="artist">
@@ -973,6 +974,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
                     <!-- jadams, 2024-12-08: make album info configurable -->
                     <span class="song-artist-album-delimiter">·</span>
                     <span
+                      class="song-info-{{player_playlist}}"
                       data-amplitude-source="audio"
                       data-amplitude-playlist="{{player_playlist}}"
                       data-amplitude-song-info="album">
@@ -1011,7 +1013,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
                 {% for item in playlist_items %}{% if item.enabled %}
                 <!-- START list item -->
                 <div
-                  class="song amplitude-song-container-large-player-{{player_playlist}} amplitude-song-container amplitude-play-pause"
+                  class="amplitude-song-container-large-player-{{player_id}} song amplitude-song-container amplitude-play-pause"
                   data-amplitude-song-index="{{forloop.index0}}"
                   data-amplitude-source="{{source_media_attribute}}"
                   data-amplitude-playlist="{{player_playlist}}">

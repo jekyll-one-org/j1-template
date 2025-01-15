@@ -403,12 +403,12 @@ masterslider::ms_00003[role="mt-4 mb-5"]
 
 [role="mt-4"]
 [[thumb_images]]
-=== Slider using Thumb Elements
+=== Slider using UI elements
 
-To give the users better control over a slideshow, sliders provide complex UI
-elements to place dor example mini-images or short text elements side-by-side
-left or right, or at the bottom of a slideshow. Find two examples below how
-to control such a carousel element.
+To give the users *visual control* over a slideshow, Swiper sliders may provide
+UI elements by placing mini-images or short text elements (thumbs) side-by-side
+(on the left|right), or at the bottom of a slideshow. Find below examples how
+to control such sliders by thumbs.
 
 .Image controls
 masterslider::ms_00004[role="mt-4 mb-5"]
