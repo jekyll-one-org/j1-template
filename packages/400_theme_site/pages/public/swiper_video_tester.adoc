@@ -89,7 +89,14 @@ lorem:sentences[5]
 
 lorem:sentences[3]
 
+[role="mt-4"]
+[[slider-videojs]]
+=== Slider using Videos (VideoJS )
+
+lorem:sentences[3]
+
 ++++
+<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Video · VideoJS</div>
 <!-- Video Slider (master) -->
 <div class="swiper swiper-container master-slider">
   <div class="swiper-wrapper">
@@ -162,28 +169,29 @@ lorem:sentences[3]
       <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" />
     </div>
 
-</div>
+  </div> <!-- END swiper-wrapper -->
+</div> <!-- END swiper-container -->
 
 <!-- Thumbs Slider (slave|bottom) -->
-<div class="swiper swiper-container thumbs-slider thumb-slider-bottom mt-1 mb-5">
+<div class="swiper swiper-container thumbs-slider thumb-slider-bottom mt-1 mb-8">
   <div class="swiper-wrapper">
 
-    <div class="swiper-slide" data-slide-type="img">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" aria-label="ms-free-animals-1">
-    </div>
-    <div class="swiper-slide" data-slide-type="img">
-      <!-- img src="/assets/video/poster/html5/peck_pocketed.jpg" aria-label="peck_pocketed" -->
-      <img src="//img.youtube.com/vi/nV8UZJNBY6Y/maxresdefault.jpg">
-    </div>
-    <div class="swiper-slide" data-slide-type="img">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg" aria-label="ms-free-animals-1">
-    </div>      
-    <div class="swiper-slide" data-slide-type="img">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" />
-    </div>
+		<div class="swiper-slide" data-slide-type="img">
+		  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" aria-label="ms-free-animals-1">
+		</div>
+		<div class="swiper-slide" data-slide-type="img">
+		  <!-- img src="/assets/video/poster/html5/peck_pocketed.jpg" aria-label="peck_pocketed" -->
+		  <img src="//img.youtube.com/vi/nV8UZJNBY6Y/maxresdefault.jpg">
+		</div>
+		<div class="swiper-slide" data-slide-type="img">
+		  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg" aria-label="ms-free-animals-1">
+		</div>      
+		<div class="swiper-slide" data-slide-type="img">
+		  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" />
+		</div>
 
-  </div>
-</div>
+	</div> <!-- END swiper-wrapper -->
+</div> <!-- END swiper-container -->
 
 <script>
 $(function() {

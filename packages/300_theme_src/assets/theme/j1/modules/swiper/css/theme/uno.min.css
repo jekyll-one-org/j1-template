@@ -13,3 +13,142 @@
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
 */
+
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/theme/j1/modules/swiper/css/theme/uno.css
+ # Provides slider styles for theme Uno
+ # -----------------------------------------------------------------------------
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2023, 2024 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+/* Global styles
+-------------------------------------------------------------------------------- */
+
+/* Slides
+--------------------------------------------- */
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Buttons
+--------------------------------------------- */
+.swiper-button-prev,
+.swiper-rtl .swiper-button-next {
+    left: var(--swiper-navigation-sides-offset, 20px) !important;
+    right: auto;
+}
+
+.swiper-button-next,
+.swiper-rtl .swiper-button-prev {
+    right: var(--swiper-navigation-sides-offset, 20px) !important;
+    left: auto;
+}
+
+/* Autoplay
+-------------------------------------------------------------------------------- */
+
+/* Progress
+--------------------------------------------- */
+.autoplay-progress {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    z-index: 10;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: var(--swiper-theme-color);
+  }
+  
+  .autoplay-progress svg {
+    --progress: 0;
+    position: absolute;
+    left: 0;
+    top: 0px;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    stroke-width: 4px;
+    stroke: var(--swiper-theme-color);
+    fill: none;
+    stroke-dashoffset: calc(125.6px * (1 - var(--progress)));
+    stroke-dasharray: 125.6;
+    transform: rotate(-90deg);
+  }
+  
+  /* Text slider
+  ------------------------------------------------------------------------------ */
+  .swiper--text {
+    border-left: 3px solid #0072ff;
+  }
+  
+  .swiper-slide p {
+    margin-left: 15px;
+    text-align: left;
+    font-size: 1.5rem;
+    font-weight: 400;    
+    color: var(--md-gray-700);
+    background-color: var(--md-gray-50);
+  }
+  
+  /* BS Multi-Slider
+  ------------------------------------------------------------------------------ */
+  .swiper--multi {
+    height: 400px;
+  }
+  
+  /* Thumbs Slider
+  ------------------------------------------------------------------------------ */
+  .thumbs-slider:active { 
+    cursor: grabbing; 
+  }
+  
+  .thumbs-slider--top .swiper-slide {
+    height: 200px !important;
+  }
+  .thumbs-slider--bottom .swiper-slide {
+    height: 200px !important;
+  }
+  
+  .thumbs-slider--top .swiper-slide,
+  .thumbs-slider--right .swiper-slide,
+  .thumbs-slider--bottom .swiper-slide,
+  .thumbs-slider--left .swiper-slide {
+    opacity: .6;
+  }
+  
+  .thumbs-slider--top .swiper-slide-thumb-active,
+  .thumbs-slider--right .swiper-slide-thumb-active,
+  .thumbs-slider--bottom .swiper-slide-thumb-active,
+  .thumbs-slider--left .swiper-slide-thumb-active {
+    opacity: 1;
+  }
+  
+
+  

@@ -97,7 +97,7 @@ paragraph to give them better visibility. You can present facts to know
 animated for the readers attention.
 
 ++++
-<div id="demo_text_carousel" class="swiper textSwiper">
+<div id="textSwiper" class="swiper swiper--text">
   <div class="swiper-wrapper">
     <div class="swiper-slide">
       <p>
@@ -122,8 +122,6 @@ animated for the readers attention.
     </div>
   </div>
 
-  <!-- div class="swiper-pagination"></div -->
-
   <div class="autoplay-progress">
     <svg viewBox="0 0 48 48">
       <circle cx="24" cy="24" r="20"></circle>
@@ -131,58 +129,6 @@ animated for the readers attention.
     <span></span>
   </div>  
 </div>
-
-<style>
-#demo_text_carousel {
-    border-left: 3px solid #0072ff;
-}
-
-.thumbsSlider1 {
-    height: 20% !important;
-    box-sizing: border-box;
-    padding: 10px 0 !important;
-}
-
-.swiper-slide p {
-    margin-left: 15px;
-    text-align: left;
-    font-size: 1.5rem;
-    font-weight: 400;    
-    color: var(--md-gray-700);
-    background-color: var(--md-gray-50);
-}
-
-.autoplay-progress {
-  position: absolute;
-  right: 16px;
-  bottom: 16px;
-  z-index: 10;
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  color: var(--swiper-theme-color);
-}
-
-.autoplay-progress svg {
-  --progress: 0;
-  position: absolute;
-  left: 0;
-  top: 0px;
-  z-index: 10;
-  width: 100%;
-  height: 100%;
-  stroke-width: 4px;
-  stroke: var(--swiper-theme-color);
-  fill: none;
-  stroke-dashoffset: calc(125.6px * (1 - var(--progress)));
-  stroke-dasharray: 125.6;
-  transform: rotate(-90deg);
-}
-
-</style>
 
 <!-- Initialize Text Swiper -->
 <script>
@@ -197,42 +143,27 @@ $(function() {
       const progressCircle  = document.querySelector(".autoplay-progress svg");
       const progressContent = document.querySelector(".autoplay-progress span");
 
-      const textSwiper = new Swiper('.textSwiper', {
+      const textSwiper = new Swiper('#textSwiper', {
           // Optional parameters
           direction: 'horizontal',
           loop: true,
-
           autoplay: {
             delay: 3000,
             pauseOnMouseEnter: true,
             disableOnInteraction: false
           },
-
-          // Pagination
-          pagination: {
-              el: '.swiper-pagination',
-          },
-
-          // Navigation arrows
-          navigation: {
-              nextEl: '.swiper-button-next',
-              prevEl: '.swiper-button-prev',
-          },
-
-          on: {
-            // afterInit: function (swiper) {
-            //   // do sth
-            // },        
-            // autoplayTimeLeft(s, time, progress) {
-            //   progressCircle.style.setProperty("--progress", 1 - progress);
-            //   progressContent.textContent = `${Math.ceil(time / 1000)}s`;
-            // }
-          },
-
-          // Scrollbar
-          scrollbar: {
-              el: '.swiper-scrollbar',
-          }
+          // scrollbar: {
+          //     el: '.swiper-scrollbar',
+          // },
+          // on: {
+          //   // afterInit: function (swiper) {
+          //   //   // do something
+          //   // },        
+          //   // autoplayTimeLeft(s, time, progress) {
+          //   //   progressCircle.style.setProperty("--progress", 1 - progress);
+          //   //   progressContent.textContent = `${Math.ceil(time / 1000)}s`;
+          //   // }
+          // }
       }); 
  
       clearInterval(dependencies_met_page_ready);
@@ -242,24 +173,20 @@ $(function() {
 </script>
 ++++
 
+
 [role="mt-4"]
 [[thumb_images]]
-=== Slider using Thumb Elements
+=== Slider controlled by Thumb Elements
 
-To give the users *visual control* over a slideshow, Swiper sliders may provide
-UI elements by placing mini-images or short text elements (thumbs) side-by-side
-(on the left|right), or at the bottom of a slideshow. Find below examples how
-to control such sliders by thumbs.
-
-[role="mt-4"]
-====  Image Thumbs (bottom)
-
-lorem:sentences[3]
+To give the users a more *visual* control over a slideshow, Swiper sliders can
+provide UI elements by placing mini-images or short text elements (thumbs)
+side-by-side (on the left|right), or at bottom|toop of a slideshow. Find below
+examples how to control such sliders by a thumbs slave silder.
 
 ++++
 <!-- Master Slider -->
 <div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Image Thumbs · bottom</div>
-<div class="swiper swiper-container gallerySlider">
+<div id="master-slider-1" class="swiper swiper-container">
   <div class="swiper-wrapper">
     <div class="swiper-slide">
       <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" />
@@ -286,7 +213,7 @@ lorem:sentences[3]
 </div>
 
 <!-- Thumbs Slider -->
-<div thumbsSlider="" class="swiper swiper-container thumbsSlider mt-1 mb-5">
+<div id="thumbs-slider-1" class="swiper swiper-container thumbs-slider--bottom mt-1 mb-5">
   <div class="swiper-wrapper">
     <div class="swiper-slide">
       <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" />
@@ -323,7 +250,7 @@ $(function() {
 
     if (atticFinished) {
 
-      const thumbsSlider = new Swiper(".thumbs-slider", {
+      const thumbsSlider1 = new Swiper("#thumbs-slider-1", {
         direction: 'horizontal',
         spaceBetween: 5,
         slidesPerView: 3,
@@ -332,29 +259,22 @@ $(function() {
         watchSlidesProgress: true,
         on: {
           transitionStart: (swiper) => {
-            var activeIndex = swiper.activeIndex;
-            gallerySlider.slideTo(activeIndex);
+            masterSlider1.slideTo(swiper.activeIndex);
           }
-        }        
+        },
       });
 
-      const gallerySlider = new Swiper(".gallerySlider", {
+      const masterSlider1 = new Swiper("#master-slider-1", {
         direction: 'horizontal',
         thumbs: {
-          swiper: thumbsSlider,
+          swiper: thumbsSlider1,
         },
-        slideChangeTransitionStart: (swiper) => {
-          thumbsSlider.slideTo(swiper.activeIndex);
-        }
+        on: {
+          slideChangeTransitionStart: (swiper) => {
+            thumbsSlider1.slideTo(masterSlider1.activeIndex);
+          }
+        },
       });
-
-      // gallerySlider.on('slideChangeTransitionStart', function() {
-      //   thumbsSlider.slideTo(gallerySlider.activeIndex);
-      // });
-
-      // thumbsSlider.on('transitionStart', function(){
-      //   gallerySlider.slideTo(thumbsSlider.activeIndex);
-      // });
 
       clearInterval(dependencies_met_page_ready);
     } // END pageVisible
@@ -362,85 +282,41 @@ $(function() {
 });    
 </script>
 
-<style>
-
-/*
-.swiper {
-  width: 100%;
-  height: 100px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.gallerySlider {
-  width: 100%;
-  height: 80%;
-}
-
-.thumbsSlider {
-  height: 20%;
-  box-sizing: border-box;
-  padding: 10px 0;
-}
-
-.thumbsSlider .swiper-slide {
-  width: 25%;
-  height: 100%;
-  opacity: .6;
-}
-*/
-
-/*
-.thumbsSlider:active { 
-  cursor: grabbing; 
-}
-
-.thumbsSlider .swiper-slide {
-  height: 200px !important;
-  opacity: .6;
-}
-
-.thumbsSlider .swiper-slide-thumb-active {
-  opacity: 1;
-}
-*/
-
-</style>
 ++++
 
-[role="mt-4"]
-====  Image Thumbs (right)
-
-lorem:sentences[3]
+A more *compact* version using image thumbs can defined by placing the thumb
+images (slave slider) on the right of the  master slider side-by-side. The will
+reduce the size of the (master) slider, but all elements of the combined sliders
+are in a *single row*.
 
 ++++
 <div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Image Thumbs · right</div>
-<div class="container g-0 mb-8">
+<div class="container g-0 mb-5">
     <div class="row gx-1">
 
-      <!-- Gallery Slider -->
+      <!-- BS Multi Slider (left) -->
       <div id="gallery_slider" class="col-md-9">
-          <div class="swiper bs-multi-swiper swiper-container">
+          <div class="swiper swiper-container swiper--multi gallery-slider">
               <div class="swiper-wrapper">
-                <div class="swiper-slide swiper-no-swiping">
+                <div class="swiper-slide">
                   <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" />
                 </div>
-                <div class="swiper-slide swiper-no-swiping">
+                <div class="swiper-slide">
                   <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg" />
                 </div>
-                <div class="swiper-slide swiper-no-swiping">
+                <div class="swiper-slide">
                   <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" />
                 </div>
-                <div class="swiper-slide swiper-no-swiping">
+                <div class="swiper-slide">
                   <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg" />
                 </div>
-                <div class="swiper-slide swiper-no-swiping">
+                <div class="swiper-slide">
                   <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg" />
                 </div>
-                <div class="swiper-slide swiper-no-swiping">
+                <div class="swiper-slide">
                   <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg" />
                 </div>
-                <div class="swiper-slide swiper-no-swiping">
+                <div class="swiper-slide">
                   <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-7.jpg" />
                 </div>
               </div>
@@ -449,7 +325,7 @@ lorem:sentences[3]
 
       <!-- Thumbs Slider (right) -->
       <div class="col-md-3">
-          <div class="swiper bs-multi-swiper swiper-container thumb-slider-right">
+          <div id="thumbs_slider_right" class="swiper swiper-container swiper--multi thumbs-slider--right">
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
                   <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" />
@@ -479,48 +355,7 @@ lorem:sentences[3]
     </div>
 </div>
 
-<style>
-
-/*
-.swiper-container {
-  cursor: grab; 
-}
-*/
-
-.swiper-container:active { 
-  cursor: grabbing; 
-}
-
-.bs-multi-swiper {
-  width: 100%; 
-  height: 400px;
-}
-
-/*
-.thumb-slider-left, .thumb-slider-right {
-  box-sizing: border-box;
-  padding: 10px 0;
-}
-*/
-
-.thumb-slider-top .swiper-slide,
-.thumb-slider-right .swiper-slide,
-.thumb-slider-bottom .swiper-slide,
-.thumb-slider-left .swiper-slide {
-  opacity: .6;
-}
-
-.thumb-slider-top .swiper-slide-thumb-active
-.thumb-slider-right .swiper-slide-thumb-active,
-.thumb-slider-bottom .swiper-slide-thumb-active,
-.thumb-slider-left .swiper-slide-thumb-active {
-  opacity: 1;
-}
-
-</style>
-
-
-<!-- Initialize Multi Swiper -->
+<!-- Initialize BS Multi Swiper -->
 <script>
 $(function() {
   // ---------------------------------------------------------------------------
@@ -536,7 +371,6 @@ $(function() {
         direction: 'vertical',
         spaceBetween: 3,
         slidesPerView: 3,
-        freeMode: false,
         grabCursor: true,
         // centeredSlides: true,
         // centeredSlidesBounds: true,
@@ -545,7 +379,7 @@ $(function() {
         // watchSlidesProgress: true        
       });
 
-      var gallerySwiper = new Swiper('.col-md-9:first-child .swiper', {
+      var gallerySwiper = new Swiper('.col-md-9:first-child .swiper ', {
         direction: 'horizontal',
         grabCursor: true,
         // watchOverflow: true,
@@ -622,6 +456,264 @@ $(function() {
 
 [role="mt-4"]
 [[slider-videojs]]
-=== Slider using VideoJS 
+=== Slider using Video
 
-lorem:sentences[3]
+If only a *small* number of video sources should presented, the concept of
+controller based slders using Thumb Elements provide a quite *space-saving*
+way to do so.
+
+The J1 template system uses VideoJS to enable *mixed* video sliders. VideoJS
+for J1 supports VJS plugins for local Video like MP4 files or platforms like
+YouTube, Vimeo, or Dailymotion to play video *sources* from *different*
+providers.
+
+++++
+<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Video · Mixed sources</div>
+<!-- Video Slider (master) -->
+<div class="swiper swiper-container master-slider">
+  <div class="swiper-wrapper">
+
+    <div class="swiper-slide swiper-no-swiping" data-slide-type="img">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" aria-label="ms-free-animals-1">
+    </div>    
+
+    <!-- div class="swiper-slide swiper-no-swiping" data-slide-type="vdo">
+      <video
+        id="peck_pocketed_video"
+        class="video-js vjs-theme-uno"
+        controls
+        width="640" height="360"
+        poster="/assets/video/poster/html5/peck_pocketed.jpg"
+        alt="title"
+        aria-label="title"
+        data-setup='{
+          "fluid" : true,
+          "sources": [{
+            "type": "video/mp4",
+            "src": "/assets/video//html5/peck_pocketed.mp4"
+          }],
+          "controlBar": {
+            "pictureInPictureToggle": false,
+            "skipButtons": {
+              "backward": 15,
+              "forward": 15
+            },
+            "volumePanel": {
+              "inline": false
+            }
+          }
+        }'
+      > </video>
+    </div -->
+
+    <div class="swiper-slide swiper-no-swiping" data-slide-type="vdo">
+      <video
+        id="peck_pocketed_video"
+        class="video-js vjs-theme-uno"
+        controls
+        width="640" height="360"
+        poster="//img.youtube.com/vi/nV8UZJNBY6Y/maxresdefault.jpg"
+        data-setup='{
+          "fluid" : true,
+          "rel": 0,
+          "techOrder": [
+            "youtube", "html5"
+          ],
+          "sources": [{
+            "type": "video/youtube",
+            "src": "//youtube.com/watch?v=nV8UZJNBY6Y"
+          }],
+          "controlBar": {
+            "pictureInPictureToggle": false,
+            "volumePanel": {
+              "inline": false
+            }
+          }
+        }'
+      >
+      </video>
+    </div>
+
+    <div class="swiper-slide swiper-no-swiping" data-slide-type="img">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg" aria-label="ms-free-animals-3">
+    </div>       
+    <div class="swiper-slide swiper-no-swiping" data-slide-type="img">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" />
+    </div>
+
+  </div> <!-- END swiper-wrapper -->
+</div> <!-- END swiper-container -->
+
+<!-- Thumbs Slider (slave|bottom) -->
+<div class="swiper swiper-container thumbs-slider thumbs-slider--bottom mt-1 mb-8">
+  <div class="swiper-wrapper">
+
+		<div class="swiper-slide" data-slide-type="img">
+		  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" aria-label="ms-free-animals-1">
+		</div>
+		<div class="swiper-slide" data-slide-type="img">
+		  <!-- img src="/assets/video/poster/html5/peck_pocketed.jpg" aria-label="peck_pocketed" -->
+		  <img src="//img.youtube.com/vi/nV8UZJNBY6Y/maxresdefault.jpg">
+		</div>
+		<div class="swiper-slide" data-slide-type="img">
+		  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg" aria-label="ms-free-animals-1">
+		</div>      
+		<div class="swiper-slide" data-slide-type="img">
+		  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" />
+		</div>
+
+	</div> <!-- END swiper-wrapper -->
+</div> <!-- END swiper-container -->
+
+<script>
+$(function() {
+
+  // ---------------------------------------------------------------------------
+  // slider initializer
+  // ---------------------------------------------------------------------------
+  var dependencies_met_page_ready = setInterval (() => {
+    var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true : false;
+
+    if (atticFinished) {
+
+      const VIDEO_PLAYING_STATE = {
+        "PLAYING":  "PLAYING",
+        "PAUSE":    "PAUSE",
+        "ENDED":    "ENDED"
+      }; 
+
+      var vjsPlayer;
+      var vjsOptions;
+      var piSkipButtons;
+
+      var vjsPlayerType   = 'native';
+      var videoPlayStatus = VIDEO_PLAYING_STATE.PAUSE;
+
+      piSkipButtons = {
+        enabled:            true,
+        backward:           30,
+        forward:            30,
+        backwardIndex:      0,
+        forwardIndex:       0,
+        surroundPlayButton: true
+      };
+
+      // Thumbs Slider (slave|bottom)
+      // -----------------------------------------------------------------------
+      const thumbsSlider = new Swiper(".thumbs-slider", {
+        direction: 'horizontal',
+        spaceBetween: 3,
+        slidesPerView: 3,
+        grabCursor: true,
+        watchSlidesProgress: true,
+        on: {
+          transitionStart: (swiper) => {
+            var activeIndex = swiper.activeIndex;
+            masterSlider.slideTo(activeIndex);
+          }
+        }
+      });
+
+      // Initialize Master Slider
+      // -----------------------------------------------------------------------
+      // See: https://stackoverflow.com/questions/45468980/how-to-fix-event-conflicts-between-swiper-and-video-js
+      var masterSlider = new Swiper('.master-slider', {
+        autoHeight:       true,  // adapt height of the currently active slide.
+        direction:        'horizontal',
+        thumbs: {
+          swiper: thumbsSlider,
+        },
+        on: {
+          afterInit: (swiper) => {
+            // do something
+          },
+          slideChangeTransitionStart: (swiper) => {
+            thumbsSlider.slideTo(swiper.activeIndex);
+          },          
+          slideChangeTransitionEnd: (swiper) => {
+            var currentSlide      = $(swiper.slides[swiper.activeIndex]);
+            var currentSlideType  = currentSlide.data('slide-type');
+            // in case user click next before video ended
+            if (videoPlayStatus === VIDEO_PLAYING_STATE.PLAYING) {
+              vjsPlayer.pause();
+            }
+
+            switch (currentSlideType) {
+              case 'img':
+                // runNext();
+                break;
+              case 'vdo':
+                // vjsPlayer.currentTime(0);
+                // vjsPlayer.play();
+                videoPlayStatus = VIDEO_PLAYING_STATE.PLAYING;
+                break;
+              default:
+                throw new Error('invalid slide type');
+            }
+          }
+        }
+      });
+
+      // vjsPlayer.on('ended', function() {
+      //     next();
+      // });
+
+      // global function
+      // function prev() {
+      //   swiper.slidePrev();
+      // }
+
+      // function next() {
+      //   swiper.slideNext();
+      // }
+
+      // function runNext() {  
+      //   timeout = setTimeout(function () {
+      //     next()
+      //   }, waiting)
+      // }
+
+      // Initialize VideoJS player/s
+      // -----------------------------------------------------------------------
+      vjsOptions = {
+        plugins: {
+          skipButtons: {
+            backward:       30,
+            forward:        30,
+            backwardIndex:  0,
+            forwardIndex:   1
+          }
+        }
+      };
+      vjsPlayer = videojs('peck_pocketed_video', {});
+
+      // Add VJS plugins
+      // -----------------------------------------------------------------------
+      if (piSkipButtons.enabled) {
+        var backwardIndex = piSkipButtons.backwardIndex;
+        var forwardIndex  = piSkipButtons.forwardIndex;
+
+        // property 'surroundPlayButton' takes precendence
+        //
+        if (piSkipButtons.surroundPlayButton) {
+          var backwardIndex = 0;
+          var forwardIndex  = 1;
+        }
+
+        // plugin initialized with custom options
+        // See: https://videojs.com/guides/options/
+        vjsPlayer.skipButtons({
+          backwardIndex:  backwardIndex,
+          forwardIndex:   forwardIndex,
+          backward:       piSkipButtons.backward,
+          forward:        piSkipButtons.forward,
+        });
+      }
+
+      clearInterval(dependencies_met_page_ready);
+    } // END pageVisible
+  }, 10); // END dependencies_met_page_ready
+
+});
+</script>
+++++
