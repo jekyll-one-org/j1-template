@@ -139,7 +139,7 @@ SwiperJS slider.
 [TIP]
 ====
 Find all available configurable *settings* with <<Autoplay>> in
-section <<Modules>>.
+section hModules>>.
 ====
 
 [cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]

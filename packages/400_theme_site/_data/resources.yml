@@ -1924,7 +1924,7 @@ resources:
   # ----------------------------------------------------------------------------
   # Swiper
   #
-  - name:                               J1 Swiper
+  - name:                               SwiperJS
     resource:
       enabled:                          true
 
@@ -1944,6 +1944,34 @@ resources:
         files:                          [ adapter/js/swiper.js ]
         js:                             [ modules/swiper/js/swiper-bundle ]
         init_function:                  [ j1.adapter.swiper.init ]
+
+  # ----------------------------------------------------------------------------
+  # Photoswipe Lightbox
+  #
+  - name:                               Photoswipe
+    resource:
+      enabled:                          true
+
+      id:                               photoswipe
+      comment:                          Module Photoswipe
+      region:                           body-footer
+      layout:                           [ home, page, post ]
+      required:                         ondemand
+      script_load:                      defer
+      pass_init_data:                   false
+
+      data:
+        css:                            [
+                                          modules/photoswipe/css/photoswipe,
+                                          modules/photoswipe/css/photoswipe-caption-plugin,
+                                        ]
+        files:                          [
+                                          modules/photoswipe/js/photoswipe-core.min.js,
+                                          modules/photoswipe/js/photoswipe-lightbox.min.js,
+                                          modules/photoswipe/js/photoswipe-caption-plugin.min.js
+                                        ]
+        js:                             []
+        init_function:                  []
 
 # ------------------------------------------------------------------------------
 # END config

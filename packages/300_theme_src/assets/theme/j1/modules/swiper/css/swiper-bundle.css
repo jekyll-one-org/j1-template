@@ -1,14 +1,18 @@
-/**
- * Swiper 11.2.0
- * Most modern mobile touch slider and framework with hardware accelerated transitions
- * https://swiperjs.com
- *
- * Copyright 2014-2025 Vladimir Kharlampidi
- *
- * Released under the MIT License
- *
- * Released on: January 7, 2025
- */
+ /*
+ # -----------------------------------------------------------------------------
+ # ~/assets/theme/j1/modules/swiper/css/swiper-bundle.css
+ # Swiper v11.2.0 (January 7, 2025) CSS by Dmytro Semenov
+ # Provides Swiper styles, all modules included
+ # -----------------------------------------------------------------------------
+ #
+ # Product/Info:
+ # https://swiperjs.com
+ # Copyright 2014 - 2025 Vladimir Kharlampidi
+ #
+ # Swiper is licensed under the MIT License.
+ # See: https://github.com/nolimits4web/swiper/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
 
 /* FONT_START */
 @font-face {
@@ -18,6 +22,7 @@
   font-style: normal;
 }
 /* FONT_END */
+
 :root {
   --swiper-theme-color: #007aff;
   /*

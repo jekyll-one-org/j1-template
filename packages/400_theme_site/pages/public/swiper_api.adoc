@@ -67,6 +67,7 @@ resource_options:
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // See: https://swiperjs.com/swiper-api
+
 [role="dropcap"]
 Swiper is a free, modern touch slider with hardware-accelerated transitions.
 The slider is intended for desktop websites, mobile (web) apps, and native or
@@ -106,22 +107,22 @@ pages of the *built-in web*.
 
 // Include sub-documents
 // -----------------------------------------------------------------------------
-include::{documentdir}/100_swiper_features.asciidoc[]
+include::{documentdir}/swiper/100_swiper_features.asciidoc[]
 
-include::{documentdir}/100_swiper_html_layout.asciidoc[]
-include::{documentdir}/100_swiper_initialization.asciidoc[]
+include::{documentdir}/swiper/100_swiper_html_layout.asciidoc[]
+include::{documentdir}/swiper/100_swiper_initialization.asciidoc[]
 
-include::{documentdir}/110_swiper_common_options.asciidoc[]
+include::{documentdir}/swiper/110_swiper_common_options.asciidoc[]
 
-include::{documentdir}/200_swiper_parameters_a_k.asciidoc[]
-include::{documentdir}/200_swiper_parameters_l_o.asciidoc[]
-include::{documentdir}/200_swiper_parameters_p_s.asciidoc[]
-include::{documentdir}/200_swiper_parameters_t_z.asciidoc[]
+include::{documentdir}/swiper/200_swiper_parameters_a_k.asciidoc[]
+include::{documentdir}/swiper/200_swiper_parameters_l_o.asciidoc[]
+include::{documentdir}/swiper/200_swiper_parameters_p_s.asciidoc[]
+include::{documentdir}/swiper/200_swiper_parameters_t_z.asciidoc[]
 
-include::{documentdir}/300_swiper_instance_properties.asciidoc[]
+include::{documentdir}/swiper/300_swiper_instance_properties.asciidoc[]
 
-include::{documentdir}/400_swiper_modules.asciidoc[]
+include::{documentdir}/swiper/400_swiper_modules.asciidoc[]
 
-include::{documentdir}/500_swiper_methods.asciidoc[]
+include::{documentdir}/swiper/500_swiper_methods.asciidoc[]
 
-include::{documentdir}/600_swiper_events.asciidoc[]
+include::{documentdir}/swiper/600_swiper_events.asciidoc[]

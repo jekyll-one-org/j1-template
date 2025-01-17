@@ -9,7 +9,14 @@ https://swiperjs.com/swiper-api[Swiper Documentation, {browser-window--new}].
 [role="mt-4"]
 === pagination
 
-Configure pagination for a swipe slider.
+Configure the *Pagination module* for a swiper slider.
+
+[TIP]
+====
+Find all available configurable *settings* with <<Pagination>> in section
+<<Modules>>.
+====
+
 
 [cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
 |===
@@ -26,7 +33,8 @@ default settings.
 const swiper = new Swiper('.swiper', {
   pagination: {
     el: '.swiper-pagination',
-    type: 'bullets'
+    type: 'bullets',
+    clickable: true
   },
 });
 ----

@@ -1,33 +1,37 @@
-/**
- * Swiper 11.2.0
- * Most modern mobile touch slider and framework with hardware accelerated transitions
- * https://swiperjs.com
- *
- * Copyright 2014-2025 Vladimir Kharlampidi
- *
- * Released under the MIT License
- *
- * Released on: January 7, 2025
- */
+ /*
+ # -----------------------------------------------------------------------------
+ # ~/assets/theme/j1/modules/swiper/js/swiper-bundle.js
+ # Swiper v11.2.0 (January 7, 2025) CSS by Dmytro Semenov
+ # Provides Swiper JS, all modules included
+ # -----------------------------------------------------------------------------
+ #
+ # Product/Info:
+ # https://swiperjs.com
+ # Copyright 2014 - 2025 Vladimir Kharlampidi
+ #
+ # Swiper is licensed under the MIT License.
+ # See: https://github.com/nolimits4web/swiper/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
 
 var Swiper = (function () {
   'use strict';
 
-  /**
+  /*
    * SSR Window 4.0.2
-   * Better handling for window object in SSR environment
+   * Better handling for window object in SSR (Server-Side Rendering) environments
    * https://github.com/nolimits4web/ssr-window
    *
    * Copyright 2021, Vladimir Kharlampidi
-   *
    * Licensed under MIT
-   *
    * Released on: December 13, 2021
-   */
+  */
+
   /* eslint-disable no-param-reassign */
   function isObject$1(obj) {
     return obj !== null && typeof obj === 'object' && 'constructor' in obj && obj.constructor === Object;
   }
+
   function extend$1(target, src) {
     if (target === void 0) {
       target = {};
@@ -41,6 +45,7 @@ var Swiper = (function () {
       }
     });
   }
+
   const ssrDocument = {
     body: {},
     addEventListener() {},
@@ -91,11 +96,13 @@ var Swiper = (function () {
       search: ''
     }
   };
+
   function getDocument() {
     const doc = typeof document !== 'undefined' ? document : {};
     extend$1(doc, ssrDocument);
     return doc;
   }
+  
   const ssrWindow = {
     document: ssrDocument,
     navigator: {
@@ -151,6 +158,8 @@ var Swiper = (function () {
       clearTimeout(id);
     }
   };
+
+
   function getWindow() {
     const win = typeof window !== 'undefined' ? window : {};
     extend$1(win, ssrWindow);

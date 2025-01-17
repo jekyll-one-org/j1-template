@@ -3136,9 +3136,9 @@ var j1 = ((options) => {
 
       // initialize event handler for window/history/back on <ESC>
       //
-      window.onkeyup = function (event) {
-        if (event.keyCode == 27) window.history.back();
-      };
+      // window.onkeyup = function (event) {
+      //   if (event.keyCode == 27) window.history.back();
+      // };
 
       $("a[href*='#']:not([href='#'])").click(function() {
         if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {

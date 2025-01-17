@@ -1,0 +1,150 @@
+---
+title:                                  PhotoSwipe
+title_extention:                        Application Interface
+tagline:                                Application Interface
+
+date:                                   2025-01-17
+#last_modified:                         2025-01-01
+
+description: >
+                                        PhotoSwipe is a popular JavaScript image gallery library well-suited
+                                        for desktops browsers and apps on mobile devices with touchscreens. PhotoSwipe provides a smooth and engaging way to showcase images on the web, especially  on mobile devices.
+keywords: >
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap,
+                                        html, html5, slider, photoswipe
+
+categories:                             [ Manuals ]
+tags:                                   [ Module, Photoswipe ]
+
+image:
+  path:                                 /assets/image/modules/attics/markus-spiske-1920x1280.jpg
+  width:                                1920
+  height:                               1280
+
+attic:                                  false
+regenerate:                             true
+personalization:                        true
+permalink:                              /pages/public/photoswipe_api/
+
+resources:                              [ photoswipe ]
+resource_options:
+  - toccer:
+      collapseDepth:                    3
+  - attic:
+      slides:
+        - url:                          /assets/image/modules/attics/markus-spiske-1920x1280.jpg
+          alt:                          PhotoSwipe API
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Attribute settings for page content control (e.g includes)
+//
+:documentdir:                           _includes/documents
+
+// Attribute settings for section control
+//
+:photoswipe-options:                    /pages/public/photoswipe_api/#photoswipe-options
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="all" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// See: https://photoswipe.com/getting-started
+
+[role="dropcap"]
+PhotoSwipe is a popular JavaScript image gallery library well-suited for
+desktops browsers and apps on mobile devices with touchscreens. PhotoSwipe
+provides a smooth and engaging way to showcase images on the web, especially
+on mobile devices. Here's a breakdown of its key functionalities.
+
+Displays images in a lightbox::
+When you click on an image, it overlays the current page with a zoomed-in
+view of the image. Easily zoom in and out of images and pan around them.
+View images in full-screen for an immersive experience
+
+Supports galleries::
+You can link multiple images together, allowing users to easily browse
+through a collection.
+
+Touch-friendly::
+Designed with intuitive touch gestures for navigation (swiping, pinching, etc.).
+Supports touch gestures like swiping, pinching, and dragging.
+
+Responsive::
+Adapts to different screen sizes and orientations.
+
+Customizable::
+Offers various options for customization, such as themes, transitions, and
+social sharing features.
+
+Keyboard Navigation::
+Navigate through images using keyboard shortcuts.
+
+Social Sharing::
+Easily share images on social media platforms.
+
+PhotoSwipe comes with a rich https://photoswipe.com/getting-startedi[API, {browser-window--new}].
+The programming interface allows developers to create individual user
+interfaces (UI) for pagination, navigation and more. Find large number of
+complex examples on the pages of the
+https://uiinitiative.com/[UI Initiative project, {browser-window--new}].
+
+The rich API makes PhotoSwipe an excellent choice for *web developers*, not least
+for template systems like J1 Template. In the current version of the J1 template
+(version 2025.x), PhotoSwipe is the *default slider* and *replaces* the *previously*
+used *carousels* _Owl Carousel_, _Slickslider_, and _Masterslider_ by their
+implementations based on _PhotoSwipeJS_.
+
+[NOTE]
+====
+The https://photoswipe.com/getting-startedi[PhotoSwipe API documentation, {browser-window--new}]
+pages are based on version *v11.2.1* for the current J1 template version 2025.x.
+The idea of providing this documentation is *not* to simply copy the original
+pages as duplicates. For better readability and usability, all pages are
+restructured and enhanced by code examples or improved description texts.
+
+The documentation pages for the J1 Template project will be used for the 
+**AI**-based **chat client** (*planned* for 4th quarter of 2025). The agent
+will be trained by all available documentation pages of the Template system
+to give users an easy-to-use source for using the J1 Template to create
+websites for their needs.
+
+All previously used slider *resources* are available in version 2025.x for
+*backward compatibility* but are no longer used for the example
+pages of the *built-in web*.
+====
+
+// Include sub-documents
+// -----------------------------------------------------------------------------
+
+// include::{documentdir}/100_swiper_html_layout.asciidoc[]
+// include::{documentdir}/100_swiper_initialization.asciidoc[]
+
+include::{documentdir}/photoswipe/200_photoswipe_parameters.asciidoc[]
+include::{documentdir}/photoswipe/210_photoswipe_lightbox_parameters.asciidoc[]
+
+// include::{documentdir}/200_swiper_parameters_l_o.asciidoc[]
+// include::{documentdir}/200_swiper_parameters_p_s.asciidoc[]
+// include::{documentdir}/200_swiper_parameters_t_z.asciidoc[]
+
+// include::{documentdir}/300_swiper_instance_properties.asciidoc[]
+
+include::{documentdir}/photoswipe/300_caption_plugin_for_photoSwipe.asciidoc[]
+// include::{documentdir}/400_swiper_modules.asciidoc[]
+
+// include::{documentdir}/500_swiper_methods.asciidoc[]
+
+// include::{documentdir}/600_swiper_events.asciidoc[]
+

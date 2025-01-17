@@ -267,7 +267,8 @@ that represent each slide in your slider.
 
 Find below available *Parameters* for the SwiperJS *Pagination* module.
 
-[cols="3,2,3,4a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+// [cols="4a,2,2,3a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols=",,,", subs=+macros, options="header", width="100%", role="rtable mt-4"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -287,7 +288,7 @@ Find below available *Parameters* for the SwiperJS *Pagination* module.
 |Defines which HTML tag will be used to represent single pagination bullet.
 Only for pagination type of _bullets_ .
 
-|clickable
+|`clickable`
 |boolean
 |`false`
 |If `true` then clicking on pagination button will cause transition
@@ -354,7 +355,7 @@ slider's container.
 |_swiper-pagination-horizontal_
 |CSS class name set to pagination in horizontal Swiper.
 
-|lockClass
+|`lockClass`
 |string
 |_swiper-pagination-lock_
 |*CSS class name* set to pagination when it is disabled.
@@ -388,7 +389,7 @@ and horizontal progressbar for vertical swiper direction
 |_swiper-pagination-progressbar-opposite_
 |*CSS class name* of pagination progressbar opposite
 
-|renderBullet
+|`renderBullet`
 |function(args)
 |*no default*
 |This parameter allows totally customize pagination bullets, you need to

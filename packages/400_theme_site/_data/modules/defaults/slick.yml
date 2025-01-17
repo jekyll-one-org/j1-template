@@ -56,7 +56,7 @@ defaults:
   xhr_data_path:                        /assets/data/slick
 
   # ----------------------------------------------------------------------------
-  # Lightbox options (Slick Ligghtbox)
+  # Lightbox options (Slick Lightbox)
   # ----------------------------------------------------------------------------
   lightbox:
     enabled:                            false

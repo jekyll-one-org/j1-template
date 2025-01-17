@@ -7,8 +7,8 @@ exclude_from_search:                    true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/data/slick.html
- # Liquid procedure to generate the HTML portion for all Slick Carousels
+ # ~/assets/data/swiper.html
+ # Liquid procedure to generate the HTML portion for all SwiperJS Slidetrs
  # configured
  #
  # Product/Info:
@@ -40,13 +40,13 @@ exclude_from_search:                    true
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign environment       = site.environment %}
-{% assign carousel_defaults = modules.defaults.slick.defaults %}
-{% assign carousel_settings = modules.slick.settings %}
+{% assign swiper_defaults   = modules.defaults.slick.defaults %}
+{% assign swiper_settings   = modules.slick.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign carousel_options  = carousel_defaults | merge: carousel_settings %}
-{% assign carousels         = carousel_settings.carousels %}
+{% assign swiper_options    = swiper_defaults | merge: swiper_settings %}
+{% assign swipers           = swiper_settings.swipers %}
 
 {% comment %} Configure permalink settings
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -70,27 +70,27 @@ exclude_from_search:                    true
   <head>
     <!-- [INFO   ] [~/assets/data/slick.html                      ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
     <meta name="robots" content="noindex, nofollow">
-    <meta name="slick slider" content="module data file">
+    <meta name="swiper slider" content="module data file">
   </head>
   <body>
-    <!-- [INFO   ] [~/assets/data/slick.html                      ]   [collect all carousel items] -->
-    {% for carousel in carousels %}
-      {% if carousel.enabled %}
+    <!-- [INFO   ] [~/assets/data/swiper.html                      ]   [collect all carousel items] -->
+    {% for swiper in swipers %}
+      {% if swiper.enabled %}
 
-      {% comment %} Set Carousel defaults
-      {% assign carousel.lightbox.enabled  = false %}
+      {% comment %} Set Swiper defaults
+      {% assign swiper.lightbox.enabled  = false %}
       -------------------------------------------------------------------------- {% endcomment %}
 
       {% comment %} Generate HTML portion for all sliders (enabled)
       -------------------------------------------------------------------------- {% endcomment %}
 
-        {% comment %} Collect Collection Carousels
+        {% comment %} Collect Collection Swipers
         ------------------------------------------------------------------------ {% endcomment %}
-        {% if carousel.type == 'collection' %}
+        {% if swiper.type == 'collection' %}
 
           {% comment %} Set Collection data
           ---------------------------------------------------------------------- {% endcomment %}
-          {% assign collection_name  = carousel.collection %}
+          {% assign collection_name  = swiper.collection %}
 
           {% comment %} Collect Collection documents
           ---------------------------------------------------------------------- {% endcomment %}
@@ -103,17 +103,17 @@ exclude_from_search:                    true
           {% endfor %}
 
           <!-- Articles -->
-          <div id="{{carousel.id}}" class="{{carousel.id | replace: '_','-' }}">
+          <div id="{{swiper.id}}" class="{{swiper.id | replace: '_','-' }}">
 
             {% for article in articles %}
 
-              {% if carousel.translate_links %}
+              {% if swiper.translate_links %}
                 {% assign translate = "" %}
               {% else %}
                 {% assign translate = "notranslate" %}
               {% endif %}
 
-              {% if carousel.link_new_window %}
+              {% if swiper.link_new_window %}
                 {% assign target = "_blank" %}
               {% else %}
                 {% assign target = "" %}
@@ -121,7 +121,7 @@ exclude_from_search:                    true
 
               {% comment %} Collect CSS image filters
               ------------------------------------------------------------------ {% endcomment %}
-              {% assign css_filters   = carousel_defaults.filters | merge: carousel.filters %}
+              {% assign css_filters   = swiper_defaults.filters | merge: swiper.filters %}
               {% assign image_filters = 'filter:' %}
 
               {% if css_filters.enabled %}
@@ -134,9 +134,9 @@ exclude_from_search:                    true
               {% endif %}
 
               <!-- Article slide -->
-              <div class="col-lg-3 col-sm-6 mb-2 mb-lg-0 pr-{{carousel.gutters}}">
+              <div class="col-lg-3 col-sm-6 mb-2 mb-lg-0 pr-{{swiper.gutters}}">
                 <div id="{{article.title | downcase | replace: ' ' ,'_'}}" class="card bottom">
-                  <img class="{{carousel.image_styles}}" src="{{article.image.path}}" alt="{{article.title}}" style="{{image_filters}}; height: {{carousel.image_height}};">
+                  <img class="{{swiper.image_styles}}" src="{{article.image.path}}" alt="{{article.title}}" style="{{image_filters}}; height: {{swiper.image_height}};">
                   <!-- Article link (caption) -->
                   <div class="caption">
                     <a class="article-link {{translate}}"
@@ -156,22 +156,22 @@ exclude_from_search:                    true
           <!-- /Articles -->
         {% endif %}
 
-        {% comment %} Collect Post Carousels
+        {% comment %} Collect Post Swipers
         ------------------------------------------------------------------------ {% endcomment %}
-        {% if carousel.type == 'post' %}
+        {% if swiper.type == 'post' %}
 
           <!-- Posts -->
-          <div id="{{carousel.id}}" class="{{carousel.id | replace: '_','-' }}">
+          <div id="{{swiper.id}}" class="{{swiper.id | replace: '_','-' }}">
             {% for post in site.posts %}
-            {% if post.group contains carousel.group %}
+            {% if post.group contains swiper.group %}
 
-            {% if carousel.translate_links %}
+            {% if swiper.translate_links %}
               {% assign translate = "" %}
             {% else %}
               {% assign translate = "notranslate" %}
             {% endif %}
 
-            {% if carousel.link_new_window %}
+            {% if swiper.link_new_window %}
               {% assign target = "_blank" %}
             {% else %}
               {% assign target = "" %}
@@ -179,7 +179,7 @@ exclude_from_search:                    true
 
             {% comment %} Collect CSS image filters
             -------------------------------------------------------------------- {% endcomment %}
-            {% assign css_filters   = carousel_defaults.filters | merge: carousel.filters %}
+            {% assign css_filters   = swiper_defaults.filters | merge: swiper.filters %}
             {% assign image_filters = 'filter:' %}
 
             {% if css_filters.enabled %}
@@ -192,10 +192,10 @@ exclude_from_search:                    true
             {% endif %}
 
             <!-- Collect data only if group matches -->
-            <div class="col-lg-3 col-sm-6 mb-2 mb-lg-0 pr-{{carousel.gutters}}">
+            <div class="col-lg-3 col-sm-6 mb-2 mb-lg-0 pr-{{swiper.gutters}}">
               <article class="card bg-dark text-center text-white border-0 rounded-0 bottom">
-                <!--  class="card-img {{carousel.image_styles}}" src="{{post.image.path | relative_url}}" alt="{{post.title}}" style="filter: contrast(1) brightness(0.5); height: {{carousel.image_height}}; witdth: {{carousel.image_witdth}}" -->
-                <img class="card-img {{carousel.image_styles}}" src="{{post.image.path | relative_url}}" alt="{{post.title}}" style="{{image_filters}}; height: {{carousel.image_height}};">
+                <!--  class="card-img {{swiper.image_styles}}" src="{{post.image.path | relative_url}}" alt="{{post.title}}" style="filter: contrast(1) brightness(0.5); height: {{swiper.image_height}}; witdth: {{swiper.image_witdth}}" -->
+                <img class="card-img {{swiper.image_styles}}" src="{{post.image.path | relative_url}}" alt="{{post.title}}" style="{{image_filters}}; height: {{swiper.image_height}};">
 
                 <div class="card-img-overlay">
                   <div class="card-content mt-4">
@@ -249,29 +249,13 @@ exclude_from_search:                    true
         <!-- /Posts -->
         {% endif %}
 
-        {% comment %} Collect Example Carousels
+        {% comment %} Collect Image Swipers
         ------------------------------------------------------------------------ {% endcomment %}
-        {% if carousel.type == 'example' %}
-
-          <!-- Example slider -->
-          <div id="{{carousel.id}}" class="{{carousel.id | replace: '_','-' }}">
-            {% for i in (1..carousel.slides) %}
-            <div>
-              <{{carousel.style}} class="slide-item notoc mr-{{carousel.gutters}}" style="line-height: {{carousel.height}};">{{i}}</{{carousel.style}}>
-            </div>
-            {% endfor %}
-          </div>
-        <!-- /Example slider -->
-
-        {% endif %}
-
-        {% comment %} Collect Image Carousels
-        ------------------------------------------------------------------------ {% endcomment %}
-        {% if carousel.type == 'image' %}
+        {% if swiper.type == 'image' %}
 
         {% comment %} Collect CSS image filters
         ------------------------------------------------------------------------ {% endcomment %}
-        {% assign css_filters   = carousel_defaults.filters | merge: carousel.filters %}
+        {% assign css_filters   = swiper_defaults.filters | merge: swiper.filters %}
         {% assign image_filters = 'filter:' %}
 
         {% if css_filters.enabled %}
@@ -284,21 +268,21 @@ exclude_from_search:                    true
         {% endif %}
 
           <!-- Image slider -->
-          <div id="{{carousel.id}}" class="{{carousel.id | replace: '_','-' }}">
-            {% for slide in carousel.slides %}
-            <div class="col-sm-6 col-lg-4 pr-{{carousel.gutters}}">
-              <div class="card {{carousel.captions.position}}">
-              {% if carousel.lightbox.enabled %}
-                <a class="card-link" href="{{carousel.image_base_path}}/{{slide.image}}" data-caption="{{slide.caption}}" target="_blank">
-                  <img class="{{carousel.image_styles}}" src="{{carousel.image_base_path}}/{{slide.image}}" alt="{{slide.caption}}" style="{{image_filters}}; height: {{carousel.image_height}};">
+          <div id="{{swiper.id}}" class="{{swiper.id | replace: '_','-' }}">
+            {% for slide in swiper.slides %}
+            <div class="col-sm-6 col-lg-4 pr-{{swiper.gutters}}">
+              <div class="card {{swiper.captions.position}}">
+              {% if swiper.lightbox.enabled %}
+                <a class="card-link" href="{{swiper.image_base_path}}/{{slide.image}}" data-caption="{{slide.caption}}" target="_blank">
+                  <img class="{{swiper.image_styles}}" src="{{swiper.image_base_path}}/{{slide.image}}" alt="{{slide.caption}}" style="{{image_filters}}; height: {{swiper.image_height}};">
                 </a>
-                {% if carousel.captions.enabled %}
-                  <div id="{{carousel.id}}_caption"class="caption">{{slide.caption}}</div>
+                {% if swiper.captions.enabled %}
+                  <div id="{{swiper.id}}_caption"class="caption">{{slide.caption}}</div>
                 {% endif %}
               {% else %}
-                <img class="{{carousel.image_styles}}" src="{{carousel.image_base_path}}/{{slide.image}}" alt="{{slide.caption}}" style="{{image_filters}}; height: {{carousel.image_height}};"">
-                {% if carousel.captions.enabled %}
-                  <div id="{{carousel.id}}_caption"class="caption">{{slide.caption}}</div>
+                <img class="{{swiper.image_styles}}" src="{{swiper.image_base_path}}/{{slide.image}}" alt="{{slide.caption}}" style="{{image_filters}}; height: {{swiper.image_height}};"">
+                {% if swiper.captions.enabled %}
+                  <div id="{{swiper.id}}_caption"class="caption">{{slide.caption}}</div>
                 {% endif %}
               {% endif %}
               </div>

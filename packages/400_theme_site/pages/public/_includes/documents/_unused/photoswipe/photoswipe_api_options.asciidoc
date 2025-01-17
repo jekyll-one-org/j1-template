@@ -1,0 +1,629 @@
+== Options
+
+=== bgOpacity
+
+Number, `+0.8+`.
+
+Background backdrop opacity, always define it via this option and not
+via CSS rgba color.
+
+[source,prism-code,language-js,codeBlock_wPnj,docs-styled-scrollbar]
+----
+import PhotoSwipeLightbox from '/photoswipe/photoswipe-lightbox.esm.js';
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#gallery--test-bgopacity',
+  children: 'a',
+  pswpModule: () => import('/photoswipe/photoswipe.esm.js'),
+  bgOpacity: 0.2,
+});
+lightbox.init();
+----
+
+// [[gallery--test-bgopacity]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200]]
+
+=== spacing
+
+Number, `+0.1+`. Spacing between slides. Defined as ratio relative to
+the viewport width (0.1 = 10% of viewport).
+
+[source,prism-code,language-js,codeBlock_wPnj,docs-styled-scrollbar]
+----
+import PhotoSwipeLightbox from '/photoswipe/photoswipe-lightbox.esm.js';
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#gallery--test-spacing',
+  children: 'a',
+  pswpModule: () => import('/photoswipe/photoswipe.esm.js'),
+  spacing: 0.5, // 50% of viewport width
+});
+lightbox.init();
+----
+
+// [[gallery--test-spacing]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-200]]
+
+=== allowPanToNext
+
+Boolean, `+true+`. Allow swipe navigation to the next slide when the
+current slide is zoomed. Does not apply to mouse events.
+
+[source,prism-code,language-js,codeBlock_wPnj,docs-styled-scrollbar]
+----
+import PhotoSwipeLightbox from '/photoswipe/photoswipe-lightbox.esm.js';
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#gallery--test-spacing',
+  children: 'a',
+  pswpModule: () => import('/photoswipe/photoswipe.esm.js'),
+  allowPanToNext: false
+});
+lightbox.init();
+----
+
+// [[gallery--test-spacing]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-200]]
+
+=== loop
+
+Boolean, `+true+`. If set to true you'll be able to swipe from the last
+to the first image. Option is always `+false+` when there are less than
+3 slides.
+
+[source,prism-code,language-js,codeBlock_wPnj,docs-styled-scrollbar]
+----
+import PhotoSwipeLightbox from '/photoswipe/photoswipe-lightbox.esm.js';
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#gallery--test-loop',
+  children: 'a',
+  pswpModule: () => import('/photoswipe/photoswipe.esm.js'),
+  loop: false
+});
+lightbox.init();
+----
+
+// [[gallery--test-loop]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-200]]
+
+=== wheelToZoom
+
+Boolean, `+undefined+`. By default PhotoSwipe zooms image with
+ctrl-wheel, if you enable this option - image will zoom just via wheel.
+
+[source,prism-code,language-js,codeBlock_wPnj,docs-styled-scrollbar]
+----
+import PhotoSwipeLightbox from '/photoswipe/photoswipe-lightbox.esm.js';
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#gallery--test-wheelToZoom',
+  children: 'a',
+  pswpModule: () => import('/photoswipe/photoswipe.esm.js'),
+  wheelToZoom: true
+});
+lightbox.init();
+----
+
+// [[gallery--test-wheelToZoom]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-200]]
+
+
+
+
+
+// ==== pinchToCloselink:#pinchtoclose[​]
+
+// Boolean, `+true+`. Pinch touch gesture to close the gallery.
+
+// [source,prism-code,language-js,codeBlock_wPnj,docs-styled-scrollbar]
+// ----
+// import PhotoSwipeLightbox from '/photoswipe/photoswipe-lightbox.esm.js';
+// const lightbox = new PhotoSwipeLightbox({
+//   gallery: '#gallery--test-pinch-to-close',
+//   children: 'a',
+//   pswpModule: () => import('/photoswipe/photoswipe.esm.js'),
+//   pinchToClose: false
+// });
+// lightbox.init();
+// ----
+
+// [[gallery--test-pinch-to-close]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-200]]
+
+// ==== closeOnVerticalDraglink:#closeonverticaldrag[​]
+
+// Boolean, `+true+`. Vertical drag gesture to close the PhotoSwipe.
+
+// [source,prism-code,language-js,codeBlock_wPnj,docs-styled-scrollbar]
+// ----
+// import PhotoSwipeLightbox from '/photoswipe/photoswipe-lightbox.esm.js';
+// const lightbox = new PhotoSwipeLightbox({
+//   gallery: '#gallery--close-on-vertical-drag',
+//   children: 'a',
+//   pswpModule: () => import('/photoswipe/photoswipe.esm.js'),
+//   closeOnVerticalDrag: false
+// });
+// lightbox.init();
+// ----
+
+// [[gallery--close-on-vertical-drag]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-200]]
+
+// ==== paddinglink:#padding[​]
+
+// Object, `+{ top: 0, bottom: 0, left: 0, right: 0 }+`. Slide area padding
+// (in pixels).
+
+// [source,prism-code,language-js,codeBlock_wPnj,docs-styled-scrollbar]
+// ----
+// import PhotoSwipeLightbox from '/photoswipe/photoswipe-lightbox.esm.js';
+// const lightbox = new PhotoSwipeLightbox({
+//   gallery: '#gallery--test-padding',
+//   children: 'a',
+//   pswpModule: () => import('/photoswipe/photoswipe.esm.js'),
+//   padding: { top: 20, bottom: 40, left: 100, right: 100 }
+// });
+// lightbox.init();
+// ----
+
+// [[gallery--test-padding]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-200]]
+
+// ==== paddingFnlink:#paddingfn[​]
+
+// Function, should return padding object. The option is checked
+// frequently, so make sure it's performant. Overrides `+padding+` option
+// if defined. For example:
+
+// [source,prism-code,language-js,codeBlock_wPnj,docs-styled-scrollbar]
+// ----
+// import PhotoSwipeLightbox from '/photoswipe/photoswipe-lightbox.esm.js';
+// const lightbox = new PhotoSwipeLightbox({
+//   gallery: '#gallery--test-paddingfn',
+//   children: 'a',
+//   pswpModule: () => import('/photoswipe/photoswipe.esm.js'),
+
+//   paddingFn: (viewportSize, itemData, index) => {
+//     return {
+//       // check based on slide index
+//       top: index === 0 ? 100 : 0,
+
+//       // check based on viewport size
+//       bottom: viewportSize.x < 600 ? 0 : 200,
+
+//       // check based on image size
+//       left: itemData.w < 2000 ? 50 : 0,
+
+//       right: 0
+//     };
+//   }
+// });
+// lightbox.init();
+// ----
+
+// [[gallery--test-paddingfn]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-200]]
+
+// ==== hideAnimationDuration, showAnimationDuration, zoomAnimationDurationlink:#hideanimationduration-showanimationduration-zoomanimationduration[​]
+
+// Number, `+333+`. Transition duration in milliseconds, can be `+0+`.
+// link:/opening-or-closing-transition#transition-duration-and-easing[Example
+// here].
+
+// ==== easinglink:#easing[​]
+
+// String, `+'cubic-bezier(.4,0,.22,1)'+`. CSS easing function for
+// open/close/zoom transitions.
+// link:/opening-or-closing-transition#transition-duration-and-easing[Example
+// here].
+
+// ==== escKeylink:#esckey[​]
+
+// Boolean, `+true+`. Esc key to close.
+
+// [source,prism-code,language-js,codeBlock_wPnj,docs-styled-scrollbar]
+// ----
+// import PhotoSwipeLightbox from '/photoswipe/photoswipe-lightbox.esm.js';
+// const lightbox = new PhotoSwipeLightbox({
+//   gallery: '#gallery--test-esc-key',
+//   children: 'a',
+//   pswpModule: () => import('/photoswipe/photoswipe.esm.js'),
+//   escKey: false
+// });
+// lightbox.init();
+// ----
+
+// [[gallery--test-esc-key]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-200]]
+
+// ==== arrowKeyslink:#arrowkeys[​]
+
+// Boolean, `+true+`. Left/right arrow keys for navigation.
+
+// [source,prism-code,language-js,codeBlock_wPnj,docs-styled-scrollbar]
+// ----
+// import PhotoSwipeLightbox from '/photoswipe/photoswipe-lightbox.esm.js';
+// const lightbox = new PhotoSwipeLightbox({
+//   gallery: '#gallery--test-arrow-keys',
+//   children: 'a',
+//   pswpModule: () => import('/photoswipe/photoswipe.esm.js'),
+//   arrowKeys: false
+// });
+// lightbox.init();
+// ----
+
+// [[gallery--test-arrow-keys]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-200]]
+
+// ==== trapFocuslink:#trapfocus[​]
+
+// Boolean, `+true+`. Trap focus within PhotoSwipe element while it's open.
+
+// ==== returnFocuslink:#returnfocus[​]
+
+// Boolean, `+true+`. Restore focus the last active element after
+// PhotoSwipe is closed.
+
+// [source,prism-code,language-js,codeBlock_wPnj,docs-styled-scrollbar]
+// ----
+// import PhotoSwipeLightbox from '/photoswipe/photoswipe-lightbox.esm.js';
+// const lightbox = new PhotoSwipeLightbox({
+//   gallery: '#gallery--test-restore-focus',
+//   children: 'a',
+//   pswpModule: () => import('/photoswipe/photoswipe.esm.js'),
+//   returnFocus: false
+// });
+// lightbox.init();
+// ----
+
+// [[gallery--test-restore-focus]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-200]]
+
+// ==== clickToCloseNonZoomablelink:#clicktoclosenonzoomable[​]
+
+// Boolean, `+true+`. If image is not zoomable (for example, smaller than
+// viewport) it can be closed by clicking on it.
+
+// [source,prism-code,language-js,codeBlock_wPnj,docs-styled-scrollbar]
+// ----
+// import PhotoSwipeLightbox from '/photoswipe/photoswipe-lightbox.esm.js';
+// const lightbox = new PhotoSwipeLightbox({
+//   gallery: '#gallery--clickToCloseNonZoomable',
+//   children: 'a',
+//   pswpModule: () => import('/photoswipe/photoswipe.esm.js'),
+//   clickToCloseNonZoomable: false
+// });
+// lightbox.init();
+// ----
+
+// [[gallery--clickToCloseNonZoomable]]
+// https://dummyimage.com/300x200/555/fff/?text=1st-300x200[image:https://dummyimage.com/150x100/555/fff/?text=1st-150x100[https://dummyimage.com/150x100/555/fff/?text=1st-150x100]]
+// https://dummyimage.com/1000x1000/555/fff/?text=2nd-1000x1000[image:https://dummyimage.com/100x100/555/fff/?text=2nd-100x100[https://dummyimage.com/100x100/555/fff/?text=2nd-100x100]]
+// https://dummyimage.com/100x700/555/fff/?text=3rd-100x700[image:https://dummyimage.com/50x350/555/fff/?text=3rd-50x350[https://dummyimage.com/50x350/555/fff/?text=3rd-50x350]]
+
+// ==== imageClickAction, bgClickAction, tapAction, doubleTapActionlink:#imageclickaction-bgclickaction-tapaction-doubletapaction[​]
+
+// Refer to link:/click-and-tap-actions[click and tap actions] page.
+
+// ==== preloaderDelaylink:#preloaderdelay[​]
+
+// Number (ms), `+2000+`. Delay before the loading indicator will be
+// displayed, if image is loaded during it - the indicator will not be
+// displayed at all. Can be zero.
+
+// [source,prism-code,language-js,codeBlock_wPnj,docs-styled-scrollbar]
+// ----
+// import PhotoSwipeLightbox from '/photoswipe/photoswipe-lightbox.esm.js';
+// const lightbox = new PhotoSwipeLightbox({
+//   gallery: '#gallery--test-preloader-delay',
+//   children: 'a',
+//   pswpModule: () => import('/photoswipe/photoswipe.esm.js'),
+//   preloaderDelay: 0
+// });
+// lightbox.init();
+// ----
+
+// [[gallery--test-preloader-delay]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-200]]
+
+// ==== indexIndicatorSeplink:#indexindicatorsep[​]
+
+// String, `+/+`. Used for slide count indicator ("1 of 10 ").
+
+// [source,prism-code,language-js,codeBlock_wPnj,docs-styled-scrollbar]
+// ----
+// import PhotoSwipeLightbox from '/photoswipe/photoswipe-lightbox.esm.js';
+// const lightbox = new PhotoSwipeLightbox({
+//   gallery: '#gallery--test-indexIndicatorSep',
+//   children: 'a',
+//   pswpModule: () => import('/photoswipe/photoswipe.esm.js'),
+//   indexIndicatorSep: ' of '
+// });
+// lightbox.init();
+// ----
+
+// [[gallery--test-indexIndicatorSep]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-200]]
+
+// ==== getViewportSizeFnlink:#getviewportsizefn[​]
+
+// Function `+{x: width, y: height}+`, `+undefined+`. A function that
+// should return slide viewport width and height, in format
+// `+{x: 100, y: 100}+`.
+
+// [source,prism-code,language-js,codeBlock_wPnj,docs-styled-scrollbar]
+// ----
+// import PhotoSwipeLightbox from '/photoswipe/photoswipe-lightbox.esm.js';
+// const lightbox = new PhotoSwipeLightbox({
+//   gallery: '#gallery--test-getViewportSizeFn',
+//   children: 'a',
+//   pswpModule: () => import('/photoswipe/photoswipe.esm.js'),
+//   getViewportSizeFn: function(options, pswp) {
+//     return {
+//       x: document.documentElement.clientWidth - 200,
+//       y: window.innerHeight
+//     };
+//   }
+// });
+// lightbox.init();
+// ----
+
+// [[gallery--test-getViewportSizeFn]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-200]]
+
+// ==== initialZoomLevel, secondaryZoomLevel, maxZoomLevellink:#initialzoomlevel-secondaryzoomlevel-maxzoomlevel[​]
+
+// Refer to link:/adjusting-zoom-level[Adjusting zoom level] page for more
+// info. The default values are described
+// link:/adjusting-zoom-level#default-behaviour[there too].
+
+// ==== errorMsglink:#errormsg[​]
+
+// String, `+'The image cannot be loaded'+`.
+
+// Message to display when the image wasn't able to load. If you need to
+// display HTML - use link:/filters#contenterrorelement[contentErrorElement
+// filter].
+
+// [source,prism-code,language-js,codeBlock_wPnj,docs-styled-scrollbar]
+// ----
+// import PhotoSwipeLightbox from '/photoswipe/photoswipe-lightbox.esm.js';
+// const lightbox = new PhotoSwipeLightbox({
+//   gallery: '#gallery--errorMsg',
+//   children: 'a',
+//   pswpModule: () => import('/photoswipe/photoswipe.esm.js'),
+//   errorMsg: 'The photo cannot be loaded'
+// });
+// lightbox.init();
+// ----
+
+// [[gallery--errorMsg]]
+// https://picsum.photos/1200/800[image:https://dummyimage.com/300x200/555/fff/?text=0-random-image[https://dummyimage.com/300x200/555/fff/?text=0-random-image]]
+// https://example.com/broken-image-link[image:https://dummyimage.com/300x200/555/fff/?text=1st-broken-large-image[https://dummyimage.com/300x200/555/fff/?text=1st-broken-large-image]]
+// https://dummyimage.com/1000x1000/555/fff/?text=2nd-1000x1000[image:https://dummyimage.com/100x100/555/fff/?text=2nd-100x100[https://dummyimage.com/100x100/555/fff/?text=2nd-100x100]]
+// https://example.com/another-broken-image-link[image:https://dummyimage.com/300x200/555/fff/?text=3rd-broken-image-link[https://dummyimage.com/300x200/555/fff/?text=3rd-broken-image-link]]
+
+// ==== preloadlink:#preload[​]
+
+// Array, `+[1, 2]+`. Lazy loading of nearby slides based on direction of
+// movement. Should be an array with two integers, first one - number of
+// items to preload before the current image, second one - after the
+// current image. Two nearby images are always loaded.
+
+// [source,prism-code,language-js,codeBlock_wPnj,docs-styled-scrollbar]
+// ----
+// import PhotoSwipeLightbox from '/photoswipe/photoswipe-lightbox.esm.js';
+// const lightbox = new PhotoSwipeLightbox({
+//   gallery: '#gallery--test-preload',
+//   children: 'a',
+//   pswpModule: () => import('/photoswipe/photoswipe.esm.js'),
+//   preload: [1, 4]
+// });
+// lightbox.init();
+// ----
+
+// [[gallery--test-preload]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/5/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/5/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/5/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/6/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/6/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/6/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/7/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/7/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/7/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/8/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/8/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/8/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/9/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/9/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/9/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/10/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/10/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/10/img-200]]
+
+// ==== mainClasslink:#mainclass[​]
+
+// String, `+undefined+`. Class that will be added to the root element of
+// PhotoSwipe, may contain multiple separated by space. Example on
+// link:/styling#modifying-icons[Styling] page.
+
+// ==== appendToEllink:#appendtoel[​]
+
+// DOMElement, `+document.body+`. Element to which PhotoSwipe dialog will
+// be appended when it opens.
+
+// [source,prism-code,language-js,codeBlock_wPnj,docs-styled-scrollbar]
+// ----
+// import PhotoSwipeLightbox from '/photoswipe/photoswipe-lightbox.esm.js';
+// const lightbox = new PhotoSwipeLightbox({
+//   gallery: '#gallery--test-appendToEl',
+//   children: 'a',
+//   pswpModule: () => import('/photoswipe/photoswipe.esm.js'),
+//   appendToEl: document.querySelector('#__docusaurus')
+// });
+// lightbox.init();
+// ----
+
+// [[gallery--test-appendToEl]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200]]
+
+// ==== maxWidthToAnimatelink:#maxwidthtoanimate[​]
+
+// Integer, `+4000+`. Maximum width of image to animate, if initial
+// rendered image width is larger than this value - the opening/closing
+// transition will be automatically disabled.
+
+// [source,prism-code,language-js,codeBlock_wPnj,docs-styled-scrollbar]
+// ----
+// import PhotoSwipeLightbox from '/photoswipe/photoswipe-lightbox.esm.js';
+// const lightbox = new PhotoSwipeLightbox({
+//   gallery: '#gallery--test-maxWidthToAnimate',
+//   children: 'a',
+//   pswpModule: () => import('/photoswipe/photoswipe.esm.js'),
+//   maxWidthToAnimate: 800,
+// });
+// lightbox.init();
+// ----
+
+// [[gallery--test-maxWidthToAnimate]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200]]
+
+// === Lightbox module optionslink:#lightbox-module-options[​]
+
+// See link:/getting-started[getting started] and link:/data-sources[data
+// sources] for examples.
+
+// ==== gallerylink:#gallery[​]
+
+// Element, NodeList, or CSS selector (string) for the gallery element.
+
+// ==== childrenlink:#children[​]
+
+// Element, NodeList, or CSS selector (string) for elements within
+// `+gallery+`. For example, link elements. If not defined or set to false
+// - root `+gallery+` node will be used.
+
+// ==== pswpModulelink:#pswpmodule[​]
+
+// Function or Module, `+undefined+`. A function that should return
+// import() promise (if you need dynamic import), for example:
+
+// [source,prism-code,language-text,codeBlock_wPnj,docs-styled-scrollbar]
+// ----
+// pswpModule: () => import('photoswipe/dist/photoswipe.esm.js');
+// ----
+
+// Or the PhotoSwipe Core module itself, for example:
+
+// [source,prism-code,language-js,codeBlock_wPnj,docs-styled-scrollbar]
+// ----
+// import PhotoSwipeLightbox from 'photoswipe/dist/photoswipe-lightbox.esm.js';
+// import PhotoSwipe from 'photoswipe/dist/photoswipe.esm.js';
+
+// const lightbox = new PhotoSwipeLightbox({
+//   pswpModule: PhotoSwipe
+//   // ...
+// });
+// ----
+
+// ==== preloadFirstSlidelink:#preloadfirstslide[​]
+
+// Boolean, `+true+`. Loads the first slide image in parallel with
+// PhotoSwipe Core (while PhotoSwipe is opening).
+
+// [source,prism-code,language-js,codeBlock_wPnj,docs-styled-scrollbar]
+// ----
+// import PhotoSwipeLightbox from '/photoswipe/photoswipe-lightbox.esm.js';
+// const lightbox = new PhotoSwipeLightbox({
+//   gallery: '#gallery--test-appendToEl',
+//   children: 'a',
+//   pswpModule: () => import('/photoswipe/photoswipe.esm.js'),
+//   preloadFirstSlide: false
+// });
+// lightbox.init();
+// ----
+
+// [[gallery--test-appendToEl]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200]]
+
+// === Translatinglink:#translating[​]
+
+// A list of options that might need a translation:
+
+// [source,prism-code,language-text,codeBlock_wPnj,docs-styled-scrollbar]
+// ----
+// closeTitle: 'Close',
+// zoomTitle: 'Zoom',
+// arrowPrevTitle: 'Previous',
+// arrowNextTitle: 'Next',
+
+// errorMsg: 'The image cannot be loaded',
+// indexIndicatorSep: ' / ',
+// ----
+
+// Example:
+
+// [source,prism-code,language-js,codeBlock_wPnj,docs-styled-scrollbar]
+// ----
+// import PhotoSwipeLightbox from '/photoswipe/photoswipe-lightbox.esm.js';
+// const lightbox = new PhotoSwipeLightbox({
+//   gallery: '#gallery--test-i18n',
+//   children: 'a',
+
+//   closeTitle: 'Close the dialog',
+//   zoomTitle: 'Zoom the photo',
+//   arrowPrevTitle: 'Go to the previous photo',
+//   arrowNextTitle: 'Go to the next photo',
+
+//   errorMsg: 'The photo cannot be loaded',
+//   indexIndicatorSep: ' of ',
+
+//   pswpModule: () => import('/photoswipe/photoswipe.esm.js'),
+//   preloadFirstSlide: false
+// });
+// lightbox.init();
+// ----
+
+// [[gallery--test-i18n]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200]]
+// https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg[image:https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg[https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200]]

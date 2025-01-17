@@ -188,33 +188,33 @@ banner presenting exciting things about your site or the products offered.
 
 ++++
   <!-- Swiper HTML Base Slider (image)-->
-  <div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Base Silder</div>
+  <div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Base Silder · Image</div>
 
-  <div id="base_image_slider_1" class="swiper swiper-container">
+  <div id="base_image_slider_1" class="swiper swiper-container base-image-slider-1">
     <!-- jadams, 2025-01-15, customize wrapper element for HEIGHT|OUTER bullets -->
-    <!-- Slides container -->
-    <ul class="swiper-wrapper" style="margin-bottom: 3.75rem;">
-      <li class="swiper-slide">
-        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg">
-      </li>
-      <li class="swiper-slide">
-        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg">
-      </li>
-      <li class="swiper-slide">
-        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg">
-      </li>
-      <li class="swiper-slide">
-        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg">
-      </li>
-      <li class="swiper-slide">
-        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg">
-      </li>
-      <li class="swiper-slide">
-        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg">
-      </li>
-    </ul> <!-- END swiper-wrapper (slides) -->
-
-     <!-- Navigation -->
+    <div class="swiper-wrapper" style="margin-bottom: 3.75rem; height: 400px;">
+      <div class="swiper-slide">
+        <a href="/assets/image/modules/carousel/cats/cat-1.jpg" data-size="1024x768">
+          <img src="/assets/image/modules/carousel/cats/cat-1.jpg" alt="Image 1">
+        </a>
+      </div>
+      <div class="swiper-slide">
+        <a href="/assets/image/modules/carousel/cats/cat-2.jpg" data-size="1024x768">
+          <img src="/assets/image/modules/carousel/cats/cat-2.jpg" alt="Image 2">
+        </a>
+      </div>
+      <div class="swiper-slide">
+        <a href="/assets/image/modules/carousel/cats/cat-3.jpg" data-size="1024x768">
+          <img src="/assets/image/modules/carousel/cats/cat-3.jpg" alt="Image 3">
+        </a>
+      </div>
+      <div class="swiper-slide">
+        <a href="/assets/image/modules/carousel/cats/cat-4.jpg" data-size="1024x768">
+          <img src="/assets/image/modules/carousel/cats/cat-4.jpg" alt="Image 4">
+        </a>
+      </div>
+    </div> <!-- END swiper-wrapper (slides) -->
+    <!-- Navigation -->
     <div class="swiper-button-next"></div>
     <div class="swiper-button-prev"></div>
 
@@ -252,16 +252,177 @@ banner presenting exciting things about your site or the products offered.
           },
         });
 
+        // Konfiguration PhotoSwipe
+        // ---------------------------------------------------------------------
+        // var pswpElement = document.querySelectorAll('.pswp')[0];
+
+        // // Funktion, die beim Klicken auf das Bild aufgerufen wird
+        // var openPhotoSwipe = function (index) {
+        //   var items = [];
+
+        //   // Füge alle Bilder zum PhotoSwipe-Array hinzu
+        //   document.querySelectorAll('.swiper-slide a').forEach(function (link) {
+        //     var size = link.getAttribute('data-size').split('x');
+        //     var item = {
+        //       src: link.getAttribute('href'),
+        //       w: parseInt(size[0]),
+        //       h: parseInt(size[1]),
+        //       title: link.querySelector('img').alt
+        //     };
+        //     items.push(item);
+        //   });
+
+        //   // Initialisiere PhotoSwipe mit den Elementen
+        //   var options = {
+        //     index: index,
+        //     bgOpacity: 0.7,
+        //     showHideOpacity: true
+        //   };
+
+        //   var gallery = new PhotoSwipe(pswpElement, items, options);
+        //   gallery.init();
+        // };
+
+        // // Event Listener für Klicks auf die Thumbnails im Slider
+        // document.querySelectorAll('.swiper-slide a').forEach(function (link, index) {
+        //   link.addEventListener('click', function (e) {
+        //     e.preventDefault();
+        //     openPhotoSwipe(index);
+        //   });
+        // });
+
+        // Initialisiere PhotoSwipe für Swiper Slides
+        // ---------------------------------------------------------------------
+        // const swiperSlides = document.querySelectorAll('#base_image_slider_1 img');
+        // swiperSlides.forEach((slide, index) => {
+        //   slide.addEventListener('click', function() {
+        //     // Hier wird die PhotoSwipe-Funktion aufgerufen, um die Lightbox zu öffnen.
+        //     // Die genaue Implementierung hängt von deiner PhotoSwipe-Konfiguration ab.
+        //     // Üblicherweise wird ein Array mit Bildinformationen übergeben.
+        //     const items = [{
+        //       src:  slide.src,
+        //       w:    slide.naturalWidth,
+        //       h:    slide.naturalHeight
+        //     }];
+
+        //     // Öffne die PhotoSwipe-Lightbox
+        //     var pswpElement = document.querySelectorAll('.pswp')[0];
+
+        //     var photoSwipeOptions = {
+        //         // Deine PhotoSwipe-Optionen
+        //         index: 0
+        //     };
+
+        //     // Initialisiere PhotoSwipe mit den Elementen
+        //     var options = {
+        //       index: index,
+        //       bgOpacity: 0.7,
+        //       showHideOpacity: true
+        //     };
+
+        //     // var lightBox = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
+        //     var lightBox = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
+        //     lightBox.init();
+        //   });
+        // });
+
+        // Initialisiere PhotoSwipe für Swiper-Slides
+        // ---------------------------------------------------------------------
+        // const photo_swipe_options = {
+        //   gallery: '#base_image_slider_1',
+        //   pswpModule: PhotoSwipe,
+        //   // set background opacity
+        //   bgOpacity: 1,
+        //   showHideOpacity: true,
+        //   children: 'a',
+        //   loop: true,
+        //   showHideAnimationType: 'fade', /* options: fade, zoom, none */
+
+        //   /* Click on image moves to the next slide */
+        //   imageClickAction: 'next',
+        //   tapAction: 'next',
+
+        //   /* ## Hiding a specific UI element ## */
+        //   zoom: false,
+        //   close: true,
+        //   counter: true,
+        //   arrowKeys: true,
+        //   /* ## Options ## */
+        //   bgOpacity: "1",/* deafult: 0.8 */
+        //   wheelToZoom: true, /* deafult: undefined */
+        // };
+
+        // const lightbox = new PhotoSwipeLightbox(photo_swipe_options);
+
+        // lightbox.init();
+
+        // lightbox.on('change', () => {
+        //   const { pswp } = lightbox;
+        //   baseImageSlider1.slideTo(pswp.currIndex, 0, false);
+        //   console.log('Slide index', pswp.currIndex);
+        //   //console.log('Slide object', pswp.currSlide);
+        //   //console.log('Slide object data', pswp.currSlide.data);
+        // });
+
+        // /* ### PhotoSwipe events ### */
+
+        // lightbox.on('afterInit', () => {
+        //   const { pswp } = lightbox;
+        //   if(baseImageSlider1.params.autoplay.enabled){
+        //     baseImageSlider1.autoplay.stop();
+        //   };
+        // });
+
+        // lightbox.on('closingAnimationStart', () => {
+        //   //console.log('closingAnimationStart');
+        //   const { pswp } = lightbox;
+        //   baseImageSlider1.slideTo(pswp.currIndex, 0, false);
+        //   /* if autoplay enabled == true -> autoplay.start() when close lightbox */
+        //   if(baseImageSlider1.params.autoplay.enabled){
+        //     baseImageSlider1.autoplay.start();
+        //   }
+        // });
+
         clearInterval(dependencies_met_page_ready);
       } // END pageVisible
 
     }, 10); // END dependencies_met_page_ready
   });
   </script>
+
+  <style>
+
+    /*
+    .swiper-wrapper {
+      margin-bottom: 3.75rem !important;
+    }
+    */
+
+    /*
+    .swiper-wrapper--bullets-outer {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        display: flex;
+        transition-property: transform;
+        transition-timing-function: var(--swiper-wrapper-transition-timing-function, initial);
+        box-sizing: content-box;
+        margin-bottom: 3.75rem !important;
+    }
+     */
+
+    /*
+    .swiper-pagination {
+      bottom: 16px !important;
+    }
+    */
+
+  </style>  
 ++++
 
 
-[role="mt-4"]
+[role="mt-0"]
 ==== Base Slider + Lightbox
 
 Carousels are used for an exceptionally compact form of image galleries.
@@ -269,70 +430,130 @@ This example shows some pictures having individual caption text and supports
 a lightbox to enlarge images full size.
 
 ++++
-<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Base Silder · Lightbox</div>
-<div id="my_gallery" class="swiper swiper-container">
-  <!-- Slides container -->
-  <ul class="swiper-wrapper" style="margin-bottom: 3.75rem;">
-    <li class="swiper-slide">
-      <a href="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg"
-         data-pswp-width="1600"
-         data-pswp-height="900">
-        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" alt="Image 1">
-        <span class="pswp-caption-content">Caption content: Image 1</span>
-      </a>
-    </li>
-    <li class="swiper-slide">
-      <a href="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg"
+<!-- Swiper & Photoswipe-->
+<div id="my_gallery" class="swiper mySwiper">
+  <ul class="swiper-wrapper" 
+      itemscope itemtype="http://schema.org/ImageGallery">
+    <!-- Slides -->
+    <li id="slide_1"
+        class="swiper-slide"
+        itemprop="associatedMedia"
+        itemscope itemtype="http://schema.org/ImageObject">
+      <a
+        itemprop="contentUrl"
+        href="https://picsum.photos/id/911/1600/900"
         data-pswp-width="1600"
         data-pswp-height="900">
-        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg" alt="Image 2">
-        <span class="pswp-caption-content">Caption content: Image 2</span>
-      </a>
+      <img
+        src="https://picsum.photos/id/911/1600/900"
+        alt=""
+        itemprop="thumbnail" alt="Image 1 description">
+       </a>
     </li>
-    <li class="swiper-slide">
-      <a href="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg"
+    <li id="slide_2"
+        class="swiper-slide"
+        itemprop="associatedMedia"
+        itemscope itemtype="http://schema.org/ImageObject">
+      <a
+        itemprop="contentUrl"
+        href="https://picsum.photos/id/777/1600/900"
         data-pswp-width="1600"
         data-pswp-height="900">
-        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" alt="Image 3">
-        <span class="pswp-caption-content">Caption content: Image 3</span>
+      <img
+        src="https://picsum.photos/id/777/1600/900"
+        alt=""
+        itemprop="thumbnail" alt="Image 2 description">
       </a>
     </li>
-    <li class="swiper-slide">
-      <a href="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg"
+    <li id="slide_3"
+        class="swiper-slide"
+        itemprop="associatedMedia"
+        itemscope itemtype="http://schema.org/ImageObject">
+      <a
+        itemprop="contentUrl"
+        href="https://picsum.photos/id/234/1600/900"
         data-pswp-width="1600"
         data-pswp-height="900">
-        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg" alt="Image 4">
-        <span class="pswp-caption-content">Caption content: Image 4</span>
+      <img
+        src="https://picsum.photos/id/234/1600/900"
+        alt=""
+        itemprop="thumbnail" alt="Image 3 description">
       </a>
     </li>
-    <li class="swiper-slide">
-      <a href="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg"
+    <li id="slide_4" 
+        class="swiper-slide"
+        itemprop="associatedMedia"
+        itemscope itemtype="http://schema.org/ImageObject">
+      <a
+        itemprop="contentUrl"
+        href="https://picsum.photos/id/203/1600/900"
         data-pswp-width="1600"
         data-pswp-height="900">
-        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg" alt="Image 5">
-        <span class="pswp-caption-content">Caption content: Image 5</span>
-      </a>
-    </li>
-    <li class="swiper-slide">
-      <a href="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg"
-        data-pswp-width="1600"
-        data-pswp-height="900">
-        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg" alt="Image 6">
-        <span class="pswp-caption-content">Caption content: Image 6</span>
+      <img
+        src="https://picsum.photos/id/203/1600/900"
+        alt=""
+        itemprop="thumbnail" alt="Image 4 description">
       </a>
     </li>
   </ul>
-
-  <!-- Pagination -->
+  <!-- If we need pagination -->
   <div class="swiper-pagination"></div>
 
-  <!-- Navigation -->
-  <!-- div class="swiper-button-prev"></div>
-  <div class="swiper-button-next"></div -->
+  <!-- If we need navigation buttons -->
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
 </div>
+
+<style>
+
+.swiper {
+  max-width: 100%;
+  height: auto;
+}
+
+.swiper img {
+  width: 100%;
+  height: auto;
+}
+
+ul.swiper-wrapper {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+/* Swiper custom pagination */
+.swiper-pagination-bullet {
+  width: 34px;
+  height: 34px;
+  text-align: center;
+  line-height: 34px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.3);
+  transition: all 0.5s ease, color 0.5s ease;
+}
+
+/* Swiper custom pagination */
+.swiper-pagination-bullet:hover {
+  transition: background-color 0.5s ease;
+  background: rgba(0, 0, 0, 1);
+  color: white;
+}
+
+/* Swiper custom pagination active state */
+.swiper-pagination-bullet-active {
+  color: #fff;
+  background: black;
+}
+
+</style>
 
 <script>
 $(function() {
+
   var dependencies_met_page_ready = setInterval (() => {
     var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true : false;
 
@@ -342,88 +563,102 @@ $(function() {
         // slider initializer
         // ---------------------------------------------------------------------
         var swiper = new Swiper("#my_gallery", {
-          slidesPerView: 2,
-          slidesPerGroup: 2,
-          spaceBetween: 5,
+          slidesPerView: 1,
+          spaceBetween: 0,
+          centeredSlides: true,
           grabCursor: true,
+          effect: "creative",
+          creativeEffect: {
+            prev: {
+              translate: ["-50%", 0, -1],
+            },
+            next: {
+              translate: ["100%", 0, 0],
+            },
+          },
+          // If we need pagination
           loop: true,
           pagination: {
             el: '.swiper-pagination',
-            clickable: true,
+            clickable: true, /* false by deafult */
             renderBullet: function(index, className) {
               return '<span class="' + className + '">' + (index + 1) + "</span>";
             }
           },
-          // navigation: {
-          //   nextEl: '.swiper-button-next',
-          //   prevEl: '.swiper-button-prev',
-          // },
-          // autoplay: { 
-          //   delay: 4000,
-          //   disableOnInteraction: true
-          // },
+          // Navigation arrows
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+          /* remove/comment to stop autoplay*/
+          autoplay: { 
+            delay: 7000,
+            disableOnInteraction: false
+          },
+          // keyboard control
           keyboard: {
             enabled: true,
-          },
+          }
         });
 
         // ---------------------------------------------------------------------
-        // PhotoSwipe initializer
+        // Photoswipe initializer
         // ---------------------------------------------------------------------
 
-        // Setup PhotoSwipe Lightbox
-        // ---------------------------------------------------------------------
-        const myLightbox = new PhotoSwipeLightbox({
+        // import PhotoSwipeLightbox from 'https://unpkg.com/photoswipe@5.4.2/dist/photoswipe-lightbox.esm.js';
+        // import PhotoSwipe from 'https://unpkg.com/photoswipe@5.4.2/dist/photoswipe.esm.js';
+
+        const photo_swipe_options = {
           gallery: '#my_gallery',
           pswpModule: PhotoSwipe,
+          // set background opacity
           bgOpacity: 1,
           showHideOpacity: true,
           children: 'a',
           loop: true,
-          showHideAnimationType: 'zoom',
+          showHideAnimationType: 'zoom', /* options: fade, zoom, none */
+
+          /* Click on image moves to the next slide */
           imageClickAction: 'next',
           tapAction: 'next',
+
+          /* ## Hiding a specific UI element ## */
           zoom: false,
           close: true,
           counter: true,
           arrowKeys: true,
-          bgOpacity: "1",
-          wheelToZoom: true,
-          escKey: true
-        });
+          /* ## Options ## */
+          bgOpacity: "1",/* deafult: 0.8 */
+          wheelToZoom: true, /* deafult: undefined */
+        };
 
-        // Setup Lightbox Captions
-        // ---------------------------------------------------------------------
-        const captionPlugin = new PhotoSwipeDynamicCaption(myLightbox, {
-          type: 'auto'
-        });
+        const lightbox = new PhotoSwipeLightbox(photo_swipe_options);
 
-        // Initialize the Lightbox
-        // ---------------------------------------------------------------------
-        myLightbox.init();
+        lightbox.init();
 
-        // Create Lightbox Events
-        // ---------------------------------------------------------------------
-        myLightbox.on('change', () => {
-          const { pswp } = myLightbox;
+        lightbox.on('change', () => {
+          const { pswp } = lightbox;
           swiper.slideTo(pswp.currIndex, 0, false);
           console.log('Slide index', pswp.currIndex);
           console.log('Slide object', pswp.currSlide);
           console.log('Slide object data', pswp.currSlide.data);
         });
 
-        myLightbox.on('afterInit', () => {
-          const { pswp } = myLightbox;
-          if (swiper.params.autoplay.enabled) {
+        /* ### PhotoSwipe events ### */
+
+        lightbox.on('afterInit', () => {
+          const { pswp } = lightbox;
+          if(swiper.params.autoplay.enabled){
             swiper.autoplay.stop();
           };
         });
 
-        // if autoplay enabled, run autoplay.start() on (lightbox) close
-        myLightbox.on('closingAnimationStart', () => {
-          const { pswp } = myLightbox;
+        lightbox.on('closingAnimationStart', () => {
+          console.log('closingAnimationStart');
+          const { pswp } = lightbox;
           swiper.slideTo(pswp.currIndex, 0, false);
-          if (swiper.params.autoplay.enabled) {
+          /* if autoplay enabled == true -> autoplay.start() when close lightbox */
+          if(swiper.params.autoplay.enabled){
             swiper.autoplay.start();
           }
         });
@@ -431,6 +666,7 @@ $(function() {
       clearInterval(dependencies_met_page_ready);
     } // END pageVisible
   }, 10); // END dependencies_met_page_ready
+
 });
 </script>
 ++++
@@ -438,7 +674,7 @@ $(function() {
 
 [role="mt-4"]
 [[thumb_images]]
-==== Base Slider + Thumb Elements
+==== Slider controlled by Thumb Elements
 
 To give the users a more *visual* control over a slideshow, Swiper sliders can
 provide UI elements by placing mini-images or short text elements (thumbs)
@@ -447,56 +683,60 @@ examples how to control such sliders by a thumbs slave silder.
 
 ++++
 <!-- Master Slider  (top) -->
-<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Base Silder · Thumb Elements (bottom)</div>
+<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Image Thumbs · bottom</div>
 <div id="master_slider_1" class="swiper swiper-container">
 
-  <!-- Slides container -->
-  <ul class="swiper-wrapper">
-    <li class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg">
-    </li>
-    <li class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg">
-    </li>
-    <li class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg">
-    </li>
-    <li class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg">
-    </li>
-    <li class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg">
-    </li>
-    <li class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg">
-    </li>
-  </ul> <!-- END swiper-wrapper (slides) -->
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-7.jpg" />
+    </div>
+  </div> <!-- END swiper-wrapper -->
+
+</div> <!-- END swiper-container -->
 
 <!-- Thumbs Slider (bottom) -->
 <div id="thumbs_slider_1" class="swiper swiper-container thumbs-slider--bottom mt-1 mb-5">
-
-  <!-- Slides container -->
-  <ul class="swiper-wrapper">
-    <li class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg">
-    </li>
-    <li class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg">
-    </li>
-    <li class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg">
-    </li>
-    <li class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg">
-    </li>
-    <li class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg">
-    </li>
-    <li class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg">
-    </li>
-  </ul> <!-- END swiper-wrapper (slides) -->
-
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-7.jpg" />
+    </div>
+  </div>
 </div>
 
 <!-- Initialize Image Thumbs Slider (bottom) -->
@@ -550,61 +790,66 @@ reduce the size of the (master) slider, but all elements of the combined sliders
 are in a *single row*.
 
 ++++
-<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Base Silder · Thumb Elements (right)</div>
+<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Image Thumbs · right</div>
 <div class="container g-0 mb-5">
     <div class="row gx-1">
 
       <!-- BS Multi Slider (left) -->
       <div class="col-md-9">
-        <div id="master_slider_2" class="swiper swiper-container swiper--multi gallery-slider">
-            <!-- Slides container -->
-            <ul class="swiper-wrapper">
-              <li class="swiper-slide">
-                <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg">
-              </li>
-              <li class="swiper-slide">
-                <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg">
-              </li>
-              <li class="swiper-slide">
-                <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg">
-              </li>
-              <li class="swiper-slide">
-                <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg">
-              </li>
-              <li class="swiper-slide">
-                <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg">
-              </li>
-              <li class="swiper-slide">
-                <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg">
-              </li>
-            </ul> <!-- END swiper-wrapper (slides) -->
-        </div>
+          <div id="master_slider_2" class="swiper swiper-container swiper--multi gallery-slider">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-7.jpg" />
+                </div>
+              </div>
+          </div>
       </div>
 
       <!-- Thumbs Slider (right) -->
       <div class="col-md-3">
-        <div id="thumbs_slider_2" class="swiper swiper-container swiper--multi thumbs-slider--right">
-          <!-- Slides container -->
-          <ul class="swiper-wrapper">
-            <li class="swiper-slide">
-              <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg">
-            </li>
-            <li class="swiper-slide">
-              <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg">
-            </li>
-            <li class="swiper-slide">
-              <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg">
-            </li>
-            <li class="swiper-slide">
-              <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg">
-            </li>
-            <li class="swiper-slide">
-              <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg">
-            </li>
-            <li class="swiper-slide">
-              <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg">
-            </li>
-          </ul> <!-- END swiper-wrapper (slides) -->
+          <div id="thumbs_slider_2" class="swiper swiper-container swiper--multi thumbs-slider--right">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-7.jpg" />
+                </div>
+              </div>
+          </div>
       </div>
 
     </div>
@@ -718,8 +963,8 @@ providers.
 <div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Video · Mixed sources</div>
 <!-- Master Slider (top) -->
 <div id="master_slider_3" class="swiper swiper-container master-slider">
-
   <div class="swiper-wrapper">
+
     <div class="swiper-slide swiper-no-swiping" data-slide-type="img">
       <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" aria-label="ms-free-animals-1">
     </div>    
@@ -783,18 +1028,18 @@ providers.
 
     <div class="swiper-slide swiper-no-swiping" data-slide-type="img">
       <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg" aria-label="ms-free-animals-3">
-    </div>
+    </div>       
     <div class="swiper-slide swiper-no-swiping" data-slide-type="img">
       <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" />
     </div>
-  </div> <!-- END swiper-wrapper -->
 
+  </div> <!-- END swiper-wrapper -->
 </div> <!-- END swiper-container -->
 
 <!-- Thumbs Slider (bottom) -->
 <div id="thumbs_slider_3" class="swiper swiper-container thumbs-slider thumbs-slider--bottom mt-1 mb-8">
-
   <div class="swiper-wrapper">
+
 		<div class="swiper-slide" data-slide-type="img">
 		  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" aria-label="ms-free-animals-1">
 		</div>
@@ -808,8 +1053,8 @@ providers.
 		<div class="swiper-slide" data-slide-type="img">
 		  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" />
 		</div>
-	</div> <!-- END swiper-wrapper -->
 
+	</div> <!-- END swiper-wrapper -->
 </div> <!-- END swiper-container -->
 
 <script>
