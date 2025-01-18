@@ -181,14 +181,14 @@ images as a series. Find with the following some examples of how to use
 a slider for your image data.
 
 [role="mt-4"]
-==== Base Silder
+==== Base Silder + Captions
 
 A simple image show is useful, for example, as an animated (or not animated)
 banner presenting exciting things about your site or the products offered.
 
 ++++
   <!-- Swiper HTML Base Slider (image)-->
-  <div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Base Silder</div>
+  <div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Base Silder · Captions</div>
 
   <div id="base_image_slider_1" class="swiper swiper-container">
     <!-- jadams, 2025-01-15, customize wrapper element for HEIGHT|OUTER bullets -->
@@ -196,27 +196,33 @@ banner presenting exciting things about your site or the products offered.
     <ul class="swiper-wrapper" style="margin-bottom: 3.75rem;">
       <li class="swiper-slide">
         <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg">
+        <div class="caption"> Image 1</div>
       </li>
       <li class="swiper-slide">
         <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg">
+        <div class="caption">Image 2</div>
       </li>
       <li class="swiper-slide">
         <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg">
+        <div class="caption">Image 3</div>
       </li>
       <li class="swiper-slide">
         <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg">
+        <div class="caption">Image 4</div>
       </li>
       <li class="swiper-slide">
         <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg">
+        <div class="caption">Image 5</div>
       </li>
       <li class="swiper-slide">
         <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg">
+        <div class="caption">Image 6</div>
       </li>
     </ul> <!-- END swiper-wrapper (slides) -->
 
-     <!-- Navigation -->
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
+    <!-- Navigation -->
+    <!-- div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div -->
 
     <!-- Pagination -->
     <!-- jadams, 2025-01-15, customize pagination element for OUTER bullets -->
@@ -238,10 +244,10 @@ banner presenting exciting things about your site or the products offered.
           slidesPerView: 2,
           slidesPerGroup: 2,
           spaceBetween: 5,
-          navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-          },
+          // navigation: {
+          //   nextEl: ".swiper-button-next",
+          //   prevEl: ".swiper-button-prev",
+          // },
           pagination: {
             el: ".swiper-pagination",
             type: 'bullets',
@@ -249,7 +255,7 @@ banner presenting exciting things about your site or the products offered.
             renderBullet: function (index, className) {
               return '<span class="' + className + '">' + (index + 1) + "</span>";
             }
-          },
+          }        
         });
 
         clearInterval(dependencies_met_page_ready);
@@ -262,14 +268,14 @@ banner presenting exciting things about your site or the products offered.
 
 
 [role="mt-4"]
-==== Base Slider + Lightbox
+==== Base Slider + Captions + Lightbox
 
 Carousels are used for an exceptionally compact form of image galleries.
 This example shows some pictures having individual caption text and supports
 a lightbox to enlarge images full size.
 
 ++++
-<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Base Silder · Lightbox</div>
+<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Base Silder · Captions + Lightbox</div>
 <div id="my_gallery" class="swiper swiper-container">
   <!-- Slides container -->
   <ul class="swiper-wrapper" style="margin-bottom: 3.75rem;">
@@ -278,7 +284,8 @@ a lightbox to enlarge images full size.
          data-pswp-width="1600"
          data-pswp-height="900">
         <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" alt="Image 1">
-        <span class="pswp-caption-content">Caption content: Image 1</span>
+        <div class="caption">Image 1</div>
+        <span class="pswp-caption-content">Image 1</span>
       </a>
     </li>
     <li class="swiper-slide">
@@ -286,7 +293,8 @@ a lightbox to enlarge images full size.
         data-pswp-width="1600"
         data-pswp-height="900">
         <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg" alt="Image 2">
-        <span class="pswp-caption-content">Caption content: Image 2</span>
+        <div class="caption">Image 2</div>
+        <span class="pswp-caption-content">Image 2</span>
       </a>
     </li>
     <li class="swiper-slide">
@@ -294,7 +302,8 @@ a lightbox to enlarge images full size.
         data-pswp-width="1600"
         data-pswp-height="900">
         <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" alt="Image 3">
-        <span class="pswp-caption-content">Caption content: Image 3</span>
+        <div class="caption">Image 3</div>
+        <span class="pswp-caption-content">Image 3</span>
       </a>
     </li>
     <li class="swiper-slide">
@@ -302,7 +311,8 @@ a lightbox to enlarge images full size.
         data-pswp-width="1600"
         data-pswp-height="900">
         <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg" alt="Image 4">
-        <span class="pswp-caption-content">Caption content: Image 4</span>
+        <div class="caption">Image 4</div>
+        <span class="pswp-caption-content">Image 4</span>
       </a>
     </li>
     <li class="swiper-slide">
@@ -310,7 +320,8 @@ a lightbox to enlarge images full size.
         data-pswp-width="1600"
         data-pswp-height="900">
         <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg" alt="Image 5">
-        <span class="pswp-caption-content">Caption content: Image 5</span>
+        <div class="caption">Image 5</div>
+        <span class="pswp-caption-content">Image 5</span>
       </a>
     </li>
     <li class="swiper-slide">
@@ -318,7 +329,8 @@ a lightbox to enlarge images full size.
         data-pswp-width="1600"
         data-pswp-height="900">
         <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg" alt="Image 6">
-        <span class="pswp-caption-content">Caption content: Image 6</span>
+        <div class="caption">Image 6</div>
+        <span class="pswp-caption-content">Image 6</span>
       </a>
     </li>
   </ul>
@@ -435,10 +447,9 @@ $(function() {
 </script>
 ++++
 
-
 [role="mt-4"]
-[[thumb_images]]
-==== Base Slider + Thumb Elements
+[[image_thumbs_silder_bottom]]
+==== Thumbs Slider (bottom)
 
 To give the users a more *visual* control over a slideshow, Swiper sliders can
 provide UI elements by placing mini-images or short text elements (thumbs)
@@ -447,13 +458,13 @@ examples how to control such sliders by a thumbs slave silder.
 
 ++++
 <!-- Master Slider  (top) -->
-<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Base Silder · Thumb Elements (bottom)</div>
+<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Thumbs Silder · Bottom</div>
 <div id="master_slider_1" class="swiper swiper-container">
 
   <!-- Slides container -->
   <ul class="swiper-wrapper">
     <li class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg">      
     </li>
     <li class="swiper-slide">
       <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg">
@@ -470,7 +481,9 @@ examples how to control such sliders by a thumbs slave silder.
     <li class="swiper-slide">
       <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg">
     </li>
-  </ul> <!-- END swiper-wrapper (slides) -->
+  </ul> <!-- END swiper-wrapper -->
+
+</div> <!-- END swiper-container -->
 
 <!-- Thumbs Slider (bottom) -->
 <div id="thumbs_slider_1" class="swiper swiper-container thumbs-slider--bottom mt-1 mb-5">
@@ -495,9 +508,9 @@ examples how to control such sliders by a thumbs slave silder.
     <li class="swiper-slide">
       <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg">
     </li>
-  </ul> <!-- END swiper-wrapper (slides) -->
+  </ul> <!-- END swiper-wrapper -->
 
-</div>
+</div> <!-- END swiper-container -->
 
 <!-- Initialize Image Thumbs Slider (bottom) -->
 <script>
@@ -544,13 +557,17 @@ $(function() {
 </script>
 ++++
 
+[role="mt-4"]
+[[image_thumbs_silder_right]]
+==== Thumbs Slider (right) + Captions
+
 A more *compact* version using image thumbs can defined by placing the thumb
 images (slave slider) on the right of the  master slider side-by-side. The will
 reduce the size of the (master) slider, but all elements of the combined sliders
 are in a *single row*.
 
 ++++
-<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Base Silder · Thumb Elements (right)</div>
+<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Thumbs Silder · Right + Captions</div>
 <div class="container g-0 mb-5">
     <div class="row gx-1">
 
@@ -561,25 +578,31 @@ are in a *single row*.
             <ul class="swiper-wrapper">
               <li class="swiper-slide">
                 <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg">
+                <div class="caption">Image 1</div>
               </li>
               <li class="swiper-slide">
                 <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg">
+                <div class="caption">Image 2</div>
               </li>
               <li class="swiper-slide">
                 <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg">
+                <div class="caption">Image 3</div>
               </li>
               <li class="swiper-slide">
                 <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg">
+                <div class="caption">Image 4</div>
               </li>
               <li class="swiper-slide">
                 <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg">
+                <div class="caption">Image 5</div>
               </li>
               <li class="swiper-slide">
                 <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg">
+                <div class="caption">Image 6</div>
               </li>
-            </ul> <!-- END swiper-wrapper (slides) -->
-        </div>
-      </div>
+            </ul> <!-- END swiper-wrapper -->
+        </div> <!-- END swiper-container -->
+      </div> <!-- END col-md-9"  -->
 
       <!-- Thumbs Slider (right) -->
       <div class="col-md-3">
@@ -588,27 +611,34 @@ are in a *single row*.
           <ul class="swiper-wrapper">
             <li class="swiper-slide">
               <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg">
+              <div class="caption">Image 1</div>
             </li>
             <li class="swiper-slide">
               <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg">
+              <div class="caption">Image 2</div>
             </li>
             <li class="swiper-slide">
               <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg">
+              <div class="caption">Image 3</div>
             </li>
             <li class="swiper-slide">
               <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg">
+              <div class="caption">Image 4</div>
             </li>
             <li class="swiper-slide">
               <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg">
+              <div class="caption">Image 5</div>
             </li>
             <li class="swiper-slide">
               <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg">
+              <div class="caption">Image 6</div>
             </li>
-          </ul> <!-- END swiper-wrapper (slides) -->
-      </div>
+          </ul> <!-- END swiper-wrapper -->
+        </div> <!-- END swiper-container -->
+      </div> <!-- END col-md-3"  -->
 
-    </div>
-</div>
+    </div> <!-- END BS row -->
+</div> <!-- END BS container -->
 
 <!-- Initialize BS Multi Swiper -->
 <script>
@@ -624,7 +654,7 @@ $(function() {
       // Initialize Thumb Swiper instance (right)
       var thumbsSwiper2 = new Swiper('#thumbs_slider_2', {
         direction: 'vertical',
-        spaceBetween: 3,
+        spaceBetween: 5,
         slidesPerView: 3,
         grabCursor: true,
         // centeredSlides: true,
@@ -664,35 +694,6 @@ $(function() {
         }
       });
 
-      masterSwiper2.on('click', (swiper, event) => {
-        //( console.log('Clicked on the slider, index: ', swiper.activeIndex);
-
-        // See: http://mreq.github.io/slick-lightbox/
-        // $('#gallery_slider').slickLightbox ({
-        //   itemSelector: '> div > img'
-        //   // caption:                  slickLightboxOptions.caption,
-        //   // useHistoryApi:            slickLightboxOptions.useHistoryApi,
-        //   // background:               slickLightboxOptions.background,
-        //   // closeOnEscape:            slickLightboxOptions.closeOnEscape,
-        //   // closeOnBackdropClick:     slickLightboxOptions.closeOnBackdropClick,
-        //   // navigateByKeyboard:       slickLightboxOptions.navigateByKeyboard,
-        //   // destroyTimeout:           slickLightboxOptions.destroyTimeout,
-        //   // imageMaxHeight:           slickLightboxOptions.imageMaxHeight,
-        //   // lazy:                     slickLightboxOptions.lazy,
-        // });
-
-        // $('#gallery_slider').slickLightbox().on({
-        //   'show.slickLightbox': function()    { console.log('A `show.slickLightbox` event triggered.'); },
-        //   'shown.slickLightbox': function()   { console.log('A `shown.slickLightbox` event triggered.'); },
-        //   'hide.slickLightbox': function()    { console.log('A `hide.slickLightbox` event triggered.'); },
-        //   'hidden.slickLightbox': function()  { console.log('A `hidden.slickLightbox` event triggered.'); }
-        // });
-
-        // if (event.target.classList.contains('my-button')) {
-        //   console.log('Clicked on the button!');
-        // }
-      });
-
       clearInterval(dependencies_met_page_ready);
     } // END pageVisible
   }, 10); // END dependencies_met_page_ready
@@ -703,7 +704,7 @@ $(function() {
 
 [role="mt-4"]
 [[slider-videojs]]
-=== Slider using Video
+=== Video Slider
 
 If only a *small* number of video sources should presented, the concept of
 controller based slders using Thumb Elements provide a quite *space-saving*
@@ -715,16 +716,16 @@ YouTube, Vimeo, or Dailymotion to play video *sources* from *different*
 providers.
 
 ++++
-<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Video · Mixed sources</div>
+<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Video Slider · Mixed Sources + Captions</div>
 <!-- Master Slider (top) -->
 <div id="master_slider_3" class="swiper swiper-container master-slider">
-
   <div class="swiper-wrapper">
-    <div class="swiper-slide swiper-no-swiping" data-slide-type="img">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" aria-label="ms-free-animals-1">
+    <div class="swiper-slide swiper-no-swiping" data-slide-type="image">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" aria-label="Animals-1">
+      <div class="caption">Image 1</div>
     </div>    
 
-    <!-- div class="swiper-slide swiper-no-swiping" data-slide-type="vdo">
+    <!-- div class="swiper-slide swiper-no-swiping" data-slide-type="video">
       <video
         id="peck_pocketed_video"
         class="video-js vjs-theme-uno"
@@ -753,13 +754,13 @@ providers.
       > </video>
     </div -->
 
-    <div class="swiper-slide swiper-no-swiping" data-slide-type="vdo">
+    <div class="swiper-slide swiper-no-swiping" data-slide-type="video">
       <video
         id="peck_pocketed_video"
         class="video-js vjs-theme-uno"
         controls
         width="640" height="360"
-        poster="//img.youtube.com/vi/nV8UZJNBY6Y/maxresdefault.jpg"
+        poster="//img.youtube.com/vi/1J2qz6B-PFY/maxresdefault.jpg"
         data-setup='{
           "fluid" : true,
           "rel": 0,
@@ -768,7 +769,7 @@ providers.
           ],
           "sources": [{
             "type": "video/youtube",
-            "src": "//youtube.com/watch?v=nV8UZJNBY6Y"
+            "src": "//youtube.com/watch?v=1J2qz6B-PFY"
           }],
           "controlBar": {
             "pictureInPictureToggle": false,
@@ -779,13 +780,16 @@ providers.
         }'
       >
       </video>
+      <div class="caption">Roni Sagi & Rhythm · AGT 2024 (YouTube)</div>
     </div>
 
-    <div class="swiper-slide swiper-no-swiping" data-slide-type="img">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg" aria-label="ms-free-animals-3">
+    <div class="swiper-slide swiper-no-swiping" data-slide-type="image">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg" aria-label="Animals-2">
+      <div class="caption">Image 2</div>
     </div>
-    <div class="swiper-slide swiper-no-swiping" data-slide-type="img">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" />
+    <div class="swiper-slide swiper-no-swiping" data-slide-type="image">
+      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" aria-label="Animals-3">
+      <div class="caption">Image 3</div>
     </div>
   </div> <!-- END swiper-wrapper -->
 
@@ -795,18 +799,21 @@ providers.
 <div id="thumbs_slider_3" class="swiper swiper-container thumbs-slider thumbs-slider--bottom mt-1 mb-8">
 
   <div class="swiper-wrapper">
-		<div class="swiper-slide" data-slide-type="img">
-		  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" aria-label="ms-free-animals-1">
+		<div class="swiper-slide">
+		  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" aria-label="Animals-1">
+      <div class="caption">Image 1</div>
 		</div>
-		<div class="swiper-slide" data-slide-type="img">
+		<div class="swiper-slide">
 		  <!-- img src="/assets/video/poster/html5/peck_pocketed.jpg" aria-label="peck_pocketed" -->
-		  <img src="//img.youtube.com/vi/nV8UZJNBY6Y/maxresdefault.jpg">
+		  <img src="//img.youtube.com/vi/1J2qz6B-PFY/maxresdefault.jpg">
+      <div class="caption">Roni Sagi & Rhythm · AGT 2024 (YouTube)</div>
 		</div>
-		<div class="swiper-slide" data-slide-type="img">
-		  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg" aria-label="ms-free-animals-1">
+		<div class="swiper-slide">
+		  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg" aria-label="Animals-2">
+      <div class="caption">Image 2</div>
 		</div>      
-		<div class="swiper-slide" data-slide-type="img">
-		  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" />
+		<div class="swiper-slide">
+		  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" aria-label="Animals-3">
 		</div>
 	</div> <!-- END swiper-wrapper -->
 
@@ -849,7 +856,7 @@ $(function() {
       // -----------------------------------------------------------------------
       const thumbsSlider3 = new Swiper("#thumbs_slider_3", {
         direction: 'horizontal',
-        spaceBetween: 3,
+        spaceBetween: 5,
         slidesPerView: 3,
         grabCursor: true,
         watchSlidesProgress: true,
@@ -885,10 +892,10 @@ $(function() {
             }
 
             switch (currentSlideType) {
-              case 'img':
-                // runNext();
+              case 'image':
+                //runNext();
                 break;
-              case 'vdo':
+              case 'video':
                 // vjsPlayer.currentTime(0);
                 // vjsPlayer.play();
                 videoPlayStatus = VIDEO_PLAYING_STATE.PLAYING;
@@ -963,3 +970,4 @@ $(function() {
 });
 </script>
 ++++
+

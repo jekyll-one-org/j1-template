@@ -62,6 +62,24 @@
   --swiper-scrollbar-size: 4px;
 }
 
+/* Captions
+-------------------------------------------------------------------- */
+.caption {
+  display: none;
+  position: absolute; 
+  bottom: 0; 
+  left: 0; 
+  width: 100%; 
+  padding: 10px; 
+  background: rgba(0, 0, 0, 0.5); 
+  color: #fff; 
+  text-align: left; 
+}
+
+.swiper-slide:hover .caption {
+  display: block;
+}
+
 /* Components
 -------------------------------------------------------------------- */
 
