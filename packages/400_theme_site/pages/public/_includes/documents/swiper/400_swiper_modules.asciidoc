@@ -144,7 +144,7 @@ You can extensively customize the autoplay behavior:
 
 Find all *Parameters* available for the *Autoplay* module.
 
-[cols="4,2,2,4a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="4,2,2,4a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -993,7 +993,7 @@ Find below available *Events* for the SwiperJS *Hash Navigation* module.
 
 Event fired on window hash change.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -1018,7 +1018,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired when swiper updates the hash.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -1067,7 +1067,7 @@ SEO:: Search engines can index *individual slides* and potentially this may
 
 Find below available *Parameters* for the SwiperJS *Navigation* module.
 
-[cols="2,2,2,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="2,2,2,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -1192,7 +1192,7 @@ Find below available *Events* for the SwiperJS *Keyboard Control* module.
 
 Event fired on key press.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -1484,7 +1484,7 @@ Find below available *Events* for the SwiperJS *Mousewheel Control* module.
 
 Event fired on mousewheel scroll.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -1582,7 +1582,7 @@ work like *prev button* after click on it.
 
 Find below available *Properties* for the SwiperJS *Navigation* module.
 
-[cols="3,9a", subs=+macros, options="header", width="100%", role="rtable mt-4" mb-5]
+[cols="3,9a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5" mb-5]
 |===
 |Name |Description \| Example
 
@@ -1600,7 +1600,7 @@ Find below available *Properties* for the SwiperJS *Navigation* module.
 
 Find below available *Methods* for the SwiperJS *Navigation* module.
 
-[cols="3,9a", subs=+macros, options="header", width="100%", role="rtable mt-4" mb-5]
+[cols="3,9a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5" mb-5]
 |===
 |Name |Description
 
@@ -1980,7 +1980,7 @@ Can be _bullets_, _fraction_ , _progressbar_ or _custom_.
 
 Find below available *Properties* for the SwiperJS *Pagination* module.
 
-[cols="3,9a", subs=+macros, options="header", width="100%", role="rtable mt-4" mb-5]
+[cols="3,9a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5" mb-5]
 |===
 |Property |Description \| Example
 
@@ -1999,7 +1999,7 @@ HTMLElement use `swiper.pagination.bullets[1]`.
 
 Find below available *Methods* for the SwiperJS *Pagination* module.
 
-[cols="3,9a", subs=+macros, options="header", width="100%", role="rtable mt-4" mb-5]
+[cols="3,9a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5" mb-5]
 |===
 |Method |Description
 
@@ -2354,7 +2354,7 @@ scrollbar is *disabled* by *breakpoint*.
 
 Find below available *Properties* for the SwiperJS *Scrollbar* module.
 
-[cols="3,9a", subs=+macros, options="header", width="100%", role="rtable mt-4" mb-5]
+[cols="3,9a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5" mb-5]
 |===
 |Property |Description
 
@@ -2373,7 +2373,7 @@ Find below available *Properties* for the SwiperJS *Scrollbar* module.
 
 Find below available *Methods* for the SwiperJS *Scrollbar* module.
 
-[cols="3,9a", subs=+macros, options="header", width="100%", role="rtable mt-4" mb-5]
+[cols="3,9a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5" mb-5]
 |===
 |Name |Description
 
@@ -2708,7 +2708,7 @@ return an outer HTML of the swiper slide or slide HTML element.
 
 |===
 
-[cols="3,3,6a", subs=+macros, options="header", width="100%", role="rtable mt-4" mb-5]
+[cols="3,3,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5" mb-5]
 |===
 |Name |Type |Description
 
@@ -2736,7 +2736,7 @@ return an outer HTML of the swiper slide or slide HTML element.
 
 Find below available *Methods* for the SwiperJS *Virtual Slides* module.
 
-[cols="3,9a", subs=+macros, options="header", width="100%", role="rtable mt-4" mb-5]
+[cols="3,9a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5" mb-5]
 |===
 |Name |Description
 
@@ -2950,7 +2950,7 @@ Find below available *Properties* for the SwiperJS *Zoom* module.
 
 Find below available *Methods* for the SwiperJS *Zoom* module.
 
-[cols="3,9a", subs=+macros, options="header", width="100%", role="rtable mt-4" mb-5]
+[cols="3,9a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5" mb-5]
 |===
 |Name |Description
 
@@ -2995,7 +2995,7 @@ Event fired on zoom change.
 Receives evants *scale*, *imageEl*, *slideEl* as an *argument*.
 ====
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
