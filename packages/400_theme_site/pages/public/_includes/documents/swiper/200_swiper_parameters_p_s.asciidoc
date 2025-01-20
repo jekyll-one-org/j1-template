@@ -7,6 +7,7 @@ https://swiperjs.com/swiper-api[Swiper Documentation, {browser-window--new}].
 
 
 [role="mt-4"]
+[[options-pagination]]
 === pagination
 
 Configure the *Pagination module* for a swiper slider.
@@ -42,6 +43,7 @@ const swiper = new Swiper('.swiper', {
 |===
 
 [role="mt-4"]
+[[options-parallax]]
 === parallax
 
 Configure parallax effect for a swipe slider.
@@ -67,6 +69,7 @@ const swiper = new Swiper('.swiper', {
 |===
 
 [role="mt-4"]
+[[options-passiveListeners]]
 === passiveListeners
 
 Configure *passive* event listeners.
@@ -86,6 +89,7 @@ this parameter.
 |===
 
 [role="mt-4"]
+[[options-preventClicks]]
 === preventClicks
 
 Prevent unwanted clicks on links during swiping.
@@ -102,6 +106,7 @@ Prevent unwanted clicks on links during swiping.
 |===
 
 [role="mt-4"]
+[[options-preventClicksPropagation]]
 === preventClicksPropagation
 
 Stop *click event* propagation on links during swiping.
@@ -118,6 +123,7 @@ Stop *click event* propagation on links during swiping.
 |===
 
 [role="mt-4"]
+[[options-preventInteractionOnTransition]]
 === preventInteractionOnTransition
 
 Allow to change slides by swiping or *navigation* \| *pagination* buttons
@@ -136,6 +142,7 @@ navigation/pagination buttons during transition.
 |===
 
 [role="mt-4"]
+[[options-resistance]]
 === resistance
 
 Enable or disable resistant bounds.
@@ -152,6 +159,7 @@ Enable or disable resistant bounds.
 |===
 
 [role="mt-4"]
+[[options-resistanceRatio]]
 === resistanceRatio
 
 Control resistance ratio.
@@ -168,6 +176,7 @@ Control resistance ratio.
 |===
 
 [role="mt-4"]
+[[options-resizeObserver]]
 === resizeObserver
 
 Configure *ResizeObserver* (if supported by browser) on swiper container
@@ -187,6 +196,7 @@ window resize).
 |===
 
 [role="mt-4"]
+[[options-rewind]]
 === rewind
 
 Enable *rewind* mode.
@@ -212,6 +222,7 @@ Should not be used together with `loop` mode.
 |===
 
 [role="mt-4"]
+[[options-roundLengths]]
 === roundLengths
 
 Enable to round values of slides *width and height* to prevent blurry texts
@@ -230,6 +241,7 @@ blurry texts on usual resolution screens (if you have such).
 |===
 
 [role="mt-4"]
+[[options-runCallbacksOnInit]]
 === runCallbacksOnInit
 
 Fire *Transition* \| *SlideChange* \| *Start* \| *End* events on swiper
@@ -249,6 +261,7 @@ initialSlide is *not 0*, or you use *loop mode*.
 |===
 
 [role="mt-4"]
+[[options-scrollbar]]
 === scrollbar
 
 Configure scrollbar parameters  to enable with default settings.
@@ -276,6 +289,7 @@ const swiper = new Swiper('.swiper', {
 |===
 
 [role="mt-4"]
+[[options-setWrapperSize]]
 === setWrapperSize
 
 Set *width* \| *height* on swiper wrapper.
@@ -294,6 +308,7 @@ fallback option for browser that don't support flexbox layout well.
 |===
 
 [role="mt-4"]
+[[options-shortSwipes]]
 === shortSwipes
 
 Disable short swipes.
@@ -310,6 +325,7 @@ Disable short swipes.
 |===
 
 [role="mt-4"]
+[[options-simulateTouch]]
 === simulateTouch
 
 Enable or disable Swiper mouse events like touch events.
@@ -328,6 +344,7 @@ and drag to change slides).
 
 
 [role="mt-4"]
+[[options-slideActiveClass]]
 === slideActiveClass
 
 Set CSS class name of the *active slide*.
@@ -352,6 +369,7 @@ changed classes.
 |===
 
 [role="mt-4"]
+[[options-slideBlankClass]]
 === slideBlankClass
 
 Configre CSS class name blank slides.
@@ -374,6 +392,7 @@ Not supported in Swiper _React_ and _Vue_ environments.
 |===
 
 [role="mt-4"]
+[[options-slideClass]]
 === slideClass
 
 Configre CSS class name for blank slides.
@@ -398,6 +417,7 @@ changed classes.
 |===
 
 [role="mt-4"]
+[[options-slideFullyVisibleClass]]
 === slideFullyVisibleClass
 
 Configre CSS class name for *blank* slides.
@@ -420,6 +440,7 @@ slide.
 |===
 
 [role="mt-4"]
+[[options-slideNextClass]]
 === slideNextClass
 
 Configre CSS class name of the slide which is right *after* the *active* slide.
@@ -444,6 +465,7 @@ changed classes.
 |===
 
 [role="mt-4"]
+[[options-slidePrevClass]]
 === slidePrevClass
 
 Configre CSS class name of the slide which is right *before* the *active* slide.
@@ -468,6 +490,7 @@ changed classes
 |===
 
 [role="mt-4"]
+[[options-slideToClickedSlide]]
 === slideToClickedSlide
 
 Enable click on any slide to trigger a *transition*.
@@ -484,6 +507,7 @@ Enable click on any slide to trigger a *transition*.
 |===
 
 [role="mt-4"]
+[[options-slideVisibleClass]]
 === slideVisibleClass
 
 Set the CSS class name of the currently *active* or *partially*
@@ -509,6 +533,7 @@ changed classes.
 |===
 
 [role="mt-4"]
+[[options-slidesOffsetAfter]]
 === slidesOffsetAfter
 
 Set additional slide offset (in px) at the end of the container *after*
@@ -527,6 +552,7 @@ all slides configured.
 |===
 
 [role="mt-4"]
+[[options-slidesOffsetBefore]]
 === slidesOffsetBefore
 
 Set additional slide offset (in px) in the beginning of the container *before*
@@ -545,6 +571,7 @@ all slides configured.
 |===
 
 [role="mt-4"]
+[[options-slidesPerGroup]]
 === slidesPerGroup
 
 Set numbers of slides for *group sliding*.
@@ -562,6 +589,7 @@ Parameter set *larger* than *1*.
 |===
 
 [role="mt-4"]
+[[options-slidesPerGroupAuto]]
 === slidesPerGroupAuto
 
 Set number of slides for *group sliding* to skip all slides in view on
@@ -583,6 +611,7 @@ clicks in *autoplay*.
 |===
 
 [role="mt-4"]
+[[options-slidesPerGroupSkip]]
 === slidesPerGroupSkip
 
 Set number of slides for *group sliding* to skip slides.
@@ -605,6 +634,7 @@ grouped by the `slidesPerGroup` value.
 |===
 
 [role="mt-4"]
+[[options-slidesPerView]]
 === slidesPerView
 
 Set the number of slides visible per view on a slider.
@@ -627,6 +657,7 @@ when `grid.row` is set larger than *1*.
 |===
 
 [role="mt-4"]
+[[options-spaceBetween]]
 === spaceBetween
 
 Set the distance between slides in px.
@@ -649,6 +680,7 @@ which you pass `spaceBetween` into, navigation might *not work* properly.
 |===
 
 [role="mt-4"]
+[[options-speed]]
 === speed
 
 Set Duration of transition between slides in ms.
@@ -665,6 +697,7 @@ Set Duration of transition between slides in ms.
 |===
 
 [role="mt-4"]
+[[options-swipeHandler]]
 === swipeHandler
 
 Set the CSS selector \| HTML element for *swiping* of the the swiper
@@ -683,6 +716,7 @@ container.
 |===
 
 [role="mt-4"]
+[[options-swiperElementNodeName]]
 === swiperElementNodeName
 
 Set the name of the swiper element node name.

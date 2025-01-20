@@ -456,8 +456,8 @@ with default settings.
 [[prop-mousewheel]]
 === mousewheel
 
-    Object with mousewheel parameters or boolean `true` ìf enabled
-with default settings.
+Object with mousewheel parameters or boolean `true` ìf enabled with
+default settings.
 
 [cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
 |===

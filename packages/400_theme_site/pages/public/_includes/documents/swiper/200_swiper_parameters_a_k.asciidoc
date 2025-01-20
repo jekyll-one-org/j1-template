@@ -5,6 +5,7 @@ from *A* to *K*. Find parameter settings also with the
 https://swiperjs.com/swiper-api[Swiper Documentation, {browser-window--new}].
 
 [role="mt-4"]
+[[options-a11y]]
 === a11y (Accessibility)
 
 Enable and configure the *Accessibility* (a11y) module with *default* settings.
@@ -43,6 +44,7 @@ const swiper = new Swiper('.swiper', {
 |===
 
 [role="mt-4"]
+[[options-allowslideNext]]
 === allowslideNext()
 
 Enable or disable swiping to next slide.
@@ -60,6 +62,7 @@ or bottom).
 |===
 
 [role="mt-4"]
+[[options-allowslidePrev]]
 === allowslidePrev()
 
 Enable or disable swiping to previous slide.
@@ -77,6 +80,7 @@ top).
 |===
 
 [role="mt-4"]
+[[options-allowTouchMove]]
 === allowTouchMove
 
 Control to switch slides by using API *methods* like *slidePrev()* or
@@ -95,24 +99,7 @@ like *slidePrev()* or *slideNext()*.
 |===
 
 [role="mt-4"]
-=== allowTouchMove
-
-Control to switch slides by using API *methods* like
-*slidePrev()* or *slideNext()*.
-
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
-|===
-|Name |Type |Default |Description \| Example
-
-|`allowTouchMove`
-|boolean
-|true
-|If `false`, then the only way to switch the slide is use of API *methods*
-like *slidePrev()* or *slideNext()*.
-
-|===
-
-[role="mt-4"]
+[[options-autoHeight]]
 === autoHeight
 
 Set the *slider wrapper* to adapt its height from the height of the
@@ -131,6 +118,7 @@ the currently active slide.
 |===
 
 [role="mt-4"]
+[[options-autoplay]]
 === autoplay
 
 Enable and configure the Autoplay module for auto playing *behaviour* of a
@@ -164,6 +152,7 @@ const swiper = new Swiper('.swiper', {
 |===
 
 [role="mt-4"]
+[[options-breakpoints]]
 === breakpoints
 
 Allows to set parameters for responsive breakpoints.
@@ -238,6 +227,7 @@ const swiper = new Swiper('.swiper', {
 |===
 
 [role="mt-4"]
+[[options-breakpointsBase]]
 === breakpointsBase
 
 Specify the base for breakpoints.
@@ -256,6 +246,7 @@ then breakpoint keys treated as *swiper container width*.
 |===
 
 [role="mt-4"]
+[[options-cardsEffect]]
 === cardsEffect
 
 Specify Cards-effect parameters.
@@ -281,6 +272,7 @@ const swiper = new Swiper('.swiper', {
 |===
 
 [role="mt-4"]
+[[options-centerInsufficientSlides]]
 === centerInsufficientSlides
 
 Enabe or disable to center slides.
@@ -303,6 +295,7 @@ Not intended to be used in `loop` mode and `grid.rows`.
 |===
 
 [role="mt-4"]
+[[options-centeredSlides]]
 === centeredSlides
 
 Control to center *active* slides.
@@ -320,6 +313,7 @@ side.
 |===
 
 [role="mt-4"]
+[[options-centeredSlidesBounds]]
 === centeredSlidesBounds
 
 Control to center *active* slides without adding gaps.
@@ -351,6 +345,7 @@ Not intended to be used with `loop` or `pagination`.
 
 
 [role="mt-4"]
+[[options-containerModifierClass]]
 === containerModifierClass
 
 The *beginning* of the modifier CSS class  to center slides.
@@ -368,6 +363,7 @@ container depending on different parameters.
 |===
 
 [role="mt-4"]
+[[options-controller]]
 === controller
 
 Set Swiper *controller* parameters.
@@ -394,6 +390,7 @@ const swiper = new Swiper('.swiper', {
 |===
 
 [role="mt-4"]
+[[options-coverflowEffect]]
 === coverflowEffect
 
 Set Overflow Effect parameters.
@@ -421,6 +418,7 @@ const swiper = new Swiper('.swiper', {
 |===
 
 [role="mt-4"]
+[[options-createElements]]
 === createElements
 
 Control how to wrap slides by an swiper-wrapper element.
@@ -440,6 +438,7 @@ with boolean `true`).
 |===
 
 [role="mt-4"]
+[[options-creativeEffect]]
 === creativeEffect
 
 Set creative effect parameters.
@@ -473,6 +472,7 @@ const swiper = new Swiper('.swiper', {
 |===
 
 [role="mt-4"]
+[[options-cssMode]]
 === cssMode
 
 Enable or disable CSS *Scroll Snap API*.
@@ -530,6 +530,7 @@ etc.), they should be set on `swiper-slide-transform` element instead.
 |===
 
 [role="mt-4"]
+[[options-cubeEffect]]
 === cubeEffect
 
 Set cube effect parameters.
@@ -556,6 +557,7 @@ const swiper = new Swiper('.swiper', {
 |===
 
 [role="mt-4"]
+[[options-direction]]
 === direction
 
 Set the direction for Swipoer sliders.
@@ -572,6 +574,7 @@ Set the direction for Swipoer sliders.
 |===
 
 [role="mt-4"]
+[[options-edgeSwipeDetection]]
 === edgeSwipeDetection
 
 [cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
@@ -590,6 +593,7 @@ Windows devices with pointer (touch) events.
 |===
 
 [role="mt-4"]
+[[options-edgeSwipeThreshold]]
 === edgeSwipeThreshold
 
 Area (in px) from left edge of the screen to release touch events.
@@ -607,6 +611,7 @@ swipe-back in app.
 |===
 
 [role="mt-4"]
+[[options-effect]]
 === effect
 
 Set slide transition effects.
@@ -624,6 +629,7 @@ Set slide transition effects.
 |===
 
 [role="mt-4"]
+[[options-enabled]]
 === enabled
 
 Control if a Swiper slideshow is initially enabled.
@@ -641,6 +647,7 @@ all navigation elements and won't respond to any events and interactions.
 |===
 
 [role="mt-4"]
+[[options-eventsPrefix]]
 === eventsPrefix
 
 Cntrol event name prefix for all Swiper DOM events.
@@ -657,6 +664,7 @@ Cntrol event name prefix for all Swiper DOM events.
 |===
 
 [role="mt-4"]
+[[options-fadeEffect]]
 === fadeEffect
 
 Set fade effect parameters.
@@ -683,6 +691,7 @@ const swiper = new Swiper('.swiper', {
 |===
 
 [role="mt-4"]
+[[options-flipEffect]]
 === flipEffect
 
 Set flip effect parameters.
@@ -708,6 +717,7 @@ const swiper = new Swiper('.swiper', {
 |===
 
 [role="mt-4"]
+[[options-focusableElements]]
 === focusableElements
 
 Set CSS selector for focusable elements.
@@ -725,6 +735,7 @@ such elements if they are *focused*.
 |===
 
 [role="mt-4"]
+[[options-followFinger]]
 === followFinger
 
 Set slider animated only when you release it.
@@ -773,6 +784,7 @@ const swiper = new Swiper('.swiper', {
 |===
 
 [role="mt-4"]
+[[options-grabCursor]]
 === grabCursor
 
 Improve desktop usability by setting  the *grab cursor* when hover on Swiper.
@@ -791,6 +803,7 @@ will see the *grab cursor* when hover on Swiper.
 
 
 [role="mt-4"]
+[[options-grid]]
 === grid
 
 Enable *multirow* slider.
@@ -816,6 +829,7 @@ const swiper = new Swiper('.swiper', {
 |===
 
 [role="mt-4"]
+[[options-hashNavigation]]
 === hashNavigation
 
 Enables or disables hash url navigation for slides.
@@ -842,6 +856,7 @@ const swiper = new Swiper('.swiper', {
 |===
 
 [role="mt-4"]
+[[options-height]]
 === height
 
 Force Swiper height.
@@ -865,6 +880,7 @@ Setting this parameter will make Swiper *not responsive*.
 |===
 
 [role="mt-4"]
+[[options-history]]
 === history
 
 Enables history push state.
@@ -901,6 +917,7 @@ const swiper = new Swiper('.swiper', {
 |===
 
 [role="mt-4"]
+[[options-init]]
 === init
 
 Specify, if Swiper should be initialised automatically.
@@ -919,6 +936,7 @@ instance. If disabled, then you need to init it manually by calling
 |===
 
 [role="mt-4"]
+[[options-initialSlide]]
 === initialSlide
 
 Set the index number of the initial slide.
@@ -935,6 +953,7 @@ Set the index number of the initial slide.
 |===
 
 [role="mt-4"]
+[[options-injectStyles]]
 === injectStyles
 
 Inject text styles to the shadow DOM.
@@ -951,6 +970,7 @@ Inject text styles to the shadow DOM.
 |===
 
 [role="mt-4"]
+[[options-injectStylesUrls]]
 === injectStylesUrls
 
 Inject styles `<link>`s to the shadow DOM.
@@ -967,6 +987,7 @@ Inject styles `<link>`s to the shadow DOM.
 |===
 
 [role="mt-4"]
+[[options-keyboard]]
 === keyboard
 
 Enables or disables navigation through slides using keyboard.

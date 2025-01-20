@@ -33,12 +33,12 @@ lorem:sentences[3]
   <div class="swiper-wrapper">
     <!-- Slides (required) -->
     <div class="swiper-slide">
-      <img src="<path_to>/image-1.jpg">
+      <img src="path/to/image-1.jpg">
       <span class="pswp-caption-content">Caption: Image 1</span>
     </div>
     <!-- more slides -->
     <div class="swiper-slide">
-      <img src="<path_to>/image-x.jpg">
+      <img src="path/to/image-x.jpg">
       <span class="pswp-caption-content">Caption: Image X</span>
     </div>
   </div> <!-- END wrapper element -->
@@ -70,12 +70,12 @@ lorem:sentences[3]
     <ul class="swiper-wrapper">
       <!-- Slides (required) -->
       <li class="swiper-slide">
-        <img src="<path_to>/image-1.jpg">
+        <img src="path/to/image-1.jpg">
         <span class="pswp-caption-content">Caption: Image 1</span>
       </li>
       <!-- more slides -->
       <li class="swiper-slide">
-        <img src="<path_to>/image-x.jpg">
+        <img src="path/to/image-x.jpg">
         <span class="pswp-caption-content">Caption: Image X</span>
       </li>
     </ul> <!-- END swiper-wrapper (slides) -->
@@ -107,19 +107,19 @@ lorem:sentences[3]
   <ul class="swiper-wrapper">
     <!-- Slides (required) -->
     <li class="swiper-slide">
-      <a href="<path_to>/image-1.jpg"
+      <a href="path/to/image-1.jpg"
         data-pswp-width="<max_width>"
         data-pswp-height="<max_height>">
-        <img src="<path_to>/image-1.jpg" alt="Image 1">
+        <img src="path/to/image-1.jpg" alt="Image 1">
         <span class="pswp-caption-content">Caption: Image 1</span>
       </a>
     </li>
     <!-- more slides -->
     <li class="swiper-slide">
-      <a href="<path_to>/image-x.jpg"
+      <a href="path/to/image-x.jpg"
         data-pswp-width="<max_width>"
         data-pswp-height="<max_height>">
-        <img src="<path_to>/image-x.jpg" alt="Image X">
+        <img src="path/to/image-x.jpg" alt="Image X">
         <span class="pswp-caption-content">Caption: Image X</span>
       </a>
     </li>

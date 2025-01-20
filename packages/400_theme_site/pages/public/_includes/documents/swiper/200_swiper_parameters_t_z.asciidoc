@@ -7,6 +7,7 @@ https://swiperjs.com/swiper-api[Swiper Documentation, {browser-window--new}].
 
 
 [role="mt-4"]
+[[options-threshold]]
 === threshold
 
 Set the threshold value in px then swiper will *not* move.
@@ -24,6 +25,7 @@ then swiper will not move.
 |===
 
 [role="mt-4"]
+[[options-thumbs]]
 === thumbs
 
 Set the configuration (object) of thumbs component parameters for *thumb image*
@@ -51,6 +53,7 @@ const swiper = new Swiper('.swiper', {
 |===
 
 [role="mt-4"]
+[[options-touchAngle]]
 === touchAngle
 
 Set Angle in degrees to trigger touch move.
@@ -67,6 +70,7 @@ Set Angle in degrees to trigger touch move.
 |===
 
 [role="mt-4"]
+[[options-touchEventsTarget]]
 === touchEventsTarget
 
 Set the *target* element to listen on touch events.
@@ -85,6 +89,7 @@ events on the swiper *wrapper*.
 |===
 
 [role="mt-4"]
+[[options-touchMoveStopPropagation]]
 === touchMoveStopPropagation
 
 Enable to *stop* the propagation of *touchmove*.
@@ -101,6 +106,7 @@ Enable to *stop* the propagation of *touchmove*.
 |===
 
 [role="mt-4"]
+[[options-touchRatio]]
 === touchRatio
 
 Set the touch ratio.
@@ -117,6 +123,7 @@ Set the touch ratio.
 |===
 
 [role="mt-4"]
+[[options-touchReleaseOnEdges]]
 === touchReleaseOnEdges
 
 Enable touch events on slider edge positions for *page scrolling*.
@@ -143,6 +150,7 @@ Also *threshold* parameter must be set to *0*.
 |===
 
 [role="mt-4"]
+[[options-touchStartForcePreventDefault]]
 === touchStartForcePreventDefault
 
 Force to *prevent default* for `touchstart` or `pointerdown` events.
@@ -176,6 +184,7 @@ by default.
 |===
 
 [role="mt-4"]
+[[options-uniqueNavElements]]
 === uniqueNavElements
 
 Disable navigation element parameters passed as a string like _.pagination_.
@@ -195,6 +204,7 @@ buttons and *scrollbar* elements.
 |===
 
 [role="mt-4"]
+[[options-updateOnWindowResize]]
 === updateOnWindowResize
 
 Disable the recalculation of slide positions on window resize for desktops or
@@ -213,6 +223,7 @@ orientation change (on mobiles).
 |===
 
 [role="mt-4"]
+[[options-url]]
 === url
 
 Required for *active* slide detection when rendered on server-side and
@@ -231,6 +242,7 @@ history enabled.
 |===
 
 [role="mt-4"]
+[[options-userAgent]]
 === userAgent
 
 Setting the *userAgent string* is required for browser or device detection
@@ -249,6 +261,7 @@ rendered on server-side.
 |===
 
 [role="mt-4"]
+[[options-virtual]]
 === virtual
 
 Enables and configures the *virtual slides* functionality.
@@ -275,6 +288,7 @@ const swiper = new Swiper('.swiper', {
 |===
 
 [role="mt-4"]
+[[options-virtualTranslate]]
 === virtualTranslate
 
 Useful when you need to create *custom* slide *transitions*.
@@ -298,6 +312,7 @@ Useful when you need to create *custom* slide *transitions*.
 |===
 
 [role="mt-4"]
+[[options-watchOverflow]]
 === watchOverflow
 
 When enabled, the swiper will be *disabled* and *hide navigation* buttons
@@ -316,6 +331,7 @@ in case there are *not enough* slides for *sliding*.
 |===
 
 [role="mt-4"]
+[[options-watchSlidesProgress]]
 === watchSlidesProgress
 
 When enabled, the swiper will be *disabled* and *hide navigation* buttons
@@ -338,6 +354,7 @@ Slides in viewport will have an *additional* visible class.
 |===
 
 [role="mt-4"]
+[[options-width]]
 === width
 
 Force the swiper width (in px).
@@ -362,6 +379,7 @@ Setting this parameter will make Swiper *not responsive*.
 |===
 
 [role="mt-4"]
+[[options-wrapperClass]]
 === wrapperClass
 
 Set the CSS class name of the slides *wrapper*.
@@ -387,6 +405,7 @@ changed classes.
 
 
 [role="mt-4"]
+[[options-zoom]]
 === zoom
 
 Enables *zooming* functionality.
