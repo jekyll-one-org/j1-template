@@ -17,7 +17,7 @@ Fire event *on* swiper initialization.
 
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // ...
   on: {
     init: function () {
@@ -34,7 +34,7 @@ Fire event *after* swiper initialization.
 
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // ...
 });
 
@@ -68,7 +68,7 @@ Event fired on *active* index change.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     activeIndexChange: (swiper) => {
@@ -94,7 +94,7 @@ Event fired right *after* swipers *initialization*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     afterInit: (swiper) => {
@@ -119,7 +119,7 @@ Event fired right *before* swiper instance is destroyed.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     beforeDestroy: (swiper) => {
@@ -144,7 +144,7 @@ Event fired right *before* swiper initialization.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     beforeInit: (swiper) => {
@@ -169,7 +169,7 @@ Event fired right *after* swiper instance is destroyed.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     afterDestroy: (swiper) => {
@@ -194,7 +194,7 @@ Event fired right *before* loop fix.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     beforeLoopFix: (swiper) => {
@@ -219,7 +219,7 @@ Event fired *before* resize handler.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     beforeResize: (swiper) => {
@@ -244,7 +244,7 @@ Event fired *before* slide *change transition* start.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     beforeSlideChangeStart: (swiper) => {
@@ -269,7 +269,7 @@ Event fired *before* transition starts.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     beforeTransitionStart: (swiper, speed, internal) => {
@@ -294,7 +294,7 @@ Event fired on *breakpoint change*
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     breakpoint: (swiper, breakpointParams) => {
@@ -319,7 +319,7 @@ Event fired on *direction* change.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     changeDirection: (swiper) => {
@@ -350,7 +350,7 @@ Receives *pointerup* event as an *argument*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     click: (swiper, event) => {
@@ -375,7 +375,7 @@ Event fired *after* swiper is destroyed.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     destroy: (swiper) => {
@@ -400,7 +400,7 @@ Event fired when user *double click/tap* on Swiper.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     doubleClick: (swiper, event) => {
@@ -430,7 +430,7 @@ Receives *pointerup* event as an *argument*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     doubleTap: (swiper, event) => {
@@ -455,7 +455,7 @@ Event fired when Swiper goes from *beginning* or *end* position.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     fromEdge: (swiper) => {
@@ -480,7 +480,7 @@ The `swiper.on('init')` syntax works only in case setting the parameter
 
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   init: false,
   // other parameters
 });
@@ -505,7 +505,7 @@ setup (new) as shown below.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     init: (swiper) => {
@@ -530,7 +530,7 @@ Event fired when swiper is *locked* (if `watchOverflow` is *enabled*).
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     lock: (swiper) => {
@@ -555,7 +555,7 @@ Event fired after *loop fix*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     loopFix: (swiper) => {
@@ -580,7 +580,7 @@ Event fired on momentum bounce.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     momentumBounce: (swiper) => {
@@ -605,7 +605,7 @@ Event fired if observer is *enabled* and a *DOM mutations* is detected.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     observerUpdate: (swiper) => {
@@ -630,7 +630,7 @@ Event fired on *orientation change* (e.g. landscape -> portrait).
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     orientationchange: (swiper) => {
@@ -661,7 +661,7 @@ Receives *progress event* as an *argument*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     progress: (swiper, progress) => {
@@ -686,7 +686,7 @@ Event fired when Swiper reach its *beginning* (initial position).
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     reachBeginning: (swiper) => {
@@ -711,7 +711,7 @@ Event fired when Swiper reach *last* slide.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     reachEnd: (swiper) => {
@@ -736,7 +736,7 @@ Event fired on real index change.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     realIndexChange: (swiper) => {
@@ -762,7 +762,7 @@ manipulation.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     resize: (swiper) => {
@@ -800,7 +800,7 @@ Receives transition duration value (in ms) as an argument.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     setTransition: (swiper, transition) => {
@@ -830,7 +830,7 @@ Receives current *translate* value as as *argument*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     setTranslate: (swiper, translate)) => {
@@ -855,7 +855,7 @@ Event fired when *active* slide has been *changed*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     slideChange: (swiper) => {
@@ -880,7 +880,7 @@ Event fired *after* animation to *other slide* (next or previous).
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     slideChangeTransitionEnd: (swiper) => {
@@ -905,7 +905,7 @@ Event fired in the *beginning* of animation to *other slide* (next or previous).
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     slideChangeTransitionStart: (swiper) => {
@@ -930,7 +930,7 @@ Same as *slideChangeTransitionEnd* but only for *forward direction*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     slideNextTransitionEnd: (swiper) => {
@@ -955,7 +955,7 @@ Same as *slideChangeTransitionStart* but only for *forward direction*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     slideNextTransitionStart: (swiper) => {
@@ -980,7 +980,7 @@ Same as *slideChangeTransitionEnd* but only for *backward direction*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     slidePrevTransitionEnd: (swiper) => {
@@ -1005,7 +1005,7 @@ Same as *slideChangeTransitionStart* but only for *backward direction*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     slidePrevTransitionStart: (swiper) => {
@@ -1030,7 +1030,7 @@ Event fired in the *end* of animation of *resetting* slide to current one.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     slideResetTransitionEnd: (swiper) => {
@@ -1056,7 +1056,7 @@ current one.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     slideResetTransitionStart: (swiper) => {
@@ -1086,7 +1086,7 @@ Receives *pointermove* event as an *argument*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     xxx: (swiper, event) => {
@@ -1116,7 +1116,7 @@ Receives *pointermove* event as an *argument*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     sliderMove: (swiper, event) => {
@@ -1141,7 +1141,7 @@ Event fired when *slides grid* has been *changed*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     slidesGridLengthChange: (swiper) => {
@@ -1167,7 +1167,7 @@ Event fired when *number* of slides has been *changed*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     slidesLengthChange: (swiper) => {
@@ -1192,7 +1192,7 @@ Event fired *after* slides and their sizes are *calculated and updated*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     slidesUpdated: (swiper) => {
@@ -1217,7 +1217,7 @@ Event fired when *snap grid* has been *changed*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     snapGridLengthChange: (swiper) => {
@@ -1242,7 +1242,7 @@ Event fired when *snap index* has been changed.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     xxx: (swiper) => {
@@ -1272,7 +1272,7 @@ Receives *pointerup* event as an *argument*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     tap: (swiper, event) => {
@@ -1297,7 +1297,7 @@ Event fired when Swiper goes to *beginning* or *end* position.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     toEdge: (swiper) => {
@@ -1327,7 +1327,7 @@ Receives *pointerup* event as an *argument*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     touchEnd: (swiper, event) => {
@@ -1357,7 +1357,7 @@ Receives *pointermove* event as an *argument*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     touchMove: (swiper, event) => {
@@ -1388,7 +1388,7 @@ Receives *pointermove* event as an *argument*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     touchMoveOpposite: (swiper, event) => {
@@ -1418,7 +1418,7 @@ Receives *pointerdown* event as an *argument*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     touchStart: (swiper, event) => {
@@ -1443,7 +1443,7 @@ Event fired *after* a transition.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     xxx: (swiper) => {
@@ -1468,7 +1468,7 @@ Event fired in the *beginning* of a transition.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     transitionStart: (swiper) => {
@@ -1493,7 +1493,7 @@ Event fired when swiper is *unlocked* (if parameter `watchOverflow` is *enabled*
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     unlock: (swiper) => {
@@ -1518,7 +1518,7 @@ Event fired *after* update() call is *finished*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     update: (swiper) => {

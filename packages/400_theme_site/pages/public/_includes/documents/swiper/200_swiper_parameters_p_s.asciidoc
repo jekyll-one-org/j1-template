@@ -10,7 +10,10 @@ https://swiperjs.com/swiper-api[Swiper Documentation, {browser-window--new}].
 [[options-pagination]]
 === pagination
 
-Configure the *Pagination module* for a swiper slider.
+The Pagination module in SwiperJS is a powerful tool that allows you to add
+visual indicators (like buttons) to a SwiperJS slide. The navigation elements
+make it clear to users how many slides there are and which slide they are
+currently viewing.
 
 [TIP]
 ====
@@ -18,6 +21,8 @@ Find all available configurable *settings* with <<Pagination>> in section
 <<Modules>>.
 ====
 
+Find below an example how to configure the *Pagination module* for a SwiperJS
+slider.
 
 [cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
@@ -31,7 +36,7 @@ default settings.
 
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   pagination: {
     el: '.swiper-pagination',
     type: 'bullets',
@@ -45,6 +50,15 @@ const swiper = new Swiper('.swiper', {
 [role="mt-4"]
 [[options-parallax]]
 === parallax
+
+The Parallax module supports parallax transition effects for SwiperJS silder
+*slides* and nested elements.
+
+[TIP]
+====
+Find all available configurable *settings* with <<Parallax>> in section
+<<Modules>>.
+====
 
 Configure parallax effect for a swipe slider.
 
@@ -60,10 +74,9 @@ default settings.
 
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   parallax: true
 });
-
 ----
 
 |===
@@ -264,7 +277,17 @@ initialSlide is *not 0*, or you use *loop mode*.
 [[options-scrollbar]]
 === scrollbar
 
-Configure scrollbar parameters  to enable with default settings.
+The Scrollbar module in SwiperJS is a powerful tool that enhances user
+interaction and provides visual feedback within a SwiperJS slider.
+
+[TIP]
+====
+Find all available configurable *settings* with <<Scrollbar>> in section
+<<Mdules>>.
+====
+
+Find below how to configure scrollbar parameters to enable with default
+settings.
 
 [cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
@@ -278,7 +301,7 @@ default settings.
 
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   scrollbar: {
     el: '.swiper-scrollbar',
     draggable: true

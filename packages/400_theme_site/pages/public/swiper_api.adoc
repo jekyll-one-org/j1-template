@@ -85,14 +85,18 @@ for template systems like J1 Template. In the current version of the J1 template
 used *carousels* _Owl Carousel_, _Slickslider_, and _Masterslider_ by their
 implementations based on _SwiperJS_.
 
+The https://swiperjs.com/swiper-api[Swiper API documentation, {browser-window--new}]
+pages are based on version *v11.2.1* (January 7, 2025) for the current version
+of J1 template (2025.x). The documentation can **generally be used* for all
+*web browser-based projects* that use SwiperJS for creating sliders.
+
+The idea of providing this documentation is *not to copy* the *original pages*
+as *duplicates*. All pages are restructured and enhanced with code examples
+or improved by additional description texts for better readability and
+usability.
+
 [NOTE]
 ====
-The https://swiperjs.com/swiper-api[Swiper API documentation, {browser-window--new}]
-pages are based on version *v11.2.1* for the current J1 template version 2025.x.
-The idea of providing this documentation is *not* to simply copy the original
-pages as duplicates. For better readability and usability, all pages are
-restructured and enhanced by code examples or improved description texts.
-
 The documentation pages for the J1 Template project will be used for the 
 **AI**-based **chat client** (*planned* for 4th quarter of 2025). The agent
 will be trained by all available documentation pages of the Template system

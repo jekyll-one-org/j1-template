@@ -28,8 +28,16 @@ then swiper will not move.
 [[options-thumbs]]
 === thumbs
 
-Set the configuration (object) of thumbs component parameters for *thumb image*
-navigation.
+The Thumbs module enables to create a *thumbnail navigation* for SliderJS
+sliders.
+
+[TIP]
+====
+Find all available configurable *settings* with <<Thumbs>> in section
+<<Mdules>>.
+====
+
+Find below how to enable the *thumbs* module and set the *thumbs* parameters.
 
 [cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
@@ -42,7 +50,7 @@ navigation.
 
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // other parameters ...
   thumbs: {
     swiper: thumbsSwiper
@@ -264,7 +272,18 @@ rendered on server-side.
 [[options-virtual]]
 === virtual
 
-Enables and configures the *virtual slides* functionality.
+The Virtual Slides module allows you to keep the required number of slides
+in the DOM. The module is very useful in terms of performance and memory
+issues if you have a lot of slides, especially slides with heavyweight DOM
+trees or images.
+
+[TIP]
+====
+Find all available configurable *settings* with <<Virtual Slides>> in section
+<<Mdules>>.
+====
+
+Find below how to enable and configures the *virtual slides* functionality.
 
 [cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
@@ -278,7 +297,7 @@ parameters or boolean `true` to enable with default settings.
 
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   virtual: {
     slides: ['Slide 1', 'Slide 2', 'Slide 3', 'Slide 4', 'Slide 5']
   }
@@ -422,7 +441,7 @@ Enables *zooming* functionality.
 
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   zoom: {
     maxRatio: 5
   }

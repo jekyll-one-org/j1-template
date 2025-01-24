@@ -18,7 +18,6 @@ Find all available configurable *settings* with <<Accessibility (a11y)>>
 in section <<Modules>>.
 ====
 
-// link:{swiper-modules--a11y}[Accessibility (a11y), {browser-window--new}]].
 
 [cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable"]
 |===
@@ -32,7 +31,7 @@ with *default* settings.
 
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   a11y: {
     prevSlideMessage:   'Go to previous slide',
     nextSlideMessage:   'Go to next slide',
@@ -142,7 +141,7 @@ section hModules>>.
 
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   autoplay: {
     delay: 5000
   }
@@ -176,7 +175,7 @@ Parameters like `loop` and `effect` won't work.
 
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // Default parameters
   slidesPerView: 1,
   spaceBetween: 10,
@@ -203,7 +202,7 @@ const swiper = new Swiper('.swiper', {
 
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   slidesPerView: 1,
   spaceBetween: 10,
   // using "ratio" endpoints
@@ -262,7 +261,7 @@ Specify Cards-effect parameters.
 
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   effect: 'cards',
   cardsEffect: {
     // ...
@@ -366,7 +365,14 @@ container depending on different parameters.
 [[options-controller]]
 === controller
 
-Set Swiper *controller* parameters.
+The Controller module allows to *synchronize* the movement of *multiple*
+slider instances. Find below how to set Swiper *controller* parameters.
+
+[TIP]
+====
+Find all available configurable *settings* with <<Controller>> in section
+<<Modules>>.
+====
 
 [cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
@@ -380,7 +386,7 @@ Set Swiper *controller* parameters.
 
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   controller: {
     inverse: true
   }
@@ -393,8 +399,14 @@ const swiper = new Swiper('.swiper', {
 [[options-coverflowEffect]]
 === coverflowEffect
 
-Set Overflow Effect parameters.
+The Coverflow Effect module for SwiperJS creates a three-dimensional,
+fan-like effect for the slides in a Swiper container. This effect is inspired
+by the Coverflow view that you can see, for example, when selecting albums
+in _iTunes_.
 
+Find below how to set Coverflow Effect parameters.
+
+.Coverflow Effect Example
 [cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
@@ -406,7 +418,7 @@ Set Overflow Effect parameters.
 
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   effect: 'coverflow',
   coverflowEffect: {
     rotate: 30,
@@ -423,6 +435,7 @@ const swiper = new Swiper('.swiper', {
 
 Control how to wrap slides by an swiper-wrapper element.
 
+.createElements Example
 [cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
@@ -441,7 +454,10 @@ with boolean `true`).
 [[options-creativeEffect]]
 === creativeEffect
 
-Set creative effect parameters.
+The creative effect module in SwiperJS generates creative and engaging visual
+effects for the slides in a Swiper. The module allows for various custom
+transformations to animate the slides dynamically as they transition between
+each slide.
 
 [cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
@@ -454,7 +470,7 @@ Set creative effect parameters.
 
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   effect: 'creative',
   creativeEffect: {
     prev: {
@@ -520,7 +536,7 @@ etc.), they should be set on `swiper-slide-transform` element instead.
 </div>
 
 <script>
-  const swiper = new Swiper('.swiper', {
+  const swiper = new Swiper('#swiper_id', {
     effect: 'flip',
     cssMode: true
   });
@@ -546,7 +562,7 @@ Set cube effect parameters.
 
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   effect: 'cube',
   cubeEffect: {
     slideShadows: false
@@ -666,8 +682,17 @@ Cntrol event name prefix for all Swiper DOM events.
 [role="mt-4"]
 [[options-fadeEffect]]
 === fadeEffect
+The Fade Effect *module* in SwiperJS creates a smooth transition between each
+slide. Instead of sliding or sliding the slides like other effects do, the
+transition causes them to fade out and the next slide to fade in.
 
-Set fade effect parameters.
+[TIP]
+====
+Find all available configurable *settings* with <<Fade Effect>>
+in section <<Modules>>.
+====
+
+Find below how to set Fade effect parameters.
 
 [cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
@@ -676,11 +701,13 @@ Set fade effect parameters.
 |`fadeEffect`
 |any
 |*no default*
-|Object with Fade-effect parameters
+|The Fade Effect module in SwiperJS creates a smooth transition between each
+slide. Instead of sliding or sliding the slides like other effects do, the
+transition causes them to fade out and the next slide to fade in.
 
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   effect: 'fade',
   fadeEffect: {
     crossFade: true
@@ -694,7 +721,17 @@ const swiper = new Swiper('.swiper', {
 [[options-flipEffect]]
 === flipEffect
 
-Set flip effect parameters.
+The Flip Effect module in SwiperJS creates a special transition effect between
+individual slides. It gives the impression that the slides are being turned
+like cards.
+
+[TIP]
+====
+Find all available configurable *settings* with <<Flip Effect>>
+in section <<Modules>>.
+====
+
+Find below how to set Flip effect parameters.
 
 [cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
@@ -707,7 +744,7 @@ Set flip effect parameters.
 
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   effect: 'flip',
   flipEffect: {
     slideShadows: false
@@ -755,8 +792,18 @@ it will not move while you hold your finger on it.
 [role="mt-4"]
 === freeMode
 
-Enables or disables free mode functionality.
+The Free Mode module gives users a more fluid and interactive sliding
+experience.
 
+[TIP]
+====
+Find all available configurable *settings* with <<Free Mode>>
+in section <<Modules>>.
+====
+
+Find below how to set Free Mode parameters.
+
+.Free Mode Example
 [cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
@@ -769,11 +816,11 @@ boolean `true` to enable with *default* settings.
 
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   freeMode: true
 });
 
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   freeMode: {
     enabled: true,
     sticky: true
@@ -806,7 +853,15 @@ will see the *grab cursor* when hover on Swiper.
 [[options-grid]]
 === grid
 
-Enable *multirow* slider.
+The Grid module in SwiperJS allows to create *multi-row* sliders, effectively
+arranging slides into a *grid-like* structure.
+
+[TIP]
+====
+Find all available configurable *settings* with <<Grid>> in section <<Mdules>>.
+====
+
+Find below how to set Grid parameters to enable a *multirow* slider.
 
 [cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
@@ -819,7 +874,7 @@ Enable *multirow* slider.
 
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   grid: {
     rows: 2
   }
@@ -832,7 +887,10 @@ const swiper = new Swiper('.swiper', {
 [[options-hashNavigation]]
 === hashNavigation
 
-Enables or disables hash url navigation for slides.
+Hash navigation is intended to have a link to specific slide that allows to
+load a page with specific slide opened.
+
+Find below how to set Hash Navigation parameters.
 
 [cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
@@ -846,7 +904,7 @@ parameters or boolean `true` to enable with *default* settings.
 
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   hashNavigation: {
     replaceState: true
   }
@@ -883,7 +941,17 @@ Setting this parameter will make Swiper *not responsive*.
 [[options-history]]
 === history
 
-Enables history push state.
+The History (Navigation) module in SwiperJS allows you to integrate Swiper
+with history of the *browser*. This means, when users navigate between slides
+in a Swiper, the browser's URL will be updated to reflect the current slide.
+
+[TIP]
+====
+Find all available configurable *settings* with <<History Navigation>> in
+section <<Mdules>>.
+====
+
+Find below how to set History Navigation parameters.
 
 [cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
@@ -901,7 +969,7 @@ with default settings.
 
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   history: {
     replaceState: true
   }
@@ -990,8 +1058,19 @@ Inject styles `<link>`s to the shadow DOM.
 [[options-keyboard]]
 === keyboard
 
-Enables or disables navigation through slides using keyboard.
+The Keyboard (Control module) in SwiperJS enables navigation through slides
+using the keyboard.
 
+[TIP]
+====
+Find all available configurable *settings* with <<Keyboard Control>> in
+section <<Mdules>>.
+====
+
+Find below how to set Keyboard Control parameters, to enable or disable 
+the navigation through slides using keyboard.
+
+.Keyboard Control Example
 [cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
@@ -1004,7 +1083,7 @@ parameters or boolean `true` to enable with *default* settings.
 
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   keyboard: {
     enabled: true,
     onlyInViewport: false

@@ -5,10 +5,25 @@ List of available Swiper parameters (properties) alphabetically ordered
 from *L* to *O*. Find parameter settings also with the
 https://swiperjs.com/swiper-api[Swiper Documentation, {browser-window--new}].
 
+=== Lazy Loading
+
+The Lazy Loading module in SwiperJS controls the lazy loading of *images*
+within a swiper. Lazy loading means images are *not loaded* until they
+scroll into the browser's *visible area*. Using the module increases loading
+speed, especially for websites with many images, and thus improves the user
+experience.
+
+[TIP]
+====
+Find all available configurable *settings* with <<Lazy Loading>> in section
+<<Mdules>>.
+====
+
+Find the available options for lazy loading below.
 
 [role="mt-4"]
 [[options-lazyPreloadPrevNext]]
-=== lazyPreloadPrevNext
+==== lazyPreloadPrevNext
 
 Number of next and previous slides to be preloaded.
 
@@ -26,7 +41,7 @@ Number of next and previous slides to be preloaded.
 
 [role="mt-4"]
 [[options-lazyPreloaderClass]]
-=== lazyPreloaderClass
+==== lazyPreloaderClass
 
 Set CSS class name of lazy preloader.
 
@@ -176,7 +191,7 @@ in loop mode.
 [[options-maxBackfaceHiddenSlides]]
 === maxBackfaceHiddenSlides
 
-Reduce visual *flicker* in Safari Browser.
+Reduce visual *flicker* in Apple's *Safari Browser*.
 
 [cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
@@ -197,6 +212,7 @@ reduce performance.
 
 |===
 
+////
 [role="mt-4"]
 [[options-modules]]
 === modules
@@ -217,18 +233,30 @@ Configure array with Swiper modules.
 import Swiper from 'swiper';
 import { Navigation, Pagination } from 'swiper/modules';
 
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
     modules: [ Navigation, Pagination ]
 });
 ----
 
 |===
+////
+
 
 [role="mt-4"]
 [[options-mousewheel]]
 === mousewheel
 
-Enables or disables navigation through slides using mouse wheel.
+The Mousewheel Control module in SwiperJS enables users to navigate through
+the slides of a SwiperJS instance using their mouse wheel.
+
+[TIP]
+====
+Find all available configurable *settings* with <<Mousewheel Control>> in
+section <<Mdules>>.
+====
+
+Find the available options for mousewheel control below to enables or disable
+navigation through slides using mouse wheel.
 
 [cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
@@ -242,7 +270,7 @@ mousewheel parameters or boolean `true` to enable with default settings.
 
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   mousewheel: {
     invert: true
   }
@@ -255,7 +283,19 @@ const swiper = new Swiper('.swiper', {
 [[options-navigation]]
 === navigation
 
-Enables or disbales navigation through slides using mouse wheel.
+The Pagination module in SwiperJS is a powerful tool that allows you to add
+visual indicators (like buttons) to a SwiperJS slide. The navigation elements
+make it clear to users how many slides there are and which slide they are
+currently viewing.
+
+[TIP]
+====
+Find all available configurable *settings* with <<Navigation>> in section
+<<Mdules>>.
+====
+
+Find the available options for navigation below to enable and configure the
+navigation (module).
 
 [cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
@@ -269,7 +309,7 @@ default settings.
 
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   navigation: {
     nextEl: '.swiper-button-next',
     prevEl: '.swiper-button-prev'
@@ -442,7 +482,7 @@ Register event handlers.
 
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   swiper.on('click', (swiper, event) => {
     // do something
   }
@@ -468,7 +508,7 @@ Register event handlers on *all* events.
 
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   onAny(eventName, ...args) {
     console.log('Event: ', eventName);
     console.log('Event data: ', args);

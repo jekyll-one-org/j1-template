@@ -2,8 +2,353 @@
 [[swiper-modules]]
 == Modules
 
+SwiperJS modules are extensions that extend the functionality of the core
+SwiperJS system. They offer additional and advanced features and customization
+options beyond the basic functions of SwiperJS sliders.
+
+[role="mt-4 mb-"]
+[TIP]
+====
 Find available SwiperJS module descriptions also with the
 https://swiperjs.com/swiper-api#modules[Swiper Documentation, {browser-window--new}].
+====
+
+Additional features::
+Modules can be used when navigation, pagination, a scroll bar, or an effect,
+such as a zoom effect, is required. A suitable module already exists for many
+additional functions.
+
+Customizatiion::
+Modules allow detailed customization of a slideshow's look and behavior and
+enable the adaptation of sliders to individual needs.
+
+[role="mt-4 mb-5"]
+[TIP]
+====
+For using SwiperJS in the *web browser* or for J1 template projects, all
+*modules* are *already* integrated* into the JS and CSS **resources** as
+*bundle* versions and can be used immediately.
+
+It is advisable to configure only the required modules to keep the code and
+configuration of a SwiperJS slider compact and clear.
+====
+
+.Available Modules for SwiperJS
+[cols="3,9a", subs=+macros, options="header", width="100%", role="rtable mb-5"]
+|===
+|Name |Description \| Example
+
+|<<Accessibility (a11y)>>
+|Enable and configure Accessibility (a11y) module features of SwiperJS
+available for screen readers and other assistive technologies.
+
+[source, js]
+----
+const swiper = new Swiper('#swiper_id', {
+  // other parameters ...
+  a11y: {
+    prevSlideMessage:   'Go to previous slide',
+    nextSlideMessage:   'Go to next slide',
+    firstSlideMessage:  'This is the first slide',
+    lastSlideMessage:   'This is the last slide'
+  }
+});
+----
+
+|<<Controller>>
+|The Controller module allows to *synchronize* the movement of *multiple*
+slider instances.
+
+[source, js]
+----
+const swiper = new Swiper('#swiper_id', {
+  // other parameters ...
+  controller: {
+    inverse: true
+  }
+});
+----
+
+|<<Cards Effect>>
+|The Cards Effect module in SwiperJS adds a visually appealing, card-like
+sliding animation for transitions between slides in a SwiperJS slider
+instance.
+
+[source, js]
+----
+const swiper = new Swiper('#swiper_id', {
+  // other parameters ...    
+  effect: 'cards',
+  cardsEffect: {
+    // ...
+  }
+});
+----
+
+|<<Coverflow Effect>>
+|The Coverflow Effect module for SwiperJS creates a three-dimensional,
+fan-like effect for the slides in a Swiper container. This effect is inspired
+by the Coverflow view that you can see, for example, when selecting albums
+in _iTunes_.
+
+[source, js]
+----
+const swiper = new Swiper('#swiper_id', {
+  // other parameters ...
+  effect: 'coverflow',
+  coverflowEffect: {
+    rotate: 30,
+    slideShadows: false
+  }
+});
+----
+
+|<<Creative Effect>>
+|The creative effect module in SwiperJS generates creative and engaging visual
+effects for the slides in a Swiper. The module allows for various custom
+transformations to animate the slides dynamically as they transition between
+each slide.
+
+[source, js]
+----
+const swiper = new Swiper('#swiper_id', {
+  // other parameters ...
+  effect: 'creative',
+  creativeEffect: {
+    prev: {
+      // will set `translateZ(-400px)` on previous slides
+      translate: [0, 0, -400],
+    },
+    next: {
+      // will set `translateX(100%)` on next slides
+      translate: ['100%', 0, 0],
+    }
+  }
+});
+----
+
+|<<Cube Effect>>
+|The Cube Effect module in SwiperJS adds a 3D cube-like rotation effect to
+the transitions between slides in a SwiperJS slider instance.
+
+[source, js]
+----
+const swiper = new Swiper('#swiper_id', {
+  // other parameters ...
+  effect: 'cube',
+  cubeEffect: {
+    slideShadows: false
+  }
+});
+----
+
+|<<Fade Effect>>
+|The Fade Effect module in SwiperJS creates a smooth transition between each
+slide. Instead of sliding or sliding the slides like other effects do, the
+transition causes them to fade out and the next slide to fade in.
+
+[source, js]
+----
+const swiper = new Swiper('#swiper_id', {
+  // other parameters ...
+  effect: 'fade',
+  fadeEffect: {
+    crossFade: true
+  }
+});  
+----
+
+|<<Flip Effect>>
+|The Flip Effect module in SwiperJS creates a special transition effect
+between individual slides. It gives the impression that the slides are being
+turned like cards.
+
+[source, js]
+----
+const swiper = new Swiper('#swiper_id', {
+  // other parameters ...
+  effect: 'flip',
+  flipEffect: {
+    slideShadows: false
+  }
+});
+----
+
+|<<Free Mode>>
+|The Free Mode module gives users a more fluid and interactive sliding 
+experience.
+
+[source, js]
+----
+// other parameters ...
+const swiper = new Swiper('#swiper_id', {
+  grid: {
+    rows: 2
+  }
+});
+----
+
+|<<Grid>>
+|The Grid module in SwiperJS allows to create *multi-row* sliders, effectively
+arranging slides into a *grid-like* structure.
+
+[source, js]
+----
+// other parameters ...
+const swiper = new Swiper('#swiper_id', {
+  grid: {
+    rows: 2
+  }
+});
+----
+
+|<<Hash Navigation>>
+|Hash navigation is intended to have a link to specific slide that allows to
+load a page with specific slide opened.
+
+[source, js]
+----
+const swiper = new Swiper('#swiper_id', {
+  // other parameters ...
+  hashNavigation: {
+    replaceState: true
+  }
+});
+----
+
+|<<History Navigation>>
+|The History (Navigation) module in SwiperJS allows you to integrate Swiper
+with history of the *browser*. This means, when users navigate between slides
+in a Swiper, the browser's URL will be updated to reflect the current slide.
+
+Object with history navigation parameters or boolean `true` to enable
+with default settings.
+
+[source, js]
+----
+const swiper = new Swiper('#swiper_id', {
+  // other parameters ...
+  history: {
+    replaceState: true
+  }
+});
+----
+
+|<<Keyboard Control>>
+|The Keyboard Control module in SwiperJS enables navigation through slides
+using the keyboard.
+
+[source, js]
+----
+// other parameters ...
+const swiper = new Swiper('#swiper_id', {
+  keyboard: {
+    enabled: true,
+    onlyInViewport: false
+  }
+});
+----
+
+|<<Lazy Loading>>
+|The Lazy Loading module in SwiperJS controls the lazy loading of *images*
+within a swiper. Lazy loading means images are *not loaded* until they
+scroll into the browser's *visible area*. Using the module increases loading
+speed, especially for websites with many images, and thus improves the user
+experience.
+
+|<<Manipulation>>
+|The Manipulation module adds useful methods to SwiperJS for manipulating
+slides. The module provides methods for dynamically adding, removing, and
+rearranging slides within a SwiperJS slider.
+
+|<<Mousewheel Control>>
+|The Mousewheel Control module in SwiperJS enables users to navigate through
+the slides of a SwiperJS instance using their mouse wheel.
+
+[source, js]
+----
+// other parameters ...
+const swiper = new Swiper('#swiper_id', {
+  mousewheel: {
+    invert: true
+  }
+});
+----
+
+|<<Pagination>>
+|The Pagination module in SwiperJS is a powerful tool for adding visual
+indicators (like buttons) to a SwiperJS slide. The navigation elements make
+it clear to users how many slides they view and which ones they view.
+
+[source, js]
+----
+const swiper = new Swiper('#swiper_id', {
+  // other parameters ...
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev'
+  }
+});
+----
+
+|<<Parallax>>
+|The Parallax module supports parallax transition effects for SwiperJS silder
+*slides* and nested elements.
+
+[source, js]
+----
+const swiper = new Swiper('#swiper_id', {
+  // other parameters ...
+  parallax: true
+});
+----
+
+|<<Scrollbar>>
+|The Scrollbar module in SwiperJS is a powerful tool that enhances user
+interaction and provides visual feedback within a SwiperJS slider.
+
+[source, js]
+----
+const swiper = new Swiper('#swiper_id', {
+  // other parameters ...
+  scrollbar: {
+    el: '.swiper-scrollbar',
+    draggable: true
+  }
+});
+----
+
+|<<Thumbs>>
+|The Thumbs module enables to create a thumbnail navigation for SliderJS
+sliders.
+
+[source, js]
+----
+const swiper = new Swiper('#swiper_id', {
+  // other parameters ...
+  thumbs: {
+    swiper: thumbsSwiper
+  }
+});
+----
+
+|<<Virtual Slides>>
+|The Virtual Slides module allows you to keep the required number of slides
+in the DOM. The module is very useful in terms of performance and memory
+issues if you have a lot of slides, especially slides with heavyweight DOM
+trees or images.
+
+[source, js]
+----
+// other parameters ...
+const swiper = new Swiper('#swiper_id', {
+  virtual: {
+    slides: ['Slide 1', 'Slide 2', 'Slide 3', 'Slide 4', 'Slide 5']
+  }
+});
+----
+
+|===
 
 
 [role="mt-5"]
@@ -30,6 +375,9 @@ user experience.
 [[swiper-modules-a11y-parameters]]
 ==== Parameters
 
+Find all parameters available for the *Accessibility* (a11y) module.
+
+.Accessibility (a11y) Parameters
 [cols="3,2,3,4a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
@@ -114,7 +462,7 @@ is on *last slide*.
 
 |===
 
-[role="mt-5"]
+
 [[swiper-modules-autoplay]]
 === Autoplay
 
@@ -144,6 +492,7 @@ You can extensively customize the autoplay behavior:
 
 Find all *Parameters* available for the *Autoplay* module.
 
+.Autoplay Parameters
 [cols="4,2,2,4a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
@@ -207,6 +556,7 @@ Can be disabled in case of using Virtual Translate when your slider may
 
 Find all *Properties* available for the *Autoplay* module.
 
+.Autoplay Properties
 [cols="3,3,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
@@ -232,6 +582,7 @@ transition starts to *next slide*.
 
 Find all *Methods* available for the *Autoplay* module.
 
+.Autoplay Methods
 [cols="3,9a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Description
@@ -275,7 +626,7 @@ Event will be fired when *slide changed* with autoplay.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     autoplay: (swiper) => {
@@ -300,7 +651,7 @@ Event will be fired on autoplay *pause*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     autoplayPause: (swiper) => {
@@ -325,7 +676,7 @@ Event will be fired on autoplay *resume*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     autoplayResume: (swiper) => {
@@ -350,7 +701,7 @@ Event will be fired in case autoplay has been *started*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     autoplayStart: (swiper) => {
@@ -375,7 +726,7 @@ Event will be fired when autoplay has been *stopped*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     autoplayStop: (swiper) => {
@@ -407,7 +758,7 @@ Receives *swiper*, *timeLeft*, *percentage* event *data* as *arguments*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     autoplayTimeLeft: (swiper, timeLeft, percentage) => {
@@ -449,8 +800,9 @@ Control can be based on the *slide index* of the master or its overall
 [[swiper-modules-controller-parameters]]
 ==== Parameters
 
-Find all available *parameters* available for a *Controller*.
+Find all parameters available for the *Controller* module.
 
+.Controller Parameters
 [cols="3,2,3,4a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
@@ -482,6 +834,7 @@ that should be controlled by this swiper. Also accepts a *string* with a
 
 Find below available *Methods* for the SwiperJS *Controller* module.
 
+.Controller Methods
 [cols="3,9a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Method |Description \| Example
@@ -520,8 +873,9 @@ module work.
 [[swiper-modules-cards-effect-parameters]]
 ==== Parameters
 
-Find below available *Parameters* for the SwiperJS *Cards Effect* module.
+Find all parameters available for the *Cards Effect* module.
 
+.Cards Effect Parameters
 [cols="3,2,3,4a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
@@ -560,6 +914,9 @@ this to work.
 [[swiper-modules-cover-effect-parameters]]
 ==== Parameters
 
+Find all parameters available for the *Coverflow Effect* module.
+
+.Coverflow Effect Parameters
 [cols="3,2,3,4a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
@@ -600,11 +957,14 @@ this to work.
 [[swiper-modules-creative-effect]]
 === Creative Effect
 
-The Creative Effect module in SwiperJS is a powerful tool for creating
-highly customized and visually striking slide transitions. Here's a breakdown
-of its key features:
+The creative effect module in SwiperJS generates creative and engaging
+visual effects for the slides in a Swiper. It allows for a variety of custom
+transformations to animate the slides dynamically as they transition between
+each slide.
 
-Highly Customizable Transitions::
+Here's a breakdown of its key features:
+
+Customizable Transitions::
 Allows you to define unique transformations for each slide (previous, next,
 and active) using properties like translate, rotate, scale, opacity, and more.
 This flexibility enables you to create a wide range of effects, from subtle
@@ -625,8 +985,9 @@ the module work.
 [[swiper-modules-creative-effect-parameters]]
 ==== Parameters
 
-Find below available *Parameters* for the SwiperJS *Creative Effect* module.
+Find all parameters available for the SwiperJS *Creative Effect* module.
 
+.Creative Effect Parameters
 [cols="3,2,3,4a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
@@ -644,7 +1005,6 @@ after 2nd before/after active will have same state, etc.
 |Next slide transformations.
 
 // kapott 1
-   kapott 1
 
 |`perspective`
 |boolean
@@ -658,7 +1018,6 @@ like `translateZ`, `rotateX`, `rotateY.
 |Previous slide transformations. Accepts object of the following type:
 
 // kapott 2
-   kapott 2
 
 |`progressMultiplier`
 |number
@@ -694,8 +1053,9 @@ module work.
 [[swiper-modules-cube-effect-parameters]]
 ==== Parameters
 
-Find below available *Parameters* for the SwiperJS *Cube Effect* module.
+Find all parameters available for the *Cube Effect* module.
 
+.Cube Effect Parameters
 [cols="3,2,3,4a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
@@ -727,8 +1087,9 @@ Find below available *Parameters* for the SwiperJS *Cube Effect* module.
 [[swiper-modules-fade-effect]]
 === Fade Effect
 
-The Fade Effect module in SwiperJS is a powerful tool for creating smooth
-and visually appealing *transitions* between slides in your slider.
+The Fade Effect module in SwiperJS creates a smooth transition between each
+slide. Instead of sliding or sliding the slides like other effects do, the
+transition causes them to fade out and the next slide to fade in.
 
 [NOTE]
 ====
@@ -743,8 +1104,9 @@ content *behind* or *underneath*.
 [[swiper-modules-fade-effect-parameters]]
 ==== Parameters
 
-Find below available *Parameters* for the SwiperJS *Fade Effect* module.
+Find all parameters available for the *Fade Effect* module.
 
+.Fade Effect Parameters
 [cols="3,2,3,4a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
@@ -773,8 +1135,9 @@ module work.
 [[swiper-modules-flip-effect-parameters]]
 ==== Parameters
 
-Find below available *Parameters* for the SwiperJS *Flip Effect* module.
+Find all parameters available for the *Flip Effect* module.
 
+.Flip Effect Parameters
 [cols="3,2,3,4a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
@@ -816,8 +1179,9 @@ it comes to rest, providing a more controlled experience.
 [[swiper-modules-free-mode-parameters]]
 ==== Parameters
 
-Find below available *Parameters* for the SwiperJS *Free Mode* module.
+Find all parameters available for the *Free Mode* module.
 
+.Free Mode Parameters
 [cols="3,2,3,4a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
@@ -887,8 +1251,9 @@ Control how slides fill the rows:
 [[swiper-modules-grid-parameters]]
 ==== Parameters
 
-Find below available *Parameters* for the SwiperJS *Grid* module.
+Find all parameters available for the *Grid* module.
 
+.Grid Parameters
 [cols="3,2,3,4a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
@@ -955,8 +1320,9 @@ const swiper = new Swiper('#swiperHashNavigation', {
 [[swiper-modules-hash-navigation-parameters]]
 ==== Parameters
 
-Find below available *Parameters* for the SwiperJS *Hash Navigation* module.
+Find all parameters available for the *Hash Navigation* module.
 
+.Hash Navigation Parameters
 [cols="2,2,2,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
@@ -1000,7 +1366,7 @@ Event fired on window hash change.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     hashChange: (swiper) => {
@@ -1025,7 +1391,7 @@ Event fired when swiper updates the hash.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     hashSet: (swiper) => {
@@ -1065,8 +1431,9 @@ SEO:: Search engines can index *individual slides* and potentially this may
 [[swiper-modules-history-navigation-parameters]]
 ==== Parameters
 
-Find below available *Parameters* for the SwiperJS *Navigation* module.
+Find all parameters available for the *History Navigation* module.
 
+.History Navigation Parameters
 [cols="2,2,2,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
@@ -1124,8 +1491,9 @@ prevent *accidental navigation* when the swiper is off-screen.
 [[swiper-modules-keyboard-control-parameters]]
 ==== Parameters
 
-Find below available *Parameters* for the SwiperJS *Keyboard Control* module.
+Find all parameters available for the *Keyboard Control* module.
 
+.Keyboard Control Parameters
 [cols="3,2,3,4a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
@@ -1152,6 +1520,7 @@ Find below available *Parameters* for the SwiperJS *Keyboard Control* module.
 
 Find below available *Properties* for the SwiperJS *Keyboard Control* module.
 
+.Keyboard Control Properties
 [cols="3,3,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
@@ -1168,6 +1537,7 @@ Find below available *Properties* for the SwiperJS *Keyboard Control* module.
 
 Find below available *Methods* for the SwiperJS *Keyboard Control* module.
 
+.Keyboard Control Methods
 [cols="3,9a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Method |Description
@@ -1199,7 +1569,7 @@ Event fired on key press.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     keyPress: (swiper, keyCode) => {
@@ -1284,6 +1654,7 @@ intended to be used with SwiperJS Environments like *React* or *Vue*.
 
 Find below available *Methods* for the SwiperJS *Manipulation* module.
 
+.Manipulation Methods
 [cols="4,8a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Method |Description \| Example
@@ -1382,6 +1753,7 @@ axis, e.g. for only *horizontal* scrolling in horizontal mode.
 
 Find below available *Parameters* for the SwiperJS *Mousewheel Control* module.
 
+.Mousewheel Control Parameters
 [cols="3,2,3,4a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
@@ -1444,6 +1816,7 @@ end).
 
 Find below available *Properties* for the SwiperJS *Keyboard Control* module.
 
+.Mousewheel Control Properties
 [cols="3,3,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
@@ -1460,6 +1833,7 @@ Find below available *Properties* for the SwiperJS *Keyboard Control* module.
 
 Find below available *Methods* for the SwiperJS *Mousewheel Control* module.
  
+.Mousewheel Control Methods
 [cols="4,8a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Method |Description
@@ -1491,7 +1865,7 @@ Event fired on mousewheel scroll.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     scroll: (swiper, event) => {
@@ -1524,8 +1898,9 @@ the navigation buttons.
 [[swiper-modules-navigation-parameters]]
 ==== Parameters
 
-Find below available *Parameters* for the SwiperJS *Navigation* module.
+Find all parameters available for the *Navigation* module.
 
+.Navigation Parameters
 // [cols="3,2,3,4a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 [cols=",,,", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
@@ -1582,6 +1957,7 @@ work like *prev button* after click on it.
 
 Find below available *Properties* for the SwiperJS *Navigation* module.
 
+.Navigation Properties
 [cols="3,9a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5" mb-5]
 |===
 |Name |Description \| Example
@@ -1600,6 +1976,7 @@ Find below available *Properties* for the SwiperJS *Navigation* module.
 
 Find below available *Methods* for the SwiperJS *Navigation* module.
 
+.Navigation Methods
 [cols="3,9a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5" mb-5]
 |===
 |Name |Description
@@ -1634,7 +2011,7 @@ Event will be fired on *navigation hide*
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     navigationHide: (swiper) => {
@@ -1659,7 +2036,7 @@ Event will be fired on *click* the navigation *next button*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     navigationNext: (swiper) => {
@@ -1684,7 +2061,7 @@ Event will be fired on *click* the navigation *prev button*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     navigationPrev: (swiper) => {
@@ -1709,7 +2086,7 @@ Event will be fired on *navigation show*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     navigationShow: (swiper) => {
@@ -1742,10 +2119,10 @@ Find below available *CSS Properties* for the SwiperJS *Navigation* module.
 [[swiper-modules-pagination]]
 === Pagination
 
-The Pagination module in SwiperJS is a powerful tool that allows you to
-easily add visual indicators to your slider, making it clear to users
-how many slides there are and which slide they are currently viewing.
-Here's a breakdown of its key functionalities:
+The Pagination module in SwiperJS is a powerful tool that allows you to add
+visual indicators (like buttons) to a SwiperJS slide. The navigation elements
+make it clear to users how many slides there are and which slide they are
+currently viewing. Here's a breakdown of its key functionalities:
 
 Active State::
 The indicator corresponding to the currently active slide is visually
@@ -1763,8 +2140,9 @@ that represent each slide in your slider.
 [[swiper-modules-pagination-parameters]]
 ==== Parameters
 
-Find below available *Parameters* for the SwiperJS *Pagination* module.
+Find all parameters available for the *Pagination* module.
 
+.Pagination Parameters
 // [cols="2,2,2,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 [cols=",,,", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
@@ -1897,7 +2275,7 @@ pagination type.
 
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
     //...
     renderBullet: function (index, className) {
         return '<span class="' + className + '">' + (index + 1) + '</span>';
@@ -1913,7 +2291,7 @@ have to specify how it should be rendered.
 
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
     //...
     renderCustom: function (swiper, current, total) {
         return current + ' of ' + total;
@@ -1929,7 +2307,7 @@ _fraction_ pagination type.
 
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
     //...
     renderFraction: function (currentClass, totalClass) {
         return '<span class="' + currentClass + '"></span>' +
@@ -1947,7 +2325,7 @@ _progress_ pagination type
 
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
     //...
     renderProgressbar: function (progressbarFillClass) {
         return '<span class="' + progressbarFillClass + '"></span>';
@@ -1980,6 +2358,7 @@ Can be _bullets_, _fraction_ , _progressbar_ or _custom_.
 
 Find below available *Properties* for the SwiperJS *Pagination* module.
 
+.Pagination Properties
 [cols="3,9a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5" mb-5]
 |===
 |Property |Description \| Example
@@ -1999,6 +2378,7 @@ HTMLElement use `swiper.pagination.bullets[1]`.
 
 Find below available *Methods* for the SwiperJS *Pagination* module.
 
+.Pagination Methods
 [cols="3,9a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5" mb-5]
 |===
 |Method |Description
@@ -2035,7 +2415,7 @@ Event will be fired on pagination hide.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     paginationHide: (swiper) => {
@@ -2060,7 +2440,7 @@ Event will be fired after pagination rendered.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     paginationRender: (swiper) => {
@@ -2090,7 +2470,7 @@ Receives *paginationEl* event as an *argument*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     paginationShow: (swiper, paginationEl) => {
@@ -2120,7 +2500,7 @@ Receives *paginationEl* event as an *argument*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     paginationUpdate: (swiper, paginationEl) => {
@@ -2242,8 +2622,9 @@ previous)
 [[swiper-modules-parallax-parameters]]
 ==== Parameters
 
-Find below available *Parameters* for the SwiperJS *Parallax* module.
+Find all parameters available for the *Parallax* module.
 
+.Parallax Parameters
 [cols="3,2,3,4a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
@@ -2282,8 +2663,9 @@ position, and more.
 [[swiper-modules-scrollbar-parameters]]
 ==== Parameters
 
-Find below available *Parameters* for the SwiperJS *Scrollbar* module.
+Find all parameters available for the *Scrollbar* module.
 
+.Scrollbar Parameters
 // [cols="3,2,3,4a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 [cols=",,,", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
@@ -2354,6 +2736,7 @@ scrollbar is *disabled* by *breakpoint*.
 
 Find below available *Properties* for the SwiperJS *Scrollbar* module.
 
+.Scrollbar Properties
 [cols="3,9a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5" mb-5]
 |===
 |Property |Description
@@ -2373,6 +2756,7 @@ Find below available *Properties* for the SwiperJS *Scrollbar* module.
 
 Find below available *Methods* for the SwiperJS *Scrollbar* module.
 
+.Scrollbar Methods
 [cols="3,9a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5" mb-5]
 |===
 |Name |Description
@@ -2413,7 +2797,7 @@ Receives *scrollbar event* as an *argument*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     scrollbarDragEnd: (swiper, event) => {
@@ -2443,7 +2827,7 @@ Receives *scrollbar event* as an *argument*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     scrollbarDragMove: (swiper, event) => {
@@ -2473,7 +2857,7 @@ Receives *scrollbar event* as an *argument*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     scrollbarDragStart: (swiper, event) => {
@@ -2520,8 +2904,9 @@ In addition to the SwiperJS <<Controller>> module the API comes with the
 [[swiper-modules-thumbs-parameters]]
 ==== Parameters
 
-Find below available *Parameters* for the SwiperJS *Thumbs* module.
+Find all parameters available for the *Thumbs* module.
 
+.Thumbs Parameters
 [cols="3,2,3,4a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
@@ -2562,6 +2947,7 @@ parameters to initialize thumbs swiper.
 
 Find below available *Properties* for the SwiperJS *Thumbs* module.
 
+.Thumbs Properties
 [cols="3,3,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
@@ -2591,7 +2977,7 @@ Initialize thumbs.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     init: (swiper) => {
@@ -2616,7 +3002,7 @@ Update thumbs.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     update: (initial) => {
@@ -2648,8 +3034,9 @@ Virtual Slides *doesn't work* with *Grid* module and if parameter
 [[swiper-modules-virtual-slides-parameters]]
 ==== Parameters
 
-Find below available *Parameters* for the SwiperJS *Virtual Slides* module.
+Find all parameters available for the *Virtual Slides* module.
 
+.Virtual Slides Parameters
 [cols="3,2,3,4a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
@@ -2736,6 +3123,7 @@ return an outer HTML of the swiper slide or slide HTML element.
 
 Find below available *Methods* for the SwiperJS *Virtual Slides* module.
 
+.Virtual Slides Methods
 [cols="3,9a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5" mb-5]
 |===
 |Name |Description
@@ -2803,7 +3191,7 @@ then re-use the ones which are required:
 </div>
 
 <script>
-  const swiper = new Swiper('.swiper', {
+  const swiper = new Swiper('#swiper_id', {
     virtual: {
     enabled: true
     }
@@ -2879,8 +3267,9 @@ You can override `maxRatio` parameter for specific slides by using
 [[swiper-modules-zoom-parameters]]
 ==== Parameters
 
-Find below available *Parameters* for the SwiperJS *Zoom* module.
+Find all parameters available for the *Zoom* module.
 
+.Zoom Parameters
 [cols="3,2,3,4a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
@@ -2930,6 +3319,7 @@ the mouse over the image.
 
 Find below available *Properties* for the SwiperJS *Zoom* module.
 
+.Zoom Properties
 [cols="3,3,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
@@ -2950,6 +3340,7 @@ Find below available *Properties* for the SwiperJS *Zoom* module.
 
 Find below available *Methods* for the SwiperJS *Zoom* module.
 
+.Zoom Methods
 [cols="3,9a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5" mb-5]
 |===
 |Name |Description
@@ -3002,7 +3393,7 @@ Receives evants *scale*, *imageEl*, *slideEl* as an *argument*.
 |
 [source, js]
 ----
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('#swiper_id', {
   // option settings ...
   on: {
     zoomChange: (swiper, scale, imageEl, slideEl) => {
