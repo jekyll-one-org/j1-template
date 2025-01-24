@@ -1,36 +1,42 @@
 [role="mt-5"]
-== Lightbox Options
+== PhotoSwipe Lightbox
 
 See link:/getting-started[getting started] and link:/data-sources[data
 sources] for examples.
 
-[role="mt-5"]
-=== gallery
+[cols="3,9a", subs=+macros, options="header", width="100%", role="rtable mt-5"]
+|===
+|Name |Description
 
-Element, NodeList, or CSS selector (string) for the gallery element.
+|`gallery`
+|Element, NodeList, or CSS selector (string) for the *gallery* element,
+a swiper slider for example.
 
-[role="mt-5"]
-==== children
+|`children`
+|Element, NodeList, or CSS selector (string) for elements within a
+`gallery`, a swiper slider for example. If not defined or set to `false`,
+the `gallery` *root* node is used.
 
-Element, NodeList, or CSS selector (string) for elements within
-`+gallery+`. For example, link elements. If not defined or set to false
-- root `+gallery+` node will be used.
+|===
 
 [role="mt-5"]
 === pswpModule
 
-Function or Module, `+undefined+`.
+Function or Module. Should return import(), if you need to *dynamic* import.
 
-A function that should return import() promise (if you need dynamic import),
-for example:
+Default: `undefined`
 
+[role="mb-5"]
+.Example
 [source, js]
 ----
-pswpModule: () => import('photoswipe/dist/photoswipe.esm.js');
+pswpModule: PhotoSwipe
 ----
 
-Or the PhotoSwipe *Core* module itself, for example:
+Or the PhotoSwipe *Core* module itself.
 
+[role="mb-5"]
+.Example
 [source, js]
 ----
 const lightbox = new PhotoSwipeLightbox({
@@ -39,19 +45,21 @@ const lightbox = new PhotoSwipeLightbox({
 });
 ----
 
+
 [role="mt-5"]
 === preloadFirstSlide
 
-Boolean, `+true+`. Loads the first slide image in parallel with
-PhotoSwipe Core (while PhotoSwipe is opening).
+Boolean, `true`. Loads the first slide image in parallel with PhotoSwipe
+Core (while PhotoSwipe is opening).
 
+[role="mb-5"]
 [source, js]
 ----
 import PhotoSwipeLightbox from '/photoswipe/photoswipe-lightbox.esm.js';
 const lightbox = new PhotoSwipeLightbox({
-  gallery: '#gallery--test-appendToEl',
+  gallery: '#gallery_id',
+  pswpModule: PhotoSwipe,
   children: 'a',
-  pswpModule: () => import('/photoswipe/photoswipe.esm.js'),
   preloadFirstSlide: false
 });
 lightbox.init();
@@ -60,39 +68,38 @@ lightbox.init();
 [role="mt-5"]
 === Translating
 
-A list of options that might need a translation:
+A list of options that might need a *translation*.
 
-[source,prism-code,language-text,codeBlock_wPnj,docs-styled-scrollbar]
-----
-closeTitle: 'Close',
-zoomTitle: 'Zoom',
-arrowPrevTitle: 'Previous',
-arrowNextTitle: 'Next',
-
-errorMsg: 'The image cannot be loaded',
-indexIndicatorSep: ' / ',
-----
-
-Example:
-
+[role="mb-5"]
 [source, js]
 ----
-import PhotoSwipeLightbox from '/photoswipe/photoswipe-lightbox.esm.js';
-const lightbox = new PhotoSwipeLightbox({
-  gallery: '#gallery--test-i18n',
-  children: 'a',
+{
+  closeTitle:         'Close',
+  zoomTitle:          'Zoom',
+  arrowPrevTitle:     'Previous',
+  arrowNextTitle:     'Next',
+  errorMsg:           'The image cannot be loaded',
+  indexIndicatorSep:  '/'
+}
+----
 
+[role="mb-5"]
+.Example
+[source, js]
+----
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#gallery_id',
+  pswpModule: PhotoSwipe,
+  children: 'a',
   closeTitle: 'Close the dialog',
   zoomTitle: 'Zoom the photo',
   arrowPrevTitle: 'Go to the previous photo',
   arrowNextTitle: 'Go to the next photo',
-
   errorMsg: 'The photo cannot be loaded',
   indexIndicatorSep: ' of ',
-
-  pswpModule: () => import('/photoswipe/photoswipe.esm.js'),
   preloadFirstSlide: false
 });
+
 lightbox.init();
 ----
 

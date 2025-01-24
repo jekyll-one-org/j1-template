@@ -27,7 +27,7 @@ regenerate:                             false
 personalization:                        true
 permalink:                              /pages/public/swiper_tester/
 
-resources:                              [ swiper, photoswipe, videojs ]
+resources:                              [ swiper, slick-slider, photoswipe, videojs ]
 resource_options:
   - toccer:
       collapseDepth:                    3
@@ -90,21 +90,107 @@ A slider is typically used for displaying images. Still, the implementation
 for the J1 Template supports a lot more sources to be displayed as a slide
 show — simple text for example.
 
-[role="mt-4"]
+
 ==== Base Text Carousel
 
 Important statements or topics can be placed on top of an article or a
 paragraph to give them better visibility. You can present facts to know
 animated for the readers attention.
 
-// .Base Text Swiper
-swiper::swiper_text_base[role="mt-4 mb-4"]
+.Base Text Swiper
+swiper::swiper_text_base[role="mt-4 mb-5"]
 
+
+++++
+<!-- div id="swiper_text_base" class="swiper swiper-container swiper--text">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <p>
+        <big>J1 is Open Source</big>
+        <br> 
+        <i>No pain for private or professional use</i>
+      </p>
+    </div>
+    <div class="swiper-slide">
+      <p>
+        <big>Explore this site</big>
+        <br> 
+        <i>Learn what's possible if you go the Jekyll Way</i>
+      </p>
+    </div>
+    <div class="swiper-slide">
+      <p>
+        <big>Create modern static sites</big>
+        <br> 
+        <i>Secure, powerful and fast!</i>
+      </p>
+    </div>
+  </div> 
+
+  <div class="autoplay-progress">
+    <svg viewBox="0 0 48 48">
+      <circle cx="24" cy="24" r="20"></circle>
+    </svg>
+    <span></span>
+  </div>
+
+</div -->
+
+<!-- Initialize Text Swiper -->
+<script>
+$(function() {
+  // ---------------------------------------------------------------------------
+  // slider initializer
+  // ---------------------------------------------------------------------------
+  var dependencies_met_page_ready = setInterval (() => {
+    var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true : false;
+
+    if (atticFinished) {
+      const progressCircle  = document.querySelector(".autoplay-progress svg");
+      const progressContent = document.querySelector(".autoplay-progress span");
+
+      // var dependencies_html_ready = setInterval (() => {
+      //   var xhrLoadState = (j1.xhrDOMState['#swiper_text_base_parent']== 'success') ? true : false;
+
+      //   if (xhrLoadState) {
+      //     const textSwiper = new Swiper('#swiper_text_base', {
+      //         // Optional parameters
+      //         direction: 'horizontal',
+      //         loop: true,
+      //         autoplay: {
+      //           delay: 3000,
+      //           pauseOnMouseEnter: true,
+      //           disableOnInteraction: false
+      //         },
+      //         // scrollbar: {
+      //         //     el: '.swiper-scrollbar',
+      //         // },
+      //         // on: {
+      //         //   // afterInit: function (swiper) {
+      //         //   //   // do something
+      //         //   // },        
+      //         //   // autoplayTimeLeft(s, time, progress) {
+      //         //   //   progressCircle.style.setProperty("--progress", 1 - progress);
+      //         //   //   progressContent.textContent = `${Math.ceil(time / 1000)}s`;
+      //         //   // }
+      //         // }
+      //     }); 
+
+      //     clearInterval(dependencies_html_ready);
+      //   }
+      // }, 10); // END dependencies_html_ready    
+
+      clearInterval(dependencies_met_page_ready);
+    } // END pageVisible
+  }, 10); // END dependencies_met_page_ready
+});    
+</script>
+++++
 
 [role="mt-4"]
 === Image Slider
 
-Sliders (or Carousels) are mostly used for pictures data to animate the
+Sliders (or Carousel)s are mostly used for pictures data to animate the
 images as a series. Find with the following some examples of how to use
 a slider for your image data.
 

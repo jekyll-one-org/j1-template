@@ -1,5 +1,5 @@
 [role="mt-5"]
-== PhotoSwipe Options
+== PhotoSwipe Parameters
 
 List of available PhotoSwipe options (parameters) alphabetically ordered.
 Find option settings also with the
@@ -11,6 +11,7 @@ https://photoswipe.com/getting-started/[PhotoSwipe Documentation, {browser-windo
 Boolean, `+true+`. Allow swipe navigation to the next slide when the
 current slide is zoomed. Does not apply to mouse events.
 
+[role="mb-5"]
 [source, js]
 ----
 const lightbox = new PhotoSwipeLightbox({
@@ -27,6 +28,7 @@ lightbox.init();
 
 Boolean, `+true+`. Left/right arrow keys for navigation.
 
+[role="mb-5"]
 [source, js]
 ----
 const lightbox = new PhotoSwipeLightbox({
@@ -45,7 +47,7 @@ lightbox.init();
 Sets the background *backdrop* opacity. Should be *always* defined by
 *bgOpacity* option and *not* by CSS RGBA color.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -55,6 +57,7 @@ Sets the background *backdrop* opacity. Should be *always* defined by
 |Sets the background *backdrop* opacity. Should be *always* defined by
 *bgOpacity* option and *not* by CSS RGBA color.
 
+[role="mb-5"]
 [source, js]
 ----
 const lightbox = new PhotoSwipeLightbox({
@@ -80,6 +83,7 @@ page.
 Boolean, `+true+`. If image is not zoomable (for example, smaller than
 viewport) it can be closed by clicking on it.
 
+[role="mb-5"]
 [source, js]
 ----
 const lightbox = new PhotoSwipeLightbox({
@@ -97,6 +101,7 @@ lightbox.init();
 
 Boolean, `+true+`. Vertical drag gesture to close the PhotoSwipe.
 
+[role="mb-5"]
 [source, js]
 ----
 const lightbox = new PhotoSwipeLightbox({
@@ -132,6 +137,7 @@ Message to display when the image wasn't able to load. If you need to
 display HTML - use link:/filters#contenterrorelement[contentErrorElement
 filter].
 
+[role="mb-5"]
 [source, js]
 ----
 const lightbox = new PhotoSwipeLightbox({
@@ -150,6 +156,7 @@ Function `+{x: width, y: height}+`, `+undefined+`. A function that
 should return slide viewport width and height, in format
 `+{x: 100, y: 100}+`.
 
+[role="mb-5"]
 [source, js]
 ----
 const lightbox = new PhotoSwipeLightbox({
@@ -188,6 +195,7 @@ In the example below transition duration is set to 1000ms (1s). Easing is
 defined dynamically (opening transition gets ease-out-back, zoom transitions
 gets ease-in-out-back, and closing transition gets ease-in-back):
 
+[role="mb-5"]
 [source, js]
 ----
 const backEasing = {
@@ -225,6 +233,7 @@ lightbox.init();
 
 String, `+/+`. Used for slide count indicator ("1 of 10 ").
 
+[role="mb-5"]
 [source, js]
 ----
 const lightbox = new PhotoSwipeLightbox({
@@ -244,6 +253,7 @@ Boolean, `+true+`. If set to true you'll be able to swipe from the last
 to the first image. Option is always `+false+` when there are less than
 3 slides.
 
+[role="mb-5"]
 [source, js]
 ----
 const lightbox = new PhotoSwipeLightbox({
@@ -288,6 +298,7 @@ Integer, `+4000+`. Maximum width of image to animate, if initial
 rendered image width is larger than this value - the opening/closing
 transition will be automatically disabled.
 
+[role="mb-5"]
 [source, js]
 ----
 const lightbox = new PhotoSwipeLightbox({
@@ -325,6 +336,7 @@ Function, should return padding object. The option is checked
 frequently, so make sure it's performant. Overrides `+padding+` option
 if defined. For example:
 
+[role="mb-5"]
 [source, js]
 ----
 const lightbox = new PhotoSwipeLightbox({
@@ -355,6 +367,7 @@ lightbox.init();
 
 Boolean, `+true+`. Pinch touch gesture to close the gallery.
 
+[role="mb-5"]
 [source, js]
 ----
 const lightbox = new PhotoSwipeLightbox({
@@ -375,6 +388,7 @@ movement. Should be an array with two integers, first one - number of
 items to preload before the current image, second one - after the
 current image. Two nearby images are always loaded.
 
+[role="mb-5"]
 [source, js]
 ----
 const lightbox = new PhotoSwipeLightbox({
@@ -394,6 +408,7 @@ Number (ms), `+2000+`. Delay before the loading indicator will be
 displayed, if image is loaded during it - the indicator will not be
 displayed at all. Can be zero.
 
+[role="mb-5"]
 [source, js]
 ----
 const lightbox = new PhotoSwipeLightbox({
@@ -412,6 +427,7 @@ lightbox.init();
 Boolean, `+true+`. Restore focus the last active element after
 PhotoSwipe is closed.
 
+[role="mb-5"]
 [source, js]
 ----
 const lightbox = new PhotoSwipeLightbox({
@@ -431,6 +447,7 @@ Number, `+333+`. Transition duration in milliseconds, can be `+0+`.
 link:/opening-or-closing-transition#transition-duration-and-easing[Example
 here].
 
+[role="mb-5"]
 [source, js]
 ----
 const lightbox = new PhotoSwipeLightbox({
@@ -449,6 +466,7 @@ lightbox.init();
 Number, `+0.1+`. Spacing between slides. Defined as ratio relative to
 the viewport width (0.1 = 10% of viewport).
 
+[role="mb-5"]
 [source, js]
 ----
 const lightbox = new PhotoSwipeLightbox({
@@ -481,6 +499,7 @@ page.
 Boolean, `+undefined+`. By default PhotoSwipe zooms image with
 ctrl-wheel, if you enable this option - image will zoom just via wheel.
 
+[role="mb-5"]
 [source, js]
 ----
 const lightbox = new PhotoSwipeLightbox({

@@ -16,7 +16,7 @@ https://swiperjs.com/swiper-api[Swiper Documentation, {browser-window--new}].
 
 Index *number* of the *active* slide.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -38,7 +38,7 @@ of slides looped.
 Set the ability on sliding to the *next* slides by assigning `false` \| `true`
 to this property.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -56,7 +56,7 @@ to this property.
 Set the ability on sliding to the *previous* slides by assigning
 `false` \| `true` to this property.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -75,7 +75,7 @@ Set the  ability move slider by *grabbing* it with mouse or by touching
 it with finger (on touch screens) by assigning `false` \| `true`
 to this property.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -93,7 +93,7 @@ to this property.
 
 Is set to `true` if swiper is in *transition*.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -109,7 +109,7 @@ Is set to `true` if swiper is in *transition*.
 
 Is set to `true` if swiper is in *transition*.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -125,7 +125,7 @@ Is set to `true` if swiper is in *transition*.
 
 Object with Cards-effect parameters.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -141,7 +141,7 @@ Object with Cards-effect parameters.
 
 Index number of last *clicked* slide.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -157,7 +157,7 @@ Index number of last *clicked* slide.
 
 Link to last clicked slide (*HTML Element*).
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -174,7 +174,7 @@ Link to last clicked slide (*HTML Element*).
 Object with controller parameters or boolean `true` to enable with
 default settings.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -191,7 +191,7 @@ default settings.
 
 Object with Coverflow-effect parameters.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -207,7 +207,7 @@ Object with Coverflow-effect parameters.
 
 Object with Creative-effect parameters.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -223,7 +223,7 @@ Object with Creative-effect parameters.
 
 Object with Cube-effect parameters.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -239,7 +239,7 @@ Object with Cube-effect parameters.
 
 Object with Swiper default options.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -255,7 +255,7 @@ Object with Swiper default options.
 
 Contains the Slider container HTML element.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -271,7 +271,7 @@ Contains the Slider container HTML element.
 
 Object with global Swiper extended options.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -287,7 +287,7 @@ Object with global Swiper extended options.
 
 Object with Fade-effect parameters.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -303,7 +303,7 @@ Object with Fade-effect parameters.
 
 Object with Flip-effect parameters.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -320,7 +320,7 @@ Object with Flip-effect parameters.
 Object with free mode parameters or boolean `true` if enabled
 with default settings.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -338,7 +338,7 @@ with default settings.
 Object with hash navigation parameters or boolean `true` if enabled
 with default settings.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -355,7 +355,7 @@ with default settings.
 
 Is set to the height of the swiper container.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -371,7 +371,7 @@ Is set to the height of the swiper container.
 
 Object with history parameters.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -387,7 +387,7 @@ Object with history parameters.
 
 Is set to `true` if slider on most *left|top* position.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -403,7 +403,7 @@ Is set to `true` if slider on most *left|top* position.
 
 Is set to `true` if slider on most *right/bottom* position.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -422,7 +422,7 @@ Is set to `true` if slide is *locked* (`watchOverflow`) and slides
 can not be *accessed*, e.g. when amount of slides is less than
 slides per view.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -441,7 +441,7 @@ slides per view.
 Object with keyboard parameters or boolean `true` if enabled
 with default settings.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -459,7 +459,7 @@ with default settings.
 Object with mousewheel parameters or boolean `true` ìf enabled with
 default settings.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -489,7 +489,7 @@ https://swiperjs.com/swiper-api[Swiper Documentation, {browser-window--new}].
 Object with navigation parameters or boolean `true` if enabled
 with default settings.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -506,7 +506,7 @@ with default settings.
 
 Object with original *initialization* parameters
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -523,7 +523,7 @@ Object with original *initialization* parameters
 Object with pagination parameters or boolean `true` if enabled
 with default settings.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -541,7 +541,7 @@ with default settings.
 Object with parallax parameters or boolean `true` if enabled
 with default settings.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -558,7 +558,7 @@ with default settings.
 
 Object with passed *initialization* parameters.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -574,7 +574,7 @@ Object with passed *initialization* parameters.
 
 Is set to index number of *previously active* slide.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -590,7 +590,7 @@ Is set to index number of *previously active* slide.
 
 Current progress of wrapper translate (from 0 to 1).
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -607,7 +607,7 @@ Current progress of wrapper translate (from 0 to 1).
 Index number of currently *active slide* considering rearranged slides
 in *loop mode*.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -625,7 +625,7 @@ in *loop mode*.
 Object with scrollbar parameters or boolean `true` if enabled
 with default settings.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -643,7 +643,7 @@ with default settings.
 Array of slides HTML elements. To get specific slide HTML Element use
 `swiper.slides[1]`
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -660,7 +660,7 @@ Array of slides HTML elements. To get specific slide HTML Element use
 
 Swiper wrapper *HTML element*.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -676,7 +676,7 @@ Swiper wrapper *HTML element*.
 
 Array of slides grid elements.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -692,7 +692,7 @@ Array of slides grid elements.
 
 Array of widths for all slides elements.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -708,7 +708,7 @@ Array of widths for all slides elements.
 
 Array of all slides snap grid elements.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -724,7 +724,7 @@ Array of all slides snap grid elements.
 
 Index number of current snap in `snapGrid`.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -740,7 +740,7 @@ Index number of current snap in `snapGrid`.
 
 Strings that reflect the direction of sliding.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -756,7 +756,7 @@ Strings that reflect the direction of sliding.
 
 Object with thumbs component parameters for thumb image navigation.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -772,7 +772,7 @@ Object with thumbs component parameters for thumb image navigation.
 
 Object with touch event properties.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -794,7 +794,7 @@ Object with touch event properties.
 
 Is set to current value of wrapper translate.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -810,7 +810,7 @@ Is set to current value of wrapper translate.
 
 Object with virtual slides settings.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -826,7 +826,7 @@ Object with virtual slides settings.
 
 Set to width of the swiper container.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -843,7 +843,7 @@ Set to width of the swiper container.
 
 Swiper wrapper *HTML element*.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 
@@ -860,7 +860,7 @@ Swiper wrapper *HTML element*.
 Object with zoom parameters or boolean `true` if enabled
 with default settings.
 
-[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,7a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Description
 

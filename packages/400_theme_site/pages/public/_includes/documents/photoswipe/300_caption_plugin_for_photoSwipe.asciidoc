@@ -1,5 +1,6 @@
 [role="mt-5"]
-== PhotoSwipe Captions
+[[photoswipe-captions-plugin]]
+=== Lightbox Captions
 
 PhotoSwipe does not support captions out of the box, but a *plugin* is available.
 The plugin can *automatically position* the text below or aside the image,
@@ -12,7 +13,8 @@ For accessibility, make sure that important captions are always
 available without PhotoSwipe - either use an `alt` attribute on
 thumbnails or `aria-labelledby`.
 
-[role="mt-4"]
+[role="mt-5"]
+[[photoswipe-captions-plugin-initialization]]
 === Initialization
 
 The plugin has a single JS file *photoswipe-caption-plugin.min.js*
@@ -56,7 +58,7 @@ lorem:sentences[3]
 </div> <!-- END Main container -->
 ----
 
-[role="mt-4"]
+[role="mt-5"]
 === Base HTML Layout v2
 
 lorem:sentences[3]
@@ -93,7 +95,7 @@ lorem:sentences[3]
 </div> <!-- END Main container -->
 ----
 
-[role="mt-4"]
+[role="mt-5"]
 === Extended HTML Layout
 
 lorem:sentences[3]
@@ -138,7 +140,7 @@ lorem:sentences[3]
 </div> <!-- END Main container -->
 ----
 
-[role="mt-4"]
+[role="mt-5"]
 === Sniper Initialization (Javascript)
 
 lorem:sentences[3]
@@ -163,45 +165,45 @@ lorem:sentences[3]
 ----
 
 [role="mt-5"]
-== Plugin options
+[[photoswipe-captions-plugin-parameters]]
+== Parameters
 
 lorem:sentences[3]
 
-[role="mt-4"]
-=== captionContent
+// .HTML Structure
+// [source, html]
+// ----
+// <a href="path/to/large-image.jpg" data-pswp-width="1024" data-pswp-height="768">
+//   <img src="path/to/thumbnail.jpg" alt="" />
+//   <span class="pswp-caption-content">Caption content</span>
+// </a>
+// ----
 
-captionContent: _.pswp-caption-content_
+// Or a function that should return *caption content*.
 
-Used to retrieve caption content.
+// .Example
+// [source, js]
+// ----
+// captionContent: (slide) => {
+//   return slide.data.element.querySelector('img').getAttribute('alt');
+// }
+// ----
 
-Can be a selector of the element from which caption content will be
-retrieved, if the element is not found - the plugin will try to use the
-thumbnail image `alt` attribute.
+[cols="4,2,2,4a", subs=+macros, options="header", width="100%", role="rtable mt-5"]
+|===
+|Name |Type |Default |Description \| Example
 
-[source, html]
-----
-<a href="path/to/large-image.jpg" data-pswp-width="1024" data-pswp-height="768">
-  <img src="path/to/thumbnail.jpg" alt="" />
-  <span class="pswp-caption-content">Caption content</span>
-</a>
-----
+|`captionContent`
+|string
+|_.pswp-caption-content_
+|Used to retrieve caption content. Can be a selector of the element from
+which caption content will be retrieved, if the element is not found, the
+plugin will try to use the thumbnail image `alt` attribute.
 
-Or a function that should return *caption content*.
-
-.Example
-[source, js]
-----
-captionContent: (slide) => {
-  return slide.data.element.querySelector('img').getAttribute('alt');
-}
-----
-
-[role="mt-4"]
-=== type
-
-string, type: _auto_
-
-Position type of the caption can be _auto_, _below_, or _aside_.
+|`type`
+|string
+|_auto_
+|Position type of the caption can be _auto_, _below_, or _aside_.
 
 * _below_, caption will always be placed below the image
 * _aside_, caption will always be placed on the right side of the
@@ -209,15 +211,13 @@ Position type of the caption can be _auto_, _below_, or _aside_.
 * _auto_, the plugin will try to automatically determine the best
   position (depending on available space)
 
-[role="mt-4"]
-=== mobileLayoutBreakpoint
+|`mobileLayoutBreakpoint`
+|number
+|600
+|Maximum window width at which mobile layout should be used, or a
+function that should return true if mobile layout should be used. 
 
-mobileLayoutBreakpoint: 600
-
-Maximum window width at which mobile layout should be used, or a
-function that should return true if mobile layout should be used. For
-example:
-
+.Example
 [source, js]
 ----
 mobileLayoutBreakpoint: (pswp, captionPlugin) => {
@@ -225,39 +225,35 @@ mobileLayoutBreakpoint: (pswp, captionPlugin) => {
 }
 ----
 
-[role="mt-4"]
-=== horizontalEdgeThreshold
-
-horizontalEdgeThreshold: 20
-
-When the caption `x` position is less than this value, it'll get class
+|`horizontalEdgeThreshold`
+|number
+|20
+|When the caption `x` position is less than this value, it'll get class
 `pswp__dynamic-caption--on-hor-edge`. You may use it to apply
 different styling, such as horizontal padding.
 
-[role="mt-4"]
-=== mobileCaptionOverlapRatio
-
-mobileCaptionOverlapRatio: 0.3
-
-A ratio defines the amount of horizontal empty space before the mobile
+|`mobileCaptionOverlapRatio`
+|number
+|0.3
+|Ratio defines the amount of horizontal empty space before the mobile
 caption switches to an "`overlap`" layout. For example, if it's set to
 0.3 - the caption will start overlapping the image when more than 30% of
 horizontal space is not occupied by an image. If you set it to 0 - the
 caption will always overlap. If you set it to 1 - the caption will
 constantly shift the image (unless it's taller than the viewport).
 
-[role="mt-4"]
-=== verticallyCenterImage
-
-verticallyCenterImage: false
-
-If enabled, the image will always be vertically centered in the
+|`verticallyCenterImage`
+|boolean
+|`false`
+|If enabled, the image will always be vertically centered in the
 remaining space between the caption and the rest of the viewport. If set
 to false (default value) - the image will lift up only if the caption
 does not fit below.
 
+|===
 
 [role="mt-5"]
+[[photoswipe-captions-plugin-styling]]
 == Styling
 
 The caption has class `pswp__dynamic-caption`.
@@ -292,6 +288,7 @@ queries if you need to):
 }
 ----
 
+[role="mt-5 mb-8"]
 === How auto positioning works
 
 * Check if there is more horizontal or vertical free space around the

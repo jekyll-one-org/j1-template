@@ -19,7 +19,7 @@ Find all available configurable *settings* with <<Pagination>> in section
 ====
 
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -48,7 +48,7 @@ const swiper = new Swiper('.swiper', {
 
 Configure parallax effect for a swipe slider.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -74,7 +74,7 @@ const swiper = new Swiper('.swiper', {
 
 Configure *passive* event listeners.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -94,7 +94,7 @@ this parameter.
 
 Prevent unwanted clicks on links during swiping.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -111,7 +111,7 @@ Prevent unwanted clicks on links during swiping.
 
 Stop *click event* propagation on links during swiping.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -129,7 +129,7 @@ Stop *click event* propagation on links during swiping.
 Allow to change slides by swiping or *navigation* \| *pagination* buttons
 during transition.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -147,7 +147,7 @@ navigation/pagination buttons during transition.
 
 Enable or disable resistant bounds.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -164,7 +164,7 @@ Enable or disable resistant bounds.
 
 Control resistance ratio.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -182,7 +182,7 @@ Control resistance ratio.
 Configure *ResizeObserver* (if supported by browser) on swiper container
 to detect container resize.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -201,7 +201,7 @@ window resize).
 
 Enable *rewind* mode.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -228,7 +228,7 @@ Should not be used together with `loop` mode.
 Enable to round values of slides *width and height* to prevent blurry texts
 on usual *resolution screens*.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -247,7 +247,7 @@ blurry texts on usual resolution screens (if you have such).
 Fire *Transition* \| *SlideChange* \| *Start* \| *End* events on swiper
 initialization.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -266,7 +266,7 @@ initialSlide is *not 0*, or you use *loop mode*.
 
 Configure scrollbar parameters  to enable with default settings.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -294,7 +294,7 @@ const swiper = new Swiper('.swiper', {
 
 Set *width* \| *height* on swiper wrapper.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -313,7 +313,7 @@ fallback option for browser that don't support flexbox layout well.
 
 Disable short swipes.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -330,7 +330,7 @@ Disable short swipes.
 
 Enable or disable Swiper mouse events like touch events.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -349,7 +349,7 @@ and drag to change slides).
 
 Set CSS class name of the *active slide*.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -374,7 +374,7 @@ changed classes.
 
 Configre CSS class name blank slides.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -397,7 +397,7 @@ Not supported in Swiper _React_ and _Vue_ environments.
 
 Configre CSS class name for blank slides.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -422,7 +422,7 @@ changed classes.
 
 Configre CSS class name for *blank* slides.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -445,7 +445,7 @@ slide.
 
 Configre CSS class name of the slide which is right *after* the *active* slide.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -470,7 +470,7 @@ changed classes.
 
 Configre CSS class name of the slide which is right *before* the *active* slide.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -495,7 +495,7 @@ changed classes
 
 Enable click on any slide to trigger a *transition*.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -513,7 +513,7 @@ Enable click on any slide to trigger a *transition*.
 Set the CSS class name of the currently *active* or *partially*
 visible slide.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -539,7 +539,7 @@ changed classes.
 Set additional slide offset (in px) at the end of the container *after*
 all slides configured.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -558,7 +558,7 @@ all slides configured.
 Set additional slide offset (in px) in the beginning of the container *before*
 all slides configured.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -576,7 +576,7 @@ all slides configured.
 
 Set numbers of slides for *group sliding*.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -596,7 +596,7 @@ Set number of slides for *group sliding* to skip all slides in view on
 `.slideNext()` \| `.slidePrev()` methods calls, on Navigation *button*
 clicks in *autoplay*.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -616,7 +616,7 @@ clicks in *autoplay*.
 
 Set number of slides for *group sliding* to skip slides.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -639,7 +639,7 @@ grouped by the `slidesPerGroup` value.
 
 Set the number of slides visible per view on a slider.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -660,16 +660,16 @@ when `grid.row` is set larger than *1*.
 [[options-spaceBetween]]
 === spaceBetween
 
-Set the distance between slides in px.
+Set Gutters (space) in between the slides in px.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
 |`spaceBetween`
 |string \| number
 |0
-|Distance between slides in px..
+|Set Gutters (space) in between the slides in px.
 
 [CAUTION]
 ====
@@ -685,7 +685,7 @@ which you pass `spaceBetween` into, navigation might *not work* properly.
 
 Set Duration of transition between slides in ms.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -703,7 +703,7 @@ Set Duration of transition between slides in ms.
 Set the CSS selector \| HTML element for *swiping* of the the swiper
 container.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -721,7 +721,7 @@ container.
 
 Set the name of the swiper element node name.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 

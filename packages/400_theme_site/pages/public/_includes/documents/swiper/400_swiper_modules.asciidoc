@@ -232,7 +232,7 @@ transition starts to *next slide*.
 
 Find all *Methods* available for the *Autoplay* module.
 
-[cols="3,9a", subs=+macros, options="header", width="100%", role="rtable"]
+[cols="3,9a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Description
 
@@ -482,7 +482,7 @@ that should be controlled by this swiper. Also accepts a *string* with a
 
 Find below available *Methods* for the SwiperJS *Controller* module.
 
-[cols="3,9a", subs=+macros, options="header", width="100%", role="rtable"]
+[cols="3,9a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Method |Description \| Example
 
@@ -1168,7 +1168,7 @@ Find below available *Properties* for the SwiperJS *Keyboard Control* module.
 
 Find below available *Methods* for the SwiperJS *Keyboard Control* module.
 
-[cols="3,9a", subs=+macros, options="header", width="100%", role="rtable"]
+[cols="3,9a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Method |Description
 
@@ -1284,7 +1284,7 @@ intended to be used with SwiperJS Environments like *React* or *Vue*.
 
 Find below available *Methods* for the SwiperJS *Manipulation* module.
 
-[cols="4,8a", subs=+macros, options="header", width="100%", role="rtable"]
+[cols="4,8a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Method |Description \| Example
 

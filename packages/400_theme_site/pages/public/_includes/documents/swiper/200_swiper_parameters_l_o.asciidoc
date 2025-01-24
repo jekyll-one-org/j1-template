@@ -12,7 +12,7 @@ https://swiperjs.com/swiper-api[Swiper Documentation, {browser-window--new}].
 
 Number of next and previous slides to be preloaded.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -30,7 +30,7 @@ Number of next and previous slides to be preloaded.
 
 Set CSS class name of lazy preloader.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -47,7 +47,7 @@ Set CSS class name of lazy preloader.
 
 Enable or disable long swipes.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -64,7 +64,7 @@ Enable or disable long swipes.
 
 Set the minimal duration (in ms) to trigger long swipes.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -82,7 +82,7 @@ during long swipes.
 
 Set the ratio to trigger swipe to next/previous slide during long swipes.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -99,7 +99,7 @@ Set the ratio to trigger swipe to next/previous slide during long swipes.
 
 Enable or disable continuous loop mode.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -123,7 +123,7 @@ total number of slides must be:
 Add blank slides if you use Grid or `slidesPerGroup` on total amount of
 slides is *not even* to `slidesPerGroup`.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -142,7 +142,7 @@ and the total amount of slides is not even to `slidesPerGroup` or to
 
 Allows to increase amount of looped slides.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -160,7 +160,7 @@ Allows to increase amount of looped slides.
 Set *slideNext* \| *slidePrev* to do nothing while slider is animating
 in *loop* mode.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -178,7 +178,7 @@ in loop mode.
 
 Reduce visual *flicker* in Safari Browser.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -203,7 +203,7 @@ reduce performance.
 
 Configure array with Swiper modules.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -228,9 +228,9 @@ const swiper = new Swiper('.swiper', {
 [[options-mousewheel]]
 === mousewheel
 
-Enables or disbales navigation through slides using mouse wheel.
+Enables or disables navigation through slides using mouse wheel.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -257,7 +257,7 @@ const swiper = new Swiper('.swiper', {
 
 Enables or disbales navigation through slides using mouse wheel.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -286,7 +286,7 @@ const swiper = new Swiper('.swiper', {
 
 Control Swiper for correct touch events interception.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -304,7 +304,7 @@ swipers that use same direction as the parent one.
 
 Control *no* swiping on elements specified by (CSS) `noSwipingClass`.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -322,7 +322,7 @@ Control *no* swiping on elements specified by (CSS) `noSwipingClass`.
 
 Specify (CSS) elements to disable swiping on.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -340,7 +340,7 @@ Specify (CSS) elements to disable swiping on.
 
 Specify (CSS) elements to disable swiping on.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -358,7 +358,7 @@ swiping on. For example `input` will disable swiping on all inputs.
 
 Normalize slide index.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -375,7 +375,7 @@ Normalize slide index.
 
 Configure to watch *Mutations* for Swiper parent elements.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -393,7 +393,7 @@ parent elements.
 
 Configure to watch *Mutations* for Swiper slide child elements.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -411,7 +411,7 @@ child elements.
 
 Enable a *Mutation Observer* on Swiper and its elements.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -431,7 +431,7 @@ its style (like hide/show) or modify its child elements
 
 Register event handlers.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -457,7 +457,7 @@ const swiper = new Swiper('.swiper', {
 
 Register event handlers on *all* events.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -484,7 +484,7 @@ const swiper = new Swiper('.swiper', {
 
 Configure swipe slides only forward (one-way) regardless of swipe direction.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 

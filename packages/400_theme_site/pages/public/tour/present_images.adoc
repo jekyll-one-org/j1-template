@@ -31,7 +31,8 @@ permalink:                              /pages/public/tour/present_images/
 
 resources:                              [
                                           carousel, gallery, lightbox, lightgallery,
-                                          master-slider, masonry, slick-slider
+                                          master-slider, masonry, slick-slider,
+                                          swiper, photoswipe
                                         ]
 resource_options:
   - toccer:
@@ -167,39 +168,40 @@ than enlarged displaying of images.
 ====
 
 [role="mt-5"]
-== J1 Carousel
+== J1 Slider
 
-J1 Carousel is based on OWL Carousel V1 in the latest version. The carousel
-is a powerful jQuery plugin for creating fully responsive and touch-enabled
-carousel slideshows.
+J1 Slider is based on *SwiperJS* in version *1.2.0* (January 7, 2025). The
+slider is a powerful tool to create fully responsive and touch-enabled
+slideshows.
 
 [role="mt-4"]
-=== Text Carousels
+=== Text Slider
 
 A slider or carousel is typically used for displaying images. Still, the
 implementation for the J1 Template supports a lot more sources to be
 displayed as a slide show -- simple text for example.
 
 [role="mt-4"]
-==== Base Text Carousel
+==== Base Text Slider
 
 Important statements or topics can be placed on top of an article or
 a paragraph to give them better visibility. In one line, you can present
 many facts to know animated for the reader's attention within a single
 line.
 
-.Base Text Carousel
-carousel::demo_text_carousel[role="mb-4"]
+.Base Text Slider
+// carousel::demo_text_carousel[role="mb-4"]
+swiper::swiper_text_base[role="mt-4 mb-4"]
 
 [role="mt-4"]
-==== Parallax Text Carousel
+==== Parallax Text Silder
 
 A more emphasized type of text-based carousel is a parallax text slider. If
 you want to focus the meaning, this kind of a slide show may be interesting.
 Image-based slide shows may draw off the reader's attention from the text,
 therefore a pure text-based presentation maybe the better choice.
 
-.Parallax Text Carousel
+.Parallax Text Slider
 carousel::demo_text_carousel_parallax[role="mb-4"]
 
 Parallax text shows can be placed as banners on a page. For text shows,
@@ -217,7 +219,7 @@ for more details.
 ====
 
 [role="mt-5"]
-=== Image Carousels
+=== Image Slider
 
 Carousels are mostly used for pictures data to animate the images as a series.
 Find with the following some examples of how to use a carousel for your image
@@ -226,17 +228,17 @@ data.
 A simple image show is useful, for example, as an animated (or not animated)
 banner presenting exciting things about your site or the products offered.
 
-.Image Carousel
+.Image Slider
 carousel::demo_simple[role="mb-5"]
 
 [role="mt-4"]
-==== Image Carousel + Lightbox
+==== Image Slider + Lightbox
 
 Carousels are used for an exceptionally compact form of image galleries.
 This example shows some pictures having individual caption text and supports
 a lightbox to enlarge images full size.
 
-.Image Carousel + Lightbox
+.Image Slider + Lightbox
 carousel::demo_cats[role="mt-4 mb-5"]
 
 The J1 module lightbox is a simple Lightbox but offers a bunch of impressive
@@ -245,14 +247,14 @@ images as a group. If one picture is opened in the lightbox, others are
 browsed by easy-to-use control buttons.
 
 [role="mt-4"]
-==== One Slide Carousel + Lightbox
+==== One Slide Slider + Lightbox
 
 The build-in carousel supports multiple and single image shows. Here you find
 an example of a single image slide show with controls enabled to browse all
 images back and forth. An indicator below the slider shows how many images
 the show contains.
 
-.One Slide Carousel
+.One Slide Slider
 carousel::demo_oneslide[role="mb-4"]
 
 

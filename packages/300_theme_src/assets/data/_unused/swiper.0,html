@@ -102,10 +102,20 @@ exclude_from_search:                    true
     <!-- [INFO   ] [~/assets/data/swiper.html                      ] [collect all sliders configured ] -->
     {% for swiper in swipers %} {% if swiper.enabled %}
 
+      {% comment %} Set Swiper defaults
+      {% assign swiper.lightbox.enabled  = false %}
+      -------------------------------------------------------------------------- {% endcomment %}
+
       {% comment %} Generate HTML portion for all sliders (enabled)
+      swiper:           {{swiper| debug}}
+      swiper.enabled:   {{swiper.enabled | debug}}
+      swiper.type:      {{swiper.type | debug}}      
       -------------------------------------------------------------------------- {% endcomment %}
 
       {% comment %} Collect Text Swipers
+      for slide in playlists.swiper.playlist.slides
+      playlist:  {{playlists.swiper.playlist.slides}}
+      slides.text:  {{playlist.slides | debug }}
       -------------------------------------------------------------------------- {% endcomment %}
       {% if swiper.type == 'text' %}      
 
@@ -161,7 +171,6 @@ exclude_from_search:                    true
   </body>
 </html>
 {%- endcapture -%}
-
 
 {% comment %} Beautify|Compress page
 -------------------------------------------------------------------------------- {% endcomment %}

@@ -49,7 +49,7 @@ const swiper = new Swiper('.swiper', {
 
 Enable or disable swiping to next slide.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -67,7 +67,7 @@ or bottom).
 
 Enable or disable swiping to previous slide.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -86,7 +86,7 @@ top).
 Control to switch slides by using API *methods* like *slidePrev()* or
 *slideNext()*.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -105,7 +105,7 @@ like *slidePrev()* or *slideNext()*.
 Set the *slider wrapper* to adapt its height from the height of the
 currently active slide.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -130,7 +130,7 @@ Find all available configurable *settings* with <<Autoplay>> in
 section hModules>>.
 ====
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -157,7 +157,7 @@ const swiper = new Swiper('.swiper', {
 
 Allows to set parameters for responsive breakpoints.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -232,7 +232,7 @@ const swiper = new Swiper('.swiper', {
 
 Specify the base for breakpoints.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -251,7 +251,7 @@ then breakpoint keys treated as *swiper container width*.
 
 Specify Cards-effect parameters.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -277,7 +277,7 @@ const swiper = new Swiper('.swiper', {
 
 Enabe or disable to center slides.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -300,7 +300,7 @@ Not intended to be used in `loop` mode and `grid.rows`.
 
 Control to center *active* slides.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -324,7 +324,7 @@ Not intended to be used with `loop` or `pagination`.
 ====
 
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -350,7 +350,7 @@ Not intended to be used with `loop` or `pagination`.
 
 The *beginning* of the modifier CSS class  to center slides.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -368,7 +368,7 @@ container depending on different parameters.
 
 Set Swiper *controller* parameters.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -395,7 +395,7 @@ const swiper = new Swiper('.swiper', {
 
 Set Overflow Effect parameters.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -423,7 +423,7 @@ const swiper = new Swiper('.swiper', {
 
 Control how to wrap slides by an swiper-wrapper element.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -443,7 +443,7 @@ with boolean `true`).
 
 Set creative effect parameters.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -477,7 +477,7 @@ const swiper = new Swiper('.swiper', {
 
 Enable or disable CSS *Scroll Snap API*.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -535,7 +535,7 @@ etc.), they should be set on `swiper-slide-transform` element instead.
 
 Set cube effect parameters.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -562,7 +562,7 @@ const swiper = new Swiper('.swiper', {
 
 Set the direction for Swipoer sliders.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -577,7 +577,7 @@ Set the direction for Swipoer sliders.
 [[options-edgeSwipeDetection]]
 === edgeSwipeDetection
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -598,7 +598,7 @@ Windows devices with pointer (touch) events.
 
 Area (in px) from left edge of the screen to release touch events.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -616,7 +616,7 @@ swipe-back in app.
 
 Set slide transition effects.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -634,7 +634,7 @@ Set slide transition effects.
 
 Control if a Swiper slideshow is initially enabled.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -652,7 +652,7 @@ all navigation elements and won't respond to any events and interactions.
 
 Cntrol event name prefix for all Swiper DOM events.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -669,7 +669,7 @@ Cntrol event name prefix for all Swiper DOM events.
 
 Set fade effect parameters.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -696,7 +696,7 @@ const swiper = new Swiper('.swiper', {
 
 Set flip effect parameters.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -722,7 +722,7 @@ const swiper = new Swiper('.swiper', {
 
 Set CSS selector for focusable elements.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -740,7 +740,7 @@ such elements if they are *focused*.
 
 Set slider animated only when you release it.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -757,7 +757,7 @@ it will not move while you hold your finger on it.
 
 Enables or disables free mode functionality.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -789,7 +789,7 @@ const swiper = new Swiper('.swiper', {
 
 Improve desktop usability by setting  the *grab cursor* when hover on Swiper.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -808,7 +808,7 @@ will see the *grab cursor* when hover on Swiper.
 
 Enable *multirow* slider.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -834,7 +834,7 @@ const swiper = new Swiper('.swiper', {
 
 Enables or disables hash url navigation for slides.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -861,7 +861,7 @@ const swiper = new Swiper('.swiper', {
 
 Force Swiper height.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -885,7 +885,7 @@ Setting this parameter will make Swiper *not responsive*.
 
 Enables history push state.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -922,7 +922,7 @@ const swiper = new Swiper('.swiper', {
 
 Specify, if Swiper should be initialised automatically.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -941,7 +941,7 @@ instance. If disabled, then you need to init it manually by calling
 
 Set the index number of the initial slide.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -958,7 +958,7 @@ Set the index number of the initial slide.
 
 Inject text styles to the shadow DOM.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -975,7 +975,7 @@ Inject text styles to the shadow DOM.
 
 Inject styles `<link>`s to the shadow DOM.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 
@@ -992,7 +992,7 @@ Inject styles `<link>`s to the shadow DOM.
 
 Enables or disables navigation through slides using keyboard.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description \| Example
 

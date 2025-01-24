@@ -17,7 +17,7 @@ to your setup.
 
 *Re-Attach* all event listeners configured for an instance.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -35,7 +35,7 @@ swiper.attachEvents();
 
 Change the slider orientation from *horizontal* to *vertical* or back.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -71,7 +71,7 @@ If set to `true`, automatically `update()` method is called.
 
 Changes slider language direction.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -96,7 +96,7 @@ Should be _rtl_ or _ltr_.
 
 Destroy a slider *instance* and detach all *event listeners*.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -133,7 +133,7 @@ again with *new options* or in *different direction*.
 
 Detach all event listeners.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -155,7 +155,7 @@ Disable Swiper (if it was *enabled*). When Swiper is disabled, it will
 hide all navigation elements and won't respond to any events and
 interactions.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -177,7 +177,7 @@ interactions.
 
 Fire event on instance.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -200,7 +200,7 @@ swiper.emit(
 
 Enable a swiper instance (if it was *disabled*).
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -221,7 +221,7 @@ swiper.enable();
 Extend a swiper instance by (global) swiper options (properties).
 See section <<Common options>> for common, frequently used options.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -242,7 +242,7 @@ See section <<Common options>> for common, frequently used options.
 
 Get current values of swiper wrapper CSS3 *transform translate* settings.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -262,7 +262,7 @@ swiper.getTranslate();
 
 Initialize a slider on its HTML element `el`.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -282,7 +282,7 @@ swiper.init(el);
 
 Get current maximal CSS3 *transform translate* value.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -302,7 +302,7 @@ swiper.maxTranslate();
 
 Get current maximal CSS3 *transform translate* value.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -322,7 +322,7 @@ swiper.minTranslate();
 
 Remove a event handler.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -345,7 +345,7 @@ swiper.off(
 
 Remove a event listener that will be fired on *all events*.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -365,7 +365,7 @@ swiper.offAny(handler);
 
 Add a event handler.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -385,7 +385,7 @@ swiper.on(event, handler);
 
 Add a event listener that will be fired on *all events*.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -406,7 +406,7 @@ swiper.onAny(handler);
 Add a event handler that is run *only once*. The event handler will
 be removed after it was fired.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -430,7 +430,7 @@ be removed after it was fired.
 
 Enable|Set a grab cursor on the swiper instance.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -440,7 +440,7 @@ Enable|Set a grab cursor on the swiper instance.
 swiper.setGrabCursor();
 ----
 
-|Enable|Set a grab cursor on the swiper instance.
+|Enable \| Set a grab cursor on the swiper instance.
 
 |===
 
@@ -452,7 +452,7 @@ Set Swiper translate progress (from 0 to 1). Where 0 its *initial*
 position (offset) on *first* slide, and 1 its *maximum* position (offset)
 on *last* slide.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -491,7 +491,7 @@ Transition duration (in ms).
 Set *custom* values for CSS3 *transform translate* settings of the
 swiper wrapper.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -512,7 +512,7 @@ swiper wrapper.
 
 Run transition to next slide.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -547,7 +547,7 @@ Set it to false, the transition will not produce transition events.
 
 Run transition to previous slide.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -583,7 +583,7 @@ Set it to false, the transition will not produce transition events.
 Reset swiper position to currently *active* slide for the duration equal
 to `speed` parameter.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -620,7 +620,7 @@ Set it to false, the transition will not produce transition events.
 Run transition to the slide with *index* number equal to the `index` parameter
 for the duration equal to `speed` parameter.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -664,7 +664,7 @@ Set it to false, the transition will not produce transition events.
 Reset swiper position to closest slide/snap point for the duration equal
 to `speed` parameter.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -701,7 +701,7 @@ Set it to false, the transition will not produce transition events.
 Does the *same* as method *slideTo()* but in case when used with enabled loop.
 So this method will slide to slides with realIndex matching to passed index.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -745,7 +745,7 @@ Set it to false, the transition will not produce transition events.
 Get dynamically calculated amount of slides per view. Only useful when
 property `slidesPerView` set to `auto`.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -771,7 +771,7 @@ Only useful when property `slidesPerView` set to `auto`.
 
 Animate custom CSS3 *transform' translate* value for swiper wrapper.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -818,9 +818,9 @@ role="mt-4"]
 [[method-unsetGrabCursor]]
 === unsetGrabCursor
 
-Disable|Unset a grab cursor on the swiper instance.
+Disable | Unset a grab cursor on the swiper instance.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -830,7 +830,7 @@ Disable|Unset a grab cursor on the swiper instance.
 swiper.unsetGrabCursor();
 ----
 
-|Disable|Unset a grab cursor on the swiper instance.
+|Disable\|Unset a grab cursor on the swiper instance.
 
 |===
 
@@ -841,7 +841,7 @@ swiper.unsetGrabCursor();
 Should called after *add/remove* slides manually, or after *hide/show*
 a slider, or any custom *DOM modifications* done with Swiper.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -864,7 +864,7 @@ a slider, or any custom *DOM modifications* done with a swiper.
 Force swiper to update its height (when `autoHeight` is *enabled*) for the
 duration equal to `speed` parameter.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -891,7 +891,7 @@ Transition duration (in ms).
 
 Recalculate swiper progress.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -911,7 +911,7 @@ swiper.updateProgress();
 
 Recalculate size of swiper container.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -932,7 +932,7 @@ swiper.updateSize();
 Recalculate number of slides and their offsets. Useful after *add/remove*
 slides.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -953,7 +953,7 @@ slides.
 
 Update *active/prev/next* classes on slides and bullets.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 
@@ -973,7 +973,7 @@ swiper.updateSlidesClasses();
 
 Installs Swiper modules on a instance at runtime.
 
-[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="6a,6a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Synopsis |Description \| Parameters
 

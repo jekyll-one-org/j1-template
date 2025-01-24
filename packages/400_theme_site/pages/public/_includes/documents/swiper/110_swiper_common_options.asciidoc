@@ -1,4 +1,3 @@
-ifeval::[{swiper--global-options} == true]
 [role="mt-5"]
 == Common Options
 // https://swiperjs.com/types/interfaces/types_swiper_options.SwiperOptions
@@ -11,33 +10,109 @@ The *properties* for a Swiper slider are extensive, covering various aspects
 of its behavior and appearance. Here's a *summary* of the key *default*
 values.
 
-=== Core Behavior
 
-* <<direction>>:        _horizontal_  (Slides move horizontally)
-* <<effect>>:           _slide_       (Basic sliding transition)
-* <<spaceBetween>>:     0             (No space between slides by default)
-* <<slidesPerView>>:    1             (Only one slide visible at a time)
-* <<initialSlide>>:     0             (First slide is active initially)
-* <<centeredSlides>>:   `false`       (Active slide is not centered)
-* <<loop>>:             `false`       (Looping is disabled)
+[role="mt-4"]
+=== Base Settings
 
+[cols="3,3,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+|===
+|Name |Default |Description
+
+|<<options-direction>>
+|_horizontal_
+|Slides *move horizontally* by default
+
+|<<options-effect>>
+|_slide_
+|Base *sliding transition* by default
+
+|<<options-spaceBetween>>
+|0
+|No space (gutters) in between the slides by default
+
+|<<options-slidesPerView>>
+|1
+|Only one slide visible at a time by default
+
+|<<options-initialSlide>>
+|0
+|*First* slide *active initially* by default
+|<<options-centeredSlides>>
+|`false
+|*Active* slide *not centered* by default
+
+|<<options-loop>>
+|`false`
+|Continuous looping *disabled* by default
+
+|===
+
+
+[role="mt-4"]
 === User Interaction
 
-* <<allowTouchMove>>:   `true`        (Swiping is enabled)
-* <<grabCursor>>:       `false`       (Cursor doesn't change on hover)1   
-* <<keyboard>>:         `false`       (Keyboard navigation is disabled)
-* <<mousewheel>>:       `false`       (Mousewheel navigation is disabled)
+[cols="3,3,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+|===
+|Name |Default |Description
 
+|<<options-allowTouchMove>>
+|`true`
+|Swiping *enabled* by default
+
+|<<options-grabCursor>>
+|`false`
+|Cursor doesn't change on hover by default
+
+|<<options-keyboard>>
+|`false`|
+Keyboard navigation *disabled* by default
+
+|<<options-mousewheel>>
+|false`|
+Mousewheel navigation *disabled* by default
+
+|<<options-pagination>>
+|*no default*
+|Pagination Elements (like bullets) *disabled* by default
+
+|<<options-navigation>>
+|*no default*
+|Navigation buttons *disabled* by default
+
+|<<options-scrollbar>>
+|*no default*
+|Scrollbar *disabled* by default
+
+|===
+
+
+[role="mt-4"]
 === Appearance
 
-* <<autoHeight>>:       `false`       (Slider height doesn't adjust to slide content)
-* <<speed>>:             300          (Transition animation duration in milliseconds)
+[cols="3,3,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+|===
+|Name |Default |Description
 
-=== Other Important Defaults
+|<<options-autoHeight>>
+|`false`
+|Slider height *doesn't adjust* to slide content by default
 
-* <<pagination>>:       *Disabled* by default
-* <<navigation>>:       *Disabled* by default
-* <<scrollbar>>:        *Disabled* by default
-* <<breakpoints>>:      *No breakpoints* defined by default
+|<<options-speed>>
+|300
+|Transition animation duration between slides in ms.
 
-endif::[]
+|===
+
+
+[role="mt-4"]
+=== Page control
+
+[cols="3,3,6a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+|===
+|Name |Default |Description
+
+|<<options-breakpoints>>
+|*no default*
+|No *responsive breakpoints* defined by default
+
+|===

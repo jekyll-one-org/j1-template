@@ -47,6 +47,7 @@ regenerate:                             true
 {% comment %} Set config options (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign swiper_options        = swiper_defaults | merge: swiper_settings %}
+{% assign swipers               = swiper_settings.sliders %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -116,6 +117,14 @@ j1.adapter.swiper = ((j1, window) => {
     // adapter initializer
     // -------------------------------------------------------------------------
     init: (options) => {
+      var xhrLoadState                  = 'pending';                            // (initial) load state for the HTML portion of the carousel
+      var load_dependencies             = {};                                   // dynamic variable
+      var carouselResponsiveSettingsOBJ = {};                                   // initial object for responsive settings
+      var reload_on_resize              = false;
+      var dependency;
+      var carouselResponsiveSettingsYAML;
+      var carouselResponsiveSettingsSTRING;
+      var swiper_lightbox_enabled;
 
       // [INFO   ] [j1.adapter.comments                    ] [ detected comments provider (j1_config): {{comments_provider}}} ]
       // [INFO   ] [j1.adapter.comments                    ] [ start processing load region head, layout: {{page.layout}} ]
@@ -132,13 +141,10 @@ j1.adapter.swiper = ((j1, window) => {
       // global variable settings
       // -----------------------------------------------------------------------
 
-      // create settings object from frontmatter
-      frontmatterOptions  = options != null ? $.extend({}, options) : {};
-
       // create settings object from module options
       swiperDefaults = $.extend({}, {{swiper_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
       swiperSettings = $.extend({}, {{swiper_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      swiperOptions  = $.extend(true, {}, swiperDefaults, swiperSettings, frontmatterOptions);
+      swiperOptions  = $.extend(true, {}, swiperDefaults, swiperSettings);
 
       _this        = j1.adapter.swiper;
       theme        = user_state.theme_name;
@@ -151,14 +157,59 @@ j1.adapter.swiper = ((j1, window) => {
         var pageState       = $('#content').css("display");
         var pageVisible     = (pageState === 'block') ? true : false;
         var j1CoreFinished  = (j1.getState() === 'finished') ? true : false;
-        // var atticFinished   = (j1.adapter.attic.getState() == 'finished') ? true : false;
+        var atticFinished   = (j1.adapter.attic.getState() == 'finished') ? true : false;
 
-        if (j1CoreFinished && pageVisible) {
+        if (j1CoreFinished && pageVisible && atticFinished) {
           startTimeModule = Date.now();
+
+          // load HTML portion for all carousels
+          _this.loadSwiperHTML(swiperOptions, swiperOptions.sliders);
 
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module is being initialized');
+
+          {% for swiper in swipers %}{% if swiper.enabled %}
+          logger.info ('\n' + 'initialize swiper on id: ' + '{{swiper.id}}');
+
+          // create dynamic loader variable|s
+          dependency = 'dependencies_met_html_loaded_{{swiper.id}}';
+          load_dependencies[dependency] = '';
+
+          // initialize the swiper if the HTML portion of the slider is successfully loaded
+          load_dependencies['dependencies_met_html_loaded_{{swiper.id}}'] = setInterval (() => {
+            // check if HTML portion of the swiper is loaded successfully
+            xhrLoadState = j1.xhrDOMState['#{{swiper.id}}_parent'];
+            if (xhrLoadState === 'success') {
+
+              logger.info ('\n' + 'HTML portion loaded for swiper on id: ' + '{{swiper.id}}');
+
+              // setup the slider
+              logger.info ('\n' + 'swiper is being setup on id: ' + '{{swiper.id}}');
+              const {{swiper.id}} = new Swiper('#{{swiper.id}}', {
+                // parameters
+                direction:              {%- if swiper.options.direction -%}  {{swiper.options.direction}}                  {%- else -%} 'horizontal' {%- endif -%},
+                loop:                   {%- if swiper.options.loop -%}       {{swiper.options.loop}}                       {%- else -%} false        {%- endif -%},
+                // modules
+                a11y:                   {%- if swiper.modules.a11y -%}       {{swiper.modules.a11y|replace: '=>', ':'}}     {%- else -%} false      {%- endif -%},
+                autoplay:               {%- if swiper.modules.autoplay -%}   {{swiper.modules.autoplay|replace: '=>', ':'}} {%- else -%} false      {%- endif -%},
+                pagination:             {%- if swiper.modules.pagination -%}   {{swiper.modules.pagination|replace: '=>', ':'}} {%- else -%} false      {%- endif -%},                
+                // events
+                on: {
+                  init: () => {
+                    // do something on initialization
+                  },                  
+                  afterInit: () => {
+                    // do something after initialization
+                  },
+                }
+              }); // END Swiper 
+
+              clearInterval (load_dependencies['dependencies_met_html_loaded_{{swiper.id}}']);
+            } // END if xhrLoadState success
+          }, 10); // END dependencies_met_html_loaded swiper.id              
+
+          {% endif %}{% endfor %} // ENDFOR (all) carousels
 
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
@@ -171,6 +222,41 @@ j1.adapter.swiper = ((j1, window) => {
         } // END pageVisible
       }, 10); // END dependencies_met_page_ready
     }, // END init
+
+    // -------------------------------------------------------------------------
+    // loadSwiperHTML()
+    // load all Slick carousels (HTML portion) dynanically configured
+    // and enabled (AJAX) from YAMLdata file
+    // NOTE: Make sure the placeholder is available in the content page
+    // eg. using the asciidoc extension mastercarousel::
+    // -------------------------------------------------------------------------
+    loadSwiperHTML: (options, carousel) => {
+      var numcarousels      = Object.keys(carousel).length;
+      var active_carousels  = numcarousels;
+      var xhr_data_path   = options.xhr_data_path + '/index.html';
+      var xhr_container_id;
+
+      // console.debug('number of carousels found: ' + numcarousels);
+
+      _this.setState('load_data');
+      Object.keys(carousel).forEach ((key) => {
+        if (carousel[key].enabled) {
+          xhr_container_id = carousel[key].id + '_parent';
+
+          // console.debug('load HTML data on carousel id: ' + carousel[key].id);
+          j1.loadHTML({
+            xhr_container_id: xhr_container_id,
+            xhr_data_path:    xhr_data_path,
+            xhr_data_element: carousel[key].id
+          });
+        } else {
+          // console.debug('carousel found disabled on id: ' + carousel[key].id);
+          active_carousels--;
+        }
+      });
+      // console.debug('carousels loaded in page enabled|all: ' + active_carousels + '|' + numcarousels);
+      _this.setState('data_loaded');
+    }, // END loadSwiperHTML
 
     // -------------------------------------------------------------------------
     // messageHandler()
@@ -200,6 +286,24 @@ j1.adapter.swiper = ((j1, window) => {
 
       return true;
     }, // END messageHandler
+
+    // -------------------------------------------------------------------------
+    // pluginManager()
+    // 
+    // -------------------------------------------------------------------------
+    pluginManager: (plugin) => {
+      if (plugin === 'photoswipe') {        
+        var tech;
+        var techScript;
+
+        tech        = document.createElement('script');
+        tech.id     = 'tech_' + plugin;
+        tech.src    = '/assets/theme/j1/modules/amplitudejs/js/tech/' + plugin + '.js';
+        techScript  = document.getElementsByTagName('script')[0];
+
+        techScript.parentNode.insertBefore(tech, techScript);
+      }
+    }, // END pluginManager
 
     // -------------------------------------------------------------------------
     // setState()

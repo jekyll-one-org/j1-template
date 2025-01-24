@@ -12,7 +12,7 @@ https://swiperjs.com/swiper-api[Swiper Documentation, {browser-window--new}].
 
 Set the threshold value in px then swiper will *not* move.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -31,7 +31,7 @@ then swiper will not move.
 Set the configuration (object) of thumbs component parameters for *thumb image*
 navigation.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -58,7 +58,7 @@ const swiper = new Swiper('.swiper', {
 
 Set Angle in degrees to trigger touch move.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -75,7 +75,7 @@ Set Angle in degrees to trigger touch move.
 
 Set the *target* element to listen on touch events.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -94,7 +94,7 @@ events on the swiper *wrapper*.
 
 Enable to *stop* the propagation of *touchmove*.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -111,7 +111,7 @@ Enable to *stop* the propagation of *touchmove*.
 
 Set the touch ratio.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -128,7 +128,7 @@ Set the touch ratio.
 
 Enable touch events on slider edge positions for *page scrolling*.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -155,7 +155,7 @@ Also *threshold* parameter must be set to *0*.
 
 Force to *prevent default* for `touchstart` or `pointerdown` events.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -171,7 +171,7 @@ Force to *prevent default* for `touchstart` or `pointerdown` events.
 
 Enable *prevent default* for `touchstart` or `pointerdown` events.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -189,7 +189,7 @@ by default.
 
 Disable navigation element parameters passed as a string like _.pagination_.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -210,7 +210,7 @@ buttons and *scrollbar* elements.
 Disable the recalculation of slide positions on window resize for desktops or
 orientation change on mobiles.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -229,7 +229,7 @@ orientation change (on mobiles).
 Required for *active* slide detection when rendered on server-side and
 history enabled.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -248,7 +248,7 @@ history enabled.
 Setting the *userAgent string* is required for browser or device detection
 when swiper is rendered on server-side.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -266,7 +266,7 @@ rendered on server-side.
 
 Enables and configures the *virtual slides* functionality.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -293,7 +293,7 @@ const swiper = new Swiper('.swiper', {
 
 Useful when you need to create *custom* slide *transitions*.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -318,7 +318,7 @@ Useful when you need to create *custom* slide *transitions*.
 When enabled, the swiper will be *disabled* and *hide navigation* buttons
 in case there are *not enough* slides for *sliding*.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -337,7 +337,7 @@ in case there are *not enough* slides for *sliding*.
 When enabled, the swiper will be *disabled* and *hide navigation* buttons
 in case there are *not enough* slides for *sliding*.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -359,7 +359,7 @@ Slides in viewport will have an *additional* visible class.
 
 Force the swiper width (in px).
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -384,7 +384,7 @@ Setting this parameter will make Swiper *not responsive*.
 
 Set the CSS class name of the slides *wrapper*.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 
@@ -410,7 +410,7 @@ changed classes.
 
 Enables *zooming* functionality.
 
-[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Name |Type |Default |Description
 

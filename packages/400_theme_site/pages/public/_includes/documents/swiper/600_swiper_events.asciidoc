@@ -61,7 +61,7 @@ Available *predefined* event listeners.
 
 Event fired on *active* index change.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -87,7 +87,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired right *after* swipers *initialization*.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -112,7 +112,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired right *before* swiper instance is destroyed.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -137,7 +137,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired right *before* swiper initialization.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -162,7 +162,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired right *after* swiper instance is destroyed.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage 
 
@@ -187,7 +187,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired right *before* loop fix.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -212,7 +212,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired *before* resize handler.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -237,7 +237,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired *before* slide *change transition* start.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -262,7 +262,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired *before* transition starts.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -287,7 +287,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired on *breakpoint change*
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -312,7 +312,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired on *direction* change.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -343,7 +343,7 @@ Receives *pointerup* event as an *argument*.
 ====
 
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -368,7 +368,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired *after* swiper is destroyed.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -393,7 +393,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired when user *double click/tap* on Swiper.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -423,7 +423,7 @@ Event fired when user *double tap* on the Swipers container.
 Receives *pointerup* event as an *argument*.
 ====
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -448,7 +448,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired when Swiper goes from *beginning* or *end* position.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -498,7 +498,7 @@ setup (new) as shown below.
 
 ====
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -523,7 +523,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired when swiper is *locked* (if `watchOverflow` is *enabled*).
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -548,7 +548,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired after *loop fix*.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -573,7 +573,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired on momentum bounce.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -598,7 +598,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired if observer is *enabled* and a *DOM mutations* is detected.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -623,7 +623,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired on *orientation change* (e.g. landscape -> portrait).
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -654,7 +654,7 @@ Receives *progress event* as an *argument*.
 ====
 
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -679,7 +679,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired when Swiper reach its *beginning* (initial position).
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -704,7 +704,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired when Swiper reach *last* slide.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -729,7 +729,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired on real index change.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -755,7 +755,7 @@ const swiper = new Swiper('.swiper', {
 Event fired on *window resize* and *before* on s swiper *onresize*
 manipulation.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -793,7 +793,7 @@ Event fired *everytime* when swiper *starts animation*.
 Receives transition duration value (in ms) as an argument.
 ====
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -823,7 +823,7 @@ Set *custom* CSS3 *transform translate* value for the *swiper wrapper*.
 Receives current *translate* value as as *argument*.
 ====
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -848,7 +848,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired when *active* slide has been *changed*.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage 
 
@@ -873,7 +873,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired *after* animation to *other slide* (next or previous).
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -898,7 +898,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired in the *beginning* of animation to *other slide* (next or previous).
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -923,7 +923,7 @@ const swiper = new Swiper('.swiper', {
 
 Same as *slideChangeTransitionEnd* but only for *forward direction*.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -948,7 +948,7 @@ const swiper = new Swiper('.swiper', {
 
 Same as *slideChangeTransitionStart* but only for *forward direction*.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -973,7 +973,7 @@ const swiper = new Swiper('.swiper', {
 
 Same as *slideChangeTransitionEnd* but only for *backward direction*.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -998,7 +998,7 @@ const swiper = new Swiper('.swiper', {
 
 Same as *slideChangeTransitionStart* but only for *backward direction*.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -1023,7 +1023,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired in the *end* of animation of *resetting* slide to current one.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -1049,7 +1049,7 @@ const swiper = new Swiper('.swiper', {
 Event fired in the *beginning* of animation of *resetting* slide to
 current one.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -1079,7 +1079,7 @@ Event fired when user *touch and move* finger over Swiper and move it.
 Receives *pointermove* event as an *argument*.
 ====
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -1109,7 +1109,7 @@ Event fired when user *touch and move* finger over Swiper and move it.
 Receives *pointermove* event as an *argument*.
 ====
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -1134,7 +1134,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired when *slides grid* has been *changed*.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -1160,7 +1160,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired when *number* of slides has been *changed*.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -1185,7 +1185,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired *after* slides and their sizes are *calculated and updated*.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -1210,7 +1210,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired when *snap grid* has been *changed*.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -1235,7 +1235,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired when *snap index* has been changed.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -1265,7 +1265,7 @@ Event fired when user *click/tap* on *Swiper*.
 Receives *pointerup* event as an *argument*.
 ====
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -1290,7 +1290,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired when Swiper goes to *beginning* or *end* position.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -1320,7 +1320,7 @@ Event fired *after* user *releases* the swiper.
 Receives *pointerup* event as an *argument*.
 ====
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -1350,7 +1350,7 @@ Event fired when user *touch and move* finger *over* the swiper.
 Receives *pointermove* event as an *argument*.
 ====
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -1381,7 +1381,7 @@ to the *direction parameter*.
 Receives *pointermove* event as an *argument*.
 ====
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -1411,7 +1411,7 @@ Event fired when user *touches* the swiper.
 Receives *pointerdown* event as an *argument*.
 ====
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -1436,7 +1436,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired *after* a transition.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -1461,7 +1461,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired in the *beginning* of a transition.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -1486,7 +1486,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired when swiper is *unlocked* (if parameter `watchOverflow` is *enabled*).
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
@@ -1511,7 +1511,7 @@ const swiper = new Swiper('.swiper', {
 
 Event fired *after* update() call is *finished*.
 
-[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4"]
+[cols="12a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
 |===
 |Usage
 
