@@ -117,10 +117,10 @@ settings:
       type:                             image
       layout:                           image_base
       playlist:                         image_playlist
-      swiper_container_classes:         false
+      container_classes:                false
+      wrapper_classes:                  "margin-bottom: 3.75rem;"
       captions:
         enabled:                        true
-        placement:                      outer                                   # [inner | outer]
 
       # ------------------------------------------------------------------------
       # SWIPER settings
