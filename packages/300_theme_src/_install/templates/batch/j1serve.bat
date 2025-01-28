@@ -3,7 +3,7 @@ rem  ---------------------------------------------------------------------------
 rem Product/Info:
 rem https://jekyll.one
 rem
-rem Copyright (C) 2023, 2024 Juergen Adams
+rem Copyright (C) 2023-2025 Juergen Adams
 rem J1 Template is licensed under the MIT License.
 rem  ---------------------------------------------------------------------------
 

@@ -9,7 +9,7 @@
  # http://jekyll.one
  #
  # Copyright (C) 2023 mister-ben
- # Copyright (C) 2023, 2024 Juergen Adams
+ # Copyright (C) 2023-2025 Juergen Adams
  #
  # skipbuttons is licensed under the Apache License 2.0.
  # See: https://github.com/mister-ben/videojs-seek-buttons/blob/master/LICENSE

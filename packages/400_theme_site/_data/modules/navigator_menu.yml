@@ -464,13 +464,13 @@
       href:                             /pages/public/swiper_tester/
       icon:                             test-tube
 
-    - title:                            Swiper API
-      href:                             /pages/public/swiper_api/
-      icon:                             alpha-j-box
+    # - title:                            Swiper API
+    #   href:                             /pages/public/swiper_api/
+    #   icon:                             alpha-j-box
 
-    - title:                            PhotoSwipe API
-      href:                             /pages/public/photoswipe_api/
-      icon:                             alpha-j-box
+    # - title:                            PhotoSwipe API
+    #   href:                             /pages/public/photoswipe_api/
+    #   icon:                             alpha-j-box
 
     # --------------------------------------------------------------------------
     # Tester

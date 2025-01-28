@@ -9,7 +9,7 @@
  #
  # Copyright (C) 2020-2021 Zia Fazal
  # Copyright (C) 2021 Edly by Arbisoft
- # Copyright (C) 2023, 2024 Juergen Adams
+ # Copyright (C) 2023-2025 Juergen Adams
  #
  #  videojs-wistia is licensed under MIT License.
  #  See: https://github.com/edly-io/videojs-wistia/blob/master/LICENSE

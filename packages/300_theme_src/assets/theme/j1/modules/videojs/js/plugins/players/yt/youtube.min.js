@@ -6,7 +6,7 @@
  # Product/Info:
  # http://jekyll.one
  #
- # Copyright (C) 2023, 2024 Juergen Adams
+ # Copyright (C) 2023-2025 Juergen Adams
  # Copyright (C) 2014-2015 Gary Katsevman, Benoit Tremblay
  #
  # YouTube Playback Technology (Tech) is licensed under MIT License.

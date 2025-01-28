@@ -11,7 +11,7 @@ regenerate:                             true
  #
  # Product/Info:
  # https://jekyll.one
- # Copyright (C) 2023, 2024 Juergen Adams
+ # Copyright (C) 2023-2025 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
@@ -64,7 +64,7 @@ regenerate:                             true
  # Product/Info:
  # https://jekyll.one
  #
- # Copyright (C) 2023, 2024 Juergen Adams
+ # Copyright (C) 2023-2025 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
@@ -187,22 +187,30 @@ j1.adapter.swiper = ((j1, window) => {
               // setup the slider
               logger.info ('\n' + 'swiper is being setup on id: ' + '{{swiper.id}}');
               const {{swiper.id}} = new Swiper('#{{swiper.id}}', {
-                // parameters
-                direction:              {%- if swiper.options.direction -%}  {{swiper.options.direction}}                  {%- else -%} 'horizontal' {%- endif -%},
-                loop:                   {%- if swiper.options.loop -%}       {{swiper.options.loop}}                       {%- else -%} false        {%- endif -%},
+
+                {% if swiper.parameters %}
+                // parameters (core)
+                {% for setting in swiper.parameters %}
+                {{setting[0]}}: {{ setting[1] | replace: '=>', ':' }},
+                {% endfor %}
+                {% endif %}
+
+                {% if swiper.modules %}
                 // modules
-                a11y:                   {%- if swiper.modules.a11y -%}       {{swiper.modules.a11y|replace: '=>', ':'}}     {%- else -%} false      {%- endif -%},
-                autoplay:               {%- if swiper.modules.autoplay -%}   {{swiper.modules.autoplay|replace: '=>', ':'}} {%- else -%} false      {%- endif -%},
-                pagination:             {%- if swiper.modules.pagination -%}   {{swiper.modules.pagination|replace: '=>', ':'}} {%- else -%} false      {%- endif -%},                
+                {% for setting in swiper.modules %}
+                {{setting[0]}}: {{ setting[1] | replace: '=>', ':' }},
+                {% endfor %}
+                {% endif %}
+
+                {% if swiper.events %}
                 // events
                 on: {
-                  init: () => {
-                    // do something on initialization
-                  },                  
-                  afterInit: () => {
-                    // do something after initialization
-                  },
-                }
+                  {% for setting in swiper.events %}
+                  {{setting[0]}}: {{ setting[1] }},                  
+                  {% endfor %}
+                } // END events
+                {% endif %}
+
               }); // END Swiper 
 
               clearInterval (load_dependencies['dependencies_met_html_loaded_{{swiper.id}}']);

@@ -7,7 +7,7 @@
  # http://jekyll.one
  #
  # Copyright (C) 2020 John Law
- # Copyright (C) 2023, 2024 Juergen Adams
+ # Copyright (C) 2023-2025 Juergen Adams
  #
  # videojs-dailymotion is licensed under MIT License.
  # See: https://github.com/lawchihon/videojs-dailymotion/blob/master/LICENSE

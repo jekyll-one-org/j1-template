@@ -7,7 +7,7 @@
  #  https://jekyll.one
  #
  #  Copyright (C) Dailymotion 2012-2024
- #  Copyright (C) 2023, 2024 Juergen Adams
+ #  Copyright (C) 2023-2025 Juergen Adams
  #
  #  Dailymotion Javascript SDK is licensed under MIT License.
  #  See: https://github.com/dailymotion/dailymotion-sdk-js/blob/master/LICENSE

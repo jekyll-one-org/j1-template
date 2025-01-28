@@ -1,16 +1,22 @@
- /*
+/*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/swiper/css/swiper-bundle.css
- # Swiper v11.2.0 (January 7, 2025) CSS by Dmytro Semenov
- # Provides Swiper styles, all modules included
+ # ~/assets/theme/j1/modules/swiper/js/swiper-bundle.css
+ # Swiper v11.2.0 (January, 2025) by Dmytro Semenov
+ # Provides SwiperJS Bundle CSS styles (all modules included)
  # -----------------------------------------------------------------------------
  #
  # Product/Info:
  # https://swiperjs.com
- # Copyright 2014 - 2025 Vladimir Kharlampidi
+ # http://jekyll.one
  #
- # Swiper is licensed under the MIT License.
+ # Copyright (C) 2014-2025 Vladimir Kharlampidi
+ # Copyright (C) 2023-2025 Juergen Adams
+ #
+ # SwiperJS is licensed under the MIT License.
  # See: https://github.com/nolimits4web/swiper/blob/master/LICENSE
+ #
+ # J1 Theme is licensed under MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
 */
 

@@ -8,7 +8,7 @@
  # https://github.com/jguadagno/ThemeSwitcher
  #
  # Copyright (C) 2014 Joseph Guadagno
- # Copyright (C) 2023, 2024 Juergen Adams
+ # Copyright (C) 2023-2025 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE

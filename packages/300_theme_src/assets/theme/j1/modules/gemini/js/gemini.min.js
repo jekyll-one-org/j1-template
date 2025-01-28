@@ -7,7 +7,7 @@
  # https://jekyll.one
  #
  # Copyright 2023 Google LLC
- # Copyright (C) 2023, 2024 Juergen Adams
+ # Copyright (C) 2023-2025 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/fabiospampinato/cash/blob/master/LICENSE.md

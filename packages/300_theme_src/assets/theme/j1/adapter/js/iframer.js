@@ -12,7 +12,7 @@ regenerate:                             true
  # Product/Info:
  # https://jekyll.one
  #
- # Copyright (C) 2023, 2024 Juergen Adams
+ # Copyright (C) 2023-2025 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
@@ -61,7 +61,7 @@ regenerate:                             true
  #  https://jekyll.one
  #  http://davidjbradshaw.github.io/iframe-resizer/
  #
- #  Copyright (C) 2023, 2024 Juergen Adams
+ #  Copyright (C) 2023-2025 Juergen Adams
  #  Copyright (C) 2013-2023  David J. Bradshaw
  #
  #  J1 Template is licensed under the MIT License.

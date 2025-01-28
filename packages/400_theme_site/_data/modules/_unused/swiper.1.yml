@@ -1,0 +1,156 @@
+# ------------------------------------------------------------------------------
+# ~/_data/modules/swiper.yml
+# User configuration settings for J1 Swiper module
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2023, 2024 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+# -----------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# Description
+#
+description:
+  title:                                J1 Swiper
+  scope:                                User settings
+  location:                             _data/modules/swiper.yml
+
+# ------------------------------------------------------------------------------
+# User configuration settings
+#
+settings:
+  enabled:                              true
+
+  # ----------------------------------------------------------------------------
+  # LIGHTBOX options (Photosnipe Lightbox )
+  # ----------------------------------------------------------------------------
+  lightbox:
+    enabled:                            false
+
+    type:                               photoswipe
+    captions:
+      enabled:                          false
+      css_class:                        pswp-caption-content
+
+  # ----------------------------------------------------------------------------
+  # CAPTION options (Sniper)
+  # ----------------------------------------------------------------------------
+  captions:                             
+    enabled:                            false
+
+    type:                               native
+    css_class:                          swp-caption-content
+
+
+  # ----------------------------------------------------------------------------
+  # Slider settings
+  # ----------------------------------------------------------------------------
+  sliders:
+
+    # --------------------------------------------------------------------------
+    # TEXT Slider (Base)
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    #
+    - slider:
+
+      # ------------------------------------------------------------------------
+      # GENERAL settings
+      #
+      enabled:                          true
+
+      id:                               swiper_text_base
+      type:                             text
+      layout:                           text_base
+      playlist:                         text_playlist
+      swiper_container_classes:         swiper--text
+
+      # ------------------------------------------------------------------------
+      # SWIPER settings
+      #
+
+      # ------------------------------------------------------------------------
+      # Parameters (Core)
+      #      
+      parameters:    
+        loop:                           true
+
+      # ------------------------------------------------------------------------
+      # Modules
+      #
+      modules:
+        autoplay:
+          delay:                        3000
+          pauseOnMouseEnter:            true
+          disableOnInteraction:         false      
+
+      # ------------------------------------------------------------------------
+      # Events
+      #
+      events:
+        init: >
+                                        function (swiper) {
+                                          // do something on initialization
+                                          console.log ('\n' + 'Entered event: init');
+                                        }
+        afterInit: >
+                                        function (swiper) {
+                                          // do something after initialization
+                                          console.log ('\n' + 'Entered event: afterInit');
+                                        }
+
+    # --------------------------------------------------------------------------
+    # IMAGE Slider (Base)
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    #
+    - slider:
+
+      # ------------------------------------------------------------------------
+      # GENERAL settings
+      #      
+      enabled:                          true
+
+      id:                               swiper_image_base_captions
+      type:                             image
+      layout:                           image_base
+      playlist:                         image_playlist
+      captions:                         true
+      swiper_container_classes:         false
+
+      # ------------------------------------------------------------------------
+      # SWIPER settings
+      #
+
+      # ------------------------------------------------------------------------
+      # Parameters (Core)
+      #      
+      parameters:   
+        slidesPerView:                  2
+        slidesPerGroup:                 2
+        spaceBetween:                   5
+
+      # ------------------------------------------------------------------------
+      # Modules
+      #
+      modules:
+        pagination:
+          el:                           .swiper-pagination
+          type:                         bullets
+          clickable:                    true
+          renderBullet: >
+                                        function (index, className) { return `<span class="${className}"> ${++index} </span>`; }
+
+      # ------------------------------------------------------------------------
+      # Events
+      #
+      events:
+        init: >
+                                        function (swiper) { console.log ('Entered event: init'); }
+        afterInit: >
+                                        function (swiper) { console.log ('Entered event: afterInit'); }
+
+# ------------------------------------------------------------------------------
+# END config

@@ -97,7 +97,7 @@ Important statements or topics can be placed on top of an article or a
 paragraph to give them better visibility. You can present facts to know
 animated for the readers attention.
 
-// .Base Text Swiper
+.Base Text Swiper
 swiper::swiper_text_base[role="mt-4 mb-4"]
 
 
@@ -109,90 +109,13 @@ images as a series. Find with the following some examples of how to use
 a slider for your image data.
 
 [role="mt-4"]
-==== Base Silder + Captions
+==== Base Silder + Captions + Pagination
 
 A simple image show is useful, for example, as an animated (or not animated)
 banner presenting exciting things about your site or the products offered.
 
-++++
-  <!-- Swiper HTML Base Slider (image)-->
-  <div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Base Silder · Captions</div>
-
-  <div id="base_image_slider_1" class="swiper swiper-container">
-    <!-- jadams, 2025-01-15, customize wrapper element for HEIGHT|OUTER bullets -->
-    <!-- Slides container -->
-    <ul class="swiper-wrapper" style="margin-bottom: 3.75rem;">
-      <li class="swiper-slide">
-        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg">
-        <div class="caption"> Image 1</div>
-      </li>
-      <li class="swiper-slide">
-        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg">
-        <div class="caption">Image 2</div>
-      </li>
-      <li class="swiper-slide">
-        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg">
-        <div class="caption">Image 3</div>
-      </li>
-      <li class="swiper-slide">
-        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg">
-        <div class="caption">Image 4</div>
-      </li>
-      <li class="swiper-slide">
-        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg">
-        <div class="caption">Image 5</div>
-      </li>
-      <li class="swiper-slide">
-        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg">
-        <div class="caption">Image 6</div>
-      </li>
-    </ul> <!-- END swiper-wrapper (slides) -->
-
-    <!-- Navigation -->
-    <!-- div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div -->
-
-    <!-- Pagination -->
-    <!-- jadams, 2025-01-15, customize pagination element for OUTER bullets -->
-    <div class="swiper-pagination" style="bottom: 16px;"></div>
-
-  </div> <!-- END swiper-container -->
-
-  <script>
-  $(function() {
-    // -------------------------------------------------------------------------
-    // slider initializer
-    // -------------------------------------------------------------------------
-    var dependencies_met_page_ready = setInterval (() => {
-      var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true : false;
-
-      if (atticFinished) {
-
-        const baseImageSlider1 = new Swiper("#base_image_slider_1", {
-          slidesPerView: 2,
-          slidesPerGroup: 2,
-          spaceBetween: 5,
-          // navigation: {
-          //   nextEl: ".swiper-button-next",
-          //   prevEl: ".swiper-button-prev",
-          // },
-          pagination: {
-            el: ".swiper-pagination",
-            type: 'bullets',
-            clickable: true,
-            renderBullet: function (index, className) {
-              return '<span class="' + className + '">' + (index + 1) + "</span>";
-            }
-          }        
-        });
-
-        clearInterval(dependencies_met_page_ready);
-      } // END pageVisible
-
-    }, 10); // END dependencies_met_page_ready
-  });
-  </script>
-++++
+.Base Image Swiper + Captions + Pagination (Bullets)
+swiper::swiper_image_base_captions[role="mt-4 mb-4"]
 
 
 [role="mt-4"]
@@ -212,7 +135,7 @@ a lightbox to enlarge images full size.
          data-pswp-width="1600"
          data-pswp-height="900">
         <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" alt="Image 1">
-        <div class="caption">Image 1</div>
+        <div class="swp-caption-content">Image 1</div>
         <span class="pswp-caption-content">Image 1</span>
       </a>
     </li>
@@ -221,7 +144,7 @@ a lightbox to enlarge images full size.
         data-pswp-width="1600"
         data-pswp-height="900">
         <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg" alt="Image 2">
-        <div class="caption">Image 2</div>
+        <div class="swp-caption-content">Image 2</div>
         <span class="pswp-caption-content">Image 2</span>
       </a>
     </li>
@@ -230,7 +153,7 @@ a lightbox to enlarge images full size.
         data-pswp-width="1600"
         data-pswp-height="900">
         <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" alt="Image 3">
-        <div class="caption">Image 3</div>
+        <div class="swp-caption-content">Image 3</div>
         <span class="pswp-caption-content">Image 3</span>
       </a>
     </li>
@@ -239,7 +162,7 @@ a lightbox to enlarge images full size.
         data-pswp-width="1600"
         data-pswp-height="900">
         <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg" alt="Image 4">
-        <div class="caption">Image 4</div>
+        <div class="swp-caption-content">Image 4</div>
         <span class="pswp-caption-content">Image 4</span>
       </a>
     </li>
@@ -248,7 +171,7 @@ a lightbox to enlarge images full size.
         data-pswp-width="1600"
         data-pswp-height="900">
         <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg" alt="Image 5">
-        <div class="caption">Image 5</div>
+        <div class="swp-caption-content">Image 5</div>
         <span class="pswp-caption-content">Image 5</span>
       </a>
     </li>
@@ -257,7 +180,7 @@ a lightbox to enlarge images full size.
         data-pswp-width="1600"
         data-pswp-height="900">
         <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg" alt="Image 6">
-        <div class="caption">Image 6</div>
+        <div class="swp-caption-content">Image 6</div>
         <span class="pswp-caption-content">Image 6</span>
       </a>
     </li>
@@ -288,11 +211,9 @@ $(function() {
           grabCursor: true,
           loop: true,
           pagination: {
-            el: '.swiper-pagination',
+            el: ".swiper-pagination",
             clickable: true,
-            renderBullet: function(index, className) {
-              return '<span class="' + className + '">' + (index + 1) + "</span>";
-            }
+            renderBullet: function (index, className) { return `<span class="${className}"> ${++index} </span>`; }
           },
           // navigation: {
           //   nextEl: '.swiper-button-next',
@@ -305,8 +226,17 @@ $(function() {
           keyboard: {
             enabled: true,
           },
+          on: {
+            init: (swiper) => {
+              // set heigth for ALL image slides (and implicitly overall the slider)
+              var slideHeight = 300;
+              swiper.slides.forEach(slide => { 
+                slide.style.height = `${slideHeight}px`;
+              });
+            }
+          }
         });
-
+ 
         // ---------------------------------------------------------------------
         // PhotoSwipe initializer
         // ---------------------------------------------------------------------
@@ -506,27 +436,27 @@ are in a *single row*.
             <ul class="swiper-wrapper">
               <li class="swiper-slide">
                 <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg">
-                <div class="caption">Image 1</div>
+                <div class="swp-caption-content">Image 1</div>
               </li>
               <li class="swiper-slide">
                 <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg">
-                <div class="caption">Image 2</div>
+                <div class="swp-caption-content">Image 2</div>
               </li>
               <li class="swiper-slide">
                 <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg">
-                <div class="caption">Image 3</div>
+                <div class="swp-caption-content">Image 3</div>
               </li>
               <li class="swiper-slide">
                 <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg">
-                <div class="caption">Image 4</div>
+                <div class="swp-caption-content">Image 4</div>
               </li>
               <li class="swiper-slide">
                 <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg">
-                <div class="caption">Image 5</div>
+                <div class="swp-caption-content">Image 5</div>
               </li>
               <li class="swiper-slide">
                 <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg">
-                <div class="caption">Image 6</div>
+                <div class="swp-caption-content">Image 6</div>
               </li>
             </ul> <!-- END swiper-wrapper -->
         </div> <!-- END swiper-container -->
@@ -539,27 +469,27 @@ are in a *single row*.
           <ul class="swiper-wrapper">
             <li class="swiper-slide">
               <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg">
-              <div class="caption">Image 1</div>
+              <div class="swp-caption-content">Image 1</div>
             </li>
             <li class="swiper-slide">
               <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg">
-              <div class="caption">Image 2</div>
+              <div class="swp-caption-content">Image 2</div>
             </li>
             <li class="swiper-slide">
               <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg">
-              <div class="caption">Image 3</div>
+              <div class="swp-caption-content">Image 3</div>
             </li>
             <li class="swiper-slide">
               <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg">
-              <div class="caption">Image 4</div>
+              <div class="swp-caption-content">Image 4</div>
             </li>
             <li class="swiper-slide">
               <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg">
-              <div class="caption">Image 5</div>
+              <div class="swp-caption-content">Image 5</div>
             </li>
             <li class="swiper-slide">
               <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg">
-              <div class="caption">Image 6</div>
+              <div class="swp-caption-content">Image 6</div>
             </li>
           </ul> <!-- END swiper-wrapper -->
         </div> <!-- END swiper-container -->
@@ -650,7 +580,7 @@ providers.
   <div class="swiper-wrapper">
     <div class="swiper-slide swiper-no-swiping" data-slide-type="image">
       <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" aria-label="Animals-1">
-      <div class="caption">Image 1</div>
+      <div class="swp-caption-content">Image 1</div>
     </div>    
 
     <!-- div class="swiper-slide swiper-no-swiping" data-slide-type="video">
@@ -708,16 +638,16 @@ providers.
         }'
       >
       </video>
-      <div class="caption">Roni Sagi & Rhythm · AGT 2024 (YouTube)</div>
+      <div class="swp-caption-content">Roni Sagi & Rhythm · AGT 2024 (YouTube)</div>
     </div>
 
     <div class="swiper-slide swiper-no-swiping" data-slide-type="image">
       <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg" aria-label="Animals-2">
-      <div class="caption">Image 2</div>
+      <div class="swp-caption-content">Image 2</div>
     </div>
     <div class="swiper-slide swiper-no-swiping" data-slide-type="image">
       <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" aria-label="Animals-3">
-      <div class="caption">Image 3</div>
+      <div class="swp-caption-content">Image 3</div>
     </div>
   </div> <!-- END swiper-wrapper -->
 
@@ -729,16 +659,16 @@ providers.
   <div class="swiper-wrapper">
 		<div class="swiper-slide">
 		  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" aria-label="Animals-1">
-      <div class="caption">Image 1</div>
+      <div class="swp-caption-content">Image 1</div>
 		</div>
 		<div class="swiper-slide">
 		  <!-- img src="/assets/video/poster/html5/peck_pocketed.jpg" aria-label="peck_pocketed" -->
 		  <img src="//img.youtube.com/vi/1J2qz6B-PFY/maxresdefault.jpg">
-      <div class="caption">Roni Sagi & Rhythm · AGT 2024 (YouTube)</div>
+      <div class="swp-caption-content">Roni Sagi & Rhythm · AGT 2024 (YouTube)</div>
 		</div>
 		<div class="swiper-slide">
 		  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg" aria-label="Animals-2">
-      <div class="caption">Image 2</div>
+      <div class="swp-caption-content">Image 2</div>
 		</div>      
 		<div class="swiper-slide">
 		  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" aria-label="Animals-3">

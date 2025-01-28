@@ -1,0 +1,74 @@
+How to use javascript regex replace in an object of nested objects?
+
+
+Gemini
+--------------------------------------------------------------------------------
+
+function replaceInNestedObjects(obj, regex, replacement) {
+  for (const key in obj) {
+    if (typeof obj[key] === 'object') {
+      replaceInNestedObjects(obj[key], regex, replacement);
+    } else if (typeof obj[key] === 'string') {
+      obj[key] = obj[key].replace(regex, replacement);
+    }
+  }
+  return obj;
+}
+
+// Example usage:
+const nestedObj = {
+  a: 'hello world',
+  b: {
+    c: 'foo bar',
+    d: {
+      e: 'baz qux'
+    }
+  },
+  f: 123
+};
+
+const newObj = replaceInNestedObjects(nestedObj, /world/, 'universe');
+
+console.log(newObj);
+// Output:
+// {
+//   a: 'hello universe',
+//   b: {
+//     c: 'foo bar',
+//     d: {
+//       e: 'baz qux'
+//     }
+//   },
+//   f: 123
+// }
+
+Explanation:
+
+replaceInNestedObjects(obj, regex, replacement) function:
+
+Takes the object (obj), regular expression (regex), and replacement
+string (replacement) as arguments. Iterates through each key-value pair in
+the object using a for...in loop.
+
+If the value is an object, recursively call the replaceInNestedObjects
+function on that nested object.
+
+If the value is a string, use the replace() method to replace the matched
+pattern with the provided replacement string.
+
+Returns the modified object.
+
+Example Usage:
+
+Creates a sample nested object nestedObj.
+Calls the replaceInNestedObjects function with the object, a regular
+expression to match "world", and the replacement string "universe".
+Stores the modified object in the newObj variable.
+
+Logs the newObj to the console, which will display the object with the
+replaced string.
+
+
+This approach effectively traverses the nested object structure and performs
+the regular expression replacement on all string values within the object.
+

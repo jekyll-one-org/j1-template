@@ -53,7 +53,7 @@ settings:
 
     # --------------------------------------------------------------------------
     # TEXT Slider (Base)
-    # --------------------------------------------------------------------------
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     #
     - slider:
 
@@ -67,11 +67,15 @@ settings:
       layout:                           text_base
       playlist:                         text_playlist
       swiper_container_classes:         swiper--text
-       
+
       # ------------------------------------------------------------------------
-      # OPTION settings (core)
+      # SWIPER settings
       #
-      options:
+
+      # ------------------------------------------------------------------------
+      # Parameters (Core)
+      #      
+      parameters:    
         loop:                           true
 
       # ------------------------------------------------------------------------
@@ -85,11 +89,22 @@ settings:
 
       # ------------------------------------------------------------------------
       # Events
-      # 
+      #
+      # events:
+      #   init: >
+      #                                   function (swiper) {
+      #                                     // do something on initialization
+      #                                     console.log ('\n' + 'Entered event: init');
+      #                                   }
+      #   afterInit: >
+      #                                   function (swiper) {
+      #                                     // do something after initialization
+      #                                     console.log ('\n' + 'Entered event: afterInit');
+      #                                   }
 
     # --------------------------------------------------------------------------
     # IMAGE Slider (Base)
-    # --------------------------------------------------------------------------
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     #
     - slider:
 
@@ -102,13 +117,21 @@ settings:
       type:                             image
       layout:                           image_base
       playlist:                         image_playlist
-      captions:                         true
       swiper_container_classes:         false
+      captions:
+        enabled:                        true
+        placement:                      outer                                   # [inner | outer]
 
       # ------------------------------------------------------------------------
-      # OPTION settings (core)
+      # SWIPER settings
       #
-      options:
+
+      # ------------------------------------------------------------------------
+      # Parameters (Core)
+      #      
+      parameters:
+        autoHeight:                     true
+#       centeredSlides:                 true
         slidesPerView:                  2
         slidesPerGroup:                 2
         spaceBetween:                   5
@@ -118,13 +141,20 @@ settings:
       #
       modules:
         pagination:
-          el:                           ".swiper-pagination"
+          el:                           .swiper-pagination
           type:                         bullets
           clickable:                    true
-          renderBullet: >               
-                                        function (index, className) { 
-                                          return <span class="' + className + '"> + index++ + </span>;
-                                        }                                     
+          # renderBullet: >
+          #                               function (index, className) { return `<span class="${className}"> ${++index} </span>`; }
+
+      # ------------------------------------------------------------------------
+      # Events
+      #
+      events:
+        init: >
+                                        function (swiper) { var slideHeight = 300; swiper.slides.forEach(slide => { slide.style.height = `${slideHeight}px`; }); }
+        afterInit: >
+                                        function (swiper) { console.log ('Entered event: afterInit'); }
 
 # ------------------------------------------------------------------------------
 # END config

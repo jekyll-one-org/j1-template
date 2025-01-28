@@ -1965,12 +1965,12 @@ resources:
                                           modules/photoswipe/css/photoswipe,
                                           modules/photoswipe/css/photoswipe-caption-plugin,
                                         ]
-        files:                          [
-                                          modules/photoswipe/js/photoswipe-core.min.js,
-                                          modules/photoswipe/js/photoswipe-lightbox.min.js,
-                                          modules/photoswipe/js/photoswipe-caption-plugin.min.js
+        files:                          []
+        js:                             [
+                                          modules/photoswipe/js/photoswipe-core,
+                                          modules/photoswipe/js/photoswipe-lightbox,
+                                          modules/photoswipe/js/photoswipe-caption-plugin
                                         ]
-        js:                             []
         init_function:                  []
 
 # ------------------------------------------------------------------------------

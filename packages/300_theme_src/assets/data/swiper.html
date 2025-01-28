@@ -14,7 +14,7 @@ exclude_from_search:                    true
  # Product/Info:
  # https://jekyll.one
  #
- # Copyright (C) 2023, 2024 Juergen Adams
+ # Copyright (C) 2023-2025 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
@@ -131,27 +131,34 @@ exclude_from_search:                    true
       {% if swiper.type == 'image' %}
 
       <!-- Image slider -->
-      <div id="{{swiper.id}}" class="{{swiper.id | replace: '_','-' }}">
-        {% for slide in swiper.slides %}
-        <div class="col-sm-6 col-lg-4 pr-{{swiper.gutters}}">
-          <div class="card {{swiper.captions.position}}">
-          {% if swiper.lightbox.enabled %}
-            <a class="card-link" href="{{swiper.image_base_path}}/{{slide.image}}" data-caption="{{slide.caption}}" target="_blank">
-              <img class="{{swiper.image_styles}}" src="{{swiper.image_base_path}}/{{slide.image}}" alt="{{slide.caption}}" style="{{image_filters}}; height: {{swiper.image_height}};">
-            </a>
-            {% if swiper.captions.enabled %}
-              <div id="{{swiper.id}}_caption"class="caption">{{slide.caption}}</div>
-            {% endif %}
-          {% else %}
-            <img class="{{swiper.image_styles}}" src="{{swiper.image_base_path}}/{{slide.image}}" alt="{{slide.caption}}" style="{{image_filters}}; height: {{swiper.image_height}};"">
-            {% if swiper.captions.enabled %}
-              <div id="{{swiper.id}}_caption"class="caption">{{slide.caption}}</div>
-            {% endif %}
-          {% endif %}
-          </div>
-        </div>
-        {% endfor %}
-      </div>
+      <div id="{{swiper.id}}" class="swiper swiper-container {{swiper.swiper_container_classes}}">
+        
+        <!-- Slides container -->
+          <!-- jadams, 2025-01-15, customize wrapper element for HEIGHT|OUTER bullets -->
+          <ul class="swiper-wrapper" style="margin-bottom: 3.75rem;">
+
+            {% for playlist in swiper_playlists %} {% if playlist.enabled %} {% if playlist.name == swiper.playlist %}    
+            {% for slide in playlist.slides %} {% if slide.enabled  %}
+            <li class="swiper-slide">
+              <img src="{{slide.image}}">
+              {% if swiper.captions.enabled %}
+              <div class="swp-caption-content">{{slide.caption}}</div>
+              {% endif %}
+            </li>
+            {% endif %} {% endfor %}
+            {% endif %} {% endif %} {% endfor %}
+
+        </ul> <!-- END swiper-wrapper (slides) -->
+    
+        <!-- Navigation -->
+        <!-- div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div -->
+    
+        <!-- Pagination -->
+        <!-- jadams, 2025-01-15, customize pagination element for OUTER bullets -->
+        <div class="swiper-pagination" style="bottom: 16px;"></div>
+    
+      </div> <!-- END swiper-container -->
       <!-- END Image slider -->
 
       {% endif %}

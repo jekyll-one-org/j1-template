@@ -9,7 +9,7 @@
  # http://jekyll.one
  #
  # Copyright (C) 2014 Chris Dougherty
- # Copyright (C) 2023, 2024 Juergen Adams
+ # Copyright (C) 2023-2025 Juergen Adams
  #
  # Hotkeys is licensed under the Apache License 2.0.
  # See: https://github.com/ctd1500/videojs-hotkeys/blob/master/LICENSE.md

@@ -9,7 +9,7 @@
  # http://jekyll.one
  #
  # Copyright (C) 2023 mister-ben
- # Copyright (C) 2023, 2024 Juergen Adams
+ # Copyright (C) 2023-2025 Juergen Adams
  #
  # videojs-auto-caption is licensed under the Apache License 2.0.
  # See: https://github.com/mister-ben/videojs-auto-caption/blob/master/LICENSE
