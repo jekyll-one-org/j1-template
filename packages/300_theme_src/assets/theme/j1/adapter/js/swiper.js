@@ -356,40 +356,40 @@ j1.adapter.swiper = ((j1, window) => {
     // createLightboxOnSwiper()
     // Create a PhotoSwipe Lightbox on a Swiper
     // -------------------------------------------------------------------------
-    // createLightboxOnSwiper: (swiper, lightbox) => {
+    createLightboxOnSwiper: (swiper, lightbox) => {
 
-    //   // Setup PhotoSwipe Lightbox
-    //   // -----------------------------------------------------------------------
-    //   const lightbox = new PhotoSwipeLightbox ({
-    //     // global settings
-    //     gallery: '#' + swiper,
-    //     pswpModule: PhotoSwipe,
-    //     // options
-    //     bgOpacity: 1,
-    //     showHideOpacity: true,
-    //     children: 'a',
-    //     loop: true,
-    //     showHideAnimationType: 'zoom',
-    //     imageClickAction: 'next',
-    //     tapAction: 'next',
-    //     // ui elements
-    //     zoom: false,
-    //     close: true,
-    //     counter: true,
-    //     arrowKeys: true,
-    //     bgOpacity: "1",
-    //     wheelToZoom: true,
-    //     // kbd control
-    //     escKey: true
-    //   });
+      // Setup PhotoSwipe Lightbox
+      // -----------------------------------------------------------------------
+      // const lightbox = new PhotoSwipeLightbox ({
+      //   // global settings
+      //   gallery: '#' + swiper,
+      //   pswpModule: PhotoSwipe,
+      //   // options
+      //   bgOpacity: 1,
+      //   showHideOpacity: true,
+      //   children: 'a',
+      //   loop: true,
+      //   showHideAnimationType: 'zoom',
+      //   imageClickAction: 'next',
+      //   tapAction: 'next',
+      //   // ui elements
+      //   zoom: false,
+      //   close: true,
+      //   counter: true,
+      //   arrowKeys: true,
+      //   bgOpacity: "1",
+      //   wheelToZoom: true,
+      //   // kbd control
+      //   escKey: true
+      // });
 
-    //   {% if swiper.lightbox.captions.enabled %}
-    //   // Setup Lightbox Captions
-    //   // -----------------------------------------------------------------------
-    //   const captionPlugin = new PhotoSwipeDynamicCaption (lightbox, {
-    //     type: 'auto'
-    //   });
-    //   {% endif %}
+      // {% if swiper.lightbox.captions.enabled %}
+      // // Setup Lightbox Captions
+      // // -----------------------------------------------------------------------
+      // const captionPlugin = new PhotoSwipeDynamicCaption (lightbox, {
+      //   type: 'auto'
+      // });
+      // {% endif %}
 
     //   // Initialize the Lightbox
     //   // -----------------------------------------------------------------------
@@ -399,7 +399,7 @@ j1.adapter.swiper = ((j1, window) => {
     //   // -----------------------------------------------------------------------
     //   lightbox.on('change', () => {
     //     const { pswp } = lightbox;
-    //     {{swiper.id}}.slideTo(pswp.currIndex, 0, false);
+    //     swiper.slideTo(pswp.currIndex, 0, false);
     //     console.log('Slide index', pswp.currIndex);
     //     console.log('Slide object', pswp.currSlide);
     //     console.log('Slide object data', pswp.currSlide.data);
@@ -407,21 +407,21 @@ j1.adapter.swiper = ((j1, window) => {
 
     //   lightbox.on('afterInit', () => {
     //     const { pswp } = lightbox;
-    //     if ({{swiper.id}}.params.autoplay.enabled) {
-    //       {{swiper.id}}.autoplay.stop();
+    //     if swiper.params.autoplay.enabled) {
+    //       swiper.autoplay.stop();
     //     };
     //   });
 
     //   // if autoplay enabled, run autoplay.start() on (lightbox) close
     //   lightbox.on('closingAnimationStart', () => {
     //     const { pswp } = lightbox;
-    //     {{swiper.id}}.slideTo(pswp.currIndex, 0, false);
-    //     if ({{swiper.id}}.params.autoplay.enabled) {
-    //       {{swiper.id}}.autoplay.start();
+    //     swiper.slideTo(pswp.currIndex, 0, false);
+    //     if swiper.params.autoplay.enabled) {
+    //       swiper.autoplay.start();
     //     }
     //   });
 
-    // }, // END createLightboxOnSwiper
+    }, // END createLightboxOnSwiper
 
     // -------------------------------------------------------------------------
     // messageHandler()

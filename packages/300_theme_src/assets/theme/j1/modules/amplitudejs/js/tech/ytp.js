@@ -774,19 +774,19 @@ var progress;
 
     // update current duration|hours
     durationHours = document.getElementsByClassName("amplitude-duration-hours");
-    if (!isNaN(hours)) {
+    if (durationHours.length && !isNaN(hours)) {
       durationHours[0].innerHTML = hours;
     }
 
     // update current duration|minutes
     durationMinutes = document.getElementsByClassName("amplitude-duration-minutes");
-    if (!isNaN(minutes)) {
+    if (durationMinutes.length && !isNaN(minutes)) {
       durationMinutes[0].innerHTML = minutes;
     }
 
     // update duration|seconds
     durationSeconds = document.getElementsByClassName("amplitude-duration-seconds");
-    if (!isNaN(seconds)) {
+    if (durationSeconds.length && !isNaN(seconds)) {
       durationSeconds[0].innerHTML = seconds;
     }
   }
