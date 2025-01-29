@@ -27,7 +27,7 @@ image:
 attic:                                  false
 regenerate:                             false
 personalization:                        true
-permalink:                              /pages/public/lazy_loader_tester/
+permalink:                              /pages/public/tester/lazy_loader/
 
 resources:                              []
 resource_options:

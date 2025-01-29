@@ -136,20 +136,64 @@ exclude_from_search:                    true
 
         {% assign wrapper_styles = '' %}
         {% if swiper.wrapper_classes %}
-        {% assign wrapper_styles = swiper.wrapper_classes %}
+          {% assign wrapper_styles = swiper.wrapper_classes %}
         {% endif %}
 
         <!-- Slides container -->
         <ul class="swiper-wrapper" style="{{wrapper_styles}}">
 
+          {% if swiper.lightbox.enabled %}
+          <!-- anchor-based swiper slide HTML required for lightbox usage -->
+          {% else %}
+          <!-- flat swiper slide HTML -->
+          {% endif %}
+
           {% for playlist in swiper_playlists %} {% if playlist.enabled %} {% if playlist.name == swiper.playlist %}    
           {% for slide in playlist.slides %} {% if slide.enabled %}
+
+          {% assign image_alt_text = 'Slide Image' %}
+          {% if swiper.captions.enabled %}
+            {% assign image_alt_text = {{slide.caption}}' %}
+          {% endif %}
+
+          {% if swiper.lightbox.enabled %}
           <li class="swiper-slide">
-            <img src="{{slide.image}}">
-            {% if swiper.captions.enabled %}
-            <div class="swp-caption-content">{{slide.caption}}</div>
+            {% if playlist.image_base %} 
+            <a href="{{playlist.image_base}}/{{slide.image}}"
+               data-pswp-width="1600"
+               data-pswp-height="900">
+              <img src="{{playlist.image_base}}/{{slide.image}}" alt="{{image_alt_text}}">              
+              {% if swiper.captions.enabled %}
+              <div class="{{swiper.captions.css_class}}">{{slide.caption}}</div>
+              {% endif %}
+              {% if swiper.lightbox.captions.enabled %}
+              <span class="pswp-caption-content">{{slide.caption}}</span>
+              {% endif %}
+            </a>
+            {% else %}
+            <a href="{{slide.image}}"
+               data-pswp-width="1600"
+               data-pswp-height="900">
+              <img src="{{slide.image}} alt="Slider Image">              
+              {% if swiper.captions.enabled %}
+              <div class="{{swiper.captions.css_class}}">{{slide.caption}}</div>
+              {% endif %}
+            </a>
             {% endif %}
           </li>
+          {% else %}
+          <li class="swiper-slide">
+            {% if playlist.image_base %} 
+            <img src="{{playlist.image_base}}/{{slide.image}}" alt="{{image_alt_text}}">
+            {% else %}
+            <img src="{{slide.image}}">
+            {% endif %}
+            {% if swiper.captions.enabled %}
+            <div class="{{swiper.captions.css_class}}">{{slide.caption}}</div>
+            {% endif %}
+          </li>          
+          {% endif %}
+
           {% endif %} {% endfor %}
           {% endif %} {% endif %} {% endfor %}
 

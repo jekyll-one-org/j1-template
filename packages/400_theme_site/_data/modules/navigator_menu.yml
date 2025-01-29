@@ -456,32 +456,28 @@
 - item:                                 Tools
   sublevel:
 
-    - title:                            YT Tester
-      href:                             /pages/public/amplitude_yt_tester/
-      icon:                             test-tube
-
-    - title:                            Swiper Tester
-      href:                             /pages/public/swiper_tester/
-      icon:                             test-tube
-
-    # - title:                            Swiper API
-    #   href:                             /pages/public/swiper_api/
-    #   icon:                             alpha-j-box
-
-    # - title:                            PhotoSwipe API
-    #   href:                             /pages/public/photoswipe_api/
-    #   icon:                             alpha-j-box
-
     # --------------------------------------------------------------------------
     # Tester
     #
-    # - title:                            Tester
-    #   icon:                             eye
-    #   dropdown:
+    - title:                            Tester
+      icon:                             ab-testing
+      dropdown:
 
-    #   - title:                          Test Video Integrations
-    #     href:                           /pages/public/video_tester/
-    #     icon:                           video
+        - title:                        Swiper
+          href:                         /pages/public/tester/swiper/
+          icon:                         test-tube
+
+        - title:                        Amplitude YT
+          href:                         /pages/public/tester/amplitude_yt/
+          icon:                         test-tube
+
+        # - title:                        Lazy Loader
+        #   href:                         /pages/public/tester/lazy_loader/
+        #   icon:                         test-tube
+
+        # - title:                        Test Video Integrations
+        #   href:                         /pages/public/video_tester/
+        #   icon:                         video
 
     # --------------------------------------------------------------------------
     # Previewer

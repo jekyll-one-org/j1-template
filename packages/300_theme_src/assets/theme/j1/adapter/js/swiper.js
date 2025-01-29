@@ -213,6 +213,74 @@ j1.adapter.swiper = ((j1, window) => {
 
               }); // END Swiper 
 
+              {% if swiper.lightbox.enabled %}
+
+              // ---------------------------------------------------------------
+              // Setup PhotoSwipe Lightbox
+              // ---------------------------------------------------------------
+              //
+              const {{swiper.id}}Lightbox = new PhotoSwipeLightbox ({
+                // global settings
+                gallery: '#{{swiper.id}}',
+                pswpModule: PhotoSwipe,
+                // options
+                bgOpacity: 1,
+                showHideOpacity: true,
+                children: 'a',
+                loop: true,
+                showHideAnimationType: 'zoom',
+                imageClickAction: 'next',
+                tapAction: 'next',
+                // ui elements
+                zoom: false,
+                close: true,
+                counter: true,
+                arrowKeys: true,
+                bgOpacity: "1",
+                wheelToZoom: true,
+                // kbd control
+                escKey: true
+              });
+
+              {% if swiper.lightbox.captions.enabled %}
+              // Setup Lightbox Captions
+              // ---------------------------------------------------------------
+              const captionPlugin = new PhotoSwipeDynamicCaption ({{swiper.id}}Lightbox, {
+                type: 'auto'
+              });
+              {% endif %}
+
+              // Initialize the Lightbox
+              // ---------------------------------------------------------------
+              {{swiper.id}}Lightbox.init();
+
+              // Create Lightbox Events
+              // ---------------------------------------------------------------
+              {{swiper.id}}Lightbox.on('change', () => {
+                const { pswp } = {{swiper.id}}Lightbox;
+                {{swiper.id}}.slideTo(pswp.currIndex, 0, false);
+                console.log('Slide index', pswp.currIndex);
+                console.log('Slide object', pswp.currSlide);
+                console.log('Slide object data', pswp.currSlide.data);
+              });
+
+              {{swiper.id}}Lightbox.on('afterInit', () => {
+                const { pswp } = {{swiper.id}}Lightbox;
+                if ({{swiper.id}}.params.autoplay.enabled) {
+                  {{swiper.id}}.autoplay.stop();
+                };
+              });
+
+              // if autoplay enabled, run autoplay.start() on (lightbox) close
+              {{swiper.id}}Lightbox.on('closingAnimationStart', () => {
+                const { pswp } = {{swiper.id}}Lightbox;
+                {{swiper.id}}.slideTo(pswp.currIndex, 0, false);
+                if ({{swiper.id}}.params.autoplay.enabled) {
+                  {{swiper.id}}.autoplay.start();
+                }
+              });
+              {% endif %}
+
               clearInterval (load_dependencies['dependencies_met_html_loaded_{{swiper.id}}']);
             } // END if xhrLoadState success
           }, 10); // END dependencies_met_html_loaded swiper.id              
@@ -267,6 +335,95 @@ j1.adapter.swiper = ((j1, window) => {
     }, // END loadSwiperHTML
 
     // -------------------------------------------------------------------------
+    // pluginManager()
+    // 
+    // -------------------------------------------------------------------------
+    pluginManager: (plugin) => {
+      if (plugin === 'photoswipe') {        
+        var tech;
+        var techScript;
+
+        tech        = document.createElement('script');
+        tech.id     = 'tech_' + plugin;
+        tech.src    = '/assets/theme/j1/modules/amplitudejs/js/tech/' + plugin + '.js';
+        techScript  = document.getElementsByTagName('script')[0];
+
+        techScript.parentNode.insertBefore(tech, techScript);
+      }
+    }, // END pluginManager
+
+    // -------------------------------------------------------------------------
+    // createLightboxOnSwiper()
+    // Create a PhotoSwipe Lightbox on a Swiper
+    // -------------------------------------------------------------------------
+    // createLightboxOnSwiper: (swiper, lightbox) => {
+
+    //   // Setup PhotoSwipe Lightbox
+    //   // -----------------------------------------------------------------------
+    //   const lightbox = new PhotoSwipeLightbox ({
+    //     // global settings
+    //     gallery: '#' + swiper,
+    //     pswpModule: PhotoSwipe,
+    //     // options
+    //     bgOpacity: 1,
+    //     showHideOpacity: true,
+    //     children: 'a',
+    //     loop: true,
+    //     showHideAnimationType: 'zoom',
+    //     imageClickAction: 'next',
+    //     tapAction: 'next',
+    //     // ui elements
+    //     zoom: false,
+    //     close: true,
+    //     counter: true,
+    //     arrowKeys: true,
+    //     bgOpacity: "1",
+    //     wheelToZoom: true,
+    //     // kbd control
+    //     escKey: true
+    //   });
+
+    //   {% if swiper.lightbox.captions.enabled %}
+    //   // Setup Lightbox Captions
+    //   // -----------------------------------------------------------------------
+    //   const captionPlugin = new PhotoSwipeDynamicCaption (lightbox, {
+    //     type: 'auto'
+    //   });
+    //   {% endif %}
+
+    //   // Initialize the Lightbox
+    //   // -----------------------------------------------------------------------
+    //   lightbox.init();
+
+    //   // Create Lightbox Events
+    //   // -----------------------------------------------------------------------
+    //   lightbox.on('change', () => {
+    //     const { pswp } = lightbox;
+    //     {{swiper.id}}.slideTo(pswp.currIndex, 0, false);
+    //     console.log('Slide index', pswp.currIndex);
+    //     console.log('Slide object', pswp.currSlide);
+    //     console.log('Slide object data', pswp.currSlide.data);
+    //   });
+
+    //   lightbox.on('afterInit', () => {
+    //     const { pswp } = lightbox;
+    //     if ({{swiper.id}}.params.autoplay.enabled) {
+    //       {{swiper.id}}.autoplay.stop();
+    //     };
+    //   });
+
+    //   // if autoplay enabled, run autoplay.start() on (lightbox) close
+    //   lightbox.on('closingAnimationStart', () => {
+    //     const { pswp } = lightbox;
+    //     {{swiper.id}}.slideTo(pswp.currIndex, 0, false);
+    //     if ({{swiper.id}}.params.autoplay.enabled) {
+    //       {{swiper.id}}.autoplay.start();
+    //     }
+    //   });
+
+    // }, // END createLightboxOnSwiper
+
+    // -------------------------------------------------------------------------
     // messageHandler()
     // manage messages send from other J1 modules
     // -------------------------------------------------------------------------
@@ -294,24 +451,6 @@ j1.adapter.swiper = ((j1, window) => {
 
       return true;
     }, // END messageHandler
-
-    // -------------------------------------------------------------------------
-    // pluginManager()
-    // 
-    // -------------------------------------------------------------------------
-    pluginManager: (plugin) => {
-      if (plugin === 'photoswipe') {        
-        var tech;
-        var techScript;
-
-        tech        = document.createElement('script');
-        tech.id     = 'tech_' + plugin;
-        tech.src    = '/assets/theme/j1/modules/amplitudejs/js/tech/' + plugin + '.js';
-        techScript  = document.getElementsByTagName('script')[0];
-
-        techScript.parentNode.insertBefore(tech, techScript);
-      }
-    }, // END pluginManager
 
     // -------------------------------------------------------------------------
     // setState()

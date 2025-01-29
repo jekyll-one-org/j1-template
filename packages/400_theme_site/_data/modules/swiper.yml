@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
 # ~/_data/modules/swiper.yml
-# User configuration settings for J1 Swiper module
+# User configuration settings for J1 Swiper Sliders
 #
 # Product/Info:
 # https://jekyll.one
@@ -26,24 +26,13 @@ settings:
   enabled:                              true
 
   # ----------------------------------------------------------------------------
-  # LIGHTBOX options (Photosnipe Lightbox )
-  # ----------------------------------------------------------------------------
-  lightbox:
-    enabled:                            false
-
-    type:                               photoswipe
-    captions:
-      enabled:                          false
-      css_class:                        pswp-caption-content
-
-  # ----------------------------------------------------------------------------
   # CAPTION options (Sniper)
   # ----------------------------------------------------------------------------
-  captions:                             
-    enabled:                            false
+  # captions:                             
+  #   enabled:                            false
 
-    type:                               native
-    css_class:                          swp-caption-content
+  #   type:                               native
+  #   css_class:                          swp-caption-content
 
 
   # ----------------------------------------------------------------------------
@@ -112,19 +101,80 @@ settings:
       # GENERAL settings
       #      
       enabled:                          true
+      type:                             image
 
       id:                               swiper_image_base_captions
-      type:                             image
       layout:                           image_base
       playlist:                         image_playlist
       container_classes:                false
       wrapper_classes:                  "margin-bottom: 3.75rem;"
-      captions:
-        enabled:                        true
+
+      # ------------------------------------------------------------------------
+      # CAPTION settings
+      #
+      captions:                             
+        enabled:                            true
+        type:                               native
+
+        css_class:                          swp-caption-content
+
+      # ------------------------------------------------------------------------
+      # LIGHTBOX options
+      #
+      lightbox:
+        enabled:                            true
+        type:                               photoswipe
+
+        # ----------------------------------------------------------------------
+        # CAPTION settings
+        #
+        captions:
+          enabled:                          true
+          css_class:                        pswp-caption-content
+
+        # ----------------------------------------------------------------------
+        # Lightbox settings
+        # ----------------------------------------------------------------------
+
+        # ----------------------------------------------------------------------
+        # Parameters (Core)
+        #
+        parameters:
+          bgOpacity:                        1
+          showHideOpacity:                  true
+          children:                         a
+          loop:                             true
+          showHideAnimationType:            zoom
+          imageClickAction:                 next
+          tapAction:                        next
+
+        # ----------------------------------------------------------------------
+        # ÎMAGE control
+        #
+        image_control:
+          maxWidth:                         1600
+          maxHeight:                        900
+
+        # ----------------------------------------------------------------------
+        # USERINTERFAE control
+        #
+        ui_control:
+          zoom:                             false
+          close:                            true
+          counter:                          true
+          arrowKeys:                        true
+          bgOpacity:                        1
+          wheelToZoom:                      true
+
+        # ----------------------------------------------------------------------
+        # KEYBOARD control
+        #
+        kbd_control:
+          escKey:                           true
 
       # ------------------------------------------------------------------------
       # SWIPER settings
-      #
+      # ------------------------------------------------------------------------
 
       # ------------------------------------------------------------------------
       # Parameters (Core)
@@ -152,9 +202,9 @@ settings:
       #
       events:
         init: >
-                                        function (swiper) { var slideHeight = 300; swiper.slides.forEach(slide => { slide.style.height = `${slideHeight}px`; }); }
-        afterInit: >
-                                        function (swiper) { console.log ('Entered event: afterInit'); }
+                                          function (swiper) { var slideHeight = 300; swiper.slides.forEach(slide => { slide.style.height = `${slideHeight}px`; }); }
+        # afterInit: >
+        #                                 function (swiper) { console.log ('Entered event: afterInit'); }
 
 # ------------------------------------------------------------------------------
 # END config

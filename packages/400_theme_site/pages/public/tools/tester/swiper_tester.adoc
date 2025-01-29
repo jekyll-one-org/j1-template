@@ -25,7 +25,7 @@ image:
 attic:                                  false
 regenerate:                             false
 personalization:                        true
-permalink:                              /pages/public/swiper_tester/
+permalink:                              /pages/public/tester/swiper/
 
 resources:                              [ swiper, photoswipe, videojs ]
 resource_options:
@@ -243,7 +243,7 @@ $(function() {
 
         // Setup PhotoSwipe Lightbox
         // ---------------------------------------------------------------------
-        const myLightbox = new PhotoSwipeLightbox({
+        const myLightbox = new PhotoSwipeLightbox ({
           gallery: '#my_gallery',
           pswpModule: PhotoSwipe,
           bgOpacity: 1,
@@ -264,26 +264,32 @@ $(function() {
 
         // Setup Lightbox Captions
         // ---------------------------------------------------------------------
-        const captionPlugin = new PhotoSwipeDynamicCaption(myLightbox, {
+        const captionPlugin = new PhotoSwipeDynamicCaption (myLightbox, {
           type: 'auto'
         });
 
         // Initialize the Lightbox
         // ---------------------------------------------------------------------
+        const pswp = myLightbox;
         myLightbox.init();
 
         // Create Lightbox Events
         // ---------------------------------------------------------------------
-        myLightbox.on('change', () => {
-          const { pswp } = myLightbox;
-          swiper.slideTo(pswp.currIndex, 0, false);
-          console.log('Slide index', pswp.currIndex);
-          console.log('Slide object', pswp.currSlide);
-          console.log('Slide object data', pswp.currSlide.data);
-        });
+        // myLightbox.on('change', () => {
+        //   const { pswp } = myLightbox;
+        //   swiper.slideTo(pswp.currIndex, 0, false);
+        //   // console.log('Slide index', pswp.currIndex);
+        //   // console.log('Slide object', pswp.currSlide);
+        //   // console.log('Slide object data', pswp.currSlide.data);
+        // });
+
+        // myLightbox.on('init', function (event) {  
+        //   const { pswp } = myLightbox;
+        //   var myEvent    = event;
+        //   console.log ('\n' + 'PhotoSwipeLightbox, entered event: init');
+        // });
 
         myLightbox.on('afterInit', () => {
-          const { pswp } = myLightbox;
           if (swiper.params.autoplay.enabled) {
             swiper.autoplay.stop();
           };

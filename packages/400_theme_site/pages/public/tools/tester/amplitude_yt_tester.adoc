@@ -27,7 +27,7 @@ image:
 attic:                                  false
 regenerate:                             false
 personalization:                        true
-permalink:                              /pages/public/amplitude_yt_tester/
+permalink:                              /pages/public/tester/amplitude_yt/
 
 resources:                              [ amplitudejs ]
 resource_options:
