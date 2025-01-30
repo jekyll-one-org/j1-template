@@ -223,23 +223,28 @@ j1.adapter.swiper = ((j1, window) => {
                 // global settings
                 gallery: '#{{swiper.id}}',
                 pswpModule: PhotoSwipe,
-                // options
-                bgOpacity: 1,
-                showHideOpacity: true,
-                children: 'a',
-                loop: true,
-                showHideAnimationType: 'zoom',
-                imageClickAction: 'next',
-                tapAction: 'next',
+
+                {% if swiper.lightbox.parameters %}
+                // parameters (core)
+                {% for setting in swiper.lightbox.parameters %}
+                {{setting[0]}}: {{ setting[1] | replace: '=>', ':' | json }},
+                {% endfor %}
+                {% endif %}
+
+                {% if swiper.lightbox.ui_control %}
                 // ui elements
-                zoom: false,
-                close: true,
-                counter: true,
-                arrowKeys: true,
-                bgOpacity: "1",
-                wheelToZoom: true,
+                {% for setting in swiper.lightbox.ui_control %}
+                {{setting[0]}}: {{ setting[1] | replace: '=>', ':' }},
+                {% endfor %}
+                {% endif %}
+
+                {% if swiper.lightbox.kbd_control %}
                 // kbd control
-                escKey: true
+                {% for setting in swiper.lightbox.kbd_control %}
+                {{setting[0]}}: {{ setting[1] | replace: '=>', ':' }},
+                {% endfor %}
+                {% endif %}
+
               });
 
               {% if swiper.lightbox.captions.enabled %}

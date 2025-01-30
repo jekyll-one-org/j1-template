@@ -170,6 +170,15 @@ exclude_from_search:                    true
               <span class="pswp-caption-content">{{slide.caption}}</span>
               {% endif %}
             </a>
+            {% else %}
+            <a href="{{slide.image}}"
+               data-pswp-width="{{swiper.lightbox.image_control.maxWidth}}"
+               data-pswp-height="{{swiper.lightbox.image_control.maxHeight}}">
+              <img src="{{slide.image}} alt="Slider Image">              
+              {% if swiper.captions.enabled %}
+              <div class="{{swiper.captions.css_class}}">{{slide.caption}}</div>
+              {% endif %}
+            </a>
             {% endif %}
           </li>
           {% else %}

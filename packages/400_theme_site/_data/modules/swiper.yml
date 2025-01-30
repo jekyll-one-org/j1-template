@@ -149,21 +149,20 @@ settings:
           tapAction:                        next
 
         # ----------------------------------------------------------------------
-        # ÎMAGE control
+        # IMAGE control
         #
         image_control:
-          maxWidth:                         1600
-          maxHeight:                        900
+          maxWidth:                         1920
+          maxHeight:                        1280
 
         # ----------------------------------------------------------------------
-        # USERINTERFAE control
+        # USER INTERFAE control
         #
         ui_control:
           zoom:                             false
           close:                            true
           counter:                          true
           arrowKeys:                        true
-          bgOpacity:                        1
           wheelToZoom:                      true
 
         # ----------------------------------------------------------------------
@@ -181,7 +180,6 @@ settings:
       #      
       parameters:
         autoHeight:                     true
-#       centeredSlides:                 true
         slidesPerView:                  2
         slidesPerGroup:                 2
         spaceBetween:                   5
