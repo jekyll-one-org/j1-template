@@ -61,8 +61,6 @@ settings:
           audio:                        watch?v=fFn1GZIYC4Y
           rating:                       3
           audio_info:                   //youtube.com/playlist?list=OLAK5uy_mmjefHkIN8Cvg5RGPpajKbMLDEazaFbT4
-#         audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
-#         audio_info:                   //youtube.com/watch?v=fFn1GZIYC4Y
           cover_image:                  //img.youtube.com/vi/fFn1GZIYC4Y/maxresdefault.jpg
           duration:                     "02:32"
 
@@ -71,9 +69,6 @@ settings:
           enabled:                      true
           <<:                           *album_manon_melodie_yt
           title:                        Fleur de Printemps                      # Frühlingsblume
-#         title:                        Frühlingsblume                          # prapeared for change  (title|mixed playlist)
-#         name:                         No Album Name                           # prapeared for change  (album|mixed playlist)
-#         artist:                       Schnuckie                               # prapeared for change (artist|mixed playlist)
           audio:                        watch?v=OUjHRpNUqyw
           rating:                       3
           audio_info:                   //youtube.com/playlist?list=OLAK5uy_nVFdeHv7LWlUYKk2gwFjfO6WxX-GvD7Hs
@@ -123,7 +118,6 @@ settings:
           audio_info:                   //youtube.com/playlist?list=OLAK5uy_mt77a4375yJP13dr29_cKr8zKNGANoWd8
           cover_image:                  //img.youtube.com/vi/yttS9UNgZFk/maxresdefault.jpg
           duration:                     "02:45"
-
 
     # --------------------------------------------------------------------------
     #  Mimi Rutherfurt, Maritim Verlag
@@ -259,7 +253,6 @@ settings:
           cover_image:                  //img.youtube.com/vi/mBRbyVFIL0U/hqdefault.jpg
           duration:                     "01:19:16"
 
-
     # --------------------------------------------------------------------------
     # Die größten Fälle des BND, Maritim Verlag
     # --------------------------------------------------------------------------
@@ -306,7 +299,6 @@ settings:
           cover_image:                  //img.youtube.com/vi/biZp6ko8x7E/hqdefault.jpg
           duration:                     "01:20:24"
 
-
     # --------------------------------------------------------------------------
     # Emancipator
     # --------------------------------------------------------------------------
@@ -323,7 +315,6 @@ settings:
       album:                            &album_from_dusk_to_dawn
         name:                           From Dusk To Dawn
         artist:                         Emancipator
-#       audio_base:                     //521dimensions.com/song
         audio_base:                     /assets/audio/album/emancipator/from-dusk-to-dawn
         cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
 
@@ -375,7 +366,6 @@ settings:
           audio_info:                   //emancipator.bandcamp.com/
           cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn/safe-in-the-steep-cliffs.jpg
           duration:                     "04:35"
-
 
     # --------------------------------------------------------------------------
     # Disco 80th - Royalty Free Music
@@ -680,7 +670,7 @@ settings:
       playlist:
         name:                           free_disco
         title:                          Disco 80th
-#       audio_info:                     true
+        audio_info:                     false
         controls:                       true
 
     # --------------------------------------------------------------------------
@@ -777,7 +767,6 @@ settings:
         title:                          Emancipator
         controls:                       true
 
-
     # --------------------------------------------------------------------------
     # LARGE player, Manon Mélodie
     # --------------------------------------------------------------------------
@@ -820,7 +809,6 @@ settings:
         audio_info:                     true
         audio_rating:                   true
 
-
     # --------------------------------------------------------------------------
     # LARGE player, Mimi Rutherfurt
     # --------------------------------------------------------------------------
@@ -862,7 +850,6 @@ settings:
         title:                          Mimi Rutherfurt
         audio_info:                     true
         audio_rating:                   true     
-
 
     # --------------------------------------------------------------------------
     # LARGE player, Die größten Fälle des BND
@@ -908,7 +895,6 @@ settings:
         title:                          Die größten Fälle des BND
         audio_info:                     true
         audio_rating:                   true     
-
 
 # ------------------------------------------------------------------------------
 # END config

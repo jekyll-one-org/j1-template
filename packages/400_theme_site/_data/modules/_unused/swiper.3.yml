@@ -23,33 +23,36 @@ description:
 # User configuration settings
 #
 settings:
-
-  # ----------------------------------------------------------------------------
-  # GLOBAL settings
-  # ----------------------------------------------------------------------------
   enabled:                              true
 
   # ----------------------------------------------------------------------------
-  # SLIDER settings
+  # CAPTION options (Sniper)
+  # ----------------------------------------------------------------------------
+  # captions:                             
+  #   enabled:                            false
+
+  #   type:                               native
+  #   css_class:                          swp-caption-content
+
+
+  # ----------------------------------------------------------------------------
+  # Slider settings
   # ----------------------------------------------------------------------------
   sliders:
 
     # --------------------------------------------------------------------------
-    # TEXT Sliders
-    # --------------------------------------------------------------------------
-
-    # --------------------------------------------------------------------------
     # TEXT Slider (Base)
-    #    
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    #
     - slider:
 
       # ------------------------------------------------------------------------
       # GENERAL settings
       #
       enabled:                          true
-      type:                             text
 
       id:                               swiper_text_base
+      type:                             text
       layout:                           text_base
       playlist:                         text_playlist
       swiper_container_classes:         swiper--text
@@ -88,13 +91,9 @@ settings:
       #                                     console.log ('\n' + 'Entered event: afterInit');
       #                                   }
 
-
-    # --------------------------------------------------------------------------
-    # IMAGE Sliders
-    # --------------------------------------------------------------------------
-
     # --------------------------------------------------------------------------
     # IMAGE Slider (Base)
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     #
     - slider:
 
@@ -106,7 +105,7 @@ settings:
 
       id:                               swiper_image_base_captions
       layout:                           image_base
-      playlist:                         mega_cities_2
+      playlist:                         image_playlist
       container_classes:                false
       wrapper_classes:                  "margin-bottom: 3.75rem;"
 
@@ -114,24 +113,24 @@ settings:
       # CAPTION settings
       #
       captions:                             
-        enabled:                        true
-        type:                           native
+        enabled:                            true
+        type:                               native
 
-        css_class:                      swp-caption-content
+        css_class:                          swp-caption-content
 
       # ------------------------------------------------------------------------
       # LIGHTBOX options
       #
       lightbox:
-        enabled:                        true
-        type:                           photoswipe
+        enabled:                            true
+        type:                               photoswipe
 
         # ----------------------------------------------------------------------
         # CAPTION settings
         #
         captions:
-          enabled:                      true
-          css_class:                    pswp-caption-content
+          enabled:                          true
+          css_class:                        pswp-caption-content
 
         # ----------------------------------------------------------------------
         # Lightbox settings
@@ -141,36 +140,36 @@ settings:
         # Parameters (Core)
         #
         parameters:
-          bgOpacity:                    1
-          showHideOpacity:              true
-          children:                     a
-          loop:                         true
-          showHideAnimationType:        zoom
-#         imageClickAction:             next
-#         tapAction:                    next
+          bgOpacity:                        1
+          showHideOpacity:                  true
+          children:                         a
+          loop:                             true
+          showHideAnimationType:            zoom
+          imageClickAction:                 next
+          tapAction:                        next
 
         # ----------------------------------------------------------------------
         # IMAGE control
         #
         image_control:
-          maxWidth:                     1920
-          maxHeight:                    1280
+          maxWidth:                         1920
+          maxHeight:                        1280
 
         # ----------------------------------------------------------------------
         # USER INTERFAE control
         #
         ui_control:
-          zoom:                         false
-          close:                        true
-          counter:                      true
-          arrowKeys:                    true
-          wheelToZoom:                  true
+          zoom:                             false
+          close:                            true
+          counter:                          true
+          arrowKeys:                        true
+          wheelToZoom:                      true
 
         # ----------------------------------------------------------------------
         # KEYBOARD control
         #
         kbd_control:
-          escKey:                       true
+          escKey:                           true
 
       # ------------------------------------------------------------------------
       # SWIPER settings
@@ -193,17 +192,17 @@ settings:
           el:                           .swiper-pagination
           type:                         bullets
           clickable:                    true
-#         renderBullet: >
-#                                       function (index, className) { return `<span class="${className}"> ${++index} </span>`; }
+          # renderBullet: >
+          #                               function (index, className) { return `<span class="${className}"> ${++index} </span>`; }
 
       # ------------------------------------------------------------------------
       # Events
       #
       events:
         init: >
-                                        function (swiper) { var slideHeight = 300; swiper.slides.forEach(slide => { slide.style.height = `${slideHeight}px`; }); }
-#       afterInit: >
-#                                       function (swiper) { console.log ('Entered event: afterInit'); }
+                                          function (swiper) { var slideHeight = 300; swiper.slides.forEach(slide => { slide.style.height = `${slideHeight}px`; }); }
+        # afterInit: >
+        #                                 function (swiper) { console.log ('Entered event: afterInit'); }
 
 # ------------------------------------------------------------------------------
 # END config

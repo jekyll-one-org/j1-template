@@ -7,14 +7,14 @@ date:                                   2025-01-07
 #last_modified:                         2025-01-01
 
 description: >
-
+                                        Test the Swiper Integration
 keywords: >
                                         open source, free, template, jekyll, jekyllone, web,
                                         sites, static, jamstack, bootstrap,
                                         html, html5, video, support, flash player,
                                         quicktime, silverlight
 
-categories:                             [ Roundtrip ]
+categories:                             [ Tester ]
 tags:                                   [ Module, Swiper ]
 
 image:
@@ -834,4 +834,3 @@ $(function() {
 });
 </script>
 ++++
-
