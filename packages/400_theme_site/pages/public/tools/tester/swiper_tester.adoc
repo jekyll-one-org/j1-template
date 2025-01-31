@@ -25,7 +25,7 @@ image:
 compress:                               false
 regenerate:                             false
 personalization:                        true
-permalink:                              /pages/public/tools/swiper_tester/
+permalink:                              /pages/public/tools/tester/swiper/
 
 resources:                              [ photoswipe, swiper, videojs ]
 resource_options:
@@ -125,185 +125,9 @@ Carousels are used for an exceptionally compact form of image galleries.
 This example shows some pictures having individual caption text and supports
 a lightbox to enlarge images full size.
 
-++++
-<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Base Silder · Captions + Lightbox</div>
-<div id="my_gallery" class="swiper swiper-container">
-  <!-- Slides container -->
-  <ul class="swiper-wrapper" style="margin-bottom: 3.75rem;">
-    <li class="swiper-slide">
-      <a href="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg"
-         data-pswp-width="1600"
-         data-pswp-height="900">
-        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" alt="Image 1">
-        <div class="swp-caption-content">Image 1</div>
-        <span class="pswp-caption-content">Image 1</span>
-      </a>
-    </li>
-    <li class="swiper-slide">
-      <a href="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg"
-        data-pswp-width="1600"
-        data-pswp-height="900">
-        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg" alt="Image 2">
-        <div class="swp-caption-content">Image 2</div>
-        <span class="pswp-caption-content">Image 2</span>
-      </a>
-    </li>
-    <li class="swiper-slide">
-      <a href="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg"
-        data-pswp-width="1600"
-        data-pswp-height="900">
-        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" alt="Image 3">
-        <div class="swp-caption-content">Image 3</div>
-        <span class="pswp-caption-content">Image 3</span>
-      </a>
-    </li>
-    <li class="swiper-slide">
-      <a href="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg"
-        data-pswp-width="1600"
-        data-pswp-height="900">
-        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg" alt="Image 4">
-        <div class="swp-caption-content">Image 4</div>
-        <span class="pswp-caption-content">Image 4</span>
-      </a>
-    </li>
-    <li class="swiper-slide">
-      <a href="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg"
-        data-pswp-width="1600"
-        data-pswp-height="900">
-        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg" alt="Image 5">
-        <div class="swp-caption-content">Image 5</div>
-        <span class="pswp-caption-content">Image 5</span>
-      </a>
-    </li>
-    <li class="swiper-slide">
-      <a href="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg"
-        data-pswp-width="1600"
-        data-pswp-height="900">
-        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg" alt="Image 6">
-        <div class="swp-caption-content">Image 6</div>
-        <span class="pswp-caption-content">Image 6</span>
-      </a>
-    </li>
-  </ul>
+.Base Slider + Captions + Lightbox
+swiper::swiper_image_base_lightbox[role="mt-4 mb-4"]
 
-  <!-- Pagination -->
-  <div class="swiper-pagination"></div>
-
-  <!-- Navigation -->
-  <!-- div class="swiper-button-prev"></div>
-  <div class="swiper-button-next"></div -->
-</div>
-
-<script>
-$(function() {
-  var dependencies_met_page_ready = setInterval (() => {
-    var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true : false;
-
-      if (atticFinished) {
-
-        // ---------------------------------------------------------------------
-        // slider initializer
-        // ---------------------------------------------------------------------
-        var swiper = new Swiper("#my_gallery", {
-          slidesPerView: 2,
-          slidesPerGroup: 2,
-          spaceBetween: 5,
-          grabCursor: true,
-          loop: true,
-          pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
-            renderBullet: function (index, className) { return `<span class="${className}"> ${++index} </span>`; }
-          },
-          // navigation: {
-          //   nextEl: '.swiper-button-next',
-          //   prevEl: '.swiper-button-prev',
-          // },
-          // autoplay: { 
-          //   delay: 4000,
-          //   disableOnInteraction: true
-          // },
-          keyboard: {
-            enabled: true,
-          },
-          on: {
-            init: (swiper) => {
-              // set heigth for ALL image slides (and implicitly overall the slider)
-              var slideHeight = 300;
-              swiper.slides.forEach(slide => { 
-                slide.style.height = `${slideHeight}px`;
-              });
-            }
-          }
-        });
- 
-        // ---------------------------------------------------------------------
-        // PhotoSwipe initializer
-        // ---------------------------------------------------------------------
-
-        // Setup PhotoSwipe Lightbox
-        // ---------------------------------------------------------------------
-        const myLightbox = new PhotoSwipeLightbox({
-          gallery: '#my_gallery',
-          pswpModule: PhotoSwipe,
-          bgOpacity: 1,
-          showHideOpacity: true,
-          children: 'a',
-          loop: true,
-          showHideAnimationType: 'zoom',
-          imageClickAction: 'next',
-          tapAction: 'next',
-          zoom: false,
-          close: true,
-          counter: true,
-          arrowKeys: true,
-          bgOpacity: "1",
-          wheelToZoom: true,
-          escKey: true
-        });
-
-        // Setup Lightbox Captions
-        // ---------------------------------------------------------------------
-        const captionPlugin = new PhotoSwipeDynamicCaption(myLightbox, {
-          type: 'auto'
-        });
-
-        // Initialize the Lightbox
-        // ---------------------------------------------------------------------
-        myLightbox.init();
-
-        // Create Lightbox Events
-        // ---------------------------------------------------------------------
-        myLightbox.on('change', () => {
-          const { pswp } = myLightbox;
-          swiper.slideTo(pswp.currIndex, 0, false);
-          console.log('Slide index', pswp.currIndex);
-          console.log('Slide object', pswp.currSlide);
-          console.log('Slide object data', pswp.currSlide.data);
-        });
-
-        myLightbox.on('afterInit', () => {
-          const { pswp } = myLightbox;
-          if (swiper.params.autoplay.enabled) {
-            swiper.autoplay.stop();
-          };
-        });
-
-        // if autoplay enabled, run autoplay.start() on (lightbox) close
-        myLightbox.on('closingAnimationStart', () => {
-          const { pswp } = myLightbox;
-          swiper.slideTo(pswp.currIndex, 0, false);
-          if (swiper.params.autoplay.enabled) {
-            swiper.autoplay.start();
-          }
-        });
-
-      clearInterval(dependencies_met_page_ready);
-    } // END pageVisible
-  }, 10); // END dependencies_met_page_ready
-});
-</script>
-++++
 
 [role="mt-4"]
 [[image_thumbs_silder_bottom]]
@@ -828,3 +652,6 @@ $(function() {
 });
 </script>
 ++++
+
+/////
+/////

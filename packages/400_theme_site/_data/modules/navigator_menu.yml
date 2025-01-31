@@ -464,20 +464,20 @@
       dropdown:
 
         - title:                        Swiper
-          href:                         /pages/public/tester/swiper/
+          href:                         /pages/public/tools/tester/swiper/
           icon:                         test-tube
 
         - title:                        Amplitude YT
-          href:                         /pages/public/tester/amplitude_yt/
+          href:                         /pages/public/tools/tester/amplitude_yt/
           icon:                         test-tube
 
-        # - title:                        Lazy Loader
-        #   href:                         /pages/public/tester/lazy_loader/
-        #   icon:                         test-tube
+#       - title:                        Lazy Loader
+#         href:                         /pages/public/tools/tester/lazy_loader/
+#         icon:                         test-tube
 
-        # - title:                        Test Video Integrations
-        #   href:                         /pages/public/video_tester/
-        #   icon:                         video
+#       - title:                        VideoJS
+#         href:                         /pages/public/tools/tester/videojs/
+#         icon:                         video
 
     # --------------------------------------------------------------------------
     # Previewer

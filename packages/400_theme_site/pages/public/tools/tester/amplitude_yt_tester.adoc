@@ -27,7 +27,7 @@ image:
 compress:                               false
 regenerate:                             false
 personalization:                        true
-permalink:                              /pages/public/tools/amplitude_yt_tester/
+permalink:                              /pages/public/tools/tester/amplitude_yt/
 
 resources:                              [ amplitudejs ]
 resource_options:

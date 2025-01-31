@@ -94,7 +94,7 @@ settings:
     # --------------------------------------------------------------------------
 
     # --------------------------------------------------------------------------
-    # IMAGE Slider (Base)
+    # IMAGE Slider (Base + Captions + Pagination)
     #
     - slider:
 
@@ -107,6 +107,67 @@ settings:
       id:                               swiper_image_base_captions
       layout:                           image_base
       playlist:                         mega_cities_2
+      container_classes:                false
+      wrapper_classes:                  "margin-bottom: 3.75rem;"
+
+      # ------------------------------------------------------------------------
+      # CAPTION settings
+      #
+      captions:                             
+        enabled:                        true
+        type:                           native
+
+        css_class:                      swp-caption-content
+
+      # ------------------------------------------------------------------------
+      # LIGHTBOX options
+      #
+      lightbox:
+        enabled:                        false
+ 
+      # ------------------------------------------------------------------------
+      # SWIPER settings
+      # ------------------------------------------------------------------------
+
+      # ------------------------------------------------------------------------
+      # Parameters (Core)
+      #      
+      parameters:
+        autoHeight:                     true
+        slidesPerView:                  2
+        slidesPerGroup:                 2
+        spaceBetween:                   5
+
+      # ------------------------------------------------------------------------
+      # Modules
+      #
+      modules:
+        pagination:
+          el:                           .swiper-pagination
+          type:                         bullets
+          clickable:                    true
+
+      # ------------------------------------------------------------------------
+      # Events
+      #
+      events:
+        init: >
+                                        function (swiper) { var slideHeight = 300; swiper.slides.forEach(slide => { slide.style.height = `${slideHeight}px`; }); }
+
+    # --------------------------------------------------------------------------
+    # IMAGE Slider (Base + Captions + Pagination + Lightbox)
+    #
+    - slider:
+
+      # ------------------------------------------------------------------------
+      # GENERAL settings
+      #      
+      enabled:                          true
+      type:                             image
+
+      id:                               swiper_image_base_lightbox
+      layout:                           image_base
+      playlist:                         free_animals
       container_classes:                false
       wrapper_classes:                  "margin-bottom: 3.75rem;"
 
@@ -146,8 +207,8 @@ settings:
           children:                     a
           loop:                         true
           showHideAnimationType:        zoom
-#         imageClickAction:             next
-#         tapAction:                    next
+          imageClickAction:             next
+          tapAction:                    next
 
         # ----------------------------------------------------------------------
         # IMAGE control

@@ -90,6 +90,61 @@ settings:
     # --------------------------------------------------------------------------
 
     # --------------------------------------------------------------------------
+    # FREE ANIMALS
+    # --------------------------------------------------------------------------
+    #
+    - playlist:
+      enabled:                          true
+
+      name:                             free_animals
+      type:                             image
+#     image_base:                       false
+      image_base:                       /assets/image/modules/gallery/free_animals
+
+      # ------------------------------------------------------------------------
+      # SLIDE settings
+      # ------------------------------------------------------------------------
+      slides:
+
+        # slide 01
+        - slide:
+          enabled:                      true
+          image:                        free-animals-1.jpg
+          caption:                      Image 1
+
+        # slide 02
+        - slide:
+          enabled:                      true
+          
+          image:                        free-animals-2.jpg
+          caption:                      Image 2
+
+        # slide 03
+        - slide:
+          enabled:                      true
+          image:                        free-animals-3.jpg
+          caption:                      Image 3
+
+        # slide 04
+        - slide:
+          enabled:                      true
+          image:                        free-animals-4.jpg
+          caption:                      Image 4
+
+        # slide 05
+        - slide:
+          enabled:                      true
+          image:                        free-animals-5.jpg
+          caption:                      Image 5
+
+        # slide 06
+        - slide:
+          enabled:                      true
+          image:                        free-animals-6.jpg
+          caption:                      Image 6
+
+
+    # --------------------------------------------------------------------------
     # MEGA CITIES 1
     # --------------------------------------------------------------------------
     #

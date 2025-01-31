@@ -1970,8 +1970,8 @@ resources:
 
       data:
         css:                            [                                          
-                                          modules/swiper/css/swiper-bundle,
-                                          modules/swiper/css/theme/uno
+                                          modules/swiper/css/theme/uno,
+                                          modules/swiper/css/swiper-bundle
                                         ]
         files:                          [ adapter/js/swiper.js ]
         js:                             [ modules/swiper/js/swiper-bundle ]
