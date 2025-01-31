@@ -16,18 +16,18 @@ keywords: >
                                         html, html5, video, support, flash player,
                                         quicktime, silverlight
 
-categories:                             [ Roundtrip ]
-tags:                                   [ Module, Video ]
+categories:                             [ Tester ]
+tags:                                   [ Audio, Amplitude YT ]
 
 image:
   path:                                 /assets/image/modules/attics/markus-spiske-1920x1280.jpg
   width:                                1920
   height:                               1280
 
-attic:                                  false
+compress:                               false
 regenerate:                             false
 personalization:                        true
-permalink:                              /pages/public/tester/amplitude_yt/
+permalink:                              /pages/public/tools/amplitude_yt_tester/
 
 resources:                              [ amplitudejs ]
 resource_options:
