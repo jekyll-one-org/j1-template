@@ -478,7 +478,7 @@ providers.
 </div> <!-- END swiper-container -->
 
 <!-- Thumbs Slider (bottom) -->
-<div id="thumbs_slider_3" class="swiper swiper-container thumbs-slider thumbs-slider--bottom mt-1 mb-8">
+<div id="thumbs_slider_3" class="swiper swiper-container thumbs-slider thumbs-slider--bottom mt-1 mb-4">
 
   <div class="swiper-wrapper">
 		<div class="swiper-slide">
@@ -652,6 +652,211 @@ $(function() {
 });
 </script>
 ++++
+
+
+[role="mt-5"]
+== Sliders using a Layout
+
+lorem:sentences[5]
+
+[role="mt-4"]
+[[slider_partialview]]
+=== Layout partialView
+
+The following slider presents a slideshow usinge a Layout: *partialview*.
+A slideshow typically presents a larger number of slides. The layout
+*partialview* accompanies the *active* slide by their neighbors on the
+left and the right.
+
+++++
+<div class="carousel-title mt-4"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Slideshow · Layout partialView</div>
+<!-- Triple slider -->
+<div class="triple-slider mb-8">
+  <!-- Duplicate swipers will be created automatically -->
+
+  <!-- Main center swiper -->
+  <div class="swiper">
+    <div class="swiper-wrapper mb-8">
+      <div class="swiper-slide">
+        <img class="bg-image" src="/assets/image/modules/gallery/triple_slider/guardians-of-the-galaxy.jpg" alt="">
+      </div>
+      <div class="swiper-slide">
+        <img class="bg-image" src="/assets/image/modules/gallery/triple_slider/justice-league.jpg" alt="">
+      </div>
+      <div class="swiper-slide">
+        <img class="bg-image" src="/assets/image/modules/gallery/triple_slider/spider-man.jpg" alt="">
+      </div>
+      <div class="swiper-slide">
+        <img class="bg-image" src="/assets/image/modules/gallery/triple_slider/suicide-squad.jpg" alt="">
+      </div>
+      <div class="swiper-slide">
+        <img class="bg-image" src="/assets/image/modules/gallery/triple_slider/thor-ragnarok.jpg" alt="">
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+
+.triple-slider {
+  /* padding: 32px 0; */
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  /* perspective: 1200px; */
+}
+
+.triple-slider .swiper {
+  width: 90%;
+  max-width: 640px;
+  height: 320px;
+  /* border-radius: 8px; */
+}
+
+.triple-slider .bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.triple-slider .triple-slider-main {
+  position: relative;
+  z-index: 10;
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
+}
+
+.triple-slider .triple-slider-prev,
+.triple-slider .triple-slider-next {
+  opacity: 0.5;
+  position: absolute;
+  top: 50%;
+  user-select: none;
+  cursor: pointer;
+}
+
+.triple-slider .triple-slider-prev {
+  right: 50%;
+  transform: translateY(-50%) scale(0.75) rotateY(10deg);
+}
+
+.triple-slider .triple-slider-next {
+  left: 50%;
+  transform: translateY(-50%) scale(0.75) rotateY(-10deg);
+}
+
+</style>
+
+<!-- Initialize Swiper Layout partialview -->
+<script>
+
+$(function() {
+
+  function createTripleSlider(el) {
+
+    // main swiper el
+    //
+    const swiperEl = el.querySelector('.swiper');
+
+    // create prev (duplicate) swiper
+    //
+    const swiperPrevEl = swiperEl.cloneNode(true);
+    swiperPrevEl.classList.add('triple-slider-prev');
+    el.insertBefore(swiperPrevEl, swiperEl);
+    const swiperPrevSlides = swiperPrevEl.querySelectorAll('.swiper-slide');
+    const swiperPrevLastSlideEl = swiperPrevSlides[swiperPrevSlides.length - 1];
+    swiperPrevEl
+      .querySelector('.swiper-wrapper')
+      .insertBefore(swiperPrevLastSlideEl, swiperPrevSlides[0]);
+
+    // create next (duplicate) swiper
+    //
+    const swiperNextEl = swiperEl.cloneNode(true);
+    swiperNextEl.classList.add('triple-slider-next');
+    el.appendChild(swiperNextEl);
+    const swiperNextSlides = swiperNextEl.querySelectorAll('.swiper-slide');
+    const swiperNextFirstSlideEl = swiperNextSlides[0];
+    swiperNextEl
+      .querySelector('.swiper-wrapper')
+      .appendChild(swiperNextFirstSlideEl);
+
+    // Add "main" class
+    //
+    swiperEl.classList.add('triple-slider-main');
+
+    // common params for all swipers
+    //
+    const commonParams = {
+      speed: 600,
+      loop: true,
+      parallax: true,
+    };
+
+    var tripleMainSwiper;
+
+    // init prev swiper
+    //
+    const triplePrevSwiper = new Swiper(swiperPrevEl, {
+      ...commonParams,
+      allowTouchMove: false,
+      on: {
+        click() {
+          tripleMainSwiper.slidePrev();
+        },
+      },
+    });
+
+    // init next swiper
+    //
+    const tripleNextSwiper = new Swiper(swiperNextEl, {
+      ...commonParams,
+      allowTouchMove: false,
+      on: {
+        click() {
+          tripleMainSwiper.slideNext();
+        },
+      },
+    });
+
+    // init main swiper
+    //
+    tripleMainSwiper = new Swiper(swiperEl, {
+      ...commonParams,
+      grabCursor: true,
+      controller: {
+        control: [triplePrevSwiper, tripleNextSwiper],
+      },
+      on: {
+        destroy() {
+          // destroy side swipers on main swiper destroy
+          triplePrevSwiper.destroy();
+          tripleNextSwiper.destroy();
+        },
+      },
+    });
+
+    return tripleMainSwiper;
+  }
+
+  // ---------------------------------------------------------------------------
+  // slider initializer
+  // ---------------------------------------------------------------------------
+  var dependencies_met_page_ready = setInterval (() => {
+    var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true : false;
+
+    if (atticFinished) {
+      const sliderEl = document.querySelector('.triple-slider');
+
+      createTripleSlider(sliderEl);
+
+       clearInterval(dependencies_met_page_ready);
+    } // END pageVisible
+  }, 10); // END dependencies_met_page_ready
+});
+
+</script>
+++++
+
+
 
 /////
 /////
