@@ -171,10 +171,10 @@ exclude_from_search:                    true
                target="_blank">
               <img class="pswp-image" src="{{playlist.image_defaults.base_folder}}/{{slide.image}}" alt="{{image_alt_text}}">
               {% if swiper.captions.enabled %}
-              <div class="{{swiper.captions.css_class}}">{{slide.caption}}</div>
+              <div class="{{swiper.captions.css_class}}">{{slide.image_caption}}</div>
               {% endif %}
               {% if swiper.lightbox.captions.enabled %}
-              <span class="pswp-caption-content">{{slide.caption}}</span>
+              <span class="pswp-caption-content">{{slide.lightbox_caption}}</span>
               {% endif %}
             </a>
             {% endif %}
@@ -187,7 +187,7 @@ exclude_from_search:                    true
             <img src="{{slide.image}}">
             {% endif %}
             {% if swiper.captions.enabled %}
-            <div class="{{swiper.captions.css_class}}">{{slide.caption}}</div>
+            <div class="{{swiper.captions.css_class}}">{{slide.image_caption}}</div>
             {% endif %}
           </li>          
           {% endif %}

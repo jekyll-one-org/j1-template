@@ -146,30 +146,29 @@ settings:
           showHideOpacity:              true
           loop:                         true
           wheelToZoom:                  true
-          # padding:                      { top: 0, bottom: 0, left: 80, right: 80 }
+          showHideAnimationType:        zoom
+          imageClickAction:             next
+          tapAction:                    next
           padding:                      {
                                           top: 0,
                                           bottom: 0,
                                           left: 80,
                                           right: 80
                                         }
-          showHideAnimationType:        zoom
-          imageClickAction:             next
-          tapAction:                    next
 
         # ----------------------------------------------------------------------
-        # USER INTERFAE control
+        # USER INTERFACE controls
         #
-        ui_control:
+        ui_controls:
           zoom:                         false
           close:                        true
           counter:                      true
           arrowKeys:                    false
 
         # ----------------------------------------------------------------------
-        # KEYBOARD control
+        # KEYBOARD controls
         #
-        kbd_control:
+        kbd_controls:
           escKey:                       true
  
       # ------------------------------------------------------------------------
@@ -249,34 +248,34 @@ settings:
         # Parameters (Core)
         #
         parameters:
+          children:                     a
           bgOpacity:                    1
           showHideOpacity:              true
           loop:                         true
           wheelToZoom:                  true
-          # showHideAnimationType:        'zoom'
-          # imageClickAction:             'next'
-          # tapAction:                    'next'
+          showHideAnimationType:        zoom
+          imageClickAction:             next
+          tapAction:                    next
+          padding:                      {
+                                          top: 0,
+                                          bottom: 0,
+                                          left: 80,
+                                          right: 80
+                                        }
 
         # ----------------------------------------------------------------------
-        # IMAGE control
+        # USER INTERFACE controls
         #
-        image_control:
-          maxWidth:                     1920
-          maxHeight:                    1280
-
-        # ----------------------------------------------------------------------
-        # USER INTERFAE control
-        #
-        ui_control:
-#         zoom:                         false
+        ui_controls:
+          zoom:                         false
           close:                        true
           counter:                      true
           arrowKeys:                    false
 
         # ----------------------------------------------------------------------
-        # KEYBOARD control
+        # KEYBOARD controls
         #
-        kbd_control:
+        kbd_controls:
           escKey:                       true
 
       # ------------------------------------------------------------------------

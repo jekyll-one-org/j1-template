@@ -113,37 +113,49 @@ settings:
         - slide:
           enabled:                      true
           image:                        free-animals-1.jpg
-          caption:                      Husky
+          image_caption:                Husky
+          lightbox_caption: >
+                                        Husky
 
         # slide 02
         - slide:
           enabled:                      true
           image:                        free-animals-2.jpg
-          caption:                      Female Lion
+          image_caption:                Female Lion
+          lightbox_caption: >
+                                        Female Lion
 
         # slide 03
         - slide:
           enabled:                      true
           image:                        free-animals-3.jpg
-          caption:                      Vulture approaching
+          image_caption:                Vulture approaching
+          lightbox_caption: >
+                                        Vulture approaching
 
         # slide 04
         - slide:
           enabled:                      true
           image:                        free-animals-4.jpg
-          caption:                      Group of Flamingos
+          image_caption:                Group of Flamingos
+          lightbox_caption: >
+                                        Group of Flamingos          
 
         # slide 05
         - slide:
           enabled:                      true
           image:                        free-animals-5.jpg
-          caption:                      Young Deer
+          image_caption:                Young Deer
+          lightbox_caption: >
+                                        Young Deer
 
         # slide 06
         - slide:
           enabled:                      true
           image:                        free-animals-6.jpg
-          caption:                      Lttle Bird
+          image_caption:                Lttle Bird
+          lightbox_caption: >
+                                        Lttle Bird
 
 
     # --------------------------------------------------------------------------
@@ -171,7 +183,9 @@ settings:
           image:                        denys-nevozhai-3_b.jpg
           imageWidth:                   1920
           imageHeight:                  1280
-          caption:                      Sunset view from Google's Office in Chelsea - United States (NY)
+          image_caption:                Sunset view from Google's Office in Chelsea (NY) - United States
+          lightbox_caption: >
+                                        Sunset view from Google's Office in Chelsea (NY) - United States
 
         # slide 02
         - slide:
@@ -179,7 +193,9 @@ settings:
           image:                        emmad-mazhari_c.jpg
           imageWidth:                   2023
           imageHeight:                  1920
-          caption:                      Chicago - United States (IL)
+          image_caption:                Chicago (IL) - United States
+          lightbox_caption: >
+                                        Chicago (IL) - United States
 
         # slide 03
         - slide:
@@ -187,7 +203,9 @@ settings:
           image:                        thomas-tucker_b.jpg
           imageWidth:                   1920
           imageHeight:                  1038
-          caption:                      Sunset view over Taipei City - Taiwan
+          image_caption:                Sunset view over Taipei City - Taiwan
+          lightbox_caption: >            
+                                        Sunset view over Taipei City - Taiwan
 
         # slide 04
         - slide:
@@ -195,7 +213,9 @@ settings:
           image:                        queen_bees_at_eureka_tower.jpg
           imageWidth:                   1308
           imageHeight:                  1920
-          caption:                      The Queen Bees at the Eureka Tower - Melbourne Australia
+          image_caption:                The Queen Bees at the Eureka Tower - Melbourne Australia
+          lightbox_caption: >
+                                        The Queen Bees at the Eureka Tower - Melbourne Australia
 
         # slide 05
         - slide:
@@ -203,7 +223,9 @@ settings:
           image:                        federico-rizzarelli_c.jpg
           imageWidth:                   1627
           imageHeight:                  2440
-          caption:                      Man sitting over Shanghai City - China
+          image_caption:                Man sitting over Shanghai City - China
+          lightbox_caption: >
+                                        Man sitting over Shanghai City - China
 
         # slide 06
         - slide:
@@ -211,7 +233,9 @@ settings:
           image:                        jakarta_indonesia_2.jpg
           imageWidth:                   2772
           imageHeight:                  1355
-          caption:                      Jakarta City Skyline - Indonesia
+          image_caption:                Jakarta City Skyline - Indonesia
+          lightbox_caption: >
+                                        Jakarta City Skyline - Indonesia
 
     # --------------------------------------------------------------------------
     # MEGA CITIES 2
@@ -235,37 +259,50 @@ settings:
         - slide:
           enabled:                      true
           image:                        tokyo_japan.jpg^
-          caption:                      Tokyo - Japan
+          image_caption:                Tokyo - Japan
+          lightbox_caption: >
+                            
+                                        Tokyo - Japan
 
         # slide 02
         - slide:
           enabled:                      true          
           image:                        thomas-tucker_b.jpg         
-          caption:                      Sunset over Taipei City - Taiwan
+          image_caption:                Sunset over Taipei City - Taiwan
+          lightbox_caption: >
+                                        Sunset over Taipei City - Taiwan
 
         # slide 03
         - slide:
           enabled:                      true
           image:                        chicago-us.jpg
-          caption:                      Chicago - United States
+          image_caption:                Chicago - United States
+          lightbox_caption: >
+                                        Chicago - United States
 
         # slide 04
         - slide:
           enabled:                      true
           image:                        melbourne_australia.jpg       
-          caption:                      Melbourne - Australia
+          image_caption:                Melbourne - Australia
+          lightbox_caption: >
+                                        Melbourne - Australia
 
         # slide 05
         - slide:
           enabled:                      true
           image:                        shanghai_china.jpg         
-          caption:                      Shanghai - China
+          image_caption:                Shanghai - China
+          lightbox_caption: >
+                                        Shanghai - China
 
         # slide 06
         - slide:
           enabled:                      true
           image:                        jakarta_indonesia.jpg         
-          caption:                      Jakarta - Indonesia
+          image_caption:                Jakarta - Indonesia
+          lightbox_caption: >
+                                        Jakarta - Indonesia
 
 # ------------------------------------------------------------------------------
 # END config

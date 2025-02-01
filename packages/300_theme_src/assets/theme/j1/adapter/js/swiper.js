@@ -234,17 +234,17 @@ j1.adapter.swiper = ((j1, window) => {
                 {% endfor %}
                 {% endif %}
 
-                {% if swiper.lightbox.ui_control %}
+                {% if swiper.lightbox.ui_controls %}
                 // ui elements
-                {% for setting in swiper.lightbox.ui_control %}
+                {% for setting in swiper.lightbox.ui_controls %}
 
                 {{setting[0]}}: {{ setting[1] | replace: '=>', ':' }},
                 {% endfor %}
                 {% endif %}
 
-                {% if swiper.lightbox.kbd_control %}
+                {% if swiper.lightbox.kbd_controls %}
                 // kbd control
-                {% for setting in swiper.lightbox.kbd_control %}
+                {% for setting in swiper.lightbox.kbd_controls %}
                 {{setting[0]}}: {{ setting[1] | replace: '=>', ':' }},
                 {% endfor %}
                 {% endif %}
