@@ -260,8 +260,7 @@ settings:
           enabled:                      true
           image:                        tokyo_japan.jpg^
           image_caption:                Tokyo - Japan
-          lightbox_caption: >
-                            
+          lightbox_caption: >    
                                         Tokyo - Japan
 
         # slide 02
