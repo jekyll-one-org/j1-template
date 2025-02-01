@@ -71,27 +71,34 @@ input.addEventListener('change', (event) => {
 Wichtige Punkte
 --------------------------------------------------------------------------------
 
-Browser-Kompatibilität: Die meisten modernen Browser unterstützen diese Methoden. Für ältere Browser könnten Polyfills oder alternative Lösungen erforderlich sein.
-Asynchrone Operationen: Beim Lesen von Dateien mit FileReader sind asynchrone Operationen beteiligt. Daher ist es wichtig, die onload-Ereignisse zu verwenden, um sicherzustellen, dass die Daten vollständig geladen sind, bevor die Bildgröße abgerufen wird.
-Bildmanipulationen: Wenn das Bild vor der Größenbestimmung manipuliert wird (z.B. skaliert oder gedreht), können sich die Ergebnisse ändern.
+Browser-Kompatibilität:
+Die meisten modernen Browser unterstützen diese Methoden. Für ältere Browser
+könnten Polyfills oder alternative Lösungen erforderlich sein.
+
+Asynchrone Operationen:
+Beim Lesen von Dateien mit FileReader sind asynchrone Operationen beteiligt.
+Daher ist es wichtig, die onload-Ereignisse zu verwenden, um sicherzustellen,
+dass die Daten vollständig geladen sind, bevor die Bildgröße abgerufen wird.
+
+Bildmanipulationen:
+Wenn das Bild vor der Größenbestimmung manipuliert wird (z.B. skaliert oder
+gedreht), können sich die Ergebnisse ändern.
+
 Welches Verfahren ist das richtige für dich?
 
 Direkter Zugriff auf ein Bild-Element: Methode 1
 Dynamisches Laden von Bildern: Methode 3
 Pixelmanipulationen: Methode 2
 
+
 Zusätzliche Überlegungen
 ------------------------
 
-Hoch aufgelöste Bilder: Für sehr große Bilder kann das Laden und die Verarbeitung im Browser zu Leistungsproblemen führen.
-Server-seitige Verarbeitung: Für komplexere Bildanalysen oder -verarbeitungen kann es sinnvoll sein, die Bildverarbeitung auf den Server zu verlagern.
-Möchtest du ein konkretes Beispiel sehen oder hast du weitere Fragen?
-Lass es mich wissen!
+Hoch aufgelöste Bilder:
+Für sehr große Bilder kann das Laden und die Verarbeitung im Browser zu
+Leistungsproblemen führen.
 
-Beispielhafte HTML-Struktur
----------------------------
+Server-seitige Verarbeitung:
+Für komplexere Bildanalysen oder -verarbeitungen kann es sinnvoll sein, die
+Bildverarbeitung auf den Server zu verlagern.
 
-HTML
-<img id="myImage" src="meinBild.jpg" alt="Mein Bild">
-<canvas id="myCanvas"></canvas>
-<input id="imageInput" type="file">

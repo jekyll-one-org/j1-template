@@ -34,7 +34,9 @@
   opacity: 0 !important;
 }
 
+/* jadams, 2025-02-01: set top */
 .pswp__dynamic-caption--aside {
+  top: 0 !important;
   width: auto;
   max-width: 300px;
   padding: 20px 15px 20px 20px;

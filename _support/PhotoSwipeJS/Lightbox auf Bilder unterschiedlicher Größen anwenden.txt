@@ -1,0 +1,163 @@
+Kann man einer Photopsie Lightbox auf Bilder unterschiedlicher Größen anwenden? Wenn ja, welche Einstellengen
+sind dazu notwendig? Bitte erzeuge ein vollständiges Beispiel einer 
+Konfiguration für HTML Markup, JavaScript und CSS.
+
+Gemini
+--------------------------------------------------------------------------------
+
+Ja, die Lightbox-Funktionalität von PhotoSwipe kann auf Bilder unterschiedlicher
+Größen angewendet werden. PhotoSwipe skaliert und passt die Bilder automatisch
+an die Größe des Bildschirms an, während die ursprüngliche Auflösung für die
+Zoomfunktion beibehalten wird.
+
+Hier ist ein vollständiges Beispiel für die Konfiguration von HTML-Markup,
+JavaScript und CSS für eine Lightbox mit PhotoSwipe, die Bilder unterschiedlicher
+Größen unterstützt:
+
+
+HTML
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhotoSwipe Beispiel</title>
+    <link rel="stylesheet" href="photoswipe.css">
+    <link rel="stylesheet" href="default-skin/default-skin.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="gallery" itemscope itemtype="http://schema.org/ImageGallery">
+        <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+            <a href="images/image1-large.jpg" itemprop="contentUrl" data-size="1600x1067">
+                <img src="images/image1-thumbnail.jpg" itemprop="thumbnail" alt="Bild 1">
+            </a>
+            <figcaption itemprop="caption description">Bildunterschrift 1</figcaption>
+        </figure>
+
+        <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+            <a href="images/image2-large.jpg" itemprop="contentUrl" data-size="1200x800">
+                <img src="images/image2-thumbnail.jpg" itemprop="thumbnail" alt="Bild 2">
+            </a>
+            <figcaption itemprop="caption description">Bildunterschrift 2</figcaption>
+        </figure>
+
+        </div>
+
+    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="pswp__bg"></div>
+        <div class="pswp__scroll-wrap">
+            <div class="pswp__container">
+                <div class="pswp__content"></div>
+            </div>
+            <div class="pswp__ui pswp__ui--hidden">
+                <div class="pswp__top-bar">
+                    <div class="pswp__counter"></div>
+                    <button class="pswp__button pswp__button--close" title="Schließen (Esc)"></button>
+                    <button class="pswp__button pswp__button--share" title="Teilen"></button>
+                    <button class="pswp__button pswp__button--fs" title="Vollbild"></button>
+                    <button class="pswp__button pswp__button--zoom" title="Zoomen"></button>
+                    <div class="pswp__preloader">
+                        <div class="pswp__preloader__icn">
+                            <div class="pswp__preloader__cut"></div>
+                            <div class="pswp__preloader__circle"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pswp__caption">
+                    <div class="pswp__caption__center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="photoswipe.min.js"></script>
+    <script src="photoswipe-ui-default.min.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
+
+CSS
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 20px;
+}
+
+.gallery figure {
+    margin: 0;
+}
+
+.gallery img {
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+}
+
+JavaScript
+
+const pswpElement = document.querySelectorAll('.pswp')[0];
+const galleryElements = document.querySelectorAll('.gallery a');
+
+// build items array
+const items = [];
+for(let i = 0; i < galleryElements.length; i++) {
+    const linkEl = galleryElements[i];
+    const size = linkEl.getAttribute('data-size').split('x');
+    const item = {
+        src: linkEl.getAttribute('href'),
+        w: parseInt(size[0], 10),
+        h: parseInt(size[1], 10),
+        title: linkEl.querySelector('img').getAttribute('alt')
+    };
+    items.push(item);
+}
+
+const openPhotoSwipe = (index) => {
+    const pswp = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+        index: index,
+        history: false
+    });
+    pswp.init();
+};
+
+galleryElements.forEach((element, index) => {
+    element.addEventListener('click', (event) => {
+        event.preventDefault();
+        openPhotoSwipe(index);
+    });
+});
+
+Wichtige Punkte:
+
+data-size Attribut:
+Das data-size Attribut im <a> Tag ist entscheidend. Es enthält die Breite und
+Höhe des originalen, großen Bildes im Format BREITExHÖHE. PhotoSwipe verwendet
+diese Informationen, um die Bilder korrekt zu skalieren und die Zoomfunktion
+zu ermöglichen.
+
+Bildgrößen:
+Die Vorschaubilder (image1-thumbnail.jpg, etc.) können unterschiedliche Größen
+haben. Wichtig ist, dass die data-size Attribute die tatsächlichen Dimensionen
+der großen Bilder angeben.
+
+PhotoSwipe Dateien:
+Stelle sicher, dass du die PhotoSwipe CSS- und JavaScript-Dateien in dein
+Projekt integrierst. Du kannst sie von der offiziellen PhotoSwipe-Website
+herunterladen.
+
+item Array:
+Das JavaScript erstellt ein Array von Objekten (items). Jedes Objekt repräsentiert
+ein Bild und enthält die src (Pfad zum großen Bild), w (Breite) und h (Höhe)
+sowie optional einen title (Bildunterschrift).
+
+
+Dieses Beispiel zeigt, wie du PhotoSwipe verwenden kannst, um eine Lightbox
+Galerie mit Bildern unterschiedlicher Größen zu erstellen. Die data-size
+Attribute und die korrekte Initialisierung des items Arrays sind dabei der
+Schlüssel zum Erfolg.
+

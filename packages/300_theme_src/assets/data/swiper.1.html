@@ -128,7 +128,6 @@ exclude_from_search:                    true
 
       {% comment %} Collect Image Swipers
       swiper: {{swiper | debug}}
-      playlist.image_defaults: {{playlist.image_defaults | debug}}
       -------------------------------------------------------------------------- {% endcomment %}
       {% if swiper.type == 'image' %}
 
@@ -159,17 +158,12 @@ exclude_from_search:                    true
 
           {% if swiper.lightbox.enabled %}
           <li class="swiper-slide">
-            {% if playlist.image_defaults.base_folder %} 
-            <a href="{{playlist.image_defaults.base_folder}}/{{slide.image}}"
-              {% if playlist.image_defaults.image_width == 'slide' %}
-                data-pswp-width="{{slide.imageWidth}}"
-                data-pswp-height="{{slide.imageHeight}}"
-              {% else %}
-                data-pswp-width="{{playlist.image_defaults.image_width}}"
-                data-pswp-height="{{playlist.image_defaults.image_height}}"              
-              {% endif %}
+            {% if playlist.image_base %} 
+            <a href="{{playlist.image_base}}/{{slide.image}}"
+               data-pswp-width="{{slide.mageWidth}}"
+               data-pswp-height="{{slide.imageHeight}}">
+               <img src="{{playlist.image_base}}/{{slide.image}}" alt="{{image_alt_text}}"
                target="_blank">
-              <img class="pswp-image" src="{{playlist.image_defaults.base_folder}}/{{slide.image}}" alt="{{image_alt_text}}">
               {% if swiper.captions.enabled %}
               <div class="{{swiper.captions.css_class}}">{{slide.caption}}</div>
               {% endif %}
@@ -177,12 +171,13 @@ exclude_from_search:                    true
               <span class="pswp-caption-content">{{slide.caption}}</span>
               {% endif %}
             </a>
+            {% else %}            
             {% endif %}
           </li>
           {% else %}
           <li class="swiper-slide">
-            {% if playlist.image_defaults.base_folder %} 
-            <img src="{{playlist.image_defaults.base_folder}}/{{slide.image}}" alt="{{image_alt_text}}">
+            {% if playlist.image_base %} 
+            <img src="{{playlist.image_base}}/{{slide.image}}" alt="{{image_alt_text}}">
             {% else %}
             <img src="{{slide.image}}">
             {% endif %}

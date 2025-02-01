@@ -106,7 +106,7 @@ settings:
 
       id:                               swiper_image_base_captions
       layout:                           image_base
-      playlist:                         mega_cities_2
+      playlist:                         mega_cities_1
       container_classes:                false
       wrapper_classes:                  "margin-bottom: 3.75rem;"
 
@@ -123,7 +123,54 @@ settings:
       # LIGHTBOX options
       #
       lightbox:
-        enabled:                        false
+        enabled:                        true
+        type:                           photoswipe
+
+        # ----------------------------------------------------------------------
+        # CAPTION settings
+        #
+        captions:
+          enabled:                      true
+          css_class:                    pswp-caption-content
+
+        # ----------------------------------------------------------------------
+        # Lightbox settings
+        # ----------------------------------------------------------------------
+
+        # ----------------------------------------------------------------------
+        # Parameters (Core)
+        #
+        parameters:
+          children:                     a
+          bgOpacity:                    1
+          showHideOpacity:              true
+          loop:                         true
+          wheelToZoom:                  true
+          # padding:                      { top: 0, bottom: 0, left: 80, right: 80 }
+          padding:                      {
+                                          top: 0,
+                                          bottom: 0,
+                                          left: 80,
+                                          right: 80
+                                        }
+          showHideAnimationType:        zoom
+          imageClickAction:             next
+          tapAction:                    next
+
+        # ----------------------------------------------------------------------
+        # USER INTERFAE control
+        #
+        ui_control:
+          zoom:                         false
+          close:                        true
+          counter:                      true
+          arrowKeys:                    false
+
+        # ----------------------------------------------------------------------
+        # KEYBOARD control
+        #
+        kbd_control:
+          escKey:                       true
  
       # ------------------------------------------------------------------------
       # SWIPER settings
@@ -204,11 +251,11 @@ settings:
         parameters:
           bgOpacity:                    1
           showHideOpacity:              true
-          children:                     a
           loop:                         true
-          showHideAnimationType:        zoom
-          imageClickAction:             next
-          tapAction:                    next
+          wheelToZoom:                  true
+          # showHideAnimationType:        'zoom'
+          # imageClickAction:             'next'
+          # tapAction:                    'next'
 
         # ----------------------------------------------------------------------
         # IMAGE control
@@ -221,11 +268,10 @@ settings:
         # USER INTERFAE control
         #
         ui_control:
-          zoom:                         false
+#         zoom:                         false
           close:                        true
           counter:                      true
-          arrowKeys:                    true
-          wheelToZoom:                  true
+          arrowKeys:                    false
 
         # ----------------------------------------------------------------------
         # KEYBOARD control

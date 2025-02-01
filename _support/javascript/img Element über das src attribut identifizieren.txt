@@ -1,0 +1,47 @@
+Kann man ein <img> Element über das src attribut identifizieren?
+
+
+Gemini
+--------------------------------------------------------------------------------
+
+Wenn jedes <img>-Element auf der Seite ein eindeutiges src-Attribut hat,
+kann man es direkt darüber identifizieren. Dies ist jedoch selten der Fall,
+da oft mehrere Bilder dasselbe src-Attribut haben können (z.B. das gleiche
+Icon wird mehrmals verwendet).
+
+Zusätzliche Attribute:
+
+id-Attribut:
+Falls das <img>-Element ein id-Attribut hat, ist dieses zur eindeutigen
+Identifizierung am besten geeignet, da IDs auf einer Seite eindeutig sein
+müssen.
+
+class-Attribut:
+Falls das <img>-Element ein class-Attribut hat, kann man es zusammen mit dem
+src-Attribut oder der ID verwenden, um es zu identifizieren.
+
+data-Attribute:
+Falls das <img>-Element data-Attribute hat, können diese zur Identifizierung
+verwendet werden.
+
+JavaScript:
+
+Mit JavaScript ist es möglich, <img>-Elemente über das src-Attribut auszuwählen
+und zu bearbeiten. Hier sind einige Beispiele:
+
+JavaScript
+
+// Alle <img>-Elemente mit einem bestimmten src-Attribut auswählen
+const images = document.querySelectorAll('img[src="path/to/image.jpg"]');
+
+// Das erste <img>-Element mit einem bestimmten src-Attribut auswählen
+const image = document.querySelector('img[src="path/to/image.jpg"]');
+
+
+Hinweis
+--------------------------------------------------------------------------------
+
+Es ist wichtig zu beachten, dass das src-Attribut case-sensitiv ist.
+Das bedeutet, dass image.jpg und Image.jpg als unterschiedliche Pfade
+betrachtet werden.
+

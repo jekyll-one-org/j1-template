@@ -114,7 +114,7 @@ a slider for your image data.
 A simple image show is useful, for example, as an animated (or not animated)
 banner presenting exciting things about your site or the products offered.
 
-.Base Image Swiper + Captions + Pagination (Bullets)
+.Base Image Swiper (Mixed image sizes)
 swiper::swiper_image_base_captions[role="mt-4 mb-4"]
 
 
@@ -125,7 +125,7 @@ Carousels are used for an exceptionally compact form of image galleries.
 This example shows some pictures having individual caption text and supports
 a lightbox to enlarge images full size.
 
-.Base Slider + Captions + Lightbox
+.Base Slider (Same image sizes)
 swiper::swiper_image_base_lightbox[role="mt-4 mb-4"]
 
 

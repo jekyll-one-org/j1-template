@@ -214,7 +214,6 @@ j1.adapter.swiper = ((j1, window) => {
               }); // END Swiper 
 
               {% if swiper.lightbox.enabled %}
-
               // ---------------------------------------------------------------
               // Setup PhotoSwipe Lightbox
               // ---------------------------------------------------------------
@@ -227,13 +226,18 @@ j1.adapter.swiper = ((j1, window) => {
                 {% if swiper.lightbox.parameters %}
                 // parameters (core)
                 {% for setting in swiper.lightbox.parameters %}
+                {% if setting[1] == 'a' or setting[1] == 'zoom' or setting[1] == 'next' %}
                 {{setting[0]}}: {{ setting[1] | replace: '=>', ':' | json }},
+                {% else %}
+                {{setting[0]}}: {{ setting[1] | replace: '=>', ':' }},
+                {% endif %}
                 {% endfor %}
                 {% endif %}
 
                 {% if swiper.lightbox.ui_control %}
                 // ui elements
                 {% for setting in swiper.lightbox.ui_control %}
+
                 {{setting[0]}}: {{ setting[1] | replace: '=>', ':' }},
                 {% endfor %}
                 {% endif %}
