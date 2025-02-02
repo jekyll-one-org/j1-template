@@ -671,7 +671,7 @@ left and the right.
 ++++
 <div class="carousel-title mt-4"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Slideshow · Layout partialView</div>
 <!-- Triple slider -->
-<div class="triple-slider mb-8">
+<div class="triple-slider mb-5">
   <!-- Duplicate swipers will be created automatically -->
 
   <!-- Main center swiper -->
@@ -863,6 +863,236 @@ $(function() {
 </script>
 ++++
 
+[role="mt-4"]
+[[slider_panoramaview]]
+=== Layout panoramaView
+
+lorem:sentences[5]
+
+++++
+<div class="carousel-title mt-4"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Slideshow · Layout panoramaView</div>
+<!-- Panorama slider -->
+<div class="panorama-slider">
+  <div class="swiper">
+    <div class="swiper-pagination"></div>
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <img class="slide-image" src="/assets/image/modules/gallery/panorama/1.jpg" alt="">
+      </div>
+      <div class="swiper-slide">
+        <img class="slide-image" src="/assets/image/modules/gallery/panorama/2.jpg" alt="">
+      </div>
+      <div class="swiper-slide">
+        <img class="slide-image" src="/assets/image/modules/gallery/panorama/3.jpg" alt="">
+      </div>
+      <div class="swiper-slide">
+        <img class="slide-image" src="/assets/image/modules/gallery/panorama/4.jpg" alt="">
+      </div>
+      <div class="swiper-slide">
+        <img class="slide-image" src="/assets/image/modules/gallery/panorama/5.jpg" alt="">
+      </div>
+      <div class="swiper-slide">
+        <img class="slide-image" src="/assets/image/modules/gallery/panorama/6.jpg" alt="">
+      </div>
+      <div class="swiper-slide">
+        <img class="slide-image" src="/assets/image/modules/gallery/panorama/7.jpg" alt="">
+      </div>
+      <div class="swiper-slide">
+        <img class="slide-image" src="/assets/image/modules/gallery/panorama/8.jpg" alt="">
+      </div>
+      <div class="swiper-slide">
+        <img class="slide-image" src="/assets/image/modules/gallery/panorama/9.jpg" alt="">
+      </div>
+      <div class="swiper-slide">
+        <img class="slide-image" src="/assets/image/modules/gallery/panorama/10.jpg" alt="">
+      </div>
+      <div class="swiper-slide">
+        <img class="slide-image" src="/assets/image/modules/gallery/panorama/11.jpg" alt="">
+      </div>
+      <div class="swiper-slide">
+        <img class="slide-image" src="/assets/image/modules/gallery/panorama/12.jpg" alt="">
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+
+.panorama-slider {
+  padding: 48px 0;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.panorama-slider .swiper {
+  width: 100%;
+  height: 280px;
+}
+
+.panorama-slider .slide-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.panorama-slider .swiper-pagination {
+  bottom: -10px;
+  --swiper-pagination-bullet-inactive-color: #fff;
+  --swiper-pagination-color: #fff;
+}
+
+</style>
+
+<!-- Initialize Swiper Layout partialview -->
+<script>
+
+$(function() {
+
+  function EffectPanorama({ swiper, extendParams, on }) {
+
+    extendParams({
+      panoramaEffect: {
+        depth: 200,
+        rotate: 30,
+      },
+    });
+
+    on('beforeInit', () => {
+      if (swiper.params.effect !== 'panorama') return;
+      swiper.classNames.push(`${swiper.params.containerModifierClass}panorama`);
+      swiper.classNames.push(`${swiper.params.containerModifierClass}3d`);
+      const overwriteParams = {
+        watchSlidesProgress: true,
+      };
+      Object.assign(swiper.params, overwriteParams);
+      Object.assign(swiper.originalParams, overwriteParams);
+    });
+
+    on('progress', () => {
+      if (swiper.params.effect !== 'panorama') return;
+      const sizesGrid = swiper.slidesSizesGrid;
+      const { depth = 200, rotate = 30 } = swiper.params.panoramaEffect;
+      const angleRad = (rotate * Math.PI) / 180;
+      const halfAngleRad = angleRad / 2;
+      const angleModifier = 1 / (180 / rotate);
+
+      for (let i = 0; i < swiper.slides.length; i += 1) {
+        const slideEl = swiper.slides[i];
+        const slideProgress = slideEl.progress;
+        const slideSize = sizesGrid[i];
+        const progressModifier = swiper.params.centeredSlides
+          ? 0
+          : (swiper.params.slidesPerView - 1) * 0.5;
+        const modifiedProgress = slideProgress + progressModifier;
+        const angleCos = 1 - Math.cos(modifiedProgress * angleModifier * Math.PI);
+        const translateX = `${modifiedProgress * (slideSize / 3) * angleCos}px`;
+        const rotateY = modifiedProgress * rotate;
+        const radius = (slideSize * 0.5) / Math.sin(halfAngleRad);
+        const translateZ = `${radius * angleCos - depth}px`;
+        slideEl.style.transform =
+          swiper.params.direction === 'horizontal'
+            ? `translateX(${translateX}) translateZ(${translateZ}) rotateY(${rotateY}deg)`
+            : `translateY(${translateX}) translateZ(${translateZ}) rotateX(${-rotateY}deg)`;
+      }
+    });
+
+    on('setTransition', (s, duration) => {
+      if (swiper.params.effect !== 'panorama') return;
+      swiper.slides.forEach((slideEl) => {
+        // eslint-disable-next-line
+        slideEl.style.transitionDuration = `${duration}ms`;
+      });
+    });
+
+  } // END EffectPanorama
+
+  function createPanoramaSlider() {
+    const swiper = new Swiper('.panorama-slider .swiper', {
+      // pass Panorama module
+      modules: [ EffectPanorama ],
+      // enable "panorama" effect
+      effect: 'panorama',
+      slidesPerView: 1.5,
+      loop: true,
+      loopAdditionalSlides: 1,
+      centeredSlides: true,
+      grabCursor: true,
+      // pagination: {
+      //   el: '.swiper-pagination',
+      //   dynamicBullets: true,
+      //   dynamicMainBullets: 3,
+      // },
+      // panorama effect parameters
+      panoramaEffect: {
+        depth: 150,
+        rotate: 45,
+      },
+      breakpoints: {
+        480: {
+          slidesPerView: 2,
+          panoramaEffect: {
+            rotate: 35,
+            depth: 150,
+          },
+        },
+        640: {
+          slidesPerView: 3,
+          panoramaEffect: {
+            rotate: 30,
+            depth: 150,
+          },
+        },
+        1024: {
+          slidesPerView: 4,
+          panoramaEffect: {
+            rotate: 30,
+            depth: 200,
+          },
+        },
+        1200: {
+          slidesPerView: 4,
+          panoramaEffect: {
+            rotate: 25,
+            depth: 250,
+          },
+        },
+      },
+    });
+
+  } // END createPanoramaSlider
+
+  // ---------------------------------------------------------------------------
+  // slider initializer
+  // ---------------------------------------------------------------------------
+  var dependencies_met_page_ready = setInterval (() => {
+    var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true : false;
+
+    if (atticFinished) {
+
+      createPanoramaSlider();
+
+      clearInterval(dependencies_met_page_ready);
+    } // END pageVisible
+  }, 10); // END dependencies_met_page_ready
+
+});
+
+</script>
+++++
+
+[role="mt-4"]
+[[slider_collection]]
+=== Layout collectionView
+
+lorem:sentences[5]
+
+[role="mt-4"]
+[[slider_post]]
+=== Layout postView
+
+lorem:sentences[5]
 
 
 /////
