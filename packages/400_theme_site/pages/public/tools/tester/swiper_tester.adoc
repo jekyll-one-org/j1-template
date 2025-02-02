@@ -734,14 +734,21 @@ left and the right.
   cursor: pointer;
 }
 
+/* jadams, 2025-02-02: set slider SIZE by >>tranform property<< */
+/* jadams, 2025-02-02: added CSS filter */
+
 .triple-slider .triple-slider-prev {
   right: 50%;
-  transform: translateY(-50%) scale(0.75) rotateY(10deg);
+  /* transform: translateY(-50%) scale(0.75) rotateY(10deg); */
+  transform: translateY(-50%) scale(1) rotateY(10deg);
+  filter: grayscale(1) contrast(1) brightness(1);
 }
 
 .triple-slider .triple-slider-next {
   left: 50%;
-  transform: translateY(-50%) scale(0.75) rotateY(-10deg);
+  /* transform: translateY(-50%) scale(0.75) rotateY(-10deg); */
+  transform: translateY(-50%) scale(1) rotateY(10deg);
+  filter: grayscale(1) contrast(1) brightness(1);
 }
 
 </style>
