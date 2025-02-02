@@ -676,7 +676,7 @@ left and the right.
 
   <!-- Main center swiper -->
   <div class="swiper">
-    <div class="swiper-wrapper mb-8">
+    <div class="swiper-wrapper">
       <div class="swiper-slide">
         <img class="bg-image" src="/assets/image/modules/gallery/triple_slider/guardians-of-the-galaxy.jpg" alt="">
       </div>
@@ -872,7 +872,7 @@ lorem:sentences[5]
 ++++
 <div class="carousel-title mt-4"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Slideshow · Layout panoramaView</div>
 <!-- Panorama slider -->
-<div class="panorama-slider">
+<div class="panorama-slider mb-5">
   <div class="swiper">
     <div class="swiper-pagination"></div>
     <div class="swiper-wrapper">
@@ -919,7 +919,7 @@ lorem:sentences[5]
 <style>
 
 .panorama-slider {
-  padding: 48px 0;
+  /* padding: 48px 0; */
   width: 100%;
   position: relative;
   overflow: hidden;
