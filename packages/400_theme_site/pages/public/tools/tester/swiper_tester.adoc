@@ -386,24 +386,6 @@ different slides of a slider. They can make the transition between slides
 more interesting and dynamic.
 
 [role="mt-4"]
-=== Pamorama Effect
-
-The panorama view presents the available slides of a slider as a group. The
-group is displayed in a virtual, circular viewing angle.
-
-[TIP]
-====
-The effect is great for slides connected in terms of content to give the user
-a panoramic view impression.
-====
-
-.Extended Slider Landscape · Panorama effect
-swiper::swiper_image_panorama[role="mt-4 mb-4"]
-
-.Extended Slider Heroes · Panorama effect
-swiper::swiper_image_neighbor[role="mt-4 mb-4"]
-
-[role="mt-4"]
 === Neighbor Effect
 
 A slideshow typically presents a larger number of slides, which requires a
@@ -413,6 +395,7 @@ left acts like a *previous button* and scrolls the slides *backward*. The
 neighbor on the *right* acts like a *next button* and scrolls the slides
 *forward*.
 
+[role="mb-5"]
 [TIP]
 ====
 The Effect transforms a slider into a quite *compact* presentation that does
@@ -420,7 +403,7 @@ The Effect transforms a slider into a quite *compact* presentation that does
 ====
 
 ++++
-<div class="carousel-title mt-4"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Extended Slider · Neighbor effect </div>
+<div class="carousel-title mt-4"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Extended Slider Neighbors · Neighbor effect </div>
 
 <!-- Neighbor slider -->
 <div class="neighbor-slider mb-5">
@@ -553,7 +536,6 @@ $(function() {
     var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true : false;
 
     if (atticFinished) {
-
       const sliderEl = document.querySelector('.neighbor-slider');
       createTripleSlider(sliderEl);
 
@@ -565,6 +547,25 @@ $(function() {
 </script>
 ++++
 
+[role="mt-4"]
+=== Pamorama Effect
+
+The panorama view presents the available slides of a slider as a group. The
+group is displayed in a virtual, circular viewing angle.
+
+[role="mb-5"]
+[TIP]
+====
+The effect is great for slides connected in terms of content to give the user
+a panoramic view impression.
+====
+
+.Extended Slider Landscapes · Panorama effect
+swiper::swiper_image_panorama[role="mt-4 mb-4"]
+
+
+// .Extended Slider Heroes · Panorama effect
+// swiper::swiper_image_neighbor[role="mt-4 mb-4"]
 /////
 [role="mt-5"]
 == Sliders using Layouts
