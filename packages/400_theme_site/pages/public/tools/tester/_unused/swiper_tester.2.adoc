@@ -386,24 +386,6 @@ different slides of a slider. They can make the transition between slides
 more interesting and dynamic.
 
 [role="mt-4"]
-=== Pamorama Effect
-
-The panorama view presents the available slides of a slider as a group. The
-group is displayed in a virtual, circular viewing angle.
-
-[TIP]
-====
-The effect is great for slides connected in terms of content to give the user
-a panoramic view impression.
-====
-
-.Extended Slider Landscape · Panorama effect
-swiper::swiper_image_panorama[role="mt-4 mb-4"]
-
-.Extended Slider Heroes · Panorama effect
-swiper::swiper_image_neighbor[role="mt-4 mb-4"]
-
-[role="mt-4"]
 === Neighbor Effect
 
 A slideshow typically presents a larger number of slides, which requires a
@@ -422,44 +404,38 @@ The Effect transforms a slider into a quite *compact* presentation that does
 ++++
 <div class="carousel-title mt-4"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Extended Slider · Neighbor effect </div>
 
-<!-- Neighbor slider -->
+<!-- Triple slider -->
 <div class="neighbor-slider mb-5">
-
   <!-- Main center swiper -->
   <!-- Duplicate swipers will be created automatically -->
   <div class="swiper">
 
     <ul class="swiper-wrapper">
       <li class="swiper-slide">
-        <img class="bg-image" src="/assets/image/modules/gallery/neighbor_slider/guardians-of-the-galaxy.jpg"
-        alt="Guardians of the Galaxy">
+        <img class="bg-image" src="/assets/image/modules/gallery/neighbor_slider/guardians-of-the-galaxy.jpg" alt="">
       </li>
       <li class="swiper-slide">
-        <img class="bg-image" src="/assets/image/modules/gallery/neighbor_slider/justice-league.jpg"
-        alt="Justice League">
+        <img class="bg-image" src="/assets/image/modules/gallery/neighbor_slider/justice-league.jpg" alt="">
       </li>
       <li class="swiper-slide">
-        <img class="bg-image" src="/assets/image/modules/gallery/neighbor_slider/spider-man.jpg"
-        alt="Spider Man">
+        <img class="bg-image" src="/assets/image/modules/gallery/neighbor_slider/spider-man.jpg" alt="">
       </li>
       <li class="swiper-slide">
-        <img class="bg-image" src="/assets/image/modules/gallery/neighbor_slider/suicide-squad.jpg"
-        alt="Suicide Squad">
+        <img class="bg-image" src="/assets/image/modules/gallery/neighbor_slider/suicide-squad.jpg" alt="">
       </li>
       <li class="swiper-slide">
-        <img class="bg-image" src="/assets/image/modules/gallery/neighbor_slider/thor-ragnarok.jpg"
-        alt="Thor Ragnarok">
+        <img class="bg-image" src="/assets/image/modules/gallery/neighbor_slider/thor-ragnarok.jpg" alt="">
       </li>
     </ul>
 
   </div>
 </div>
 
+<!-- Initialize Swiper Layout partialview -->
 <script>
 
 $(function() {
 
-  // Initialize Swiper Effect Neighbor
   function createTripleSlider(el) {
 
     // main swiper el
@@ -553,11 +529,11 @@ $(function() {
     var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true : false;
 
     if (atticFinished) {
-
       const sliderEl = document.querySelector('.neighbor-slider');
+
       createTripleSlider(sliderEl);
 
-      clearInterval(dependencies_met_page_ready);
+       clearInterval(dependencies_met_page_ready);
     } // END pageVisible
   }, 10); // END dependencies_met_page_ready
 });
@@ -565,7 +541,18 @@ $(function() {
 </script>
 ++++
 
-/////
+[role="mt-4"]
+=== Pamorama Effect
+
+The panorama view presents the available slides of a slider as a
+group. The group is displayed in a virtual, circular viewing angle. This
+effect is great for slides connected in terms of content to give the user
+a panoramic view impression.
+
+.Extended Slider · Panorama effect
+swiper::swiper_image_panorama[role="mt-4 mb-4"]
+
+
 [role="mt-5"]
 == Sliders using Layouts
 
@@ -582,9 +569,9 @@ lorem:sentences[5]
 === Layout Posts
 
 lorem:sentences[5]
-/////
 
-/////
+
+
 [role="mt-4"]
 [[slider-videojs]]
 == Video Sliders
@@ -853,7 +840,6 @@ $(function() {
 });
 </script>
 ++++
-/////
 
 
 /////

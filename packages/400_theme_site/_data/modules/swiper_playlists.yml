@@ -303,5 +303,178 @@ settings:
           lightbox_caption: >
                                         Jakarta - Indonesia
 
+    # --------------------------------------------------------------------------
+    # PANORAMA
+    # --------------------------------------------------------------------------
+    #
+    - playlist:
+      enabled:                          true
+
+      name:                             panorama
+      type:                             image
+      image_defaults:
+        base_folder:                    /assets/image/modules/gallery/panorama
+        image_width:                    960
+        image_height:                   641
+
+      # ------------------------------------------------------------------------
+      # SLIDE settings
+      # ------------------------------------------------------------------------
+      slides:
+
+        # slide 01
+        - slide:
+          enabled:                      true
+          image:                        1.jpg
+          image_caption:                Image Caption
+          lightbox_caption: >
+                                        Lightbox Caption
+
+        # slide 02
+        - slide:
+          enabled:                      true
+          image:                        2.jpg
+          image_caption:                Image Caption
+          lightbox_caption: >
+                                        Lightbox Caption
+        # slide 03
+        - slide:
+          enabled:                      true
+          image:                        3.jpg
+          image_caption:                Image Caption
+          lightbox_caption: >
+                                        Lightbox Caption
+
+        # slide 04
+        - slide:
+          enabled:                      true
+          image:                        4.jpg
+          image_caption:                Image Caption
+          lightbox_caption: >
+                                        Lightbox Caption
+
+        # slide 05
+        - slide:
+          enabled:                      true
+          image:                        5.jpg
+          image_caption:                Image Caption
+          lightbox_caption: >
+                                        Lightbox Caption
+
+        # slide 06
+        - slide:
+          enabled:                      true
+          image:                        6.jpg
+          image_caption:                Image Caption
+          lightbox_caption: >
+                                        Lightbox Caption
+
+        # slide 07
+        - slide:
+          enabled:                      true
+          image:                        7.jpg
+          image_caption:                Image Caption
+          lightbox_caption: >
+                                        Lightbox Caption
+
+        # slide 08
+        - slide:
+          enabled:                      true
+          image:                        8.jpg
+          image_caption:                Image Caption
+          lightbox_caption: >
+                                        Lightbox Caption
+
+        # slide 09
+        - slide:
+          enabled:                      true
+          image:                        9.jpg
+          image_caption:                Image Caption
+          lightbox_caption: >
+                                        Lightbox Caption
+
+        # slide 10
+        - slide:
+          enabled:                      true
+          image:                        10.jpg
+          image_caption:                Image Caption
+          lightbox_caption: >
+                                        Lightbox Caption
+
+        # slide 11
+        - slide:
+          enabled:                      true
+          image:                        11.jpg
+          image_caption:                Image Caption
+          lightbox_caption: >
+                                        Lightbox Caption
+
+        # slide 12
+        - slide:
+          enabled:                      true
+          image:                        12.jpg
+          image_caption:                Image Caption
+          lightbox_caption: >
+                                        Lightbox Caption
+
+    # --------------------------------------------------------------------------
+    # NEIGHBOR
+    # --------------------------------------------------------------------------
+    #
+    - playlist:
+      enabled:                          true
+
+      name:                             neighbor
+      type:                             image
+      image_defaults:
+        base_folder:                    /assets/image/modules/gallery/neighbor_slider
+        image_width:                    1280
+        image_height:                   640
+
+      # ------------------------------------------------------------------------
+      # SLIDE settings
+      # ------------------------------------------------------------------------
+      slides:
+
+        # slide 01
+        - slide:
+          enabled:                      true
+          image:                        guardians-of-the-galaxy.jpg
+          image_caption:                Image Caption
+          lightbox_caption: >
+                                        Lightbox Caption
+
+        # slide 02
+        - slide:
+          enabled:                      true
+          image:                        justice-league.jpg
+          image_caption:                Image Caption
+          lightbox_caption: >
+                                        Lightbox Caption
+
+        # slide 03
+        - slide:
+          enabled:                      true
+          image:                        spider-man.jpg
+          image_caption:                Image Caption
+          lightbox_caption: >
+                                        Lightbox Caption
+
+        # slide 04
+        - slide:
+          enabled:                      true
+          image:                        suicide-squad.jpg
+          image_caption:                Image Caption
+          lightbox_caption: >
+                                        Lightbox Caption
+
+        # slide 05
+        - slide:
+          enabled:                      true
+          image:                        thor-ragnarok.jpg
+          image_caption:                Image Caption
+          lightbox_caption: >
+                                        Lightbox Caption
+
 # ------------------------------------------------------------------------------
 # END config

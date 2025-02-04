@@ -191,14 +191,22 @@ j1.adapter.swiper = ((j1, window) => {
                 {% if swiper.parameters %}
                 // parameters (core)
                 {% for setting in swiper.parameters %}
+                {% if setting[0] == 'effect' %}
+                {{setting[0]}}: {{ setting[1] | replace: '=>', ':' | json }},
+                {% else %}
                 {{setting[0]}}: {{ setting[1] | replace: '=>', ':' }},
+                {% endif %}
                 {% endfor %}
                 {% endif %}
 
                 {% if swiper.modules %}
                 // modules
                 {% for setting in swiper.modules %}
+                {% if setting[0] == 'modules' %}
+                {{setting[0]}}: {{ setting[1] | replace: '=>', ':' | replace: '"', ' ' }},
+                {% else %}
                 {{setting[0]}}: {{ setting[1] | replace: '=>', ':' }},
+                {% endif %}
                 {% endfor %}
                 {% endif %}
 
@@ -224,7 +232,7 @@ j1.adapter.swiper = ((j1, window) => {
                 pswpModule: PhotoSwipe,
 
                 {% if swiper.lightbox.parameters %}
-                // parameters (core)
+                // parameters (lightbox)
                 {% for setting in swiper.lightbox.parameters %}
                 {% if setting[1] == 'a' or setting[1] == 'zoom' or setting[1] == 'next' %}
                 {{setting[0]}}: {{ setting[1] | replace: '=>', ':' | json }},

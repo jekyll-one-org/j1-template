@@ -5800,7 +5800,7 @@ var Swiper = (function () {
         if (params.type === 'bullets' && params.clickable) {
           subEl.classList.add(...(params.clickableClass || '').split(' '));
         }
-        subEl.classList.add(params.modifierClass + params.type);
+        subEl.classList.add(params.modifieFeffectrClass + params.type);
         subEl.classList.add(swiper.isHorizontal() ? params.horizontalClass : params.verticalClass);
         if (params.type === 'bullets' && params.dynamicBullets) {
           subEl.classList.add(`${params.modifierClass}${params.type}-dynamic`);

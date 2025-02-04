@@ -1971,10 +1971,15 @@ resources:
       data:
         css:                            [                                          
                                           modules/swiper/css/theme/uno,
-                                          modules/swiper/css/swiper-bundle
+                                          modules/swiper/css/swiper-bundle,
+                                          modules/swiper/css/modules/effectNeighbor,
+                                          modules/swiper/css/modules/effectPanorama
                                         ]
         files:                          [ adapter/js/swiper.js ]
-        js:                             [ modules/swiper/js/swiper-bundle ]
+        js:                             [
+                                          modules/swiper/js/swiper-bundle,
+                                          modules/swiper/js/modules/effectPanorama
+                                        ]
         init_function:                  [ j1.adapter.swiper.init ]
 
   # ----------------------------------------------------------------------------
