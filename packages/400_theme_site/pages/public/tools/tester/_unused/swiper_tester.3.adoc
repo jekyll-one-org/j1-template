@@ -122,35 +122,22 @@ a lightbox to enlarge images full size.
 .Same image sizes
 swiper::swiper_image_base_lightbox[role="mt-4 mb-4"]
 
-
 [role="mt-5"]
-== Sliders using Views
+[[image_thumbs_silder]]
+== Thumbs Slider
 
-Views in the J1 Template for SwioperJS are *transformations* of a Swiper to
-rebuild it for extended *UI controls* or create a more complex visual
-*presentation* for the Swiper's slides.
-
-Views can *improve* the *useability* of a slider or make the presentation
-of a slideshow more *interesting*.
-
-[role="mt-4"]
-[[image_thumb_silder]]
-=== Thumbs View
-
-To give the users a more *visual* control over a slideshow, Swiper sliders
-can provide *UI elements* by placing minified images or text elements (thumbs)
-side-by-side (on the left|right), or at the bottom|top of a swiper. Find below
-examples how to control such sliders' by a thumb (slave) silder.
+To give the users a more *visual* control over a slideshow, Swiper sliders can
+provide UI elements by placing mini-images or short text elements (thumbs)
+side-by-side (on the left|right), or at bottom|toop of a slideshow. Find below
+examples how to control such sliders by a thumbs slave silder.
 
 [role="mt-4"]
-[[image_thumbs_top]]
-==== Thumbs Slider (top)
-
-lorem:sentences[3]
+[[image_thumbs_bottom]]
+=== Thumbs Slider (bottom)
 
 ++++
 <!-- Master Slider -->
-<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Thumbs View · Position Top</div>
+<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Thumbs Silder · Bottom</div>
 <div id="master_slider_1">
   <div class="swiper swiper-container">
 
@@ -158,6 +145,36 @@ lorem:sentences[3]
     <ul class="swiper-wrapper">
       <li class="swiper-slide">
         <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg">      
+      </li>
+      <li class="swiper-slide">
+        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg">
+      </li>
+      <li class="swiper-slide">
+        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg">
+      </li>
+      <li class="swiper-slide">
+        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg">
+      </li>
+      <li class="swiper-slide">
+        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg">
+      </li>
+      <li class="swiper-slide">
+        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg">
+      </li>
+    </ul>
+    <!-- END swiper wrapper (slides) -->
+
+  </div> <!-- END swiper container -->
+</div> <!-- END Swiper -->
+
+<!-- Thumbs Slider (bottom) -->
+<div id="thumbs_slider_1" class="mt-1 mb-5">
+  <div id="thumbs_slider_1" class="swiper swiper-container thumbs-slider--bottom">
+
+    <!-- Slides -->
+    <ul class="swiper-wrapper">
+      <li class="swiper-slide">
+        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg">
       </li>
       <li class="swiper-slide">
         <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg">
@@ -189,71 +206,51 @@ $(function() {
   var dependencies_met_page_ready = setInterval (() => {
     var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true : false;
 
-    // See: https://stackoverflow.com/questions/4793604/how-to-insert-an-element-after-another-element-in-javascript-without-using-a-lib
-    // See: https://www.javascripttutorial.net/javascript-dom/javascript-after/
-    //
-    Element.prototype.appendBefore = function (element) {
-      element.parentNode.insertBefore(this, element);
-    }, false;
-
-    Element.prototype.appendAfter = function (element) {
-      element.parentNode.insertBefore(this, element.nextSibling);
-    }, false;
-
-    function insertAfter(referenceNode, newNode) {
-        referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-    }
-
     if (atticFinished) {
 
       // main swiper
       //
-      const mainSwiper    = document.querySelector('#master_slider_1');
-      const mainSwiperEl  = mainSwiper.querySelector('.swiper');
+      // const mainSliderEl = document.querySelector('#master_slider_1"');
+      // const thumbSwiperEl = mainSliderEl.querySelector('.swiper');
 
-      // Add space 
-      mainSwiperEl.classList.add('mt-1');
+      // // create thmubs (duplicate) swiper
+      // //
+      // const swiperThumbsEl = thumbSwiperEl.cloneNode(true);
+      // mainSliderEl.insertBefore(swiperThumbsEl, mainSwiperEl);
+      // const swiperThumbSlides = swiperThumbsEl.querySelectorAll('.swiper-slide');
+      // const swiperThumbLastSlideEl = swiperThumbSlides[swiperPrevSlides.length - 1];
 
-      // create thmubs swiper (duplicate from main swiper)
-      //
-      const swiperThumbEl = mainSwiperEl.cloneNode(true);
-      // add thumbs slider before the main swiper (place on top)
-      mainSwiper.insertBefore(swiperThumbEl, mainSwiperEl);
-
-      const swiperThumbSlides      = swiperThumbEl.querySelectorAll('.swiper-slide');
-      const swiperThumbLastSlideEl = swiperThumbSlides[swiperThumbSlides.length - 1];
-
-      swiperThumbEl
-        .querySelector('.swiper-wrapper')
-        .insertBefore(swiperThumbLastSlideEl, swiperThumbLastSlideEl[0]);
-
-      // place thumb slider at the bottom|below main (does NOT work that way)
-      // -----------------------------------------------------------------------
-      // swiperThumbEl.parentNode
+      // swiperThumbsEl
       //   .querySelector('.swiper-wrapper')
-      //   .insertBefore(swiperThumbLastSlideEl, swiperThumbLastSlideEl[0].nextSibling);
+      //   .insertBefore(swiperThumbLastSlideEl, swiperThumbSlides[0]);
 
-      const thumbSlider = new Swiper(swiperThumbEl, {
+      const thumbsSlider    = document.querySelector('#thumbs_slider_1');
+      const thumbsSliderEl  = thumbsSlider.querySelector('.swiper');
+      const thumbsSlider1   = new Swiper(thumbsSliderEl, {
         autoHeight: true,
+        direction: 'horizontal',
         spaceBetween: 5,
         slidesPerView: 3,
         grabCursor: true,
-        // freeMode: false,
-        // watchSlidesProgress: true,
+        freeMode: false,
+        watchSlidesProgress: true,
         on: {
           transitionStart: (swiper) => {
-            mainSlider.slideTo(swiper.activeIndex);
+            masterSlider1.slideTo(swiper.activeIndex);
           }
         },
       });
 
-      const mainSlider = new Swiper(mainSwiperEl, {
+      const masterSlider  = document.querySelector('#master_slider_1');
+      const masterliderEl = masterSlider.querySelector('.swiper');
+      const masterSlider1 = new Swiper(masterliderEl, {
+        direction: 'horizontal',
         thumbs: {
-          swiper: thumbSlider,
+          swiper: thumbsSlider1,
         },
         on: {
           slideChangeTransitionStart: (swiper) => {
-            thumbSlider.slideTo(swiper.activeIndex);
+            thumbsSlider1.slideTo(swiper.activeIndex);
           }
         },
       });
@@ -406,7 +403,14 @@ $(function() {
 
 
 [role="mt-5"]
-=== Neighbor View
+== Sliders using Transition Effects
+
+Transition effects are visual effects used when switching between the
+different slides of a slider. They can make the transition between slides
+more interesting and dynamic.
+
+[role="mt-4"]
+=== Neighbor Effect
 
 A slideshow typically presents a larger number of slides, which requires a
 sort of navigation. The Effect *neighbor* accompanies the *active* slide by
@@ -423,7 +427,7 @@ The Effect transforms a slider into a quite *compact* presentation that does
 ====
 
 ++++
-<div class="carousel-title mt-4"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Extended Slider · Neighbor View </div>
+<div class="carousel-title mt-4"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Extended Slider Neighbors · Neighbor effect </div>
 
 <!-- Neighbor slider -->
 <div id="neighbor_slider" class="neighbor-slider mb-5">
@@ -463,40 +467,39 @@ The Effect transforms a slider into a quite *compact* presentation that does
 $(function() {
 
   // Initialize Swiper Effect Neighbor
-  function createTripleSlider(swiper) {
-    var tripleMainSwiper;
+  function createTripleSlider(el) {
 
-    // main slider
+    // main swiper el
     //
-    const swiperEl = swiper.querySelector('.swiper');
+    const swiperEl = el.querySelector('.swiper');
 
-    // create (duplicate) prev slider
+    // create prev (duplicate) swiper
     //
     const swiperPrevEl = swiperEl.cloneNode(true);
     swiperPrevEl.classList.add('neighbor-slider-prev');
-    swiper.insertBefore(swiperPrevEl, swiperEl);
+    el.insertBefore(swiperPrevEl, swiperEl);
     const swiperPrevSlides = swiperPrevEl.querySelectorAll('.swiper-slide');
     const swiperPrevLastSlideEl = swiperPrevSlides[swiperPrevSlides.length - 1];
     swiperPrevEl
       .querySelector('.swiper-wrapper')
       .insertBefore(swiperPrevLastSlideEl, swiperPrevSlides[0]);
 
-    // create (duplicate) next slider
+    // create next (duplicate) swiper
     //
     const swiperNextEl = swiperEl.cloneNode(true);
     swiperNextEl.classList.add('neighbor-slider-next');
-    swiper.appendChild(swiperNextEl);
+    el.appendChild(swiperNextEl);
     const swiperNextSlides = swiperNextEl.querySelectorAll('.swiper-slide');
     const swiperNextFirstSlideEl = swiperNextSlides[0];
     swiperNextEl
       .querySelector('.swiper-wrapper')
       .appendChild(swiperNextFirstSlideEl);
 
-    // Add main class
+    // Add "main" class
     //
     swiperEl.classList.add('neighbor-slider-main');
 
-    // common params for all sliders
+    // common params for all swipers
     //
     const commonParams = {
       speed: 600,
@@ -504,7 +507,9 @@ $(function() {
       parallax: true,
     };
 
-    // init prev slider
+    var tripleMainSwiper;
+
+    // init prev swiper
     //
     const triplePrevSwiper = new Swiper(swiperPrevEl, {
       ...commonParams,
@@ -516,7 +521,7 @@ $(function() {
       },
     });
 
-    // init next slider
+    // init next swiper
     //
     const tripleNextSwiper = new Swiper(swiperNextEl, {
       ...commonParams,
@@ -528,7 +533,7 @@ $(function() {
       },
     });
 
-    // init main slider
+    // init main swiper
     //
     tripleMainSwiper = new Swiper(swiperEl, {
       ...commonParams,
@@ -538,7 +543,7 @@ $(function() {
       },
       on: {
         destroy() {
-          // destroy side sliders on main (slider) destroy
+          // destroy side swipers on main swiper destroy
           triplePrevSwiper.destroy();
           tripleNextSwiper.destroy();
         },
@@ -557,8 +562,8 @@ $(function() {
     if (atticFinished) {
 
 //    const sliderEl = document.querySelector('.neighbor-slider');
-      const slider = document.querySelector('#neighbor_slider');
-      createTripleSlider(slider);
+      const sliderEl = document.querySelector('#neighbor_slider');
+      createTripleSlider(sliderEl);
 
       clearInterval(dependencies_met_page_ready);
     } // END pageVisible
@@ -569,8 +574,8 @@ $(function() {
 </script>
 ++++
 
-[role="mt-5"]
-=== Pamorama View
+[role="mt-4"]
+=== Pamorama Effect
 
 The panorama view presents the available slides of a slider as a group. The
 group is displayed in a virtual, circular viewing angle.
@@ -582,7 +587,7 @@ The effect is great for slides connected in terms of content to give the user
 a panoramic view impression.
 ====
 
-.Extended Slider · Panorama View
+.Extended Slider Landscapes · Panorama effect
 swiper::swiper_image_panorama[role="mt-4 mb-4"]
 
 

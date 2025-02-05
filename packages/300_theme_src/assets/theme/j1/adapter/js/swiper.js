@@ -186,7 +186,10 @@ j1.adapter.swiper = ((j1, window) => {
 
               // setup the slider
               logger.info ('\n' + 'swiper is being setup on id: ' + '{{swiper.id}}');
-              const {{swiper.id}} = new Swiper('#{{swiper.id}}', {
+
+              const slider        = document.querySelector('#{{swiper.id}}');
+              const swiperEl      = slider.querySelector('.swiper');
+              const {{swiper.id}} = new Swiper(swiperEl, {
 
                 {% if swiper.parameters %}
                 // parameters (core)

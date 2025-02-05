@@ -135,7 +135,7 @@ of a slideshow more *interesting*.
 
 [role="mt-4"]
 [[image_thumb_silder]]
-=== Thumbs View
+== Thumbs View
 
 To give the users a more *visual* control over a slideshow, Swiper sliders
 can provide *UI elements* by placing minified images or text elements (thumbs)
@@ -144,9 +144,9 @@ examples how to control such sliders' by a thumb (slave) silder.
 
 [role="mt-4"]
 [[image_thumbs_top]]
-==== Thumbs Slider (top)
+=== Thumbs Slider (top)
 
-lorem:sentences[3]
+lorem:sentences[3-+]
 
 ++++
 <!-- Master Slider -->
@@ -192,17 +192,18 @@ $(function() {
     // See: https://stackoverflow.com/questions/4793604/how-to-insert-an-element-after-another-element-in-javascript-without-using-a-lib
     // See: https://www.javascripttutorial.net/javascript-dom/javascript-after/
     //
-    Element.prototype.appendBefore = function (element) {
-      element.parentNode.insertBefore(this, element);
-    }, false;
+    //
+    // Element.prototype.appendBefore = function (element) {
+    //   element.parentNode.insertBefore(this, element);
+    // }, false;
 
-    Element.prototype.appendAfter = function (element) {
-      element.parentNode.insertBefore(this, element.nextSibling);
-    }, false;
+    // Element.prototype.appendAfter = function (element) {
+    //   element.parentNode.insertBefore(this, element.nextSibling);
+    // }, false;
 
-    function insertAfter(referenceNode, newNode) {
-        referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-    }
+    // function insertAfter(referenceNode, newNode) {
+    //     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+    // }
 
     if (atticFinished) {
 
