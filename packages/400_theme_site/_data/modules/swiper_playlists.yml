@@ -129,9 +129,9 @@ settings:
         - slide:
           enabled:                      true
           image:                        free-animals-3.jpg
-          image_caption:                Vulture approaching
+          image_caption:                Approaching Vulture
           lightbox_caption: >
-                                        Vulture approaching
+                                        Approaching Vulture
 
         # slide 04
         - slide:
@@ -139,7 +139,7 @@ settings:
           image:                        free-animals-4.jpg
           image_caption:                Group of Flamingos
           lightbox_caption: >
-                                        Group of Flamingos          
+                                        Group of Flamingos
 
         # slide 05
         - slide:

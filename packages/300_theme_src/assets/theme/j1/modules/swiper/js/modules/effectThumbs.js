@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/swiper/css/modules/effectPanorama.min.css
- # CSS styles of the J1 module for SwiperJS v11 (view)
+ # ~/assets/theme/j1/modules/swiper/js/modules/effectThumbs.js
+ # J1 module for SwiperJS v11 (view)
  # -----------------------------------------------------------------------------
  #
  # Product/Info:
@@ -13,5 +13,21 @@
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
 */
+"use strict";
 
-.panorama-slider{width:100%;padding:14px 0}.panorama-slider .swiper-pagination{bottom:-10px;--swiper-pagination-bullet-inactive-color:#fff;--swiper-pagination-color:#fff}
+function EffectThumbs(_ref) {
+
+    var {
+        swiper,
+        extendParams,
+        on
+    } = _ref;
+
+    extendParams({
+      panoramaEffect: {
+        depth: 200,
+        rotate: 30,
+      },
+    });
+
+} // END EffectThumbs

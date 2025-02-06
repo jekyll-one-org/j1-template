@@ -227,3 +227,31 @@ ul.swiper-wrapper {
 .swiper--multi {
   height: 400px;
 }
+
+/* Thumbs Slider
+------------------------------------------------------------------------------ */
+.thumbs-slider:active { 
+  cursor: grabbing; 
+}
+
+.thumbs-slider--top .swiper-slide {
+  height: 200px !important;
+}
+
+.thumbs-slider--bottom .swiper-slide {
+  height: 200px !important;
+}
+
+.thumbs-slider--top .swiper-slide,
+.thumbs-slider--right .swiper-slide,
+.thumbs-slider--bottom .swiper-slide,
+.thumbs-slider--left .swiper-slide {
+  opacity: .6;
+}
+
+.thumbs-slider--top .swiper-slide-thumb-active,
+.thumbs-slider--right .swiper-slide-thumb-active,
+.thumbs-slider--bottom .swiper-slide-thumb-active,
+.thumbs-slider--left .swiper-slide-thumb-active {
+  opacity: 1;
+}

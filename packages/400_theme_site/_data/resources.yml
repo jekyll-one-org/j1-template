@@ -1973,12 +1973,15 @@ resources:
                                           modules/swiper/css/theme/uno,
                                           modules/swiper/css/swiper-bundle,
                                           modules/swiper/css/modules/effectNeighbor,
-                                          modules/swiper/css/modules/effectPanorama
+                                          modules/swiper/css/modules/effectPanorama,
+                                          modules/swiper/css/modules/effectThumbs
                                         ]
         files:                          [ adapter/js/swiper.js ]
         js:                             [
                                           modules/swiper/js/swiper-bundle,
-                                          modules/swiper/js/modules/effectPanorama
+                                          modules/swiper/js/modules/effectNeighbor,
+                                          modules/swiper/js/modules/effectPanorama,
+                                          modules/swiper/js/modules/effectThumbs
                                         ]
         init_function:                  [ j1.adapter.swiper.init ]
 
