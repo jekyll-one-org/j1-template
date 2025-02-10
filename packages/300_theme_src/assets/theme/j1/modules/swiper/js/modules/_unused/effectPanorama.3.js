@@ -22,6 +22,13 @@ function EffectPanorama(_ref) {
     on
   } = _ref;
 
+  extendParams({
+    panoramaEffect: {
+      depth: 200,
+      rotate: 30,
+    },
+  });
+
   // ---------------------------------------------------------------------------
   // effect initializer
   // ---------------------------------------------------------------------------
@@ -36,7 +43,7 @@ function EffectPanorama(_ref) {
       watchSlidesProgress: true,
     };
     Object.assign(swiper.params, overwriteParams);
-  }); // END effect initializer
+  });
 
   // ---------------------------------------------------------------------------
   // create (surround) effect (on Swiper progress) on all slides
@@ -55,9 +62,9 @@ function EffectPanorama(_ref) {
 
     // process all slides
     for (let i = 0; i < swiper.slides.length; i += 1) {
-      const slideEl           = swiper.slides[i];
-      const slideProgress     = slideEl.progress;
-      const slideSize         = sizesGrid[i];
+      const slideEl = swiper.slides[i];
+      const slideProgress = slideEl.progress;
+      const slideSize = sizesGrid[i];
       const progressModifier = swiper.params.centeredSlides
         ? 0
         : (swiper.params.slidesPerView - 1) * 0.5;
@@ -73,9 +80,9 @@ function EffectPanorama(_ref) {
         swiper.params.direction === 'horizontal'
           ? `translateX(${translateX}) translateZ(${translateZ}) rotateY(${rotateY}deg)`
           : `translateY(${translateX}) translateZ(${translateZ}) rotateX(${-rotateY}deg)`;
-    } // END for
+    }
 
-  }); // END on Swiper progress
+  });
 
   // ---------------------------------------------------------------------------
   // click effects
@@ -88,6 +95,6 @@ function EffectPanorama(_ref) {
     if (on_click === 'next') {
         swiper.slideNext();
     }
-  }); // END click effects
+  });
 
 } // END EffectPanorama 

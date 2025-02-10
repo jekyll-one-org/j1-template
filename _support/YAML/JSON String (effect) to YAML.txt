@@ -1,0 +1,70 @@
+Schreibe den JSON String
+
+{
+  "effect": "fade, thumbs",
+  "fadeEffect": {
+    "crossFade": true
+  },
+  "thumbs": {
+    "swiper": "thumbSlider"
+  }
+}
+
+in eine entsprechende YAML Struktur um.
+
+Gemini
+--------------------------------------------------------------------------------
+
+YAML
+
+effect: fade, thumbs
+fadeEffect:
+  crossFade: true
+thumbs:
+  swiper: thumbSlider
+
+
+JSON (recompiled from YAML)
+
+{
+  "effect": "fade, thumbs",
+  "fadeEffect": {
+    "crossFade": true
+  }, 
+  "thumbs": {
+    "swiper": "thumbSlider"
+  }
+}
+
+
+Erläuterung
+--------------------------------------------------------------------------------
+
+Erläuterung:
+
+* YAML ist eine Auszeichnungssprache, die für ihre Lesbarkeit bekannt ist.
+  Sie verwendet Einrückungen anstelle von geschweiften Klammern {} zur
+  Strukturierung von Daten.
+
+* effect:
+  "fade, thumbs": Diese Zeile definiert ein Schlüssel-Wert-Paar, wobei effect
+  der Schlüssel und "fade, thumbs" der Wert ist. In YAML werden Strings in
+  Anführungszeichen gesetzt, wenn sie Sonderzeichen oder Leerzeichen enthalten.
+
+* fadeEffect::
+  Dies ist ein Schlüssel, der ein verschachteltes Objekt einleitet.
+
+* crossFade: true:
+  Dies ist ein Schlüssel-Wert-Paar innerhalb von fadeEffect. Der Wert true
+  ist ein boolescher Wert und muss in YAML nicht in Anführungszeichen gesetzt
+  werden.
+
+* thumbs:: Dies ist ein weiterer Schlüssel, der ein verschachteltes Objekt
+  einleitet.
+
+* swiper: "thumbSlider": Dies ist ein Schlüssel-Wert-Paar innerhalb von thumbs.
+  Der Wert "thumbSlider" ist ein String und wird in Anführungszeichen gesetzt.
+  ???
+
+
+

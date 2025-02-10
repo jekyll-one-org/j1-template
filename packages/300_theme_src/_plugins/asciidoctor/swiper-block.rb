@@ -43,7 +43,7 @@ Asciidoctor::Extensions.register do
       html        = %(
         <div class="#{attributes['role']}">
           #{title_html}
-          <div id="#{target}_parent" class="swiper swioper-parent"></div>
+          <div id="#{target}_parent" class="swiper-parent"></div>
         </div>
       )
 

@@ -44,7 +44,7 @@ settings:
     - slider:
 
       # ------------------------------------------------------------------------
-      # GENERAL settings
+      # SLIDER general settings
       #
       enabled:                          true
       type:                             text
@@ -65,16 +65,16 @@ settings:
         loop:                           true
 
       # ------------------------------------------------------------------------
-      # Modules
+      # SWIPER Module settings
       #
-      modules:
+      module_settings:
         autoplay:
           delay:                        3000
           pauseOnMouseEnter:            true
           disableOnInteraction:         false      
 
       # ------------------------------------------------------------------------
-      # Events
+      # SWIPER Events
       #
       # events:
       #   init: >
@@ -99,7 +99,7 @@ settings:
     - slider:
 
       # ------------------------------------------------------------------------
-      # GENERAL settings
+      # SLIDER general settings
       #      
       enabled:                          true
       type:                             image
@@ -112,11 +112,10 @@ settings:
       wrapper_classes:                  false
 
       # ------------------------------------------------------------------------
-      # CAPTION settings
+      # SLIDER caption settings
       #
       captions:                             
         enabled:                        true
-        type:                           native
 
         css_class:                      swp-caption-content
 
@@ -125,21 +124,17 @@ settings:
       #
       lightbox:
         enabled:                        true
-        type:                           photoswipe
 
         # ----------------------------------------------------------------------
-        # CAPTION settings
+        # LIGHTBOX caption settings
         #
         captions:
           enabled:                      true
+
           css_class:                    pswp-caption-content
 
         # ----------------------------------------------------------------------
-        # Lightbox settings
-        # ----------------------------------------------------------------------
-
-        # ----------------------------------------------------------------------
-        # Parameters (Core)
+        # LIGHTBOX Parameters (Core)
         #
         parameters:
           children:                     a
@@ -150,15 +145,10 @@ settings:
           showHideAnimationType:        zoom
           imageClickAction:             next
           tapAction:                    next
-          padding:                      {
-                                          top:      0,
-                                          bottom:   0,
-                                          left:     80,
-                                          right:    80
-                                        }
+          padding:                      { top: 0, bottom: 0, left: 80, right: 80 }
 
         # ----------------------------------------------------------------------
-        # USER INTERFACE controls
+        # LIGHTBOX user interface (UI Controls)
         #
         ui_controls:
           zoom:                         false
@@ -186,16 +176,16 @@ settings:
         spaceBetween:                   5
 
       # ------------------------------------------------------------------------
-      # Modules
+      # SWIPER Module settings
       #
-      modules:
+      module_settings:
         pagination:
           el:                           .swiper-pagination
           type:                         bullets
           clickable:                    true
 
       # ------------------------------------------------------------------------
-      # Events
+      # SWIPER Events
       #
       events:
         init: >
@@ -207,7 +197,7 @@ settings:
     - slider:
 
       # ------------------------------------------------------------------------
-      # GENERAL settings
+      # SLIDER general settings
       #      
       enabled:                          true
       type:                             image
@@ -219,11 +209,10 @@ settings:
       wrapper_classes:                  false
 
       # ------------------------------------------------------------------------
-      # CAPTION settings
+      # SLIDER caption settings
       #
       captions:                             
         enabled:                        true
-        type:                           native
 
         css_class:                      swp-caption-content
 
@@ -232,21 +221,17 @@ settings:
       #
       lightbox:
         enabled:                        true
-        type:                           photoswipe
 
         # ----------------------------------------------------------------------
-        # CAPTION settings
+        # LIGHTBOX caption settings
         #
         captions:
           enabled:                      true
+
           css_class:                    pswp-caption-content
 
         # ----------------------------------------------------------------------
-        # Lightbox settings
-        # ----------------------------------------------------------------------
-
-        # ----------------------------------------------------------------------
-        # Parameters (Core)
+        # LIGHTBOX Parameters (Core)
         #
         parameters:
           children:                     a
@@ -257,15 +242,10 @@ settings:
           showHideAnimationType:        zoom
           imageClickAction:             next
           tapAction:                    next
-          padding:                      {
-                                          top:  	  0,
-                                          bottom:   0,
-                                          left:     80,
-                                          right:    80
-                                        }
+          padding:                      { top: 0, bottom: 0, left: 80, right: 80 }
 
         # ----------------------------------------------------------------------
-        # USER INTERFACE controls
+        # LIGHTBOX user interface (UI Controls)
         #
         ui_controls:
           zoom:                         false
@@ -293,9 +273,9 @@ settings:
         spaceBetween:                   5
 
       # ------------------------------------------------------------------------
-      # Modules
+      # SWIPER Module settings
       #
-      modules:
+      module_settings:
         pagination:
           el:                           .swiper-pagination
           type:                         bullets
@@ -304,7 +284,7 @@ settings:
 #                                       function (index, className) { return `<span class="${className}"> ${++index} </span>`; }
 
       # ------------------------------------------------------------------------
-      # Events
+      # SWIPER Events
       #
       events:
         init: >
@@ -319,7 +299,7 @@ settings:
     - slider:
 
       # ------------------------------------------------------------------------
-      # GENERAL settings
+      # SLIDER general settings
       #      
       enabled:                          true
       type:                             image
@@ -331,11 +311,10 @@ settings:
       wrapper_classes:                  "height: 240px; padding: 14px 0;"
 
       # ------------------------------------------------------------------------
-      # CAPTION settings
+      # SLIDER caption settings
       #
       captions:                             
         enabled:                        false
-        type:                           native
 
         css_class:                      swp-caption-content
 
@@ -344,40 +323,34 @@ settings:
       #
       lightbox:
         enabled:                        false
-        type:                           photoswipe
 
         # ----------------------------------------------------------------------
-        # CAPTION settings
+        # LIGHTBOX caption settings
         #
         captions:
           enabled:                      true
+
           css_class:                    pswp-caption-content
 
         # ----------------------------------------------------------------------
-        # Lightbox settings
-        # ----------------------------------------------------------------------
-
-        # ----------------------------------------------------------------------
-        # Parameters (Core)
+        # LIGHTBOX Parameters (Core)
         #
         parameters:
           children:                     a
           bgOpacity:                    1
           showHideOpacity:              true
-          loop:                         true
+          loop:                         true          
+          effect:                       fade
+          fadeEffect:                   { crossFade: true }
+#         parallax:                     true
           wheelToZoom:                  true
           showHideAnimationType:        zoom
           imageClickAction:             next
           tapAction:                    next
-          padding:                      {
-                                          top:      0,
-                                          bottom:   0,
-                                          left:     80,
-                                          right:    80
-                                        }
+          padding:                      { top: 0, bottom: 0, left: 80, right: 80 }
 
         # ----------------------------------------------------------------------
-        # USER INTERFACE controls
+        # LIGHTBOX user interface (UI Controls)
         #
         ui_controls:
           zoom:                         false
@@ -402,6 +375,7 @@ settings:
         effect:                         panorama
         slidesPerView:                  1.5
         loop:                           true
+#       speed:                          200
         loopAdditionalSlides:           1
         centeredSlides:                 true
         grabCursor:                     true
@@ -437,17 +411,18 @@ settings:
         }
 
       # ------------------------------------------------------------------------
-      # Modules
+      # SWIPER Module settings
       #
-      modules:
+      module_settings:
         modules:                        [ EffectPanorama ]
-        pagination:
-          el:                           .swiper-pagination
-          dynamicBullets:               true
-          dynamicMainBullets:           3
+#       pagination:
+#         el:                           .swiper-pagination
+#         dynamicBullets:               true
+#         dynamicMainBullets:           3
         panorama:
-          depth:                        150
-          rotate:                       45
+          on_click:                     next                                    # false | next
+          depth:                        200
+          rotate:                       30
 
     # --------------------------------------------------------------------------
     # IMAGE Slider Extended - Neigbor View
@@ -455,7 +430,7 @@ settings:
     - slider:
 
       # ------------------------------------------------------------------------
-      # GENERAL settings
+      # SLIDER general settings
       #      
       enabled:                          true
       type:                             image
@@ -467,11 +442,10 @@ settings:
       wrapper_classes:                  "height: 300px; padding: 14px 0;"
 
       # ------------------------------------------------------------------------
-      # CAPTION settings
+      # SLIDER caption settings
       #
       captions:                             
         enabled:                        false
-        type:                           native
 
         css_class:                      swp-caption-content
 
@@ -480,21 +454,17 @@ settings:
       #
       lightbox:
         enabled:                        false
-        type:                           photoswipe
 
         # ----------------------------------------------------------------------
-        # CAPTION settings
+        # LIGHTBOX caption settings
         #
         captions:
           enabled:                      true
+
           css_class:                    pswp-caption-content
 
         # ----------------------------------------------------------------------
-        # Lightbox settings
-        # ----------------------------------------------------------------------
-
-        # ----------------------------------------------------------------------
-        # Parameters (Core)
+        # LIGHTBOX Parameters (Core)
         #
         parameters:
           children:                     a
@@ -505,15 +475,10 @@ settings:
           showHideAnimationType:        zoom
           imageClickAction:             next
           tapAction:                    next
-          padding:                      {
-                                          top:      0,
-                                          bottom:   0,
-                                          left:     80,
-                                          right:    80
-                                        }
+          padding:                      { top: 0, bottom: 0, left: 80, right: 80 }
 
         # ----------------------------------------------------------------------
-        # USER INTERFACE controls
+        # LIGHTBOX USER INTERFACE controls
         #
         ui_controls:
           zoom:                         false
@@ -535,55 +500,56 @@ settings:
       # Parameters (Core)
       #      
       parameters:
-        effect:                         panorama
+#       effect:                         panorama
         slidesPerView:                  1.3
         loop:                           true
         loopAdditionalSlides:           1
         centeredSlides:                 true
         grabCursor:                     true
-        breakpoints: {
-                                        480: {
-                                          slidesPerView: 2,
-                                          panoramaEffect: {
-                                            rotate: 35,
-                                            depth: 150,
-                                          },
-                                        },
-                                        640: {
-                                          slidesPerView: 3,
-                                          panoramaEffect: {
-                                            rotate: 30,
-                                            depth: 150,
-                                          },
-                                        },
-                                        1024: {
-                                          slidesPerView: 4,
-                                          panoramaEffect: {
-                                            rotate: 30,
-                                            depth: 200,
-                                          },
-                                        },
-                                        1200: {
-                                          slidesPerView: 4,
-                                          panoramaEffect: {
-                                            rotate: 25,
-                                            depth: 250,
-                                          },
-                                        }
-        }
+        # breakpoints: {
+        #                                 480: {
+        #                                   slidesPerView: 2,
+        #                                   panoramaEffect: {
+        #                                     rotate: 35,
+        #                                     depth: 150,
+        #                                   },
+        #                                 },
+        #                                 640: {
+        #                                   slidesPerView: 3,
+        #                                   panoramaEffect: {
+        #                                     rotate: 30,
+        #                                     depth: 150,
+        #                                   },
+        #                                 },
+        #                                 1024: {
+        #                                   slidesPerView: 4,
+        #                                   panoramaEffect: {
+        #                                     rotate: 30,
+        #                                     depth: 200,
+        #                                   },
+        #                                 },
+        #                                 1200: {
+        #                                   slidesPerView: 4,
+        #                                   panoramaEffect: {
+        #                                     rotate: 25,
+        #                                     depth: 250,
+        #                                   },
+        #                                 }
+        # }
 
       # ------------------------------------------------------------------------
-      # Modules
+      # SWIPER Module settings
       #
-      modules:
+      module_settings:
         modules:                        [ EffectPanorama ]
-        pagination:
-          el:                           .swiper-pagination
-          dynamicBullets:               true
-          dynamicMainBullets:           3
-        panorama:
-          depth:                        150
-          rotate:                       45
+#       pagination:
+#         el:                           .swiper-pagination
+#         dynamicBullets:               true
+#         dynamicMainBullets:           3
+#       panorama:
+#         on_click:                     next                                    # false | next
+#         depth:                        150
+#         rotate:                       45
 
     # --------------------------------------------------------------------------
     # IMAGE Slider Extended - Thumbs View
@@ -591,23 +557,22 @@ settings:
     - slider:
 
       # ------------------------------------------------------------------------
-      # GENERAL settings
+      # SLIDER general settings
       #      
-      enabled:                          false
+      enabled:                          true
       type:                             image
 
-      id:                               swiper_image_thumbs
+      id:                               thumb_slider_animals
       layout:                           image_base
       playlist:                         free_animals
       container_classes:                false
-      wrapper_classes:                  "height: 300px; padding: 14px 0;"
+      wrapper_classes:                  false                                   # "height: 300px; padding: 14px 0;"
 
       # ------------------------------------------------------------------------
-      # CAPTION settings
+      # SLIDER caption settings
       #
       captions:                             
-        enabled:                        false
-        type:                           native
+        enabled:                        true
 
         css_class:                      swp-caption-content
 
@@ -617,29 +582,69 @@ settings:
       lightbox:
         enabled:                        false
 
+        # ----------------------------------------------------------------------
+        # LIGHTBOX caption settings
+        #
+        captions:
+          enabled:                      true
+
+          css_class:                    pswp-caption-content
+
+        # ----------------------------------------------------------------------
+        # LIGHTBOX Parameters (Core)
+        #
+        parameters:
+          children:                     a
+          bgOpacity:                    1
+          showHideOpacity:              true
+          loop:                         true
+          wheelToZoom:                  true
+          showHideAnimationType:        zoom
+          imageClickAction:             next
+          tapAction:                    next
+          padding:                      { top: 0, bottom: 0, left: 80, right: 80 }
+
+        # ----------------------------------------------------------------------
+        # LIGHTBOX user interface (UI Controls)
+        #
+        ui_controls:
+          zoom:                         false
+          close:                        true
+          counter:                      true
+          arrowKeys:                    false
+
+        # ----------------------------------------------------------------------
+        # KEYBOARD controls
+        #
+        kbd_controls:
+          escKey:                       true
+ 
       # ------------------------------------------------------------------------
       # SWIPER settings
       # ------------------------------------------------------------------------
 
       # ------------------------------------------------------------------------
-      # Parameters (Core)
-      #      
-      parameters:
-        effect:                         thumbs
-        slidesPerView:                  1.3
-        loop:                           true
-        loopAdditionalSlides:           1
-        centeredSlides:                 true
-        grabCursor:                     true
+      # SWIPER Module settings
+      #
+      module_settings:
+        modules:                        [ EffectThumbs ]                        # Swiper modules for J1 are to specied (to be loaded)
+        thumbs:
+          speed:                        1000
+          main_slider_id:               thumb_slider_animals                    # should ALWAYS an id (NOT a class)
+          autoHeight:                   true
+          grabCursor:                   true
+          placement:                    top
+          spaceBetween:                 5
+          slidesPerView:                3
 
       # ------------------------------------------------------------------------
-      # Modules
+      # SWIPER Events
       #
-      modules:
-        modules:                        [ EffectThumbs ]
-        thumbs:
-          placement:                    bottom
-
+      events:
+        # init: >
+        #                                 function (swiper) { var slideHeight = 550; swiper.slides.forEach(slide => { slide.style.height = `${slideHeight}px`; }); }
+        # slideChangeTransitionStart: >
+        #                                 function (swiper) { thumbSlider.slideTo(swiper.activeIndex); }
 
     # --------------------------------------------------------------------------
     # VIDEO Sliders

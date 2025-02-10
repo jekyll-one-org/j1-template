@@ -185,6 +185,7 @@ j1.adapter.swiper = ((j1, window) => {
               logger.info ('\n' + 'HTML portion loaded for swiper on id: ' + '{{swiper.id}}');
 
               // setup the slider
+              // ---------------------------------------------------------------
               logger.info ('\n' + 'swiper is being setup on id: ' + '{{swiper.id}}');
 
               const slider        = document.querySelector('#{{swiper.id}}');
@@ -194,7 +195,7 @@ j1.adapter.swiper = ((j1, window) => {
                 {% if swiper.parameters %}
                 // parameters (core)
                 {% for setting in swiper.parameters %}
-                {% if setting[0] == 'effect' %}
+                {% if setting[0] == 'effect' or setting[0] == 'slideHeight' %}
                 {{setting[0]}}: {{ setting[1] | replace: '=>', ':' | json }},
                 {% else %}
                 {{setting[0]}}: {{ setting[1] | replace: '=>', ':' }},
@@ -202,9 +203,9 @@ j1.adapter.swiper = ((j1, window) => {
                 {% endfor %}
                 {% endif %}
 
-                {% if swiper.modules %}
-                // modules
-                {% for setting in swiper.modules %}
+                {% if swiper.module_settings %}
+                // module settings
+                {% for setting in swiper.module_settings %}
                 {% if setting[0] == 'modules' %}
                 {{setting[0]}}: {{ setting[1] | replace: '=>', ':' | replace: '"', ' ' }},
                 {% else %}

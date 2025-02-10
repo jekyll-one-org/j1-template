@@ -158,9 +158,142 @@ This Thumb Slider creates the best results for high-quality images for websites
 mainly used on *desktops*.
 ====
 
-.Extended Slider · Thums View + Captions
+.Extended Slider · Thums View
 swiper::thumb_slider_animals[role="mt-0 mb-5"]
 
+// ++++
+// <!-- Master Slider -->
+// <div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Thumbs View · Position Bottom </div>
+// <div id="thumb_slider_animals">
+//   <div class="swiper swiper-container">
+
+//     <!-- Slides -->
+//     <ul class="swiper-wrapper">
+//       <li class="swiper-slide">
+//         <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg">      
+//       </li>
+//       <li class="swiper-slide">
+//         <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg">
+//       </li>
+//       <li class="swiper-slide">
+//         <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg">
+//       </li>
+//       <li class="swiper-slide">
+//         <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg">
+//       </li>
+//       <li class="swiper-slide">
+//         <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg">
+//       </li>
+//       <li class="swiper-slide">
+//         <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg">
+//       </li>
+//     </ul>
+//     <!-- END swiper wrapper (slides) -->
+
+//   </div> <!-- END swiper container -->
+// </div> <!-- END Swiper -->
+// ++++
+
+++++
+<!-- Initialize Image Thumbs Slider (bottom) -->
+<script>
+$(function() {
+  // ---------------------------------------------------------------------------
+  // slider initializer
+  // ---------------------------------------------------------------------------
+  var dependencies_met_page_ready = setInterval (() => {
+    var atticFinished         = (j1.adapter.attic.getState() == 'finished') ? true : false;
+    var xhrLoadState_success  = (j1.xhrDOMState['#thumb_slider_animals_parent'] === 'success') ? true : false;
+
+    if (atticFinished && xhrLoadState_success) {
+
+      // common params for all sliders
+      //
+       const commonParams = {
+        main_slider_id:         '#thumb_slider_animals',                        // should ALWAYS an id (NOT a class)
+        slideHeight:             'auto',                                        // 'auto' | int
+        thumbs: {
+          placement:            'top',                                          // placement [top | bottom]
+        }
+      };
+
+      // main swiper
+      //
+      const mainSwiper    = document.querySelector(commonParams.main_slider_id);
+      const mainSwiperEl  = mainSwiper.querySelector('.swiper');
+
+      // create thmubs swiper (duplicate from main)
+      //
+      const swiperThumbEl = mainSwiperEl.cloneNode(true);
+      swiperThumbEl.classList.add('thumbs-slider');
+      // swiperThumbEl.classList.add('thumbs-slider--bottom');
+      mainSwiper.insertBefore(swiperThumbEl, mainSwiperEl);
+
+      const swiperThumbSlides      = swiperThumbEl.querySelectorAll('.swiper-slide');
+      const swiperThumbLastSlideEl = swiperThumbSlides[swiperThumbSlides.length - 1];
+
+      if (commonParams.thumbs.placement === 'bottom') {
+        // place thumbs slider AFTER the main swiper (place at botton)
+        // ---------------------------------------------------------------------
+        mainSwiper.appendChild(swiperThumbEl);
+        mainSwiperEl.classList.add('mb-1');
+        swiperThumbEl.classList.add('thumbs-slider--bottom');
+      } else if (commonParams.thumbs.placement === 'top') {
+        // place thumbs slider BEFORE the main swiper (place on top)
+        // ---------------------------------------------------------------------
+        swiperThumbEl
+          .querySelector('.swiper-wrapper')
+          .insertBefore(swiperThumbLastSlideEl, swiperThumbLastSlideEl[0]);
+
+          mainSwiperEl.classList.add('mt-1');
+          swiperThumbEl.classList.add('thumbs-slider--top');
+      } else {
+        // place thumbs at botton (default)
+        // ---------------------------------------------------------------------
+        mainSwiper.appendChild(swiperThumbEl);
+        mainSwiperEl.classList.add('mb-1');
+        swiperThumbEl.classList.add('thumbs-slider--bottom');
+      }
+
+      const thumbSlider = new Swiper(swiperThumbEl, {
+        autoHeight: true,
+        spaceBetween: 5,
+        slidesPerView: 3,
+        grabCursor: true,
+        on: {
+          transitionStart: (swiper) => {
+            mainSlider.slideTo(swiper.activeIndex);
+          }
+        },
+      });
+
+      const mainSlider = new Swiper(mainSwiperEl, {
+        grabCursor: true,
+        // effect: 'fade',
+        //   fadeEffect: {
+        //   crossFade: true
+        // },
+        thumbs: {
+          swiper: thumbSlider,
+        },
+        on: {
+          // init: function (swiper) {
+          //   if (commonParams.slideHeight !== 'auto') {
+          //     swiper.slides.forEach(slide => { slide.style.height = `${commonParams.slideHeight}px`; });
+          //   }
+          // },
+          slideChangeTransitionStart: (swiper) => {
+            thumbSlider.slideTo(swiper.activeIndex);
+          }
+        }
+      });
+
+      clearInterval(dependencies_met_page_ready);
+    } // END pageVisible
+  }, 10); // END dependencies_met_page_ready
+});
+</script>
+++++
 
 [role="mt-5"]
 [[image_thumbs_right_left]]
