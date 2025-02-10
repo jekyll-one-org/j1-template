@@ -1,13 +1,18 @@
 ---
-title:                                  Swiper Tester
-title_extention:                        Swiper Integration
-tagline:                                Swiper Integration
+title:                                  SwiperJS
+title_extention:                        Selected Examples
+tagline:                                Selected Examples
 
-date:                                   2025-01-07
+date:                                   2025-02-10
 #last_modified:                         2025-01-01
 
 description: >
-
+                                        SwiperJS is an API that creates modern slider shows.
+                                        All sliders use hardware-accelerated features like
+                                        3D transitions to perform best on modern devices.
+                                        SwiperJS-based sliders are intended to be displayed
+                                        at their best on all types of websites, es such
+                                        as tablets or smartphones.
 keywords: >
                                         open source, free, template, jekyll, jekyllone, web,
                                         sites, static, jamstack, bootstrap,
@@ -62,58 +67,49 @@ resource_options:
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [role="dropcap"]
-Swiper, the free and most modern mobile touch slider with hardware accelerated
-transitions and amazing native behavior. It is intended to be used in mobile
-websites, mobile web apps, and mobile native/hybrid apps.
+SwiperJS is an API that creates modern slider shows. All sliders use
+hardware-accelerated features like 3D transitions to perform best on modern
+devices. SwiperJS-based sliders are intended to be displayed at their best
+on all types of websites, such as tablets or smartphones.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-lorem:sentences[5]
+// lorem:sentences[5]
 
-[NOTE]
-====
-Swiper is not compatible with all platforms, it is a modern touch slider
-which is focused only on modern apps/platforms to bring the best experience
-and simplicity.
-====
+// [NOTE]
+// ====
+// Swiper is not compatible with all platforms, it is a modern touch slider
+// which is focused only on modern apps/platforms to bring the best experience
+// and simplicity.
+// ====
 
-[role="mt-4"]
-== Text Slider
+// [role="mt-4"]
+// == Text Slider
 
-A slider is typically used for displaying images. Still, the implementation
-for the J1 Template supports a lot more sources to be displayed as a slide
-show — simple text for example.
+// A slider is typically used for displaying images. Still, the implementation
+// for the J1 Template supports a lot more sources to be displayed as a slide
+// show — simple text for example.
 
-[role="mt-4"]
-=== Base Text Carousel
+// [role="mt-4"]
+// === Base Text Carousel
 
-Important statements or topics can be placed on top of an article or a
-paragraph to give them better visibility. You can present facts to know
-animated for the readers attention.
+// Important statements or topics can be placed on top of an article or a
+// paragraph to give them better visibility. You can present facts to know
+// animated for the readers attention.
 
-// .Base Text Swiper
+// .Text Swiper
 // swiper::swiper_text_base[role="mt-4 mb-4"]
 
 
 [role="mt-4"]
-== Base Image Sliders
+== Image Sliders
 
 Sliders (or carousels) are mainly used for picture data to animate images
 as a group. Find below examples of using a simple (base) slider for your
 image data.
 
 [role="mt-4"]
-=== Lightbox enabled
-
-A simple image show is useful, for example, as an animated (or not animated)
-banner presenting exciting things about your site or the products offered.
-
-.Mixed image sizes
-swiper::swiper_image_base_captions[role="mt-4 mb-4"]
-
-
-[role="mt-4"]
-=== Captions + Lightbox enabled
+=== Same Image Sizes
 
 Carousels are used for an exceptionally compact form of image galleries.
 This example shows some pictures having individual caption text and supports
@@ -121,6 +117,15 @@ a lightbox to enlarge images full size.
 
 .Same image sizes
 swiper::swiper_image_base_lightbox[role="mt-4 mb-4"]
+
+[role="mt-5"]
+=== Mixed Image Sizes
+
+A simple image show is useful, for example, as an animated (or not animated)
+banner presenting exciting things about your site or the products offered.
+
+.Mixed image sizes
+swiper::swiper_image_base_captions[role="mt-4 mb-4"]
 
 
 [role="mt-5"]
