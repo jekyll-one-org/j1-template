@@ -42,11 +42,13 @@ regenerate:                             true
 {% comment %} Set config data (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign amplitude_defaults  = modules.defaults.amplitude.defaults %}
-{% assign amplitude_settings  = modules.amplitude.settings %}
+{% assign amplitude_players   = modules.amplitude_players.settings %}
+{% assign amplitude_playlists = modules.amplitude_playlists.settings %}
 
 {% comment %} Set config options (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign amplitude_options   = amplitude_defaults | merge: amplitude_settings %}
+{% assign amplitude_options   = amplitude_defaults | merge: amplitude_players %}
+{% assign amplitude_options   = amplitude_options  | merge: amplitude_playlists %}
 
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -95,6 +97,17 @@ j1.adapter.amplitude = ((j1, window) => {
   // module settings
   // ---------------------------------------------------------------------------
 
+  // YT player settings
+  // ---------------------------------------------------------------------------
+  // const YT_PLAYER_STATE = {
+  //   not_started:        -1,
+  //   ended:               0,
+  //   playing:             1,
+  //   paused:              2,
+  //   buffering:           3,
+  //   video_cued:          5
+  // };
+
   // control|logging
   // ---------------------------------------------------------------------------
   var _this;
@@ -126,21 +139,26 @@ j1.adapter.amplitude = ((j1, window) => {
   var playListName;
   var amplitudePlayerState;
   var amplitudeDefaults;
-  var amplitudeSettings;
+  var amplitudePlayers
+  var amplitudePlaylists
   var amplitudeOptions;
   var ytPlayer;
   var ytpPlaybackRate
 
-  // AmplitudeJS Player DEFAULT settings
-  // ---------------------------------------------------------------------------
   var xhrLoadState;
   var dependency;
+  var pluginManagerEnabled;
+  var playerExistsInPage;
+
+  // AmplitudeJS Player DEFAULT settings
+  // ---------------------------------------------------------------------------
   var playerCounter                     = 0;
   var load_dependencies                 = {};
   var playersProcessed                  = [];
   var playersHtmlLoaded                 = false;
   var processingPlayersFinished         = false;
-  
+  var pluginManagerRunOnce              = false;
+
   var playerAudioInfo                   = ('{{amplitude_defaults.playlist.audio_info}}' === 'true') ? true : false;
   var playerDefaultPluginManager        = ('{{amplitude_defaults.player.plugin_manager.enabled}}' === 'true') ? true : false;
   var playerDefaultType                 = '{{amplitude_defaults.player.type}}';
@@ -153,29 +171,12 @@ j1.adapter.amplitude = ((j1, window) => {
   var playerDelayNextTitle              = '{{amplitude_defaults.player.delay_next_title}}';
   var playerForwardBackwardSkipSeconds  = '{{amplitude_defaults.player.forward_backward_skip_seconds}}';
 
-  var pluginManagerEnabled;
-  var playerExistsInPage;
-
-  var pluginManagerRunOnce = false;
-
-  // YT player settings
-// -----------------------------------------------------------------------------
-// const YT_PLAYER_STATE = {
-//   not_started:        -1,
-//   ended:               0,
-//   playing:             1,
-//   paused:              2,
-//   buffering:           3,
-//   video_cued:          5
-// };
-
   // AmplitudeJS settings curently NOT used
   // ---------------------------------------------------------------------------
   var playerWaveformsEnabled           = '{{amplitude_defaults.player.waveforms.enabled}}';
   var playerWaveformsSampleRate        = '{{amplitude_defaults.player.waveforms.sample_rate}}';
   var playerVisualizationEnabled       = '{{amplitude_defaults.player.visualization.enabled}}';
   var playerVisualizationName          = '{{amplitude_defaults.player.visualization.name}}';
-
 
   // ---------------------------------------------------------------------------
   // helper functions
@@ -202,9 +203,10 @@ j1.adapter.amplitude = ((j1, window) => {
       // -----------------------------------------------------------------------
       // global variable settings
       // -----------------------------------------------------------------------
-      amplitudeDefaults = $.extend({}, {{amplitude_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      amplitudeSettings = $.extend({}, {{amplitude_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      amplitudeOptions  = $.extend(true, {}, amplitudeDefaults, amplitudeSettings);
+      amplitudeDefaults  = $.extend({}, {{amplitude_defaults  | replace: 'nil', 'null' | replace: '=>', ':' }});
+      amplitudePlayers   = $.extend({}, {{amplitude_players   | replace: 'nil', 'null' | replace: '=>', ':' }});
+      amplitudePlaylists = $.extend({}, {{amplitude_playlists | replace: 'nil', 'null' | replace: '=>', ':' }});
+      amplitudeOptions   = $.extend(true, {}, amplitudeDefaults, amplitudePlayers, amplitudePlaylists);
 
       // save AJS player setiings for later use (e.g. the AJS plugins)
       // j1.adapter.amplitude['amplitudeDefaults'] = amplitudeDefaults;
@@ -214,8 +216,8 @@ j1.adapter.amplitude = ((j1, window) => {
       // -----------------------------------------------------------------------
       // control|logging settings
       // -----------------------------------------------------------------------
-      _this                     = j1.adapter.amplitude;
-      logger                    = log4javascript.getLogger('j1.adapter.amplitude');
+      _this              = j1.adapter.amplitude;
+      logger             = log4javascript.getLogger('j1.adapter.amplitude');
 
       // prepare data element for later use
       j1.adapter.amplitude.data             = {};
@@ -287,7 +289,7 @@ j1.adapter.amplitude = ((j1, window) => {
       // -----------------------------------------------------------------------
       // initialize amplitude songs
       // -----------------------------------------------------------------------
-      {% for playlist in amplitude_settings.playlists %} {% if playlist.enabled %}
+      {% for playlist in amplitude_playlists.playlists %} {% if playlist.enabled %}
         var song_items = $.extend({}, {{playlist.items | replace: 'nil', 'null' | replace: '=>', ':' }});
 
         for (var i = 0; i < Object.keys(song_items).length; i++) {
@@ -411,12 +413,12 @@ j1.adapter.amplitude = ((j1, window) => {
       {% comment %} collect playlists
       --------------------------------------------------------------------------  {% endcomment %}
       {% assign playlists_enabled = 0 %}
-      {% for list in amplitude_settings.playlists %} {% if list.enabled %}
+      {% for list in amplitude_playlists.playlists %} {% if list.enabled %}
         {% assign playlists_enabled = playlists_enabled | plus: 1 %}
       {% endif %} {% endfor %}
 
       {% assign playlists_processed = 0 %}
-      {% for list in amplitude_settings.playlists %} {% if list.enabled %}
+      {% for list in amplitude_playlists.playlists %} {% if list.enabled %}
         {% assign playlist_items = list.items %}
         {% assign playlist_name  = list.name %}
         {% assign playlist_title = list.title %}

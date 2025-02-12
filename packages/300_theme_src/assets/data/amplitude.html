@@ -35,17 +35,17 @@ exclude_from_search:                    true
 {% assign modules               = site.data.modules %}
 
 {% comment %} set config data
-amplitude_settings: {{amplitude_settings | debug}}
-amplitude_defaults: {{amplitude_defaults | debug}}
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign environment           = site.environment %}
 
-{% assign amplitude_settings    = modules.amplitude.settings %}
 {% assign amplitude_defaults    = modules.defaults.amplitude.defaults %}
+{% assign amplitude_players     = modules.amplitude_players.settings %}
+{% assign amplitude_playlists   = modules.amplitude_playlists.settings %}
 
 {% comment %} set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign amplitude_options     = amplitude_defaults | merge: amplitude_settings %}
+{% assign amplitude_options     = amplitude_defaults | merge: amplitude_players %}
+{% assign amplitude_options     = amplitude_options  | merge: amplitude_playlists %}
 
 {% comment %} set permalink setting
 -------------------------------------------------------------------------------- {% endcomment %}

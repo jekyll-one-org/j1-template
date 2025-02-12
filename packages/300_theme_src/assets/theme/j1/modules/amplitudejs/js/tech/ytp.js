@@ -43,11 +43,13 @@ regenerate: true
 {% comment %} Set config data (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign amplitude_defaults  = modules.defaults.amplitude.defaults %}
-{% assign amplitude_settings  = modules.amplitude.settings %}
+{% assign amplitude_players   = modules.amplitude_players.settings %}
+{% assign amplitude_playlists = modules.amplitude_playlists.settings %}
 
 {% comment %} Set config options (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign amplitude_options   = amplitude_defaults | merge: amplitude_settings %}
+{% assign amplitude_options   = amplitude_defaults | merge: amplitude_players %}
+{% assign amplitude_options   = amplitude_options  | merge: amplitude_playlists %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -82,7 +84,6 @@ var timeSeconds;
 
 // YT API settings
 // -----------------------------------------------------------------------------
-// const YT_PLAYER_STATE = {
 var YT_PLAYER_STATE = {
   UNSTARTED:  -1,
   ENDED:       0,
@@ -107,21 +108,23 @@ var logger            = log4javascript.getLogger('j1.adapter.amplitude.tech');
 // -----------------------------------------------------------------------------
 
 var dependency;
-var playerCounter     = 0;
-var load_dependencies = {};
+var playerCounter      = 0;
+var load_dependencies  = {};
 
 // set default song index to FIRST item
-var songIndex         = 0;
-var ytpSongIndex      = 0;
+var songIndex          = 0;
+var ytpSongIndex       = 0;
 
-var ytpAutoPlay       = false;
-var ytpLoop           = true;
-var playLists         = {};
-var playersUILoaded   = { state: false };
-var apiInitialized    = { state: false };
-var amplitudeDefaults = $.extend({}, {{amplitude_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-var amplitudeSettings = $.extend({}, {{amplitude_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-var amplitudeOptions  = $.extend(true, {}, amplitudeDefaults, amplitudeSettings);
+var ytpAutoPlay        = false;
+var ytpLoop            = true;
+var playLists          = {};
+var playersUILoaded    = { state: false };
+var apiInitialized     = { state: false };
+
+var amplitudeDefaults  = $.extend({}, {{amplitude_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+var amplitudePlayers   = $.extend({}, {{amplitude_players   | replace: 'nil', 'null' | replace: '=>', ':' }});
+var amplitudePlaylists = $.extend({}, {{amplitude_playlists | replace: 'nil', 'null' | replace: '=>', ':' }});
+var amplitudeOptions   = $.extend(true, {}, amplitudeDefaults, amplitudePlayers, amplitudePlaylists);
 
 var playerExistsInPage = false;
 var ytpContainer       = null;
@@ -233,7 +236,7 @@ var progress;
 
       if (ytApiReady && ytPlayerReady) {
 
-        {% for player in amplitude_settings.players %}{% if player.enabled %}
+        {% for player in amplitude_players.players %}{% if player.enabled %}
 
           {% if player.source == empty %}
             {% assign player_source = amplitude_defaults.player.source %}
