@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
-# ~/_data/modules/amplitude.yml
-# User Configuration of the AmplitudeJS Module
+# ~/_data/modules/amplitude_playlists.yml
+# User Configuration (PLAYLISTS) of the AmplitudeJS Module
 #
 # Product/Info:
 # https://jekyll.one
@@ -16,8 +16,8 @@
 #
 description:
   title:                                AmplitudeJS
-  scope:                                User settings
-  location:                             _data/modules/amplitude.yml
+  scope:                                User settings (PLAYLIST<S) 
+  location:                             _data/modules/amplitude_playlists.yml
 
 # ------------------------------------------------------------------------------
 # User settings
@@ -43,7 +43,7 @@ settings:
       # ALBUM settings
       # ------------------------------------------------------------------------
       album:                            &album_manon_melodie_yt
-        name:                           TuneCore 2024
+        name:                           YouTube 2025
         artist:                         Manon Mélodie
         audio_base:                     //youtube.com
         cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
@@ -57,76 +57,92 @@ settings:
         - item:
           enabled:                      true
           <<:                           *album_manon_melodie_yt
-          title:                        La Fête du cœur                         # Das Fest des Herzens
-          audio:                        watch?v=fFn1GZIYC4Y
-          rating:                       3
-          audio_info:                   //youtube.com/playlist?list=OLAK5uy_mmjefHkIN8Cvg5RGPpajKbMLDEazaFbT4
-#         audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
-#         audio_info:                   //youtube.com/watch?v=fFn1GZIYC4Y
-          cover_image:                  //img.youtube.com/vi/fFn1GZIYC4Y/maxresdefault.jpg
-          duration:                     "02:32"
+          title:                        En Volant Haut                          # Hoch hinaus
+          audio:                        watch?v=5NiMGeQOzKQ
+          rating:                       2
+          audio_info:                   https://www.youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
+          cover_image:                  //img.youtube.com/vi/5NiMGeQOzKQ/maxresdefault.jpg
+          duration:                     "02:47"
 
         # title 02
         - item:
           enabled:                      true
           <<:                           *album_manon_melodie_yt
+          title:                        Anno du Soleil                          # Jahr der Sonne
+          audio:                        watch?v=pCXSGCBSIG0
+          rating:                       3
+          audio_info:                   https://www.youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
+          cover_image:                  //img.youtube.com/vi/pCXSGCBSIG0/maxresdefault.jpg
+          duration:                     "02:53"
+
+        # title 03
+        - item:
+          enabled:                      true
+          <<:                           *album_manon_melodie_yt
+          title:                        La Fête du cœur                         # Das Fest des Herzens
+          audio:                        watch?v=fFn1GZIYC4Y
+          rating:                       3
+          audio_info:                   https://www.youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
+          cover_image:                  //img.youtube.com/vi/fFn1GZIYC4Y/maxresdefault.jpg
+          duration:                     "02:32"
+
+        # title 04
+        - item:
+          enabled:                      true
+          <<:                           *album_manon_melodie_yt
           title:                        Fleur de Printemps                      # Frühlingsblume
-#         title:                        Frühlingsblume                          # prapeared for change  (title|mixed playlist)
-#         name:                         No Album Name                           # prapeared for change  (album|mixed playlist)
-#         artist:                       Schnuckie                               # prapeared for change (artist|mixed playlist)
           audio:                        watch?v=OUjHRpNUqyw
           rating:                       3
-          audio_info:                   //youtube.com/playlist?list=OLAK5uy_nVFdeHv7LWlUYKk2gwFjfO6WxX-GvD7Hs
+          audio_info:                   https://www.youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/OUjHRpNUqyw/maxresdefault.jpg
           duration:                     "02:57"
 
-        # title 03
+        # title 05
         - item:
           enabled:                      true
           <<:                           *album_manon_melodie_yt
           title:                        Cote d'Azur                             # Cote d'Azur
           audio:                        watch?v=9Z9yNpsiBKs
           rating:                       3
-          audio_info:                   //youtube.com/playlist?list=OLAK5uy_mWcvgY93sAOZcffnEJbCrrF4XSTtfE6BY
+          audio_info:                   https://www.youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/9Z9yNpsiBKs/maxresdefault.jpg
           duration:                     "02:42"
 
-        # title 04
+        # title 06
         - item:
           enabled:                      true
           <<:                           *album_manon_melodie_yt
           title:                        Les Échos du Passé                      # Echos der Vergangenheit          
           audio:                        watch?v=_EYc5W3qy4s
           rating:                       4
-          audio_info:                   //youtube.com/playlist?list=OLAK5uy_m11FnQ_33QBAo6EJ64yk-N9pWzG68MQ_Q
+          audio_info:                   https://www.youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/_EYc5W3qy4s/maxresdefault.jpg
           duration:                     "03:03"
 
-        # title 05
+        # title 07
         - item:
           enabled:                      true
           <<:                           *album_manon_melodie_yt
           title:                        Les Souvenirs                           # Die Erinnerungen
           audio:                        watch?v=i8ltW0WDcdQ
           rating:                       3
-          audio_info:                   //youtube.com/playlist?list=OLAK5uy_lAC0NbwBvAihaCbcvTngkRSmCgxov-Mzo
+          audio_info:                   https://www.youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/i8ltW0WDcdQ/maxresdefault.jpg
           duration:                     "02:19"
 
-        # title 06
+        # title 08
         - item:
           enabled:                      true
           <<:                           *album_manon_melodie_yt
           title:                        La Vie en Dance                         # Leben im Tanz
           audio:                        watch?v=yttS9UNgZFk
           rating:                       3
-          audio_info:                   //youtube.com/playlist?list=OLAK5uy_mt77a4375yJP13dr29_cKr8zKNGANoWd8
+          audio_info:                   https://www.youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/yttS9UNgZFk/maxresdefault.jpg
           duration:                     "02:45"
 
-
     # --------------------------------------------------------------------------
-    # Mimi Rutherfurt
+    #  Mimi Rutherfurt, Maritim Verlag
     # --------------------------------------------------------------------------
     #
     - playlist:
@@ -155,11 +171,11 @@ settings:
           <<:                           *album_mimi_rutherfurt_yt
           title:                        Alte Zeiten
           audio:                        watch?v=qEhzpBJpUq0
-          rating:                       2
-          audio_info:                   //www.youtube.com/@MaritimVerlag
+          rating:                       3
+          audio_info:                   //youtube.com/watch?v=qEhzpBJpUq0
           cover_image:                  //img.youtube.com/vi/qEhzpBJpUq0/maxresdefault.jpg
           duration:                     "00:48:15"
-          
+
         # title 02
         - item:
           enabled:                      true
@@ -167,10 +183,143 @@ settings:
           title:                        Nacht-Express
           audio:                        watch?v=I4VTc8nQxDs
           rating:                       3
-          audio_info:                   //www.youtube.com/@MaritimVerlag
+          audio_info:                   //youtube.com/watch?v=I4VTc8nQxDs
           cover_image:                  //img.youtube.com/vi/I4VTc8nQxDs/maxresdefault.jpg
           duration:                     "00:59:35"
+  
+        # title 03
+        - item:
+          enabled:                      true
+          <<:                           *album_mimi_rutherfurt_yt
+          title:                        Puppenspielerin
+          audio:                        watch?v=WAI07l_v9FA
+          rating:                       3
+          audio_info:                   //youtube.com/watch?v=WAI07l_v9FA
+          cover_image:                  //img.youtube.com/vi/WAI07l_v9FA/maxresdefault.jpg
+          duration:                     "00:45:37"
 
+        # title 04
+        - item:
+          enabled:                      true
+          <<:                           *album_mimi_rutherfurt_yt
+          title:                        Todesliste
+          audio:                        watch?v=ADKSPZJDErY
+          rating:                       3
+          audio_info:                   //youtube.com/watch?v=ADKSPZJDErY
+          cover_image:                  //img.youtube.com/vi/ADKSPZJDErY/maxresdefault.jpg
+          duration:                     "00:49:57"
+
+        # title 05
+        - item:
+          enabled:                      true
+          <<:                           *album_mimi_rutherfurt_yt
+          title:                        Buckingham Palace
+          audio:                        watch?v=ce_8ez1rFP0
+          rating:                       3
+          audio_info:                   //youtube.com/watch?v=ce_8ez1rFP0
+          cover_image:                  //img.youtube.com/vi/ce_8ez1rFP0/maxresdefault.jpg
+          duration:                     "01:09:14"
+
+        # title 06
+        - item:
+          enabled:                      true
+          <<:                           *album_mimi_rutherfurt_yt
+          title:                        Flucht im Dunkeln
+          audio:                        watch?v=Isy7X_HFYKc
+          rating:                       3
+          audio_info:                   //youtube.com/watch?v=Isy7X_HFYKc
+          cover_image:                  //img.youtube.com/vi/Isy7X_HFYKc/hqdefault.jpg
+          duration:                     "00:43:42"
+
+        # title 07
+        - item:
+          enabled:                      true
+          <<:                           *album_mimi_rutherfurt_yt
+          title:                        Priestermord
+          audio:                        watch?v=Wm9HMq7u_eA
+          rating:                       3
+          audio_info:                   //youtube.com/watch?v=Wm9HMq7u_eA
+          cover_image:                  //img.youtube.com/vi/Wm9HMq7u_eA/hqdefault.jpg
+          duration:                     "00:55:01"
+
+        # title 08
+        - item:
+          enabled:                      true
+          <<:                           *album_mimi_rutherfurt_yt
+          title:                        Das indische Kind
+          audio:                        watch?v=IggoySTsG5s
+          rating:                       3
+          audio_info:                   //youtube.com/watch?v=IggoySTsG5s
+          cover_image:                  //img.youtube.com/vi/IggoySTsG5s/maxresdefault.jpg
+          duration:                     "00:50:21"
+
+        # title 09
+        - item:
+          enabled:                      true
+          <<:                           *album_mimi_rutherfurt_yt
+          title:                        Schwarze Rache
+          audio:                        watch?v=N853_AAE0Fg
+          rating:                       3
+          audio_info:                   //youtube.com/watch?v=N853_AAE0Fg
+          cover_image:                  //img.youtube.com/vi/N853_AAE0Fg/maxresdefault.jpg
+          duration:                     "00:54:40"
+
+        # title 10
+        - item:
+          enabled:                      true
+          <<:                           *album_mimi_rutherfurt_yt
+          title:                        Spuk im Herrenhaus
+          audio:                        watch?v=mBRbyVFIL0U
+          rating:                       3
+          audio_info:                   //youtube.com/watch?v=mBRbyVFIL0U
+          cover_image:                  //img.youtube.com/vi/mBRbyVFIL0U/hqdefault.jpg
+          duration:                     "01:19:16"
+
+    # --------------------------------------------------------------------------
+    # Die größten Fälle des BND, Maritim Verlag
+    # --------------------------------------------------------------------------
+    #
+    - playlist:
+      enabled:                          true
+
+      name:                             faelle_des_bnd_yt
+      title:                            Die größten Fälle des BND
+
+      # ------------------------------------------------------------------------
+      # ALBUM settings
+      # ------------------------------------------------------------------------
+      album:                            &faelle_des_bnd_yt
+        name:                           Die größten Fälle des BND
+        artist:                         Maritim Verlag
+        audio_base:                     //youtube.com
+        cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
+
+      # ------------------------------------------------------------------------
+      # TITLE settings (songs)
+      # ------------------------------------------------------------------------
+      items:
+
+        # title 01
+        - item:
+          enabled:                      true
+          <<:                           *faelle_des_bnd_yt
+          title:                        Der unverzichtbare Feind
+          audio:                        watch?v=Y56DTeGXOfs
+          rating:                       3
+          audio_info:                   //youtube.com/watch?v=Y56DTeGXOfs
+          cover_image:                  //img.youtube.com/vi/Y56DTeGXOfs/hqdefault.jpg
+          duration:                     "01:17:17"
+
+        # title 02
+        - item:
+          enabled:                      true
+          <<:                           *faelle_des_bnd_yt
+          title:                        Ein Diener vieler Herren
+          audio:                        watch?v=biZp6ko8x7E
+          rating:                       3
+          audio_info:                   //youtube.com/watch?v=biZp6ko8x7E
+          cover_image:                  //img.youtube.com/vi/biZp6ko8x7E/hqdefault.jpg
+          duration:                     "01:20:24"
 
     # --------------------------------------------------------------------------
     # Emancipator
@@ -188,7 +337,6 @@ settings:
       album:                            &album_from_dusk_to_dawn
         name:                           From Dusk To Dawn
         artist:                         Emancipator
-#       audio_base:                     //521dimensions.com/song
         audio_base:                     /assets/audio/album/emancipator/from-dusk-to-dawn
         cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
 
@@ -240,7 +388,6 @@ settings:
           audio_info:                   //emancipator.bandcamp.com/
           cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn/safe-in-the-steep-cliffs.jpg
           duration:                     "04:35"
-
 
     # --------------------------------------------------------------------------
     # Disco 80th - Royalty Free Music
@@ -445,289 +592,6 @@ settings:
           audio:                        soundscrate-funkish-vibe.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "02:38"
-
-
-  # ============================================================================
-  # PLAYER configuration
-  # ----------------------------------------------------------------------------
-  players:
-
-    # --------------------------------------------------------------------------
-    # MINI player, Disco 80th
-    # --------------------------------------------------------------------------
-    #
-    - player:
-      enabled:                          true
-
-      # ------------------------------------------------------------------------
-      # CONTROL settings
-      #
-      song_progress_bar:                true
-      volume_slider:
-        enabled:                        true
-
-      # ------------------------------------------------------------------------
-      # PLAYER settings
-      #
-      id:                               free_disco_mini
-      type:                             mini
-
-      # ------------------------------------------------------------------------
-      # TIME settings
-      display_hours:                    false
-
-      playlist:
-        name:                           free_disco
-        title:                          Disco 80th
-        controls:                       true
-
-    # --------------------------------------------------------------------------
-    # COMPACT player, Disco 80th
-    # --------------------------------------------------------------------------
-    #
-    - player:
-      enabled:                          true
-
-      plugin_manager:
-        enabled:                        true
-
-      # ------------------------------------------------------------------------
-      # PLAYER settings
-      #
-      id:                               free_disco_compact
-      type:                             compact
-      audio_info:                       true
-      audio_rating:                     true
-
-      # ------------------------------------------------------------------------
-      # TIME settings
-      display_hours:                    false
-
-      # ------------------------------------------------------------------------
-      # CONTROL settings
-      #
-      song_progress_bar:                true
-      skip_forward_backward_button:     true
-
-      playlist:
-        name:                           free_disco
-        title:                          Disco 80th
-        controls:                       true
-
-    # --------------------------------------------------------------------------
-    # LARGE player, Disco 80th
-    # --------------------------------------------------------------------------
-    #
-    - player:
-      enabled:                          true
-
-      # ------------------------------------------------------------------------
-      # PLAYER settings
-      #
-      id:                               free_disco_large
-      type:                             large
-      audio_info:                       true
-      audio_rating:                     true
-
-      # ------------------------------------------------------------------------
-      # TIME settings
-      display_hours:                    false
-
-      # ------------------------------------------------------------------------
-      # CONTROL settings
-      #
-      song_progress_bar:                true
-      skip_forward_backward_button:     true
-      volume_slider:
-        enabled:                        true
-        preset_value:                   46
-
-      playlist:
-        name:                           free_disco
-        title:                          Disco 80th
-#       audio_info:                     true
-        controls:                       true
-
-    # --------------------------------------------------------------------------
-    # MINI player, Emancipator
-    # --------------------------------------------------------------------------
-    #
-    - player:
-      enabled:                          true
-
-      # ------------------------------------------------------------------------
-      # TIME settings
-      display_hours:                    false
-
-      # ------------------------------------------------------------------------
-      # CONTROL settings
-      #
-      song_progress_bar:                true
-      volume_slider:
-        enabled:                        true
-
-      # ------------------------------------------------------------------------
-      # PLAYER settings
-      #
-      id:                               free_emancipator_mini
-      type:                             mini
-
-      playlist:
-        name:                           emancipator
-        title:                          Emancipator
-        controls:                       true
-
-    # --------------------------------------------------------------------------
-    # COMPACT player, Emancipator
-    # --------------------------------------------------------------------------
-    #
-    - player:
-      enabled:                          true
-
-      # ------------------------------------------------------------------------
-      # CONTROL settings
-      #
-      song_progress_bar:                true
-      skip_forward_backward_button:     true
-      volume_slider:
-        enabled:                        true      
-
-      # ------------------------------------------------------------------------
-      # PLAYER settings
-      #
-      id:                               free_emancipator_compact
-      type:                             compact
-      audio_info:                       true
-      audio_rating:                     true
-
-      playlist:
-        name:                           emancipator
-        title:                          Emancipator
-        controls:                       true
-
-    # --------------------------------------------------------------------------
-    # LARGE player, Emancipator
-    # --------------------------------------------------------------------------
-    #
-    - player:
-
-      # ------------------------------------------------------------------------
-      # GENERAL settings
-      #     
-      enabled:                          true
-
-      # ------------------------------------------------------------------------
-      # TIME settings
-      display_hours:                    false
-
-      # ------------------------------------------------------------------------
-      # CONTROL settings
-      #
-      song_progress_bar:                true
-      skip_forward_backward_button:     true
-      volume_slider:
-        enabled:                        true
-        preset_value:                   46
-
-      # ------------------------------------------------------------------------
-      # PLAYER settings
-      #
-      id:                               free_emancipator_large
-      type:                             large
-      audio_info:                       true
-      audio_rating:                     true
-
-      playlist:
-        name:                           emancipator
-        title:                          Emancipator
-        controls:                       true
-
-
-    # --------------------------------------------------------------------------
-    # LARGE player, Mimi Rutherfurt
-    # --------------------------------------------------------------------------
-    #
-    - player:
-
-      # ------------------------------------------------------------------------
-      # GENERAL settings
-      #     
-      enabled:                          true
-
-      id:                               mimi_rutherfurt_yt_large
-      type:                             large
-      source:                           video
-      display_hours:                    true
-
-      # ------------------------------------------------------------------------
-      # CONTROL settings
-      #
-      song_progress_bar:                true
-      skip_forward_backward_button:     true
-      forward_backward_skip_seconds:    60
-      volume_slider:
-        enabled:                        true
-        preset_value:                   46
-
-      # ------------------------------------------------------------------------
-      # PLUGIN settings
-      #
-      plugin_manager:
-        enabled:                        true
-        plugins:                        [ ytp ]
-
-      # ------------------------------------------------------------------------
-      # PLAYLIST settings
-      #
-      playlist:
-        name:                           mimi_rutherfurt_yt
-        title:                          Mimi Rutherfurt
-        audio_info:                     true
-        audio_rating:                   true     
-
-
-    # --------------------------------------------------------------------------
-    # LARGE player, Manon Mélodie
-    # --------------------------------------------------------------------------
-    #
-    - player:
-
-      # ------------------------------------------------------------------------
-      # GENERAL settings
-      #    
-      enabled:                          true
-
-      id:                               manon_melodie_yt_large
-      type:                             large
-      source:                           video
-      display_hours:                    false
-
-      # ------------------------------------------------------------------------
-      # CONTROL settings
-      #
-      song_progress_bar:                true
-      skip_forward_backward_button:     true
-      forward_backward_skip_seconds:    10
-      volume_slider:
-        enabled:                        true
-        preset_value:                   46
-
-      # ------------------------------------------------------------------------
-      # PLUGIN settings
-      #
-      plugin_manager:
-        enabled:                        true
-        plugins:                        [ ytp ]
-
-      # ------------------------------------------------------------------------
-      # PLAYLIST settings
-      #      
-      playlist:
-        name:                           manon_melodie_yt
-        title:                          Manon Mélodie
-        audio_info:                     true
-        audio_rating:                   true
-#       controls:                       false
 
 # ------------------------------------------------------------------------------
 # END config
