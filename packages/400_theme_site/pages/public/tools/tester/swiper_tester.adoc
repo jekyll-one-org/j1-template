@@ -63,6 +63,8 @@ resource_options:
 // -----------------------------------------------------------------------------
 {% include {{load_attributes}} scope="global" %}
 
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
 
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -72,37 +74,32 @@ hardware-accelerated features like 3D transitions to perform best on modern
 devices. SwiperJS-based sliders are intended to be displayed at their best
 on all types of websites, such as tablets or smartphones.
 
-// Include sub-documents (if any)
-// -----------------------------------------------------------------------------
-// lorem:sentences[5]
-
-// [NOTE]
-// ====
-// Swiper is not compatible with all platforms, it is a modern touch slider
-// which is focused only on modern apps/platforms to bring the best experience
-// and simplicity.
-// ====
-
 // [role="mt-4"]
-// == Text Slider
+// == Text Swiper
 
 // A slider is typically used for displaying images. Still, the implementation
 // for the J1 Template supports a lot more sources to be displayed as a slide
 // show — simple text for example.
 
 // [role="mt-4"]
-// === Base Text Carousel
+// === Base Text
 
 // Important statements or topics can be placed on top of an article or a
 // paragraph to give them better visibility. You can present facts to know
 // animated for the readers attention.
 
-// .Text Swiper
+// .Base Text Swiper
 // swiper::swiper_text_base[role="mt-4 mb-4"]
 
 
+[role="mt-5"]
+== What Swipers are
+
+lorem:sentences[5]
+
+
 [role="mt-4"]
-== Image Sliders
+== Image Swiper
 
 Sliders (or carousels) are mainly used for picture data to animate images
 as a group. Find below examples of using a simple (base) slider for your
@@ -129,7 +126,7 @@ swiper::swiper_image_base_captions[role="mt-4 mb-4"]
 
 
 [role="mt-5"]
-== Sliders using Views
+== Swiper using Views
 
 Views in the J1 Template for SwioperJS are *transformations* of a Swiper to
 rebuild it for extended *UI controls* or create a more complex visual
@@ -163,7 +160,7 @@ This Thumb Slider creates the best results for high-quality images for websites
 mainly used on *desktops*.
 ====
 
-.Extended Slider · Thums View + Captions
+.Extended Swiper · Thums View + Captions
 swiper::thumb_slider_animals[role="mt-0 mb-5"]
 
 
@@ -481,6 +478,7 @@ $(function() {
 </script>
 ++++
 
+
 [role="mt-5"]
 === Pamorama View
 
@@ -499,13 +497,13 @@ swiper::swiper_image_panorama[role="mt-4 mb-5"]
 
 
 [role="mt-5"]
-== Sliders using Layouts
+== Swiper using Layouts
 
 lorem:sentences[5]
 
 [role="mt-4"]
 [[slider_collection]]
-=== Layout Collection
+=== Layout Cards
 
 lorem:sentences[3]
 
@@ -811,7 +809,6 @@ $(function() {
 }
 */
 
-
 .expanding-collection {
   width: 100%;
   height: 100%;
@@ -901,7 +898,6 @@ $(function() {
   width: 16px;
   height: 16px;
 }
-
 
 /* slider styles
 -------------------------------------------------------------------------------- */
@@ -1037,18 +1033,10 @@ $(function() {
 </style>
 ++++
 
-/////
-[role="mt-4"]
-[[slider_post]]
-=== Layout Posts
+////
 
-lorem:sentences[5]
-/////
-
-/////
 [role="mt-4"]
-[[slider-videojs]]
-== Video Sliders
+== Video Swiper
 
 If only a *small* number of video sources should presented, the concept of
 controller based slders using Thumb Elements provide a quite *space-saving*
@@ -1314,6 +1302,7 @@ $(function() {
 });
 </script>
 ++++
-/////
+
+////
 
 

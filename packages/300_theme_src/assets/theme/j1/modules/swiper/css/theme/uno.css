@@ -1,19 +1,13 @@
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/modules/swiper/css/theme/uno.css
- # Swiper v11.2.0 (January, 2025) by Dmytro Semenov
- # Provides SwiperJS CSS styles for theme Uno
+ # Provides SwiperJS v11.2.0 (January, 2025) CSS styles for theme Uno
  # -----------------------------------------------------------------------------
  #
  # Product/Info:
- # https://swiperjs.com
  # http://jekyll.one
  #
- # Copyright (C) 2014-2025 Vladimir Kharlampidi
  # Copyright (C) 2023-2025 Juergen Adams
- #
- # SwiperJS is licensed under the MIT License.
- # See: https://github.com/nolimits4web/swiper/blob/master/LICENSE
  #
  # J1 Theme is licensed under MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
@@ -68,8 +62,18 @@
   --swiper-scrollbar-size: 4px;
 }
 
-/* Captions
+/* Titles and Captions
 -------------------------------------------------------------------- */
+.swiper-title {
+  display: flex;
+  align-items: center;
+  text-rendering: optimizeLegibility;
+  text-align: left;
+  line-height: 1.25;
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin-bottom: .5rem;
+}
 .swp-caption-content {
   display: none;
   position: absolute; 
@@ -90,10 +94,8 @@
 
 /* Components
 -------------------------------------------------------------------- */
-
-/* Remove bullet and space from UL list */
 ul.swiper-wrapper {
-  list-style-type: none;
+  list-style-type: none;  /* temove bullet and space from UL list */
   margin: 0;
   padding: 0;
   position: relative;
@@ -101,9 +103,8 @@ ul.swiper-wrapper {
 
 /* Photoswipe Lightbox
 -------------------------------------------------------------------- */
-/* override zoom cursor */
 .pswp__img {
-  cursor: pointer !important;
+  cursor: pointer !important;  /* override zoom cursor */
 }
 
 /* Slides

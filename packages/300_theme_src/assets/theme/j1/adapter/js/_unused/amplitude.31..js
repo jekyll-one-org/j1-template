@@ -348,7 +348,7 @@ j1.adapter.amplitude = ((j1, window) => {
 
       {% for player in amplitude_options.players %} {% if player.enabled %}
         {% assign xhr_data_path = amplitude_options.xhr_data_path %}
-        {% capture xhr_container_id %}{{player.id}}_app{% endcapture %}
+        {% capture xhr_container_id %}{{player.id}}_parent{% endcapture %}
 
         // load players only that are configured in current page
         //
@@ -572,7 +572,7 @@ j1.adapter.amplitude = ((j1, window) => {
           
           {% for player in amplitude_options.players %} {% if player.enabled %}
             {% assign xhr_data_path = amplitude_options.xhr_data_path %}
-            {% capture xhr_container_id %}{{player.id}}_app{% endcapture %}
+            {% capture xhr_container_id %}{{player.id}}_parent{% endcapture %}
 
             playerID              = '{{player.id}}';
             playerType            = '{{player.type}}';
@@ -1034,7 +1034,7 @@ j1.adapter.amplitude = ((j1, window) => {
                   } // END if apiInitialized
                 }, 10); // END dependencies_met_api_initialized
 
-                playerExistsInPage   = (document.getElementById('{{player.id}}_app') !== null) ? true : false;
+                playerExistsInPage   = (document.getElementById('{{player.id}}_parent') !== null) ? true : false;
                 pluginManagerEnabled = ('{{player.plugin_manager.enabled}}'.length > 0 && '{{player.plugin_manager.enabled}}' === 'true') ? true : playerDefaultPluginManager;
 
                 if (playerExistsInPage && pluginManagerEnabled && !pluginManagerRunOnce) {

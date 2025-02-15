@@ -268,7 +268,7 @@ var progress;
     // currentOptions = $.extend({}, {{amplitude_options | replace: 'nil', 'null' | replace: '=>', ':' }});
 
     {% for player in amplitude_options.players %}{% if player.enabled %}
-      {% capture xhr_container_id %}{{player.id}}_app{% endcapture %}
+      {% capture xhr_container_id %}{{player.id}}_parent{% endcapture %}
 
       playerSource = '{{player.source}}';
 
@@ -384,7 +384,7 @@ var progress;
           // -------------------------------------------------------------------
 
           // set duration|hours
-          if ({{player.display_hours}} ) {
+          if ({{player.display_hours}}) {
             var durationHours = document.getElementsByClassName("amplitude-duration-hours");
             durationHours[0].innerHTML = hours;
           }
@@ -983,9 +983,9 @@ var progress;
     if (player !== undefined && player.getPlayerState !== undefined) {
       playerState = player.getPlayerState();
       if (playerState === YT_PLAYER_STATE.PLAYING || playerState === YT_PLAYER_STATE.PAUSED || playerState === YT_PLAYER_STATE.CUED) {
-        duration  = ytpGetDuration(player);
-        d         = Number(duration);
-        m         = Math.floor(d % 3600 / 60);
+        d         = ytpGetDuration(player);
+        duration  = Number(duration);
+        m         = Math.floor(duration % 3600 / 60);
         minutes   = m.toString().padStart(2, '0');
 
         return minutes;
@@ -1003,9 +1003,9 @@ var progress;
     if (player !== undefined && player.getPlayerState !== undefined) {
       playerState = player.getPlayerState();
       if (playerState === YT_PLAYER_STATE.PLAYING || playerState === YT_PLAYER_STATE.PAUSED || playerState === YT_PLAYER_STATE.CUED ) {
-        duration  = ytpGetDuration(player);
-        d         = Number(duration);
-        s         = Math.floor(d % 60);
+        d         = ytpGetDuration(player);
+        duration  = Number(d);
+        s         = Math.floor(duration % 60);
         seconds   = s.toString().padStart(2, '0');
 
         return seconds;
@@ -1018,14 +1018,14 @@ var progress;
   // Returns the current hours the user is into the video
   // ---------------------------------------------------------------------------
   function ytpGetCurrentHours(player) {
-    var playerState, currentTime, hours, d, h;
+    var playerState, currentTime, duration, hours, d, h;
 
     if (player !== undefined && player.getPlayerState !== undefined) {
       playerState = player.getPlayerState();
       if (playerState === YT_PLAYER_STATE.PLAYING || playerState === YT_PLAYER_STATE.PAUSED || playerState === YT_PLAYER_STATE.CUED) {
         currentTime = ytpGetCurrentTime(player);
-        d           = Number(currentTime);
-        h           = Math.floor(d / 3600);
+        duration    = Number(currentTime);
+        h           = Math.floor(duration / 3600);
         hours       = h.toString().padStart(2, '0');
 
         return hours;
@@ -1038,14 +1038,14 @@ var progress;
   // Returns the current minutes the user is into the video
   // ---------------------------------------------------------------------------
   function ytpGetCurrentMinutes (player) {
-    var playerState, currentTime, minutes, d, m;
+    var playerState, currentTime, duration, minutes, d, m;
 
     if (player !== undefined && player.getPlayerState !== undefined) {
       playerState = player.getPlayerState();
       if (playerState === YT_PLAYER_STATE.PLAYING || playerState === YT_PLAYER_STATE.PAUSED || playerState === YT_PLAYER_STATE.CUED) {
         currentTime = ytpGetCurrentTime(player);
-        d           = Number(currentTime);
-        m           = Math.floor(d % 3600 / 60);
+        duration    = Number(currentTime);
+        m           = Math.floor(duration % 60);
         minutes     = m.toString().padStart(2, '0');
 
         return minutes;
@@ -1058,14 +1058,14 @@ var progress;
   // Returns the current seconds the user is into the video
   // ---------------------------------------------------------------------------
   function ytpGetCurrentSeconds(player) {
-    var playerState, currentTime, seconds, d, s;
+    var playerState, currentTime, duration, seconds, d, s;
 
     if (player !== undefined && player.getPlayerState !== undefined) {
       playerState = player.getPlayerState();
       if (playerState === YT_PLAYER_STATE.PLAYING || playerState === YT_PLAYER_STATE.PAUSED || playerState === YT_PLAYER_STATE.CUED ) {
         currentTime = ytpGetCurrentTime(player);
-        d           = Number(currentTime);
-        s           = Math.floor(d % 60);
+        duration    = Number(currentTime);
+        s           = Math.floor(duration % 60);
         seconds     = s.toString().padStart(2, '0');
 
         return seconds;
@@ -1498,7 +1498,7 @@ var progress;
 
             var playlist        = this.getAttribute("data-amplitude-playlist");
             var playerID        = playlist + '_large';
-            // var ytpSongIndex    = parseInt(this.getAttribute("data-amplitude-song-index"));
+//          var ytpSongIndex    = parseInt(this.getAttribute("data-amplitude-song-index"));
             var songs           = j1.adapter.amplitude.data.ytPlayers[playerID].songs;
 
             // update global song index
@@ -1596,8 +1596,8 @@ var progress;
       if (progressBars.length) {
         for (var i=0; i<progressBars.length; i++) {
           var progressBar = progressBars[i];
-          //        var id          = bar.id.split('large-player-progress_')[0];
-          //        var progressId  = progressBars[i].id.split('large-player-progress_')[0];
+//        var id          = bar.id.split('large-player-progress_')[0];
+//        var progressId  = progressBars[i].id.split('large-player-progress_')[0];
           var progressId  = progressBars[i].id;
           var playerId    = progressId.split('large_player_progress_')[1];
 

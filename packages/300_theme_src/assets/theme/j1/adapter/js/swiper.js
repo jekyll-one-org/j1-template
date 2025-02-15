@@ -42,7 +42,7 @@ regenerate:                             true
 {% comment %} Set config data (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign swiper_defaults       = modules.defaults.swiper.defaults %}
-{% assign swiper_settings       = modules.swiper.settings %}
+{% assign swiper_settings       = modules.swiper_app.settings %}
 
 {% comment %} Set config options (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -179,7 +179,7 @@ j1.adapter.swiper = ((j1, window) => {
           // initialize the swiper if the HTML portion of the slider is successfully loaded
           load_dependencies['dependencies_met_html_loaded_{{swiper.id}}'] = setInterval (() => {
             // check if HTML portion of the swiper is loaded successfully
-            xhrLoadState = j1.xhrDOMState['#{{swiper.id}}_parent'];
+            xhrLoadState = j1.xhrDOMState['#{{swiper.id}}_app'];
             if (xhrLoadState === 'success') {
 
               logger.info ('\n' + 'HTML portion loaded for swiper on id: ' + '{{swiper.id}}');
@@ -338,7 +338,7 @@ j1.adapter.swiper = ((j1, window) => {
       _this.setState('load_data');
       Object.keys(carousel).forEach ((key) => {
         if (carousel[key].enabled) {
-          xhr_container_id = carousel[key].id + '_parent';
+          xhr_container_id = carousel[key].id + '_app';
 
           // console.debug('load HTML data on carousel id: ' + carousel[key].id);
           j1.loadHTML({

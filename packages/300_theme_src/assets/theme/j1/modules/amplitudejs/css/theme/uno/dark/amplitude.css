@@ -101,10 +101,14 @@
 /* General styles
 # ------------------------------------------------------------------------------ */
 
+/* Links
+-------------------------------------------------------------------- */
 a {
   border-bottom: unset;
 }
 
+/* Cover Images
+-------------------------------------------------------------------- */
 .album-cover-image {
   display: block;
   /* max-height: 500px; */
@@ -112,6 +116,8 @@ a {
   /* object-fit: cover; */
 }
 
+/* Players
+-------------------------------------------------------------------- */
 .amplitude-player {
   max-width: max-content;
 }
@@ -120,7 +126,9 @@ a {
   max-width: max-content;
 }
 
-.player-title {
+/* Titles and Captions
+-------------------------------------------------------------------- */
+.amplitude-title {
   display: flex;
   align-items: center;
   text-rendering: optimizeLegibility;

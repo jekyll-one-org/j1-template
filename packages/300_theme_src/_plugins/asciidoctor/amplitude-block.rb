@@ -38,12 +38,12 @@ Asciidoctor::Extensions.register do
 
     def process parent, target, attributes
 
-      title_html = (attributes.has_key? 'title') ? %(<div class="player-title"> <i class="mdib mdib-ear-hearing mdib-24px mr-2"></i> #{attributes['title']} </div>\n) : nil
+      title_html = (attributes.has_key? 'title') ? %(<div class="amplitude-title"> <i class="mdib mdib-ear-hearing mdib-24px mr-2"></i> #{attributes['title']} </div>\n) : nil
 
       html = %(
         <div class="audioblock #{attributes['role']}">
           #{title_html}
-          <div id="#{target}_parent" class="amplitude-player"></div>
+          <div id="#{target}_app" class="amplitude-player"></div>
           <div id="#{target}_video" class="yt-player"></div>
         </div>
       )
