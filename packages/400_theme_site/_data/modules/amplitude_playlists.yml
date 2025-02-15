@@ -60,7 +60,7 @@ settings:
           title:                        En Volant Haut                          # Hoch hinaus
           audio:                        watch?v=5NiMGeQOzKQ
           rating:                       2
-          audio_info:                   https://www.youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
+          audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/5NiMGeQOzKQ/maxresdefault.jpg
           duration:                     "02:47"
 
@@ -71,7 +71,7 @@ settings:
           title:                        Anno du Soleil                          # Jahr der Sonne
           audio:                        watch?v=pCXSGCBSIG0
           rating:                       3
-          audio_info:                   https://www.youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
+          audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/pCXSGCBSIG0/maxresdefault.jpg
           duration:                     "02:53"
 
@@ -82,7 +82,7 @@ settings:
           title:                        La Fête du cœur                         # Das Fest des Herzens
           audio:                        watch?v=fFn1GZIYC4Y
           rating:                       3
-          audio_info:                   https://www.youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
+          audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/fFn1GZIYC4Y/maxresdefault.jpg
           duration:                     "02:32"
 
@@ -93,7 +93,7 @@ settings:
           title:                        Fleur de Printemps                      # Frühlingsblume
           audio:                        watch?v=OUjHRpNUqyw
           rating:                       3
-          audio_info:                   https://www.youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
+          audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/OUjHRpNUqyw/maxresdefault.jpg
           duration:                     "02:57"
 
@@ -104,7 +104,7 @@ settings:
           title:                        Cote d'Azur                             # Cote d'Azur
           audio:                        watch?v=9Z9yNpsiBKs
           rating:                       3
-          audio_info:                   https://www.youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
+          audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/9Z9yNpsiBKs/maxresdefault.jpg
           duration:                     "02:42"
 
@@ -115,7 +115,7 @@ settings:
           title:                        Les Échos du Passé                      # Echos der Vergangenheit          
           audio:                        watch?v=_EYc5W3qy4s
           rating:                       4
-          audio_info:                   https://www.youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
+          audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/_EYc5W3qy4s/maxresdefault.jpg
           duration:                     "03:03"
 
@@ -126,7 +126,7 @@ settings:
           title:                        Les Souvenirs                           # Die Erinnerungen
           audio:                        watch?v=i8ltW0WDcdQ
           rating:                       3
-          audio_info:                   https://www.youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
+          audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/i8ltW0WDcdQ/maxresdefault.jpg
           duration:                     "02:19"
 
@@ -137,7 +137,7 @@ settings:
           title:                        La Vie en Dance                         # Leben im Tanz
           audio:                        watch?v=yttS9UNgZFk
           rating:                       3
-          audio_info:                   https://www.youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
+          audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/yttS9UNgZFk/maxresdefault.jpg
           duration:                     "02:45"
 

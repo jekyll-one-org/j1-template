@@ -1,7 +1,7 @@
 ---
-title:                                  Amplitude YT Tester
-title_extention:                        YT Video Integration
-tagline:                                YT Video Integration
+title:                                  Amplitude YTP
+title_extention:                        YouTube Video Integration
+tagline:                                YouTube Video Integration
 
 date:                                   2024-09-21
 #last_modified:                         2024-01-01
@@ -159,17 +159,18 @@ endif::[]
 
 ifeval::[{ytp--audio-player} == true]
 [role="mt-5"]
-== Amplitude YT Player
+== Amplitude YouTube Player
 
 The example below demonstrates playing only the *Audio* track from YouTube
-Video using an AmplitudJS player. The J1 template uses the video *plugin* ytp
-to extend the native functionality of the AmplitudeJS API to playback YouTube
-files for the audio part.
+Video using an *AmplitudJS* player. The J1 template uses the video plugin
+*ytp* to *extend* the native functionality of the AmplitudeJS API to playback
+YouTube files *only* for the *audio* track.
 
 [role="mt-4 mb-5"]
 [TIP]
 ====
-Find complete playlist for the example of Manon Mélodie on link:{manon-melodie--playlist}[YouTube, {browser-window--new}].
+Find the complete *playlist* for Manon Mélodie on
+link:{manon-melodie--playlist}[YouTube, {browser-window--new}].
 ====
 
 [role="mt-4"]
