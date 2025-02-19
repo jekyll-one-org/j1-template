@@ -6,7 +6,7 @@
  #  Product/Info:
  #  http://jekyll.one
  #
- #  Copyright (C) 2023, 2024 Juergen Adams
+ #  Copyright (C) 2023-2025 Juergen Adams
  #
  #  J1 Theme is licensed under MIT License.
  #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
@@ -31,7 +31,7 @@
 // -----------------------------------------------------------------------------
 /*!
  * J1 Asciidoctor
- * Copyright (C) 2023, 2024 Juergen Adams
+ * Copyright (C) 2023-2025 Juergen Adams
  * Licensed under MIT License.
  */
 module.exports = function asciidoctor (options) {

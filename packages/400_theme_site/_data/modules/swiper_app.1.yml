@@ -1,0 +1,607 @@
+# ------------------------------------------------------------------------------
+# ~/_data/modules/swiper.yml
+# Application settings for the J1 Swiper App
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2023-2025 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+# -----------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# Description
+#
+description:
+  title:                                J1 Swiper
+  scope:                                User App settings
+  location:                             _data/modules/swiper_app.yml
+
+# ------------------------------------------------------------------------------
+# User App configuration settings
+#
+settings:
+
+  apps:
+
+    # ==========================================================================
+    # TEXT Sliders
+    # --------------------------------------------------------------------------
+
+    # --------------------------------------------------------------------------
+    # TEXT Base Slider
+    #
+    - app:
+
+      # ------------------------------------------------------------------------
+      # APP General settings
+      #
+      enabled:                          false
+
+      id:                               swiper_text_base
+      layout:                           text_base
+      playlist:                         text_playlist
+      swiper_container_classes:         swiper--text
+
+      # ------------------------------------------------------------------------
+      # SWIPER Core Settings
+      #      
+      parameters:    
+        loop:                           true
+
+      # ------------------------------------------------------------------------
+      # SWIPER Module settings
+      #
+      module_settings:
+        autoplay:
+          delay:                        3000
+          pauseOnMouseEnter:            true
+          disableOnInteraction:         false      
+
+      # ------------------------------------------------------------------------
+      # SWIPER Event Settings
+      #
+      # events:
+      #   init: >
+      #                                   function (swiper) {
+      #                                     // do something on initialization
+      #                                     console.log ('\n' + 'Entered event: init');
+      #                                   }
+      #   afterInit: >
+      #                                   function (swiper) {
+      #                                     // do something after initialization
+      #                                     console.log ('\n' + 'Entered event: afterInit');
+      #                                   }
+
+
+    # ==========================================================================
+    # IMAGE Sliders
+    # --------------------------------------------------------------------------
+
+    # --------------------------------------------------------------------------
+    # IMAGE Slider - Captions + Pagination
+    #
+    - app:
+
+      # ------------------------------------------------------------------------
+      # APP General settings
+      #      
+      enabled:                          true
+
+      id:                               image_base_captions
+      layout:                           image_base
+      playlist:                         mega_cities_1
+      container_classes:                false
+      wrapper_classes:                  false                                   # "margin-bottom: 3.75rem;"
+
+      # ------------------------------------------------------------------------
+      # LIGHTBOX options
+      #
+      lightbox:
+        enabled:                        true
+
+        # ----------------------------------------------------------------------
+        # LIGHTBOX caption settings
+        #
+        captions:
+          enabled:                      true
+
+          css_class:                    pswp-caption-content
+
+        # ----------------------------------------------------------------------
+        # LIGHTBOX Core Parameters
+        #
+        parameters:
+          children:                     a
+          bgOpacity:                    1
+          showHideOpacity:              true
+          loop:                         true
+          wheelToZoom:                  true
+          showHideAnimationType:        zoom
+          imageClickAction:             next
+          tapAction:                    next
+          padding:                      { top: 0, bottom: 0, left: 80, right: 80 }
+
+        # ----------------------------------------------------------------------
+        # LIGHTBOX User Interface controls
+        #
+        ui_controls:
+          zoom:                         false
+          close:                        true
+          counter:                      true
+          arrowKeys:                    false
+
+        # ----------------------------------------------------------------------
+        # LIGHTBOX Keyboard controls
+        #
+        kbd_controls:
+          escKey:                       true
+
+      # ------------------------------------------------------------------------
+      # SWIPER Caption settings
+      #
+      captions:                             
+        enabled:                        true
+
+        css_class:                      swp-caption-content
+
+      # ------------------------------------------------------------------------
+      # SWIPER Core Settings
+      #      
+      parameters:
+        autoHeight:                     true
+        slidesPerView:                  2
+        slidesPerGroup:                 2
+        spaceBetween:                   5
+
+      # ------------------------------------------------------------------------
+      # SWIPER Module settings
+      #
+      module_settings:
+        pagination:
+          el:                           .swiper-pagination
+          type:                         bullets
+          clickable:                    true
+
+      # ------------------------------------------------------------------------
+      # SWIPER Event Settings
+      #
+      events:
+        init: >
+                                        function (swiper) { var slideHeight = 300; swiper.slides.forEach(slide => { slide.style.height = `${slideHeight}px`; }); }
+
+    # --------------------------------------------------------------------------
+    # IMAGE Slider - Captions + Pagination + Lightbox
+    #
+    - app:
+
+      # ------------------------------------------------------------------------
+      # APP General settings
+      #      
+      enabled:                          true
+      type:                             image
+
+      id:                               swiper_image_base_lightbox
+      layout:                           image_base
+      playlist:                         free_animals
+      container_classes:                false
+      wrapper_classes:                  false
+
+      # ------------------------------------------------------------------------
+      # LIGHTBOX options
+      #
+      lightbox:
+        enabled:                        true
+
+        # ----------------------------------------------------------------------
+        # LIGHTBOX caption settings
+        #
+        captions:
+          enabled:                      true
+
+          css_class:                    pswp-caption-content
+
+        # ----------------------------------------------------------------------
+        # LIGHTBOX Core Parameters
+        #
+        parameters:
+          children:                     a
+          bgOpacity:                    1
+          showHideOpacity:              true
+          loop:                         true
+          wheelToZoom:                  true
+          showHideAnimationType:        zoom
+          imageClickAction:             next
+          tapAction:                    next
+          padding:                      { top: 0, bottom: 0, left: 80, right: 80 }
+
+        # ----------------------------------------------------------------------
+        # LIGHTBOX User Interface controls
+        #
+        ui_controls:
+          zoom:                         false
+          close:                        true
+          counter:                      true
+          arrowKeys:                    false
+
+        # ----------------------------------------------------------------------
+        # LIGHTBOX Keyboard controls
+        #
+        kbd_controls:
+          escKey:                       true
+
+      # ------------------------------------------------------------------------
+      # SWIPER Caption settings
+      #
+      captions:                             
+        enabled:                        true
+
+        css_class:                      swp-caption-content
+
+      # ------------------------------------------------------------------------
+      # SWIPER Core Settings
+      #      
+      parameters:
+        autoHeight:                     true
+        slidesPerView:                  2
+        slidesPerGroup:                 2
+        spaceBetween:                   5
+
+      # ------------------------------------------------------------------------
+      # SWIPER Module settings
+      #
+      module_settings:
+        pagination:
+          el:                           .swiper-pagination
+          type:                         bullets
+          clickable:                    true
+
+      # ------------------------------------------------------------------------
+      # SWIPER Event Settings
+      #
+      events:
+        init: >
+                                        function (swiper) { var slideHeight = 300; swiper.slides.forEach(slide => { slide.style.height = `${slideHeight}px`; }); }
+
+    # --------------------------------------------------------------------------
+    # IMAGE Slider - Thumb View
+    #
+    - app:
+
+      # ------------------------------------------------------------------------
+      # APP General settings
+      #      
+      enabled:                          true
+
+      id:                               thumb_slider_animals
+      layout:                           image_base
+      playlist:                         free_animals
+      container_classes:                false
+      wrapper_classes:                  false                                   # "height: 300px; padding: 14px 0;"
+
+      # ------------------------------------------------------------------------
+      # LIGHTBOX options
+      #
+      lightbox:
+        enabled:                        false
+
+        # ----------------------------------------------------------------------
+        # LIGHTBOX caption settings
+        #
+        captions:
+          enabled:                      true
+
+          css_class:                    pswp-caption-content
+
+        # ----------------------------------------------------------------------
+        # LIGHTBOX Core Parameters
+        #
+        parameters:
+          children:                     a
+          bgOpacity:                    1
+          showHideOpacity:              true
+          loop:                         true
+          wheelToZoom:                  true
+          showHideAnimationType:        zoom
+          imageClickAction:             next
+          tapAction:                    next
+          padding:                      { top: 0, bottom: 0, left: 80, right: 80 }
+
+        # ----------------------------------------------------------------------
+        # LIGHTBOX User Interface controls
+        #
+        ui_controls:
+          zoom:                         false
+          close:                        true
+          counter:                      true
+          arrowKeys:                    false
+
+        # ----------------------------------------------------------------------
+        # LIGHTBOX Keyboard controls
+        #
+        kbd_controls:
+          escKey:                       true
+
+      # ------------------------------------------------------------------------
+      # SWIPER Caption settings
+      #
+      captions:                             
+        enabled:                        true
+
+        css_class:                      swp-caption-content
+
+      # ------------------------------------------------------------------------
+      # SWIPER Module settings
+      #
+      module_settings:
+        modules:                        [ EffectThumbs ]                        # Swiper modules for J1 are to specied (to be loaded)
+        thumbs:
+          speed:                        1000
+          main_slider_id:               thumb_slider_animals                    # should ALWAYS an id (NOT a class)
+          autoHeight:                   true
+          grabCursor:                   true
+          placement:                    top
+          spaceBetween:                 5
+          slidesPerView:                3
+
+    # --------------------------------------------------------------------------
+    # IMAGE Slider - Panorama View
+    #
+    - app:
+
+      # ------------------------------------------------------------------------
+      # APP General settings
+      #      
+      enabled:                          true
+
+      id:                               swiper_image_panorama
+      layout:                           image_base
+      playlist:                         panorama
+      container_classes:                false
+      wrapper_classes:                  "height: 240px; padding: 14px 0;"
+
+      # ------------------------------------------------------------------------
+      # LIGHTBOX options
+      #
+      lightbox:
+        enabled:                        false
+
+        # ----------------------------------------------------------------------
+        # LIGHTBOX caption settings
+        #
+        captions:
+          enabled:                      true
+
+          css_class:                    pswp-caption-content
+
+        # ----------------------------------------------------------------------
+        # LIGHTBOX Core Parameters
+        #
+        parameters:
+          children:                     a
+          bgOpacity:                    1
+          showHideOpacity:              true
+          loop:                         true          
+          effect:                       fade
+          fadeEffect:                   { crossFade: true }
+          wheelToZoom:                  true
+          showHideAnimationType:        zoom
+          imageClickAction:             next
+          tapAction:                    next
+          padding:                      { top: 0, bottom: 0, left: 80, right: 80 }
+
+        # ----------------------------------------------------------------------
+        # LIGHTBOX User Interface controls
+        #
+        ui_controls:
+          zoom:                         false
+          close:                        true
+          counter:                      true
+          arrowKeys:                    false
+
+        # ----------------------------------------------------------------------
+        # LIGHTBOX Keyboard controls
+        #
+        kbd_controls:
+          escKey:                       true
+
+      # ------------------------------------------------------------------------
+      # SWIPER Caption settings
+      #
+      captions:                             
+        enabled:                        false
+
+        css_class:                      swp-caption-content
+
+      # ------------------------------------------------------------------------
+      # SWIPER Core Settings
+      #      
+      parameters:
+        effect:                         panorama
+        slidesPerView:                  1.5
+        loop:                           true
+        loopAdditionalSlides:           1
+        centeredSlides:                 true
+        grabCursor:                     true
+        breakpoints: {
+                                        480: {
+                                          slidesPerView: 2,
+                                          panoramaEffect: {
+                                            rotate: 35,
+                                            depth: 150,
+                                          },
+                                        },
+                                        640: {
+                                          slidesPerView: 3,
+                                          panoramaEffect: {
+                                            rotate: 30,
+                                            depth: 150,
+                                          },
+                                        },
+                                        1024: {
+                                          slidesPerView: 4,
+                                          panoramaEffect: {
+                                            rotate: 30,
+                                            depth: 200,
+                                          },
+                                        },
+                                        1200: {
+                                          slidesPerView: 4,
+                                          panoramaEffect: {
+                                            rotate: 25,
+                                            depth: 250,
+                                          },
+                                        }
+        }
+
+      # ------------------------------------------------------------------------
+      # SWIPER Module settings
+      #
+      module_settings:
+        modules:                        [ EffectPanorama ]
+        panorama:
+          on_click:                     next                                    # false | next
+          depth:                        200
+          rotate:                       30
+
+    # --------------------------------------------------------------------------
+    # IMAGE Slider - Neigbor View
+    #
+    - app:
+
+      # ------------------------------------------------------------------------
+      # APP General settings
+      #      
+      enabled:                          true
+
+      id:                               swiper_image_neighbor
+      layout:                           image_base
+      playlist:                         neighbor
+      container_classes:                false
+      wrapper_classes:                  "height: 300px; padding: 14px 0;"
+
+      # ------------------------------------------------------------------------
+      # LIGHTBOX options
+      #
+      lightbox:
+        enabled:                        false
+
+        # ----------------------------------------------------------------------
+        # LIGHTBOX caption settings
+        #
+        captions:
+          enabled:                      true
+
+          css_class:                    pswp-caption-content
+
+        # ----------------------------------------------------------------------
+        # LIGHTBOX Core Parameters
+        #
+        parameters:
+          children:                     a
+          bgOpacity:                    1
+          showHideOpacity:              true
+          loop:                         true
+          wheelToZoom:                  true
+          showHideAnimationType:        zoom
+          imageClickAction:             next
+          tapAction:                    next
+          padding:                      { top: 0, bottom: 0, left: 80, right: 80 }
+
+        # ----------------------------------------------------------------------
+        # LIGHTBOX USER INTERFACE controls
+        #
+        ui_controls:
+          zoom:                         false
+          close:                        true
+          counter:                      true
+          arrowKeys:                    false
+
+        # ----------------------------------------------------------------------
+        # LIGHTBOX Keyboard controls
+        #
+        kbd_controls:
+          escKey:                       true
+
+      # ------------------------------------------------------------------------
+      # SWIPER Caption settings
+      #
+      captions:                             
+        enabled:                        false
+
+        css_class:                      swp-caption-content
+
+      # ------------------------------------------------------------------------
+      # SWIPER Core Settings
+      #      
+      parameters:
+        slidesPerView:                  1.3
+        loop:                           true
+        loopAdditionalSlides:           1
+        centeredSlides:                 true
+        grabCursor:                     true
+
+      # ------------------------------------------------------------------------
+      # SWIPER Module settings
+      #
+      module_settings:
+        modules:                        [ EffectPanorama ]
+
+    # --------------------------------------------------------------------------
+    # IMAGE Slider - Card Layout
+    #
+    - app:
+
+      # ------------------------------------------------------------------------
+      # APP General settings
+      #      
+      enabled:                          false
+
+      id:                               image_cards
+      layout:                           image_cards
+      playlist:                         card_images
+      container_classes:                false
+      wrapper_classes:                  false
+
+    # ==========================================================================
+    # AUDIO Sliders
+    # --------------------------------------------------------------------------
+
+    # AUDIO Slider - MP3
+    #
+    - app:
+
+      # ------------------------------------------------------------------------
+      # APP General settings
+      #      
+      enabled:                          false
+
+      id:                               audio_mp3
+      layout:                           audio_base
+      playlist:                         mp3_audio
+      container_classes:                false
+      wrapper_classes:                  false
+
+    # ==========================================================================
+    # VIDEO Sliders
+    # --------------------------------------------------------------------------
+
+    # VIDEO Slider - YouTube
+    #
+    - app:
+
+      # ------------------------------------------------------------------------
+      # APP General settings
+      #      
+      enabled:                          false
+
+      id:                               video_youtube
+      layout:                           video_base
+      playlist:                         youtube_video
+      container_classes:                false
+      wrapper_classes:                  false
+
+# ------------------------------------------------------------------------------
+# END config

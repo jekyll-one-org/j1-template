@@ -1,11 +1,11 @@
 # ------------------------------------------------------------------------------
 # ~/_data/modules/swiper.yml
-# User configuration settings for J1 Swiper Sliders
+# Application settings for the J1 Swiper App
 #
 # Product/Info:
 # https://jekyll.one
 #
-# Copyright (C) 2023, 2024 Juergen Adams
+# Copyright (C) 2023-2025 Juergen Adams
 #
 # J1 Template is licensed under the MIT License.
 # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
@@ -16,21 +16,16 @@
 #
 description:
   title:                                J1 Swiper
-  scope:                                User settings
-  location:                             _data/modules/swiper.yml
+  scope:                                User App settings
+  location:                             _data/modules/swiper_app.yml
 
 # ------------------------------------------------------------------------------
-# User configuration settings
+# User App configuration settings
 #
 settings:
 
-  # ----------------------------------------------------------------------------
-  # GLOBAL settings
-  # ----------------------------------------------------------------------------
-  enabled:                              true
-
-  # ----------------------------------------------------------------------------
-  # SLIDER settings
+  # ============================================================================
+  # APP configurations
   # ----------------------------------------------------------------------------
   sliders:
 

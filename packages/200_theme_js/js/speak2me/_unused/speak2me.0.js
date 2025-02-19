@@ -7,7 +7,7 @@
  # https://jekyll.one
  # https://github.com/acoti/articulate.js/tree/master
  #
- # Copyright (C) 2023, 2024 Juergen Adams
+ # Copyright (C) 2023-2025 Juergen Adams
  # Copyright (C) 2017 Adam Coti
  #
  # J1 Template is licensed under the MIT License.

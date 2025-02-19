@@ -7,8 +7,8 @@ exclude_from_search:                    true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/data/carousel.json
- # Liquid JSON template for ALL Swiper sliders configured
+ # ~/assets/data/swiper_app.json
+ # Liquid JSON template for ALL Swiper apps configured
  #
  # Product/Info:
  # http://jekyll.one
@@ -18,6 +18,7 @@ exclude_from_search:                    true
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
+ #
  # The Liquid template sliders.json is used by J1 Slider (Owl Carousel).
  # This template is a helper that creates the carousel (JSON) data
  # for all sliders configured (if enabled or NOT). It's used by
@@ -45,15 +46,16 @@ exclude_from_search:                    true
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment         = site.environment %}
+{% assign environment       = site.environment %}
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign modules             = site.data.modules %}
+{% assign modules           = site.data.modules %}
 
-{% comment %} Set config data (swiper settings only)
+{% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign slider_settings     = modules.swiper.settings.sliders %}
+{% assign swiper_defaults   = modules.defaults.swiper_app.defaults %}
+{% assign slider_settings   = modules.swiper.settings.sliders %}
 
 
 {% comment %} Detect prod mode
@@ -76,9 +78,10 @@ exclude_from_search:                    true
 }
 
 {% endcapture %}
+
 {% if production %}
   {{ cache | minifyJSON }}
 {% else %}
   {{ cache | strip_empty_lines }}
 {% endif %}
-{% assign cache = false%}
+{% assign cache = false %}

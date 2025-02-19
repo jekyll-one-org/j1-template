@@ -9,7 +9,7 @@
  # https://jekyll.one
  # http://www.vxk.cz/tips/2017/05/18/netlify-cms/
  #
- # Copyright (C) 2023, 2024 Juergen Adams
+ # Copyright (C) 2023-2025 Juergen Adams
  # Copyright (C) 2020 Václav Klecanda
  #
  # J1 Template is licensed under the MIT License.

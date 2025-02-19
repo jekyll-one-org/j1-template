@@ -1,5 +1,5 @@
 ---
-title:                                  Amplitude YTP
+title:                                  J1 Amplitude App
 title_extention:                        YouTube Video Integration
 tagline:                                YouTube Video Integration
 
@@ -17,7 +17,7 @@ keywords: >
                                         quicktime, silverlight
 
 categories:                             [ Tester ]
-tags:                                   [ Audio, Amplitude YT ]
+tags:                                   [ Audio, Amplitude App, YouTube ]
 
 image:
   path:                                 /assets/image/modules/attics/markus-spiske-1920x1280.jpg
@@ -27,7 +27,7 @@ image:
 compress:                               false
 regenerate:                             false
 personalization:                        true
-permalink:                              /pages/public/tools/tester/amplitude_yt/
+permalink:                              /pages/public/tools/tester/amplitude_app_yt/
 
 resources:                              [ amplitudejs ]
 resource_options:

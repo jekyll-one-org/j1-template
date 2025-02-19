@@ -8,7 +8,7 @@
  #  https://tscanlin.github.io/tocbot
  #  https://github.com/tscanlin/tocbot
  #
- #  Copyright (C) 2023, 2024 Juergen Adams
+ #  Copyright (C) 2023-2025 Juergen Adams
  #  Copyright (C) 2016 Tim Scanlin
  #
  #  J1 Theme is licensed under MIT License.

@@ -1,26 +1,25 @@
 ---
-title:                                  SwiperJS
+title:                                  J1 Swiper App
 title_extention:                        Selected Examples
 tagline:                                Selected Examples
-
 date:                                   2025-02-10
 #last_modified:                         2025-01-01
 
 description: >
-                                        SwiperJS is an API that creates modern slider shows.
-                                        All sliders use hardware-accelerated features like
-                                        3D transitions to perform best on modern devices.
-                                        SwiperJS-based sliders are intended to be displayed
-                                        at their best on all types of websites, es such
-                                        as tablets or smartphones.
+                                        SwiperJS is a Javascript API that creates modern
+                                        slider shows. All sliders use hardware-accelerated
+                                        features like 3D transitions to perform best on modern
+                                        devices. SwiperJS-based sliders are intended to be
+                                        displayed at their best on all types of websites, such
+                                        as those viewed on desktop computers, tablets, or
+                                        smartphones.
 keywords: >
                                         open source, free, template, jekyll, jekyllone, web,
                                         sites, static, jamstack, bootstrap,
-                                        html, html5, video, support, flash player,
-                                        quicktime, silverlight
+                                        html, html5, sliders, carousels, SwiperJS
 
 categories:                             [ Tester ]
-tags:                                   [ Swiper ]
+tags:                                   [ Swiper App ]
 
 image:
   path:                                 /assets/image/modules/attics/markus-spiske-1920x1280.jpg
@@ -30,7 +29,7 @@ image:
 compress:                               false
 regenerate:                             false
 personalization:                        true
-permalink:                              /pages/public/tools/tester/swiper/
+permalink:                              /pages/public/tools/tester/swiper_app/
 
 resources:                              [ photoswipe, swiper, videojs ]
 resource_options:
@@ -69,10 +68,11 @@ resource_options:
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [role="dropcap"]
-SwiperJS is an API that creates modern slider shows. All sliders use
-hardware-accelerated features like 3D transitions to perform best on modern
-devices. SwiperJS-based sliders are intended to be displayed at their best
-on all types of websites, such as tablets or smartphones.
+SwiperJS is a Javascript API that creates modern slider shows. All sliders
+use hardware-accelerated features like 3D transitions to perform best on modern
+devices. SwiperJS-based sliders are intended to be displayed at their best on
+all types of websites, such as those viewed on desktop computers, tablets, or
+smartphones.
 
 // [role="mt-4"]
 // == Text Swiper
@@ -93,13 +93,13 @@ on all types of websites, such as tablets or smartphones.
 
 
 [role="mt-5"]
-== What Swipers are
+== What Swiper Apps are
 
 lorem:sentences[5]
 
 
 [role="mt-4"]
-== Image Swiper
+== Image Swiper App
 
 Sliders (or carousels) are mainly used for picture data to animate images
 as a group. Find below examples of using a simple (base) slider for your
@@ -126,7 +126,7 @@ swiper::swiper_image_base_captions[role="mt-4 mb-4"]
 
 
 [role="mt-5"]
-== Swiper using Views
+== Swiper Apps using Views
 
 Views in the J1 Template for SwioperJS are *transformations* of a Swiper to
 rebuild it for extended *UI controls* or create a more complex visual
@@ -137,7 +137,7 @@ of a slideshow more *interesting*.
 
 [role="mt-4"]
 [[image_thumb_silder]]
-=== Thumbs View
+=== Thumb View
 
 To give the users a more *visual* control over a slideshow, Swiper sliders
 can provide *UI elements* by placing minified images or text elements (thumbs)
@@ -146,7 +146,7 @@ examples how to control such sliders' by a thumb (slave) silder.
 
 [role="mt-4"]
 [[image_thumbs_top_bottom]]
-==== Thumb Slider (top|bottom)
+==== Thumb View top|bottom
 
 This Thumb Slider uses minified images that are placed to control the (main)
 slider at the *top* or the *bottom*. This swiper type creates a thumbed Swiper
@@ -160,17 +160,18 @@ This Thumb Slider creates the best results for high-quality images for websites
 mainly used on *desktops*.
 ====
 
-.Extended Swiper · Thums View + Captions
+.Thumb View top · Captions
 swiper::thumb_slider_animals[role="mt-0 mb-5"]
 
 
 [role="mt-5"]
 [[image_thumbs_right_left]]
-==== Thumbs Slider (right|left) + Captions + Lightbox
+==== Thumb View right|left
 
-A more *mobile-friendly* version of a Thunbs Slider is created by placing the
-minified images on the slider's *right* or *left* side. This swiper uses a
-*single lane*, but *minifies* the presented images.
+A more *mobile-friendly* version of a Thunb Slider is created by placing the
+minified images for the slider on the *right* or the *left*. This swiper use
+just a *single lane* in the page, but *minifies* the presented images as
+required for the lane *heigth* specified.
 
 [role="mb-5"]
 [TIP]
@@ -180,7 +181,7 @@ presented *images*.
 ====
 
 ++++
-<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Thumbs View · Position Right + Captions + Lightbox </div>
+<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Thumb View right · Captions </div>
 <div class="container g-0 mb-5">
     <div class="row gx-1">
 
@@ -497,7 +498,7 @@ swiper::swiper_image_panorama[role="mt-4 mb-5"]
 
 
 [role="mt-5"]
-== Swiper using Layouts
+== Swiper Apps using Layouts
 
 lorem:sentences[5]
 
@@ -1033,10 +1034,15 @@ $(function() {
 </style>
 ++++
 
-////
 
-[role="mt-4"]
-== Video Swiper
+[role="mt-5"]
+== Audio Swiper Apps
+
+lorem:sentences[5]
+
+
+[role="mt-5"]
+== Video Swiper Apps
 
 If only a *small* number of video sources should presented, the concept of
 controller based slders using Thumb Elements provide a quite *space-saving*
@@ -1046,6 +1052,8 @@ The J1 template system uses VideoJS to enable *mixed* video sliders. VideoJS
 for J1 supports VJS plugins for local Video like MP4 files or platforms like
 YouTube, Vimeo, or Dailymotion to play video *sources* from *different*
 providers.
+
+////
 
 ++++
 <div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Video Slider · Mixed Sources + Captions</div>
@@ -1304,5 +1312,3 @@ $(function() {
 ++++
 
 ////
-
-

@@ -41,7 +41,7 @@ regenerate:                             true
 
 {% comment %} Set config data (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign swiper_defaults       = modules.defaults.swiper.defaults %}
+{% assign swiper_defaults       = modules.defaults.swiper_app.defaults %}
 {% assign swiper_settings       = modules.swiper_app.settings %}
 
 {% comment %} Set config options (settings only)

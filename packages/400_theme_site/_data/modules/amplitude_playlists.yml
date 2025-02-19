@@ -5,7 +5,7 @@
 # Product/Info:
 # https://jekyll.one
 #
-# Copyright (C) 2023, 2024 Juergen Adams
+# Copyright (C) 2023-2025 Juergen Adams
 #
 # J1 Template is licensed under the MIT License.
 # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
@@ -16,7 +16,7 @@
 #
 description:
   title:                                AmplitudeJS
-  scope:                                User settings (PLAYLIST<S) 
+  scope:                                User Playlist settings
   location:                             _data/modules/amplitude_playlists.yml
 
 # ------------------------------------------------------------------------------
@@ -161,8 +161,8 @@ settings:
         cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
 
       # ------------------------------------------------------------------------
-      # TITLE settings (songs)
-      # ------------------------------------------------------------------------
+      # Playlist Items (Songs)
+      #
       items:
 
         # title 01
@@ -295,8 +295,8 @@ settings:
         cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
 
       # ------------------------------------------------------------------------
-      # TITLE settings (songs)
-      # ------------------------------------------------------------------------
+      # Playlist Items (Songs)
+      #
       items:
 
         # title 01
@@ -341,8 +341,8 @@ settings:
         cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
 
       # ------------------------------------------------------------------------
-      # TITLE settings (songs)
-      # ------------------------------------------------------------------------
+      # Playlist Items (Songs)
+      #
       items:
 
         # title 01
@@ -409,8 +409,8 @@ settings:
         cover_image:                    /assets/audio/cover/royalty_free/free_disco_sounds.jpg
 
       # ------------------------------------------------------------------------
-      # TITLE settings (songs)
-      # ------------------------------------------------------------------------
+      # Playlist Items (Songs)
+      #
       items:
 
         # title 01

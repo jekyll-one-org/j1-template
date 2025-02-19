@@ -40,7 +40,7 @@ Asciidoctor::Extensions.register do
     name_positional_attributes 'caption', 'start','poster', 'theme', 'custom_buttons', 'role'
     default_attrs 'caption' => 'true',
                   'start' => '00:00:00',
-                  'poster' => '/assets/videos/poster/wistia/wistia-blue.jpg',
+                  'poster' => '/assets/video/poster/wistia/wistia-blue.jpg',
                   'theme' => 'uno',
                   'custom_buttons' => true,
                   'role' => 'mt-3 mb-3'
