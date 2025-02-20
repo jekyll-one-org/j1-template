@@ -532,11 +532,11 @@ lorem:sentences[3]
                     <!-- img src="/assets/image/modules/gallery/expanding_collection/avatar4.jpg" -->
                   </div>
                   <div class="demo-content-rating">
-                    <img src="/assets/image/modules/gallery/expanding_collection/star-orange.svg" />
-                    <img src="/assets/image/modules/gallery/expanding_collection/star-orange.svg" />
-                    <img src="/assets/image/modules/gallery/expanding_collection/star-orange.svg" />
-                    <img src="/assets/image/modules/gallery/expanding_collection/star-orange.svg" />
-                    <img src="/assets/image/modules/gallery/expanding_collection/star-gray.svg" />
+                    <img src="/assets/image/modules/gallery/expanding_collection/scalable/star-orange.svg" />
+                    <img src="/assets/image/modules/gallery/expanding_collection/scalable/star-orange.svg" />
+                    <img src="/assets/image/modules/gallery/expanding_collection/scalable/star-orange.svg" />
+                    <img src="/assets/image/modules/gallery/expanding_collection/scalable/star-orange.svg" />
+                    <img src="/assets/image/modules/gallery/expanding_collection/scalable/star-gray.svg" />
                   </div>
                 </div>
               </div>
@@ -568,11 +568,11 @@ lorem:sentences[3]
                     <!-- img src="/assets/image/modules/gallery/expanding_collection/avatar4.jpg" -->
                   </div>
                   <div class="demo-content-rating">
-                    <img src="/assets/image/modules/gallery/expanding_collection/star-orange.svg" />
-                    <img src="/assets/image/modules/gallery/expanding_collection/star-orange.svg" />
-                    <img src="/assets/image/modules/gallery/expanding_collection/star-orange.svg" />
-                    <img src="/assets/image/modules/gallery/expanding_collection/star-orange.svg" />
-                    <img src="/assets/image/modules/gallery/expanding_collection/star-gray.svg" />
+                    <img src="/assets/image/modules/gallery/expanding_collection/scalable/star-orange.svg" />
+                    <img src="/assets/image/modules/gallery/expanding_collection/scalable/star-orange.svg" />
+                    <img src="/assets/image/modules/gallery/expanding_collection/scalable/star-orange.svg" />
+                    <img src="/assets/image/modules/gallery/expanding_collection/scalable/star-orange.svg" />
+                    <img src="/assets/image/modules/gallery/expanding_collection/scalable/star-gray.svg" />
                   </div>
                 </div>
               </div>
@@ -602,11 +602,11 @@ lorem:sentences[3]
                     <!-- img src="/assets/image/modules/gallery/expanding_collection/avatar4.jpg" -->
                   </div>
                   <div class="demo-content-rating">
-                    <img src="/assets/image/modules/gallery/expanding_collection/star-orange.svg" />
-                    <img src="/assets/image/modules/gallery/expanding_collection/star-orange.svg" />
-                    <img src="/assets/image/modules/gallery/expanding_collection/star-orange.svg" />
-                    <img src="/assets/image/modules/gallery/expanding_collection/star-orange.svg" />
-                    <img src="/assets/image/modules/gallery/expanding_collection/star-gray.svg" />
+                    <img src="/assets/image/modules/gallery/expanding_collection/scalable/star-orange.svg" />
+                    <img src="/assets/image/modules/gallery/expanding_collection/scalable/star-orange.svg" />
+                    <img src="/assets/image/modules/gallery/expanding_collection/scalable/star-orange.svg" />
+                    <img src="/assets/image/modules/gallery/expanding_collection/scalable/star-orange.svg" />
+                    <img src="/assets/image/modules/gallery/expanding_collection/scalable/star-gray.svg" />
                   </div>
                 </div>
               </div>
@@ -636,11 +636,11 @@ lorem:sentences[3]
                     <!-- img src="/assets/image/modules/gallery/expanding_collection/avatar4.jpg" -->
                   </div>
                   <div class="demo-content-rating">
-                    <img src="/assets/image/modules/gallery/expanding_collection/star-orange.svg" />
-                    <img src="/assets/image/modules/gallery/expanding_collection/star-orange.svg" />
-                    <img src="/assets/image/modules/gallery/expanding_collection/star-orange.svg" />
-                    <img src="/assets/image/modules/gallery/expanding_collection/star-orange.svg" />
-                    <img src="/assets/image/modules/gallery/expanding_collection/star-gray.svg" />
+                    <img src="/assets/image/modules/gallery/expanding_collection/scalable/star-orange.svg" />
+                    <img src="/assets/image/modules/gallery/expanding_collection/scalable/star-orange.svg" />
+                    <img src="/assets/image/modules/gallery/expanding_collection/scalable/star-orange.svg" />
+                    <img src="/assets/image/modules/gallery/expanding_collection/scalable/star-orange.svg" />
+                    <img src="/assets/image/modules/gallery/expanding_collection/scalable/star-gray.svg" />
                   </div>
                 </div>
               </div>

@@ -94,7 +94,7 @@ topsearch_options.enabled: {{topsearch_options.enabled | debug}}
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="mdib mdib-magnify mdib-2x mr-2"></i></span>
-                  <input id="search-query" class="form-control" type="text" name="q" placeholder="{{placeholder}}" autocomplete="off">
+                  <input id="search-query" class="form-control" type="text" name="quick-search-query" placeholder="{{placeholder}}" autocomplete="off">
                   <span id="clear-topsearch" class="form-clear form-clear-searcher d-none"> <i class="mdib mdib-format-clear mdib-24px"></i> </span>
                   <span id="send-to-history"> <i class="mdib mdib-send mdib-24px" ></i> </span>
                 </div>
