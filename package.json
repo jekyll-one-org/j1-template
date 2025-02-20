@@ -58,7 +58,6 @@
     "build": "echo build web site .. && lerna run build --parallel && echo done. && shx echo",
     "bump": "cross-var cross-env if-env J1DOCKER=true && run-s -s bump-docker || run-s -s bump-local",
     "clean": "run-p -s clean:*",
-    "cy": "npm run --silent cypress:open",
     "j1": "node _support/js/info.js",
     "rebuild": "lerna run rebuild --parallel --scope",
     "bundle": "lerna run bundle --parallel --scope site",
@@ -87,7 +86,6 @@
     "credentials": "run-s -s credential:*",
     "credential:echo": "shx echo && echo store username and password ..",
     "credential:set": "git config credential.helper store && echo done. && shx echo",
-    "cypress:open": "cross-var cross-env $CYPRESS_INSTALL_BINARY=0 ./node_modules/.bin/cypress open",
     "publish:print-current-versions": "npm run version:current",
     "publish:publish-no-npm": "lerna publish --skip-npm",
     "reset:start": "echo reset development system to factory state .. && shx echo",
@@ -100,6 +98,7 @@
     "setup:detect-os": "echo detect operating system .. && cross-var cross-env if-env OS=Windows_NT && cross-var echo \"operating system detected: $OS\" || OS=$(echo $(getos)) && echo \"operating system detected: $OS\"",
     "setup:links": "shx echo && echo create links for shared resources .. && lerna run --parallel setup-links && echo done. && shx echo",
     "setup:build": "lerna run --parallel build",
+    "setup:workaround_copy_css_assets": "shx cp -rf packages/300_theme_src/assets/theme/j1/core/css packages/400_theme_site/_site/assets/theme/j1/core",
     "setup-start": "echo prepare project control && npm --silent install shx && echo done. && shx echo && echo setup development system for first use ..",
     "setup-create-log-folders": "shx echo && echo create project folders .. && run-s -s setup-create-folders:*",
     "setup-create-folders:log-folder": "shx mkdir packages/400_theme_site/log",
@@ -109,10 +108,7 @@
     "setup:env": "shx echo && cross-var echo \"configure environment ..\" && run-s -s set-env:*",
     "setup:tip": "shx echo && echo run \"yarn site\" to open the web.",
     "set-env:npm-loglevel": "cross-var cross-env npm_config_loglevel=$npm_package_npm_loglevel",
-    "_set-env:npm-node-path": "cross-var cross-env  npm config set scripts-prepend-node-path=$npm_package_npm_prepend_nodepath",
-    "set-env:mode": "cross-var cross-env npm_config_mode=$npm_package_config_mode && echo done.",
-    "parent-script": "cross-env BUNDLE_VENDORIZE=$npm_package_jekyll_vendorize run-s -s child-script",
-    "child-script": "cross-env if-env BUNDLE_VENDORIZE=true && echo bundle vendorized || echo bundle global"
+    "set-env:mode": "cross-var cross-env npm_config_mode=$npm_package_config_mode && echo done."
   },
   "dependencies": {
     "cross-env": "^7.0.3",

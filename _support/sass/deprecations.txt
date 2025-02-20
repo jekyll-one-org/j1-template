@@ -1,0 +1,54 @@
+Welche Optionen stehen für die Sass CLI bei --silence-deprecation zur Verfügung?
+
+See: https://sass-lang.com/documentation/breaking-changes/
+See: https://sass-lang.com/documentation/breaking-changes/import/
+
+Die Sass CLI bietet die Option --silence-deprecation an, um bestimmte oder
+alle Veraltungswarnungen zu unterdrücken. Dies kann nützlich sein, um die
+Ausgabe der CLI zu bereinigen oder um mit älteren Projekten zu arbeiten,
+die noch veraltete Sass-Funktionen verwenden.
+
+Verwendung:
+
+Einzelne Warnungen unterdrücken:
+
+Um spezifische Veraltungswarnungen zu unterdrücken, können Sie den Flag
+--silence-deprecation zusammen mit dem Typ der Warnung verwenden. Zum Beispiel,
+um Warnungen vor der Verwendung von / für die Division zu unterdrücken, können
+Sie Folgendes verwenden:
+
+Bash
+
+sass --silence-deprecation=division input.scss output.css
+
+Alle Warnungen unterdrücken: Um alle Veraltungswarnungen zu unterdrücken,
+können Sie den Flag --silence-deprecation ohne einen spezifischen Typ
+verwenden:
+
+Bash
+
+sass --silence-deprecation input.scss output.css
+
+Zusätzliche Optionen:
+
+--quiet-deps:
+
+Diese Option unterdrückt Veraltungswarnungen, die von Abhängigkeiten verursacht
+werden. Dies ist nützlich, wenn Sie Bibliotheken verwenden, die veraltete
+Sass-Funktionen verwenden, die Sie nicht direkt ändern können.
+
+--fatal-deprecation:
+Diese Option behandelt bestimmte Veraltungswarnungen als Fehler, was dazu
+führt, dass die Kompilierung fehlschlägt. Dies kann verwendet werden, u
+sicherzustellen, dass Sie keine veralteten Funktionen in Ihrem Code verwenden,
+die in Zukunft entfernt werden könnten.
+
+Wichtiger Hinweis:
+
+Es ist wichtig zu beachten, dass das Unterdrücken von Veraltungswarnungen
+nicht die zugrunde liegenden Probleme behebt. Es wird empfohlen, die Ursachen
+der Warnungen zu untersuchen und Ihren Code zu aktualisieren, um veraltete
+Funktionen zu vermeiden. Dies stellt sicher, dass Ihr Code zukunftssicher ist
+und mit neueren Versionen von Sass kompatibel bleibt.#
+
+
