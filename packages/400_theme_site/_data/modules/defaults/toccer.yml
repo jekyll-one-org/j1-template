@@ -41,9 +41,7 @@ defaults:
   #
   #     values:                         boolean (true|false)
   #     default:                        false
-  # ----------------------------------------------------------------------------
-  enabled:                              true
-
+  #
   # ----------------------------------------------------------------------------
   # Toccer options
   #
@@ -150,7 +148,12 @@ defaults:
   #       values:                       boolean (true|false)
   #       default:                      true
   #
+
   # ----------------------------------------------------------------------------
+  # GENERAL options
+  # ----------------------------------------------------------------------------
+  #
+  enabled:                              false
   log:                                  false
   tocSelector:                          .js-toc
   contentSelector:                      .js-toc-content

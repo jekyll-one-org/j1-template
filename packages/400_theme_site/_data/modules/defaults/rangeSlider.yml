@@ -23,7 +23,6 @@ description:
 # Default settings
 #
 defaults:
-  enabled:                              false
 
   # ----------------------------------------------------------------------------
   # RANGE SLIDER options
@@ -136,7 +135,13 @@ defaults:
   #   default:                          false
   #
   # ----------------------------------------------------------------------------
+  
+  # ----------------------------------------------------------------------------
+  # GENERAL options
+  # ----------------------------------------------------------------------------
   #
+  enabled:                              false
+
   options:
     orientation:                        vertical                                # horizontal | vertical
     connect:                            true

@@ -66,7 +66,7 @@ defaults:
   topsearch:
     enabled:                            false
 
-    search_history_max:                 30
+    search_history_max:                 10
     search_history_enabled:             false
     search_history_from_cookie:         true
     allow_history_updates_on_max:       true

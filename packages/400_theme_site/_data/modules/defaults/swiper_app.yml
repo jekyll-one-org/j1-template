@@ -35,8 +35,6 @@ defaults:
   # automatically from its configuration for all sliders configured.
   # AJAX methods are used to supply the needed HTML code at the time
   # a slider is initialized by the JS adapter.
-  # ----------------------------------------------------------------------------
-
 
   # ----------------------------------------------------------------------------
   # SWIPER options
@@ -61,7 +59,8 @@ defaults:
   # ----------------------------------------------------------------------------
 
   # ----------------------------------------------------------------------------
-  # APP General settings
+  # GENERAL options
+  # ----------------------------------------------------------------------------
   #
   enabled:                              false
   xhr_data_path:                        /assets/data/swiper_app

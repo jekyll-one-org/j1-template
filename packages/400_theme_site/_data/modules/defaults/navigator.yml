@@ -27,7 +27,6 @@ description:
 # Default settings
 #
 defaults:
-  enabled:                              true
 
   # ----------------------------------------------------------------------------
   # Font icon settings
@@ -60,11 +59,17 @@ defaults:
   #   values:                         size string (all supported size names mdi-*)
   #   default:                        true
   #
+  # ----------------------------------------------------------------------------
+
+  # ----------------------------------------------------------------------------
+  # GENERAL options
+  # ----------------------------------------------------------------------------
+  #
+  enabled:                              false
   icon_family:                          mdib
   icon_style:                           mdib
   icon_color:                           mdib-grey
   icon_size:                            mdib-sm
-
   nav_primary_color:                    var(--md-blue)
 
   # ----------------------------------------------------------------------------

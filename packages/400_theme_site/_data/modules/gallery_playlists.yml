@@ -23,7 +23,6 @@ description:
 # User configuration settings
 #
 settings:
-  enabled:                              true
 
   # ----------------------------------------------------------------------------
   # All playlists available

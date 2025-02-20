@@ -24,6 +24,11 @@ description:
 #
 defaults:
 
+  # ----------------------------------------------------------------------------
+  # GENERAL options
+  # ----------------------------------------------------------------------------
+  #
+  enabled:                              false
   xhr_data_path:                        /assets/data/masterslider               # data portion of all slders configured
   module_version:                       lite                                    # lite | pro (commercial licence required)
   save_slider_config:                   true

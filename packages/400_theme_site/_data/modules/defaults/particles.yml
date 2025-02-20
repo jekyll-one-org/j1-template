@@ -23,11 +23,12 @@ description:
 # Default configuration settings
 #
 defaults:
-  enabled:                              false
 
   # ----------------------------------------------------------------------------
-  # Particle options
+  # GENERAL options
   # ----------------------------------------------------------------------------
+  #
+  enabled:                              false
   xhr_data_path:                        /assets/data/particles.yml
 
   # ----------------------------------------------------------------------------

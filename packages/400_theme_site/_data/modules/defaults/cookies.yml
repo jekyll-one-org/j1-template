@@ -27,7 +27,6 @@ description:
 # Default settings
 #
 defaults:
-  enabled:                              true
 
   # ----------------------------------------------------------------------------
   # Oprions
@@ -95,7 +94,12 @@ defaults:
   #   default:                          true
   #
   # ----------------------------------------------------------------------------
+  
+  # ----------------------------------------------------------------------------
+  # GENERAL options
+  # ----------------------------------------------------------------------------
   #
+  enabled:                              false
   checkCookies:                         false
   encryptCookiesOnHttp:                 false
   expireCookiesOnRequiredOnly:          true

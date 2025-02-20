@@ -36,11 +36,12 @@ description:
 # Default configuration settings
 #
 defaults:
-  enabled:                              true
 
   # ----------------------------------------------------------------------------
-  # Global settings for text- and image-based header
+  # GENERAL options (for text- and image-based header)
+  # ----------------------------------------------------------------------------
   #
+  enabled:                              false
   debug:                                false
   hide_page_oninit:                     true                                    # hide page on 'init' to optimze LCP (loading images ???)
 

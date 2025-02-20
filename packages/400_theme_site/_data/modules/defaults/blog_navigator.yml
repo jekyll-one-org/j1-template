@@ -140,6 +140,12 @@ description:
 #
 defaults:
 
+  # ----------------------------------------------------------------------------
+  # GENERAL options
+  # ----------------------------------------------------------------------------
+  #
+  enabled:                              false
+
   readmore_text:                        read
   post_image:                           /assets/image/modules/attics/christa-dodoo-1920x1280.jpg
   previewer:                            timeline

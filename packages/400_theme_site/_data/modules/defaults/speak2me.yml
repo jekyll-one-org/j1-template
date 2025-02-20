@@ -23,12 +23,15 @@ description:
 # Default settings
 #
 defaults:
-  enabled:                              false
 
+  # ----------------------------------------------------------------------------
+  # GENERAL options
+  # ----------------------------------------------------------------------------
+  #
+  enabled:                              false
   dialogContainerID:                    speak2me_container
   speechSelector:                       main
   chrome_pause_resume_cycle:            5000
-
   mobilesDisabled:                      true
   browsersDisabled:                     [Firefox, Opera, Avast, Safari]
 

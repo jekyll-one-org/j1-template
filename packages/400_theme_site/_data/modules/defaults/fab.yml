@@ -26,13 +26,15 @@ description:
 # Default settings
 #
 defaults:
+
+  # ----------------------------------------------------------------------------
+  # GENERAL options
+  # ----------------------------------------------------------------------------
+  #
   enabled:                              false
-
   mode:                                 icon
-
   xhr_container_id:                     fab-container
   xhr_data_path:                        /assets/data/fab/index.html
-
   icon_family:                          mdib
   icon_color:                           md-grey
   icon_size:                            mdib-2x
