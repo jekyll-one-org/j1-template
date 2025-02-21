@@ -20,7 +20,7 @@ categories:                             [ Tester ]
 tags:                                   [ Audio, Amplitude App, YouTube ]
 
 image:
-  path:                                 /assets/image/modules/attics/markus-spiske-1920x1280.jpg
+  path:                                 /assets/image/module/attic/markus-spiske-1920x1280.jpg
   width:                                1920
   height:                               1280
 
@@ -33,7 +33,7 @@ resources:                              [ amplitudejs ]
 resource_options:
   - attic:
       slides:
-        - url:                          /assets/image/modules/attics/markus-spiske-1920x1280.jpg
+        - url:                          /assets/image/module/attic/markus-spiske-1920x1280.jpg
           alt:                          Video Tester
 ---
 

@@ -47,7 +47,7 @@ exclude_from_search:                    true
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign swiper_options    = swiper_defaults | merge: swiper_settings %}
-{% assign swipers           = swiper_settings.sliders %}
+{% assign swipers           = swiper_settings.swipers %}
 
 {% comment %} Configure permalink settings
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -117,7 +117,11 @@ exclude_from_search:                    true
           <!-- Swiper Wrapper (slides) -->
           <ul class="swiper-wrapper">
           {% for playlist in swiper_playlists %} {% if playlist.enabled %} {% if playlist.name == swiper.playlist %}    
-            {% for slide in playlist.slides %} {% if slide.enabled  %}
+            {% assign type_extension  = playlist.type | split: "/" %}
+            {% assign playlist_type   = type_extension[0] %}
+            {% assign extension       = type_extension[1] %}
+
+            {% for slide in playlist.items %} {% if slide.enabled  %}
             <li class="swiper-slide">
               <p>
                 {{slide.text}}
@@ -137,6 +141,7 @@ exclude_from_search:                    true
       {% comment %} Collect Image Swipers
       swiper: {{swiper | debug}}
       playlist.image_defaults: {{playlist.image_defaults | debug}}
+      {% assign  image_alt_text = slide.caption %}
       ========================================================================== {% endcomment %}
       {% if swiper.type == 'image' %}
 
@@ -160,17 +165,21 @@ exclude_from_search:                    true
             {% endif %}
 
             {% for playlist in swiper_playlists %} {% if playlist.enabled %} {% if playlist.name == swiper.playlist %}    
-            {% for slide in playlist.slides %} {% if slide.enabled %}
+            {% for slide in playlist.items %} {% if slide.enabled %}
+
+            {% assign type_extension  = playlist.type | split: "/" %}
+            {% assign playlist_type   = type_extension[0] %}
+            {% assign image_extension = type_extension[1] %}
 
             {% assign image_alt_text = 'Slide Image' %}
             {% if swiper.captions.enabled %}
-              {% assign image_alt_text = slide.caption %}
+              {% capture image_alt_text %}Slide Image{{slide.caption}}{% endcapture %}
             {% endif %}
 
             {% if swiper.lightbox.enabled %}
             <li class="swiper-slide">
               {% if playlist.image_defaults.base_folder %} 
-              <a href="{{playlist.image_defaults.base_folder}}/{{slide.image}}"
+              <a href="{{playlist.image_defaults.base_folder}}/{{slide.image}}.{{image_extension}}"
                 {% if playlist.image_defaults.image_width == 'slide' %}
                   data-pswp-width="{{slide.imageWidth}}"
                   data-pswp-height="{{slide.imageHeight}}"
@@ -178,13 +187,13 @@ exclude_from_search:                    true
                   data-pswp-width="{{playlist.image_defaults.image_width}}"
                   data-pswp-height="{{playlist.image_defaults.image_height}}"              
                 {% endif %}
-                target="_blank">
-                <img class="pswp-image" src="{{playlist.image_defaults.base_folder}}/{{slide.image}}" alt="{{image_alt_text}}">
+                  target="_blank">
+                <img class="pswp-image" src="{{playlist.image_defaults.base_folder}}/{{slide.image}}.{{image_extension}}" alt="{{image_alt_text}} {{slide.image}}">
                 {% if swiper.captions.enabled %}
-                <div class="{{swiper.captions.css_class}}">{{slide.image_caption}}</div>
+                <div class="{{swiper.captions.css_class}}">{{slide.caption_text}}</div>
                 {% endif %}
                 {% if swiper.lightbox.captions.enabled %}
-                <span class="pswp-caption-content">{{slide.lightbox_caption}}</span>
+                <span class="pswp-caption-content">{{slide.description}}</span>
                 {% endif %}
               </a>
               {% endif %}
@@ -192,12 +201,12 @@ exclude_from_search:                    true
             {% else %}
             <li class="swiper-slide">
               {% if playlist.image_defaults.base_folder %} 
-              <img src="{{playlist.image_defaults.base_folder}}/{{slide.image}}" alt="{{image_alt_text}}">
+              <img src="{{playlist.image_defaults.base_folder}}/{{slide.image}}.{{image_extension}}" alt="{{image_alt_text}} {{slide.image}}">
               {% else %}
-              <img src="{{slide.image}}">
+              <img src="{{slide.image}}.{{image_extension}}">
               {% endif %}
               {% if swiper.captions.enabled %}
-              <div class="{{swiper.captions.css_class}}">{{slide.image_caption}}</div>
+              <div class="{{swiper.captions.css_class}}">{{slide.caption_text}}</div>
               {% endif %}
             </li>          
             {% endif %}

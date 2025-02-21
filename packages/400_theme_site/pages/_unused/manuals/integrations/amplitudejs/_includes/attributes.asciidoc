@@ -37,8 +37,8 @@ end::tags[]
 // -----------------------------------------------------------------------------
 tag::data[]
 
-:data-images-standalone:                          "assets/image/modules/gallery/old_times/image_02.jpg, GrandPa's 80th Birthday"
-:data-images-group:                               "assets/image/modules/gallery/old_times/image_03.jpg, GrandPa's annual journey, assets/image/modules/gallery/old_times/image_04.jpg, GrandPa's annual journey"
+:data-images-standalone:                          "assets/image/module/gallery/old_times/image_02.jpg, GrandPa's 80th Birthday"
+:data-images-group:                               "assets/image/module/gallery/old_times/image_03.jpg, GrandPa's annual journey, assets/image/module/gallery/old_times/image_04.jpg, GrandPa's annual journey"
 
 end::data[]
 

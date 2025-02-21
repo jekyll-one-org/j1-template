@@ -40,7 +40,7 @@ resource_options:
       collapseDepth:                    3
   - attic:
       slides:
-        - url:                          /assets/image/modules/attics/lianhao-1920x1280.jpg
+        - url:                          /assets/image/module/attic/lianhao-1920x1280.jpg
           alt:                          Playback Video
 ---
 

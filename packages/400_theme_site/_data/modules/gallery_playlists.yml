@@ -42,7 +42,7 @@ settings:
       name:                             old_times
       title:                            
       type:                             image/jpg
-      item_base_path:                   /assets/image/modules/gallery/old_times
+      item_base_path:                   /assets/image/module/swiper/old_times
 
       # ------------------------------------------------------------------------
       # Playlist Items
@@ -90,7 +90,7 @@ settings:
       name:                             mega_cities
       title:                            
       type:                             image/jpg
-      item_base_path:                   /assets/image/modules/gallery/mega_cities
+      item_base_path:                   /assets/image/module/swiper/mega_cities
 
       # ------------------------------------------------------------------------
       # Playlist Items

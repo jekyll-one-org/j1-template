@@ -20,7 +20,7 @@ robots:
   follow:                               false
 
 image:
-  path:                                 /assets/image/modules/attics/1920x1280/kira-auf-der-heide.jpg
+  path:                                 /assets/image/module/attic/1920x1280/kira-auf-der-heide.jpg
   width:                                1920
   height:                               1280
 
@@ -32,7 +32,7 @@ resources:                              [ lightbox, rouge ]
 resource_options:
   - attic:
       slides:
-        - url:                          /assets/image/modules/attics/1920x1280/kira-auf-der-heide.jpg
+        - url:                          /assets/image/module/attic/1920x1280/kira-auf-der-heide.jpg
           alt:                          Photo by Kira auf der Heide on Unsplash
           badge:
             type:                       unsplash

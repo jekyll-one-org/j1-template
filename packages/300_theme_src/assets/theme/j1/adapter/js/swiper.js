@@ -47,7 +47,7 @@ regenerate:                             true
 {% comment %} Set config options (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign swiper_options        = swiper_defaults | merge: swiper_settings %}
-{% assign swipers               = swiper_settings.sliders %}
+{% assign swipers               = swiper_settings.swipers %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -117,7 +117,7 @@ j1.adapter.swiper = ((j1, window) => {
     // adapter initializer
     // -------------------------------------------------------------------------
     init: (options) => {
-      var xhrLoadState                  = 'pending';                            // (initial) load state for the HTML portion of the carousel
+      var xhrLoadState                  = 'pending';                            // (initial) load state for the HTML portion of the swiper
       var load_dependencies             = {};                                   // dynamic variable
       var carouselResponsiveSettingsOBJ = {};                                   // initial object for responsive settings
       var reload_on_resize              = false;
@@ -162,8 +162,8 @@ j1.adapter.swiper = ((j1, window) => {
         if (j1CoreFinished && pageVisible && atticFinished) {
           startTimeModule = Date.now();
 
-          // load HTML portion for all carousels
-          _this.loadSwiperHTML(swiperOptions, swiperOptions.sliders);
+          // load HTML portion for all swiper
+          _this.loadSwiperHTML(swiperOptions, swiperOptions.swipers);
 
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());
@@ -321,37 +321,37 @@ j1.adapter.swiper = ((j1, window) => {
     }, // END init
 
     // -------------------------------------------------------------------------
-    // loadSwiperHTML()
-    // load all Slick carousels (HTML portion) dynanically configured
-    // and enabled (AJAX) from YAMLdata file
+    // loadSwiperHTML(options, swipers)
+    // load all swipers (HTML portion) dynanically configured
+    // and enabled (AJAX) from YAMLdata file.
     // NOTE: Make sure the placeholder is available in the content page
     // eg. using the asciidoc extension mastercarousel::
     // -------------------------------------------------------------------------
-    loadSwiperHTML: (options, carousel) => {
-      var numcarousels      = Object.keys(carousel).length;
-      var active_carousels  = numcarousels;
-      var xhr_data_path   = options.xhr_data_path + '/index.html';
-      var xhr_container_id;
+    loadSwiperHTML: (options, swipers) => {
+      var numSwipers      = Object.keys(swipers).length;
+      var activeSwipers   = numSwipers;
+      var xhrDataPath     = options.xhr_data_path + '/index.html';
+      var xhrContainerId;
 
-      // console.debug('number of carousels found: ' + numcarousels);
+      console.debug('number of swipers found: ' + numSwipers);
 
       _this.setState('load_data');
-      Object.keys(carousel).forEach ((key) => {
-        if (carousel[key].enabled) {
-          xhr_container_id = carousel[key].id + '_app';
+      Object.keys(swipers).forEach ((key) => {
+        if (swipers[key].enabled) {
+          xhrContainerId = swipers[key].id + '_app';
 
-          // console.debug('load HTML data on carousel id: ' + carousel[key].id);
+          console.debug('load HTML data on swiper id: ' + swipers[key].id);
           j1.loadHTML({
-            xhr_container_id: xhr_container_id,
-            xhr_data_path:    xhr_data_path,
-            xhr_data_element: carousel[key].id
+            xhr_container_id: xhrContainerId,
+            xhr_data_path:    xhrDataPath,
+            xhr_data_element: swipers[key].id
           });
         } else {
-          // console.debug('carousel found disabled on id: ' + carousel[key].id);
-          active_carousels--;
+          console.debug('swiper found disabled on id: ' + swipers[key].id);
+          activeSwipers--;
         }
       });
-      // console.debug('carousels loaded in page enabled|all: ' + active_carousels + '|' + numcarousels);
+      console.debug('swipers loaded in page enabled|all: ' + activeSwipers + '|' + numSwipers);
       _this.setState('data_loaded');
     }, // END loadSwiperHTML
 

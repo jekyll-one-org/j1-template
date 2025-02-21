@@ -24,7 +24,7 @@ robots:
   follow:                               true
 
 image:
-  path:                                 /assets/image/modules/attics/christina-1920x1280.jpg
+  path:                                 /assets/image/module/attic/christina-1920x1280.jpg
   width:                                1920
   height:                               1280
 
@@ -37,7 +37,7 @@ resource_options:
       collapseDepth:                    3
   - attic:
       slides:
-        - url:                          /assets/image/modules/attics/christina-1920x1280.jpg
+        - url:                          /assets/image/module/attic/christina-1920x1280.jpg
           alt:                          Photo by Christina on Unsplash
           badge:
             type:                       unsplash

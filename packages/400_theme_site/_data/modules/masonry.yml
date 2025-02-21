@@ -288,7 +288,7 @@ settings:
       type:                             image
       gutters:                          3
 
-      image_base_path:                  /assets/image/modules/gallery/mega_cities
+      image_base_path:                  /assets/image/module/swiper/mega_cities
       image_styles:                     img-fluid
       image_height:                     300px
 
@@ -365,7 +365,7 @@ settings:
       type:                             image
       gutters:                          3
 
-      image_base_path:                  /assets/image/modules/gallery/mega_cities
+      image_base_path:                  /assets/image/module/swiper/mega_cities
       image_styles:                     img-fluid
 
       # ------------------------------------------------------------------------
@@ -440,7 +440,7 @@ settings:
       type:                             image
       gutters:                          3
 
-      image_base_path:                  /assets/image/modules/gallery/mega_cities
+      image_base_path:                  /assets/image/module/swiper/mega_cities
       image_styles:                     img-fluid
       image_height:                     300px
 

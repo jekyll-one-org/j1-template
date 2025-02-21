@@ -23,7 +23,7 @@ resource_options:
       padding_bottom:                   50
       opacity:                          0.5
       slides:
-        - url:                          /assets/image/pages/tour/images-1920x1280-bw.jpg
+        - url:                          /assets/image/page/tour/images-1920x1280-bw.jpg
           alt:                          Photo by Ricardo Gomez Angel on Unsplash
           badge:
             type:                       unsplash
@@ -144,7 +144,7 @@ lorem:sentences[5]
   <!-- MasterSlider Main -->
   <div id="MS62a73daae4e59" class="master-slider ms-skin-default" >
     <div  class="ms-slide">
-      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="" title="" data-src="/assets/image/modules/masterslider/slider_7/6-2.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="" title="" data-src="/assets/image/module/masterslider/slider_7/6-2.jpg">
       <div class="ms-info">
         <h3 class="notoc" style="font-weight: 300; color: #222222; text-align: center;">CHILDHOOD MEMORIES</h3>
         <h4 class="notoc" style="font-weight: 300; color: #7a7a7a; text-align: center;">JOHN WILIAM</h4>
@@ -152,7 +152,7 @@ lorem:sentences[5]
       </div>
     </div>
     <div  class="ms-slide">
-      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="" title="" data-src="/assets/image/modules/masterslider/slider_7/5-2.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="" title="" data-src="/assets/image/module/masterslider/slider_7/5-2.jpg">
       <div class="ms-info">
         <h3 class="notoc" style="font-weight: 300; color: #222222; text-align: center;">CONSECTETUR ADIPISCING ELIT</h3>
         <h4 class="notoc" style="font-weight: 300; color: #7a7a7a; text-align: center;">JOHN WILIAM</h4>
@@ -160,7 +160,7 @@ lorem:sentences[5]
       </div>
     </div>
     <div  class="ms-slide">
-      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="" title="" data-src="/assets/image/modules/masterslider/slider_7/6-3.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="" title="" data-src="/assets/image/module/masterslider/slider_7/6-3.jpg">
       <div class="ms-info">
         <h3 class="notoc" style="font-weight: 300; color: #222222; text-align: center;">SUSPENDISSE UT PULVINAR MAURIS</h3>
         <h4 class="notoc" style="font-weight: 300; color: #7a7a7a; text-align: center;">JOHN WILIAM</h4>
@@ -168,7 +168,7 @@ lorem:sentences[5]
       </div>
     </div>
     <div  class="ms-slide">
-      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="" title="" data-src="/assets/image/modules/masterslider/slider_7/8.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="" title="" data-src="/assets/image/module/masterslider/slider_7/8.jpg">
       <div class="ms-info">
         <h3 class="notoc" style="font-weight: 300; color: #222222; text-align: center;">SED DAPIBUS SIT AMET FELIS</h3>
         <h4 class="notoc" style="font-weight: 300; color: #7a7a7a; text-align: center;">JOHN WILIAM</h4>
@@ -176,7 +176,7 @@ lorem:sentences[5]
       </div>
     </div>
     <div  class="ms-slide">
-      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="" title="" data-src="/assets/image/modules/masterslider/slider_7/8-1.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="" title="" data-src="/assets/image/module/masterslider/slider_7/8-1.jpg">
       <div class="ms-info">
         <h3 class="notoc" style="font-weight: 300; color: #222222; text-align: center;">CHEETAHS ON THE EDGE</h3>
         <h4 class="notoc" style="font-weight: 300; color: #7a7a7a; text-align: center;">GREGORY WILSON</h4>
@@ -184,7 +184,7 @@ lorem:sentences[5]
       </div>
     </div>
     <div  class="ms-slide">
-      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="" title="" data-src="/assets/image/modules/masterslider/slider_7/1-2.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="" title="" data-src="/assets/image/module/masterslider/slider_7/1-2.jpg">
       <div class="ms-info">
         <h3 class="notoc" style="font-weight: 300; color: #222222; text-align: center;">CONSECTETUR ADIPISCING ELIT</h3>
         <h4 class="notoc" style="font-weight: 300; color: #7a7a7a; text-align: center;">JOHN WILIAM</h4>

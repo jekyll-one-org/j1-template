@@ -60,7 +60,7 @@ defaults:
 
       # video parameters
       #
-      default_poster:                   /assets/image/icons/videojs/videojs-poster.png
+      default_poster:                   /assets/image/icon/videojs/videojs-poster.png
       poster:                           maxresdefault.jpg                       # poster taken from YT at highest resolution
       end:                              true                                    # set end (of a video) allowed
       start:                            true                                    # set start (of a video) allowed

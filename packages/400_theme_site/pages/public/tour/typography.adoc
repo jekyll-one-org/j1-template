@@ -20,7 +20,7 @@ categories:                             [ Roundtrip ]
 tags:                                   [ Module, Typography ]
 
 image:
-  path:                                 /assets/image/pages/tour/typography-1920x1280-bw.jpg
+  path:                                 /assets/image/page/tour/typography-1920x1280-bw.jpg
   width:                                1920
   height:                               1280
 
@@ -35,7 +35,7 @@ resource_options:
       transitionDuration:               fast
       resolutionRefreshRate:            500
       slides:
-        - url:                          /assets/image/pages/tour/typography-1920x1280-bw.jpg
+        - url:                          /assets/image/page/tour/typography-1920x1280-bw.jpg
           alt:                          Photo by Alice Donovan Rousel on Unsplash
           badge:
             type:                       unsplash

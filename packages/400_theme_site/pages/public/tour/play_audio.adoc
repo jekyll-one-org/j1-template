@@ -19,7 +19,7 @@ categories:                             [ Tour ]
 tags:                                   [ Audio, Module ]
 
 image:
-  path:                                 /assets/image/modules/attics/1920x1280/alexey-ruban.jpg
+  path:                                 /assets/image/module/attic/1920x1280/alexey-ruban.jpg
   width:                                1920
   height:                               1280
 
@@ -36,7 +36,7 @@ resource_options:
       collapseDepth:                    3
   - attic:
       slides:
-        - url:                          /assets/image/modules/attics/1920x1280/alexey-ruban.jpg
+        - url:                          /assets/image/module/attic/1920x1280/alexey-ruban.jpg
           alt:                          Photo by Alexey Ruban on Unsplash
           badge:
             type:                       unsplash

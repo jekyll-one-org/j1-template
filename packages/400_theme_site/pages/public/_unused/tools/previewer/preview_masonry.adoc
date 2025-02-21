@@ -20,7 +20,7 @@ categories:                             [ Previewer ]
 tags:                                   [ Masonry, Module ]
 
 image:
-  path:                                 /assets/image/modules/attics/1920x1280/hayden-mills-2.jpg
+  path:                                 /assets/image/module/attic/1920x1280/hayden-mills-2.jpg
   width:                                1920
   height:                               1280
 
@@ -39,7 +39,7 @@ resource_options:
       collapseDepth:                    4
   - attic:
       slides:
-        - url:                          /assets/image/modules/attics/1920x1280/hayden-mills-2.jpg
+        - url:                          /assets/image/module/attic/1920x1280/hayden-mills-2.jpg
           alt:                          Photo by Hayden Mills on Unsplash
           badge:
             type:                       unsplash
@@ -244,7 +244,7 @@ masonry::card_example[]
 
   id:                               card_example
   type:                             card
-  image_base_path:                  /assets/image/modules/gallery/mega_cities
+  image_base_path:                  /assets/image/module/swiper/mega_cities
   image_styles:                     img-fluid img-object--cover g-height-300
   lightbox:                         true
   gutters:                          true
@@ -311,7 +311,7 @@ masonry::image_grid_base_example[]
 
   id:                               image_grid_base_example
   type:                             image
-  image_base_path:                  /assets/image/modules/gallery/mega_cities
+  image_base_path:                  /assets/image/module/swiper/mega_cities
   image_styles:                     img-fluid
   lightbox:                         false
   gutters:                          false
@@ -371,7 +371,7 @@ masonry::image_grid_full_example[]
 
   id:                               image_grid_full_example
   type:                             image
-  image_base_path:                  /assets/image/modules/gallery/mega_cities
+  image_base_path:                  /assets/image/module/swiper/mega_cities
   image_styles:                     img-fluid
   lightbox:                         true
   gutters:                          true

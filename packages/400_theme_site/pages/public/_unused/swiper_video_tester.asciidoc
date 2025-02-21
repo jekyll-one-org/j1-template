@@ -18,7 +18,7 @@ categories:                             [ Roundtrip ]
 tags:                                   [ Module, Swiper ]
 
 image:
-  path:                                 /assets/image/modules/attics/markus-spiske-1920x1280.jpg
+  path:                                 /assets/image/module/attic/markus-spiske-1920x1280.jpg
   width:                                1920
   height:                               1280
 
@@ -33,7 +33,7 @@ resource_options:
       collapseDepth:                    3
   - attic:
       slides:
-        - url:                          /assets/image/modules/attics/markus-spiske-1920x1280.jpg
+        - url:                          /assets/image/module/attic/markus-spiske-1920x1280.jpg
           alt:                          Swiper Tester
 ---
 
@@ -102,7 +102,7 @@ lorem:sentences[3]
   <div class="swiper-wrapper">
 
     <div class="swiper-slide swiper-no-swiping" data-slide-type="img">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" aria-label="ms-free-animals-1">
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-1.jpg" aria-label="ms-free-animals-1">
     </div>    
 
     <!-- div class="swiper-slide swiper-no-swiping" data-slide-type="vdo">
@@ -163,10 +163,10 @@ lorem:sentences[3]
     </div>
 
     <div class="swiper-slide swiper-no-swiping" data-slide-type="img">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg" aria-label="ms-free-animals-3">
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-2.jpg" aria-label="ms-free-animals-3">
     </div>       
     <div class="swiper-slide swiper-no-swiping" data-slide-type="img">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" />
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-3.jpg" />
     </div>
 
   </div> <!-- END swiper-wrapper -->
@@ -177,17 +177,17 @@ lorem:sentences[3]
   <div class="swiper-wrapper">
 
 		<div class="swiper-slide" data-slide-type="img">
-		  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" aria-label="ms-free-animals-1">
+		  <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-1.jpg" aria-label="ms-free-animals-1">
 		</div>
 		<div class="swiper-slide" data-slide-type="img">
 		  <!-- img src="/assets/video/poster/html5/peck_pocketed.jpg" aria-label="peck_pocketed" -->
 		  <img src="//img.youtube.com/vi/nV8UZJNBY6Y/maxresdefault.jpg">
 		</div>
 		<div class="swiper-slide" data-slide-type="img">
-		  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg" aria-label="ms-free-animals-1">
+		  <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-2.jpg" aria-label="ms-free-animals-1">
 		</div>      
 		<div class="swiper-slide" data-slide-type="img">
-		  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" />
+		  <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-3.jpg" />
 		</div>
 
 	</div> <!-- END swiper-wrapper -->

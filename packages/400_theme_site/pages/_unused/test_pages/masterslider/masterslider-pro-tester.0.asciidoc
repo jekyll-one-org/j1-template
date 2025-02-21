@@ -23,7 +23,7 @@ resource_options:
       padding_bottom:                   50
       opacity:                          0.5
       slides:
-        - url:                          /assets/image/pages/tour/images-1920x1280-bw.jpg
+        - url:                          /assets/image/page/tour/images-1920x1280-bw.jpg
           alt:                          Photo by Ricardo Gomez Angel on Unsplash
           badge:
             type:                       unsplash
@@ -62,13 +62,13 @@ lorem:sentences[5]
 ++++
 <div id="ms_00001" class="master-slider ms-skin-light-3">
   <div class="ms-slide">
-    <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="cat-1" title="cat-1" data-src="/assets/image/modules/masterslider/cats/cat-1.jpg">
+    <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="cat-1" title="cat-1" data-src="/assets/image/module/masterslider/cats/cat-1.jpg">
   </div>
   <div class="ms-slide">
-    <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="cat-2" title="cat-2" data-src="/assets/image/modules/masterslider/cats/cat-2.jpg">
+    <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="cat-2" title="cat-2" data-src="/assets/image/module/masterslider/cats/cat-2.jpg">
   </div>
   <div class="ms-slide">
-    <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="cat-3" title="cat-3" data-src="/assets/image/modules/masterslider/cats/cat-3.jpg">
+    <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="cat-3" title="cat-3" data-src="/assets/image/module/masterslider/cats/cat-3.jpg">
   </div>
 </div>
 ++++
@@ -82,13 +82,13 @@ lorem:sentences[5]
 <div id="p_ms_00002" class="master-slider-parent mt-3 mb-5">
   <div id="ms_00002" class="master-slider ms-skin-default">
     <div class="ms-slide">
-      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="cities-1" title="cities-1" data-src="/assets/image/modules/masterslider/mega_cities/andreas-brucker.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="cities-1" title="cities-1" data-src="/assets/image/module/masterslider/mega_cities/andreas-brucker.jpg">
     </div>
     <div class="ms-slide">
-      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="cities-2" title="cities-2" data-src="/assets/image/modules/masterslider/mega_cities/denys-nevozhai-1.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="cities-2" title="cities-2" data-src="/assets/image/module/masterslider/mega_cities/denys-nevozhai-1.jpg">
     </div>
     <div class="ms-slide">
-      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="cities-3" title="cities-3" data-src="/assets/image/modules/masterslider/mega_cities/denys-nevozhai-2.jpg">
+      <img src="/assets/theme/j1/modules/masterslider/css/blank.gif" alt="cities-3" title="cities-3" data-src="/assets/image/module/masterslider/mega_cities/denys-nevozhai-2.jpg">
     </div>
   </div>
 </div>

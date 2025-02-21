@@ -19,7 +19,7 @@ categories:                             [ Previewer ]
 tags:                                   [ Masterslider ]
 
 image:
-  path:                                 /assets/image/pages/tour/images-1920x1280-bw.jpg
+  path:                                 /assets/image/page/tour/images-1920x1280-bw.jpg
   width:                                1920
   height:                               1280
 
@@ -32,7 +32,7 @@ resources:                              [ advertising, animate, clipboard, light
 resource_options:
   - attic:
       slides:
-        - url:                          /assets/image/pages/tour/images-1920x1280-bw.jpg
+        - url:                          /assets/image/page/tour/images-1920x1280-bw.jpg
           alt:                          Photo by Ricardo Gomez Angel on Unsplash
           badge:
             type:                       unsplash
@@ -207,7 +207,7 @@ settings:
         - slide:
           alt:                          Cat 1
           title:                        Cat 1
-          foreground_image:             /assets/image/modules/masterslider/slider_1/cat-1.jpg
+          foreground_image:             /assets/image/module/masterslider/slider_1/cat-1.jpg
           background_image:             /assets/theme/j1/modules/masterslider/css/blank.gif
           thumb_image:                  false
           slideinfo:                    false

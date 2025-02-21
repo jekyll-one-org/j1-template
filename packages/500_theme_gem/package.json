@@ -113,8 +113,8 @@
 
     "posttemplate-gem-files": "run-s posttemplate-gem-site-files:*",
     "posttemplate-gem-site-files:data-remove": "shx rm -f lib/starter_web/_data/modules/cc.yml",
-    "posttemplate-gem-site-files:assets-remove": "shx rm -rf ./lib/starter_web/assets/error_pages && shx rm -rf ./lib/starter_web/assets/data",
-    "posttemplate-gem-site-files:assets-copy": "shx cp -r ../300_theme_src/assets/error_pages ./assets && shx cp -r ../300_theme_src/assets/data ./assets",
+    "posttemplate-gem-site-files:assets-remove": "shx rm -rf ./lib/starter_web/assets/error/page && shx rm -rf ./lib/starter_web/assets/data",
+    "posttemplate-gem-site-files:assets-copy": "shx cp -r ../300_theme_src/assets/error/page ./assets && shx cp -r ../300_theme_src/assets/data ./assets",
     "posttemplate-gem-site-files:includes-remove": "shx rm -rf ./lib/starter_web/_includes/themes",
     "posttemplate-gem-site-files:posts-remove": "shx rm -f ./lib/starter_web/collections/_posts/featured/*-welcome-to-j1.adoc",
     "posttemplate-gem-site-files:pages-remove": "shx rm -rf ./lib/starter_web/pages/public/jupyter/* && shx rm -rf ./lib/starter_web/pages/_test* && shx rm -rf ./lib/starter_web/pages/public/se",

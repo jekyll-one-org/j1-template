@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/swiper/css/modules/effectNeighbor.css
+ # ~/assets/theme/j1/modules/swiper/css/modules/effectNeighborSlider.css
  # CSS styles of the J1 Template for SwiperJS v11 (view)
  # -----------------------------------------------------------------------------
  #
@@ -14,26 +14,26 @@
  # -----------------------------------------------------------------------------
 */
 
-.neighbor-slider {
+.neighbors-slider {
     position: relative;
     overflow: hidden;
 }
 
-.neighbor-slider .swiper {
+.neighbors-slider .swiper {
     width: 90%;
     max-width: 640px;
     height: 320px;
     /* border-radius: 8px; effect option */
 }
 
-.neighbor-slider .neighbor-slider-main {
+.neighbors-slider .neighbors-slider-main {
     position: relative;
     z-index: 10;
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5); /* effect option */
 }
 
-.neighbor-slider .neighbor-slider-prev,
-.neighbor-slider .neighbor-slider-next {
+.neighbors-slider .neighbors-slider-prev,
+.neighbors-slider .neighbors-slider-next {
     top: 50%;
     opacity: 0.75;  /* effect option */
     position: absolute;
@@ -44,10 +44,10 @@
     transform: translateY(-50%) scale(1) rotateY(0deg); /* effect option (scale) */
 }
 
-.neighbor-slider .neighbor-slider-prev {
+.neighbors-slider .neighbors-slider-prev {
     right: 50%;
 }
 
-.neighbor-slider .neighbor-slider-next {
+.neighbors-slider .neighbors-slider-next {
     left: 50%;
 }

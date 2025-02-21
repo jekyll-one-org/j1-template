@@ -19,7 +19,7 @@ categories:                             [ Previewer ]
 tags:                                   [ AmplitudeJS, Audio ]
 
 image:
-  path:                                 /assets/image/icons/videojs/videojs-poster.png
+  path:                                 /assets/image/icon/videojs/videojs-poster.png
   width:                                1920
   height:                               1280
 
@@ -33,7 +33,7 @@ resource_options:
       collapseDepth:                    2
   - attic:
       slides:
-        - url:                          /assets/image/modules/attics/1920x1280/alexey-ruban.jpg
+        - url:                          /assets/image/module/attic/1920x1280/alexey-ruban.jpg
           alt:                          Photo by Alexey Ruban on Unsplash
           badge:
             type:                       unsplash

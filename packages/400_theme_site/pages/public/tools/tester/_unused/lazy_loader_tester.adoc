@@ -20,7 +20,7 @@ categories:                             [ Roundtrip ]
 tags:                                   [ Module, Video ]
 
 image:
-  path:                                 /assets/image/icons/videojs/videojs-poster.png
+  path:                                 /assets/image/icon/videojs/videojs-poster.png
   width:                                1920
   height:                               1280
 
@@ -33,7 +33,7 @@ resources:                              []
 resource_options:
   - attic:
       slides:
-        - url:                          /assets/image/icons/videojs/videojs-poster.png
+        - url:                          /assets/image/icon/videojs/videojs-poster.png
           alt:                          VideoJS Poster
 ---
 
@@ -84,11 +84,11 @@ and horizontal scroll ways.
 lorem:sentences[5]
 
 ++++
-<img class="lazy" data-src="/assets/image/modules/attics/markus-spiske-1920x1280.jpg" src="" alt="markus-spiske">
+<img class="lazy" data-src="/assets/image/module/attic/markus-spiske-1920x1280.jpg" src="" alt="markus-spiske">
 ++++
 
 // ++++
-// <img class="lazy" data-src="/assets/image/icons/videojs/videojs-poster.png" src="" alt="VideoJS Poster">
+// <img class="lazy" data-src="/assets/image/icon/videojs/videojs-poster.png" src="" alt="VideoJS Poster">
 // ++++
 
 
@@ -133,7 +133,7 @@ lorem:sentences[5]
 </div -->
 
 <div class="lazy" data-loader="av">
-  <video controls data-poster="/assets/image/icons/videojs/videojs-poster.png">
+  <video controls data-poster="/assets/image/icon/videojs/videojs-poster.png">
     <data-src src="/assets/video//html5/peck_pocketed.mp4" type="video/mp4"></data-src>
   </video>
 </div>
@@ -152,7 +152,7 @@ lorem:sentences[5]
     <!-- [INFO   ] [~/assets/data/panel.html              ] [ write post items (card_block == 'card-list')] -->
     <li id="home_news-scroll-item" class="scroll-group-item items-2 p-0">
       <article class="card card-same-height raised-z0 mb-5">
-        <img class="lazy img-fluid img-object--cover g-height-300" data-src="/assets/image/modules/attics/1920x1280/j1-starter-mockup-1.jpg" src="" alt="Protocol scheme" style="filter: grayscale(1) contrast(1) brightness(1);">
+        <img class="lazy img-fluid img-object--cover g-height-300" data-src="/assets/image/module/attic/1920x1280/j1-starter-mockup-1.jpg" src="" alt="Protocol scheme" style="filter: grayscale(1) contrast(1) brightness(1);">
         <!-- h3 id="639670" class="card-header bg-primary notoc notranslate">URLs</h3 -->
         <h3 id="286107" class="card-header bg-primary notranslate">URLs</h3>
         <!-- Body|Excerpt -->
@@ -183,7 +183,7 @@ lorem:sentences[5]
     </li>
     <li id="home_news-scroll-item" class="scroll-group-item items-2 p-0">
       <article class="card card-same-height raised-z0 mb-5">
-        <img class="lazy img-fluid img-object--cover g-height-300" data-src="/assets/image/modules/attics/1920x1280/j1-starter-mockup-1.jpg" src="" alt="About the Template" style="filter: grayscale(1) contrast(1) brightness(1);">
+        <img class="lazy img-fluid img-object--cover g-height-300" data-src="/assets/image/module/attic/1920x1280/j1-starter-mockup-1.jpg" src="" alt="About the Template" style="filter: grayscale(1) contrast(1) brightness(1);">
         <!-- h3 id="781169" class="card-header bg-primary notoc notranslate">J1 Theme</h3 -->
         <h3 id="318611" class="card-header bg-primary notranslate">J1 Theme</h3>
         <!-- Body|Excerpt -->
@@ -223,7 +223,7 @@ lorem:sentences[5]
     <li id="home_news-scroll-item" class="scroll-group-item items-2 p-0">
       <article class="card card-same-height raised-z0 mb-5">
         <!-- [INFO   ] [j1.layouts.content_generator_news_panel_posts.html ] [ place post image ] -->
-        <img class="lazy img-fluid img-object--cover g-height-300" data-src="/assets/image/modules/attics/machine-generator-1920x1280.jpg" src=""  alt="Top open source Tools" style="filter: grayscale(1);">
+        <img class="lazy img-fluid img-object--cover g-height-300" data-src="/assets/image/module/attic/machine-generator-1920x1280.jpg" src=""  alt="Top open source Tools" style="filter: grayscale(1);">
         <!-- h3 id="376383" class="card-header bg-primary notoc notranslate">Site Generators</h3 -->
         <h3 id="955445" class="card-header bg-primary notranslate">Site Generators</h3>
         <!-- Body|Excerpt -->
@@ -265,7 +265,7 @@ lorem:sentences[5]
     <li id="home_news-scroll-item" class="scroll-group-item items-2 p-0">
       <article class="card card-same-height raised-z0 mb-5">
         <!-- [INFO   ] [j1.layouts.content_generator_news_panel_posts.html ] [ place post image ] -->
-        <img class="lazy img-fluid img-object--cover g-height-300" data-src="/assets/image/modules/attics/cookies-1920x1200.jpg" src="" alt="Data for Site Control" style="filter: grayscale(1);">
+        <img class="lazy img-fluid img-object--cover g-height-300" data-src="/assets/image/module/attic/cookies-1920x1200.jpg" src="" alt="Data for Site Control" style="filter: grayscale(1);">
         <!-- h3 id="283406" class="card-header bg-primary notoc notranslate">Cookies</h3 -->
         <h3 id="343365" class="card-header bg-primary notranslate">Cookies</h3>
         <!-- Body|Excerpt -->
@@ -332,9 +332,9 @@ lorem:sentences[5]
 <div class="lazy parallaxBg" alt="sigmund">
 
     <style>
-        .parallaxBg{background:url("/assets/image/modules/attics/sigmund-1920x1280.jpg"); min-height: 450px; background-attachment: fixed; background-position: center;  background-repeat: no-repeat; background-size: cover; }
+        .parallaxBg{background:url("/assets/image/module/attic/sigmund-1920x1280.jpg"); min-height: 450px; background-attachment: fixed; background-position: center;  background-repeat: no-repeat; background-size: cover; }
         .banner_parallax-parallax-quote{color:#fff;padding:100px 0;position:relative;text-align:center}
-        .banner_parallax-parallax-quote:before{top:0;left:0;width:100%;height:100%;content:" ";position:absolute;background: url("/assets/image/modules/patterns/gridtile.png") repeat;}
+        .banner_parallax-parallax-quote:before{top:0;left:0;width:100%;height:100%;content:" ";position:absolute;background: url("/assets/image/pattern/image/gridtile.png") repeat;}
         .banner_parallax-parallax-quote:after{top:0;left:0;width:100%;height:100%;content:" ";position:absolute;background:rgba(0,0,0,0.6)}
         .banner_parallax-parallax-quote-in{z-index: 2;position:absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; padding: 20px; text-align: center; font-family: "Roboto Slab", Helvetica, Arial, sans-serif; }
         .banner_parallax-parallax-quote-in p{color:var(--md-gray-300);font-size:300%;text-transform:uppercase;line-height: 1.25;}
@@ -379,9 +379,9 @@ lorem:sentences[5]
 // ++++
 // <div id="banner_parallax" class="elevated-z0"><div id="banner_parallax_content" class="lazy parallax"
 //   <style>
-//       .parallaxBg{background:url("/assets/image/modules/attics/ideas-start-here-1920x1280.jpg"); min-height: 450px; background-attachment: fixed; background-position: center;  background-repeat: no-repeat; background-size: cover; }
+//       .parallaxBg{background:url("/assets/image/module/attic/ideas-start-here-1920x1280.jpg"); min-height: 450px; background-attachment: fixed; background-position: center;  background-repeat: no-repeat; background-size: cover; }
 //       .banner_parallax-parallax-quote{color:#fff;padding:100px 0;position:relative;text-align:center}
-//       .banner_parallax-parallax-quote:before{top:0;left:0;width:100%;height:100%;content:" ";position:absolute;background: url("/assets/image/modules/patterns/gridtile.png") repeat;}
+//       .banner_parallax-parallax-quote:before{top:0;left:0;width:100%;height:100%;content:" ";position:absolute;background: url("/assets/image/pattern/image/gridtile.png") repeat;}
 //       .banner_parallax-parallax-quote:after{top:0;left:0;width:100%;height:100%;content:" ";position:absolute;background:rgba(0,0,0,0.6)}
 //       .banner_parallax-parallax-quote-in{z-index: 2;position:absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; padding: 20px; text-align: center; font-family: "Roboto Slab", Helvetica, Arial, sans-serif; }
 //       .banner_parallax-parallax-quote-in p{color:var(--md-gray-300);font-size:300%;text-transform:uppercase;line-height: 1.25;}

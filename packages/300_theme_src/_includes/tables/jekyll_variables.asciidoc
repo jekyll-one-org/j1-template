@@ -27,7 +27,7 @@ defaults:
 
     values:
       images:
-        dir:        /assets/image/pages
+        dir:        /assets/image/page
 ----
 
 |`page-imagesdir`

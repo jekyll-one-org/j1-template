@@ -20,7 +20,7 @@
 # Example:
 #
 #  .The image block title
-#  lightbox::lightbox-example[450, "assets/image/modules/gallery/old_times/image_01.jpg, description 1, assets/image/modules/gallery/old_times/image_02.jpg, description 2" ]
+#  lightbox::lightbox-example[450, "assets/image/module/gallery/old_times/image_01.jpg, description 1, assets/image/module/gallery/old_times/image_02.jpg, description 2" ]
 #
 # ------------------------------------------------------------------------------
 include Asciidoctor
