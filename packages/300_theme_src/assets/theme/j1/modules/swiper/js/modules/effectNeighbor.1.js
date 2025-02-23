@@ -16,45 +16,44 @@
 "use strict";
 
 function EffectNeighbor(_ref) {
-  var mainSwiper, tripleSwiper;
+
   var {
       swiper,
-      extendParams,
       params,
       on
   } = _ref;
 
-  // module options
-  const commonParameters  = params.neighbor;
-  const swiperID          = `#${params.neighbor.swiper_id}`;
-
-  mainSwiper = document.querySelector(swiperID);
-
-
   // ---------------------------------------------------------------------------
   // effect initializer
   // ---------------------------------------------------------------------------
-  
-  // main swiper
-  //
-  const swiperEl = mainSwiper.querySelector('.swiper');
 
-  // create neighbor swiper PREV
+  var tripleMainSwiper;
+
+  // module options
+  const commonParameters = params.neighbor;
+
+  var neighbor_swiper = document.querySelector('#neighbor_slider');
+  
+  // main slider
+  //
+  const swiperEl = neighbor_swiper.querySelector('#neighbor_slider .swiper');
+
+  // create neighbor slider PREV
   //
   const swiperPrevEl = swiperEl.cloneNode(true);
   swiperPrevEl.classList.add('neighbor-slider-prev');
-  mainSwiper.insertBefore(swiperPrevEl, swiperEl);
+  neighbor_swiper.insertBefore(swiperPrevEl, swiperEl);
   const swiperPrevSlides = swiperPrevEl.querySelectorAll('.swiper-slide');
   const swiperPrevLastSlideEl = swiperPrevSlides[swiperPrevSlides.length - 1];
   swiperPrevEl
     .querySelector('.swiper-wrapper')
     .insertBefore(swiperPrevLastSlideEl, swiperPrevSlides[0]);
 
-  // create neighbor swiper NEXT
+  // create neighbor slider NEXT
   //
   const swiperNextEl = swiperEl.cloneNode(true);
   swiperNextEl.classList.add('neighbor-slider-next');
-  mainSwiper.appendChild(swiperNextEl);
+  neighbor_swiper.appendChild(swiperNextEl);
   const swiperNextSlides = swiperNextEl.querySelectorAll('.swiper-slide');
   const swiperNextFirstSlideEl = swiperNextSlides[0];
   swiperNextEl
@@ -65,33 +64,33 @@ function EffectNeighbor(_ref) {
   //
   swiperEl.classList.add('neighbor-slider-main');
 
-  // init neighbor swiper PREV
+  // init neighbor slider PREV
   //
   const triplePrevSwiper = new Swiper(swiperPrevEl, {
     ...commonParameters,
     allowTouchMove: false,
     on: {
       click() {
-        tripleSwiper.slidePrev();
+        tripleMainSwiper.slidePrev();
       },
     },
   });
 
-  // init neighbor swiper NEXT
+  // init neighbor slider NEXT
   //
   const tripleNextSwiper = new Swiper(swiperNextEl, {
     ...commonParameters,
     allowTouchMove: false,
     on: {
       click() {
-        tripleSwiper.slideNext();
+        tripleMainSwiper.slideNext();
       },
     },
   });
 
-  // init neighbor swiper MAIN
+  // init neighbor slider MAIN
   //
-  tripleSwiper = new Swiper(swiperEl, {
+  tripleMainSwiper = new Swiper(swiperEl, {
     ...commonParameters,
     grabCursor: true,
     controller: {
@@ -99,7 +98,7 @@ function EffectNeighbor(_ref) {
     },
     on: {
       destroy() {
-        // destroy swipers PREV|NEXT on MAIN destroy
+        // destroy side sliders on main (slider) destroy
         triplePrevSwiper.destroy();
         tripleNextSwiper.destroy();
       },

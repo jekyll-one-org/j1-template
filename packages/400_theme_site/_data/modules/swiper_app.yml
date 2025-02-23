@@ -56,7 +56,7 @@ settings:
       id:                               swiper_text_base
       layout:                           text_base
       playlist:                         text_playlist
-      swiper_container_classes:         swiper--text
+      container_classes:                swiper--text
 
       # ------------------------------------------------------------------------
       # CORE Options
@@ -112,8 +112,9 @@ settings:
       id:                               swiper_image_base_captions
       layout:                           image_base
       playlist:                         mega_cities_1
+      swiper_classes:                   false
       container_classes:                false
-      wrapper_classes:                  false                                   # "margin-bottom: 3.75rem;"
+      wrapper_styles:                   false
 
       # ------------------------------------------------------------------------
       # CAPTION Options
@@ -126,7 +127,7 @@ settings:
       # ------------------------------------------------------------------------
       # CORE Options
       # ------------------------------------------------------------------------
-      # 
+      #
       parameters:
         autoHeight:                     true
         slidesPerView:                  2
@@ -219,8 +220,9 @@ settings:
       id:                               swiper_image_base_lightbox
       layout:                           image_base
       playlist:                         free_animal
+      swiper_classes:                   false
       container_classes:                false
-      wrapper_classes:                  false
+      wrapper_styles:                   false
 
       # ------------------------------------------------------------------------
       # CAPTION options
@@ -233,7 +235,7 @@ settings:
       # ------------------------------------------------------------------------
       # CORE Options
       # ------------------------------------------------------------------------
-      #    
+      #
       parameters:
         autoHeight:                     true
         slidesPerView:                  2
@@ -268,7 +270,7 @@ settings:
         # ----------------------------------------------------------------------
         # GENERAL Options
         # ----------------------------------------------------------------------
-        #      
+        #
         enabled:                        true
 
         # ----------------------------------------------------------------------
@@ -311,7 +313,6 @@ settings:
         kbd_controls:
           escKey:                       true
 
-
     # --------------------------------------------------------------------------
     # EXTENDED Swiper, Panorama View
     # --------------------------------------------------------------------------
@@ -327,8 +328,9 @@ settings:
       id:                               swiper_image_panorama
       layout:                           image_base
       playlist:                         panorama
+      swiper_classes:                   false
       container_classes:                false
-      wrapper_classes:                  "height: 240px; padding: 14px 0;"
+      wrapper_styles:                   "height: 240px; padding: 14px 0;"
 
       # ------------------------------------------------------------------------
       # CAPTION Options
@@ -341,7 +343,7 @@ settings:
       # ------------------------------------------------------------------------
       # CORE Options
       # ------------------------------------------------------------------------
-      #      
+      #
       parameters:
         effect:                         panorama
         slidesPerView:                  1.5
@@ -407,7 +409,7 @@ settings:
         # ----------------------------------------------------------------------
         # GENERAL Options
         # ----------------------------------------------------------------------
-        # 
+        #
         enabled:                        false
 
         # ----------------------------------------------------------------------
@@ -464,11 +466,12 @@ settings:
       #
       enabled:                          true
       type:                             image
-      id:                               swiper_image_neighbor
+      id:                               neighbor_slider
       layout:                           image_base
       playlist:                         neighbor
+      swiper_classes:                   neighbor-slider
       container_classes:                false
-      wrapper_classes:                  "height: 300px; padding: 14px 0;"
+      wrapper_styles:                   false
 
       # ------------------------------------------------------------------------
       # CAPTION Options
@@ -481,7 +484,7 @@ settings:
       # ------------------------------------------------------------------------
       # CORE Options
       # ------------------------------------------------------------------------
-      #     
+      #
       parameters:
         slidesPerView:                  1.3
         loop:                           true
@@ -492,9 +495,13 @@ settings:
       # ------------------------------------------------------------------------
       # MODULE Options
       # ------------------------------------------------------------------------
-      #       
+      #
       module_settings:
-        modules:                        [ EffectNeigbors ]
+        modules:                        [ EffectNeighbor ]
+        neighbor:
+          swiper_id:                    neighbor_slider                         # should ALWAYS an id (NOT a class)
+          speed:                        800
+          loop:                         true
 
       # ------------------------------------------------------------------------
       # EVENT Options
@@ -567,12 +574,12 @@ settings:
       #
       enabled:                          true
       type:                             image
-
       id:                               thumb_slider_top
       layout:                           image_base
       playlist:                         free_animal
+      swiper_classes:                   false
       container_classes:                false
-      wrapper_classes:                  false                                   # "height: 300px; padding: 14px 0;"
+      wrapper_styles:                   false
 
       # ------------------------------------------------------------------------
       # CAPTION Options
@@ -589,8 +596,8 @@ settings:
       module_settings:
         modules:                        [ EffectThumbs ]                        # Swiper modules for J1 are to specied (to be loaded)
         thumbs:
+          swiper_id:                    thumb_slider_top                        # should ALWAYS an id (NOT a class)
           speed:                        1000
-          main_slider_id:               thumb_slider_top                    # should ALWAYS an id (NOT a class)
           autoHeight:                   true
           grabCursor:                   true
           placement:                    top
@@ -617,7 +624,7 @@ settings:
         # ----------------------------------------------------------------------
         # GENERAL Options
         # ----------------------------------------------------------------------
-        #      
+        #
         enabled:                        false
 
         # ----------------------------------------------------------------------

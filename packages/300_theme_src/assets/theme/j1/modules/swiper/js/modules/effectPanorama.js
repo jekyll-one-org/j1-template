@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/modules/swiper/js/modules/effectPanorama.js
- # J1 module for SwiperJS v11 (transition effect)
+ # J1 module for SwiperJS v11
  # -----------------------------------------------------------------------------
  #
  # Product/Info:

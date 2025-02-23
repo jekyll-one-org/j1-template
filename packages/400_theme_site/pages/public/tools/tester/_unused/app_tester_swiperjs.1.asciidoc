@@ -106,13 +106,13 @@ as a group. Find below examples of using a simple (base) slider for your
 image data.
 
 [role="mt-4"]
-=== Same Image Sizes
+=== Equal Image Sizes
 
 Carousels are used for an exceptionally compact form of image galleries.
 This example shows some pictures having individual caption text and supports
 a lightbox to enlarge images full size.
 
-.Image Swiper · Same image sizes
+.Image Swiper · Equal image sizes
 swiper::swiper_image_base_lightbox[role="mt-4 mb-4"]
 
 [role="mt-5"]
@@ -161,7 +161,7 @@ mainly used on *desktop* computers.
 ====
 
 .Thumb View · Top
-swiper::thumb_slider_top[role="mb-5"]
+// swiper::thumb_slider_top[role="mt-0 mb-5"]
 
 
 [role="mt-5"]
@@ -326,157 +326,156 @@ The *effect* transforms a slider into a quite *compact* presentation that does
 ====
 
 .Extended Slider · Neighbor View
-swiper::neighbor_slider[role="mb-5"]
+// swiper::neighbor_slider[role="mt-0 mb-5"]
 
-////
-++++
-<div class="swiper-title mt-4"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Extended Slider · Neighbor View </div>
+// ++++
+// <div class="swiper-title mt-4"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Extended Slider · Neighbor View </div>
 
-<!-- Neighbors slider -->
-<div id="neighbor_slider" class="neighbor-slider mb-5">
+// <!-- Neighbors slider -->
+// <div id="neighbor_slider" class="neighbor-slider mb-5">
 
-  <!-- Main center swiper -->
-  <div class="swiper swiper-container">
+//   <!-- Main center swiper -->
+//   <div class="swiper swiper-container">
 
-    <ul class="swiper-wrapper">
-      <li class="swiper-slide">
-        <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-1.jpg"
-        alt="Husky">
-      </li>
-      <li class="swiper-slide">
-        <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-2.jpg"
-        alt="Female Lion">
-      </li>
-      <li class="swiper-slide">
-        <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-3.jpg"
-        alt="Approaching Vulture">
-      </li>
-      <li class="swiper-slide">
-        <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-4.jpg"
-        alt="Group of Flamingos">
-      </li>
-      <li class="swiper-slide">
-        <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-5.jpg"
-        alt="Young Deer">
-      </li>
-      <li class="swiper-slide">
-        <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-6.jpg"
-        alt="Little Bird">
-      </li>
-    </ul>
+//     <ul class="swiper-wrapper">
+//       <li class="swiper-slide">
+//         <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-1.jpg"
+//         alt="Husky">
+//       </li>
+//       <li class="swiper-slide">
+//         <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-2.jpg"
+//         alt="Female Lion">
+//       </li>
+//       <li class="swiper-slide">
+//         <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-3.jpg"
+//         alt="Approaching Vulture">
+//       </li>
+//       <li class="swiper-slide">
+//         <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-4.jpg"
+//         alt="Group of Flamingos">
+//       </li>
+//       <li class="swiper-slide">
+//         <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-5.jpg"
+//         alt="Young Deer">
+//       </li>
+//       <li class="swiper-slide">
+//         <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-6.jpg"
+//         alt="Little Bird">
+//       </li>
+//     </ul>
 
-  </div>
-</div>
+//   </div>
+// </div>
 
-<script>
+// <script>
 
-$(function() {
+// $(function() {
 
-  // Initialize Neighbor Effect
-  function createNeighborEffect(commonParameters, swiper) {
-    var tripleMainSwiper;
+//   // Initialize Neighbor Effect
+//   function createNeighborEffect(commonParameters, swiper) {
+//     var tripleMainSwiper;
 
-    // main swiper
-    //
-    const swiperEl = swiper.querySelector('.swiper');
+//     // main slider
+//     //
+//     const swiperEl = swiper.querySelector('.swiper');
 
-    // create neighbor swiper PREV
-    //
-    const swiperPrevEl = swiperEl.cloneNode(true);
-    swiperPrevEl.classList.add('neighbor-slider-prev');
-    swiper.insertBefore(swiperPrevEl, swiperEl);
-    const swiperPrevSlides = swiperPrevEl.querySelectorAll('.swiper-slide');
-    const swiperPrevLastSlideEl = swiperPrevSlides[swiperPrevSlides.length - 1];
-    swiperPrevEl
-      .querySelector('.swiper-wrapper')
-      .insertBefore(swiperPrevLastSlideEl, swiperPrevSlides[0]);
+//     // create neighbor slider PREV
+//     //
+//     const swiperPrevEl = swiperEl.cloneNode(true);
+//     swiperPrevEl.classList.add('neighbor-slider-prev');
+//     swiper.insertBefore(swiperPrevEl, swiperEl);
+//     const swiperPrevSlides = swiperPrevEl.querySelectorAll('.swiper-slide');
+//     const swiperPrevLastSlideEl = swiperPrevSlides[swiperPrevSlides.length - 1];
+//     swiperPrevEl
+//       .querySelector('.swiper-wrapper')
+//       .insertBefore(swiperPrevLastSlideEl, swiperPrevSlides[0]);
 
-    // create neighbor swiper NEXT
-    //
-    const swiperNextEl = swiperEl.cloneNode(true);
-    swiperNextEl.classList.add('neighbor-slider-next');
-    swiper.appendChild(swiperNextEl);
-    const swiperNextSlides = swiperNextEl.querySelectorAll('.swiper-slide');
-    const swiperNextFirstSlideEl = swiperNextSlides[0];
-    swiperNextEl
-      .querySelector('.swiper-wrapper')
-      .appendChild(swiperNextFirstSlideEl);
+//     // create neighbor slider NEXT
+//     //
+//     const swiperNextEl = swiperEl.cloneNode(true);
+//     swiperNextEl.classList.add('neighbor-slider-next');
+//     swiper.appendChild(swiperNextEl);
+//     const swiperNextSlides = swiperNextEl.querySelectorAll('.swiper-slide');
+//     const swiperNextFirstSlideEl = swiperNextSlides[0];
+//     swiperNextEl
+//       .querySelector('.swiper-wrapper')
+//       .appendChild(swiperNextFirstSlideEl);
 
-    // Add main class
-    //
-    swiperEl.classList.add('neighbor-slider-main');
+//     // Add main class
+//     //
+//     swiperEl.classList.add('neighbor-slider-main');
 
-    // init neighbor swiper PREV
-    //
-    const triplePrevSwiper = new Swiper(swiperPrevEl, {
-      ...commonParameters,
-      allowTouchMove: false,
-      on: {
-        click() {
-          tripleMainSwiper.slidePrev();
-        },
-      },
-    });
+//     // init neighbor slider PREV
+//     //
+//     const triplePrevSwiper = new Swiper(swiperPrevEl, {
+//       ...commonParameters,
+//       allowTouchMove: false,
+//       on: {
+//         click() {
+//           tripleMainSwiper.slidePrev();
+//         },
+//       },
+//     });
 
-    // init neighbor swiper NEXT
-    //
-    const tripleNextSwiper = new Swiper(swiperNextEl, {
-      ...commonParameters,
-      allowTouchMove: false,
-      on: {
-        click() {
-          tripleMainSwiper.slideNext();
-        },
-      },
-    });
+//     // init neighbor slider NEXT
+//     //
+//     const tripleNextSwiper = new Swiper(swiperNextEl, {
+//       ...commonParameters,
+//       allowTouchMove: false,
+//       on: {
+//         click() {
+//           tripleMainSwiper.slideNext();
+//         },
+//       },
+//     });
 
-    // init neighbor swiper MAIN
-    //
-    tripleMainSwiper = new Swiper(swiperEl, {
-      ...commonParameters,
-      grabCursor: true,
-      controller: {
-        control: [triplePrevSwiper, tripleNextSwiper],
-      },
-      on: {
-        destroy() {
-          // destroy PREV|NEXT swipers on MAIN swiper destroy
-          triplePrevSwiper.destroy();
-          tripleNextSwiper.destroy();
-        },
-      },
-    });
-  }
+//     // init neighbor slider MAIN
+//     //
+//     tripleMainSwiper = new Swiper(swiperEl, {
+//       ...commonParameters,
+//       grabCursor: true,
+//       controller: {
+//         control: [triplePrevSwiper, tripleNextSwiper],
+//       },
+//       on: {
+//         destroy() {
+//           // destroy side sliders on main (slider) destroy
+//           triplePrevSwiper.destroy();
+//           tripleNextSwiper.destroy();
+//         },
+//       },
+//     });
+//   }
 
-  // ---------------------------------------------------------------------------
-  // Swiper initializer
-  // ---------------------------------------------------------------------------
-  var dependencies_met_page_ready = setInterval (() => {
-    var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true : false;
+//   // ---------------------------------------------------------------------------
+//   // Swiper initializer
+//   // ---------------------------------------------------------------------------
+//   var dependencies_met_page_ready = setInterval (() => {
+//     var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true : false;
 
-    if (atticFinished) {   
-      var commonSliderParams, neighborSlider;
+//     if (atticFinished) {   
+//       var commonSliderParams, neighborSlider;
 
-      commonSliderParams = {
-        speed:    800,
-        loop:     true,
-      };
-      neighborSlider = document.querySelector('#neighbor_slider');
+//       commonSliderParams = {
+//         speed:    800,
+//         loop:     true,
+//       };
+//       neighborSlider = document.querySelector('#neighbor_slider');
 
-      createNeighborEffect(commonSliderParams, neighborSlider);
+//       createNeighborEffect(commonSliderParams, neighborSlider);
 
-      clearInterval(dependencies_met_page_ready);
-    } // END pageVisible
+//       clearInterval(dependencies_met_page_ready);
+//     } // END pageVisible
     
-  }, 10); // END dependencies_met_page_ready
-});
+//   }, 10); // END dependencies_met_page_ready
+// });
 
-</script>
-++++
-////
+// </script>
+// ++++
+
 
 [role="mt-5"]
-=== Panorama View
+=== Pamorama View
 
 The panorama view presents the available slides of a slider as a group. The
 group is displayed in a virtual, circular viewing angle.

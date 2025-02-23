@@ -19,15 +19,15 @@ function EffectThumbs(_ref) {
 
   var {
     swiper,
+    extendParams,
     params,
     on
   } = _ref;
 
   // set (module) options
-  const commonParams = params.thumbs;
-  const thumbSpeed = commonParams.speed/2;
-  const mainSpeed = commonParams.speed;
-
+  const commonParams  = params.thumbs;
+  const thumbSpeed    = commonParams.speed/2;
+  const mainSpeed     = commonParams.speed;
 
   // ---------------------------------------------------------------------------
   // effect initializer
@@ -35,7 +35,7 @@ function EffectThumbs(_ref) {
 
   // main swiper
   //
-  const mainSwiper    = document.querySelector(`#${commonParams.main_slider_id}`);
+  const mainSwiper    = document.querySelector(`#${commonParams.swiper_id}`);
   const mainSwiperEl  = mainSwiper.querySelector('.swiper');
 
   // create thmubs swiper (duplicate from main)

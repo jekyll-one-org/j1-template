@@ -160,11 +160,7 @@ exclude_from_search:                    true
           {% endif %}
 
           <!-- Swiper Wrapper (slides) -->
-          {% if swiper.wrapper_styles %}
           <ul class="swiper-wrapper" style="{{wrapper_styles}}">
-          {% else %}
-          <ul class="swiper-wrapper">
-          {% endif %}
 
             {% if swiper.lightbox.enabled %}
             <!-- anchor-based swiper slide HTML required for lightbox usage -->

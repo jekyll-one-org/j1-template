@@ -447,42 +447,50 @@ settings:
         # slide 01
         - item:
           enabled:                      true
-          image:                        guardians-of-the-galaxy
-          caption_text:                 Guardians of the Galaxy
+          image:                        free-animal-1
+          caption_text:                 Husky
           description: >
-                                        Guardians of the Galaxy
+                                        Husky
 
         # slide 02
         - item:
           enabled:                      true
-          image:                        justice-league
-          caption_text:                 Justice League
+          image:                        free-animal-2
+          caption_text:                 Female Lion
           description: >
-                                        Justice League
+                                        Female Lion
 
         # slide 03
         - item:
           enabled:                      true
-          image:                        spider-man
-          caption_text:                 Spider Man
+          image:                        free-animal-3
+          caption_text:                 Approaching Vulture
           description: >
-                                        Spider Man
+                                        Approaching Vulture
 
         # slide 04
         - item:
           enabled:                      true
-          image:                        suicide-squad
-          caption_text:                 Suicide Squad
+          image:                        free-animal-4
+          caption_text:                 Group of Flamingos
           description: >
-                                        Suicide Squad
+                                        Group of Flamingos
 
         # slide 05
         - item:
           enabled:                      true
-          image:                        thor-ragnarok
-          caption_text:                 Thor Ragnarok
+          image:                        free-animal-5
+          caption_text:                 Young Deer
           description: >
-                                        Thor Ragnarok
+                                        Young Deer
+
+        # slide 06
+        - item:
+          enabled:                      true
+          image:                        free-animal-6
+          caption_text:                 Lttle Bird
+          description: >
+                                        Lttle Bird
 
 # ------------------------------------------------------------------------------
 # END config
