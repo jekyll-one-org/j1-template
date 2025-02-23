@@ -367,11 +367,7 @@ swiper::neighbor_slider[role="mb-5"]
 
   </div>
 </div>
-++++
-////
 
-////
-++++
 <script>
 
 $(function() {
@@ -512,115 +508,124 @@ lorem:sentences[3]
   <!-- Style expanding-slide should wrap the swiper for Effect: Expanding  -->
   <div id="expanding_slides" class="expanding-slide mt-4">
     <div class="swiper swiper-container">
+      <div class="swiper-wrapper">
 
-        <ul class="swiper-wrapper">
-            <!-- First slide -->
-            <li class="swiper-slide">
-                <!-- Expanding card container, required element -->
-                <div class="expanding-slide-container">
-                    <!-- Expanding card content that opens underneath the cover image on click -->
-                    <div class="expanding-slide-content">
-                        <div class="expanding-slide-content-inner">
-                            <!-- Put any required content here -->
-                            <div class="slide-content">
-                                <div class="slide-content-title">Jameson Street, CA90030</div>
-                                <div class="slide-content-avatars">
-                                    <img src="/assets/image/module/swiper/extended/expanding/image/avatar/avatar-1.jpg">
-                                </div>
-                                <div class="slide-content-rating">
-                                    <img src="/assets/image/pattern/rating/scalable/2-star.svg">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Expanding card cover, can contain any HTML content -->
-                    <div class="expanding-slide-cover">
-                        <img src="/assets/image/module/swiper/extended/expanding/image/tokyo.jpg">
-                        <div class="slide-cover-title">Tokyo</div>
-                    </div>
+        <!-- First slide -->
+        <div class="swiper-slide">
+          <!-- Expanding card container, required element -->
+          <div class="expanding-slide-container">
+            <!-- Expanding card content that opens underneath the cover image on click -->
+            <div class="expanding-slide-content">
+              <div class="expanding-slide-content-inner">
+                <!-- Put any required content here -->
+                <div class="slide-content">
+                  <div class="slide-content-title">Jameson Street, CA90030</div>
+                  <div class="slide-content-avatars">
+                    <img src="/assets/image/module/swiper/extended/expanding/image/avatar/avatar-1.jpg">
+                  </div>
+                  <div class="slide-content-rating">
+                    <img src="/assets/image/pattern/rating/scalable/2-star.svg">
+                  </div>
                 </div>
-            </li>
+              </div>
+            </div>
 
-            <!-- Second slide -->
-            <li class="swiper-slide">
-                <!-- Expanding card container, required element -->
-                <div class="expanding-slide-container">
-                    <div class="expanding-slide-content">
-                        <div class="expanding-slide-content-inner">
-                            <div class="slide-content">
-                                <div class="slide-content-title">Jameson Street, CA90030</div>
-                                <div class="slide-content-avatars">
-                                    <img src="/assets/image/module/swiper/extended/expanding/image/avatar/avatar-1.jpg">
-                                </div>
-                                <div class="slide-content-rating">
-                                    <img src="/assets/image/pattern/rating/scalable/2-star.svg">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <!-- Expanding card cover, can contain any HTML content -->
+            <div class="expanding-slide-cover">
+              <img src="/assets/image/module/swiper/extended/expanding/image/tokyo.jpg">
+              <div class="slide-cover-title">Tokyo</div>
+              <!-- div class="slide-cover-coords">
+                <span>North LAT 36</span>
+                <span>East LON 37</span>
+              </div -->
+            </div>
+          </div>
+        </div>
 
-                    <div class="expanding-slide-cover">
-                        <img src="/assets/image/module/swiper/extended/expanding/image/san-francisco.jpg">
-                        <div class="slide-cover-title">San Francisco</div>
-                    </div>
+        <!-- Second slide -->
+        <div class="swiper-slide">
+          <div class="expanding-slide-container">
+            <div class="expanding-slide-content">
+              <div class="expanding-slide-content-inner">
+                <div class="slide-content">
+                  <div class="slide-content-title">Jameson Street, CA90030</div>
+                  <div class="slide-content-avatars">
+                    <img src="/assets/image/module/swiper/extended/expanding/image/avatar/avatar-1.jpg">
+                  </div>
+                  <div class="slide-content-rating">
+                    <img src="/assets/image/pattern/rating/scalable/2-star.svg">
+                  </div>
                 </div>
-            </li>
+              </div>
+            </div>
+            <div class="expanding-slide-cover">
+              <img src="/assets/image/module/swiper/extended/expanding/image/san-francisco.jpg">
+              <div class="slide-cover-title">San Francisco</div>
+              <!-- div class="slide-cover-coords">
+                <span>North LAT 36</span>
+                <span>East LON 37</span>
+              </div -->
+            </div>
+          </div>
+        </div>
 
-            <!-- Third slide -->
-            <li class="swiper-slide">
-                <!-- Expanding card container, required element -->
-                <div class="expanding-slide-container">
-                    <div class="expanding-slide-content">
-                        <div class="expanding-slide-content-inner">
-                            <div class="slide-content">
-                                <div class="slide-content-title">Jameson Street, CA90030</div>
-                                <div class="slide-content-avatars">
-                                    <img src="/assets/image/module/swiper/extended/expanding/image/avatar/avatar-1.jpg">
-                                </div>
-                                <div class="slide-content-rating">
-                                    <img src="/assets/image/pattern/rating/scalable/2-star.svg">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="expanding-slide-cover">
-                        <img src="/assets/image/module/swiper/extended/expanding/image/london.jpg">
-                        <div class="slide-cover-title">London</div>
-                    </div>
+        <!-- Third slide -->
+        <div class="swiper-slide">
+          <div class="expanding-slide-container">
+            <div class="expanding-slide-content">
+              <div class="expanding-slide-content-inner">
+                <div class="slide-content">
+                  <div class="slide-content-title">Jameson Street, CA90030</div>
+                  <div class="slide-content-avatars">
+                    <img src="/assets/image/module/swiper/extended/expanding/image/avatar/avatar-1.jpg">
+                  </div>
+                  <div class="slide-content-rating">
+                    <img src="/assets/image/pattern/rating/scalable/2-star.svg">
+                  </div>
                 </div>
-            </li>
+              </div>
+            </div>
+            <div class="expanding-slide-cover">
+              <img src="/assets/image/module/swiper/extended/expanding/image/london.jpg">
+              <div class="slide-cover-title">London</div>
+              <!-- div class="slide-cover-coords">
+                <span>North LAT 36</span>
+                <span>East LON 37</span>
+              </div -->
+            </div>
+          </div>
+        </div>
 
-            <!-- Fourth slide -->
-            <li class="swiper-slide">
-                <!-- Expanding card container, required element -->
-                <div class="expanding-slide-container">
-                    <div class="expanding-slide-content">
-                        <div class="expanding-slide-content-inner">
-                            <div class="slide-content">
-                                <div class="slide-content-title">Jameson Street, CA90030</div>
-                                <div class="slide-content-avatars">
-                                    <img src="/assets/image/module/swiper/extended/expanding/image/avatar/avatar-1.jpg">
-                                </div>
-                                <div class="slide-content-rating">
-                                    <img src="/assets/image/pattern/rating/scalable/2-star.svg">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="expanding-slide-cover">
-                        <img src="/assets/image/module/swiper/extended/expanding/image/moscow.jpg">
-                        <div class="slide-cover-title">Moscow</div>
-                    </div>
+        <!-- Fourth slide -->
+        <div class="swiper-slide">
+          <div class="expanding-slide-container">
+            <div class="expanding-slide-content">
+              <div class="expanding-slide-content-inner">
+                <div class="slide-content">
+                  <div class="slide-content-title">Jameson Street, CA90030</div>
+                  <div class="slide-content-avatars">
+                    <img src="/assets/image/module/swiper/extended/expanding/image/avatar/avatar-1.jpg">
+                  </div>
+                  <div class="slide-content-rating">
+                    <img src="/assets/image/pattern/rating/scalable/2-star.svg">
+                  </div>
                 </div>
-            </li>
-        </ul> <!-- END Swiper wrapper -->
-
-    </div> <!-- END Swiper container -->
-  </div> <!-- END expanding_slides -->
-</div> <!-- END app -->
+              </div>
+            </div>
+            <div class="expanding-slide-cover">
+              <img src="/assets/image/module/swiper/extended/expanding/image/moscow.jpg">
+              <div class="slide-cover-title">Moscow</div>
+              <!-- div class="slide-cover-coords">
+                <span>North LAT 36</span>
+                <span>East LON 37</span>
+              </div -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 ++++
 
 ++++
@@ -1002,14 +1007,13 @@ $(function() {
 </style>
 ++++
 
-////
+
 [role="mt-5"]
 == Audio Swiper Apps
 
 lorem:sentences[5]
-////
 
-////
+
 [role="mt-5"]
 == Video Swiper Apps
 
@@ -1021,9 +1025,9 @@ The J1 template system uses VideoJS to enable *mixed* video sliders. VideoJS
 for J1 supports VJS plugins for local Video like MP4 files or platforms like
 YouTube, Vimeo, or Dailymotion to play video *sources* from *different*
 providers.
-////
 
 ////
+
 ++++
 <div class="swiper-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Video Slider · Mixed Sources + Captions</div>
 <!-- Master Slider (top) -->
@@ -1279,4 +1283,5 @@ $(function() {
 });
 </script>
 ++++
+
 ////
