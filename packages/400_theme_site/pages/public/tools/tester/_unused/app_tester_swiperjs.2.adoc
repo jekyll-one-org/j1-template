@@ -106,13 +106,13 @@ as a group. Find below examples of using a simple (base) slider for your
 image data.
 
 [role="mt-4"]
-=== Equal Image Sizes
+=== Same Image Sizes
 
 Carousels are used for an exceptionally compact form of image galleries.
 This example shows some pictures having individual caption text and supports
 a lightbox to enlarge images full size.
 
-.Image Swiper · Equal image sizes
+.Image Swiper · Same image sizes
 swiper::swiper_image_base_lightbox[role="mt-4 mb-4"]
 
 [role="mt-5"]
@@ -161,7 +161,7 @@ mainly used on *desktop* computers.
 ====
 
 .Thumb View · Top
-// swiper::thumb_slider_top[role="mt-0 mb-5"]
+swiper::thumb_slider_top[role="mb-5"]
 
 
 [role="mt-5"]
@@ -326,156 +326,161 @@ The *effect* transforms a slider into a quite *compact* presentation that does
 ====
 
 .Extended Slider · Neighbor View
-// swiper::neighbor_slider[role="mt-0 mb-5"]
+swiper::neighbor_slider[role="mb-5"]
 
-// ++++
-// <div class="swiper-title mt-4"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Extended Slider · Neighbor View </div>
+////
+++++
+<div class="swiper-title mt-4"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Extended Slider · Neighbor View </div>
 
-// <!-- Neighbors slider -->
-// <div id="neighbor_slider" class="neighbor-slider mb-5">
+<!-- Neighbors slider -->
+<div id="neighbor_slider" class="neighbor-slider mb-5">
 
-//   <!-- Main center swiper -->
-//   <div class="swiper swiper-container">
+  <!-- Main center swiper -->
+  <div class="swiper swiper-container">
 
-//     <ul class="swiper-wrapper">
-//       <li class="swiper-slide">
-//         <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-1.jpg"
-//         alt="Husky">
-//       </li>
-//       <li class="swiper-slide">
-//         <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-2.jpg"
-//         alt="Female Lion">
-//       </li>
-//       <li class="swiper-slide">
-//         <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-3.jpg"
-//         alt="Approaching Vulture">
-//       </li>
-//       <li class="swiper-slide">
-//         <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-4.jpg"
-//         alt="Group of Flamingos">
-//       </li>
-//       <li class="swiper-slide">
-//         <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-5.jpg"
-//         alt="Young Deer">
-//       </li>
-//       <li class="swiper-slide">
-//         <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-6.jpg"
-//         alt="Little Bird">
-//       </li>
-//     </ul>
+    <ul class="swiper-wrapper">
+      <li class="swiper-slide">
+        <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-1.jpg"
+        alt="Husky">
+      </li>
+      <li class="swiper-slide">
+        <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-2.jpg"
+        alt="Female Lion">
+      </li>
+      <li class="swiper-slide">
+        <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-3.jpg"
+        alt="Approaching Vulture">
+      </li>
+      <li class="swiper-slide">
+        <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-4.jpg"
+        alt="Group of Flamingos">
+      </li>
+      <li class="swiper-slide">
+        <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-5.jpg"
+        alt="Young Deer">
+      </li>
+      <li class="swiper-slide">
+        <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-6.jpg"
+        alt="Little Bird">
+      </li>
+    </ul>
 
-//   </div>
-// </div>
+  </div>
+</div>
+++++
+////
 
-// <script>
+////
+++++
+<script>
 
-// $(function() {
+$(function() {
 
-//   // Initialize Neighbor Effect
-//   function createNeighborEffect(commonParameters, swiper) {
-//     var tripleMainSwiper;
+  // Initialize Neighbor Effect
+  function createNeighborEffect(commonParameters, swiper) {
+    var tripleMainSwiper;
 
-//     // main slider
-//     //
-//     const swiperEl = swiper.querySelector('.swiper');
+    // main swiper
+    //
+    const swiperEl = swiper.querySelector('.swiper');
 
-//     // create neighbor slider PREV
-//     //
-//     const swiperPrevEl = swiperEl.cloneNode(true);
-//     swiperPrevEl.classList.add('neighbor-slider-prev');
-//     swiper.insertBefore(swiperPrevEl, swiperEl);
-//     const swiperPrevSlides = swiperPrevEl.querySelectorAll('.swiper-slide');
-//     const swiperPrevLastSlideEl = swiperPrevSlides[swiperPrevSlides.length - 1];
-//     swiperPrevEl
-//       .querySelector('.swiper-wrapper')
-//       .insertBefore(swiperPrevLastSlideEl, swiperPrevSlides[0]);
+    // create neighbor swiper PREV
+    //
+    const swiperPrevEl = swiperEl.cloneNode(true);
+    swiperPrevEl.classList.add('neighbor-slider-prev');
+    swiper.insertBefore(swiperPrevEl, swiperEl);
+    const swiperPrevSlides = swiperPrevEl.querySelectorAll('.swiper-slide');
+    const swiperPrevLastSlideEl = swiperPrevSlides[swiperPrevSlides.length - 1];
+    swiperPrevEl
+      .querySelector('.swiper-wrapper')
+      .insertBefore(swiperPrevLastSlideEl, swiperPrevSlides[0]);
 
-//     // create neighbor slider NEXT
-//     //
-//     const swiperNextEl = swiperEl.cloneNode(true);
-//     swiperNextEl.classList.add('neighbor-slider-next');
-//     swiper.appendChild(swiperNextEl);
-//     const swiperNextSlides = swiperNextEl.querySelectorAll('.swiper-slide');
-//     const swiperNextFirstSlideEl = swiperNextSlides[0];
-//     swiperNextEl
-//       .querySelector('.swiper-wrapper')
-//       .appendChild(swiperNextFirstSlideEl);
+    // create neighbor swiper NEXT
+    //
+    const swiperNextEl = swiperEl.cloneNode(true);
+    swiperNextEl.classList.add('neighbor-slider-next');
+    swiper.appendChild(swiperNextEl);
+    const swiperNextSlides = swiperNextEl.querySelectorAll('.swiper-slide');
+    const swiperNextFirstSlideEl = swiperNextSlides[0];
+    swiperNextEl
+      .querySelector('.swiper-wrapper')
+      .appendChild(swiperNextFirstSlideEl);
 
-//     // Add main class
-//     //
-//     swiperEl.classList.add('neighbor-slider-main');
+    // Add main class
+    //
+    swiperEl.classList.add('neighbor-slider-main');
 
-//     // init neighbor slider PREV
-//     //
-//     const triplePrevSwiper = new Swiper(swiperPrevEl, {
-//       ...commonParameters,
-//       allowTouchMove: false,
-//       on: {
-//         click() {
-//           tripleMainSwiper.slidePrev();
-//         },
-//       },
-//     });
+    // init neighbor swiper PREV
+    //
+    const triplePrevSwiper = new Swiper(swiperPrevEl, {
+      ...commonParameters,
+      allowTouchMove: false,
+      on: {
+        click() {
+          tripleMainSwiper.slidePrev();
+        },
+      },
+    });
 
-//     // init neighbor slider NEXT
-//     //
-//     const tripleNextSwiper = new Swiper(swiperNextEl, {
-//       ...commonParameters,
-//       allowTouchMove: false,
-//       on: {
-//         click() {
-//           tripleMainSwiper.slideNext();
-//         },
-//       },
-//     });
+    // init neighbor swiper NEXT
+    //
+    const tripleNextSwiper = new Swiper(swiperNextEl, {
+      ...commonParameters,
+      allowTouchMove: false,
+      on: {
+        click() {
+          tripleMainSwiper.slideNext();
+        },
+      },
+    });
 
-//     // init neighbor slider MAIN
-//     //
-//     tripleMainSwiper = new Swiper(swiperEl, {
-//       ...commonParameters,
-//       grabCursor: true,
-//       controller: {
-//         control: [triplePrevSwiper, tripleNextSwiper],
-//       },
-//       on: {
-//         destroy() {
-//           // destroy side sliders on main (slider) destroy
-//           triplePrevSwiper.destroy();
-//           tripleNextSwiper.destroy();
-//         },
-//       },
-//     });
-//   }
+    // init neighbor swiper MAIN
+    //
+    tripleMainSwiper = new Swiper(swiperEl, {
+      ...commonParameters,
+      grabCursor: true,
+      controller: {
+        control: [triplePrevSwiper, tripleNextSwiper],
+      },
+      on: {
+        destroy() {
+          // destroy PREV|NEXT swipers on MAIN swiper destroy
+          triplePrevSwiper.destroy();
+          tripleNextSwiper.destroy();
+        },
+      },
+    });
+  }
 
-//   // ---------------------------------------------------------------------------
-//   // Swiper initializer
-//   // ---------------------------------------------------------------------------
-//   var dependencies_met_page_ready = setInterval (() => {
-//     var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true : false;
+  // ---------------------------------------------------------------------------
+  // Swiper initializer
+  // ---------------------------------------------------------------------------
+  var dependencies_met_page_ready = setInterval (() => {
+    var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true : false;
 
-//     if (atticFinished) {   
-//       var commonSliderParams, neighborSlider;
+    if (atticFinished) {   
+      var commonSliderParams, neighborSlider;
 
-//       commonSliderParams = {
-//         speed:    800,
-//         loop:     true,
-//       };
-//       neighborSlider = document.querySelector('#neighbor_slider');
+      commonSliderParams = {
+        speed:    800,
+        loop:     true,
+      };
+      neighborSlider = document.querySelector('#neighbor_slider');
 
-//       createNeighborEffect(commonSliderParams, neighborSlider);
+      createNeighborEffect(commonSliderParams, neighborSlider);
 
-//       clearInterval(dependencies_met_page_ready);
-//     } // END pageVisible
+      clearInterval(dependencies_met_page_ready);
+    } // END pageVisible
     
-//   }, 10); // END dependencies_met_page_ready
-// });
+  }, 10); // END dependencies_met_page_ready
+});
 
-// </script>
-// ++++
-
+</script>
+++++
+////
 
 [role="mt-5"]
-=== Pamorama View
+=== Panorama View
 
 The panorama view presents the available slides of a slider as a group. The
 group is displayed in a virtual, circular viewing angle.
@@ -507,124 +512,115 @@ lorem:sentences[3]
   <!-- Style expanding-slide should wrap the swiper for Effect: Expanding  -->
   <div id="expanding_slides" class="expanding-slide mt-4">
     <div class="swiper swiper-container">
-      <div class="swiper-wrapper">
 
-        <!-- First slide -->
-        <div class="swiper-slide">
-          <!-- Expanding card container, required element -->
-          <div class="expanding-slide-container">
-            <!-- Expanding card content that opens underneath the cover image on click -->
-            <div class="expanding-slide-content">
-              <div class="expanding-slide-content-inner">
-                <!-- Put any required content here -->
-                <div class="slide-content">
-                  <div class="slide-content-title">Jameson Street, CA90030</div>
-                  <div class="slide-content-avatars">
-                    <img src="/assets/image/module/swiper/extended/expanding/image/avatar/avatar-1.jpg">
-                  </div>
-                  <div class="slide-content-rating">
-                    <img src="/assets/image/pattern/rating/scalable/2-star.svg">
-                  </div>
+        <ul class="swiper-wrapper">
+            <!-- First slide -->
+            <li class="swiper-slide">
+                <!-- Expanding card container, required element -->
+                <div class="expanding-slide-container">
+                    <!-- Expanding card content that opens underneath the cover image on click -->
+                    <div class="expanding-slide-content">
+                        <div class="expanding-slide-content-inner">
+                            <!-- Put any required content here -->
+                            <div class="slide-content">
+                                <div class="slide-content-title">Jameson Street, CA90030</div>
+                                <div class="slide-content-avatars">
+                                    <img src="/assets/image/module/swiper/extended/expanding/image/avatar/avatar-1.jpg">
+                                </div>
+                                <div class="slide-content-rating">
+                                    <img src="/assets/image/pattern/rating/scalable/2-star.svg">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Expanding card cover, can contain any HTML content -->
+                    <div class="expanding-slide-cover">
+                        <img src="/assets/image/module/swiper/extended/expanding/image/tokyo.jpg">
+                        <div class="slide-cover-title">Tokyo</div>
+                    </div>
                 </div>
-              </div>
-            </div>
+            </li>
 
-            <!-- Expanding card cover, can contain any HTML content -->
-            <div class="expanding-slide-cover">
-              <img src="/assets/image/module/swiper/extended/expanding/image/tokyo.jpg">
-              <div class="slide-cover-title">Tokyo</div>
-              <!-- div class="slide-cover-coords">
-                <span>North LAT 36</span>
-                <span>East LON 37</span>
-              </div -->
-            </div>
-          </div>
-        </div>
+            <!-- Second slide -->
+            <li class="swiper-slide">
+                <!-- Expanding card container, required element -->
+                <div class="expanding-slide-container">
+                    <div class="expanding-slide-content">
+                        <div class="expanding-slide-content-inner">
+                            <div class="slide-content">
+                                <div class="slide-content-title">Jameson Street, CA90030</div>
+                                <div class="slide-content-avatars">
+                                    <img src="/assets/image/module/swiper/extended/expanding/image/avatar/avatar-1.jpg">
+                                </div>
+                                <div class="slide-content-rating">
+                                    <img src="/assets/image/pattern/rating/scalable/2-star.svg">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        <!-- Second slide -->
-        <div class="swiper-slide">
-          <div class="expanding-slide-container">
-            <div class="expanding-slide-content">
-              <div class="expanding-slide-content-inner">
-                <div class="slide-content">
-                  <div class="slide-content-title">Jameson Street, CA90030</div>
-                  <div class="slide-content-avatars">
-                    <img src="/assets/image/module/swiper/extended/expanding/image/avatar/avatar-1.jpg">
-                  </div>
-                  <div class="slide-content-rating">
-                    <img src="/assets/image/pattern/rating/scalable/2-star.svg">
-                  </div>
+                    <div class="expanding-slide-cover">
+                        <img src="/assets/image/module/swiper/extended/expanding/image/san-francisco.jpg">
+                        <div class="slide-cover-title">San Francisco</div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <div class="expanding-slide-cover">
-              <img src="/assets/image/module/swiper/extended/expanding/image/san-francisco.jpg">
-              <div class="slide-cover-title">San Francisco</div>
-              <!-- div class="slide-cover-coords">
-                <span>North LAT 36</span>
-                <span>East LON 37</span>
-              </div -->
-            </div>
-          </div>
-        </div>
+            </li>
 
-        <!-- Third slide -->
-        <div class="swiper-slide">
-          <div class="expanding-slide-container">
-            <div class="expanding-slide-content">
-              <div class="expanding-slide-content-inner">
-                <div class="slide-content">
-                  <div class="slide-content-title">Jameson Street, CA90030</div>
-                  <div class="slide-content-avatars">
-                    <img src="/assets/image/module/swiper/extended/expanding/image/avatar/avatar-1.jpg">
-                  </div>
-                  <div class="slide-content-rating">
-                    <img src="/assets/image/pattern/rating/scalable/2-star.svg">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="expanding-slide-cover">
-              <img src="/assets/image/module/swiper/extended/expanding/image/london.jpg">
-              <div class="slide-cover-title">London</div>
-              <!-- div class="slide-cover-coords">
-                <span>North LAT 36</span>
-                <span>East LON 37</span>
-              </div -->
-            </div>
-          </div>
-        </div>
+            <!-- Third slide -->
+            <li class="swiper-slide">
+                <!-- Expanding card container, required element -->
+                <div class="expanding-slide-container">
+                    <div class="expanding-slide-content">
+                        <div class="expanding-slide-content-inner">
+                            <div class="slide-content">
+                                <div class="slide-content-title">Jameson Street, CA90030</div>
+                                <div class="slide-content-avatars">
+                                    <img src="/assets/image/module/swiper/extended/expanding/image/avatar/avatar-1.jpg">
+                                </div>
+                                <div class="slide-content-rating">
+                                    <img src="/assets/image/pattern/rating/scalable/2-star.svg">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        <!-- Fourth slide -->
-        <div class="swiper-slide">
-          <div class="expanding-slide-container">
-            <div class="expanding-slide-content">
-              <div class="expanding-slide-content-inner">
-                <div class="slide-content">
-                  <div class="slide-content-title">Jameson Street, CA90030</div>
-                  <div class="slide-content-avatars">
-                    <img src="/assets/image/module/swiper/extended/expanding/image/avatar/avatar-1.jpg">
-                  </div>
-                  <div class="slide-content-rating">
-                    <img src="/assets/image/pattern/rating/scalable/2-star.svg">
-                  </div>
+                    <div class="expanding-slide-cover">
+                        <img src="/assets/image/module/swiper/extended/expanding/image/london.jpg">
+                        <div class="slide-cover-title">London</div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <div class="expanding-slide-cover">
-              <img src="/assets/image/module/swiper/extended/expanding/image/moscow.jpg">
-              <div class="slide-cover-title">Moscow</div>
-              <!-- div class="slide-cover-coords">
-                <span>North LAT 36</span>
-                <span>East LON 37</span>
-              </div -->
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+            </li>
+
+            <!-- Fourth slide -->
+            <li class="swiper-slide">
+                <!-- Expanding card container, required element -->
+                <div class="expanding-slide-container">
+                    <div class="expanding-slide-content">
+                        <div class="expanding-slide-content-inner">
+                            <div class="slide-content">
+                                <div class="slide-content-title">Jameson Street, CA90030</div>
+                                <div class="slide-content-avatars">
+                                    <img src="/assets/image/module/swiper/extended/expanding/image/avatar/avatar-1.jpg">
+                                </div>
+                                <div class="slide-content-rating">
+                                    <img src="/assets/image/pattern/rating/scalable/2-star.svg">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="expanding-slide-cover">
+                        <img src="/assets/image/module/swiper/extended/expanding/image/moscow.jpg">
+                        <div class="slide-cover-title">Moscow</div>
+                    </div>
+                </div>
+            </li>
+        </ul> <!-- END Swiper wrapper -->
+
+    </div> <!-- END Swiper container -->
+  </div> <!-- END expanding_slides -->
+</div> <!-- END app -->
 ++++
 
 ++++
@@ -1006,13 +1002,14 @@ $(function() {
 </style>
 ++++
 
-
+////
 [role="mt-5"]
 == Audio Swiper Apps
 
 lorem:sentences[5]
+////
 
-
+////
 [role="mt-5"]
 == Video Swiper Apps
 
@@ -1024,9 +1021,9 @@ The J1 template system uses VideoJS to enable *mixed* video sliders. VideoJS
 for J1 supports VJS plugins for local Video like MP4 files or platforms like
 YouTube, Vimeo, or Dailymotion to play video *sources* from *different*
 providers.
-
 ////
 
+////
 ++++
 <div class="swiper-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Video Slider · Mixed Sources + Captions</div>
 <!-- Master Slider (top) -->
@@ -1282,5 +1279,4 @@ $(function() {
 });
 </script>
 ++++
-
 ////
