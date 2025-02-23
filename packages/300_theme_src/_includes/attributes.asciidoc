@@ -574,9 +574,9 @@ tag::data[]
 :data-images--example-content:                    "assets/image/page/features/example-content-1280x800.jpg, Example Content"
 :data-images--bootswatch-themes:                  "assets/image/page/features/bootswatch-themes-1280x800.jpg, Bootswatch Themes (Minty)"
 :data-images--blog-post-navigator:                "assets/image/page/features/blog-post-navigator-1280x1000.jpg, Blog Post Navigator"
-:data-images--nbi-textbook-example:                "assets/image/page/features/nbi-barchart-1280x800.jpg, Bar Chart"
+:data-images--nbi-textbook-example:               "assets/image/page/features/nbi-barchart-1280x800.jpg, Bar Chart"
 
-:data-lb-example--template-features:              "assets/image/module/gallery/old_times/image_01.jpg, GrandPa's 80th Birthday, assets/image/module/gallery/old_times/image_02.jpg, GrandPa's 80th Birthday, assets/image/module/gallery/old_times/image_03.jpg, GrandPa's annual journey"
+:data-lb-example--template-features:              "assets/image/module/gallery/old_time/image/grand_pa/image-1.jpg, GrandPa's 80th Birthday, assets/image/module/gallery/old_time/image/grand_pa/image-2.jpg, GrandPa's 80th Birthday, assets/image/module/gallery/old_time/image/grand_pa/image-3.jpg, GrandPa's annual journey"
 
 :data-rocketstart--1-click-deploy-1:              "assets/image/page/1-click-deploy/step-1.jpg, 1-Click Deploy Process"
 :data-rocketstart--1-click-deploy-2:              "assets/image/page/1-click-deploy/step-2.jpg, 1-Click Deploy Process"
@@ -593,8 +593,8 @@ tag::data[]
 
 :data-translator--icon:                           "assets/image/page/tools/translator-icon.jpg, QuickLinks - Translator Icon"
 
-:data-images-lightbox--standalone:                "assets/image/module/gallery/old_times/image_02.jpg, GrandPa's 80th Birthday"
-:data-images-lightbox--group:                     "assets/image/module/gallery/old_times/image_03.jpg, GrandPa's annual journey, assets/image/module/gallery/old_times/image_04.jpg, GrandPa's annual journey"
+:data-images-lightbox--standalone:                "assets/image/module/gallery/old_time/image/grand_pa/image-2.jpg, GrandPa's 80th Birthday"
+:data-images-lightbox--group:                     "assets/image/module/gallery/old_time/image/grand_pa/image-3.jpg, GrandPa's annual journey, assets/image/module/gallery/old_time/image/grand_pa/image-4.jpg, GrandPa's annual journey"
 
 end::data[]
 

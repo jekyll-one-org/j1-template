@@ -399,7 +399,7 @@ lightbox::<block_id>[ 800, {<data-images-id>} ]
 ----
 
 .Lightbox block for standalone images
-lightbox::images-standalone[ 800, {data-images-standalone} ]
+lightbox::images-standalone[ 800, {data-images-lightbox--standalone} ]
 
 [role="mt-5"]
 === Grouped Images
@@ -416,7 +416,7 @@ lightbox::<block_id>[ 400, {<data-images-group_id>}, <group_name> ]
 ----
 
 .Lightbox block for grouped images
-lightbox::images-group[ 400, {data-images-group}, group_name ]
+lightbox::images-group[ 400, {data-images-lightbox--group}, group_name ]
 
 
 [role="mt-5"]

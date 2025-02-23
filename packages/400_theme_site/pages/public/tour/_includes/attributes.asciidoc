@@ -99,9 +99,6 @@ end::tags[]
 // -----------------------------------------------------------------------------
 tag::data[]
 
-:data-images-standalone:                          "assets/image/module/gallery/old_times/image_02.jpg, GrandPa's 80th Birthday"
-:data-images-group:                               "assets/image/module/gallery/old_times/image_03.jpg, GrandPa's annual journey, assets/image/module/gallery/old_times/image_04.jpg, GrandPa's annual journey"
-
 :data-images--themes-menu:                        "assets/image/page/tour/themes-1920x1280.jpg, Themes menu (Bootswatch)"
 :data-images--styles-menu:                        "assets/image/page/tour/styles-menu-1280x800.jpg, Styles menu (Bootswatch)"
 

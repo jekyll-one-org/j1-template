@@ -139,13 +139,13 @@ Find below an example of using the the default lightbox used for standalone
 images. See how individual images are linked.
 
 .Lightbox for standalone images
-lightbox::example-standalone[800, {data-images-standalone}, role="mt-4 mb-5"]
+lightbox::example-standalone[800, {data-images-lightbox--standalone}, role="mt-4 mb-5"]
 
 The J1 lightbox module supports groups of images as well. Click on the image
 group below to see how a group is managed.
 
 .Lightbox for grouped images
-lightbox::example-group[395, {data-images-group}, group, role="mt-4 mb-4 wm-800"]
+lightbox::example-group[395, {data-images-lightbox--group}, group, role="mt-4 mb-4 wm-800"]
 
 
 [role="mt-5"]
@@ -497,7 +497,7 @@ It works by placing elements in an optimal position based on available
 horizontal and vertical space. Sort of like mason fitting stones in a wall.
 For sure, you'll have seen it in action all over the Internet.
 
-.Gallery of Images + lightGallery
+.Gallery of Images + lightGaller
 gallery::jg_mega_cities[role="mt-4 mb-4"]
 
 
@@ -520,3 +520,4 @@ HTML5 video for local content and from online sources on the Internet.
 
 [role="mb-7"]
 Incredible? See the next example page link:{url-tour--present-audio}[Audio Player].
+
