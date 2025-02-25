@@ -177,7 +177,7 @@ settings:
     # demo_text_carousel
     #
     - show:
-        enabled:                        true
+        enabled:                        false
         id:                             demo_text_carousel
         lightbox:                       false
         type:                           text
@@ -207,7 +207,7 @@ settings:
         text_color:                     var(--md-gray-300)
         font_size:                      1.5rem
         font_weight:                    500
-        background:                     /assets/image/quotes/default.jpg       # /assets/image/module/attic/ideas-start-here-1920x1280-bw.jpg
+        background:                     /assets/image/quote/default.jpg         # /assets/image/module/attic/ideas-start-here-1920x1280-bw.jpg
         cover:                          true
         darken:                         1
         gridify:                        true
@@ -220,7 +220,7 @@ settings:
                                           "<big>Create modern static sites</big>  </br> <i>Secure, powerful and fast<i>"
                                         ]
         options:
-          autoPlay:                     5000
+          autoPlay:                     false
           singleItem:                   true
           pagination:                   false
 

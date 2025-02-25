@@ -74,23 +74,6 @@ devices. SwiperJS-based sliders are intended to be displayed at their best on
 all types of websites, such as those viewed on desktop computers, tablets, or
 smartphones.
 
-// [role="mt-4"]
-// == Text Swiper
-
-// A slider is typically used for displaying images. Still, the implementation
-// for the J1 Template supports a lot more sources to be displayed as a slide
-// show — simple text for example.
-
-// [role="mt-4"]
-// === Base Text
-
-// Important statements or topics can be placed on top of an article or a
-// paragraph to give them better visibility. You can present facts to know
-// animated for the readers attention.
-
-// .Base Text Swiper
-// swiper::swiper_text_base[role="mt-4 mb-4"]
-
 
 [role="mt-5"]
 == What Swiper Apps are
@@ -98,7 +81,54 @@ smartphones.
 lorem:sentences[5]
 
 
-[role="mt-4"]
+[role="mt-5"]
+== Text Swiper
+
+Swipers are mnainly used for displaying images. Still, the implementation
+for the J1 Template supports a lot more *sources* to be displayed as a *slide*.
+Simple *text* for example.
+
+[TIP]
+====
+Have a look a
+link://daneden.github.io/animate.css/[Dan Eden's home page, {browser-window--new}]
+to see all *possible* styles available to be created based on pure CSS. Some of
+them are implemented for J1 Swipper Apps for animation. For more details, see
+the documentation at
+link:{url-j1-docs--carousel-module}[Carousel module, {browser-window--new}].
+====
+
+
+[role="mt-5"]
+=== Base Text Swiper
+
+Important statements or topics can be placed on top of an *article* or a
+*paragraph* to give them better visibility. You can present facts to know
+animated for the readers attention.
+
+.Base Text Swiper
+swiper::swiper_text_base[role="mt-4 mb-4"]
+
+
+[role="mt-5"]
+=== Parallax Text Swiper
+
+A more *emphasized* type of a **text**-based swiper is a *parallax* text
+swiper. If you want to *focus* the meaning, this kind of a swiper may be
+nteresting. Parallax text sliders can be placed as *banners* on a page.
+
+.Parallax Text Swiper
+swiper::swiper_text_parallax[role="mt-4 mb-4"]
+
+
+
+
+
+
+
+
+
+[role="mt-5"]
 == Image Swiper App
 
 Sliders (or carousels) are mainly used for picture data to animate images
@@ -108,9 +138,10 @@ image data.
 [role="mt-4"]
 === Same Image Sizes
 
-Carousels are used for an exceptionally compact form of image galleries.
-This example shows some pictures having individual caption text and supports
-a lightbox to enlarge images full size.
+Important statements or topics can be placed on top of an article or
+a paragraph to give them better visibility. In one line, you can present
+many facts to know animated for the reader's attention within a single
+line.
 
 .Image Swiper · Same image sizes
 swiper::swiper_image_base_lightbox[role="mt-4 mb-4"]
@@ -126,18 +157,16 @@ swiper::swiper_image_base_captions[role="mt-4 mb-4"]
 
 
 [role="mt-5"]
-== Swiper Apps using Views
+== Swiper Apps using Layouts
 
-Views in the J1 Template for SwioperJS are *transformations* of a Swiper to
-rebuild it for extended *UI controls* or create a more complex visual
-*presentation* for the Swiper's slides.
-
-Views can *improve* the *useability* of a slider or make the presentation
+Layouts in the J1 Template for SwiperJS are *transformations* of a Swiper to
+rebuild it for  a more complex visual *presentation* for the Swiper's slides.
+The Layout of a swiper  can *improve* the *useability* or make the presentation
 of a slideshow more *interesting*.
 
 [role="mt-4"]
 [[image_thumb_silder]]
-=== Thumb View
+=== Layout Thumb
 
 To give the users a more *visual* control over a slideshow, Swiper sliders
 can provide *UI elements* by placing minified images or text elements (thumbs)
@@ -146,7 +175,7 @@ examples how to control such sliders' by a thumb (slave) silder.
 
 [role="mt-4"]
 [[image_thumbs_top_bottom]]
-==== Thumb View Top|Bottom
+==== Layout Thumb Top|Bottom
 
 This Thumb Slider uses minified images that are placed to control the (main)
 slider at the *top* or the *bottom*. This swiper type creates a thumbed Swiper
@@ -156,19 +185,19 @@ sliders' images *optimally*.
 [role="mb-5"]
 [TIP]
 ====
-This Thumb Slider creates the best results for high-quality images for websites
-mainly used on *desktop* computers.
+This Layout creates best results for high-quality images for websites mainly
+used on *desktop* computers.
 ====
 
-.Thumb View · Top
+.Layout Thumb · Top
 swiper::thumb_slider_top[role="mb-5"]
 
 
 [role="mt-5"]
 [[image_thumbs_right_left]]
-==== Thumb View Right|Left
+==== Layout Thumb Right|Left
 
-A more *mobile-friendly* version of a Thunb Slider is created by placing the
+A more *mobile-friendly* version of a Thunb slider is created by placing the
 minified images for the slider on the *right* or the *left*. This swiper use
 just a *single lane* in the page, but *minifies* the presented images as
 required for the lane *heigth* specified.
@@ -181,7 +210,7 @@ presented *images*.
 ====
 
 ++++
-<div class="swiper-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Thumb View · Right + Captions </div>
+<div class="swiper-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Layout Thumb · Right + Captions </div>
 <div class="container g-0 mb-5">
     <div class="row gx-1">
 
@@ -309,7 +338,7 @@ $(function() {
 
 
 [role="mt-5"]
-=== Neighbor View
+=== Layout Neighbor
 
 A slideshow typically presents a larger number of slides, which requires a
 sort of navigation. The effect *neighbors* accompanies the *active slide* by
@@ -325,7 +354,7 @@ The *effect* transforms a slider into a quite *compact* presentation that does
 *not* require any (additional) *navigation* elements.
 ====
 
-.Extended Slider · Neighbor View
+.Extended Slider · Layout Neighbor
 swiper::neighbor_slider[role="mb-5"]
 
 ////
@@ -480,10 +509,10 @@ $(function() {
 ////
 
 [role="mt-5"]
-=== Panorama View
+=== Layout Panorama
 
-The panorama view presents the available slides of a slider as a group. The
-group is displayed in a virtual, circular viewing angle.
+The layout panaorama presents available slides of a slider as a group. The
+group is displayed in a virtual, circular viewing angle. 
 
 [role="mb-5"]
 [TIP]
@@ -492,22 +521,18 @@ The effect is great for slides connected in terms of content to give the user
 a panoramic view impression.
 ====
 
-.Extended Slider · Panorama View
+.Extended Slider · Layout Panorama
 swiper::swiper_image_panorama[role="mt-4 mb-5"]
 
 
 [role="mt-5"]
-== Swiper Apps using Layouts
-
-lorem:sentences[5]
-
-[role="mt-4"]
 [[slider_collection]]
 === Layout Expanding
 
 lorem:sentences[3]
 
 ++++
+<div class="swiper-title mt-4"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Extended Slider · Layout Expanding </div>
 <div id="app">
   <!-- Style expanding-slide should wrap the swiper for Effect: Expanding  -->
   <div id="expanding_slides" class="expanding-slide mt-4">

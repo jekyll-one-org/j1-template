@@ -177,9 +177,9 @@ slideshows.
 [role="mt-4"]
 === Text Slider
 
-A slider or carousel is typically used for displaying images. Still, the
-implementation for the J1 Template supports a lot more sources to be
-displayed as a slide show -- simple text for example.
+Swipers are typically used for displaying images. Still, the implementation
+for the J1 Template supports a lot more sources to be displayed as a slide
+show -- simple text for example.
 
 [role="mt-4"]
 ==== Base Text Slider
@@ -191,7 +191,13 @@ line.
 
 .Base Text Slider
 // carousel::demo_text_carousel[role="mb-4"]
-//swiper::swiper_text_base[role="mt-4 mb-4"]
+swiper::swiper_text_base[role="mt-4 mb-4"]
+
+
+[role="mt-4"]
+==== Parallax Text Silder
+
+A more emphasized type of text-based carousel is a parallax text slider. If you want to focus the meaning, this kind of a slide show may be interesting. Image-based slide shows may draw off the reader’s attention from the text, therefore a pure text-based presentation maybe the better choice.
 
 [role="mt-4"]
 ==== Parallax Text Silder
