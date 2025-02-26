@@ -27,12 +27,6 @@ description:
 settings:
 
   # ============================================================================
-  # GENERAL configuration
-  # ----------------------------------------------------------------------------
-  #
-  enabled:                              true
-
-  # ============================================================================
   # SWIPER configuration
   # ----------------------------------------------------------------------------
   swipers:
@@ -73,7 +67,7 @@ settings:
       #
       module_settings:
         autoplay:
-          delay:                        3000
+          delay:                        3500
           pauseOnMouseEnter:            true
           disableOnInteraction:         false      
 
@@ -107,7 +101,9 @@ settings:
       enabled:                          true
       id:                               swiper_text_parallax
       layout:                           text/parallax
-      gridify:                          true                                    # true | false
+      gridify:                          true
+      # background-image:               /assets/image/quote/default.jpg
+      # quote-text-color:               rgba(255, 255, 255, .75)
       playlist:                         text_playlist
       swiper_classes:                   false
       container_classes:                swiper-text-parallax
@@ -126,10 +122,10 @@ settings:
       # ------------------------------------------------------------------------
       #
       module_settings:
-        # autoplay:
-        #   delay:                        3000
-        #   pauseOnMouseEnter:            true
-        #   disableOnInteraction:         false      
+        autoplay:
+          delay:                        3500
+          pauseOnMouseEnter:            true
+          disableOnInteraction:         false      
 
       # ------------------------------------------------------------------------
       # EVENT Options

@@ -208,17 +208,8 @@ ul.swiper-wrapper {
   transform: rotate(-90deg);
 }
 
-
 /* Text Swipers
 -------------------------------------------------------------------------------- */
-
-.transparent-text {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, .1);
-}
 
 /* BASE Text Swipers
 -------------------------------------------------------------------- */
@@ -234,19 +225,24 @@ ul.swiper-wrapper {
   text-align: left;
   color: var(--md-gray-700);
   background: var(--md-gray-50);
+  overflow-x: hidden;
 }
 
 /* PARALLAX Text Swipers
 -------------------------------------------------------------------- */
+
+/* jadams. 2025-02-25: configurable background image placed via /assets/data/swiper_app.html (styles) */
+/*
 .swiper-text-parallax {
   width: 100%;
   height: 100%;
-  padding: 75px 0 75px 75px !important;
+  padding: 75px 0 75px 0;
   position: relative;
   background: url(/assets/image/quote/default.jpg) 50% 0 repeat fixed;
 }
+/*
 
-/* jadams. 2025-02-25: class placed via /assets/data/swiper_app.html if swiper.gridify enabled */
+/* jadams. 2025-02-25: placed via /assets/data/swiper_app.html (styles) if swiper.gridify enabled */
 /*
 .swiper-text-parallax:before {
   content: "";
@@ -260,14 +256,15 @@ ul.swiper-wrapper {
 */
 
 .swiper-text-parallax .swiper-wrapper .swiper-slide p {
-  position: relative;
-  top: 0;
-  left: 0;  
-  margin-bottom: 0px !important;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
   font-size: 1.5rem;
   font-weight: 500;   
   text-align: left;
   color: rgba(255, 255, 255, .75);
+  overflow-x: hidden;
 }
 
 

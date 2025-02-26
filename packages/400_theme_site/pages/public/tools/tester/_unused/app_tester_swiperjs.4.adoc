@@ -78,19 +78,7 @@ smartphones.
 [role="mt-5"]
 == What Swiper Apps are
 
-Swiper Apps are preconfigured sliders that use the SwiperJS API as a base and
-combine it with other libraries like AmplitudeJS, VideoJS, and Photoswipe to
-create powerful and modern slider shows.
-
-[NOTE]
-====
-Swiper Apps create sliders that display text, images, videos, or audio files.
-They can be used to create simple sliders or more complex slide shows with
-different types of content.
-
-Swiper Apps are defined by pure *configuration* and do *not require* any
-*programming*.
-====
+lorem:sentences[5]
 
 
 [role="mt-5"]
@@ -100,8 +88,18 @@ Swipers are mnainly used for displaying images. Still, the implementation
 for the J1 Template supports a lot more *sources* to be displayed as a *slide*.
 Simple *text* for example.
 
+[TIP]
+====
+Have a look a
+link://daneden.github.io/animate.css/[Dan Eden's home page, {browser-window--new}]
+to see all *possible* styles available to be created based on pure CSS. Some of
+them are implemented for J1 Swipper Apps for animation. For more details, see
+the documentation at
+link:{url-j1-docs--carousel-module}[Carousel module, {browser-window--new}].
+====
 
-[role="mt-4"]
+
+[role="mt-5"]
 === Base Text Swiper
 
 Important statements or topics can be placed on top of an *article* or a
@@ -109,10 +107,10 @@ Important statements or topics can be placed on top of an *article* or a
 animated for the readers attention.
 
 .Base Text Swiper
-swiper::swiper_text_base[role="mt-4 mb-5"]
+swiper::swiper_text_base[role="mt-4 mb-4"]
 
 
-[role="mt-4"]
+[role="mt-5"]
 === Parallax Text Swiper
 
 A more *emphasized* type of a **text**-based swiper is a *parallax* text
@@ -120,7 +118,14 @@ swiper. If you want to *focus* the meaning, this kind of a swiper may be
 nteresting. Parallax text sliders can be placed as *banners* on a page.
 
 .Parallax Text Swiper
-swiper::swiper_text_parallax[role="mt-4 mb-5"]
+swiper::swiper_text_parallax[role="mt-4 mb-4"]
+
+
+
+
+
+
+
 
 
 [role="mt-5"]
@@ -645,25 +650,25 @@ lorem:sentences[3]
 
 ++++
 <script>
-
 $(function() {
 
   // ---------------------------------------------------------------------------
-  // Initialize Layout Expanding
+  // Layout initializer
   // ---------------------------------------------------------------------------  
   function createLayoutExpanding(el) {
     const swiperEl = el.querySelector('.swiper');
 
     const calcOffsets = (slideEl) => {
-      const coverEl = slideEl.querySelector('.expanding-slide-cover');
+      const coverEl   = slideEl.querySelector('.expanding-slide-cover');
       const contentEl = slideEl.querySelector('.expanding-slide-content');
-      if (!contentEl || !coverEl) return;
+      if (!coverEl || !contentEl) return;
 
       const { offsetWidth: coverWidth, offsetHeight: coverHeight } = coverEl;
       slideEl.style.setProperty(
         '--expanding-slide-cover-height',
         `${coverHeight}px`,
       );
+
       const { offsetHeight: contentHeight, offsetWidth: contentWidth } = contentEl;
       const props = {
         '--expanding-slide-scale-x': (coverWidth / contentWidth) * 0.95,
@@ -672,26 +677,29 @@ $(function() {
       Object.keys(props).forEach((prop) => {
         slideEl.style.setProperty(prop, props[prop]);
       });
-    };
+    }; // END calcOffsets
 
+
+    // -------------------------------------------------------------------------
+    // Event initializer
+    // -------------------------------------------------------------------------
     const initEvents = (swiper) => {
       swiper.slides.forEach((slideEl) => {
-        const containerEl = slideEl.querySelector(
-          '.expanding-slide-container',
-        );
-        const coverEl = slideEl.querySelector('.expanding-slide-cover');
-        const contentEl = slideEl.querySelector('.expanding-slide-content');
+        const containerEl = slideEl.querySelector('.expanding-slide-container');
+        const coverEl     = slideEl.querySelector('.expanding-slide-cover');
+        const contentEl   = slideEl.querySelector('.expanding-slide-content');
+
         coverEl.expandingCollectionClickHandler = () => {
-          if (!contentEl || !slideEl.classList.contains('swiper-slide-active'))
-            return;
+          if (!contentEl || !slideEl.classList.contains('swiper-slide-active')) return;
           containerEl.classList.toggle('expanding-slide-opened');
         };
+
         coverEl.addEventListener(
           'click',
           coverEl.expandingCollectionClickHandler,
         );
       });
-    };
+    }; //END initEvents
 
     const removeEvents = (swiper) => {
       swiper.slides.forEach((slideEl) => {
@@ -703,19 +711,21 @@ $(function() {
           );
         }
       });
-    };
+    }; // END removeEvents
 
+    // -------------------------------------------------------------------------
+    // Swiper initializer
+    // -------------------------------------------------------------------------
     const swiper = new Swiper(swiperEl, {
-      speed: 600,
+      init: false,
+      // speed: 600,
       // resistanceRatio: 0,
       // slidesPerView: 'auto',
       // centeredSlides: true,
       on: {
-        init(s) {
-          s.slides.forEach((slideEl) => {
-            const coverImageEl = slideEl.querySelector(
-              '.expanding-slide-cover img',
-            );
+        init(swiper) {
+          swiper.slides.forEach((slideEl) => {
+            const coverImageEl = slideEl.querySelector('.expanding-slide-cover img');
             if (coverImageEl && !coverImageEl.complete) {
               coverImageEl.addEventListener('load', () => {
                 calcOffsets(slideEl);
@@ -726,37 +736,35 @@ $(function() {
           requestAnimationFrame(() => {
             el.classList.add('expanding-slide-initialized');
           });
-          initEvents(s);
+          initEvents(swiper);
         },
-        slideChange(s) {
-          const openedContainerEl = s.wrapperEl.querySelector(
-            '.expanding-slide-opened',
-          );
+        slideChange(swiper) {
+          const openedContainerEl = swiper.wrapperEl.querySelector('.expanding-slide-opened');
           if (openedContainerEl) {
             openedContainerEl.classList.remove('expanding-slide-opened');
           }
         },
-        imagesReady(s) {
+        imagesReady(swiper) {
           el.classList.remove('expanding-slide-initialized');
-          s.slides.forEach((slideEl) => {
+          swiper.slides.forEach((slideEl) => {
             calcOffsets(slideEl);
           });
           el.classList.add('expanding-slide-initialized');
         },
-        resize(s) {
+        resize(swiper) {
           el.classList.remove('expanding-slide-initialized');
-          s.slides.forEach((slideEl) => {
+          swiper.slides.forEach((slideEl) => {
             calcOffsets(slideEl);
           });
           el.classList.add('expanding-slide-initialized');
         },
-        beforeDestroy(s) {
-          removeEvents(s);
+        beforeDestroy(swiper) {
+          removeEvents(swiper);
         },
       },
-    });
+    }); // END Swiper initializer
 
-    // return swiper;
+    return swiper;
   } // END Expanding Effect
 
   // ---------------------------------------------------------------------------
@@ -777,7 +785,6 @@ $(function() {
   }, 10); // END dependencies_met_page_ready
 
 }); // END Document READY
-
 </script>
 ++++
 

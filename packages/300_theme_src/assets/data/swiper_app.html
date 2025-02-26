@@ -164,7 +164,7 @@ playlist.image_defaults: {{playlist.image_defaults | debug}}
             {% comment %} Place 1-pixel grid on background-image if enabled
             -------------------------------------------------------------------- {% endcomment %}
             {% if swiper.gridify %}
-            <style>
+            <style>              
             .swiper-text-parallax:before {
               content: "";
               position: absolute;
@@ -177,6 +177,35 @@ playlist.image_defaults: {{playlist.image_defaults | debug}}
             </style>
             {% endif %}
 
+            {% comment %} set default or configured background-image
+            -------------------------------------------------------------------- {% endcomment %}
+            {% assign background-image = '/assets/image/quote/default.jpg' %}
+            {% if swiper.background-image and swiper.background-image != empty %}
+              {% assign background-image = swiper.background-image %}
+            {% endif %}
+
+            {% comment %} set default or configured quote-text color
+            -------------------------------------------------------------------- {% endcomment %}
+            {% assign quote-text-color = 'rgba(255, 255, 255, .75)' %}
+            {% if swiper.quote-text-color and swiper.quote-text-color != empty %}
+              {% assign quote-text-color = swiper.quote-text-color %}
+            {% endif %}
+
+            {% comment %} jadams. 2025-02-26: place background-image|quote-text color
+            -------------------------------------------------------------------- {% endcomment %}
+            <style>
+              .swiper-text-parallax {
+                width: 100%;
+                height: 100%;
+                padding: 75px 0 75px 0;
+                position: relative;
+                background: url({{background-image}}) 50% 0 repeat fixed;
+              }
+              .swiper-text-parallax .swiper-wrapper .swiper-slide p {
+                color: {{quote-text-color}};
+              }
+            </style>
+
             {% assign type_extension  = playlist.type | split: "/" %}
             {% assign playlist_type   = type_extension[0] %}
             {% assign extension       = type_extension[1] %}
@@ -184,7 +213,7 @@ playlist.image_defaults: {{playlist.image_defaults | debug}}
             {% for slide in playlist.items %} {% if slide.enabled  %}
             <li class="swiper-slide">
               <!-- p class="transparent-text" -->
-              <p class="transparent-text">
+              <p>
                 {{slide.text}}
               </p>
             </li>

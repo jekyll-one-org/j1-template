@@ -181,6 +181,12 @@ Swipers are typically used for displaying images. Still, the implementation
 for the J1 Template supports a lot more sources to be displayed as a slide
 show -- simple text for example.
 
+[TIP]
+====
+Text sliders can be placed like banners on a page's section. For text sliders,
+different animations are available.
+====
+
 [role="mt-4"]
 ==== Base Text Slider
 
@@ -195,34 +201,16 @@ swiper::swiper_text_base[role="mt-4 mb-4"]
 
 
 [role="mt-4"]
-==== Parallax Text Silder
+==== Parallax Text Slider
 
-A more emphasized type of text-based carousel is a parallax text slider. If you want to focus the meaning, this kind of a slide show may be interesting. Image-based slide shows may draw off the reader’s attention from the text, therefore a pure text-based presentation maybe the better choice.
-
-[role="mt-4"]
-==== Parallax Text Silder
-
-A more emphasized type of text-based carousel is a parallax text slider. If
-you want to focus the meaning, this kind of a slide show may be interesting.
-Image-based slide shows may draw off the reader's attention from the text,
-therefore a pure text-based presentation maybe the better choice.
+A more emphasized type of text-based slide is a *parallax* text slider. If you
+want to focus the meaning, this kind of a slide show may be interesting.
+Image-based slide may draw off the reader's attention from the text. Therefore,
+a pure text-based presentation may a better choice.
 
 .Parallax Text Slider
-carousel::demo_text_carousel_parallax[role="mb-4"]
+swiper::swiper_text_parallax[role="mt-4 mb-4"]
 
-Parallax text shows can be placed as banners on a page. For text shows,
-different animations are available. Internally, J1 Template uses some of
-the great CSS styles offered by _animate.css_.
-
-[TIP]
-====
-Have a look a https://daneden.github.io/animate.css/[Dan Eden's home page, {browser-window--new}]
-to see all the possible dynamic styles you can create based on pure CSS.
-Some of them are implemented for the J1 Carousel for animation. See the
-documentation for the
-link:{url-j1-docs--carousel-module}[Carousel module, {browser-window--new}]
-for more details.
-====
 
 [role="mt-5"]
 === Image Slider
