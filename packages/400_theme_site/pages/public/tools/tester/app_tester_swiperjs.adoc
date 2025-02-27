@@ -893,10 +893,10 @@ $(function() {
 lorem:sentences[5]
 
 ++++
-<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2 mb-3"></i> Extendend Swiper · Layout Stacked</div>
+<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Extendend Swiper · Layout Stacked</div>
 <div id="app">
   <!-- Posters slider -->
-  <div id="stacked_slider" class="posters-slider">
+  <div id="stacked_slider" class="posters-slider mt-3">
     <div class="swiper">
       <div class="swiper-wrapper">
         <div class="swiper-slide">
