@@ -312,13 +312,13 @@ playlist.image_defaults: {{playlist.image_defaults | debug}}
 
           </ul> <!-- END Swiper Wrapper (slides) -->
 
-          {% if swiper.modules.navigation %}
+          {% if swiper.module_settings.navigation %}
           <!-- Navigation -->
           <div class="swiper-button-prev"></div>
           <div class="swiper-button-next"></div>
           {% endif %}
 
-          {% if swiper.modules.pagination %}
+          {% if swiper.module_settings.pagination %}
           <!-- Pagination -->
           <div class="swiper-pagination"></div>
           {% endif %}

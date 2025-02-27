@@ -1972,16 +1972,17 @@ resources:
         css:                            [                                          
                                           modules/swiper/css/theme/uno,
                                           modules/swiper/css/swiper-bundle,
-                                          modules/swiper/css/modules/effectNeighbor,
-                                          modules/swiper/css/modules/effectPanorama,
-                                          modules/swiper/css/modules/effectThumbs
+                                          modules/swiper/css/modules/layoutNeighbor,
+                                          modules/swiper/css/modules/layoutPanorama,
+                                          modules/swiper/css/modules/layoutThumbs
                                         ]
         files:                          [ adapter/js/swiper.js ]
         js:                             [
+                                          modules/swiper/js/highlightJS,
                                           modules/swiper/js/swiper-bundle,
-                                          modules/swiper/js/modules/effectNeighbor,
-                                          modules/swiper/js/modules/effectPanorama,
-                                          modules/swiper/js/modules/effectThumbs
+                                          modules/swiper/js/modules/layoutNeighbor,
+                                          modules/swiper/js/modules/layoutPanorama,
+                                          modules/swiper/js/modules/layoutThumbs
                                         ]
         init_function:                  [ j1.adapter.swiper.init ]
 

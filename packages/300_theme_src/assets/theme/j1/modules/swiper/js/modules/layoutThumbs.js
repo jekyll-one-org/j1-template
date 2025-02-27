@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/swiper/js/modules/effectThumbs.js
- # J1 module for SwiperJS v11 (view)
+ # ~/assets/theme/j1/modules/swiper/js/modules/layoutThumbs.js
+ # J1 Module for SwiperJS v11 (layout)
  # -----------------------------------------------------------------------------
  #
  # Product/Info:
@@ -15,7 +15,7 @@
 */
 "use strict";
 
-function EffectThumbs(_ref) {
+function LayoutThumbs(_ref) {
 
   var {
     swiper,
@@ -76,7 +76,7 @@ function EffectThumbs(_ref) {
   // ---------------------------------------------------------------------------
 
   const thumbSlider = new Swiper(swiperThumbEl, {
-    autoHeight:     commonParams.autoHeight,
+//  autoHeight:     commonParams.autoHeight,
     grabCursor:     commonParams.grabCursor,
     speed:          commonParams.speed * .5,
     spaceBetween:   commonParams.spaceBetween,
@@ -110,4 +110,4 @@ function EffectThumbs(_ref) {
     mainSlider.slideTo(swiper.activeIndex);
   });
 
-} // END EffectThumbs
+} // END LayoutThumbs

@@ -175,7 +175,7 @@ slider is a powerful tool to create fully responsive and touch-enabled
 slideshows.
 
 [role="mt-4"]
-=== Text Slider
+=== Text Sliders
 
 Swipers are typically used for displaying images. Still, the implementation
 for the J1 Template supports a lot more sources to be displayed as a slide
@@ -399,54 +399,45 @@ masterslider::ms_00003[role="mt-4 mb-5"]
 
 [role="mt-4"]
 [[thumb_images]]
-=== Slider using UI elements
+=== Layout Thumb
 
-To give the users *visual control* over a slideshow, Swiper sliders may provide
-UI elements by placing mini-images or short text elements (thumbs) side-by-side
-(on the left|right), or at the bottom of a slideshow. Find below examples how
-to control such sliders by thumbs.
+To give the users a more *visual* control over a slideshow, Swiper sliders
+can provide *UI elements* by placing minified images or text elements (thumbs)
+side-by-side (on the left|right), or at the bottom|top of a swiper. Find below
+examples how to control such sliders' by a thumb (slave) silder.
 
-.Image controls
+.Layout Thumb · Top
+swiper::thumb_slider_top[role="mb-5"]
+
+.Layout Thumb · Right
 masterslider::ms_00004[role="mt-4 mb-5"]
 
 .Text controls
 masterslider::ms_00007[role="mt-4 mb-5"]
 
 
-////
-[role="mt-4"]
-[[ms_video]]
-=== Masterslider using Video
+[role="mt-5"]
+=== Layout Neighbor
 
-lorem:sentences[5]
+A slideshow typically presents a larger number of slides, which requires a
+sort of navigation. The effect *neighbors* accompanies the *active slide* by
+their *neighbors* on the left and right as *previews*. The neighbor on the
+*left* acts like a *previous button* and scrolls the slides *backward*. The
+neighbor on the *right* acts like a *next button* and scrolls the slides
+*forward*.
 
-.Slider using Video
-masterslider::ms_00010[role="mt-4 mb-5"]
-////
+[role="mb-5"]
+[TIP]
+====
+The *effect* transforms a slider into a quite *compact* presentation that does
+*not* require any (additional) *navigation* elements.
+====
 
-
-[role="mt-4"]
-[[partialview]]
-=== Slider using a Layout
-
-The following slider presents a slideshow that combines an MSInfo element
-at the bottom and the MS Layout `partialview`. A slideshow typically presents
-a larger number of slides. The layout `partialview` accompanies the active
-slide by their neighbors on the left and the right.
+.Layout Neighbor
+swiper::neighbor_slider[role="mb-5"]
 
 .Slider using PartialView
 masterslider::ms_00009[role="mt-4 mb-5"]
-
-[role="mt-4"]
-.More about Master Slider
-[TIP]
-====
-If you're interested to learn more about Master Slider, go for the following
-documents:
-
-* Masterslider link:{url-j1-masterslider-previewer}[Previewer, {browser-window--new}]
-* Masterslider link:{url-j1-docs--masterslider-module}[Module documentation, {browser-window--new}]
-====
 
 
 [role="mt-5"]

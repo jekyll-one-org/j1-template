@@ -195,7 +195,7 @@ j1.adapter.swiper = ((j1, window) => {
                 {% if swiper.parameters %}
                 // parameters (core)
                 {% for setting in swiper.parameters %}
-                {% if setting[0] == 'effect' or setting[0] == 'slideHeight' %}
+                {% if setting[0] == 'direction' or setting[0] == 'effect' or setting[0] == 'slideHeight' %}
                 {{setting[0]}}: {{ setting[1] | replace: '=>', ':' | json }},
                 {% else %}
                 {{setting[0]}}: {{ setting[1] | replace: '=>', ':' }},
@@ -214,10 +214,11 @@ j1.adapter.swiper = ((j1, window) => {
                 {% endfor %}
                 {% endif %}
 
-                {% if swiper.events %}
+                {% if swiper.events and swiper.events.enabled %}
                 // events
                 on: {
                   {% for setting in swiper.events %}
+                  {% if setting[0] == 'enabled' %} {% continue %} {% endif %}
                   {{setting[0]}}: {{ setting[1] }},                  
                   {% endfor %}
                 } // END events

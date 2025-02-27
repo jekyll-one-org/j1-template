@@ -150,6 +150,115 @@ settings:
     # ==========================================================================
 
     # --------------------------------------------------------------------------
+    # IMAGE Swiper|Layout Base, Full-width
+    # --------------------------------------------------------------------------
+    #
+    - swiper:
+
+      # ------------------------------------------------------------------------
+      # GENERAL Options
+      # ------------------------------------------------------------------------
+      #
+      enabled:                          true
+      id:                               swiper_image_base_full_width_pagination
+      layout:                           image/base
+      playlist:                         free_animal
+      swiper_classes:                   false
+      container_classes:                false
+      wrapper_styles:                   false
+
+      # ------------------------------------------------------------------------
+      # CAPTION Options
+      # ------------------------------------------------------------------------
+      #
+      captions:                             
+        enabled:                        false
+        css_class:                      swp-caption-content
+
+      # ------------------------------------------------------------------------
+      # CORE Options
+      # ------------------------------------------------------------------------
+      #
+      parameters:
+      # direction:                        horizontal
+        grabCursor:                       true
+        loop:                             true
+
+      # ------------------------------------------------------------------------
+      # MODULE Options
+      # ------------------------------------------------------------------------
+      #
+      module_settings:
+        pagination:
+          el:                           .swiper-pagination
+          type:                         bullets
+          clickable:                    true
+        navigation:
+          nextEl:                       .swiper-button-next
+          prevEl:                       .swiper-button-prev
+
+      # ------------------------------------------------------------------------
+      # EVENT Options
+      # ------------------------------------------------------------------------
+      #
+      events:
+        enabled:                        false
+        init: >
+                                        function (swiper) { var slideHeight = 300; swiper.slides.forEach(slide => { slide.style.height = `${slideHeight}px`; }); }
+
+      # ------------------------------------------------------------------------
+      # LIGHTBOX Options
+      # ------------------------------------------------------------------------
+      #
+      lightbox:
+
+        # ----------------------------------------------------------------------
+        # GENERAL Options
+        # ----------------------------------------------------------------------
+        #
+        enabled:                        false
+
+        # ----------------------------------------------------------------------
+        # CAPTION Options
+        # ----------------------------------------------------------------------
+        #
+        captions:
+          enabled:                      true
+          css_class:                    pswp-caption-content
+
+        # ----------------------------------------------------------------------
+        # CORE Options
+        # ----------------------------------------------------------------------
+        #
+        parameters:
+          children:                     a
+          bgOpacity:                    1
+          showHideOpacity:              true
+          loop:                         true
+          wheelToZoom:                  true
+          showHideAnimationType:        zoom
+          imageClickAction:             next
+          tapAction:                    next
+          padding:                      { top: 0, bottom: 0, left: 80, right: 80 }
+
+        # ----------------------------------------------------------------------
+        # USER INTERFACE Options
+        # ----------------------------------------------------------------------
+        #
+        ui_controls:
+          zoom:                         false
+          close:                        true
+          counter:                      true
+          arrowKeys:                    false
+
+        # ----------------------------------------------------------------------
+        # KEYBOARD Options
+        # ----------------------------------------------------------------------
+        #
+        kbd_controls:
+          escKey:                       true
+ 
+    # --------------------------------------------------------------------------
     # IMAGE Swiper|Layout Base, Captions
     # --------------------------------------------------------------------------
     #
@@ -181,6 +290,7 @@ settings:
       #
       parameters:
         autoHeight:                     true
+        grabCursor:                     true
         slidesPerView:                  2
         slidesPerGroup:                 2
         spaceBetween:                   5
@@ -267,7 +377,7 @@ settings:
       # ------------------------------------------------------------------------
       #
       enabled:                          true
-      id:                               swiper_image_base_lightbox
+      id:                               swiper_image_base_navigation_pagination_lightbox
       layout:                           image/base
       playlist:                         free_animal
       swiper_classes:                   false
@@ -288,6 +398,7 @@ settings:
       #
       parameters:
         autoHeight:                     true
+        grabCursor:                     true
         slidesPerView:                  2
         slidesPerGroup:                 2
         spaceBetween:                   5
@@ -301,6 +412,9 @@ settings:
           el:                           .swiper-pagination
           type:                         bullets
           clickable:                    true
+        navigation:
+          nextEl:                       .swiper-button-next
+          prevEl:                       .swiper-button-prev
 
       # ------------------------------------------------------------------------
       # EVENT Options
@@ -321,7 +435,7 @@ settings:
         # GENERAL Options
         # ----------------------------------------------------------------------
         #
-        enabled:                        true
+        enabled:                        false
 
         # ----------------------------------------------------------------------
         # CAPTION Options
@@ -437,7 +551,7 @@ settings:
       # ------------------------------------------------------------------------
       #
       module_settings:
-        modules:                        [ EffectPanorama ]
+        modules:                        [ LayoutPanorama ]
         panorama:
           on_click:                     next                                    # false | next
           depth:                        200
@@ -546,7 +660,7 @@ settings:
       # ------------------------------------------------------------------------
       #
       module_settings:
-        modules:                        [ EffectNeighbor ]
+        modules:                        [ LayoutNeighbor ]
         neighbor:
           swiper_id:                    neighbor_slider                         # should ALWAYS an id (NOT a class)
           speed:                        800
@@ -643,18 +757,20 @@ settings:
       #
       parameters:
         effect:                         thumbs
+      # layout:                         thumbs
 
       # ------------------------------------------------------------------------
       # MODULE Options
       # ------------------------------------------------------------------------
       #
       module_settings:
-        modules:                        [ EffectThumbs ]                        # Swiper modules for J1 are to specied (to be loaded)
+        modules:                        [ LayoutThumbs ]                        # Swiper modules for J1 are to specied (to be loaded)
         thumbs:
-          swiper_id:                    thumb_slider_top                        # should ALWAYS an id (NOT a class)
-          speed:                        1000
-          autoHeight:                   true
-          grabCursor:                   true
+          swiper_id:                    thumb_slider_top                        # should be moved to CORE Options (parameters)
+          speed:                        1000                                    # should be moved to CORE Options (parameters)
+        # autoHeight:                   true                                    # should be moved to CORE Options (parameters)
+          grabCursor:                   true                                    # should be moved to CORE Options (parameters)
+          loop:                         true                                    # should be moved to CORE Options (parameters)                                 
           placement:                    top
           spaceBetween:                 5
           slidesPerView:                3
@@ -665,10 +781,10 @@ settings:
       #
       events:
         enabled:                        false
-        # init: >
-        #                                 function (swiper) { var slideHeight = 550; swiper.slides.forEach(slide => { slide.style.height = `${slideHeight}px`; }); }
-        # slideChangeTransitionStart: >
-        #                                 function (swiper) { thumbSlider.slideTo(swiper.activeIndex); }
+      # init: >
+      #                                 function (swiper) { var slideHeight = 550; swiper.slides.forEach(slide => { slide.style.height = `${slideHeight}px`; }); }
+      # slideChangeTransitionStart: >
+      #                                 function (swiper) { thumbSlider.slideTo(swiper.activeIndex); }
 
       # ------------------------------------------------------------------------
       # LIGHTBOX options

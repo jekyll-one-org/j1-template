@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/swiper/js/modules/effectNeighbor.js
- # J1 module for SwiperJS v11
+ # ~/assets/theme/j1/modules/swiper/js/modules/layoutNeighbor.js
+ # J1 Module for SwiperJS v11 (layout)
  # -----------------------------------------------------------------------------
  #
  # Product/Info:
@@ -15,7 +15,7 @@
 */
 "use strict";
 
-function EffectNeighbor(_ref) {
+function LayoutNeighbor(_ref) {
   var mainSwiper, tripleSwiper;
   var {
       swiper,
@@ -106,4 +106,4 @@ function EffectNeighbor(_ref) {
     },
   });
 
-} // END EffectNeighbor
+} // END LayoutNeighbor

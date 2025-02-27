@@ -17,7 +17,7 @@
 /* Global styles
 -------------------------------------------------------------------------------- */
 
-/* Theme styles
+/* Global Theme styles
 -------------------------------------------------------------------- */
 :root {
   --swiper-theme-color: var(--bs-primary);
@@ -27,8 +27,7 @@
 
 /* Pagination styles
 -------------------------------------------------------------------- */
-
-:root { 
+:root {
   --swiper-pagination-color: var(--swiper-theme-color);
   --swiper-pagination-left: auto;
   --swiper-pagination-right: 8px;
@@ -60,6 +59,15 @@
   --swiper-scrollbar-bg-color: rgba(0, 0, 0, 0.1);
   --swiper-scrollbar-drag-bg-color: rgba(0, 0, 0, 0.5);
   --swiper-scrollbar-size: 4px;
+}
+
+/* Navigation styles
+-------------------------------------------------------------------- */
+:root {
+  --swiper-navigation-color: var(--bs-gray-100);
+  --swiper-navigation-size: 44px;
+  --swiper-navigation-top-offset: 50%;
+  --swiper-navigation-sides-offset: 10px;
 }
 
 /* Titles and Captions
@@ -144,17 +152,6 @@ ul.swiper-wrapper {
 /* Navigation
 -------------------------------------------------------------------------------- */
 
-/* Global vars
--------------------------------------------------------------------- */
-:root {
-  --swiper-navigation-size: 44px;
-  --swiper-navigation-top-offset: 50%;
-  --swiper-navigation-sides-offset: 10px;
-  --swiper-navigation-color: var(--swiper-theme-color);
-}
-
-/* Styles
--------------------------------------------------------------------- */
 .swiper-pagination-bullet {
   width: 25px !important;
   height: 25px !important;

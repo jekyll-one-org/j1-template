@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/swiper/js/modules/effectPanorama.js
- # J1 module for SwiperJS v11
+ # ~/assets/theme/j1/modules/swiper/js/modules/layoutPanorama.js
+ # J1 Module for SwiperJS v11 (layout)
  # -----------------------------------------------------------------------------
  #
  # Product/Info:
@@ -15,7 +15,7 @@
 */
 "use strict";
 
-function EffectPanorama(_ref) {
+function LayoutPanorama(_ref) {
   var {
     swiper,
     extendParams,
@@ -90,4 +90,4 @@ function EffectPanorama(_ref) {
     }
   }); // END click effects
 
-} // END EffectPanorama 
+} // END LayoutPanorama 
