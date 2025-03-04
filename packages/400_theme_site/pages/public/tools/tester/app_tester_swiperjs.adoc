@@ -31,7 +31,7 @@ regenerate:                             false
 personalization:                        true
 permalink:                              /pages/public/tools/tester/swiper_app/
 
-resources:                              [ photoswipe, swiper, videojs ]
+resources:                              [ photoswipejs, swiperjs, videojs ]
 resource_options:
   - toccer:
       collapseDepth:                    3
@@ -381,8 +381,208 @@ The effect is great for slides connected in terms of content to give the user
 a panoramic view impression.
 ====
 
-.Extendend Swiper ·
+.Extendend Swiper · Layout Panorama
 swiper::swiper_image_panorama[role="mt-4 mb-5"]
+
+////
+[role="mt-5"]
+==== Layout Cards
+
+lorem:sentences[5]
+
+++++
+<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Extendend Swiper · Layout Cards</div>
+<!-- Cards slider -->
+<div id="cards_swiper" class="swiper swiper-container mySwiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide slide-1">Slide 1</div>
+    <div class="swiper-slide slide-2">Slide 2</div>
+    <div class="swiper-slide slide-3">Slide 3</div>
+    <!--div class="swiper-slide slide-1">Slide 1</div>
+    <div class="swiper-slide slide-2">Slide 2</div>
+    <div class="swiper-slide slide-3">Slide 3</div -->
+  </div>
+</div>
+++++
+
+++++
+<script>
+$(function() {
+
+  // ---------------------------------------------------------------------------
+  // Swiper initializer
+  // ---------------------------------------------------------------------------
+  var dependencies_met_page_ready = setInterval (() => {
+    var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true : false;
+
+    if (atticFinished) {
+      const sliderEl = document.querySelector('#cards_swiper');
+      const swiperEl = sliderEl.querySelector('.swiper');
+
+      // Initialize Swiper
+      //
+      var swiper = new Swiper(".mySwiper", {
+        autoplay: false,
+        effect: "cards",
+        grabCursor: true,
+        loop: true,
+        centeredSlides: true,
+      });
+
+      clearInterval(dependencies_met_page_ready);
+    } // END pageVisible
+
+  }, 10); // END dependencies_met_page_ready
+
+}); // END Document READY
+</script>
+++++
+
+++++
+<style>
+
+.swiper {
+  width: 240px;
+  height: 320px;
+}
+
+.swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.slide-1 {
+  background-color: red;
+}
+
+.slide-2 {
+  background-color: green;
+}
+
+.slide-3 {
+  background-color: blue;
+}
+</style>
+++++
+////
+
+[role="mt-5"]
+==== Layout Stacked
+
+lorem:sentences[5]
+
+++++
+<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Extendend Swiper · Layout Stacked</div>
+<!-- Posters slider -->
+<div id="stacked_slider" class="stacked-slider mt-3">
+  <div class="swiper swiper-container">
+
+    <ul class="swiper-wrapper">
+      <li class="swiper-slide">
+        <!-- set image parallax scale for nice zoom effect -->
+        <img data-swiper-parallax-scale="1.1" src="/assets/image/module/swiper/extended/poster/image/1.jpg" alt="">
+      </li>
+      <li class="swiper-slide">
+        <img data-swiper-parallax-scale="1.1" src="/assets/image/module/swiper/extended/poster/image/2.jpg" alt="">
+      </li>
+      <li class="swiper-slide">
+        <img data-swiper-parallax-scale="1.1" src="/assets/image/module/swiper/extended/poster/image/3.jpg" alt="">
+      </li>
+      <li class="swiper-slide">
+        <img data-swiper-parallax-scale="1.1" src="/assets/image/module/swiper/extended/poster/image/4.jpg" alt="">
+      </li>
+      <li class="swiper-slide">
+        <img data-swiper-parallax-scale="1.1" src="/assets/image/module/swiper/extended/poster/image/5.jpg" alt="">
+      </li>
+      <li class="swiper-slide">
+        <img data-swiper-parallax-scale="1.1" src="/assets/image/module/swiper/extended/poster/image/6.jpg" alt="">
+      </li>
+    </ul>
+
+  </div>
+</div>
+++++
+
+++++
+<script>
+$(function() {
+
+  function createPostersSlider(el) {
+    const swiperEl = el.querySelector('.swiper');
+
+    const calcNextOffset = () => {
+      const parentWidth = swiperEl.parentElement.offsetWidth;
+      const swiperWidth = swiperEl.offsetWidth;
+      var nextOffset    = (parentWidth - (parentWidth - swiperWidth) / 2) / swiperWidth;
+      var nextOffsetVh  = Math.max(nextOffset, 1) * 100;
+
+      return `${nextOffsetVh}%`;
+    };
+
+    const postersSwiper = new Swiper(swiperEl, {      
+      effect: 'creative',
+      speed: 600,
+      resistanceRatio: 0,
+      grabCursor: true,
+      parallax: true,
+      creativeEffect: {
+        limitProgress: 3,
+        perspective: true,
+        shadowPerProgress: true,
+        prev: {
+          shadow: true,
+          translate: ['-15%', 0, -200],
+        },
+        next: {
+          translate: [calcNextOffset(), 0, 0],
+        },
+      },
+      on: {
+        init: (swiper) => { var slideHeight = 600; swiper.slides.forEach(slide => { slide.style.height = `${slideHeight}px`; }); }
+      }
+    });
+
+    const onResize = () => {
+      if (!postersSwiper || postersSwiper.destroyed) return;
+      // prettier-ignore
+      postersSwiper.params.creativeEffect.next.translate = [calcNextOffset(), 0, 0];
+      if (
+        postersSwiper.params.resizeObserver &&
+        typeof window.ResizeObserver !== 'undefined'
+      ) {
+        postersSwiper.update();
+      }
+    };
+    window.addEventListener('resize', onResize);
+
+    return postersSwiper;
+
+  } // END createPostersSlider
+
+  // ---------------------------------------------------------------------------
+  // Swiper initializer
+  // ---------------------------------------------------------------------------
+  var dependencies_met_page_ready = setInterval (() => {
+    var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true : false;
+
+    if (atticFinished) {
+      const sliderEl = document.querySelector('#stacked_slider');
+
+      createPostersSlider(sliderEl);
+
+      clearInterval(dependencies_met_page_ready);
+    } // END pageVisible
+
+  }, 10); // END dependencies_met_page_ready
+
+}); // END Document READY
+</script>
+++++
 
 
 [role="mt-5"]
@@ -392,7 +592,7 @@ lorem:sentences[3]
 
 ++++
 <div class="swiper-title mt-4"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Extendend Swiper · Layout Expanding </div>
-<div id="app">
+<div id="app" class="extended-app">
   <!-- Style expanding-slide should wrap the swiper for Effect: Expanding  -->
   <div id="expanding_slides" class="expanding-slide mt-4">
     <div class="swiper swiper-container">
@@ -647,433 +847,8 @@ $(function() {
 
 ++++
 <style>
-
-/* slide styles
--------------------------------------------------------------------------------- */
-
-:root {
-  --expanding-slide-content-bg-color: #fff;
-  --expanding-slide-content-vertical-offset: 32px;
-  --expanding-slide-content-horizontal-offset: 16px;
-  --expanding-slide-content-padding: 16px;
-  --expanding-slide-content-border-radius: 0px;
-  --expanding-slide-cover-border-radius: 0px;
-  --expanding-slide-inactive-cover-opacity: 0.5;
-  --expanding-slide-opened-translate-y: -64px;
-  --expanding-slide-cover-box-shadow: 0px 8px 16px rgba(0, 0, 0, 0);
-/*
-  --expanding-slide-opened-cover-box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
-*/
-}
-
-.swiper-slide {
-  /* background: var(--md-gray-50); */
-  background: var(--md-gray);
-}
-.expanding-slide {
-  width: 100%;
-  height: 100%;
-}
-
-.expanding-slide-cover {
-  color: #fff;
-}
-
-@media (orientation: portrait) {
-  .expanding-slide-cover img {
-    height: 40vh;
-    object-fit: cover;
-  }
-}
-
-.expanding-slide .slide-cover-title {
-  box-sizing: border-box;
-  padding: 8px 16px;
-  font-size: 24px;
-  color: #fff;
-  position: absolute;
-  left: 0;
-  top: 0px;
-  width: 100%;
-  text-align: center;
-  z-index: 10;
-  font-weight: 600;
-}
-
-.expanding-slide .slide-cover-coords {
-  padding: 8px 16px;
-  width: 100%;
-  box-sizing: border-box;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: space-between;
-  z-index: 10;
-  text-transform: uppercase;
-  font-size: 12px;
-  font-weight: 500;
-}
-
-.expanding-slide .slide-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  align-content: center;
-  flex-wrap: wrap;
-}
-
-.expanding-slide .slide-content-title {
-  text-align: center;
-  font-size: 16px;
-  margin-bottom: 8px;
-  font-weight: 600;
-  width: 100%;
-}
-
-.expanding-slide .slide-content-avatars {
-  display: flex;
-}
-
-.expanding-slide .slide-content-avatars img {
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  border: 4px solid #fff;
-}
-
-.expanding-slide .slide-content-avatars img + img {
-  margin-left: -16px;
-}
-
-.expanding-slide .slide-content-rating {
-  display: flex;
-}
-
-/* jadams */
-.expanding-slide .slide-content-rating img {
-  width: 80px;
-  height: 16px;
-}
-
-.expanding-slide {
-  overflow: hidden;
-  position: relative;
-  box-sizing: border-box;
-  width: 100%;
-  margin: 0 auto;
-}
-
-.expanding-slide .swiper {
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-  transform: translate3d(0, 0, 0);
-}
-
-/* jadams, 2025-02-20: */
-/*
-.expanding-slide .swiper-slide {
-  width: 600px;
-  max-width: calc(100% - 32px - 32px);
-}
-*/
-
-/* jadams, DISABLED width */
-.expanding-slide .swiper-slide {
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  /* width: calc(100% - 32px); */
-}
-
-.expanding-slide-initialized .expanding-slide-content,
-.expanding-slide-initialized .expanding-slide-cover,
-.expanding-slide-initialized .expanding-slide-cover::before {
-  transition-duration: 300ms;
-}
-
-.expanding-slide-container, .expanding-slide-cover {
-  -webkit-touch-callout: none;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-/* jadams, changed width */
-.expanding-slide-container {
-  /*max-width: calc(100% - 32px); */
-  width: 90%;
-  max-width: 640px;
-  position: relative;
-  margin-bottom: 1.5rem;
-}
-
-.expanding-slide-cover {
-  opacity: var(--expanding-slide-inactive-cover-opacity);
-  position: relative;
-}
-
-.expanding-slide-cover img {
-  width: 100%;
-  border-radius: var(--expanding-slide-cover-border-radius);
-  display: block;
-  margin: 0;
-  position: relative;
-  z-index: 2;
-}
-
-.expanding-slide-cover::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 90%;
-  left: 0;
-  bottom: 0;
-  border-radius: var(--expanding-slide-cover-border-radius);
-  z-index: 1;
-  transform-origin: center bottom;
-  box-shadow: var(--expanding-slide-cover-box-shadow);
-}
-
-.swiper-slide.swiper-slide-active .expanding-slide-cover {
-  opacity: 1;
-  cursor: pointer;
-}
-
-.swiper-slide:not(.swiper-slide-active) .expanding-slide-cover::before {
-  box-shadow: none;
-}
-
-.swiper-slide:not(.swiper-slide-active) .expanding-slide-content {
-  opacity: 0;
-}
-
-/* jadams */
-.expanding-slide-content {
-  position: absolute;
-  box-sizing: border-box;
-  left: calc(-1 * var(--expanding-slide-content-horizontal-offset));
-  right: calc(-1 * var(--expanding-slide-content-horizontal-offset));
-  top: 0;
-  z-index: 0;
-  padding-top: calc(var(--expanding-slide-cover-height) - var(--expanding-slide-content-vertical-offset));
-  border-radius: var(--expanding-slide-content-border-radius);
-  transform: scaleX(var(--expanding-slide-scale-x)) scaleY(var(--expanding-slide-scale-y));
-  transform-origin: center top;
-  background: var(--expanding-slide-content-bg-color);
-}
-
-.expanding-slide-content-inner {
-  padding: var(--expanding-slide-content-padding);
-  box-sizing: border-box;
-}
-
-.expanding-slide-opened .expanding-slide-cover {
-  transform: translateY(var(--expanding-slide-opened-translate-y));
-}
-
-/* jadams */
-/*
-.expanding-slide-opened .expanding-slide-cover::before {
-  box-shadow: var(--expanding-slide-opened-cover-box-shadow);
-}
-*/
-
-.expanding-slide-opened .expanding-slide-content {
-  transform: scale(1) translateY(calc(var(--expanding-slide-opened-translate-y) + var(--expanding-slide-content-vertical-offset)));
-  opacity: 1;
-  background-color: antiquewhite;
-}
-
 </style>
 ++++
-
-[role="mt-5"]
-==== Layout Stacked
-
-lorem:sentences[5]
-
-++++
-<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Extendend Swiper · Layout Stacked</div>
-<div id="app">
-  <!-- Posters slider -->
-  <div id="stacked_slider" class="posters-slider mt-3">
-    <div class="swiper">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <!-- set image parallax scale for nice zoom effect -->
-          <img data-swiper-parallax-scale="1.1" src="/assets/image/module/swiper/extended/poster/image/1.jpg" alt="">
-        </div>
-        <div class="swiper-slide">
-          <img data-swiper-parallax-scale="1.1" src="/assets/image/module/swiper/extended/poster/image/2.jpg" alt="">
-        </div>
-        <div class="swiper-slide">
-          <img data-swiper-parallax-scale="1.1" src="/assets/image/module/swiper/extended/poster/image/3.jpg" alt="">
-        </div>
-        <div class="swiper-slide">
-          <img data-swiper-parallax-scale="1.1" src="/assets/image/module/swiper/extended/poster/image/4.jpg" alt="">
-        </div>
-        <div class="swiper-slide">
-          <img data-swiper-parallax-scale="1.1" src="/assets/image/module/swiper/extended/poster/image/5.jpg" alt="">
-        </div>
-        <div class="swiper-slide">
-          <img data-swiper-parallax-scale="1.1" src="/assets/image/module/swiper/extended/poster/image/6.jpg" alt="">
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-++++
-
-++++
-<script>
-$(function() {
-
-  function createPostersSlider(el) {
-    const swiperEl = el.querySelector('.swiper');
-
-    const calcNextOffset = () => {
-      const parentWidth = swiperEl.parentElement.offsetWidth;
-      const swiperWidth = swiperEl.offsetWidth;
-      var nextOffset    = (parentWidth - (parentWidth - swiperWidth) / 2) / swiperWidth;
-      var nextOffsetVh  = Math.max(nextOffset, 1) * 100;
-
-      return `${nextOffsetVh}%`;
-    };
-
-    const postersSwiper = new Swiper(swiperEl, {      
-      effect: 'creative',
-      speed: 600,
-      resistanceRatio: 0,
-      grabCursor: true,
-      parallax: true,
-      creativeEffect: {
-        limitProgress: 3,
-        perspective: true,
-        shadowPerProgress: true,
-        prev: {
-          shadow: true,
-          translate: ['-15%', 0, -200],
-        },
-        next: {
-          translate: [calcNextOffset(), 0, 0],
-        },
-      },
-      on: {
-        init: (swiper) => { var slideHeight = 600; swiper.slides.forEach(slide => { slide.style.height = `${slideHeight}px`; }); }
-      }
-    });
-
-    const onResize = () => {
-      if (!postersSwiper || postersSwiper.destroyed) return;
-      // prettier-ignore
-      postersSwiper.params.creativeEffect.next.translate = [calcNextOffset(), 0, 0];
-      if (
-        postersSwiper.params.resizeObserver &&
-        typeof window.ResizeObserver !== 'undefined'
-      ) {
-        postersSwiper.update();
-      }
-    };
-    window.addEventListener('resize', onResize);
-
-    return postersSwiper;
-
-  } // END createPostersSlider
-
-  // ---------------------------------------------------------------------------
-  // Swiper initializer
-  // ---------------------------------------------------------------------------
-  var dependencies_met_page_ready = setInterval (() => {
-    var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true : false;
-
-    if (atticFinished) {
-      const sliderEl = document.querySelector('#stacked_slider');
-
-      createPostersSlider(sliderEl);
-
-      clearInterval(dependencies_met_page_ready);
-    } // END pageVisible
-
-  }, 10); // END dependencies_met_page_ready
-
-}); // END Document READY
-</script>
-++++
-
-++++
-<style>
-
-#app {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/*
-  See: https://cssunitconverter.vercel.app/de/blog/die-vw-einheit-in-css-verstehen
-
-  VW-Einheit in CSS: Viewport-Breite (viewport width).
-  Relative Einheit, die einen Prozentsatz der Breite des aktuellen
-  Ansichtsfensters darstellt.
-  1vw bedeutet 1 Prozent der Bildschirmbreite.
-*/
-
-@media (orientation: portrait) {
-  .posters-slider {
-    --posters-slider-width: 68vw;
-    --posters-slider-height: calc(68vw * .8);
-  }
-}
-
-@media (orientation: landscape) {
-  .posters-slider {
-    --posters-slider-width: calc(80vh / 1.48);
-    --posters-slider-height: 80vh;
-  }
-}
-
-:root {
-  /* actually sets slide shadow that should match background color of the element behind th slider */
-  --posters-slider-shadow-bg-color: #000;
-  /* width of the swiper container (image) */
-  --posters-slider-width: 265px;
-  /* height of the swiper container (image) */
-  --posters-slider-height: 392px;
-}
-
-.posters-slider {
-  overflow: hidden;
-  position: relative;
-  box-sizing: border-box;
-  width: 100%;
-  margin: 0 auto;
-}
-
-.posters-slider .swiper {
-  overflow: visible;
-  width: var(--posters-slider-width);
-  height: var(--posters-slider-height);
-}
-
-.posters-slider .swiper-slide {
-  border-radius: 10px;
-  justify-content: center;
-  display: flex;
-}
-
-.posters-slider .swiper-slide-shadow {
-  background: var(--posters-slider-shadow-bg-color);
-}
-
-.posters-slider img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-</style>
-++++
-
 
 ////
 [role="mt-5"]

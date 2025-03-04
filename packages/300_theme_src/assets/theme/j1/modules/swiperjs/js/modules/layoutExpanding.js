@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/swiper/css/modules/effectPanorama.css
- # CSS styles of the J1 module for SwiperJS v11 (view)
+ # ~/assets/theme/j1/modules/swiper/js/modules/layoutExpanding.js
+ # J1 Module for SwiperJS v11 (layout)
  # -----------------------------------------------------------------------------
  #
  # Product/Info:
@@ -13,14 +13,17 @@
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
 */
+"use strict";
 
-.panorama-slider {
-    width: 100%;
-    padding: 14px 0;
-}
+function LayoutExpanding(_ref) {
 
-.panorama-slider .swiper-pagination {
-    bottom: -10px;
-    --swiper-pagination-bullet-inactive-color: #fff;
-    --swiper-pagination-color: #fff;
-}
+  var {
+    swiper,
+    extendParams,
+    params,
+    on
+  } = _ref;
+
+
+
+} // END ayoutExpanding
