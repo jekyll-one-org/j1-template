@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
-# ~/_data/modules/defaults/amplitude.yml
-# Default configuration for J1 Amplitude
+# ~/_data/modules/defaults/amplitude_app.yml
+# Default settings for J1 Amplitude Apps
 #
 # Product/Info:
 # https://jekyll.one
@@ -16,11 +16,11 @@
 #
 description:
   title:                                AmplitudeJS
-  scope:                                Default settings
-  location:                             _data/apps/defaults/amplitude.yml
+  scope:                                Default App settings
+  location:                             _data/modules/defaults/amplitude_app.yml
 
 # ------------------------------------------------------------------------------
-# User configuration settings
+# Default settings
 #
 defaults:
 
@@ -29,7 +29,7 @@ defaults:
   # ----------------------------------------------------------------------------
   #
   enabled:                              false
-  xhr_data_path:                        /assets/data/amplitude
+  xhr_data_path:                        /assets/data/amplitude_app
 
   # ----------------------------------------------------------------------------
   # PLAYLIST defaults

@@ -1980,7 +1980,6 @@ resources:
                                         ]
         files:                          [ adapter/js/swiper.js ]
         js:                             [
-                                          modules/swiperjs/js/highlightJS,
                                           modules/swiperjs/js/swiper-bundle,
                                           modules/swiperjs/js/modules/layoutExpanding,
                                           modules/swiperjs/js/modules/layoutNeighbor,

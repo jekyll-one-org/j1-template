@@ -7,7 +7,7 @@ regenerate:                             true
 {% comment %}
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/adapter/js/swiper.js
- # Liquid template to adapt the Swiper module
+ # Liquid template to adapt J1 SwiperJS Apps
  #
  # Product/Info:
  # https://jekyll.one

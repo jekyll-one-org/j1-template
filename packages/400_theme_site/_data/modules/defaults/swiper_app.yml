@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
 # ~/_data/modules/defaults/swiper_app.yml
-# Default settings for the J1 Swiper App
+# Default settings for J1 Swiper Apps
 #
 # Product/Info:
 # https://jekyll.one
@@ -15,7 +15,7 @@
 # Description
 #
 description:
-  title:                                J1 Swiper
+  title:                                SwiperJS
   scope:                                Default App settings
   location:                             _data/modules/defaults/swiper_app.yml
 

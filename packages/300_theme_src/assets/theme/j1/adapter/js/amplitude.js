@@ -7,7 +7,7 @@ regenerate:                             true
 {% comment %}
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/adapter/js/amplitude.js
- # Liquid template to adapt the AmplitudeJS v4 module
+ # Liquid template to adapt J1 AmplitudeJS Apps
  #
  # Product/Info:
  # https://jekyll.one
@@ -41,7 +41,7 @@ regenerate:                             true
 
 {% comment %} Set config data (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign amplitude_defaults  = modules.defaults.amplitude.defaults %}
+{% assign amplitude_defaults  = modules.defaults.amplitude_app.defaults %}
 {% assign amplitude_players   = modules.amplitude_app.settings %}
 {% assign amplitude_playlists = modules.amplitude_playlists.settings %}
 
