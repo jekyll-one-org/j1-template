@@ -189,10 +189,10 @@ settings:
       # ------------------------------------------------------------------------
       #
       module_settings:
-        pagination:
-          el:                           .swiper-pagination
-          type:                         bullets
-          clickable:                    true
+        # pagination:
+        #   el:                           .swiper-pagination
+        #   dynamicBullets:               false
+        #   clickable:                    true
         navigation:
           nextEl:                       .swiper-button-next
           prevEl:                       .swiper-button-prev
@@ -289,7 +289,6 @@ settings:
       # ------------------------------------------------------------------------
       #
       parameters:
-        autoHeight:                     true
         grabCursor:                     true
         slidesPerView:                  2
         slidesPerGroup:                 2
@@ -300,10 +299,10 @@ settings:
       # ------------------------------------------------------------------------
       #
       module_settings:
-        pagination:
-          el:                           .swiper-pagination
-          type:                         bullets
-          clickable:                    true
+        # pagination:
+        #   el:                           .swiper-pagination
+        #   dynamicBullets:               false
+        #   clickable:                    true
 
       # ------------------------------------------------------------------------
       # EVENT Options
@@ -397,7 +396,6 @@ settings:
       # ------------------------------------------------------------------------
       #
       parameters:
-        autoHeight:                     true
         grabCursor:                     true
         slidesPerView:                  2
         slidesPerGroup:                 2
@@ -407,11 +405,12 @@ settings:
       # MODULE Options
       # ------------------------------------------------------------------------
       #
-      module_settings:
+      module_settings:    
         pagination:
           el:                           .swiper-pagination
-          type:                         bullets
+          dynamicBullets:               false
           clickable:                    true
+        #   renderBullet:                 function (index, className) { return `<span class="${className}"> ${++index} </span>`; }
         navigation:
           nextEl:                       .swiper-button-next
           prevEl:                       .swiper-button-prev

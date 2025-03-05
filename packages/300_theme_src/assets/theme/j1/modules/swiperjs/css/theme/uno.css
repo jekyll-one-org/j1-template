@@ -25,6 +25,15 @@
   --swiper-wrapper-transition-timing-function: initial;
 }
 
+/* Navigation styles
+-------------------------------------------------------------------- */
+:root {
+  --swiper-navigation-color: var(--bs-gray-100);
+  --swiper-navigation-size: 44px;
+  --swiper-navigation-top-offset: 50%;
+  --swiper-navigation-sides-offset: 10px;
+}
+
 /* Pagination styles
 -------------------------------------------------------------------- */
 :root {
@@ -34,7 +43,7 @@
   --swiper-pagination-bottom: 8px;
   --swiper-pagination-top: auto;
   --swiper-pagination-fraction-color: inherit;
-  --swiper-pagination-progressbar-bg-color: rgba(0,0,0,0.25);
+  --swiper-pagination-progressbar-bg-color: rgba(0, 0, 0, 0.25);
   --swiper-pagination-progressbar-size: 4px;
   --swiper-pagination-bullet-size: 8px;
   --swiper-pagination-bullet-width: 8px;
@@ -61,13 +70,12 @@
   --swiper-scrollbar-size: 4px;
 }
 
-/* Navigation styles
+/* Swiper container
+   NOTE: Important for positioning controls relative to it
 -------------------------------------------------------------------- */
-:root {
-  --swiper-navigation-color: var(--bs-gray-100);
-  --swiper-navigation-size: 44px;
-  --swiper-navigation-top-offset: 50%;
-  --swiper-navigation-sides-offset: 10px;
+.swiper-container {
+    display: block;
+/*  position: relative !important; */
 }
 
 /* Titles and Captions
@@ -149,9 +157,8 @@ ul.swiper-wrapper {
   left: auto;
 }
 
-/* Navigation
+/* Pagination
 -------------------------------------------------------------------------------- */
-
 .swiper-pagination-bullet {
   width: 25px !important;
   height: 25px !important;
@@ -168,6 +175,13 @@ ul.swiper-wrapper {
   color: var(--bs-white) !important;
   background: var(--swiper-theme-color) !important;
   opacity: 1 !important;
+}
+
+.swiper-pagination-outside {
+  position: absolute;
+  margin-top: -18px;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* Autoplay

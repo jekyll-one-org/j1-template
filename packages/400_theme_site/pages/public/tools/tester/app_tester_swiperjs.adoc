@@ -147,6 +147,91 @@ below the Swiper App indicate how *many* slides (images) the slide show
 .Image Swiper · Full-width + Pagination
 swiper::swiper_image_base_full_width_pagination[role="mt-4 mb-5"]
 
+
+////
+[role="mt-4"]
+==== Base Slider + Pagination
+
+Carousels are used for an exceptionally compact form of image galleries.
+This example shows some pictures having individual caption text and supports
+a lightbox to enlarge images full size.
+
+++++
+<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Base Silder · Pagination </div>
+
+<!-- Swiper -->
+<div class="swiper-container mb-5">
+  <!-- Slides container -->
+  <div class="swiper-wrapper">
+    <!-- flat swiper slide HTML -->
+    <li class="swiper-slide">
+      <img src="/assets/image/module/swiper/simple/free_animal/image/free-animal-1.jpg" alt="Slide Image free-animal-1">
+    </li>          
+    <li class="swiper-slide">
+      <img src="/assets/image/module/swiper/simple/free_animal/image/free-animal-2.jpg" alt="Slide Image free-animal-2">
+    </li>          
+    <li class="swiper-slide">
+      <img src="/assets/image/module/swiper/simple/free_animal/image/free-animal-3.jpg" alt="Slide Image free-animal-3">
+    </li>          
+    <li class="swiper-slide">
+      <img src="/assets/image/module/swiper/simple/free_animal/image/free-animal-4.jpg" alt="Slide Image free-animal-4">
+    </li>          
+    <li class="swiper-slide">
+      <img src="/assets/image/module/swiper/simple/free_animal/image/free-animal-5.jpg" alt="Slide Image free-animal-5">
+    </li>          
+    <li class="swiper-slide">
+      <img src="/assets/image/module/swiper/simple/free_animal/image/free-animal-6.jpg" alt="Slide Image free-animal-6">
+    </li>          
+  </div> <!-- END Swiper Wrapper (slides) -->
+
+  <div class="swiper-pagination" style="margin-top: .75rem;"></div>  
+</div>
+
+<!-- Add Pagination OUTSIDE -->
+<div class="swiper-pagination-outside"></div>
+++++
+
+++++
+<script>
+$(function() {
+  var dependencies_met_page_ready = setInterval (() => {
+    var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true : false;
+
+      if (atticFinished) {
+
+        // ---------------------------------------------------------------------
+        // slider initializer
+        // ---------------------------------------------------------------------
+        const mySwiper = new Swiper('.swiper-container', {
+          // module options
+          pagination: {
+            el: '.swiper-pagination-outside',
+            clickable: true,
+            renderBullet: (index, className) => {
+              return `<span class="${className}"> ${++index} </span>`;
+            }
+          },
+          // event settings
+          on: {
+            // Swiper's default pagination will automatically handle the active class.
+            // If you need more customization, you can implement it here.            
+            slideChange: (swiper) => { 
+              const activeIndex = swiper.activeIndex;
+              console.log('Active slide index:', activeIndex);
+            }
+          }
+        });
+
+
+
+        clearInterval(dependencies_met_page_ready);
+    } // END pageVisible
+  }, 10); // END dependencies_met_page_ready
+});
+</script>
+++++
+////
+
 [role="mt-4"]
 ==== Equal Image Sizes
 
@@ -157,6 +242,7 @@ line.
 
 .Equal Image Sizes · Captions + Navigation + Pagination
 swiper::swiper_image_base_navigation_pagination_lightbox[role="mt-4 mb-4"]
+
 
 [role="mt-5"]
 ==== Mixed Image Sizes

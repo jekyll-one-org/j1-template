@@ -24,6 +24,4 @@ function LayoutExpanding(_ref) {
     on
   } = _ref;
 
-
-
 } // END ayoutExpanding

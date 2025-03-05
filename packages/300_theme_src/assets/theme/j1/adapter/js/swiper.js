@@ -206,7 +206,7 @@ j1.adapter.swiper = ((j1, window) => {
                 {% if swiper.module_settings %}
                 // module settings
                 {% for setting in swiper.module_settings %}
-                {% if setting[0] == 'modules' %}
+                {% if setting[0] == 'modules' or setting[0] == 'pppppagination' %}
                 {{setting[0]}}: {{ setting[1] | replace: '=>', ':' | replace: '"', ' ' }},
                 {% else %}
                 {{setting[0]}}: {{ setting[1] | replace: '=>', ':' }},

@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/swiper/css/modules/layoutNeighbor.css
+ # ~/assets/theme/j1/modules/swiper/css/modules/layoutNeighbor.min.css
  # CSS styles of the J1 module for SwiperJS v11 (layout)
  # -----------------------------------------------------------------------------
  #
@@ -14,4 +14,4 @@
  # -----------------------------------------------------------------------------
 */
 
-.neighbor-slider{position:relative;overflow:hidden}.neighbor-slider .swiper{width:90%;max-width:640px;height:320px}.neighbor-slider .neighbor-slider-main{position:relative;z-index:10;box-shadow:0 0 30px rgba(0,0,0,0.5)}.neighbor-slider .neighbor-slider-prev,.neighbor-slider .neighbor-slider-next{top:50%;opacity:.75;position:absolute;user-select:none;-webkit-user-select:none;cursor:pointer;filter:grayscale(1);transform:translateY(-50%) scale(1) rotateY(0)}.neighbor-slider .neighbor-slider-prev{right:50%}.neighbor-slider .neighbor-slider-next{left:50%}
+.neighbor-slider{position:relative;overflow:hidden}.neighbor-slider .swiper{width:90%;max-width:540px;height:320px}.neighbor-slider .neighbor-slider-main{position:relative;z-index:10;box-shadow:0 0 30px rgba(0,0,0,0.5)}.neighbor-slider .neighbor-slider-prev,.neighbor-slider .neighbor-slider-next{position:absolute;top:50%;cursor:pointer;user-select:none;-webkit-user-select:none;opacity:.75;filter:grayscale(1);transform:translateY(-50%) scale(1) rotateY(0)}.neighbor-slider .neighbor-slider-prev{right:50%}.neighbor-slider .neighbor-slider-next{left:50%}
