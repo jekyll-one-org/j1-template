@@ -180,7 +180,6 @@ settings:
       # ------------------------------------------------------------------------
       #
       parameters:
-      # direction:                        horizontal
         grabCursor:                       true
         loop:                             true
 
@@ -189,13 +188,13 @@ settings:
       # ------------------------------------------------------------------------
       #
       module_settings:
-        # pagination:
-        #   el:                           .swiper-pagination
-        #   dynamicBullets:               false
-        #   clickable:                    true
         navigation:
           nextEl:                       .swiper-button-next
           prevEl:                       .swiper-button-prev
+        pagination:
+          el:                           .swiper-pagination-outer
+          clickable:                    true
+        # renderBullet:                 function (index, className) { return `<span class="${className}"> ${++index} </span>`; }
 
       # ------------------------------------------------------------------------
       # EVENT Options
@@ -203,6 +202,77 @@ settings:
       #
       events:
         enabled:                        false
+        init: >
+                                        function (swiper) { var slideHeight = 300; swiper.slides.forEach(slide => { slide.style.height = `${slideHeight}px`; }); }
+
+      # ------------------------------------------------------------------------
+      # LIGHTBOX Options
+      # ------------------------------------------------------------------------
+      #
+      lightbox:
+
+        # ----------------------------------------------------------------------
+        # GENERAL Options
+        # ----------------------------------------------------------------------
+        #
+        enabled:                        false
+
+    # --------------------------------------------------------------------------
+    # IMAGE Swiper|Layout Base, Captions
+    # --------------------------------------------------------------------------
+    #
+    - swiper:
+
+      # ------------------------------------------------------------------------
+      # GENERAL options
+      # ------------------------------------------------------------------------
+      #
+      enabled:                          true
+      id:                               swiper_image_base_navigation_pagination
+      layout:                           image/base
+      playlist:                         free_animal
+      swiper_classes:                   false
+      container_classes:                false
+      wrapper_styles:                   false
+
+      # ------------------------------------------------------------------------
+      # CAPTION options
+      # ------------------------------------------------------------------------
+      #
+      captions:                             
+        enabled:                        true
+        css_class:                      swp-caption-content
+
+      # ------------------------------------------------------------------------
+      # CORE Options
+      # ------------------------------------------------------------------------
+      #
+      parameters:
+        grabCursor:                     true
+        slidesPerView:                  2
+        slidesPerGroup:                 2
+        spaceBetween:                   5
+
+      # ------------------------------------------------------------------------
+      # MODULE Options
+      # ------------------------------------------------------------------------
+      #
+      module_settings:
+        navigation:
+          nextEl:                       .swiper-button-next
+          prevEl:                       .swiper-button-prev      
+        pagination:
+          type:                         bullets
+          el:                           .swiper-pagination-outer
+          dynamicBullets:               false
+          clickable:                    true
+
+      # ------------------------------------------------------------------------
+      # EVENT Options
+      # ------------------------------------------------------------------------
+      #
+      events:
+        enabled:                        true
         init: >
                                         function (swiper) { var slideHeight = 300; swiper.slides.forEach(slide => { slide.style.height = `${slideHeight}px`; }); }
 
@@ -257,7 +327,7 @@ settings:
         #
         kbd_controls:
           escKey:                       true
- 
+
     # --------------------------------------------------------------------------
     # IMAGE Swiper|Layout Base, Captions
     # --------------------------------------------------------------------------
@@ -300,7 +370,8 @@ settings:
       #
       module_settings:
         # pagination:
-        #   el:                           .swiper-pagination
+        #   type:                         bullets
+        #   el:                           .swiper-pagination-outer
         #   dynamicBullets:               false
         #   clickable:                    true
 
@@ -365,117 +436,6 @@ settings:
         kbd_controls:
           escKey:                       true
  
-    # --------------------------------------------------------------------------
-    # IMAGE Swiper|Layout Base, Captions + Lightbox
-    # --------------------------------------------------------------------------
-    #
-    - swiper:
-
-      # ------------------------------------------------------------------------
-      # GENERAL options
-      # ------------------------------------------------------------------------
-      #
-      enabled:                          true
-      id:                               swiper_image_base_navigation_pagination_lightbox
-      layout:                           image/base
-      playlist:                         free_animal
-      swiper_classes:                   false
-      container_classes:                false
-      wrapper_styles:                   false
-
-      # ------------------------------------------------------------------------
-      # CAPTION options
-      # ------------------------------------------------------------------------
-      #
-      captions:                             
-        enabled:                        true
-        css_class:                      swp-caption-content
-
-      # ------------------------------------------------------------------------
-      # CORE Options
-      # ------------------------------------------------------------------------
-      #
-      parameters:
-        grabCursor:                     true
-        slidesPerView:                  2
-        slidesPerGroup:                 2
-        spaceBetween:                   5
-
-      # ------------------------------------------------------------------------
-      # MODULE Options
-      # ------------------------------------------------------------------------
-      #
-      module_settings:    
-        pagination:
-          el:                           .swiper-pagination
-          dynamicBullets:               false
-          clickable:                    true
-        #   renderBullet:                 function (index, className) { return `<span class="${className}"> ${++index} </span>`; }
-        navigation:
-          nextEl:                       .swiper-button-next
-          prevEl:                       .swiper-button-prev
-
-      # ------------------------------------------------------------------------
-      # EVENT Options
-      # ------------------------------------------------------------------------
-      #
-      events:
-        enabled:                        true
-        init: >
-                                        function (swiper) { var slideHeight = 300; swiper.slides.forEach(slide => { slide.style.height = `${slideHeight}px`; }); }
-
-      # ------------------------------------------------------------------------
-      # LIGHTBOX Options
-      # ------------------------------------------------------------------------
-      #
-      lightbox:
-
-        # ----------------------------------------------------------------------
-        # GENERAL Options
-        # ----------------------------------------------------------------------
-        #
-        enabled:                        false
-
-        # ----------------------------------------------------------------------
-        # CAPTION Options
-        # ----------------------------------------------------------------------
-        #
-        captions:
-          enabled:                      true
-          css_class:                    pswp-caption-content
-
-        # ----------------------------------------------------------------------
-        # CORE Options
-        # ----------------------------------------------------------------------
-        #
-        parameters:
-          children:                     a
-          bgOpacity:                    1
-          showHideOpacity:              true
-          loop:                         true
-          wheelToZoom:                  true
-          showHideAnimationType:        zoom
-          imageClickAction:             next
-          tapAction:                    next
-          padding:                      { top: 0, bottom: 0, left: 80, right: 80 }
-
-        # ----------------------------------------------------------------------
-        # USER INTERFACE Options
-        # ----------------------------------------------------------------------
-        #
-        ui_controls:
-          zoom:                         false
-          close:                        true
-          counter:                      true
-          arrowKeys:                    false
-
-        # ----------------------------------------------------------------------
-        # KEYBOARD Options
-        # ----------------------------------------------------------------------
-        #
-        kbd_controls:
-          escKey:                       true
-
     # --------------------------------------------------------------------------
     # IMAGE Swiper|Layout Panorama
     # --------------------------------------------------------------------------
@@ -555,6 +515,11 @@ settings:
           on_click:                     next                                    # false | next
           depth:                        200
           rotate:                       30
+        pagination:
+          type:                         bullets
+          el:                           .swiper-pagination-outer
+          dynamicBullets:               false
+          clickable:                    true
 
       # ------------------------------------------------------------------------
       # EVENT Options
@@ -648,7 +613,6 @@ settings:
       #
       parameters:
         effect:                         neighbor
-      # slidesPerView:                  1.3                                     # slidesPerView NOT supported by EffectNeighbor
         loop:                           true
         loopAdditionalSlides:           1
         centeredSlides:                 true
@@ -664,6 +628,11 @@ settings:
           swiper_id:                    neighbor_slider                         # should ALWAYS an id (NOT a class)
           speed:                        800
           loop:                         true
+        # pagination:
+        #   type:                         bullets
+        #   el:                           .swiper-pagination-outer
+        #   dynamicBullets:               false
+        #   clickable:                    true
 
       # ------------------------------------------------------------------------
       # EVENT Options
@@ -764,10 +733,14 @@ settings:
       #
       module_settings:
         modules:                        [ LayoutThumbs ]                        # Swiper modules for J1 are to specied (to be loaded)
+        pagination:
+          type:                         bullets
+          el:                           .swiper-pagination-outer
+          dynamicBullets:               false
+          clickable:                    true        
         thumbs:
           swiper_id:                    thumb_slider_top                        # should be moved to CORE Options (parameters)
           speed:                        1000                                    # should be moved to CORE Options (parameters)
-        # autoHeight:                   true                                    # should be moved to CORE Options (parameters)
           grabCursor:                   true                                    # should be moved to CORE Options (parameters)
           loop:                         true                                    # should be moved to CORE Options (parameters)                                 
           placement:                    top

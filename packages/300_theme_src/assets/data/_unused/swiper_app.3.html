@@ -240,7 +240,7 @@ playlist.image_defaults: {{playlist.image_defaults | debug}}
       <div id="{{swiper.id}}">
       {% endif %}
         <!-- Swiper elements (El) -->
-        <div id="{{swiper.id}}_swiper_container" class="swiper swiper-container {{swiper.swiper_container_classes}}">
+        <div class="swiper swiper-container {{swiper.swiper_container_classes}}">
 
           {% assign wrapper_styles = '' %}
           {% if swiper.wrapper_styles %}
@@ -312,28 +312,33 @@ playlist.image_defaults: {{playlist.image_defaults | debug}}
 
           </ul> <!-- END Swiper Wrapper (slides) -->
 
+          {% comment %} DEBUG
+          ----------------------------------------------------------------------
+          swiper.module_settings.pagination: {{swiper.module_settings.pagination | debug}}
+          swiper.module_settings.pagination.el (outer): {{swiper.module_settings.pagination.el | contains: 'outer' | debug}}
+          ---------------------------------------------------------------------- {% endcomment %}
+         
           {% if swiper.module_settings.navigation %}
           <!-- Navigation -->
           <div class="swiper-button-prev"></div>
           <div class="swiper-button-next"></div>
           {% endif %}
 
-          {% assign pagination_el       = swiper.module_settings.pagination.el | split: '-' %}
-          {% assign pagination_position = pagination_el[2] %}
-
-          {% if swiper.module_settings.pagination and pagination_position == 'inner' %}
+          {% if swiper.module_settings.pagination and swiper.module_settings.pagination.type == 'inner' %}
           <!-- Inner Pagination -->
-          <div id="{{swiper.id}}_pagination" class="swiper-pagination-inner"></div>
-          {% endif %}
-
-          {% if swiper.module_settings.pagination and pagination_position == 'outer' %}
-          <!-- Outer pagination moved by SwiperJS Adapter (workaround) -->
-          <div id="{{swiper.id}}_pagination" class="swiper-pagination-outer"></div>
+          <div class="swiper-pagination"></div>
           {% endif %}
 
         </div> <!-- END Swiper Container (elements) -->
-      <!-- END Image Swipers, Layout Base -->
+
+        {% if swiper.module_settings.pagination and swiper.module_settings.pagination.type == 'outer' %}
+        <!-- Outer Pagination -->
+        <div class="swiper-pagination-outer"></div>
+        {% endif %} 
+
       </div> <!-- END Swiper {{swiper.id}} -->     
+
+      <!-- END Image Swipers, Layout Base -->
       {% endif %}
 
 
@@ -421,23 +426,15 @@ playlist.image_defaults: {{playlist.image_defaults | debug}}
   
           </ul> <!-- END Swiper Wrapper (slides) -->
   
-          {% if swiper.module_settings.navigation %}
+          {% if swiper.modules.navigation %}
           <!-- Navigation -->
           <div class="swiper-button-prev"></div>
           <div class="swiper-button-next"></div>
           {% endif %}
-
-          {% assign pagination_el       = swiper.module_settings.pagination.el | split: '-' %}
-          {% assign pagination_position = pagination_el[2] %}
-
-          {% if swiper.module_settings.pagination and pagination_position == 'inner' %}
-          <!-- Inner Pagination -->
-          <div id="{{swiper.id}}_pagination" class="swiper-pagination-inner"></div>
-          {% endif %}
-
-          {% if swiper.module_settings.pagination and pagination_position == 'outer' %}
-          <!-- Outer pagination moved by SwiperJS Adapter (workaround) -->
-          <div id="{{swiper.id}}_pagination" class="swiper-pagination-outer"></div>
+  
+          {% if swiper.modules.pagination %}
+          <!-- Pagination -->
+          <div class="swiper-pagination"></div>
           {% endif %}
   
         </div> <!-- END Swiper Container (elements) -->
@@ -536,17 +533,9 @@ playlist.image_defaults: {{playlist.image_defaults | debug}}
           <div class="swiper-button-next"></div>
           {% endif %}
   
-          {% assign pagination_el       = swiper.module_settings.pagination.el | split: '-' %}
-          {% assign pagination_position = pagination_el[2] %}
-
-          {% if swiper.module_settings.pagination and pagination_position == 'inner' %}
-          <!-- Inner Pagination -->
-          <div id="{{swiper.id}}_pagination" class="swiper-pagination-inner"></div>
-          {% endif %}
-
-          {% if swiper.module_settings.pagination and pagination_position == 'outer' %}
-          <!-- Outer pagination moved by SwiperJS Adapter (workaround) -->
-          <div id="{{swiper.id}}_pagination" class="swiper-pagination-outer"></div>
+          {% if swiper.modules.pagination %}
+          <!-- Pagination -->
+          <div class="swiper-pagination"></div>
           {% endif %}
   
         </div> <!-- END Swiper Container (elements) -->
@@ -646,17 +635,9 @@ playlist.image_defaults: {{playlist.image_defaults | debug}}
           <div class="swiper-button-next"></div>
           {% endif %}
   
-          {% assign pagination_el       = swiper.module_settings.pagination.el | split: '-' %}
-          {% assign pagination_position = pagination_el[2] %}
-
-          {% if swiper.module_settings.pagination and pagination_position == 'inner' %}
-          <!-- Inner Pagination -->
-          <div id="{{swiper.id}}_pagination" class="swiper-pagination-inner"></div>
-          {% endif %}
-
-          {% if swiper.module_settings.pagination and pagination_position == 'outer' %}
-          <!-- Outer pagination moved by SwiperJS Adapter (workaround) -->
-          <div id="{{swiper.id}}_pagination" class="swiper-pagination-outer"></div>
+          {% if swiper.modules.pagination %}
+          <!-- Pagination -->
+          <div class="swiper-pagination"></div>
           {% endif %}
   
         </div> <!-- END Swiper Container (elements) -->
@@ -756,17 +737,9 @@ playlist.image_defaults: {{playlist.image_defaults | debug}}
           <div class="swiper-button-next"></div>
           {% endif %}
   
-          {% assign pagination_el       = swiper.module_settings.pagination.el | split: '-' %}
-          {% assign pagination_position = pagination_el[2] %}
-
-          {% if swiper.module_settings.pagination and pagination_position == 'inner' %}
-          <!-- Inner Pagination -->
-          <div id="{{swiper.id}}_pagination" class="swiper-pagination-inner"></div>
-          {% endif %}
-
-          {% if swiper.module_settings.pagination and pagination_position == 'outer' %}
-          <!-- Outer pagination moved by SwiperJS Adapter (workaround) -->
-          <div id="{{swiper.id}}_pagination" class="swiper-pagination-outer"></div>
+          {% if swiper.modules.pagination %}
+          <!-- Pagination -->
+          <div class="swiper-pagination"></div>
           {% endif %}
   
         </div> <!-- END Swiper Container (elements) -->

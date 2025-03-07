@@ -31,7 +31,7 @@
   --swiper-navigation-color: var(--bs-gray-100);
   --swiper-navigation-size: 44px;
   --swiper-navigation-top-offset: 50%;
-  --swiper-navigation-sides-offset: 10px;
+  --swiper-navigation-sides-offset: 20px;
 }
 
 /* Pagination styles
@@ -70,14 +70,6 @@
   --swiper-scrollbar-size: 4px;
 }
 
-/* Swiper container
-   NOTE: Important for positioning controls relative to it
--------------------------------------------------------------------- */
-.swiper-container {
-    display: block;
-/*  position: relative !important; */
-}
-
 /* Titles and Captions
 -------------------------------------------------------------------- */
 .swiper-title {
@@ -90,6 +82,7 @@
   font-weight: 500;
   margin-bottom: .5rem;
 }
+
 .swp-caption-content {
   display: none;
   position: absolute; 
@@ -157,8 +150,25 @@ ul.swiper-wrapper {
   left: auto;
 }
 
-/* Pagination
+/* Pagination, absolute (relative to the swiper container/parent)
 -------------------------------------------------------------------------------- */
+.swiper-pagination,
+.swiper-pagination-inner {
+  position: absolute;
+  text-align: center;
+  transition: 300ms opacity;
+  transform: translate3d(0, 0, 0);
+  z-index: 10;
+}
+
+.swiper-pagination-outer {
+  padding-top: 12px;
+  bottom: unset !important;
+  text-align: center;
+  transition: 300ms opacity;
+  transform: translate3d(0, 0, 0);
+}
+
 .swiper-pagination-bullet {
   width: 25px !important;
   height: 25px !important;
@@ -168,20 +178,13 @@ ul.swiper-wrapper {
   font-weight: 400;
   color: var(--bs-black) !important;
   opacity: .6 !important;
-  background: rgba(0, 0, 0, 0.3) !important
+  background: rgba(0, 0, 0, 0.5) !important
 }
 
 .swiper-pagination-bullet-active {
   color: var(--bs-white) !important;
   background: var(--swiper-theme-color) !important;
   opacity: 1 !important;
-}
-
-.swiper-pagination-outside {
-  position: absolute;
-  margin-top: -18px;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 /* Autoplay

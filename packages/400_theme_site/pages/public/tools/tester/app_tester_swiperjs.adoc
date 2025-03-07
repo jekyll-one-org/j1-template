@@ -145,92 +145,7 @@ below the Swiper App indicate how *many* slides (images) the slide show
 *contains* for improved usage experience.
 
 .Image Swiper · Full-width + Pagination
-swiper::swiper_image_base_full_width_pagination[role="mt-4 mb-5"]
-
-
-////
-[role="mt-4"]
-==== Base Slider + Pagination
-
-Carousels are used for an exceptionally compact form of image galleries.
-This example shows some pictures having individual caption text and supports
-a lightbox to enlarge images full size.
-
-++++
-<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Base Silder · Pagination </div>
-
-<!-- Swiper -->
-<div class="swiper-container mb-5">
-  <!-- Slides container -->
-  <div class="swiper-wrapper">
-    <!-- flat swiper slide HTML -->
-    <li class="swiper-slide">
-      <img src="/assets/image/module/swiper/simple/free_animal/image/free-animal-1.jpg" alt="Slide Image free-animal-1">
-    </li>          
-    <li class="swiper-slide">
-      <img src="/assets/image/module/swiper/simple/free_animal/image/free-animal-2.jpg" alt="Slide Image free-animal-2">
-    </li>          
-    <li class="swiper-slide">
-      <img src="/assets/image/module/swiper/simple/free_animal/image/free-animal-3.jpg" alt="Slide Image free-animal-3">
-    </li>          
-    <li class="swiper-slide">
-      <img src="/assets/image/module/swiper/simple/free_animal/image/free-animal-4.jpg" alt="Slide Image free-animal-4">
-    </li>          
-    <li class="swiper-slide">
-      <img src="/assets/image/module/swiper/simple/free_animal/image/free-animal-5.jpg" alt="Slide Image free-animal-5">
-    </li>          
-    <li class="swiper-slide">
-      <img src="/assets/image/module/swiper/simple/free_animal/image/free-animal-6.jpg" alt="Slide Image free-animal-6">
-    </li>          
-  </div> <!-- END Swiper Wrapper (slides) -->
-
-  <div class="swiper-pagination" style="margin-top: .75rem;"></div>  
-</div>
-
-<!-- Add Pagination OUTSIDE -->
-<div class="swiper-pagination-outside"></div>
-++++
-
-++++
-<script>
-$(function() {
-  var dependencies_met_page_ready = setInterval (() => {
-    var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true : false;
-
-      if (atticFinished) {
-
-        // ---------------------------------------------------------------------
-        // slider initializer
-        // ---------------------------------------------------------------------
-        const mySwiper = new Swiper('.swiper-container', {
-          // module options
-          pagination: {
-            el: '.swiper-pagination-outside',
-            clickable: true,
-            renderBullet: (index, className) => {
-              return `<span class="${className}"> ${++index} </span>`;
-            }
-          },
-          // event settings
-          on: {
-            // Swiper's default pagination will automatically handle the active class.
-            // If you need more customization, you can implement it here.            
-            slideChange: (swiper) => { 
-              const activeIndex = swiper.activeIndex;
-              console.log('Active slide index:', activeIndex);
-            }
-          }
-        });
-
-
-
-        clearInterval(dependencies_met_page_ready);
-    } // END pageVisible
-  }, 10); // END dependencies_met_page_ready
-});
-</script>
-++++
-////
+swiper::swiper_image_base_full_width_pagination[role="mt-3"]
 
 [role="mt-4"]
 ==== Equal Image Sizes
@@ -241,10 +156,10 @@ many facts to know animated for the reader's attention within a single
 line.
 
 .Equal Image Sizes · Captions + Navigation + Pagination
-swiper::swiper_image_base_navigation_pagination_lightbox[role="mt-4 mb-4"]
+swiper::swiper_image_base_navigation_pagination[role="mt-3"]
 
 
-[role="mt-5"]
+[role="mt-4"]
 ==== Mixed Image Sizes
 
 Pictures you've made are typically *not even in size*. Images may have the
@@ -252,7 +167,7 @@ same size (resolution), but some are orientated *landscape*, or others may
 be *portrait*. For that reason, a more powerful swiper is needed to create
 so-called justified slides.
 
-.Mixed Image Sizes · Captions + Lightbos
+.Mixed Image Sizes · Captions + Lightbox
 swiper::swiper_image_base_captions[role="mt-4 mb-4"]
 
 
@@ -342,6 +257,10 @@ presented *images*.
               </li>
             </ul> <!-- END Swiper wrapper -->
         </div> <!-- END Swiper container  -->
+        
+        <!-- Outer Pagination -->
+        <div class="swiper-pagination-outer"></div>
+
       </div> <!-- END Thumb View (main)  -->
 
       <!-- Thumb View (thumbs/right) -->
@@ -408,6 +327,11 @@ $(function() {
       var masterSwiper2 = new Swiper('#master_slider_2', {        
         direction: 'horizontal',
         grabCursor: true,
+        // pagination: {
+        //   el: '.swiper-pagination-outer',
+        //   clickable: true,
+        //   renderBullet: function (index, className) { return `<span class="${className}"> ${++index} </span>`; }
+        // },        
         effect: 'fade',
           fadeEffect: {
           crossFade: true
@@ -616,6 +540,11 @@ $(function() {
       resistanceRatio: 0,
       grabCursor: true,
       parallax: true,
+      pagination: {
+        el: '.swiper-pagination-outer',
+        type: 'bullets',
+        clickable: true
+      },      
       creativeEffect: {
         limitProgress: 3,
         perspective: true,
@@ -857,6 +786,11 @@ $(function() {
 
     const swiper = new Swiper(swiperEl, {
       speed: 600,
+      pagination: {
+        el: '.swiper-pagination-outer',
+        type: 'bullets',
+        clickable: true
+      },
       // resistanceRatio: 0,
       // slidesPerView: 'auto',
       // centeredSlides: true,

@@ -206,7 +206,7 @@ j1.adapter.swiper = ((j1, window) => {
                 {% if swiper.module_settings %}
                 // module settings
                 {% for setting in swiper.module_settings %}
-                {% if setting[0] == 'modules' or setting[0] == 'pppppagination' %}
+                {% if setting[0] == 'modules' or setting[0] == 'ppppppagination' %}
                 {{setting[0]}}: {{ setting[1] | replace: '=>', ':' | replace: '"', ' ' }},
                 {% else %}
                 {{setting[0]}}: {{ setting[1] | replace: '=>', ':' }},
@@ -302,6 +302,23 @@ j1.adapter.swiper = ((j1, window) => {
                 }
               });
               {% endif %}
+
+              // workaround for swiper pagination placed 'outer'
+              // ---------------------------------------------------------------
+              {% assign init_swiper_delay   = 500 %}
+              {% assign pagination_el       = swiper.module_settings.pagination.el | split: '-' %}
+              {% assign pagination_position = pagination_el[2] %}
+
+              {% if swiper.module_settings.pagination and pagination_position == 'outer' %}
+              setTimeout(() => {
+                const sourceEl = document.getElementById('{{swiper.id}}_pagination');
+                const targetEl = document.getElementById('{{swiper.id}}');
+                targetEl.appendChild(sourceEl);
+
+                logger.debug('\n' + 'pagination elements moved');
+              }, {{init_swiper_delay}});
+              {% endif %}
+              // ---------------------------------------------------------------
 
               clearInterval (load_dependencies['dependencies_met_html_loaded_{{swiper.id}}']);
             } // END if xhrLoadState success
