@@ -369,11 +369,11 @@ settings:
       # ------------------------------------------------------------------------
       #
       module_settings:
-        # pagination:
-        #   type:                         bullets
-        #   el:                           .swiper-pagination-outer
-        #   dynamicBullets:               false
-        #   clickable:                    true
+        pagination:
+          type:                         bullets
+          el:                           .swiper-pagination-outer
+          dynamicBullets:               false
+          clickable:                    true
 
       # ------------------------------------------------------------------------
       # EVENT Options
@@ -628,11 +628,6 @@ settings:
           swiper_id:                    neighbor_slider                         # should ALWAYS an id (NOT a class)
           speed:                        800
           loop:                         true
-        # pagination:
-        #   type:                         bullets
-        #   el:                           .swiper-pagination-outer
-        #   dynamicBullets:               false
-        #   clickable:                    true
 
       # ------------------------------------------------------------------------
       # EVENT Options
@@ -724,8 +719,7 @@ settings:
       # ------------------------------------------------------------------------
       #
       parameters:
-        effect:                         thumbs
-      # layout:                         thumbs
+        direction:                      horizontal       
 
       # ------------------------------------------------------------------------
       # MODULE Options
@@ -734,15 +728,13 @@ settings:
       module_settings:
         modules:                        [ LayoutThumbs ]                        # Swiper modules for J1 are to specied (to be loaded)
         pagination:
-          type:                         bullets
-          el:                           .swiper-pagination-outer
-          dynamicBullets:               false
-          clickable:                    true        
+          enabled:                      true
+          nunbered:                     true       
         thumbs:
-          swiper_id:                    thumb_slider_top                        # should be moved to CORE Options (parameters)
-          speed:                        1000                                    # should be moved to CORE Options (parameters)
-          grabCursor:                   true                                    # should be moved to CORE Options (parameters)
-          loop:                         true                                    # should be moved to CORE Options (parameters)                                 
+          swiper_id:                    thumb_slider_top
+          speed:                        1000
+          grabCursor:                   true
+          loop:                         true
           placement:                    top
           spaceBetween:                 5
           slidesPerView:                3
@@ -752,11 +744,11 @@ settings:
       # ------------------------------------------------------------------------
       #
       events:
-        enabled:                        false
-      # init: >
-      #                                 function (swiper) { var slideHeight = 550; swiper.slides.forEach(slide => { slide.style.height = `${slideHeight}px`; }); }
-      # slideChangeTransitionStart: >
-      #                                 function (swiper) { thumbSlider.slideTo(swiper.activeIndex); }
+        enabled:                        false      
+        init: >
+                                        function (swiper) { var slideHeight = 550; swiper.slides.forEach(slide => { slide.style.height = `${slideHeight}px`; }); }
+        slideChangeTransitionStart: >
+                                        function (swiper) { thumbSlider.slideTo(swiper.activeIndex); }
 
       # ------------------------------------------------------------------------
       # LIGHTBOX options

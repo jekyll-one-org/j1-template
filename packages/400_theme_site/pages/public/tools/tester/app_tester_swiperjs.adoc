@@ -75,7 +75,7 @@ all types of websites, such as those viewed on desktop computers, tablets, or
 smartphones.
 
 
-[role="mt-5"]
+[role="mt-4"]
 == What SwiperJS Apps are
 
 SwiperJS Apps are preconfigured swipers (sliders) that use the SwiperJS API as
@@ -490,7 +490,7 @@ lorem:sentences[5]
 <div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Extendend Swiper · Layout Stacked</div>
 <!-- Posters slider -->
 <div id="stacked_slider" class="stacked-slider mt-3">
-  <div class="swiper swiper-container">
+  <div id="stacked_slider_swiper_container" class="swiper swiper-container">
 
     <ul class="swiper-wrapper">
       <li class="swiper-slide">
@@ -512,10 +512,13 @@ lorem:sentences[5]
       <li class="swiper-slide">
         <img data-swiper-parallax-scale="1.1" src="/assets/image/module/swiper/extended/poster/image/6.jpg" alt="">
       </li>
-    </ul>
+    </ul> <!-- END Swiper Wrapper (slides) -->
 
-  </div>
-</div>
+    <!-- Inner Pagination -->
+    <div class="swiper-pagination-inner"></div>
+
+  </div> <!-- END Swiper Container (elements) -->
+</div> <!-- END Swiper stacked_slider -->
 ++++
 
 ++++
@@ -541,7 +544,7 @@ $(function() {
       grabCursor: true,
       parallax: true,
       pagination: {
-        el: '.swiper-pagination-outer',
+        el: '.swiper-pagination-inner',
         type: 'bullets',
         clickable: true
       },      
@@ -610,7 +613,7 @@ lorem:sentences[3]
 <div id="app" class="extended-app">
   <!-- Style expanding-slide should wrap the swiper for Effect: Expanding  -->
   <div id="expanding_slides" class="expanding-slide mt-4">
-    <div class="swiper swiper-container">
+    <div id="expanding_slides_swiper_container" class="swiper swiper-container">
 
         <ul class="swiper-wrapper">
             <!-- First slide -->
@@ -717,6 +720,12 @@ lorem:sentences[3]
             </li>
         </ul> <!-- END Swiper wrapper -->
 
+          <!-- Inner Pagination -->
+          <!-- div class="swiper-pagination-inner"></div -->
+
+        <!-- Outer pagination, NOT moved by SwiperJS Adapter (workaround) -->
+        <div class="swiper-pagination-outer"></div>
+
     </div> <!-- END Swiper container -->
   </div> <!-- END expanding_slides -->
 </div> <!-- END app -->
@@ -791,7 +800,7 @@ $(function() {
         type: 'bullets',
         clickable: true
       },
-      // resistanceRatio: 0,
+      resistanceRatio: 0,
       // slidesPerView: 'auto',
       // centeredSlides: true,
       on: {

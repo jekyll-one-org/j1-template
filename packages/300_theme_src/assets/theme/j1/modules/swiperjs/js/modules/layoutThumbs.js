@@ -17,6 +17,8 @@
 
 function LayoutThumbs(_ref) {
 
+
+
   var {
     swiper,
     extendParams,
@@ -24,18 +26,42 @@ function LayoutThumbs(_ref) {
     on
   } = _ref;
 
+  var paramsPagination, settingsPagination, paramsThumbs, renderBullet;
+
   // set (module) options
-  const commonParams  = params.thumbs;
-  const thumbSpeed    = commonParams.speed/2;
-  const mainSpeed     = commonParams.speed;
+  // ---------------------------------------------------------------------------
+  if (params.pagination.enabled && params.pagination.nunbered) {
+    renderBullet = (index, className) => { return `<span class="${className}"> ${++index} </span>`; };
+  } else {
+    renderBullet = false;
+  }
+
+  settingsPagination  = {
+    el: '.swiper-pagination-outer',
+    type: 'bullets',
+    clickable: true,
+    renderBullet: renderBullet
+  };
+
+  if (params.pagination.enabled) {
+    paramsPagination = settingsPagination;
+  } else {
+    paramsPagination = false;
+  }
+
+  paramsThumbs      = params.thumbs;
+
+  const thumbSpeed        = paramsThumbs.speed/2;
+  const mainSpeed         = paramsThumbs.speed;
+
 
   // ---------------------------------------------------------------------------
-  // effect initializer
+  // layout initializer
   // ---------------------------------------------------------------------------
 
   // main swiper
   //
-  const mainSwiper    = document.querySelector(`#${commonParams.swiper_id}`);
+  const mainSwiper    = document.querySelector(`#${paramsThumbs.swiper_id}`);
   const mainSwiperEl  = mainSwiper.querySelector('.swiper');
 
   // create thmubs swiper (duplicate from main)
@@ -47,24 +73,24 @@ function LayoutThumbs(_ref) {
   const swiperThumbSlides      = swiperThumbEl.querySelectorAll('.swiper-slide');
   const swiperThumbLastSlideEl = swiperThumbSlides[swiperThumbSlides.length - 1];
 
-  if (commonParams.placement === 'bottom') {
+  if (paramsThumbs.placement === 'bottom') {
     // place thumbs slider AFTER the main swiper (place at botton)
-    // ---------------------------------------------------------------------
+    // -------------------------------------------------------------------------
     mainSwiper.appendChild(swiperThumbEl);
-    mainSwiperEl.classList.add('mb-1');
+    // mainSwiperEl.classList.add('mb-1');
     swiperThumbEl.classList.add('thumbs-slider--bottom');
-  } else if (commonParams.placement === 'top') {
+  } else if (paramsThumbs.placement === 'top') {
     // place thumbs slider BEFORE the main swiper (place on top)
-    // ---------------------------------------------------------------------
+    // -------------------------------------------------------------------------
     swiperThumbEl
       .querySelector('.swiper-wrapper')
       .insertBefore(swiperThumbLastSlideEl, swiperThumbLastSlideEl[0]);
 
-      mainSwiperEl.classList.add('mt-1');
+      // mainSwiperEl.classList.add('mt-1');
       swiperThumbEl.classList.add('thumbs-slider--top');
   } else {
     // place thumbs at botton (default)
-    // ---------------------------------------------------------------------
+    // -------------------------------------------------------------------------
     mainSwiper.appendChild(swiperThumbEl);
     mainSwiperEl.classList.add('mb-1');
     swiperThumbEl.classList.add('thumbs-slider--bottom');
@@ -76,29 +102,52 @@ function LayoutThumbs(_ref) {
   // ---------------------------------------------------------------------------
 
   const thumbSlider = new Swiper(swiperThumbEl, {
-//  autoHeight:     commonParams.autoHeight,
-    grabCursor:     commonParams.grabCursor,
-    speed:          commonParams.speed * .5,
-    spaceBetween:   commonParams.spaceBetween,
-    slidesPerView:  commonParams.slidesPerView,
+    grabCursor:     paramsThumbs.grabCursor,
+    speed:          paramsThumbs.speed * .5,
+    spaceBetween:   paramsThumbs.spaceBetween,
+    slidesPerView:  paramsThumbs.slidesPerView,
   });
 
   const mainSlider = new Swiper(mainSwiperEl, {
-    grabCursor:     commonParams.grabCursor,
-    speed:          commonParams.speed,
+    grabCursor:     paramsThumbs.grabCursor,
+    speed:          paramsThumbs.speed,
+    pagination:     paramsPagination,
     thumbs: {
       swiper:       thumbSlider,
     },
   });
 
+  // if (paramsPagination.enabled) {
+  //   const mainSlider = new Swiper(mainSwiperEl, {
+  //     grabCursor:     paramsThumbs.grabCursor,
+  //     speed:          paramsThumbs.speed,
+  //     pagination:     paramsPagination,
+  //     thumbs: {
+  //       swiper:       thumbSlider,
+  //     },
+  //   });
+  // } else {
+  //   const mainSlider = new Swiper(mainSwiperEl, {
+  //     grabCursor:     paramsThumbs.grabCursor,
+  //     speed:          paramsThumbs.speed,
+  //     pagination:     paramsPagination,
+  //     thumbs: {
+  //       swiper:       thumbSlider,
+  //     },
+  //   });    
+  // }
+
+
 
   // ---------------------------------------------------------------------------
-  // events
+  // slider events
   // ---------------------------------------------------------------------------   
 
+  // MAIN
+  //
   mainSlider.on('init', function (swiper) {
-    if (commonParams.slideHeight !== 'auto') {
-      swiper.slides.forEach(slide => { slide.style.height = `${commonParams.slideHeight}px`; });
+    if (paramsThumbs.slideHeight !== 'auto') {
+      swiper.slides.forEach(slide => { slide.style.height = `${paramsThumbs.slideHeight}px`; });
     }
   });
 
@@ -106,6 +155,12 @@ function LayoutThumbs(_ref) {
     thumbSlider.slideTo(swiper.activeIndex);
   });
 
+  mainSlider.on('paginationUpdate', function (swiper) {
+    thumbSlider.slideTo(swiper.activeIndex);
+  });
+
+  // THUMBS
+  //
   thumbSlider.on('transitionStart', function (swiper) {
     mainSlider.slideTo(swiper.activeIndex);
   });

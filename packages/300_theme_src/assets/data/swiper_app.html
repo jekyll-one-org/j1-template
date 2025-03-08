@@ -430,16 +430,9 @@ playlist.image_defaults: {{playlist.image_defaults | debug}}
           {% assign pagination_el       = swiper.module_settings.pagination.el | split: '-' %}
           {% assign pagination_position = pagination_el[2] %}
 
-          {% if swiper.module_settings.pagination and pagination_position == 'inner' %}
-          <!-- Inner Pagination -->
-          <div id="{{swiper.id}}_pagination" class="swiper-pagination-inner"></div>
-          {% endif %}
-
-          {% if swiper.module_settings.pagination and pagination_position == 'outer' %}
-          <!-- Outer pagination moved by SwiperJS Adapter (workaround) -->
+          <!-- pagination, configured by LAYOUT -->
           <div id="{{swiper.id}}_pagination" class="swiper-pagination-outer"></div>
-          {% endif %}
-  
+
         </div> <!-- END Swiper Container (elements) -->
       </div> <!-- END Swiper {{swiper.id}} -->
       
@@ -765,7 +758,7 @@ playlist.image_defaults: {{playlist.image_defaults | debug}}
           {% endif %}
 
           {% if swiper.module_settings.pagination and pagination_position == 'outer' %}
-          <!-- Outer pagination moved by SwiperJS Adapter (workaround) -->
+          <!-- Outer pagination, moved by SwiperJS Adapter (workaround) -->
           <div id="{{swiper.id}}_pagination" class="swiper-pagination-outer"></div>
           {% endif %}
   
