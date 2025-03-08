@@ -223,7 +223,7 @@ presented *images*.
 ++++
 <div class="swiper-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Extendend Swiper · Layout Thumb Right + Captions </div>
 <div class="container g-0 mb-5">
-    <div class="row gx-1">
+    <div id="thumb_view_row" class="row gx-1">
 
       <!-- Thumb View (main) -->
       <div class="col-md-9">
@@ -256,11 +256,11 @@ presented *images*.
                 <div class="swp-caption-content">Little Bird</div>
               </li>
             </ul> <!-- END Swiper wrapper -->
-        </div> <!-- END Swiper container  -->
-        
-        <!-- Outer Pagination -->
-        <div class="swiper-pagination-outer"></div>
 
+            <!-- Outer Pagination -->
+            <div id="thumb_view_row_pagination" class="swiper-pagination-outer"></div>
+
+        </div> <!-- END Swiper container  -->        
       </div> <!-- END Thumb View (main)  -->
 
       <!-- Thumb View (thumbs/right) -->
@@ -298,6 +298,10 @@ presented *images*.
       </div> <!-- END Thumb View (thumbs/right) -->
 
     </div> <!-- END BS row -->
+
+    <!-- Outer Pagination -->
+    <!--div class="swiper-pagination-outer"></div -->
+
 </div> <!-- END BS container -->
 
 <script>
@@ -323,15 +327,14 @@ $(function() {
         }
       });
 
-      // Initialize Master instance (right)
+      // Initialize Master instance
       var masterSwiper2 = new Swiper('#master_slider_2', {        
         direction: 'horizontal',
         grabCursor: true,
-        // pagination: {
-        //   el: '.swiper-pagination-outer',
-        //   clickable: true,
-        //   renderBullet: function (index, className) { return `<span class="${className}"> ${++index} </span>`; }
-        // },        
+        pagination: {
+          el: '.swiper-pagination-outer',
+          clickable: true,
+        },        
         effect: 'fade',
           fadeEffect: {
           crossFade: true
@@ -348,6 +351,22 @@ $(function() {
           }
         }
       });
+
+      // workaround for swiper pagination placed 'outer'
+      // ---------------------------------------------------------------
+      {% assign init_swiper_delay  = 500 %}
+      {% assign pagination_enabled = true %}
+
+      {% if pagination_enabled %}
+      setTimeout(() => {
+        const sourceEl = document.getElementById('thumb_view_row_pagination');
+        const targetEl = document.getElementById('thumb_view_row');
+        targetEl.appendChild(sourceEl);
+
+        // logger.debug('\n' + 'pagination elements (outer) moved');
+      }, {{init_swiper_delay}});
+      {% endif %}
+      // ---------------------------------------------------------------
 
       clearInterval(dependencies_met_page_ready);
     } // END pageVisible

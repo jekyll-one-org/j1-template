@@ -315,7 +315,7 @@ j1.adapter.swiper = ((j1, window) => {
                 const targetEl = document.getElementById('{{swiper.id}}');
                 targetEl.appendChild(sourceEl);
 
-                logger.debug('\n' + 'pagination elements moved');
+                logger.debug('\n' + 'pagination elements (outer) moved');
               }, {{init_swiper_delay}});
               {% endif %}
               // ---------------------------------------------------------------
