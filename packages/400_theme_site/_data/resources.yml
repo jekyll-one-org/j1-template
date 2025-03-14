@@ -1972,18 +1972,22 @@ resources:
         css:                            [                                          
                                           modules/swiperjs/css/theme/uno,
                                           modules/swiperjs/css/swiper-bundle,
+                                          modules/swiperjs/css/modules/layoutBase,
                                           modules/swiperjs/css/modules/layoutExpanding,
                                           modules/swiperjs/css/modules/layoutNeighbor,
                                           modules/swiperjs/css/modules/layoutPanorama,
+                                          modules/swiperjs/css/modules/layoutParallax,
                                           modules/swiperjs/css/modules/layoutStacked,
                                           modules/swiperjs/css/modules/layoutThumbs
                                         ]
         files:                          [ adapter/js/swiper.js ]
         js:                             [
                                           modules/swiperjs/js/swiper-bundle,
+                                          modules/swiperjs/js/modules/layoutBase,
                                           modules/swiperjs/js/modules/layoutExpanding,
                                           modules/swiperjs/js/modules/layoutNeighbor,
                                           modules/swiperjs/js/modules/layoutPanorama,
+                                          modules/swiperjs/js/modules/layoutParallax,
                                           modules/swiperjs/js/modules/layoutStacked,
                                           modules/swiperjs/js/modules/layoutThumbs
                                         ]

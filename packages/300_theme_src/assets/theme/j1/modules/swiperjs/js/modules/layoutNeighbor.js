@@ -16,28 +16,27 @@
 "use strict";
 
 function LayoutNeighbor(_ref) {
-  var mainSwiper, tripleSwiper;
   var {
-      swiper,
-      extendParams,
-      params,
-      on
+    swiper,
+    params,
+    moduleFound = false
   } = _ref;
 
-  // module options
-  const commonParameters  = params.neighbor;
-  const swiperID          = `#${params.neighbor.swiper_id}`;
+  // collect module settings
+  // ---------------------------------------------------------------------------
+  const commonParameters = params.neighbor;
 
-  mainSwiper = document.querySelector(swiperID);
-
+  moduleFound = j1.adapter.swiper.findModuleByName(swiper.modules, LayoutNeighbor.name);
+  if (!moduleFound) { return; }
 
   // ---------------------------------------------------------------------------
   // effect initializer
   // ---------------------------------------------------------------------------
-  
+
   // main swiper
   //
-  const swiperEl = mainSwiper.querySelector('.swiper');
+  const mainSwiper  = document.querySelector(`#${params.neighbor.swiper_id}`);
+  const swiperEl    = mainSwiper.querySelector('.swiper');
 
   // create neighbor swiper PREV
   //
@@ -91,7 +90,7 @@ function LayoutNeighbor(_ref) {
 
   // init neighbor swiper MAIN
   //
-  tripleSwiper = new Swiper(swiperEl, {
+  const tripleSwiper = new Swiper(swiperEl, {
     ...commonParameters,
     grabCursor: true,
     controller: {

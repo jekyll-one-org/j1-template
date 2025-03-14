@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/swiper/js/modules/layoutExpanding.js
+ # ~/assets/theme/j1/modules/swiper/js/modules/layoutBase.js
  # J1 Module for SwiperJS v11 (layout)
  # -----------------------------------------------------------------------------
  #
@@ -15,7 +15,7 @@
 */
 "use strict";
 
-function LayoutExpanding(_ref) {
+function LayoutBase(_ref) {
 
   var {
     swiper,
@@ -24,4 +24,4 @@ function LayoutExpanding(_ref) {
     on
   } = _ref;
 
-} // END LayoutExpanding
+} // END LayoutBase

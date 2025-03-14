@@ -92,6 +92,7 @@ j1.adapter.swiper = ((j1, window) => {
   var swiperDefaults;
   var swiperSettings;
   var swiperOptions;
+  var swiperLayout;
   var frontmatterOptions;
   var themes_allowed;
   var theme_enabled;
@@ -162,7 +163,7 @@ j1.adapter.swiper = ((j1, window) => {
         if (j1CoreFinished && pageVisible && atticFinished) {
           startTimeModule = Date.now();
 
-          // load HTML portion for all swiper
+          // load HTML portion for all swipers
           _this.loadSwiperHTML(swiperOptions, swiperOptions.swipers);
 
           _this.setState('started');
@@ -172,11 +173,11 @@ j1.adapter.swiper = ((j1, window) => {
           {% for swiper in swipers %}{% if swiper.enabled %}
           logger.info ('\n' + 'initialize swiper on id: ' + '{{swiper.id}}');
 
-          // create dynamic loader variable|s
+          // create dynamic loader variable
           dependency = 'dependencies_met_html_loaded_{{swiper.id}}';
           load_dependencies[dependency] = '';
 
-          // initialize the swiper if the HTML portion of the slider is successfully loaded
+          // initialize the swiper if the HTML portion of the slider successfully loaded
           load_dependencies['dependencies_met_html_loaded_{{swiper.id}}'] = setInterval (() => {
             // check if HTML portion of the swiper is loaded successfully
             xhrLoadState = j1.xhrDOMState['#{{swiper.id}}_app'];
@@ -184,7 +185,12 @@ j1.adapter.swiper = ((j1, window) => {
 
               logger.info ('\n' + 'HTML portion loaded for swiper on id: ' + '{{swiper.id}}');
 
-              // setup the slider
+              {% comment %} Set Swiper Layout
+              ------------------------------------------------------------------ {% endcomment %}      
+              {% assign type_layout   = swiper.layout | split: "/" %}
+              {% assign swiper_layout = type_layout[1] | capitalize %}             
+
+              // setup slider {{swiper.id}}
               // ---------------------------------------------------------------
               logger.info ('\n' + 'swiper is being setup on id: ' + '{{swiper.id}}');
 
@@ -192,8 +198,8 @@ j1.adapter.swiper = ((j1, window) => {
               const swiperEl      = slider.querySelector('.swiper');
               const {{swiper.id}} = new Swiper(swiperEl, {
 
+                // set swiper CORE parameter settings
                 {% if swiper.parameters %}
-                // parameters (core)
                 {% for setting in swiper.parameters %}
                 {% if setting[0] == 'direction' or setting[0] == 'effect' or setting[0] == 'slideHeight' %}
                 {{setting[0]}}: {{ setting[1] | replace: '=>', ':' | json }},
@@ -202,29 +208,36 @@ j1.adapter.swiper = ((j1, window) => {
                 {% endif %}
                 {% endfor %}
                 {% endif %}
+                // end swiper CORE parameter settings
 
-                {% if swiper.module_settings %}
-                // module settings
-                {% for setting in swiper.module_settings %}
-                {% if setting[0] == 'modules' or setting[0] == 'ppppppagination' %}
-                {{setting[0]}}: {{ setting[1] | replace: '=>', ':' | replace: '"', ' ' }},
-                {% else %}
-                {{setting[0]}}: {{ setting[1] | replace: '=>', ':' }},
+                // set swiper LAYOUT module settings
+                // -------------------------------------------------------------
+                {% if swiper_layout != 'Base' or swiper_layout != 'Parallax' %}
+                modules: [Layout{{swiper_layout}}],
                 {% endif %}
+                // end swiper LAYOUT module settings
+
+                // set swiper DEFAULT module settings
+                // -------------------------------------------------------------
+                {% if swiper.module_settings %}
+                {% for setting in swiper.module_settings %}
+                {{setting[0]}}: {{ setting[1] | replace: '=>', ':' }},
                 {% endfor %}
                 {% endif %}
+                // end swiper DEFAULT module settings
 
+                // set swiper EVENT settings
                 {% if swiper.events and swiper.events.enabled %}
-                // events
                 on: {
                   {% for setting in swiper.events %}
                   {% if setting[0] == 'enabled' %} {% continue %} {% endif %}
                   {{setting[0]}}: {{ setting[1] }},                  
                   {% endfor %}
-                } // END events
+                }
                 {% endif %}
+                // end swiper EVENT settings
 
-              }); // END Swiper 
+              }); // end setup slider 
 
               {% if swiper.lightbox.enabled %}
               // ---------------------------------------------------------------
@@ -372,6 +385,14 @@ j1.adapter.swiper = ((j1, window) => {
       console.debug('swipers loaded in page enabled|all: ' + activeSwipers + '|' + numSwipers);
       _this.setState('data_loaded');
     }, // END loadSwiperHTML
+
+    // -------------------------------------------------------------------------
+    // findModuleByName(array, functionName)
+    // 
+    // -------------------------------------------------------------------------
+    findModuleByName: (moduleArray, moduleName) => {
+      return moduleArray.find(func => func.name === moduleName);
+    }, // END findModuleByName
 
     // -------------------------------------------------------------------------
     // pluginManager()

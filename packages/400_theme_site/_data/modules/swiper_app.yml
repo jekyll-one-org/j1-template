@@ -510,7 +510,6 @@ settings:
       # ------------------------------------------------------------------------
       #
       module_settings:
-        modules:                        [ LayoutPanorama ]
         panorama:
           on_click:                     next                                    # false | next
           depth:                        200
@@ -612,10 +611,7 @@ settings:
       # ------------------------------------------------------------------------
       #
       parameters:
-        effect:                         neighbor
-        loop:                           true
-        loopAdditionalSlides:           1
-        centeredSlides:                 true
+        direction:                      horizontal
         grabCursor:                     true
 
       # ------------------------------------------------------------------------
@@ -623,11 +619,12 @@ settings:
       # ------------------------------------------------------------------------
       #
       module_settings:
-        modules:                        [ LayoutNeighbor ]
         neighbor:
-          swiper_id:                    neighbor_slider                         # should ALWAYS an id (NOT a class)
-          speed:                        800
+          centeredSlides:               true
           loop:                         true
+          loopAdditionalSlides:         1
+          speed:                        800
+          swiper_id:                    neighbor_slider
 
       # ------------------------------------------------------------------------
       # EVENT Options
@@ -700,7 +697,7 @@ settings:
       #
       enabled:                          true
       id:                               thumb_slider_top
-      layout:                           image/thumb
+      layout:                           image/thumbs
       playlist:                         free_animal
       swiper_classes:                   false
       container_classes:                false
@@ -726,7 +723,6 @@ settings:
       # ------------------------------------------------------------------------
       #
       module_settings:
-        modules:                        [ LayoutThumbs ]                        # Swiper modules for J1 are to specied (to be loaded)
         pagination:
           enabled:                      true
           nunbered:                     true       
