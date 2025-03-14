@@ -424,6 +424,55 @@ settings:
                                         Lightbox Caption
 
     # --------------------------------------------------------------------------
+    # STACKED
+    # --------------------------------------------------------------------------
+    #
+    - playlist:
+      enabled:                          false
+
+      name:                             stacked
+      type:                             image/jpg
+      image_defaults:
+        base_folder:                    /assets/image/module/swiper/extended/stacked/image
+        parallax_data_elements:         [ data-swiper-parallax-scale="1.1" ]
+
+      # ------------------------------------------------------------------------
+      # SLIDE settings
+      # ------------------------------------------------------------------------
+      #
+      items:
+
+       # slide 01
+        - item:
+          enabled:                      true
+          image:                        1.jpg
+
+        # slide 02
+        - item:
+          enabled:                      true
+          image:                        2.jpg
+
+        # slide 03
+        - item:
+          enabled:                      true
+          image:                        3.jpg
+
+        # slide 04
+        - item:
+          enabled:                      true
+          image:                        4.jpg
+
+        # slide 05
+        - item:
+          enabled:                      true
+          image:                        5.jpg
+
+        # slide 06
+        - item:
+          enabled:                      true
+          image:                        6.jpg
+
+    # --------------------------------------------------------------------------
     # NEIGHBOR
     # --------------------------------------------------------------------------
     #
@@ -492,14 +541,15 @@ settings:
           description: >
                                         Lttle Bird
 
+
     # --------------------------------------------------------------------------
     # AUDIO Playlists
     # ==========================================================================
 
+
     # --------------------------------------------------------------------------
     # VIDER Playlists
     # ==========================================================================
-
 
 # ------------------------------------------------------------------------------
 # END config

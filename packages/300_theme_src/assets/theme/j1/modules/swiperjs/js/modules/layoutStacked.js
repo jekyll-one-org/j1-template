@@ -19,12 +19,25 @@ function LayoutStacked(_ref) {
 
   var {
     swiper,
-    extendParams,
     params,
-    on
+    moduleFound = false
   } = _ref;
 
-  const swiperEl = el.querySelector('.swiper');
+  // collect module settings
+  // ---------------------------------------------------------------------------
+  const commonParameters = params.stacked;
+
+  moduleFound = j1.adapter.swiper.findModuleByName(swiper.modules, LayoutStacked.name);
+  if (!moduleFound) { return; }
+
+  // ---------------------------------------------------------------------------
+  // effect initializer
+  // ---------------------------------------------------------------------------
+
+  // main swiper
+  //
+  const mainSwiper  = document.querySelector(`#${params.stacked.swiper_id}`);
+  const swiperEl    = mainSwiper.querySelector('.swiper');
 
   const calcNextOffset = () => {
     const parentWidth = swiperEl.parentElement.offsetWidth;
@@ -35,12 +48,18 @@ function LayoutStacked(_ref) {
     return `${nextOffsetVh}%`;
   };
 
-  const postersSwiper = new Swiper(swiperEl, {      
+  const stackedSwiper = new Swiper(swiperEl, {      
     effect: 'creative',
     speed: 600,
     resistanceRatio: 0,
     grabCursor: true,
     parallax: true,
+    pagination: {
+    //el: '.swiper-pagination-outer',
+      el: '.swiper-pagination-inner',
+      type: 'bullets',
+      clickable: true
+    },      
     creativeEffect: {
       limitProgress: 3,
       perspective: true,
@@ -59,17 +78,37 @@ function LayoutStacked(_ref) {
   });
 
   const onResize = () => {
-    if (!postersSwiper || postersSwiper.destroyed) return;
+    if (!stackedSwiper || stackedSwiper.destroyed) return;
     // prettier-ignore
-    postersSwiper.params.creativeEffect.next.translate = [calcNextOffset(), 0, 0];
+    stackedSwiper.params.creativeEffect.next.translate = [calcNextOffset(), 0, 0];
     if (
-      postersSwiper.params.resizeObserver &&
+      stackedSwiper.params.resizeObserver &&
       typeof window.ResizeObserver !== 'undefined'
     ) {
-      postersSwiper.update();
+      stackedSwiper.update();
     }
   };
   window.addEventListener('resize', onResize);
-  
+
+
+  // workaround for swiper pagination placed 'outer'
+  // -------------------------------------------------------------------------
+  var init_swiper_delay = 500;
+
+  // {% assign pagination_el       = swiper.module_settings.pagination.el | split: '-' %}
+  // {% assign pagination_position = pagination_el[2] %}
+
+  setTimeout(() => {
+    // const sourceEl = document.getElementById('{{swiper.id}}_pagination');
+    // const targetEl = document.getElementById('{{swiper.id}}');
+    const sourceEl = document.getElementById('stacked_slider_pagination');
+    const targetEl = document.getElementById('stacked_slider_swiper_container');
+    // targetEl.appendChild(sourceEl);
+
+    // logger.debug('\n' + 'pagination elements (outer) moved');
+  }, init_swiper_delay);
+  // -------------------------------------------------------------------------
+
+  // return stackedSwiper;
 
 } // END LayoutStacked

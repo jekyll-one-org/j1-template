@@ -436,7 +436,228 @@ settings:
         kbd_controls:
           escKey:                       true
  
+     # --------------------------------------------------------------------------
+
+    # IMAGE Swiper|Layout Thumbs
     # --------------------------------------------------------------------------
+    #
+    - swiper:
+
+      # ------------------------------------------------------------------------
+      # GENERAL Options
+      # ------------------------------------------------------------------------
+      #
+      enabled:                          true
+      id:                               thumb_slider_top
+      layout:                           image/thumbs
+      playlist:                         free_animal
+      swiper_classes:                   false
+      container_classes:                false
+      wrapper_styles:                   false
+
+      # ------------------------------------------------------------------------
+      # CAPTION Options
+      # ------------------------------------------------------------------------
+      #
+      captions:                             
+        enabled:                        false
+        css_class:                      swp-caption-content
+
+      # ------------------------------------------------------------------------
+      # CORE Options
+      # ------------------------------------------------------------------------
+      #
+      parameters:
+        direction:                      horizontal       
+
+      # ------------------------------------------------------------------------
+      # MODULE Options
+      # ------------------------------------------------------------------------
+      #
+      module_settings:
+        pagination:
+          enabled:                      true
+          nunbered:                     true       
+        thumbs:
+          swiper_id:                    thumb_slider_top
+          speed:                        1000
+          grabCursor:                   true
+          loop:                         true
+          placement:                    top
+          spaceBetween:                 5
+          slidesPerView:                3
+
+      # ------------------------------------------------------------------------
+      # EVENT Options
+      # ------------------------------------------------------------------------
+      #
+      events:
+        enabled:                        false      
+        init: >
+                                        function (swiper) { var slideHeight = 550; swiper.slides.forEach(slide => { slide.style.height = `${slideHeight}px`; }); }
+        slideChangeTransitionStart: >
+                                        function (swiper) { thumbSlider.slideTo(swiper.activeIndex); }
+
+      # ------------------------------------------------------------------------
+      # LIGHTBOX options
+      # ------------------------------------------------------------------------
+      #
+      lightbox:
+
+        # ----------------------------------------------------------------------
+        # GENERAL Options
+        # ----------------------------------------------------------------------
+        #
+        enabled:                        false
+
+        # ----------------------------------------------------------------------
+        # CAPTION Options
+        # ----------------------------------------------------------------------
+        #
+        captions:
+          enabled:                      true
+
+          css_class:                    pswp-caption-content
+
+        # ----------------------------------------------------------------------
+        # CORE Options
+        # ----------------------------------------------------------------------
+        #
+        parameters:
+          children:                     a
+          bgOpacity:                    1
+          showHideOpacity:              true
+          loop:                         true
+          wheelToZoom:                  true
+          showHideAnimationType:        zoom
+          imageClickAction:             next
+          tapAction:                    next
+          padding:                      { top: 0, bottom: 0, left: 80, right: 80 }
+
+        # ----------------------------------------------------------------------
+        # USER INTERFACE Options
+        # ----------------------------------------------------------------------
+        #
+        ui_controls:
+          zoom:                         false
+          close:                        true
+          counter:                      true
+          arrowKeys:                    false
+
+        # ----------------------------------------------------------------------
+        # KEYBOARD Options
+        # ----------------------------------------------------------------------
+        #
+        kbd_controls:
+          escKey:                       true
+
+    # --------------------------------------------------------------------------
+    # IMAGE Swiper|Layout Neighbor
+    # --------------------------------------------------------------------------
+    #
+    - swiper:
+
+      # ------------------------------------------------------------------------
+      # GENERAL Options
+      # ------------------------------------------------------------------------
+      #
+      enabled:                          true
+      id:                               neighbor_slider
+      layout:                           image/neighbor
+      playlist:                         neighbor
+      swiper_classes:                   neighbor-slider
+      container_classes:                false
+      wrapper_styles:                   false
+
+      # ------------------------------------------------------------------------
+      # CAPTION Options
+      # ------------------------------------------------------------------------
+      #
+      captions:                             
+        enabled:                        false
+        css_class:                      swp-caption-content
+
+      # ------------------------------------------------------------------------
+      # CORE Options
+      # ------------------------------------------------------------------------
+      #
+      parameters:
+        direction:                      horizontal
+        grabCursor:                     true
+
+      # ------------------------------------------------------------------------
+      # MODULE Options
+      # ------------------------------------------------------------------------
+      #
+      module_settings:
+        neighbor:
+          centeredSlides:               true
+          loop:                         true
+          loopAdditionalSlides:         1
+          speed:                        800
+          swiper_id:                    neighbor_slider
+
+      # ------------------------------------------------------------------------
+      # EVENT Options
+      # ------------------------------------------------------------------------
+      #
+      events:
+        enabled:                        false
+
+      # ------------------------------------------------------------------------
+      # LIGHTBOX Options
+      # ------------------------------------------------------------------------
+      #
+      lightbox:
+
+        # ----------------------------------------------------------------------
+        # GENERAL Options
+        # ----------------------------------------------------------------------
+        #
+        enabled:                        false
+
+        # ----------------------------------------------------------------------
+        # CAPTION Options
+        # ----------------------------------------------------------------------
+        #
+        captions:
+          enabled:                      true
+          css_class:                    pswp-caption-content
+
+        # ----------------------------------------------------------------------
+        # CORE Options
+        # ----------------------------------------------------------------------        
+        #
+        parameters:
+          children:                     a
+          bgOpacity:                    1
+          showHideOpacity:              true
+          loop:                         true
+          wheelToZoom:                  true
+          showHideAnimationType:        zoom
+          imageClickAction:             next
+          tapAction:                    next
+          padding:                      { top: 0, bottom: 0, left: 80, right: 80 }
+
+        # ----------------------------------------------------------------------
+        # USER INTERFACE Options
+        # ----------------------------------------------------------------------
+        #
+        ui_controls:
+          zoom:                         false
+          close:                        true
+          counter:                      true
+          arrowKeys:                    false
+
+        # ----------------------------------------------------------------------
+        # KEYBOARD Options
+        # ----------------------------------------------------------------------
+        #
+        kbd_controls:
+          escKey:                       true
+ 
+     # --------------------------------------------------------------------------
+
     # IMAGE Swiper|Layout Panorama
     # --------------------------------------------------------------------------
     #
@@ -580,8 +801,7 @@ settings:
         kbd_controls:
           escKey:                       true
 
-    # --------------------------------------------------------------------------
-    # IMAGE Swiper|Layout Neighbor
+    # IMAGE Swiper|Layout Stacked
     # --------------------------------------------------------------------------
     #
     - swiper:
@@ -589,12 +809,12 @@ settings:
       # ------------------------------------------------------------------------
       # GENERAL Options
       # ------------------------------------------------------------------------
-      #
-      enabled:                          true
-      id:                               neighbor_slider
-      layout:                           image/neighbor
-      playlist:                         neighbor
-      swiper_classes:                   neighbor-slider
+      # 
+      enabled:                          false
+      id:                               swiper_image_stacked
+      layout:                           image/stacked
+      playlist:                         stacked
+      swiper_classes:                   stacked-slider
       container_classes:                false
       wrapper_styles:                   false
 
@@ -602,7 +822,7 @@ settings:
       # CAPTION Options
       # ------------------------------------------------------------------------
       #
-      captions:                             
+      captions:
         enabled:                        false
         css_class:                      swp-caption-content
 
@@ -611,20 +831,35 @@ settings:
       # ------------------------------------------------------------------------
       #
       parameters:
-        direction:                      horizontal
         grabCursor:                     true
+        speed:                          600
 
       # ------------------------------------------------------------------------
       # MODULE Options
       # ------------------------------------------------------------------------
       #
       module_settings:
-        neighbor:
-          centeredSlides:               true
-          loop:                         true
-          loopAdditionalSlides:         1
-          speed:                        800
-          swiper_id:                    neighbor_slider
+        creativeEffect:
+          enabled:                      true
+          limitProgress:                3
+          perspective:                  true
+          shadowPerProgress:            true
+          prev:
+            shadow:                     true
+            translate:                  [ '-15%', 0, -200 ]
+          next:
+            translate:                  [ calcNextOffset(), 0, 0 ]      
+        pagination:
+          clickable:                    true
+          dynamicBullets:               false
+          el:                           .swiper-pagination-outer
+          type:                         bullets
+        parallax:
+          enabled:                      true
+          parallax_data_elements:       [ data-swiper-parallax-scale="1.1" ]
+        stacked:
+        # effect:                       creative
+          resistanceRatio:              0
 
       # ------------------------------------------------------------------------
       # EVENT Options
@@ -635,7 +870,6 @@ settings:
 
       # ------------------------------------------------------------------------
       # LIGHTBOX Options
-      # ------------------------------------------------------------------------
       #
       lightbox:
 
@@ -644,160 +878,6 @@ settings:
         # ----------------------------------------------------------------------
         #
         enabled:                        false
-
-        # ----------------------------------------------------------------------
-        # CAPTION Options
-        # ----------------------------------------------------------------------
-        #
-        captions:
-          enabled:                      true
-          css_class:                    pswp-caption-content
-
-        # ----------------------------------------------------------------------
-        # CORE Options
-        # ----------------------------------------------------------------------        
-        #
-        parameters:
-          children:                     a
-          bgOpacity:                    1
-          showHideOpacity:              true
-          loop:                         true
-          wheelToZoom:                  true
-          showHideAnimationType:        zoom
-          imageClickAction:             next
-          tapAction:                    next
-          padding:                      { top: 0, bottom: 0, left: 80, right: 80 }
-
-        # ----------------------------------------------------------------------
-        # USER INTERFACE Options
-        # ----------------------------------------------------------------------
-        #
-        ui_controls:
-          zoom:                         false
-          close:                        true
-          counter:                      true
-          arrowKeys:                    false
-
-        # ----------------------------------------------------------------------
-        # KEYBOARD Options
-        # ----------------------------------------------------------------------
-        #
-        kbd_controls:
-          escKey:                       true
- 
-    # --------------------------------------------------------------------------
-    # IMAGE Swiper|Layout Thumbs
-    # --------------------------------------------------------------------------
-    #
-    - swiper:
-
-      # ------------------------------------------------------------------------
-      # GENERAL Options
-      # ------------------------------------------------------------------------
-      #
-      enabled:                          true
-      id:                               thumb_slider_top
-      layout:                           image/thumbs
-      playlist:                         free_animal
-      swiper_classes:                   false
-      container_classes:                false
-      wrapper_styles:                   false
-
-      # ------------------------------------------------------------------------
-      # CAPTION Options
-      # ------------------------------------------------------------------------
-      #
-      captions:                             
-        enabled:                        false
-        css_class:                      swp-caption-content
-
-      # ------------------------------------------------------------------------
-      # CORE Options
-      # ------------------------------------------------------------------------
-      #
-      parameters:
-        direction:                      horizontal       
-
-      # ------------------------------------------------------------------------
-      # MODULE Options
-      # ------------------------------------------------------------------------
-      #
-      module_settings:
-        pagination:
-          enabled:                      true
-          nunbered:                     true       
-        thumbs:
-          swiper_id:                    thumb_slider_top
-          speed:                        1000
-          grabCursor:                   true
-          loop:                         true
-          placement:                    top
-          spaceBetween:                 5
-          slidesPerView:                3
-
-      # ------------------------------------------------------------------------
-      # EVENT Options
-      # ------------------------------------------------------------------------
-      #
-      events:
-        enabled:                        false      
-        init: >
-                                        function (swiper) { var slideHeight = 550; swiper.slides.forEach(slide => { slide.style.height = `${slideHeight}px`; }); }
-        slideChangeTransitionStart: >
-                                        function (swiper) { thumbSlider.slideTo(swiper.activeIndex); }
-
-      # ------------------------------------------------------------------------
-      # LIGHTBOX options
-      # ------------------------------------------------------------------------
-      #
-      lightbox:
-
-        # ----------------------------------------------------------------------
-        # GENERAL Options
-        # ----------------------------------------------------------------------
-        #
-        enabled:                        false
-
-        # ----------------------------------------------------------------------
-        # CAPTION Options
-        # ----------------------------------------------------------------------
-        #
-        captions:
-          enabled:                      true
-
-          css_class:                    pswp-caption-content
-
-        # ----------------------------------------------------------------------
-        # CORE Options
-        # ----------------------------------------------------------------------
-        #
-        parameters:
-          children:                     a
-          bgOpacity:                    1
-          showHideOpacity:              true
-          loop:                         true
-          wheelToZoom:                  true
-          showHideAnimationType:        zoom
-          imageClickAction:             next
-          tapAction:                    next
-          padding:                      { top: 0, bottom: 0, left: 80, right: 80 }
-
-        # ----------------------------------------------------------------------
-        # USER INTERFACE Options
-        # ----------------------------------------------------------------------
-        #
-        ui_controls:
-          zoom:                         false
-          close:                        true
-          counter:                      true
-          arrowKeys:                    false
-
-        # ----------------------------------------------------------------------
-        # KEYBOARD Options
-        # ----------------------------------------------------------------------
-        #
-        kbd_controls:
-          escKey:                       true
 
 
     # --------------------------------------------------------------------------

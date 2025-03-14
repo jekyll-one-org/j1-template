@@ -514,22 +514,22 @@ lorem:sentences[5]
     <ul class="swiper-wrapper">
       <li class="swiper-slide">
         <!-- set image parallax scale for nice zoom effect -->
-        <img data-swiper-parallax-scale="1.1" src="/assets/image/module/swiper/extended/poster/image/1.jpg" alt="">
+        <img data-swiper-parallax-scale="1.1" src="/assets/image/module/swiper/extended/stacked/image/1.jpg" alt="">
       </li>
       <li class="swiper-slide">
-        <img data-swiper-parallax-scale="1.1" src="/assets/image/module/swiper/extended/poster/image/2.jpg" alt="">
+        <img data-swiper-parallax-scale="1.1" src="/assets/image/module/swiper/extended/stacked/image/2.jpg" alt="">
       </li>
       <li class="swiper-slide">
-        <img data-swiper-parallax-scale="1.1" src="/assets/image/module/swiper/extended/poster/image/3.jpg" alt="">
+        <img data-swiper-parallax-scale="1.1" src="/assets/image/module/swiper/extended/stacked/image/3.jpg" alt="">
       </li>
       <li class="swiper-slide">
-        <img data-swiper-parallax-scale="1.1" src="/assets/image/module/swiper/extended/poster/image/4.jpg" alt="">
+        <img data-swiper-parallax-scale="1.1" src="/assets/image/module/swiper/extended/stacked/image/4.jpg" alt="">
       </li>
       <li class="swiper-slide">
-        <img data-swiper-parallax-scale="1.1" src="/assets/image/module/swiper/extended/poster/image/5.jpg" alt="">
+        <img data-swiper-parallax-scale="1.1" src="/assets/image/module/swiper/extended/stacked/image/5.jpg" alt="">
       </li>
       <li class="swiper-slide">
-        <img data-swiper-parallax-scale="1.1" src="/assets/image/module/swiper/extended/poster/image/6.jpg" alt="">
+        <img data-swiper-parallax-scale="1.1" src="/assets/image/module/swiper/extended/stacked/image/6.jpg" alt="">
       </li>
     </ul> <!-- END Swiper Wrapper (slides) -->
 
