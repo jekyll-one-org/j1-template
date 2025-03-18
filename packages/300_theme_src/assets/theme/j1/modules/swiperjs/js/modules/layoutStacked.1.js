@@ -47,22 +47,13 @@ function LayoutStacked(_ref) {
     return `${nextOffsetVh}%`;
   };
 
-  const onLastSlide = (swiper) => {
-    console.log ('\n' + 'LayoutStacked, Entered event: reachEnd');
-    // swiper.allowTouchMove = false;
-    // swiper.allowSlidePrev = false;
-    // swiper.allowSlideNext = false;
-  };
-
-  const stackedSwiper = new Swiper(swiperEl, {
-    loop: true,
+  const stackedSwiper = new Swiper(swiperEl, {      
     effect: 'creative',
     speed: 600,
     resistanceRatio: 0,
     grabCursor: true,
     parallax: true,
     pagination: {
-    //el: '.swiper-pagination-outer',
       el: '.swiper-pagination-inner',
       type: 'bullets',
       clickable: true
@@ -80,8 +71,7 @@ function LayoutStacked(_ref) {
       },
     },
     on: {
-      init:     function (swiper) { var slideHeight = 600; swiper.slides.forEach(slide => { slide.style.height = `${slideHeight}px`; }); },
-      reachEnd: function (swiper) { onLastSlide(swiper) }
+      init: (swiper) => { var slideHeight = 600; swiper.slides.forEach(slide => { slide.style.height = `${slideHeight}px`; }); }
     }
   });
 
@@ -98,7 +88,6 @@ function LayoutStacked(_ref) {
   };
   window.addEventListener('resize', onResize);
 
-} // END LayoutStacked
+  return stackedSwiper;
 
-  // Disable touch move (swiping)
-  // swiper.allowTouchMove = false;
+} // END LayoutStacked

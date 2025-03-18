@@ -309,6 +309,8 @@ defaults:
       audio_info:                       true
       audio_rating:                     true
       controls:                         false
+      track:
+        enabled:                        false   
 
 # ------------------------------------------------------------------------------
 # END config

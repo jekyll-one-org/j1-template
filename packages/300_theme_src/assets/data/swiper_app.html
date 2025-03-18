@@ -339,10 +339,10 @@ playlist.image_defaults: {{playlist.image_defaults | debug}}
       {% endif %}
 
 
-      {% comment %} Collect Extended Image Swipers, Layout Thumb
+      {% comment %} Collect Extended Image Swipers, Layout Thumbs
       layout: image/thumb
       ========================================================================== {% endcomment %}
-      {% if swiper_type == 'image' and swiper_layout == 'thumb' %}
+      {% if swiper_type == 'image' and swiper_layout == 'thumbs' %}
   
       <!-- Image Swipers, Layout Thumb -->
       {% if swiper.swiper_classes %}
@@ -658,6 +658,116 @@ playlist.image_defaults: {{playlist.image_defaults | debug}}
       </div> <!-- END Swiper {{swiper.id}} -->
       
       <!-- END Image Swipers, Layout Neighbor -->
+      {% endif %}
+
+
+      {% comment %} Collect Extended Image Swipers, Layout Stacked
+      layout: image/stacked
+      ========================================================================== {% endcomment %}
+      {% if swiper_type == 'image' and swiper_layout == 'stacked' %}
+
+      <!-- Image Swipers, Layout Stacked -->
+      {% if swiper.swiper_classes %}
+      <div id="{{swiper.id}}" class="{{swiper.swiper_classes}}">
+      {% else %}
+      <div id="{{swiper.id}}">
+      {% endif %}
+        <!-- Swiper elements (El) -->
+        <div id="{{swiper.id}}_container" class="swiper swiper-container">
+
+          {% assign wrapper_styles = '' %}
+          {% if swiper.wrapper_styles %}
+            {% assign wrapper_styles = swiper.wrapper_styles %}
+          {% endif %}
+
+          <!-- Swiper Wrapper (slides) -->
+          {% if swiper.wrapper_styles %}
+          <ul class="swiper-wrapper" style="{{wrapper_styles}}">
+          {% else %}
+          <ul class="swiper-wrapper">
+          {% endif %}
+
+            {% if swiper.lightbox.enabled %}
+            <!-- anchor-based swiper slide HTML required for lightbox usage -->
+            {% else %}
+            <!-- flat swiper slide HTML -->
+            {% endif %}
+
+            {% for playlist in swiper_playlists %} {% if playlist.enabled %} {% if playlist.name == swiper.playlist %}    
+            {% for slide in playlist.items %} {% if slide.enabled %}
+
+            {% assign type_extension  = playlist.type | split: "/" %}
+            {% assign playlist_type   = type_extension[0] %}
+            {% assign image_extension = type_extension[1] %}
+
+            {% assign image_alt_text = 'Slide Image' %}
+            {% if swiper.captions.enabled %}
+              {% capture image_alt_text %}Slide Image{{slide.caption}}{% endcapture %}
+            {% endif %}
+
+            {% if swiper.lightbox.enabled %}
+            <li class="swiper-slide">
+              {% if playlist.image_defaults.base_folder %}
+              <a href="{{playlist.image_defaults.base_folder}}/{{slide.image}}.{{image_extension}}"
+                {% if playlist.image_defaults.image_width == 'slide' %}
+                  data-pswp-width="{{slide.imageWidth}}"
+                  data-pswp-height="{{slide.imageHeight}}"
+                {% else %}
+                  data-pswp-width="{{playlist.image_defaults.image_width}}"
+                  data-pswp-height="{{playlist.image_defaults.image_height}}"              
+                {% endif %}
+                  target="_blank">
+                <img data-swiper-parallax-scale="1.1" class="pswp-image" src="{{playlist.image_defaults.base_folder}}/{{slide.image}}.{{image_extension}}" alt="{{image_alt_text}} {{slide.image}}">
+                {% if swiper.captions.enabled %}
+                <div class="{{swiper.captions.css_class}}">{{slide.caption_text}}</div>
+                {% endif %}
+                {% if swiper.lightbox.captions.enabled %}
+                <span class="pswp-caption-content">{{slide.description}}</span>
+                {% endif %}
+              </a>
+              {% endif %}
+            </li>
+            {% else %}
+            <li class="swiper-slide">
+              {% if playlist.image_defaults.base_folder %}
+              <img data-swiper-parallax-scale="1.1" src="{{playlist.image_defaults.base_folder}}/{{slide.image}}.{{image_extension}}" alt="{{image_alt_text}} {{slide.image}}">
+              {% else %}
+              <img src="{{slide.image}}.{{image_extension}}">
+              {% endif %}
+              {% if swiper.captions.enabled %}
+              <div data-swiper-parallax-scale="1.1" class="{{swiper.captions.css_class}}">{{slide.caption_text}}</div>
+              {% endif %}
+            </li>
+            {% endif %}
+
+            {% endif %} {% endfor %}
+            {% endif %} {% endif %} {% endfor %}
+
+          </ul> <!-- END Swiper Wrapper (slides) -->
+
+          {% if swiper.modules.navigation %}
+          <!-- Navigation -->
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+          {% endif %}
+
+          {% assign pagination_el       = swiper.module_settings.pagination.el | split: '-' %}
+          {% assign pagination_position = pagination_el[2] %}
+
+          {% if swiper.module_settings.pagination and pagination_position == 'inner' %}
+          <!-- Inner Pagination -->
+          <div id="{{swiper.id}}_pagination" class="swiper-pagination-inner"></div>
+          {% endif %}
+
+          {% if swiper.module_settings.pagination and pagination_position == 'outer' %}
+          <!-- Outer pagination moved by SwiperJS Adapter (workaround) -->
+          <div id="{{swiper.id}}_pagination" class="swiper-pagination-outer"></div>
+          {% endif %}
+
+        </div> <!-- END Swiper Container (elements) -->
+      </div> <!-- END Swiper {{swiper.id}} -->
+
+      <!-- END Image Swipers, Layout Stacked -->
       {% endif %}
 
 

@@ -14,9 +14,7 @@
  # -----------------------------------------------------------------------------
 */
 "use strict";
-
 function LayoutExpanding(_ref) {
-
   var {
     swiper,
     extendParams,

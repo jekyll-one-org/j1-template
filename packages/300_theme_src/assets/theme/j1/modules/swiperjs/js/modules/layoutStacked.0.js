@@ -14,7 +14,9 @@
  # -----------------------------------------------------------------------------
 */
 "use strict";
+
 function LayoutStacked(_ref) {
+
   var {
     swiper,
     params,
@@ -34,8 +36,7 @@ function LayoutStacked(_ref) {
 
   // main swiper
   //
-  // const mainSwiper  = document.querySelector(`#${params.stacked.swiper_id}`);
-  const mainSwiper  = document.querySelector('#swiper_image_stacked');
+  const mainSwiper  = document.querySelector(`#${params.stacked.swiper_id}`);
   const swiperEl    = mainSwiper.querySelector('.swiper');
 
   const calcNextOffset = () => {
@@ -47,15 +48,7 @@ function LayoutStacked(_ref) {
     return `${nextOffsetVh}%`;
   };
 
-  const onLastSlide = (swiper) => {
-    console.log ('\n' + 'LayoutStacked, Entered event: reachEnd');
-    // swiper.allowTouchMove = false;
-    // swiper.allowSlidePrev = false;
-    // swiper.allowSlideNext = false;
-  };
-
-  const stackedSwiper = new Swiper(swiperEl, {
-    loop: true,
+  const stackedSwiper = new Swiper(swiperEl, {      
     effect: 'creative',
     speed: 600,
     resistanceRatio: 0,
@@ -80,8 +73,7 @@ function LayoutStacked(_ref) {
       },
     },
     on: {
-      init:     function (swiper) { var slideHeight = 600; swiper.slides.forEach(slide => { slide.style.height = `${slideHeight}px`; }); },
-      reachEnd: function (swiper) { onLastSlide(swiper) }
+      init: (swiper) => { var slideHeight = 600; swiper.slides.forEach(slide => { slide.style.height = `${slideHeight}px`; }); }
     }
   });
 
@@ -98,7 +90,25 @@ function LayoutStacked(_ref) {
   };
   window.addEventListener('resize', onResize);
 
-} // END LayoutStacked
 
-  // Disable touch move (swiping)
-  // swiper.allowTouchMove = false;
+  // workaround for swiper pagination placed 'outer'
+  // -------------------------------------------------------------------------
+  var init_swiper_delay = 500;
+
+  // {% assign pagination_el       = swiper.module_settings.pagination.el | split: '-' %}
+  // {% assign pagination_position = pagination_el[2] %}
+
+  setTimeout(() => {
+    // const sourceEl = document.getElementById('{{swiper.id}}_pagination');
+    // const targetEl = document.getElementById('{{swiper.id}}');
+    const sourceEl = document.getElementById('stacked_slider_pagination');
+    const targetEl = document.getElementById('stacked_slider_swiper_container');
+    // targetEl.appendChild(sourceEl);
+
+    // logger.debug('\n' + 'pagination elements (outer) moved');
+  }, init_swiper_delay);
+  // -------------------------------------------------------------------------
+
+  // return stackedSwiper;
+
+} // END LayoutStacked

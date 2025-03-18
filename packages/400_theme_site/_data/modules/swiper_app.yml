@@ -688,13 +688,13 @@ settings:
       # ------------------------------------------------------------------------
       #
       parameters:
-        effect:                         panorama
-        slidesPerView:                  1.5
-        loop:                           true
-
-        loopAdditionalSlides:           1
         centeredSlides:                 true
+        effect:                         panorama
         grabCursor:                     true
+        loop:                           true
+      # loopAdditionalSlides:           1
+      # slidesPerView:                  1.5
+
         breakpoints: {
                                         480: {
                                           slidesPerView: 2,
@@ -801,7 +801,7 @@ settings:
         kbd_controls:
           escKey:                       true
 
-    # IMAGE Swiper|Layout Stacked
+    # IMAGE Swiper|Layout Stacked (old)
     # --------------------------------------------------------------------------
     #
     - swiper:
@@ -813,7 +813,7 @@ settings:
       enabled:                          false
       id:                               swiper_image_stacked
       layout:                           image/stacked
-      playlist:                         stacked
+      playlist:                         game_posters
       swiper_classes:                   stacked-slider
       container_classes:                false
       wrapper_styles:                   false
@@ -832,6 +832,7 @@ settings:
       #
       parameters:
         grabCursor:                     true
+        loop:                           false
         speed:                          600
 
       # ------------------------------------------------------------------------
@@ -846,19 +847,22 @@ settings:
           shadowPerProgress:            true
           prev:
             shadow:                     true
+            # set `translateX(-15%)` and translateZ(-200)` on PREVIOUS slides
             translate:                  [ '-15%', 0, -200 ]
           next:
+            # set `translateX to calcNextOffset on NEXT slides
             translate:                  [ calcNextOffset(), 0, 0 ]      
         pagination:
           clickable:                    true
           dynamicBullets:               false
-          el:                           .swiper-pagination-outer
+          el:                           .swiper-pagination-inner
           type:                         bullets
         parallax:
           enabled:                      true
           parallax_data_elements:       [ data-swiper-parallax-scale="1.1" ]
         stacked:
-        # effect:                       creative
+          effect:                       creative
+          swiper_id:                    swiper_image_stacked
           resistanceRatio:              0
 
       # ------------------------------------------------------------------------
@@ -866,7 +870,11 @@ settings:
       # ------------------------------------------------------------------------
       #
       events:
-        enabled:                        false
+        enabled:                        true      
+        init: >
+                                        function (swiper) { var slideHeight = 600; swiper.slides.forEach(slide => { slide.style.height = `${slideHeight}px`; }); }
+        reachEnd: >
+                                        function (swiper) { onLastSlide(swiper) }
 
       # ------------------------------------------------------------------------
       # LIGHTBOX Options
@@ -879,6 +887,92 @@ settings:
         #
         enabled:                        false
 
+
+    # IMAGE Swiper|Layout Stacked (new)
+    # --------------------------------------------------------------------------
+    #
+    - swiper:
+
+      # ------------------------------------------------------------------------
+      # GENERAL Options
+      # ------------------------------------------------------------------------
+      # 
+      enabled:                          true
+      id:                               swiper_image_stacked
+      layout:                           image/stacked
+      playlist:                         game_posters
+      swiper_classes:                   stacked-slider
+      container_classes:                false
+      wrapper_styles:                   false
+
+      # ------------------------------------------------------------------------
+      # CAPTION Options
+      # ------------------------------------------------------------------------
+      #
+      captions:
+        enabled:                        false
+        css_class:                      swp-caption-content
+
+      # ------------------------------------------------------------------------
+      # CORE Options
+      # ------------------------------------------------------------------------
+      #
+      parameters:
+        grabCursor:                     true
+        loop:                           false
+        speed:                          600
+
+      # ------------------------------------------------------------------------
+      # MODULE Options
+      # ------------------------------------------------------------------------
+      #
+      module_settings:
+        creativeEffect:
+          enabled:                      true
+          limitProgress:                3
+          perspective:                  true
+          shadowPerProgress:            true
+          prev:
+            shadow:                     true
+            # set `translateX(-15%)` and translateZ(-200)` on PREVIOUS slides
+            translate:                  [ '-15%', 0, -200 ]
+          next:
+            # set `translateX to calcNextOffset on NEXT slides
+            translate:                  [ calcNextOffset(), 0, 0 ]      
+        pagination:
+          clickable:                    true
+          dynamicBullets:               false
+          el:                           .swiper-pagination-inner
+          type:                         bullets
+        parallax:
+          enabled:                      true
+          parallax_data_elements:       [ data-swiper-parallax-scale="1.1" ]
+        stacked:
+          effect:                       creative
+          swiper_id:                    swiper_image_stacked
+          resistanceRatio:              0
+
+      # ------------------------------------------------------------------------
+      # EVENT Options
+      # ------------------------------------------------------------------------
+      #
+      events:
+        enabled:                        true      
+        init: >
+                                        function (swiper) { var slideHeight = 600; swiper.slides.forEach(slide => { slide.style.height = `${slideHeight}px`; }); }
+        reachEnd: >
+                                        function (swiper) { onLastSlide(swiper) }
+
+      # ------------------------------------------------------------------------
+      # LIGHTBOX Options
+      #
+      lightbox:
+
+        # ----------------------------------------------------------------------
+        # GENERAL Options
+        # ----------------------------------------------------------------------
+        #
+        enabled:                        false
 
     # --------------------------------------------------------------------------
     # AUDIO Swiper

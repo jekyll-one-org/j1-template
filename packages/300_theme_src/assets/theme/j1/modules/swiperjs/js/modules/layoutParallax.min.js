@@ -14,9 +14,7 @@
  # -----------------------------------------------------------------------------
 */
 "use strict";
-
 function LayoutParallax(_ref) {
-
   var {
     swiper,
     extendParams,

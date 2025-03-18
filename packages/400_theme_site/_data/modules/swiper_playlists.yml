@@ -424,13 +424,13 @@ settings:
                                         Lightbox Caption
 
     # --------------------------------------------------------------------------
-    # STACKED
+    # STACKED Game Posters
     # --------------------------------------------------------------------------
     #
     - playlist:
-      enabled:                          false
+      enabled:                          true
 
-      name:                             stacked
+      name:                             game_posters
       type:                             image/jpg
       image_defaults:
         base_folder:                    /assets/image/module/swiper/extended/stacked/image
@@ -445,32 +445,32 @@ settings:
        # slide 01
         - item:
           enabled:                      true
-          image:                        1.jpg
+          image:                        1
 
         # slide 02
         - item:
           enabled:                      true
-          image:                        2.jpg
+          image:                        2
 
         # slide 03
         - item:
           enabled:                      true
-          image:                        3.jpg
+          image:                        3
 
         # slide 04
         - item:
           enabled:                      true
-          image:                        4.jpg
+          image:                        4
 
         # slide 05
         - item:
           enabled:                      true
-          image:                        5.jpg
+          image:                        5
 
         # slide 06
         - item:
           enabled:                      true
-          image:                        6.jpg
+          image:                        6
 
     # --------------------------------------------------------------------------
     # NEIGHBOR

@@ -80,6 +80,7 @@ div#large_player_left {
   flex-direction: column;
   /* jadams, 2014-11-07: width (overall) DISABLED on the left */
   /* width: 50%; */
+  width: 50vw;
   max-width: fit-content;
   border: solid 1px;
   border-color: var(--ajs-theme-uno--medium-silver);
@@ -102,8 +103,11 @@ div#large_player_right {
   flex: 1;
   flex-direction: column;
   flex-grow: 1;
-  width: 50%;                     /* make flex colums same in width (overall) */
-  min-width: 500px;
+  width: 50vw;
+  /* make flex colums same in width (overall) */
+  /* width: 50%; */
+  /* min-width: 500px; */
+  /* max-width: fit-content; */
   border-top: solid 1px;
   border-right: solid 1px;
   border-bottom: solid 1px;

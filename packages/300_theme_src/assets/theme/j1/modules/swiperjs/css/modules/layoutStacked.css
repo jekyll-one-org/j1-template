@@ -21,29 +21,29 @@
     --stacked-slider-width: 265px;
     /* height of the swiper container (image) */
     --stacked-slider-height: 392px;
-  }
-  
+}
+
 /*
  * VW unit CSS: viewport width.
  * Relative unit that represents a percentage of the width of the
  * current viewport.
  * NOTE: 1vw means 1 percent of the screen width.
 */
-  
+
 @media ((orientation: portrait) and (min-width: 768px)) {
     .stacked-slider {
         --stacked-slider-width: 68vw;
         --stacked-slider-height: 55vw;
     }
 }
-  
+
 @media ((orientation: portrait) and (min-width: 576px)) {
     .stacked-slider {
         --stacked-slider-width: 68vw;
         --stacked-slider-height: 60vw;
     }
 }
-  
+
 @media ((orientation: portrait) and (max-width: 575.98px)) {
     .stacked-slider {
         --stacked-slider-width: 72vw;
@@ -57,7 +57,7 @@
         --stacked-slider-height: 80vh;
     }
 }
-  
+
 @media ((orientation: landscape) and (min-width: 992px)) {
     .stacked-slider {
         --stacked-slider-width: calc(80vh / 1.1);
@@ -95,4 +95,3 @@
     height: 100%;
     object-fit: cover;
 }
-

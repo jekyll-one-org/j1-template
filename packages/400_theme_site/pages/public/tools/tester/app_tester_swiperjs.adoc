@@ -505,8 +505,12 @@ $(function() {
 
 lorem:sentences[5]
 
+.Extendend Swiper · Layout Stacked
+swiper::swiper_image_stacked[role="mt-4 mb-5"]
+
+////
 ++++
-<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Extendend Swiper · Layout Stacked</div>
+<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Extendend Swiper · Layout Stacked (manual)</div>
 <!-- Stacked slider -->
 <div id="stacked_slider" class="stacked-slider mt-3">
   <div id="stacked_slider_swiper_container" class="swiper swiper-container">
@@ -539,9 +543,7 @@ lorem:sentences[5]
 
   </div> <!-- END Swiper Container (elements) -->
 </div> <!-- END Swiper stacked_slider -->
-++++
 
-++++
 <script>
 $(function() {
 
@@ -555,6 +557,13 @@ $(function() {
       var nextOffsetVh  = Math.max(nextOffset, 1) * 100;
 
       return `${nextOffsetVh}%`;
+    };
+
+    const onLastSlide = (swiper) => {
+      console.log ('\n' + 'LayoutStacked, Entered event: reachEnd');
+      // swiper.allowTouchMove = false;
+      // swiper.allowSlidePrev = false;
+      // swiper.allowSlideNext = false;
     };
 
     const stackedSwiper = new Swiper(swiperEl, {      
@@ -582,7 +591,15 @@ $(function() {
         },
       },
       on: {
-        init: (swiper) => { var slideHeight = 600; swiper.slides.forEach(slide => { slide.style.height = `${slideHeight}px`; }); }
+        init:     (swiper) => { 
+          var slideHeight = 900;
+          swiper.slides.forEach(slide => {
+            slide.style.height = `${slideHeight}px`;
+          });
+        },
+        // reachEnd: (swiper) => { 
+        //   onLastSlide(swiper);
+        // }
       }
     });
 
@@ -640,7 +657,7 @@ $(function() {
 }); // END Document READY
 </script>
 ++++
-
+////
 
 [role="mt-5"]
 ==== Layout Expanding
@@ -651,8 +668,8 @@ lorem:sentences[3]
 <div class="swiper-title mt-4"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Extendend Swiper · Layout Expanding </div>
 <div id="app" class="extended-app">
   <!-- Style expanding-slide should wrap the swiper for Effect: Expanding  -->
-  <div id="expanding_slides" class="swiper expanding-slide mt-4">
-    <div id="expanding_slides_swiper_container" class="swiper-container">
+  <div id="expanding_slides" class="expanding-slide mt-4">
+    <div id="expanding_slides_swiper_container" class="swiper swiper-container">
 
         <ul class="swiper-wrapper">
             <!-- First slide -->

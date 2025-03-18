@@ -196,8 +196,9 @@ j1.adapter.swiper = ((j1, window) => {
 
               const slider        = document.querySelector('#{{swiper.id}}');
               const swiperEl      = slider.querySelector('.swiper');
-              const {{swiper.id}} = new Swiper(swiperEl, {
 
+              {% if swiper_layout != 'Stacked' %}
+              const {{swiper.id}} = new Swiper(swiperEl, {             
                 // set swiper CORE parameter settings
                 {% if swiper.parameters %}
                 {% for setting in swiper.parameters %}
@@ -237,7 +238,16 @@ j1.adapter.swiper = ((j1, window) => {
                 {% endif %}
                 // end swiper EVENT settings
 
-              }); // end setup slider 
+              }); // end setup slider
+              {% else %}
+              const {{swiper.id}} = new Swiper(swiperEl, {             
+                // set swiper LAYOUT module settings
+                // -------------------------------------------------------------
+                {% if swiper_layout != 'Base' or swiper_layout != 'Parallax' %}
+                modules: [Layout{{swiper_layout}}],
+                {% endif %}
+              }); // end setup slider              
+              {% endif %}
 
               {% if swiper.lightbox.enabled %}
               // ---------------------------------------------------------------

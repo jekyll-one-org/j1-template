@@ -30,11 +30,67 @@ settings:
   playlists:
 
     # --------------------------------------------------------------------------
-    # Manon Mélodie
+    #  Ephraim Kishon, YouTube
     # --------------------------------------------------------------------------
     #
     - playlist:
       enabled:                          true
+
+      name:                             ephraim_kishon_yt
+      title:                            Ephraim Kishon
+
+      # ------------------------------------------------------------------------
+      # ALBUM settings
+      # ------------------------------------------------------------------------
+      album:                            &album_ephraim_kishon_yt
+        name:                           Ephraim Kishon
+        artist:                         Beste Geschichten
+        audio_base:                     //youtube.com
+        cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
+
+      # ------------------------------------------------------------------------
+      # TITLE settings (songs)
+      # ------------------------------------------------------------------------
+      items:
+
+        # title 01
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_yt
+          title:                        Beste Familiengeschichten
+          audio:                        watch?v=9LojTw98Fks
+          rating:                       3
+          track:
+            name:                       Ein Vater wird geboren
+            start:                      "00:00:03"
+            end:                        "00:16:53"
+            duration:                   "00:00:00"
+          audio_info:                   //youtube.com/watch?v=9LojTw98Fks
+          cover_image:                  //img.youtube.com/vi/9LojTw98Fks/maxresdefault.jpg
+          duration:                     "00:00:00"
+
+        # title 02
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_yt
+          title:                        Beste Familiengeschichten
+          audio:                        watch?v=9LojTw98Fks
+          rating:                       3
+          track:
+            name:                       Baby Sitting
+            start:                      "00:16:55"
+            end:                        "00:28:34"
+            duration:                   "00:00:00"
+          audio_info:                   //youtube.com/watch?v=9LojTw98Fks
+          cover_image:                  //img.youtube.com/vi/9LojTw98Fks/maxresdefault.jpg
+          duration:                     "00:00:00"
+
+    # --------------------------------------------------------------------------
+    # Manon Mélodie
+    # --------------------------------------------------------------------------
+    #
+    - playlist:
+      enabled:                          false
 
       name:                             manon_melodie_yt
       title:                            Manon Mélodie
@@ -146,7 +202,7 @@ settings:
     # --------------------------------------------------------------------------
     #
     - playlist:
-      enabled:                          true
+      enabled:                          false
 
       name:                             mimi_rutherfurt_yt
       title:                            Mimi Rutherfurt

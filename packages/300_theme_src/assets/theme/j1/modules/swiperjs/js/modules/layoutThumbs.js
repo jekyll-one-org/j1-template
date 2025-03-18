@@ -14,11 +14,7 @@
  # -----------------------------------------------------------------------------
 */
 "use strict";
-
 function LayoutThumbs(_ref) {
-
-
-
   var {
     swiper,
     extendParams,

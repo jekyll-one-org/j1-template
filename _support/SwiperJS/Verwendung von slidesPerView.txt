@@ -1,0 +1,81 @@
+Was bedeutet der Weit 1.5 für slidesPerView für SwiperJS sliders?
+
+Gemini, German version
+--------------------------------------------------------------------------------
+
+In Swiper.js bestimmt die Option „slidesPerView“, wie viele Folien gleichzeitig
+im Slider sichtbar sind. Ein Wert von beispielsweise 1,5 bedeutet, dass
+eineinhalb Folien im Ansichtsbereich des Sliders sichtbar sind.
+
+Dies hat folgende Auswirkungen:
+
+Teilweise Sichtbarkeit:
+  Ein Wert von 1,5 bedeutet, dass eine vollständige Folie und die Hälfte der
+  nächsten Folie angezeigt werden. Dadurch entsteht ein visueller Effekt,
+  der Nutzern eine Vorschau der nächsten Folie bietet.
+
+Visueller Effekt:
+  Diese Einstellung wird häufig verwendet, um ein dynamischeres und
+  ansprechenderes Slider-Erlebnis zu schaffen und den nachfolgenden Inhalt
+  anzukündigen.
+
+Anwendungsfälle:
+  Sie wird häufig verwendet, um Nutzern weitere Inhalte zu zeigen, z. B. in
+  Bildergalerien, Produktpräsentationen oder Testimonial-Slidern.
+
+Responsives Design:
+  slidesPerView kann auch in Verbindung mit responsiven Haltepunkten
+  (breakpoints) verwendet werden, sodass Sie die Anzahl der sichtbaren Folien
+  je nach Bildschirmgröße anpassen können.
+
+
+Wichtige Überlegungen
+--------------------------------------------------------------------------------
+
+Achten Sie bei der Verwendung von Bruchwerten für „slidesPerView“ auf die
+Größe und Anordnung der Folien, um ein optisch ansprechendes Layout zu
+gewährleisten.
+
+Bei der Verwendung von Bruchwerten wie 1,5 in Kombination mit anderen
+SwiperJS-Einstellungen können unerwünschte visuelle Störungen auftreten.
+Testen Sie Ihre Implementierung daher am besten auf mehreren Geräten.
+
+„slidesPerView: 1,5“ erzeugt im Wesentlichen einen visuellen Hinweis, der
+Nutzer dazu anregt, mit dem Slider zu interagieren und die zusätzlichen
+Inhalte zu erkunden.
+
+
+Gemini, English version
+--------------------------------------------------------------------------------
+
+In Swiper.js, the slidesPerView option determines how many slides are visible
+at the same time in the slider. When set to a value like 1.5, it means that
+one and a half slides will be visible within the slider's viewport.
+
+Here's a breakdown of what that implies:
+
+Partial Visibility:
+A value of 1.5 indicates that you'll see one full slide and half of the
+next slide. This creates a visual effect where users can see a preview of
+the upcoming slide.
+
+Visual Effect:
+This setting is often used to create a more dynamic and engaging
+slider experience, hinting at the content that follows.
+
+Use Cases:
+It's common in scenarios where you want to show users that there's more
+content to explore, such as in image galleries, product showcases, or
+testimonial sliders.
+
+Responsive Design:
+slidesPerView can also be used in conjunction with responsive breakpoints,
+allowing you to adjust the number of visible slides based on the screen size.
+Key considerations:
+
+When using fractional slidesPerView values, be mindful of how the slides
+are sized and spaced to ensure a visually appealing layout.
+
+It is possible that when using fractional values such as 1.5 in combination
+with other SwiperJS settings, that unwanted visual glitches can occur. It is
+always best to test your implementation across multiple devices.
