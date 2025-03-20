@@ -656,6 +656,7 @@ screen and (max-width: 576px) {
   } */
 
   div#large_player_left {
+    width: auto;
     max-width: unset;
     border: solid 1px;
     border-color: var(--ajs-theme-uno--medium-silver);

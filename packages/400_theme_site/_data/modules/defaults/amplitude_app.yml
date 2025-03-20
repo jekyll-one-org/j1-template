@@ -309,6 +309,7 @@ defaults:
       audio_info:                       true
       audio_rating:                     true
       controls:                         false
+      start_end:                        false
       track:
         enabled:                        false   
 

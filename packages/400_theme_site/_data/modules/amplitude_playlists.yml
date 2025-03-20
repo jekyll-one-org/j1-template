@@ -30,11 +30,11 @@ settings:
   playlists:
 
     # --------------------------------------------------------------------------
-    #  Ephraim Kishon, YouTube
+    #  Ephraim Kishon, Single Video/Multiple tracks
     # --------------------------------------------------------------------------
     #
     - playlist:
-      enabled:                          true
+      enabled:                          false
 
       name:                             ephraim_kishon_yt
       title:                            Ephraim Kishon
@@ -86,11 +86,71 @@ settings:
           duration:                     "00:00:00"
 
     # --------------------------------------------------------------------------
+    #  Ephraim Kishon, Multiple Video/Single tracks
+    # --------------------------------------------------------------------------
+    #
+    - playlist:
+      enabled:                          true
+
+      name:                             ephraim_kishon_yt
+      title:                            Ephraim Kishon
+
+      # ------------------------------------------------------------------------
+      # ALBUM settings
+      # ------------------------------------------------------------------------
+      album:                            &album_ephraim_kishon_yt
+        name:                           Ephraim Kishon
+        artist:                         Beste Geschichten
+        audio_base:                     //youtube.com
+        cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
+
+      # ------------------------------------------------------------------------
+      # TITLE settings (songs)
+      # ------------------------------------------------------------------------
+      items:
+
+        # title 01
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_yt
+          title:                        Beste Familiengeschichten
+          audio:                        watch?v=9LojTw98Fks
+          rating:                       3
+          start_end:                    ["00:00:10", "00:00:30"]
+          audio_info:                   //youtube.com/watch?v=9LojTw98Fks
+          cover_image:                  //img.youtube.com/vi/9LojTw98Fks/maxresdefault.jpg
+          duration:                     "02:55:35"
+
+        # title 02
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_yt
+          title:                        Beste Autofahrergeschichten, Teil 1
+          audio:                        watch?v=D2gVmGFa2wE
+          rating:                       3
+          start_end:                    ["00:00:10", "00:00:30"]
+          audio_info:                   //youtube.com/watch?v=D2gVmGFa2wE
+          cover_image:                  //img.youtube.com/vi/D2gVmGFa2wE/maxresdefault.jpg
+          duration:                     "00:59:44"
+
+        # title 03
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_yt
+          title:                        Beste Autofahrergeschichten, Teil 2
+          audio:                        watch?v=zBSlRSGp5N4
+          rating:                       3
+          start_end:                    ["00:00:10", "00:00:30"]
+          audio_info:                   //youtube.com/watch?v=zBSlRSGp5N4
+          cover_image:                  //img.youtube.com/vi/zBSlRSGp5N4/maxresdefault.jpg
+          duration:                     "00:57:31"
+
+    # --------------------------------------------------------------------------
     # Manon Mélodie
     # --------------------------------------------------------------------------
     #
     - playlist:
-      enabled:                          false
+      enabled:                          true
 
       name:                             manon_melodie_yt
       title:                            Manon Mélodie
@@ -116,6 +176,7 @@ settings:
           title:                        En Volant Haut                          # Hoch hinaus
           audio:                        watch?v=5NiMGeQOzKQ
           rating:                       2
+          start_end:                    ["00:00:10", "00:00:30"]
           audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/5NiMGeQOzKQ/maxresdefault.jpg
           duration:                     "02:47"
@@ -127,6 +188,7 @@ settings:
           title:                        Anno du Soleil                          # Jahr der Sonne
           audio:                        watch?v=pCXSGCBSIG0
           rating:                       3
+          start_end:                    ["00:00:10", "00:00:30"]
           audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/pCXSGCBSIG0/maxresdefault.jpg
           duration:                     "02:53"
@@ -138,6 +200,7 @@ settings:
           title:                        La Fête du cœur                         # Das Fest des Herzens
           audio:                        watch?v=fFn1GZIYC4Y
           rating:                       3
+          start_end:                    ["00:00:10", "00:00:30"]
           audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/fFn1GZIYC4Y/maxresdefault.jpg
           duration:                     "02:32"
@@ -149,6 +212,7 @@ settings:
           title:                        Fleur de Printemps                      # Frühlingsblume
           audio:                        watch?v=OUjHRpNUqyw
           rating:                       3
+          start_end:                    ["00:00:10", "00:00:30"]
           audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/OUjHRpNUqyw/maxresdefault.jpg
           duration:                     "02:57"
@@ -160,6 +224,7 @@ settings:
           title:                        Cote d'Azur                             # Cote d'Azur
           audio:                        watch?v=9Z9yNpsiBKs
           rating:                       3
+          start_end:                    ["00:00:10", "00:00:30"]
           audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/9Z9yNpsiBKs/maxresdefault.jpg
           duration:                     "02:42"
@@ -171,6 +236,7 @@ settings:
           title:                        Les Échos du Passé                      # Echos der Vergangenheit          
           audio:                        watch?v=_EYc5W3qy4s
           rating:                       4
+          start_end:                    ["00:00:10", "00:00:30"]
           audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/_EYc5W3qy4s/maxresdefault.jpg
           duration:                     "03:03"
@@ -182,6 +248,7 @@ settings:
           title:                        Les Souvenirs                           # Die Erinnerungen
           audio:                        watch?v=i8ltW0WDcdQ
           rating:                       3
+          start_end:                    ["00:00:10", "00:00:30"]
           audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/i8ltW0WDcdQ/maxresdefault.jpg
           duration:                     "02:19"
@@ -193,6 +260,7 @@ settings:
           title:                        La Vie en Dance                         # Leben im Tanz
           audio:                        watch?v=yttS9UNgZFk
           rating:                       3
+          start_end:                    ["00:00:10", "00:00:30"]
           audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/yttS9UNgZFk/maxresdefault.jpg
           duration:                     "02:45"
@@ -202,7 +270,7 @@ settings:
     # --------------------------------------------------------------------------
     #
     - playlist:
-      enabled:                          false
+      enabled:                          true
 
       name:                             mimi_rutherfurt_yt
       title:                            Mimi Rutherfurt
@@ -238,7 +306,7 @@ settings:
           <<:                           *album_mimi_rutherfurt_yt
           title:                        Nacht-Express
           audio:                        watch?v=I4VTc8nQxDs
-          rating:                       3
+          rating:                       4
           audio_info:                   //youtube.com/watch?v=I4VTc8nQxDs
           cover_image:                  //img.youtube.com/vi/I4VTc8nQxDs/maxresdefault.jpg
           duration:                     "00:59:35"
@@ -271,7 +339,7 @@ settings:
           <<:                           *album_mimi_rutherfurt_yt
           title:                        Buckingham Palace
           audio:                        watch?v=ce_8ez1rFP0
-          rating:                       3
+          rating:                       2
           audio_info:                   //youtube.com/watch?v=ce_8ez1rFP0
           cover_image:                  //img.youtube.com/vi/ce_8ez1rFP0/maxresdefault.jpg
           duration:                     "01:09:14"

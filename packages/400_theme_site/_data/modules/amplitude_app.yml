@@ -270,7 +270,7 @@ settings:
       # ------------------------------------------------------------------------
       # GENERAL settings
       #    
-      enabled:                          false
+      enabled:                          true
 
       id:                               manon_melodie_yt_large
       type:                             large
@@ -312,7 +312,7 @@ settings:
       # ------------------------------------------------------------------------
       # GENERAL settings
       #     
-      enabled:                          false
+      enabled:                          true
 
       id:                               mimi_rutherfurt_yt_large
       type:                             large
