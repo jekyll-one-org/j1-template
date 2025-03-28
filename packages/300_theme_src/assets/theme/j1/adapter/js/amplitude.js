@@ -809,6 +809,13 @@ j1.adapter.amplitude = ((j1, window) => {
                       // NOTE: listener overloads for video managed by plugin
                       // -------------------------------------------------------
 
+                      var largetPlayerSongContainer = document.getElementsByClassName("amplitude-song-container");
+                      for (var i=0; i<largetPlayerSongContainer.length; i++) {
+                        var classArray  = [].slice.call(largetPlayerSongContainer[i].classList, 0);
+                        var classString = classArray.toString();
+
+                      } // END for
+                      
                       // click on prev button
                       var largePlayerPreviousButton = document.getElementById('large_player_previous');
                       if (largePlayerPreviousButton && largePlayerPreviousButton.getAttribute("data-amplitude-source") === 'youtube') {
@@ -891,7 +898,7 @@ j1.adapter.amplitude = ((j1, window) => {
 
                       // click on repeat button
                       var largePlayerRepeatButton = document.getElementById('large_player_repeat');
-                      if (largePlayerShuffleButton) {
+                      if (largePlayerRepeatButton) {
                         largePlayerRepeatButton.addEventListener('click', function(event) {
                           var repeatState = (document.getElementById('large_player_repeat').className.includes('amplitude-repeat-on')) ? true : false;
                           Amplitude.setRepeat(repeatState)

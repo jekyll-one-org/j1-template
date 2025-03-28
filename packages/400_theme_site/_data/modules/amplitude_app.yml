@@ -117,13 +117,13 @@ settings:
       skip_forward_backward_button:     true
       volume_slider:
         enabled:                        true
-        preset_value:                   46
+        preset_value:                   50
 
       playlist:
         name:                           free_disco
         title:                          Disco 80th
         audio_info:                     false
-        controls:                       true
+        controls:                       false
 
     # --------------------------------------------------------------------------
     # MINI player, Emancipator
@@ -204,7 +204,7 @@ settings:
       skip_forward_backward_button:     true
       volume_slider:
         enabled:                        true
-        preset_value:                   46
+        preset_value:                   50
 
       # ------------------------------------------------------------------------
       # PLAYER settings
@@ -217,7 +217,7 @@ settings:
       playlist:
         name:                           emancipator
         title:                          Emancipator
-        controls:                       true
+        controls:                       false
 
     # --------------------------------------------------------------------------
     # LARGE player, Ephraim Kishon
@@ -243,7 +243,7 @@ settings:
       forward_backward_skip_seconds:    60
       volume_slider:
         enabled:                        true
-        preset_value:                   46
+        preset_value:                   50
 
       # ------------------------------------------------------------------------
       # PLUGIN settings
@@ -285,7 +285,7 @@ settings:
       forward_backward_skip_seconds:    10
       volume_slider:
         enabled:                        true
-        preset_value:                   46
+        preset_value:                   50
 
       # ------------------------------------------------------------------------
       # PLUGIN settings
@@ -302,6 +302,7 @@ settings:
         title:                          Manon Mélodie
         audio_info:                     true
         audio_rating:                   true
+        controls:                       false                                   # currently NOT supported for YTP
 
     # --------------------------------------------------------------------------
     # LARGE player, Mimi Rutherfurt
@@ -327,7 +328,7 @@ settings:
       forward_backward_skip_seconds:    60
       volume_slider:
         enabled:                        true
-        preset_value:                   46
+        preset_value:                   50
 
       # ------------------------------------------------------------------------
       # PLUGIN settings
@@ -372,7 +373,7 @@ settings:
       forward_backward_skip_seconds:    60
       volume_slider:
         enabled:                        true
-        preset_value:                   46
+        preset_value:                   50
 
       # ------------------------------------------------------------------------
       # PLUGIN settings

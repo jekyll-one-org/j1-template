@@ -1,0 +1,111 @@
+
+Nach dem laden von YouTube Videos über die ifarme API ist der Status in
+OnPlayerStateChange häufig BUFFERING. Wie kann man auf dem Status PLAYING
+warten?
+
+Gemini
+--------------------------------------------------------------------------------
+
+Das Problem, dass der onPlayerStateChange-Handler oft den Status BUFFERING
+meldet, bevor das Video tatsächlich abspielt (PLAYING), ist ein bekanntes
+Phänomen bei der YouTube iFrame API. Hier sind einige Strategien, um
+zuverlässig auf den PLAYING-Status zu warten:
+
+1. Verwenden von setTimeout mit einer Statusprüfung
+---------------------------------------------------
+
+Dies ist die einfachste und am weitesten verbreitete Methode. Sie warten eine
+kurze Zeit nach dem BUFFERING-Status und überprüfen dann erneut den aktuellen
+Status des Players.
+
+JavaScript
+
+function onPlayerStateChange(event) {
+  if (event.data == YT_PLAYER_STATE.BUFFERING) {
+    setTimeout(checkPlayingStatus, 500); // Warte 500ms (anpassbar)
+  } else if (event.data == YT_PLAYER_STATE.PLAYING) {
+    // Video spielt jetzt wirklich ab
+    console.log("Video spielt ab!");
+    // Hier deinen Code ausführen, der nach dem Abspielen benötigt wird
+  }
+}
+
+function checkPlayingStatus() {
+  if (player.getPlayerState() == YT_PLAYER_STATE.PLAYING) {
+    console.log("Video spielt ab (nach Prüfung)!");
+    // Hier deinen Code ausführen, der nach dem Abspielen benötigt wird
+  } else {
+    // Video spielt noch nicht, ggf. erneut prüfen oder Fehler behandeln
+    console.log("Video spielt noch nicht...");
+  }
+}
+
+Anpassung der Verzögerung:
+    Die 500ms im setTimeout sind ein Richtwert. Je nach Ggeschwindigkeit
+    der Netwerkverbindung und Videogröße kann eine längere oder kürzere
+    Verzögerung erforderlich sein.
+
+Wiederholte Prüfung:
+    Für eine höhere Zuverlässigkeit können Sie die Funktion checkPlayingStatus
+    rekursiv aufrufen, bis der PLAYING-Status erreicht ist, oder eine maximale
+    Anzahl von Wiederholungen festlegen, um Endlosschleifen zu vermeiden.
+
+
+2. Überwachung der getVideoLoadedFraction()
+-------------------------------------------
+
+Diese Methode ist etwas komplexer, aber potenziell genauer. Sie überwachen
+den Ladefortschritt des Videos und gehen davon aus, dass das Video abspielt,
+wenn ein bestimmter Prozentsatz geladen wurde.
+
+JavaScript
+
+function onPlayerStateChange(event) {
+  if (event.data == YT_PLAYER_STATE.BUFFERING) {
+    checkVideoLoaded();
+  } else if (event.data == YT_PLAYER_STATE.PLAYING) {
+    console.log("Video spielt ab!");
+  }
+}
+
+function checkVideoLoaded() {
+  const loadedFraction = player.getVideoLoadedFraction();
+  if (loadedFraction > 0.8) { // 80% geladen (anpassbar)
+    console.log("Video ist ausreichend geladen, spiele ab!");
+    player.playVideo(); // Manuell das Abspielen starten
+  } else {
+    setTimeout(checkVideoLoaded, 250); // Erneut prüfen
+  }
+}
+
+Anpassung des Ladeanteils:
+    Der Schwellenwert von 0.8 (80%) ist ein Beispiel. Möglicherweise müssen
+    Sie diesen Wert anpassen, um eine optimale Balance zwischen Genauigkeit
+    und Verzögerung zu finden.
+
+Manuelles Abspielen:
+    In dieser Methode wird das Abspielen des Videos manuell mit
+    player.playVideo() ausgelöst, sobald der Ladeanteil ausreichend ist.
+
+
+3. Kombination beider Methoden
+------------------------------
+
+Für maximale Zuverlässigkeit können Sie beide Methoden kombinieren. Warten Sie
+zunächst mit setTimeout eine kurze Zeit und überprüfen Sie dann den
+Ladefortschritt.
+
+Zusätzliche Tipps
+
+Netzwerkbedingungen:
+    Bedenken Sie, dass die Ladezeiten stark von den Netzwerkbedingungen
+    des Benutzers abhängen.
+
+Fehlerbehandlung:
+    Implementieren Sie eine angemessene Fehlerbehandlung, um Fälle zu
+    berücksichtigen, in denen das Video nicht geladen oder abgespielt
+    werden kann.
+
+onReady-Ereignis:
+    Stellen Sie sicher, dass Sie den Player erst nach dem onReady-Ereignis
+    verwenden, um sicherzustellen, dass er vollständig initialisiert ist.

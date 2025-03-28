@@ -1,0 +1,17 @@
+Was bewirkt die Funktion Shuffle im Audio Player?
+
+Die Shuffle-Funktion im Audio-Player sorgt dafür, dass die Songs in einer
+Playlist in z abgespielt werden. Dadurch wird verhindert,
+dass immer die gleichen Songs in der gleichen Reihenfolge hörst und es sorgt
+für mehr Abwechslung.
+
+Issues|AmpltideJS
+
+Das Abspeilen in zufälliger Reihenfolge funktioniert, aber die (realen)
+Song-Indizes (der Playlist) werden NICHT berücksichtigt bzw. auf den aktuellen
+Index umgerechnet. Beispiel: Der als erste abgenspielte Song bekommt den Index
+mit der Nummer 1, hat aber in der Playlist die Position 6 (realer Index = 6).
+
+Damit ist die Markierung (amplitude-active-song-container) als >>Highlighted<<
+Song des jeweils aktiven Songs in der Playlist hinsichtlich des >>realen<<
+Index falsch.

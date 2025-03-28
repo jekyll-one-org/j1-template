@@ -291,8 +291,8 @@ defaults:
     # --------------------------------------------------------------------------
     # CONTROL BUTTON settings
     #
-    shuffle_button:                     false
-    repeat_button:                      false
+    shuffle_button:                     false                                   # shuffle, currently NOT supported
+    repeat_button:                      false                                   # repeat,  currently NOT supported
     song_progress_bar:                  false
     skip_forward_backward_button:       false
     volume_slider:
@@ -308,10 +308,12 @@ defaults:
     playlist:
       audio_info:                       true
       audio_rating:                     true
-      controls:                         false
-      start_end:                        false
-      track:
-        enabled:                        false   
+      controls:                         false                                   # currently NOT supported for YTP
+      start_end:                        false                                   # currently NOT supported
+      track:                                                                    # false | array of timestamps, currently NOT supported
+        enabled:                        false
+        start:                          false                                   # false | timestanp
+        end:                            false                                   # false | timestanp
 
 # ------------------------------------------------------------------------------
 # END config

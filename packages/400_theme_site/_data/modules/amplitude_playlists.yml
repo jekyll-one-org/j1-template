@@ -173,7 +173,7 @@ settings:
         - item:
           enabled:                      true
           <<:                           *album_manon_melodie_yt
-          title:                        En Volant Haut                          # Hoch hinaus
+          title:                        En Volant Haut                          # Hoch hinaus (fliegen)
           audio:                        watch?v=5NiMGeQOzKQ
           rating:                       2
           start_end:                    ["00:00:10", "00:00:30"]
@@ -187,7 +187,7 @@ settings:
           <<:                           *album_manon_melodie_yt
           title:                        Anno du Soleil                          # Jahr der Sonne
           audio:                        watch?v=pCXSGCBSIG0
-          rating:                       3
+          rating:                       4
           start_end:                    ["00:00:10", "00:00:30"]
           audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/pCXSGCBSIG0/maxresdefault.jpg
@@ -197,7 +197,7 @@ settings:
         - item:
           enabled:                      true
           <<:                           *album_manon_melodie_yt
-          title:                        La Fête du cœur                         # Das Fest des Herzens
+          title:                        La Fête du cœur                         # Fest des Herzens
           audio:                        watch?v=fFn1GZIYC4Y
           rating:                       3
           start_end:                    ["00:00:10", "00:00:30"]
@@ -245,9 +245,9 @@ settings:
         - item:
           enabled:                      true
           <<:                           *album_manon_melodie_yt
-          title:                        Les Souvenirs                           # Die Erinnerungen
+          title:                        Les Souvenirs                           # Erinnerungen
           audio:                        watch?v=i8ltW0WDcdQ
-          rating:                       3
+          rating:                       4
           start_end:                    ["00:00:10", "00:00:30"]
           audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/i8ltW0WDcdQ/maxresdefault.jpg
@@ -259,7 +259,7 @@ settings:
           <<:                           *album_manon_melodie_yt
           title:                        La Vie en Dance                         # Leben im Tanz
           audio:                        watch?v=yttS9UNgZFk
-          rating:                       3
+          rating:                       4
           start_end:                    ["00:00:10", "00:00:30"]
           audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/yttS9UNgZFk/maxresdefault.jpg
@@ -562,7 +562,7 @@ settings:
           enabled:                      true
           <<:                           *album_free_disco
           title:                        Disco Flamingo
-          rating:                       1
+          rating:                       4
           audio:                        SoundsCrate-Disco_Flamingo.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "02:19"

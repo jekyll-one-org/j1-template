@@ -94,7 +94,7 @@ exclude_from_search:                    true
     {% assign volume_slider_min             = amplitude_defaults.player.volume_slider.min_value %}
     {% assign volume_slider_max             = amplitude_defaults.player.volume_slider.max_value %}
     {% assign volume_slider_step            = amplitude_defaults.player.volume_slider.slider_step %}
-    {% assign shuffle_repeat_button         = amplitude_defaults.player.shuffle_repeat_button %}
+    {% assign repeat_button                 = amplitude_defaults.player.repeat_button %}
     {% assign shuffle_button                = amplitude_defaults.player.shuffle_button %}
     {% assign skip_forward_backward_button  = amplitude_defaults.player.skip_forward_backward_button %}
     {% assign playlist_controls             = amplitude_defaults.player.playlist.controls %}
@@ -128,10 +128,6 @@ exclude_from_search:                    true
       {% assign volume_slider_min  = amplitude_defaults.player.volume_slider.min_value %}
       {% assign volume_slider_max  = amplitude_defaults.player.volume_slider.max_value %}
       {% assign volume_slider_step = amplitude_defaults.player.volume_slider.slider_step %}
-    {% endif %}
-
-    {% if player.shuffle_repeat_button %}
-      {% assign shuffle_repeat_button = player.shuffle_repeat_button %}
     {% endif %}
 
     {% if player.shuffle_button %}
@@ -351,7 +347,7 @@ exclude_from_search:                    true
                 <!-- load initial (first) info URL -->
                 {% for item in playlist_items %} {% if item.enabled %}
                 {% if playlist_audio_info and forloop.first %}
-                <span class="audio-info">
+                <span class="amplitude-audio-info">
                   <a class="audio-info-link" href="{{item.audio_info}}" target="_blank">
                     <i class="mdib mdib-information md-gray-400 mdib-24px"></i>
                   </a>
@@ -436,18 +432,14 @@ exclude_from_search:                    true
                   {% endif %}
                   {% endcomment %}
 
-                  <!-- span class="song-artist-album">
-                    <span>{{item.name}}</span>
-                    <span class="song-artist-album-delimiter">·</span>
-                    <span>{{item.artist}}</span>
-                  </span -->
+
 
                   <span class="song-artist-album">
                     <span>{{item.artist}}</span>
                   </span>
 
                   {% if player_audio_infooo %}
-                  <span class="audio-info">
+                  <span class="amplitude-audio-info">
                     <a href="{{item.audio_info}}" class="audio-info-link" target="_blank">
                       <i class="mdib mdib-information md-gray-400 mdib-24px"></i>
                     </a>
@@ -592,7 +584,7 @@ exclude_from_search:                    true
                 <!-- END controls container -->
               </div>
             </div>
-            <!-- END LARGE player left MIDDLE -->
+            <!-- END COMPACT player left MIDDLE -->
 
             <!-- START COMPACT player BOTTOM -->
             <div class="player-bottom">
@@ -687,6 +679,8 @@ exclude_from_search:                    true
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {% endcomment %}
       {% when 'large' %} {% if player_enabled %}
 
+      <!-- player.shuffle_button:  {{player.shuffle_button}} -->
+
       {% if player.source %}
         {% assign source_media = player.source %}
       {% endif %}
@@ -700,7 +694,7 @@ exclude_from_search:                    true
       <!-- START create player instance on ID: {{player_id}} of type: {{player_type}} -->
       {% capture large_player_left_side %}
         <!-- START LARGE player left TOP -->
-        <div class="player-left-top">
+        <div class="large-player-left-top">
 
           <div
             id="large_player_title_header_{{player_id}}"
@@ -747,10 +741,10 @@ exclude_from_search:                    true
         <!-- END LARGE player left TOP -->
 
         <!-- START LARGE player left MIDDLE -->
-        <div class="player-left-middle">
+        <div class="large-player-left-middle">
           <!-- START controls container -->
-          <div id="large_player_control_container">
-            <div id="large_player_controls">
+          <div class="large-player-control-container">
+            <div id="large_player_controls" class="large_player_controls">
 
               <div class="large-player-controls-container">
                 {% if shuffle_button %}
@@ -805,19 +799,17 @@ exclude_from_search:                    true
                 {% endif %}
 
                 <!-- START volume container -->
-                <div class="compact-player-volume-container">
+                <div class="large-player-volume-container">
                   {% if volume_slider %}
-                  <div class="volume-controls">
-                    <div class="amplitude-mute amplitude-not-muted"></div>
-                    <input
-                      id="volume_slider_{{player_id}}"
-                      class="amplitude-volume-slider"
-                      type="range"
-                      min="{{volume_slider_min}}"
-                      max="{{volume_slider_max}}"
-                      step="{{volume_slider_step}}"
-                      aria-label="Amplitude Volume Slider">
-                  </div>
+                  <div class="amplitude-mute amplitude-not-muted"></div>
+                  <input
+                    id="volume_slider_{{player_id}}"
+                    class="amplitude-volume-slider"
+                    type="range"
+                    min="{{volume_slider_min}}"
+                    max="{{volume_slider_max}}"
+                    step="{{volume_slider_step}}"
+                    aria-label="Amplitude Volume Slider">
                   {% endif %}
                 </div>
                 <!-- END volume container -->
@@ -831,7 +823,7 @@ exclude_from_search:                    true
 
         <!-- START LARGE player left BOTTOM -->
         <!-- div class="player-left-bottom" -->
-        <div class="player-bottom">
+        <div class="large-player-left-bottom">
           <!-- time container -->
           <div class="time-container">
             <span class="current-time">
@@ -912,14 +904,14 @@ exclude_from_search:                    true
           <div class="large-player-container">
 
             <!-- Large Player|Left Side -->
-            <div id="large_player_left">
+            <div id="large_player_left" class="large-player-left">
             {{large_player_left_side}}
             </div>
             <!-- END Large Player|Left Side -->
 
             <!-- Large Player|Right Side (playlist) -->
             <div
-              id="large_player_right" class="hide-scrollbar"
+              id="large_player_right" class="large-player-right hide-scrollbar"
               data-amplitude-source="{{source_media_attribute}}"
               data-amplitude-playlist="{{player_playlist}}">
               <div
@@ -940,7 +932,7 @@ exclude_from_search:                    true
                   <!-- load initial (first element) info URL -->
                   {% for item in playlist_items %} {% if item.enabled %}
                   {% if playlist_audio_info and forloop.first %}
-                  <span class="audio-info">
+                  <span class="amplitude-audio-info">
                     <a class="audio-info-link-{{player_playlist}} audio-info-link" href="{{item.audio_info}}" target="_blank">
                       <i class="mdib mdib-information md-gray-400 mdib-24px"></i>
                     </a>
@@ -1015,7 +1007,7 @@ exclude_from_search:                    true
                     data-amplitude-source="{{source_media_attribute}}"
                     data-amplitude-playlist="{{player_playlist}}">
                   </div>
-                </div>
+                </div><!-- Large Player|Left Side -->
                 {% endif %}
 
               </div> <!-- END playlist controls -->
@@ -1028,49 +1020,51 @@ exclude_from_search:                    true
                 {% for item in playlist_items %}{% if item.enabled %}
                 <!-- START list item -->
                 <div
-                  class="amplitude-song-container-large-player-{{player_id}} song amplitude-song-container amplitude-play-pause"
+                  class="amplitude-song-container-large-player-{{player_id}} amplitude-song-container amplitude-song amplitude-play-pause"
                   data-amplitude-song-index="{{forloop.index0}}"
                   data-amplitude-source="{{source_media_attribute}}"
                   data-amplitude-playlist="{{player_playlist}}">
 
-                  <div
-                    class="song-number-now-playing"
-                    data-amplitude-source="{{source_media_attribute}}"
-                    data-amplitude-playlist="{{player_playlist}}">
-                    <span class="title-number">{{forloop.index}}
-                      <img
-                        class="now-playing"
-                        src="/assets/theme/j1/modules/amplitudejs/icons/player/dark/now-playing.svg"
-                        alt="now-playing">
-                    </span>
-                  </div>
-
-                  <div
-                    class="audio-meta-data"
+                  <div class="audio-meta-data"
                     data-amplitude-playlist="{{player_playlist}}"
                     data-amplitude-song-index="{{forloop.index0}}">
-                    <span class="audio-title">{{item.title}}</span>
 
-                    <span class="audio-artist">
-                      <span>{{item.artist}}</span>
-                      <!-- span class="song-artist-album-delimiter">·</span>
-                      <span>{{item.name}}</span -->            
-                    </span>
-                  </div>
+                      <div
+                        class="amplitude-song-container"
+                        data-amplitude-source="{{source_media_attribute}}"
+                        data-amplitude-playlist="{{player_playlist}}">
+                        <span class="title-number">Track {{forloop.index}}
+                          <img
+                            class="now-playing"
+                            src="/assets/theme/j1/modules/amplitudejs/icons/player/dark/now-playing.svg"
+                            alt="now-playing">
+                        </span>
+                      </div>
+
+                      <span class="audio-title">{{item.title}}</span>
+
+                      <span class="audio-artist">
+                        <span>{{item.artist}}</span>
+                        <!-- span class="song-artist-album-delimiter">·</span>
+                        <span>{{item.name}}</span -->            
+                      </span>
+                    
+                  </div> <!-- END audio-meta-data -->
 
                   <!-- jadams, 2024-11-05: workaround -->
                   {% if player.display_hours %}
                   <span class="audio-duration">{{item.duration}}</span>
                   {% else %}
-                  <span class="audio-duration" style="margin-left: 50px;">{{item.duration}}</span>
-                  <!-- span class="audio-duration">{{item.duration}}</span -->
+                  <!-- span class="audio-duration" style="margin-left: 50px;">{{item.duration}}</span -->
+                  <span class="audio-duration">{{item.duration}}</span>
                   {% endif %}
 
                   {% if item.rating %}
                   <span class="audio-rating">
                     {% capture rating_image %}{{image_rating_path}}/{{item.rating}}-star.svg{% endcapture %}
                     <!-- rating image: {{rating_image}} -->
-                    <img src="{{rating_image}}" alt="song rating" style="padding-left: 13px; margin-top: 5px;">
+                    <!-- img src="{{rating_image}}" alt="song rating" style="padding-left: 13px; margin-top: 5px;" -->
+                    <img src="{{rating_image}}" alt="song rating">
                   </span>
                   {% else %}
                   <!-- place empty (span) element (placeholder) -->
