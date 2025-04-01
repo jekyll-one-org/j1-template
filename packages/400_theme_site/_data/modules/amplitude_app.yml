@@ -276,6 +276,8 @@ settings:
       type:                             large
       source:                           video
       display_hours:                    false
+      audio_fade_in:                    false
+      audio_fade_out:                   false
 
       # ------------------------------------------------------------------------
       # CONTROL settings

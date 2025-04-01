@@ -265,6 +265,8 @@ defaults:
     type:                               compact
     source:                             audio
     display_hours:                      false
+    audio_fade_in:                      false
+    audio_fade_out:                     false    
     play_next_title:                    true
     pause_next_title:                   false
     delay_next_title:                   250
@@ -309,7 +311,8 @@ defaults:
       audio_info:                       true
       audio_rating:                     true
       controls:                         false                                   # currently NOT supported for YTP
-      start_end:                        false                                   # currently NOT supported
+      start:                            false                                   # false | timestanp
+      end:                              false                                   # false | timestanp
       track:                                                                    # false | array of timestamps, currently NOT supported
         enabled:                        false
         start:                          false                                   # false | timestanp

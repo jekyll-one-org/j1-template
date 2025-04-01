@@ -227,7 +227,8 @@ var messageLoggedOnce = false;
 
     // check timestamp format
     if (parts.length !== 3) {
-      return "invalid timestamp";
+      // return "invalid timestamp";
+      return false;
     }
 
     // convert parts to integers
@@ -667,9 +668,10 @@ var messageLoggedOnce = false;
             var player        = playlist + '_large';
             var songs         = j1.adapter.amplitude.data.ytPlayers[player].songs;
             var songIndex     = j1.adapter.amplitude.data.ytpGlobals.activeIndex;
-            var songStartEnd  = songs[songIndex].start_end.split(',');
-            var songStartSec  = timestamp2seconds(songStartEnd[0]);
-            var songEndSec    = timestamp2seconds(songStartEnd[1]);
+            var songStart     = songs[songIndex].start;
+            var songEnd       = songs[songIndex].end;
+            var songStartSec  = timestamp2seconds(songStart);
+            var songEndSec    = timestamp2seconds(songEnd);
 
             logger.debug('\n' + 'current player state: ' + YT_PLAYER_STATE_NAMES[event.data]);
 
@@ -679,8 +681,8 @@ var messageLoggedOnce = false;
             setInterval(updateProgressBarsYTP, 1000);
 
             // seek video to configured start position
-            if (currentTime <= songStartSec) {
-              logger.debug('\n' + 'seek video on configured start position');
+            if (songStartSec && currentTime <= songStartSec) {
+              logger.debug('\n' + 'seek current video on configured start position: ', songStartSec);
               ytPlayer.mute();
               ytPlayer.seekTo(songStartSec);
               ytPlayer.unMute();
@@ -688,8 +690,8 @@ var messageLoggedOnce = false;
 
             // check video for configured END position
             // -----------------------------------------------------------------
+            if (songEndSec) {
             var checkOnVideoEnd = setInterval(function() {            
-
               if (ytPlayer.getCurrentTime() >= songEndSec) {
                 // mute on LAST video
                 if (songIndex === songs.length-1) {
@@ -700,11 +702,13 @@ var messageLoggedOnce = false;
                 ytPlayer.pauseVideo();
 
                 // load next video
-                logger.debug('\n' + 'current player end reached: load next video');
+                logger.debug('\n' + 'switch current video on configured end position: ', songEndSec);
                 nextVideo();
                 clearInterval(checkOnVideoEnd);
               }
-            }, 250);
+            }, 250);              
+            }
+
           }
 
           // load|play NEXT|FIRST song (video) in playlist
@@ -1258,9 +1262,10 @@ var messageLoggedOnce = false;
               var playPauseButton = `large-player-play-pause-${ytPlayerID}`;
 
               var player          = playlist + '_large';
-              var songStartEnd    = songs[activeIndex].start_end.split(',');
-              var songStartSec    = timestamp2seconds(songStartEnd[0]);
-              var songEndSec      = timestamp2seconds(songStartEnd[1]);
+              var songStart       = songs[songIndex].start;
+              var songEnd         = songs[songIndex].end;
+              var songStartSec    = timestamp2seconds(songStart);
+              var songEndSec      = timestamp2seconds(songEnd);
 
               // save YT player GLOBAL data for later use (e.g. events)
               j1.adapter.amplitude.data.ytpGlobals['activeIndex']    = activeIndex;
@@ -1277,10 +1282,13 @@ var messageLoggedOnce = false;
                 // set song active in playlist
                 setSongPlayed(ytPlayerID, activeIndex);
               } else {
-                // set video on configured position: start
-                ytPlayer.mute();
-                ytPlayer.seekTo(songStartSec);
-                ytPlayer.unMute();
+                // set video to configured start position
+                if (songStartSec) {
+                  ytPlayer.mute();
+                  logger.debug('\n' + 'seek current video on configured start position: ', songStartSec);
+                  ytPlayer.seekTo(songStartSec);
+                  ytPlayer.unMute();
+                }
 
                 ytPlayer.playVideo();
                 toggle_play_pause_video(playPauseButton);

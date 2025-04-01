@@ -436,7 +436,8 @@ j1.adapter.amplitude = ((j1, window) => {
             "url":            "{{item.audio_base}}/{{item.audio}}",
             "audio_info":     "{{item.audio_info}}",
             "rating":         "{{item.rating}}",
-            "start_end":      "{{item.start_end}}",
+            "start":          "{{item.start}}",
+            "end":            "{{item.end}}",
             "cover_art_url":  "{{item.cover_image}}"
           }{% if forloop.last %}{% else %},{% endif %}
           {% endcapture %}
