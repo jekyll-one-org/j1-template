@@ -1,5 +1,5 @@
 
-Nach dem laden von YouTube Videos über die ifarme API ist der Status in
+Nach dem laden von YouTube Videos über die ifrarme API ist der Status in
 OnPlayerStateChange häufig BUFFERING. Wie kann man auf dem Status PLAYING
 warten?
 
@@ -109,3 +109,61 @@ Fehlerbehandlung:
 onReady-Ereignis:
     Stellen Sie sicher, dass Sie den Player erst nach dem onReady-Ereignis
     verwenden, um sicherzustellen, dass er vollständig initialisiert ist.
+
+
+
+
+
+
+Welche Funktionen der YouTube iframe API lösen das Event onPlayerStateChange
+aus?
+
+Die YouTube IFrame API löst das Event `onPlayerStateChange` aus, wenn sich
+der Zustand des YouTube-Players ändert. Es gibt sechs mögliche Zustände, die
+das Event auslösen können:
+
+* **UNSTARTED:** Der Player ist nicht gestartet.
+* **PLAYING:** Der Player spielt ein Video ab.
+* **PAUSED:** Der Player ist angehalten.
+* **BUFFERING:** Der Player lädt das Video.
+* **ENDED:** Das Video ist beendet.
+* **CUED:** Der Player ist bereit zum Abspielen, aber es wird noch nicht abgespielt.
+
+Du kannst das Event `onPlayerStateChange` verwenden, um deinen Code auszuführen,
+wenn sich der Zustand des Players ändert. Zum Beispiel kannst du den Player
+automatisch pausieren, wenn der Benutzer die Seite verlässt, oder du kannst
+das nächste Video in der Playlist abspielen, wenn das aktuelle Video beendet
+ist.
+
+Hier ist ein Beispiel dafür, wie du das Event `onPlayerStateChange` verwenden
+kannst:
+
+```javascript
+var player;
+
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('player', {
+    events: {
+      'onStateChange': onPlayerStateChange
+    }
+  });
+}
+
+function onPlayerStateChange(event) {
+  switch (event.data) {
+    case YT.PlayerState.PLAYING:
+      console.log('Video wird abgespielt');
+      break;
+    case YT.PlayerState.PAUSED:
+      console.log('Video ist angehalten');
+      break;
+    case YT.PlayerState.ENDED:
+      console.log('Video ist beendet');
+      break;
+  }
+}
+```
+
+In diesem Beispiel wird die `onPlayerStateChange`-Funktion aufgerufen, wenn sich der Zustand des Players ändert. Die Funktion prüft dann den Zustand des Players und gibt eine Meldung aus, wenn der Player abgespielt wird, angehalten wird oder beendet wird.
+
+Du kannst das `onPlayerStateChange`-Event auch verwenden, um andere Aktionen auszuführen, z. B. um die Lautstärke des Players zu ändern oder um das Video zu überspringen.

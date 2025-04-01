@@ -425,6 +425,7 @@ j1.adapter.amplitude = ((j1, window) => {
         {% assign playlist_title = list.title %}
 
         {% comment %} collect song items
+        NOTE: configure all properties avaialble in songs array
         ------------------------------------------------------------------------ {% endcomment %}
         {% for item in playlist_items %} {% if item.enabled %}
           {% capture song_item %}
@@ -435,6 +436,7 @@ j1.adapter.amplitude = ((j1, window) => {
             "url":            "{{item.audio_base}}/{{item.audio}}",
             "audio_info":     "{{item.audio_info}}",
             "rating":         "{{item.rating}}",
+            "start_end":      "{{item.start_end}}",
             "cover_art_url":  "{{item.cover_image}}"
           }{% if forloop.last %}{% else %},{% endif %}
           {% endcapture %}
