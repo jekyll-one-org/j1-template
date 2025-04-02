@@ -262,61 +262,81 @@ defaults:
     # --------------------------------------------------------------------------
     # GENERAL settings
     #    
-    type:                               compact
-    source:                             audio
-    display_hours:                      false
-    audio_fade_in:                      false
-    audio_fade_out:                     false    
-    play_next_title:                    true
-    pause_next_title:                   false
+    type:                               compact                                 # default player type compact|large
+    source:                             audio                                   # default player source audio|video
+    display_hours:                      false                                   # use hours for timestamps in time container
+  
+    audio_fade_animated:                true
+    audio_fade_in:                      true
+    audio_fade_in_speed:                fast                                    # fast|slow|slower
+    audio_fade_out:                     true
+    audio_fade_out_speed:               fast                                    # fast|slow|slower
+
+    play_next_title:                    true                                    # play next title on end
+    pause_next_title:                   false                                   # add a pause on title on end
     delay_next_title:                   250
     forward_backward_skip_seconds:      15
 
+    audio_fade:
+      enabled:                          true                                    # use fade transitions true|false
+      animated:                         true                                    # animate the volume slider in player
+      fade_in:                          true                                    # audio fade-in true|false
+      fade_in_speed:                    fast                                    # transition speed fast|slow|slower
+      fade_out:                         true                                    # audio fade-in true|false
+      fade_out_speed:                   fast                                    # transition speed fast|slow|slower
+
     yt_player:
+      autoplay:                         0                                       # start playing using the AJS player START button
       height:                           0                                       # display player 'minimited'
       width:                            0                                       # display player 'minimized'
-      autoplay:                         0                                       # prevent autostart, start playing using the AJS player start button
-      loop:                             1                                       # prevent autoloop, control looping by the AJS player
+      quality:                          small                                   # reduce amout of VIDEO data loaded at a minimum
+      loop:                             0                                       # control looping by the AJS player
 
     plugin_manager:
-      enabled:                          false
+      enabled:                          false                                   # load plugins true|false
       plugins:                          [ ytp ]                                 # prepared as an array to support multiple plugins (NOT supported yet)
 
     waveforms:
-      enabled:                          false
+      enabled:                          false                                   # currently NOT supported
       sample_rate:                      0.25
 
     visualization:
-      enabled:                          false
+      enabled:                          false                                   # currently NOT supported
       name:                             [ bar ]                                 # prepared as an array to support multiple visualizations (NOT supported yet)
 
     # --------------------------------------------------------------------------
     # CONTROL BUTTON settings
     #
-    shuffle_button:                     false                                   # shuffle, currently NOT supported
-    repeat_button:                      false                                   # repeat,  currently NOT supported
-    song_progress_bar:                  false
+    shuffle_button:                     false                                   # true|false, shuffle button (currently NOT supported)
+    repeat_button:                      false                                   # true|false, repeat  button (currently NOT supported)
+    song_progress_bar:                  false                                   # true|false, show progressbar in player
     skip_forward_backward_button:       false
+
+    skip_buttons:
+      enabled:                          true                                    # true|false, enable skip buttion in player
+      skip_forward:                     15                                      # seconds
+      skipbackward:                     15                                      # seconds
+
     volume_slider:
-      enabled:                          false
-      min_value:                        0
-      max_value:                        100
-      preset_value:                     50
-      slider_step:                      1
+      enabled:                          true
+      min_value:                        0                                       # percent
+      max_value:                        100                                     # percent
+      preset_value:                     50                                      # percent
+      slider_step:                      1                                       # integer 1..10
 
     # --------------------------------------------------------------------------
     # PLAYLIST settings
     #
     playlist:
-      audio_info:                       true
-      audio_rating:                     true
-      controls:                         false                                   # currently NOT supported for YTP
-      start:                            false                                   # false | timestanp
-      end:                              false                                   # false | timestanp
-      track:                                                                    # false | array of timestamps, currently NOT supported
-        enabled:                        false
-        start:                          false                                   # false | timestanp
-        end:                            false                                   # false | timestanp
+      audio_info:                       true                                    # true|false, show info button in playlist
+      audio_rating:                     true                                    # true|false, show ratings in playlist
+      controls:                         false                                   # true|false, show control buttons in playlist (currently NOT supported for YTP)
+      start:                            false                                   # false|timestanp, set video|audio start position
+      end:                              false                                   # false|timestanp, set video|audio start position
+
+      tracks:
+        enabled:                        false                                   # true|false, generate chapter list for YTP (currently NOT supported)
+        vtt_file:                       false                                   # string (filename, e.g. /assets/audio/tracks/captions.vtt)
 
 # ------------------------------------------------------------------------------
 # END config

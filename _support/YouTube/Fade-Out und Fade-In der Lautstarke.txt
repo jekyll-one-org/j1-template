@@ -1,6 +1,8 @@
 Kann man über die YouTube iframe API mit Hilfe der Funktion setVolume() ein
 Fade-Out oder Fade-In der Lautstarke nachbilden? Falls Ja, bitte Beispiele
 für JavaScript der Funktionen für Fade-Out oder Fade-In.
+Wie müsste man die Fade-Effekte für ein logarithmisches Verhalten (nicht-linear)
+anpassen?
 
 
 Gemini
@@ -15,29 +17,32 @@ Hier sind Beispiele für JavaScript-Funktionen für Fade-Out und Fade-In:
 **1. Fade-Out Funktion:**
 
 ```javascript
-function fadeOut(player, duration) {
-  if (!player || typeof player.getVolume !== 'function' || typeof player.setVolume !== 'function') {
-    console.error("YouTube Player-Objekt ist nicht gültig oder die benötigten Funktionen sind nicht vorhanden.");
-    return;
-  }
 
-  const startVolume = player.getVolume();
-  const steps = 20; // Anzahl der Lautstärkeschritte
-  const interval = duration / steps;
-  let currentStep = 0;
+  function audioFadeOut(duration=3, speed='fast') {
+    var interval, currentStep, steps, startVolume, newVolume;
 
-  const fadeOutInterval = setInterval(() => {
-    const newVolume = startVolume * (1 - currentStep / steps);
-    player.setVolume(newVolume);
-    currentStep++;
+    // number of iteration steps to DECREASE the volume
+    const speedSteps = {
+      'fast':     250,
+      'slow': 	  500,
+      'slower':   750
+    };
 
-    if (currentStep > steps) {
-      clearInterval(fadeOutInterval);
-      // Optional: Hier kannst du Aktionen ausführen, nachdem das Fade-Out abgeschlossen ist, z.B. das Video pausieren.
-      // player.pauseVideo();
-    }
-  }, interval);
-}
+    startVolume = ytPlayer.getVolume();
+    steps       = speedSteps[speed];
+    interval    = duration / steps;
+    currentStep = 0;
+
+    const fadeOutInterval = setInterval(() => {
+      newVolume = startVolume * (1 - currentStep / steps);
+
+      ytPlayer.setVolume(newVolume);  
+      currentStep++;
+
+      (currentStep > steps) && clearInterval(fadeOutInterval);
+    }, interval);
+
+  } // END audioFadeOut
 
 // Beispielhafte Verwendung:
 // Angenommen, du hast dein Player-Objekt in der Variablen 'ytPlayer' gespeichert.
@@ -61,33 +66,36 @@ function fadeOut(player, duration) {
 **2. Fade-In Funktion:**
 
 ```javascript
-function fadeIn(player, duration) {
-  if (!player || typeof player.getVolume !== 'function' || typeof player.setVolume !== 'function') {
-    console.error("YouTube Player-Objekt ist nicht gültig oder die benötigten Funktionen sind nicht vorhanden.");
-    return;
-  }
 
-  const targetVolume = 100; // Maximale Lautstärke (0-100)
-  const steps = 20; // Anzahl der Lautstärkeschritte
-  const interval = duration / steps;
-  let currentStep = 0;
+  function audioFadeIn(targetVolume=50, duration=3, speed='fast') {
+    var interval, currentStep, steps;
 
-  // Stelle sicher, dass die Startlautstärke nicht bereits 100 ist, um ein unnötiges Fade-In zu vermeiden.
-  if (player.getVolume() >= targetVolume) {
-    return;
-  }
+    // number of iteration steps to INCREASE the volume to targetVolume
+    const speedSteps = {
+      'fast':     150,
+      'slow': 	  250,
+      'slower':   500
+    };
 
-  const fadeInInterval = setInterval(() => {
-    const newVolume = targetVolume * (currentStep / steps);
-    player.setVolume(newVolume);
-    currentStep++;
+    steps       = speedSteps[speed];
+    interval    = duration / speedSteps[speed];
+    currentStep = 1;
 
-    if (currentStep > steps) {
-      clearInterval(fadeInInterval);
-      // Optional: Hier kannst du Aktionen ausführen, nachdem das Fade-In abgeschlossen ist.
+    // skip fade-in when volume is already at target value
+    if (ytPlayer.getVolume() >= targetVolume) {
+      return;
     }
-  }, interval);
-}
+
+    const fadeInInterval = setInterval(() => {
+      const newVolume = targetVolume * (currentStep / steps);
+
+      ytPlayer.setVolume(newVolume);
+      currentStep++;
+
+      (currentStep > steps) && clearInterval(fadeInInterval);
+    }, interval);
+
+  } // END audioFadeIn
 
 // Beispielhafte Verwendung:
 // Angenommen, du hast dein Player-Objekt in der Variablen 'ytPlayer' gespeichert.
