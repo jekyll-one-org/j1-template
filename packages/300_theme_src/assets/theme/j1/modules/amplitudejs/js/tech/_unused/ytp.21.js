@@ -42,7 +42,7 @@ regenerate: true
 
 {% comment %} Set config data (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign amplitude_defaults  = modules.defaults.amplitude_app.defaults %}
+{% assign amplitude_defaults  = modules.defaults.amplitude.defaults %}
 {% assign amplitude_players   = modules.amplitude_app.settings %}
 {% assign amplitude_playlists = modules.amplitude_playlists.settings %}
 

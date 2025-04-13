@@ -34,62 +34,6 @@ settings:
     # --------------------------------------------------------------------------
     #
     - playlist:
-      enabled:                          false
-
-      name:                             ephraim_kishon_yt
-      title:                            Ephraim Kishon
-
-      # ------------------------------------------------------------------------
-      # ALBUM settings
-      # ------------------------------------------------------------------------
-      album:                            &album_ephraim_kishon_yt
-        name:                           Ephraim Kishon
-        artist:                         Beste Geschichten
-        audio_base:                     //youtube.com
-        cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
-
-      # ------------------------------------------------------------------------
-      # TITLE settings (songs)
-      # ------------------------------------------------------------------------
-      items:
-
-        # title 01
-        - item:
-          enabled:                      true
-          <<:                           *album_ephraim_kishon_yt
-          title:                        Beste Familiengeschichten
-          audio:                        watch?v=9LojTw98Fks
-          rating:                       3
-          track:
-            name:                       Ein Vater wird geboren
-            start:                      "00:00:03"
-            end:                        "00:16:53"
-            duration:                   "00:00:00"
-          audio_info:                   //youtube.com/watch?v=9LojTw98Fks
-          cover_image:                  //img.youtube.com/vi/9LojTw98Fks/maxresdefault.jpg
-          duration:                     "00:00:00"
-
-        # title 02
-        - item:
-          enabled:                      true
-          <<:                           *album_ephraim_kishon_yt
-          title:                        Beste Familiengeschichten
-          audio:                        watch?v=9LojTw98Fks
-          rating:                       3
-          track:
-            name:                       Baby Sitting
-            start:                      "00:16:55"
-            end:                        "00:28:34"
-            duration:                   "00:00:00"
-          audio_info:                   //youtube.com/watch?v=9LojTw98Fks
-          cover_image:                  //img.youtube.com/vi/9LojTw98Fks/maxresdefault.jpg
-          duration:                     "00:00:00"
-
-    # --------------------------------------------------------------------------
-    #  Ephraim Kishon, Multiple Video/Single tracks
-    # --------------------------------------------------------------------------
-    #
-    - playlist:
       enabled:                          true
 
       name:                             ephraim_kishon_yt
@@ -100,9 +44,13 @@ settings:
       # ------------------------------------------------------------------------
       album:                            &album_ephraim_kishon_yt
         name:                           Ephraim Kishon
-        artist:                         Beste Geschichten
+        artist:                         Beste Familiengeschichten
+        audio_single:                   true
+        audio_fade:                     false
+        audio:                          watch?v=9LojTw98Fks
         audio_base:                     //youtube.com
-        cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
+        audio_info:                     //youtube.com/watch?v=9LojTw98Fks
+        cover_image:                    //img.youtube.com/vi/9LojTw98Fks/maxresdefault.jpg
 
       # ------------------------------------------------------------------------
       # TITLE settings (songs)
@@ -113,38 +61,182 @@ settings:
         - item:
           enabled:                      true
           <<:                           *album_ephraim_kishon_yt
-          title:                        Beste Familiengeschichten
-          audio:                        watch?v=9LojTw98Fks
-          rating:                       3
-          start_end:                    "00:00:00, 00:00:10"
-          audio_info:                   //youtube.com/watch?v=9LojTw98Fks
-          cover_image:                  //img.youtube.com/vi/9LojTw98Fks/maxresdefault.jpg
-          duration:                     "02:55:35"
+          title:                        Ein Vater wird geboren
+          rating:                       4
+          start:                        "00:00:03"
+          end:                          "00:16:53"
+          duration:                     "00:16:50"
 
         # title 02
         - item:
           enabled:                      true
           <<:                           *album_ephraim_kishon_yt
-          title:                        Beste Autofahrergeschichten, Teil 1
-          audio:                        watch?v=D2gVmGFa2wE
+          title:                        Baby Sitting und was man dafür tun muß
           rating:                       3
-          start_end:                    "00:00:00, 00:00:10"
-          audio_info:                   //youtube.com/watch?v=D2gVmGFa2wE
-          cover_image:                  //img.youtube.com/vi/D2gVmGFa2wE/maxresdefault.jpg
-          duration:                     "00:59:44"
+          start:                        "00:16:55"
+          end:                          "00:28:34"
+          duration:                     "00:11:39"
 
         # title 03
         - item:
           enabled:                      true
           <<:                           *album_ephraim_kishon_yt
-          title:                        Beste Autofahrergeschichten, Teil 2
-          audio:                        watch?v=zBSlRSGp5N4
-          rating:                       3
-          start_end:                    "00:00:00, 00:00:10"
-          audio_info:                   //youtube.com/watch?v=zBSlRSGp5N4
-          cover_image:                  //img.youtube.com/vi/zBSlRSGp5N4/maxresdefault.jpg
-          duration:                     "00:57:31"
+          title:                        Schreckens Rotkäppchen
+          rating:                       2
+          start:                        "00:28:37"
+          end:                          "00:33:57"
+          duration:                     "00:05:20"
 
+        # title 04
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_yt
+          title:                        Kontakt mit Linsen
+          rating:                       4
+          start:                        "00:34:00"
+          end:                          "00:45:57"
+          duration:                     "00:11:57"
+
+        # title 05
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_yt
+          title:                        Auf Mäusesuche
+          rating:                       4
+          start:                        "00:46:00"
+          end:                          "00:54:35"
+          duration:                     "00:08:35"
+
+        # title 06
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_yt
+          title:                        Das Wunderkind
+          rating:                       2
+          start:                        "00:54:36"
+          end:                          "01:01:07"
+          duration:                     "00:06:31"
+
+        # title 07
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_yt
+          title:                        Ein Fläschchen für's Kätzchen
+          rating:                       3
+          start:                        "01:01:13"
+          end:                          "01:11:34"
+          duration:                     "00:10:21"
+
+        # title 08
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_yt
+          title:                        Die Stmme des Blutes
+          rating:                       3
+          start:                        "01:11:36"
+          end:                          "01:20:44"
+          duration:                     "00:09:08"
+
+        # title 09
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_yt
+          title:                        Onkel Morris und das Kollosalgemälde
+          rating:                       3
+          start:                        "01:20:45"
+          end:                          "01:34:05"
+          duration:                     "00:13:20"
+
+        # title 10
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_yt
+          title:                        Durch den Kakao gezogen 
+          rating:                       4
+          start:                        "01:34:08"
+          end:                          "01:44:39"
+          duration:                     "00:09:31"
+
+        # title 11
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_yt
+          title:                        Ein Scnnuller Namens Zezie 
+          rating:                       4
+          start:                        "01:44:41"
+          end:                          "01:54:02"
+          duration:                     "00:09:21"
+
+        # title 12
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_yt
+          title:                        Gefahren des Wachstums
+          rating:                       4
+          start:                        "01:54:08"
+          end:                          "02:02:35"
+          duration:                     "00:07:27"
+
+        # title 13
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_yt
+          title:                        Wie man Freunde gewinnt
+          rating:                       3
+          start:                        "02:02:37"
+          end:                          "02:10:33"
+          duration:                     "00:07:56"
+
+        # title 14
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_yt
+          title:                        Pedigree
+          rating:                       4
+          start:                        "02:10:35"
+          end:                          "02:22:26"
+          duration:                     "00:11:09"
+
+        # title 15
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_yt
+          title:                        Dressur
+          rating:                       4
+          start:                        "02:22:29"
+          end:                          "02:31:46"
+          duration:                     "00:08:15"
+
+        # title 16
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_yt
+          title:                        Die große Steak-Saga
+          rating:                       3
+          start:                        "02:31:48"
+          end:                          "02:39:54"
+          duration:                     "00:08:07"
+
+        # title 17
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_yt
+          title:                        Der kluge Mann baut vor
+          rating:                       3
+          start:                        "02:39:56"
+          end:                          "02:47:44"
+          duration:                     "00:07:48"
+
+        # title 18
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_yt
+          title:                        Vertrauen gegen Vertrauen
+          rating:                       4
+          start:                        "02:47:45"
+          end:                          "02:55:15"
+          duration:                     "00:07:30"
+    
     # --------------------------------------------------------------------------
     # Manon Mélodie
     # --------------------------------------------------------------------------
@@ -176,10 +268,14 @@ settings:
           title:                        En Volant Haut                          # Hoch hinaus (fliegen)
           audio:                        watch?v=5NiMGeQOzKQ
           rating:                       2
-          #start:                        false                                   # timestamp | false
-          #end:                          false                                   # timestamp | false
-          start:                        "00:00:10"
-          end:                          "00:00:20"          
+          # start:                        false                                   # timestamp | false
+          # end:                          false                                   # timestamp | false
+          # start:                        "00:00:10"
+          # end:                          "00:00:20"
+          # start:                        "00:01:20"
+          # end:                          "00:01:50"
+          start:                        "00:01:00"
+          end:                          "00:02:00"
           audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/5NiMGeQOzKQ/maxresdefault.jpg
           duration:                     "02:48"
@@ -191,8 +287,8 @@ settings:
           title:                        Anno du Soleil                          # Jahr der Sonne
           audio:                        watch?v=pCXSGCBSIG0
           rating:                       4
-          start:                        "00:00:10"
-          end:                          "00:00:20"
+          start:                        "00:01:20"
+          end:                          "00:02:20"
           audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/pCXSGCBSIG0/maxresdefault.jpg
           duration:                     "02:53"
@@ -204,8 +300,8 @@ settings:
           title:                        La Fête du cœur                         # Fest des Herzens
           audio:                        watch?v=fFn1GZIYC4Y
           rating:                       3
-          start:                        "00:00:10"
-          end:                          "00:00:20"
+          start:                        "00:01:00"
+          end:                          "00:02:00"
           audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/fFn1GZIYC4Y/maxresdefault.jpg
           duration:                     "02:32"
@@ -217,34 +313,34 @@ settings:
           title:                        Fleur de Printemps                      # Frühlingsblume
           audio:                        watch?v=OUjHRpNUqyw
           rating:                       3
-          start:                        "00:00:10"
-          end:                          "00:00:20"
+          start:                        "00:01:20"
+          end:                          "00:02:20"          
           audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/OUjHRpNUqyw/maxresdefault.jpg
           duration:                     "02:57"
 
-        # title 05
+        # # title 05
         - item:
           enabled:                      true
           <<:                           *album_manon_melodie_yt
           title:                        Cote d'Azur                             # Cote d'Azur
           audio:                        watch?v=9Z9yNpsiBKs
           rating:                       3
-          start:                        "00:00:10"
-          end:                          "00:00:20"
+          start:                        "00:01:00"
+          end:                          "00:02:00"
           audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/9Z9yNpsiBKs/maxresdefault.jpg
           duration:                     "02:42"
 
-        # title 06
+        # # title 06
         - item:
           enabled:                      true
           <<:                           *album_manon_melodie_yt
           title:                        Les Échos du Passé                      # Echos der Vergangenheit          
           audio:                        watch?v=_EYc5W3qy4s
           rating:                       4
-          start:                        "00:00:10"
-          end:                          "00:00:20"
+          start:                        "00:01:20"
+          end:                          "00:02:20"         
           audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/_EYc5W3qy4s/maxresdefault.jpg
           duration:                     "03:03"
@@ -257,7 +353,7 @@ settings:
           audio:                        watch?v=i8ltW0WDcdQ
           rating:                       4
           start:                        "00:00:10"
-          end:                          "00:00:20"
+          end:                          "00:00:30"
           audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/i8ltW0WDcdQ/maxresdefault.jpg
           duration:                     "02:19"
@@ -269,8 +365,8 @@ settings:
           title:                        La Vie en Dance                         # Leben im Tanz
           audio:                        watch?v=yttS9UNgZFk
           rating:                       4
-          start:                        "00:00:10"
-          end:                          "00:00:20"
+          start:                        "00:01:20"
+          end:                          "00:01:50"
           audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/yttS9UNgZFk/maxresdefault.jpg
           duration:                     "02:45"
@@ -298,6 +394,32 @@ settings:
       # Playlist Items (Songs)
       #
       items:
+
+        # # title 00
+        # - item:
+        #   enabled:                      true
+        #   <<:                           *album_mimi_rutherfurt_yt
+        #   title:                        Ein Vater wird geboren
+        #   audio:                        watch?v=9LojTw98Fks
+        #   rating:                       5
+        #   start:                        "00:00:03"
+        #   end:                          "00:16:53"
+        #   audio_info:                   //youtube.com/watch?v=9LojTw98Fks
+        #   cover_image:                  //img.youtube.com/vi/9LojTw98Fks/maxresdefault.jpg
+        #   duration:                     "02:55:35"
+
+        # # title 00
+        # - item:
+        #   enabled:                      true
+        #   <<:                           *album_mimi_rutherfurt_yt
+        #   title:                        Baby Sitting
+        #   audio:                        watch?v=9LojTw98Fks
+        #   rating:                       4
+        #   start:                        "00:16:55"
+        #   end:                          "00:28:34"
+        #   audio_info:                   //youtube.com/watch?v=9LojTw98Fks
+        #   cover_image:                  //img.youtube.com/vi/9LojTw98Fks/maxresdefault.jpg
+        #   duration:                     "02:55:35"
 
         # title 01
         - item:

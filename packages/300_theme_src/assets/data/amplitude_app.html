@@ -38,7 +38,7 @@ exclude_from_search:                    true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign environment           = site.environment %}
 
-{% assign amplitude_defaults    = modules.defaults.amplitude_app.defaults %}
+{% assign amplitude_defaults    = modules.defaults.amplitude.defaults %}
 {% assign amplitude_players     = modules.amplitude_app.settings %}
 {% assign amplitude_playlists   = modules.amplitude_playlists.settings %}
 
@@ -749,14 +749,14 @@ exclude_from_search:                    true
               <div class="large-player-controls-container">
                 {% if shuffle_button %}
                 <div
-                  id="large_player_shuffle"
+                  id="large_player_shuffle_{{player_id}}"
                   class="large-player-shuffle-{{player_id}} amplitude-shuffle amplitude-shuffle-off"
                   data-amplitude-source="{{source_media_attribute}}"
                   data-amplitude-playlist="{{player_playlist}}">
                 </div>
                 {% endif %}
                 <div
-                  id="large_player_previous"
+                  id="large_player_previous_{{player_id}}"
                   class="large-player-previous-{{player_id}} large-player-previous amplitude-prev"
                   data-amplitude-source="{{source_media_attribute}}"
                   data-amplitude-playlist="{{player_playlist}}">
@@ -770,7 +770,7 @@ exclude_from_search:                    true
                 </div>
                 {% endif %}
                 <div
-                  id="large_player_play_pause"
+                  id="large_player_play_pause_{{player_id}}"
                   class="large-player-play-pause-{{player_id}} large-player-play-pause amplitude-play-pause amplitude-paused"
                   data-amplitude-source="{{source_media_attribute}}"
                   data-amplitude-playlist="{{player_playlist}}">
@@ -784,14 +784,14 @@ exclude_from_search:                    true
                 </div>
                 {% endif %}
                 <div
-                  id="large_player_next"
+                  id="large_player_next_{{player_id}}"
                   class="large-player-next-{{player_id}} large-player-next amplitude-next"
                   data-amplitude-source="{{source_media_attribute}}"
                   data-amplitude-playlist="{{player_playlist}}">
                 </div>
                 {% if repeat_button %}
                 <div
-                  id="large_player_repeat"
+                  id="large_player_repeat_{{player_id}}"
                   class="large-player-repeat-{{player_id}} large-player-repeat amplitude-repeat amplitude-repeat-off"
                   data-amplitude-source="{{source_media_attribute}}"
                   data-amplitude-playlist="{{player_playlist}}">

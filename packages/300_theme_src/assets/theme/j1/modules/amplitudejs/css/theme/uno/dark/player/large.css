@@ -280,8 +280,8 @@ div.large-player-play-pause.amplitude-playing {
   margin-right: 12px;
 }
 .audio-duration {
-  float: left;
-  margin-left: 103px;
+  float: right;
+  /* margin-left: 103px; */
   font-family: "Lato", sans-serif;
   font-size: 16px;
   color: var(--ajs-theme-uno--gray-300);

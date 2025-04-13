@@ -85,6 +85,9 @@ settings:
       #
       song_progress_bar:                true
       skip_forward_backward_button:     true
+      volume_slider:
+        enabled:                        true
+        preset_value:                   50
 
       playlist:
         name:                           free_disco
@@ -115,9 +118,9 @@ settings:
       #
       song_progress_bar:                true
       skip_forward_backward_button:     true
-      volume_slider:
-        enabled:                        true
-        preset_value:                   50
+      # volume_slider:
+      #   enabled:                        true
+      #   preset_value:                   50
 
       playlist:
         name:                           free_disco
@@ -233,6 +236,7 @@ settings:
       id:                               ephraim_kishon_yt_large
       type:                             large
       source:                           video
+      loop:                             false
       display_hours:                    true
 
       # ------------------------------------------------------------------------
@@ -241,6 +245,8 @@ settings:
       song_progress_bar:                true
       skip_forward_backward_button:     true
       forward_backward_skip_seconds:    60
+      delay_after_video_loaded:         750
+
       volume_slider:
         enabled:                        true
         preset_value:                   50
@@ -320,7 +326,7 @@ settings:
       id:                               mimi_rutherfurt_yt_large
       type:                             large
       source:                           video
-      display_hours:                    true
+      display_hours:                    false
 
       # ------------------------------------------------------------------------
       # CONTROL settings

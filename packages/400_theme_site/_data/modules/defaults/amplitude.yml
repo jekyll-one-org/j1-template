@@ -262,8 +262,9 @@ defaults:
     # --------------------------------------------------------------------------
     # GENERAL settings
     #    
-    type:                               compact                                 # default player type compact|large
+    type:                               large                                   # default player type compact|large
     source:                             audio                                   # default player source audio|video
+    loop:                               false                                   # true|false, start playing on FIRST item
     display_hours:                      false                                   # use hours for timestamps in time container
   
     audio_fade_animated:                true
@@ -305,12 +306,15 @@ defaults:
       name:                             [ bar ]                                 # prepared as an array to support multiple visualizations (NOT supported yet)
 
     # --------------------------------------------------------------------------
-    # CONTROL BUTTON settings
+    # CONTROL settings
     #
+    delay_after_video_loaded:           500                                     # 0..1000 (ms), delay after yt video loaded
     shuffle_button:                     false                                   # true|false, shuffle button (currently NOT supported)
     repeat_button:                      false                                   # true|false, repeat  button (currently NOT supported)
     song_progress_bar:                  false                                   # true|false, show progressbar in player
     skip_forward_backward_button:       false
+    do_previous_button_on_first:        none                                    # none|last,  item to select on click
+    do_next_button_on_last:             first                                   # none|first, item to select on click
 
     skip_buttons:
       enabled:                          true                                    # true|false, enable skip buttion in player
@@ -330,13 +334,11 @@ defaults:
     playlist:
       audio_info:                       true                                    # true|false, show info button in playlist
       audio_rating:                     true                                    # true|false, show ratings in playlist
+      audio_single:                     false                                   # true|false, a single audio (video) file used
+      audio_fade:                       false                                   # true|false, fadeIn|Out audio on start|end (if configured)
       controls:                         false                                   # true|false, show control buttons in playlist (currently NOT supported for YTP)
       start:                            false                                   # false|timestanp, set video|audio start position
       end:                              false                                   # false|timestanp, set video|audio start position
-
-      tracks:
-        enabled:                        false                                   # true|false, generate chapter list for YTP (currently NOT supported)
-        vtt_file:                       false                                   # string (filename, e.g. /assets/audio/tracks/captions.vtt)
 
 # ------------------------------------------------------------------------------
 # END config
