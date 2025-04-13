@@ -61,6 +61,7 @@ settings:
         - item:
           enabled:                      true
           <<:                           *album_ephraim_kishon_yt
+          #track:                        1
           title:                        Ein Vater wird geboren
           rating:                       4
           start:                        "00:00:03"
@@ -71,6 +72,7 @@ settings:
         - item:
           enabled:                      true
           <<:                           *album_ephraim_kishon_yt
+          #track:                        2
           title:                        Baby Sitting und was man dafür tun muß
           rating:                       3
           start:                        "00:16:55"
@@ -81,9 +83,10 @@ settings:
         - item:
           enabled:                      true
           <<:                           *album_ephraim_kishon_yt
+          #track:                        3
           title:                        Schreckens Rotkäppchen
           rating:                       2
-          start:                        "00:28:37"
+          start:                        "00:28:36"
           end:                          "00:33:57"
           duration:                     "00:05:20"
 

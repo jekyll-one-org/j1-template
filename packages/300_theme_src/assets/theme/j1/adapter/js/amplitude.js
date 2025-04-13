@@ -431,6 +431,7 @@ j1.adapter.amplitude = ((j1, window) => {
           {% capture song_item %}
           {
             "name":           "{{item.title}}",
+            "track":          "{{item.track}}",
             "artist":         "{{item.artist}}",
             "album":          "{{item.name}}",
             "url":            "{{item.audio_base}}/{{item.audio}}",
