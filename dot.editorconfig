@@ -1,0 +1,16 @@
+root = true
+
+[*]
+# Allgemeine Einstellungen für alle Dateitypen
+indent_style = space
+indent_size = 2
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+end_of_line = lf
+
+[*.js]
+# Spezifische Einstellungen für deine Template-Dateien
+# Hier kannst du festlegen, dass VS Code diese Dateien
+# nicht als JavaScript parsen soll.
+type = text
