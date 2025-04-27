@@ -760,39 +760,90 @@ j1.adapter.amplitude = ((j1, window) => {
           return;
         }
 
-        if (state === AT_PLAYER_STATE.PLAYING) {
-        
-          logger.debug('\n' + 'audio at trackID|state: ' + trackID + '|' + AT_PLAYER_STATE_NAMES[state]);
+        if (state === AT_PLAYER_STATE.PLAYING) {    
+          // playlist      = Amplitude.getActivePlaylist();
+          // songs         = Amplitude.getSongsInPlaylist(playlist);
+          songMetaData  = Amplitude.getActiveSongMetadata();
+          // songIndex     = Amplitude.getActiveIndex();
+          songEndTS     = songMetaData.end;
+          songEndSec    = timestamp2seconds(songEndTS); 
+          songStartTS   = songMetaData.start;
+          songStartSec  = timestamp2seconds(songStartTS);          
 
+          logger.debug('\n' + 'audio at trackID|state: ' + trackID + '|' + AT_PLAYER_STATE_NAMES[state]);
           // return;
 
-          // check|process audio for configured START position
-          var isPlaying = setInterval (() => {
-            songMetaData      = Amplitude.getActiveSongMetadata();
-            songIndex         = songMetaData.index;
-            songStartTS       = songMetaData.start;
-            songEndTS         = songMetaData.end;
-            songStartSec      = timestamp2seconds(songStartTS);
-            songEndSec        = timestamp2seconds(songEndTS);     
+          if (songStartTS) {
+            // check|process audio for configured START position
+            var isPlaying = setInterval (() => {
+              // songMetaData  = Amplitude.getActiveSongMetadata();
+              // songIndex     = songMetaData.index;
+              // songStartTS   = songs[songIndex].start;
+              songStartSec  = timestamp2seconds(songStartTS);  
 
-            // process audio for configured START position
-            // NOTE: check currentAudioTime to prevent reentrance
-            // NOTE: check currentAudioTime > 0 to make sure that the active audio is PLAYING.
-            //       Required to get correct values from AmplitudeJS API calls
+              // process audio for configured START position
+              // NOTE: check currentAudioTime to prevent reentrance
+              // NOTE: check currentAudioTime > 0 to make sure that the active audio is PLAYING.
+              //       Required to get correct values from AmplitudeJS API calls
+              var currentAudioTime = Amplitude.getSongPlayedSeconds();
+              if (songStartSec && currentAudioTime > 0 && currentAudioTime <= songStartSec) {              
+                // seek audio to configured START position
+                Amplitude.skipTo(songStartSec, songIndex, playlist);
+
+                logger.debug('\n' + 'start audio at trackID|timestamp: ' + trackID + '|' + songStartTS);
+
+                // audio FadeIn on song position START
+                // fadeAudio && fadeAudioIn();
+                //logger.debug('\n' + 'fade-in current video at track|second: ' + trackID + '|' + songStartSec);
+
+                clearInterval(isPlaying);
+              }  // END if songStartSec
+            }, 10); // END isPlaying        
+          } // END if songStartTS
+
+          return;
+
+        // check|process audio for configured END position
+        // -------------------------------------------------------------------
+        // if (songEndSec) {
+          var checkOnVideoEnd = setInterval(function() {
+            songMetaData = Amplitude.getActiveSongMetadata();
+            songIndex    = songMetaData.index;
+
+            var duration         = Amplitude.getSongDuration();
             var currentAudioTime = Amplitude.getSongPlayedSeconds();
-            if (songStartSec && currentAudioTime > 0 && currentAudioTime <= songStartSec) {              
-              // seek audio to configured START position
-              Amplitude.skipTo(songStartSec, songIndex, playlist);
+            if (songEndSec && currentAudioTime >= songEndSec && currentAudioTime < duration - 1) {
+              songMetaData      = Amplitude.getActiveSongMetadata();
+              songIndex         = songMetaData.index;
 
-              logger.debug('\n' + 'start audio at trackID|timestamp: ' + trackID + '|' + songStartTS);
+              // fade-out audio on video|song END
+              // fadeAudio && fadeAudioOut();
+              // logger.debug('\n' + 'fade-out current audio at track|second: ' + trackID + '|' + songEndSec);
 
-              // audio FadeIn on song position START
-              // fadeAudio && fadeAudioIn();
-              //logger.debug('\n' + 'fade-in current video at track|second: ' + trackID + '|' + songStartSec);
+              // skip current audio to the END
+              logger.debug('\n' + 'stop audio at trackID|timestamp: ' + trackID + '|' + songEndTS);
+              // Amplitude.setSongPlayedPercentage(99.99);
+              Amplitude.skipTo(duration, songIndex, playlist);
 
-              clearInterval(isPlaying);
-            }  // END if songStartSec
-          }, 250); // END isPlaying
+              // var duration          = Amplitude.getSongDuration();
+              
+              // Amplitude.stop();
+              // Amplitude.playNow(songMetaData);
+              // Amplitude.next(playlist);
+
+              // PAUSE player on LAST audio
+              if (songIndex === songs.length-1) {
+                logger.debug('\n' + 'paused player at trackID: ' + songIndex + 1);
+                Amplitude.pause();
+              }
+
+              clearInterval(checkOnVideoEnd);
+            }
+          }, 10);
+
+        // } // END if songEndSec
+
+
 
 
       } // END AT_PLAYER_STATE PLAYING

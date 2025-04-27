@@ -46,7 +46,7 @@ settings:
       # ------------------------------------------------------------------------
       # PLAYER settings
       #
-      id:                               free_disco_mini
+      id:                               disco_mini
       type:                             mini
 
       # ------------------------------------------------------------------------
@@ -71,7 +71,7 @@ settings:
       # ------------------------------------------------------------------------
       # PLAYER settings
       #
-      id:                               free_disco_compact
+      id:                               disco_compact
       type:                             compact
       audio_info:                       true
       audio_rating:                     true
@@ -104,7 +104,7 @@ settings:
       # ------------------------------------------------------------------------
       # PLAYER settings
       #
-      id:                               free_disco_large
+      id:                               disco_large
       type:                             large
       audio_info:                       true
       audio_rating:                     true
@@ -149,7 +149,7 @@ settings:
       # ------------------------------------------------------------------------
       # PLAYER settings
       #
-      id:                               free_emancipator_mini
+      id:                               emancipator_mini
       type:                             mini
 
       playlist:
@@ -175,7 +175,7 @@ settings:
       # ------------------------------------------------------------------------
       # PLAYER settings
       #
-      id:                               free_emancipator_compact
+      id:                               emancipator_compact
       type:                             compact
       audio_info:                       true
       audio_rating:                     true
@@ -212,7 +212,7 @@ settings:
       # ------------------------------------------------------------------------
       # PLAYER settings
       #
-      id:                               free_emancipator_large
+      id:                               emancipator_large
       type:                             large
       audio_info:                       true
       audio_rating:                     true
@@ -223,7 +223,7 @@ settings:
         controls:                       false
 
     # --------------------------------------------------------------------------
-    # LARGE player, Ephraim Kishon
+    # LARGE player, Ephraim Kishon - Beste Familiengeschichten
     # --------------------------------------------------------------------------
     #
     - player:
@@ -233,7 +233,7 @@ settings:
       #     
       enabled:                          true
 
-      id:                               ephraim_kishon_yt_large
+      id:                               ephraim_kishon_beste_familiengeschichten_yt_large
       type:                             large
       source:                           video
       loop:                             false
@@ -262,10 +262,55 @@ settings:
       # PLAYLIST settings
       #
       playlist:
-        name:                           ephraim_kishon_yt
+        name:                           ephraim_kishon_beste_familiengeschichten_yt
         title:                          Ephraim Kishon
         audio_info:                     true
         audio_rating:                   true     
+
+    # --------------------------------------------------------------------------
+    # LARGE player, Ephraim Kishon - Beste Autofahrergeschichten
+    # --------------------------------------------------------------------------
+    #
+    - player:
+
+      # ------------------------------------------------------------------------
+      # GENERAL settings
+      #     
+      enabled:                          true
+
+      id:                               ephraim_kishon_beste_autofahrer_geschichten_yt_large
+      type:                             large
+      source:                           video
+      loop:                             false
+      display_hours:                    true
+
+      # ------------------------------------------------------------------------
+      # CONTROL settings
+      #
+      song_progress_bar:                true
+      skip_forward_backward_button:     true
+      forward_backward_skip_seconds:    60
+      delay_after_video_loaded:         750
+
+      volume_slider:
+        enabled:                        true
+        preset_value:                   50
+
+      # ------------------------------------------------------------------------
+      # PLUGIN settings
+      #
+      plugin_manager:
+        enabled:                        true
+        plugins:                        [ ytp ]
+
+      # ------------------------------------------------------------------------
+      # PLAYLIST settings
+      #
+      playlist:
+        name:                           ephraim_kishon_beste_autofahrer_geschichten_yt
+        title:                          Ephraim Kishon
+        audio_info:                     true
+        audio_rating:                   true   
 
     # --------------------------------------------------------------------------
     # LARGE player, Manon Mélodie

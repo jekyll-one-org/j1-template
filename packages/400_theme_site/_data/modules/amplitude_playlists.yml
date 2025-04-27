@@ -30,19 +30,19 @@ settings:
   playlists:
 
     # --------------------------------------------------------------------------
-    #  Ephraim Kishon, Single Video/Multiple tracks
+    #  Ephraim Kishon, Beste Familiengeschichten
     # --------------------------------------------------------------------------
     #
     - playlist:
       enabled:                          true
 
-      name:                             ephraim_kishon_yt
+      name:                             ephraim_kishon_beste_familiengeschichten_yt
       title:                            Ephraim Kishon
 
       # ------------------------------------------------------------------------
       # ALBUM settings
       # ------------------------------------------------------------------------
-      album:                            &album_ephraim_kishon_yt
+      album:                            &album_ephraim_kishon_beste_familiengeschichten_yt
         name:                           Ephraim Kishon
         artist:                         Beste Familiengeschichten
         audio_single:                   true
@@ -60,8 +60,7 @@ settings:
         # title 01
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_yt
-          #track:                        1
+          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
           title:                        Ein Vater wird geboren
           rating:                       4
           start:                        "00:00:03"
@@ -71,8 +70,7 @@ settings:
         # title 02
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_yt
-          #track:                        2
+          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
           title:                        Baby Sitting und was man dafür tun muß
           rating:                       3
           start:                        "00:16:55"
@@ -82,8 +80,7 @@ settings:
         # title 03
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_yt
-          #track:                        3
+          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
           title:                        Schreckens Rotkäppchen
           rating:                       2
           start:                        "00:28:36"
@@ -93,7 +90,7 @@ settings:
         # title 04
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_yt
+          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
           title:                        Kontakt mit Linsen
           rating:                       4
           start:                        "00:34:00"
@@ -103,7 +100,7 @@ settings:
         # title 05
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_yt
+          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
           title:                        Auf Mäusesuche
           rating:                       4
           start:                        "00:46:00"
@@ -113,7 +110,7 @@ settings:
         # title 06
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_yt
+          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
           title:                        Das Wunderkind
           rating:                       2
           start:                        "00:54:36"
@@ -123,7 +120,7 @@ settings:
         # title 07
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_yt
+          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
           title:                        Ein Fläschchen für's Kätzchen
           rating:                       3
           start:                        "01:01:13"
@@ -133,7 +130,7 @@ settings:
         # title 08
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_yt
+          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
           title:                        Die Stmme des Blutes
           rating:                       3
           start:                        "01:11:36"
@@ -143,7 +140,7 @@ settings:
         # title 09
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_yt
+          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
           title:                        Onkel Morris und das Kollosalgemälde
           rating:                       3
           start:                        "01:20:45"
@@ -153,7 +150,7 @@ settings:
         # title 10
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_yt
+          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
           title:                        Durch den Kakao gezogen 
           rating:                       4
           start:                        "01:34:08"
@@ -163,7 +160,7 @@ settings:
         # title 11
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_yt
+          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
           title:                        Ein Scnnuller Namens Zezie 
           rating:                       4
           start:                        "01:44:41"
@@ -173,7 +170,7 @@ settings:
         # title 12
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_yt
+          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
           title:                        Gefahren des Wachstums
           rating:                       4
           start:                        "01:54:08"
@@ -183,7 +180,7 @@ settings:
         # title 13
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_yt
+          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
           title:                        Wie man Freunde gewinnt
           rating:                       3
           start:                        "02:02:37"
@@ -193,7 +190,7 @@ settings:
         # title 14
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_yt
+          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
           title:                        Pedigree
           rating:                       4
           start:                        "02:10:35"
@@ -203,7 +200,7 @@ settings:
         # title 15
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_yt
+          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
           title:                        Dressur
           rating:                       4
           start:                        "02:22:29"
@@ -213,7 +210,7 @@ settings:
         # title 16
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_yt
+          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
           title:                        Die große Steak-Saga
           rating:                       3
           start:                        "02:31:48"
@@ -223,7 +220,7 @@ settings:
         # title 17
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_yt
+          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
           title:                        Der kluge Mann baut vor
           rating:                       3
           start:                        "02:39:56"
@@ -233,13 +230,75 @@ settings:
         # title 18
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_yt
+          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
           title:                        Vertrauen gegen Vertrauen
           rating:                       4
           start:                        "02:47:45"
           end:                          "02:55:15"
           duration:                     "00:07:30"
-    
+
+    # --------------------------------------------------------------------------
+    #  Ephraim Kishon, Beste Autofahrergeschichten
+    # --------------------------------------------------------------------------
+    #
+    - playlist:
+      enabled:                          true
+
+      name:                             ephraim_kishon_beste_autofahrer_geschichten_yt
+      title:                            Ephraim Kishon
+
+      # ------------------------------------------------------------------------
+      # ALBUM settings
+      # ------------------------------------------------------------------------
+      album:                            &album_ephraim_kishon_beste_autofahrer_geschichten_yt
+        name:                           Ephraim Kishon
+        artist:                         Beste Familiengeschichten
+        audio_single:                   true
+        audio_fade:                     false
+        audio_base:                     //youtube.com
+        cover_image:                    //img.youtube.com/vi/D2gVmGFa2wE/maxresdefault.jpg
+
+      # ------------------------------------------------------------------------
+      # TITLE settings (songs)
+      # ------------------------------------------------------------------------
+      items:
+
+        # title 01
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          audio:                        watch?v=D2gVmGFa2wE
+          audio_info:                   //youtube.com/watch?v=D2gVmGFa2wE
+          title:                        Süss ist die Rache
+          rating:                       3
+          start:                        "00:00:39"
+          end:                          "00:04:27"
+          duration:                     "00:03:48"
+
+        # title 02
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          audio:                        watch?v=D2gVmGFa2wE
+          audio_info:                   //youtube.com/watch?v=D2gVmGFa2wE
+          title:                        Non-stop Autostop
+          rating:                       3
+          start:                        "00:04:29"
+          end:                          "00:08:34"
+          duration:                     "00:04:05"
+
+        # title 03
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          audio:                        watch?v=D2gVmGFa2wE
+          audio_info:                   //youtube.com/watch?v=D2gVmGFa2wE
+          title:                        Privatparkplatz
+          rating:                       3
+          start:                        "00:08:35"
+          end:                          "00:12:03"
+          duration:                     "00:03:38"
+
     # --------------------------------------------------------------------------
     # Manon Mélodie
     # --------------------------------------------------------------------------
@@ -581,7 +640,7 @@ settings:
           duration:                     "01:20:24"
 
     # --------------------------------------------------------------------------
-    # Emancipator
+    # Emancipator - Royalty Free Music
     # --------------------------------------------------------------------------
     #
     - playlist:
@@ -610,6 +669,8 @@ settings:
           <<:                           *album_from_dusk_to_dawn
           title:                        First Snow
           rating:                       3
+          start:                        "00:01:00"
+          end:                          "00:01:10"
           audio:                        FirstSnow.mp3
           audio_info:                   //emancipator.bandcamp.com/
           cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn/soon-it-will-be-cold-enough.jpg
@@ -621,6 +682,8 @@ settings:
           <<:                           *album_from_dusk_to_dawn
           title:                        From Dusk To Dawn
           rating:                       3
+          start:                        "00:00:10"
+          end:                          "00:00:20"
           audio:                        DuskToDawn.mp3
           audio_info:                   //emancipator.bandcamp.com/
           cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn/from-dusk-to-dawn.jpg
@@ -632,6 +695,8 @@ settings:
           <<:                           *album_from_dusk_to_dawn
           title:                        Anthem
           rating:                       3
+          start:                        "00:00:10"
+          end:                          "00:00:20"          
           audio:                        Anthem.mp3
           audio_info:                   //emancipator.bandcamp.com/
           cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn/anthem.jpg
@@ -643,6 +708,8 @@ settings:
           <<:                           *album_from_dusk_to_dawn
           title:                        Safe In The Steep Cliffs
           rating:                       3
+          start:                        "00:00:10"
+          end:                          "00:00:20"
           audio:                        SafeInTheSteepCliffs.mp3
           audio_info:                   //emancipator.bandcamp.com/
           cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn/safe-in-the-steep-cliffs.jpg
@@ -678,6 +745,8 @@ settings:
           <<:                           *album_free_disco
           title:                        Dancefloor Fever
           rating:                       1
+          start:                        false
+          end:                          false
           audio:                        SoundsCrate-Dancefloor_Fever.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "02:27"
@@ -688,6 +757,8 @@ settings:
           <<:                           *album_free_disco
           title:                        Dance On Dance Off
           rating:                       1
+          start:                        false
+          end:                          false          
           audio:                        SoundsCrate-Dance_On_Dance_Off.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "02:14"
@@ -698,6 +769,8 @@ settings:
           <<:                           *album_free_disco
           title:                        Disco Flamingo
           rating:                       4
+          start:                        false
+          end:                          false          
           audio:                        SoundsCrate-Disco_Flamingo.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "02:19"
@@ -708,6 +781,8 @@ settings:
           <<:                           *album_free_disco
           title:                        Downtown
           rating:                       1
+          start:                        false
+          end:                          false          
           audio:                        SoundsCrate-Downtown.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "02:48"
@@ -718,6 +793,8 @@ settings:
           <<:                           *album_free_disco
           title:                        Electric Boogie
           rating:                       1
+          start:                        false
+          end:                          false
           audio:                        SoundsCrate-Electric_Boogie.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "02:19"
@@ -728,6 +805,8 @@ settings:
           <<:                           *album_free_disco
           title:                        Grand Central
           rating:                       1
+          start:                        false
+          end:                          false          
           audio:                        SoundsCrate-Grand_Central.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "02:33"
@@ -738,6 +817,8 @@ settings:
           <<:                           *album_free_disco
           title:                        In The Pocket
           rating:                       1
+          start:                        false
+          end:                          false          
           audio:                        SoundsCrate-In_The_Pocket.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "02:58"
@@ -748,6 +829,8 @@ settings:
           <<:                           *album_free_disco
           title:                        Lounge Life
           rating:                       1
+          start:                        false
+          end:                          false
           audio:                        SoundsCrate-Lounge_Life.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "02:34"
@@ -758,6 +841,8 @@ settings:
           <<:                           *album_free_disco
           title:                        Made For This
           rating:                       1
+          start:                        false
+          end:                          false
           audio:                        SoundsCrate-Made_For_This.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "02:13"
@@ -768,6 +853,8 @@ settings:
           <<:                           *album_free_disco
           title:                        Midnight Express
           rating:                       1
+          start:                        false
+          end:                          false
           audio:                        SoundsCrate-Midnight_Express.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "02:30"
@@ -778,6 +865,8 @@ settings:
           <<:                           *album_free_disco
           title:                        Nightrun
           rating:                       1
+          start:                        false
+          end:                          false
           audio:                        SoundsCrate-Nightrun.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "02:58"
@@ -788,6 +877,8 @@ settings:
           <<:                           *album_free_disco
           title:                        Saturday Night
           rating:                       1
+          start:                        false
+          end:                          false
           audio:                        SoundsCrate-Saturday_Night.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "02:02"
@@ -798,6 +889,8 @@ settings:
           <<:                           *album_free_disco
           title:                        Studio 45
           rating:                       1
+          start:                        false
+          end:                          false
           audio:                        SoundsCrate-Studio_45.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "01:56"
@@ -808,6 +901,8 @@ settings:
           <<:                           *album_free_disco
           title:                        Yes Sir I Can Disco
           rating:                       1
+          start:                        false
+          end:                          false
           audio:                        SoundsCrate-Yes_Sir_I_Can_Disco.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "02:21"
@@ -818,6 +913,8 @@ settings:
           <<:                           *album_free_disco
           title:                        Fashion Show
           rating:                       1
+          start:                        false
+          end:                          false
           audio:                        soundscrate-fashion-show.mp3
           audio_info:                   /sfx.productioncrate.com
           duration:                     "03:08"
@@ -828,6 +925,8 @@ settings:
           <<:                           *album_free_disco
           title:                        Loungy Disco
           rating:                       1
+          start:                        false
+          end:                          false
           audio:                        soundscrate-loungy-disco.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "03:04"
@@ -838,6 +937,8 @@ settings:
           <<:                           *album_free_disco
           title:                        Oakland Style
           rating:                       1
+          start:                        false
+          end:                          false
           audio:                        soundscrate-oakland-style.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "03:19"
@@ -848,6 +949,8 @@ settings:
           <<:                           *album_free_disco
           title:                        Funkish Vibe
           rating:                       1
+          start:                        false
+          end:                          false
           audio:                        soundscrate-funkish-vibe.mp3
           audio_info:                   //sfx.productioncrate.com
           duration:                     "02:38"
