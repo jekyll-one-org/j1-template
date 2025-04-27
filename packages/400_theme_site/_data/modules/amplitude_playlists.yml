@@ -332,8 +332,8 @@ settings:
           rating:                       2
           # start:                        false                                   # timestamp | false
           # end:                          false                                   # timestamp | false
-          # start:                        "00:00:10"
-          # end:                          "00:00:20"
+          # start:                        "00:00:30"
+          # end:                          "00:00:40"
           # start:                        "00:01:20"
           # end:                          "00:01:50"
           start:                        "00:01:00"
@@ -414,7 +414,7 @@ settings:
           title:                        Les Souvenirs                           # Erinnerungen
           audio:                        watch?v=i8ltW0WDcdQ
           rating:                       4
-          start:                        "00:00:10"
+          start:                        "00:00:30"
           end:                          "00:00:30"
           audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/i8ltW0WDcdQ/maxresdefault.jpg
@@ -657,6 +657,7 @@ settings:
         artist:                         Emancipator
         audio_base:                     /assets/audio/album/emancipator/from-dusk-to-dawn
         cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
+        audio_fade:                     false
 
       # ------------------------------------------------------------------------
       # Playlist Items (Songs)
@@ -682,8 +683,8 @@ settings:
           <<:                           *album_from_dusk_to_dawn
           title:                        From Dusk To Dawn
           rating:                       3
-          start:                        "00:00:10"
-          end:                          "00:00:20"
+          start:                        "00:00:30"
+          end:                          "00:00:40"
           audio:                        DuskToDawn.mp3
           audio_info:                   //emancipator.bandcamp.com/
           cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn/from-dusk-to-dawn.jpg
@@ -695,8 +696,8 @@ settings:
           <<:                           *album_from_dusk_to_dawn
           title:                        Anthem
           rating:                       3
-          start:                        "00:00:10"
-          end:                          "00:00:20"          
+          start:                        "00:00:30"
+          end:                          "00:00:40"          
           audio:                        Anthem.mp3
           audio_info:                   //emancipator.bandcamp.com/
           cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn/anthem.jpg
@@ -708,8 +709,8 @@ settings:
           <<:                           *album_from_dusk_to_dawn
           title:                        Safe In The Steep Cliffs
           rating:                       3
-          start:                        "00:00:10"
-          end:                          "00:00:20"
+          start:                        "00:00:30"
+          end:                          "00:00:40"
           audio:                        SafeInTheSteepCliffs.mp3
           audio_info:                   //emancipator.bandcamp.com/
           cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn/safe-in-the-steep-cliffs.jpg
@@ -733,6 +734,7 @@ settings:
         artist:                         Royalty Free Music
         audio_base:                     //p.productioncrate.com/stock-hd/audio
         cover_image:                    /assets/audio/cover/royalty_free/free_disco_sounds.jpg
+        audio_fade:                     false
 
       # ------------------------------------------------------------------------
       # Playlist Items (Songs)

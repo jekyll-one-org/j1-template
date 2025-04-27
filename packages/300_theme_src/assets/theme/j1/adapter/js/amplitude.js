@@ -723,17 +723,19 @@ j1.adapter.amplitude = ((j1, window) => {
       function onPlayerStateChange(state) {
         var playlist, player, songs, songIndex, songIndex, trackID,
             songStart, songEnd, songStartSec, songEndSec,
-            songStartTS, songEndTS, songMetaData;
+            songStartTS, songEndTS, songMetaData,
+            fadeAudio;
 
         playlist      = Amplitude.getActivePlaylist();
         player        = playlist + '_large';
         songs         = Amplitude.getSongsInPlaylist(playlist);
         songMetaData  = Amplitude.getActiveSongMetadata();
         songIndex     = songMetaData.index;
-        songEndTS     = songs[songIndex].end;
-        songEndSec    = timestamp2seconds(songEndTS);
         trackID       = songIndex + 1;
 
+        // songEndTS     = songs[songIndex].end;
+        // songEndSec    = timestamp2seconds(songEndTS);
+        
         if (state === AT_PLAYER_STATE.UNSTARTED) {
           // logger.debug('\n' + 'current audio state: unstarted');
           return;
@@ -768,32 +770,36 @@ j1.adapter.amplitude = ((j1, window) => {
 
           // check|process audio for configured START position
           var isPlaying = setInterval (() => {
-            songMetaData      = Amplitude.getActiveSongMetadata();
-            songIndex         = songMetaData.index;
-            songStartTS       = songMetaData.start;
-            songEndTS         = songMetaData.end;
-            songStartSec      = timestamp2seconds(songStartTS);
-            songEndSec        = timestamp2seconds(songEndTS);     
+            songMetaData  = Amplitude.getActiveSongMetadata();
+            songIndex     = songMetaData.index;
+            trackID       = songIndex + 1;
+            songStartTS   = songMetaData.start;
+            songEndTS     = songMetaData.end;
+            songStartSec  = timestamp2seconds(songStartTS);
+            songEndSec    = timestamp2seconds(songEndTS);
 
-            // process audio for configured START position
             // NOTE: check currentAudioTime to prevent reentrance
             // NOTE: check currentAudioTime > 0 to make sure that the active audio is PLAYING.
             //       Required to get correct values from AmplitudeJS API calls
+            // -----------------------------------------------------------------
+            // process audio for configured START position
             var currentAudioTime = Amplitude.getSongPlayedSeconds();
-            if (songStartSec && currentAudioTime > 0 && currentAudioTime <= songStartSec) {              
+            if (songStartSec && currentAudioTime > 0 && currentAudioTime <= songStartSec) {
+              fadeAudio = (songMetaData.audio_fade === 'true') ? true : false;
+
+              // fade-in audio on audio position START
+              if (fadeAudio) {
+                logger.debug('\n' + 'fade-in current audio at trackID|second: ' + trackID + '|' + songStartSec);
+                fadeAudioIn();
+              }              
+
               // seek audio to configured START position
+              logger.debug('\n' + 'start audio at trackID|timestamp: ' + trackID + '|' + songStartTS);
               Amplitude.skipTo(songStartSec, songIndex, playlist);
 
-              logger.debug('\n' + 'start audio at trackID|timestamp: ' + trackID + '|' + songStartTS);
-
-              // audio FadeIn on song position START
-              // fadeAudio && fadeAudioIn();
-              //logger.debug('\n' + 'fade-in current video at track|second: ' + trackID + '|' + songStartSec);
-
               clearInterval(isPlaying);
-            }  // END if songStartSec
+            } // END if songStartSec
           }, 250); // END isPlaying
-
 
       } // END AT_PLAYER_STATE PLAYING
 
