@@ -621,56 +621,60 @@ j1.adapter.amplitude = ((j1, window) => {
       } // END seconds2timestamp
 
       // -----------------------------------------------------------------------
-      // fadeAudioIn
+      // atpFadeInAudio
       // -----------------------------------------------------------------------
-      function fadeAudioIn(targetVolume=50, speed='default') {
-        var currentStep, steps,
-            playerId, sliderId, volumSlider;
-
+      function atpFadeInAudio(params) {
         const cycle = 1;
+        var   settings, currentStep, steps, sliderID, volumeSlider;
 
-        // number of iteration steps to INCREASE the volume to targetVolume
-        const speedSteps = {
-          'default':  150,
-          'slow': 	  250,
-          'slower':   350
+        // current fade-in settings using DEFAULTS (if available)
+        settings =  {
+          playerID:     params.playerID,
+          targetVolume: params.targetVolume = 50,
+          speed:        params.speed = 'default'
         };
 
-        playerId    = 'manon_melodie_yt_large';
-        sliderId    = 'volume_slider_' + playerId;
-        volumSlider = document.getElementById(sliderId);
+        // number of iteration steps to INCREASE the players volume on fade-in
+        // NOTE: number of steps controls how long and smooth the fade-in 
+        // transition will be
+        const iterationSteps = {
+          'default':  150,
+          'slow': 	  250,
+          'slower':   350,
+          'slowest':  500
+        };
 
-        steps       = speedSteps[speed];
-        currentStep = 1;
+        sliderID     = 'volume_slider_' + settings.playerID;
+        volumeSlider = document.getElementById(sliderID);
+        steps        = iterationSteps[settings.speed];
+        currentStep  = 1;
 
-        (ytPlayer.isMuted()) && ytPlayer.unMute();
-
-        // skip fade-in when volume is already at target value
-        if (ytPlayer.getVolume() >= targetVolume) {
-          logger.warn('\n' + 'skipped fade-in for current video on volume: ', targetVolume);
+        if (volumeSlider === undefined || volumeSlider === null) {
+          logger.warn('\n' + 'no volume slider found at playerID: ' + settings.playerID);
           return;
         }
 
-        if (volumSlider !== null) {
-          const fadeInInterval = setInterval(() => {
-            const newVolume = targetVolume * (currentStep / steps);
+        // Start the players volume muted
+        Amplitude.setVolume(0);
 
-            ytPlayer.setVolume(newVolume);
-            volumSlider.value = newVolume;
-            currentStep++;
+        const fadeInInterval = setInterval(() => {
+          const newVolume = settings.targetVolume * (currentStep / steps);
 
-            (currentStep > steps) && clearInterval(fadeInInterval);
-          }, cycle);
-        } // END if volumSlider
+          Amplitude.setVolume(newVolume);
+          volumeSlider.value = newVolume;
+          currentStep++;
 
-      } // END fadeAudioIn
+          (currentStep > steps) && clearInterval(fadeInInterval);
+        }, cycle);
+
+      } // END atpFadeInAudio
 
       // -----------------------------------------------------------------------
-      // fadeAudioOut
+      // atpFadeAudioOut
       // -----------------------------------------------------------------------
       function fadeAudioOut(speed='default') {
         var currentStep, steps, newVolume, startVolume,
-            playerId, sliderId, volumSlider;
+            playerId, sliderId, volumeSlider;
 
         const cycle = 1;
 
@@ -683,23 +687,23 @@ j1.adapter.amplitude = ((j1, window) => {
 
         playerId    = 'manon_melodie_yt_large';
         sliderId    = 'volume_slider_' + playerId;
-        volumSlider = document.getElementById(sliderId);
+        volumeSlider = document.getElementById(sliderId);
 
         startVolume = ytPlayer.getVolume();
         steps       = speedSteps[speed];
         currentStep = 0;
 
-        if (volumSlider !== null) {
+        if (volumeSlider !== null) {
           const fadeOutInterval = setInterval(() => {
             newVolume = startVolume * (1 - currentStep / steps);
 
             ytPlayer.setVolume(newVolume);
-            volumSlider.value = newVolume;
+            volumeSlider.value = newVolume;
             currentStep++;
 
             (currentStep > steps) && clearInterval(fadeOutInterval);
           }, cycle);
-        } // END if volumSlider
+        } // END if volumeSlider
 
       } // END fadeAudioOut
 
@@ -721,13 +725,13 @@ j1.adapter.amplitude = ((j1, window) => {
       // update AT player on state change        
       // -----------------------------------------------------------------------
       function onPlayerStateChange(state) {
-        var playlist, player, songs, songIndex, songIndex, trackID,
+        var playlist, playerID, songs, songIndex, songIndex, trackID,
             songStart, songEnd, songStartSec, songEndSec,
-            songStartTS, songEndTS, songMetaData,
+            songStartTS, songEndTS, songMetaData, currentVolume,
             fadeAudio;
 
         playlist      = Amplitude.getActivePlaylist();
-        player        = playlist + '_large';
+        playerID      = playlist + '_large';
         songs         = Amplitude.getSongsInPlaylist(playlist);
         songMetaData  = Amplitude.getActiveSongMetadata();
         songIndex     = songMetaData.index;
@@ -763,10 +767,7 @@ j1.adapter.amplitude = ((j1, window) => {
         }
 
         if (state === AT_PLAYER_STATE.PLAYING) {
-        
           logger.debug('\n' + 'audio at trackID|state: ' + trackID + '|' + AT_PLAYER_STATE_NAMES[state]);
-
-          // return;
 
           // check|process audio for configured START position
           var isPlaying = setInterval (() => {
@@ -777,6 +778,7 @@ j1.adapter.amplitude = ((j1, window) => {
             songEndTS     = songMetaData.end;
             songStartSec  = timestamp2seconds(songStartTS);
             songEndSec    = timestamp2seconds(songEndTS);
+            currentVolume = Amplitude.getVolume();
 
             // NOTE: check currentAudioTime to prevent reentrance
             // NOTE: check currentAudioTime > 0 to make sure that the active audio is PLAYING.
@@ -787,15 +789,15 @@ j1.adapter.amplitude = ((j1, window) => {
             if (songStartSec && currentAudioTime > 0 && currentAudioTime <= songStartSec) {
               fadeAudio = (songMetaData.audio_fade === 'true') ? true : false;
 
-              // fade-in audio on audio position START
-              if (fadeAudio) {
-                logger.debug('\n' + 'fade-in current audio at trackID|second: ' + trackID + '|' + songStartSec);
-                fadeAudioIn();
-              }              
-
               // seek audio to configured START position
               logger.debug('\n' + 'start audio at trackID|timestamp: ' + trackID + '|' + songStartTS);
               Amplitude.skipTo(songStartSec, songIndex, playlist);
+
+              // fade-in audio IN (if enabled)
+              if (fadeAudio) {
+                logger.debug('\n' + 'fade-in current audio at trackID|second: ' + trackID + '|' + songStartSec);
+                atpFadeInAudio({ playerID: playerID });
+              } // END if fadeAudio
 
               clearInterval(isPlaying);
             } // END if songStartSec
@@ -804,7 +806,7 @@ j1.adapter.amplitude = ((j1, window) => {
       } // END AT_PLAYER_STATE PLAYING
 
       // load|play NEXT|FIRST song (video) in playlist
-      // ---------------------------------------------------------------------
+      // -----------------------------------------------------------------------
       if (state === AT_PLAYER_STATE.ENDED) {
       } // END if AT_PLAYER_STATE.ENDED
 

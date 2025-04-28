@@ -657,7 +657,7 @@ settings:
         artist:                         Emancipator
         audio_base:                     /assets/audio/album/emancipator/from-dusk-to-dawn
         cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
-        audio_fade:                     false
+        audio_fade:                     true
 
       # ------------------------------------------------------------------------
       # Playlist Items (Songs)
