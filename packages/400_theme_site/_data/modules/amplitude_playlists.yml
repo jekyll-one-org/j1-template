@@ -254,9 +254,9 @@ settings:
         name:                           Ephraim Kishon
         artist:                         Beste Familiengeschichten
         audio_single:                   true
-        audio_fade:                     false
         audio_base:                     //youtube.com
         cover_image:                    //img.youtube.com/vi/D2gVmGFa2wE/maxresdefault.jpg
+        audio_fade:                     true
 
       # ------------------------------------------------------------------------
       # TITLE settings (songs)
@@ -317,6 +317,7 @@ settings:
         artist:                         Manon Mélodie
         audio_base:                     //youtube.com
         cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
+        audio_fade:                     true
 
       # ------------------------------------------------------------------------
       # TITLE settings (songs)

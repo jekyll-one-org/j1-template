@@ -182,28 +182,28 @@ link:{manon-melodie--playlist}[YouTube, {browser-window--new}].
 // amplitude::free_disco_large[role="mt-4 mb-5"]
 
 
-// [role="mt-4"]
-// [[manon_melodie]]
-// === Manon Mélodie
-
-// lorem:sentences[3]
-
-// .Manon Mélodie · YouTube 2025
-// amplitude::manon_melodie_yt_large[role="mb-5"]
-
-
 [role="mt-4"]
-=== Ephraim Kishon
-
-lorem:sentences[5]
-
-[role="mt-4"]
-==== Beste Familiengeschichten
+[[manon_melodie]]
+=== Manon Mélodie
 
 lorem:sentences[3]
 
-.Ephraim Kishon · Beste Familiengeschichten
-amplitude::ephraim_kishon_beste_familiengeschichten_yt_large[role="mb-5"]
+.Manon Mélodie · YouTube 2025
+amplitude::manon_melodie_yt_large[role="mb-5"]
+
+
+// [role="mt-4"]
+// === Ephraim Kishon
+
+// lorem:sentences[5]
+
+// [role="mt-4"]
+// ==== Beste Familiengeschichten
+
+// lorem:sentences[3]
+
+// .Ephraim Kishon · Beste Familiengeschichten
+// amplitude::ephraim_kishon_beste_familiengeschichten_yt_large[role="mb-5"]
 
 
 // [role="mt-4"]
@@ -221,7 +221,7 @@ amplitude::ephraim_kishon_beste_familiengeschichten_yt_large[role="mb-5"]
 // lorem:sentences[3]
 
 // .Mimi Rutherfurt · Maritim Verlag
-// amplitude::mimi_rutherfurt_yt_large[role="mt-4 mb-5"]
+// amplitude::mimi_rutherfurt_yt_large[role="mb-5"]
 
 
 // [role="mt-4"]
@@ -231,7 +231,7 @@ amplitude::ephraim_kishon_beste_familiengeschichten_yt_large[role="mb-5"]
 // lorem:sentences[3]
 
 // .Die größten Fälle des BND · Maritim Verlag
-// amplitude::faelle_des_bnd_yt_large[role="mt-4 mb-5"]
+// amplitude::faelle_des_bnd_yt_large[role="mb-5"]
 
 endif::[]
 
@@ -255,7 +255,7 @@ ifeval::[{ms-slider-video--example} == true]
 lorem:sentences[5]
 
 .Slider using Video
-masterslider::ms_00010[role="mt-4 mb-5"]
+masterslider::ms_00010[role="mb-5"]
 
 
 [role="mt-5"]
@@ -266,7 +266,7 @@ upload, view, share, and comment on videos. The platform provides services
 for people and organizations to publish various video content.
 
 .Fortnight (feat. Post Malone, Official Music Video) · Taylor Swift
-youtube::q3zqJs7JUCQ[poster="//img.youtube.com/vi/q3zqJs7JUCQ/maxresdefault.jpg" role="mt-4 mb-5"]
+youtube::q3zqJs7JUCQ[poster="//img.youtube.com/vi/q3zqJs7JUCQ/maxresdefault.jpg" role="mb-5"]
 
 
 [role="mt-5"]
@@ -276,5 +276,5 @@ VideoJS provides a flexible and customizable platform for displaying and
 controlling MPEG 4 video content on websites and web applications.
 
 .Video over VideoJS
-gallery::jg_video_html5_videojs[role="mt-4 mb-5"]
+gallery::jg_video_html5_videojs[role="mb-5"]
 endif::[]
