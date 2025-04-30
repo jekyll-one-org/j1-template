@@ -626,7 +626,7 @@ var progress;
         {% continue %}
       {% else %}
         // load players of type 'video' configured in current page
-        //
+        // ---------------------------------------------------------------------
         playerExistsInPage = ($('#' + '{{xhr_container_id}}')[0] !== undefined) ? true : false;
         if (playerExistsInPage) { 
           var playerSettings     = $.extend({}, {{player | replace: 'nil', 'null' | replace: '=>', ':' }});
@@ -2203,7 +2203,7 @@ var progress;
       } // END for
     } // END if progressBars
 
-    // add listeners to all volume_sliders found
+    // add listeners to all volume sliders found
     // TODO: Fix for multiple players in page
     // -------------------------------------------------------------------------
     var volumeSliders = document.getElementsByClassName("amplitude-volume-slider");
@@ -2224,7 +2224,7 @@ var progress;
             var currenVolume = ytPlayer.getVolume();
 
             volumeSlider = this;
-            volumeValue = 50;  // default
+            volumeValue  = 50;  // default
 
             if (volumeSlider !== null) {
               volumeValue = parseInt(volumeSlider.value);

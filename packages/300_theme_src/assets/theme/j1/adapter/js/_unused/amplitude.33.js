@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/amplitude.js
+ # ~/assets/theme/j1/adapter/js/amplitude.33.js
  # Liquid template to adapt J1 AmplitudeJS Apps
  #
  # Product/Info:
@@ -63,7 +63,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/amplitude.js
+ # ~/assets/theme/j1/adapter/js/amplitude.33.js
  # J1 Adapter for the amplitude module
  #
  # Product/Info:
@@ -621,56 +621,60 @@ j1.adapter.amplitude = ((j1, window) => {
       } // END seconds2timestamp
 
       // -----------------------------------------------------------------------
-      // fadeAudioIn
+      // atpFadeInAudio
       // -----------------------------------------------------------------------
-      function fadeAudioIn(targetVolume=50, speed='default') {
-        var currentStep, steps,
-            playerId, sliderId, volumSlider;
-
+      function atpFadeInAudio(params) {
         const cycle = 1;
+        var   settings, currentStep, steps, sliderID, volumeSlider;
 
-        // number of iteration steps to INCREASE the volume to targetVolume
-        const speedSteps = {
-          'default':  150,
-          'slow': 	  250,
-          'slower':   350
+        // current fade-in settings using DEFAULTS (if available)
+        settings =  {
+          playerID:     params.playerID,
+          targetVolume: params.targetVolume = 50,
+          speed:        params.speed = 'default'
         };
 
-        playerId    = 'manon_melodie_yt_large';
-        sliderId    = 'volume_slider_' + playerId;
-        volumSlider = document.getElementById(sliderId);
+        // number of iteration steps to INCREASE the players volume on fade-in
+        // NOTE: number of steps controls how long and smooth the fade-in 
+        // transition will be
+        const iterationSteps = {
+          'default':  150,
+          'slow': 	  250,
+          'slower':   350,
+          'slowest':  500
+        };
 
-        steps       = speedSteps[speed];
-        currentStep = 1;
+        sliderID     = 'volume_slider_' + settings.playerID;
+        volumeSlider = document.getElementById(sliderID);
+        steps        = iterationSteps[settings.speed];
+        currentStep  = 1;
 
-        (ytPlayer.isMuted()) && ytPlayer.unMute();
-
-        // skip fade-in when volume is already at target value
-        if (ytPlayer.getVolume() >= targetVolume) {
-          logger.warn('\n' + 'skipped fade-in for current video on volume: ', targetVolume);
+        if (volumeSlider === undefined || volumeSlider === null) {
+          logger.warn('\n' + 'no volume slider found at playerID: ' + settings.playerID);
           return;
         }
 
-        if (volumSlider !== null) {
-          const fadeInInterval = setInterval(() => {
-            const newVolume = targetVolume * (currentStep / steps);
+        // Start the players volume muted
+        Amplitude.setVolume(0);
 
-            ytPlayer.setVolume(newVolume);
-            volumSlider.value = newVolume;
-            currentStep++;
+        const fadeInInterval = setInterval(() => {
+          const newVolume = settings.targetVolume * (currentStep / steps);
 
-            (currentStep > steps) && clearInterval(fadeInInterval);
-          }, cycle);
-        } // END if volumSlider
+          Amplitude.setVolume(newVolume);
+          volumeSlider.value = newVolume;
+          currentStep++;
 
-      } // END fadeAudioIn
+          (currentStep > steps) && clearInterval(fadeInInterval);
+        }, cycle);
+
+      } // END atpFadeInAudio
 
       // -----------------------------------------------------------------------
-      // fadeAudioOut
+      // atpFadeAudioOut
       // -----------------------------------------------------------------------
       function fadeAudioOut(speed='default') {
         var currentStep, steps, newVolume, startVolume,
-            playerId, sliderId, volumSlider;
+            playerId, sliderId, volumeSlider;
 
         const cycle = 1;
 
@@ -683,23 +687,23 @@ j1.adapter.amplitude = ((j1, window) => {
 
         playerId    = 'manon_melodie_yt_large';
         sliderId    = 'volume_slider_' + playerId;
-        volumSlider = document.getElementById(sliderId);
+        volumeSlider = document.getElementById(sliderId);
 
         startVolume = ytPlayer.getVolume();
         steps       = speedSteps[speed];
         currentStep = 0;
 
-        if (volumSlider !== null) {
+        if (volumeSlider !== null) {
           const fadeOutInterval = setInterval(() => {
             newVolume = startVolume * (1 - currentStep / steps);
 
             ytPlayer.setVolume(newVolume);
-            volumSlider.value = newVolume;
+            volumeSlider.value = newVolume;
             currentStep++;
 
             (currentStep > steps) && clearInterval(fadeOutInterval);
           }, cycle);
-        } // END if volumSlider
+        } // END if volumeSlider
 
       } // END fadeAudioOut
 
@@ -721,19 +725,21 @@ j1.adapter.amplitude = ((j1, window) => {
       // update AT player on state change        
       // -----------------------------------------------------------------------
       function onPlayerStateChange(state) {
-        var playlist, player, songs, songIndex, songIndex, trackID,
+        var playlist, playerID, songs, songIndex, songIndex, trackID,
             songStart, songEnd, songStartSec, songEndSec,
-            songStartTS, songEndTS, songMetaData;
+            songStartTS, songEndTS, songMetaData, currentVolume,
+            fadeAudio;
 
         playlist      = Amplitude.getActivePlaylist();
-        player        = playlist + '_large';
+        playerID      = playlist + '_large';
         songs         = Amplitude.getSongsInPlaylist(playlist);
         songMetaData  = Amplitude.getActiveSongMetadata();
         songIndex     = songMetaData.index;
-        songEndTS     = songs[songIndex].end;
-        songEndSec    = timestamp2seconds(songEndTS);
         trackID       = songIndex + 1;
 
+        // songEndTS     = songs[songIndex].end;
+        // songEndSec    = timestamp2seconds(songEndTS);
+        
         if (state === AT_PLAYER_STATE.UNSTARTED) {
           // logger.debug('\n' + 'current audio state: unstarted');
           return;
@@ -760,96 +766,47 @@ j1.adapter.amplitude = ((j1, window) => {
           return;
         }
 
-        if (state === AT_PLAYER_STATE.PLAYING) {    
-          // playlist      = Amplitude.getActivePlaylist();
-          // songs         = Amplitude.getSongsInPlaylist(playlist);
-          songMetaData  = Amplitude.getActiveSongMetadata();
-          // songIndex     = Amplitude.getActiveIndex();
-          songEndTS     = songMetaData.end;
-          songEndSec    = timestamp2seconds(songEndTS); 
-          songStartTS   = songMetaData.start;
-          songStartSec  = timestamp2seconds(songStartTS);          
-
+        if (state === AT_PLAYER_STATE.PLAYING) {
           logger.debug('\n' + 'audio at trackID|state: ' + trackID + '|' + AT_PLAYER_STATE_NAMES[state]);
-          // return;
 
-          if (songStartTS) {
-            // check|process audio for configured START position
-            var isPlaying = setInterval (() => {
-              // songMetaData  = Amplitude.getActiveSongMetadata();
-              // songIndex     = songMetaData.index;
-              // songStartTS   = songs[songIndex].start;
-              songStartSec  = timestamp2seconds(songStartTS);  
+          // check|process audio for configured START position
+          var isPlaying = setInterval (() => {
+            songMetaData  = Amplitude.getActiveSongMetadata();
+            songIndex     = songMetaData.index;
+            trackID       = songIndex + 1;
+            songStartTS   = songMetaData.start;
+            songEndTS     = songMetaData.end;
+            songStartSec  = timestamp2seconds(songStartTS);
+            songEndSec    = timestamp2seconds(songEndTS);
+            currentVolume = Amplitude.getVolume();
 
-              // process audio for configured START position
-              // NOTE: check currentAudioTime to prevent reentrance
-              // NOTE: check currentAudioTime > 0 to make sure that the active audio is PLAYING.
-              //       Required to get correct values from AmplitudeJS API calls
-              var currentAudioTime = Amplitude.getSongPlayedSeconds();
-              if (songStartSec && currentAudioTime > 0 && currentAudioTime <= songStartSec) {              
-                // seek audio to configured START position
-                Amplitude.skipTo(songStartSec, songIndex, playlist);
-
-                logger.debug('\n' + 'start audio at trackID|timestamp: ' + trackID + '|' + songStartTS);
-
-                // audio FadeIn on song position START
-                // fadeAudio && fadeAudioIn();
-                //logger.debug('\n' + 'fade-in current video at track|second: ' + trackID + '|' + songStartSec);
-
-                clearInterval(isPlaying);
-              }  // END if songStartSec
-            }, 10); // END isPlaying        
-          } // END if songStartTS
-
-          return;
-
-        // check|process audio for configured END position
-        // -------------------------------------------------------------------
-        // if (songEndSec) {
-          var checkOnVideoEnd = setInterval(function() {
-            songMetaData = Amplitude.getActiveSongMetadata();
-            songIndex    = songMetaData.index;
-
-            var duration         = Amplitude.getSongDuration();
+            // NOTE: check currentAudioTime to prevent reentrance
+            // NOTE: check currentAudioTime > 0 to make sure that the active audio is PLAYING.
+            //       Required to get correct values from AmplitudeJS API calls
+            // -----------------------------------------------------------------
+            // process audio for configured START position
             var currentAudioTime = Amplitude.getSongPlayedSeconds();
-            if (songEndSec && currentAudioTime >= songEndSec && currentAudioTime < duration - 1) {
-              songMetaData      = Amplitude.getActiveSongMetadata();
-              songIndex         = songMetaData.index;
+            if (songStartSec && currentAudioTime > 0 && currentAudioTime <= songStartSec) {
+              fadeAudio = (songMetaData.audio_fade === 'true') ? true : false;
 
-              // fade-out audio on video|song END
-              // fadeAudio && fadeAudioOut();
-              // logger.debug('\n' + 'fade-out current audio at track|second: ' + trackID + '|' + songEndSec);
+              // seek audio to configured START position
+              logger.debug('\n' + 'start audio at trackID|timestamp: ' + trackID + '|' + songStartTS);
+              Amplitude.skipTo(songStartSec, songIndex, playlist);
 
-              // skip current audio to the END
-              logger.debug('\n' + 'stop audio at trackID|timestamp: ' + trackID + '|' + songEndTS);
-              // Amplitude.setSongPlayedPercentage(99.99);
-              Amplitude.skipTo(duration, songIndex, playlist);
+              // fade-in audio IN (if enabled)
+              if (fadeAudio) {
+                logger.debug('\n' + 'fade-in current audio at trackID|second: ' + trackID + '|' + songStartSec);
+                atpFadeInAudio({ playerID: playerID });
+              } // END if fadeAudio
 
-              // var duration          = Amplitude.getSongDuration();
-              
-              // Amplitude.stop();
-              // Amplitude.playNow(songMetaData);
-              // Amplitude.next(playlist);
-
-              // PAUSE player on LAST audio
-              if (songIndex === songs.length-1) {
-                logger.debug('\n' + 'paused player at trackID: ' + songIndex + 1);
-                Amplitude.pause();
-              }
-
-              clearInterval(checkOnVideoEnd);
-            }
-          }, 10);
-
-        // } // END if songEndSec
-
-
-
+              clearInterval(isPlaying);
+            } // END if songStartSec
+          }, 250); // END isPlaying
 
       } // END AT_PLAYER_STATE PLAYING
 
       // load|play NEXT|FIRST song (video) in playlist
-      // ---------------------------------------------------------------------
+      // -----------------------------------------------------------------------
       if (state === AT_PLAYER_STATE.ENDED) {
       } // END if AT_PLAYER_STATE.ENDED
 
@@ -1217,8 +1174,7 @@ j1.adapter.amplitude = ((j1, window) => {
 
                         // show|hide scrollbar in playlist
                         // -----------------------------------------------------
-                        const songsInPlaylist = Amplitude.getSongsInPlaylist(playListName);
-
+                        var songsInPlaylist = Amplitude.getSongsInPlaylist(playListName);
                         if (songsInPlaylist.length <= 8) {
                           const titleListLargePlayer = document.getElementById('large_player_title_list_' + playListName);
                           if (titleListLargePlayer !== null) {

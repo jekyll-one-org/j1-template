@@ -423,16 +423,16 @@ exclude_from_search:                    true
                   <span class="song-name">{{item.title}}</span>
 
                   {% comment %}
+                  --------------------------------------------------------------
                   {% if playlist_audio_rating %}
                   {% capture rating %}/assets/image/pattern/rating/scalable/3-star.svg{% endcapture %}
-                  <span class="audio-rating">
+                  <span class="audio-rating" data-amplitude-playlist="{{player_playlist}}">
                     {{item.rating}}
                     <i class="mdib mdib-star md-gray-400 mdib-18px"></i>
                   </span>
                   {% endif %}
+                  --------------------------------------------------------------
                   {% endcomment %}
-
-
 
                   <span class="song-artist-album">
                     <span>{{item.artist}}</span>
@@ -944,14 +944,14 @@ exclude_from_search:                    true
                   <!-- load initial (first element) rating -->
                   {% if playlist_audio_rating and forloop.first %}
                     {% if item.rating %}
-                    <span class="audio-rating">
+                    <span class="audio-rating audio-rating-screen-controls" data-amplitude-playlist="{{player_playlist}}">
                       {% capture rating_image %}{{image_rating_path}}/{{item.rating}}-star.svg{% endcapture %}
                       <!-- rating image: {{rating_image}} -->
                       <img src="{{rating_image}}" alt="song rating" style="margin-top: 5px;">
                     </span>
                     {% else %}
                     <!-- place empty (span) element (placeholder) -->
-                    <span class="audio-rating"></span>
+                    <span class="audio-rating audio-rating-screen-controls"></span>
                     {% endif %}
 
                     {% comment %}
@@ -965,7 +965,8 @@ exclude_from_search:                    true
                     <span class="audio-rating"></span>
                     {% endif %}
                     {% endcomment %}
-                  {% else %}
+
+                    {% else %}
                     {% break %}
                   {% endif %}
                   {% endif %} {% endfor %}
@@ -1060,7 +1061,7 @@ exclude_from_search:                    true
                   {% endif %}
 
                   {% if item.rating %}
-                  <span class="audio-rating">
+                  <span class="audio-rating" data-amplitude-playlist="{{player_playlist}}">
                     {% capture rating_image %}{{image_rating_path}}/{{item.rating}}-star.svg{% endcapture %}
                     <!-- rating image: {{rating_image}} -->
                     <!-- img src="{{rating_image}}" alt="song rating" style="padding-left: 13px; margin-top: 5px;" -->

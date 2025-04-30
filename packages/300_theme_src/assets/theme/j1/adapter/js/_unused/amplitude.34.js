@@ -444,7 +444,6 @@ j1.adapter.amplitude = ((j1, window) => {
             "name":           "{{item.title}}",
             "track":          "{{item.track}}",
             "artist":         "{{item.artist}}",
-            "playlist":       "{{item.playlist}}",
             "album":          "{{item.name}}",
             "url":            "{{item.audio_base}}/{{item.audio}}",
             "audio_info":     "{{item.audio_info}}",
@@ -559,9 +558,6 @@ j1.adapter.amplitude = ((j1, window) => {
                 }, 150);
               } // END if playing
             } // END if pause on next title
-          },
-          ended: function() {
-            onPlayerStateChange(0);
           }
         }, // END callbacks
 
@@ -677,62 +673,41 @@ j1.adapter.amplitude = ((j1, window) => {
 
       // -----------------------------------------------------------------------
       // atpFadeAudioOut
-      //
-      // returns true if fade-out is finished
       // -----------------------------------------------------------------------
-      function atpFadeAudioOut(params) {
+      function fadeAudioOut(speed='default') {
+        var currentStep, steps, newVolume, startVolume,
+            playerId, sliderId, volumeSlider;
+
         const cycle = 1;
-        var   settings, currentStep, steps, sliderID, 
-              startVolume, newVolume, volumeSlider;
 
-        // current fade-out settings using DEFAULTS (if available)
-        settings =  {
-          playerID:       params.playerID,
-          speed:          params.speed = 'default'
+        // number of iteration steps to DECREASE the volume
+        const speedSteps = {
+          'default':  100,
+          'slow': 	  200,
+          'slower':   300
         };
 
-        // number of iteration steps to INCREASE the players volume on fade-in
-        // NOTE: number of steps controls how long and smooth the fade-in 
-        // transition will be
-        const iterationSteps = {
-          'default':  150,
-          'slow': 	  250,
-          'slower':   350,
-          'slowest':  500
-        };
+        playerId    = 'manon_melodie_yt_large';
+        sliderId    = 'volume_slider_' + playerId;
+        volumeSlider = document.getElementById(sliderId);
 
-        sliderID      = 'volume_slider_' + settings.playerID;
-        volumeSlider  = document.getElementById(sliderID);
-        startVolume   = Amplitude.getVolume();
-        steps         = iterationSteps[settings.speed];
-        currentStep   = 1;
-
-        var songMetaData  = Amplitude.getActiveSongMetadata();
-        var playlist      = songMetaData.playlist;
-        var songIndex     = songMetaData.index;
-        var trackID       = songIndex + 1; 
+        startVolume = ytPlayer.getVolume();
+        steps       = speedSteps[speed];
+        currentStep = 0;
 
         if (volumeSlider !== null) {
           const fadeOutInterval = setInterval(() => {
             newVolume = startVolume * (1 - currentStep / steps);
 
-            Amplitude.setVolume(newVolume);
+            ytPlayer.setVolume(newVolume);
             volumeSlider.value = newVolume;
             currentStep++;
 
-            // seek current audio to total end to continue on next track
-            if (currentStep > steps) {
-              logger.debug('\n' + 'seek audio to total end position after fade-out');          
-              Amplitude.setSongPlayedPercentage(99.99999);
-              // Amplitude.setVolume(startVolume);
-              // volumeSlider.value = startVolume;
-
-              clearInterval(fadeOutInterval);
-            } 
+            (currentStep > steps) && clearInterval(fadeOutInterval);
           }, cycle);
         } // END if volumeSlider
 
-      } // END atpFadeAudioOut
+      } // END fadeAudioOut
 
       // function onplaying(metaData) {
       //   var songMetaData = metaData;
@@ -763,6 +738,9 @@ j1.adapter.amplitude = ((j1, window) => {
         songMetaData  = Amplitude.getActiveSongMetadata();
         songIndex     = songMetaData.index;
         trackID       = songIndex + 1;
+
+        // songEndTS     = songs[songIndex].end;
+        // songEndSec    = timestamp2seconds(songEndTS);
         
         if (state === AT_PLAYER_STATE.UNSTARTED) {
           // logger.debug('\n' + 'current audio state: unstarted');
@@ -771,142 +749,70 @@ j1.adapter.amplitude = ((j1, window) => {
 
         if (state === AT_PLAYER_STATE.STOPPED) {
           // logger.debug('\n' + 'changed to title: ' + songMetaData.name + ' with titleIndex ' + songMetaData.index);
-          logger.debug('\n' + 'audio player at trackID|state: ' + trackID + '|' + AT_PLAYER_STATE_NAMES[state]);
+          logger.debug('\n' + 'audio at trackID|state: ' + trackID + '|' + AT_PLAYER_STATE_NAMES[state]);
           return;
         }
 
         if (state === AT_PLAYER_STATE.PAUSED) {
-          logger.debug('\n' + 'audio player at trackID|state: ' + trackID + '|' + AT_PLAYER_STATE_NAMES[state]);
+          logger.debug('\n' + 'audio at trackID|state: ' + trackID + '|' + AT_PLAYER_STATE_NAMES[state]);
           return;
         }
 
         if (state === AT_PLAYER_STATE.PREVIOUS) {
-          logger.debug('\n' + 'audio player at trackID|state: ' + trackID + '|' + AT_PLAYER_STATE_NAMES[state]);
+          logger.debug('\n' + 'audio at trackID|state: ' + trackID + '|' + AT_PLAYER_STATE_NAMES[state]);
           return;
         }
 
         if (state === AT_PLAYER_STATE.NEXT) {
-          logger.debug('\n' + 'audio player at trackID|state: ' + trackID + '|' + AT_PLAYER_STATE_NAMES[state]);
+          logger.debug('\n' + 'audio at trackID|state: ' + trackID + '|' + AT_PLAYER_STATE_NAMES[state]);
           return;
         }
 
         if (state === AT_PLAYER_STATE.PLAYING) {
-          var isPlaying, screenControlRatingElements, screenControlRating,
-          startVolume, ratingIndex, ratingElement;
+          logger.debug('\n' + 'audio at trackID|state: ' + trackID + '|' + AT_PLAYER_STATE_NAMES[state]);
 
-          songMetaData  = Amplitude.getActiveSongMetadata();
-          songIndex     = songMetaData.index;
-          trackID       = songIndex + 1;
-          songStartTS   = songMetaData.start;
-          songEndTS     = songMetaData.end;
-          songStartSec  = timestamp2seconds(songStartTS);
-          songEndSec    = timestamp2seconds(songEndTS);
-          isPlaying     = false;
-          startVolume   = Amplitude.getVolume();
+          // check|process audio for configured START position
+          var isPlaying = setInterval (() => {
+            songMetaData  = Amplitude.getActiveSongMetadata();
+            songIndex     = songMetaData.index;
+            trackID       = songIndex + 1;
+            songStartTS   = songMetaData.start;
+            songEndTS     = songMetaData.end;
+            songStartSec  = timestamp2seconds(songStartTS);
+            songEndSec    = timestamp2seconds(songEndTS);
+            currentVolume = Amplitude.getVolume();
 
-          logger.debug('\n' + 'audio player at trackID|state: ' + trackID + '|' + AT_PLAYER_STATE_NAMES[state]);
+            // NOTE: check currentAudioTime to prevent reentrance
+            // NOTE: check currentAudioTime > 0 to make sure that the active audio is PLAYING.
+            //       Required to get correct values from AmplitudeJS API calls
+            // -----------------------------------------------------------------
+            // process audio for configured START position
+            var currentAudioTime = Amplitude.getSongPlayedSeconds();
+            if (songStartSec && currentAudioTime > 0 && currentAudioTime <= songStartSec) {
+              fadeAudio = (songMetaData.audio_fade === 'true') ? true : false;
 
-          // update song rating in playlist-screen|meta-container
-          // -------------------------------------------------------------------
-          screenControlRatingElements = document.getElementsByClassName('audio-rating-screen-controls');
-          screenControlRating         = null;
-          songMetaData                = Amplitude.getActiveSongMetadata();
+              // seek audio to configured START position
+              logger.debug('\n' + 'start audio at trackID|timestamp: ' + trackID + '|' + songStartTS);
+              Amplitude.skipTo(songStartSec, songIndex, playlist);
 
-          for (let i=0; i<screenControlRatingElements.length; i++) {
-            ratingElement = screenControlRatingElements[i];
-            if (ratingElement.dataset.amplitudePlaylist === songMetaData.playlist) {
-              ratingIndex = i;
-              screenControlRating = ratingElement;
-              break;
-            }
-          }
+              // fade-in audio IN (if enabled)
+              if (fadeAudio) {
+                logger.debug('\n' + 'fade-in current audio at trackID|second: ' + trackID + '|' + songStartSec);
+                atpFadeInAudio({ playerID: playerID });
+              } // END if fadeAudio
 
-          if (screenControlRating) {
-            if (songMetaData.rating) {
-              screenControlRatingElements[ratingIndex].innerHTML = '<img src="/assets/image/pattern/rating/scalable/' + songMetaData.rating + '-star.svg"' + 'alt="song rating" style="margin-top: 5px;">';
-            } else {
-              screenControlRatingElements[ratingIndex].innerHTML = '';
-            }
-          } // END if screenControlRating
+              clearInterval(isPlaying);
+            } // END if songStartSec
+          }, 250); // END isPlaying
 
-          // check|process audio for configured START position (if is plaxing)
-          // -------------------------------------------------------------------
-          if (songStartSec) {
-            var checkIsPlaying = setInterval (() => {
-              songMetaData  = Amplitude.getActiveSongMetadata();
-              songIndex     = songMetaData.index;
-              trackID       = songIndex + 1;
-              songStartTS   = songMetaData.start;
-              songEndTS     = songMetaData.end;
-              songStartSec  = timestamp2seconds(songStartTS);
-              songEndSec    = timestamp2seconds(songEndTS);
-              currentVolume = Amplitude.getVolume();
-              isPlaying     = (Amplitude.getSongPlayedSeconds() > 0) ? true : false;
+      } // END AT_PLAYER_STATE PLAYING
 
-              // NOTE: check currentAudioTime to prevent reentrance
-              // NOTE: check currentAudioTime > 0 to make sure that the active audio is PLAYING.
-              //       Required to get correct values from AmplitudeJS API calls
-              // -----------------------------------------------------------------
-              // process audio for configured START position
-              var currentAudioTime = Amplitude.getSongPlayedSeconds();
-              if (songStartSec && currentAudioTime > 0 && currentAudioTime <= songStartSec) {
-                fadeAudio = (songMetaData.audio_fade === 'true') ? true : false;
+      // load|play NEXT|FIRST song (video) in playlist
+      // -----------------------------------------------------------------------
+      if (state === AT_PLAYER_STATE.ENDED) {
+      } // END if AT_PLAYER_STATE.ENDED
 
-                // seek audio to configured START position
-                logger.debug('\n' + 'seek audio at|to trackID|timestamp: ' + trackID + '|' + songStartTS);
-                Amplitude.skipTo(songStartSec, songIndex, playlist);
-
-                // fade-in audio IN (if enabled)
-                if (fadeAudio) {
-                  logger.debug('\n' + 'fade-in audio at|to trackID|timestamp: ' + trackID + '|' + songStartTS);
-                  atpFadeInAudio({ playerID: playerID });
-                } // END if fadeAudio
-
-                clearInterval(checkIsPlaying);
-              } // END if songStartSec
-
-            }, 250); // END checkIsPlaying
-          } // END if songStartSec
-
-          // check|process audio for configured END position
-          // -------------------------------------------------------------------
-          if (songEndSec) {
-            var checkIsOnVideoEnd = setInterval(() => {
-              var currentAudioTime = Amplitude.getSongPlayedSeconds();
-
-              if (currentAudioTime > 0 && currentAudioTime >= songEndSec) {                
-                songMetaData  = Amplitude.getActiveSongMetadata();
-                playlist      = songMetaData.playlist;
-                songIndex     = songMetaData.index;
-                trackID       = songIndex + 1;
-
-                // fade-out audio (if enabled)
-                var fadeAudio = (songMetaData.audio_fade === 'true') ? true : false;
-                if (fadeAudio) {
-                  logger.debug('\n' + 'fade-out audio at|to trackID|timestamp: ' + trackID + '|' + songEndTS);
-                  atpFadeAudioOut({ playerID: playerID });
-                } // END if fadeAudio
-
-                clearInterval(checkIsOnVideoEnd);
-              } // END if currentAudioTime
-
-              // Restore players volume on LAST track
-              // ---------------------------------------------------------------
-              // if (songIndex === songs.length-1) {
-              //   logger.debug('\n' + 'restore player volume on last track');
-              //   Amplitude.setVolume(currentVolume);
-              // }
-
-            }, 250); // END checkIsOnVideoEnd
-          } // END if songEndSec
-
-        } // END state AT_PLAYER_STATE PLAYING
-
-        if (state === AT_PLAYER_STATE.ENDED) {
-          // Amplitude.setVolume(50);
-        } // END state AT_PLAYER_STATE.ENDED
-
-      } // END onPlayerStateChange
+    } // END onPlayerStateChange
 
     }, // END initApi
 
@@ -934,18 +840,18 @@ j1.adapter.amplitude = ((j1, window) => {
             // initialize player instance (when player UI is loaded)
             // -----------------------------------------------------------------
             load_dependencies['dependencies_met_player_loaded_{{player.id}}'] = setInterval (() => {
-              var xhrDataLoaded      = (j1.xhrDOMState['#' + '{{xhr_container_id}}'] === 'success') ? true : false;
-              var playerExistsInPage = ($('#' + '{{xhr_container_id}}')[0] !== undefined) ? true : false;
+              // check if HTML portion of the player is loaded successfully
+              var xhrLoadState        = j1.xhrDOMState['#' + '{{xhr_container_id}}'];
+              var playerExistsInPage  = ($('#' + '{{xhr_container_id}}')[0] !== undefined) ? true : false;
 
-              // check the player HTML portion is loaded and player exists (in page)
-              if (xhrDataLoaded && playerExistsInPage) {
+              if (xhrLoadState === 'success' && playerExistsInPage) {
+                logger.debug('\n' + 'set playlist {{player.playlist}} on id #{{player.id}} with title: ' + playListTitle);
+
                 var playerID      = '{{player.id}}';
                 var playerType    = '{{player.type}}';
                 var playList      = '{{player.playlist}}';
                 var playListName  = '{{player.playlist.name}}';
                 var playListTitle = '{{player.playlist.title}}';
-
-                logger.debug('\n' + 'initialize audio player instance on id: {{player.id}}');
 
                 // set song (title) specific audio info links
                 // -------------------------------------------------------------
@@ -962,7 +868,7 @@ j1.adapter.amplitude = ((j1, window) => {
 
                 // player specific UI events
                 // -------------------------------------------------------------
-                logger.debug('\n' + 'setup audio player specific UI events on ID #{{player.id}}: started');
+                logger.debug('\n' + 'setup player specific UI events on ID #{{player.id}}: started');
 
                 var dependencies_met_api_initialized = setInterval (() => {
                   if (apiInitialized.state) {

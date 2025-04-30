@@ -170,7 +170,8 @@ settings:
       song_progress_bar:                true
       skip_forward_backward_button:     true
       volume_slider:
-        enabled:                        true      
+        enabled:                        true
+        # preset_value:                   50
 
       # ------------------------------------------------------------------------
       # PLAYER settings
@@ -407,8 +408,8 @@ settings:
 
       # ------------------------------------------------------------------------
       # GENERAL settings
-      #     
-      enabled:                          true
+      #
+      enabled:                          false
 
       id:                               faelle_des_bnd_yt_large
       type:                             large
@@ -442,7 +443,7 @@ settings:
         name:                           faelle_des_bnd_yt
         title:                          Die größten Fälle des BND
         audio_info:                     true
-        audio_rating:                   true     
+        audio_rating:                   true
 
 # ------------------------------------------------------------------------------
 # END config

@@ -44,6 +44,7 @@ settings:
       # ------------------------------------------------------------------------
       album:                            &album_ephraim_kishon_beste_familiengeschichten_yt
         name:                           Ephraim Kishon
+        playlist:                       ephraim_kishon_beste_familiengeschichten_yt
         artist:                         Beste Familiengeschichten
         audio_single:                   true
         audio_fade:                     false
@@ -252,6 +253,7 @@ settings:
       # ------------------------------------------------------------------------
       album:                            &album_ephraim_kishon_beste_autofahrer_geschichten_yt
         name:                           Ephraim Kishon
+        playlist:                       ephraim_kishon_beste_autofahrer_geschichten_yt
         artist:                         Beste Familiengeschichten
         audio_single:                   true
         audio_base:                     //youtube.com
@@ -314,6 +316,7 @@ settings:
       # ------------------------------------------------------------------------
       album:                            &album_manon_melodie_yt
         name:                           YouTube 2025
+        playlist:                       manon_melodie_yt
         artist:                         Manon Mélodie
         audio_base:                     //youtube.com
         cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
@@ -449,6 +452,7 @@ settings:
       # ------------------------------------------------------------------------
       album:                            &album_mimi_rutherfurt_yt
         name:                           Mimi Rutherfurt
+        playlist:                       mimi_rutherfurt_yt
         artist:                         Maritim Verlag
         audio_base:                     //youtube.com
         cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
@@ -610,6 +614,7 @@ settings:
       album:                            &faelle_des_bnd_yt
         name:                           Die größten Fälle des BND
         artist:                         Maritim Verlag
+        playlist:                       faelle_des_bnd_yt
         audio_base:                     //youtube.com
         cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
 
@@ -655,6 +660,7 @@ settings:
       # ------------------------------------------------------------------------
       album:                            &album_from_dusk_to_dawn
         name:                           From Dusk To Dawn
+        playlist:                       emancipator
         artist:                         Emancipator
         audio_base:                     /assets/audio/album/emancipator/from-dusk-to-dawn
         cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
@@ -670,7 +676,7 @@ settings:
           enabled:                      true
           <<:                           *album_from_dusk_to_dawn
           title:                        First Snow
-          rating:                       3
+          rating:                       2
           start:                        "00:01:00"
           end:                          "00:01:10"
           audio:                        FirstSnow.mp3
@@ -732,6 +738,7 @@ settings:
       # ------------------------------------------------------------------------
       album:                            &album_free_disco
         name:                           Disco 80th
+        playlist:                       free_disco
         artist:                         Royalty Free Music
         audio_base:                     //p.productioncrate.com/stock-hd/audio
         cover_image:                    /assets/audio/cover/royalty_free/free_disco_sounds.jpg
