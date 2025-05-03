@@ -263,7 +263,7 @@ progress.mini-player-progress {
   -moz-appearance: none;
   cursor: pointer;
   width: 100%;
-  height: 10px;
+  height: 12px;
   border: none;
   background-color: var(--ajs-theme-uno--silver-500);
 }
@@ -274,7 +274,7 @@ progress.compact-player-progress {
   -moz-appearance: none;
   cursor: pointer;
   width: 100%;
-  height: 10px;
+  height: 12px;
   border: none;
   background-color: var(--ajs-theme-uno--silver-500);
 }
@@ -285,7 +285,7 @@ progress.large-player-progress {
   -moz-appearance: none;
   cursor: pointer;
   width: 100%;
-  height: 10px;
+  height: 12px;
   border: none;
   background-color: var(--ajs-theme-uno--silver-500);
 }

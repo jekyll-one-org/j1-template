@@ -365,6 +365,7 @@ div.playlist-screen-controls div.list-controls div.list-next {
 div.playlist-screen-controls div.list-controls div.list-next:hover {
   opacity: 0.5;
 }
+
 @media (orientation: portrait) and (max-width: 992px) {
   .large-player-left {
     width: 35vw;
@@ -373,7 +374,20 @@ div.playlist-screen-controls div.list-controls div.list-next:hover {
     width: 45vw;
     object-fit: cover;
   }
+
+  input[type="range"].amplitude-volume-slider::-webkit-slider-thumb {
+    background-color: var(--ajs-theme-uno--blue-500);
+    width: 25px;
+    height: 25px;
+  }
+  input[type="range"].amplitude-volume-slider::-moz-slider-thumb {
+    background-color: var(--ajs-theme-uno--blue-500);
+    width: 25px;
+    height: 25px;
+  }
+    
 }
+
 @media (orientation: portrait) and (max-width: 768px) {
   .large-player-left {
     width: 35vw;
@@ -383,6 +397,7 @@ div.playlist-screen-controls div.list-controls div.list-next:hover {
     object-fit: cover;
   }
 }
+
 @media (orientation: landscape) and (max-width: 992px) {
   .large-player-left {
     width: 35vw;
@@ -392,6 +407,7 @@ div.playlist-screen-controls div.list-controls div.list-next:hover {
     object-fit: cover;
   }
 }
+
 @media (orientation: landscape) and (max-width: 768px) {
   .large-player-left {
     width: 35vw;
@@ -401,6 +417,7 @@ div.playlist-screen-controls div.list-controls div.list-next:hover {
     object-fit: cover;
   }
 }
+
 @media screen and (max-width: 576px) {
   .large-player {
     max-width: -webkit-fill-available;

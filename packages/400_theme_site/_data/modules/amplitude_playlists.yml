@@ -664,7 +664,8 @@ settings:
         artist:                         Emancipator
         audio_base:                     /assets/audio/album/emancipator/from-dusk-to-dawn
         cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
-        audio_fade:                     true
+        audio_fade_in:                  true
+        audio_fade_out:                 true
 
       # ------------------------------------------------------------------------
       # Playlist Items (Songs)
@@ -682,7 +683,7 @@ settings:
           audio:                        FirstSnow.mp3
           audio_info:                   //emancipator.bandcamp.com/
           cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn/soon-it-will-be-cold-enough.jpg
-          duration:                     "05:12"
+          duration:                     "00:05:12"
 
         # title 02
         - item:
@@ -695,7 +696,7 @@ settings:
           audio:                        DuskToDawn.mp3
           audio_info:                   //emancipator.bandcamp.com/
           cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn/from-dusk-to-dawn.jpg
-          duration:                     "05:25"
+          duration:                     "00:05:25"
 
         # title 03
         - item:
@@ -708,7 +709,7 @@ settings:
           audio:                        Anthem.mp3
           audio_info:                   //emancipator.bandcamp.com/
           cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn/anthem.jpg
-          duration:                     "05:40"
+          duration:                     "00:05:40"
 
         # title 04
         - item:
@@ -721,7 +722,7 @@ settings:
           audio:                        SafeInTheSteepCliffs.mp3
           audio_info:                   //emancipator.bandcamp.com/
           cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn/safe-in-the-steep-cliffs.jpg
-          duration:                     "04:35"
+          duration:                     "00:04:35"
 
     # --------------------------------------------------------------------------
     # Disco 80th - Royalty Free Music

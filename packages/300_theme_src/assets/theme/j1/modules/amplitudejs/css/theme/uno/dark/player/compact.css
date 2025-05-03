@@ -118,7 +118,7 @@ div.amplitude-mute {
   cursor: pointer;
   width: 25px;
   height: 19px;
-  margin-left: 40px;
+  margin-left: 50px;
 }
 
 div#compact_player_control_container
@@ -507,17 +507,31 @@ span.song-name {
 }
 
 div.compact-player-playlist
+div.playlist-screen-controls
+div.playlist-screen-meta-container
+span.amplitude-audio-info {
+    float: right;
+    margin-right: -130px;
+}
+
+div.compact-player-playlist
+div.playlist-screen-controls
+div.playlist-screen-meta-container
+span.audio-rating {
+  float: right;
+  margin-right: -100px;
+  margin-top: 10px;
+}
+
+div.compact-player-playlist
 div.compact-player-title-list
 div.song
 div.song-meta-container
 span.audio-rating {
   display: flex;
-  align-items: center;
   float: right;
-  font-size: 18px;
-  margin-top: -24px;
-  margin-right: -20px;
-  color: var(--ajs-theme-uno--gray-400);
+  margin-top: -17px;
+  margin-right: -96px;
 }
 
 div.compact-player-playlist
@@ -537,8 +551,8 @@ div.compact-player-title-list
 div.song
 span.audio-duration {
   float: right;
-  margin-top: -46px;
-  margin-right: -108px;
+  margin-top: -40px;
+  margin-right: -93px;
   font-family: "Lato", sans-serif;
   font-size: 16px;
   color: var(--ajs-theme-uno--gray-300);
@@ -565,6 +579,12 @@ span.audio-info {
   margin-top: -24px;
   margin-right: -110px;
 }
+
+.amplitude-audio-info-compact-player {
+  float: right;
+  margin-right: -128px;
+}
+
 
 div.compact-player-playlist
 div.compact-player-title-list

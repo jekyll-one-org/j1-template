@@ -343,27 +343,46 @@ exclude_from_search:                    true
                   data-amplitude-song-info="name">
                 </span>
 
+
+
+
+                {% comment %}
+                ----------------------------------------------------------------
+                ----------------------------------------------------------------
+                {% endcomment %}
+
+                
+
+
                 <!-- START player_audio_info -->
                 <!-- load initial (first) info URL -->
                 {% for item in playlist_items %} {% if item.enabled %}
+                {% if playlist_audio_info and forloop.first %}
+                <span class="amplitude-audio-info">
+                  <a class="audio-info-link" href="{{item.audio_info}}" target="_blank">
+                    <i class="mdib mdib-information md-gray-400 mdib-24px"></i>
+                  </a>
+                </span>
 
-                  {% if playlist_audio_info and forloop.first %}
-                    <span class="amplitude-audio-info">
-                      <a class="audio-info-link" href="{{item.audio_info}}" target="_blank">
-                        <i class="mdib mdib-information md-gray-400 mdib-24px"></i>
-                      </a>
-                    </span>
 
-                  {% if playlist_audio_rating %}
-                  {% capture rating_image %}{{image_rating_path}}/{{item.rating}}-star.svg{% endcapture %}
-                    <span class="audio-rating" data-amplitude-playlist="{{player_playlist}}">
-                      <img src="{{rating_image}}" alt="song rating">
-                    </span>
-                  {% endif %}
-                  {% else %}
-                    {% break %}
-                  {% endif %}
 
+
+                {% if playlist_audio_rating %}
+                {% capture rating_image %}{{image_rating_path}}/{{item.rating}}-star.svg{% endcapture %}
+                <span class="audio-rating" data-amplitude-playlist="{{player_playlist}}">
+                  <img src="{{rating_image}}" alt="song rating">
+                </span>
+                {% endif %}
+                
+
+
+
+
+
+
+                {% else %}
+                  {% break %}
+                {% endif %}
                 {% endif %} {% endfor %}
                 <!-- END player_audio_info -->
 
