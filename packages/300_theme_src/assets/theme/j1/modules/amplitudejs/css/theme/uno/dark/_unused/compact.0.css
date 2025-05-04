@@ -39,18 +39,19 @@
 
 /* Player TOP
 # --------------------------------------------------------- */
-.player-top {
+div.player-top {
   position: relative;
 }
 
 /* jadams, 2024-11-04: Overload user agent styles for width|height */
-.player-top img[data-amplitude-song-info="cover_art_url"] {
+div.player-top
+img[data-amplitude-song-info="cover_art_url"] {
   width: 498px;    /* size of cover image (rendered) - 1px borders left|right */
   height: auto;
   object-fit: cover;
 }
 
-.compact-player-header {
+div.compact-player-header {
   position: relative;
   padding: 15px;
   cursor: pointer;
@@ -66,7 +67,6 @@
   left: 15px;
 }
 
-/*
 .compact-player-header-arrows.arrow-down {
   background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/up.svg") no-repeat;
 }
@@ -74,8 +74,6 @@
 .compact-player-header-arrows.arrow-up {
   background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/down.svg") no-repeat;
 }
-*/
-
 
 /* Player MIDDLE
 # --------------------------------------------------------- */
@@ -205,7 +203,7 @@ div#compact_player_shuffle.amplitude-shuffle-on {
 
 div.compact-player-middle
 div.compact-player-controls-container
-div.compact-player-previous {
+div#compact_player_previous {
   display: inline-block;
   cursor: pointer;
   vertical-align: middle;
@@ -217,7 +215,7 @@ div.compact-player-previous {
 
 div.compact-player-middle
 div.compact-player-controls-container
-div.compact-player-previous {
+div#compact_player_previous {
   display: inline-block;
   cursor: pointer;
   height: 24px;
@@ -229,7 +227,7 @@ div.compact-player-previous {
 
 div.compact-player-middle
 div.compact-player-controls-container
-div.compact-player-previous:hover {
+div#compact_player_previous:hover {
   opacity: 0.5;
 }
 
@@ -299,7 +297,7 @@ div.compact-player-skip-forward:hover {
 
 div.compact-player-middle
 div.compact-player-controls-container
-div.compact-player-next {
+div#compact_player_next {
   display: inline-block;
   cursor: pointer;
   height: 24px;
@@ -312,7 +310,7 @@ div.compact-player-next {
 
 div.compact-player-middle
 div.compact-player-controls-container
-div.compact-player-next:hover {
+div#compact_player_next:hover {
   opacity: .5;
 }
 

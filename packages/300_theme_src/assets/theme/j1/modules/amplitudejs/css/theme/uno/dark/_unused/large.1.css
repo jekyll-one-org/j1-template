@@ -307,6 +307,12 @@ span.audio-rating {
   float: right;
   margin-top: 10px;
   margin-right: -48px;
+/*
+  align-items: center;
+  font-family: "Lato", sans-serif;
+  font-size: 18px;
+  color: var(--ajs-theme-uno--gray-400);
+*/
 }
 
 div.playlist-screen-meta-container .song-artist-album {
