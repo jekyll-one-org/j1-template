@@ -135,10 +135,6 @@ j1.adapter.amplitude = ((j1, window) => {
     6:              "changed",
   };
 
-  // var ytpSongIndex    = "0";
-  // var ytpAutoPlay     = false;
-  // var ytpLoop         = true;
-
   var playLists       = {};
   var playersUILoaded = { state: false };
   var apiInitialized  = { state: false };
@@ -151,6 +147,7 @@ j1.adapter.amplitude = ((j1, window) => {
   var amplitudePlayers
   var amplitudePlaylists
   var amplitudeOptions;
+
   var ytPlayer;
   var ytpPlaybackRate
 
@@ -166,7 +163,6 @@ j1.adapter.amplitude = ((j1, window) => {
   var playersProcessed                  = [];
   var playersHtmlLoaded                 = false;
   var processingPlayersFinished         = false;
-  var pluginManagerRunOnce              = false;
 
   var playerAudioInfo                   = ('{{amplitude_defaults.playlist.audio_info}}' === 'true') ? true : false;
   var playerDefaultPluginManager        = ('{{amplitude_defaults.player.plugin_manager.enabled}}' === 'true') ? true : false;
@@ -225,8 +221,8 @@ j1.adapter.amplitude = ((j1, window) => {
       // -----------------------------------------------------------------------
       // control|logging settings
       // -----------------------------------------------------------------------
-      _this              = j1.adapter.amplitude;
-      logger             = log4javascript.getLogger('j1.adapter.amplitude');
+      _this                 = j1.adapter.amplitude;
+      logger                = log4javascript.getLogger('j1.adapter.amplitude');
 
       // prepare data element for later use
       j1.adapter.amplitude.data             = {};
@@ -235,6 +231,7 @@ j1.adapter.amplitude = ((j1, window) => {
       j1.adapter.amplitude.data.ytPlayers   = {};
       
       j1.adapter.amplitude.data.atpGlobals.activePlayerType = 'not_set';
+      j1.adapter.amplitude.data.atpGlobals.ytpInstalled     = false;
       j1.adapter.amplitude.data.ytpGlobals.activePlayerType = 'not_set';
 
       // -----------------------------------------------------------------------
@@ -781,9 +778,11 @@ j1.adapter.amplitude = ((j1, window) => {
         var playerID, playlist, songs, songIndex, songIndex, trackID,
             songStart, songEnd, songStartSec, songEndSec,
             songStartTS, songEndTS, songMetaData, currentVolume,
-            fadeAudio;
+            activeSongMetadata, fadeAudio;
 
+        activeSongMetadata  = Amplitude.getActiveSongMetadata();
         playlist      = Amplitude.getActivePlaylist();
+        playlist      = activeSongMetadata.playlist 
         playerID      = playlist + '_large';
         songs         = Amplitude.getSongsInPlaylist(playlist);
         songMetaData  = Amplitude.getActiveSongMetadata();
@@ -796,27 +795,27 @@ j1.adapter.amplitude = ((j1, window) => {
         } 
 
         if (state === AT_PLAYER_STATE.STOPPED) {
-          // logger.debug('\n' + 'audio player on playlist: ' + playlist + ' at trackID|state: ' + trackID + '|' + AT_PLAYER_STATE_NAMES[state]);
+          logger.debug('\n' + 'audio player on playlist: ' + playlist + ' at trackID|state: ' + trackID + '|' + AT_PLAYER_STATE_NAMES[state]);
           return;
         }
 
         if (state === AT_PLAYER_STATE.PAUSED) {
-          // logger.debug('\n' + 'audio player on playlist: ' + playlist + ' at trackID|state: ' + trackID + '|' + AT_PLAYER_STATE_NAMES[state]);
+          logger.debug('\n' + 'audio player on playlist: ' + playlist + ' at trackID|state: ' + trackID + '|' + AT_PLAYER_STATE_NAMES[state]);
           return;
         }
 
         if (state === AT_PLAYER_STATE.PREVIOUS) {
-          // logger.debug('\n' + 'audio player on playlist: ' + playlist + ' at trackID|state: ' + trackID + '|' + AT_PLAYER_STATE_NAMES[state]);
+          logger.debug('\n' + 'audio player on playlist: ' + playlist + ' at trackID|state: ' + trackID + '|' + AT_PLAYER_STATE_NAMES[state]);
           return;
         }
 
         if (state === AT_PLAYER_STATE.NEXT) {
-          // logger.debug('\n' + 'audio player on playlist: ' + playlist + ' at trackID|state: ' + trackID + '|' + AT_PLAYER_STATE_NAMES[state]);
+          logger.debug('\n' + 'audio player on playlist: ' + playlist + ' at trackID|state: ' + trackID + '|' + AT_PLAYER_STATE_NAMES[state]);
           return;
         }
 
         if (state === AT_PLAYER_STATE.CHANGED) {
-          // logger.debug('\n' + 'audio player on playlist: ' + playlist + ' at trackID|state: ' + trackID + '|' + AT_PLAYER_STATE_NAMES[state]);
+          logger.debug('\n' + 'audio player on playlist: ' + playlist + ' at trackID|state: ' + trackID + '|' + AT_PLAYER_STATE_NAMES[state]);
           return;
         }
 
@@ -1116,27 +1115,35 @@ j1.adapter.amplitude = ((j1, window) => {
                       // add listeners to all Next Buttons found
                       var largeNextButtons = document.getElementsByClassName("compact-player-next");
                       for (var i=0; i<largeNextButtons.length; i++) {
-                        if (largeNextButtons[i].id === 'compact_player_next_{{player.id}}') {
-                          largeNextButtons[i].addEventListener('click', function(event) {
-                            var atpPlayerID     = this.id;
-                            var atpPlayerActive = atpPlayerID.split('_');
-  
-                            j1.adapter.amplitude.data.atpGlobals.activePlayerType = atpPlayerActive[0];
-                          }); // END EventListener 'click'
-                        } // END if ID
+                        if (largeNextButtons[i].dataset.amplitudeSource === 'youtube') {
+                          // do nothing
+                        } else {                        
+                          if (largeNextButtons[i].id === 'compact_player_next_{{player.id}}') {
+                            largeNextButtons[i].addEventListener('click', function(event) {
+                              var atpPlayerID     = this.id;
+                              var atpPlayerActive = atpPlayerID.split('_');
+    
+                              j1.adapter.amplitude.data.atpGlobals.activePlayerType = atpPlayerActive[0];
+                            }); // END EventListener 'click'
+                          } // END if ID
+                        }
                       } // END for Next Buttons
 
                       // add listeners to all Previous Buttons found
                       var compactPreviousButtons = document.getElementsByClassName("compact-player-previous");
                       for (var i=0; i<compactPreviousButtons.length; i++) {
-                        if (compactPreviousButtons[i].id === 'compact_player_previous_{{player.id}}') {
-                          compactPreviousButtons[i].addEventListener('click', function(event) {
-                            var atpPlayerID     = this.id;
-                            var atpPlayerActive = atpPlayerID.split('_');
-  
-                            j1.adapter.amplitude.data.atpGlobals.activePlayerType = atpPlayerActive[0];
-                          }); // END EventListener 'click'
-                        } // END if ID
+                        if (compactPreviousButtons[i].dataset.amplitudeSource === 'youtube') {
+                          // do nothing
+                        } else { 
+                          if (compactPreviousButtons[i].id === 'compact_player_previous_{{player.id}}') {
+                            compactPreviousButtons[i].addEventListener('click', function(event) {
+                              var atpPlayerID     = this.id;
+                              var atpPlayerActive = atpPlayerID.split('_');
+    
+                              j1.adapter.amplitude.data.atpGlobals.activePlayerType = atpPlayerActive[0];
+                            }); // END EventListener 'click'
+                          } // END if ID
+                        }
                       } // END for Previous Buttons
 
 
@@ -1147,35 +1154,43 @@ j1.adapter.amplitude = ((j1, window) => {
                       // add listeners to all SkipForwardButtons found
                       var compactPlayerSkipForwardButtons = document.getElementsByClassName("compact-player-skip-forward");
                       for (var i=0; i<compactPlayerSkipForwardButtons.length; i++) {
-                        if (compactPlayerSkipForwardButtons[i].id === 'skip-forward_{{player.id}}') {
-                          compactPlayerSkipForwardButtons[i].addEventListener('click', function(event) {
-                            const skipOffset  = parseFloat(playerForwardBackwardSkipSeconds);
-                            const duration    = Amplitude.getSongDuration();
-                            const currentTime = parseFloat(Amplitude.getSongPlayedSeconds());
-                            const targetTime  = parseFloat(currentTime + skipOffset);
+                        if (compactPlayerSkipForwardButtons[i].dataset.amplitudeSource === 'youtube') {
+                          // do nothing
+                        } else {                         
+                          if (compactPlayerSkipForwardButtons[i].id === 'skip-forward_{{player.id}}') {
+                            compactPlayerSkipForwardButtons[i].addEventListener('click', function(event) {
+                              const skipOffset  = parseFloat(playerForwardBackwardSkipSeconds);
+                              const duration    = Amplitude.getSongDuration();
+                              const currentTime = parseFloat(Amplitude.getSongPlayedSeconds());
+                              const targetTime  = parseFloat(currentTime + skipOffset);
 
-                            if (currentTime > 0) {
-                              Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
-                            }
-                          }); // END EventListener 'click'
-                        } // END if ID
+                              if (currentTime > 0) {
+                                Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
+                              }
+                            }); // END EventListener 'click'
+                          } // END if ID
+                        }
                       } // END for SkipForwardButtons
 
                       // add listeners to all SkipBackwardButtons found
                       var compactPlayerSkipBackwardButtons = document.getElementsByClassName("compact-player-skip-backward");
                       for (var i=0; i<compactPlayerSkipBackwardButtons.length; i++) {
-                        if (compactPlayerSkipBackwardButtons[i].id === 'skip-backward_{{player.id}}') {
-                          compactPlayerSkipBackwardButtons[i].addEventListener('click', function(event) {
-                            const skipOffset  = parseFloat(playerForwardBackwardSkipSeconds);
-                            const duration    = Amplitude.getSongDuration();
-                            const currentTime = parseFloat(Amplitude.getSongPlayedSeconds());
-                            const targetTime  = parseFloat(currentTime - skipOffset);
+                        if (compactPlayerSkipBackwardButtons[i].dataset.amplitudeSource === 'youtube') {
+                          // do nothing
+                        } else {                         
+                          if (compactPlayerSkipBackwardButtons[i].id === 'skip-backward_{{player.id}}') {
+                            compactPlayerSkipBackwardButtons[i].addEventListener('click', function(event) {
+                              const skipOffset  = parseFloat(playerForwardBackwardSkipSeconds);
+                              const duration    = Amplitude.getSongDuration();
+                              const currentTime = parseFloat(Amplitude.getSongPlayedSeconds());
+                              const targetTime  = parseFloat(currentTime - skipOffset);
 
-                            if (currentTime > 0) {
-                              Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
-                            }
-                          }); // END EventListener 'click'
-                        } // END if ID
+                              if (currentTime > 0) {
+                                Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
+                              }
+                            }); // END EventListener 'click'
+                          } // END if ID
+                        }
                       } // END for SkipBackwardButtons
 
                       // click on shuffle button
@@ -1210,12 +1225,16 @@ j1.adapter.amplitude = ((j1, window) => {
                       // -------------------------------------------------------
                       var largetPlayerSongContainer = document.getElementsByClassName("amplitude-song-container");
                       for (var i=0; i<largetPlayerSongContainer.length; i++) {
-                        largetPlayerSongContainer[i].addEventListener('click', function(event) {
-                          var classArray      = [].slice.call(this.classList, 0);
-                          var atpPlayerActive = classArray[2].split('-');
+                        if (largetPlayerSongContainer[i].dataset.amplitudeSource === 'youtube') {
+                          // do nothing
+                        } else {                         
+                          largetPlayerSongContainer[i].addEventListener('click', function(event) {
+                            var classArray      = [].slice.call(this.classList, 0);
+                            var atpPlayerActive = classArray[2].split('-');
 
-                          j1.adapter.amplitude.data.atpGlobals.activePlayerType = atpPlayerActive[3];
-                        });
+                            j1.adapter.amplitude.data.atpGlobals.activePlayerType = atpPlayerActive[3];
+                          });
+                        }
                       } // END for
 
                       // click on prev button
@@ -1227,12 +1246,11 @@ j1.adapter.amplitude = ((j1, window) => {
                       // click on play_pause button (MINI player)
                       var largePlayerPlayPauseButton = document.getElementsByClassName('mini-player-play-pause');
                       for (var i=0; i<largePlayerPlayPauseButton.length; i++) {
-                        if (largePlayerPlayPauseButton[i].dataset.amplitudeSource === 'youtube') {
-                          // do nothing (managed by plugin)
-                        } else {
+                        if (largetPlayerSongContainer[i].dataset.amplitudeSource === 'youtube') {
+                          // do nothing
+                        } else {                         
                           // var amplitudeSource = largePlayerPlayPauseButton[i].dataset.amplitudeSource;
                           largePlayerPlayPauseButton[i].addEventListener('click', function(event) {
-                            // var classArray   = [].slice.call(largePlayerPlayPauseButton[i].classList, 0);
                             var atpPlayerID     = this.id;
                             var atpPlayerActive = atpPlayerID.split('_');
 
@@ -1248,7 +1266,6 @@ j1.adapter.amplitude = ((j1, window) => {
                           // do nothing (managed by plugin)
                         } else {
                           largePlayerPlayPauseButton[i].addEventListener('click', function(event) {
-                            // var classArray    = [].slice.call(largePlayerPlayPauseButton[i].classList, 0);
                             var atpPlayerID     = this.id;
                             var atpPlayerActive = atpPlayerID.split('_');
 
@@ -1264,7 +1281,6 @@ j1.adapter.amplitude = ((j1, window) => {
                           // do nothing (managed by plugin)
                         } else {
                           largePlayerPlayPauseButton[i].addEventListener('click', function(event) {
-                            // var classArray   = [].slice.call(largePlayerPlayPauseButton[i].classList, 0);
                             var atpPlayerID     = this.id;
                             var atpPlayerActive = atpPlayerID.split('_');
 
@@ -1287,7 +1303,6 @@ j1.adapter.amplitude = ((j1, window) => {
                             if (Amplitude.getPlayerState() === 'playing') {
                               Amplitude.setSongPlayedPercentage((parseFloat(xpos)/parseFloat(this.offsetWidth))*100);
                             }
-
                           }); // END EventListener 'click'
                         }
                       } // END for
@@ -1299,27 +1314,35 @@ j1.adapter.amplitude = ((j1, window) => {
                       // add listeners to all Next Buttons found
                       var largeNextButtons = document.getElementsByClassName("large-player-next");
                       for (var i=0; i<largeNextButtons.length; i++) {
-                        if (largeNextButtons[i].id === 'large_player_next_{{player.id}}') {
-                          largeNextButtons[i].addEventListener('click', function(event) {
-                            var atpPlayerID     = this.id;
-                            var atpPlayerActive = atpPlayerID.split('_');
-  
-                            j1.adapter.amplitude.data.atpGlobals.activePlayerType = atpPlayerActive[0];
-                          }); // END EventListener 'click'
-                        } // END if ID
+                        if (largeNextButtons[i].dataset.amplitudeSource === 'youtube') {
+                          // do nothing (managed by plugin)
+                        } else {                        
+                          if (largeNextButtons[i].id === 'large_player_next_{{player.id}}') {
+                            largeNextButtons[i].addEventListener('click', function(event) {
+                              var atpPlayerID     = this.id;
+                              var atpPlayerActive = atpPlayerID.split('_');
+    
+                              j1.adapter.amplitude.data.atpGlobals.activePlayerType = atpPlayerActive[0];
+                            }); // END EventListener 'click'
+                          } // END if ID
+                        }
                       } // END for Next Buttons
 
                       // add listeners to all Previous Buttons found
                       var largePreviousButtons = document.getElementsByClassName("large-player-previous");
                       for (var i=0; i<largePreviousButtons.length; i++) {
-                        if (largePreviousButtons[i].id === 'large_player_previous_{{player.id}}') {
-                          largePreviousButtons[i].addEventListener('click', function(event) {
-                            var atpPlayerID     = this.id;
-                            var atpPlayerActive = atpPlayerID.split('_');
-  
-                            j1.adapter.amplitude.data.atpGlobals.activePlayerType = atpPlayerActive[0];
-                          }); // END EventListener 'click'
-                        } // END if ID
+                        if (largePreviousButtons[i].dataset.amplitudeSource === 'youtube') {
+                          // do nothing (managed by plugin)
+                        } else {                          
+                          if (largePreviousButtons[i].id === 'large_player_previous_{{player.id}}') {
+                            largePreviousButtons[i].addEventListener('click', function(event) {
+                              var atpPlayerID     = this.id;
+                              var atpPlayerActive = atpPlayerID.split('_');
+    
+                              j1.adapter.amplitude.data.atpGlobals.activePlayerType = atpPlayerActive[0];
+                            }); // END EventListener 'click'
+                          } // END if ID
+                        }
                       } // END for Previous Buttons
 
 
@@ -1526,11 +1549,9 @@ j1.adapter.amplitude = ((j1, window) => {
                 playerExistsInPage   = (document.getElementById('{{player.id}}_app') !== null) ? true : false;
                 pluginManagerEnabled = ('{{player.plugin_manager.enabled}}'.length > 0 && '{{player.plugin_manager.enabled}}' === 'true') ? true : playerDefaultPluginManager;
 
-                if (playerExistsInPage && pluginManagerEnabled && !pluginManagerRunOnce) {
+                var ytpPluginInstalled = j1.adapter.amplitude.data.atpGlobals.ytpInstalled;
+                if (playerExistsInPage && pluginManagerEnabled && !ytpPluginInstalled) {
                   _this.pluginManager('{{player.plugin_manager.plugins}}');
-
-                  // make sure the plugin is loaded|run only ONCE
-                  pluginManagerRunOnce = true;
                 }
 
                 clearInterval(load_dependencies['dependencies_met_player_loaded_{{player.id}}']);
@@ -1605,8 +1626,21 @@ j1.adapter.amplitude = ((j1, window) => {
     // pluginManager()
     // 
     // -------------------------------------------------------------------------
-    pluginManager: (plugin) => {
-      if (plugin === 'ytp') {        
+    pluginManager: (plugin) => {      
+
+      function isPluginLoaded(pluginName) {
+        const scripts     = document.scripts;
+        const pluginFile  = pluginName + '.js';
+
+        for (let i = 0; i < scripts.length; i++) {
+          if (scripts[i].src.includes(pluginFile)) {
+            return true;
+          }
+        }
+        return false;
+      }
+
+      if (plugin !== '' && plugin === 'ytp') {        
         var tech;
         var techScript;
 
@@ -1617,6 +1651,13 @@ j1.adapter.amplitude = ((j1, window) => {
 
         techScript.parentNode.insertBefore(tech, techScript);
       }
+
+      if (plugin !== '' && isPluginLoaded(plugin)) {     
+        logger.debug('\n' + 'plugin loaded: ' + plugin);
+
+        // make sure the plugin installed only ONCE
+        j1.adapter.amplitude.data.atpGlobals.ytpInstalled = true;
+      }      
     }, // END pluginManager
 
     // -------------------------------------------------------------------------

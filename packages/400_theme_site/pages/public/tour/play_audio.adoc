@@ -91,13 +91,24 @@ the visual and functional aspects of a player's audio control elements.
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 
+[role="mt-5"]
+== HTML 5 Audio
+
+Audio players can easily be embedded in web pages using the *audio* tag
+`<audio>.` Browsers have a built-in framework for decoding and playing audio
+content directly within a webpage.
+
+.Ambient Piano
+audio::/assets/audio/sound-effects/ambient-piano.mp3[role="mt-4 mb-5"]
+
+
 // [role="mt-5"]
 // == AmplitudeJS Video (Youtube)
 
-// The example below demonstrates playing only the *Audio* track from YouTube
-// Video using an AmplitudJS player. The J1 template uses the video *plugin* ytp
-// to extend the native functionality of the AmplitudeJS API to playback YouTube
-// files for the audio part.
+// The example demonstrates playing *Audio* track from *YouTube Video* using an
+// AmplitudJS player. The J1 template uses the video *plugin ytp* to extend the
+// native functionality of the AmplitudeJS API to playback YouTube files only for
+// the audio part.
 
 // [role="mt-4 mb-5"]
 // [CAUTION]
@@ -119,18 +130,7 @@ the visual and functional aspects of a player's audio control elements.
 
 
 [role="mt-5"]
-== HTML 5 Audio
-
-Audio players can easily be embedded in web pages using the *audio* tag
-`<audio>.` Browsers have a built-in framework for decoding and playing audio
-content directly within a webpage.
-
-.Ambient Piano
-audio::/assets/audio/sound-effects/ambient-piano.mp3[role="mt-4 mb-5"]
-
-
-[role="mt-5"]
-== AmplitudeJS (AJS) Audio
+== AmplitudeJS Audio
 
 The J1 Template implements custom players based on the (default) theme Uno.
 The color scheme used matches the look and feel of the template to preserve
@@ -218,37 +218,41 @@ lorem:sentences[3]
 .Royalty Free Music · Disco 80th
 amplitude::disco_large[role="mt-4 mb-5"]
 
-// lorem:sentences[5]
+lorem:sentences[5]
 
-// .Spontanorama 2024 (large)
+// Spontanorama 2024 (large)
 // amplitude::spontanorama_2024_large[role="mt-4 mb-5"]
 
 
-// [role="mt-5"]
-// == AmplitudeJS Video (Youtube)
+[role="mt-5"]
+== AmplitudeJS Video (Youtube)
 
-// The example below demonstrates playing only the *Audio* track from YouTube
-// Video using an AmplitudJS player. The J1 template uses the video *plugin* ytp
-// to extend the native functionality of the AmplitudeJS API to playback YouTube
-// files for the audio part.
+The example demonstrates playing *Audio* track from *YouTube Video* using an
+AmplitudJS player. The J1 template uses the video *plugin ytp* to extend the
+native functionality of the AmplitudeJS API to playback YouTube files only for
+the audio part.
 
-// [role="mt-4 mb-5"]
-// [CAUTION]
-// ====
-// Playing audio tracks is currently supported only for videos from YouTube (YT).
-// The YT plugin *ytp* embeds a YouTube (iframe) player and mimics the AmplitudeJS
-// player buttons and controls to manage a *playlist* of videos the same as known
-// for native audio files.
-// ====
+[role="mt-4 mb-5"]
+[CAUTION]
+====
+Playing audio tracks is currently supported only for videos from YouTube (YT).
+The YT plugin *ytp* embeds a YouTube (iframe) player and mimics the AmplitudeJS
+player buttons and controls to manage a *playlist* of videos the same as known
+for native audio files.
+====
 
-// .Manon Mélodie · TuneCore 2024
-// amplitude::manon_melodie_yt_large[role="mt-4 mb-4"]
+.Manon Mélodie · TuneCore 2024
+amplitude::manon_melodie_yt_large[role="mb-5"]
 
-// [NOTE]
-// ====
-// AmplitudeJS YT Player can only be used with the J1 Template. Currently, only
-// AJS players of type *large * are supported.
-// ====
+// .Ephraim Kishon · Beste Familiengeschichten
+// amplitude::ephraim_kishon_beste_familiengeschichten_yt_large[role="mb-5"]
+
+[role="mt-4 mb-5"]
+[NOTE]
+====
+AmplitudeJS YT Player can only be used with the J1 Template. Currently, only
+AJS players of type *large * are supported.
+====
 
 
 [role="mt-5"]
