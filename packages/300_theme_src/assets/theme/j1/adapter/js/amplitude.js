@@ -230,6 +230,8 @@ j1.adapter.amplitude = ((j1, window) => {
       j1.adapter.amplitude.data.ytpGlobals  = {};      
       j1.adapter.amplitude.data.ytPlayers   = {};
       
+      // (initial) YT player data for later use (e.g. events)
+      j1.adapter.amplitude.data.activePlayer                = 'not_set';
       j1.adapter.amplitude.data.atpGlobals.activePlayerType = 'not_set';
       j1.adapter.amplitude.data.atpGlobals.ytpInstalled     = false;
       j1.adapter.amplitude.data.ytpGlobals.activePlayerType = 'not_set';
@@ -1220,6 +1222,9 @@ j1.adapter.amplitude = ((j1, window) => {
                     // START large player UI events
                     //
                     if (document.getElementById('{{player.id}}') !== null) {
+                      // var playlist = '{{player.id}}_yt';
+                      var playlistInfo  = {{player.playlist | replace: 'nil', 'null' | replace: '=>', ':'}};
+                      var playList      = playlistInfo.name;
 
                       // NOTE: listener overloads for video managed by plugin
                       // -------------------------------------------------------
@@ -1227,13 +1232,18 @@ j1.adapter.amplitude = ((j1, window) => {
                       for (var i=0; i<largetPlayerSongContainer.length; i++) {
                         if (largetPlayerSongContainer[i].dataset.amplitudeSource === 'youtube') {
                           // do nothing
-                        } else {                         
-                          largetPlayerSongContainer[i].addEventListener('click', function(event) {
-                            var classArray      = [].slice.call(this.classList, 0);
-                            var atpPlayerActive = classArray[0].split('-');
+                        } else {
+                            var currentPlaylist = largetPlayerSongContainer[i].dataset.amplitudePlaylist;
+                            if (currentPlaylist === playList) {
+                              largetPlayerSongContainer[i].addEventListener('click', function(event) {
+                                var classArray      = [].slice.call(this.classList, 0);
+                                var atpPlayerActive = classArray[0].split('-');
 
-                            j1.adapter.amplitude.data.atpGlobals.activePlayerType = atpPlayerActive[3];
-                          });
+                                // save YT player data for later use (e.g. events)
+                                j1.adapter.amplitude.data.activePlayer = 'atp';
+                                j1.adapter.amplitude.data.atpGlobals.activePlayerType = atpPlayerActive[3];
+                              });
+                            }
                         }
                       } // END for
 
@@ -1248,14 +1258,15 @@ j1.adapter.amplitude = ((j1, window) => {
                       for (var i=0; i<largePlayerPlayPauseButton.length; i++) {
                         if (largetPlayerSongContainer[i].dataset.amplitudeSource === 'youtube') {
                           // do nothing
-                        } else {                         
-                          // var amplitudeSource = largePlayerPlayPauseButton[i].dataset.amplitudeSource;
-                          largePlayerPlayPauseButton[i].addEventListener('click', function(event) {
-                            var atpPlayerID     = this.id;
-                            var atpPlayerActive = atpPlayerID.split('_');
-
-                            j1.adapter.amplitude.data.atpGlobals.activePlayerType = atpPlayerActive[0];
-                          });
+                        } else {   
+                          if (currentPlaylist === playList) {
+                            largePlayerPlayPauseButton[i].addEventListener('click', function(event) {
+                              var atpPlayerID     = this.id;
+                              var atpPlayerActive = atpPlayerID.split('_');
+  
+                              j1.adapter.amplitude.data.atpGlobals.activePlayerType = atpPlayerActive[0];
+                            });
+                          }
                         }
                       } // END for
 
@@ -1265,12 +1276,16 @@ j1.adapter.amplitude = ((j1, window) => {
                         if (largePlayerPlayPauseButton[i].dataset.amplitudeSource === 'youtube') {
                           // do nothing (managed by plugin)
                         } else {
-                          largePlayerPlayPauseButton[i].addEventListener('click', function(event) {
-                            var atpPlayerID     = this.id;
-                            var atpPlayerActive = atpPlayerID.split('_');
-
-                            j1.adapter.amplitude.data.atpGlobals.activePlayerType = atpPlayerActive[0];
-                          });
+                          if (currentPlaylist === playList) {
+                            largePlayerPlayPauseButton[i].addEventListener('click', function(event) {
+                              var atpPlayerID     = this.id;
+                              var atpPlayerActive = atpPlayerID.split('_');
+  
+                              // save YT player data for later use (e.g. events)
+                              j1.adapter.amplitude.data.activePlayer = 'atp';
+                              j1.adapter.amplitude.data.atpGlobals.activePlayerType = atpPlayerActive[0];
+                            });
+                          }
                         }
                       } // END for
 
@@ -1280,12 +1295,18 @@ j1.adapter.amplitude = ((j1, window) => {
                         if (largePlayerPlayPauseButton[i].dataset.amplitudeSource === 'youtube') {
                           // do nothing (managed by plugin)
                         } else {
-                          largePlayerPlayPauseButton[i].addEventListener('click', function(event) {
-                            var atpPlayerID     = this.id;
-                            var atpPlayerActive = atpPlayerID.split('_');
+                          var currentPlaylist = largePlayerPlayPauseButton[i].dataset.amplitudePlaylist;
+                          if (currentPlaylist === playList) {
+                            largePlayerPlayPauseButton[i].addEventListener('click', function(event) {
+                              var atpPlayerID     = this.id;
+                              var atpPlayerActive = atpPlayerID.split('_');
 
-                            j1.adapter.amplitude.data.atpGlobals.activePlayerType = atpPlayerActive[0];
-                          });
+                              // save YT player data for later use (e.g. events)
+                              j1.adapter.amplitude.data.activePlayer = 'atp';
+                              j1.adapter.amplitude.data.atpGlobals.activePlayerType = atpPlayerActive[0];
+                              
+                            });
+                          }
                         }
                       } // END for
 
@@ -1322,6 +1343,8 @@ j1.adapter.amplitude = ((j1, window) => {
                               var atpPlayerID     = this.id;
                               var atpPlayerActive = atpPlayerID.split('_');
     
+                              // save YT player data for later use (e.g. events)
+                              j1.adapter.amplitude.data.activePlayer = 'atp';
                               j1.adapter.amplitude.data.atpGlobals.activePlayerType = atpPlayerActive[0];
                             }); // END EventListener 'click'
                           } // END if ID
@@ -1338,7 +1361,9 @@ j1.adapter.amplitude = ((j1, window) => {
                             largePreviousButtons[i].addEventListener('click', function(event) {
                               var atpPlayerID     = this.id;
                               var atpPlayerActive = atpPlayerID.split('_');
-    
+
+                              // save YT player data for later use (e.g. events)
+                              j1.adapter.amplitude.data.activePlayer = 'atp';
                               j1.adapter.amplitude.data.atpGlobals.activePlayerType = atpPlayerActive[0];
                             }); // END EventListener 'click'
                           } // END if ID

@@ -436,6 +436,12 @@ var progress;
       var ytpVideoID    = songURL.split('=')[1];
 
       // load next video
+      // -----------------------------------------------------------------------
+
+      // save YT player data for later use (e.g. events)
+      j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex = songIndex;
+      j1.adapter.amplitude.data.ytPlayers[playerID].videoID     = ytpVideoID;      
+
       logger.debug('\n' + 'switch video at trackID|ID: ', trackID + '|' + ytpVideoID);
       ytPlayer.loadVideoById(ytpVideoID);
 
@@ -461,6 +467,7 @@ var progress;
   
       // save YT player data for later use (e.g. events)
       // j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex = songIndex;
+      // j1.adapter.amplitude.data.ytPlayers[playerID].videoID     = ytpVideoID;
 
       // load cover image
       selector       = ".cover-image-" + playlist;
@@ -480,6 +487,10 @@ var progress;
           if (currentPlaylist === playlist) {
             if (songMetaData.rating) {
               var trackID = songMetaData.index + 1;
+
+              // save YT player data for later use (e.g. events)
+              j1.adapter.amplitude.data.ytPlayers[playerID].videoID = songMetaData.videoID;
+
               logger.debug('\n' + 'update song rating for trackID|playlist at: ', trackID + '|' + playlist + ' = ' + songMetaData.rating);
               largetPlayerSongAudioRating[k].innerHTML = '<img src="/assets/image/pattern/rating/scalable/' + songMetaData.rating + '-star.svg"' + 'alt="song rating">';
             } else {
@@ -506,18 +517,17 @@ var progress;
       var songMetaData  = songs[songIndex];
       var songURL       = songMetaData.url;
       var ytpVideoID    = songURL.split('=')[1];
-  
+
       // update global song index
       ytpSongIndex = songIndex;
 
-      // save YT player data for later use (e.g. events)
-      j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex = songIndex;
-      j1.adapter.amplitude.data.ytPlayers[playerID].videoID     = ytpVideoID;
-  
-      // save YT player data for later use (e.g. events)
-      j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex = songIndex;
+      // load next video (paused)
+      // -----------------------------------------------------------------------
 
-      // load next video paused
+      // save YT player data for later use (e.g. events)
+      j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex = songIndex;
+      j1.adapter.amplitude.data.ytPlayers[playerID].videoID     = ytpVideoID; 
+
       logger.debug('\n' + 'switch video at trackID|ID: ', trackID + '|' + ytpVideoID);
       ytPlayer.loadVideoById(ytpVideoID);
 
@@ -556,6 +566,10 @@ var progress;
           if (currentPlaylist === playlist) {
             if (songMetaData.rating) {
               var trackID = songMetaData.index + 1;
+
+              // save YT player data for later use (e.g. events)
+              j1.adapter.amplitude.data.ytPlayers[playerID].videoID = songMetaData.videoID;
+
               logger.debug('\n' + 'update song rating for trackID|playlist at: ', trackID + '|' + playlist + ' = ' + songMetaData.rating);
               largetPlayerSongAudioRating[k].innerHTML = '<img src="/assets/image/pattern/rating/scalable/' + songMetaData.rating + '-star.svg"' + 'alt="song rating">';
             } else {
@@ -820,6 +834,7 @@ var progress;
           songs       = j1.adapter.amplitude.data.ytPlayers.{{player.id}}.songs;
 
           // save YT player GLOBAL data for later use (e.g. events)
+          j1.adapter.amplitude.data.activePlayer                 = 'ytp';
           j1.adapter.amplitude.data.ytpGlobals['activePlayer']   = ytPlayer;
           j1.adapter.amplitude.data.ytpGlobals['activeIndex']    = ytpSongIndex;
           j1.adapter.amplitude.data.ytpGlobals['activePlaylist'] = playlist;   
@@ -886,6 +901,7 @@ var progress;
             var trackID       = songIndex + 1;
 
             // save YT player GLOBAL data for later use (e.g. events)
+            j1.adapter.amplitude.data.activePlayer              = 'ytp';
             j1.adapter.amplitude.data.ytpGlobals['activeIndex'] = songIndex;
             j1.adapter.amplitude.data.ytpGlobals['videoID']     = ytpVideoID;
 
@@ -1694,20 +1710,26 @@ var progress;
               var songMetaData      = songs[activeIndex];
               var currentVolume     = ytPlayer.getVolume();
 
-              // var playerID       = playlist + '_large';
               var songStart         = songs[songIndex].start;
               var songEnd           = songs[songIndex].end;
               var songStartSec      = timestamp2seconds(songStart);
               var songEndSec        = timestamp2seconds(songEnd);
 
-              Amplitude.stop();
+              if (j1.adapter.amplitude.data.activePlayer !== 'not_set') {
+                logger.debug('\n' + 'active player type: ' + j1.adapter.amplitude.data.activePlayer);
+              }
 
-              // save YT player GLOBAL data for later use (e.g. events)
+              if (j1.adapter.amplitude.data.activePlayer === 'atp') {
+                var atpPlayerState = Amplitude.getPlayerState();
+                if (atpPlayerState === 'playing') {
+                  Amplitude.stop();
+                }
+              }
+
+              // save player GLOBAL data for later use (e.g. events)
+              j1.adapter.amplitude.data.activePlayer                 = 'ytp';
               j1.adapter.amplitude.data.ytpGlobals['activeIndex']    = activeIndex;
               j1.adapter.amplitude.data.ytpGlobals['activePlaylist'] = playlist;
-
-              // save YT player data for later use (e.g. events)
-              j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex = activeIndex;
 
               // toggle YT play|pause video
               if (ytPlayer.getPlayerState() === YT_PLAYER_STATE.PLAYING || event.data === YT_PLAYER_STATE.BUFFERING) {
@@ -1848,6 +1870,13 @@ var progress;
                 logger.error('\n' + 'YT player not defined');
               }
 
+              if (j1.adapter.amplitude.data.activePlayer === 'atp') {
+                var atpPlayerState = Amplitude.getPlayerState();
+                if (atpPlayerState === 'playing') {
+                  Amplitude.stop();
+                }
+              }
+
               // select video
               if (songIndex < songs.length-1) {
                 // select NEXT video
@@ -1864,16 +1893,18 @@ var progress;
               songURL       = songMetaData.url;
               ytpVideoID    = songURL.split('=')[1];
 
+              // load next video
+              // ---------------------------------------------------------------
+
               // save YT player GLOBAL data for later use (e.g. events)
+              j1.adapter.amplitude.data.activePlayer                 = 'ytp';
               j1.adapter.amplitude.data.ytpGlobals['activeIndex']    = songIndex;
               j1.adapter.amplitude.data.ytpGlobals['activePlaylist'] = playlist;
 
               // save YT player data for later use (e.g. events)
               j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex = songIndex;
-              j1.adapter.amplitude.data.ytPlayers[playerID].videoID = ytpVideoID;
+              j1.adapter.amplitude.data.ytPlayers[playerID].videoID     = ytpVideoID;
 
-              // wait some time to make sure video is loaded|active
-              // load next video
               trackID = songIndex + 1;
               logger.debug('\n' + 'switch video at trackID|ID: ', trackID + '|' + ytpVideoID);
               ytPlayer.loadVideoById(ytpVideoID);
@@ -1931,6 +1962,11 @@ var progress;
                   if (currentPlaylist === playlist) {
                     if (songMetaData.rating) {
                       var trackID = songMetaData.index + 1;
+
+                      // save YT player data for later use (e.g. events)
+                      j1.adapter.amplitude.data.activePlayer                = 'ytp';
+                      j1.adapter.amplitude.data.ytPlayers[playerID].videoID = songMetaData.videoID;
+
                       logger.debug('\n' + 'update song rating for trackID|playlist at: ', trackID + '|' + playlist + ' = ' + songMetaData.rating);
                       largetPlayerSongAudioRating[k].innerHTML = '<img src="/assets/image/pattern/rating/scalable/' + songMetaData.rating + '-star.svg"' + 'alt="song rating">';
                     } else {
@@ -1983,6 +2019,13 @@ var progress;
               logger.error('\n' + 'YT player not defined');
             }
 
+            if (j1.adapter.amplitude.data.activePlayer === 'atp') {
+              var atpPlayerState = Amplitude.getPlayerState();
+              if (atpPlayerState === 'playing') {
+                Amplitude.stop();
+              }
+            }
+
             // select video
             if (songIndex > 0 && songIndex <= songs.length - 1) {
               // select NEXT video
@@ -2000,15 +2043,18 @@ var progress;
             ytpVideoID    = songURL.split('=')[1];
 
             // save YT player GLOBAL data for later use (e.g. events)
+            j1.adapter.amplitude.data.activePlayer                 = 'ytp';
             j1.adapter.amplitude.data.ytpGlobals['activeIndex']    = songIndex;
             j1.adapter.amplitude.data.ytpGlobals['activePlaylist'] = playlist;
 
-            // save YT player data for later use (e.g. events)
-            j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex = songIndex;
-            j1.adapter.amplitude.data.ytPlayers[playerID].videoID = ytpVideoID;
-
-            // wait some time to make sure video is loaded|active
             // load next video
+            // -----------------------------------------------------------------
+
+            // save YT player data for later use (e.g. events)
+            j1.adapter.amplitude.data.activePlayer                    = 'ytp';
+            j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex = songIndex;
+            j1.adapter.amplitude.data.ytPlayers[playerID].videoID     = ytpVideoID; 
+
             trackID = songIndex + 1;
             logger.debug('\n' + 'switch video at trackID|ID: ', trackID + '|' + ytpVideoID);
             ytPlayer.loadVideoById(ytpVideoID);
@@ -2065,6 +2111,11 @@ var progress;
                 var currentPlaylist = largetPlayerSongAudioRating[k].dataset.amplitudePlaylist;
                 if (currentPlaylist === playlist) {
                   if (songMetaData.rating) {
+
+                    // save YT player data for later use (e.g. events)
+                    j1.adapter.amplitude.data.activePlayer                = 'ytp';
+                    j1.adapter.amplitude.data.ytPlayers[playerID].videoID = songMetaData.videoID;                    
+
                     var trackID = songMetaData.index + 1;
                     logger.debug('\n' + 'update song rating for trackID|playlist at: ', trackID + '|' + playlist + ' = ' + songMetaData.rating);
                     largetPlayerSongAudioRating[k].innerHTML = '<img src="/assets/image/pattern/rating/scalable/' + songMetaData.rating + '-star.svg"' + 'alt="song rating">';
@@ -2114,6 +2165,13 @@ var progress;
           songs     = j1.adapter.amplitude.data.ytPlayers[playerID].songs;
           songIndex = parseInt(this.getAttribute("data-amplitude-song-index"));
 
+          if (j1.adapter.amplitude.data.activePlayer === 'atp') {
+            var atpPlayerState = Amplitude.getPlayerState();
+            if (atpPlayerState === 'playing') {
+              Amplitude.stop();
+            }
+          }
+
           // set (current) song meta data
           songMetaData  = songs[songIndex];
           songURL       = songMetaData.url;
@@ -2123,16 +2181,18 @@ var progress;
           ytpSongIndex  = songIndex;
 
           // save YT player GLOBAL data for later use (e.g. events)
+          j1.adapter.amplitude.data.activePlayer                 = 'ytp';
           j1.adapter.amplitude.data.ytpGlobals['activeIndex']    = songIndex;
           j1.adapter.amplitude.data.ytpGlobals['activePlaylist'] = playlist;            
 
           // save YT player data for later use (e.g. events)
           j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex = songIndex;
+          // j1.adapter.amplitude.data.ytPlayers[playerID].videoID     = ytpVideoID;
 
           playerState   = ytPlayer.getPlayerState();
-          singleAudio   = (songMetaData.audio_single === 'true') ? true : false;
-          changedAudio  = (j1.adapter.amplitude.data.ytPlayers[playerID].videoID !== ytpVideoID) ? true : false;
-          if (!singleAudio && !changedAudio && (playerState === YT_PLAYER_STATE.PLAYING || playerState === YT_PLAYER_STATE.PAUSED)) {
+          // changedAudio  = (j1.adapter.amplitude.data.ytPlayers[playerID].videoID !== ytpVideoID) ? true : false;
+          changedAudio  = (j1.adapter.amplitude.data.ytPlayers[playerID].videoID !== ytpVideoID) ? true : false;          
+          if (!changedAudio && (playerState === YT_PLAYER_STATE.PLAYING || playerState === YT_PLAYER_STATE.PAUSED)) {
             // do NOT interupt CURRENT video (song) playing|paused
             return;
           }
@@ -2169,6 +2229,10 @@ var progress;
               var currentPlaylist = largetPlayerSongAudioRating[k].dataset.amplitudePlaylist;
               if (currentPlaylist === playlist) {
                 if (songMetaData.rating) {
+
+                  // save YT player data for later use (e.g. events)
+                  j1.adapter.amplitude.data.ytPlayers[playerID].videoID = songMetaData.videoID;
+
                   var trackID = songMetaData.index + 1;
                   logger.debug('\n' + 'update song rating for trackID|playlist at: ', trackID + '|' + playlist + ' = ' + songMetaData.rating);
                   largetPlayerSongAudioRating[k].innerHTML = '<img src="/assets/image/pattern/rating/scalable/' + songMetaData.rating + '-star.svg"' + 'alt="song rating">';
@@ -2187,6 +2251,12 @@ var progress;
           setSongPlayed(ytPlayerID, songIndex);
 
           // load next video
+          // -------------------------------------------------------------------
+
+          // save YT player data for later use (e.g. events)
+          j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex = songIndex;
+          j1.adapter.amplitude.data.ytPlayers[playerID].videoID     = ytpVideoID;
+
           trackID = songIndex + 1;
           logger.debug('\n' + 'switch video at trackID|ID: ', trackID + '|' + ytpVideoID);
           ytPlayer.loadVideoById(ytpVideoID);
