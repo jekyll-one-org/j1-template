@@ -1230,7 +1230,7 @@ j1.adapter.amplitude = ((j1, window) => {
                         } else {                         
                           largetPlayerSongContainer[i].addEventListener('click', function(event) {
                             var classArray      = [].slice.call(this.classList, 0);
-                            var atpPlayerActive = classArray[2].split('-');
+                            var atpPlayerActive = classArray[0].split('-');
 
                             j1.adapter.amplitude.data.atpGlobals.activePlayerType = atpPlayerActive[3];
                           });
