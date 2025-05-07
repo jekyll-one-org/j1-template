@@ -7,7 +7,7 @@ regenerate: true
 {% comment %}
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/modules/amplitudejs/js/plugins/tech/ytp.26.js
- # AmplitudeJS V5 Plugin|Tech for J1 Template
+ # AmplitudeJS V5 Tech for J1 Template
  #
  # Product/Info:
  # https://jekyll.one
@@ -1086,8 +1086,11 @@ var progress;
     // Find the active index and add the active song container to the element
     // that represents the song at the index.
     //
-    if (Amplitude.getActivePlaylist() == "" || Amplitude.getActivePlaylist() == null) {
-      var activeIndex = "";
+    
+    // if (Amplitude.getActivePlaylist() == "" || Amplitude.getActivePlaylist() == null) {
+    if (index !== "" || index !== null) {
+      // var activeIndex = "";
+      var activeIndex = index;
 
       // If we click directly on the song element, we ignore
       // whether it's in shuffle or not.
@@ -1119,7 +1122,7 @@ var progress;
       //  song element, we ignore the shuffle.
       //
       if (Amplitude.getActivePlaylist() != null && Amplitude.getActivePlaylist() != "" || direct) {
-        var activePlaylistIndex = Amplitude.getActiveIndex();
+        var activePlaylistIndex = index;                                        // Amplitude.getActiveIndex();
       } else {
         var activePlaylistIndex = "";
 
