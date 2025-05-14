@@ -321,6 +321,8 @@ settings:
         audio_base:                     //youtube.com
         cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
         audio_fade:                     true
+        audio_single:                   false
+        shuffle:                        false
 
       # ------------------------------------------------------------------------
       # TITLE settings (songs)
@@ -344,7 +346,7 @@ settings:
           end:                          "00:02:00"
           audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/5NiMGeQOzKQ/maxresdefault.jpg
-          duration:                     "02:48"
+          duration:                     "02:47"
 
         # title 02
         - item:
@@ -409,7 +411,7 @@ settings:
           end:                          "00:02:20"         
           audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/_EYc5W3qy4s/maxresdefault.jpg
-          duration:                     "03:03"
+          duration:                     "03:02"
 
         # title 07
         - item:

@@ -356,6 +356,7 @@ settings:
         title:                          Manon Mélodie
         audio_info:                     true
         audio_rating:                   true
+        shuffle:                        true
         controls:                       false                                   # currently NOT supported for YTP
 
     # --------------------------------------------------------------------------

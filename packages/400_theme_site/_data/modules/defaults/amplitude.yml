@@ -335,10 +335,11 @@ defaults:
       audio_info:                       true                                    # true|false, show info button in playlist
       audio_rating:                     true                                    # true|false, show ratings in playlist
       audio_single:                     false                                   # true|false, a single audio (video) file used
-      audio_fade:                       false                                   # true|false, fadeIn|Out audio on start|end (if configured)
+      audio_fade:                       false                                   # true|false, fadeIn|Out audio on start|end (if configured
       controls:                         false                                   # true|false, show control buttons in playlist (currently NOT supported for YTP)
       start:                            false                                   # false|timestanp, set video|audio start position
       end:                              false                                   # false|timestanp, set video|audio start position
+      shuffle:                          false
 
 # ------------------------------------------------------------------------------
 # END config
