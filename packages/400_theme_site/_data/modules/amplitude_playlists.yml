@@ -440,6 +440,245 @@ settings:
           duration:                     "02:45"
 
     # --------------------------------------------------------------------------
+    # Bea and her Business
+    # https://www.beaandher.business/
+    # --------------------------------------------------------------------------
+    #
+    - playlist:
+      enabled:                          true
+
+      name:                             bea_yt
+      title:                            Bea and her Business
+
+      # ------------------------------------------------------------------------
+      # ALBUM settings
+      # ------------------------------------------------------------------------
+      album:                            &album_bea_yt
+        name:                           YouTube 2025
+        playlist:                       bea_yt
+        artist:                         Bea and her Business
+        audio_base:                     //youtube.com
+        cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
+        audio_fade:                     true
+        audio_single:                   false
+        shuffle:                        false
+
+      # ------------------------------------------------------------------------
+      # TITLE settings (songs)
+      # ------------------------------------------------------------------------
+      items:
+
+        # title 01
+        - item:
+          enabled:                      true
+          <<:                           *album_bea_yt
+          title:                        Safety Net (Official Video)
+          audio:                        watch?v=fTXrSVzkIXI
+          rating:                       5
+          start:                        "00:00:03"                              # false | timestamp
+          end:                          "00:03:20"                              # false | timestamp
+          audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
+          cover_image:                  //img.youtube.com/vi/fTXrSVzkIXI/maxresdefault.jpg
+          duration:                     "03:26"
+
+
+        # title 02
+        - item:
+          enabled:                      true
+          <<:                           *album_bea_yt
+          title:                        Good Things
+          audio:                        watch?v=dM7CmIHwJnU
+          rating:                       3
+          start:                        "00:00:03"
+          end:                          "00:02:56"
+          audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
+          cover_image:                  //img.youtube.com/vi/dM7CmIHwJnU/maxresdefault.jpg
+          duration:                     "02:58"
+
+        # title 03
+        - item:
+          enabled:                      true
+          <<:                           *album_bea_yt
+          title:                        Me Against My Head
+          audio:                        watch?v=bvXV4pfIzog
+          rating:                       4
+          start:                        "00:00:03"
+          end:                          "00:03:14"
+          audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
+          cover_image:                  //img.youtube.com/vi/dM7CmIHwJnU/maxresdefault.jpg
+          duration:                     "03:21"
+
+        # title 04
+        - item:
+          enabled:                      true
+          <<:                           *album_bea_yt
+          title:                        Never Ever Love a Liar (Live Session)
+          audio:                        watch?v=npctqyR5ZdU
+          rating:                       4
+          start:                        "00:00:03"
+          end:                          false # "00:02:50"
+          audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
+          cover_image:                  //img.youtube.com/vi/npctqyR5ZdU/maxresdefault.jpg
+          duration:                     "02:53"
+
+        # title 05
+        - item:
+          enabled:                      true
+          <<:                           *album_bea_yt
+          title:                        Smoking Lessons (Live Session)
+          audio:                        watch?v=DMxz1Sp8RPA
+          rating:                       4
+          start:                        "00:00:03"
+          end:                          false
+          audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
+          cover_image:                  //img.youtube.com/vi/DMxz1Sp8RPA/maxresdefault.jpg
+          duration:                     "02:58"
+
+        # title 06
+        - item:
+          enabled:                      true
+          <<:                           *album_bea_yt
+          title:                        Too Loud (And That's The Way I'm Going Out)
+          audio:                        watch?v=PcDCR8s0IU4
+          rating:                       4
+          start:                        "00:00:03"
+          end:                          false
+          audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
+          cover_image:                  //img.youtube.com/vi/PcDCR8s0IU4/maxresdefault.jpg
+          duration:                     "02:58"
+
+        # title 07
+        - item:
+          enabled:                      true
+          <<:                           *album_bea_yt
+          title:                        We're Not The Same
+          audio:                        watch?v=915zXRLgirM
+          rating:                       3
+          start:                        "00:00:03"
+          end:                          false
+          audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
+          cover_image:                  //img.youtube.com/vi/915zXRLgirM/maxresdefault.jpg
+          duration:                     "03:16"
+
+        # title 08
+        - item:
+          enabled:                      true
+          <<:                           *album_bea_yt
+          title:                        Born To Be Alive
+          audio:                        watch?v=hu8VcmkM0yI
+          rating:                       3
+          start:                        "00:00:03"
+          end:                          false
+          audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
+          cover_image:                  //img.youtube.com/vi/hu8VcmkM0yI/maxresdefault.jpg
+          duration:                     "02:37"
+
+        # title 09
+        - item:
+          enabled:                      true
+          <<:                           *album_bea_yt
+          title:                        If I Was A God
+          audio:                        watch?v=eVcXzVMKf0I
+          rating:                       3
+          start:                        "00:00:03"
+          end:                          false
+          audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
+          cover_image:                  //img.youtube.com/vi/eVcXzVMKf0I/maxresdefault.jpg
+          duration:                     "02:55"
+
+        # title 10
+        - item:
+          enabled:                      true
+          <<:                           *album_bea_yt
+          title:                        Safety Net (Cry in your bed version)
+          audio:                        watch?v=W5uafrpOZ6M
+          rating:                       5
+          start:                        "00:00:03"
+          end:                          false
+          audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
+          cover_image:                  //img.youtube.com/vi/W5uafrpOZ6M/maxresdefault.jpg
+          duration:                     "02:55"
+
+        # title 11
+        - item:
+          enabled:                      true
+          <<:                           *album_bea_yt
+          title:                        Rich
+          audio:                        watch?v=gyquo0Z6ngY
+          rating:                       2
+          start:                        "00:00:03"
+          end:                          false
+          audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
+          cover_image:                  //img.youtube.com/vi/gyquo0Z6ngY/maxresdefault.jpg
+          duration:                     "02:31"
+
+        # title 12
+        - item:
+          enabled:                      true
+          <<:                           *album_bea_yt
+          title:                        The Scientist
+          audio:                        watch?v=UXMMm3CdRdI
+          rating:                       3
+          start:                        "00:00:03"
+          end:                          false
+          audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
+          cover_image:                  //img.youtube.com/vi/UXMMm3CdRdI/maxresdefault.jpg
+          duration:                     "02:31"
+
+        # title 13
+        - item:
+          enabled:                      true
+          <<:                           *album_bea_yt
+          title:                        Sunburnt Shoulders
+          audio:                        watch?v=6-B2hDMR7S0
+          rating:                       3
+          start:                        "00:00:03"
+          end:                          false
+          audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
+          cover_image:                  //img.youtube.com/vi/6-B2hDMR7S0/maxresdefault.jpg
+          duration:                     "02:31"
+
+        # title 14
+        - item:
+          enabled:                      true
+          <<:                           *album_bea_yt
+          title:                        Nightmare Being 19 
+          audio:                        watch?v=s74aKArgOvU
+          rating:                       3
+          start:                        "00:00:03"
+          end:                          false
+          audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
+          cover_image:                  //img.youtube.com/vi/s74aKArgOvU/maxresdefault.jpg
+          duration:                     "02:31"
+
+        # title 15
+        - item:
+          enabled:                      true
+          <<:                           *album_bea_yt
+          title:                        WOW!
+          audio:                        watch?v=R0UJgMJJaio
+          rating:                       3
+          start:                        "00:00:03"
+          end:                          false
+          audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
+          cover_image:                  //img.youtube.com/vi/R0UJgMJJaio/maxresdefault.jpg
+          duration:                     "02:50"
+
+        # title 16
+        - item:
+          enabled:                      true
+          <<:                           *album_bea_yt
+          title:                        All The Boys
+          audio:                        watch?v=ffjNBbYa_oA
+          rating:                       3
+          start:                        "00:00:03"
+          end:                          false
+          audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
+          cover_image:                  //img.youtube.com/vi/ffjNBbYa_oA/maxresdefault.jpg
+          duration:                     "02:50"
+
+
+    # --------------------------------------------------------------------------
     #  Mimi Rutherfurt, Maritim Verlag
     # --------------------------------------------------------------------------
     #

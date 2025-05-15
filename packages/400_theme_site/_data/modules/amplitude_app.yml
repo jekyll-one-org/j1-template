@@ -360,6 +360,52 @@ settings:
         controls:                       false                                   # currently NOT supported for YTP
 
     # --------------------------------------------------------------------------
+    # LARGE player, Bea and her Business
+    # --------------------------------------------------------------------------
+    #
+    - player:
+
+      # ------------------------------------------------------------------------
+      # GENERAL settings
+      #    
+      enabled:                          true
+
+      id:                               bea_yt_large
+      type:                             large
+      source:                           video
+      display_hours:                    false
+      audio_fade_in:                    true
+      audio_fade_out:                   true
+
+      # ------------------------------------------------------------------------
+      # CONTROL settings
+      #
+      song_progress_bar:                true
+      skip_forward_backward_button:     true
+      forward_backward_skip_seconds:    10
+      volume_slider:
+        enabled:                        true
+        preset_value:                   50
+
+      # ------------------------------------------------------------------------
+      # PLUGIN settings
+      #
+      plugin_manager:
+        enabled:                        true
+        plugins:                        [ ytp ]
+
+      # ------------------------------------------------------------------------
+      # PLAYLIST settings
+      #      
+      playlist:
+        name:                           bea_yt
+        title:                          Bea and her Business
+        audio_info:                     true
+        audio_rating:                   true
+        shuffle:                        true
+        controls:                       false
+
+    # --------------------------------------------------------------------------
     # LARGE player, Mimi Rutherfurt
     # --------------------------------------------------------------------------
     #

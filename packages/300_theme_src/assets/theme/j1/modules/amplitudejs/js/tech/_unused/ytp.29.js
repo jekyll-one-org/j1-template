@@ -1982,59 +1982,76 @@ regenerate: true
               j1.adapter.amplitude.data.ytpGlobals['activeIndex']    = songIndex;
               j1.adapter.amplitude.data.ytpGlobals['activePlaylist'] = playlist;
 
-              // YT play|pause video
-              // ---------------------------------------------------------------
-              var playerState   = ytPlayer.getPlayerState();
-              if (playerState < 0) {
-                var ytPlayerState = YT_PLAYER_STATE_NAMES[6];
-              } else {
-                var ytPlayerState = YT_PLAYER_STATE_NAMES[playerState];
-              }
+              // setTimeout(() => {
+                // YT play|pause video
+                // ---------------------------------------------------------------
+                var playerState   = ytPlayer.getPlayerState();
+                if (playerState < 0) {
+                  var ytPlayerState = YT_PLAYER_STATE_NAMES[6];
+                } else {
+                  var ytPlayerState = YT_PLAYER_STATE_NAMES[playerState];
+                }
 
-              if (ytPlayerState === 'playing') {
-                ytPlayer.pauseVideo();
-                
-                var playPauseButtonClass = `large-player-play-pause-${ytPlayerID}`;
-                togglePlayPauseButton(playPauseButtonClass);
+                if (ytPlayerState === 'playing') {
+                  ytPlayer.pauseVideo();
+                  
+                  var playPauseButtonClass = `large-player-play-pause-${ytPlayerID}`;
+                  togglePlayPauseButton(playPauseButtonClass);
 
-                // reset|update time settings
-                resetCurrentTimeContainerYTP(ytPlayer, songMetaData);
-                updateDurationTimeContainerYTP(ytPlayer, songMetaData);                
-              }
+                  // reset|update time settings
+                  resetCurrentTimeContainerYTP(ytPlayer, songMetaData);
+                  updateDurationTimeContainerYTP(ytPlayer, songMetaData);                
+                }
 
-              if (ytPlayerState === 'paused') {
-                var ytpCurrentTime = ytPlayer.getCurrentTime();
-                ytPlayer.playVideo();
-                ytpSeekTo(ytPlayer, ytpCurrentTime, true);
+                if (ytPlayerState === 'paused') {
+                  var ytpCurrentTime = ytPlayer.getCurrentTime();
+                  ytPlayer.playVideo();
+                  ytpSeekTo(ytPlayer, ytpCurrentTime, true);
 
-                var playPauseButtonClass = `large-player-play-pause-${ytPlayerID}`;
-                togglePlayPauseButton(playPauseButtonClass);
+                  var playPauseButtonClass = `large-player-play-pause-${ytPlayerID}`;
+                  togglePlayPauseButton(playPauseButtonClass);
 
-                // reset|update time settings
-                resetCurrentTimeContainerYTP(ytPlayer, songMetaData);
-                updateDurationTimeContainerYTP(ytPlayer, songMetaData);                  
-              }
+                  // reset|update time settings
+                  resetCurrentTimeContainerYTP(ytPlayer, songMetaData);
+                  updateDurationTimeContainerYTP(ytPlayer, songMetaData);                  
+                }
 
-              if (ytPlayerState === 'cued') {
-                ytPlayer.playVideo();
-                var playPauseButtonClass = `large-player-play-pause-${ytPlayerID}`;
-                togglePlayPauseButton(playPauseButtonClass);
+                if (ytPlayerState === 'cued') {
+                  ytPlayer.playVideo();
+                  var playPauseButtonClass = `large-player-play-pause-${ytPlayerID}`;
+                  togglePlayPauseButton(playPauseButtonClass);
 
-                // set song active in playlist
-                setSongPlayed(ytPlayerID, songIndex);
+                  // set song active in playlist
+                  setSongPlayed(ytPlayerID, songIndex);
 
-                // reset|update time settings
-                resetCurrentTimeContainerYTP(ytPlayer, songMetaData);
-                updateDurationTimeContainerYTP(ytPlayer, songMetaData);                  
-              }
+                  // reset|update time settings
+                  resetCurrentTimeContainerYTP(ytPlayer, songMetaData);
+                  updateDurationTimeContainerYTP(ytPlayer, songMetaData);                  
+                }
 
-              if (ytPlayerState === 'unstarted') {
-                ytPlayer.playVideo();
-                var playPauseButtonClass = `large-player-play-pause-${ytPlayerID}`;
-                togglePlayPauseButton(playPauseButtonClass);
-                resetCurrentTimeContainerYTP(ytPlayer, songMetaData);
-                updateDurationTimeContainerYTP(ytPlayer, songMetaData);                  
-              }
+                // TODU: unclear why state 'unstarted' is generated
+                // on LAST item
+                // workaround sofar
+                if (ytPlayerState === 'unstarted') {
+                  ytPlayer.playVideo();
+                  // ytPlayer.mute();
+
+                  // setTimeout(() => {
+                  //   ytPlayer.pauseVideo();
+                  //   // ytPlayer.unMute();
+                  //   var playPauseButtonClass = `large-player-play-pause-${ytPlayerID}`;
+                  //   togglePlayPauseButton(playPauseButtonClass);
+                  //   resetCurrentTimeContainerYTP(ytPlayer, songMetaData);
+                  //   updateDurationTimeContainerYTP(ytPlayer, songMetaData);                    
+                  // }, 500);                
+                  
+                  var playPauseButtonClass = `large-player-play-pause-${ytPlayerID}`;
+                  togglePlayPauseButton(playPauseButtonClass);
+                  resetCurrentTimeContainerYTP(ytPlayer, songMetaData);
+                  updateDurationTimeContainerYTP(ytPlayer, songMetaData);                  
+                }
+
+              // }, 500);
 
               // deactivate AJS events (if any)
               event.stopImmediatePropagation();
