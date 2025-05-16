@@ -406,6 +406,48 @@ settings:
         controls:                       false
 
     # --------------------------------------------------------------------------
+    # LARGE player, Diana Krall
+    # --------------------------------------------------------------------------
+    #
+    - player:
+
+      # ------------------------------------------------------------------------
+      # GENERAL settings
+      #     
+      enabled:                          true
+
+      id:                               diana_krall_yt_large
+      type:                             large
+      source:                           video
+      display_hours:                    false
+
+      # ------------------------------------------------------------------------
+      # CONTROL settings
+      #
+      song_progress_bar:                true
+      skip_forward_backward_button:     true
+      forward_backward_skip_seconds:    15
+      volume_slider:
+        enabled:                        true
+        preset_value:                   46
+
+      # ------------------------------------------------------------------------
+      # PLUGIN settings
+      #
+      plugin_manager:
+        enabled:                        true
+        plugins:                        [ ytp ]
+
+      # ------------------------------------------------------------------------
+      # PLAYLIST settings
+      #
+      playlist:
+        name:                           diana_krall_yt
+        title:                          Diana Krall
+        audio_info:                     true
+        audio_rating:                   false   
+
+    # --------------------------------------------------------------------------
     # LARGE player, Mimi Rutherfurt
     # --------------------------------------------------------------------------
     #

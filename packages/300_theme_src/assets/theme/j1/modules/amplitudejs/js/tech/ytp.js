@@ -1096,7 +1096,8 @@ regenerate: true
   // load the configured cover image for a specic song (metaData)
   // ---------------------------------------------------------------------------  
   function loadCoverImage(metaData) {
-    var selector, coverImage;
+    var selector;
+    var coverImage = {};
 
     selector       = ".cover-image-" + metaData.playlist;
     coverImage     = document.querySelector(selector);

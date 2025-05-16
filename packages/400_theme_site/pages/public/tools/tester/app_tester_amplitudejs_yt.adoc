@@ -193,6 +193,15 @@ lorem:sentences[3]
 amplitude::bea_yt_large[role="mb-5"]
 
 
+[role="mt-4"]
+=== Diana Krall
+
+lorem:sentences[3]
+
+.Diana Krall · YouTube
+amplitude::diana_krall_yt_large[role="mb-5"]
+
+
 // [role="mt-4"]
 // === Ephraim Kishon
 

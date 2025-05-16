@@ -677,6 +677,293 @@ settings:
           cover_image:                  //img.youtube.com/vi/ffjNBbYa_oA/maxresdefault.jpg
           duration:                     "02:50"
 
+    # --------------------------------------------------------------------------
+    #  Smooth Jazz (Diana Krall)
+    # --------------------------------------------------------------------------
+    
+    - playlist:
+      enabled:                          true
+
+      name:                             diana_krall_yt
+      title:                            Diana Krall
+
+      # ------------------------------------------------------------------------
+      # ALBUM settings
+      # ------------------------------------------------------------------------
+      album:                            &album_diana_krall_yt
+        name:                           Diana Krall
+        playlist:                       diana_krall_yt
+        artist:                         Smooth Jazz
+        audio_base:                     //youtube.com
+        cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
+        audio_fade:                     true
+        audio_single:                   false
+        shuffle:                        false        
+
+      # ------------------------------------------------------------------------
+      # TITLE settings (songs)
+      # ------------------------------------------------------------------------
+      items:
+
+        # title 01
+        - item:
+          enabled:                      true
+          <<:                           *album_diana_krall_yt
+          title:                        Cry Me A River · Live in Rio
+          audio:                        watch?v=cizgXSegrko
+          rating:                       3
+          start:                        "00:00:10"                              # false | timestamp
+          end:                          false                                   # false | timestamp          
+          audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
+          cover_image:                  //img.youtube.com/vi/cizgXSegrko/maxresdefault.jpg
+          duration:                     "06:07"
+
+        # title 02
+        - item:
+          enabled:                      true
+          <<:                           *album_diana_krall_yt
+          title:                        Walk On By · Live in Rio
+          audio:                        watch?v=yCwc-5YTBb0
+          rating:                       3
+          start:                        "00:00:05"
+          end:                          false
+          audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
+          cover_image:                  //img.youtube.com/vi/cizgXSegrko/maxresdefault.jpg
+          duration:                     "05:10"
+
+        # title 03
+        - item:
+          enabled:                      true
+          <<:                           *album_diana_krall_yt
+          title:                        Este seu Olhar · Live in Rio
+          audio:                        watch?v=okb8nIpuXgs
+          rating:                       3
+          start:                        "00:00:10"
+          end:                          false
+          audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
+          cover_image:                  //img.youtube.com/vi/cizgXSegrko/maxresdefault.jpg
+          duration:                     "03:11"
+
+        # title 04
+        - item:
+          enabled:                      true
+          <<:                           *album_diana_krall_yt
+          title:                        So Nice · Live in Rio
+          audio:                        watch?v=LKaAS3ZxiKM
+          rating:                       3
+          start:                        "00:00:03"
+          end:                          false
+          audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
+          cover_image:                  //img.youtube.com/vi/cizgXSegrko/maxresdefault.jpg
+          duration:                     "06:07"
+
+        # title 05
+        - item:
+          enabled:                      true
+          <<:                           *album_diana_krall_yt
+          title:                        Besame Mucho
+          audio:                        watch?v=4uEl5Z5DEDw
+          rating:                       4
+          start:                        false
+          end:                          false
+          audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
+          cover_image:                  //img.youtube.com/vi/0XMZNI1qKh8/maxresdefault.jpg
+          duration:                     "06:07"
+
+        # title 06
+        - item:
+          enabled:                      true
+          <<:                           *album_diana_krall_yt
+          title:                        When I look in your eyes
+          audio:                        watch?v=Hkke0UOJMB0
+          rating:                       4
+          start:                        false
+          end:                          false
+          audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
+          cover_image:                  //img.youtube.com/vi/0XMZNI1qKh8/maxresdefault.jpg
+          duration:                     "05:00"
+
+        # title 07
+        - item:
+          enabled:                      true
+          <<:                           *album_diana_krall_yt
+          title:                        Narrow Daylight
+          audio:                        watch?v=0XMZNI1qKh8
+          rating:                       4
+          start:                        "00:00:03"
+          end:                          false
+          audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
+          cover_image:                  //img.youtube.com/vi/0XMZNI1qKh8/maxresdefault.jpg
+          duration:                     "03:29"
+
+        # title 08
+        - item:
+          enabled:                      true
+          <<:                           *album_diana_krall_yt
+          title:                        Quiet Nights
+          audio:                        watch?v=LyHFY-gWLR4
+          rating:                       3
+          start:                        "00:00:05"
+          end:                          false
+          audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
+          cover_image:                  //img.youtube.com/vi/0XMZNI1qKh8/maxresdefault.jpg
+          duration:                     "04:43"
+
+        # title 09
+        - item:
+          enabled:                      true
+          <<:                           *album_diana_krall_yt
+          title:                        The Look Of Love
+          audio:                        watch?v=Yr8xDSPjII8
+          rating:                       4
+          start:                        false
+          end:                          false
+          audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
+          cover_image:                  //img.youtube.com/vi/0XMZNI1qKh8/maxresdefault.jpg
+          duration:                     "03:50"
+
+        # title 10
+        - item:
+          enabled:                      true
+          <<:                           *album_diana_krall_yt
+          title:                        You Go To My Head
+          audio:                        watch?v=Mpq61KN2ShY
+          rating:                       3
+          start:                        false
+          end:                          false
+          audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
+          cover_image:                  //img.youtube.com/vi/0XMZNI1qKh8/maxresdefault.jpg
+          duration:                     "03:48"
+
+        # title 11
+        - item:
+          enabled:                      true
+          <<:                           *album_diana_krall_yt
+          title:                        East Of The Sun
+          audio:                        watch?v=jkk2mMq2x8E
+          rating:                       3
+          start:                        false
+          end:                          false
+          audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
+          cover_image:                  //img.youtube.com/vi/jkk2mMq2x8E/maxresdefault.jpg
+          duration:                     "04:10"
+
+        # title 12
+        - item:
+          enabled:                      true
+          <<:                           *album_diana_krall_yt
+          title:                        Almost Blue
+          audio:                        watch?v=_z7X8fbNIkI
+          rating:                       3
+          start:                        false
+          end:                          false
+          audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
+          cover_image:                  //img.youtube.com/vi/_z7X8fbNIkI/maxresdefault.jpg
+          duration:                     "03:59"
+
+        # title 13
+        - item:
+          enabled:                      true
+          <<:                           *album_diana_krall_yt
+          title:                        Temptation
+          audio:                        watch?v=pbej3bEnPfk
+          rating:                       3
+          start:                        "00:00:06"
+          end:                          false
+          audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
+          cover_image:                  //img.youtube.com/vi/0XMZNI1qKh8/maxresdefault.jpg
+          duration:                     "04:37"
+
+        # title 14
+        - item:
+          enabled:                      true
+          <<:                           *album_diana_krall_yt
+          title:                        Maybe You'll Be There
+          audio:                        watch?v=dMsvBwvZ7U8
+          rating:                       4
+          start:                        "00:00:04"
+          end:                          false
+          audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
+          cover_image:                  //img.youtube.com/vi/0XMZNI1qKh8/maxresdefault.jpg
+          duration:                     "05:26"
+
+        # title 15
+        - item:
+          enabled:                      true
+          <<:                           *album_diana_krall_yt
+          title:                        A Blossom Fell
+          audio:                        watch?v=GBnWGAQQw1w
+          rating:                       3
+          start:                        "00:00:04"
+          end:                          false
+          audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
+          cover_image:                  //img.youtube.com/vi/0XMZNI1qKh8/maxresdefault.jpg
+          duration:                     "05:14"
+
+        # title 16
+        - item:
+          enabled:                      true
+          <<:                           *album_diana_krall_yt
+          title:                        Boulevard of broken dreams
+          audio:                        watch?v=J5fBxO5YL3Q
+          rating:                       3
+          start:                        "00:00:04"
+          end:                          false
+          audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
+          cover_image:                  //img.youtube.com/vi/0XMZNI1qKh8/maxresdefault.jpg
+          duration:                     "06:21"
+
+        # title 17
+        - item:
+          enabled:                      true
+          <<:                           *album_diana_krall_yt
+          title:                        How Can You Mend A Broken Heart
+          audio:                        watch?v=mG88b1qjWik
+          rating:                       4
+          start:                        false
+          end:                          false
+          audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
+          cover_image:                  //img.youtube.com/vi/0XMZNI1qKh8/maxresdefault.jpg
+          duration:                     "04:35"
+
+        # title 18
+        - item:
+          enabled:                      true
+          <<:                           *album_diana_krall_yt
+          title:                        Abandoned Masquerade
+          audio:                        watch?v=tHWusss1MHk
+          rating:                       3
+          start:                        "00:00:04"
+          end:                          false
+          audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
+          cover_image:                  //img.youtube.com/vi/0XMZNI1qKh8/maxresdefault.jpg
+          duration:                     "05:22"
+
+        # title 19
+        - item:
+          enabled:                      true
+          <<:                           *album_diana_krall_yt
+          title:                        Is You Is Or Is You Ain't My Baby
+          audio:                        watch?v=m-_wewgy-Ls
+          rating:                       3
+          start:                        false
+          end:                          false
+          audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
+          cover_image:                  //img.youtube.com/vi/0XMZNI1qKh8/maxresdefault.jpg
+          duration:                     "04:57"
+
+        # title 20
+        - item:
+          enabled:                      true
+          <<:                           *album_diana_krall_yt
+          title:                        Just The Way You Are
+          audio:                        watch?v=d8RYUZT57XA
+          rating:                       4
+          start:                        "00:00:02"
+          end:                          false
+          audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
+          cover_image:                  //img.youtube.com/vi/d8RYUZT57XA/maxresdefault.jpg
+          duration:                     "04:01"
 
     # --------------------------------------------------------------------------
     #  Mimi Rutherfurt, Maritim Verlag
