@@ -162,7 +162,8 @@ div.large-player-play-pause.amplitude-playing {
 }
 .large-player-title-list {
   display: block;
-  max-height: 600px;
+  /* max-height: 600px; */
+  max-height: 540px;
   overflow-y: scroll;
 }
 .large-player-control-container {
