@@ -164,6 +164,9 @@ j1.adapter.amplitude = ((j1, window) => {
   var playersHtmlLoaded                 = false;
   var processingPlayersFinished         = false;
 
+  var delayAfterVideoSwitch             = 750;
+  var playerSongElementHeigth           = 104.44;
+
   var playerAudioInfo                   = ('{{amplitude_defaults.playlist.audio_info}}' === 'true') ? true : false;
   var playerDefaultPluginManager        = ('{{amplitude_defaults.player.plugin_manager.enabled}}' === 'true') ? true : false;
   var playerDefaultType                 = '{{amplitude_defaults.player.type}}';
@@ -1768,6 +1771,21 @@ j1.adapter.amplitude = ((j1, window) => {
         j1.adapter.amplitude.data.atpGlobals.ytpInstalled = true;
       }      
     }, // END pluginManager
+
+    // ---------------------------------------------------------------------------
+    // scrollToActiveElement(playlist)
+    // ---------------------------------------------------------------------------  
+    scrollToActiveElement: (activePlaylist) => {
+      const scrollableList        = document.getElementById('large_player_title_list_' + activePlaylist);
+      const activeElement         = scrollableList.querySelector('.amplitude-active-song-container');
+      var activeElementOffsetTop  = activeElement.offsetTop;
+      var songIndex               = parseInt(activeElement.getAttribute("data-amplitude-song-index"));
+      var activeElementOffsetTop  = songIndex * playerSongElementHeigth;
+
+      if (scrollableList && activeElement) {
+        scrollableList.scrollTop = activeElementOffsetTop;
+      }
+    }, // END scrollToActiveElement
 
     // -------------------------------------------------------------------------
     // messageHandler()

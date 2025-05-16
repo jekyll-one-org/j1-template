@@ -145,8 +145,10 @@ regenerate: true
   var activeAudioElement      = {};
   var playlistScrollMin       = 5;
   var delayAfterVideoSwitch   = 750;
+
   var playerSongElementHeigth = 104.44;
   var playerScrollControl     = false;
+
   var fadeAudio               = true;
   var singleAudio             = true;
   var playList;
@@ -1901,7 +1903,6 @@ regenerate: true
     if (scrollableList && activeElement) {
       scrollableList.scrollTop = activeElementOffsetTop;
     }
-
   } // END scrollToActiveElement
 
   // ---------------------------------------------------------------------------
