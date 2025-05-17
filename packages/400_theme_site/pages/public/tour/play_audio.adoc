@@ -4,7 +4,7 @@ title_extention:                        Playback Audio using J1 Template
 tagline:                                Playback Audio
 
 date:                                   2024-04-16
-#last_modified:                         2024-01-01
+last_modified:                          2025-05-17
 
 description: >
                                         J1 Template provides playing audio on web pages
@@ -102,45 +102,18 @@ content directly within a webpage.
 audio::/assets/audio/sound-effects/ambient-piano.mp3[role="mt-4 mb-5"]
 
 
-// [role="mt-5"]
-// == AmplitudeJS Video (Youtube)
-
-// The example demonstrates playing *Audio* track from *YouTube Video* using an
-// AmplitudJS player. The J1 template uses the video *plugin ytp* to extend the
-// native functionality of the AmplitudeJS API to playback YouTube files only for
-// the audio part.
-
-// [role="mt-4 mb-5"]
-// [CAUTION]
-// ====
-// Playing audio tracks is currently supported only for videos from YouTube (YT).
-// The YT plugin *ytp* embeds a YouTube (iframe) player and mimics the AmplitudeJS
-// player buttons and controls to manage a *playlist* of videos the same as known
-// for native audio files.
-// ====
-
-// .Manon Mélodie · TuneCore 2024
-// amplitude::manon_melodie_yt_large[role="mt-4 mb-4"]
-
-// [NOTE]
-// ====
-// AmplitudeJS YT Player can only be used with the J1 Template. Currently, only
-// AJS players of type *large * are supported.
-// ====
-
-
 [role="mt-5"]
-== AmplitudeJS Audio
+== AmplitudeJS
 
-The J1 Template implements custom players based on the (default) theme Uno.
-The color scheme used matches the look and feel of the template to preserve
-the page design.
+The J1 Template suports *native audio* files (e.g. mp3) using *custom players*
+based on *AmplitudeJS* using the the (default) theme Uno. The color scheme
+used matches the look and feel of the template to preserve the page design.
 
 Three types of AmplitudeJS players are build-in for the J1 template system:
 
-* Mini Player
-* Compact Player (default payer)
-* Large Player
+* *Mini* Players
+* *Compact* Players (default payer)
+* *Large* Players
 
 [role="mt-4"]
 [NOTE]
@@ -165,12 +138,12 @@ are commonly found on music streaming services, podcast platforms, and
 websites with embedded audio content.
 
 .Emancipator · From Dusk To Dawn
-amplitude::emancipator_mini[role="mt-3 mb-5"]
+amplitude::emancipator_mini[role="mb-5"]
 
 .Royalty Free Music · Disco 80th
-amplitude::disco_mini[role="mt-3 mb-5"]
+amplitude::disco_mini[role="mb-5"]
 
-lorem:sentences[5]
+// lorem:sentences[5]
 
 
 [role="mt-5"]
@@ -186,10 +159,10 @@ can easily access and control the audio playback without sacrificing too much
 screen space or placing  multiple players side-by-side.
 
 .Emancipator · From Dusk To Dawn
-amplitude::emancipator_compact[role="mt-3 mb-5"]
+amplitude::emancipator_compact[role="mb-5"]
 
 .Royalty Free Music · Disco 80th
-amplitude::disco_compact[role="mt-3 mb-5"]
+amplitude::disco_compact[role="mb-5"]
 
 
 [role="mt-5"]
@@ -208,7 +181,7 @@ compact player, but all controls are displayed in a single window; there is
 no need to open other widgets.
 
 .Emancipator · From Dusk To Dawn
-amplitude::emancipator_large[role="mt-4 mb-5"]
+amplitude::emancipator_large[role="mb-5"]
 
 [role="mt-4"]
 ==== Disco 80th
@@ -216,16 +189,13 @@ amplitude::emancipator_large[role="mt-4 mb-5"]
 lorem:sentences[3]
 
 .Royalty Free Music · Disco 80th
-amplitude::disco_large[role="mt-4 mb-5"]
+amplitude::disco_large[role="mb-5"]
 
-lorem:sentences[5]
-
-// Spontanorama 2024 (large)
-// amplitude::spontanorama_2024_large[role="mt-4 mb-5"]
+// lorem:sentences[5]
 
 
 [role="mt-5"]
-== AmplitudeJS Video (Youtube)
+== AmplitudeJS on Youtube
 
 The example demonstrates playing *Audio* track from *YouTube Video* using an
 AmplitudJS player. The J1 template uses the video *plugin ytp* to extend the
@@ -251,18 +221,20 @@ AmplitudeJS YT Player can only be used with the J1 Template. Currently, only
 AJS players of type *large* are supported.
 ====
 
-[role="mt-4"]
-=== Ephraim Kishon
 
-lorem:sentences[5]
+// [role="mt-4"]
+// === Ephraim Kishon
 
-[role="mt-4"]
-==== Beste Familiengeschichten
+// lorem:sentences[5]
 
-lorem:sentences[3]
+// [role="mt-4"]
+// ==== Beste Familiengeschichten
 
-.Ephraim Kishon · Beste Familiengeschichten
-amplitude::ephraim_kishon_beste_familiengeschichten_yt_large[role="mb-5"]
+// lorem:sentences[3]
+
+// .Ephraim Kishon · Beste Familiengeschichten
+// amplitude::ephraim_kishon_beste_familiengeschichten_yt_large[role="mb-5"]
+
 
 [role="mt-5"]
 == What next
