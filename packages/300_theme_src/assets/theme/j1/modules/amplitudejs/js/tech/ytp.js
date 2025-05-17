@@ -6,7 +6,7 @@ regenerate: true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/amplitudejs/js/plugins/tech/ytp.30.js
+ # ~/assets/theme/j1/modules/amplitudejs/js/plugins/tech/ytp.31.js
  # AmplitudeJS V5 Tech for J1 Template
  #
  # Product/Info:
@@ -60,7 +60,7 @@ regenerate: true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/amplitudejs/js/plugins/tech/ytp.30.js
+ # ~/assets/theme/j1/modules/amplitudejs/js/plugins/tech/ytp.31.js
  # AmplitudeJS V5 Plugin|Tech for J1 Template
  #
  # Product/Info:
