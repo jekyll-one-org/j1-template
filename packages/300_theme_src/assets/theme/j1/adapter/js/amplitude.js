@@ -166,7 +166,7 @@ j1.adapter.amplitude = ((j1, window) => {
 
   var delayAfterVideoSwitch             = 750;
   var playerSongElementHeigth           = 104.44;
-  var playerSongElementAutoScroll       = true;
+  var playerAutoScrollSongElement       = true;
 
   var playerAudioInfo                   = ('{{amplitude_defaults.playlist.audio_info}}' === 'true') ? true : false;
   var playerDefaultPluginManager        = ('{{amplitude_defaults.player.plugin_manager.enabled}}' === 'true') ? true : false;
@@ -1362,7 +1362,7 @@ j1.adapter.amplitude = ((j1, window) => {
                               playlist        = this.getAttribute("data-amplitude-playlist");
 
                               // scroll song active at index in player
-                              if (playerSongElementAutoScroll) {
+                              if (playerAutoScrollSongElement) {
                                 j1.adapter.amplitude.atPlayerScrollToActiveElement(playlist);
                               }
 
@@ -1468,7 +1468,7 @@ j1.adapter.amplitude = ((j1, window) => {
                               var playlist        = this.getAttribute("data-amplitude-playlist");
 
                               // scroll song active at index in player
-                              if (playerSongElementAutoScroll) {
+                              if (playerAutoScrollSongElement) {
                                 j1.adapter.amplitude.atPlayerScrollToActiveElement(playlist);
                               }                              
 
@@ -1493,7 +1493,7 @@ j1.adapter.amplitude = ((j1, window) => {
                               var playlist        = this.getAttribute("data-amplitude-playlist");
 
                               // scroll song active at index in player
-                              if (playerSongElementAutoScroll) {
+                              if (playerAutoScrollSongElement) {
                                 j1.adapter.amplitude.atPlayerScrollToActiveElement(playlist);
                               }  
 
