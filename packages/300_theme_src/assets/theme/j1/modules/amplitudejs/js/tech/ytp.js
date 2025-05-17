@@ -1477,11 +1477,16 @@ regenerate: true
   // ---------------------------------------------------------------------------
   function resetProgressBarYTP(playerID) {
     if (playerID !== undefined) {
-      var progressBar   = j1.adapter.amplitude.data.ytPlayers[playerID].progressBar;
-      progressBar.value = 0;
+      var progressBar;
+
+      if (j1.adapter.amplitude.data.ytPlayers[playerID] !== undefined) {
+        progressBar = j1.adapter.amplitude.data.ytPlayers[playerID].progressBar;
+        progressBar.value = 0;
+      } else {
+        return false;
+      }
     }
 
-    return;    
   } // END resetProgressBarYTP
 
   // ---------------------------------------------------------------------------
@@ -1850,17 +1855,22 @@ regenerate: true
   function togglePlayPauseButton(elementClass) {
     var button, htmlElement;
 
-    button      = document.getElementsByClassName(elementClass);
-    htmlElement = button[0];
+    button = document.getElementsByClassName(elementClass);
 
-    if (htmlElement.classList.contains('amplitude-paused')) {
-      htmlElement.classList.remove('amplitude-paused');
-      htmlElement.classList.add('amplitude-playing');
+    if (button.length) {
+      htmlElement = button[0];
+
+      if (htmlElement.classList.contains('amplitude-paused')) {
+        htmlElement.classList.remove('amplitude-paused');
+        htmlElement.classList.add('amplitude-playing');
+      } else {
+        htmlElement.classList.remove('amplitude-playing');
+        htmlElement.classList.add('amplitude-paused');
+      }
     } else {
-      htmlElement.classList.remove('amplitude-playing');
-      htmlElement.classList.add('amplitude-paused');
+      return false;
     }
-  
+
   } // END togglePlayPauseButton
 
   // ---------------------------------------------------------------------------
@@ -1987,11 +1997,13 @@ regenerate: true
                   songIndex    = 0;
                   ytpSongIndex = 0;
 
-                  // reset previous player settings
-                  activeSongSettings.player.stopVideo();
-                  resetProgressBarYTP(activeSongSettings.playerID);
-                  var playPauseButtonClass = `large-player-play-pause-${activeSongSettings.playerID}`;
-                  togglePlayPauseButton(playPauseButtonClass);
+                  if (activeSongSettings.player !== undefined) {
+                    // reset previous player settings
+                    activeSongSettings.player.stopVideo();
+                    resetProgressBarYTP(activeSongSettings.playerID);
+                    var playPauseButtonClass = `large-player-play-pause-${activeSongSettings.playerID}`;
+                    togglePlayPauseButton(playPauseButtonClass);                    
+                  }
                 } else {
                   songIndex = ytpSongIndex;
                 }

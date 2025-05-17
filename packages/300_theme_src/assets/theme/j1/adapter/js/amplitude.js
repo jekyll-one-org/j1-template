@@ -83,8 +83,8 @@ regenerate:                             true
 // -----------------------------------------------------------------------------
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
-
 "use strict";
+
 j1.adapter.amplitude = ((j1, window) => {
 
   // global settings
@@ -166,6 +166,7 @@ j1.adapter.amplitude = ((j1, window) => {
 
   var delayAfterVideoSwitch             = 750;
   var playerSongElementHeigth           = 104.44;
+  var playerSongElementAutoScroll       = true;
 
   var playerAudioInfo                   = ('{{amplitude_defaults.playlist.audio_info}}' === 'true') ? true : false;
   var playerDefaultPluginManager        = ('{{amplitude_defaults.player.plugin_manager.enabled}}' === 'true') ? true : false;
@@ -279,7 +280,7 @@ j1.adapter.amplitude = ((j1, window) => {
           }, 10); // END dependencies_met_players_loaded
 
           // -------------------------------------------------------------------
-          // initialize player specific UI events
+          // initialize player specific events
           // -------------------------------------------------------------------
           var dependencies_met_api_initialized = setInterval (() => {
             if (apiInitialized.state) {
@@ -959,6 +960,35 @@ j1.adapter.amplitude = ((j1, window) => {
     }, // END initApi
 
     // -------------------------------------------------------------------------
+    // monitorPlayerActiveElementChanges
+    //
+    // -------------------------------------------------------------------------
+    monitorPlayerActiveElementChanges: () => {
+      // var playerSongContainers = document.getElementsByClassName("large-player-title-list");
+      var playerSongContainers = document.getElementsByClassName("large-player-title-list");
+      for (var i=0; i<playerSongContainers.length; i++) {
+        var scrollableList = document.getElementById(playerSongContainers[0].id);
+        var observer = new MutationObserver((mutationsList, observer) => {
+          for (const mutation of mutationsList) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+              // Überprüfen, ob das geänderte Element jetzt die aktive Klasse besitzt
+              if (mutation.target.classList.contains('amplitude-active-song-container')) {
+                scrollableList.scrollTop = mutation.target.offsetTop;
+              }
+            }
+          }
+        }); // END observer
+
+        // Optionen für den Observer: Nur Änderungen an Attributen beobachten
+        observer.observe(scrollableList, {
+          attributes: true,
+          subtree:    true
+        }); // END observer options
+
+      } // END for playerSongContainers
+    }, // END monitorPlayerActiveElementChanges
+
+    // -------------------------------------------------------------------------
     // initPlayerUiEvents
     // -------------------------------------------------------------------------
     initPlayerUiEvents: () => {
@@ -1324,11 +1354,17 @@ j1.adapter.amplitude = ((j1, window) => {
                           var currentPlaylist = largetPlayerSongContainer[i].dataset.amplitudePlaylist;
                           if (currentPlaylist === playList) {
                             largetPlayerSongContainer[i].addEventListener('click', function(event) {
-                              var ytpPlayer;
-                              var ytpPlayerState;
-                              var playerState;
-                              var classArray      = [].slice.call(this.classList, 0);
-                              var atpPlayerActive = classArray[0].split('-');
+                              var ytpPlayer, ytpPlayerState, ytpPlayerState, playerState,
+                                  classArray, atpPlayerActive, playlist;
+
+                              classArray      = [].slice.call(this.classList, 0);
+                              atpPlayerActive = classArray[0].split('-');
+                              playlist        = this.getAttribute("data-amplitude-playlist");
+
+                              // scroll song active at index in player
+                              if (playerSongElementAutoScroll) {
+                                j1.adapter.amplitude.atPlayerScrollToActiveElement(playlist);
+                              }
 
                               // stop active YT players
                               const ytPlayers = Object.keys(j1.adapter.amplitude.data.ytPlayers);
@@ -1429,7 +1465,13 @@ j1.adapter.amplitude = ((j1, window) => {
                             largeNextButtons[i].addEventListener('click', function(event) {
                               var atpPlayerID     = this.id;
                               var atpPlayerActive = atpPlayerID.split('_');
-    
+                              var playlist        = this.getAttribute("data-amplitude-playlist");
+
+                              // scroll song active at index in player
+                              if (playerSongElementAutoScroll) {
+                                j1.adapter.amplitude.atPlayerScrollToActiveElement(playlist);
+                              }                              
+
                               // save YT player data for later use (e.g. events)
                               j1.adapter.amplitude.data.activePlayer = 'atp';
                               j1.adapter.amplitude.data.atpGlobals.activePlayerType = atpPlayerActive[0];
@@ -1448,6 +1490,12 @@ j1.adapter.amplitude = ((j1, window) => {
                             largePreviousButtons[i].addEventListener('click', function(event) {
                               var atpPlayerID     = this.id;
                               var atpPlayerActive = atpPlayerID.split('_');
+                              var playlist        = this.getAttribute("data-amplitude-playlist");
+
+                              // scroll song active at index in player
+                              if (playerSongElementAutoScroll) {
+                                j1.adapter.amplitude.atPlayerScrollToActiveElement(playlist);
+                              }  
 
                               // save YT player data for later use (e.g. events)
                               j1.adapter.amplitude.data.activePlayer = 'atp';
@@ -1772,20 +1820,30 @@ j1.adapter.amplitude = ((j1, window) => {
       }      
     }, // END pluginManager
 
-    // ---------------------------------------------------------------------------
-    // scrollToActiveElement(playlist)
-    // ---------------------------------------------------------------------------  
-    scrollToActiveElement: (activePlaylist) => {
-      const scrollableList        = document.getElementById('large_player_title_list_' + activePlaylist);
-      const activeElement         = scrollableList.querySelector('.amplitude-active-song-container');
-      var activeElementOffsetTop  = activeElement.offsetTop;
-      var songIndex               = parseInt(activeElement.getAttribute("data-amplitude-song-index"));
-      var activeElementOffsetTop  = songIndex * playerSongElementHeigth;
+    // -------------------------------------------------------------------------
+    // atPlayerScrollToActiveElement(activePlaylist)
+    // -------------------------------------------------------------------------  
+    atPlayerScrollToActiveElement: (activePlaylist) => {
+      var scrollableList, songIndex,
+          activeElement, activeElementOffsetTop;
 
-      if (scrollableList && activeElement) {
-        scrollableList.scrollTop = activeElementOffsetTop;
+      scrollableList  = document.getElementById('large_player_title_list_' + activePlaylist);
+      activeElement   = scrollableList.querySelector('.amplitude-active-song-container');
+
+      if (activeElement === null || scrollableList === null)  {
+        // do nothing if NO scrollableList or active element found (failsafe)
+        return;
       }
-    }, // END scrollToActiveElement
+
+      songIndex                 = parseInt(activeElement.getAttribute("data-amplitude-song-index"));
+      activeElementOffsetTop    = songIndex * playerSongElementHeigth;
+      scrollableList.scrollTop  = activeElementOffsetTop;
+
+      if (songIndex === 0) {
+        var bla = 'puups';
+      }
+
+    }, // END atPlayerScrollToActiveElement
 
     // -------------------------------------------------------------------------
     // messageHandler()

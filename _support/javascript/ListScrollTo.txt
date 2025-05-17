@@ -182,7 +182,6 @@ function scrollToActiveElement() {
   } // END scrollToActiveElement
 ```
 
-
 Erläuterung
 -----------
 
@@ -204,10 +203,6 @@ Erläuterung
     der Liste gescrollt.
 
 
-
-
-
-
 Automatisches Scrollen bei Änderung des aktiven Elements
 --------------------------------------------------------
 
@@ -216,13 +211,17 @@ Möglichkeit, diese Änderungen zu erkennen. Da es keine nativen DOM-Events
 gibt, die spezifisch auf das Hinzufügen oder Entfernen einer bestimmten
 Klasse reagieren, gibt es verschiedene Ansätze.
 
-Hier sind zwei gängige Methoden:
+Hier sind zwei gängige Methoden.
 
-**Methode 1: Verwendung eines `MutationObserver` (empfohlen für moderne Browser):**
+
+Methode 1
+---------
+
+Verwendung eines `MutationObserver` (empfohlen für moderne Browser)
 
 Der `MutationObserver` überwacht Änderungen am DOM und kann
-Callback-Funktionen ausführen, wenn bestimmte Arten von Mutationen auftreten
-(z.B. Änderungen von Attributen wie der `class`).
+Callback-Funktionen ausführen, wenn bestimmte Arten von Mutationen
+auftreten (z.B. Änderungen von Attributen wie der `class`).
 
 ```javascript
 function observeActiveElementChanges() {
@@ -241,31 +240,54 @@ function observeActiveElementChanges() {
   // Optionen für den Observer: Nur Änderungen an Attributen beobachten
   observer.observe(scrollableList, { attributes: true, subtree: true });
 }
-
-// Starte die Beobachtung, sobald die Seite geladen ist
-window.onload = observeActiveElementChanges;
 ```
 
-**Erläuterung:**
+Erläuterung
+-----------
 
-1.  **`observeActiveElementChanges()` Funktion:**
-      * Ruft das `<ul>`-Element ab.
-      * Erstellt eine neue Instanz von `MutationObserver`.
-      * Der Callback-Funktion des `MutationObserver` werden zwei Argumente übergeben:
-          * `mutationsList`: Ein Array von `MutationRecord`-Objekten, die die aufgetretenen Änderungen beschreiben.
-          * `observer`: Die `MutationObserver`-Instanz selbst.
-      * Wir iterieren durch die `mutationsList` und prüfen für jede Mutation:
-          * Ob der `type` der Mutation `attributes` ist (d.h., ein Attribut wurde geändert).
-          * Ob der Name des geänderten Attributs `class` ist.
-          * Ob das `target`-Element (das Element, dessen Attribute sich geändert haben) jetzt die Klasse `amplitude-active-song-container` enthält.
-      * Wenn all diese Bedingungen erfüllt sind, scrollen wir die Liste zum oberen Rand des geänderten Elements.
-      * `observer.observe(scrollableList, { attributes: true, subtree: true });` startet die Beobachtung des `scrollableList`-Elements.
-          * `attributes: true` gibt an, dass Attributänderungen beobachtet werden sollen.
-          * `subtree: true` gibt an, dass auch Änderungen an den Kindelementen des beobachteten Elements berücksichtigt werden sollen (wichtig, falls die aktive Klasse an einem `<li>`-Element innerhalb der Liste gesetzt wird).
+observeActiveElementChanges() Funktion
+--------------------------------------
 
-**Methode 2: Regelmäßiges Überprüfen (Polling - weniger effizient):**
+  * Ruft das `<ul>`-Element ab.
 
-Diese Methode überprüft in regelmäßigen Abständen, ob sich das aktive Element geändert hat. Sie ist weniger effizient als `MutationObserver`, kann aber in älteren Browsern ohne `MutationObserver`-Unterstützung eine Alternative sein.
+  * Erstellt eine neue Instanz von `MutationObserver`.
+
+  * Der Callback-Funktion des `MutationObserver` werden zwei Argumente
+    übergeben:
+
+      * `mutationsList`: Ein Array von `MutationRecord`-Objekten, die die
+         aufgetretenen Änderungen beschreiben.
+      * `observer`: Die `MutationObserver`-Instanz selbst.
+
+  * Wir iterieren durch die `mutationsList` und prüfen für jede Mutation:
+
+      * Ob der `type` der Mutation `attributes` ist (d.h., ein Attribut
+        wurde geändert).
+      * Ob der Name des geänderten Attributs `class` ist.
+      * Ob das `target`-Element (das Element, dessen Attribute sich geändert
+        haben) jetzt die Klasse `amplitude-active-song-container` enthält.
+
+  * Wenn all diese Bedingungen erfüllt sind, scrollen wir die Liste zum
+    oberen Rand des geänderten Elements:
+
+  * `observer.observe(scrollableList, { attributes: true, subtree: true });`
+     startet die Beobachtung des `scrollableList`-Elements.
+
+      * `attributes: true` gibt an, dass Attributänderungen beobachtet
+         werden sollen.
+      * `subtree: true` gibt an, dass auch Änderungen an den Kindelementen
+         des beobachteten Elements berücksichtigt werden sollen (wichtig,
+         falls die aktive Klasse an einem `<li>`-Element innerhalb der Liste
+         gesetzt wird).
+
+
+Methode 2
+---------
+
+Regelmäßiges Überprüfen (Polling - weniger effizient). Diese Methode überprüft
+in regelmäßigen Abständen, ob sich das aktive Element geändert hat. Sie ist
+weniger effizient als `MutationObserver`, kann aber in älteren Browsern ohne
+`MutationObserver`-Unterstützung eine Alternative sein.
 
 ```javascript
 function watchActiveElementAndScroll() {
@@ -284,32 +306,46 @@ function watchActiveElementAndScroll() {
   // Überprüfe alle 100 Millisekunden (kann angepasst werden)
   setInterval(checkActiveElement, 100);
 }
-
-// Starte die Überwachung, sobald die Seite geladen ist
-window.onload = watchActiveElementAndScroll;
 ```
 
-**Erläuterung:**
+Erläuterung
+-----------
 
-1.  **`watchActiveElementAndScroll()` Funktion:**
-      * Ruft die `<ul>`-Liste ab.
-      * Initialisiert `lastActiveElement` mit `null`, um den vorherigen aktiven Zustand zu speichern.
-      * **`checkActiveElement()` Funktion:**
-          * Sucht nach dem aktuellen aktiven Element.
-          * Vergleicht das aktuelle aktive Element mit dem `lastActiveElement`.
-          * Wenn ein neues aktives Element gefunden wurde (oder wenn `lastActiveElement` noch `null` ist), wird die Liste zum neuen aktiven Element gescrollt, und `lastActiveElement` wird aktualisiert.
-      * `setInterval(checkActiveElement, 100);` ruft die `checkActiveElement`-Funktion alle 100 Millisekunden auf. Sie können das Intervall anpassen, aber kürzere Intervalle können die Leistung beeinträchtigen.
+watchActiveElementAndScroll() Funktion
 
-**Wahl der Methode:**
+  * Ruft die `<ul>`-Liste ab.
 
-  * Für moderne Browser ist die Verwendung des `MutationObserver` die **empfohlene und effizientere Methode**, da sie ereignisgesteuert ist und nur dann Code ausführt, wenn tatsächlich eine Änderung im DOM stattfindet.
-  * Das regelmäßige Überprüfen (Polling) ist weniger effizient, da es den Browser in regelmäßigen Abständen belastet, auch wenn sich nichts geändert hat. Verwenden Sie diese Methode nur, wenn Sie ältere Browser unterstützen müssen, die `MutationObserver` nicht implementieren.
+  * Initialisiert `lastActiveElement` mit `null`, um den vorherigen
+  aktiven Zustand zu speichern.
+
+  * `checkActiveElement()` Funktion
+      * Sucht nach dem aktuellen aktiven Element.
+      * Vergleicht das aktuelle aktive Element mit dem `lastActiveElement`.
+      * Wenn ein neues aktives Element gefunden wurde (oder wenn
+      `lastActiveElement` noch `null` ist), wird die Liste zum neuen
+      aktiven Element gescrollt, und `lastActiveElement` wird aktualisiert.
+
+  * `setInterval(checkActiveElement, 100);` ruft die `checkActiveElement`
+    Funktion alle 100 Millisekunden auf. Sie können das Intervall anpassen,
+    aber kürzere Intervalle können die Leistung beeinträchtigen.
+
+
+Wahl der Methode
+----------------
+
+  * Für moderne Browser ist die Verwendung des `MutationObserver` die
+    **empfohlene und effizientere Methode**, da sie ereignisgesteuert
+    ist und nur dann Code ausführt, wenn tatsächlich eine Änderung im
+    DOM stattfindet.
+
+  * Das regelmäßige Überprüfen (Polling) ist weniger effizient, da es
+    den Browser in regelmäßigen Abständen belastet, auch wenn sich
+    nichts geändert hat. Verwenden Sie diese Methode nur, wenn Sie
+    ältere Browser unterstützen müssen, die `MutationObserver` nicht
+    implementieren.
 
 Denken Sie daran, dass diese Lösungen davon ausgehen, dass die Klasse
 `amplitude-active-song-container` dynamisch zu dem Element hinzugefügt
 oder von ihm entfernt wird, wenn sich das aktive Element in Ihrer Anwendung
 ändert. Die genaue Implementierung, wie diese Klasse verwaltet wird, hängt
 von Ihrer spezifischen Anwendung und der Amplitude.js-Integration ab.
-
-
-
