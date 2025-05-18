@@ -164,10 +164,9 @@ j1.adapter.amplitude = ((j1, window) => {
   var playersHtmlLoaded                 = false;
   var processingPlayersFinished         = false;
 
-  var delayAfterVideoSwitch             = {{amplitude_defaults.player.delay_after_video_switch}};
   var playerSongElementHeigthDesktop    = {{amplitude_defaults.player.song_element_heigt_desktop}};
   var playerSongElementHeigthMobile     = {{amplitude_defaults.player.song_element_heigth_mobile}};
-  var playerAutoScrollSongElement       = {{amplitude_defaults.player.song_element_autoscroll}};
+  var playerAutoScrollSongElement       = {{amplitude_defaults.player.player_auto_scroll_song_element}};
 
   var playerAudioInfo                   = ('{{amplitude_defaults.playlist.audio_info}}' === 'true') ? true : false;
   var playerDefaultPluginManager        = ('{{amplitude_defaults.player.plugin_manager.enabled}}' === 'true') ? true : false;
