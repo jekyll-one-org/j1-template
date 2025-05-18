@@ -164,9 +164,10 @@ j1.adapter.amplitude = ((j1, window) => {
   var playersHtmlLoaded                 = false;
   var processingPlayersFinished         = false;
 
-  var delayAfterVideoSwitch             = 750;
-  var playerSongElementHeigth           = 104.44;
-  var playerAutoScrollSongElement       = true;
+  var delayAfterVideoSwitch             = {{amplitude_defaults.player.delay_after_video_switch}};
+  var playerSongElementHeigthDesktop    = {{amplitude_defaults.player.song_element_heigt_desktop}};
+  var playerSongElementHeigthMobile     = {{amplitude_defaults.player.song_element_heigth_mobile}};
+  var playerAutoScrollSongElement       = {{amplitude_defaults.player.song_element_autoscroll}};
 
   var playerAudioInfo                   = ('{{amplitude_defaults.playlist.audio_info}}' === 'true') ? true : false;
   var playerDefaultPluginManager        = ('{{amplitude_defaults.player.plugin_manager.enabled}}' === 'true') ? true : false;
@@ -217,11 +218,6 @@ j1.adapter.amplitude = ((j1, window) => {
       amplitudePlaylists = $.extend({}, {{amplitude_playlists | replace: 'nil', 'null' | replace: '=>', ':' }});
       amplitudeOptions   = $.extend(true, {}, amplitudeDefaults, amplitudePlayers, amplitudePlaylists);
 
-      // save AJS player setiings for later use (e.g. the AJS plugins)
-      // j1.adapter.amplitude['amplitudeDefaults'] = amplitudeDefaults;
-      // j1.adapter.amplitude['amplitudeSettings'] = amplitudeSettings;
-      // j1.adapter.amplitude['amplitudeOptions']  = amplitudeOptions;
-
       // -----------------------------------------------------------------------
       // control|logging settings
       // -----------------------------------------------------------------------
@@ -236,6 +232,7 @@ j1.adapter.amplitude = ((j1, window) => {
       
       // (initial) YT player data for later use (e.g. events)
       j1.adapter.amplitude.data.activePlayer                = 'not_set';
+      j1.adapter.amplitude.data.playerSongElementHeigth     = playerSongElementHeigthDesktop;
       j1.adapter.amplitude.data.atpGlobals.activePlayerType = 'not_set';
       j1.adapter.amplitude.data.atpGlobals.ytpInstalled     = false;
       j1.adapter.amplitude.data.ytpGlobals.activePlayerType = 'not_set';
@@ -289,6 +286,24 @@ j1.adapter.amplitude = ((j1, window) => {
               clearInterval(dependencies_met_api_initialized);
             } // END if apiInitialized
           }, 10); // END dependencies_met_api_initialized
+
+          // initialize viewPort specific (GLOBAL) settings
+          $(window).bind('resizeEnd', function() {
+            var viewPortSize = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+              //do something, window hasn't changed size in 500ms
+              if (viewPortSize > 578) {
+                j1.adapter.amplitude.data.playerSongElementHeigth = playerSongElementHeigthDesktop;
+              } else {
+                j1.adapter.amplitude.data.playerSongElementHeigth = playerSongElementHeigthMobile;
+              }
+          });
+
+          $(window).resize(function() {
+              if(this.resizeTO) clearTimeout(this.resizeTO);
+              this.resizeTO = setTimeout(function() {
+                  $(this).trigger('resizeEnd');
+              }, 500);
+          });
 
           clearInterval(dependencies_met_page_ready);
         } // END pageVisible
@@ -1836,7 +1851,7 @@ j1.adapter.amplitude = ((j1, window) => {
       }
 
       songIndex                 = parseInt(activeElement.getAttribute("data-amplitude-song-index"));
-      activeElementOffsetTop    = songIndex * playerSongElementHeigth;
+      activeElementOffsetTop    = songIndex * j1.adapter.amplitude.data.playerSongElementHeigth;
       scrollableList.scrollTop  = activeElementOffsetTop;
 
       if (songIndex === 0) {

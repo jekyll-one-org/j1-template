@@ -267,6 +267,12 @@ defaults:
     loop:                               false                                   # true|false, start playing on FIRST item
     display_hours:                      false                                   # use hours for timestamps in time container
   
+    song_element_heigt_desktop:         104.44
+    song_element_heigth_mobile:         94.53
+    song_element_autoscroll:            true
+
+    delay_after_video_switch:           750
+
     audio_fade_animated:                true
     audio_fade_in:                      true
     audio_fade_in_speed:                fast                                    # fast|slow|slower
