@@ -2720,6 +2720,7 @@ regenerate: true
               volumeSlider.value = playerVolumePreset;
               ytPlayer.setVolume(playerVolumePreset);
             }
+  
 
           } // END if ytPlayer
 
