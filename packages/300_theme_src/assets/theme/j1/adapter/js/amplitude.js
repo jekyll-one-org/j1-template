@@ -232,7 +232,7 @@ j1.adapter.amplitude = ((j1, window) => {
       
       // (initial) YT player data for later use (e.g. events)
       j1.adapter.amplitude.data.activePlayer                = 'not_set';
-      j1.adapter.amplitude.data.playerSongElementHeigth     = playerSongElementHeigthDesktop;
+      j1.adapter.amplitude.data.playerSongElementHeigth     = 'not_set';
       j1.adapter.amplitude.data.atpGlobals.activePlayerType = 'not_set';
       j1.adapter.amplitude.data.atpGlobals.ytpInstalled     = false;
       j1.adapter.amplitude.data.ytpGlobals.activePlayerType = 'not_set';
@@ -252,6 +252,9 @@ j1.adapter.amplitude = ((j1, window) => {
           _this.setState('started');
           logger.debug('\n' + 'module state: ' + _this.getState());
           logger.info('\n' + 'module is being initialized');
+
+          // set default viewport setting
+          j1.adapter.amplitude.data.playerSongElementHeigth = playerSongElementHeigthDesktop;
 
           // -------------------------------------------------------------------
           // create global playlist (songs)

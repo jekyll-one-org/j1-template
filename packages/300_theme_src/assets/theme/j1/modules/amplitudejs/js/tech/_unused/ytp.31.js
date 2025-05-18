@@ -569,6 +569,7 @@ regenerate: true
       // set song (video) active at index in playlist
       setSongActive(playlist, songIndex);
 
+      // reset progress bar settings
       resetProgressBarYTP();
 
       // scroll song active at index in player
@@ -617,6 +618,7 @@ regenerate: true
       // set song (video) active at index in playlist
       setSongActive(playlist, songIndex);
 
+      // reset progress bar settings
       resetProgressBarYTP();
 
       // scroll song active at index in player
@@ -2036,6 +2038,7 @@ regenerate: true
               // set song (video) active at index in playlist
               setSongActive(playlist, songIndex);
 
+              // reset progress bar settings
               resetProgressBarYTP();
 
               // scroll song active at index in player
@@ -2463,9 +2466,11 @@ regenerate: true
               ytPlayer  = j1.adapter.amplitude.data.ytPlayers[playerID].player;              
 
               // reset previous player settings
-              activeSongSettings.player.stopVideo();
-              var playPauseButtonClass = `large-player-play-pause-${activeSongSettings.playerID}`;
-              togglePlayPauseButton(playPauseButtonClass);
+              if (activeSongSettings.player !== undefined) {
+                activeSongSettings.player.stopVideo();
+                var playPauseButtonClass = `large-player-play-pause-${activeSongSettings.playerID}`;
+                togglePlayPauseButton(playPauseButtonClass);                    
+              }
             } else {
               // set current player settings
               songs     = j1.adapter.amplitude.data.ytPlayers[playerID].songs;
