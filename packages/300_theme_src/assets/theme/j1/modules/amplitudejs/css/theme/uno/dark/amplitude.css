@@ -207,7 +207,7 @@ input[type=range].amplitude-volume-slider {
   height: 1px;
   margin-top: 10px;
   margin-left: 5px;
-  width: calc(100% - 170px);
+  width: calc(100% - 144px);
   background: transparent;
 }
 input[type=range].amplitude-volume-slider::-webkit-slider-runnable-track {

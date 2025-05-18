@@ -385,12 +385,13 @@ div.playlist-screen-controls div.list-controls div.list-next:hover {
     width: 25px;
     height: 25px;
   }
+
   input[type="range"].amplitude-volume-slider::-moz-slider-thumb {
     background-color: var(--ajs-theme-uno--blue-500);
     width: 25px;
     height: 25px;
   }
-    
+
 }
 
 @media (orientation: portrait) and (max-width: 768px) {
@@ -469,7 +470,7 @@ div.playlist-screen-controls div.list-controls div.list-next:hover {
   }
   input[type=range].amplitude-volume-slider {
     appearance: none;
-    width: calc(100% - 112px);
+    width: calc(100% - 86px);
   }
   input[type="range"].amplitude-volume-slider::-webkit-slider-thumb {
     background-color: var(--ajs-theme-uno--blue-500);
