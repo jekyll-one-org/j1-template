@@ -1,0 +1,263 @@
+CSS Selectors
+--------------------------------------------------------------------------------
+// See: https://developer.mozilla.org/de/docs/Web/CSS/CSS_selectors
+
+Das CSS-Selektoren-Modul definiert Muster zur Auswahl von Elementen, auf
+die eine Reihe von CSS-Regeln zusammen mit ihrer specificity angewendet
+werden. Das CSS-Selektoren-Modul bietet uns mehr als 60 Selektoren und
+fünf Kombinatoren. Andere Module bieten zusätzliche Pseudo-Klassen-Selektoren
+und Pseudo-Elemente.
+
+Kombinatoren und Trennzeichen
+-----------------------------
+
++ (Nachfolgender Geschwister-Kombinator)
+// https://developer.mozilla.org/de/docs/Web/CSS/Next-sibling_combinator
+
+> (Kindkombinator)
+// https://developer.mozilla.org/de/docs/Web/CSS/Child_combinator
+
+|| (Spaltenkombinator)
+// https://developer.mozilla.org/de/docs/Web/CSS/Column_combinator
+
+~ (Nachfolgender Geschwister-Kombinator)
+// https://developer.mozilla.org/de/docs/Web/CSS/Subsequent-sibling_combinator
+
+" " (Nachfahrkombinator)
+// https://developer.mozilla.org/de/docs/Web/CSS/Descendant_combinator
+
+| (Namespace-Trennzeichen)
+// https://developer.mozilla.org/de/docs/Web/CSS/Namespace_separator
+
+A CSS selector selects the HTML element(s) you want to style.
+CSS selectors are used to "find" (or select) the HTML elements you want to style.
+
+We can divide CSS selectors into five categories:
+
+* Simple selectors
+    select elements based on name, id, class
+* Combinator selectors
+    select elements based on a specific relationship between them
+* Pseudo-class selectors
+    select elements based on a certain state
+* Pseudo-elements selectors
+    select and style a part of an element
+* Attribute selectors
+    select elements based on an attribute or attribute value)
+
+
+The CSS element Selector
+------------------------
+
+The element selector selects HTML elements based on the element name.
+
+Example
+Here, all <p> elements on the page will be center-aligned, with a red text color: 
+
+p {
+  text-align: center;
+  color: red;
+}
+
+The CSS id Selector
+-------------------
+
+The id selector uses the id attribute of an HTML element to select a
+specific element. The id of an element is unique within a page, so the
+id selector is used to select one unique element!
+
+To select an element with a specific id, write a hash (#) character,
+followed by the id of the element.
+
+Example
+The CSS rule below will be applied to the HTML element with id="para1": 
+
+#para1 {
+  text-align: center;
+  color: red;
+}
+Note: An id name cannot start with a number!
+
+
+
+The CSS class Selector
+----------------------
+
+The class selector selects HTML elements with a specific class attribute.
+To select elements with a specific class, write a period (.) character,
+followed by the class name.
+
+Example
+In this example all HTML elements with class="center" will be red and center-aligned: 
+
+.center {
+  text-align: center;
+  color: red;
+}
+You can also specify that only specific HTML elements should be affected by a class.
+
+Example
+In this example only <p> elements with class="center" will be red and center-aligned: 
+
+p.center {
+  text-align: center;
+  color: red;
+}
+HTML elements can also refer to more than one class.
+
+Example
+In this example the <p> element will be styled according to class="center" and to class="large": 
+
+<p class="center large">This paragraph refers to two classes.</p>
+Note: A class name cannot start with a number!
+
+The CSS Universal Selector
+--------------------------
+
+The universal selector (*) selects all HTML elements on the page.
+
+Example
+The CSS rule below will affect every HTML element on the page: 
+
+* {
+  text-align: center;
+  color: blue;
+}
+
+
+The CSS Grouping Selector
+-------------------------
+
+The grouping selector selects all the HTML elements with the same style
+definitions. Look at the following CSS code (the h1, h2, and p elements
+have the same style definitions):
+
+h1 {
+  text-align: center;
+  color: red;
+}
+
+h2 {
+  text-align: center;
+  color: red;
+}
+
+p {
+  text-align: center;
+  color: red;
+}
+It will be better to group the selectors, to minimize the code.
+
+To group selectors, separate each selector with a comma.
+
+Example
+In this example we have grouped the selectors from the code above: 
+
+h1, h2, p {
+  text-align: center;
+  color: red;
+}
+
+
+All CSS Simple Selectors
+Selector	Example	Example description
+#id	#firstname	Selects the element with id="firstname"
+.class	.intro	Selects all elements with class="intro"
+*	*	Selects all elements
+element	p	Selects all <p> elements
+element,element,..	div, p	Selects all <div> elements and all <p> elements
+
+
+Gemini
+--------------------------------------------------------------------------------
+
+Welche Arten von CSS Selektoren gibt es? Wie kann man Selektoren verwenden?
+
+CSS-Selektoren, Werkzeuge zur gezielten Gestaltung deiner Webseite.
+CSS-Selektoren sind die unsichtbaren Fäden, mit denen du in deinem
+HTML-Code nach Elementen suchst und ihnen dann ganz bestimmte Stile zuweist.
+Stell dir vor, du hättest eine Kiste voller bunter Bausteine. Mit Selektoren
+kannst du gezielt einzelne Bausteine herauspicken und ihnen eine bestimmte
+Form oder Farbe geben.
+
+Die verschiedenen Arten von CSS-Selektoren
+------------------------------------------
+
+Es gibt eine Vielzahl von Selektoren, die sich in ihrer Komplexität und
+ihrer Zielgenauigkeit unterscheiden. Hier sind einige der wichtigsten:
+
+* Elemente-Selektor
+    Der einfachste Selektor. Er wählt alle Elemente eines bestimmten Typs
+    aus (z.B. alle <p>-Elemente).
+
+* Klassen-Selektor
+    Wählt alle Elemente aus, die eine bestimmte Klasse besitzen. Klassen
+    werden mit einem Punkt (.) vor dem Namen gekennzeichnet (z.B. .button).
+
+* ID-Selektor
+    Wählt ein einziges Element aus, das eine bestimmte ID besitzt. IDs sind
+    immer eindeutig und werden mit einem Hashtag (#) vor dem Namen
+    gekennzeichnet (z.B. #header).
+
+* Attribut-Selektor
+    Wählt Elemente basierend auf ihren Attributen aus, z.B. alle Links mit
+    dem Attribut href.
+
+* Pseudo-Klassen:
+    Erweitern die Selektoren um zusätzliche Informationen über den Zustand
+    eines Elements, z.B. :hover für Elemente, über die der Mauszeiger schwebt.
+
+* Pseudo-Elemente
+    Erzeugen neue Elemente, die du mit CSS gestalten kannst, z.B. ::before
+    um Inhalt vor ein Element einzufügen.
+
+* Kombinatoren
+    Kombinieren mehrere einfache Selektoren zu komplexeren Ausdrücken, z.B.
+    div p wählt alle <p>-Elemente aus, die innerhalb eines <div>-Elements
+    liegen.
+
+Wie man Selektoren verwendet
+----------------------------
+
+Ein CSS-Selektor wird immer gefolgt von den Eigenschaften, die du den
+ausgewählten Elementen zuweisen möchtest. Hier ein einfaches Beispiel:
+
+CSS
+
+p {
+  color: blue;
+  font-size: 16px;
+}
+
+Dieser Code färbt alle <p>-Elemente auf deiner Seite blau und setzt die
+Schriftgröße auf 16 Pixel.
+
+Ein komplexeres Beispiel:
+
+CSS
+
+.button:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+Dieser Code ändert den Hintergrund einer Schaltfläche (mit der Klasse button)
+auf grün und die Schriftfarbe auf weiß, sobald der Mauszeiger darüber schwebt.
+
+
+
+Weitere Informationen
+--------------------------------------------------------------------------------
+
+Möchtest du tiefer in die Welt der CSS-Selektoren eintauchen? Hier sind
+einige Ressourcen, die dir helfen können:
+
+* MDN Web Docs
+    Eine umfangreiche Referenz zu CSS-Selektoren:
+    https://developer.mozilla.org/de/docs/Web/CSS/CSS_selectors
+
+* SELFHTML-Wiki
+    Eine deutschsprachige Erklärung zu CSS-Selektoren:
+    https://wiki.selfhtml.org/wiki/CSS/Selektoren
+
+

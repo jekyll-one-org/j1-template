@@ -814,13 +814,13 @@ j1.adapter.amplitude = ((j1, window) => {
 
         activeSongMetadata  = Amplitude.getActiveSongMetadata();
         playlist      = Amplitude.getActivePlaylist();
-        playlist      = activeSongMetadata.playlist 
+        // playlist   = activeSongMetadata.playlist 
         playerID      = playlist + '_large';
         songs         = Amplitude.getSongsInPlaylist(playlist);
         songMetaData  = Amplitude.getActiveSongMetadata();
         songIndex     = songMetaData.index;
         trackID       = songIndex + 1;
-        
+
         if (state === AT_PLAYER_STATE.UNSTARTED) {
           // logger.debug('\n' + 'current audio state: unstarted');
           return;

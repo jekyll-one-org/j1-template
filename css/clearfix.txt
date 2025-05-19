@@ -1,0 +1,67 @@
+Welche Aufgabe hat ein Clearfix in HTML Seiten bzw. CSS?
+
+Ein Clearfix in HTML und CSS dient dazu, das Layoutproblem zu lösen, das
+durch schwebende (floatende) Elemente entsteht. Wenn Elemente in einem
+Container floaten, wird der Container standardmäßig nicht in der Höhe an
+diese Elemente angepasst, was zu einem kollabierenden Container führen kann.
+
+Dadurch können nachfolgende Inhalte über den Container hinausfließen, was
+das Layout der Seite zerstört.
+
+Problem:
+Nehmen wir an, wir haben einen Container mit zwei schwebenden (float) Div
+Elementen:
+
+<div class="container">
+  <div class="float-left"></div>
+  <div class="float-right"></div>
+</div>
+
+Wenn die beiden inneren divs floaten, wird der Container .container ihre Höhe
+nicht erkennen und deshalb auf eine Höhe von 0 zusammenfallen. Dadurch werden
+nachfolgende Inhalte, die außerhalb des Containers liegen, nicht korrekt
+dargestellt.
+
+Lösung: Clearfix
+
+Ein Clearfix stellt sicher, dass der Container die Höhe der schwebenden
+Elemente berücksichtigt und sich entsprechend erweitert.
+
+Clearfix mit CSS:
+
+/* Clearfix-Hack */
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+Dann würde man die Klasse clearfix auf den Container anwenden:
+
+<div class="container clearfix">
+  <div class="float-left"></div>
+  <div class="float-right"></div>
+</div>
+
+Erklärung:
+content: "": Erzeugt ein leeres Pseudoelement.
+display: table: Das Pseudoelement wird als Tabellenzelle dargestellt, wodurch es blockartig wird und sich in den Fluss der Seite einfügt.
+clear: both: Das Pseudoelement "räumt auf" und zwingt den Container, seine Höhe an die schwebenden Elemente anzupassen.
+
+Alternative Methode: Overflow
+
+Man kann das gleiche Ergebnis auch durch das Setzen der overflow-Eigenschaft
+erreichen:
+
+.container {
+  overflow: hidden; /* oder overflow: auto; */
+}
+
+Das kann jedoch unerwünschte Nebeneffekte haben, wie das Abschneiden von
+überfließenden Inhalten oder das Einfügen von Scrollleisten.
+
+Fazit
+
+Ein Clearfix ist eine CSS-Technik, die sicherstellt, dass ein Container die
+Höhe seiner schwebenden Kindelemente korrekt berücksichtigt, um Layoutprobleme
+zu vermeiden.

@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
-# ~/_data/modules/defaults/amplitude_app.yml
-# Default settings for J1 Amplitude Apps
+# ~/_data/modules/defaults/amplitude.yml
+# Default settings for J1 AmplitudeJS Module
 #
 # Product/Info:
 # https://jekyll.one
@@ -291,11 +291,11 @@ defaults:
     forward_backward_skip_seconds:      15                                      # number of seconds a video is skipped by click forward/backward buttons in the player
 
     audio_fade:
-      enabled:                          true                                    # use fade transitions true|false
+      enabled:                          true                                    # true|false, use fade transitions
       animated:                         true                                    # animate the volume slider in player
-      fade_in:                          true                                    # audio fade-in true|false
+      fade_in:                          true                                    # true|false audio fade-in
       fade_in_speed:                    fast                                    # transition speed fast|slow|slower
-      fade_out:                         true                                    # audio fade-in true|false
+      fade_out:                         true                                    # true|false, audio fade-in
       fade_out_speed:                   fast                                    # transition speed fast|slow|slower
 
     yt_player:
@@ -306,7 +306,7 @@ defaults:
       loop:                             0                                       # control looping by the AJS player
 
     plugin_manager:
-      enabled:                          false                                   # load plugins true|false
+      enabled:                          false                                   # true|false, load plugins
       plugins:                          [ ytp ]                                 # prepared as an array to support multiple plugins (NOT supported yet)
 
     waveforms:
@@ -325,7 +325,7 @@ defaults:
     repeat_button:                      false                                   # true|false, repeat  button (currently NOT supported)
     song_progress_bar:                  false                                   # true|false, show progressbar in player
     skip_forward_backward_button:       false
-    do_previous_button_on_first:        none                                    # none|last,  item to select on click
+    do_previous_button_on_first:        none                                    # none|last, item to select on click
     do_next_button_on_last:             first                                   # none|first, item to select on click
 
     skip_buttons:
@@ -334,7 +334,8 @@ defaults:
       skipbackward:                     15                                      # seconds
 
     volume_slider:
-      enabled:                          true
+      enabled:                          true                                    # true|false, enable volume slider in player
+      preset_value:                     50                                      # default volume level (percent)
       min_value:                        0                                       # percent
       max_value:                        100                                     # percent
       preset_value:                     50                                      # percent
