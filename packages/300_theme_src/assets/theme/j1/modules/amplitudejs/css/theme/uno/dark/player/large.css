@@ -13,9 +13,15 @@
  # -----------------------------------------------------------------------------
 */
 
+/* 1. Base
+# --------------------------------------------------------- */
 .large-player {
   -webkit-font-smoothing: antialiased;
 }
+
+/* 2. Components
+# --------------------------------------------------------- */
+
 .large-player-container {
   display: flex;
   max-width: fit-content;
@@ -371,6 +377,34 @@ div.playlist-screen-controls div.list-controls div.list-next:hover {
   opacity: 0.5;
 }
 
+div.large-player-volume-container
+input[type=range].amplitude-volume-slider {
+    float: left;
+    height: 1px;
+    margin-top: 10px;
+    margin-left: 5px;
+    width: calc(100% - 165px);
+    background: transparent;
+}  
+
+/* 3. Layout
+# ------------------------------------------------------------------------------ */
+
+/*
+Bootstrap (BS) grid breakpoints
+  SN:     576px           Mobile
+  MD:     768px           Small Desktop|Tablet
+  LG:     992px           Desktop
+  XL:     1200px          Large Desktop
+  XXL:    1400px          X Large Desktop
+ */
+
+ /* max-width: -webkit-fill-available;  Chrome, Safari, Edge */
+ /* max-width: -moz-available;          Firefox              */
+
+
+/* BS LG (Desktop)
+# --------------------------------------------------------- */
 @media (orientation: portrait) and (max-width: 992px) {
   .large-player-left {
     width: 35vw;
@@ -394,6 +428,8 @@ div.playlist-screen-controls div.list-controls div.list-next:hover {
 
 }
 
+/* BS MD (Desktop)
+# --------------------------------------------------------- */
 @media (orientation: portrait) and (max-width: 768px) {
   .large-player-left {
     width: 35vw;
@@ -404,6 +440,8 @@ div.playlist-screen-controls div.list-controls div.list-next:hover {
   }
 }
 
+/* BS LG (Desktop)
+# --------------------------------------------------------- */
 @media (orientation: landscape) and (max-width: 992px) {
   .large-player-left {
     width: 35vw;
@@ -414,6 +452,8 @@ div.playlist-screen-controls div.list-controls div.list-next:hover {
   }
 }
 
+/* BS MD (Desktop)
+# --------------------------------------------------------- */
 @media (orientation: landscape) and (max-width: 768px) {
   .large-player-left {
     width: 35vw;
@@ -424,11 +464,16 @@ div.playlist-screen-controls div.list-controls div.list-next:hover {
   }
 }
 
+/* BS SM (Mobile)
+# --------------------------------------------------------- */
+
 @media screen and (max-width: 576px) {
+
   .large-player {
     max-width: -webkit-fill-available;
     max-width: -moz-available;
   }
+ 
   .large-player-container {
     position: relative;
     flex-direction: column;
@@ -468,18 +513,42 @@ div.playlist-screen-controls div.list-controls div.list-next:hover {
   .amplitude-mute {
     margin-left: 14px;
   }
+
+  div.large-player-volume-container
   input[type=range].amplitude-volume-slider {
     appearance: none;
-    width: calc(100% - 86px);
+    width: calc(100% - 106px);
   }
+
+  div.large-player-volume-container
   input[type="range"].amplitude-volume-slider::-webkit-slider-thumb {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    margin-top: -15px;    
     background-color: var(--ajs-theme-uno--blue-500);
-    width: 25px;
-    height: 25px;
   }
+  div.large-player-volume-container
   input[type="range"].amplitude-volume-slider::-moz-slider-thumb {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    margin-top: -15px;    
     background-color: var(--ajs-theme-uno--blue-500);
-    width: 25px;
-    height: 25px;
   }
 }
+
+/* 4. Pages
+# ------------------------------------------------------------------------------ */
+
+/* 5. Themes
+# ------------------------------------------------------------------------------ */
+
+/* 6. Utils
+# ------------------------------------------------------------------------------ */
+
+/* 7. Vendors
+# ------------------------------------------------------------------------------ */
+
+/* 8. Animations
+# ------------------------------------------------------------------------------ */

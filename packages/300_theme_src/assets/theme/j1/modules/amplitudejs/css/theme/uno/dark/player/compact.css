@@ -14,7 +14,7 @@
 */
 
 /* 1. Base
-# --------------------------------------------------------- */
+# ------------------------------------------------------------------------------ */
 
 .compact-player {
   width: 500px;
@@ -35,7 +35,7 @@
 }
 
 /* 2. Components
-# --------------------------------------------------------- */
+# ------------------------------------------------------------------------------ */
 
 /* Player TOP
 # --------------------------------------------------------- */
@@ -418,12 +418,29 @@ Bootstrap (BS) grid breakpoints
     max-width: -moz-available; /* Firefox */
   }
 
+  div.compact-player-playlist {
+    width: calc(100% - 1px); 
+  }
+
+  div.compact-player-volume-container
   input[type=range].amplitude-volume-slider {
+    appearance: none;
     width: calc(100% - 100px);
   }
 
-  div.compact-player-playlist {
-    width: calc(100% - 1px); 
+  div.compact-player-volume-container
+  input[type=range].amplitude-volume-slider::-webkit-slider-thumb {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    margin-top: -15px;
+  }
+  div.compact-player-volume-container
+  input[type=range].amplitude-volume-slider::-moz-slider-thumb {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    margin-top: -15px;
   }
 
 }
@@ -772,6 +789,17 @@ div.list-next:hover {
   opacity: 0.5;
 }
 
+div.compact-player-volume-container
+input[type=range].amplitude-volume-slider {
+    float: left;
+    height: 1px;
+    margin-top: 10px;
+    margin-left: 5px;
+    width: calc(100% - 165px);
+    background: transparent;
+}
+
+
 
 /* 5. Themes
 # ------------------------------------------------------------------------------ */
@@ -781,7 +809,6 @@ div.list-next:hover {
 
 /* 7. Vendors
 # ------------------------------------------------------------------------------ */
-
 
 /* 8. Animations
 # ------------------------------------------------------------------------------ */

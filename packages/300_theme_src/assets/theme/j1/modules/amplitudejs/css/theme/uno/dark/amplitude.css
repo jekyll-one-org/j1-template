@@ -202,6 +202,7 @@ a {
 .meta-container .audio-artist-album span {
   display: block;
 }
+
 input[type=range].amplitude-volume-slider {
   float: left;
   height: 1px;
@@ -256,6 +257,7 @@ input[type=range].amplitude-volume-slider.compact-player-volume-slider {
   margin-top: -12px;
   margin-left: 29px;
 }
+
 progress.mini-player-progress {
   display: block;
   appearance: none;
@@ -298,7 +300,9 @@ progress::-moz-progress-bar {
 progress::-ms-fill {
   background-color: var(--ajs-theme-uno--blue);
 }
+
 @media screen and (max-width: 576px) {
+
   input[type=range].amplitude-volume-slider::-webkit-slider-thumb {
     width: 30px;
     height: 30px;
@@ -311,6 +315,7 @@ progress::-ms-fill {
     margin-top: -15px;
     border-radius: 30px;
   }
+ 
   progress.mini-player-progress {
     height: 16px;
   }
@@ -320,10 +325,12 @@ progress::-ms-fill {
   progress.large-player-progress {
     height: 16px;
   }
+
   .meta-container .song-name {
     font-size: 16px;
   }
   .meta-container .audio-artist-album {
     font-size: 16px;
   }
+
 }

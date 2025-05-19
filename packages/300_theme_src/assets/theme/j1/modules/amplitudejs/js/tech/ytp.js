@@ -219,6 +219,7 @@ regenerate: true
   // ---------------------------------------------------------------------------
   // processOnVideoEnd(player)
   //
+  // TODO: 
   // ---------------------------------------------------------------------------
   function processOnVideoEnd(player) {
     var currentVideoTime,
@@ -232,7 +233,7 @@ regenerate: true
     songs               = j1.adapter.amplitude.data.ytPlayers[playerID].songs;
 
     // fade-out audio (if enabled)
-    if (playerFadeAudio) {
+    if (!activeVideoElement.audio_single && playerFadeAudio) {
       ytpFadeOutAudio({
       playerID:     playerID,
       speed:        'default'
@@ -240,7 +241,7 @@ regenerate: true
     } // END if playerFadeAudio
 
     // mute audio on LAST video
-    if (songIndex === songs.length-1) {
+    if (!activeVideoElement.audio_single && songIndex === songs.length-1) {
       player.mute();
     }
 
@@ -2079,9 +2080,11 @@ regenerate: true
 
               if (ytPlayerState === 'playing') {
                 ytPlayer.pauseVideo();
+
+                ytPlayerCurrentTime = ytPlayer.getCurrentTime();
                 
                 var trackID = songIndex + 1;
-                logger.debug('\n' + `PAUSE video for PlayPauseButton at playlist|trackID: ${playlist}|${trackID}`);
+                logger.debug('\n' + `PAUSE video for PlayPauseButton on playlist|trackID: ${playlist}|${trackID} at: ${ytPlayerCurrentTime}`);                
 
                 var playPauseButtonClass = `large-player-play-pause-${ytPlayerID}`;
                 togglePlayPauseButton(playPauseButtonClass);
@@ -2095,8 +2098,8 @@ regenerate: true
                 ytPlayer.playVideo();
                 ytpSeekTo(ytPlayer, ytPlayerCurrentTime, true);
 
-                // var trackID =  songIndex + 1;
-                // logger.debug('\n' + `PLAY video for PlayPauseButton at playlist|trackID: ${playlist}|${trackID}`);
+                var trackID =  songIndex + 1;
+                logger.debug('\n' + `PLAY video for PlayPauseButton on playlist|trackID: ${playlist}|${trackID} at: ${ytPlayerCurrentTime}`);
 
                 var playPauseButtonClass = `large-player-play-pause-${ytPlayerID}`;
                 togglePlayPauseButton(playPauseButtonClass);
@@ -2496,9 +2499,10 @@ regenerate: true
 
             if (playerState === YT_PLAYER_STATE.PLAYING) {
               ytPlayer.pauseVideo();
+              ytPlayerCurrentTime = ytPlayer.getCurrentTime();
 
               var trackID = songIndex + 1;
-              logger.debug('\n' + `PAUSE video for PlayerSongContainer at playlist|trackID: ${playlist}|${trackID}`);
+              logger.debug('\n' + `PAUSE video for PlayerSongContainer on playlist|trackID: ${playlist}|${trackID} at: ${ytPlayerCurrentTime}`);
 
               var playPauseButtonClass = `large-player-play-pause-${ytPlayerID}`;
               togglePlayPauseButton(playPauseButtonClass);
@@ -2513,8 +2517,8 @@ regenerate: true
               ytPlayer.playVideo();
               ytpSeekTo(ytPlayer, ytPlayerCurrentTime, true);
 
-              // var trackID = songIndex + 1;
-              // logger.debug('\n' + `PLAY video for PlayerSongContainer at playlist|trackID: ${playlist}|${trackID}`);
+              var trackID = songIndex + 1;
+              logger.debug('\n' + `PLAY video for PlayerSongContainer on playlist|trackID: ${playlist}|${trackID} at: ${ytPlayerCurrentTime}`);
 
               var playPauseButtonClass = `large-player-play-pause-${ytPlayerID}`;
               togglePlayPauseButton(playPauseButtonClass);
