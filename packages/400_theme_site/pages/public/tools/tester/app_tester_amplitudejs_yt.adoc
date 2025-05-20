@@ -158,6 +158,7 @@ endif::[]
 
 
 ifeval::[{ytp--audio-player} == true]
+
 [role="mt-5"]
 == Amplitude YouTube Player
 
@@ -226,7 +227,7 @@ amplitude::ephraim_kishon_beste_autofahrer_geschichten_yt_large[role="mb-5"]
 
 
 [role="mt-4"]
-==== Emancipator
+=== Emancipator
 
 The large design provides the full functionality of an audio player to ensure
 users can easily control audio playback. The player behaves similarly to a
@@ -237,23 +238,13 @@ no need to open other widgets.
 amplitude::disco_large[role="mb-5"]
 
 
-// [role="mt-4"]
-// === Mimi Rutherfurt
+[role="mt-4"]
+=== Mimi Rutherfurt
 
-// lorem:sentences[3]
+lorem:sentences[3]
 
-// .Mimi Rutherfurt · Maritim Verlag
-// amplitude::mimi_rutherfurt_yt_large[role="mb-5"]
-
-
-// [role="mt-4"]
-// [[faelle_des_bnd]]
-// === Die größten Fälle des BND
-
-// lorem:sentences[3]
-
-// .Die größten Fälle des BND · Maritim Verlag
-// amplitude::faelle_des_bnd_yt_large[role="mb-5"]
+.Mimi Rutherfurt · Maritim Verlag
+amplitude::mimi_rutherfurt_yt_large[role="mb-5"]
 
 endif::[]
 

@@ -962,6 +962,26 @@ j1.adapter.amplitude = ((j1, window) => {
             }, 100); // END checkIsOnVideoEnd
           } // END if songEndSec
 
+          // stop active YT players running in parallel
+          // -------------------------------------------------------------------
+          const ytPlayers = Object.keys(j1.adapter.amplitude.data.ytPlayers);
+          for (let i=0; i<ytPlayers.length; i++) {
+            const ytPlayerID        = ytPlayers[i];
+            const playerProperties  = j1.adapter.amplitude.data.ytPlayers[ytPlayerID];
+
+            var player        = j1.adapter.amplitude['data']['ytPlayers'][ytPlayerID]['player'];
+            var playerState   = (player.getPlayerState() > 0) ? player.getPlayerState() : 6;
+            var ytPlayerState = YT_PLAYER_STATE_NAMES[playerState];
+
+            // if (ytPlayerState === 'playing' || ytPlayerState === 'paused' || ytPlayerState === 'buffering' || ytPlayerState === 'cued' || ytPlayerState === 'unstarted') {
+            if (ytPlayerState === 'playing' || ytPlayerState === 'paused') {
+              logger.debug('\n' + `STOP YT player at onPlayerStateChange for id: ${ytPlayerID}`);
+              player.stopVideo();
+              j1.adapter.amplitude.data.ytpGlobals.activeIndex = 0;
+            }
+
+          } // END stop active YT players
+
         } // END state AT_PLAYER_STATE PLAYING
 
         if (state === AT_PLAYER_STATE.ENDED) {
@@ -1086,29 +1106,7 @@ j1.adapter.amplitude = ((j1, window) => {
                           var currentPlaylist = miniPlayerPlayPauseButton[i].dataset.amplitudePlaylist;
                           if (currentPlaylist === playList) {
                             miniPlayerPlayPauseButton[i].addEventListener('click', function(event) {
-                              var ytpPlayer;
-                              var ytpPlayerState;
-                              var playerState;
- 
-                              // stop active YT players
-                              const ytPlayers = Object.keys(j1.adapter.amplitude.data.ytPlayers);
-                              for (let i=0; i<ytPlayers.length; i++) {
-                                const playerID = ytPlayers[i];
-                                const playerProperties = j1.adapter.amplitude.data.ytPlayers[playerID];
-                                logger.debug('\n' + 'process player id: ' + playerID);
-                                ytpPlayer       = j1.adapter.amplitude.data.ytPlayers[playerID].player;
-                                playerState     = ytpPlayer.getPlayerState();
-                                ytpPlayerState  = YT_PLAYER_STATE_NAMES[playerState];
- 
-                                if (ytpPlayerState === 'playing' || ytpPlayerState === 'paused' || ytpPlayerState === 'buffering') {
-                                  logger.debug('\n' + 'process player id: ' + playerID + ' stopped');
-                                  ytpPlayer.stopVideo();
-                                }
-                              }
- 
-                              // save YT player data for later use (e.g. events)
-                              j1.adapter.amplitude.data.activePlayer = 'atp';
-                              j1.adapter.amplitude.data.atpGlobals.activePlayerType = 'mini';
+                              // do nothing
                             });
                           }
                         }
@@ -1214,10 +1212,7 @@ j1.adapter.amplitude = ((j1, window) => {
                         } else {                        
                           if (largeNextButtons[i].id === 'compact_player_next_{{player.id}}') {
                             largeNextButtons[i].addEventListener('click', function(event) {
-                              var atpPlayerID     = this.id;
-                              var atpPlayerActive = atpPlayerID.split('_');
-    
-                              j1.adapter.amplitude.data.atpGlobals.activePlayerType = 'compact';
+                              // do nothing
                             }); // END EventListener 'click'
                           } // END if ID
                         }
@@ -1231,54 +1226,26 @@ j1.adapter.amplitude = ((j1, window) => {
                         } else { 
                           if (compactPreviousButtons[i].id === 'compact_player_previous_{{player.id}}') {
                             compactPreviousButtons[i].addEventListener('click', function(event) {
-                              var atpPlayerID     = this.id;
-                              var atpPlayerActive = atpPlayerID.split('_');
-    
-                              j1.adapter.amplitude.data.atpGlobals.activePlayerType = 'compact';
+                              // do nothing
                             }); // END EventListener 'click'
                           } // END if ID
                         }
                       } // END Previous Buttons (COMPACT player)
 
-
-                     // click on play_pause button (COMPACT player)
-                     var compactPlayerPlayPauseButton = document.getElementsByClassName('compact-player-play-pause');
-                     for (var i=0; i<compactPlayerPlayPauseButton.length; i++) {
-                       if (compactPlayerPlayPauseButton[i].dataset.amplitudeSource === 'youtube') {
-                         // do nothing (managed by plugin)
-                       } else {
-                        var currentPlaylist = compactPlayerPlayPauseButton[i].dataset.amplitudePlaylist;
-                         if (currentPlaylist === playList) {
-                           compactPlayerPlayPauseButton[i].addEventListener('click', function(event) {
-                             var ytpPlayer;
-                             var ytpPlayerState;
-                             var playerState;
-
-                             // stop active YT players
-                             const ytPlayers = Object.keys(j1.adapter.amplitude.data.ytPlayers);
-                             for (let i=0; i<ytPlayers.length; i++) {
-                               const playerID = ytPlayers[i];
-                               const playerProperties = j1.adapter.amplitude.data.ytPlayers[playerID];
-                               logger.debug('\n' + 'process player id: ' + playerID);
-                               ytpPlayer       = j1.adapter.amplitude.data.ytPlayers[playerID].player;
-                               playerState     = ytpPlayer.getPlayerState();
-                               ytpPlayerState  = YT_PLAYER_STATE_NAMES[playerState];
-
-                               if (ytpPlayerState === 'playing' || ytpPlayerState === 'paused' || ytpPlayerState === 'buffering') {
-                                 logger.debug('\n' + 'process player id: ' + playerID + ' stopped');
-                                 ytpPlayer.stopVideo();
-                               }
-                             }
-
-                             // save YT player data for later use (e.g. events)
-                             j1.adapter.amplitude.data.activePlayer = 'atp';
-                             j1.adapter.amplitude.data.atpGlobals.activePlayerType = 'compact';
-                           });
-                         }
-                       }
-                     } // END play_pause button (COMPACT player)
-
-
+                      // click on play_pause button (COMPACT player)
+                      var compactPlayerPlayPauseButton = document.getElementsByClassName('compact-player-play-pause');
+                      for (var i=0; i<compactPlayerPlayPauseButton.length; i++) {
+                        if (compactPlayerPlayPauseButton[i].dataset.amplitudeSource === 'youtube') {
+                          // do nothing (managed by plugin)
+                        } else {
+                          var currentPlaylist = compactPlayerPlayPauseButton[i].dataset.amplitudePlaylist;
+                          if (currentPlaylist === playList) {
+                            compactPlayerPlayPauseButton[i].addEventListener('click', function(event) {
+                              // do nothing
+                            });
+                          }
+                        }
+                      } // END play_pause button (COMPACT player)
 
                       // click on skip forward|backward (COMPACT player)
                       // See: https://github.com/serversideup/amplitudejs/issues/384
@@ -1351,7 +1318,7 @@ j1.adapter.amplitude = ((j1, window) => {
 
                     {% if player.id contains 'large' %}
                     // START large player UI events
-                    //
+                    // ---------------------------------------------------------
                     if (document.getElementById('{{player.id}}') !== null) {
                       // var playlist = '{{player.id}}_yt';
                       var playlistInfo  = {{player.playlist | replace: 'nil', 'null' | replace: '=>', ':'}};
@@ -1378,26 +1345,6 @@ j1.adapter.amplitude = ((j1, window) => {
                               if (playerAutoScrollSongElement) {
                                 j1.adapter.amplitude.atPlayerScrollToActiveElement(playlist);
                               }
-
-                              // stop active YT players
-                              const ytPlayers = Object.keys(j1.adapter.amplitude.data.ytPlayers);
-                              for (let i=0; i<ytPlayers.length; i++) {
-                                const playerID = ytPlayers[i];
-                                const playerProperties = j1.adapter.amplitude.data.ytPlayers[playerID];
-                                logger.debug('\n' + 'process player id: ' + playerID);
-                                ytpPlayer       = j1.adapter.amplitude.data.ytPlayers[playerID].player;
-                                playerState     = ytpPlayer.getPlayerState();
-                                ytpPlayerState  = YT_PLAYER_STATE_NAMES[playerState];
-
-                                if (ytpPlayerState === 'playing' || ytpPlayerState === 'paused' || ytpPlayerState === 'buffering') {
-                                  logger.debug('\n' + 'process player id: ' + playerID + ' stopped');
-                                  ytpPlayer.stopVideo();
-                                }
-                              }
-
-                              // save YT player data for later use (e.g. events)
-                              j1.adapter.amplitude.data.activePlayer = 'atp';
-                              j1.adapter.amplitude.data.atpGlobals.activePlayerType = atpPlayerActive[3];
                             });
                           }
                         }
@@ -1418,29 +1365,7 @@ j1.adapter.amplitude = ((j1, window) => {
                           var currentPlaylist = largePlayerPlayPauseButton[i].dataset.amplitudePlaylist;
                           if (currentPlaylist === playList) {
                             largePlayerPlayPauseButton[i].addEventListener('click', function(event) {
-                              var ytpPlayer;
-                              var ytpPlayerState;
-                              var playerState;
-
-                              // stop active YT players
-                              const ytPlayers = Object.keys(j1.adapter.amplitude.data.ytPlayers);
-                              for (let i=0; i<ytPlayers.length; i++) {
-                                const playerID = ytPlayers[i];
-                                const playerProperties = j1.adapter.amplitude.data.ytPlayers[playerID];
-                                logger.debug('\n' + 'process player id: ' + playerID);
-                                ytpPlayer       = j1.adapter.amplitude.data.ytPlayers[playerID].player;
-                                playerState     = ytpPlayer.getPlayerState();
-                                ytpPlayerState  = YT_PLAYER_STATE_NAMES[playerState];
-
-                                if (ytpPlayerState === 'playing' || ytpPlayerState === 'paused' || ytpPlayerState === 'buffering') {
-                                  logger.debug('\n' + 'process player id: ' + playerID + ' stopped');
-                                  ytpPlayer.stopVideo();
-                                }
-                              }
-
-                              // save YT player data for later use (e.g. events)
-                              j1.adapter.amplitude.data.activePlayer = 'atp';
-                              j1.adapter.amplitude.data.atpGlobals.activePlayerType = 'large';
+                              // do nothing
                             });
                           }
                         }

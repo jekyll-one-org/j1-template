@@ -360,12 +360,13 @@ regenerate: true
     } // END if songEndEnabled
 
     // stop active AT players running in parallel
+    // -------------------------------------------------------------------------
     var atpPlayerState = Amplitude.getPlayerState();
     if (atpPlayerState === 'playing') {
       Amplitude.stop();
 
-      // clear button PlayerPlayPause (AT player)
-      var buttonPlayerPlayPause = document.getElementsByClassName("large-player-play-pause");
+      // clear button MINI PlayerPlayPause (AT player)
+      var buttonPlayerPlayPause = document.getElementsByClassName("mini-player-play-pause");
       for (var i=0; i<buttonPlayerPlayPause.length; i++) {
         var htmlElement = buttonPlayerPlayPause[i];
         
@@ -374,7 +375,32 @@ regenerate: true
           htmlElement.classList.add('amplitude-paused');
         }
     
-      } // END for buttonPlayerPlayPause
+      } // END for MINI buttonPlayerPlayPause
+
+      // clear button COMPACT PlayerPlayPause (AT player)
+      var buttonPlayerPlayPause = document.getElementsByClassName("compact-player-play-pause");
+      for (var i=0; i<buttonPlayerPlayPause.length; i++) {
+        var htmlElement = buttonPlayerPlayPause[i];
+        
+        if (htmlElement.dataset.amplitudeSource === 'audio') {
+          htmlElement.classList.remove('amplitude-playing');
+          htmlElement.classList.add('amplitude-paused');
+        }
+    
+      } // END for COMACT buttonPlayerPlayPause
+
+      // clear button LARGE PlayerPlayPause (AT player)
+      var buttonPlayerPlayPause = document.getElementsByClassName("large-player-play-pause");
+      for (var i=0; i<buttonPlayerPlayPause.length; i++) {
+        var htmlElement = buttonPlayerPlayPause[i];
+        
+        if (htmlElement.dataset.amplitudeSource === 'audio') {
+          htmlElement.classList.remove('amplitude-playing');
+          htmlElement.classList.add('amplitude-paused');
+        }
+
+      } // END for LARGE buttonPlayerPlayPause
+
     } // END if atpPlayerState 'playing' 
 
     // TODO: check if YT player stop is needed
@@ -2730,7 +2756,7 @@ regenerate: true
             var playerID      = sliderID.split('volume_slider_')[1];
 
             // save YT player data for later use (e.g. events)
-            j1.adapter.amplitude.data.ytPlayers[playerID].volumeSlider = volumeSlider;
+            // j1.adapter.amplitude.data.ytPlayers[playerID].volumeSlider = volumeSlider;
 
             volumeSliders[i].addEventListener('click', function(event) {
 
@@ -2783,7 +2809,7 @@ regenerate: true
           var playerID  = sliderID.split('amplitude-mute_')[1];
 
           // save YT player data for later use (e.g. events)
-          j1.adapter.amplitude.data.ytPlayers[playerID].volumMute = volumMute;
+          // j1.adapter.amplitude.data.ytPlayers[playerID].volumMute = volumMute;
 
           volumeMutes[i].addEventListener('click', function(event) {
 

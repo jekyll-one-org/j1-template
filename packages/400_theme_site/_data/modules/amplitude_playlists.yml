@@ -1408,8 +1408,8 @@ settings:
           <<:                           *album_from_dusk_to_dawn
           title:                        First Snow
           rating:                       2
-          start:                        "00:01:00"
-          end:                          "00:01:10"
+          start:                        false                                   # "00:01:00"
+          end:                          false                                   # "00:01:10"
           audio:                        FirstSnow.mp3
           audio_info:                   //emancipator.bandcamp.com/
           cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn/soon-it-will-be-cold-enough.jpg
@@ -1421,8 +1421,8 @@ settings:
           <<:                           *album_from_dusk_to_dawn
           title:                        From Dusk To Dawn
           rating:                       3
-          start:                        "00:00:30"
-          end:                          "00:00:40"
+          start:                        false                                   # "00:00:30"
+          end:                          false                                   # "00:00:40"
           audio:                        DuskToDawn.mp3
           audio_info:                   //emancipator.bandcamp.com/
           cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn/from-dusk-to-dawn.jpg
@@ -1434,8 +1434,8 @@ settings:
           <<:                           *album_from_dusk_to_dawn
           title:                        Anthem
           rating:                       3
-          start:                        "00:00:30"
-          end:                          "00:00:40"          
+          start:                        false                                   # "00:00:30"
+          end:                          false                                   # "00:00:40"          
           audio:                        Anthem.mp3
           audio_info:                   //emancipator.bandcamp.com/
           cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn/anthem.jpg
@@ -1447,8 +1447,8 @@ settings:
           <<:                           *album_from_dusk_to_dawn
           title:                        Safe In The Steep Cliffs
           rating:                       3
-          start:                        "00:00:30"
-          end:                          "00:00:40"
+          start:                        false                                   # "00:00:30"
+          end:                          false                                   # "00:00:40"
           audio:                        SafeInTheSteepCliffs.mp3
           audio_info:                   //emancipator.bandcamp.com/
           cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn/safe-in-the-steep-cliffs.jpg
