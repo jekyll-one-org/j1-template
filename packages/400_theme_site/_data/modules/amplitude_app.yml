@@ -118,9 +118,6 @@ settings:
       #
       song_progress_bar:                true
       skip_forward_backward_button:     true
-      # volume_slider:
-      #   enabled:                        true
-      #   preset_value:                   50
 
       playlist:
         name:                           free_disco
@@ -290,7 +287,7 @@ settings:
       #
       song_progress_bar:                true
       skip_forward_backward_button:     true
-      forward_backward_skip_seconds:    60
+      forward_backward_skip_seconds:    30
       delay_after_video_loaded:         750
 
       volume_slider:
@@ -426,7 +423,7 @@ settings:
       #
       song_progress_bar:                true
       skip_forward_backward_button:     true
-      forward_backward_skip_seconds:    15
+      forward_backward_skip_seconds:    10
       volume_slider:
         enabled:                        true
         preset_value:                   46
@@ -468,7 +465,7 @@ settings:
       #
       song_progress_bar:                true
       skip_forward_backward_button:     true
-      forward_backward_skip_seconds:    60
+      forward_backward_skip_seconds:    30
       volume_slider:
         enabled:                        true
         preset_value:                   50
@@ -513,7 +510,7 @@ settings:
       #
       song_progress_bar:                true
       skip_forward_backward_button:     true
-      forward_backward_skip_seconds:    60
+      forward_backward_skip_seconds:    30
       volume_slider:
         enabled:                        true
         preset_value:                   50

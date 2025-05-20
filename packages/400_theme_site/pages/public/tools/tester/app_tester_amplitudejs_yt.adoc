@@ -216,13 +216,25 @@ lorem:sentences[3]
 amplitude::ephraim_kishon_beste_familiengeschichten_yt_large[role="mb-5"]
 
 
-// [role="mt-4"]
-// ==== Beste Autofahrergeschichten
+[role="mt-4"]
+==== Beste Autofahrergeschichten
 
-// lorem:sentences[3]
+lorem:sentences[3]
 
-// .Ephraim Kishon · Beste Autofahrergeschichten
-// amplitude::ephraim_kishon_beste_autofahrer_geschichten_yt_large[role="mb-5"]
+.Ephraim Kishon · Beste Autofahrergeschichten
+amplitude::ephraim_kishon_beste_autofahrer_geschichten_yt_large[role="mb-5"]
+
+
+[role="mt-4"]
+==== Emancipator
+
+The large design provides the full functionality of an audio player to ensure
+users can easily control audio playback. The player behaves similarly to a
+compact player, but all controls are displayed in a single window; there is
+no need to open other widgets.
+
+.Royalty Free Music · Disco 80th
+amplitude::disco_large[role="mb-5"]
 
 
 // [role="mt-4"]

@@ -288,7 +288,7 @@ defaults:
     play_next_title:                    true                                    # play next title on end
     pause_next_title:                   false                                   # add a pause on title on end
     delay_next_title:                   250                                     # delay the next title is loaded (ms)
-    forward_backward_skip_seconds:      15                                      # number of seconds a video is skipped by click forward/backward buttons in the player
+    forward_backward_skip_seconds:      15                                      # number of seconds a video is skipped by click forward|backward button in the player
 
     audio_fade:
       enabled:                          true                                    # true|false, use fade transitions

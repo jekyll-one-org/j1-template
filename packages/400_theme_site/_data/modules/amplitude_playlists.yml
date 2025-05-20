@@ -46,9 +46,8 @@ settings:
         name:                           Ephraim Kishon
         playlist:                       ephraim_kishon_beste_familiengeschichten_yt
         artist:                         Beste Familiengeschichten
-        audio_single:                   true
-        audio_fade:                     false
         audio:                          watch?v=9LojTw98Fks
+        audio_fade:                     false
         audio_base:                     //youtube.com
         audio_info:                     //youtube.com/watch?v=9LojTw98Fks
         cover_image:                    //img.youtube.com/vi/9LojTw98Fks/maxresdefault.jpg
@@ -255,10 +254,9 @@ settings:
         name:                           Ephraim Kishon
         playlist:                       ephraim_kishon_beste_autofahrer_geschichten_yt
         artist:                         Beste Familiengeschichten
-        audio_single:                   true
+        audio_fade:                     false
         audio_base:                     //youtube.com
         cover_image:                    //img.youtube.com/vi/D2gVmGFa2wE/maxresdefault.jpg
-        audio_fade:                     true
 
       # ------------------------------------------------------------------------
       # TITLE settings (songs)
@@ -299,6 +297,210 @@ settings:
           rating:                       3
           start:                        "00:08:35"
           end:                          "00:12:03"
+          duration:                     "00:03:38"
+
+        # title 04
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          audio:                        watch?v=D2gVmGFa2wE
+          audio_info:                   //youtube.com/watch?v=D2gVmGFa2wE
+          title:                        Der letzte Schrei der Medien
+          rating:                       3
+          start:                        "00:12:05"
+          end:                          "00:19:54"
+          duration:                     "00:03:38"
+
+        # title 05
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          audio:                        watch?v=D2gVmGFa2wE
+          audio_info:                   //youtube.com/watch?v=D2gVmGFa2wE
+          title:                        In den Händen der Chauvinisten
+          rating:                       3
+          start:                        "00:19:55"
+          end:                          "00:29:47"
+          duration:                     "00:03:38"
+
+        # title 06
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          audio:                        watch?v=D2gVmGFa2wE
+          audio_info:                   //youtube.com/watch?v=D2gVmGFa2wE
+          title:                        Ein Parasit fährt mit
+          rating:                       3
+          start:                        "00:19:55"
+          end:                          "00:37:57"
+          duration:                     "00:03:38"
+
+        # title 07
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          audio:                        watch?v=D2gVmGFa2wE
+          audio_info:                   //youtube.com/watch?v=D2gVmGFa2wE
+          title:                        Die Gefahren der guten Kinderstube
+          rating:                       3
+          start:                        "00:37:58"
+          end:                          "00:41:31"
+          duration:                     "00:03:38"
+
+        # title 08
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          audio:                        watch?v=D2gVmGFa2wE
+          audio_info:                   //youtube.com/watch?v=D2gVmGFa2wE
+          title:                        Jede Münze hat zwei Seiten
+          rating:                       3
+          start:                        "00:37:58"
+          end:                          "00:52:17"
+          duration:                     "00:03:38"
+
+        # title 09
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          audio:                        watch?v=D2gVmGFa2wE
+          audio_info:                   //youtube.com/watch?v=D2gVmGFa2wE
+          title:                        Das Werkstatt-Kabaret
+          rating:                       3
+          start:                        "00:52:19"
+          end:                          "00:55:28"
+          duration:                     "00:03:38"
+
+        # title 10
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          audio:                        watch?v=D2gVmGFa2wE
+          audio_info:                   //youtube.com/watch?v=D2gVmGFa2wE
+          title:                        Busfahren ist gefährlich
+          rating:                       3
+          start:                        "00:55:30"
+          end:                          "00:59:20"
+          duration:                     "00:03:38"
+
+        # title 11
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          audio:                        watch?v=zBSlRSGp5N4
+          audio_info:                   //youtube.com/watch?v=zBSlRSGp5N4
+          title:                        Ein Profi am Steuer
+          rating:                       3
+          start:                        "00:00:03"
+          end:                          false                                   # "00:03:12"
+          duration:                     "00:03:38"
+
+        # title 12
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          audio:                        watch?v=zBSlRSGp5N4
+          audio_info:                   //youtube.com/watch?v=zBSlRSGp5N4
+          title:                        Amtshandlung mit menschlichen Zügen
+          rating:                       3
+          start:                        "00:03:14"
+          end:                          false                                   # "00:06:04"
+          duration:                     "00:03:38"
+
+        # title 13
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          audio:                        watch?v=zBSlRSGp5N4
+          audio_info:                   //youtube.com/watch?v=zBSlRSGp5N4
+          title:                        Freund in der Not
+          rating:                       3
+          start:                        "00:06:05"
+          end:                          false
+          duration:                     "00:03:38"
+
+        # title 14
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          audio:                        watch?v=zBSlRSGp5N4
+          audio_info:                   //youtube.com/watch?v=zBSlRSGp5N4
+          title:                        Fernsehen hat vorrang
+          rating:                       3
+          start:                        "00:08:48"
+          end:                          false
+          duration:                     "00:03:38"
+
+        # title 15
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          audio:                        watch?v=zBSlRSGp5N4
+          audio_info:                   //youtube.com/watch?v=zBSlRSGp5N4
+          title:                        Parkplatz-Safari
+          rating:                       3
+          start:                        "00:16:51"
+          end:                          false
+          duration:                     "00:03:38"
+
+        # title 16
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          audio:                        watch?v=zBSlRSGp5N4
+          audio_info:                   //youtube.com/watch?v=zBSlRSGp5N4
+          title:                        Gottes Hand und Josseles Fuß
+          rating:                       3
+          start:                        "00:22:38"
+          end:                          false
+          duration:                     "00:03:38"
+
+        # title 17
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          audio:                        watch?v=zBSlRSGp5N4
+          audio_info:                   //youtube.com/watch?v=zBSlRSGp5N4
+          title:                        Ein vierbeiniger Autofan
+          rating:                       3
+          start:                        "00:29:13"
+          end:                          false
+          duration:                     "00:03:38"
+
+        # title 18
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          audio:                        watch?v=zBSlRSGp5N4
+          audio_info:                   //youtube.com/watch?v=zBSlRSGp5N4
+          title:                        Wir gehen in den Untergrund
+          rating:                       3
+          start:                        "00:38:29"
+          end:                          false
+          duration:                     "00:03:38"
+
+        # title 19
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          audio:                        watch?v=zBSlRSGp5N4
+          audio_info:                   //youtube.com/watch?v=zBSlRSGp5N4
+          title:                        Autofahren ist gesund
+          rating:                       3
+          start:                        "00:44:17"
+          end:                          false
+          duration:                     "00:03:38"
+
+        # title 20
+        - item:
+          enabled:                      true
+          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          audio:                        watch?v=zBSlRSGp5N4
+          audio_info:                   //youtube.com/watch?v=zBSlRSGp5N4
+          title:                        Und am Ende steht die Parklaterne
+          rating:                       3
+          start:                        "00:48:42"
+          end:                          false
           duration:                     "00:03:38"
 
     # --------------------------------------------------------------------------

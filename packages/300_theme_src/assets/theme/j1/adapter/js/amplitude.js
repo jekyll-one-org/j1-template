@@ -354,10 +354,7 @@ j1.adapter.amplitude = ((j1, window) => {
                 continue;
               } else if (key === 'rating') {
                 song.rating = item[key];
-                continue;
-              } else if (key === 'audio_single') {
-                song.audio_single = item[key];
-                continue;               
+                continue;              
               } else if (key === 'shuffle') {
                 song.shuffle = item[key];
                 continue;                 
@@ -482,7 +479,6 @@ j1.adapter.amplitude = ((j1, window) => {
             "end":            "{{item.end}}",
             "shuffle":        "{{item.shuffle}}",
             "duration":       "{{item.duration}}",
-            "audio_single":   "{{item.audio_single}}",
             // "audio_fade_in":  "{{item.audio_fade_in}}",
             // "audio_fade_out": "{{item.audio_fade_out}}",
             "cover_art_url":  "{{item.cover_image}}"
