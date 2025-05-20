@@ -168,7 +168,7 @@ settings:
       skip_forward_backward_button:     true
       volume_slider:
         enabled:                        true
-        # preset_value:                   50
+        # preset_value:                 50
 
       # ------------------------------------------------------------------------
       # PLAYER settings
@@ -426,7 +426,7 @@ settings:
       forward_backward_skip_seconds:    10
       volume_slider:
         enabled:                        true
-        preset_value:                   46
+        preset_value:                   50
 
       # ------------------------------------------------------------------------
       # PLUGIN settings

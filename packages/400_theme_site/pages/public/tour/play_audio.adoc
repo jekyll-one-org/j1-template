@@ -143,8 +143,6 @@ amplitude::emancipator_mini[role="mb-5"]
 .Royalty Free Music · Disco 80th
 amplitude::disco_mini[role="mb-5"]
 
-// lorem:sentences[5]
-
 
 [role="mt-5"]
 === Compact Players
@@ -191,7 +189,6 @@ lorem:sentences[3]
 .Royalty Free Music · Disco 80th
 amplitude::disco_large[role="mb-5"]
 
-// lorem:sentences[5]
 
 
 [role="mt-5"]
