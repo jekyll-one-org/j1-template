@@ -268,6 +268,19 @@ regenerate: true
 
   } // END processOnVideoEnd  
 
+
+  // ---------------------------------------------------------------------------
+  // doNothingOnStateChange(state)
+  //
+  // ---------------------------------------------------------------------------
+  function doNothingOnStateChange(state) {
+    if (state > 0) {
+      logger.warn('\n' + `DO NOTHING on StateChange for state: ${YT_PLAYER_STATE_NAMES[state]}`);
+    } else {
+      logger.warn('\n' + `DO NOTHING on StateChange for state: ${YT_PLAYER_STATE_NAMES[6]}`);
+    }
+  } // ENS doNothingOnStateChange
+
   // ---------------------------------------------------------------------------
   // processOnStateChangePlaying()
   //
@@ -354,7 +367,25 @@ regenerate: true
     }
     // stopAllActivePlayers(playerID);
 
-  } // END processOnStateChangePlaying  
+  } // END processOnStateChangePlaying
+
+
+  // ---------------------------------------------------------------------------
+  // processOnStateChangeEnded()
+  //
+  // ---------------------------------------------------------------------------
+  function processOnStateChangeEnded() {
+    var videoID = event.target.options.videoId;
+
+    // save player current time data for later use
+    ytPlayerCurrentTime = ytPlayer.getCurrentTime();
+
+    logger.debug('\n' + `NEXT video on StateChange at trackID|VideoID: ${trackID}|${videoID}`);
+
+    // load NEXT song (video) in playlist
+    loadNextVideo(playlist, songIndex);
+
+  } // END processOnStateChangeEnded
 
   // ---------------------------------------------------------------------------
   // getSongIndex(songArray, videoID)
@@ -992,55 +1023,37 @@ regenerate: true
           updateDurationTimeContainerYTP(ytPlayer, playlist);
           resetProgressBarYTP();
 
-          if (event.data === YT_PLAYER_STATE.UNSTARTED) {
-            // do nothing on state 'unstarted'
-            logger.warn('\n' + `DO NOTHING on StateChange for playlist ${playlist} at trackID|state: ${trackID}|${YT_PLAYER_STATE_NAMES[6]}`);
-            return;
-          }
-
-          if (event.data === YT_PLAYER_STATE.CUED) {
-            // do nothing on state 'cued'
-            logger.warn('\n' + `DO NOTHING on StateChange for playlist ${playlist} at trackID|state: ${trackID}|${YT_PLAYER_STATE_NAMES[event.data]}`);
-            return;
-          }
-          // END YT_PLAYER_STATE.CUED
-
-          if (event.data == YT_PLAYER_STATE.BUFFERING) {
-            // do nothing on state 'buffering'
-            logger.warn('\n' + `DO NOTHING on StateChange for playlist ${playlist} at trackID|state: ${trackID}|${YT_PLAYER_STATE_NAMES[event.data]}`);
-            return;
-          } // END YT_PLAYER_STATE.BUFFERING
-
-          if (event.data === YT_PLAYER_STATE.PAUSED) {
-            // do nothing on state 'paused'
-            logger.warn('\n' + `DO NOTHING on StateChange for playlist ${playlist} at trackID|state: ${trackID}|${YT_PLAYER_STATE_NAMES[event.data]}`);
-            return;
-          } // END YT_PLAYER_STATE.PAUSED
-
-          if (event.data === YT_PLAYER_STATE.PLAYING) {       
-            processOnStateChangePlaying();
-            return;
-          } // END YT_PLAYER_STATE PLAYING
-
-          if (event.data === YT_PLAYER_STATE.ENDED) {
-            var videoID = event.target.options.videoId;
-
-            // save player current time data for later use
-            ytPlayerCurrentTime = ytPlayer.getCurrentTime();
-
-            logger.debug('\n' + `NEXT video on StateChange at trackID|VideoID: ${trackID}|${videoID}`);
-
-            // load NEXT song (video) in playlist
-            loadNextVideo(playlist, songIndex);
-            return;
-          } // END if YT_PLAYER_STATE.ENDED
+          // process all state changes fired by YT API
+          // ------------------------------------------------------------------- 
+          switch(event.data) {
+            case YT_PLAYER_STATE.UNSTARTED:
+              doNothingOnStateChange(YT_PLAYER_STATE.UNSTARTED);
+              break;
+            case YT_PLAYER_STATE.CUED:
+              doNothingOnStateChange(YT_PLAYER_STATE.CUED);
+              break;
+            case YT_PLAYER_STATE.BUFFERING:
+              doNothingOnStateChange(YT_PLAYER_STATE.BUFFERING);
+              break;
+            case YT_PLAYER_STATE.PAUSED:
+              doNothingOnStateChange(YT_PLAYER_STATE.PAUSED);
+              break;
+            case YT_PLAYER_STATE.PLAYING:
+              processOnStateChangePlaying();
+              break;
+            case YT_PLAYER_STATE.ENDED:
+              processOnStateChangeEnded();
+              break;
+            default:
+              logger.error('\n' + `UNKNOWN event on StateChange fired`);
+          } // END case
 
         } // END {{player.id}}OnPlayerStateChange
 
       {% endif %}
     {% endif %}{% endfor %}
 
-  } // END onYouTubeIframeAPIReady ()
+  } // END onYouTubeIframeAPIReady
 
 
   // ---------------------------------------------------------------------------
