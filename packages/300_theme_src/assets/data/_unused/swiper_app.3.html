@@ -1,0 +1,769 @@
+---
+regenerate:                             true
+exclude_from_search:                    true
+---
+
+{%- capture cache -%}
+
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/assets/data/swiper_app.html
+ # Generate the HTML portion for all SwiperJS Apps (Silder)
+ # configured
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2023-2025 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ # -----------------------------------------------------------------------------
+ # NOTE: Data loaded dynamically by J1 Master Slider module (AJAX)
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #    {{variable | debug}}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Liquid var initialization
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign template_config   = site.data.j1_config %}
+{% assign modules           = site.data.modules %}
+
+{% comment %} Set config data
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign environment       = site.environment %}
+{% assign swiper_defaults   = modules.defaults.swiper_app.defaults %}
+{% assign swiper_settings   = modules.swiper_app.settings %}
+{% assign swiper_playlists  = modules.swiper_playlists.settings.playlists %}
+
+{% comment %} Set config options
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign swiper_options    = swiper_defaults | merge: swiper_settings %}
+{% assign swipers           = swiper_settings.swipers %}
+
+{% comment %} Configure permalink settings
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign ext = '' %}
+{% if site.permalink == 'none' %}
+  {% assign ext = '.html' %}
+{% endif %}
+
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign production = false %}
+{% if environment == 'prod' or environment == 'production' %}
+  {% assign production = true %}
+{% endif %}
+
+{% comment %} Collect CSS image filters
+------------------------------------------------------------------------------- {% endcomment %}
+{% assign css_filters   = swiper_defaults.filters | merge: swiper.filters %}
+{% assign image_filters = 'filter:' %}
+
+{% if css_filters.enabled %}
+  {% for filter in css_filters %}
+    {% if filter[0] contains 'enabled' %}
+      {% continue %}
+    {% endif %}
+    {% capture image_filters %}{{image_filters}} {{filter[0]}}({{filter[1]}}){% endcapture %}
+  {% endfor %}
+{% endif %}
+
+{% comment %} Collect HTML snippets
+------------------------------------------------------------------------------- {% endcomment %}
+{% capture _AUTOPLAY_PROGRESS %}
+<div class="autoplay-progress">
+  <svg viewBox="0 0 48 48">
+    <circle cx="24" cy="24" r="20"></circle>
+  </svg>
+  <span></span>
+</div>
+{% endcapture %}
+
+
+{% comment %} Main
+swiper: {{swiper | debug}}
+playlist.image_defaults: {{playlist.image_defaults | debug}}
+{% assign  image_alt_text = slide.caption %}
+================================================================================ {% endcomment %}
+<!DOCTYPE {{site.doctype}}>
+<html lang="{{site.language}}">
+  <head>
+    <!-- [INFO   ] [~/assets/data/swiper.html                      ] [ exclude data file from GLOBAL _site/sitemap.xml (robots) ] -->
+    <meta name="robots" content="noindex, nofollow">
+    <!-- [INFO   ] [~/assets/data/swiper.html                      ] [ exclude data file from LOCAL search index _site/assets/data/lunr-index.json ] -->
+    <meta type="module" content="html data file">
+  </head>
+  <body>
+
+    <!-- [INFO   ] [~/assets/data/swiper.html                      ] [collect all sliders configured ] -->
+    {% for swiper in swipers %} {% if swiper.enabled %}
+
+      {% comment %} Generate HTML portion for all sliders enabled
+      -------------------------------------------------------------------------- {% endcomment %}
+      {% assign type_layout   = swiper.layout | split: "/" %}
+      {% assign swiper_type   = type_layout[0] %}
+      {% assign swiper_layout = type_layout[1] %}    
+
+      {% comment %} Collect Text Swipers, Layout Base
+      layout: text/base
+      ========================================================================== {% endcomment %}
+      {% if swiper_type == 'text' and swiper_layout == 'base' %}
+
+      <!-- Text Swipers, Layout Base -->
+      <div id="{{swiper.id}}">
+        <!-- Swiper elements (El) -->
+        <div class="swiper swiper-container {{swiper.container_classes}}">
+
+          <!-- Swiper Wrapper (slides) -->
+          <ul class="swiper-wrapper">
+          {% for playlist in swiper_playlists %} {% if playlist.enabled %} {% if playlist.name == swiper.playlist %}    
+
+            {% assign type_extension  = playlist.type | split: "/" %}
+            {% assign playlist_type   = type_extension[0] %}
+            {% assign extension       = type_extension[1] %}
+
+            {% for slide in playlist.items %} {% if slide.enabled  %}
+            <li class="swiper-slide">
+              <p>
+                {{slide.text}}
+              </p>
+            </li>
+            {% endif %} {% endfor %}
+          {% endif %} {% endif %} {% endfor %}
+          </ul> <!-- END Swiper Wrapper (slides) -->
+
+        </div> <!-- END Swiper Container (elements) -->
+      </div> <!-- END Swiper {{swiper.id}} -->
+
+      <!-- END Text Swipers, Layout Base  -->
+      {% endif %}
+
+      {% comment %} Collect Text Swipers, Layout Parallax
+      layout: text/parallax
+      ========================================================================== {% endcomment %}
+      {% if swiper_type == 'text' and swiper_layout == 'parallax' %}
+
+      <!-- Text Swipers, Layout Parallax -->
+      <div id="{{swiper.id}}">
+        <!-- Swiper elements (El) -->
+        <div class="swiper swiper-container {{swiper.container_classes}}">
+
+          <!-- Swiper Wrapper (slides) -->
+          <ul class="swiper-wrapper">
+          {% for playlist in swiper_playlists %} {% if playlist.enabled %} {% if playlist.name == swiper.playlist %}
+
+            {% comment %} Place 1-pixel grid on background-image if enabled
+            -------------------------------------------------------------------- {% endcomment %}
+            {% if swiper.gridify %}
+            <style>              
+            .swiper-text-parallax:before {
+              content: "";
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background: url(/assets/image/pattern/image/gridtile.png) repeat;
+            }            
+            </style>
+            {% endif %}
+
+            {% comment %} set default or configured background-image
+            -------------------------------------------------------------------- {% endcomment %}
+            {% assign background-image = '/assets/image/quote/default.jpg' %}
+            {% if swiper.background-image and swiper.background-image != empty %}
+              {% assign background-image = swiper.background-image %}
+            {% endif %}
+
+            {% comment %} set default or configured quote-text color
+            -------------------------------------------------------------------- {% endcomment %}
+            {% assign quote-text-color = 'rgba(255, 255, 255, .75)' %}
+            {% if swiper.quote-text-color and swiper.quote-text-color != empty %}
+              {% assign quote-text-color = swiper.quote-text-color %}
+            {% endif %}
+
+            {% comment %} jadams. 2025-02-26: place background-image|quote-text color
+            -------------------------------------------------------------------- {% endcomment %}
+            <style>
+              .swiper-text-parallax {
+                width: 100%;
+                height: 100%;
+                padding: 75px 0 75px 0;
+                position: relative;
+                background: url({{background-image}}) 50% 0 repeat fixed;
+              }
+              .swiper-text-parallax .swiper-wrapper .swiper-slide p {
+                color: {{quote-text-color}};
+              }
+            </style>
+
+            {% assign type_extension  = playlist.type | split: "/" %}
+            {% assign playlist_type   = type_extension[0] %}
+            {% assign extension       = type_extension[1] %}
+
+            {% for slide in playlist.items %} {% if slide.enabled  %}
+            <li class="swiper-slide">
+              <!-- p class="transparent-text" -->
+              <p>
+                {{slide.text}}
+              </p>
+            </li>
+            {% endif %} {% endfor %}
+          {% endif %} {% endif %} {% endfor %}
+          </ul> <!-- END Swiper Wrapper (slides) -->
+
+        </div> <!-- END Swiper Container (elements) -->
+      </div> <!-- END Swiper {{swiper.id}} -->
+
+      <!-- END Text Swipers, Layout Base  -->
+      {% endif %}
+
+
+      {% comment %} Collect Image Swipers, Layout Base
+      layout: image/base
+      ========================================================================== {% endcomment %}
+      {% if swiper_type == 'image' and swiper_layout == 'base' %}
+
+      <!-- Image Swipers, Layout Base -->
+      {% if swiper.swiper_classes %}
+      <div id="{{swiper.id}}" class="{{swiper.swiper_classes}}">
+      {% else %}
+      <div id="{{swiper.id}}">
+      {% endif %}
+        <!-- Swiper elements (El) -->
+        <div class="swiper swiper-container {{swiper.swiper_container_classes}}">
+
+          {% assign wrapper_styles = '' %}
+          {% if swiper.wrapper_styles %}
+            {% assign wrapper_styles = swiper.wrapper_styles %}
+          {% endif %}
+
+          <!-- Swiper Wrapper (slides) -->
+          {% if swiper.wrapper_styles %}
+          <ul class="swiper-wrapper" style="{{wrapper_styles}}">
+          {% else %}
+          <ul class="swiper-wrapper">
+          {% endif %}
+
+            {% if swiper.lightbox.enabled %}
+            <!-- anchor-based swiper slide HTML required for lightbox usage -->
+            {% else %}
+            <!-- flat swiper slide HTML -->
+            {% endif %}
+
+            {% for playlist in swiper_playlists %} {% if playlist.enabled %} {% if playlist.name == swiper.playlist %}    
+            {% for slide in playlist.items %} {% if slide.enabled %}
+
+            {% assign type_extension  = playlist.type | split: "/" %}
+            {% assign playlist_type   = type_extension[0] %}
+            {% assign image_extension = type_extension[1] %}
+
+            {% assign image_alt_text = 'Slide Image' %}
+            {% if swiper.captions.enabled %}
+              {% capture image_alt_text %}Slide Image{{slide.caption}}{% endcapture %}
+            {% endif %}
+
+            {% if swiper.lightbox.enabled %}
+            <li class="swiper-slide">
+              {% if playlist.image_defaults.base_folder %} 
+              <a href="{{playlist.image_defaults.base_folder}}/{{slide.image}}.{{image_extension}}"
+                {% if playlist.image_defaults.image_width == 'slide' %}
+                  data-pswp-width="{{slide.imageWidth}}"
+                  data-pswp-height="{{slide.imageHeight}}"
+                {% else %}
+                  data-pswp-width="{{playlist.image_defaults.image_width}}"
+                  data-pswp-height="{{playlist.image_defaults.image_height}}"              
+                {% endif %}
+                  target="_blank">
+                <img class="pswp-image" src="{{playlist.image_defaults.base_folder}}/{{slide.image}}.{{image_extension}}" alt="{{image_alt_text}} {{slide.image}}">
+                {% if swiper.captions.enabled %}
+                <div class="{{swiper.captions.css_class}}">{{slide.caption_text}}</div>
+                {% endif %}
+                {% if swiper.lightbox.captions.enabled %}
+                <span class="pswp-caption-content">{{slide.description}}</span>
+                {% endif %}
+              </a>
+              {% endif %}
+            </li>
+            {% else %}
+            <li class="swiper-slide">
+              {% if playlist.image_defaults.base_folder %} 
+              <img src="{{playlist.image_defaults.base_folder}}/{{slide.image}}.{{image_extension}}" alt="{{image_alt_text}} {{slide.image}}">
+              {% else %}
+              <img src="{{slide.image}}.{{image_extension}}">
+              {% endif %}
+              {% if swiper.captions.enabled %}
+              <div class="{{swiper.captions.css_class}}">{{slide.caption_text}}</div>
+              {% endif %}
+            </li>          
+            {% endif %}
+
+            {% endif %} {% endfor %}
+            {% endif %} {% endif %} {% endfor %}
+
+          </ul> <!-- END Swiper Wrapper (slides) -->
+
+          {% comment %} DEBUG
+          ----------------------------------------------------------------------
+          swiper.module_settings.pagination: {{swiper.module_settings.pagination | debug}}
+          swiper.module_settings.pagination.el (outer): {{swiper.module_settings.pagination.el | contains: 'outer' | debug}}
+          ---------------------------------------------------------------------- {% endcomment %}
+         
+          {% if swiper.module_settings.navigation %}
+          <!-- Navigation -->
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+          {% endif %}
+
+          {% if swiper.module_settings.pagination and swiper.module_settings.pagination.type == 'inner' %}
+          <!-- Inner Pagination -->
+          <div class="swiper-pagination"></div>
+          {% endif %}
+
+        </div> <!-- END Swiper Container (elements) -->
+
+        {% if swiper.module_settings.pagination and swiper.module_settings.pagination.type == 'outer' %}
+        <!-- Outer Pagination -->
+        <div class="swiper-pagination-outer"></div>
+        {% endif %} 
+
+      </div> <!-- END Swiper {{swiper.id}} -->     
+
+      <!-- END Image Swipers, Layout Base -->
+      {% endif %}
+
+
+      {% comment %} Collect Extended Image Swipers, Layout Thumb
+      layout: image/thumb
+      ========================================================================== {% endcomment %}
+      {% if swiper_type == 'image' and swiper_layout == 'thumb' %}
+  
+      <!-- Image Swipers, Layout Thumb -->
+      {% if swiper.swiper_classes %}
+      <div id="{{swiper.id}}" class="{{swiper.swiper_classes}}">
+      {% else %}
+      <div id="{{swiper.id}}">
+      {% endif %}
+        <!-- Swiper elements (El) -->
+        <div class="swiper swiper-container {{swiper.swiper_container_classes}}">
+  
+          {% assign wrapper_styles = '' %}
+          {% if swiper.wrapper_styles %}
+            {% assign wrapper_styles = swiper.wrapper_styles %}
+          {% endif %}
+  
+          <!-- Swiper Wrapper (slides) -->
+          {% if swiper.wrapper_styles %}
+          <ul class="swiper-wrapper" style="{{wrapper_styles}}">
+          {% else %}
+          <ul class="swiper-wrapper">
+          {% endif %}
+  
+            {% if swiper.lightbox.enabled %}
+            <!-- anchor-based swiper slide HTML required for lightbox usage -->
+            {% else %}
+            <!-- flat swiper slide HTML -->
+            {% endif %}
+  
+            {% for playlist in swiper_playlists %} {% if playlist.enabled %} {% if playlist.name == swiper.playlist %}    
+            {% for slide in playlist.items %} {% if slide.enabled %}
+  
+            {% assign type_extension  = playlist.type | split: "/" %}
+            {% assign playlist_type   = type_extension[0] %}
+            {% assign image_extension = type_extension[1] %}
+  
+            {% assign image_alt_text = 'Slide Image' %}
+            {% if swiper.captions.enabled %}
+              {% capture image_alt_text %}Slide Image{{slide.caption}}{% endcapture %}
+            {% endif %}
+  
+            {% if swiper.lightbox.enabled %}
+            <li class="swiper-slide">
+              {% if playlist.image_defaults.base_folder %} 
+              <a href="{{playlist.image_defaults.base_folder}}/{{slide.image}}.{{image_extension}}"
+                {% if playlist.image_defaults.image_width == 'slide' %}
+                  data-pswp-width="{{slide.imageWidth}}"
+                  data-pswp-height="{{slide.imageHeight}}"
+                {% else %}
+                  data-pswp-width="{{playlist.image_defaults.image_width}}"
+                  data-pswp-height="{{playlist.image_defaults.image_height}}"              
+                {% endif %}
+                  target="_blank">
+                <img class="pswp-image" src="{{playlist.image_defaults.base_folder}}/{{slide.image}}.{{image_extension}}" alt="{{image_alt_text}} {{slide.image}}">
+                {% if swiper.captions.enabled %}
+                <div class="{{swiper.captions.css_class}}">{{slide.caption_text}}</div>
+                {% endif %}
+                {% if swiper.lightbox.captions.enabled %}
+                <span class="pswp-caption-content">{{slide.description}}</span>
+                {% endif %}
+              </a>
+              {% endif %}
+            </li>
+            {% else %}
+            <li class="swiper-slide">
+              {% if playlist.image_defaults.base_folder %} 
+              <img src="{{playlist.image_defaults.base_folder}}/{{slide.image}}.{{image_extension}}" alt="{{image_alt_text}} {{slide.image}}">
+              {% else %}
+              <img src="{{slide.image}}.{{image_extension}}">
+              {% endif %}
+              {% if swiper.captions.enabled %}
+              <div class="{{swiper.captions.css_class}}">{{slide.caption_text}}</div>
+              {% endif %}
+            </li>          
+            {% endif %}
+  
+            {% endif %} {% endfor %}
+            {% endif %} {% endif %} {% endfor %}
+  
+          </ul> <!-- END Swiper Wrapper (slides) -->
+  
+          {% if swiper.modules.navigation %}
+          <!-- Navigation -->
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+          {% endif %}
+  
+          {% if swiper.modules.pagination %}
+          <!-- Pagination -->
+          <div class="swiper-pagination"></div>
+          {% endif %}
+  
+        </div> <!-- END Swiper Container (elements) -->
+      </div> <!-- END Swiper {{swiper.id}} -->
+      
+      <!-- END Image Swipers, Layout Thumb -->
+      {% endif %}
+
+      {% comment %} Collect Extended Image Swipers, Layout Panorama
+      layout: image/panorama
+      ========================================================================== {% endcomment %}
+      {% if swiper_type == 'image' and swiper_layout == 'panorama' %}
+  
+      <!-- Image Swipers, Layout Panorama -->
+      {% if swiper.swiper_classes %}
+      <div id="{{swiper.id}}" class="{{swiper.swiper_classes}}">
+      {% else %}
+      <div id="{{swiper.id}}">
+      {% endif %}
+        <!-- Swiper elements (El) -->
+        <div class="swiper swiper-container {{swiper.swiper_container_classes}}">
+  
+          {% assign wrapper_styles = '' %}
+          {% if swiper.wrapper_styles %}
+            {% assign wrapper_styles = swiper.wrapper_styles %}
+          {% endif %}
+  
+          <!-- Swiper Wrapper (slides) -->
+          {% if swiper.wrapper_styles %}
+          <ul class="swiper-wrapper" style="{{wrapper_styles}}">
+          {% else %}
+          <ul class="swiper-wrapper">
+          {% endif %}
+  
+            {% if swiper.lightbox.enabled %}
+            <!-- anchor-based swiper slide HTML required for lightbox usage -->
+            {% else %}
+            <!-- flat swiper slide HTML -->
+            {% endif %}
+  
+            {% for playlist in swiper_playlists %} {% if playlist.enabled %} {% if playlist.name == swiper.playlist %}    
+            {% for slide in playlist.items %} {% if slide.enabled %}
+  
+            {% assign type_extension  = playlist.type | split: "/" %}
+            {% assign playlist_type   = type_extension[0] %}
+            {% assign image_extension = type_extension[1] %}
+  
+            {% assign image_alt_text = 'Slide Image' %}
+            {% if swiper.captions.enabled %}
+              {% capture image_alt_text %}Slide Image{{slide.caption}}{% endcapture %}
+            {% endif %}
+  
+            {% if swiper.lightbox.enabled %}
+            <li class="swiper-slide">
+              {% if playlist.image_defaults.base_folder %} 
+              <a href="{{playlist.image_defaults.base_folder}}/{{slide.image}}.{{image_extension}}"
+                {% if playlist.image_defaults.image_width == 'slide' %}
+                  data-pswp-width="{{slide.imageWidth}}"
+                  data-pswp-height="{{slide.imageHeight}}"
+                {% else %}
+                  data-pswp-width="{{playlist.image_defaults.image_width}}"
+                  data-pswp-height="{{playlist.image_defaults.image_height}}"              
+                {% endif %}
+                  target="_blank">
+                <img class="pswp-image" src="{{playlist.image_defaults.base_folder}}/{{slide.image}}.{{image_extension}}" alt="{{image_alt_text}} {{slide.image}}">
+                {% if swiper.captions.enabled %}
+                <div class="{{swiper.captions.css_class}}">{{slide.caption_text}}</div>
+                {% endif %}
+                {% if swiper.lightbox.captions.enabled %}
+                <span class="pswp-caption-content">{{slide.description}}</span>
+                {% endif %}
+              </a>
+              {% endif %}
+            </li>
+            {% else %}
+            <li class="swiper-slide">
+              {% if playlist.image_defaults.base_folder %} 
+              <img src="{{playlist.image_defaults.base_folder}}/{{slide.image}}.{{image_extension}}" alt="{{image_alt_text}} {{slide.image}}">
+              {% else %}
+              <img src="{{slide.image}}.{{image_extension}}">
+              {% endif %}
+              {% if swiper.captions.enabled %}
+              <div class="{{swiper.captions.css_class}}">{{slide.caption_text}}</div>
+              {% endif %}
+            </li>          
+            {% endif %}
+  
+            {% endif %} {% endfor %}
+            {% endif %} {% endif %} {% endfor %}
+  
+          </ul> <!-- END Swiper Wrapper (slides) -->
+  
+          {% if swiper.modules.navigation %}
+          <!-- Navigation -->
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+          {% endif %}
+  
+          {% if swiper.modules.pagination %}
+          <!-- Pagination -->
+          <div class="swiper-pagination"></div>
+          {% endif %}
+  
+        </div> <!-- END Swiper Container (elements) -->
+      </div> <!-- END Swiper {{swiper.id}} -->
+      
+      <!-- END Image Swipers, Layout Panorama -->
+      {% endif %}
+
+
+      {% comment %} Collect Extended Image Swipers, Layout Neighbor
+      layout: image/neighbor
+      ========================================================================== {% endcomment %}
+      {% if swiper_type == 'image' and swiper_layout == 'neighbor' %}
+  
+      <!-- Image Swipers, Layout Neighbor -->
+      {% if swiper.swiper_classes %}
+      <div id="{{swiper.id}}" class="{{swiper.swiper_classes}}">
+      {% else %}
+      <div id="{{swiper.id}}">
+      {% endif %}
+        <!-- Swiper elements (El) -->
+        <div class="swiper swiper-container {{swiper.swiper_container_classes}}">
+  
+          {% assign wrapper_styles = '' %}
+          {% if swiper.wrapper_styles %}
+            {% assign wrapper_styles = swiper.wrapper_styles %}
+          {% endif %}
+  
+          <!-- Swiper Wrapper (slides) -->
+          {% if swiper.wrapper_styles %}
+          <ul class="swiper-wrapper" style="{{wrapper_styles}}">
+          {% else %}
+          <ul class="swiper-wrapper">
+          {% endif %}
+  
+            {% if swiper.lightbox.enabled %}
+            <!-- anchor-based swiper slide HTML required for lightbox usage -->
+            {% else %}
+            <!-- flat swiper slide HTML -->
+            {% endif %}
+  
+            {% for playlist in swiper_playlists %} {% if playlist.enabled %} {% if playlist.name == swiper.playlist %}    
+            {% for slide in playlist.items %} {% if slide.enabled %}
+  
+            {% assign type_extension  = playlist.type | split: "/" %}
+            {% assign playlist_type   = type_extension[0] %}
+            {% assign image_extension = type_extension[1] %}
+  
+            {% assign image_alt_text = 'Slide Image' %}
+            {% if swiper.captions.enabled %}
+              {% capture image_alt_text %}Slide Image{{slide.caption}}{% endcapture %}
+            {% endif %}
+  
+            {% if swiper.lightbox.enabled %}
+            <li class="swiper-slide">
+              {% if playlist.image_defaults.base_folder %} 
+              <a href="{{playlist.image_defaults.base_folder}}/{{slide.image}}.{{image_extension}}"
+                {% if playlist.image_defaults.image_width == 'slide' %}
+                  data-pswp-width="{{slide.imageWidth}}"
+                  data-pswp-height="{{slide.imageHeight}}"
+                {% else %}
+                  data-pswp-width="{{playlist.image_defaults.image_width}}"
+                  data-pswp-height="{{playlist.image_defaults.image_height}}"              
+                {% endif %}
+                  target="_blank">
+                <img class="pswp-image" src="{{playlist.image_defaults.base_folder}}/{{slide.image}}.{{image_extension}}" alt="{{image_alt_text}} {{slide.image}}">
+                {% if swiper.captions.enabled %}
+                <div class="{{swiper.captions.css_class}}">{{slide.caption_text}}</div>
+                {% endif %}
+                {% if swiper.lightbox.captions.enabled %}
+                <span class="pswp-caption-content">{{slide.description}}</span>
+                {% endif %}
+              </a>
+              {% endif %}
+            </li>
+            {% else %}
+            <li class="swiper-slide">
+              {% if playlist.image_defaults.base_folder %} 
+              <img src="{{playlist.image_defaults.base_folder}}/{{slide.image}}.{{image_extension}}" alt="{{image_alt_text}} {{slide.image}}">
+              {% else %}
+              <img src="{{slide.image}}.{{image_extension}}">
+              {% endif %}
+              {% if swiper.captions.enabled %}
+              <div class="{{swiper.captions.css_class}}">{{slide.caption_text}}</div>
+              {% endif %}
+            </li>          
+            {% endif %}
+  
+            {% endif %} {% endfor %}
+            {% endif %} {% endif %} {% endfor %}
+  
+          </ul> <!-- END Swiper Wrapper (slides) -->
+  
+          {% if swiper.modules.navigation %}
+          <!-- Navigation -->
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+          {% endif %}
+  
+          {% if swiper.modules.pagination %}
+          <!-- Pagination -->
+          <div class="swiper-pagination"></div>
+          {% endif %}
+  
+        </div> <!-- END Swiper Container (elements) -->
+      </div> <!-- END Swiper {{swiper.id}} -->
+      
+      <!-- END Image Swipers, Layout Neighbor -->
+      {% endif %}
+
+
+      {% comment %} Collect Extended Image Swipers, Layout Expanded
+      layout: image/expanded
+      ========================================================================== {% endcomment %}
+      {% if swiper_type == 'image' and swiper_layout == 'expanded' %}
+  
+      <!-- Image Swipers, Layout Expanded -->
+      {% if swiper.swiper_classes %}
+      <div id="{{swiper.id}}" class="{{swiper.swiper_classes}}">
+      {% else %}
+      <div id="{{swiper.id}}">
+      {% endif %}
+        <!-- Swiper elements (El) -->
+        <div class="swiper swiper-container {{swiper.swiper_container_classes}}">
+  
+          {% assign wrapper_styles = '' %}
+          {% if swiper.wrapper_styles %}
+            {% assign wrapper_styles = swiper.wrapper_styles %}
+          {% endif %}
+  
+          <!-- Swiper Wrapper (slides) -->
+          {% if swiper.wrapper_styles %}
+          <ul class="swiper-wrapper" style="{{wrapper_styles}}">
+          {% else %}
+          <ul class="swiper-wrapper">
+          {% endif %}
+  
+            {% if swiper.lightbox.enabled %}
+            <!-- anchor-based swiper slide HTML required for lightbox usage -->
+            {% else %}
+            <!-- flat swiper slide HTML -->
+            {% endif %}
+  
+            {% for playlist in swiper_playlists %} {% if playlist.enabled %} {% if playlist.name == swiper.playlist %}    
+            {% for slide in playlist.items %} {% if slide.enabled %}
+  
+            {% assign type_extension  = playlist.type | split: "/" %}
+            {% assign playlist_type   = type_extension[0] %}
+            {% assign image_extension = type_extension[1] %}
+  
+            {% assign image_alt_text = 'Slide Image' %}
+            {% if swiper.captions.enabled %}
+              {% capture image_alt_text %}Slide Image{{slide.caption}}{% endcapture %}
+            {% endif %}
+  
+            {% if swiper.lightbox.enabled %}
+            <li class="swiper-slide">
+              {% if playlist.image_defaults.base_folder %} 
+              <a href="{{playlist.image_defaults.base_folder}}/{{slide.image}}.{{image_extension}}"
+                {% if playlist.image_defaults.image_width == 'slide' %}
+                  data-pswp-width="{{slide.imageWidth}}"
+                  data-pswp-height="{{slide.imageHeight}}"
+                {% else %}
+                  data-pswp-width="{{playlist.image_defaults.image_width}}"
+                  data-pswp-height="{{playlist.image_defaults.image_height}}"              
+                {% endif %}
+                  target="_blank">
+                <img class="pswp-image" src="{{playlist.image_defaults.base_folder}}/{{slide.image}}.{{image_extension}}" alt="{{image_alt_text}} {{slide.image}}">
+                {% if swiper.captions.enabled %}
+                <div class="{{swiper.captions.css_class}}">{{slide.caption_text}}</div>
+                {% endif %}
+                {% if swiper.lightbox.captions.enabled %}
+                <span class="pswp-caption-content">{{slide.description}}</span>
+                {% endif %}
+              </a>
+              {% endif %}
+            </li>
+            {% else %}
+            <li class="swiper-slide">
+              {% if playlist.image_defaults.base_folder %} 
+              <img src="{{playlist.image_defaults.base_folder}}/{{slide.image}}.{{image_extension}}" alt="{{image_alt_text}} {{slide.image}}">
+              {% else %}
+              <img src="{{slide.image}}.{{image_extension}}">
+              {% endif %}
+              {% if swiper.captions.enabled %}
+              <div class="{{swiper.captions.css_class}}">{{slide.caption_text}}</div>
+              {% endif %}
+            </li>          
+            {% endif %}
+  
+            {% endif %} {% endfor %}
+            {% endif %} {% endif %} {% endfor %}
+  
+          </ul> <!-- END Swiper Wrapper (slides) -->
+  
+          {% if swiper.modules.navigation %}
+          <!-- Navigation -->
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+          {% endif %}
+  
+          {% if swiper.modules.pagination %}
+          <!-- Pagination -->
+          <div class="swiper-pagination"></div>
+          {% endif %}
+  
+        </div> <!-- END Swiper Container (elements) -->
+      </div> <!-- END Swiper {{swiper.id}} -->
+      
+      <!-- END Image Swipers, Layout Expanded -->
+      {% endif %}
+
+  {% endif %}{% endfor %}
+  <!-- [INFO   ] [~/assets/data/swiper.html                      ] [END collect all sliders configured] -->
+
+  </body>
+</html>
+{%- endcapture -%}
+
+
+{% comment %} Beautify|Compress page
+-------------------------------------------------------------------------------- {% endcomment %}
+{%- if production -%}
+  {% capture _LINE_FEED %}{% endcapture %}{% if site.compress_html.ignore.envs contains jekyll.environment %}{{ cache | strip_html_comments }}{% else %}{% capture _content %}{{ cache | strip_html_comments }}{% endcapture %}{% assign _profile = site.compress_html.profile %}{% if site.compress_html.endings == "all" %}{% assign _endings = "html head body li dt dd p rt rp optgroup option colgroup caption thead tbody tfoot tr td th" | split: " " %}{% else %}{% assign _endings = site.compress_html.endings %}{% endif %}{% for _element in _endings %}{% capture _END %}</{{ _element }}>{% endcapture %}{% assign _content = _content | remove: _END %}{% endfor %}{% if _profile and _endings %}{% assign _profile_endings = _content | size | plus: 1 %}{% endif %}{% for _element in site.compress_html.startings %}{% capture _start %}<{{ _element }}>{% endcapture %}{% assign _content = _content | remove: _start %}{% endfor %}{% if _profile and site.compress_html.startings %}{% assign _profile_startings = _content | size | plus: 1 %}{% endif %}{% if site.compress_html.comments == "all" %}{% assign _comments = "<!-- -->" | split: " " %}{% else %}{% assign _comments = site.compress_html.comments %}{% endif %}{% if _comments.size == 2 %}{% capture _comment_befores %}.{{ _content }}{% endcapture %}{% assign _comment_befores = _comment_befores | split: _comments.first %}{% for _comment_before in _comment_befores %}{% if forloop.first %}{% continue %}{% endif %}{% capture _comment_outside %}{% if _carry %}{{ _comments.first }}{% endif %}{{ _comment_before }}{% endcapture %}{% capture _comment %}{% unless _carry %}{{ _comments.first }}{% endunless %}{{ _comment_outside | split: _comments.last | first }}{% if _comment_outside contains _comments.last %}{{ _comments.last }}{% assign _carry = false %}{% else %}{% assign _carry = true %}{% endif %}{% endcapture %}{% assign _content = _content | remove_first: _comment %}{% endfor %}{% if _profile %}{% assign _profile_comments = _content | size | plus: 1 %}{% endif %}{% endif %}{% assign _pre_befores = _content | split: "<pre" %}{% assign _content = "" %}{% for _pre_before in _pre_befores %}{% assign _pres = _pre_before | split: "</pre>" %}{% assign _pres_after = "" %}{% if _pres.size != 0 %}{% if site.compress_html.blanklines %}{% assign _lines = _pres.last | split: _LINE_FEED %}{% capture _pres_after %}{% for _line in _lines %}{% assign _trimmed = _line | split: " " | join: " " %}{% if _trimmed != empty or forloop.last %}{% unless forloop.first %}{{ _LINE_FEED }}{% endunless %}{{ _line }}{% endif %}{% endfor %}{% endcapture %}{% else %}{% assign _pres_after = _pres.last | split: " " | join: " " %}{% endif %}{% endif %}{% capture _content %}{{ _content }}{% if _pre_before contains "</pre>" %}<pre{{ _pres.first }}</pre>{% endif %}{% unless _pre_before contains "</pre>" and _pres.size == 1 %}{{ _pres_after }}{% endunless %}{% endcapture %}{% endfor %}{% if _profile %}{% assign _profile_collapse = _content | size | plus: 1 %}{% endif %}{% if site.compress_html.clippings == "all" %}{% assign _clippings = "html head title base link meta style body article section nav aside h1 h2 h3 h4 h5 h6 hgroup header footer address p hr blockquote ol ul li dl dt dd figure figcaption main div table caption colgroup col tbody thead tfoot tr td th" | split: " " %}{% else %}{% assign _clippings = site.compress_html.clippings %}{% endif %}{% for _element in _clippings %}{% assign _edges = " <e;<e; </e>;</e>;</e> ;</e>" | replace: "e", _element | split: ";" %}{% assign _content = _content | replace: _edges[0], _edges[1] | replace: _edges[2], _edges[3] | replace: _edges[4], _edges[5] %}{% endfor %}{% if _profile and _clippings %}{% assign _profile_clippings = _content | size | plus: 1 %}{% endif %}{{ _content }}{% if _profile %} <table id="compress_html_profile_{{ site.time | date: "%Y%m%d" }}" class="compress_html_profile"> <thead> <tr> <td>Step <td>Bytes <tbody> <tr> <td>raw <td>{{ cache | strip_html_comments | size }}{% if _profile_endings %} <tr> <td>endings <td>{{ _profile_endings }}{% endif %}{% if _profile_startings %} <tr> <td>startings <td>{{ _profile_startings }}{% endif %}{% if _profile_comments %} <tr> <td>comments <td>{{ _profile_comments }}{% endif %}{% if _profile_collapse %} <tr> <td>collapse <td>{{ _profile_collapse }}{% endif %}{% if _profile_clippings %} <tr> <td>clippings <td>{{ _profile_clippings }}{% endif %} </table>{% endif %}{% endif %}
+{%- else -%}
+  {{ cache | remove:'<html><body>' | remove:'</body></html>' | strip_empty_lines }}
+{%- endif -%}
+
+{% comment %} Reset page cache
+-------------------------------------------------------------------------------- {% endcomment %}
+{%- assign cache = false -%}

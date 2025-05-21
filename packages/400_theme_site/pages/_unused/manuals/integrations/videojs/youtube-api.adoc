@@ -21,7 +21,7 @@ categories:                             [ Manuals ]
 tags:                                   [ Module, YouTube ]
 
 image:
-  path:                                 /assets/image/icons/videojs/videojs-poster.png
+  path:                                 /assets/image/icon/videojs/videojs-poster.png
   width:                                1920
   height:                               1280
 
@@ -35,7 +35,7 @@ resource_options:
       collapseDepth:                    2
   - attic:
       slides:
-        - url:                          /assets/image/icons/videojs/videojs-poster.png
+        - url:                          /assets/image/icon/videojs/videojs-poster.png
           alt:                          VideoJS Poster
 ---
 

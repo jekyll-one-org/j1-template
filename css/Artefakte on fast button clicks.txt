@@ -1,0 +1,102 @@
+Ich verende eine Gruppe von Buttons, die mit einem Click-Event versehen sind.
+Klickt man auf diese Knöpfe schnell mehrmals hintereinander, erscheinen
+senkrechte Balken (Artefakte) um diese Knöpfe.
+
+Was kann der Grund dafür sein und wie kann man dies verhindern?
+
+Gemini
+--------------------------------------------------------------------------------
+
+Das Problem, das du beschreibst, klingt nach einem klassischen Fall von
+Fokus-Umrandungen (auch als "Focus Rings" oder "Outline" bekannt), die in
+Browsern auftreten, wenn ein Element den Fokus erhält. Dies passiert häufig
+bei schnellen, wiederholten Klicks auf Buttons.
+
+Gründe für die Fokus-Umrandungen:
+
+Barrierefreiheit:
+    Browser zeigen diese Umrandungen standardmäßig an, um Nutzern, die
+    keine Maus verwenden (z. B. Tastaturnutzer oder Nutzer von Screenreadern),
+    visuelles Feedback zu geben, welches Element gerade den Fokus hat.
+
+Browser-Standardverhalten:
+    Jeder Browser hat seine eigene Implementierung von Fokus-Umrandungen,
+    was zu unterschiedlichen Stilen und Verhaltensweisen führen kann.
+
+Schnelle Klicks:
+    Bei schnellen Klicks kann der Browser den Fokus mehrmals hintereinander
+    setzen und entfernen, was zu einer temporären Anzeige der Umrandung führt.
+
+
+Lösungen zur Vermeidung der Fokus-Umrandungen
+--------------------------------------------------------------------------------
+
+Die einfachste Methode ist, die Umrandung mit CSS zu deaktivieren. Füge der
+CSS-Regel für deine Buttons outline: none; hinzu:
+
+CSS
+
+button {
+  outline: none;
+}
+
+Das Deaktivieren der Umrandung kann die Barrierefreiheit beeinträchtigen.
+Überlege dir, ob du eine alternative visuelle Anzeige für den Fokus
+bereitstellen möchtest.
+
+CSS focus-visible. Diese CSS-Pseudoklasse ist die empfohlene Lösung, da sie
+die Umrandung nur dann anzeigt, wenn der Fokus über die Tastatur gesetzt wird.
+Dies erhält die Barrierefreiheit für Tastaturnutzer, während das Problem bei
+Mausklicks behoben wird.
+
+CSS
+
+button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+Dies bedeutet, dass das Element beim Fokussieren, wenn der Fokus NICHT durch
+die Tastatur gesetzt wurde, keine Umrandung anzeigen soll.
+
+
+JavaScript blur(): Du kannst den Fokus nach dem Klick mit JavaScript entfernen:
+
+JavaScript
+
+const buttons = document.querySelectorAll('button');
+buttons.forEach(button => {
+  button.addEventListener('click', () => {
+    button.blur();
+  });
+});
+
+
+Dies ist eine weniger empfohlene Methode, da sie das natürliche Verhalten des
+Browsers verändert und zu unerwarteten Ergebnissen führen kann.
+
+CSS pointer-events: none; (Für kurze Zeit): Wenn die Buttons nach dem
+Klicken kurzzeitig deaktiviert werden können, um Doppel-Klicks zu verhindern,
+kann pointer-events verwendet werden:
+
+JavaScript
+
+button.addEventListener('click', () => {
+  button.style.pointerEvents = 'none';
+  setTimeout(() => {
+    button.style.pointerEvents = 'auto';
+  }, 300); // 300ms Verzögerung
+});
+
+Dies verhindert, dass der Button während der Verzögerung erneut geklickt
+werden kann.
+
+Empfehlung
+--------------------------------------------------------------------------------
+
+Die Verwendung von focus-visible ist die beste Lösung, da sie die
+Barrierefreiheit gewährleistet und gleichzeitig das Problem mit den
+Fokus-Umrandungen bei Mausklicks behebt.
+
+Stelle sicher, dass dein Browser focus-visible unterstützt (moderne Browser
+tun dies). Wenn du ältere Browser unterstützen musst, kannst du ein Polyfill
+verwenden.

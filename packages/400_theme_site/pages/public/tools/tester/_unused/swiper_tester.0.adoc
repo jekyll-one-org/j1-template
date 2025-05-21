@@ -18,7 +18,7 @@ categories:                             [ Tester ]
 tags:                                   [ Module, Swiper ]
 
 image:
-  path:                                 /assets/image/modules/attics/markus-spiske-1920x1280.jpg
+  path:                                 /assets/image/module/attic/markus-spiske-1920x1280.jpg
   width:                                1920
   height:                               1280
 
@@ -33,7 +33,7 @@ resource_options:
       collapseDepth:                    3
   - attic:
       slides:
-        - url:                          /assets/image/modules/attics/markus-spiske-1920x1280.jpg
+        - url:                          /assets/image/module/attic/markus-spiske-1920x1280.jpg
           alt:                          Swiper Tester
 ---
 
@@ -131,55 +131,55 @@ a lightbox to enlarge images full size.
   <!-- Slides container -->
   <ul class="swiper-wrapper" style="margin-bottom: 3.75rem;">
     <li class="swiper-slide">
-      <a href="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg"
+      <a href="/assets/image/module/masterslider/slider_4/ms-free-animals-1.jpg"
          data-pswp-width="1600"
          data-pswp-height="900">
-        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" alt="Image 1">
+        <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-1.jpg" alt="Image 1">
         <div class="swp-caption-content">Image 1</div>
         <span class="pswp-caption-content">Image 1</span>
       </a>
     </li>
     <li class="swiper-slide">
-      <a href="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg"
+      <a href="/assets/image/module/masterslider/slider_4/ms-free-animals-2.jpg"
         data-pswp-width="1600"
         data-pswp-height="900">
-        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg" alt="Image 2">
+        <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-2.jpg" alt="Image 2">
         <div class="swp-caption-content">Image 2</div>
         <span class="pswp-caption-content">Image 2</span>
       </a>
     </li>
     <li class="swiper-slide">
-      <a href="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg"
+      <a href="/assets/image/module/masterslider/slider_4/ms-free-animals-3.jpg"
         data-pswp-width="1600"
         data-pswp-height="900">
-        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" alt="Image 3">
+        <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-3.jpg" alt="Image 3">
         <div class="swp-caption-content">Image 3</div>
         <span class="pswp-caption-content">Image 3</span>
       </a>
     </li>
     <li class="swiper-slide">
-      <a href="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg"
+      <a href="/assets/image/module/masterslider/slider_4/ms-free-animals-4.jpg"
         data-pswp-width="1600"
         data-pswp-height="900">
-        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg" alt="Image 4">
+        <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-4.jpg" alt="Image 4">
         <div class="swp-caption-content">Image 4</div>
         <span class="pswp-caption-content">Image 4</span>
       </a>
     </li>
     <li class="swiper-slide">
-      <a href="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg"
+      <a href="/assets/image/module/masterslider/slider_4/ms-free-animals-5.jpg"
         data-pswp-width="1600"
         data-pswp-height="900">
-        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg" alt="Image 5">
+        <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-5.jpg" alt="Image 5">
         <div class="swp-caption-content">Image 5</div>
         <span class="pswp-caption-content">Image 5</span>
       </a>
     </li>
     <li class="swiper-slide">
-      <a href="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg"
+      <a href="/assets/image/module/masterslider/slider_4/ms-free-animals-6.jpg"
         data-pswp-width="1600"
         data-pswp-height="900">
-        <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg" alt="Image 6">
+        <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-6.jpg" alt="Image 6">
         <div class="swp-caption-content">Image 6</div>
         <span class="pswp-caption-content">Image 6</span>
       </a>
@@ -328,22 +328,22 @@ examples how to control such sliders by a thumbs slave silder.
   <!-- Slides container -->
   <ul class="swiper-wrapper">
     <li class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg">      
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-1.jpg">      
     </li>
     <li class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg">
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-2.jpg">
     </li>
     <li class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg">
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-3.jpg">
     </li>
     <li class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg">
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-4.jpg">
     </li>
     <li class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg">
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-5.jpg">
     </li>
     <li class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg">
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-6.jpg">
     </li>
   </ul> <!-- END swiper-wrapper -->
 
@@ -355,22 +355,22 @@ examples how to control such sliders by a thumbs slave silder.
   <!-- Slides container -->
   <ul class="swiper-wrapper">
     <li class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg">
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-1.jpg">
     </li>
     <li class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg">
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-2.jpg">
     </li>
     <li class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg">
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-3.jpg">
     </li>
     <li class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg">
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-4.jpg">
     </li>
     <li class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg">
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-5.jpg">
     </li>
     <li class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg">
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-6.jpg">
     </li>
   </ul> <!-- END swiper-wrapper -->
 
@@ -441,27 +441,27 @@ are in a *single row*.
             <!-- Slides container -->
             <ul class="swiper-wrapper">
               <li class="swiper-slide">
-                <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg">
+                <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-1.jpg">
                 <div class="swp-caption-content">Image 1</div>
               </li>
               <li class="swiper-slide">
-                <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg">
+                <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-2.jpg">
                 <div class="swp-caption-content">Image 2</div>
               </li>
               <li class="swiper-slide">
-                <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg">
+                <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-3.jpg">
                 <div class="swp-caption-content">Image 3</div>
               </li>
               <li class="swiper-slide">
-                <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg">
+                <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-4.jpg">
                 <div class="swp-caption-content">Image 4</div>
               </li>
               <li class="swiper-slide">
-                <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg">
+                <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-5.jpg">
                 <div class="swp-caption-content">Image 5</div>
               </li>
               <li class="swiper-slide">
-                <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg">
+                <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-6.jpg">
                 <div class="swp-caption-content">Image 6</div>
               </li>
             </ul> <!-- END swiper-wrapper -->
@@ -474,27 +474,27 @@ are in a *single row*.
           <!-- Slides container -->
           <ul class="swiper-wrapper">
             <li class="swiper-slide">
-              <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg">
+              <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-1.jpg">
               <div class="swp-caption-content">Image 1</div>
             </li>
             <li class="swiper-slide">
-              <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg">
+              <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-2.jpg">
               <div class="swp-caption-content">Image 2</div>
             </li>
             <li class="swiper-slide">
-              <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg">
+              <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-3.jpg">
               <div class="swp-caption-content">Image 3</div>
             </li>
             <li class="swiper-slide">
-              <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg">
+              <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-4.jpg">
               <div class="swp-caption-content">Image 4</div>
             </li>
             <li class="swiper-slide">
-              <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg">
+              <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-5.jpg">
               <div class="swp-caption-content">Image 5</div>
             </li>
             <li class="swiper-slide">
-              <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg">
+              <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-6.jpg">
               <div class="swp-caption-content">Image 6</div>
             </li>
           </ul> <!-- END swiper-wrapper -->
@@ -585,7 +585,7 @@ providers.
 <div id="master_slider_3" class="swiper swiper-container master-slider">
   <div class="swiper-wrapper">
     <div class="swiper-slide swiper-no-swiping" data-slide-type="image">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" aria-label="Animals-1">
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-1.jpg" aria-label="Animals-1">
       <div class="swp-caption-content">Image 1</div>
     </div>    
 
@@ -648,11 +648,11 @@ providers.
     </div>
 
     <div class="swiper-slide swiper-no-swiping" data-slide-type="image">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg" aria-label="Animals-2">
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-2.jpg" aria-label="Animals-2">
       <div class="swp-caption-content">Image 2</div>
     </div>
     <div class="swiper-slide swiper-no-swiping" data-slide-type="image">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" aria-label="Animals-3">
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-3.jpg" aria-label="Animals-3">
       <div class="swp-caption-content">Image 3</div>
     </div>
   </div> <!-- END swiper-wrapper -->
@@ -664,7 +664,7 @@ providers.
 
   <div class="swiper-wrapper">
 		<div class="swiper-slide">
-		  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" aria-label="Animals-1">
+		  <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-1.jpg" aria-label="Animals-1">
       <div class="swp-caption-content">Image 1</div>
 		</div>
 		<div class="swiper-slide">
@@ -673,11 +673,11 @@ providers.
       <div class="swp-caption-content">Roni Sagi & Rhythm · AGT 2024 (YouTube)</div>
 		</div>
 		<div class="swiper-slide">
-		  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg" aria-label="Animals-2">
+		  <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-2.jpg" aria-label="Animals-2">
       <div class="swp-caption-content">Image 2</div>
 		</div>      
 		<div class="swiper-slide">
-		  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" aria-label="Animals-3">
+		  <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-3.jpg" aria-label="Animals-3">
 		</div>
 	</div> <!-- END swiper-wrapper -->
 

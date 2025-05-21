@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "js",
-  "version": "2024.3.19",
+  "version": "2024.3.20",
   "description": "JS bundle for J1 Theme",
   "main": "template.js",
   "config": {
@@ -42,8 +42,9 @@
     "build-js": "cross-var webpack --mode production --config $npm_package_wp_build",
     "uglify-js": "terser dist/template.nomin.js -o dist/template.min.js -m --source-map",
     "deploy:mkdir-starter": "shx mkdir -p ../400_theme_site/assets/theme/j1/core/js",
-    "deploy:cleanup-js": "shx rm -f dist/template.js* && shx mv dist/template.nomin.js dist/template.js",
-    "deploy:core-js": "shx cp -rf dist/* ../400_theme_site/assets/theme/j1/core/js"
+    "deploy:rename-js": "shx mv dist/template.nomin.js dist/template.js",
+    "deploy:core-js": "shx cp -rf dist/* ../400_theme_site/assets/theme/j1/core/js",
+    "postdeploy": "shx rm ../400_theme_site/assets/theme/j1/core/js/*.map && shx rm ../400_theme_site/assets/theme/j1/core/js/*.txt"
   },
   "dependencies": {
     "@octokit/webhooks": "^6.1.0",

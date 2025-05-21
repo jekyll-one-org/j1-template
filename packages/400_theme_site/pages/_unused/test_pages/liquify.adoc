@@ -18,7 +18,7 @@ categories:                             [ Info ]
 tags:                                   [ Introduction ]
 
 image:
-  path:                                 /assets/image/modules/attics/1920x1280/brigitta-schneiter.jpg
+  path:                                 /assets/image/module/attic/1920x1280/brigitta-schneiter.jpg
   width:                                1920
   height:                               1280
 
@@ -30,7 +30,7 @@ resources:                              [ animate, comments ]
 resource_options:
   - attic:
       slides:
-        - url:                          /assets/image/modules/attics/1920x1280/brigitta-schneiter.jpg
+        - url:                          /assets/image/module/attic/1920x1280/brigitta-schneiter.jpg
           alt:                          Photo by Brigitta Schneiter on Unsplash
           badge:
             type:                       unsplash

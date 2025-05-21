@@ -7,7 +7,7 @@
  # https://jekyll.one
  #
  # Copyright (C) 2013-2014 Selvakumar Arumugam
- # Copyright (C) 2023, 2024 Juergen Adams
+ # Copyright (C) 2023-2025 Juergen Adams
  #
  # Attrchange is licensed under the MIT License.
  # See: https://github.com/meetselva/attrchange/blob/master/MIT-License.txt

@@ -1,7 +1,7 @@
 ---
 title:                                  Themes
-title_extention:                        Bootstrap V5 Themes for J1 Template
-tagline:                                Individual Themes for Your Web
+title_extention:                        Bootstrap V5 Themes
+tagline:                                Individual Bootstrap Styles
 
 date:                                   2020-11-10
 #last_modified:                         2023-01-01
@@ -21,7 +21,7 @@ categories:                             [ Roundtrip ]
 tags:                                   [ Bootstrap, Module, Theme ]
 
 image:
-  path:                                 /assets/image/modules/attics/themes-1920x1280-bw.jpg
+  path:                                 /assets/image/module/attic/themes-1920x1280-bw.jpg
   width:                                1920
   height:                               1280
 
@@ -32,7 +32,7 @@ resources:                              [ lightbox ]
 resource_options:
   - attic:
       slides:
-        - url:                          /assets/image/modules/attics/themes-1920x1280-bw.jpg
+        - url:                          /assets/image/module/attic/themes-1920x1280-bw.jpg
           alt:                          Photo by Clem Onojeghuo on Unsplash
           badge:
             type:                       unsplash

@@ -1,0 +1,123 @@
+Ich verwende einen HTML Div Container mit zwei Spalten. Die linke Spalte
+enthält ein statisches Element fester Höhe, die linke Spalte eine dynamische
+Liste variabler Länge bzw. Höhe.
+
+Der Container soll die volle Breite des Browserfensters nutzen.
+
+Wie kann ich mit Hilfe von Bootstrap die linke Spalte gleich hoch der rechten
+Spalte skalieren? 
+
+
+Gemini
+--------------------------------------------------------------------------------
+
+Skalierung einer linken Spalte mit variabler rechter Spalte in Bootstrap.
+
+Das Problem:
+
+Sie haben einen zweispaltigen Layout in Bootstrap, wobei die linke Spalte
+eine feste Höhe hat und die rechte Spalte eine dynamische Höhe aufgrund einer
+Liste variabler Länge. Ziel ist es, dass beide Spalten immer gleich hoch sind,
+unabhängig vom Inhalt der rechten Spalte.
+
+Lösung mit Flexbox in Bootstrap:
+
+Bootstrap basiert stark auf Flexbox, um responsive Layouts zu erstellen.
+Hier ist eine mögliche Lösung, um Ihre Anforderungen zu erfüllen:
+
+HTML
+<div class="container-fluid d-flex flex-column">
+  <div class="row flex-grow-1">
+    <div class="col-md-6">
+      <div class="h-100">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="h-100">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+Erklärung der Klassen
+---------------------
+
+container-fluid:
+  Erstellt einen Container, der die volle Breite des Eltern-Elements einnimmt.
+
+d-flex flex-column:
+  Macht den Container zu einem Flex-Container und richtet die Elemente
+  vertikal aus.
+
+row:
+  Definiert eine Zeile im Bootstrap-Grid-System.
+
+flex-grow-1:
+  Lässt die Zeile den verfügbaren Platz ausfüllen.
+
+col-md-6:
+  Teilt die Zeile in zwei Spalten mit jeweils 50% Breite.
+
+h-100:
+  Setzt die Höhe eines Elements auf 100% des Eltern-Elements.
+
+
+Wie es funktioniert
+-------------------
+
+Flex-Container:
+  Der äußere div mit der Klasse container-fluid wird zum Flex-Container.
+
+Vertikale Ausrichtung:
+  Durch flex-column werden die Elemente innerhalb des Containers vertikal
+  angeordnet.
+
+Gleiche Höhe:
+  Die beiden Spalten innerhalb der row erhalten beide die Klasse h-100.
+  Dadurch dehnen sie sich beide so weit aus, wie es der Platz innerhalb
+  der Zeile zulässt. Da die Zeile den gesamten verfügbaren Platz ausfüllt,
+  sind beide Spalten immer gleich hoch.
+
+Dynamische Anpassung:
+  Wenn der Inhalt der rechten Spalte wächst oder schrumpft, passt sich die
+  Höhe beider Spalten automatisch an, da sie immer die gleiche Höhe haben
+  müssen.
+
+
+Zusätzliche Überlegungen
+------------------------
+
+Responsive Design:
+  Wenn Sie ein vollständig responsives Design benötigen, können Sie die
+  Spaltenklassen anpassen (z.B. col-sm-6, col-lg-4) oder Media Queries
+  verwenden, um das Layout an verschiedene Bildschirmgrößen anzupassen.
+
+Minimale Höhe:
+  Wenn Sie sicherstellen möchten, dass die linke Spalte immer eine bestimmte
+  Mindesthöhe hat, können Sie einen min-height-Wert festlegen.
+
+Padding und Margin:
+  Achten Sie auf Padding und Margin innerhalb der Spalten, da diese die
+  effektive Höhe beeinflussen können.
+
+Bootstrap Version:
+  Stellen Sie sicher, dass Sie die korrekten Klassen für Ihre Bootstrap-Version
+  verwenden.
+
+Weitere Optimierungen
+---------------------
+
+CSS Grid:
+  Für komplexere Layouts kann CSS Grid eine Alternative sein.
+JavaScript:
+  Wenn Sie sehr komplexe Anforderungen haben, können Sie JavaScript verwenden,
+  um die Höhen dynamisch zu berechnen und anzupassen.
+
+Fazit:
+--------------------------------------------------------------------------------
+
+Mit dieser Flexbox-Lösung können Sie in Bootstrap leicht ein zweispaltiges
+Layout erstellen, bei dem beide Spalten immer die gleiche Höhe haben,
+unabhängig vom Inhalt der rechten Spalte.
+

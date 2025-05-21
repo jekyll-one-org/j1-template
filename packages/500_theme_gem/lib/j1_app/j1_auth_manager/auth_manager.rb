@@ -35,7 +35,7 @@
 #  Product/Info:
 #  https://jekyll.one
 #
-#  Copyright (C) 2023, 2024 Juergen Adams
+#  Copyright (C) 2023-2025 Juergen Adams
 #
 #  J1 Template is licensed under the MIT License.
 #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
@@ -1281,7 +1281,7 @@ IIF
       @modal_agreed_text    = "Yes, please"
       @modal_disagreed_text = "No, thanks"
       @modal_title          = "SignIn"
-      @modal_image          = "/assets/image/modules/attics/banner/admin-dashboard-bootstrap-1280x600.png"
+      @modal_image          = "/assets/image/module/attic/banner/admin-dashboard-bootstrap-1280x600.png"
       @modal_description    = "The page <b>#{requested_page}</b> you requested belongs to <b>#{category}</b> content. You'll be redirected to authenticate with the provider <b>#{provider}</b>. If signed in successfully, you get access to all <b>#{category} pages</b>."
 
       erb :auth_manager_ui

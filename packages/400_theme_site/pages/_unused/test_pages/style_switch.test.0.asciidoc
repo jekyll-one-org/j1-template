@@ -14,7 +14,7 @@ categories:                             [ Manual ]
 tags:                                   [ Cheatsheet, Gem ]
 
 image:
-  path:                                 /assets/image/modules/attics/1920x1280/recha-oktaviani.jpg
+  path:                                 /assets/image/module/attic/1920x1280/recha-oktaviani.jpg
   width:                                1920
   height:                               1280
   alt:                                  Photo by Recha Oktaviani on Unsplash
@@ -26,7 +26,7 @@ resources:                              [ animate, clipboard, rouge ]
 resource_options:
   - attic:
       slides:
-        - url:                          /assets/image/modules/attics/1920x1280/recha-oktaviani.jpg
+        - url:                          /assets/image/module/attic/1920x1280/recha-oktaviani.jpg
           alt:                          Photo by Recha Oktaviani on Unsplash
           badge:
             type:                       unsplash

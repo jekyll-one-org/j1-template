@@ -97,23 +97,13 @@ module Jekyll
     end
 
     # --------------------------------------------------------------------------
-    #  contains: check if a string contains a substring
-    #
-    #  Example:
-    #
-    # --------------------------------------------------------------------------
-    def contains(input, substr)
-       input.include?(substr) ? true : false
-    end
-
-    # --------------------------------------------------------------------------
     #  contain_substr: check if a string contains a substring
     #
     #  Example:
     #
     # --------------------------------------------------------------------------
     def contain_substr(input, substr)
-       input.include?(substr) ? true : false
+       input.include?(substr.to_s) ? true : false
     end
 
     # --------------------------------------------------------------------------

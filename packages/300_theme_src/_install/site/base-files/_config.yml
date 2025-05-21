@@ -53,13 +53,13 @@ environment:                            development
 # ------------------------------------------------------------------------------
 # Sets the build version of the site
 #
-version:                                2024.3.19
+version:                                2024.3.20
 
 # copyright
 # ------------------------------------------------------------------------------
 # Sets the copyright info of the site
 #
-copyright:                              © 2023, 2024 J1 · All rights reserved
+copyright:                              © 2023-2025 J1 · All rights reserved
 
 # noscript
 # ------------------------------------------------------------------------------
@@ -247,7 +247,7 @@ robots:
 # BRAND configuration
 # Set the brand image and favicon (located in /asset/images)
 brand:
-  image:                                icons/j1/j1-512x512.png
+  image:                                icon/j1/j1-512x512.png
   image_height:                         48px
   text:                                 Jekyll One
   text_color:                           "#9E9E9E"
@@ -255,7 +255,7 @@ brand:
 # Set the favicon and type
 #
 favicon:
-  image:                                icons/j1/favicon.ico
+  image:                                icon/j1/favicon.ico
   type:                                 image/ico
 
 
@@ -527,7 +527,7 @@ author:
   twitter:
   feedburner:
 
-logo:                                   /assets/image/icons/j1/j1-512x512.png
+logo:                                   /assets/image/icon/j1/j1-512x512.png
 
 image:
   path:                                 /assets/image/promo/home/screenshot.jpg
@@ -647,7 +647,7 @@ defaults:
         name:                           Juergen Adams
         url:                            https://jekyll.one/
 
-      logo:                             /assets/image/icons/j1/j1-512x512.png
+      logo:                             /assets/image/icon/j1/j1-512x512.png
 
       image:
         path:                           /assets/image/promo/home/screenshot.jpg
@@ -660,7 +660,7 @@ defaults:
         size:                           5x
 
       images:
-        dir:                            /assets/image/pages
+        dir:                            /assets/image/page
 
       robots:
         index:                          true
@@ -701,7 +701,7 @@ defaults:
         name:                           Juergen Adams
         url:                            https://jekyll.one/
 
-      logo:                             /assets/image/icons/j1/j1-512x512.png
+      logo:                             /assets/image/icon/j1/j1-512x512.png
 
       image:
         path:                           /assets/image/promo/home/screenshot.jpg

@@ -263,7 +263,7 @@ j1.adapter.carousel = (function (j1, window) {
                   {% endif %}
 
                   {% if gridify %}
-                  $('head').append('<style>#{{slider_id}}:before{top:0;left:0;width:100%;height:100%;content:" ";position:absolute;background:url(/assets/image/modules/patterns/gridtile.png) repeat;}</style>');
+                  $('head').append('<style>#{{slider_id}}:before{top:0;left:0;width:100%;height:100%;content:" ";position:absolute;background:url(/assets/image/pattern/image/gridtile.png) repeat;}</style>');
                   {% endif %}
 
                 {% endif %}

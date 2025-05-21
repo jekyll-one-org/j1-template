@@ -5,7 +5,7 @@
 # Product/Info:
 # https://jekyll.one
 #
-# Copyright (C) 2023, 2024 Juergen Adams
+# Copyright (C) 2023-2025 Juergen Adams
 #
 # J1 Template is licensed under the MIT License.
 # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
@@ -23,6 +23,11 @@ description:
 # User configuration settings
 #
 settings:
+
+  # ----------------------------------------------------------------------------
+  # GENERAL options
+  # ----------------------------------------------------------------------------
+  #
   enabled:                              true
 
   # ----------------------------------------------------------------------------
@@ -42,7 +47,7 @@ settings:
 
       id:                               jg_old_times
       type:                             image
-      image_base_path:                  /assets/image/modules/gallery/old_times
+      image_base_path:                  /assets/image/module/gallery/old_time/image/grand_pa
 
       # ------------------------------------------------------------------------
       # Justified Gallery settings
@@ -74,28 +79,28 @@ settings:
       images:
 
         - image:                        # image
-          file:                         image_01.jpg
+          file:                         image-1.jpg
           caption_text:                 GrandPa &middot; 80th Birthday
           description: >
                                         <h5>GrandPa</h5>
                                         <h6>80th Birthday</h6>
 
         - image:                        # image
-          file:                         image_02.jpg
+          file:                         image-2.jpg
           caption_text:                 GrandPa &middot; 80th Birthday
           description: >
                                         <h5>GrandPa</h5>
                                         <h6>80th Birthday</h6>
 
         - image:                        # image
-          file:                         image_03.jpg
+          file:                         image-3.jpg
           caption_text:                 GrandPa &middot; Annual journey
           description: >
                                         <h5>GrandPa</h5>
                                         <h6>Annual journey</h6>
 
         - image:                        # image
-          file:                         image_04.jpg
+          file:                         image-4.jpg
           caption_text:                 GrandPa &middot; Annual journey
           description: >
                                         <h5>GrandPa</h5>
@@ -109,7 +114,8 @@ settings:
 
       id:                               jg_mega_cities
       type:                             image
-      image_base_path:                  /assets/image/modules/gallery/mega_cities
+      image_base_path:                  /assets/image/module/swiper/simple/mega_city/image
+
 
       # ------------------------------------------------------------------------
       # Justified Gallery settings

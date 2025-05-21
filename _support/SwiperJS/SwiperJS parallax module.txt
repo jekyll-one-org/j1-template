@@ -1,0 +1,98 @@
+Wie verhält sich das SwiperJS Parallax-Modul?
+
+Gemini
+--------------------------------------------------------------------------------
+See: //breakdance4fun.supadezign.com/the-secret-parallax-feature-of-the-slider-element/
+
+Das SwiperJS Parallax-Modul ermöglicht es, einen Parallax-Effekt auf Elemente
+innerhalb eines Swiper-Sliders anzuwenden. Hier ist eine detaillierte
+Beschreibung, wie es funktioniert und wie man es verwendet:
+
+Grundlegendes Prinzip
+--------------------------------------------------------------------------------
+
+Bewegung und Tiefe
+------------------
+
+Das Parallax-Modul erzeugt einen Effekt, bei dem sich Elemente innerhalb der
+Slides mit unterschiedlichen Geschwindigkeiten bewegen, wenn der Benutzer durch
+den Slider wischt. Dies erzeugt den Eindruck von Tiefe und Bewegung.
+
+Dies wird erreicht, indem die Positionen der Elemente basierend auf der
+aktuellen Position des Sliders angepasst werden.
+
+Elementauswahl
+--------------
+Bestimmte Elemente innerhalb der Slides werden als Parallax-Elemente definiert.
+Dies geschieht in der Regel durch Hinzufügen spezifischer CSS-Klassen oder
+Attribute.
+
+Bewegungssteuerung
+------------------
+
+Die Bewegungsgeschwindigkeit und -richtung der Parallax-Elemente können
+angepasst werden, um verschiedene Effekte zu erzielen.
+
+
+Verwendung und Implementierung
+--------------------------------------------------------------------------------
+
+Modul-Einbindung
+----------------
+Zuerst muss das Parallax-Modul in die SwiperJS-Konfiguration eingebunden
+werden. Dies erfolgt durch die Option parallax: true oder durch das Hinzufügen
+des Moduls in das Array der Swiper Module.
+
+HTML-Struktur
+-------------
+Innerhalb der Slides müssen die Elemente, die den Parallax-Effekt erhalten
+sollen, entsprechend markiert werden. In der Regel werden dafür Attribute wie
+data-swiper-parallax genutzt.
+
+CSS-Anpassungen
+---------------
+Zusätzliche CSS-Anpassungen können erforderlich sein, um den gewünschten
+Effekt zu erzielen. Dies kann die Anpassung von Transformationswerten,
+Opazität oder anderen CSS-Eigenschaften umfassen.
+
+Parallax-Effekt-Anpassung:
+Die Intensität des Parallax-Effekts kann über Attribute wie
+
+* data-swiper-parallax-x
+* data-swiper-parallax-y
+* data-swiper-parallax-scale
+* data-swiper-parallax-opacity
+* data-swiper-parallax-duration
+
+angepasst werden.
+
+
+Wichtige Überlegungen
+--------------------------------------------------------------------------------
+
+Performance
+-----------
+Parallax-Effekte können rechenintensiv sein, insbesondere auf mobilen Geräten.
+Es ist wichtig, die Anzahl der Parallax-Elemente und die Komplexität der
+Effekte zu optimieren, um eine reibungslose Leistung zu gewährleisten.
+
+Benutzererfahrung
+-----------------
+Übermäßige Parallax-Effekte können ablenkend wirken oder sogar Übelkeit
+verursachen. Es ist wichtig, ein Gleichgewicht zu finden und den Effekt
+subtil und ansprechend zu gestalten.
+
+Responsive Design
+-----------------
+Es ist wichtig, sicherzustellen, dass der Parallax-Effekt auf verschiedenen
+Bildschirmgrößen und Geräten gut funktioniert. Dies kann die Anpassung von
+CSS-Eigenschaften oder die Verwendung von Media Queries erfordern.
+
+
+Zusammenfassung
+--------------------------------------------------------------------------------
+
+Das SwiperJS Parallax-Modul bietet eine leistungsstarke Möglichkeit, Slides
+mit ansprechenden Bewegungseffekten zu versehen. Durch die richtige Anwendung
+und Optimierung kann es die Benutzererfahrung erheblich verbessern.
+

@@ -5,7 +5,7 @@
 # Product/Info:
 # https://jekyll.one
 #
-# Copyright (C) 2023, 2024 Juergen Adams
+# Copyright (C) 2023-2025 Juergen Adams
 #
 # J1 Template is licensed under the MIT License.
 # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
@@ -463,12 +463,12 @@
       icon:                             ab-testing
       dropdown:
 
-        - title:                        Swiper
-          href:                         /pages/public/tools/tester/swiper/
+        - title:                        J1 Amplitude App (YouTube)
+          href:                         /pages/public/tools/tester/amplitude_app_yt/
           icon:                         test-tube
 
-        - title:                        Amplitude YT
-          href:                         /pages/public/tools/tester/amplitude_yt/
+        - title:                        J1 Swiper App
+          href:                         /pages/public/tools/tester/swiper_app/
           icon:                         test-tube
 
 #       - title:                        Lazy Loader

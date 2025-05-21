@@ -1,0 +1,1133 @@
+---
+regenerate:                             true
+exclude_from_search:                    true
+---
+
+{%- capture cache -%}
+
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/assets/data/amplitude_app.html
+ # Generate the HTML portion for all J1 Amplitude Apps (Player)
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2023-2025 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  {{variable | debug}}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Liquid initialization (vars)
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign template_config       = site.data.j1_config %}
+{% assign modules               = site.data.modules %}
+
+{% comment %} set config data
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign environment           = site.environment %}
+
+{% assign amplitude_defaults    = modules.defaults.amplitude.defaults %}
+{% assign amplitude_players     = modules.amplitude_app.settings %}
+{% assign amplitude_playlists   = modules.amplitude_playlists.settings %}
+
+{% comment %} set config options
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign amplitude_options     = amplitude_defaults | merge: amplitude_players %}
+{% assign amplitude_options     = amplitude_options  | merge: amplitude_playlists %}
+
+{% comment %} set permalink setting
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign ext = '' %}
+{% if site.permalink == 'none' %}
+  {% assign ext = '.html' %}
+{% endif %}
+
+{% comment %} detect production mode
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign production = false %}
+{% if environment == 'prod' or environment == 'production' %}
+  {% assign production = true %}
+{% endif %}
+
+{% assign image_rating_path = '/assets/image/pattern/rating/scalable' %}
+
+{% comment %} main
+================================================================================ {% endcomment %}
+<!DOCTYPE {{site.doctype}}>
+<html lang="{{site.language}}">
+
+  <head>
+    <title>HTML portion (UI) for AmplitudeJS v4 Players</title>
+    <!-- [INFO   ] [~/assets/data/amplitude.html                 ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="amplitude" content="module data file">
+  </head>
+
+  <body>
+  {% comment %} create player instances
+  player.volume_slider:             {{player.volume_slider | debug}}
+  amplitude_defaults.volume_slider: {{amplitude_defaults.player.volume_slider | debug}}
+  volume_slider:                    {{volume_slider}}
+  ============================================================================== {% endcomment %}
+
+  {% for player in amplitude_options.players %} {% if player.enabled %}
+
+    {% comment %} player default settings
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% assign source_media                  = amplitude_defaults.player.source %}
+    {% assign song_progress_bar             = amplitude_defaults.player.song_progress_bar %}
+    {% assign audio_rating                  = amplitude_defaults.player.audio_rating %}
+    {% assign display_hours                 = amplitude_defaults.player.display_hours %}
+    {% assign volume_slider                 = amplitude_defaults.player.volume_slider.enabled %}
+    {% assign volume_slider_min             = amplitude_defaults.player.volume_slider.min_value %}
+    {% assign volume_slider_max             = amplitude_defaults.player.volume_slider.max_value %}
+    {% assign volume_slider_step            = amplitude_defaults.player.volume_slider.slider_step %}
+    {% assign repeat_button                 = amplitude_defaults.player.repeat_button %}
+    {% assign shuffle_button                = amplitude_defaults.player.shuffle_button %}
+    {% assign skip_forward_backward_button  = amplitude_defaults.player.skip_forward_backward_button %}
+    {% assign playlist_controls             = amplitude_defaults.player.playlist.controls %}
+    {% assign playlist_audio_info           = amplitude_defaults.player.playlist.audio_info %}    
+    {% assign playlist_audio_rating         = amplitude_defaults.player.playlist.audio_rating %}    
+
+    {% comment %} player settings
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% assign player_enabled                = player.enabled %}
+    {% assign player_id                     = player.id %}
+    {% assign player_playlist               = player.playlist.name | strip %}
+
+    {% if player.type %}
+      {% assign player_type = player.type %}
+    {% endif %}
+
+    {% if player.playlist.controls %}
+      {% assign playlist_controls = player.playlist.controls %}
+    {% else %}
+      {% assign playlist_controls = playlist_controls %}
+    {% endif %}      
+
+    {% if player.song_progress_bar %}
+      {% assign song_progress_bar = player.song_progress_bar %}
+    {% endif %}
+
+    {% comment %} NOTE: slider VALUE is set by Adapter|Amplitude API (volume)
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% if player.volume_slider %}
+      {% assign volume_slider      = player.volume_slider.enabled %}
+      {% assign volume_slider_min  = amplitude_defaults.player.volume_slider.min_value %}
+      {% assign volume_slider_max  = amplitude_defaults.player.volume_slider.max_value %}
+      {% assign volume_slider_step = amplitude_defaults.player.volume_slider.slider_step %}
+    {% endif %}
+
+    {% if player.shuffle_button %}
+      {% assign shuffle_button = player.shuffle_button %}
+    {% endif %}
+
+    {% if player.repeat_button %}
+      {% assign repeat_button = player.repeat_button %}
+    {% endif %}
+
+    {% if player.skip_forward_backward_button %}
+      {% assign skip_forward_backward_button = player.skip_forward_backward_button %}
+    {% endif %}
+
+    {% if player.display_hours %}
+      {% assign display_hours = player.display_hours %}
+    {% endif %}
+
+    {% if player.playlist.audio_info %}
+      {% assign player_audio_info_enabled = player.playlist.audio_info %}
+    {% else %}
+      {% assign player_audio_info_enabled = playlist_audio_info %}
+    {% endif %}
+
+    {% if player.playlist.audio_rating %}
+      {% assign player_audio_rating_enabled = player.playlist.audio_rating %}
+    {% else %}
+      {% assign player_audio_rating_enabled = playlist_audio_rating %}
+    {% endif %}
+
+
+    {% comment %} unused
+    ----------------------------------------------------------------------------
+    {% unless player.playlist.scrollbar %}
+      {% assign player_scrollbar_class = 'hide-scrollbar' %}
+    {% else %}
+      {% unless amplitude_defaults.player.playlist.scrollbar %}
+        {% assign player_scrollbar_class = 'hide-scrollbar' %}
+      {% else %}
+        {% assign player_scrollbar_class = '' %}
+      {% endunless %}
+    {% endunless %}
+    ---------------------------------------------------------------------------- {% endcomment %}
+
+
+    {% comment %} collect playlist items
+    ---------------------------------------------------------------------------- {% endcomment %}
+      <!-- START collect playlist items for player on ID: {{player_id}} -->
+    {% for playlist in amplitude_options.playlists %} {% if playlist.enabled %}
+      {% assign playlist_name = playlist.name | strip %}
+
+      {% if playlist_name == player_playlist %}
+      <!-- Playlist collected: {{player_playlist}} -->
+        {% assign playlist_items = playlist.items %}
+        {% break %}
+      {% else %}
+        {% continue %}
+      {% endif %}
+    {% endif %} {% endfor %}
+      <!-- END collect playlist items -->
+
+
+    {% comment %} collect player instances
+    ============================================================================ {% endcomment %}
+    {% case player_type %}
+
+      {% comment %} MINI player
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {% endcomment %}
+      {% when 'mini' %} {% if player_enabled %}
+      <!-- START create player instance on ID: {{player_id}} of type: {{player_type}} -->
+      <div id="{{player_id}}" class="mini-player">
+
+        <!-- START mini player container -->
+        <div class="mini-player-container">
+
+          <!-- START progress bar -->
+          {% if song_progress_bar %}
+          <progress
+            class="mini-player-progress amplitude-song-played-progress"
+            data-amplitude-playlist="{{player_playlist}}">
+          </progress>
+          {% endif %}
+          <!-- END progress bar -->
+
+          <!-- START time container -->
+          <div class="time-container">
+            <span class="current-time">
+              {% if display_hours %}
+              <span
+                class="amplitude-current-hours"
+                data-amplitude-playlist="{{player_playlist}}">
+              </span>
+              :
+              {% endif %}
+              <span
+                class="amplitude-current-minutes"
+                data-amplitude-playlist="{{player_playlist}}">
+              </span>
+              :
+              <span
+                class="amplitude-current-seconds"
+                data-amplitude-playlist="{{player_playlist}}">
+              </span>
+            </span>
+            <span class="duration">
+              {% if display_hours %}
+              <span
+                class="amplitude-duration-hours"
+                data-amplitude-playlist="{{player_playlist}}">
+              </span>
+              :
+              {% endif %}
+              <span
+                class="amplitude-duration-minutes"
+                data-amplitude-playlist="{{player_playlist}}">
+              </span>
+              :
+              <span
+                class="amplitude-duration-seconds"
+                data-amplitude-playlist="{{player_playlist}}">
+              </span>
+            </span>
+          </div>
+          <!-- END time container -->
+
+          <!-- START control container -->
+          <div class="mini-player control-container">
+            <div
+              id="mini_player_previous"
+              class="amplitude-prev"
+              data-amplitude-playlist="{{player_playlist}}">
+            </div>
+            <div
+              id="mini_player_play_pause_{{player_id}}"
+              class="amplitude-play-pause mini-player-play-pause amplitude-paused"
+              data-amplitude-playlist="{{player_playlist}}">
+            </div>
+            <div
+              id="mini_player_next"
+              class="amplitude-next"
+              data-amplitude-playlist="{{player_playlist}}">
+            </div>
+          </div>
+          <!-- END control container  -->
+
+          <!-- START meta (data) container -->
+          <div class="mini-player meta-container">
+            <span
+              class="song-name"
+              data-amplitude-playlist="{{player_playlist}}"
+              data-amplitude-song-info="name">
+            </span>
+            <div class="audio-artist-album">
+              <span
+                class="artist"
+                data-amplitude-playlist="{{player_playlist}}"
+                data-amplitude-song-info="artist">
+              </span>
+              <span
+                class="album"
+                data-amplitude-playlist="{{player_playlist}}"
+                data-amplitude-song-info="album">
+              </span>
+            </div>
+          </div> <!-- END meta container -->
+
+          <!-- START volume container -->
+          <div class="mini-player volume-container">
+            {% if volume_slider %}
+            <img src="/assets/theme/j1/modules/amplitudejs/icons/player/dark/volume.svg" alt="Volume Icon">
+            <input
+              id="volume_slider_{{player_id}}"
+              class="mini-player amplitude-volume-slider"
+              type="range"
+              min="{{volume_slider_min}}"
+              max="{{volume_slider_max}}"
+              step="{{volume_slider_step}}"
+              aria-label="Amplitude Volume Slider">
+            {% endif %}
+          </div>
+          <!-- END volume container -->
+
+        </div>
+        <!-- END mini-player container -->
+
+      </div>
+      <!-- END create player instance on ID: {{player_id}} -->
+      {% endif %}
+
+      {% comment %} END MINI player
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {% endcomment %}
+
+
+      {% comment %} COMPACT player
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {% endcomment %}
+      {% when 'compact' %} {% if player_enabled %}
+      <!-- START create player instance on ID: {{player_id}} of type: {{player_type}} -->
+      <div id="{{player_id}}" class="compact-player">
+        <div class="compact-player-container">
+
+          <div id="playlist_screen_{{player_id}}" class="compact-player-playlist slide-in-top">
+
+            <div id="hide_playlist_{{player_id}}" class="compact-player-header hide-playlist">
+              <img class="compact-player-header-arrows" src="/assets/theme/j1/modules/amplitudejs/icons/player/dark/playlist-hide.svg" alt="Hide Playlist">
+              Playlist
+            </div>
+            <!-- END playlist-screen header (toggle playlist) -->
+
+            <div class="playlist-screen-controls screen-controls-compact-player">
+              <div class="playlist-screen-meta-container">
+                <span
+                  class="song-name" data-amplitude-playlist="{{player_playlist}}"
+                  data-amplitude-source="{{source_media_attribute}}"
+                  data-amplitude-song-info="name">
+                </span>
+
+                <!-- START player_audio_info (COMPACT player) -->
+                {% for item in playlist_items %}{% if item.enabled %}
+
+                  <!-- place initial (first) info URL -->
+                  {% if playlist_audio_info and forloop.first %}
+                    <span class="amplitude-audio-info">
+                      <a class="audio-info-link" href="{{item.audio_info}}" target="_blank">
+                        <i class="mdib mdib-information md-gray-400 mdib-24px"></i>
+                      </a>
+                    </span>
+                  {% else %}
+                    {% break %}                  
+                  {% endif %}
+
+                  <!-- place initial (first) audio rating for screen controls -->
+                  {% if playlist_audio_rating and forloop.first %}
+                    {% capture rating_image %}{{image_rating_path}}/{{item.rating}}-star.svg{% endcapture %}
+                    <span 
+                     class="audio-rating audio-rating-screen-controls"
+                     data-amplitude-playlist="{{player_playlist}}"
+                     data-player-type="compact">
+                      <img src="{{rating_image}}" alt="song rating">
+                    </span>
+                  {% else %}
+                    {% break %}
+                  {% endif %}
+
+                {% endif %}{% endfor %}
+                <!-- END place place initial audio_info|audio_rating (COMPACT player) -->
+
+                <div class="song-artist-album">
+                  <span
+                    data-amplitude-source="{{source_media_attribute}}"
+                    data-amplitude-playlist="{{player_playlist}}"
+                    data-amplitude-song-info="artist">
+                  </span>
+                  <span class="song-artist-album-delimiter">·</span>
+                  <span
+                    data-amplitude-source="audio"
+                    data-amplitude-playlist="{{player_playlist}}"
+                    data-amplitude-song-info="album">
+                  </span>  
+                </div>
+              </div>
+              {% if playlist_controls %}
+              <div class="list-controls">
+                <div
+                  class="list-previous amplitude-prev compact-player-previous"
+                  data-amplitude-source="{{source_media_attribute}}"
+                  data-amplitude-playlist="{{player_playlist}}">
+                </div>
+                <div
+                  id="compact_player_play_pause_{{player_id}}"
+                  class="list-play-pause amplitude-play-pause"
+                  data-amplitude-source="{{source_media_attribute}}"
+                  data-amplitude-playlist="{{player_playlist}}">
+                </div>
+                <div
+                  class="list-next amplitude-next compact-player-next"
+                  data-amplitude-source="{{source_media_attribute}}"
+                  data-amplitude-playlist="{{player_playlist}}">
+                </div>
+              </div>
+              {% endif %}
+            </div> <!-- END playlist controls -->
+            
+
+            <!-- START playlist items (COMPACT player )-->
+            <div
+              id="compact_player_title_list_{{player_playlist}}"
+              class="amplitude-scroller-gradient compact-player-title-list">
+              {% for item in playlist_items %}{% if item.enabled %}
+              <!-- START list item -->
+              <div
+                class="song amplitude-song-container amplitude-song-container-compact-player amplitude-play-pause"
+                data-amplitude-source="{{source_media_attribute}}"
+                data-amplitude-song-index="{{forloop.index0}}"
+                data-amplitude-playlist="{{player_playlist}}">
+
+                <span class="song-number-now-playing">
+                  <span class="title-number">
+                    {{forloop.index}}
+                    <img
+                      class="now-playing"
+                      src="/assets/theme/j1/modules/amplitudejs/icons/player/dark/now-playing.svg"
+                      alt="now-playing">
+                  </span>
+                </span>
+
+                <div
+                  class="playlist-song-meta song-meta-container"
+                  data-amplitude-source="{{source_media_attribute}}"
+                  data-amplitude-playlist="{{player_playlist}}">
+
+                  <span class="song-name">{{item.title}}</span>
+                  <span class="song-artist-album">
+                    <span>{{item.artist}}</span>
+                  </span>
+
+                  <!-- place audio rating for playlist (COMPACT player) -->
+                  {% if playlist_audio_rating %}
+                    {% capture rating_image %}{{image_rating_path}}/{{item.rating}}-star.svg{% endcapture %}
+                    <span class="audio-rating" data-amplitude-playlist="{{player_playlist}}">
+                      <img src="{{rating_image}}" alt="song rating">
+                    </span>
+                  {% else %}
+                    <!-- place empty (span) element (placeholder) -->
+                    <span class="audio-rating audio-rating-screen-controls"></span>
+                  {% endif %}
+
+                  <span class="audio-duration">{{item.duration}}</span>
+
+                </div> <!-- END song-meta-container -->
+
+
+              </div>
+              <!-- END list item -->
+              {% endif %}{% endfor %}
+
+            </div> <!-- END  playlist items -->
+
+          </div> <!-- END list screen -->
+
+          <!-- START compact player -->
+          <div class="compact-player">
+
+            <!-- START COMPACT player TOP -->
+            <div id="show_playlist_{{player_id}}" class="compact-player-header show-playlist">
+              <span>
+                <span
+                  data-amplitude-source="{{source_media_attribute}}"
+                  data-amplitude-playlist="{{player_playlist}}"
+                  data-amplitude-song-info="artist">
+                </span>
+                <span class="song-artist-album-delimiter">·</span>
+                <span
+                  data-amplitude-source="{{source_media_attribute}}"
+                  data-amplitude-playlist="{{player_playlist}}"
+                  data-amplitude-song-info="album">
+                </span>
+            </span>
+              <img
+                class="compact-player-header-arrows"
+                src="/assets/theme/j1/modules/amplitudejs/icons/player/dark/playlist-show.svg"
+                alt="Show Playlist">
+            </div> <!-- END compact player header (toggle playlist) -->
+
+            <div class="player-top">
+              <!-- NOTE: album cover image (replaced by AJS API based on playlist) -->
+              <div class="album-cover-image">
+                <img
+                  src="/assets/audio/cover/default/placeholder-blue.jpg"
+                  data-amplitude-playlist="{{player_playlist}}"
+                  data-amplitude-source="{{source_media_attribute}}"
+                  data-amplitude-song-info="cover_art_url"
+                  alt="album cover image"
+                >
+              </div>
+            </div>
+
+            <!-- START progress bar -->
+            {% if song_progress_bar %}
+            <progress
+              class="compact-player-progress amplitude-song-played-progress"
+              data-amplitude-source="{{source_media_attribute}}"
+              data-amplitude-playlist="{{player_playlist}}">
+            </progress>
+            <!-- END progress bar -->
+            {% endif %}
+            <!-- END COMPACT player TOP -->
+
+            <!-- START COMPACT player MIDDLE -->
+            <div class="compact-player-middle">
+              <!-- START controls container -->
+              <div id="compact_player_control_container">
+                <div id="compact_player_controls">
+
+                  <div class="compact-player-controls-container">
+                    {% if shuffle_button %}
+                    <div
+                      id="compact_player_shuffle"
+                      class="amplitude-shuffle amplitude-shuffle-off"
+                      data-amplitude-source="{{source_media_attribute}}"
+                      data-amplitude-playlist="{{player_playlist}}">
+                    </div>
+                    {% endif %}
+                    <div
+                      id="compact_player_previous_{{player_id}}"
+                      class="amplitude-prev compact-player-previous"
+                      data-amplitude-source="{{source_media_attribute}}"
+                      data-amplitude-playlist="{{player_playlist}}">
+                    </div>
+                    {% if skip_forward_backward_button %}
+                    <div
+                      id="skip-backward_{{player_id}}"
+                      class="compact-player-skip-backward">
+                   </div>
+                   {% endif %}
+                    <div
+                      id="compact_player_play_pause_{{player_id}}"
+                      class="amplitude-play-pause compact-player-play-pause amplitude-paused"
+                      data-amplitude-source="{{source_media_attribute}}"
+                      data-amplitude-playlist="{{player_playlist}}">
+                    </div>
+                    {% if skip_forward_backward_button %}
+                    <div
+                      id="skip-forward_{{player_id}}"
+                      class="compact-player-skip-forward">
+                    </div>
+                    {% endif %}
+                    <div
+                      id="compact_player_next_{{player_id}}"
+                      class="amplitude-next compact-player-next"
+                      data-amplitude-source="{{source_media_attribute}}"
+                      data-amplitude-playlist="{{player_playlist}}">
+                    </div>
+                    {% if repeat_button %}
+            			  <div
+            				  id="compact_player_repeat"
+            				  class="amplitude-repeat amplitude-repeat-off"
+                      data-amplitude-source="{{source_media_attribute}}"
+            				  data-amplitude-playlist="{{player_playlist}}">
+            			  </div>
+                    {% endif %}
+
+                    <!-- START volume container -->
+                    <div class="compact-player-volume-container">
+                      {% if volume_slider %}
+                      <div class="volume-controls">
+                        <div class="amplitude-mute amplitude-not-muted"></div>
+                        <input
+                          id="volume_slider_{{player_id}}"
+                          class="amplitude-volume-slider"
+                          type="range"
+                          min="{{volume_slider_min}}"
+                          max="{{volume_slider_max}}"
+                          step="{{volume_slider_step}}"
+                          aria-label="Amplitude Volume Slider">
+                      </div>
+                      {% endif %}
+                    </div>
+                    <!-- END volume container -->
+                  </div>
+
+                </div>
+                <!-- END controls container -->
+              </div>
+            </div>
+            <!-- END COMPACT player left MIDDLE -->
+
+            <!-- START COMPACT player BOTTOM -->
+            <div class="player-bottom">
+              <!-- time container -->
+              <div class="time-container">
+                <span class="current-time">
+                  {% if display_hours %}
+                  <span
+                    class="amplitude-current-hours"
+                    data-amplitude-source="{{source_media_attribute}}"
+                    data-amplitude-playlist="{{player_playlist}}">
+                  </span>
+                  :
+                  {% endif %}
+                  <span
+                    class="amplitude-current-minutes"
+                    data-amplitude-source="{{source_media_attribute}}"
+                    data-amplitude-playlist="{{player_playlist}}">
+                  </span>
+                  :
+                  <span
+                    class="amplitude-current-seconds"
+                    data-amplitude-source="{{source_media_attribute}}"
+                    data-amplitude-playlist="{{player_playlist}}">
+                  </span>
+                </span>
+                <span class="duration">
+                  {% if display_hours %}
+                  <span
+                    class="amplitude-duration-hours"
+                    data-amplitude-source="{{source_media_attribute}}"
+                    data-amplitude-playlist="{{player_playlist}}">
+                  </span>
+                  :
+                  {% endif %}
+                  <span
+                    class="amplitude-duration-minutes"
+                    data-amplitude-source="{{source_media_attribute}}"
+                    data-amplitude-playlist="{{player_playlist}}">
+                  </span>
+                  :
+                  <span
+                    class="amplitude-duration-seconds"
+                    data-amplitude-source="{{source_media_attribute}}"
+                    data-amplitude-playlist="{{player_playlist}}">
+                  </span>
+                </span>
+              </div>
+              <!-- END time container -->
+
+              <!-- START meta container -->
+              <div class="meta-container compact-player">
+                <span
+                  class="song-name"
+                  data-amplitude-source="{{source_media_attribute}}"
+                  data-amplitude-playlist="{{player_playlist}}"
+                  data-amplitude-song-info="name">
+                </span>
+                <div class="audio-artist-album">
+                  <span
+                    class="artist"
+                    data-amplitude-source="{{source_media_attribute}}"
+                    data-amplitude-playlist="{{player_playlist}}"
+                    data-amplitude-song-info="artist">
+                  </span>
+                  <span
+                    class="album"
+                    data-amplitude-source="{{source_media_attribute}}"
+                    data-amplitude-playlist="{{player_playlist}}"
+                    data-amplitude-song-info="album">
+                  </span>
+                </div>
+              </div>
+              <!-- END meta container -->
+            </div>
+            <!-- START COMPACT player BOTTOM -->
+
+          </div>
+          <!-- END compact player -->
+
+        </div> <!-- END compact player container -->
+      </div>
+      <!-- END create player instance on id: {{player_id}} -->
+      {% endif %}
+
+      {% comment %} END COMPACT player
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {% endcomment %}
+
+
+      {% comment %} LARGE player
+      player.source:  {{source_media}}
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {% endcomment %}
+      {% when 'large' %} {% if player_enabled %}
+
+      <!-- player.shuffle_button:  {{player.shuffle_button}} -->
+
+      {% if player.source %}
+        {% assign source_media = player.source %}
+      {% endif %}
+
+      {% if player.source == 'video' %}
+        {% assign source_media_attribute = 'youtube' %}
+      {% else %}
+        {% assign source_media_attribute = 'audio' %}
+      {% endif %}
+
+      <!-- START create player instance on ID: {{player_id}} of type: {{player_type}} -->
+      {% capture large_player_left_side %}
+        <!-- START LARGE player left TOP -->
+        <div class="large-player-left-top">
+
+          <div
+            id="large_player_title_header_{{player_id}}"
+            class="large-player-playlist-header">
+            <span class="audio-artist">
+              <span
+                data-amplitude-playlist="{{player_playlist}}"
+                data-amplitude-source="{{source_media_attribute}}"
+                data-amplitude-song-info="artist">
+              </span>
+              <span class="song-artist-album-delimiter">·</span>
+              <span
+                data-amplitude-playlist="{{player_playlist}}"
+                data-amplitude-source="{{source_media_attribute}}"
+                data-amplitude-song-info="album">
+              </span>
+            </span>
+          </div>
+
+          <!-- NOTE: album cover image (replaced by AJS API based on playlist) -->
+          <div class="album-cover-image">
+            <img
+              class="cover-image-{{player_playlist}} cover-image"
+              src="/assets/audio/cover/default/placeholder-blue.jpg"
+              data-amplitude-playlist="{{player_playlist}}"
+              data-amplitude-source="{{source_media_attribute}}"
+              data-amplitude-song-info="cover_art_url"
+              alt="album cover image"
+            >
+          </div>
+
+          <!-- START progress bar -->
+          {% if song_progress_bar %}
+          <progress
+            id="large_player_progress_{{player_id}}"
+            class="large-player-progress-{{player_playlist}} large-player-progress amplitude-song-played-progress"
+            data-amplitude-source="{{source_media_attribute}}"
+            data-amplitude-playlist="{{player_playlist}}">
+
+          </progress>
+          {% endif %}
+          <!-- END progress bar -->
+        </div>
+        <!-- END LARGE player left TOP -->
+
+        <!-- START LARGE player left MIDDLE -->
+        <div class="large-player-left-middle">
+          <!-- START controls container -->
+          <div class="large-player-control-container">
+            <div id="large_player_controls" class="large_player_controls">
+
+              <div class="large-player-controls-container">
+                {% if shuffle_button %}
+                <div
+                  id="large_player_shuffle_{{player_id}}"
+                  class="large-player-shuffle-{{player_id}} amplitude-shuffle amplitude-shuffle-off"
+                  data-amplitude-source="{{source_media_attribute}}"
+                  data-amplitude-playlist="{{player_playlist}}">
+                </div>
+                {% endif %}
+                <div
+                  id="large_player_previous_{{player_id}}"
+                  class="large-player-previous-{{player_id}} large-player-previous amplitude-prev"
+                  data-amplitude-source="{{source_media_attribute}}"
+                  data-amplitude-playlist="{{player_playlist}}">
+                </div>
+                {% if skip_forward_backward_button %}
+                <div
+                  id="skip-backward_{{player_id}}"
+                  class="large-player-skip-backward-{{player_id}} large-player-skip-backward"
+                  data-amplitude-source="{{source_media_attribute}}"
+                  data-amplitude-playlist="{{player_playlist}}">
+                </div>
+                {% endif %}
+                <div
+                  id="large_player_play_pause_{{player_id}}"
+                  class="large-player-play-pause-{{player_id}} large-player-play-pause amplitude-play-pause amplitude-paused"
+                  data-amplitude-source="{{source_media_attribute}}"
+                  data-amplitude-playlist="{{player_playlist}}">
+                </div>
+                {% if skip_forward_backward_button %}
+                <div
+                  id="skip-forward_{{player_id}}"
+                  class="large-player-skip-forward-{{player_id}} large-player-skip-forward"
+                  data-amplitude-source="{{source_media_attribute}}"
+                  data-amplitude-playlist="{{player_playlist}}">
+                </div>
+                {% endif %}
+                <div
+                  id="large_player_next_{{player_id}}"
+                  class="large-player-next-{{player_id}} large-player-next amplitude-next"
+                  data-amplitude-source="{{source_media_attribute}}"
+                  data-amplitude-playlist="{{player_playlist}}">
+                </div>
+                {% if repeat_button %}
+                <div
+                  id="large_player_repeat_{{player_id}}"
+                  class="large-player-repeat-{{player_id}} large-player-repeat amplitude-repeat amplitude-repeat-off"
+                  data-amplitude-source="{{source_media_attribute}}"
+                  data-amplitude-playlist="{{player_playlist}}">
+                </div>
+                {% endif %}
+
+                <!-- START volume container -->
+                <div class="large-player-volume-container">
+                  {% if volume_slider %}
+                  <div
+                    id="amplitude-mute_{{player_id}}"
+                    class="amplitude-mute amplitude-not-muted"
+                    data-amplitude-source="{{source_media_attribute}}">
+                  </div>
+                  <input
+                    id="volume_slider_{{player_id}}"
+                    class="amplitude-volume-slider"
+                    data-amplitude-source="{{source_media_attribute}}"
+                    type="range"
+                    min="{{volume_slider_min}}"
+                    max="{{volume_slider_max}}"
+                    step="{{volume_slider_step}}"
+                    aria-label="Amplitude Volume Slider">
+                  {% endif %}
+                </div>
+                <!-- END volume container -->
+              </div>
+              <!-- END large player controls container -->
+            </div>
+            <!-- END controls container -->
+          </div>
+        </div>
+        <!-- END LARGE player left MIDDLE -->
+
+        <!-- START LARGE player left BOTTOM -->
+        <!-- div class="player-left-bottom" -->
+        <div class="large-player-left-bottom">
+          <!-- time container -->
+          <div class="time-container">
+            <span class="current-time">
+              {% if display_hours %}
+              <span
+                class="amplitude-current-hours-{{player_playlist}} amplitude-current-hours"
+                data-amplitude-source="{{source_media_attribute}}"
+                data-amplitude-playlist="{{player_playlist}}">
+              </span>
+              :
+              {% endif %}
+              <span
+                class="amplitude-current-minutes-{{player_playlist}} amplitude-current-minutes"
+                data-amplitude-source="{{source_media_attribute}}"
+                data-amplitude-playlist="{{player_playlist}}">
+              </span>
+              :
+              <span
+                class="amplitude-current-seconds-{{player_playlist}} amplitude-current-seconds"
+                data-amplitude-source="{{source_media_attribute}}"
+                data-amplitude-playlist="{{player_playlist}}">
+              </span>
+            </span>
+            <span class="duration">
+              {% if display_hours %}
+              <span
+                class="amplitude-duration-hours-{{player_playlist}} amplitude-duration-hours"
+                data-amplitude-source="{{source_media_attribute}}"
+                data-amplitude-playlist="{{player_playlist}}">
+              </span>
+              :             
+              {% endif %}
+              <span
+                class="amplitude-duration-minutes-{{player_playlist}} amplitude-duration-minutes"
+                data-amplitude-source="{{source_media_attribute}}"
+                data-amplitude-playlist="{{player_playlist}}">
+              </span>
+              :
+              <span
+                class="amplitude-duration-seconds-{{player_playlist}} amplitude-duration-seconds"
+                data-amplitude-source="{{source_media_attribute}}"
+                data-amplitude-playlist="{{player_playlist}}">
+              </span>
+            </span>
+          </div>
+          <!-- END time container -->
+
+          <div class="meta-container large-player">
+            <span
+              class="song-name-{{player_playlist}} song-name"
+              data-amplitude-source="{{source_media_attribute}}"
+              data-amplitude-playlist="{{player_playlist}}"
+              data-amplitude-song-info="name">
+            </span>
+            <div class="audio-artist-album">
+              <span
+                class="artist-name-{{player_playlist}} artist"
+                data-amplitude-source="{{source_media_attribute}}"
+                data-amplitude-playlist="{{player_playlist}}"
+                data-amplitude-song-info="artist">
+              </span>
+              <span
+                class="album-name-{{player_playlist}} album"
+                data-amplitude-source="{{source_media_attribute}}"
+                data-amplitude-playlist="{{player_playlist}}"
+                data-amplitude-song-info="album">
+              </span>
+            </div>
+          </div> <!-- END meta container -->
+        </div>
+        <!-- END LARGE player left BOTTOM -->
+      {% endcapture %}
+
+      <!-- START create player instance on ID: {{player_id}} of type: {{player_type}} -->
+      <div id="{{player_id}}" class="large-player">
+        <!-- START large player container -->
+        <!-- div class="large-player-container" -->
+          <div class="large-player-container">
+
+            <!-- Large Player|Left Side -->
+            <div id="large_player_left" class="large-player-left">
+            {{large_player_left_side}}
+            </div>
+            <!-- END Large Player|Left Side -->
+
+            <!-- Large Player|Right Side (playlist) -->
+            <div
+              id="large_player_right" class="large-player-right hide-scrollbar"
+              data-amplitude-source="{{source_media_attribute}}"
+              data-amplitude-playlist="{{player_playlist}}">
+              <div
+                id="playlist_header_{{player_id}}"
+                class="large-player-playlist-header">Playlist
+              </div>
+
+              <div class="playlist-screen-controls screen-controls-large-player large-player">
+                <div class="playlist-screen-meta-container">
+                  <span
+                    class="song-name-{{player_playlist}} song-name"
+                    data-amplitude-source="{{source_media_attribute}}"
+                    data-amplitude-playlist="{{player_playlist}}"
+                    data-amplitude-song-info="name">
+                  </span>
+
+                  <!-- START player_audio_info (LARGE player) -->
+                  
+                  {% for item in playlist_items %}{% if item.enabled %}
+                  {% if playlist_audio_info and forloop.first %}
+
+                  <!-- place initial (first element) info URL -->
+                  <span class="amplitude-audio-info">
+                    <a class="audio-info-link-{{player_playlist}} audio-info-link" href="{{item.audio_info}}" target="_blank">
+                      <i class="mdib mdib-information md-gray-400 mdib-24px"></i>
+                    </a>
+                  </span>
+                  {% else %}
+                    {% break %}
+                  {% endif %}
+
+                  <!-- place initial (first) audio rating for screen controls (LARGE player) -->
+                  {% if playlist_audio_rating and forloop.first %}
+                    {% capture rating_image %}{{image_rating_path}}/{{item.rating}}-star.svg{% endcapture %}
+                    {% if item.rating %}
+                    <span
+                     class="audio-rating audio-rating-screen-controls"
+                     data-amplitude-playlist="{{player_playlist}}"
+                     data-player-type="large">
+                      <img src="{{rating_image}}" alt="song rating">
+                    </span>
+                    {% else %}
+                      <!-- place empty (span) element (placeholder) -->
+                      <span class="audio-rating"></span>
+                    {% endif %}
+                  {% else %}
+                    {% break %}
+                  {% endif %}
+
+                  {% endif %}{% endfor %}
+                  <!-- END playlist_audio_info -->
+
+                  <div class="song-artist-album">
+                    <span
+                      class="song-artist-{{player_playlist}}"
+                      data-amplitude-source="{{source_media_attribute}}"
+                      data-amplitude-playlist="{{player_playlist}}"
+                      data-amplitude-song-info="artist">
+                    </span>
+                    <!-- jadams, 2024-12-08: make album info configurable -->
+                    <span class="song-artist-album-delimiter">·</span>
+                    <span
+                      class="song-info-{{player_playlist}}"
+                      data-amplitude-source="audio"
+                      data-amplitude-playlist="{{player_playlist}}"
+                      data-amplitude-song-info="album">
+                    </span>                    
+                  </div>
+                </div>
+
+                <!-- place extra control buttons (playlist_controls: {{playlist_controls}}) -->
+                {% if playlist_controls %}
+                <div class="list-controls">
+                  <div
+                    class="list-previous amplitude-prev large-player-previous"
+                    data-amplitude-source="{{source_media_attribute}}"
+                    data-amplitude-playlist="{{player_playlist}}">
+                  </div>
+                  <div
+                    id="large_player_play_pause_{{player_id}}"
+                    class="list-play-pause amplitude-play-pause"
+                    data-amplitude-source="{{source_media_attribute}}"
+                    data-amplitude-playlist="{{player_playlist}}">
+                  </div>
+                  <div
+                    class="list-next amplitude-next large-player-next"
+                    data-amplitude-source="{{source_media_attribute}}"
+                    data-amplitude-playlist="{{player_playlist}}">
+                  </div>
+                </div><!-- Large Player|Left Side -->
+                {% endif %}
+
+              </div> <!-- END playlist controls -->
+
+              <!-- START playlist items (Large Player) -->
+              <ul
+                id="large_player_title_list_{{player_playlist}}"
+                class="amplitude-scroller-gradient large-player-title-list"
+                style="margin-bottom: 0px; padding-left: 0px;">
+
+                <!-- START Playlist item -->
+                <li>
+                  {% for item in playlist_items %}{% if item.enabled %}
+                  <!-- START list item -->
+                  <!-- class="amplitude-song-container-large-player-{{player_id}} amplitude-song-container-large-player amplitude-song-container amplitude-song amplitude-play-pause amplitude-player-large" -->
+                  <!-- class="amplitude-song amplitude-song-container amplitude-song-container-large-player amplitude-play-pause amplitude-paused" -->
+                  <div
+                    class="amplitude-song-container-large-player-{{player_id}} amplitude-song amplitude-song-container amplitude-song-container-large-player amplitude-play-pause amplitude-paused"
+                    data-amplitude-song-index="{{forloop.index0}}"
+                    data-amplitude-source="{{source_media_attribute}}"
+                    data-amplitude-playlist="{{player_playlist}}">
+
+                    <div class="audio-meta-data"
+                      data-amplitude-playlist="{{player_playlist}}"
+                      data-amplitude-song-index="{{forloop.index0}}">
+
+                        <div
+                          class="amplitude-song-container"
+                          data-amplitude-source="{{source_media_attribute}}"
+                          data-amplitude-playlist="{{player_playlist}}">
+                          <span class="title-number">Track {{forloop.index}}
+                          <!-- span class="title-number">{{forloop.index}} -->
+                            <img
+                              class="now-playing"
+                              src="/assets/theme/j1/modules/amplitudejs/icons/player/dark/now-playing.svg"
+                              alt="now-playing">
+                          </span>
+                        </div>
+
+                        <span class="audio-title">{{item.title}}</span>
+
+                        <span class="audio-artist">
+                          <span>{{item.artist}}</span>
+                          <!-- span class="song-artist-album-delimiter">·</span>
+                          <span>{{item.name}}</span -->            
+                        </span>
+                      
+                    </div> <!-- END audio-meta-data -->
+
+                    <!-- jadams, 2024-11-05: ??? -->
+                    {% if player.display_hours %}
+                    <span class="audio-duration">{{item.duration}}</span>
+                    {% else %}
+                    <span class="audio-duration">{{item.duration}}</span>
+                    {% endif %}
+
+                    <!-- load audio rating for playlist (LARGE player) -->
+                    {% if item.rating %}
+                    <span class="audio-rating" data-amplitude-playlist="{{player_playlist}}">
+                      {% capture rating_image %}{{image_rating_path}}/{{item.rating}}-star.svg{% endcapture %}
+                      <img src="{{rating_image}}" alt="song rating">
+                    </span>
+                    {% else %}
+                    <!-- place empty (span) element (placeholder) -->
+                    <span class="audio-rating"></span>
+                    {% endif %}
+
+                  </div>
+                  <!-- END list item -->
+                  {% endif %}{% endfor %}
+                </li>                
+                <!-- END Playlist item -->
+
+              </ul>
+              <!-- END playlist items (Large Player) -->
+
+            </div> <!-- END Large Player|Right Side -->
+
+          </div>  <!-- END Player -->
+        <!-- /div -->
+        <!-- END large player container -->
+      </div>
+      <!-- END create player instance on ID: {{player_id}} -->
+      {% endif %}
+
+      {% comment %} END LARGE player
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {% endcomment %}
+
+      {% comment %} Reset element variables (already processed)
+      -------------------------------------------------------------------------- {% endcomment %}
+      {% assign amplitude_settings = false %}
+      {% assign player_playlist    = false %}
+      {% assign playlist_items     = false %}
+
+    {% endcase %}
+
+  {% endif %} {% endfor %}
+
+  {% comment %} END create player instances
+  ============================================================================== {% endcomment %}
+  </body>
+
+</html>
+{%- endcapture -%}
+
+{% comment %} Beautify|compress page
+-------------------------------------------------------------------------------- {% endcomment %}
+{%- if production -%}
+  {% capture _LINE_FEED %}{% endcapture %}{% if site.compress_html.ignore.envs contains jekyll.environment %}{{ cache | strip_html_comments }}{% else %}{% capture _content %}{{ cache | strip_html_comments }}{% endcapture %}{% assign _profile = site.compress_html.profile %}{% if site.compress_html.endings == "all" %}{% assign _endings = "html head body li dt dd p rt rp optgroup option colgroup caption thead tbody tfoot tr td th" | split: " " %}{% else %}{% assign _endings = site.compress_html.endings %}{% endif %}{% for _element in _endings %}{% capture _END %}</{{ _element }}>{% endcapture %}{% assign _content = _content | remove: _END %}{% endfor %}{% if _profile and _endings %}{% assign _profile_endings = _content | size | plus: 1 %}{% endif %}{% for _element in site.compress_html.startings %}{% capture _start %}<{{ _element }}>{% endcapture %}{% assign _content = _content | remove: _start %}{% endfor %}{% if _profile and site.compress_html.startings %}{% assign _profile_startings = _content | size | plus: 1 %}{% endif %}{% if site.compress_html.comments == "all" %}{% assign _comments = "<!-- -->" | split: " " %}{% else %}{% assign _comments = site.compress_html.comments %}{% endif %}{% if _comments.size == 2 %}{% capture _comment_befores %}.{{ _content }}{% endcapture %}{% assign _comment_befores = _comment_befores | split: _comments.first %}{% for _comment_before in _comment_befores %}{% if forloop.first %}{% continue %}{% endif %}{% capture _comment_outside %}{% if _carry %}{{ _comments.first }}{% endif %}{{ _comment_before }}{% endcapture %}{% capture _comment %}{% unless _carry %}{{ _comments.first }}{% endunless %}{{ _comment_outside | split: _comments.last | first }}{% if _comment_outside contains _comments.last %}{{ _comments.last }}{% assign _carry = false %}{% else %}{% assign _carry = true %}{% endif %}{% endcapture %}{% assign _content = _content | remove_first: _comment %}{% endfor %}{% if _profile %}{% assign _profile_comments = _content | size | plus: 1 %}{% endif %}{% endif %}{% assign _pre_befores = _content | split: "<pre" %}{% assign _content = "" %}{% for _pre_before in _pre_befores %}{% assign _pres = _pre_before | split: "</pre>" %}{% assign _pres_after = "" %}{% if _pres.size != 0 %}{% if site.compress_html.blanklines %}{% assign _lines = _pres.last | split: _LINE_FEED %}{% capture _pres_after %}{% for _line in _lines %}{% assign _trimmed = _line | split: " " | join: " " %}{% if _trimmed != empty or forloop.last %}{% unless forloop.first %}{{ _LINE_FEED }}{% endunless %}{{ _line }}{% endif %}{% endfor %}{% endcapture %}{% else %}{% assign _pres_after = _pres.last | split: " " | join: " " %}{% endif %}{% endif %}{% capture _content %}{{ _content }}{% if _pre_before contains "</pre>" %}<pre{{ _pres.first }}</pre>{% endif %}{% unless _pre_before contains "</pre>" and _pres.size == 1 %}{{ _pres_after }}{% endunless %}{% endcapture %}{% endfor %}{% if _profile %}{% assign _profile_collapse = _content | size | plus: 1 %}{% endif %}{% if site.compress_html.clippings == "all" %}{% assign _clippings = "html head title base link meta style body article section nav aside h1 h2 h3 h4 h5 h6 hgroup header footer address p hr blockquote ol ul li dl dt dd figure figcaption main div table caption colgroup col tbody thead tfoot tr td th" | split: " " %}{% else %}{% assign _clippings = site.compress_html.clippings %}{% endif %}{% for _element in _clippings %}{% assign _edges = " <e;<e; </e>;</e>;</e> ;</e>" | replace: "e", _element | split: ";" %}{% assign _content = _content | replace: _edges[0], _edges[1] | replace: _edges[2], _edges[3] | replace: _edges[4], _edges[5] %}{% endfor %}{% if _profile and _clippings %}{% assign _profile_clippings = _content | size | plus: 1 %}{% endif %}{{ _content }}{% if _profile %} <table id="compress_html_profile_{{ site.time | date: "%Y%m%d" }}" class="compress_html_profile"> <thead> <tr> <td>Step <td>Bytes <tbody> <tr> <td>raw <td>{{ cache | strip_html_comments | size }}{% if _profile_endings %} <tr> <td>endings <td>{{ _profile_endings }}{% endif %}{% if _profile_startings %} <tr> <td>startings <td>{{ _profile_startings }}{% endif %}{% if _profile_comments %} <tr> <td>comments <td>{{ _profile_comments }}{% endif %}{% if _profile_collapse %} <tr> <td>collapse <td>{{ _profile_collapse }}{% endif %}{% if _profile_clippings %} <tr> <td>clippings <td>{{ _profile_clippings }}{% endif %} </table>{% endif %}{% endif %}
+{%- else -%}
+  {{ cache | remove:'<html><body>' | remove:'</body></html>' | strip_empty_lines }}
+{%- endif -%}
+
+{% comment %} reset page cache
+-------------------------------------------------------------------------------- {% endcomment %}
+{%- assign cache = false -%}

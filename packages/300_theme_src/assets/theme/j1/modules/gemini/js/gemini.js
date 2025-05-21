@@ -923,4 +923,4 @@ class GoogleGenerativeAI {
 }
 
 export { BlockReason, ChatSession, FinishReason, GenerativeModel, GoogleGenerativeAI, HarmBlockThreshold, HarmCategory, HarmProbability, TaskType };
-//# sourceMappingURL=gemini.js.map
+

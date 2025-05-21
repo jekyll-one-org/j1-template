@@ -16,7 +16,7 @@
     "width": 1920,
     "height": 1280,
     "alt": "Site Generators",
-    "url": "http://localhost:40000/assets/image/modules/attics/machine-generator-1920x1280.jpg",
+    "url": "http://localhost:40000/assets/image/module/attic/machine-generator-1920x1280.jpg",
     "@type": "imageObject"
   },
   "mainEntityOfPage": {

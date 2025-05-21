@@ -18,7 +18,7 @@ categories:                             [ Roundtrip ]
 tags:                                   [ Module, Swiper ]
 
 image:
-  path:                                 /assets/image/modules/attics/markus-spiske-1920x1280.jpg
+  path:                                 /assets/image/module/attic/markus-spiske-1920x1280.jpg
   width:                                1920
   height:                               1280
 
@@ -31,7 +31,7 @@ resources:                              [ swiper, slick-slider, videoja ]
 resource_options:
   - attic:
       slides:
-        - url:                          /assets/image/modules/attics/markus-spiske-1920x1280.jpg
+        - url:                          /assets/image/module/attic/markus-spiske-1920x1280.jpg
           alt:                          Swiper Tester
 ---
 
@@ -260,25 +260,25 @@ lorem:sentences[3]
 <div class="swiper swiper-container gallerySlider">
   <div class="swiper-wrapper">
     <div class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" />
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-1.jpg" />
     </div>
     <div class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg" />
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-2.jpg" />
     </div>
     <div class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" />
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-3.jpg" />
     </div>
     <div class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg" />
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-4.jpg" />
     </div>
     <div class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg" />
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-5.jpg" />
     </div>
     <div class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg" />
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-6.jpg" />
     </div>
     <div class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-7.jpg" />
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-7.jpg" />
     </div>
   </div>
 </div>
@@ -287,25 +287,25 @@ lorem:sentences[3]
 <div thumbsSlider="" class="swiper swiper-container thumbsSlider mt-1 mb-5">
   <div class="swiper-wrapper">
     <div class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" />
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-1.jpg" />
     </div>
     <div class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg" />
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-2.jpg" />
     </div>
     <div class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" />
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-3.jpg" />
     </div>
     <div class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg" />
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-4.jpg" />
     </div>
     <div class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg" />
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-5.jpg" />
     </div>
     <div class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg" />
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-6.jpg" />
     </div>
     <div class="swiper-slide">
-      <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-7.jpg" />
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-7.jpg" />
     </div>
   </div>
 </div>
@@ -399,25 +399,25 @@ lorem:sentences[3]
           <div class="swiper multiSwiper swiper-container">
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" />
+                  <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-1.jpg" />
                 </div>
                 <div class="swiper-slide">
-                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg" />
+                  <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-2.jpg" />
                 </div>
                 <div class="swiper-slide">
-                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" />
+                  <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-3.jpg" />
                 </div>
                 <div class="swiper-slide">
-                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg" />
+                  <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-4.jpg" />
                 </div>
                 <div class="swiper-slide">
-                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg" />
+                  <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-5.jpg" />
                 </div>
                 <div class="swiper-slide">
-                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg" />
+                  <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-6.jpg" />
                 </div>
                 <div class="swiper-slide">
-                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-7.jpg" />
+                  <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-7.jpg" />
                 </div>
               </div>
           </div>
@@ -428,25 +428,25 @@ lorem:sentences[3]
           <div class="swiper multiSwiper swiper-container thumb-slider-right">
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-1.jpg" />
+                  <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-1.jpg" />
                 </div>
                 <div class="swiper-slide">
-                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-2.jpg" />
+                  <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-2.jpg" />
                 </div>
                 <div class="swiper-slide">
-                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-3.jpg" />
+                  <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-3.jpg" />
                 </div>
                 <div class="swiper-slide">
-                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-4.jpg" />
+                  <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-4.jpg" />
                 </div>
                 <div class="swiper-slide">
-                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-5.jpg" />
+                  <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-5.jpg" />
                 </div>
                 <div class="swiper-slide">
-                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-6.jpg" />
+                  <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-6.jpg" />
                 </div>
                 <div class="swiper-slide">
-                  <img src="/assets/image/modules/masterslider/slider_4/ms-free-animals-7.jpg" />
+                  <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-7.jpg" />
                 </div>
               </div>
           </div>

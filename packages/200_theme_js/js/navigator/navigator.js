@@ -8,7 +8,7 @@
  #  https://github.com/adamnurdin01/bootsnav
  #  http://corenav.anurdin.net/
  #
- #  Copyright (C) 2023, 2024 Juergen Adams
+ #  Copyright (C) 2023-2025 Juergen Adams
  #  Copyright (C) 2016 adamnurdin01
  #
  #  J1 Theme is licensed under MIT License.

@@ -20,7 +20,7 @@ categories:                             [ Previewer ]
 tags:                                   [ Module, DocSearch ]
 
 image:
-  path:                                 /assets/image/modules/attics/library-1920x1280.jpg
+  path:                                 /assets/image/module/attic/library-1920x1280.jpg
   width:                                1920
   height:                               1280
 
@@ -32,7 +32,7 @@ resources:                              [ animate, iframer, rouge ]
 resource_options:
   - attic:
       slides:
-        - url:                          /assets/image/modules/attics/library-1920x1280.jpg
+        - url:                          /assets/image/module/attic/library-1920x1280.jpg
           alt:                          Library
 ---
 

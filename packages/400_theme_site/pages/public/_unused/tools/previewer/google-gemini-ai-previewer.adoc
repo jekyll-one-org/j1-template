@@ -22,7 +22,7 @@ categories:                             [ Previewer ]
 tags:                                   [ Module, Gemini, ChatBot ]
 
 image:
-  path:                                 /assets/image/modules/attics/1920x1280/build-with-gemini.jpg
+  path:                                 /assets/image/module/attic/1920x1280/build-with-gemini.jpg
   width:                                1920
   height:                               1280
 
@@ -42,7 +42,7 @@ resource_options:
         contrast:                       1
         brightness:                     0.8
       slides:
-        - url:                          /assets/image/modules/attics/1920x1280/build-with-gemini.jpg
+        - url:                          /assets/image/module/attic/1920x1280/build-with-gemini.jpg
           alt:                          Build with Gemini
 ---
 

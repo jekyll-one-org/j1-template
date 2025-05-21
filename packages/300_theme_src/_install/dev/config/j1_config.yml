@@ -396,7 +396,7 @@ preload:
 
   image:
     preload:                            false
-    files:                              [ /assets/image/modules/icons/j1/j1-512x512.png ]
+    files:                              [ /assets/image/module/icon/j1/j1-512x512.png ]
 
   font:
     preload:                            false

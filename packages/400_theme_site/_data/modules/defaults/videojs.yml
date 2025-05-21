@@ -5,7 +5,7 @@
 # Product/Info:
 # https://jekyll.one
 #
-# Copyright (C) 2023, 2024 Juergen Adams
+# Copyright (C) 2023-2025 Juergen Adams
 #
 # J1 Template is licensed under the MIT License.
 # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
@@ -24,6 +24,12 @@ description:
 #
 defaults:
 
+  # ----------------------------------------------------------------------------
+  # GENERAL options
+  # ----------------------------------------------------------------------------
+  #
+  enabled:                              false
+  
   # ----------------------------------------------------------------------------
   # VideoJS settings
   # ----------------------------------------------------------------------------
@@ -54,7 +60,7 @@ defaults:
 
       # video parameters
       #
-      default_poster:                   /assets/image/icons/videojs/videojs-poster.png
+      default_poster:                   /assets/image/icon/videojs/videojs-poster.png
       poster:                           maxresdefault.jpg                       # poster taken from YT at highest resolution
       end:                              true                                    # set end (of a video) allowed
       start:                            true                                    # set start (of a video) allowed

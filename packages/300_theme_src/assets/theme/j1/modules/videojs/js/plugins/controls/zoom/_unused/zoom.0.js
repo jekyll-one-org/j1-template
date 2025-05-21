@@ -8,7 +8,7 @@
  # https://github.com/theonlyducks/videojs-zoom/blob/main/README.md
  # http://jekyll.one
  #
- # Copyright (C) 2023, 2024 The Only Ducks
+ # Copyright (C) 2023-2025 The Only Ducks
  # Copyright (C) 2023-2025 Juergen Adams
  #
  # Videojs Zoom is licensed under the MIT License.

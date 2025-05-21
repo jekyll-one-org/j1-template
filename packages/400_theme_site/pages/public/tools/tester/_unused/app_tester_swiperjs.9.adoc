@@ -1,0 +1,2167 @@
+---
+title:                                  J1 SwiperJS Apps
+title_extention:                        Selected Examples
+tagline:                                Selected Examples
+date:                                   2025-02-10
+#last_modified:                         2025-01-01
+
+description: >
+                                        SwiperJS is a Javascript API that creates modern
+                                        slider shows. All sliders use hardware-accelerated
+                                        features like 3D transitions to perform best on modern
+                                        devices. SwiperJS-based sliders are intended to be
+                                        displayed at their best on all types of websites, such
+                                        as those viewed on desktop computers, tablets, or
+                                        smartphones.
+keywords: >
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap,
+                                        html, html5, sliders, carousels, SwiperJS
+
+categories:                             [ Tester ]
+tags:                                   [ Swiper App ]
+
+image:
+  path:                                 /assets/image/module/attic/markus-spiske-1920x1280.jpg
+  width:                                1920
+  height:                               1280
+
+compress:                               false
+regenerate:                             false
+personalization:                        true
+permalink:                              /pages/public/tools/tester/swiper_app/
+
+resources:                              [ photoswipejs, swiperjs, videojs ]
+resource_options:
+  - toccer:
+      collapseDepth:                    3
+  - attic:
+      slides:
+        - url:                          /assets/image/module/attic/markus-spiske-1920x1280.jpg
+          alt:                          Swiper Tester
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Attribute settings for section control
+//
+:image-card-layout:                     false
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+SwiperJS is a Javascript API that creates modern slider shows. All sliders
+use hardware-accelerated features like 3D transitions to perform best on modern
+devices. SwiperJS-based sliders are intended to be displayed at their best on
+all types of websites, such as those viewed on desktop computers, tablets, or
+smartphones.
+
+
+[role="mt-4"]
+== What SwiperJS Apps are
+
+SwiperJS Apps are preconfigured swipers (sliders) that use the SwiperJS API as
+a *base* and *combine* it with *other libraries* like AmplitudeJS, VideoJS,
+and Photoswipe to create powerful and modern *slide shows* to be *embedded* in 
+webpages of a J1 Template based site.
+
+[NOTE]
+====
+SwiperJS Apps create sliders that display text, images, videos, or audio files.
+They can be used to create simple sliders or more complex slide shows with
+different type of content.
+
+SwiperJS Apps are defined by pure *configuration* and do *not require* any
+*programming*.
+====
+
+
+[role="mt-5"]
+== SwiperJS Apps for Text
+
+Swipers are mnainly used for displaying images. Still, the implementation
+for the J1 Template supports a lot more *sources* to be displayed as a *slide*.
+Simple *text* for example.
+
+
+[role="mt-4"]
+=== Base Text Swiper
+
+Important statements or topics can be placed on top of an *article* or a
+*paragraph* to give them better visibility. You can present facts to know
+animated for the readers attention.
+
+.Base Text Swiper
+swiper::swiper_text_base[role="mt-4 mb-5"]
+
+
+[role="mt-4"]
+=== Extended Text Swiper
+
+A more *emphasized* type of a **text**-based swiper is a *parallax* text
+swiper. If you want to *focus* the meaning, this kind of a swiper may be
+nteresting. Parallax text sliders can be placed as *banners* on a page.
+
+.Extended Text Swiper ·  Parallax
+swiper::swiper_text_parallax[role="mt-4 mb-5"]
+
+
+[role="mt-5"]
+== SwiperJS Apps for Images
+
+Swipers (sliders or carousels) are mainly used for pictures *animated* as a
+managed *group*. Find below some examples of using simple (base) swipers for
+presenting images using the Swiper App.
+
+[role="mt-4"]
+=== Base Image Swipers
+
+lorem:sentences[5]
+
+[role="mt-4"]
+==== Image Full-width
+
+Find an example of a *full-width* slider with *pagination* control *enabled*
+to browse all images *back* and *forth*. Additionally, the pagination bullets
+below the Swiper App indicate how *many* slides (images) the slide show
+*contains* for improved usage experience.
+
+.Image Swiper · Full-width + Pagination
+swiper::swiper_image_base_full_width_pagination[role="mt-3"]
+
+[role="mt-4"]
+==== Equal Image Sizes
+
+Important statements or topics can be placed on top of an article or
+a paragraph to give them better visibility. In one line, you can present
+many facts to know animated for the reader's attention within a single
+line.
+
+.Equal Image Sizes · Captions + Navigation + Pagination
+swiper::swiper_image_base_navigation_pagination[role="mt-3"]
+
+
+[role="mt-4"]
+==== Mixed Image Sizes
+
+Pictures you've made are typically *not even in size*. Images may have the
+same size (resolution), but some are orientated *landscape*, or others may
+be *portrait*. For that reason, a more powerful swiper is needed to create
+so-called justified slides.
+
+.Mixed Image Sizes · Captions + Lightbox
+swiper::swiper_image_base_captions[role="mt-4 mb-4"]
+
+
+[role="mt-5"]
+=== Extendend Image Swipers
+
+Layouts in terms of J1 Template for SwiperJS are *transformations* of a Swiper.
+A *layout* is used to rebuild it for a more complex visual *presentation* for
+the Swiper's slides. The Layout of a swiper can improve the *useability* or
+make the *presentation* of a slideshow more *interesting*.
+
+
+[role="mt-4"]
+[[image_thumbs_top_bottom]]
+==== Layout Thumb Top|Bottom
+
+To give the users a more *visual* control over a slideshow, Swiper sliders
+can provide *UI elements* by placing minified images or text elements (thumbs)
+side-by-side (on the left|right), or at the bottom|top of a swiper. Find below
+examples how to control such sliders' by a thumb (slave) silder.
+
+[role="mt-4 mb-4"]
+[TIP]
+====
+This Layout creates best results for high-quality images for websites mainly
+used on *desktop* computers.
+====
+
+This Thumb Slider uses minified images that are placed to control the (main)
+slider at the *top* or the *bottom*. This swiper type creates a thumbed Swiper
+that uses *two lanes*, which takes up a *lot of space* but can render the
+sliders' images *optimally*.
+
+.Extendend Swiper · Layout Thumb Top
+swiper::thumb_slider_top[role="mb-5"]
+
+
+[role="mt-5"]
+[[image_thumbs_right_left]]
+==== Layout Thumb Right|Left
+
+A more **mobile**-friendly version of a Thunb slider is created by placing the
+minified images for the slider side-by-side on the *right* or the *left*. This
+swiper use just a *single lane* in the page, but *minifies* the presented images
+as required for the lane *heigth* specified.
+
+[role="mb-5"]
+[TIP]
+====
+Adding a *Lightbox* to a *single-lane* swiper allows users to *enlarge* the
+presented *images*.
+====
+
+++++
+<div class="swiper-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Extendend Swiper · Layout Thumb Right + Captions </div>
+<div class="container g-0 mb-5">
+    <div id="thumb_view_row" class="row gx-1">
+
+      <!-- Thumb View (main) -->
+      <div class="col-md-9">
+        <!-- Swiper container -->
+        <div id="master_slider_2" class="swiper swiper-container swiper--multi gallery-slider">
+            <!-- Swiper wrapper (slides) -->
+            <ul class="swiper-wrapper">
+              <li class="swiper-slide">
+                <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-1.jpg">
+                <div class="swp-caption-content">Husky</div>
+              </li>
+              <li class="swiper-slide">
+                <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-2.jpg">
+                <div class="swp-caption-content">Female Lion</div>
+              </li>
+              <li class="swiper-slide">
+                <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-3.jpg">
+                <div class="swp-caption-content">Approaching Vulture</div>
+              </li>
+              <li class="swiper-slide">
+                <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-4.jpg">
+                <div class="swp-caption-content">Group of Flamingos</div>
+              </li>
+              <li class="swiper-slide">
+                <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-5.jpg">
+                <div class="swp-caption-content">Young Deer</div>
+              </li>
+              <li class="swiper-slide">
+                <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-6.jpg">
+                <div class="swp-caption-content">Little Bird</div>
+              </li>
+            </ul> <!-- END Swiper wrapper -->
+
+            <!-- Outer Pagination -->
+            <div id="thumb_view_row_pagination" class="swiper-pagination-outer"></div>
+
+        </div> <!-- END Swiper container  -->        
+      </div> <!-- END Thumb View (main)  -->
+
+      <!-- Thumb View (thumbs/right) -->
+      <div class="col-md-3">
+        <!-- Swiper container -->
+        <div id="thumbs_slider_2" class="swiper swiper-container swiper--multi thumbs-slider--right">
+          <!-- Swiper wrapper (slides) -->
+          <ul class="swiper-wrapper">
+            <li class="swiper-slide">
+              <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-1.jpg">
+              <div class="swp-caption-content">Husky</div>
+            </li>
+            <li class="swiper-slide">
+              <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-2.jpg">
+              <div class="swp-caption-content">Female Lion</div>
+            </li>
+            <li class="swiper-slide">
+              <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-3.jpg">
+              <div class="swp-caption-content">Approaching Vulture</div>
+            </li>
+            <li class="swiper-slide">
+              <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-4.jpg">
+              <div class="swp-caption-content">Group of Flamingos</div>
+            </li>
+            <li class="swiper-slide">
+              <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-5.jpg">
+              <div class="swp-caption-content">Young Deer</div>
+            </li>
+            <li class="swiper-slide">
+              <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-6.jpg">
+              <div class="swp-caption-content">Little Bird</div>
+            </li>
+          </ul> <!-- END Swiper wrapper -->
+        </div> <!-- END Swiper container -->
+      </div> <!-- END Thumb View (thumbs/right) -->
+
+    </div> <!-- END BS row -->
+
+    <!-- Outer Pagination -->
+    <!--div class="swiper-pagination-outer"></div -->
+
+</div> <!-- END BS container -->
+
+<script>
+$(function() {
+  // ---------------------------------------------------------------------------
+  // Swiper initializer (Thumb View (right))
+  // ---------------------------------------------------------------------------
+  var dependencies_met_page_ready = setInterval (() => {
+    var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true : false;
+
+    if (atticFinished) {
+
+      // Initialize Thumbs instance (right)
+      var thumbsSwiper2 = new Swiper('#thumbs_slider_2', {
+        direction: 'vertical',
+        spaceBetween: 5,
+        slidesPerView: 3,
+        grabCursor: true,
+        on: {
+          transitionStart: (swiper) => {
+            masterSwiper2.slideTo(swiper.activeIndex);
+          }
+        }
+      });
+
+      // Initialize Master instance
+      var masterSwiper2 = new Swiper('#master_slider_2', {        
+        direction: 'horizontal',
+        grabCursor: true,
+        pagination: {
+          el: '.swiper-pagination-outer',
+          clickable: true,
+        },        
+        effect: 'fade',
+          fadeEffect: {
+          crossFade: true
+        },
+        thumbs: {
+          swiper: thumbsSwiper2
+        },
+        on: {
+          slideChangeTransitionStart: (swiper) => {
+            thumbsSwiper2.slideTo(swiper.activeIndex);
+          },
+          click: (swiper, event) => {
+            console.log('Clicked on the slider, index: ', swiper.activeIndex);
+          }
+        }
+      });
+
+      // workaround for swiper pagination placed 'outer'
+      // -----------------------------------------------------------------------
+      {% assign init_swiper_delay  = 500 %}
+      {% assign pagination_enabled = true %}
+
+      {% if pagination_enabled %}
+      setTimeout(() => {
+        const sourceEl = document.getElementById('thumb_view_row_pagination');
+        const targetEl = document.getElementById('thumb_view_row');
+        targetEl.appendChild(sourceEl);
+
+        // logger.debug('\n' + 'pagination elements (outer) moved');
+      }, {{init_swiper_delay}});
+      {% endif %}
+      // -----------------------------------------------------------------------
+
+      clearInterval(dependencies_met_page_ready);
+    } // END pageVisible
+  }, 10); // END dependencies_met_page_ready
+}); // END Swiper initializer (Thumb View (right))
+</script>
+++++
+
+
+[role="mt-5"]
+==== Layout Neighbor
+
+A slideshow typically presents a larger number of slides, which requires a
+sort of navigation. The effect *neighbors* accompanies the *active slide* by
+their *neighbors* on the left and right as *previews*. The neighbor on the
+*left* acts like a *previous button* and scrolls the slides *backward*. The
+neighbor on the *right* acts like a *next button* and scrolls the slides
+*forward*.
+
+[role="mb-5"]
+[TIP]
+====
+The *effect* transforms a slider into a quite *compact* presentation that does
+*not* require any (additional) *navigation* elements.
+====
+
+.Extendend Swiper · Layout Neighbor
+swiper::neighbor_slider[role="mb-5"]
+
+
+[role="mt-5"]
+==== Layout Panorama
+
+The layout panaorama presents available slides of a slider as a group. The
+group is displayed in a virtual, circular viewing angle. 
+
+[role="mb-5"]
+[TIP]
+====
+The effect is great for slides connected in terms of content to give the user
+a panoramic view impression.
+====
+
+.Extendend Swiper · Layout Panorama
+swiper::swiper_image_panorama[role="mt-4 mb-5"]
+// style="margin-inline: .75rem;"
+
+////
+[role="mt-5"]
+==== Layout Cards
+
+lorem:sentences[5]
+
+++++
+<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Extendend Swiper · Layout Cards</div>
+<!-- Cards slider -->
+<div id="cards_swiper" class="swiper swiper-container mySwiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide slide-1">Slide 1</div>
+    <div class="swiper-slide slide-2">Slide 2</div>
+    <div class="swiper-slide slide-3">Slide 3</div>
+    <!--div class="swiper-slide slide-1">Slide 1</div>
+    <div class="swiper-slide slide-2">Slide 2</div>
+    <div class="swiper-slide slide-3">Slide 3</div -->
+  </div>
+</div>
+++++
+
+++++
+<script>
+$(function() {
+
+  // ---------------------------------------------------------------------------
+  // Swiper initializer
+  // ---------------------------------------------------------------------------
+  var dependencies_met_page_ready = setInterval (() => {
+    var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true : false;
+
+    if (atticFinished) {
+      const sliderEl = document.querySelector('#cards_swiper');
+      const swiperEl = sliderEl.querySelector('.swiper');
+
+      // Initialize Swiper
+      //
+      var swiper = new Swiper(".mySwiper", {
+        autoplay: false,
+        effect: "cards",
+        grabCursor: true,
+        loop: true,
+        centeredSlides: true,
+      });
+
+      clearInterval(dependencies_met_page_ready);
+    } // END pageVisible
+
+  }, 10); // END dependencies_met_page_ready
+
+}); // END Document READY
+</script>
+++++
+
+++++
+<style>
+
+.swiper {
+  width: 240px;
+  height: 320px;
+}
+
+.swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.slide-1 {
+  background-color: red;
+}
+
+.slide-2 {
+  background-color: green;
+}
+
+.slide-3 {
+  background-color: blue;
+}
+</style>
+++++
+////
+
+[role="mt-5"]
+==== Layout Stacked
+
+lorem:sentences[5]
+
+++++
+<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Extendend Swiper · Layout Stacked</div>
+<!-- Posters slider -->
+<div id="stacked_slider" class="stacked-slider mt-3">
+  <div id="stacked_slider_swiper_container" class="swiper swiper-container">
+
+    <ul class="swiper-wrapper">
+      <li class="swiper-slide">
+        <!-- set image parallax scale for nice zoom effect -->
+        <img data-swiper-parallax-scale="1.1" src="/assets/image/module/swiper/extended/poster/image/1.jpg" alt="">
+      </li>
+      <li class="swiper-slide">
+        <img data-swiper-parallax-scale="1.1" src="/assets/image/module/swiper/extended/poster/image/2.jpg" alt="">
+      </li>
+      <li class="swiper-slide">
+        <img data-swiper-parallax-scale="1.1" src="/assets/image/module/swiper/extended/poster/image/3.jpg" alt="">
+      </li>
+      <li class="swiper-slide">
+        <img data-swiper-parallax-scale="1.1" src="/assets/image/module/swiper/extended/poster/image/4.jpg" alt="">
+      </li>
+      <li class="swiper-slide">
+        <img data-swiper-parallax-scale="1.1" src="/assets/image/module/swiper/extended/poster/image/5.jpg" alt="">
+      </li>
+      <li class="swiper-slide">
+        <img data-swiper-parallax-scale="1.1" src="/assets/image/module/swiper/extended/poster/image/6.jpg" alt="">
+      </li>
+    </ul> <!-- END Swiper Wrapper (slides) -->
+
+    <!-- Outer pagination moved by createPostersSlider (workaround) -->
+    <div id ="stacked_slider_swiper_pagination" class="swiper-pagination-outer"></div>
+
+  </div> <!-- END Swiper Container (elements) -->
+</div> <!-- END Swiper stacked_slider -->
+++++
+
+++++
+<script>
+$(function() {
+
+  function (el) {
+    const swiperEl = el.querySelector('.swiper');
+
+    const calcNextOffset = () => {
+      const parentWidth = swiperEl.parentElement.offsetWidth;
+      const swiperWidth = swiperEl.offsetWidth;
+      var nextOffset    = (parentWidth - (parentWidth - swiperWidth) / 2) / swiperWidth;
+      var nextOffsetVh  = Math.max(nextOffset, 1) * 100;
+
+      return `${nextOffsetVh}%`;
+    };
+
+    const postersSwiper = new Swiper(swiperEl, {      
+      effect: 'creative',
+      speed: 600,
+      resistanceRatio: 0,
+      grabCursor: true,
+      parallax: true,
+      pagination: {
+        el: '.swiper-pagination-outer',
+        type: 'bullets',
+        clickable: true
+      },      
+      creativeEffect: {
+        limitProgress: 3,
+        perspective: true,
+        shadowPerProgress: true,
+        prev: {
+          shadow: true,
+          translate: ['-15%', 0, -200],
+        },
+        next: {
+          translate: [calcNextOffset(), 0, 0],
+        },
+      },
+      on: {
+        init: (swiper) => { var slideHeight = 600; swiper.slides.forEach(slide => { slide.style.height = `${slideHeight}px`; }); }
+      }
+    });
+
+    const onResize = () => {
+      if (!postersSwiper || postersSwiper.destroyed) return;
+      // prettier-ignore
+      postersSwiper.params.creativeEffect.next.translate = [calcNextOffset(), 0, 0];
+      if (
+        postersSwiper.params.resizeObserver &&
+        typeof window.ResizeObserver !== 'undefined'
+      ) {
+        postersSwiper.update();
+      }
+    };
+    window.addEventListener('resize', onResize);
+
+    // workaround for swiper pagination placed 'outer'
+    // -------------------------------------------------------------------------
+    {% assign init_swiper_delay   = 500 %}
+    {% assign pagination_el       = swiper.module_settings.pagination.el | split: '-' %}
+    {% assign pagination_position = pagination_el[2] %}
+
+    setTimeout(() => {
+      const sourceEl = document.getElementById('stacked_slider_swiper_pagination');
+      const targetEl = document.getElementById('stacked_slider');
+      targetEl.appendChild(sourceEl);
+
+      logger.debug('\n' + 'pagination elements (outer) moved');
+    }, {{init_swiper_delay}});
+    // -------------------------------------------------------------------------
+
+    return postersSwiper;
+  } // END createPostersSlider
+
+  // ---------------------------------------------------------------------------
+  // Swiper initializer
+  // ---------------------------------------------------------------------------
+  var dependencies_met_page_ready = setInterval (() => {
+    var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true : false;
+
+    if (atticFinished) {
+      const sliderEl = document.querySelector('#stacked_slider');
+
+      createPostersSlider(sliderEl);
+
+      clearInterval(dependencies_met_page_ready);
+    } // END pageVisible
+
+  }, 10); // END dependencies_met_page_ready
+
+}); // END Document READY
+</script>
+++++
+
+
+[role="mt-5"]
+==== Layout Expanding
+
+lorem:sentences[3]
+
+++++
+<div class="swiper-title mt-4"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Extendend Swiper · Layout Expanding </div>
+<div id="app" class="extended-app">
+  <!-- Style expanding-slide should wrap the swiper for Effect: Expanding  -->
+  <div id="expanding_slides" class="expanding-slide mt-4">
+    <div id="expanding_slides_swiper_container" class="swiper swiper-container">
+
+        <ul class="swiper-wrapper">
+            <!-- First slide -->
+            <li class="swiper-slide">
+                <!-- Expanding card container, required element -->
+                <div class="expanding-slide-container">
+                    <!-- Expanding card content that opens underneath the cover image on click -->
+                    <div class="expanding-slide-content">
+                        <div class="expanding-slide-content-inner">
+                            <!-- Put any required content here -->
+                            <div class="slide-content">
+                                <div class="slide-content-title">Jameson Street, CA90030</div>
+                                <div class="slide-content-avatars">
+                                    <img src="/assets/image/module/swiper/extended/expanding/image/avatar/avatar-1.jpg">
+                                </div>
+                                <div class="slide-content-rating">
+                                    <img src="/assets/image/pattern/rating/scalable/2-star.svg">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Expanding card cover, can contain any HTML content -->
+                    <div class="expanding-slide-cover">
+                        <img src="/assets/image/module/swiper/extended/expanding/image/tokyo.jpg">
+                        <div class="slide-cover-title">Tokyo</div>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Second slide -->
+            <li class="swiper-slide">
+                <!-- Expanding card container, required element -->
+                <div class="expanding-slide-container">
+                    <div class="expanding-slide-content">
+                        <div class="expanding-slide-content-inner">
+                            <div class="slide-content">
+                                <div class="slide-content-title">Jameson Street, CA90030</div>
+                                <div class="slide-content-avatars">
+                                    <img src="/assets/image/module/swiper/extended/expanding/image/avatar/avatar-1.jpg">
+                                </div>
+                                <div class="slide-content-rating">
+                                    <img src="/assets/image/pattern/rating/scalable/2-star.svg">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="expanding-slide-cover">
+                        <img src="/assets/image/module/swiper/extended/expanding/image/san-francisco.jpg">
+                        <div class="slide-cover-title">San Francisco</div>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Third slide -->
+            <li class="swiper-slide">
+                <!-- Expanding card container, required element -->
+                <div class="expanding-slide-container">
+                    <div class="expanding-slide-content">
+                        <div class="expanding-slide-content-inner">
+                            <div class="slide-content">
+                                <div class="slide-content-title">Jameson Street, CA90030</div>
+                                <div class="slide-content-avatars">
+                                    <img src="/assets/image/module/swiper/extended/expanding/image/avatar/avatar-1.jpg">
+                                </div>
+                                <div class="slide-content-rating">
+                                    <img src="/assets/image/pattern/rating/scalable/2-star.svg">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="expanding-slide-cover">
+                        <img src="/assets/image/module/swiper/extended/expanding/image/london.jpg">
+                        <div class="slide-cover-title">London</div>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Fourth slide -->
+            <li class="swiper-slide">
+                <!-- Expanding card container, required element -->
+                <div class="expanding-slide-container">
+                    <div class="expanding-slide-content">
+                        <div class="expanding-slide-content-inner">
+                            <div class="slide-content">
+                                <div class="slide-content-title">Jameson Street, CA90030</div>
+                                <div class="slide-content-avatars">
+                                    <img src="/assets/image/module/swiper/extended/expanding/image/avatar/avatar-1.jpg">
+                                </div>
+                                <div class="slide-content-rating">
+                                    <img src="/assets/image/pattern/rating/scalable/2-star.svg">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="expanding-slide-cover">
+                        <img src="/assets/image/module/swiper/extended/expanding/image/moscow.jpg">
+                        <div class="slide-cover-title">Moscow</div>
+                    </div>
+                </div>
+            </li>
+        </ul> <!-- END Swiper wrapper -->
+
+          <!-- Inner Pagination -->
+          <!-- div class="swiper-pagination-inner"></div -->
+
+        <!-- Outer pagination, NOT moved by SwiperJS Adapter (workaround) -->
+        <div class="swiper-pagination-outer"></div>
+
+    </div> <!-- END Swiper container -->
+  </div> <!-- END expanding_slides -->
+</div> <!-- END app -->
+++++
+
+++++
+<script>
+
+$(function() {
+
+  // ---------------------------------------------------------------------------
+  // Initialize Layout Expanding
+  // ---------------------------------------------------------------------------  
+  function createLayoutExpanding(el) {
+    const swiperEl = el.querySelector('.swiper');
+
+    const calcOffsets = (slideEl) => {
+      const coverEl = slideEl.querySelector('.expanding-slide-cover');
+      const contentEl = slideEl.querySelector('.expanding-slide-content');
+      if (!contentEl || !coverEl) return;
+
+      const { offsetWidth: coverWidth, offsetHeight: coverHeight } = coverEl;
+      slideEl.style.setProperty(
+        '--expanding-slide-cover-height',
+        `${coverHeight}px`,
+      );
+      const { offsetHeight: contentHeight, offsetWidth: contentWidth } = contentEl;
+      const props = {
+        '--expanding-slide-scale-x': (coverWidth / contentWidth) * 0.95,
+        '--expanding-slide-scale-y': (coverHeight / contentHeight) * 0.95,
+      };
+      Object.keys(props).forEach((prop) => {
+        slideEl.style.setProperty(prop, props[prop]);
+      });
+    };
+
+    const initEvents = (swiper) => {
+      swiper.slides.forEach((slideEl) => {
+        const containerEl = slideEl.querySelector(
+          '.expanding-slide-container',
+        );
+        const coverEl = slideEl.querySelector('.expanding-slide-cover');
+        const contentEl = slideEl.querySelector('.expanding-slide-content');
+        coverEl.expandingCollectionClickHandler = () => {
+          if (!contentEl || !slideEl.classList.contains('swiper-slide-active'))
+            return;
+          containerEl.classList.toggle('expanding-slide-opened');
+        };
+        coverEl.addEventListener(
+          'click',
+          coverEl.expandingCollectionClickHandler,
+        );
+      });
+    };
+
+    const removeEvents = (swiper) => {
+      swiper.slides.forEach((slideEl) => {
+        const coverEl = slideEl.querySelector('.expanding-slide-cover');
+        if (coverEl && coverEl.expandingCollectionClickHandler) {
+          coverEl.removeEventListener(
+            'click',
+            coverEl.expandingCollectionClickHandler,
+          );
+        }
+      });
+    };
+
+    const swiper = new Swiper(swiperEl, {
+      speed: 600,
+      pagination: {
+        el: '.swiper-pagination-outer',
+        type: 'bullets',
+        clickable: true
+      },
+      resistanceRatio: 0,
+      slidesPerView: 1,
+      // slidesPerGroup: 2,
+      // slidesPerView: 'auto',
+      centeredSlides: true,
+      on: {
+        init(s) {
+          s.slides.forEach((slideEl) => {
+            const coverImageEl = slideEl.querySelector(
+              '.expanding-slide-cover img',
+            );
+            if (coverImageEl && !coverImageEl.complete) {
+              coverImageEl.addEventListener('load', () => {
+                calcOffsets(slideEl);
+              });
+            }
+            calcOffsets(slideEl);
+          });
+          requestAnimationFrame(() => {
+            el.classList.add('expanding-slide-initialized');
+          });
+          initEvents(s);
+        },
+        slideChange(s) {
+          const openedContainerEl = s.wrapperEl.querySelector(
+            '.expanding-slide-opened',
+          );
+          if (openedContainerEl) {
+            openedContainerEl.classList.remove('expanding-slide-opened');
+          }
+        },
+        imagesReady(s) {
+          el.classList.remove('expanding-slide-initialized');
+          s.slides.forEach((slideEl) => {
+            calcOffsets(slideEl);
+          });
+          el.classList.add('expanding-slide-initialized');
+        },
+        resize(s) {
+          el.classList.remove('expanding-slide-initialized');
+          s.slides.forEach((slideEl) => {
+            calcOffsets(slideEl);
+          });
+          el.classList.add('expanding-slide-initialized');
+        },
+        beforeDestroy(s) {
+          removeEvents(s);
+        },
+      },
+    });
+
+    // return swiper;
+  } // END Expanding Effect
+
+  // ---------------------------------------------------------------------------
+  // Swiper initializer
+  // ---------------------------------------------------------------------------
+  var dependencies_met_page_ready = setInterval (() => {
+    var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true : false;
+
+    if (atticFinished) {
+      const sliderEl = document.querySelector('#expanding_slides');
+
+      createLayoutExpanding(sliderEl);
+//    createNeighborEffect(sliderEl);
+
+      clearInterval(dependencies_met_page_ready);
+    } // END pageVisible
+
+  }, 10); // END dependencies_met_page_ready
+
+}); // END Document READY
+
+</script>
+++++
+
+++++
+<style>
+</style>
+++++
+
+////
+[role="mt-5"]
+== Audio SwiperJS Apps
+
+lorem:sentences[5]
+////
+
+////
+[role="mt-5"]
+== Video SwiperJS Apps
+
+If only a *small* number of video sources should presented, the concept of
+controller based slders using Thumb Elements provide a quite *space-saving*
+way to do so.
+
+The J1 template system uses VideoJS to enable *mixed* video sliders. VideoJS
+for J1 supports VJS plugins for local Video like MP4 files or platforms like
+YouTube, Vimeo, or Dailymotion to play video *sources* from *different*
+providers.
+////
+
+////
+++++
+<div class="swiper-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Video Slider · Mixed Sources + Captions</div>
+<!-- Master Slider (top) -->
+<div id="master_slider_3" class="swiper swiper-container master-slider">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide swiper-no-swiping" data-slide-type="image">
+      <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-1.jpg" aria-label="Animals-1">
+      <div class="swp-caption-content">Image 1</div>
+    </div>    
+
+    <!-- div class="swiper-slide swiper-no-swiping" data-slide-type="video">
+      <video
+        id="peck_pocketed_video"
+        class="video-js vjs-theme-uno"
+        controls
+        width="640" height="360"
+        poster="/assets/video/poster/html5/peck_pocketed.jpg"
+        alt="title"
+        aria-label="title"
+        data-setup='{
+          "fluid" : true,
+          "sources": [{
+            "type": "video/mp4",
+            "src": "/assets/video//html5/peck_pocketed.mp4"
+          }],
+          "controlBar": {
+            "pictureInPictureToggle": false,
+            "skipButtons": {
+              "backward": 15,
+              "forward": 15
+            },
+            "volumePanel": {
+              "inline": false
+            }
+          }
+        }'
+      > </video>
+    </div -->
+
+    <div class="swiper-slide swiper-no-swiping" data-slide-type="video">
+      <video
+        id="peck_pocketed_video"
+        class="video-js vjs-theme-uno"
+        controls
+        width="640" height="360"
+        poster="//img.youtube.com/vi/1J2qz6B-PFY/maxresdefault.jpg"
+        data-setup='{
+          "fluid" : true,
+          "rel": 0,
+          "techOrder": [
+            "youtube", "html5"
+          ],
+          "sources": [{
+            "type": "video/youtube",
+            "src": "//youtube.com/watch?v=1J2qz6B-PFY"
+          }],
+          "controlBar": {
+            "pictureInPictureToggle": false,
+            "volumePanel": {
+              "inline": false
+            }
+          }
+        }'
+      >
+      </video>
+      <div class="swp-caption-content">Roni Sagi & Rhythm · AGT 2024 (YouTube)</div>
+    </div>
+
+    <div class="swiper-slide swiper-no-swiping" data-slide-type="image">
+      <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-2.jpg" aria-label="Animals-2">
+      <div class="swp-caption-content">Image 2</div>
+    </div>
+    <div class="swiper-slide swiper-no-swiping" data-slide-type="image">
+      <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-3.jpg" aria-label="Animals-3">
+      <div class="swp-caption-content">Image 3</div>
+    </div>
+  </div> <!-- END swiper-wrapper -->
+
+</div> <!-- END swiper-container -->
+
+<!-- Thumbs Slider (bottom) -->
+<div id="thumbs_slider_3" class="swiper swiper-container thumbs-slider thumbs-slider--bottom mt-1 mb-4">
+
+  <div class="swiper-wrapper">
+		<div class="swiper-slide">
+		  <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-1.jpg" aria-label="Animals-1">
+      <div class="swp-caption-content">Image 1</div>
+		</div>
+		<div class="swiper-slide">
+		  <!-- img src="/assets/video/poster/html5/peck_pocketed.jpg" aria-label="peck_pocketed" -->
+		  <img src="//img.youtube.com/vi/1J2qz6B-PFY/maxresdefault.jpg">
+      <div class="swp-caption-content">Roni Sagi & Rhythm · AGT 2024 (YouTube)</div>
+		</div>
+		<div class="swiper-slide">
+		  <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-2.jpg" aria-label="Animals-2">
+      <div class="swp-caption-content">Image 2</div>
+		</div>      
+		<div class="swiper-slide">
+		  <img src="/assets/image/module/swiper/extended/neighbor/image/free-animal-3.jpg" aria-label="Animals-3">
+		</div>
+	</div> <!-- END swiper-wrapper -->
+
+</div> <!-- END swiper-container -->
+
+<script>
+$(function() {
+
+  // ---------------------------------------------------------------------------
+  // Swiper initializer
+  // ---------------------------------------------------------------------------
+  var dependencies_met_page_ready = setInterval (() => {
+    var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true : false;
+
+    if (atticFinished) {
+
+      const VIDEO_PLAYING_STATE = {
+        "PLAYING":  "PLAYING",
+        "PAUSE":    "PAUSE",
+        "ENDED":    "ENDED"
+      }; 
+
+      var vjsPlayer;
+      var vjsOptions;
+      var piSkipButtons;
+
+      var vjsPlayerType   = 'native';
+      var videoPlayStatus = VIDEO_PLAYING_STATE.PAUSE;
+
+      piSkipButtons = {
+        enabled:            true,
+        backward:           30,
+        forward:            30,
+        backwardIndex:      0,
+        forwardIndex:       0,
+        surroundPlayButton: true
+      };
+
+      // Thumbs Slider (slave|bottom)
+      // -----------------------------------------------------------------------
+      const thumbsSlider3 = new Swiper("#thumbs_slider_3", {
+        direction: 'horizontal',
+        spaceBetween: 5,
+        slidesPerView: 3,
+        grabCursor: true,
+        watchSlidesProgress: true,
+        on: {
+          transitionStart: (swiper) => {
+            masterSlider3.slideTo(swiper.activeIndex);
+          }
+        }
+      });
+
+      // Initialize Master Slider
+      // -----------------------------------------------------------------------
+      // See: https://stackoverflow.com/questions/45468980/how-to-fix-event-conflicts-between-swiper-and-video-js
+      var masterSlider3 = new Swiper('#master_slider_3', {
+        autoHeight:       true,  // adapt height of the currently active slide.
+        direction:        'horizontal',
+        thumbs: {
+          swiper: thumbsSlider3,
+        },
+        on: {
+          afterInit: (swiper) => {
+            // do something
+          },
+          slideChangeTransitionStart: (swiper) => {
+            thumbsSlider3.slideTo(swiper.activeIndex);
+          },          
+          slideChangeTransitionEnd: (swiper) => {
+            var currentSlide      = $(swiper.slides[swiper.activeIndex]);
+            var currentSlideType  = currentSlide.data('slide-type');
+            // in case user click next before video ended
+            if (videoPlayStatus === VIDEO_PLAYING_STATE.PLAYING) {
+              vjsPlayer.pause();
+            }
+
+            switch (currentSlideType) {
+              case 'image':
+                //runNext();
+                break;
+              case 'video':
+                // vjsPlayer.currentTime(0);
+                // vjsPlayer.play();
+                videoPlayStatus = VIDEO_PLAYING_STATE.PLAYING;
+                break;
+              default:
+                throw new Error('invalid slide type');
+            }
+          }
+        }
+      });
+
+      // vjsPlayer.on('ended', function() {
+      //     next();
+      // });
+
+      // global function
+      // function prev() {
+      //   swiper.slidePrev();
+      // }
+
+      // function next() {
+      //   swiper.slideNext();
+      // }
+
+      // function runNext() {  
+      //   timeout = setTimeout(function () {
+      //     next()
+      //   }, waiting)
+      // }
+
+      // Initialize VideoJS player/s
+      // -----------------------------------------------------------------------
+      vjsOptions = {
+        plugins: {
+          skipButtons: {
+            backward:       30,
+            forward:        30,
+            backwardIndex:  0,
+            forwardIndex:   1
+          }
+        }
+      };
+      vjsPlayer = videojs('peck_pocketed_video', {});
+
+      // Add VJS plugins
+      // -----------------------------------------------------------------------
+      if (piSkipButtons.enabled) {
+        var backwardIndex = piSkipButtons.backwardIndex;
+        var forwardIndex  = piSkipButtons.forwardIndex;
+
+        // property 'surroundPlayButton' takes precendence
+        //
+        if (piSkipButtons.surroundPlayButton) {
+          var backwardIndex = 0;
+          var forwardIndex  = 1;
+        }
+
+        // plugin initialized with custom options
+        // See: https://videojs.com/guides/options/
+        vjsPlayer.skipButtons({
+          backwardIndex:  backwardIndex,
+          forwardIndex:   forwardIndex,
+          backward:       piSkipButtons.backward,
+          forward:        piSkipButtons.forward,
+        });
+      }
+
+      clearInterval(dependencies_met_page_ready);
+    } // END pageVisible
+  }, 10); // END dependencies_met_page_ready
+
+});
+</script>
+++++
+////
+
+ifeval::[{image-card-layout} == true]
+[role="mt-5"]
+[[image_card_layout]]
+==== Layout Image Cards
+
+- Responsive Card Slider Using HTML CSS & JavaScript
+- It contains beautiful cards in dark mode and 3D images.
+- Slider images with Swiper Js.
+- Developed first with the Mobile First methodology, then for desktop.
+- Compatible with all mobile devices and with a beautiful and pleasant user interface.
+
+// lorem:sentences[5]
+
+++++
+<!-- HTML -->
+<section class="swiper swiper-container mt-4 mb-8">
+  <div class="card__container swiper">
+
+    <div class="card__content">
+
+        <div class="swiper swiper-wrapper">
+          <article class="card__article swiper-slide">
+              <div class="card__image">
+                <img src="/assets/image/module/swiper/avatar/avatar-1.png" alt="image" class="card__img">
+                <div class="card__shadow"></div>
+              </div>
+
+              <div class="card__data">
+                <h3 class="card__name">Kell Dawx</h3>
+                <p class="card__description">
+                    Passionate about development and design, 
+                    I carry out projects at the request of users.
+                </p>
+
+                <a href="#" class="card__button">View More</a>
+              </div>
+          </article>
+
+          <article class="card__article swiper-slide">
+              <div class="card__image">
+                <img src="/assets/image/module/swiper/avatar/avatar-2.png" alt="image" class="card__img">
+                <div class="card__shadow"></div>
+              </div>
+
+              <div class="card__data">
+                <h3 class="card__name">Lotw Fox</h3>
+                <p class="card__description">
+                    Passionate about development and design, 
+                    I carry out projects at the request of users.
+                </p>
+
+                <a href="#" class="card__button">View More</a>
+              </div>
+          </article>
+
+          <article class="card__article swiper-slide">
+              <div class="card__image">
+                <img src="/assets/image/module/swiper/avatar/avatar-3.png" alt="image" class="card__img">
+                <div class="card__shadow"></div>
+              </div>
+
+              <div class="card__data">
+                <h3 class="card__name">Sara Mit</h3>
+                <p class="card__description">
+                    Passionate about development and design, 
+                    I carry out projects at the request of users.
+                </p>
+
+                <a href="#" class="card__button">View More</a>
+              </div>
+          </article>
+
+          <article class="card__article swiper-slide">
+              <div class="card__image">
+                <img src="/assets/image/module/swiper/avatar/avatar-4.png" alt="image" class="card__img">
+                <div class="card__shadow"></div>
+              </div>
+
+              <div class="card__data">
+                <h3 class="card__name">Jenny Wert</h3>
+                <p class="card__description">
+                    Passionate about development and design, 
+                    I carry out projects at the request of users.
+                </p>
+
+                <a href="#" class="card__button">View More</a>
+              </div>
+          </article>
+
+          <article class="card__article swiper-slide">
+              <div class="card__image">
+                <img src="/assets/image/module/swiper/avatar/avatar-5.png" alt="image" class="card__img">
+                <div class="card__shadow"></div>
+              </div>
+
+              <div class="card__data">
+                <h3 class="card__name">Lexa Kin</h3>
+                <p class="card__description">
+                    Passionate about development and design, 
+                    I carry out projects at the request of users.
+                </p>
+
+                <a href="#" class="card__button">View More</a>
+              </div>
+          </article>
+        </div>
+
+    </div>
+
+    <!-- Navigation buttons -->
+    <div class="swiper-button-next">
+        <i class="ri-arrow-right-s-line"></i>
+    </div>
+    
+    <div class="swiper-button-prev">
+        <i class="ri-arrow-left-s-line"></i>
+    </div>
+
+    <!-- Pagination -->
+    <div class="swiper-pagination-inner"></div>
+
+  </div>
+</section>
+++++
+
+++++
+<script>
+$(function() {
+  // ---------------------------------------------------------------------------
+  // Swiper initializer Layout News Cards
+  // ---------------------------------------------------------------------------
+  var dependencies_met_page_ready = setInterval (() => {
+    var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true : false;
+
+    if (atticFinished) {
+
+      let swiperCards = new Swiper(".card__content", {
+        loop: true,
+        spaceBetween: 12,
+        grabCursor: true,
+        pagination: {
+          el: ".swiper-pagination-inner",
+          clickable: true,
+          dynamicBullets: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+        breakpoints:{
+          600: {
+            slidesPerView: 2,
+          },
+          968: {
+            slidesPerView: 3,
+          },
+        },
+      });
+
+      clearInterval(dependencies_met_page_ready);
+    } // END pageVisible
+    
+  }, 10); // END dependencies_met_page_ready
+}); // END Swiper initializer Layout News Cards
+</script>    
+++++
+
+++++
+<style>
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  /*========== Colors ==========*/
+  /*Color mode HSL(hue, saturation, lightness)*/
+  --first-color: hsl(38, 92%, 58%);
+  --first-color-light: hsl(38, 100%, 78%);
+  --first-color-alt: hsl(32, 75%, 50%);
+  --second-color: hsl(195, 75%, 52%);
+  --dark-color: hsl(212, 40%, 12%);
+  --container-color: hsl(212, 42%, 20%);
+}
+
+/*=============== BASE ===============*/
+/*
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+*/
+
+/*=============== CARD ===============*/
+/*
+.swiper-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+*/
+
+.card__container {
+  /* padding-block: 5rem; */
+}
+
+.card__content {
+  margin-inline: 1.75rem;
+  border-radius: 1.25rem;
+  overflow: hidden;
+}
+
+.card__article {
+  width: 300px; /* Remove after adding swiper js */
+  border-radius: 1.25rem;
+  overflow: hidden;
+}
+
+.card__image {
+  position: relative;
+  background-color: var(--first-color-light);
+  padding-top: 1.5rem;
+  margin-bottom: -.75rem;
+}
+
+.card__data {
+  background-color: var(--container-color);
+  padding: 1.5rem 2rem;
+  /* border-radius: 1rem; */
+  text-align: center;
+  position: relative;
+  z-index: 10;
+}
+
+.card__img {
+  width: 180px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 5;
+}
+
+.card__shadow {
+  width: 200px;
+  height: 200px;
+  background-color: var(--first-color-alt);
+  border-radius: 50%;
+  position: absolute;
+  top: 3.75rem;
+  left: 0;
+  right: 0;
+  margin-inline: auto;
+  filter: blur(45px);
+}
+
+.card__name {
+  font-size: var(--h2-font-size);
+  color: var(--second-color);
+  margin-bottom: .75rem;
+}
+
+.card__description {
+  font-weight: 500;
+  margin-bottom: 1.75rem;
+  color: var(--bs-gray-100);
+}
+
+.card__button {
+  display: inline-block;
+  background-color: var(--first-color);
+  padding: .75rem 1.5rem;
+  border-radius: .25rem;
+  color: var(--dark-color);
+  font-weight: 600;
+}
+
+/* Swiper class */
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  content: "";
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  width: initial;
+  height: initial;
+  font-size: 3rem;
+  color: var(--second-color);
+  display: none;
+}
+
+.swiper-button-prev {
+  left: 0;
+}
+
+.swiper-button-next {
+  right: 0;
+}
+
+/*
+.swiper-pagination-bullet {
+  background-color: hsl(212, 32%, 40%);
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: var(--second-color);
+}
+*/
+
+/*=============== BREAKPOINTS ===============*/
+/* For small devices */
+@media screen and (max-width: 320px) {
+  .card__data {
+    padding: 1rem;
+  }
+}
+
+/* For medium devices */
+@media screen and (min-width: 768px) {
+  .card__content {
+    margin-inline: 3rem;
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: block;
+  }
+}
+
+/* For large devices */
+@media screen and (min-width: 1120px) {
+  .card__container {
+    max-width: 1120px;
+  }
+
+  .swiper-button-prev {
+    left: -1rem;
+  }
+  .swiper-button-next {
+    right: -1rem;
+  }
+}
+</style>
+++++
+endif::[]
+
+////
+[role="mt-5"]
+[[image_news_card_layout]]
+==== Layout News Cards
+
+lorem:sentences[5]
+
+++++
+<div class="wrapper">
+  <div class="background">
+    <!-- img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1537132206/news-slider/background.webp" alt="" -->
+  </div>
+  
+  <div class="item-bg"></div>
+
+  <div class="news-slider">
+    <div class="news-slider__wrp swiper-wrapper">
+      <div class="news-slider__item swiper-slide">
+        <a href="#" class="news__item">
+          <div class="news-date">
+            <span class="news-date__title">24</span>
+            <span class="news-date__txt">May</span>
+          </div>
+          <div class="news__title">
+            Lorem Ipsum Dolor Sit Amed
+          </div>
+
+          <p class="news__txt">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...
+          </p>
+
+          <div class="news__img">
+            <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1537132205/news-slider/item-2.webp" alt="news">
+          </div>
+        </a>
+      </div>
+
+      <div class="news-slider__item swiper-slide">
+        <a href="#" class="news__item">
+          <div class="news-date">
+            <span class="news-date__title">25</span>
+            <span class="news-date__txt">May</span>
+          </div>
+          <div class="news__title">
+            Lorem Ipsum Dolor Sit Amed
+          </div>
+
+          <p class="news__txt">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...
+          </p>
+
+          <div class="news__img">
+            <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1537132205/news-slider/item-3.webp" alt="news">
+          </div>
+        </a>
+      </div>
+
+      <div class="news-slider__item swiper-slide">
+        <a href="#" class="news__item">
+          <div class="news-date">
+            <span class="news-date__title">26</span>
+            <span class="news-date__txt">May</span>
+          </div>
+          <div class="news__title">
+            Lorem Ipsum Dolor Sit Amed
+          </div>
+
+          <p class="news__txt">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...
+          </p>
+
+          <div class="news__img">
+            <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1537132205/news-slider/item-4.webp" alt="news">
+          </div>
+        </a>
+      </div>
+
+      <div class="news-slider__item swiper-slide">
+        <a href="#" class="news__item">
+          <div class="news-date">
+            <span class="news-date__title">27</span>
+            <span class="news-date__txt">May</span>
+          </div>
+          <div class="news__title">
+            Lorem Ipsum Dolor Sit Amed
+          </div>
+
+          <p class="news__txt">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...
+          </p>
+
+          <div class="news__img">
+            <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1537132205/news-slider/item-2.webp" alt="news">
+          </div>
+        </a>
+      </div>
+
+      <div class="news-slider__item swiper-slide">
+        <a href="#" class="news__item">
+          <div class="news-date">
+            <span class="news-date__title">28</span>
+            <span class="news-date__txt">May</span>
+          </div>
+          <div class="news__title">
+            Lorem Ipsum Dolor Sit Amed
+          </div>
+
+          <p class="news__txt">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...
+          </p>
+
+          <div class="news__img">
+            <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1537132205/news-slider/item-5.webp" alt="news">
+          </div>
+        </a>
+      </div>
+
+      <div class="news-slider__item swiper-slide">
+        <a href="#" class="news__item">
+          <div class="news-date">
+            <span class="news-date__title">29</span>
+            <span class="news-date__txt">May</span>
+          </div>
+          <div class="news__title">
+            Lorem Ipsum Dolor Sit Amed
+          </div>
+
+          <p class="news__txt">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...
+          </p>
+
+          <div class="news__img">
+            <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1537132205/news-slider/item-4.webp" alt="news">
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- div class="news-slider__ctr">
+
+      <div class="news-slider__arrows">
+        <button class="news-slider__arrow news-slider-prev">
+          <span class="icon-font">
+            <svg class="icon icon-arrow-left"><use xlink:href="#icon-arrow-left"></use></svg>
+          </span>
+        </button>
+        <button class="news-slider__arrow news-slider-next">
+          <span class="icon-font">
+            <svg class="icon icon-arrow-right"><use xlink:href="#icon-arrow-right"></use></svg>
+          </span>
+        </button>
+      </div>
+
+      <div class="news-slider__pagination"></div>
+
+    </div -->
+
+  </div>
+
+</div>
+
+<svg hidden="hidden">
+  <defs>
+    <symbol id="icon-arrow-left" viewBox="0 0 32 32">
+      <title>arrow-left</title>
+      <path d="M0.704 17.696l9.856 9.856c0.896 0.896 2.432 0.896 3.328 0s0.896-2.432 0-3.328l-5.792-5.856h21.568c1.312 0 2.368-1.056 2.368-2.368s-1.056-2.368-2.368-2.368h-21.568l5.824-5.824c0.896-0.896 0.896-2.432 0-3.328-0.48-0.48-1.088-0.704-1.696-0.704s-1.216 0.224-1.696 0.704l-9.824 9.824c-0.448 0.448-0.704 1.056-0.704 1.696s0.224 1.248 0.704 1.696z"></path>
+    </symbol>
+    <symbol id="icon-arrow-right" viewBox="0 0 32 32">
+      <title>arrow-right</title>
+      <path d="M31.296 14.336l-9.888-9.888c-0.896-0.896-2.432-0.896-3.328 0s-0.896 2.432 0 3.328l5.824 5.856h-21.536c-1.312 0-2.368 1.056-2.368 2.368s1.056 2.368 2.368 2.368h21.568l-5.856 5.824c-0.896 0.896-0.896 2.432 0 3.328 0.48 0.48 1.088 0.704 1.696 0.704s1.216-0.224 1.696-0.704l9.824-9.824c0.448-0.448 0.704-1.056 0.704-1.696s-0.224-1.248-0.704-1.664z"></path>
+    </symbol>
+  </defs>
+</svg>
+++++
+
+++++
+<script>
+$(function() {
+  // ---------------------------------------------------------------------------
+  // Swiper initializer Layout News Cards
+  // ---------------------------------------------------------------------------
+  var dependencies_met_page_ready = setInterval (() => {
+    var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true : false;
+
+    if (atticFinished) {
+      var bg = document.querySelector('.item-bg');
+      var items = document.querySelectorAll('.news__item');
+      var item = document.querySelector('.news__item');
+
+      function cLog(content) {
+          console.log(content)
+      }
+
+      if($(window).width() > 800) {
+          $(document).on("mouseover", ".news__item", function (_event, _element) {
+
+              var newsItem = document.querySelectorAll('.news__item');
+              newsItem.forEach(function (element, index) {
+                  element.addEventListener('mouseover', function () {
+                      var x = this.getBoundingClientRect().left;
+                      var y = this.getBoundingClientRect().top;
+                      var width = this.getBoundingClientRect().width;
+                      var height = this.getBoundingClientRect().height;
+
+                      $('.item-bg').addClass('active');
+                      $('.news__item').removeClass('active');
+                      // $('.news__item').removeClass('active');
+
+
+                      bg.style.width = width + 'px';
+                      bg.style.height = height + 'px';
+                      bg.style.transform = 'translateX(' + x + 'px ) translateY(' + y + 'px)';
+                  });
+
+                  element.addEventListener('mouseleave', function () {
+                      $('.item-bg').removeClass('active');
+                      $('.news__item').removeClass('active');
+                  });
+
+              });
+
+          });
+      }
+
+
+      var swiper = new Swiper('.news-slider', {
+          effect: 'coverflow',
+          grabCursor: true,
+          loop: true,
+          centeredSlides: true,
+          keyboard: true,
+          spaceBetween: 0,
+          slidesPerView: 'auto',
+          speed: 300,
+          coverflowEffect: {
+              rotate: 0,
+              stretch: 0,
+              depth: 0,
+              modifier: 3,
+              slideShadows: false
+          },
+          breakpoints: {
+              480: {
+                  spaceBetween: 0,
+                  centeredSlides: true
+              }
+          },
+          simulateTouch: true,
+          // navigation: {
+          //     nextEl: '.news-slider-next',
+          //     prevEl: '.news-slider-prev'
+          // },
+          pagination: {
+              el: '.news-slider__pagination',
+              clickable: true
+          },
+          on: {
+              init: function () {
+                  var activeItem = document.querySelector('.swiper-slide-active');
+
+                  var sliderItem = activeItem.querySelector('.news__item');
+
+                  $('.swiper-slide-active .news__item').addClass('active');
+
+                  var x = sliderItem.getBoundingClientRect().left;
+                  var y = sliderItem.getBoundingClientRect().top;
+                  var width = sliderItem.getBoundingClientRect().width;
+                  var height = sliderItem.getBoundingClientRect().height;
+
+
+                  $('.item-bg').addClass('active');
+
+                  bg.style.width = width + 'px';
+                  bg.style.height = height + 'px';
+                  bg.style.transform = 'translateX(' + x + 'px ) translateY(' + y + 'px)';
+              }
+          }
+      });
+
+      swiper.on('touchEnd', function () {
+          $('.news__item').removeClass('active');
+          $('.swiper-slide-active .news__item').addClass('active');
+      });
+
+      swiper.on('slideChange', function () {
+          $('.news__item').removeClass('active');
+      });
+
+      swiper.on('slideChangeTransitionEnd', function () {
+          $('.news__item').removeClass('active');
+          var activeItem = document.querySelector('.swiper-slide-active');
+
+          var sliderItem = activeItem.querySelector('.news__item');
+
+          $('.swiper-slide-active .news__item').addClass('active');
+
+          var x = sliderItem.getBoundingClientRect().left;
+          var y = sliderItem.getBoundingClientRect().top;
+          var width = sliderItem.getBoundingClientRect().width;
+          var height = sliderItem.getBoundingClientRect().height;
+
+
+          $('.item-bg').addClass('active');
+
+          bg.style.width = width + 'px';
+          bg.style.height = height + 'px';
+          bg.style.transform = 'translateX(' + x + 'px ) translateY(' + y + 'px)';
+      });
+
+      clearInterval(dependencies_met_page_ready);
+    } // END pageVisible
+    
+  }, 10); // END dependencies_met_page_ready
+}); // END Swiper initializer Layout News Cards
+</script>    
+++++
+
+++++
+<style>
+icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+
+/*
+.background {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
+.background:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(45deg, rgba(209, 0, 42, 0.6) 0%, #0E5DC4 100%);
+  opacity: 0.9;
+}
+
+.background img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  user-select: none;
+}
+*/
+
+.item-bg {
+  width: 300px;
+  height: 500px;
+  position: absolute;
+  top: 30px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 6px 26px 6px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  transition: all 0.3s;
+  left: -30px;
+}
+
+.item-bg.active {
+  left: 0;
+  top: 0;
+  opacity: 1;
+}
+
+.news-slider {
+  z-index: 2;
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 60px;
+}
+
+@media screen and (max-width: 1300px) {
+  .news-slider {
+    max-width: 1000px;
+  }
+}
+@media screen and (max-width: 576px) {
+  .news-slider {
+    margin-top: 45px;
+  }
+}
+
+.news-slider__wrp {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  z-index: 2;
+}
+
+.news-slider__item {
+  width: 400px;
+  flex-shrink: 0;
+}
+
+@media screen and (max-width: 992px) {
+  .news-slider__item {
+    width: 340px;
+  }
+}
+
+.news-slider__item.swiper-slide {
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+}
+
+.news-slider__item.swiper-slide-active, .news-slider__item.swiper-slide-prev, .news-slider__item.swiper-slide-next {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.news-slider__ctr {
+  position: relative;
+  z-index: 12;
+}
+
+.news-slider__arrow {
+  background: #fff;
+  border: none;
+  display: inline-flex;
+  width: 50px;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 6px 26px 6px rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  z-index: 12;
+  cursor: pointer;
+  outline: none !important;
+}
+
+.news-slider__arrow:focus {
+  outline: none !important;
+}
+
+.news-slider__arrow .icon-font {
+  display: inline-flex;
+}
+
+.news-slider__arrow.news-slider-prev {
+  left: 15px;
+  transform: translateY(-50%);
+}
+
+.news-slider__arrow.news-slider-next {
+  right: 15px;
+  transform: translateY(-50%);
+}
+
+.news-slider__pagination {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.news-slider__pagination .swiper-pagination-bullet {
+  width: 13px;
+  height: 10px;
+  display: inline-block;
+  background: #fff;
+  opacity: 0.2;
+  margin: 0 5px;
+  border-radius: 20px;
+  transition: opacity 0.5s, background-color 0.5s, width 0.5s;
+  transition-delay: 0.5s, 0.5s, 0s;
+}
+
+.news-slider__pagination .swiper-pagination-bullet-active {
+  opacity: 1;
+  background: #ffffff;
+  width: 100px;
+  transition-delay: 0s;
+}
+
+@media screen and (max-width: 576px) {
+  .news-slider__pagination .swiper-pagination-bullet-active {
+    width: 70px;
+  }
+}
+
+.news__item {
+  padding: 40px;
+  color: #fff;
+  border-radius: 10px;
+  display: block;
+  transition: all 0.3s;
+}
+
+@media screen and (min-width: 800px) {
+  .news__item:hover {
+    color: #222222;
+    transition-delay: 0.1s;
+  }
+  .news__item:hover .news-date, .news__item:hover .news__title, .news__item:hover .news__txt {
+    opacity: 1;
+    transition-delay: 0.1s;
+  }
+  .news__item:hover .news__img {
+    box-shadow: none;
+  }
+}
+
+.news__item.active {
+  color: #222222;
+}
+
+.news__item.active .news-date, .news__item.active .news__title, .news__item.active .news__txt {
+  opacity: 1;
+}
+
+.news__item.active .news__img {
+  box-shadow: none;
+}
+
+@media screen and (max-width: 992px) {
+  .news__item {
+    padding: 30px;
+  }
+}
+@media screen and (max-width: 576px) {
+  .news__item {
+    padding: 20px;
+  }
+}
+
+.news-date {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid;
+  display: inline-block;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+@media screen and (max-width: 576px) {
+  .news-date {
+    margin-bottom: 10px;
+    display: inline-flex;
+    align-items: center;
+    padding-bottom: 0;
+  }
+}
+
+.news-date__title {
+  display: block;
+  font-size: 32px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 576px) {
+  .news-date__title {
+    margin-right: 10px;
+  }
+}
+
+.news-date__txt {
+  font-size: 16px;
+}
+
+.news__title {
+  font-size: 25px;
+  font-weight: 500;
+  opacity: 0.7;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  transition: opacity 0.3s;
+}
+
+@media screen and (max-width: 576px) {
+  .news__title {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+}
+
+.news__txt {
+  margin: 10px 0;
+  line-height: 1.6em;
+  font-size: 15px;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+.news__img {
+  border-radius: 10px;
+  box-shadow: 0 6px 26px 6px rgba(0, 0, 0, 0.25);
+  height: 200px;
+  margin-top: 30px;
+  width: 100%;
+  transition: all 0.3s;
+  transform-origin: 0% 0%;
+}
+
+@media screen and (max-width: 576px) {
+  .news__img {
+    height: 180px;
+    margin-top: 20px;
+  }
+}
+
+.news__img img {
+  max-width: 100%;
+  border-radius: 10px;
+  height: 100%;
+  width: 100%;
+}
+</style>
+++++
+////

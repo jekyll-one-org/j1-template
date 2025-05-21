@@ -5,7 +5,7 @@
 # Product/Info:
 # https://jekyll.one
 #
-# Copyright (C) 2023, 2024 Juergen Adams
+# Copyright (C) 2023-2025 Juergen Adams
 #
 # J1 Template is licensed under the MIT License.
 # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
@@ -42,8 +42,8 @@ settings:
 
       id:                               jg_old_times
       type:                             image
-      image_base_path:                  /assets/image/modules/gallery/old_times
-      thumb_base_path:                  /assets/image/modules/gallery/old_times
+      image_base_path:                  /assets/image/module/swiper/old_times
+      thumb_base_path:                  /assets/image/module/swiper/old_times
 
       # ------------------------------------------------------------------------
       # Justified Gallery settings
@@ -114,8 +114,8 @@ settings:
 
       id:                               jg_mega_cities
       type:                             image
-      image_base_path:                  /assets/image/modules/gallery/mega_cities
-      thumb_base_path:                  /assets/image/modules/gallery/mega_cities
+      image_base_path:                  /assets/image/module/swiper/mega_cities
+      thumb_base_path:                  /assets/image/module/swiper/mega_cities
 
       # ------------------------------------------------------------------------
       # Justified Gallery settings

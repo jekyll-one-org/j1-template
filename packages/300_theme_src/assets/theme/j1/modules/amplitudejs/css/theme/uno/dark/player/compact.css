@@ -14,7 +14,7 @@
 */
 
 /* 1. Base
-# --------------------------------------------------------- */
+# ------------------------------------------------------------------------------ */
 
 .compact-player {
   width: 500px;
@@ -35,23 +35,22 @@
 }
 
 /* 2. Components
-# --------------------------------------------------------- */
+# ------------------------------------------------------------------------------ */
 
 /* Player TOP
 # --------------------------------------------------------- */
-div.player-top {
+.player-top {
   position: relative;
 }
 
 /* jadams, 2024-11-04: Overload user agent styles for width|height */
-div.player-top
-img[data-amplitude-song-info="cover_art_url"] {
+.player-top img[data-amplitude-song-info="cover_art_url"] {
   width: 498px;    /* size of cover image (rendered) - 1px borders left|right */
   height: auto;
   object-fit: cover;
 }
 
-div.compact-player-header {
+.compact-player-header {
   position: relative;
   padding: 15px;
   cursor: pointer;
@@ -67,6 +66,7 @@ div.compact-player-header {
   left: 15px;
 }
 
+/*
 .compact-player-header-arrows.arrow-down {
   background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/up.svg") no-repeat;
 }
@@ -74,9 +74,34 @@ div.compact-player-header {
 .compact-player-header-arrows.arrow-up {
   background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/down.svg") no-repeat;
 }
+*/
+
 
 /* Player MIDDLE
 # --------------------------------------------------------- */
+
+.compact-player-play-pause {
+  display: inline-block;
+  user-select: none;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+.compact-player-play-pause:hover {
+  opacity: 0.5;
+}
+.compact-player-play-pause:focus:not(:focus-visible) {
+  outline: none;
+}
+div.compact-player-play-pause.amplitude-paused {
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/play.svg") no-repeat;
+}
+div.compact-player-play-pause.amplitude-playing {
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/pause.svg") no-repeat;
+}
+
+
 div#compact_player_control_container {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -118,7 +143,7 @@ div.amplitude-mute {
   cursor: pointer;
   width: 25px;
   height: 19px;
-  margin-left: 40px;
+  margin-left: 50px;
 }
 
 div#compact_player_control_container
@@ -180,7 +205,7 @@ div#compact_player_shuffle.amplitude-shuffle-on {
 
 div.compact-player-middle
 div.compact-player-controls-container
-div#compact_player_previous {
+div.compact-player-previous {
   display: inline-block;
   cursor: pointer;
   vertical-align: middle;
@@ -192,7 +217,7 @@ div#compact_player_previous {
 
 div.compact-player-middle
 div.compact-player-controls-container
-div#compact_player_previous {
+div.compact-player-previous {
   display: inline-block;
   cursor: pointer;
   height: 24px;
@@ -204,7 +229,7 @@ div#compact_player_previous {
 
 div.compact-player-middle
 div.compact-player-controls-container
-div#compact_player_previous:hover {
+div.compact-player-previous:hover {
   opacity: 0.5;
 }
 
@@ -228,7 +253,7 @@ div.compact-player-skip-backward:hover {
 
 div.compact-player-middle
 div.compact-player-controls-container
-div#compact_player_play_pause {
+div.compact-player-play-pause {
   display: inline-block;
   cursor: pointer;
   width: 60px;
@@ -274,7 +299,7 @@ div.compact-player-skip-forward:hover {
 
 div.compact-player-middle
 div.compact-player-controls-container
-div#compact_player_next {
+div.compact-player-next {
   display: inline-block;
   cursor: pointer;
   height: 24px;
@@ -287,7 +312,7 @@ div#compact_player_next {
 
 div.compact-player-middle
 div.compact-player-controls-container
-div#compact_player_next:hover {
+div.compact-player-next:hover {
   opacity: .5;
 }
 
@@ -393,12 +418,29 @@ Bootstrap (BS) grid breakpoints
     max-width: -moz-available; /* Firefox */
   }
 
+  div.compact-player-playlist {
+    width: calc(100% - 1px); 
+  }
+
+  div.compact-player-volume-container
   input[type=range].amplitude-volume-slider {
+    appearance: none;
     width: calc(100% - 100px);
   }
 
-  div.compact-player-playlist {
-    width: calc(100% - 1px); 
+  div.compact-player-volume-container
+  input[type=range].amplitude-volume-slider::-webkit-slider-thumb {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    margin-top: -15px;
+  }
+  div.compact-player-volume-container
+  input[type=range].amplitude-volume-slider::-moz-slider-thumb {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    margin-top: -15px;
   }
 
 }
@@ -507,17 +549,53 @@ span.song-name {
 }
 
 div.compact-player-playlist
+div.playlist-screen-controls
+div.playlist-screen-meta-container
+span.amplitude-audio-info {
+    float: right;
+    margin-right: -130px;
+}
+
+/*
+div.compact-player-playlist
+div.playlist-screen-controls
+div.playlist-screen-meta-container
+span.audio-rating {
+  float: right;
+  margin-right: -100px;
+  margin-top: 10px;
+}
+*/
+
+div.screen-controls-compact-player
+div.playlist-screen-meta-container
+span.audio-rating {
+  display: flex;
+  float: right;
+  margin-top: 10px;
+  margin-right: -100px;
+}
+
+/*
+div.screen-controls-large-player
+div.playlist-screen-meta-container
+span.audio-rating {
+  display: flex;
+  float: right;
+  margin-top: 10px;
+  margin-right: -48px;
+}
+*/
+
+div.compact-player-playlist
 div.compact-player-title-list
 div.song
 div.song-meta-container
 span.audio-rating {
   display: flex;
-  align-items: center;
   float: right;
-  font-size: 18px;
-  margin-top: -24px;
-  margin-right: -20px;
-  color: var(--ajs-theme-uno--gray-400);
+  margin-top: -17px;
+  margin-right: -96px;
 }
 
 div.compact-player-playlist
@@ -537,8 +615,8 @@ div.compact-player-title-list
 div.song
 span.audio-duration {
   float: right;
-  margin-top: -46px;
-  margin-right: -108px;
+  margin-top: -40px;
+  margin-right: -93px;
   font-family: "Lato", sans-serif;
   font-size: 16px;
   color: var(--ajs-theme-uno--gray-300);
@@ -565,6 +643,12 @@ span.audio-info {
   margin-top: -24px;
   margin-right: -110px;
 }
+
+.amplitude-audio-info-compact-player {
+  float: right;
+  margin-right: -128px;
+}
+
 
 div.compact-player-playlist
 div.compact-player-title-list
@@ -705,6 +789,17 @@ div.list-next:hover {
   opacity: 0.5;
 }
 
+div.compact-player-volume-container
+input[type=range].amplitude-volume-slider {
+    float: left;
+    height: 1px;
+    margin-top: 10px;
+    margin-left: 5px;
+    width: calc(100% - 165px);
+    background: transparent;
+}
+
+
 
 /* 5. Themes
 # ------------------------------------------------------------------------------ */
@@ -714,7 +809,6 @@ div.list-next:hover {
 
 /* 7. Vendors
 # ------------------------------------------------------------------------------ */
-
 
 /* 8. Animations
 # ------------------------------------------------------------------------------ */

@@ -19,7 +19,7 @@ categories:                             [ About ]
 tags:                                   [ Issues ]
 
 image:
-  path:                                 /assets/image/modules/attics/1920x1280/j1-starter-mockup-1.jpg
+  path:                                 /assets/image/module/attic/1920x1280/j1-starter-mockup-1.jpg
   width:                                1920
   height:                               1280
 
@@ -31,7 +31,7 @@ resources:                              [ animate ]
 resource_options:
   - attic:
       slides:
-        - url:                          /assets/image/modules/attics/1920x1280/j1-starter-mockup-1.jpg
+        - url:                          /assets/image/module/attic/1920x1280/j1-starter-mockup-1.jpg
           alt:                          J1 Template Mockup
 ---
 
