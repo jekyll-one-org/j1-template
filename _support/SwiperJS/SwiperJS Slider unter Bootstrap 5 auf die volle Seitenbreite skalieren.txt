@@ -1,0 +1,44 @@
+Wie kann man einen SwiperJS Slider unter Bootstrap 5 auf die volle
+Seitenbreite skalieren
+
+Perplexity
+--------------------------------------------------------------------------------
+
+Um sicherzustellen, dass der SwiperJS Slider unter Bootstrap 5 vollständig
+die Seitenbreite einnimmt, musst du sicherstellen, dass der Slider **nicht** 
+durch Bootstrap-Container (wie `.container`, `.container-fluid`, `.row` oder `.col-*`)
+in seiner Breite eingeschränkt wird. 
+
+**Empfohlene Vorgehensweise:**
+
+- Platziere den Swiper-Slider außerhalb aller Bootstrap-Container, damit
+  er nicht von deren Maximalbreite begrenzt wird.
+- Weise dem Swiper-Element per CSS die volle Viewport-Breite zu, z.B.
+  mit `width: 100vw;` und setze `margin-left: calc(-50vw + 50%);`, um
+  ihn bei Bedarf mittig auszurichten.
+- Achte darauf, dass kein zusätzliches Padding oder Margin von Bootstrap
+  Klassen auf das Swiper-Element wirkt.
+
+**Beispiel:**
+
+```html
+    Slide 1
+    Slide 2
+    Slide 3
+```
+
+```css
+.swiper {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}
+```
+
+Damit nimmt der Swiper die komplette Seitenbreite ein, unabhängig von
+Bootstrap-Containern in der restlichen Seite[1].
+
+Citations:
+[1] https://www.youtube.com/watch?v=ZQmeHTB-DQ8
+
+---
+Antwort von Perplexity: pplx.ai/share

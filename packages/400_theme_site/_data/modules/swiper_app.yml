@@ -144,6 +144,73 @@ settings:
                                           console.log ('\n' + 'Entered event: afterInit');
                                         }
 
+    # --------------------------------------------------------------------------
+    # IMAGE Swiper|Layout Base, Tester
+    # --------------------------------------------------------------------------
+    #
+    - swiper:
+
+      # ------------------------------------------------------------------------
+      # GENERAL Options
+      # ------------------------------------------------------------------------
+      #
+      enabled:                          true
+      id:                               attic_swiper
+      layout:                           image/base
+      playlist:                         attic_swiper_base
+      swiper_classes:                   false
+      container_classes:                false
+      wrapper_styles:                   false
+
+      # ------------------------------------------------------------------------
+      # CAPTION Options
+      # ------------------------------------------------------------------------
+      #
+      captions:                             
+        enabled:                        false
+        css_class:                      swp-caption-content
+
+      # ------------------------------------------------------------------------
+      # CORE Options
+      # ------------------------------------------------------------------------
+      #
+      parameters:
+        grabCursor:                     false
+        loop:                           false
+
+      # ------------------------------------------------------------------------
+      # MODULE Options
+      # ------------------------------------------------------------------------
+      #
+      module_settings:
+        # navigation:
+        #   nextEl:                       .swiper-button-next
+        #   prevEl:                       .swiper-button-prev
+        # pagination:
+        #   el:                           .swiper-pagination-outer
+        #   clickable:                    true
+        # renderBullet:                 function (index, className) { return `<span class="${className}"> ${++index} </span>`; }
+
+      # ------------------------------------------------------------------------
+      # EVENT Options
+      # ------------------------------------------------------------------------
+      #
+      events:
+        enabled:                        false
+        init: >
+                                        function (swiper) { var slideHeight = 300; swiper.slides.forEach(slide => { slide.style.height = `${slideHeight}px`; }); }
+
+      # ------------------------------------------------------------------------
+      # LIGHTBOX Options
+      # ------------------------------------------------------------------------
+      #
+      lightbox:
+
+        # ----------------------------------------------------------------------
+        # GENERAL Options
+        # ----------------------------------------------------------------------
+        #
+        enabled:                        false
 
     # --------------------------------------------------------------------------
     # IMAGE Swiper

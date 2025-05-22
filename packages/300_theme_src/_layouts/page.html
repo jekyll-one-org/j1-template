@@ -59,6 +59,7 @@ debug:                                  false                                   
   ------------------------------------------------------------------------------ {% endcomment %}
   <!-- [INFO   ] [j1.layout.page.html                    ] [ call content_writer for region: 'body-main' ] -->
   <div id="content" class="container mb-5">
+  <!-- div id="content" class="container-fluid g-5 mb-5" -->
     {% include  {{content_writer}} region='body-main' items=lanes_collate %}
   </div>
   <!-- [INFO   ] [j1.layout.page.html                    ] [ end content_writer processing for region: 'body-main' ] -->

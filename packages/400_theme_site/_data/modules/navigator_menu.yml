@@ -463,12 +463,16 @@
       icon:                             ab-testing
       dropdown:
 
-        - title:                        J1 Amplitude App (YouTube)
-          href:                         /pages/public/tools/tester/amplitude_app_yt/
+        - title:                        J1 Swiper
+          href:                         /pages/public/tools/tester/swiper/
           icon:                         test-tube
 
         - title:                        J1 Swiper App
           href:                         /pages/public/tools/tester/swiper_app/
+          icon:                         test-tube
+
+        - title:                        J1 Amplitude App (YouTube)
+          href:                         /pages/public/tools/tester/amplitude_app_yt/
           icon:                         test-tube
 
 #       - title:                        Lazy Loader
