@@ -1,0 +1,60 @@
+Welche aktuellen Templates für Jekyll verenden Bootstrap 5 und sind
+voll konfigurierbar? Wie und wo kann man die Templates herunterladen?
+
+Gemini
+--------------------------------------------------------------------------------
+// https://gemini.google.com/app/c2a2a5f96eb9513a
+
+
+Es gibt einige aktuelle Jekyll-Templates, die Bootstrap 5 verwenden und als
+voll konfigurierbar gelten. Hier sind einige Optionen und wo Sie sie
+herunterladen können:
+
+**Kostenlose und Open-Source Templates:**
+
+  * **Jekyll One:** Dieses Template ist speziell für komplexere Webseiten konzipiert und bietet viele zusätzliche Module für Business- oder Dokumentationsseiten. Es basiert auf Bootstrap 5 und ist sehr konfigurierbar.
+      * **Download:** Sie können es direkt von der [Jekyll One Webseite](https://starter.jekyll.one/) herunterladen oder das zugehörige [GitHub Repository](https://www.google.com/search?q=https://github.com/jekyll-one/jekyll-one) nutzen. Es gibt auch eine "Rocketstart" Option für eine schnelle Einrichtung.
+  * **Jekyll Bootstrap Theme:** Ein einfaches, aber erweiterbares Jekyll-Theme, das auf Bootstrap 5 basiert. Es unterstützt GitHub Pages und Bootstrap Icons.
+      * **Download:** Verfügbar als Gem auf [RubyGems](https://www.google.com/search?q=https://rubygems.org/gems/jekyll-bootstrap-theme) und als [GitHub Repository](https://github.com/jonaharagon/jekyll-bootstrap-theme).
+  * **Jekyll-Bootstrap-5-Template:** Ein grundlegendes Template-Repository, um eine Bootstrap 5 Webseite mit Jekyll auf GitHub Pages (oder jedem anderen Hoster) zu erstellen. Es basiert auf dem Bootstrap Starter Template.
+      * **Download:** Sie können dieses Template direkt von [GitHub](https://github.com/JackieGable/Jekyll-Bootstrap-5-Template) nutzen, indem Sie auf den grünen "Use this template" Button klicken.
+  * **Petridish:** Ein Jekyll-Theme speziell für Webseiten von Forschungsprojekten, das Bootstrap 5 verwendet.
+      * **Download:** Verfügbar auf [Jekyll Themes](https://www.google.com/search?q=https://jekyll-themes.com/themes/petridish/).
+  * **Minima Reboot:** Eine responsive Bootstrap-Portierung des Standard-Jekyll-Themes Minima.
+      * **Download:** Finden Sie es auf [Jekyll Themes](https://www.google.com/search?q=https://jekyll-themes.com/themes/minima-reboot/).
+  * **Jekyll Bootstrap Github Pages:** Ein komplettes Jekyll-Template mit Bootstrap 5, das speziell für GitHub Pages entwickelt wurde.
+      * **Download:** Verfügbar auf [Jekyll Themes](https://www.google.com/search?q=https://jekyll-themes.com/themes/jekyll-bootstrap-github-pages/).
+
+**Premium Templates:**
+
+  * **Jekyll Origin:** Ein Premium-Blog-Theme mit Bootstrap 5, das viele Konfigurationsmöglichkeiten bietet (Farben, Fonts, Menüs, Header etc.).
+      * **Download:** Erhältlich auf [Zerostatic Themes](https://www.zerostatic.io/theme/jekyll-origin/) (kostenpflichtig).
+  * Einige der auf [Themeix](https://themeix.com/blog/best-jekyll-portfolio-themes/) gelisteten Portfolio-Themes, die Bootstrap 5 verwenden, bieten ebenfalls gute Konfigurationsmöglichkeiten (z.B. Waxon, OBER, Palun, Tfolio, Ailng, Mappix). Diese sind in der Regel kostenpflichtig.
+
+**Wo Sie Templates herunterladen können:**
+
+  * **Jekyll Themes Webseiten:** Plattformen wie [jekyllthemes.io](https://jekyllthemes.io/free) und [jekyll-themes.com](https://jekyll-themes.com/) bieten eine große Auswahl an kostenlosen und kostenpflichtigen Jekyll-Themes, die oft nach Features (wie Bootstrap) gefiltert werden können.
+  * **GitHub:** Viele Jekyll-Templates werden als Open-Source-Projekte auf GitHub gehostet. Suchen Sie nach Stichwörtern wie "jekyll bootstrap 5 theme" oder "jekyll template bootstrap 5". Achten Sie auf die Lizenzbedingungen.
+  * **Theme-Marktplätze:** Anbieter wie [Creative Tim](https://www.creative-tim.com/) (obwohl nicht spezifisch für Jekyll) bieten Bootstrap-basierte Templates, die Sie theoretisch in ein Jekyll-Projekt integrieren könnten, dies erfordert aber mehr Aufwand.
+  * **Entwickler-Webseiten:** Einige Webentwickler und Agenturen bieten ihre Jekyll-Templates zum Kauf oder als kostenlose Downloads auf ihren eigenen Webseiten an (z.B. [Zerostatic Themes](https://www.zerostatic.io/)).
+
+**Wie Sie die Templates herunterladen:**
+
+  * **Von Webseiten:** Oft gibt es einen "Download" Button oder eine Anleitung zum Herunterladen einer `.zip`-Datei des Templates.
+  * **Von GitHub:**
+      * Klicken Sie auf den grünen "Code" Button und wählen Sie "Download ZIP".
+      * Alternativ können Sie das Repository mit Git klonen: `git clone [Repository-URL]`.
+      * Bei einigen Templates (wie dem "Use this template" Button auf GitHub) wird eine Kopie des Repositorys in Ihrem eigenen GitHub-Konto erstellt.
+  * **Als Gem:** Bei Themes, die als Ruby Gem verfügbar sind (wie `jekyll-bootstrap-theme`), fügen Sie den Gem zur `Gemfile` Ihrer Jekyll-Seite hinzu und führen Sie `bundle install` aus. Anschließend müssen Sie das Theme in Ihrer `_config.yml` aktivieren.
+
+**Konfigurierbarkeit:**
+
+Die "vollständige Konfigurierbarkeit" kann je nach Template variieren. Achten Sie auf folgende Aspekte:
+
+  * **`_config.yml` Datei:** Hier sollten grundlegende Einstellungen wie Seitentitel, Beschreibung, Farben, Fonts, Menüs und Social Media Links konfigurierbar sein.
+  * **Sass/SCSS Dateien:** Wenn das Template Sass verwendet, können Sie in den `.scss`-Dateien (oft unter `assets/css` oder `_sass`) Farben, Typografie und andere Stile anpassen.
+  * **Data-Dateien (`_data` Ordner):** Einige Templates verwenden YAML- oder JSON-Dateien im `_data`-Ordner, um Menüs, Social Media Informationen oder andere wiederkehrende Inhalte zu verwalten.
+  * **Include-Dateien (`_includes` Ordner):** Diese ermöglichen es Ihnen, wiederverwendbare Code-Schnipsel einfach in Ihre Layouts einzufügen und anzupassen.
+  * **Layout-Dateien (`_layouts` Ordner):** Hier können Sie die grundlegende Struktur Ihrer Seiten und Posts anpassen.
+
+Lesen Sie die Dokumentation des jeweiligen Templates sorgfältig durch, um zu verstehen, welche Konfigurationsmöglichkeiten es bietet und wie Sie diese nutzen können. Viele Open-Source-Templates haben auch eine `README.md`-Datei mit Anweisungen zur Installation und Konfiguration.

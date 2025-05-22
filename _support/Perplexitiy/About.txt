@@ -1,0 +1,86 @@
+
+Was ist die KI-Suche Perplexity?
+
+https://de.wikipedia.org/wiki/Perplexity.ai
+
+
+Gemini
+--------------------------------------------------------------------------------
+// https://gemini.google.com/app/4e016b6952b8ab07
+
+Perplexity AI ist eine **KI-gestützte Websuchmaschine** und ein 
+**"Antwort-Engine"**, die darauf ausgelegt ist, präzise Antworten auf
+Nutzerfragen zu liefern, indem sie Informationen aus verschiedenen Quellen
+im Internet zusammenfasst und diese mit **Quellenangaben** versieht.
+
+Hier sind die wichtigsten Aspekte von Perplexity AI:
+
+* **Funktionsweise:**
+  Im Gegensatz zu herkömmlichen Suchmaschinen, die eine Liste von Links
+  präsentieren, verwendet Perplexity AI **Large Language Models (LLMs)**
+  wie GPT-3.5 (in der kostenlosen Version) und fortschrittlichere Modelle
+  wie GPT-4, Claude 3 und eigene Modelle (in der Pro-Version), um die
+  Suchanfrage zu verstehen, relevante Informationen im Internet in Echtzeit
+  zu suchen und diese in einer **klaren, prägnanten Antwort** zusammenzufassen.
+
+* **Konversationeller Ansatz:**
+  Perplexity AI ermöglicht es Nutzern, **Folgefragen** zu stellen, wobei
+  der Kontext der vorherigen Fragen beibehalten wird, was zu einer
+  dialogähnlichen Interaktion führt.
+
+* **Transparenz durch Quellenangaben:**
+  Jede Antwort enthält **Fußnoten** mit Links zu den ursprünglichen Quellen,
+  sodass Nutzer die Informationen leicht überprüfen und weiterführende
+  Recherchen durchführen können.
+
+* **Verschiedene Suchmodi:**
+    * **Quick Search:** Für schnelle, unkomplizierte Antworten.
+    * **Pro Search:** Für detailliertere und umfassendere Antworten,
+      die mehrere Quellen gründlicher untersucht.
+
+* **Zusätzliche Funktionen:**
+
+    * **Spaces:**
+      Ermöglichen es Nutzern, Recherchen zu bestimmten Themen zu organisieren
+      und Ergebnisse mit anderen zu teilen.
+
+    * **Pages:**
+      Erlauben das Erstellen von anpassbaren Webseiten und
+      Recherchepräsentationen basierend auf Nutzeranfragen.
+
+    * **Copilot:**
+      Ein Modus (in Entwicklung), der die Suche durch Generierung
+      verschiedener Suchanfragen verbessern soll.
+
+    * **Fokus-Modi:**
+      Spezielle Modi für spezifische Arten von Fragen (z.B. "Academic"
+      für wissenschaftliche Quellen).
+
+    * **Datei-Upload:**
+      Pro- und Enterprise-Nutzer können Dokumente hochladen und zusammen
+      mit Webinhalten durchsuchen.
+
+    * **Bildgenerierung:**
+     In der kostenpflichtigen Version können Nutzer Bilder basierend auf
+     ihren Suchanfragen generieren.
+
+* **Verfügbarkeit:**
+  Perplexity AI ist als Webanwendung, Chrome-Erweiterung sowie als
+  App für iOS und Android verfügbar.
+
+* **Kostenlose und kostenpflichtige Version:**
+  Es gibt eine kostenlose Version mit eingeschränkten Funktionen und
+  eine kostenpflichtige Pro-Version mit erweiterten Möglichkeiten,
+  Zugriff auf fortschrittlichere KI-Modelle und höhere Nutzungslimits.
+
+
+Zusammenfassung
+--------------------------------------------------------------------------------
+
+Zusammenfassend lässt sich sagen, dass Perplexity AI ein KI-gestütztes
+Werkzeug für die Informationsbeschaffung ist, das darauf abzielt, Nutzern
+nicht nur Suchergebnisse, sondern direkte Antworten mit transparenten
+Quellenangaben in einem konversationellen Format zu liefern. Es positioniert
+sich als eine intelligentere und effizientere Alternative zu traditionellen
+Suchmaschinen.
+

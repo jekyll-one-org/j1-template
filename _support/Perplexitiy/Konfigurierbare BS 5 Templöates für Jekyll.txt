@@ -1,0 +1,77 @@
+Welche aktuellen Templates für Jekyll verenden Bootstrap 5 und sind
+voll konfigurierbar? Wie und wo kann man die Templates herunterladen?
+
+Perplexity
+--------------------------------------------------------------------------------
+// https://gemini.google.com/app/c2a2a5f96eb9513a
+
+## Aktuelle Jekyll-Templates mit Bootstrap 5 und Konfigurierbarkeit
+
+Für moderne Webprojekte mit Jekyll und Bootstrap 5 gibt es inzwischen eine
+Reihe von Templates und Themes, die sowohl aktuell als auch flexibel
+konfigurierbar sind. Hier eine Übersicht der empfehlenswerten Optionen:
+
+**Sandbox Jekyll Theme**
+- Premium-Theme, gebaut mit Jekyll, Bootstrap 5 und SASS.
+- Bietet über 250 UI-Elemente, 130+ vorgefertigte Blöcke und 100+ Seiten.
+- Sehr flexibel: Farb- und Schriftoptionen, verschiedene Header- und Menüvarianten, zahlreiche Layouts für Business, Portfolio, Blog, Shop etc.
+- Keine Abhängigkeit von jQuery, moderne Features wie Mega-Menü, Sticky Header, Lightbox, Slider, Animationen u.v.m.
+- Umfassende Dokumentation und regelmäßige Updates[3].
+
+**Redron – Startup & Agency Bootstrap 5 Jekyll Theme**
+- Premium-Theme, speziell für Agenturen, Startups und Software-Projekte.
+- Entwickelt mit Bootstrap 5, voll responsiv und vollständig anpassbar.
+- Enthält mehrere Startseiten, Service-Seiten, Blog-Layout, Login/Sign-up, Preisseiten, u.v.m.
+- Einfache Anpassung durch gut strukturierte HTML- und YAML-Dateien[7].
+
+**J1 Template**
+- Kostenloses, voll ausgestattetes Theme für Jekyll, basiert auf Bootstrap V5.
+- Ziel: Moderne, dynamische und vollständig konfigurierbare Websites.
+- Bietet eine saubere, flexible Basis für individuelle Anpassungen[8].
+
+**JackieGable/Jekyll-Bootstrap-5-Template (GitHub)**
+- Open-Source-Starter-Template für Bootstrap 5 mit Jekyll.
+- Enthält Navbar, Suchfunktion (lunr.js), Footer und einfache Konfigurierbarkeit via _config.yml und YAML-Frontmatter.
+- Anpassung von Farben, Layouts und Komponenten über SCSS, CSV und Includes möglich.
+- Ideal als Ausgangspunkt für eigene Projekte[2].
+
+**Jekyll Minima Bootstrap 5 Boilerplate**
+- Boilerplate-Template, das das beliebte Minima-Theme mit Bootstrap 5 kombiniert.
+- Eignet sich als Basis für eigene, individuell konfigurierbare Seiten[9].
+
+**bs5-starter (GitHub)**
+- Sehr schlankes Starter-Template für Bootstrap 5.3 und Jekyll.
+- Einfache Struktur, ideal für Einsteiger oder als Grundlage für eigene Entwicklungen.
+- Anpassbar über SCSS und HTML-Includes[5].
+
+## Vergleichstabelle
+
+| Template/Theme               | Bootstrap 5 | Konfigurierbar | Typ      | Besonderheiten                        |
+|------------------------------|:-----------:|:--------------:|----------|---------------------------------------|
+| Sandbox                      |     ✔       |      ✔         | Premium  | Sehr viele UI-Komponenten, flexibel   |
+| Redron                       |     ✔       |      ✔         | Premium  | Agentur/Startup, viele Layouts        |
+| J1 Template                  |     ✔       |      ✔         | Free     | Voll ausgestattet, flexibel           |
+| JackieGable/Jekyll-Bootstrap-5|    ✔       |      ✔         | Free     | Starter-Template, modular             |
+| Minima Bootstrap 5 Boilerplate|    ✔       |      ✔         | Free     | Minimal, als Basis geeignet           |
+| bs5-starter                  |     ✔       |      ✔         | Free     | Sehr einfach, für eigene Anpassungen  |
+
+## Fazit
+
+Für aktuelle, konfigurierbare Jekyll-Websites mit Bootstrap 5 bieten sich sowohl kostenlose als auch Premium-Lösungen an. Die Wahl hängt vom gewünschten Funktionsumfang und Design ab. Sandbox und Redron sind sehr vielseitig und bieten viele fertige Komponenten. Für Eigenentwicklungen und maximale Flexibilität sind die Starter-Templates wie JackieGable/Jekyll-Bootstrap-5-Template und bs5-starter ideal[2][3][5][7][8][9].
+
+Citations:
+[1] https://jekyllthemes.dev/tag/bootstrap/
+[2] https://github.com/JackieGable/Jekyll-Bootstrap-5-Template
+[3] https://jekyllthemes.io/theme/sandbox-jekyll-theme
+[4] https://jamstackthemes.dev/ssg/jekyll/
+[5] https://github.com/jekyllgems/bs5-starter
+[6] https://www.bestjekyllthemes.com/category/template/
+[7] https://themeforest.net/item/redron-startup-agency-bootstrap-5-jekyll-theme/30557593
+[8] https://jekyll.one/pages/public/blog/navigator/archive/allview/
+[9] https://jekyll-themes.com/category/bootstrap5
+
+---
+
+Antwort von Perplexity:
+
+https://www.perplexity.ai/search/welche-aktuellen-templates-fur-VFBMmRFaRX26ZvqG0GJ8LA?login-source=floatingSignup&login-new=true&utm_source=copy_output
