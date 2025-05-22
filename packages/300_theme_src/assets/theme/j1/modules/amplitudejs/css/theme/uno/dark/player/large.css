@@ -405,7 +405,8 @@ Bootstrap (BS) grid breakpoints
 
 /* BS LG (Desktop)
 # --------------------------------------------------------- */
-@media (orientation: portrait) and (max-width: 992px) {
+/* @media (orientation: portrait) and (max-width: 992px) { */
+@media (orientation: portrait) and (max-width: 1024px) {
   .large-player-left {
     width: 35vw;
   }
@@ -413,13 +414,15 @@ Bootstrap (BS) grid breakpoints
     width: 45vw;
     object-fit: cover;
   }
+  .playlist-screen-controls {
+    display: none;
+  }
 
   input[type="range"].amplitude-volume-slider::-webkit-slider-thumb {
     background-color: var(--ajs-theme-uno--blue-500);
     width: 25px;
     height: 25px;
   }
-
   input[type="range"].amplitude-volume-slider::-moz-slider-thumb {
     background-color: var(--ajs-theme-uno--blue-500);
     width: 25px;
@@ -434,6 +437,9 @@ Bootstrap (BS) grid breakpoints
   .large-player-left {
     width: 35vw;
   }
+  .playlist-screen-controls {
+    display: none;
+  }
   .large-player-left-top img {
     width: 45vw;
     object-fit: cover;
@@ -442,7 +448,8 @@ Bootstrap (BS) grid breakpoints
 
 /* BS LG (Desktop)
 # --------------------------------------------------------- */
-@media (orientation: landscape) and (max-width: 992px) {
+/* @media (orientation: landscape) and (max-width: 992px) { */
+@media (orientation: landscape) and (max-width: 1024px) {  
   .large-player-left {
     width: 35vw;
   }
@@ -450,6 +457,9 @@ Bootstrap (BS) grid breakpoints
     width: 95vw;
     object-fit: cover;
   }
+  .playlist-screen-controls {
+    display: none;
+  }  
 }
 
 /* BS MD (Desktop)
@@ -462,6 +472,9 @@ Bootstrap (BS) grid breakpoints
     width: 95vw;
     object-fit: cover;
   }
+  .playlist-screen-controls {
+    display: none;
+  }  
 }
 
 /* BS SM (Mobile)
