@@ -449,14 +449,16 @@ Bootstrap (BS) grid breakpoints
 /* BS LG (Desktop)
 # --------------------------------------------------------- */
 /* @media (orientation: landscape) and (max-width: 992px) { */
-@media (orientation: landscape) and (max-width: 1024px) {  
-  .large-player-left {
+@media (orientation: landscape) and (max-width: 1024px) {
+  
+  /* .large-player-left {
     width: 35vw;
-  }
-  .large-player-left-top img {
+  } */
+  /* .large-player-left-top img {
     width: 95vw;
     object-fit: cover;
-  }
+  } */
+
   .playlist-screen-controls {
     display: none;
   }  
