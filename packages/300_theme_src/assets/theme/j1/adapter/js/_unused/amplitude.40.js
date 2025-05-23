@@ -1469,27 +1469,7 @@ j1.adapter.amplitude = ((j1, window) => {
                           var currentPlaylist = largePlayerPlayPauseButton[i].dataset.amplitudePlaylist;
                           if (currentPlaylist === playList) {
                             largePlayerPlayPauseButton[i].addEventListener('click', function(event) {
-                              var ytpPlayer, ytpPlayerState, playlist, metaData, playerState;
-
-                              metaData = Amplitude.getActiveSongMetadata();
-                              playlist = this.getAttribute("data-amplitude-playlist");
-
-                              // // update song rating in screen controls
-                              // var largePlayerSongAudioRating = document.getElementsByClassName("audio-rating-screen-controls");
-                              // if (largePlayerSongAudioRating.length) {
-                              //   for (var i=0; i<largePlayerSongAudioRating.length; i++) {
-                              //     var currentPlaylist = largePlayerSongAudioRating[i].dataset.amplitudePlaylist;
-                              //     if (currentPlaylist === playlist) {
-                              //       if (metaData.rating) {
-                              //         var trackID = metaData.index + 1;
-                              //         logger.debug('\n' + `UPDATE song rating on updatMetaContainers for trackID|playlist at: ${trackID}|${playlist} with a value of: ${metaData.rating}`);
-                              //         largePlayerSongAudioRating[i].innerHTML = '<img src="/assets/image/pattern/rating/scalable/' + metaData.rating + '-star.svg"' + 'alt="song rating">';
-                              //       } else {
-                              //         largePlayerSongAudioRating[i].innerHTML = '';
-                              //       }
-                              //     }
-                              //   }
-                              // } // END if largePlayerSongAudioRating
+                              var ytpPlayer, ytpPlayerState, playerState;
 
                               // stop active YT players
                               // -----------------------------------------------
@@ -1507,11 +1487,6 @@ j1.adapter.amplitude = ((j1, window) => {
                                   ytpPlayer.stopVideo();
                                 }
                               }
-
-                              // scroll song active at index in player
-                              // if (playerAutoScrollSongElement) {
-                              //   j1.adapter.amplitude.atPlayerScrollToActiveElement(playlist);
-                              // }  
 
                               // save YT player data for later use (e.g. events)
                               // -----------------------------------------------

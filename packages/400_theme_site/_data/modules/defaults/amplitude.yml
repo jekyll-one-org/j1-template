@@ -266,7 +266,10 @@ defaults:
     source:                             audio                                   # default player source audio|video
     loop:                               false                                   # true|false, start playing on FIRST item
     display_hours:                      false                                   # use hours for timestamps in time container
-  
+
+    player_repeat:                      false                                   # ???
+    player_shuffle:                     false                                   # ???
+
     player_playback_rate:               small                                   # YT video resolution
     player_fade_audio:                  true                                    # enable|disable audio faden in|out
     player_scroll_control:              false                                   # additional control on scrolling player song items
