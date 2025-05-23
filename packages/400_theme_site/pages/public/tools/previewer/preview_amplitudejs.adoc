@@ -144,9 +144,6 @@ websites with embedded audio content.
 .Emancipator · From Dusk To Dawn
 amplitude::emancipator_mini[role="mb-5"]
 
-.Royalty Free Music · Disco 80th
-amplitude::disco_mini[role="mb-5"]
-
 
 [role="mt-5"]
 === Compact Players
@@ -163,9 +160,6 @@ screen space or placing  multiple players side-by-side.
 .Emancipator · From Dusk To Dawn
 amplitude::emancipator_compact[role="mb-5"]
 
-.Royalty Free Music · Disco 80th
-amplitude::disco_compact[role="mb-5"]
-
 
 [role="mt-5"]
 === Large Players
@@ -173,9 +167,6 @@ amplitude::disco_compact[role="mb-5"]
 A complex component, like an audio player on a web page, typically refers
 to a design or layout that minimizes the component's space while maintaining
 its functionality and usability.
-
-[role="mt-4"]
-==== Emancipator
 
 The large design provides the full functionality of an audio player to ensure
 users can easily control audio playback. The player behaves similarly to a
@@ -185,13 +176,7 @@ no need to open other widgets.
 .Emancipator · From Dusk To Dawn
 amplitude::emancipator_large[role="mb-5"]
 
-[role="mt-4"]
-==== Disco 80th
 
-lorem:sentences[3]
-
-.Royalty Free Music · Disco 80th
-amplitude::disco_large[role="mb-5"]
 [role="mt-5"]
 == AmplitudeJS on Youtube
 
@@ -209,12 +194,12 @@ player buttons and controls to manage a *playlist* of videos the same as known
 for native audio files.
 ====
 
-.Manon Mélodie · YouTube 2025
-amplitude::manon_melodie_yt_large[role="mb-5"]
+.Bea and her Business · YouTube 2025
+amplitude::bea_yt_large[role="mb-5"]
 
 [role="mt-4 mb-5"]
 [NOTE]
 ====
 AmplitudeJS YT Player can only be used with the J1 Template. Currently, only
-AJS players of type *large* are supported.
+players of type *large* are supported.
 ====

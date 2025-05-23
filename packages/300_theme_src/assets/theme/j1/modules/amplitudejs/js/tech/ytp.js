@@ -271,6 +271,7 @@ regenerate: true
   // ---------------------------------------------------------------------------
   // doNothingOnStateChange(state)
   //
+  // wrraper for states that are not processed
   // ---------------------------------------------------------------------------
   function doNothingOnStateChange(state) {
     if (state > 0) {
@@ -278,11 +279,12 @@ regenerate: true
     } else {
       logger.warn('\n' + `DO NOTHING on StateChange for state: ${YT_PLAYER_STATE_NAMES[6]}`);
     }
-  } // ENS doNothingOnStateChange
+  } // END doNothingOnStateChange
 
   // ---------------------------------------------------------------------------
   // processOnStateChangePlaying()
   //
+  // wrraper for processing on stae PLAYING 
   // ---------------------------------------------------------------------------
   function processOnStateChangePlaying(event, playlist, songIndex) {
     var activeSong, playlist, playerID, videoID,
@@ -1042,7 +1044,7 @@ regenerate: true
         // ---------------------------------------------------------------------
         // OnPlayerStateChange
         //
-        // process Player|Video specific functions on state change
+        // process all YT Player specific state changes
         // ---------------------------------------------------------------------
         // NOTE:
         // The YT API fires a lot of INTERMEDIATE states. MOST of them gets
@@ -1101,8 +1103,8 @@ regenerate: true
               processOnStateChangeEnded(event, playlist, songIndex);
               break;
             default:
-              logger.error('\n' + `UNKNOWN event on StateChange fired`);
-          } // END case
+              logger.error('\n' + `UNKNOWN event on StateChange fired: ${event.data}`);
+          } // END switch event.data
 
         } // END {{player.id}}OnPlayerStateChange
 

@@ -231,7 +231,7 @@ settings:
       #     
       enabled:                          true
 
-      id:                               ephraim_kishon_beste_familiengeschichten_yt_large
+      id:                               familiengeschichten_yt_large
       type:                             large
       source:                           video
       loop:                             false
@@ -260,7 +260,7 @@ settings:
       # PLAYLIST settings
       #
       playlist:
-        name:                           ephraim_kishon_beste_familiengeschichten_yt
+        name:                           familiengeschichten_yt
         title:                          Ephraim Kishon
         audio_info:                     true
         audio_rating:                   true     
@@ -276,7 +276,7 @@ settings:
       #     
       enabled:                          true
 
-      id:                               ephraim_kishon_beste_autofahrer_geschichten_yt_large
+      id:                               autofahrer_geschichten_yt_large
       type:                             large
       source:                           video
       loop:                             false
@@ -305,7 +305,7 @@ settings:
       # PLAYLIST settings
       #
       playlist:
-        name:                           ephraim_kishon_beste_autofahrer_geschichten_yt
+        name:                           autofahrer_geschichten_yt
         title:                          Ephraim Kishon
         audio_info:                     true
         audio_rating:                   true   

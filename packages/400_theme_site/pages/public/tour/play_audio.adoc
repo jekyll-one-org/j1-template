@@ -111,9 +111,9 @@ used matches the look and feel of the template to preserve the page design.
 
 Three types of AmplitudeJS players are build-in for the J1 template system:
 
-* *Mini* Players
-* *Compact* Players (default payer)
-* *Large* Players
+* *Mini* Player
+* *Compact* Player (default player)
+* *Large* Player
 
 [role="mt-4"]
 [NOTE]
@@ -125,7 +125,7 @@ mobile devices.
 
 
 [role="mt-5"]
-=== Mini Players
+=== Mini Player
 
 In the context of complex components on a web page, like an audio player,
 a mini player refers to a minimized version of full players. It typically
@@ -140,12 +140,9 @@ websites with embedded audio content.
 .Emancipator · From Dusk To Dawn
 amplitude::emancipator_mini[role="mb-5"]
 
-.Royalty Free Music · Disco 80th
-amplitude::disco_mini[role="mb-5"]
-
 
 [role="mt-5"]
-=== Compact Players
+=== Compact Player
 
 The design of a *Compact player* is an efficient approach that involves
 condensing the player controls and display elements into a smaller area.
@@ -159,19 +156,13 @@ screen space or placing  multiple players side-by-side.
 .Emancipator · From Dusk To Dawn
 amplitude::emancipator_compact[role="mb-5"]
 
-.Royalty Free Music · Disco 80th
-amplitude::disco_compact[role="mb-5"]
-
 
 [role="mt-5"]
-=== Large Players
+=== Large Player
 
 A complex component, like an audio player on a web page, typically refers
 to a design or layout that minimizes the component's space while maintaining
 its functionality and usability.
-
-[role="mt-4"]
-==== Emancipator
 
 The large design provides the full functionality of an audio player to ensure
 users can easily control audio playback. The player behaves similarly to a
@@ -180,15 +171,6 @@ no need to open other widgets.
 
 .Emancipator · From Dusk To Dawn
 amplitude::emancipator_large[role="mb-5"]
-
-[role="mt-4"]
-==== Disco 80th
-
-lorem:sentences[3]
-
-.Royalty Free Music · Disco 80th
-amplitude::disco_large[role="mb-5"]
-
 
 
 [role="mt-5"]
@@ -208,8 +190,8 @@ player buttons and controls to manage a *playlist* of videos the same as known
 for native audio files.
 ====
 
-.Manon Mélodie · YouTube 2025
-amplitude::manon_melodie_yt_large[role="mb-5"]
+.Bea and her Business · YouTube 2025
+amplitude::bea_yt_large[role="mb-5"]
 
 [role="mt-4 mb-5"]
 [NOTE]
@@ -217,20 +199,6 @@ amplitude::manon_melodie_yt_large[role="mb-5"]
 AmplitudeJS YT Player can only be used with the J1 Template. Currently, only
 AJS players of type *large* are supported.
 ====
-
-
-// [role="mt-4"]
-// === Ephraim Kishon
-
-// lorem:sentences[5]
-
-// [role="mt-4"]
-// ==== Beste Familiengeschichten
-
-// lorem:sentences[3]
-
-// .Ephraim Kishon · Beste Familiengeschichten
-// amplitude::ephraim_kishon_beste_familiengeschichten_yt_large[role="mb-5"]
 
 
 [role="mt-5"]

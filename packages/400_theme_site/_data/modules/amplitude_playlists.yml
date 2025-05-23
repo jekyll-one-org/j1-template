@@ -36,15 +36,15 @@ settings:
     - playlist:
       enabled:                          true
 
-      name:                             ephraim_kishon_beste_familiengeschichten_yt
+      name:                             familiengeschichten_yt
       title:                            Ephraim Kishon
 
       # ------------------------------------------------------------------------
       # ALBUM settings
       # ------------------------------------------------------------------------
-      album:                            &album_ephraim_kishon_beste_familiengeschichten_yt
+      album:                            &album_familiengeschichten_yt
         name:                           Ephraim Kishon
-        playlist:                       ephraim_kishon_beste_familiengeschichten_yt
+        playlist:                       familiengeschichten_yt
         artist:                         Beste Familiengeschichten
         audio:                          watch?v=9LojTw98Fks
         audio_fade:                     false
@@ -60,7 +60,7 @@ settings:
         # title 01
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
+          <<:                           *album_familiengeschichten_yt
           title:                        Ein Vater wird geboren
           rating:                       4
           start:                        "00:00:03"
@@ -70,7 +70,7 @@ settings:
         # title 02
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
+          <<:                           *album_familiengeschichten_yt
           title:                        Baby Sitting und was man dafür tun muß
           rating:                       3
           start:                        "00:16:55"
@@ -80,7 +80,7 @@ settings:
         # title 03
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
+          <<:                           *album_familiengeschichten_yt
           title:                        Schreckens Rotkäppchen
           rating:                       2
           start:                        "00:28:36"
@@ -90,7 +90,7 @@ settings:
         # title 04
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
+          <<:                           *album_familiengeschichten_yt
           title:                        Kontakt mit Linsen
           rating:                       4
           start:                        "00:34:00"
@@ -100,7 +100,7 @@ settings:
         # title 05
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
+          <<:                           *album_familiengeschichten_yt
           title:                        Auf Mäusesuche
           rating:                       4
           start:                        "00:46:00"
@@ -110,7 +110,7 @@ settings:
         # title 06
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
+          <<:                           *album_familiengeschichten_yt
           title:                        Das Wunderkind
           rating:                       2
           start:                        "00:54:36"
@@ -120,7 +120,7 @@ settings:
         # title 07
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
+          <<:                           *album_familiengeschichten_yt
           title:                        Ein Fläschchen für's Kätzchen
           rating:                       3
           start:                        "01:01:13"
@@ -130,7 +130,7 @@ settings:
         # title 08
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
+          <<:                           *album_familiengeschichten_yt
           title:                        Die Stmme des Blutes
           rating:                       3
           start:                        "01:11:36"
@@ -140,7 +140,7 @@ settings:
         # title 09
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
+          <<:                           *album_familiengeschichten_yt
           title:                        Onkel Morris und das Kollosalgemälde
           rating:                       3
           start:                        "01:20:45"
@@ -150,7 +150,7 @@ settings:
         # title 10
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
+          <<:                           *album_familiengeschichten_yt
           title:                        Durch den Kakao gezogen 
           rating:                       4
           start:                        "01:34:08"
@@ -160,7 +160,7 @@ settings:
         # title 11
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
+          <<:                           *album_familiengeschichten_yt
           title:                        Ein Scnnuller Namens Zezie 
           rating:                       4
           start:                        "01:44:41"
@@ -170,7 +170,7 @@ settings:
         # title 12
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
+          <<:                           *album_familiengeschichten_yt
           title:                        Gefahren des Wachstums
           rating:                       4
           start:                        "01:54:08"
@@ -180,7 +180,7 @@ settings:
         # title 13
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
+          <<:                           *album_familiengeschichten_yt
           title:                        Wie man Freunde gewinnt
           rating:                       3
           start:                        "02:02:37"
@@ -190,7 +190,7 @@ settings:
         # title 14
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
+          <<:                           *album_familiengeschichten_yt
           title:                        Pedigree
           rating:                       4
           start:                        "02:10:35"
@@ -200,7 +200,7 @@ settings:
         # title 15
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
+          <<:                           *album_familiengeschichten_yt
           title:                        Dressur
           rating:                       4
           start:                        "02:22:29"
@@ -210,7 +210,7 @@ settings:
         # title 16
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
+          <<:                           *album_familiengeschichten_yt
           title:                        Die große Steak-Saga
           rating:                       3
           start:                        "02:31:48"
@@ -220,7 +220,7 @@ settings:
         # title 17
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
+          <<:                           *album_familiengeschichten_yt
           title:                        Der kluge Mann baut vor
           rating:                       3
           start:                        "02:39:56"
@@ -230,7 +230,7 @@ settings:
         # title 18
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_familiengeschichten_yt
+          <<:                           *album_familiengeschichten_yt
           title:                        Vertrauen gegen Vertrauen
           rating:                       4
           start:                        "02:47:45"
@@ -244,15 +244,15 @@ settings:
     - playlist:
       enabled:                          true
 
-      name:                             ephraim_kishon_beste_autofahrer_geschichten_yt
+      name:                             autofahrer_geschichten_yt
       title:                            Ephraim Kishon
 
       # ------------------------------------------------------------------------
       # ALBUM settings
       # ------------------------------------------------------------------------
-      album:                            &album_ephraim_kishon_beste_autofahrer_geschichten_yt
+      album:                            &album_autofahrer_geschichten_yt
         name:                           Ephraim Kishon
-        playlist:                       ephraim_kishon_beste_autofahrer_geschichten_yt
+        playlist:                       autofahrer_geschichten_yt
         artist:                         Beste Familiengeschichten
         audio_fade:                     false
         audio_base:                     //youtube.com
@@ -266,7 +266,7 @@ settings:
         # title 01
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          <<:                           *album_autofahrer_geschichten_yt
           audio:                        watch?v=D2gVmGFa2wE
           audio_info:                   //youtube.com/watch?v=D2gVmGFa2wE
           title:                        Süss ist die Rache
@@ -278,7 +278,7 @@ settings:
         # title 02
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          <<:                           *album_autofahrer_geschichten_yt
           audio:                        watch?v=D2gVmGFa2wE
           audio_info:                   //youtube.com/watch?v=D2gVmGFa2wE
           title:                        Non-stop Autostop
@@ -290,7 +290,7 @@ settings:
         # title 03
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          <<:                           *album_autofahrer_geschichten_yt
           audio:                        watch?v=D2gVmGFa2wE
           audio_info:                   //youtube.com/watch?v=D2gVmGFa2wE
           title:                        Privatparkplatz
@@ -302,7 +302,7 @@ settings:
         # title 04
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          <<:                           *album_autofahrer_geschichten_yt
           audio:                        watch?v=D2gVmGFa2wE
           audio_info:                   //youtube.com/watch?v=D2gVmGFa2wE
           title:                        Der letzte Schrei der Medien
@@ -314,7 +314,7 @@ settings:
         # title 05
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          <<:                           *album_autofahrer_geschichten_yt
           audio:                        watch?v=D2gVmGFa2wE
           audio_info:                   //youtube.com/watch?v=D2gVmGFa2wE
           title:                        In den Händen der Chauvinisten
@@ -326,7 +326,7 @@ settings:
         # title 06
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          <<:                           *album_autofahrer_geschichten_yt
           audio:                        watch?v=D2gVmGFa2wE
           audio_info:                   //youtube.com/watch?v=D2gVmGFa2wE
           title:                        Ein Parasit fährt mit
@@ -338,7 +338,7 @@ settings:
         # title 07
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          <<:                           *album_autofahrer_geschichten_yt
           audio:                        watch?v=D2gVmGFa2wE
           audio_info:                   //youtube.com/watch?v=D2gVmGFa2wE
           title:                        Die Gefahren der guten Kinderstube
@@ -350,7 +350,7 @@ settings:
         # title 08
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          <<:                           *album_autofahrer_geschichten_yt
           audio:                        watch?v=D2gVmGFa2wE
           audio_info:                   //youtube.com/watch?v=D2gVmGFa2wE
           title:                        Jede Münze hat zwei Seiten
@@ -362,7 +362,7 @@ settings:
         # title 09
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          <<:                           *album_autofahrer_geschichten_yt
           audio:                        watch?v=D2gVmGFa2wE
           audio_info:                   //youtube.com/watch?v=D2gVmGFa2wE
           title:                        Das Werkstatt-Kabaret
@@ -374,7 +374,7 @@ settings:
         # title 10
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          <<:                           *album_autofahrer_geschichten_yt
           audio:                        watch?v=D2gVmGFa2wE
           audio_info:                   //youtube.com/watch?v=D2gVmGFa2wE
           title:                        Busfahren ist gefährlich
@@ -386,7 +386,7 @@ settings:
         # title 11
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          <<:                           *album_autofahrer_geschichten_yt
           audio:                        watch?v=zBSlRSGp5N4
           audio_info:                   //youtube.com/watch?v=zBSlRSGp5N4
           title:                        Ein Profi am Steuer
@@ -398,7 +398,7 @@ settings:
         # title 12
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          <<:                           *album_autofahrer_geschichten_yt
           audio:                        watch?v=zBSlRSGp5N4
           audio_info:                   //youtube.com/watch?v=zBSlRSGp5N4
           title:                        Amtshandlung mit menschlichen Zügen
@@ -410,7 +410,7 @@ settings:
         # title 13
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          <<:                           *album_autofahrer_geschichten_yt
           audio:                        watch?v=zBSlRSGp5N4
           audio_info:                   //youtube.com/watch?v=zBSlRSGp5N4
           title:                        Freund in der Not
@@ -422,7 +422,7 @@ settings:
         # title 14
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          <<:                           *album_autofahrer_geschichten_yt
           audio:                        watch?v=zBSlRSGp5N4
           audio_info:                   //youtube.com/watch?v=zBSlRSGp5N4
           title:                        Fernsehen hat vorrang
@@ -434,7 +434,7 @@ settings:
         # title 15
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          <<:                           *album_autofahrer_geschichten_yt
           audio:                        watch?v=zBSlRSGp5N4
           audio_info:                   //youtube.com/watch?v=zBSlRSGp5N4
           title:                        Parkplatz-Safari
@@ -446,7 +446,7 @@ settings:
         # title 16
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          <<:                           *album_autofahrer_geschichten_yt
           audio:                        watch?v=zBSlRSGp5N4
           audio_info:                   //youtube.com/watch?v=zBSlRSGp5N4
           title:                        Gottes Hand und Josseles Fuß
@@ -458,7 +458,7 @@ settings:
         # title 17
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          <<:                           *album_autofahrer_geschichten_yt
           audio:                        watch?v=zBSlRSGp5N4
           audio_info:                   //youtube.com/watch?v=zBSlRSGp5N4
           title:                        Ein vierbeiniger Autofan
@@ -470,7 +470,7 @@ settings:
         # title 18
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          <<:                           *album_autofahrer_geschichten_yt
           audio:                        watch?v=zBSlRSGp5N4
           audio_info:                   //youtube.com/watch?v=zBSlRSGp5N4
           title:                        Wir gehen in den Untergrund
@@ -482,7 +482,7 @@ settings:
         # title 19
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          <<:                           *album_autofahrer_geschichten_yt
           audio:                        watch?v=zBSlRSGp5N4
           audio_info:                   //youtube.com/watch?v=zBSlRSGp5N4
           title:                        Autofahren ist gesund
@@ -494,7 +494,7 @@ settings:
         # title 20
         - item:
           enabled:                      true
-          <<:                           *album_ephraim_kishon_beste_autofahrer_geschichten_yt
+          <<:                           *album_autofahrer_geschichten_yt
           audio:                        watch?v=zBSlRSGp5N4
           audio_info:                   //youtube.com/watch?v=zBSlRSGp5N4
           title:                        Und am Ende steht die Parklaterne

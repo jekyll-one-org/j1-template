@@ -214,7 +214,7 @@ lorem:sentences[5]
 lorem:sentences[3]
 
 .Ephraim Kishon · Beste Familiengeschichten
-amplitude::ephraim_kishon_beste_familiengeschichten_yt_large[role="mb-5"]
+amplitude::familiengeschichten_yt_large[role="mb-5"]
 
 
 [role="mt-4"]
@@ -223,7 +223,7 @@ amplitude::ephraim_kishon_beste_familiengeschichten_yt_large[role="mb-5"]
 lorem:sentences[3]
 
 .Ephraim Kishon · Beste Autofahrergeschichten
-amplitude::ephraim_kishon_beste_autofahrer_geschichten_yt_large[role="mb-5"]
+amplitude::autofahrer_geschichten_yt_large[role="mb-5"]
 
 
 [role="mt-4"]
