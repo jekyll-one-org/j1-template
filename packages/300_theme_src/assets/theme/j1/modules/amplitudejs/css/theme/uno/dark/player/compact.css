@@ -238,16 +238,8 @@
   clear: both;
 }
 
-.amplitude-mute {
+.compact-player-amplitude-mute {
   margin-left: 28px;
-}
-
-.amplitude-mute.amplitude-muted {
-  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/mute.svg") no-repeat;
-}
-
-.amplitude-mute.amplitude-not-muted {
-  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/volume.svg") no-repeat;
 }
 
 
