@@ -389,7 +389,7 @@ exclude_from_search:                    true
                 </div>
               </div>
               {% if playlist_controls %}
-              <div class="list-controls">
+              <div class="compact-player-list-controls list-controls">
                 <div
                   class="list-previous amplitude-prev compact-player-previous"
                   data-amplitude-source="{{source_media_attribute}}"
@@ -518,21 +518,21 @@ exclude_from_search:                    true
             <!-- START COMPACT player MIDDLE -->
             <div class="compact-player-middle">
               <!-- START controls container -->
-              <div id="compact_player_control_container">
+              <div id="compact_player_control_container" class="compact-player-control-container">
                 <div id="compact_player_controls">
 
                   <div class="compact-player-controls-container">
                     {% if shuffle_button %}
                     <div
                       id="compact_player_shuffle"
-                      class="amplitude-shuffle amplitude-shuffle-off"
+                      class="compact-player-shuffle amplitude-shuffle amplitude-shuffle-off"
                       data-amplitude-source="{{source_media_attribute}}"
                       data-amplitude-playlist="{{player_playlist}}">
                     </div>
                     {% endif %}
                     <div
                       id="compact_player_previous_{{player_id}}"
-                      class="amplitude-prev compact-player-previous"
+                      class="compact-player-previous amplitude-prev"
                       data-amplitude-source="{{source_media_attribute}}"
                       data-amplitude-playlist="{{player_playlist}}">
                     </div>
@@ -544,7 +544,7 @@ exclude_from_search:                    true
                    {% endif %}
                     <div
                       id="compact_player_play_pause_{{player_id}}"
-                      class="amplitude-play-pause compact-player-play-pause amplitude-paused"
+                      class="compact-player-play-pause amplitude-play-pause amplitude-paused"
                       data-amplitude-source="{{source_media_attribute}}"
                       data-amplitude-playlist="{{player_playlist}}">
                     </div>
@@ -556,14 +556,14 @@ exclude_from_search:                    true
                     {% endif %}
                     <div
                       id="compact_player_next_{{player_id}}"
-                      class="amplitude-next compact-player-next"
+                      class="compact-player-next amplitude-next"
                       data-amplitude-source="{{source_media_attribute}}"
                       data-amplitude-playlist="{{player_playlist}}">
                     </div>
                     {% if repeat_button %}
             			  <div
             				  id="compact_player_repeat"
-            				  class="amplitude-repeat amplitude-repeat-off"
+            				  class="compact-player-repeat amplitude-repeat amplitude-repeat-off"
                       data-amplitude-source="{{source_media_attribute}}"
             				  data-amplitude-playlist="{{player_playlist}}">
             			  </div>

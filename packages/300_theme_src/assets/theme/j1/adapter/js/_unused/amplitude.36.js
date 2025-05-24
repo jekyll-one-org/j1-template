@@ -1080,7 +1080,7 @@ j1.adapter.amplitude = ((j1, window) => {
                           var playlistScreen = document.getElementById("playlist_screen_{{player.id}}");
 
                           playlistScreen.classList.remove('slide-in-top');
-                          playlistScreen.classList.add('slislide-out-top');
+                          playlistScreen.classList.add('slide-out-top');
                           playlistScreen.style.display = "none";
                           playlistScreen.style.zIndex = "1";
 

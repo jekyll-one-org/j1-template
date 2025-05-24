@@ -383,7 +383,7 @@ input[type=range].amplitude-volume-slider {
     height: 1px;
     margin-top: 10px;
     margin-left: 5px;
-    width: calc(100% - 165px);
+    width: calc(100% - 86px);
     background: transparent;
 }  
 
@@ -525,8 +525,10 @@ Bootstrap (BS) grid breakpoints
     border-left: 1px solid;
     border-color: var(--ajs-theme-uno--medium-silver);
   }
+
+  div.large-player-volume-container
   .amplitude-mute {
-    margin-left: 14px;
+    margin-left: 4px;
   }
 
   div.large-player-volume-container

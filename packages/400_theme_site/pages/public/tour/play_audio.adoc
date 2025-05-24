@@ -156,6 +156,8 @@ screen space or placing  multiple players side-by-side.
 .Emancipator · From Dusk To Dawn
 amplitude::emancipator_compact[role="mb-5"]
 
+// .Royalty Free Music · Disco 80th
+// amplitude::disco_compact[role="mb-5"]
 
 [role="mt-5"]
 === Large Player

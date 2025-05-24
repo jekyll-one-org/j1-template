@@ -835,7 +835,7 @@ j1.adapter.amplitude = ((j1, window) => {
       function processOnStateChangePlaying(state) {
         var playList, activePlayist, playerID, playerType,
             activePlayerType, startVolume, songIndex, trackID,
-            ratingIndex, rating, ratingElement,
+            ratingIndex, rating, ratingElement, songMetaData,
             songStartTS, songEndTS, songStartSec, songEndSec,
             screenControlRatingElements, screenControlRating;
 
@@ -1195,7 +1195,7 @@ j1.adapter.amplitude = ((j1, window) => {
                           var playlistScreen = document.getElementById("playlist_screen_{{player.id}}");
 
                           playlistScreen.classList.remove('slide-in-top');
-                          playlistScreen.classList.add('slislide-out-top');
+                          playlistScreen.classList.add('slide-out-top');
                           playlistScreen.style.display = "none";
                           playlistScreen.style.zIndex = "1";
 

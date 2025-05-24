@@ -108,7 +108,7 @@ a {
   cursor: pointer;
   width: 25px;
   height: 19px;
-  margin-left: 40px;
+  /* margin-left: 40px; */
 }
 .amplitude-mute.amplitude-muted {
   background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/mute.svg") no-repeat;
