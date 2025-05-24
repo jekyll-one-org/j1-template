@@ -1,0 +1,167 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/theme/j1/modules/amplitudejs/css/theme/uno/dark/player/mini.css
+ # AmplitudeJS v5.3.2 Mini Player for J1 template
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2023-2025 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+/* 1. Base
+# ------------------------------------------------------------------------------ */
+
+.mini-player {
+  -webkit-font-smoothing: antialiased;
+}
+
+.mini-player-container {
+  width: 500px;
+  border: solid 1px;
+  border-color: var(--ajs-theme-uno--medium-silver);
+  background-color: var(--ajs-theme-uno--black);
+}
+
+
+/* 2. Components
+# ------------------------------------------------------------------------------ */
+
+.mini-player.control-container.meta-container {
+  text-align: center;
+  margin-left: 90px;
+  color: var(--ajs-theme-uno--white);
+}
+.mini-player.meta-container {
+  display: block;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+.mini-player.control-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+.mini-player.control-container div#mini_player_previous {
+  cursor: pointer;
+  height: 24px;
+  width: 24px;
+  margin-top: 8px;
+  margin-right: 12px;
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/small/previous.svg") no-repeat;
+}
+.mini-player.control-container div#mini_player_previous:hover {
+  opacity: 0.5;
+}
+.mini-player.control-container div#mini_player_next {
+  cursor: pointer;
+  height: 24px;
+  width: 24px;
+  margin: 8px 12px 0 12px;
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/small/next.svg") no-repeat;
+}
+.mini-player.control-container div#mini_player_next:hover {
+  opacity: 0.5;
+}
+.mini-player.control-container div.amplitude-play-pause {
+  cursor: pointer;
+  height: 24px;
+  width: 24px;
+  margin-top: 2px;
+}
+.mini-player.control-container div.amplitude-play-pause:hover {
+  opacity: 0.5;
+}
+.mini-player.control-container div.amplitude-play-pause.amplitude-paused {
+  background-size: cover;
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/small/play.svg") no-repeat;
+}
+.mini-player.control-container div.amplitude-play-pause.amplitude-playing {
+  background-size: cover;
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/small/pause.svg") no-repeat;
+}
+.mini-player.volume-container {
+  padding-top: 10px;
+  margin-left: 25px;
+  padding-bottom: 36px;
+  width: calc(100% - 43px);
+}
+input[type=range].mini-player.amplitude-volume-slider {
+  margin-top: -10px;
+  margin-left: 28px;
+  width: 90%;
+}
+
+
+/* 3. Layout
+# ------------------------------------------------------------------------------ */
+
+/*
+Bootstrap (BS) grid breakpoints
+  SN:     576px           Mobile
+  MD:     768px           Small Desktop|Tablet
+  LG:     992px           Desktop
+  XL:     1200px          Large Desktop
+  XXL:    1400px          X Large Desktop
+ */
+
+ /* max-width: -webkit-fill-available;  Chrome, Safari, Edge */
+ /* max-width: -moz-available;          Firefox              */
+
+
+/* BS SM (Mobile)
+# --------------------------------------------------------- */
+
+@media screen and (max-width: 576px) {
+  .mini-player-container {
+    max-width: -webkit-fill-available;
+    max-width: -moz-available;
+  }
+
+  .mini-player.volume-container {
+    appearance: none;
+    padding-top: 20px;
+  }
+
+  /* input[type=range].mini-player.amplitude-volume-slider {
+    margin-top: -11px;
+  } */
+ 
+  input[type="range"].mini-player.amplitude-volume-slider::-webkit-slider-thumb {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    margin-top: -15px;    
+    background-color: var(--ajs-theme-uno--blue-500);
+  }
+
+  input[type="range"].mini-player.amplitude-volume-slider::-moz-slider-thumb {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    margin-top: -15px;    
+    background-color: var(--ajs-theme-uno--blue-500);
+  }
+
+}
+
+
+/* 4. Pages
+# ------------------------------------------------------------------------------ */
+
+/* 5. Themes
+# ------------------------------------------------------------------------------ */
+
+/* 6. Utils
+# ------------------------------------------------------------------------------ */
+
+/* 7. Vendors
+# ------------------------------------------------------------------------------ */
+
+/* 8. Animations
+# ------------------------------------------------------------------------------ */

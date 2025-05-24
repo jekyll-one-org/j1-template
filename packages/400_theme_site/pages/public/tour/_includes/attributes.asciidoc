@@ -38,9 +38,9 @@ tag::urls[]
 :url-tour--data-slider-picker:                    /pages/public/tour/data_slider_picker
 :url-tour--image_headers:                         /pages/public/tour/image_header
 :url-tour--readme-first:                          /pages/public/learn/read_me_first/
-:url-tour--present-images:                        /pages/public/tour/present_images/
-:url-tour--present-audio:                         /pages/public/tour/present_audio/
-:url-tour--present-video:                         /pages/public/tour/present_video/
+:url-tour--image_data:                            /pages/public/tour/image_data/
+:url-tour--audio_data:                            /pages/public/tour/audio_data/
+:url-tour--video_data:                            /pages/public/tour/video_data/
 :url-tour--cards:                                 /pages/public/tour/cards/
 :url-tour--typography:                            /pages/public/tour/typography/
 :url-tour--asciidoc-extensions:                   /pages/public/tour/asciidoc_extensions/

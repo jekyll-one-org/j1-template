@@ -94,7 +94,7 @@ the top features of J1.
 
 If you're interested what J1 Template can do, continue by walking through the
 roundtrip examples by starting an inspiring tour
-link:{url-j1-roundtrip--present-images}[from here].
+link:{url-j1-roundtrip--image_data}[from here].
 
 [role="mt-4"]
 === Cheatsheets

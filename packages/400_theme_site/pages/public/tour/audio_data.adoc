@@ -1,5 +1,5 @@
 ---
-title:                                  Audio Player
+title:                                  Audio
 title_extention:                        Playback Audio using J1 Template
 tagline:                                Playback Audio
 
@@ -28,7 +28,7 @@ comments:                               false
 exclude_from_search:                    false
 regenerate:                             false
 personalization:                        true
-permalink:                              /pages/public/tour/present_audio/
+permalink:                              /pages/public/tour/audio_data/
 
 resources:                              [ amplitudejs ]
 resource_options:
@@ -220,4 +220,5 @@ Quicktime, or Silverlight is no longer needed as the Theme JekyllOne provides
 HTML5 video for local content and from online sources on the Internet.
 
 [role="mb-8"]
-Incredible? See the next example page link:{url-tour--present-video}[Video Player].
+Incredible? See the next example page link:{url-tour--video_data}[Video Player].
+

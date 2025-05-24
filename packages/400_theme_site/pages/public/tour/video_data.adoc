@@ -1,5 +1,5 @@
 ---
-title:                                  Video Player
+title:                                  Video
 title_extention:                        Playback Video using J1 Template
 tagline:                                Playback Video
 
@@ -28,7 +28,7 @@ image:
 compress:                               false
 personalization:                        true
 regenerate:                             false
-permalink:                              /pages/public/tour/present_video/
+permalink:                              /pages/public/tour/video_data/
 
 resources:                              [
 #                                         amplitudejs,

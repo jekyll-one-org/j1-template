@@ -24,13 +24,13 @@
   sublevel:
 
     - title:                            Image
-      href:                             /pages/public/tour/present_images/
+      href:                             /pages/public/tour/image_data/
       icon:                             image
     - title:                            Audio
-      href:                             /pages/public/tour/present_audio/
+      href:                             /pages/public/tour/audio_data/
       icon:                             volume-high
     - title:                            Video
-      href:                             /pages/public/tour/present_video/
+      href:                             /pages/public/tour/video_data/
       icon:                             video
 
     - title:                            Typography
