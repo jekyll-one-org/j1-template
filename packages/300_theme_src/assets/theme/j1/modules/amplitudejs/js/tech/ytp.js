@@ -368,9 +368,9 @@ regenerate: true
       Amplitude.stop();
 
       // clear button MINI PlayerPlayPause (AT player)
-      var buttonPlayerPlayPause = document.getElementsByClassName("mini-player-play-pause");
-      for (var i=0; i<buttonPlayerPlayPause.length; i++) {
-        var htmlElement = buttonPlayerPlayPause[i];
+      var buttonPlayerPlayPauseMini = document.getElementsByClassName("mini-player-play-pause");
+      for (var i=0; i<buttonPlayerPlayPauseMini.length; i++) {
+        var htmlElement = buttonPlayerPlayPauseMini[i];
         
         if (htmlElement.dataset.amplitudeSource === 'audio') {
           htmlElement.classList.remove('amplitude-playing');
@@ -380,9 +380,9 @@ regenerate: true
       } // END for MINI buttonPlayerPlayPause
 
       // clear button COMPACT PlayerPlayPause (AT player)
-      var buttonPlayerPlayPause = document.getElementsByClassName("compact-player-play-pause");
-      for (var i=0; i<buttonPlayerPlayPause.length; i++) {
-        var htmlElement = buttonPlayerPlayPause[i];
+      var buttonPlayerPlayPauseCompact = document.getElementsByClassName("compact-player-play-pause");
+      for (var i=0; i<buttonPlayerPlayPauseCompact.length; i++) {
+        var htmlElement = buttonPlayerPlayPauseCompact[i];
         
         if (htmlElement.dataset.amplitudeSource === 'audio') {
           htmlElement.classList.remove('amplitude-playing');
@@ -392,9 +392,9 @@ regenerate: true
       } // END for COMACT buttonPlayerPlayPause
 
       // clear button LARGE PlayerPlayPause (AT player)
-      var buttonPlayerPlayPause = document.getElementsByClassName("large-player-play-pause");
-      for (var i=0; i<buttonPlayerPlayPause.length; i++) {
-        var htmlElement = buttonPlayerPlayPause[i];
+      var buttonPlayerPlayPauseLarge = document.getElementsByClassName("large-player-play-pause");
+      for (var i=0; i<buttonPlayerPlayPauseLarge.length; i++) {
+        var htmlElement = buttonPlayerPlayPauseLarge[i];
         
         if (htmlElement.dataset.amplitudeSource === 'audio') {
           htmlElement.classList.remove('amplitude-playing');
@@ -406,17 +406,18 @@ regenerate: true
     } // END if atpPlayerState 'playing' 
 
     // TODO: check if YT player stop is needed
+    // -------------------------------------------------------------------------
     // stop active YT players running in parallel except the current
     // if (previousPlayer.options.videoId !== videoID) {
     //   logger.debug('\n' + `STOP all video on StateChange running in parallel at trackID|playerID: ${trackID}|${playerID}`);
     //   var playerState   = (previousPlayer.getPlayerState() > 0) ? previousPlayer.getPlayerState() : 6;
     //   var ytPlayerState = YT_PLAYER_STATE_NAMES[playerState];
-
+    //
     //   if (ytPlayerState === 'playing' || ytPlayerState === 'paused') {
     //     previousPlayer.stopVideo();
     //   }      
     // }
-
+    //
     // stopAllActivePlayers(playerID);
 
   } // END processOnStateChangePlaying
@@ -1978,14 +1979,14 @@ regenerate: true
   // ---------------------------------------------------------------------------
   // setPlayPauseButtonPaused 
   // ---------------------------------------------------------------------------
-  function setPlayPauseButtonPaused(elementClass) {
+  function setPlayPauseButtonPaused(element) {
     var button, htmlElement;
 
-    button      = document.getElementsByClassName(elementClass);
-    htmlElement = button[0];
+    // button      = document.getElementsByClassName(elementClass);
+    // htmlElement = button[0];
 
-    htmlElement.classList.remove('amplitude-playing');
-    htmlElement.classList.add('amplitude-paused');
+    element.classList.remove('amplitude-playing');
+    element.classList.add('amplitude-paused');
 
   } // END setPlayPauseButtonPaused
 
@@ -2153,16 +2154,25 @@ regenerate: true
                 var ytPlayerState = YT_PLAYER_STATE_NAMES[playerState];
               }
 
+              // var playPauseButtonsMini = document.getElementsByClassName('mini-player-play-pause');
+              // setPlayPauseButtonPaused(playPauseButtonsMini);
+
               if (ytPlayerState === 'playing') {
                 ytPlayer.pauseVideo();
 
                 ytPlayerCurrentTime = ytPlayer.getCurrentTime();
                 
-                var trackID = songIndex + 1;
-                logger.debug('\n' + `PAUSE video for PlayPauseButton on playlist|trackID: ${playlist}|${trackID} at: ${ytPlayerCurrentTime}`);                
+                // var trackID = songIndex + 1;
+                // logger.debug('\n' + `PAUSE video for PlayPauseButton on playlist|trackID: ${playlist}|${trackID} at: ${ytPlayerCurrentTime}`);                
 
-                var playPauseButtonClass = `large-player-play-pause-${ytPlayerID}`;
-                togglePlayPauseButton(playPauseButtonClass);
+                // var playPauseButtonsMini = document.getElementsByClassName('mini-player-play-pause');
+                // setPlayPauseButtonPaused(playPauseButtonsMini);
+
+                // var playPauseButtonClassCompact = `compact-player-play-pause -${ytPlayerID}`;
+                // togglePlayPauseButton(playPauseButtonClassCompact);
+                // //                 
+                // var playPauseButtonClassLarge = `large-player-play-pause-${ytPlayerID}`;
+                // togglePlayPauseButton(playPauseButtonClassLarge);
 
                 // reset|update time settings
                 resetCurrentTimeContainerYTP(ytPlayer, playlist);

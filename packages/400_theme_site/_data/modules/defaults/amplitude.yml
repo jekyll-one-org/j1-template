@@ -275,9 +275,9 @@ defaults:
     player_scroll_control:              false                                   # additional control on scrolling player song items
     player_auto_scroll_song_element:    true                                    # auto scroll of active player song items 
     player_scroller_song_element_min:   5                                       # number of player song items a scrollbat is added
-
-    song_element_heigt_desktop:         104.44                                  # heigt of player song items (pixel)
-    song_element_heigth_mobile:         94.53                                   # heigt of player song items (pixel)
+    player_continue_on_last_item:       true                                    # continue playing on last song|timestamp  
+    song_element_heigt_desktop:         104.44                                  # heigt of player song items (sub)pixel
+    song_element_heigth_mobile:         94.53                                   # heigt of player song items (sub)pixel
 
     mute_after_video_switch_interval:   750                                     # mute audio after swiching a video (ms)
     check_active_video_interval:        100                                     # how often the data structure 'activeVideoElement' is updated (ms)

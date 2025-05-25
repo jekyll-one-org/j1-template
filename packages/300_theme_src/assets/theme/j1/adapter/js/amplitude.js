@@ -830,7 +830,7 @@ j1.adapter.amplitude = ((j1, window) => {
       // -----------------------------------------------------------------------
       // processOnStateChangePlaying()
       //
-      // wrraper for processing on state PLAYING
+      // wrraper to update the ACTIVE player on state PLAYING
       // -----------------------------------------------------------------------      
       function processOnStateChangePlaying(state) {
         var playList, activePlayist, playerID, playerType,
@@ -853,32 +853,28 @@ j1.adapter.amplitude = ((j1, window) => {
 
         // update song rating in playlist-screen|meta-container
         // -------------------------------------------------------------------
+        j1.adapter.amplitude.atUpdateSongRating(Amplitude.getActiveSongMetadata());
 
-        // search for ACTIVE screenControlRatingElement
-        screenControlRating         = null;
-        screenControlRatingElements = document.getElementsByClassName('audio-rating-screen-controls');
-        for (let i=0; i<screenControlRatingElements.length; i++) {
-          ratingElement     = screenControlRatingElements[i];
-          rating            = parseInt(songMetaData.rating);
-          playerType        = ratingElement.dataset.playerType;
-          activePlayerType  = j1.adapter.amplitude.data.atpGlobals.activePlayerType;
-          activePlayist     = songMetaData.playlist
+        // scroll active song in players playlist
+        // ---------------------------------------------------------------------
+        j1.adapter.amplitude.atPlayerScrollToActiveElement(Amplitude.getActiveSongMetadata());
 
-          if (ratingElement.dataset.amplitudePlaylist === activePlayist && playerType === activePlayerType) {
-            ratingIndex = i;
-            screenControlRating = ratingElement;
-            break;
+        // stop active YT players
+        // -----------------------------------------------
+        const ytPlayers = Object.keys(j1.adapter.amplitude.data.ytPlayers);
+        for (let i=0; i<ytPlayers.length; i++) {
+          const playerID = ytPlayers[i];
+          const playerProperties = j1.adapter.amplitude.data.ytPlayers[playerID];
+          logger.debug('\n' + 'process player id: ' + playerID);
+          var ytpPlayer       = j1.adapter.amplitude.data.ytPlayers[playerID].player;
+          var playerState     = ytpPlayer.getPlayerState();
+          var ytpPlayerState  = YT_PLAYER_STATE_NAMES[playerState];
+
+          if (ytpPlayerState === 'playing' || ytpPlayerState === 'paused' || ytpPlayerState === 'buffering') {
+            logger.debug('\n' + 'process player id: ' + playerID + ' stopped');
+            ytpPlayer.stopVideo();
           }
         }
-
-        // set the rating for ACTIVE screenControlRatingElements
-        if (screenControlRating) {
-          if (rating) {
-            screenControlRatingElements[ratingIndex].innerHTML = '<img src="/assets/image/pattern/rating/scalable/' + rating + '-star.svg"' + 'alt="song rating">';
-          } else {
-            screenControlRatingElements[ratingIndex].innerHTML = '';
-          }
-        } // END if screenControlRating
 
         // process audio for configured START position
         // -------------------------------------------------------------------
@@ -945,6 +941,11 @@ j1.adapter.amplitude = ((j1, window) => {
 
           }, 100); // END checkIsOnVideoEnd
         } // END if songEndSec
+
+        // save YT player data for later use (e.g. events)
+        // ---------------------------------------------------------------------
+        j1.adapter.amplitude.data.activePlayer = 'atp';
+        j1.adapter.amplitude.data.atpGlobals.activePlayerType = 'large';
 
       }; // END processOnStateChangePlaying
 
@@ -1080,12 +1081,37 @@ j1.adapter.amplitude = ((j1, window) => {
                     {% if player.id contains 'mini' %}
                     if (document.getElementById('{{player.id}}') !== null) {
 
+                      {% comment %} PREPARED event listener for LATER use
+                      ----------------------------------------------------------
+                      // click on play_pause button (MINI player)
+                      var miniPlayerPlayPauseButton = document.getElementsByClassName('mini-player-play-pause');
+                      for (var i=0; i<miniPlayerPlayPauseButton.length; i++) {
+                        if (miniPlayerPlayPauseButton[i].dataset.amplitudeSource === 'youtube') {
+                          // do nothing (managed by plugin)
+                        } else {
+                          // var currentPlaylist = compactPlayerPlayPauseButton[i].dataset.amplitudePlaylist;
+                          // if (currentPlaylist === playListName) {
+                          if (miniPlayerPlayPauseButton[i].id === 'mini_player_play_pause_{{player.id}}') {
+                            miniPlayerPlayPauseButton[i].addEventListener('click', function(event) {
+                              var ytpPlayer;
+
+                              // save YT player data for later use (e.g. events)
+                              j1.adapter.amplitude.data.activePlayer = 'atp';
+                              j1.adapter.amplitude.data.atpGlobals.activePlayerType = 'mini';
+
+                            }); // addEventListener END
+                          } // END if miniPlayerPlayPauseButton
+                        } // END if ATP
+                      } // END for miniPlayerPlayPauseButton
+                      ----------------------------------------------------------
+                      {% endcomment %}
+
                       // add listeners to all progress bars found (MINI Player)
                       // -------------------------------------------------------
                       var progressBars = document.getElementsByClassName("mini-player-progress");
                       for (var i=0; i<progressBars.length; i++) {
                         if (progressBars[i].dataset.amplitudeSource === 'youtube') {
-                          // do nothing
+                          // do nothing for YTP (managed by plugin)
                         } else {
                           progressBars[i].addEventListener('click', function(event) {
                             var offset = this.getBoundingClientRect();
@@ -1097,44 +1123,6 @@ j1.adapter.amplitude = ((j1, window) => {
                           }); // END addEventListener
                         } // END if progressBars
                       } // END for progressBars
-
-                      // click on play_pause button (MINI player)
-                      var miniPlayerPlayPauseButton = document.getElementsByClassName('mini-player-play-pause');
-                      for (var i=0; i<miniPlayerPlayPauseButton.length; i++) {
-                        if (miniPlayerPlayPauseButton[i].dataset.amplitudeSource === 'youtube') {
-                          // do nothing
-                        } else {
-                          var currentPlaylist = miniPlayerPlayPauseButton[i].dataset.amplitudePlaylist;
-                          if (currentPlaylist === playList) {
-                            miniPlayerPlayPauseButton[i].addEventListener('click', function(event) {
-                              var ytpPlayer;
-                              var ytpPlayerState;
-                              var playerState;
- 
-                              // stop active YT players
-                              const ytPlayers = Object.keys(j1.adapter.amplitude.data.ytPlayers);
-                              for (let i=0; i<ytPlayers.length; i++) {
-                                const playerID = ytPlayers[i];
-                                const playerProperties = j1.adapter.amplitude.data.ytPlayers[playerID];
-                                logger.debug('\n' + 'process player id: ' + playerID);
-                                ytpPlayer       = j1.adapter.amplitude.data.ytPlayers[playerID].player;
-                                playerState     = ytpPlayer.getPlayerState();
-                                ytpPlayerState  = YT_PLAYER_STATE_NAMES[playerState];
- 
-                                if (ytpPlayerState === 'playing' || ytpPlayerState === 'paused' || ytpPlayerState === 'buffering') {
-                                  logger.debug('\n' + 'process player id: ' + playerID + ' stopped');
-                                  ytpPlayer.stopVideo();
-                                }
-                              }
- 
-                              // save YT player data for later use (e.g. events)
-                              j1.adapter.amplitude.data.activePlayer = 'atp';
-                              j1.adapter.amplitude.data.atpGlobals.activePlayerType = 'mini';
-
-                            });
-                          } // END if currentPlaylist
-                        } // END if miniPlayerPlayPauseButton
-                      } // END play_pause button (MINI player)
 
                     } // END mini player UI events
                     {% endif %}
@@ -1207,13 +1195,12 @@ j1.adapter.amplitude = ((j1, window) => {
                         }); // END addEventListener
                       } // END if hidePlaylist
 
-
                       // add listeners to all progress bars found (compact-player)
                       // -------------------------------------------------------
                       var progressBars = document.getElementsByClassName("compact-player-progress");
                       for (var i=0; i<progressBars.length; i++) {
                         if (progressBars[i].dataset.amplitudeSource === 'youtube') {
-                          // do nothing
+                          // do nothing for YTP (managed by plugin)
                         } else {
                           progressBars[i].addEventListener('click', function(event) {
                             var offset = this.getBoundingClientRect();
@@ -1228,13 +1215,16 @@ j1.adapter.amplitude = ((j1, window) => {
 
                       // add listeners to all Next Buttons found (COMPACT player)
                       // -------------------------------------------------------
-                      var largeNextButtons = document.getElementsByClassName("compact-player-next");
-                      for (var i=0; i<largeNextButtons.length; i++) {
-                        if (largeNextButtons[i].dataset.amplitudeSource === 'youtube') {
-                          // do nothing
+
+                      {% comment %} PREPARED event listener for LATER use
+                      ----------------------------------------------------------
+                      var compactNextButtons = document.getElementsByClassName("compact-player-next");
+                      for (var i=0; i<compactNextButtons.length; i++) {
+                        if (compactNextButtons[i].dataset.amplitudeSource === 'youtube') {
+                          // do nothing for YTP (managed by plugin)
                         } else {                        
-                          if (largeNextButtons[i].id === 'compact_player_next_{{player.id}}') {
-                            largeNextButtons[i].addEventListener('click', function(event) {
+                          if (compactNextButtons[i].id === 'compact_player_next_{{player.id}}' || compactNextButtons[i].id === 'compact_player_list_next_{{player.id}}') {
+                            compactNextButtons[i].addEventListener('click', function(event) {
                               var atpPlayerID     = this.id;
                               var atpPlayerActive = atpPlayerID.split('_');
     
@@ -1244,14 +1234,18 @@ j1.adapter.amplitude = ((j1, window) => {
                           } // END if ID
                         }
                       } // END Next Buttons (COMPACT player)
+                      ----------------------------------------------------------
+                      {% endcomment %}
 
+                      {% comment %} PREPARED event listener for LATER use
+                      ----------------------------------------------------------
                       // add listeners to all Previous Buttons found
                       var compactPreviousButtons = document.getElementsByClassName("compact-player-previous");
                       for (var i=0; i<compactPreviousButtons.length; i++) {
                         if (compactPreviousButtons[i].dataset.amplitudeSource === 'youtube') {
-                          // do nothing
+                          // do nothing for YTP (managed by plugin)
                         } else { 
-                          if (compactPreviousButtons[i].id === 'compact_player_previous_{{player.id}}') {
+                          if (compactPreviousButtons[i].id === 'compact_player_previous_{{player.id}}' || compactPreviousButtons[i].id === 'compact_player_list_previous_{{player.id}}') {
                             compactPreviousButtons[i].addEventListener('click', function(event) {
                               var atpPlayerID     = this.id;
                               var atpPlayerActive = atpPlayerID.split('_');
@@ -1262,45 +1256,51 @@ j1.adapter.amplitude = ((j1, window) => {
                           } // END if ID
                         }
                       } // END Previous Buttons (COMPACT player)
+                      ----------------------------------------------------------
+                      {% endcomment %}
 
+                      {% comment %} PREPARED event listener for LATER use
+                      ---------------------------------------------------------- 
+                      // click on play_pause button (COMPACT player)
+                      var compactPlayerPlayPauseButton = document.getElementsByClassName('compact-player-play-pause');
+                      for (var i=0; i<compactPlayerPlayPauseButton.length; i++) {
+                        if (compactPlayerPlayPauseButton[i].dataset.amplitudeSource === 'youtube') {
+                          // do nothing (managed by plugin)
+                        } else {
+                          // var currentPlaylist = compactPlayerPlayPauseButton[i].dataset.amplitudePlaylist;
+                          // if (currentPlaylist === playListName) {
+                          if (compactPlayerPlayPauseButton[i].id === 'compact_player_play_pause_{{player.id}}' || compactPlayerPlayPauseButton[i].id === 'compact_player_list_play_pause_{{player.id}}') {
+                            compactPlayerPlayPauseButton[i].addEventListener('click', function(event) {
+                              var ytpPlayer;
+                              var ytpPlayerState;
+                              var playerState;
 
-                     // click on play_pause button (COMPACT player)
-                     var compactPlayerPlayPauseButton = document.getElementsByClassName('compact-player-play-pause');
-                     for (var i=0; i<compactPlayerPlayPauseButton.length; i++) {
-                       if (compactPlayerPlayPauseButton[i].dataset.amplitudeSource === 'youtube') {
-                         // do nothing (managed by plugin)
-                       } else {
-                        var currentPlaylist = compactPlayerPlayPauseButton[i].dataset.amplitudePlaylist;
-                         if (currentPlaylist === playList) {
-                           compactPlayerPlayPauseButton[i].addEventListener('click', function(event) {
-                             var ytpPlayer;
-                             var ytpPlayerState;
-                             var playerState;
+                              // stop active YT players
+                              const ytPlayers = Object.keys(j1.adapter.amplitude.data.ytPlayers);
+                              for (let i=0; i<ytPlayers.length; i++) {
+                                const playerID = ytPlayers[i];
+                                const playerProperties = j1.adapter.amplitude.data.ytPlayers[playerID];
+                                logger.debug('\n' + 'process player id: ' + playerID);
+                                ytpPlayer       = j1.adapter.amplitude.data.ytPlayers[playerID].player;
+                                playerState     = ytpPlayer.getPlayerState();
+                                ytpPlayerState  = YT_PLAYER_STATE_NAMES[playerState];
 
-                             // stop active YT players
-                             const ytPlayers = Object.keys(j1.adapter.amplitude.data.ytPlayers);
-                             for (let i=0; i<ytPlayers.length; i++) {
-                               const playerID = ytPlayers[i];
-                               const playerProperties = j1.adapter.amplitude.data.ytPlayers[playerID];
-                               logger.debug('\n' + 'process player id: ' + playerID);
-                               ytpPlayer       = j1.adapter.amplitude.data.ytPlayers[playerID].player;
-                               playerState     = ytpPlayer.getPlayerState();
-                               ytpPlayerState  = YT_PLAYER_STATE_NAMES[playerState];
+                                if (ytpPlayerState === 'playing' || ytpPlayerState === 'paused' || ytpPlayerState === 'buffering') {
+                                  logger.debug('\n' + 'process player id: ' + playerID + ' stopped');
+                                  ytpPlayer.stopVideo();
+                                }
+                              }
 
-                               if (ytpPlayerState === 'playing' || ytpPlayerState === 'paused' || ytpPlayerState === 'buffering') {
-                                 logger.debug('\n' + 'process player id: ' + playerID + ' stopped');
-                                 ytpPlayer.stopVideo();
-                               }
-                             }
+                              // save YT player data for later use (e.g. events)
+                              j1.adapter.amplitude.data.activePlayer = 'atp';
+                              j1.adapter.amplitude.data.atpGlobals.activePlayerType = 'compact';
 
-                             // save YT player data for later use (e.g. events)
-                             j1.adapter.amplitude.data.activePlayer = 'atp';
-                             j1.adapter.amplitude.data.atpGlobals.activePlayerType = 'compact';
-
-                            });
-                         }
-                       }
-                     } // END play_pause button (COMPACT player)
+                              });
+                          }
+                        }
+                      } // END play_pause button (COMPACT player)
+                      ----------------------------------------------------------
+                      {% endcomment %}
 
                       // click on skip forward|backward (COMPACT player)
                       // See: https://github.com/serversideup/amplitudejs/issues/384
@@ -1310,7 +1310,7 @@ j1.adapter.amplitude = ((j1, window) => {
                       var compactPlayerSkipForwardButtons = document.getElementsByClassName("compact-player-skip-forward");
                       for (var i=0; i<compactPlayerSkipForwardButtons.length; i++) {
                         if (compactPlayerSkipForwardButtons[i].dataset.amplitudeSource === 'youtube') {
-                          // do nothing
+                          // do nothing for YTP (managed by plugin)
                         } else {                         
                           if (compactPlayerSkipForwardButtons[i].id === 'skip-forward_{{player.id}}') {
                             compactPlayerSkipForwardButtons[i].addEventListener('click', function(event) {
@@ -1336,7 +1336,7 @@ j1.adapter.amplitude = ((j1, window) => {
                       var compactPlayerSkipBackwardButtons = document.getElementsByClassName("compact-player-skip-backward");
                       for (var i=0; i<compactPlayerSkipBackwardButtons.length; i++) {
                         if (compactPlayerSkipBackwardButtons[i].dataset.amplitudeSource === 'youtube') {
-                          // do nothing
+                          // do nothing for YTP (managed by plugin)
                         } else {                         
                           if (compactPlayerSkipBackwardButtons[i].id === 'skip-backward_{{player.id}}') {
                             compactPlayerSkipBackwardButtons[i].addEventListener('click', function(event) {
@@ -1398,42 +1398,58 @@ j1.adapter.amplitude = ((j1, window) => {
                       var largePlayerSongContainer = document.getElementsByClassName("amplitude-song-container");
                       for (var i=0; i<largePlayerSongContainer.length; i++) {
                         if (largePlayerSongContainer[i].dataset.amplitudeSource === 'youtube') {
-                          // do nothing for ATP (managed by plugin)
+                          // do nothing for YTP (managed by plugin)
                         } else {
                           var currentPlaylist = largePlayerSongContainer[i].dataset.amplitudePlaylist;
                           if (currentPlaylist === playList) {
+                          // if (largePlayerSongContainer[i].id === 'large-player-play-pause_{{player.id}}' || largePlayerSongContainer[i].id === 'large-player-play-pause_{{player.id}}') {
                             largePlayerSongContainer[i].addEventListener('click', function(event) {
-                              var ytpPlayer, ytpPlayerState, ytpPlayerState, playerState,
-                                  classArray, atpPlayerActive, metaData, playlist;
+                              var ytpPlayer, ytpPlayerState, ytpPlayerState, atpPlayerState,
+                                  playerState, classArray, atpPlayerActive, metaData,
+                                  playlist, playlistIndex;
 
                               classArray      = [].slice.call(this.classList, 0);
                               atpPlayerActive = classArray[0].split('-');
                               playlist        = this.getAttribute("data-amplitude-playlist");
+                              playlistIndex   = parseInt(this.getAttribute("data-amplitude-song-index"));
                               metaData        = Amplitude.getActiveSongMetadata();
+                              atpPlayerState  = Amplitude.getPlayerState();
 
                               // update song rating in screen controls
                               // -----------------------------------------------
-                              var largePlayerSongAudioRating = document.getElementsByClassName("audio-rating-screen-controls");
-                              if (largePlayerSongAudioRating.length) {
-                                for (var i=0; i<largePlayerSongAudioRating.length; i++) {
-                                  var currentPlaylist = largePlayerSongAudioRating[i].dataset.amplitudePlaylist;
-                                  if (currentPlaylist === playlist) {
-                                    if (metaData.rating) {
-                                      var trackID = metaData.index + 1;
-                                      logger.debug('\n' + `UPDATE song rating on updatMetaContainers for trackID|playlist at: ${trackID}|${playlist} with a value of: ${metaData.rating}`);
-                                      largePlayerSongAudioRating[i].innerHTML = '<img src="/assets/image/pattern/rating/scalable/' + metaData.rating + '-star.svg"' + 'alt="song rating">';
-                                    } else {
-                                      largePlayerSongAudioRating[i].innerHTML = '';
-                                    }
-                                  }
-                                }
-                              } // END if largePlayerSongAudioRating
+                              // updateSongRating(playlist, metaData.index, metaData.rating);
+
+                              // var largePlayerSongAudioRating = document.getElementsByClassName("audio-rating-screen-controls");
+                              // if (largePlayerSongAudioRating.length) {
+                              //   for (var i=0; i<largePlayerSongAudioRating.length; i++) {
+                              //     var currentPlaylist = largePlayerSongAudioRating[i].dataset.amplitudePlaylist;
+                              //     if (currentPlaylist === playlist) {
+                              //       if (metaData.rating) {
+                              //         var trackID = metaData.index + 1;
+                              //         logger.debug('\n' + `UPDATE song rating on updatMetaContainers for trackID|playlist at: ${trackID}|${playlist} with a value of: ${metaData.rating}`);
+                              //         largePlayerSongAudioRating[i].innerHTML = '<img src="/assets/image/pattern/rating/scalable/' + metaData.rating + '-star.svg"' + 'alt="song rating">';
+                              //       } else {
+                              //         largePlayerSongAudioRating[i].innerHTML = '';
+                              //       }
+                              //     }
+                              //   }
+                              // } // END if largePlayerSongAudioRating
 
                               // scroll song active at index in player
                               // -----------------------------------------------
-                              if (playerAutoScrollSongElement) {
-                                j1.adapter.amplitude.atPlayerScrollToActiveElement(playlist);
-                              }
+                              // if (playerAutoScrollSongElement) {
+                              //   j1.adapter.amplitude.atPlayerScrollToActiveElement(playlist);
+                              // }
+
+                              // toggle active AT players
+                              // -----------------------------------------------
+                              // if (atpPlayerState === 'playing') {
+                              //   // start|pause active player
+                              //   // logger.debug('\n' + 'process player id: ' + atpPlayerActive[0] + ' stopped');
+                              //   Amplitude.pause();
+                              // } else {
+                              //   Amplitude.playPlaylistSongAtIndex(playlistIndex, playlist);
+                              // }
 
                               // stop active YT players
                               // -----------------------------------------------
@@ -1465,79 +1481,40 @@ j1.adapter.amplitude = ((j1, window) => {
                       // click on prev button
                       var largePlayerPreviousButton = document.getElementById('large_player_previous');
                       if (largePlayerPreviousButton && largePlayerPreviousButton.getAttribute("data-amplitude-source") === 'youtube') {
-                        // do nothing (managed by plugin)
+                        // do nothing for YTP (managed by plugin)
                       }
 
                       // add listeners to all PlayPause Buttons found (LARGE player)
                       // -------------------------------------------------------
+
+                      {% comment %} PREPARED event listener for LATER use
+                      ----------------------------------------------------------                      
                       var largePlayerPlayPauseButton = document.getElementsByClassName('large-player-play-pause');
                       for (var i=0; i<largePlayerPlayPauseButton.length; i++) {
                         if (largePlayerPlayPauseButton[i].dataset.amplitudeSource === 'youtube') {
-                          // do nothing for ATP (managed by plugin)
+                          // do nothing for YTP (managed by plugin)
                         } else {
-                          var currentPlaylist = largePlayerPlayPauseButton[i].dataset.amplitudePlaylist;
-                          if (currentPlaylist === playList) {
+                          var currentPlaylist = largePlayerPlayPauseButton[i].dataset.amplitudePlaylist;                          
+                          if (currentPlaylist === playList) {                        
                             largePlayerPlayPauseButton[i].addEventListener('click', function(event) {
                               var ytpPlayer, ytpPlayerState, playlist, metaData, playerState;
 
                               metaData = Amplitude.getActiveSongMetadata();
                               playlist = this.getAttribute("data-amplitude-playlist");
 
-                              // // update song rating in screen controls
-                              // var largePlayerSongAudioRating = document.getElementsByClassName("audio-rating-screen-controls");
-                              // if (largePlayerSongAudioRating.length) {
-                              //   for (var i=0; i<largePlayerSongAudioRating.length; i++) {
-                              //     var currentPlaylist = largePlayerSongAudioRating[i].dataset.amplitudePlaylist;
-                              //     if (currentPlaylist === playlist) {
-                              //       if (metaData.rating) {
-                              //         var trackID = metaData.index + 1;
-                              //         logger.debug('\n' + `UPDATE song rating on updatMetaContainers for trackID|playlist at: ${trackID}|${playlist} with a value of: ${metaData.rating}`);
-                              //         largePlayerSongAudioRating[i].innerHTML = '<img src="/assets/image/pattern/rating/scalable/' + metaData.rating + '-star.svg"' + 'alt="song rating">';
-                              //       } else {
-                              //         largePlayerSongAudioRating[i].innerHTML = '';
-                              //       }
-                              //     }
-                              //   }
-                              // } // END if largePlayerSongAudioRating
-
-                              // stop active YT players
-                              // -----------------------------------------------
-                              const ytPlayers = Object.keys(j1.adapter.amplitude.data.ytPlayers);
-                              for (let i=0; i<ytPlayers.length; i++) {
-                                const playerID = ytPlayers[i];
-                                const playerProperties = j1.adapter.amplitude.data.ytPlayers[playerID];
-                                logger.debug('\n' + 'process player id: ' + playerID);
-                                ytpPlayer       = j1.adapter.amplitude.data.ytPlayers[playerID].player;
-                                playerState     = ytpPlayer.getPlayerState();
-                                ytpPlayerState  = YT_PLAYER_STATE_NAMES[playerState];
-
-                                if (ytpPlayerState === 'playing' || ytpPlayerState === 'paused' || ytpPlayerState === 'buffering') {
-                                  logger.debug('\n' + 'process player id: ' + playerID + ' stopped');
-                                  ytpPlayer.stopVideo();
-                                }
-                              }
-
-                              // scroll song active at index in player
-                              // if (playerAutoScrollSongElement) {
-                              //   j1.adapter.amplitude.atPlayerScrollToActiveElement(playlist);
-                              // }  
-
-                              // save YT player data for later use (e.g. events)
-                              // -----------------------------------------------
-                              j1.adapter.amplitude.data.activePlayer = 'atp';
-                              j1.adapter.amplitude.data.atpGlobals.activePlayerType = 'large';
-
                             });
                           }
                         }
                       } // END play_pause button (LARGE player)
+                      ----------------------------------------------------------
+                      {% endcomment %}
 
                       // add listeners to all progress bars found (LARGE player)
                       // -------------------------------------------------------
                       var progressBars = document.getElementsByClassName("large-player-progress");
                       for (var i=0; i<progressBars.length; i++) {
                         if (progressBars[i].dataset.amplitudeSource === 'youtube') {
-                          // do nothing for ATP (managed by plugin)
+                          // do nothing for YTP (managed by plugin)
                         } else {
                           progressBars[i].addEventListener('click', function(event) {
                             var offset = this.getBoundingClientRect();
@@ -1556,7 +1533,7 @@ j1.adapter.amplitude = ((j1, window) => {
                       var largeNextButtons = document.getElementsByClassName("large-player-next");
                       for (var i=0; i<largeNextButtons.length; i++) {
                         if (largeNextButtons[i].dataset.amplitudeSource === 'youtube') {
-                          // do nothing for ATP (managed by plugin)
+                          // do nothing for YTP (managed by plugin)
                         } else {                        
                           if (largeNextButtons[i].id === 'large_player_next_{{player.id}}') {
                             largeNextButtons[i].addEventListener('click', function(event) {
@@ -1605,7 +1582,7 @@ j1.adapter.amplitude = ((j1, window) => {
                       var largePreviousButtons = document.getElementsByClassName("large-player-previous");
                       for (var i=0; i<largePreviousButtons.length; i++) {
                         if (largePreviousButtons[i].dataset.amplitudeSource === 'youtube') {
-                          // do nothing for ATP (managed by plugin)
+                          // do nothing for YTP (managed by plugin)
                         } else {                          
                           if (largePreviousButtons[i].id === 'large_player_previous_{{player.id}}') {
                             largePreviousButtons[i].addEventListener('click', function(event) {
@@ -1659,7 +1636,7 @@ j1.adapter.amplitude = ((j1, window) => {
                       for (var i=0; i<largePlayerSkipForwardButtons.length; i++) {
                         if (largePlayerSkipForwardButtons[i].id === 'skip-forward_{{player.id}}') {
                           if (largePlayerSkipForwardButtons[i].dataset.amplitudeSource === 'youtube') {
-                            // do nothing for ATP (managed by plugin)
+                            // do nothing for YTP (managed by plugin)
                           } else {
                             largePlayerSkipForwardButtons[i].addEventListener('click', function(event) {
                               const skipOffset  = parseFloat(playerForwardBackwardSkipSeconds);
@@ -1682,7 +1659,7 @@ j1.adapter.amplitude = ((j1, window) => {
                       for (var i=0; i<largePlayerSkipBackwardButtons.length; i++) {
                         if (largePlayerSkipBackwardButtons[i].id === 'skip-backward_{{player.id}}') {
                           if (largePlayerSkipBackwardButtons[i].dataset.amplitudeSource === 'youtube') {
-                            // do nothing for ATP (managed by plugin)
+                            // do nothing for YTP (managed by plugin)
                           } else {
                             largePlayerSkipBackwardButtons[i].addEventListener('click', function(event) {
                               const skipOffset  = parseFloat(playerForwardBackwardSkipSeconds);
@@ -1970,29 +1947,77 @@ j1.adapter.amplitude = ((j1, window) => {
     }, // END pluginManager
 
     // -------------------------------------------------------------------------
-    // atPlayerScrollToActiveElement(activePlaylist)
+    // atPlayerScrollToActiveElement(metaData)
     // -------------------------------------------------------------------------  
-    atPlayerScrollToActiveElement: (activePlaylist) => {
+    atPlayerScrollToActiveElement: (metaData) => {
       var scrollableList, songIndex,
-          activeElement, activeElementOffsetTop;
+          activeElement, activeElementOffsetTop,
+          songElementMin, numSongs;
 
-      scrollableList = document.getElementById('large_player_title_list_' + activePlaylist);
-      activeElement  = scrollableList.querySelector('.amplitude-active-song-container');
-
-      if (activeElement === null || scrollableList === null)  {
-        // do nothing if NO scrollableList or active element found (failsafe)
+      if (!playerAutoScrollSongElement) {
+        // do nothing if playerAutoScrollSongElement is false
         return;
       }
 
-      songIndex                 = parseInt(activeElement.getAttribute("data-amplitude-song-index"));
-      activeElementOffsetTop    = songIndex * j1.adapter.amplitude.data.playerSongElementHeigth;
-      scrollableList.scrollTop  = activeElementOffsetTop;
+      songIndex       = metaData.index;
+      songElementMin  = playerScrollerSongElementMin;
+      numSongs        = Amplitude.getSongsInPlaylist(metaData.playlist).length;
+      scrollableList  = document.getElementById('large_player_title_list_' + metaData.playlist);
+      activeElement   = scrollableList.querySelector('.amplitude-active-song-container');
 
-      if (songIndex === 0) {
-        var bla = 'puups';
+      if (activeElement === null || scrollableList === null)  {
+        // do nothing if NO scrollableList or ACTIVE element found (failsafe)
+        return;
+      }
+
+      if (songIndex > 0 && numSongs >= songElementMin) {
+        scrollableList            = document.getElementById('large_player_title_list_' + metaData.playlist);
+        activeElement             = scrollableList.querySelector('.amplitude-active-song-container');
+        activeElementOffsetTop    = songIndex * j1.adapter.amplitude.data.playerSongElementHeigth;
+        scrollableList.scrollTop  = activeElementOffsetTop;        
+      } else {
+        // do nothing if songIndex is 0 or less than songElementMin
+        return; 
       }
 
     }, // END atPlayerScrollToActiveElement
+
+    // -------------------------------------------------------------------------
+    // atUpdateSongRating(playlist, rating)
+    //
+    // update song rating in playlist-screen|meta-container
+    // -------------------------------------------------------------------------
+    atUpdateSongRating: (metaData) => {
+      var screenControlRating         = null;
+      var screenControlRatingElements = document.getElementsByClassName('audio-rating-screen-controls');
+      var ratingIndex;
+
+      for (let i=0; i<screenControlRatingElements.length; i++) {
+        var ratingElement     = screenControlRatingElements[i];
+        var rating            = parseInt(metaData.rating);
+        var playerType        = ratingElement.dataset.playerType;
+        var activePlayerType  = j1.adapter.amplitude.data.atpGlobals.activePlayerType;
+        var activePlayist     = metaData.playlist;
+
+        if (ratingElement.dataset.amplitudePlaylist === activePlayist && playerType === activePlayerType) {
+          ratingIndex = i;
+          screenControlRating = ratingElement;
+          break;
+        }
+
+      }
+
+      // set the rating for ACTIVE screenControlRatingElement
+      // -----------------------------------------------------------------------
+      if (screenControlRating) {
+        if (rating) {
+          ratingElement.innerHTML = '<img src="/assets/image/pattern/rating/scalable/' + rating + '-star.svg"' + 'alt="song rating">';
+        } else {
+          ratingElement.innerHTML = '';
+        }
+      }
+
+    }, // END atUpdateSongRating
 
     // -------------------------------------------------------------------------
     // messageHandler()

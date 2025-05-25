@@ -110,12 +110,52 @@ a {
   height: 19px;
   /* margin-left: 40px; */
 }
+
 .amplitude-mute.amplitude-muted {
   background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/mute.svg") no-repeat;
 }
 .amplitude-mute.amplitude-not-muted {
   background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/volume.svg") no-repeat;
 }
+
+/*
+.amplitude-paused {
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/play.svg") no-repeat;
+}
+.amplitude-playing {
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/pause.svg") no-repeat;
+}
+*/
+
+.amplitude-prev {
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/previous.svg") no-repeat;
+}
+.amplitude-next {
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/next.svg") no-repeat;
+}
+
+.amplitude-skip-forward {
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/skip-forward.svg") no-repeat;	
+}
+.amplitude-skip-backward {
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/skip-backward.svg") no-repeat;	
+}
+
+.amplitude-shuffle-on {
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/shuffle-on.svg") no-repeat;
+}
+.amplitude-shuffle-off {
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/shuffle-off.svg") no-repeat;
+}
+
+.amplitude-repeat-off {
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/repeat-off.svg") no-repeat;
+}
+.amplitude-repeat-on {
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/repeat-on.svg") no-repeat;
+}
+
+
 .title-number {
   display: inline-flex;
   opacity: 0.5;

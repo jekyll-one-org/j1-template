@@ -1,7 +1,7 @@
 ---
 title:                                  Video
-title_extention:                        Playback Video using J1 Template
-tagline:                                Playback Video
+title_extention:                        J1 Template Apps
+tagline:                                Players
 
 date:                                   2020-11-04
 #last_modified:                         2023-01-01
@@ -131,6 +131,7 @@ without loading *external players*.
   Peck Pocketed · MP4 Video
 </div>
 ++++
+
 video::/assets/video//html5/peck_pocketed.mp4[poster="/assets/video/poster/html5/peck_pocketed.jpg", opts="" role="mt-1 mb-5"]
 
 ifeval::[{ytp_audio} == true]
@@ -163,7 +164,7 @@ endif::[]
 
 
 [role="mt-5"]
-== VideoJS
+== J1 VideoJS
 
 VideoJS is a *free-to-use* open-source JavaScript framework for building
 custom video players for the web. Implementing VideoJS for the J1 Template
@@ -182,7 +183,7 @@ VideoJS provides a flexible and customizable platform for displaying and
 controlling MPEG 4 video content on websites and web applications.
 
 .Rolling Wild · MP4 Video
-videojs::/assets/video//html5/rolling_wild.mp4[poster="/assets/video/poster/html5/rolling_wild.jpg", opts="" role="mt-4 mb-5"]
+videojs::/assets/video//html5/rolling_wild.mp4[poster="/assets/video/poster/html5/rolling_wild.jpg", opts="" role="mb-5"]
 
 [role="mt-4"]
 === YouTube
@@ -197,7 +198,7 @@ different - for good reasons. See a compilation on YouTube of the very best
 auditions ever.
 
 .Best Auditions · AGT 2024 
-youtube::4VSBJU52UvM[poster="//img.youtube.com/vi/4VSBJU52UvM/maxresdefault.jpg" role="mt-4 mb-5"]
+youtube::4VSBJU52UvM[poster="//img.youtube.com/vi/4VSBJU52UvM/maxresdefault.jpg" role="mb-4"]
 
 ifeval::[{ytp_rhythm} == true]
 Dog Dancing is presented quite often on stage. Like AGT season 18, Adrian Stoica
@@ -206,7 +207,7 @@ But see Roni Sagi - an Israeli dog trainer - and her dog Rhythm. This is Dog
 Traing the next level.
 
 .Roni Sagi & Rhythm, ALL Performances · AGT 2024 
-youtube::1J2qz6B-PFY[poster="//img.youtube.com/vi/1J2qz6B-PFY/maxresdefault.jpg" role="mt-4 mb-5"]
+youtube::1J2qz6B-PFY[poster="//img.youtube.com/vi/1J2qz6B-PFY/maxresdefault.jpg" role="mb-4"]
 endif::[]
 
 ifeval::[{ytp_sky_elements} == true]
@@ -215,7 +216,7 @@ A large group of Drones is painting lights in the sky to reflect the most
 captivating narratives. 
 
 .Sky Elements, ALL Performances · AGT 2024 
-youtube::cN8IrZUhPtc[poster="//img.youtube.com/vi/cN8IrZUhPtc/maxresdefault.jpg" role="mt-4 mb-5"]
+youtube::cN8IrZUhPtc[poster="//img.youtube.com/vi/cN8IrZUhPtc/maxresdefault.jpg" role="mb-4"]
 endif::[]
 
 
@@ -229,7 +230,7 @@ Like YouTube, videos can be watched for free, but ads are shown on every
 video.
 
 .Beginner Mat Pilates · SELF Channel
-dailymotion::x87ycik[poster="/assets/video/poster/dailymotion/pilates.jpg" role="mt-4 mb-5"]
+dailymotion::x87ycik[poster="/assets/video/poster/dailymotion/pilates.jpg" role="mb-4"]
 endif::[]
 
 ifeval::[{vm_video} == true]
@@ -243,7 +244,7 @@ showcase their videos. Vimeo is known for its emphasis on high-quality
 video and creative expression.
 
 .Kick It Old School · Forever 21
-vimeo::179528528[poster="/assets/video/poster/vimeo/kick_it_old_school.jpg" role="mt-4 mb-4"]
+vimeo::179528528[poster="/assets/video/poster/vimeo/kick_it_old_school.jpg" role="mb-4"]
 // vimeo::179528528[poster="auto" role="mt-4 mb-5"]
 // vimeo::179528528[role="mt-4 mb-5"]
 
@@ -288,7 +289,7 @@ Masonry for J1 Template is a great tool for creating dynamic video galleries.
 The module makes creating a gallery to display videos of different types easy.
 
 .Mixed Video · Masonry + LightGallery
-masonry::mixed_video_example[role="mt-4 mb-4"]
+masonry::mixed_video_example[role="mb-4"]
 
 [role="mb-5"]
 .More about Masonry
@@ -316,7 +317,7 @@ HD 720p (1280x720 pixel).
 ====
 
 .Local MP4 Video · Justified Gallery + LightGallery
-gallery::jg_video_html5[role="mt-4 mb-5"]
+gallery::jg_video_html5[role="mb-4"]
 
 ifeval::[{yt_gallery} == true]
 [role="mt-4"]
@@ -333,7 +334,7 @@ new studio album *The Tortured Poets Department: The Anthology*, released on
 April 19, 2024.
 
 .Taylor Swift - The Tortured Poets Department · Justified Gallery + LightGallery
-gallery::jg_video_online_taylor_swift[role="mt-4 mb-4"]
+gallery::jg_video_online_taylor_swift[role="mb-4"]
 
 [role="mb-5"]
 [TIP]
@@ -368,7 +369,7 @@ offers sufficient space for private projects to present video content
 without advertising.
 
 .Forever 21 · Justified Gallery + LightGallery
-gallery::jg_video_online_vimeo[role="mb-5"]
+gallery::jg_video_online_vimeo[role="mb-4"]
 endif::[]
 
 ifeval::[{dm_gallery} == true]
@@ -385,7 +386,7 @@ Like YouTube, videos can be watched for free, but ads are shown on each and
 every video.
 
 .SELF Chanel · Justified Gallery + LightGallery
-gallery::jg_video_online_dailymotion[role="mt-4 mb-5"]
+gallery::jg_video_online_dailymotion[role="mb-4"]
 endif::[]
 
 [role="mt-5"]

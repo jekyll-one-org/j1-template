@@ -258,17 +258,20 @@ exclude_from_search:                    true
             <div
               id="mini_player_previous"
               class="amplitude-prev"
-              data-amplitude-playlist="{{player_playlist}}">
+              data-amplitude-playlist="{{player_playlist}}"
+              data-amplitude-source="audio">
             </div>
             <div
               id="mini_player_play_pause_{{player_id}}"
-              class="amplitude-play-pause mini-player-play-pause amplitude-paused"
-              data-amplitude-playlist="{{player_playlist}}">
+              class="mini-player-play-pause amplitude-play-pause amplitude-paused"
+              data-amplitude-playlist="{{player_playlist}}"
+              data-amplitude-source="audio">
             </div>
             <div
               id="mini_player_next"
               class="amplitude-next"
-              data-amplitude-playlist="{{player_playlist}}">
+              data-amplitude-playlist="{{player_playlist}}"
+              data-amplitude-source="audio">
             </div>
           </div>
           <!-- END control container  -->
@@ -391,18 +394,20 @@ exclude_from_search:                    true
               {% if playlist_controls %}
               <div class="compact-player-list-controls list-controls">
                 <div
-                  class="list-previous amplitude-prev compact-player-previous"
+                  id="compact_player_list_previous_{{player_id}}"
+                  class="compact-player-previous list-previous amplitude-prev"
                   data-amplitude-source="{{source_media_attribute}}"
                   data-amplitude-playlist="{{player_playlist}}">
                 </div>
                 <div
-                  id="compact_player_play_pause_{{player_id}}"
-                  class="list-play-pause amplitude-play-pause"
+                  id="compact_player_list_play_pause_{{player_id}}"
+                  class="compact-player-play-pause amplitude-play-pause amplitude-paused"
                   data-amplitude-source="{{source_media_attribute}}"
                   data-amplitude-playlist="{{player_playlist}}">
                 </div>
                 <div
-                  class="list-next amplitude-next compact-player-next"
+                  id="compact_player_list_next_{{player_id}}"
+                  class="compact-player-next list-next amplitude-next"
                   data-amplitude-source="{{source_media_attribute}}"
                   data-amplitude-playlist="{{player_playlist}}">
                 </div>
@@ -418,7 +423,7 @@ exclude_from_search:                    true
               {% for item in playlist_items %}{% if item.enabled %}
               <!-- START list item -->
               <div
-                class="song amplitude-song-container amplitude-song-container-compact-player amplitude-play-pause"
+                class="amplitude-song-container-compact-player song amplitude-song-container amplitude-play-pause amplitude-paused"
                 data-amplitude-source="{{source_media_attribute}}"
                 data-amplitude-song-index="{{forloop.index0}}"
                 data-amplitude-playlist="{{player_playlist}}">
@@ -539,7 +544,7 @@ exclude_from_search:                    true
                     {% if skip_forward_backward_button %}
                     <div
                       id="skip-backward_{{player_id}}"
-                      class="compact-player-skip-backward">
+                      class="compact-player-skip-backward amplitude-skip-backward">
                    </div>
                    {% endif %}
                     <div
@@ -551,7 +556,7 @@ exclude_from_search:                    true
                     {% if skip_forward_backward_button %}
                     <div
                       id="skip-forward_{{player_id}}"
-                      class="compact-player-skip-forward">
+                      class="compact-player-skip-forward amplitude-skip-forward">
                     </div>
                     {% endif %}
                     <div
@@ -772,7 +777,7 @@ exclude_from_search:                    true
                 {% if skip_forward_backward_button %}
                 <div
                   id="skip-backward_{{player_id}}"
-                  class="large-player-skip-backward-{{player_id}} large-player-skip-backward"
+                  class="large-player-skip-backward-{{player_id}} large-player-skip-backward amplitude-skip-backward"
                   data-amplitude-source="{{source_media_attribute}}"
                   data-amplitude-playlist="{{player_playlist}}">
                 </div>
@@ -786,7 +791,7 @@ exclude_from_search:                    true
                 {% if skip_forward_backward_button %}
                 <div
                   id="skip-forward_{{player_id}}"
-                  class="large-player-skip-forward-{{player_id}} large-player-skip-forward"
+                  class="large-player-skip-forward-{{player_id}} large-player-skip-forward amplitude-skip-forward"
                   data-amplitude-source="{{source_media_attribute}}"
                   data-amplitude-playlist="{{player_playlist}}">
                 </div>
@@ -1032,7 +1037,7 @@ exclude_from_search:                    true
                   <!-- class="amplitude-song-container-large-player-{{player_id}} amplitude-song-container-large-player amplitude-song-container amplitude-song amplitude-play-pause amplitude-player-large" -->
                   <!-- class="amplitude-song amplitude-song-container amplitude-song-container-large-player amplitude-play-pause amplitude-paused" -->
                   <div
-                    class="amplitude-song-container-large-player-{{player_id}} amplitude-song amplitude-song-container amplitude-song-container-large-player amplitude-play-pause amplitude-paused"
+                    class="amplitude-song-container-large-player-{{player_id}} amplitude-song-container-large-player amplitude-song-container amplitude-song amplitude-play-pause amplitude-paused"
                     data-amplitude-song-index="{{forloop.index0}}"
                     data-amplitude-source="{{source_media_attribute}}"
                     data-amplitude-playlist="{{player_playlist}}">
