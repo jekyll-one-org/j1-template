@@ -30,7 +30,7 @@ function Translator(props) {
   // global vars
   // ---------------------------------------------------------------------------
   var self                  = this;
-  var logger                = log4javascript.getLogger('j1.core.translator');
+  var logger                = log4javascript.getLogger('j1.api.translator');
   var pageURL               = new liteURL(window.location.href);
   var cookieSecure          = (pageURL.protocol.includes('https')) ? true : false;
   var detailedSettingsShown = false;

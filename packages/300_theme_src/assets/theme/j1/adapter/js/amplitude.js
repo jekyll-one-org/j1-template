@@ -236,10 +236,6 @@ j1.adapter.amplitude = ((j1, window) => {
       // j1.adapter.amplitude['amplitudeSettings'] = amplitudeSettings;
       // j1.adapter.amplitude['amplitudeOptions']  = amplitudeOptions;
 
-      // function forceError() {
-      //   throw new Error("Ein echter JavaScript-Fehler!");
-      // }
-
       // -----------------------------------------------------------------------
       // control|logging settings
       // -----------------------------------------------------------------------
@@ -275,11 +271,11 @@ j1.adapter.amplitude = ((j1, window) => {
           logger.debug('\n' + 'module state: ' + _this.getState());
           logger.info('\n' + 'module is being initialized');
 
-          j1.api.errorFilters.filter();
-          j1.api.consoleFilters.filter();
+          // j1.api.errorFilters.filter();
+          // j1.api.consoleFilters.filter();
 
           // force an 'error' Event
-          forceError();
+          // forceError();
 
           // -------------------------------------------------------------------
           // create global playlist (songs)

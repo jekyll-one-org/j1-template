@@ -856,7 +856,7 @@ var j1 = ((options) => {
       // -----------------------------------------------------------------------
       // run additional helpers from j1.core
       // -----------------------------------------------------------------------
-      j1.core.bsFormClearButton();
+      j1.api.bsFormClearButton();
 
       // -----------------------------------------------------------------------
       // finalize current page
@@ -1282,7 +1282,7 @@ var j1 = ((options) => {
           } else {
            // initialize dropcaps
            logger.info('\n' + 'post processing: createDropCap');
-           j1.core.createDropCap();
+           j1.api.createDropCap();
           }
 
           // TODO: should MOVED to Cookiebar ???
@@ -1348,7 +1348,7 @@ var j1 = ((options) => {
           logger.info('\n' + 'update sidebar');
           user_state        = j1.readCookie(cookie_names.user_state);
           current_user_data = j1.mergeData(user_session, user_state);
-          j1.core.navigator.updateSidebar(current_user_data);
+          j1.api.navigator.updateSidebar(current_user_data);
 
           // initiate smooth scroller if page is ready and visible
           var dependencies_met_page_ready = setInterval (() => {
@@ -1458,7 +1458,7 @@ var j1 = ((options) => {
         } else {
           // initialize dropcaps
           logger.info('\n' + 'post processing: createDropCap');
-          j1.core.createDropCap();
+          j1.api.createDropCap();
         }
 
         logger.info('\n' + 'mode detected: web');
@@ -1545,7 +1545,7 @@ var j1 = ((options) => {
 
         // set current user data
         current_user_data = j1.mergeData(user_session, user_state);
-        j1.core.navigator.updateSidebar(current_user_data);
+        j1.api.navigator.updateSidebar(current_user_data);
 
         // initiate smooth scroller if page is ready and visible
         var dependencies_met_page_ready = setInterval (() => {
@@ -1686,7 +1686,7 @@ var j1 = ((options) => {
         selector = $(anchor_id);
         if (selector.length) {
           logger.info('\n' + 'scrollTo header: ' + anchor_id);
-          j1.core.scrollSmooth.scroll(anchor_id, {
+          j1.api.scrollSmooth.scroll(anchor_id, {
             duration:   scrollDuration,
             offset:     scrollOffset,
             callback:   false
@@ -2695,7 +2695,7 @@ var j1 = ((options) => {
                 logger.debug('\n' + 'scrollToAnchor: top position detected');
               } else {
                 logger.debug('\n' + 'scrollToAnchor: scroll to headline by id: ' + headingHash);
-                j1.core.scrollSmooth.scroll(headingHash, {
+                j1.api.scrollSmooth.scroll(headingHash, {
                   duration:   scrollDuration,
                   offset:     scrollOffsetCorrection,
                   callback:   false
@@ -2707,7 +2707,7 @@ var j1 = ((options) => {
           } else if (j1['pageMonitor'].pageType == 'dynamic') {
             // page type dynamic
             setTimeout(() => {
-              var headingArray           = j1.core.parseHeadings();            // collect all headings in page
+              var headingArray           = j1.api.parseHeadings();            // collect all headings in page
               var headingUrl              = new URL(window.location.href);
               var headingHash             = headingUrl.hash;
               var headingId               = headingHash.replace(/#/g, '');

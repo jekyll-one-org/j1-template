@@ -25,7 +25,7 @@
 // -----------------------------------------------------------------------------
 
 // -----------------------------------------------------------------------------
-// WebHook client registered as j1.core.webhooks
+// WebHook client registered as j1.api.webhooks
 // -----------------------------------------------------------------------------
 module.exports = function client (options) {
 
@@ -60,7 +60,7 @@ module.exports = function client (options) {
     // Initialize WebHook (Octokit) client
     // -------------------------------------------------------------------------
     init: function (options) {
-      logger = log4javascript.getLogger('j1.core.webhooks');
+      logger = log4javascript.getLogger('j1.api.webhooks');
 
       // if (options.utility_server.git_client.enabled) {
       if (options.enabled) {
@@ -96,7 +96,7 @@ module.exports = function client (options) {
       var json_data;
       var json_data_log;
 
-      logger = log4javascript.getLogger('j1.core.webhooks.sseHandler');
+      logger = log4javascript.getLogger('j1.api.webhooks.sseHandler');
 
       source.onmessage = function (e) {
         e.preventDefault();
@@ -139,7 +139,7 @@ module.exports = function client (options) {
             message.type    = 'command';
             message.action  = 'pull';
             message.text    = 'pull message';
-            j1.sendMessage( 'j1.core.webhooks', 'j1.adapter.webhooks', message );
+            j1.sendMessage( 'j1.api.webhooks', 'j1.adapter.webhooks', message );
           }
         } else {
           logger.warn ('mode invalid: do nothing');
@@ -188,7 +188,7 @@ module.exports = function client (options) {
       var logText;
       var property;
 
-      logger = log4javascript.getLogger('j1.core.webhooks');
+      logger = log4javascript.getLogger('j1.api.webhooks');
 
       return $.ajax({
 

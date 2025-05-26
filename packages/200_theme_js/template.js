@@ -69,10 +69,11 @@ window.j1.api.navigator                 = require('./js/navigator/navigator.js')
 window.j1.api.parseContent              = require('./js/speak2me/parse-content.js');
 window.j1.api.scrollSmooth              = require('./js/scroll-smooth/scroll-smooth.js');
 
-window.j1.core                          = require('./js/core/core.js');
-window.j1.core.navigator                = require('./js/navigator/navigator.js');
+// window.j1.core                          = require('./js/core/core.js');
+// window.j1.api.navigator                = require('./js/navigator/navigator.js');
 
-window.j1.modules                       = {};
+// placeholder object for all J1 Modules
+// window.j1.modules                    = {};
 
 // Following source objects|modules are *implicetly* forced to be
 // exposed for run-time to the global namespace (window).
@@ -91,7 +92,7 @@ const J1SCarousel                         = require('./js/carousel/carousel.js')
 
 // Passing log data over Internet|SeeMe (currently NOT used)
 // -----------------------------------------------------------------------------
-// window.j1.core.log4javascript        = require('./js/logger/client/webhook.js');
+// window.j1.api.log4javascript        = require('./js/logger/client/webhook.js');
 
 // BMD Libraries (moved to modules)
 // -----------------------------------------------------------------------------
@@ -99,7 +100,7 @@ const J1SCarousel                         = require('./js/carousel/carousel.js')
 
 // Github Webhooks (currently NOT used)
 // -----------------------------------------------------------------------------
-// window.j1.core.webhooks              = require('./js/webhooks/octokit/client.js');
+// window.j1.api.webhooks              = require('./js/webhooks/octokit/client.js');
 
 // Test|Custom modules (currently NOT used)
 // -----------------------------------------------------------------------------

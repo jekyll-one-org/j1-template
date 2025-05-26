@@ -312,7 +312,7 @@
       } else {
         // initialize dropcaps
         logger.debug('\n' + 'post processing: createDropCap');
-        j1.core.createDropCap();
+        j1.api.createDropCap();
       } // END if translationEnabled
     }, // END appendNewItems
 

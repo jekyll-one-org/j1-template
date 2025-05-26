@@ -796,7 +796,7 @@
     resize: function () {
         try {
           // var debug = false;
-          var logger = log4javascript.getLogger('j1.core.attic');
+          var logger = log4javascript.getLogger('j1.api.attic');
 
           // Check for a better suited image after the resize
           var $resTest = this.options.alwaysTestWindowResolution ? $(window) : this.$root;
@@ -938,7 +938,7 @@
       ,
     show: function (newIndex, overrideOptions) {
 
-        var logger = log4javascript.getLogger('j1.core.attic');
+        var logger = log4javascript.getLogger('j1.api.attic');
 
         // Validate index
         if (Math.abs(newIndex) > this.images.length - 1) {

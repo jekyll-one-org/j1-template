@@ -37,7 +37,7 @@
 // TODO: Height of dropdowns are to be limited in general
 
 // -----------------------------------------------------------------------------
-// Navigator core registered as 'j1.core.navigator'
+// Navigator core registered as 'j1.api.navigator'
 // -----------------------------------------------------------------------------
 
 module.exports = function navigator ( options ) {
@@ -142,7 +142,7 @@ module.exports = function navigator ( options ) {
       //     message.type    = 'command';
       //     message.action  = 'status';
       //     message.text    = payload;
-      //     j1.sendMessage( 'j1.core.navigator', 'j1.adapter.navigator', message );
+      //     j1.sendMessage( 'j1.api.navigator', 'j1.adapter.navigator', message );
       //
       //     return true;
       //   }; // END event onMessage
@@ -678,7 +678,7 @@ module.exports = function navigator ( options ) {
     // Note:
     // -------------------------------------------------------------------------
     updateSidebar: function (user_data) {
-      var logger = log4javascript.getLogger('j1.core.navigator.updateSidebar');
+      var logger = log4javascript.getLogger('j1.api.navigator.updateSidebar');
       var json_message;
 
 //    json_message = JSON.stringify(user_data, undefined, 2);                   // multiline

@@ -346,7 +346,7 @@ j1.adapter.navigator = ((j1, window) => {
                 logger.debug('\n' + 'application status detected: ' + appDetected);
 
                 logger.info('\n' + 'initialize navigator core: started');
-                j1.core.navigator.init (_this.navDefaults, _this.navMenuOptions);
+                j1.api.navigator.init (_this.navDefaults, _this.navMenuOptions);
 
                 clearInterval(dependencies_met_html_loaded);
               } // END if htmloaded
@@ -428,17 +428,17 @@ j1.adapter.navigator = ((j1, window) => {
       }, 10); // END dependencies_met_module_initialized
 
       // ----------------------------------------------------------------------
-      // Register event 'reset on resize' to call j1.core.navigator on
+      // Register event 'reset on resize' to call j1.api.navigator on
       // manageDropdownMenu to manage the (current) NAV menu for
       // desktop or mobile
       // -----------------------------------------------------------------------
       $(window).on('resize', function () {
-        j1.core.navigator.manageDropdownMenu(navDefaults, navMenuOptions);
+        j1.api.navigator.manageDropdownMenu(navDefaults, navMenuOptions);
 
         // Manage sticky NAV bars
         // TODO: Check why a timeout is required to manage sticky NAV bars on RESIZE a page
         setTimeout(() => {
-          j1.core.navigator.navbarSticky();
+          j1.api.navigator.navbarSticky();
         }, 500);
 
         // Scroll the page one pixel back and forth to get
@@ -1098,7 +1098,7 @@ j1.adapter.navigator = ((j1, window) => {
       // -----------------------------------------------------------------------
       //  process commands|actions
       // -----------------------------------------------------------------------
-      if (sender === 'j1.core.navigator' && message.type === 'state' && message.action === 'core_initialized') {
+      if (sender === 'j1.api.navigator' && message.type === 'state' && message.action === 'core_initialized') {
         navigatorCoreInitialized = true;
         logger.info('\n' + message.text);
       }

@@ -81,7 +81,7 @@ j1.adapter.fab = ((j1, window) => {
   // ---------------------------------------------------------------------------
   // global variable settings
   // ---------------------------------------------------------------------------
-  var isMobile          = j1.core.isMobile();
+  var isMobile          = j1.api.isMobile();
   var environment       = '{{environment}}';
   var dclFinished       = false;
   var moduleOptions     = {};
@@ -415,7 +415,7 @@ j1.adapter.fab = ((j1, window) => {
 
       // scroll offset correction if mobile or window width <= 992
       // For smaller window sizes, the height of the menubar changes.
-      // if (j1.core.isMobile() || $(window).width() <= 992) { scrollOffset += 30; }
+      // if (j1.api.isMobile() || $(window).width() <= 992) { scrollOffset += 30; }
       // calculate offset for correct (smooth) scroll position.
       //
       var $pagehead       = $('.attic');
@@ -447,7 +447,7 @@ j1.adapter.fab = ((j1, window) => {
             previous_header_id  = $(prev_node).find(':header').first()[0].id;
             anchor_id           = '#' + previous_header_id;
 
-            j1.core.scrollSmooth.scroll( anchor_id, {
+            j1.api.scrollSmooth.scroll( anchor_id, {
               duration: toccerScrollDuration,
               offset: scrollOffset,
               callback: null
@@ -509,7 +509,7 @@ j1.adapter.fab = ((j1, window) => {
             //
             scrollOffset        = scrollOffset + toccerScrollOffset;
 
-            j1.core.scrollSmooth.scroll( next_anchor_id, {
+            j1.api.scrollSmooth.scroll( next_anchor_id, {
               duration: toccerScrollDuration,
               offset: scrollOffset,
               callback: null

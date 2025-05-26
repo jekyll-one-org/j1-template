@@ -38,7 +38,7 @@
 
 'use strict';
 function CookieConsent(props) {
-  var logger                = log4javascript.getLogger('j1.core.CookieConsent');
+  var logger                = log4javascript.getLogger('j1.api.CookieConsent');
   var self                  = this;
   var detailedSettingsShown = false;
   var url                   = new liteURL(window.location.href);

@@ -130,9 +130,9 @@
       } else {
         logger.error('\n' + 'cookie not found: ' + cookie_names.user_state);
         logger.info('\n' + 'j1 cookies found:' + j1Cookies.length);
-        j1Cookies.forEach(function (item) {console.log('j1.core.switcher: ' + item);});
+        j1Cookies.forEach(function (item) {console.log('j1.api.switcher: ' + item);});
         logger.info('\n' + 'ga cookies found:' + gaCookies.length);
-        gaCookies.forEach(function (item) {console.log('j1.core.switcher: ' + item);});
+        gaCookies.forEach(function (item) {console.log('j1.api.switcher: ' + item);});
       }
 
       themeName = user_state.theme_name;
@@ -199,9 +199,9 @@
       } else {
         logger.error('\n' + 'cookie not found: ' + cookie_names.user_state);
         logger.info('\n' + 'j1 cookies found:' + j1Cookies.length);
-        j1Cookies.forEach(function (item) {console.log('j1.core.switcher: ' + item);});
+        j1Cookies.forEach(function (item) {console.log('j1.api.switcher: ' + item);});
         logger.info('\n' + 'ga cookies found:' + gaCookies.length);
-        gaCookies.forEach(function (item) {console.log('j1.core.switcher: ' + item);});
+        gaCookies.forEach(function (item) {console.log('j1.api.switcher: ' + item);});
       }
 
       var themeName = user_state.theme_name;
@@ -272,9 +272,9 @@
         } else {
           logger.error('\n' + 'user state NOT cookie found');
           logger.info('\n' + 'j1 cookies found:' + j1Cookies.length);
-          j1Cookies.forEach(function (item) {console.log('j1.core.switcher: ' + item);});
+          j1Cookies.forEach(function (item) {console.log('j1.api.switcher: ' + item);});
           logger.info('\n' + 'ga cookies found:' + gaCookies.length);
-          gaCookies.forEach(function (item) {console.log('j1.core.switcher: ' + item);});
+          gaCookies.forEach(function (item) {console.log('j1.api.switcher: ' + item);});
         }
 
         themeName = user_state.theme_name;

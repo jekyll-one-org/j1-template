@@ -627,8 +627,8 @@
         //
         words = wordCount(subText);
         if (words < wordsMin) {
-          console.debug('j1.core.speak2me: no search possible on this fraction of subText: ' + subText);
-          console.debug('j1.core.speak2me: number of words found: ' + words + ' lower that words min: ' + wordsMin);
+          console.debug('j1.api.speak2me: no search possible on this fraction of subText: ' + subText);
+          console.debug('j1.api.speak2me: number of words found: ' + words + ' lower that words min: ' + wordsMin);
           return undefined;
         } else {
           return subText;

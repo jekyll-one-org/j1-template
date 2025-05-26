@@ -334,7 +334,7 @@ j1.adapter.navigator = ((j1, window) => {
           logger.info('\n' + 'initializing module: started');
 
           logger.info('\n' + 'initialize navigator core: started');
-          j1.core.navigator.init (_this.navDefaults, _this.navMenuOptions);
+          j1.api.navigator.init (_this.navDefaults, _this.navMenuOptions);
 
           clearInterval(dependencies_met_html_loaded);
         } // END if htmloaded
@@ -409,15 +409,15 @@ j1.adapter.navigator = ((j1, window) => {
           } // END if
 
           // ----------------------------------------------------------------------
-          // Register event 'reset on resize' to call j1.core.navigator on
+          // Register event 'reset on resize' to call j1.api.navigator on
           // manageDropdownMenu to manage the (current) NAV menu for
           // desktop or mobile
           // -----------------------------------------------------------------------
           $(window).on('resize', function () {
-            j1.core.navigator.manageDropdownMenu(navDefaults, navMenuOptions);
+            j1.api.navigator.manageDropdownMenu(navDefaults, navMenuOptions);
 
             // Manage sticky NAV bars
-            j1.core.navigator.navbarSticky();
+            j1.api.navigator.navbarSticky();
 
             // Scroll the page one pixel back and forth to get
             // the right position for the toccer
