@@ -1,77 +1,95 @@
 /*
  # -----------------------------------------------------------------------------
- #  ~/js/console_filter/consoleFilter.js
- #  console logs (error|info) im Browser unabhängig von der auslösenden
- #  Quelle filtern und bestimmte Fehlermeldungen oder Log-Einträge entfernen
+ # ~/js/console_filter/consoleFilter.js
+ # filter console logs (info|warning|error|) in the Browser Console
+ # independent of the source that triggered the log and remove
+ # specific error messages or log entries
  #
- #  Product/Info:
- #  https://jekyll.one
+ # Product/Info:
+ # https://jekyll.one
  #
- #  Copyright (C) 2023-2025 Juergen Adams
+ # Copyright (C) 2023-2025 Juergen Adams
  #
- #  J1 Theme is licensed under MIT License.
- #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ # J1 Theme is licensed under MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
 */
 "use strict";
-module.exports = function consoleFilters (options) {
+module.exports = function consoleFilters (window, j1) {
 
   return {
 
     // -------------------------------------------------------------------------
     // filters
     // -------------------------------------------------------------------------
-    filter: function () {  
+    filter: function (options) {
 
-      // Speichern Sie die ursprüngliche console error|log Funktion
-      const originalConsoleInfoLog  = console.log;
-      const originalConsoleErrorLog = console.error;
-      var debug = false;
+      // save console info|warning|error log function references
+      const originalConsoleInfoLog    = console.log;
+      const originalConsoleWarningLog = console.warn;
+      const originalConsoleErrorLog   = console.error;
 
-      // Definieren Sie die Filter, nach denen gesucht werden soll (Groß-/Kleinschreibung beachten)
-      const logFilterWoerter    = ["Fehler", "Error", "WARNUNG"];
-      const errorFilterWoerter  = ["googleads.g.doubleclick.net"];
+      var settings  = options || {};
+      var debug     = settings.debug || false
 
-      // Definieren Sie die neue console.log-Funktion
-      console.error = function() {
-        const argsArray = Array.from(arguments);
-        const logMessage = argsArray.join(" ");
+      // define message filter|words (NOTE: words are case sensitive)
+      const infoFilterWords     = ["Fehler", "Error", "WARNUNG", "WARNING"];
+      const warningFilterWords  = ["Chrome", "Fehler", "Error", "WARNUNG", "WARNING"];
+      const errorFilterWords    = ["doubleclick.net"];
 
-        // Überprüfen Sie, ob die Log-Nachricht eines der Filterwörter enthält
-        const sollGeloggtWerden = !errorFilterWoerter.some(wort => logMessage.includes(wort));
-
-        // Rufen Sie die ursprüngliche console.log-Funktion nur auf, wenn die Nachricht nicht gefiltert werden soll
-        if (sollGeloggtWerden) {
-            originalConsoleErrorLog.apply(console, arguments);
-        }
-      }
-
-      // Definieren Sie die neue console.log-Funktion
+      // define redirect for funktion console.log 
       console.log = function() {
-        const argsArray = Array.from(arguments);
-        const logMessage = argsArray.join(" ");
+        const argsArray   = Array.from(arguments);
+        const logMessage  = argsArray.join(' ');
 
-        // Überprüfen Sie, ob die Log-Nachricht eines der Filterwörter enthält
-        const sollGeloggtWerden = !logFilterWoerter.some(wort => logMessage.includes(wort));
+        // check for filter words in the log message
+        const shouldLogged = !infoFilterWords.some(word => logMessage.includes(word));
 
-        // Rufen Sie die ursprüngliche console.log-Funktion nur auf, wenn die Nachricht nicht gefiltert werden soll
-        if (sollGeloggtWerden) {
+        // call original console.log function if the message should not be filtered
+        if (shouldLogged) {
           originalConsoleInfoLog.apply(console, arguments);
         }
       }
 
-      if (debug) {
-      console.error("consoleFilter: Dieser Fehler sollte angezeigt werden.");
+      // define redirect for funktion console.warn
+      console.warn = function() {
+        const argsArray   = Array.from(arguments);
+        const logMessage  = argsArray.join(' ');
 
-      console.log("consoleFilter: Diese Nachricht sollte angezeigt werden.");
-      console.log("consoleFilter: Diese Nachricht enthält das Wort Fehler und wird gefiltert.");
-      console.log("consoleFilter: Diese WARNUNG wird ebenfalls gefiltert.");
+        // check for filter words in the log message
+        const shouldLogged = !warningFilterWords.some(word => logMessage.includes(word));
+
+        // call original console.warn function if the message should not be filtered
+        if (shouldLogged) {
+          originalConsoleWarningLog.apply(console, arguments);
+        }
+      }
+
+      // define redirect for funktion console.error
+      console.error = function() {
+        const argsArray   = Array.from(arguments);
+        const logMessage  = argsArray.join(' ');
+
+        // check for filter words in the log message
+        const shouldLogged = !errorFilterWords.some(word => logMessage.includes(word));
+
+        // call original console.error function if the message should not be filtered
+        if (shouldLogged) {
+          originalConsoleErrorLog.apply(console, arguments);
+        }
+      }
+
+      if (debug) {
+        console.log("consoleFilters: This message should be displayed.");
+        console.log("consoleFilters: This message contains the word \"Error\" and is filtered.");
+        console.log("consoleFilters: This WARNING is also filtered.");
+        console.warn("consoleFilters: This warning should be displayed.");        
+        console.error("consoleFilters: This error should be displayed.");
       }
     
-    return true;
+      return true;
     },
 
   };
 }( window, j1 ); 
 // END consoleFilters
-

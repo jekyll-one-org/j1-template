@@ -97,6 +97,7 @@ j1.adapter.amplitude = ((j1, window) => {
   // ---------------------------------------------------------------------------
   // control|logging
   // ------------------------------------
+  var consoleFilterSettings = {};
   var _this;
   var logger;
   var logText;
@@ -197,11 +198,10 @@ j1.adapter.amplitude = ((j1, window) => {
   var playerVisualizationEnabled        = {{amplitude_defaults.player.visualization.enabled}};
   var playerVisualizationName           = '{{amplitude_defaults.player.visualization.name}}';
 
-
   // ---------------------------------------------------------------------------
   // helper functions
   // ---------------------------------------------------------------------------
-  function forceError() {
+  function forceJsError() {
     throw new Error("GENERATED JavaScript error!");
   }
 
@@ -214,6 +214,20 @@ j1.adapter.amplitude = ((j1, window) => {
     // adapter initializer
     // -------------------------------------------------------------------------
     init: (options) => {
+
+      // -----------------------------------------------------------------------
+      // set console log filters (early)
+      // -----------------------------------------------------------------------
+      // consoleFilterSettings = {
+      //   debug: false,
+      // };
+      // j1.api.consoleFilters.filter(consoleFilterSettings);  
+      j1.api.consoleFilters.filter();
+
+      // -----------------------------------------------------------------------
+      // set error log filters (JS early)
+      // -----------------------------------------------------------------------
+      // j1.api.errorFilters.filter();
 
       // -----------------------------------------------------------------------
       // default module settings
@@ -271,11 +285,16 @@ j1.adapter.amplitude = ((j1, window) => {
           logger.debug('\n' + 'module state: ' + _this.getState());
           logger.info('\n' + 'module is being initialized');
 
-          // j1.api.errorFilters.filter();
-          j1.api.consoleFilters.filter();
+          // test data for console filters
+          // -------------------------------------------------------------------
+          // console.warn("consoleFilters: Diese WARNUNG wird gefiltert.");
+          // logger.warn("consoleFilters: Diese WARNUNG wird gefiltert.");
+          // console.warn("consoleFilters: Diese Meldung wird nicht gefiltert.");
+          // logger.warn("consoleFilters: Diese Meldung wird nicht gefiltert.");
 
-          // force an 'error' Event
-          // forceError();
+          // test data for error filters
+          // -------------------------------------------------------------------
+          // forceJsError();
 
           // -------------------------------------------------------------------
           // create global playlist (songs)

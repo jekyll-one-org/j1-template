@@ -1,19 +1,20 @@
 /*
  # -----------------------------------------------------------------------------
- #  ~/js/console_filter/consoleFilter.js
- #  console logs (error|info) im Browser unabhängig von der auslösenden
- #  Quelle filtern und bestimmte Fehlermeldungen oder Log-Einträge entfernen
+ # ~/js/console_filter/errorFilter.js
+ # filter error logs in the browser console regardless of the
+ # (triggering) source and remove specific error messages
  #
- #  Product/Info:
- #  https://jekyll.one
+ # Product/Info:
+ # https://jekyll.one
  #
- #  Copyright (C) 2023-2025 Juergen Adams
+ # Copyright (C) 2023-2025 Juergen Adams
  #
- #  J1 Theme is licensed under MIT License.
- #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ # J1 Theme is licensed under MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
 */
 "use strict";
+
 module.exports = function errorFilters (options) {
 
   return {
