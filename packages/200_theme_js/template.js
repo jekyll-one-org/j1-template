@@ -69,11 +69,7 @@ window.j1.api.navigator                 = require('./js/navigator/navigator.js')
 window.j1.api.parseContent              = require('./js/speak2me/parse-content.js');
 window.j1.api.scrollSmooth              = require('./js/scroll-smooth/scroll-smooth.js');
 
-// window.j1.core                          = require('./js/core/core.js');
-// window.j1.api.navigator                = require('./js/navigator/navigator.js');
-
-// placeholder object for all J1 Modules
-// window.j1.modules                    = {};
+// window.j1.modules                    = {};                                   // placeholder object for all J1 Modules
 
 // Following source objects|modules are *implicetly* forced to be
 // exposed for run-time to the global namespace (window).
@@ -82,7 +78,6 @@ window.j1.api.scrollSmooth              = require('./js/scroll-smooth/scroll-smo
 // const J1jQueryExt                      = require('./js/jquery-extensions/jquery-regex.js');
 // const J1ThemeSwitcher                  = require('./js/bs_theme_switcher/switcher.js');
 // const J1MmenuLight                     = require('./js/mmenu-light/mmenu.js');
-
 // const BootstrapJS                      = require('./node_modules/bootstrap/dist/js/bootstrap.js');
 
 const J1Tocbot                            = require('./js/tocbot/tocbot.js');
