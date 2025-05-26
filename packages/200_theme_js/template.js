@@ -80,10 +80,10 @@ window.j1.api.scrollSmooth   = require('./js/api/scroll-smooth/scroll-smooth.js'
 // const J1MmenuLight        = require('./js/mmenu-light/mmenu.js');
 // const BootstrapJS         = require('./node_modules/bootstrap/dist/js/bootstrap.js');
 
-const J1Tocbot               = require('./js/tocbot/tocbot.js');
-const J1AttrChangeListener   = require('./js/jquery-extensions/attrchange.js');
+const J1Tocbot               = require('./js/modules/tocbot/tocbot.js');
+const J1AttrChangeListener   = require('./js/modules/jquery-extensions/attrchange.js');
+const J1SCarousel            = require('./js/modules/carousel/carousel.js');
 const J1Speak2Me             = require('./js/api/speak2me/speak2me.js');
-const J1SCarousel            = require('./js/carousel/carousel.js');
 
 // Additional Vanilla JS helpers
 // -----------------------------------------------------------------------------

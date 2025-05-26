@@ -180,7 +180,7 @@ no need to open other widgets.
 
 
 [role="mt-5"]
-== J1 AmplitudeJS on Youtube
+== J1 AmplitudeJS on YouTube
 
 The example demonstrates playing *Audio* track from *YouTube Video* using an
 AmplitudJS player. The J1 template uses the video *plugin ytp* to extend the
