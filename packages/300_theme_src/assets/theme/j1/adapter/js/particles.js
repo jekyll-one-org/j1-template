@@ -161,8 +161,8 @@ j1.adapter.particles = ((j1, window) => {
           var dataUrl = particleDefaults['xhr_data_path'];
 
           _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized');
+          logger.debug('state: ' + _this.getState());
+          logger.info('module is being initialized');
 
           {% for item in particles_settings.particles %}
             {% if item.particle.enabled %}
@@ -176,7 +176,7 @@ j1.adapter.particles = ((j1, window) => {
 
               var dependencies_met_attic_ready = setInterval((options) => {
                 if ($('#' + particleID).length != 0) {
-                  logger.info('\n' + 'container found: ' + '#' + particleID);
+                  logger.info('container found: ' + '#' + particleID);
 
                   // load particles config from yaml data file (dataUrl)
                   $.get(dataUrl)
@@ -199,11 +199,11 @@ j1.adapter.particles = ((j1, window) => {
                   {% endfor %}
                   })
                   .fail(() => {
-                    logger.error('\n' + 'loading data: failed');
+                    logger.error('loading data: failed');
                   });
 
                 } else {
-                  logger.warn('\n' + 'container id not found: ' + '#' + particleID);
+                  logger.warn('container id not found: ' + '#' + particleID);
                 }
 
                 clearInterval(dependencies_met_attic_ready);
@@ -212,11 +212,11 @@ j1.adapter.particles = ((j1, window) => {
           {% endfor %}
 
           _this.setState('finished');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'initializing module finished');
+          logger.debug('state: ' + _this.getState());
+          logger.info('initializing module finished');
 
           endTimeModule = Date.now();
-          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+          logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_page_ready);
         } // END if j1CoreFinished
@@ -230,7 +230,7 @@ j1.adapter.particles = ((j1, window) => {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -242,7 +242,7 @@ j1.adapter.particles = ((j1, window) => {
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

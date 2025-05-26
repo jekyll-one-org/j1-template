@@ -572,12 +572,12 @@
           winWidth = $(window).width();
           // set show/hide all table/colgroup elements
           if ($(window).width() < Tablesaw.bsMediaBreakpoints[Tablesaw.options.breakpoint]) {
-            log_text = '\n' + 'hide colgroups: ' + curTable.attr('id')
+            log_text = 'hide colgroups: ' + curTable.attr('id')
             // hide colgroups if table is collapsed
             curTable.find('colgroup').hide();
             logger.debug(log_text);
           } else {
-            log_text = '\n' + 'show colgroup: ' + curTable.attr('id')
+            log_text = 'show colgroup: ' + curTable.attr('id')
             // show colgroups if table is expanded
             curTable.find('colgroup').show();
             logger.debug(log_text);

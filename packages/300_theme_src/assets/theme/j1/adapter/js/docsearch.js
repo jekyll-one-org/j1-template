@@ -152,8 +152,8 @@ var timeSeconds;
           startTimeModule = Date.now();
 
           _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized');
+          logger.debug('state: ' + _this.getState());
+          logger.info('module is being initialized');
 
           user_consent = j1.readCookie(cookie_names.user_consent);
           if (!user_consent.personalization) {
@@ -207,11 +207,11 @@ var timeSeconds;
           }); // END modal on 'hidden'
 
           _this.setState('finished');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module initialization finished');
+          logger.debug('state: ' + _this.getState());
+          logger.info('module initialization finished');
 
           endTimeModule = Date.now();
-          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+          logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_page_ready);
         } // END if
@@ -223,7 +223,7 @@ var timeSeconds;
     // display the dialog
     // -------------------------------------------------------------------------
     showDialog: () => {
-      logger.debug('\n' + "showDialog");
+      logger.debug("showDialog");
 
       $('#docsearch_container').modal({
         backdrop: 'static',
@@ -241,7 +241,7 @@ var timeSeconds;
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -253,7 +253,7 @@ var timeSeconds;
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

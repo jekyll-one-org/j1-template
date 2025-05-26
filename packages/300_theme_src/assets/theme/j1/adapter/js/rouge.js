@@ -143,8 +143,8 @@ j1.adapter.rouge = ((j1, window) => {
           startTimeModule = Date.now();
 
           _this.setState('started');
-          logger.debug('\n' + 'set module state to: ' + _this.getState());
-          logger.info('\n' + 'initializing module: started');
+          logger.debug('set module state to: ' + _this.getState());
+          logger.info('initializing module: started');
 
           // Detect|Set J1 UserState
           user_state_detected = j1.existsCookie(cookie_user_state_name);
@@ -157,7 +157,7 @@ j1.adapter.rouge = ((j1, window) => {
                           themeCss.includes('slate') ||
                           themeCss.includes('superhero');
           } else {
-            log_text = '\n' + 'user_state cookie not found';
+            log_text = 'user_state cookie not found';
             logger.warn(log_text);
           }
 
@@ -177,11 +177,11 @@ j1.adapter.rouge = ((j1, window) => {
           });
 
           _this.setState('finished');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'initializing module: finished');
+          logger.debug('state: ' + _this.getState());
+          logger.info('initializing module: finished');
 
           endTimeModule = Date.now();
-          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+          logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependency_met_page_ready);
         } // END if pageVisible
@@ -238,7 +238,7 @@ j1.adapter.rouge = ((j1, window) => {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -250,7 +250,7 @@ j1.adapter.rouge = ((j1, window) => {
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

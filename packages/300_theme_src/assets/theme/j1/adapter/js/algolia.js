@@ -126,8 +126,8 @@ j1.adapter.algolia = ((j1, window) => {
       startTimeModule = Date.now();
 
       _this.setState('started');
-      logger.debug('\n' + 'state: ' + _this.getState());
-      logger.info('\n' + 'module is being initialized');
+      logger.debug('state: ' + _this.getState());
+      logger.info('module is being initialized');
 
       {% comment %} Load module config from yaml data file
       -------------------------------------------------------------------------- {% endcomment %}
@@ -185,7 +185,7 @@ j1.adapter.algolia = ((j1, window) => {
         }
 
         // state = 'finished search';
-        // logger.debug('\n' + 'state: ' + state);
+        // logger.debug('state: ' + state);
       };
 
       if (moduleOptions.enabled == true) {
@@ -275,16 +275,16 @@ j1.adapter.algolia = ((j1, window) => {
         $('#searcher').addClass('row');
 
         _this.setState('finished');
-        logger.debug('\n' + 'state: ' + _this.getState());
-        logger.info('\n' + 'module initialized successfully');
+        logger.debug('state: ' + _this.getState());
+        logger.info('module initialized successfully');
 
         endTimeModule = Date.now();
-        logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+        logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
       } else {
         $('#algolia-site-search').append('<p class="ml-5 mt-5 mb-5 "> <strong>Algolia Search DISABLED</strong> </p>');
         _this.setState('finished');
-        logger.debug('\n' + 'state: ' + _this.getState());
-        logger.warn('\n' + 'module disabled');
+        logger.debug('state: ' + _this.getState());
+        logger.warn('module disabled');
       } // END if moduleOptions enabled
 
       return true;
@@ -297,7 +297,7 @@ j1.adapter.algolia = ((j1, window) => {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -309,7 +309,7 @@ j1.adapter.algolia = ((j1, window) => {
         // Place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

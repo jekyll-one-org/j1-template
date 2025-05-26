@@ -196,8 +196,8 @@ j1.adapter.advertising = ((j1, window) => {
           _this.ad_initializer();
 
           if (!validpublisherID) {
-            logger.warn('\n' + 'invalid publisher id: ' + publisherID);
-            logger.info('\n' + 'module disabled' );
+            logger.warn('invalid publisher id: ' + publisherID);
+            logger.info('module disabled' );
 
             clearInterval(dependencies_met_page_ready);
             return false;
@@ -210,22 +210,22 @@ j1.adapter.advertising = ((j1, window) => {
           // initialize state flag
           _this.setState('started');
 
-          logger.debug('\n' + 'state: ' + _this.getState());
+          logger.debug('state: ' + _this.getState());
 
           if (user_consent.personalization) {
-            logger.info('\n' + 'adsense api is being initialized');
+            logger.info('adsense api is being initialized');
 
             if (!validpublisherID) {
-              logger.debug('\n' + 'invalid publisherID detected for Google Adsense: ' + publisherID);
-              logger.info('\n' + 'skip initialization for provider: ' + advertisingProvider);
+              logger.debug('invalid publisherID detected for Google Adsense: ' + publisherID);
+              logger.info('skip initialization for provider: ' + advertisingProvider);
 
               return false;
             } else {
-              logger.info('\n' + 'use publisherID for Google Adsense: ' + publisherID);
+              logger.info('use publisherID for Google Adsense: ' + publisherID);
             }
 
             // add Google Adsense API dynamically in head section loaded async
-            logger.info('\n' + 'add Google AdsenseAPI in section: head');
+            logger.info('add Google AdsenseAPI in section: head');
 
             gasScript.async = true;
             gasScript.id    = 'gas-api';
@@ -233,22 +233,22 @@ j1.adapter.advertising = ((j1, window) => {
             gasScript.setAttribute('data-ad-client', publisherID);
 
             document.head.appendChild(gasScript);
-            logger.info('\n' + 'adsense api initialized');
+            logger.info('adsense api initialized');
 
             // setup monitor for state changes on all ads configured
             setTimeout(() => {
               var ads_found = (document.getElementsByClassName('adsbygoogle').length > 0) ? true : false;
               if (ads_found > 0) {
-                logger.info('\n' + 'setup Google Ad monitoring');
+                logger.info('setup Google Ad monitoring');
                 _this.ad_monitor();
               } else {
-                logger.warn('\n' + 'no initialized Google Ads found in page');
+                logger.warn('no initialized Google Ads found in page');
               }
             }, 1000);
 
             // run protection check
             if (checkTrackingProtection) {
-              logger.debug('\n' + 'run checks for tracking protection');
+              logger.debug('run checks for tracking protection');
 
               _this.check_tracking_protection();
               var dependencies_met_tracking_check_ready = setInterval (() => {
@@ -256,14 +256,14 @@ j1.adapter.advertising = ((j1, window) => {
                   var browser_tracking_feature = navigator.DoNotTrack;
 
                   if (!tracking_protection && !browser_tracking_feature) {
-                    logText = '\n' + 'tracking protection: disabled';
+                    logText = 'tracking protection: disabled';
                     logger.info(logText);
                   } else {
-                    logText = '\n' + 'tracking protection: enabled';
+                    logText = 'tracking protection: enabled';
                     logger.debug(logText);
 
                     if (showErrorPageOnBlocked) {
-                      logger.error('\n' + 'redirect to error page (blocked content): HTML-447');
+                      logger.error('redirect to error page (blocked content): HTML-447');
                       // redirect to error page: blocked content
                       window.location.href = '/447.html';
                     }
@@ -275,11 +275,11 @@ j1.adapter.advertising = ((j1, window) => {
             } else {
               // no protection check enabled
               _this.setState('finished');
-              logger.debug('\n' + 'state: ' + _this.getState());
-              logger.info('\n' + 'initializing module: finished');
+              logger.debug('state: ' + _this.getState());
+              logger.info('initializing module: finished');
 
               endTimeModule = Date.now();
-              logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+              logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
               clearInterval(dependencies_met_tracking_check_ready);
             } // END if checkTrackingProtection
@@ -290,8 +290,8 @@ j1.adapter.advertising = ((j1, window) => {
               console.debug('cookies for personalization rejected');
               console.debug('initialization of module advertising skipped');
             } else {
-              logger.warn('\n' + 'user consent on personalization: ' + user_consent.personalization);
-              logger.warn('\n' + 'initializing module: skipped');
+              logger.warn('user consent on personalization: ' + user_consent.personalization);
+              logger.warn('initializing module: skipped');
             }
 
             // if consent is rejected, detect and remove Adsense cookies
@@ -305,13 +305,13 @@ j1.adapter.advertising = ((j1, window) => {
             if (checkTrackingProtection) {
               if (!user_consent.personalization) {
                 if (development) {
-                  logText = '\n' + 'consent on cookies disabled for personalization';
+                  logText = 'consent on cookies disabled for personalization';
                   logger.debug(logText);
                 }
 
                 if (showErrorPageOnBlocked) {
                   if (development) {
-                    logger.error('\n' + 'redirect to error page (blocked content): HTML-447');
+                    logger.error('redirect to error page (blocked content): HTML-447');
                   }
                   // redirect to error page: blocked content
                   window.location.href = '/448.html';
@@ -329,8 +329,8 @@ j1.adapter.advertising = ((j1, window) => {
             var ads_found = document.getElementsByClassName('adsbygoogle').length;
 
             logger = log4javascript.getLogger('j1.adapter.advertising');
-            logger.debug('\n' + 'found ads in page: #' + ads_found);
-            logger.debug('\n' + 'no ads initialized, advertising disabled');
+            logger.debug('found ads in page: #' + ads_found);
+            logger.debug('no ads initialized, advertising disabled');
 
           {% endif %} // END if 'advertising'
 
@@ -399,18 +399,18 @@ j1.adapter.advertising = ((j1, window) => {
                 ads_initialized ++;
               } else {
                 if (ad.layout === layout) {
-                  logger.warn('\n' + 'ad disabled on id ' + ad.id + ' for slot: ' + ad.slot);
+                  logger.warn('ad disabled on id ' + ad.id + ' for slot: ' + ad.slot);
                 }
               }
             } else {
-              logger.warn('\n' + 'skipped add settings on all ad containers');
+              logger.warn('skipped add settings on all ad containers');
             } // END if user_consent.personalization
 
           });
           // END loading adverting containers
 
           if (ads_initialized > 0) {
-            logger.info('\n' + 'ads enabled found in page (total): ' + ads_initialized);
+            logger.info('ads enabled found in page (total): ' + ads_initialized);
 
             var google_ads = document.getElementsByClassName('adsbygoogle');
             var counter    = document.getElementsByClassName('adsbygoogle').length;
@@ -431,7 +431,7 @@ j1.adapter.advertising = ((j1, window) => {
               counter --;
             });
           } else {
-            logger.warn('\n' + 'no ads found in page for layout: ' + layout);
+            logger.warn('no ads found in page for layout: ' + layout);
           } // END if ads_initialized
 
           clearInterval(dependencies_met_page_visible);
@@ -465,19 +465,19 @@ j1.adapter.advertising = ((j1, window) => {
               if (production) {
                 console.debug('detected ad blocks in state: unfilled');
               } else {
-                logger.warn('\n' + 'detected ad on slot ' + elm.adSlot + ' in state: ' + event.newValue);
+                logger.warn('detected ad on slot ' + elm.adSlot + ' in state: ' + event.newValue);
               }
               if (addBorderOnUnfilled) {
                 $('.adsbygoogle').addClass('border--dotted');
               }
               if (autoHideOnUnfilled) {
                 if (development) {
-                  logger.info('\n' + ' hide ad on slot: ' + elm.adSlot);
+                  logger.info(' hide ad on slot: ' + elm.adSlot);
                 }
                 $('.adsbygoogle').hide();
               }
             } else if (event.newValue === 'filled') {
-              logger.info('\n' + 'detected ad on slot ' + elm.adSlot + ' in state: ' + event.newValue);
+              logger.info('detected ad on slot ' + elm.adSlot + ' in state: ' + event.newValue);
             } else {
               var filled = (event.newValue.includes('display') ? true : false);
               var unfilled = (event.newValue.includes('dotted') ? true : false);
@@ -485,19 +485,19 @@ j1.adapter.advertising = ((j1, window) => {
                 if (production) {
                   console.info('detected ad blocks in state: filled');
                 } else {
-                  logger.info('\n' + 'detected ad block on slot ' + elm.adSlot + ' in state: filled');
+                  logger.info('detected ad block on slot ' + elm.adSlot + ' in state: filled');
                 }
               } else if (unfilled) {
                 if (production) {
                   console.info('detected ad blocks in state: unfilled');
                 } else {
-                  logger.info('\n' + 'detected ad block on slot ' + elm.adSlot + ' in state: unfilled');
+                  logger.info('detected ad block on slot ' + elm.adSlot + ' in state: unfilled');
                 }
               } else {
                 if (production) {
                   console.warn('unknown ad state detected: ' + event.newValue);
                 } else {
-                  logger.warn('\n' + 'unknown ad state detected on slot ' + elm.adSlot + ' : ' + event.newValue);
+                  logger.warn('unknown ad state detected on slot ' + elm.adSlot + ' : ' + event.newValue);
                 }
               }
             } // END if 'event.newValue'
@@ -521,7 +521,7 @@ j1.adapter.advertising = ((j1, window) => {
     check_tracking_protection: () => {
       var logger = log4javascript.getLogger('j1.adapter.advertising.monitor.tracking');
 
-      logText = '\n' + 'check for trackingprotection';
+      logText = 'check for trackingprotection';
       logger.info(logText);
 
       function checkTrackingProtection() {
@@ -543,7 +543,7 @@ j1.adapter.advertising = ((j1, window) => {
             tracking_protection = false;
           }).catch(e => {
             tracking_protection = true;
-            logger.debug('\n' + 'detection details: ' + e);
+            logger.debug('detection details: ' + e);
           });
         }
       }
@@ -558,7 +558,7 @@ j1.adapter.advertising = ((j1, window) => {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -571,7 +571,7 @@ j1.adapter.advertising = ((j1, window) => {
         //
 
         if (development) {
-          logger.info('\n' + message.text);
+          logger.info(message.text);
         }
       }
 

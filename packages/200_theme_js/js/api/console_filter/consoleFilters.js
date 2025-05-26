@@ -28,6 +28,7 @@ module.exports = function consoleFilters (window, j1) {
       const originalConsoleInfoLog    = console.log;
       const originalConsoleWarningLog = console.warn;
       const originalConsoleErrorLog   = console.error;
+      const originalConsoleDebugLog   = console.debug;
 
       var settings  = options || {};
       var debug     = settings.debug || false
@@ -36,6 +37,7 @@ module.exports = function consoleFilters (window, j1) {
       const infoFilterWords     = ["Fehler", "Error", "WARNUNG", "WARNING"];
       const warningFilterWords  = ["Chrome", "Fehler", "Error", "WARNUNG", "WARNING"];
       const errorFilterWords    = ["doubleclick.net"];
+      const debugFilterWords    = [];
 
       // define redirect for funktion console.log 
       console.log = function() {
@@ -76,6 +78,20 @@ module.exports = function consoleFilters (window, j1) {
         // call original console.error function if the message should not be filtered
         if (shouldLogged) {
           originalConsoleErrorLog.apply(console, arguments);
+        }
+      }
+
+      // define redirect for funktion console.debug
+      console.debug = function() {
+        const argsArray   = Array.from(arguments);
+        const logMessage  = argsArray.join(' ');
+
+        // check for filter words in the log message
+        const shouldLogged = !debugFilterWords.some(word => logMessage.includes(word));
+
+        // call original console.error function if the message should not be filtered
+        if (shouldLogged) {
+          originalConsoleDebugLog.apply(console, arguments);
         }
       }
 

@@ -141,7 +141,7 @@ j1.adapter.lunr = ((j1, window) => {
       var dependencies_met_span_ready = setInterval (() => {
         var spanElementReady = (($(spanElement).length) !== 0) ? true : false;
         if (spanElementReady) {
-          logger.debug('\n' + 'add eventListener to: ' + span);
+          logger.debug('add eventListener to: ' + span);
           spanElement.addEventListener('click', spanElementEventListener);
 
           clearInterval(dependencies_met_span_ready);
@@ -210,7 +210,7 @@ j1.adapter.lunr = ((j1, window) => {
 
       // update searchHistory
       if (searchHistoryFromCookie) {
-        logger.debug('\n' + 'save search history to cookie');
+        logger.debug('save search history to cookie');
 
         // remove BEFORE write
         j1.removeCookie({ name: cookie_names.search_prompt });
@@ -227,13 +227,13 @@ j1.adapter.lunr = ((j1, window) => {
             data:   {},
             secure: secure
           });
-          logger.info('\n' + 'spanElementEventListener, hide prompt history on last element');
+          logger.info('spanElementEventListener, hide prompt history on last element');
           $("#search_history_select_wrapper").hide();
         } // END if length
       } // END if searchHistoryFromCookie
     }
 
-    logger.info('\n' + 'spanElementEventListener, option deleted:\n' + optionText);
+    logger.info('spanElementEventListener, option deleted:\n' + optionText);
 
     // close currently required to re-add history prompt events on next beforeOpen
     $slimSelect.close();
@@ -289,7 +289,7 @@ j1.adapter.lunr = ((j1, window) => {
         var slimSelectFinished = (Object.keys(j1.adapter.slimSelect.select).length) ? true : false;
 
         if (slimSelectFinished) {
-          logger.debug('\n' + 'initializing select data');
+          logger.debug('initializing select data');
 
           // initialize history array from cookie
           if (searchHistoryEnabled && searchHistoryFromCookie) {
@@ -303,7 +303,7 @@ j1.adapter.lunr = ((j1, window) => {
             // allow|reject history updates if promptHistoryMax reached
             allowSearchHistoryUpdatesOnMax = topSearchOptions.allow_history_updates_on_max;
 
-            logger.debug('\n' + 'read search history from cookie');
+            logger.debug('read search history from cookie');
             var data    = [];
             var option  = {};
             searchHistory = j1.existsCookie(cookie_names.search_prompt)
@@ -320,7 +320,7 @@ j1.adapter.lunr = ((j1, window) => {
 
               textHistory = uniqueArray;
               if (textHistoryLenght > textHistory.length) {
-                logger.debug('\n' + 'removed duplicates from history array: ' + (textHistoryLenght - textHistory.length) + ' element|s');
+                logger.debug('removed duplicates from history array: ' + (textHistoryLenght - textHistory.length) + ' element|s');
               }
             } // END if !allowHistoryDupicates
 
@@ -372,10 +372,10 @@ j1.adapter.lunr = ((j1, window) => {
 
           // initialize state flag
           _this.setState('started');
-          logger.debug('\n' + 'set module state to: ' + _this.getState());
-          logger.info('\n' + 'initializing module: started');
+          logger.debug('set module state to: ' + _this.getState());
+          logger.info('initializing module: started');
 
-          logger.info('\n' + 'initializing search engine');
+          logger.info('initializing search engine');
           $(searchOptions.search_input).lunrSearch({
             index_file:     searchOptions.index_file,
             results:        searchOptions.results,
@@ -389,14 +389,14 @@ j1.adapter.lunr = ((j1, window) => {
             {% endif %}
           });
 
-          logger.info('\n' + 'initializing UI event handlers (modal)');
+          logger.info('initializing UI event handlers (modal)');
           _this.uiEventHandler();
 
           {% if search_history_enabled %}
           // initialize history array from cookie
           if (searchHistoryEnabled && searchHistoryFromCookie) {
 
-            logger.info('\n' + 'initializing search history from cookie');
+            logger.info('initializing search history from cookie');
 
             // limit the history
             searchHistoryMax                = topSearchOptions.search_history_max;
@@ -407,7 +407,7 @@ j1.adapter.lunr = ((j1, window) => {
             // allow|reject history updates if searchHistoryMax reached
             allowSearchHistoryUpdatesOnMax  = topSearchOptions.allow_history_updates_on_max;
 
-            logger.debug('\n' + 'read search history from cookie');
+            logger.debug('read search history from cookie');
             var data      = [];
             var option    = {};
             searchHistory = j1.existsCookie(cookie_names.search_prompt)
@@ -431,18 +431,18 @@ j1.adapter.lunr = ((j1, window) => {
 
               textHistory = uniqueArray;
               if (textHistoryLenght > textHistory.length) {
-                logger.debug('\n' + 'removed duplicates from history array: ' + (textHistoryLenght - textHistory.length) + ' element|s');
+                logger.debug('removed duplicates from history array: ' + (textHistoryLenght - textHistory.length) + ' element|s');
               }
             } // END if !allowHistoryDupicates
           } // END if searchHistoryEnabled
           {% endif %}
 
           _this.setState('finished');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'initializing module: finished');
+          logger.debug('state: ' + _this.getState());
+          logger.info('initializing module: finished');
 
           endTimeModule = Date.now();
-          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+          logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_lunr_finished);
         } // END j1CoreFinished && slimSelectFinished
@@ -473,7 +473,7 @@ j1.adapter.lunr = ((j1, window) => {
 
       // on modal 'shown'
       $(topSearchModalID).on('shown.bs.modal', (e) => {
-        logger.debug('\n' + 'search modal shown');
+        logger.debug('search modal shown');
 
         {% if search_history_enabled %}
         if (searchHistoryEnabled) {
@@ -510,7 +510,7 @@ j1.adapter.lunr = ((j1, window) => {
 
           // display history container
           if (textHistory.length > 0) {
-            logger.debug('\n' + 'show search history on id: ' + searchHstoryWrapperID);
+            logger.debug('show search history on id: ' + searchHstoryWrapperID);
             $(searchHstoryWrapperID).show();
           }
         } // END if searchHistoryEnabled
@@ -520,7 +520,7 @@ j1.adapter.lunr = ((j1, window) => {
       {% if search_history_enabled %}
       // on modal 'hidden'
       $(topSearchModalID).on('hidden.bs.modal', (e) => {
-        logger.debug('\n' + 'search modal hidden');
+        logger.debug('search modal hidden');
 
         if (searchHistoryEnabled) {
           var currentSearchQuery = $('#search-query').val();
@@ -563,7 +563,7 @@ j1.adapter.lunr = ((j1, window) => {
         index = textHistory.indexOf(prompt);
         itemExists  = (index !== -1) ? true : false;
         if (itemExists) {
-          logText = '\n' + `sendButton, prompt: "${prompt}"\n` + `already exists in history at index: ${index}`;
+          logText = `sendButton, prompt: "${prompt}"\n` + `already exists in history at index: ${index}`;
           logger.debug(logText);
         }
 
@@ -576,10 +576,10 @@ j1.adapter.lunr = ((j1, window) => {
             newItem = queryInput.value.replace(/\s+$/g, '');
           }
 
-          logger.debug('\n' + 'sendButton, update item in history:\n' + textHistory[0]);
+          logger.debug('sendButton, update item in history:\n' + textHistory[0]);
           // replace FIRST history element by NEW item
           textHistory[0] = newItem;
-          logger.debug('\n' + 'sendButton, add new item to history:\n' + textHistory[0]);
+          logger.debug('sendButton, add new item to history:\n' + textHistory[0]);
 
           historySet = true;
         } // END update history on searchHistoryMax
@@ -591,7 +591,7 @@ j1.adapter.lunr = ((j1, window) => {
             newItem = queryInput.value.replace(/\s+$/g, '');
           }
 
-          logger.debug('\n' + 'sendButton, add new item to history:\n' + newItem);
+          logger.debug('sendButton, add new item to history:\n' + newItem);
           textHistory.push(newItem);
 
           historySet = true;
@@ -608,7 +608,7 @@ j1.adapter.lunr = ((j1, window) => {
             }
             p++;
           }); // END forEach
-          logger.debug('\n' + 'sendButton, cleaned history for trailing whitespaces');
+          logger.debug('sendButton, cleaned history for trailing whitespaces');
         } // END failsafe, cleanup history
 
         // remove duplicates from history
@@ -618,7 +618,7 @@ j1.adapter.lunr = ((j1, window) => {
 
           textHistory = uniqueArray;
           if (textHistoryLenght > textHistory.length) {
-            logger.debug('\n' + 'sendButton, removed duplicates from history array: ' + (textHistoryLenght - textHistory.length) + ' element|s');
+            logger.debug('sendButton, removed duplicates from history array: ' + (textHistoryLenght - textHistory.length) + ' element|s');
           }
         } // END remove duplicates from history
 
@@ -649,7 +649,7 @@ j1.adapter.lunr = ((j1, window) => {
 
         // write current history to cookie
         if (searchHistoryFromCookie) {
-          logger.debug('\n' + 'sendButton, save prompt history to cookie');
+          logger.debug('sendButton, save prompt history to cookie');
 
           // remove BEFORE write
           j1.removeCookie({ name: cookie_names.search_prompt });
@@ -694,7 +694,7 @@ j1.adapter.lunr = ((j1, window) => {
         const slimValues   = $slimSelect.getData();
         eventListenersReady = false;
 
-        logger.debug('\n' + 'slimSelect.beforeOpen, processing: started');
+        logger.debug('slimSelect.beforeOpen, processing: started');
 
         // re-read searchHistory from cookie for initial values
         if (searchHistoryFromCookie) {
@@ -728,7 +728,7 @@ j1.adapter.lunr = ((j1, window) => {
 
         // set searchHistory EventListeners (for option deletion)
         if (slimValues.length) {
-          logger.debug('\n' + 'slimSelect.beforeOpen, number of eventListeners to process: #' + slimValues.length);
+          logger.debug('slimSelect.beforeOpen, number of eventListeners to process: #' + slimValues.length);
           addSearchHistoryEventListeners(slimValues);
         }
 
@@ -742,7 +742,7 @@ j1.adapter.lunr = ((j1, window) => {
             if (spanElementReady) {
               if (listenerIndex === slimValues.length) {
                 eventListenersReady = true;
-                logger.debug('\n' + 'slimSelect.beforeOpen, all eventListeners ready');
+                logger.debug('slimSelect.beforeOpen, all eventListeners ready');
               } // END if listenerIndex
             } // END if spanElementReady
             if (!eventListenersReady) {
@@ -755,7 +755,7 @@ j1.adapter.lunr = ((j1, window) => {
 
         var dependencies_beforeOpen_met_ready = setInterval (() => {
           if (eventListenersReady) {
-            logger.debug('\n' + 'slimSelect.beforeOpen, processing: finished');
+            logger.debug('slimSelect.beforeOpen, processing: finished');
 
             clearInterval(dependencies_beforeOpen_met_ready);
           }
@@ -772,7 +772,7 @@ j1.adapter.lunr = ((j1, window) => {
           document.getElementById('search-query').value = prompt;
           $('#clear-topsearch').show();
 
-          logger.debug('\n' + 'slimSelect.afterClose, selection from history: ' + prompt);
+          logger.debug('slimSelect.afterClose, selection from history: ' + prompt);
         } else {
           document.getElementById('search-query').value = '';
           $('#search-results').html('');
@@ -780,7 +780,7 @@ j1.adapter.lunr = ((j1, window) => {
           $('#send-to-history').hide();
           $('#clear-topsearch').hide();
 
-          logger.debug('\n' + 'slimSelect.afterClose, selection from history: empty');
+          logger.debug('slimSelect.afterClose, selection from history: empty');
         }
 
         // remove selection from select
@@ -797,7 +797,7 @@ j1.adapter.lunr = ((j1, window) => {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -809,7 +809,7 @@ j1.adapter.lunr = ((j1, window) => {
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

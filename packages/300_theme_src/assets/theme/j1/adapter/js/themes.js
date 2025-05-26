@@ -256,14 +256,14 @@ j1.adapter.themes = (function (j1, window) {
           user_consent = j1.readCookie(cookie_names.user_consent);
 
           _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized');
+          logger.debug('state: ' + _this.getState());
+          logger.info('module is being initialized');
 
           // hide page until 'theme' is loaded
-          logger.info('\n' + 'hide page until theme is loaded');
+          logger.info('hide page until theme is loaded');
           $('#no_flicker').hide();
 
-          logger.info('\n' + 'cookie ' +  cookie_names.user_state + ' successfully loaded after: ' + interval_count * 25 + ' ms');
+          logger.info('cookie ' +  cookie_names.user_state + ' successfully loaded after: ' + interval_count * 25 + ' ms');
 
           // load previously selected theme from cookie (preferred)
           // if (user_state.theme_css !== '') {
@@ -280,7 +280,7 @@ j1.adapter.themes = (function (j1, window) {
           //   });
 
           //   if (!cookie_written) {
-          //     logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_consent);
+          //     logger.error('failed to write cookie: ' + cookie_names.user_consent);
           //   }
           // } // END load previously selected theme
 
@@ -299,7 +299,7 @@ j1.adapter.themes = (function (j1, window) {
           //   });
 
           //   if (!cookie_written) {
-          //     logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_consent);
+          //     logger.error('failed to write cookie: ' + cookie_names.user_consent);
           //   }
           // } // END load default theme
 
@@ -318,7 +318,7 @@ j1.adapter.themes = (function (j1, window) {
             });
 
             if (!cookie_written) {
-             logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_consent);
+             logger.error('failed to write cookie: ' + cookie_names.user_consent);
             }
           } // END oad default theme
 
@@ -326,8 +326,8 @@ j1.adapter.themes = (function (j1, window) {
           user_state.theme_switcher = themesOptions.enabled;
           if (themesOptions.enabled) {
              // enable BS ThemeSwitcher
-             logger.info('\n' + 'themes detected as: ' + themesOptions.enabled);
-             logger.info('\n' + 'remote themes are being initialized');
+             logger.info('themes detected as: ' + themesOptions.enabled);
+             logger.info('remote themes are being initialized');
 
              /* eslint-disable */
              // load list of remote themes
@@ -352,8 +352,8 @@ j1.adapter.themes = (function (j1, window) {
              };
              /* eslint-enable */
            } else {
-             logger.debug('\n' + 'themes detected as: disabled');
-             logger.debug('\n' + 'no remote themes are available');
+             logger.debug('themes detected as: disabled');
+             logger.debug('no remote themes are available');
           } // END if themesOptions enabled
 
           // validate theme to be loaded
@@ -370,12 +370,12 @@ j1.adapter.themes = (function (j1, window) {
                }, 10); // END dependencies_met_theme_loaded
              } else {
                // invalid theme, fallback on default
-               logger.warn('\n' + 'themes CSS invalid: ' + user_state.theme_css);
+               logger.warn('themes CSS invalid: ' + user_state.theme_css);
 
                theme_css_html = '<link rel="stylesheet" id="' + id + '" href="' + default_theme_css + '" type="text/css">';
 
-               logger.debug('\n' + 'set default theme :' + default_theme_name);
-               logger.debug('\n' + 'theme CSS loaded: ' + default_theme_css);
+               logger.debug('set default theme :' + default_theme_name);
+               logger.debug('theme CSS loaded: ' + default_theme_css);
 
 
                $('head').append(theme_css_html);
@@ -394,7 +394,7 @@ j1.adapter.themes = (function (j1, window) {
                });
 
                if (!cookie_written) {
-                 logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_consent);
+                 logger.error('failed to write cookie: ' + cookie_names.user_consent);
                }
 
                // reload page using the default thme
@@ -413,17 +413,17 @@ j1.adapter.themes = (function (j1, window) {
 
         if (styleLoaded) {
           // show page (theme is loaded)
-          logger.info('\n' + 'theme loaded successfully: ' + user_state.theme_name);
-          logger.debug('\n' + 'theme CSS loaded: ' + user_state.theme_css);
-          logger.info('\n' + 'show page on theme loaded');
+          logger.info('theme loaded successfully: ' + user_state.theme_name);
+          logger.debug('theme CSS loaded: ' + user_state.theme_css);
+          logger.info('show page on theme loaded');
           $('#no_flicker').show();
 
           _this.setState('finished');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'initializing module finished');
+          logger.debug('state: ' + _this.getState());
+          logger.info('initializing module finished');
 
           endTimeModule = Date.now();
-          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+          logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_theme_applied);
         } // ENF if styleLoaded
@@ -438,7 +438,7 @@ j1.adapter.themes = (function (j1, window) {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -450,7 +450,7 @@ j1.adapter.themes = (function (j1, window) {
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

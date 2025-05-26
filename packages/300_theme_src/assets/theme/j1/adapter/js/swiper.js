@@ -167,11 +167,11 @@ j1.adapter.swiper = ((j1, window) => {
           _this.loadSwiperHTML(swiperOptions, swiperOptions.swipers);
 
           _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized');
+          logger.debug('state: ' + _this.getState());
+          logger.info('module is being initialized');
 
           {% for swiper in swipers %}{% if swiper.enabled %}
-          logger.info ('\n' + 'initialize swiper on id: ' + '{{swiper.id}}');
+          logger.info ('initialize swiper on id: ' + '{{swiper.id}}');
 
           // create dynamic loader variable
           dependency = 'dependencies_met_html_loaded_{{swiper.id}}';
@@ -183,7 +183,7 @@ j1.adapter.swiper = ((j1, window) => {
             xhrLoadState = j1.xhrDOMState['#{{swiper.id}}_app'];
             if (xhrLoadState === 'success') {
 
-              logger.info ('\n' + 'HTML portion loaded for swiper on id: ' + '{{swiper.id}}');
+              logger.info ('HTML portion loaded for swiper on id: ' + '{{swiper.id}}');
 
               {% comment %} Set Swiper Layout
               ------------------------------------------------------------------ {% endcomment %}      
@@ -192,7 +192,7 @@ j1.adapter.swiper = ((j1, window) => {
 
               // setup slider {{swiper.id}}
               // ---------------------------------------------------------------
-              logger.info ('\n' + 'swiper is being setup on id: ' + '{{swiper.id}}');
+              logger.info ('swiper is being setup on id: ' + '{{swiper.id}}');
 
               const slider        = document.querySelector('#{{swiper.id}}');
               const swiperEl      = slider.querySelector('.swiper');
@@ -338,7 +338,7 @@ j1.adapter.swiper = ((j1, window) => {
                 const targetEl = document.getElementById('{{swiper.id}}');
                 targetEl.appendChild(sourceEl);
 
-                logger.debug('\n' + 'pagination elements (outer) moved');
+                logger.debug('pagination elements (outer) moved');
               }, {{init_swiper_delay}});
               {% endif %}
               // ---------------------------------------------------------------
@@ -350,11 +350,11 @@ j1.adapter.swiper = ((j1, window) => {
           {% endif %}{% endfor %} // ENDFOR (all) carousels
 
           _this.setState('finished');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'initializing module finished');
+          logger.debug('state: ' + _this.getState());
+          logger.info('initializing module finished');
 
           endTimeModule = Date.now();
-          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+          logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_page_ready);
         } // END pageVisible
@@ -500,7 +500,7 @@ j1.adapter.swiper = ((j1, window) => {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -512,7 +512,7 @@ j1.adapter.swiper = ((j1, window) => {
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

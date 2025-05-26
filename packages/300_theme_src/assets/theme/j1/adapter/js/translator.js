@@ -221,15 +221,15 @@ j1.adapter.translator = (function (j1, window) {
           }
 
           _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState ());
-          logger.info('\n' + 'module is being initialized');
+          logger.debug('state: ' + _this.getState ());
+          logger.info('module is being initialized');
 
           // load|initialize user translate cookie
           //
           if (j1.existsCookie(cookie_names.user_translate)) {
             user_translate = j1.readCookie(cookie_names.user_translate);
           } else {
-            logger.debug ('\n' + 'write to cookie : ' + cookie_names.user_translate);
+            logger.debug ('write to cookie : ' + cookie_names.user_translate);
             cookie_written = j1.writeCookie({
               name:     cookie_names.user_translate,
               data:     user_translate,
@@ -252,7 +252,7 @@ j1.adapter.translator = (function (j1, window) {
               // disable google translate button if visible
               //
               if ($('#quickLinksTranslateButton').css('display') === 'block')  {
-                logger.info('\n' + 'disable quickLinksTranslateButton');
+                logger.info('disable quickLinksTranslateButton');
                 $('#quickLinksTranslateButton').css('display', 'none');
               }
             }
@@ -260,7 +260,7 @@ j1.adapter.translator = (function (j1, window) {
               // enable google translate button if NOT visible
               //
               if ($('#quickLinksTranslateButton').css('display') === 'none')  {
-                logger.info('\n' + 'enable quickLinksTranslateButton');
+                logger.info('enable quickLinksTranslateButton');
                 $('#quickLinksTranslateButton').css('display', 'block');
               }
             }
@@ -282,7 +282,7 @@ j1.adapter.translator = (function (j1, window) {
             //
             j1.expireCookie({ name: cookie_names.user_translate });
           } else {
-            logger.debug('\n' + 'write to cookie : ' + cookie_names.user_translate);
+            logger.debug('write to cookie : ' + cookie_names.user_translate);
             cookie_written = j1.writeCookie({
               name:     cookie_names.user_translate,
               data:     user_translate,
@@ -330,7 +330,7 @@ j1.adapter.translator = (function (j1, window) {
           // enable|disable translation (after callback)
           if (user_translate.analysis && user_translate.personalization && user_translate.translationEnabled) {
             if (translatorOptions.translatorName === 'google') {
-              logger.info('\n' + 'append Google Translate Script: ' + gtTranslateScript.id);
+              logger.info('append Google Translate Script: ' + gtTranslateScript.id);
               head.appendChild(gtTranslateScript);
               if ($('google_translate_element')) {
                 $('google_translate_element').hide();
@@ -338,8 +338,8 @@ j1.adapter.translator = (function (j1, window) {
             }
           } else {
             if (translatorOptions.translatorName === 'google') {
-              logger.info('\n' + 'translation disabled');
-              logger.info('\n' + 'remove existing Google Translate cookies');
+              logger.info('translation disabled');
+              logger.info('remove existing Google Translate cookies');
 
               // remove all googtrans cookies that POTENTIALLY exists
               //
@@ -355,8 +355,8 @@ j1.adapter.translator = (function (j1, window) {
           // -------------------------------------------------------------------
 
           _this.setState('finished');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module initialized successfully');
+          logger.debug('state: ' + _this.getState());
+          logger.info('module initialized successfully');
 
           clearInterval(dependencies_met_page_ready);
         }
@@ -370,8 +370,8 @@ j1.adapter.translator = (function (j1, window) {
     // -------------------------------------------------------------------------
     postTranslateElementInit: function (response) {
       // code for post processing
-      logger.info('\n' + 'postTranslateElementInit entered');
-      logger.info('\n' + response.T.Dh);
+      logger.info('postTranslateElementInit entered');
+      logger.info(response.T.Dh);
 
       return;
     }, // END postTranslateElementInit
@@ -411,7 +411,7 @@ j1.adapter.translator = (function (j1, window) {
       }
 
       selectedTranslationLanguage = msDropdown.value;
-      logger.info('\n' + 'selected translation language: ' + selectedTranslationLanguage);
+      logger.info('selected translation language: ' + selectedTranslationLanguage);
 
       // set content language
       //
@@ -485,7 +485,7 @@ j1.adapter.translator = (function (j1, window) {
     messageHandler: function (sender, message) {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -497,7 +497,7 @@ j1.adapter.translator = (function (j1, window) {
         // Place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

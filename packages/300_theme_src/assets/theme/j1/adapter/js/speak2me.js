@@ -200,8 +200,8 @@ j1.adapter.speak2me = ((j1, window) => {
       logger = log4javascript.getLogger('j1.adapter.speak2me');
 
       _this.setState('started');
-      logger.debug('\n' + 'state: ' + _this.getState());
-      logger.info('\n' + 'module is being initialized');
+      logger.debug('state: ' + _this.getState());
+      logger.info('module is being initialized');
 
       // -----------------------------------------------------------------------
       // module initializer
@@ -215,12 +215,12 @@ j1.adapter.speak2me = ((j1, window) => {
           startTimeModule = Date.now();
 
           _this.setState('started');
-          logger.debug('\n' + 'set module state to: ' + _this.getState());
-          logger.info('\n' + 'initializing module: started');
+          logger.debug('set module state to: ' + _this.getState());
+          logger.info('initializing module: started');
 
           if (mobilesDisabled && isMobile) {
             console.log('module speak2me is disabled for mobile browsers');
-            logger.warn('\n' + 'module speak2me is disabled for mobile browsers');
+            logger.warn('module speak2me is disabled for mobile browsers');
             $('#quickLinksSpeakButton').hide();
             clearInterval(dependencies_met_page_ready);
             return;
@@ -229,7 +229,7 @@ j1.adapter.speak2me = ((j1, window) => {
           var operaDisabled = (browsersDisabled.includes('Opera')) ? true : false;
           if (operaDisabled && isOpera) {
             console.log('module speak2me is disabled for the Opera browser');
-            logger.warn('\n' + 'module speak2me is disabled for the Opera browser');
+            logger.warn('module speak2me is disabled for the Opera browser');
             $('#quickLinksSpeakButton').hide();
             clearInterval(dependencies_met_page_ready);
             return;
@@ -238,7 +238,7 @@ j1.adapter.speak2me = ((j1, window) => {
           var firefoxDisabled = (browsersDisabled.includes('Firefox')) ? true : false;
           if (firefoxDisabled && isFirefox) {
             console.log('module speak2me is disabled for the Firefox browser');
-            logger.warn('\n' + 'module speak2me is disabled for the Firefox browser');
+            logger.warn('module speak2me is disabled for the Firefox browser');
             $('#quickLinksSpeakButton').hide();
             clearInterval(dependencies_met_page_ready);
             return;
@@ -248,7 +248,7 @@ j1.adapter.speak2me = ((j1, window) => {
           var avastDisabled = (browsersDisabled.includes('Avast')) ? true : false;
           if (avastDisabled && isAvast) {
             console.log('module speak2me is not supported for the Avast Secure browser');
-            logger.warn('\n' + 'module speak2me is disabled for the Avast Secure browser');
+            logger.warn('module speak2me is disabled for the Avast Secure browser');
             $('#quickLinksSpeakButton').hide();
             clearInterval(dependencies_met_page_ready);
             return;
@@ -257,14 +257,14 @@ j1.adapter.speak2me = ((j1, window) => {
           var safariDisabled = (browsersDisabled.includes('Safari')) ? true : false;
           if (safariDisabled && !isChrome && !isEdge && !isSafari) {
             console.log('module speak2me is disabled for the Safari browser');
-            logger.warn('\n' + 'module speak2me is disabled for the Safari browser');
+            logger.warn('module speak2me is disabled for the Safari browser');
             $('#quickLinksSpeakButton').hide();
             clearInterval(dependencies_met_page_ready);
             return;
           }
 
           if (ttsDisabled) {
-            logger.debug('\n' + 'tts detected: disabled');
+            logger.debug('tts detected: disabled');
             $('#quickLinksSpeakButton').hide();
             clearInterval(dependencies_met_page_ready);
             return;
@@ -282,7 +282,7 @@ j1.adapter.speak2me = ((j1, window) => {
             // -----------------------------------------------------------------
             // data loader
             // -----------------------------------------------------------------
-            logger.info('\n' + 'load modal');
+            logger.info('load modal');
             j1.loadHTML ({
               xhr_container_id:   'speak2me_container',
               xhr_data_path:      '/assets/data/speak2me/index.html',
@@ -292,7 +292,7 @@ j1.adapter.speak2me = ((j1, window) => {
             );
           }
 
-          logger.info('\n' + 'initialize modal');
+          logger.info('initialize modal');
           // -------------------------------------------------------------------
           // on 'show'
           // -------------------------------------------------------------------
@@ -312,17 +312,17 @@ j1.adapter.speak2me = ((j1, window) => {
             //
             this.$buttonSpeak.click(function () {
               if (isChrome) {
-                logger.info('\n' + 'speak: setup pause workaround for chromium based browsers');
+                logger.info('speak: setup pause workaround for chromium based browsers');
                 chromeWorkaround = setInterval(() => {
                   var isSpeaking  = $().speak2me('isSpeaking');
 
-                  logger.debug('\n' + 'speak: isSpeaking|isPaused: ' + isSpeaking + '|' + isPaused);
+                  logger.debug('speak: isSpeaking|isPaused: ' + isSpeaking + '|' + isPaused);
                   if (isSpeaking) {
                     $().speak2me('pause').speak2me('resume');
-                    logger.debug('\n' + 'speak: send pause-resumed');
+                    logger.debug('speak: send pause-resumed');
                   } else {
                     $().speak2me('resume');
-                    logger.debug('\n' + 'speak: send resumed');
+                    logger.debug('speak: send resumed');
                   }
 
                 }, speak2meOptions.chrome_pause_resume_cycle);
@@ -331,7 +331,7 @@ j1.adapter.speak2me = ((j1, window) => {
 
             // stop workaround for chromium based browsers
             this.$buttonStop.click(function () {
-              logger.info('\n' + 'speak: remove pause workaround for chromium based browsers');
+              logger.info('speak: remove pause workaround for chromium based browsers');
               // wait 3 sec to make sure speech output is stopped
               setTimeout (() => {
                 var isSpeaking  = $().speak2me('isSpeaking');
@@ -357,11 +357,11 @@ j1.adapter.speak2me = ((j1, window) => {
           }); // END modal on 'hidden'
 
           _this.setState('finished');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module initialization finished');
+          logger.debug('state: ' + _this.getState());
+          logger.info('module initialization finished');
 
           endTimeModule = Date.now();
-          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+          logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_page_ready);
         } // END pageVisible
@@ -392,7 +392,7 @@ j1.adapter.speak2me = ((j1, window) => {
     // display the tts settings dialog
     // -------------------------------------------------------------------------
     showDialog: () => {
-      logger.debug('\n' + "showDialog");
+      logger.debug("showDialog");
 
       $('#speak2me_container').modal({
         backdrop: 'static',
@@ -536,7 +536,7 @@ j1.adapter.speak2me = ((j1, window) => {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -548,7 +548,7 @@ j1.adapter.speak2me = ((j1, window) => {
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

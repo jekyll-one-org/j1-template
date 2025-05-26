@@ -186,7 +186,7 @@ j1.adapter.gemini = ((j1, window) => {
       var dependencies_met_span_ready = setInterval (() => {
         var spanElementReady = (($(spanElement).length) !== 0) ? true : false;
         if (spanElementReady) {
-          logger.debug('\n' + 'add eventListener to: ' + span);
+          logger.debug('add eventListener to: ' + span);
           spanElement.addEventListener('click', spanElementEventListener);
 
           clearInterval(dependencies_met_span_ready);
@@ -230,7 +230,7 @@ j1.adapter.gemini = ((j1, window) => {
       if ($slimSelect !== undefined || $slimSelect !== null) {
         $slimSelect.setData(newData);
       } else {
-        logger.error('\n' + 'FATAL: slimSelect NOT available');
+        logger.error('FATAL: slimSelect NOT available');
       } // END create|set slimSelect data elements
     }
 
@@ -260,7 +260,7 @@ j1.adapter.gemini = ((j1, window) => {
 
       // update the prompt history
       if (promptHistoryFromCookie) {
-        logger.debug('\n' + 'save prompt history to cookie');
+        logger.debug('save prompt history to cookie');
 
         if (newHistory.length > 0) {
 
@@ -276,18 +276,18 @@ j1.adapter.gemini = ((j1, window) => {
         } else {
           j1.removeCookie({ name: cookie_names.chat_prompt });
 
-          logger.info('\n' + 'spanElementEventListener, hide prompt history on last element');
+          logger.info('spanElementEventListener, hide prompt history on last element');
           $("#prompt_history_container").hide();
           $("#clear").hide()
         } // END if length
       } // END if promptHistoryFromCookie
     }
 
-    logger.info('\n' + 'spanElementEventListener, option deleted:\n' + optionText);
+    logger.info('spanElementEventListener, option deleted:\n' + optionText);
 
     // failsafe
     if ($slimSelect === undefined || $slimSelect === null) {
-      logger.error('\n' + 'FATAL: slimSelect NOT available');
+      logger.error('FATAL: slimSelect NOT available');
     } else {
       // close currently required to re-add history prompt events on next beforeOpen
       $slimSelect.close();
@@ -300,7 +300,7 @@ j1.adapter.gemini = ((j1, window) => {
     latitude   = position.coords.latitude;
     longitude  = position.coords.longitude;
 
-    logger.debug('\n' + 'detected geocode (lat:long): ' + latitude + ':' + longitude);
+    logger.debug('detected geocode (lat:long): ' + latitude + ':' + longitude);
   } // END function showPosition
 
   function locateCountry(position) {
@@ -314,10 +314,10 @@ j1.adapter.gemini = ((j1, window) => {
       country = data.address.country;
       city    = data.address.city;
       $("#modal_error").html(modal_error_text + '<br>' + '<b>' + country + '</b>');
-      logger.warn('\n' + 'location is not supported: ' + country + ':' + city);
+      logger.warn('location is not supported: ' + country + ':' + city);
     })
     .catch((error) => {
-      logger.error('\n' + 'error detect location: ' + error);
+      logger.error('error detect location: ' + error);
     });
   } // END function locateCountry
 
@@ -331,11 +331,11 @@ j1.adapter.gemini = ((j1, window) => {
     } // END function success
 
     function error() {
-      logger.warn('\n' + 'Unable to retrieve the location');
+      logger.warn('Unable to retrieve the location');
     } // END function error
 
     if (!navigator.geolocation) {
-      logger.warn('\n' + 'Geolocation API is not supported by the browser');
+      logger.warn('Geolocation API is not supported by the browser');
     } else {
       navigator.geolocation.getCurrentPosition(success, error);
     }
@@ -355,17 +355,17 @@ j1.adapter.gemini = ((j1, window) => {
     if (prompt.length === 0) {
       // use default prompt
       prompt = defaultPrompt.replace(/\s+$/g, '');
-      logger.debug('\n' + 'use default prompt: ' + prompt);
+      logger.debug('use default prompt: ' + prompt);
       document.getElementById('prompt').value = prompt;
     }
 
     // run a request
     startTime   = Date.now();
     retryCount  = 1;
-    logger.info('\n' + 'processing request: started');
+    logger.info('processing request: started');
     while (retryCount <= maxRetries) {
       try {
-        logger.debug('\n' + 'processing request: #' + retryCount + '|' + maxRetries);
+        logger.debug('processing request: #' + retryCount + '|' + maxRetries);
         result = await model.generateContent(prompt);
 
         // exit the loop on success
@@ -380,22 +380,22 @@ j1.adapter.gemini = ((j1, window) => {
             $("#modal_error").html(modal_error_text);
           } else {
             $("#modal_error").html(modal_error_text);
-            logger.warn('\n' + 'location not supported');
+            logger.warn('location not supported');
           }
         } else if (error.includes('50')) {
           genAIErrorType   = 500;
           modal_error_text = httpError500;
           $("#modal_error").html(modal_error_text);
-          logger.warn('\n' + 'service not available');
+          logger.warn('service not available');
         }
         genAIError = true;
       } finally {
           if (!genAIError) {
             try {
-              logger.debug('\n' + 'collecting results ...');
+              logger.debug('collecting results ...');
               response = await result.response;
             } catch (e) {
-              logger.warn('\n' + e);
+              logger.warn(e);
             } finally {
               $("#spinner").hide();
 
@@ -422,7 +422,7 @@ j1.adapter.gemini = ((j1, window) => {
                     }
                   });
                   if (ratingCategory !== undefined && ratingCategory !== '' && ratingProbability !== undefined && ratingProbability !== '') {
-                    logger.warn('\n' + 'Security issue detected, reason: ' + ratingCategory + ' = ' + ratingProbability);
+                    logger.warn('Security issue detected, reason: ' + ratingCategory + ' = ' + ratingProbability);
                   }
                   var ratingCategoryText    = ratingCategory.replace("HARM_CATEGORY_", '').toLowerCase();
                   var ratingProbabilityText = ratingProbability.toLowerCase();
@@ -470,7 +470,7 @@ j1.adapter.gemini = ((j1, window) => {
                   } // END for
 
                   if (safetyCategory !== undefined) {
-                    logger.debug('\n' + safetyCategory + ': ' + safetyRating);
+                    logger.debug(safetyCategory + ': ' + safetyRating);
                   }
                 } // END responseFinishReason STOP
 
@@ -498,7 +498,7 @@ j1.adapter.gemini = ((j1, window) => {
               if (responseText.length > 0) {
                 // Set|Show UI elements
                 if (responseText.length < geminiOptions.api_options.responseLengthMin) {
-                  logger.warn('\n' + 'Response generated too short: <' + geminiOptions.api_options.responseLengthMin + ' characters');
+                  logger.warn('Response generated too short: <' + geminiOptions.api_options.responseLengthMin + ' characters');
                   document.getElementById('md_result').innerHTML = 'Response generated too short (less than ' + geminiOptions.api_options.responseLengthMin + ' characters). Please re-run the generation for better results';
                 } else {
                   document.getElementById('md_result').innerHTML = marked.parse(responseText);
@@ -509,7 +509,7 @@ j1.adapter.gemini = ((j1, window) => {
             } // END finally
           } else {
             if (retryCount === 3) {
-              logger.debug('\n' + 'requests failed after max retries: ' + maxRetries);
+              logger.debug('requests failed after max retries: ' + maxRetries);
 
               $("#spinner").hide();
               if (geminiOptions.detectGeoLocation) {
@@ -526,8 +526,8 @@ j1.adapter.gemini = ((j1, window) => {
     } // END while (retry)
 
     endTime = Date.now();
-    logger.debug('\n' + 'request execution time: ' + (endTime-startTime) + 'ms');
-    logger.info('\n' + 'processing request: finished');
+    logger.debug('request execution time: ' + (endTime-startTime) + 'ms');
+    logger.info('processing request: finished');
 
   } // END async function runner()
 
@@ -586,12 +586,12 @@ j1.adapter.gemini = ((j1, window) => {
           startTimeModule = Date.now();
 
           _this.setState('started');
-          logger.debug('\n' + 'set module state to: ' + _this.getState());
-          logger.info('\n' + 'initializing module: started');
+          logger.debug('set module state to: ' + _this.getState());
+          logger.info('initializing module: started');
 
           if (!validApiKey) {
-            logger.warn('\n' + 'Invalid API key detected: ' + apiKey);
-            logger.debug('\n' + 'disable|hide all UI buttons');
+            logger.warn('Invalid API key detected: ' + apiKey);
+            logger.debug('disable|hide all UI buttons');
             // disable all UI buttons
             $("#send").hide();
             $("#reset").hide();
@@ -607,7 +607,7 @@ j1.adapter.gemini = ((j1, window) => {
           textarea        = document.getElementById(geminiOptions.prompt_id);
           textarea.value = '';
 
-          logger.debug('\n' + 'initializing select data');
+          logger.debug('initializing select data');
 
           // initialize history array from cookie
           if (promptHistoryEnabled && promptHistoryFromCookie) {
@@ -618,7 +618,7 @@ j1.adapter.gemini = ((j1, window) => {
 
             // failsafe
             if ($slimSelect === undefined || $slimSelect === null) {
-              logger.error('\n' + 'FATAL: slimSelect NOT available');
+              logger.error('FATAL: slimSelect NOT available');
             }
             // END get slimSelect object
 
@@ -628,7 +628,7 @@ j1.adapter.gemini = ((j1, window) => {
             // allow|reject history updates if promptHistoryMax reached
             allowPromptHistoryUpdatesOnMax = geminiOptions.allow_prompt_history_updates_on_max;
 
-            logger.debug('\n' + 'read prompt history from cookie');
+            logger.debug('read prompt history from cookie');
             var data    = [];
             var option  = {};
             chat_prompt = j1.existsCookie(cookie_names.chat_prompt)
@@ -645,7 +645,7 @@ j1.adapter.gemini = ((j1, window) => {
 
               textHistory = uniqueArray;
               if (textHistoryLenght > textHistory.length) {
-                logger.debug('\n' + 'removed duplicates from history array: ' + (textHistoryLenght - textHistory.length) + ' element|s');
+                logger.debug('removed duplicates from history array: ' + (textHistoryLenght - textHistory.length) + ' element|s');
               }
             } // END if !allowHistoryDupicates
 
@@ -671,7 +671,7 @@ j1.adapter.gemini = ((j1, window) => {
             if ($slimSelect !== undefined || $slimSelect !== null) {
               $slimSelect.setData(data);
             } else {
-              logger.error('\n' + 'FATAL: slimSelect NOT available');
+              logger.error('FATAL: slimSelect NOT available');
             } // END create|set slimSelect data elements
 
             // display history container
@@ -698,11 +698,11 @@ j1.adapter.gemini = ((j1, window) => {
           _this.setupUIButtonEventHandlers()
 
           _this.setState('finished');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'initializing module: finished');
+          logger.debug('state: ' + _this.getState());
+          logger.info('initializing module: finished');
 
           endTimeModule = Date.now();
-          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+          logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_page_ready);
         } // END slimSelectFinished && uiLoaded && modulesLoaded
@@ -768,13 +768,13 @@ j1.adapter.gemini = ((j1, window) => {
             }
           ];
 
-          logger.debug('\n' + 'Importing Gemini module: successful');
+          logger.debug('Importing Gemini module: successful');
           modulesLoaded = true;
         })
         .catch((error) => {
           logger = log4javascript.getLogger('j1.adapter.gemini');
           // An error occurred during module import
-          logger.warn('\n' + 'Importing Gemini module failed: ' + error);
+          logger.warn('Importing Gemini module failed: ' + error);
         });
     }, // END loadModules
 
@@ -796,7 +796,7 @@ j1.adapter.gemini = ((j1, window) => {
         var uiLoaded = (j1.xhrDOMState['#gemini_ui'] === 'success') ? true : false;
 
         if (uiLoaded) {
-          logger.debug('\n' + 'Loading UI: successful');
+          logger.debug('Loading UI: successful');
 
           clearInterval(dependencies_met_data_loaded);
         } // END if uiLoaded
@@ -821,7 +821,7 @@ j1.adapter.gemini = ((j1, window) => {
         const slimValues   = $select.getData();
         eventListenersReady = false;
 
-        logger.debug('\n' + 'slimSelect.beforeOpen, processing: started');
+        logger.debug('slimSelect.beforeOpen, processing: started');
 
         // re-read current history from cookie for initial values
         if (promptHistoryFromCookie) {
@@ -854,14 +854,14 @@ j1.adapter.gemini = ((j1, window) => {
           if ($slimSelect !== undefined || $slimSelect !== null) {
             $slimSelect.setData(data);
           } else {
-            logger.error('\n' + 'FATAL: slimSelect NOT available');
+            logger.error('FATAL: slimSelect NOT available');
           } // END create|set slimSelect data elements
 
         } // END re-read current history from cookie
 
         // set prompt history EventListeners (for option deletion)
         if (slimValues.length) {
-          logger.debug('\n' + 'slimSelect.beforeOpen, number of eventListeners to process: #' + slimValues.length);
+          logger.debug('slimSelect.beforeOpen, number of eventListeners to process: #' + slimValues.length);
           addPromptHistoryEventListeners(slimValues);
         }
 
@@ -877,7 +877,7 @@ j1.adapter.gemini = ((j1, window) => {
             if (spanElementReady) {
               if (listenerIndex === slimValues.length) {
                 eventListenersReady = true;
-                logger.debug('\n' + 'slimSelect.beforeOpen, all eventListeners ready');
+                logger.debug('slimSelect.beforeOpen, all eventListeners ready');
               } // END if listenerIndex
             } // END if spanElementReady
             if (!eventListenersReady) {
@@ -890,7 +890,7 @@ j1.adapter.gemini = ((j1, window) => {
 
         var dependencies_beforeOpen_met_ready = setInterval (() => {
           if (eventListenersReady) {
-            logger.debug('\n' + 'slimSelect.beforeOpen, processing: finished');
+            logger.debug('slimSelect.beforeOpen, processing: finished');
 
             clearInterval(dependencies_beforeOpen_met_ready);
           }
@@ -905,19 +905,19 @@ j1.adapter.gemini = ((j1, window) => {
         if (slimValue.length) {
           prompt = slimValue[0];
           document.getElementById('prompt').value = prompt;
-          logger.debug('\n' + 'slimSelect.afterClose, selection from history: ' + prompt);
+          logger.debug('slimSelect.afterClose, selection from history: ' + prompt);
         } else {
-          logger.debug('\n' + 'slimSelect.afterClose, selection from history: empty');
+          logger.debug('slimSelect.afterClose, selection from history: empty');
           document.getElementById('prompt').value = '';
         }
 
         // failsafe
         if ($slimSelect === undefined || $slimSelect === null) {
-          logger.error('\n' + 'FATAL: slimSelect NOT available');
+          logger.error('FATAL: slimSelect NOT available');
         } else {
           // failsafe
           if ($slimSelect === undefined || $slimSelect === null) {
-            logger.error('\n' + 'FATAL: slimSelect NOT available');
+            logger.error('FATAL: slimSelect NOT available');
           } else {
             // remove selection from select
             $slimSelect.setSelected('', false);
@@ -958,7 +958,7 @@ j1.adapter.gemini = ((j1, window) => {
           if (textarea.value.length === 0) {
             // use default prompt
             prompt = defaultPrompt.replace(/\s+$/g, '');
-            logger.debug('\n' + 'sendButton, use default prompt: ' + prompt);
+            logger.debug('sendButton, use default prompt: ' + prompt);
           } else {
             prompt = textarea.value.replace(/\s+$/g, '');
           }
@@ -967,7 +967,7 @@ j1.adapter.gemini = ((j1, window) => {
           index = textHistory.indexOf(prompt);
           itemExists  = (index !== -1) ? true : false;
           if (itemExists) {
-            logText = '\n' + `sendButton, prompt: "${prompt}"\n` + `already exists in history at index: ${index}`;
+            logText = `sendButton, prompt: "${prompt}"\n` + `already exists in history at index: ${index}`;
             logger.debug(logText);
           }
 
@@ -981,13 +981,13 @@ j1.adapter.gemini = ((j1, window) => {
             } else if (textarea.value.length === 0) {
               // use default prompt
               newItem = defaultPrompt.replace(/\s+$/g, '');
-              logger.debug('\n' + 'sendButton, use default prompt:\n' + newItem);
+              logger.debug('sendButton, use default prompt:\n' + newItem);
             }
 
-            logger.debug('\n' + 'sendButton, update item in history:\n' + textHistory[0]);
+            logger.debug('sendButton, update item in history:\n' + textHistory[0]);
             // replace FIRST history element by NEW item
             textHistory[0] = newItem;
-            logger.debug('\n' + 'sendButton, add new item to history:\n' + textHistory[0]);
+            logger.debug('sendButton, add new item to history:\n' + textHistory[0]);
 
             historySet = true;
           } // END update history on promptHistoryMax
@@ -1000,9 +1000,9 @@ j1.adapter.gemini = ((j1, window) => {
             } else if (textarea.value.length === 0) {
               // use default prompt
               newItem = defaultPrompt.replace(/\s+$/g, '');
-              logger.debug('\n' + 'sendButton, use default prompt:\n' + newItem);
+              logger.debug('sendButton, use default prompt:\n' + newItem);
             }
-            logger.debug('\n' + 'sendButton, add new item to history:\n' + newItem);
+            logger.debug('sendButton, add new item to history:\n' + newItem);
             textHistory.push(newItem);
 
             historySet = true;
@@ -1017,7 +1017,7 @@ j1.adapter.gemini = ((j1, window) => {
               textHistory[p] = prompt;
               p++;
             }); // END forEach
-            logger.debug('\n' + 'sendButton, cleaned history for trailing whitespaces');
+            logger.debug('sendButton, cleaned history for trailing whitespaces');
           } // END failsafe, cleanup history
 
           // remove duplicates from history
@@ -1027,7 +1027,7 @@ j1.adapter.gemini = ((j1, window) => {
 
             textHistory = uniqueArray;
             if (textHistoryLenght > textHistory.length) {
-              logger.debug('\n' + 'sendButton, removed duplicates from history array: ' + (textHistoryLenght - textHistory.length) + ' element|s');
+              logger.debug('sendButton, removed duplicates from history array: ' + (textHistoryLenght - textHistory.length) + ' element|s');
             }
           } // END remove duplicates from history
 
@@ -1054,7 +1054,7 @@ j1.adapter.gemini = ((j1, window) => {
           if ($slimSelect !== undefined || $slimSelect !== null) {
             $slimSelect.setData(data);
           } else {
-            logger.error('\n' + 'FATAL: slimSelect NOT available');
+            logger.error('FATAL: slimSelect NOT available');
           } // END create|set slimSelect data elements
 
           // display history container
@@ -1065,7 +1065,7 @@ j1.adapter.gemini = ((j1, window) => {
 
           // write current history to cookie
           if (promptHistoryFromCookie) {
-            logger.debug('\n' + 'sendButton, save prompt history to cookie');
+            logger.debug('sendButton, save prompt history to cookie');
 
             // remove BEFORE write
             j1.removeCookie({ name: cookie_names.chat_prompt });
@@ -1093,7 +1093,7 @@ j1.adapter.gemini = ((j1, window) => {
         event.preventDefault();
         event.stopPropagation();
 
-        logger.debug('\n' + 'resetButton, clear input prompt|response');
+        logger.debug('resetButton, clear input prompt|response');
         document.getElementById("prompt").value   = '';
         document.getElementById("response").value = '';
         $("#spinner").hide();
@@ -1123,7 +1123,7 @@ j1.adapter.gemini = ((j1, window) => {
 
           // clear history
           if (!logStartOnce) {
-            logger.warn('\n' + 'resetButton, perform clearHistory');
+            logger.warn('resetButton, perform clearHistory');
             logStartOnce = true;
           }
 
@@ -1141,7 +1141,7 @@ j1.adapter.gemini = ((j1, window) => {
           event.preventDefault();
           event.stopPropagation();
 
-          logger.debug('\n' + 'resetButton, skipped clearHistory');
+          logger.debug('resetButton, skipped clearHistory');
         }); // END click dismissClearHistoryButton
 
       }); // END click clearButton
@@ -1154,7 +1154,7 @@ j1.adapter.gemini = ((j1, window) => {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -1166,7 +1166,7 @@ j1.adapter.gemini = ((j1, window) => {
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

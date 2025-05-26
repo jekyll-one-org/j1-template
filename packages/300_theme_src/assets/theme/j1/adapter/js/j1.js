@@ -451,7 +451,7 @@ var j1 = ((options) => {
         // add for compatibility reasons
         template_version_changed = true;
         user_state.template_version = template_version;
-        logger.warn('\n' + 'template_version not found, set value to: ' +  template_version);
+        logger.warn('template_version not found, set value to: ' +  template_version);
         cookie_written = j1.writeCookie({
           name:     cookie_names.user_state,
           data:     user_state,
@@ -476,7 +476,7 @@ var j1 = ((options) => {
         }
       }
 
-      // logger.info('\n' + 'register monitors');
+      // logger.info('register monitors');
       // j1.registerMonitors();
 
       // -----------------------------------------------------------------------
@@ -503,11 +503,11 @@ var j1 = ((options) => {
           user_session.requested_page = window.location.pathname;
           user_session.timestamp      = timestamp_now;
           user_session                = j1.mergeData(user_session, data);
-          logText                     = '\n' + 'mode detected: ' + user_session.mode;
+          logText                     = 'mode detected: ' + user_session.mode;
 
           logger.info(logText);
-          logger.info('\n' + 'update user session cookie');
-          logger.debug('\n' + 'write to cookie : ' + cookie_names.user_session);
+          logger.info('update user session cookie');
+          logger.debug('write to cookie : ' + cookie_names.user_session);
           cookie_written = j1.writeCookie({
             name:     cookie_names.user_session,
             data:     user_session,
@@ -516,23 +516,23 @@ var j1 = ((options) => {
           });
 
           j1.setState(curr_state);
-          logger.debug('\n' + 'state: ' + j1.getState());
+          logger.debug('state: ' + j1.getState());
 
           if (j1.authEnabled()) {
             if (user_session.authenticated === 'true') {
               // set signout
-              logger.info('\n' + 'show signout icon');
+              logger.info('show signout icon');
               $('#navLinkSignInOut').attr('data-bs-target','#modalOmniSignOut');
               $('#iconSignInOut').removeClass('mdib-login').addClass('mdib-logout');
             } else {
               // set signin
-              logger.info('\n' + 'show signin icon');
+              logger.info('show signin icon');
               $('#navLinkSignInOut').attr('data-bs-target','#modalOmniSignIn');
               $('#iconSignInOut').removeClass('mdib-logout').addClass('mdib-login');
             }
-            logger.info('\n' + 'authentication detected as: ' + user_session.authenticated);
+            logger.info('authentication detected as: ' + user_session.authenticated);
             $('#quickLinksSignInOutButton').css('display', 'block');
-            logger.debug('\n' + 'met dependencies for: j1');
+            logger.debug('met dependencies for: j1');
           } // END if (j1.authEnabled
         }) // END all $ajax requests done
         .catch((error) => {
@@ -544,10 +544,10 @@ var j1 = ((options) => {
             user_session.mode           = 'web';
             user_session.requested_page = window.location.pathname;
             user_session.timestamp      = timestamp_now;
-            logText                     = '\n' + 'mode detected: ' + user_session.mode;
+            logText                     = 'mode detected: ' + user_session.mode;
 
             logger.info(logText);
-            logger.debug('\n' + 'write to cookie : ' + cookie_names.user_session);
+            logger.debug('write to cookie : ' + cookie_names.user_session);
             cookie_written = j1.writeCookie({
               name:     cookie_names.user_session,
               data:     user_session,
@@ -576,7 +576,7 @@ var j1 = ((options) => {
                 panels_exists   = (panel_blocks > 0)  ? true : false;
                 footer_exists   = (footer_blocks > 0) ? true : false;
 
-                logger.info('\n' + 'load block elements');
+                logger.info('load block elements');
 
                 if (banners_exits) {j1.initBanner(settings);}
                 if (panels_exists) {j1.initPanel(settings)};
@@ -664,15 +664,15 @@ var j1 = ((options) => {
             }, 10); // END dependencies_met_page_ready
 
             j1.setState(curr_state);
-            logger.debug('\n' + 'state: ' + j1.getState());
+            logger.debug('state: ' + j1.getState());
           }, detectTimeout);
         });
         // END app mode
       } else {
         // web mode
         state = 'started';
-        logger.debug('\n' + 'state: ' + state);
-        logger.info('\n' + 'page is being initialized');
+        logger.debug('state: ' + state);
+        logger.info('page is being initialized');
       }
 
       // ---------------------------------------------------------------------
@@ -683,7 +683,7 @@ var j1 = ((options) => {
         $('html').addClass('hide-scrollbar-moz');
       }
 
-      logger.info('\n' + 'read user state from cookie');
+      logger.info('read user state from cookie');
       user_session = j1.readCookie(cookie_names.user_session);
 
       // process|update user state cookie
@@ -714,8 +714,8 @@ var j1 = ((options) => {
         last_pager                = user_session.last_pager;
       }
 
-      logger.info('\n' + 'update user session cookie');
-      logger.debug('\n' + 'write to cookie : ' + cookie_names.user_session);
+      logger.info('update user session cookie');
+      logger.debug('write to cookie : ' + cookie_names.user_session);
       cookie_written = j1.writeCookie({
         name:     cookie_names.user_session,
         data:     user_session,
@@ -737,9 +737,9 @@ var j1 = ((options) => {
         if (pageVisible) {
           startTimeModule = Date.now();
 
-          logger.info('\n' + 'page is being initialized');
+          logger.info('page is being initialized');
 
-          logger.info('\n' + 'register monitors');
+          logger.info('register monitors');
           j1.registerMonitors();
 
           banner_blocks   = document.querySelectorAll('[id^="banner"]').length;
@@ -749,7 +749,7 @@ var j1 = ((options) => {
           panels_exists   = (panel_blocks > 0)  ? true : false;
           footer_exists   = (footer_blocks > 0) ? true : false;
 
-          logger.info('\n' + 'load block elements');
+          logger.info('load block elements');
 
           if (banners_exits) {j1.initBanner(settings);}
           if (panels_exists) {j1.initPanel(settings)};
@@ -839,18 +839,18 @@ var j1 = ((options) => {
           } // END pages w/o banners or panels
 
           endTimeModule = Date.now();
-          logger.info('\n' + 'page finalized successfully');
-          logger.info('\n' + 'page initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+          logger.info('page finalized successfully');
+          logger.info('page initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_page_ready);
         } // END pageVisible
       }, 10); // END dependencies_met_page_ready
 
       state = 'running';
-      logger.debug('\n' + 'state: ' + state);
+      logger.debug('state: ' + state);
 
       user_session.timestamp = timestamp_now;
-      logger.debug('\n' + 'write to cookie : ' + cookie_names.user_session);
+      logger.debug('write to cookie : ' + cookie_names.user_session);
       cookie_written = j1.writeCookie({
         name:     cookie_names.user_session,
         data:     user_session,
@@ -887,19 +887,19 @@ var j1 = ((options) => {
       var cb_load_closure = (banner_id) => {
         return (responseTxt, statusTxt, xhr) => {
           if (statusTxt ==  'success') {
-            logger.debug('\n' + 'loading banner completed on id: ' + banner_id);
+            logger.debug('loading banner completed on id: ' + banner_id);
             j1.setXhrDataState(banner_id, statusTxt);
             j1.setXhrDomState(banner_id, statusTxt);
-            logger.debug('\n' + 'XHR data loaded in the DOM: ' + banner_id);
+            logger.debug('XHR data loaded in the DOM: ' + banner_id);
           }
           if (statusTxt == 'error') {
-            logText = '\n' + 'loading banner failed on id: '  +banner_id + ', error: ' + xhr.status + ': ' + xhr.statusText;
+            logText = 'loading banner failed on id: '  +banner_id + ', error: ' + xhr.status + ': ' + xhr.statusText;
             logger.error(logText);
             j1.setXhrDataState(banner_id, statusTxt);
             j1.setXhrDomState(banner_id, statusTxt);
 
             state = 'failed';
-            logger.error('\n' + 'state: ' + state);
+            logger.error('state: ' + state);
           }
         };
       };
@@ -960,7 +960,7 @@ var j1 = ((options) => {
           var id = '#' + banner[i];
           var selector = $(id);
           if (selector.length) {
-            logText = '\n' + 'loading banner on id: ' +banner[i];
+            logText = 'loading banner on id: ' +banner[i];
             logger.info(logText);
             var banner_data_path = '{{banner_data_path}} ' + id + '_content';
             selector.load(banner_data_path, cb_load_closure(id));
@@ -969,7 +969,7 @@ var j1 = ((options) => {
           }
         }
       }  else {
-        logText = '\n' + 'no banner found in site';
+        logText = 'no banner found in site';
         logger.debug(logText);
 
         return false;
@@ -998,19 +998,19 @@ var j1 = ((options) => {
       var cb_load_closure = (panel_id) => {
         return (responseTxt, statusTxt, xhr) => {
           if (statusTxt == 'success') {
-            logger.debug('\n' + 'loading panel completed on id: ' + panel_id);
+            logger.debug('loading panel completed on id: ' + panel_id);
             j1.setXhrDataState(panel_id, statusTxt);
             j1.setXhrDomState(panel_id, statusTxt);
-            logger.debug('\n' + 'XHR data loaded in the DOM: ' + panel_id);
+            logger.debug('XHR data loaded in the DOM: ' + panel_id);
           }
           if (statusTxt == 'error') {
-            logText = '\n' + 'loading panel failed on id: ' + panel_id + ', error ' + xhr.status + ': ' + xhr.statusText;
+            logText = 'loading panel failed on id: ' + panel_id + ', error ' + xhr.status + ': ' + xhr.statusText;
             logger.error(logText);
             j1.setXhrDataState(panel_id, statusTxt);
             j1.setXhrDomState(panel_id, statusTxt);
 
             state = 'error';
-            logger.error('\n' + 'state: ' + state);
+            logger.error('state: ' + state);
           }
         };
       };
@@ -1064,7 +1064,7 @@ var j1 = ((options) => {
           var id = '#' + panel[i];
           var selector = $(id);
           if ( selector.length ) {
-            logText = '\n' + 'loading panel on id: ' +panel[i];
+            logText = 'loading panel on id: ' +panel[i];
             logger.info(logText);
             var panel_data_path = '{{panel_data_path}} ' + id + '_content';
             selector.load(panel_data_path, cb_load_closure(id));
@@ -1073,7 +1073,7 @@ var j1 = ((options) => {
           }
         }
       } else {
-        logText = '\n' + 'no panel found in site';
+        logText = 'no panel found in site';
         logger.debug(logText);
 
         return false;
@@ -1093,27 +1093,27 @@ var j1 = ((options) => {
       var cb_load_closure = (footer_id) => {
         return (responseTxt, statusTxt, xhr) => {
           if (statusTxt ==  'success') {
-            logger.debug('\n' + 'footer loaded successfully on id: ' + footer_id);
+            logger.debug('footer loaded successfully on id: ' + footer_id);
             j1.setXhrDataState(footer_id, statusTxt);
             j1.setXhrDomState(footer_id, statusTxt);
-            logger.debug('\n' + 'XHR data loaded in the DOM: ' + footer_id);
-            logger.debug('\n' + 'initialization footer finished');
+            logger.debug('XHR data loaded in the DOM: ' + footer_id);
+            logger.debug('initialization footer finished');
           }
           if (statusTxt == 'error') {
-            logText = '\n' + 'loading footer failed on id: ' + footer_id + ', error ' + xhr.status + ': ' + xhr.statusText;
+            logText = 'loading footer failed on id: ' + footer_id + ', error ' + xhr.status + ': ' + xhr.statusText;
             logger.error(logText);
             j1.setXhrDataState(footer_id, statusTxt);
             j1.setXhrDomState(footer_id, statusTxt);
 
             // Set|Log status
             state = 'failed';
-            logger.error('\n' + 'state: ' + state);
-            logger.error('\n' + 'initialization footer failed');
+            logger.error('state: ' + state);
+            logger.error('initialization footer failed');
           }
         };
       };
 
-      logger.info('\n' + 'loading footer on id: {{footer_id}}');
+      logger.info('loading footer on id: {{footer_id}}');
 
       var id = '#' + '{{footer_id}}';
       var selector = $(id);
@@ -1121,7 +1121,7 @@ var j1 = ((options) => {
         var footer_data_path = '{{footer_data_path}} ' + id;
         selector.load(footer_data_path, cb_load_closure(id));
       } else {
-        logger.debug('\n' + 'data not loaded');
+        logger.debug('data not loaded');
         j1.setXhrDataState(id, 'not loaded');
         j1.setXhrDomState(id, 'pending');
 
@@ -1188,15 +1188,15 @@ var j1 = ((options) => {
         window.location.href = '/444.html';
       }
 
-      logger.info('\n' + 'finalize page');
-      logText= '\n' + 'loading page partials: started';
+      logger.info('finalize page');
+      logText= 'loading page partials: started';
       logger.info(logText);
 
       if (j1.appDetected()) {
         // ---------------------------------------------------------------------
         // APP mode
         // ---------------------------------------------------------------------
-        logger.info('\n' + 'mode detected: app');
+        logger.info('mode detected: app');
 
         $.when ($.ajax(ep_status))
         .then(function(data) {
@@ -1205,7 +1205,7 @@ var j1 = ((options) => {
           user_session = j1.mergeData(user_session, data);
 
           user_session.current_page = current_url.pathname;
-          logger.debug('\n' + 'write to cookie : ' + cookie_names.user_session);
+          logger.debug('write to cookie : ' + cookie_names.user_session);
           cookie_written = j1.writeCookie({
             name:     cookie_names.user_session,
             data:     user_session,
@@ -1265,23 +1265,23 @@ var j1 = ((options) => {
           if (checkCookies) {
             var j1Cookies = j1.findCookie('j1');
             if (!j1.existsCookie(cookie_names.user_state)) {
-              logger.error('\n' + 'Access to cookie failed or cookie not found: ' + cookie_names.user_state);
-              logger.info('\n' + 'j1 cookies found:' + j1Cookies.length);
+              logger.error('Access to cookie failed or cookie not found: ' + cookie_names.user_state);
+              logger.info('j1 cookies found:' + j1Cookies.length);
               // redirect to error page: blocked content
               window.location.href = '/446.html';
             } else {
-              logger.info('\n' + 'j1 cookies found:' + j1Cookies.length);
+              logger.info('j1 cookies found:' + j1Cookies.length);
             }
           }
 
           // manage Dropcaps if translation is enabled|disabled
           // -----------------------------------------------------------------
           if (user_translate.translationEnabled) {
-           logger.info('\n' + 'translation enabled: ' + user_translate.translationEnabled);
-           logger.debug('\n' + 'skipped processing of dropcaps');
+           logger.info('translation enabled: ' + user_translate.translationEnabled);
+           logger.debug('skipped processing of dropcaps');
           } else {
            // initialize dropcaps
-           logger.info('\n' + 'post processing: createDropCap');
+           logger.info('post processing: createDropCap');
            j1.api.createDropCap();
           }
 
@@ -1289,11 +1289,11 @@ var j1 = ((options) => {
           // show|hide cookie icon
           if (j1.existsCookie(cookie_names.user_consent)) {
             // Display cookie icon
-            logText = '\n' + 'show cookie icon';
+            logText = 'show cookie icon';
             logger.info(logText);
             $('#quickLinksCookieButton').css('display', 'block');
           } else {
-            logText = '\n' + 'hide cookie icon';
+            logText = 'hide cookie icon';
             logger.info(logText);
             // Display cookie icon
             $('#quickLinksCookieButton').css('display', 'none');
@@ -1307,16 +1307,16 @@ var j1 = ((options) => {
           if (j1.authEnabled()) {
             if (user_session.authenticated === 'true') {
               // set signout
-              logger.info('\n' + 'show signout icon');
+              logger.info('show signout icon');
               $('#navLinkSignInOut').attr('data-bs-target','#modalOmniSignOut');
               $('#iconSignInOut').removeClass('mdib-login').addClass('mdib-logout');
             } else {
               // set signin
-              logger.info('\n' + 'show signin icon');
+              logger.info('show signin icon');
               $('#navLinkSignInOut').attr('data-bs-target','#modalOmniSignIn');
               $('#iconSignInOut').removeClass('mdib-logout').addClass('mdib-login');
             }
-            logger.info('\n' + 'authentication detected as: ' + user_session.authenticated);
+            logger.info('authentication detected as: ' + user_session.authenticated);
             $('#quickLinksSignInOutButton').css('display', 'block');
           }
 
@@ -1327,8 +1327,8 @@ var j1 = ((options) => {
           // for GDPR compliance, themes feature may disabled on
           // privacy settings
           if (!user_consent.personalization)  {
-            logger.debug('\n' + 'disable themes feature because of privacy settings');
-            logger.debug('\n' + 'personalization not allowed, privacy settings for personalization: ' + user_consent.personalization);
+            logger.debug('disable themes feature because of privacy settings');
+            logger.debug('personalization not allowed, privacy settings for personalization: ' + user_consent.personalization);
             $("#themes_menu").hide();
           } else {
             $("#themes_menu").show();
@@ -1336,16 +1336,16 @@ var j1 = ((options) => {
 
           // detect if a loaded page has been chenged
           if (user_session.previous_page !== user_session.current_page) {
-            logText = '\n' + 'page change detected';
+            logText = 'page change detected';
             logger.info(logText);
-            logText = '\n' + 'previous page: ' + user_session.previous_page;
+            logText = 'previous page: ' + user_session.previous_page;
             logger.info(logText);
-            logText = '\n' + 'current page: ' + user_session.current_page;
+            logText = 'current page: ' + user_session.current_page;
             logger.info(logText);
           }
 
           // update sidebar for changed theme data
-          logger.info('\n' + 'update sidebar');
+          logger.info('update sidebar');
           user_state        = j1.readCookie(cookie_names.user_state);
           current_user_data = j1.mergeData(user_session, user_state);
           j1.api.navigator.updateSidebar(current_user_data);
@@ -1370,21 +1370,21 @@ var j1 = ((options) => {
           // set|log status
           state = 'finished';
           j1.setState(state);
-          logText = '\n' + 'state: ' + state;
+          logText = 'state: ' + state;
           logger.info(logText);
-          logText = '\n' + 'page finalized successfully';
+          logText = 'page finalized successfully';
           logger.info(logText);
 
           endTimeModule = Date.now();
-          logger.info('\n' + 'page initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+          logger.info('page initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
         });
       } else {
         // ---------------------------------------------------------------------
         // WEB mode
         // ---------------------------------------------------------------------
-        logger.info('\n' + 'state: finished');
-        logger.info('\n' + 'page initialization: finished');
+        logger.info('state: finished');
+        logger.info('page initialization: finished');
 
         // enable (body) animation on page load if enabled
         if (bodyAnimation) {
@@ -1416,13 +1416,13 @@ var j1 = ((options) => {
         if (checkCookies) {
           var j1Cookies = j1.findCookie('j1');
           if (!j1.existsCookie(cookie_names.user_state)) {
-            logger.error('\n' + 'Access to cookie failed or cookie not found: ' + cookie_names.user_state);
-            logger.info('\n' + 'j1 cookies found:' + j1Cookies.length);
+            logger.error('Access to cookie failed or cookie not found: ' + cookie_names.user_state);
+            logger.info('j1 cookies found:' + j1Cookies.length);
             // redirect to error page: blocked content
             window.location.href = '/446.html';
           } else {
 
-            logger.info('\n' + 'j1 cookies found:' + j1Cookies.length);
+            logger.info('j1 cookies found:' + j1Cookies.length);
           }
         }
 
@@ -1432,7 +1432,7 @@ var j1 = ((options) => {
         // -------------------------------------------------------------------
         // $('#features').tapTarget();
         // $('#features').click(function(e) {
-        //   logger.info('\n' + 'call default action');
+        //   logger.info('call default action');
         //   $('#features').tapTarget('open');
         // });
 
@@ -1453,20 +1453,20 @@ var j1 = ((options) => {
         // manage Dropcaps if translation is enabled|disabled
         // -------------------------------------------------------------------
         if (user_translate.translationEnabled) {
-          logger.info('\n' + 'translation enabled: ' + user_translate.translationEnabled);
-          logger.debug('\n' + 'skipped processing of dropcaps');
+          logger.info('translation enabled: ' + user_translate.translationEnabled);
+          logger.debug('skipped processing of dropcaps');
         } else {
           // initialize dropcaps
-          logger.info('\n' + 'post processing: createDropCap');
+          logger.info('post processing: createDropCap');
           j1.api.createDropCap();
         }
 
-        logger.info('\n' + 'mode detected: web');
-        logger.info('\n' + 'hide signin icon');
+        logger.info('mode detected: web');
+        logger.info('hide signin icon');
         $('#quickLinksSignInOutButton').css('display', 'none');
 
         user_session.current_page = current_url.pathname;
-        logger.debug('\n' + 'write to cookie : ' + cookie_names.user_session);
+        logger.debug('write to cookie : ' + cookie_names.user_session);
         cookie_written = j1.writeCookie({
             name:     cookie_names.user_session,
             data:     user_session,
@@ -1483,11 +1483,11 @@ var j1 = ((options) => {
         // show|hide cookie icon
         if (j1.existsCookie(cookie_names.user_consent)) {
           // Display cookie icon
-          logText = '\n' + 'show cookie icon';
+          logText = 'show cookie icon';
           logger.info(logText);
           $('#quickLinksCookieButton').css('display', 'block');
         } else {
-          logText = '\n' + 'hide cookie icon';
+          logText = 'hide cookie icon';
           logger.info(logText);
           // Display cookie icon
           $('#quickLinksCookieButton').css('display', 'none');
@@ -1500,8 +1500,8 @@ var j1 = ((options) => {
         // for GDPR compliance, themes feature may disabled on
         // privacy settings
         if (!user_consent.personalization) {
-          logger.debug('\n' + 'disable themes feature because of privacy settings');
-          logger.debug('\n' + 'personalization not allowed, privacy settings for personalization: ' + user_consent.personalization);
+          logger.debug('disable themes feature because of privacy settings');
+          logger.debug('personalization not allowed, privacy settings for personalization: ' + user_consent.personalization);
           $("#themes_menu").hide();
         } else {
           $("#themes_menu").show();
@@ -1509,22 +1509,22 @@ var j1 = ((options) => {
 
         // detect if a loaded page has been chenged
         if (user_session.previous_page !== user_session.current_page) {
-          logText = '\n' + 'page change detected';
+          logText = 'page change detected';
           logger.info(logText);
-          logText = '\n' + 'previous page: ' + user_session.previous_page;
+          logText = 'previous page: ' + user_session.previous_page;
           logger.info(logText);
-          logText = '\n' + 'current page: ' + user_session.current_page;
+          logText = 'current page: ' + user_session.current_page;
           logger.info(logText);
         }
 
         // update sidebar for changed theme data
-        logger.info('\n' + 'update sidebar');
+        logger.info('update sidebar');
         user_state        = j1.readCookie(cookie_names.user_state);
 
         if (template_version_changed) {
           if (typeof template_previous_version == 'undefined') template_previous_version = 'na';
-          logger.warn('\n' + 'template version detected as changed');
-          logger.warn('\n' + 'template version previous|current: ' +  template_previous_version + '|' + template_version);
+          logger.warn('template version detected as changed');
+          logger.warn('template version previous|current: ' +  template_previous_version + '|' + template_version);
 
           // Update the user_state cookie
           // TODO:  replace theme_version by template_version as they
@@ -1538,9 +1538,9 @@ var j1 = ((options) => {
           	secure:   secure,
           	expires:  365
           });
-          logger.warn('\n' + 'template version updated to: ' +  template_version);
+          logger.warn('template version updated to: ' +  template_version);
         } else {
-          logger.info('\n' + 'template version detected: ' +  user_state.template_version);
+          logger.info('template version detected: ' +  user_state.template_version);
         }
 
         // set current user data
@@ -1567,13 +1567,13 @@ var j1 = ((options) => {
         // set|log status
         state = 'finished';
         j1.setState(state);
-        logText = '\n' + 'state: ' + state;
+        logText = 'state: ' + state;
         logger.info(logText);
-        logText = '\n' + 'page finalized successfully';
+        logText = 'page finalized successfully';
         logger.info(logText);
 
         endTimeModule = Date.now();
-        logger.info('\n' + 'page initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+        logger.info('page initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
       }
     }, // END finalizePage
 
@@ -1681,7 +1681,7 @@ var j1 = ((options) => {
         // scroll only, if an anchor is given with an URL
         selector = $(anchor_id);
         if (selector.length) {
-          logger.info('\n' + 'scrollTo header: ' + anchor_id);
+          logger.info('scrollTo header: ' + anchor_id);
           j1.api.scrollSmooth.scroll(anchor_id, {
             duration:   scrollDuration,
             offset:     scrollOffset,
@@ -1696,7 +1696,7 @@ var j1 = ((options) => {
           $(window).scrollTop($(window).scrollTop()-1);
         }
       } else if (anchor_id === '#') {
-        logger.info('\n' + 'bound click event to "#", suppress default action');
+        logger.info('bound click event to "#", suppress default action');
         $(window).scrollTop($(window).scrollTop()+1);
         $(window).scrollTop($(window).scrollTop()-1);
 
@@ -1758,7 +1758,7 @@ var j1 = ((options) => {
             j1.setXhrDataState(id, statusTxt);
             j1.setXhrDomState(id, 'pending');
 
-            logger.debug('\n' + 'data loaded successfully on id: ' +id);
+            logger.debug('data loaded successfully on id: ' +id);
 
             state = true;
           }
@@ -1766,12 +1766,12 @@ var j1 = ((options) => {
             // jadams, 2020-07-21: to be checked why id could be UNDEFINED
             if (typeof(id) != "undefined") {
               state = 'failed';
-              logger.debug('\n' + 'set state for ' +mod+ ' to: ' + state);
+              logger.debug('set state for ' +mod+ ' to: ' + state);
               // jadams, 2020-07-21: intermediate state should DISABLED
               // executeFunctionByName(mod + '.setState', window, state);
               j1.setXhrDataState(id, statusTxt);
               j1.setXhrDomState(id, 'pending');
-              logText = '\n' + 'loading data failed on id: ' +id+ ', error ' + xhr.status + ': ' + xhr.statusText;
+              logText = 'loading data failed on id: ' +id+ ', error ' + xhr.status + ': ' + xhr.statusText;
               logger.error(logText);
 
               state = false;
@@ -1793,9 +1793,9 @@ var j1 = ((options) => {
 
       // failsafe - prevent XHR load errors
       if (options.xhr_data_element !== '') {
-        logger.debug('\n' + 'XHR data element found: ' + options.xhr_data_element);
+        logger.debug('XHR data element found: ' + options.xhr_data_element);
       } else  {
-        logger.debug('\n' + 'no XHR data element found, loading data aborted');
+        logger.debug('no XHR data element found, loading data aborted');
         return;
       }
 
@@ -1817,7 +1817,7 @@ var j1 = ((options) => {
         function mutationHandler (mutationRecords) {
           mutationRecords.forEach ( function (mutation) {
             if (mutation.addedNodes.length) {
-              logger.debug('\n' + 'XHR data loaded in the DOM: ' + id);
+              logger.debug('XHR data loaded in the DOM: ' + id);
               j1.setXhrDomState(id, 'success');
             }
           });
@@ -1853,16 +1853,16 @@ var j1 = ((options) => {
           if ( statusTxt === 'success' ) {
             j1.setXhrDataState(id, statusTxt);
 
-            logText = '\n' + 'data loaded successfully for: ' +id;
+            logText = 'data loaded successfully for: ' +id;
             logger.info(logText);
 
             state = true;
           }
           if ( statusTxt === 'error' ) {
             state = 'failed';
-            logger.info('\n' + 'set state for ' +mod+ ' to: ' + state);
+            logger.info('set state for ' +mod+ ' to: ' + state);
             j1.setXhrDataState(id, statusTxt);
-            logText = '\n' + 'loading data failed for: ' +id+ ', error ' + xhr.status + ': ' + xhr.statusText;
+            logText = 'loading data failed for: ' +id+ ', error ' + xhr.status + ': ' + xhr.statusText;
             logger.error(logText);
 
             state = false;
@@ -2346,11 +2346,11 @@ var j1 = ((options) => {
               });
 
             });
-            logger.debug('\n' + 'met dependencies for: sidebarLoaded');
+            logger.debug('met dependencies for: sidebarLoaded');
             clearInterval(sidebarLoaded);
             return true;
           } else {
-            logger.error('\n' + 'no user data provided');
+            logger.error('no user data provided');
             clearInterval(sidebarLoaded);
             return false;
           }
@@ -2404,11 +2404,11 @@ var j1 = ((options) => {
               });
 
             });
-            logger.debug('\n' + 'met dependencies for: sidebarLoaded');
+            logger.debug('met dependencies for: sidebarLoaded');
             clearInterval(sidebarLoaded);
             return true;
           } else {
-            logger.error('\n' + 'no user data provided');
+            logger.error('no user data provided');
             clearInterval(sidebarLoaded);
             return false;
           }
@@ -2480,7 +2480,7 @@ var j1 = ((options) => {
     //   var bg_primary    = j1.getStyleValue('bg-primary', 'background-color');
     //   var bg_secondary  = j1.getStyleValue('bg-secondary', 'background-color');
     //
-    //   logger.info('\n' + 'set color scheme for selected theme');
+    //   logger.info('set color scheme for selected theme');
     //
     //   // globals
     //   // -----------------------------------------------------------------------
@@ -2688,14 +2688,14 @@ var j1 = ((options) => {
               var scrollOffsetCorrection  = -93;
               var scrollDuration          = 300;
 
-              logger.debug('\n' + 'scrollToAnchor: scroll page of type: static');
+              logger.debug('scrollToAnchor: scroll page of type: static');
 
               // scroll if headingId
               //
               if (headingHash === '') {
-                logger.debug('\n' + 'scrollToAnchor: top position detected');
+                logger.debug('scrollToAnchor: top position detected');
               } else {
-                logger.debug('\n' + 'scrollToAnchor: scroll to headline by id: ' + headingHash);
+                logger.debug('scrollToAnchor: scroll to headline by id: ' + headingHash);
                 j1.api.scrollSmooth.scroll(headingHash, {
                   duration:   scrollDuration,
                   offset:     scrollOffsetCorrection,
@@ -2722,7 +2722,7 @@ var j1 = ((options) => {
 //            var scrollOffsetCorrection  = -93;
 //              var scrollDuration          = 300;
 
-              logger.debug('\n' + 'scrollToAnchor: scroll page of type: dynamic');
+              logger.debug('scrollToAnchor: scroll page of type: dynamic');
 
               // collect top position for the active headline
               //
@@ -2766,9 +2766,9 @@ var j1 = ((options) => {
               //
               if (headingHash === '') {
                 headingHash = '#';
-                logger.debug('\n' + 'scrollToAnchor: top position detected');
+                logger.debug('scrollToAnchor: top position detected');
               } else {
-                logger.debug('\n' + 'scrollToAnchor: headline|no: ' + headingHash + '|' + headlineNo);
+                logger.debug('scrollToAnchor: headline|no: ' + headingHash + '|' + headlineNo);
 
                 // build-in scroller
                 //
@@ -2785,7 +2785,7 @@ var j1 = ((options) => {
           } else {
             // page type unknown (failsave fallback)
             setTimeout(() => {
-              logger.debug('\n' + 'scrollToAnchor: scroll page of type: unknown');
+              logger.debug('scrollToAnchor: scroll page of type: unknown');
 
               scrollOffset = scrollOffsetCorrection - scrollOffsetBase;
               j1.scrollTo(scrollOffset);
@@ -2916,16 +2916,16 @@ var j1 = ((options) => {
         var pathname    = url.replace( /^[a-zA-Z]{3,5}\:\/{2}[a-zA-Z0-9_.:-]+\//, '' );
 
         if (development && lastEntry.url !== '') {
-          logger.debug('\n' + 'Largest Contentful Paint (LCP), url:', pathname);
+          logger.debug('Largest Contentful Paint (LCP), url:', pathname);
         } else {
           console.debug(`Largest Contentful Paint (LCP), url: ${pathname}`);
         }
 
         if (development) {
           if (lcp > 2.5) {
-            logger.warn('\n' + 'Largest Contentful Paint (LCP), cumulated:', lcp);
+            logger.warn('Largest Contentful Paint (LCP), cumulated:', lcp);
           } else {
-            logger.info('\n' + 'Largest Contentful Paint (LCP), cumulated:', lcp);
+            logger.info('Largest Contentful Paint (LCP), cumulated:', lcp);
           }
         } else {
           if (lcp > 2.5) {
@@ -2976,11 +2976,11 @@ var j1 = ((options) => {
 
                 if (development && id !== 'missing' && id !== '' && cls > 0.01) {
                   if (cls > 0.1) {
-                    logger.warn('\n' + 'Cumulative Layout Shift (CLS), entry id: ', id);
-                    logger.warn('\n' + 'Cumulative Layout Shift (CLS): ', cls);
+                    logger.warn('Cumulative Layout Shift (CLS), entry id: ', id);
+                    logger.warn('Cumulative Layout Shift (CLS): ', cls);
                   } else {
-                    logger.info('\n' + 'Cumulative Layout Shift (CLS), entry id: ', id);
-                    logger.info('\n' + 'Cumulative Layout Shift (CLS): ', cls);
+                    logger.info('Cumulative Layout Shift (CLS), entry id: ', id);
+                    logger.info('Cumulative Layout Shift (CLS): ', cls);
                   }
                 }
               } // END if typeof
@@ -3083,8 +3083,8 @@ var j1 = ((options) => {
               j1['pageMonitor'].pageType = 'dynamic';
 
               if (development) {
-                logger.debug('\n' + 'growthRatio: ' + j1['pageMonitor'].growthRatio + '%');
-                logger.debug('\n' + 'page detected as: dynamic');
+                logger.debug('growthRatio: ' + j1['pageMonitor'].growthRatio + '%');
+                logger.debug('page detected as: dynamic');
               }
             } else {
               // set the page type to 'static' if low growth detected
@@ -3092,8 +3092,8 @@ var j1 = ((options) => {
               if (typeof j1['pageMonitor'].growthRatio != 'undefined' && j1['pageMonitor'].growthRatio == 0) {
                 j1['pageMonitor'].pageType = 'static';
                 if (development) {
-                  logger.debug('\n' + 'growthRatio: ' + j1['pageMonitor'].growthRatio + '%');
-                  logger.debug('\n' + 'page detected as: static');
+                  logger.debug('growthRatio: ' + j1['pageMonitor'].growthRatio + '%');
+                  logger.debug('page detected as: static');
                 }
               }
             } // END if growthRatio
@@ -3220,11 +3220,11 @@ var j1 = ((options) => {
       var json_message  = JSON.stringify(message);
 
       if (receiver === 'j1') {
-        logText = '\n' + 'send message from ' + sender + ' to' + receiver + ': ' + json_message;
+        logText = 'send message from ' + sender + ' to' + receiver + ': ' + json_message;
         logger.debug(logText);
         executeFunctionByName('j1' + '.messageHandler', window, sender, message);
       } else {
-        logText = '\n' + 'send message from ' + sender + ' to ' + receiver + ': ' + json_message;
+        logText = 'send message from ' + sender + ' to ' + receiver + ': ' + json_message;
         logger.debug(logText);
         //executeFunctionByName('j1.' + receiver + '.messageHandler', window, sender, message)
         executeFunctionByName(receiver + '.messageHandler', window, sender, message);
@@ -3239,7 +3239,7 @@ var j1 = ((options) => {
       // var json_message  = JSON.stringify(message, undefined, 2);             // multiline
       var json_message  = JSON.stringify(message);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -3247,7 +3247,7 @@ var j1 = ((options) => {
       // -----------------------------------------------------------------------
       if ( message.type === 'command' && message.action === 'module_initialized' ) {
         _this.setState('finished');
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

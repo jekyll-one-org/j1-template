@@ -154,7 +154,7 @@
       // available), some cleanups are needed AFTER results generated.
       if (docs.length > 0) {
         var logger    =  log4javascript.getLogger('j1.lunr');
-        var log_text  =  '\n' + 'post cleanup of tags and categories';
+        var log_text  =  'post cleanup of tags and categories';
         var sr_categories;
         var sr_tags;
 

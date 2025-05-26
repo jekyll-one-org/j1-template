@@ -282,8 +282,8 @@ j1.adapter.amplitude = ((j1, window) => {
           startTimeModule = Date.now();
 
           _this.setState('started');
-          logger.debug('\n' + 'module state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized');
+          logger.debug('module state: ' + _this.getState());
+          logger.info('module is being initialized');
 
           // test data for console filters
           // -------------------------------------------------------------------
@@ -359,7 +359,7 @@ j1.adapter.amplitude = ((j1, window) => {
     // -------------------------------------------------------------------------
     songLoader: (songs) => {
 
-      logger.info('\n' + 'creating global playlist (API): started');
+      logger.info('creating global playlist (API): started');
 
       // -----------------------------------------------------------------------
       // initialize amplitude songs
@@ -413,7 +413,7 @@ j1.adapter.amplitude = ((j1, window) => {
 
       {% endif %} {% endfor %}
 
-      logger.info('\n' + 'creating global playlist (API): finished');
+      logger.info('creating global playlist (API): finished');
     }, // END songLoader
 
     // -------------------------------------------------------------------------
@@ -425,7 +425,7 @@ j1.adapter.amplitude = ((j1, window) => {
       // -----------------------------------------------------------------------
       // initialize HTML portion (UI) for all players configured|enabled
       // -----------------------------------------------------------------------
-      logger.info('\n' + 'loading player HTML components (UI): started');
+      logger.info('loading player HTML components (UI): started');
 
       {% for player in amplitude_options.players %} {% if player.enabled %}
         {% assign xhr_data_path = amplitude_options.xhr_data_path %}
@@ -436,7 +436,7 @@ j1.adapter.amplitude = ((j1, window) => {
         playerExistsInPage = ($('#' + '{{xhr_container_id}}')[0] !== undefined) ? true : false;
         if (playerExistsInPage) {
           playerCounter++;
-          logger.debug('\n' + 'load player UI on ID #{{player.id}}: started');
+          logger.debug('load player UI on ID #{{player.id}}: started');
 
           j1.loadHTML({
             xhr_container_id: '{{xhr_container_id}}',
@@ -460,7 +460,7 @@ j1.adapter.amplitude = ((j1, window) => {
 
             if (xhrLoadState === 'success') {
               playersProcessed.push('{{xhr_container_id}}');
-              logger.debug('\n' + 'load player UI on ID #{{player.id}}: finished');
+              logger.debug('load player UI on ID #{{player.id}}: finished');
 
               clearInterval(load_dependencies['dependencies_met_html_loaded_{{player.id}}']);
             }
@@ -476,7 +476,7 @@ j1.adapter.amplitude = ((j1, window) => {
         }
 
         if (processingPlayersFinished) {
-          logger.info('\n' + 'loading player HTML components (UI): finished');
+          logger.info('loading player HTML components (UI): finished');
 
           clearInterval(load_dependencies['dependencies_met_players_loaded']);
           playersLoaded.state = true;
@@ -490,7 +490,7 @@ j1.adapter.amplitude = ((j1, window) => {
     // -------------------------------------------------------------------------
     initApi: (songlist) => {
 
-      logger.info('\n' + 'initialze API: started');
+      logger.info('initialze API: started');
 
       {% comment %} collect playlists
       --------------------------------------------------------------------------  {% endcomment %}
@@ -574,14 +574,14 @@ j1.adapter.amplitude = ((j1, window) => {
         callbacks: {
           initialized: function() {
             var amplitudeConfig = Amplitude.getConfig();
-            logger.info('\n' + 'initialze API: finished');
+            logger.info('initialze API: finished');
             // indicate api successfully initialized
             apiInitialized.state = true;
           },
           onInitError: function() {
             // indicate api failed on initialization
             apiInitialized.state = false;
-            console.error('\n' + 'Amplitude API failed on initialization');
+            console.error('Amplitude API failed on initialization');
           },
           play: function() {
             // make sure the player is playing
@@ -617,7 +617,7 @@ j1.adapter.amplitude = ((j1, window) => {
             var currentState = Amplitude.getPlayerState();
             onPlayerStateChange(4);
             if (playerDelayNextTitle) {
-              logger.debug('\n' + 'delay on previous title: ' + songMetaData.name + ' with titleIndex ' + songMetaData.index);
+              logger.debug('delay on previous title: ' + songMetaData.name + ' with titleIndex ' + songMetaData.index);
             }
 
             if (playerPauseNextTitle) {
@@ -625,7 +625,7 @@ j1.adapter.amplitude = ((j1, window) => {
               if (amplitudePlayerState === 'playing' || amplitudePlayerState === 'stopped' ) {
                 setTimeout(() => {
                   // pause playback of next title
-                  logger.debug('\n' + 'paused on next title: ' + songMetaData.name);
+                  logger.debug('paused on next title: ' + songMetaData.name);
                   Amplitude.pause();
                 }, 150);
               } // END if playing
@@ -636,7 +636,7 @@ j1.adapter.amplitude = ((j1, window) => {
           next: function() {
             onPlayerStateChange(5);
             if (playerDelayNextTitle) {
-              logger.debug('\n' + 'delay on next title: ' + songMetaData.name + ' with titleIndex ' + songMetaData.index);
+              logger.debug('delay on next title: ' + songMetaData.name + ' with titleIndex ' + songMetaData.index);
             }
 
             if (playerPauseNextTitle) {
@@ -644,7 +644,7 @@ j1.adapter.amplitude = ((j1, window) => {
               if (amplitudePlayerState === 'playing' || amplitudePlayerState === 'stopped' ) {
                 setTimeout(() => {
                   // pause playback of next title
-                  logger.debug('\n' + 'paused on next title: ' + songMetaData.name);
+                  logger.debug('paused on next title: ' + songMetaData.name);
                   Amplitude.pause();
                 }, 150);
               } // END if playing
@@ -753,7 +753,7 @@ j1.adapter.amplitude = ((j1, window) => {
         currentStep  = 1;
 
         if (volumeSlider === undefined || volumeSlider === null) {
-          logger.warn('\n' + 'no volume slider found at playerID: ' + settings.playerID);
+          logger.warn('no volume slider found at playerID: ' + settings.playerID);
           return;
         }
 
@@ -830,7 +830,7 @@ j1.adapter.amplitude = ((j1, window) => {
               songs = Amplitude.getSongsInPlaylist(playlist);
 
               if (songIndex === songs.length-1) {
-                logger.debug('\n' + 'restore player volume on last trackID|volume at: ' + trackID + '|' + defaultVolume);
+                logger.debug('restore player volume on last trackID|volume at: ' + trackID + '|' + defaultVolume);
                 volumeSlider.value  =  defaultVolume;              
               }
 
@@ -855,7 +855,7 @@ j1.adapter.amplitude = ((j1, window) => {
         songIndex     = songMetaData.index;
         trackID       = songIndex + 1;
 
-        logger.warn('\n' + `DO NOTHING on StateChange for playlist: ${playlist} at trackID|state: ${trackID}|${AT_PLAYER_STATE_NAMES[state]}`);
+        logger.warn(`DO NOTHING on StateChange for playlist: ${playlist} at trackID|state: ${trackID}|${AT_PLAYER_STATE_NAMES[state]}`);
 
       } // END doNothingOnStateChange
 
@@ -881,7 +881,7 @@ j1.adapter.amplitude = ((j1, window) => {
         songEndSec    = timestamp2seconds(songEndTS);
         startVolume   = Amplitude.getVolume();
 
-        logger.debug('\n' + `PLAY audio on processOnStateChangePlaying for playlist \'${playList}\' at trackID|state: ${trackID}|${AT_PLAYER_STATE_NAMES[state]}`);
+        logger.debug(`PLAY audio on processOnStateChangePlaying for playlist \'${playList}\' at trackID|state: ${trackID}|${AT_PLAYER_STATE_NAMES[state]}`);
 
         // update song rating in playlist-screen|meta-container
         // -------------------------------------------------------------------
@@ -897,13 +897,13 @@ j1.adapter.amplitude = ((j1, window) => {
         for (let i=0; i<ytPlayers.length; i++) {
           const playerID = ytPlayers[i];
           const playerProperties = j1.adapter.amplitude.data.ytPlayers[playerID];
-          logger.debug('\n' + 'process player id: ' + playerID);
+          logger.debug('process player id: ' + playerID);
           var ytpPlayer       = j1.adapter.amplitude.data.ytPlayers[playerID].player;
           var playerState     = ytpPlayer.getPlayerState();
           var ytpPlayerState  = YT_PLAYER_STATE_NAMES[playerState];
 
           if (ytpPlayerState === 'playing' || ytpPlayerState === 'paused' || ytpPlayerState === 'buffering') {
-            logger.debug('\n' + 'process player id: ' + playerID + ' stopped');
+            logger.debug('process player id: ' + playerID + ' stopped');
             ytpPlayer.stopVideo();
           }
         }
@@ -920,13 +920,13 @@ j1.adapter.amplitude = ((j1, window) => {
               // NOTE: use setSongPlayedPercentage for seeking to NOT
               //       generation any addition state changes like stopped
               //       or playing
-              logger.debug('\n' + 'seek audio in on playlist: ' + playList + ' at|to trackID|timestamp: ' + trackID + '|' + songStartTS);
+              logger.debug('seek audio in on playlist: ' + playList + ' at|to trackID|timestamp: ' + trackID + '|' + songStartTS);
               Amplitude.setSongPlayedPercentage((songStartSec / songDurationSec) * 100);
 
               // fade-in audio (if enabled)
               var fadeAudioIn = (songMetaData.audio_fade_in === 'true') ? true : false;
               if (fadeAudioIn) {
-                logger.debug('\n' + 'faden audio in on playlist: ' + playList + ' at|to trackID|timestamp: ' + trackID + '|' + songStartTS);
+                logger.debug('faden audio in on playlist: ' + playList + ' at|to trackID|timestamp: ' + trackID + '|' + songStartTS);
                 atpFadeInAudio({ playerID: playerID });
               } // END if fadeAudio
 
@@ -956,13 +956,13 @@ j1.adapter.amplitude = ((j1, window) => {
                 // NOTE: use setSongPlayedPercentage for seeking to NOT
                 //       generation any addition state changes like stopped
                 //       or playing                  
-                logger.debug('\n' + 'seek audio out to end on playlist: ' + playList + ' at trackID|timestamp: ' + trackID + '|' + songEndTS);
+                logger.debug('seek audio out to end on playlist: ' + playList + ' at trackID|timestamp: ' + trackID + '|' + songEndTS);
                 Amplitude.setSongPlayedPercentage(99.99);
                 
                 // fade-out audio (if enabled)
                 var fadeAudioOut = (songMetaData.audio_fade_out === 'true') ? true : false;
                 if (fadeAudioOut) {
-                  logger.debug('\n' + 'fade audio out on playlist: ' + playList + ' at|to trackID|timestamp: ' + trackID + '|' + songEndTS);
+                  logger.debug('fade audio out on playlist: ' + playList + ' at|to trackID|timestamp: ' + trackID + '|' + songEndTS);
                   atpFadeAudioOut({ playerID: playerID });
                 } // END if fadeAudio
 
@@ -1021,7 +1021,7 @@ j1.adapter.amplitude = ((j1, window) => {
             doNothingOnStateChange(AT_PLAYER_STATE.ENDED);
             break;
           default:
-            logger.error('\n' + `UNKNOWN state on StateChange fired: ${state}`);
+            logger.error(`UNKNOWN state on StateChange fired: ${state}`);
         } // END switch state
       } // END onPlayerStateChange
 
@@ -1066,7 +1066,7 @@ j1.adapter.amplitude = ((j1, window) => {
           var parentContainer = (document.getElementById('{{xhr_container_id}}') !== null) ? true : false;
           var parentContainerExist = ($('#' + '{{xhr_container_id}}')[0] !== undefined) ? true : false;
 
-          logger.info('\n' + 'initialize player specific UI events: started');
+          logger.info('initialize player specific UI events: started');
           
           {% for player in amplitude_options.players %} {% if player.enabled %}
             {% assign xhr_data_path = amplitude_options.xhr_data_path %}
@@ -1091,7 +1091,7 @@ j1.adapter.amplitude = ((j1, window) => {
                 var playListName  = '{{player.playlist.name}}';
                 var playListTitle = '{{player.playlist.title}}';
 
-                logger.debug('\n' + 'initialize audio player instance on id: {{player.id}}');
+                logger.debug('initialize audio player instance on id: {{player.id}}');
 
                 // set song (title) specific audio info links
                 // -------------------------------------------------------------
@@ -1102,7 +1102,7 @@ j1.adapter.amplitude = ((j1, window) => {
 
                 // set player specific UI events
                 // -------------------------------------------------------------
-                logger.debug('\n' + 'setup audio player specific UI events on ID #{{player.id}}: started');
+                logger.debug('setup audio player specific UI events on ID #{{player.id}}: started');
 
                 var dependencies_met_api_initialized = setInterval (() => {
                   if (apiInitialized.state) {
@@ -1312,13 +1312,13 @@ j1.adapter.amplitude = ((j1, window) => {
                               for (let i=0; i<ytPlayers.length; i++) {
                                 const playerID = ytPlayers[i];
                                 const playerProperties = j1.adapter.amplitude.data.ytPlayers[playerID];
-                                logger.debug('\n' + 'process player id: ' + playerID);
+                                logger.debug('process player id: ' + playerID);
                                 ytpPlayer       = j1.adapter.amplitude.data.ytPlayers[playerID].player;
                                 playerState     = ytpPlayer.getPlayerState();
                                 ytpPlayerState  = YT_PLAYER_STATE_NAMES[playerState];
 
                                 if (ytpPlayerState === 'playing' || ytpPlayerState === 'paused' || ytpPlayerState === 'buffering') {
-                                  logger.debug('\n' + 'process player id: ' + playerID + ' stopped');
+                                  logger.debug('process player id: ' + playerID + ' stopped');
                                   ytpPlayer.stopVideo();
                                 }
                               }
@@ -1455,13 +1455,13 @@ j1.adapter.amplitude = ((j1, window) => {
                               for (let i=0; i<ytPlayers.length; i++) {
                                 const playerID = ytPlayers[i];
                                 const playerProperties = j1.adapter.amplitude.data.ytPlayers[playerID];
-                                logger.debug('\n' + 'process player id: ' + playerID);
+                                logger.debug('process player id: ' + playerID);
                                 ytpPlayer       = j1.adapter.amplitude.data.ytPlayers[playerID].player;
                                 playerState     = ytpPlayer.getPlayerState();
                                 ytpPlayerState  = YT_PLAYER_STATE_NAMES[playerState];
 
                                 if (ytpPlayerState === 'playing' || ytpPlayerState === 'paused' || ytpPlayerState === 'buffering') {
-                                  logger.debug('\n' + 'process player id: ' + playerID + ' stopped');
+                                  logger.debug('process player id: ' + playerID + ' stopped');
                                   ytpPlayer.stopVideo();
                                 }
                               }
@@ -1577,7 +1577,7 @@ j1.adapter.amplitude = ((j1, window) => {
                                   if (currentPlaylist === playlist) {
                                     if (metaData.rating) {
                                       var trackID = metaData.index + 1;
-                                      logger.debug('\n' + `UPDATE song rating on updatMetaContainers for trackID|playlist at: ${trackID}|${playlist} with a value of: ${metaData.rating}`);
+                                      logger.debug(`UPDATE song rating on updatMetaContainers for trackID|playlist at: ${trackID}|${playlist} with a value of: ${metaData.rating}`);
                                       largePlayerSongAudioRating[i].innerHTML = '<img src="/assets/image/pattern/rating/scalable/' + metaData.rating + '-star.svg"' + 'alt="song rating">';
                                     } else {
                                       largePlayerSongAudioRating[i].innerHTML = '';
@@ -1621,7 +1621,7 @@ j1.adapter.amplitude = ((j1, window) => {
                               const targetTime  = parseFloat(currentTime + skipOffset);
 
                               if (currentTime > 0) {
-                                logger.debug('\n' + `SKIP forward on Button skipForward for ${skipOffset} seconds`);
+                                logger.debug(`SKIP forward on Button skipForward for ${skipOffset} seconds`);
                                 Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
                               }
                             }); // END addEventListener
@@ -1644,7 +1644,7 @@ j1.adapter.amplitude = ((j1, window) => {
                               const targetTime  = parseFloat(currentTime - skipOffset);
 
                               if (currentTime > 0) {
-                                logger.debug('\n' + `SKIP backward on Button skipForward for ${skipOffset} seconds`);
+                                logger.debug(`SKIP backward on Button skipForward for ${skipOffset} seconds`);
                                 Amplitude.setSongPlayedPercentage((targetTime / duration) * 100);
                               }
                             }); // END addEventListener
@@ -1657,7 +1657,7 @@ j1.adapter.amplitude = ((j1, window) => {
                       if (largePlayerShuffleButton) {
                         largePlayerShuffleButton.addEventListener('click', function(event) {
                           var shuffleState = (document.getElementById('large_player_shuffle').className.includes('amplitude-shuffle-on')) ? true : false;
-                          logger.debug('\n' + `Set shuffle state to: ${shuffleState}`);
+                          logger.debug(`Set shuffle state to: ${shuffleState}`);
                           Amplitude.setShuffle(shuffleState)
                         }); // END addEventListener
                       } // END if largePlayerShuffleButton
@@ -1667,7 +1667,7 @@ j1.adapter.amplitude = ((j1, window) => {
                       if (largePlayerRepeatButton) {
                         largePlayerRepeatButton.addEventListener('click', function(event) {
                           var repeatState = (document.getElementById('large_player_repeat').className.includes('amplitude-repeat-on')) ? true : false;
-                          logger.debug('\n' + `Set repeat state to: ${repeatState}`);
+                          logger.debug(`Set repeat state to: ${repeatState}`);
                           Amplitude.setRepeat(repeatState)
                         }); // END addEventListener
                       } // END if largePlayerRepeatButton
@@ -1787,10 +1787,10 @@ j1.adapter.amplitude = ((j1, window) => {
                     // ---------------------------------------------------------
                     // START configured player features
 
-                    logger.debug('\n' + 'set play next title: ' + playerPlayNextTitle);
-                    logger.debug('\n' + 'set delay between titles: ' + playerDelayNextTitle + 'ms');
-                    logger.debug('\n' + 'set repeat (album): ' + playerRepeat);
-                    logger.debug('\n' + 'set shuffle (album): ' + playerShuffle);
+                    logger.debug('set play next title: ' + playerPlayNextTitle);
+                    logger.debug('set delay between titles: ' + playerDelayNextTitle + 'ms');
+                    logger.debug('set repeat (album): ' + playerRepeat);
+                    logger.debug('set shuffle (album): ' + playerShuffle);
 
                     // set delay between titles (songs)
                     Amplitude.setDelay(playerDelayNextTitle);
@@ -1804,8 +1804,8 @@ j1.adapter.amplitude = ((j1, window) => {
 
                     // finished messages
                     // ---------------------------------------------------------
-                    logger.debug('\n' + 'current player state: ' + amplitudePlayerState);
-                    logger.debug('\n' + 'setup player specific UI events on ID #{{player.id}}: finished');
+                    logger.debug('current player state: ' + amplitudePlayerState);
+                    logger.debug('setup player specific UI events on ID #{{player.id}}: finished');
 
                     clearInterval(dependencies_met_api_initialized);
                   } // END if apiInitialized
@@ -1825,14 +1825,14 @@ j1.adapter.amplitude = ((j1, window) => {
 
           {% endif %} {% endfor %}
 
-          logger.info('\n' + 'initialize player specific UI events: finished');
+          logger.info('initialize player specific UI events: finished');
 
           _this.setState('finished');
-          logger.debug('\n' + 'module state: ' + _this.getState());
-          logger.info('\n' + 'module initialized successfully');
+          logger.debug('module state: ' + _this.getState());
+          logger.info('module initialized successfully');
 
           endTimeModule = Date.now();
-          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+          logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_player_instances_initialized);
         } // END if apiInitialized
@@ -1856,7 +1856,7 @@ j1.adapter.amplitude = ((j1, window) => {
     // songEvents
     // -------------------------------------------------------------------------
     songEvents: (songs) => {
-      logger.debug('\n' + 'initializing title events for player on ID ' + '#' + playerID + ': started');
+      logger.debug('initializing title events for player on ID ' + '#' + playerID + ': started');
 
       for (var i = 0; i < songs.length; i++) {
         // ensure that on mouseover, CSS styles don't get messed up for active songs
@@ -1884,7 +1884,7 @@ j1.adapter.amplitude = ((j1, window) => {
         }); // END EventListener 'click' (songlist)
       }
 
-      logger.debug('\n' + 'initializing title events for player on ID ' + '#' + playerID + ': finished');
+      logger.debug('initializing title events for player on ID ' + '#' + playerID + ': finished');
     }, // END songEvents
 
     // -------------------------------------------------------------------------
@@ -1918,7 +1918,7 @@ j1.adapter.amplitude = ((j1, window) => {
       }
 
       if (plugin !== '' && isPluginLoaded(plugin)) {     
-        logger.debug('\n' + 'plugin loaded: ' + plugin);
+        logger.debug('plugin loaded: ' + plugin);
 
         // make sure the plugin installed only ONCE
         j1.adapter.amplitude.data.atpGlobals.ytpInstalled = true;
@@ -2005,7 +2005,7 @@ j1.adapter.amplitude = ((j1, window) => {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -2017,7 +2017,7 @@ j1.adapter.amplitude = ((j1, window) => {
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

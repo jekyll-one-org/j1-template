@@ -148,12 +148,12 @@ j1.adapter.iconPickerPage = ((j1, window) => {
         }); // END pickerButton (click)
 
         // setup slimSelect events|iconPicker options
-        logger.info('\n' + 'setup select events');
+        logger.info('setup select events');
         init_select_events();
 
         _this.setState('finished');
-        logger.debug('\n' + 'state: ' + _this.getState());
-        logger.info('\n' + 'initializing finished');
+        logger.debug('state: ' + _this.getState());
+        logger.info('initializing finished');
       } // END init_select
 
       function init_select_events() {
@@ -166,7 +166,7 @@ j1.adapter.iconPickerPage = ((j1, window) => {
           var currentIconLibrary    = select.value;
           var currentIconLibraryCss = select.options[select.selectedIndex].dataset.css;
 
-          logger.debug('\n' + 'use current IconLibrary: ' + currentIconLibrary);
+          logger.debug('use current IconLibrary: ' + currentIconLibrary);
 
           // apply selection
           currentIconLibrary        = select.value;
@@ -189,8 +189,8 @@ j1.adapter.iconPickerPage = ((j1, window) => {
 
         if (j1Finished && pageVisible) {
           _this.setState('started');
-          logger.debug('\n' + 'set module state to: ' + _this.getState());
-          logger.info('\n' + 'initializing started');
+          logger.debug('set module state to: ' + _this.getState());
+          logger.info('initializing started');
 
           var dependencies_met_modules_ready = setInterval(() => {
             var selectState         = $('#container_icon_library_select_wrapper').length;
@@ -199,7 +199,7 @@ j1.adapter.iconPickerPage = ((j1, window) => {
             var iconPickerFinished = (j1.adapter.iconPicker.getState() === 'finished') ? true: false;
 
             if (slimSelectFinished && iconPickerFinished && selectReady) {
-              logger.info('\n' + 'initializing select data');
+              logger.info('initializing select data');
 
               // setup initial slimSelect values|iconPicker options
               init_select();
@@ -229,7 +229,7 @@ j1.adapter.iconPickerPage = ((j1, window) => {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -241,7 +241,7 @@ j1.adapter.iconPickerPage = ((j1, window) => {
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

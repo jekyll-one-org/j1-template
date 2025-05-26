@@ -136,8 +136,8 @@ j1.adapter.dropdowns = ((j1, window) => {
 
       // initialize state flag
       _this.setState('started');
-      logger.debug('\n' + 'state: ' + _this.getState());
-      logger.info('\n' + 'module is being initialized');
+      logger.debug('state: ' + _this.getState());
+      logger.info('module is being initialized');
 
       // -----------------------------------------------------------------------
       // module initializer
@@ -153,8 +153,8 @@ j1.adapter.dropdowns = ((j1, window) => {
           startTimeModule = Date.now();
 
           _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized');
+          logger.debug('state: ' + _this.getState());
+          logger.info('module is being initialized');
 
           {% for item in dropdowns_options.dropdowns %} {% if item.dropdown.enabled %}
             {% assign dropdown_id = item.dropdown.id %}
@@ -214,11 +214,11 @@ j1.adapter.dropdowns = ((j1, window) => {
           {% endif %} {% endfor %}
 
           _this.setState('finished');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module initialized successfully');
+          logger.debug('state: ' + _this.getState());
+          logger.info('module initialized successfully');
 
           endTimeModule = Date.now();
-          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+          logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_page_ready);
         } // END pageVisible
@@ -234,7 +234,7 @@ j1.adapter.dropdowns = ((j1, window) => {
       var logger = log4javascript.getLogger('j1.adapter.dropdowns.cbOnClick');
       var itemEl = $(event.target).closest('li')[0];
 
-      // logText = '\n' + 'entered cbOnClick on id: ' + id;
+      // logText = 'entered cbOnClick on id: ' + id;
       // logger.info(logText);
 
       return true;
@@ -248,7 +248,7 @@ j1.adapter.dropdowns = ((j1, window) => {
       var logger  = log4javascript.getLogger('j1.adapter.dropdowns.cbOnOpen');
       var id      = elm.id;
 
-      logText = '\n' + 'entered cbOnOpen on id: ' + id;
+      logText = 'entered cbOnOpen on id: ' + id;
       logger.info(logText);
       return true;
     }, // END cbOnOpen
@@ -273,11 +273,11 @@ j1.adapter.dropdowns = ((j1, window) => {
         }
       }
 
-      logText = '\n' + 'entered cbOnClose on id: ' + id;
+      logText = 'entered cbOnClose on id: ' + id;
       logger.info(logText);
-      logText = '\n' + 'item selected: ' + activeItem;
+      logText = 'item selected: ' + activeItem;
       logger.info(logText);
-      logText = '\n' + 'value selected: ' + activeValue;
+      logText = 'value selected: ' + activeValue;
       logger.info(logText);
       return true;
     }, // END cbOnClose
@@ -289,7 +289,7 @@ j1.adapter.dropdowns = ((j1, window) => {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -301,7 +301,7 @@ j1.adapter.dropdowns = ((j1, window) => {
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

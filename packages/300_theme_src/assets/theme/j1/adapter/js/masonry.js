@@ -159,13 +159,13 @@ j1.adapter.masonry = ((j1, window) => {
           startTimeModule = Date.now();
 
           _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized');
+          logger.debug('state: ' + _this.getState());
+          logger.info('module is being initialized');
 
           {% for grid in masonry_settings.grids %}
             {% if grid.enabled %}
               {% assign grid_id = grid.id %}
-              logger.debug('\n' + 'found masonry grid on id: ' + '{{grid_id}}');
+              logger.debug('found masonry grid on id: ' + '{{grid_id}}');
 
               {% comment %} load default grid options
               ------------------------------------------------------------------ {% endcomment %}
@@ -208,16 +208,16 @@ j1.adapter.masonry = ((j1, window) => {
                 if (xhrLoadState === 'success') {
                   setTimeout(() => {
                     var $grid_{{grid_id}} = $('#{{grid_id}}');
-                    logger.debug('\n' + 'initialize grid on id: ' + '{{grid_id}}');
+                    logger.debug('initialize grid on id: ' + '{{grid_id}}');
 
                     // grid event handler
-                    logger.debug('\n' + 'install event handlers for grid on id: ' + '{{grid_id}}');
+                    logger.debug('install event handlers for grid on id: ' + '{{grid_id}}');
                     $grid_{{grid_id}}.on('layoutComplete', () => {
                       // initializing (grid layout) completed
-                      logger.debug('\n' + 'initializing layout completed for grid on id: ' + '{{grid_id}}');
+                      logger.debug('initializing layout completed for grid on id: ' + '{{grid_id}}');
 
                       // correct position for artice modals (previwes)
-                      logger.debug('\n' + 'adjust positions of all modals on id: {{grid_id.id}}');
+                      logger.debug('adjust positions of all modals on id: {{grid_id.id}}');
                       var preview_modals = $("#{{grid_id}} > .article-modal");
                       $.each($(preview_modals), (index, modal) => {
                         $(modal).attr('style', 'left: 0%');
@@ -225,7 +225,7 @@ j1.adapter.masonry = ((j1, window) => {
                     }); // ENF on layoutComplete
 
                     // setup grid
-                    logger.debug('\n' + 'grid is being setup on id: ' + '{{grid.id}}');
+                    logger.debug('grid is being setup on id: ' + '{{grid.id}}');
                     var $grid_{{grid_id}} = $grid_{{grid_id}}.masonry({
                       percentPosition:        {{percent_position}},
                       horizontalOrder:        {{horizontal_order}},
@@ -240,10 +240,10 @@ j1.adapter.masonry = ((j1, window) => {
 
                     // run code after all images are loaded with the grid
                     $grid_{{grid_id}}.imagesLoaded(() => {
-                      logger.debug('\n' + 'images loaded on id: {{grid_id}}');
+                      logger.debug('images loaded on id: {{grid_id}}');
 
                       {% if grid.lightbox.type == 'lg' %}
-                      logger.debug('\n' + 'gallery detected on id: {{grid_id}}');
+                      logger.debug('gallery detected on id: {{grid_id}}');
 
                       // setup lightbox
                       var lg      = document.getElementById("{{grid_id}}");
@@ -314,10 +314,10 @@ j1.adapter.masonry = ((j1, window) => {
 
             {% else %}
 
-              logger.info('\n' + 'found grid disabled on id: {{grid.id}}');
+              logger.info('found grid disabled on id: {{grid.id}}');
               {% if masonryOptions.hideDisabled %}
                 // hide a grid if disabled
-                logger.debug('\n' + 'hide grid disabled on id: {{grid.id}}');
+                logger.debug('hide grid disabled on id: {{grid.id}}');
                 $('#{{grid.id}}').hide();
               {% endif %}
             {% endif %} // ENDIF grid enabled
@@ -325,11 +325,11 @@ j1.adapter.masonry = ((j1, window) => {
           {% endfor %} // ENDFOR (all) grids
 
           _this.setState('finished');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'initializing module: finished');
+          logger.debug('state: ' + _this.getState());
+          logger.info('initializing module: finished');
 
           endTimeModule = Date.now();
-          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+          logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_page_ready);
         } // END if pageVisible
@@ -377,7 +377,7 @@ j1.adapter.masonry = ((j1, window) => {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -389,7 +389,7 @@ j1.adapter.masonry = ((j1, window) => {
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

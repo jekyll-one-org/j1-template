@@ -165,8 +165,8 @@ j1.adapter.toccer = (() => {
 
       // initialize state flag
       // _this.setState('started');
-      // logger.debug('\n' + 'state: ' + _this.getState());
-      // logger.info('\n' + 'module is being initialized');
+      // logger.debug('state: ' + _this.getState());
+      // logger.info('module is being initialized');
 
       // -----------------------------------------------------------------------
       // module initializer
@@ -181,8 +181,8 @@ j1.adapter.toccer = (() => {
           startTimeModule = Date.now();
 
           _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized');
+          logger.debug('state: ' + _this.getState());
+          logger.info('module is being initialized');
 
           _this.initToccerCore(toccerOptions);
 
@@ -190,11 +190,11 @@ j1.adapter.toccer = (() => {
           _this['moduleOptions'] = toccerOptions;
 
           _this.setState('finished');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'initializing module finished');
+          logger.debug('state: ' + _this.getState());
+          logger.info('initializing module finished');
 
           endTimeModule = Date.now();
-          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+          logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_toccer);
         } // END
@@ -209,7 +209,7 @@ j1.adapter.toccer = (() => {
       var scrollOffset            = j1.getScrollOffset(scrollOffsetCorrection) + scrollOffsetCorrection;
 
       _this.setState('running');
-      logger.debug('\n' + 'state: ' + _this.getState());
+      logger.debug('state: ' + _this.getState());
 
       // tocbot get fired if HTML portion is loaded (AJAX load finished)
       var dependencies_met_ajax_load_finished = setInterval (() => {
@@ -260,7 +260,7 @@ j1.adapter.toccer = (() => {
           });
           /* eslint-enable */
 
-          logger.debug('\n' + 'met dependencies for: loadHTML');
+          logger.debug('met dependencies for: loadHTML');
           clearInterval(dependencies_met_ajax_load_finished);
         } // END AJAX load finished
       }, 10); // END dependencies_met_ajax_load_finished
@@ -274,7 +274,7 @@ j1.adapter.toccer = (() => {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -286,7 +286,7 @@ j1.adapter.toccer = (() => {
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

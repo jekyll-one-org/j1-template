@@ -150,15 +150,15 @@ var timeSeconds;
           startTimeModule = Date.now();
 
           _this.setState('started');
-          logger.debug('\n' + 'set module state to: ' + _this.getState());
-          logger.info('\n' + 'initializing module: started');
+          logger.debug('set module state to: ' + _this.getState());
+          logger.info('initializing module: started');
 
           var wrapper_dependencies = {};
           var dependency;
 
           // setup selects on all wrappers
           {% for select in slim_select_settings.selects %} {% if select.enabled %}
-          logger.debug('\n' + 'select {{select.id}} is being initialized on wrapper: {{select.wrapper_id}}');
+          logger.debug('select {{select.id}} is being initialized on wrapper: {{select.wrapper_id}}');
 
           // create dynamic loader variable to setup the
           // select '{{select.id}}' on wrapper: '{{select.wrapper_id}}'
@@ -171,7 +171,7 @@ var timeSeconds;
 
             // process the wrapper if extsts
             if (wrapperReady) {
-              logger.debug('\n' + 'select {{select.id}} is being placed on wrapper: {{select.wrapper_id}}');
+              logger.debug('select {{select.id}} is being placed on wrapper: {{select.wrapper_id}}');
 
               // create|place select <div> element
               selectDIV           = document.createElement('div');
@@ -185,7 +185,7 @@ var timeSeconds;
 
               // setup new SlimSelect
               // jadams, 2024-03-06: setup events moved to page (test_icon_picker.adoc)
-              logger.debug('\n' + 'SlimSelect object is being created for id: {{select.id}}');
+              logger.debug('SlimSelect object is being created for id: {{select.id}}');
               var $select_{{select.id}} = new SlimSelect ({
                 select:                   'select[name ="{{select.name}}"]',
                 settings: {
@@ -211,7 +211,7 @@ var timeSeconds;
               // store the select in the adapter for later access
               _this.select.{{select.id}} = $select_{{select.id}};
 
-              logger.debug('\n' + 'initializing finished select: {{select.id}}');
+              logger.debug('initializing finished select: {{select.id}}');
 
               clearInterval(wrapper_dependencies['dependency_met_wrapper_ready_{{select.id}}']);
             } // END if wrapperReady
@@ -220,11 +220,11 @@ var timeSeconds;
           // END (for) all selects
 
           _this.setState('finished');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'initializing module: finished');
+          logger.debug('state: ' + _this.getState());
+          logger.info('initializing module: finished');
 
           endTimeModule = Date.now();
-          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+          logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependency_met_page_ready);
         } // END pageVisible
@@ -238,7 +238,7 @@ var timeSeconds;
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -250,7 +250,7 @@ var timeSeconds;
         // Place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

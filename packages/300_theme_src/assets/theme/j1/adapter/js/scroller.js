@@ -140,8 +140,8 @@ j1.adapter.scroller = ((j1, window) => {
 
       // initialize state flag
       _this.setState('started');
-      logger.debug('\n' + 'state: ' + _this.getState());
-      logger.info('\n' + 'module is being initialized');
+      logger.debug('state: ' + _this.getState());
+      logger.info('module is being initialized');
 
       // -----------------------------------------------------------------------
       // module initializer
@@ -156,10 +156,10 @@ j1.adapter.scroller = ((j1, window) => {
           startTimeModule = Date.now();
 
           _this.setState('started');
-          logger.debug('\n' + 'set module state to: ' + _this.getState());
-          logger.info('\n' + 'initializing module: started');
+          logger.debug('set module state to: ' + _this.getState());
+          logger.info('initializing module: started');
 
-          logger.info('\n' + 'initialize scrollers');
+          logger.info('initialize scrollers');
           _this.generate_scrollers();
 
           clearInterval(dependencies_met_page_ready);
@@ -180,7 +180,7 @@ j1.adapter.scroller = ((j1, window) => {
       -------------------------------------------------------------------------- {% endcomment %}
 
       {% for item in scroller_options.scrollers %} {% if item.scroller.enabled %}
-      logger.info('\n' + 'scroller {{item.scroller.id}} is being initialized on wrapper: {{item.scroller.container}}');
+      logger.info('scroller {{item.scroller.id}} is being initialized on wrapper: {{item.scroller.container}}');
 
       // create dynamic loader variable to setup
       dependency = 'dependency_met_wrapper_ready_{{item.scroller.container}}';
@@ -213,7 +213,7 @@ j1.adapter.scroller = ((j1, window) => {
 
               if (containerExists) {
                 // create an (scroller) instance of infiniteScroll
-                logText = '\n' + 'scroller of type {{item.scroller.type}} initialized on: ' + '{{scroller_id}}';
+                logText = 'scroller of type {{item.scroller.type}} initialized on: ' + '{{scroller_id}}';
                 logger.info(logText);
 
                 if (language === 'en') {
@@ -242,11 +242,11 @@ j1.adapter.scroller = ((j1, window) => {
                 });
 
                 _this.setState('finished');
-                logger.debug('\n' + 'state: ' + _this.getState());
-                logger.info('\n' + 'module initialized successfully');
+                logger.debug('state: ' + _this.getState());
+                logger.info('module initialized successfully');
 
                 endTimeModule = Date.now();
-                logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+                logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
                 clearInterval(dependencies_met_container_exists);
             } // END containerExists
@@ -265,7 +265,7 @@ j1.adapter.scroller = ((j1, window) => {
           var container = '#' + '{{container}}';
 
           // scroller_id: {{ scroller_id }}
-          logText = '\n' + 'scroller of type {{item.scroller.type}} initialized on: ' + '{{scroller_id}}';
+          logText = 'scroller of type {{item.scroller.type}} initialized on: ' + '{{scroller_id}}';
           logger.info(logText);
 
           // create an (scroller) instance of 'showOnScroll'
@@ -296,7 +296,7 @@ j1.adapter.scroller = ((j1, window) => {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -308,7 +308,7 @@ j1.adapter.scroller = ((j1, window) => {
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

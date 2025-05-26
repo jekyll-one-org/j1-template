@@ -49,8 +49,8 @@ function CookieConsent(props) {
   var current_page;
   var whitelisted;
 
-  logger.debug('\n' + 'initializing core module: started');
-  logger.debug('\n' + 'state: started');
+  logger.debug('initializing core module: started');
+  logger.debug('state: started');
 
   if (navigatorLanguage.indexOf("-") !== -1) {
     navigatorLanguage = navigatorLanguage.split("-")[0];
@@ -210,7 +210,7 @@ function CookieConsent(props) {
 
       self.modal = document.getElementById(self.props.dialogContainerID);
       if (!self.modal) {
-        logger.info('\n' +  'load consent modal');
+        logger.info( 'load consent modal');
 
         self.modal = document.createElement("div");
         self.modal.id = self.props.dialogContainerID;
@@ -250,7 +250,7 @@ function CookieConsent(props) {
         var templateUrl = self.props.contentURL + '/' + 'index.html';
         $.get(templateUrl)
         .done(function (data) {
-          logger.info('\n' + 'loading consent modal: successfully');
+          logger.info('loading consent modal: successfully');
           self.modal.innerHTML      = data;
           self.modal.innerHTML      = $('#' + self.props.xhrDataElement).eq(0).html();
           self.modal.style.display  = 'block';
@@ -265,7 +265,7 @@ function CookieConsent(props) {
           self.$buttonSave = $("#bccs-buttonSave");
           self.$buttonAgreeAll = $("#bccs-buttonAgreeAll");
 
-          logger.info('\n' + 'load/initialze options from cookie');
+          logger.info('load/initialze options from cookie');
 
           updateButtons();
           updateOptionsFromCookie();
@@ -278,7 +278,7 @@ function CookieConsent(props) {
             updateButtons();
           });
 
-          logger.info('\n' + 'initialze event handler');
+          logger.info('initialze event handler');
 
           self.$buttonDoNotAgree.click(function () {
             doNotAgree();
@@ -300,8 +300,8 @@ function CookieConsent(props) {
           self.$modal.modal('show');
         })
         .fail(function () {
-          logger.error('\n' + 'loading consent modal: failed');
-          logger.warn('\n' + 'probably no `contentURL` set');
+          logger.error('loading consent modal: failed');
+          logger.warn('probably no `contentURL` set');
         });
       } else {
         self.$modal.modal('show');
@@ -401,8 +401,8 @@ function CookieConsent(props) {
 
   // API functions
   // ---------------------------------------------------------------------------
-  logger.debug('\n' + 'initializing core module finished');
-  logger.debug('\n' + 'state: finished');
+  logger.debug('initializing core module finished');
+  logger.debug('state: finished');
 
   // show the consent dialog (modal)
   // ---------------------------------------------------------------------------

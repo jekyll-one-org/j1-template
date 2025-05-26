@@ -79,13 +79,13 @@
   // ---------------------------------------------------------------------------
   ThemeSwitcher.prototype = {
     clear: function () {
-      logger.debug('\n' + 'ThemeSwitcher.clear');
+      logger.debug('ThemeSwitcher.clear');
       return this.$element.each(function () {
         this.$element.empty();
       });
     },
     update: function () {
-      logger.debug('\n' + 'ThemeSwitcher.update');
+      logger.debug('ThemeSwitcher.update');
       this.getThemes();
     },
 
@@ -126,13 +126,13 @@
       // detect|set user state cookie
       user_state_detected = j1.existsCookie (cookie_names.user_state);
       if ( user_state_detected ) {
-        logger.info('\n' + 'cookie found: ' + cookie_names.user_state);
+        logger.info('cookie found: ' + cookie_names.user_state);
         user_state = j1.readCookie(cookie_names.user_state);
       } else {
-        logger.error('\n' + 'cookie not found: ' + cookie_names.user_state);
-        logger.info('\n' + 'j1 cookies found:' + j1Cookies.length);
+        logger.error('cookie not found: ' + cookie_names.user_state);
+        logger.info('j1 cookies found:' + j1Cookies.length);
         j1Cookies.forEach(function (item) {console.log('j1.themes.switcher: ' + item);});
-        logger.info('\n' + 'ga cookies found:' + gaCookies.length);
+        logger.info('ga cookies found:' + gaCookies.length);
         gaCookies.forEach(function (item) {console.log('j1.themes.switcher: ' + item);});
       }
 
@@ -146,7 +146,7 @@
       if (settings.saveToCookie) {
         if ( typeof Cookies === 'undefined' ) {
           if ( debug === 'true' ) {
-            logger.error('\n' + 'cookies library not present');
+            logger.error('cookies library not present');
           }
           return false;
         }
@@ -162,7 +162,7 @@
           user_state.theme_author_url    = 'https://jekyll.one/';
         }
 
-        logger.info('\n' + 'write to cookie : ' + cookie_names.user_state);
+        logger.info('write to cookie : ' + cookie_names.user_state);
         j1.writeCookie({
           name: cookie_names.user_state,
           data: user_state,
@@ -173,8 +173,8 @@
         // reload current page (skip cache)
         location.reload(true);
       } else {
-        logger.info('\n' + 'write to cookie : disabled');
-        logger.warn('\n' + 'selected theme not activated: ' + name);
+        logger.info('write to cookie : disabled');
+        logger.warn('selected theme not activated: ' + name);
       } // END if saveToCookie
 
     }, // END switchTheme
@@ -185,7 +185,7 @@
     loadThemeFromCookie: function (options) {
 
       if ( typeof Cookies === 'undefined' ) {
-        logger.error('\n' + 'cookies library not present');
+        logger.error('cookies library not present');
         return false;
       }
 
@@ -195,13 +195,13 @@
       user_state_detected = j1.existsCookie (cookie_names.user_state);
 
       if ( user_state_detected ) {
-        logger.info('\n' + 'cookie found: ' + cookie_names.user_state);
+        logger.info('cookie found: ' + cookie_names.user_state);
         user_state = j1.readCookie(cookie_names.user_state);
       } else {
-        logger.error('\n' + 'cookie not found: ' + cookie_names.user_state);
-        logger.info('\n' + 'j1 cookies found:' + j1Cookies.length);
+        logger.error('cookie not found: ' + cookie_names.user_state);
+        logger.info('j1 cookies found:' + j1Cookies.length);
         j1Cookies.forEach(function (item) {console.log('j1.themes.switcher: ' + item);});
-        logger.info('\n' + 'ga cookies found:' + gaCookies.length);
+        logger.info('ga cookies found:' + gaCookies.length);
         gaCookies.forEach(function (item) {console.log('j1.themes.switcher: ' + item);});
       }
 
@@ -226,11 +226,11 @@
     // -------------------------------------------------------------------------
     addThemesToControl: function () {
       if (typeof this.$element === 'undefined') {
-        logger.error('\n' + 'bootstrapThemeSelector|addThemesToControl: Element is undefined');
+        logger.error('bootstrapThemeSelector|addThemesToControl: Element is undefined');
         return false;
       }
       if (typeof this.themesList === 'undefined') {
-        logger.error('\n' + 'bootstrapThemeSelector|addThemesToControl: Themes is undefined');
+        logger.error('bootstrapThemeSelector|addThemesToControl: Themes is undefined');
         return false;
       }
 
@@ -268,20 +268,20 @@
         // detect|set user state cookie
         user_state_detected = j1.existsCookie (cookie_names.user_state);
         if ( user_state_detected ) {
-          logger.info('\n' + 'user state cookie found');
+          logger.info('user state cookie found');
           user_state = j1.readCookie(cookie_names.user_state);
         } else {
-          logger.error('\n' + 'user state NOT cookie found');
-          logger.info('\n' + 'j1 cookies found:' + j1Cookies.length);
+          logger.error('user state NOT cookie found');
+          logger.info('j1 cookies found:' + j1Cookies.length);
           j1Cookies.forEach(function (item) {console.log('j1.themes.switcher: ' + item);});
-          logger.info('\n' + 'ga cookies found:' + gaCookies.length);
+          logger.info('ga cookies found:' + gaCookies.length);
           gaCookies.forEach(function (item) {console.log('j1.themes.switcher: ' + item);});
         }
 
         themeName = user_state.theme_name;
 
         if ( debug === 'true' ) {
-          logger.info('\n' + 'bootstrapThemeSelector: UL element selected');
+          logger.info('bootstrapThemeSelector: UL element selected');
         }
         this.$element.empty();
 
@@ -328,7 +328,7 @@
 
         // END if element is 'ul'
       } else if (this.$element.is('select')) {
-        logger.info('\n' + 'bootstrapThemeSelector: SELECT element selected');
+        logger.info('bootstrapThemeSelector: SELECT element selected');
         this.$element.empty();
 
         var optionSelectedMarker;
@@ -350,8 +350,8 @@
         // END if element is 'select'
       } else {
         // no container found to add Theme list
-        logger.info('\n' + 'bootstrapThemeSelector: no UL or SELECT element found');
-        logger.error('\n' + 'bootstrapThemeSelector: failed');
+        logger.info('bootstrapThemeSelector: no UL or SELECT element found');
+        logger.error('bootstrapThemeSelector: failed');
         // console.warn('bootstrapThemeSelector only works with ul or select elements');
       } // END if
     }, // END addThemesToControl
@@ -374,7 +374,7 @@
             base.addThemesToControl();
           },
           error: function (jqXHR, textStatus, errorThrown) {
-            logger.error('\n' + 'failed to retrieve the local feed from: \'' + base.settings.localFeed + '\'');
+            logger.error('failed to retrieve the local feed from: \'' + base.settings.localFeed + '\'');
           }
         });
       } else {

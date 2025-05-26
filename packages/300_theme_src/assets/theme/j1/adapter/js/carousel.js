@@ -153,8 +153,8 @@ j1.adapter.carousel = ((j1, window) => {
           startTimeModule = Date.now();
 
           _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized');
+          logger.debug('state: ' + _this.getState());
+          logger.info('module is being initialized');
 
           {% for item in carousel_options.carousel %}
 
@@ -175,7 +175,7 @@ j1.adapter.carousel = ((j1, window) => {
               // create an Carousel INSTANCE if slider on id: {{slider_id}} exists
               if ($('#{{slider_id}}').length) {
 
-                logText = '\n' + 'slider is being processed on id: #{{slider_id}}';
+                logText = 'slider is being processed on id: #{{slider_id}}';
                 logger.info(logText);
                 _this.setState('processing');
 
@@ -377,7 +377,7 @@ j1.adapter.carousel = ((j1, window) => {
                   // );
 
                   _this.setState('processed');
-                  logger.debug('\n' + 'processing slider finished on id: {{slider_id}}');
+                  logger.debug('processing slider finished on id: {{slider_id}}');
                 } // END customDataSuccess_{{forloop.index}}
               } // END if carousel exists
             {% endif %}
@@ -391,11 +391,11 @@ j1.adapter.carousel = ((j1, window) => {
             if (slidersProcessed) {
 
               _this.setState('finished');
-              logger.debug('\n' + 'state: ' + _this.getState());
-              logger.info('\n' + 'initializing module finished');
+              logger.debug('state: ' + _this.getState());
+              logger.info('initializing module finished');
 
               endTimeModule = Date.now();
-              logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+              logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
               clearInterval(dependencies_met_sliders_processed);
             }
@@ -736,7 +736,7 @@ j1.adapter.carousel = ((j1, window) => {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -748,7 +748,7 @@ j1.adapter.carousel = ((j1, window) => {
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

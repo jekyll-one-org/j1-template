@@ -288,25 +288,25 @@ j1.adapter.logger = ((j1, window) => {
           log4javascript.getRootLogger().addAppender(consoleAppender);
 
           _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized');
+          logger.debug('state: ' + _this.getState());
+          logger.info('module is being initialized');
 
           // to use the ajaxAppender (write logs to disk), the utility server
           // needs to be enabled (util_srv.yml) as well
           //
           if (ajaxAppenderOptions.enabled) {
             log4javascript.getRootLogger().addAppender(ajaxAppender);
-            logger.info('\n' + 'ajax appender/util server detected as: enabled');
+            logger.info('ajax appender/util server detected as: enabled');
           } else {
-            logger.info('\n' + 'ajax appender/util server detected as: disabled');
+            logger.info('ajax appender/util server detected as: disabled');
           }
 
           _this.setState('finished');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module initialized successfully');
+          logger.debug('state: ' + _this.getState());
+          logger.info('module initialized successfully');
 
           endTimeModule = Date.now();
-          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+          logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_mode_detected);
           return true;
@@ -321,7 +321,7 @@ j1.adapter.logger = ((j1, window) => {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -333,7 +333,7 @@ j1.adapter.logger = ((j1, window) => {
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

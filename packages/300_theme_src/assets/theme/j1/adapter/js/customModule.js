@@ -148,19 +148,19 @@ j1.adapter.customModule = ((j1, window) => {
           startTimeModule = Date.now();
 
           _this.setState('started');
-          logger.debug('\n' + 'set module state to: ' + _this.getState());
-          logger.info('\n' + 'custom functions are being initialized');
+          logger.debug('set module state to: ' + _this.getState());
+          logger.info('custom functions are being initialized');
 
           //
           // place init code here
           //
 
           _this.setState('finished');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'initializing custom functions: finished');
+          logger.debug('state: ' + _this.getState());
+          logger.info('initializing custom functions: finished');
 
           endTimeModule = Date.now();
-          logger.info('\n' + 'initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+          logger.info('initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
         } // END j1CoreFinished
       }, 10); // END dependencies_met_j1_finished
     }, // END init
@@ -172,7 +172,7 @@ j1.adapter.customModule = ((j1, window) => {
     custom_module_1: (options) => {
       var logger = log4javascript.getLogger('j1.adapter.customModule.custom_module_1');
 
-      logText = '\n' + 'entered custom function: custom_module_1';
+      logText = 'entered custom function: custom_module_1';
       logger.info(logText);
 
       return true;
@@ -185,7 +185,7 @@ j1.adapter.customModule = ((j1, window) => {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -197,7 +197,7 @@ j1.adapter.customModule = ((j1, window) => {
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

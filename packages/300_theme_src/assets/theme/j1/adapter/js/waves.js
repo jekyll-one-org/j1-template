@@ -166,40 +166,40 @@ j1.adapter.waves = ((j1, window) => {
           theme_enabled  = waveOptions.themes.indexOf(theme) > -1 ? true : false;
 
           _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized');
+          logger.debug('state: ' + _this.getState());
+          logger.info('module is being initialized');
 
-          logger.debug('\n' + 'themes allowd: ' + themes_allowed);
-          logger.debug('\n' + 'theme detected: ' + theme);
+          logger.debug('themes allowd: ' + themes_allowed);
+          logger.debug('theme detected: ' + theme);
 
           // TODO: Check why a timeout is required to enable|disable the wave elements
           if (themes_allowed === 'all') {
-            logger.info('\n' + 'activate waves for theme: ' + 'all' );
+            logger.info('activate waves for theme: ' + 'all' );
             setTimeout(() => {
               $('.wave').show();
-              logger.info('\n' + 'initializing module finished');
+              logger.info('initializing module finished');
             }, {{template_config.page_on_load_timeout}} );
           } else if (theme_enabled) {
-            logger.info('\n' + 'activate waves for theme: ' + theme );
+            logger.info('activate waves for theme: ' + theme );
             setTimeout(() => {
               $('.wave').show();
-              logger.info('\n' + 'initializing module finished');
+              logger.info('initializing module finished');
             }, {{template_config.page_on_load_timeout}} );
           } else {
-            logger.warn('\n' + 'no valid theme/s found');
-            logger.warn('\n' + 'deactivate (hide) waves');
+            logger.warn('no valid theme/s found');
+            logger.warn('deactivate (hide) waves');
             setTimeout(() => {
               $('.wave').hide();
-              logger.info('\n' + 'initializing module finished');
+              logger.info('initializing module finished');
             }, {{template_config.page_on_load_timeout}} );
           }
 
           _this.setState('finished');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'initializing module finished');
+          logger.debug('state: ' + _this.getState());
+          logger.info('initializing module finished');
 
           endTimeModule = Date.now();
-          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+          logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_page_ready);
         } // END pageVisible
@@ -213,7 +213,7 @@ j1.adapter.waves = ((j1, window) => {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -225,7 +225,7 @@ j1.adapter.waves = ((j1, window) => {
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

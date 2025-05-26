@@ -123,7 +123,7 @@ j1.adapter.clipboard = ((j1, window) => {
 
       // initialize state flag
       _this.state = 'started';
-      logText = '\n' + 'initialization: started';
+      logText = 'initialization: started';
       logger.info(logText);
 
       if (language == 'en') {
@@ -150,8 +150,8 @@ j1.adapter.clipboard = ((j1, window) => {
           startTimeModule = Date.now();
 
           _this.setState('started');
-          logger.debug('\n' + 'set module state to: ' + _this.getState());
-          logger.info('\n' + 'initializing module: started');
+          logger.debug('set module state to: ' + _this.getState());
+          logger.info('initializing module: started');
 
           clipboardJS = new ClipboardJS('.btn-clipboard', {
             target: function target(trigger) {
@@ -162,14 +162,14 @@ j1.adapter.clipboard = ((j1, window) => {
           _this.initClipButtons();
           _this.initEventHandler(clipboardJS);
 
-          logger.debug('\n' + 'met dependencies for: j1');
+          logger.debug('met dependencies for: j1');
 
           _this.setState('finished');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module initialized successfully');
+          logger.debug('state: ' + _this.getState());
+          logger.info('module initialized successfully');
 
           endTimeModule = Date.now();
-          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+          logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_j1_finished);
         } // END j1CoreFinished
@@ -209,7 +209,7 @@ j1.adapter.clipboard = ((j1, window) => {
       clipboard.on('success', (e) => {
         $(e.trigger).attr('title', btnResponseText).tooltip('_fixTitle').tooltip('show').attr('title', btnTitle).tooltip('_fixTitle');
         var logger = log4javascript.getLogger('j1.initClipboard');
-        var logText = '\n' + 'initialization copy-to-clipboard sucessfull';
+        var logText = 'initialization copy-to-clipboard sucessfull';
         logger.debug(logText);
         /* Cleanup clipped data for trailing numbers */
         var splitted = e.text.split('\n');
@@ -223,7 +223,7 @@ j1.adapter.clipboard = ((j1, window) => {
       clipboard.on('error', (e) => {
         var fallbackMsg = /Mac/i.test(navigator.userAgent) ? 'press \u2318 to copy' : 'press ctrl-c to copy';
         logger = log4javascript.getLogger('j1.initClipboard');
-        logText = '\n' + 'initialization copy-to-clipboard failed, fallback used.';
+        logText = 'initialization copy-to-clipboard failed, fallback used.';
         logger.warn(logText);
         $(e.trigger).attr('title', fallbackMsg).tooltip('_fixTitle').tooltip('show').attr('title', 'copy to clipboard').tooltip('_fixTitle');
       });
@@ -236,7 +236,7 @@ j1.adapter.clipboard = ((j1, window) => {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -248,7 +248,7 @@ j1.adapter.clipboard = ((j1, window) => {
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

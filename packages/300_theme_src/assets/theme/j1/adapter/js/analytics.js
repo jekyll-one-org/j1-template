@@ -176,15 +176,15 @@ j1.adapter.analytics = ((j1, window) => {
             startTimeModule = Date.now();
 
             _this.setState('started');
-            logger.debug('\n' + 'state: ' + _this.getState());
-            logger.info('\n' + 'module initializing: started');
+            logger.debug('state: ' + _this.getState());
+            logger.info('module initializing: started');
 
             // remove cookies on invalid GA config or left from a previous
             // session/page view if they exists
             // -----------------------------------------------------------------
             gaCookies = j1.findCookie('_ga');
             gaCookies.forEach((item) => {
-              logger.debug('\n' + 'delete cookie created by Google Analytics: ' + item);
+              logger.debug('delete cookie created by Google Analytics: ' + item);
               j1.removeCookie({ name: item });
             });
 
@@ -194,14 +194,14 @@ j1.adapter.analytics = ((j1, window) => {
 
             user_consent = j1.readCookie(cookie_names.user_consent);
             if (user_consent.analysis && skipHost && validProviderID) {
-              logger.debug('\n' + 'Google Analytics skipped for: ' + hostname);
+              logger.debug('Google Analytics skipped for: ' + hostname);
             }
 
             if (!gaExists && !skipHost) {
               // add ga api dynamically in the head section
               // ---------------------------------------------------------------
-              logger.info('\n' + 'Google Analytics added for: ' + hostname);
-              logger.info('\n' + 'Google Analytics API added in section: head');
+              logger.info('Google Analytics added for: ' + hostname);
+              logger.info('Google Analytics API added in section: head');
               gaScript.async = true;
               gaScript.id    = 'google-tag-manager';
               gaScript.src   = '//www.googletagmanager.com/gtag/js?id=' + providerID;
@@ -211,26 +211,26 @@ j1.adapter.analytics = ((j1, window) => {
             user_consent = j1.readCookie(cookie_names.user_consent);
             if (user_consent.analysis && !skipHost ) {
               if (validProviderID) {
-                logger.info('\n' + 'user consent on analytics: ' + user_consent.analysis);
-                logger.info('\n' + 'enable Google Analytics on ID: ' + providerID);
+                logger.info('user consent on analytics: ' + user_consent.analysis);
+                logger.info('enable Google Analytics on ID: ' + providerID);
                 GTagOptIn.register(providerID);
                 GTagOptIn.optIn();
               } else {
-                logger.debug('\n' + 'invalid trackig id detected for Google Analytics: ' + providerID);
+                logger.debug('invalid trackig id detected for Google Analytics: ' + providerID);
               }
             } else {
-              logger.info('\n' + 'user consent on analytics: ' + user_consent.analysis);
-              logger.debug('\n' + 'disable Google Analytics on ID: ' + providerID);
+              logger.info('user consent on analytics: ' + user_consent.analysis);
+              logger.debug('disable Google Analytics on ID: ' + providerID);
               GTagOptIn.register(providerID);
               GTagOptIn.optOut();
             }
 
             _this.setState('finished');
-            logger.debug('\n' + 'state: ' + _this.getState());
-            logger.info('\n' + 'module initializing: finished');
+            logger.debug('state: ' + _this.getState());
+            logger.info('module initializing: finished');
 
             endTimeModule = Date.now();
-            logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+            logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
             clearInterval(dependencies_met_page_ready);
             {% when "custom" %}
@@ -239,7 +239,7 @@ j1.adapter.analytics = ((j1, window) => {
             // [INFO   ] [j1.adapter.analytics                    ] [ end processing ]
           {% else %}
             logger = log4javascript.getLogger('j1.adapter.analytics');
-            logger.info('\n' + 'Google Analytics: disabled');
+            logger.info('Google Analytics: disabled');
 
             clearInterval(dependencies_met_page_ready);
           {% endif %}
@@ -256,7 +256,7 @@ j1.adapter.analytics = ((j1, window) => {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -268,7 +268,7 @@ j1.adapter.analytics = ((j1, window) => {
         // Place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

@@ -166,10 +166,10 @@ j1.adapter.fab = ((j1, window) => {
           startTimeModule = Date.now();
 
           _this.setState('started');
-          logger.info('\n' + 'set module state to: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized');
+          logger.info('set module state to: ' + _this.getState());
+          logger.info('module is being initialized');
 
-          logger.info('\n' + 'load FABs');
+          logger.info('load FABs');
           _this.fabLoader(fabOptions);
 
           clearInterval(dependency_met_page_ready);
@@ -183,8 +183,8 @@ j1.adapter.fab = ((j1, window) => {
     fabLoader: (fabOptions) => {
 
       _this.setState('loading');
-      logger.info('\n' + 'set module state to: ' + _this.getState());
-      logger.info('\n' + 'load HTML data for FAB: ' + fabOptions.fab_menu_id);
+      logger.info('set module state to: ' + _this.getState());
+      logger.info('load HTML data for FAB: ' + fabOptions.fab_menu_id);
 
       j1.loadHTML({
         xhr_container_id: fabOptions.xhr_container_id,
@@ -203,18 +203,18 @@ j1.adapter.fab = ((j1, window) => {
 
         if (fabLoaded) {
           _this.setState('loaded');
-          logger.info('\n' + 'set module state to: ' + _this.getState());
-          logger.info('\n' + 'HTML data for FAB: ' + _this.getState());
+          logger.info('set module state to: ' + _this.getState());
+          logger.info('HTML data for FAB: ' + _this.getState());
 
           _this.buttonInitializer(fabOptions);
           $('.fab-btn').show();
 
           _this.setState('finished');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module initialized successfully');
+          logger.debug('state: ' + _this.getState());
+          logger.info('module initialized successfully');
 
           endTimeModule = Date.now();
-          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+          logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_fab_initialized);
         } // END if fabLoaded
@@ -241,8 +241,8 @@ j1.adapter.fab = ((j1, window) => {
       // check if multiple buttons detected
       if (fabButtons.length === 1) {
         _this.setState('processing');
-        logger.info('\n' + 'set module state to: ' + _this.getState());
-        logger.info('\n' + 'initialize FAB menu');
+        logger.info('set module state to: ' + _this.getState());
+        logger.info('initialize FAB menu');
 
         actionButtonId  = fabButtons[0].firstElementChild.id;
         actionMenuId    = actionButtonId.replace('_button', '');
@@ -284,21 +284,21 @@ j1.adapter.fab = ((j1, window) => {
               eventHandler = item.event_handler;
               // check if eventhandler configured is a SINGLE word
               if (eventHandler.split(' ').length == 1) {
-                logger.debug('\n' + 'register pre-configured eventhandler ' + eventHandler + ' on id: #' + item.id);
+                logger.debug('register pre-configured eventhandler ' + eventHandler + ' on id: #' + item.id);
 
                 if (eventHandler === 'open_mmenu_toc') {
                   if ($('#j1-toc-mgr').length) {
-                    logger.info('\n' + 'found toc in page: enabled');
+                    logger.info('found toc in page: enabled');
                     var dependencies_met_toccer_finished = setInterval (() => {
                       if (j1.adapter.toccer.getState() == 'finished') {
-                        logger.debug('\n' + 'met dependencies for: toccer');
+                        logger.debug('met dependencies for: toccer');
 
                         $('#open_mmenu_toc').show();
                         clearInterval(dependencies_met_toccer_finished);
                       }
                     }, 10); // END dependencies_met_toccer_finished
                   } else {
-                    logger.info('\n' + 'found toc in page: disabled');
+                    logger.info('found toc in page: disabled');
                   }
                 } else {
                   $('#' + item.id).show();
@@ -311,15 +311,15 @@ j1.adapter.fab = ((j1, window) => {
                   });
                 });
               } else {
-                logger.info('\n' + 'register custom eventhandler on id: #' + item.id);
+                logger.info('register custom eventhandler on id: #' + item.id);
               }
             } else {
-              logger.error('\n' + 'creating Eventhandler failed on id: #' + item.id);
+              logger.error('creating Eventhandler failed on id: #' + item.id);
             } // END if items (action buttons)
           });
         } else {
           // single action, create FAB
-          logger.info('\n' + 'single action found for FAB, no menu loaded/created');
+          logger.info('single action found for FAB, no menu loaded/created');
 
           // disable hover event (CSS)
           // $actionButton.css({'pointer-events': 'none'})
@@ -328,7 +328,7 @@ j1.adapter.fab = ((j1, window) => {
             eventHandler = item.event_handler;
             // check if eventhandler configured is a SINGLE word
             if (eventHandler.split(' ').length === 1) {
-              logger.debug('\n' + 'register pre-configured eventhandler ' +eventHandler+ ' on id: #' + actionButtonId);
+              logger.debug('register pre-configured eventhandler ' +eventHandler+ ' on id: #' + actionButtonId);
 
               if (eventHandler === 'scroll_to_top') {
                 // register click event
@@ -343,10 +343,10 @@ j1.adapter.fab = ((j1, window) => {
               if ( eventHandler === 'open_mmenu_toc' ) {
                 // check if toccer (toc_mgr) is available
                 if ($('#j1-toc-mgr').length) {
-                  logger.info('\n' + 'found toc in page: enabled');
+                  logger.info('found toc in page: enabled');
                   var dependencies_met_toccer_finished = setInterval (() => {
                     if (j1.adapter.toccer.getState() === 'finished') {
-                      logger.debug('\n' + 'met dependencies for toccer: finished');
+                      logger.debug('met dependencies for toccer: finished');
 
                       // change the id of the $actionButton to the already
                       // registered id by mmenu adapter of ('open_mmenu_toc')
@@ -357,16 +357,16 @@ j1.adapter.fab = ((j1, window) => {
                     }
                   }, 10); // END dependencies_met_toccer_finished
                 } else {
-                  logger.info('\n' + 'found toc in page: disabled');
-                  logger.info('\n' + 'eventhandler: disabled');
+                  logger.info('found toc in page: disabled');
+                  logger.info('eventhandler: disabled');
                 }
               } // END if eventHandler == open_mmenu_toc
             }
           });
         } // END else
       } else {
-        logger.error('\n' + 'multiple FAB buttons found: ' + fabButtons.length);
-        logger.info('\n' + 'FAB container set to hidden: ' + $fabContainer);
+        logger.error('multiple FAB buttons found: ' + fabButtons.length);
+        logger.info('FAB container set to hidden: ' + $fabContainer);
         $fabContainer.hide();
       } // END if famButton
     }, // END buttonInitializer
@@ -574,7 +574,7 @@ j1.adapter.fab = ((j1, window) => {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -586,7 +586,7 @@ j1.adapter.fab = ((j1, window) => {
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

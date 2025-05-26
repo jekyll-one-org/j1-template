@@ -158,15 +158,15 @@ j1.adapter.rangeSlider = ((j1, window) => {
           startTimeModule = Date.now();
 
           _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized');
+          logger.debug('state: ' + _this.getState());
+          logger.info('module is being initialized');
 
           var dependencies_met_elms_loaded = setInterval(() => {
             elms = document.querySelectorAll('.range-slider');
             if (elms.length) {
-              logger.info('\n' + 'number of rangeSlider elements found: ' + elms.length);
+              logger.info('number of rangeSlider elements found: ' + elms.length);
 
-              var log_text = '\n' + 'rangeSlider elements are being initialized';
+              var log_text = 'rangeSlider elements are being initialized';
               logger.info(log_text);
 
               {% for item in range_slider_options.sliders %} {% if item.slider.enabled %}
@@ -204,7 +204,7 @@ j1.adapter.rangeSlider = ((j1, window) => {
                   if (id === '{{slider_id}}') {
                     // processing rangeSlider: {{slider_id}}
                     //
-                    logger.info('\n' + 'configure rangeSlider: ' + id);
+                    logger.info('configure rangeSlider: ' + id);
 
                     var slider_{{slider_id}} = document.getElementById('{{slider_id}}');
                     var instance = noUiSlider.create(slider_{{slider_id}}, {
@@ -235,7 +235,7 @@ j1.adapter.rangeSlider = ((j1, window) => {
 
                     slider_{{slider_id}}.noUiSlider.on('update', (values, handle) => {
                       var logger = log4javascript.getLogger('j1.adapter.rangeSlider.cbOnUpdate');
-                      logger.debug('\n' + 'current value: ' + values[handle]);
+                      logger.debug('current value: ' + values[handle]);
                     });
                     instances.push(instance);
                   }
@@ -245,10 +245,10 @@ j1.adapter.rangeSlider = ((j1, window) => {
               {% endif %} {% endfor %}
 
               if (instances.length) {
-                logger.info('\n' + 'number of rangeSlider instances configured: ' + instances.length);
+                logger.info('number of rangeSlider instances configured: ' + instances.length);
               } else {
-                logger.error('\n' + 'no configured rangeSlider instances found');
-                logger.warning('\n' + 'initializing module failed');
+                logger.error('no configured rangeSlider instances found');
+                logger.warning('initializing module failed');
               } // END if instances
             } // END if elms
 
@@ -256,11 +256,11 @@ j1.adapter.rangeSlider = ((j1, window) => {
           }, 10); // END dependencies_met_elms_loaded
 
           _this.setState('finished');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'initializing module finished');
+          logger.debug('state: ' + _this.getState());
+          logger.info('initializing module finished');
 
           endTimeModule = Date.now();
-          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+          logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_j1_finished);
         } // END if j1CoreFinished
@@ -276,7 +276,7 @@ j1.adapter.rangeSlider = ((j1, window) => {
       var logger  = log4javascript.getLogger('j1.adapter.rangeSlider.cbOnClick');
       var itemEl = $(event.target).closest('li')[0];
 
-      // logText = '\n' + 'entered cbOnClick on id: ' + id;
+      // logText = 'entered cbOnClick on id: ' + id;
       // logger.info(logText);
 
       return true;
@@ -290,7 +290,7 @@ j1.adapter.rangeSlider = ((j1, window) => {
       var logger  = log4javascript.getLogger('j1.adapter.rangeSlider.cbOnOpen');
       var id      = elm.id;
 
-      logText = '\n' + 'entered cbOnOpen on id: ' + id;
+      logText = 'entered cbOnOpen on id: ' + id;
       logger.info(logText);
       return true;
     },
@@ -315,11 +315,11 @@ j1.adapter.rangeSlider = ((j1, window) => {
         }
       }
 
-      logText = '\n' + 'entered cbOnClose on id: ' + id;
+      logText = 'entered cbOnClose on id: ' + id;
       logger.info(logText);
-      logText = '\n' + 'item selected: ' + activeItem;
+      logText = 'item selected: ' + activeItem;
       logger.info(logText);
-      logText = '\n' + 'value selected: ' + activeValue;
+      logText = 'value selected: ' + activeValue;
       logger.info(logText);
       return true;
     },
@@ -331,7 +331,7 @@ j1.adapter.rangeSlider = ((j1, window) => {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -343,7 +343,7 @@ j1.adapter.rangeSlider = ((j1, window) => {
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

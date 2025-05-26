@@ -185,14 +185,14 @@ j1.adapter.slick = ((j1, window) => {
           startTimeModule = Date.now();
 
           _this.setState('started');
-          logger.debug('\n' + 'set module state to: ' + _this.getState());
-          logger.info('\n' + 'initializing module: started');
+          logger.debug('set module state to: ' + _this.getState());
+          logger.info('initializing module: started');
 
           {% for carousel in slick_settings.carousels %} {% if carousel.enabled %}
-          logger.info ('\n' + 'initialize carousel on id: ' + '{{carousel.id}}');
+          logger.info ('initialize carousel on id: ' + '{{carousel.id}}');
 
           {% if carousel.options.responsive %}
-          logger.debug ('\n' + 'collect responsive settings for carousel on id: ' + '{{carousel.id}}');
+          logger.debug ('collect responsive settings for carousel on id: ' + '{{carousel.id}}');
           // collect breakpoint settings from carousel config
           responsiveSettings = $.extend({}, {{carousel.responsive | replace: 'nil', 'null' | replace: '=>', ':' }});
           // generate carousel breakpoint settings as YAML data structure
@@ -239,10 +239,10 @@ j1.adapter.slick = ((j1, window) => {
               carouselResponsiveSettingsYAML    = yaml.loadAll(carouselResponsiveSettings, 'utf8');
               carouselResponsiveSettingsOBJ     = carouselResponsiveSettingsYAML[0];
               carouselResponsiveSettingsSTRING  = JSON.stringify(carouselResponsiveSettingsOBJ, null, 4);
-              logger.debug('\n' + 'responsive settings on carousel id #{{carousel.id}}: ' + '\n' + carouselResponsiveSettingsSTRING);
+              logger.debug('responsive settings on carousel id #{{carousel.id}}: ' + carouselResponsiveSettingsSTRING);
 
               $('.{{carousel.id | replace: '_','-' }}').on('init', function (event, slick) {
-                logger.debug('\n' + 'carousel initialized on id: {{carousel.id}}');
+                logger.debug('carousel initialized on id: {{carousel.id}}');
 
                 slick_lightbox_enabled = '{{carousel.lightbox.enabled}}';
 
@@ -254,7 +254,7 @@ j1.adapter.slick = ((j1, window) => {
                 }
 
                 if (slick_lightbox_enabled) {
-                  logger.debug('\n' + 'initialize lightbox on id: {{carousel.id}}');
+                  logger.debug('initialize lightbox on id: {{carousel.id}}');
 
                   // See: http://mreq.github.io/slick-lightbox/demo/
                   $('#{{carousel.id}}').slickLightbox ({
@@ -270,13 +270,13 @@ j1.adapter.slick = ((j1, window) => {
                   });
                 } // END carousel lightbox enabled
 
-                logger.debug ('\n' + 'adjust positions of slick lightbox arrows on id: {{carousel.id}}');
+                logger.debug ('adjust positions of slick lightbox arrows on id: {{carousel.id}}');
                 var buttons = $("#{{carousel.id}} > button");
                 var arrowTopPos = Math.round (document.documentElement.clientHeight/2)
 
                 // add CSS style for individual top position for all carousels
                 if ($('#{{carousel.id}}_caption')) {
-                  logger.debug ('\n' + 'adjust top position of arrows on id: {{carousel.id}}');
+                  logger.debug ('adjust top position of arrows on id: {{carousel.id}}');
                   var buttons = $("#{{carousel.id}} > button");
                   $.each ($(buttons), function (index, button) {
                     $(button).addClass ('slick-arrow-{{carousel.id}}');
@@ -317,7 +317,7 @@ j1.adapter.slick = ((j1, window) => {
                       slideImageHeight = ($currentSlide.find ('img').height()/2) - 25;
                     }
 
-                    logger.debug ('\n' + 'adjust top arrow position (centered) by ' + slideImageHeight + ' on id: {{carousel.id}}');
+                    logger.debug ('adjust top arrow position (centered) by ' + slideImageHeight + ' on id: {{carousel.id}}');
                     $('.slick-arrow-{{carousel.id}}').css ('top', slideImageHeight + 'px');
                     clearInterval (dependencies_met_page_ready);
                   }
@@ -328,7 +328,7 @@ j1.adapter.slick = ((j1, window) => {
               $('.{{carousel.id | replace: '_','-' }}').on('init afterChange', positionSlickArrows);
 
               // setup the carousel
-              logger.debug ('\n' + 'carousel is being setup on id: ' + '{{carousel.id}}');
+              logger.debug ('carousel is being setup on id: ' + '{{carousel.id}}');
               $('.{{carousel.id | replace: '_','-' }}').slick ({
                 accessibility:              carouselSettings.accessibility,
                 adaptiveHeight:             carouselSettings.adaptiveHeight,
@@ -384,11 +384,11 @@ j1.adapter.slick = ((j1, window) => {
           {% endif %} {% endfor %} // ENDFOR (all) carousels
 
           _this.setState ('finished');
-          logger.debug ('\n' + 'state: ' + _this.getState());
-          logger.info ('\n' + 'module initialization finished');
+          logger.debug ('state: ' + _this.getState());
+          logger.info ('module initialization finished');
 
           endTimeModule = Date.now();
-          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+          logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval (dependencies_met_page_ready);
         } // END if pageVisible
@@ -437,7 +437,7 @@ j1.adapter.slick = ((j1, window) => {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -449,7 +449,7 @@ j1.adapter.slick = ((j1, window) => {
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

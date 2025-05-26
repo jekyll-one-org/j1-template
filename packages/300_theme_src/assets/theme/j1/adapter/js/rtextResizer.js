@@ -149,10 +149,10 @@ j1.adapter.rtextResizer = ((j1, window) => {
           startTimeModule = Date.now();
 
           _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized');
+          logger.debug('state: ' + _this.getState());
+          logger.info('module is being initialized');
 
-          logger.info('\n' + 'initialize resizer ui');
+          logger.info('initialize resizer ui');
           var $modalContainer = $('#rtext_resizer_modal');
           if ($modalContainer.length) {
             var environment     = '{{environment}}';
@@ -221,11 +221,11 @@ j1.adapter.rtextResizer = ((j1, window) => {
           } // END if $modalContainer
 
           _this.setState('finished');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'initializing module finished');
+          logger.debug('state: ' + _this.getState());
+          logger.info('initializing module finished');
 
           endTimeModule = Date.now();
-          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+          logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_data_loaded);
         } // END if rtextContainerLoaded
@@ -239,7 +239,7 @@ j1.adapter.rtextResizer = ((j1, window) => {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -251,7 +251,7 @@ j1.adapter.rtextResizer = ((j1, window) => {
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

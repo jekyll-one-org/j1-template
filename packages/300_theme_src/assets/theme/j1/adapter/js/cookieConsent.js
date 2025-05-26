@@ -206,8 +206,8 @@ j1.adapter.cookieConsent = ((j1, window) => {
           startTimeModule = Date.now();
 
           _this.setState('started');
-          logger.debug('\n' + 'set module state to: ' + _this.getState());
-          logger.info('\n' + 'initializing module: started');
+          logger.debug('set module state to: ' + _this.getState());
+          logger.info('initializing module: started');
 
           if (cookieConsentOptions.enabled) {
             expires = cookieOptions.expires;
@@ -220,11 +220,11 @@ j1.adapter.cookieConsent = ((j1, window) => {
             // disable the themes menus
             $('#themes_menu').css('display', 'none');
             $('#themes_mmenu').css('display', 'none');
-            logger.warn('\n' + 'disable module: Themes');
+            logger.warn('disable module: Themes');
 
             // disable the quick link for (Google) Translation
             $('#quickLinksTranslateButton').css('display', 'none');
-            logger.warn('\n' + 'disable module: Trranslator');
+            logger.warn('disable module: Trranslator');
           }
 
           // set domain used by cookies
@@ -252,7 +252,7 @@ j1.adapter.cookieConsent = ((j1, window) => {
           // -------------------------------------------------------------------
 
           if (cookieConsentOptions.enabled) {
-            logger.info('\n' + 'initialize core module');
+            logger.info('initialize core module');
 
             j1.cookieConsent = new CookieConsent ({
               contentURL:             cookieConsentOptions.contentURL,          // dialog content (modals) for all supported languages
@@ -269,15 +269,15 @@ j1.adapter.cookieConsent = ((j1, window) => {
               postSelectionCallback:  cookieConsentOptions.postSelectionCallback, // callback function, called after the user has made his selection
             });
           } else {
-            logger.warn('\n' + 'module is disabled');
+            logger.warn('module is disabled');
           } // END if cookieConsentOptions enabled
 
           _this.setState('finished');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module initialized successfully');
+          logger.debug('state: ' + _this.getState());
+          logger.info('module initialized successfully');
 
           endTimeModule = Date.now();
-          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+          logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_page_ready);
         } // END  j1CoreFinished
@@ -303,8 +303,8 @@ j1.adapter.cookieConsent = ((j1, window) => {
       var user_agent      = platform.ua;
       var cookie_written;
 
-      logger.info('\n' + 'entered post selection callback from CookieConsent');
-      logger.info('\n' + 'current values from CookieConsent: ' + json);
+      logger.info('entered post selection callback from CookieConsent');
+      logger.info('current values from CookieConsent: ' + json);
 
       // enable cookie button if not visible
       if ($('#quickLinksCookieButton').css('display') === 'none')  {
@@ -354,7 +354,7 @@ j1.adapter.cookieConsent = ((j1, window) => {
         // session/page view if they exists
         // ---------------------------------------------------------------------
         gaCookies.forEach((item) => {
-          logger.warn('\n' + 'delete GA cookie: ' + item);
+          logger.warn('delete GA cookie: ' + item);
           j1.removeCookie({ name: item });
         });
 
@@ -363,7 +363,7 @@ j1.adapter.cookieConsent = ((j1, window) => {
         // ---------------------------------------------------------------------
         gasCookies.forEach((item) => {
           // Remove cookies from Google Ads
-          logger.warn('\n' + 'delete GAS cookie: ' + item);
+          logger.warn('delete GAS cookie: ' + item);
           j1.removeCookie({
             name: item
           });
@@ -410,7 +410,7 @@ j1.adapter.cookieConsent = ((j1, window) => {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -422,7 +422,7 @@ j1.adapter.cookieConsent = ((j1, window) => {
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

@@ -161,8 +161,8 @@ j1.adapter.mmenu = ((j1, window) => {
 
       // initialize state flag
       _this.setState('started');
-      logger.debug('\n' + 'state: ' + _this.getState());
-      logger.info('\n' + 'module is being initialized');
+      logger.debug('state: ' + _this.getState());
+      logger.info('module is being initialized');
 
       // -----------------------------------------------------------------------
       // options loader
@@ -194,8 +194,8 @@ j1.adapter.mmenu = ((j1, window) => {
           startTimeModule = Date.now();
 
           _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized');
+          logger.debug('state: ' + _this.getState());
+          logger.info('module is being initialized');
 
           _this.mmenuLoader(navMenuOptions);
 
@@ -212,8 +212,8 @@ j1.adapter.mmenu = ((j1, window) => {
       var xhr_data_path;
 
       _this.setState('loading');
-      logger.debug('\n' + 'status: ' + _this.getState());
-      logger.debug('\n' + 'load HTML data for navs and drawers');
+      logger.debug('status: ' + _this.getState());
+      logger.debug('load HTML data for navs and drawers');
 
       {% assign id_list = "" %}
 
@@ -253,15 +253,15 @@ j1.adapter.mmenu = ((j1, window) => {
       {% capture id_list %}{{id_list}}{{menu_id}}{% if forloop.last %}{% else %},{% endif %} {% endcapture %}
       {% endfor %} // ENDFOR menus
 
-      logger.info('\n' + 'initialize navs and drawers');
+      logger.info('initialize navs and drawers');
       _this.mmenuInitializer(mmOptions);
 
       _this.setState('finished');
-      logger.debug('\n' + 'state: ' + _this.getState());
-      logger.info('\n' + 'initializing module: finished');
+      logger.debug('state: ' + _this.getState());
+      logger.info('initializing module: finished');
 
       endTimeModule = Date.now();
-      logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+      logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
     }, // END dataLoader
 
@@ -281,20 +281,20 @@ j1.adapter.mmenu = ((j1, window) => {
       // Create an mmenu instance if id exists: {{menu_id}}
       if ($('#{{menu_id}}').length) {
 
-        logger.info('\n' + 'mmenu is being initialized on id: {{menu_id}}');
+        logger.info('mmenu is being initialized on id: {{menu_id}}');
 
         {% if item.menu.content.type == "navigation" %}
         // Create an mmenu instance of type NAVIGATION
-        logger.info('\n' + 'found content type: NAVIGATION');
+        logger.info('found content type: NAVIGATION');
         // ---------------------------------------------------------------------
         // menu initializer (NAVIGATION)
         // ---------------------------------------------------------------------
         // NOTE: Run load check (j1.xhrDataState) before initialization
         //
-        logger.debug('\n' + 'initialize mmenu on id: #{{menu_id}}');
+        logger.debug('initialize mmenu on id: #{{menu_id}}');
         var dependencies_met_{{menu_id}}_loaded = setInterval (() => {
           if (j1.xhrDataState['#{{menu_id}}'] == 'success' ) {
-            logger.debug('\n' + 'met dependencies for: {{menu_id}}');
+            logger.debug('met dependencies for: {{menu_id}}');
 
             const menu_selector = document.querySelector('#{{menu_id}}');
             const mmenu_{{menu_id}} = new MmenuLight (
@@ -372,7 +372,7 @@ j1.adapter.mmenu = ((j1, window) => {
             }
 
             $('#{{item.menu.content.id}}').show();
-            logger.debug('\n' + 'initializing mmenu finished on id: #{{menu_id}}');
+            logger.debug('initializing mmenu finished on id: #{{menu_id}}');
 
             clearInterval(dependencies_met_{{menu_id}}_loaded);
           }; // END mmenu_loaded
@@ -381,18 +381,18 @@ j1.adapter.mmenu = ((j1, window) => {
 
         {% if item.menu.content.type == "drawer" %}
           // Create an mmenu instance of type HTML
-          logger.info('\n' + 'found content type: DRAWER');
+          logger.info('found content type: DRAWER');
           // -------------------------------------------------------------------
           // menu initializer (DRAWER)
           // -------------------------------------------------------------------
           // TODO: Check if Toggle button make sense/should be implemented
           // NOTE: Run load check (j1.xhrDataState) before initialization
           //
-          logger.debug('\n' + 'initialize mmenu on id: #{{menu_id}}');
+          logger.debug('initialize mmenu on id: #{{menu_id}}');
 
           var dependencies_met_{{menu_id}}_loaded = setInterval (() => {
             if (j1.xhrDataState['#{{menu_id}}'] == 'success' && $('{{item.menu.content.button}}').length) {
-              logger.debug('\n' + 'met dependencies for: xhrData/{{menu_id}}');
+              logger.debug('met dependencies for: xhrData/{{menu_id}}');
 
               const menu_selector = document.querySelector('#{{menu_id}}');
               const mmenu_{{menu_id}} = new MmenuLight (
@@ -416,7 +416,7 @@ j1.adapter.mmenu = ((j1, window) => {
               $('#drawer_{{menu_id}}').attrchange({
                 trackValues:  true,
                 callback:     (event)  => {
-                  logger.debug('\n' + 'hide|show the nav menu');
+                  logger.debug('hide|show the nav menu');
                   // switch off|on the (main) nav menu
                   $('#' + 'navigator_nav_navbar').toggle();
                   // $('#' + 'navbar-brand').toggle();
@@ -451,13 +451,13 @@ j1.adapter.mmenu = ((j1, window) => {
                 });
               });
 
-              logger.debug('\n' + 'met dependencies for: {{menu_id}} loaded');
+              logger.debug('met dependencies for: {{menu_id}} loaded');
               $('#{{item.menu.content.id}}').show();
 
               clearInterval(dependencies_met_{{menu_id}}_loaded);
           }; // END if menu_loaded
         }, 10); // END dependencies_met_mmenu_loaded
-        logger.debug('\n' + 'initializing mmenu finished on id: #{{menu_id}}');
+        logger.debug('initializing mmenu finished on id: #{{menu_id}}');
         {% endif %} // ENDIF content_type: DRAWER
         } // END menus|drawers
       {% endif %} // ENDIF menu enabled
@@ -471,7 +471,7 @@ j1.adapter.mmenu = ((j1, window) => {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -483,7 +483,7 @@ j1.adapter.mmenu = ((j1, window) => {
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

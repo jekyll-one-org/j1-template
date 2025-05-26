@@ -139,8 +139,8 @@ function Translator(props) {
   // set the xhrDataElement of the modal loadad based on dialogLanguage
   translator.props.xhrDataElement = translator.props.xhrDataElement + '-' + translator.props.dialogLanguage;
 
-  logger.info('\n' + 'initializing core module: started');
-  logger.debug('\n' + 'state: started');
+  logger.info('initializing core module: started');
+  logger.debug('state: started');
 
   var translationDefaultSettings = {
     "translatorName":         "google",
@@ -154,7 +154,7 @@ function Translator(props) {
 
   var translatorCookie = Cookie.get(translator.props.cookieName);
   if (!translatorCookie) {
-    logger.info('\n' + 'initializing translator cookie: ' + translator.props.cookieName);
+    logger.info('initializing translator cookie: ' + translator.props.cookieName);
     // enable and write all settings required for translation (translation cookie)
     Cookie.set(
       translator.props.cookieName,
@@ -304,7 +304,7 @@ function Translator(props) {
         }
       },
       error: function (jqXHR, textStatus, errorThrown) {
-        logger.error('\n' + 'failed to retrieve JSON data from: ' + settings.url);
+        logger.error('failed to retrieve JSON data from: ' + settings.url);
       }
     });
   }
@@ -319,7 +319,7 @@ function Translator(props) {
 
       self.modal = document.getElementById(translator.props.dialogContainerID);
       if (!self.modal) {
-        logger.info('\n' +  'load consent modal');
+        logger.info( 'load consent modal');
 
         self.modal = document.createElement('div');
         self.modal.id = translator.props.dialogContainerID;
@@ -343,7 +343,7 @@ function Translator(props) {
           var msDropdownJSON;
           var index;
 
-          logger.debug('\n' + 'show.bs.modal: entered');
+          logger.debug('show.bs.modal: entered');
 
           // hide the menubar for the modal header
           // $('#navigator_nav_navbar').hide();
@@ -359,7 +359,7 @@ function Translator(props) {
             })
           )
           .then(function(data) {
-            logger.info('\n' + 'creating msDropdown from JSON data: finished');
+            logger.info('creating msDropdown from JSON data: finished');
           });
         }); // END modal on 'show'
 
@@ -376,7 +376,7 @@ function Translator(props) {
               msDropdownJSON = document.getElementById('dropdownJSON').msDropdown;
               if (!msDropdownJSON.length) {
               	// critical error
-              	logger.error('\n' + 'no msDropdown found in translation dialog');
+              	logger.error('no msDropdown found in translation dialog');
               	self.$modal.hide();
               } else {
               	// set translation language for auto detection
@@ -401,7 +401,7 @@ function Translator(props) {
               	// if modal is OPEN
               	$('body').addClass('stop-scrolling');
 
-                logger.info('\n' + 'msDropdown successfully loaded in translation dialog');
+                logger.info('msDropdown successfully loaded in translation dialog');
                 clearInterval(dependencies_met_msDropdownJSON_loaded);
               }
             }
@@ -426,7 +426,7 @@ function Translator(props) {
         var templateUrl = translator.props.contentURL + '/' + 'index.html';
         $.get(templateUrl)
         .done(function (data) {
-          logger.info('\n' + 'loading consent modal: successfully');
+          logger.info('loading consent modal: successfully');
           self.modal.innerHTML = data;
           self.modal.innerHTML = $('#' + translator.props.xhrDataElement).eq(0).html();
           self.modal.style.display  = 'block';
@@ -442,7 +442,7 @@ function Translator(props) {
           self.$buttonSave       = $('#translator-buttonSave');
           self.$buttonAgreeAll   = $('#translator-buttonAgreeAll');
 
-          logger.info('\n' + 'load/initialze options from cookie');
+          logger.info('load/initialze options from cookie');
           updateButtons();
           updateOptionsFromCookie();
 
@@ -457,7 +457,7 @@ function Translator(props) {
             updateButtons();
           });
 
-          logger.info('\n' + 'initialze button event handler');
+          logger.info('initialze button event handler');
 
           self.$buttonDoNotAgree.click(function () {
             doNotAgree();
@@ -485,8 +485,8 @@ function Translator(props) {
           self.$modal.modal('show');
         })
         .fail(function () {
-          logger.error('\n' + 'loading translator dialog (modal): failed');
-          logger.warn('\n' + 'probably no|wrong `contentURL` set');
+          logger.error('loading translator dialog (modal): failed');
+          logger.warn('probably no|wrong `contentURL` set');
         });
       } else {
         self.$modal.modal('show');
@@ -678,7 +678,7 @@ function Translator(props) {
     }
   }; // END getSettings
 
-  logger.info('\n' + 'initializing core module finished');
-  logger.debug('\n' + 'state: finished');
+  logger.info('initializing core module finished');
+  logger.debug('state: finished');
 
 } // END Translator

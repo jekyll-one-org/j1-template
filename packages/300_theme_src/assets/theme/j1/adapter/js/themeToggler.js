@@ -171,8 +171,8 @@ j1.adapter.themeToggler = ((j1, window) => {
           user_state = j1.readCookie(cookie_names.user_state);
 
           _this.setState('started');
-          logger.debug('\n' + 'set module state to: ' + _this.getState());
-          logger.info('\n' + 'initializing module: started');
+          logger.debug('set module state to: ' + _this.getState());
+          logger.info('initializing module: started');
 
           // -------------------------------------------------------------------
           // Event Mgmt SHOULD moved ta navigator core
@@ -180,11 +180,11 @@ j1.adapter.themeToggler = ((j1, window) => {
           _this.initThemeTogglerEvent();
 
           _this.setState('finished');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'initializing module: finished');
+          logger.debug('state: ' + _this.getState());
+          logger.info('initializing module: finished');
 
           endTimeModule = Date.now();
-          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+          logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_page_ready);
         } // END pageVisible
@@ -214,7 +214,7 @@ j1.adapter.themeToggler = ((j1, window) => {
           user_state.theme_css  = light_theme_css;
           user_state.theme_icon = 'mdib-lightbulb-outline';
         }
-        logger.info('\n' + 'switch theme to: ' + user_state.theme_name);
+        logger.info('switch theme to: ' + user_state.theme_name);
 
         user_state.writer = 'themeToggler';
         var cookie_written = j1.writeCookie({
@@ -225,7 +225,7 @@ j1.adapter.themeToggler = ((j1, window) => {
         });
 
         if (!cookie_written) {
-          logger.error('\n' + 'failed write to cookie: ' + cookie_names.user_consent);
+          logger.error('failed write to cookie: ' + cookie_names.user_consent);
         } else {
           location.reload(true);
         }
@@ -240,7 +240,7 @@ j1.adapter.themeToggler = ((j1, window) => {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -252,7 +252,7 @@ j1.adapter.themeToggler = ((j1, window) => {
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

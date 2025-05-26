@@ -158,25 +158,25 @@ j1.adapter.attic = ((j1, window) => {
           startTimeModule = Date.now();
 
           _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized');
+          logger.debug('state: ' + _this.getState());
+          logger.info('module is being initialized');
 
           {% if attic_options.enabled %}
-          logger.info('\n' + 'module initializaton: started');
+          logger.info('module initializaton: started');
 
           if (atticOptions.hide_page_oninit) {
             // hide whole page while attic is being created
             // jadams, 2023-05-12: page visible while loading the attic
             // cause high numbers for cumulative layout shift (CLS)
             //
-            // logger.debug('\n' + 'hide attic on initialization');
+            // logger.debug('hide attic on initialization');
             // $('#no_flicker').css('display', 'none');
           }
 
           _this.createAllAttics();
           clearInterval(dependencies_met_page_ready);
           {% else %}
-          logger.warn('\n' + 'found module attics disabled');
+          logger.warn('found module attics disabled');
           // add additional top space if attics are disabled
           $('#no_flicker').addClass('mt-5');
           clearInterval(dependencies_met_page_ready);
@@ -250,7 +250,7 @@ j1.adapter.attic = ((j1, window) => {
                   mute:                           atticOptions.mute
               });
             } else {
-              logger.warn('\n' + 'no attic container found on id: {{attic_id}}');
+              logger.warn('no attic container found on id: {{attic_id}}');
             }
 
             {% comment %} Add a spinner if configured
@@ -427,12 +427,12 @@ j1.adapter.attic = ((j1, window) => {
               $('#{{attic_id}}').backstretch('resize');
 
              _this.setState('finished');
-             logger.debug('\n' + 'state: ' + _this.getState());
-             logger.info('\n' + 'initialize attic on id {{attic_id}}: finished');
-             logger.info('\n' + 'module initializaton: finished');
+             logger.debug('state: ' + _this.getState());
+             logger.info('initialize attic on id {{attic_id}}: finished');
+             logger.info('module initializaton: finished');
 
              endTimeModule = Date.now();
-             logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+             logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
             }); // END callback backstretch.after
           } // END if attic_id exists
 
@@ -660,21 +660,21 @@ j1.adapter.attic = ((j1, window) => {
             $('head').append(backstretch_opacity);
 
             _this.setState('initialized');
-            logger.debug('\n' + 'state: ' + _this.getState());
+            logger.debug('state: ' + _this.getState());
 
             // start RUNNER on page 'ready'|module state 'initialized'
             //
             // $(() => {
             //   var dependencies_met_attic_ready = setInterval (() => {
             //     if (_this.getState() === 'initialized') {
-            //       logger.info('\n' + 'initialize attic on id {{attic_id}}: started');
+            //       logger.info('initialize attic on id {{attic_id}}: started');
             //       {{attic_id}}_runner (atticOptions);
             //       clearInterval(dependencies_met_attic_ready);
             //     }
             //   }, 10);
             // });
 
-            logger.info('\n' + 'initialize attic on id {{attic_id}}: started');
+            logger.info('initialize attic on id {{attic_id}}: started');
             {{attic_id}}_runner (atticOptions);
 
           } // END apply CSS styles|start ATTIC RUNNER
@@ -682,15 +682,15 @@ j1.adapter.attic = ((j1, window) => {
         {% else %}
           {% assign attic_id = item.attic.id %}
           _this.setState('finished');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'initialize attic on id {{attic_id}}: finished');
-          logger.info('\n' + 'module initializaton: finished');
+          logger.debug('state: ' + _this.getState());
+          logger.info('initialize attic on id {{attic_id}}: finished');
+          logger.info('module initializaton: finished');
 
           // add additional top space if attic disabled
           //
           $('#no_flicker').addClass('mt-3');
 
-          logger.warn('\n' + 'attic on id {{attic_id}}: disabled');
+          logger.warn('attic on id {{attic_id}}: disabled');
           $('#no_flicker').css('display', 'block');
         {% endif %} // END if header enabled
       {% endfor %} // END for item in header_config.attics
@@ -698,8 +698,8 @@ j1.adapter.attic = ((j1, window) => {
       // NO header found in page
       // if ($('#no_header').length) {
       //   _this.setState('completed');
-      //   logger.debug('\n' + 'state: ' + _this.getState());
-      //   logger.warn('\n' + 'no header configured or found in page');
+      //   logger.debug('state: ' + _this.getState());
+      //   logger.warn('no header configured or found in page');
       // }
 
       return true;
@@ -713,7 +713,7 @@ j1.adapter.attic = ((j1, window) => {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -725,7 +725,7 @@ j1.adapter.attic = ((j1, window) => {
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

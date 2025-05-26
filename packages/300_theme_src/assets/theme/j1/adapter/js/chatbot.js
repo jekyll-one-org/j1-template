@@ -163,10 +163,10 @@ var timeSeconds;
             validChatbotID = (chatbotID.includes('your')) ? false : true;
 
             if (validChatbot) {
-              logger.info('\n' + 'chatbot detected: ' + chatbot);
+              logger.info('chatbot detected: ' + chatbot);
             } else {
-              logger.info('\n' + 'invalid chatbot detected: ' + chatbot);
-              logger.warn('\n' + 'module chat: disabled');
+              logger.info('invalid chatbot detected: ' + chatbot);
+              logger.warn('module chat: disabled');
               clearInterval(dependencies_met_page_ready);
             }
 
@@ -190,32 +190,32 @@ var timeSeconds;
 
             // initialize state flag
             _this.setState('started');
-            logger.debug('\n' + 'state: ' + _this.getState());
-            logger.info('\n' + 'module initializing: started');
+            logger.debug('state: ' + _this.getState());
+            logger.info('module initializing: started');
 
             user_consent = j1.readCookie(cookie_names.user_consent);
             if (user_consent.personalization) {
-              logger.info('\n' + 'user consent on personalization: ' + user_consent.personalization);
+              logger.info('user consent on personalization: ' + user_consent.personalization);
               if (validChatbotID) {
-                logger.info('\n' + 'chatbotID detected: ' + chatbotID);
+                logger.info('chatbotID detected: ' + chatbotID);
               } else {
-                logger.warn('\n' + 'invalid chatbotID detected: ' + chatbotID);
-                logger.warn('\n' + 'module chat: disabled');
+                logger.warn('invalid chatbotID detected: ' + chatbotID);
+                logger.warn('module chat: disabled');
                 return;
               }
             } else {
-              logger.info('\n' + 'user consent on personalization: ' + user_consent.personalization);
-              logger.warn('\n' + 'disable Chatbot on ID: ' + chatbotID);
+              logger.info('user consent on personalization: ' + user_consent.personalization);
+              logger.warn('disable Chatbot on ID: ' + chatbotID);
               return;
             }
 
             _this.setState('finished');
 
-            logger.debug('\n' + 'state: ' + _this.getState());
-            logger.info('\n' + 'module initializing: finished');
+            logger.debug('state: ' + _this.getState());
+            logger.info('module initializing: finished');
 
             endTimeModule = Date.now();
-            logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+            logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
             clearInterval(dependencies_met_page_ready);
 
@@ -226,19 +226,19 @@ var timeSeconds;
 
             // initialize state flag
             _this.setState('started');
-            logger.debug('\n' + 'state: ' + _this.getState());
-            logger.info('\n' + 'module initializing: started');
+            logger.debug('state: ' + _this.getState());
+            logger.info('module initializing: started');
 
             apiExists     = document.getElementById("{{chatbotID}}") === null ? false : true;
             user_consent  = j1.readCookie(cookie_names.user_consent);
             if (user_consent.personalization) {
-              logger.info('\n' + 'user consent on personalization: ' + user_consent.personalization);
+              logger.info('user consent on personalization: ' + user_consent.personalization);
 
               if (validChatbotID) {
-                logger.info('\n' + 'enable VivoChat on ID: ' + chatbotID);
+                logger.info('enable VivoChat on ID: ' + chatbotID);
 
                 setTimeout(() => {
-                  logger.info('\n' + 'set fab button position');
+                  logger.info('set fab button position');
                   $('.fab-btn').css('bottom', '5rem');
                 }, 1000);
 
@@ -249,22 +249,22 @@ var timeSeconds;
 
                 document.head.appendChild(apiScript);
 
-                logger.info('\n' + 'VivoChat API added in section: head');
+                logger.info('VivoChat API added in section: head');
               } else {
-                logger.warn('\n' + 'invalid chatbotID detected: ' + chatbotID);
-                logger.warn('\n' + 'module chat: disabled');
+                logger.warn('invalid chatbotID detected: ' + chatbotID);
+                logger.warn('module chat: disabled');
               }
             } else {
-              logger.info('\n' + 'user consent on personalization: ' + user_consent.personalization);
-              logger.warn('\n' + 'disable VivoChat on ID: ' + chatbotID);
+              logger.info('user consent on personalization: ' + user_consent.personalization);
+              logger.warn('disable VivoChat on ID: ' + chatbotID);
             }
 
             _this.setState('finished');
-            logger.debug('\n' + 'state: ' + _this.getState());
-            logger.info('\n' + 'module initializing: finished');
+            logger.debug('state: ' + _this.getState());
+            logger.info('module initializing: finished');
 
             endTimeModule = Date.now();
-            logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+            logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
             clearInterval(dependencies_met_page_ready);
 
@@ -275,19 +275,19 @@ var timeSeconds;
 
             // initialize state flag
             _this.setState('started');
-            logger.debug('\n' + 'state: ' + _this.getState());
-            logger.info('\n' + 'module initializing: started');
+            logger.debug('state: ' + _this.getState());
+            logger.info('module initializing: started');
 
             setTimeout(() => {
-              logger.info('\n' + 'set fab button position');
+              logger.info('set fab button position');
               $('.fab-btn').css('bottom', '5rem');
             }, 1000);
 
             user_consent = j1.readCookie(cookie_names.user_consent);
             if (user_consent.personalization) {
-              logger.info('\n' + 'user consent on personalization: ' + user_consent.personalization);
+              logger.info('user consent on personalization: ' + user_consent.personalization);
               if (validChatbotID) {
-                logger.info('\n' + 'enable TutGPT on ID: ' + chatbotID);
+                logger.info('enable TutGPT on ID: ' + chatbotID);
 
                 // create the chatBotWidget (Button container)
                 //
@@ -308,28 +308,28 @@ var timeSeconds;
                 })
 
                 setTimeout(() => {
-                  logger.info('\n' + 'Initialize TutGPT API');
+                  logger.info('Initialize TutGPT API');
                   // add the chatbotAPI to run the Bot (delayed)
                   //
                   document.head.appendChild(apiScript);
-                  logger.info('\n' + 'TutGPT API added in section: head');
+                  logger.info('TutGPT API added in section: head');
                 }, 3000);
 
               } else {
-                logger.warn('\n' + 'invalid chatbotID detected: ' + chatbotID);
-                logger.warn('\n' + 'module chat: disabled');
+                logger.warn('invalid chatbotID detected: ' + chatbotID);
+                logger.warn('module chat: disabled');
               }
             } else {
-              logger.info('\n' + 'user consent on personalization: ' + user_consent.personalization);
-              logger.warn('\n' + 'disable TutGPT on ID: ' + chatbotID);
+              logger.info('user consent on personalization: ' + user_consent.personalization);
+              logger.warn('disable TutGPT on ID: ' + chatbotID);
             }
 
             _this.setState('finished');
-            logger.debug('\n' + 'state: ' + _this.getState());
-            logger.info('\n' + 'module initializing: finished');
+            logger.debug('state: ' + _this.getState());
+            logger.info('module initializing: finished');
 
             endTimeModule = Date.now();
-            logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+            logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
             clearInterval(dependencies_met_page_ready);
 
@@ -340,11 +340,11 @@ var timeSeconds;
 
             // initialize state flag
             _this.setState('started');
-            logger.debug('\n' + 'state: ' + _this.getState());
-            logger.info('\n' + 'module initializing: started');
+            logger.debug('state: ' + _this.getState());
+            logger.info('module initializing: started');
 
             setTimeout(() => {
-              logger.info('\n' + 'set fab button position');
+              logger.info('set fab button position');
               $('.fab-btn').css('bottom', '5rem');
             }, 1000);
 
@@ -352,9 +352,9 @@ var timeSeconds;
             user_consent  = j1.readCookie(cookie_names.user_consent);
 
             if (user_consent.personalization) {
-              logger.info('\n' + 'user consent on personalization: ' + user_consent.personalization);
+              logger.info('user consent on personalization: ' + user_consent.personalization);
               if (validChatbotID) {
-                logger.info('\n' + 'enable ChatBob on ID: ' + chatbotID);
+                logger.info('enable ChatBob on ID: ' + chatbotID);
 
                 apiScript.async = true;
                 apiScript.id    = chatbotID;
@@ -362,22 +362,22 @@ var timeSeconds;
 
                 document.head.appendChild(apiScript);
 
-                logger.info('\n' + 'ChatBob API added in section: head');
+                logger.info('ChatBob API added in section: head');
               } else {
-                logger.warn('\n' + 'invalid chatbotID detected: ' + chatbotID);
-                logger.warn('\n' + 'module chat: disabled');
+                logger.warn('invalid chatbotID detected: ' + chatbotID);
+                logger.warn('module chat: disabled');
               }
             } else {
-              logger.info('\n' + 'user consent on personalization: ' + user_consent.personalization);
-              logger.warn('\n' + 'disable ChatBob on ID: ' + chatbotID);
+              logger.info('user consent on personalization: ' + user_consent.personalization);
+              logger.warn('disable ChatBob on ID: ' + chatbotID);
             }
 
             _this.setState('finished');
-            logger.debug('\n' + 'state: ' + _this.getState());
-            logger.info('\n' + 'module initializing: finished');
+            logger.debug('state: ' + _this.getState());
+            logger.info('module initializing: finished');
 
             endTimeModule = Date.now();
-            logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+            logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
             clearInterval(dependencies_met_page_ready);
 
@@ -388,11 +388,11 @@ var timeSeconds;
 
             // initialize state flag
             _this.setState('started');
-            logger.debug('\n' + 'state: ' + _this.getState());
-            logger.info('\n' + 'module initializing: started');
+            logger.debug('state: ' + _this.getState());
+            logger.info('module initializing: started');
 
             setTimeout(() => {
-              logger.info('\n' + 'set fab button position');
+              logger.info('set fab button position');
               $('.fab-btn').css('bottom', '5rem');
             }, 1000);
 
@@ -400,9 +400,9 @@ var timeSeconds;
             user_consent  = j1.readCookie(cookie_names.user_consent);
 
             if (user_consent.personalization) {
-              logger.info('\n' + 'user consent on personalization: ' + user_consent.personalization);
+              logger.info('user consent on personalization: ' + user_consent.personalization);
               if (validChatbotID) {
-                logger.info('\n' + 'enable WebWhiz on ID: ' + chatbotID);
+                logger.info('enable WebWhiz on ID: ' + chatbotID);
 
                 apiScript.id    = '__webwhizSdk__';
                 apiScript.src   = 'https://widget.webwhiz.ai/webwhiz-sdk.js';
@@ -410,22 +410,22 @@ var timeSeconds;
 
                 document.head.appendChild(apiScript);
 
-                logger.info('\n' + 'WebWhiz API added in section: head');
+                logger.info('WebWhiz API added in section: head');
               } else {
-                logger.warn('\n' + 'invalid chatbotID detected: ' + chatbotID);
-                logger.warn('\n' + 'module chat: disabled');
+                logger.warn('invalid chatbotID detected: ' + chatbotID);
+                logger.warn('module chat: disabled');
               }
             } else {
-              logger.info('\n' + 'user consent on personalization: ' + user_consent.personalization);
-              logger.warn('\n' + 'disable WebWhiz on ID: ' + chatbotID);
+              logger.info('user consent on personalization: ' + user_consent.personalization);
+              logger.warn('disable WebWhiz on ID: ' + chatbotID);
             }
 
             _this.setState('finished');
-            logger.debug('\n' + 'state: ' + _this.getState());
-            logger.info('\n' + 'module initializing: finished');
+            logger.debug('state: ' + _this.getState());
+            logger.info('module initializing: finished');
 
             endTimeModule = Date.now();
-            logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+            logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
             clearInterval(dependencies_met_page_ready);
 
@@ -438,10 +438,10 @@ var timeSeconds;
             // [INFO   ] [j1.adapter.analytics                    ] [ end processing ]
           {% else %}
             logger = log4javascript.getLogger('j1.adapter.chatbot');
-            logger.info('\n' + 'chatbot: disabled');
+            logger.info('chatbot: disabled');
 
             endTimeModule = Date.now();
-            logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+            logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
             clearInterval(dependencies_met_page_ready);
           {% endif %}
@@ -458,7 +458,7 @@ var timeSeconds;
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -470,7 +470,7 @@ var timeSeconds;
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

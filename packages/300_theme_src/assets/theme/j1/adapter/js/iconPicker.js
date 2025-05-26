@@ -153,8 +153,8 @@ var timeSeconds;
           icon_picker_button_id = '#' + iconPickerOptions.picker_button_id;
 
           _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized on id: ' + icon_picker_button_id);
+          logger.debug('state: ' + _this.getState());
+          logger.info('module is being initialized on id: ' + icon_picker_button_id);
 
           var dependencies_met_picker_button_ready = setInterval (() => {
             var buttonState = $(icon_picker_button_id).length;
@@ -185,11 +185,11 @@ var timeSeconds;
               _this['moduleOptions']  = iconPickerOptions;
 
               _this.setState('finished');
-              logger.debug('\n' + 'state: ' + _this.getState());
-              logger.info('\n' + 'initializing module finished');
+              logger.debug('state: ' + _this.getState());
+              logger.info('initializing module finished');
 
               endTimeModule = Date.now();
-              logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+              logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
               clearInterval(dependencies_met_picker_button_ready);
             } // END if buttonReady
@@ -207,7 +207,7 @@ var timeSeconds;
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -219,7 +219,7 @@ var timeSeconds;
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

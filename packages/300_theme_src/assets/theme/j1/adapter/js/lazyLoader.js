@@ -144,17 +144,17 @@ var timeSeconds;
           startTimeModule = Date.now();
 
           _this.setState('started');
-          logger.debug('\n' + 'set module state to: ' + _this.getState());
-          logger.info('\n' + 'initializing module: started');
+          logger.debug('set module state to: ' + _this.getState());
+          logger.info('initializing module: started');
 
           _this.registerLoaders(lazyLoaderOptions);
 
           _this.setState('finished');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'initializing module: finished');
+          logger.debug('state: ' + _this.getState());
+          logger.info('initializing module: finished');
 
           endTimeModule = Date.now();
-          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+          logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependency_met_j1_core_ready);
         } // END if pageVisible
@@ -182,7 +182,7 @@ var timeSeconds;
             selector:   '{{loader.selector}}',
             rootMargin: '{{loader.rootMargin}}'
           });
-          logger.info('\n' + 'register lazy loading for: {{loader.description}}');
+          logger.info('register lazy loading for: {{loader.description}}');
         {% endif %}
 
       {% endif %} {% endfor %}
@@ -213,7 +213,7 @@ var timeSeconds;
           link.type = 'text/css';
           link.href = options.src;
           document.head.appendChild(link);
-          logger.info('\n' + 'lazy load of type ' + link.rel + ': ' + link.href);
+          logger.info('lazy load of type ' + link.rel + ': ' + link.href);
       }
 
       const cssObserver = () => {
@@ -241,7 +241,7 @@ var timeSeconds;
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -253,7 +253,7 @@ var timeSeconds;
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

@@ -208,12 +208,12 @@ j1.adapter.comments = ((j1, window) => {
             startTimeModule = Date.now();
 
             _this.setState('started');
-            logger.debug('\n' + 'state: ' + _this.getState());
-            logger.info('\n' + 'module is being initialized');
+            logger.debug('state: ' + _this.getState());
+            logger.info('module is being initialized');
 
             if (!validProviderID) {
-              logger.debug('\n' + 'invalid site id detected for Hyvor Talk: ' + providerID);
-              logger.info('\n' + 'skip initialization for provider: ' + comments_provider);
+              logger.debug('invalid site id detected for Hyvor Talk: ' + providerID);
+              logger.info('skip initialization for provider: ' + comments_provider);
 
               clearInterval(dependencies_met_page_ready);
               return false;
@@ -226,8 +226,8 @@ j1.adapter.comments = ((j1, window) => {
               // enable Hyvor Talk
               // ---------------------------------------------------------------
               $('#main-content').append('<h2 id="leave-a-comment" class="mt-4">{{comments_headline}}</h2>');
-              logger.info('\n' + 'user consent on comments: ' + user_consent.personalization);
-              logger.info('\n' + 'enable comments provider' + ' {{comments_provider}} on siteID: ' + providerID);
+              logger.info('user consent on comments: ' + user_consent.personalization);
+              logger.info('enable comments provider' + ' {{comments_provider}} on siteID: ' + providerID);
 
               // add Hyvor Talk Web API
               // NOTE: don't change the script id
@@ -263,8 +263,8 @@ j1.adapter.comments = ((j1, window) => {
               }, 10);
             } else {
               // disable Hyvor Talk
-              logger.info('\n' + 'user consent on comments: ' + user_consent.personalization);
-              logger.debug('\n' + 'disable Hyvor Talk on site id: ' + providerID);
+              logger.info('user consent on comments: ' + user_consent.personalization);
+              logger.debug('disable Hyvor Talk on site id: ' + providerID);
 
               // remove Hyvor Talk resources
               $('#leave-a-comment').remove();
@@ -286,27 +286,27 @@ j1.adapter.comments = ((j1, window) => {
             startTimeModule = Date.now();
 
             _this.setState('started');
-            logger.debug('\n' + 'state: ' + _this.getState());
-            logger.info('\n' + 'module is being initialized');
+            logger.debug('state: ' + _this.getState());
+            logger.info('module is being initialized');
 
             if (!validProviderID) {
-              logger.debug('\n' + 'invalid short name detected for Disqus: ' + providerID);
-              logger.info('\n' + 'skip initialization for provider: ' + comments_provider);
+              logger.debug('invalid short name detected for Disqus: ' + providerID);
+              logger.info('skip initialization for provider: ' + comments_provider);
               clearInterval(dependencies_met_page_ready);
               return;
             }
 
             // initialize state flag, issue init message
             _this.setState('started');
-            logger.debug('\n' + 'state: ' + _this.getState());
-            logger.info('\n' + 'module is being initialized for provider: ' + comments_provider);
+            logger.debug('state: ' + _this.getState());
+            logger.info('module is being initialized for provider: ' + comments_provider);
 
             // place|remove initialization code
             user_consent = j1.readCookie(cookie_names.user_consent);
             if (user_consent.personalization) {
               $('#main-content').append('<h2 id="leave-a-comment" class="mt-4">{{comments_headline}}</h2>');
-              logger.info('\n' + 'user consent on comments: ' + user_consent.personalization);
-              logger.info('\n' + 'enable comments provider' + ' {{comments_provider}} on short name: ' + providerID);
+              logger.info('user consent on comments: ' + user_consent.personalization);
+              logger.info('enable comments provider' + ' {{comments_provider}} on short name: ' + providerID);
 
               // old Disqus Web API init
               // ---------------------------------------------------------------
@@ -346,8 +346,8 @@ j1.adapter.comments = ((j1, window) => {
               // ---------------------------------------------------------------
               $('#main-content').append('<div id="disqus_thread"></div>');
             } else {
-              logger.info('\n' + 'user consent on comments: ' + user_consent.personalization);
-              logger.debug('\n' + 'disable comments provider' + ' {{comments_provider}} on short name: ' + providerID);
+              logger.info('user consent on comments: ' + user_consent.personalization);
+              logger.debug('disable comments provider' + ' {{comments_provider}} on short name: ' + providerID);
               $('#leave-a-comment').remove();
               $('#dq-web-api').remove();
               $('#hdisqus_thread').remove();
@@ -374,10 +374,10 @@ j1.adapter.comments = ((j1, window) => {
             startTimeModule = Date.now();
 
             logger = log4javascript.getLogger('j1.adapter.comments');
-            logger.info('\n' + 'comment services: disabled');
+            logger.info('comment services: disabled');
 
             endTimeModule = Date.now();
-            logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+            logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
             clearInterval(dependencies_met_page_ready);
           } // END j1CoreFinished
@@ -393,7 +393,7 @@ j1.adapter.comments = ((j1, window) => {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -405,7 +405,7 @@ j1.adapter.comments = ((j1, window) => {
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

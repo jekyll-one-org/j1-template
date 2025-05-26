@@ -6,7 +6,7 @@ regenerate: true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/amplitudejs/js/plugins/tech/ytp.33.js
+ # ~/assets/theme/j1/modules/amplitudejs/js/plugins/tech/ytp.32.js
  # AmplitudeJS V5 Tech for J1 Template
  #
  # Product/Info:
@@ -60,7 +60,7 @@ regenerate: true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/amplitudejs/js/plugins/tech/ytp.33.js
+ # ~/assets/theme/j1/modules/amplitudejs/js/plugins/tech/ytp.32.js
  # AmplitudeJS V5 Plugin|Tech for J1 Template
  #
  # Product/Info:
@@ -418,7 +418,23 @@ regenerate: true
 
       } // END for LARGE buttonPlayerPlayPause
 
-    } // END if atpPlayerState 'playing'
+    } // END if atpPlayerState 'playing' 
+
+    // TODO: check if YT player stop is needed
+    // -------------------------------------------------------------------------
+    // stop active YT players running in parallel except the current
+    // if (previousPlayer.options.videoId !== videoID) {
+    //   logger.debug(`STOP all video on StateChange running in parallel at trackID|playerID: ${trackID}|${playerID}`);
+    //   var playerState   = (previousPlayer.getPlayerState() > 0) ? previousPlayer.getPlayerState() : 6;
+    //   var ytPlayerState = YT_PLAYER_STATE_NAMES[playerState];
+    //
+    //   if (ytPlayerState === 'playing' || ytPlayerState === 'paused') {
+    //     previousPlayer.stopVideo();
+    //   }      
+    // }
+    //
+    // stopAllActivePlayers(playerID);
+
   } // END processOnStateChangePlaying
 
 
@@ -598,6 +614,14 @@ regenerate: true
       return;
     }
 
+    // (ytPlayer.isMuted()) && ytPlayer.unMute();
+
+    // skip fade-in when volume is already at target value
+    // if (ytPlayer.getVolume() >= targetVolume) {
+    //   logger.warn('skipped fade-in for current video on volume: ', targetVolume);
+    //   return;
+    // }
+
     // Start the players volume muted
     ytPlayer.setVolume(0);
 
@@ -714,6 +738,7 @@ regenerate: true
       j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex = songIndex;
       j1.adapter.amplitude.data.ytPlayers[playerID].videoID     = ytVideoID;      
 
+
       logger.debug(`SWITCH video on loadNextVideo at trackID|VideoID: ${trackID}|${ytVideoID}`);
       ytPlayer.loadVideoById(ytVideoID);
 
@@ -779,8 +804,9 @@ regenerate: true
       // update meta data
       updatMetaContainers(songMetaData);
   
-      var playPauseButtonClass = `large-player-play-pause-${ytPlayerID}`;
-      togglePlayPauseButton(playPauseButtonClass);
+      // set AJS play_pause button paused
+      var playPauseButtonClass = `large-player-play-pause-${playerID}`
+      setPlayPauseButtonPaused(playPauseButtonClass);
 
       // set song (video) active at index in playlist
       setSongActive(playlist, songIndex);
@@ -927,6 +953,18 @@ regenerate: true
           playerExistsInPage = false;
 
         } // END if playerExistsInPage()
+
+        function checkPlayingStatus(player) {
+          if (player.getPlayerState() === YT_PLAYER_STATE.PLAYING) {
+            // code run after video is playing
+            // console.debug("checkPlayingStatus: AJS YouTube Player state: PLAYING");
+            // do nothing
+            return;
+          } else {
+            // re-check player state required
+            // console.debug("checkPlayingStatus: AJS YouTube Player state:", player.getPlayerState());
+          }
+        } // END checkPlayingStatus
 
         // AJS YouTube Player errors fired by the YT API
         // ---------------------------------------------------------------------
@@ -1476,6 +1514,14 @@ regenerate: true
     ytPlayer        = activeSongSettings.player;
     activePlaylist  = activeSongSettings.playlist;
 
+    // if (activeSongSettings) {
+    //   ytPlayer        = activeSongSettings.player;
+    //   activePlaylist  = activeSongSettings.playlist;
+    // } else {
+    //   ytPlayer        = player; 
+    //   activePlaylist  = playlist; 
+    // }
+
     // get current hours|minutes|seconds
     // -------------------------------------------------------------------------
     hours   = ytpGetDurationHours(ytPlayer);
@@ -1680,6 +1726,7 @@ regenerate: true
 
   } // END ytpSeekTo
 
+
   // ---------------------------------------------------------------------------
   // ytpGetBuffered
   //
@@ -1704,6 +1751,7 @@ regenerate: true
 
     return activeIndex;
   } // END ytpGetActiveIndex
+
 
   // ---------------------------------------------------------------------------
   // ytpSetActiveIndex
@@ -1842,6 +1890,7 @@ regenerate: true
     }
   } // END ytpGetDurationMinutes
 
+
   // ---------------------------------------------------------------------------
   // ytpGetDurationSeconds
   //
@@ -1964,6 +2013,10 @@ regenerate: true
   // setPlayPauseButtonPaused 
   // ---------------------------------------------------------------------------
   function setPlayPauseButtonPaused(element) {
+    var button, htmlElement;
+
+    // button      = document.getElementsByClassName(elementClass);
+    // htmlElement = button[0];
 
     element.classList.remove('amplitude-playing');
     element.classList.add('amplitude-paused');
@@ -1973,10 +2026,14 @@ regenerate: true
   // ---------------------------------------------------------------------------
   // setPlayPauseButtonPlaying 
   // ---------------------------------------------------------------------------
-  function setPlayPauseButtonPlaying(element) {
+  function setPlayPauseButtonPlaying(elementClass) {
+    var button, htmlElement;
 
-    element.classList.remove('amplitude-paused');
-    element.classList.add('amplitude-playing');
+    button      = document.getElementsByClassName(elementClass);
+    htmlElement = button[0];
+
+    htmlElement.classList.remove('amplitude-paused');
+    htmlElement.classList.add('amplitude-playing');
 
   } // END setPlayPauseButtonPlaying
 
@@ -2067,144 +2124,160 @@ regenerate: true
 
               // get active song settings (manually)
               activeSongSettings  = getActiveSong();
-              if (!activeSongSettings) {
-                songIndex     = 0;
-                ytpSongIndex  = 0;
-              } else {
-                if (activeSongSettings.playlist !== playlist) {
-                  songIndex    = 0;
-                  ytpSongIndex = 0;
 
-                  // reset previous player settings
-                  if (activeSongSettings.player !== undefined) {
-                    activeSongSettings.player.stopVideo();
-                    var playPauseButtonClass = `large-player-play-pause-${activeSongSettings.playerID}`;
-                    togglePlayPauseButton(playPauseButtonClass);                    
-                  }
+              // wait for API error state
+              // setTimeout(() => {
+                if (!activeSongSettings) {
+                  songIndex     = 0;
+                  ytpSongIndex  = 0;
                 } else {
-                  songIndex = ytpSongIndex;
-                }
-              } // END if activeSongSettings
+                  if (activeSongSettings.playlist !== playlist) {
+                    songIndex    = 0;
+                    ytpSongIndex = 0;
 
-              if (j1.adapter.amplitude.data.ytpGlobals.ytApiError > 0) {
-                // do nothing on API errors
-                var trackID = songIndex + 1;
-                logger.error(`DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[j1.adapter.amplitude.data.ytpGlobals.ytApiError]}'`);
-
-                return;
-              }
-
-              // update activeAudio data (manually)
-              checkActiveVideoElementYTP();
-
-              // get active song settings (manually)
-              activeSongSettings  = getActiveSong();
-              if (!activeSongSettings) {
-                var metaData  = j1.adapter.amplitude.data.ytPlayers[playerID];
-                songIndex     = metaData.activeIndex;
-                songs         = metaData.songs;
-                songMetaData  = songs[songIndex];
-                ytPlayer      = metaData.player;                   
-              } else {
-                songs         = activeSongSettings.songs;
-                songMetaData  = songs[songIndex];
-                ytPlayer      = activeSongSettings.player;                  
-              }
-
-              // update meta data
-              updatMetaContainers(songMetaData);              
-
-              // save player GLOBAL data for later use (e.g. events)
-              j1.adapter.amplitude.data.activePlayer                 = 'ytp';
-              j1.adapter.amplitude.data.ytpGlobals['activeIndex']    = songIndex;
-              j1.adapter.amplitude.data.ytpGlobals['activePlaylist'] = playlist;
-
-              // YT play|pause video
-              // ---------------------------------------------------------------
-              var playerState   = ytPlayer.getPlayerState();
-              if (playerState < 0) {
-                var ytPlayerState = YT_PLAYER_STATE_NAMES[6];
-              } else {
-                var ytPlayerState = YT_PLAYER_STATE_NAMES[playerState];
-              }
-
-              // TOGGLE state 'playing' => 'paused'
-              if (ytPlayerState === 'playing') {
-                ytPlayer.pauseVideo();
-
-                ytPlayerCurrentTime = ytPlayer.getCurrentTime();
-
-                var playPauseButtonClass = `large-player-play-pause-${ytPlayerID}`;
-                togglePlayPauseButton(playPauseButtonClass);
-
-                // reset|update time settings
-                resetCurrentTimeContainerYTP(ytPlayer, playlist);
-                updateDurationTimeContainerYTP(ytPlayer, playlist);                
-              }
-
-              // TOGGLE state 'paused' => 'playing'
-              if (ytPlayerState === 'paused') {
-                ytPlayer.playVideo();
-                ytpSeekTo(ytPlayer, ytPlayerCurrentTime, true);
-
-                var trackID =  songIndex + 1;
-                logger.debug(`PLAY video for PlayPauseButton on playlist|trackID: ${playlist}|${trackID} at: ${ytPlayerCurrentTime}`);
-
-                var playPauseButtonClass = `large-player-play-pause-${ytPlayerID}`;
-                togglePlayPauseButton(playPauseButtonClass);
-
-                // reset|update time settings
-                resetCurrentTimeContainerYTP(ytPlayer, playlist);
-                updateDurationTimeContainerYTP(ytPlayer, playlist);                  
-              } // if ytPlayerState === 'paused'
-
-              // load (cued) video
-              if (ytPlayerState === 'cued') {
-                ytPlayer.playVideo();
-
-                // wait for API error state
-                setTimeout(() => {
-                  if (j1.adapter.amplitude.data.ytpGlobals.ytApiError > 0) {
-                    var trackID = songIndex + 1;
-                    logger.error(`DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[j1.adapter.amplitude.data.ytpGlobals.ytApiError]}'`);
-
-                    // do nothing on API errors
-                    return;
+                    // reset previous player settings
+                    if (activeSongSettings.player !== undefined) {
+                      activeSongSettings.player.stopVideo();
+                      var playPauseButtonClass = `large-player-play-pause-${activeSongSettings.playerID}`;
+                      togglePlayPauseButton(playPauseButtonClass);                    
+                    }
+                  } else {
+                    songIndex = ytpSongIndex;
                   }
+                } // END if activeSongSettings
 
-                  // reset progress bar settings
-                  resetProgressBarYTP();                    
+                if (j1.adapter.amplitude.data.ytpGlobals.ytApiError > 0) {
+                  // do nothing on API errors
+                  var trackID = songIndex + 1;
+                  logger.error(`DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[j1.adapter.amplitude.data.ytpGlobals.ytApiError]}'`);
+
+                  return;
+                }
+
+                // set song (video) active at index in playlist
+                // setSongActive(playlist, songIndex);
+
+                // reset progress bar settings
+                // resetProgressBarYTP();
+
+                // scroll song active at index in player
+                // if (playerAutoScrollSongElement) {
+                //   scrollToActiveElement(playlist);
+                // }
+
+                // update activeAudio data (manually)
+                checkActiveVideoElementYTP();
+
+                // get active song settings (manually)
+                activeSongSettings  = getActiveSong();
+                if (!activeSongSettings) {
+                  var metaData  = j1.adapter.amplitude.data.ytPlayers[playerID];
+                  songIndex     = metaData.activeIndex;
+                  songs         = metaData.songs;
+                  songMetaData  = songs[songIndex];
+                  ytPlayer      = metaData.player;                   
+                } else {
+                  songs         = activeSongSettings.songs;
+                  songMetaData  = songs[songIndex];
+                  ytPlayer      = activeSongSettings.player;                  
+                }
+
+                // update meta data
+                updatMetaContainers(songMetaData);              
+
+                // save player GLOBAL data for later use (e.g. events)
+                j1.adapter.amplitude.data.activePlayer                 = 'ytp';
+                j1.adapter.amplitude.data.ytpGlobals['activeIndex']    = songIndex;
+                j1.adapter.amplitude.data.ytpGlobals['activePlaylist'] = playlist;
+
+                // YT play|pause video
+                // ---------------------------------------------------------------
+                var playerState   = ytPlayer.getPlayerState();
+                if (playerState < 0) {
+                  var ytPlayerState = YT_PLAYER_STATE_NAMES[6];
+                } else {
+                  var ytPlayerState = YT_PLAYER_STATE_NAMES[playerState];
+                }
+
+                // TOGGLE state 'playing' => 'paused'
+                if (ytPlayerState === 'playing') {
+                  ytPlayer.pauseVideo();
+
+                  ytPlayerCurrentTime = ytPlayer.getCurrentTime();
 
                   var playPauseButtonClass = `large-player-play-pause-${ytPlayerID}`;
                   togglePlayPauseButton(playPauseButtonClass);
 
-                  // set song at songIndex active in playlist
-                  setSongActive(playlist, songIndex);
+                  // reset|update time settings
+                  resetCurrentTimeContainerYTP(ytPlayer, playlist);
+                  updateDurationTimeContainerYTP(ytPlayer, playlist);                
+                }
 
-                  // scroll song active at index in player
-                  if (playerAutoScrollSongElement) {
-                    scrollToActiveElement(playlist);
-                  }
+                // TOGGLE state 'paused' => 'playing'
+                if (ytPlayerState === 'paused') {
+                  ytPlayer.playVideo();
+                  ytpSeekTo(ytPlayer, ytPlayerCurrentTime, true);
+
+                  var trackID =  songIndex + 1;
+                  logger.debug(`PLAY video for PlayPauseButton on playlist|trackID: ${playlist}|${trackID} at: ${ytPlayerCurrentTime}`);
+
+                  var playPauseButtonClass = `large-player-play-pause-${ytPlayerID}`;
+                  togglePlayPauseButton(playPauseButtonClass);
 
                   // reset|update time settings
                   resetCurrentTimeContainerYTP(ytPlayer, playlist);
-                  updateDurationTimeContainerYTP(ytPlayer, playlist);
-                }, 100);
-              } // END if ytPlayerState === 'cued'
+                  updateDurationTimeContainerYTP(ytPlayer, playlist);                  
+                } // if ytPlayerState === 'paused'
 
-              // TODO: unclear why state 'unstarted' is generated
-              // on LAST item
-              // workaround sofar
-              // -------------------------------------------------------------
-              // if (ytPlayerState === 'unstarted') {
-              //   ytPlayer.playVideo();
-              //   // ytPlayer.mute();              
-              //  
-              //   var playPauseButtonClass = `large-player-play-pause-${ytPlayerID}`;
-              //   togglePlayPauseButton(playPauseButtonClass);
-              //   resetCurrentTimeContainerYTP(ytPlayer, playlist);
-              //   updateDurationTimeContainerYTP(ytPlayer, playlist);                  
-              // } // END if ytPlayerState === 'unstarted'               
+                // load (cued) video
+                if (ytPlayerState === 'cued') {
+                  ytPlayer.playVideo();
+
+                  // wait for API error state
+                  setTimeout(() => {
+                    if (j1.adapter.amplitude.data.ytpGlobals.ytApiError > 0) {
+                      var trackID = songIndex + 1;
+                      logger.error(`DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[j1.adapter.amplitude.data.ytpGlobals.ytApiError]}'`);
+
+                      // do nothing on API errors
+                      return;
+                    }
+
+                    // reset progress bar settings
+                    resetProgressBarYTP();                    
+
+                    var playPauseButtonClass = `large-player-play-pause-${ytPlayerID}`;
+                    togglePlayPauseButton(playPauseButtonClass);
+
+                    // set song at songIndex active in playlist
+                    setSongActive(playlist, songIndex);
+
+                    // scroll song active at index in player
+                    if (playerAutoScrollSongElement) {
+                      scrollToActiveElement(playlist);
+                    }
+
+                    // reset|update time settings
+                    resetCurrentTimeContainerYTP(ytPlayer, playlist);
+                    updateDurationTimeContainerYTP(ytPlayer, playlist);
+                  }, 100);
+                } // END if ytPlayerState === 'cued'
+
+                // TODO: unclear why state 'unstarted' is generated
+                // on LAST item
+                // workaround sofar
+                // -------------------------------------------------------------
+                // if (ytPlayerState === 'unstarted') {
+                //   ytPlayer.playVideo();
+                //   // ytPlayer.mute();              
+                //  
+                //   var playPauseButtonClass = `large-player-play-pause-${ytPlayerID}`;
+                //   togglePlayPauseButton(playPauseButtonClass);
+                //   resetCurrentTimeContainerYTP(ytPlayer, playlist);
+                //   updateDurationTimeContainerYTP(ytPlayer, playlist);                  
+                // } // END if ytPlayerState === 'unstarted'               
+
+              // }, 200);
 
               // deactivate AJS events (if any)
               event.stopImmediatePropagation();
@@ -2309,6 +2382,9 @@ regenerate: true
                 logger.error('YT player not defined');
               }
 
+              // stop active AT|YT players except the current
+              // stopAllActivePlayers(playerID);
+
               // select video
               if (songIndex < songs.length-1) {
                 // select NEXT video
@@ -2362,6 +2438,7 @@ regenerate: true
 
                 // set AJS play_pause button paused
                 var playPauseButtonClass = `large-player-play-pause-${ytPlayerID}`;
+                // setPlayPauseButtonPlaying(playPauseButtonClass);
                 togglePlayPauseButton(playPauseButtonClass);
               } else {
                 // toggle AJS play_pause button
@@ -2429,6 +2506,9 @@ regenerate: true
               logger.error('YT player not defined');
             }
 
+            // stop active AT|YT players except the current
+            // stopAllActivePlayers(playerID);
+
             // select video
             if (songIndex > 0 && songIndex <= songs.length - 1) {
               // select NEXT video
@@ -2450,7 +2530,7 @@ regenerate: true
             j1.adapter.amplitude.data.ytpGlobals['activeIndex']    = songIndex;
             j1.adapter.amplitude.data.ytpGlobals['activePlaylist'] = playlist;
 
-            // load previous video
+            // load next video
             // -----------------------------------------------------------------
 
             // save YT player data for later use (e.g. events)
@@ -2483,6 +2563,7 @@ regenerate: true
 
               // set AJS play_pause button paused
               var playPauseButtonClass = `large-player-play-pause-${ytPlayerID}`;
+              // setPlayPauseButtonPlaying(playPauseButtonClass);
               togglePlayPauseButton(playPauseButtonClass);
             } else {
               // toggle AJS play_pause button
@@ -2529,159 +2610,258 @@ regenerate: true
         largePlayerSongContainer[i].addEventListener('click', function(event) {
           var activeSongSettings, playlist, playerID, playerState,
               songs, songIndex, songName, singleAudio, trackID,
-              ytPlayer, ytpVideoID, activeSongIndex, isSongIndexChanged;
+              ytPlayer, ytpVideoID;
 
           // set (current) playlist|song data
-          playlist            = this.getAttribute("data-amplitude-playlist");
-          playerID            = playlist + '_large';
-          songIndex           = parseInt(this.getAttribute("data-amplitude-song-index"));
-          trackID             = songIndex + 1;
-          activeSongIndex     = j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex;
-          isSongIndexChanged  = (activeSongIndex !== songIndex) ? true : false;
+          playlist    = this.getAttribute("data-amplitude-playlist");
+          playerID    = playlist + '_large';
+          songIndex   = parseInt(this.getAttribute("data-amplitude-song-index"));
+          trackID     = songIndex + 1;
 
-          // update active song settings (manually)
-          checkActiveVideoElementYTP(); 
+          var activeSongIndex     = j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex;
+          var isSongIndexChanged  = (activeSongIndex !== songIndex) ? true : false;
 
-          // set (current) song meta data
-          songs         = j1.adapter.amplitude.data.ytPlayers[playerID].songs;
-          songMetaData  = songs[songIndex];
-          songURL       = songMetaData.url;
-          ytpVideoID    = songURL.split('=')[1];
-          // ytpVideoID = 'bloedsinn';
-          ytPlayer      = j1.adapter.amplitude.data.ytPlayers[playerID].player;
-          playerState   = ytPlayer.getPlayerState();                   
+          // wait for API error state
+          // setTimeout(() => {
+            // if (j1.adapter.amplitude.data.ytpGlobals.ytApiError > 0) {
+            //   var trackID = songIndex + 1;
+            //   logger.error(`DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[j1.adapter.amplitude.data.ytpGlobals.ytApiError]}'`);
+            //   // do nothing on API errors
+            //   return;
+            // }
 
-          // TOGGLE state 'playing' => 'paused' if video (audio) NOT changed
-          if (playerState === YT_PLAYER_STATE.PLAYING && !isSongIndexChanged) {
-            ytPlayer.pauseVideo();
-              // get active song settings (manually)
-              activeSongSettings = getActiveSong();
+            // update active song settings (manually)
+            checkActiveVideoElementYTP(); 
 
-              if (activeSongSettings) {
-                // ytpCurrentTime = activeSongSettings.currentTime;
-                if (activeSongSettings.playlist !== playlist) {
-                  // set current player settings
-                  songs     = j1.adapter.amplitude.data.ytPlayers[playerID].songs;
-                  ytPlayer  = j1.adapter.amplitude.data.ytPlayers[playerID].player;              
+            // // get active song settings (manually)
+            // activeSongSettings = getActiveSong();
 
-                  // reset previous player settings
-                  if (activeSongSettings.player !== undefined) {
-                    activeSongSettings.player.stopVideo();
-                    var playPauseButtonClass = `large-player-play-pause-${activeSongSettings.playerID}`;
-                    togglePlayPauseButton(playPauseButtonClass);                    
+            // if (activeSongSettings) {
+            //   // ytpCurrentTime = activeSongSettings.currentTime;
+            //   if (activeSongSettings.playlist !== playlist) {
+            //     // set current player settings
+            //     songs     = j1.adapter.amplitude.data.ytPlayers[playerID].songs;
+            //     ytPlayer  = j1.adapter.amplitude.data.ytPlayers[playerID].player;              
+
+            //     // reset previous player settings
+            //     if (activeSongSettings.player !== undefined) {
+            //       activeSongSettings.player.stopVideo();
+            //       var playPauseButtonClass = `large-player-play-pause-${activeSongSettings.playerID}`;
+            //       togglePlayPauseButton(playPauseButtonClass);                    
+            //     }
+            //   } else {
+            //     // set current player settings
+            //     songs     = j1.adapter.amplitude.data.ytPlayers[playerID].songs;
+            //     ytPlayer  = j1.adapter.amplitude.data.ytPlayers[playerID].player;
+            //   }
+            // } else {
+            //   // set current player settings
+            //   songs     = j1.adapter.amplitude.data.ytPlayers[playerID].songs;
+            //   ytPlayer  = j1.adapter.amplitude.data.ytPlayers[playerID].player;
+            // }
+
+            // set (current) song meta data
+            songs         = j1.adapter.amplitude.data.ytPlayers[playerID].songs;
+            songMetaData  = songs[songIndex];
+            songURL       = songMetaData.url;
+            ytpVideoID = songURL.split('=')[1];
+            // ytpVideoID    = 'bloedsinn';
+            ytPlayer      = j1.adapter.amplitude.data.ytPlayers[playerID].player;
+            playerState   = ytPlayer.getPlayerState();
+
+            // TOGGLE state 'playing'|'paused' if video (audio) NOT changed
+            // var isItemChanged = (j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex !== songIndex) ? true : false;
+            // if (!isItemChanged && (playerState === YT_PLAYER_STATE.PLAYING || playerState === YT_PLAYER_STATE.PAUSED)) {                    
+
+              // TOGGLE state 'playing' => 'paused' if video (audio) NOT changed
+              if (playerState === YT_PLAYER_STATE.PLAYING && !isSongIndexChanged) {
+                ytPlayer.pauseVideo();
+                  // get active song settings (manually)
+                  activeSongSettings = getActiveSong();
+
+                  if (activeSongSettings) {
+                    // ytpCurrentTime = activeSongSettings.currentTime;
+                    if (activeSongSettings.playlist !== playlist) {
+                      // set current player settings
+                      songs     = j1.adapter.amplitude.data.ytPlayers[playerID].songs;
+                      ytPlayer  = j1.adapter.amplitude.data.ytPlayers[playerID].player;              
+
+                      // reset previous player settings
+                      if (activeSongSettings.player !== undefined) {
+                        activeSongSettings.player.stopVideo();
+                        var playPauseButtonClass = `large-player-play-pause-${activeSongSettings.playerID}`;
+                        togglePlayPauseButton(playPauseButtonClass);                    
+                      }
+                    } else {
+                      // set current player settings
+                      songs     = j1.adapter.amplitude.data.ytPlayers[playerID].songs;
+                      ytPlayer  = j1.adapter.amplitude.data.ytPlayers[playerID].player;
+                    }
+                  } else {
+                    // set current player settings
+                    songs     = j1.adapter.amplitude.data.ytPlayers[playerID].songs;
+                    ytPlayer  = j1.adapter.amplitude.data.ytPlayers[playerID].player;
                   }
-                } else {
-                  // set current player settings
-                  songs     = j1.adapter.amplitude.data.ytPlayers[playerID].songs;
-                  ytPlayer  = j1.adapter.amplitude.data.ytPlayers[playerID].player;
-                }
-              } else {
-                // set current player settings
-                songs     = j1.adapter.amplitude.data.ytPlayers[playerID].songs;
-                ytPlayer  = j1.adapter.amplitude.data.ytPlayers[playerID].player;
-              }
 
-              ytPlayerCurrentTime = ytPlayer.getCurrentTime();
+                  ytPlayerCurrentTime = ytPlayer.getCurrentTime();
 
-              var trackID = songIndex + 1;
-              logger.debug(`PAUSE video for PlayerSongContainer on playlist|trackID: ${playlist}|${trackID} at: ${ytPlayerCurrentTime}`);
+                  var trackID = songIndex + 1;
+                  logger.debug(`PAUSE video for PlayerSongContainer on playlist|trackID: ${playlist}|${trackID} at: ${ytPlayerCurrentTime}`);
 
-              var playPauseButtonClass = `large-player-play-pause-${ytPlayerID}`;
-              togglePlayPauseButton(playPauseButtonClass);
+                  var playPauseButtonClass = `large-player-play-pause-${ytPlayerID}`;
+                  togglePlayPauseButton(playPauseButtonClass);
 
-              // reset|update time settings
-              resetCurrentTimeContainerYTP(ytPlayer, playlist);
-              updateDurationTimeContainerYTP(ytPlayer, playlist);
+                  // reset|update time settings
+                  resetCurrentTimeContainerYTP(ytPlayer, playlist);
+                  updateDurationTimeContainerYTP(ytPlayer, playlist);
 
-              // update global song index (start at 0)
-              ytpSongIndex  = songIndex;
+                  // update global song index (start at 0)
+                  ytpSongIndex  = songIndex;
 
-              // save YT player GLOBAL data for later use (e.g. events)
-              j1.adapter.amplitude.data.activePlayer                 = 'ytp';
-              j1.adapter.amplitude.data.ytpGlobals['activeIndex']    = songIndex;
-              j1.adapter.amplitude.data.ytpGlobals['activePlaylist'] = playlist;            
+                  // save YT player GLOBAL data for later use (e.g. events)
+                  j1.adapter.amplitude.data.activePlayer                 = 'ytp';
+                  j1.adapter.amplitude.data.ytpGlobals['activeIndex']    = songIndex;
+                  j1.adapter.amplitude.data.ytpGlobals['activePlaylist'] = playlist;            
 
-              // save YT player data for later use (e.g. events)
-              j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex = songIndex;
-              j1.adapter.amplitude.data.ytPlayers[playerID].videoID     = ytpVideoID;
+                  // save YT player data for later use (e.g. events)
+                  j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex = songIndex;
+                  j1.adapter.amplitude.data.ytPlayers[playerID].videoID     = ytpVideoID;
 
-              // reset|update current time settings
-              resetCurrentTimeContainerYTP(ytPlayer, playlist);
-              updateDurationTimeContainerYTP(ytPlayer, playlist);
-              resetProgressBarYTP();
+                  // reset|update current time settings
+                  resetCurrentTimeContainerYTP(ytPlayer, playlist);
+                  updateDurationTimeContainerYTP(ytPlayer, playlist);
+                  resetProgressBarYTP();
 
-              // load the song cover image
-              loadCoverImage(songMetaData);
+                  // load the song cover image
+                  loadCoverImage(songMetaData);
 
-              // update meta data
-              updatMetaContainers(songMetaData);
+                  // update meta data
+                  updatMetaContainers(songMetaData);
 
-              // set song at songIndex active in playlist
-              setSongActive(playlist, songIndex);
+                  // set AJS play_pause button playing
+                  var playPauseButtonClass = `large-player-play-pause-${ytPlayerID}`;
+                  setPlayPauseButtonPlaying(playPauseButtonClass)
 
-              // scroll song active at index in player
-              if (playerAutoScrollSongElement) {
-                scrollToActiveElement(playlist);
-              }
+                  // set song at songIndex active in playlist
+                  setSongActive(playlist, songIndex);
 
-              // save YT player data for later use (e.g. events)
-              j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex = songIndex;
-              j1.adapter.amplitude.data.ytPlayers[playerID].videoID     = ytpVideoID;   
-
-              return;
-            } // END if playerState === PLAYING
-
-            // TOGGLE state 'paused' => 'playing' if video (audio) NOT changed
-            if (playerState === YT_PLAYER_STATE.PAUSED && !isSongIndexChanged) {
-              ytPlayer.playVideo();
-              ytpSeekTo(ytPlayer, ytPlayerCurrentTime, true);
-
-              // get active song settings (manually)
-              activeSongSettings = getActiveSong();
-
-              if (activeSongSettings) {
-                // ytpCurrentTime = activeSongSettings.currentTime;
-                if (activeSongSettings.playlist !== playlist) {
-                  // set current player settings
-                  songs     = j1.adapter.amplitude.data.ytPlayers[playerID].songs;
-                  ytPlayer  = j1.adapter.amplitude.data.ytPlayers[playerID].player;              
-
-                  // reset previous player settings
-                  if (activeSongSettings.player !== undefined) {
-                    activeSongSettings.player.stopVideo();
-                    var playPauseButtonClass = `large-player-play-pause-${activeSongSettings.playerID}`;
-                    togglePlayPauseButton(playPauseButtonClass);                    
+                  // scroll song active at index in player
+                  if (playerAutoScrollSongElement) {
+                    scrollToActiveElement(playlist);
                   }
-                } else {
-                  // set current player settings
-                  songs     = j1.adapter.amplitude.data.ytPlayers[playerID].songs;
-                  ytPlayer  = j1.adapter.amplitude.data.ytPlayers[playerID].player;
-                }
-              } else {
-                // set current player settings
-                songs     = j1.adapter.amplitude.data.ytPlayers[playerID].songs;
-                ytPlayer  = j1.adapter.amplitude.data.ytPlayers[playerID].player;
-              }
 
-              var trackID = songIndex + 1;
-              logger.debug(`PLAY video for PlayerSongContainer on playlist|trackID: ${playlist}|${trackID} at: ${ytPlayerCurrentTime}`);
+                  // save YT player data for later use (e.g. events)
+                  j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex = songIndex;
+                  j1.adapter.amplitude.data.ytPlayers[playerID].videoID     = ytpVideoID;   
 
-              var playPauseButtonClass = `large-player-play-pause-${ytPlayerID}`;
-              togglePlayPauseButton(playPauseButtonClass);
+                // }, 100);
+                return;
+              } // END if playerState === PLAYING
 
-              // update meta data
-              updatMetaContainers(songMetaData);
+              // TOGGLE state 'paused' => 'playing' if video (audio) NOT changed
+              if (playerState === YT_PLAYER_STATE.PAUSED && !isSongIndexChanged) {
+                ytPlayer.playVideo();
+                ytpSeekTo(ytPlayer, ytPlayerCurrentTime, true);
 
-              // reset|update time settings
-              resetCurrentTimeContainerYTP(ytPlayer, playlist);
-              updateDurationTimeContainerYTP(ytPlayer, playlist);
+                // wait for API error state
+                // setTimeout(() => {
+                  if (j1.adapter.amplitude.data.ytpGlobals.ytApiError > 0) {
+                    var trackID = songIndex + 1;
+                    logger.error(`DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[j1.adapter.amplitude.data.ytpGlobals.ytApiError]}'`);
 
-              // set song at songIndex active in playlist
-              setSongActive(playlist, songIndex);
+                    // do nothing on API errors
+                    return;
+                  }
 
-              return;
-            } // END if playerState === PAUSED
-        
+                  // get active song settings (manually)
+                  activeSongSettings = getActiveSong();
+
+                  if (activeSongSettings) {
+                    // ytpCurrentTime = activeSongSettings.currentTime;
+                    if (activeSongSettings.playlist !== playlist) {
+                      // set current player settings
+                      songs     = j1.adapter.amplitude.data.ytPlayers[playerID].songs;
+                      ytPlayer  = j1.adapter.amplitude.data.ytPlayers[playerID].player;              
+
+                      // reset previous player settings
+                      if (activeSongSettings.player !== undefined) {
+                        activeSongSettings.player.stopVideo();
+                        var playPauseButtonClass = `large-player-play-pause-${activeSongSettings.playerID}`;
+                        togglePlayPauseButton(playPauseButtonClass);                    
+                      }
+                    } else {
+                      // set current player settings
+                      songs     = j1.adapter.amplitude.data.ytPlayers[playerID].songs;
+                      ytPlayer  = j1.adapter.amplitude.data.ytPlayers[playerID].player;
+                    }
+                  } else {
+                    // set current player settings
+                    songs     = j1.adapter.amplitude.data.ytPlayers[playerID].songs;
+                    ytPlayer  = j1.adapter.amplitude.data.ytPlayers[playerID].player;
+                  }
+
+                  var trackID = songIndex + 1;
+                  logger.debug(`PLAY video for PlayerSongContainer on playlist|trackID: ${playlist}|${trackID} at: ${ytPlayerCurrentTime}`);
+
+                  var playPauseButtonClass = `large-player-play-pause-${ytPlayerID}`;
+                  togglePlayPauseButton(playPauseButtonClass);
+
+                  // update meta data
+                  updatMetaContainers(songMetaData);
+
+                  // reset|update time settings
+                  resetCurrentTimeContainerYTP(ytPlayer, playlist);
+                  updateDurationTimeContainerYTP(ytPlayer, playlist);
+
+                  // set song at songIndex active in playlist
+                  setSongActive(playlist, songIndex);                  
+
+                // }, 100);
+
+                return;
+              } // END if playerState === PAUSED
+            // } // END !changedAudio
+
+            // // update global song index (start at 0)
+            // ytpSongIndex  = songIndex;
+
+            // // save YT player GLOBAL data for later use (e.g. events)
+            // j1.adapter.amplitude.data.activePlayer                 = 'ytp';
+            // j1.adapter.amplitude.data.ytpGlobals['activeIndex']    = songIndex;
+            // j1.adapter.amplitude.data.ytpGlobals['activePlaylist'] = playlist;            
+
+            // // save YT player data for later use (e.g. events)
+            // j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex = songIndex;
+            // j1.adapter.amplitude.data.ytPlayers[playerID].videoID     = ytpVideoID;
+
+            // // reset|update current time settings
+            // resetCurrentTimeContainerYTP(ytPlayer, playlist);
+            // updateDurationTimeContainerYTP(ytPlayer, playlist);
+            // resetProgressBarYTP();
+
+            // // load the song cover image
+            // loadCoverImage(songMetaData);
+
+            // // update meta data
+            // updatMetaContainers(songMetaData);
+
+            // // set AJS play_pause button playing
+            // var playPauseButtonClass = `large-player-play-pause-${ytPlayerID}`;
+            // setPlayPauseButtonPlaying(playPauseButtonClass)
+
+            // // set song at songIndex active in playlist
+            // setSongActive(playlist, songIndex);
+
+            // // scroll song active at index in player
+            // if (playerAutoScrollSongElement) {
+            //   scrollToActiveElement(playlist);
+            // }
+
+            // // save YT player data for later use (e.g. events)
+            // j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex = songIndex;
+            // j1.adapter.amplitude.data.ytPlayers[playerID].videoID     = ytpVideoID;          
+
+
             if (isSongIndexChanged) {
               // load (next) video
               // -------------------------------------------------------------------
@@ -2722,8 +2902,9 @@ regenerate: true
                 // update meta data
                 updatMetaContainers(songMetaData);
 
+                // set AJS play_pause button playing
                 var playPauseButtonClass = `large-player-play-pause-${ytPlayerID}`;
-                togglePlayPauseButton(playPauseButtonClass);
+                setPlayPauseButtonPlaying(playPauseButtonClass)
 
                 // set song at songIndex active in playlist
                 setSongActive(playlist, songIndex);
@@ -2748,11 +2929,13 @@ regenerate: true
               }, 100);
             } // END if isSongIndexChanged
 
-            // deactivate AJS events (if any)
-            event.stopImmediatePropagation();           
-        }); // END EventListener
-      } // END if classString
-    } // END for largePlayerSongContainer
+          // }, 200);  
+
+          // deactivate AJS events (if any)
+          event.stopImmediatePropagation();           
+        }); // END EventListener 'click' SongContainer
+      } // END ifSWITCH video
+    } // END for
 
     // add listeners to all progress bars found
     // TODO: Fix for multiple players in page
@@ -2837,6 +3020,9 @@ regenerate: true
             var sliderID      = volumeSliders[i].id;
             var playerID      = sliderID.split('volume_slider_')[1];
 
+            // save YT player data for later use (e.g. events)
+            // j1.adapter.amplitude.data.ytPlayers[playerID].volumeSlider = volumeSlider;
+
             volumeSliders[i].addEventListener('click', function(event) {
 
               // update active song settings (manually)
@@ -2887,6 +3073,9 @@ regenerate: true
           var sliderID  = volumeMutes[i].id;
           var playerID  = sliderID.split('amplitude-mute_')[1];
 
+          // save YT player data for later use (e.g. events)
+          // j1.adapter.amplitude.data.ytPlayers[playerID].volumMute = volumMute;
+
           volumeMutes[i].addEventListener('click', function(event) {
 
             // update active song settings (manually)
@@ -2924,7 +3113,7 @@ regenerate: true
 
   } // END if playerSettings.type 'large'
 
- } // END if j1.adapter.amplitude['data']['ytPlayers'][ytPlayerID] !== undefined
+ }
 
 } // END mimikYTPlayerUiEventsForAJS
 

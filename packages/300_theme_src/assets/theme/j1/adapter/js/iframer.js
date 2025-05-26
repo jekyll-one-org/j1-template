@@ -146,8 +146,8 @@ j1.adapter.iframer = ((j1, window) => {
 
       // initialize state flag
       _this.setState('started');
-      logger.debug('\n' + 'state: ' + _this.getState());
-      logger.info('\n' + 'module is being initialized');
+      logger.debug('state: ' + _this.getState());
+      logger.info('module is being initialized');
 
       // -----------------------------------------------------------------------
       // module initializer
@@ -160,18 +160,18 @@ j1.adapter.iframer = ((j1, window) => {
         if (j1CoreFinished && pageVisible) {
 
           _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized');
+          logger.debug('state: ' + _this.getState());
+          logger.info('module is being initialized');
 
-          logger.info('\n' + 'initialize iFramer');
+          logger.info('initialize iFramer');
           _this.initialize(iframerOptions);
 
           _this.setState('finished');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'initializing module finished');
+          logger.debug('state: ' + _this.getState());
+          logger.info('initializing module finished');
 
           endTimeModule = Date.now();
-          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+          logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_page_ready);
         } // END j1CoreFinished && pageVisible
@@ -190,13 +190,13 @@ j1.adapter.iframer = ((j1, window) => {
       // logger = log4javascript.getLogger('j1.adapter.gallery');
 
       _this.setState('running');
-      logger.debug('\n' + 'state: ' + _this.getState());
+      logger.debug('state: ' + _this.getState());
 
       {% for iframe in iframer_options.iframes %}
 
         {% if iframe.enabled %}
         {% assign iframe_id = iframe.id %}
-        logger.info('\n' + 'found iframe on id: ' + '{{iframe_id}}');
+        logger.info('found iframe on id: ' + '{{iframe_id}}');
 
           // create dynamic loader variable to setup the grid on id {{iframe_id}}
           dependency = 'dependencies_met_html_loaded_{{iframe_id}}';
@@ -210,7 +210,7 @@ j1.adapter.iframer = ((j1, window) => {
             if (xhrLoadState === 'success') {
               var $iframe_{{iframe_id}} = $('#{{iframe_id}}');                  // used for later access
 
-              logger.info('\n' + 'dyn_loader, initialize iframe on id: ' + '{{iframe_id}}');
+              logger.info('dyn_loader, initialize iframe on id: ' + '{{iframe_id}}');
 
               // Inject contentWindow script into the docoment to be loaded
               // into an iframe element
@@ -259,8 +259,8 @@ j1.adapter.iframer = ((j1, window) => {
       {% endfor %}
 
       _this.setState('finished');
-      logger.debug('\n' + 'state: ' + _this.getState());
-      logger.info('\n' + 'module initialized successfully');
+      logger.debug('state: ' + _this.getState());
+      logger.info('module initialized successfully');
 
     }, // END function initialize
 
@@ -321,7 +321,7 @@ j1.adapter.iframer = ((j1, window) => {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -333,7 +333,7 @@ j1.adapter.iframer = ((j1, window) => {
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

@@ -168,17 +168,17 @@ j1.adapter.gallery = ((j1, window) => {
 
           // initialize state flag
           _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized');
+          logger.debug('state: ' + _this.getState());
+          logger.info('module is being initialized');
 
           _this.initialize(galleryOptions);
           _this.setState('finished');
 
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module initialized successfully');
+          logger.debug('state: ' + _this.getState());
+          logger.info('module initialized successfully');
 
           endTimeModule = Date.now();
-          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+          logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependency_met_page_ready);
         } // END 'finished' && 'pageVisible'
@@ -196,13 +196,13 @@ j1.adapter.gallery = ((j1, window) => {
       logger = log4javascript.getLogger('j1.adapter.gallery');
 
       _this.setState('running');
-      logger.debug('\n' + 'state: ' + _this.getState());
+      logger.debug('state: ' + _this.getState());
 
       {% for gallery in gallery_options.galleries %}
 
         {% if gallery.enabled %}
         {% assign gallery_id = gallery.id %}
-        logger.info('\n' + 'found gallery on id: ' + '{{gallery_id}}');
+        logger.info('found gallery on id: ' + '{{gallery_id}}');
 
           // create dynamic loader variable to setup the grid on id {{gallery_id}}
           dependency = 'dependencies_met_html_loaded_{{gallery_id}}';
@@ -216,7 +216,7 @@ j1.adapter.gallery = ((j1, window) => {
             if (xhrLoadState === 'success') {
               var $grid_{{gallery_id}} = $('#{{gallery_id}}');                  // used for later access
 
-              logger.debug('\n' + 'dyn_loader, initialize gallery on id: ' + '{{gallery_id}}');
+              logger.debug('dyn_loader, initialize gallery on id: ' + '{{gallery_id}}');
 
               j1.jg.callback.{{gallery_id}} = 'waiting';
 
@@ -237,8 +237,8 @@ j1.adapter.gallery = ((j1, window) => {
 
                 // setup the lightbox
                 //
-                logger.debug('\n' + 'dyn_loader, callback "jg.complete" entered on id: ' + '{{gallery_id}}');
-                logger.debug('\n' + 'dyn_loader, initialize lightGallery on id: ' + '{{gallery_id}}');
+                logger.debug('dyn_loader, callback "jg.complete" entered on id: ' + '{{gallery_id}}');
+                logger.debug('dyn_loader, initialize lightGallery on id: ' + '{{gallery_id}}');
 
                 var lg = document.getElementById("{{gallery_id}}");
                 lightGallery(lg, {
@@ -325,8 +325,8 @@ j1.adapter.gallery = ((j1, window) => {
               //
               setTimeout(() => {
                 if (j1.jg.callback.{{gallery_id}} == 'waiting') {
-                  logger.debug('\n' + 'dyn_loader, callback "jg.callback": ' + j1.jg.callback.{{gallery_id}})
-                  logger.debug('\n' + 'dyn_loader, initialize lightGallery on id: ' + '{{gallery_id}}');
+                  logger.debug('dyn_loader, callback "jg.callback": ' + j1.jg.callback.{{gallery_id}})
+                  logger.debug('dyn_loader, initialize lightGallery on id: ' + '{{gallery_id}}');
 
                   var lg = document.getElementById("{{gallery_id}}");
                   lightGallery(lg, {
@@ -445,7 +445,7 @@ j1.adapter.gallery = ((j1, window) => {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -457,7 +457,7 @@ j1.adapter.gallery = ((j1, window) => {
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

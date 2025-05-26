@@ -170,11 +170,11 @@ j1.adapter.masterslider = ((j1, window) => {
           startTimeModule = Date.now();
 
           _this.setState('started');
-          logger.debug('\n' + 'set module state to: ' + _this.getState());
-          logger.info('\n' + 'initializing module: started');
+          logger.debug('set module state to: ' + _this.getState());
+          logger.info('initializing module: started');
 
-          logger.debug('\n' + 'ms module version detected: ' + moduleVersion);
-          logger.debug('\n' + 'module is being initialized');
+          logger.debug('ms module version detected: ' + moduleVersion);
+          logger.debug('module is being initialized');
 
           _this.initSliders(masterSliderOptions, masterSliderOptions.sliders, msSliderManager, saveSliderConfig);
 
@@ -193,11 +193,11 @@ j1.adapter.masterslider = ((j1, window) => {
               if (sliderManager) document.body.appendChild(msSliderManager);
 
               _this.setState('finished');
-              logger.debug('\n' + 'state: ' + _this.getState());
-              logger.info('\n' + 'initializing module: finished');
+              logger.debug('state: ' + _this.getState());
+              logger.info('initializing module: finished');
 
               endTimeModule = Date.now();
-              logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+              logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
             }, masterSliderOptions.slider_manager_load_timeout);
 
@@ -274,7 +274,7 @@ j1.adapter.masterslider = ((j1, window) => {
         var index;
         var i=0;
 
-        logger.info('\n' + 'generate slider controls');
+        logger.info('generate slider controls');
 
         if (sliderManager) msSliderManager.innerHTML += newline;
         Object.keys(slider).forEach((key) => {
@@ -285,7 +285,7 @@ j1.adapter.masterslider = ((j1, window) => {
             if (slider[index].controls) {
               Object.keys(slider[index].controls).forEach((key) => {
                 var msSliderManagerItem = '\n';
-                logger.debug('\n' + 'slider control found id|key: ' + slider[index].id + '|' + key);
+                logger.debug('slider control found id|key: ' + slider[index].id + '|' + key);
 
                 // merge settings, defaults into control
                 control = $.extend({}, controlOptions[key], slider[index].controls[key]);
@@ -301,10 +301,10 @@ j1.adapter.masterslider = ((j1, window) => {
 
               });
             } else {
-              logger.debug('\n' + 'no slider controls found on id: ' + slider[key].id);
+              logger.debug('no slider controls found on id: ' + slider[key].id);
             }
           } else {
-            logger.debug('\n' + 'slider found disabled on id: ' + slider[key].id);
+            logger.debug('slider found disabled on id: ' + slider[key].id);
           }
         });
       } // END setupControls
@@ -320,7 +320,7 @@ j1.adapter.masterslider = ((j1, window) => {
         var index;
         var i=0;
 
-        logger.debug('\n' + 'generate slider plugins');
+        logger.debug('generate slider plugins');
 
         if (sliderManager) msSliderManager.innerHTML += newline;
         Object.keys(slider).forEach((key) => {
@@ -331,7 +331,7 @@ j1.adapter.masterslider = ((j1, window) => {
             if (slider[index].plugins) {
               Object.keys(slider[index].plugins).forEach((key) => {
                 var msSliderManagerItem = '\n';
-                logger.info('\n' + 'slider plugin found id|key: ' + slider[index].id + '|' + key);
+                logger.info('slider plugin found id|key: ' + slider[index].id + '|' + key);
 
                 // merge settings, defaults into 'plugins'
                 plugins = $.extend({}, pluginOptions, slider[index].plugins);
@@ -344,7 +344,7 @@ j1.adapter.masterslider = ((j1, window) => {
 
                   // create a 'properties' string
                   pluginSettings = JSON.stringify(plugins.J1ScrollParallax).replace(/"/g, '').replace(/{/g, '').replace(/}/g, '');
-                  logger.debug('\n' + 'plugin J1ScrollParallax found: ' + pluginSettings);
+                  logger.debug('plugin J1ScrollParallax found: ' + pluginSettings);
 
                   // remove property names to get a pure 'parameter' string
                   pluginSettings = pluginSettings.replace(/layers_parallax_depth:/g, '');
@@ -360,10 +360,10 @@ j1.adapter.masterslider = ((j1, window) => {
                 } // END plugin 'MSScrollParallax'
               });
             } else {
-              logger.debug('\n' + 'no slider plugins found on id: ' + slider[key].id);
+              logger.debug('no slider plugins found on id: ' + slider[key].id);
             } // END if slider[index].plugins
           } else {
-            logger.debug('\n' + 'slider found disabled on id: ' + slider[key].id);
+            logger.debug('slider found disabled on id: ' + slider[key].id);
           } // END if slider[index].enabled
         }); // END forEach
       } // END setupPlugIns
@@ -376,7 +376,7 @@ j1.adapter.masterslider = ((j1, window) => {
         var control          = {};
         var index;
 
-        logger.info('\n' + 'generate slider setup');
+        logger.info('generate slider setup');
 
         if (sliderManager) msSliderManager.innerHTML += newline;
         var i=0;
@@ -385,7 +385,7 @@ j1.adapter.masterslider = ((j1, window) => {
           i++;                                                                  // instance index
           index = parseInt(key);                                                // object index
           if (slider[index].enabled) {
-            logger.debug('\n' + 'slider is being initialized on id: ' + slider[key].id);
+            logger.debug('slider is being initialized on id: ' + slider[key].id);
 
             // merge settings, defaults into 'setup'
             setup = $.extend({}, settings.options, slider[index].options);
@@ -393,7 +393,7 @@ j1.adapter.masterslider = ((j1, window) => {
             // log the filter object if enabled
             if (setup.filters !== null) {
               var filterSettings = JSON.stringify(setup.filters).replace(/"/g, '');
-              logger.debug('\n' + 'filters found: ' + filterSettings.replace(/{/g, '').replace(/}/g, ''));
+              logger.debug('filters found: ' + filterSettings.replace(/{/g, '').replace(/}/g, ''));
             }
 
             if (sliderManager) {
@@ -413,13 +413,13 @@ j1.adapter.masterslider = ((j1, window) => {
               }
             }
           } else {
-            logger.info('\n' + 'slider found disabled on id: ' + slider[key].id);
+            logger.info('slider found disabled on id: ' + slider[key].id);
           }
         }); // END forEach
 
         _this.setState('sliders_initialized');
-        logger.debug('\n' + 'state: ' + _this.getState());
-        logger.info('\n' + 'initializing sliders finished');
+        logger.debug('state: ' + _this.getState());
+        logger.info('initializing sliders finished');
 
       } // END setupSliders
 
@@ -430,8 +430,8 @@ j1.adapter.masterslider = ((j1, window) => {
       var log_text;
 
       _this.setState('initialize_sliders');
-      logger.debug('\n' + 'state: ' + _this.getState());
-      log_text = '\n' + 'sliders are being initialized';
+      logger.debug('state: ' + _this.getState());
+      log_text = 'sliders are being initialized';
       logger.info(log_text);
 
       setupControls(options, slider, msSliderManager);
@@ -452,7 +452,7 @@ j1.adapter.masterslider = ((j1, window) => {
         index = parseInt(key); // object index
         i++;  // instance index
 
-        logger.debug('\n' + 'slider events are being initialized on id: ' + index);
+        logger.debug('slider events are being initialized on id: ' + index);
 
         // slider[index].api.addEventListener(MSSliderEvent.WAITING, (e) => {
         slider[index].api.addEventListener(MSSliderEvent.WAITING, function(e) {
@@ -462,9 +462,9 @@ j1.adapter.masterslider = ((j1, window) => {
 
           // dispatches when the slider's current slide change starts.
           if (!isLoading) {
-            logger.info('\n' + 'slider is loaded' );
+            logger.info('slider is loaded' );
           } else {
-            logger.info('\n' + 'slider is being loaded: ' + e.target.currentSlide.bg_src);
+            logger.info('slider is being loaded: ' + e.target.currentSlide.bg_src);
           }
         }); // END addEventListener
       }); // END forEach
@@ -477,7 +477,7 @@ j1.adapter.masterslider = ((j1, window) => {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -489,7 +489,7 @@ j1.adapter.masterslider = ((j1, window) => {
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //
