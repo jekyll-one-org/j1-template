@@ -7,6 +7,19 @@
 */
 'use strict';
 
+// -----------------------------------------------------------------------------
+// ESLint shimming
+// -----------------------------------------------------------------------------
+/* eslint no-extra-semi: "off"                                                */
+/* eslint no-empty: "off"                                                     */
+/* eslint no-undef: "off"                                                     */
+/* eslint no-redeclare: "off"                                                 */
+/* eslint no-unused-vars: "off"                                               */
+/* eslint indent: "off"                                                       */
+/* eslint quotes: "off"                                                       */
+/* eslint no-prototype-builtins: "off"                                        */
+/* global window                                                              */
+
 (function (factory) {
 	if (typeof define === 'function' && define.amd) {
 		// AMD (Register as an anonymous module)

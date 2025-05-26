@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- #  ~/js/navigator/navigator.js
+ #  ~/js/api/navigator/navigator.js
  #  Provides all JavaScript core functions for J1 Navigator
  #
  #  Product/Info:

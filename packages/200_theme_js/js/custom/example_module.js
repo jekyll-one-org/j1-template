@@ -58,7 +58,7 @@ module.exports = function j1example ( options ) {
       // -----------------------------------------------------------------------
       logger = log4javascript.getLogger('j1.example');
 
-      logText = 'Example module successfully initialized'
+      logText = 'Example module successfully initialized';
       logger.info(logText);
 
     } // END init

@@ -7,6 +7,18 @@
 // -----------------------------------------------------------------------------
 'use strict';
 
+// -----------------------------------------------------------------------------
+// ESLint shimming
+// -----------------------------------------------------------------------------
+/* eslint no-extra-semi: "off"                                                */
+/* eslint no-undef: "off"                                                     */
+/* eslint no-redeclare: "off"                                                 */
+/* eslint no-unused-vars: "off"                                               */
+/* eslint indent: "off"                                                       */
+/* eslint quotes: "off"                                                       */
+/* eslint no-prototype-builtins: "off"                                        */
+/* global window                                                              */
+
 module.exports = {
   // Where to render the table of contents.
   tocSelector: '.js-toc',

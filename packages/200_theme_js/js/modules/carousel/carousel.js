@@ -13,6 +13,17 @@
 /*global dragMove: false, dragEnd: false, $, jQuery, alert, window, document */
 /*jslint nomen: true, continue:true */
 
+// -----------------------------------------------------------------------------
+// ESLint shimming
+// -----------------------------------------------------------------------------
+/* eslint no-unused-vars: "off"                                               */
+/* eslint no-undef: "off"                                                     */
+/* eslint no-redeclare: "off"                                                 */
+/* eslint indent: "off"                                                       */
+/* eslint quotes: "off"                                                       */
+/* eslint no-prototype-builtins: "off"                                       */
+/* global window                                                              */
+
 (function ($, window, document) {
 
     var Carousel = {

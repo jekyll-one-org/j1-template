@@ -8,23 +8,23 @@
 // -----------------------------------------------------------------------------
 // ESLint shimming
 // -----------------------------------------------------------------------------
-/* eslint indent: "off"                                                       */
+/* eslint no-extra-semi: "off"                                                */
 /* eslint no-undef: "off"                                                     */
-/* eslint semi: "off"                                                         */
-// -----------------------------------------------------------------------------
-
+/* eslint no-redeclare: "off"                                                 */
+/* eslint no-unused-vars: "off"                                               */
 /* eslint indent: "off"                                                       */
-/* eslint no-undef: "off"                                                     */
-/* eslint semi: "off"                                                         */
-// -----------------------------------------------------------------------------
+/* eslint quotes: "off"                                                       */
+/* eslint no-prototype-builtins: "off"                                        */
+/* global window                                                              */
 
 
 module.exports = function (options) {
-  var forEach = [].forEach
-  var some = [].some
-  var body = document.body
-  var currentlyHighlighting = true
-  var SPACE_CHAR = ' '
+
+  var forEach = [].forEach;
+  var some = [].some;
+  var body = document.body;
+  var currentlyHighlighting = true;
+  var SPACE_CHAR = ' ';
 
   /**
    * Create link and list elements.
@@ -33,13 +33,13 @@ module.exports = function (options) {
    * @return {HTMLElement}
    */
   function createEl (d, container) {
-    var link = container.appendChild(createLink(d))
+    var link = container.appendChild(createLink(d));
     if (d.children.length) {
-      var list = createList(d.isCollapsed)
+      var list = createList(d.isCollapsed);
       d.children.forEach(function (child) {
-        createEl(child, list)
-      })
-      link.appendChild(list)
+        createEl(child, list);
+      });
+      link.appendChild(list);
     }
   }
 
@@ -50,32 +50,32 @@ module.exports = function (options) {
    * @return {HTMLElement}
    */
   function render (selector, data) {
-    var collapsed = false
-    var container = createList(collapsed)
+    var collapsed = false;
+    var container = createList(collapsed);
 
     data.forEach(function (d) {
-      createEl(d, container)
-    })
+      createEl(d, container);
+    });
 
-    var parent = document.querySelector(selector)
+    var parent = document.querySelector(selector);
 
     // Return if no parent is found.
     if (parent === null) {
-      return
+      return;
     }
 
     // Remove existing child if it exists.
     if (parent.firstChild) {
-      parent.removeChild(parent.firstChild)
+      parent.removeChild(parent.firstChild);
     }
 
     // Just return the parent and don't append the list if no links are found.
     if (data.length === 0) {
-      return parent
+      return parent;
     }
 
     // Append the Elements that have been created
-    return parent.appendChild(container)
+    return parent.appendChild(container);
   }
 
   /**
@@ -84,30 +84,30 @@ module.exports = function (options) {
    * @return {HTMLElement}
    */
   function createLink (data) {
-    var item = document.createElement('li')
-    var a = document.createElement('a')
+    var item = document.createElement('li');
+    var a = document.createElement('a');
     if (options.listItemClass) {
-      item.setAttribute('class', options.listItemClass)
+      item.setAttribute('class', options.listItemClass);
     }
 
     if (options.onClick) {
-      a.onclick = options.onClick
+      a.onclick = options.onClick;
     }
 
     if (options.includeHtml && data.childNodes.length) {
       forEach.call(data.childNodes, function (node) {
-        a.appendChild(node.cloneNode(true))
-      })
+        a.appendChild(node.cloneNode(true));
+      });
     } else {
       // Default behavior.
-      a.textContent = data.textContent
+      a.textContent = data.textContent;
     }
-    a.setAttribute('href', options.basePath + '#' + data.id)
+    a.setAttribute('href', options.basePath + '#' + data.id);
     a.setAttribute('class', options.linkClass +
       SPACE_CHAR + 'node-name--' + data.nodeName +
-      SPACE_CHAR + options.extraLinkClasses)
-    item.appendChild(a)
-    return item
+      SPACE_CHAR + options.extraLinkClasses);
+    item.appendChild(a);
+    return item;
   }
 
   /**
@@ -116,16 +116,15 @@ module.exports = function (options) {
    * @return {HTMLElement}
    */
   function createList (isCollapsed) {
-    var listElement = (options.orderedList) ? 'ol' : 'ul'
-    var list = document.createElement(listElement)
-    var classes = options.listClass +
-      SPACE_CHAR + options.extraListClasses
+    var listElement = (options.orderedList) ? 'ol' : 'ul';
+    var list = document.createElement(listElement);
+    var classes = options.listClass + SPACE_CHAR + options.extraListClasses;
     if (isCollapsed) {
-      classes += SPACE_CHAR + options.collapsibleClass
-      classes += SPACE_CHAR + options.isCollapsedClass
+      classes += SPACE_CHAR + options.collapsibleClass;
+      classes += SPACE_CHAR + options.isCollapsedClass;
     }
-    list.setAttribute('class', classes)
-    return list
+    list.setAttribute('class', classes);
+    return list;
   }
 
   /**
@@ -134,23 +133,23 @@ module.exports = function (options) {
    */
   function updateFixedSidebarClass () {
     if (options.scrollContainer && document.querySelector(options.scrollContainer)) {
-      var top
-      top = document.querySelector(options.scrollContainer).scrollTop
+      var top;
+      top = document.querySelector(options.scrollContainer).scrollTop;
     } else {
-      top = document.documentElement.scrollTop || body.scrollTop
+      top = document.documentElement.scrollTop || body.scrollTop;
     }
-    var posFixedEl = document.querySelector(options.positionFixedSelector)
+    var posFixedEl = document.querySelector(options.positionFixedSelector);
 
     if (options.fixedSidebarOffset === 'auto') {
-      options.fixedSidebarOffset = document.querySelector(options.tocSelector).offsetTop
+      options.fixedSidebarOffset = document.querySelector(options.tocSelector).offsetTop;
     }
 
     if (top > options.fixedSidebarOffset) {
       if (posFixedEl.className.indexOf(options.positionFixedClass) === -1) {
-        posFixedEl.className += SPACE_CHAR + options.positionFixedClass
+        posFixedEl.className += SPACE_CHAR + options.positionFixedClass;
       }
     } else {
-      posFixedEl.className = posFixedEl.className.split(SPACE_CHAR + options.positionFixedClass).join('')
+      posFixedEl.className = posFixedEl.className.split(SPACE_CHAR + options.positionFixedClass).join('');
     }
   }
 
@@ -160,12 +159,12 @@ module.exports = function (options) {
    * @return {integer} position
    */
   function getHeadingTopPos (obj) {
-    var position = 0
+    var position = 0;
     if (obj !== document.querySelector(options.contentSelector && obj != null)) {
-      position = obj.offsetTop
-      if (options.hasInnerContainers) { position += getHeadingTopPos(obj.offsetParent) }
+      position = obj.offsetTop;
+      if (options.hasInnerContainers) { position += getHeadingTopPos(obj.offsetParent); }
     }
-    return position
+    return position;
   }
 
   /**
@@ -174,15 +173,15 @@ module.exports = function (options) {
   function updateToc (headingsArray) {
     // If a fixed content container was set
     if (options.scrollContainer && document.querySelector(options.scrollContainer)) {
-      var top
-      top = document.querySelector(options.scrollContainer).scrollTop
+      var top;
+      top = document.querySelector(options.scrollContainer).scrollTop;
     } else {
-      top = document.documentElement.scrollTop || body.scrollTop
+      top = document.documentElement.scrollTop || body.scrollTop;
     }
 
     // Add fixed class at offset
     if (options.positionFixedSelector) {
-      updateFixedSidebarClass()
+      updateFixedSidebarClass();
     }
 
     // Get the most TOP heading currently visible on the page to
@@ -196,61 +195,61 @@ module.exports = function (options) {
       document.querySelector(options.tocSelector) !== null &&
       headings.length > 0) {
       some.call(headings, function (heading, i) {
-        headingTopPos = getHeadingTopPos(heading)
+        headingTopPos = getHeadingTopPos(heading);
         if (headingTopPos > top + options.headingsOffset + 10) {
           // Don't allow negative index value
           // var index = (i === 0) ? i : i - 1;
           // topHeader = headings[index];
           // jadams, index correction seems NOT needed
           topHeader = headings[i];
-          return true
+          return true;
         } else if (i === headings.length - 1) {
           // This allows scrolling for the last heading on the page
-          topHeader = headings[headings.length - 1]
-          return true
+          topHeader = headings[headings.length - 1];
+          return true;
         }
-      })
+      });
 
       // Remove the active class from the other tocLinks.
       var tocLinks = document.querySelector(options.tocSelector)
-        .querySelectorAll('.' + options.linkClass)
+        .querySelectorAll('.' + options.linkClass);
       forEach.call(tocLinks, function (tocLink) {
-        tocLink.className = tocLink.className.split(SPACE_CHAR + options.activeLinkClass).join('')
-      })
+        tocLink.className = tocLink.className.split(SPACE_CHAR + options.activeLinkClass).join('');
+      });
       var tocLis = document.querySelector(options.tocSelector)
-        .querySelectorAll('.' + options.listItemClass)
+        .querySelectorAll('.' + options.listItemClass);
       forEach.call(tocLis, function (tocLi) {
-        tocLi.className = tocLi.className.split(SPACE_CHAR + options.activeListItemClass).join('')
-      })
+        tocLi.className = tocLi.className.split(SPACE_CHAR + options.activeListItemClass).join('');
+      });
 
       // Add the active class to the active tocLink.
       var activeTocLink = document.querySelector(options.tocSelector)
         .querySelector('.' + options.linkClass +
           '.node-name--' + topHeader.nodeName +
-          '[href="' + options.basePath + '#' + topHeader.id.replace(/([ #;&,.+*~':"!^$[\]()=>|/@])/g, '\\$1') + '"]')
+          '[href="' + options.basePath + '#' + topHeader.id.replace(/([ #;&,.+*~':"!^$[\]()=>|/@])/g, '\\$1') + '"]');
       if (activeTocLink.className.indexOf(options.activeLinkClass) === -1) {
-        activeTocLink.className += SPACE_CHAR + options.activeLinkClass
+        activeTocLink.className += SPACE_CHAR + options.activeLinkClass;
       }
-      var li = activeTocLink.parentNode
+      var li = activeTocLink.parentNode;
       if (li && li.className.indexOf(options.activeListItemClass) === -1) {
-        li.className += SPACE_CHAR + options.activeListItemClass
+        li.className += SPACE_CHAR + options.activeListItemClass;
       }
 
       var tocLists = document.querySelector(options.tocSelector)
-        .querySelectorAll('.' + options.listClass + '.' + options.collapsibleClass)
+        .querySelectorAll('.' + options.listClass + '.' + options.collapsibleClass);
 
       // Collapse the other collapsible lists.
       forEach.call(tocLists, function (list) {
         if (list.className.indexOf(options.isCollapsedClass) === -1) {
-          list.className += SPACE_CHAR + options.isCollapsedClass
+          list.className += SPACE_CHAR + options.isCollapsedClass;
         }
-      })
+      });
 
       // Expand the active link's collapsible list and its sibling if applicable.
       if (activeTocLink.nextSibling && activeTocLink.nextSibling.className.indexOf(options.isCollapsedClass) !== -1) {
-        activeTocLink.nextSibling.className = activeTocLink.nextSibling.className.split(SPACE_CHAR + options.isCollapsedClass).join('')
+        activeTocLink.nextSibling.className = activeTocLink.nextSibling.className.split(SPACE_CHAR + options.isCollapsedClass).join('');
       }
-      removeCollapsedFromParents(activeTocLink.parentNode.parentNode)
+      removeCollapsedFromParents(activeTocLink.parentNode.parentNode);
     }
   }
 
@@ -261,10 +260,10 @@ module.exports = function (options) {
    */
   function removeCollapsedFromParents (element) {
     if (element.className.indexOf(options.collapsibleClass) !== -1 && element.className.indexOf(options.isCollapsedClass) !== -1) {
-      element.className = element.className.split(SPACE_CHAR + options.isCollapsedClass).join('')
-      return removeCollapsedFromParents(element.parentNode.parentNode)
+      element.className = element.className.split(SPACE_CHAR + options.isCollapsedClass).join('');
+      return removeCollapsedFromParents(element.parentNode.parentNode);
     }
-    return element
+    return element;
   }
 
   /**
@@ -272,20 +271,20 @@ module.exports = function (options) {
    * @param {Event} event
    */
   function disableTocAnimation (event) {
-    var target = event.target || event.srcElement
+    var target = (event.target || event.srcElement);
     if (typeof target.className !== 'string' || target.className.indexOf(options.linkClass) === -1) {
-      return
+      return;
     }
     // Bind to tocLink clicks to temporarily disable highlighting
     // while smoothScroll is animating.
-    currentlyHighlighting = false
+    currentlyHighlighting = false;
   }
 
   /**
    * Enable TOC Animation.
    */
   function enableTocAnimation () {
-    currentlyHighlighting = true
+    currentlyHighlighting = true;
   }
 
   return {
@@ -293,5 +292,6 @@ module.exports = function (options) {
     disableTocAnimation: disableTocAnimation,
     render: render,
     updateToc: updateToc
-  }
-}
+  };
+
+};

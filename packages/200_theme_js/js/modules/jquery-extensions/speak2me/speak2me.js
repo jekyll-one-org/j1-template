@@ -29,6 +29,19 @@
   https://github.com/jankapunkt/easy-speech
 */
 
+// -----------------------------------------------------------------------------
+// ESLint shimming
+// -----------------------------------------------------------------------------
+/* eslint no-extra-semi: "off"                                                */
+/* eslint no-useless-escape: "off"                                            */
+/* eslint no-undef: "off"                                                     */
+/* eslint no-redeclare: "off"                                                 */
+/* eslint no-unused-vars: "off"                                               */
+/* eslint indent: "off"                                                       */
+/* eslint quotes: "off"                                                       */
+/* eslint no-prototype-builtins: "off"                                        */
+/* global window                                                              */
+
 (function($) {
 
   const defaultOptions       = require('./default-options.js');
@@ -46,11 +59,11 @@
   const isEdge              = /Edg/i.test(navigator.userAgent);
   const chrome              = /chrome/i.test(navigator.userAgent);
   const isChrome            = ((chrome) && (!isEdge));
-  const voiceUserDefault    = 'Google UK English Female';
-  const voiceChromeDefault  = 'Google US English';
   const ignoreProvider      = 'Microsoft';
   const sourceLanguage      = document.getElementsByTagName("html")[0].getAttribute("lang");
 
+  var voiceUserDefault      = 'Google UK English Female';
+  var voiceChromeDefault    = 'Google US English';
   var defaultLanguage       = '';
   var navigatorLanguage     = navigator.language || navigator.userLanguage;
 
@@ -140,7 +153,7 @@
     'en-GB':  'Microsoft Hazel - English (United Kingdom)',
 //  'en-US':  'Microsoft Zira Desktop - English (United States)',
     'de-DE':  'Microsoft Katja - German (Germany)',
-  }
+  };
 
   if (sourceLanguage == 'en') {
     defaultLanguage = sourceLanguage + '-' + 'GB';
@@ -207,12 +220,12 @@
   // merge (configuration) objects
   //
   function extend () {
-    var target = {}
+    var target = {};
     for (var i = 0; i < arguments.length; i++) {
-      var source = arguments[i]
+      var source = arguments[i];
       for (var key in source) {
         if (hasOwnProperty.call(source, key)) {
-          target[key] = source[key]
+          target[key] = source[key];
         }
       }
     }
@@ -416,7 +429,7 @@
         // someone wanted that, but not what I wanted.
         //
         if (window.speechSynthesis.speaking) {
-            return
+            return;
         };
 
         // TODO: coincident active speech synthesis in multiple
@@ -542,7 +555,7 @@
             var offset;
 
             if ($paragraph.length > 0) {
-              offset     = Math.round($paragraph[0].offsetTop)
+              offset     = Math.round($paragraph[0].offsetTop);
             } else {
               offset     = undefined;
               $paragraph = undefined;
@@ -1699,7 +1712,7 @@
       // if not, exit the function.
       //
       if (arguments.length < 2) {
-        return this
+        return this;
       }
 
       var requestedVoice, requestedLanguage;
@@ -1744,7 +1757,7 @@
 
       return this;
     } // END setVoice
-  } // END public methods
+  }; // END public methods
 
   // main speak2me method
   //

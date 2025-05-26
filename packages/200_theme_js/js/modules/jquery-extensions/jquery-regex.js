@@ -18,6 +18,7 @@
 // ESLint shimming
 // -----------------------------------------------------------------------------
 /* eslint indent: "off"                                                       */
+/* eslint no-extra-semi: "off"                                                */
 /* eslint no-unused-vars: "off"                                               */
 /* eslint no-undef: "off"                                                     */
 // -----------------------------------------------------------------------------
@@ -25,7 +26,7 @@
 ;(function(hasClass) {
 
 	jQuery.fn.hasClass = function hasClassRegExp( selector ) {
-		if ( selector && typeof selector.test === "function" ) {
+		if ( selector && typeof selector.test === 'function' ) {
 			for ( var i = 0, l = this.length; i < l; i++ ) {
 				var classNames = this[i].className.split( /\s+/ );
 				for ( var c = 0, cl = classNames.length; c < cl; c++ ) {
@@ -38,14 +39,14 @@
 		} else {
 			return hasClass.call(this, selector);
 		}
-	}
+	};
 
 })(jQuery.fn.hasClass);
 
 ;(function(removeClass) {
 
 	jQuery.fn.removeClass = function( value ) {
-		if ( value && typeof value.test === "function" ) {
+		if ( value && typeof value.test === 'function' ) {
 			for ( var i = 0, l = this.length; i < l; i++ ) {
 				var elem = this[i];
 				if ( elem.nodeType === 1 && elem.className ) {
@@ -56,13 +57,13 @@
 							classNames.splice(n, 1);
 						}
 					}
-					elem.className = jQuery.trim( classNames.join(" ") );
+					elem.className = jQuery.trim( classNames.join(' ') );
 				}
 			}
 		} else {
 			removeClass.call(this, value);
 		}
 		return this;
-	}
+	};
 
 })(jQuery.fn.removeClass);

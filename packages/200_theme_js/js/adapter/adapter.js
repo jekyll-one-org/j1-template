@@ -21,7 +21,7 @@
 /* eslint no-undef: "off"                                                     */
 // -----------------------------------------------------------------------------
 
-"use strict";
+'use strict';
 module.exports = (function ( j1, window ) {
   return {
 

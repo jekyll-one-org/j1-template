@@ -22,11 +22,14 @@
 // -----------------------------------------------------------------------------
 // ESLint shimming
 // -----------------------------------------------------------------------------
+/* eslint indent: "off"                                                       */
+/* eslint semi: "off"                                                         */
 /* eslint no-redeclare: "off"                                                 */
+/* eslint no-unused-vars: "off"                                               */
 /* eslint no-undef: "off"                                                     */
 /* eslint no-empty: "off"                                                     */
-/* eslint semi: "off"                                                         */
 // -----------------------------------------------------------------------------
+
 /* globals location, requestAnimationFrame */
 
 exports.initSmoothScrolling = initSmoothScrolling
