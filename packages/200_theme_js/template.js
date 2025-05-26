@@ -41,11 +41,11 @@
 // Following objects (native node modules) are *explicitely* forced to be
 // exposed for run-time to the global namespace (window).
 // -----------------------------------------------------------------------------
-window.Cookies                          = require('js-cookie');
-window.yaml                             = require('js-yaml');
-window.log4javascript                   = require('log4javascript');
-window.liteURL                          = require('lite-url');
-window.platform                         = require('platform');
+window.Cookies               = require('js-cookie');
+window.yaml                  = require('js-yaml');
+window.log4javascript        = require('log4javascript');
+window.liteURL               = require('lite-url');
+window.platform              = require('platform');
 
 // Core Libraries - build|required from SOURCE
 // -----------------------------------------------------------------------------
@@ -53,37 +53,42 @@ window.platform                         = require('platform');
 // Following source objects|modules are *explicitely* forced to be
 // exposed for run-time to the global namespace (window).
 // -----------------------------------------------------------------------------
-// window.deeplTranslator               = require('./js/deepl-translator');     // J1 Module deeplAPI used instead
-// window.j1.fab                        = require('./js/fab/fab.js');           // cannot used until NOT rewritten to jQuery
-// window.ejs                           = require('./js/ejs/ejs.js');
-// window.j1.lazyCSSLoader              = require('./js/lazyCSS/lazyCSSLoader.js');
+// window.deeplTranslator    = require('./js/deepl-translator');                // J1 Module deeplAPI used instead
+// window.j1.fab             = require('./js/fab/fab.js');                      // cannot used until NOT rewritten to jQuery
+// window.ejs                = require('./js/ejs/ejs.js');                      // currently NOT used
+// window.j1.lazyCSSLoader   = require('./js/lazyCSS/lazyCSSLoader.js');        // currently NOT used
 
-window.j1.adapter                       = require('./js/adapter/adapter.js');
+window.j1.adapter            = require('./js/adapter/adapter.js');
 
-window.j1.api                           = require('./js/api/api.js');
-window.j1.api.anime                     = require('./js/anime/anime.js');       // added for fab
-window.j1.api.asciidoctor               = require('./js/asciidoctor/asciidoctor.js');
-window.j1.api.consoleFilters            = require('./js/console_filter/consoleFilters.js');
-window.j1.api.errorFilters              = require('./js/error_filter/errorFilters.js');
-window.j1.api.navigator                 = require('./js/navigator/navigator.js');
-window.j1.api.parseContent              = require('./js/speak2me/parse-content.js');
-window.j1.api.scrollSmooth              = require('./js/scroll-smooth/scroll-smooth.js');
+window.j1.api                = require('./js/api/api.js');
+window.j1.api.anime          = require('./js/api/anime/anime.js');       // added for fab
+window.j1.api.asciidoctor    = require('./js/api/asciidoctor/asciidoctor.js');
+window.j1.api.consoleFilters = require('./js/api/console_filter/consoleFilters.js');
+window.j1.api.errorFilters   = require('./js/api/error_filter/errorFilters.js');
+window.j1.api.navigator      = require('./js/api/navigator/navigator.js');
+window.j1.api.parseContent   = require('./js/api/speak2me/parse-content.js');
+window.j1.api.scrollSmooth   = require('./js/api/scroll-smooth/scroll-smooth.js');
 
-// window.j1.modules                    = {};                                   // placeholder object for all J1 Modules
+// window.j1.modules                    = {};                                   // currently NOT used, placeholder object for all J1 Modules
 
 // Following source objects|modules are *implicetly* forced to be
 // exposed for run-time to the global namespace (window).
 // -----------------------------------------------------------------------------
-// const J1Yaml                           = require('js-yaml');
-// const J1jQueryExt                      = require('./js/jquery-extensions/jquery-regex.js');
-// const J1ThemeSwitcher                  = require('./js/bs_theme_switcher/switcher.js');
-// const J1MmenuLight                     = require('./js/mmenu-light/mmenu.js');
-// const BootstrapJS                      = require('./node_modules/bootstrap/dist/js/bootstrap.js');
+// const J1Yaml              = require('js-yaml');
+// const J1jQueryExt         = require('./js/jquery-extensions/jquery-regex.js');
+// const J1ThemeSwitcher     = require('./js/bs_theme_switcher/switcher.js');
+// const J1MmenuLight        = require('./js/mmenu-light/mmenu.js');
+// const BootstrapJS         = require('./node_modules/bootstrap/dist/js/bootstrap.js');
 
-const J1Tocbot                            = require('./js/tocbot/tocbot.js');
-const J1AttrChangeListener                = require('./js/listen-attribute-changes/attrchange.js');
-const J1Speak2Me                          = require('./js/speak2me/speak2me.js');
-const J1SCarousel                         = require('./js/carousel/carousel.js');
+const J1Tocbot               = require('./js/tocbot/tocbot.js');
+const J1AttrChangeListener   = require('./js/jquery-extensions/attrchange.js');
+const J1Speak2Me             = require('./js/api/speak2me/speak2me.js');
+const J1SCarousel            = require('./js/carousel/carousel.js');
+
+// Additional Vanilla JS helpers
+// -----------------------------------------------------------------------------
+const J1AdocResultViewer     = require('./js/api/asciidoctor/view_results.js');
+
 
 // Passing log data over Internet|SeeMe (currently NOT used)
 // -----------------------------------------------------------------------------
@@ -117,11 +122,6 @@ const J1SCarousel                         = require('./js/carousel/carousel.js')
 // exposed for run-time to the namespace of jQuery ($).
 // -----------------------------------------------------------------------------
 // const J1Attics                       = require('./js/backstretch/backstretch.js');
-
-// Additional Vanilla JS helpers
-// -----------------------------------------------------------------------------
-const J1AdocResultViewer                = require('./js/adoc_result_viewer/view_results.js');
-// const MSIEPolyfills                  = require('./js/polyfills/ms-ie.js');
 
 // HMR messages  (currently NOT used)
 // -----------------------------------------------------------------------------

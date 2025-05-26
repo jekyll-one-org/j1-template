@@ -272,7 +272,7 @@ j1.adapter.amplitude = ((j1, window) => {
           logger.info('\n' + 'module is being initialized');
 
           // j1.api.errorFilters.filter();
-          // j1.api.consoleFilters.filter();
+          j1.api.consoleFilters.filter();
 
           // force an 'error' Event
           // forceError();
