@@ -1,0 +1,75 @@
+
+Ich habe für eine Webseite einen globalen Eventhandler eingerichtet. Löse
+ich innerhalb der Weibseite einen Fehler aus, z.B console.error("Test-Fehler")
+wird der Eventhandler nicht getriggert.
+
+Was kann der Grund dafür sein?
+
+Gemini
+--------------------------------------------------------------------------------
+
+Es gibt mehrere Gründe, warum Ihr globaler Eventhandler `window.addEventListener("error", ...)`
+möglicherweise nicht ausgelöst wird, wenn Sie `console.error("Test-Fehler")`
+auf Ihrer Webseite verwenden.
+
+**Die Hauptursache ist, dass `console.error()` *keinen* globalen `error`-Event
+auslöst, der von `window.addEventListener("error", ...)` abgefangen werden
+könnte.**
+
+Der `error`-Event, auf den `window.addEventListener("error", ...)` hört,
+wird typischerweise durch **Laufzeitfehler im JavaScript-Code** oder
+**Fehler beim Laden von Ressourcen** (wie Bilder oder Skripte) ausgelöst.
+
+**Hier sind die wahrscheinlichen Gründe und was Sie stattdessen tun können:**
+
+1.  **`console.error()` ist keine Fehlerbedingung im Sinne des `error`-Events:**
+    * `console.error()` ist eine Funktion, die eine Fehlermeldung in der Browser-Konsole ausgibt. Es signalisiert zwar ein Problem für Entwickler, führt aber nicht dazu, dass der Browser einen globalen `error`-Event feuert, den Ihr Eventlistener abfangen könnte.
+    * Der `error`-Event ist für tatsächliche JavaScript-Fehler (z.B. `TypeError`, `ReferenceError`) oder Probleme beim Laden von Assets gedacht.
+
+2.  **Unbehandelte Ausnahmen lösen `error`-Events aus:**
+    * Wenn in Ihrem JavaScript-Code ein Fehler auftritt, der nicht in einem `try...catch`-Block behandelt wird, dann löst der Browser einen globalen `error`-Event aus.
+
+    ```javascript
+    function verursacheFehler() {
+      throw new Error("Ein echter JavaScript-Fehler!");
+    }
+
+    window.addEventListener("error", (event) => {
+      console.log("Globaler Fehler gefangen:", event.message, event.filename, event.lineno);
+    });
+
+    verursacheFehler(); // Dies löst den 'error'-Event aus
+    ```
+
+3.  **Fehler beim Laden von Ressourcen lösen `error`-Events aus:**
+    * Wenn der Browser versucht, eine Ressource (z.B. ein Bild über ein `<img>`-Tag oder ein Skript über ein `<script src="...">`) zu laden und dies fehlschlägt, wird ebenfalls ein `error`-Event ausgelöst. Das `event`-Objekt enthält dann Informationen über das fehlgeschlagene Element.
+
+    ```html
+    <img src="nicht-existierende-datei.jpg" onerror="console.log('Bild konnte nicht geladen werden (inline)')">
+
+    <script>
+      window.addEventListener("error", (event) => {
+        if (event.target instanceof HTMLImageElement && event.target.src.includes('nicht-existierende-datei.jpg')) {
+          console.log("Globaler Fehler: Bild konnte nicht geladen werden (Event Listener)");
+        }
+      });
+    </script>
+    ```
+
+Zusammenfassung
+--------------------------------------------------------------------------------
+
+* Der `window.addEventListener("error", ...)`-Handler ist dafür gedacht, 
+  **unbehandelte JavaScript-Laufzeitfehler** und **Fehler beim Laden von
+  Ressourcen** abzufangen.
+* `console.error()` ist lediglich eine Funktion zur Ausgabe von
+   Fehlermeldungen in der Entwicklerkonsole und löst keinen globalen
+   `error`-Event aus.
+* Wenn Sie auf `console.error`-Aufrufe reagieren möchten, müssten Sie
+  die `console.error`-Funktion selbst überschreiben.
+
+Stellen Sie sicher, dass Sie den `error`-Event verwenden, um tatsächliche
+Fehler in Ihrem Code oder beim Laden von Ressourcen zu behandeln.
+Für reine Protokollierungszwecke ist `console.error()` das richtige Werkzeug,
+aber es interagiert nicht direkt mit dem globalen `error`-Event.
+

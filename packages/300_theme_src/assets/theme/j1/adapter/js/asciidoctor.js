@@ -120,7 +120,7 @@ j1.adapter.asciidoctor = ((j1, window) => {
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module is being initialized');
 
-        	j1.core.asciidoctor.init();
+        	j1.api.asciidoctor.init();
 
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());

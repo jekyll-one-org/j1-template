@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
- #  ~/js/adapter/adapter.js
- #  Provides an empty object for later loaded adapter objects
+ #  ~/js/api/j1API.js
+ #  Provides an empty object for later loaded API functios objects
  #
  #  Product/Info:
  #  https://jekyll.one
@@ -26,10 +26,10 @@ module.exports = (function ( j1, window ) {
   return {
 
     // -------------------------------------------------------------------------
-    // _init_
-    // Global initializer for the adapter object
+    // init
+    // Global initializer for the J1 API object
     // -------------------------------------------------------------------------
-    _init_: function () {
+    init: function () {
       return;
     }  // END _init_
 

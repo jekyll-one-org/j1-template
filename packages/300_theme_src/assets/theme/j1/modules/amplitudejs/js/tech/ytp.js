@@ -906,7 +906,13 @@ regenerate: true
             },
             events: {
               'onReady':                  {{player.id}}OnPlayerReady,
-              'onStateChange':            {{player.id}}OnPlayerStateChange
+              'onStateChange':            {{player.id}}OnPlayerStateChange,
+              'onError': (event) => {
+                // Unterdrücke den Fehler in der Konsole
+                event.preventDefault();
+                // Eigene Fehlerbehandlung (z.B. Logging)
+                console.log('YouTube Player Error:', event.data);
+              }              
             }
           });
 

@@ -1,0 +1,41 @@
+Wie kann man `console.error`-Meldungen "abfangen" 
+
+Gemini
+--------------------------------------------------------------------------------
+
+Wenn Sie protokollieren oder auf `console.error`-Ausgaben reagieren
+möchten, müssten Sie die `console.error`-Funktion selbst überschreiben:
+
+```javascript
+const originalConsoleError = console.error;
+
+console.error = function(message) {
+  // Führen Sie hier Ihre eigene Logik aus, z.B. eine zusätzliche Protokollierung
+  console.log("Benutzerdefinierte Fehlerbehandlung:", message);
+  // Rufen Sie die ursprüngliche console.error-Funktion auf, damit die Meldung weiterhin in der Konsole erscheint
+  originalConsoleError.apply(console, arguments);
+};
+
+console.error("Test-Fehler"); // Dies löst jetzt Ihre benutzerdefinierte Funktion aus
+```
+
+**Wichtiger Hinweis:**
+
+Das Überschreiben von Browser-Kernfunktionen wie `console.error` sollte
+mit Vorsicht erfolgen, da es potenziell das Verhalten anderer Skripte oder
+Browser-Erweiterungen beeinflussen kann. Verwenden Sie diese Technik nur,
+wenn Sie ein sehr spezifisches Bedürfnis haben, `console.error`-Ausgaben
+zu protokollieren oder zu verarbeiten.
+
+Zusammenfassung:
+--------------------------------------------------------------------------------
+
+* Der `window.addEventListener("error", ...)`-Handler ist dafür gedacht, **unbehandelte JavaScript-Laufzeitfehler** und **Fehler beim Laden von Ressourcen** abzufangen.
+* `console.error()` ist lediglich eine Funktion zur Ausgabe von Fehlermeldungen in der Entwicklerkonsole und löst keinen globalen `error`-Event aus.
+* Wenn Sie auf `console.error`-Aufrufe reagieren möchten, müssten Sie die `console.error`-Funktion selbst überschreiben.
+
+Stellen Sie sicher, dass Sie den `error`-Event verwenden, um tatsächliche
+Fehler in Ihrem Code oder beim Laden von Ressourcen zu behandeln.
+Für reine Protokollierungszwecke ist `console.error()` das richtige Werkzeug,
+aber es interagiert nicht direkt mit dem globalen `error`-Event.
+

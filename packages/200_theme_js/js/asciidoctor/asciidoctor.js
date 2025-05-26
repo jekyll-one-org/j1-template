@@ -44,7 +44,7 @@ module.exports = function asciidoctor (options) {
     init: function (options) {
 
       var moduleOptions       = options;
-      var logger              = log4javascript.getLogger('j1.core.asciidoctor');
+      var logger              = log4javascript.getLogger('j1.api.asciidoctor');
       var logText;
 
       var moduleDefaults = {
@@ -70,7 +70,7 @@ module.exports = function asciidoctor (options) {
       // If the colist does not have a <colgroup> structure
       //
     	if($('.colist > table > colgroup').length == 0) {
-        colgroupList += '<!-- [INFO   ] [j1.core.asciidoctor      ] [ place a colgroup dynamically ] -->' + '\n';
+        colgroupList += '<!-- [INFO   ] [j1.api.asciidoctor      ] [ place a colgroup dynamically ] -->' + '\n';
         colgroupList += '<colgroup> <col style="width: 5%;"> <col style="width: 95%;"> </colgroup>';
     		$(".colist > table").prepend(colgroupList);
       }

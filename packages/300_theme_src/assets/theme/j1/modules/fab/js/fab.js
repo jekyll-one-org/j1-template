@@ -470,5 +470,5 @@
 
   //  jadams, 2020-10-10: TODO: check if anime could be a replacement
   //  for (huge) animate.css
-// })($, j1.anime);
-})(cash, j1.anime);
+// })($, j1.api.anime);
+})(cash, j1.api.anime);
