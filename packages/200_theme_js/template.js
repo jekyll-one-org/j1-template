@@ -61,15 +61,14 @@ window.platform              = require('platform');
 window.j1.adapter            = require('./js/adapter/adapter.js');
 
 window.j1.api                = require('./js/api/api.js');
-window.j1.api.anime          = require('./js/api/anime/anime.js');       // added for fab
+window.j1.api.anime          = require('./js/api/anime/anime.js');              // added for fab
 window.j1.api.asciidoctor    = require('./js/api/asciidoctor/asciidoctor.js');
 window.j1.api.consoleFilters = require('./js/api/console_filter/consoleFilters.js');
 window.j1.api.errorFilters   = require('./js/api/error_filter/errorFilters.js');
 window.j1.api.navigator      = require('./js/api/navigator/navigator.js');
-window.j1.api.parseContent   = require('./js/api/speak2me/parse-content.js');
 window.j1.api.scrollSmooth   = require('./js/api/scroll-smooth/scroll-smooth.js');
 
-// window.j1.modules                    = {};                                   // currently NOT used, placeholder object for all J1 Modules
+// window.j1.modules         = {};                                              // currently NOT used, placeholder object for all J1 Modules
 
 // Following source objects|modules are *implicetly* forced to be
 // exposed for run-time to the global namespace (window).
@@ -83,7 +82,7 @@ window.j1.api.scrollSmooth   = require('./js/api/scroll-smooth/scroll-smooth.js'
 const J1Tocbot               = require('./js/modules/tocbot/tocbot.js');
 const J1AttrChangeListener   = require('./js/modules/jquery-extensions/attrchange.js');
 const J1SCarousel            = require('./js/modules/carousel/carousel.js');
-const J1Speak2Me             = require('./js/api/speak2me/speak2me.js');
+const J1Speak2Me             = require('./js/modules/jquery-extensions/speak2me/speak2me.js');
 
 // Additional Vanilla JS helpers
 // -----------------------------------------------------------------------------
