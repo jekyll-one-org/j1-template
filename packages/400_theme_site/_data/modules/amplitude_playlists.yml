@@ -1408,8 +1408,8 @@ settings:
           <<:                           *album_from_dusk_to_dawn
           title:                        First Snow
           rating:                       2
-          start:                        false                                   # "00:01:00"
-          end:                          false                                   # "00:01:10"
+          start:                        "00:01:00"                              # false | "00:01:00"
+          end:                          "00:01:20"                              # false | "00:01:10"
           audio:                        FirstSnow.mp3
           audio_info:                   //emancipator.bandcamp.com/
           cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn/soon-it-will-be-cold-enough.jpg

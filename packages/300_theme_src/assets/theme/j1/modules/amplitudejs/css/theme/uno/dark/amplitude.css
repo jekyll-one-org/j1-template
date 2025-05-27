@@ -118,7 +118,7 @@ a {
   background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/volume.svg") no-repeat;
 }
 
-/*
+/* for technical reasons (currently) NOT globally defined
 .amplitude-paused {
   background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/play.svg") no-repeat;
 }
@@ -155,6 +155,12 @@ a {
   background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/repeat-on.svg") no-repeat;
 }
 
+.player-title-list {
+  margin-bottom: 0px;
+  padding-left: 0px;
+  max-height: 540px;
+  overflow-y: scroll;  
+}
 
 .title-number {
   display: inline-flex;
@@ -177,16 +183,16 @@ a {
   background-color: var(--ajs-theme-uno--blue-gray-500);
   background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0.5, var(--ajs-theme-uno--lighten-200)), color-stop(0.5, transparent), to(transparent));
 }
-.amplitude-scroller-gradient::-webkit-scrollbar {
+.playlist-scroller-gradient::-webkit-scrollbar {
   width: 10px;
   background-color: var(--ajs-theme-uno--gray-100);
 }
-.amplitude-scroller-gradient::-webkit-scrollbar-track {
+.playlist-scroller-gradient::-webkit-scrollbar-track {
   border-radius: 0px;
   -webkit-box-shadow: inset 0 0 6px var(--ajs-theme-uno--darken-300);
   background-color: var(--ajs-theme-uno--gray-100);
 }
-.amplitude-scroller-gradient::-webkit-scrollbar-thumb {
+.playlist-scroller-gradient::-webkit-scrollbar-thumb {
   border-radius: 0px;
   background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.44, var(--ajs-theme-uno--blue-300)), color-stop(0.72, var(--ajs-theme-uno--blue)), color-stop(0.86, var(--ajs-theme-uno--blue-900)));
 }

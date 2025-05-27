@@ -152,8 +152,8 @@ overwhelming or dominating the content around it.
 .Emancipator · From Dusk To Dawn
 amplitude::emancipator_compact[role="mb-4"]
 
-// .Royalty Free Music · Disco 80th
-// amplitude::disco_compact[role="mb-5"]
+.Royalty Free Music · Disco 80th
+amplitude::disco_compact[role="mb-4"]
 
 The player aims to balance functionality and space efficiency, ensuring users
 can easily access and control the audio playback without sacrificing too much

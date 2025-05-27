@@ -346,12 +346,6 @@ input[type=range].amplitude-volume-slider {
   margin-right: -32px !important;
 }
 
-.compact-player-title-list {
-  width: 100%;
-  height: 680px;
-  overflow-y: scroll;
-}
-
 .compact-player-title-list
 .song {
   padding: 15px;

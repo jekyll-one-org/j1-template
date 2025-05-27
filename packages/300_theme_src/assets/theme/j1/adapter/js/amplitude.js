@@ -862,117 +862,37 @@ j1.adapter.amplitude = ((j1, window) => {
       // -----------------------------------------------------------------------
       // processOnStateChangePlaying()
       //
-      // wrraper to update the ACTIVE player on state PLAYING
+      // wrraper to process the ACTIVE player on state PLAYING
       // -----------------------------------------------------------------------      
       function processOnStateChangePlaying(state) {
-        var playList, activePlayist, playerID, playerType,
-            activePlayerType, startVolume, songIndex, trackID,
-            ratingIndex, rating, ratingElement, songMetaData,
-            songStartTS, songEndTS, songStartSec, songEndSec,
-            screenControlRatingElements, screenControlRating;
+        var songMetaData, songIndex,  playList, trackID;
 
         songMetaData  = Amplitude.getActiveSongMetadata();
         songIndex     = songMetaData.index;
         playList      = Amplitude.getActivePlaylist();
         trackID       = songIndex + 1;
-        songStartTS   = songMetaData.start;
-        songEndTS     = songMetaData.end;
-        songStartSec  = timestamp2seconds(songStartTS);
-        songEndSec    = timestamp2seconds(songEndTS);
-        startVolume   = Amplitude.getVolume();
 
         logger.debug(`PLAY audio on processOnStateChangePlaying for playlist \'${playList}\' at trackID|state: ${trackID}|${AT_PLAYER_STATE_NAMES[state]}`);
 
         // update song rating in playlist-screen|meta-container
-        // -------------------------------------------------------------------
-        j1.adapter.amplitude.atUpdateSongRating(Amplitude.getActiveSongMetadata());
+        // ---------------------------------------------------------------------
+        _this.atUpdateSongRating(songMetaData);
 
         // scroll active song in players playlist
         // ---------------------------------------------------------------------
-        j1.adapter.amplitude.atPlayerScrollToActiveElement(Amplitude.getActiveSongMetadata());
+        _this.atPlayerScrollToActiveElement(songMetaData);
 
         // stop active YT players
-        // -----------------------------------------------
-        const ytPlayers = Object.keys(j1.adapter.amplitude.data.ytPlayers);
-        for (let i=0; i<ytPlayers.length; i++) {
-          const playerID = ytPlayers[i];
-          const playerProperties = j1.adapter.amplitude.data.ytPlayers[playerID];
-          logger.debug('process player id: ' + playerID);
-          var ytpPlayer       = j1.adapter.amplitude.data.ytPlayers[playerID].player;
-          var playerState     = ytpPlayer.getPlayerState();
-          var ytpPlayerState  = YT_PLAYER_STATE_NAMES[playerState];
+        // ---------------------------------------------------------------------
+        _this.ytStopActivePlayers(j1.adapter.amplitude.data.ytPlayers);
 
-          if (ytpPlayerState === 'playing' || ytpPlayerState === 'paused' || ytpPlayerState === 'buffering') {
-            logger.debug('process player id: ' + playerID + ' stopped');
-            ytpPlayer.stopVideo();
-          }
-        }
+        // process audio for AT players at configured START position
+        // ---------------------------------------------------------------------
+        _this.atpProcessAudioStartPosition();
 
-        // process audio for configured START position
-        // -------------------------------------------------------------------
-        var checkIsFading = setInterval (() => {
-          if (!isFadingIn) {
-            var currentAudioTime = Amplitude.getSongPlayedSeconds();
-            if (songStartSec && currentAudioTime <= songStartSec) {
-              var songDurationSec = timestamp2seconds(songMetaData.duration); 
-
-              // seek audio to configured START position
-              // NOTE: use setSongPlayedPercentage for seeking to NOT
-              //       generation any addition state changes like stopped
-              //       or playing
-              logger.debug('seek audio in on playlist: ' + playList + ' at|to trackID|timestamp: ' + trackID + '|' + songStartTS);
-              Amplitude.setSongPlayedPercentage((songStartSec / songDurationSec) * 100);
-
-              // fade-in audio (if enabled)
-              var fadeAudioIn = (songMetaData.audio_fade_in === 'true') ? true : false;
-              if (fadeAudioIn) {
-                logger.debug('faden audio in on playlist: ' + playList + ' at|to trackID|timestamp: ' + trackID + '|' + songStartTS);
-                atpFadeInAudio({ playerID: playerID });
-              } // END if fadeAudio
-
-            } // END if songStartSec
-
-            clearInterval(checkIsFading);
-          }
-        }, 100); // END checkIsFading
-
-        // check|process audio for configured END position
-        // -------------------------------------------------------------------
-        if (songEndSec > songStartSec) {
-          var checkIsOnVideoEnd = setInterval(() => {
-
-            if (!isFadingOut) {              
-              var currentAudioTime  = Amplitude.getSongPlayedSeconds();
-              var songMetaData      = Amplitude.getActiveSongMetadata();
-              var songEndTS         = songMetaData.end;
-              var songEndSec        = timestamp2seconds(songEndTS);
-
-              if (currentAudioTime > songEndSec) {                
-                songMetaData  = Amplitude.getActiveSongMetadata();             
-                songIndex     = songMetaData.index;
-                trackID       = songIndex + 1;
-
-                // seek audio out to total end END position
-                // NOTE: use setSongPlayedPercentage for seeking to NOT
-                //       generation any addition state changes like stopped
-                //       or playing                  
-                logger.debug('seek audio out to end on playlist: ' + playList + ' at trackID|timestamp: ' + trackID + '|' + songEndTS);
-                Amplitude.setSongPlayedPercentage(99.99);
-                
-                // fade-out audio (if enabled)
-                var fadeAudioOut = (songMetaData.audio_fade_out === 'true') ? true : false;
-                if (fadeAudioOut) {
-                  logger.debug('fade audio out on playlist: ' + playList + ' at|to trackID|timestamp: ' + trackID + '|' + songEndTS);
-                  atpFadeAudioOut({ playerID: playerID });
-                } // END if fadeAudio
-
-                clearInterval(checkIsOnVideoEnd);
-              } // END if currentAudioTime
-
-            } // END if !isFading
-
-          }, 100); // END checkIsOnVideoEnd
-        } // END if songEndSec
+        // process audio for AT players at configured END position
+        // ---------------------------------------------------------------------
+        _this.atpProcessAudioEndPosition();
 
         // save YT player data for later use (e.g. events)
         // ---------------------------------------------------------------------
@@ -1527,7 +1447,6 @@ j1.adapter.amplitude = ((j1, window) => {
                         }
                       } // END for
 
-
                       {% comment %} PREPARED event listener for LATER use
                       ----------------------------------------------------------
                       // add listeners to all Next Buttons found (LARGE player)
@@ -1679,7 +1598,7 @@ j1.adapter.amplitude = ((j1, window) => {
 
                         // show|hide scrollbar in playlist
                         // -----------------------------------------------------
-                        var songsInPlaylist = Amplitude.getSongsInPlaylist(playListName);
+                        const songsInPlaylist = Amplitude.getSongsInPlaylist(playListName);
                         if (songsInPlaylist.length <= playerScrollerSongElementMin) {
                           const titleListLargePlayer = document.getElementById('large_player_title_list_' + playListName);
                           if (titleListLargePlayer !== null) {
@@ -1965,38 +1884,147 @@ j1.adapter.amplitude = ((j1, window) => {
     // atUpdateSongRating(playlist, rating)
     //
     // update song rating in playlist-screen|meta-container
+    // for all (compact|large) players
     // -------------------------------------------------------------------------
     atUpdateSongRating: (metaData) => {
-      var screenControlRating         = null;
+      var activePlayist   = metaData.playlist;
+      var rating          = parseInt(metaData.rating);
+
+      if (!rating) { return; }
+
       var screenControlRatingElements = document.getElementsByClassName('audio-rating-screen-controls');
-      var ratingIndex;
-
       for (let i=0; i<screenControlRatingElements.length; i++) {
-        var ratingElement     = screenControlRatingElements[i];
-        var rating            = parseInt(metaData.rating);
-        var playerType        = ratingElement.dataset.playerType;
-        var activePlayerType  = j1.adapter.amplitude.data.atpGlobals.activePlayerType;
-        var activePlayist     = metaData.playlist;
-
-        if (ratingElement.dataset.amplitudePlaylist === activePlayist && playerType === activePlayerType) {
-          ratingIndex = i;
-          screenControlRating = ratingElement;
-          break;
-        }
-
-      }
-
-      // set the rating for ACTIVE screenControlRatingElement
-      // -----------------------------------------------------------------------
-      if (screenControlRating) {
-        if (rating) {
+        var ratingElement = screenControlRatingElements[i];
+        if (ratingElement.dataset.amplitudePlaylist === activePlayist && ratingElement.classList.contains('audio-rating-screen-controls')) {          
           ratingElement.innerHTML = '<img src="/assets/image/pattern/rating/scalable/' + rating + '-star.svg"' + 'alt="song rating">';
-        } else {
-          ratingElement.innerHTML = '';
         }
       }
 
     }, // END atUpdateSongRating
+
+    // -------------------------------------------------------------------------
+    // ytStopActivePlayers(players)
+    //
+    // stop active YT players (running in parallel to AT players)
+    // -------------------------------------------------------------------------
+    ytStopActivePlayers: (players) => {
+      var ytPlayer, playerState, ytPlayerState;
+
+      const ytPlayers = Object.keys(players);
+      for (let i=0; i<ytPlayers.length; i++) {
+        const playerID          = ytPlayers[i];
+        const playerProperties  = players.playerID;        
+
+        ytPlayer      = players[playerID].player;
+        playerState   = ytPlayer.getPlayerState();
+        ytPlayerState = YT_PLAYER_STATE_NAMES[playerState];
+
+        if (ytPlayerState === 'playing' || ytPlayerState === 'paused' || ytPlayerState === 'buffering') {
+          logger.debug(`STOP YT player on id: ${playerID}`);
+          ytPlayer.stopVideo();
+        }
+      }
+
+    }, // END ytStopActivePlayers
+
+    // -------------------------------------------------------------------------
+    // atpProcessAudioStartPosition()
+    //
+    // process audio for configured START position
+    // -------------------------------------------------------------------------
+    atpProcessAudioStartPosition: () => {
+      var songMetaData, songIndex, playList,
+          songStartSec, songStartTS, trackID;
+
+      songMetaData  = Amplitude.getActiveSongMetadata();
+      songIndex     = songMetaData.index;
+      songStartTS   = songMetaData.start;
+      songStartSec  = timestamp2seconds(songStartTS);
+      playList      = Amplitude.getActivePlaylist();
+      trackID       = songIndex + 1;
+
+      if (!songStartSec) {
+        return;
+      }
+
+      var checkIsFading = setInterval (() => {
+        if (!isFadingIn) {
+          var currentAudioTime = Amplitude.getSongPlayedSeconds();
+          if (songStartSec && currentAudioTime <= songStartSec) {
+            var songDurationSec = timestamp2seconds(songMetaData.duration); 
+
+            // seek audio to configured START position
+            // NOTE: use setSongPlayedPercentage for seeking to NOT
+            //       generation any addition state changes like stopped
+            //       or playing
+            logger.debug('seek audio in on playlist: ' + playList + ' at|to trackID|timestamp: ' + trackID + '|' + songStartTS);
+            Amplitude.setSongPlayedPercentage((songStartSec / songDurationSec) * 100);
+
+            // fade-in audio (if enabled)
+            var fadeAudioIn = (songMetaData.audio_fade_in === 'true') ? true : false;
+            if (fadeAudioIn) {
+              logger.debug('faden audio in on playlist: ' + playList + ' at|to trackID|timestamp: ' + trackID + '|' + songStartTS);
+              atpFadeInAudio({ playerID: playerID });
+            } // END if fadeAudio
+
+          } // END if songStartSec
+
+          clearInterval(checkIsFading);
+        }
+      }, 100); // END checkIsFading
+    }, // END atpProcessAudioStartPosition      
+
+    // -------------------------------------------------------------------------
+    // atpProcessAudioEndPosition()
+    //
+    // process audio for configured END position
+    // -------------------------------------------------------------------------
+    atpProcessAudioEndPosition: () => {
+      var songMetaData, songIndex, playList,
+          songStartSec, songStartTS, songEndSec, songEndTS,
+          trackID;
+
+      songMetaData  = Amplitude.getActiveSongMetadata();
+      songIndex     = songMetaData.index;
+      songStartTS   = songMetaData.start;
+      songStartSec  = timestamp2seconds(songStartTS);      
+      songEndTS     = songMetaData.end;
+      songEndSec    = timestamp2seconds(songEndTS);
+      playList      = Amplitude.getActivePlaylist();
+      trackID       = songIndex + 1;
+
+      if (songEndSec > songStartSec) {
+        var checkIsOnVideoEnd = setInterval(() => {
+          if (!isFadingOut) {              
+            var currentAudioTime = Amplitude.getSongPlayedSeconds();
+            if (currentAudioTime >= songEndSec) {                
+              songMetaData  = Amplitude.getActiveSongMetadata();             
+              songIndex     = songMetaData.index;
+              trackID       = songIndex + 1;
+
+              // seek audio out to END position
+              // NOTE:
+              // ---------------------------------------------------------------
+              // use setSongPlayedPercentage for seeking to NOT
+              // generation any addition state changes like stopped
+              // or playing                  
+              logger.debug('seek audio to end on playlist: ' + playList + ' at trackID|timestamp: ' + trackID + '|' + songEndTS);
+              Amplitude.setSongPlayedPercentage(99.99);
+              
+              // fade-out audio (if enabled)
+              var fadeAudioOut = (songMetaData.audio_fade_out === 'true') ? true : false;
+              if (fadeAudioOut) {
+                logger.debug('fade audio out on playlist: ' + playList + ' at|to trackID|timestamp: ' + trackID + '|' + songEndTS);
+                atpFadeAudioOut({ playerID: playerID });
+              } // END if fadeAudio
+
+              clearInterval(checkIsOnVideoEnd);
+            } // END if currentAudioTime
+          } // END if !isFading
+        }, 100); // END checkIsOnVideoEnd
+      } // END if songEndSec
+
+    }, // END atpProcessAudioEndPosition     
 
     // -------------------------------------------------------------------------
     // messageHandler()

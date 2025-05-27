@@ -218,6 +218,7 @@
   border-color: var(--ajs-theme-uno--medium-silver);
   background-color: var(--ajs-theme-uno--darker-silver) !important;
 }
+
 .amplitude-song-container img.now-playing {
   display: none;
 }

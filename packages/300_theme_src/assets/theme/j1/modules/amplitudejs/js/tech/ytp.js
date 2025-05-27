@@ -299,7 +299,7 @@ regenerate: true
   // ---------------------------------------------------------------------------
   // processOnStateChangePlaying()
   //
-  // wrraper for processing on stae PLAYING 
+  // wrapper for processing players on state PLAYING 
   // ---------------------------------------------------------------------------
   function processOnStateChangePlaying(event, playlist, songIndex) {
     var activeSong, playlist, playerID, videoID,
@@ -376,51 +376,55 @@ regenerate: true
       }, 500); // END checkOnVideoEnd
     } // END if songEndEnabled
 
-    // stop active AT players running in parallel
-    // -------------------------------------------------------------------------
-    var atpPlayerState = Amplitude.getPlayerState();
-    if (atpPlayerState === 'playing') {
-      Amplitude.stop();
+    // stop active AT|YT players running in parallel except the current
+    stopAllParallelActivePlayers(playerID);
 
-      // clear button MINI PlayerPlayPause (AT player)
-      var buttonPlayerPlayPauseMini = document.getElementsByClassName("mini-player-play-pause");
-      for (var i=0; i<buttonPlayerPlayPauseMini.length; i++) {
-        var htmlElement = buttonPlayerPlayPauseMini[i];
-        
-        if (htmlElement.dataset.amplitudeSource === 'audio') {
+    // clear button MINI PlayerPlayPause (AT player)
+    var buttonPlayerPlayPauseMini = document.getElementsByClassName("mini-player-play-pause");
+    for (var i=0; i<buttonPlayerPlayPauseMini.length; i++) {
+      var htmlElement = buttonPlayerPlayPauseMini[i];
+
+      // toggle classes on state playing
+      if (htmlElement.dataset.amplitudeSource === 'audio') {
+        if (htmlElement.classList.contains('amplitude-playing')) {        
           htmlElement.classList.remove('amplitude-playing');
           htmlElement.classList.add('amplitude-paused');
         }
-    
-      } // END for MINI buttonPlayerPlayPause
+      }
+  
+    } // END for MINI buttonPlayerPlayPause
 
-      // clear button COMPACT PlayerPlayPause (AT player)
-      var buttonPlayerPlayPauseCompact = document.getElementsByClassName("compact-player-play-pause");
-      for (var i=0; i<buttonPlayerPlayPauseCompact.length; i++) {
-        var htmlElement = buttonPlayerPlayPauseCompact[i];
-        
-        if (htmlElement.dataset.amplitudeSource === 'audio') {
+    // clear button COMPACT PlayerPlayPause (AT player)
+    var buttonPlayerPlayPauseCompact = document.getElementsByClassName("compact-player-play-pause");
+    for (var i=0; i<buttonPlayerPlayPauseCompact.length; i++) {
+      var htmlElement = buttonPlayerPlayPauseCompact[i];
+      
+      // toggle classes on state playing
+      if (htmlElement.dataset.amplitudeSource === 'audio') {
+        if (htmlElement.classList.contains('amplitude-playing')) {
           htmlElement.classList.remove('amplitude-playing');
           htmlElement.classList.add('amplitude-paused');
         }
-    
-      } // END for COMACT buttonPlayerPlayPause
+      }
+  
+    } // END for COMACT buttonPlayerPlayPause
 
-      // clear button LARGE PlayerPlayPause (AT player)
-      var buttonPlayerPlayPauseLarge = document.getElementsByClassName("large-player-play-pause");
-      for (var i=0; i<buttonPlayerPlayPauseLarge.length; i++) {
-        var htmlElement = buttonPlayerPlayPauseLarge[i];
-        
-        if (htmlElement.dataset.amplitudeSource === 'audio') {
+    // clear button LARGE PlayerPlayPause (AT player)
+    var buttonPlayerPlayPauseLarge = document.getElementsByClassName("large-player-play-pause");
+    for (var i=0; i<buttonPlayerPlayPauseLarge.length; i++) {
+      var htmlElement = buttonPlayerPlayPauseLarge[i];
+
+      // toggle classes on state playing
+      if (htmlElement.dataset.amplitudeSource === 'audio') {
+        if (htmlElement.classList.contains('amplitude-playing')) {
           htmlElement.classList.remove('amplitude-playing');
           htmlElement.classList.add('amplitude-paused');
         }
+      }
 
-      } // END for LARGE buttonPlayerPlayPause
+    } // END for LARGE buttonPlayerPlayPause
 
-    } // END if atpPlayerState 'playing'
   } // END processOnStateChangePlaying
-
 
   // ---------------------------------------------------------------------------
   // processOnStateChangeEnded()
@@ -1109,7 +1113,6 @@ regenerate: true
 
   } // END onYouTubeIframeAPIReady
 
-
   // ---------------------------------------------------------------------------
   // main
   // ===========================================================================
@@ -1127,7 +1130,6 @@ regenerate: true
   // setup YTPlayerUiEvents for AJS players  
   // ---------------------------------------------------------------------------
   initUiEventsForAJS();
-
 
   // ---------------------------------------------------------------------------
   // Base AJS Player functions
@@ -1219,21 +1221,21 @@ regenerate: true
   } // END loadCoverImage
 
   // ---------------------------------------------------------------------------
-  // stopAllActivePlayers(exceptPlayer)
+  // stopAllParallelActivePlayers(exceptPlayer)
   //
   // if multiple players used on a page, stop ALL active AT|YT players
-  // running in parallel execpet the exceptPlayer
+  // running in parallel skipping the exceptPlayer
   // ---------------------------------------------------------------------------  
-  function stopAllActivePlayers(exceptPlayer) {
+  function stopAllParallelActivePlayers(exceptPlayer) {
 
-    // stop active AT players
+    // stop active AT players running in parallel
     // -------------------------------------------------------------------------
-    var atpPlayerState = Amplitude.getPlayerState();
-    if (atpPlayerState === 'playing') {
+    var atPlayerState = Amplitude.getPlayerState();
+    if (atPlayerState === 'playing' || atPlayerState === 'paused') {
       Amplitude.stop();
     } // END stop active AT players
 
-    // stop active YT players
+    // stop active YT players running in parallel
     // -------------------------------------------------------------------------
     const ytPlayers = Object.keys(j1.adapter.amplitude.data.ytPlayers);
     for (let i=0; i<ytPlayers.length; i++) {
@@ -1246,8 +1248,8 @@ regenerate: true
         var ytPlayerState = YT_PLAYER_STATE_NAMES[playerState];
 
         // if (ytPlayerState === 'playing' || ytPlayerState === 'paused' || ytPlayerState === 'buffering' || ytPlayerState === 'cued' || ytPlayerState === 'unstarted') {
-        if (ytPlayerState === 'playing' || ytPlayerState === 'paused' || ytPlayerState === 'buffering' || ytPlayerState === 'cued' || ytPlayerState === 'unstarted') {
-          logger.debug(`STOP player at stopAllActivePlayers for id: ${ytPlayerID}`);
+        if (ytPlayerState === 'playing' || ytPlayerState === 'paused') {
+          logger.debug(`STOP player at stopAllParallelActivePlayers for id: ${ytPlayerID}`);
           // player.mute();
           player.stopVideo();
           j1.adapter.amplitude.data.ytpGlobals.activeIndex = 0;
@@ -1255,7 +1257,7 @@ regenerate: true
       }
     } // END stop active YT players
 
-  } // END stopAllActivePlayers
+  } // END stopAllParallelActivePlayers  // END stopAllActivePlayers
 
   // ---------------------------------------------------------------------------
   // getSongPlayed
@@ -2056,8 +2058,9 @@ regenerate: true
 
           if (classString.includes(ytPlayerID)) {
             largePlayerPlayPauseButton[i].addEventListener('click', function(event) {
-              var activeSongSettings, songs, songMetaData, ytPlayer,
-                  playlist, playerID, songIndex;
+              var activeSongSettings, songs, songMetaData, playerData,
+                  ytPlayer, playerState, ytPlayerState, playlist,
+                  playerID, songIndex;
 
               playlist            = this.getAttribute("data-amplitude-playlist");
               playerID            = playlist + '_large';
@@ -2098,35 +2101,32 @@ regenerate: true
               checkActiveVideoElementYTP();
 
               // get active song settings (manually)
-              activeSongSettings  = getActiveSong();
-              if (!activeSongSettings) {
-                var metaData  = j1.adapter.amplitude.data.ytPlayers[playerID];
-                songIndex     = metaData.activeIndex;
-                songs         = metaData.songs;
-                songMetaData  = songs[songIndex];
-                ytPlayer      = metaData.player;                   
-              } else {
-                songs         = activeSongSettings.songs;
-                songMetaData  = songs[songIndex];
-                ytPlayer      = activeSongSettings.player;                  
-              }
+              // activeSongSettings  = getActiveSong();
+
+              playerData    = j1.adapter.amplitude.data.ytPlayers[playerID];
+              ytPlayer      = playerData.player;
+              songIndex     = playerData.activeIndex;
+              songs         = playerData.songs;
 
               // update meta data
-              updatMetaContainers(songMetaData);              
+              // songMetaData = songs[songIndex];
+              // updatMetaContainers(songMetaData);              
 
               // save player GLOBAL data for later use (e.g. events)
               j1.adapter.amplitude.data.activePlayer                 = 'ytp';
               j1.adapter.amplitude.data.ytpGlobals['activeIndex']    = songIndex;
               j1.adapter.amplitude.data.ytpGlobals['activePlaylist'] = playlist;
 
-              // YT play|pause video
+              // toggle YT play|pause video
               // ---------------------------------------------------------------
-              var playerState   = ytPlayer.getPlayerState();
-              if (playerState < 0) {
-                var ytPlayerState = YT_PLAYER_STATE_NAMES[6];
-              } else {
-                var ytPlayerState = YT_PLAYER_STATE_NAMES[playerState];
-              }
+              playerState   = ytPlayer.getPlayerState();
+              ytPlayerState = (playerState < 0) ? YT_PLAYER_STATE_NAMES[6] : YT_PLAYER_STATE_NAMES[playerState];
+
+              // if (playerState < 0) {
+              //   var ytPlayerState = YT_PLAYER_STATE_NAMES[6];
+              // } else {
+              //   var ytPlayerState = YT_PLAYER_STATE_NAMES[playerState];
+              // }
 
               // TOGGLE state 'playing' => 'paused'
               if (ytPlayerState === 'playing') {

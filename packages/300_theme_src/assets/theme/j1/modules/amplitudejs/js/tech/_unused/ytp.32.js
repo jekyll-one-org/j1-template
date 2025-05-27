@@ -433,7 +433,10 @@ regenerate: true
     //   }      
     // }
     //
-    // stopAllActivePlayers(playerID);
+    // ytpStopParallelActivePlayers(playerID);
+
+    // stop active YT players running in parallel except the current
+    ytpStopParallelActivePlayers(playerID);
 
   } // END processOnStateChangePlaying
 
@@ -1257,21 +1260,21 @@ regenerate: true
   } // END loadCoverImage
 
   // ---------------------------------------------------------------------------
-  // stopAllActivePlayers(exceptPlayer)
+  // stopAllParallelActivePlayers(exceptPlayer)
   //
   // if multiple players used on a page, stop ALL active AT|YT players
-  // running in parallel execpet the exceptPlayer
+  // running in parallel skipping the exceptPlayer
   // ---------------------------------------------------------------------------  
-  function stopAllActivePlayers(exceptPlayer) {
+  function stopAllParallelActivePlayers(exceptPlayer) {
 
-    // stop active AT players
+    // stop active AT players running in parallel
     // -------------------------------------------------------------------------
     var atpPlayerState = Amplitude.getPlayerState();
     if (atpPlayerState === 'playing') {
       Amplitude.stop();
     } // END stop active AT players
 
-    // stop active YT players
+    // stop active YT players running in parallel
     // -------------------------------------------------------------------------
     const ytPlayers = Object.keys(j1.adapter.amplitude.data.ytPlayers);
     for (let i=0; i<ytPlayers.length; i++) {
@@ -1285,7 +1288,7 @@ regenerate: true
 
         // if (ytPlayerState === 'playing' || ytPlayerState === 'paused' || ytPlayerState === 'buffering' || ytPlayerState === 'cued' || ytPlayerState === 'unstarted') {
         if (ytPlayerState === 'playing' || ytPlayerState === 'paused' || ytPlayerState === 'buffering' || ytPlayerState === 'cued' || ytPlayerState === 'unstarted') {
-          logger.debug(`STOP player at stopAllActivePlayers for id: ${ytPlayerID}`);
+          logger.debug(`STOP player at ytpStopParallelActivePlayers for id: ${ytPlayerID}`);
           // player.mute();
           player.stopVideo();
           j1.adapter.amplitude.data.ytpGlobals.activeIndex = 0;
@@ -1293,7 +1296,7 @@ regenerate: true
       }
     } // END stop active YT players
 
-  } // END stopAllActivePlayers
+  } // END stopAllParallelActivePlayers
 
   // ---------------------------------------------------------------------------
   // getSongPlayed
@@ -2382,8 +2385,8 @@ regenerate: true
                 logger.error('YT player not defined');
               }
 
-              // stop active AT|YT players except the current
-              // stopAllActivePlayers(playerID);
+              // stop active YT players except the current
+              ytpStopParallelActivePlayers(playerID);
 
               // select video
               if (songIndex < songs.length-1) {
@@ -2507,7 +2510,7 @@ regenerate: true
             }
 
             // stop active AT|YT players except the current
-            // stopAllActivePlayers(playerID);
+            // ytpStopParallelActivePlayers(playerID);
 
             // select video
             if (songIndex > 0 && songIndex <= songs.length - 1) {

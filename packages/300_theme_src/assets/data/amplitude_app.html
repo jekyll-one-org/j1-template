@@ -414,61 +414,59 @@ exclude_from_search:                    true
               </div>
               {% endif %}
             </div> <!-- END playlist controls -->
-            
 
             <!-- START playlist items (COMPACT player )-->
-            <div
+            <ul
               id="compact_player_title_list_{{player_playlist}}"
-              class="amplitude-scroller-gradient compact-player-title-list">
+              class="compact-player-title-list player-title-list playlist-scroller-gradient">
               {% for item in playlist_items %}{% if item.enabled %}
+              <li>
               <!-- START list item -->
-              <div
-                class="amplitude-song-container-compact-player song amplitude-song-container amplitude-play-pause amplitude-paused"
-                data-amplitude-source="{{source_media_attribute}}"
-                data-amplitude-song-index="{{forloop.index0}}"
-                data-amplitude-playlist="{{player_playlist}}">
-
-                <span class="song-number-now-playing">
-                  <span class="title-number">
-                    {{forloop.index}}
-                    <img
-                      class="now-playing"
-                      src="/assets/theme/j1/modules/amplitudejs/icons/player/dark/now-playing.svg"
-                      alt="now-playing">
-                  </span>
-                </span>
-
                 <div
-                  class="playlist-song-meta song-meta-container"
+                  class="amplitude-song-container-compact-player song amplitude-song-container amplitude-play-pause amplitude-paused"
                   data-amplitude-source="{{source_media_attribute}}"
+                  data-amplitude-song-index="{{forloop.index0}}"
                   data-amplitude-playlist="{{player_playlist}}">
 
-                  <span class="song-name">{{item.title}}</span>
-                  <span class="song-artist-album">
-                    <span>{{item.artist}}</span>
+                  <span class="song-number-now-playing">
+                    <span class="title-number">
+                      {{forloop.index}}
+                      <img
+                        class="now-playing"
+                        src="/assets/theme/j1/modules/amplitudejs/icons/player/dark/now-playing.svg"
+                        alt="now-playing">
+                    </span>
                   </span>
 
-                  <!-- place audio rating for playlist (COMPACT player) -->
-                  {% if playlist_audio_rating %}
-                    {% capture rating_image %}{{image_rating_path}}/{{item.rating}}-star.svg{% endcapture %}
-                    <span class="audio-rating" data-amplitude-playlist="{{player_playlist}}">
-                      <img src="{{rating_image}}" alt="song rating">
+                  <div
+                    class="playlist-song-meta song-meta-container"
+                    data-amplitude-source="{{source_media_attribute}}"
+                    data-amplitude-playlist="{{player_playlist}}">
+
+                    <span class="song-name">{{item.title}}</span>
+                    <span class="song-artist-album">
+                      <span>{{item.artist}}</span>
                     </span>
-                  {% else %}
-                    <!-- place empty (span) element (placeholder) -->
-                    <span class="audio-rating audio-rating-screen-controls"></span>
-                  {% endif %}
 
-                  <span class="audio-duration">{{item.duration}}</span>
+                    <!-- place audio rating for playlist (COMPACT player) -->
+                    {% if playlist_audio_rating %}
+                      {% capture rating_image %}{{image_rating_path}}/{{item.rating}}-star.svg{% endcapture %}
+                      <span class="audio-rating" data-amplitude-playlist="{{player_playlist}}">
+                        <img src="{{rating_image}}" alt="song rating">
+                      </span>
+                    {% else %}
+                      <!-- place empty (span) element (placeholder) -->
+                      <span class="audio-rating audio-rating-screen-controls"></span>
+                    {% endif %}
 
-                </div> <!-- END song-meta-container -->
+                    <span class="audio-duration">{{item.duration}}</span>
 
-
-              </div>
+                  </div> <!-- END song-meta-container -->
+                </div>
               <!-- END list item -->
+              </li>
               {% endif %}{% endfor %}
-
-            </div> <!-- END  playlist items -->
+            </ul> <!-- END  playlist items -->
 
           </div> <!-- END list screen -->
 
@@ -1027,8 +1025,7 @@ exclude_from_search:                    true
               <!-- START playlist items (Large Player) -->
               <ul
                 id="large_player_title_list_{{player_playlist}}"
-                class="amplitude-scroller-gradient large-player-title-list"
-                style="margin-bottom: 0px; padding-left: 0px;">
+                class="large-player-title-list player-title-list playlist-scroller-gradient">
 
                 <!-- START Playlist item -->
                 <li>

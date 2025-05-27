@@ -425,7 +425,7 @@ exclude_from_search:                    true
             <!-- START playlist items (COMPACT player )-->
             <div
               id="compact_player_title_list_{{player_playlist}}"
-              class="amplitude-scroller-gradient compact-player-title-list">
+              class="playlist-scroller-gradient compact-player-title-list">
               {% for item in playlist_items %} {% if item.enabled %}
               <!-- START list item -->
               <div
@@ -1043,7 +1043,7 @@ exclude_from_search:                    true
               <!-- START playlist items (Large Player) -->
               <div
                 id="large_player_title_list_{{player_playlist}}"
-                class="amplitude-scroller-gradient large-player-title-list">
+                class="playlist-scroller-gradient large-player-title-list">
                 {% for item in playlist_items %}{% if item.enabled %}
                 <!-- START list item -->
                 <div
