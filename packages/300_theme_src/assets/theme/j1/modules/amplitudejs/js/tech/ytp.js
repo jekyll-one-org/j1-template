@@ -1309,7 +1309,7 @@ regenerate: true
       }
     }
 
-  } // END setSongPlayed
+  } // END setSongActive
 
   // ---------------------------------------------------------------------------
   // getProgressBarSelectedPositionPercentage

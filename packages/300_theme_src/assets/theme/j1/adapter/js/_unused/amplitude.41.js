@@ -848,9 +848,11 @@ j1.adapter.amplitude = ((j1, window) => {
       // wrraper for states that are not processed
       // -----------------------------------------------------------------------
       function doNothingOnStateChange(state) {
-        var playlist, songMetaData, songIndex, trackID;
+        var playlist, playerID, songMetaData,
+            songIndex, trackID;
         
         playlist      = Amplitude.getActivePlaylist();
+        playerID      = playlist + '_large';
         songMetaData  = Amplitude.getActiveSongMetadata();
         songIndex     = songMetaData.index;
         trackID       = songIndex + 1;
@@ -872,7 +874,11 @@ j1.adapter.amplitude = ((j1, window) => {
         playList      = Amplitude.getActivePlaylist();
         trackID       = songIndex + 1;
 
-        logger.debug(`PLAY audio on processOnStateChangePlaying for playlist \'${playList}\' at trackID|state: ${trackID}|${AT_PLAYER_STATE_NAMES[state]}`);
+        logger.debug(`PLAY audio on processOnStateChangePlaying for playlist \'${playList}\' at trackID|state: ${trackID}|${AT_PLAYER_STATE_NAMES[state]}`);   
+
+        // stop active YT players
+        // ---------------------------------------------------------------------
+        _this.ytStopActivePlayers(j1.adapter.amplitude.data.ytPlayers);
 
         // update song rating in playlist-screen|meta-container
         // ---------------------------------------------------------------------
@@ -881,10 +887,6 @@ j1.adapter.amplitude = ((j1, window) => {
         // scroll active song in players playlist
         // ---------------------------------------------------------------------
         _this.atPlayerScrollToActiveElement(songMetaData);
-
-        // stop active YT players
-        // ---------------------------------------------------------------------
-        _this.ytStopActivePlayers(j1.adapter.amplitude.data.ytPlayers);
 
         // process audio for AT players at configured START position
         // ---------------------------------------------------------------------
@@ -1849,8 +1851,8 @@ j1.adapter.amplitude = ((j1, window) => {
     // -------------------------------------------------------------------------  
     atPlayerScrollToActiveElement: (metaData) => {
       var scrollableList, songIndex,
-          activeElement, activeElementOffsetTop,
-          songElementMin, numSongs;
+          activeElement, activeElementOffsetTop, numSongs,
+          songElementMin, playerSongElementHeigthCompact;
 
       if (!playerAutoScrollSongElement) {
         // do nothing if playerAutoScrollSongElement is false
@@ -1868,15 +1870,28 @@ j1.adapter.amplitude = ((j1, window) => {
         return;
       }
 
+      // LARGE players
+      // -----------------------------------------------------------------------
       if (songIndex > 0 && numSongs >= songElementMin) {
-        scrollableList            = document.getElementById('large_player_title_list_' + metaData.playlist);
-        activeElement             = scrollableList.querySelector('.amplitude-active-song-container');
         activeElementOffsetTop    = songIndex * j1.adapter.amplitude.data.playerSongElementHeigth;
         scrollableList.scrollTop  = activeElementOffsetTop;        
       } else {
         // do nothing if songIndex is 0 or less than songElementMin
         return; 
       }
+
+      // COMPACT players (WIP)
+      // -----------------------------------------------------------------------
+      // playerSongElementHeigthCompact  = 74.00; 
+      // if (songIndex > 0 && numSongs >= songElementMin) {
+      //   // scrollableList            = document.getElementById('compact_player_title_list_' + metaData.playlist);
+      //   // activeElement             = scrollableList.querySelector('.amplitude-active-song-container');
+      //   activeElementOffsetTop    = (songIndex * playerSongElementHeigthCompact);
+      //   scrollableList.scrollTop  = activeElementOffsetTop;        
+      // } else {
+      //   // do nothing if songIndex is 0 or less than songElementMin
+      //   return; 
+      // }
 
     }, // END atPlayerScrollToActiveElement
 
@@ -1911,7 +1926,7 @@ j1.adapter.amplitude = ((j1, window) => {
       var ytPlayer, playerState, ytPlayerState;
 
       const ytPlayers = Object.keys(players);
-      for (let i=0; i<ytPlayers.length; i++) {
+      for (var i=0; i<ytPlayers.length; i++) {
         const playerID          = ytPlayers[i];
         const playerProperties  = players.playerID;        
 
@@ -1923,8 +1938,22 @@ j1.adapter.amplitude = ((j1, window) => {
           logger.debug(`STOP YT player on id: ${playerID}`);
           ytPlayer.stopVideo();
         }
-      }
 
+        // reset YT Player PlayPause Buttoms
+        var ytpButtonPlayerPlayPause = document.getElementsByClassName("large-player-play-pause-bea_yt_large");
+        for (var j=0; j<ytpButtonPlayerPlayPause.length; j++) {
+          var htmlElement = ytpButtonPlayerPlayPause[j];
+
+          // toggle classes on state playing
+          if (htmlElement.dataset.amplitudeSource === 'youtube') {
+            if (htmlElement.classList.contains('amplitude-playing')) {        
+              htmlElement.classList.remove('amplitude-playing');
+              htmlElement.classList.add('amplitude-paused');
+            }
+          }
+        } // END for ytpButtonPlayerPlayPause
+
+      } // END for ytPlayers
     }, // END ytStopActivePlayers
 
     // -------------------------------------------------------------------------
