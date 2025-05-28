@@ -707,7 +707,6 @@ regenerate: true
 
     ytpSongIndex  = songIndex;
     
-
     // play sonng (video) in playlist 
     if (songIndex <= songs.length - 1) {
       songMetaData  = songs[songIndex];
@@ -2189,6 +2188,7 @@ regenerate: true
                   // reset|update time settings
                   resetCurrentTimeContainerYTP(ytPlayer, playlist);
                   updateDurationTimeContainerYTP(ytPlayer, playlist);
+
                 }, 100);
               } // END if ytPlayerState === 'cued'
 
@@ -2925,7 +2925,6 @@ regenerate: true
   } // END if playerSettings.type 'large'
 
  } // END if j1.adapter.amplitude['data']['ytPlayers'][ytPlayerID] !== undefined
-
 } // END mimikYTPlayerUiEventsForAJS
 
 {%- endcapture -%}
