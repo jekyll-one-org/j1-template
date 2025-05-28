@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/amplitude.40.js
+ # ~/assets/theme/j1/adapter/js/amplitude.41.js
  # Liquid template to adapt J1 AmplitudeJS Apps
  #
  # Product/Info:
@@ -63,7 +63,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/amplitude.40.js
+ # ~/assets/theme/j1/adapter/js/amplitude.41.js
  # J1 Adapter for the amplitude module
  #
  # Product/Info:

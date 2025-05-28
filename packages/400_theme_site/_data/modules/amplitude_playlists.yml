@@ -1388,12 +1388,13 @@ settings:
       # ------------------------------------------------------------------------
       # ALBUM settings
       # ------------------------------------------------------------------------
-      album:                            &album_from_dusk_to_dawn
-        name:                           From Dusk To Dawn
+      album:                            &album_emancipator_music
+        name:                           Emancipator Music
         playlist:                       emancipator
         artist:                         Emancipator
-        audio_base:                     /assets/audio/album/emancipator/from-dusk-to-dawn
+        audio_base:                     /assets/audio/album/emancipator
         cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
+        audio_info:                     //emancipatormusic.com/
         audio_fade_in:                  true
         audio_fade_out:                 true
 
@@ -1405,54 +1406,98 @@ settings:
         # title 01
         - item:
           enabled:                      true
-          <<:                           *album_from_dusk_to_dawn
+          <<:                           *album_emancipator_music
           title:                        First Snow
           rating:                       2
           start:                        "00:01:00"                              # false | "00:01:00"
           end:                          "00:01:20"                              # false | "00:01:10"
           audio:                        FirstSnow.mp3
-          audio_info:                   //emancipator.bandcamp.com/
-          cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn/soon-it-will-be-cold-enough.jpg
+          cover_image:                  /assets/audio/cover/emancipator/soon-it-will-be-cold-enough.jpg
           duration:                     "00:05:12"
 
         # title 02
         - item:
           enabled:                      true
-          <<:                           *album_from_dusk_to_dawn
+          <<:                           *album_emancipator_music
           title:                        From Dusk To Dawn
           rating:                       3
           start:                        false                                   # "00:00:30"
           end:                          false                                   # "00:00:40"
           audio:                        DuskToDawn.mp3
-          audio_info:                   //emancipator.bandcamp.com/
-          cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn/from-dusk-to-dawn.jpg
+          cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn.jpg
           duration:                     "00:05:25"
 
         # title 03
         - item:
           enabled:                      true
-          <<:                           *album_from_dusk_to_dawn
+          <<:                           *album_emancipator_music
           title:                        Anthem
           rating:                       3
           start:                        false                                   # "00:00:30"
           end:                          false                                   # "00:00:40"          
           audio:                        Anthem.mp3
-          audio_info:                   //emancipator.bandcamp.com/
-          cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn/anthem.jpg
+          cover_image:                  /assets/audio/cover/emancipator/anthem.jpg
           duration:                     "00:05:40"
 
         # title 04
         - item:
           enabled:                      true
-          <<:                           *album_from_dusk_to_dawn
+          <<:                           *album_emancipator_music
           title:                        Safe In The Steep Cliffs
           rating:                       3
           start:                        false                                   # "00:00:30"
           end:                          false                                   # "00:00:40"
           audio:                        SafeInTheSteepCliffs.mp3
-          audio_info:                   //emancipator.bandcamp.com/
-          cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn/safe-in-the-steep-cliffs.jpg
+          cover_image:                  /assets/audio/cover/emancipator/safe-in-the-steep-cliffs.jpg
           duration:                     "00:04:35"
+
+        # title 05
+        - item:
+          enabled:                      true
+          <<:                           *album_emancipator_music
+          title:                        Time For Space
+          rating:                       3
+          start:                        false                                   # "00:00:30"
+          end:                          false                                   # "00:00:40"
+          audio:                        TimeForSpace.mp3
+          cover_image:                  /assets/audio/cover/emancipator/tine-for-space.jpg
+          duration:                     "00:07:13"
+
+        # title 06
+        - item:
+          enabled:                      true
+          <<:                           *album_emancipator_music
+          title:                        Sea To Sky
+          rating:                       3
+          start:                        false                                   # "00:00:30"
+          end:                          false                                   # "00:00:40"
+          audio:                        SeaToSky.mp3
+          cover_image:                  /assets/audio/cover/emancipator/sea-to-sky.jpg
+          duration:                     "00:04:24"
+
+        # title 07
+        - item:
+          enabled:                      true
+          <<:                           *album_emancipator_music
+          title:                        Alligator
+          rating:                       3
+          start:                        false                                   # "00:00:30"
+          end:                          false                                   # "00:00:40"
+          audio:                        alligator.mp3
+          cover_image:                  /assets/audio/cover/emancipator/alligator.jpg
+          duration:                     "00:03:13"
+
+        # title 08
+        - item:
+          enabled:                      true
+          <<:                           *album_emancipator_music
+          title:                        Dab City
+          rating:                       3
+          start:                        false                                   # "00:00:30"
+          end:                          false                                   # "00:00:40"
+          audio:                        DabCity.mp3
+          cover_image:                  /assets/audio/cover/emancipator/dab-city.jpg
+          duration:                     "00:04:22"
 
     # --------------------------------------------------------------------------
     # Disco 80th - Royalty Free Music
