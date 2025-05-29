@@ -78,6 +78,8 @@ regenerate:                             true
 "use strict";
 j1.adapter.fab = ((j1, window) => {
 
+  const isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
+
   // ---------------------------------------------------------------------------
   // global variable settings
   // ---------------------------------------------------------------------------

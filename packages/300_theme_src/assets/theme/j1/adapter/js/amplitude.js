@@ -87,6 +87,8 @@ regenerate:                             true
 
 j1.adapter.amplitude = ((j1, window) => {
 
+  const isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
+
   // Adapter GLOBAL settings
   // ---------------------------------------------------------------------------
   var environment   = '{{environment}}';
@@ -290,9 +292,9 @@ j1.adapter.amplitude = ((j1, window) => {
           // test data for console filters
           // -------------------------------------------------------------------
           // console.warn("consoleFilters: Diese WARNUNG wird gefiltert.");
-          // logger.warn("consoleFilters: Diese WARNUNG wird gefiltert.");
+          // isDev && logger.warn("consoleFilters: Diese WARNUNG wird gefiltert.");
           // console.warn("consoleFilters: Diese Meldung wird nicht gefiltert.");
-          // logger.warn("consoleFilters: Diese Meldung wird nicht gefiltert.");
+          // isDev && logger.warn("consoleFilters: Diese Meldung wird nicht gefiltert.");
 
           // test data for error filters
           // -------------------------------------------------------------------
@@ -711,7 +713,7 @@ j1.adapter.amplitude = ((j1, window) => {
         currentStep  = 1;
 
         if (volumeSlider === undefined || volumeSlider === null) {
-          logger.warn('no volume slider found at playerID: ' + settings.playerID);
+          isDev && logger.warn('no volume slider found at playerID: ' + settings.playerID);
           return;
         }
 
@@ -815,7 +817,7 @@ j1.adapter.amplitude = ((j1, window) => {
         songIndex     = songMetaData.index;
         trackID       = songIndex + 1;
 
-        logger.warn(`DO NOTHING on StateChange for playlist: ${playlist} at trackID|state: ${trackID}|${AT_PLAYER_STATE_NAMES[state]}`);
+        isDev && logger.warn(`DO NOTHING on StateChange for playlist: ${playlist} at trackID|state: ${trackID}|${AT_PLAYER_STATE_NAMES[state]}`);
 
       } // END doNothingOnStateChange
 

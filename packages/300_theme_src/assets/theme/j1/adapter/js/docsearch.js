@@ -84,29 +84,31 @@ regenerate:                             true
 "use strict";
 j1.adapter.docsearch = ((j1, window) => {
 
-{% comment %} Set global variables
--------------------------------------------------------------------------------- {% endcomment %}
-var environment           = '{{environment}}';
-var state                 = 'not_started';
-var cookie_names          = j1.getCookieNames();
+  const isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
 
-var docsearchDefaults;
-var docsearchSettings;
-var docsearchOptions;
-var docsearchModal;
-var modal_container;
-var user_consent;
+  {% comment %} Set global variables
+  -------------------------------------------------------------------------------- {% endcomment %}
+  var environment           = '{{environment}}';
+  var state                 = 'not_started';
+  var cookie_names          = j1.getCookieNames();
 
-var _this;
-var logger;
-var logText;
+  var docsearchDefaults;
+  var docsearchSettings;
+  var docsearchOptions;
+  var docsearchModal;
+  var modal_container;
+  var user_consent;
 
-// date|time
-var startTime;
-var endTime;
-var startTimeModule;
-var endTimeModule;
-var timeSeconds;
+  var _this;
+  var logger;
+  var logText;
+
+  // date|time
+  var startTime;
+  var endTime;
+  var startTimeModule;
+  var endTimeModule;
+  var timeSeconds;
 
   // ---------------------------------------------------------------------------
   // main

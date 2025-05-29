@@ -86,26 +86,28 @@ regenerate:                             true
 "use strict";
 j1.adapter.slimSelect = ((j1, window) => {
 
-// -----------------------------------------------------------------------------
-// Set global variables
-// -----------------------------------------------------------------------------
-var slimSelectDefaults;
-var slimSelectSettings;
-var slimSelectOptions;
+  const isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
 
-var _this;
-var logger;
-var logText;
+  // -----------------------------------------------------------------------------
+  // Set global variables
+  // -----------------------------------------------------------------------------
+  var slimSelectDefaults;
+  var slimSelectSettings;
+  var slimSelectOptions;
 
-var selectDIV;
-var selectHTML;
+  var _this;
+  var logger;
+  var logText;
 
-// date|time
-var startTime;
-var endTime;
-var startTimeModule;
-var endTimeModule;
-var timeSeconds;
+  var selectDIV;
+  var selectHTML;
+
+  // date|time
+  var startTime;
+  var endTime;
+  var startTimeModule;
+  var endTimeModule;
+  var timeSeconds;
 
   // ---------------------------------------------------------------------------
   // main

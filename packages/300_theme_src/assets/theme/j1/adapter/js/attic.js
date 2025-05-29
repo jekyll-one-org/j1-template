@@ -85,6 +85,8 @@ regenerate:                             true
 "use strict";
 j1.adapter.attic = ((j1, window) => {
 
+  const isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
+
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
   var environment   = '{{environment}}';
@@ -158,7 +160,7 @@ j1.adapter.attic = ((j1, window) => {
           startTimeModule = Date.now();
 
           _this.setState('started');
-          logger.debug('state: ' + _this.getState());
+          isDev && logger.debug('state: ' + _this.getState());
           logger.info('module is being initialized');
 
           {% if attic_options.enabled %}
@@ -169,14 +171,14 @@ j1.adapter.attic = ((j1, window) => {
             // jadams, 2023-05-12: page visible while loading the attic
             // cause high numbers for cumulative layout shift (CLS)
             //
-            // logger.debug('hide attic on initialization');
+            // isDev && logger.debug('hide attic on initialization');
             // $('#no_flicker').css('display', 'none');
           }
 
           _this.createAllAttics();
           clearInterval(dependencies_met_page_ready);
           {% else %}
-          logger.warn('found module attics disabled');
+          isDev && logger.warn('found module attics disabled');
           // add additional top space if attics are disabled
           $('#no_flicker').addClass('mt-5');
           clearInterval(dependencies_met_page_ready);
@@ -250,7 +252,7 @@ j1.adapter.attic = ((j1, window) => {
                   mute:                           atticOptions.mute
               });
             } else {
-              logger.warn('no attic container found on id: {{attic_id}}');
+              isDev && logger.warn('no attic container found on id: {{attic_id}}');
             }
 
             {% comment %} Add a spinner if configured
@@ -427,7 +429,7 @@ j1.adapter.attic = ((j1, window) => {
               $('#{{attic_id}}').backstretch('resize');
 
              _this.setState('finished');
-             logger.debug('state: ' + _this.getState());
+             isDev && logger.debug('state: ' + _this.getState());
              logger.info('initialize attic on id {{attic_id}}: finished');
              logger.info('module initializaton: finished');
 
@@ -660,7 +662,7 @@ j1.adapter.attic = ((j1, window) => {
             $('head').append(backstretch_opacity);
 
             _this.setState('initialized');
-            logger.debug('state: ' + _this.getState());
+            isDev && logger.debug('state: ' + _this.getState());
 
             // start RUNNER on page 'ready'|module state 'initialized'
             //
@@ -682,7 +684,7 @@ j1.adapter.attic = ((j1, window) => {
         {% else %}
           {% assign attic_id = item.attic.id %}
           _this.setState('finished');
-          logger.debug('state: ' + _this.getState());
+          isDev && logger.debug('state: ' + _this.getState());
           logger.info('initialize attic on id {{attic_id}}: finished');
           logger.info('module initializaton: finished');
 
@@ -690,7 +692,7 @@ j1.adapter.attic = ((j1, window) => {
           //
           $('#no_flicker').addClass('mt-3');
 
-          logger.warn('attic on id {{attic_id}}: disabled');
+          isDev && logger.warn('attic on id {{attic_id}}: disabled');
           $('#no_flicker').css('display', 'block');
         {% endif %} // END if header enabled
       {% endfor %} // END for item in header_config.attics
@@ -698,8 +700,8 @@ j1.adapter.attic = ((j1, window) => {
       // NO header found in page
       // if ($('#no_header').length) {
       //   _this.setState('completed');
-      //   logger.debug('state: ' + _this.getState());
-      //   logger.warn('no header configured or found in page');
+      //   isDev && logger.debug('state: ' + _this.getState());
+      //   isDev && logger.warn('no header configured or found in page');
       // }
 
       return true;
@@ -714,7 +716,7 @@ j1.adapter.attic = ((j1, window) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = 'received message from ' + sender + ': ' + json_message;
-      logger.debug(logText);
+      isDev && logger.debug(logText);
 
       // -----------------------------------------------------------------------
       //  process commands|actions

@@ -89,6 +89,8 @@ regenerate:                             true
 "use strict";
 j1.adapter.gemini = ((j1, window) => {
 
+  const isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
+
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
   var environment       = '{{environment}}';

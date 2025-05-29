@@ -83,6 +83,8 @@ regenerate:                             true
 "use strict";
 j1.adapter.masonry = ((j1, window) => {
 
+  const isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
+
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
   var environment     = '{{environment}}';
@@ -348,25 +350,25 @@ j1.adapter.masonry = ((j1, window) => {
       var xhr_data_path = options.xhr_data_path + '/index.html';
       var xhr_container_id;
 
-      console.debug('number of grids found: ' + numGrids);
+      isDev && console.debug('number of grids found: ' + numGrids);
 
       _this.setState('load_data');
       Object.keys(grid).forEach((key) => {
         if (grid[key].enabled) {
           xhr_container_id = grid[key].id + '_parent';
 
-          console.debug('load HTML portion on grid id: ' + grid[key].id);
+          isDev && console.debug('load HTML portion on grid id: ' + grid[key].id);
           j1.loadHTML({
             xhr_container_id: xhr_container_id,
             xhr_data_path:    xhr_data_path,
             xhr_data_element: grid[key].id
           });
         } else {
-          console.debug('grid found disabled on id: ' + grid[key].id);
+          isDev && console.debug('grid found disabled on id: ' + grid[key].id);
           active_grids--;
         }
       });
-      console.debug('grids loaded in page enabled|all: ' + active_grids + '|' + numGrids);
+      isDev && console.debug('grids loaded in page enabled|all: ' + active_grids + '|' + numGrids);
       _this.setState('data_loaded');
     }, // END loadSliderHTML
 

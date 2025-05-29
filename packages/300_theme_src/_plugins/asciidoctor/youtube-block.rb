@@ -279,6 +279,13 @@ Asciidoctor::Extensions.register do
                     });
                   }
 
+                  // TODO:
+                  // -----------------------------------------------------------
+                  // Check if plugin ZoomButtons possible to be used for 
+                  // this extension. Disabled for now.
+                  // ------------------------------------------------------------
+                  piZoomButtons.enabled = false;                  
+
                   // add|skip zoomButtons plugin
                   if (piZoomButtons.enabled && vjsPlayerType === 'native') {
                     vjsPlayer.zoomButtons({

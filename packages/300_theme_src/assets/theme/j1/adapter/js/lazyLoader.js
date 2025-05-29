@@ -80,28 +80,30 @@ regenerate:                             true
 `use strict`;
 j1.adapter.lazyLoader = ((j1, window) => {
 
-{% comment %} Set global variables
--------------------------------------------------------------------------------- {% endcomment %}
-var environment     = '{{environment}}';
-var cookie_names    = j1.getCookieNames();
-var user_state      = j1.readCookie(cookie_names.user_state);
-var state           = 'not_started';
+  const isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
 
-var lazyLoaderDefaults;
-var lazyLoaderSettings;
-var lazyLoaderOptions;
-var frontmatterOptions;
+  {% comment %} Set global variables
+  -------------------------------------------------------------------------------- {% endcomment %}
+  var environment     = '{{environment}}';
+  var cookie_names    = j1.getCookieNames();
+  var user_state      = j1.readCookie(cookie_names.user_state);
+  var state           = 'not_started';
 
-var _this;
-var logger;
-var logText;
+  var lazyLoaderDefaults;
+  var lazyLoaderSettings;
+  var lazyLoaderOptions;
+  var frontmatterOptions;
 
-// date|time
-var startTime;
-var endTime;
-var startTimeModule;
-var endTimeModule;
-var timeSeconds;
+  var _this;
+  var logger;
+  var logText;
+
+  // date|time
+  var startTime;
+  var endTime;
+  var startTimeModule;
+  var endTimeModule;
+  var timeSeconds;
 
   // ---------------------------------------------------------------------------
   // main

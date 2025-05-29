@@ -78,6 +78,8 @@ regenerate:                             false
 "use strict";
 j1.adapter.algolia = ((j1, window) => {
 
+  const isDev = (j1.env === "development" || j1.env === "dev") ? true : false;  
+
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
   var environment   = '{{environment}}';
@@ -126,7 +128,7 @@ j1.adapter.algolia = ((j1, window) => {
       startTimeModule = Date.now();
 
       _this.setState('started');
-      logger.debug('state: ' + _this.getState());
+      isDev && logger.debug('state: ' + _this.getState());
       logger.info('module is being initialized');
 
       {% comment %} Load module config from yaml data file
@@ -185,7 +187,7 @@ j1.adapter.algolia = ((j1, window) => {
         }
 
         // state = 'finished search';
-        // logger.debug('state: ' + state);
+        // isDev && logger.debug('state: ' + state);
       };
 
       if (moduleOptions.enabled == true) {
@@ -275,7 +277,7 @@ j1.adapter.algolia = ((j1, window) => {
         $('#searcher').addClass('row');
 
         _this.setState('finished');
-        logger.debug('state: ' + _this.getState());
+        isDev && logger.debug('state: ' + _this.getState());
         logger.info('module initialized successfully');
 
         endTimeModule = Date.now();
@@ -283,8 +285,8 @@ j1.adapter.algolia = ((j1, window) => {
       } else {
         $('#algolia-site-search').append('<p class="ml-5 mt-5 mb-5 "> <strong>Algolia Search DISABLED</strong> </p>');
         _this.setState('finished');
-        logger.debug('state: ' + _this.getState());
-        logger.warn('module disabled');
+        isDev && logger.debug('state: ' + _this.getState());
+        isDev && logger.warn('module disabled');
       } // END if moduleOptions enabled
 
       return true;
@@ -298,7 +300,7 @@ j1.adapter.algolia = ((j1, window) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = 'received message from ' + sender + ': ' + json_message;
-      logger.debug(logText);
+      isDev && logger.debug(logText);
 
       // -----------------------------------------------------------------------
       //  Process commands|actions

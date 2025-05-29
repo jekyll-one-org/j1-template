@@ -87,39 +87,41 @@ regenerate:                             true
 "use strict";
 j1.adapter.chatbot = ((j1, window) => {
 
-{% comment %} Set global variables
--------------------------------------------------------------------------------- {% endcomment %}
-var url               = new URL(window.location.href);
-var hostname          = url.hostname;
-var environment       = '{{environment}}';
-var apiScript         = document.createElement('script');
-var cookie_names      = j1.getCookieNames();
-var date              = new Date();
-var timestamp_now     = date.toISOString();
-var skipHost          = false;
-var state             = 'not_started';
+  const isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
 
-var chatDefaults;
-var chatSettings;
-var chatOptions;
-var chatbot;
-var chatbotID;
-var chatBotWidget;
-var validChatbot;
-var validChatbotID;
-var user_consent;
-var apiExists;
+  {% comment %} Set global variables
+  ------------------------------------------------------------------------------ {% endcomment %}
+  var url               = new URL(window.location.href);
+  var hostname          = url.hostname;
+  var environment       = '{{environment}}';
+  var apiScript         = document.createElement('script');
+  var cookie_names      = j1.getCookieNames();
+  var date              = new Date();
+  var timestamp_now     = date.toISOString();
+  var skipHost          = false;
+  var state             = 'not_started';
 
-var _this;
-var logger;
-var logText;
+  var chatDefaults;
+  var chatSettings;
+  var chatOptions;
+  var chatbot;
+  var chatbotID;
+  var chatBotWidget;
+  var validChatbot;
+  var validChatbotID;
+  var user_consent;
+  var apiExists;
 
-// date|time
-var startTime;
-var endTime;
-var startTimeModule;
-var endTimeModule;
-var timeSeconds;
+  var _this;
+  var logger;
+  var logText;
+
+  // date|time
+  var startTime;
+  var endTime;
+  var startTimeModule;
+  var endTimeModule;
+  var timeSeconds;
 
   // ---------------------------------------------------------------------------
   // main

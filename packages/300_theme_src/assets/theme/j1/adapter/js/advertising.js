@@ -89,6 +89,8 @@ regenerate:                             true
 "use strict";
 j1.adapter.advertising = ((j1, window) => {
 
+  const isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
+
   {% comment %} Set global variables
   ----------------------------------------------------------------------------- {% endcomment %}
   var environment           = '{{environment}}';
@@ -196,7 +198,7 @@ j1.adapter.advertising = ((j1, window) => {
           _this.ad_initializer();
 
           if (!validpublisherID) {
-            logger.warn('invalid publisher id: ' + publisherID);
+            isDev && logger.warn('invalid publisher id: ' + publisherID);
             logger.info('module disabled' );
 
             clearInterval(dependencies_met_page_ready);
@@ -242,7 +244,7 @@ j1.adapter.advertising = ((j1, window) => {
                 logger.info('setup Google Ad monitoring');
                 _this.ad_monitor();
               } else {
-                logger.warn('no initialized Google Ads found in page');
+                isDev && logger.warn('no initialized Google Ads found in page');
               }
             }, 1000);
 
@@ -290,8 +292,8 @@ j1.adapter.advertising = ((j1, window) => {
               console.debug('cookies for personalization rejected');
               console.debug('initialization of module advertising skipped');
             } else {
-              logger.warn('user consent on personalization: ' + user_consent.personalization);
-              logger.warn('initializing module: skipped');
+              isDev && logger.warn('user consent on personalization: ' + user_consent.personalization);
+              isDev && logger.warn('initializing module: skipped');
             }
 
             // if consent is rejected, detect and remove Adsense cookies
@@ -399,11 +401,11 @@ j1.adapter.advertising = ((j1, window) => {
                 ads_initialized ++;
               } else {
                 if (ad.layout === layout) {
-                  logger.warn('ad disabled on id ' + ad.id + ' for slot: ' + ad.slot);
+                  isDev && logger.warn('ad disabled on id ' + ad.id + ' for slot: ' + ad.slot);
                 }
               }
             } else {
-              logger.warn('skipped add settings on all ad containers');
+              isDev && logger.warn('skipped add settings on all ad containers');
             } // END if user_consent.personalization
 
           });
@@ -431,7 +433,7 @@ j1.adapter.advertising = ((j1, window) => {
               counter --;
             });
           } else {
-            logger.warn('no ads found in page for layout: ' + layout);
+            isDev && logger.warn('no ads found in page for layout: ' + layout);
           } // END if ads_initialized
 
           clearInterval(dependencies_met_page_visible);
@@ -465,7 +467,7 @@ j1.adapter.advertising = ((j1, window) => {
               if (production) {
                 console.debug('detected ad blocks in state: unfilled');
               } else {
-                logger.warn('detected ad on slot ' + elm.adSlot + ' in state: ' + event.newValue);
+                isDev && logger.warn('detected ad on slot ' + elm.adSlot + ' in state: ' + event.newValue);
               }
               if (addBorderOnUnfilled) {
                 $('.adsbygoogle').addClass('border--dotted');
@@ -497,7 +499,7 @@ j1.adapter.advertising = ((j1, window) => {
                 if (production) {
                   console.warn('unknown ad state detected: ' + event.newValue);
                 } else {
-                  logger.warn('unknown ad state detected on slot ' + elm.adSlot + ' : ' + event.newValue);
+                  isDev && logger.warn('unknown ad state detected on slot ' + elm.adSlot + ' : ' + event.newValue);
                 }
               }
             } // END if 'event.newValue'

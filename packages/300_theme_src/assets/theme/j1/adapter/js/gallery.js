@@ -84,6 +84,8 @@ regenerate:                             true
 "use strict";
 j1.adapter.gallery = ((j1, window) => {
 
+  const isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
+
   {% comment %} Global variables
   ------------------------------------------------------------------------------ {% endcomment %}
   var environment   = '{{environment}}';
@@ -152,7 +154,7 @@ j1.adapter.gallery = ((j1, window) => {
       galleryOptions  = $.extend(true, {}, galleryDefaults, gallerySettings, frontmatterOptions);
 
       // load HTML portion for all grids
-      console.debug('loading HTML portion for all galleries configured');
+      isDev && console.debug('loading HTML portion for all galleries configured');
       _this.loadGalleryHTML(galleryOptions, galleryOptions.galleries);
 
       // -----------------------------------------------------------------------
@@ -416,25 +418,25 @@ j1.adapter.gallery = ((j1, window) => {
       var xhr_data_path = options.xhr_data_path + '/index.html';
       var xhr_container_id;
 
-      console.debug('number of galleries found: ' + active_grids);
+      isDev && console.debug('number of galleries found: ' + active_grids);
 
       _this.setState('load_data');
       Object.keys(gallery).forEach((key) => {
         if (gallery[key].enabled) {
           xhr_container_id = gallery[key].id + '_parent';
 
-          console.debug('load HTML portion on gallery id: ' + gallery[key].id);
+          isDev && console.debug('load HTML portion on gallery id: ' + gallery[key].id);
           j1.loadHTML({
             xhr_container_id: xhr_container_id,
             xhr_data_path:    xhr_data_path,
             xhr_data_element: gallery[key].id
           });
         } else {
-          console.debug('gallery found disabled on id: ' + gallery[key].id);
+          isDev && console.debug('gallery found disabled on id: ' + gallery[key].id);
           active_grids--;
         }
       });
-      console.debug('galleries loaded in page enabled|all: ' + active_grids + '|' + numGalleries);
+      isDev && console.debug('galleries loaded in page enabled|all: ' + active_grids + '|' + numGalleries);
       _this.setState('data_loaded');
     }, // END loadGalleryHTML
 

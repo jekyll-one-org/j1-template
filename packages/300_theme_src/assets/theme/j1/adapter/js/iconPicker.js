@@ -86,28 +86,30 @@ regenerate:                             true
 "use strict";
 j1.adapter.iconPicker = ((j1, window) => {
 
-{% comment %} Set global variables
--------------------------------------------------------------------------------- {% endcomment %}
-var environment           = '{{environment}}';
-var state                 = 'not_started';
+  const isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
 
-var iconPickerDefaults;
-var iconPickerSettings;
-var iconPickerOptions;
-var frontmatterOptions;
-var icon_picker;
-var icon_picker_button_id;
+  {% comment %} Set global variables
+  -------------------------------------------------------------------------------- {% endcomment %}
+  var environment           = '{{environment}}';
+  var state                 = 'not_started';
 
-var _this;
-var logger;
-var logText;
+  var iconPickerDefaults;
+  var iconPickerSettings;
+  var iconPickerOptions;
+  var frontmatterOptions;
+  var icon_picker;
+  var icon_picker_button_id;
 
-// date|time
-var startTime;
-var endTime;
-var startTimeModule;
-var endTimeModule;
-var timeSeconds;
+  var _this;
+  var logger;
+  var logText;
+
+  // date|time
+  var startTime;
+  var endTime;
+  var startTimeModule;
+  var endTimeModule;
+  var timeSeconds;
 
   // ---------------------------------------------------------------------------
   // Main object

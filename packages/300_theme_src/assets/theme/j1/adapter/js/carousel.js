@@ -87,6 +87,9 @@ regenerate:                             true
 // -----------------------------------------------------------------------------
 "use strict";
 j1.adapter.carousel = ((j1, window) => {
+
+  const isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
+
   var environment   = '{{environment}}';
   var dragging      = false;
   var state         = 'not_started';

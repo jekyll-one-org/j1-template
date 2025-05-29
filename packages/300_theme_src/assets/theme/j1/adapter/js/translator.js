@@ -87,6 +87,9 @@ regenerate:                             true
 "use strict";
 
 j1.adapter.translator = (function (j1, window) {
+
+  const isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
+
   var environment       = '{{environment}}';
   var state             = 'not_started';
   var user_translate    = {};
