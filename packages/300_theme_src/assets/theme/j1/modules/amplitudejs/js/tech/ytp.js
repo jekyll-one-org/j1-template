@@ -353,7 +353,7 @@ regenerate: true
     // -------------------------------------------------------------------------
     var songStartSec = activeSong.startSec;
     if (songStartSec) {
-      var tsStartSec      = seconds2timestamp(songStartSec);
+      var tsStartSec      = j1.adapter.amplitude.seconds2timestamp(songStartSec);
       var songCurrentTime = ytPlayer.getCurrentTime();
 
       if (songCurrentTime < songStartSec) {
@@ -366,7 +366,7 @@ regenerate: true
     // -------------------------------------------------------------------------
     var songEndSec = activeSong.endSec;
     if (songEndSec) {
-      var tsEndSec = seconds2timestamp(songEndSec);
+      var tsEndSec = j1.adapter.amplitude.seconds2timestamp(songEndSec);
 
       var checkOnVideoEnd = setInterval(function() {
         var songCurrentTime = ytPlayer.getCurrentTime();
@@ -527,50 +527,6 @@ regenerate: true
   
     current[lastKey] = value;
   }
-
-  // ---------------------------------------------------------------------------
-  // timestamp2seconds
-  // ---------------------------------------------------------------------------
-  function timestamp2seconds(timestamp) {
-    // split timestamp
-    const parts = timestamp.split(':');
-
-    // check timestamp format
-    if (parts.length !== 3) {
-      // return "invalid timestamp";
-      return false;
-    }
-
-    // convert parts to integers
-    const hours   = parseInt(parts[0], 10);
-    const minutes = parseInt(parts[1], 10);
-    const seconds = parseInt(parts[2], 10);
-
-    // check valid timestamp values
-    if (isNaN(hours) || isNaN(minutes) || isNaN(seconds) ||
-        hours   < 0 || hours   > 23 ||
-        minutes < 0 || minutes > 59 ||
-        seconds < 0 || seconds > 59) {
-      return "invalid timestamp";
-    }
-
-    const totalSeconds = (hours * 3600) + (minutes * 60) + seconds;
-    return totalSeconds;
-  } // END timestamp2seconds
-
-  // ---------------------------------------------------------------------------
-  // seconds2timestamp
-  // ---------------------------------------------------------------------------
-  function seconds2timestamp(seconds) {
-    const hours         = Math.floor(seconds / 3600);
-    const minutes       = Math.floor((seconds % 3600) / 60);
-    const remainSeconds = seconds % 60;
-    const tsHours       = hours.toString().padStart(2, '0');
-    const tsMinutes     = minutes.toString().padStart(2, '0');
-    const tsSeconds     = remainSeconds.toString().padStart(2, '0');
-  
-    return `${tsHours}:${tsMinutes}:${tsSeconds}`;
-  } // END seconds2timestamp
 
   // ---------------------------------------------------------------------------
   // ytpFadeInAudio
@@ -1397,11 +1353,11 @@ regenerate: true
         activeVideoElement.currentTime    = parseFloat(activeVideoElement.player.getCurrentTime());
         activeVideoElement.cover_art_url  = activeSong.cover_art_url;
         activeVideoElement.duration       = activeSong.duration;
-        activeVideoElement.endSec         = timestamp2seconds(activeSong.end);
+        activeVideoElement.endSec         = j1.adapter.amplitude.timestamp2seconds(activeSong.end);
         activeVideoElement.endTS          = activeSong.end;
         activeVideoElement.name           = activeSong.name;
         activeVideoElement.rating         = activeSong.rating;
-        activeVideoElement.startSec       = timestamp2seconds(activeSong.start);
+        activeVideoElement.startSec       = j1.adapter.amplitude.timestamp2seconds(activeSong.start);
         activeVideoElement.startTS        = activeSong.start;
         activeVideoElement.url            = activeSong.url;
 

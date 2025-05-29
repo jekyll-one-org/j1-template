@@ -397,9 +397,21 @@ j1.adapter.amplitude = ((j1, window) => {
                 continue;
               } else if (key === 'rating') {
                 song.rating = item[key];
-                continue;             
+                continue; 
+              } else if (key === 'playlist') {
+                song.playlist = item[key];
+                continue;                            
               } else if (key === 'shuffle') {
-                song.shuffle = item[key];
+                song.shuffle = ((!!item[key]) === false) ? playerShuffle : item[key];
+                continue;
+              } else if (key === 'repeat') {
+                song.repeat = ((!!item[key]) === false) ? playerRepeat : item[key];
+                continue;                
+              } else if (key === 'start') {
+                song.start = ((!!item[key]) === false) ? '00:00:00' : item[key];
+                continue;                 
+              } else if (key === 'end') {
+                song.end = ((!!item[key]) === false) ? '00:00:00' : item[key];
                 continue;                 
               } else {
                 song[key] = item[key];
@@ -520,6 +532,7 @@ j1.adapter.amplitude = ((j1, window) => {
             "start":          "{{item.start}}",
             "end":            "{{item.end}}",
             "shuffle":        "{{item.shuffle}}",
+            "repeat":         "{{item.repeat}}",
             "duration":       "{{item.duration}}",
             // "audio_fade_in":  "{{item.audio_fade_in}}",
             // "audio_fade_out": "{{item.audio_fade_out}}",
@@ -665,58 +678,6 @@ j1.adapter.amplitude = ((j1, window) => {
         volume_increment: playerVolumeSliderStep
 
       }); // END Amplitude init
-
-      // -----------------------------------------------------------------------
-      // timestamp2seconds
-      //
-      // TODO: Add support for timestamp w/o hours like mm:ss
-      // -----------------------------------------------------------------------
-      function timestamp2seconds(timestamp) {
-        // split timestamp
-        const parts = timestamp.split(':');
-
-        // check timestamp format
-        if (parts.length !== 3) {
-          // return "invalid timestamp";
-          return false;
-        }
-
-        // convert parts to integers
-        const hours   = parseInt(parts[0], 10);
-        const minutes = parseInt(parts[1], 10);
-        const seconds = parseInt(parts[2], 10);
-
-        // check valid timestamp values
-        if (isNaN(hours) || isNaN(minutes) || isNaN(seconds) ||
-            hours   < 0 || hours   > 23 ||
-            minutes < 0 || minutes > 59 ||
-            seconds < 0 || seconds > 59) {
-          return "invalid timestamp";
-        }
-
-        const totalSeconds = (hours * 3600) + (minutes * 60) + seconds;
-
-        return totalSeconds;
-      } // END timestamp2seconds
-
-      // -----------------------------------------------------------------------
-      // seconds2timestamp
-      // -----------------------------------------------------------------------
-      function seconds2timestamp(seconds) {
-
-        if (isNaN(seconds)) {
-          return false;
-        }
-
-        const hours         = Math.floor(seconds / 3600);
-        const minutes       = Math.floor((seconds % 3600) / 60);
-        const remainSeconds = seconds % 60;
-        const tsHours       = hours.toString().padStart(2, '0');
-        const tsMinutes     = minutes.toString().padStart(2, '0');
-        const tsSeconds     = remainSeconds.toString().padStart(2, '0');
-      
-        return `${tsHours}:${tsMinutes}:${tsSeconds}`;
-      } // END seconds2timestamp
 
       // -----------------------------------------------------------------------
       // atpFadeInAudio
@@ -1858,7 +1819,7 @@ j1.adapter.amplitude = ((j1, window) => {
     // atPlayerScrollToActiveElement(metaData)
     // -------------------------------------------------------------------------  
     atPlayerScrollToActiveElement: (metaData) => {
-      var scrollableList, songIndex,
+      var scrollableList, songIndex, playlist,
           activeElement, activeElementOffsetTop, numSongs,
           songElementMin, playerSongElementHeigthCompact;
 
@@ -1869,9 +1830,10 @@ j1.adapter.amplitude = ((j1, window) => {
 
       songIndex       = metaData.index;
       songElementMin  = playerScrollerSongElementMin;
-      numSongs        = Amplitude.getSongsInPlaylist(metaData.playlist).length;
-      scrollableList  = document.getElementById('large_player_title_list_' + metaData.playlist);
+      playlist        = metaData.playlist;
+      scrollableList  = document.getElementById('large_player_title_list_' + playlist);
       activeElement   = scrollableList.querySelector('.amplitude-active-song-container');
+      numSongs        = Amplitude.getSongsInPlaylist(playlist).length;
 
       if (activeElement === null || scrollableList === null)  {
         // do nothing if NO scrollableList or ACTIVE element found (failsafe)
@@ -2037,7 +1999,7 @@ j1.adapter.amplitude = ((j1, window) => {
       songMetaData  = Amplitude.getActiveSongMetadata();
       songIndex     = songMetaData.index;
       songStartTS   = songMetaData.start;
-      songStartSec  = timestamp2seconds(songStartTS);
+      songStartSec  = _this.timestamp2seconds(songStartTS);
       playList      = Amplitude.getActivePlaylist();
       trackID       = songIndex + 1;
 
@@ -2049,7 +2011,7 @@ j1.adapter.amplitude = ((j1, window) => {
         if (!isFadingIn) {
           var currentAudioTime = Amplitude.getSongPlayedSeconds();
           if (songStartSec && currentAudioTime <= songStartSec) {
-            var songDurationSec = timestamp2seconds(songMetaData.duration); 
+            var songDurationSec = _this.timestamp2seconds(songMetaData.duration); 
 
             // seek audio to configured START position
             // NOTE: use setSongPlayedPercentage for seeking to NOT
@@ -2085,9 +2047,9 @@ j1.adapter.amplitude = ((j1, window) => {
       songMetaData  = Amplitude.getActiveSongMetadata();
       songIndex     = songMetaData.index;
       songStartTS   = songMetaData.start;
-      songStartSec  = timestamp2seconds(songStartTS);      
+      songStartSec  = _this.timestamp2seconds(songStartTS);      
       songEndTS     = songMetaData.end;
-      songEndSec    = timestamp2seconds(songEndTS);
+      songEndSec    = _this.timestamp2seconds(songEndTS);
       playList      = Amplitude.getActivePlaylist();
       trackID       = songIndex + 1;
 
@@ -2153,7 +2115,63 @@ j1.adapter.amplitude = ((j1, window) => {
         }
       }
 
-    },
+    }, // END setSongActive
+
+    // -------------------------------------------------------------------------
+    // timestamp2seconds(timestamp)
+    //
+    // converts a timestamp of hh:mm:ss into seconds
+    // -------------------------------------------------------------------------
+    // TODO:
+    // Add support for timestamp w/o hours like mm:ss
+    // -------------------------------------------------------------------------
+    timestamp2seconds: (timestamp) => {
+      // split timestamp
+      const parts = timestamp.split(':');
+
+      // check timestamp format
+      if (parts.length !== 3) {
+        // return "invalid timestamp";
+        return false;
+      }
+
+      // convert parts to integers
+      const hours   = parseInt(parts[0], 10);
+      const minutes = parseInt(parts[1], 10);
+      const seconds = parseInt(parts[2], 10);
+
+      // check valid timestamp values
+      if (isNaN(hours) || isNaN(minutes) || isNaN(seconds) ||
+          hours   < 0 || hours   > 23 ||
+          minutes < 0 || minutes > 59 ||
+          seconds < 0 || seconds > 59) {
+        return "invalid timestamp";
+      }
+
+      const totalSeconds = (hours * 3600) + (minutes * 60) + seconds;
+
+      return totalSeconds;
+    }, // END timestamp2seconds
+
+    // -------------------------------------------------------------------------
+    // seconds2timestamp(seconds)
+    //
+    // converts seconds into a timestamp of hh:mm:ss
+    // -------------------------------------------------------------------------
+    seconds2timestamp: (seconds) => {
+      if (isNaN(seconds)) {
+        return false;
+      }
+
+      const hours         = Math.floor(seconds / 3600);
+      const minutes       = Math.floor((seconds % 3600) / 60);
+      const remainSeconds = seconds % 60;
+      const tsHours       = hours.toString().padStart(2, '0');
+      const tsMinutes     = minutes.toString().padStart(2, '0');
+      const tsSeconds     = remainSeconds.toString().padStart(2, '0');
+    
+      return `${tsHours}:${tsMinutes}:${tsSeconds}`;
+    }, // END seconds2timestamp
 
     // -------------------------------------------------------------------------
     // messageHandler()

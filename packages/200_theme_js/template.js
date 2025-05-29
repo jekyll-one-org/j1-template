@@ -68,7 +68,9 @@ window.j1.api.errorFilters   = require('./js/api/error_filter/errorFilters.js');
 window.j1.api.navigator      = require('./js/api/navigator/navigator.js');
 window.j1.api.scrollSmooth   = require('./js/api/scroll-smooth/scroll-smooth.js');
 
-window.j1.modules         = {};                                                 // placeholder object for all J1 Modules
+// window.j1.api.ts2sec         = require('./js/api/tools/timestamps2seconds.js');
+
+window.j1.modules            = {};                                              // placeholder object for all J1 Modules
 
 // Following source objects|modules are *implicetly* forced to be
 // exposed for run-time to the global namespace (window).
