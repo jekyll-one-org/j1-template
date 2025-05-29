@@ -304,6 +304,8 @@ exclude_from_search:                    true
             <input
               id="volume_slider_{{player_id}}"
               class="mini-player amplitude-volume-slider"
+              data-amplitude-source="{{source_media_attribute}}"
+              data-amplitude-playlist="{{player_playlist}}"
               type="range"
               min="{{volume_slider_min}}"
               max="{{volume_slider_max}}"
@@ -584,6 +586,8 @@ exclude_from_search:                    true
                         <input
                           id="volume_slider_{{player_id}}"
                           class="amplitude-volume-slider"
+                          data-amplitude-source="{{source_media_attribute}}"
+                          data-amplitude-playlist="{{player_playlist}}"
                           type="range"
                           min="{{volume_slider_min}}"
                           max="{{volume_slider_max}}"
@@ -824,6 +828,7 @@ exclude_from_search:                    true
                   <input
                     id="volume_slider_{{player_id}}"
                     class="amplitude-volume-slider"
+                    data-amplitude-playlist="{{player_playlist}}"
                     data-amplitude-source="{{source_media_attribute}}"
                     type="range"
                     min="{{volume_slider_min}}"

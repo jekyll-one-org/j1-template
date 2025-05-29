@@ -2821,6 +2821,11 @@ regenerate: true
             var sliderID      = volumeSliders[i].id;
             var playerID      = sliderID.split('volume_slider_')[1];
 
+            // save YT player data for later use (e.g. events)
+            if (volumeSlider.dataset.amplitudeSource === 'youtube') {
+              j1.adapter.amplitude.data.ytPlayers[playerID].volumeSlider = volumeSlider;
+            }
+
             volumeSliders[i].addEventListener('click', function(event) {
 
               // update active song settings (manually)
