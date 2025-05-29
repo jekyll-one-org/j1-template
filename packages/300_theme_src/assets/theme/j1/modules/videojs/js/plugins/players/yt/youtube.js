@@ -277,7 +277,7 @@
 
       this.ytPlayer = new YT.Player(this.options_.techId, playerConfig);
 
-      logger.debug('\n' + 'created ' + this.name_ + ' player on ID: ' + this.el_.firstChild.id);
+      isDev && logger.debug('\n' + 'created ' + this.name_ + ' player on ID: ' + this.el_.firstChild.id);
     } // END initYTPlayer
 
     onPlayerReady() {
@@ -762,16 +762,16 @@
   function apiLoaded() {
     YT.ready(() => {
       Youtube.isApiReady = true;
-      logger.debug('\n' + 'API loaded successfully');
+      isDev && logger.debug('\n' + 'API loaded successfully');
 
       for (var i = 0; i < Youtube.apiReadyQueue.length; ++i) {
         Youtube.apiReadyQueue[i].initYTPlayer();
       }
-      logger.debug('\n' + 'created all players from queue: #' + i);
+      isDev && logger.debug('\n' + 'created all players from queue: #' + i);
 
       endTimeModule = Date.now();
-      logger.debug('\n' + 'initializing plugin: finished');
-      logger.debug('\n' + 'plugin initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+      isDev && logger.debug('\n' + 'initializing plugin: finished');
+      isDev && logger.debug('\n' + 'plugin initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
     });
   } // END apiLoaded
 
@@ -820,7 +820,7 @@
     }
 
     head.appendChild(style);
-    logger.debug('\n' + 'added additional CSS styles');
+    isDev && logger.debug('\n' + 'added additional CSS styles');
   } // END injectCss
 
   Youtube.apiReadyQueue = [];
@@ -835,8 +835,8 @@
     if (j1CoreFinished && pageVisible) {
       startTimeModule = Date.now();
 
-      logger.debug('\n' + 'initializing plugin: started');
-      logger.debug('\n' + 'version of videoJS detected: ' + videojs.VERSION);
+      isDev && logger.debug('\n' + 'initializing plugin: started');
+      isDev && logger.debug('\n' + 'version of videoJS detected: ' + videojs.VERSION);
 
       loadScript('//www.youtube.com/iframe_api', apiLoaded);
       injectCss();

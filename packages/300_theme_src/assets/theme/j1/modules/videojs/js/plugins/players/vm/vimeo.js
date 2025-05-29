@@ -187,7 +187,7 @@
         // END API events
 
         this.triggerReady();
-        logger.debug('\n' + 'created ' + this.name_ + ' player on ID: ' + this.el_.firstChild.id);
+        isDev && logger.debug('\n' + 'created ' + this.name_ + ' player on ID: ' + this.el_.firstChild.id);
       } // END initVMPlayer
 
       initVimeoState() {
@@ -587,7 +587,7 @@
         style.appendChild(document.createTextNode(css));
       }
 
-      logger.debug('\n' + 'added additional CSS styles');
+      isDev && logger.debug('\n' + 'added additional CSS styles');
       head.appendChild(style);
     } // END injectCss
 
@@ -597,11 +597,11 @@
       for (var i = 0; i < Vimeo.sdkReadyQueue.length; ++i) {
         Vimeo.sdkReadyQueue[i].initVMPlayer();
       }
-      logger.debug('\n' + 'created all players from queue: #' + i);
+      isDev && logger.debug('\n' + 'created all players from queue: #' + i);
 
       endTimeModule = Date.now();
-      logger.debug('\n' + 'initializing plugin: finished');
-      logger.debug('\n' + 'plugin initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+      isDev && logger.debug('\n' + 'initializing plugin: finished');
+      isDev && logger.debug('\n' + 'plugin initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
     } // END apiLoaded
 
     function loadScript(src, callback) {
@@ -644,8 +644,8 @@
       if (j1CoreFinished && pageVisible) {
         startTimeModule = Date.now();
 
-        logger.debug('\n' + 'initializing plugin: started');
-        logger.debug('\n' + 'version of videoJS detected: ' + videojs.VERSION);
+        isDev && logger.debug('\n' + 'initializing plugin: started');
+        isDev && logger.debug('\n' + 'version of videoJS detected: ' + videojs.VERSION);
 
         // load script loaded from local because of NemeSpace conflicts (Vimeo -> VM)
         loadScript('/assets/theme/j1/modules/videojs/js/plugins/players/vm/api/vimeo.js', apiLoaded);

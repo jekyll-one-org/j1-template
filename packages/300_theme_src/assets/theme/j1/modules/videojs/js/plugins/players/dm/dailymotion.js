@@ -35,6 +35,7 @@
 
   var logger      = log4javascript.getLogger('videoJS.plugin.dailymotion');
   var _isOnMobile = videojs.browser.IS_IOS || videojs.browser.IS_ANDROID;
+  var isDev       = (j1.env === "development" || j1.env === "dev") ? false : true;
   var Tech        = videojs.getTech('Tech');
 
   var startTimeModule;
@@ -197,7 +198,7 @@
       });
 
       this.triggerReady();
-      logger.debug('\n' + 'created ' + this.name_ + ' player on ID: ' + vm.dmPlayer.id);
+      isDev && logger.debug('\n' + 'created ' + this.name_ + ' player on ID: ' + vm.dmPlayer.id);
     } // END initDMPlayer
 
     autoplay(autoplay) {
@@ -542,18 +543,18 @@
   };
 
   function apiLoaded() {
-    logger.debug('\n' + 'API loaded successfully');
+    isDev && logger.debug('\n' + 'API loaded successfully');
 
     Dailymotion.isSdkReady = true;
 
     for (var i = 0; i < Dailymotion.sdkReadyQueue.length; ++i) {
       Dailymotion.sdkReadyQueue[i].initDMPlayer();
     }
-    logger.debug('\n' + 'created all players from queue: #' + i);
+    isDev && logger.debug('\n' + 'created all players from queue: #' + i);
 
     endTimeModule = Date.now();
-    logger.debug('\n' + 'initializing plugin: finished');
-    logger.debug('\n' + 'plugin initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+    isDev && logger.debug('\n' + 'initializing plugin: finished');
+    isDev && logger.debug('\n' + 'plugin initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
   } // END apiLoaded
 
   function loadScript(src, callback) {
@@ -606,7 +607,7 @@
     }
 
     head.appendChild(style);
-    logger.debug('\n' + 'added additional CSS styles');
+    isDev &&  logger.debug('\n' + 'added additional CSS styles');
   } // END injectCss
 
   // Include the version number
@@ -624,8 +625,8 @@
     if (j1CoreFinished && pageVisible) {
       startTimeModule = Date.now();
 
-      logger.debug('\n' + 'initializing plugin: started');
-      logger.debug('\n' + 'version of videoJS detected: ' + videojs.VERSION);
+      isDev && logger.debug('\n' + 'initializing plugin: started');
+      isDev && logger.debug('\n' + 'version of videoJS detected: ' + videojs.VERSION);
 
       loadScript('//api.dmcdn.net/all.js', apiLoaded);
       // loadScript('/assets/theme/j1/modules/videojs/js/plugins/players/dm/api/dailymotion.sdk.min.js', apiLoaded);

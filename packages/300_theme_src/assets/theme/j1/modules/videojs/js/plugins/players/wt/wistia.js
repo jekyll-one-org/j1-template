@@ -150,7 +150,7 @@
           }
         });
 
-        logger.debug('\n' + 'created ' + this.name_ + ' player on ID: ' + this.el_.firstChild.id);
+        isDev && logger.debug('\n' + 'created ' + this.name_ + ' player on ID: ' + this.el_.firstChild.id);
       } // END initWistiaPlayer
 
       onPlayerReady(options) {
@@ -170,7 +170,7 @@
           wt_player.addEventListener('click', (event) => {
             wtPlayerState = this.wistiaPlayer.state();
 
-            logger.debug('\n' + 'wt player state: ' + wtPlayerState);
+            isDev && logger.debug('\n' + 'wt player state: ' + wtPlayerState);
           }); // END EventListener 'click'
         } else {
           // workaround toggle play|pause for Wistia Tech (click on video itself)
@@ -178,13 +178,13 @@
           wt_player.addEventListener('click', (event) => {
             wtPlayerState = this.wistiaPlayer.state();
 
-            logger.debug('\n' + 'wt player state: ' + wtPlayerState);
+            isDev && logger.debug('\n' + 'wt player state: ' + wtPlayerState);
 
             // trigger play on state beforeplay (initiate FIRST play)
             if (wtPlayerState === 'beforeplay') {
               this.wistiaPlayer.play();
               this.trigger('play');
-              logger.debug('\n' + 'triggered play on state: ' + wtPlayerState);
+              isDev && logger.debug('\n' + 'triggered play on state: ' + wtPlayerState);
             }
           }); // END EventListener 'click'
 
@@ -332,17 +332,17 @@
 
     function apiLoaded() {
       Wistia.isApiReady = true;
-      logger.debug('\n' + 'API loaded successfully');
+      isDev && logger.debug('\n' + 'API loaded successfully');
 
       // NOTE: skip first element in ready queue as it is used internally
       for (var i = 0; i < Wistia.apiReadyQueue.length; ++i) {
         Wistia.apiReadyQueue[i].initWistiaPlayer();
       }
-      logger.debug('\n' + 'added players to ready queue: #' + i);
+      isDev && logger.debug('\n' + 'added players to ready queue: #' + i);
 
       endTimeModule = Date.now();
-      logger.debug('\n' + 'initializing plugin: finished');
-      logger.debug('\n' + 'plugin initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+      isDev && logger.debug('\n' + 'initializing plugin: finished');
+      isDev && logger.debug('\n' + 'plugin initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
     } // END apiLoaded
 
     function loadScript(src, callback) {
@@ -385,7 +385,7 @@
         style.appendChild(document.createTextNode(css));
       }
 
-      logger.debug('\n' + 'added additional CSS styles');
+      isDev && logger.debug('\n' + 'added additional CSS styles');
       head.appendChild(style);
     } // END injectCss
 
@@ -401,8 +401,8 @@
       if (j1CoreFinished && pageVisible) {
         startTimeModule = Date.now();
 
-        logger.debug('\n' + 'initializing plugin: started');
-        logger.debug('\n' + 'version of videoJS detected: ' + videojs.VERSION);
+        isDev && logger.debug('\n' + 'initializing plugin: started');
+        isDev && logger.debug('\n' + 'version of videoJS detected: ' + videojs.VERSION);
 
         loadScript('//fast.wistia.com/assets/external/E-v1.js', apiLoaded);
         injectCss();

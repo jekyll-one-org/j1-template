@@ -71,6 +71,7 @@ window.j1.api.scrollSmooth   = require('./js/api/scroll-smooth/scroll-smooth.js'
 // window.j1.api.ts2sec         = require('./js/api/tools/timestamps2seconds.js');
 
 window.j1.modules            = {};                                              // placeholder object for all J1 Modules
+window.j1.env                = 'not_set';
 
 // Following source objects|modules are *implicetly* forced to be
 // exposed for run-time to the global namespace (window).
