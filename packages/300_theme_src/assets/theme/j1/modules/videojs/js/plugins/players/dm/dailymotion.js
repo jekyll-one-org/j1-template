@@ -33,9 +33,10 @@
 }(this, function(videojs) {
  'use strict';
 
+  const isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
+
   var logger      = log4javascript.getLogger('videoJS.plugin.dailymotion');
   var _isOnMobile = videojs.browser.IS_IOS || videojs.browser.IS_ANDROID;
-  var isDev       = (j1.env === "development" || j1.env === "dev") ? false : true;
   var Tech        = videojs.getTech('Tech');
 
   var startTimeModule;
