@@ -353,8 +353,11 @@ exclude_from_search:                    true
                   <!-- place initial (first) info URL -->
                   {% if playlist_audio_info and forloop.first %}
                     <span class="amplitude-audio-info">
-                      <a class="audio-info-link" href="{{item.audio_info}}" target="_blank">
-                        <i class="mdib mdib-information md-gray-400 mdib-24px"></i>
+                      <a
+                        class="audio-info-link-{{player_playlist}} audio-info-link-screen-controls"
+                        data-amplitude-playlist="{{player_playlist}}"
+                        href="{{item.audio_info}}" target="_blank">
+                          <i class="mdib mdib-information md-gray-400 mdib-24px"></i>
                       </a>
                     </span>
                   {% else %}
@@ -379,16 +382,17 @@ exclude_from_search:                    true
 
                 <div class="song-artist-album">
                   <span
+                    class="artist audio-rating-screen-controls"
                     data-amplitude-source="{{source_media_attribute}}"
                     data-amplitude-playlist="{{player_playlist}}"
                     data-amplitude-song-info="artist">
                   </span>
-                  <span class="song-artist-album-delimiter">·</span>
+                  <!--span class="song-artist-album-delimiter">·</span>
                   <span
                     data-amplitude-source="audio"
                     data-amplitude-playlist="{{player_playlist}}"
                     data-amplitude-song-info="album">
-                  </span>  
+                  </span -->  
                 </div>
               </div>
               {% if playlist_controls %}
@@ -716,12 +720,12 @@ exclude_from_search:                    true
                 data-amplitude-source="{{source_media_attribute}}"
                 data-amplitude-song-info="artist">
               </span>
-              <span class="song-artist-album-delimiter">·</span>
+              <!-- span class="song-artist-album-delimiter">·</span>
               <span
                 data-amplitude-playlist="{{player_playlist}}"
                 data-amplitude-source="{{source_media_attribute}}"
                 data-amplitude-song-info="album">
-              </span>
+              </span -->
             </span>
           </div>
 
@@ -950,9 +954,12 @@ exclude_from_search:                    true
                   {% if playlist_audio_info and forloop.first %}
 
                   <!-- place initial (first element) info URL -->
-                  <span class="amplitude-audio-info">
-                    <a class="audio-info-link-{{player_playlist}} audio-info-link" href="{{item.audio_info}}" target="_blank">
-                      <i class="mdib mdib-information md-gray-400 mdib-24px"></i>
+                  <span class="amplitude-audio-info-large-player amplitude-audio-info">
+                    <a
+                      class="audio-info-link-{{player_playlist}} audio-info-link-screen-controls"
+                      data-amplitude-playlist="{{player_playlist}}"
+                      href="{{item.audio_info}}" target="_blank">
+                        <i class="mdib mdib-information md-gray-400 mdib-24px"></i>
                     </a>
                   </span>
                   {% else %}
@@ -988,13 +995,13 @@ exclude_from_search:                    true
                       data-amplitude-song-info="artist">
                     </span>
                     <!-- jadams, 2024-12-08: make album info configurable -->
-                    <span class="song-artist-album-delimiter">·</span>
+                    <!-- span class="song-artist-album-delimiter">·</span>
                     <span
                       class="song-info-{{player_playlist}}"
                       data-amplitude-source="audio"
                       data-amplitude-playlist="{{player_playlist}}"
                       data-amplitude-song-info="album">
-                    </span>                    
+                    </span -->                    
                   </div>
                 </div>
 

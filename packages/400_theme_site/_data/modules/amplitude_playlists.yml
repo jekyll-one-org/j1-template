@@ -548,7 +548,7 @@ settings:
           end:                          "00:02:00"
           audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/5NiMGeQOzKQ/maxresdefault.jpg
-          duration:                     "02:47"
+          duration:                     "00:02:47"
 
         # title 02
         - item:
@@ -561,7 +561,7 @@ settings:
           end:                          "00:02:20"
           audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/pCXSGCBSIG0/maxresdefault.jpg
-          duration:                     "02:53"
+          duration:                     "00:02:53"
 
         # title 03
         - item:
@@ -574,7 +574,7 @@ settings:
           end:                          "00:02:00"
           audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/fFn1GZIYC4Y/maxresdefault.jpg
-          duration:                     "02:32"
+          duration:                     "00:02:32"
 
         # title 04
         - item:
@@ -587,7 +587,7 @@ settings:
           end:                          "00:02:20"          
           audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/OUjHRpNUqyw/maxresdefault.jpg
-          duration:                     "02:57"
+          duration:                     "00:02:57"
 
         # # title 05
         - item:
@@ -600,7 +600,7 @@ settings:
           end:                          "00:02:00"
           audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/9Z9yNpsiBKs/maxresdefault.jpg
-          duration:                     "02:42"
+          duration:                     "00:02:42"
 
         # # title 06
         - item:
@@ -613,7 +613,7 @@ settings:
           end:                          "00:02:20"         
           audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/_EYc5W3qy4s/maxresdefault.jpg
-          duration:                     "03:02"
+          duration:                     "00:03:02"
 
         # title 07
         - item:
@@ -626,7 +626,7 @@ settings:
           end:                          "00:00:30"
           audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/i8ltW0WDcdQ/maxresdefault.jpg
-          duration:                     "02:19"
+          duration:                     "00:02:19"
 
         # title 08
         - item:
@@ -639,7 +639,7 @@ settings:
           end:                          "00:01:50"
           audio_info:                   //youtube.com/channel/UCEsIlUzfXYT5AZSOVnbFqsQ
           cover_image:                  //img.youtube.com/vi/yttS9UNgZFk/maxresdefault.jpg
-          duration:                     "02:45"
+          duration:                     "00:02:45"
 
     # --------------------------------------------------------------------------
     # Bea and her Business
@@ -681,7 +681,7 @@ settings:
           end:                          "00:03:20"                              # false | timestamp
           audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
           cover_image:                  //img.youtube.com/vi/fTXrSVzkIXI/maxresdefault.jpg
-          duration:                     "03:26"
+          duration:                     "00:03:26"
 
 
         # title 02
@@ -695,7 +695,7 @@ settings:
           end:                          "00:02:56"
           audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
           cover_image:                  //img.youtube.com/vi/dM7CmIHwJnU/maxresdefault.jpg
-          duration:                     "02:58"
+          duration:                     "00:02:58"
 
         # title 03
         - item:
@@ -708,7 +708,7 @@ settings:
           end:                          "00:03:14"
           audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
           cover_image:                  //img.youtube.com/vi/dM7CmIHwJnU/maxresdefault.jpg
-          duration:                     "03:21"
+          duration:                     "00:03:21"
 
         # title 04
         - item:
@@ -721,7 +721,7 @@ settings:
           end:                          false # "00:02:50"
           audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
           cover_image:                  //img.youtube.com/vi/npctqyR5ZdU/maxresdefault.jpg
-          duration:                     "02:53"
+          duration:                     "00:02:53"
 
         # title 05
         - item:
@@ -734,7 +734,7 @@ settings:
           end:                          false
           audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
           cover_image:                  //img.youtube.com/vi/DMxz1Sp8RPA/maxresdefault.jpg
-          duration:                     "02:58"
+          duration:                     "00:02:58"
 
         # title 06
         - item:
@@ -747,7 +747,7 @@ settings:
           end:                          false
           audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
           cover_image:                  //img.youtube.com/vi/PcDCR8s0IU4/maxresdefault.jpg
-          duration:                     "02:58"
+          duration:                     "00:02:58"
 
         # title 07
         - item:
@@ -760,7 +760,7 @@ settings:
           end:                          false
           audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
           cover_image:                  //img.youtube.com/vi/915zXRLgirM/maxresdefault.jpg
-          duration:                     "03:16"
+          duration:                     "00:03:16"
 
         # title 08
         - item:
@@ -773,7 +773,7 @@ settings:
           end:                          false
           audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
           cover_image:                  //img.youtube.com/vi/hu8VcmkM0yI/maxresdefault.jpg
-          duration:                     "02:37"
+          duration:                     "00:02:37"
 
         # title 09
         - item:
@@ -786,7 +786,7 @@ settings:
           end:                          false
           audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
           cover_image:                  //img.youtube.com/vi/eVcXzVMKf0I/maxresdefault.jpg
-          duration:                     "02:55"
+          duration:                     "00:02:55"
 
         # title 10
         - item:
@@ -799,7 +799,7 @@ settings:
           end:                          false
           audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
           cover_image:                  //img.youtube.com/vi/W5uafrpOZ6M/maxresdefault.jpg
-          duration:                     "02:55"
+          duration:                     "00:02:55"
 
         # title 11
         - item:
@@ -812,7 +812,7 @@ settings:
           end:                          false
           audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
           cover_image:                  //img.youtube.com/vi/gyquo0Z6ngY/maxresdefault.jpg
-          duration:                     "02:31"
+          duration:                     "00:02:31"
 
         # title 12
         - item:
@@ -825,7 +825,7 @@ settings:
           end:                          false
           audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
           cover_image:                  //img.youtube.com/vi/UXMMm3CdRdI/maxresdefault.jpg
-          duration:                     "02:31"
+          duration:                     "00:02:31"
 
         # title 13
         - item:
@@ -838,7 +838,7 @@ settings:
           end:                          false
           audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
           cover_image:                  //img.youtube.com/vi/6-B2hDMR7S0/maxresdefault.jpg
-          duration:                     "02:31"
+          duration:                     "00:02:31"
 
         # title 14
         - item:
@@ -851,7 +851,7 @@ settings:
           end:                          false
           audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
           cover_image:                  //img.youtube.com/vi/s74aKArgOvU/maxresdefault.jpg
-          duration:                     "02:31"
+          duration:                     "00:02:31"
 
         # title 15
         - item:
@@ -864,7 +864,7 @@ settings:
           end:                          false
           audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
           cover_image:                  //img.youtube.com/vi/R0UJgMJJaio/maxresdefault.jpg
-          duration:                     "02:50"
+          duration:                     "00:02:50"
 
         # title 16
         - item:
@@ -877,7 +877,7 @@ settings:
           end:                          false
           audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
           cover_image:                  //img.youtube.com/vi/ffjNBbYa_oA/maxresdefault.jpg
-          duration:                     "02:50"
+          duration:                     "00:02:50"
 
     # --------------------------------------------------------------------------
     #  Smooth Jazz (Diana Krall)
@@ -918,7 +918,7 @@ settings:
           end:                          false                                   # false | timestamp          
           audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
           cover_image:                  //img.youtube.com/vi/cizgXSegrko/maxresdefault.jpg
-          duration:                     "06:07"
+          duration:                     "00:06:07"
 
         # title 02
         - item:
@@ -931,7 +931,7 @@ settings:
           end:                          false
           audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
           cover_image:                  //img.youtube.com/vi/cizgXSegrko/maxresdefault.jpg
-          duration:                     "05:10"
+          duration:                     "00:05:10"
 
         # title 03
         - item:
@@ -944,7 +944,7 @@ settings:
           end:                          false
           audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
           cover_image:                  //img.youtube.com/vi/cizgXSegrko/maxresdefault.jpg
-          duration:                     "03:11"
+          duration:                     "00:03:11"
 
         # title 04
         - item:
@@ -957,7 +957,7 @@ settings:
           end:                          false
           audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
           cover_image:                  //img.youtube.com/vi/cizgXSegrko/maxresdefault.jpg
-          duration:                     "06:07"
+          duration:                     "00:06:07"
 
         # title 05
         - item:
@@ -970,7 +970,7 @@ settings:
           end:                          false
           audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
           cover_image:                  //img.youtube.com/vi/0XMZNI1qKh8/maxresdefault.jpg
-          duration:                     "06:07"
+          duration:                     "00:06:07"
 
         # title 06
         - item:
@@ -983,7 +983,7 @@ settings:
           end:                          false
           audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
           cover_image:                  //img.youtube.com/vi/0XMZNI1qKh8/maxresdefault.jpg
-          duration:                     "05:00"
+          duration:                     "00:05:00"
 
         # title 07
         - item:
@@ -996,7 +996,7 @@ settings:
           end:                          false
           audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
           cover_image:                  //img.youtube.com/vi/0XMZNI1qKh8/maxresdefault.jpg
-          duration:                     "03:29"
+          duration:                     "00:03:29"
 
         # title 08
         - item:
@@ -1009,7 +1009,7 @@ settings:
           end:                          false
           audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
           cover_image:                  //img.youtube.com/vi/0XMZNI1qKh8/maxresdefault.jpg
-          duration:                     "04:43"
+          duration:                     "00:04:43"
 
         # title 09
         - item:
@@ -1022,7 +1022,7 @@ settings:
           end:                          false
           audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
           cover_image:                  //img.youtube.com/vi/0XMZNI1qKh8/maxresdefault.jpg
-          duration:                     "03:50"
+          duration:                     "00:03:50"
 
         # title 10
         - item:
@@ -1035,7 +1035,7 @@ settings:
           end:                          false
           audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
           cover_image:                  //img.youtube.com/vi/0XMZNI1qKh8/maxresdefault.jpg
-          duration:                     "03:48"
+          duration:                     "00:03:48"
 
         # title 11
         - item:
@@ -1048,7 +1048,7 @@ settings:
           end:                          false
           audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
           cover_image:                  //img.youtube.com/vi/jkk2mMq2x8E/maxresdefault.jpg
-          duration:                     "04:10"
+          duration:                     "00:04:10"
 
         # title 12
         - item:
@@ -1061,7 +1061,7 @@ settings:
           end:                          false
           audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
           cover_image:                  //img.youtube.com/vi/_z7X8fbNIkI/maxresdefault.jpg
-          duration:                     "03:59"
+          duration:                     "00:03:59"
 
         # title 13
         - item:
@@ -1074,7 +1074,7 @@ settings:
           end:                          false
           audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
           cover_image:                  //img.youtube.com/vi/0XMZNI1qKh8/maxresdefault.jpg
-          duration:                     "04:37"
+          duration:                     "00:04:37"
 
         # title 14
         - item:
@@ -1087,7 +1087,7 @@ settings:
           end:                          false
           audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
           cover_image:                  //img.youtube.com/vi/0XMZNI1qKh8/maxresdefault.jpg
-          duration:                     "05:26"
+          duration:                     "00:05:26"
 
         # title 15
         - item:
@@ -1100,7 +1100,7 @@ settings:
           end:                          false
           audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
           cover_image:                  //img.youtube.com/vi/0XMZNI1qKh8/maxresdefault.jpg
-          duration:                     "05:14"
+          duration:                     "00:05:14"
 
         # title 16
         - item:
@@ -1113,7 +1113,7 @@ settings:
           end:                          false
           audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
           cover_image:                  //img.youtube.com/vi/0XMZNI1qKh8/maxresdefault.jpg
-          duration:                     "06:21"
+          duration:                     "00:06:21"
 
         # title 17
         - item:
@@ -1126,7 +1126,7 @@ settings:
           end:                          false
           audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
           cover_image:                  //img.youtube.com/vi/0XMZNI1qKh8/maxresdefault.jpg
-          duration:                     "04:35"
+          duration:                     "00:04:35"
 
         # title 18
         - item:
@@ -1139,7 +1139,7 @@ settings:
           end:                          false
           audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
           cover_image:                  //img.youtube.com/vi/0XMZNI1qKh8/maxresdefault.jpg
-          duration:                     "05:22"
+          duration:                     "00:05:22"
 
         # title 19
         - item:
@@ -1152,7 +1152,7 @@ settings:
           end:                          false
           audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
           cover_image:                  //img.youtube.com/vi/0XMZNI1qKh8/maxresdefault.jpg
-          duration:                     "04:57"
+          duration:                     "00:04:57"
 
         # title 20
         - item:
@@ -1165,7 +1165,7 @@ settings:
           end:                          false
           audio_info:                   //youtube.com/playlist?list=PL63F10BA7870008CB
           cover_image:                  //img.youtube.com/vi/d8RYUZT57XA/maxresdefault.jpg
-          duration:                     "04:01"
+          duration:                     "00:04:01"
 
     # --------------------------------------------------------------------------
     #  Mimi Rutherfurt, Maritim Verlag
@@ -1535,7 +1535,7 @@ settings:
           end:                          false
           audio:                        SoundsCrate-Dancefloor_Fever.mp3
           audio_info:                   //sfx.productioncrate.com
-          duration:                     "02:27"
+          duration:                     "00:02:27"
 
         # title 02
         - item:
@@ -1547,7 +1547,7 @@ settings:
           end:                          false          
           audio:                        SoundsCrate-Dance_On_Dance_Off.mp3
           audio_info:                   //sfx.productioncrate.com
-          duration:                     "02:14"
+          duration:                     "00:02:14"
 
         # title 03
         - item:
@@ -1559,7 +1559,7 @@ settings:
           end:                          false          
           audio:                        SoundsCrate-Disco_Flamingo.mp3
           audio_info:                   //sfx.productioncrate.com
-          duration:                     "02:19"
+          duration:                     "00:02:19"
 
         # title 04
         - item:
@@ -1571,7 +1571,7 @@ settings:
           end:                          false          
           audio:                        SoundsCrate-Downtown.mp3
           audio_info:                   //sfx.productioncrate.com
-          duration:                     "02:48"
+          duration:                     "00:02:48"
 
         # title 05
         - item:
@@ -1583,7 +1583,7 @@ settings:
           end:                          false
           audio:                        SoundsCrate-Electric_Boogie.mp3
           audio_info:                   //sfx.productioncrate.com
-          duration:                     "02:19"
+          duration:                     "00:02:19"
 
         # title 06
         - item:
@@ -1595,7 +1595,7 @@ settings:
           end:                          false          
           audio:                        SoundsCrate-Grand_Central.mp3
           audio_info:                   //sfx.productioncrate.com
-          duration:                     "02:33"
+          duration:                     "00:02:33"
 
         # title 07
         - item:
@@ -1607,7 +1607,7 @@ settings:
           end:                          false          
           audio:                        SoundsCrate-In_The_Pocket.mp3
           audio_info:                   //sfx.productioncrate.com
-          duration:                     "02:58"
+          duration:                     "00:02:58"
 
         # title 08
         - item:
@@ -1619,7 +1619,7 @@ settings:
           end:                          false
           audio:                        SoundsCrate-Lounge_Life.mp3
           audio_info:                   //sfx.productioncrate.com
-          duration:                     "02:34"
+          duration:                     "00:02:34"
 
         # title 09
         - item:
@@ -1631,7 +1631,7 @@ settings:
           end:                          false
           audio:                        SoundsCrate-Made_For_This.mp3
           audio_info:                   //sfx.productioncrate.com
-          duration:                     "02:13"
+          duration:                     "00:02:13"
 
         # title 10
         - item:
@@ -1643,7 +1643,7 @@ settings:
           end:                          false
           audio:                        SoundsCrate-Midnight_Express.mp3
           audio_info:                   //sfx.productioncrate.com
-          duration:                     "02:30"
+          duration:                     "00:02:30"
 
         # title 11
         - item:
@@ -1655,7 +1655,7 @@ settings:
           end:                          false
           audio:                        SoundsCrate-Nightrun.mp3
           audio_info:                   //sfx.productioncrate.com
-          duration:                     "02:58"
+          duration:                     "00:02:58"
 
         # title 12
         - item:
@@ -1667,7 +1667,7 @@ settings:
           end:                          false
           audio:                        SoundsCrate-Saturday_Night.mp3
           audio_info:                   //sfx.productioncrate.com
-          duration:                     "02:02"
+          duration:                     "00:02:02"
 
         # title 13
         - item:
@@ -1679,7 +1679,7 @@ settings:
           end:                          false
           audio:                        SoundsCrate-Studio_45.mp3
           audio_info:                   //sfx.productioncrate.com
-          duration:                     "01:56"
+          duration:                     "00:01:56"
 
         # title 14
         - item:
@@ -1691,7 +1691,7 @@ settings:
           end:                          false
           audio:                        SoundsCrate-Yes_Sir_I_Can_Disco.mp3
           audio_info:                   //sfx.productioncrate.com
-          duration:                     "02:21"
+          duration:                     "00:02:21"
 
         # title 15
         - item:
@@ -1703,7 +1703,7 @@ settings:
           end:                          false
           audio:                        soundscrate-fashion-show.mp3
           audio_info:                   /sfx.productioncrate.com
-          duration:                     "03:08"
+          duration:                     "00:03:08"
 
         # title 16
         - item:
@@ -1715,7 +1715,7 @@ settings:
           end:                          false
           audio:                        soundscrate-loungy-disco.mp3
           audio_info:                   //sfx.productioncrate.com
-          duration:                     "03:04"
+          duration:                     "00:03:04"
 
         # title 17
         - item:
@@ -1727,7 +1727,7 @@ settings:
           end:                          false
           audio:                        soundscrate-oakland-style.mp3
           audio_info:                   //sfx.productioncrate.com
-          duration:                     "03:19"
+          duration:                     "00:03:19"
 
         # title 18
         - item:
@@ -1739,7 +1739,7 @@ settings:
           end:                          false
           audio:                        soundscrate-funkish-vibe.mp3
           audio_info:                   //sfx.productioncrate.com
-          duration:                     "02:38"
+          duration:                     "00:02:38"
 
 # ------------------------------------------------------------------------------
 # END config

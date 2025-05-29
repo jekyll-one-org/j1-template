@@ -171,7 +171,7 @@ to a design or layout that minimizes the component's space while maintaining
 its functionality and usability.
 
 .Emancipator · From Dusk To Dawn
-amplitude::emancipator_large[role="mb-5"]
+amplitude::emancipator_large[role="mb-4"]
 
 // .Royalty Free Music · Disco 80th
 // amplitude::disco_large[role="mb-4"]
@@ -202,6 +202,9 @@ for native audio files.
 .Bea and her Business · YouTube 2025
 amplitude::bea_yt_large[role="mb-5"]
 
+.Diana Krall · YouTube
+amplitude::diana_krall_yt_large[role="mb-4"]
+
 [role="mt-4 mb-5"]
 [NOTE]
 ====
@@ -228,4 +231,3 @@ HTML5 video for local content and from online sources on the Internet.
 
 [role="mb-8"]
 Incredible? See the next example page link:{url-tour--video_data}[Video Player].
-

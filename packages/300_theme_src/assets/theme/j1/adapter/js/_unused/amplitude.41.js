@@ -876,6 +876,9 @@ j1.adapter.amplitude = ((j1, window) => {
 
         logger.debug(`PLAY audio on processOnStateChangePlaying for playlist \'${playList}\' at trackID|state: ${trackID}|${AT_PLAYER_STATE_NAMES[state]}`);   
 
+        // set song (manually) active at index in playlist
+        _this.setSongActive(playList, songIndex);
+
         // stop active YT players
         // ---------------------------------------------------------------------
         _this.ytStopActivePlayers(j1.adapter.amplitude.data.ytPlayers);
@@ -2054,6 +2057,37 @@ j1.adapter.amplitude = ((j1, window) => {
       } // END if songEndSec
 
     }, // END atpProcessAudioEndPosition     
+
+    // -------------------------------------------------------------------------
+    // setSongActive(currentPlayList, currentIndex)
+    //
+    // set song active at index in playlist
+    // -------------------------------------------------------------------------
+    setSongActive: (currentPlayList, currentIndex) => {
+      var playlist, songContainers, songIndex;
+
+      songIndex = currentIndex;
+
+      // clear ALL active song containers
+      // -------------------------------------------------------------------------
+      songContainers = document.getElementsByClassName("amplitude-song-container");
+      for (var i=0; i<songContainers.length; i++) {
+        songContainers[i].classList.remove("amplitude-active-song-container");
+      }
+
+      // find current song container and activate the element
+      // -------------------------------------------------------------------------
+      songContainers = document.querySelectorAll('.amplitude-song-container[data-amplitude-song-index="' + songIndex + '"]');          
+      for (var i=0; i<songContainers.length; i++) {
+        if (songContainers[i].hasAttribute("data-amplitude-playlist")) {
+          playlist = songContainers[i].getAttribute("data-amplitude-playlist");
+          if (playlist === currentPlayList) {
+            songContainers[i].classList.add("amplitude-active-song-container");
+          }
+        }
+      }
+
+    },
 
     // -------------------------------------------------------------------------
     // messageHandler()

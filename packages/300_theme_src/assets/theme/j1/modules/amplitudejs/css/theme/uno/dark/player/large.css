@@ -277,13 +277,21 @@
   margin-top: 8px;
   margin-right: 12px;
 }
+
 .audio-duration {
   float: right;
-  /* margin-left: 103px; */
   font-family: "Lato", sans-serif;
   font-size: 16px;
   color: var(--ajs-theme-uno--gray-300);
 }
+
+.audio-rating {
+  float: right;
+  margin-top: 20px;
+  /* margin-right: -43px;   */
+  margin-right: -66px;  
+}
+
 .song-name {
   line-height: 24px;
   white-space: nowrap;
@@ -294,30 +302,42 @@
   color: var(--ajs-theme-uno--white);
 }
 
-div.screen-controls-large-player
-div.playlist-screen-meta-container
-span.audio-rating {
-  display: flex;
-  float: right;
-  margin-top: 10px;
-  /* margin-right: -48px; */
-}
+/* div.playlist-screen-meta-container .song-artist-album {
+  opacity: 0.5;
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  line-height: 18px;
+  color: var(--ajs-theme-uno--white);
+} */
 
-div.playlist-screen-meta-container .song-artist-album {
+.screen-controls-large-player
+.playlist-screen-meta-container
+.song-artist-album {
   opacity: 0.5;
   font-family: "Lato", sans-serif;
   font-size: 16px;
   line-height: 18px;
   color: var(--ajs-theme-uno--white);
 }
+
+.screen-controls-large-player
+.playlist-screen-meta-container
 .audio-rating {
-  float: left;
-  padding-left: 65px;
-}
-.amplitude-audio-info {
+  display: flex;
   float: right;
-  margin-right: -80px;
+  margin-top: 0px;
+  margin-right: -94px;
 }
+
+.screen-controls-large-player
+.playlist-screen-meta-container
+.amplitude-audio-info {  
+  float: right;
+  margin-top: -10px;
+  margin-right: -126px;
+}
+
+
 div.playlist-screen-controls div.list-controls {
   float: right;
   width: 90px;

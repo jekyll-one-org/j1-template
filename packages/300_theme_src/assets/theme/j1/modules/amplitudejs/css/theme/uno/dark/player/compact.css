@@ -398,6 +398,7 @@ img.now-playing {
   display: flex;
   float: right;
   margin-top: -38px;
+  margin-right: -3px;
 }
 
 .compact-player-title-list
@@ -420,7 +421,8 @@ img.now-playing {
   color: var(--ajs-theme-uno--gray-300);
 }
 
-.playlist-screen-meta-container
+/* .playlist-screen-meta-container */
+.amplitude-audio-info-compact-player
 .audio-rating {
   display: flex;
   float: right;
@@ -428,10 +430,21 @@ img.now-playing {
   margin-right: -100px;
 }
 
+.screen-controls-compact-player
 .playlist-screen-meta-container
 .amplitude-audio-info {
     float: right;
+    margin-top: -10px;
     margin-right: -130px;
+}
+
+.screen-controls-compact-player
+.playlist-screen-meta-container
+.audio-rating {
+  display: flex;
+  float: right;
+  margin-top: 0px;
+  margin-right: -94px;
 }
 
 .compact-player-title-list
@@ -479,11 +492,11 @@ img.now-playing {
 .playlist-screen-controls
 .playlist-screen-meta-container
 .song-name {
+  display: block;
   font-family: "Lato", sans-serif;
   font-size: 18px;
   line-height: 24px;
   white-space: nowrap;
-  overflow: hidden;
   text-overflow: ellipsis;
   color: var(--ajs-theme-uno--white);
 }
