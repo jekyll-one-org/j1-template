@@ -87,6 +87,8 @@ regenerate:                             true
 
 j1.adapter.amplitude = ((j1, window) => {
 
+  const isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
+
   // Adapter GLOBAL settings
   // ---------------------------------------------------------------------------
   var environment   = '{{environment}}';
@@ -735,7 +737,7 @@ j1.adapter.amplitude = ((j1, window) => {
         // transition will be
         const iterationSteps = {
           'default':  150,
-          'slow': 	  250,
+          'slow':     250,
           'slower':   350,
           'slowest':  500
         };
@@ -792,7 +794,7 @@ j1.adapter.amplitude = ((j1, window) => {
         // transition will be
         const iterationSteps = {
           'default':  150,
-          'slow': 	  250,
+          'slow':     250,
           'slower':   350,
           'slowest':  500
         };
