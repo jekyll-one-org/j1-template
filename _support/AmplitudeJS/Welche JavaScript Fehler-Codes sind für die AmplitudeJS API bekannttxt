@@ -1,0 +1,54 @@
+Welche JavaScript Fehler-Codes sind für die AmplitudeJS API bekannt?
+
+Perplexity
+--------------------------------------------------------------------------------
+
+Für die AmplitudeJS API (bzw. für das JavaScript SDK von Amplitude) gibt es keine spezifischen, offiziell dokumentierten JavaScript-Fehler-Codes im Sinne von numerischen Fehlercodes wie bei HTTP-Statuscodes. Stattdessen treten in der Praxis typische JavaScript-Fehler auf, die bei der Nutzung der API auftreten können. Diese werden meist als Fehlermeldungen in der Browser-Konsole oder als Exceptions ausgegeben[1][2][5].
+
+Hier sind die häufigsten Fehlerarten und deren Ursachen:
+
+## Typische JavaScript-Fehler bei AmplitudeJS
+
+- **TypeError: Cannot read properties of undefined (reading 'save')**
+  - Tritt auf, wenn versucht wird, auf eine Eigenschaft eines undefined-Objekts zuzugreifen, z.B. weil Amplitude nicht korrekt initialisiert wurde oder ein falscher Objektpfad verwendet wird[1].
+- **TypeError: undefined is not an object (evaluating 'i[null!=o?o:0]')**
+  - Ein weiterer häufiger Fehler, der auf Zugriffsprobleme auf undefinierte oder falsch referenzierte Objekte hinweist[5].
+- **Module Parse Failed / Export not found**
+  - Diese Fehler treten auf, wenn Module nicht korrekt importiert werden oder es Probleme mit der Kompatibilität oder dem Build-System gibt[1][2].
+- **SyntaxError: The requested module does not provide an export named 'default'**
+  - Tritt auf, wenn ES6-Module (z.B. blueimp-md5) nicht korrekt exportieren oder importiert werden[2].
+- **Unhandled Promise Rejection**
+  - Kann auftreten, wenn asynchrone Operationen fehlschlagen und nicht abgefangen werden[5].
+- **Failed to load script / Failed integrity metadata check**
+  - Tritt auf, wenn das Laden des AmplitudeJS-Skripts fehlschlägt, z.B. wegen fehlerhafter URLs oder Integritätsprüfungen[5].
+
+## HTTP-Statuscodes (API-Ebene)
+
+Diese Fehler betreffen nicht direkt JavaScript, sondern die API-Kommunikation mit dem Amplitude-Backend. Sie sind aber für Entwickler relevant, die AmplitudeJS zur Kommunikation mit der Amplitude-API nutzen:
+
+| Code | Bedeutung |
+|------|-----------|
+| 200  | Erfolg    |
+| 400  | Falsches JSON-Format |
+| 413  | Payload zu groß      |
+| 429  | Zu viele Anfragen    |
+| 500  | Serverfehler         |
+
+Diese Codes werden im Response-Objekt zurückgegeben, wenn die API angefragt wird[3].
+
+## Zusammenfassung
+
+Für AmplitudeJS gibt es keine speziellen JavaScript-Fehler-Codes, sondern nur die üblichen JavaScript-Fehler und Exceptions, die in der Browser-Konsole erscheinen. Auf API-Ebene werden HTTP-Statuscodes verwendet, die im Response-Objekt auftauchen können[1][3][5].
+
+Citations:
+[1] https://github.com/amplitude/amplitude-javascript/issues
+[2] https://github.com/amplitude/Amplitude-JavaScript/issues/361
+[3] https://community.amplitude.com/data-instrumentation-57/common-api-error-codes-215
+[4] https://521dimensions.com/open-source/amplitudejs/docs/fx/visualizations.html
+[5] https://community.feathery.io/t/console-error-when-using-amplitude/113
+[6] https://community.amplitude.com/data-planning-and-governance-73/
+
+amplitude-js-changing-request-header-doesn-t-work-862
+[7] https://stackoverflow.com/questions/49640248/amplitudejs-audio-player-and-json
+[8] https://521dimensions.com/open-source/amplitudejs/docs/configuration/callbacks.html
+

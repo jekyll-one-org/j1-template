@@ -1,0 +1,33 @@
+Welche Audio-Formate werden von AmplitudeJS unterstützt
+
+Perplexity
+--------------------------------------------------------------------------------
+
+AmplitudeJS ist eine JavaScript-Bibliothek zur Erstellung und Steuerung eines individuellen Web-Audio-Players[1][2]. In der offiziellen Dokumentation und auf der Projektseite wird explizit darauf hingewiesen, dass AmplitudeJS als Frontend für HTML5-Audio fungiert und keine eigenen Audio-Codecs implementiert. Stattdessen nutzt es die Audio-Fähigkeiten des Browsers, sodass die unterstützten Audio-Formate von den jeweiligen Browser-Versionen abhängen, auf denen AmplitudeJS läuft[1][2].
+
+Die am häufigsten unterstützten Audio-Formate in modernen Browsern sind:
+
+- **MP3** (MPEG-1 Audio Layer III)
+- **WAV** (Waveform Audio File Format)
+- **OGG** (Ogg Vorbis)
+- **AAC/M4A** (Advanced Audio Coding)
+- **WebM** (nur Audio-Track)
+
+AmplitudeJS selbst schreibt in der Dokumentation und in den Beispielen, dass du einfach die URL zu deiner Audiodatei im gewünschten Format angeben musst (z.B. `url: "/song/url.mp3"` im JSON-Objekt für die Songliste)[6]. Die tatsächliche Wiedergabe hängt dann davon ab, welche Formate dein Browser unterstützt.
+
+**Zusammenfassung:**  
+AmplitudeJS unterstützt alle Audio-Formate, die der verwendete Browser unterstützt – typischerweise MP3, WAV, OGG, AAC/M4A und WebM[1][2][6].
+
+Citations:
+[1] https://github.com/serversideup/amplitudejs
+[2] https://521dimensions.com/open-source/amplitudejs
+[3] https://www.magix.com/at/musik-bearbeiten/audioformate/
+[4] https://www.youtube.com/watch?v=kWHj2WqOm3g
+[5] https://stackoverflow.com/questions/49640248/amplitudejs-audio-player-and-json
+[6] https://521dimensions.com/open-source/amplitudejs/docs/initialization/
+[7] https://discourse.webflow.com/t/amplitude-html-audio-player-integration/211008
+[8] https://de.linux-terminal.com/?p=7147
+
+---
+Antwort von Perplexity: pplx.ai/share
+

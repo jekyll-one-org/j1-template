@@ -51,6 +51,8 @@ settings:
         audio_base:                     //youtube.com
         audio_info:                     //youtube.com/watch?v=9LojTw98Fks
         cover_image:                    //img.youtube.com/vi/9LojTw98Fks/maxresdefault.jpg
+        repeat:                         false
+        shuffle:                        false        
 
       # ------------------------------------------------------------------------
       # TITLE settings (songs)
@@ -257,6 +259,8 @@ settings:
         audio_fade:                     false
         audio_base:                     //youtube.com
         cover_image:                    //img.youtube.com/vi/D2gVmGFa2wE/maxresdefault.jpg
+        repeat:                         false
+        shuffle:                        false
 
       # ------------------------------------------------------------------------
       # TITLE settings (songs)
@@ -524,6 +528,7 @@ settings:
         cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
         audio_fade:                     true
         audio_single:                   false
+        repeat:                         false
         shuffle:                        false
 
       # ------------------------------------------------------------------------
@@ -663,6 +668,7 @@ settings:
         cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
         audio_fade:                     true
         audio_single:                   false
+        repeat:                         false
         shuffle:                        false
 
       # ------------------------------------------------------------------------
@@ -900,7 +906,8 @@ settings:
         cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
         audio_fade:                     true
         audio_single:                   false
-        shuffle:                        false        
+        repeat:                         false
+        shuffle:                        false    
 
       # ------------------------------------------------------------------------
       # TITLE settings (songs)
@@ -1186,6 +1193,8 @@ settings:
         artist:                         Maritim Verlag
         audio_base:                     //youtube.com
         cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
+        repeat:                         false
+        shuffle:                        false        
 
       # ------------------------------------------------------------------------
       # Playlist Items (Songs)
@@ -1347,6 +1356,8 @@ settings:
         playlist:                       faelle_des_bnd_yt
         audio_base:                     //youtube.com
         cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
+        repeat:                         false
+        shuffle:                        false        
 
       # ------------------------------------------------------------------------
       # Playlist Items (Songs)
@@ -1397,6 +1408,8 @@ settings:
         audio_info:                     //emancipatormusic.com/
         audio_fade_in:                  true
         audio_fade_out:                 true
+        repeat:                         false
+        shuffle:                        false        
 
       # ------------------------------------------------------------------------
       # Playlist Items (Songs)
@@ -1519,6 +1532,8 @@ settings:
         audio_base:                     //p.productioncrate.com/stock-hd/audio
         cover_image:                    /assets/audio/cover/royalty_free/free_disco_sounds.jpg
         audio_fade:                     false
+        repeat:                         false
+        shuffle:                        false        
 
       # ------------------------------------------------------------------------
       # Playlist Items (Songs)
