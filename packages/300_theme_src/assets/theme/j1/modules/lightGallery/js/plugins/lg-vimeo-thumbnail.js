@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/modules/lightGallery/js/plugins/lg-vimeo-thumbnail.js
- # Provides lightGallery JS code for the plugin lgVideo
+ # Provides lightGallery v2.8.3 JS code for the plugin lgVimeoThumbnail
  #
  # Product/Info:
  # https://jekyll.one
@@ -17,7 +17,7 @@
 */
 
 /*!
- * lightgallery | 2.7.2 | September 20th 2023
+ * lightgallery | 2.8.3 | March 1st 2025
  * http://www.lightgalleryjs.com/
  * Copyright (c) 2020 Sachin Neravath;
  * @license GPLv3

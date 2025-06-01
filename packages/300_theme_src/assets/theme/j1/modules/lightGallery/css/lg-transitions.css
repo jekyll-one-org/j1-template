@@ -1,48 +1,19 @@
-/*
- # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/lightGallery/css/core/lg-transitions.css
- # Provides lightGallery transition styles
- #
- # Product/Info:
- # https://jekyll.one
- #
- # Copyright (C) 2023 Sachin Neravath
- # Copyright (C) 2023-2025 Juergen Adams
- #
- # J1 Template is licensed under the MIT License.
- # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
- # lightGallery is licensed under the GPLv3 license
- # See: https://github.com/sachinchoolur/lightGallery/blob/master/LICENSE
- # -----------------------------------------------------------------------------
-*/
-
-/*!
- * lightgallery | 2.7.2 | September 20th 2023
- * http://www.lightgalleryjs.com/
- * Copyright (c) 2020 Sachin Neravath;
- * @license GPLv3
- */
-
 .lg-css3.lg-zoom-in .lg-item {
   opacity: 0;
 }
-
 .lg-css3.lg-zoom-in .lg-item.lg-prev-slide {
   -webkit-transform: scale3d(1.3, 1.3, 1.3);
   transform: scale3d(1.3, 1.3, 1.3);
 }
-
 .lg-css3.lg-zoom-in .lg-item.lg-next-slide {
   -webkit-transform: scale3d(1.3, 1.3, 1.3);
   transform: scale3d(1.3, 1.3, 1.3);
 }
-
 .lg-css3.lg-zoom-in .lg-item.lg-current {
   -webkit-transform: scale3d(1, 1, 1);
   transform: scale3d(1, 1, 1);
   opacity: 1;
 }
-
 .lg-css3.lg-zoom-in .lg-item.lg-prev-slide, .lg-css3.lg-zoom-in .lg-item.lg-next-slide, .lg-css3.lg-zoom-in .lg-item.lg-current {
   -webkit-transition: -webkit-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 1s ease 0s;
   -moz-transition: -moz-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 1s ease 0s;
@@ -53,7 +24,6 @@
 .lg-css3.lg-lollipop-rev .lg-item {
   opacity: 0;
 }
-
 .lg-css3.lg-lollipop-rev .lg-item.lg-prev-slide {
   -moz-transform: translate3d(0, 0, 0) scale(0.5);
   -o-transform: translate3d(0, 0, 0) scale(0.5);
@@ -61,18 +31,15 @@
   -webkit-transform: translate3d(0, 0, 0) scale(0.5);
   transform: translate3d(0, 0, 0) scale(0.5);
 }
-
 .lg-css3.lg-lollipop-rev .lg-item.lg-next-slide {
   -webkit-transform: translate3d(100%, 0, 0);
   transform: translate3d(100%, 0, 0);
 }
-
 .lg-css3.lg-lollipop-rev .lg-item.lg-current {
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
   opacity: 1;
 }
-
 .lg-css3.lg-lollipop-rev .lg-item.lg-prev-slide, .lg-css3.lg-lollipop-rev .lg-item.lg-next-slide, .lg-css3.lg-lollipop-rev .lg-item.lg-current {
   -webkit-transition: -webkit-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
   -moz-transition: -moz-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
@@ -83,7 +50,6 @@
 .lg-css3.lg-slide-skew-ver-cross .lg-item {
   opacity: 0;
 }
-
 .lg-css3.lg-slide-skew-ver-cross .lg-item.lg-prev-slide {
   -moz-transform: skew(0deg, 20deg) translate3d(0, -100%, 0px);
   -o-transform: skew(0deg, 20deg) translate3d(0, -100%, 0px);
@@ -91,7 +57,6 @@
   -webkit-transform: skew(0deg, 20deg) translate3d(0, -100%, 0px);
   transform: skew(0deg, 20deg) translate3d(0, -100%, 0px);
 }
-
 .lg-css3.lg-slide-skew-ver-cross .lg-item.lg-next-slide {
   -moz-transform: skew(0deg, 20deg) translate3d(0, 100%, 0px);
   -o-transform: skew(0deg, 20deg) translate3d(0, 100%, 0px);
@@ -99,7 +64,6 @@
   -webkit-transform: skew(0deg, 20deg) translate3d(0, 100%, 0px);
   transform: skew(0deg, 20deg) translate3d(0, 100%, 0px);
 }
-
 .lg-css3.lg-slide-skew-ver-cross .lg-item.lg-current {
   -moz-transform: skew(0deg, 0deg) translate3d(0%, 0%, 0px);
   -o-transform: skew(0deg, 0deg) translate3d(0%, 0%, 0px);
@@ -108,7 +72,6 @@
   transform: skew(0deg, 0deg) translate3d(0%, 0%, 0px);
   opacity: 1;
 }
-
 .lg-css3.lg-slide-skew-ver-cross .lg-item.lg-prev-slide, .lg-css3.lg-slide-skew-ver-cross .lg-item.lg-next-slide, .lg-css3.lg-slide-skew-ver-cross .lg-item.lg-current {
   -webkit-transition: -webkit-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
   -moz-transition: -moz-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
@@ -119,12 +82,10 @@
 .lg-css3.lg-lollipop .lg-item {
   opacity: 0;
 }
-
 .lg-css3.lg-lollipop .lg-item.lg-prev-slide {
   -webkit-transform: translate3d(-100%, 0, 0);
   transform: translate3d(-100%, 0, 0);
 }
-
 .lg-css3.lg-lollipop .lg-item.lg-next-slide {
   -moz-transform: translate3d(0, 0, 0) scale(0.5);
   -o-transform: translate3d(0, 0, 0) scale(0.5);
@@ -132,13 +93,11 @@
   -webkit-transform: translate3d(0, 0, 0) scale(0.5);
   transform: translate3d(0, 0, 0) scale(0.5);
 }
-
 .lg-css3.lg-lollipop .lg-item.lg-current {
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
   opacity: 1;
 }
-
 .lg-css3.lg-lollipop .lg-item.lg-prev-slide, .lg-css3.lg-lollipop .lg-item.lg-next-slide, .lg-css3.lg-lollipop .lg-item.lg-current {
   -webkit-transition: -webkit-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
   -moz-transition: -moz-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
@@ -149,7 +108,6 @@
 .lg-css3.lg-slide-skew-ver-rev .lg-item {
   opacity: 0;
 }
-
 .lg-css3.lg-slide-skew-ver-rev .lg-item.lg-prev-slide {
   -moz-transform: skew(-60deg, 0deg) translate3d(0, -100%, 0px);
   -o-transform: skew(-60deg, 0deg) translate3d(0, -100%, 0px);
@@ -157,7 +115,6 @@
   -webkit-transform: skew(-60deg, 0deg) translate3d(0, -100%, 0px);
   transform: skew(-60deg, 0deg) translate3d(0, -100%, 0px);
 }
-
 .lg-css3.lg-slide-skew-ver-rev .lg-item.lg-next-slide {
   -moz-transform: skew(-60deg, 0deg) translate3d(0, 100%, 0px);
   -o-transform: skew(-60deg, 0deg) translate3d(0, 100%, 0px);
@@ -165,7 +122,6 @@
   -webkit-transform: skew(-60deg, 0deg) translate3d(0, 100%, 0px);
   transform: skew(-60deg, 0deg) translate3d(0, 100%, 0px);
 }
-
 .lg-css3.lg-slide-skew-ver-rev .lg-item.lg-current {
   -moz-transform: skew(0deg, 0deg) translate3d(0%, 0%, 0px);
   -o-transform: skew(0deg, 0deg) translate3d(0%, 0%, 0px);
@@ -174,7 +130,6 @@
   transform: skew(0deg, 0deg) translate3d(0%, 0%, 0px);
   opacity: 1;
 }
-
 .lg-css3.lg-slide-skew-ver-rev .lg-item.lg-prev-slide, .lg-css3.lg-slide-skew-ver-rev .lg-item.lg-next-slide, .lg-css3.lg-slide-skew-ver-rev .lg-item.lg-current {
   -webkit-transition: -webkit-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
   -moz-transition: -moz-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
@@ -185,7 +140,6 @@
 .lg-css3.lg-rotate-rev .lg-item {
   opacity: 0;
 }
-
 .lg-css3.lg-rotate-rev .lg-item.lg-prev-slide {
   -moz-transform: rotate(360deg);
   -o-transform: rotate(360deg);
@@ -193,7 +147,6 @@
   -webkit-transform: rotate(360deg);
   transform: rotate(360deg);
 }
-
 .lg-css3.lg-rotate-rev .lg-item.lg-next-slide {
   -moz-transform: rotate(-360deg);
   -o-transform: rotate(-360deg);
@@ -201,7 +154,6 @@
   -webkit-transform: rotate(-360deg);
   transform: rotate(-360deg);
 }
-
 .lg-css3.lg-rotate-rev .lg-item.lg-current {
   -moz-transform: rotate(0deg);
   -o-transform: rotate(0deg);
@@ -210,7 +162,6 @@
   transform: rotate(0deg);
   opacity: 1;
 }
-
 .lg-css3.lg-rotate-rev .lg-item.lg-prev-slide, .lg-css3.lg-rotate-rev .lg-item.lg-next-slide, .lg-css3.lg-rotate-rev .lg-item.lg-current {
   -webkit-transition: -webkit-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
   -moz-transition: -moz-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
@@ -221,7 +172,6 @@
 .lg-css3.lg-slide-skew-ver .lg-item {
   opacity: 0;
 }
-
 .lg-css3.lg-slide-skew-ver .lg-item.lg-prev-slide {
   -moz-transform: skew(60deg, 0deg) translate3d(0, -100%, 0px);
   -o-transform: skew(60deg, 0deg) translate3d(0, -100%, 0px);
@@ -229,7 +179,6 @@
   -webkit-transform: skew(60deg, 0deg) translate3d(0, -100%, 0px);
   transform: skew(60deg, 0deg) translate3d(0, -100%, 0px);
 }
-
 .lg-css3.lg-slide-skew-ver .lg-item.lg-next-slide {
   -moz-transform: skew(60deg, 0deg) translate3d(0, 100%, 0px);
   -o-transform: skew(60deg, 0deg) translate3d(0, 100%, 0px);
@@ -237,7 +186,6 @@
   -webkit-transform: skew(60deg, 0deg) translate3d(0, 100%, 0px);
   transform: skew(60deg, 0deg) translate3d(0, 100%, 0px);
 }
-
 .lg-css3.lg-slide-skew-ver .lg-item.lg-current {
   -moz-transform: skew(0deg, 0deg) translate3d(0%, 0%, 0px);
   -o-transform: skew(0deg, 0deg) translate3d(0%, 0%, 0px);
@@ -246,7 +194,6 @@
   transform: skew(0deg, 0deg) translate3d(0%, 0%, 0px);
   opacity: 1;
 }
-
 .lg-css3.lg-slide-skew-ver .lg-item.lg-prev-slide, .lg-css3.lg-slide-skew-ver .lg-item.lg-next-slide, .lg-css3.lg-slide-skew-ver .lg-item.lg-current {
   -webkit-transition: -webkit-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
   -moz-transition: -moz-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
@@ -257,7 +204,6 @@
 .lg-css3.lg-rotate .lg-item {
   opacity: 0;
 }
-
 .lg-css3.lg-rotate .lg-item.lg-prev-slide {
   -moz-transform: rotate(-360deg);
   -o-transform: rotate(-360deg);
@@ -265,7 +211,6 @@
   -webkit-transform: rotate(-360deg);
   transform: rotate(-360deg);
 }
-
 .lg-css3.lg-rotate .lg-item.lg-next-slide {
   -moz-transform: rotate(360deg);
   -o-transform: rotate(360deg);
@@ -273,7 +218,6 @@
   -webkit-transform: rotate(360deg);
   transform: rotate(360deg);
 }
-
 .lg-css3.lg-rotate .lg-item.lg-current {
   -moz-transform: rotate(0deg);
   -o-transform: rotate(0deg);
@@ -282,7 +226,6 @@
   transform: rotate(0deg);
   opacity: 1;
 }
-
 .lg-css3.lg-rotate .lg-item.lg-prev-slide, .lg-css3.lg-rotate .lg-item.lg-next-slide, .lg-css3.lg-rotate .lg-item.lg-current {
   -webkit-transition: -webkit-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
   -moz-transition: -moz-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
@@ -293,7 +236,6 @@
 .lg-css3.lg-slide-skew .lg-item {
   opacity: 0;
 }
-
 .lg-css3.lg-slide-skew .lg-item.lg-prev-slide {
   -moz-transform: skew(20deg, 0deg) translate3d(-100%, 0%, 0px);
   -o-transform: skew(20deg, 0deg) translate3d(-100%, 0%, 0px);
@@ -301,7 +243,6 @@
   -webkit-transform: skew(20deg, 0deg) translate3d(-100%, 0%, 0px);
   transform: skew(20deg, 0deg) translate3d(-100%, 0%, 0px);
 }
-
 .lg-css3.lg-slide-skew .lg-item.lg-next-slide {
   -moz-transform: skew(20deg, 0deg) translate3d(100%, 0%, 0px);
   -o-transform: skew(20deg, 0deg) translate3d(100%, 0%, 0px);
@@ -309,7 +250,6 @@
   -webkit-transform: skew(20deg, 0deg) translate3d(100%, 0%, 0px);
   transform: skew(20deg, 0deg) translate3d(100%, 0%, 0px);
 }
-
 .lg-css3.lg-slide-skew .lg-item.lg-current {
   -moz-transform: skew(0deg, 0deg) translate3d(0%, 0%, 0px);
   -o-transform: skew(0deg, 0deg) translate3d(0%, 0%, 0px);
@@ -318,7 +258,6 @@
   transform: skew(0deg, 0deg) translate3d(0%, 0%, 0px);
   opacity: 1;
 }
-
 .lg-css3.lg-slide-skew .lg-item.lg-prev-slide, .lg-css3.lg-slide-skew .lg-item.lg-next-slide, .lg-css3.lg-slide-skew .lg-item.lg-current {
   -webkit-transition: -webkit-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
   -moz-transition: -moz-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
@@ -329,7 +268,6 @@
 .lg-css3.lg-scale-up .lg-item {
   opacity: 0;
 }
-
 .lg-css3.lg-scale-up .lg-item.lg-prev-slide {
   -moz-transform: scale3d(0.8, 0.8, 0.8) translate3d(0%, 10%, 0);
   -o-transform: scale3d(0.8, 0.8, 0.8) translate3d(0%, 10%, 0);
@@ -337,7 +275,6 @@
   -webkit-transform: scale3d(0.8, 0.8, 0.8) translate3d(0%, 10%, 0);
   transform: scale3d(0.8, 0.8, 0.8) translate3d(0%, 10%, 0);
 }
-
 .lg-css3.lg-scale-up .lg-item.lg-next-slide {
   -moz-transform: scale3d(0.8, 0.8, 0.8) translate3d(0%, 10%, 0);
   -o-transform: scale3d(0.8, 0.8, 0.8) translate3d(0%, 10%, 0);
@@ -345,7 +282,6 @@
   -webkit-transform: scale3d(0.8, 0.8, 0.8) translate3d(0%, 10%, 0);
   transform: scale3d(0.8, 0.8, 0.8) translate3d(0%, 10%, 0);
 }
-
 .lg-css3.lg-scale-up .lg-item.lg-current {
   -moz-transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
   -o-transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
@@ -354,7 +290,6 @@
   transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
   opacity: 1;
 }
-
 .lg-css3.lg-scale-up .lg-item.lg-prev-slide, .lg-css3.lg-scale-up .lg-item.lg-next-slide, .lg-css3.lg-scale-up .lg-item.lg-current {
   -webkit-transition: -webkit-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 1s ease 0s;
   -moz-transition: -moz-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 1s ease 0s;
@@ -365,7 +300,6 @@
 .lg-css3.lg-slide-vertical-growth .lg-item {
   opacity: 0;
 }
-
 .lg-css3.lg-slide-vertical-growth .lg-item.lg-prev-slide {
   -moz-transform: scale3d(0.5, 0.5, 0.5) translate3d(0, -150%, 0);
   -o-transform: scale3d(0.5, 0.5, 0.5) translate3d(0, -150%, 0);
@@ -373,7 +307,6 @@
   -webkit-transform: scale3d(0.5, 0.5, 0.5) translate3d(0, -150%, 0);
   transform: scale3d(0.5, 0.5, 0.5) translate3d(0, -150%, 0);
 }
-
 .lg-css3.lg-slide-vertical-growth .lg-item.lg-next-slide {
   -moz-transform: scale3d(0.5, 0.5, 0.5) translate3d(0, 150%, 0);
   -o-transform: scale3d(0.5, 0.5, 0.5) translate3d(0, 150%, 0);
@@ -381,7 +314,6 @@
   -webkit-transform: scale3d(0.5, 0.5, 0.5) translate3d(0, 150%, 0);
   transform: scale3d(0.5, 0.5, 0.5) translate3d(0, 150%, 0);
 }
-
 .lg-css3.lg-slide-vertical-growth .lg-item.lg-current {
   -moz-transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
   -o-transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
@@ -390,7 +322,6 @@
   transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
   opacity: 1;
 }
-
 .lg-css3.lg-slide-vertical-growth .lg-item.lg-prev-slide, .lg-css3.lg-slide-vertical-growth .lg-item.lg-next-slide, .lg-css3.lg-slide-vertical-growth .lg-item.lg-current {
   -webkit-transition: -webkit-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
   -moz-transition: -moz-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
@@ -401,7 +332,6 @@
 .lg-css3.lg-slide-circular-vertical .lg-item {
   opacity: 0;
 }
-
 .lg-css3.lg-slide-circular-vertical .lg-item.lg-prev-slide {
   -moz-transform: scale3d(0, 0, 0) translate3d(0, -100%, 0);
   -o-transform: scale3d(0, 0, 0) translate3d(0, -100%, 0);
@@ -409,7 +339,6 @@
   -webkit-transform: scale3d(0, 0, 0) translate3d(0, -100%, 0);
   transform: scale3d(0, 0, 0) translate3d(0, -100%, 0);
 }
-
 .lg-css3.lg-slide-circular-vertical .lg-item.lg-next-slide {
   -moz-transform: scale3d(0, 0, 0) translate3d(0, 100%, 0);
   -o-transform: scale3d(0, 0, 0) translate3d(0, 100%, 0);
@@ -417,7 +346,6 @@
   -webkit-transform: scale3d(0, 0, 0) translate3d(0, 100%, 0);
   transform: scale3d(0, 0, 0) translate3d(0, 100%, 0);
 }
-
 .lg-css3.lg-slide-circular-vertical .lg-item.lg-current {
   -moz-transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
   -o-transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
@@ -426,7 +354,6 @@
   transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
   opacity: 1;
 }
-
 .lg-css3.lg-slide-circular-vertical .lg-item.lg-prev-slide, .lg-css3.lg-slide-circular-vertical .lg-item.lg-next-slide, .lg-css3.lg-slide-circular-vertical .lg-item.lg-current {
   -webkit-transition: -webkit-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 1s ease 0s;
   -moz-transition: -moz-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 1s ease 0s;
@@ -437,23 +364,19 @@
 .lg-css3.lg-slide-vertical .lg-item {
   opacity: 0;
 }
-
 .lg-css3.lg-slide-vertical .lg-item.lg-prev-slide {
   -webkit-transform: translate3d(0, -100%, 0);
   transform: translate3d(0, -100%, 0);
 }
-
 .lg-css3.lg-slide-vertical .lg-item.lg-next-slide {
   -webkit-transform: translate3d(0, 100%, 0);
   transform: translate3d(0, 100%, 0);
 }
-
 .lg-css3.lg-slide-vertical .lg-item.lg-current {
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
   opacity: 1;
 }
-
 .lg-css3.lg-slide-vertical .lg-item.lg-prev-slide, .lg-css3.lg-slide-vertical .lg-item.lg-next-slide, .lg-css3.lg-slide-vertical .lg-item.lg-current {
   -webkit-transition: -webkit-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
   -moz-transition: -moz-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
@@ -464,7 +387,6 @@
 .lg-css3.lg-slide-circular .lg-item {
   opacity: 0;
 }
-
 .lg-css3.lg-slide-circular .lg-item.lg-prev-slide {
   -moz-transform: scale3d(0, 0, 0) translate3d(-100%, 0, 0);
   -o-transform: scale3d(0, 0, 0) translate3d(-100%, 0, 0);
@@ -472,7 +394,6 @@
   -webkit-transform: scale3d(0, 0, 0) translate3d(-100%, 0, 0);
   transform: scale3d(0, 0, 0) translate3d(-100%, 0, 0);
 }
-
 .lg-css3.lg-slide-circular .lg-item.lg-next-slide {
   -moz-transform: scale3d(0, 0, 0) translate3d(100%, 0, 0);
   -o-transform: scale3d(0, 0, 0) translate3d(100%, 0, 0);
@@ -480,7 +401,6 @@
   -webkit-transform: scale3d(0, 0, 0) translate3d(100%, 0, 0);
   transform: scale3d(0, 0, 0) translate3d(100%, 0, 0);
 }
-
 .lg-css3.lg-slide-circular .lg-item.lg-current {
   -moz-transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
   -o-transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
@@ -489,7 +409,6 @@
   transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
   opacity: 1;
 }
-
 .lg-css3.lg-slide-circular .lg-item.lg-prev-slide, .lg-css3.lg-slide-circular .lg-item.lg-next-slide, .lg-css3.lg-slide-circular .lg-item.lg-current {
   -webkit-transition: -webkit-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 1s ease 0s;
   -moz-transition: -moz-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 1s ease 0s;
@@ -500,23 +419,19 @@
 .lg-css3.lg-soft-zoom .lg-item {
   opacity: 0;
 }
-
 .lg-css3.lg-soft-zoom .lg-item.lg-prev-slide {
   -webkit-transform: scale3d(1.1, 1.1, 1.1);
   transform: scale3d(1.1, 1.1, 1.1);
 }
-
 .lg-css3.lg-soft-zoom .lg-item.lg-next-slide {
   -webkit-transform: scale3d(0.9, 0.9, 0.9);
   transform: scale3d(0.9, 0.9, 0.9);
 }
-
 .lg-css3.lg-soft-zoom .lg-item.lg-current {
   -webkit-transform: scale3d(1, 1, 1);
   transform: scale3d(1, 1, 1);
   opacity: 1;
 }
-
 .lg-css3.lg-soft-zoom .lg-item.lg-prev-slide, .lg-css3.lg-soft-zoom .lg-item.lg-next-slide, .lg-css3.lg-soft-zoom .lg-item.lg-current {
   -webkit-transition: -webkit-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 1s ease 0s;
   -moz-transition: -moz-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 1s ease 0s;
@@ -527,7 +442,6 @@
 .lg-css3.lg-slide-skew-cross-rev .lg-item {
   opacity: 0;
 }
-
 .lg-css3.lg-slide-skew-cross-rev .lg-item.lg-prev-slide {
   -moz-transform: skew(0deg, -60deg) translate3d(-100%, 0%, 0px);
   -o-transform: skew(0deg, -60deg) translate3d(-100%, 0%, 0px);
@@ -535,7 +449,6 @@
   -webkit-transform: skew(0deg, -60deg) translate3d(-100%, 0%, 0px);
   transform: skew(0deg, -60deg) translate3d(-100%, 0%, 0px);
 }
-
 .lg-css3.lg-slide-skew-cross-rev .lg-item.lg-next-slide {
   -moz-transform: skew(0deg, -60deg) translate3d(100%, 0%, 0px);
   -o-transform: skew(0deg, -60deg) translate3d(100%, 0%, 0px);
@@ -543,7 +456,6 @@
   -webkit-transform: skew(0deg, -60deg) translate3d(100%, 0%, 0px);
   transform: skew(0deg, -60deg) translate3d(100%, 0%, 0px);
 }
-
 .lg-css3.lg-slide-skew-cross-rev .lg-item.lg-current {
   -moz-transform: skew(0deg, 0deg) translate3d(0%, 0%, 0px);
   -o-transform: skew(0deg, 0deg) translate3d(0%, 0%, 0px);
@@ -552,7 +464,6 @@
   transform: skew(0deg, 0deg) translate3d(0%, 0%, 0px);
   opacity: 1;
 }
-
 .lg-css3.lg-slide-skew-cross-rev .lg-item.lg-prev-slide, .lg-css3.lg-slide-skew-cross-rev .lg-item.lg-next-slide, .lg-css3.lg-slide-skew-cross-rev .lg-item.lg-current {
   -webkit-transition: -webkit-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
   -moz-transition: -moz-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
@@ -563,7 +474,6 @@
 .lg-css3.lg-tube .lg-item {
   opacity: 0;
 }
-
 .lg-css3.lg-tube .lg-item.lg-prev-slide {
   -moz-transform: scale3d(1, 0, 1) translate3d(-100%, 0, 0);
   -o-transform: scale3d(1, 0, 1) translate3d(-100%, 0, 0);
@@ -571,7 +481,6 @@
   -webkit-transform: scale3d(1, 0, 1) translate3d(-100%, 0, 0);
   transform: scale3d(1, 0, 1) translate3d(-100%, 0, 0);
 }
-
 .lg-css3.lg-tube .lg-item.lg-next-slide {
   -moz-transform: scale3d(1, 0, 1) translate3d(100%, 0, 0);
   -o-transform: scale3d(1, 0, 1) translate3d(100%, 0, 0);
@@ -579,7 +488,6 @@
   -webkit-transform: scale3d(1, 0, 1) translate3d(100%, 0, 0);
   transform: scale3d(1, 0, 1) translate3d(100%, 0, 0);
 }
-
 .lg-css3.lg-tube .lg-item.lg-current {
   -moz-transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
   -o-transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
@@ -588,7 +496,6 @@
   transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
   opacity: 1;
 }
-
 .lg-css3.lg-tube .lg-item.lg-prev-slide, .lg-css3.lg-tube .lg-item.lg-next-slide, .lg-css3.lg-tube .lg-item.lg-current {
   -webkit-transition: -webkit-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
   -moz-transition: -moz-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
@@ -599,7 +506,6 @@
 .lg-css3.lg-slide-skew-cross .lg-item {
   opacity: 0;
 }
-
 .lg-css3.lg-slide-skew-cross .lg-item.lg-prev-slide {
   -moz-transform: skew(0deg, 60deg) translate3d(-100%, 0%, 0px);
   -o-transform: skew(0deg, 60deg) translate3d(-100%, 0%, 0px);
@@ -607,7 +513,6 @@
   -webkit-transform: skew(0deg, 60deg) translate3d(-100%, 0%, 0px);
   transform: skew(0deg, 60deg) translate3d(-100%, 0%, 0px);
 }
-
 .lg-css3.lg-slide-skew-cross .lg-item.lg-next-slide {
   -moz-transform: skew(0deg, 60deg) translate3d(100%, 0%, 0px);
   -o-transform: skew(0deg, 60deg) translate3d(100%, 0%, 0px);
@@ -615,7 +520,6 @@
   -webkit-transform: skew(0deg, 60deg) translate3d(100%, 0%, 0px);
   transform: skew(0deg, 60deg) translate3d(100%, 0%, 0px);
 }
-
 .lg-css3.lg-slide-skew-cross .lg-item.lg-current {
   -moz-transform: skew(0deg, 0deg) translate3d(0%, 0%, 0px);
   -o-transform: skew(0deg, 0deg) translate3d(0%, 0%, 0px);
@@ -624,7 +528,6 @@
   transform: skew(0deg, 0deg) translate3d(0%, 0%, 0px);
   opacity: 1;
 }
-
 .lg-css3.lg-slide-skew-cross .lg-item.lg-prev-slide, .lg-css3.lg-slide-skew-cross .lg-item.lg-next-slide, .lg-css3.lg-slide-skew-cross .lg-item.lg-current {
   -webkit-transition: -webkit-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
   -moz-transition: -moz-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
@@ -635,23 +538,19 @@
 .lg-css3.lg-zoom-in-big .lg-item {
   opacity: 0;
 }
-
 .lg-css3.lg-zoom-in-big .lg-item.lg-prev-slide {
   -webkit-transform: scale3d(2, 2, 2);
   transform: scale3d(2, 2, 2);
 }
-
 .lg-css3.lg-zoom-in-big .lg-item.lg-next-slide {
   -webkit-transform: scale3d(2, 2, 2);
   transform: scale3d(2, 2, 2);
 }
-
 .lg-css3.lg-zoom-in-big .lg-item.lg-current {
   -webkit-transform: scale3d(1, 1, 1);
   transform: scale3d(1, 1, 1);
   opacity: 1;
 }
-
 .lg-css3.lg-zoom-in-big .lg-item.lg-prev-slide, .lg-css3.lg-zoom-in-big .lg-item.lg-next-slide, .lg-css3.lg-zoom-in-big .lg-item.lg-current {
   -webkit-transition: -webkit-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 1s ease 0s;
   -moz-transition: -moz-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 1s ease 0s;
@@ -662,7 +561,6 @@
 .lg-css3.lg-slide-skew-only-rev .lg-item {
   opacity: 0;
 }
-
 .lg-css3.lg-slide-skew-only-rev .lg-item.lg-prev-slide {
   -moz-transform: skew(-10deg, 0deg);
   -o-transform: skew(-10deg, 0deg);
@@ -670,7 +568,6 @@
   -webkit-transform: skew(-10deg, 0deg);
   transform: skew(-10deg, 0deg);
 }
-
 .lg-css3.lg-slide-skew-only-rev .lg-item.lg-next-slide {
   -moz-transform: skew(-10deg, 0deg);
   -o-transform: skew(-10deg, 0deg);
@@ -678,7 +575,6 @@
   -webkit-transform: skew(-10deg, 0deg);
   transform: skew(-10deg, 0deg);
 }
-
 .lg-css3.lg-slide-skew-only-rev .lg-item.lg-current {
   -moz-transform: skew(0deg, 0deg);
   -o-transform: skew(0deg, 0deg);
@@ -687,7 +583,6 @@
   transform: skew(0deg, 0deg);
   opacity: 1;
 }
-
 .lg-css3.lg-slide-skew-only-rev .lg-item.lg-prev-slide, .lg-css3.lg-slide-skew-only-rev .lg-item.lg-next-slide, .lg-css3.lg-slide-skew-only-rev .lg-item.lg-current {
   -webkit-transition: -webkit-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
   -moz-transition: -moz-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
@@ -698,23 +593,19 @@
 .lg-css3.lg-zoom-in-out .lg-item {
   opacity: 0;
 }
-
 .lg-css3.lg-zoom-in-out .lg-item.lg-prev-slide {
   -webkit-transform: scale3d(2, 2, 2);
   transform: scale3d(2, 2, 2);
 }
-
 .lg-css3.lg-zoom-in-out .lg-item.lg-next-slide {
   -webkit-transform: scale3d(0, 0, 0);
   transform: scale3d(0, 0, 0);
 }
-
 .lg-css3.lg-zoom-in-out .lg-item.lg-current {
   -webkit-transform: scale3d(1, 1, 1);
   transform: scale3d(1, 1, 1);
   opacity: 1;
 }
-
 .lg-css3.lg-zoom-in-out .lg-item.lg-prev-slide, .lg-css3.lg-zoom-in-out .lg-item.lg-next-slide, .lg-css3.lg-zoom-in-out .lg-item.lg-current {
   -webkit-transition: -webkit-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 1s ease 0s;
   -moz-transition: -moz-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 1s ease 0s;
@@ -725,7 +616,6 @@
 .lg-css3.lg-slide-skew-only-y-rev .lg-item {
   opacity: 0;
 }
-
 .lg-css3.lg-slide-skew-only-y-rev .lg-item.lg-prev-slide {
   -moz-transform: skew(0deg, -10deg);
   -o-transform: skew(0deg, -10deg);
@@ -733,7 +623,6 @@
   -webkit-transform: skew(0deg, -10deg);
   transform: skew(0deg, -10deg);
 }
-
 .lg-css3.lg-slide-skew-only-y-rev .lg-item.lg-next-slide {
   -moz-transform: skew(0deg, -10deg);
   -o-transform: skew(0deg, -10deg);
@@ -741,7 +630,6 @@
   -webkit-transform: skew(0deg, -10deg);
   transform: skew(0deg, -10deg);
 }
-
 .lg-css3.lg-slide-skew-only-y-rev .lg-item.lg-current {
   -moz-transform: skew(0deg, 0deg);
   -o-transform: skew(0deg, 0deg);
@@ -750,7 +638,6 @@
   transform: skew(0deg, 0deg);
   opacity: 1;
 }
-
 .lg-css3.lg-slide-skew-only-y-rev .lg-item.lg-prev-slide, .lg-css3.lg-slide-skew-only-y-rev .lg-item.lg-next-slide, .lg-css3.lg-slide-skew-only-y-rev .lg-item.lg-current {
   -webkit-transition: -webkit-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
   -moz-transition: -moz-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
@@ -761,7 +648,6 @@
 .lg-css3.lg-slide-skew-only-y .lg-item {
   opacity: 0;
 }
-
 .lg-css3.lg-slide-skew-only-y .lg-item.lg-prev-slide {
   -moz-transform: skew(0deg, 10deg);
   -o-transform: skew(0deg, 10deg);
@@ -769,7 +655,6 @@
   -webkit-transform: skew(0deg, 10deg);
   transform: skew(0deg, 10deg);
 }
-
 .lg-css3.lg-slide-skew-only-y .lg-item.lg-next-slide {
   -moz-transform: skew(0deg, 10deg);
   -o-transform: skew(0deg, 10deg);
@@ -777,7 +662,6 @@
   -webkit-transform: skew(0deg, 10deg);
   transform: skew(0deg, 10deg);
 }
-
 .lg-css3.lg-slide-skew-only-y .lg-item.lg-current {
   -moz-transform: skew(0deg, 0deg);
   -o-transform: skew(0deg, 0deg);
@@ -786,7 +670,6 @@
   transform: skew(0deg, 0deg);
   opacity: 1;
 }
-
 .lg-css3.lg-slide-skew-only-y .lg-item.lg-prev-slide, .lg-css3.lg-slide-skew-only-y .lg-item.lg-next-slide, .lg-css3.lg-slide-skew-only-y .lg-item.lg-current {
   -webkit-transition: -webkit-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
   -moz-transition: -moz-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
@@ -797,23 +680,19 @@
 .lg-css3.lg-zoom-out-big .lg-item {
   opacity: 0;
 }
-
 .lg-css3.lg-zoom-out-big .lg-item.lg-prev-slide {
   -webkit-transform: scale3d(0, 0, 0);
   transform: scale3d(0, 0, 0);
 }
-
 .lg-css3.lg-zoom-out-big .lg-item.lg-next-slide {
   -webkit-transform: scale3d(0, 0, 0);
   transform: scale3d(0, 0, 0);
 }
-
 .lg-css3.lg-zoom-out-big .lg-item.lg-current {
   -webkit-transform: scale3d(1, 1, 1);
   transform: scale3d(1, 1, 1);
   opacity: 1;
 }
-
 .lg-css3.lg-zoom-out-big .lg-item.lg-prev-slide, .lg-css3.lg-zoom-out-big .lg-item.lg-next-slide, .lg-css3.lg-zoom-out-big .lg-item.lg-current {
   -webkit-transition: -webkit-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 1s ease 0s;
   -moz-transition: -moz-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 1s ease 0s;
@@ -824,7 +703,6 @@
 .lg-css3.lg-slide-skew-only .lg-item {
   opacity: 0;
 }
-
 .lg-css3.lg-slide-skew-only .lg-item.lg-prev-slide {
   -moz-transform: skew(10deg, 0deg);
   -o-transform: skew(10deg, 0deg);
@@ -832,7 +710,6 @@
   -webkit-transform: skew(10deg, 0deg);
   transform: skew(10deg, 0deg);
 }
-
 .lg-css3.lg-slide-skew-only .lg-item.lg-next-slide {
   -moz-transform: skew(10deg, 0deg);
   -o-transform: skew(10deg, 0deg);
@@ -840,7 +717,6 @@
   -webkit-transform: skew(10deg, 0deg);
   transform: skew(10deg, 0deg);
 }
-
 .lg-css3.lg-slide-skew-only .lg-item.lg-current {
   -moz-transform: skew(0deg, 0deg);
   -o-transform: skew(0deg, 0deg);
@@ -849,7 +725,6 @@
   transform: skew(0deg, 0deg);
   opacity: 1;
 }
-
 .lg-css3.lg-slide-skew-only .lg-item.lg-prev-slide, .lg-css3.lg-slide-skew-only .lg-item.lg-next-slide, .lg-css3.lg-slide-skew-only .lg-item.lg-current {
   -webkit-transition: -webkit-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
   -moz-transition: -moz-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
@@ -860,23 +735,19 @@
 .lg-css3.lg-zoom-out-in .lg-item {
   opacity: 0;
 }
-
 .lg-css3.lg-zoom-out-in .lg-item.lg-prev-slide {
   -webkit-transform: scale3d(0, 0, 0);
   transform: scale3d(0, 0, 0);
 }
-
 .lg-css3.lg-zoom-out-in .lg-item.lg-next-slide {
   -webkit-transform: scale3d(2, 2, 2);
   transform: scale3d(2, 2, 2);
 }
-
 .lg-css3.lg-zoom-out-in .lg-item.lg-current {
   -webkit-transform: scale3d(1, 1, 1);
   transform: scale3d(1, 1, 1);
   opacity: 1;
 }
-
 .lg-css3.lg-zoom-out-in .lg-item.lg-prev-slide, .lg-css3.lg-zoom-out-in .lg-item.lg-next-slide, .lg-css3.lg-zoom-out-in .lg-item.lg-current {
   -webkit-transition: -webkit-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 1s ease 0s;
   -moz-transition: -moz-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 1s ease 0s;
@@ -887,7 +758,6 @@
 .lg-css3.lg-slide-skew-rev .lg-item {
   opacity: 0;
 }
-
 .lg-css3.lg-slide-skew-rev .lg-item.lg-prev-slide {
   -moz-transform: skew(-20deg, 0deg) translate3d(-100%, 0%, 0px);
   -o-transform: skew(-20deg, 0deg) translate3d(-100%, 0%, 0px);
@@ -895,7 +765,6 @@
   -webkit-transform: skew(-20deg, 0deg) translate3d(-100%, 0%, 0px);
   transform: skew(-20deg, 0deg) translate3d(-100%, 0%, 0px);
 }
-
 .lg-css3.lg-slide-skew-rev .lg-item.lg-next-slide {
   -moz-transform: skew(-20deg, 0deg) translate3d(100%, 0%, 0px);
   -o-transform: skew(-20deg, 0deg) translate3d(100%, 0%, 0px);
@@ -903,7 +772,6 @@
   -webkit-transform: skew(-20deg, 0deg) translate3d(100%, 0%, 0px);
   transform: skew(-20deg, 0deg) translate3d(100%, 0%, 0px);
 }
-
 .lg-css3.lg-slide-skew-rev .lg-item.lg-current {
   -moz-transform: skew(0deg, 0deg) translate3d(0%, 0%, 0px);
   -o-transform: skew(0deg, 0deg) translate3d(0%, 0%, 0px);
@@ -912,7 +780,6 @@
   transform: skew(0deg, 0deg) translate3d(0%, 0%, 0px);
   opacity: 1;
 }
-
 .lg-css3.lg-slide-skew-rev .lg-item.lg-prev-slide, .lg-css3.lg-slide-skew-rev .lg-item.lg-next-slide, .lg-css3.lg-slide-skew-rev .lg-item.lg-current {
   -webkit-transition: -webkit-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
   -moz-transition: -moz-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
@@ -923,23 +790,19 @@
 .lg-css3.lg-zoom-out .lg-item {
   opacity: 0;
 }
-
 .lg-css3.lg-zoom-out .lg-item.lg-prev-slide {
   -webkit-transform: scale3d(0.7, 0.7, 0.7);
   transform: scale3d(0.7, 0.7, 0.7);
 }
-
 .lg-css3.lg-zoom-out .lg-item.lg-next-slide {
   -webkit-transform: scale3d(0.7, 0.7, 0.7);
   transform: scale3d(0.7, 0.7, 0.7);
 }
-
 .lg-css3.lg-zoom-out .lg-item.lg-current {
   -webkit-transform: scale3d(1, 1, 1);
   transform: scale3d(1, 1, 1);
   opacity: 1;
 }
-
 .lg-css3.lg-zoom-out .lg-item.lg-prev-slide, .lg-css3.lg-zoom-out .lg-item.lg-next-slide, .lg-css3.lg-zoom-out .lg-item.lg-current {
   -webkit-transition: -webkit-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 1s ease 0s;
   -moz-transition: -moz-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 1s ease 0s;
@@ -950,7 +813,6 @@
 .lg-css3.lg-slide-skew-ver-cross-rev .lg-item {
   opacity: 0;
 }
-
 .lg-css3.lg-slide-skew-ver-cross-rev .lg-item.lg-prev-slide {
   -moz-transform: skew(0deg, -20deg) translate3d(0, -100%, 0px);
   -o-transform: skew(0deg, -20deg) translate3d(0, -100%, 0px);
@@ -958,7 +820,6 @@
   -webkit-transform: skew(0deg, -20deg) translate3d(0, -100%, 0px);
   transform: skew(0deg, -20deg) translate3d(0, -100%, 0px);
 }
-
 .lg-css3.lg-slide-skew-ver-cross-rev .lg-item.lg-next-slide {
   -moz-transform: skew(0deg, -20deg) translate3d(0, 100%, 0px);
   -o-transform: skew(0deg, -20deg) translate3d(0, 100%, 0px);
@@ -966,7 +827,6 @@
   -webkit-transform: skew(0deg, -20deg) translate3d(0, 100%, 0px);
   transform: skew(0deg, -20deg) translate3d(0, 100%, 0px);
 }
-
 .lg-css3.lg-slide-skew-ver-cross-rev .lg-item.lg-current {
   -moz-transform: skew(0deg, 0deg) translate3d(0%, 0%, 0px);
   -o-transform: skew(0deg, 0deg) translate3d(0%, 0%, 0px);
@@ -975,10 +835,11 @@
   transform: skew(0deg, 0deg) translate3d(0%, 0%, 0px);
   opacity: 1;
 }
-
 .lg-css3.lg-slide-skew-ver-cross-rev .lg-item.lg-prev-slide, .lg-css3.lg-slide-skew-ver-cross-rev .lg-item.lg-next-slide, .lg-css3.lg-slide-skew-ver-cross-rev .lg-item.lg-current {
   -webkit-transition: -webkit-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
   -moz-transition: -moz-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
   -o-transition: -o-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
   transition: transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
 }
+
+/*# sourceMappingURL=lg-transitions.css.map */
