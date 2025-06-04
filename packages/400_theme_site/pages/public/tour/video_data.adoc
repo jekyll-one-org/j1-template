@@ -319,6 +319,7 @@ HD 720p (1280x720 pixel).
 .Local MP4 Video · Justified Gallery + LightGallery
 gallery::jg_video_html5[role="mb-4"]
 
+
 ifeval::[{yt_gallery} == true]
 [role="mt-4"]
 === YouTube

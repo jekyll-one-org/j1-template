@@ -1,3 +1,21 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/theme/j1/modules/lightGallery/css/lg-transitions.css
+ # Provides the lightGallery v2.8.3 Main JS module
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2025 Sachin Neravath
+ # Copyright (C) 2023-2025 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ # lightGallery is licensed under the GPLv3 license
+ # See: https://github.com/sachinchoolur/lightGallery/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
 .lg-css3.lg-zoom-in .lg-item {
   opacity: 0;
 }
@@ -841,5 +859,3 @@
   -o-transition: -o-transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
   transition: transform 1s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.1s ease 0s;
 }
-
-/*# sourceMappingURL=lg-transitions.css.map */

@@ -1,0 +1,129 @@
+Ich verwende Poster Images (thumbnails) für Videos der YouTube Plattform
+über die Adresse //img.youtube.com/vi/<videiID>/maxresdefault.jpg. Diese
+Bilder sind nicht immer verfügbar. Wie kann ich mit JavaScript prüfen, ob
+dieses Bild auf dem Server zur Verfügung steht?
+
+Perplexity
+--------------------------------------------------------------------------------
+
+Um mit JavaScript zu prüfen, ob ein YouTube-Poster-Image (z.B.
+`https://img.youtube.com/vi/F4neLJQC1_E/maxresdefault.jpg`) tatsächlich
+ auf dem  Server verfügbar ist, gibt es verschiedene Ansätze.
+ 
+ Häufig wird bei YouTube für fehlende Bilder ein Platzhalterbild (meist
+ 120×90 Pixel) zurückgegeben, also ist ein reiner Statuscode-Check nicht
+ immer ausreichend.
+
+Hier sind die wichtigsten Methoden:
+
+## 1. Image-Objekt und Events
+
+Die einfachste und browserübergreifende Methode ist, das Image-Objekt zu
+nutzen und auf die Events `onload` und `onerror` zu reagieren:
+
+```javascript
+function checkImageExists(url, callback) {
+  const img = new Image();
+  img.src = url;
+  img.onload = () => callback(true);
+  img.onerror = () => callback(false);
+}
+
+// Beispielaufruf
+checkImageExists('https://img.youtube.com/vi/F4neLJQC1_E/maxresdefault.jpg', (exists) => {
+  if (exists) {
+    console.log('Bild existiert.');
+  } else {
+    console.log('Bild existiert nicht.');
+  }
+});
+```
+Dies prüft, ob das Bild geladen werden kann, aber nicht, ob es sich um das
+gewünschte Bild oder einen Platzhalter handelt[4][6][1].
+
+
+## 2. Prüfung der Bildgröße (Fallback-Logik)
+
+Um zu vermeiden, dass der Platzhalter als gültiges Bild erkannt wird, kann
+man die natürliche Größe des Bildes prüfen, sobald es geladen wurde. YouTube
+liefert für fehlende Bilder meist ein 120×90 Pixel großes Bild zurück:
+
+```javascript
+function checkValidThumbnail(url, callback) {
+  const img = new Image();
+  img.src = url;
+  img.onload = () => {
+    if (img.naturalWidth > 120 || img.naturalHeight > 90) {
+      callback(true);
+    } else {
+      callback(false);
+    }
+  };
+  img.onerror = () => callback(false);
+}
+```
+Damit wird sichergestellt, dass nur Bilder als gültig erkannt werden,
+die größer als der übliche YouTube-Platzhalter sind[3].
+
+## 3. Fetch-API (mit Einschränkungen)
+
+Mit der Fetch-API kann man eine HTTP-Anfrage senden und den Statuscode
+überprüfen. Allerdings wird bei YouTube oft CORS (Cross-Origin Resource
+Sharing) nicht korrekt unterstützt, sodass diese Methode im Browser nicht
+immer funktioniert:
+
+```javascript
+fetch('https://img.youtube.com/vi//maxresdefault.jpg', { method: 'HEAD' })
+  .then(res => {
+    if (res.ok) {
+      console.log('Bild existiert.');
+    } else {
+      console.log('Bild existiert nicht.');
+    }
+  })
+  .catch(() => console.log('Fehler bei der Anfrage.'));
+```
+Diese Methode ist für YouTube-Bilder im Browser meist nicht zuverlässig,
+da CORS-Header fehlen und daher Fehler auftreten können[2][5].
+
+## 4. Fallback-Logik direkt im ``-Tag
+
+Alternativ kann man das Fallback direkt im ``-Tag mit JavaScript umsetzen,
+indem man die Größe prüft und bei Bedarf auf ein anderes Thumbnail wechselt:
+
+```html
+/maxresdefault.jpg"
+  style="opacity:0;"
+  onload="if(this.naturalHeight > 90) { this.style.opacity=1; } else { this.src=this.src.replace('maxres','hq'); }"
+>
+```
+Dieses Beispiel prüft beim Laden, ob das Bild größer als der Platzhalter ist,
+und wechselt bei Bedarf automatisch auf `hqdefault.jpg`[3].
+
+
+Zusammenfassung
+--------------------------------------------------------------------------------
+
+- **Verwende das Image-Objekt mit `onload`/`onerror`** für eine einfache Prüfung.
+- **Prüfe die Bildgröße**, um YouTube-Platzhalter zu erkennen.
+- **Fetch-API ist für YouTube meist nicht geeignet** wegen CORS.
+- **Fallback-Logik im ``-Tag** ist praktisch für automatische Fallbacks.
+
+Damit kannst du zuverlässig prüfen, ob das gewünschte Poster-Image von
+YouTube verfügbar ist.
+
+
+Citations
+--------------------------------------------------------------------------------
+
+[1]     https://stackoverflow.com/questions/18837735/check-if-image-exists-on-server-using-javascript
+[2]     https://stackoverflow.com/questions/72285764/check-if-youtube-thumbnail-exists-using-javascript-fetch
+[3]     https://krdevnotes.com/automatically-use-fallback-thumbnail-size-for-youtube-maxresdefault-image-on-html-img-tag-with-javascript/
+[4]     https://github.com/RebeccaWhit3/gists/blob/master/JavaScript/Check%20if%20image%20exists%20on%20server%20using%20JavaScript.md
+[5]     https://attacomsian.com/blog/javascript-check-if-image-exists
+[6]     https://codepen.io/kallil-belmonte/pen/KKKRoyx
+[7]     https://www.reddit.com/r/reactjs/comments/l2yz8h/how_to_check_if_image_exists/
+[8]     https://javascript.plainenglish.io/how-to-check-if-image-exists-on-the-server-using-javascript-564535efff51
+[9]     https://www.youtube.com/watch?v=w9BcWulmDkI
+[10]    https://stackoverflow.com/questions/7462449
+

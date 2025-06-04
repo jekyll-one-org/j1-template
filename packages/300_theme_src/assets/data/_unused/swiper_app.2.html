@@ -312,25 +312,20 @@ playlist.image_defaults: {{playlist.image_defaults | debug}}
 
           </ul> <!-- END Swiper Wrapper (slides) -->
 
-          {% if swiper.modules.navigation %}
+          {% if swiper.module_settings.navigation %}
           <!-- Navigation -->
           <div class="swiper-button-prev"></div>
           <div class="swiper-button-next"></div>
           {% endif %}
 
-          {% if swiper.modules.pagination %}
+          {% if swiper.module_settings.pagination %}
           <!-- Pagination -->
           <div class="swiper-pagination"></div>
           {% endif %}
 
         </div> <!-- END Swiper Container (elements) -->
       </div> <!-- END Swiper {{swiper.id}} -->
-
-      {% if swiper.modules.pagination and swiper.modules.pagination.el contains 'outer' %}
-      <!-- Outer Pagination -->
-      <div class="swiper-pagination-outside"></div>
-      {% endif %}
-
+      
       <!-- END Image Swipers, Layout Base -->
       {% endif %}
 
@@ -426,18 +421,13 @@ playlist.image_defaults: {{playlist.image_defaults | debug}}
           {% endif %}
   
           {% if swiper.modules.pagination %}
-          <!-- Inner Pagination -->
+          <!-- Pagination -->
           <div class="swiper-pagination"></div>
           {% endif %}
   
         </div> <!-- END Swiper Container (elements) -->
       </div> <!-- END Swiper {{swiper.id}} -->
-
-      {% if swiper.modules.pagination and swiper.modules.pagination.el contains 'outer' %}
-      <!-- Outer Pagination -->
-      <div class="swiper-pagination-outside"></div>
-      {% endif %}      
-
+      
       <!-- END Image Swipers, Layout Thumb -->
       {% endif %}
 
@@ -532,18 +522,13 @@ playlist.image_defaults: {{playlist.image_defaults | debug}}
           {% endif %}
   
           {% if swiper.modules.pagination %}
-          <!-- Inner Pagination -->
+          <!-- Pagination -->
           <div class="swiper-pagination"></div>
           {% endif %}
   
         </div> <!-- END Swiper Container (elements) -->
       </div> <!-- END Swiper {{swiper.id}} -->
-
-      {% if swiper.modules.pagination and swiper.modules.pagination.el contains 'outer' %}
-      <!-- Outer Pagination -->
-      <div class="swiper-pagination-outside"></div>
-      {% endif %}      
-
+      
       <!-- END Image Swipers, Layout Panorama -->
       {% endif %}
 
@@ -639,18 +624,13 @@ playlist.image_defaults: {{playlist.image_defaults | debug}}
           {% endif %}
   
           {% if swiper.modules.pagination %}
-          <!-- Inner Pagination -->
+          <!-- Pagination -->
           <div class="swiper-pagination"></div>
           {% endif %}
   
         </div> <!-- END Swiper Container (elements) -->
       </div> <!-- END Swiper {{swiper.id}} -->
-
-      {% if swiper.modules.pagination and swiper.modules.pagination.el contains 'outer' %}
-      <!-- Outer Pagination -->
-      <div class="swiper-pagination-outside"></div>
-      {% endif %}
-
+      
       <!-- END Image Swipers, Layout Neighbor -->
       {% endif %}
 
@@ -746,18 +726,13 @@ playlist.image_defaults: {{playlist.image_defaults | debug}}
           {% endif %}
   
           {% if swiper.modules.pagination %}
-          <!-- Inner Pagination -->
+          <!-- Pagination -->
           <div class="swiper-pagination"></div>
           {% endif %}
   
         </div> <!-- END Swiper Container (elements) -->
       </div> <!-- END Swiper {{swiper.id}} -->
-
-      {% if swiper.modules.pagination and swiper.modules.pagination.el contains 'outer' %}
-      <!-- Outer Pagination -->
-      <div class="swiper-pagination-outside"></div>
-      {% endif %}
-
+      
       <!-- END Image Swipers, Layout Expanded -->
       {% endif %}
 

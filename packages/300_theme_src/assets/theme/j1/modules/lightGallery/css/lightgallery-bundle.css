@@ -1,3 +1,21 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/theme/j1/modules/lightGallery/css/lightgallery-bundle.css
+ # Provides the lightGallery v2.8.3 Main JS module
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2025 Sachin Neravath
+ # Copyright (C) 2023-2025 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ # lightGallery is licensed under the GPLv3 license
+ # See: https://github.com/sachinchoolur/lightGallery/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
 @font-face {
   font-family: "lg";
   src: url("../fonts/lg.woff2?io9a6k") format("woff2"), url("../fonts/lg.ttf?io9a6k") format("truetype"), url("../fonts/lg.woff?io9a6k") format("woff"), url("../fonts/lg.svg?io9a6k#lg") format("svg");
@@ -1440,5 +1458,3 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
   right: 0;
   left: 0;
 }
-
-/*# sourceMappingURL=lightgallery-bundle.css.map */

@@ -363,36 +363,37 @@
       var base = this;
 
       if (this.settings.localFeed !== null && this.settings.localFeed !== '') {
-        // Deferred loading themes from local themes (json file)
+        // Deferred loading themes (feed) from LOCAL: theme file (JSON file)
+        // ---------------------------------------------------------------------
         $.ajax({
           url: this.settings.localFeed,
-          // jadams 2016-10-10: removed the setting for sychronous XMLHttpRequest
-          // async: false,
           dataType: 'json',
           success: function (data) {
             base.themesList = data.themes;
             base.addThemesToControl();
           },
           error: function (jqXHR, textStatus, errorThrown) {
-            logger.error('failed to retrieve the local feed from: \'' + base.settings.localFeed + '\'');
+            logger.error('failed to retrieve the LOCAL feed from: ' + this.settings.localFeed);
           }
         });
       } else {
-        // Deferred loading remote themes from Bootswatch API
-        // -----------------------------------------------------------------------
+        // Deferred loading themes (feed) from REMOTE: Bootswatch API (JSON file)
+        // ---------------------------------------------------------------------
+        var bootswatchApiJson = `${this.settings.bootswatchApiUrl}/${this.settings.bootswatchApiVersion}.json`;
         $.ajax({
-          url:        this.settings.bootswatchApiUrl + '/' + this.settings.bootswatchApiVersion + '.json',
-          // jadams 2016-10-10: removed the setting for sychronous XMLHttpRequest
-          // async: false,
-          dataType:   'json',
-          success:    function (data) {
+          url: bootswatchApiJson,
+          dataType: 'json',
+          success: function (data) {
             if (typeof data.themes === 'undefined') {
               return null;
             }
             base.themesList = data.themes;
             base.themesList.splice(0,0, {name: 'default', css: base.settings.defaultCssFile});
             base.addThemesToControl();
-          }
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            logger.error('failed to retrieve the REMOTE feed from: ' + bootswatchApiJson);
+          }          
         });
       }
     }, // END getThemes

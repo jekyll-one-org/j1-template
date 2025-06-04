@@ -267,44 +267,6 @@ j1.adapter.themes = (function (j1, window) {
 
           logger.info('cookie ' +  cookie_names.user_state + ' successfully loaded after: ' + interval_count * 25 + ' ms');
 
-          // load previously selected theme from cookie (preferred)
-          // if (user_state.theme_css !== '') {
-          //   user_state.theme_name       = default_theme_name;
-          //   user_state.theme_css        = default_theme_css;
-          //   user_state.theme_author     = default_theme_author;
-          //   user_state.theme_author_url = default_theme_author_url;
-
-          //   cookie_written = j1.writeCookie({
-          //     name:     cookie_names.user_state,
-          //     data:     user_state,
-          //     secure:   secure,
-          //     expires:  365
-          //   });
-
-          //   if (!cookie_written) {
-          //     logger.error('failed to write cookie: ' + cookie_names.user_consent);
-          //   }
-          // } // END load previously selected theme
-
-          // load default theme (j1_config and NO theme given with (user_state) cookie
-          // if (user_state.theme_css === '' && default_theme_css.theme_css !== '') {
-          //   user_state.theme_name       = default_theme_name;
-          //   user_state.theme_css        = default_theme_css;
-          //   user_state.theme_author     = default_theme_author;
-          //   user_state.theme_author_url = default_theme_author_url;
-
-          //   cookie_written = j1.writeCookie({
-          //     name:     cookie_names.user_state,
-          //     data:     user_state,
-          //     secure:   secure,
-          //     expires:  365
-          //   });
-
-          //   if (!cookie_written) {
-          //     logger.error('failed to write cookie: ' + cookie_names.user_consent);
-          //   }
-          // } // END load default theme
-
           // load default theme if NO theme given with (user_state) cookie
           if (user_state.theme_css === '') {
             user_state.theme_name       = default_theme_name;
@@ -322,41 +284,51 @@ j1.adapter.themes = (function (j1, window) {
             if (!cookie_written) {
              logger.error('failed to write cookie: ' + cookie_names.user_consent);
             }
-          } // END oad default theme
+          } // END load default theme
 
           // set the theme switcher state
           user_state.theme_switcher = themesOptions.enabled;
           if (themesOptions.enabled) {
-             // enable BS ThemeSwitcher
-             logger.info('themes detected as: ' + themesOptions.enabled);
-             logger.info('remote themes are being initialized');
+            // enable BS ThemeSwitcher
+            logger.info('themes detected as: ' + themesOptions.enabled);
+            logger.info('remote themes are being initialized');
 
-             /* eslint-disable */
-             // load list of remote themes
-             $('#remote_themes').ThemeSwitcher.defaults = {
-               debug:                    themesOptions.debug,
-               saveToCookie:             themesOptions.saveToCookie,
-               cssThemeLink:             themesOptions.cssThemeLink,
-               cookieThemeName:          themesOptions.cookieThemeName,
-               cookieDefaultThemeName:   themesOptions.cookieDefaultThemeName,
-               cookieThemeCss:           themesOptions.cookieThemeCss,
-               cookieThemeExtensionCss:  themesOptions.cookieThemeExtensionCss,
-               cookieExpiration:         themesOptions.cookieExpiration,
-               cookiePath:               themesOptions.cookiePath,
-               defaultCssFile:           themesOptions.defaultCssFile,
-               bootswatchApiUrl:         themesOptions.bootswatchApiUrl,
-               bootswatchApiVersion:     themesOptions.bootswatchApiVersion,
-               loadFromBootswatch:       themesOptions.loadFromBootswatch,
-               localFeed:                themesOptions.localThemes,
-               excludeBootswatch:        themesOptions.excludeBootswatch,
-               includeBootswatch:        themesOptions.includeBootswatch,
-               skipIncludeBootswatch:    themesOptions.skipIncludeBootswatch
-             };
-             /* eslint-enable */
-           } else {
-             logger.debug('themes detected as: disabled');
-             logger.debug('no remote themes are available');
-          } // END if themesOptions enabled
+            // validate if theme api json can be loaded
+            var bootswatchApiJson = `${themesOptions.bootswatchApiUrl}/${themesOptions.bootswatchApiVersion}.json`;
+            urlExists(bootswatchApiJson, function(success) {
+              // load theme
+              if (success) {
+                logger.debug('LOAD remote themes from: ' + bootswatchApiJson);
+                // continue processing if ap json is available
+                /* eslint-disable */
+                // load list of remote themes (api json file)
+                $('#remote_themes').ThemeSwitcher.defaults = {
+                  debug:                    themesOptions.debug,
+                  saveToCookie:             themesOptions.saveToCookie,
+                  cssThemeLink:             themesOptions.cssThemeLink,
+                  cookieThemeName:          themesOptions.cookieThemeName,
+                  cookieDefaultThemeName:   themesOptions.cookieDefaultThemeName,
+                  cookieThemeCss:           themesOptions.cookieThemeCss,
+                  cookieThemeExtensionCss:  themesOptions.cookieThemeExtensionCss,
+                  cookieExpiration:         themesOptions.cookieExpiration,
+                  cookiePath:               themesOptions.cookiePath,
+                  defaultCssFile:           themesOptions.defaultCssFile,
+                  bootswatchApiUrl:         themesOptions.bootswatchApiUrl,
+                  bootswatchApiVersion:     themesOptions.bootswatchApiVersion,
+                  loadFromBootswatch:       themesOptions.loadFromBootswatch,
+                  localFeed:                themesOptions.localThemes,
+                  excludeBootswatch:        themesOptions.excludeBootswatch,
+                  includeBootswatch:        themesOptions.includeBootswatch,
+                  skipIncludeBootswatch:    themesOptions.skipIncludeBootswatch
+                };
+                /* eslint-enable */
+              } else {
+                // failed to load oad list of remote themes (api json file)
+                // TODO: create fallback strategy
+                logger.error('failed to LOAD remote themes from: ' + bootswatchApiJson);
+              } // END if success
+            }); // END urlExists
+          } // END if themesOptions.enabled
 
           // validate theme to be loaded
           urlExists(user_state.theme_css, function(success) {

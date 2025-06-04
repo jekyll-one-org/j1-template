@@ -1,0 +1,173 @@
+Wie kann man bei VideoJS Playern den Progessbar/Slider (vjs-slider-horizontal)
+oberhab der vjs-control-bar plazieren
+
+See: https://github.com/videojs/video.js/wiki/Skins
+
+
+Perplexity
+--------------------------------------------------------------------------------
+
+Um beim VideoJS-Player die Progressbar (vjs-slider-horizontal bzw.
+progressControl) **über** der vjs-control-bar zu platzieren, reicht
+eine Änderung der Reihenfolge der ControlBar-Elemente allein nicht aus,
+da sie standardmäßig alle innerhalb der gleichen Leiste liegen.
+
+Stattdessen muss die Progressbar aus der ControlBar herausgelöst und
+separat positioniert werden. Das erreichst du mit einer Kombination aus
+JavaScript und CSS.
+
+## Vorgehen
+
+**1. Progressbar aus der ControlBar herauslösen**
+
+Die Progressbar ist standardmäßig ein Kind-Element der ControlBar. Um sie
+oberhalb zu platzieren, musst du sie per JavaScript ins DOM verschieben,
+sobald der Player bereit ist:
+
+```javascript
+player.ready(function() {
+  var progressControl = player.controlBar.progressControl.el();
+  var controlBar = player.controlBar.el();
+  var playerEl = player.el();
+
+  // Progressbar vor die ControlBar verschieben
+  playerEl.insertBefore(progressControl, controlBar);
+});
+```
+
+Damit liegt die Progressbar im DOM direkt über der ControlBar[2][3].
+
+**2. CSS-Anpassungen für das Layout**
+
+Da VideoJS ab Version 5 Flexbox für das Layout verwendet, kann die
+Progressbar jetzt unabhängig von der ControlBar gestylt werden.
+
+Beispiel:
+
+```css
+.vjs-progress-control {
+  width: 100%;
+  position: relative;
+  margin-bottom: 4px; /* Abstand zur ControlBar */
+}
+```
+
+Optional kannst du das Styling weiter anpassen, um die Progressbar optisch
+hervorzuheben oder den Abstand zur ControlBar zu variieren[2].
+
+**3. Hinweise und Besonderheiten**
+
+- Die Reihenfolge der ControlBar-Elemente kann weiterhin über das `children`
+  Array angepasst werden, aber das betrifft nur die Elemente innerhalb der
+  ControlBar selbst[1][4].
+- Das Verschieben per JavaScript ist robust und funktioniert unabhängig von
+  der VideoJS-Version, solange die Klassen gleich bleiben.
+- Falls du ein Custom-Skin verwendest, prüfe, ob das Skin spezielle Layouts
+  für die Progressbar vorsieht[2].
+
+
+Zusammenfassung
+--------------------------------------------------------------------------------
+
+- Progressbar per JavaScript aus der ControlBar verschieben und direkt vor ihr einfügen.
+- Mit CSS das Layout und den Abstand anpassen.
+- Reihenfolge der ControlBar-Elemente bleibt davon unberührt.
+
+So erreichst du das klassische Layout, bei dem die Progressbar über der
+ControlBar sitzt, wie es z.B. in älteren VideoJS-Versionen oder anderen
+Playern üblich war[2][3].
+
+[1] https://stackoverflow.com/questions/45727017/how-to-change-the-position-of-videojs-control-bar-elements-order
+[2] https://github.com/videojs/video.js/issues/3094
+[3] https://stackoverflow.com/questions/41808513/how-to-change-layout-of-controls-in-video-js
+[4] https://github.com/videojs/video.js/issues/4584
+[5] https://github.com/videojs/video.js/issues/9049
+[6] https://docs.videojs.com/playprogressbar
+[7] https://docs.videojs.com/control-bar_progress-control_play-progress-bar.js.html
+[8] https://docs.videojs.com/control-bar_progress-control_progress-control.js.html
+[9] https://docs.videojs.com/slider_slider.js.html
+[10] https://github.com/videojs/video.js/discussions/8501
+
+
+
+Wie kann man bei VideoJS Playern den Progessbar/Slider (vjs-slider-horizontal)
+innerhalb der ControlBar oberhalb aller anderen Elemente oberhalb plazieren?
+
+Perplexity
+--------------------------------------------------------------------------------
+
+Um den Progressbar/Slider (vjs-slider-horizontal) im VideoJS Player innerhalb
+der ControlBar ganz oben, also oberhalb aller anderen ControlBar-Elemente, zu
+platzieren, sind zwei Schritte notwendig: die Anpassung der Reihenfolge der
+ControlBar-Elemente und gegebenenfalls ein CSS-Tuning für das gewünschte
+Layout.
+
+## Reihenfolge der ControlBar-Elemente ändern
+
+Die Reihenfolge der Elemente in der ControlBar wird über die VideoJS
+Konfiguration gesteuert. Du kannst die gewünschte Anordnung festlegen, indem
+du das `controlBar`-Objekt im Setup des Players entsprechend konfigurierst.
+
+Um den Progressbar ganz oben zu haben, muss das ProgressControl-Element als
+Erstes in der Liste stehen.
+
+Beispiel:
+
+```javascript
+var player = videojs('video-player', {
+    "controls": true,
+    "controlBar": {
+        "children": [
+            "progressControl",
+            "playToggle",
+            "volumePanel",
+            "currentTimeDisplay",
+            "timeDivider",
+            "durationDisplay",
+            "fullscreenToggle"
+        ],
+    }
+});
+```
+Damit wird der Progressbar innerhalb der ControlBar ganz oben angezeigt[2].
+
+## Optional: CSS-Anpassungen
+
+Falls du möchtest, dass der Progressbar optisch noch stärker hervorgehoben
+wird oder sich über die gesamte Breite erstreckt, kannst du zusätzlich CSS
+verwenden.
+
+Beispiel:
+
+```css
+.video-js .vjs-progress-control {
+  order: -1; /* Falls Flexbox genutzt wird */
+  width: 100%;
+  z-index: 2; /* Falls Überlagerung nötig ist */
+}
+```
+
+Mit dem `order`-Attribut kannst du die Reihenfolge in Flexbox-basierten
+Layouts weiter steuern. `z-index` ist nur relevant, falls der Progressbar
+andere Elemente überdecken soll[1].
+
+Zusammenfassung
+--------------------------------------------------------------------------------
+
+- Stelle sicher, dass `'progressControl'` als erstes Kind in der
+  `controlBar.children`-Liste steht.
+- Ergänze bei Bedarf CSS, um das Layout weiter anzupassen.
+
+So wird der Progressbar/Slider im VideoJS Player innerhalb der ControlBar
+ganz oben platziert, oberhalb aller anderen Steuerelemente[2][1].
+
+[1] https://github.com/videojs/video.js/issues/8315
+[2] https://stackoverflow.com/questions/45727017/how-to-change-the-position-of-videojs-control-bar-elements-order
+[3] https://docs.videojs.com/docs/api/progress-control.html
+[4] https://github.com/videojs/video.js/issues/3842
+[5] https://forum.bubble.io/t/plugin-videojs-advanced-youtube-vimeo-wistia-hls-dash-mux-pre-roll-ads-plus-more/132751?page=64
+[6] https://gist.github.com/juandjara/427a592a84f59b5b13e724a50041e0d8
+[7] https://stackoverflow.com/questions/60337830/how-to-make-videojs-marker-slidable-or-movable
+[8] https://docs.videojs.com/control-bar_progress-control_play-progress-bar.js.html
+[9] https://gist.github.com/emreylmz/98ed14e7078733747d5c78625e112f49
+[10] https://github.com/videojs/videojs-overlay/blob/main/README.md

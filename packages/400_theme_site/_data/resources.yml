@@ -1320,9 +1320,9 @@ resources:
 
       data:
         css:                            [
-                                          modules/lightGallery/css/lightgallery-bundle,
                                           modules/lightGallery/css/lg-transitions,
-                                          modules/lightGallery/css/themes/uno/uno
+                                          modules/lightGallery/css/lightgallery-bundle,
+                                          modules/lightGallery/css/theme/uno/uno
                                         ]
         files:                          []
         js:                             [

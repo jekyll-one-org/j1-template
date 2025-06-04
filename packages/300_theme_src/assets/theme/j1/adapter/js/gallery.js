@@ -62,7 +62,7 @@ regenerate:                             true
  # https://github.com/miromannino/Justified-Gallery
  #
  # Copyright (C) 2020 Miro Mannino
- # Copyright (C) 2023 Sachin Neravath
+ # Copyright (C) 2025 Sachin Neravath
  # Copyright (C) 2023-2025 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.

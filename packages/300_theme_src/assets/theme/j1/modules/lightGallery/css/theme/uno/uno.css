@@ -1,0 +1,276 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/theme/j1/modules/lightGallery/css/theme/uno.css
+ # Provides LightGallery styles for Theme Uno
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2023-2025 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+/* global styles
+   ----------------------------------------------------------------------------- */
+
+/* gallery container
+------------------------------------------------ */
+.gallery-container a {
+  width: 240px;
+  margin: 5px;
+}
+
+.gallery-container a img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* captions container
+------------------------------------------------ */
+.lg-sub-html {
+  margin-bottom: 64px;
+}
+
+.lg-sub-html h2 {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.5em !important;
+    text-align: center;
+}
+
+.lg-sub-html h3 {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1em !important;
+    text-align: center;
+}
+
+.lg-sub-html h5 {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.5em !important;
+    text-align: center;
+}
+
+.lg-sub-html h6 {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1em !important;
+    text-align: center;
+}
+
+
+/* images
+------------------------------------------------ */
+.img-responsive {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+
+/* custom chapter markers (timeline)
+   ----------------------------------------------------------------------------- */
+
+/* marker bullet */
+.vjs-chapter-marker {
+	position: absolute;
+	background: #0D47A1;
+	width: 7px;
+	height: 7px;
+	margin-left: -3px;
+}
+
+/* marker text */
+.vjs-chapter-marker span {
+  position: absolute;
+  bottom: 50px;
+  opacity: 0;
+  margin-left: -20px;
+  background: rgba(0,0,0,.8);
+  padding: 8px;
+  font-size: 10px;
+  z-index: 90;
+}
+
+.vjs-chapter-marker:hover span {
+  opacity: 1;
+}
+
+/* custom anchor
+-------------------------------------------------------------------------------- */
+
+/* jadams, 2024-08-01: remove pointer cursor */
+.card.bottom > a.lg-item {
+  cursor: default;
+}
+
+/* custom icons (vjs big-play-button
+-------------------------------------------------------------------------------- */
+.lg-uno-video-icon
+.big-play-button {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  background: url(icons/play-button.svg) no-repeat center center;
+}
+
+.lg-uno-video-icon:hover
+.big-play-button {
+  background: url(icons/play-button-hover.svg) no-repeat center center;
+}
+
+
+/* custom thumbnails
+   ----------------------------------------------------------------------------- */
+ .lg-uno-thumbnails .lg-outer {
+   width: auto;
+   right: 230px;
+   left: 10px;
+ }
+
+ .lg-uno-thumbnails .lg-outer .lg-thumb-outer {
+   left: auto;
+   top: 0;
+   width: 230px;
+   max-height: none;
+   bottom: 0;
+   background-color: #999;
+   padding-left: 5px;
+   padding-right: 5px;
+   margin: 0 -10px;
+   overflow-y: auto;
+   position: fixed;
+   right: 0;
+   transform: translate3d(30%, 0, 0);
+   opacity: 0;
+   will-change: transform opacity;
+   transition: transform 0.15s cubic-bezier(0, 0, 0.25, 1) 0s, cubic-bezier(0, 0, 0.25, 1) 0.15s;
+ }
+
+ .lg-uno-thumbnails .lg-outer.lg-components-open .lg-thumb-outer {
+   transform: translate3d(0, 0, 0);
+   opacity: 1;
+ }
+
+ .lg-uno-thumbnails .lg-outer .lg-thumb-item {
+   float: left;
+   will-change: filter;
+   transition: filter 0.12s ease-in, border-color 0.12s ease;
+ }
+
+ .lg-uno-thumbnails .lg-outer .lg-thumb {
+   padding: 5px;
+   background-color: #1c1c1d;
+ }
+
+
+/* Layout
+# ------------------------------------------------------------------------------ */
+
+/*
+Bootstrap (BS) grid breakpoints
+  SN:     576px           Mobile
+  MD:     768px           Small Desktop|Tablet
+  LG:     992px           Desktop
+  XL:     1200px          Large Desktop
+  XXL:    1400px          X Large Desktop
+*/
+
+/* BS SM (Mobile|Landscape)
+# --------------------------------------------------------- */
+@media screen and (orientation: landscape) and (max-width: 768px) {
+
+	.lg-sub-html {
+	  margin-bottom: -3px;
+	}
+
+}  
+
+/* BS SM (Mobile|Landscape)
+# --------------------------------------------------------- */
+@media screen and (orientation: portrait) and (max-width: 768px) {
+
+	.lg-sub-html {
+	  margin-bottom: 76px;
+	}
+
+}  
+
+
+/* BS SM (Mobile|Landscape)
+# --------------------------------------------------------- */
+@media screen and (orientation: landscape) and (max-width: 576px) {
+
+	.lg-sub-html {
+	  margin-bottom: -6px;
+	}
+
+  .lg-sub-html h2 {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.5em !important;
+    text-align: center;
+  }
+
+  .lg-sub-html h3 {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1em !important;
+    text-align: center;
+  }
+
+  .lg-sub-html h5 {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.5em !important;
+    text-align: center;
+  }
+
+  .lg-sub-html h6 {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1em !important;
+    text-align: center;
+  }
+
+}
+
+/* BS SM (Mobile|Portrait)
+# --------------------------------------------------------- */
+@media screen and (orientation: portrait) and (max-width: 576px) {
+
+	.lg-sub-html {
+	  margin-bottom: 46px;
+	}
+
+  .lg-sub-html h2 {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.5em !important;
+    text-align: center;
+  }
+
+  .lg-sub-html h3 {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1em !important;
+    text-align: center;
+  }
+
+  .lg-sub-html h5 {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.5em !important;
+    text-align: center;
+  }
+
+  .lg-sub-html h6 {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1em !important;
+    text-align: center;
+  }
+
+}

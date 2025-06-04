@@ -15,8 +15,8 @@
 // General
 // -----------------------------------------------------------------------------
 .caption {
-  display: none;                                                                /* hidden for default */
-  position: absolute;                                                           /* positions set by translate */
+  display: none;                                                                /* hidden by default */
+  position: relative;                                                           /* positions set by translate/transform */
   margin-top: 1px;                                                              /* place caption top position */
   padding: 10px 5px 10px 5px;                                                   /* space around a caption */
   color: #E0E0E0;                                                             /* caption text color */
@@ -28,20 +28,9 @@
   z-index: 1;
 }
 
-/* jadams, 2024-11-15: Unused
-.caption-video {
-  display: none;
-  position: absolute;
-  padding: 10px 5px 10px 5px;
-  color: #E0E0E0;
-  background: rgba(0, 0, 0, 1);
-  width: 100%;
-  font-size: 12px;
-  font-weight: 300;
-  font-family: sans-serif;
-  z-index: 1;
+.caption:hover {
+  display: block;                                                               /* show caption */
 }
-*/
 
 // Positions
 // -----------------------------------------------------------------------------
@@ -52,15 +41,9 @@
 // width: 97%;
 // -----------------------------------------------------------------------------
 .top .caption {
+  display: none;                                                                /* hidden by default */
   top: 0;
-  transform: translate(-100%, -50%);                                            /* move hidden caption */
-  -moz-transform: translate(-100%, -50%);
-  -webkit-transform: translate(-100%, -50%);
-}
-
-.top:hover .caption {
-  display: block;                                                               /* show caption */
-  transform: translate(0, 0);                                                   /* move visible caption */
+  transform: translate(0, 0);                                                   
   -moz-transform: translate(0, 0);
   -webkit-transform: translate(0, 0);
   transition: all 0.25s;
@@ -71,56 +54,33 @@
   -webkit-transition-delay: 0.25s;
 }
 
+.top:hover .caption {
+  display: block;                                                               /* show caption */
+}
+
 // Bottom
 // -----------------------------------------------------------------------------
 /* jadams, 2024-11-11: ToDo (fix) */
 /* workaround: make cover images +1 pixel higher for caption text overlay */
 .bottom .caption {
-// top: 100%;
-// top: calc(100% + 1px);
- transform: translate(0, 0);
- -moz-transform: translate(0, 0);
- -webkit-transform: translate(0, 0);
+  display: none;                                                                /* hidden by default */
+  transform: translate(0, -100%);
+  -moz-transform: translate(0, -100%);
+  -webkit-transform: translate(0, -100%);
+  transition: all 0.25s;
+  -moz-transition: all 0.25s;
+  -webkit-transition: all 0.25s;
 }
 
 .bottom:hover .caption {
-  display: block;
-  transform: translate(0, -100%);
-  -moz-transform: translate(0, -100%);
-  -webkit-transform: translate(0, -100%);
-  transition: all 0.25s;
-  -moz-transition: all 0.25s;
-  -webkit-transition: all 0.25s;
-}
-
-.bottom .caption-video {
- top: 100%;
- transform: translate(0, 0);
- -moz-transform: translate(0, 0);
- -webkit-transform: translate(0, 0);
-}
-
-.bottom:hover .caption-video {
-  display: block;
-  transform: translate(0, -100%);
-  -moz-transform: translate(0, -100%);
-  -webkit-transform: translate(0, -100%);
-  transition: all 0.25s;
-  -moz-transition: all 0.25s;
-  -webkit-transition: all 0.25s;
+  display: block;                                                               /* show caption */
 }
 
 // Centered
 // -----------------------------------------------------------------------------
 .center .caption {
+  display: none;                                                                /* hidden by default */
   top: 50%;
-  transform: translate(-100%, -50%);
-  -moz-transform: translate(-100%, -50%);
-  -webkit-transform: translate(-100%, -50%);
-}
-
-.center:hover .caption {
-  display: block;
   transform: translate(0, -50%);
   -moz-transform: translate(0, -50%);
   -webkit-transform: translate(0, -50%);
@@ -131,3 +91,41 @@
   -moz-transition-delay: 0.25s;
   -webkit-transition-delay: 0.25s;
 }
+
+.center:hover .caption {
+  display: block;                                                               /* show caption */
+}
+
+// Captions|Video: Bottom
+// jadams, 2025-07-05: Unused
+// -----------------------------------------------------------------------------
+// jadams, 2024-11-15: Unused
+// .caption-video {
+//  display: none;                                                                /* hidden by default */
+//  position: absolute;
+//  padding: 10px 5px 10px 5px;
+//  color: #E0E0E0;
+//  background: rgba(0, 0, 0, 1);
+//  width: 100%;
+//  font-size: 12px;
+//  font-weight: 300;
+//  font-family: sans-serif;
+//  z-index: 1;
+//}
+
+// .bottom .caption-video {
+//  top: 100%;
+//  transform: translate(0, 0);
+//  -moz-transform: translate(0, 0);
+//  -webkit-transform: translate(0, 0);
+// }
+
+// .bottom:hover .caption-video {
+//   display: block;
+//   transform: translate(0, -100%);
+//   -moz-transform: translate(0, -100%);
+//   -webkit-transform: translate(0, -100%);
+//   transition: all 0.25s;
+//   -moz-transition: all 0.25s;
+//   -webkit-transition: all 0.25s;
+// }
