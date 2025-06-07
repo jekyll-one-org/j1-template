@@ -1,0 +1,83 @@
+Ich verwende für meine VideoJS Player in der Controlbar das Element
+playbackRates (vjsPlaybackRates). Über den Button wird ein Menü geöffnet,
+dass falsch in der Höhe platziert ist.
+
+Auf welche Weise (JS/CSS) kann man das Menü vertikal nach oben verschieben?
+
+Perplexity
+--------------------------------------------------------------------------------
+
+## Problem: PlaybackRates-Menü in VideoJS ist vertikal falsch platziert
+
+Das PlaybackRates-Menü in der VideoJS-Controlbar öffnet sich bei dir zu
+weit unten und soll nach oben verschoben werden. Dieses Menü ist ein
+Standard-VideoJS-Component und wird als Dropdown unterhalb des Buttons
+gerendert. Die Platzierung erfolgt per CSS.
+
+## Lösungsmöglichkeiten
+
+**1. CSS-Anpassung (empfohlen)**
+
+Das Menü ist ein HTML-Element mit der Klasse `.vjs-menu` und wird als Kind des Buttons eingefügt. Um das Menü vertikal zu verschieben, kannst du das CSS anpassen:
+
+```css
+.vjs-playback-rate .vjs-menu {
+  /* Verschiebt das Menü nach oben, z.B. um 20px */
+  top: -20px !important;
+}
+```
+
+Falls das Menü mit `bottom` positioniert ist (je nach Theme/Version), dann stattdessen:
+
+```css
+.vjs-playback-rate .vjs-menu {
+  bottom: 40px !important; /* Wert ggf. anpassen */
+}
+```
+
+Passe den Wert nach Bedarf an, um das Menü exakt zu positionieren.
+
+**2. Mit JavaScript dynamisch anpassen**
+
+Falls das Menü dynamisch oder abhängig von anderen Elementen positioniert werden soll, kannst du nach dem Rendern per JavaScript eingreifen:
+
+```js
+player.on('ready', function() {
+  var menu = document.querySelector('.vjs-playback-rate .vjs-menu');
+  if (menu) {
+    menu.style.top = '-20px'; // Wert anpassen
+  }
+});
+```
+
+**3. Eigene CSS-Klasse verwenden**
+
+Falls du verschiedene Player auf einer Seite hast, kannst du eine spezifischere Klasse vergeben:
+
+```css
+.mein-player .vjs-playback-rate .vjs-menu {
+  top: -20px !important;
+}
+```
+
+**Hinweis:**  
+Die genaue Klasse kann je nach VideoJS-Version und Theme leicht variieren. Prüfe im Browser-Inspector, wie das Menü positioniert ist (meistens mit `top` oder `bottom` relativ zum Button).
+
+## Hintergrund
+
+Das Menü wird als `MenuButton`-Component von VideoJS erstellt und ist als Dropdown unterhalb des Buttons positioniert[1][2]. Die Platzierung erfolgt rein per CSS, nicht per JavaScript-Logik. Das Menü selbst hat keine eigene Positionierungslogik im JS, sondern folgt dem Standard-Layout der Controlbar.
+
+## Fazit
+
+Die vertikale Position des PlaybackRates-Menüs in VideoJS lässt sich am einfachsten und zuverlässigsten per CSS anpassen, indem du gezielt das `.vjs-menu`-Element innerhalb der `.vjs-playback-rate`-Komponente ansprichst und mit `top` oder `bottom` verschiebst. JavaScript ist nur nötig, wenn du dynamisch oder kontextabhängig eingreifen möchtest.
+
+[1] https://player.support.brightcove.com/brightcove-player/current-release/control-bar_playback-rate-menu_playback-rate-menu-button.js.html
+[2] https://docs.videojs.com/control-bar_playback-rate-menu_playback-rate-menu-button.js.html
+[3] https://docs.videojs.com/docs/api/playback-rate-menu-item.html
+[4] https://videojs.com/guides/options/
+[5] https://github.com/videojs/video.js/discussions/8822
+[6] https://github.com/videojs/video.js/issues/7989
+[7] https://docs.videojs.com/playbackratemenuitem
+[8] https://stackoverflow.com/questions/70396230/videojs-playback-rate-menu-button-not-showing-in-control-bar
+[9] https://github.com/videojs/video.js/issues/7581
+[10] https://github.com/cookpete/react-player/issues/1047

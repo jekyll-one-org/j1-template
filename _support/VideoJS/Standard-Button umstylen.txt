@@ -1,0 +1,64 @@
+Wie kann man den playbackRates Button in VideoJS durch ein Icon ersetzen?
+
+Perplexity
+--------------------------------------------------------------------------------
+
+Um den playbackRates-Button in VideoJS durch ein Icon zu ersetzen, gibt es
+eine effektive Methode per CSS, die das Standard-Textlabel ausblendet und
+stattdessen ein Icon anzeigt. Das Vorgehen ist dabei wie folgt:
+
+## Schritt-für-Schritt-Anleitung
+
+**1. Text im Button ausblenden**
+
+Blende das Textlabel des Buttons aus, damit nur noch das Icon sichtbar ist:
+
+```css
+.video-js .vjs-playback-rate .vjs-menu-button-content {
+  display: none;
+}
+```
+
+**2. Icon per CSS einfügen**
+
+Füge ein Icon deiner Wahl (SVG, PNG oder ein Font-Icon) über das
+`::before`-Pseudoelement hinzu. Beispiel mit einem SVG als
+Hintergrundbild:
+
+```css
+.video-js .vjs-playback-rate.vjs-control::before {
+  content: "";
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url('dein-icon.svg'); /* Pfad zum Icon */
+  background-size: contain;
+  background-repeat: no-repeat;
+  vertical-align: middle;
+}
+```
+
+Alternativ kannst du auch ein Font-Icon verwenden, z.B. mit Material Design Icons:
+
+```css
+.video-js .vjs-playback-rate.vjs-control::before {
+  content: "\f0F85"; /* Beispiel: Unicode für ein MDI-Icon: speedometer-medium */
+  font-family: "Material Design Icons";
+  font-weight: 900;
+  font-size: 20px;
+  color: #fff;
+}
+```
+
+**3. Optional: Button weiter anpassen**
+
+Falls nötig, passe die Größe, Farbe oder Abstände des Buttons an, damit
+das Icon optimal in die Controlbar passt.
+
+---
+
+Diese Methode bewirkt, dass der playbackRates-Button weiterhin seine
+Funktion behält, aber statt des Textes nur noch ein Icon angezeigt wird.
+Sie ist besonders geeignet, wenn du das UI gezielt anpassen möchtest,
+wie es auch deinem Fokus auf UI-Komponenten-Optimierung entspricht.
+

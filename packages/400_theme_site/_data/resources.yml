@@ -1362,24 +1362,28 @@ resources:
       data:
         css:                            [
                                           modules/videojs/css/videojs,
-                                          modules/videojs/css/plugins/controls/skipbuttons,
-                                          modules/videojs/css/plugins/controls/zoom,
                                           modules/videojs/css/themes/city,
                                           modules/videojs/css/themes/fantasy,
                                           modules/videojs/css/themes/forest,
                                           modules/videojs/css/themes/sea,
-                                          modules/videojs/css/themes/uno
+                                          modules/videojs/css/themes/uno,
+                                          modules/videojs/plugins/controls/aspect-ratio-panel/css/aspect-ratio-panel,
+                                          modules/videojs/plugins/controls/skipbuttons/css/skipbuttons,
+                                          modules/videojs/plugins/controls/zoom/css/zoom
                                         ]
         files:                          [ adapter/js/videojs.js ]
         js:                             [
                                           modules/videojs/js/video,
-                                          modules/videojs/js/plugins/controls/hotkeys/hotkeys,
-                                          modules/videojs/js/plugins/controls/skipbuttons/skipbuttons,
-                                          modules/videojs/js/plugins/controls/zoom/zoom,
-                                          modules/videojs/js/plugins/players/dm/dailymotion,
-                                          modules/videojs/js/plugins/players/vm/vimeo,
-                                          modules/videojs/js/plugins/players/wt/wistia,
-                                          modules/videojs/js/plugins/players/yt/youtube
+                                          modules/videojs/plugins/controls/aspect-ratio-panel/js/aspect-ratio-panel,
+                                          modules/videojs/plugins/controls/hotkeys/js/hotkeys,
+                                          modules/videojs/plugins/controls/skipbuttons/js/skipbuttons,
+                                          modules/videojs/plugins/controls/persist-settings/js/videojs-persist,
+                                          modules/videojs/plugins/controls/playbackrate-adjuster/js/playbackrate-adjuster,
+                                          modules/videojs/plugins/controls/zoom/js/zoom,
+                                          modules/videojs/plugins/players/dm/js/dailymotion,
+                                          modules/videojs/plugins/players/vm/js/vimeo,
+                                          modules/videojs/plugins/players/wt/js/wistia,
+                                          modules/videojs/plugins/players/yt/js/youtube
                                         ]
         init_function:                  [ j1.adapter.videojs.init ]
 

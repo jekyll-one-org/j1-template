@@ -170,7 +170,7 @@ Asciidoctor::Extensions.register do
                 // insert div|caption container AFTER the image
                 image.parentNode.insertBefore(newDiv, image.nextSibling);
               } else {
-                console.error(`Kein Bild mit src="${imageSrc}" gefunden.`);
+                console.error(`No image found at: '${imageSrc}'`);
               }
             }
 
@@ -212,12 +212,44 @@ Asciidoctor::Extensions.register do
               var vjsPlayerCustomButtons  = ("#{custom_buttons}" === 'true') ? true : false;
 
               if (vjsPlayerExist && vjsPlayerCustomButtons) {
+
                 // apply player customization on 'player ready'
+                // -------------------------------------------------------------
                 videojs("#{video_id}").ready(function() {
-                  var vjsPlayer = this;
+                  var vjsPlayer   = this;
+                  var controlBar  = vjsPlayer.controlBar.el();
+                  var playerEl    = vjsPlayer.el();                  
+
+                  // add custom progressControlSilder
+                  // -----------------------------------------------------------
+
+                  // create custom controlContainer (progressControlSilder|time display elements)
+                  var customProgressContainer = vjsPlayer.controlBar.addChild('Component', {
+                    el: videojs.dom.createEl('div', {
+                      className: 'vjs-theme-uno  custom-progress-container'
+                    })
+                  });
+
+                  // move progressControlSlider in den neuen Container
+                  var progressControl = vjsPlayer.controlBar.progressControl;
+                  if (progressControl) {
+                    customProgressContainer.el().appendChild(progressControl.el());
+                  }
+
+                  // move remainingTimeDisplay BEFORE the progressControlSilder
+                  var remainingTimeDisplay = vjsPlayer.controlBar.remainingTimeDisplay;
+                  if (remainingTimeDisplay) {
+                    customProgressContainer.el().insertBefore(remainingTimeDisplay.el(), progressControl.el());
+                  }
+
+                  // move the durationDisplay AFTER the progressControlSilder
+                  var durationDisplay = vjsPlayer.controlBar.durationDisplay;
+                  if (durationDisplay) {
+                    customProgressContainer.el().appendChild(durationDisplay.el());
+                  }
 
                   // add|skip playbackRates
-                  //
+                  // -----------------------------------------------------------
                   if (videojsConfig.playbackRates.enabled) {
                     vjsPlayer.playbackRates(vjsPlaybackRates);
                   }
@@ -260,6 +292,7 @@ Asciidoctor::Extensions.register do
                   }
 
                   // add|skip skipButtons plugin
+                  // -----------------------------------------------------------
                   if (piSkipButtons.enabled) {
                     var backwardIndex = piSkipButtons.backward;
                     var forwardIndex  = piSkipButtons.forwardIndex;
@@ -283,10 +316,11 @@ Asciidoctor::Extensions.register do
                   // -----------------------------------------------------------
                   // Check if plugin ZoomButtons possible to be used for 
                   // this extension. Disabled for now.
-                  // ------------------------------------------------------------
+                  // -----------------------------------------------------------
                   piZoomButtons.enabled = false;                  
 
                   // add|skip zoomButtons plugin
+                  // -----------------------------------------------------------
                   if (piZoomButtons.enabled && vjsPlayerType === 'native') {
                     vjsPlayer.zoomButtons({
                       moveX:  piZoomButtons.moveX,

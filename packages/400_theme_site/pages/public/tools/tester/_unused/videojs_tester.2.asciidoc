@@ -1,0 +1,388 @@
+---
+title:                                  VideoJS Tester
+title_extention:                        Scrollbar Plazierung
+tagline:                                Scrollbar Plazierung
+
+date:                                   2025-01-07
+#last_modified:                         2025-01-01
+
+description: >
+                                        Test the Swiper Integration
+keywords: >
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap,
+                                        html, html5, video, support, flash player,
+                                        quicktime, silverlight
+
+categories:                             [ Tester ]
+tags:                                   [ Module, Swiper ]
+
+image:
+  path:                                 /assets/image/module/attic/markus-spiske-1920x1280.jpg
+  width:                                1920
+  height:                               1280
+
+attic:                                  false
+regenerate:                             false
+personalization:                        true
+permalink:                              /pages/public/tester/videojs_sb/
+
+resources:                              [ videojs ]
+resource_options:
+  - toccer:
+      collapseDepth:                    3
+  - attic:
+      slides:
+        - url:                          /assets/image/module/attic/markus-spiske-1920x1280.jpg
+          alt:                          Swiper Tester
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Attribute settings for section control
+//
+:swiper--features:                      false
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+Swiper, the free and most modern mobile touch slider with hardware accelerated
+transitions and amazing native behavior. It is intended to be used in mobile
+websites, mobile web apps, and mobile native/hybrid apps.
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+== VideoJS Player
+
+lorem:sentences[5]
+
+++++
+<div class="video-title">
+	<i class="mdib mdib-video mdib-24px mr-2"></i>
+	Horst Evers - Parkfest 2019 (radioeins) 
+</div>
+
+<div class="mb-8">
+  <video
+  id="2rtQOsWaAXc"
+  class="video-js vjs-theme-uno"
+  controls
+  width="640"
+  height="360"
+  poster="//img.youtube.com/vi/jyMxNuBW100/maxresdefault.jpg" alt="Horst Evers - Parkfest 2019 (radioeins)" 
+  aria-label="Horst Evers - Parkfest 2019 (radioeins)"
+  data-setup='{
+    "fluid" : true,
+    "techOrder": [
+        "youtube", "html5"
+    ],
+    "sources": [{
+        "type": "video/youtube",
+        "src": "//youtube.com/watch?v=jyMxNuBW100"
+    }],
+    "controlBar": {
+      "children": [
+		  "progressControl",
+          "playToggle",
+          "volumePanel",
+          "currentTimeDisplay",
+          "timeDivider",
+          "durationDisplay",
+          "fullscreenToggle"
+      ],
+      "pictureInPictureToggle": false,
+      "volumePanel": {
+      "inline": false
+      }
+    }
+  }'
+></video>
+</div>
+
+<style>
+
+/* Testing only */
+.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-control-bar {
+    opacity: 1;   /* make alaways visible */
+}
+
+/* Grundlegende VideoJS Stile können hier überschrieben werden */
+.video-js {
+  font-size: 14px;
+}
+
+.vjs-theme-uno .vjs-progress-control .vjs-progress-holder,
+.vjs-theme-uno .vjs-progress-control:hover .vjs-progress-holder {
+  font-size: 1.0em
+}
+
+.video-js .vjs-progress-control:hover .vjs-progress-holder {
+  font-size: 1.6666666667em;
+}
+
+/* Positionierung des Sliders über der Controlbar */
+.video-js .vjs-control-bar {
+  position: relative; /* Wichtig für die Positionierung des Sliders */
+  display: flex; /* Um die Elemente in der Controlbar richtig anzuordnen */
+  align-items: center;
+  justify-content: flex-start;
+  height: 65px; /* Höhe der Controlbar */
+}
+
+.video-js .vjs-progress-control {
+  position: absolute;
+  top: -1em; 						/* Anpassung der Position nach oben, je nach Höhe des Sliders */
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 1em; 						/* Höhe der Progressbar */
+  margin-top: 0; 					/* Standardmäßig hat VideoJS hier einen Margin */
+  background-color: transparent; 	/* Macht den Hintergrund des Progress-Containers transparent */
+}
+
+.video-js .vjs-slider {
+  height: 1em;   /* Höhe des Sliders selbst */
+  margin-top: 0;
+}
+
+/* Optional: Feinabstimmung für die Slider-Leiste und den Daumen */
+.video-js .vjs-play-progress {
+  background-color: #4CAF50; 		/* Grüne Farbe für den Fortschritt */
+}
+
+/* Ladebalken */
+.video-js .vjs-load-progress {
+  background-color: rgba(255, 255, 255, 0.3); 
+}
+
+.video-js .vjs-mouse-display {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  font-size: 0.9em;
+  padding: 0.2em 0.5em;
+  border-radius: 3px;
+  transform: translateX(-50%);
+}
+
+/* Verstecken der Standard-Progressbar in der Controlbar, falls sie durch JS verschoben wird */
+/* Dies ist wichtig, damit es keine doppelte Progressbar gibt */
+.video-js .vjs-control-bar .vjs-progress-control {
+  order: -1; /* Verschiebt das Progress-Control an den Anfang der Flexbox-Reihenfolge */
+  flex-grow: 1; /* Lässt den Progress-Control den verfügbaren Platz einnehmen */
+  margin-right: 1em; /* Kleiner Abstand zur nächsten Steuerung */
+}
+
+</style>
+++++
+
+++++
+<script>
+	$(function() {
+
+		// =================================================================
+		// take over VideoJS configuration data (JSON data from Ruby)
+		// -----------------------------------------------------------------
+		var videojsDefaultConfigJson = '{"description":{"title":"J1 VideoJS","scope":"Default settings","location":"_data/modules/defaults/videojs.yml"},"defaults":{"enabled":false,"playbackRates":{"enabled":false,"values":[0.25,0.5,1,1.5,2]},"players":{"youtube":{"autoplay":0,"cc_load_policy":0,"controls":0,"disablekb":1,"enablejsapi":1,"fs":0,"iv_load_policy":3,"loop":0,"modestbranding":1,"rel":0,"showinfo":0,"default_poster":"/assets/image/icon/videojs/videojs-poster.png","poster":"maxresdefault.jpg","end":true,"start":true}},"plugins":{"autoCaption":{"enabled":false},"hotKeys":{"enabled":false,"seekStep":15,"volumeStep":0.1,"alwaysCaptureHotkeys":true,"captureDocumentHotkeys":false,"hotkeysFocusElementFilter":"function () { return false }","enableFullscreen":true,"enableHoverScroll":true,"enableInactiveFocus":true,"enableJogStyle":false,"enableMute":true,"enableModifiersForNumbers":true,"enableNumbers":false,"enableVolumeScroll":true,"skipInitialFocus":false},"skipButtons":{"enabled":false,"surroundPlayButton":false,"backwardIndex":1,"forwardIndex":1,"forward":10,"backward":10},"zoomButtons":{"enabled":false,"moveX":0,"moveY":0,"rotate":0,"zoom":1}}}}';
+		var videojsUserConfigJson = '{"description":{"title":"J1 VideoJS","scope":"User settings","location":"_data/modules/videojs.yml"},"settings":{"enabled":true,"playbackRates":{"enabled":true},"plugins":{"hotKeys":{"enabled":true,"enableInactiveFocus":false},"skipButtons":{"enabled":true,"surroundPlayButton":true},"zoomButtons":{"enabled":true}}}}';
+
+		// =================================================================
+		// create config objects from JSON data
+		// -----------------------------------------------------------------
+		var videojsDefaultSettings 	= JSON.parse(videojsDefaultConfigJson);
+		var videojsUserSettings 	= JSON.parse(videojsUserConfigJson);
+		var videojsConfig           = $.extend(true, {}, videojsDefaultSettings.defaults, videojsUserSettings.settings);
+
+		// =================================================================
+		// VideoJS player settings
+		// -----------------------------------------------------------------
+		const vjsPlayerType = 'ytp';
+		const vjsPlaybackRates = videojsConfig.playbackRates.values;
+
+		// =================================================================
+		// VideoJS plugin settings
+		// -----------------------------------------------------------------
+		const piAutoCaption = videojsConfig.plugins.autoCaption;
+		const piHotKeys 	= videojsConfig.plugins.hotKeys;
+		const piSkipButtons = videojsConfig.plugins.skipButtons;
+		const piZoomButtons = videojsConfig.plugins.zoomButtons;
+
+		// =================================================================
+		// helper functions
+		// -----------------------------------------------------------------
+		function addCaptionAfterImage(imageSrc) {
+			const image = document.querySelector(`img[src="${imageSrc}"]`);
+			if (image) {
+				// create div|caption container
+				const newDiv = document.createElement('div');
+				newDiv.classList.add('caption');
+				newDiv.textContent = 'Horst Evers - Parkfest 2019 (radioeins)';
+				// insert div|caption container AFTER the image
+				image.parentNode.insertBefore(newDiv, image.nextSibling);
+			} else {
+				console.error(`Kein Bild mit src="${imageSrc}" gefunden.`);
+			}
+		}
+
+		// =================================================================
+		// initialize the VideoJS player (on page ready)
+		// -----------------------------------------------------------------
+		var dependencies_met_page_ready = setInterval(function(options) {
+			var pageState = $('#content').css("display");
+			var pageVisible = (pageState == 'block') ? true : false;
+			var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
+			if (j1CoreFinished && pageVisible) {
+				var vjs_player = document.getElementById("2rtQOsWaAXc");
+				// add|skip captions (on poster image)
+				if ('true' === 'true') {
+					addCaptionAfterImage('//img.youtube.com/vi/jyMxNuBW100/maxresdefault.jpg');
+				}
+				// scroll page to the players top position
+				// -------------------------------------------------------------
+				vjs_player.addEventListener('click', function(event) {
+					const targetDiv = document.getElementById("2rtQOsWaAXc");
+					const targetDivPosition = targetDiv.offsetTop;
+					var scrollOffset = (window.innerWidth >= 720) ? -130 : -110;
+					// scroll player to top position
+					window.scrollTo(0, targetDivPosition + scrollOffset);
+				});
+				// END EventListener 'click'
+				clearInterval(dependencies_met_page_ready);
+			}
+		}, 10);
+
+		// customize the yt player created
+		// -----------------------------------------------------------------
+		var dependencies_met_vjs_player_exist = setInterval(function(options) {
+			var vjsPlayerExist = document.getElementById("2rtQOsWaAXc") ? true : false;
+			var vjsPlayerCustomButtons = ("true" === 'true') ? true : false;
+			if (vjsPlayerExist && vjsPlayerCustomButtons) {
+				// apply player customization on 'player ready'
+				videojs("2rtQOsWaAXc").ready(function() {
+					var vjsPlayer 		= this;
+					var progressControl = vjsPlayer.controlBar.progressControl.el();
+					var controlBar 		= vjsPlayer.controlBar.el();
+					var playerEl 		= vjsPlayer.el();
+
+					// Hole die Controlbar und den Progressbar-Container
+					var controlBar 			= vjsPlayer.controlBar;
+					var progressControl 	= vjsPlayer.controlBar.getChild('ProgressControl');
+					var currentTimeDisplay 	= vjsPlayer.controlBar.getChild('currentTimeDisplay');
+					var durationDisplay		= vjsPlayer.controlBar.getChild('durationDisplay');
+
+					// Entferne den Progressbar aus seiner ursprünglichen Position in der Controlbar
+					// controlBar.removeChild(progressControl);
+					controlBar.removeChild(durationDisplay);
+
+					// Füge den Progressbar ganz am Anfang der Controlbar ein
+					// Dies platziert ihn visuell "über" den anderen Steuerelementen,
+					// da wir die Controlbar als relative Container nutzen und den Slider absolut positionieren.
+					// controlBar.addChild(durationDisplay, {}, 0); // Der dritte Parameter ist der Index
+					controlBar.addChild(progressControl, {}, 0); // Der dritte Parameter ist der Index
+
+
+
+
+				// add|skip playbackRates
+				//
+				if (videojsConfig.playbackRates.enabled) {
+					vjsPlayer.playbackRates(vjsPlaybackRates);
+				}
+				// add|skip hotKeys plugin
+				//
+				if (piHotKeys.enabled) {
+					vjsPlayer.hotKeys({
+						volumeStep: piHotKeys.volumeStep,
+						seekStep: piHotKeys.seekStep,
+						enableMute: piHotKeys.enableMute,
+						enableFullscreen: piHotKeys.enableFullscreen,
+						enableNumbers: piHotKeys.enableNumbers,
+						enableVolumeScroll: piHotKeys.enableVolumeScroll,
+						enableHoverScroll: piHotKeys.enableHoverScroll,
+						alwaysCaptureHotkeys: piHotKeys.alwaysCaptureHotkeys,
+						captureDocumentHotkeys: piHotKeys.captureDocumentHotkeys,
+						documentHotkeysFocusElementFilter: e => e.tagName.toLowerCase() === "body",
+						// Mimic VLC seek behavior (default to: 15)
+						seekStep: function(e) {
+							if (e.ctrlKey && e.altKey) {
+								return 5 * 60;
+							} else if (e.ctrlKey) {
+								return 60;
+							} else if (e.altKey) {
+								return 10;
+							} else {
+								return 15;
+							}
+						},
+						// Enhance existing simple hotkey by complex hotkeys
+						fullscreenKey: function(e) {
+							// fullscreen with the F key or Ctrl+Enter
+							return ((e.which === 70) || (e.ctrlKey && e.which === 13));
+						},
+					});
+					// END VideoJS hotKeys plugin
+				}
+				// add|skip skipButtons plugin
+				if (piSkipButtons.enabled) {
+					var backwardIndex	= piSkipButtons.backward;
+					var forwardIndex 	= piSkipButtons.forwardIndex;
+
+					// property 'surroundPlayButton' takes precendence
+					//
+					if (piSkipButtons.surroundPlayButton) {
+						var backwardIndex = 0;
+						var forwardIndex = 1;
+					}
+					vjsPlayer.skipButtons({
+						backwardIndex: backwardIndex,
+						forwardIndex: forwardIndex,
+						backward: piSkipButtons.backward,
+						forward: piSkipButtons.forward,
+					});
+				}
+
+				// add|skip zoomButtons plugin
+				if (piZoomButtons.enabled && vjsPlayerType === 'native') {
+					vjsPlayer.zoomButtons({
+						moveX: piZoomButtons.moveX,
+						moveY: piZoomButtons.moveY,
+						rotate: piZoomButtons.rotate,
+						zoom: piZoomButtons.zoom
+					});
+				}
+
+				// set start position of current video (on play)
+				// -----------------------------------------------------------
+				var appliedOnce = false;
+				vjsPlayer.on("play", function() {
+					var startFromSecond = new Date('1970-01-01T' + "00:00:00" + 'Z').getTime() / 1000;
+					if (!appliedOnce) {
+						vjsPlayer.currentTime(startFromSecond);
+						appliedOnce = true;
+					}
+				})
+
+				}); // EventListener on 'player ready'
+				// END yt player ready (set custom controls)
+				clearInterval(dependencies_met_vjs_player_exist);
+			} // END if 'vjsPlayerExist'
+		}, 10); // END 'dependencies_met_vjs_player_exist'
+
+	}); //END 'document ready'
+</script>
+++++

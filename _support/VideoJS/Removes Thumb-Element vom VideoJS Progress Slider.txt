@@ -1,0 +1,99 @@
+Wie entfernt man das Thumb-Element vom VideoJS Progress Slider 
+für Videos JS V8?
+
+Gemini
+--------------------------------------------------------------------------------
+
+Um das "Thumb-Element" (den kleinen Kreis oder Griff, den man auf dem
+Progress-Slider ziehen kann) vom Video.js Progress Slider in Video.js V8
+zu entfernen oder auszublenden, kannst du CSS verwenden. Video.js verwendet
+spezielle CSS-Klassen für seine Komponenten, die du gezielt ansprechen kannst.
+
+Das Thumb-Element ist normalerweise Teil des "SeekBar" (Suchleiste) und wird
+durch die Klasse `vjs-play-progress` oder ein darin enthaltenes Pseudo-Element
+dargestellt.
+
+Hier sind die gängigsten Methoden, um es auszublenden:
+
+**1. Mit CSS `display: none;` (empfohlen, wenn du den Thumb vollständig entfernen möchtest):**
+
+Diese Methode blendet das Thumb-Element komplett aus, sodass es weder sichtbar noch interaktiv ist.
+
+```css
+.video-js .vjs-progress-control .vjs-play-progress:before {
+  display: none;
+}
+```
+
+**Erklärung:**
+* `.video-js`: Dies stellt sicher, dass die Regel nur auf Video.js-Player angewendet wird.
+* `.vjs-progress-control`: Dies ist der Container für den gesamten Progress-Slider.
+* `.vjs-play-progress`: Dies ist der Teil des Sliders, der den bereits abgespielten Bereich darstellt, und oft enthält er das Thumb-Element oder ist eng damit verbunden.
+* `:before`: Video.js verwendet oft Pseudo-Elemente (`:before` oder `:after`) für das Thumb-Element. Durch das Anwenden von `display: none;` auf dieses Pseudo-Element wird es unsichtbar.
+
+**2. Mit CSS `opacity: 0;` und/oder `visibility: hidden;` (wenn du es nur unsichtbar machen, aber den Platz beibehalten möchtest):**
+
+Diese Methoden machen das Thumb unsichtbar, es könnte aber immer noch den Platz einnehmen oder theoretisch interaktiv sein, wenn auch schwer zu bedienen. `display: none;` ist meist die bessere Wahl.
+
+```css
+.video-js .vjs-progress-control .vjs-play-progress:before {
+  opacity: 0;
+  visibility: hidden;
+}
+```
+
+**Wo füge ich diesen CSS-Code ein?**
+
+Du kannst diesen CSS-Code in deiner eigenen CSS-Datei einfügen, die nach dem Video.js-Stylesheet geladen wird. Zum Beispiel in deiner `style.css` oder einer ähnlichen Datei:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Video.js ohne Thumb</title>
+  <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
+  <style>
+    /* Dein benutzerdefiniertes CSS */
+    .video-js .vjs-progress-control .vjs-play-progress:before {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <video
+    id="my-video"
+    class="video-js vjs-default-skin"
+    controls
+    preload="auto"
+    width="640"
+    height="360"
+    poster="YOUR_POSTER_IMAGE.jpg"
+    data-setup='{}'
+  >
+    <source src="YOUR_VIDEO_FILE.mp4" type="video/mp4" />
+    <p class="vjs-no-js">
+      To view this video please enable JavaScript, and consider upgrading to a
+      web browser that
+      <a href="https://videojs.com/html5-video-support/" target="_blank"
+        >supports HTML5 video</a
+      >
+    </p>
+  </video>
+
+  <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+</body>
+</html>
+```
+
+**Wichtiger Hinweis:**
+
+Die genaue CSS-Klasse oder das Pseudo-Element für das Thumb kann sich
+leicht zwischen verschiedenen Video.js-Versionen oder bei benutzerdefinierten
+Skins ändern. Die oben genannte Methode ist die gängigste für Video.js V8.
+
+Wenn es nicht funktioniert, kannst du die Entwicklertools deines Browsers
+verwenden (Rechtsklick auf den Player -> "Untersuchen"), um die genauen
+CSS-Klassen des Thumb-Elements zu identifizieren.
+
+Suche nach Elementen, die das Thumb darstellen, wenn du über den Slider fährst.

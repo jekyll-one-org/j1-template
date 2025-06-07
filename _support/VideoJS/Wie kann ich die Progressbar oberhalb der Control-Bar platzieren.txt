@@ -1,5 +1,7 @@
-Wie kann man bei VideoJS Playern den Progessbar/Slider (vjs-slider-horizontal)
-oberhab der vjs-control-bar plazieren
+Wie kann man bei VideoJS Playern den Progessbar/Slider (vjs-slider)
+oberhab der Controlbar plazieren? Ich benötige ein komplettes Beispiel
+mit JS + CSS zeige, das man direkt in einem  CodePen oder lokal testen
+kann.
 
 See: https://github.com/videojs/video.js/wiki/Skins
 
