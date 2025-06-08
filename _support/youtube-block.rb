@@ -216,35 +216,37 @@ Asciidoctor::Extensions.register do
                 // apply player customization on 'player ready'
                 // -------------------------------------------------------------
                 videojs("#{video_id}").ready(function() {
-                  const vjsPlayer   = this;               
+                  var vjsPlayer   = this;
+                  var controlBar  = vjsPlayer.controlBar.el();
+                  var playerEl    = vjsPlayer.el();                  
 
                   // add custom progressControlSilder
                   // -----------------------------------------------------------
 
-                  // create customControlContainer for progressControlSilder|time (display) elements
-                    const customProgressContainer = vjsPlayer.controlBar.addChild('Component', {
-                      el: videojs.dom.createEl('div', {
-                        className: 'vjs-theme-uno custom-progressbar-container'
-                      })
-                    });
+                  // create custom controlContainer (progressControlSilder|time display elements)
+                  var customProgressContainer = vjsPlayer.controlBar.addChild('Component', {
+                    el: videojs.dom.createEl('div', {
+                      className: 'vjs-theme-uno  custom-progress-container'
+                    })
+                  });
 
-                    // move progressControlSlider into customControlContainer
-                    const progressControlSlider = vjsPlayer.controlBar.progressControl;
-                    if (progressControlSlider) {
-                      customProgressContainer.el().appendChild(progressControlSlider.el());
-                    }
+                  // move progressControlSlider in den neuen Container
+                  var progressControl = vjsPlayer.controlBar.progressControl;
+                  if (progressControl) {
+                    customProgressContainer.el().appendChild(progressControl.el());
+                  }
 
-                    // move currentTimeDisplay BEFORE the progressControlSilder
-                    const currentTimeDisplay = vjsPlayer.controlBar.currentTimeDisplay;
-                    if (currentTimeDisplay) {
-                      customProgressContainer.el().insertBefore(currentTimeDisplay.el(), progressControlSlider.el());
-                    }
+                  // move remainingTimeDisplay BEFORE the progressControlSilder
+                  var remainingTimeDisplay = vjsPlayer.controlBar.remainingTimeDisplay;
+                  if (remainingTimeDisplay) {
+                    customProgressContainer.el().insertBefore(remainingTimeDisplay.el(), progressControl.el());
+                  }
 
-                    // move the durationDisplay AFTER the progressControlSilder
-                    const durationDisplay = vjsPlayer.controlBar.durationDisplay;
-                    if (durationDisplay) {
-                      customProgressContainer.el().appendChild(durationDisplay.el());
-                    }
+                  // move the durationDisplay AFTER the progressControlSilder
+                  var durationDisplay = vjsPlayer.controlBar.durationDisplay;
+                  if (durationDisplay) {
+                    customProgressContainer.el().appendChild(durationDisplay.el());
+                  }
 
                   // add|skip playbackRates
                   // -----------------------------------------------------------

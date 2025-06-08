@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/videojs/js/plugins/players/vm/vimeo.js
+ # ~/assets/theme/j1/modules/videojs/js/plugins/players/vm/js/vimeo.js
  # Provides Vimeo Playback Technology (Tech) for Video.js V8 and newer
  #
  #  Product/Info:
@@ -649,9 +649,8 @@
         isDev && logger.debug('\n' + 'initializing plugin: started');
         isDev && logger.debug('\n' + 'version of videoJS detected: ' + videojs.VERSION);
 
-        // load script loaded from local because of NemeSpace conflicts (Vimeo -> VM)
-        loadScript('/assets/theme/j1/modules/videojs/plugins/players/vm/api/vimeo.js', apiLoaded);
-
+        // load script loaded from local because (original) NemeSpace conflicts (Vimeo -> VM)
+        loadScript('/assets/theme/j1/modules/videojs/plugins/players/vm/api/js/vimeo.js', apiLoaded);
         injectCss();
         clearInterval(dependencies_met_page_ready);
       } // END pageVisible

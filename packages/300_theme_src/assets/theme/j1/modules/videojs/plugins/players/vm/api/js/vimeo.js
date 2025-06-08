@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/videojs/js/vimeo/api/vimeo.js
+ # ~/assets/theme/j1/modules/videojs/plugins/players/vm/api/js/vimeo.js
  # Vimeo Player API (modified version)
  #
  #  Product/Info:
