@@ -86,12 +86,12 @@ lorem:sentences[3]
 
 ++++
 <div class="video-title">
-    <i class="mdib mdib-video mdib-24px mr-2"></i>
-    The Breathtaking Beauty of Nature
+  <i class="mdib mdib-video mdib-24px mr-2"></i>
+  The Breathtaking Beauty of Nature
 </div>
 
 <div class="mb-8">
-   <video
+  <video
     id="2rtQOsWaAXc"
     class="video-js vjs-theme-uno"
     controls
@@ -114,7 +114,7 @@ lorem:sentences[3]
               "inline": false
           }
         }
-     }'
+      }'
   ></video>
 </div>
 ++++
@@ -141,16 +141,16 @@ $(function() {
   // ===========================================================================
   // VideoJS player settings
   // ---------------------------------------------------------------------------
-  const vjsPlayerType         = 'ytp';
-  const vjsPlaybackRates      = videojsConfig.playbackRates.values;
+  const vjsPlayerType           = 'ytp';
+  const vjsPlaybackRates        = videojsConfig.playbackRates.values;
 
   // ===========================================================================
   // VideoJS plugin settings
   // -----------------------------------------------------------------
-  const piAutoCaption         = videojsConfig.plugins.autoCaption;
-  const piHotKeys             = videojsConfig.plugins.hotKeys;
-  const piSkipButtons         = videojsConfig.plugins.skipButtons;
-  const piZoomButtons         = videojsConfig.plugins.zoomButtons;
+  const piAutoCaption           = videojsConfig.plugins.autoCaption;
+  const piHotKeys               = videojsConfig.plugins.hotKeys;
+  const piSkipButtons           = videojsConfig.plugins.skipButtons;
+  const piZoomButtons           = videojsConfig.plugins.zoomButtons;
 
   // ===========================================================================
   // helper functions
@@ -180,7 +180,8 @@ $(function() {
     var j1CoreFinished  = (j1.getState() === 'finished') ? true : false;
 
     if (j1CoreFinished && pageVisible) {
-      const vjs_player = document.getElementById("2rtQOsWaAXc");
+      const vjs_player  = document.getElementById("2rtQOsWaAXc");
+
       // add captions (on poster image)
       addCaptionAfterImage('//img.youtube.com/vi/IUN664s7N-c/maxresdefault.jpg');
 
@@ -208,7 +209,7 @@ $(function() {
 
       // apply player customization on 'player ready'
       videojs("2rtQOsWaAXc").ready(function() {
-        const vjsPlayer   = this;
+        const vjsPlayer = this;
 
         // create customControlContainer for progressControlSilder|time (display) elements
         const customProgressContainer = vjsPlayer.controlBar.addChild('Component', {
@@ -248,7 +249,7 @@ $(function() {
           // property 'surroundPlayButton' takes precendence
           if (piSkipButtons.surroundPlayButton) {
               var backwardIndex = 0;
-              var forwardIndex = 1;
+              var forwardIndex  = 1;
           }
 
           vjsPlayer.skipButtons({

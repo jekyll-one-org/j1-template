@@ -222,29 +222,29 @@ Asciidoctor::Extensions.register do
                   // -----------------------------------------------------------
 
                   // create customControlContainer for progressControlSilder|time (display) elements
-                    const customProgressContainer = vjsPlayer.controlBar.addChild('Component', {
-                      el: videojs.dom.createEl('div', {
-                        className: 'vjs-theme-uno custom-progressbar-container'
-                      })
-                    });
+                  const customProgressContainer = vjsPlayer.controlBar.addChild('Component', {
+                    el: videojs.dom.createEl('div', {
+                      className: 'vjs-theme-uno custom-progressbar-container'
+                    })
+                  });
 
-                    // move progressControlSlider into customControlContainer
-                    const progressControlSlider = vjsPlayer.controlBar.progressControl;
-                    if (progressControlSlider) {
-                      customProgressContainer.el().appendChild(progressControlSlider.el());
-                    }
+                  // move progressControlSlider into customControlContainer
+                  const progressControlSlider = vjsPlayer.controlBar.progressControl;
+                  if (progressControlSlider) {
+                    customProgressContainer.el().appendChild(progressControlSlider.el());
+                  }
 
-                    // move currentTimeDisplay BEFORE the progressControlSilder
-                    const currentTimeDisplay = vjsPlayer.controlBar.currentTimeDisplay;
-                    if (currentTimeDisplay) {
-                      customProgressContainer.el().insertBefore(currentTimeDisplay.el(), progressControlSlider.el());
-                    }
+                  // move currentTimeDisplay BEFORE the progressControlSilder
+                  const currentTimeDisplay = vjsPlayer.controlBar.currentTimeDisplay;
+                  if (currentTimeDisplay) {
+                    customProgressContainer.el().insertBefore(currentTimeDisplay.el(), progressControlSlider.el());
+                  }
 
-                    // move the durationDisplay AFTER the progressControlSilder
-                    const durationDisplay = vjsPlayer.controlBar.durationDisplay;
-                    if (durationDisplay) {
-                      customProgressContainer.el().appendChild(durationDisplay.el());
-                    }
+                  // move the durationDisplay AFTER the progressControlSilder
+                  const durationDisplay = vjsPlayer.controlBar.durationDisplay;
+                  if (durationDisplay) {
+                    customProgressContainer.el().appendChild(durationDisplay.el());
+                  }
 
                   // add|skip playbackRates
                   // -----------------------------------------------------------
@@ -310,24 +310,6 @@ Asciidoctor::Extensions.register do
                     });
                   }
 
-                  // TODO:
-                  // -----------------------------------------------------------
-                  // Check if plugin ZoomButtons possible to be used for 
-                  // this extension. Disabled for now.
-                  // -----------------------------------------------------------
-                  piZoomButtons.enabled = false;                  
-
-                  // add|skip zoomButtons plugin
-                  // -----------------------------------------------------------
-                  if (piZoomButtons.enabled && vjsPlayerType === 'native') {
-                    vjsPlayer.zoomButtons({
-                      moveX:  piZoomButtons.moveX,
-                      moveY:  piZoomButtons.moveY,
-                      rotate: piZoomButtons.rotate,
-                      zoom:   piZoomButtons.zoom
-                    });                    
-                  }
-
                   // set start position of current video (on play)
                   // -----------------------------------------------------------
                   var appliedOnce = false;
@@ -347,7 +329,6 @@ Asciidoctor::Extensions.register do
             }, 10); // END 'dependencies_met_vjs_player_exist'
 
           }); // END 'document ready'
-
         </script>
       )
 
