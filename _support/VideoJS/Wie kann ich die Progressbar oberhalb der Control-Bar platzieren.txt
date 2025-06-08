@@ -1,7 +1,8 @@
 Wie kann man bei VideoJS Playern den Progessbar/Slider (vjs-slider)
-oberhab der Controlbar plazieren? Ich benötige ein komplettes Beispiel
-mit JS + CSS zeige, das man direkt in einem  CodePen oder lokal testen
-kann.
+oberhab der Controlbar plazieren? Das Element remainingTimeDisplay soll vor
+und das Element durationDisplay nach dem progressControlSilder plaziert werden.
+Ich benötige ein komplettes Beispiel mit JS + CSS zeige, das man direkt
+lokal testen kann.
 
 See: https://github.com/videojs/video.js/wiki/Skins
 

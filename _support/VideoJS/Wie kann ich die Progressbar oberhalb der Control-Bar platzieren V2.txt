@@ -1,0 +1,227 @@
+Wie kann man bei VideoJS Playern den Progessbar/Slider (vjs-slider)
+oberhalb der Controlbar platzieren? Das Element remainingTimeDisplay soll vor
+und das Element durationDisplay nach dem progressControlSilder platziert werden.
+Ich benötige ein komplettes Beispiel mit JS + CSS zeige, das man direkt
+lokal testen kann?
+
+See: https://github.com/videojs/video.js/wiki/Skins
+
+
+Gemoni
+--------------------------------------------------------------------------------
+
+Um den Progressbar/Slider ($vjs-slider$) oberhalb der Controlbar zu platzieren
+und die Elemente $remainingTimeDisplay$ sowie $durationDisplay$ entsprechend
+anzuordnen, benötigt man eine Kombination aus JavaScript und CSS.
+
+Hier ist ein komplettes Beispiel, das du direkt lokal testen kannst:
+
+**HTML ($index.html$):**
+
+```html
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VideoJS Progressbar über Controlbar</title>
+    <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="video-container">
+        <video
+            id="my-video"
+            class="video-js vjs-default-skin"
+            controls
+            preload="auto"
+            width="640"
+            height="360"
+            poster="https://vjs.zencdn.net/v/oceans.png"
+            data-setup="{}"
+        >
+            <source src="https://vjs.zencdn.net/v/oceans.mp4" type="video/mp4" />
+            <source src="https://vjs.zencdn.net/v/oceans.webm" type="video/webm" />
+            <p class="vjs-no-js">
+                To view this video please enable JavaScript, and consider upgrading to a
+                web browser that
+                <a href="https://videojs.com/html5-video-support/" target="_blank"
+                    >supports HTML5 video</a
+                >
+            </p>
+        </video>
+    </div>
+
+    <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
+```
+
+**CSS ($style.css$):**
+
+```css
+.video-container {
+    margin: 20px auto;
+    width: 640px; /* Oder die gewünschte Breite Ihres Players */
+}
+
+/* Positioniert die Controlbar relativ, um Kindelemente absolut positionieren zu können */
+.video-js .vjs-control-bar {
+    position: relative;
+    display: flex; /* Verwenden von Flexbox für die Anordnung innerhalb der Controlbar */
+    align-items: center; /* Vertikale Zentrierung der Elemente */
+}
+
+/* Versteckt den Standard-Progress-Control in der Controlbar */
+.video-js .vjs-control-bar .vjs-progress-control {
+    display: none;
+}
+
+/* Definiert das Styling und die Positionierung für die neue Fortschrittsanzeige */
+.video-js .custom-progressbar-container {
+    position: absolute;
+    bottom: 100%; /* Platziert den Container direkt über der Controlbar */
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 30px; /* Höhe des neuen Progressbar-Containers */
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7); /* Hintergrund für den Container */
+    padding: 0 10px; /* Etwas Polsterung an den Seiten */
+    box-sizing: border-box; /* Stellt sicher, dass Padding in der Breite enthalten ist */
+}
+
+/* Styling für den Progress Slider selbst */
+.video-js .custom-progressbar-container .vjs-progress-control {
+    flex-grow: 1; /* Lässt den Slider den verfügbaren Platz einnehmen */
+    position: static; /* Setzt die Position zurück, da der Parent schon Position hat */
+    height: 100%; /* Slider füllt die Höhe des Containers aus */
+    margin: 0 10px; /* Abstand zu den Zeit-Anzeigen */
+    display: flex; /* Muss auch Flexbox sein, um die internen Elemente zu layouten */
+    align-items: center;
+}
+
+/* Styling für den SeekBar */
+.video-js .custom-progressbar-container .vjs-progress-control .vjs-play-progress,
+.video-js .custom-progressbar-container .vjs-progress-control .vjs-load-progress,
+.video-js .custom-progressbar-container .vjs-progress-control .vjs-mouse-display {
+    height: 100%; /* Stellt sicher, dass die Fortschrittsbalken die Höhe des Sliders füllen */
+    border-radius: 0; /* Optional: Entfernt Rundungen, wenn gewünscht */
+}
+
+/* Styling für die verbleibende Zeit und Gesamtdauer */
+.video-js .custom-time-display {
+    color: #fff;
+    font-size: 0.9em;
+    min-width: 50px; /* Stellt sicher, dass genug Platz für die Zeitanzeige ist */
+    text-align: center;
+}
+
+/* Anordnung der Zeit-Anzeigen innerhalb des custom-progressbar-container */
+.video-js .custom-progressbar-container .vjs-current-time-display {
+    order: -1; /* Platziert die aktuelle Zeit vor dem Slider (nicht direkt sichtbar, da in progress-control) */
+}
+
+/* Sicherstellen, dass remainingTimeDisplay und durationDisplay korrekt angeordnet sind */
+/* Sie werden in JS dynamisch erzeugt und müssen daher hier nur gestylt werden */
+.video-js .vjs-remaining-time-display,
+.video-js .vjs-duration-display {
+    color: #fff;
+    font-size: 0.9em;
+    padding: 0 5px;
+    white-space: nowrap; /* Verhindert Zeilenumbruch */
+}
+
+/* Anpassungen für kleinere Bildschirme oder Responsivität */
+@media (max-width: 768px) {
+    .video-container {
+        width: 100%;
+    }
+}
+```
+
+**JavaScript ($script.js$):**
+
+```javascript
+document.addEventListener('DOMContentLoaded', function() {
+    var player = videojs('my-video');
+
+    player.on('ready', function() {
+        var player = this;
+        var controlBar = player.controlBar;
+
+        // 1. Erstelle einen Container für den neuen Progressbar
+        var customProgressbarContainer = document.createElement('div');
+        customProgressbarContainer.className = 'custom-progressbar-container';
+
+        // 2. Hole die originalen Elemente, die wir verschieben oder neu positionieren wollen
+        var progressControl = controlBar.progressControl;
+        var remainingTimeDisplay = controlBar.remainingTimeDisplay;
+        var durationDisplay = controlBar.durationDisplay;
+
+        // Sicherstellen, dass die Elemente existieren, bevor wir sie manipulieren
+        if (!progressControl || !remainingTimeDisplay || !durationDisplay) {
+            console.warn("Einige VideoJS-Steuerelemente wurden nicht gefunden. Skript wird möglicherweise nicht wie erwartet funktionieren.");
+            return;
+        }
+
+        // 3. Verschiebe den Progress Control in den neuen Container
+        // Zuerst entfernen wir ihn von seiner ursprünglichen Position
+        controlBar.removeChild(progressControl);
+        // Dann fügen wir ihn dem neuen Container hinzu
+        customProgressbarContainer.appendChild(remainingTimeDisplay); // remainingTimeDisplay vor progressControl
+        customProgressbarContainer.appendChild(progressControl);
+        customProgressbarContainer.appendChild(durationDisplay); // durationDisplay nach progressControl
+
+        // 4. Füge den neuen Container _vor_ der Controlbar ein
+        // Da die Controlbar schon im Player ist, müssen wir ihn vor der Controlbar einfügen.
+        // Der Player ist das Elternelement der Controlbar.
+        player.el().insertBefore(customProgressbarContainer, controlBar.el());
+
+        // Optional: Anpassen des Verhaltens, falls der Mausover-Effekt des Progress-Sliders nicht funktioniert
+        // Manchmal muss man das vjs-hover Klasse manuell triggern oder den Event-Listener erneut anhängen
+        // Dies ist in der Regel nicht notwendig, da VideoJS die Events intern handhabt.
+    });
+});
+```
+
+**So kannst du es testen:**
+
+1.  **Speichere die Dateien:**
+    * Erstelle eine Datei namens `index.html`.
+    * Erstelle eine Datei namens `style.css` im selben Verzeichnis.
+    * Erstelle eine Datei namens `script.js` im selben Verzeichnis.
+2.  **Öffne `index.html`:** Doppelklicke auf die `index.html`-Datei in deinem Browser.
+
+Du solltest nun einen VideoJS-Player sehen, bei dem der Fortschrittsbalken ($vjs-slider$) zusammen mit der verbleibenden Zeit und der Gesamtdauer oberhalb der Haupt-Controlbar platziert ist.
+
+**Erklärung der Vorgehensweise:**
+
+1.  **HTML:** Bindet VideoJS und unsere benutzerdefinierten CSS- und JS-Dateien ein. Es definiert den grundlegenden Videoplayer.
+2.  **CSS ($style.css$):**
+    * `video-js .vjs-control-bar`: Wir setzen `position: relative;` auf die Controlbar, damit wir Kindelemente (wie unseren neuen Progressbar-Container) absolut dazu positionieren können. Wir verwenden auch `display: flex;` um die Anordnung der Standard-Controlbar-Elemente beizubehalten oder zu steuern.
+    * `.video-js .vjs-control-bar .vjs-progress-control`: Der *originale* Fortschrittsbalken innerhalb der Controlbar wird mit `display: none;` versteckt, da wir ihn in einen neuen Container verschieben.
+    * `.video-js .custom-progressbar-container`: Dies ist unser neu erstellter Container.
+        * `position: absolute;`: Ermöglicht die genaue Platzierung.
+        * `bottom: 100%;`: Platziert den Container genau über der Controlbar (100% der Höhe der Controlbar nach oben).
+        * `left: 0; right: 0; width: 100%;`: Lässt ihn die volle Breite des Players einnehmen.
+        * `display: flex; align-items: center;`: Verwendet Flexbox, um die Elemente ($remainingTimeDisplay$, $progressControl$, $durationDisplay$) nebeneinander zu zentrieren.
+    * `.video-js .custom-progressbar-container .vjs-progress-control`: Anpassungen für den verschobenen Fortschrittsbalken innerhalb unseres benutzerdefinierten Containers. `flex-grow: 1;` sorgt dafür, dass er den gesamten verfügbaren Platz zwischen den Zeitanzeigen einnimmt.
+    * `.video-js .vjs-remaining-time-display`, `.video-js .vjs-duration-display`: Grundlegendes Styling für die Textanzeigen, die in unseren neuen Container verschoben werden.
+3.  **JavaScript ($script.js$):**
+    * `player.on('ready', function() { ... });`: Stellt sicher, dass das Skript ausgeführt wird, sobald der VideoJS-Player vollständig initialisiert ist.
+    * **Elemente holen:** Wir holen Referenzen auf den Fortschrittsbalken ($progressControl$), die Anzeige der verbleibenden Zeit ($remainingTimeDisplay$) und die Gesamtdauer ($durationDisplay$) aus der Controlbar.
+    * **Container erstellen:** Ein neues `div`-Element ($customProgressbarContainer$) wird erstellt, das unseren neuen Fortschrittsbalken aufnehmen wird.
+    * **Elemente verschieben:**
+        * `controlBar.removeChild(progressControl);`: Der originale Fortschrittsbalken wird aus der Controlbar entfernt.
+        * Die Elemente werden in der gewünschten Reihenfolge ($remainingTimeDisplay$, $progressControl$, $durationDisplay$) dem $customProgressbarContainer$ hinzugefügt.
+    * **Container einfügen:** `player.el().insertBefore(customProgressbarContainer, controlBar.el());`: Der $customProgressbarContainer$ wird *vor* der eigentlichen Controlbar im DOM eingefügt. Dies ist entscheidend für seine Positionierung.
+
+
+Dieses Beispiel bietet eine robuste Lösung, um die gewünschte Anordnung
+der Elemente im VideoJS-Player zu erreichen.
+

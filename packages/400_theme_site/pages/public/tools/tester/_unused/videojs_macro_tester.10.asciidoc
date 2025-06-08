@@ -1,5 +1,5 @@
 ---
-title:                                  VideoJS over YT (3)
+title:                                  VideoJS over YT (10)
 title_extention:                        VJS progressControlSlider
 tagline:                                VJS progressControlSlider
 
@@ -86,30 +86,40 @@ lorem:sentences[3]
   font-size: 1.5em;
 }
 
+.vjs-playback-rate .vjs-menu {
+  /* Verschiebt das Menü nach oben, z.B. um 20px */
+  top: -20px !important;
+}
+
+.video-js .vjs-progress-control {
+  order: -1; /* Falls Flexbox genutzt wird */
+  width: 100%;
+  z-index: 2; /* Falls Überlagerung nötig ist */
+}
+
+/* manage time display */
+.vjs-theme-uno .vjs-time-divider    { display: none; }
+.vjs-theme-uno .vjs-current-time    { display: none; }
+.vjs-theme-uno .vjs-duration        { display: none; }
+.vjs-theme-uno .vjs-remaining-time  { display: none; }
+
 
 /* controlbar|controls
  --------------------------------------------------- */
 
- 
-/* Positionierung des Sliders über der Controlbar */
+/* Sizing of the controlbar (already specified in VideoJs) */
+/*
 .vjs-theme-uno .vjs-control-bar {
-  /* jadams, 2024-11-15: set control-bar heigth|position */
-  /*
-  height: 55px;
   top: calc(100% - 54px);
-  */
-  top: calc(100% - 64px);
-  height: 65px; 
+  height: 55px; 
   background-color: var(--vjs-theme-uno--gray-900);
   z-index: 100;
 }
-
-
-
+*/
 
 .video-js .vjs-progress-control {
   position: absolute;
-  top: -8px; 						/* Anpassung der Position nach oben, je nach Höhe des Sliders */
+  top: -18px; 						/* Anpassung der Position nach oben, je nach Höhe des Sliders */
   left: 0;
   right: 0;
   width: 100%;
@@ -118,8 +128,9 @@ lorem:sentences[3]
   background-color: transparent; 	/* Macht den Hintergrund des Progress-Containers transparent */
 }
 
+/* Höhe des Sliders selbst */
 .video-js .vjs-slider {
-  height: 1em;   /* Höhe des Sliders selbst */
+  height: 1em;   
   margin-top: 0;
 }
 
@@ -173,7 +184,7 @@ lorem:sentences[3]
             "type": "video/youtube",
             "src": "//youtube.com/watch?v=IUN664s7N-c"
         }],
-        "controlBar": {
+        "controlBar": {      
           "pictureInPictureToggle": false,
           "volumePanel": {
               "inline": false
@@ -276,7 +287,7 @@ $(function() {
         // create custom controlContainer (progressControlSilder|time display elements)
         var customProgressContainer = vjsPlayer.controlBar.addChild('Component', {
           el: videojs.dom.createEl('div', {
-            className: 'vjs-theme-uno  custom-progress-container'
+            className: 'vjs-theme-uno custom-progressbar-container'
           })
         });
 
@@ -289,13 +300,13 @@ $(function() {
         // move remainingTimeDisplay BEFORE the progressControlSilder
         var remainingTimeDisplay = vjsPlayer.controlBar.remainingTimeDisplay;
         if (remainingTimeDisplay) {
-          customProgressContainer.el().insertBefore(remainingTimeDisplay.el(), progressControl.el());
+          // customProgressContainer.el().insertBefore(remainingTimeDisplay.el(), progressControl.el());
         }
 
         // move the durationDisplay AFTER the progressControlSilder
         var durationDisplay = vjsPlayer.controlBar.durationDisplay;
         if (durationDisplay) {
-          customProgressContainer.el().appendChild(durationDisplay.el());
+          // customProgressContainer.el().appendChild(durationDisplay.el());
         }
 
         // add|skip playbackRates

@@ -60,8 +60,9 @@ picture > img {
 
 /* controlbar|controls
  ------------------------------------------------------------------------------- */
+
+/* jadams, 2024-11-15: set control-bar heigth|position */
 .vjs-theme-uno .vjs-control-bar {
-  /* jadams, 2024-11-15: set control-bar heigth|position */
   height: 55px;
   top: calc(100% - 54px);
   background-color: var(--vjs-theme-uno--gray-900);
@@ -69,20 +70,18 @@ picture > img {
 }
 
 /* auto hide VJS controlbar when video is paused */
+/*
 .vjs-has-started.vjs-user-inactive.vjs-paused .vjs-control-bar {
   visibility: visible;
   opacity: 0;
   transition: visibility 1s, opacity 1s;
 }
+*/
 
-/* adjust control position for playback rate (centered) */
-.vjs-playback-rate {
-  margin-top: 10px !important;
-}
 
 /* manage time display */
-.vjs-theme-uno .vjs-current-time    { display: none; }
 .vjs-theme-uno .vjs-time-divider    { display: none; }
+.vjs-theme-uno .vjs-current-time    { display: block; }
 .vjs-theme-uno .vjs-duration        { display: block; }
 .vjs-theme-uno .vjs-remaining-time  { display: block; }
 
@@ -92,8 +91,8 @@ picture > img {
 }
 
 .vjs-theme-uno .vjs-big-play-button {
-  top: 30%;
-  left: 40%;
+  top: 25%;
+  left: 35%;
   width: 240px;
   height: 240px;
   font-size: 0px;
@@ -102,8 +101,8 @@ picture > img {
 }
 
 .vjs-theme-uno .vjs-big-play-button:hover {
-  top: 30%;
-  left: 40%;
+  top: 25%;
+  left: 35%;
   width: 240px;
   height: 240px;
   font-size: 0px;
@@ -122,8 +121,10 @@ picture > img {
 }
 
 .vjs-theme-uno .vjs-play-control {
-  font-size: 1.5em;
-  position: relative
+  position: relative;
+  margin-top: 3px;
+  width: 48px;
+  font-size: 1.4em;
 }
 
 .vjs-theme-uno .vjs-volume-panel {
