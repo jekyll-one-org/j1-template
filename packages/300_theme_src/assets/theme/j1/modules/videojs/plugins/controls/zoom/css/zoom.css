@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/videojs/css/plugins/controls/zoom.css
+ # ~/assets/theme/j1/modules/videojs/css/plugins/controls/css/zoom.css
  # Provides CSS Styles for the VideoJS (V8) plugin Zoom, Version 1.2.0
  # See: https://github.com/theonlyducks/videojs-zoom
  #
@@ -23,8 +23,8 @@
 	font-style: normal;
 	font-weight: 400;
 	font-display: block;
-	src: url("../../../assets/icons/material-icons.woff2") format("woff2"),
-	url("../../../assets/icons/material-icons.woff") format("woff");
+	src: url("../../../../assets/icons/material-icons.woff2") format("woff2"),
+	url("../../../../assets/icons/material-icons.woff") format("woff");
 }
 
 .video-js .vjs-zoom-icons {
@@ -52,13 +52,14 @@
 	font-style: normal;
 }
 
+/* md-window */
 .video-js .vjs-zoom-duck .vjs-icon-placeholder:before {
-	content: "\f110";
+	content: "\f128";
 }
 
 .video-js .vjs-zoom-duck__container {
-	right: 45px;
-	bottom: 50px;
+    left: 130px;
+    bottom: 75px;
 	padding: 10px;
 	visibility: hidden;
 	position: absolute;

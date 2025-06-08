@@ -183,7 +183,8 @@ Asciidoctor::Extensions.register do
               var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
               if (j1CoreFinished && pageVisible) {
-                var vjs_player  = document.getElementById("#{video_id}");
+                var vjs_player   = document.getElementById("#{video_id}");
+                var appliedOnce  = false;
 
                 // add|skip captions (on poster image)
                 if ('#{caption_enabled}' === 'true') {

@@ -107,30 +107,30 @@ Asciidoctor::Extensions.register do
 
             // =================================================================
             // take over VideoJS configuration data (JSON data from Ruby)
-            // -----------------------------------------------------------------            
-            var videojsDefaultConfigJson = '#{videojsDefaultSettingsJson}';
-            var videojsUserConfigJson    = '#{videojsUserSettingsJson}';
+            // -----------------------------------------------------------------
+            var videojsDefaultConfigJson  = '#{videojsDefaultSettingsJson}';
+            var videojsUserConfigJson     = '#{videojsUserSettingsJson}';
 
             // create config objects from JSON data
-            var videojsDefaultSettings   = JSON.parse(videojsDefaultConfigJson);
-            var videojsUserSettings      = JSON.parse(videojsUserConfigJson);
+            var videojsDefaultSettings    = JSON.parse(videojsDefaultConfigJson);
+            var videojsUserSettings       = JSON.parse(videojsUserConfigJson);
 
             // merge config objects (jQuery)
-            var videojsConfig = $.extend(true, {}, videojsDefaultSettings.defaults, videojsUserSettings.settings);
+            var videojsConfig             = $.extend(true, {}, videojsDefaultSettings.defaults, videojsUserSettings.settings);
 
             // =================================================================
             // VideoJS player settings
             // -----------------------------------------------------------------
-            const vjsPlayerType     = 'native';
-            const vjsPlaybackRates  = videojsConfig.playbackRates.values;
+            const vjsPlayerType           = 'native';
+            const vjsPlaybackRates        = videojsConfig.playbackRates.values;
 
             // =================================================================
             // VideoJS plugin settings
-            // -----------------------------------------------------------------   
-            const piAutoCaption     = videojsConfig.plugins.autoCaption;
-            const piHotKeys         = videojsConfig.plugins.hotKeys;
-            const piSkipButtons     = videojsConfig.plugins.skipButtons;
-            const piZoomButtons     = videojsConfig.plugins.zoomButtons;
+            // -----------------------------------------------------------------
+            const piAutoCaption           = videojsConfig.plugins.autoCaption;
+            const piHotKeys               = videojsConfig.plugins.hotKeys;
+            const piSkipButtons           = videojsConfig.plugins.skipButtons;
+            const piZoomButtons           = videojsConfig.plugins.zoomButtons;
 
             // =================================================================
             // helper functions
@@ -147,21 +147,21 @@ Asciidoctor::Extensions.register do
                 // insert div|caption container AFTER the image
                 image.parentNode.insertBefore(newDiv, image.nextSibling);
               } else {
-                console.error(`Kein Bild mit src="${imageSrc}" gefunden.`);
+                console.error(`No image found at: '${imageSrc}'`);
               }
             }
 
             // =================================================================
             // initialize the VideoJS player (on page ready)
-            // -----------------------------------------------------------------   
+            // -----------------------------------------------------------------
             var dependencies_met_page_ready = setInterval (function (options) {
-              var pageState      = $('#content').css("display");
-              var pageVisible    = (pageState == 'block') ? true : false;
-              var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
+              var pageState       = $('#content').css("display");
+              var pageVisible     = (pageState == 'block') ? true : false;
+              var j1CoreFinished  = (j1.getState() === 'finished') ? true : false;
 
               if (j1CoreFinished && pageVisible) {
-                var vjs_player  = document.getElementById("#{video_id}");
-                var appliedOnce = false;
+                var vjs_player    = document.getElementById("#{video_id}");
+                var appliedOnce   = false;
 
                 // add|skip captions (on poster image)
                 if ('#{caption_enabled}' === 'true') {
@@ -171,6 +171,34 @@ Asciidoctor::Extensions.register do
                 // set VideoJS player settings
                 videojs("#{video_id}").ready(function() {
                   var vjsPlayer = this;
+
+                  // add custom progressControlSilder
+                  // -----------------------------------------------------------
+
+                  // create customControlContainer for progressControlSilder|time (display) elements
+                  const customProgressContainer = vjsPlayer.controlBar.addChild('Component', {
+                    el: videojs.dom.createEl('div', {
+                      className: 'vjs-theme-uno custom-progressbar-container'
+                    })
+                  });
+
+                  // move progressControlSlider into customControlContainer
+                  const progressControlSlider = vjsPlayer.controlBar.progressControl;
+                  if (progressControlSlider) {
+                    customProgressContainer.el().appendChild(progressControlSlider.el());
+                  }
+
+                  // move currentTimeDisplay BEFORE the progressControlSilder
+                  const currentTimeDisplay = vjsPlayer.controlBar.currentTimeDisplay;
+                  if (currentTimeDisplay) {
+                    customProgressContainer.el().insertBefore(currentTimeDisplay.el(), progressControlSlider.el());
+                  }
+
+                  // move the durationDisplay AFTER the progressControlSilder
+                  const durationDisplay = vjsPlayer.controlBar.durationDisplay;
+                  if (durationDisplay) {
+                    customProgressContainer.el().appendChild(durationDisplay.el());
+                  }
 
                   // add|skip playbackRates
                   //
@@ -234,14 +262,13 @@ Asciidoctor::Extensions.register do
                       forward:        piSkipButtons.forward,
                     });
                   }
-
-
+                
                   // TODO:
                   // -----------------------------------------------------------
                   // Check if plugin ZoomButtons possible to be used for 
                   // this extension. Disabled for now.
-                  // ------------------------------------------------------------
-                  piZoomButtons.enabled = false; 
+                  // -----------------------------------------------------------
+                  piZoomButtons.enabled = true; 
                   
                   // add|skip zoomButtons plugin
                   //
@@ -276,7 +303,7 @@ Asciidoctor::Extensions.register do
                   var scrollOffset        = (window.innerWidth >= 720) ? -130 : -110;
 
                   // scroll page to the players top position
-                  // -------------------------------------------------------------                  
+                  // ------------------------------------------------------------
                   window.scrollTo(0, targetDivPosition + scrollOffset);
 
                 }); // END EventListener 'click'
