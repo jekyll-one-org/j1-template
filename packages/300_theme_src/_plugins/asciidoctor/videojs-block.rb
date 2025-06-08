@@ -262,14 +262,7 @@ Asciidoctor::Extensions.register do
                       forward:        piSkipButtons.forward,
                     });
                   }
-                
-                  // TODO:
-                  // -----------------------------------------------------------
-                  // Check if plugin ZoomButtons possible to be used for 
-                  // this extension. Disabled for now.
-                  // -----------------------------------------------------------
-                  piZoomButtons.enabled = true; 
-                  
+                                 
                   // add|skip zoomButtons plugin
                   //
                   if (piZoomButtons.enabled && vjsPlayerType === 'native') {
