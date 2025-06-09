@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link type="text/css" rel="stylesheet" href="../../../../../css/videojs.min.css" />
+    <link type="text/css" rel="stylesheet" href="../../../../css/videojs.min.css" />
   </head>
   <body>
     <video
@@ -10,11 +10,22 @@
       controls
       autoplay
       width="640" height="264"
-      data-setup='{ "techOrder": ["dailymotion", "html5"], "sources": [{ "type": "video/dailymotion", "src": "https://www.dailymotion.com/video/x7t3la2"}] }'
+      data-setup='{
+        "techOrder": [
+          "dailymotion",
+          "html5"
+        ],
+        "sources": [
+          {
+            "type": "video/dailymotion",
+            "src": "https://www.dailymotion.com/video/x7t3la2"
+          }
+        ]
+      }'
     >
     </video>
 
-    <script src="../../../../../js/video.js"></script>
-    <script src="../dailymotion.js"></script>
+    <script src="../../../../js/video.js"></script>
+    <script src="../js/dailymotion.js"></script>
   </body>
 </html>
