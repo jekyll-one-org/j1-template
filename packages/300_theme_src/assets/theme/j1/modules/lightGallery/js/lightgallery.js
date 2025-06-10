@@ -1675,19 +1675,20 @@
                 this.zoomFromOrigin &&
                 this.currentImageSize);
         };
-        // Add video slideInfo
+
+        // jadams: modified check the (existance of) element/slide poster
         LightGallery.prototype.addSlideVideoInfo = function (items) {
-            var _this = this;
-            items.forEach(function (element, index) {
-                element.__slideVideoInfo = utils.isVideo(element.src, !!element.video, index);
-                if (element.__slideVideoInfo &&
-                    _this.settings.loadYouTubePoster &&
-                    !element.poster &&
-                    element.__slideVideoInfo.youtube) {
-                    element.poster = "//img.youtube.com/vi/" + element.__slideVideoInfo.youtube[1] + "/maxresdefault.jpg";
-                }
-            });
-        };
+          var _this = this;
+          items.forEach(function (element, index) {
+            element.__slideVideoInfo = utils.isVideo(element.src, !!element.video, index);
+
+            // failsafe check
+            if (element.__slideVideoInfo.youtube && !element.poster) {
+              element.poster = `//img.youtube.com/vi/${element.__slideVideoInfo.youtube[1]}/maxresdefault.jpg`;
+            } // END if
+          }); // END for
+        }; // END addSlideVideoInfo
+
         /**
          *  Load slide content into slide.
          *  This is used to load content into slides that is not visible too
@@ -1711,7 +1712,8 @@
             var lgVideoStyle = '';
             var iframe = !!currentGalleryItem.iframe;
             var isFirstSlide = !this.lGalleryOn;
-            // delay for adding complete class. it is 0 except first time.
+
+            // delay for adding complete class, it is 0 except for FIRST time
             var delay = 0;
             if (isFirstSlide) {
                 if (this.zoomFromOrigin && this.currentImageSize) {
@@ -2370,6 +2372,9 @@
             }
             this.getSlideItem(_touchNext).addClass('lg-next-slide');
         };
+
+
+
         /**
          * Go to next slide
          * @param {Boolean} fromTouch - true if slide function called via touch event
@@ -2379,6 +2384,7 @@
          *  plugin.goToNextSlide();
          * @see <a href="/demos/methods/">Demo</a>
          */
+        // jadams:
         LightGallery.prototype.goToNextSlide = function (fromTouch) {
             var _this = this;
             var _loop = this.settings.loop;

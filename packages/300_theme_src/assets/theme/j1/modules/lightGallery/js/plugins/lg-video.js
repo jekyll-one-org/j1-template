@@ -376,60 +376,73 @@
             this.controlVideo(index, 'pause');
         };
 
-        // jadams
+        // jadams: extract videoTitle from HTML caption element (subHtml)
         Video.prototype.getVideoHtml = function (src, addClass, index, html5Video) {
-            var video = '';
-            var videoInfo = this.core.galleryItems[index]
-                .__slideVideoInfo || {};
-            var currentGalleryItem = this.core.galleryItems[index];
-            var videoTitle = currentGalleryItem.title || currentGalleryItem.alt;
-            videoTitle = videoTitle ? 'title="' + videoTitle + '"' : '';
-            var commonIframeProps = "allowtransparency=\"true\"\n            frameborder=\"0\"\n            scrolling=\"no\"\n            allowfullscreen\n            mozallowfullscreen\n            webkitallowfullscreen\n            oallowfullscreen\n            msallowfullscreen";
-            
+          var video                 = '';
+          var video_api             = 'iframe';
+          var videoInfo             = this.core.galleryItems[index].__slideVideoInfo || {};
+          var currentGalleryItem    = this.core.galleryItems[index];
+          var currentGalleryHtml    = currentGalleryItem.subHtml.split("</h5>");
+          var videoTitle            = currentGalleryHtml[0].replace('<h5>','');
+          var commonIframeProps     = "allowtransparency=\"true\"\n            frameborder=\"0\"\n            scrolling=\"no\"\n            allowfullscreen\n            mozallowfullscreen\n            webkitallowfullscreen\n            oallowfullscreen\n            msallowfullscreen";
+
           if (videoInfo.youtube) {
-            var videoId = 'lg-youtube' + index;
-            var youTubeParams = getYouTubeParams(videoInfo, this.settings.youTubePlayerParams);
-            var isYouTubeNoCookieURL = isYouTubeNoCookie(src);
-            var youtubeURL = isYouTubeNoCookieURL
-                ? '//www.youtube-nocookie.com/'
-                : '//www.youtube.com/';
+            var videoId                 = 'lg-youtube' + index;
+            var youTubeParams           = getYouTubeParams(videoInfo, this.settings.youTubePlayerParams);
+            var isYouTubeNoCookieURL    = isYouTubeNoCookie(src);
+            var youtubeURL              = isYouTubeNoCookieURL ? '//www.youtube-nocookie.com/' : '//www.youtube.com/';
+            var ytVideoID               = videoInfo.youtube[1];
 
-            // var video = `
-            //   <video
-            //     id="${videoId}"
-            //   	class="lg-video-object lg-youtube vjs-theme-uno video-js">
-            //     data-setup='{
-            //       "fluid" : true,
-            //       "techOrder": [
-            //     	"youtube", "html5"
-            //     ],
-            //     "sources": [{
-            //     	"type": "video/youtube",
-            //     	"src": "//youtube.com/watch?v=nV8UZJNBY6"
-            //     }],
-            //     "controlBar": {
-            //     	"pictureInPictureToggle": false,
-            //     	"volumePanel": {
-            //     	  "inline": false
-            //   	   }
-            //     }
-            //   }'>
-            //   	Your browser does not support HTML5 video
-            //   </video>
-            // `;
-
-            var video_new = `
+            var video_iframe = `
               <iframe
                 id="${videoId}"
                 class="lg-video-object lg-youtube ${addClass}"
-                allow="autoplay"
-                title="${videoTitle}""
-                src="${youtubeURL}/embed${videoInfo.youtube[1]}${youTubeParams}"
+                src="${youtubeURL}/embed/${ytVideoID}${youTubeParams}"
                 ${commonIframeProps}>
               </iframe>
             `;
 
-            video = "<iframe allow=\"autoplay\" id=" + videoId + " class=\"lg-video-object lg-youtube " + addClass + "\" " + videoTitle + " src=\"" + youtubeURL + "embed/" + (videoInfo.youtube[1] + youTubeParams) + "\" " + commonIframeProps + "></iframe>";
+            var video_vjs_old = `
+              <video
+                id="${videoId}"
+                class="video-js vjs-theme-uno lg-youtube"
+                controls
+                width="640"
+                height="360"
+                aria-label="${videoTitle}"
+                data-setup='{
+                  "fluid" : true,
+                  "techOrder": [
+                      "youtube", "html5"
+                  ],
+                  "sources": [{
+                    "type": "video/youtube",
+                    "src": "//youtube.com/watch?v=${ytVideoID}"
+                  }],
+                  "controlBar": {      
+                    "pictureInPictureToggle": false,
+                    "volumePanel": {
+                      "inline": false
+                    }
+                  }
+                }'
+              ></video>
+            `;
+
+            var video_vjs = `
+              <video
+                class="lg-video-object lg-youtube vjs-theme-uno video-js">
+                <source
+                  type="video/youtube",
+                  src="//youtube.com/watch?v=${ytVideoID}"
+                >
+
+                Your browser does not support HTML5 video.
+              </video>
+            `;
+
+            var video = (video_api === 'iiiiframe') ? video_iframe : video_vjs;
+            // END videoInfo.youtube
           } else if (videoInfo.vimeo) {
             var videoId = 'lg-vimeo' + index;
             var playerParams = getVimeoURLParams(this.settings.vimeoPlayerParams, videoInfo);
@@ -486,8 +499,9 @@
             video = "<video class=\"lg-video-object lg-html5 " + (this.settings.videojs && this.settings.videojsTheme
                 ? this.settings.videojsTheme + ' '
                 : '') + " " + (this.settings.videojs ? ' video-js' : '') + "\" " + html5VideoAttrs_1 + ">\n                " + html5VideoMarkup + "\n                Your browser does not support HTML5 video.\n            </video>";
-          }
+          } // END if videoInfo html5
 
+          // jadams: generated HTML code for the video
           return video;
         };
 
@@ -507,7 +521,12 @@
                     e.stopPropagation();
                 });
             }
-            if (this.settings.videojs && ((_a = this.core.galleryItems[videoParams.index].__slideVideoInfo) === null || _a === void 0 ? void 0 : _a.html5)) {
+
+            // jadams
+            // if (this.settings.videojs && ((_a = this.core.galleryItems[videoParams.index].__slideVideoInfo) === null || _a === void 0 ? void 0 : _a.html5)) {
+            _a = this.core.galleryItems[videoParams.index].__slideVideoInfo;
+            if (this.settings.videojs && 
+                ((_a = this.core.galleryItems[videoParams.index].__slideVideoInfo) === null || _a === void 0 ? void 0 : _a.youtube)) {
                 try {
                     return videojs($videoElement.get(), this.settings.videojsOptions);
                 }
