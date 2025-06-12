@@ -34,8 +34,12 @@ resource_options:
       collapseDepth:                    3
   - attic:
       slides:
-        - url:                          /assets/image/module/attic/markus-spiske-1920x1280.jpg
-          alt:                          Swiper Tester
+        - url:                          /assets/image/module/attic/1920x1280/markus-spiske.jpg
+          alt:                          Photo by Markus Spiske on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Markus Spiske
+            href:                       https://unsplash.com/de/@markusspiske/ 
 ---
 
 // Page Initializer

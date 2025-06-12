@@ -21,7 +21,7 @@ categories:                             [ Previewer ]
 tags:                                   [ Theme, Bootstrap ]
 
 image:
-  path:                                 /assets/image/module/attic/themes-1920x1280-bw.jpg
+  path:                                 /assets/image/module/attic/1920x1280/stories-ink-tattoo-care.jpg
   width:                                1920
   height:                               1280
 
@@ -35,12 +35,12 @@ resource_options:
       collapseDepth:                    4
   - attic:
       slides:
-        - url:                          /assets/image/module/attic/themes-1920x1280-bw.jpg
-          alt:                          Photo by Clem Onojeghuo on Unsplash
+        - url:                          /assets/image/module/attic/1920x1280/stories-ink-tattoo-care.jpg
+          alt:                          Photo by Stories & Ink Tattoo Care on Unsplash
           badge:
             type:                       unsplash
-            author:                     Clem Onojeghuo
-            href:                       //unsplash.com/@clemono
+            author:                     Stories & Ink Tattoo Care
+            href:                       https://unsplash.com/de/@storiesandink
 ---
 
 // Page Initializer

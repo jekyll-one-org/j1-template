@@ -20,7 +20,7 @@ categories:                             [ Roundtrip ]
 tags:                                   [ Asciidoc, Extension ]
 
 image:
-  path:                                 /assets/image/page/tour/puzzle-1920x1280-bw.jpg
+  path:                                 /assets/image/module/attic/1920x1280/martin-sanchez.jpg
   width:                                1920
   height:                               1280
 
@@ -36,8 +36,12 @@ resources:                              [
 resource_options:
   - attic:
       slides:
-        - url:                          /assets/image/page/tour/puzzle-1920x1280-bw.jpg
-          alt:                          puzzle-1920x1280-bw
+        - url:                          /assets/image/module/attic/1920x1280/martin-sanchez.jpg
+          alt:                          Photo by Martin Sanchez on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     BP Miller
+            href:                       //unsplash.com/de/@bp_miller
 ---
 
 // Page Initializer

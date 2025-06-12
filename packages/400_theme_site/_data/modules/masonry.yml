@@ -622,6 +622,8 @@ settings:
           # --------------------------------------------------------------------
           vimeoPlayer:
             enabled:                    true
+            api:                        native                                  # native|videojs
+
             options:
               autoPlay:                 true
               muted:                    true
@@ -634,6 +636,8 @@ settings:
           # --------------------------------------------------------------------
           wistiaPlayer:
             enabled:                    true
+            api:                        native                                  # native|videojs
+
             options:
               autoPlay:                 true
               fullscreenButton:         true
@@ -644,6 +648,8 @@ settings:
           # --------------------------------------------------------------------
           youTubePlayer:
             enabled:                    true
+            api:                        videojs                                 # native|videojs
+
             options:
               autoPlay:                 true
               muted:                    true

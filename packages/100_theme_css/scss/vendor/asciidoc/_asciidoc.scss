@@ -207,8 +207,8 @@ table tr td {
 table tr.even,
 table tr.alt,
 table tr:nth-of-type(even) {
-  // background: $grey-100;
-  background: rgba(0, 0, 0, 0.1);
+  background: var(--bs-gray-400);
+  // background: rgba(0, 0, 0, 0.1);
 }
 
 table thead tr th,

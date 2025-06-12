@@ -56,6 +56,7 @@
     };
 
     // jadams
+    // -------------------------------------------------------------------------
     var videoSettings = {
         autoplayFirstVideo: true,
         htmlPlayerParams: false,
@@ -176,6 +177,7 @@
     };
 
     // jadams
+    // -------------------------------------------------------------------------
     var getTikTokURLParams = function (defaultParams, videoInfo) {
         if (!videoInfo || !videoInfo.tiktok)
             return '';
@@ -222,7 +224,6 @@
      * Video module for lightGallery
      * Supports HTML5, YouTube, Vimeo, Wistia, Dailymotion, TikToc
      *
-
      * @ref Youtube
      * https://developers.google.com/youtube/player_parameters#enablejsapi
      * https://developers.google.com/youtube/iframe_api_reference
@@ -376,6 +377,8 @@
             this.controlVideo(index, 'pause');
         };
 
+        // jadams
+        // ---------------------------------------------------------------------        
         // jadams: extract videoTitle from HTML caption element (subHtml)
         Video.prototype.getVideoHtml = function (src, addClass, index, html5Video) {
           var video                 = '';
@@ -387,7 +390,7 @@
           var commonIframeProps     = "allowtransparency=\"true\"\n            frameborder=\"0\"\n            scrolling=\"no\"\n            allowfullscreen\n            mozallowfullscreen\n            webkitallowfullscreen\n            oallowfullscreen\n            msallowfullscreen";
 
           if (videoInfo.youtube) {
-            var videoId                 = 'lg-youtube' + index;
+            var videoId;
             var youTubeParams           = getYouTubeParams(videoInfo, this.settings.youTubePlayerParams);
             var isYouTubeNoCookieURL    = isYouTubeNoCookie(src);
             var youtubeURL              = isYouTubeNoCookieURL ? '//www.youtube-nocookie.com/' : '//www.youtube.com/';
@@ -402,35 +405,9 @@
               </iframe>
             `;
 
-            var video_vjs_old = `
-              <video
-                id="${videoId}"
-                class="video-js vjs-theme-uno lg-youtube"
-                controls
-                width="640"
-                height="360"
-                aria-label="${videoTitle}"
-                data-setup='{
-                  "fluid" : true,
-                  "techOrder": [
-                      "youtube", "html5"
-                  ],
-                  "sources": [{
-                    "type": "video/youtube",
-                    "src": "//youtube.com/watch?v=${ytVideoID}"
-                  }],
-                  "controlBar": {      
-                    "pictureInPictureToggle": false,
-                    "volumePanel": {
-                      "inline": false
-                    }
-                  }
-                }'
-              ></video>
-            `;
-
             var video_vjs = `
               <video
+                id="${videoId}"
                 class="lg-video-object lg-youtube vjs-theme-uno video-js">
                 <source
                   type="video/youtube",
@@ -505,39 +482,46 @@
           return video;
         };
 
+        // jadams
+        // ---------------------------------------------------------------------
         /**
-         * @desc - Append videos to the slide
+         * @desc - Append video to the slide
          *
          * @param {HTMLElement} el - slide element
          * @param {Object} videoParams - Video parameters, Contains src, class, index, htmlVideo
          */
         Video.prototype.appendVideos = function (el, videoParams) {
-            var _a;
-            var videoHtml = this.getVideoHtml(videoParams.src, videoParams.addClass, videoParams.index, videoParams.html5Video);
-            el.find('.lg-video-cont').append(videoHtml);
-            var $videoElement = el.find('.lg-video-object').first();
-            if (videoParams.html5Video) {
-                $videoElement.on('mousedown.lg.video', function (e) {
-                    e.stopPropagation();
-                });
-            }
+          var _a;         
+          var videoHtml = this.getVideoHtml(videoParams.src, videoParams.addClass, videoParams.index, videoParams.html5Video);
+          el.find('.lg-video-cont').append(videoHtml);
+          var $videoElement = el.find('.lg-video-object').first();
+          if (videoParams.html5Video) {
+            $videoElement.on('mousedown.lg.video', function (e) {
+              e.stopPropagation();
+            });
+          }
 
-            // jadams
-            // if (this.settings.videojs && ((_a = this.core.galleryItems[videoParams.index].__slideVideoInfo) === null || _a === void 0 ? void 0 : _a.html5)) {
-            _a = this.core.galleryItems[videoParams.index].__slideVideoInfo;
-            if (this.settings.videojs && 
-                ((_a = this.core.galleryItems[videoParams.index].__slideVideoInfo) === null || _a === void 0 ? void 0 : _a.youtube)) {
-                try {
-                    return videojs($videoElement.get(), this.settings.videojsOptions);
-                }
-                catch (e) {
-                    // jadams:
-                    console.warn('lightGallery: Make sure you have included //github.com/vimeo/player.js');
-                }
+          // jadams
+          // if (this.settings.videojs && ((_a = this.core.galleryItems[videoParams.index].__slideVideoInfo) === null || _a === void 0 ? void 0 : _a.html5)) {
+          _a = this.core.galleryItems[videoParams.index].__slideVideoInfo;
+          _a.videojs = {};
+          if (this.settings.videojs && (_a  === null || _a === void 0 ? void 0 : _a.youtube)) {
+            try {
+              var vjsPlayer           = videojs($videoElement.get(), this.settings.videojsOptions);
+              this.settings.vjsPlayer = vjsPlayer;
+              _a.videojs.player       = vjsPlayer;
+
+              return vjsPlayer;
             }
-        };
+            catch (e) {
+              // jadams:
+              console.warn('lightGallery: Make sure you have included //github.com/vimeo/player.js');
+            }
+          }
+        }; // END appendVideos
 
         // jadams
+        // ---------------------------------------------------------------------
         Video.prototype.gotoNextSlideOnVideoEnd = function (src, index) {
             var _this = this;
             var $videoElement = this.core
@@ -552,16 +536,17 @@
                     });
                 }
                 else if (videoInfo.vimeo) {
-                    try {
-                        // https://github.com/vimeo/player.js/#ended
-                        new Vimeo.Player($videoElement.get()).on('ended', function () {
-                            _this.core.goToNextSlide();
-                        });
-                    }
-                    catch (e) {
-                        // jadams
-                        console.error('lightGallery:- Make sure you have included //github.com/vimeo/player.js');
-                    }
+                    // jadams: NOT used for VideoJS
+                    // try {
+                    //     // https://github.com/vimeo/player.js/#ended
+                    //     new Vimeo.Player($videoElement.get()).on('ended', function () {
+                    //         _this.core.goToNextSlide();
+                    //     });
+                    // }
+                    // catch (e) {
+                    //     // jadams
+                    //     console.error('lightGallery:- Make sure you have included //github.com/vimeo/player.js');
+                    // }
                 }
                 else if (videoInfo.wistia) {
                     try {
@@ -582,11 +567,13 @@
                     }
                 }
             }
-        };
+        }; // END gotoNextSlideOnVideoEnd
 
         // jadams
+        // ---------------------------------------------------------------------
         Video.prototype.controlVideo = function (index, action) {
             const vjsOptions = j1.modules.videojs.options;
+
             var trackSrc,
                 $videoElement, videoInfo, videoStart, videoData, videoId,
                 videojsPlayer, playbackRates,
@@ -625,44 +612,79 @@
                 zoom:                       vjsOptions.plugins.zoomButtons.zoom
             };
 
-            videoInfo     = this.core.galleryItems[index].__slideVideoInfo || {};
-            $videoElement = this.core
-              .getSlideItem(index)
-              .find('.lg-video-object')
-              .first()
+            // ??? scheinbar sind die Elemente [this.core.index].video | videoInfo kaputt geschrieben ???
+            // if (this.core.galleryItems[this.core.index].video !== undefined && videoInfo.html5) {
+            if (this.core.galleryItems[this.core.index] !== undefined) {
+                // videoData = JSON.parse(this.core.galleryItems[this.core.index].video);
 
-            // chapter tracks only available for VJS
-            //
-            if (this.core.galleryItems[this.core.index].video !== undefined && videoInfo.html5) {
-                videoData = JSON.parse(this.core.galleryItems[this.core.index].video);
+                // chapter tracks only available for VJS
+                // -------------------------------------------------------------
+                // if (videoData.tracks !== undefined && videoData.tracks.length > 0) {
+                //     for (var i=0; i<videoData.tracks.length; i++) {
+                //         if (videoData.tracks[i].kind == 'chapters') {
+                //             trackSrc = videoData.tracks[i].src;
+                //             chapterTracksEnabled = true;
+                //         }
+                //     }
+                // } // END if videoData.tracks
 
-                if (videoData.tracks !== undefined && videoData.tracks.length > 0) {
-                    for (var i=0; i<videoData.tracks.length; i++) {
-                        if (videoData.tracks[i].kind == 'chapters') {
-                            trackSrc = videoData.tracks[i].src;
-                            chapterTracksEnabled = true;
-                        }
-                    }
-                } // END if videoData.tracks
+                // load video (element) details, type lgQuery
+                $videoElement = this.core
+                .getSlideItem(index)
+                .find('.lg-video-object')
+                .first();
 
-                if ($videoElement.selector !== undefined) {
-                    videoId       = $videoElement.selector.id;
-                    videojsPlayer = videojs(videoId);
+                videoInfo = this.core.galleryItems[index].__slideVideoInfo || {};
+                if (videoInfo.videojs.player !== undefined) {
+                    videojsPlayer = videoInfo.videojs.player;
+                    videojsPlayer = $videoElement.selector.player
                 } else {
                     videojsPlayer = 'unknown';
                 }
 
+                // testing only 
+                // videojsPlayer = 'unknown';
+
                 if (videojsPlayer !== 'unknown') {
 
+                    //  jadams, 2025-07-10: added customControlContainer
+                    // ---------------------------------------------------------
+                    var vjsPlayerControlBar = videojsPlayer.controlBar;
+
+                    // create customControlContainer for progressControlSilder|time (display) elements
+                    const customProgressContainer = vjsPlayerControlBar.addChild('Component', {
+                        el: videojs.dom.createEl('div', {
+                            className: 'vjs-theme-uno custom-progressbar-container'
+                        })
+                    });
+
+                    // move progressControlSlider into customControlContainer
+                    const progressControlSlider = vjsPlayerControlBar.progressControl;
+                    if (progressControlSlider) {
+                      customProgressContainer.el().appendChild(progressControlSlider.el());
+                    }
+
+                    // move currentTimeDisplay BEFORE the progressControlSilder
+                    const currentTimeDisplay = vjsPlayerControlBar.currentTimeDisplay;
+                    if (currentTimeDisplay) {
+                      customProgressContainer.el().insertBefore(currentTimeDisplay.el(), progressControlSlider.el());
+                    }
+
+                    // move the durationDisplay AFTER the progressControlSilder
+                    const durationDisplay = vjsPlayerControlBar.durationDisplay;
+                    if (durationDisplay) {
+                      customProgressContainer.el().appendChild(durationDisplay.el());
+                    }
+
                     // added VJS Plugins hotKeys|skipButtons|zoom, playbackRates
-                    // -------------------------------------------------------------
+                    // ---------------------------------------------------------
                     hotKeysPlugin     = this.settings.videojsOptions.controlBar.hotKeysPlugin;
                     skipButtonsPlugin = this.settings.videojsOptions.controlBar.skipButtonsPlugin;
                     zoomPlugin        = this.settings.videojsOptions.controlBar.zoomPlugin;
                     playbackRates     = (this.settings.videojsOptions.controlBar.playbackRates !== undefined) ? this.settings.videojsOptions.controlBar.playbackRates : playbackRatesDefaults;
 
                     //  jadams, 2024-01-22: added video start position
-                    // -------------------------------------------------------------
+                    // ---------------------------------------------------------
                     if (this.settings.videojsOptions.videoStart !== undefined) {
                         videoStart = this.settings.videojsOptions.videoStart[index];
                          videojsPlayer.on("play", function() {
@@ -673,7 +695,7 @@
 
                     // add playbackRates (only available for VJS)
                     if (videojsPlayer.playbackRates !== undefined) {
-                        videojsPlayer.playbackRates(playbackRates);
+                      videojsPlayer.playbackRates(playbackRates);
                     }
 
                     // add hotkeys Plugin (only available for VJS)
@@ -685,7 +707,7 @@
                         // prevent multiple plugin instances
                         var hotKeysActive = false;
                         if (videojsPlayer.activePlugins_ !== undefined && videojsPlayer.activePlugins_.hotKeys !== undefined) {
-                            hotKeysActive = videojsPlayer.activePlugins_.hotKeys;
+                          hotKeysActive = videojsPlayer.activePlugins_.hotKeys;
                         }
 
                         if (!hotKeysActive) {
@@ -728,7 +750,7 @@
                         // prevent multiple plugin instances
                         var skipButtonsActive = false;
                         if (videojsPlayer.activePlugins_ !== undefined && videojsPlayer.activePlugins_.skipButtons !== undefined) {
-                            skipButtonsActive = videojsPlayer.activePlugins_.skipButtons;
+                          skipButtonsActive = videojsPlayer.activePlugins_.skipButtons;
                         }
 
                         if (!skipButtonsActive) {
@@ -742,8 +764,9 @@
 
                     } // END if skipButtons Plugin enabled
 
-                    // add zoom Plugin (only available for VJS)
-                    // -----------------------------------------------------------------
+                    // add zoom Plugin (only available for VJS/html5)
+                    zoomPlugin.enabled  = false;
+                    // ---------------------------------------------------------
                     if (zoomPlugin !== undefined && zoomPlugin.enabled && videojsPlayer.zoomButtons !== undefined) {
                         // merge objects
                         zoomPlugin.options = __assign(__assign({}, zoomPluginDefaults), zoomPlugin.options);
@@ -751,7 +774,7 @@
                         // prevent multiple plugin instances
                         var zoomButtonsActive = false;
                         if (videojsPlayer.activePlugins_ !== undefined && videojsPlayer.activePlugins_.zoomButtons !== undefined) {
-                            zoomButtonsActive  = videojsPlayer.activePlugins_.zoomButtons;
+                          zoomButtonsActive  = videojsPlayer.activePlugins_.zoomButtons;
                         }
                         
                         if (!zoomButtonsActive) {
@@ -821,52 +844,63 @@
 
             } // END if videoInfo.html5
 
-            if (!$videoElement.get())
+            // check if $videoElement.get() return (values to proceed)
+            var videoElement = $videoElement.get();
+            if (!videoElement) {
                 return;
-            if (videoInfo.youtube) {
-                try {
-                    $videoElement.get().contentWindow.postMessage("{\"event\":\"command\",\"func\":\"" + action + "Video\",\"args\":\"\"}", '*');
-                }
-                catch (e) {
-                    console.error("lightGallery:- " + e);
-                }
             }
-            else if (videoInfo.vimeo) {
-                try {
-                    new Vimeo.Player($videoElement.get())[action]();
-                }
-                catch (e) {
-                    console.warn('lightGallery: Make sure you have included //github.com/vimeo/player.js');
-                }
-            }
-            else if (videoInfo.html5) {
-                if (this.settings.videojs) {
+
+            if (videoInfo !== undefined) {
+
+                if (videoInfo.youtube) {
+                if (videoElement.contentWindow !== undefined ) {
                     try {
-                        videojs($videoElement.get())[action]();
+                    videoElement.contentWindow.postMessage("{\"event\":\"command\",\"func\":\"" + action + "Video\",\"args\":\"\"}", '*');
                     }
                     catch (e) {
-                        console.warn('lightGallery: Make sure you have included videojs');
+                    console.error("lightGallery:- " + e);
                     }
                 }
-                else {
-                    $videoElement.get()[action]();
                 }
-            }
-            else if (videoInfo.wistia) {
-                try {
-                    window._wq = window._wq || [];
-                    // @todo Find a way to destroy wistia player instance
-                    window._wq.push({
-                        id: $videoElement.attr('id'),
-                        onReady: function (video) {
-                            video[action]();
-                        },
-                    });
+                else if (videoInfo.vimeo) {
+                    // jadams: NOT used for VideoJS
+                    // try {
+                    //     new Vimeo.Player(videoElement)[action]();
+                    // }
+                    // catch (e) {
+                    //     console.warn('lightGallery: Make sure you have included //github.com/vimeo/player.js');
+                    // }
                 }
-                catch (e) {
-                    console.warn('lightGallery: Make sure you have included //fast.wistia.com/assets/external/E-v1.js');
+                else if (videoInfo.html5) {
+                    if (this.settings.videojs) {
+                        try {
+                            videojs(videoElement)[action]();
+                        }
+                        catch (e) {
+                            console.warn('lightGallery: Make sure you have included videojs');
+                        }
+                    }
+                    else {
+                        videoElement[action]();
+                    }
                 }
-            }
+                else if (videoInfo.wistia) {
+                    try {
+                        window._wq = window._wq || [];
+                        // @todo Find a way to destroy wistia player instance
+                        window._wq.push({
+                            id: $videoElement.attr('id'),
+                            onReady: function (video) {
+                                video[action]();
+                            },
+                        });
+                    }
+                    catch (e) {
+                        console.warn('lightGallery: Make sure you have included //fast.wistia.com/assets/external/E-v1.js');
+                    }
+                }
+
+            } // END if videoInfo
 
         }; // END controlVideo
 

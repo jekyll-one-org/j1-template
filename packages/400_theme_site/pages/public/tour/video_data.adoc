@@ -1,7 +1,7 @@
 ---
 title:                                  Video
 title_extention:                        J1 Template Apps
-tagline:                                Players
+tagline:                                J1 Players
 
 date:                                   2020-11-04
 #last_modified:                         2023-01-01
@@ -21,7 +21,7 @@ categories:                             [ Tour ]
 tags:                                   [ Video, Module ]
 
 image:
-  path:                                 /assets/video/headers/present_videos/still/underground-broadway.jpg
+  path:                                 /assets/image/module/attic/1920x1280/alexander-shatov.jpg
   width:                                1920
   height:                               1280
 
@@ -40,8 +40,12 @@ resource_options:
       collapseDepth:                    3
   - attic:
       slides:
-        - url:                          /assets/image/module/attic/lianhao-1920x1280.jpg
-          alt:                          Playback Video
+        - url:                          /assets/image/module/attic/1920x1280/alexander-shatov.jpg
+          alt:                          Photo by Alexander Shatov on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Alexander Shatov
+            href:                       //unsplash.com/de/@alexbemore
 ---
 
 // Page Initializer

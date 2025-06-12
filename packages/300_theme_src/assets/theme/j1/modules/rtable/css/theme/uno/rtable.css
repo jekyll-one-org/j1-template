@@ -18,7 +18,7 @@
 */
 
 /*
-// BS4 media breakpoints
+// BS media breakpoints
 // -----------------------------------------------------------------------------
 $breakpoint-xl:                        	1200px;
 $breakpoint-lg:                        	992px;
@@ -26,6 +26,16 @@ $breakpoint-md:                        	768px;
 $breakpoint-sm:                        	576px;
 $breakpoint-xs:                        	575px;
 */
+
+/* BS styles
+// ----------------------------------------------------------------------------- */
+table tr.even, table tr.alt, table tr:nth-of-type(even) {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+
+/* rtable (tableSaw) styles
+// ----------------------------------------------------------------------------- */
 
 .tablesaw {
     width: 100%;

@@ -217,7 +217,7 @@ settings:
               gridify:                  true
               size_y:                   450
               darken:                   6
-              background_image:         /assets/image/module/attic/ideas-start-here-1920x1280-bw.jpg
+              background_image:         /assets/image/module/attic/1920x1280/ideas-start-here-1920x1280.jpg
 
 
   # ----------------------------------------------------------------------------
@@ -246,7 +246,7 @@ settings:
           justify:                      true
           brightness:                   80
           opacity:                      false
-          picture:                      /assets/image/module/attic/ideas-start-here-1920x1280-bw.jpg
+          picture:                      /assets/image/module/attic/1920x1280/ideas-start-here-1920x1280.jpg
 
 # ------------------------------------------------------------------------------
 # END config

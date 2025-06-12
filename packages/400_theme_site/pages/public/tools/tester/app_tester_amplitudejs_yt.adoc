@@ -20,7 +20,7 @@ categories:                             [ Tester ]
 tags:                                   [ Audio, Amplitude App, YouTube ]
 
 image:
-  path:                                 /assets/image/module/attic/markus-spiske-1920x1280.jpg
+  path:                                 /assets/image/module/attic/1920x1280/markus-spiske.jpg
   width:                                1920
   height:                               1280
 
@@ -33,8 +33,12 @@ resources:                              [ amplitudejs ]
 resource_options:
   - attic:
       slides:
-        - url:                          /assets/image/module/attic/markus-spiske-1920x1280.jpg
-          alt:                          Video Tester
+        - url:                          /assets/image/module/attic/1920x1280/markus-spiske.jpg
+          alt:                          Photo by Markus Spiske on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Markus Spiske
+            href:                       https://unsplash.com/de/@markusspiske/ 
 ---
 
 // Page Initializer

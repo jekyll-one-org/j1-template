@@ -68,11 +68,13 @@
 }
 
 /* auto HIDE VJS controlbar when video is PAUSED */
+/*
 .vjs-has-started.vjs-user-inactive.vjs-paused .vjs-control-bar {
   visibility: visible;
   opacity: 0;
   transition: visibility 1s, opacity 1s;
 }
+*/
 
 /* manage time (display) divider, remaining-time */
 .vjs-theme-uno .vjs-time-divider,

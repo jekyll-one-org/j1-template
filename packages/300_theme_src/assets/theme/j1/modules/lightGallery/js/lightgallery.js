@@ -829,6 +829,9 @@
         isMobile: function () {
             return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         },
+
+        // jadams
+        // ---------------------------------------------------------------------
         /**
          * @desc Check the given src is video
          * @param {String} src
@@ -1022,6 +1025,7 @@
                 _loop_1(index);
             }
         };
+      
         /**
          * Module constructor
          * Modules are build incrementally.
@@ -1034,6 +1038,9 @@
                 _this.plugins.push(new plugin(_this, $LG));
             });
         };
+
+        // jadams
+        // ---------------------------------------------------------------------          
         LightGallery.prototype.validateLicense = function () {
             if (!this.settings.licenseKey) {
                 console.error('Please provide a valid license key');
@@ -1043,6 +1050,7 @@
               // console.warn("lightGallery: " + " license key not valid for business use: " + this.settings.licenseKey);
             }
         };
+
         LightGallery.prototype.getSlideItem = function (index) {
             return $LG(this.getSlideItemId(index));
         };
@@ -1677,25 +1685,27 @@
         };
 
         // jadams: modified check the (existance of) element/slide poster
+        // ---------------------------------------------------------------------
         LightGallery.prototype.addSlideVideoInfo = function (items) {
           var _this = this;
           items.forEach(function (element, index) {
             element.__slideVideoInfo = utils.isVideo(element.src, !!element.video, index);
 
             // failsafe check
-            if (element.__slideVideoInfo.youtube && !element.poster) {
+            if (element.__slideVideoInfo !== undefined && element.__slideVideoInfo.youtube !== undefined && !element.poster) {
               element.poster = `//img.youtube.com/vi/${element.__slideVideoInfo.youtube[1]}/maxresdefault.jpg`;
             } // END if
           }); // END for
         }; // END addSlideVideoInfo
 
+        // jadams
+        // ---------------------------------------------------------------------
         /**
          *  Load slide content into slide.
          *  This is used to load content into slides that is not visible too
          *  @param {Number} index - index of the slide.
          *  @param {Boolean} rec - if true call loadcontent() function again.
          */
-        // jadams
         LightGallery.prototype.loadContent = function (index, rec) {
             var _this = this;
             var currentGalleryItem = this.galleryItems[index];
@@ -1841,6 +1851,7 @@
                 }
             }
         };
+
         /**
          * @desc Remove dummy image content and load next slides
          * Called only for the first time if zoomFromOrigin animation is enabled
@@ -2373,8 +2384,8 @@
             this.getSlideItem(_touchNext).addClass('lg-next-slide');
         };
 
-
-
+        // jadams:
+        // ---------------------------------------------------------------------
         /**
          * Go to next slide
          * @param {Boolean} fromTouch - true if slide function called via touch event
@@ -2384,7 +2395,6 @@
          *  plugin.goToNextSlide();
          * @see <a href="/demos/methods/">Demo</a>
          */
-        // jadams:
         LightGallery.prototype.goToNextSlide = function (fromTouch) {
             var _this = this;
             var _loop = this.settings.loop;
@@ -2416,6 +2426,7 @@
                 }
             }
         };
+
         /**
          * Go to previous slides
          * @param {Boolean} fromTouch - true if slide function called via touch event
