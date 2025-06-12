@@ -90,7 +90,7 @@ and mobile devices, two types of *responsive* tables are implemented by the
 J1 Template system:
 
 .Types of Responsive Tables
-[cols="3a,3a,6a", options="header", width="100%", role="table-striped rtable mt-4"]
+[cols="3a,3a,6a", options="header", width="100%", role="rtable mt-4"]
 |===
 |Style |Type |Description
 
@@ -123,7 +123,7 @@ tablets.
 
 
 [role="mt-5"]
-== Bootstrap Tables
+== Bootstrap Tables (striped)
 
 Tables are widely used for documentation pages. Below, simple 2-column tables
 are used to explain some of the Jekyll variables for templating your content
@@ -219,7 +219,8 @@ Post's front matter by specifying a new date/time in the format
 |===
 
 [role="mt-4"]
-== Responsive Tables
+[[rtables-striped]]
+== Responsive Tables (striped)
 
 Responsive tables *rebuild* a table. The header is set to invisible, and
 all columns get vertically *stacked as rows*.
@@ -261,10 +262,15 @@ Post's front matter by specifying a new date/time in the format
 
 |===
 
-.R Table using fixed font size
+
+[role="mt-4"]
+[[rtables-not-striped]]
+== Responsive Tables (NOT striped)
+
+.R Table using fixed font size (no rtext)
 [source, asciidoc, role="noclip"]
 ----
-[cols="4a,8a", options="header", width="100%", role="table-striped rtable no-rtext"]
+[cols="4a,8a", options="header", width="100%", role="rtable no-rtext"]
 |===
 |Variable |Description
 
@@ -278,7 +284,7 @@ depending upon what Liquid is being processed and what `page` is.
 ----
 
 .R Table, stacked, fixed text size `no-rtext`
-[cols="4a,8a", options="header", width="100%", role="table-striped rtable no-rtext mt-4"]
+[cols="4a,8a", options="header", width="100%", role="rtable no-rtext mt-4"]
 |===
 |Variable |Description
 
