@@ -56,7 +56,6 @@
     };
 
     // jadams
-    // -------------------------------------------------------------------------
     var videoSettings = {
         autoplayFirstVideo: true,
         htmlPlayerParams: false,
@@ -177,7 +176,6 @@
     };
 
     // jadams
-    // -------------------------------------------------------------------------
     var getTikTokURLParams = function (defaultParams, videoInfo) {
         if (!videoInfo || !videoInfo.tiktok)
             return '';
@@ -218,12 +216,269 @@
         }
       });
 
-    } // END loadVtt
+    }; // END loadVtt
+
+
+    // jadams
+    // -------------------------------------------------------------------------
+    // vjsProcessExtendedButtonsAndPlugins
+    // Loads a given WEBVTT file (from data path) and process loaded
+    // data in callback cb (function)
+    // -------------------------------------------------------------------------
+    var vjsProcessExtendedButtonsAndPlugins = function (vjsObject, videojsPlayer) {
+        const vjsOptions = j1.modules.videojs.options;
+        var trackSrc,
+            $videoElement, videoInfo, videoStart, videoData, videoId,
+            videojsPlayer, playbackRates,
+            hotKeysPlugin, skipButtonsPlugin, zoomPlugin;
+
+        var playbackRatesDefaults = vjsOptions.playbackRates.values;
+        var chapterTracksEnabled  = false;
+
+        var hotKeysPluginDefaults    = {
+            volumeStep:                 vjsOptions.plugins.hotKeys.volumeStep,
+            seekStep:                   vjsOptions.plugins.hotKeys.seekStep,
+            enableMute:                 vjsOptions.plugins.hotKeys.enableMute,
+            enableVolumeScroll:         vjsOptions.plugins.hotKeys.enableVolumeScroll,
+            enableHoverScroll:          vjsOptions.plugins.hotKeys.enableHoverScroll,
+            enableFullscreen:           vjsOptions.plugins.hotKeys.enableFullscreen,
+            enableNumbers:              vjsOptions.plugins.hotKeys.enableNumbers,
+            enableJogStyle:             vjsOptions.plugins.hotKeys.enableJogStyle,
+            alwaysCaptureHotkeys:       vjsOptions.plugins.hotKeys.alwaysCaptureHotkeys,
+            captureDocumentHotkeys:     vjsOptions.plugins.hotKeys.captureDocumentHotkeys,
+            enableModifiersForNumbers:  vjsOptions.plugins.hotKeys.enableModifiersForNumbers,
+            enableInactiveFocus:        vjsOptions.plugins.hotKeys.enableInactiveFocus,
+            skipInitialFocus:           vjsOptions.plugins.hotKeys.skipInitialFocus
+        };
+
+        var skipButtonsPluginDefaults  = {
+            backward:                     vjsOptions.plugins.skipButtons.backward,
+            forward:                      vjsOptions.plugins.skipButtons.forward,
+            backwardIndex:                0,
+            forwardIndex:                 1
+        };
+
+        var zoomPluginDefaults = {
+            moveX:                      vjsOptions.plugins.zoomButtons.moveX,
+            moveY:                      vjsOptions.plugins.zoomButtons.moveY,
+            rotate:                     vjsOptions.plugins.zoomButtons.rotate,
+            zoom:                       vjsOptions.plugins.zoomButtons.zoom
+        };
+
+        //  jadams, 2025-06-11: added customControlContainer
+        // ---------------------------------------------------------------------
+        var vjsPlayerControlBar = videojsPlayer.controlBar;
+
+        // create customControlContainer for progressControlSilder|time (display) elements
+        const customProgressContainer = vjsPlayerControlBar.addChild('Component', {
+            el: videojs.dom.createEl('div', {
+                className: 'vjs-theme-uno custom-progressbar-container'
+            })
+        });
+
+        // move progressControlSlider into customControlContainer
+        const progressControlSlider = vjsPlayerControlBar.progressControl;
+        if (progressControlSlider) {
+            customProgressContainer.el().appendChild(progressControlSlider.el());
+        }
+
+        // move currentTimeDisplay BEFORE the progressControlSilder
+        const currentTimeDisplay = vjsPlayerControlBar.currentTimeDisplay;
+        if (currentTimeDisplay) {
+            customProgressContainer.el().insertBefore(currentTimeDisplay.el(), progressControlSlider.el());
+        }
+
+        // move the durationDisplay AFTER the progressControlSilder
+        const durationDisplay = vjsPlayerControlBar.durationDisplay;
+        if (durationDisplay) {
+            customProgressContainer.el().appendChild(durationDisplay.el());
+        }
+
+        // configure VideoJS (extended) Plugins
+        // ---------------------------------------------------------------------
+        hotKeysPlugin     = vjsObject.settings.videojsOptions.controlBar.hotKeysPlugin;
+        skipButtonsPlugin = vjsObject.settings.videojsOptions.controlBar.skipButtonsPlugin;
+        zoomPlugin        = vjsObject.settings.videojsOptions.controlBar.zoomPlugin;
+        playbackRates     = (vjsObject.settings.videojsOptions.controlBar.playbackRates !== undefined) ? vjsObject.settings.videojsOptions.controlBar.playbackRates : playbackRatesDefaults;
+
+        //  jadams, 2024-01-22: added video start position
+        // ---------------------------------------------------------------------
+        if (vjsObject.settings.videojsOptions.videoStart !== undefined) {
+            videoStart = vjsObject.settings.videojsOptions.videoStart[index];
+                videojsPlayer.on("play", function() {
+                var startFromSecond = new Date('1970-01-01T' + videoStart + 'Z').getTime() / 1000;
+                videojsPlayer.currentTime(startFromSecond);
+            }); // END on event play
+        } // END if videoStart
+
+        // add playbackRates, only available for VideoJS
+        // ---------------------------------------------------------------------
+        if (videojsPlayer.playbackRates !== undefined) {
+            videojsPlayer.playbackRates(playbackRates);
+        }
+
+        // add hotkeys Plugin, only available for VideoJS
+        // ---------------------------------------------------------------------
+        if (hotKeysPlugin !== undefined && hotKeysPlugin.enabled && videojsPlayer.hotKeys !== undefined) {
+
+            // merge objects
+            hotKeysPlugin.options = __assign(__assign({}, hotKeysPluginDefaults), hotKeysPlugin.options);
+
+            // prevent multiple plugin instances
+            var hotKeysActive = false;
+            if (videojsPlayer.activePlugins_ !== undefined && videojsPlayer.activePlugins_.hotKeys !== undefined) {
+                hotKeysActive = videojsPlayer.activePlugins_.hotKeys;
+            }
+
+            if (!hotKeysActive) {
+                videojsPlayer.hotKeys({
+                    volumeStep:                         hotKeysPlugin.options.volumeStep,
+                    seekStep:                           hotKeysPlugin.options.seekStep,
+                    enableMute:                         hotKeysPlugin.options.enableMute,
+                    enableFullscreen:                   hotKeysPlugin.options.enableFullscreen,
+                    enableNumbers:                      hotKeysPlugin.options.enableNumbers,
+                    enableVolumeScroll:                 hotKeysPlugin.options.enableVolumeScroll,
+                    enableHoverScroll:                  hotKeysPlugin.options.enableHoverScroll,
+                    alwaysCaptureHotkeys:               hotKeysPlugin.options.alwaysCaptureHotkeys,
+                    captureDocumentHotkeys:             hotKeysPlugin.options.captureDocumentHotkeys,
+                    documentHotkeysFocusElementFilter:  hotKeysPlugin.options.documentHotkeysFocusElementFilter,
+
+                    // Mimic VLC seek behavior (default to: 15)
+                    seekStep: function(e) {
+                        if (e.ctrlKey && e.altKey) {
+                            return 5*60;
+                        } else if (e.ctrlKey) {
+                            return 60;
+                        } else if (e.altKey) {
+                            return 10;
+                        } else {
+                            return 15;
+                        }
+                    }
+
+                });
+            } // END if hotKeysActive
+
+        } // END if hotKeysPlugin enabled
+
+        // add skipButtons Plugin, only available for VideoJS
+        // ---------------------------------------------------------------------
+        if (skipButtonsPlugin !== undefined && skipButtonsPlugin.enabled && videojsPlayer.skipButtons !== undefined) {
+            // merge objects
+            skipButtonsPlugin.options = __assign(__assign({}, skipButtonsPluginDefaults), skipButtonsPlugin.options);
+
+            // prevent multiple plugin instances
+            var skipButtonsActive = false;
+            if (videojsPlayer.activePlugins_ !== undefined && videojsPlayer.activePlugins_.skipButtons !== undefined) {
+                skipButtonsActive = videojsPlayer.activePlugins_.skipButtons;
+            }
+
+            if (!skipButtonsActive) {
+                videojsPlayer.skipButtons({
+                    backward:         skipButtonsPlugin.options.backward,
+                    forward:          skipButtonsPlugin.options.forward,
+                    backwardIndex:    skipButtonsPlugin.options.backwardIndex,
+                    forwardIndex:     skipButtonsPlugin.options.forwardIndex
+                });
+            }
+
+        } // END if skipButtons Plugin enabled
+
+        // add zoom Plugin (only available for VJS)
+        // ---------------------------------------------------------------------
+        if (zoomPlugin !== undefined && zoomPlugin.enabled && videojsPlayer.zoomButtons !== undefined) {
+            // merge objects
+            zoomPlugin.options = __assign(__assign({}, zoomPluginDefaults), zoomPlugin.options);
+
+            // prevent multiple plugin instances
+            var zoomButtonsActive = false;
+            if (videojsPlayer.activePlugins_ !== undefined && videojsPlayer.activePlugins_.zoomButtons !== undefined) {
+                zoomButtonsActive  = videojsPlayer.activePlugins_.zoomButtons;
+            }
+            
+            if (!zoomButtonsActive) {
+                videojsPlayer.zoomButtons({
+                    moveX:  zoomPlugin.options.moveX,
+                    moveY:  zoomPlugin.options.moveY,
+                    rotate: zoomPlugin.options.rotate,
+                    zoom:   zoomPlugin.options.zoom
+                });
+            }
+
+        } // END if zoom Plugin enabled
+
+        // chapter track processing, only available for VideoJS
+        // ---------------------------------------------------------------------
+        videoData = JSON.parse(vjsObject.core.galleryItems[vjsObject.core.index].video);
+
+        // chapter tracks only available for VideoJS
+        // ---------------------------------------------------------------------
+        if (videoData.tracks !== undefined && videoData.tracks.length > 0) {
+            for (var i=0; i<videoData.tracks.length; i++) {
+                if (videoData.tracks[i].kind == 'chapters') {
+                    trackSrc = videoData.tracks[i].src;
+                    chapterTracksEnabled = true;
+                }
+            }
+        } // END if videoData tracks
+
+        if (chapterTracksEnabled) {
+            var parser  = new WebVTTParser();
+            var markers = [];
+
+            function cb_load (data /* ,textStatus, jqXHR */ ) {
+                var tree = parser.parse(data, 'metadata');
+                var marker;
+
+                // add chapter tracks to markers array
+                for (var i=0; i<tree.cues.length; i++) {
+                    marker = { time: tree.cues[i].startTime, label: tree.cues[i].text };
+                    markers.push(marker);
+                }
+            }; // END function cb_load 
+
+            // load chapter tracks
+            // -----------------------------------------------------------------
+            loadVtt(trackSrc, cb_load);
+
+            // add chapter tracks on play
+            videojsPlayer.on("play", function() {
+                videojsPlayer.currentTime(videoStart);
+
+                var total    = videojsPlayer.duration();
+                var timeline = $(videojsPlayer.controlBar.progressControl.children_[0].el_);
+
+                // add chapter tracks on timeline (delayed)
+                setTimeout (function() {
+                    var markers_loaded = setInterval (function () {
+                        if (markers.length) {
+                            for (var i=0; i<markers.length; i++) {
+                                var left = (markers[i].time / total * 100) + '%';
+                                var time = markers[i].time;
+                                var el   = $('<div class="vjs-chapter-marker" style="left: ' +left+ '" data-time="' +time+ '"> <span>' +markers[i].label+ '</span></div>');
+
+                                el.click(function() {
+                                    videojsPlayer.currentTime($(this).data('time'));
+                                });
+
+                                timeline.append(el);
+                            }
+                            clearInterval(markers_loaded);
+                        }
+                    }, 10); // END markers_loaded
+                }, 1000 ); // END setTimeout
+
+            }); // END on "play"
+
+        } // END if chapterTracksEnabled
+
+    }; // END vjsProcessExtendedButtonsAndPlugins
 
     /**
      * Video module for lightGallery
      * Supports HTML5, YouTube, Vimeo, Wistia, Dailymotion, TikToc
      *
+
      * @ref Youtube
      * https://developers.google.com/youtube/player_parameters#enablejsapi
      * https://developers.google.com/youtube/iframe_api_reference
@@ -378,48 +633,59 @@
         };
 
         // jadams
-        // ---------------------------------------------------------------------        
-        // jadams: extract videoTitle from HTML caption element (subHtml)
         Video.prototype.getVideoHtml = function (src, addClass, index, html5Video) {
-          var video                 = '';
-          var video_api             = 'iframe';
-          var videoInfo             = this.core.galleryItems[index].__slideVideoInfo || {};
-          var currentGalleryItem    = this.core.galleryItems[index];
-          var currentGalleryHtml    = currentGalleryItem.subHtml.split("</h5>");
-          var videoTitle            = currentGalleryHtml[0].replace('<h5>','');
-          var commonIframeProps     = "allowtransparency=\"true\"\n            frameborder=\"0\"\n            scrolling=\"no\"\n            allowfullscreen\n            mozallowfullscreen\n            webkitallowfullscreen\n            oallowfullscreen\n            msallowfullscreen";
-
+            var video = '';
+            var videoInfo = this.core.galleryItems[index]
+                .__slideVideoInfo || {};
+            var currentGalleryItem = this.core.galleryItems[index];
+            var videoTitle = currentGalleryItem.title || currentGalleryItem.alt;
+            videoTitle = videoTitle ? 'title="' + videoTitle + '"' : '';
+            var commonIframeProps = "allowtransparency=\"true\"\n            frameborder=\"0\"\n            scrolling=\"no\"\n            allowfullscreen\n            mozallowfullscreen\n            webkitallowfullscreen\n            oallowfullscreen\n            msallowfullscreen";
+            
           if (videoInfo.youtube) {
-            var videoId;
-            var youTubeParams           = getYouTubeParams(videoInfo, this.settings.youTubePlayerParams);
-            var isYouTubeNoCookieURL    = isYouTubeNoCookie(src);
-            var youtubeURL              = isYouTubeNoCookieURL ? '//www.youtube-nocookie.com/' : '//www.youtube.com/';
-            var ytVideoID               = videoInfo.youtube[1];
+            var videoId = 'lg-youtube' + index;
+            var youTubeParams = getYouTubeParams(videoInfo, this.settings.youTubePlayerParams);
+            var isYouTubeNoCookieURL = isYouTubeNoCookie(src);
+            var youtubeURL = isYouTubeNoCookieURL
+                ? '//www.youtube-nocookie.com/'
+                : '//www.youtube.com/';
 
-            var video_iframe = `
+            // var video = `
+            //   <video
+            //     id="${videoId}"
+            //   	class="lg-video-object lg-youtube vjs-theme-uno video-js">
+            //     data-setup='{
+            //       "fluid" : true,
+            //       "techOrder": [
+            //     	"youtube", "html5"
+            //     ],
+            //     "sources": [{
+            //     	"type": "video/youtube",
+            //     	"src": "//youtube.com/watch?v=nV8UZJNBY6"
+            //     }],
+            //     "controlBar": {
+            //     	"pictureInPictureToggle": false,
+            //     	"volumePanel": {
+            //     	  "inline": false
+            //   	   }
+            //     }
+            //   }'>
+            //   	Your browser does not support HTML5 video
+            //   </video>
+            // `;
+
+            var video_new = `
               <iframe
                 id="${videoId}"
                 class="lg-video-object lg-youtube ${addClass}"
-                src="${youtubeURL}/embed/${ytVideoID}${youTubeParams}"
+                allow="autoplay"
+                title="${videoTitle}""
+                src="${youtubeURL}/embed${videoInfo.youtube[1]}${youTubeParams}"
                 ${commonIframeProps}>
               </iframe>
             `;
 
-            var video_vjs = `
-              <video
-                id="${videoId}"
-                class="lg-video-object lg-youtube vjs-theme-uno video-js">
-                <source
-                  type="video/youtube",
-                  src="//youtube.com/watch?v=${ytVideoID}"
-                >
-
-                Your browser does not support HTML5 video.
-              </video>
-            `;
-
-            var video = (video_api === 'iiiiframe') ? video_iframe : video_vjs;
-            // END videoInfo.youtube
+            video = "<iframe allow=\"autoplay\" id=" + videoId + " class=\"lg-video-object lg-youtube " + addClass + "\" " + videoTitle + " src=\"" + youtubeURL + "embed/" + (videoInfo.youtube[1] + youTubeParams) + "\" " + commonIframeProps + "></iframe>";
           } else if (videoInfo.vimeo) {
             var videoId = 'lg-vimeo' + index;
             var playerParams = getVimeoURLParams(this.settings.vimeoPlayerParams, videoInfo);
@@ -476,52 +742,39 @@
             video = "<video class=\"lg-video-object lg-html5 " + (this.settings.videojs && this.settings.videojsTheme
                 ? this.settings.videojsTheme + ' '
                 : '') + " " + (this.settings.videojs ? ' video-js' : '') + "\" " + html5VideoAttrs_1 + ">\n                " + html5VideoMarkup + "\n                Your browser does not support HTML5 video.\n            </video>";
-          } // END if videoInfo html5
+          }
 
-          // jadams: generated HTML code for the video
           return video;
         };
 
-        // jadams
-        // ---------------------------------------------------------------------
         /**
-         * @desc - Append video to the slide
+         * @desc - Append videos to the slide
          *
          * @param {HTMLElement} el - slide element
          * @param {Object} videoParams - Video parameters, Contains src, class, index, htmlVideo
          */
         Video.prototype.appendVideos = function (el, videoParams) {
-          var _a;         
-          var videoHtml = this.getVideoHtml(videoParams.src, videoParams.addClass, videoParams.index, videoParams.html5Video);
-          el.find('.lg-video-cont').append(videoHtml);
-          var $videoElement = el.find('.lg-video-object').first();
-          if (videoParams.html5Video) {
-            $videoElement.on('mousedown.lg.video', function (e) {
-              e.stopPropagation();
-            });
-          }
-
-          // jadams
-          // if (this.settings.videojs && ((_a = this.core.galleryItems[videoParams.index].__slideVideoInfo) === null || _a === void 0 ? void 0 : _a.html5)) {
-          _a = this.core.galleryItems[videoParams.index].__slideVideoInfo;
-          _a.videojs = {};
-          if (this.settings.videojs && (_a  === null || _a === void 0 ? void 0 : _a.youtube)) {
-            try {
-              var vjsPlayer           = videojs($videoElement.get(), this.settings.videojsOptions);
-              this.settings.vjsPlayer = vjsPlayer;
-              _a.videojs.player       = vjsPlayer;
-
-              return vjsPlayer;
+            var _a;
+            var videoHtml = this.getVideoHtml(videoParams.src, videoParams.addClass, videoParams.index, videoParams.html5Video);
+            el.find('.lg-video-cont').append(videoHtml);
+            var $videoElement = el.find('.lg-video-object').first();
+            if (videoParams.html5Video) {
+                $videoElement.on('mousedown.lg.video', function (e) {
+                    e.stopPropagation();
+                });
             }
-            catch (e) {
-              // jadams:
-              console.warn('lightGallery: Make sure you have included //github.com/vimeo/player.js');
+            if (this.settings.videojs && ((_a = this.core.galleryItems[videoParams.index].__slideVideoInfo) === null || _a === void 0 ? void 0 : _a.html5)) {
+                try {
+                    return videojs($videoElement.get(), this.settings.videojsOptions);
+                }
+                catch (e) {
+                    // jadams:
+                    console.warn('lightGallery: Make sure you have included //github.com/vimeo/player.js');
+                }
             }
-          }
-        }; // END appendVideos
+        };
 
         // jadams
-        // ---------------------------------------------------------------------
         Video.prototype.gotoNextSlideOnVideoEnd = function (src, index) {
             var _this = this;
             var $videoElement = this.core
@@ -536,17 +789,16 @@
                     });
                 }
                 else if (videoInfo.vimeo) {
-                    // jadams: NOT used for VideoJS
-                    // try {
-                    //     // https://github.com/vimeo/player.js/#ended
-                    //     new Vimeo.Player($videoElement.get()).on('ended', function () {
-                    //         _this.core.goToNextSlide();
-                    //     });
-                    // }
-                    // catch (e) {
-                    //     // jadams
-                    //     console.error('lightGallery:- Make sure you have included //github.com/vimeo/player.js');
-                    // }
+                    try {
+                        // https://github.com/vimeo/player.js/#ended
+                        new Vimeo.Player($videoElement.get()).on('ended', function () {
+                            _this.core.goToNextSlide();
+                        });
+                    }
+                    catch (e) {
+                        // jadams
+                        console.error('lightGallery:- Make sure you have included //github.com/vimeo/player.js');
+                    }
                 }
                 else if (videoInfo.wistia) {
                     try {
@@ -567,339 +819,88 @@
                     }
                 }
             }
-        }; // END gotoNextSlideOnVideoEnd
+        };
 
-        // jadams
+        // jadams: 2025-06-11: Add (extended) VideoJS control elements
+        // for HTML5 video over VJS (to be extended for e.g.YouTube)
         // ---------------------------------------------------------------------
         Video.prototype.controlVideo = function (index, action) {
-            const vjsOptions = j1.modules.videojs.options;
+            var $videoElement, videoInfo, videoId, videojsPlayer;
 
-            var trackSrc,
-                $videoElement, videoInfo, videoStart, videoData, videoId,
-                videojsPlayer, playbackRates,
-                hotKeysPlugin, skipButtonsPlugin, zoomPlugin;
+            // load the lgQuery element for the active player
+            $videoElement = this.core
+              .getSlideItem(index)
+              .find('.lg-video-object')
+              .first()
 
-            var playbackRatesDefaults = vjsOptions.playbackRates.values;
-            var chapterTracksEnabled  = false;
+            // try to get HTML Element for the active player (failsafe)
+            // if NOT available, something went totally wrong
+            if (!$videoElement.get()) {
+                return;
+            }
 
-            var hotKeysPluginDefaults    = {
-                volumeStep:                 vjsOptions.plugins.hotKeys.volumeStep,
-                seekStep:                   vjsOptions.plugins.hotKeys.seekStep,
-                enableMute:                 vjsOptions.plugins.hotKeys.enableMute,
-                enableVolumeScroll:         vjsOptions.plugins.hotKeys.enableVolumeScroll,
-                enableHoverScroll:          vjsOptions.plugins.hotKeys.enableHoverScroll,
-                enableFullscreen:           vjsOptions.plugins.hotKeys.enableFullscreen,
-                enableNumbers:              vjsOptions.plugins.hotKeys.enableNumbers,
-                enableJogStyle:             vjsOptions.plugins.hotKeys.enableJogStyle,
-                alwaysCaptureHotkeys:       vjsOptions.plugins.hotKeys.alwaysCaptureHotkeys,
-                captureDocumentHotkeys:     vjsOptions.plugins.hotKeys.captureDocumentHotkeys,
-                enableModifiersForNumbers:  vjsOptions.plugins.hotKeys.enableModifiersForNumbers,
-                enableInactiveFocus:        vjsOptions.plugins.hotKeys.enableInactiveFocus,
-                skipInitialFocus:           vjsOptions.plugins.hotKeys.skipInitialFocus
-            };
+            // load the INFO object for the active player
+            videoInfo = this.core.galleryItems[index].__slideVideoInfo || {};
 
-            var skipButtonsPluginDefaults  = {
-                backward:                     vjsOptions.plugins.skipButtons.backward,
-                forward:                      vjsOptions.plugins.skipButtons.forward,
-                backwardIndex:                0,
-                forwardIndex:                 1
-            };
+            // process video of type 'html5' for extended VJS settings
+            // -----------------------------------------------------------------
+            if (this.core.galleryItems[this.core.index].video !== undefined && videoInfo.html5) {
 
-            var zoomPluginDefaults = {
-                moveX:                      vjsOptions.plugins.zoomButtons.moveX,
-                moveY:                      vjsOptions.plugins.zoomButtons.moveY,
-                rotate:                     vjsOptions.plugins.zoomButtons.rotate,
-                zoom:                       vjsOptions.plugins.zoomButtons.zoom
-            };
-
-            // ??? scheinbar sind die Elemente [this.core.index].video | videoInfo kaputt geschrieben ???
-            // if (this.core.galleryItems[this.core.index].video !== undefined && videoInfo.html5) {
-            if (this.core.galleryItems[this.core.index] !== undefined) {
-                // videoData = JSON.parse(this.core.galleryItems[this.core.index].video);
-
-                // chapter tracks only available for VJS
-                // -------------------------------------------------------------
-                // if (videoData.tracks !== undefined && videoData.tracks.length > 0) {
-                //     for (var i=0; i<videoData.tracks.length; i++) {
-                //         if (videoData.tracks[i].kind == 'chapters') {
-                //             trackSrc = videoData.tracks[i].src;
-                //             chapterTracksEnabled = true;
-                //         }
-                //     }
-                // } // END if videoData.tracks
-
-                // load video (element) details, type lgQuery
-                $videoElement = this.core
-                .getSlideItem(index)
-                .find('.lg-video-object')
-                .first();
-
-                videoInfo = this.core.galleryItems[index].__slideVideoInfo || {};
-                if (videoInfo.videojs.player !== undefined) {
-                    videojsPlayer = videoInfo.videojs.player;
-                    videojsPlayer = $videoElement.selector.player
+                if ($videoElement.selector.id !== undefined) {
+                    videoId       = $videoElement.selector.id;
+                    videojsPlayer = videojs(videoId);
                 } else {
                     videojsPlayer = 'unknown';
                 }
 
-                // testing only 
-                // videojsPlayer = 'unknown';
-
                 if (videojsPlayer !== 'unknown') {
-
-                    //  jadams, 2025-07-10: added customControlContainer
-                    // ---------------------------------------------------------
-                    var vjsPlayerControlBar = videojsPlayer.controlBar;
-
-                    // create customControlContainer for progressControlSilder|time (display) elements
-                    const customProgressContainer = vjsPlayerControlBar.addChild('Component', {
-                        el: videojs.dom.createEl('div', {
-                            className: 'vjs-theme-uno custom-progressbar-container'
-                        })
-                    });
-
-                    // move progressControlSlider into customControlContainer
-                    const progressControlSlider = vjsPlayerControlBar.progressControl;
-                    if (progressControlSlider) {
-                      customProgressContainer.el().appendChild(progressControlSlider.el());
-                    }
-
-                    // move currentTimeDisplay BEFORE the progressControlSilder
-                    const currentTimeDisplay = vjsPlayerControlBar.currentTimeDisplay;
-                    if (currentTimeDisplay) {
-                      customProgressContainer.el().insertBefore(currentTimeDisplay.el(), progressControlSlider.el());
-                    }
-
-                    // move the durationDisplay AFTER the progressControlSilder
-                    const durationDisplay = vjsPlayerControlBar.durationDisplay;
-                    if (durationDisplay) {
-                      customProgressContainer.el().appendChild(durationDisplay.el());
-                    }
-
-                    // added VJS Plugins hotKeys|skipButtons|zoom, playbackRates
-                    // ---------------------------------------------------------
-                    hotKeysPlugin     = this.settings.videojsOptions.controlBar.hotKeysPlugin;
-                    skipButtonsPlugin = this.settings.videojsOptions.controlBar.skipButtonsPlugin;
-                    zoomPlugin        = this.settings.videojsOptions.controlBar.zoomPlugin;
-                    playbackRates     = (this.settings.videojsOptions.controlBar.playbackRates !== undefined) ? this.settings.videojsOptions.controlBar.playbackRates : playbackRatesDefaults;
-
-                    //  jadams, 2024-01-22: added video start position
-                    // ---------------------------------------------------------
-                    if (this.settings.videojsOptions.videoStart !== undefined) {
-                        videoStart = this.settings.videojsOptions.videoStart[index];
-                         videojsPlayer.on("play", function() {
-                            var startFromSecond = new Date('1970-01-01T' + videoStart + 'Z').getTime() / 1000;
-                            videojsPlayer.currentTime(startFromSecond);
-                        }); // END on event play
-                    } // END if videoStart
-
-                    // add playbackRates (only available for VJS)
-                    if (videojsPlayer.playbackRates !== undefined) {
-                      videojsPlayer.playbackRates(playbackRates);
-                    }
-
-                    // add hotkeys Plugin (only available for VJS)
-                    if (hotKeysPlugin !== undefined && hotKeysPlugin.enabled && videojsPlayer.hotKeys !== undefined) {
-
-                        // merge objects
-                        hotKeysPlugin.options = __assign(__assign({}, hotKeysPluginDefaults), hotKeysPlugin.options);
-
-                        // prevent multiple plugin instances
-                        var hotKeysActive = false;
-                        if (videojsPlayer.activePlugins_ !== undefined && videojsPlayer.activePlugins_.hotKeys !== undefined) {
-                          hotKeysActive = videojsPlayer.activePlugins_.hotKeys;
-                        }
-
-                        if (!hotKeysActive) {
-                            videojsPlayer.hotKeys({
-                                volumeStep:                         hotKeysPlugin.options.volumeStep,
-                                seekStep:                           hotKeysPlugin.options.seekStep,
-                                enableMute:                         hotKeysPlugin.options.enableMute,
-                                enableFullscreen:                   hotKeysPlugin.options.enableFullscreen,
-                                enableNumbers:                      hotKeysPlugin.options.enableNumbers,
-                                enableVolumeScroll:                 hotKeysPlugin.options.enableVolumeScroll,
-                                enableHoverScroll:                  hotKeysPlugin.options.enableHoverScroll,
-                                alwaysCaptureHotkeys:               hotKeysPlugin.options.alwaysCaptureHotkeys,
-                                captureDocumentHotkeys:             hotKeysPlugin.options.captureDocumentHotkeys,
-                                documentHotkeysFocusElementFilter:  hotKeysPlugin.options.documentHotkeysFocusElementFilter,
-
-                                // Mimic VLC seek behavior (default to: 15)
-                                seekStep: function(e) {
-                                    if (e.ctrlKey && e.altKey) {
-                                        return 5*60;
-                                    } else if (e.ctrlKey) {
-                                        return 60;
-                                    } else if (e.altKey) {
-                                        return 10;
-                                    } else {
-                                        return 15;
-                                    }
-                                }
-
-                            });
-                        } // END if hotKeysActive
-
-                    } // END if hotKeysPlugin enabled
-
-                    // add skipButtons Plugin (only available for VJS)
-                    // -------------------------------------------------------------
-                    if (skipButtonsPlugin !== undefined && skipButtonsPlugin.enabled && videojsPlayer.skipButtons !== undefined) {
-                        // merge objects
-                        skipButtonsPlugin.options = __assign(__assign({}, skipButtonsPluginDefaults), skipButtonsPlugin.options);
-
-                        // prevent multiple plugin instances
-                        var skipButtonsActive = false;
-                        if (videojsPlayer.activePlugins_ !== undefined && videojsPlayer.activePlugins_.skipButtons !== undefined) {
-                          skipButtonsActive = videojsPlayer.activePlugins_.skipButtons;
-                        }
-
-                        if (!skipButtonsActive) {
-                            videojsPlayer.skipButtons({
-                                backward:         skipButtonsPlugin.options.backward,
-                                forward:          skipButtonsPlugin.options.forward,
-                                backwardIndex:    skipButtonsPlugin.options.backwardIndex,
-                                forwardIndex:     skipButtonsPlugin.options.forwardIndex
-                            });
-                        }
-
-                    } // END if skipButtons Plugin enabled
-
-                    // add zoom Plugin (only available for VJS/html5)
-                    zoomPlugin.enabled  = false;
-                    // ---------------------------------------------------------
-                    if (zoomPlugin !== undefined && zoomPlugin.enabled && videojsPlayer.zoomButtons !== undefined) {
-                        // merge objects
-                        zoomPlugin.options = __assign(__assign({}, zoomPluginDefaults), zoomPlugin.options);
-
-                        // prevent multiple plugin instances
-                        var zoomButtonsActive = false;
-                        if (videojsPlayer.activePlugins_ !== undefined && videojsPlayer.activePlugins_.zoomButtons !== undefined) {
-                          zoomButtonsActive  = videojsPlayer.activePlugins_.zoomButtons;
-                        }
-                        
-                        if (!zoomButtonsActive) {
-                            videojsPlayer.zoomButtons({
-                                moveX:  zoomPlugin.options.moveX,
-                                moveY:  zoomPlugin.options.moveY,
-                                rotate: zoomPlugin.options.rotate,
-                                zoom:   zoomPlugin.options.zoom
-                            });
-                        }
-
-                    } // END if zoom Plugin enabled
-
-                    // chapter track processing (only available for VJS)
-                    // -----------------------------------------------------------------
-                    if (chapterTracksEnabled) {
-                        var parser  = new WebVTTParser();
-                        var markers = [];
-
-                        function cb_load (data /* ,textStatus, jqXHR */ ) {
-                            var tree = parser.parse(data, 'metadata');
-                            var marker;
-
-                            // add chapter tracks to markers array
-                            for (var i=0; i<tree.cues.length; i++) {
-                                marker = { time: tree.cues[i].startTime, label: tree.cues[i].text };
-                                markers.push(marker);
-                            }
-                        }; // END function cb_load 
-
-                        // load chapter tracks
-                        // -------------------------------------------------------------
-                        loadVtt(trackSrc, cb_load);
-
-                        // add chapter tracks on play
-                        videojsPlayer.on("play", function() {
-                            videojsPlayer.currentTime(videoStart);
-
-                            var total    = videojsPlayer.duration();
-                            var timeline = $(videojsPlayer.controlBar.progressControl.children_[0].el_);
-
-                            // add chapter tracks on timeline (delayed)
-                            setTimeout (function() {
-                                var markers_loaded = setInterval (function () {
-                                    if (markers.length) {
-                                        for (var i=0; i<markers.length; i++) {
-                                            var left = (markers[i].time / total * 100) + '%';
-                                            var time = markers[i].time;
-                                            var el   = $('<div class="vjs-chapter-marker" style="left: ' +left+ '" data-time="' +time+ '"> <span>' +markers[i].label+ '</span></div>');
-
-                                            el.click(function() {
-                                                videojsPlayer.currentTime($(this).data('time'));
-                                            });
-
-                                            timeline.append(el);
-                                        }
-                                        clearInterval(markers_loaded);
-                                    }
-                                }, 10); // END markers_loaded
-                            }, 1000 ); // END setTimeout
-
-                        }); // END on "play"
-
-                    } // END if chapterTracksEnabled
-
+                    vjsProcessExtendedButtonsAndPlugins(this, videojsPlayer);
                 } // END if videojsPlayer is defined
 
             } // END if videoInfo.html5
 
-            // check if $videoElement.get() return (values to proceed)
-            var videoElement = $videoElement.get();
-            if (!videoElement) {
-                return;
-            }
-
-            if (videoInfo !== undefined) {
-
-                if (videoInfo.youtube) {
-                if (videoElement.contentWindow !== undefined ) {
+            // check responses of the (active) player loaded
+            // -----------------------------------------------------------------
+            if (videoInfo.html5) {
+                if (this.settings.videojs) {
                     try {
-                    videoElement.contentWindow.postMessage("{\"event\":\"command\",\"func\":\"" + action + "Video\",\"args\":\"\"}", '*');
+                        videojs($videoElement.get())[action]();
                     }
                     catch (e) {
+                        console.warn('lightGallery: Make sure you have included videojs');
+                    }
+                }
+                else {
+                    $videoElement.get()[action]();
+                } // END html5
+            } else if (videoInfo.youtube) {
+                try {
+                    $videoElement.get().contentWindow.postMessage("{\"event\":\"command\",\"func\":\"" + action + "Video\",\"args\":\"\"}", '*');
+                }
+                catch (e) {
                     console.error("lightGallery:- " + e);
-                    }
+                } // END youtube
+            } else if (videoInfo.vimeo) {
+                try {
+                    new Vimeo.Player($videoElement.get())[action]();
                 }
+                catch (e) {
+                    console.warn('lightGallery: Make sure you have included //github.com/vimeo/player.js');
+                } // END vimeo
+            } else if (videoInfo.wistia) {
+                try {
+                    window._wq = window._wq || [];
+                    // @todo Find a way to destroy wistia player instance
+                    window._wq.push({
+                        id: $videoElement.attr('id'),
+                        onReady: function (video) {
+                            video[action]();
+                        },
+                    });
                 }
-                else if (videoInfo.vimeo) {
-                    // jadams: NOT used for VideoJS
-                    // try {
-                    //     new Vimeo.Player(videoElement)[action]();
-                    // }
-                    // catch (e) {
-                    //     console.warn('lightGallery: Make sure you have included //github.com/vimeo/player.js');
-                    // }
-                }
-                else if (videoInfo.html5) {
-                    if (this.settings.videojs) {
-                        try {
-                            videojs(videoElement)[action]();
-                        }
-                        catch (e) {
-                            console.warn('lightGallery: Make sure you have included videojs');
-                        }
-                    }
-                    else {
-                        videoElement[action]();
-                    }
-                }
-                else if (videoInfo.wistia) {
-                    try {
-                        window._wq = window._wq || [];
-                        // @todo Find a way to destroy wistia player instance
-                        window._wq.push({
-                            id: $videoElement.attr('id'),
-                            onReady: function (video) {
-                                video[action]();
-                            },
-                        });
-                    }
-                    catch (e) {
-                        console.warn('lightGallery: Make sure you have included //fast.wistia.com/assets/external/E-v1.js');
-                    }
-                }
-
+                catch (e) {
+                    console.warn('lightGallery: Make sure you have included //fast.wistia.com/assets/external/E-v1.js');
+                } // END wistia
             } // END if videoInfo
 
         }; // END controlVideo
