@@ -1,0 +1,534 @@
+# ------------------------------------------------------------------------------
+# ~/_data/modules/gallery_playlists.yml
+# Playlist settings for the J1 Gallery App
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2023-2025 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# Description
+#
+description:
+  title:                                J1 Gallery App
+  scope:                                User Playlist settings
+  location:                             _data/modules/gallery_playlists.yml
+
+# ------------------------------------------------------------------------------
+# User configuration settings
+#
+settings:
+
+  # ----------------------------------------------------------------------------
+  # All playlists available
+  # ----------------------------------------------------------------------------
+  playlists:
+
+    # --------------------------------------------------------------------------
+    # Image Playlists
+    # ==========================================================================
+
+    # --------------------------------------------------------------------------
+    # Old Times
+    #
+    - playlist:
+      enabled:                          true
+
+      name:                             old_times
+      title:                            
+      type:                             image/jpg
+      item_base_path:                   /assets/image/module/swiper/old_times
+
+      # ------------------------------------------------------------------------
+      # Playlist Items
+      #
+      items:
+
+        # image 01
+        - item:
+          file:                         image_01.jpg
+          caption_text:                 GrandPa &middot; 80th Birthday
+          description: >
+                                        <h5>GrandPa</h5>
+                                        <h6>80th Birthday</h6>
+
+        # image 02
+        - item:
+          file:                         image_02.jpg
+          caption_text:                 GrandPa &middot; 80th Birthday
+          description: >
+                                        <h5>GrandPa</h5>
+                                        <h6>80th Birthday</h6>
+
+        # image 03
+        - item:
+          file:                         image_03.jpg
+          caption_text:                 GrandPa &middot; Annual journey
+          description: >
+                                        <h5>GrandPa</h5>
+                                        <h6>Annual journey</h6>
+
+        # image 04
+        - item:
+          file:                         image_04.jpg
+          caption_text:                 GrandPa &middot; Annual journey
+          description: >
+                                        <h5>GrandPa</h5>
+                                        <h6>Annual journey</h6>
+
+    # --------------------------------------------------------------------------
+    # Mega Cities
+    #
+    - playlist:
+      enabled:                          true
+
+      name:                             mega_cities
+      title:                            
+      type:                             image/jpg
+      item_base_path:                   /assets/image/module/swiper/mega_cities
+
+      # ------------------------------------------------------------------------
+      # Playlist Items
+      #
+      items:
+
+        # image 01
+        - item:
+          file:                         banter-snaps_b.jpg
+          caption_text:                 Japan &middot; City of Osaka
+          description: >
+                                        <h5>Japan</h5>
+                                        <h6>City of Osaka</h6>
+
+        # image 02
+        - item:
+          file:                         denys-nevozhai-1_b.jpg
+          caption_text:                 China &middot; Man posing at the rooftop of Jin Mao Tower Shanghai
+          description: >
+                                        <h5>China</h5>
+                                        <h6>Man posing at the rooftop of Jin Mao Tower Shanghai</h6>
+
+        # image 03
+        - item:                        # image 3
+          file:                         gints-gailis_b.jpg
+          caption_text:                 Indonesia &middot; Shangri-La Hotel Jakarta
+          description: >
+                                        <h5>Indonesia</h5>
+                                        <h6>Shangri-La Hotel Jakarta</h6>
+        # image 04
+        - item:
+          file:                         steven-diaz_b.jpg
+          caption_text:                 Indonesia &middot; Shangri-La Hotel Jakarta
+          description: >
+                                        <h5>Japan</h5>
+                                        <h6>Tokyo seen from World Trade Center Observation Deck</h6>
+
+        # image 05
+        - item:
+          file:                         denys-nevozhai-2_b.jpg
+          caption_text:                 China &middot; Young couple over Shenzhen
+          description: >
+                                        <h5>China</h5>
+                                        <h6>Young couple over Shenzhen</h6>
+
+        # image 06
+        - item:
+          file:                         johan-mouchet_b.jpg
+          caption_text:                 Australia &middot; The Queen Bee at the Eureka Tower of Melbourne
+          description: >
+                                        <h5>Australia</h5>
+                                        <h6>The Queen Bee at the Eureka Tower of Melbourne</h6>
+        # image 07
+        - item:
+          file:                         thomas-tucker_b.jpg
+          caption_text:                 Taiwan &middot; Sunset over City of Taipei
+          description: >
+                                        <h5>Taiwan</h5>
+                                        <h6>Sunset over City of Taipei</h6>
+
+        # image 08
+        - item:
+          file:                         emmad-mazhari_b.jpg
+          caption_text:                 United States &middot; City of Chicago
+          description: >
+                                        <h5>United States</h5>
+                                        <h6>City of Chicago</h6>
+
+        # image 09
+        - item:
+          file:                         federico-rizzarelli_b.jpg
+          caption_text:                 China &middot; City of Shanghai
+          description: >
+                                        <h5>China</h5>
+                                        <h6>City of Shanghai</h6>
+
+        # image 10
+        - item:
+          file:                         andreas-brucker_b.jpg
+          caption_text:                 Thailand &middot; City of Bangkok
+          description: >
+                                        <h5>Thailand</h5>
+                                        <h6>City of Bangkok</h6>
+
+        # image 11
+        - item:
+          file:                         luca-bravo_b.jpg
+          caption_text:                 Taiwan &middot; Sunset over City of Taipei
+          description: >
+                                        <h5>Taiwan</h5>
+                                        <h6>Sunset over City of Taipei</h6>
+
+        # image 12
+        - item:
+          file:                         ethan-brooke_b.jpg
+          caption_text:                 South Korea &middot; Lotte World Tower Seoul
+          description: >
+                                        <h5>South Korea</h5>
+                                        <h6>Lotte World Tower Seoul</h6>
+
+
+    # --------------------------------------------------------------------------
+    # Video Galleries
+    # ==========================================================================
+
+    # --------------------------------------------------------------------------
+    # HTML5 VIDEO
+    #
+    - playlist:
+      enabled:                          true
+
+      name:                             video_html5
+      title:                            
+      type:                             video/html5
+      item_base_path:                   /assets/video/html5
+      poster_base_path:                 /assets/video/poster/html5
+
+      # ------------------------------------------------------------------------
+      # Playlist Items
+      #
+      items:
+
+        - item:                        # video 1
+          enabled:                      true
+
+          name:                         Peck Pocketed
+          type:                         html5
+          size:                         1280-720
+          source:                       peck_pocketed.mp4
+          poster_image:                 peck_pocketed.jpg
+#         pinterest_prefix:             Pin video
+#         tweet_prefix:                 Try video
+          caption_text:                 Peck Pocketed &middot; Student Academy Award winning Cartoon Clip
+          description: >
+                                        <h5>Peck Pocketed by Kevin Herron | Disney Favorite</h5>
+                                        <h6>Student Academy Award winning Cartoon Clip</h6>
+                                        <br>
+          tracks:
+            - track:
+              default:                  true                                    # Indicates that the track is to be enabled if the user's preferences do not indicate that another track would be more appropriate
+              kind:                     captions
+              srclang:                  en                                      # Code for the language of the text track
+              label:                    English                                 # Descriptive text for the track that will used in the user interface (player)
+              src:                      /assets/video/tracks/html5/peck_pocketed/captions/video.vtt
+
+            - track:
+              default:                  true                                    # Indicates that the track is to be enabled if the user's preferences do not indicate that another track would be more appropriate
+              kind:                     chapters
+              srclang:                  en                                      # Code for the language of the text track
+              label:                    Chapters                                # Descriptive text for the track that will used in the user interface (player)
+              src:                      /assets/video/tracks/html5/peck_pocketed/chapters/video.vtt
+
+        - item:                        # video 2
+          enabled:                      true
+
+          name:                         Rollin Wild
+          type:                         html5
+          size:                         1280-720
+          source:                       rolling_wild.mp4
+          poster_image:                 rolling_wild.jpg
+#         pinterest_prefix:             Pin video
+#         tweet_prefix:                 Try video
+          caption_text:                 Rollin` Wild &middot; Short Funny animated video clip created at the Film Academy
+          description: >
+                                        <h5>Rollin` Wild</h5>
+                                        <h6>Short Funny Animated Clip created at the Film Academy</h6>
+                                        <br>
+
+    # --------------------------------------------------------------------------
+    # Online VIDEO Tylor Swift (YouTube)
+    # See: https://www.youtube.com/playlist?list=PLINj2JJM1jxOxE-4mVaEJCEzO1CiR0Cwm
+    #
+    - playlist:
+      enabled:                          true
+
+      name:                             video_online_taylor_swift
+      title:                            
+      type:                             video
+      video:                            youtube
+      item_base_path:                   //youtube.com/watch?v=
+      poster_base_path:                  //img.youtube.com/vi
+
+      # ------------------------------------------------------------------------
+      # Playlist Items
+      #
+      items:
+
+        # video 01
+        - item:
+          enabled:                      true
+
+          name:                         Tylor Swift
+          type:                         youtube
+          size:                         1280-720
+          source:                       //youtube.com/watch?v=q3zqJs7JUCQ
+          poster_image:                 q3zqJs7JUCQ/maxresdefault.jpg
+#         pinterest_prefix:             Pin video
+#         tweet_prefix:                 Try video
+          caption_text:                 Fortnight (feat. Post Malone) &middot; Official Music Video
+          description: >
+                                        <h5>Tylor Swift</h5>
+                                        <h6>Fortnight (feat. Post Malone) &middot; Official Music Video</h6>
+                                        <br>
+
+        # video 01
+        - item:
+          enabled:                      true
+
+          name:                         Tylor Swift
+          type:                         youtube
+          size:                         1280-720
+          source:                       //youtube.com/watch?v=0GQ_QeZxdzo
+          poster_image:                 0GQ_QeZxdzo/maxresdefault.jpg
+#         pinterest_prefix:             Pin video
+#         tweet_prefix:                 Try video
+          caption_text:                 Fortnight (feat. Post Malone) &middot; Behind the Scenes
+          description: >
+                                        <h5>Tylor Swift</h5>
+                                        <h6>Fortnight (feat. Post Malone) &middot; Behind the Scenes</h6>
+                                        <br>
+
+    # --------------------------------------------------------------------------
+    # Online VIDEO Carpool Karaoke (YouTube)
+    #
+    - playlist:
+      enabled:                          true
+
+      name:                             video_online_youtube_james_and_adele
+      title:                            
+      type:                             video
+      video:                            youtube
+      item_base_path:                   //youtube.com/watch?v=
+      poster_base_path:                  //img.youtube.com/vi
+
+      # ------------------------------------------------------------------------
+      # Playlist Items
+      #
+      items:
+
+        # video 01
+        - item:
+          enabled:                      true
+
+          name:                         Carpool Karaoke James and Adele
+          type:                         youtube
+          size:                         1280-720
+          source:                       //youtube.com/watch?v=Nck6BZga7TQ
+          poster_image:                 Nck6BZga7TQ/mqdefault.jpg
+#         pinterest_prefix:             Pin video
+#         tweet_prefix:                 Try video
+          caption_text:                 Carpool Karaoke 2015 &middot; James and Adele
+          description: >
+                                        <h5>Carpool Karaoke 2015</h5>
+                                        <h6>
+                                        December 2015 - James is on holidays is about the holidays in
+                                        London and gets Adele off for a ride through the city. On the way
+                                        they sing some of their biggest hits.
+                                        </h6>
+                                        <br>
+          playerParams:
+            start:                      50                                      # seconds to start
+
+        # video 02
+        - item:
+          enabled:                      true
+
+          name:                         Last Carpool Karaoke
+          type:                         youtube
+          size:                         1280-720
+          source:                       //youtube.com/watch?v=nV8UZJNBY6Y
+          poster_image:                 nV8UZJNBY6Y/mqdefault.jpg
+#         pinterest_prefix:             Pin video
+#         tweet_prefix:                 Try video
+          caption_text:                 Carpool Karaoke 2023 &middot; Last Carpool Karaoke
+          description: >
+                                        <h5>Carpool Karaoke 2023</h5>
+                                        <h6>
+                                          April 2023 - Adele wakeup James at home for the last Late Night Show,
+                                          for the last Carpool Caraoke ever.
+                                        </h6>
+                                        <br>
+          playerParams:
+            start:                      50                                      # seconds to start
+
+    # --------------------------------------------------------------------------
+    # Online VIDEO (Vimeo)
+    #
+    - playlist:
+      enabled:                          true
+
+      name:                             video_online_vimeo
+      title:                            
+      type:                             video
+      video:                            vimeo
+      item_base_path:                   //vimeo.com
+      poster_base_path:                  /assets/video/poster/vimeo
+
+      # ------------------------------------------------------------------------
+      # Playlist Items
+      #
+      items:
+
+        # video 01
+        - item:
+          enabled:                      true
+
+          name:                         Forever 21
+          type:                         vimeo
+          size:                         1280-720
+          source:                       //vimeo.com/179528528
+          poster_image:                 kick_it_old_school.jpg
+#         pinterest_prefix:             Pin video
+#         tweet_prefix:                 Try video
+          caption_text:                 Forever 21 &middot; Kick It Old School
+          description: >
+                                        <h5>Forever 21</h5>
+                                        <h6>Kick It Old School</h6>
+                                        <br>
+          playerParams:
+            start:                      50                                      # seconds to start
+
+        # video 02
+        - item:
+          enabled:                      true
+
+          name:                         Forever 21
+          type:                         vimeo
+          size:                         1280-720
+          source:                       //vimeo.com/202117650
+          poster_image:                 stay_colorful.jpg
+#         pinterest_prefix:             Pin video
+#         tweet_prefix:                 Try video
+          caption_text:                 Forever 21 &middot; Stay Colorful, Babe!
+          description: >
+                                        <h5>Forever 21</h5>
+                                        <h6>Stay Colorful, Babe!</h6>
+                                        <br>
+
+    # --------------------------------------------------------------------------
+    # Online VIDEO (Dailymotion)
+    #
+    - playlist:
+      enabled:                          true
+
+      name:                             video_online_dailymotion
+      title:                                  
+      type:                             video
+      video:                            dailymotion
+      item_base_path:                   //dai.ly/
+      poster_base_path:                  /assets/video/poster/dailymotion
+
+      # ------------------------------------------------------------------------
+      # Playlist Items
+      #
+      items:
+
+        # video 01
+        - item:
+          enabled:                      true
+
+          name:                         SELF Channel
+          type:                         dailymotion
+          size:                         1280-720
+          source:                       //dai.ly/x887s09
+          poster_image:                 meditation.jpg
+#         pinterest_prefix:             Pin video
+#         tweet_prefix:                 Try video
+          caption_text:                 SELF Channel &middot; Morning Energy
+          description: >
+                                        <h5>SELF Channel</h5>
+                                        <h6>Guided Meditation: Morning Energy</h6>
+                                        <br>
+        # video 02
+        - item:
+          enabled:                      true
+
+          name:                         SELF Channel
+          type:                         dailymotion
+          size:                         1280-720
+          source:                       //dai.ly/x87ycik
+          poster_image:                 pilates.jpg
+#         pinterest_prefix:             Pin video
+#         tweet_prefix:                 Try video
+          caption_text:                 SELF Channel &middot; Pilates Core Workout
+          description: >
+                                        <h5>SELF Channel</h5>
+                                        <h6>Beginner Mat Pilates: Core Workout</h6>
+                                        <br>
+
+    # --------------------------------------------------------------------------
+    # HTML5 VIDEO (over VideoJS)
+    #
+    - playlist:
+      enabled:                          true
+
+      name:                             video_html5_videojs
+      title:                            
+      type:                             video
+      video:                            html5
+      item_base_path:                   /assets/video/html5
+      poster_base_path:                 /assets/video/poster/html5
+
+      # ------------------------------------------------------------------------
+      # Playlist Items
+      #
+      items:
+
+        # video 01
+        - item:
+          enabled:                      true
+
+          name:                         Peck Pocketed
+          type:                         html5
+          size:                         1280-720
+          source:                       peck_pocketed.mp4
+          poster_image:                 peck_pocketed.jpg
+#         pinterest_prefix:             Pin video
+#         tweet_prefix:                 Try video
+          caption_text:                 Peck Pocketed &middot; Student Academy Award winning Cartoon Clip
+          description: >
+                                        <h5>Peck Pocketed by Kevin Herron | Disney Favorite</h5>
+                                        <h6>Student Academy Award winning Cartoon Clip</h6>
+
+        # video 02
+        - item:
+          enabled:                      true
+        
+          name:                         Rollin Wild
+          type:                         html5
+          size:                         1280-720
+          source:                       rolling_wild.mp4
+          poster_image:                 rolling_wild.jpg
+#         pinterest_prefix:             Pin video
+#         tweet_prefix:                 Try video
+          caption_text:                 Rollin` Wild &middot; Short Funny animated video clip created at the Film Academy
+          description: >
+                                        <h5>Rollin` Wild</h5>
+                                        <h6>Short Funny Animated Clip created at the Film Academy</h6>
+
+# ------------------------------------------------------------------------------
+# END config
