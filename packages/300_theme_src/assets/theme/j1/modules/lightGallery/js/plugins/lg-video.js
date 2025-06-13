@@ -298,9 +298,9 @@
 
         // configure VideoJS (extended) Plugins
         // ---------------------------------------------------------------------
-        hotKeysPlugin     = vjsObject.settings.videojsOptions.controlBar.hotKeysPlugin;
-        skipButtonsPlugin = vjsObject.settings.videojsOptions.controlBar.skipButtonsPlugin;
-        zoomPlugin        = vjsObject.settings.videojsOptions.controlBar.zoomPlugin;
+        hotKeysPlugin     = (vjsObject.settings.videojsOptions.hotKeysPlugin !== undefined) ? vjsObject.settings.videojsOptions.hotKeysPlugin : hotKeysPluginDefaults;
+        skipButtonsPlugin = (vjsObject.settings.videojsOptions.controlBar.skipButtonsPlugin !== undefined) ? vjsObject.settings.videojsOptions.controlBar.skipButtonsPlugin : skipButtonsPluginDefaults;
+        zoomPlugin        = (vjsObject.settings.videojsOptions.controlBar.zoomPlugin !== undefined) ? vjsObject.settings.videojsOptions.controlBar.zoomPlugin : false;
         playbackRates     = (vjsObject.settings.videojsOptions.controlBar.playbackRates !== undefined) ? vjsObject.settings.videojsOptions.controlBar.playbackRates : playbackRatesDefaults;
 
         //  jadams, 2024-01-22: added video start position
@@ -643,13 +643,20 @@
 
         // jadams
         Video.prototype.getVideoHtml = function (src, addClass, index, html5Video) {
-          var video                  = '';
-          var video_api              = '';
-          var commonIframeProps      = '';
-          var videoInfo              = this.core.galleryItems[index].__slideVideoInfo || {};
-          var currentGalleryItem     = this.core.galleryItems[index];
-          var currentGalleryHtml     = currentGalleryItem.subHtml.split("</h5>");
-          var videoTitle             = currentGalleryHtml[0].replace('<h5>','');            
+          var currentGalleryHtml, currentGalleryItem, videoInfo,
+              videoTitle, video, video_api, commonIframeProps;
+
+          videoInfo                  = this.core.galleryItems[index].__slideVideoInfo || {};
+          currentGalleryItem         = this.core.galleryItems[index];
+
+          if (currentGalleryItem.subHtml.includes('<h2>')) {
+            currentGalleryHtml       = currentGalleryItem.subHtml.split("</h2>");
+            videoTitle               = currentGalleryHtml[0].replace('<h2>','');  
+          } else if (currentGalleryItem.subHtml.includes('<h5>')) {
+            // for backward compatibility reasons
+            currentGalleryHtml       = currentGalleryItem.subHtml.split("</h5>");
+            videoTitle               = currentGalleryHtml[0].replace('<h5>','');            
+          } 
 
           videoTitle                 = videoTitle ? 'title="' + videoTitle + '"' : '';
           commonIframeProps          = "allowtransparency=\"true\"\n            frameborder=\"0\"\n            scrolling=\"no\"\n            allowfullscreen\n            mozallowfullscreen\n            webkitallowfullscreen\n            oallowfullscreen\n            msallowfullscreen";
@@ -683,7 +690,7 @@
               </video>
             `;
 
-            video_api = 'iiiframe';
+            video_api = 'youtube';
             video     = (video_api === 'iframe') ? video_iframe : video_vjs;
             // END videoInfo youtube
           } else if (videoInfo.vimeo) {

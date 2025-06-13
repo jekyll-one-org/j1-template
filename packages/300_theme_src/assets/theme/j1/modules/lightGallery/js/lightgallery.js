@@ -843,13 +843,14 @@
         isVideo: function (src, isHTML5VIdeo, index) {
             // jadams, 2024-08-01: workaound when src equals '#'
             // jadams, 2024-08-01: TODO, check why src is set to '#'
-            if (!src || src === '#') {
+            // jadams, 2025-06-13: Fixed by adding missing data-src elements in assets/data/gallery_app.html
+            // if (!src || src === '#') {
+            if (!src) {
                 if (isHTML5VIdeo) {
                     return {
                         html5: true,
                     };
-                }
-                else {
+                } else {
                     console.error('lightGallery :- data-src is not provided on slide item ' +
                         (index + 1) +
                         '. Please make sure the selector property is properly configured. More info - https://www.lightgalleryjs.com/demos/html-markup/');

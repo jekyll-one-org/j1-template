@@ -7,7 +7,7 @@ exclude_from_search:                    true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/data/gallery_app.html (1)
+ # ~/assets/data/gallery_app.html (0)
  # Liquid procedure to generate the HTML portion for all J1 Galleries
  # configured (Justified Gallery)
  #
@@ -96,8 +96,8 @@ exclude_from_search:                    true
         {% endfor %}
       {% endif %}
 
-    <!-- START Image Galleries -->
-    <div id="{{gallery.id}}">
+      <!-- START Image Galleries -->
+      <div id="{{gallery.id}}">
       {% for image in gallery.images %}
         {% assign caption     = image.caption_text %}
         {% assign description = image.description %}
@@ -133,8 +133,8 @@ exclude_from_search:                    true
         {% endif %}
         {% endif %}
       {% endfor %}
-    </div>
-    <!-- END Image Galleries -->
+      </div>
+      <!-- END Image Galleries -->
     {% endif %}
 
     {% comment %} VIDEO Galleries
@@ -160,11 +160,11 @@ exclude_from_search:                    true
     <div id="{{gallery.id}}" class="gallery justified-gallery">
       {% for video in gallery.videos %}
 
-      {% if video.type == 'vimeo' or video.type == 'tiktoc' or video.type == 'wistia' or video.type == 'dailymotion' %}
+      {% if video.type == 'youtube' or video.type == 'vimeo' or video.type == 'tiktoc' or video.type == 'wistia' or video.type == 'dailymotion' %}
       {% assign description = video.description %}
       {% assign alt         = video.caption_text %}
 
-        <!-- START video type: {{video.type}} -->
+        <!-- START {{video.type}} video -->
         <a
           href="#"
           class="lg-item lg-uno-video-icon speak2me-ignore"
@@ -181,30 +181,30 @@ exclude_from_search:                    true
             alt="{{alt|strip|strip_newlines}}"
             aria-label="{{alt|strip|strip_newlines}}">
 
-        	  <span class="big-play-button"></span>
+        	<span class="big-play-button"></span>
 
         </a>
-        <!-- END video type: {{video.type}} -->
+        <!-- END {{video.type}} video -->
 
       {% elsif video.type == 'html5' %}
       {% assign description = video.description %}
       {% assign alt         = video.caption_text %}
       {% assign video_split = video.source | split: '.' %}
       {% assign extention   = video_split[1] %}
-        <!-- START video type: {{video.type}} -->
+
+        <!-- START {{video.type}} video -->
         <a
           href="#"
           class="lg-item lg-uno-video-icon speak2me-ignore"
           data-lg-size="{{video.size}}"
           data-pinterest-text="{{video.pinterest_prefix}} {{video.name}} at {{video.source}}"
           data-tweet-text="{{video.tweet_prefix}} {{video.name}} at {{video.source}}"
-          data-src="{{video.source}}"
           data-poster="{{gallery.image_base_path}}/{{video.poster_image}}"
           data-sub-html="{{description|strip|strip_newlines}}"
           data-video='{
             "source": [{
-               "type":  "video/{{extention}}",
-               "src":   "{{gallery.video_base_path}}/{{video.source}}"
+               "src":   "{{gallery.video_base_path}}/{{video.source}}",
+               "type":  "video/{{extention}}"
             }],
             "tracks": [
                {% for track in video.tracks %}
@@ -224,98 +224,10 @@ exclude_from_search:                    true
             alt="{{alt|strip|strip_newlines}}"
             aria-label="{{alt|strip|strip_newlines}}">
 
-        	  <span class="big-play-button"></span>
+        	<span class="big-play-button"></span>
 
         </a>
-        <!-- END video type: {{video.type}} -->
-
-      {% elsif video.type == 'youtube' %}
-      {% assign description = video.description %}
-      {% assign alt         = video.caption_text %}
-        {% if video.api == 'videojs' %}
-        <!-- START video api: {{video.api}} -->
-        <a
-          href="#"
-          class="lg-item lg-uno-video-icon speak2me-ignore"
-          data-lg-size="{{video.size}}"
-          data-pinterest-text="{{video.pinterest_prefix}} {{video.name}} at {{video.source}}"
-          data-tweet-text="{{video.tweet_prefix}} {{video.name}} at {{video.source}}"
-          data-src="{{video.source}}"
-          data-poster="{{gallery.image_base_path}}/{{video.poster_image}}"
-          data-sub-html="{{description|strip|strip_newlines}}"
-          data-video='{
-            "source": [{
-               "type":  "video/youtube",
-               "src":   "{{gallery.video_base_path}}/{{video.source}}"
-            }],
-            "tracks": [
-               {% for track in video.tracks %}
-               {
-                 {% for attribute in track %}
-                   {% if attribute[0] == 'track' %} {% continue %} {% endif %}
-                   {{attribute[0] | json}}: {{attribute[1] | json}}{% if forloop.last %}{% else %},{% endif %}
-                 {% endfor %}
-               }{% if forloop.last %}{% else %},{% endif %}
-               {% endfor %}
-            ]
-          }'>
-
-        	<img
-            class="{{gallery.image_styles}}"
-            src="{{gallery.image_base_path}}/{{video.poster_image}}"
-            alt="{{alt|strip|strip_newlines}}"
-            aria-label="{{alt|strip|strip_newlines}}">
-
-        	  <span class="big-play-button"></span>
-
-        </a>
-        <!-- END video api: {{video.api}} -->
-        {% elsif video.api == 'iframe' %}
-        <!-- START video api: {{video.api}} -->
-        <a
-          href="#"
-          class="lg-item lg-uno-video-icon speak2me-ignore"
-          data-lg-size="{{video.size}}"
-          data-pinterest-text="{{video.pinterest_prefix}} {{video.name}} at {{video.source}}"
-          data-tweet-text="{{video.tweet_prefix}} {{video.name}} at {{video.source}}"
-          data-src="{{video.source}}"
-          data-poster="{{gallery.image_base_path}}/{{video.poster_image}}"
-          data-sub-html="{{description|strip|strip_newlines}}">
-
-          <img
-            class="{{gallery.image_styles}}"
-            src="{{gallery.image_base_path}}/{{video.poster_image}}"
-            alt="{{alt|strip|strip_newlines}}"
-            aria-label="{{alt|strip|strip_newlines}}">
-
-        	  <span class="big-play-button"></span>
-
-        </a>
-        <!-- END video api: {{video.api}} -->
-        {% else %}
-        <!-- START video api: {{video.api}} (fallback) -->
-        <a
-          href="#"
-          class="lg-item lg-uno-video-icon speak2me-ignore"
-          data-lg-size="{{video.size}}"
-          data-pinterest-text="{{video.pinterest_prefix}} {{video.name}} at {{video.source}}"
-          data-tweet-text="{{video.tweet_prefix}} {{video.name}} at {{video.source}}"
-          data-src="{{video.source}}"
-          data-poster="{{gallery.image_base_path}}/{{video.poster_image}}"
-          data-sub-html="{{description|strip|strip_newlines}}">
-
-          <img
-            class="{{gallery.image_styles}}"
-            src="{{gallery.image_base_path}}/{{video.poster_image}}"
-            alt="{{alt|strip|strip_newlines}}"
-            aria-label="{{alt|strip|strip_newlines}}">
-
-        	  <span class="big-play-button"></span>
-
-        </a>
-        <!-- END video api: {{video.api}} (fallback) -->
-        {% endif %}
-        <!-- END video type: {{video.type}}  -->
+        <!-- START {{video.type}} video -->
 
       {% endif %} {% endfor %}
     </div>

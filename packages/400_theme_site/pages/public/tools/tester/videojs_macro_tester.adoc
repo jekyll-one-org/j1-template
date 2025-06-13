@@ -28,7 +28,7 @@ regenerate:                             false
 personalization:                        true
 permalink:                              /pages/public/tester/videojs_yt/
 
-resources:                              [ videojs ]
+resources:                              [ gallery, lightgallery, videojs ]
 resource_options:
   - toccer:
       collapseDepth:                    3
@@ -73,6 +73,17 @@ websites, mobile web apps, and mobile native/hybrid apps.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
+[role="mt-4"]
+== lightGallery (YouTube)
+
+The galley maker *justifiedGallery* in combination with the *lightbox*
+lightGallery is a great toolset for creating dynamic video galleries.
+The module combinati0n makes creating a gallery to access videos easy.
+
+.YouTube Video · justifiedGallery + LightGallery
+gallery::jg_video_youtube_james_and_adele[role="mb-4"]
+
+
 == VideoJS Player over YouTube
 
 lorem:sentences[3]

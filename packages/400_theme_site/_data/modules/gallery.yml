@@ -11,33 +11,36 @@
 # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
 # ------------------------------------------------------------------------------
 
-# ------------------------------------------------------------------------------
+# ==============================================================================
 # Description
+# ==============================================================================
 #
 description:
   title:                                Justified Gallery
   scope:                                User settings
   location:                             _data/apps/justifiedGallery.yml
 
-# ------------------------------------------------------------------------------
+# ==============================================================================
 # User configuration settings
+# ==============================================================================
 #
 settings:
 
-  # ----------------------------------------------------------------------------
+  # ============================================================================
   # GENERAL options
   # ----------------------------------------------------------------------------
   #
   enabled:                              true
 
-  # ----------------------------------------------------------------------------
+  # ============================================================================
   # All galleries available
   # ----------------------------------------------------------------------------
+  #
   galleries:
 
     # ==========================================================================
     # Image Galleries
-    # ==========================================================================
+    # --------------------------------------------------------------------------
 
     # --------------------------------------------------------------------------
     # Old Times
@@ -244,9 +247,103 @@ settings:
                                         <h3>Lotte World Tower Seoul</h3>
 
 
+      # ========================================================================
+      # VideoJS settings
+      # See settings: //jekyll.one/pages/public/manuals/videojs/videojs_api/
+      # ------------------------------------------------------------------------
+      #
+      videojs:
+        enabled:                        true
+        theme:                          uno
+
+        # ----------------------------------------------------------------------
+        # Player settings
+        # See: //jekyll.one/pages/public/manuals/videojs/lightgallery_api
+        # ----------------------------------------------------------------------
+        #
+        player:
+          enabled:                      true
+
+          # VideoJS
+          # --------------------------------------------------------------------
+          videojsPlayer:
+            enabled:                    true
+
+            options:
+              muted:                    false
+              preload:                  false
+              autoplayFirstVideo:       true
+              playbackRates:            [0.25, 0.5, 1, 1.5, 2]
+
+            controls:                   true
+            controlBar:
+              remainingTimeDisplay:     true
+              pictureInPictureToggle:   false
+              playbackRates:            [0.25, 0.5, 1, 1.5, 2]
+
+              volumePanel:
+                inline:                 false
+
+              hotkeysPlugin:
+                enabled:                true
+                options:
+                  volumeStep:           0.2
+
+              skipButtonsPlugin:
+                enabled:                  true
+                options:
+                  forward:                15
+                  backward:               15
+
+              zoomPlugin:
+                enabled:                true
+                options:
+                  moveX:                0
+                  moveY:                0
+                  rotate:               0
+                  zoom:                 1
+
+          # Vimeo
+          # --------------------------------------------------------------------
+          vimeoPlayer:
+            enabled:                    true
+            api:                        native                                  # native|videojs
+
+            options:
+              autoPlay:                 true
+              muted:                    true
+  #             byline:                   0
+  #             portrait:                 0
+  #             color:                    var(--md-gray-100)
+
+
+          # Wistia
+          # --------------------------------------------------------------------
+          wistiaPlayer:
+            enabled:                    true
+            api:                        native                                  # native|videojs
+
+            options:
+              autoPlay:                 true
+              fullscreenButton:         true
+              muted:                    false
+              qualityControl:           false
+
+          # Youtube
+          # --------------------------------------------------------------------
+          youTubePlayer:
+            enabled:                    true
+            api:                        videojs                                 # native|videojs
+
+            options:
+              autoPlay:                 true
+              muted:                    true
+              showinfo:                 true
+              controls:                 true
+
     # ==========================================================================
     # Video Galleries
-    # ==========================================================================
+    # --------------------------------------------------------------------------
 
     # --------------------------------------------------------------------------
     # HTML5 VIDEO
@@ -286,7 +383,7 @@ settings:
           alignThumbnails:              left
           animateThumb:                 true
           autoplayFirstVideo:           true
-          videojs:                      true
+          videojs:                      true                                    # jadams: !!!
           videojsTheme:                 vjs-theme-uno
 
         videojsOptions:
@@ -297,6 +394,12 @@ settings:
 #         videoStart:                   ["00:00:30", "00:01:30"]                # start time (hh:mm:ss) for [video1, video2]
 
           controls:                     true
+
+          hotKeysPlugin:
+            enabled:                    true
+            options:
+              volumeStep:               0.2          
+
           controlBar:
             playbackRates:              [0.25, 0.5, 1, 1.5, 2]
             remainingTimeDisplay:       true
@@ -304,11 +407,6 @@ settings:
 
             volumePanel:
               inline:                   false
-
-            hotKeysPlugin:
-              enabled:                  true
-              options:
-                volumeStep:             0.2
 
             skipButtonsPlugin:
               enabled:                  true
@@ -387,177 +485,12 @@ settings:
                                         <h3>Short Funny Animated Clip created at the Film Academy</h3>
 
     # --------------------------------------------------------------------------
-    # Online VIDEO Tylor Swift (YouTube)
-    # See: https://www.youtube.com/playlist?list=PLINj2JJM1jxOxE-4mVaEJCEzO1CiR0Cwm
-    #
-    - gallery:
-      enabled:                          true
-
-      id:                               jg_video_online_taylor_swift
-      type:                             video
-      video:                            youtube
-      image_base_path:                  //img.youtube.com/vi
-
-      # ------------------------------------------------------------------------
-      # Justified Gallery settings
-      # ------------------------------------------------------------------------
-      #
-      gallery_options:
-        rowHeight:                      250
-        gutters:                        3
-
-      # ------------------------------------------------------------------------
-      # Lightbox|lightGallery settings
-      # ------------------------------------------------------------------------
-      #
-      lightbox:
-        enabled:                        true
-        type:                           lg
-
-      lightGallery:
-        plugins:                        lgThumbnail, lgVideo
-
-        options:
-          licenseKey:                   0000-0000-000-0000
-          download:                     false
-          alignThumbnails:              left
-          animateThumb:                 true
-          autoplayFirstVideo:           true
-          videojs:                      false
-
-        videojsOptions:
-          enabled:                      false
-
-#       See: https://stackoverflow.com/questions/40685142/youtube-autoplay-does-not-work-with-iframe
-        playerParams:
-          enabled:                      true
-          start:                        ["00:00:00", "00:00:00"]                # start time video1, vido2
-          autoplay:                     1                                       # autoplay = 1 only available for YouTube when muted.
-#         controls:                     1                                       # default = 0
-#         enablejsapi:                  1                                       # default = 1
-#         hl:                           en                                      # default = en
-#         loop:                         0                                       # default = 0
-          mute:                         0                                       # default = 1
-#         playsinline:                  1                                       # for mobile|iOS only
-#         wmode:                        opaque                                  # default = opaque
-
-      # ------------------------------------------------------------------------
-      # CSS filter options
-      #
-      filters:
-        enabled:                        false
-        grayscale:                      0
-        contrast:                       1
-        brightness:                     1
-
-      # ------------------------------------------------------------------------
-      # Video settings
-      # ------------------------------------------------------------------------
-      #
-      videos:
-
-        - video:                        # video 1
-          enabled:                      true
-
-          name:                         Tylor Swift
-          type:                         youtube
-          size:                         1280-720
-          source:                       //youtube.com/watch?v=q3zqJs7JUCQ
-          poster_image:                 q3zqJs7JUCQ/maxresdefault.jpg
-          pinterest_prefix:             Pin video
-          tweet_prefix:                 Try video
-          caption_text:                 Fortnight (feat. Post Malone) &middot; Official Music Video
-          description: >
-                                        <h2>Tylor Swift</h2>
-                                        <h3>Fortnight (feat. Post Malone) &middot; Official Music Video</h3>
-
-        - video:                        # video 2
-          enabled:                      true
-
-          name:                         Tylor Swift
-          type:                         youtube
-          size:                         1280-720
-          source:                       //youtube.com/watch?v=0GQ_QeZxdzo
-          poster_image:                 0GQ_QeZxdzo/maxresdefault.jpg
-          pinterest_prefix:             Pin video
-          tweet_prefix:                 Try video
-          caption_text:                 Fortnight (feat. Post Malone) &middot; Behind the Scenes
-          description: >
-                                        <h2>Tylor Swift</h2>
-                                        <h3>Fortnight (feat. Post Malone) &middot; Behind the Scenes</h3>
-
-#         - video:                        # video 2
-#           enabled:                      true
-#
-#           name:                         Tylor Swift
-#           type:                         youtube
-#           size:                         1280-720
-# #         source:                       //youtube.com/watch?v=i8_w_m6HLJ0&list=PLINj2JJM1jxOxE-4mVaEJCEzO1CiR0Cwm
-#           source:                       //youtube.com/watch?v=i8_w_m6HLJ0
-#           pinterest_prefix:             Pin video
-#           tweet_prefix:                 Try video
-#           description: >
-#                                         <h2>Tylor Swift</h2>
-#                                         <h3>I Can Do With a Broken Heart</h3>
-#                                         
-#           caption:
-#             text:                       I Can Do With a Broken Heart &middot; Tylor Swift
-#           poster:
-#             source:                     i8_w_m6HLJ0/maxresdefault.jpg
-# #           source:                     i8_w_m6HLJ0/sddefault.jpg
-#
-# #          playerParams:
-# #            start:                      50                                      # seconds to start
-#
-#
-#
-# #          playerParams:
-# #            start:                      50                                      # seconds to start
-#
-#         - video:                        # video 3
-#           enabled:                      true
-#
-#           name:                         Tylor Swift
-#           type:                         youtube
-#           size:                         1280-720
-#           source:                       //youtube.com/watch?v=RQMz4JDbtmI
-#           pinterest_prefix:             Pin video
-#           tweet_prefix:                 Try video
-#           description: >
-#                                         <h2>Tylor Swift</h2>
-#                                         <h3>The Tortured Poets Department (Official Lyric Video)</h3>
-#                                         
-#           caption:
-#             text:                       The Tortured Poets Department (Official Lyric Video) &middot; Tylor Swift
-#           poster:
-#             source:                     RQMz4JDbtmI/maxresdefault.jpg
-#
-#         - video:                        # video 3
-#           enabled:                      true
-#
-#           name:                         Tylor Swift
-#           type:                         youtube
-#           size:                         1280-720
-#           source:                       //youtube.com/watch?v=wRKXAAV6jh4
-#           pinterest_prefix:             Pin video
-#           tweet_prefix:                 Try video
-#           description: >
-#                                         <h2>Tylor Swift</h2>
-#                                         <h3>My Boy Only Breaks His Favorite Toys (Official Lyric Video)</h3>
-#                                         
-#           caption:
-#             text:                       My Boy Only Breaks His Favorite Toys (Official Lyric Video) &middot; Tylor Swift
-#           poster:
-#             source:                     wRKXAAV6jh4/maxresdefault.jpg
-
-
-    # --------------------------------------------------------------------------
     # Online VIDEO Carpool Karaoke (YouTube)
     #
     - gallery:
       enabled:                          true
 
-      id:                               jg_video_online_youtube_james_and_adele
+      id:                               jg_video_youtube_james_and_adele
       type:                             video
       video:                            youtube
       image_base_path:                  //img.youtube.com/vi
@@ -587,15 +520,47 @@ settings:
           alignThumbnails:              left
           animateThumb:                 true
           autoplayFirstVideo:           true
-          videojs:                      false
+          videojs:                      true                                    # jadams: !!!
+          videojsTheme:                 vjs-theme-uno
 
         videojsOptions:
-          enabled:                      false
+          enabled:                      true
+          muted:                        false
+          preload:                      true
+          controls:                     true
 
-#       See: https://stackoverflow.com/questions/40685142/youtube-autoplay-does-not-work-with-iframe
+          hotKeysPlugin:
+            enabled:                    true
+            options:
+              volumeStep:               0.2          
+
+          controlBar:
+            playbackRates:              [0.25, 0.5, 1, 1.5, 2]
+            remainingTimeDisplay:       true
+            pictureInPictureToggle:     false
+
+            volumePanel:
+              inline:                   false
+
+            skipButtonsPlugin:
+              enabled:                  true
+              options:
+                forward:                5
+                backward:               5
+                backwardIndex:          0
+                forwardIndex:           1
+
+            zoomPlugin:
+              enabled:                  false
+              options:
+                moveX:                  0
+                moveY:                  0
+                rotate:                 0
+                zoom:                   1
+
         playerParams:
           enabled:                      true
-          start:                        ["00:00:50", "00:00:50"]                # start time video1, vido2
+#         start:                        ["00:00:50", "00:00:50"]                # start time video1, vido2
           autoplay:                     1                                       # autoplay = 1 only available for YouTube when muted.
 #         controls:                     1                                       # default = 0
 #         enablejsapi:                  1                                       # default = 1
@@ -625,43 +590,46 @@ settings:
 
           name:                         Carpool Karaoke James and Adele
           type:                         youtube
+          api:                          videojs                                 # jadams !!!
           size:                         1280-720
           source:                       //youtube.com/watch?v=Nck6BZga7TQ
-          poster_image:                 Nck6BZga7TQ/mqdefault.jpg
+          poster_image:                 Nck6BZga7TQ/mqdefault.jpg               # jadams !!!
           pinterest_prefix:             Pin video
           tweet_prefix:                 Try video
           caption_text:                 Carpool Karaoke 2015 &middot; James and Adele
           description: >
                                         <h2>Carpool Karaoke 2015</h2>
                                         <h3>
-                                          December 2015 - James is on holidays is about the holidays in
-                                          London and gets Adele off for a ride through the city. On the way
-                                          they sing some of their biggest hits.
+                                          James is on holidays in London and picks up
+                                          Adele for a ride through the city.
+                                          On the way, they sing some of their biggest hits.
                                         </h3>
 
           playerParams:
-            start:                      50                                      # seconds to start
+            # start:                      50                                    # seconds to start
 
         - video:                        # video 2
           enabled:                      true
 
           name:                         Last Carpool Karaoke
           type:                         youtube
+          api:                          videojs                                 # jadams !!!
           size:                         1280-720
           source:                       //youtube.com/watch?v=nV8UZJNBY6Y
-          poster_image:                 nV8UZJNBY6Y/mqdefault.jpg
+          poster_image:                 nV8UZJNBY6Y/mqdefault.jpg               # jadams !!!
           pinterest_prefix:             Pin video
           tweet_prefix:                 Try video
-          caption_text:                 Carpool Karaoke 2023 &middot; Last Carpool Karaoke
+          caption_text:                 Carpool Karaoke 2023 &middot; Last Carpool Karaoke Tour
           description: >
                                         <h2>Carpool Karaoke 2023</h2>
                                         <h3>
-                                          April 2023 - Adele wakeup James at home for the last Late Night Show,
-                                          for the last Carpool Caraoke ever.
+                                          Adele wakeups James at home for the very
+                                          last Late Late Night Show and for the
+                                          final Carpool Caraoke Tour.
                                         </h3>
 
           playerParams:
-            start:                      50                                      # seconds to start
+            # start:                      50                                    # seconds to start
 
     # --------------------------------------------------------------------------
     # Online VIDEO (Vimeo)
@@ -853,7 +821,7 @@ settings:
                                         <h3>Beginner Mat Pilates: Core Workout</h3>
 
     # --------------------------------------------------------------------------
-    # HTML5 VIDEO (over VodeoJS)
+    # HTML5 VIDEO (over VideoJS)
     #
     - gallery:
       enabled:                          true
@@ -960,40 +928,20 @@ settings:
                                         <h2>Peck Pocketed by Kevin Herron | Disney Favorite</h2>
                                         <h3>Student Academy Award winning Cartoon Clip</h3>
 
-        # - video:                        # video 2
-        #   enabled:                      true
-        #
-        #   name:                         Rollin Wild
-        #   type:                         html5
-        #   size:                         1280-720
-        #   source:                       rolling_wild.mp4
-        #   poster_image:                 rolling_wild.jpg
-        #   pinterest_prefix:             Pin video
-        #   tweet_prefix:                 Try video
-        #   caption_text:                 Rollin` Wild &middot; Short Funny animated video clip created at the Film Academy
-        #   description: >
-        #                                 <h2>Rollin` Wild</h2>
-        #                                 <h3>Short Funny Animated Clip created at the Film Academy</h3>
-
         - video:                        # video 2
           enabled:                      true
-
-          name:                         Last Carpool Karaoke
-          type:                         youtube
+        
+          name:                         Rollin Wild
+          type:                         html5
           size:                         1280-720
-          source:                       //youtube.com/watch?v=nV8UZJNBY6Y
+          source:                       rolling_wild.mp4
           poster_image:                 rolling_wild.jpg
           pinterest_prefix:             Pin video
           tweet_prefix:                 Try video
-          caption_text:                 Carpool Karaoke 2023 &middot; Last Carpool Karaoke
+          caption_text:                 Rollin` Wild &middot; Short Funny animated video clip created at the Film Academy
           description: >
-                                        <h2>Carpool Karaoke 2023</h2>
-                                        <h3>
-                                          April 2023 - Adele wakeup James at home for the last Late Night Show,
-                                          for the last Carpool Caraoke ever.
-                                        </h3>
-          playerParams:
-            start:                      50                                      # seconds to start
+                                        <h2>Rollin` Wild</h2>
+                                        <h3>Short Funny Animated Clip created at the Film Academy</h3>
 
 # ------------------------------------------------------------------------------
 # END config

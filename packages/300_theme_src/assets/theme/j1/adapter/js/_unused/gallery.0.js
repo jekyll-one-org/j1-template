@@ -6,8 +6,8 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/gallery.js (1)
- # Liquid template to create the J1 Adapter for J1 Gallery
+ # ~/assets/theme/j1/adapter/js/gallery.js (0)
+ # Liquid template to create the J1 Adapter for J1 Gallery 
  #
  # Product/Info:
  # https://jekyll.one
@@ -54,7 +54,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/gallery.js (1)
+ # ~/assets/theme/j1/adapter/js/gallery.js (0)
  # JS Adapter for J1 Gallery
  #
  # Product/Info:
@@ -270,17 +270,6 @@ j1.adapter.gallery = ((j1, window) => {
                     {{option[0] | json}}: {{option[1] | json}},
                     {% endfor %}
                     "origin": "origin"
-                  },
-                  {% endif %}
-
-                  {% if gallery.video == 'youtube' and gallery.lightGallery.videojsOptions.enabled %}
-                  "videojsOptions": {
-                    {% for option in gallery.lightGallery.videojsOptions %}
-                    {% if option[0] contains "enabled" %}
-                    {% continue %}
-                    {% endif %}
-                    {{option[0] | json}}: {{option[1] | json}},
-                    {% endfor %}
                   }
                   {% endif %}
 

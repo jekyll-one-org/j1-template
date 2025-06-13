@@ -270,7 +270,7 @@ j1.adapter.gallery = ((j1, window) => {
                     {{option[0] | json}}: {{option[1] | json}},
                     {% endfor %}
                     "origin": "origin"
-                  },
+                  }
                   {% endif %}
 
                   {% if gallery.video == 'youtube' and gallery.lightGallery.videojsOptions.enabled %}
@@ -282,7 +282,7 @@ j1.adapter.gallery = ((j1, window) => {
                     {{option[0] | json}}: {{option[1] | json}},
                     {% endfor %}
                   }
-                  {% endif %}
+                  {% endif %}                  
 
                   {% if gallery.video == 'vimeo' and gallery.lightGallery.playerParams.enabled %}
                   "vimeoPlayerParams": {

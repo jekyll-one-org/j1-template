@@ -71,6 +71,7 @@ resource_options:
 :dm_video:                              false
 :vm_video:                              true
 :masonry:                               true
+:lightGallery:                          false
 :dm_gallery:                            true
 :vm_gallery:                            true
 
@@ -283,7 +284,7 @@ how to use lightGallery for *commercial* websites and projects.
 ====
 
 Find below examples of video galleries of locally stored (MP4) video resources
-and video content provided online.
+*and* video content provided online.
 
 ifeval::[{masonry} == true]
 [role="mt-4"]
@@ -303,6 +304,20 @@ Find more on how the Masonry module can be used on the
 link:{url-j1-masonry-previewer}[Masonry Preview, {browser-window--new}] page.
 ====
 endif::[]
+
+
+ifeval::[{lightGallery} == true]
+[role="mt-4"]
+=== lightGallery (YouTube)
+
+The galley maker *justifiedGallery* in combination with the *lightbox*
+lightGallery is a great toolset for creating dynamic video galleries.
+The module combinati0n makes creating a gallery to access videos easy.
+
+.YouTube Video · justifiedGallery + LightGallery
+gallery::jg_video_youtube_james_and_adele[role="mb-4"]
+endif::[]
+
 
 [role="mt-4"]
 [[local-video-2]]
