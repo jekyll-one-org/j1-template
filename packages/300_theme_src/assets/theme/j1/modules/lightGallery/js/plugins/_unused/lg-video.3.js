@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/lightGallery/js/plugins/lg-video.js
+ # ~/assets/theme/j1/modules/lightGallery/js/plugins/lg-video.js (3)
  # Provides lightGallery v2.8.3 JS code for the plugin lgVideo
  #
  # Product/Info:

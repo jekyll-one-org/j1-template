@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/lightGallery/js/plugins/lg-video.js
+ # ~/assets/theme/j1/modules/lightGallery/js/plugins/lg-video.js (2)
  # Provides lightGallery v2.8.3 JS code for the plugin lgVideo
  #
  # Product/Info:
@@ -225,14 +225,12 @@
     // Loads a given WEBVTT file (from data path) and process loaded
     // data in callback cb (function)
     // -------------------------------------------------------------------------
-    var vjsProcessExtendedButtonsAndPlugins = function (vjsObject, videojsPlayer, videoInfo) {
+    var vjsProcessExtendedButtonsAndPlugins = function (vjsObject, videojsPlayer) {
         const vjsOptions = j1.modules.videojs.options;
-        var videoInfo, videoStart, videojsPlayer,
-            playbackRates, hotKeysPlugin, skipButtonsPlugin, zoomPlugin;
-
-        var videoData = {
-            tracks: false
-        };
+        var trackSrc,
+            $videoElement, videoInfo, videoStart, videoData, videoId,
+            videojsPlayer, playbackRates,
+            hotKeysPlugin, skipButtonsPlugin, zoomPlugin;
 
         var playbackRatesDefaults = vjsOptions.playbackRates.values;
         var chapterTracksEnabled  = false;
@@ -386,13 +384,8 @@
 
         } // END if skipButtons Plugin enabled
 
-        // add zoom Plugin (only available for VJS|local video/mp4)
+        // add zoom Plugin (only available for VJS)
         // ---------------------------------------------------------------------
-        if (videoInfo.youtube) {
-            // zoom pluging NOT supported for YouTube
-            zoomPlugin.enabled = false;
-        }
-
         if (zoomPlugin !== undefined && zoomPlugin.enabled && videojsPlayer.zoomButtons !== undefined) {
             // merge objects
             zoomPlugin.options = __assign(__assign({}, zoomPluginDefaults), zoomPlugin.options);
@@ -416,13 +409,11 @@
 
         // chapter track processing, only available for VideoJS
         // ---------------------------------------------------------------------
-        if (vjsObject.core.galleryItems[vjsObject.core.index].video !== undefined) {
-            videoData = JSON.parse(vjsObject.core.galleryItems[vjsObject.core.index].video);
-        }
+        videoData = JSON.parse(vjsObject.core.galleryItems[vjsObject.core.index].video);
 
-        // chapter tracks only available for VideoJS (local video/mp4)
+        // chapter tracks only available for VideoJS
         // ---------------------------------------------------------------------
-        if (videoData.tracks && videoData.tracks.length > 0) {
+        if (videoData.tracks !== undefined && videoData.tracks.length > 0) {
             for (var i=0; i<videoData.tracks.length; i++) {
                 if (videoData.tracks[i].kind == 'chapters') {
                     trackSrc = videoData.tracks[i].src;
@@ -569,7 +560,7 @@
             var _a = event.detail, index = _a.index, src = _a.src, html5Video = _a.html5Video, hasPoster = _a.hasPoster;
             if (!hasPoster) {
                 // All functions are called separately if poster exist in loadVideoOnPosterClick function
-                this.appendVideo(this.core.getSlideItem(index), {
+                this.appendVideos(this.core.getSlideItem(index), {
                     src: src,
                     addClass: 'lg-object',
                     index: index,
@@ -643,49 +634,58 @@
 
         // jadams
         Video.prototype.getVideoHtml = function (src, addClass, index, html5Video) {
-          var video                  = '';
-          var video_api              = '';
-          var commonIframeProps      = '';
-          var videoInfo              = this.core.galleryItems[index].__slideVideoInfo || {};
-          var currentGalleryItem     = this.core.galleryItems[index];
-          var currentGalleryHtml     = currentGalleryItem.subHtml.split("</h5>");
-          var videoTitle             = currentGalleryHtml[0].replace('<h5>','');            
-
-          videoTitle                 = videoTitle ? 'title="' + videoTitle + '"' : '';
-          commonIframeProps          = "allowtransparency=\"true\"\n            frameborder=\"0\"\n            scrolling=\"no\"\n            allowfullscreen\n            mozallowfullscreen\n            webkitallowfullscreen\n            oallowfullscreen\n            msallowfullscreen";
-
+            var video = '';
+            var videoInfo = this.core.galleryItems[index]
+                .__slideVideoInfo || {};
+            var currentGalleryItem = this.core.galleryItems[index];
+            var videoTitle = currentGalleryItem.title || currentGalleryItem.alt;
+            videoTitle = videoTitle ? 'title="' + videoTitle + '"' : '';
+            var commonIframeProps = "allowtransparency=\"true\"\n            frameborder=\"0\"\n            scrolling=\"no\"\n            allowfullscreen\n            mozallowfullscreen\n            webkitallowfullscreen\n            oallowfullscreen\n            msallowfullscreen";
+            
           if (videoInfo.youtube) {
-            var videoId              = 'lg-youtube' + index;
-            var youTubeParams        = getYouTubeParams(videoInfo, this.settings.youTubePlayerParams);
+            var videoId = 'lg-youtube' + index;
+            var youTubeParams = getYouTubeParams(videoInfo, this.settings.youTubePlayerParams);
             var isYouTubeNoCookieURL = isYouTubeNoCookie(src);
-            var youtubeURL           = isYouTubeNoCookieURL ? '//youtube-nocookie.com/' : '//youtube.com/';
-            var ytVideoID            = videoInfo.youtube[1];
+            var youtubeURL = isYouTubeNoCookieURL
+                ? '//www.youtube-nocookie.com/'
+                : '//www.youtube.com/';
 
-            var video_iframe = `
+            // var video = `
+            //   <video
+            //     id="${videoId}"
+            //   	class="lg-video-object lg-youtube vjs-theme-uno video-js">
+            //     data-setup='{
+            //       "fluid" : true,
+            //       "techOrder": [
+            //     	"youtube", "html5"
+            //     ],
+            //     "sources": [{
+            //     	"type": "video/youtube",
+            //     	"src": "//youtube.com/watch?v=nV8UZJNBY6"
+            //     }],
+            //     "controlBar": {
+            //     	"pictureInPictureToggle": false,
+            //     	"volumePanel": {
+            //     	  "inline": false
+            //   	   }
+            //     }
+            //   }'>
+            //   	Your browser does not support HTML5 video
+            //   </video>
+            // `;
+
+            var video_new = `
               <iframe
                 id="${videoId}"
                 class="lg-video-object lg-youtube ${addClass}"
-                src="${youtubeURL}/embed/${ytVideoID}${youTubeParams}"
+                allow="autoplay"
+                title="${videoTitle}""
+                src="${youtubeURL}/embed${videoInfo.youtube[1]}${youTubeParams}"
                 ${commonIframeProps}>
               </iframe>
             `;
 
-            var video_vjs = `
-              <video
-                id="${videoId}"
-                class="video-js lg-video-object lg-youtube vjs-theme-uno">
-                <source
-                  type="video/youtube",
-                  src="//youtube.com/watch?v=${ytVideoID}"
-                >
-
-                Your browser does not support HTML5 video.
-              </video>
-            `;
-
-            video_api = 'iiiframe';
-            video     = (video_api === 'iframe') ? video_iframe : video_vjs;
-            // END videoInfo youtube
+            video = "<iframe allow=\"autoplay\" id=" + videoId + " class=\"lg-video-object lg-youtube " + addClass + "\" " + videoTitle + " src=\"" + youtubeURL + "embed/" + (videoInfo.youtube[1] + youTubeParams) + "\" " + commonIframeProps + "></iframe>";
           } else if (videoInfo.vimeo) {
             var videoId = 'lg-vimeo' + index;
             var playerParams = getVimeoURLParams(this.settings.vimeoPlayerParams, videoInfo);
@@ -753,67 +753,26 @@
          * @param {HTMLElement} el - slide element
          * @param {Object} videoParams - Video parameters, Contains src, class, index, htmlVideo
          */
-        Video.prototype.appendVideo = function (el, videoParams) {
-            var vjsPlayer;
-            var _a             = {};
-            var videojsEnabled = false;
-            var videoHtml      = this.getVideoHtml(videoParams.src, videoParams.addClass, videoParams.index, videoParams.html5Video);
-
+        Video.prototype.appendVideos = function (el, videoParams) {
+            var _a;
+            var videoHtml = this.getVideoHtml(videoParams.src, videoParams.addClass, videoParams.index, videoParams.html5Video);
             el.find('.lg-video-cont').append(videoHtml);
             var $videoElement = el.find('.lg-video-object').first();
-
-            // check the HTML Element for the active player (failsafe)
-            // if NOT available, something went totally wrong
-            if (!$videoElement.get()) {
-                return;
-            }
-
             if (videoParams.html5Video) {
                 $videoElement.on('mousedown.lg.video', function (e) {
                     e.stopPropagation();
                 });
             }
-
-            _a                 = this.core.galleryItems[videoParams.index].__slideVideoInfo;
-            _a.videojs         = { enabled: false };
-            videojsEnabled     = videoHtml.includes('iframe');
-            _a.videojs.enabled = (videojsEnabled) ? false : true;
-
-            // jadams, 2025-06-13: process html5
-            if (this.settings.videojs && (_a === null || _a === void 0 ? void 0 : _a.html5)) {
+            if (this.settings.videojs && ((_a = this.core.galleryItems[videoParams.index].__slideVideoInfo) === null || _a === void 0 ? void 0 : _a.html5)) {
                 try {
-                    if (_a.videojs.enabled) {
-                        vjsPlayer               = videojs($videoElement.get(), this.settings.videojsOptions);
-                        this.settings.vjsPlayer = vjsPlayer;
-                        _a.videojs.player       = vjsPlayer;
-
-                        return vjsPlayer;
-                    }
+                    return videojs($videoElement.get(), this.settings.videojsOptions);
                 }
                 catch (e) {
                     // jadams:
                     console.warn('lightGallery: Make sure you have included //github.com/vimeo/player.js');
                 }
             }
-
-            // jadams, 2025-06-13: process youtube
-            if (this.settings.videojs && (_a  === null || _a === void 0 ? void 0 : _a.youtube)) {
-                try {
-                    if (_a.videojs.enabled) {
-                        vjsPlayer           = videojs($videoElement.get(), this.settings.videojsOptions);
-                        this.settings.vjsPlayer = vjsPlayer;
-                        _a.videojs.player       = vjsPlayer;
-
-                        return vjsPlayer;
-                    }
-                }
-                    catch (e) {
-                    // jadams:
-                    console.warn('lightGallery: Make sure you have included //github.com/vimeo/player.js');
-                }
-            }
-
-        }; // END appendVideo
+        };
 
         // jadams
         Video.prototype.gotoNextSlideOnVideoEnd = function (src, index) {
@@ -822,13 +781,6 @@
                 .getSlideItem(index)
                 .find('.lg-video-object')
                 .first();
-
-            // try to get HTML Element for the active player (failsafe)
-            // if NOT available, something went totally wrong
-            if (!$videoElement.get()) {
-                return;
-            }
-
             var videoInfo = this.core.galleryItems[index].__slideVideoInfo || {};
             if (this.settings.gotoNextSlideOnVideoEnd) {
                 if (videoInfo.html5) {
@@ -873,8 +825,7 @@
         // for HTML5 video over VJS (to be extended for e.g.YouTube)
         // ---------------------------------------------------------------------
         Video.prototype.controlVideo = function (index, action) {
-            var $videoElement, videoInfo, videoId;
-            var videojsPlayer = 'not_set';
+            var $videoElement, videoInfo, videoId, videojsPlayer;
 
             // load the lgQuery element for the active player
             $videoElement = this.core
@@ -893,20 +844,17 @@
 
             // process video of type 'html5' for extended VJS settings
             // -----------------------------------------------------------------
-            // if (this.core.galleryItems[this.core.index].video !== undefined && (videoInfo.html5 || videoInfo.youtube)) {
-            if (videoInfo.html5 || videoInfo.youtube) {
+            if (this.core.galleryItems[this.core.index].video !== undefined && videoInfo.html5) {
 
-                // if ($videoElement.selector.id !== undefined) {
-                //     videoId       = $videoElement.selector.id;
-                //     videojsPlayer = videojs(videoId);
-                // }
-
-                if ($videoElement.selector.player !== undefined) {
-                  videojsPlayer = $videoElement.selector.player;
+                if ($videoElement.selector.id !== undefined) {
+                    videoId       = $videoElement.selector.id;
+                    videojsPlayer = videojs(videoId);
+                } else {
+                    videojsPlayer = 'unknown';
                 }
 
-                if (videojsPlayer !== 'not_set') {
-                  vjsProcessExtendedButtonsAndPlugins(this, videojsPlayer, videoInfo);
+                if (videojsPlayer !== 'unknown') {
+                    vjsProcessExtendedButtonsAndPlugins(this, videojsPlayer);
                 } // END if videojsPlayer is defined
 
             } // END if videoInfo.html5
@@ -915,7 +863,6 @@
             // -----------------------------------------------------------------
             if (videoInfo.html5) {
                 if (this.settings.videojs) {
-                    // VideoJS  API detected
                     try {
                         videojs($videoElement.get())[action]();
                     }
@@ -924,26 +871,14 @@
                     }
                 }
                 else {
-                    // iFrame API detected (??? supported ???)
                     $videoElement.get()[action]();
                 } // END html5
             } else if (videoInfo.youtube) {
-                if (this.settings.videojs) {
-                    // VideoJS  API detected
-                    try {
-                        videojs($videoElement.get())[action]();
-                    }
-                    catch (e) {
-                        console.warn('lightGallery: Make sure you have included videojs');
-                    }
-                } else  {
-                    // iFrame API detected
-                    try {
-                        $videoElement.get().contentWindow.postMessage("{\"event\":\"command\",\"func\":\"" + action + "Video\",\"args\":\"\"}", '*');
-                    }
-                    catch (e) {
-                        console.error("lightGallery:- " + e);
-                    }
+                try {
+                    $videoElement.get().contentWindow.postMessage("{\"event\":\"command\",\"func\":\"" + action + "Video\",\"args\":\"\"}", '*');
+                }
+                catch (e) {
+                    console.error("lightGallery:- " + e);
                 } // END youtube
             } else if (videoInfo.vimeo) {
                 try {
@@ -984,7 +919,7 @@
                         _html =
                             typeof video === 'string' ? JSON.parse(video) : video;
                     }
-                    var videoJsPlayer_1 = this.appendVideo($el, {
+                    var videoJsPlayer_1 = this.appendVideos($el, {
                         src: _src,
                         addClass: '',
                         index: this.core.index,
