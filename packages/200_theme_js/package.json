@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "js",
-  "version": "2024.3.24",
+  "version": "2024.3.25",
   "description": "JS bundle for J1 Theme",
   "main": "template.js",
   "config": {

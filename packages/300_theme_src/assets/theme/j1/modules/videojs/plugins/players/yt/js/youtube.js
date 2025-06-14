@@ -447,11 +447,16 @@
       this.source = source;
       this.url = Youtube.parseUrl(source.src);
 
-      if (!this.options_.poster) {
+      // jadams, 2025-06-14: disabled for now
+      // -----------------------------------------------------------------------
+      var checkVideoPoster = false;
+      if (checkVideoPoster && this.poster_ === '') {
+//      if (!this.options_.poster && checkVideoPoster) {
         if (this.url.videoId) {
           // Set the low resolution first
 //        this.poster_ = 'https://img.youtube.com/vi/' + this.url.videoId + '/0.jpg';
-          this.poster_ = 'https://img.youtube.com/vi/' + this.url.videoId + '/sddefault.jpg';
+//        this.poster_ = 'https://img.youtube.com/vi/' + this.url.videoId + '/sddefault.jpg';
+          this.poster_ = 'https://img.youtube.com/vi/' + this.url.videoId + '/mqdefault.jpg';
           this.trigger('posterchange');
 
           // Check if their is a high res image
