@@ -233,7 +233,8 @@
     var vjsProcessExtendedButtonsAndPlugins = function (vjsObject, videojsPlayer, videoInfo) {
         const vjsOptions = j1.modules.videojs.options;
         var dependency_met_module_ready, videoInfo, videoStart, videojsPlayer,
-            playbackRates, hotKeysPlugin, skipButtonsPlugin, zoomPlugin;
+            playbackRates, hotKeysPlugin, skipButtonsPlugin, zoomPlugin,
+            trackSrc;
 
         dependency_met_module_ready = setInterval (() => {            
             var isModuleInitialised = (j1.adapter.gallery.getState() === 'finished') ? true : false;
@@ -487,6 +488,19 @@
                         }); // END on "play"
 
                     } // END if chapterTracksEnabled
+
+                    // move the durationDisplay AFTER the progressControlSilder
+                    const playbackRateButton = vjsPlayerControlBar.playbackRateMenuButton;
+                    const zoomButton = vjsPlayerControlBar.ZoomButton;
+
+                    if (playbackRateButton) {
+                        var bla = 1;
+                    }                    
+
+                    if (zoomButton) {
+                        var bla = 2;
+                        // customProgressContainer.el().appendChild(durationDisplay.el());
+                    }
 
                 } // END if videojsOptions
 

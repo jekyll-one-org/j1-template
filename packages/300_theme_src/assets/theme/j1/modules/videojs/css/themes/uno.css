@@ -28,6 +28,16 @@
   --vjs-theme-uno--secondary: #fff
 }
 
+/* menus
+ ------------------------------------------------------------------------------- */
+.vjs-menu .vjs-menu-content {
+  font-family: "Roboto Slab", Arial, Helvetica, sans-serif;
+}
+
+.vjs-menu-button-popup .vjs-menu .vjs-menu-content {
+  bottom: 6em;
+}
+
 /* captions|subtitles
  ------------------------------------------------------------------------------- */
 .video-js .vjs-text-track-display div {
@@ -157,9 +167,9 @@
   margin-top: 12px !important;
 }
 
-/* move tbe plaback-rate menu to top: 20px */
+/* move up the playback-rate menu */
 .vjs-playback-rate .vjs-menu {
-  top: -17px;
+  top: 28px;
 }
 
 /* move tbe volume slider up: +2em */

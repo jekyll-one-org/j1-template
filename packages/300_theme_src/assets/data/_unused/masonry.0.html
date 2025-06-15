@@ -7,7 +7,7 @@ exclude_from_search:                    true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/data/masonry.html
+ # ~/assets/data/masonry.html (0)
  # Liquid procedure to generate the HTML portion for all Masonry Grids
  # configured
  #
@@ -456,6 +456,7 @@ exclude_from_search:                    true
               data-lg-size="{{video.size}}"
               data-pinterest-text="{{video.pinterest_prefix}} {{video.name}} at {{video.source}}"
               data-tweet-text="{{video.tweet_prefix}} {{video.name}} at {{video.source}}"
+              data-src="{{video.source}}"
               data-poster="{{grid.html5.poster_base_path}}/{{video.poster.source}}"
               data-sub-html="{{video.description|strip|strip_newlines}}"
               data-video='{

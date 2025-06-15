@@ -711,18 +711,18 @@ settings:
         - video:
           name:                         Planet Earth II
           type:                         youtube
+          api:                          videojs                                 # jadams !!!
           size:                         1280-720
-          source:                       //youtu.be/IUN664s7N-c
+          source:                       //youtube.com/IUN664s7N-c
           pinterest_prefix:             Pin video
           tweet_prefix:                 Try video
           description: >
-                                        <h5>Beauty of Nature</h5>
-                                        <h6>
+                                        <h2>Beauty of Nature</h2>
+                                        <h3>
                                           The BBC America presents breathtaking landscapes of
                                           amazing habitats from their Planet Earth II series
                                           on YouTube
-                                        </h6>
-                                        <br>
+                                        </h3>
           poster:
             style:                      img-responsive
             source:                     //img.youtube.com/vi/IUN664s7N-c/maxresdefault.jpg
@@ -739,9 +739,11 @@ settings:
           pinterest_prefix:             Pin video
           tweet_prefix:                 Try video
           description: >
-                                        <h5>Amazing Nature</h5>
-                                        <h6>Video by <a target='_blank' href='//vimeo.com/charliekaye'>Charlie Kaye.</a> on Vimeo</h6>
-                                        <br>
+                                        <h2>Amazing Nature</h2>
+                                        <h3>
+                                          Video by <a target='_blank' href='//vimeo.com/charliekaye'>Charlie Kaye.</a>
+                                          on Vimeo
+                                        </h3>
           poster:
             style:                      img-responsive
             source:                     /assets/video/poster/vimeo/amazing_nature.jpg
@@ -758,9 +760,8 @@ settings:
           pinterest_prefix:             Pin video
           tweet_prefix:                 Try video
           description: >
-                                        <h5>SELF Channel</h5>
-                                        <h6>Beginner Mat Pilates</h6>
-                                        <br>
+                                        <h2>SELF Channel</h2>
+                                        <h3>Beginner Mat Pilates</h3>
           poster:
             style:                      img-responsive
             source:                     /assets/video/poster/dailymotion/pilates.jpg
@@ -778,9 +779,24 @@ settings:
           pinterest_prefix:             Pin video
           tweet_prefix:                 Try video
           description: >
-                                        <h5>Peck Pocketed by Kevin Herron</h5>
-                                        <h6>Student Academy Award winning cartoon clip on VideoJS</h6>
-                                        <br>
+                                        <h2>Peck Pocketed by Kevin Herron</h2>
+                                        <h3>Student Academy Award winning cartoon clip on VideoJS</h3>
+
+          tracks:
+            - track:
+              default:                  true                                    # Indicates that the track is to be enabled if the user's preferences do not indicate that another track would be more appropriate
+              kind:                     captions
+              srclang:                  en                                      # Code for the language of the text track
+              label:                    English                                 # Descriptive text for the track that will used in the user interface (player)
+              src:                      /assets/video/tracks/html5/peck_pocketed/captions/video.vtt
+
+            - track:
+              default:                  true                                    # Indicates that the track is to be enabled if the user's preferences do not indicate that another track would be more appropriate
+              kind:                     chapters
+              srclang:                  en                                      # Code for the language of the text track
+              label:                    Chapters                                # Descriptive text for the track that will used in the user interface (player)
+              src:                      /assets/video/tracks/html5/peck_pocketed/chapters/video.vtt
+
           poster:
             style:                      img-responsive
             source:                     peck_pocketed.jpg

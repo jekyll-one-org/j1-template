@@ -1,0 +1,521 @@
+---
+regenerate:                             true
+exclude_from_search:                    true
+---
+
+{%- capture cache -%}
+
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/assets/data/masonry.html
+ # Liquid procedure to generate the HTML portion for all Masonry Grids
+ # configured
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2023-2025 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ # -----------------------------------------------------------------------------
+ # NOTE: Data loaded dynamically by J1 Masonry module (AJAX)
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #    {{variable | debug}}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Liquid var initialization
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign template_config     = site.data.j1_config %}
+{% assign modules             = site.data.modules %}
+
+{% comment %} Set config data
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign environment         = site.environment %}
+{% assign masonry_defaults    = modules.defaults.masonry.defaults %}
+{% assign masonry_settings    = modules.masonry.settings %}
+
+{% comment %} Set config options
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign masonry_options     = masonry_defaults | merge: masonry_settings %}
+{% assign grids               = masonry_options.grids %}
+
+{% comment %} Configure permalink settings
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign ext = '' %}
+{% if site.permalink == 'none' %}
+  {% assign ext = '.html' %}
+{% endif %}
+
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign production = false %}
+{% if environment == 'prod' or environment == 'production' %}
+  {% assign production = true %}
+{% endif %}
+
+
+{% comment %} Main
+================================================================================ {% endcomment %}
+<!DOCTYPE {{site.doctype}}>
+<html lang="{{site.language}}">
+  <head>
+    <!-- [INFO   ] [~/assets/data/masonry.html                    ]  [ set meta data (robots) to exclude HTML datafiles from index ] -->
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="masonry" content="module data file">
+  </head>
+  <body>
+  {% comment %} Collect grids
+  ------------------------------------------------------------------------------ {% endcomment %}
+  {% for grid in grids %} {% if grid.enabled %}
+
+    {% comment %} POSTS grids
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% if grid.type == 'post' %}
+
+      <!-- Posts|Group -->
+      <div id="{{grid.id}}" class="row {{grid.id | replace: '_','-' }} g-0">
+        <!-- Collect posts only if group matches -->
+        {% for post in site.posts %} {% if post.group contains grid.group %}
+
+        {% if grid.translate_links %}
+          {% assign translate = "" %}
+        {% else %}
+          {% assign translate = "notranslate" %}
+        {% endif %}
+
+        {% if grid.link_new_window %}
+          {% assign target = "_blank" %}
+        {% else %}
+          {% assign target = "" %}
+        {% endif %}
+
+        {% comment %} Collect CSS image filters
+        ------------------------------------------------------------------------ {% endcomment %}
+        {% assign css_filters   = masonry_options.filters | merge: grid.filters %}
+        {% assign image_filters = 'filter:' %}
+
+        {% if css_filters.enabled %}
+          {% for filter in css_filters %}
+            {% if filter[0] contains 'enabled' %}
+              {% continue %}
+            {% endif %}
+            {% capture image_filters %}{{image_filters}} {{filter[0]}}({{filter[1]}}){% endcapture %}
+          {% endfor %}
+        {% endif %}
+
+        <!-- resposive items: 3-2-1 -->
+        <div class="col-xl-{{grid.responsive.xl}} col-lg-{{grid.responsive.lg}} col-md-{{grid.responsive.md}} col-sm-{{grid.responsive.sm}} col-{{grid.responsive.xs}}" style=";padding-bottom: {{grid.gutters}}px; padding-left: {{grid.gutters}}px;">
+
+          <article class="card bg-dark text-center text-white border-0 rounded-0 bottom">
+            <img
+              class="card-img {{grid.image_styles}}"
+              src="{{post.image.path | relative_url}}"
+              aria-label="{{post.title}}"
+              style="{{image_filters}}; height: {{grid.image_height}};">
+
+            <div class="card-content mt-5">
+
+              {% if post %}
+                {% assign categories = post.categories %}
+              {% else %}
+                {% assign categories = page.categories %}
+              {% endif %}
+
+              {% comment %} categories: {{categories | debug}}
+              ------------------------------------------------------------------ {% endcomment %}
+              {% for category in categories %}
+              {% if category contains post.category %}
+              <a
+                href="/pages/public/blog/navigator/archive/categoryview/#{{grid.group | slugify}}"
+                class="masonry-article-link d-block text-white text-uppercase link-no-decoration {{translate}}"
+                target="{{target}}"
+                style="font-size: 32px;">
+                {{grid.group}}
+              </a>
+              {% endif %}
+              {% endfor %}
+
+              <ul class="list-inline d-flex justify-content-center mb-5">
+                <li class="list-inline-item">
+                  <i class="mdib mdib-account mdib-24px md-gray-400 mr-1" style="margin-right: 8px;"></i>
+                  {{site.author.name | split: ' ' | first}} &nbsp;&middot;&nbsp;&nbsp;
+                </li>
+                <li class="list-inline-item">
+                  <i class="mdib mdib-calendar-blank mdib-24px md-gray-400 mr-1"></i>
+                  {{post.date | date: '%b %d, %Y'}}
+                </li>
+              </ul>
+
+              <!-- Post link (caption) -->
+              <h4 class="caption notoc">
+                <a
+                  href="{{post.url}}"
+                  class="masonry-article-link {{translate}}"
+                  target="{{target}}"
+                  style="font-size: 32px;">
+                   {{post.tags[0]}}
+                </a>
+              </h4>
+              <!-- /Post link (caption) -->
+
+            </div>
+          </article>
+
+        </div>
+        {% endif %} {% endfor %}
+      </div>
+      <!-- /Posts|Group -->
+    {% endif %}
+
+
+    {% comment %} COLLECTION grids
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% if grid.type == 'collection' %}
+
+    {% comment %} Set collection data
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% assign collection_name   = grid.collection %}
+
+    {% comment %} Collect collection documents
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% for collection in site.collections %}
+      {% if collection.label contains collection_name %}
+        {% assign articles = collection.docs %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+
+    <!-- Collection|Articles -->
+    <div id="{{grid.id}}" class="row {{grid.id | replace: '_','-' }} g-0">
+
+      {% if grid.translate_titles %}
+        {% assign translate = "" %}
+      {% else %}
+        {% assign translate = "notranslate" %}
+      {% endif %}
+
+      {% comment %} Collect CSS image filters
+      -------------------------------------------------------------------------- {% endcomment %}
+      {% assign css_filters   = masonry_options.filters | merge: grid.filters %}
+      {% assign image_filters = 'filter:' %}
+
+      {% if css_filters.enabled %}
+        {% for filter in css_filters %}
+          {% if filter[0] contains 'enabled' %}
+            {% continue %}
+          {% endif %}
+          {% capture image_filters %}{{image_filters}} {{filter[0]}}({{filter[1]}}){% endcapture %}
+        {% endfor %}
+      {% endif %}
+
+      {% for article in articles %}
+      <div class="col-xl-{{grid.responsive.xl}} col-lg-{{grid.responsive.lg}} col-md-{{grid.responsive.md}} col-sm-{{grid.responsive.sm}} col-{{grid.responsive.xs}}" style=";padding-bottom: {{grid.gutters}}px; padding-left: {{grid.gutters}}px;">
+        <!-- (Masonry) Article item -->
+        <div id="{{article.title | downcase | replace: ' ' ,'_'}}" class="masonry-article-item masonry-article-item--w400">
+          {% if grid.preview %}
+          <a
+            href="#articleModal_{{grid.id}}_{{forloop.index}}"
+            class="masonry-article-link"
+            data-bs-toggle="modal">
+            <div class="masonry-article-hover">
+              <div class="masonry-article-hover-content">
+                <i class="mdib mdib-plus mdib-10x"></i>
+              </div>
+            </div>
+            <img
+              class="{{grid.image_styles}}"
+              src="{{article.image.path}}"
+              aria-label="{{article.title}}"
+              style="{{image_filters}}; height: {{grid.image_height}}; width: {{grid.image_width}}">
+          </a>
+          {% else %}
+            <img
+              class="{{grid.image_styles}}"
+              src="{{article.image.path}}"
+              aria-label="{{article.title}}"
+              style="{{image_filters}}; height: {{grid.image_height}}; width: {{grid.image_width}}">
+          {% endif %}
+          <div class="masonry-article-caption">
+            <div class="masonry-article-caption-heading">
+              <a
+                href="{{article.url}}"
+                class="masonry-article-link {{translate}}"
+                target="{{target}}">
+                {{article.title}}
+              </a>
+            </div>
+            <div class="masonry-article-caption-subheading">{{article.tags[0]}}</div>
+          </div>
+        </div>
+        <!-- /(Masonry) Article item -->
+      </div>
+
+      <!-- Article Modal-->
+      {% if grid.preview %}
+      <div id="articleModal_{{grid.id}}_{{forloop.index}}" class="article-modal modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+            <!-- div class="close-modal" data-bs-dismiss="modal">
+              <img src="{{'/assets/image/icon/controls/close-icon.svg' | relative_url}}" aria-label="Close modal">
+            </div -->
+
+            <div class="close-modal" data-bs-dismiss="modal" aria-label="Close">
+              <i class="mdi mdi-close mdi-dark mdi-48px"></i>
+            </div >
+
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col-lg-8">
+                  <div class="modal-body">
+                    <!-- Project details-->
+                    <h2 class="text-uppercase notoc {{translate}}">{{article.title}}</h2>
+                    <p class="item-intro">{{article.tagline}}</p>
+                    <!-- img class="img-fluid d-block mx-auto" src="{{article.image.path | relative_url}}" aria-label="{{article.title}}" -->
+                    <p>{{article.description}}</p>
+                    <ul class="list-inline">
+                      <!-- li>
+                        <strong>Titel:</strong>
+                        <span class="{{translate}}">{{article.title}}</span>
+                      </li -->
+                      <!-- li>
+                        <strong>Kategorien:</strong>
+                        <span class="{{translate}}">{{article.categories}}</span>
+                      </li -->
+                      <!-- li>
+                        <strong>Tags:</strong>
+                        <span class="{{translate}}">{{article.tags}}</span>
+                      </li -->
+                    </ul>
+
+                    <!-- button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                      <i class="mdib mdib-close mdib-24px mx-2"></i>
+                      Schließen
+                    </button -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      <!-- /Article Modal-->
+
+      {% endfor %}
+    </div>
+    <!-- /Collection|Articles -->
+    {% endif %}
+
+    {% comment %} Image Grids
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% if grid.type == 'image' %}
+
+      {% comment %} Collect CSS image filters
+      -------------------------------------------------------------------------- {% endcomment %}
+      {% assign css_filters   = masonry_options.filters | merge: grid.filters %}
+      {% assign image_filters = 'filter:' %}
+
+      {% if css_filters.enabled %}
+        {% for filter in css_filters %}
+          {% if filter[0] contains 'enabled' %}
+            {% continue %}
+          {% endif %}
+          {% capture image_filters %}{{image_filters}} {{filter[0]}}({{filter[1]}}){% endcapture %}
+        {% endfor %}
+      {% endif %}
+
+      <!-- Card Image Grid -->
+      <div id="{{grid.id}}" class="row {{grid.id | replace: '_','-' }} g-0">
+        {% for image in grid.images %}
+        <div class="col-xl-{{grid.responsive.xl}} col-lg-{{grid.responsive.lg}} col-md-{{grid.responsive.md}} col-sm-{{grid.responsive.sm}} col-{{grid.responsive.xs}}" style=";padding-bottom: {{grid.gutters}}px; padding-left: {{grid.gutters}}px;">
+          <div class="card">
+            {% if grid.lightbox.enabled %}
+            {% if grid.lightbox.type == 'lb' %}
+            <div class="{{grid.caption.position}}">
+              <a
+                href="{{grid.image_base_path}}/{{image.file}}"
+                data-lightbox="{{grid.id}}-image-group"
+                data-caption="{{image.caption}}"
+                data-title="{{image.caption}}">
+                 <img
+                  id="{{forloop.index}}"
+                  class="{{grid.image_styles}}"
+                  src="{{grid.image_base_path}}/{{image.file}}"
+                  aria-label="{{image.caption}}"
+                  style="{{image_filters}}; height: {{grid.image_height}}">
+              </a>
+              {% if grid.caption.enabled %}
+              <div class="caption">{{image.caption}}</div>
+              {% endif %}
+            </div>
+            {% elsif grid.lightbox.type == 'lg' %}
+            <!-- place lightGalley code -->
+            <!-- see: https://www.lightgalleryjs.com/docs/getting-started/#the-markup -->
+            <div class="{{grid.caption.position}}">
+              <a
+                href="{{grid.image_base_path}}/{{image.file}}"
+                class="lg-item">
+                <img
+                  id="{{forloop.index}}"
+                  class="img-responsive"
+                  src="{{grid.image_base_path}}/{{image.file}}"
+                  aria-label="{{image.caption}}">
+              </a>
+              {% if grid.caption.enabled %}
+              <div class="caption">{{image.caption}}</div>
+              {% endif %}
+            </div>
+            {% else %}
+            <div class="{{grid.caption.position}}">
+              <img
+                id="{{forloop.index}}"
+                class="{{grid.image_styles}}"
+                src="{{grid.image_base_path}}/{{image.file}}"
+                aria-label="{{image.caption}}">
+              {% if grid.caption.enabled %}
+              <div class="caption">{{image.caption}}</div>
+              {% endif %}
+            </div>
+            {% endif %}
+            {% endif %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <!-- /Image Grid -->
+    {% endif %}
+
+    {% comment %} VIDEO Grid
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% if grid.type == 'video' %}
+
+    {% comment %} Collect CSS image filters
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% assign css_filters   = masonry_options.filters | merge: grid.filters %}
+    {% assign image_filters = 'filter:' %}
+
+      {% if css_filters.enabled %}
+        {% for filter in css_filters %}
+          {% if filter[0] contains 'enabled' %}
+            {% continue %}
+          {% endif %}
+          {% capture image_filters %}{{image_filters}} {{filter[0]}}({{filter[1]}}){% endcapture %}
+        {% endfor %}
+      {% endif %}
+
+      <!-- START Video Grid -->
+      <div id="{{grid.id}}" class="row {{grid.id | replace: '_','-' }} g-0">
+        {% for video in grid.videos %}
+        {% if video.type == 'youtube' or video.type == 'dailymotion' or video.type == 'vimeo' or video.type == 'wistia' %}
+        <div class="col-xl-{{grid.responsive.xl}} col-lg-{{grid.responsive.lg}} col-md-{{grid.responsive.md}} col-sm-{{grid.responsive.sm}} col-{{grid.responsive.xs}}" style="padding-bottom: {{grid.gutters}}px; padding-left: {{grid.gutters}}px;">
+          <div class="card {{video.caption.position}}">
+            <!-- START {{video.type}} video -->
+            <a
+              href="#"
+              class="lg-item"
+              data-lg-size="{{video.size}}"
+              data-pinterest-text="{{video.pinterest_prefix}} {{video.name}} at {{video.source}}"
+              data-tweet-text="{{video.tweet_prefix}} {{video.name}} at {{video.source}}"
+              data-src="{{video.source}}"
+              data-poster="{{video.poster.source}}"
+              data-sub-html="{{video.description|strip|strip_newlines}}">
+                <div class="lg-uno-video-icon">
+                  <img
+                    id="{{video.name | replace: ' ','_' | replace: '-','_' | downcase}}"
+                    class="{{video.poster.style}}"
+                    src="{{video.poster.source}}"
+                    aria-label="{{video.name}}">
+
+                   <span class="big-play-button"></span>
+              </div>
+            </a>
+            <!-- END {{video.type}} video -->
+            <div class="caption">{{video.caption.text}}</div>
+          </div>
+        </div>
+
+        {% elsif video.type == 'html5' %}
+        {% assign video_split = video.source | split: '.' %}
+        <div class="col-xl-{{grid.responsive.xl}} col-lg-{{grid.responsive.lg}} col-md-{{grid.responsive.md}} col-sm-{{grid.responsive.sm}} col-{{grid.responsive.xs}}" style="padding-bottom: {{grid.gutters}}px; padding-left: {{grid.gutters}}px;">
+          <div class="card {{video.caption.position}}">
+            <!-- START {{video.type}} video -->
+            <a
+              href="#"
+              class="lg-item"
+              data-lg-size="{{video.size}}"
+              data-pinterest-text="{{video.pinterest_prefix}} {{video.name}} at {{video.source}}"
+              data-tweet-text="{{video.tweet_prefix}} {{video.name}} at {{video.source}}"
+              data-src="{{video.source}}"
+              data-poster="{{grid.html5.poster_base_path}}/{{video.poster.source}}"
+              data-sub-html="{{video.description|strip|strip_newlines}}"
+              data-video='{
+                "source": [{
+                   "src":   "{{grid.html5.video_base_path}}/{{video.source}}",
+                   "type":  "video/{{video_split[1]}}"
+                }],
+                "attributes": {
+                   {% for attribute in grid.lightGallery.attributes %}
+                   {{attribute[0] | json}}:   {{attribute[1] | json}}{% if forloop.last %}{% else %},{% endif %}
+                   {% endfor %}
+                },
+                "tracks": [
+                  {% for track in video.tracks %}
+                  {
+                    {% for attribute in track %}
+                      {% if attribute[0] == 'track' %} {% continue %} {% endif %}
+                      {{attribute[0] | json}}: {{attribute[1] | json}}{% if forloop.last %}{% else %},{% endif %}
+                    {% endfor %}
+                  }{% if forloop.last %}{% else %},{% endif %}
+                  {% endfor %}
+                ]
+              }'>
+
+              <div class="lg-uno-video-icon">
+                <img
+                  id="{{video.name | replace: ' ','_' | replace: '-','_' | downcase}}"
+                  class="{{video.poster.style}}"
+                  src="{{grid.html5.poster_base_path}}/{{video.poster.source}}"
+                  aria-label="{{video.name}}">
+
+                  <span class="big-play-button"></span>
+              </div>
+
+            </a>
+            <!-- END {{video.type}} video -->
+            <div class="caption">{{video.caption.text}}</div>
+          </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+     <!-- END Video Grid -->
+    {% endif %}
+
+    {% endif %} {% endfor %}
+    <!-- [INFO   ] [~/assets/data/masonry.html                    ]  [END collecting all grid items] -->
+  </body>
+</html>
+{%- endcapture -%}
+
+{% comment %} Beautify|Compress page
+-------------------------------------------------------------------------------- {% endcomment %}
+{%- if production -%}
+  {% capture _LINE_FEED %}{% endcapture %}{% if site.compress_html.ignore.envs contains jekyll.environment %}{{ cache | strip_html_comments }}{% else %}{% capture _content %}{{ cache | strip_html_comments }}{% endcapture %}{% assign _profile = site.compress_html.profile %}{% if site.compress_html.endings == "all" %}{% assign _endings = "html head body li dt dd p rt rp optgroup option colgroup caption thead tbody tfoot tr td th" | split: " " %}{% else %}{% assign _endings = site.compress_html.endings %}{% endif %}{% for _element in _endings %}{% capture _END %}</{{ _element }}>{% endcapture %}{% assign _content = _content | remove: _END %}{% endfor %}{% if _profile and _endings %}{% assign _profile_endings = _content | size | plus: 1 %}{% endif %}{% for _element in site.compress_html.startings %}{% capture _start %}<{{ _element }}>{% endcapture %}{% assign _content = _content | remove: _start %}{% endfor %}{% if _profile and site.compress_html.startings %}{% assign _profile_startings = _content | size | plus: 1 %}{% endif %}{% if site.compress_html.comments == "all" %}{% assign _comments = "<!-- -->" | split: " " %}{% else %}{% assign _comments = site.compress_html.comments %}{% endif %}{% if _comments.size == 2 %}{% capture _comment_befores %}.{{ _content }}{% endcapture %}{% assign _comment_befores = _comment_befores | split: _comments.first %}{% for _comment_before in _comment_befores %}{% if forloop.first %}{% continue %}{% endif %}{% capture _comment_outside %}{% if _carry %}{{ _comments.first }}{% endif %}{{ _comment_before }}{% endcapture %}{% capture _comment %}{% unless _carry %}{{ _comments.first }}{% endunless %}{{ _comment_outside | split: _comments.last | first }}{% if _comment_outside contains _comments.last %}{{ _comments.last }}{% assign _carry = false %}{% else %}{% assign _carry = true %}{% endif %}{% endcapture %}{% assign _content = _content | remove_first: _comment %}{% endfor %}{% if _profile %}{% assign _profile_comments = _content | size | plus: 1 %}{% endif %}{% endif %}{% assign _pre_befores = _content | split: "<pre" %}{% assign _content = "" %}{% for _pre_before in _pre_befores %}{% assign _pres = _pre_before | split: "</pre>" %}{% assign _pres_after = "" %}{% if _pres.size != 0 %}{% if site.compress_html.blanklines %}{% assign _lines = _pres.last | split: _LINE_FEED %}{% capture _pres_after %}{% for _line in _lines %}{% assign _trimmed = _line | split: " " | join: " " %}{% if _trimmed != empty or forloop.last %}{% unless forloop.first %}{{ _LINE_FEED }}{% endunless %}{{ _line }}{% endif %}{% endfor %}{% endcapture %}{% else %}{% assign _pres_after = _pres.last | split: " " | join: " " %}{% endif %}{% endif %}{% capture _content %}{{ _content }}{% if _pre_before contains "</pre>" %}<pre{{ _pres.first }}</pre>{% endif %}{% unless _pre_before contains "</pre>" and _pres.size == 1 %}{{ _pres_after }}{% endunless %}{% endcapture %}{% endfor %}{% if _profile %}{% assign _profile_collapse = _content | size | plus: 1 %}{% endif %}{% if site.compress_html.clippings == "all" %}{% assign _clippings = "html head title base link meta style body article section nav aside h1 h2 h3 h4 h5 h6 hgroup header footer address p hr blockquote ol ul li dl dt dd figure figcaption main div table caption colgroup col tbody thead tfoot tr td th" | split: " " %}{% else %}{% assign _clippings = site.compress_html.clippings %}{% endif %}{% for _element in _clippings %}{% assign _edges = " <e;<e; </e>;</e>;</e> ;</e>" | replace: "e", _element | split: ";" %}{% assign _content = _content | replace: _edges[0], _edges[1] | replace: _edges[2], _edges[3] | replace: _edges[4], _edges[5] %}{% endfor %}{% if _profile and _clippings %}{% assign _profile_clippings = _content | size | plus: 1 %}{% endif %}{{ _content }}{% if _profile %} <table id="compress_html_profile_{{ site.time | date: "%Y%m%d" }}" class="compress_html_profile"> <thead> <tr> <td>Step <td>Bytes <tbody> <tr> <td>raw <td>{{ cache | strip_html_comments | size }}{% if _profile_endings %} <tr> <td>endings <td>{{ _profile_endings }}{% endif %}{% if _profile_startings %} <tr> <td>startings <td>{{ _profile_startings }}{% endif %}{% if _profile_comments %} <tr> <td>comments <td>{{ _profile_comments }}{% endif %}{% if _profile_collapse %} <tr> <td>collapse <td>{{ _profile_collapse }}{% endif %}{% if _profile_clippings %} <tr> <td>clippings <td>{{ _profile_clippings }}{% endif %} </table>{% endif %}{% endif %}
+{%- else -%}
+  {{cache|pretty_print}}
+{%- endif -%}
+
+{% comment %} Reset page cache
+-------------------------------------------------------------------------------- {% endcomment %}
+{%- assign cache = false -%}

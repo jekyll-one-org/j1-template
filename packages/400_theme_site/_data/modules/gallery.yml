@@ -295,7 +295,7 @@ settings:
                   forward:                15
                   backward:               15
 
-              zoomPlugin:
+              zoomButtonsPlugin:
                 enabled:                true
                 options:
                   moveX:                0
@@ -391,7 +391,6 @@ settings:
 
           muted:                        false
           preload:                      true
-#         videoStart:                   ["00:00:30", "00:01:30"]                # start time (hh:mm:ss) for [video1, video2]
 
           controls:                     true
 
@@ -444,6 +443,7 @@ settings:
 
           name:                         Peck Pocketed
           type:                         html5
+          api:                          videojs                                 # jadams !!!
           size:                         1280-720
           source:                       peck_pocketed.mp4
           poster_image:                 peck_pocketed.jpg
@@ -474,6 +474,7 @@ settings:
 
           name:                         Rollin Wild
           type:                         html5
+          api:                          videojs                                 # jadams !!!
           size:                         1280-720
           source:                       rolling_wild.mp4
           poster_image:                 rolling_wild.jpg
@@ -858,7 +859,7 @@ settings:
           alignThumbnails:              left
           animateThumb:                 true
           autoplayFirstVideo:           true
-          videojs:                      true
+          videojs:                      true                                    # jadams: !!!
           videojsTheme:                 vjs-theme-uno
 
         videojsOptions:
@@ -866,9 +867,14 @@ settings:
 
           muted:                        false
           preload:                      true
-#         videoStart:                   ["00:00:30", "00:01:30"]                  # start time (hh:mm:ss) for [video1, video2]
 
           controls:                     true
+
+          hotKeysPlugin:
+            enabled:                    true
+            options:
+              volumeStep:               0.2          
+
           controlBar:
             playbackRates:              [0.25, 0.5, 1, 1.5, 2]
             remainingTimeDisplay:       true
@@ -877,26 +883,21 @@ settings:
             volumePanel:
               inline:                   false
 
-          # hotKeysPlugin:
-          #   enabled:                  true
-          #   options:
-          #     volumeStep:             0.2
-          #
-          # skipButtonsPlugin:
-          #   enabled:                  true
-          #   options:
-          #     forward:                5
-          #     backward:               5
-          #     backwardIndex:          0
-          #     forwardIndex:           1
-          # 
-          # zoomPlugin:
-          #   enabled:                  true
-          #   options:
-          #     moveX:                  0
-          #     moveY:                  0
-          #     rotate:                 0
-          #     zoom:                   1
+            skipButtonsPlugin:
+              enabled:                  true
+              options:
+                forward:                5
+                backward:               5
+                backwardIndex:          0
+                forwardIndex:           1
+
+            zoomPlugin:
+              enabled:                  true
+              options:
+                moveX:                  0
+                moveY:                  0
+                rotate:                 0
+                zoom:                   1
 
       # ------------------------------------------------------------------------
       # CSS filter options
@@ -918,6 +919,7 @@ settings:
 
           name:                         Peck Pocketed
           type:                         html5
+          api:                          videojs                                 # jadams !!!
           size:                         1280-720
           source:                       peck_pocketed.mp4
           poster_image:                 peck_pocketed.jpg
@@ -933,6 +935,7 @@ settings:
         
           name:                         Rollin Wild
           type:                         html5
+          api:                          videojs                                 # jadams !!!
           size:                         1280-720
           source:                       rolling_wild.mp4
           poster_image:                 rolling_wild.jpg

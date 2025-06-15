@@ -846,18 +846,13 @@
             // jadams, 2025-06-13: Fixed by adding missing data-src elements in assets/data/gallery_app.html
             // if (!src || src === '#') {
             if (!src) {
-                if (isHTML5VIdeo) {
-                    return {
-                        html5: true,
-                    };
-                } else {
-                    console.error('lightGallery :- data-src is not provided on slide item ' +
-                        (index + 1) +
-                        '. Please make sure the selector property is properly configured. More info - https://www.lightgalleryjs.com/demos/html-markup/');
-                    return;
-                }
+                console.error('lightGallery :- data-src is not provided on slide item ' +
+                    (index + 1) +
+                    '. Please make sure the selector property is properly configured. More info - https://www.lightgalleryjs.com/demos/html-markup/');
+                return;
             }
 
+            var html5       = src.includes('.mp4');
             var youtube     = src.match(/\/\/(?:www\.)?youtu(?:\.be|be\.com|be-nocookie\.com)\/(?:watch\?v=|embed\/)?([a-z0-9\-\_\%]+)([\&|?][\S]*)*/i);
             var vimeo       = src.match(/\/\/(?:www\.)?(?:player\.)?vimeo.com\/(?:video\/)?([0-9a-z\-_]+)(.*)?/i);
 
@@ -866,7 +861,12 @@
             var tiktoc      = src.match(/\/\/(?:www\.)?tiktok.com\/embed\/?([0-9a-z\-_]+)(.*)?/);
             var wistia      = src.match(/\/\/(?:fast\.)?(wistia\.com|wi\.st)\/(medias|embed)\/([0-9a-z\-_]+)(.*)/);
 
-            if (youtube) {
+            if (html5) {
+                return {
+                    html5: html5,
+                };
+            } 
+            else  if (youtube) {
                 return {
                     youtube: youtube,
                 };

@@ -852,13 +852,12 @@ body.vjs-pip-window .video-js {
   right: 1em;
 }
 
-.vjs-menu-button-popup .vjs-menu .vjs-menu-content {
-  background-color: #2B333F;
-  background-color: rgba(43, 51, 63, 0.7);
+.vjs-menu-button-popup .vjs-menu .vjs-menu-content { 
   position: absolute;
   width: 100%;
   bottom: 1.5em;
   max-height: 15em;
+  background-color: rgba(43, 51, 63, 0.7);
 }
 
 .vjs-layout-tiny .vjs-menu-button-popup .vjs-menu .vjs-menu-content,
