@@ -32,7 +32,6 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
     const Plugin    = videojs.getPlugin('plugin');
     const Component = videojs.getComponent('Component');
 
-//  const version   = '1.2.0';
     const version   = '1.3.6';
     const ZOOM_SALT = 0.2;
 
