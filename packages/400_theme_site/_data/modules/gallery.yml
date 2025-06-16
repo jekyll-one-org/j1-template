@@ -396,6 +396,7 @@ settings:
 
           hotKeysPlugin:
             enabled:                    true
+
             options:
               volumeStep:               0.2          
 
@@ -409,6 +410,7 @@ settings:
 
             skipButtonsPlugin:
               enabled:                  true
+
               options:
                 forward:                5
                 backward:               5
@@ -417,6 +419,12 @@ settings:
 
             zoomPlugin:
               enabled:                  true
+
+              showZoom:                 true
+              showMove:                 false
+              showRotate:               false
+              gestureHandler:           false
+
               options:
                 moveX:                  0
                 moveY:                  0

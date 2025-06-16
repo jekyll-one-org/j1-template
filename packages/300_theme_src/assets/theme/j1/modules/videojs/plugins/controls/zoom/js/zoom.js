@@ -32,14 +32,20 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
     const Plugin    = videojs.getPlugin('plugin');
     const Component = videojs.getComponent('Component');
 
-    const version   = '1.2.0';
+//  const version   = '1.2.0';
+    const version   = '1.3.6';
     const ZOOM_SALT = 0.2;
+
     const DEFAULT_OPTIONS = {
-        zoom:       1,
-        moveX:      0,
-        moveY:      0,
-        flip:       "+",
-        rotate:     0
+        zoom:           1,
+        moveX:          0,
+        moveY:          0,
+        flip:           "+",
+        rotate:         0,
+        showZoom:       true,
+        showMove:       true,
+        showRotate:     true,
+        gestureHandler: false
     };
 
     class Observer {
@@ -72,6 +78,69 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
         }
     } // END class Observer
 
+    class ZoomGesture extends Component {
+
+        constructor(player, options) {
+            super(player, options);
+            this._enabled       = false;
+            this._observer      = Observer.getInstance();
+            this.pointers       = {};
+            this.player         = player.el();
+            this.state          = options.state;
+            this.function       = new ZoomFunction(player, options);
+
+            player.on("loadstart", () => {
+                this.gesture();
+            });
+
+            this._observer.subscribe('plugin', state => {
+                this._enabled = state.enabled;
+            });
+        } // END constructor
+
+        // =====================================================================
+        // methods
+        // =====================================================================
+
+        gesture() {
+            this.player.addEventListener("pointerdown", event => {
+                this.pointers[event.pointerId] = event;
+            });
+
+            this.player.addEventListener("pointerup", event => {
+                delete this.pointers[event.pointerId];
+                this.player.firstChild.style.pointerEvents = "";
+            });
+
+            this.player.addEventListener("pointerleave", event => {
+                delete this.pointers[event.pointerId];
+            });
+
+            this.player.addEventListener("pointermove", event => {
+                if (!this._enabled) return;
+                if (!Object.keys(this.pointers).length) return;
+                this.player.firstChild.style.pointerEvents = "none";
+                const pointer   = this.pointers[event.pointerId];
+                const moveX     = event.clientX - pointer.clientX;
+                const moveY     = event.clientY - pointer.clientY;
+
+                this.pointers[event.pointerId] = event;
+                this.function.moveY(moveX);
+                this.function.moveX(moveY);
+            });
+
+            this.player.addEventListener("wheel", event => {
+                event.preventDefault();
+                event.stopPropagation();
+                if (!this._enabled) return;
+                this.function.zoomHandler(-1e-2 * event.deltaY);
+                this.function.moveY(0);
+                this.function.moveX(0);
+            });
+        }
+
+    } // END class ZoomGesture
+
     class ZoomFunction {
         constructor(player, options) {
             this.player = player.el();
@@ -99,10 +168,12 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
             this.state.saltMoveX = this.player.offsetWidth * ZOOM_SALT / 2;
             this.state.saltMoveY = this.player.offsetHeight * ZOOM_SALT / 2;
         }
+
         _zoom() {
             this.plugin.zoom(this.state.zoom);
             this.plugin.listeners.change(this.state);
         }
+
         zoomIn() {
             if (this.state.zoom >= 9.8) return;
             this.state.moveCount++;
@@ -110,6 +181,7 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
             this.plugin.zoom(this.state.zoom);
             this.plugin.listeners.change(this.state);
         }
+
         zoomOut() {
             if (this.state.zoom <= 1) return;
             this.state.moveCount--;
@@ -118,10 +190,12 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
             this.plugin.move(0, 0);
             this.plugin.listeners.change(this.state);
         }
+
         _move() {
             this.plugin.move(this.state.moveX, this.state.moveY);
             this.plugin.listeners.change(this.state);
         }
+
         moveUp() {
             const next = this.state.moveY + this.state.saltMoveY;
             const available = this.state.moveCount * this.state.saltMoveY;
@@ -130,6 +204,7 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
             this.state.moveY += this.state.saltMoveY;
             this._move();
         }
+
         moveDown() {
             const next = this.state.moveY - this.state.saltMoveY;
             const available = this.state.moveCount * this.state.saltMoveY;
@@ -138,6 +213,13 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
             this.state.moveY -= this.state.saltMoveY;
             this._move();
         }
+
+        moveX(salt) {
+            const available = this._getMoveYAvailable();
+            this.state.moveY = Math.max(-available, Math.min(available, this.state.moveY + salt));
+            this._move();
+        }
+
         reset() {
             this.state.zoom = 1;
             this.state.moveX = 0;
@@ -150,6 +232,7 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
             this.plugin.move(0, 0);
             this.plugin.listeners.change(this.state);
         }
+
         moveLeft() {
             const next = this.state.moveX + this.state.saltMoveX;
             const available = this.state.moveCount * this.state.saltMoveX;
@@ -158,6 +241,7 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
             this.state.moveX += this.state.saltMoveX;
             this._move();
         }
+
         moveRight() {
             const next = this.state.moveX - this.state.saltMoveX;
             const available = this.state.moveCount * this.state.saltMoveX;
@@ -166,10 +250,18 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
             this.state.moveX -= this.state.saltMoveX;
             this._move();
         }
+
+        moveY(salt) {
+            const available = this._getMoveXAvailable();
+            this.state.moveX = Math.max(-available, Math.min(available, this.state.moveX + salt));
+            this._move();
+        }
+
         _rotate() {
             this.plugin.rotate(this.state.rotate);
             this.plugin.listeners.change(this.state);
         }
+
         rotate() {
             this.state.rotate -= 90;
             if (this.state.rotate === -360) {
@@ -177,10 +269,12 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
             }
             this._rotate();
         }
+
         _flip() {
             this.plugin.flip(this.state.flip);
             this.plugin.listeners.change(this.state);
         }
+
         flip() {
             this.state.flip = this.state.flip === "+" ? "-" : "+";
             this._flip();
@@ -199,10 +293,81 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
         // =====================================================================
 
         getContent() {
-        return this.content;
+            return this.content;
         }
 
         _createContent() {
+            const zoom = `
+                <div class="vjs-zoom-buttons__container--row">
+                    <button id="vjs-zoom-buttons__zoomIn" class="vjs-zoom-buttons__button">
+                        <span class="vjs-zoom-icons">add</span>
+                    </button>
+                    <span class="vjs-zoom-buttons__space"></span>
+                    <button id="vjs-zoom-buttons__zoomOut" class="vjs-zoom-buttons__button">
+                        <span class="vjs-zoom-icons">remove</span>
+                    </button>
+                </div>
+            `;
+
+            const move = `
+                <div class="vjs-zoom-buttons__container--row">
+                    <span class="vjs-zoom-buttons__space"></span>
+                    <button id="vjs-zoom-buttons__moveUp" class="vjs-zoom-buttons__button">
+                        <span class="vjs-zoom-icons">arrow_drop_up</span>
+                    </button>
+                    <span class="vjs-zoom-buttons__space"></span>
+                </div>
+                <div class="vjs-zoom-buttons__container--row">
+                    <button id="vjs-zoom-buttons__moveLeft" class="vjs-zoom-buttons__button">
+                        <span class="vjs-zoom-icons">arrow_left</span>
+                    </button>
+                    <button id="vjs-zoom-buttons__reset" class="vjs-zoom-buttons__button">
+                        <span class="vjs-zoom-icons">fiber_manual_record</span>
+                    </button>
+                    <button id="vjs-zoom-buttons__moveRight" class="vjs-zoom-buttons__button">
+                        <span class="vjs-zoom-icons">arrow_right</span>
+                    </button>
+                </div>
+                <div class="vjs-zoom-buttons__container--row">
+                    <span class="vjs-zoom-buttons__space"></span>
+                    <button id="vjs-zoom-buttons__moveDown" class="vjs-zoom-buttons__button">
+                        <span class="vjs-zoom-icons">arrow_drop_down</span>
+                    </button>
+                    <span class="vjs-zoom-buttons__space"></span>
+                </div>
+            `;
+
+            const rotate = `
+                <div class="vjs-zoom-buttons__container--row">
+                    <button id="vjs-zoom-buttons__rotate" class="vjs-zoom-buttons__button">
+                        <span class="vjs-zoom-icons">rotate_left</span>
+                    </button>
+                    <span class="vjs-zoom-buttons__space"></span>
+                    <button id="vjs-zoom-buttons__flip" class="vjs-zoom-buttons__button">
+                        <span class="vjs-zoom-icons">swap_horiz</span>
+                    </button>
+                </div>
+            `;
+
+            var mergeOptions = (videojs.VERSION <= "7.10.0") ? videojs.mergeOptions : videojs.obj.merge
+            var options  = mergeOptions(DEFAULT_OPTIONS, options);
+            this.content = '';
+
+            if (options.showZoom) {
+                this.content += zoom;
+            }
+
+            if (options.showMove) {
+                this.content += move;
+            }
+
+            if (options.showRotate) {
+                this.content += rotate;
+            }
+
+        } // END _createContent
+
+        _createContent_old() {
             this.content = `
                 <div class="vjs-zoom-buttons__container--row">
                     <button id="vjs-zoom-buttons__zoomIn" class="vjs-zoom-buttons__button">
@@ -371,13 +536,20 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
                 player.getChild('ControlBar').addChild('ZoomButton');
 
                 player.addChild('ZoomModal', {
-                plugin: this,
-                state: this.state
+                    plugin: this,
+                    state: this.state
+                });
+
+                player.addChild('ZoomGesture', {
+                    plugin: this,
+                    state: this.state
                 });
 
                 this._observer = Observer.getInstance();
+                this._observer.notify("plugin", { enabled: this._enabled });
                 this._setTransform();
-        } // END constructor
+
+            } // END constructor
 
         // =====================================================================
         // methods
@@ -435,6 +607,7 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
     // register components|plugin
     //
     videojs.registerComponent('ZoomModal', ZoomModal);
+    videojs.registerComponent('ZoomGesture', ZoomGesture);
     videojs.registerComponent('ZoomButton', ZoomButton);
     videojs.registerPlugin('zoomButtons', zoomButtons);
 
