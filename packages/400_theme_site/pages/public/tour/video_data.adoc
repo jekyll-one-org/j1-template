@@ -66,7 +66,8 @@ resource_options:
 // Attribute settings for section control
 //
 :ytp_audio:                             false
-:ytp_rhythm:                            true
+:ytp_best_2024:                         false
+:ytp_rhythm:                            false
 :ytp_sky_elements:                      true
 :dm_video:                              false
 :vm_video:                              true
@@ -133,7 +134,7 @@ without loading *external players*.
 ++++
 <div class="video-title">
   <i class="mdib mdib-video mdib-24px mr-2"></i>
-  Peck Pocketed · MP4 Video
+  Peck Pocketed · Local Video over HTML5 Video
 </div>
 ++++
 
@@ -141,14 +142,14 @@ video::/assets/video//html5/peck_pocketed.mp4[poster="/assets/video/poster/html5
 
 ifeval::[{ytp_audio} == true]
 [role="mt-5"]
-== AmplitudeJS Video (Youtube)
+== AmplitudeJS (over YouTube Video)
 
 The example below demonstrates playing only the *Audio* track from YouTube
 Video using an AmplitudJS player. The J1 template uses the video *plugin* ytp
 to extend the native functionality of the AmplitudeJS API to playback YouTube
 files for the audio part.
 
-[role="mt-4 mb-5"]
+[role="mt-4 mb-4"]
 [CAUTION]
 ====
 Playing audio tracks is currently supported only for videos from YouTube (YT).
@@ -157,8 +158,8 @@ player buttons and controls to manage a *playlist* of videos the same as known
 for native audio files.
 ====
 
-.Manon Mélodie · TuneCore 2024
-amplitude::manon_melodie_yt_large[role="mt-4 mb-4"]
+.Manon Mélodie · YouTube 2025
+amplitude::manon_melodie_yt_large[role="mb-4"]
 
 [NOTE]
 ====
@@ -169,7 +170,7 @@ endif::[]
 
 
 [role="mt-5"]
-== J1 VideoJS
+== VideoJS
 
 VideoJS is a *free-to-use* open-source JavaScript framework for building
 custom video players for the web. Implementing VideoJS for the J1 Template
@@ -187,8 +188,11 @@ better user experience.
 VideoJS provides a flexible and customizable platform for displaying and
 controlling MPEG 4 video content on websites and web applications.
 
-.Rolling Wild · MP4 Video
-videojs::/assets/video//html5/rolling_wild.mp4[poster="/assets/video/poster/html5/rolling_wild.jpg", opts="" role="mb-5"]
+.Peck Pocketed · Local Video over VideoJS
+videojs::/assets/video//html5/peck_pocketed.mp4[poster="/assets/video/poster/html5/peck_pocketed.jpg", opts="" role="mb-5"]
+
+// .Rolling Wild · MP4 Video (over VideoJS)
+// videojs::/assets/video//html5/rolling_wild.mp4[poster="/assets/video/poster/html5/rolling_wild.jpg", opts="" role="mb-5"]
 
 [role="mt-4"]
 === YouTube
@@ -197,13 +201,15 @@ YouTube is a popular online video-sharing platform that allows users to
 upload, view, share, and comment on videos. The platform provides services
 for people and organizations to publish various video content.
 
+ifeval::[{ytp_best_2024} == true]
 The season 19 (2024) of _America's Got Talent_ (AGT) is special. In the long
 history of AGT, only a few *Goldern Buzzers* were given. In 2024, this is
 different - for good reasons. See a compilation on YouTube of the very best
 auditions ever.
 
-.Best Auditions · AGT 2024 
+.Best Auditions · AGT 2024
 youtube::4VSBJU52UvM[poster="//img.youtube.com/vi/4VSBJU52UvM/maxresdefault.jpg" role="mb-4"]
+endif::[]
 
 ifeval::[{ytp_rhythm} == true]
 Dog Dancing is presented quite often on stage. Like AGT season 18, Adrian Stoica
@@ -211,7 +217,7 @@ presented his dog Hurricane https://www.youtube.com/watch?v=ENGRnUN1UKQ)[Youtube
 But see Roni Sagi - an Israeli dog trainer - and her dog Rhythm. This is Dog
 Traing the next level.
 
-.Roni Sagi & Rhythm, ALL Performances · AGT 2024 
+.Roni Sagi & Rhythm · AGT 2024
 youtube::1J2qz6B-PFY[poster="//img.youtube.com/vi/1J2qz6B-PFY/maxresdefault.jpg" role="mb-4"]
 endif::[]
 
@@ -220,7 +226,7 @@ Sky Elements uses the night sky as a canvas on which anything is possible.
 A large group of Drones is painting lights in the sky to reflect the most
 captivating narratives. 
 
-.Sky Elements, ALL Performances · AGT 2024 
+.Sky Elements · AGT 2024
 youtube::cN8IrZUhPtc[poster="//img.youtube.com/vi/cN8IrZUhPtc/maxresdefault.jpg" role="mb-4"]
 endif::[]
 
