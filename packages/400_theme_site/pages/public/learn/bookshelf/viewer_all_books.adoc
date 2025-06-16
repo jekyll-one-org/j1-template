@@ -26,7 +26,7 @@ image:
 regenerate:                             false
 permalink:                              /pages/public/learn/bookshelf/viewer_all_books/
 
-resources:                              [ masonry, rouge ]
+resources:                              [ masonry ]
 resource_options:
   - attic:
       slides:

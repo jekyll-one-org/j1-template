@@ -1694,7 +1694,7 @@
             element.__slideVideoInfo = utils.isVideo(element.src, !!element.video, index);
 
             // failsafe check
-            if (element.__slideVideoInfo.youtube && !element.poster) {
+            if (element.__slideVideoInfo !== undefined && element.__slideVideoInfo.youtube && !element.poster) {
               element.poster = `//img.youtube.com/vi/${element.__slideVideoInfo.youtube[1]}/maxresdefault.jpg`;
             } // END if
           }); // END for

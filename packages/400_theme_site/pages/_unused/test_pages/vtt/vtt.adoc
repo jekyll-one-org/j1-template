@@ -26,7 +26,7 @@ regenerate:                             false
 personalization:                        false
 permalink:                              /pages/public/learn/vtt/
 
-resources:                              [ animate, lightgallery, gallery, videojs ]
+resources:                              [ lightgallery, gallery, videojs ]
 resource_options:
   - attic:
       slides:

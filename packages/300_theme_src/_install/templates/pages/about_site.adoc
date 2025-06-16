@@ -24,7 +24,7 @@ comments:                               false
 regenerate:                             false
 permalink:                              /pages/public/about/starter/
 
-resources:                              [ animate ]
+resources:                              [ ]
 resource_options:
   - attic:
       padding_top:                      600

@@ -224,7 +224,6 @@
 
     }; // END loadVtt
 
-
     // jadams
     // -------------------------------------------------------------------------
     // vjsProcessExtendedButtonsAndPlugins
@@ -238,15 +237,17 @@
             trackSrc;
 
         dependency_met_module_ready = setInterval (() => {            
-            var isModuleInitialised = (j1.adapter.gallery.getState() === 'finished') ? true : false;
-            var isVideojsOptions    = (isEmpty(vjsObject.settings.videojsOptions)) ? false : true;
+            var isModuleInitialised  = (j1.adapter.gallery.getState() === 'finished') ? true : false;
+            var isVideojsOptions     = (isEmpty(vjsObject.settings.videojsOptions)) ? false : true;
 
             if (isModuleInitialised && isVideojsOptions) {
-                var videoData = { tracks: false };
+                var videoData             = { tracks: false };
                 var playbackRatesDefaults = vjsOptions.playbackRates.values;
-                var chapterTracksEnabled  = false;
 
-                var hotKeysPluginDefaults    = {
+                // disable chapterTracks by default
+                videojsPlayer.chapterTracksEnabled = false;
+
+                var hotKeysPluginDefaults = {
                     volumeStep:                 vjsOptions.plugins.hotKeys.volumeStep,
                     seekStep:                   vjsOptions.plugins.hotKeys.seekStep,
                     enableMute:                 vjsOptions.plugins.hotKeys.enableMute,
@@ -262,7 +263,7 @@
                     skipInitialFocus:           vjsOptions.plugins.hotKeys.skipInitialFocus
                 };
 
-                var skipButtonsPluginDefaults  = {
+                var skipButtonsPluginDefaults = {
                     backward:                     vjsOptions.plugins.skipButtons.backward,
                     forward:                      vjsOptions.plugins.skipButtons.forward,
                     backwardIndex:                0,
@@ -423,24 +424,28 @@
 
                     } // END if zoom Plugin enabled
 
-                    // chapter track processing, only available for VideoJS
+                    // chapter tracks only available for VideoJS (local video/mp4)
                     // ---------------------------------------------------------
                     if (vjsObject.core.galleryItems[vjsObject.core.index].video !== undefined) {
                         videoData = JSON.parse(vjsObject.core.galleryItems[vjsObject.core.index].video);
                     }
 
-                    // chapter tracks only available for VideoJS (local video/mp4)
+                    // load tracks
+                    // TODO: chapterTracksEnabled needs to be indivialized
+                    // per player
                     // ---------------------------------------------------------
                     if (videoData.tracks && videoData.tracks.length > 0) {
                         for (var i=0; i<videoData.tracks.length; i++) {
                             if (videoData.tracks[i].kind == 'chapters') {
                                 trackSrc = videoData.tracks[i].src;
-                                chapterTracksEnabled = true;
+                                videojsPlayer.chapterTracksEnabled = true;
                             }
                         }
-                    } // END if videoData tracks
+                    } // END load tracks
 
-                    if (chapterTracksEnabled) {
+                    // process (chapter) tracks if tracks available
+                    // ---------------------------------------------------------                    
+                    if (videojsPlayer.chapterTracksEnabled) {
                         var parser  = new WebVTTParser();
                         var markers = [];
 
@@ -459,17 +464,24 @@
                         // -----------------------------------------------------
                         loadVtt(trackSrc, cb_load);
 
-                        // add chapter tracks on play
+                        // add chapter tracks on player is playing
+                        // -----------------------------------------------------
                         videojsPlayer.on("play", function() {
                             videojsPlayer.currentTime(videoStart);
 
                             var total    = videojsPlayer.duration();
                             var timeline = $(videojsPlayer.controlBar.progressControl.children_[0].el_);
 
+                            // remove old|previous markers
+                            timeline.find('.vjs-chapter-marker').remove();
+
                             // add chapter tracks on timeline (delayed)
                             setTimeout (function() {
                                 var markers_loaded = setInterval (function () {
                                     if (markers.length) {
+                                        // make sure, that previous markers deleted
+                                        timeline.find('.vjs-chapter-marker').remove();
+
                                         for (var i=0; i<markers.length; i++) {
                                             var left = (markers[i].time / total * 100) + '%';
                                             var time = markers[i].time;
@@ -484,24 +496,22 @@
                                         clearInterval(markers_loaded);
                                     }
                                 }, 10); // END markers_loaded
-                            }, 1000 ); // END setTimeout
+                            }, 100 ); // END setTimeout
 
-                        }); // END on "play"
+                        });
+                    } else {
+                        // remove chapter tracks on playing
+                        // -----------------------------------------------------                     
+                        videojsPlayer.on("play", function() {
+                            videojsPlayer.chapterTracksEnabled = false;
+                            var timeline = $(videojsPlayer.controlBar.progressControl.children_[0].el_);
 
-                    } // END if chapterTracksEnabled
+                            // remove existing markers
+                            timeline.find('.vjs-chapter-marker').remove();
 
-                    // move the durationDisplay AFTER the progressControlSilder
-                    const playbackRateButton = vjsPlayerControlBar.playbackRateMenuButton;
-                    const zoomButton = vjsPlayerControlBar.ZoomButton;
+                        });
 
-                    if (playbackRateButton) {
-                        var bla = 1;
-                    }                    
-
-                    if (zoomButton) {
-                        var bla = 2;
-                        // customProgressContainer.el().appendChild(durationDisplay.el());
-                    }
+                    } // END remove chapter tracks
 
                 } // END if videojsOptions
 

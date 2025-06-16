@@ -26,7 +26,7 @@ fab_menu_id:                            default
 regenerate:                             false
 permalink:                              /pages/public/getImageSizes/
 
-resources:                              [ animate, comments ]
+resources:                              [ comments ]
 resource_options:
   - attic:
       slides:

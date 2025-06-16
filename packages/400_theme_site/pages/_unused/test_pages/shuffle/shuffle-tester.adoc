@@ -16,7 +16,7 @@ fab_menu_id:                            open_toc
 permalink:                              /pages/public/learn/shuffle-bs4-grid-filters/
 regenerate:                             false
 
-resources:                              [ animate, clipboard, shuffle, rouge ]
+resources:                              [ clipboard, shuffle, rouge ]
 resource_options:
   - attic:
       padding_top:                      400

@@ -23,7 +23,7 @@ fab_menu_id:                            default
 permalink:                              /pages/public/learn/particles_tester/
 regenerate:                             false
 
-resources:                              [ animate, comments, particles ]
+resources:                              [ comments, particles ]
 resource_options:
   - attic:
       padding_top:                      400

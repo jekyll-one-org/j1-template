@@ -22,7 +22,7 @@ image:
 regenerate:                             false
 permalink:                              /pages/public/learn/style_switch/
 
-resources:                              [ animate, clipboard, rouge ]
+resources:                              [ clipboard, rouge ]
 resource_options:
   - attic:
       slides:

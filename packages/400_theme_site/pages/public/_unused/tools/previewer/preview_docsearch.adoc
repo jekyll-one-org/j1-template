@@ -28,7 +28,7 @@ personalization:                        true
 regenerate:                             false
 permalink:                              /pages/public/tools/previewer/docsearch/
 
-resources:                              [ animate, iframer, rouge ]
+resources:                              [ iframer, rouge ]
 resource_options:
   - attic:
       slides:

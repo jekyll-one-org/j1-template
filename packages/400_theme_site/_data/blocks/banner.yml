@@ -104,7 +104,7 @@ settings:
               width:                    12
               type:                     text
               position:                 left                                    # left | center
-              title:                    J1 Template
+              title:                    Jekyll
               tagline:                  <b>create modern websites</b>
               translate_description:    notranslate                             # translate|notranslate
               description_properties:   mt-3 mb-3

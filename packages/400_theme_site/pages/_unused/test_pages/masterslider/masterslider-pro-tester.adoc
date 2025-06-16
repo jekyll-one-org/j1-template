@@ -16,7 +16,7 @@ fab_menu_id:                            open_toc
 permalink:                              /pages/public/learn/masterslider-pro/
 regenerate:                             false
 
-resources:                              [ animate, lightbox, lightGallery, mastersliderpro, rouge ]
+resources:                              [ lightbox, lightGallery, mastersliderpro, rouge ]
 resource_options:
   - attic:
       padding_top:                      400

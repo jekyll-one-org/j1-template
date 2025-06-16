@@ -69,7 +69,7 @@ resource_options:
 :ytp_best_2024:                         false
 :ytp_rhythm:                            false
 :ytp_sky_elements:                      true
-:dm_video:                              false
+:dm_video:                              true
 :vm_video:                              true
 :masonry:                               true
 :lightGallery:                          false

@@ -25,7 +25,7 @@ image:
 regenerate:                             false
 permalink:                              /pages/public/tools/previewer/gad/
 
-resources:                              [ animate, clipboard, rouge ]
+resources:                              [ clipboard, rouge ]
 resource_options:
   - attic:
       slides:
@@ -270,7 +270,7 @@ tagline:                                Preview  Advertising
 
 ...
 
-resources:                              [ animate, clipboard, rouge ]
+resources:                              [ clipboard, rouge ]
 
 ...
 ----

@@ -381,7 +381,7 @@ lanes:
   # ----------------------------------------------------------------------------
   #
   - lane:
-      enabled:                          true
+      enabled:                          false
       id:                               banner_home_parallax
       region:                           body-main
       type:                             async

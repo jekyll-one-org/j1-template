@@ -17,7 +17,7 @@ fab_menu_id:                            default
 permalink:                              /pages/public/learn/caption_tester/
 regenerate:                             false
 
-resources:                              [ animate, clipboard, lightbox, rouge ]
+resources:                              [ clipboard, lightbox, rouge ]
 resource_options:
   - attic:
       slides:

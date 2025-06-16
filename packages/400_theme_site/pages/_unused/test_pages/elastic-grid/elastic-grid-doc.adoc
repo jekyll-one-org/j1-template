@@ -16,7 +16,7 @@ fab_menu_id:                            open_toc
 permalink:                              /pages/public/learn/egrid_doc/
 regenerate:                             false
 
-resources:                              [ animate, clipboard, elasticgrid, rouge ]
+resources:                              [ clipboard, elasticgrid, rouge ]
 resource_options:
   - attic:
       padding_top:                      400^^

@@ -16,7 +16,7 @@ fab_menu_id:                            open_toc
 permalink:                              /pages/public/learn/masterslider-lite/
 regenerate:                             false
 
-resources:                              [ animate, masterslider ]
+resources:                              [ masterslider ]
 resource_options:
   - attic:
       padding_top:                      400

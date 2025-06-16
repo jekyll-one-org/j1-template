@@ -1,0 +1,175 @@
+Wie kann man for VideoJS Player individuelle je Player individuelle Kapitel-Marken
+in die progressControlBar setzen? Die derzeitige Lösung macht die Marker für
+alle Player sichtbar.
+
+Wie ist der aktuelle Jaavascript Code zu ändern?
+
+Jaavascript Code
+
+// chapter track processing, only available for VideoJS
+// ---------------------------------------------------------
+if (vjsObject.core.galleryItems[vjsObject.core.index].video !== undefined) {
+	videoData = JSON.parse(vjsObject.core.galleryItems[vjsObject.core.index].video);
+}
+
+// chapter tracks only available for VideoJS (local video/mp4)
+// ---------------------------------------------------------
+if (videoData.tracks && videoData.tracks.length > 0) {
+	for (var i=0; i<videoData.tracks.length; i++) {
+		if (videoData.tracks[i].kind == 'chapters') {
+			trackSrc = videoData.tracks[i].src;
+			chapterTracksEnabled = true;
+		}
+	}
+} // END if videoData tracks
+
+if (chapterTracksEnabled) {
+	var parser  = new WebVTTParser();
+	var markers = [];
+
+	function cb_load (data /* ,textStatus, jqXHR */ ) {
+		var tree = parser.parse(data, 'metadata');
+		var marker;
+
+		// add chapter tracks to markers array
+		for (var i=0; i<tree.cues.length; i++) {
+			marker = { time: tree.cues[i].startTime, label: tree.cues[i].text };
+			markers.push(marker);
+		}
+	}; // END function cb_load 
+
+	// load chapter tracks
+	// -----------------------------------------------------
+	loadVtt(trackSrc, cb_load);
+
+	// add chapter tracks on play
+	videojsPlayer.on("play", function() {
+		videojsPlayer.currentTime(videoStart);
+
+		var total    = videojsPlayer.duration();
+		var timeline = $(videojsPlayer.controlBar.progressControl.children_[0].el_);
+
+		// add chapter tracks on timeline (delayed)
+		setTimeout (function() {
+			var markers_loaded = setInterval (function () {
+				if (markers.length) {
+					for (var i=0; i<markers.length; i++) {
+						var left = (markers[i].time / total * 100) + '%';
+						var time = markers[i].time;
+						var el   = $('<div class="vjs-chapter-marker" style="left: ' +left+ '" data-time="' +time+ '"> <span>' +markers[i].label+ '</span></div>');
+
+						el.click(function() {
+							videojsPlayer.currentTime($(this).data('time'));
+						});
+
+						timeline.append(el);
+					}
+					clearInterval(markers_loaded);
+				}
+			}, 10); // END markers_loaded
+		}, 1000 ); // END setTimeout
+
+	}); // END on "play"
+
+} // END if chapterTracksEnabled
+
+
+Perplexity
+--------------------------------------------------------------------------------
+
+## Problem: Kapitelmarker erscheinen bei allen Playern
+
+Das aktuelle Problem ist, dass die Kapitelmarker (chapter markers) global
+auf alle VideoJS-Player gesetzt werden, statt individuell je Player. Das
+liegt daran, dass die Marker direkt ins DOM gesetzt werden, ohne auf den
+jeweiligen Player-Kontext zu achten. Dadurch werden Marker-Elemente mehrfach
+oder falsch zugewiesen.
+
+## Lösung: Marker nur für den jeweiligen Player setzen
+
+### 1. Marker vor dem Hinzufügen entfernen
+
+Bevor neue Marker gesetzt werden, müssen alte Marker entfernt werden,
+die eventuell noch vom vorherigen Video/Player vorhanden sind. Sonst
+sammeln sich Marker im DOM an und werden für alle Player sichtbar.
+
+Füge vor dem Hinzufügen der Marker folgenden Code ein:
+
+```javascript
+timeline.find('.vjs-chapter-marker').remove();
+```
+
+### 2. Marker-Array und DOM-Elemente pro Player halten
+
+Stelle sicher, dass das `markers`-Array und die DOM-Elemente nur für
+den aktuellen Player gelten. Das ist bereits der Fall, solange der Code
+nicht global, sondern im Kontext des jeweiligen Players ausgeführt wird.
+
+### 3. Korrekte Timeline-Referenz pro Player
+
+Die Timeline-Referenz muss eindeutig zum aktuellen Player passen.
+Das ist mit:
+
+```javascript
+var timeline = $(videojsPlayer.controlBar.progressControl.children_[0].el_);
+```
+
+in Ordnung, solange `videojsPlayer` eindeutig ist.
+
+### 4. Optional: Event-Handler sauber entfernen
+
+Falls der gleiche Player mehrfach neue Marker bekommt (z.B. bei Video-Wechsel),
+solltest du verhindern, dass Marker mehrfach hinzugefügt werden. Das erreichst
+du, indem du die Marker immer entfernst, bevor du neue hinzufügst
+(siehe Schritt 1).
+
+---
+
+## Beispiel: Anpassung des relevanten Codes
+
+Hier ein Auszug, wie du den Marker-Teil anpassen solltest:
+
+```javascript
+videojsPlayer.on("play", function() {
+    videojsPlayer.currentTime(videoStart);
+
+    var total    = videojsPlayer.duration();
+    var timeline = $(videojsPlayer.controlBar.progressControl.children_[0].el_);
+
+    // Entferne alte Marker für diesen Player
+    timeline.find('.vjs-chapter-marker').remove();
+
+    // add chapter tracks on timeline (delayed)
+    setTimeout (function() {
+        var markers_loaded = setInterval (function () {
+            if (markers.length) {
+                // Nochmals sicherstellen, dass keine doppelten Marker entstehen
+                timeline.find('.vjs-chapter-marker').remove();
+
+                for (var i=0; i ' +markers[i].label+ '');
+
+                    el.click(function() {
+                        videojsPlayer.currentTime($(this).data('time'));
+                    });
+
+                    timeline.append(el);
+                }
+                clearInterval(markers_loaded);
+            }
+        }, 10); // END markers_loaded
+    }, 100 ); // END setTimeout
+});
+```
+
+## Zusammenfassung
+
+- Entferne vor jedem Hinzufügen von Markern alle `.vjs-chapter-marker`
+  Elemente aus der jeweiligen Player-Timeline.
+- Führe das Marker-Handling immer im Kontext des jeweiligen Players aus.
+- So werden Marker nur für den aktiven Player gesetzt und nicht global
+  für alle Player sichtbar.
+
+Damit ist das Problem gelöst, dass Marker global erscheinen – sie sind
+jetzt individuell pro Player sichtbar und werden korrekt verwaltet[1].
+
+[1] programming.ui_development

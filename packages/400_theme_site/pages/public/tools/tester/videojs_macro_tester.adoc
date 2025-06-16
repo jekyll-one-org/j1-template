@@ -73,12 +73,13 @@ websites, mobile web apps, and mobile native/hybrid apps.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
+[role="mt-5"]
 == Local Video
 
 Videos created by a digicam or a mobile can be played by J1 Template using
 the lightGallery integration. Present videos you have made at it's best.
 
-.Local MP4 Video · Justified Gallery + LightGallery
+.Local Video over VideoJS · Justified Gallery + LightGallery
 gallery::jg_video_html5[role="mb-4"]
 
 
@@ -102,9 +103,12 @@ gallery::jg_video_html5[role="mb-4"]
 // gallery::jg_video_youtube_james_and_adele[role="mb-4"]
 
 
+[role="mt-5"]
 == VideoJS Player over YouTube
 
-lorem:sentences[3]
+YouTube is a popular online video-sharing platform that allows users to
+upload, view, share, and comment on videos. The platform provides services
+for people and organizations to publish various video content.
 
 ++++
 <style>

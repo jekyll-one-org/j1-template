@@ -16,7 +16,7 @@ fab_menu_id:                            default
 permalink:                              /pages/public/learn/egrid-tester/
 regenerate:                             false
 
-resources:                              [ animate, clipboard, elasticgrid, rouge ]
+resources:                              [ clipboard, elasticgrid, rouge ]
 resource_options:
   - attic:
       padding_top:                      400

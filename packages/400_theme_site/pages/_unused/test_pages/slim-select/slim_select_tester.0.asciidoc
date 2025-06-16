@@ -23,7 +23,7 @@ fab_menu_id:                            default
 permalink:                              /pages/public/slim_select_tester/
 regenerate:                             false
 
-resources:                              [ animate, clipboard, iconpicker, slim_select ]
+resources:                              [ clipboard, iconpicker, slim_select ]
 resource_options:
   - attic:
       padding_top:                      400

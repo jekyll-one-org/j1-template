@@ -30,7 +30,7 @@ comments:                               false
 regenerate:                             false
 permalink:                              /pages/public/tools/previewer/iframer/
 
-resources:                              [ animate, iframer, rouge ]
+resources:                              [ iframer, rouge ]
 resource_options:
   - attic:
       padding_top:                      600

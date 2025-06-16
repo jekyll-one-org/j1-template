@@ -23,7 +23,7 @@ fab_menu_id:                            default
 permalink:                              /pages/public/learn/xml_fetch_tester/
 regenerate:                             false
 
-resources:                              [ animate, clipboard ]
+resources:                              [ clipboard ]
 resource_options:
   - attic:
       padding_top:                      400

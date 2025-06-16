@@ -28,7 +28,7 @@ fab_menu_id:                            default
 regenerate:                             false
 permalink:                              /pages/public/learn/bookshelf/article_previewer/biography/
 
-resources:                              [ masonry, rouge ]
+resources:                              [ masonry ]
 resource_options:
   - attic:
       slides:
