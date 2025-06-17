@@ -814,18 +814,22 @@
 #
 - item:                                 About
   sublevel:
-    - title:                            Starter
+
+    - title:                            This Site
       icon:                             home-variant-outline
       href:                             /pages/public/about/starter/
-    - title:                            Issues
-      icon:                             bug
-      href:                             /pages/public/about/reporting_issues/
+
+    - title:                            Privacy
+      icon:                             heart
+      href:                             /pages/public/legal/en/privacy/      
+
     - title:                            Features
       icon:                             wrench
       href:                             /pages/public/about/features/
-    - title:                            Privacy
-      icon:                             heart
-      href:                             /pages/public/legal/en/privacy/
+
+    - title:                            Issues
+      icon:                             bug
+      href:                             /pages/public/about/reporting_issues/
 
 # ------------------------------------------------------------------------------
 # END config

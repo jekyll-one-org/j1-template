@@ -24,13 +24,13 @@
   sublevel:
 
     - title:                            Image
-      href:                             /pages/public/tour/present_images/
+      href:                             /pages/public/tour/image_data/
       icon:                             image
     - title:                            Audio
-      href:                             /pages/public/tour/present_audio/
+      href:                             /pages/public/tour/audio_data/
       icon:                             volume-high
     - title:                            Video
-      href:                             /pages/public/tour/present_video/
+      href:                             /pages/public/tour/video_data/
       icon:                             video
 
     - title:                            Typography
@@ -457,6 +457,37 @@
   sublevel:
 
     # --------------------------------------------------------------------------
+    # Tester
+    #
+    - title:                            Tester
+      icon:                             ab-testing
+      dropdown:
+
+        - title:                        VideoJS over YT
+          href:                         /pages/public/tester/videojs_yt/
+          icon:                         video
+
+        - title:                        J1 Swiper
+          href:                         /pages/public/tools/tester/swiper/
+          icon:                         test-tube
+
+        - title:                        J1 Swiper App
+          href:                         /pages/public/tools/tester/swiper_app/
+          icon:                         test-tube
+
+        - title:                        J1 Amplitude App (YouTube)
+          href:                         /pages/public/tools/tester/amplitude_app_yt/
+          icon:                         test-tube
+
+#       - title:                        Lazy Loader
+#         href:                         /pages/public/tools/tester/lazy_loader/
+#         icon:                         test-tube
+
+#       - title:                        VideoJS
+#         href:                         /pages/public/tools/tester/videojs/
+#         icon:                         video
+
+    # --------------------------------------------------------------------------
     # Previewer
     #
     - title:                            Previewer
@@ -487,9 +518,12 @@
 #        icon:                          robot
 #        target:                        _blank
 
-      - title:                          J1 Amplitude
+      - title:                          J1 AmplitudeJS
         href:                           /pages/public/tools/previewer/amplitudejs/
         icon:                           speaker
+      - title:                          J1 VideoJS
+        href:                           /pages/public/tools/previewer/videojs/
+        icon:                           video
 
       - title:                          J1 Geolocation
         href:                           //jekyll.one/pages/public/tools/previewer/geolocation/
@@ -814,18 +848,22 @@
 #
 - item:                                 About
   sublevel:
-    - title:                            Starter
+
+    - title:                            This Site
       icon:                             home-variant-outline
       href:                             /pages/public/about/starter/
-    - title:                            Issues
-      icon:                             bug
-      href:                             /pages/public/about/reporting_issues/
+
+    - title:                            Privacy
+      icon:                             heart
+      href:                             /pages/public/legal/en/privacy/      
+
     - title:                            Features
       icon:                             wrench
       href:                             /pages/public/about/features/
-    - title:                            Privacy
-      icon:                             heart
-      href:                             /pages/public/legal/en/privacy/
+
+    - title:                            Issues
+      icon:                             bug
+      href:                             /pages/public/about/reporting_issues/
 
 # ------------------------------------------------------------------------------
 # END config
