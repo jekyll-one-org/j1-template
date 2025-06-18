@@ -69,7 +69,7 @@ resource_options:
 :ytp_best_2024:                         false
 :ytp_rhythm:                            false
 :ytp_sky_elements:                      true
-:dm_video:                              true
+:dm_video:                              false
 :vm_video:                              true
 :masonry:                               true
 :lightGallery:                          false
@@ -182,7 +182,7 @@ Playback Technology. With the help of *plugins*, it is possible to present
 *different media* using the *same player*, the same look and feel for a
 better user experience.
 
-[role="mt-4"]
+[role="mt-5"]
 === Native Video
 
 VideoJS provides a flexible and customizable platform for displaying and
@@ -194,7 +194,7 @@ videojs::/assets/video//html5/peck_pocketed.mp4[poster="/assets/video/poster/htm
 // .Rolling Wild · MP4 Video (over VideoJS)
 // videojs::/assets/video//html5/rolling_wild.mp4[poster="/assets/video/poster/html5/rolling_wild.jpg", opts="" role="mb-5"]
 
-[role="mt-4"]
+[role="mt-5"]
 === YouTube
 
 YouTube is a popular online video-sharing platform that allows users to
@@ -232,7 +232,7 @@ endif::[]
 
 
 ifeval::[{dm_video} == true]
-[role="mt-4"]
+[role="mt-5"]
 === Dailymotion
 
 The Dailymotion platform is a monetization solution directly connecting to
@@ -245,7 +245,7 @@ dailymotion::x87ycik[poster="/assets/video/poster/dailymotion/pilates.jpg" role=
 endif::[]
 
 ifeval::[{vm_video} == true]
-[role="mt-4"]
+[role="mt-5"]
 === Vimeo
  
 Vimeo is an sharing platform that allows users to upload, share, and view
@@ -293,7 +293,7 @@ Find below examples of video galleries of locally stored (MP4) video resources
 *and* video content provided online.
 
 ifeval::[{masonry} == true]
-[role="mt-4"]
+[role="mt-5"]
 === Masonry
 
 Masonry for J1 Template is a great tool for creating dynamic video galleries.
@@ -313,7 +313,7 @@ endif::[]
 
 
 ifeval::[{lightGallery} == true]
-[role="mt-4"]
+[role="mt-5"]
 === lightGallery (YouTube)
 
 The galley maker *justifiedGallery* in combination with the *lightbox*
@@ -325,7 +325,7 @@ gallery::jg_video_youtube_james_and_adele[role="mb-4"]
 endif::[]
 
 
-[role="mt-4"]
+[role="mt-5"]
 [[local-video-2]]
 === Local Video
 
@@ -346,7 +346,7 @@ gallery::jg_video_html5[role="mb-4"]
 
 
 ifeval::[{yt_gallery} == true]
-[role="mt-4"]
+[role="mt-5"]
 === YouTube
 
 The community at link:{url-youtube--home}[YouTube, {browser-window--new}]
@@ -371,7 +371,7 @@ a thematic compilation of literary or musical works.
 endif::[]
 
 ifeval::[{vm_gallery} == true]
-[role="mt-4"]
+[role="mt-5"]
 === Vimeo
 
 [role="mb-4"]
@@ -399,7 +399,7 @@ gallery::jg_video_online_vimeo[role="mb-4"]
 endif::[]
 
 ifeval::[{dm_gallery} == true]
-[role="mt-4"]
+[role="mt-5"]
 === Dailymotion
 
 link:{url-dailymotion--home}[Dailymotion, {browser-window--new}] is a

@@ -33,7 +33,8 @@
 }(this, function(videojs) {
   'use strict';
 
-  const isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
+  // var isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
+  var isDev = false
 
   var logger      = log4javascript.getLogger('videoJS.plugin.youtube');
   var _isOnMobile = videojs.browser.IS_IOS || videojs.browser.IS_NATIVE_ANDROID;
@@ -837,9 +838,10 @@
   var dependencies_met_page_ready = setInterval (() => {
     var pageState      = $('#content').css("display");
     var pageVisible    = (pageState === 'block') ? true : false;
-    var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
+//  var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
-    if (j1CoreFinished && pageVisible) {
+//  if (j1CoreFinished && pageVisible) {
+    if (pageVisible) {      
       startTimeModule = Date.now();
 
       isDev && logger.debug('\n' + 'initializing plugin: started');
