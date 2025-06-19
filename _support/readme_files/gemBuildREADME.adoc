@@ -3,17 +3,17 @@
 create:                               gem build j1-template.gemspec
 list all (local):                     gem list j1-template --local --all
 list all (remote):                    gem list j1-template --remote --all
-publish (RubyGems):                   gem push j1-template-2024.3.25.gem
-unpublish (RubyGems):                 gem yank j1-template -v 2024.3.25
+publish (RubyGems):                   gem push j1-template-2024.3.26.gem
+unpublish (RubyGems):                 gem yank j1-template -v 2024.3.26
 install (manually, system):           gem install --local j1-template --no-document
 install (manually, user):             gem install --local j1-template --user-install --no-document
 install (project):                    yarn gem install
 install (remote):                     gem install j1-template --no-document
 install (remote, userized):           gem install j1-template --user-install --no-document
 uninstall (all):                      gem uninstall j1-template --force
-uninstall (version):                  gem uninstall j1-template -v 2024.3.25
-uninstall (version/forced):           gem uninstall j1-template -v 2024.3.25 --force
-uninstall (version/user/forced):      gem uninstall j1-template -v 2024.3.25 --user --force
+uninstall (version):                  gem uninstall j1-template -v 2024.3.26
+uninstall (version/forced):           gem uninstall j1-template -v 2024.3.26 --force
+uninstall (version/user/forced):      gem uninstall j1-template -v 2024.3.26 --user --force
 install binstub:                      bundle binstubs j1-template
 list bundle:                          bundle list j1-template
 run j1 exe (help):                    bundle exec j1 --help
@@ -47,7 +47,7 @@ cd C:\temp
 cd C:\temp\starter
 
 mklink /D "ziel" "quelle"
-mklink /D "C:\Temp\starter" "C:\Temp\starter 2024.3.25"
+mklink /D "C:\Temp\starter" "C:\Temp\starter 2024.3.26"
 
 
 == Gem build
