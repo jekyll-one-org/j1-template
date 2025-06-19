@@ -248,12 +248,19 @@ gem 'puma', '>= 6.0'
 # Omniauth (authentication) strategies for Github, Twitter, Facebook and
 # Patreon are implemented.
 #
-# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------+#
+# sinatra v4 requires rack v3
+# gem 'rack', '~> 2.2', '>= 2.2.3'
 gem 'rack', '~> 2.2', '>= 2.2.3'
+
 gem 'rack-protection', '~> 2.0'
 gem 'rack-ssl-enforcer', '~> 0.2'
 gem 'rest-client', '~> 2.0'
-gem 'sinatra', '~> 4.0'
+
+# update sinatra v2 -> v4 for security reasons
+# gem 'sinatra', '~> 4.0'
+gem 'sinatra', '~> 2.0'
+
 gem 'warden', '~> 1.2'
 
 # ------------------------------------------------------------------------------
