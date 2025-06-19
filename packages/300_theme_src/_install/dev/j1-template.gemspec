@@ -68,7 +68,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'rack-protection', '~> 2.0'
   spec.add_runtime_dependency 'rack-ssl-enforcer', '~> 0.2'
   spec.add_runtime_dependency 'rest-client', '~> 2.0'
-  spec.add_runtime_dependency 'sinatra', '~> 2.0'
+  spec.add_runtime_dependency 'sinatra', '~> 4.0'
   spec.add_runtime_dependency 'warden', '~> 1.2'
 
   # Dependencies: Runtime Addons (currently NOT used)
