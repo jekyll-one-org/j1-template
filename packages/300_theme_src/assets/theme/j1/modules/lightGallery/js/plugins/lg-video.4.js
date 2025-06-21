@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/lightGallery/js/plugins/lg-video.js (4)
+ # ~/assets/theme/j1/modules/lightGallery/js/plugins/lg-video.js
  # Provides lightGallery v2.8.3 JS code for the plugin lgVideo
  #
  # Product/Info:
@@ -245,7 +245,6 @@
                 var playbackRatesDefaults = vjsOptions.playbackRates.values;
 
                 // disable chapterTracks by default
-                var chapterTracksEnabled = false;
                 videojsPlayer.chapterTracksEnabled = false;
 
                 var hotKeysPluginDefaults = {
@@ -425,30 +424,31 @@
 
                     } // END if zoom Plugin enabled
 
-
-                    // chapter track processing, only available for VideoJS
+                    // chapter tracks only available for VideoJS (local video/mp4)
                     // ---------------------------------------------------------
                     if (vjsObject.core.galleryItems[vjsObject.core.index].video !== undefined) {
                         videoData = JSON.parse(vjsObject.core.galleryItems[vjsObject.core.index].video);
                     }
 
-                    // chapter tracks only available for VideoJS (local video/mp4)
+                    // load tracks
+                    // TODO: chapterTracksEnabled needs to be indivialized
+                    // per player
                     // ---------------------------------------------------------
                     if (videoData.tracks && videoData.tracks.length > 0) {
                         for (var i=0; i<videoData.tracks.length; i++) {
                             if (videoData.tracks[i].kind == 'chapters') {
                                 trackSrc = videoData.tracks[i].src;
-                                chapterTracksEnabled = true;
+                                videojsPlayer.chapterTracksEnabled  = true;
+                                videojsPlayer.chapterMarkers        = [];
                             }
                         }
-                    } // END if videoData tracks
+                    } // END load tracks
 
-                    if (chapterTracksEnabled) {
+                    // process (chapter) tracks if tracks available
+                    // ---------------------------------------------------------                    
+                    if (videojsPlayer.chapterTracksEnabled) {
                         var parser  = new WebVTTParser();
                         var markers = [];
-                        
-                        // Eindeutige Player-ID generieren oder verwenden
-                        var playerId = videojsPlayer.id() || 'player_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
 
                         function cb_load (data /* ,textStatus, jqXHR */ ) {
                             var tree = parser.parse(data, 'metadata');
@@ -459,48 +459,41 @@
                                 marker = { time: tree.cues[i].startTime, label: tree.cues[i].text };
                                 markers.push(marker);
                             }
+
+                            videojsPlayer.chapterMarkers = markers;
+
                         }; // END function cb_load 
 
                         // load chapter tracks
                         // -----------------------------------------------------
                         loadVtt(trackSrc, cb_load);
 
-                        // Funktion zum Entfernen vorhandener Marker für diesen Player
-                        function removeExistingMarkers(timeline, currentPlayerId) {
-                            timeline.find('.vjs-chapter-marker[data-player-id="' + currentPlayerId + '"]').remove();
-                        }
-
-                        // add chapter tracks on play
+                        // add chapter tracks on player is playing
+                        // -----------------------------------------------------
                         videojsPlayer.on("play", function() {
                             videojsPlayer.currentTime(videoStart);
 
                             var total    = videojsPlayer.duration();
                             var timeline = $(videojsPlayer.controlBar.progressControl.children_[0].el_);
 
-                            // Entferne bereits existierende Marker für diesen Player
-                            removeExistingMarkers(timeline, playerId);
+                            // remove old|previous markers
+                            timeline.find('.vjs-chapter-marker').remove();
 
                             // add chapter tracks on timeline (delayed)
                             setTimeout (function() {
                                 var markers_loaded = setInterval (function () {
-                                    if (markers.length) {
+                                    if ( videojsPlayer.chapterTracksEnabled && videojsPlayer.chapterMarkers.length) {
+                                        // make sure, that previous markers deleted
+                                        timeline.find('.vjs-chapter-marker').remove();
+
                                         for (var i=0; i<markers.length; i++) {
                                             var left = (markers[i].time / total * 100) + '%';
                                             var time = markers[i].time;
-                                            
-                                            // Eindeutige Klasse und data-player-id hinzufügen
-                                            var el = $('<div class="vjs-chapter-marker vjs-chapter-marker-' + playerId + '" ' +
-                                                    'style="left: ' + left + '" ' +
-                                                    'data-time="' + time + '" ' +
-                                                    'data-player-id="' + playerId + '">' +
-                                                    '<span>' + markers[i].label + '</span></div>');
+                                            var el   = $('<div class="vjs-chapter-marker" style="left: ' +left+ '" data-time="' +time+ '"> <span>' +markers[i].label+ '</span></div>');
 
-                                            // Event-Handler mit Closure für korrekten Player-Bezug
-                                            (function(currentPlayer, markerTime) {
-                                                el.click(function() {
-                                                    currentPlayer.currentTime(markerTime);
-                                                });
-                                            })(videojsPlayer, time);
+                                            el.click(function() {
+                                                videojsPlayer.currentTime($(this).data('time'));
+                                            });
 
                                             timeline.append(el);
                                         }
@@ -509,15 +502,20 @@
                                 }, 10); // END markers_loaded
                             }, 100 ); // END setTimeout
 
-                        }); // END on "play"
-
-                        // Optional: Marker beim Pausieren/Beenden entfernen
-                        videojsPlayer.on("dispose", function() {
+                        });
+                    } else {
+                        // remove chapter tracks on playing
+                        // -----------------------------------------------------                     
+                        videojsPlayer.on("play", function() {
+                            videojsPlayer.chapterTracksEnabled = false;
                             var timeline = $(videojsPlayer.controlBar.progressControl.children_[0].el_);
-                            removeExistingMarkers(timeline, playerId);
+
+                            // remove existing markers
+                            timeline.find('.vjs-chapter-marker').remove();
+
                         });
 
-                    } // END if chapterTracksEnabled
+                    } // END remove chapter tracks
 
                 } // END if videojsOptions
 

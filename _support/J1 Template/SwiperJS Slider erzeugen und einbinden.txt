@@ -1,0 +1,3 @@
+Wie kann man mit Hilfe von J1 Template (https://jekyll.one/) einen einfachen
+SwiperJS Slider für Bilder erzeugen und in eine (neue) Webseite einbinden?
+

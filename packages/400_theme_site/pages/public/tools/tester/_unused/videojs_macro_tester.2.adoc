@@ -1,7 +1,7 @@
 ---
-title:                                  VideoJS over YT
-title_extention:                        Custom progressControlSlider
-tagline:                                Custom progressControlSlider
+title:                                  VideoJS
+title_extention:                        Custom VJS Players
+tagline:                                Custom VJS Players
 
 date:                                   2025-06-05
 last_modified:                          2025-06-08
@@ -73,14 +73,14 @@ websites, mobile web apps, and mobile native/hybrid apps.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-[role="mt-5"]
-== Local Video
+// [role="mt-5"]
+// == Local Video
 
-Videos created by a digicam or a mobile can be played by J1 Template using
-the lightGallery integration. Present videos you have made at it's best.
+// Videos created by a digicam or a mobile can be played by J1 Template using
+// the lightGallery integration. Present videos you have made at it's best.
 
-.Local Video over VideoJS · Justified Gallery + LightGallery
-gallery::jg_video_html5[role="mb-4"]
+// .Local Video over VideoJS · Justified Gallery + LightGallery
+// gallery::jg_video_html5[role="mb-4"]
 
 
 // == Masonry
@@ -103,47 +103,83 @@ gallery::jg_video_html5[role="mb-4"]
 // gallery::jg_video_youtube_james_and_adele[role="mb-4"]
 
 
+// [role="mt-5"]
+// == VideoJS Player over YouTube
+
+// YouTube is a popular online video-sharing platform that allows users to
+// upload, view, share, and comment on videos. The platform provides services
+// for people and organizations to publish various video content.
+
+// ++++
+// <div class="video-title">
+//   <i class="mdib mdib-video mdib-24px mr-2"></i>
+//   The Breathtaking Beauty of Nature
+// </div>
+
+// <div class="mb-8">
+//   <video
+//     id="vid_2rtQOsWaAXc"
+//     class="video-js vjs-theme-uno"
+//     controls
+//     width="640"
+//     height="360"
+//     poster="//img.youtube.com/vi/IUN664s7N-c/maxresdefault.jpg" alt="Beauty of Nature" 
+//     aria-label="The Breathtaking Beauty of Nature"
+//     data-setup='{
+//         "fluid" : true,
+//         "techOrder": [
+//             "youtube", "html5"
+//         ],
+//         "sources": [{
+//             "type": "video/youtube",
+//             "src": "//youtube.com/watch?v=IUN664s7N-c"
+//         }],
+//         "controlBar": {      
+//           "pictureInPictureToggle": false,
+//           "volumePanel": {
+//               "inline": false
+//           }
+//         }
+//       }'
+//   ></video>
+// </div>
+// ++++
+
 [role="mt-5"]
-== VideoJS Player over YouTube
+== VideoJS Player over Dailymotion
 
-YouTube is a popular online video-sharing platform that allows users to
-upload, view, share, and comment on videos. The platform provides services
-for people and organizations to publish various video content.
+link:{url-dailymotion--home}[Dailymotion, {browser-window--new}] is a
+video-sharing platform. The platform is available worldwide in 180+
+languages, featuring websites for their video content.
 
-++++
-<style>
-
-/* -----------------------------------------------------------------------------
-  styles moved to VJS theme uno at: 
-  assets/theme/j1/modules/videojs/css/themes/uno.css
-*/
-
-</style>
-++++
+The platform is a *monetization* solution that allows allows to directly
+connect to high-quality advertisers through a proprietary Advertising system.
+Like YouTube, videos can be watched for free, but ads are shown on each and
+every video.
 
 ++++
 <div class="video-title">
   <i class="mdib mdib-video mdib-24px mr-2"></i>
-  The Breathtaking Beauty of Nature
+  Morning Energy
 </div>
 
 <div class="mb-8">
   <video
-    id="2rtQOsWaAXc"
+    id="vid_x887s09"
     class="video-js vjs-theme-uno"
     controls
     width="640"
     height="360"
-    poster="//img.youtube.com/vi/IUN664s7N-c/maxresdefault.jpg" alt="Beauty of Nature" 
-    aria-label="The Breathtaking Beauty of Nature"
+    poster="/assets/video/poster/dailymotion/meditation.jpg" alt="Morning Energy" 
+    aria-label="Morning Energy"
     data-setup='{
         "fluid" : true,
         "techOrder": [
-            "youtube", "html5"
+            "dailymotion", "html5"
         ],
         "sources": [{
-            "type": "video/youtube",
-            "src": "//youtube.com/watch?v=IUN664s7N-c"
+            "type": "video/dailymotion",
+            "src": "//dai.ly/x887s09"
         }],
         "controlBar": {      
           "pictureInPictureToggle": false,
@@ -154,6 +190,18 @@ for people and organizations to publish various video content.
       }'
   ></video>
 </div>
+++++
+
+
+++++
+<style>
+
+/* -----------------------------------------------------------------------------
+  styles moved to VJS theme uno at: 
+  assets/theme/j1/modules/videojs/css/themes/uno.css
+*/
+
+</style>
 ++++
 
 ++++
@@ -199,7 +247,7 @@ $(function() {
       // create div|caption container
       const newDiv = document.createElement('div');
       newDiv.classList.add('caption');
-      newDiv.textContent = 'The Breathtaking Beauty of Nature';
+      newDiv.textContent = 'Morning Energy';
 
       // insert div|caption container AFTER the image
       image.parentNode.insertBefore(newDiv, image.nextSibling);
@@ -217,15 +265,17 @@ $(function() {
     var j1CoreFinished  = (j1.getState() === 'finished') ? true : false;
 
     if (j1CoreFinished && pageVisible) {
-      const vjs_player  = document.getElementById("2rtQOsWaAXc");
+      // const vjs_player  = document.getElementById("vid_2rtQOsWaAXc");
+      const vjs_player  = document.getElementById('vid_x887s09');
 
       // add captions (on poster image)
-      addCaptionAfterImage('//img.youtube.com/vi/IUN664s7N-c/maxresdefault.jpg');
-
+      // naddCaptionAfterImage('//img.youtube.com/vi/IUN664s7N-c/maxresdefault.jpg');
+      addCaptionAfterImage('/assets/video/poster/dailymotion/meditation.jpg');
+      
       // scroll page to the players top position
       // -----------------------------------------------------------------------
       vjs_player.addEventListener('click', function(event) {
-        const targetDiv         = document.getElementById("2rtQOsWaAXc");
+        const targetDiv         = document.getElementById("vid_x887s09");
         const targetDivPosition = targetDiv.offsetTop;
         const scrollOffset      = (window.innerWidth >= 720) ? -130 : -110;
 
@@ -240,12 +290,12 @@ $(function() {
   // customize the yt player created
   // ---------------------------------------------------------------------------
   var dependencies_met_vjs_player_exist = setInterval(function(options) {
-    var vjsPlayerExist = document.getElementById("2rtQOsWaAXc") ? true : false;
+    var vjsPlayerExist = document.getElementById("vid_x887s09") ? true : false;
 
     if (vjsPlayerExist) {
 
       // apply player customization on 'player ready'
-      videojs("2rtQOsWaAXc").ready(function() {
+      videojs("vid_x887s09").ready(function() {
         const vjsPlayer = this;
 
         // create customControlContainer for progressControlSilder|time (display) elements
@@ -317,3 +367,4 @@ $(function() {
 
 </script>
 ++++
+
