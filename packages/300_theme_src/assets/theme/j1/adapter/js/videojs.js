@@ -119,8 +119,8 @@ j1.adapter.videojs = ((j1, window) => {
       vjsSettings = $.extend({}, {{videojs_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
       vjsOptions  = $.extend(true, {}, vjsDefaults, vjsSettings);
 
-      _this        = j1.adapter.videojs;
-      logger       = log4javascript.getLogger('j1.adapter.videojs');
+      _this       = j1.adapter.videojs;
+      logger      = log4javascript.getLogger('j1.adapter.videojs');
 
       // -----------------------------------------------------------------------
       // module initializer
@@ -137,9 +137,11 @@ j1.adapter.videojs = ((j1, window) => {
           logger.debug('state: ' + _this.getState());
           logger.info('module is being initialized');
 
-          // save vjsOptions for later access
-          j1.modules.videojs         = {};
-          j1.modules.videojs.options = vjsOptions || {};
+          // save vjsOptions|data for later access
+          j1.modules.videojs              = {};
+          j1.modules.videojs.options      = vjsOptions || {};
+          j1.modules.videojs.data         = {};
+          j1.modules.videojs.data.players = {};   // set initial value         
 
           _this.setState('finished');
           logger.debug('state: ' + _this.getState());

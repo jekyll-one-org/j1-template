@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/lightGallery/js/plugins/lg-video.js
+ # ~/assets/theme/j1/modules/lightGallery/js/plugins/lg-video.js (4)
  # Provides lightGallery v2.8.3 JS code for the plugin lgVideo
  #
  # Product/Info:
@@ -232,20 +232,126 @@
     // -------------------------------------------------------------------------
     var vjsProcessExtendedButtonsAndPlugins = function (vjsObject, videojsPlayer, videoInfo) {
         const vjsOptions = j1.modules.videojs.options;
-        var dependency_met_module_ready, videoInfo, videoStart, videojsPlayer,
-            playbackRates, hotKeysPlugin, skipButtonsPlugin, zoomPlugin,
-            trackSrc;
+        var dependency_met_module_ready, videoInfo, playerState,
+            videoStart, videojsPlayer, playbackRates,
+            hotKeysPlugin, skipButtonsPlugin, zoomPlugin;
 
-        dependency_met_module_ready = setInterval (() => {            
+
+        // ---------------------------------------------------------------------
+        // helper functions
+        // =====================================================================
+
+        // remove existng markers
+        // ---------------------------------------------------------------------
+        function removeChapterMarkers(timeline, currentPlayerId) {
+            timeline.find('.vjs-chapter-marker').remove();
+        }
+
+        // get player status
+        // ---------------------------------------------------------------------
+        function getPlayerStatus(player) {
+            return {
+                paused:             player.paused(),
+                currentTime:        player.currentTime(),
+                duration:           player.duration(),
+                muted:              player.muted(),
+                bufferedPercent:    player.bufferedPercent()
+            };
+        }
+
+        // check if player is playing
+        // ---------------------------------------------------------------------
+        function isPlaying (player) {
+            var vjsIsPlaying = (!player.paused() || player.currentTime() > 0) ? true : false;
+
+            return vjsIsPlaying;
+        }
+
+        // set chapter markers for the player (videojsPlayer) specified
+        // ---------------------------------------------------------------------
+        function addChapterMarkers(videojsPlayer) {
+            var timeline    = $(videojsPlayer.controlBar.progressControl.children_[0].el_);
+            var playerID    = videojsPlayer.id();
+            var parser      = new WebVTTParser();
+            var markers     = [];
+
+            function cb_load (data /* ,textStatus, jqXHR */ ) {
+                var tree = parser.parse(data, 'metadata');
+                var marker;
+
+                // add chapter tracks to markers array
+                for (var i=0; i<tree.cues.length; i++) {
+                    marker = { time: tree.cues[i].startTime, label: tree.cues[i].text };
+                    markers.push(marker);
+                }
+            }; // END function cb_load 
+
+            // create chapter tracks from source file
+            // -----------------------------------------------------------------
+            loadVtt(videojsPlayer.chapterTracksSource, cb_load);
+
+            // failsafe: remove already existing markers for current player
+            removeChapterMarkers(timeline, playerID);
+
+            // if tracks available, add (chapter) tracks on timeline
+            // -----------------------------------------------------------------
+            if (j1.modules.videojs.data.players[playerID].videoData.tracks.length) {
+                setTimeout (function() {
+                    var markers_loaded = setInterval (function () {
+                        if (markers.length) {
+                            const duration = videojsPlayer.duration();
+
+                            for (var i=0; i<markers.length; i++) {
+                                var left = (markers[i].time / duration * 100) + '%';
+                                var time = markers[i].time;
+
+                                // add (unique) marker element
+                                var el = $(
+                                    '<div class="vjs-chapter-marker" ' +
+                                    'style="left: ' + left + '" ' +
+                                    'data-time="' + time + '" ' +
+                                    'data-player-id="' + playerID + '">' +
+                                    '<span>' + markers[i].label + '</span></div>'
+                                );
+
+                                // event handler with closure for correct player reference
+                                (function(currentPlayer, markerTime) {
+                                    el.click(function() {
+                                        currentPlayer.currentTime(markerTime);
+                                    });
+                                })(videojsPlayer, time);
+
+                                timeline.append(el);
+                            }
+
+                            clearInterval(markers_loaded);
+                        } else {
+                            clearInterval(markers_loaded);
+                        } // END if markers.length
+                    }, 10); // END interval markers_loaded
+                }, 100 ); // END timeout
+            } // END if chapterTracks enabled
+        } // END addChapterMarkers
+
+
+        // ---------------------------------------------------------------------
+        // main
+        // =====================================================================
+        dependency_met_module_ready = setInterval (() => {
+            var playerId, videoData, timeline;
             var isModuleInitialised  = (j1.adapter.gallery.getState() === 'finished') ? true : false;
             var isVideojsOptions     = (isEmpty(vjsObject.settings.videojsOptions)) ? false : true;
 
             if (isModuleInitialised && isVideojsOptions) {
-                var videoData             = { tracks: false };
-                var playbackRatesDefaults = vjsOptions.playbackRates.values;
+                playerId    = videojsPlayer.id();
+                videoData   = { tracks: [] };
+                playerState = getPlayerStatus(videojsPlayer);
 
-                // disable chapterTracks by default
-                videojsPlayer.chapterTracksEnabled = false;
+                // set (initial) videoData tracks.chapters to empty array
+                videoData.tracks.chapters = [];
+
+                // ENABLE chapter tracks by default (to enable very first checks)
+                // videojsPlayer.chapterTracksEnabled = true;
 
                 var hotKeysPluginDefaults = {
                     volumeStep:                 vjsOptions.plugins.hotKeys.volumeStep,
@@ -424,105 +530,90 @@
 
                     } // END if zoom Plugin enabled
 
-                    // chapter tracks only available for VideoJS (local video/mp4)
+
+                    // chapter track processing, only available for VideoJS
                     // ---------------------------------------------------------
                     if (vjsObject.core.galleryItems[vjsObject.core.index].video !== undefined) {
                         videoData = JSON.parse(vjsObject.core.galleryItems[vjsObject.core.index].video);
+                        videojsPlayer.videoData = videoData;
+
+                        // save VJS videoData for later use
+                        // NOTE: for unknown reasons, lightGallery generates
+                        // WRONG videoData on skip forwaed|backward  a video slide
+                        // Workaround: do NOT overwrite existing video data
+                        // stored in current window (j1.modules.videojs.data)
+                        // -----------------------------------------------------
+                        if (j1.modules.videojs.data.players[playerId] === undefined) {
+                            j1.modules.videojs.data.players[playerId] = {};
+                            j1.modules.videojs.data.players[playerId]['videoData'] = {};
+                            j1.modules.videojs.data.players[playerId].videoData['tracks'] = videoData.tracks || [];
+                        }    
                     }
 
-                    // load tracks
-                    // TODO: chapterTracksEnabled needs to be indivialized
-                    // per player
+                    // load source file for chapter tracks
                     // ---------------------------------------------------------
-                    if (videoData.tracks && videoData.tracks.length > 0) {
-                        for (var i=0; i<videoData.tracks.length; i++) {
-                            if (videoData.tracks[i].kind == 'chapters') {
-                                trackSrc = videoData.tracks[i].src;
-                                videojsPlayer.chapterTracksEnabled  = true;
-                                videojsPlayer.chapterMarkers        = [];
-                            }
+                    var chapterTracksSrc;
+                    for (var i=0; i<videojsPlayer.videoData.tracks.length; i++) {
+                        if (videojsPlayer.videoData.tracks[i].kind == 'chapters') {
+                            chapterTracksSrc = videojsPlayer.videoData.tracks[i].src;
+                            videojsPlayer.chapterTracksSource  = chapterTracksSrc;
                         }
-                    } // END load tracks
+                    }
 
-                    // process (chapter) tracks if tracks available
-                    // ---------------------------------------------------------                    
-                    if (videojsPlayer.chapterTracksEnabled) {
-                        var parser  = new WebVTTParser();
-                        var markers = [];
+                    // process chapter tracks
+                    if (j1.modules.videojs.data.players[playerId].videoData.tracks.length) {
+                        playerId = videojsPlayer.id();
+                        timeline = $(videojsPlayer.controlBar.progressControl.children_[0].el_);
 
-                        function cb_load (data /* ,textStatus, jqXHR */ ) {
-                            var tree = parser.parse(data, 'metadata');
-                            var marker;
+                        removeChapterMarkers(timeline, playerId);
 
-                            // add chapter tracks to markers array
-                            for (var i=0; i<tree.cues.length; i++) {
-                                marker = { time: tree.cues[i].startTime, label: tree.cues[i].text };
-                                markers.push(marker);
-                            }
+                        // add chapter tracks when playing alreay (e.g. autoplay)
+                        // -----------------------------------------------------                        
+                        if (isPlaying(videojsPlayer)) {
+                            addChapterMarkers(videojsPlayer) 
+                        } // END if VideoJS player isPlaying
 
-                            videojsPlayer.chapterMarkers = markers;
-
-                        }; // END function cb_load 
-
-                        // load chapter tracks
+                        // jadams, 2025-06-22: prepare settting start position
+                        // TODO: coding is to be continued 
                         // -----------------------------------------------------
-                        loadVtt(trackSrc, cb_load);
+                        // videojsPlayer.currentTime(videoStart);
 
-                        // add chapter tracks on player is playing
+                        // remove chapter tracks on event 'pause'
                         // -----------------------------------------------------
-                        videojsPlayer.on("play", function() {
-                            videojsPlayer.currentTime(videoStart);
-
-                            var total    = videojsPlayer.duration();
+                        videojsPlayer.on("pause", function() {
                             var timeline = $(videojsPlayer.controlBar.progressControl.children_[0].el_);
 
-                            // remove old|previous markers
-                            timeline.find('.vjs-chapter-marker').remove();
+                            removeChapterMarkers(timeline, videojsPlayer.id());
+                        }); // END on event 'pause'
 
-                            // add chapter tracks on timeline (delayed)
-                            setTimeout (function() {
-                                var markers_loaded = setInterval (function () {
-                                    if ( videojsPlayer.chapterTracksEnabled && videojsPlayer.chapterMarkers.length) {
-                                        // make sure, that previous markers deleted
-                                        timeline.find('.vjs-chapter-marker').remove();
+                        // add chapter tracks on event 'play'
+                        // -----------------------------------------------------
+                        videojsPlayer.on("play", function() {
+                            addChapterMarkers(videojsPlayer) 
+                        }); // END on event 'play'
 
-                                        for (var i=0; i<markers.length; i++) {
-                                            var left = (markers[i].time / total * 100) + '%';
-                                            var time = markers[i].time;
-                                            var el   = $('<div class="vjs-chapter-marker" style="left: ' +left+ '" data-time="' +time+ '"> <span>' +markers[i].label+ '</span></div>');
+                        // failsafe: remove chapter markers on the player removed||destroyed
+                        videojsPlayer.on("dispose", function() {
+                            var timeline = $(videojsPlayer.controlBar.progressControl.children_[0].el_);
 
-                                            el.click(function() {
-                                                videojsPlayer.currentTime($(this).data('time'));
-                                            });
-
-                                            timeline.append(el);
-                                        }
-                                        clearInterval(markers_loaded);
-                                    }
-                                }, 10); // END markers_loaded
-                            }, 100 ); // END setTimeout
-
+                            // remove already existing markers for the  player destroyed
+                            removeChapterMarkers(timeline, videojsPlayer.id());
                         });
+
                     } else {
-                        // remove chapter tracks on playing
-                        // -----------------------------------------------------                     
-                        videojsPlayer.on("play", function() {
-                            videojsPlayer.chapterTracksEnabled = false;
-                            var timeline = $(videojsPlayer.controlBar.progressControl.children_[0].el_);
+                        // remove existing chapter markers if NO tracks enabled
+                        var timeline = $(videojsPlayer.controlBar.progressControl.children_[0].el_);
+                        var playerId = videojsPlayer.id();
 
-                            // remove existing markers
-                            timeline.find('.vjs-chapter-marker').remove();
-
-                        });
-
-                    } // END remove chapter tracks
+                        removeChapterMarkers(timeline, playerId);                        
+                    } // END if chapterTracks enabled
 
                 } // END if videojsOptions
 
                 clearInterval(dependency_met_module_ready);
             } // END if isModuleInitialised
 
-       }, 10); // END dependency_met_page_ready
+        }, 10); // END interval dependency_met_module_ready
 
     }; // END vjsProcessExtendedButtonsAndPlugins
 
