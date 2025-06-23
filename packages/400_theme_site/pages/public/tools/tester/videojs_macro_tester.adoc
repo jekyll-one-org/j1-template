@@ -49,10 +49,10 @@ resource_options:
 
 // Attribute settings for section control
 //
-:videojs--youtube-video:                false
+:videojs--youtube-video:                true
 :videojs--masonry:                      false
 :videojs--local-video:                  true
-:videojs--over-youtube:                 true
+:videojs--over-youtube:                 false
 
 // Set (local) page attributes here
 // -----------------------------------------------------------------------------
@@ -113,6 +113,10 @@ The module combinati0n makes creating a gallery to access videos easy.
 
 .YouTube Video · justifiedGallery + LightGallery
 gallery::jg_video_youtube_james_and_adele[role="mb-4"]
+
+
+.NPR Tiny Desk Concerts · Latin
+gallery::tdc_latin[role="mb-5"]
 endif::[]
 
 

@@ -597,19 +597,34 @@
     } // END
 
     playbackRate() {
-      return this.ytPlayer ? this.ytPlayer.getPlaybackRate() : 1;
-    } // END
+      // jadams, 2025-06-22: check to prevent "Cannot read properties of undefined"
+      try {
+        return this.ytPlayer ? this.ytPlayer.getPlaybackRate() : 1;
+      } catch (error) {
+        return 1; // getDuration is not available/supported
+      }
+    } // END playbackRate
 
     setPlaybackRate(suggestedRate) {
       if (!this.ytPlayer) {
         return;
       }
 
-      this.ytPlayer.setPlaybackRate(suggestedRate);
-    } // END onSeeked
+      // jadams, 2025-06-22: check to prevent "Cannot read properties of undefined"
+      try {
+        this.ytPlayer.setPlaybackRate(suggestedRate);
+      } catch (error) {
+        this.ytPlayer.setPlaybackRate(1); // getDuration is not available/supported
+      }
+    } // END setPlaybackRate
 
     duration() {
-      return this.ytPlayer ? this.ytPlayer.getDuration() : 0;
+      // jadams, 2025-06-22: check to prevent "Cannot read properties of undefined"
+      try {
+        return this.ytPlayer ? this.ytPlayer.getDuration() : 0;
+      } catch (error) {
+        return 0; // return 0, if getDuration is not available/supported
+      }
     } // END duration
 
     currentSrc() {

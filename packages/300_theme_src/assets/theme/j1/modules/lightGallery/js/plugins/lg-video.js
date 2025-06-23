@@ -329,7 +329,7 @@
                             clearInterval(markers_loaded);
                         } // END if markers.length
                     }, 10); // END interval markers_loaded
-                }, 100 ); // END timeout
+                }, 100); // END timeout
             } // END if chapterTracks enabled
         } // END addChapterMarkers
 
@@ -346,12 +346,6 @@
                 playerId    = videojsPlayer.id();
                 videoData   = { tracks: [] };
                 playerState = getPlayerStatus(videojsPlayer);
-
-                // set (initial) videoData tracks.chapters to empty array
-                videoData.tracks.chapters = [];
-
-                // ENABLE chapter tracks by default (to enable very first checks)
-                // videojsPlayer.chapterTracksEnabled = true;
 
                 var hotKeysPluginDefaults = {
                     volumeStep:                 vjsOptions.plugins.hotKeys.volumeStep,
@@ -530,10 +524,10 @@
 
                     } // END if zoom Plugin enabled
 
-
-                    // chapter track processing, only available for VideoJS
+                    // chapter track processing, only available if enabled
                     // ---------------------------------------------------------
-                    if (vjsObject.core.galleryItems[vjsObject.core.index].video !== undefined) {
+                    var tracksEnabled = vjsObject.settings.videojsOptions.tracks;
+                    if (tracksEnabled && vjsObject.core.galleryItems[vjsObject.core.index].video !== undefined) {
                         videoData = JSON.parse(vjsObject.core.galleryItems[vjsObject.core.index].video);
                         videojsPlayer.videoData = videoData;
 
@@ -548,65 +542,66 @@
                             j1.modules.videojs.data.players[playerId]['videoData'] = {};
                             j1.modules.videojs.data.players[playerId].videoData['tracks'] = videoData.tracks || [];
                         }    
-                    }
 
-                    // load source file for chapter tracks
-                    // ---------------------------------------------------------
-                    var chapterTracksSrc;
-                    for (var i=0; i<videojsPlayer.videoData.tracks.length; i++) {
-                        if (videojsPlayer.videoData.tracks[i].kind == 'chapters') {
-                            chapterTracksSrc = videojsPlayer.videoData.tracks[i].src;
-                            videojsPlayer.chapterTracksSource  = chapterTracksSrc;
+                        // load source file for chapter tracks
+                        // ---------------------------------------------------------                        
+                        var chapterTracksSrc;
+                        for (var i=0; i<videojsPlayer.videoData.tracks.length; i++) {
+                            if (videojsPlayer.videoData.tracks[i].kind == 'chapters') {
+                                chapterTracksSrc = videojsPlayer.videoData.tracks[i].src;
+                                videojsPlayer.chapterTracksSource  = chapterTracksSrc;
+                            }
                         }
-                    }
 
-                    // process chapter tracks
-                    if (j1.modules.videojs.data.players[playerId].videoData.tracks.length) {
-                        playerId = videojsPlayer.id();
-                        timeline = $(videojsPlayer.controlBar.progressControl.children_[0].el_);
+                        // process chapter tracks
+                        if (j1.modules.videojs.data.players[playerId].videoData.tracks.length) {
+                            playerId = videojsPlayer.id();
+                            timeline = $(videojsPlayer.controlBar.progressControl.children_[0].el_);
 
-                        removeChapterMarkers(timeline, playerId);
+                            removeChapterMarkers(timeline, playerId);
 
-                        // add chapter tracks when playing alreay (e.g. autoplay)
-                        // -----------------------------------------------------                        
-                        if (isPlaying(videojsPlayer)) {
-                            addChapterMarkers(videojsPlayer) 
-                        } // END if VideoJS player isPlaying
+                            // add chapter tracks when playing alreay (e.g. autoplay)
+                            // -----------------------------------------------------                        
+                            if (isPlaying(videojsPlayer)) {
+                                addChapterMarkers(videojsPlayer) 
+                            } // END if VideoJS player isPlaying
 
-                        // jadams, 2025-06-22: prepare settting start position
-                        // TODO: coding is to be continued 
-                        // -----------------------------------------------------
-                        // videojsPlayer.currentTime(videoStart);
+                            // jadams, 2025-06-22: prepare processing start position
+                            // TODO: coding is to be continued 
+                            // -------------------------------------------------
+                            // videojsPlayer.currentTime(videoStart);
 
-                        // remove chapter tracks on event 'pause'
-                        // -----------------------------------------------------
-                        videojsPlayer.on("pause", function() {
+                            // remove chapter tracks on event 'pause'
+                            // -------------------------------------------------
+                            videojsPlayer.on("pause", function() {
+                                var timeline = $(videojsPlayer.controlBar.progressControl.children_[0].el_);
+
+                                removeChapterMarkers(timeline, videojsPlayer.id());
+                            }); // END on event 'pause'
+
+                            // add chapter tracks on event 'play'
+                            // -------------------------------------------------
+                            videojsPlayer.on("play", function() {
+                                addChapterMarkers(videojsPlayer) 
+                            }); // END on event 'play'
+
+                            // failsafe: remove chapter markers on the player removed||destroyed
+                            videojsPlayer.on("dispose", function() {
+                                var timeline = $(videojsPlayer.controlBar.progressControl.children_[0].el_);
+
+                                // remove already existing markers for the  player destroyed
+                                removeChapterMarkers(timeline, videojsPlayer.id());
+                            });
+
+                        } else {
+                            // remove existing chapter markers if NO tracks enabled
                             var timeline = $(videojsPlayer.controlBar.progressControl.children_[0].el_);
+                            var playerId = videojsPlayer.id();
 
-                            removeChapterMarkers(timeline, videojsPlayer.id());
-                        }); // END on event 'pause'
+                            removeChapterMarkers(timeline, playerId);                        
+                        } // END if chapterTracks enabled
 
-                        // add chapter tracks on event 'play'
-                        // -----------------------------------------------------
-                        videojsPlayer.on("play", function() {
-                            addChapterMarkers(videojsPlayer) 
-                        }); // END on event 'play'
-
-                        // failsafe: remove chapter markers on the player removed||destroyed
-                        videojsPlayer.on("dispose", function() {
-                            var timeline = $(videojsPlayer.controlBar.progressControl.children_[0].el_);
-
-                            // remove already existing markers for the  player destroyed
-                            removeChapterMarkers(timeline, videojsPlayer.id());
-                        });
-
-                    } else {
-                        // remove existing chapter markers if NO tracks enabled
-                        var timeline = $(videojsPlayer.controlBar.progressControl.children_[0].el_);
-                        var playerId = videojsPlayer.id();
-
-                        removeChapterMarkers(timeline, playerId);                        
-                    } // END if chapterTracks enabled
+                    } // END if
 
                 } // END if videojsOptions
 
@@ -818,7 +813,8 @@
                 <source
                   type="video/youtube",
                   src="//youtube.com/watch?v=${ytVideoID}"
-                >
+                >,
+                <tracks>
 
                 Your browser does not support HTML5 video.
               </video>
