@@ -341,21 +341,19 @@
         // main
         // =====================================================================
         dependency_met_module_ready = setInterval (() => {
-            var playerId, videoData, timeline,
-            textTracks, isModuleInitialised, isVideojsOptions,
-            hasChapters, hasSubtitles;
+            var playerId, videoData, timeline;
 
-            textTracks          = videojsPlayer.textTracks();
-            isModuleInitialised = (j1.adapter.gallery.getState() === 'finished') ? true : false;
-            isVideojsOptions    = (isEmpty(vjsObject.settings.videojsOptions)) ? false : true;
+            const textTracks         = videojsPlayer.textTracks();
+            var isModuleInitialised  = (j1.adapter.gallery.getState() === 'finished') ? true : false;
+            var isVideojsOptions     = (isEmpty(vjsObject.settings.videojsOptions)) ? false : true;
 
-            // check on chapters
-            hasChapters = Array.from(textTracks).some(track => 
+            // Prüfung auf Chapters
+            const hasChapters = Array.from(textTracks).some(track => 
                 track.kind === 'chapters' && track.cues && track.cues.length > 0
             );
             
-            // check on subtitles||captions  
-            hasSubtitles = Array.from(textTracks).some(track => 
+            // Prüfung auf Subtitles/Captions  
+            const hasSubtitles = Array.from(textTracks).some(track => 
                 (track.kind === 'subtitles' || track.kind === 'captions') && 
                 track.cues && track.cues.length > 0
             );
@@ -395,7 +393,7 @@
                     zoom:                       vjsOptions.plugins.zoomButtons.zoom
                 };
 
-                //  add customControlContainer
+                //  jadams, 2025-06-11: added customControlContainer
                 // -------------------------------------------------------------
                 var vjsPlayerControlBar = videojsPlayer.controlBar;
 
@@ -433,7 +431,7 @@
                     zoomPlugin        = vjsObject.settings.videojsOptions.controlBar.zoomPlugin;
                     playbackRates     = vjsObject.settings.videojsOptions.controlBar.playbackRates;
 
-                    // add video start position
+                    //  jadams, 2024-01-22: added video start position
                     // ---------------------------------------------------------
                     if (vjsObject.settings.videojsOptions.videoStart !== undefined) {
                         videoStart = vjsObject.settings.videojsOptions.videoStart[index];
@@ -443,11 +441,11 @@
                         }); // END on event play
                     } // END if videoStart
 
-                    // add playbackRates
+                    // add playbackRates, only available for VideoJS
                     // ---------------------------------------------------------
                     videojsPlayer.playbackRates(playbackRates);
 
-                    // add hotkeys Plugin
+                    // add hotkeys Plugin, only available for VideoJS
                     // ---------------------------------------------------------
                     if (hotKeysPlugin !== undefined && hotKeysPlugin.enabled && videojsPlayer.hotKeys !== undefined) {
 
@@ -491,7 +489,7 @@
 
                     } // END if hotKeysPlugin enabled
 
-                    // add skipButtons Plugin
+                    // add skipButtons Plugin, only available for VideoJS
                     // ---------------------------------------------------------
                     if (skipButtonsPlugin !== undefined && skipButtonsPlugin.enabled && videojsPlayer.skipButtons !== undefined) {
                         // merge objects
@@ -514,7 +512,7 @@
 
                     } // END if skipButtons Plugin enabled
 
-                    // add zoom Plugin (only available for video/mp4
+                    // add zoom Plugin (only available for VJS|local video/mp4)
                     // ---------------------------------------------------------
                     if (videoInfo.youtube) {
                         // zoom pluging NOT supported for YouTube
@@ -542,7 +540,7 @@
 
                     } // END if zoom Plugin enabled
 
-                    // chapter track processing
+                    // chapter track processing, only available if enabled
                     // ---------------------------------------------------------
                     var tracksEnabled = vjsObject.settings.videojsOptions.tracks;
                     if (tracksEnabled && vjsObject.core.galleryItems[vjsObject.core.index].video !== undefined) {
@@ -583,7 +581,7 @@
                             timeline = $(videojsPlayer.controlBar.progressControl.children_[0].el_);
                             removeChapterMarkers(timeline, playerId);
 
-                            // add chapter markers when playing (e.g. autoplay)
+                            // add chapter markers when playing alreay (e.g. autoplay)
                             // -------------------------------------------------
                             if (isPlaying(videojsPlayer)) {
                                 addChapterMarkers(videojsPlayer);
@@ -595,44 +593,29 @@
                             // videojsPlayer.currentTime(videoStart);
 
                             // remove chapter markers on event 'pause'
-                            // TODO: should be confifurable
                             // -------------------------------------------------
-                            // videojsPlayer.on("pause", function() {
-                            //     var timeline = $(videojsPlayer.controlBar.progressControl.children_[0].el_);
-                            //     removeChapterMarkers(timeline, videojsPlayer.id());
-                            // }); // END on event 'pause'
+                            videojsPlayer.on("pause", function() {
+                                var timeline = $(videojsPlayer.controlBar.progressControl.children_[0].el_);
+                                removeChapterMarkers(timeline, videojsPlayer.id());
+                            }); // END on event 'pause'
 
                             // add chapter tracks on event 'play'
-                            // TODO: should be configurable
                             // -------------------------------------------------
                             videojsPlayer.on("play", function() {
                                 addChapterMarkers(videojsPlayer) 
                             }); // END on event 'play'
 
                             // failsafe: remove chapter markers on player destroyed
-                            // TODO: should be configurable
                             // -------------------------------------------------
                             // videojsPlayer.on("dispose", function() {
                             //     var timeline = $(videojsPlayer.controlBar.progressControl.children_[0].el_);
                             //     removeChapterMarkers(timeline, videojsPlayer.id());
                             // });
 
-                            // add tracks and buttons
+                            // Add tracks and buttons to VJS player
                             // -------------------------------------------------
                             videojsPlayer.addRemoteTextTrack(videojsPlayer.captionTracks);
                             videojsPlayer.addRemoteTextTrack(videojsPlayer.chapterTracks);
-
-                            // enable 'english' caption tracks
-                            // -------------------------------------------------
-                            textTracks = videojsPlayer.textTracks();
-                            for (var i = 0; i < textTracks.length; i++) {
-                                var track = textTracks[i];
-                                if (track.kind === 'captions' && track.language === 'en') {
-                                    track.mode = 'showing';     // enable
-                                } else {
-                                    track.mode = 'disabled';    // disable other
-                                }
-                            }                            
 
                         } else {
                             // remove existing chapter markers if NO tracks enabled

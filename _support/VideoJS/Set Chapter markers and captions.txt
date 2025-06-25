@@ -1,0 +1,406 @@
+Wie kann man für VideoJS Player dynamisch (zur Laufzeit)  Chapters
+und Captions über bereits bestehende WEBVTT Dateien ergänzen oder löschen?
+
+Gebe Beispiele für die notwendigen WEBVTT Dateien der Chapters und Captions.
+
+Gebe ausführliche Beispiele für die notwendigen JavaScript Kommandos zum
+ergänzen und enfernen von Tracks.
+
+
+Claude
+--------------------------------------------------------------------------------
+// https://claude.ai/chat/861f694b-dd5c-4703-868c-78ae3b975890
+
+
+Für VideoJS Player können Sie Chapters und Captions dynamisch zur Laufzeit
+über die VideoJS API hinzufügen.
+
+Hier ist eine vollständige Lösung für das dynamische Hinzufügen von
+Chapters und Captions zu VideoJS Playern.
+
+## Hauptmethoden für dynamische Tracks:
+
+### 1. **addRemoteTextTrack()**
+
+Tracks hinzufügen.
+
+```javascript
+videojsPlayer.addRemoteTextTrack({
+    default:  true,
+    kind:     'chapters',      // oder 'captions', 'subtitles'
+    src:      '/assets/video/tracks/html5/peck_pocketed/chapters/video.vtt',
+    srclang:  'en',
+    label:    'English'
+    
+}, false);
+```
+
+## WEBVTT Datei-Beispiele
+--------------------------------------------------------------------------------
+
+### Chapters (chapters.vtt):
+```
+WEBVTT
+
+CHAPTER
+00:00:00.000 --> 00:01:30.000
+Intro
+
+CHAPTER  
+00:01:30.000 --> 00:03:45.000
+Hauptteil
+```
+
+### Captions (captions-de.vtt):
+```
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.000
+Willkommen zu diesem Video!
+
+2
+00:00:03.000 --> 00:00:06.000
+Heute zeigen wir Ihnen VideoJS.
+```
+
+## Wichtige Punkte:
+
+- **Blob URLs**: Für dynamische Inhalte können Sie WEBVTT-Strings in
+  Blob URLs umwandeln
+- **Track Management**: Entfernen Sie existierende Tracks bevor Sie
+  neue hinzufügen
+- **Multiple Sprachen**: Unterschiedliche `srclang` Werte für
+   verschiedene Sprachen
+- **Default Track**: `default: true` aktiviert den Track automatisch
+
+Das Beispiel zeigt eine vollständig funktionsfähige Implementierung mit
+Buttons zum Testen der verschiedenen Funktionen.
+
+
+
+Perplexity
+--------------------------------------------------------------------------------
+// https://www.perplexity.ai/search/wie-kann-man-fur-videojs-playe-kqbOYJe3Ssyaj.qKEl_2rA
+
+
+Um Kapitel (Chapters) und Untertitel (Captions) in VideoJS dynamisch zur
+Laufzeit hinzuzufügen oder zu entfernen, sind WebVTT-Dateien und
+JavaScript-Methoden erforderlich.
+
+Hier ist eine detaillierte Anleitung mit Beispielen:
+
+### **1. WEBVTT-Dateien für Chapters und Captions**  
+
+#### Kapitel (Chapters)-Beispiel:  
+```webvtt
+WEBVTT
+
+00:00:00.000 --> 00:00:30.000
+Einführung
+00:00:30.000 --> 00:01:15.000
+
+Hauptteil
+00:01:15.000 --> 00:02:00.000
+
+Zusammenfassung:
+
+```
+- **Struktur**: Zeitstempel im Format `hh:mm:ss.mss`, gefolgt vom Kapiteltitel
+  (jeweils nur eine Zeile).  
+- **Hinweis**: Kapitel müssen lückenlos aufeinanderfolgen[2][3].  
+
+#### Untertitel (Captions)-Beispiel:  
+```webvtt
+WEBVTT
+
+00:00:05.000 --> 00:00:10.000
+Hallo, willkommen bei dieser Demo.
+
+00:00:15.000 --> 00:00:20.000
+Dies ist ein dynamischer Untertitel.
+```
+
+### **2. JavaScript für dynamische Tracks** 
+
+#### Kapitel oder Untertitel hinzufügen:
+
+```javascript
+const player = videojs('my-video');
+
+// Neuen Track erstellen
+const track = player.addTextTrack('chapters', 'Deutsch', 'de'); // Für Captions: 'captions'
+
+// Cues aus WebVTT-Datei laden (Beispiel mit Kapiteln)
+track.addCue(new VTTCue(0, 30, 'Einführung')); // Start, Ende, Text
+track.addCue(new VTTCue(30, 75, 'Hauptteil'));
+track.mode = 'showing'; // Track sichtbar machen
+```
+
+- **Erklärung**:  
+  - `addTextTrack(kind, label, language)` erstellt einen neuen Track.  
+  - `VTTCue(start, end, text)` definiert Zeitabschnitte und Text[1][4].  
+  - Für Remote-WebVTT-Dateien:  
+    ```javascript
+    const trackEl = document.createElement('track');
+    trackEl.kind = 'chapters';
+    trackEl.label = 'Deutsch';
+    trackEl.src = 'pfad/zur/datei.vtt';
+    player.remoteTextTracks().addTrackElement(trackEl);
+    ```
+
+#### Tracks entfernen:
+
+```javascript
+const tracks = player.remoteTextTracks();
+
+// Track deaktivieren und aus DOM entfernen
+tracks.tracks().forEach((track, index) => {
+  if (track.label === 'Deutsch') {
+    track.mode = 'disabled'; // Deaktiviert den Track
+    const trackEl = track.trackElement;
+    if (trackEl) trackEl.parentNode.removeChild(trackEl); // Entfernt DOM-Element
+  }
+});
+```
+
+**Hinweis**: Direktes Löschen via API ist nicht möglich.
+Zum Löschen is ein  Deaktivieren + DOM-Manipulation sind notwendig[5][6].  
+
+---
+
+### **Zusammenfassung der Schritte**
+
+1. **WebVTT-Dateien erstellen**:  
+   - Kapitel: Zeitbereiche + Titel (eine Zeile pro Kapitel).  
+   - Untertitel: Zeitbereiche + Text.  
+
+2. **Tracks hinzufügen**:  
+   - `addTextTrack()` für manuelle Cues.  
+   - ``-Element für Remote-Dateien.  
+
+3. **Tracks entfernen**:  
+   - Track deaktivieren (`mode = "disabled"`).  
+   - DOM-Element entfernen (falls vorhanden).  
+
+> **Wichtig**: Bei Verwendung von Remote-Dateien muss der Track über ein
+``-Element hinzugefügt werden, um ihn später entfernen zu können[5][6].
+Native Browser-APIs erlauben kein direktes Löschen von Tracks, daher ist
+eine DOM-Manipulation nötig.
+
+[1]  https://videojs.com/guides/text-tracks/
+[2]  https://studio.support.brightcove.com/media/captions/adding-chapters-video.html
+[3]  https://www.brightcove.com/tech-talk/how-chapterize-your-videos-using-webvtt-files/
+[4]  https://stackoverflow.com/questions/32947215/dynamically-change-videojs-captions-with-addtexttrack
+[5]  https://stackoverflow.com/questions/29306931/delete-a-texttrack-from-a-video
+[6]  https://stackoverflow.com/questions/18114092/cannot-dynamically-change-a-caption-track-in-video-js
+[7]  https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_API/Web_Video_Text_Tracks_Format
+[8]  https://docs.videojs.com/docs/guides/text-tracks.html
+[9]  https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_API
+[10] https://www.w3.org/TR/webvtt1/
+[11] https://player.support.brightcove.com/user-interface/adding-captions-videos-programmatically.html
+[12] https://stackoverflow.com/questions/66132308/how-to-remove-caption-setting-option-from-caption-cascading-on-videojs-in-react
+[13] https://github.com/videojs/video.js/issues/3244
+[14] https://www.nuevodevel.com/nuevo/showcase/chapters
+[15] https://github.com/videojs/video.js/issues/3202
+[16] https://www.speechpad.com/captions/webvtt
+[17] https://codesandbox.io/s/video-js-with-text-track-poc-xn3tc
+[18] https://gist.github.com/gkatsev/a32561a1691354f327b8
+[19] https://www.radiantmediaplayer.com/docs/latest/chapters.html
+[20] https://lists.w3.org/Archives/Public/public-texttracks/2011Nov/att-0017/webvtt.html
+[21] https://www.3playmedia.com/blog/how-to-create-a-webvtt-file/
+[22] https://meryl.net/vtt/
+[23] https://github.com/CosmicMedia/chapter-vtt
+[24] https://www.w3schools.com/tags/av_met_addtexttrack.asp
+[25] https://www.w3schools.com/jsref/met_video_addtexttrack.asp
+[26] https://developer.mozilla.org/en-US/docs/Web/API/MediaStream/removeTrack
+[27] https://www.npmjs.com/package/@viostream/videojs-chapters?activeTab=readme
+[28] https://www.npmjs.com/package/@viostream/videojs-chapters
+
+
+
+
+
+Welche WebVTT-Struktur ist notwendig, um Kapitel und Captions im Web
+zu ergänzen?
+
+Perplexity
+--------------------------------------------------------------------------------
+
+Um Kapitel (Chapters) und Untertitel (Captions) im Web über WebVTT zu
+ergänzen, ist jeweils eine spezifische Struktur der .vtt-Datei notwendig.
+Beide Formate basieren auf dem gleichen Grundprinzip, unterscheiden sich
+aber in der Verwendung und im Aufbau der Einträge.
+
+## **Grundstruktur einer WebVTT-Datei**
+
+- Die Datei beginnt immer mit dem Header `WEBVTT` (optional gefolgt
+  von einem Kommentar oder Titel).
+- Es folgen die einzelnen Einträge (Cues), die jeweils mit einem
+  Zeitstempel beginnen.
+- Zeitstempel-Format: `hh:mm:ss.mmm --> hh:mm:ss.mmm`
+- Zwischen jedem Eintrag steht eine Leerzeile.
+- Die Dateiendung muss `.vtt` sein[1][2][3].
+
+---
+
+## **Beispiel: WebVTT für Kapitel (Chapters)**
+
+```vtt
+WEBVTT
+
+00:00:00.000 --> 00:00:30.000
+Einführung
+
+00:00:30.000 --> 00:01:15.000
+Hauptteil
+
+00:01:15.000 --> 00:02:00.000
+Zusammenfassung
+```
+
+- Jeder Cue markiert den Start und das Ende eines Kapitels.
+- Der Text unterhalb des Zeitstempels ist der Kapitelname[4][5][1].
+- Keine weiteren Formatierungen oder Einstellungen notwendig.
+
+---
+
+## **Beispiel: WebVTT für Untertitel (Captions)**
+
+```vtt
+WEBVTT
+
+00:00:05.000 --> 00:00:10.000
+Hallo, willkommen bei dieser Demo.
+
+00:00:15.000 --> 00:00:20.000
+Dies ist ein dynamischer Untertitel.
+```
+
+- Jeder Cue enthält den gesprochenen Text für den jeweiligen Zeitraum.
+- Optional KANN jeder Cue eine fortlaufende Nummer erhalten, ist aber
+  nicht zwingend[2][1].
+- Für Captions können zusätzliche Einstellungen wie Position oder Stil
+  nach dem Zeitstempel ergänzt werden (z.B. `line:90%`)[2].
+
+---
+
+## **Wichtige Hinweise zur Struktur**
+
+- Die Zeitstempel müssen exakt formatiert sein: `Stunden:Minuten:Sekunden.Millisekunden`[1][2].
+- Zwischen den Einträgen muss jeweils eine Leerzeile stehen[1][2].
+- Die Datei muss als reiner Text gespeichert werden (kein Rich Text)[4][5].
+- Für Kapitel und Untertitel wird die gleiche Grundstruktur verwendet,
+  aber die Interpretation durch den Player erfolgt über das `kind`-Attribut
+  im ``-Element (z.B. `kind="chapters"` oder `kind="captions"`)[3].
+
+---
+
+## **Zusammenfassung**
+
+- **Kapitel:** Jeder Cue steht für ein Kapitel, der Text ist der Kapitelname.
+- **Captions:** Jeder Cue steht für einen Untertitel, der Text ist der
+  anzuzeigende Untertitel.
+- **Technische Anforderungen:** Korrekte Zeitstempel, Leerzeilen,
+  Dateiendung `.vtt`, reiner Text[1][2][4].
+
+Mit dieser Struktur können Sie sowohl Kapitel als auch Untertitel einfach
+im Web ergänzen.
+
+[1]  https://help.itc.rwth-aachen.de/service/8d9eb2f36eea4fcaa9abd0e1ca008b22/article/cccca264d518404ea3c9587bc93d7a73/
+[2]  https://www.3playmedia.com/blog/how-to-create-a-webvtt-file/
+[3]  https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_API
+[4]  https://www.brightcove.com/tech-talk/how-chapterize-your-videos-using-webvtt-files/
+[5]  https://www.brightcove.com/fr/resources/blog/how-chapterize-your-videos-using-webvtt-files/
+[6]  https://www.checksub.com/de/blog/leitfaden-verwendung-webvtt-untertitel-format
+[7]  https://support.microsoft.com/en-us/office/create-closed-captions-for-a-video-b1cfb30f-5b00-4435-beeb-2a25e115024b
+[8]  https://www.w3.org/TR/webvtt1/
+[9]  https://transcri.io/de/untertitel-generator/vtt
+[10] https://www.radiantmediaplayer.com/docs/latest/chapters.html
+[11] https://www.loc.gov/preservation/digital/formats/fdd/fdd000567.shtml
+[12] https://scribewire.ca/blog/a-comprehensive-guide-to-the-vtt-file-format
+[13] https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_API/Web_Video_Text_Tracks_Format
+[14] https://www.amberscript.com/de/blog/kapitelmarkierungen-zu-einer-vtt-datei-hinzufugen/
+[15] https://en.wikipedia.org/wiki/WebVTT
+[16] https://docs.fileformat.com/de/video/vtt/
+[17] https://hellovisual.de/vtt-untertitel-datei-erstellen-so-gehts/
+
+
+
+Wie kann man bei einem VideoJS Player Caption-Tracks zur Laufzeit manuell
+per JavaScript ein- und ausschalten?
+
+Perplexity
+--------------------------------------------------------------------------------
+
+## Caption-Tracks bei VideoJS zur Laufzeit per JavaScript ein- und ausschalten
+
+Um Caption-Tracks (z. B. Untertitel oder Übersetzungen) in einem VideoJS
+Player zur Laufzeit manuell per JavaScript ein- oder auszuschalten, kannst
+du direkt auf die textTracks()-API des Players zugreifen und dort den mode
+der gewünschten Spur setzen.
+
+**Vorgehen:**
+
+- Hole dir die TextTracks des Players mit `player.textTracks()`.
+- Durchlaufe die Tracks und setze für den gewünschten Track die
+  Eigenschaft `mode` auf `"showing"` (einblenden) oder `"disabled"`
+  (ausblenden).
+
+**Beispiel:**
+
+```javascript
+// Angenommen, 'player' ist deine VideoJS-Instanz
+var tracks = player.textTracks();
+
+for (var i = 0; i < tracks.length; i++) {
+  var track = tracks[i];
+  // Beispiel: Englische Captions anzeigen
+  if (track.kind === 'captions' && track.language === 'en') {
+    track.mode = 'showing'; // Einschalten
+  } else {
+    track.mode = 'disabled'; // Andere ausblenden
+  }
+}
+```
+
+Mit dieser Methode kannst du gezielt einzelne Tracks ein- oder ausschalten,
+ohne dass der Nutzer das Menü benutzen muss[6].
+
+**Hinweise:**
+
+- `"showing"`: Track wird angezeigt.
+- `"disabled"`: Track ist deaktiviert und wird nicht angezeigt.
+- `"hidden"`: Track ist aktiv, aber nicht sichtbar (z. B. für Metadaten).
+
+Weitere Details findest du in der offiziellen VideoJS-Dokumentation zum 
+hema Text Tracks[6].
+
+**Zusatz:**
+
+Falls du die Caption-Settings im Menü ausblenden möchtest, kannst du dies
+über die Player-Option `textTrackSettings: false` und ein wenig CSS
+erreichen:
+
+```javascript
+var player = videojs('myvideo', {
+  textTrackSettings: false
+});
+```
+```css
+.vjs-texttrack-settings {
+  display: none;
+}
+```
+
+Damit wird das Caption-Settings-Menü entfernt, hat aber keinen Einfluss auf
+das manuelle Umschalten der Tracks per JavaScript[6][1][2].
+
+[1] https://github.com/videojs/video.js/issues/3202
+[2] https://stackoverflow.com/questions/35806897/how-do-we-disable-captions-settings-in-a-video-js-player
+[3] https://github.com/videojs/video.js/issues/8662
+[4] https://docs.videojs.com/docs/api/caption-settings-menu-item.html
+[5] https://de.player.support.brightcove.com/plugins/picture-picture-plugin-aka-floating-or-pinned.html
+[6] https://videojs.com/guides/text-tracks/
+[7] https://developer.mozilla.org/de/docs/Web/Media/Guides/Audio_and_video_delivery/Adding_captions_and_subtitles_to_HTML5_video
+[8] https://verbit.my.site.com/s/article/115000358366-Closed-Captioning-with-Video-js

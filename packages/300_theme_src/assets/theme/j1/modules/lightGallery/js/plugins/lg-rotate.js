@@ -27,9 +27,10 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.lgRotate = factory());
-}(this, (function () { 'use strict';
-
-    /*! *****************************************************************************
+}(this, (function () {
+    'use strict';
+    /*! 
+    ****************************************************************************
     Copyright (c) Microsoft Corporation.
 
     Permission to use, copy, modify, and/or distribute this software for any
@@ -42,7 +43,8 @@
     LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
     OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
     PERFORMANCE OF THIS SOFTWARE.
-    ***************************************************************************** */
+    **************************************************************************** 
+    */
 
     var __assign = function() {
         __assign = Object.assign || function __assign(t) {

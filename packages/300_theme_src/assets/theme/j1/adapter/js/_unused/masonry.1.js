@@ -290,12 +290,11 @@ j1.adapter.masonry = ((j1, window) => {
                         videojs:        {{grid.videojs.enabled}},
                         videojsTheme:   "vjs-theme-{{grid.videojs.theme}}",
                         videojsOptions: {
-                          {% comment %} disabled because of side effects
-                          ------------------------------------------------------
+                          {% for option in grid.lightGallery.player.videojsPlayer.videojsOptions %}
+                          {{option[0] | json}}: {{option[1] | json}},
+                          {% endfor %}
                           "tracks":   {{grid.videojs.player.videojsPlayer.videojsOptions.tracks}},
-                          ------------------------------------------------------
-                          {% endcomment %}
-                          "controls": {{grid.videojs.player.videojsPlayer.videojsOptions.controls}},
+                          "controls": {{grid.videojs.player.videojsPlayer.controls}},
                           "controlBar": {
                             {% for option in grid.videojs.player.videojsPlayer.controlBar %}
                             {{option[0] | json}}: {{option[1] | json}}{% if forloop.last %}{% else %},{% endif %}

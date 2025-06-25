@@ -1,0 +1,65 @@
+Ich benötige eine Liste aller VideoJS ControlBar Elemente wie
+pictureInPictureToggle.
+
+Claude
+--------------------------------------------------------------------------------
+// https://claude.ai/chat/861f694b-dd5c-4703-868c-78ae3b975890
+
+Hier ist eine umfassende Liste der VideoJS ControlBar Elemente:
+
+## Standard ControlBar Komponenten
+
+**Playback Controls:**
+- `playToggle` - Play/Pause Button
+- `replayButton` - Replay Button (erscheint am Ende des Videos)
+
+**Navigation:**
+- `currentTimeDisplay` - Aktuelle Wiedergabezeit
+- `timeDivider` - Trennzeichen zwischen aktueller Zeit und Gesamtdauer
+- `durationDisplay` - Gesamtdauer des Videos
+- `progressControl` - Fortschrittsbalken mit Scrubbing-Funktionalität
+- `remainingTimeDisplay` - Verbleibende Zeit
+
+**Audio:**
+- `volumePanel` - Volume-Kontrollen (enthält volumeControl und muteToggle)
+- `muteToggle` - Stumm-Button
+- `volumeControl` - Lautstärke-Slider
+
+**Vollbild & Darstellung:**
+- `fullscreenToggle` - Vollbild ein/aus
+- `pictureInPictureToggle` - Picture-in-Picture Modus
+
+**Erweiterte Features:**
+- `chaptersButton` - Kapitel-Navigation
+- `descriptionsButton` - Audio-Beschreibungen
+- `subtitlesButton` - Untertitel-Button
+- `captionsButton` - Closed Captions
+- `audioTrackButton` - Audio-Spur Auswahl
+- `playbackRateMenuButton` - Wiedergabegeschwindigkeit
+
+**Responsive:**
+- `customControlSpacer` - Flexibler Abstandshalter
+- `spacer` - Fester Abstandshalter
+
+## Verwendung in der Konfiguration
+
+```javascript
+var player = videojs('my-video', {
+  controls: true,
+  controlBar: {
+    playToggle: true,
+    volumePanel: {
+      inline: false
+    },
+    pictureInPictureToggle: true,
+    fullscreenToggle: true,
+    // Komponenten deaktivieren:
+    chaptersButton: false,
+    subtitlesButton: false
+  }
+});
+```
+
+Die meisten dieser Komponenten werden automatisch angezeigt, wenn die
+entsprechenden Features verfügbar sind (z.B. wird `pictureInPictureToggle`
+nur angezeigt, wenn der Browser Picture-in-Picture unterstützt).
