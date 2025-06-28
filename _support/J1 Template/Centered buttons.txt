@@ -1,0 +1,90 @@
+Wie kann ich die folgende Button-Row zentrieren und responsiv machen?
+
+<div class="speak2me-ignore mt-5">
+  <a id="roundtrip" href="/pages/public/tour/present_images/" class="btn btn-raised btn-xl btn-primary text-uppercase text-left mr-2 mb-2" style="min-width: 270px">
+	<i class="mdib mdib-briefcase-search-outline mdib-3x mdib- mr-3"></i>
+	<span class="float-right text-left mt-2 notranslate">
+	  Roundtrip
+	  <span class="d-block r-text-200 text-lowercase">learn top features</span>
+	</span>
+  </a>
+  <a id="rocketstart" href="https://jekyll.one/pages/public/learn/rocketstart/" target="blank" rel="noopener" class="btn btn-raised btn-xl btn-primary text-uppercase text-left mr-2 mb-2" style="min-width: 270px">
+	<i class="mdib mdib-rocket-launch mdib-3x mdib- mr-3"></i>
+	<span class="float-right text-left mt-2 notranslate">
+	  Rocketstart
+	  <span class="d-block r-text-200 text-lowercase">finished in minutes</span>
+	</span>
+  </a>
+  <a id="download" href="https://rubygems.org/gems/j1-template" target="blank" rel="noopener" class="btn btn-raised btn-xl btn-primary text-uppercase text-left mr-2 mb-2" style="min-width: 270px">
+	<i class="mdib mdib-briefcase-download-outline mdib-3x mdib- mr-3"></i>
+	<span class="float-right text-left mt-2 notranslate">
+	  Download
+	  <span class="d-block r-text-200 text-lowercase">get on rubygems</span>
+	</span>
+  </a>
+</div>
+
+
+Perplexity
+--------------------------------------------------------------------------------
+
+Um Ihre Button-Row zu zentrieren und responsiv zu machen, können Sie
+verschiedene Ansätze verwenden. Hier sind die besten Lösungen.
+
+Hier sind drei Lösungsansätze für Ihre Button-Row:
+
+## **Lösung 1: Einfachste Bootstrap-Lösung**
+
+Ändern Sie nur die Container-Klassen:
+
+```html
+<div class="speak2me-ignore mt-5 d-flex justify-content-center flex-wrap">
+  <!-- Ihre Buttons bleiben unverändert, nur mr-2 mb-2 durch m-2 ersetzen -->
+</div>
+```
+
+## **Lösung 2: CSS Flexbox (Empfohlen)**
+
+```css
+.button-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    .button-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+```
+
+## **Lösung 3: CSS Grid**
+
+```css  
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 1rem;
+    justify-items: center;
+    max-width: 900px;
+    margin: 2rem auto;
+}
+```
+
+## **Wichtige Responsive-Verbesserungen:**
+
+1. **Mobile-First Approach**: Buttons stapeln sich vertikal auf kleinen
+   Bildschirmen
+2. **Flexible Breiten**: `auto-fit` und `minmax()` sorgen für optimale
+   Anordnung
+3. **Touch-freundlich**: Größere Touch-Targets auf mobilen Geräten
+4. **Spacing**: Konsistente Abstände mit `gap` statt Margins
+
+Die **Bootstrap-Lösung** ist am einfachsten zu implementieren, da Sie nur
+die Container-Klassen ändern müssen. Die **Flexbox-Lösung** bietet mehr
+Kontrolle und ist modern. Die **Grid-Lösung** ist ideal für komplexere
+Layouts.
