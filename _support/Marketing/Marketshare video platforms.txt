@@ -1,0 +1,75 @@
+Welche Bedeutung bzw. Marktanteile haben die Anbieter Vimeo, Dailymotion
+und Wistia neben dem Marktführer YouTube?
+
+Perplexity
+--------------------------------------------------------------------------------
+
+## Marktanteile und Bedeutung von Vimeo, Dailymotion und Wistia im Vergleich
+zu YouTube
+
+**YouTube** ist mit einem Marktanteil von etwa 73 % der klare Marktführer
+unter den Videoplattformen und erreicht eine extrem breite, globale
+Zielgruppe[9]. Die Plattform ist in 53 Ländern und 61 Sprachen verfügbar
+und dominiert sowohl im B2C- als auch im B2B-Bereich.
+
+### Vimeo
+
+- Vimeo hält etwa 4,1 % des weltweiten Online-Video-Streaming-Marktes[3]. 
+- Die Plattform verzeichnet rund 715 Millionen Videoaufrufe pro Monat und
+  hat eine Nutzerbasis von ca. 300 Millionen (Stand 2025)[3][8].
+- Vimeo ist besonders im B2B-Bereich und bei Kreativen beliebt, da es
+  hochwertige, werbefreie Videowiedergabe, Anpassungsmöglichkeiten für
+  den Player und professionelle Tools (inkl. KI-Funktionen) bietet[6][8].
+- Der Umsatz lag 2025 bei etwa 426 Millionen US-Dollar, mit leichtem Wachstum
+  und Fokus auf das Enterprise-Segment[1][5].
+- Vimeo ist vor allem für Unternehmen und professionelle Content-Produzenten
+  interessant, das virale Potenzial ist jedoch geringer als bei YouTube[8].
+
+### Dailymotion
+
+- Dailymotion ist die größte YouTube-Alternative hinsichtlich Reichweite
+  und Nutzerzahlen: Die Plattform zählt rund 350 Millionen Nutzer weltweit[6].
+- Sie ist besonders in Europa stark vertreten und bietet ein breites Spektrum
+  an Unterhaltungsinhalten, aber auch B2B- und B2C-Lösungen[6].
+- Dailymotion ermöglicht Monetarisierung, Analysen und Livestreaming, richtet
+  sich aber stärker an Publisher und Medienunternehmen als an Einzel-Creator[6].
+- Hinsichtlich Marktanteil bleibt Dailymotion jedoch weit hinter YouTube
+  zurück und ist international weniger präsent als der Marktführer.
+
+### Wistia
+
+- Wistia ist im Vergleich zu YouTube, Vimeo und Dailymotion deutlich kleiner,
+  hat aber im Bereich Video-Marketing und B2B eine besondere Nische gefunden[8].
+- Die Plattform bietet spezialisierte Marketing- und Analysefunktionen, die
+  für Unternehmen mit Fokus auf Lead-Generierung und Conversion-Tracking
+  attraktiv sind[8].
+- Wistia ist weniger eine breite Videoplattform, sondern eher ein
+  professionelles Videotool für Unternehmen und Agenturen.
+
+## Vergleich der Plattformen
+
+| Plattform    | Marktanteil (ca.) | Nutzerbasis        | Ausrichtung            | Besonderheiten                       |
+|--------------|-------------------|--------------------|------------------------|--------------------------------------|
+| YouTube      | 73 %              | Milliarden         | B2C, B2B, global       | Größte Reichweite, virales Potenzial |
+| Vimeo        | 4,1 %             | 300 Mio.           | B2B, Kreative          | Werbefrei, hohe Qualität, Nische     |
+| Dailymotion  | <5 %              | 350 Mio.           | B2C, Publisher, Europa | Breite Inhalte, Monetarisierung      |
+| Wistia       | sehr gering       | nicht veröffentlicht| B2B, Marketing         | Analyse- und Marketingtools          |
+
+## Fazit
+
+Neben YouTube spielen Vimeo, Dailymotion und Wistia weltweit nur eine
+untergeordnete Rolle, bedienen aber jeweils spezifische Zielgruppen und
+Anwendungsfälle. Vimeo ist die größte professionelle Alternative, Dailymotion
+punktet mit Reichweite in bestimmten Märkten, und Wistia ist im Segment
+B2B-Marketing stark[3][6][8][9].
+
+[1] https://www.high-tech-investing.de/post/vimeo-aktie-2025
+[2] https://electroiq.com/stats/vimeo-statistics/
+[3] https://thumbnailtest.com/stats/vimeo/
+[4] https://eulerpool.com/aktie/Vimeo-%D7%A9%D7%98%D7%A8%20%D7%A4%D7%99%D7%A7%D7%93%D7%95%D7%9F-US92719V1008/ROCE
+[5] https://aktien.guide/kursziel/Vimeo-US92719V1008
+[6] https://blog.hubspot.de/marketing/youtube-alternative
+[7] https://aktienfinder.net/aktien-profil/Vimeo-Aktie
+[8] https://www.trialta.de/blog/youtube-vimeo-wistia
+[9] https://de.ryte.com/wiki/Videoplattformen/
+

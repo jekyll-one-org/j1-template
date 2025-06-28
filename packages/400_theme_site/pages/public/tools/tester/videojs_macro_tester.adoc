@@ -79,6 +79,43 @@ or Dailymotion, for presenting videos *online*.
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 
+// .Vimeo Video · The Present
+// // 137221158 152985022
+// ++++
+// <iframe
+//     width="930" height="640"
+//     src="https://player.vimeo.com/video/152985022" 
+//     frameborder="0" 
+//     allowfullscreen>
+// </iframe>
+// ++++
+
+
+// .Dailymotion Video · Blödsinn
+// // x7vn9g2 
+// ++++
+// <iframe
+//     width="930" height="640"
+//     src="https://www.dailymotion.com/embed/video/x8oz6w2"
+//     frameborder="0"
+//     allowfullscreen>
+// </iframe>
+// ++++
+
+
+// .Wistia Video · Blödsinn
+// ++++
+// <iframe
+//     width="930" height="640"
+//     src="https://fast.wistia.net/embed/iframe/zs8hlyi5xz"
+//     allowtransparency="true"
+//     frameborder="0"
+//     scrolling="no"
+//     class="wistia_embed" name="wistia_embed"
+//     allowfullscreen>
+// </iframe>
+// ++++
+
 ifeval::[{videojs--local-video} == true]
 [role="mt-5"]
 == Local Video

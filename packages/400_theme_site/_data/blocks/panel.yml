@@ -30,7 +30,7 @@ description:
 settings:
 
   filters:
-    grayscale:                          1
+    grayscale:                          0
     contrast:                           1
     brightness:                         1
 
@@ -406,48 +406,47 @@ settings:
 
         position:                       left                                    # left | center
         title:                          J1 Template
-        tagline:                        free bootstrap V5 theme for jekyll
+        tagline:                        The all-in Bootstrap V5 Theme for Jekyll
         description_properties:         mt-3 mr-3 mb-3
         description: >
                                         <p class="dropcap">
-                                          People quite often ask if static websites make sense for
-                                          anything beyond a one-page website. Some others see in
-                                          static websites the stone age of the World Wide Web.
-                                          What is achievable today?
+                                          Jekyll One is a modern, flexible, and easy-to-use template system
+                                          for Jekyll, based on Bootstrap 5, and offers numerous features for the
+                                          Quick and professional creation of static websites, completely without
+                                          license costs and any programming effort, allowing you to start in no time
+                                          without requiring  a costly toolset.
+                                          <br><br>
+                                          Jekyll One is aimed at:
+                                          <ul>
+                                            <li>
+                                              <p style="margin-bottom: 0;"><b>Beginners</b> who want to create professional websites without much effort.</p>
+                                            </li>                                          
+                                            <li>
+                                              <p style="margin-bottom: 0;"><b>Web developers</b> who work with Jekyll and are looking for a powerful, modern template.</p>
+                                            </li>
+                                            <li>
+                                              <p style="margin-bottom: 0;"><b>Companies</b> who need fast websites but focus on the highest level of security to prevent attacks.</p>
+                                            </li>
+                                          </ul>
                                         </p>
                                         <p>
-                                          This board highlights top features, which make static webs
-                                          not only an option but a state-of-the-art technology to create
-                                          fast, secure, and sophisticated websites for many use cases.
+                                          The system is suitable for all types of websites: blogs, documentation
+                                          sites, portfolios, or company websites. It is based on a so-called
+                                          <i>Starter Web</i>, which serves as a basic framework and can be easily customized.
                                         </p>
                                         <ul>
                                           <li>
-                                            <p style="margin-bottom: 0;">Current Technology and Design. Excellent performance on all devices.</p>
+                                            <p style="margin-bottom: 0;"><b>Easy to customize.</b> A featured website that provides numerous examples is included.</p>
                                           </li>
                                           <li>
-                                            <p style="margin-bottom: 0;">Fully Responsive. Best results on PCs, Tablets, and SmartPhones.</p>
+                                            <p style="margin-bottom: 0;"><b>Extensible.</b> Many modules and extensions are already integrated, and more can be easily added.</p>
                                           </li>
                                           <li>
-                                            <p style="margin-bottom: 0;">Start in no time. No programming is needed using J1 Template.</p>
+                                            <p style="margin-bottom: 0;"><b>Highest performance.</b> Optimized for best results in Google Lighthouse.</p>
                                           </li>
                                         </ul>
-                                        <p class="fw-bold mt-4 mb-5">Explore what the J1 Template system can do for your next website.</p>
-
-        wave:
-          top:
-            enabled:                    false
-            height:                     2                                     # [1 .. 9]
-            style:                      wave-1                                # default
-            color:                      var(--md-gray-200)
-            background_color:           var(--md-gray-50)
-            transform:                  false                                 # false or rotate|flip-x|flip-y and combinations
-          bottom:
-            enabled:                    false
-            height:                     2
-            style:                      wave-4
-            color:                      var(--md-gray-200)
-            background_color:           var(--md-gray-50)
-            transform:                  rotate
+                                        <!-- p class="fw-bold mt-4 mb-5">Explore what the J1 Template system can do for your next website.</p -->
+                                        <p class="mt-4 mb-4 fw-bold d-flex justify-content-center flex-wrap">Explore what the J1 Template system can do for your next website.</p>
 
         cards:
 
@@ -736,7 +735,7 @@ settings:
         title:                          Blog
         tagline:                        latest news
         translate_description:          notranslate                             # translate|notranslate
-        description_properties:         mt-3 mr-3 mb-5
+        description_properties:         mt-3 mr-3 mb-4
         description: >
                                         <p class="dropcap">
                                           Explore the blog and find interesting articles about
@@ -744,22 +743,8 @@ settings:
                                           blog is an excellent example of how J1 and Jekyll can be
                                           used for blogging.
                                         </p>
-                                        <p class="fw-bold mb-4">Read more on how Jekyll can be used for the powerful websites of today.</p>
-        wave:
-          top:
-            enabled:                    false
-            height:                     2                                       # [1 .. 9]
-            style:                      wave-1                                  # default
-            color:                      var(--md-gray-200)
-            background_color:           var(--md-gray-50)
-            transform:                  false                                   # false or rotate|flip-x|flip-y and combinations
-          bottom:
-            enabled:                    false
-            height:                     2
-            style:                      wave-4
-            color:                      var(--md-gray-200)
-            background_color:           var(--md-gray-50)
-            transform:                  rotate
+                                        <!-- p class="fw-bold mb-4">Read more on how Jekyll can be used for the powerful websites of today.</p -->
+                                        <p class="mb-4 fw-bold d-flex justify-content-center flex-wrap">Read more on how Jekyll can be used for the powerful websites of today.</p>
 
         cards:
 

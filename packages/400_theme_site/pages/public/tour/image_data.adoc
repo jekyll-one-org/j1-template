@@ -1,7 +1,7 @@
 ---
 title:                                  Image
-title_extention:                        J1 Template Apps
-tagline:                                Apps
+title_extention:                        J1 Player Apps
+tagline:                                J1 Player Apps
 
 date:                                   2020-11-03
 #last_modified:                         2023-01-01
