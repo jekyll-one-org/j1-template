@@ -403,6 +403,7 @@
         voiceTags['.listingblock']        = new voiceTag('Text element' + pause_spoken,      'Element not spoken' + pause_spoken);
         voiceTags['.gist']                = new voiceTag('Gist element' + pause_spoken,      'Element not spoken' + pause_spoken);
         voiceTags['.slider']              = new voiceTag('Slider element' + pause_spoken,    'Element not spoken' + pause_spoken);
+        voiceTags['.swiper-app']          = new voiceTag('Slider element' + pause_spoken,    'Element not spoken' + pause_spoken);
         voiceTags['.modal']               = new voiceTag('Info element' + pause_spoken,      'Element not spoken' + pause_spoken);
         voiceTags['.masonry']             = new voiceTag('Masonry element' + pause_spoken,   'Element not spoken' + pause_spoken);
         voiceTags['.lightbox-block']      = new voiceTag('Lightbox element' + pause_spoken,  'Element not spoken' + pause_spoken);
@@ -1305,7 +1306,38 @@
 
       });
 
-      // Search for a lightbox blocks and extract the <caption> tag data,
+      // Search for (SwiperJS) slider elements, check for previous declared 
+      // <div> container that contains the title element and insert the
+      // text if exists and finally remove the DOM object.
+      //
+      $(clone).find('.swiper-app').addBack('.swiper-app').each(function() {
+
+        if ($(this).prev()[0] !== undefined) {
+          title = $(this).prev()[0].innerText;
+          title_element = $(this).prev();
+          // remove the title BEFORE the DOM object gets deleted
+          //
+          $(title_element).remove();
+        } else {
+          title = '';
+        }
+
+        prepend  = voiceTags['.swiper-app'].prepend;
+        appended = voiceTags['.swiper-app'].append;
+
+        if ((title !== undefined) && (title != '')) {
+          (prepend !== '')  && $('<div>' + prepend + ' with the title ' + title + pause_spoken + '</div>').insertBefore(this);
+          (appended !== '') && $('<div>' + appended + '</div>').insertBefore(this);
+        } else {
+          (prepend !== '')  && $('<div>' + prepend + pause_spoken  + '</div>').insertBefore(this);
+          (appended !== '') && $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+        }
+
+        $(this).remove();
+
+      });
+
+      // Search for lightbox block elements and extract the <caption> tag data,
       // insert the text if exists and finally remove the DOM object.
       //
       $(clone).find('.lightbox-block').addBack('.lightbox-block').each(function() {

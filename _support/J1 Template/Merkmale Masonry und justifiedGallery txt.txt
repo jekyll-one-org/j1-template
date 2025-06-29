@@ -1,0 +1,109 @@
+Was sind die Merkmale der JavaScript APIs Masonry und justifiedGallery
+und was sind die wesentlichen Unterschiede?
+
+Perplexity
+--------------------------------------------------------------------------------
+
+**Masonry** und **Justified Gallery** sind zwei beliebte JavaScript
+Bibliotheken zur Erstellung von Bildgalerien, unterscheiden sich aber
+grundlegend im Layout-Ansatz und der Präsentation der Inhalte.
+
+### Merkmale von Masonry
+
+- **Layout-Prinzip:** Masonry ordnet Elemente in einem sogenannten
+  "Mauerwerk"-Stil an, bei dem die Elemente wie Ziegelsteine versetzt
+  und platzsparend angeordnet werden. Die Elemente werden in optimaler
+  Position entsprechend dem verfügbaren vertikalen Raum platziert – es
+  entstehen unterschiedlich hohe Spalten, die sich an der natürlichen Höhe
+  der Inhalte orientieren[1][2][3].
+
+- **Flexibilität:** Funktioniert mit beliebigen HTML-Elementen, nicht
+  nur mit Bildern. Die Größe der Items wird über CSS gesteuert[1].
+
+- **Initialisierung:** Kann mit Vanilla JavaScript, als jQuery-Plugin
+  oder direkt über HTML-Attribute (data-masonry) genutzt werden[1].
+
+- **Responsivität:** Unterstützt responsive Layouts, wobei die Anzahl
+  der Spalten und die Anordnung dynamisch angepasst werden können[1][2][3].
+
+- **Typische Anwendung:** Ideal für Portfolios, Blog-Übersichten,
+  Pinterest-ähnliche Layouts oder jede Darstellung, bei der Elemente
+  unterschiedlicher Höhe kompakt angeordnet werden sollen[2][3].
+
+### Merkmale von Justified Gallery
+
+- **Layout-Prinzip:** Justified Gallery erstellt Galerien, bei denen
+  die Bilder in gleichmäßigen, horizontal ausgerichteten Zeilen
+  ("justified rows") angeordnet werden. Die Höhe der Zeilen ist konstant,
+  die Breite der Bilder wird proportional angepasst, sodass jede Zeile
+  die volle Containerbreite nutzt – ähnlich wie bei Flickr oder
+  Google Photos[4][5][6].
+
+- **Bildorientiert:** Speziell für Bildgalerien konzipiert. Die Bilder
+  werden nicht beschnitten, sondern in der Größe angepasst, um die Zeile
+  zu füllen[4][5].
+
+- **Initialisierung:** Funktioniert als jQuery-Plugin, das auf ein
+  Container-Element angewendet wird[5].
+
+- **Optionen:** Einstellbare Zeilenhöhe, Abstände (margins), Verhalten
+  der letzten Zeile (z.B. "nojustify"), Unterstützung für Lightbox-Effekte,
+  Bildunterschriften und Animationen[5].
+
+- **Typische Anwendung:** Besonders geeignet für Fotogalerien, bei denen
+  eine saubere, zeilenweise Ausrichtung und ein harmonisches Gesamtbild
+  im Vordergrund stehen[4][5][6].
+
+### Wesentliche Unterschiede
+
+| Merkmal                   | Masonry                                       | Justified Gallery                               |
+|---------------------------|-----------------------------------------------|-------------------------------------------------|
+| **Layout**                | Versetzte, spaltenbasierte Anordnung          | Zeilenbasierte, gleichmäßige Ausrichtung        |
+| **Elementhöhe**           | Variabel, je nach Inhalt                      | Konstante Zeilenhöhe, variable Bildbreite       |
+| **Lücken**                | Vertikale Lücken möglich                      | Zeilen werden lückenlos gefüllt                 |
+| **Einsatzgebiet**         | Vielfältig (Bilder, Cards, beliebige Inhalte) | Hauptsächlich für Bildgalerien                  |
+| **Technische Basis**      | Vanilla JS, jQuery, HTML-Attribute            | jQuery-Plugin                                   |
+| **Responsivität**         | Sehr flexibel, abhängig von Einstellungen     | Zeilenhöhe anpassbar, Containerbreite genutzt   |
+| **Visueller Effekt**      | Pinterest-ähnlich, "Mauerwerk"-Optik          | Flickr/Google Photos-ähnlich, "Brick Wall"-Optik|
+
+
+**Zusammengefasst:**
+
+- **Masonry** eignet sich für dynamische, versetzte Layouts mit unterschiedlich
+  hohen Elementen.
+
+- **Justified Gallery** sorgt für eine harmonische, zeilenweise Bildausrichtung
+  mit gleichmäßigen Zeilenhöhen und angepassten Bildbreiten.
+
+Die Wahl hängt vom gewünschten visuellen Effekt und dem Inhaltstyp ab:
+Für eine Pinterest-Optik ist Masonry ideal, für eine professionelle
+Fotogalerie empfiehlt sich Justified Gallery[1][4][5][2][7][3][6].
+
+[1]  https://masonry.desandro.com
+[2]  https://kulturbanause.de/blog/responsive-masonry-layout-mit-css/
+[3]  https://www.visualportfolio.com/docs/gallery-blocks/layout/masonry/
+[4]  https://miromannino.github.io/Justified-Gallery/
+[5]  https://www.jqueryscript.net/gallery/jQuery-Plugin-For-Justified-Image-Gallery-Justified-Gallery.html
+[6]  https://github.com/miromannino/Justified-Gallery
+[7]  https://unlimited-elements.com/masonry-gallery-widget-for-elementor/
+[8]  https://helpcenter.websitex5.com/de/post/262323
+[9]  https://miromannino.github.io/Justified-Gallery/getting-started/
+[10] https://www.youtube.com/watch?v=9ZzZhkg2s9o
+[11] http://macyjs.com
+[12] https://github.com/nk-o/flickr-justified-gallery
+[13] https://www.jqueryscript.net/gallery/Responsive-Justified-Gallery-jQuery-TJ-gallery.html
+[14] https://support.undsgn.com/hc/en-us/articles/115002645349-Masonry-Metro-and-Justify
+[15] https://css-tricks.com/a-lightweight-masonry-solution/
+[16] https://debricked.com/select/compare/npm-justifiedgallery-vs-npm-@egjs/infinitegrid-vs-npm-react-masonry-infinite
+[17] https://developer.mozilla.org/de/docs/Web/CSS/CSS_grid_layout/Masonry_layout
+[18] https://developer.mozilla.org/de/docs/Web/CSS/CSS_properties_and_values_API
+[19] https://spope.github.io/MiniMasonry.js/
+[20] https://design2seo.com/blog/web-development/js/masonry-layout/
+[21] https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Masonry_layout
+[22] https://www.bubsites.com/masonry-layout-ohne-nebenwirkungen/
+[23] https://blog.andri.co/021-building-a-stylish-masonry-layout-using-just-css-and-javascript/
+[24] https://nitinhayaran.github.io/Justified.js/demo/index.html
+[25] https://stackoverflow.com/questions/42015118/preload-images-with-justified-gallery
+[26] https://stackoverflow.com/questions/32441677/how-do-i-get-justifiedgallery-plugin-to-work-with-multiple-galleries
+[27] https://dfactory.co/docs/responsive-lightbox/extensions/justified-gallery/
+[28] https://wordpress.org/support/topic/change-gallery-layout-from-justify-to-masonry-in-fusion-grid/
