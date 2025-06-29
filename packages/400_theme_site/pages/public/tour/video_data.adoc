@@ -1,7 +1,7 @@
 ---
 title:                                  Video
-title_extention:                        J1 Player Apps
-tagline:                                J1 Player Apps
+title_extention:                        J1 Video Apps
+tagline:                                J1 Video Apps
 
 date:                                   2020-11-04
 #last_modified:                         2023-01-01
@@ -64,16 +64,16 @@ resource_options:
 
 // Attribute settings for section control
 //
-:ytp_audio:                             true
+:ytp_audio:                             false
 :ytp_best_2024:                         false
 :ytp_rhythm:                            false
 :ytp_sky_elements:                      true
 :dm_video:                              false
 :vm_video:                              false
 :masonry:                               true
-:lightGallery:                          false
+:justifiedGallery:                      true
 :dm_gallery:                            true
-:vm_gallery:                            false
+:vm_gallery:                            true
 
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
@@ -266,7 +266,7 @@ Find below examples of video galleries of locally stored (MP4) video resources
 
 ifeval::[{masonry} == true]
 [role="mt-5"]
-=== Masonry
+=== Masonry Gallery
 
 Masonry for J1 Template is a great tool for creating dynamic video galleries.
 The module makes creating a gallery to display videos of different types easy.
@@ -284,22 +284,18 @@ link:{url-j1-masonry-previewer}[Masonry Preview, {browser-window--new}] page.
 endif::[]
 
 
-ifeval::[{lightGallery} == true]
+ifeval::[{justifiedGallery} == true]
 [role="mt-5"]
-=== lightGallery (YouTube)
+=== Justified Gallery
 
 The galley maker *justifiedGallery* in combination with the *lightbox*
 lightGallery is a great toolset for creating dynamic video galleries.
 The module combinati0n makes creating a gallery to access videos easy.
 
-.YouTube Video · justifiedGallery + LightGallery
-gallery::jg_video_youtube_james_and_adele[role="mb-4"]
-endif::[]
 
-
-[role="mt-5"]
-[[local-video-2]]
-=== Local Video
+[role="mt-4"]
+[[justified-gllery-local-video]]
+==== Local Video
 
 Videos created by a digicam or a mobile can be played by J1 Template using
 the lightGallery integration. Present videos you have made at it's best.
@@ -317,9 +313,9 @@ HD 720p (1280x720 pixel).
 gallery::jg_video_html5[role="mb-4"]
 
 
-ifeval::[{yt_gallery} == true]
 [role="mt-5"]
-=== YouTube
+[[justified-gllery-youtube]]
+==== YouTube
 
 The community at link:{url-youtube--home}[YouTube, {browser-window--new}]
 is large, with over 1 billion users that watch hundreds of millions of
@@ -327,24 +323,14 @@ hours of content every day. The number of YouTube channels is enormous.
 Today, it's a must for TV stations or musicians to publish videos of their
 shows or songs on YouTube.
 
-A really great channel at YouTube is presented by _Taylor Swift_ for her
-new studio album *The Tortured Poets Department: The Anthology*, released on
-April 19, 2024.
-
-.Taylor Swift - The Tortured Poets Department · Justified Gallery + LightGallery
-gallery::jg_video_online_taylor_swift[role="mb-4"]
-
-[role="mb-5"]
-[TIP]
-====
-An *anthology* is a collection of selected texts or, in a broader sense,
-a thematic compilation of literary or musical works.
-====
+.YouTube Video · justifiedGallery + LightGallery
+gallery::jg_video_youtube_james_and_adele[role="mb-4"]
 endif::[]
+
 
 ifeval::[{vm_gallery} == true]
 [role="mt-5"]
-=== Vimeo
+==== Vimeo
 
 [role="mb-4"]
 link:{url-vimeo--home}[Vimeo, {browser-window--new}] is a video-sharing
@@ -372,7 +358,7 @@ endif::[]
 
 ifeval::[{dm_gallery} == true]
 [role="mt-5"]
-=== Dailymotion
+==== Dailymotion
 
 link:{url-dailymotion--home}[Dailymotion, {browser-window--new}] is a
 video-sharing platform. The platform is available worldwide in 180+

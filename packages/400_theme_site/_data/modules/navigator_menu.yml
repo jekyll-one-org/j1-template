@@ -42,9 +42,11 @@
     - title:                            Extensions
       href:                             /pages/public/tour/asciidoc_extensions/
       icon:                             format-annotation-plus
-    - title:                            Modals
-      href:                             /pages/public/tour/modals/
-      icon:                             image
+
+    # - title:                          Modals
+    #   href:                           /pages/public/tour/modals/
+    #   icon:                           image
+
     - title:                            Tables
       href:                             /pages/public/tour/responsive_tables/
       icon:                             table

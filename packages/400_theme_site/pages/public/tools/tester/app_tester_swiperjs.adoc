@@ -1,5 +1,5 @@
 ---
-title:                                  J1 SwiperJS Apps
+title:                                  J1 SwiperJS App
 title_extention:                        Selected Examples
 tagline:                                Selected Examples
 date:                                   2025-02-10

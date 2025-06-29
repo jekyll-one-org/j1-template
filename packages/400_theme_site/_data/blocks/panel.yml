@@ -83,22 +83,6 @@ settings:
         raised:
         lane_span:                      fixed
 
-        wave:
-          top:
-            enabled:                    false
-            height:                     2                                     # [1 .. 9]
-            style:                      wave-1                                # default
-            color:                      var(--md-gray-200)
-            background_color:           var(--md-gray-50)                             # auto|rgb_value, var(--md-gray-50)
-            transform:                  false                                 # false or rotate|flip-x|flip-y and combinations
-          bottom:
-            enabled:                    false
-            height:                     2
-            style:                      wave-4
-            color:                      var(--md-gray-200)
-            background_color:           var(--md-gray-50)
-            transform:                  flip-y flip-x
-
         cards:
 
           - name:                       Design
@@ -229,22 +213,6 @@ settings:
                                           Fund our project that make up your web site easy to manage
                                           for excellent performance, reliability, and stability.
                                         </p>
-
-        wave:
-          top:
-            enabled:                    defaultCssFile
-            height:                     4                                     # [1 .. 9]
-            style:                      wave-4                                # default
-            color:                      var(--md-gray-200)
-            background_color:           var(--md-gray-50)
-            transform:                  false                                 # false or rotate|flip-x|flip-y and combinations
-          bottom:
-            enabled:                    false
-            height:                     2
-            style:                      wave-4
-            color:                      var(--md-gray-200)
-            background_color:           var(--md-gray-50)
-            transform:                  rotate
 
         cards:
 
@@ -450,7 +418,7 @@ settings:
 
         cards:
 
-          - name:                       General Features
+          - name:                       Core Features
             card:
               enabled:                  true
               id:                       card_1
@@ -458,9 +426,9 @@ settings:
               icon_family:              mdib
               icon_size:                mdib-6x
               icon_color:               var(--bs-white)
-              href:                     /pages/public/features/general_features/
+              href:                     /pages/public/features/core_features/
               title:                    J1 Template
-              tagline:                  General Features
+              tagline:                  Core Features
               header_translate:         notranslate
               text: >
                                         <p class="dropcap">
@@ -492,14 +460,14 @@ settings:
                                         </p>
                                         <p>
                                           <i class="mdib mdib-language-ruby mdib-24px md-blue-700 ml-3 mr-2"></i>
-                                          Ruby 2.7 <br />
+                                          Ruby 3.x <br>
                                           <i class="mdib mdib-language-ruby mdib-24px md-blue-700 ml-3 mr-2"></i>
-                                          Jekyll 4.3 <br />
+                                          Jekyll 4.4 <br>
                                           <i class="mdib mdib-nodejs mdib-24px md-blue-700 ml-3 mr-2"></i>
-                                          NodeJS 14.x <br />
+                                          NodeJS 18.x <br>
                                         </p>
                     title:              Platforms
-                    href:               "/pages/public/features/general_features/#platforms"
+                    href:               "/pages/public/features/core_features/#platforms"
 
                 - name:                 Frameworks
                   service:
@@ -537,16 +505,16 @@ settings:
                                         </p>
                                         <p>
                                           <i class="mdib mdib-bootstrap mdib-24px md-blue-700 ml-3 mr-2"></i>
-                                          Bootstrap V5 <br />
+                                          Bootstrap V5 <br>
                                           <i class="mdib mdib-language-html5 mdib-24px md-blue-700 ml-3 mr-2"></i>
-                                          Enhanced HTML, CSS and Javascript <br />
+                                          Enhanced HTML, CSS and Javascript <br>
                                           <i class="mdib mdib-24px mdib-grass md-blue-700 ml-3 mr-2"></i>
-                                          Icon Fonts <br />
+                                          Icon Fonts <br>
                                           <i class="mdib mdib-application-settings mdib-24px md-blue-700 ml-3 mr-2"></i>
-                                          Fully configurable components <br />
+                                          Fully configurable components <br>
                                         </p>
                     title:              Frameworks
-                    href:               /pages/public/features/general_features/#frameworks
+                    href:               /pages/public/features/core_features/#frameworks
 
                 - name:                 Devices
                   service:
@@ -572,17 +540,17 @@ settings:
                                         </p>
                                         <p>
                                           <i class="mdib mdib-devices mdib-24px md-blue-700 ml-3 mr-2"></i>
-                                          Desktop and Mobile support <br />
+                                          Desktop and Mobile support <br>
                                           <i class="mdib mdib-near-me mdib-24px md-blue-700 ml-3 mr-2"></i>
-                                          Mobile Web Navigation <br />
+                                          Mobile Web Navigation <br>
                                           <i class="mdib mdib-lighthouse mdib-24px md-blue-700 ml-3 mr-2"></i>
-                                          Highest Google Lighthouse Scores <br />
+                                          Highest Google Lighthouse Scores <br>
                                         </p>
 
                     title:              Devices
-                    href:               /pages/public/features/general_features/#devices
+                    href:               /pages/public/features/core_features/#devices
 
-          - name:                       Modules
+          - name:                       Theme Features
             card:
               enabled:                  true
               id:                       card_2
@@ -590,7 +558,7 @@ settings:
               icon_family:              mdib
               icon_size:                mdib-6x
               icon_color:               var(--bs-white)
-              href:                     /pages/public/features/template_features/
+              href:                     /pages/public/features/theme_features/
               title:                    J1 Template
               tagline:                  Theme Features
               header_translate:         notranslate
@@ -622,33 +590,33 @@ settings:
                                         </p>
                                         <p>
                                           <i class="mdib mdib-mouse-move-down mdib-24px md-blue-700 ml-3 mr-2"></i>
-                                          Infinite srcoll <br />
+                                          Infinite srcoll <br>
                                           <i class="mdib mdib-mouse-move-down mdib-24px md-blue-700 ml-3 mr-2"></i>
-                                          Animate on srcoll <br />
+                                          Animate on srcoll <br>
                                           <i class="mdib mdib-animation mdib-24px md-blue-700 ml-3 mr-2"></i>
-                                          Floating Action Buttons <br />
+                                          Floating Action Buttons <br>
                                           <i class="mdib mdib-magnify mdib-24px md-blue-700 ml-3 mr-2"></i>
-                                          Full-text search engine (Lunr) <br />
+                                          Full-text search engine (Lunr) <br>
                                           <i class="mdib mdib-cookie mdib-24px md-blue-700 ml-3 mr-2"></i>
-                                          Cookie consent (GDPR compatible) <br />
+                                          Cookie consent (GDPR compatible) <br>
                                           <i class="mdib mdib-translate mdib-24px md-blue-700 ml-3 mr-2"></i>
-                                          Translator (Google, Deepl) <br />
+                                          Translator (Google, Deepl) <br>
                                           <i class="mdib mdib-clipboard mdib-24px md-blue-700 ml-3 mr-2"></i>
-                                          Clipboard <br />
+                                          Clipboard <br>
                                           <i class="mdib mdib-forwardburger mdib-24px mdib-rotate-90 md-blue-700 ml-3 mr-2"></i>
-                                          Smooth-srcoll <br />
+                                          Smooth-srcoll <br>
                                           <i class="mdib mdib-near-me mdib-24px md-blue-700 ml-3 mr-2"></i>
-                                          Enhanced Navigation <br />
+                                          Enhanced Navigation <br>
                                           <i class="mdib mdib-lightbulb-on mdib-24px md-blue-700 ml-3 mr-2"></i>
-                                          Lightboxes <br />
-                                          <i class="mdib mdib-gesture-swipe mdib-24px md-blue-700 ml-3 mr-2"></i>
-                                          Image and Video Galleries <br />
+                                          Lightboxes <br>
                                           <i class="mdib mdib-view-carousel mdib-24px md-blue-700 ml-3 mr-2"></i>
-                                          Text and Image Carousels <br />
+                                          Sliders <br>                                          
+                                          <i class="mdib mdib-gesture-swipe mdib-24px md-blue-700 ml-3 mr-2"></i>
+                                          Galleries <br>
                                         </p>
 
                     title:              Modules
-                    href:               /pages/public/features/template_features/#modules
+                    href:               /pages/public/features/theme_features/#modules
 
                 - name:                 Extensions
                   service:
@@ -665,20 +633,20 @@ settings:
                                         </p>
                                         <p>
                                           <i class="mdib mdib-bootstrap mdib-24px md-blue-700 ml-3 mr-2"></i>
-                                          Bootstrap extensions <br />
+                                          Bootstrap extensions <br>
                                           <i class="mdib mdib-format-annotation-plus mdib-24px md-blue-700 ml-3 mr-2"></i>
-                                          Asciidoctor extensions <br />
+                                          Asciidoctor extensions <br>
                                           <i class="mdib mdib-group mdib-24px md-blue-700 ml-3 mr-2"></i>
-                                          Advanced banners and panels <br />
+                                          Banners and panels <br>
                                           <i class="mdib mdib-near-me mdib-24px md-blue-700 ml-3 mr-2"></i>
-                                          Blog Post navigation <br />
+                                          Blog navigation <br>
                                           <i class="mdib mdib-content-duplicate mdib-24px md-blue-700 ml-3 mr-2"></i>
-                                          Featured example content <br />
+                                          Sample content <br>
                                           <i class="mdib mdib-image mdib-24px md-blue-700 ml-3 mr-2"></i>
-                                          Royalty free images <br />
+                                          Royalty free images <br>
                                         </p>
                     title:              Extensions
-                    href:               /pages/public/features/template_features/#extensions
+                    href:               /pages/public/features/theme_features/#extensions
 
                 - name:                 Integrations
                   service:
@@ -695,20 +663,22 @@ settings:
                                         </p>
                                         <p>
                                           <i class="mdib mdib-theme-light-dark mdib-24px md-blue-700 ml-3 mr-2"></i>
-                                          Bootstrap Themes <br />
+                                          Bootstrap Themes <br>
                                           <i class="mdib mdib-comment mdib-24px md-blue-700 ml-3 mr-2"></i>
-                                          Comment providers <br />
+                                          Comment providers <br>
                                           <i class="mdib mdib-google-analytics mdib-24px md-blue-700 ml-3 mr-2"></i>
-                                          Google Analytics <br />
+                                          Google Analytics <br>
+                                          <!-- Disabled for now
                                           <i class="mdib mdib-google-ads mdib-24px md-blue-700 ml-3 mr-2"></i>
-                                          Google Ads <br />
+                                          Google Ads <br>
                                           <i class="mdib mdib-youtube mdib-24px md-blue-700 ml-3 mr-2"></i>
-                                          YouTube Video <br />
+                                          YouTube Video <br>
                                           <i class="mdib mdib-vimeo mdib-24px md-blue-700 ml-3 mr-2"></i>
-                                          Vimeo Video <br />
+                                          Vimeo Video <br>
+                                          -->
                                         </p>
                     title:              Integrations
-                    href:               /pages/public/features/template_features/#integrations
+                    href:               /pages/public/features/theme_features/#integrations
 
 
   # ----------------------------------------------------------------------------
