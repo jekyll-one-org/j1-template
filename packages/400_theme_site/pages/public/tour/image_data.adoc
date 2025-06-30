@@ -72,11 +72,6 @@ resource_options:
 
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.Extendend Swiper · Layout Thumb Top
-swiper::thumb_slider_top[role="mb-5"]
-
-
 [role="dropcap"]
 Welcome to the preview page focussing on image modules. This page shows
 all of the powerful features of the J1 Template to manage your image-based
@@ -390,7 +385,7 @@ It works by placing elements in an optimal position based on available
 horizontal and vertical space, like fitting stones in a wall. For sure,
 you'll have seen it in action all over the Internet.
 
-.Gallery of Images + lightGaller
+.Gallery of Images + lightGallery
 gallery::jg_mega_cities[role="mt-4 mb-4"]
 
 
