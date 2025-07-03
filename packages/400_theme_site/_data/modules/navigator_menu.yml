@@ -465,6 +465,10 @@
       icon:                             ab-testing
       dropdown:
 
+        - title:                        J1 Gallery App
+          href:                         /pages/public/tools/tester/gallery_app/
+          icon:                         gesture-swipe
+
         - title:                        VideoJS over YT
           href:                         /pages/public/tester/videojs_yt/
           icon:                         video

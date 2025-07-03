@@ -50,7 +50,9 @@ exclude_from_search:                    true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign gallery_options     = gallery_defaults | merge: gallery_players %}
 {% assign gallery_options     = gallery_options  | merge: gallery_playlists %}
-{% assign galleries           = gallery_options.galleries %}
+
+
+
 
 {% comment %} Configure permalink settings
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -77,11 +79,9 @@ exclude_from_search:                    true
     <meta name="gallery" content="module data file">
   </head>
   <body>
-
   {% comment %} Collect Galleries
-  galleries: {{galleries | debug}}
+  galleries {{galleries | debug}}
   ------------------------------------------------------------------------------ {% endcomment %}
-
   {% for gallery in galleries %} {% if gallery.enabled %}
 
     {% comment %} Image Galleries

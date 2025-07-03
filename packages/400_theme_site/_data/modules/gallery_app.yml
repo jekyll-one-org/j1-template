@@ -312,7 +312,9 @@ settings:
             options:
               autoPlay:                 true
               muted:                    true
-
+  #             byline:                   0
+  #             portrait:                 0
+  #             color:                    var(--md-gray-100)
 
 
           # Wistia

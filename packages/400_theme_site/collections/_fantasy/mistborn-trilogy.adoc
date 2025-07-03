@@ -1,5 +1,5 @@
 ---
-title:                                  Mistborn Trilogy
+title:                                  Mistborn Trilogy - The Final Empire
 tagline:                                The Final Empire
 
 date:                                   2016-11-19
