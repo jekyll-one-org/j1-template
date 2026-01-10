@@ -458,6 +458,14 @@
 - item:                                 Tools
   sublevel:
 
+    # - title:                            J1 Audio Transcription
+    #   href:                             /pages/public/tools/tester/ats/
+    #   icon:                             speaker
+
+    - title:                            TTS Karaoke
+      href:                             /pages/public/tools/tester/tts_karaoke/
+      icon:                             speaker
+
     # --------------------------------------------------------------------------
     # Tester
     #

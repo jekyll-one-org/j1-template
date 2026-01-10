@@ -1,0 +1,614 @@
+---
+title:                                  J1 Audio Transcription
+title_extention:                        Convert audio files to text
+tagline:                                Convert audio files to text
+date:                                   2025-02-10
+#last_modified:                         2025-01-01
+
+description: >
+                                        Convert audio files to text entirely in a browser.
+keywords: >
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap, html, html5
+
+categories:                             [ Tester ]
+tags:                                   [ Audio Transcription ]
+
+image:
+  path:                                 /assets/image/module/attic/1920x1280/markus-spiske.jpg
+  width:                                1920
+  height:                               1280
+
+compress:                               false
+regenerate:                             false
+personalization:                        false
+permalink:                              /pages/public/tools/tester/ats/
+
+resources:                              []
+resource_options:
+  - toccer:
+      collapseDepth:                    3
+  - attic:
+      slides:
+        - url:                          /assets/image/module/attic/1920x1280/markus-spiske.jpg
+          alt:                          Audio Transcription
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Attribute settings for section control
+//
+:swiper--features:                      false
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[role="mt-5"]
+== Audio Transcription
+
+Convert audio files to text entirely in your browser.
+
+++++
+    <div class="container mt-5 mb-8">
+
+        <!-- Geräteauswahl-Bereich (fügen Sie dies vor dem Upload-Bereich ein) -->
+        <div class="device-selection">
+        <h3>Audio-Geräte</h3>
+        
+        <div class="device-group">
+            <label for="audioInputSelect">Mikrofon (Input):</label>
+            <select id="audioInputSelect">
+            <option>Lade Geräte...</option>
+            </select>
+        </div>
+        
+        <div class="device-group">
+            <label for="audioOutputSelect">Lautsprecher (Output):</label>
+            <select id="audioOutputSelect">
+            <option>Lade Geräte...</option>
+            </select>
+        </div>
+        
+        <button id="refreshDevicesBtn">🔄 Geräte aktualisieren</button>
+    </div>
+
+    <div class="upload-area" id="uploadArea">
+        <div class="upload-icon">📁</div>
+        <p><strong>Click to upload</strong> or drag and drop</p>
+        <p style="font-size: 12px; color: #999; margin-top: 10px;">Supports: MP3, WAV, OGG, M4A</p>
+        <input type="file" id="fileInput" accept="audio/*">
+    </div>
+
+    <div class="audio-player" id="audioPlayer">
+        <audio id="audio" controls></audio>
+    </div>
+
+    <div class="controls">
+        <select id="languageSelect">
+            <option value="de-DE">German</option>
+            <option value="en-US">English (US)</option>
+            <option value="en-GB">English (UK)</option>
+            <option value="es-ES">Spanish</option>
+            <option value="fr-FR">French</option>
+            <option value="it-IT">Italian</option>
+            <option value="pt-BR">Portuguese (Brazil)</option>
+            <option value="ja-JP">Japanese</option>
+            <option value="ko-KR">Korean</option>
+            <option value="zh-CN">Chinese (Simplified)</option>
+        </select>
+        <button class="btn" id="transcribeBtn" disabled>Start Transcription</button>
+        <button class="btn" id="stopBtn" disabled>Stop</button>
+        <button class="btn" id="copyBtn" disabled>Copy Text</button>
+        <button class="btn" id="downloadBtn" disabled>Download TXT</button>
+    </div>
+
+    <div class="progress" id="progress">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="status" id="status" style="display: none;"></div>
+
+    <div class="transcription-box" id="transcriptionBox"></div>
+</div>
+++++
+
+++++
+<script>
+  const uploadArea = document.getElementById('uploadArea');
+  const fileInput = document.getElementById('fileInput');
+  const audioPlayer = document.getElementById('audioPlayer');
+  const audio = document.getElementById('audio');
+  const transcribeBtn = document.getElementById('transcribeBtn');
+  const stopBtn = document.getElementById('stopBtn');
+  const copyBtn = document.getElementById('copyBtn');
+  const downloadBtn = document.getElementById('downloadBtn');
+  const languageSelect = document.getElementById('languageSelect');
+  const status = document.getElementById('status');
+  const transcriptionBox = document.getElementById('transcriptionBox');
+  const progress = document.getElementById('progress');
+  const progressBar = document.getElementById('progressBar');
+  
+  // Neue Elemente für Geräteauswahl
+  const audioInputSelect = document.getElementById('audioInputSelect');
+  const audioOutputSelect = document.getElementById('audioOutputSelect');
+  const refreshDevicesBtn = document.getElementById('refreshDevicesBtn');
+
+  let audioBlob = null;
+  let transcription = '';
+  let recognition = null;
+  let audioContext = null;
+  let isTranscribing = false;
+
+  // Check browser support
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SpeechRecognition) {
+      showStatus('error', 'Speech recognition is not supported in your browser. Please use Chrome or Edge.');
+  }
+
+  // Geräte laden beim Start
+  loadAudioDevices();
+
+  // Event Listener für Geräte-Refresh
+  if (refreshDevicesBtn) {
+      refreshDevicesBtn.addEventListener('click', loadAudioDevices);
+  }
+
+  // Event Listener für Output-Änderung
+  if (audioOutputSelect) {
+      audioOutputSelect.addEventListener('change', changeAudioOutput);
+  }
+
+  // Funktion zum Laden der verfügbaren Audio-Geräte
+  async function loadAudioDevices() {
+      try {
+          // Erst Berechtigung anfordern
+          await navigator.mediaDevices.getUserMedia({ audio: true });
+          
+          const devices = await navigator.mediaDevices.enumerateDevices();
+          
+          // Audio-Eingänge (Mikrofone)
+          const audioInputs = devices.filter(device => device.kind === 'audioinput');
+          if (audioInputSelect) {
+              audioInputSelect.innerHTML = '';
+              audioInputs.forEach(device => {
+                  const option = document.createElement('option');
+                  option.value = device.deviceId;
+                  option.textContent = device.label || `Mikrofon ${audioInputSelect.length + 1}`;
+                  audioInputSelect.appendChild(option);
+              });
+          }
+          
+          // Audio-Ausgänge (Lautsprecher)
+          const audioOutputs = devices.filter(device => device.kind === 'audiooutput');
+          if (audioOutputSelect) {
+              audioOutputSelect.innerHTML = '';
+              audioOutputs.forEach(device => {
+                  const option = document.createElement('option');
+                  option.value = device.deviceId;
+                  option.textContent = device.label || `Lautsprecher ${audioOutputSelect.length + 1}`;
+                  audioOutputSelect.appendChild(option);
+              });
+          }
+          
+          showStatus('success', 'Audio-Geräte geladen');
+      } catch (error) {
+          console.error('Fehler beim Laden der Geräte:', error);
+          showStatus('error', 'Fehler beim Laden der Audio-Geräte. Bitte Berechtigungen prüfen.');
+      }
+  }
+
+  // Funktion zum Ändern des Audio-Outputs
+  async function changeAudioOutput() {
+      if (!audioOutputSelect || !audio.setSinkId) {
+          showStatus('error', 'Audio-Output-Auswahl wird in diesem Browser nicht unterstützt.');
+          return;
+      }
+      
+      try {
+          await audio.setSinkId(audioOutputSelect.value);
+          showStatus('success', 'Audio-Output geändert');
+      } catch (error) {
+          console.error('Fehler beim Ändern des Audio-Outputs:', error);
+          showStatus('error', 'Fehler beim Ändern des Audio-Outputs');
+      }
+  }
+
+  // Upload area events
+  uploadArea.addEventListener('click', () => fileInput.click());
+
+  uploadArea.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      uploadArea.classList.add('dragover');
+  });
+
+  uploadArea.addEventListener('dragleave', () => {
+      uploadArea.classList.remove('dragover');
+  });
+
+  uploadArea.addEventListener('drop', (e) => {
+      e.preventDefault();
+      uploadArea.classList.remove('dragover');
+      const files = e.dataTransfer.files;
+      if (files.length > 0) {
+          handleFile(files[0]);
+      }
+  });
+
+  fileInput.addEventListener('change', (e) => {
+      if (e.target.files.length > 0) {
+          handleFile(e.target.files[0]);
+      }
+  });
+
+  function handleFile(file) {
+      if (!file.type.startsWith('audio/')) {
+          showStatus('error', 'Please upload a valid audio file.');
+          return;
+      }
+
+      audioBlob = file;
+      const url = URL.createObjectURL(file);
+      audio.src = url;
+      audioPlayer.classList.add('active');
+      transcribeBtn.disabled = false;
+      transcription = '';
+      transcriptionBox.textContent = '';
+      transcriptionBox.classList.remove('active');
+      copyBtn.disabled = true;
+      downloadBtn.disabled = true;
+      showStatus('success', `File loaded: ${file.name}`);
+      
+      // Audio-Output setzen wenn bereits ausgewählt
+      if (audioOutputSelect && audioOutputSelect.value) {
+          changeAudioOutput();
+      }
+  }
+
+  transcribeBtn.addEventListener('click', startTranscription);
+  stopBtn.addEventListener('click', stopTranscription);
+
+  async function startTranscription() {
+      if (!SpeechRecognition) return;
+
+      transcribeBtn.disabled = true;
+      stopBtn.disabled = false;
+      copyBtn.disabled = true;
+      downloadBtn.disabled = true;
+      transcription = '';
+      transcriptionBox.textContent = '';
+      transcriptionBox.classList.add('active');
+      isTranscribing = true;
+
+      recognition = new SpeechRecognition();
+      recognition.continuous = true;
+      recognition.interimResults = true;
+      recognition.lang = languageSelect.value;
+
+      recognition.onstart = () => {
+          showStatus('info', 'Transcription in progress... Play the audio file.');
+          progress.classList.add('active');
+      };
+
+      recognition.onresult = (event) => {
+          let interimTranscript = '';
+          let finalTranscript = '';
+
+          for (let i = event.resultIndex; i < event.results.length; i++) {
+              const transcript = event.results[i][0].transcript;
+              if (event.results[i].isFinal) {
+                  finalTranscript += transcript + ' ';
+              } else {
+                  interimTranscript += transcript;
+              }
+          }
+
+          if (finalTranscript) {
+              transcription += finalTranscript;
+          }
+
+          transcriptionBox.textContent = transcription + interimTranscript;
+          transcriptionBox.scrollTop = transcriptionBox.scrollHeight;
+      };
+
+      recognition.onerror = (event) => {
+          console.error('Recognition error:', event.error);
+          if (event.error !== 'aborted') {
+              showStatus('error', `Error: ${event.error}`);
+          }
+      };
+
+      recognition.onend = () => {
+          if (isTranscribing) {
+              recognition.start();
+          } else {
+              finishTranscription();
+          }
+      };
+
+      try {
+          await audio.play();
+          recognition.start();
+          
+          audio.addEventListener('timeupdate', updateProgress);
+          audio.addEventListener('ended', () => {
+              stopTranscription();
+          });
+      } catch (error) {
+          showStatus('error', 'Failed to start transcription: ' + error.message);
+          transcribeBtn.disabled = false;
+          stopBtn.disabled = true;
+      }
+  }
+
+  function updateProgress() {
+      const percent = (audio.currentTime / audio.duration) * 100;
+      progressBar.style.width = percent + '%';
+  }
+
+  function stopTranscription() {
+      isTranscribing = false;
+      if (recognition) {
+          recognition.stop();
+      }
+      audio.pause();
+      finishTranscription();
+  }
+
+  function finishTranscription() {
+      transcribeBtn.disabled = false;
+      stopBtn.disabled = true;
+      progress.classList.remove('active');
+      
+      if (transcription.trim()) {
+          copyBtn.disabled = false;
+          downloadBtn.disabled = false;
+          showStatus('success', 'Transcription complete!');
+      } else {
+          showStatus('error', 'No speech detected. Please ensure the audio is playing and try again.');
+      }
+  }
+
+  copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText(transcription.trim()).then(() => {
+          showStatus('success', 'Text copied to clipboard!');
+      }).catch(() => {
+          showStatus('error', 'Failed to copy text.');
+      });
+  });
+
+  downloadBtn.addEventListener('click', () => {
+      const blob = new Blob([transcription.trim()], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'transcription.txt';
+      a.click();
+      URL.revokeObjectURL(url);
+      showStatus('success', 'Transcription downloaded!');
+  });
+
+  function showStatus(type, message) {
+      status.className = `status ${type}`;
+      status.textContent = message;
+      status.style.display = 'block';
+  }
+</script>
+++++
+
+++++
+<style>
+
+
+.subtitle {
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+.upload-area {
+    border: 3px dashed #667eea;
+    border-radius: 15px;
+    padding: 40px;
+    text-align: center;
+    background: #f8f9ff;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-bottom: 20px;
+}
+
+.upload-area:hover {
+    background: #f0f2ff;
+    border-color: #764ba2;
+}
+
+.upload-area.dragover {
+    background: #e8ebff;
+    border-color: #764ba2;
+}
+
+.upload-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    margin: 5px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.status {
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.status.info {
+    background: #e3f2fd;
+    color: #1565c0;
+}
+
+.status.success {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.status.error {
+    background: #ffebee;
+    color: #c62828;
+}
+
+.transcription-box {
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    min-height: 200px;
+    max-height: 400px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    display: none;
+}
+
+.transcription-box.active {
+    display: block;
+}
+
+select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.audio-player {
+    margin: 20px 0;
+    display: none;
+}
+
+.audio-player.active {
+    display: block;
+}
+
+audio {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.progress {
+    width: 100%;
+    height: 4px;
+    background: #e0e0e0;
+    border-radius: 2px;
+    overflow: hidden;
+    margin: 10px 0;
+    display: none;
+}
+
+.progress.active {
+    display: block;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    width: 0%;
+    transition: width 0.3s;
+}
+
+/* CSS für die Geräteauswahl */
+
+.device-selection {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.device-group {
+  margin-bottom: 15px;
+}
+
+.device-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.device-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+#refreshDevicesBtn {
+  padding: 10px 20px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#refreshDevicesBtn:hover {
+  background: #0056b3;
+}
+
+</style>
+++++
+
+

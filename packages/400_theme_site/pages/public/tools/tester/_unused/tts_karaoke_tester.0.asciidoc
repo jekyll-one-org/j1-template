@@ -1,0 +1,632 @@
+---
+title:                                  TTS Karaoke
+title_extention:                        Convert audio files to text
+tagline:                                Convert audio files to text
+date:                                   2025-02-10
+#last_modified:                         2025-01-01
+
+description: >
+                                        TTS Karaoke
+keywords: >
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap, html, html5
+
+categories:                             [ Tester ]
+tags:                                   [ Audio TTS ]
+
+image:
+  path:                                 /assets/image/module/attic/1920x1280/markus-spiske.jpg
+  width:                                1920
+  height:                               1280
+
+compress:                               false
+regenerate:                             false
+personalization:                        false
+permalink:                              /pages/public/tools/tester/tts_karaoke/
+
+resources:                              []
+resource_options:
+  - toccer:
+      collapseDepth:                    3
+  - attic:
+      slides:
+        - url:                          /assets/image/module/attic/1920x1280/markus-spiske.jpg
+          alt:                          Audio Transcription
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Attribute settings for section control
+//
+:swiper--features:                      false
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+[role="dropcap"]
+TTS Karaoke Highlighting refers to a feature in text-to-speech (TTS) systems
+where words or phrases in displayed text are visually highlighted in real-time
+as the synthesized voice reads them aloud, mimicking the style of karaoke
+lyrics on screen.
+
+This synchronization enhances reading comprehension by combining auditory
+playback with visual cues, allowing users to follow along effortlessly.
+Modern neural TTS engines often provide precise word-level timestamps to
+enable smooth highlighting without unnatural pauses.
+
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// https://github.com/westonruter/html5-audio-read-along/tree/master
+
+[role="mt-5"]
+== TTS Karaoke
+
+// Willkommen zum Text-to-Speech Karaoke Demo!
+
+// Diese Anwendung zeigt, wie man Wörter während des Sprechens hervorhebt.
+// Die Web Speech API verwendet Boundary Events, um die Position jedes Wortes
+// zu verfolgen.
+
+Welcome to the Text-to-Speech (TTS) Karaoke Demo!
+
+This page shows how to highlight words while speaking. The Web Speech
+API uses boundary events to track the position of each word.
+
+++++
+<div class="container nospeak mt-5">
+
+    <h1>🎤 TTS Karaoke Highlighting</h1>
+    <p class="subtitle">Text-to-Speech mit Wort-für-Wort Hervorhebung</p>
+    
+    <div id="status" class="status ready">Bereit zum Starten</div>
+
+    <div id="textDisplay" class="text-display"></div>
+
+    <div class="controls nospeak">
+        <button id="speakBtn">▶ Sprechen</button>
+        <button id="pauseBtn" disabled>⏸ Pause</button>
+        <button id="stopBtn" disabled>⏹ Stop</button>
+    </div>
+
+    <div class="settings">
+        <div class="setting-group">
+            <label for="voiceSelect">Stimme</label>
+            <select id="voiceSelect"></select>
+        </div>
+        <div class="setting-group">
+            <label for="rateSlider">Geschwindigkeit: <span class="range-value" id="rateValue">1.0</span></label>
+            <input type="range" id="rateSlider" min="0.5" max="2" step="0.1" value="1">
+        </div>
+        <div class="setting-group">
+            <label for="pitchSlider">Tonhöhe: <span class="range-value" id="pitchValue">1.0</span></label>
+            <input type="range" id="pitchSlider" min="0.5" max="2" step="0.1" value="1">
+        </div>
+    </div>
+
+    <!-- textarea id="textInput" class="mt-4 mb-8" placeholder="Geben Sie hier Ihren Text ein ...">
+        Ralf Schmitz ist ein vielseitiger deutscher Unterhaltungskünstler. Viele Menschen in Deutschland werden ihn kennen, aber nicht unbedingt alle. Das wäre aber schade, da er durch viele Talente überzeugen kann. Seine Schlagfertigkeit, das improvisatorische Können und seine energiegeladenen Auftritte machen ihn einzigartig.
+
+        Er begann seine Karriere im Improvisationstheater Die Springmaus in Bonn. Der Durchbruch gelang mit der Sketch-Comedy-Show 'Die Dreisten Drei', für die er im Jahr 2003 als Newcomer des Jahres den Deutschen Comedypreis bekam.
+
+        Als Moderator hat Ralf zahlreiche TV-Shows präsentert. Darunter 'Take Me Out' und 'Schmitz in the City'. Als Schauspieler hat er in Filmen und Serien mitgewirkt, die schon heute legendär sind. Darunter die TV-Show Schillerstraße und der Kino-Film '7 Zwerge - Männer allein im Wald' von 2004; eine Komödie von und mit Otto Waalkes.
+    </textarea -->
+
+    <textarea id="textInput" class="mt-4 mb-8" placeholder="Geben Sie hier Ihren Text ein ...">
+        TTS Karaoke Highlighting refers to a feature in text-to-speech (TTS) systems where words or phrases in displayed text are visually highlighted in real-time as the synthesized voice reads them aloud, mimicking the style of karaoke lyrics on screen.
+
+        This synchronization enhances reading comprehension by combining auditory playback with visual cues, allowing users to follow along effortlessly. Modern neural TTS engines often provide precise word-level timestamps to enable smooth highlighting without unnatural pauses.
+    </textarea>
+
+</div>
+++++
+
+++++
+<script>
+
+const logger            = log4javascript.getLogger('j1.tts.karaoke');
+
+const textDisplay       = document.getElementById('textDisplay');
+const textInput         = document.getElementById('textInput');
+const textInputValue    = textInput.value;
+const trimText          = textInputValue.trim();
+const speakBtn          = document.getElementById('speakBtn');
+const pauseBtn          = document.getElementById('pauseBtn');
+const stopBtn           = document.getElementById('stopBtn');
+const voiceSelect       = document.getElementById('voiceSelect');
+const rateSlider        = document.getElementById('rateSlider');
+const pitchSlider       = document.getElementById('pitchSlider');
+const rateValue         = document.getElementById('rateValue');
+const pitchValue        = document.getElementById('pitchValue');
+const status            = document.getElementById('status');
+
+// Average speaking rate: ~150-200 words per minute
+const wordsPerMinute = 160 * 5; // Rough estimate: 5 chars per word
+const msPerWord = (60 * 1000) / wordsPerMinute;
+
+var voices = [];
+var utterance = null;
+var isPaused = false;
+
+var voiceUserDefault      = 'Google UK English Female';
+var voiceChromeDefault    = 'Google US English';
+var defaultLanguage       = '';
+var navigatorLanguage     = navigator.language || navigator.userLanguage;
+var sourceLanguage        = document.getElementsByTagName("html")[0].getAttribute("lang");
+
+var words2speak;
+var onBoundaryEmulated    = false;
+var voiceName = '';
+
+// Voices laden
+function loadVoices() {
+    voices = speechSynthesis.getVoices();
+    voiceSelect.innerHTML = '';
+    
+    const germanVoices  = voices.filter(v => v.lang.startsWith('de'));
+    const englishVoices = voices.filter(v => v.lang.startsWith('en'));
+    const otherVoices   = voices.filter(v => !v.lang.startsWith('de') && !v.lang.startsWith('en'));
+
+    [...germanVoices, ...englishVoices, ...otherVoices].forEach((voice, index) => {
+        const option = document.createElement('option');
+        option.value = index;
+        option.textContent = `${voice.name} (${voice.lang})`;
+        if (voice.default) option.textContent += ' - Standard';
+        voiceSelect.appendChild(option);
+    });
+
+    // Stimme auswählen
+    if (sourceLanguage == 'de' && germanVoices.length > 0) {
+        const voiceIndex  = voices.indexOf(germanVoices[2]);
+        voiceSelect.value = voiceIndex;
+        voiceName         = germanVoices[0];
+    }
+
+    if (sourceLanguage == 'en' && englishVoices.length > 0) {
+        const voiceIndex  = voices.indexOf(englishVoices[0]);
+        voiceSelect.value = voiceIndex;
+        voiceName         = englishVoices[0].name;
+        
+    }
+
+    if (voiceName.includes('Google')) {
+        onBoundaryEmulated  = true;
+    }    
+}
+
+// Voices beim Laden und bei Änderungen aktualisieren
+loadVoices();
+if (speechSynthesis.onvoiceschanged !== undefined) {
+    speechSynthesis.onvoiceschanged = loadVoices;
+}
+
+// Slider Updates
+rateSlider.addEventListener('input', (e) => {
+    rateValue.textContent = e.target.value;
+});
+
+pitchSlider.addEventListener('input', (e) => {
+    pitchValue.textContent = e.target.value;
+});
+
+// Text in Spans aufteilen
+function prepareText(text) {
+    // const words = text.split(/(\s+)/);
+    const words = text.split(/\s+/);
+    textDisplay.innerHTML = '';
+    
+    words.forEach((word, index) => {
+        const span = document.createElement('span');
+        span.textContent = word + ' '; // add single space between words
+        span.dataset.index = index;
+        textDisplay.appendChild(span);
+    });
+}
+
+// Highlighting
+function highlightWord(hlWord, charIndex) {
+    const spans = textDisplay.querySelectorAll('span');
+    var currentPos = 0;
+    
+    
+    // Alle Highlights entfernen
+    spans.forEach(span => span.classList.remove('highlight'));
+    
+    // Das aktuelle Wort finden und highlighten
+    for (var span of spans) {
+        const wordLength      = span.textContent.length;
+        const spanTextContent = span.textContent;
+
+        if (charIndex >= currentPos && charIndex < currentPos + wordLength) {
+            span.classList.add('highlight');
+            // Sanft zum Wort scrollen
+            span.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            break;
+        }
+        currentPos += wordLength; // +1  add space
+
+        logger.debug(`highlightWord index at: ${charIndex}, word: ${hlWord}, spanContent: ${spanTextContent}`);
+    }
+}
+
+// Status Update
+function updateStatus(state, text) {
+    status.className = `status ${state}`;
+    status.textContent = text;
+}
+
+// Speak Funktion
+function speak() {
+
+    logger.info('speak funktion is being initialized');
+
+    // const textInput = textInput.value;
+    // const text      = textInput.trim();
+
+    if (!trimText) return;
+
+    // Vorherige Utterance stoppen
+    speechSynthesis.cancel();
+    
+    prepareText(trimText);
+    
+    utterance           = new SpeechSynthesisUtterance(textInputValue);
+    utterance.voice     = voices[voiceSelect.value];
+    utterance.rate      = parseFloat(rateSlider.value);
+    utterance.pitch     = parseFloat(pitchSlider.value);
+
+    // if (onBoundaryEmulated) {
+    //     // emulateUtteranceOnBoundary(text);
+    //     var bla = 1;
+    // } else {
+    //     // Boundary Event - avalable for OS voices only 
+    //     utterance.onboundary = (event) => {
+    //         if (event.name === 'word') {
+    //             highlightWord(event.charIndex);
+    //         }
+    //    };
+    // }
+
+    utterance.onstart = () => {
+        updateStatus('speaking', '🔊 Spreche...');
+        speakBtn.disabled   = true;
+        pauseBtn.disabled   = false;
+        stopBtn.disabled    = false;
+        isPaused            = false;
+        words2speak         = trimText.split(/\s+/);
+
+        // var charIndex = 0;
+        if (onBoundaryEmulated) {
+            // emulated boundary handler
+            words2speak.forEach((word, index) => {
+                setTimeout(() => {
+                    // logger.debug(`Word ${index}: "spoken ${word}" at char ${charIndex}`);
+                    // logger.debug(`spoken: ${word} at index: ${index}`);
+                    highlightWord(word, index);
+                }, index * msPerWord);
+                // charIndex += word.length + 1; // +1 for space
+            });            
+        }
+    };
+
+    utterance.onend = () => {
+        updateStatus('ready', 'Fertig! Bereit zum Starten');
+        speakBtn.disabled = false;
+        pauseBtn.disabled = true;
+        stopBtn.disabled = true;
+        // Alle Highlights entfernen
+        textDisplay.querySelectorAll('span').forEach(span => {
+            span.classList.remove('highlight');
+        });
+    };
+
+    utterance.onerror = (event) => {
+        console.error('Speech error:', event);
+        updateStatus('ready', 'Fehler aufgetreten');
+        speakBtn.disabled = false;
+        pauseBtn.disabled = true;
+        stopBtn.disabled = true;
+    };
+
+    speechSynthesis.speak(utterance);
+}
+
+// function emulateUtteranceOnBoundary(text) {
+//   words2speak = text.split(/\s+/);
+//   onBoundaryEmulated = true;
+
+//   utterance.onstart = () => {
+//     var charIndex = 0;
+//     words2speak.forEach((word, index) => {
+//       setTimeout(() => {
+//         // logger.info(`Word ${index}: "${word}" at char ${charIndex}`);
+//         highlightWord(index);
+//         //console.log(`Word ${index}: "${word}" at char ${charIndex}`);
+//         // Your boundary handler here
+//       }, index * msPerWord);
+//       charIndex += word.length + 1; // +1 for space
+//     });
+//   };
+// }
+
+function speakWithEmulator(text, voice) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.voice = voice;
+
+    // Average speaking speed: ~150 words per minute
+    // Adjust based on utterance.rate (default is 1)
+    const words = text.split(/\s+/);
+    const avgMsPerChar = 60 * 1000 / (150 * 5); // Rough estimate: 5 chars per word
+    const adjustedMsPerChar = avgMsPerChar / utterance.rate;
+
+    utterance.onstart = () => {
+        let currentOffset = 0;
+        
+        words.forEach((word) => {
+            const duration = word.length * adjustedMsPerChar;
+            
+            setTimeout(() => {
+                // Emulate the boundary event object
+                const event = {
+                    name: 'word',
+                    charIndex: text.indexOf(word, currentOffset),
+                    elapsedTime: performance.now(),
+                    utterance: utterance
+                };
+                
+                console.log(`Boundary reached: "${word}" at index ${event.charIndex}`);
+                // Trigger your highlighting logic here
+                
+                currentOffset = event.charIndex + word.length;
+            }, currentOffset * adjustedMsPerChar);
+        });
+    };
+
+    window.speechSynthesis.speak(utterance);
+}
+
+// Pause/Resume
+function togglePause() {
+    if (isPaused) {
+        speechSynthesis.resume();
+        updateStatus('speaking', '🔊 Spreche...');
+        pauseBtn.textContent = '⏸ Pause';
+        isPaused = false;
+    } else {
+        speechSynthesis.pause();
+        updateStatus('paused', '⏸ Pausiert');
+        pauseBtn.textContent = '▶ Fortsetzen';
+        isPaused = true;
+    }
+}
+
+// Stop
+function stop() {
+    speechSynthesis.cancel();
+    updateStatus('ready', 'Gestoppt. Bereit zum Starten');
+    speakBtn.disabled = false;
+    pauseBtn.disabled = true;
+    stopBtn.disabled = true;
+    pauseBtn.textContent = '⏸ Pause';
+    isPaused = false;
+    
+    // Alle Highlights entfernen
+    textDisplay.querySelectorAll('span').forEach(span => {
+        span.classList.remove('highlight');
+    });
+}
+
+// Event Listeners
+speakBtn.addEventListener('click', speak);
+pauseBtn.addEventListener('click', togglePause);
+stopBtn.addEventListener('click', stop);
+
+</script>
+++++
+
+++++
+<style>
+
+.VIpgJd-ZVi9od-aZ2wEe-wOHMyf-ti6hGc {
+    -webkit-transition-delay: 0s;
+    transition-delay: 0s;
+    left: -14px;
+    top: -14px;
+    display: none;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.subtitle {
+    color: #666;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+.text-display {
+    background: #eeeeee;
+    /*
+    border-radius: 12px;
+    padding: 30px;
+    */
+    margin-top: 30px;
+    margin-bottom: 30px;
+    min-height: 150px;
+    font-size: 20px;
+    /* line-height: 1.8; */
+    color: #333;
+}
+
+.text-display span {
+    transition: all 0.15s ease;
+    padding: 2px 0;
+}
+
+.text-display span.highlight {
+    background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+    color: #fff;
+    font-weight: 600;
+    border-radius: 4px;
+    padding: 2px 4px;
+    box-shadow: 0 2px 8px rgba(253, 160, 133, 0.4);
+}
+
+.controls {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+button {
+    flex: 1;
+    min-width: 120px;
+    padding: 15px 25px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+#speakBtn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+#pauseBtn {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+}
+
+#stopBtn {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+textarea {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: inherit;
+    resize: vertical;
+    min-height: 120px;
+    transition: border-color 0.3s ease;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.settings {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.setting-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+label {
+    font-weight: 600;
+    color: #555;
+    font-size: 14px;
+}
+
+select, input[type="range"] {
+    padding: 10px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    background: white;
+}
+
+input[type="range"] {
+    cursor: pointer;
+}
+
+.range-value {
+    text-align: right;
+    color: #667eea;
+    font-weight: 600;
+}
+
+.info {
+    background: #e3f2fd;
+    border-left: 4px solid #2196f3;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #1565c0;
+}
+
+.status {
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.status.ready {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.status.speaking {
+    background: #fff3e0;
+    color: #e65100;
+}
+
+.status.paused {
+    background: #f3e5f5;
+    color: #6a1b9a;
+}
+
+</style>
+++++

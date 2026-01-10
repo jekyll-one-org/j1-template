@@ -40,13 +40,12 @@ resource_options:
       collapseDepth:                    3
   - attic:
       slides:
-        # AI generated video
-        - url:                          /assets/video/headers/present_videos/Tanzszene_Video_muted.mp4
-          alt:                          Broadway Underground Video
-          title:                        Video Player
-          tagline:                      Playback Video
-          isVideo:                      true
-#         loop:                         false
+        - url:                          /assets/image/module/attic/1920x1280/alexander-shatov.jpg
+          alt:                          Photo by Alexander Shatov on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Alexander Shatov
+            href:                       //unsplash.com/de/@alexbemore
 ---
 
 // Page Initializer
@@ -161,8 +160,22 @@ better user experience.
 VideoJS provides a flexible and customizable platform for MPEG4 video content
 on web pages.
 
-.Peck Pocketed · Local Video over VideoJS
-videojs::/assets/video//html5/peck_pocketed.mp4[poster="/assets/video/poster/html5/peck_pocketed.jpg", opts="" role="mb-5"]
+//.Peck Pocketed · Local Video over VideoJS
+//videojs::/assets/video//html5/peck_pocketed.mp4[poster="/assets/video/poster/html5/peck_pocketed.jpg", opts="" role="mb-5"]
+
+.Czech Twins over VideoJS
+//videojs:://localhost:10000/czech/emily.mp4[poster="/assets/video/poster/html5/peck_pocketed.jpg", opts="" role="mb-5"]
+//videojs:://localhost:10000/czech/twins.mp4[poster="/assets/video/poster/html5/peck_pocketed.jpg", opts="" role="mb-5"]
+
+//videojs:://localhost:10000/czech/fisting01.mp4[poster="/assets/video/poster/html5/peck_pocketed.jpg", opts="" role="mb-5"]
+
+//videojs:://localhost:10000/czech/fisting02.mp4[poster="/assets/video/poster/html5/peck_pocketed.jpg", opts="" role="mb-5"]
+
+videojs:://localhost:10000/czech/linda.mp4[poster="/assets/video/poster/html5/peck_pocketed.jpg", opts="" role="mb-5"]
+
+//videojs:://localhost:10000/czech/lulynut.mp4[poster="/assets/video/poster/html5/peck_pocketed.jpg", opts="" role="mb-5"]
+
+videojs:://localhost:10000/czech/skinny.mp4[poster="/assets/video/poster/html5/peck_pocketed.jpg", opts="" role="mb-5"]
 
 // .Rolling Wild · MP4 Video (over VideoJS)
 // videojs::/assets/video//html5/rolling_wild.mp4[poster="/assets/video/poster/html5/rolling_wild.jpg", opts="" role="mb-5"]
@@ -199,8 +212,8 @@ Sky Elements uses the night sky as a canvas on which anything is possible.
 A large group of Drones is painting lights in the sky to reflect the most
 captivating narratives. 
 
-.Sky Elements · AGT 2024 
-youtube::brEXrQBIj68[poster="//img.youtube.com/vi/brEXrQBIj68/maxresdefault.jpg" role="mb-4"]
+.Sky Elements · AGT 2024
+youtube::cN8IrZUhPtc[poster="//img.youtube.com/vi/cN8IrZUhPtc/maxresdefault.jpg" role="mb-4"]
 endif::[]
 
 

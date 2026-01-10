@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/gallery.js (1)
+ # ~/assets/theme/j1/adapter/js/gallery.js (2)
  # Liquid template to create the J1 Adapter for J1 Gallery
  #
  # Product/Info:
@@ -24,26 +24,29 @@ regenerate:                             true
 
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment       = site.environment %}
-{% assign template_version  = site.version %}
+{% assign environment           = site.environment %}
+{% assign template_version      = site.version %}
 
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config   = site.data.j1_config %}
-{% assign apps              = site.data.apps %}
-{% assign modules           = site.data.modules %}
+{% assign template_config       = site.data.j1_config %}
+{% assign apps                  = site.data.apps %}
+{% assign modules               = site.data.modules %}
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign gallery_defaults  = modules.defaults.gallery.defaults %}
-{% assign gallery_settings  = modules.gallery.settings %}
+{% assign gallery_defaults    = modules.defaults.gallery.defaults %}
+{% assign gallery_players     = modules.gallery_app.settings %}
+{% assign gallery_playlists   = modules.gallery_playlists.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign gallery_options   = gallery_defaults | merge: gallery_settings %}
+{% assign gallery_options     = gallery_defaults | merge: gallery_players %}
+{% assign gallery_options     = gallery_options  | merge: gallery_playlists %}
+
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -56,11 +59,12 @@ regenerate:                             true
 {% comment %} Collect gallery options
 gallery_options: {{gallery_options | debug}}
 -------------------------------------------------------------------------------- {% endcomment %}
+gallery_options: {{gallery_options | debug}}
 
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/gallery.js (1)
+ # ~/assets/theme/j1/adapter/js/gallery.js (2)
  # JS Adapter for J1 Gallery
  #
  # Product/Info:

@@ -15,7 +15,7 @@
 'use strict';
 
 module.exports = function parseContent (options) {
-  var reduce = [].reduce
+  var reduce = [].reduce;
 
   /**
    * Get the last item in an array and return a reference to it.
@@ -23,7 +23,7 @@ module.exports = function parseContent (options) {
    * @return {Object}
    */
   function getLastItem (array) {
-    return array[array.length - 1]
+    return array[array.length - 1];
   }
 
   /**
@@ -32,7 +32,7 @@ module.exports = function parseContent (options) {
    * @return {Number}
    */
   function getHeadingLevel (heading) {
-    return +heading.nodeName.split('H').join('')
+    return +heading.nodeName.split('H').join('');
   }
 
   /**
@@ -44,10 +44,10 @@ module.exports = function parseContent (options) {
     // each node is processed twice by this method because nestHeadingsArray() and addNode() calls it
     // first time heading is real DOM node element, second time it is obj
     // that is causing problem so I am processing only original DOM node
-    if (!(heading instanceof window.HTMLElement)) return heading
+    if (!(heading instanceof window.HTMLElement)) return heading;
 
     if (options.ignoreHiddenElements && (!heading.offsetHeight || !heading.offsetParent)) {
-      return null
+      return null;
     }
 
     var obj = {
@@ -59,14 +59,14 @@ module.exports = function parseContent (options) {
     }
 
     if (options.includeHtml) {
-      obj.childNodes = heading.childNodes
+      obj.childNodes = heading.childNodes;
     }
 
     if (options.headingObjectCallback) {
-      return options.headingObjectCallback(obj, heading)
+      return options.headingObjectCallback(obj, heading);
     }
 
-    return obj
+    return obj;
   }
 
   /**
@@ -76,29 +76,27 @@ module.exports = function parseContent (options) {
    * @return {Array}
    */
   function addNode (node, nest) {
-    var obj = getHeadingObject(node)
-    var level = obj.headingLevel
-    var array = nest
+    var obj = getHeadingObject(node);
+    var level = obj.headingLevel;
+    var array = nest;
     var lastItem = getLastItem(array)
-    var lastItemLevel = lastItem
-      ? lastItem.headingLevel
-      : 0
-    var counter = level - lastItemLevel
+    var lastItemLevel = lastItem ? lastItem.headingLevel : 0;
+    var counter = level - lastItemLevel;
 
     while (counter > 0) {
-      lastItem = getLastItem(array)
+      lastItem = getLastItem(array);
       if (lastItem && lastItem.children !== undefined) {
-        array = lastItem.children
+        array = lastItem.children;
       }
-      counter--
+      counter--;
     }
 
     if (level >= options.collapseDepth) {
-      obj.isCollapsed = true
+      obj.isCollapsed = true;
     }
 
     array.push(obj)
-    return array
+    return array;
   }
 
   /**
@@ -108,19 +106,19 @@ module.exports = function parseContent (options) {
    * @return {Array}
    */
   function selectHeadings (contentSelector, headingSelector) {
-    var selectors = headingSelector
+    var selectors = headingSelector;
     if (options.ignoreSelector) {
       selectors = headingSelector.split(',')
         .map(function mapSelectors (selector) {
-          return selector.trim() + ':not(' + options.ignoreSelector + ')'
-        })
+          return selector.trim() + ':not(' + options.ignoreSelector + ')';
+        });
     }
     try {
       return document.querySelector(contentSelector)
-        .querySelectorAll(selectors)
+        .querySelectorAll(selectors);
     } catch (e) {
       console.warn('Element not found: ' + contentSelector); // eslint-disable-line
-      return null
+      return null;
     }
   }
 

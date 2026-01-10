@@ -1,0 +1,91 @@
+Welche Gem-basierenden Templates existieren für den Generator Jekyll.?
+Welche Anteile am Markt haben sie im vergleich zum Template jekyll-one-template?
+Versuche ein paar Datensätze oder Webseiten zu finden, die Analytics/Zählungen
+zu Jekyll-Themes haben, um eine quantifiziertere Schätzung zu machen.
+
+
+chatGPT
+--------------------------------------------------------------------------------
+
+Kurzfassung vorweg: Es gibt sehr viele gem-basierte Jekyll-Themes
+(also Themes, die als RubyGem installiert werden). Für eine quantifiziertere
+Schätzung der „Marktanteile“ lässt sich am pragmatischsten mit RubyGems
+Downloadzahlen (als Proxy) + GitHub-Sichtbarkeit (Stars/Org „pages-themes“)
+arbeiten. Das ist *keine* echte Site-Zählung, aber brauchbar für eine
+Größenordnung.
+
+# 1) Wichtige gem-basierte Jekyll-Themes (Auswahl, mit belastbaren Quellen)
+
+* minima – das Jekyll-Standardtheme; >8,5 M Downloads.
+* pages-themes (GitHub Pages-Themes als Gems), u. a.:
+  primer 4,72 M, cayman 4,59 M, dinky 4,43 M, slate 4,56 M,
+  hacker 4,76 M, leap-day 4,29 M.
+* just-the-docs – Doku-Theme;  ~2,27 M Downloads.
+* Minimal Mistakes (minimal-mistakes-jekyll) – populäres Blog/Portfolio
+    Theme;  ~0,57 M Downloads
+* Chirpy (jekyll-theme-chirpy) – technisches Schreib-Theme; als Gem verfügbar.
+* J1 / jekyll-one-template – j1-template als Gem verfügbar;  ~262 k Downloads. 
+
+Weitere Kataloge/Verzeichnisse mit (teils) quantifizierbarer Sicht:
+
+* JamstackThemes.dev (Jekyll-Sektion listet  ~330 Themes, sortierbar nach
+  Stars/Last-Commit).
+* jekyllthemes.io (Filter „Free“, sortiert u. a. nach GitHub-Stars; zeigt
+  Minimal Mistakes/Just-the-Docs etc.).
+* pages-themes GitHub-Organisation (offizielle GitHub Pages-Themes).
+
+> Wichtig: RubyGems-Downloads messen Downloads (inkl. CI, Upgrades,
+  Transitivitäten via `github-pages`-Gem), nicht aktive Websites. Als
+  relative Proxy zwischen gem-basierten Themes ist es trotzdem nützlich.
+
+# 2) Grobe Marktanteils-Schätzung (Proxy: RubyGems-Downloads)
+
+Ich habe exemplarisch zehn verbreitete gem-basierte Themes addiert und Anteile
+innerhalb dieses „Korbs“ berechnet:
+
+| Theme (Gem)             | Total Downloads (Quelle) | Anteil im Sample |
+| ----------------------- | -----------------------: | ---------------: |
+| minima                  |                  ~8,51 M |          ~21,9 % |
+| jekyll-theme-primer     |                  ~4,72 M |          ~12,1 % |
+| jekyll-theme-hacker     |                  ~4,76 M |          ~12,2 % |
+| jekyll-theme-slate      |                  ~4,56 M |          ~11,7 % |
+| jekyll-theme-cayman     |                  ~4,59 M |          ~11,8 % |
+| jekyll-theme-leap-day   |                  ~4,29 M |          ~11,0 % |
+| jekyll-theme-dinky      |                  ~4,43 M |          ~11,4 % |
+| just-the-docs           |                  ~2,27 M |           ~5,8 % |
+| minimal-mistakes-jekyll |                  ~0,57 M |           ~1,5 % |
+| j1-template             |                 ~0,263 M |           ~0,7 % |
+
+Summe im Sample ≈ 38,95 M Downloads.
+
+Damit liegt jekyll-one-template (j1-template) in diesem Vergleich bei  ~0,7 %
+des ausgewählten gem-Marktes. (Alle Rohzahlen siehe Quellen.)
+
+# 3) Weitere Datenquellen für Quantifizierung
+
+* RubyGems Profiles/Stats – zeigen Summen je Maintainer/Org und erleichtern Massen-Abschätzung (z. B. `github-open-source` Profil mit vielen pages-themes-Downloads). ([rubygems.org][11])
+* GitHub Stars/Forks je Theme-Repo – gute Popularitäts-Proxys (z. B. Minimal Mistakes  ~8,6k Stars; Just-the-Docs  ~8,6k Stars). ([GitHub][12])
+* JamstackThemes.dev – Anzahl gelisteter Jekyll-Themes ( ~330) + Sterne/letzte Commits als Aktivitätsindikator. ([Jamstack Themes][8])
+
+# 4) Einschätzung & Bias
+
+* GitHub Pages-Themes werden häufig transitiv via `github-pages` installiert ⇒ ihre Downloadzahlen sind *stark* aufgebläht. Dadurch dominieren „pages-themes“ im Download-Vergleich. ([rubygems.org][10])
+* Beliebte Nicht-Pages-Themes (z. B. Minimal Mistakes, Just-the-Docs, Chirpy) schneiden bei GitHub-Stars sehr stark ab, obwohl ihre Gem-Downloads deutlich unter den Pages-Themes liegen – das deutet auf rege Nutzung via Remote Theme/Repo-Template statt Gem-Installation hin. ([mmistakes.github.io][13])
+
+---
+
+Wenn du magst, kann ich dir als nächsten Schritt eine CSV-Liste mit den o. g. Gems und Zahlen zusammenstellen (inkl. Quellen-Links) – dann hast du eine Datei, die du direkt in deine J1-Site/Docs einbinden kannst.
+
+[1]:  https://rubygems.org/gems/minima/versions/0.1.0?locale=en&utm_source=chatgpt.com "minima | RubyGems.org | your community gem host"
+[2]:  https://rubygems.org/gems/jekyll-theme-primer/versions/0.6.0?locale=en "jekyll-theme-primer | RubyGems.org | your community gem host"
+[3]:  https://github.com/pages-themes?utm_source=chatgpt.com "GitHub Pages themes"
+[4]:  https://rubygems.org/gems/just-the-docs/versions/0.8.2?locale=en "just-the-docs | RubyGems.org | your community gem host"
+[5]:  https://rubygems.org/gems/minimal-mistakes-jekyll/versions/4.26.2?locale=en "minimal-mistakes-jekyll | RubyGems.org | your community gem host"
+[6]:  https://rubygems.org/gems/jekyll-theme-chirpy/versions/7.3.1?locale=en&utm_source=chatgpt.com "jekyll-theme-chirpy 7.3.1"
+[7]:  https://rubygems.org/gems/j1-template "j1-template | RubyGems.org | your community gem host"
+[8]:  https://jamstackthemes.dev/ssg/jekyll/?utm_source=chatgpt.com "Jekyll"
+[9]:  https://jekyllthemes.io/free?utm_source=chatgpt.com "Free Jekyll Themes"
+[10]: https://rubygems.org/gems/github-pages/versions/232?locale=en&utm_source=chatgpt.com "github-pages 232"
+[11]: https://rubygems.org/profiles/github-open-source?utm_source=chatgpt.com "Profile of github-open-source"
+[12]: https://github.com/mmistakes/minimal-mistakes "GitHub - mmistakes/minimal-mistakes: :triangular_ruler: Jekyll theme for building a personal site, blog, project documentation, or portfolio."
+[13]: https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/?utm_source=chatgpt.com "Quick-Start Guide - Minimal Mistakes - GitHub Pages"

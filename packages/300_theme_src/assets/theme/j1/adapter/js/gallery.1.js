@@ -56,6 +56,7 @@ regenerate:                             true
 {% comment %} Collect gallery options
 gallery_options: {{gallery_options | debug}}
 -------------------------------------------------------------------------------- {% endcomment %}
+gallery_options: {{gallery_options | debug}}
 
 
 /*
