@@ -1,0 +1,19 @@
+In der Sprachwissenschaft und Logopädie bezeichnet eine Utterance
+(deutsch: Äußerung) eine natürliche Sprecheinheit, die durch Pausen oder
+Schweigen begrenzt ist. 
+
+Zentrale Merkmale einer Utterance
+Phonetische Einheit: Eine Utterance wird akustisch durch eine zusammenhängende Intonationskurve und Atempausen definiert.
+Abgrenzung zum Satz: Während ein Satz eine grammatikalische Struktur ist, ist eine Utterance eine handlungsorientierte Sprecheinheit. Sie muss nicht zwingend vollständig oder grammatikalisch korrekt sein (z. B. Einwortäußerungen wie „Hallo!“).
+Kontextabhängigkeit: Ihre Bedeutung ergibt sich oft erst aus der konkreten Situation oder dem vorangegangenen Dialog. 
+
+Bedeutung in der Logopädie
+In der Diagnostik, etwa bei Aphasien oder Sprachentwicklungsstörungen, wird die Utterance als Messeinheit genutzt:
+Mean Length of Utterance (MLU): Die durchschnittliche Länge der Äußerungen (gemessen in Wörtern oder Morphemen) dient zur Beurteilung der sprachlichen Komplexität.
+Recurring Utterances: Bei schweren Sprachstörungen treten oft Automatismen auf – immer gleiche Silben- oder Wortfolgen (z. B. „dadada“), die keinen direkten Bezug zum Gesprächskontext haben. 
+
+
+
+
+
+

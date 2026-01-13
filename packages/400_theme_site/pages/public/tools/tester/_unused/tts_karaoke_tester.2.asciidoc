@@ -75,7 +75,7 @@ enable smooth highlighting without unnatural pauses.
 // https://github.com/westonruter/html5-audio-read-along/tree/master
 
 [role="mt-5"]
-== TTS Karaoke
+== TTS Karaoke Highlighting
 
 // Willkommen zum Text-to-Speech Karaoke Demo!
 
@@ -91,11 +91,10 @@ API uses boundary events to track the position of each word.
 ++++
 <div class="container nospeak mt-5">
 
-    <h1>🎤 TTS Karaoke Highlighting</h1>
-    <p class="subtitle">Text-to-Speech mit Wort-für-Wort Hervorhebung</p>
+    <!-- h1>🎤 TTS Karaoke Highlighting</h1>
+    <p class="subtitle">Text-to-Speech mit Wort-für-Wort Hervorhebung</p -->
     
     <div id="status" class="status ready">Bereit zum Starten</div>
-
     <div id="textDisplay" class="text-display"></div>
 
     <div class="controls nospeak">
@@ -121,16 +120,10 @@ API uses boundary events to track the position of each word.
 
     <!-- textarea id="textInput" class="mt-4 mb-8" placeholder="Geben Sie hier Ihren Text ein ...">
         Ralf Schmitz ist ein vielseitiger deutscher Unterhaltungskünstler. Viele Menschen in Deutschland werden ihn kennen, aber nicht unbedingt alle. Das wäre aber schade, da er durch viele Talente überzeugen kann. Seine Schlagfertigkeit, das improvisatorische Können und seine energiegeladenen Auftritte machen ihn einzigartig.
-
-        Er begann seine Karriere im Improvisationstheater Die Springmaus in Bonn. Der Durchbruch gelang mit der Sketch-Comedy-Show 'Die Dreisten Drei', für die er im Jahr 2003 als Newcomer des Jahres den Deutschen Comedypreis bekam.
-
-        Als Moderator hat Ralf zahlreiche TV-Shows präsentert. Darunter 'Take Me Out' und 'Schmitz in the City'. Als Schauspieler hat er in Filmen und Serien mitgewirkt, die schon heute legendär sind. Darunter die TV-Show Schillerstraße und der Kino-Film '7 Zwerge - Männer allein im Wald' von 2004; eine Komödie von und mit Otto Waalkes.
     </textarea -->
 
     <textarea id="textInput" class="mt-4 mb-8" placeholder="Geben Sie hier Ihren Text ein ...">
-        TTS Karaoke Highlighting refers to a feature in text-to-speech (TTS) systems where words or phrases in displayed text are visually highlighted in real-time as the synthesized voice reads them aloud, mimicking the style of karaoke lyrics on screen.
-
-        This synchronization enhances reading comprehension by combining auditory playback with visual cues, allowing users to follow along effortlessly.
+TTS Karaoke Highlighting refers to a feature in text-to-speech (TTS) systems where words or phrases in displayed text are visually highlighted in real-time as the synthesized voice reads them aloud, mimicking the style of karaoke lyrics on screen.
     </textarea>
 
 </div>
@@ -144,7 +137,7 @@ const logger            = log4javascript.getLogger('j1.tts.karaoke');
 const textDisplay       = document.getElementById('textDisplay');
 const textInput         = document.getElementById('textInput');
 const textInputValue    = textInput.value;
-const trimText          = textInputValue.trim();
+const trimedText          = textInputValue.trim();
 const speakBtn          = document.getElementById('speakBtn');
 const pauseBtn          = document.getElementById('pauseBtn');
 const stopBtn           = document.getElementById('stopBtn');
@@ -266,7 +259,7 @@ function highlightWord(hlWord, charIndex) {
         }
         currentPos += wordLength; // +1  add space
 
-        logger.debug(`highlightWord \n charIndex at: ${charIndex}, word: ${hlWord}, spanContent: ${spanTextContent}`);
+        // logger.debug(`highlightWord \n charIndex at: ${charIndex}, word: ${hlWord}, spanContent: ${spanTextContent}`);
     }
 }
 
@@ -281,15 +274,12 @@ function speak() {
 
     logger.info('speak: \n  funktion is being initialized');
 
-    // const textInput = textInput.value;
-    // const text      = textInput.trim();
-
-    if (!trimText) return;
+    if (!trimedText) return;
 
     // Vorherige Utterance stoppen
     speechSynthesis.cancel();
     
-    prepareText(trimText);
+    prepareText(trimedText);
     
     utterance           = new SpeechSynthesisUtterance(textInputValue);
     utterance.voice     = voices[voiceSelect.value];
@@ -303,30 +293,66 @@ function speak() {
         // speech synthesis utterance boundary events are avalable for OS voices only 
         utterance.onboundary = (event) => {
             const dummyWord = 'dummyWord';
+            
             if (event.name === 'word') {
-                highlightWord(dummyWord, event.charIndex);
+                const startIndex    = event.charIndex;
+                const length        = event.charLength;
+                const targetText    = event.target.text;
+
+                // Das Wort aus dem Originaltext extrahieren
+                const currentWord = targetText.substring(startIndex, startIndex + length);
+                logger.debug(`utterance.onboundary: \n spoken word: ${currentWord} at startIndex: ${startIndex}`);
+                highlightWord(currentWord, startIndex);
             }
-       };
+      };
     }
 
     utterance.onstart = () => {
-        updateStatus('speaking', '🔊 Spreche...');
         speakBtn.disabled   = true;
         pauseBtn.disabled   = false;
         stopBtn.disabled    = false;
         isPaused            = false;
-        words2speak         = trimText.split(/\s+/);
+        words2speak         = trimedText.split(/\s+/);
+
+        updateStatus('speaking', '🔊 Speaking ...');
 
         // var charIndex = 0;
         if (onBoundaryEmulated) {
             // emulated boundary handler
             words2speak.forEach((word, index) => {
                 setTimeout(() => {
+                    // Emulate the boundary event object
+                    // const target = {};
+                    // const text   = trimedText;
+
+                    const event  = {
+                        name: 'word',
+                    //  target['text']: trimedText,
+                        charIndex:      trimedText.indexOf(word, currentOffset),
+                        charLength:     word.length,
+                        elapsedTime:    performance.now(),
+                        utterance:      utterance
+                    };
+
+                    const startIndex    = event.charIndex;
+                    const length        = event.charLength;
+                    const targetText    = trimedText;
+
+                    // console.log(`Boundary reached: "${word}" at index ${event.charIndex}`);
                     // logger.debug(`Word ${index}: "spoken ${word}" at char ${charIndex}`);
                     // logger.debug(`spoken: ${word} at index: ${index}`);
+
+                    // Das Wort aus dem Originaltext extrahieren
+                    const currentWord = targetText.substring(startIndex, startIndex + length);
+                    logger.debug(`utterance.onboundary: \n spoken word: ${currentWord} at startIndex: ${startIndex}`);
+
+                    // Trigger your highlighting logic here
                     highlightWord(word, index);
+
+                    currentOffset = event.charIndex + word.length;
                 }, index * msPerWord);
                 // charIndex += word.length + 1; // +1 for space
+                
             });            
         } else {
 
@@ -334,7 +360,7 @@ function speak() {
     };
 
     utterance.onend = () => {
-        updateStatus('ready', 'Fertig! Bereit zum Starten');
+        updateStatus('ready', 'Ready to start');
         speakBtn.disabled = false;
         pauseBtn.disabled = true;
         stopBtn.disabled = true;
@@ -379,7 +405,7 @@ function speakWithEmulator(text, voice) {
 
     // Average speaking speed: ~150 words per minute
     // Adjust based on utterance.rate (default is 1)
-    const words = text.split(/\s+/);
+    const words = trimedText.split(/\s+/);
     const avgMsPerChar = 60 * 1000 / (150 * 5); // Rough estimate: 5 chars per word
     const adjustedMsPerChar = avgMsPerChar / utterance.rate;
 
@@ -393,7 +419,7 @@ function speakWithEmulator(text, voice) {
                 // Emulate the boundary event object
                 const event = {
                     name: 'word',
-                    charIndex: text.indexOf(word, currentOffset),
+                    charIndex: trimedText.indexOf(word, currentOffset),
                     elapsedTime: performance.now(),
                     utterance: utterance
                 };

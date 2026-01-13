@@ -128,9 +128,7 @@ API uses boundary events to track the position of each word.
     </textarea -->
 
     <textarea id="textInput" class="mt-4 mb-8" placeholder="Geben Sie hier Ihren Text ein ...">
-        TTS Karaoke Highlighting refers to a feature in text-to-speech (TTS) systems where words or phrases in displayed text are visually highlighted in real-time as the synthesized voice reads them aloud, mimicking the style of karaoke lyrics on screen.
-
-        This synchronization enhances reading comprehension by combining auditory playback with visual cues, allowing users to follow along effortlessly.
+TTS Karaoke Highlighting refers to a feature in text-to-speech (TTS) systems where words or phrases in displayed text are visually highlighted in real-time as the synthesized voice reads them aloud, mimicking the style of karaoke lyrics on screen. This synchronization enhances reading comprehension by combining auditory playback with visual cues, allowing users to follow along effortlessly.
     </textarea>
 
 </div>
@@ -171,7 +169,8 @@ var sourceLanguage      = document.getElementsByTagName("html")[0].getAttribute(
 
 var onBoundaryEmulated  = false;
 var voiceName           = '';
-var words2speak;
+var words2speak         = [];
+
 
 // Voices laden
 function loadVoices() {
@@ -310,6 +309,10 @@ function speak() {
     }
 
     utterance.onstart = () => {
+        const avgMsPerChar      = 60 * 1000 / (150 * 5); // Rough estimate: 5 chars per word
+        const adjustedMsPerChar = avgMsPerChar / utterance.rate;
+        var currentOffset       = 0;
+
         updateStatus('speaking', '🔊 Spreche...');
         speakBtn.disabled   = true;
         pauseBtn.disabled   = false;
@@ -322,16 +325,45 @@ function speak() {
             // emulated boundary handler
             words2speak.forEach((word, index) => {
                 setTimeout(() => {
-                    // logger.debug(`Word ${index}: "spoken ${word}" at char ${charIndex}`);
-                    // logger.debug(`spoken: ${word} at index: ${index}`);
+                    logger.debug(`utterance.onstart: \n spoken word: ${word} at index: ${index}`);
                     highlightWord(word, index);
-                }, index * msPerWord);
+                    currentOffset = index + word.length;
+                }, currentOffset * adjustedMsPerChar); // index * msPerWord);
                 // charIndex += word.length + 1; // +1 for space
             });            
         } else {
-
+            // do nothing
         }
     };
+
+    // const words2speak       = trimText.split(/\s+/);
+    // const avgMsPerChar      = 60 * 1000 / (150 * 5); // Rough estimate: 5 chars per word
+    // const adjustedMsPerChar = avgMsPerChar / utterance.rate;
+
+    // utterance.onstart = () => {
+    //     let currentOffset   = 0;
+        
+    //     words2speak.forEach((word) => {
+    //         const duration = word.length * adjustedMsPerChar;
+            
+    //         setTimeout(() => {
+    //             // Emulate the boundary event object
+    //             const event = {
+    //                 name:           'word',
+    //                 charIndex:      trimText.indexOf(word, currentOffset),
+    //                 elapsedTime:    performance.now(),
+    //                 utterance:      utterance
+    //             };
+
+    //             logger.debug(`utterance.onstart: \n boundary reached: "${word}" at index ${event.charIndex}`);
+
+    //             // Trigger your highlighting logic here
+    //             highlightWord(word, event.charIndex);
+
+    //             currentOffset = event.charIndex + word.length;
+    //         }, currentOffset * adjustedMsPerChar);
+    //     });
+    // };
 
     utterance.onend = () => {
         updateStatus('ready', 'Fertig! Bereit zum Starten');
@@ -345,8 +377,9 @@ function speak() {
     };
 
     utterance.onerror = (event) => {
+        logger.error('Speech error:', event.error);
         console.error('Speech error:', event);
-        updateStatus('ready', 'Fehler aufgetreten');
+        updateStatus('error', `Fehler aufgetreten: ${event.error}`);
         speakBtn.disabled = false;
         pauseBtn.disabled = true;
         stopBtn.disabled = true;
@@ -637,5 +670,9 @@ input[type="range"] {
     color: #6a1b9a;
 }
 
+.status.error {
+    background: #e8f5e9;
+    color: #e65100;
+}
 </style>
 ++++

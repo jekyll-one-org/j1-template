@@ -1,0 +1,90 @@
+How to add dynamically attributes to an javascript object
+--------------------------------------------------------------------------------
+
+https://gemini.google.com/app/f25202ba3c8ee67a
+
+
+Adding attributes (properties) dynamically to a JavaScript object is a
+fundamental skill. Depending on whether you know the property name beforehand
+or need to determine it at runtime, there are three primary ways to do it.
+
+Dot Notation
+--------------------------------------------------------------------------------
+
+If you know the exact name of the property you want to add while writing
+the code, dot notation is the cleanest and most common method.
+
+```javascript
+const user = {};
+user.name = "Alex";
+user.age = 30;
+```
+
+Square Bracket Notation
+--------------------------------------------------------------------------------
+
+This is the most powerful method because it allows you to use **variables**
+or **strings with spaces/special characters** as keys.
+
+* **Using Variables:** If the key name comes from a function or user input.
+* **Using Strings:** If the key contains spaces (e.g., `"Home Address"`).
+
+```javascript
+const user = {};
+const key = "email";
+
+// Adding a property using a variable
+user[key] = "alex@example.com";
+
+// Adding a property with spaces
+user["is active"] = true;
+```
+
+Object.assign() or Spread Operator
+--------------------------------------------------------------------------------
+
+If you want to add multiple properties at once or merge one object into
+another without mutating the original (in the case of the spread operator),
+use these methods.
+
+### Object.assign
+
+```javascript
+const user = { name: "Alex" };
+Object.assign(user, { age: 30, city: "New York" });
+```
+
+### Spread Operator (`...`)
+
+This creates a **new object** rather than modifying the existing one, which
+is a core concept in functional programming and frameworks like React.
+
+```javascript
+const user = { name: "Alex" };
+const updatedUser = { 
+  ...user, 
+  age: 30, 
+  status: "Active" 
+};
+```
+
+---
+
+## Comparison Summary
+
+| Method | Best Use Case | Dynamic Keys? |
+| --- | --- | --- |
+| **Dot Notation** | Hardcoded, simple property names. | No |
+| **Bracket Notation** | Variable keys, keys with spaces or symbols. | **Yes** |
+| **Object.assign** | Adding multiple properties to an existing object. | No |
+| **Spread Operator** | Creating a new object with additional properties. | **Yes** |
+
+
+> **Pro Tip:** In modern JavaScript (ES6+), you can also use **Computed Property Names** directly inside the object literal:
+> ```javascript
+> const dynamicKey = "id_number";
+> const user = {
+>   [dynamicKey]: 12345
+> };
+> 
+> ```
