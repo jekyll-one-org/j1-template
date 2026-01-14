@@ -1,4 +1,4 @@
-How to add dynamically attributes to an javascript object
+How to add dynamically flat and nested attributes to an javascript object
 --------------------------------------------------------------------------------
 
 https://gemini.google.com/app/f25202ba3c8ee67a

@@ -1,0 +1,126 @@
+How to add dynamically flat and nested attributes to an javascript object
+-------------------------------------------------------------------------
+
+Adding attributes to JavaScript objects dynamically depends on whether you
+are working with a single level (**flat**) or multiple levels of hierarchy
+(**nested**).
+
+Here is a breakdown of the best patterns to achieve this.
+
+
+Adding Flat Attributes
+--------------------------------------------------------------------------------
+
+For flat attributes, you can use **Dot Notation**, **Bracket Notation**,
+or `Object.assign()`.
+
+Bracket Notation (Most Dynamic)
+-------------------------------
+
+If the key name is stored in a variable, you must use square brackets.
+
+```javascript
+const user = { name: "Alex" };
+const key = "role";
+const value = "Admin";
+
+user[key] = value; 
+// Result: { name: "Alex", role: "Admin" }
+```
+
+Using Object.assign or Spread
+-----------------------------
+
+These are useful if you want to merge multiple attributes at once or create
+a new object without mutating the original.
+
+```javascript
+const updates = { status: "Active", lastLogin: "2026-01-13" };
+
+// Merging into existing object
+Object.assign(user, updates);
+
+// Creating a new object (Immutable pattern)
+const newUser = { ...user, ...updates };
+```
+
+
+Adding Nested Attributes
+--------------------------------------------------------------------------------
+
+Adding nested attributes dynamically is trickier because if the parent key
+doesn't exist yet, JavaScript will throw a `TypeError`.
+
+The "Manual" Safety Check
+-------------------------
+
+Before setting a deep value, you must ensure every level of the path exists.
+
+```javascript
+const config = {};
+
+// Goal: config.theme.colors.primary = "blue"
+// This would fail: config.theme.colors.primary = "blue"; 
+
+config.theme = config.theme || {};
+config.theme.colors = config.theme.colors || {};
+config.theme.colors.primary = "blue";
+```
+
+The "Reduce" Pattern (Deep Path Utility)
+----------------------------------------
+
+If you have a string path like `"settings.display.mode"`, you can
+use `Array.prototype.reduce` to build the nesting dynamically.
+
+```javascript
+const setDeep = (obj, path, value) => {
+  const keys = path.split('.');
+  const lastKey = keys.pop();
+  
+  const lastObj = keys.reduce((current, key) => {
+    if (!current[key]) current[key] = {};
+    return current[key];
+  }, obj);
+  
+  lastObj[lastKey] = value;
+};
+
+const data = {};
+setDeep(data, 'profile.privacy.emailVisible', true);
+// Result: { profile: { privacy: { emailVisible: true } } }
+```
+
+
+Modern Approaches
+--------------------------------------------------------------------------------
+
+Optional Chaining (Assignment)
+------------------------------
+
+While you can't *assign* through optional chaining (e.g., `obj?.prop = val`
+is invalid), you can use it to check for existence before performing logic.
+
+Using Libraries (Lodash)
+------------------------
+
+In professional production environments, many developers use **Lodash**
+to avoid writing boilerplate for deep nesting.
+
+```javascript
+import _ from 'lodash';
+
+const user = {};
+_.set(user, 'account.settings.notifications', false);
+```
+
+Comparison Summary
+--------------------------------------------------------------------------------
+
+| Method | Best For | Mutates Original? |
+| --- | --- | --- |
+| **Bracket Notation** | Single dynamic keys | Yes |
+| **Spread Operator** | Flat merging / React state | No (creates copy) |
+| **Reduce Loop** | Deeply nested paths from strings | Yes |
+| **Lodash `.set()**` | Complex, unpredictable nesting | Yes |
+

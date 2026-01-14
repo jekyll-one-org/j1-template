@@ -1,0 +1,49 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/scss/theme_uno/modules/_tts_karaoke.scss
+ #
+ # Product/Info:
+ # http://jekyll.one
+ #
+ # Copyright (C) 2023-2025 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ # -----------------------------------------------------------------------------
+ # NOTE: Provides styles for the J1 Google Adsense module
+ # NOTE: Settings are set dynamicall by the JS adapter
+ # -----------------------------------------------------------------------------
+*/
+
+// Styles
+// -----------------------------------------------------------------------------
+
+.text-display {
+    background: #eeeeee;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    min-height: 150px;
+    font-size: 20px;
+    color: #333;
+    /*
+    border-radius: 12px;
+    padding: 30px;
+    line-height: 1.8;
+    */    
+}
+
+.text-display span {
+    transition: all 0.15s ease;
+    padding: 2px 0;
+}
+
+.text-display span.highlight {
+    background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+    color: #fff;
+    font-weight: 600;
+    border-radius: 4px;
+    padding: 2px 4px;
+    /*
+    box-shadow: 0 2px 8px rgba(253, 160, 133, 0.4);
+    */
+}

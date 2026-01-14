@@ -1,21 +1,18 @@
 ---
 title:                                  TTS Karaoke
-title_extention:                        Mimick Karaoke lyrics
-tagline:                                Mimick Karaoke lyrics for spoken text
+title_extention:                        Convert audio files to text
+tagline:                                Convert audio files to text
 date:                                   2025-02-10
 #last_modified:                         2025-01-01
 
 description: >
-                                        TTS Karaoke Highlighting refers to a feature in text-to-speech systems
-                                        where words or phrases in displayed text are visually highlighted in
-                                        real-time as the synthesized voice reads them aloud, mimick the style
-                                        of karaoke lyrics on screen.
+                                        TTS Karaoke
 keywords: >
                                         open source, free, template, jekyll, jekyllone, web,
                                         sites, static, jamstack, bootstrap, html, html5
 
 categories:                             [ Tester ]
-tags:                                   [ Audio, TTS, Karaoke ]
+tags:                                   [ Audio TTS ]
 
 image:
   path:                                 /assets/image/module/attic/1920x1280/markus-spiske.jpg
@@ -122,35 +119,12 @@ API uses boundary events to track the position of each word.
     </div>
 
     <!-- textarea id="textInput" class="mt-4 mb-8" placeholder="Geben Sie hier Ihren Text ein ...">
-TTS Karaoke Highlighting bezeichnet eine Funktion in Text-to-Speech (TTS)-Systemen, bei der Wörter oder Phrasen im angezeigten Text in Echtzeit visuell hervorgehoben werden, während die synthetische Stimme sie vorliest, wodurch der Stil von Karaoke-Texten auf dem Bildschirm nachgeahmt wird.
-Diese Synchronisierung verbessert das Leseverständnis durch die Kombination von Audio- und visuellen Hinweisen und ermöglicht so ein müheloses Mitlesen. Moderne neuronale TTS-Systeme liefern oft präzise Zeitstempel auf Wortebene, um ein flüssiges Hervorheben ohne unnatürliche Pausen zu ermöglichen.
+        Ralf Schmitz ist ein vielseitiger deutscher Unterhaltungskünstler. Viele Menschen in Deutschland werden ihn kennen, aber nicht unbedingt alle. Das wäre aber schade, da er durch viele Talente überzeugen kann. Seine Schlagfertigkeit, das improvisatorische Können und seine energiegeladenen Auftritte machen ihn einzigartig.
     </textarea -->
 
-    <!-- textarea id="textInput" class="mt-4 mb-8" placeholder="Enter your text ...">
-La mise en évidence karaoké (TTS Karaoke Highlighting) est une fonctionnalité des systèmes de synthèse vocale qui met en évidence visuellement, en temps réel, les mots ou expressions d'un texte affiché, au fur et à mesure que la voix de synthèse les lit à haute voix, imitant ainsi le style des paroles de karaoké.
-Cette synchronisation améliore la compréhension de la lecture en combinant la lecture audio et les repères visuels, permettant ainsi aux utilisateurs de suivre sans effort. Les moteurs TTS neuronaux modernes fournissent souvent des horodatages précis au niveau du mot pour une mise en évidence fluide, sans pauses artificielles.
-  </textarea -->
-
-    <!-- textarea id="textInput" class="mt-4 mb-8" placeholder="Enter your text ...">
-The relevance, the score, is calculated based on an algorithm called BM25, along with other factors. You don't need to worry too much about the details of how this technique works. To summarize: the more a search term occurs in a document, the more that term will increase that documents' score, but th more a search term occurs in the overall collection of documents, the less that term will increase a document's score. In other words: seldom words count and increase the score.
-    </textarea -->
-
-    <textarea id="textInput" class="mt-4 mb-8" placeholder="Enter your text ...">
-TTS Karaoke Highlighting refers to a feature in text-to-speech systems where words or phrases in displayed text are visually highlighted in real-time as the synthesized voice reads them aloud, mimicking the style of karaoke lyrics on screen.
-This synchronization enhances reading comprehension by combining auditory playback with visual cues, allowing users to follow along effortlessly. Modern neural TTS engines often provide precise word-level timestamps to enable smooth highlighting without unnatural pauses.
+    <textarea id="textInput" class="mt-4 mb-8" placeholder="Geben Sie hier Ihren Text ein ...">
+TTS Karaoke Highlighting refers to a feature in text-to-speech (TTS) systems where words or phrases in displayed text are visually highlighted in real-time as the synthesized voice reads them aloud, mimicking the style of karaoke lyrics on screen.
     </textarea>
-
-    <!-- textarea id="textInput" class="mt-4 mb-8" placeholder="Enter your text ...">
-The relevance, the score, is calculated based on an algorithm called BM25, along with other factors. You don't need to worry too much about the details of how this technique works. To summarize: the more a search term occurs in a document, the more that term will increase that documents' score, but th more a search term occurs in the overall collection of documents, the less that term will increase a document's score. In other words: seldom words count and increase the score.
-
-Scoring information generated by the BM25 algorithm is added to the search index and allows a very fast calculation of the relevance of documents for queries.
-
-Imagine you're website contains documents about Jekyll. The term Jekyll may occur very frequently throughout the entire website. Used quite often for the content. So finding a document that mentions the term Jekyll isn't very significant for a search.
-
-However, if you're searching for Jekyll Generator, only some documents of the website has the word Generator in them, and that will bring the score, the relevance, for documents having both words in them at a higher level, and bring them higher up in the search results.
-
-Matching and scoring are used by all search engines - the same as for J1 QuickSearch. You'll see for QuickSearch a similar behavior in sorting search results as you already know from commercial internet search engines like Google: the top results are the more relevant ones.
-    </textarea -->
 
 </div>
 ++++
@@ -159,10 +133,6 @@ Matching and scoring are used by all search engines - the same as for J1 QuickSe
 <script>
 
 const logger            = log4javascript.getLogger('j1.tts.karaoke');
-
-// Rough average speaking speed, en: ~150-160 words per minute
-const avgSpeedSpeakingWordsPerMin   = 170; // en
-// const avgSpeedSpeakingWordsPerMin   = 215; // fr
 
 const textDisplay       = document.getElementById('textDisplay');
 const textInput         = document.getElementById('textInput');
@@ -191,6 +161,7 @@ var sourceLanguage      = document.getElementsByTagName("html")[0].getAttribute(
 var onBoundaryEmulated  = false;
 var voiceName           = '';
 var words2speak;
+
 
 // load voices available
 function loadVoices() {
@@ -235,11 +206,13 @@ function loadVoices() {
     }   
 }
 
-
-function emulateOnBoundaryHandlerSimple() {
+function emulateOnBoundaryHandler() {
 
 // Rough estimatation: ~5 chars per word
 const avgCharsPerWord               = getAverageCharsPerWord(trimedText);
+
+// Rough average speaking speed: ~150-200 words per minute
+const avgSpeedSpeakingWordsPerMin   = 160;
 
 // time values
 const secPerMin                     = 60;
@@ -280,64 +253,6 @@ var currentOffset                   = 0;
         }, wordDelay);
 
         currentOffset = event.charIndex + event.charLength;
-    });
-}
-
-
-function emulateOnBoundaryHandler() {
-
-// rough estimatation: ~5 chars per word
-const avgCharsPerWord               = getAverageCharsPerWord(trimedText);
-
-// adjust based on utterance.rate (default is 1)
-const avgMsPerChar      = 60 * 1000 / (avgSpeedSpeakingWordsPerMin * avgCharsPerWord);
-const adjustedMsPerChar = avgMsPerChar / utterance.rate;
-
-var currentOffset       = 0;
-var cumulativeDelay     = 0;
-
-    // emulated boundary handler
-    words2speak.forEach((word) => {
-        // find actual position of this word in the text
-        const charIndex = trimedText.indexOf(word, currentOffset);
-
-        if (charIndex === -1) {
-            logger.warn`Word "${word}" not found in text after offset ${currentOffset}`;
-            return;
-        }
-
-        // calculate delay based on characters from start to this word
-        const wordDelay = cumulativeDelay;
-
-        setTimeout(() => {
-            // emulate the boundary event object
-            const event = {
-                name:           'word',
-                charIndex:      charIndex,
-                charLength:     word.length,
-                elapsedTime:    performance.now(),
-                utterance:      utterance
-            };
-
-            const currentWord = trimedText.substring(charIndex, charIndex + word.length);
-            logger.debug(`utterance.onboundary: \n
-             spoken word: ${currentWord} at startIndex: ${charIndex}`);
-
-            // trigger highlighting logic
-            highlightWord(charIndex);
-
-        }, wordDelay);
-
-        // update offset and cumulative delay for next iteration
-        currentOffset   = charIndex + word.length;
-        cumulativeDelay += (word.length * adjustedMsPerChar);
-
-        // account for spaces/whitespace between words
-        // find next non-whitespace character
-        while (currentOffset < trimedText.length && /\s/.test(trimedText[currentOffset])) {
-            cumulativeDelay += adjustedMsPerChar; // Add delay for whitespace
-            currentOffset++;
-        }
     });
 }
 
@@ -498,8 +413,7 @@ function speak() {
         updateStatus('speaking', '🔊 Speaking ...');
 
         if (onBoundaryEmulated) {
-//        emulateOnBoundaryHandlerSimple();
-          emulateOnBoundaryHandler();
+            emulateOnBoundaryHandler();
         }
     };
 
@@ -545,7 +459,6 @@ stopBtn.addEventListener('click', stop);
     display: none;
 }
 
-/*
 h1 {
     color: #333;
     margin-bottom: 10px;
@@ -561,10 +474,15 @@ h1 {
 
 .text-display {
     background: #eeeeee;
+    /*
+    border-radius: 12px;
+    padding: 30px;
+    */
     margin-top: 30px;
     margin-bottom: 30px;
     min-height: 150px;
     font-size: 20px;
+    /* line-height: 1.8; */
     color: #333;
 }
 
@@ -581,7 +499,6 @@ h1 {
     padding: 2px 4px;
     box-shadow: 0 2px 8px rgba(253, 160, 133, 0.4);
 }
-*/
 
 .controls {
     display: flex;
