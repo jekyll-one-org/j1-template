@@ -286,15 +286,20 @@ var currentOffset                   = 0;
 
 function emulateOnBoundaryHandler() {
 
-// rough estimatation: ~5 chars per word
+// Rough estimatation: ~5 chars per word
 const avgCharsPerWord               = getAverageCharsPerWord(trimedText);
 
-// adjust based on utterance.rate (default is 1)
-const avgMsPerChar      = 60 * 1000 / (avgSpeedSpeakingWordsPerMin * avgCharsPerWord);
-const adjustedMsPerChar = avgMsPerChar / utterance.rate;
+// time values
+const secPerMin                     = 60;
+const msPerSec                      = 1000;
+const msPerMin                      = secPerMin * msPerSec;
 
-var currentOffset       = 0;
-var cumulativeDelay     = 0;
+// Adjust duration based on utterance.rate (default is 1)
+const avgMsPerChar                  = msPerMin / (avgSpeedSpeakingWordsPerMin * avgCharsPerWord); 
+const adjustedMsPerChar             = avgMsPerChar / utterance.rate;
+
+var currentOffset                   = 0;
+var cumulativeDelay                 = 0;
 
     // emulated boundary handler
     words2speak.forEach((word) => {
@@ -302,7 +307,7 @@ var cumulativeDelay     = 0;
         const charIndex = trimedText.indexOf(word, currentOffset);
 
         if (charIndex === -1) {
-            logger.warn`Word "${word}" not found in text after offset ${currentOffset}`;
+            logger.warn(`Word: "${word}" not found in text after offset: ${currentOffset}`);
             return;
         }
 
@@ -310,26 +315,27 @@ var cumulativeDelay     = 0;
         const wordDelay = cumulativeDelay;
 
         setTimeout(() => {
-            // emulate the boundary event object
-            const event = {
-                name:           'word',
-                charIndex:      charIndex,
-                charLength:     word.length,
-                elapsedTime:    performance.now(),
-                utterance:      utterance
-            };
+            const currentWord           = trimedText.substring(charIndex, charIndex + word.length);
 
-            const currentWord = trimedText.substring(charIndex, charIndex + word.length);
-            logger.debug(`utterance.onboundary: \n
-             spoken word: ${currentWord} at startIndex: ${charIndex}`);
+            // emulated/extended boundary event object
+            const event                 = {};
 
-            // trigger highlighting logic
-            highlightWord(charIndex);
+            event.name                  = event.name || 'word';
+            event.charIndex             = event.charIndex || charIndex;
+            event.charLength            = event.charLength || word.length;
+            event.elapsedTime           = event.elapsedTime || performance.now();
+            event.currentTarget         = event.currentTarget|| {};
+            event.currentTarget.text    = event.currentTarget.text || trimedText;
+            event.currentTarget.word    = event.currentTarget.word || word;     // extended property
+            event.utterance             = event.utterance || utterance;
 
+            logger.debug(`emulated utterance.onboundary:\n spoken word: ${event.currentTarget.word} at startIndex: ${event.charIndex}`);
+
+            highlightWord(event.charIndex);
         }, wordDelay);
 
         // update offset and cumulative delay for next iteration
-        currentOffset   = charIndex + word.length;
+        currentOffset    = charIndex + word.length;
         cumulativeDelay += (word.length * adjustedMsPerChar);
 
         // account for spaces/whitespace between words
