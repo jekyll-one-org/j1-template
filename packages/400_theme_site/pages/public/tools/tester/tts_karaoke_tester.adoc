@@ -406,9 +406,10 @@ pitchSlider.addEventListener('input', (e) => {
     pitchValue.textContent = e.target.value;
 });
 
-// spli spoken text in spans (for highlightning)
+// split spoken text in spans (for highlightning)
 function prepareText(text) {
     const words = text.split(/\s+/);
+    textDisplay = document.getElementById('textDisplay');
     textDisplay.innerHTML = '';
     
     words.forEach((word, index) => {
@@ -424,10 +425,10 @@ function prepareText(text) {
 function highlightWord(charIndex) {
     const spans = textDisplay.querySelectorAll('span');
     var currentPos = 0;
-    
+
     // remove all exising highlights 
     spans.forEach(span => span.classList.remove('highlight'));
-    
+
     // searh for current word to highlight
     for (var span of spans) {
         const wordLength      = span.textContent.length;
@@ -676,11 +677,11 @@ label {
 }
 
 select, input[type="range"] {
-    padding: 10px;
+    font-size: 14px;
+    background: white;    
     border: 2px solid #e0e0e0;
     border-radius: 8px;
-    font-size: 14px;
-    background: white;
+    /* padding: 10px; */
 }
 
 input[type="range"] {

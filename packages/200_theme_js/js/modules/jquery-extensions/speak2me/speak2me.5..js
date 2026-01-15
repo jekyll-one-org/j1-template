@@ -87,8 +87,7 @@
   var pitch                 = pitchDefault;
   var volume                = volumeDefault;
 
-  // var pause_spoken          = ' — '; // aading a pause this way cause issues on highlightning
-  var pause_spoken          = '';
+  var pause_spoken          = ' — ';
 
   var chunkCounter          = 0;
   var userStoppedSpeaking   = false;
@@ -674,32 +673,7 @@
             }
           };
 
-          activeEventListeners.onstart = function(event) {
-            if (event.name === 'onstart') {
-              const speak2meId  = event.srcElement.speak2meId;
-              const onStart     = 1;
-            }
-          };
-
-          activeEventListeners.onend = function(event) {
-            if (event.name === 'onend') {
-              const speak2meId  = event.srcElement.speak2meId;
-              const onEnd = 1;
-            }
-          };
-
           speech.addEventListener('boundary', activeEventListeners.boundary);
-          speech.addEventListener('onstart', activeEventListeners.onstart);
-
-          speech.onstart = function(event) {
-            const speak2meId  = event.srcElement.speak2meId;
-            const onStart     = 1;
-          };
-
-          speech.onend = function(event) {
-            const speak2meId  = event.srcElement.speak2meId;
-            const onEnd       = 1;
-          };
 
           processTextChunks(speech, toSpeak);
           clearInterval(processSpeech);
