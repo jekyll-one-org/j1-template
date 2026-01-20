@@ -57,23 +57,23 @@ defaults:
       voice_speed_min:                  0.1
       voice_speed_max:                  3.0
       voice_speed_step:                 0.1
-      voice_speed_value:                1.0
+      voice_speed_value:                0.9
       voice_speed_label:                Speed
-      voice_speed_max_label:            1.0
+      voice_speed_max_label:            0.9
 
       voice_pitch_min:                  0.1
       voice_pitch_max:                  2.0
       voice_pitch_step:                 0.1
-      voice_pitch_value:                0.9
+      voice_pitch_value:                1.0
       voice_pitch_label:                Pitch
-      voice_pitch_max_label:            0.9
+      voice_pitch_max_label:            1.0
 
       voice_volume_min:                 0
       voice_volume_max:                 1.0
       voice_volume_step:                0.1
-      voice_volume_value:               0.9
+      voice_volume_value:               1.0
       voice_volume_label:               Volume
-      voice_volume_max_label:           0.9
+      voice_volume_max_label:           1.0
 
 # ------------------------------------------------------------------------------
 # END config

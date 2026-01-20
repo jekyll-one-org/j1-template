@@ -68,7 +68,7 @@ height, the width or both to fit their contained content on same and cross
 domain.
 
 mdi:clock-time-five-outline[24px, md-gray mt-4 mr-2]
-*2 Minutes* to read
+*2 Minutes* to read.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------

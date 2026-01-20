@@ -84,7 +84,7 @@ the visual and functional aspects of a player's audio control elements.
 ++++
 <div class="video-title">
   <i class="mdib mdib-clock-outline mdib-24px mr-2"></i>
-  {time-num--string} {time-en--string} {time-en--description}
+  {time-num--string} {time-en--string} {time-en--description}.
 </div>
 ++++
 

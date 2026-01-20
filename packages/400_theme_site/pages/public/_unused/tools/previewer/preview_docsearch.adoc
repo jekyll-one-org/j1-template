@@ -69,7 +69,7 @@ The service *DocSearch* is only available, when you have agreed on
 ====
 
 mdi:clock-time-five-outline[24px, md-gray mt-5 mr-2]
-*2 Minutes* to read
+*2 Minutes* to read.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------

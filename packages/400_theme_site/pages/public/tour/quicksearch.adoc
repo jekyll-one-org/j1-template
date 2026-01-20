@@ -78,7 +78,7 @@ size yet full-featured to provide users with a great search experience.
 <div class="video-title">
   <p>
     <i class="mdib mdib-clock-outline mdib-24px mr-2"></i>
-    {time-num--string} {time-en--string} {time-en--description}
+    {time-num--string} {time-en--string} {time-en--description}.
   </p>
 </div>
 ++++

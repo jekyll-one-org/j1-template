@@ -79,7 +79,7 @@ the visual and functional aspects of a player's audio control elements.
 
 
 mdi:clock-time-five-outline[24px, md-gray mr-2]
-*5 Minutes* to read
+*5 Minutes* to read.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------

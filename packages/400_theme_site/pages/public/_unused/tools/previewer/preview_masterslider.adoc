@@ -84,7 +84,7 @@ required template is automatically generated and loaded. No need for any
 Javascript programming work or writing HTML code for your sliders.
 
 mdi:clock-time-five-outline[24px, md-gray mt-4 mr-2]
-*15-30 Minutes* to read
+*15-30 Minutes* to read.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------

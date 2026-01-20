@@ -67,7 +67,7 @@ Install TubeNinja's simple script on your page to automatically add download
 links to the video embeds.
 
 mdi:clock-time-five-outline[24px, md-gray mr-2]
-*3 Minutes* to read
+*3 Minutes* to read.
 
 
 // Include sub-documents (if any)

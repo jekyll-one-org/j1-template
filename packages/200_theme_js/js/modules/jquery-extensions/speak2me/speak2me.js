@@ -55,10 +55,10 @@
   const isEdge                = /Edg/i.test(navigator.userAgent);
   const chrome                = /chrome/i.test(navigator.userAgent);
   const isChrome              = ((chrome) && (!isEdge));
-  const ignoreProvider        = 'Microsoft';
+  const ignoreProvider        = 'blaMicrosoft';
   const sourceLanguage        = document.getElementsByTagName("html")[0].getAttribute("lang");
   const pauseBetweenSentences = 500;
-  const pauseOnHeadlines     = 750;
+  const pauseOnHeadlines      = 750;
 
   var currentParagraph        = null;
   var previousParagraph       = null;
@@ -86,9 +86,9 @@
   var voices                  = [];
   var headingsArray           = [];
 
-  var rateDefault             = 0.9;
-  var pitchDefault            = 1;
-  var volumeDefault           = 0.9;
+  var rateDefault             = 1.0;
+  var pitchDefault            = 1.0;
+  var volumeDefault           = 1.0;
   var rate                    = rateDefault;
   var pitch                   = pitchDefault;
   var volume                  = volumeDefault;
@@ -286,12 +286,14 @@
     return bestMatch;
   }
 
-  // Claude: paragraph highlighting fixes - Build paragraph cache for faster lookups
+  // Claude: paragraph highlighting fixes
+  // Build paragraph cache for faster lookups (NOT used)
   function buildParagraphCache() {
     paragraphCache.clear();
     var $contentCached = getCachedContent();
-    
-    $contentCached.find('p, h1, h2, h3, h4, h5, h6, li, dt, dd').each(function() {
+
+//  $contentCached.find('p, h1, h2, h3, h4, h5, h6, li, dt, dd').each(function() {    
+    $contentCached.find('p, h1, h2, h3, h4, h5, h6').each(function() {
       var $elem = $(this);
       var speak2meId = $elem.attr('data-speak2me-id');
       
@@ -385,7 +387,7 @@
     const isAlredadyHighlighted = (elementid === currentHighlightedElement) ? true : false;
 
     if (isAlredadyHighlighted) {
-      console.debug(`speak2me core:\n setHighlightParagraph called on id current|previous: ${elementid} | ${currentHighlightedElement}`);
+      console.debug(`speak2me.core:\n setHighlightParagraph called on id current|previous: ${elementid} | ${currentHighlightedElement}`);
     }
 
     // add new highlight
@@ -428,7 +430,7 @@
     const $element = document.querySelector(selector);
 
     if ($element !== null && $element !== undefined) {
-      console.debug(`speak2me core:\n removeParagrapHighlight called on id: ${dataId}`);
+      console.debug(`speak2me.core:\n removeParagrapHighlight called on id: ${dataId}`);
       $element.classList.remove('speak-paragraph-highlighted');
     }
 
@@ -479,15 +481,22 @@
       
       // Claude: paragraph highlighting fixes - Assign IDs and build cache
       paragraphIdCounter = 0;
-      getCachedContent().find('p, h1, h2, h3, h4, h5, h6, li, dt, dd').each(function() {
+      getCachedContent().find('p, h1, h2, h3, h4, h5, h6').each(function() {
         var $elem = $(this);
         if (!$elem.attr('data-speak2me-id')) {
           $elem.attr('data-speak2me-id', 'speak2me-p-' + (paragraphIdCounter++));
         }
       });
-      
-      // build the paragraph cache for fast lookups
-      buildParagraphCache();
+
+      // getCachedContent().find('p, h1, h2, h3, h4, h5, h6, li, dt, dd').each(function() {
+      //   var $elem = $(this);
+      //   if (!$elem.attr('data-speak2me-id')) {
+      //     $elem.attr('data-speak2me-id', 'speak2me-p-' + (paragraphIdCounter++));
+      //   }
+      // });      
+
+      // build the paragraph cache for fast lookups (NOT used)
+      // buildParagraphCache();
     }
 
     scanSection();
@@ -645,46 +654,75 @@
         scanFinished = true;
         // Claude: paragraph highlighting fixes - Also build cache when resuming
         paragraphIdCounter = 0;
-        getCachedContent().find('p, h1, h2, h3, h4, h5, h6, li, dt, dd').each(function() {
+        getCachedContent().find('p, h1, h2, h3, h4, h5, h6').each(function() {
           var $elem = $(this);
           if (!$elem.attr('data-speak2me-id')) {
             $elem.attr('data-speak2me-id', 'speak2me-p-' + (paragraphIdCounter++));
           }
         });
-        buildParagraphCache();
+
+        // build the paragraph cache for fast lookups (NOT used)
+        // buildParagraphCache();
       }
 
-      // dfault values for voice tags
-      voiceTags['a']                    = new voiceTag('Link' + pause_spoken, '');
-      voiceTags['q']                    = new voiceTag(pause_spoken, '');
-      voiceTags['ol']                   = new voiceTag(pause_spoken, '');
-      voiceTags['ul']                   = new voiceTag(pause_spoken, '');
-      voiceTags['dl']                   = new voiceTag(pause_spoken, '');
-      voiceTags['dt']                   = new voiceTag(pause_spoken, '');
-      voiceTags['img']                  = new voiceTag('Image element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      voiceTags['table']                = new voiceTag('Table element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      voiceTags['card-header']          = new voiceTag(pause_spoken, '');
-      voiceTags['.doc-example']         = new voiceTag('Example element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      voiceTags['.admonitionblock']     = new voiceTag('Attention element ' + pause_spoken, pause_spoken);
-      voiceTags['.listingblock']        = new voiceTag('Text element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      voiceTags['.gist']                = new voiceTag('Gist element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      voiceTags['.slider']              = new voiceTag('Slider element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      voiceTags['.swiper-app']          = new voiceTag('Slider element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      voiceTags['.modal']               = new voiceTag('Info element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      voiceTags['.masonry']             = new voiceTag('Masonry element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      voiceTags['.lightbox-block']      = new voiceTag('Lightbox element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      voiceTags['.gallery']             = new voiceTag('Gallery element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      voiceTags['.audioblock']          = new voiceTag('Audio element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      voiceTags['.videoblock']          = new voiceTag('Video element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      voiceTags['.videojs-player']      = new voiceTag('Video element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      voiceTags['.youtube-player']      = new voiceTag('Video element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      voiceTags['.dailymotion-player']  = new voiceTag('Video element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      voiceTags['.vimeo-player']        = new voiceTag('Video element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      voiceTags['.wistia-player']       = new voiceTag('Video element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      voiceTags['figure']               = new voiceTag('Figure element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      voiceTags['parallax-quoteblock']  = new voiceTag('', pause_spoken);
-      voiceTags['blockquote']           = new voiceTag('', pause_spoken);
-      voiceTags['quoteblock']           = new voiceTag('', pause_spoken);
+      // default values for voice tags
+      // voiceTags['a']                    = new voiceTag('Link' + pause_spoken, '');
+      // voiceTags['q']                    = new voiceTag(pause_spoken, '');
+      // voiceTags['ol']                   = new voiceTag(pause_spoken, '');
+      // voiceTags['ul']                   = new voiceTag(pause_spoken, '');
+      // voiceTags['dl']                   = new voiceTag(pause_spoken, '');
+      // voiceTags['dt']                   = new voiceTag(pause_spoken, '');
+      // voiceTags['img']                  = new voiceTag('Image element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['table']                = new voiceTag('Table element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['card-header']          = new voiceTag(pause_spoken, '');
+      // voiceTags['.doc-example']         = new voiceTag('Example element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['.admonitionblock']     = new voiceTag('Attention element ' + pause_spoken, pause_spoken);
+      // voiceTags['.listingblock']        = new voiceTag('Text element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['.gist']                = new voiceTag('Gist element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['.slider']              = new voiceTag('Slider element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['.swiper-app']          = new voiceTag('Slider element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['.modal']               = new voiceTag('Info element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['.masonry']             = new voiceTag('Masonry element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['.lightbox-block']      = new voiceTag('Lightbox element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['.gallery']             = new voiceTag('Gallery element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['.audioblock']          = new voiceTag('Audio element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['.videoblock']          = new voiceTag('Video element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['.videojs-player']      = new voiceTag('Video element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['.youtube-player']      = new voiceTag('Video element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['.dailymotion-player']  = new voiceTag('Video element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['.vimeo-player']        = new voiceTag('Video element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['.wistia-player']       = new voiceTag('Video element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['figure']               = new voiceTag('Figure element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['parallax-quoteblock']  = new voiceTag('', pause_spoken);
+      // voiceTags['blockquote']           = new voiceTag('', pause_spoken);
+      // voiceTags['quoteblock']           = new voiceTag('', pause_spoken);
+
+      // default values for voice tags
+      //
+      voiceTags['a']                    = new voiceTag('Link' + '.', '');
+      voiceTags['img']                  = new voiceTag('Image element' +  '.', 'Element not spoken' +  '.');
+      voiceTags['table']                = new voiceTag('Table element' +  '.', 'Element not spoken' +  '.');
+      voiceTags['.doc-example']         = new voiceTag('Example element' + '.', 'Element not spoken' + '.');
+      voiceTags['.admonitionblock']     = new voiceTag('Attention element ' +  '.', '');
+      voiceTags['.listingblock']        = new voiceTag('Text element' +  '.', 'Element not spoken' + '.');
+      voiceTags['.gist']                = new voiceTag('Gist element' +  '.', 'Element not spoken' + '.');
+      voiceTags['.slider']              = new voiceTag('Slider element' +  '.', 'Element not spoken' + '.');
+      voiceTags['.swiper-app']          = new voiceTag('Slider element' +  '.', 'Element not spoken' + '.');
+      voiceTags['.modal']               = new voiceTag('Info element' +  '.', 'Element not spoken' + '.');
+      voiceTags['.masonry']             = new voiceTag('Masonry element' +  '.', 'Element not spoken' + '.');
+      voiceTags['.lightbox-block']      = new voiceTag('Lightbox element' +  '.', 'Element not spoken' + '.');
+      voiceTags['.gallery']             = new voiceTag('Gallery element' +  '.', 'Element not spoken' + '.');
+      voiceTags['.audioblock']          = new voiceTag('Audio element' +  '.', 'Element not spoken' + '.');
+      voiceTags['.videoblock']          = new voiceTag('Video element' +  '.', 'Element not spoken' + '.');
+      voiceTags['.videojs-player']      = new voiceTag('Video element' +  '.', 'Element not spoken' + '.');
+      voiceTags['.youtube-player']      = new voiceTag('Video element' +  '.', 'Element not spoken' + '.');
+      voiceTags['.dailymotion-player']  = new voiceTag('Video element' +  '.', 'Element not spoken' + '.');
+      voiceTags['.vimeo-player']        = new voiceTag('Video element' +  '.', 'Element not spoken' + '.');
+      voiceTags['.wistia-player']       = new voiceTag('Video element' +  '.', 'Element not spoken' + '.');
+      voiceTags['figure']               = new voiceTag('Figure element' +  '.', 'Element not spoken' + '.');    
+      voiceTags['parallax-quoteblock']  = new voiceTag('Parallax Quoteblock' + '.', '');
+      voiceTags['blockquote']           = new voiceTag('Blockquote' + '.',  '');
+      voiceTags['quoteblock']           = new voiceTag('Quoteblock' + '.',  '');
 
       ignoreTags = ['audio','button','canvas','code','del', 'pre', 'dialog','embed','form','head','iframe','meter','nav','noscript','object','picture', 'script','select','style','textarea','video'];
 
@@ -765,32 +803,29 @@
 
               if ($paragraph !== undefined && $paragraph !== null) {
                 // remove highlight on current paragraph
-                console.debug(`speak2me core, onstart:\n remove highlight on: ${currentHighlightedElement}`);
+                console.debug(`speak2me.core, onstart:\n remove highlight on: ${currentHighlightedElement}`);
                 removeParagrapHighlight(currentHighlightedElement);
               } else {
                 // failsafe: manage loose text (NO speak2meId found on paragraph)
-                console.warn('speak2me core, onstart:\n error accessing loose text:', currentTargetText);
+//              console.warn('speak2me.core, onstart:\n error accessing loose text:', currentTargetText);
+                console.warn('speak2me.core, onstart:\n error accessing loose text');
 
                 // clear all highlights globally
                 $('.speak-paragraph-highlighted').removeClass('speak-paragraph-highlighted');
-                console.warn('speak2me core, onstart:\n clear all highlights globally');
+                console.warn('speak2me.core, onstart:\n clear all highlights globally');
               }
 
-              console.debug(`speak2me core, onstart:\n set highlight on: ${speak2meId}`);
-              setHighlightParagraph(speak2meId);
+              console.debug(`speak2me.core, onstart:\n set highlight on: ${speak2meId}`);
+              setHighlightParagraph(speak2meId);            
 
-              if ($element.localName === 'h2' || $element.localName === 'h3') {
-                pauseOnSpeak(pauseOnHeadlines);
-              }              
-
-              // highlight words only on paragraphs
-              if ($element.localName === 'p') {
+              // highlightning words supported only on paragraphs
+              if ($element !== null && $element.localName === 'p') {
                 prepareParagraphToHighlighWords($element.innerText);
                 var bla = 1;
               }
 
             } else {
-              console.debug(`speak2me core, onstart:\n highlight MOT changed on: ${speak2meId}`);
+              console.debug(`speak2me.core, onstart:\n highlight MOT changed on: ${speak2meId}`);
             }
           };
 
@@ -803,7 +838,7 @@
           //   var currentTargetText       = event.currentTarget.text;
 
           //   if (isAlredadyHighlighted) {
-          //     console.warn(`speak2me core, onend:\n current highlight NOT changed: ${currentHighlightedElement}`);
+          //     console.warn(`speak2me.core, onend:\n current highlight NOT changed: ${currentHighlightedElement}`);
           //   }
 
           //   if (event.currentTarget.$paragraph !== undefined && event.currentTarget.$paragraph !== null) {
@@ -825,7 +860,7 @@
           activeEventListeners.onend = (event) => {
             const speak2meId            = event.currentTarget.speak2meId;
             var selector                = `[data-speak2me-id="${speak2meId}"]`;
-            const $element              = document.querySelector(selector);
+            const $element              = document.querySelector(selector) || null;
             const isHighlighted         = $element?.classList.contains('speak-paragraph-highlighted');
             const isAlredadyHighlighted = (speak2meId === currentHighlightedElement) ? true : false;
             var currentTargetText       = event.currentTarget.text;
@@ -839,7 +874,7 @@
             }
 
             // clear element id for word-based highlightning
-            if ($element.id === 'speak_highlighted') {
+            if ($element !== null && $element.id === 'speak_highlighted') {
               $element.removeAttribute('id');
             }
 
@@ -863,7 +898,7 @@
         // OPTIMIZATION: cain text cleanup operations
         text = text
           .replace(/^\s+>/gm, '')
-          .replaceAll(/^Attention\s+element.*/g, '')
+//          .replaceAll(/^Attention\s+element.*/g, '')
           .replaceAll('..', '.')
           .replace(/(\r\n|\n|\r)/gm, '')
           .replace(/\s+/gm, ' ');
@@ -921,7 +956,7 @@
         });
 
         // create the headings array
-        headingsArray = parseContent.selectHeadings(
+        headingsArray = parseContent.selectHeadings (
           defaultOptions.contentSelector,
           defaultOptions.headingSelector
         );
@@ -934,7 +969,8 @@
               var normalizedChunkText = normalizeText(cleanText);
 
               for (var node of headingsArray) {
-                var innerText = node.innerText.replace(/[?!]/g, '') + pause_spoken;
+//              var innerText = node.innerText.replace(/[?!]/g, '') + pause_spoken;
+                var innerText = node.innerText.replace(/[?!]/g, '') + '.';
                 var normalizedNodeText = normalizeText(innerText);
                 
                 // Claude: paragraph highlighting fixes - Better heading text comparison
@@ -1183,12 +1219,32 @@
           }
         }
 
-        // Add pause to heading and list elements
-        clone.find('h1,h2,h3,h4,h5,h6,p,li').addBack('h1,h2,h3,h4,h5,h6,p,li').each(function() {
+        // Add a dot for a spoken pause to heading elements
+        clone.find('h1,h2,h3,h4,h5,h6').addBack('h1,h2,h3,h4,h5,h6').each(function() {
           var text = $(this)[0].innerText;
-          text = text.replace(/\s+/g, ' ') + pause_spoken;
+          text = text
+            .trim()
+            .replace(/\s+/g, ' ') + '.';
+
           $(this)[0].innerText = text;
         });
+
+        // Add a dot for a spoken pause to list elements
+        clone.find('li').addBack('li').each(function() {
+          var text = $(this)[0].innerText;
+          text = text
+            .trim()
+            .replace(/\s+/g, ' ') + '.';
+
+            $(this)[0].innerText = text;
+        });
+
+        // // Add pause to list elements
+        // clone.find('p,li').addBack('p,li').each(function() {
+        //   var text = $(this)[0].innerText;
+        //   text = text.replace(/\s+/g, ' ') + pause_spoken;
+        //   $(this)[0].innerText = text;
+        // });
 
         // Add pause to <br> tags
         clone.find('br').each(function() {
@@ -1366,19 +1422,21 @@
           clone.find(selector).addBack(selector).each(function() {
             var prev = $(this).prev()[0];
             title = (prev !== undefined) ? prev.innerText : '';
-            title_element = prev !== undefined ? $(this).prev() : null;
+            title = title.trim();
+            title += '.'; // add a dot for a pause spoken
 
+            title_element = prev !== undefined ? $(this).prev() : null;
             if (title_element) title_element.remove();
 
             prepend = voiceTags[voiceTag].prepend;
             appended = voiceTags[voiceTag].append;
 
             if (title !== undefined && title !== '') {
-              if (prepend !== '') $('<div>' + prepend + ' with the title, ' + title + pause_spoken + '</div>').insertBefore(this);
+              if (prepend !== '') $('<div>' + prepend + ' with the title, ' + title +  '.' + '</div>').insertBefore(this);
               if (appended !== '') $('<div>' + appended + '</div>').insertBefore(this);
             } else {
-              if (prepend !== '') $('<div>' + prepend + pause_spoken + '</div>').insertBefore(this);
-              if (appended !== '') $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+              if (prepend !== '') $('<div>' + prepend +  '.' + '</div>').insertBefore(this);
+              if (appended !== '') $('<div>' + appended +  '.' + '</div>').insertBefore(this);
             }
             $(this).remove();
           });
@@ -1441,16 +1499,14 @@
         // OPTIMIZATION: Chain all replacement operations
         var replacementPairs = [
           [/"/g, ''],
-          [/"/g, ''],
-          [/"/g, ''],
-//        [/:/g, '.'],
+//          [/:/g, '.'],
           [/\., /g, '. '],
           [/ , /g, ', '],
           [/\. \./g, ''],
           [/, \./g, ''],
           [/  ,  /g, ''],
           [/^$/g, '\n'],
-          [/Attention element.*/g, ''],
+//          [/Attention element.*/g, ''],
           [/^\s+$/g, '\n'],
           [/\s+\.\s+/g, '\n'],
           [/\s+\.\s+$/g, '\n'],
@@ -1501,6 +1557,7 @@
       if (window.speechSynthesis) {
         window.speechSynthesis.pause();
       }
+
       return this;
     },
 
@@ -1508,6 +1565,7 @@
       if (window.speechSynthesis) {
         window.speechSynthesis.resume();
       }
+
       return this;
     },
 
@@ -1517,18 +1575,26 @@
         userStoppedSpeaking = true;
 
         // OPTIMIZATION: Clean up event listeners on stop
-        if (speech && activeEventListeners.start) {
-          speech.removeEventListener('start', activeEventListeners.start);
-          speech.removeEventListener('end', activeEventListeners.end);
-          if (activeEventListeners.boundary) {
-            speech.removeEventListener('boundary', activeEventListeners.boundary);
+        if (speech && activeEventListeners.onstart) {
+          speech.removeEventListener('onstart', activeEventListeners.onstart);
+          speech.removeEventListener('onend', activeEventListeners.onend);
+
+          if (activeEventListeners.onboundary) {
+            speech.removeEventListener('onboundary', activeEventListeners.onboundary);
           }
-          activeEventListeners = { start: null, end: null, boundary: null };
+
+          activeEventListeners = {
+            onstart:      null,
+            onend:        null,
+            onboundary:   null
+          };
+
         }
         
         // Claude: paragraph highlighting fixes - Use centralized clearing
         clearAllHighlights();
       }
+
       return this;
     },
 
@@ -1560,6 +1626,7 @@
         rateUserDefault = undefined;
         rate = rateDefault;
       }
+
       return this;
     },
 
@@ -1571,6 +1638,7 @@
         pitchUserDefault = undefined;
         pitch = pitchDefault;
       }
+
       return this;
     },
 
@@ -1582,6 +1650,7 @@
         volumeUserDefault = undefined;
         volume = volumeDefault;
       }
+
       return this;
     },
 
@@ -1591,6 +1660,7 @@
       for (var i = len - 1; i >= 0; i--) {
         ignoreTagsUser.push(arguments[i]);
       }
+
       return this;
     },
 
@@ -1600,6 +1670,7 @@
       for (var i = len - 1; i >= 0; i--) {
         recognizeTagsUser.push(arguments[i]);
       }
+
       return this;
     },
 
@@ -1609,6 +1680,7 @@
       for (var i = 0; i < len - 1; i += 2) {
         replacements.push(arguments[i], arguments[i + 1]);
       }
+
       return this;
     },
 

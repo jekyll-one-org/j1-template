@@ -67,7 +67,7 @@ your application and also defines the parameters that are available in the
 YouTube embedded player.
 
 mdi:clock-time-five-outline[24px, md-gray mt-4 mb-5 mr-2]
-*30-60 Minutes* to read
+*30-60 Minutes* to read.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------

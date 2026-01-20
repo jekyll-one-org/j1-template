@@ -91,7 +91,7 @@ all of the powerful features of the J1 Template to manage your image-based
 content using lightboxes and galleries.
 
 mdi:clock-time-five-outline[24px, md-gray mt-4 mr-2]
-*15-30 Minutes* to read
+*15-30 Minutes* to read.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
