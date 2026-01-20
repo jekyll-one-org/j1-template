@@ -1,0 +1,43 @@
+Checking CSS class on paragraph element - Claude
+
+
+how to check if CSS class "speak-paragraph-highlighted" is set on a
+paragraph identified  by data element "data-speak2me-id" of value
+"speak2me-p-0"?
+
+
+
+Here are a few ways to check if that CSS class is set on the paragraph:
+
+**Using querySelector:**
+
+```javascript
+const paragraph = document.querySelector('[data-speak2me-id="speak2me-p-0"]');
+const hasClass = paragraph?.classList.contains('speak-paragraph-highlighted');
+console.log(hasClass); // true or false
+```
+
+**Using getAttribute for the class:**
+
+```javascript
+const paragraph = document.querySelector('[data-speak2me-id="speak2me-p-0"]');
+const classes = paragraph?.getAttribute('class') || '';
+const hasClass = classes.includes('speak-paragraph-highlighted');
+```
+
+**In browser DevTools Console:**
+
+```javascript
+document.querySelector('[data-speak2me-id="speak2me-p-0"]').classList.contains('speak-paragraph-highlighted')
+```
+
+**Using matches() to check both conditions at once:**
+
+```javascript
+const element = document.querySelector('[data-speak2me-id="speak2me-p-0"]');
+const hasClass = element?.matches('.speak-paragraph-highlighted');
+```
+
+The first method using `classList.contains()` is generally the most
+reliable and recommended approach. The optional chaining (`?.`) prevents
+errors if the element doesn't exist.

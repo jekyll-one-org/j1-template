@@ -462,6 +462,10 @@
     #   href:                             /pages/public/tools/tester/ats/
     #   icon:                             speaker
 
+    - title:                            Speak2Me TTS Karaoke
+      href:                             /pages/public/speak2me_hl_test_doc/
+      icon:                             speaker
+
     - title:                            TTS Karaoke
       href:                             /pages/public/tools/tester/tts_karaoke/
       icon:                             speaker

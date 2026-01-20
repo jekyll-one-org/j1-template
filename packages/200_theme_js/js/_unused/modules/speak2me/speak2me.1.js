@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/speak2me/js/speak2me.js
- # speak2me v.1.0 implementation (based on Articulate.js) for J1 Theme
+ # ~/assets/theme/j1/modules/speak2me/js/speak2me.1.js
+ # speak2me v.1.1 implementation (based on Articulate.js) for J1 Theme
  #
  # Product/Info:
  # https://jekyll.one

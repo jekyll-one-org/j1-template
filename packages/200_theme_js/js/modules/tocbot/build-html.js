@@ -227,7 +227,7 @@ module.exports = function (options) {
         .querySelector('.' + options.linkClass +
           '.node-name--' + topHeader.nodeName +
           '[href="' + options.basePath + '#' + topHeader.id.replace(/([ #;&,.+*~':"!^$[\]()=>|/@])/g, '\\$1') + '"]');
-      if (activeTocLink.className.indexOf(options.activeLinkClass) === -1) {
+      if (activeTocLink.className !== null && activeTocLink.className.indexOf(options.activeLinkClass) === -1) {
         activeTocLink.className += SPACE_CHAR + options.activeLinkClass;
       }
       var li = activeTocLink.parentNode;

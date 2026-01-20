@@ -48,9 +48,18 @@
     */
 }
 
-.speak-highlighted {
+/*
+.speak-paragraph-highlighted {
   background-color: #fff3cd !important;
   border-left: 4px solid #ffc107 !important;
+  padding-left: 12px !important;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+*/
+
+.speak-paragraph-highlighted {
+  background-color: #E0E0E0 !important;
+  border-left: 4px solid #757575 !important;
   padding-left: 12px !important;
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }

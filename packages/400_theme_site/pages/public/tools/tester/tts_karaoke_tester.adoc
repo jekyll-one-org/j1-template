@@ -283,7 +283,6 @@ var currentOffset                   = 0;
     });
 }
 
-
 function emulateOnBoundaryHandler() {
 
 // Rough estimatation: ~5 chars per word

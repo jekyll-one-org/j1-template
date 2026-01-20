@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/speak2me/js/speak2me.10.js
- # speak2me v.1.10 implementation (based on Articulate.js) for J1 Theme
+ # ~/assets/theme/j1/modules/speak2me/js/speak2me.9.js
+ # speak2me v.1.9 implementation (based on Articulate.js) for J1 Theme
  #
  # Product/Info:
  # https://jekyll.one
@@ -23,7 +23,7 @@
  # - Cleaner code structure with modern JavaScript patterns
  # - FIXED: Reliable paragraph highlighting with direct element references
  # - FIXED: Better text normalization and matching
- # - Claude: paragraph highlighting fixes - Enhanced paragraph tracking and highlighting
+ # - Claude: Paragraph highlighting fixes - Enhanced paragraph tracking and highlighting
  # -----------------------------------------------------------------------------
 */
 'use strict';
@@ -58,15 +58,9 @@
   const ignoreProvider        = 'Microsoft';
   const sourceLanguage        = document.getElementsByTagName("html")[0].getAttribute("lang");
   const pauseBetweenSentences = 500;
-  const pauseOnHeadlines     = 750;
 
-  var currentParagraph        = null;
-  var previousParagraph       = null;
-  var previousParagraphHTML   = null;
-  var currentParagraphHTML    = null;
-
-  // OPTIMIZATION: cache DOM elements to avoid repeated queries - cached on first use
-  var $content                = null;
+  // OPTIMIZATION: Cache DOM elements to avoid repeated queries
+  var $content                = null; // Will be cached on first use
 
   var voiceUserDefault        = 'Google UK English Female';
   var voiceChromeDefault      = 'Google US English';
@@ -111,7 +105,7 @@
 
   var scanFinished;
 
-  // OPTIMIZATION: store active event listeners for cleanup
+  // OPTIMIZATION: Store active event listeners for cleanup
   var activeEventListeners  = {
     onstart:      null,
     onend:        null,
@@ -125,7 +119,7 @@
   // FIX: Add counter for unique paragraph IDs
   var paragraphIdCounter = 0;
 
-  // Claude: paragraph highlighting fixes - Add paragraph mapping cache
+  // Claude: Paragraph highlighting fixes - Add paragraph mapping cache
   var paragraphCache = new Map();
   var currentHighlightedElement = null;
 
@@ -168,7 +162,7 @@
       }, msPause);
   }
 
-  // OPTIMIZATION: cache DOM queries
+  // OPTIMIZATION: Cache DOM queries
   function getCachedContent() {
     if (!$content) {
       $content = $('#content');
@@ -209,34 +203,24 @@
     }
   }
 
-  // clean text for unwanted white spaces and split spoken text
-  // in spans (for word-based highlighting)
-  function prepareParagraphToHighlighWords(text) {
-    const words = text
-      .replace(/\n+/, '')
-      .replace(/^\s+/, '')
-//    .replace(/\s+$/, '')
-      .split(/\s+/);
+  // split spoken text in spans (for highlighting)
+  function prepareText(text) {
+    const words = text.split(/\s+/);
 
     document.querySelector('.speak-paragraph-highlighted').id = 'speak_highlighted';
-    currentParagraph            = document.getElementById('speak_highlighted');
-    currentParagraphHTML        = currentParagraph.innerHTML;
-    currentParagraph.innerHTML  = '';
+    textDisplay  = document.getElementById('speak_highlighted');
+    textDisplay.innerHTML = '';
 
     words.forEach((word, index) => {
       const span = document.createElement('span');
       // add single space between words
       span.textContent = word + ' '; 
       span.dataset.index = index;
-      currentParagraph.appendChild(span);
+      textDisplay.appendChild(span);
     });
-
-    // store for later use to REBUILD already spoken paragraph
-    previousParagraph     = currentParagraph;
-    previousParagraphHTML = currentParagraphHTML;
   }
 
-  // Claude: paragraph highlighting fixes - enhanced text normalization
+  // Claude: Paragraph highlighting fixes - Enhanced text normalization
   function normalizeText(text) {
     if (!text) return '';
     return text
@@ -250,7 +234,7 @@
       .toLowerCase();
   }
 
-  // Claude: paragraph highlighting fixes - Improved text matching with fuzzy logic
+  // Claude: Paragraph highlighting fixes - Improved text matching with fuzzy logic
   function findParagraphByText(searchText, $container) {
     if (!searchText || !$container) return null;
     
@@ -286,7 +270,7 @@
     return bestMatch;
   }
 
-  // Claude: paragraph highlighting fixes - Build paragraph cache for faster lookups
+  // Claude: Paragraph highlighting fixes - Build paragraph cache for faster lookups
   function buildParagraphCache() {
     paragraphCache.clear();
     var $contentCached = getCachedContent();
@@ -306,7 +290,7 @@
     });
   }
 
-  // Claude: paragraph highlighting fixes - Enhanced paragraph lookup
+  // Claude: Paragraph highlighting fixes - Enhanced paragraph lookup
   function findParagraphForChunk(chunk) {
     // Method 1: Try cached paragraph by ID (fastest and most reliable)
     if (chunk.speak2meId && paragraphCache.has(chunk.speak2meId)) {
@@ -342,19 +326,19 @@
     return null;
   }
 
-  // Claude: paragraph highlighting fixes - Centralized highlight management
+  // Claude: Paragraph highlighting fixes - Centralized highlight management
   function setHighlight($element) {
-    // remove previous highlight
+    // Remove previous highlight
     if (currentHighlightedElement) {
       currentHighlightedElement.removeClass('speak-paragraph-highlighted');
     }
     
-    // add new highlight
+    // Add new highlight
     if ($element && $element.length > 0) {
       $element.addClass('speak-paragraph-highlighted');
       currentHighlightedElement = $element;
       
-      // scroll to element with better error handling
+      // Scroll to element with better error handling
       try {
         var elementTop = $element.offset().top;
         var scrollTop = elementTop - scrollBlockOffset;
@@ -369,72 +353,70 @@
             behavior: scrollBehavior
           });
         }
-      } catch (error) {
-        console.warn('speak2me: Could not scroll to highlighted element', error);
+      } catch (e) {
+        console.warn('speak2me: Could not scroll to highlighted element', e);
       }
+      
       return true;
     }
+    
     return false;
   }
 
   function setHighlightParagraph(elementid) {
+
     // get the element with data-speak2me-id like 'speak2me-p-0'
-    var selector                = `[data-speak2me-id="${elementid}"]`;
-    const $element              = document.querySelector(selector);
-//  const isHighlighted         = $element?.classList.contains('speak-paragraph-highlighted');
-    const isAlredadyHighlighted = (elementid === currentHighlightedElement) ? true : false;
+    var selector = `[data-speak2me-id="${elementid}"]`;
+    const $element = document.querySelector(selector);
 
-    if (isAlredadyHighlighted) {
-      console.debug(`speak2me core:\n setHighlightParagraph called on id current|previous: ${elementid} | ${currentHighlightedElement}`);
-    }
+    // Remove previous highlight
+    // if (currentHighlightedElement !== null && currentHighlightedElement !== elementid) {
+    //   $element.classList.remove('speak-paragraph-highlighted');
+    // }
 
-    // add new highlight
+    // Add new highlight
     if ($element) {
       $element.classList.add('speak-paragraph-highlighted');
       currentHighlightedElement = elementid;
 
-      // scroll to (highlighted) element with error handling
+      // Scroll to (highlighted) element with error handling
       try {
-        var elementTop      = $element.offsetTop;
-        var elementBottom   = elementTop + $element.offsetHeight;
-        var scrollTop       = elementTop - scrollBlockOffset;
+        var elementTop = $element.offsetTop;
+        var scrollTop = elementTop - scrollBlockOffset;
 
-        // only scroll if element is not fully visible in viewport
-        var viewportTop     = window.pageYOffset || document.documentElement.scrollTop;
-        var viewportBottom  = viewportTop + window.innerHeight;
+        // Only scroll if element is not already visible
+        var viewportTop = $(window).scrollTop();
+        var viewportBottom = viewportTop + $(window).height();
 
-        // check if element is outside viewport (either partially or fully)
-        if (elementTop < viewportTop || elementBottom > viewportBottom) {
+        if (elementTop < viewportTop || elementTop > viewportBottom) {
           window.scrollTo({
             top: scrollTop,
             behavior: scrollBehavior
           });
         }
-      } catch (error) {
-        console.warn('speak2me:\n Could not scroll to highlighted element:', error);
+      } catch (e) {
+        console.warn('speak2me:\n Could not scroll to highlighted element:', e);
       }
       return true;
     }
     return false;
   }
 
-  // Claude: paragraph highlighting fixes - clear all highlights
+  // Claude: Paragraph highlighting fixes - Clear all highlights
   function clearAllHighlights() {
+//     if (currentHighlightedElement) {
+// //    currentHighlightedElement.removeClass('speak-paragraph-highlighted');
+//       currentHighlightedElement.classList.remove('speak-paragraph-highlighted');
+//       currentHighlightedElement = null;
+//     }
     $('.speak-paragraph-highlighted').removeClass('speak-paragraph-highlighted');
   }
 
-  function removeParagrapHighlight(dataId) {
-    const selector = `[data-speak2me-id="${dataId}"]`;
-    const $element = document.querySelector(selector);
-
-    if ($element !== null && $element !== undefined) {
-      console.debug(`speak2me core:\n removeParagrapHighlight called on id: ${dataId}`);
-      $element.classList.remove('speak-paragraph-highlighted');
-    }
-
+  function clearParagrapHighlight(element) {
+    element.classList.remove('speak-paragraph-highlighted');
   }
 
-  // OPTIMIZATION: improved scan function with better error handling
+  // OPTIMIZATION: Improved scan function with better error handling
   function scanPage(options) {
     var line = options.startLine || 0;
     var lines;
@@ -442,14 +424,14 @@
     var maxScanIterations = 100; // STABILITY: Prevent infinite loops
 
     function scanSection() {
-      // STABILITY: add maximum iteration check
+      // STABILITY: Add maximum iteration check
       if (scanCounter++ > maxScanIterations) {
         console.warn('speak2me: Page scan exceeded maximum iterations');
         finalizeScan();
         return;
       }
 
-      // OPTIMIZATION: calculate once per iteration
+      // OPTIMIZATION: Calculate once per iteration
       lines = Math.max(
         document.body.scrollHeight,
         document.body.offsetHeight,
@@ -458,7 +440,7 @@
         document.documentElement.offsetHeight
       );
 
-      // OPTIMIZATION: cache jQuery selector
+      // OPTIMIZATION: Cache jQuery selector
       var $contentEl = getCachedContent();
       $contentEl.css('opacity', '0.3');
 
@@ -477,7 +459,7 @@
       scanFinished = true;
       getCachedContent().css('opacity', '1');
       
-      // Claude: paragraph highlighting fixes - Assign IDs and build cache
+      // Claude: Paragraph highlighting fixes - Assign IDs and build cache
       paragraphIdCounter = 0;
       getCachedContent().find('p, h1, h2, h3, h4, h5, h6, li, dt, dd').each(function() {
         var $elem = $(this);
@@ -486,7 +468,7 @@
         }
       });
       
-      // build the paragraph cache for fast lookups
+      // Build the paragraph cache for fast lookups
       buildParagraphCache();
     }
 
@@ -494,7 +476,7 @@
   }
 
   // merge (configuration) objects
-  // OPTIMIZATION: simplified and more efficient
+  // OPTIMIZATION: Simplified and more efficient
   function extend() {
     var target = {};
     for (var i = 0; i < arguments.length; i++) {
@@ -537,19 +519,17 @@
   }
 
   // count the number of words in a string
-  // OPTIMIZATION: more efficient word counting
+  // OPTIMIZATION: More efficient word counting
   function wordCount(str) {
     if (!str || typeof str !== 'string') return 0; // STABILITY: Input validation
     var words = str.trim().split(/\s+/);
     return words.filter(word => word !== '').length;
   }
 
-  // this populates the "voices" array with objects that represent the
+  // This populates the "voices" array with objects that represent the
   // available voices in the current browser.
-  // populateVoiceList seems NOT reqired
-  //
   function populateVoiceList() {
-    // OPTIMIZATION: clear existing voices before re-populating
+    // OPTIMIZATION: Clear existing voices before repopulating
     voices = [];
     
     let systemVoicesText = 'systemVoices START - ';
@@ -558,7 +538,7 @@
     for (var i = 0; i < systemVoices.length; i++) {
       voices.push(new voiceObj(systemVoices[i].name, systemVoices[i].lang));
       
-      // OPTIMIZATION: use regex for language matching
+      // OPTIMIZATION: Use regex for language matching
       if (/^(en|de-DE|es-ES|pl|nl)/.test(systemVoices[i].lang)) {
         systemVoicesText += systemVoices[i].lang.toString();
         systemVoicesText += ' : ';
@@ -569,28 +549,26 @@
     systemVoicesText += " - systemVoices END.";
   }
 
-  // populateVoiceList seems NOT reqired
   populateVoiceList();
 
-   // populateVoiceList seems NOT reqired
   if (typeof speechSynthesis !== 'undefined' && speechSynthesis.onvoiceschanged !== undefined) {
     speechSynthesis.onvoiceschanged = populateVoiceList;
   }
 
-  // after checking for compatibility, define the utterance object
+  // After checking for compatibility, define the utterance object
   if ('speechSynthesis' in window) {
     var speech = new SpeechSynthesisUtterance();
     window.speechSynthesis.cancel();
   }
 
-  // OPTIMIZATION: simplified language detection
+  // OPTIMIZATION: Simplified language detection
   if (!currentTranslation) {
     currentLanguage = defaultLanguage;
   } else {
     var translation = currentTranslation.split('/');
     var langCode = translation[2];
     
-    // OPTIMIZATION: use object mapping for language codes
+    // OPTIMIZATION: Use object mapping for language codes
     var languageMap = {
       'en': 'en-GB',
       'ar': 'ar-EG',
@@ -617,7 +595,7 @@
   }
 
   // ---------------------------------------------------------------------------
-  // public functions (methods)
+  // Public functions (methods)
   // ---------------------------------------------------------------------------
   var methods = {
 
@@ -632,7 +610,7 @@
       scanFinished  = false;
       myOptions     = extend(options, defaultOptions, customOptions || {});
 
-      // STABILITY: validate options
+      // STABILITY: Validate options
       if (!myOptions) {
         console.error('speak2me: Invalid options provided');
         return this;
@@ -643,7 +621,7 @@
         scanPage({ startLine: 0 });
       } else {
         scanFinished = true;
-        // Claude: paragraph highlighting fixes - Also build cache when resuming
+        // Claude: Paragraph highlighting fixes - Also build cache when resuming
         paragraphIdCounter = 0;
         getCachedContent().find('p, h1, h2, h3, h4, h5, h6, li, dt, dd').each(function() {
           var $elem = $(this);
@@ -654,7 +632,7 @@
         buildParagraphCache();
       }
 
-      // dfault values for voice tags
+      // Default values for voice tags
       voiceTags['a']                    = new voiceTag('Link' + pause_spoken, '');
       voiceTags['q']                    = new voiceTag(pause_spoken, '');
       voiceTags['ol']                   = new voiceTag(pause_spoken, '');
@@ -688,7 +666,7 @@
 
       ignoreTags = ['audio','button','canvas','code','del', 'pre', 'dialog','embed','form','head','iframe','meter','nav','noscript','object','picture', 'script','select','style','textarea','video'];
 
-      // STABILITY: check if speech synthesis is already active
+      // STABILITY: Check if speech synthesis is already active
       if (window.speechSynthesis.speaking) {
         console.warn('speak2me: Speech synthesis already in progress');
         return this;
@@ -697,7 +675,7 @@
       // top-level function to prepare the HTML content
       var processSpeech = setInterval(function () {
         if (scanFinished) {
-          // OPTIMIZATION: process all elements in one pass
+          // OPTIMIZATION: Process all elements in one pass
           try {
             _this.each(function() {
               obj = $(this).clone();
@@ -707,18 +685,18 @@
               toSpeak = finished;
             });
           } catch (error) {
-            // STABILITY: error handling for DOM processing
+            // STABILITY: Error handling for DOM processing
             console.error('speak2me: Error processing DOM elements', error);
             clearInterval(processSpeech);
             return;
           }
 
-          // set speech parameters
+          // Set speech parameters
           rate = rateUserDefault !== undefined ? rateUserDefault : rateDefault;
           pitch = pitchUserDefault !== undefined ? pitchUserDefault : pitchDefault;
           volume = volumeUserDefault !== undefined ? volumeUserDefault : volumeDefault;
 
-          // OPTIMIZATION: remove old event listeners before adding new ones
+          // OPTIMIZATION: Remove old event listeners before adding new ones
           if (speech && activeEventListeners.start) {
             speech.removeEventListener('start', activeEventListeners.start);
             speech.removeEventListener('end', activeEventListeners.end);
@@ -733,7 +711,7 @@
           speech.pitch = pitch;
           speech.volume = volume;
           
-          // STABILITY: safe voice selection with fallback
+          // STABILITY: Safe voice selection with fallback
           var availableVoices = speechSynthesis.getVoices();
           var selectedVoice = availableVoices.find(function(voice) {
             return voice.name === voiceLanguageDefault;
@@ -742,105 +720,38 @@
           speech.voice = selectedVoice || availableVoices[0];
           speech.previousScrollPosition = 0;
 
-          // OPTIMIZATION: store event listeners for cleanup
+          // OPTIMIZATION: Store event listeners for cleanup
           activeEventListeners.onboundary = (event) => {
             if (event.name === 'word') {
               const startIndex = event.charIndex;
               const length = event.charLength;
               const targetText = event.target.text;
               const currentWord = targetText.substring(startIndex, startIndex + length);
-              // uncomment if highlighting is needed
+              // Uncomment if highlighting is needed
               highlightWord(startIndex);
             }
           };
 
           activeEventListeners.onstart = (event) => {
-            const speak2meId            = event.currentTarget.speak2meId;
-            const selector              = `[data-speak2me-id="${speak2meId}"]`;
-            const $element              = document.querySelector(selector);            
-            const $paragraph            = event.currentTarget.$paragraph;
-            const isAlredadyHighlighted = (speak2meId === currentHighlightedElement) ? true : false;
-             
-            if (!isAlredadyHighlighted) {
+            const speak2meId = event.currentTarget.speak2meId;
 
-              if ($paragraph !== undefined && $paragraph !== null) {
-                // remove highlight on current paragraph
-                console.debug(`speak2me core, onstart:\n remove highlight on: ${currentHighlightedElement}`);
-                removeParagrapHighlight(currentHighlightedElement);
-              } else {
-                // failsafe: manage loose text (NO speak2meId found on paragraph)
-                console.warn('speak2me core, onstart:\n error accessing loose text:', currentTargetText);
-
-                // clear all highlights globally
-                $('.speak-paragraph-highlighted').removeClass('speak-paragraph-highlighted');
-                console.warn('speak2me core, onstart:\n clear all highlights globally');
-              }
-
-              console.debug(`speak2me core, onstart:\n set highlight on: ${speak2meId}`);
+            if (speak2meId !== undefined) {
               setHighlightParagraph(speak2meId);
-
-              if ($element.localName === 'h2' || $element.localName === 'h3') {
-                pauseOnSpeak(pauseOnHeadlines);
-              }              
-
-              // highlight words only on paragraphs
-              if ($element.localName === 'p') {
-                prepareParagraphToHighlighWords($element.innerText);
-                var bla = 1;
-              }
-
-            } else {
-              console.debug(`speak2me core, onstart:\n highlight MOT changed on: ${speak2meId}`);
             }
           };
 
-          // activeEventListeners.onend = (event) => {
-          //   const speak2meId            = event.currentTarget.speak2meId;
-          //   var selector                = `[data-speak2me-id="${speak2meId}"]`;
-          //   const $element              = document.querySelector(selector);
-          //   const isHighlighted         = $element?.classList.contains('speak-paragraph-highlighted');
-          //   const isAlredadyHighlighted = (speak2meId === currentHighlightedElement) ? true : false;
-          //   var currentTargetText       = event.currentTarget.text;
-
-          //   if (isAlredadyHighlighted) {
-          //     console.warn(`speak2me core, onend:\n current highlight NOT changed: ${currentHighlightedElement}`);
-          //   }
-
-          //   if (event.currentTarget.$paragraph !== undefined && event.currentTarget.$paragraph !== null) {
-          //     // remove highlight on current paragraph
-          //     clearParagrapHighlight(event.currentTarget.$paragraph[0]);
-          //   } else {
-          //      // manage loose text ()
-          //      console.warn('Error accessing loose text:', currentTargetText);
-
-          //      // clear all highlights globally
-          //      $('.speak-paragraph-highlighted').removeClass('speak-paragraph-highlighted');
-          //      console.warn('clear all highlights globally');
-          //   }
-
-          //   // pause between sentences in a paragraph
-          //   pauseOnSpeak(pauseBetweenSentences);
-          // };
-
           activeEventListeners.onend = (event) => {
-            const speak2meId            = event.currentTarget.speak2meId;
-            var selector                = `[data-speak2me-id="${speak2meId}"]`;
-            const $element              = document.querySelector(selector);
-            const isHighlighted         = $element?.classList.contains('speak-paragraph-highlighted');
-            const isAlredadyHighlighted = (speak2meId === currentHighlightedElement) ? true : false;
-            var currentTargetText       = event.currentTarget.text;
+            if (event.currentTarget.$paragraph !== undefined && event.currentTarget.$paragraph !== null) {
+              // Remove highlight on current paragraph
+              clearParagrapHighlight(event.currentTarget.$paragraph[0]);
+            } else {
+               // manage loose text ()
+               var currentTargetText = event.currentTarget.text;
+               console.error('Error accessing loose text:', currentTargetText);
 
-            // if ($element.localName === 'h2' || $element.localName === 'h3') {
-            //   pauseOnSpeak(pauseOnHeadlines);
-            // }
-
-            if (previousParagraph !== null) {
-              previousParagraph.innerHTML  = previousParagraphHTML;
-            }
-
-            // clear element id for word-based highlightning
-            if ($element.id === 'speak_highlighted') {
-              $element.removeAttribute('id');
+               // clear all highlights globally
+               $('.speak-paragraph-highlighted').removeClass('speak-paragraph-highlighted');
+               console.warn('clear all highlights globally');
             }
 
             // pause between sentences in a paragraph
@@ -860,7 +771,7 @@
       function splitTextIntoChunks(text) {
         var chunks = [];
 
-        // OPTIMIZATION: cain text cleanup operations
+        // OPTIMIZATION: Chain text cleanup operations
         text = text
           .replace(/^\s+>/gm, '')
           .replaceAll(/^Attention\s+element.*/g, '')
@@ -870,7 +781,7 @@
 
         chunks = text.split('.');
 
-        // OPTIMIZATION: single pass cleanup with filter
+        // OPTIMIZATION: Single pass cleanup with filter
         chunks = chunks
           .map(chunk => chunk.replace(/^\s+/g, '').replaceAll('""', ''))
           .filter(chunk => chunk.length > 0)
@@ -888,20 +799,20 @@
           var speak2meId;
 
           if (sectionText) {
-            // Claude: paragraph highlighting fixes - Enhanced paragraph matching
+            // Claude: Paragraph highlighting fixes - Enhanced paragraph matching
             $paragraph = findParagraphByText(sectionText, $contentCached);
             
-            // store comprehensive data for reliable lookup later
+            // Store comprehensive data for reliable lookup later
             if ($paragraph && $paragraph.length > 0) {
               offset = Math.round($paragraph.offset().top);
               speak2meId = $paragraph.attr('data-speak2me-id');
               
-              // Claude: paragraph highlighting fixes - Ensure ID exists
+              // Claude: Paragraph highlighting fixes - Ensure ID exists
               if (!speak2meId) {
                 speak2meId = 'speak2me-p-' + (paragraphIdCounter++);
                 $paragraph.attr('data-speak2me-id', speak2meId);
                 
-                // update cache with new ID
+                // Update cache with new ID
                 paragraphCache.set(speak2meId, {
                   element: $paragraph,
                   normalizedText: normalizeText($paragraph.text()),
@@ -926,7 +837,7 @@
           defaultOptions.headingSelector
         );
 
-        // OPTIMIZATION: more efficient heading parsing
+        // OPTIMIZATION: More efficient heading parsing
         if (headingsArray && headingsArray.length > 0) {
           chunkSet.forEach((chunk) => {
             if (chunk.offsetTop === undefined) {
@@ -937,7 +848,7 @@
                 var innerText = node.innerText.replace(/[?!]/g, '') + pause_spoken;
                 var normalizedNodeText = normalizeText(innerText);
                 
-                // Claude: paragraph highlighting fixes - Better heading text comparison
+                // Claude: Paragraph highlighting fixes - Better heading text comparison
                 if (normalizedNodeText === normalizedChunkText || 
                     normalizedNodeText.indexOf(normalizedChunkText) !== -1 ||
                     normalizedChunkText.indexOf(normalizedNodeText) !== -1) {
@@ -946,12 +857,12 @@
                     chunk.offsetTop = Math.round(headline.offset().top);
                     chunk.speak2meId = headline.attr('data-speak2me-id');
                     
-                    // Claude: paragraph highlighting fixes - Ensure heading has ID
+                    // Claude: Paragraph highlighting fixes - Ensure heading has ID
                     if (!chunk.speak2meId) {
                       chunk.speak2meId = 'speak2me-p-' + (paragraphIdCounter++);
                       headline.attr('data-speak2me-id', chunk.speak2meId);
                       
-                      // update cache
+                      // Update cache
                       paragraphCache.set(chunk.speak2meId, {
                         element: headline,
                         normalizedText: normalizedNodeText,
@@ -959,7 +870,7 @@
                       });
                     }
                     
-                    // Claude: paragraph highlighting fixes - Update paragraph reference
+                    // Claude: Paragraph highlighting fixes - Update paragraph reference
                     chunk.$paragraph = headline;
                   }
                   break;
@@ -1001,12 +912,12 @@
         // indicate active converter in the quicklinks bar
         $('.mdib-speaker').addClass('mdib-spin');
 
-        // Claude: paragraph highlighting fixes - Enhanced start event handler
+        // Claude: Paragraph highlighting fixes - Enhanced start event handler
         activeEventListeners.start = function(event) {
-          // clear any existing highlights
+          // Clear any existing highlights
           // clearAllHighlights();
 
-          // handle scrolling for valid offsetTop positions
+          // Handle scrolling for valid offsetTop positions
           if (speaker.offsetTop !== undefined) {
             // Skip scrolling if offsetTop position is LOWER than expected
             if (speaker.offsetTop >= speaker.previousScrollPosition) {
@@ -1017,7 +928,7 @@
             }
           }
 
-          // Claude: paragraph highlighting fixes - Improved paragraph finding and highlighting
+          // Claude: Paragraph highlighting fixes - Improved paragraph finding and highlighting
           // var $currentParagraph = findParagraphForChunk(speaker);
           
           // // Apply highlighting if we found a paragraph
@@ -1032,7 +943,7 @@
           //       speaker.sectionText || speaker.text?.substring(0, 50));
           //   }
           // } else {
-          //   // Claude: paragraph highlighting fixes - Better debugging info
+          //   // Claude: Paragraph highlighting fixes - Better debugging info
           //   console.warn('speak2me: Could not find paragraph for chunk', {
           //     speak2meId: speaker.speak2meId,
           //     sectionText: speaker.sectionText,
@@ -1042,7 +953,7 @@
           // }
         };
 
-        // Claude: paragraph highlighting fixes - Enhanced end event handler
+        // Claude: Paragraph highlighting fixes - Enhanced end event handler
         activeEventListeners.end = function(event) {
           // workaround to detect offsetTop positions LOWER than expected
           if (speaker.offsetTop !== undefined) {
@@ -1078,7 +989,7 @@
               speaker.$paragraph.removeClass('speak-paragraph-highlighted');
             }
 
-            // Claude: paragraph highlighting fixes - Use centralized highlight clearing
+            // Claude: Paragraph highlighting fixes - Use centralized highlight clearing
             // clearAllHighlights();
 
             // remove speak indication
@@ -1526,7 +1437,7 @@
           activeEventListeners = { start: null, end: null, boundary: null };
         }
         
-        // Claude: paragraph highlighting fixes - Use centralized clearing
+        // Claude: Paragraph highlighting fixes - Use centralized clearing
         clearAllHighlights();
       }
       return this;
@@ -1640,12 +1551,6 @@
     },
 
     getVoices: function() {
-      const voices        = speechSynthesis.getVoices();
-
-      const germanVoices  = voices.filter(v => v.lang.startsWith('de'));
-      const englishVoices = voices.filter(v => v.lang.startsWith('en'));
-      const otherVoices   = voices.filter(v => !v.lang.startsWith('de') && !v.lang.startsWith('en'));
-
       // Return voice array if no arguments
       if (arguments.length === 0) {
         return voices;
@@ -1669,9 +1574,7 @@
         }
 
         var option = document.createElement('option');
-        // does NOT work
-        // option.textContent = voice.name + ' (' + voice.language + ')';
-        option.textContent = voice.name;
+        option.textContent = voice.name + ' (' + voice.language + ')';
         option.setAttribute('value', voice.name);
 
         // Set selected voice
@@ -1679,9 +1582,7 @@
           option.setAttribute('selected', 'selected');
         }
 
-        // does NOT work
-        // option.setAttribute('data-speak2me-language', voice.language);
-
+        option.setAttribute('data-speak2me-language', voice.language);
         obj.find('select').append(option);
       });
 

@@ -1,7 +1,6 @@
 /*
 # -----------------------------------------------------------------------------
-# ~/assets/theme/j1/modules/speak2me/js/speak2me.js
-#
+# ~/assets/theme/j1/modules/speak2me/js/speak2me.6.js
 # speak2me v.1.6 implementation (based on Articulate.js) for J1 Theme
 #
 # Product/Info:
@@ -26,8 +25,8 @@
 
 (function($) {
 
-  const defaultOptions = require('./default-options.js');
-  const ParseContent   = require('./parse-content.js');
+  const defaultOptions = require('../default-options.js');
+  const ParseContent   = require('../parse-content.js');
   const parseContent   = ParseContent(defaultOptions);
 
   const scrollBehavior       = 'smooth';
