@@ -187,11 +187,11 @@
 
   // highlighting logic
   function highlightWord(charIndex) {
-    const spans = document.querySelectorAll('span');
-    var currentPos = 0;
+    const spans     = document.querySelectorAll('span');
+    var currentPos  = 0;
 
     // remove all existing highlights 
-    spans.forEach(span => span.classList.remove('highlight'));
+    spans.forEach(span => span.classList.remove('karaoke-highlight-word'));
 
     // search for current word to highlight
     for (var span of spans) {
@@ -199,9 +199,9 @@
       const spanTextContent = span.textContent;
 
       if (charIndex >= currentPos && charIndex < currentPos + wordLength) {
-        span.classList.add('highlight');
+        span.classList.add('karaoke-highlight-word');
         // scroll smooth to current word spoken
-        span.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // span.scrollIntoView({ behavior: 'smooth', block: 'center' });
         break;
       }
       currentPos += wordLength;
@@ -217,7 +217,7 @@
 //    .replace(/\s+$/, '')
       .split(/\s+/);
 
-    document.querySelector('.speak-paragraph-highlighted').id = 'speak_highlighted';
+    document.querySelector('.tts-karaoke-highlight-paragraph').id = 'speak_highlighted';
     currentParagraph            = document.getElementById('speak_highlighted');
     currentParagraphHTML        = currentParagraph.innerHTML;
     currentParagraph.innerHTML  = '';
@@ -349,12 +349,12 @@
   function setHighlight($element) {
     // remove previous highlight
     if (currentHighlightedElement) {
-      currentHighlightedElement.removeClass('speak-paragraph-highlighted');
+      currentHighlightedElement.removeClass('tts-karaoke-highlight-paragraph');
     }
     
     // add new highlight
     if ($element && $element.length > 0) {
-      $element.addClass('speak-paragraph-highlighted');
+      $element.addClass('tts-karaoke-highlight-paragraph');
       currentHighlightedElement = $element;
       
       // scroll to element with better error handling
@@ -384,7 +384,7 @@
     // get the element with data-speak2me-id like 'speak2me-p-0'
     var selector                = `[data-speak2me-id="${elementid}"]`;
     const $element              = document.querySelector(selector);
-//  const isHighlighted         = $element?.classList.contains('speak-paragraph-highlighted');
+//  const isHighlighted         = $element?.classList.contains('tts-karaoke-highlight-paragraph');
     const isAlredadyHighlighted = (elementid === currentHighlightedElement) ? true : false;
 
     if (isAlredadyHighlighted) {
@@ -393,7 +393,7 @@
 
     // add new highlight
     if ($element) {
-      $element.classList.add('speak-paragraph-highlighted');
+      $element.classList.add('tts-karaoke-highlight-paragraph');
       currentHighlightedElement = elementid;
 
       // scroll to (highlighted) element with error handling
@@ -423,7 +423,7 @@
 
   // Claude: paragraph highlighting fixes - clear all highlights
   function clearAllHighlights() {
-    $('.speak-paragraph-highlighted').removeClass('speak-paragraph-highlighted');
+    $('.tts-karaoke-highlight-paragraph').removeClass('tts-karaoke-highlight-paragraph');
   }
 
   function removeParagrapHighlight(dataId) {
@@ -432,7 +432,7 @@
 
     if ($element !== null && $element !== undefined) {
       console.debug(`speak2me.core:\n removeParagrapHighlight called on id: ${dataId}`);
-      $element.classList.remove('speak-paragraph-highlighted');
+      $element.classList.remove('tts-karaoke-highlight-paragraph');
     }
 
   }
@@ -809,10 +809,14 @@
           // OPTIMIZATION: store event listeners for cleanup
           activeEventListeners.onboundary = (event) => {
             if (event.name === 'word') {
-              const startIndex = event.charIndex;
-              const length = event.charLength;
-              const targetText = event.target.text;
-              const currentWord = targetText.substring(startIndex, startIndex + length);
+              const startIndex  = event.charIndex;
+              const length      = event.charLength;
+              const targetText  = event.target.text;
+
+              // extract|log current word from original text
+             const currentWord = targetText.substring(startIndex, startIndex + length);
+             console.debug(`speak2me.core, utterance.onboundary: spoken word: '${currentWord}' at startIndex: ${startIndex}`);
+
               // uncomment if highlighting is needed
               highlightWord(startIndex);
             }
@@ -837,7 +841,7 @@
                 console.warn('speak2me.core, onstart:\n error accessing loose text');
 
                 // clear all highlights globally
-                $('.speak-paragraph-highlighted').removeClass('speak-paragraph-highlighted');
+                $('.tts-karaoke-highlight-paragraph').removeClass('tts-karaoke-highlight-paragraph');
                 console.warn('speak2me.core, onstart:\n clear all highlights globally');
               }
 
@@ -859,7 +863,7 @@
           //   const speak2meId            = event.currentTarget.speak2meId;
           //   var selector                = `[data-speak2me-id="${speak2meId}"]`;
           //   const $element              = document.querySelector(selector);
-          //   const isHighlighted         = $element?.classList.contains('speak-paragraph-highlighted');
+          //   const isHighlighted         = $element?.classList.contains('tts-karaoke-highlight-paragraph');
           //   const isAlredadyHighlighted = (speak2meId === currentHighlightedElement) ? true : false;
           //   var currentTargetText       = event.currentTarget.text;
 
@@ -875,7 +879,7 @@
           //      console.warn('Error accessing loose text:', currentTargetText);
 
           //      // clear all highlights globally
-          //      $('.speak-paragraph-highlighted').removeClass('speak-paragraph-highlighted');
+          //      $('.tts-karaoke-highlight-paragraph').removeClass('tts-karaoke-highlight-paragraph');
           //      console.warn('clear all highlights globally');
           //   }
 
@@ -887,7 +891,7 @@
             const speak2meId            = event.currentTarget.speak2meId;
             var selector                = `[data-speak2me-id="${speak2meId}"]`;
             const $element              = document.querySelector(selector) || null;
-            const isHighlighted         = $element?.classList.contains('speak-paragraph-highlighted');
+            const isHighlighted         = $element?.classList.contains('tts-karaoke-highlight-paragraph');
             const isAlredadyHighlighted = (speak2meId === currentHighlightedElement) ? true : false;
             var currentTargetText       = event.currentTarget.text;
 
@@ -1056,7 +1060,7 @@
         return subText;
       }
 
-      // process chunks (to speak) sequentially
+      // process chunks (sentences to speak) sequentially
       function processTextChunks(speaker, chunks) {
         const synth = window.speechSynthesis;
 
@@ -1116,7 +1120,7 @@
 
           // Remove highlighting for the paragraph already spoken
           if (speaker.$currentHighlight !== undefined) {
-            speaker.$currentHighlight.removeClass('speak-paragraph-highlighted');
+            speaker.$currentHighlight.removeClass('tts-karaoke-highlight-paragraph');
             speaker.$currentHighlight = undefined;
           }
 
@@ -1137,7 +1141,7 @@
             chunkSpoken = false;
 
             if (speaker.$paragraph !== undefined) {
-              speaker.$paragraph.removeClass('speak-paragraph-highlighted');
+              speaker.$paragraph.removeClass('tts-karaoke-highlight-paragraph');
             }
 
             // Claude: paragraph highlighting fixes - Use centralized highlight clearing
@@ -1165,11 +1169,11 @@
 
             // STABILITY: Validate chunk exists before accessing
             if (chunks[chunkCounter]) {
-              speaker.text = chunks[chunkCounter].text;
-              speaker.offsetTop = chunks[chunkCounter].offsetTop;
-              speaker.$paragraph = chunks[chunkCounter].$paragraph;
-              speaker.speak2meId = chunks[chunkCounter].speak2meId;
-              speaker.sectionText = chunks[chunkCounter].sectionText;
+              speaker.text          = chunks[chunkCounter].text;
+              speaker.offsetTop     = chunks[chunkCounter].offsetTop;
+              speaker.$paragraph    = chunks[chunkCounter].$paragraph;
+              speaker.speak2meId    = chunks[chunkCounter].speak2meId;
+              speaker.sectionText   = chunks[chunkCounter].sectionText;
 
               // speak current text line
               if (!chunkSpoken && synth) {
