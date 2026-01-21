@@ -702,6 +702,7 @@
       voiceTags['a']                    = new voiceTag('Link' + '.', '');
       voiceTags['img']                  = new voiceTag('Image element' +  '.', 'Element not spoken' +  '.');
       voiceTags['table']                = new voiceTag('Table element' +  '.', 'Element not spoken' +  '.');
+      voiceTags['card-header']          = new voiceTag('', '');
       voiceTags['.doc-example']         = new voiceTag('Example element' + '.', 'Element not spoken' + '.');
       voiceTags['.admonitionblock']     = new voiceTag('Attention element ' +  '.', '');
       voiceTags['.listingblock']        = new voiceTag('Text element' +  '.', 'Element not spoken' + '.');
@@ -752,32 +753,32 @@
           }
 
           // set speech parameters
-          rate = rateUserDefault !== undefined ? rateUserDefault : rateDefault;
-          pitch = pitchUserDefault !== undefined ? pitchUserDefault : pitchDefault;
-          volume = volumeUserDefault !== undefined ? volumeUserDefault : volumeDefault;
+          rate    = rateUserDefault !== undefined ? rateUserDefault : rateDefault;
+          pitch   = pitchUserDefault !== undefined ? pitchUserDefault : pitchDefault;
+          volume  = volumeUserDefault !== undefined ? volumeUserDefault : volumeDefault;
 
           // OPTIMIZATION: remove old event listeners before adding new ones
-          if (speech && activeEventListeners.start) {
-            speech.removeEventListener('start', activeEventListeners.start);
-            speech.removeEventListener('end', activeEventListeners.end);
-            if (activeEventListeners.boundary) {
-              speech.removeEventListener('boundary', activeEventListeners.boundary);
+          if (speech && activeEventListeners.onstart) {
+            speech.removeEventListener('onstart', activeEventListeners.onstart);
+            speech.removeEventListener('onend', activeEventListeners.onend);
+            if (activeEventListeners.onboundary) {
+              speech.removeEventListener('onboundary', activeEventListeners.onboundary);
             }
           }
 
           // create and configure the utterance object
           speech = new SpeechSynthesisUtterance();
-          speech.rate = rate;
-          speech.pitch = pitch;
-          speech.volume = volume;
+          speech.rate     = rate;
+          speech.pitch    = pitch;
+          speech.volume   = volume;
           
           // STABILITY: safe voice selection with fallback
           var availableVoices = speechSynthesis.getVoices();
-          var selectedVoice = availableVoices.find(function(voice) {
+          var selectedVoice   = availableVoices.find(function(voice) {
             return voice.name === voiceLanguageDefault;
           });
 
-          speech.voice = selectedVoice || availableVoices[0];
+          speech.voice                  = selectedVoice || availableVoices[0];
           speech.previousScrollPosition = 0;
 
           // OPTIMIZATION: store event listeners for cleanup
