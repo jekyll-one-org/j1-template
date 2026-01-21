@@ -44,6 +44,9 @@
   const ParseContent          = require('./parse-content.js');
   const parseContent          = ParseContent(defaultOptions);
 
+  // var logger                  = log4javascript.getLogger('j1.speak2me.core');
+  // logger.info('initializing core module: started');
+
   const scrollBehavior        = 'smooth';
   const speechCycle           = 10;
   const speechMonitorCycle    = 10;
@@ -191,7 +194,7 @@
     var currentPos  = 0;
 
     // remove all existing highlights 
-    spans.forEach(span => span.classList.remove('karaoke-highlight-word'));
+    spans.forEach(span => span.classList.remove('tts-karaoke-highlight-word'));
 
     // search for current word to highlight
     for (var span of spans) {
@@ -199,7 +202,7 @@
       const spanTextContent = span.textContent;
 
       if (charIndex >= currentPos && charIndex < currentPos + wordLength) {
-        span.classList.add('karaoke-highlight-word');
+        span.classList.add('tts-karaoke-highlight-word');
         // scroll smooth to current word spoken
         // span.scrollIntoView({ behavior: 'smooth', block: 'center' });
         break;
@@ -373,7 +376,7 @@
           });
         }
       } catch (error) {
-        console.warn('speak2me: Could not scroll to highlighted element', error);
+        console.warn('speak2me.core: Could not scroll to highlighted element', error);
       }
       return true;
     }
@@ -388,7 +391,7 @@
     const isAlredadyHighlighted = (elementid === currentHighlightedElement) ? true : false;
 
     if (isAlredadyHighlighted) {
-      console.debug(`speak2me.core:\n setHighlightParagraph called on id current|previous: ${elementid} | ${currentHighlightedElement}`);
+      console.debug(`speak2me.core: setHighlightParagraph called on id current|previous: ${elementid} | ${currentHighlightedElement}`);
     }
 
     // add new highlight
@@ -414,7 +417,7 @@
           });
         }
       } catch (error) {
-        console.warn('speak2me:\n Could not scroll to highlighted element:', error);
+        console.warn('speak2me.core: Could not scroll to highlighted element:', error);
       }
       return true;
     }
@@ -431,7 +434,7 @@
     const $element = document.querySelector(selector);
 
     if ($element !== null && $element !== undefined) {
-      console.debug(`speak2me.core:\n removeParagrapHighlight called on id: ${dataId}`);
+      console.debug(`speak2me.core: removeParagrapHighlight called on id: ${dataId}`);
       $element.classList.remove('tts-karaoke-highlight-paragraph');
     }
 
@@ -447,7 +450,7 @@
     function scanSection() {
       // STABILITY: add maximum iteration check
       if (scanCounter++ > maxScanIterations) {
-        console.warn('speak2me: Page scan exceeded maximum iterations');
+        console.warn('speak2me.core: Page scan exceeded maximum iterations');
         finalizeScan();
         return;
       }
@@ -644,7 +647,7 @@
 
       // STABILITY: validate options
       if (!myOptions) {
-        console.error('speak2me: Invalid options provided');
+        console.error('speak2me.core: Invalid options provided');
         return this;
       }
 
@@ -754,7 +757,7 @@
 
       // STABILITY: check if speech synthesis is already active
       if (window.speechSynthesis.speaking) {
-        console.warn('speak2me: Speech synthesis already in progress');
+        console.warn('speak2me.core: Speech synthesis already in progress');
         return this;
       }
 
@@ -772,7 +775,7 @@
             });
           } catch (error) {
             // STABILITY: error handling for DOM processing
-            console.error('speak2me: Error processing DOM elements', error);
+            console.error('speak2me.core: Error processing DOM elements', error);
             clearInterval(processSpeech);
             return;
           }
@@ -833,21 +836,25 @@
 
               if ($paragraph !== undefined && $paragraph !== null) {
                 // remove highlight on current paragraph
-                console.debug(`speak2me.core, onstart:\n remove highlight on: ${currentHighlightedElement}`);
+                console.debug(`speak2me.core, onstart: remove highlight on: ${currentHighlightedElement}`);
                 removeParagrapHighlight(currentHighlightedElement);
               } else {
                 // failsafe: manage loose text (NO speak2meId found on paragraph)
 //              console.warn('speak2me.core, onstart:\n error accessing loose text:', currentTargetText);
-                console.warn('speak2me.core, onstart:\n error accessing loose text');
+                console.warn('speak2me.core, onstart: error accessing loose text');
 
                 // clear all highlights globally
                 $('.tts-karaoke-highlight-paragraph').removeClass('tts-karaoke-highlight-paragraph');
-                console.warn('speak2me.core, onstart:\n clear all highlights globally');
+                console.warn('speak2me.core, onstart: clear all highlights globally');
               }
 
-              console.debug(`speak2me.core, onstart:\n set highlight on: ${speak2meId}`);
-              setHighlightParagraph(speak2meId);            
-
+              if (speak2meId !== undefined) {
+                console.debug(`speak2me.core, onstart: set highlight on: ${speak2meId}`);
+                setHighlightParagraph(speak2meId);                  
+              } else {
+                console.warn(`speak2me.core, onstart: could not set highlight on paragraph`);
+              }
+         
               // highlightning words supported only on paragraphs
               if ($element !== null && $element.localName === 'p') {
                 prepareParagraphToHighlighWords($element.innerText);
@@ -855,7 +862,7 @@
               }
 
             } else {
-              console.debug(`speak2me.core, onstart:\n highlight MOT changed on: ${speak2meId}`);
+              console.debug(`speak2me.core, onstart: highlight MOT changed on: ${speak2meId}`);
             }
           };
 
@@ -1181,7 +1188,7 @@
                 chunkSpoken = true;
               }
             } else {
-              console.warn('speak2me: Invalid chunk at index', chunkCounter);
+              console.warn('speak2me.core: Invalid chunk at index', chunkCounter);
               clearInterval(speechMonitor);
             }
           }
@@ -1194,7 +1201,7 @@
 
         // STABILITY: Validate clone exists
         if (!clone || !clone.length) {
-          console.error('speak2me: Invalid DOM clone');
+          console.error('speak2me.core: Invalid DOM clone');
           return clone;
         }
 
@@ -1515,7 +1522,7 @@
 
         // STABILITY: Validate input
         if (!final || typeof final !== 'string') {
-          console.error('speak2me: Invalid input for cleanDOMelements');
+          console.error('speak2me.core: Invalid input for cleanDOMelements');
           return [];
         }
 
@@ -1734,7 +1741,7 @@
 
       if (len === 2) {
         if (['img','table','figure'].indexOf(arguments[0]) === -1) {
-          console.warn("speak2me: When customizing, tag must be 'img', 'table', or 'figure'.");
+          console.warn("speak2me.core: When customizing, tag must be 'img', 'table', or 'figure'.");
           return this;
         }
         customTags[arguments[0].toString()] = new voiceTag(arguments[1].toString());
@@ -1742,7 +1749,7 @@
 
       if (len === 3) {
         if (['q','ol','ul','blockquote'].indexOf(arguments[0]) === -1) {
-          console.warn("speak2me: When customizing, tag must be 'q', 'ol', 'ul' or 'blockquote'.");
+          console.warn("speak2me.core: When customizing, tag must be 'q', 'ol', 'ul' or 'blockquote'.");
           return this;
         }
         customTags[arguments[0].toString()] = new voiceTag(arguments[1].toString(), arguments[2].toString());
