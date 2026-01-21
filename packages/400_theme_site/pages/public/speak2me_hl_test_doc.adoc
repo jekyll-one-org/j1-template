@@ -68,28 +68,35 @@ resource_options:
 The search option for the J1 Template is based on the Lunar, a great search
 engine.
 
-// .Gallery + lightGallery
-// gallery::jg_old_times[role="mt-4 mb-4"]
+// Necessary::
+// Necessary data is stored in cookies to enable the basic services of this site
+// to operate. This website *does not keep records* of their use. All information
+// data necessary to control this page are stored in so-called *session cookies*.
+// Session cookies are *automatically* removed from your browser when you have
+// *closed* all the tabs in your browser.
+
+// Analyses::
+// Analyzing the use of this website helps us to improve your user experience of
+// the website to optimize. Google Analytics GA is used for the analysis. This
+// site does not transmit any personal data. Implicit personal data such as
+// IP addresses are *anonymized* to protect your privacy.
 
 // For J1 Template, different lightbox modules are available:
 
-// * PhotoSwipeJS (default)
-// * lightGallery (optional)
+// * PhotoSwipeJS, the default
+// * lightGallery, optional lightbox
 
 // Two types of video sources are supported:
 
-// * Video from local folders from your webspace
-// * Video from online sources like YouTube
+// * Video from local folders from your webspace.
+// * Video from online sources like YouTube.
+
+// .Gallery + lightGallery
+// gallery::jg_old_times[role="mt-4 mb-4"]
 
 // [role="mt-4"]
 // "Don't do stupid things twice. The selection is too big for that."
 // -- Jean-Paul Sartre
-
-// [IMPORTANT]
-// ====
-// If the text element, or excerpt, to be quoted is more than one paragraph,
-// place the multine text between delimiter lines consisting of four.
-// ====
 
 *Lunar*, written in Javscript by
 http://lunrjs.com[Oliver Nightingale, {browser-window--new}], is fully
