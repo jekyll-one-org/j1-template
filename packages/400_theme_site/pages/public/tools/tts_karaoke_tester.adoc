@@ -52,6 +52,7 @@ resource_options:
 :time-en--description:                  to read
 :time-de--string:                       Minuten
 :time-de--description:                  Lesezeit
+:lunrjs--home:                          //lunrjs.com
 
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
@@ -59,20 +60,28 @@ resource_options:
 
 // Load page attributes
 // -----------------------------------------------------------------------------
-{% include {{load_attributes}} scope="none" %}
+{% include {{load_attributes}} scope="global" %}
 
 
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [role="dropcap"]
-The search option for the J1 Template is based on the Lunar, a great search
-engine.
+The search option for J1 Template is based on Lunar, a great search engine.
 
-Necessary data is stored in cookies to enable the basic services of this site
-to operate. This website does not keep records of their use. All information
-data necessary to control this page are stored in so-called session cookies.
-Session cookies are automatically removed from your browser when you have
-closed all the tabs in your browser.
+// *Lunar*, written by link:{lunrjs--home}[Oliver Nightingale, {browser-window--new}]
+// in Javscript, is fully integrated with the template system. The engine is
+// designed to be small in code size yet full-featured to provide users with a
+// great search experience.
+
+Lunar, written by Oliver Nightingale in Javscript, is fully integrated with
+the template system. The engine is designed to be small in code size yet
+full-featured to provide users with a great search experience.
+
+// Necessary data is stored in cookies to enable the basic services of this site
+// to operate. This website does not keep records of their use. All information
+// data necessary to control this page are stored in so-called session cookies.
+// Session cookies are automatically removed from your browser when you have
+// closed all the tabs in your browser.
 
 // Necessary::
 // Necessary data is stored in cookies to enable the basic services of this site
@@ -103,15 +112,6 @@ closed all the tabs in your browser.
 // [role="mt-4"]
 // "Don't do stupid things twice. The selection is too big for that."
 // -- Jean-Paul Sartre
-
-// *Lunar*, written in Javscript by
-// http://lunrjs.com[Oliver Nightingale, {browser-window--new}], is fully
-// integrated with the template system. The engine is designed to be small in code
-// size yet full-featured to provide users with a great search experience.
-
-Lunar, written in Javscript by Oliver Nightingale, is fully integrated with
-the template system. The engine is designed to be small in code size yet
-full-featured to provide users with a great search experience.
 
 [subs=attributes]
 ++++

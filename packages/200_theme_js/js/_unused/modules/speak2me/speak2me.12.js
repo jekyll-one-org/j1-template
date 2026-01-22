@@ -181,6 +181,15 @@
     return $content;
   }
 
+  // toggle the speak ID 'speak_highlighted' (NOT used)
+  // function toggleSpeakId() {
+  //   if (paragraph.id === 'speak_highlighted') {
+  //     paragraph.removeAttribute('id');
+  //   } else {
+  //     paragraph.id = 'speak_highlighted';
+  //   }
+  // }
+
   // highlighting logic for words
   function highlightWord(charIndex) {
     const spans     = document.querySelectorAll('span');
@@ -225,6 +234,7 @@
       const span          = document.createElement('span');
       span.textContent    = word + ' ';   // add single space between words
       span.dataset.index  = index;
+//    span.className      = 'word-highlight';
 
       currentParagraph.appendChild(span);
     });
@@ -285,6 +295,99 @@
 
     return bestMatch;
   }
+
+  // Claude: paragraph highlighting fixes
+  // Build paragraph cache for faster lookups (NOT used)
+//   function buildParagraphCache() {
+//     paragraphCache.clear();
+//     var $contentCached = getCachedContent();
+
+// //  $contentCached.find('p, h1, h2, h3, h4, h5, h6, li, dt, dd').each(function() {    
+//     $contentCached.find('p, dt, h1, h2, h3, h4, h5, h6').each(function() {
+//       var $elem = $(this);
+//       var speak2meId = $elem.attr('data-speak2me-id');
+      
+//       if (speak2meId) {
+//         // Store both the element and its normalized text
+//         paragraphCache.set(speak2meId, {
+//           element: $elem,
+//           normalizedText: normalizeText($elem.text()),
+//           offsetTop: Math.round($elem.offset().top)
+//         });
+//       }
+//     });
+//   }
+
+  // Claude: paragraph highlighting fixes - Enhanced paragraph lookup (NOT used)
+  // function findParagraphForChunk(chunk) {
+  //   // Method 1: Try cached paragraph by ID (fastest and most reliable)
+  //   if (chunk.speak2meId && paragraphCache.has(chunk.speak2meId)) {
+  //     var cached = paragraphCache.get(chunk.speak2meId);
+  //     // Verify the element still exists in DOM
+  //     if (cached.element && cached.element.length > 0 && $.contains(document.documentElement, cached.element[0])) {
+  //       return cached.element;
+  //     }
+  //   }
+    
+  //   // Method 2: Try stored paragraph reference
+  //   if (chunk.$paragraph && chunk.$paragraph.length > 0 && $.contains(document.documentElement, chunk.$paragraph[0])) {
+  //     return chunk.$paragraph;
+  //   }
+    
+  //   // Method 3: Try text matching with the section text
+  //   if (chunk.sectionText) {
+  //     var $found = findParagraphByText(chunk.sectionText, getCachedContent());
+  //     if ($found && $found.length > 0) {
+  //       return $found;
+  //     }
+  //   }
+    
+  //   // Method 4: Try text matching with first part of chunk text
+  //   if (chunk.text && chunk.text.length > 20) {
+  //     var searchText = chunk.text.substring(0, 50).replace(/\s+/g, ' ').trim();
+  //     var $found = findParagraphByText(searchText, getCachedContent());
+  //     if ($found && $found.length > 0) {
+  //       return $found;
+  //     }
+  //   }
+    
+  //   return null;
+  // }
+
+  // Claude: paragraph highlighting fixes - Centralized highlight management (NOT used)
+  // function setHighlight($element) {
+  //   // remove previous highlight
+  //   if (currentHighlightedElement) {
+  //     currentHighlightedElement.removeClass('tts-karaoke-highlight-paragraph');
+  //   }
+    
+  //   // add new highlight
+  //   if ($element && $element.length > 0) {
+  //     $element.addClass('tts-karaoke-highlight-paragraph');
+  //     currentHighlightedElement = $element;
+      
+  //     // scroll to element with better error handling
+  //     try {
+  //       var elementTop = $element.offset().top;
+  //       var scrollTop = elementTop - scrollBlockOffset;
+        
+  //       // Only scroll if element is not already visible
+  //       var viewportTop = $(window).scrollTop();
+  //       var viewportBottom = viewportTop + $(window).height();
+        
+  //       if (elementTop < viewportTop || elementTop > viewportBottom) {
+  //         window.scrollTo({
+  //           top: scrollTop,
+  //           behavior: scrollBehavior
+  //         });
+  //       }
+  //     } catch (error) {
+  //       console.warn('speak2me.core: Could not scroll to highlighted element', error);
+  //     }
+  //     return true;
+  //   }
+  //   return false;
+  // }
 
   function setHighlightParagraph(elementid) {
     // get the element with data-speak2me-id like 'speak2me-p-0'
@@ -394,6 +497,16 @@
           $elem.attr('data-speak2me-id', 'speak2me-p-' + (paragraphIdCounter++));
         }
       });
+
+      // getCachedContent().find('p, h1, h2, h3, h4, h5, h6, li, dt, dd').each(function() {
+      //   var $elem = $(this);
+      //   if (!$elem.attr('data-speak2me-id')) {
+      //     $elem.attr('data-speak2me-id', 'speak2me-p-' + (paragraphIdCounter++));
+      //   }
+      // });      
+
+      // build the paragraph cache for fast lookups (NOT used)
+      // buildParagraphCache();
     }
 
     scanSection();
@@ -557,11 +670,47 @@
             $elem.attr('data-speak2me-id', 'speak2me-p-' + (paragraphIdCounter++));
           }
         });
+
+        // build the paragraph cache for fast lookups (NOT used)
+        // buildParagraphCache();
       }
+
+      // default values for voice tags
+      // voiceTags['a']                    = new voiceTag('Link' + pause_spoken, '');
+      // voiceTags['q']                    = new voiceTag(pause_spoken, '');
+      // voiceTags['ol']                   = new voiceTag(pause_spoken, '');
+      // voiceTags['ul']                   = new voiceTag(pause_spoken, '');
+      // voiceTags['dl']                   = new voiceTag(pause_spoken, '');
+      // voiceTags['dt']                   = new voiceTag(pause_spoken, '');
+      // voiceTags['img']                  = new voiceTag('Image element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['table']                = new voiceTag('Table element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['card-header']          = new voiceTag(pause_spoken, '');
+      // voiceTags['.doc-example']         = new voiceTag('Example element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['.admonitionblock']     = new voiceTag('Attention element ' + pause_spoken, pause_spoken);
+      // voiceTags['.listingblock']        = new voiceTag('Text element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['.gist']                = new voiceTag('Gist element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['.slider']              = new voiceTag('Slider element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['.swiper-app']          = new voiceTag('Slider element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['.modal']               = new voiceTag('Info element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['.masonry']             = new voiceTag('Masonry element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['.lightbox-block']      = new voiceTag('Lightbox element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['.gallery']             = new voiceTag('Gallery element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['.audioblock']          = new voiceTag('Audio element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['.videoblock']          = new voiceTag('Video element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['.videojs-player']      = new voiceTag('Video element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['.youtube-player']      = new voiceTag('Video element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['.dailymotion-player']  = new voiceTag('Video element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['.vimeo-player']        = new voiceTag('Video element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['.wistia-player']       = new voiceTag('Video element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['figure']               = new voiceTag('Figure element' + pause_spoken, 'Element not spoken' + pause_spoken);
+      // voiceTags['parallax-quoteblock']  = new voiceTag('', pause_spoken);
+      // voiceTags['blockquote']           = new voiceTag('', pause_spoken);
+      // voiceTags['quoteblock']           = new voiceTag('', pause_spoken);
 
       // values of voice tags for pre- and post-pending spoken text
       //
       voiceTags['a']                    = new voiceTag('Link' + '.', '');
+//    voiceTags['dt']                   = new voiceTag('.', '');
       voiceTags['img']                  = new voiceTag('Image element' +  '.', 'Element not spoken' +  '.');
       voiceTags['table']                = new voiceTag('Table element' +  '.', 'Element not spoken' +  '.');
       voiceTags['card-header']          = new voiceTag('', '');
@@ -902,6 +1051,8 @@
 
         // Claude: paragraph highlighting fixes - Enhanced start event handler
         activeEventListeners.start = function(event) {
+          // clear any existing highlights
+          // clearAllHighlights();
 
           // handle scrolling for valid offsetTop positions
           if (speaker.offsetTop !== undefined) {
@@ -914,6 +1065,29 @@
             }
           }
 
+          // Claude: paragraph highlighting fixes - Improved paragraph finding and highlighting
+          // var $currentParagraph = findParagraphForChunk(speaker);
+          
+          // // Apply highlighting if we found a paragraph
+          // if ($currentParagraph && $currentParagraph.length > 0) {
+          //   var highlighted = setHighlight($currentParagraph);
+            
+          //   if (highlighted) {
+          //     // Store reference for cleanup
+          //     speaker.$currentHighlight = $currentParagraph;
+          //   } else {
+          //     console.warn('speak2me: Highlighting failed for chunk:', 
+          //       speaker.sectionText || speaker.text?.substring(0, 50));
+          //   }
+          // } else {
+          //   // Claude: paragraph highlighting fixes - Better debugging info
+          //   console.warn('speak2me: Could not find paragraph for chunk', {
+          //     speak2meId: speaker.speak2meId,
+          //     sectionText: speaker.sectionText,
+          //     textPreview: speaker.text?.substring(0, 50),
+          //     offsetTop: speaker.offsetTop
+          //   });
+          // }
         };
 
         // Claude: paragraph highlighting fixes - Enhanced end event handler
@@ -934,7 +1108,6 @@
 
           chunkSpoken = false;
           chunkCounter++;
-
         };
 
         speaker.addEventListener('start', activeEventListeners.start);
@@ -952,6 +1125,9 @@
             if (speaker.$paragraph !== undefined) {
               speaker.$paragraph.removeClass('tts-karaoke-highlight-paragraph');
             }
+
+            // Claude: paragraph highlighting fixes - Use centralized highlight clearing
+            // clearAllHighlights();
 
             // remove speak indication
             $('.mdib-speaker').removeClass('mdib-spin');
@@ -1074,6 +1250,23 @@
 
           $(this)[0].innerText = text;
         });
+
+        // Add a dot for a spoken pause to list elements
+        // clone.find('li').addBack('li').each(function() {
+        //   var text = $(this)[0].innerText;
+        //   text = text
+        //     .trim()
+        //     .replace(/\s+/g, ' ') + '.';
+
+        //     $(this)[0].innerText = text;
+        // });
+
+        // // Add pause to list elements
+        // clone.find('p,li').addBack('p,li').each(function() {
+        //   var text = $(this)[0].innerText;
+        //   text = text.replace(/\s+/g, ' ') + pause_spoken;
+        //   $(this)[0].innerText = text;
+        // });
 
         // Add pause to <br> tags
         clone.find('br').each(function() {
@@ -1345,6 +1538,10 @@
           [/etc\./g, 'and so on, '],
           [/z\. B\./g, 'zum Beispiel, '],
           [/[\!\?]/g, '. '],
+//        [/—/g, pause_spoken],
+//        [/–/g, pause_spoken],
+//        [/--/g, pause_spoken],
+          [/\s+/g, ' '],
           [/^\s*(\b\w+\b)\s*$/gm, "$1. "],
           [/^\s*(\b\w+\b\s*[0-9]{4})$/gm, "$1. "]
         ];
@@ -1409,8 +1606,6 @@
           }
 
           activeEventListeners = {
-            start:        null,
-            end:          null,            
             onstart:      null,
             onend:        null,
             onboundary:   null
