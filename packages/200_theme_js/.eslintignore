@@ -1,3 +1,4 @@
 **/*.min.js
 **/vendor/*
 **/dist/*
+**/js/modules/jquery-extensions/speak2me/*
