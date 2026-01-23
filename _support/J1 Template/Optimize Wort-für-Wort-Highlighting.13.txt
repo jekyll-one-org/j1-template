@@ -1,0 +1,74 @@
+Prompt
+--------------------------------------------------------------------------------
+
+Das wort-weise highlightning  ist nicht synchron (verzögert) zu den
+gesprochenen Worten. Was kann die Ursache sein?
+
+Bitte eine optimierte Version der Datei mit Fixes erstellen.
+Ergänzen des Kommentars "SYNC FIX" für alle Fixes in der optimierten Version.
+
+
+
+
+Claude, speak2me.13.js
+--------------------------------------------------------------------------------
+
+Ich werde die Datei analysieren, um das Problem mit dem verzögerten
+Wort-für-Wort-Highlighting zu identifizieren und eine optimierte Version
+erstellen.
+
+Ich habe das Problem identifiziert! Die Verzögerung beim Wort-Highlighting
+hat mehrere Ursachen:
+
+1. Fehlende Zeitkompensation: Die `charIndex` aus dem `boundary`-Event
+   wird nicht mit der tatsächlichen Sprachausgabe-Latenz kompensiert
+2. Ineffiziente DOM-Suche: Bei jedem Boundary-Event werden ALLE Spans
+   durchsucht (Zeile 186)
+3. Keine Vorausberechnung: Die Wort-Positionen werden nicht vorher gecached
+4. Browser-spezifische Timing-Unterschiede: Chrome/Edge/Firefox haben
+   unterschiedliche Boundary-Event-Delays
+
+Hier ist die optimierte Version mit mehreren Fixes:
+Ich habe die optimierte Version erstellt! Hier sind die Hauptursachen
+für die Verzögerung und die implementierten Fixes:
+
+## 🔍 Identifizierte Probleme:
+
+1. Fehlende Zeitkompensation - Browser feuern `boundary`-Events mit unterschiedlichem Timing
+2. Ineffiziente DOM-Suche - Bei jedem Event wurden ALLE Spans linear durchsucht
+3. Keine Position-Caching - Wortpositionen wurden nicht vorberechnet
+4. Fehlende Rate-Kompensation - Speech-Rate wurde nicht für Timing berücksichtigt
+
+## ✅ Implementierte Optimierungen:
+
+Die neue Version sollte ein deutlich synchroneres Wort-Highlighting liefern,
+besonders bei normaler bis erhöhter Speech-Rate.
+
+Alle Änderungen sind mit `// SYNCH FIX:` gekennzeichnet.
+
+### 1. Browser-spezifische Timing-Kompensation (Zeilen 67-79)
+- Chrome: -50ms
+- Firefox: 0ms (am genauesten)
+- Edge: -30ms
+- Safari: -100ms
+
+### 2. Word Position Cache (Zeilen 230-250)
+- Vorberechnung aller Wortpositionen beim Paragraph-Start
+- Binary Search statt linearer Suche (O(log n) statt O(n))
+- Direkter Element-Zugriff ohne DOM-Queries
+
+### 3. Predictive Highlighting (Zeilen 312-323)
+- Berechnet erwarteten Fortschritt basierend auf vergangener Zeit
+- Kompensiert Verzögerungen durch Browser-Events
+- Nutzt Speech-Rate für präzisere Vorhersage
+
+### 4. Optimierte DOM-Updates (Zeilen 252-300)
+- `requestAnimationFrame` für flüssige Updates
+- Batch-Verarbeitung statt einzelner Updates
+- Gecachte Span-Elemente
+
+### 5. Verbesserte Event-Handler (Zeilen 677-691)
+- Timing-Reset bei jedem Speech-Start
+- Angepasste charIndex-Verarbeitung
+- Sofortiges Highlight-Clearing beim Stop
+

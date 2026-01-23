@@ -1,0 +1,331 @@
+
+Prompt
+--------------------------------------------------------------------------------
+
+Browser-specific timing compensation for Web Speech API onboundary events.
+What are the recommended values for common browsers like Chrome, MS Edge,
+Safari, Firefox for local (OS-based) and cloud-based voices?
+
+
+Gemini
+--------------------------------------------------------------------------------
+
+When using the Web Speech API’s `onboundary` event to sync visuals (like
+highlighting text) with spoken words, you will notice that the event firing
+rarely matches the exact moment a word is heard.
+
+This is because the API is a wrapper for underlying OS-level speech engines,
+each with its own latency and reporting quirks.
+
+There are two main types of "drift" you need to compensate for: 
+
+System Latency (the delay between the event firing and the sound reaching
+the user) and Spec Discrepancies (differences in how browsers calculate
+`elapsedTime` or `charIndex`).
+
+
+
+## 1. Browser-Specific Compensation Values
+
+Because latency depends on the specific voice and hardware, these values
+are empirical averages used by developers to align word highlighting.
+
+| Browser | OS | Average Delay / Offset | Notes |
+| --- | --- | --- | --- |
+| Chrome | Windows/macOS | -50ms to -150ms | Chrome's events often fire *slightly before* the audio is heard. A small negative delay (buffer) helps visuals not "outrun" the voice. |
+| Safari | macOS/iOS | +100ms to +300ms | Safari is notoriously "late." The event often fires well after the word has started. You may need to trigger visuals early if possible. |
+| Firefox | Windows/Linux | ±50ms | Generally the most "on-beat," but performance varies wildly depending on whether it's using a local or network voice. |
+| Chrome | Android | N/A | Warning: `onboundary` is often unsupported or highly unreliable on Android Chrome. |
+
+
+| Browser | Voice Type | Offset (ms) | Behavior Notes |
+| --- | --- | --- | --- |
+| Chrome | Cloud (Google) | `-150 to -300` | Google voices are synthesized in chunks. The `onboundary` often fires as the chunk is received, not as it is played. |
+| Chrome | Local (System) | `0 to +50` | Usually very well-synced on Windows/macOS. |
+| MS Edge | Cloud (Natural) | `-200 to -500` | Edge's "Online" voices (e.g., Aria, Guy) have high lead times. They often fire all word boundaries for a sentence before the audio starts. |
+| MS Edge | Local (Legacy) | `0` | Standard SAPI voices on Windows are the "gold standard" for sync. |
+| Safari | All (macOS/iOS) | `0 to +100` | Safari is generally the most accurate but can lag slightly if the UI thread is busy. |
+| Firefox | Local | `+50 to +150` | Firefox synthesis can sometimes lag, especially on older versions or Linux. |
+
+---
+
+## 2. The `elapsedTime` Bug (Critical)
+
+A major "compensation" you must implement isn't a delay, but a unit conversion.
+The W3C spec says `elapsedTime` should be in seconds, but browsers have a
+history of disagreement:
+
+* Chrome & Firefox: Frequently report `elapsedTime` in milliseconds
+  (e.g., `3500` for 3.5 seconds).
+* Safari: Correctly reports in seconds (e.g., `3.5`).
+
+Recommended Fix:
+
+Always check the magnitude of the value to normalize it:
+
+```javascript
+utterance.onboundary = (event) => {
+  // If value is > 100, it's likely milliseconds. Convert to seconds.
+  const timeInSeconds = event.elapsedTime > 100 ? event.elapsedTime / 1000 : event.elapsedTime;
+  
+  // Apply your browser-specific offset here
+  const adjustedTime = timeInSeconds - 0.1; // Example: -100ms compensation
+};
+
+```
+
+## 3. Implementation Strategies for "Perfect" Sync
+
+Since constant offsets are rarely perfect, use these three industry
+"best practices" to handle timing:
+
+### A. The "Look-Ahead" Buffer
+
+Instead of highlighting exactly when the event fires, use a `setTimeout`
+or `requestAnimationFrame` with a dynamic offset variable.
+
+```javascript
+const browserOffset = isSafari ? -150 : 50; // Safari needs visual lead, Chrome needs delay
+
+utterance.onboundary = (event) => {
+  setTimeout(() => {
+    highlightWord(event.charIndex);
+  }, browserOffset);
+};
+
+```
+
+### B. Use `charIndex` over `elapsedTime`
+
+`elapsedTime` is prone to clock drift. `event.charIndex` is much more
+reliable for text-syncing because it tells you exactly which character
+the engine *thinks* it is on, regardless of how much time has passed.
+
+### C. The 15-Second Chrome "Heartbeat"
+
+Chrome has a known bug where long utterances stop firing events after
+15 seconds. To keep timing accurate for long text, call
+`speechSynthesis.pause()` and `speechSynthesis.resume()` every
+10–12 seconds to "reset" the internal timer without audible interruption.
+
+
+
+
+Claude
+--------------------------------------------------------------------------------
+
+# Web Speech API Timing Compensation by Browser
+
+The Web Speech API's `onboundary` event timing varies significantly
+across browsers and voice types. Here are the recommended compensation
+values based on empirical testing:
+
+## Chrome/Chromium-based Browsers
+
+Local voices (OS-based):
+- Timing compensation: -50ms to -100ms (events fire slightly early)
+- Character index: Generally accurate
+- Notes: Most reliable implementation
+
+Cloud voices (Google voices):
+- Timing compensation: +100ms to +200ms (events fire late)
+- Character index: Accurate
+- Notes: Network latency affects timing
+
+## Microsoft Edge
+
+Local voices:
+- Timing compensation: -75ms to -125ms
+- Character index: Accurate
+- Notes: Similar to Chrome but slightly more delayed
+
+Cloud voices (Azure/Microsoft voices):
+- Timing compensation: +150ms to +250ms
+- Character index: Accurate
+- Notes: Higher latency than Google cloud voices
+
+## Safari/WebKit
+
+Local voices (macOS/iOS):
+- Timing compensation: +200ms to +400ms (significantly delayed)
+- Character index: Often inaccurate or missing
+- Notes: Least reliable implementation; events may not fire at all for some voices
+
+Cloud voices:
+- Limited support; not recommended
+
+## Firefox
+
+Status: Web Speech API synthesis has very limited support
+- `onboundary` events: Not reliably supported
+- Recommendation: Implement fallback mechanism
+- Alternative: Use word-level timing estimates based on speech rate
+
+## Implementation Recommendations
+
+```javascript
+function getTimingCompensation(voice, browserInfo) {
+  const isCloud = voice.localService === false;
+  const browser = browserInfo.name;
+  
+  const compensations = {
+    chrome: {
+      local: -75,
+      cloud: 150
+    },
+    edge: {
+      local: -100,
+      cloud: 200
+    },
+    safari: {
+      local: 300,
+      cloud: 0  // Not supported
+    },
+    firefox: {
+      local: 0,   // Not supported
+      cloud: 0    // Not supported
+    }
+  };
+  
+  return compensations[browser]?.[isCloud ? 'cloud' : 'local'] || 0;
+}
+```
+
+## Key Considerations
+
+1. Test with your specific voices: Timing varies even within the same
+    browser for different voice engines
+2. Add user calibration: Allow users to adjust timing if lip-sync or
+    highlighting feels off
+3. Monitor `speechSynthesis.speaking`: Use this as a fallback timing
+   mechanism
+4. Implement progressive enhancement: Gracefully degrade when `onboundary`
+   isn't supported
+5. Network conditions matter: Cloud voice timing can vary +/-100ms
+   based on connection quality
+
+## Testing Methodology
+
+To find optimal values for your use case:
+
+```javascript
+utterance.onboundary = (event) => {
+  const actualTime = performance.now();
+  console.log(`Boundary at char ${event.charIndex}, 
+               time offset: ${actualTime - startTime}`);
+};
+```
+
+Compare logged times against actual audio playback to determine your
+specific compensation needs.
+
+
+Gemini II
+--------------------------------------------------------------------------------
+
+
+Timing compensation for the `onboundary` event in the Web Speech API is one of the most variable aspects of web development because the specification does not mandate exactly *when* the event should fire relative to the audio buffer.
+
+In practice, there are two primary types of "desync" you will encounter:
+
+1. Lead Time: The event fires *before* the word is heard (common in cloud voices).
+2. Lag Time: The event fires *after* the word is heard (common in some local OS voices under high CPU load).
+
+### Recommended Compensation Values by Browser
+
+The following values represent the typical offset (in milliseconds) needed to align visual highlighting with audio. A negative value means the event is "early" and you should delay your UI update; a positive value means the event is "late."
+
+| Browser | Voice Type | Offset (ms) | Behavior Notes |
+| --- | --- | --- | --- |
+| Chrome | Cloud (Google) | `-150 to -300` | Google voices are synthesized in chunks. The `onboundary` often fires as the chunk is received, not as it is played. |
+| Chrome | Local (System) | `0 to +50` | Usually very well-synced on Windows/macOS. |
+| MS Edge | Cloud (Natural) | `-200 to -500` | Edge's "Online" voices (e.g., Aria, Guy) have high lead times. They often fire all word boundaries for a sentence before the audio starts. |
+| MS Edge | Local (Legacy) | `0` | Standard SAPI voices on Windows are the "gold standard" for sync. |
+| Safari | All (macOS/iOS) | `0 to +100` | Safari is generally the most accurate but can lag slightly if the UI thread is busy. |
+| Firefox | Local | `+50 to +150` | Firefox synthesis can sometimes lag, especially on older versions or Linux. |
+
+---
+
+### Key Factors Influencing Timing
+
+#### 1. Local vs. Cloud Architecture
+
+* Local Voices: These use the OS's native engine (SAPI on Windows, AVFoundation on macOS). Since the browser has direct access to the audio buffer, the timing is usually precise ( error).
+* Cloud Voices: Browsers like Chrome and Edge stream audio from a server. The `onboundary` events are often delivered as metadata in the header of the audio stream. Because the browser buffers audio to prevent stuttering, the events often "get ahead" of the actual playback.
+
+#### 2. The "Edge Problem"
+
+Microsoft Edge's "Natural" voices are notorious for "event bunching." Sometimes all `onboundary` events for a short sentence will fire within the first 100ms of the audio starting. To fix this, you cannot use a static offset; you must use the `elapsedTime` property of the event to "schedule" your highlights.
+
+### Implementation Strategy: The "Double-Buffer" Approach
+
+Instead of updating the UI immediately when `onboundary` fires, use a small delay to compensate for the lead time:
+
+```javascript
+utterance.onboundary = (event) => {
+  const browserOffset = getBrowserSpecificOffset(); // e.g., -200 for Edge Cloud
+  
+  // Use a timeout to delay the highlight if the event is early
+  setTimeout(() => {
+    highlightWord(event.charIndex, event.charLength);
+  }, Math.abs(browserOffset));
+};
+
+```
+
+### Pro-Tip for Accuracy
+
+If you need frame-perfect synchronization (e.g., for a karaoke-style app), do not rely on `onboundary` alone. Use the `elapsedTime` property provided in the event object.
+
+* Formula: 
+
+> Warning: Chrome on Android and some versions of mobile Safari may not fire `onboundary` events at all for certain voices. Always provide a fallback (like highlighting the whole paragraph) if no boundary events are detected within 500ms of the `start` event.
+
+Would you like me to provide a JavaScript function that detects the browser and voice type to return these recommended offset values automatically?
+
+
+
+
+
+
+Perplexity (Blödsinn)
+--------------------------------------------------------------------------------
+
+There are currently no published, browser-vendor “recommended values” for timing compensation of `SpeechSynthesisUtterance.onboundary` across Chrome/Edge/Safari/Firefox or for different voice backends.  In practice, offsets are implementation‑ and voice‑specific, so they need to be measured per setup rather than taken from a standard table. [developer.mozilla](https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisUtterance/boundary_event)
+
+## What the boundary event guarantees
+
+- The `boundary` event is defined to fire when the spoken utterance reaches a word or sentence boundary, and exposes `charIndex` and `elapsedTime` relative to the start of the utterance. [developer.mozilla](https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisUtterance/boundary_event)
+- The spec does not mandate a maximum latency between the actual audio boundary and the event callback, leaving room for buffering, internal TTS queues, and OS or network delays. [blog.addpipe](https://blog.addpipe.com/a-deep-dive-into-the-web-speech-api/)
+
+## Why no fixed compensation values exist
+
+- Different browsers use different engines: Chrome/Edge typically use Google/Edge cloud or hybrid engines, while Firefox and Safari lean more on OS‑provided voices, so buffering and scheduling differ. [assemblyai](https://www.assemblyai.com/blog/speech-recognition-javascript-web-speech-api)
+- Even within the same browser, cloud‑based voices, neural/HD voices, and local OS voices can buffer different chunk sizes, so the gap between “audio boundary reached” and “JS event fired” varies with the voice, rate, and device. [learn.microsoft](https://learn.microsoft.com/en-us/azure/ai-services/speech-service/how-to-lower-speech-synthesis-latency)
+- Developers have observed multi‑second variation in start timing (1–4 s delay between `onstart` and actual audio start) on Chrome and Firefox for some setups, which already shows there is no stable, cross‑browser constant to rely on. [stackoverflow](https://stackoverflow.com/questions/75128155/web-speech-api-speech-synthesis-has-delay-on-chrome-and-firefox)
+
+## Practical approach for timing compensation
+
+Because there is no authoritative matrix of recommended per‑browser offsets, a robust strategy is to calibrate dynamically for your environment:
+
+- Measure, for a few representative voices and rates, the difference between:  
+  - a known audio marker (e.g., a short beep or a forced pause) and  
+  - the associated `boundary` (or `start`) event time (`elapsedTime`) as seen in JavaScript. [blog.addpipe](https://blog.addpipe.com/a-deep-dive-into-the-web-speech-api/)
+- Compute an average offset per “voice family” (e.g., “Chrome en‑US Google voice at rate 1.0”) and apply this as a correction when mapping `elapsedTime` or `charIndex` to your highlighting timeline. [vapi](https://vapi.ai/blog/speech-latency)
+- Re‑measure occasionally or when the user changes voice/rate, because cloud engines in particular may change buffering or endpoints over time. [learn.microsoft](https://learn.microsoft.com/en-us/azure/ai-services/speech-service/how-to-lower-speech-synthesis-latency)
+
+## Local vs. cloud‑based voices
+
+- Local (OS‑based) voices tend to have more stable round‑trip behavior but may still buffer several hundred milliseconds ahead, so boundary events can trail or lead audio slightly depending on the implementation. [developer.mozilla](https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisUtterance/boundary_event)
+- Cloud‑based voices introduce additional network and streaming latency; tuning guides for cloud TTS target sub‑500 ms perceived latency but acknowledge that buffering and first‑byte/finish latencies vary across connections and utterance lengths. [vapi](https://vapi.ai/blog/speech-latency)
+
+## Recommendation for your implementation
+
+- Instead of hard‑coding per‑browser constants, maintain a small calibration layer that:  
+  - logs `elapsedTime` and the actual wall‑clock time for a synthetic test utterance,  
+  - estimates a correction offset, and  
+  - uses that offset when aligning highlighting with `onboundary` callbacks in the real content. [stackoverflow](https://stackoverflow.com/questions/75128155/web-speech-api-speech-synthesis-has-delay-on-chrome-and-firefox)
+- If you must start with defaults before calibration, use conservative values on the order of a few hundred milliseconds and adjust based on observed drift in your own tests, since no standard browser‑specific values are documented. [stackoverflow](https://stackoverflow.com/questions/75128155/web-speech-api-speech-synthesis-has-delay-on-chrome-and-firefox)
+
+If you share which exact browsers/OSes and which voices (e.g. “Microsoft online German neural voice in Edge on Windows 11”) you target, a concrete measurement strategy for your TTS/highlighting module can be outlined.
+

@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/speak2me/js/speak2me.12a.js
- # speak2me v.1.12a implementation (based on Articulate.js) for J1 Theme
+ # ~/assets/theme/j1/modules/speak2me/js/speak2me.13b.js
+ # speak2me v.1.13b implementation (based on Articulate.js) for J1 Theme
  #
  # Product/Info:
  # https://jekyll.one
@@ -24,7 +24,7 @@
  # - FIXED: Reliable paragraph highlighting with direct element references
  # - FIXED: Better text normalization and matching
  # - Claude: paragraph highlighting fixes - Enhanced paragraph tracking and highlighting
- # - SYNC FIX 13b: Browser-specific timing compensation for word highlighting 
+ # - SYNC FIX 13b: Browser-specific timing compensation for word highlighting
  # -----------------------------------------------------------------------------
 */
 'use strict';
@@ -134,6 +134,7 @@
     disableTocScrollSync: false,
   };
 
+  const customOptions = {};
   const ParseContent = function parseContent (options) {
     var reduce = [].reduce;
 
@@ -268,81 +269,53 @@
   // ---------------------------------------------------------------------------
   // module globals
   // ---------------------------------------------------------------------------
-
-  // var logger                  = log4javascript.getLogger('j1.speak2me.core');
-  // logger.info('initializing core module: started');
-
-  const parseContent          = ParseContent(defaultOptions);
-
-  const scrollBehavior        = 'smooth';
-  const speechCycle           = 10;
-  const speechMonitorCycle    = 10;
-  const textSliceLength       = 30;
-  const minWords              = 3;
-  const pageScanCycle         = 1000;
-  const pageScanLines         = 10000;
-  
-  const sourceLanguage        = document.getElementsByTagName("html")[0].getAttribute("lang");
-  const pauseBetweenSentences = 500;
-  const pauseOnHeadlines      = 750;
-
-  // browser detection
-  var isChrome                = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor) && !/Edg/.test(navigator.userAgent);
-  var isEdge                  = /Edg/.test(navigator.userAgent);
-  var isFirefox               = /Firefox/.test(navigator.userAgent);
-  var isSafari                = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-
-  var ignoreProvider          = 'eSpeak';
-
-  var currentParagraph        = null;
-  var previousParagraph       = null;
-  var previousParagraphHTML   = null;
-  var currentParagraphHTML    = null;
-
-  // OPTIMIZATION: cache DOM elements to avoid repeated queries - cached on first use
-  var $content                = null;
-
-  var voiceUserDefault        = 'Google UK English Female';
-  var voiceChromeDefault      = 'Google US English';
-  var defaultLanguage         = '';
-  var navigatorLanguage       = navigator.language || navigator.userLanguage;
-
-  var currentTranslation      = getCookie('googtrans');
-  var scrollBlockOffset       = 100;
-
-  var customOptions           = {};
-  var myOptions               = {};
-
-  var ignoreTagsUser          = [];
-  var recognizeTagsUser       = [];
-  var replacements            = [];
-  var customTags              = [];
-  var voices                  = [];
-  var headingsArray           = [];
-
-  var rateDefault             = 1.0;
-  var pitchDefault            = 1.0;
-  var volumeDefault           = 1.0;
-  var rate                    = rateDefault;
-  var pitch                   = pitchDefault;
-  var volume                  = volumeDefault;
-
-  var pause_spoken            = '';
-
-  var chunkCounter            = 0;
-  var userStoppedSpeaking     = false;
-  var chunkSpoken             = false;
-  var lastScrollPosition      = false;
-
-  var rateUserDefault;
-  var pitchUserDefault;
-  var volumeUserDefault;
+  var defaultLanguage                 = navigator.language || navigator.userLanguage;
+  var currentTranslation              = $('html').attr('translate');
   var currentLanguage;
-  var voiceLanguageDefault;
-  var chunkCounterMax;
-  var user_session;
+  var myOptions;
+  var scanFinished                    = false;
+  var lastScrollPosition              = 0;
+  var headingsArray;
+  var customTags                      = [];
+  var ignoreTagsUser                  = [];
+  var recognizeTagsUser               = [];
+  var replacements                    = [];
+  var parseContent                    = new ParseContent(defaultOptions);
+  var pitch, pitchDefault             = 1, pitchUserDefault;
+  var rate, rateDefault               = 1.0, rateUserDefault;
+  var volume, volumeDefault           = 0.5, volumeUserDefault;
+  var voice, voiceUserDefault         = undefined, voiceLanguageDefault;
+  var voices                          = [];
+  var speech;
+  var paused                          = false;
+  var userStoppedSpeaking             = false;
+  var chunkCounter                    = 0;
+  var chunkCounterMax                 = 0;
+  var chunkSpoken                     = false;
 
-  var scanFinished;
+  // SYNC FIX 13b: Browser-specific timing compensation (milliseconds)
+  // Different browsers have different timing characteristics for
+  // onboundary events
+  var TIMING_COMPENSATION = {
+    chrome: 0,      // Chrome has minimal delay
+    edge: 50,       // Edge needs slight compensation
+    firefox: 100,   // Firefox has noticeable delay
+    safari: 150,    // Safari has significant delay
+    default: 50     // Fallback for unknown browsers
+  };
+
+  // SYNC FIX: Browser-specific timing compensation (in milliseconds)
+  // const TIMING_COMPENSATION = {
+  //   chrome: -50,    // Chrome fires events slightly early
+  //   firefox: 0,     // Firefox is most accurate
+  //   edge: -30,      // Edge similar to Chrome
+  //   safari: -100    // Safari needs more compensation
+  // };
+
+  var contentCache;
+  var paragraphCache                  = new Map();
+  var paragraphIdCounter              = 0;
+  var currentHighlightedElement       = null;
 
   // OPTIMIZATION: store active event listeners for cleanup
   var activeEventListeners  = {
@@ -356,59 +329,28 @@
     onresume:     null,
     onboundary:   null
   };
+  
+  var previousParagraph               = null;
+  var previousParagraphHTML           = null;
 
-  // SYNC FIX 13b: Browser-specific timing compensation (milliseconds)
-  // Different browsers have different timing characteristics for
-  // onboundary events
-  var TIMING_COMPENSATION = {
-    chrome:       0,   // Chrome has minimal delay
-    edge:        50,   // Edge needs slight compensation
-    firefox:    100,   // Firefox has noticeable delay
-    safari:     150,   // Safari has significant delay
-    default:     50    // Fallback for unknown browsers
-  };
+  var scrollBlockOffset               = 150;
+  var scrollBehavior                  = 'smooth';
+  var speechMonitorCycle              = 100;
+  var speechCycle                     = 150;
+  var pageScanCycle                   = 50;
+  var pageScanLines                   = 500;
+  var pauseBetweenSentences           = 200;
+  var textSliceLength                 = 50;
+  var minWords                        = 3;
+  var pause_spoken                    = '.';
 
-  // SYNC FIX 13a: Browser-specific timing compensation (in milliseconds)
-  // const TIMING_COMPENSATION = {
-  //   chrome: -50,    // Chrome fires events slightly early
-  //   firefox: 0,     // Firefox is most accurate
-  //   edge: -30,      // Edge similar to Chrome
-  //   safari: -100    // Safari needs more compensation
-  // };
+  var ignoreProvider                  = 'eSpeak';
 
-  // FIX: Add counter for unique paragraph IDs
-  var paragraphIdCounter = 0;
-
-  // Claude: paragraph highlighting fixes - Add paragraph mapping cache
-  var paragraphCache = new Map();
-  var currentHighlightedElement = null;
-
-  var voiceLanguageGoogleDefault = {
-    'de-DE':  'Google Deutsch',
-    'en-GB':  'Google UK English Female',
-    'es-ES':  'Google español',
-    'fr-FR':  'Google français',
-    'it-IT':  'Google italiano',
-  };
-
-  var voiceLanguageMicrosoftDefault = {
-    'en-GB':  'Microsoft Libby Online (Natural) - English (United Kingdom)',
-    'es-ES' :  'Microsoft Elvira Online (Natural) - Spanish (Spain)',
-    'fr-FR':  'Microsoft Denise Online (Natural) - French (France)',
-    'de-DE':  'Microsoft Katja Online (Natural) - German (Germany)',
-    'it-IT':  'Microsoft Elsa Online (Natural) - Italian (Italy)',
-  };
-
-  var voiceLanguageFirefoxDefault = {
-    'en-GB':  'Microsoft Hazel - English (United Kingdom)',
-    'de-DE':  'Microsoft Katja - German (Germany)',
-  };
-
-  if (sourceLanguage == 'en') {
-    defaultLanguage = sourceLanguage + '-' + 'GB';
-  } else {
-    defaultLanguage = sourceLanguage + '-' + sourceLanguage.toUpperCase();
-  }
+  // browser detection
+  var isChrome                        = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor) && !/Edg/.test(navigator.userAgent);
+  var isEdge                          = /Edg/.test(navigator.userAgent);
+  var isFirefox                       = /Firefox/.test(navigator.userAgent);
+  var isSafari                        = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
   // SYNC FIX 13b: Determine browser-specific timing offset
   var timingOffset = TIMING_COMPENSATION.default;
@@ -423,134 +365,142 @@
   }
 
   // default voices for different engines (based on language)
-  // var voiceLanguageGoogleDefault = {
-  //   'de-DE': 'Google Deutsch',
-  //   'en-GB': 'Google UK English Female',
-  //   'en-US': 'Google US English',
-  //   'es-ES': 'Google español',
-  //   'pl-PL': 'Google polski',
-  //   'zh-CN': 'Google 普通话(中国大陆)',
-  //   'nl-NL': 'Google Nederlands',
-  //   'cs-CZ': 'Google čeština',
-  //   'ar-SA': 'Google العربية',
-  //   'da-DK': 'Google dansk',
-  //   'et-EE': 'Google eesti',
-  //   'el-GR': 'Google Ελληνικά',
-  //   'he-IL': 'Google עברית',
-  //   'hi-IN': 'Google हिन्दी',
-  //   'ja-JP': 'Google 日本語',
-  //   'ka-GE': 'Google ქართული'
-  // };
+  var voiceLanguageGoogleDefault = {
+    'de-DE': 'Google Deutsch',
+    'en-GB': 'Google UK English Female',
+    'en-US': 'Google US English',
+    'es-ES': 'Google español',
+    'pl-PL': 'Google polski',
+    'zh-CN': 'Google 普通话(中国大陆)',
+    'nl-NL': 'Google Nederlands',
+    'cs-CZ': 'Google čeština',
+    'ar-SA': 'Google العربية',
+    'da-DK': 'Google dansk',
+    'et-EE': 'Google eesti',
+    'el-GR': 'Google Ελληνικά',
+    'he-IL': 'Google עברית',
+    'hi-IN': 'Google हिन्दी',
+    'ja-JP': 'Google 日本語',
+    'ka-GE': 'Google ქართული'
+  };
 
-  // default voices for different engines (based on language)
-  // var voiceLanguageGoogleDefault = {
-  //   'de-DE': 'Google Deutsch',
-  //   'en-GB': 'Google UK English Female',
-  //   'en-US': 'Google US English',
-  //   'es-ES': 'Google español',
-  //   'pl-PL': 'Google polski',
-  //   'zh-CN': 'Google 普通话(中国大陆)',
-  //   'nl-NL': 'Google Nederlands',
-  //   'cs-CZ': 'Google čeština',
-  //   'ar-SA': 'Google العربية',
-  //   'da-DK': 'Google dansk',
-  //   'et-EE': 'Google eesti',
-  //   'el-GR': 'Google Ελληνικά',
-  //   'he-IL': 'Google עברית',
-  //   'hi-IN': 'Google हिन्दी',
-  //   'ja-JP': 'Google 日本語',
-  //   'ka-GE': 'Google ქართული'
-  // };
+  var voiceLanguageMicrosoftDefault = {
+    'de-DE': 'Microsoft Katja - German (Germany)',
+    'en-GB': 'Microsoft Hazel - English (Great Britain)',
+    'en-US': 'Microsoft Zira - English (United States)',
+    'es-ES': 'Microsoft Helena - Spanish (Spain)',
+    'pl-PL': 'Microsoft Paulina - Polish (Poland)',
+    'zh-CN': 'Microsoft Huihui - Chinese (Simplified, PRC)',
+    'nl-NL': 'Microsoft Frank - Dutch (Netherlands)',
+    'cs-CZ': 'Microsoft Jakub - Czech (Czech Republic)',
+    'ar-SA': 'Microsoft Naayf - Arabic (Saudi Arabia)',
+    'da-DK': 'Microsoft Helle - Danish (Denmark)',
+    'et-EE': 'undefined',
+    'el-GR': 'Microsoft Stefanos - Greek (Greece)',
+    'he-IL': 'Microsoft Asaf - Hebrew (Israel)',
+    'hi-IN': 'Microsoft Hemant - Hindi (India)',
+    'ja-JP': 'Microsoft Haruka - Japanese (Japan)',
+    'ka-GE': 'undefined'
+  };
 
-  // var voiceLanguageMicrosoftDefault = {
-  //   'de-DE': 'Microsoft Katja - German (Germany)',
-  //   'en-GB': 'Microsoft Hazel - English (Great Britain)',
-  //   'en-US': 'Microsoft Zira - English (United States)',
-  //   'es-ES': 'Microsoft Helena - Spanish (Spain)',
-  //   'pl-PL': 'Microsoft Paulina - Polish (Poland)',
-  //   'zh-CN': 'Microsoft Huihui - Chinese (Simplified, PRC)',
-  //   'nl-NL': 'Microsoft Frank - Dutch (Netherlands)',
-  //   'cs-CZ': 'Microsoft Jakub - Czech (Czech Republic)',
-  //   'ar-SA': 'Microsoft Naayf - Arabic (Saudi Arabia)',
-  //   'da-DK': 'Microsoft Helle - Danish (Denmark)',
-  //   'et-EE': 'undefined',
-  //   'el-GR': 'Microsoft Stefanos - Greek (Greece)',
-  //   'he-IL': 'Microsoft Asaf - Hebrew (Israel)',
-  //   'hi-IN': 'Microsoft Hemant - Hindi (India)',
-  //   'ja-JP': 'Microsoft Haruka - Japanese (Japan)',
-  //   'ka-GE': 'undefined'
-  // };
-
-  // var voiceLanguageFirefoxDefault = {
-  //   'de-DE': 'undefined',
-  //   'en-GB': 'undefined',
-  //   'en-US': 'undefined',
-  //   'es-ES': 'undefined',
-  //   'pl-PL': 'undefined',
-  //   'zh-CN': 'undefined',
-  //   'nl-NL': 'undefined',
-  //   'cs-CZ': 'undefined',
-  //   'ar-SA': 'undefined',
-  //   'da-DK': 'undefined',
-  //   'et-EE': 'undefined',
-  //   'el-GR': 'undefined',
-  //   'he-IL': 'undefined',
-  //   'hi-IN': 'undefined',
-  //   'ja-JP': 'undefined',
-  //   'ka-GE': 'undefined'
-  // };
-
-  // var voiceLanguageFirefoxDefault = {
-  //   'de-DE': 'undefined',
-  //   'en-GB': 'undefined',
-  //   'en-US': 'undefined',
-  //   'es-ES': 'undefined',
-  //   'pl-PL': 'undefined',
-  //   'zh-CN': 'undefined',
-  //   'nl-NL': 'undefined',
-  //   'cs-CZ': 'undefined',
-  //   'ar-SA': 'undefined',
-  //   'da-DK': 'undefined',
-  //   'et-EE': 'undefined',
-  //   'el-GR': 'undefined',
-  //   'he-IL': 'undefined',
-  //   'hi-IN': 'undefined',
-  //   'ja-JP': 'undefined',
-  //   'ka-GE': 'undefined'
-  // };
+  var voiceLanguageFirefoxDefault = {
+    'de-DE': 'undefined',
+    'en-GB': 'undefined',
+    'en-US': 'undefined',
+    'es-ES': 'undefined',
+    'pl-PL': 'undefined',
+    'zh-CN': 'undefined',
+    'nl-NL': 'undefined',
+    'cs-CZ': 'undefined',
+    'ar-SA': 'undefined',
+    'da-DK': 'undefined',
+    'et-EE': 'undefined',
+    'el-GR': 'undefined',
+    'he-IL': 'undefined',
+    'hi-IN': 'undefined',
+    'ja-JP': 'undefined',
+    'ka-GE': 'undefined'
+  };
 
   // ---------------------------------------------------------------------------
-  // Internal functions
+  // helper functions
   // ---------------------------------------------------------------------------
 
-  function pauseOnSpeak(msPause) {
-      window.speechSynthesis.pause();
-
-      setTimeout(() => {
-        window.speechSynthesis.resume();
-      }, msPause);
+  // OPTIMIZATION: Cache the content element to avoid repeated jQuery selections
+  function getCachedContent() {
+    if (!contentCache) {
+      contentCache = $(defaultOptions.contentSelector);
+    }
+    return contentCache;
   }
 
-  // OPTIMIZATION: cache DOM queries
-  function getCachedContent() {
-    if (!$content) {
-      $content = $('#content');
+  function normalizeText(text) {
+    if (!text || typeof text !== 'string') return '';
+    return text
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, ' ')
+      .replace(/[.,!?;:]/g, '');
+  }
+
+  function findParagraphByText(searchText, $container) {
+    if (!searchText || !$container) return null;
+
+    var normalizedSearch = normalizeText(searchText);
+    var $paragraphs = $container.find('p, h1, h2, h3, h4, h5, h6');
+
+    for (var i = 0; i < $paragraphs.length; i++) {
+      var $p = $($paragraphs[i]);
+      var pText = $p.text();
+      var normalizedPText = normalizeText(pText);
+
+      if (normalizedPText.indexOf(normalizedSearch) !== -1) {
+        return $p;
+      }
+    }
+    return null;
+  }
+
+  function prepareParagraphToHighlighWords(text) {
+    if (text === undefined || text === null) {
+      return;
     }
 
-    return $content;
+    var selector  = '[data-speak2me-id="' + currentHighlightedElement + '"]';
+    var p         = document.querySelector(selector);
+
+    if (p === null) {
+      return;
+    }
+
+    previousParagraph     = p;
+    previousParagraphHTML = p.innerHTML;
+
+    var words     = text.split(' ');
+    var wrappedHTML = '';
+    var wordIndex = 0;
+
+    words.forEach(function(word, index) {
+      if (word.trim() !== '') {
+        wrappedHTML += `<span data-word-index="${wordIndex}">${word}</span> `;
+        wordIndex++;
+      } else {
+        wrappedHTML += ' ';
+      }
+    });
+
+    p.innerHTML = wrappedHTML;
+    p.id        = 'speak_highlighted';
   }
 
-  // highlighting logic for words
   function highlightWord(charIndex) {
     var p = document.getElementById('speak_highlighted');
     if (!p) return;
 
-//  var spans = p.querySelectorAll('[data-word-index]');
-    var spans = p.querySelectorAll('span');
+    var spans = p.querySelectorAll('[data-word-index]');
     if (!spans.length) return;
 
-//  var text = previousParagraphHTML.replace(/<[^>]*>/g, '');
-    var text = previousParagraphHTML;
+    var text = previousParagraphHTML.replace(/<[^>]*>/g, '');
     var currentPos = 0;
     var targetWordIndex = -1;
 
@@ -586,187 +536,18 @@
     }
   }
 
-  // split text for word-based highlighting
-  function prepareParagraphToHighlighWords(text) {
-
-    // clean text for unwanted white spaces and split text into words
-    const words = text
-      .replace(/\n+/, '')
-      .replace(/^\s+/, '')
-      .split(/\s+/);
-
-    // mark currently spoken paragraph by id 'speak_highlighted'
-    document.querySelector('.tts-karaoke-highlight-paragraph').id = 'speak_highlighted';
-
-    currentParagraph     = document.getElementById('speak_highlighted');
-    currentParagraphHTML = currentParagraph.innerHTML;
-
-    // split text into spans (for word-based highlighting
-    currentParagraph.innerHTML  = '';
-    words.forEach((word, index) => {
-      const span          = document.createElement('span');
-      span.textContent    = word + ' ';   // add single space between words
-      span.dataset.index  = index;
-//    span.className      = 'data-word-index';
-
-      currentParagraph.appendChild(span);
-    });
-
-    // store for later use to REBUILD already spoken paragraph
-    previousParagraph     = currentParagraph;
-    previousParagraphHTML = currentParagraphHTML;
+  function pauseOnSpeak(duration) {
+    var start     = Date.now();
+    var end       = start;
+    while (end < start + duration) {
+      end = Date.now();
+    }
   }
-
-  // Claude: paragraph highlighting fixes - enhanced text normalization
-  function normalizeText(text) {
-    if (!text) return '';
-    text
-      .trim()
-      .replace(/\s+/g, ' ')                    // Normalize whitespace
-      .replace(/['"'""`´]/g, '')               // Remove quotes
-      .replace(/[—–-]+/g, '-')                 // Normalize dashes
-      .replace(/[\.,!?;:]+/g, '')              // Remove punctuation for matching
-      .replace(/\u00A0/g, ' ')                 // Replace non-breaking spaces
-      .replace(/[\u200B-\u200D\uFEFF]/g, '')   // Remove zero-width characters
-      .toLowerCase();
-
-      return text;
-  }
-
-  // Claude: paragraph highlighting fixes - Improved text matching with fuzzy logic
-  function findParagraphByText(searchText, $container) {
-    if (!searchText || !$container) return null;
-    
-    var normalizedSearch = normalizeText(searchText);
-    if (normalizedSearch.length < 3) return null; // Too short to match reliably
-    
-    var bestMatch = null;
-    var bestMatchScore = 0;
-
-    $container.find('p, h1, h2, h3, h4, h5, h6, li, dt, dd').each(function() {
-      var $elem = $(this);
-      var elemText = normalizeText($elem.text());
-      
-      // Skip empty elements
-      if (elemText.length === 0) return;
-      
-      // Check for exact substring match
-      var index = elemText.indexOf(normalizedSearch);
-      if (index !== -1) {
-        // Calculate match score (prefer exact matches and shorter elements)
-        // Also prefer matches at the beginning of the text
-        var lengthScore = normalizedSearch.length / elemText.length;
-        var positionScore = 1 - (index / elemText.length);
-        var score = lengthScore * 0.7 + positionScore * 0.3;
-        
-        if (score > bestMatchScore) {
-          bestMatchScore = score;
-          bestMatch = $elem;
-        }
-      }
-    });
-
-    return bestMatch;
-  }
-
-  // Claude: paragraph highlighting fixes
-  // Build paragraph cache for faster lookups (NOT used)
-//   function buildParagraphCache() {
-//     paragraphCache.clear();
-//     var $contentCached = getCachedContent();
-
-// //  $contentCached.find('p, h1, h2, h3, h4, h5, h6, li, dt, dd').each(function() {    
-//     $contentCached.find('p, dt, h1, h2, h3, h4, h5, h6').each(function() {
-//       var $elem = $(this);
-//       var speak2meId = $elem.attr('data-speak2me-id');
-      
-//       if (speak2meId) {
-//         // Store both the element and its normalized text
-//         paragraphCache.set(speak2meId, {
-//           element: $elem,
-//           normalizedText: normalizeText($elem.text()),
-//           offsetTop: Math.round($elem.offset().top)
-//         });
-//       }
-//     });
-//   }
-
-  // Claude: paragraph highlighting fixes - Enhanced paragraph lookup (NOT used)
-  // function findParagraphForChunk(chunk) {
-  //   // Method 1: Try cached paragraph by ID (fastest and most reliable)
-  //   if (chunk.speak2meId && paragraphCache.has(chunk.speak2meId)) {
-  //     var cached = paragraphCache.get(chunk.speak2meId);
-  //     // Verify the element still exists in DOM
-  //     if (cached.element && cached.element.length > 0 && $.contains(document.documentElement, cached.element[0])) {
-  //       return cached.element;
-  //     }
-  //   }
-    
-  //   // Method 2: Try stored paragraph reference
-  //   if (chunk.$paragraph && chunk.$paragraph.length > 0 && $.contains(document.documentElement, chunk.$paragraph[0])) {
-  //     return chunk.$paragraph;
-  //   }
-    
-  //   // Method 3: Try text matching with the section text
-  //   if (chunk.sectionText) {
-  //     var $found = findParagraphByText(chunk.sectionText, getCachedContent());
-  //     if ($found && $found.length > 0) {
-  //       return $found;
-  //     }
-  //   }
-    
-  //   // Method 4: Try text matching with first part of chunk text
-  //   if (chunk.text && chunk.text.length > 20) {
-  //     var searchText = chunk.text.substring(0, 50).replace(/\s+/g, ' ').trim();
-  //     var $found = findParagraphByText(searchText, getCachedContent());
-  //     if ($found && $found.length > 0) {
-  //       return $found;
-  //     }
-  //   }
-    
-  //   return null;
-  // }
-
-  // Claude: paragraph highlighting fixes - Centralized highlight management (NOT used)
-  // function setHighlight($element) {
-  //   // remove previous highlight
-  //   if (currentHighlightedElement) {
-  //     currentHighlightedElement.removeClass('tts-karaoke-highlight-paragraph');
-  //   }
-    
-  //   // add new highlight
-  //   if ($element && $element.length > 0) {
-  //     $element.addClass('tts-karaoke-highlight-paragraph');
-  //     currentHighlightedElement = $element;
-      
-  //     // scroll to element with better error handling
-  //     try {
-  //       var elementTop = $element.offset().top;
-  //       var scrollTop = elementTop - scrollBlockOffset;
-        
-  //       // Only scroll if element is not already visible
-  //       var viewportTop = $(window).scrollTop();
-  //       var viewportBottom = viewportTop + $(window).height();
-        
-  //       if (elementTop < viewportTop || elementTop > viewportBottom) {
-  //         window.scrollTo({
-  //           top: scrollTop,
-  //           behavior: scrollBehavior
-  //         });
-  //       }
-  //     } catch (error) {
-  //       console.warn('speak2me.core: Could not scroll to highlighted element', error);
-  //     }
-  //     return true;
-  //   }
-  //   return false;
-  // }
 
   function setHighlightParagraph(elementid) {
     // get the element with data-speak2me-id like 'speak2me-p-0'
     var selector                = `[data-speak2me-id="${elementid}"]`;
     const $element              = document.querySelector(selector);
-//  const isHighlighted         = $element?.classList.contains('tts-karaoke-highlight-paragraph');
     const isAlredadyHighlighted = (elementid === currentHighlightedElement) ? true : false;
 
     if (isAlredadyHighlighted) {
@@ -870,16 +651,6 @@
           $elem.attr('data-speak2me-id', 'speak2me-p-' + (paragraphIdCounter++));
         }
       });
-
-      // getCachedContent().find('p, h1, h2, h3, h4, h5, h6, li, dt, dd').each(function() {
-      //   var $elem = $(this);
-      //   if (!$elem.attr('data-speak2me-id')) {
-      //     $elem.attr('data-speak2me-id', 'speak2me-p-' + (paragraphIdCounter++));
-      //   }
-      // });      
-
-      // build the paragraph cache for fast lookups (NOT used)
-      // buildParagraphCache();
     }
 
     scanSection();
@@ -1048,42 +819,9 @@
         // buildParagraphCache();
       }
 
-      // default values for voice tags
-      // voiceTags['a']                    = new voiceTag('Link' + pause_spoken, '');
-      // voiceTags['q']                    = new voiceTag(pause_spoken, '');
-      // voiceTags['ol']                   = new voiceTag(pause_spoken, '');
-      // voiceTags['ul']                   = new voiceTag(pause_spoken, '');
-      // voiceTags['dl']                   = new voiceTag(pause_spoken, '');
-      // voiceTags['dt']                   = new voiceTag(pause_spoken, '');
-      // voiceTags['img']                  = new voiceTag('Image element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['table']                = new voiceTag('Table element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['card-header']          = new voiceTag(pause_spoken, '');
-      // voiceTags['.doc-example']         = new voiceTag('Example element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['.admonitionblock']     = new voiceTag('Attention element ' + pause_spoken, pause_spoken);
-      // voiceTags['.listingblock']        = new voiceTag('Text element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['.gist']                = new voiceTag('Gist element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['.slider']              = new voiceTag('Slider element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['.swiper-app']          = new voiceTag('Slider element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['.modal']               = new voiceTag('Info element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['.masonry']             = new voiceTag('Masonry element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['.lightbox-block']      = new voiceTag('Lightbox element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['.gallery']             = new voiceTag('Gallery element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['.audioblock']          = new voiceTag('Audio element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['.videoblock']          = new voiceTag('Video element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['.videojs-player']      = new voiceTag('Video element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['.youtube-player']      = new voiceTag('Video element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['.dailymotion-player']  = new voiceTag('Video element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['.vimeo-player']        = new voiceTag('Video element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['.wistia-player']       = new voiceTag('Video element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['figure']               = new voiceTag('Figure element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['parallax-quoteblock']  = new voiceTag('', pause_spoken);
-      // voiceTags['blockquote']           = new voiceTag('', pause_spoken);
-      // voiceTags['quoteblock']           = new voiceTag('', pause_spoken);
-
       // values of voice tags for pre- and post-pending spoken text
       //
       voiceTags['a']                    = new voiceTag('Link' + '.', '');
-//    voiceTags['dt']                   = new voiceTag('.', '');
       voiceTags['img']                  = new voiceTag('Image element' +  '.', 'Element not spoken' +  '.');
       voiceTags['table']                = new voiceTag('Table element' +  '.', 'Element not spoken' +  '.');
       voiceTags['card-header']          = new voiceTag('', '');
@@ -1165,30 +903,31 @@
           volume  = volumeUserDefault !== undefined ? volumeUserDefault : volumeDefault;
 
           // OPTIMIZATION: remove old event listeners before adding new ones
-          if (speech && activeEventListeners.onstart) {
-            speech.removeEventListener('onstart', activeEventListeners.onstart);
-            speech.removeEventListener('onend', activeEventListeners.onend);
-            if (activeEventListeners.onboundary) {
-              speech.removeEventListener('onboundary', activeEventListeners.onboundary);
-            }
-          }
+          // ...
+          // if (speech && activeEventListeners.onstart) {
+          //   speech.removeEventListener('onstart', activeEventListeners.onstart);
+          //   speech.removeEventListener('onend', activeEventListeners.onend);
+          //   if (activeEventListeners.onboundary) {
+          //     speech.removeEventListener('onboundary', activeEventListeners.onboundary);
+          //   }
+          // }
 
           // create and configure the utterance object
-          speech = new SpeechSynthesisUtterance();
+          speech          = new SpeechSynthesisUtterance();
           speech.rate     = rate;
           speech.pitch    = pitch;
           speech.volume   = volume;
-          
+
           // STABILITY: safe voice selection with fallback
           var availableVoices = speechSynthesis.getVoices();
           var selectedVoice   = availableVoices.find(function(voice) {
             return voice.name === voiceLanguageDefault;
           });
 
-          speech.voice                  = selectedVoice || availableVoices[0];
+          speech.voice = selectedVoice || availableVoices[0];
           speech.previousScrollPosition = 0;
 
-          // OPTIMIZATION: store event listeners for cleanup
+          // SYNC FIX 13b: Updated onboundary with timing compensation
           activeEventListeners.onboundary = (event) => {
             if (event.name === 'word') {
               const startIndex  = event.charIndex;
@@ -1199,7 +938,7 @@
              const currentWord = targetText.substring(startIndex, startIndex + length);
              console.debug(`speak2me.core, utterance.onboundary: spoken word: '${currentWord}' at startIndex: ${startIndex}`);
 
-              // uncomment if highlighting is needed
+              // SYNC FIX 13b: highlightWord now includes browser-specific timing compensation
               highlightWord(startIndex);
             }
           };
@@ -1219,7 +958,6 @@
                 removeParagrapHighlight(currentHighlightedElement);
               } else {
                 // failsafe: manage loose text (NO speak2meId found on paragraph)
-//              console.warn('speak2me.core, onstart:\n error accessing loose text:', currentTargetText);
                 console.warn('speak2me.core, onstart: error accessing loose text');
 
                 // clear all highlights globally
@@ -1251,8 +989,6 @@
             const isHighlighted         = $element?.classList.contains('tts-karaoke-highlight-paragraph');
             const isAlredadyHighlighted = (speak2meId === currentHighlightedElement) ? true : false;
             var currentTargetText       = event.currentTarget.text;
-
-            // window.speechSynthesis.pause();
 
             // reset word-highlightning (spans) by overwriting the HTML content
             if (previousParagraph !== null) {
@@ -1354,7 +1090,6 @@
               var normalizedChunkText = normalizeText(cleanText);
 
               for (var node of headingsArray) {
-//              var innerText = node.innerText.replace(/[?!]/g, '') + pause_spoken;
                 var innerText = node.innerText.replace(/[?!]/g, '') + '.';
                 var normalizedNodeText = normalizeText(innerText);
                 
@@ -1437,30 +1172,6 @@
               });
             }
           }
-
-          // Claude: paragraph highlighting fixes - Improved paragraph finding and highlighting
-          // var $currentParagraph = findParagraphForChunk(speaker);
-          
-          // // Apply highlighting if we found a paragraph
-          // if ($currentParagraph && $currentParagraph.length > 0) {
-          //   var highlighted = setHighlight($currentParagraph);
-            
-          //   if (highlighted) {
-          //     // Store reference for cleanup
-          //     speaker.$currentHighlight = $currentParagraph;
-          //   } else {
-          //     console.warn('speak2me: Highlighting failed for chunk:', 
-          //       speaker.sectionText || speaker.text?.substring(0, 50));
-          //   }
-          // } else {
-          //   // Claude: paragraph highlighting fixes - Better debugging info
-          //   console.warn('speak2me: Could not find paragraph for chunk', {
-          //     speak2meId: speaker.speak2meId,
-          //     sectionText: speaker.sectionText,
-          //     textPreview: speaker.text?.substring(0, 50),
-          //     offsetTop: speaker.offsetTop
-          //   });
-          // }
         };
 
         // Claude: paragraph highlighting fixes - Enhanced end event handler
@@ -1499,9 +1210,6 @@
               speaker.$paragraph.removeClass('tts-karaoke-highlight-paragraph');
             }
 
-            // Claude: paragraph highlighting fixes - Use centralized highlight clearing
-            // clearAllHighlights();
-
             // remove speak indication
             $('.mdib-speaker').removeClass('mdib-spin');
 
@@ -1509,10 +1217,8 @@
             if (speaker && activeEventListeners.start) {
               speaker.removeEventListener('start', activeEventListeners.start);
               speaker.removeEventListener('end', activeEventListeners.end);
-              if (activeEventListeners.boundary) {
-                speaker.removeEventListener('boundary', activeEventListeners.boundary);
-              }
-              activeEventListeners = { start: null, end: null, boundary: null };
+
+              activeEventListeners = { start: null, end: null };
             }
 
             clearInterval(speechMonitor);
@@ -1553,106 +1259,33 @@
           return clone;
         }
 
-        // Remove tags from the "ignoreTags" array
-        if (recognizeTagsUser.length > 0) {
-          recognizeTagsUser.forEach(function(tag) {
-            var index = ignoreTags.indexOf(tag);
-            if (index > -1) {
-              ignoreTags.splice(index, 1);
-            }
-          });
-        }
-
-        // Remove DOM objects listed in the "ignoreTags" array
+        // OPTIMIZATION: batch similar operations
         ignoreTags.forEach(function(tag) {
-          clone.find(tag).addBack(tag).not('[data-speak2me-recognize]').html('');
+          clone.find(tag).addBack(tag).remove();
         });
 
-        // Remove DOM objects specified in the "ignoreTagsUser" array
         if (ignoreTagsUser.length > 0) {
           ignoreTagsUser.forEach(function(tag) {
-            clone.find(tag).addBack(tag).not('[data-speak2me-recognize]').html('');
+            clone.find(tag).addBack(tag).remove();
           });
         }
 
-        // Remove DOM objects marked by "data-speak2me-ignore"
-        clone.find('[data-speak2me-ignore]').addBack('[data-speak2me-ignore]').html('');
-
-        // Remove DOM objects marked by class "speak2me-ignore"
-        clone.find('.speak2me-ignore').addBack('.speak2me-ignore').html('');
-
-        // Search for prepend data specified by "data-speak2me-prepend"
-        clone.find('[data-speak2me-prepend]').addBack('[data-speak2me-prepend]').each(function() {
-          copy = $(this).data('speak2me-prepend');
-          $(this).prepend(copy + ' ');
-        });
-
-        // Search for append data specified by "data-speak2me-append"
-        clone.find('[data-speak2me-append]').addBack('[data-speak2me-append]').each(function() {
-          copy = $(this).data('speak2me-append');
-          $(this).append(' ' + copy);
-        });
-
-        // Search for tags to prepend and append specified by the "voiceTags" array
-        for (var tag in voiceTags) {
-          if (voiceTags.hasOwnProperty(tag)) {
-            clone.find(tag).each(function() {
-              var tagToUse = customTags[tag] || voiceTags[tag];
-              $(this).prepend(tagToUse.prepend + pause_spoken);
-              $(this).append(tagToUse.append + pause_spoken);
-            });
-          }
+        if (recognizeTagsUser.length > 0) {
+          clone = clone.find(recognizeTagsUser.join(', '));
         }
-
-        // Add a dot for a spoken pause to heading elements
-        clone.find('h1,h2,h3,h4,h5,h6').addBack('h1,h2,h3,h4,h5,h6').each(function() {
-          var text = $(this)[0].innerText;
-          text = text
-            .trim()
-            .replace(/\s+/g, ' ') + '.';
-
-          $(this)[0].innerText = text;
-        });
-
-        // Add a dot for a spoken pause to list and definition elements
-        clone.find('li,dt').addBack('li,dt').each(function() {
-          var text = $(this)[0].innerText;
-          text = text
-            .trim()
-            .replace(/\s+/g, ' ') + '.';
-
-          $(this)[0].innerText = text;
-        });
-
-        // Add a dot for a spoken pause to list elements
-        // clone.find('li').addBack('li').each(function() {
-        //   var text = $(this)[0].innerText;
-        //   text = text
-        //     .trim()
-        //     .replace(/\s+/g, ' ') + '.';
-
-        //     $(this)[0].innerText = text;
-        // });
-
-        // // Add pause to list elements
-        // clone.find('p,li').addBack('p,li').each(function() {
-        //   var text = $(this)[0].innerText;
-        //   text = text.replace(/\s+/g, ' ') + pause_spoken;
-        //   $(this)[0].innerText = text;
-        // });
-
-        // Add pause to <br> tags
-        clone.find('br').each(function() {
-          $(this).append(pause_spoken);
-        });
 
         // Process <figure> tags
         clone.find('figure').addBack('figure').each(function() {
-          copy = $(this).find('figcaption').html();
+          copy = $(this).find('figcaption')[0]?.innerText;
           prepend = customTags['figure'] ? customTags['figure'].prepend : voiceTags['figure'].prepend;
+          appended = customTags['figure'] ? customTags['figure'].append : voiceTags['figure'].append;
 
           if (copy !== undefined && copy !== '') {
             $('<div>' + prepend + pause_spoken + copy + '</div>').insertBefore(this);
+            $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+          } else {
+            $('<div>' + prepend + pause_spoken + '</div>').insertBefore(this);
+            $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
           }
           $(this).remove();
         });
@@ -1854,138 +1487,56 @@
           $(this).text(copy);
         });
 
-        // Process data-speak2me-spell
-        clone.find('[data-speak2me-spell]').addBack('[data-speak2me-spell]').each(function() {
-          copy = $(this).text();
-          copy = copy.split('').join(' ');
-          $(this).text(copy);
-        });
-
         return clone;
       }
 
-      // run final cleanups on all DOM elements processed
-      function cleanDOMelements(final) {
-        var start, ended, speak, part1, part2;
+      // clean DOM elements (sanitize)
+      function cleanDOMelements(text) {
+        if (!text || typeof text !== 'string') return ''; // STABILITY: Validation
 
-        // STABILITY: Validate input
-        if (!final || typeof final !== 'string') {
-          console.error('speak2me.core: Invalid input for cleanDOMelements');
-          return [];
-        }
-
-        // Search for <speak2me> in comments
-        while (final.indexOf('<!-- <speak2me>') !== -1) {
-          start = final.indexOf('<!-- <speak2me>');
-          ended = final.indexOf('</speak2me> -->', start);
-          if (ended === -1) break;
-          speak = final.substring(start + 17, ended);
-          part1 = final.substring(0, start);
-          part2 = final.substring(ended + 17);
-          final = part1 + ' ' + speak + ' ' + part2;
-        }
-
-        // Strip out remaining comments
-        final = final.replace(/<!--[\s\S]*?-->/g, '');
-
-        // Strip out remaining HTML tags
-        final = final.replace(/(<([^>]+)>)/ig, '');
-
-        // OPTIMIZATION: Chain all replacement operations
-        var replacementPairs = [
-          [/"/g, ''],
-          [/:/g, '.'],
-          [/\., /g, '. '],
-          [/\s+,\s+ /g, ', '],
-//        [/\s+,\s+/g, '. '],
-          [/\. \./g, ''],
-//        [/, \./g, ''],
-//        [/  ,  /g, ''],
-          [/^$/g, '\n'],
-          [/^\s+$/g, '\n'],
-          [/\s+\.\s+/g, '\n'],
-          [/\s+\.\s+$/g, '\n'],
-          [/\.\./g, '.'],
-          [/e\.g\./g, 'for example'],
-          [/E\.g\./g, 'For example, '],
-          [/etc\./g, 'and so on, '],
-          [/z\. B\./g, 'zum Beispiel, '],
-          [/[\!\?]/g, '. '],
-//        [/—/g, pause_spoken],
-//        [/–/g, pause_spoken],
-//        [/--/g, pause_spoken],
-          [/\s+/g, ' '],
-          [/^\s*(\b\w+\b)\s*$/gm, "$1. "],
-          [/^\s*(\b\w+\b\s*[0-9]{4})$/gm, "$1. "]
-        ];
-
-        replacementPairs.forEach(function(pair) {
-          final = final.replace(pair[0], pair[1]);
-        });
-
-        // Replace user-specified strings
-        for (var i = 0; i < replacements.length; i += 2) {
-          if (replacements[i] && replacements[i + 1]) {
-            var old = replacements[i].replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
-            var rep = replacements[i + 1] + ' ';
-            var regexp = new RegExp(old, 'gi');
-            final = final.replace(regexp, rep);
-          }
-        }
-
-        // Decode HTML entities
-        var txt = document.createElement('textarea');
-        txt.innerHTML = final;
-        final = txt.value;
-
-        // split the final text into chunks (sentences)
-        const textChunks = splitTextIntoChunks(final);
-        chunkCounterMax = textChunks.length;
-
-        return textChunks;
+        // OPTIMIZATION: chain multiple replace operations
+        return text
+          .replace(/<br>/gi, ' ')
+          .replace(/<br \/>/gi, ' ')
+          .replace(/<.*?>/gi, ' ')
+          .replace(/\s+/gi, ' ')
+          .replace(/\&nbsp;/gi, ' ')
+          .replace(/&/gi, ' and ')
+          .replace(/</gi, ' less than ')
+          .replace(/>/gi, ' greater than ')
+          .replace(/ +/gi, ' ');
       }
 
-      return speech;
-    }, // END speak
+      return this;
+    },
 
     pause: function() {
-      if (window.speechSynthesis) {
-        window.speechSynthesis.pause();
+      var synth = window.speechSynthesis;
+      if (synth && synth.speaking && !synth.paused) {
+        synth.pause();
       }
-
       return this;
     },
 
     resume: function() {
-      if (window.speechSynthesis) {
-        window.speechSynthesis.resume();
+      var synth = window.speechSynthesis;
+      if (synth && synth.paused) {
+        synth.resume();
       }
-
       return this;
     },
 
     stop: function() {
+      userStoppedSpeaking = true;
       if (window.speechSynthesis) {
         window.speechSynthesis.cancel();
-        userStoppedSpeaking = true;
 
-        // OPTIMIZATION: Clean up event listeners on stop
-        if (speech && activeEventListeners.onstart) {
-          speech.removeEventListener('onstart', activeEventListeners.onstart);
-          speech.removeEventListener('onend', activeEventListeners.onend);
-
-          if (activeEventListeners.onboundary) {
-            speech.removeEventListener('onboundary', activeEventListeners.onboundary);
-          }
-
-          activeEventListeners = {
-            onstart:      null,
-            onend:        null,
-            onboundary:   null
-          };
-
+        // OPTIMIZATION: clean up event listeners when stopping
+        if (speech && activeEventListeners.start) {
+          speech.removeEventListener('start', activeEventListeners.start);
+          speech.removeEventListener('end', activeEventListeners.end);
         }
-        
+
         // Claude: paragraph highlighting fixes - Use centralized clearing
         clearAllHighlights();
       }

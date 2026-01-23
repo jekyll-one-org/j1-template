@@ -1,0 +1,61 @@
+Prompt
+--------------------------------------------------------------------------------
+
+Das wort-weise highlightning  ist nicht synchron (verzögert) zu den
+gesprochenen Worten. Was kann die Ursache sein?
+
+Bitte eine optimierte Version der Datei mit Fixes erstellen.
+Ergänzen des Kommentars "SYNC FIX" für alle Fixes in der optimierten Version.
+
+
+
+
+Claude, speak2me.13a.js
+--------------------------------------------------------------------------------
+
+Ich werde mir die Datei ansehen, um das Problem mit der verzögerten
+Wort-Synchronisation zu analysieren. Ich habe die Datei analysiert und
+mehrere Ursachen für die verzögerte Wort-Synchronisation gefunden:
+
+## Hauptprobleme:
+
+1. Keine Vorberechnung der Wortpositionen: Die `highlightWord()`
+   Funktion berechnet bei jedem Aufruf alle Positionen neu
+2. Ineffiziente DOM-Queries: `querySelectorAll('span')` bei jedem
+   boundary-Event
+3. Verzögerung durch sequentielle Suche: Linear durch alle Spans iterieren
+4. Fehlende Zeitkompensation: Keine Berücksichtigung der Rendering-
+   und Event-Verzögerung
+5. Race Conditions: Paragraph-Vorbereitung und boundary-Events nicht
+   synchronisiert
+
+Ich erstelle jetzt eine optimierte Version mit allen Fixes:Ich habe eine
+optimierte Version der Datei erstellt mit folgenden SYNCH FIX-Verbesserungen:
+
+## Hauptprobleme und Lösungen:
+
+Alle Änderungen sind mit `// SYNCH FIX:` gekennzeichnet.
+
+### 1. Position-Caching (Zeilen 140-145, 193-207)
+- Problem: Wiederholte Berechnung aller Wortpositionen bei jedem Event
+- Lösung: Vorberechnung mit `buildWordPositionCache()` - einmalig beim Paragraph-Start
+
+### 2. Binary Search (Zeilen 209-239)
+- Problem: Lineare Suche durch alle Spans (O(n))
+- Lösung: Binäre Suche (O(log n)) mit Fast-Path für sequenziellen Zugriff
+
+### 3. Optimiertes Highlighting (Zeilen 241-276)
+- Problem: Ineffiziente DOM-Queries mit `querySelectorAll()` bei jedem Boundary-Event
+- Lösung: Direkter Zugriff auf gecachte Elemente
+
+### 4. Batch DOM-Updates (Zeilen 278-318)
+- Problem: Einzelne DOM-Manipulationen für jedes Wort
+- Lösung: DocumentFragment für eine einzige DOM-Operation
+
+### 5. RequestAnimationFrame (Zeilen 267-274, 962-968)
+- Problem: Synchrone DOM-Updates blockieren Rendering
+- Lösung: Asynchrone Updates im nächsten Frame
+
+### 6. Cache-Verwaltung (Zeilen 331-350, 858, 1022)
+- Problem: Veraltete Caches führen zu falschen Highlights
+- Lösung: Systematisches Löschen aller Caches bei Zustandsänderungen
