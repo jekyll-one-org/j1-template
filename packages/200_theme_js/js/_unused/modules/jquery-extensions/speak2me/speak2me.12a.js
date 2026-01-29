@@ -24,7 +24,8 @@
  # - FIXED: Reliable paragraph highlighting with direct element references
  # - FIXED: Better text normalization and matching
  # - Claude: paragraph highlighting fixes - Enhanced paragraph tracking and highlighting
- # - SYNC FIX 13b: Browser-specific timing compensation for word highlighting 
+ # - SYNC FIX 13b: browser-specific timing compensation for word highlighting 
+ # - PARAGRAPH FIX: highligt paragraps witm multiple sentences word-wise
  # -----------------------------------------------------------------------------
 */
 'use strict';
@@ -334,6 +335,10 @@
   var chunkSpoken             = false;
   var lastScrollPosition      = false;
 
+  // PARAGRAPH FIX: Track current sentence offset within paragraph
+  var currentSentenceOffset     = 0;
+  var currentParagraphSentences = [];
+
   var rateUserDefault;
   var pitchUserDefault;
   var volumeUserDefault;
@@ -554,6 +559,9 @@
     var currentPos = 0;
     var targetWordIndex = -1;
 
+    // PARAGRAPH FIX: Adjust charIndex by adding the offset of previous sentences
+    var adjustedCharIndex = charIndex + currentSentenceOffset;
+
     // SYNC FIX 13b: Apply browser-specific timing compensation
     // The charIndex from the boundary event may be slightly ahead or behind
     // depending on the browser's speech synthesis timing
@@ -586,8 +594,35 @@
     }
   }
 
+  // PARAGRAPH FIX: Split paragraph text into sentences to track offsets
+  function splitParagraphIntoSentences(text) {
+    // Split by period, but keep the period with each sentence
+    var sentences = text.split(/\.\s+/).map(function(s, index, arr) {
+      // Add period back except for the last element if it's empty
+      return (index < arr.length - 1 || s.trim().length > 0) ? s.trim() + '.' : s.trim();
+    }).filter(function(s) {
+      return s.length > 0;
+    });
+    
+    return sentences;
+  }
+
+  // PARAGRAPH FIX: Calculate character offset for a sentence within the paragraph
+  function calculateSentenceOffset(sentences, sentenceIndex) {
+    var offset = 0;
+    for (var i = 0; i < sentenceIndex && i < sentences.length; i++) {
+      // Add sentence length plus space (except for first sentence)
+      offset += sentences[i].length + (i > 0 ? 1 : 0);
+    }
+    return offset;
+  }
+
   // split text for word-based highlighting
   function prepareParagraphToHighlighWords(text) {
+
+    // PARAGRAPH FIX: Split the paragraph into sentences for tracking
+    currentParagraphSentences = splitParagraphIntoSentences(text);
+    currentSentenceOffset = 0; // Reset to 0 when a new paragraph starts
 
     // clean text for unwanted white spaces and split text into words
     const words = text
@@ -1048,38 +1083,6 @@
         // buildParagraphCache();
       }
 
-      // default values for voice tags
-      // voiceTags['a']                    = new voiceTag('Link' + pause_spoken, '');
-      // voiceTags['q']                    = new voiceTag(pause_spoken, '');
-      // voiceTags['ol']                   = new voiceTag(pause_spoken, '');
-      // voiceTags['ul']                   = new voiceTag(pause_spoken, '');
-      // voiceTags['dl']                   = new voiceTag(pause_spoken, '');
-      // voiceTags['dt']                   = new voiceTag(pause_spoken, '');
-      // voiceTags['img']                  = new voiceTag('Image element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['table']                = new voiceTag('Table element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['card-header']          = new voiceTag(pause_spoken, '');
-      // voiceTags['.doc-example']         = new voiceTag('Example element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['.admonitionblock']     = new voiceTag('Attention element ' + pause_spoken, pause_spoken);
-      // voiceTags['.listingblock']        = new voiceTag('Text element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['.gist']                = new voiceTag('Gist element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['.slider']              = new voiceTag('Slider element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['.swiper-app']          = new voiceTag('Slider element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['.modal']               = new voiceTag('Info element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['.masonry']             = new voiceTag('Masonry element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['.lightbox-block']      = new voiceTag('Lightbox element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['.gallery']             = new voiceTag('Gallery element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['.audioblock']          = new voiceTag('Audio element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['.videoblock']          = new voiceTag('Video element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['.videojs-player']      = new voiceTag('Video element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['.youtube-player']      = new voiceTag('Video element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['.dailymotion-player']  = new voiceTag('Video element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['.vimeo-player']        = new voiceTag('Video element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['.wistia-player']       = new voiceTag('Video element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['figure']               = new voiceTag('Figure element' + pause_spoken, 'Element not spoken' + pause_spoken);
-      // voiceTags['parallax-quoteblock']  = new voiceTag('', pause_spoken);
-      // voiceTags['blockquote']           = new voiceTag('', pause_spoken);
-      // voiceTags['quoteblock']           = new voiceTag('', pause_spoken);
-
       // values of voice tags for pre- and post-pending spoken text
       //
       voiceTags['a']                    = new voiceTag('Link' + '.', '');
@@ -1143,6 +1146,7 @@
       // top-level function to prepare the HTML content
       var processSpeech = setInterval(function () {
         if (scanFinished) {
+
           // OPTIMIZATION: process all elements in one pass
           try {
             _this.each(function() {
@@ -1239,8 +1243,28 @@
                 prepareParagraphToHighlighWords($element.innerText);
               }
 
+              // PARAGRAPH FIX: Update sentence offset for the current chunk
+              var currentChunk = chunks[chunkCounter];
+              if (currentChunk && currentParagraphSentences.length > 0) {
+                var sentenceIndex = findSentenceIndexForChunk(currentChunk, currentParagraphSentences);
+                if (sentenceIndex >= 0) {
+                  currentSentenceOffset = calculateSentenceOffset(currentParagraphSentences, sentenceIndex);
+                  console.debug(`speak2me.core, onstart: sentence ${sentenceIndex} starts at offset ${currentSentenceOffset}`);
+                }
+              }
+
             } else {
               console.debug(`speak2me.core, onstart: highlight MOT changed on: ${speak2meId}`);
+
+              // PARAGRAPH FIX: Even if paragraph hasn't changed, update offset for next sentence
+              var currentChunk = chunks[chunkCounter];
+              if (currentChunk && currentParagraphSentences.length > 0) {
+                var sentenceIndex = findSentenceIndexForChunk(currentChunk, currentParagraphSentences);
+                if (sentenceIndex >= 0) {
+                  currentSentenceOffset = calculateSentenceOffset(currentParagraphSentences, sentenceIndex);
+                  console.debug(`speak2me.core, onstart: (same paragraph) sentence ${sentenceIndex} starts at offset ${currentSentenceOffset}`);
+                }
+              }
             }
           };
 

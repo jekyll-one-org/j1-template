@@ -67,7 +67,8 @@ resource_options:
 :ytp_audio:                             false
 :ytp_best_2024:                         false
 :ytp_rhythm:                            false
-:ytp_sky_elements:                      true
+:ytp_sky_elements:                      false
+:ytp_hb:                                true
 :dm_video:                              false
 :vm_video:                              false
 :masonry:                               true
@@ -214,6 +215,16 @@ captivating narratives.
 
 .Sky Elements · AGT 2024
 youtube::cN8IrZUhPtc[poster="//img.youtube.com/vi/cN8IrZUhPtc/maxresdefault.jpg" role="mb-4"]
+
+endif::[]
+
+ifeval::[{ytp_hb} == true]
+Sky Elements uses the night sky as a canvas on which anything is possible.
+A large group of Drones is painting lights in the sky to reflect the most
+captivating narratives. 
+
+.Hazel Brugger · Immer noch wach
+youtube::w37wr0b6KE[poster="//img.youtube.com/vi/w37wr0b6KE/maxresdefault.jpg" role="mb-4"]
 endif::[]
 
 

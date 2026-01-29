@@ -128,7 +128,8 @@
 }
 
 .video-js .vjs-time-control {
-  font-size: 1.6em;
+  /* font-size: 1.6em; */
+  font-size: 1.4em;
 }
 
 .vjs-theme-uno .vjs-play-control {
@@ -215,7 +216,8 @@
 
 .vjs-theme-uno .vjs-time-control, .video-js .vjs-current-time, .video-js .vjs-duration {
   display: block;
-  top: -12px;
+  /* top: -12px; */
+  top: 0px;
 }
 
 .vjs-theme-uno .vjs-current-time .vjs-duration {
@@ -245,7 +247,8 @@
 
 /* placenment for the time displays within the custom progressBar container */
 .video-js .custom-progressbar-container .vjs-current-time-display {
-    order: -1; 
+    order: -1;
+    /* font-size: 1.6em; */
 }
 
 /* Adjust the sizes for time-display elements */

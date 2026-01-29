@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/speak2me/js/speak2me.12a.js
- # speak2me v.1.12a implementation (based on Articulate.js) for J1 Theme
+ # ~/assets/theme/j1/modules/speak2me/js/speak2me.14.js
+ # speak2me v.1.14 implementation (based on Articulate.js) for J1 Theme
  #
  # Product/Info:
  # https://jekyll.one
@@ -24,7 +24,7 @@
  # - FIXED: Reliable paragraph highlighting with direct element references
  # - FIXED: Better text normalization and matching
  # - Claude: paragraph highlighting fixes - Enhanced paragraph tracking and highlighting
- # - SYNC FIX 13b: browser-specific timing compensation for word highlighting 
+ # - SYNC FIX 13b: browser-specific timing compensation for word highlighting
  # - PARAGRAPH FIX: highligt paragraps witm multiple sentences word-wise
  # -----------------------------------------------------------------------------
 */
@@ -238,7 +238,7 @@
         return document.querySelector(contentSelector)
           .querySelectorAll(selectors);
       } catch (e) {
-        console.warn('speak2me.core: Could not find', contentSelector);
+        console.warn('speak2me.core: Element not found: ' + contentSelector);
         return null;
       }
     }
@@ -262,313 +262,270 @@
 
     return {
       nestHeadingsArray: nestHeadingsArray,
-      selectHeadings: selectHeadings
+      selectHeadings: selectHeadings,
     };
   };
 
   // ---------------------------------------------------------------------------
-  // module globals
+  // private vars
   // ---------------------------------------------------------------------------
+  var parseContent      = ParseContent(defaultOptions);
+  var pause_spoken      = '';
+  var synth             = window.speechSynthesis;
 
-  // var logger                  = log4javascript.getLogger('j1.speak2me.core');
-  // logger.info('initializing core module: started');
+  var rateDefault               = 1;
+  var pitchDefault              = 1;
+  var volumeDefault             = 1;
 
-  const parseContent          = ParseContent(defaultOptions);
+  var scrollBlockOffset         = 100;
+  var speechCycle               = 100;
+  var speechMonitorCycle        = 100;
+  var pauseOnSpeak              = 0;
 
-  const scrollBehavior        = 'smooth';
-  const speechCycle           = 10;
-  const speechMonitorCycle    = 10;
-  const textSliceLength       = 30;
-  const minWords              = 3;
-  const pageScanCycle         = 1000;
-  const pageScanLines         = 10000;
-  
-  const sourceLanguage        = document.getElementsByTagName("html")[0].getAttribute("lang");
-  const pauseBetweenSentences = 500;
-  const pauseOnHeadlines      = 750;
+  var currentLanguage;
+  var defaultLanguage           = 'en-GB';
+  var currentTranslation        = window.location.href;
+  var textSliceLength           = 250;
+  var minWords                  = 4;
 
-  // browser detection
-  var isChrome                = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor) && !/Edg/.test(navigator.userAgent);
-  var isEdge                  = /Edg/.test(navigator.userAgent);
-  var isFirefox               = /Firefox/.test(navigator.userAgent);
-  var isSafari                = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-
-  var ignoreProvider          = 'eSpeak';
-
-  var currentParagraph        = null;
-  var previousParagraph       = null;
-  var previousParagraphHTML   = null;
-  var currentParagraphHTML    = null;
-
-  // OPTIMIZATION: cache DOM elements to avoid repeated queries - cached on first use
-  var $content                = null;
-
-  var voiceUserDefault        = 'Google UK English Female';
-  var voiceChromeDefault      = 'Google US English';
-
-  var defaultLanguage         = '';
-  var navigatorLanguage       = navigator.language || navigator.userLanguage;
-
-  var currentTranslation      = getCookie('googtrans');
-  var scrollBlockOffset       = 100;
+  var scanPage;
+  var scanFinished;
+  var chunkCounter;
+  var chunkSpoken;
+  var wasRunOnce;
+  var ignoreTags;
+  var ignoreTagsDefault;
+  var ignoreTagsUser;
+  var recognizeTagsUser;
+  var recognizeBlocks;
+  var customTags;
+  var replacements;
 
   var customOptions           = {};
   var myOptions               = {};
-
-  var ignoreTagsUser          = [];
-  var recognizeTagsUser       = [];
-  var replacements            = [];
-  var customTags              = [];
-  var voices                  = [];
-  var headingsArray           = [];
-
-  var rateDefault             = 1.0;
-  var pitchDefault            = 1.0;
-  var volumeDefault           = 1.0;
-
-  var rate                    = rateDefault;
-  var pitch                   = pitchDefault;
-  var volume                  = volumeDefault;
-
-  var pause_spoken            = '';
-
-  var chunkCounter            = 0;
-  var userStoppedSpeaking     = false;
-  var chunkSpoken             = false;
-  var lastScrollPosition      = false;
+  
+  var rate;
+  var pitch;
+  var volume;
+  var rateUserDefault;
+  var pitchUserDefault;
+  var volumeUserDefault;
+  var voiceUserDefault;
+  var voiceLanguageDefault;
+  var processSpeech;
+  var speechMonitor;
+  var lastScrollPosition;
+  var voices                    = [];
 
   // PARAGRAPH FIX: Track current sentence offset within paragraph
   var currentSentenceOffset     = 0;
   var currentParagraphSentences = [];
 
-  var currentParagraphLength;
-
-  var rateUserDefault;
-  var pitchUserDefault;
-  var volumeUserDefault;
-
-  // var processSpeech;
-  // var speechMonitor;
-
-  var chunks = [];
-
-  var lastScrollPosition;
-  var voices                    = [];
-
-  var currentLanguage;
-  var voiceLanguageDefault;
-  var chunkCounterMax;
-
-  var user_session;
-
-  var scanFinished;
-
-
-  var wasRunOnce;
-
-  // OPTIMIZATION: store active event listeners for cleanup
-  var activeEventListeners  = {
-    start:        null,
-    end:          null,    
-    onstart:      null,
-    onend:        null,
-    onerror:      null,
-    onmark:       null,
-    onpause:      null,
-    onresume:     null,
-    onboundary:   null
-  };
-
-  // SYNC FIX 13b: Browser-specific timing compensation (milliseconds)
-  // Different browsers have different timing characteristics for
-  // onboundary events
-  var TIMING_COMPENSATION = {
-    chrome:       0,   // Chrome has minimal delay
-    edge:        50,   // Edge needs slight compensation
-    firefox:    100,   // Firefox has noticeable delay
-    safari:     150,   // Safari has significant delay
-    default:     50    // Fallback for unknown browsers
-  };
-
-  // SYNC FIX 13a: Browser-specific timing compensation (in milliseconds)
-  // const TIMING_COMPENSATION = {
-  //   chrome: -50,    // Chrome fires events slightly early
-  //   firefox: 0,     // Firefox is most accurate
-  //   edge: -30,      // Edge similar to Chrome
-  //   safari: -100    // Safari needs more compensation
-  // };
-
-  // FIX: Add counter for unique paragraph IDs
-  var paragraphIdCounter = 0;
-
-  // Claude: paragraph highlighting fixes - Add paragraph mapping cache
-  var paragraphCache = new Map();
+  var currentParagraph;
+  var previousParagraph;
+  var currentParagraphHTML;
+  var previousParagraphHTML;
   var currentHighlightedElement = null;
 
-  var voiceLanguageGoogleDefault = {
-    'de-DE':  'Google Deutsch',
-    'en-GB':  'Google UK English Female',
-    'es-ES':  'Google español',
-    'fr-FR':  'Google français',
-    'it-IT':  'Google italiano',
+  // voice providers to be ignored
+  const ignoreProvider          = 'eSpeak';
+
+  // Browser-specific timing offsets for word highlighting sync
+  const isChrome                = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+  const isFirefox               = /Firefox/.test(navigator.userAgent);
+  const isEdge                  = /Edg/.test(navigator.userAgent);
+  const isSafari                = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+  
+  // SYNC FIX 13b: Browser-specific timing adjustments
+  // These offsets compensate for different speech synthesis implementations
+  const timingOffset            = isChrome  ? 0 :  
+                                  isFirefox ? 50 : 
+                                  isEdge    ? 0 :  
+                                  isSafari  ? 100 : 
+                                  0;
+
+  // get|set default voices for browser|platform
+  const voiceLanguageGoogleDefault = {
+    'ar-EG': 'Google العربية',
+    'cs-CZ': 'Google čeština',
+    'da-DK': 'Google Dansk',
+    'de-DE': 'Google Deutsch',
+    'en-GB': 'Google UK English Female',
+    'en-US': 'Google US English',
+    'es-ES': 'Google español',
+    'et-EE': 'Google eesti keel',
+    'fi-FI': 'Google Suomi',
+    'fr-FR': 'Google français',
+    'el-GR': 'Google Ελληνικά',
+    'he-IL': 'Google עברית',
+    'hi-IN': 'Google हिन्दी',
+    'hu-HU': 'Google Magyar',
+    'id-ID': 'Google Bahasa Indonesia',
+    'it-IT': 'Google italiano',
+    'ja-JP': 'Google 日本語',
+    'ka-GE': 'Google ქართული',
+    'ko-KR': 'Google 한국어',
+    'nl-NL': 'Google Nederlands',
+    'nb-NO': 'Google Norsk bokmål',
+    'pl-PL': 'Google polski',
+    'pt-PT': 'Google português do Brasil',
+    'ro-RO': 'Google Română',
+    'ru-RU': 'Google русский',
+    'sk-SK': 'Google Slovenčina',
+    'sv-SE': 'Google Svenska',
+    'th-TH': 'Google ไทย',
+    'tr-TR': 'Google Türkçe',
+    'uk-UA': 'Google Українська',
+    'vi-VN': 'Google Tiếng Việt',
+    'zh-CN': 'Google 普通话（中国大陆）'
   };
 
-  var voiceLanguageMicrosoftDefault = {
-    'en-GB':  'Microsoft Libby Online (Natural) - English (United Kingdom)',
-    'es-ES' :  'Microsoft Elvira Online (Natural) - Spanish (Spain)',
-    'fr-FR':  'Microsoft Denise Online (Natural) - French (France)',
-    'de-DE':  'Microsoft Katja Online (Natural) - German (Germany)',
-    'it-IT':  'Microsoft Elsa Online (Natural) - Italian (Italy)',
+  const voiceLanguageMicrosoftDefault = {
+    'ar-EG': 'Microsoft Salma Online (Natural) - Arabic (Egypt)',
+    'cs-CZ': 'Microsoft Antonin Online (Natural) - Czech (Czech Republic)',
+    'da-DK': 'Microsoft Christel Online (Natural) - Danish (Denmark)',
+    'de-DE': 'Microsoft Katja Online (Natural) - German (Germany)',
+    'en-GB': 'Microsoft Libby Online (Natural) - English (United Kingdom)',
+    'en-US': 'Microsoft Aria Online (Natural) - English (United States)',
+    'es-ES': 'Microsoft Elvira Online (Natural) - Spanish (Spain)',
+    'et-EE': 'Microsoft Anu Online (Natural) - Estonian (Estonia)',
+    'fi-FI': 'Microsoft Noora Online (Natural) - Finnish (Finland)',
+    'fr-FR': 'Microsoft Denise Online (Natural) - French (France)',
+    'el-GR': 'Microsoft Athina Online (Natural) - Greek (Greece)',
+    'he-IL': 'Microsoft Avri Online (Natural) - Hebrew (Israel)',
+    'hi-IN': 'Microsoft Swara Online (Natural) - Hindi (India)',
+    'hu-HU': 'Microsoft Noemi Online (Natural) - Hungarian (Hungary)',
+    'id-ID': 'Microsoft Ardi Online (Natural) - Indonesian (Indonesia)',
+    'it-IT': 'Microsoft Elsa Online (Natural) - Italian (Italy)',
+    'ja-JP': 'Microsoft Nanami Online (Natural) - Japanese (Japan)',
+    'ka-GE': 'Microsoft Eka Online (Natural) - Georgian (Georgia)',
+    'ko-KR': 'Microsoft SunHi Online (Natural) - Korean (Korea)',
+    'nl-NL': 'Microsoft Colette Online (Natural) - Dutch (Netherlands)',
+    'nb-NO': 'Microsoft Pernille Online (Natural) - Norwegian Bokmål (Norway)',
+    'pl-PL': 'Microsoft Zofia Online (Natural) - Polish (Poland)',
+    'pt-PT': 'Microsoft Raquel Online (Natural) - Portuguese (Portugal)',
+    'ro-RO': 'Microsoft Alina Online (Natural) - Romanian (Romania)',
+    'ru-RU': 'Microsoft Svetlana Online (Natural) - Russian (Russia)',
+    'sk-SK': 'Microsoft Viktoria Online (Natural) - Slovak (Slovakia)',
+    'sv-SE': 'Microsoft Sofie Online (Natural) - Swedish (Sweden)',
+    'th-TH': 'Microsoft Premwadee Online (Natural) - Thai (Thailand)',
+    'tr-TR': 'Microsoft Emel Online (Natural) - Turkish (Turkey)',
+    'uk-UA': 'Microsoft Polina Online (Natural) - Ukrainian (Ukraine)',
+    'vi-VN': 'Microsoft HoaiMy Online (Natural) - Vietnamese (Vietnam)',
+    'zh-CN': 'Microsoft Xiaoxiao Online (Natural) - Chinese (Mainland)'
   };
 
-  var voiceLanguageFirefoxDefault = {
-    'en-GB':  'Microsoft Hazel - English (United Kingdom)',
-    'de-DE':  'Microsoft Katja - German (Germany)',
+  const voiceLanguageFirefoxDefault = {
+    'ar-EG': 'Google العربية',
+    'cs-CZ': 'Google čeština',
+    'da-DK': 'Google Dansk',
+    'de-DE': 'Google Deutsch',
+    'en-GB': 'Google UK English Female',
+    'en-US': 'Google US English',
+    'es-ES': 'Google español',
+    'et-EE': 'Google eesti keel',
+    'fi-FI': 'Google Suomi',
+    'fr-FR': 'Google français',
+    'el-GR': 'Google Ελληνικά',
+    'he-IL': 'Google עברית',
+    'hi-IN': 'Google हिन्दी',
+    'hu-HU': 'Google Magyar',
+    'id-ID': 'Google Bahasa Indonesia',
+    'it-IT': 'Google italiano',
+    'ja-JP': 'Google 日本語',
+    'ka-GE': 'Google ქართული',
+    'ko-KR': 'Google 한국어',
+    'nl-NL': 'Google Nederlands',
+    'nb-NO': 'Google Norsk bokmål',
+    'pl-PL': 'Google polski',
+    'pt-PT': 'Google português do Brasil',
+    'ro-RO': 'Google Română',
+    'ru-RU': 'Google русский',
+    'sk-SK': 'Google Slovenčina',
+    'sv-SE': 'Google Svenska',
+    'th-TH': 'Google ไทย',
+    'tr-TR': 'Google Türkçe',
+    'uk-UA': 'Google Українська',
+    'vi-VN': 'Google Tiếng Việt',
+    'zh-CN': 'Google 普通话（中国大陆）'
   };
 
-  if (sourceLanguage == 'en') {
-    defaultLanguage = sourceLanguage + '-' + 'GB';
-  } else {
-    defaultLanguage = sourceLanguage + '-' + sourceLanguage.toUpperCase();
-  }
+  // Claude: paragraph highlighting fixes - Cache for paragraph lookups
+  var paragraphCache = new Map();
+  var paragraphIdCounter = 0;
+  var headingsArray;
 
-  // SYNC FIX 13b: Determine browser-specific timing offset
-  var timingOffset = TIMING_COMPENSATION.default;
-  if (isChrome) {
-    timingOffset = TIMING_COMPENSATION.chrome;
-  } else if (isEdge) {
-    timingOffset = TIMING_COMPENSATION.edge;
-  } else if (isFirefox) {
-    timingOffset = TIMING_COMPENSATION.firefox;
-  } else if (isSafari) {
-    timingOffset = TIMING_COMPENSATION.safari;
-  }
+  // Track active event listeners to allow proper cleanup
+  var activeEventListeners = {
+    onstart: null,
+    onend: null,
+    onboundary: null
+  };
 
-  // default voices for different engines (based on language)
-  // var voiceLanguageGoogleDefault = {
-  //   'de-DE': 'Google Deutsch',
-  //   'en-GB': 'Google UK English Female',
-  //   'en-US': 'Google US English',
-  //   'es-ES': 'Google español',
-  //   'pl-PL': 'Google polski',
-  //   'zh-CN': 'Google 普通话(中国大陆)',
-  //   'nl-NL': 'Google Nederlands',
-  //   'cs-CZ': 'Google čeština',
-  //   'ar-SA': 'Google العربية',
-  //   'da-DK': 'Google dansk',
-  //   'et-EE': 'Google eesti',
-  //   'el-GR': 'Google Ελληνικά',
-  //   'he-IL': 'Google עברית',
-  //   'hi-IN': 'Google हिन्दी',
-  //   'ja-JP': 'Google 日本語',
-  //   'ka-GE': 'Google ქართული'
-  // };
-
-  // default voices for different engines (based on language)
-  // var voiceLanguageGoogleDefault = {
-  //   'de-DE': 'Google Deutsch',
-  //   'en-GB': 'Google UK English Female',
-  //   'en-US': 'Google US English',
-  //   'es-ES': 'Google español',
-  //   'pl-PL': 'Google polski',
-  //   'zh-CN': 'Google 普通话(中国大陆)',
-  //   'nl-NL': 'Google Nederlands',
-  //   'cs-CZ': 'Google čeština',
-  //   'ar-SA': 'Google العربية',
-  //   'da-DK': 'Google dansk',
-  //   'et-EE': 'Google eesti',
-  //   'el-GR': 'Google Ελληνικά',
-  //   'he-IL': 'Google עברית',
-  //   'hi-IN': 'Google हिन्दी',
-  //   'ja-JP': 'Google 日本語',
-  //   'ka-GE': 'Google ქართული'
-  // };
-
-  // var voiceLanguageMicrosoftDefault = {
-  //   'de-DE': 'Microsoft Katja - German (Germany)',
-  //   'en-GB': 'Microsoft Hazel - English (Great Britain)',
-  //   'en-US': 'Microsoft Zira - English (United States)',
-  //   'es-ES': 'Microsoft Helena - Spanish (Spain)',
-  //   'pl-PL': 'Microsoft Paulina - Polish (Poland)',
-  //   'zh-CN': 'Microsoft Huihui - Chinese (Simplified, PRC)',
-  //   'nl-NL': 'Microsoft Frank - Dutch (Netherlands)',
-  //   'cs-CZ': 'Microsoft Jakub - Czech (Czech Republic)',
-  //   'ar-SA': 'Microsoft Naayf - Arabic (Saudi Arabia)',
-  //   'da-DK': 'Microsoft Helle - Danish (Denmark)',
-  //   'et-EE': 'undefined',
-  //   'el-GR': 'Microsoft Stefanos - Greek (Greece)',
-  //   'he-IL': 'Microsoft Asaf - Hebrew (Israel)',
-  //   'hi-IN': 'Microsoft Hemant - Hindi (India)',
-  //   'ja-JP': 'Microsoft Haruka - Japanese (Japan)',
-  //   'ka-GE': 'undefined'
-  // };
-
-  // var voiceLanguageFirefoxDefault = {
-  //   'de-DE': 'undefined',
-  //   'en-GB': 'undefined',
-  //   'en-US': 'undefined',
-  //   'es-ES': 'undefined',
-  //   'pl-PL': 'undefined',
-  //   'zh-CN': 'undefined',
-  //   'nl-NL': 'undefined',
-  //   'cs-CZ': 'undefined',
-  //   'ar-SA': 'undefined',
-  //   'da-DK': 'undefined',
-  //   'et-EE': 'undefined',
-  //   'el-GR': 'undefined',
-  //   'he-IL': 'undefined',
-  //   'hi-IN': 'undefined',
-  //   'ja-JP': 'undefined',
-  //   'ka-GE': 'undefined'
-  // };
-
-  // var voiceLanguageFirefoxDefault = {
-  //   'de-DE': 'undefined',
-  //   'en-GB': 'undefined',
-  //   'en-US': 'undefined',
-  //   'es-ES': 'undefined',
-  //   'pl-PL': 'undefined',
-  //   'zh-CN': 'undefined',
-  //   'nl-NL': 'undefined',
-  //   'cs-CZ': 'undefined',
-  //   'ar-SA': 'undefined',
-  //   'da-DK': 'undefined',
-  //   'et-EE': 'undefined',
-  //   'el-GR': 'undefined',
-  //   'he-IL': 'undefined',
-  //   'hi-IN': 'undefined',
-  //   'ja-JP': 'undefined',
-  //   'ka-GE': 'undefined'
-  // };
-
-  // ---------------------------------------------------------------------------
-  // Internal functions
-  // ---------------------------------------------------------------------------
-
-  function pauseOnSpeak(msPause) {
-      window.speechSynthesis.pause();
-
-      setTimeout(() => {
-        window.speechSynthesis.resume();
-      }, msPause);
-  }
-
-  // OPTIMIZATION: cache DOM queries
+  // OPTIMIZATION: Cache content container for reuse
+  var cachedContent = null;
   function getCachedContent() {
-    if (!$content) {
-      $content = $('#content');
+    if (!cachedContent) {
+      cachedContent = $(myOptions.contentSelector);
     }
-
-    return $content;
+    return cachedContent;
   }
 
-  // highlighting logic for words
-  function highlightWord(charIndex) {
-    var p = document.getElementById('speak_highlighted');
-    if (!p) return;
+  // Claude: paragraph highlighting fixes - Centralized highlight clearing
+  function clearAllHighlights() {
+    $('.tts-karaoke-highlight-paragraph').removeClass('tts-karaoke-highlight-paragraph');
+    $('.tts-karaoke-highlight-word').removeClass('tts-karaoke-highlight-word');
+    
+    // reset element id for word-based highlighting
+    var highlighted = document.getElementById('speak_highlighted');
+    if (highlighted) {
+      highlighted.removeAttribute('id');
+    }
+    
+    currentHighlightedElement = null;
+  }
 
-//  var spans = p.querySelectorAll('[data-word-index]');
-    var spans = p.querySelectorAll('span');
+  function setHighlightParagraph(speak2meId) {
+    const selector  = `[data-speak2me-id="${speak2meId}"]`;
+    const $element  = document.querySelector(selector);
+
+    // set highlight
+    $element.classList.add('tts-karaoke-highlight-paragraph');
+
+    // save speak2meId for next paragraph
+    currentHighlightedElement = speak2meId;
+  }
+
+  function removeParagrapHighlight(speak2meId) {
+    const selector  = `[data-speak2me-id="${speak2meId}"]`;
+    const $element  = document.querySelector(selector);
+
+    if ($element !== null) {
+      $element.classList.remove('tts-karaoke-highlight-paragraph');
+    }
+  }
+
+  function pauseOnSpeak(pause) {
+    var pauseThis = new Promise(function(resolve, reject) {
+      setTimeout(function() {
+        resolve();
+      }, pause);
+    });
+
+    pauseThis
+      .then(function() {
+        return new Promise(function(resolve, reject) {
+          if (window.speechSynthesis.paused) {
+            window.speechSynthesis.resume();
+          }
+          resolve();
+        });
+      });
+  }
+
+  // SYNC FIX 13b: Enhanced word highlighting with browser compensation
+  function highlightWord(charIndex) {
+    var spans = document.querySelectorAll('#speak_highlighted span');
     if (!spans.length) return;
 
 //  var text = previousParagraphHTML.replace(/<[^>]*>/g, '');
@@ -582,7 +539,7 @@
     // SYNC FIX 13b: Apply browser-specific timing compensation
     // The charIndex from the boundary event may be slightly ahead or behind
     // depending on the browser's speech synthesis timing
-    var compensatedCharIndex = Math.max(0, charIndex);
+    var compensatedCharIndex = Math.max(0, adjustedCharIndex);
 
     var words = text.split(/\s+/).filter(function(w) { return w.trim() !== ''; });
 
@@ -636,12 +593,10 @@
 
   // split text for word-based highlighting
   function prepareParagraphToHighlighWords(text) {
-    const paragraphText = text.replace(/\n+/, '')
 
     // PARAGRAPH FIX: Split the paragraph into sentences for tracking
-    currentParagraphSentences = splitParagraphIntoSentences(paragraphText);
-    currentParagraphLength    =  currentParagraphSentences.length;
-    currentSentenceOffset     = 0; // Reset to 0 when a new paragraph starts
+    currentParagraphSentences = splitParagraphIntoSentences(text);
+    currentSentenceOffset = 0; // Reset to 0 when a new paragraph starts
 
     // clean text for unwanted white spaces and split text into words
     const words = text
@@ -803,157 +758,71 @@
   //       var viewportBottom = viewportTop + $(window).height();
         
   //       if (elementTop < viewportTop || elementTop > viewportBottom) {
-  //         window.scrollTo({
-  //           top: scrollTop,
-  //           behavior: scrollBehavior
-  //         });
+  //         $('html, body').animate({
+  //           scrollTop: scrollTop
+  //         }, 500);
   //       }
-  //     } catch (error) {
-  //       console.warn('speak2me.core: Could not scroll to highlighted element', error);
+  //     } catch (e) {
+  //       console.warn('speak2me.core: Error scrolling to element:', e);
   //     }
-  //     return true;
   //   }
-  //   return false;
   // }
 
-  function setHighlightParagraph(elementid) {
-    // get the element with data-speak2me-id like 'speak2me-p-0'
-    var selector                = `[data-speak2me-id="${elementid}"]`;
-    const $element              = document.querySelector(selector);
-//  const isHighlighted         = $element?.classList.contains('tts-karaoke-highlight-paragraph');
-    const isAlredadyHighlighted = (elementid === currentHighlightedElement) ? true : false;
+  // scan the content page to create the required data structures
+  function scanPage(obj) {
+    const start       = obj.startLine;
+    const $self       = getCachedContent();
+    var scanInterval  = 100;
+    var lineCounter   = 0;
+    var linesScanned  = 0;
 
-    if (isAlredadyHighlighted) {
-      console.debug(`speak2me.core: setHighlightParagraph called on id current|previous: ${elementid} | ${currentHighlightedElement}`);
-    }
+    // Claude: paragraph highlighting fixes - Ensure cache is cleared before scan
+    paragraphCache.clear();
+    paragraphIdCounter = 0;
 
-    // add new highlight
-    if ($element) {
-      $element.classList.add('tts-karaoke-highlight-paragraph');
-      currentHighlightedElement = elementid;
-
-      // scroll to (highlighted) element with error handling
-      try {
-        var elementTop      = $element.offsetTop;
-        var elementBottom   = elementTop + $element.offsetHeight;
-        var scrollTop       = elementTop - scrollBlockOffset;
-
-        // only scroll if element is not fully visible in viewport
-        var viewportTop     = window.pageYOffset || document.documentElement.scrollTop;
-        var viewportBottom  = viewportTop + window.innerHeight;
-
-        // check if element is outside viewport (either partially or fully)
-        if (elementTop < viewportTop || elementBottom > viewportBottom) {
-          window.scrollTo({
-            top: scrollTop,
-            behavior: scrollBehavior
-          });
-        }
-      } catch (error) {
-        console.warn('speak2me.core: Could not scroll to highlighted element:', error);
-      }
-      return true;
-    }
-    return false;
-  }
-
-  // Claude: paragraph highlighting fixes - clear all highlights
-  function clearAllHighlights() {
-    $('.tts-karaoke-highlight-paragraph').removeClass('tts-karaoke-highlight-paragraph');
-  }
-
-  function removeParagrapHighlight(dataId) {
-    const selector = `[data-speak2me-id="${dataId}"]`;
-    const $element = document.querySelector(selector);
-
-    if ($element !== null && $element !== undefined) {
-      console.debug(`speak2me.core: removeParagrapHighlight called on id: ${dataId}`);
-      $element.classList.remove('tts-karaoke-highlight-paragraph');
-    }
-
-  }
-
-  // OPTIMIZATION: improved scan function with better error handling
-  function scanPage(options) {
-    var line = options.startLine || 0;
-    var lines;
-    var scanCounter = 0;
-    var maxScanIterations = 100; // STABILITY: Prevent infinite loops
-
-    function scanSection() {
-      // STABILITY: add maximum iteration check
-      if (scanCounter++ > maxScanIterations) {
-        console.warn('speak2me.core: Page scan exceeded maximum iterations');
-        finalizeScan();
-        return;
-      }
-
-      // OPTIMIZATION: calculate once per iteration
-      lines = Math.max(
-        document.body.scrollHeight,
-        document.body.offsetHeight,
-        document.documentElement.clientHeight,
-        document.documentElement.scrollHeight,
-        document.documentElement.offsetHeight
-      );
-
-      // OPTIMIZATION: cache jQuery selector
-      var $contentEl = getCachedContent();
-      $contentEl.css('opacity', '0.3');
-
-      if (line < lines) {
-        setTimeout(function() {
-          line = line + pageScanLines;
-          window.scrollTo({top: line, behavior: 'smooth'});
-          scanSection();
-        }, pageScanCycle);
-      } else {
-        setTimeout(finalizeScan, pageScanCycle);
-      }
-    }
-
-    function finalizeScan() {
-      scanFinished = true;
-      getCachedContent().css('opacity', '1');
-      
-      // Claude: paragraph highlighting fixes - Assign IDs and build cache
-      paragraphIdCounter = 0;
-      getCachedContent().find('p, h1, h2, h3, h4, h5, h6').each(function() {
-        var $elem = $(this);
-        if (!$elem.attr('data-speak2me-id')) {
-          $elem.attr('data-speak2me-id', 'speak2me-p-' + (paragraphIdCounter++));
+    // page scanner
+    var scanPageInterval = setInterval(function() {
+      $self.find('p, dt, h1, h2, h3, h4, h5, h6').each(function() {
+        lineCounter++;
+        if (lineCounter >= start) {
+          var $this = $(this);
+          
+          // Claude: paragraph highlighting fixes - Assign IDs during scan
+          if (!$this.attr('data-speak2me-id')) {
+            $this.attr('data-speak2me-id', 'speak2me-p-' + (paragraphIdCounter++));
+          }
+          
+          linesScanned = lineCounter;
         }
       });
 
-      // getCachedContent().find('p, h1, h2, h3, h4, h5, h6, li, dt, dd').each(function() {
-      //   var $elem = $(this);
-      //   if (!$elem.attr('data-speak2me-id')) {
-      //     $elem.attr('data-speak2me-id', 'speak2me-p-' + (paragraphIdCounter++));
-      //   }
-      // });      
-
-      // build the paragraph cache for fast lookups (NOT used)
-      // buildParagraphCache();
-    }
-
-    scanSection();
+      // all content elements scanned
+      if (linesScanned === lineCounter) {
+        // Claude: paragraph highlighting fixes - Build cache after IDs assigned
+        // buildParagraphCache();
+        scanFinished = true;
+        clearInterval(scanPageInterval);
+        console.debug('speak2me.core: page scanning finished');
+      }
+    }, scanInterval);
   }
 
-  // merge (configuration) objects
-  // OPTIMIZATION: simplified and more efficient
-  function extend() {
-    var target = {};
-    for (var i = 0; i < arguments.length; i++) {
-      var source = arguments[i];
-      if (source) { // STABILITY: Check for null/undefined
-        for (var key in source) {
-          if (Object.prototype.hasOwnProperty.call(source, key)) {
-            target[key] = source[key];
-          }
-        }
-      }
-    }
-    return target;
+  // convert non-numeric characters to their word equivalents, for example, '$' to 'dollars', and so on
+  function convertNonNumeric(match) {
+    var str       = match.toString();
+    var obj       = match;
+    var len       = obj.length;
+    var converted = match;
+
+    if (str.match(/^\$/))       { converted = str.replace(/\$/g, ' dollars ');    }
+    if (str.match(/^£/))        { converted = str.replace(/£/g, ' pounds ');      }
+    if (str.match(/^€/))        { converted = str.replace(/€/g, ' euros ');       }
+    if (str.match(/^¥/))        { converted = str.replace(/¥/g, ' yen ');         }
+    if (str.match(/^\u20bd/))   { converted = str.replace(/\u20bd/g, ' rubles '); }
+
+    if (str.match(/\%$/))       { converted = str.replace(/\%/g, ' percent ');    }
+
+    return converted;
   }
 
   // get the content of a Cookie (by its name)
@@ -1126,128 +995,100 @@
       voiceTags['.dailymotion-player']  = new voiceTag('Video element' +  '.', 'Element not spoken' + '.');
       voiceTags['.vimeo-player']        = new voiceTag('Video element' +  '.', 'Element not spoken' + '.');
       voiceTags['.wistia-player']       = new voiceTag('Video element' +  '.', 'Element not spoken' + '.');
-      voiceTags['figure']               = new voiceTag('Figure element' +  '.', 'Element not spoken' + '.');    
-      voiceTags['parallax-quoteblock']  = new voiceTag('Parallax Quoteblock' + '.', '');
-      voiceTags['blockquote']           = new voiceTag('Blockquote' + '.',  '');
-      voiceTags['quoteblock']           = new voiceTag('Quoteblock' + '.',  '');
+      voiceTags['figure']               = new voiceTag('Figure element' +  '.', 'Element not spoken' + '.');
+      voiceTags['parallax-quoteblock']  = new voiceTag('', '');
+      voiceTags['blockquote']           = new voiceTag('', '');
+      voiceTags['quoteblock']           = new voiceTag('', '');
 
-      // HTML tags NOT spoken (ignored)
-      ignoreTags = [
-        'audio',
-        'button',
-        'canvas',
-        'code',
-        'del', 
-        'pre', 
-        'dialog',
-        'embed',
-        'form',
-        'head',
-        'iframe',
-        'meter',
-        'nav',
+      var pauseBetweenSentences = 250;
+
+      // set default values for ignored DOM elements
+      ignoreTagsDefault = [
+        'a',
         'noscript',
-        'object',
-        'picture', 
         'script',
-        'select',
         'style',
         'textarea',
-        'video'
+        'button',
+        'select',
+        'datalist'
       ];
 
-//    ignoreTags = ignoreTagsDefault;
-
-      ignoreTagsUser      = myOptions.ignore || [];
-      recognizeTagsUser   = myOptions.recognize || [];
-      replacements        = myOptions.replace || [];
-      customTags          = myOptions.customize || {};
-      rate                = rateUserDefault !== undefined ? rateUserDefault : (myOptions.rate || rateDefault);
-      pitch               = pitchUserDefault !== undefined ? pitchUserDefault : (myOptions.pitch || pitchDefault);
-      volume              = volumeUserDefault !== undefined ? volumeUserDefault : (myOptions.volume || volumeDefault);
+      ignoreTags = ignoreTagsDefault;
+      ignoreTagsUser = myOptions.ignore || [];
+      recognizeTagsUser = myOptions.recognize || [];
+      replacements = myOptions.replace || [];
+      customTags = myOptions.customize || {};
+      rate = rateUserDefault !== undefined ? rateUserDefault : (myOptions.rate || rateDefault);
+      pitch = pitchUserDefault !== undefined ? pitchUserDefault : (myOptions.pitch || pitchDefault);
+      volume = volumeUserDefault !== undefined ? volumeUserDefault : (myOptions.volume || volumeDefault);
 
       // NOTE: set voice for the current browser
-      // if (voiceUserDefault !== undefined) {
-      //   speech.voice = voices.find(function(v) { return v.name === voiceUserDefault; });
-      // } else if (voiceLanguageDefault !== undefined) {
-      //   speech.voice = voices.find(function(v) { return v.name === voiceLanguageDefault; });
-      // }
+      if (voiceUserDefault !== undefined) {
+        speech.voice = voices.find(function(v) { return v.name === voiceUserDefault; });
+      } else if (voiceLanguageDefault !== undefined) {
+        speech.voice = voices.find(function(v) { return v.name === voiceLanguageDefault; });
+      }
 
       // setting speaking params to browser defaults
       speech.rate   = rate;
       speech.pitch  = pitch;
       speech.volume = volume;
 
-      // STABILITY: check if speech synthesis is already active
-      if (window.speechSynthesis.speaking) {
-        console.warn('speak2me.core: Speech synthesis already in progress');
-        return this;
-      }
-
       // OPTIMIZATION: Combine processing with event monitoring in single interval
-      // top-level function to prepare the HTML content
-      var processSpeech = setInterval(function () {
+      processSpeech = setInterval(function() {
         // scan page to find correct positions for scrolling
         // and highlighting. Wait for scan NOT finished
-        if (scanFinished) {
+        if (!scanFinished) {
+          return; // Don't start processing until scan is complete
+        }
 
-          // OPTIMIZATION: process all elements in one pass
-          try {
-            _this.each(function() {
-              obj = $(this).clone();
-              processed = processDOMelements(obj, voiceTags, ignoreTags);
-              processed = $(processed).html();
-              finished = cleanDOMelements(processed);
-              toSpeak = finished;
-            });
-          } catch (error) {
-            // STABILITY: error handling for DOM processing
-            console.error('speak2me.core: Error processing DOM elements', error);
-            clearInterval(processSpeech);
-            return;
-          }
+        // (re-)create the text and data structures for the page content
+        if (!processed) {
+          toSpeak   = processDOMelements(_this.clone(), voiceTags, ignoreTags).text();
+          finished  = myOptions.finished || function() {};
+          processed = true;
+        }
 
-          // set speech parameters
-          rate    = rateUserDefault !== undefined ? rateUserDefault : rateDefault;
-          pitch   = pitchUserDefault !== undefined ? pitchUserDefault : pitchDefault;
-          volume  = volumeUserDefault !== undefined ? volumeUserDefault : volumeDefault;
+        if (!obj) {
+          lastScrollPosition  = 0;
+          chunkCounter        = 0;
+          chunkSpoken         = false;
+          wasRunOnce          = false;
 
-          // OPTIMIZATION: remove old event listeners before adding new ones
-          if (speech && activeEventListeners.onstart) {
-            speech.removeEventListener('onstart', activeEventListeners.onstart);
-            speech.removeEventListener('onend', activeEventListeners.onend);
-            if (activeEventListeners.onboundary) {
-              speech.removeEventListener('onboundary', activeEventListeners.onboundary);
-            }
-          }
+          obj = {
+            toSpeak: toSpeak,
+            myOptions: myOptions
+          };
+        }
 
-          // create and configure the utterance object
-          speech = new SpeechSynthesisUtterance();
-          speech.rate     = rate;
-          speech.pitch    = pitch;
-          speech.volume   = volume;
+        // STABILITY: Validate speech synthesis availability
+        if (!synth) {
+          console.error('speak2me.core: Speech synthesis not available');
+          clearInterval(processSpeech);
+          return this;
+        }
 
-          // STABILITY: safe voice selection with fallback
-          var availableVoices = speechSynthesis.getVoices();
-          var selectedVoice   = availableVoices.find(function(voice) {
-            return voice.name === voiceLanguageDefault;
-          });
+        var speakerObj, chunks;
 
-          speech.voice  = selectedVoice || availableVoices[0];
-          speech.previousScrollPosition = 0;
+        // create the speaker object that gets spoken by the browser
+        if (synth && synth.speaking === false && obj && obj.toSpeak && !myOptions.isPaused) {
+          console.debug('speak2me.core: setting event handlers on start|end|boundary');
+
+          speakerObj = {
+            voiceTags: voiceTags,
+            ignoreTags: ignoreTags
+          };
+
+          chunks = splitTextIntoChunks(obj.toSpeak);
 
           // PARAGRAPH FIX: Find which sentence index corresponds to the current chunk
           function findSentenceIndexForChunk(chunk, paragraphSentences) {
-            var chunkTextNormalized = chunk
-              .trim()
-              .replace(/\s+/g, ' ');
-
+            var chunkTextNormalized = chunk.text.trim().replace(/\s+/g, ' ');
+            
             for (var i = 0; i < paragraphSentences.length; i++) {
-              var sentenceNormalized = paragraphSentences[i]
-                .trim()
-                .replace(/\s+/g, ' ');
-
-                if (chunkTextNormalized === sentenceNormalized || 
+              var sentenceNormalized = paragraphSentences[i].trim().replace(/\s+/g, ' ');
+              if (chunkTextNormalized === sentenceNormalized || 
                   chunkTextNormalized.indexOf(sentenceNormalized.substring(0, Math.min(20, sentenceNormalized.length))) === 0) {
                 return i;
               }
@@ -1255,18 +1096,14 @@
             return -1;
           }
 
-          // OPTIMIZATION: store event listeners for cleanup
           activeEventListeners.onboundary = (event) => {
-            if (event.name === 'word') {
-              const startIndex  = event.charIndex;
-              const length      = event.charLength;
-              const targetText  = event.target.text;
+            const startIndex  = event.charIndex;
+            const currentWord = event.utterance.text.substring(startIndex).split(/\s+/)[0];
 
-              // extract current word from original text
-              const currentWord = targetText.substring(startIndex, startIndex + length);
-              console.debug(`speak2me.core, onboundary: spoken word: '${currentWord}' at startIndex: ${startIndex}`);
+            if (currentWord) {
+             console.debug(`speak2me.core, utterance.onboundary: spoken word: '${currentWord}' at startIndex: ${startIndex}`);
 
-              // highlighting the word
+              // uncomment if highlighting is needed
               highlightWord(startIndex);
             }
           };
@@ -1277,7 +1114,7 @@
             const $element              = document.querySelector(selector);            
             const $paragraph            = event.currentTarget.$paragraph;
             const isAlredadyHighlighted = (speak2meId === currentHighlightedElement) ? true : false;
-
+             
             if (!isAlredadyHighlighted) {
 
               if ($paragraph !== undefined && $paragraph !== null) {
@@ -1300,7 +1137,7 @@
               } else {
                 console.warn(`speak2me.core, onstart: could not set highlight on paragraph`);
               }
-
+         
               // highlightning words supported only on paragraphs
               if ($element !== null && $element.localName === 'p') {
                 prepareParagraphToHighlighWords($element.innerText);
@@ -1318,7 +1155,7 @@
 
             } else {
               console.debug(`speak2me.core, onstart: highlight MOT changed on: ${speak2meId}`);
-
+              
               // PARAGRAPH FIX: Even if paragraph hasn't changed, update offset for next sentence
               var currentChunk = chunks[chunkCounter];
               if (currentChunk && currentParagraphSentences.length > 0) {
@@ -1337,14 +1174,13 @@
             const $element              = document.querySelector(selector) || null;
             const isHighlighted         = $element?.classList.contains('tts-karaoke-highlight-paragraph');
             const isAlredadyHighlighted = (speak2meId === currentHighlightedElement) ? true : false;
-            const currentTargetText     = event.currentTarget.text;
+            var currentTargetText       = event.currentTarget.text;
 
             // window.speechSynthesis.pause();
 
             // reset word-highlightning (spans) by overwriting the HTML content
-            // if (whole) paragraph was spoken
             if (previousParagraph !== null) {
-              // previousParagraph.innerHTML  = previousParagraphHTML;
+              previousParagraph.innerHTML  = previousParagraphHTML;
             }
 
             // clear element id for word-based highlightning
@@ -1367,7 +1203,7 @@
 
       // create the chunks array from (speakable) text generated
       function splitTextIntoChunks(text) {
-        //var chunks = [];
+        var chunks = [];
 
         // OPTIMIZATION: chain text cleanup operations
         text = text
@@ -1486,146 +1322,92 @@
         if (!text || typeof text !== 'string') return undefined; // STABILITY: Validation
 
         var startSubString = 0;
-        var endSubString = startSubString + sliceLength;
-        var subText = text.substr(startSubString, endSubString);
-        var stringArray = subText.split(/(\s+)/);
+        var endSubString = Math.min(text.length, sliceLength);
+        var slicedText = text.slice(startSubString, endSubString);
 
-        // remove last two elements (fraction of subText)
-        stringArray.pop();
-        stringArray.pop();
-
-        subText = stringArray.join('').replaceAll('.', '');
-
-        var words = wordCount(subText);
-        if (words < wordsMin) {
+        // OPTIMIZATION: simplified word count validation
+        if (wordCount(slicedText) < wordsMin) {
           return undefined;
         }
-        return subText;
+
+        return slicedText;
       }
 
-      // process chunks (sentences to speak) sequentially
-      function processTextChunks(speaker, chunks) {
-        const synth = window.speechSynthesis;
+      // process text chunks
+      function processTextChunks(speaker, text) {
+        // scroll to the top element found
+        if (myOptions.scrollToSpokenContent) {
+          console.debug('speak2me.core: scroll to top element');
+          var offset = chunks[0].offsetTop - scrollBlockOffset;
+          $('html, body').animate({ scrollTop: offset }, 500);
+        }
 
-        // indicate active converter in the quicklinks bar
-        $('.mdib-speaker').addClass('mdib-spin');
+        // monitor the speaking process
+        speechMonitor = setInterval(function() {
+          if (synth && synth.speaking === false) {
 
-        // Claude: paragraph highlighting fixes - Enhanced start event handler
-        activeEventListeners.start = function(event) {
-          // clear any existing highlights
-          // clearAllHighlights();
+            if (chunkCounter >= chunks.length) {
+              clearAllHighlights();
+              console.debug('speak2me.core: all text read|spoken, finished');
 
-          // handle scrolling for valid offsetTop positions
-          if (speaker.offsetTop !== undefined) {
-            // Skip scrolling if offsetTop position is LOWER than expected
-            if (speaker.offsetTop >= speaker.previousScrollPosition) {
-              window.scrollTo({
-                top: speaker.offsetTop - scrollBlockOffset,
-                behavior: scrollBehavior
-              });
-            }
-          }
+              // callback function
+              finished();
 
-          // Claude: paragraph highlighting fixes - Improved paragraph finding and highlighting
-          // var $currentParagraph = findParagraphForChunk(speaker);
-          
-          // // Apply highlighting if we found a paragraph
-          // if ($currentParagraph && $currentParagraph.length > 0) {
-          //   var highlighted = setHighlight($currentParagraph);
-            
-          //   if (highlighted) {
-          //     // Store reference for cleanup
-          //     speaker.$currentHighlight = $currentParagraph;
-          //   } else {
-          //     console.warn('speak2me: Highlighting failed for chunk:', 
-          //       speaker.sectionText || speaker.text?.substring(0, 50));
-          //   }
-          // } else {
-          //   // Claude: paragraph highlighting fixes - Better debugging info
-          //   console.warn('speak2me: Could not find paragraph for chunk', {
-          //     speak2meId: speaker.speak2meId,
-          //     sectionText: speaker.sectionText,
-          //     textPreview: speaker.text?.substring(0, 50),
-          //     offsetTop: speaker.offsetTop
-          //   });
-          // }
-        };
+              chunkSpoken = false;
 
-        // Claude: paragraph highlighting fixes - Enhanced end event handler
-        activeEventListeners.end = function(event) {
-          // workaround to detect offsetTop positions LOWER than expected
-          if (speaker.offsetTop !== undefined) {
-            if (speaker.offsetTop >= speaker.previousScrollPosition) {
-              speaker.previousScrollPosition = speaker.offsetTop;
-            }
-            lastScrollPosition = speaker.offsetTop - scrollBlockOffset;
-          }
-
-          // Remove highlighting for the paragraph already spoken
-          if (speaker.$currentHighlight !== undefined) {
-            speaker.$currentHighlight.removeClass('tts-karaoke-highlight-paragraph');
-            speaker.$currentHighlight = undefined;
-          }
-
-          chunkSpoken = false;
-          chunkCounter++;
-        };
-
-        speaker.addEventListener('start', activeEventListeners.start);
-        speaker.addEventListener('end', activeEventListeners.end);
-
-        // loop to prepare ALL chunks to speak or STOP the voice output
-        var wasRunOnce = false;
-        var speechMonitor = setInterval(function () {
-          // check if all chunks (text) are spoken
-          if (chunkCounter >= chunkCounterMax || userStoppedSpeaking) {
-            chunkCounter = 0;
-            userStoppedSpeaking = false;
-            chunkSpoken = false;
-
-            if (speaker.$paragraph !== undefined) {
-              speaker.$paragraph.removeClass('tts-karaoke-highlight-paragraph');
-            }
-
-            // Claude: paragraph highlighting fixes - Use centralized highlight clearing
-            // clearAllHighlights();
-
-            // remove speak indication
-            $('.mdib-speaker').removeClass('mdib-spin');
-
-            // OPTIMIZATION: Clean up event listeners when done
-            if (speaker && activeEventListeners.start) {
-              speaker.removeEventListener('start', activeEventListeners.start);
-              speaker.removeEventListener('end', activeEventListeners.end);
-              if (activeEventListeners.boundary) {
-                speaker.removeEventListener('boundary', activeEventListeners.boundary);
+              // OPTIMIZATION: Clean up event listeners when done
+              if (speaker && activeEventListeners.onstart) {
+                speaker.removeEventListener('start', activeEventListeners.onstart);
+                speaker.removeEventListener('end', activeEventListeners.onend);
+                if (activeEventListeners.onboundary) {
+                  speaker.removeEventListener('boundary', activeEventListeners.onboundary);
+                }
+                activeEventListeners = {
+                  onstart:      null,
+                  onend:        null,
+                  onboundary:   null
+                };
               }
-              activeEventListeners = { start: null, end: null, boundary: null };
-            }
 
-            clearInterval(speechMonitor);
-          } else {
-            if (!wasRunOnce && myOptions.isPaused) {
-              chunkCounter = myOptions.lastChunk || 0; // STABILITY: Add fallback
-              wasRunOnce = true;
-            }
-
-            // STABILITY: Validate chunk exists before accessing
-            if (chunks[chunkCounter]) {
-              speaker.text          = chunks[chunkCounter].text;
-              speaker.offsetTop     = chunks[chunkCounter].offsetTop;
-              speaker.$paragraph    = chunks[chunkCounter].$paragraph;
-              speaker.speak2meId    = chunks[chunkCounter].speak2meId;
-              speaker.sectionText   = chunks[chunkCounter].sectionText;
-
-              // speak current text line
-              if (!chunkSpoken && synth) {
-                synth.speak(speaker);
-                chunkSpoken = true;
-              }
-            } else {
-              console.warn('speak2me.core: Invalid chunk at index', chunkCounter);
               clearInterval(speechMonitor);
+            } else {
+              if (!wasRunOnce && myOptions.isPaused) {
+                chunkCounter = myOptions.lastChunk || 0; // STABILITY: Add fallback
+                wasRunOnce = true;
+              }
+
+              // STABILITY: Validate chunk exists before accessing
+              if (chunks[chunkCounter]) {
+                speaker.text          = chunks[chunkCounter].text;
+                speaker.offsetTop     = chunks[chunkCounter].offsetTop;
+                speaker.$paragraph    = chunks[chunkCounter].$paragraph;
+                speaker.speak2meId    = chunks[chunkCounter].speak2meId;
+                speaker.sectionText   = chunks[chunkCounter].sectionText;
+
+                // speak current text line
+                if (!chunkSpoken && synth) {
+                  synth.speak(speaker);
+                  chunkSpoken = true;
+                }
+              } else {
+                console.warn('speak2me.core: Invalid chunk at index', chunkCounter);
+                clearInterval(speechMonitor);
+              }
+            }
+          } else {
+            chunkSpoken = false;
+            chunkCounter++;
+
+            if (chunks[chunkCounter] && chunks[chunkCounter].offsetTop !== undefined && chunkCounter > 0) {
+              if (chunks[chunkCounter].offsetTop !== chunks[chunkCounter - 1].offsetTop) {
+                lastScrollPosition = chunks[chunkCounter - 1].offsetTop;
+              }
+
+              if (myOptions.scrollToSpokenContent) {
+                var offsetScroll = chunks[chunkCounter].offsetTop - scrollBlockOffset;
+                console.debug('speak2me.core: scroll to block - offsetScroll:', offsetScroll);
+                $('html, body').animate({ scrollTop: offsetScroll }, 500);
+              }
             }
           }
         }, speechMonitorCycle);
@@ -1712,23 +1494,6 @@
           $(this)[0].innerText = text;
         });
 
-        // Add a dot for a spoken pause to list elements
-        // clone.find('li').addBack('li').each(function() {
-        //   var text = $(this)[0].innerText;
-        //   text = text
-        //     .trim()
-        //     .replace(/\s+/g, ' ') + '.';
-
-        //     $(this)[0].innerText = text;
-        // });
-
-        // // Add pause to list elements
-        // clone.find('p,li').addBack('p,li').each(function() {
-        //   var text = $(this)[0].innerText;
-        //   text = text.replace(/\s+/g, ' ') + pause_spoken;
-        //   $(this)[0].innerText = text;
-        // });
-
         // Add pause to <br> tags
         clone.find('br').each(function() {
           $(this).append(pause_spoken);
@@ -1789,283 +1554,141 @@
           });
         }
 
-        // Process admonition blocks
-        processBlock('.admonitionblock', '.admonitionblock', function($el) {
-          var content_type = $el[0].classList[1];
-          var content = $el.find('.content')[0]?.innerText;
-          return content ? { content: content, prefix: content_type + '. ' } : null;
-        });
-
-        // Process parallax quote blocks
-        processBlock('.parallax-quoteblock', 'quoteblock', function($el) {
-          var content = $el.find('.quote-text')[0]?.innerText;
-          return content ? { content: content + pause_spoken, prefix: pause_spoken } : null;
-        });
-
-        // Process quote blocks
-        clone.find('.quoteblock').addBack('.quoteblock').each(function() {
-          var attribution = $(this).find('.attribution');
-          content_element = $(this).find('blockquote');
-          content = content_element[0]?.innerText + (attribution[0]?.innerText || '');
-          prepend = voiceTags['quoteblock'].prepend;
-          appended = voiceTags['quoteblock'].append;
-
-          if (content !== undefined && content !== '') {
-            $('<div>' + prepend + pause_spoken + content + '</div>').insertBefore(this);
-            $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+        // Process <blockquote> tags
+        processBlock('blockquote', 'blockquote', function($elem) {
+          var cite = $elem.find('cite').text();
+          var quote = $elem.text().replace(cite, '').trim();
+          if (quote) {
+            return {
+              prefix: '',
+              content: quote + (cite ? ' (Quote from ' + cite + ')' : '')
+            };
           }
-          $(this).remove();
+          return null;
         });
 
-        // Process tables
-        clone.find('table').addBack('table').each(function() {
-          copy = $(this).find('caption').text();
-          prepend = voiceTags['table'].prepend;
-          appended = voiceTags['table'].append;
-
-          if (copy !== undefined && copy !== '') {
-            $('<div>' + prepend + pause_spoken + copy + '</div>').insertBefore(this);
-            $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
-          } else {
-            $('<div>' + prepend + pause_spoken + '</div>').insertBefore(this);
-            $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
+        // Process <q> tags
+        processBlock('q', 'q', function($elem) {
+          var cite = $elem.attr('cite');
+          var quote = $elem.text().trim();
+          if (quote) {
+            return {
+              prefix: '',
+              content: quote + (cite ? ' (Quote from ' + cite + ')' : '')
+            };
           }
-          $(this).remove();
+          return null;
         });
 
-        // OPTIMIZATION: Helper for media blocks (audio/video players)
-        function processMediaBlock(selector, voiceTag) {
-          clone.find(selector).addBack(selector).each(function() {
-            var titleText = $(this).find('.title, .video-title').text();
-            prepend = voiceTags[voiceTag].prepend;
-            appended = voiceTags[voiceTag].append;
-
-            if (titleText !== undefined && titleText !== '') {
-              $('<div>' + prepend + 'with the title, ' + titleText + pause_spoken + '</div>').insertBefore(this);
-              $('<div>' + appended + '</div>').insertBefore(this);
-            } else {
-              $('<div>' + prepend + '</div>').insertBefore(this);
-              $('<div>' + appended + '</div>').insertBefore(this);
+        // Process <ol> tags
+        processBlock('ol', 'ol', function($elem) {
+          var items = [];
+          $elem.find('> li').each(function(index) {
+            var text = $(this).text().trim();
+            if (text) {
+              items.push('Number ' + (index + 1) + ': ' + text);
             }
-            $(this).remove();
           });
+          if (items.length) {
+            return { prefix: '', content: items.join('. ') };
+          }
+          return null;
+        });
+
+        // Process <ul> tags
+        processBlock('ul', 'ul', function($elem) {
+          var items = [];
+          $elem.find('> li').each(function() {
+            var text = $(this).text().trim();
+            if (text) {
+              items.push('Item: ' + text);
+            }
+          });
+          if (items.length) {
+            return { prefix: '', content: items.join('. ') };
+          }
+          return null;
+        });
+
+        // Process <table> tags
+        processBlock('table', 'table', function($elem) {
+          var caption = $elem.find('caption').text().trim();
+          var summary = $elem.attr('summary');
+          
+          if (caption || summary) {
+            return {
+              prefix: '',
+              content: caption || summary
+            };
+          }
+          return null;
+        });
+
+        // Convert non-numeric characters
+        var textContent = clone.text();
+        
+        // OPTIMIZATION: Combined regex pattern for non-numeric conversion
+        textContent = textContent.replace(/[$£€¥\u20bd]\d+(?:\.\d+)?|\d+(?:\.\d+)?%/g, convertNonNumeric);
+
+        // Apply custom replacements
+        if (replacements.length > 0) {
+          for (var i = 0; i < replacements.length - 1; i += 2) {
+            var pattern = new RegExp(replacements[i], 'g');
+            textContent = textContent.replace(pattern, replacements[i + 1]);
+          }
         }
 
-        // Process all media blocks
-        processMediaBlock('.audioblock', '.audioblock');
-        processMediaBlock('.videoblock', '.videoblock');
-        processMediaBlock('.videojs-player', '.videojs-player');
-        processMediaBlock('.youtube-player', '.youtube-player');
-        processMediaBlock('.dailymotion-player', '.dailymotion-player');
-        processMediaBlock('.vimeo-player', '.vimeo-player');
-        processMediaBlock('.wistia-player', '.wistia-player');
-
-        // Process card headers
-        clone.find('.card-header').addBack('card-header').each(function() {
-          title_element = $(this).find('.card-title');
-          prepend = voiceTags['card-header'].prepend;
-          appended = voiceTags['card-header'].append;
-
-          title = title_element.length ? title_element[0].innerText + pause_spoken : '';
-
-          $('<div>' + prepend + pause_spoken + '</div>').insertBefore(this);
-          $('<div>' + appended + pause_spoken + title + '</div>').insertBefore(this);
-          title_element.remove();
-        });
-
-        // Process doc-example elements
-        clone.find('.doc-example').addBack('.doc-example').each(function() {
-          prepend = voiceTags['.doc-example'].prepend;
-          appended = voiceTags['.doc-example'].append;
-
-          $('<div>' + prepend + pause_spoken + '</div>').insertBefore(this);
-          $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
-          $(this).remove();
-        });
-
-        // Process listing blocks
-        clone.find('.listingblock').addBack('.listingblock').each(function() {
-          title_element = $(this).find('.title');
-          copy = title_element.length ? title_element[0].innerText : '';
-          prepend = voiceTags['.listingblock'].prepend;
-          appended = voiceTags['.listingblock'].append;
-
-          if (copy !== undefined && copy !== '') {
-            $('<div>' + prepend + ' with the title,' + copy + pause_spoken + '</div>').insertBefore(this);
-            $('<div>' + appended + '</div>').insertBefore(this);
-          } else {
-            $('<div>' + prepend + pause_spoken + '</div>').insertBefore(this);
-            $('<div>' + appended + pause_spoken + '</div>').insertBefore(this);
-          }
-          $(this).remove();
-        });
-
-        // OPTIMIZATION: Helper for elements with title in previous sibling
-        function processTitledBlock(selector, voiceTag) {
-          clone.find(selector).addBack(selector).each(function() {
-            var prev = $(this).prev()[0];
-            title = (prev !== undefined) ? prev.innerText : '';
-            title = title.trim();
-            title += '.'; // add a dot for a pause spoken
-
-            title_element = prev !== undefined ? $(this).prev() : null;
-            if (title_element) title_element.remove();
-
-            prepend = voiceTags[voiceTag].prepend;
-            appended = voiceTags[voiceTag].append;
-
-            if (title !== undefined && title !== '') {
-              if (prepend !== '') $('<div>' + prepend + ' with the title, ' + title +  '.' + '</div>').insertBefore(this);
-              if (appended !== '') $('<div>' + appended + '</div>').insertBefore(this);
-            } else {
-              if (prepend !== '') $('<div>' + prepend +  '.' + '</div>').insertBefore(this);
-              if (appended !== '') $('<div>' + appended +  '.' + '</div>').insertBefore(this);
-            }
-            $(this).remove();
-          });
-        }
-
-        // Process various titled blocks
-        processTitledBlock('.gist', '.gist');
-        processTitledBlock('.masonry', '.masonry');
-        processTitledBlock('.slider', '.slider');
-        processTitledBlock('.gallery', '.gallery');
-        processTitledBlock('.swiper-app', '.swiper-app');
-        processTitledBlock('.lightbox-block', '.lightbox-block');
-
-        // Remove modal elements
-        clone.find('.modal').addBack('.modal').remove();
-
-        // Process data-speak2me-swap
-        clone.find('[data-speak2me-swap]').addBack('[data-speak2me-swap]').each(function() {
-          copy = $(this).data('speak2me-swap');
-          $(this).text(copy);
-        });
-
-        // Process data-speak2me-spell
-        clone.find('[data-speak2me-spell]').addBack('[data-speak2me-spell]').each(function() {
-          copy = $(this).text();
-          copy = copy.split('').join(' ');
-          $(this).text(copy);
-        });
-
+        clone.text(textContent);
         return clone;
       }
 
-      // run final cleanups on all DOM elements processed
-      function cleanDOMelements(final) {
-        var start, ended, speak, part1, part2;
-
-        // STABILITY: Validate input
-        if (!final || typeof final !== 'string') {
-          console.error('speak2me.core: Invalid input for cleanDOMelements');
-          return [];
-        }
-
-        // Search for <speak2me> in comments
-        while (final.indexOf('<!-- <speak2me>') !== -1) {
-          start = final.indexOf('<!-- <speak2me>');
-          ended = final.indexOf('</speak2me> -->', start);
-          if (ended === -1) break;
-          speak = final.substring(start + 17, ended);
-          part1 = final.substring(0, start);
-          part2 = final.substring(ended + 17);
-          final = part1 + ' ' + speak + ' ' + part2;
-        }
-
-        // Strip out remaining comments
-        final = final.replace(/<!--[\s\S]*?-->/g, '');
-
-        // Strip out remaining HTML tags
-        final = final.replace(/(<([^>]+)>)/ig, '');
-
-        // OPTIMIZATION: Chain all replacement operations
-        var replacementPairs = [
-          [/"/g, ''],
-          [/:/g, '.'],
-          [/\., /g, '. '],
-          [/\s+,\s+ /g, ', '],
-//        [/\s+,\s+/g, '. '],
-          [/\. \./g, ''],
-//        [/, \./g, ''],
-//        [/  ,  /g, ''],
-          [/^$/g, '\n'],
-          [/^\s+$/g, '\n'],
-          [/\s+\.\s+/g, '\n'],
-          [/\s+\.\s+$/g, '\n'],
-          [/\.\./g, '.'],
-          [/e\.g\./g, 'for example'],
-          [/E\.g\./g, 'For example, '],
-          [/etc\./g, 'and so on, '],
-          [/z\. B\./g, 'zum Beispiel, '],
-          [/[\!\?]/g, '. '],
-//        [/—/g, pause_spoken],
-//        [/–/g, pause_spoken],
-//        [/--/g, pause_spoken],
-          [/\s+/g, ' '],
-          [/^\s*(\b\w+\b)\s*$/gm, "$1. "],
-          [/^\s*(\b\w+\b\s*[0-9]{4})$/gm, "$1. "]
-        ];
-
-        replacementPairs.forEach(function(pair) {
-          final = final.replace(pair[0], pair[1]);
-        });
-
-        // Replace user-specified strings
-        for (var i = 0; i < replacements.length; i += 2) {
-          if (replacements[i] && replacements[i + 1]) {
-            var old = replacements[i].replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
-            var rep = replacements[i + 1] + ' ';
-            var regexp = new RegExp(old, 'gi');
-            final = final.replace(regexp, rep);
-          }
-        }
-
-        // Decode HTML entities
-        var txt = document.createElement('textarea');
-        txt.innerHTML = final;
-        final = txt.value;
-
-        // split the final text into chunks (sentences)
-        const textChunks = splitTextIntoChunks(final);
-        chunkCounterMax = textChunks.length;
-
-        return textChunks;
-      }
-
-      return speech;
-    }, // END speak
+      return this;
+    },
 
     pause: function() {
-      if (window.speechSynthesis) {
-        window.speechSynthesis.pause();
+      if (!synth) return this;
+      
+      if (synth.speaking && !synth.paused) {
+        synth.pause();
       }
 
       return this;
     },
 
     resume: function() {
-      if (window.speechSynthesis) {
-        window.speechSynthesis.resume();
+      if (!synth) return this;
+      
+      if (synth.paused) {
+        synth.resume();
       }
 
       return this;
     },
 
     stop: function() {
-      if (window.speechSynthesis) {
-        window.speechSynthesis.cancel();
-        userStoppedSpeaking = true;
+      if (!synth) return this;
+      
+      if (synth.speaking) {
+        // reset chunk counter|bool for word-highlighting
+        chunkCounter  = 0;
+        chunkSpoken   = false;
+        wasRunOnce    = false;
 
-        // OPTIMIZATION: Clean up event listeners on stop
-        if (speech && activeEventListeners.onstart) {
-          speech.removeEventListener('onstart', activeEventListeners.onstart);
-          speech.removeEventListener('onend', activeEventListeners.onend);
+        synth.cancel();
 
-          if (activeEventListeners.onboundary) {
-            speech.removeEventListener('onboundary', activeEventListeners.onboundary);
+        if (processSpeech) {
+          clearInterval(processSpeech);
+        }
+        if (speechMonitor) {
+          // OPTIMIZATION: Clean up event listeners when stopping
+          if (speaker && activeEventListeners.start) {
+            speaker.removeEventListener('start', activeEventListeners.start);
+            speaker.removeEventListener('end', activeEventListeners.end);
+            if (activeEventListeners.boundary) {
+              speaker.removeEventListener('boundary', activeEventListeners.boundary);
+            }
           }
-
+          
           activeEventListeners = {
             onstart:      null,
             onend:        null,

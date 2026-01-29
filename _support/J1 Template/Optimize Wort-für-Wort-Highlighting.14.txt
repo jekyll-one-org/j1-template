@@ -1,0 +1,87 @@
+Prompt
+--------------------------------------------------------------------------------
+
+The attached javascript module implements an interface for TTS based on
+Web Speech API. 
+
+Currently, the spoken text of a web page is paragraph-wise (p).
+
+The curent word-based highligthning is focussing a single sentence marked by
+a dot at the end for the spoken text. The highlighting logic for words needs
+to be modified to highligt word-wise if a a paragraph contains multiple
+sentences.
+
+How needs the module modified, to highligt paragraps witm multiple sentences
+word-wise correctly?
+
+Please do not make any further optimizations or fixes to the code.
+
+Mark all required changes to be done by the comment "PARAGRAPH FIX".
+
+
+Claude, speak2me.14.js
+--------------------------------------------------------------------------------
+
+I'll analyze the uploaded JavaScript module to understand the current
+highlighting implementation and identify the necessary changes for
+proper word-wise highlighting across multiple sentences in a paragraph.
+
+Now I need to see the key parts related to word highlighting. Let me view
+the sections that handle boundary events and word highlighting.
+Now let me look at how the text is split into chunks and how sentences
+are identified.
+
+Now I understand the issue. The code splits text by periods (`.`) into chunks,
+treating each chunk as a sentence. The `prepareParagraphToHighlighWords`
+function is called once per paragraph (in the `onstart` event handler),
+but the word highlighting (`highlightWord`) uses the character index from
+the boundary event which is relative to the current chunk (sentence), not
+the entire paragraph.
+
+When a paragraph contains multiple sentences, the highlighting logic needs to:
+
+1. Track which sentence is currently being spoken within the paragraph
+2. Map the character index from the boundary event to the correct word
+   in the entire paragraph (not just the current sentence)
+
+Let me create a modified version with the necessary fixes:I've modified
+the speak2me.js module to correctly highlight words across multiple sentences
+in a paragraph.
+
+All required changes are marked with the comment "PARAGRAPH FIX".
+
+## Key Changes Made:
+
+1. **New tracking variables** (lines 320-322):
+   - `currentSentenceOffset`: Tracks character position offset for
+      the current sentence within the paragraph
+   - `currentParagraphSentences`: Array storing all sentences in
+      the current paragraph
+
+2. **New helper functions** (lines 634-651):
+   - `splitParagraphIntoSentences()`: Splits paragraph text into
+       individual sentences
+   - `calculateSentenceOffset()`: Calculates the character offset for
+      a sentence within the paragraph
+
+3. **Modified `prepareParagraphToHighlighWords()`** (lines 654-675):
+   - Now splits the paragraph into sentences and stores them
+   - Resets `currentSentenceOffset` to 0 when a new paragraph starts
+
+4. **Modified `highlightWord()`** (lines 544-545):
+   - Adjusts the character index by adding `currentSentenceOffset`
+     to map from sentence-relative to paragraph-relative position
+
+5. **New helper function in event handlers** (lines 1251-1262):
+   - `findSentenceIndexForChunk()`: Identifies which sentence in
+     the paragraph corresponds to the current chunk being spoken
+
+6. **Enhanced `onstart` event handler** (lines 1301-1328):
+   - Updates `currentSentenceOffset` when each new sentence starts,
+     both for new paragraphs and when staying in the same paragraph
+
+These changes ensure that when a paragraph contains multiple sentences,
+the word highlighting correctly tracks which word is being spoken across
+all sentences by maintaining an offset that accounts for the position of
+the current sentence within the entire paragraph.
+
