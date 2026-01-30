@@ -7,6 +7,8 @@ date:                                   2026-01-29
 #last_modified:                         2026-01-01
 
 description: >
+                                        SkipAd, excellent online YouTube video player
+                                        to block adverising. Blocks all ads instantly.
                                         Test YT Video with No Advertising
 
 keywords: >
@@ -43,10 +45,6 @@ resource_options:
 // Enable the Liquid Preprocessor
 :page-liquid:
 
-// Attribute settings for section control
-//
-:swiper--features:                      false
-
 // Set (local) page attributes here
 // -----------------------------------------------------------------------------
 // :page--attr:                         <attr-value>
@@ -63,8 +61,14 @@ resource_options:
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [role="dropcap"]
-The best online YouTube video player to block adverising. Paste a YT video
-link to the video below.
+SkipAd, excellent online YouTube video player to block adverising. Blocks
+all ads instantly. No pre-roll, mid-roll, or overlay ads. 100% Free
+alternative to YouTube Premium for watching videos undisturbed.
+
+[role="mt-4"]
+== Video selection
+
+Paste a YT video link to the input element below.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
@@ -115,7 +119,7 @@ link to the video below.
     Hazel Brugger · Immer noch wach
 </div>
 
-<div class="mb-7">
+<div class="mb-5">
    <video
     id="-w37wr0b6KE"
     class="video-js vjs-theme-uno"
@@ -142,7 +146,16 @@ link to the video below.
      }'
   ></video>
 </div>
+
 ++++
+
+[role="mt-4"]
+== History
+
+[role="mb-8"]
+A Private and personql history of last videos watched is stored in your
+browser Clear the cache to erase it anytime!
+
 
 ++++
 <script>
@@ -198,9 +211,10 @@ link to the video below.
           e.preventDefault();
           window.open($(this).attr('href'), '', "width=550,height=350");
       });
+
       $('#urlfield').on('paste', function () {
           setTimeout(function () {
-              $('#urlForm').submit();
+              $('#videoUrl').submit();
           }, 100);
       });
 
@@ -209,6 +223,7 @@ link to the video below.
   }, 10);
 
   $(function() {
+
     // =================================================================
     // take over VideoJS configuration data (JSON data from Ruby)
     // -----------------------------------------------------------------
@@ -216,30 +231,30 @@ link to the video below.
 
     var videojsUserConfigJson = '{"description":{"title":"J1 VideoJS","scope":"User settings","location":"_data/modules/videojs.yml"},"settings":{"enabled":true,"playbackRates":{"enabled":true},"plugins":{"hotKeys":{"enabled":false,"enableInactiveFocus":false},"skipButtons":{"enabled":true,"surroundPlayButton":true},"zoomButtons":{"enabled":false}}}}';
 
-    // =================================================================
+    // =========================================================================
     // create config objects from JSON data
-    // -----------------------------------------------------------------
+    // -------------------------------------------------------------------------
     var videojsDefaultSettings  = JSON.parse(videojsDefaultConfigJson);
     var videojsUserSettings     = JSON.parse(videojsUserConfigJson);
     var videojsConfig           = $.extend(true, {}, videojsDefaultSettings.defaults, videojsUserSettings.settings);
 
-    // =================================================================
+    // =========================================================================
     // VideoJS player settings
-    // -----------------------------------------------------------------
+    // -------------------------------------------------------------------------
     const vjsPlayerType         = 'ytp';
     const vjsPlaybackRates      = videojsConfig.playbackRates.values;
 
-    // =================================================================
+    // =========================================================================
     // VideoJS plugin settings
-    // -----------------------------------------------------------------
+    // -------------------------------------------------------------------------
     const piAutoCaption         = videojsConfig.plugins.autoCaption;
     const piHotKeys             = videojsConfig.plugins.hotKeys;
     const piSkipButtons         = videojsConfig.plugins.skipButtons;
     const piZoomButtons         = videojsConfig.plugins.zoomButtons;
 
-    // =================================================================
+    // =========================================================================
     // helper functions
-    // -----------------------------------------------------------------
+    // -------------------------------------------------------------------------
     function addCaptionAfterImage(imageSrc) {
       const image = document.querySelector(`img[src="${imageSrc}"]`);
       if (image) {
@@ -254,21 +269,29 @@ link to the video below.
       }
     }
 
-    // =================================================================
+    // =========================================================================
     // initialize the VideoJS player (on page ready)
-    // -----------------------------------------------------------------
+    // -------------------------------------------------------------------------
     var dependencies_met_page_ready = setInterval(function(options) {
       var pageState = $('#content').css("display");
       var pageVisible = (pageState == 'block') ? true : false;
       var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
       if (j1CoreFinished && pageVisible) {
+
+        $('#urlfield').on('paste', function () {
+          setTimeout(function () {
+              $('#videoUrl').submit();
+          }, 100);
+        });
+
         var vjs_player = document.getElementById("-w37wr0b6KE");
+
         // add captions (on poster image)
         // addCaptionAfterImage('//img.youtube.com/vi/-w37wr0b6KE/maxresdefault.jpg');
 
         // scroll page to the players top position
-        // -------------------------------------------------------------
+        // ---------------------------------------------------------------------
         vjs_player.addEventListener('click', function(event) {
           const targetDiv = document.getElementById("-w37wr0b6KE");
           const targetDivPosition = targetDiv.offsetTop;
@@ -282,7 +305,7 @@ link to the video below.
     }, 10);
 
     // customize the yt player created
-    // -----------------------------------------------------------------
+    // -------------------------------------------------------------------------
     var dependencies_met_vjs_player_exist = setInterval(function(options) {
       var vjsPlayerExist = document.getElementById("-w37wr0b6KE") ? true : false;
 
@@ -344,7 +367,7 @@ link to the video below.
           }
 
           // set start position of current video (on play)
-          // -----------------------------------------------------------
+          // -------------------------------------------------------------------
           var appliedOnce = false;
           vjsPlayer.on("play", function() {
             var startFromSecond = new Date('1970-01-01T' + "00:00:00" + 'Z').getTime() / 1000;
@@ -368,6 +391,7 @@ link to the video below.
 ++++
 <style>
 
+
 :root {
   --background-color: #f5f5f7;
   --text-color: #1d1d1f;
@@ -383,9 +407,11 @@ link to the video below.
   content: "\f0ea";
 }
 
+/*
 form {
     margin-bottom: .00125rem !important;
 }
+*/
 
 .input-wrapper {
   align-items: center;
@@ -485,7 +511,7 @@ form {
   font-size: 1.08rem;
   font-weight: 600;
   letter-spacing: .01em;
-  margin-left: .5rem;
+  margin-left: .75rem;
   margin-bottom: .5rem;
   padding: .85rem 2.2rem;
   transition: background .2s, box-shadow .2s, transform .1s;
