@@ -31,6 +31,7 @@ exclude_from_search:                    true
 
 {% comment %} Liquid var initialization
 -------------------------------------------------------------------------------- {% endcomment %}
+{% assign environment         = site.environment %}
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -40,13 +41,18 @@ exclude_from_search:                    true
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign environment         = site.environment %}
-{% assign gallery_defaults    = modules.defaults.gallery.defaults %}
-{% assign gallery_settings    = modules.gallery.settings %}
 
-{% comment %} Set config options
+{% assign gallery_defaults    = modules.defaults.gallery.defaults %}
+{% assign gallery_players     = modules.gallery_app.settings %}
+{% assign gallery_playlists   = modules.gallery_playlists.settings %}
+
+{% comment %} set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign gallery_options     = gallery_defaults | merge: gallery_settings %}
-{% assign galleries           = gallery_options.galleries %}
+{% assign gallery_options     = gallery_defaults | merge: gallery_players %}
+{% assign gallery_options     = gallery_options  | merge: gallery_playlists %}
+
+
+
 
 {% comment %} Configure permalink settings
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -198,6 +204,7 @@ exclude_from_search:                    true
           data-lg-size="{{video.size}}"
           data-pinterest-text="{{video.pinterest_prefix}} {{video.name}} at {{video.source}}"
           data-tweet-text="{{video.tweet_prefix}} {{video.name}} at {{video.source}}"
+          data-src="{{video.source}}"
           data-poster="{{gallery.image_base_path}}/{{video.poster_image}}"
           data-sub-html="{{description|strip|strip_newlines}}"
           data-video='{
@@ -239,6 +246,7 @@ exclude_from_search:                    true
           data-lg-size="{{video.size}}"
           data-pinterest-text="{{video.pinterest_prefix}} {{video.name}} at {{video.source}}"
           data-tweet-text="{{video.tweet_prefix}} {{video.name}} at {{video.source}}"
+          data-src="{{video.source}}"
           data-poster="{{gallery.image_base_path}}/{{video.poster_image}}"
           data-sub-html="{{description|strip|strip_newlines}}"
           data-video='{

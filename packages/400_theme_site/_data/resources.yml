@@ -2026,6 +2026,29 @@ resources:
         init_function:                  []
 
   # ----------------------------------------------------------------------------
+  # SkipAd
+  # YouTube Video with No Advertising
+  #
+  - name:                               J1 SkipAd
+    resource:
+      enabled:                          true
+
+      id:                               skipad
+      comment:                          Module SkipAd
+      region:                           head
+      layout:                           [ home, page, post ]
+      required:                         ondemand
+      script_load:                      defer
+      dependencies:                     false
+      pass_init_data:                   false
+
+      data:
+        css:                            [ modules/skipAd/css/skipad ]
+        files:                          [ adapter/js/skipad.js ]
+        js:                             []
+        init_function:                  [ j1.adapter.skipad.init ]
+
+  # ----------------------------------------------------------------------------
   # jqueryScrollbar
   #
   # - name:                               J1 jqueryScrollbar

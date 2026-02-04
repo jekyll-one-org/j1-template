@@ -717,5 +717,187 @@ settings:
         contrast:                       1
         brightness:                     1
 
+
+    # ==========================================================================
+    # Video Galleries
+    # ==========================================================================
+
+    # --------------------------------------------------------------------------
+    # HTML5 VIDEO
+    #
+    - gallery:
+      enabled:                          true
+
+      id:                               die_augenzeugen
+      type:                             video
+      video:                            html5
+      video_base_path:                  /assets/video/html5
+      image_base_path:                  /assets/video/poster/html5
+      thumb_base_path:                  /assets/video/poster/html5
+
+      # ------------------------------------------------------------------------
+      # Justified Gallery settings
+      # ------------------------------------------------------------------------
+      #
+      gallery_options:
+        rowHeight:                      250
+        gutters:                        3
+
+      # ------------------------------------------------------------------------
+      # Lightbox|lightGallery settings
+      # ------------------------------------------------------------------------
+      #
+      lightbox:
+        enabled:                        true
+        type:                           lg
+
+      lightGallery:
+        plugins:                        lgThumbnail, lgVideo
+
+        options:
+          licenseKey:                   0000-0000-000-0000
+          download:                     false
+          alignThumbnails:              left
+          animateThumb:                 true
+          autoplayFirstVideo:           true
+          videojs:                      true                                    # jadams: !!!
+          videojsTheme:                 vjs-theme-uno
+
+        videojsOptions:
+          enabled:                      true
+          muted:                        false
+          preload:                      true
+          controls:                     true
+          tracks:                       false                                   # jadams: !!!
+
+          hotKeysPlugin:
+            enabled:                    true
+            options:
+              volumeStep:               0.2          
+
+          controlBar:
+            playbackRates:              [0.25, 0.5, 1, 1.5, 2]
+            remainingTimeDisplay:       true
+            pictureInPictureToggle:     false
+
+            volumePanel:
+              inline:                   false
+
+            skipButtonsPlugin:
+              enabled:                  true
+              options:
+                forward:                5
+                backward:               5
+                backwardIndex:          0
+                forwardIndex:           1
+
+            zoomPlugin:
+              enabled:                  true
+              showZoom:                 true
+              showMove:                 false
+              showRotate:               false
+              gestureHandler:           false
+              options:
+                moveX:                  0
+                moveY:                  0
+                rotate:                 0
+                zoom:                   1
+
+      # ------------------------------------------------------------------------
+      # CSS filter options
+      #
+      filters:
+        enabled:                        false
+        grayscale:                      0
+        contrast:                       1
+        brightness:                     1
+
+    # ==========================================================================
+    # TUSHY Blonde
+    #
+    # - gallery:
+    #   enabled:                          true
+
+    #   id:                               tushy_blonde
+    #   type:                             video
+    #   video:                            html5
+
+    #   video_base_path:                  //localhost:10000/studios/tushy/blonde/video
+    #   image_base_path:                  //localhost:10000/studios/tushy/blonde/video/images
+
+    #   # ------------------------------------------------------------------------
+    #   # Justified Gallery settings
+    #   # ------------------------------------------------------------------------
+    #   #
+    #   gallery_options:
+    #     rowHeight:                      200
+    #     margins:                        3
+
+    #   # ------------------------------------------------------------------------
+    #   # Lightbox|lightGallery settings
+    #   # ------------------------------------------------------------------------
+    #   #
+    #   lightbox:
+    #     enabled:                        true
+    #     type:                           lg
+
+    #   lightGallery:
+    #     plugins:                        lgThumbnail, lgVideo
+
+    #     options:
+    #       licenseKey:                   0000-0000-000-0000
+    #       download:                     false
+    #       animateThumb:                 true
+    #       alignThumbnails:              left
+    #       allowMediaOverlap:            true                                    # required for customized thumbnails
+    #       autoplayFirstVideo:           true
+    #       videojs:                      true
+    #       videojsTheme:                 vjs-theme-uno                           # required for customized thumbnails
+
+    #     videojsOptions:
+    #       enabled:                      true
+
+    #       muted:                        false
+    #       preload:                      true
+
+    #       controls:                     true
+    #       controlBar:
+    #         playbackRates:              [0.25, 0.5, 1, 1.5, 2]
+    #         remainingTimeDisplay:       true
+    #         pictureInPictureToggle:     false
+
+    #         volumePanel:
+    #           inline:                   false
+
+    #         hotkeysPlugin:
+    #           enabled:                  true
+    #           options:
+    #             volumeStep:             0.2
+
+    #         skipButtonsPlugin:
+    #           enabled:                  true
+    #           options:
+    #             forward:                5
+    #             backward:               5
+    #             backwardIndex:          0
+    #             forwardIndex:           1
+
+    #         zoomPlugin:
+    #           enabled:                  true
+    #           options:
+    #             moveX:                  0
+    #             moveY:                  0
+    #             rotate:                 0
+    #             zoom:                   1
+
+    #   # ------------------------------------------------------------------------
+    #   # CSS filter options
+    #   #
+    #   filters:
+    #     enabled:                        false
+    #     grayscale:                      0
+    #     contrast:                       1
+    #     brightness:                     1
+
 # ------------------------------------------------------------------------------
 # END config

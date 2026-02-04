@@ -30,7 +30,7 @@ regenerate:                             false
 personalization:                        true
 permalink:                              /pages/public/tester/yt_skipad_tester/
 
-resources:                              [ skipad, videojs ]
+resources:                              [ videojs ]
 resource_options:
   - toccer:
       collapseDepth:                    3
@@ -45,31 +45,9 @@ resource_options:
 // Enable the Liquid Preprocessor
 :page-liquid:
 
-
-{% comment %} Set config files
--------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config     = site.data.j1_config %}
-{% assign blocks              = site.data.blocks %}
-{% assign modules             = site.data.modules %}
-
-{% comment %} Set config data (settings only)
-------------------------------------------------------------------------------- {% endcomment %}
-{% assign videojs_defaults    = modules.defaults.videojs.defaults %}
-{% assign videojs_settings    = modules.videojs.settings %}
-
-{% comment %} Set config options (settings only)
-------------------------------------------------------------------------------- {% endcomment %}
-{% assign videojs_options     = videojs_defaults | merge: videojs_settings %}
-
-
 // Set (local) page attributes here
 // -----------------------------------------------------------------------------
 // :page--attr:                         <attr-value>
-
-// Attribute settings for section control
-//
-:badges-enabled:                        true
-:history-enabled:                       true
 
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
@@ -79,17 +57,6 @@ resource_options:
 // -----------------------------------------------------------------------------
 {% include {{load_attributes}} scope="global" %}
 
-ifeval::[{badges-enabled} == true]
-
-++++
-<span class="powered-by">Powered by J1 Template</span>
-++++
-
-[role="mb-5"]
-{badge-j1--version-latest} {badge-j1--downloads}
-
-endif::[]
-
 
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -97,8 +64,9 @@ endif::[]
 SkipAd, excellent online YouTube video player to block adverising. Blocks
 all ads instantly - no more pre-roll, mid-roll, or overlay ads.
 
-SkipAd provides an 100% *free alternative* to *YouTube Premium* for watching
+_SkipAd_ provides an *100% free alternative* to *YouTube Premium* for watching
 a video undisturbed.
+
 
 [role="mt-5"]
 == Video selection
@@ -106,28 +74,55 @@ a video undisturbed.
 Paste a YT video link (or the YT video ID) to the input element below.
 
 // Include sub-documents (if any)
-// https://skipcut.com/
-// https://www.youtube.com/watch?v=-w37wr0b6KE
 // -----------------------------------------------------------------------------
+// https://skipcut.com/
+// == VideoJS Player over YouTube
+
+// lorem:sentences[3]
 
 ++++
-<div class="input-wrapper mt-4">
-  <div class="input-container">
-    <button id="pasteButton" class="paste-btn-inside" title="Paste from clipboard">
-      <i class="fas fa-paste"></i>
-      <span>Paste</span>
-    </button>
-    <input type="text" id="videoUrl" placeholder="https://www.youtube.com/watch?v=xxxx.. or xxxx..">
-  </div>
-  <!-- button id="loadVideo" class="watch-adfree-btn">Watch Ad Free</button -->
-</div>
 
-<!-- div class="video-title">
-  <i class="mdib mdib-video mdib-24px mr-2"></i>
-  Hazel Brugger · Immer noch wach
+<!-- div class="input-wrapper">
+  <div class="input-container">
+    <form id="urlForm" action="/pages/public/tester/videojs_over_yt/" method="get" class="">
+        <div class="input-group input-group-lg">
+            <input type="text" class="form-control" autofocus="" name="url" id="urlfield"
+              placeholder="  https://www.youtube.com/xxxx ... or xxxx ..." value="" aria-label="YT Video URL">
+            <div class="input-group-append">
+                <button class="btn btn-danger" type="submit" id="watchVideo" aria-label="VideoURL">
+                    <i class="fa fa-solid fa-video mr-2" aria-hidden="true"></i>
+                    <span class="hidden-xs inline">Watch Ad Free</span>
+                </button>
+            </div>
+        </div>
+    </form>
+  </div>
 </div -->
 
-<!-- div class="mb-5">
+
+<div class="input-wrapper">
+  <div class="input-container">
+      <button id="pasteButton" class="paste-btn-inside" title="Paste from clipboard">
+          <i class="fas fa-paste"></i>
+          <span>Paste</span>
+      </button>
+      <input type="text" id="videoUrl" placeholder="https://www.youtube.com/xxxx...">
+  </div>
+  <button id="loadVideo" class="watch-adfree-btn">Watch Ad Free</button>
+  <!-- div id="djButtons" class="dj-buttons" style="display: none;">
+      <button id="playA" class="watch-adfree-btn" style="margin-left:0;"><i class="fas fa-play"></i> A</button>
+      <button id="playB" class="watch-adfree-btn" style="margin-left:0;"><i class="fas fa-play"></i> B</button>
+  </div -->
+</div>
+
+<div id="yt_video"></div>
+
+<div class="video-title">
+    <i class="mdib mdib-video mdib-24px mr-2"></i>
+    Hazel Brugger · Immer noch wach
+</div>
+
+<div class="mb-5">
    <video
     id="-w37wr0b6KE"
     class="video-js vjs-theme-uno"
@@ -153,185 +148,71 @@ Paste a YT video link (or the YT video ID) to the input element below.
         }
      }'
   ></video>
-</div -->
-
-
-<div id="videoContainer" class="video-container mb-5">
-
-  <div id="emptyPlayerOverlay" class="empty-player-overlay">
-    <div class="empty-player-content">
-      <h3 class="notoc" style="opacity: 0.5">Paste YouTube Link/ID above</h3>
-      <h4 class="notoc" style="opacity: 0.5">or</h4>
-      <h3 class="notoc" style="opacity: 0.5">Paste from Clipboard (Button)</h3>
-      <!-- h4 class="notoc">and</h4>
-      <h4 class="notoc">Lean back and watch your video ad-free</h4 -->
-    </div>
-  </div>
-
 </div>
+
 ++++
 
-
-ifeval::[{history-enabled} == true]
 [role="mt-4"]
 == History
 
-[role="mb-4"]
+[role="mb-8"]
 A Private and personql history of last videos watched is stored in your
 browser Clear the cache to erase it anytime!
 
-++++
-<div id="videoHistory" class="history-list mb-8">
-  <div class="history-card card-base" data-video-id="-w37wr0b6KE">
-    <div class="history-thumb-wrapper">
-      <img class="history-thumb" src="https://img.youtube.com/vi/-w37wr0b6KE/mqdefault.jpg" alt="Hazel Brugger - Immer noch wach (GANZES PROGRAMM)">
-      <div class="history-play-overlay"><i class="fas fa-play"></i></div>
-      <!-- div class="history-duration">1:05:42</div -->
-    </div>
-    <div class="history-info">
-      <div class="history-title">Hazel Brugger - Immer noch wach (GANZES PROGRAMM)</div>
-      <div class="history-channel">Hazel Brugger • now</div>
-      <div class="history-meta"></div>
-      <div class="history-actions"><button class="history-btn" title="Download" aria-label="Download video"><i class="fas fa-download"></i></button><button class="history-btn" title="Share" aria-label="Share"><i class="fas fa-share-alt"></i></button><button class="history-btn delete" title="Delete" aria-label="Delete from history"><i class="fas fa-trash"></i></button></div>
-    </div>
-  </div>
-</div>
-++++
-
-endif::[]
 
 ++++
 <script>
 
-  var vjsDefaults;
-  var vjsSettings;
-  var vjsOptions;
+  window.tubeninja = (function () {
 
-  window.skipAdJS = (function () {
-    // -------------------------------------------------------------------------
-    // global variable settings
-    // -------------------------------------------------------------------------
-
-    // create settings object from module options
-    vjsDefaults = $.extend({}, {{videojs_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-    vjsSettings = $.extend({}, {{videojs_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-    vjsOptions  = $.extend(true, {}, vjsDefaults, vjsSettings);    
-
-    Element.prototype.appendAfter = function (element) {
-        element.parentNode.insertBefore(this, element.nextSibling);
-    };
-
-    String.prototype.contains = function (it) {
-        return this.indexOf(it) !== -1;
-    };
-
-    // =========================================================================
-    // helper functions
-    // -------------------------------------------------------------------------
-
-    // Funktion zum Erstellen des Video-Elements
-    function createVideoElement(videoId, width = 640, height = 360) {
-      // Video-Element erstellen
-      const video = document.createElement('video');
-      
-      // Klassen setzen
-      video.id = videoId;
-      video.className = 'video-js vjs-theme-uno';
-      
-      // Attribute setzen
-      video.setAttribute('controls', '');
-      video.setAttribute('width', width);
-      video.setAttribute('height', height);
-      video.setAttribute('poster', `//img.youtube.com/vi/${videoId}/maxresdefault.jpg`);
-      video.setAttribute('alt', 'Hazel Brugger · Immer noch wach');
-      video.setAttribute('aria-label', 'Hazel Brugger · Immer noch wach');
-      
-      // data-setup Konfiguration
-      const dataSetup = {
-        fluid: true,
-        techOrder: ['youtube', 'html5'],
-        sources: [{
-          type: 'video/youtube',
-          src: `//youtu.be/${videoId}`
-        }],
-        controlBar: {
-          pictureInPictureToggle: false,
-          volumePanel: {
-            inline: false
-          }
-        }
+      Element.prototype.appendAfter = function (element) {
+          element.parentNode.insertBefore(this, element.nextSibling);
       };
-      
-      video.setAttribute('data-setup', JSON.stringify(dataSetup));
-      
-      return video;
-    }
 
-    function addVideoToContainer(videoId, containerSelector) {
-        const container = document.getElementById(containerSelector);
-        
-        if (!container) {
-            console.error('Container nicht gefunden!');
-            return;
-        }
-        
-        container.innerHTML = `
-            <video
-                id="${videoId}"
-                class="video-js vjs-theme-uno"
-                controls
-                width="640"
-                height="360"
-                poster="//img.youtube.com/vi/${videoId}/maxresdefault.jpg"
-                alt="Hazel Brugger · Immer noch wach"
-                aria-label="Hazel Brugger · Immer noch wach"
-                data-setup='{
-                    "fluid": true,
-                    "techOrder": ["youtube", "html5"],
-                    "sources": [{
-                        "type": "video/youtube",
-                        "src": "//youtu.be/${videoId}"
-                    }],
-                    "controlBar": {
-                        "pictureInPictureToggle": false,
-                        "volumePanel": {
-                            "inline": false
-                        }
-                    }
-                }'
-            ></video>
-        `;
-    }
+      String.prototype.contains = function (it) {
+          return this.indexOf(it) !== -1;
+      };
 
-    var skipadjs = {
-      text: 'Download',
-      title: 'Download with TubeNinja',
-      target: '_blank',
-      btnClass: 'btn-tubeninja',
-      init: function () {
-        var videoID  = '-w37wr0b6KE';
+      var tubeninja = {
+          text: 'Download',
+          title: 'Download with TubeNinja',
+          target: '_blank',
+          btnClass: 'btn-tubeninja',
+          init: function () {
+              var els = document.getElementsByTagName('iframe');
+              for (var i = 0; i < els.length; i++) {
+                  var iframe = els[i];
+                  if (iframe.src.contains('youtube.com') || iframe.src.contains('vimeo.com')) {
+                      var dlbtn = document.createElement('a');
+                      dlbtn.className = tubeninja.btnClass;
+                      dlbtn.style = 'display:block;width:60px;';
+                      dlbtn.textContent = tubeninja.text;
+                      dlbtn.title = tubeninja.title;
+                      dlbtn.target = tubeninja.target;
+                      dlbtn.href = 'https://tubeninja.net/?url=' + iframe.src + '&utm_source=widget&utm_medium=widget';
+                      dlbtn.rel = 'nofollow';
+                      dlbtn.appendAfter(iframe);
+                  }
+              }
+          }
+      };
 
-        // Video dem Container hinzufügen
-        // addVideoToContainer(videoID, 'videoContainer');
-      }
-    };
+      document.addEventListener("DOMContentLoaded", function (event) {
+          tubeninja.init();
+      });
 
-    document.addEventListener("DOMContentLoaded", function (event) {
-      skipAdJS.init();
-    });
-
-    return skipadjs;
+      return tubeninja;
   }());
 
   var dependencies_met_page_ready = setInterval (function (options) {
-    var pageState   = $('#no_flicker').css("display");
-    var pageVisible = (pageState == 'block') ? true : false;
+    var pageState           = $('#no_flicker').css("display");
+    var pageVisible         = (pageState == 'block') ? true : false;
 
     if (j1.getState() === 'finished' && pageVisible) {
 
       $(document).on('click', 'a.ts, a.share', function (e) {
-        e.preventDefault();
-        window.open($(this).attr('href'), '', "width=550,height=350");
+          e.preventDefault();
+          window.open($(this).attr('href'), '', "width=550,height=350");
       });
 
       $('#urlfield').on('paste', function () {
@@ -346,10 +227,19 @@ endif::[]
 
   $(function() {
 
+    // =================================================================
+    // take over VideoJS configuration data (JSON data from Ruby)
+    // -----------------------------------------------------------------
+    var videojsDefaultConfigJson = '{"description":{"title":"J1 VideoJS","scope":"Default settings","location":"_data/modules/defaults/videojs.yml"},"defaults":{"enabled":false,"playbackRates":{"enabled":false,"values":[0.25,0.5,1,1.5,2]},"players":{"youtube":{"autoplay":0,"cc_load_policy":0,"controls":0,"disablekb":1,"enablejsapi":1,"fs":0,"iv_load_policy":3,"loop":0,"modestbranding":1,"rel":0,"showinfo":0,"default_poster":"/assets/image/icon/videojs/videojs-poster.png","poster":"maxresdefault.jpg","end":true,"start":true}},"plugins":{"autoCaption":{"enabled":false},"hotKeys":{"enabled":false,"seekStep":15,"volumeStep":0.1,"alwaysCaptureHotkeys":true,"captureDocumentHotkeys":false,"hotkeysFocusElementFilter":"function () { return false }","enableFullscreen":true,"enableHoverScroll":true,"enableInactiveFocus":true,"enableJogStyle":false,"enableMute":true,"enableModifiersForNumbers":true,"enableNumbers":false,"enableVolumeScroll":true,"skipInitialFocus":false},"skipButtons":{"enabled":false,"surroundPlayButton":false,"backwardIndex":1,"forwardIndex":1,"forward":10,"backward":10},"zoomButtons":{"enabled":false,"moveX":0,"moveY":0,"rotate":0,"zoom":1}}}}';
+
+    var videojsUserConfigJson = '{"description":{"title":"J1 VideoJS","scope":"User settings","location":"_data/modules/videojs.yml"},"settings":{"enabled":true,"playbackRates":{"enabled":true},"plugins":{"hotKeys":{"enabled":false,"enableInactiveFocus":false},"skipButtons":{"enabled":true,"surroundPlayButton":true},"zoomButtons":{"enabled":false}}}}';
+
     // =========================================================================
     // create config objects from JSON data
     // -------------------------------------------------------------------------
-    var videojsConfig           = vjsOptions;
+    var videojsDefaultSettings  = JSON.parse(videojsDefaultConfigJson);
+    var videojsUserSettings     = JSON.parse(videojsUserConfigJson);
+    var videojsConfig           = $.extend(true, {}, videojsDefaultSettings.defaults, videojsUserSettings.settings);
 
     // =========================================================================
     // VideoJS player settings
@@ -368,48 +258,8 @@ endif::[]
     // =========================================================================
     // helper functions
     // -------------------------------------------------------------------------
-
-    // Funktion zum Erstellen des Video-Elements
-    function createVideoElement(videoId, width = 640, height = 360) {
-      // Video-Element erstellen
-      const video = document.createElement('video');
-      
-      // Klassen setzen
-      video.id = videoId;
-      video.className = 'video-js vjs-theme-uno';
-      
-      // Attribute setzen
-      video.setAttribute('controls', '');
-      video.setAttribute('width', width);
-      video.setAttribute('height', height);
-      video.setAttribute('poster', `//img.youtube.com/vi/${videoId}/maxresdefault.jpg`);
-      video.setAttribute('alt', 'Hazel Brugger · Immer noch wach');
-      video.setAttribute('aria-label', 'Hazel Brugger · Immer noch wach');
-      
-      // data-setup Konfiguration
-      const dataSetup = {
-        fluid: true,
-        techOrder: ['youtube', 'html5'],
-        sources: [{
-          type: 'video/youtube',
-          src: `//youtu.be/${videoId}`
-        }],
-        controlBar: {
-          pictureInPictureToggle: false,
-          volumePanel: {
-            inline: false
-          }
-        }
-      };
-      
-      video.setAttribute('data-setup', JSON.stringify(dataSetup));
-      
-      return video;
-    }
-
     function addCaptionAfterImage(imageSrc) {
       const image = document.querySelector(`img[src="${imageSrc}"]`);
-
       if (image) {
         // create div|caption container
         const newDiv = document.createElement('div');
@@ -445,13 +295,13 @@ endif::[]
 
         // scroll page to the players top position
         // ---------------------------------------------------------------------
-        // vjs_player.addEventListener('click', function(event) {
-        //   const targetDiv         = document.getElementById("-w37wr0b6KE");
-        //   const targetDivPosition = targetDiv.offsetTop;
-        //   var scrollOffset        = (window.innerWidth >= 720) ? -130 : -110;
-        //   // scroll player to top position
-        //   window.scrollTo(0, targetDivPosition + scrollOffset);
-        // });// END EventListener 'click'
+        vjs_player.addEventListener('click', function(event) {
+          const targetDiv = document.getElementById("-w37wr0b6KE");
+          const targetDivPosition = targetDiv.offsetTop;
+          var scrollOffset = (window.innerWidth >= 720) ? -130 : -110;
+          // scroll player to top position
+          window.scrollTo(0, targetDivPosition + scrollOffset);
+        });// END EventListener 'click'
 
         clearInterval(dependencies_met_page_ready);
       }
@@ -509,7 +359,7 @@ endif::[]
             //
             if (piSkipButtons.surroundPlayButton) {
                 var backwardIndex = 0;
-                var forwardIndex  = 1;
+                var forwardIndex = 1;
             }
             vjsPlayer.skipButtons({
               backwardIndex: backwardIndex,
@@ -540,8 +390,169 @@ endif::[]
 </script>
 ++++
 
+
 ++++
 <style>
+
+
+:root {
+  --background-color: #f5f5f7;
+  --text-color: #1d1d1f;
+  --card-background: #fff;
+  --primary-color: #f84545;
+  --primary-hover: #a62a2a;
+  --shadow-color: rgba(0,0,0,.1);
+  --secondary-color: #86868b;
+  --border-color: #d2d2d7;
+}
+
+.fa-file-clipboard:before, .fa-paste:before {
+  content: "\f0ea";
+}
+
+/*
+form {
+    margin-bottom: .00125rem !important;
+}
+*/
+
+.input-wrapper {
+  align-items: center;
+  flex-direction: row;
+}
+
+/*
+.input-wrapper {
+  align-items: center;
+  background: var(--card-background);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  box-sizing: border-box;
+  display: flex;
+  margin: 0 auto 1.5rem;
+  max-width: 600px;
+  padding: 1.2rem;
+  width: 60%;
+}
+*/
+
+.input-wrapper {
+    align-items: center;
+    background: var(--card-background);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px var(--shadow-color);
+    box-sizing: border-box;
+    display: flex;
+    margin: 0 auto 1.5rem;
+    /* max-width: 600px; */
+    padding: 1.2rem;
+    width: 90%;
+}
+.input-container #videoUrl {
+  padding-left: 5.5rem!important;
+}
+
+/*
+.input-container {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  position: relative;
+  width: 100%;
+}
+*/
+
+.input-container {
+  align-items: center;
+  display: flex;
+  position: relative;
+  width: 100%;
+  flex: 1 1 0%;
+}
+
+
+.paste-btn-inside {
+  align-items: center;
+  background: #9c9c9e26;
+  border: none;
+  border-radius: 6px;
+  color: var(--text-color);
+  cursor: pointer;
+  display: flex;
+  font-size: .85rem;
+  font-weight: 500;
+  gap: .4rem;
+  height: auto;
+  justify-content: center;
+  left: .5rem;
+  min-width: auto;
+  padding: .4rem .6rem;
+  position: absolute;
+  /* top: 50%; */
+  top: 36%;
+  transform: translateY(-50%);
+  transition: all .3s ease;
+  white-space: nowrap;
+  width: auto;
+  z-index: 2;
+}
+
+.paste-btn-inside:hover {
+  background-color: var(--bs-primary);
+  box-shadow: 0 2px 8px var(--shadow-color);
+  color: #fff;
+}
+
+.watch-adfree-btn {
+  background: linear-gradient(90deg, var(--md-green-500), var(--md-green-700));
+  /* background: linear-gradient(90deg, var(--primary-color), #d44343); */
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  color: #fff;
+  flex-shrink: 0;
+  font-size: 1.08rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  margin-left: .75rem;
+  margin-bottom: .5rem;
+  padding: .85rem 2.2rem;
+  transition: background .2s, box-shadow .2s, transform .1s;
+}
+
+.watch-adfree-btn:focus,.watch-adfree-btn:hover {
+  background: linear-gradient(90deg, var(--md-green-700), var(--md-green-500));
+  box-shadow: 0 4px 16px var(--shadow-color);
+  outline: none;
+  transform: translateY(-2px) scale(1.03);
+}
+
+.input-container #videoUrl {
+  padding-left: 5.5rem!important;
+}
+
+input {
+  background-color: var(--card-background);
+  border: none;
+  border-radius: 8px;
+  color: var(--text-color);
+  flex: 1;
+  font-size: 1rem;
+  padding: .8rem 1rem;
+  transition: all .3s ease;
+  width: 100%;
+}
+
+#videoUrl {
+  background: none!important;
+  border: 1px solid var(--border-color)!important;
+  border-radius: 8px!important;
+  box-shadow: none!important;
+  color: var(--text-color)!important;
+  font-size: 1.01rem!important;
+  padding: .8rem 1rem .8rem 5.5rem!important;
+  transition: border-color .2s,box-shadow .2s;
+}
 
 </style>
 ++++

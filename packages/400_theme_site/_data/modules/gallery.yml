@@ -246,99 +246,6 @@ settings:
                                         <h2>South Korea</h2>
                                         <h3>Lotte World Tower Seoul</h3>
 
-
-      # ========================================================================
-      # VideoJS settings
-      # See settings: //jekyll.one/pages/public/manuals/videojs/videojs_api/
-      # ------------------------------------------------------------------------
-      #
-      videojs:
-        enabled:                        true
-        theme:                          uno
-
-        # ----------------------------------------------------------------------
-        # Player settings
-        # See: //jekyll.one/pages/public/manuals/videojs/lightgallery_api
-        # ----------------------------------------------------------------------
-        #
-        player:
-          enabled:                      true
-
-          # VideoJS
-          # --------------------------------------------------------------------
-          videojsPlayer:
-            enabled:                    true
-
-            options:
-              muted:                    false
-              preload:                  false
-              autoplayFirstVideo:       true
-              playbackRates:            [0.25, 0.5, 1, 1.5, 2]
-
-            controls:                   true
-            controlBar:
-              remainingTimeDisplay:     true
-              pictureInPictureToggle:   false
-              playbackRates:            [0.25, 0.5, 1, 1.5, 2]
-
-              volumePanel:
-                inline:                 false
-
-              hotkeysPlugin:
-                enabled:                true
-                options:
-                  volumeStep:           0.2
-
-              skipButtonsPlugin:
-                enabled:                  true
-                options:
-                  forward:                15
-                  backward:               15
-
-              zoomButtonsPlugin:
-                enabled:                true
-                options:
-                  moveX:                0
-                  moveY:                0
-                  rotate:               0
-                  zoom:                 1
-
-          # Vimeo
-          # --------------------------------------------------------------------
-          vimeoPlayer:
-            enabled:                    true
-            api:                        native                                  # native|videojs
-
-            options:
-              autoPlay:                 true
-              muted:                    true
-
-
-
-          # Wistia
-          # --------------------------------------------------------------------
-          wistiaPlayer:
-            enabled:                    true
-            api:                        native                                  # native|videojs
-
-            options:
-              autoPlay:                 true
-              fullscreenButton:         true
-              muted:                    false
-              qualityControl:           false
-
-          # Youtube
-          # --------------------------------------------------------------------
-          youTubePlayer:
-            enabled:                    true
-            api:                        videojs                                 # native|videojs
-
-            options:
-              autoPlay:                 true
-              muted:                    true
-              showinfo:                 true
-              controls:                 true
-
     # ==========================================================================
     # Video Galleries
     # --------------------------------------------------------------------------
@@ -1077,6 +984,138 @@ settings:
           description: >
                                         <h2> S02 Roberto Fonsecas </h2>
                                         <h3>At NPR 2025           </h3>
+
+    # ==========================================================================
+    # Video Galleries
+    # ==========================================================================
+
+    # --------------------------------------------------------------------------
+    # HTML5 VIDEO (online)
+    #
+    - gallery:
+      enabled:                          true
+
+      id:                               die_augenzeugen
+      type:                             video
+      video:                            html5
+      video_base_path:                  /assets/video/html5
+      image_base_path:                  /assets/video/poster/html5
+      thumb_base_path:                  /assets/video/poster/html5
+
+      # ------------------------------------------------------------------------
+      # Justified Gallery settings
+      # ------------------------------------------------------------------------
+      #
+      gallery_options:
+        rowHeight:                      250
+        gutters:                        3
+
+      # ------------------------------------------------------------------------
+      # Lightbox|lightGallery settings
+      # ------------------------------------------------------------------------
+      #
+      lightbox:
+        enabled:                        true
+        type:                           lg
+
+      lightGallery:
+        plugins:                        lgThumbnail, lgVideo
+
+        options:
+          licenseKey:                   0000-0000-000-0000
+          download:                     false
+          alignThumbnails:              left
+          animateThumb:                 true
+          autoplayFirstVideo:           true
+          videojs:                      true                                    # jadams: !!!
+          videojsTheme:                 vjs-theme-uno
+
+        videojsOptions:
+          enabled:                      true
+          muted:                        false
+          preload:                      true
+          controls:                     true
+          tracks:                       false                                   # jadams: !!!
+
+          hotKeysPlugin:
+            enabled:                    true
+            options:
+              volumeStep:               0.2          
+
+          controlBar:
+            playbackRates:              [0.25, 0.5, 1, 1.5, 2]
+            remainingTimeDisplay:       true
+            pictureInPictureToggle:     false
+
+            volumePanel:
+              inline:                   false
+
+            skipButtonsPlugin:
+              enabled:                  true
+              options:
+                forward:                5
+                backward:               5
+                backwardIndex:          0
+                forwardIndex:           1
+
+            zoomPlugin:
+              enabled:                  true
+              showZoom:                 true
+              showMove:                 false
+              showRotate:               false
+              gestureHandler:           false
+              options:
+                moveX:                  0
+                moveY:                  0
+                rotate:                 0
+                zoom:                   1
+
+      # ------------------------------------------------------------------------
+      # CSS filter options
+      #
+      filters:
+        enabled:                        false
+        grayscale:                      0
+        contrast:                       1
+        brightness:                     1
+
+      # ------------------------------------------------------------------------
+      # Video settings
+      # ------------------------------------------------------------------------
+      #
+      videos:
+
+        - video:                        # video 1
+          enabled:                      true
+
+          name:                         Peck Pocketed II
+          type:                         html5
+          api:                          videojs                                 # jadams !!!
+          size:                         1280-720
+          source:                       peck_pocketed.mp4
+          poster_image:                 peck_pocketed.jpg
+          pinterest_prefix:             Pin video
+          tweet_prefix:                 Try video
+          caption_text:                 Peck Pocketed &middot; Student Academy Award winning Cartoon Clip
+          description: >
+                                        <h2>Peck Pocketed by Kevin Herron | Disney Favorite</h2>
+                                        <h3>Student Academy Award winning Cartoon Clip</h3>
+
+        - video:                        # video 2
+          enabled:                      true
+
+          name:                         Rollin Wild II
+          type:                         html5
+          api:                          videojs                                 # jadams !!!
+          size:                         1280-720
+          source:                       rolling_wild.mp4
+          poster_image:                 rolling_wild.jpg
+          pinterest_prefix:             Pin video
+          tweet_prefix:                 Try video
+          caption_text:                 Rollin` Wild &middot; Short Funny animated video clip created at the Film Academy
+          description: >
+                                        <h2>Rollin` Wild</h2>
+                                        <h3>Short Funny Animated Clip created at the Film Academy</h3>
 
 # ------------------------------------------------------------------------------
 # END config

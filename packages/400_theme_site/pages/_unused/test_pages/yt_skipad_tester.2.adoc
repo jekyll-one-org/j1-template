@@ -30,7 +30,7 @@ regenerate:                             false
 personalization:                        true
 permalink:                              /pages/public/tester/yt_skipad_tester/
 
-resources:                              [ skipad, videojs ]
+resources:                              [ videojs ]
 resource_options:
   - toccer:
       collapseDepth:                    3
@@ -97,7 +97,7 @@ endif::[]
 SkipAd, excellent online YouTube video player to block adverising. Blocks
 all ads instantly - no more pre-roll, mid-roll, or overlay ads.
 
-SkipAd provides an 100% *free alternative* to *YouTube Premium* for watching
+_SkipAd_ provides an *100% free alternative* to *YouTube Premium* for watching
 a video undisturbed.
 
 [role="mt-5"]
@@ -156,7 +156,9 @@ Paste a YT video link (or the YT video ID) to the input element below.
 </div -->
 
 
-<div id="videoContainer" class="video-container mb-5">
+<div id="videoContainer" class="video-container  mb-5">
+
+  <!-- iframe id="player" frameborder="0" allowfullscreen="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" title="YouTube video player" width="100%" height="100%" src="https://www.youtube.com/embed/?autoplay=1&amp;mute=0&amp;playsinline=1&amp;rel=0&amp;modestbranding=1&amp;controls=1&amp;fs=1&amp;disablekb=0&amp;iv_load_policy=3&amp;cc_load_policy=0&amp;origin=https%3A%2F%2Fskipcut.com&amp;enablejsapi=1&amp;widgetid=1&amp;forigin=https%3A%2F%2Fskipcut.com%2F&amp;aoriginsup=1&amp;gporigin=https%3A%2F%2Fwww.google.com%2F&amp;vf=5"></iframe -->
 
   <div id="emptyPlayerOverlay" class="empty-player-overlay">
     <div class="empty-player-content">
@@ -186,13 +188,13 @@ browser Clear the cache to erase it anytime!
     <div class="history-thumb-wrapper">
       <img class="history-thumb" src="https://img.youtube.com/vi/-w37wr0b6KE/mqdefault.jpg" alt="Hazel Brugger - Immer noch wach (GANZES PROGRAMM)">
       <div class="history-play-overlay"><i class="fas fa-play"></i></div>
-      <!-- div class="history-duration">1:05:42</div -->
+      <div class="history-duration">1:05:42</div>
     </div>
     <div class="history-info">
       <div class="history-title">Hazel Brugger - Immer noch wach (GANZES PROGRAMM)</div>
       <div class="history-channel">Hazel Brugger • now</div>
       <div class="history-meta"></div>
-      <div class="history-actions"><button class="history-btn" title="Download" aria-label="Download video"><i class="fas fa-download"></i></button><button class="history-btn" title="Share" aria-label="Share"><i class="fas fa-share-alt"></i></button><button class="history-btn delete" title="Delete" aria-label="Delete from history"><i class="fas fa-trash"></i></button></div>
+      <div class="history-actions"><button class="yt-history-btn" title="Download" aria-label="Download video"><i class="fas fa-download"></i></button><button class="yt-history-btn" title="Share" aria-label="Share"><i class="fas fa-share-alt"></i></button><button class="yt-history-btn delete" title="Delete" aria-label="Delete from history"><i class="fas fa-trash"></i></button></div>
     </div>
   </div>
 </div>
@@ -225,94 +227,28 @@ endif::[]
         return this.indexOf(it) !== -1;
     };
 
-    // =========================================================================
-    // helper functions
-    // -------------------------------------------------------------------------
-
-    // Funktion zum Erstellen des Video-Elements
-    function createVideoElement(videoId, width = 640, height = 360) {
-      // Video-Element erstellen
-      const video = document.createElement('video');
-      
-      // Klassen setzen
-      video.id = videoId;
-      video.className = 'video-js vjs-theme-uno';
-      
-      // Attribute setzen
-      video.setAttribute('controls', '');
-      video.setAttribute('width', width);
-      video.setAttribute('height', height);
-      video.setAttribute('poster', `//img.youtube.com/vi/${videoId}/maxresdefault.jpg`);
-      video.setAttribute('alt', 'Hazel Brugger · Immer noch wach');
-      video.setAttribute('aria-label', 'Hazel Brugger · Immer noch wach');
-      
-      // data-setup Konfiguration
-      const dataSetup = {
-        fluid: true,
-        techOrder: ['youtube', 'html5'],
-        sources: [{
-          type: 'video/youtube',
-          src: `//youtu.be/${videoId}`
-        }],
-        controlBar: {
-          pictureInPictureToggle: false,
-          volumePanel: {
-            inline: false
-          }
-        }
-      };
-      
-      video.setAttribute('data-setup', JSON.stringify(dataSetup));
-      
-      return video;
-    }
-
-    function addVideoToContainer(videoId, containerSelector) {
-        const container = document.getElementById(containerSelector);
-        
-        if (!container) {
-            console.error('Container nicht gefunden!');
-            return;
-        }
-        
-        container.innerHTML = `
-            <video
-                id="${videoId}"
-                class="video-js vjs-theme-uno"
-                controls
-                width="640"
-                height="360"
-                poster="//img.youtube.com/vi/${videoId}/maxresdefault.jpg"
-                alt="Hazel Brugger · Immer noch wach"
-                aria-label="Hazel Brugger · Immer noch wach"
-                data-setup='{
-                    "fluid": true,
-                    "techOrder": ["youtube", "html5"],
-                    "sources": [{
-                        "type": "video/youtube",
-                        "src": "//youtu.be/${videoId}"
-                    }],
-                    "controlBar": {
-                        "pictureInPictureToggle": false,
-                        "volumePanel": {
-                            "inline": false
-                        }
-                    }
-                }'
-            ></video>
-        `;
-    }
-
     var skipadjs = {
       text: 'Download',
       title: 'Download with TubeNinja',
       target: '_blank',
       btnClass: 'btn-tubeninja',
       init: function () {
-        var videoID  = '-w37wr0b6KE';
+        var els = document.getElementsByTagName('iframe');
+        for (var i = 0; i < els.length; i++) {
+          var iframe = els[i];
+          if (iframe.src.contains('youtube.com') || iframe.src.contains('vimeo.com')) {
+            var dlbtn = document.createElement('a');
+              dlbtn.className = tubeninja.btnClass;
+              dlbtn.style = 'display:block;width:60px;';
+              dlbtn.textContent = tubeninja.text;
+              dlbtn.title = tubeninja.title;
+              dlbtn.target = tubeninja.target;
+              dlbtn.href = 'https://tubeninja.net/?url=' + iframe.src + '&utm_source=widget&utm_medium=widget';
+              dlbtn.rel = 'nofollow';
 
-        // Video dem Container hinzufügen
-        // addVideoToContainer(videoID, 'videoContainer');
+              dlbtn.appendAfter(iframe);
+            }
+        }
       }
     };
 
@@ -347,9 +283,21 @@ endif::[]
   $(function() {
 
     // =========================================================================
+    // take over VideoJS configuration data (JSON data from Ruby)
+    // -------------------------------------------------------------------------
+    //
+    // var videojsDefaultConfigJson = '{"description":{"title":"J1 VideoJS","scope":"Default settings","location":"_data/modules/defaults/videojs.yml"},"defaults":{"enabled":false,"playbackRates":{"enabled":false,"values":[0.25,0.5,1,1.5,2]},"players":{"youtube":{"autoplay":0,"cc_load_policy":0,"controls":0,"disablekb":1,"enablejsapi":1,"fs":0,"iv_load_policy":3,"loop":0,"modestbranding":1,"rel":0,"showinfo":0,"default_poster":"/assets/image/icon/videojs/videojs-poster.png","poster":"maxresdefault.jpg","end":true,"start":true}},"plugins":{"autoCaption":{"enabled":false},"hotKeys":{"enabled":false,"seekStep":15,"volumeStep":0.1,"alwaysCaptureHotkeys":true,"captureDocumentHotkeys":false,"hotkeysFocusElementFilter":"function () { return false }","enableFullscreen":true,"enableHoverScroll":true,"enableInactiveFocus":true,"enableJogStyle":false,"enableMute":true,"enableModifiersForNumbers":true,"enableNumbers":false,"enableVolumeScroll":true,"skipInitialFocus":false},"skipButtons":{"enabled":false,"surroundPlayButton":false,"backwardIndex":1,"forwardIndex":1,"forward":10,"backward":10},"zoomButtons":{"enabled":false,"moveX":0,"moveY":0,"rotate":0,"zoom":1}}}}';
+
+    // var videojsUserConfigJson = '{"description":{"title":"J1 VideoJS","scope":"User settings","location":"_data/modules/videojs.yml"},"settings":{"enabled":true,"playbackRates":{"enabled":true},"plugins":{"hotKeys":{"enabled":false,"enableInactiveFocus":false},"skipButtons":{"enabled":true,"surroundPlayButton":true},"zoomButtons":{"enabled":false}}}}';
+
+    // =========================================================================
     // create config objects from JSON data
     // -------------------------------------------------------------------------
-    var videojsConfig           = vjsOptions;
+    // var videojsDefaultSettings  = JSON.parse(videojsDefaultConfigJson);
+    // var videojsUserSettings     = JSON.parse(videojsUserConfigJson);
+    // var videojsConfig           = $.extend(true, {}, videojsDefaultSettings.defaults, videojsUserSettings.settings);
+
+    var videojsConfig              = vjsOptions;
 
     // =========================================================================
     // VideoJS player settings
@@ -368,45 +316,6 @@ endif::[]
     // =========================================================================
     // helper functions
     // -------------------------------------------------------------------------
-
-    // Funktion zum Erstellen des Video-Elements
-    function createVideoElement(videoId, width = 640, height = 360) {
-      // Video-Element erstellen
-      const video = document.createElement('video');
-      
-      // Klassen setzen
-      video.id = videoId;
-      video.className = 'video-js vjs-theme-uno';
-      
-      // Attribute setzen
-      video.setAttribute('controls', '');
-      video.setAttribute('width', width);
-      video.setAttribute('height', height);
-      video.setAttribute('poster', `//img.youtube.com/vi/${videoId}/maxresdefault.jpg`);
-      video.setAttribute('alt', 'Hazel Brugger · Immer noch wach');
-      video.setAttribute('aria-label', 'Hazel Brugger · Immer noch wach');
-      
-      // data-setup Konfiguration
-      const dataSetup = {
-        fluid: true,
-        techOrder: ['youtube', 'html5'],
-        sources: [{
-          type: 'video/youtube',
-          src: `//youtu.be/${videoId}`
-        }],
-        controlBar: {
-          pictureInPictureToggle: false,
-          volumePanel: {
-            inline: false
-          }
-        }
-      };
-      
-      video.setAttribute('data-setup', JSON.stringify(dataSetup));
-      
-      return video;
-    }
-
     function addCaptionAfterImage(imageSrc) {
       const image = document.querySelector(`img[src="${imageSrc}"]`);
 
@@ -540,8 +449,366 @@ endif::[]
 </script>
 ++++
 
+
 ++++
 <style>
+
+:root {
+  --background-color: #f5f5f7;
+  --text-color: #1d1d1f;
+  --card-background: #fff;
+  --primary-color: #f84545;
+  --primary-hover: #a62a2a;
+  --shadow-color: rgba(0,0,0,.1);
+  --secondary-color: #86868b;
+  --border-color: #d2d2d7;
+}
+
+.fa-file-clipboard:before, .fa-paste:before {
+  content: "\f0ea";
+}
+
+.input-wrapper {
+  align-items: center;
+  flex-direction: row;
+}
+
+.input-wrapper {
+    align-items: center;
+    background: var(--card-background);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px var(--shadow-color);
+    box-sizing: border-box;
+    display: flex;
+    margin: 0 auto 1.5rem;
+    /* max-width: 600px; */
+    padding: 1.2rem;
+    width: 90%;
+}
+.input-container #videoUrl {
+  padding-left: 5.5rem!important;
+}
+
+.input-container {
+  align-items: center;
+  display: flex;
+  position: relative;
+  width: 100%;
+  flex: 1 1 0%;
+}
+
+.paste-btn-inside {
+  align-items: center;
+  background: #9c9c9e26;
+  border: none;
+  border-radius: 6px;
+  color: var(--text-color);
+  cursor: pointer;
+  display: flex;
+  font-size: .85rem;
+  font-weight: 500;
+  gap: .4rem;
+  height: auto;
+  justify-content: center;
+  left: .5rem;
+  min-width: auto;
+  padding: .4rem .6rem;
+  position: absolute;
+  /* top: 50%; */
+  top: 36%;
+  transform: translateY(-50%);
+  transition: all .3s ease;
+  white-space: nowrap;
+  width: auto;
+  z-index: 2;
+}
+
+.paste-btn-inside:hover {
+  background-color: var(--bs-primary);
+  box-shadow: 0 2px 8px var(--shadow-color);
+  color: #fff;
+}
+
+.watch-adfree-btn {
+  background: linear-gradient(90deg, var(--md-green-500), var(--md-green-700));
+  /* background: linear-gradient(90deg, var(--primary-color), #d44343); */
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  color: #fff;
+  flex-shrink: 0;
+  font-size: 1.08rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  margin-left: .75rem;
+  margin-bottom: .5rem;
+  padding: .85rem 2.2rem;
+  transition: background .2s, box-shadow .2s, transform .1s;
+}
+
+.watch-adfree-btn:focus,.watch-adfree-btn:hover {
+  background: linear-gradient(90deg, var(--md-green-700), var(--md-green-500));
+  box-shadow: 0 4px 16px var(--shadow-color);
+  outline: none;
+  transform: translateY(-2px) scale(1.03);
+}
+
+.input-container #videoUrl {
+  padding-left: 5.5rem!important;
+}
+
+input {
+  background-color: var(--card-background);
+  border: none;
+  border-radius: 8px;
+  color: var(--text-color);
+  flex: 1;
+  font-size: 1rem;
+  padding: .8rem 1rem;
+  transition: all .3s ease;
+  width: 100%;
+}
+
+#videoUrl {
+  background: none!important;
+  border: 1px solid var(--border-color)!important;
+  border-radius: 8px!important;
+  box-shadow: none!important;
+  color: var(--text-color)!important;
+  font-size: 1.01rem!important;
+  padding: .8rem 1rem .8rem 5.5rem!important;
+  transition: border-color .2s,box-shadow .2s;
+}
+
+.video-section {
+    margin: 2rem 0;
+    width: 100%;
+}
+
+.video-container {
+    position: relative;
+}
+
+.video-container {
+    aspect-ratio: 16/9;
+    background-color: var(--card-background);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px var(--shadow-color);
+    max-width: 100vw;
+    overflow: hidden;
+    width: 100%;
+}
+
+.empty-player-overlay {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  position: relative;
+  width: 100%;
+  flex: 1 1 0%;  
+  justify-content: center;
+
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  top: 0px;
+
+  z-index: 5;
+  background: var(--card-background);
+  border: 2px dashed var(--border-color);
+  border-radius: 12px;
+  transition: 0.3s;
+}
+
+.empty-player-content {
+  max-width: 100%;
+  text-align: center;
+  padding: 2rem;
+}
+
+.history-list {
+    padding-top: .5rem;
+}
+
+.history-list {
+    background: none;
+    display: grid;
+    gap: 1.2rem;
+    grid-template-columns: repeat(4,1fr);
+    padding: 0;
+}
+
+.dj-section~.history-section .history-card {
+    cursor: default;
+}
+
+.card-base {
+    background: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    transition: transform .3s ease,background-color .3s ease;
+}
+
+.history-card {
+    background: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    overflow: hidden;
+    transition: all .3s ease;
+}
+
+.history-thumb {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform .3s ease;
+    width: 100%;
+}
+
+.history-play-overlay {
+    align-items: center;
+    backdrop-filter: blur(10px);
+    background: rgba(0,0,0,.549);
+    border: 1px solid #ffffff23;
+    border-radius: 50%;
+    box-shadow: 0 10px 30px rgba(0,0,0,.2);
+    color: #fff;
+    display: flex;
+    font-size: 20px;
+    height: 60px;
+    justify-content: center;
+    left: 50%;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    transition: opacity .3s ease;
+    width: 60px;
+}
+
+.featured-badge, .history-duration, .playlist-badge-overlay {
+    backdrop-filter: blur(5px);
+    bottom: 8px;
+    color: #fff;
+    font-family: Segoe UI,Tahoma,Geneva,Verdana,sans-serif;
+    line-height: 1.2;
+    position: absolute;
+    z-index: 2;
+}
+
+.history-duration, .playlist-badge-overlay {
+    background: rgba(0,0,0,.8);
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 2px 6px;
+    right: 8px;
+}
+.history-info {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    justify-content: space-between;
+    padding: 12px;
+}
+
+.history-title {
+    color: var(--text-primary);
+    display: -webkit-box;
+    font-size: .9rem;
+    font-weight: 600;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    line-height: 1.4;
+    margin-bottom: 8px;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.history-channel, .history-meta {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.history-channel {
+    color: var(--secondary-color);
+    font-size: .85rem;
+    line-height: 1.3;
+    margin-bottom: 8px;
+    word-break: break-word;
+}
+
+
+.history-meta {
+    gap: 10px;
+    justify-content: flex-start;
+    margin-bottom: auto;
+    margin-top: 4px;
+}
+
+.history-channel, .history-meta {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.history-actions {
+    margin-top: .3rem;
+}
+
+.history-actions {
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    justify-content: space-evenly;
+    margin-top: 12px;
+    padding-top: 8px;
+}
+
+.yt-history-btn {
+    align-items: center;
+    border: none;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    box-shadow: none;
+    color: var(--secondary-color);
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 1rem;
+    height: 32px;
+    justify-content: center;
+    margin: 0 2px;
+    outline: none;
+    transition: all .3s ease;
+    width: 32px;
+}
+
+.yt-history-btn:hover {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 8px rgba(0,0,0,.1);
+    color: #fff;
+    outline: none;
+    transform: translateY(-2px);
+}
+
+.powered-by {
+  margin-bottom: 3rem !important;
+  background-color: var(--bs-primary);
+  color: white;
+  padding: 4px 8px;
+  /* border-radius: 58px; */
+  font-size: 12px;
+  font-weight: bold;
+}
 
 </style>
 ++++

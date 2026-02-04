@@ -1,0 +1,343 @@
+---
+title:                                  Die Augenzeugen
+tagline:                                Thriller
+title_extention:                        Vierteiliger Thriller
+
+
+date:                                   2024-09-14
+#last_modified:                         2023-01-01
+
+description: >
+                                        Vierteiliger Thriller über zwei 16-jährige Jungs,
+                                        die zufällig einen dreifachen Mord beobachten, ins
+                                        Visier des Killers geraten  und damit eine große
+                                        Ermittlung der Polizei in München im Bereich der
+                                        Organisierten Kriminatität (OK) lostreten
+
+keywords:                               Musik, TV, Show, Igor Levit, Mark Forster,
+                                        Piano, VOX
+
+categories:                             [ Video ]
+tags:                                   [ Show, Mark Forster, Igor Levit ]
+
+image:
+  path:                                 /assets/image/page/die-augenzeugen/die-augenzeugen-1300.jpg
+  width:                                1280
+  height:                               720
+
+tts:                                    true
+fab_menu_id:                            open_toc
+comments:                               false
+regenerate:                             false
+permalink:                              /pages/public/video/filme/die-augenzeugen/
+
+resources:                              [ lightgallery, gallery, videojs ]
+resource_options:
+  - attic:
+      padding_top:                      550
+      slides:
+        - url:                          /assets/image/page/die-augenzeugen/die-augenzeugen-1300.jpg
+          alt:                          Die Augenzeugen
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+Die Augenzeugen ist ein vierteiliger Thriller über zwei 16-jährige Jungs,
+die zufällig einen dreifachen Mord beobachten, ins Visier des Killers geraten
+und damit eine große Ermittlung der Polizei in München im Bereich der
+Organisierten Kriminatität (OK) lostreten.
+
+++++
+<div class="video-title">
+  <i class="mdib mdi-bs-primary mdib-clock mdib-24px mr-2"></i>
+  45+ Minuten Videozeit
+</div>
+++++
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+[role="mt-5"]
+== Über die Serie
+
+Lukas und sein Freund Jan werden im Wald Zeuge eines Mordes an drei
+Gangmitgliedern. Sie selbst geraten in Gefahr und können noch rechtzeitig
+entkommen.
+
+Jedoch sind sie sich sicher: Der Killer ist auf freiem Fuß und er weiß um
+ihre Existenz. Obwohl Jan bei der örtlichen Polizeichefin Helen aufwächst,
+behält er das Gesehene für sich.
+
+Helen übernimmt den Fall zusammen mit ihrer Münchner Kollegin Corinna und
+deren neuen Chef Roman Berg, einem ehemaligen Undercover-Ermittler. Während
+die Jugendlichen sich in einem Gefühlschaos aus Angst und Scham befinden
+und hoffen, durch ihr Schweigen mit dem Leben davonzukommen, fasst der
+unbekannte Mörder inmitten eines sich anbahnenden Bandenkriegs in München
+den Entschluss, alle Zeugen auszuschalten.
+
+[role="mt-4"]
+[NOTE]
+====
+Zum Abspielen der Videos ist eine Internetverbindung zwingend *erforderlich*.
+Aus Gründen des *Urheberschutzes*, laden die Video Player alle Beiträge
+über das Angebot von
+link://www.ardmediathek.de/serien_spannung/[ARD Mediathek, {browser-window--new}].
+
+Videos verfügbar bis einschließlich: *01.05.2026*.
+====
+
+
+[role="mt-5"]
+=== Hauptfiguren
+
+[cols="2a,3a,7a", options="header", width="100%", role="table-striped rtable mt-4"]
+|===
+|Name |Rolle |Verbindungen\|Charakteristika
+
+|*Jan Severing*
+|16-jähriger Schüler, einer der titelgebenden Augenzeugen.
+|Neffe von Kommissarin Helen Severing, heimlich in Mitschüler Lukas
+verliebt, gerät nach der Mordnacht massiv unter Druck, weil der Killer
+ihn erkannt hat; ringt zwischen Loyalität zu Lukas, Angst und dem Drang,
+die Wahrheit zu sagen.
+
+|*Lukas Watzinger*
+|16-jähriger Schüler, zweiter Augenzeuge und Jans
+Freund. |Sohn des Sägewerksbesitzers Erich Watzinger, entwickelt eine
+Beziehung zu Jan; will die Nacht im Wald unbedingt geheim halten,
+verstrickt sich in Lügen und wird zusätzlich durch ein Erpresservideo
+über ihr Sexvideo unter Druck gesetzt.
+
+|*Helen Severing*
+|Kommissarin, Jans Tante und wichtigste Ermittlerin.
+|Zog nach dem Tod ihrer Schwester mit Jan aufs Land; wird in den
+Mordfall hineingezogen, ohne zunächst zu wissen, dass ihr eigener Neffe
+Zeuge ist; arbeitet mit ihrer Nachfolgerin Corinna Will in der
+OK-Abteilung zusammen und ist beruflich wie privat stark involviert.
+
+|*Corinna Will*
+|Leiterin/Ermittlerin im Dezernat Organisierte Kriminalität (OK) München.
+|Früher Kollegin von Helen, jetzt ihre Nachfolgerin; pflegt einen eher
+harten, wenig teamorientierten Stil; muss mit Helen kooperieren, als klar
+wird, dass Biker-Gang und Mafia-Clan verwickelt sind; wird am Ende auf
+Helens Empfehlung zur neuen Leiterin des Dezernats befördert.
+
+|*Roman Berg*
+|Auftragskiller und eigentlicher Täter in der Waldhütte.
+|Gibt sich zeitweise als Arzt aus; erschießt in der Hütte drei
+Mitglieder der Biker-Gang _Balkan Barbarians_, später versucht er, die
+beiden jugendlichen Zeugen zu finden und zu töten; wird im Finale bei
+einer Schießerei im Wald von Helen erschossen.
+
+|*Balkan Barbarians*
+|Münchner Biker-Gang, drei ihrer Mitglieder werden in der Hütte getötet.
+|Verstrickt in organisierte Kriminalität; steht in Verbindung zum Münchner
+Untergrund, bildet eine Konfliktlinie gegen den italienischen Fontana-Clan;
+ihre interne Situation und der Mord an einem verdeckten Ermittler verschärfen
+den Druck auf die Polizei.
+
+|*Vincenzo Fontana*
+|Kopf eines italienischen Mafia-Clans in München.
+|Führt einen einflussreichen Clan, der mit der Biker-Gang um Einfluss
+konkurriert; als seine Tochter Vincenza verschwindet, eskaliert der Fall
+und die Ermittlungen nehmen größere Dimensionen an.
+
+|*Vincenza (Fontana)*
+|Tochter von Vincenzo Fontana.
+|Ihr Verschwinden erhöht den Druck auf Polizei und Clan; wird zum Hebel,
+über den sich die Verbindungen zwischen Biker-Gang und Clan zuspitzen
+und die Ermittlungen beschleunigt werden.
+
+|*Erich Watzinger*
+|Vater von Lukas, Betreiber eines Sägewerks.
+|Hat ein angespanntes Verhältnis zu Lukas; sein Sägewerk wird Schauplatz
+eines späteren Zwischenfalls, nach dem Lukas im Koma landet; Erich wird
+verhaftet, was die familiäre Krise verschärft.
+
+|*Mirek Polanski*
+|Kleinkrimineller, der die Jungs in der Mordnacht gesehen hat.
+|Beobachtet Jan und Lukas in der Hütte und filmt ein
+Sexvideo von ihnen; erpresst Lukas mit dem Video, um Geld zu bekommen;
+wird zunächst vom Killer Branic ins Visier genommen und später von Lukas
+im Handgemenge erschossen.
+
+|*Franjo Pranjic*
+|Mitglied/Figur im Umfeld der _Balkan Barbarians_.
+|Mit der Biker-Gang und der Münchner Unterwelt verknüpft; seine Rolle
+unterstreicht die internationale und brutale Struktur der Gang; Teil des
+Geflechts aus Gewalt, Drogen und Auftragsmorden.
+
+|*Hannah Berg*
+|Angehörige im Umfeld Roman Bergs.
+|Verknüpft den Killer mit einer bürgerlicheren Fassade; dient als
+emotionaler Bezugspunkt und Kontrast zu seiner Kaltblütigkeit.
+
+|===
+
+
+[role="mt-5"]
+== Videos
+
+.Episoden
+gallery::die_augenzeugen[role="mt-4 mb-4"]
+
+
+[role="mt-5"]
+== Episoden
+
+[role="mt-4"]
+=== Episode 1 - Schweigen
+
+Die Serie eröffnet mit der Downhill-Tour von Jan und Lukas, die in der
+abgelegenen Jagdhütte endet, wo die beiden sich erstmals offen zueinander
+bekennen und intim werden.
+
+Kurz darauf beobachten sie draußen, wie die Biker-Gang einen gefesselten
+Mann verschleppt. Als dieser überraschend eine Waffe an sich bringt, fallen
+mehrere Schüsse, drei Biker sterben und es wird deutlich, dass hier
+Profikriminalität am Werk ist.
+
+Jan wird beim panischen Rückzug von Roman Berg gesehen, die beiden Jugendlichen
+können jedoch fliehen und beschließen im Schock, mit niemandem über das
+Gesehene zu sprechen.
+
+Parallel beginnt Helen Severing, die mit Jan auf dem Land lebt, in München
+zu ermitteln, nachdem unter den Toten ein verdeckter Ermittler identifiziert
+wird und sie ihre frühere Kollegin Corinna Will aus der OK-Abteilung
+wiedertrifft.
+
+Erste Hinweise deuten darauf hin, dass sowohl die _Balkan Barbarians_ als
+auch der Fontana-Clan in einen größeren Konflikt verstrickt sind, während
+Jan und Lukas versuchen, den Alltag in Schule und Familie aufrechtzuerhalten.
+
+
+[role="mt-4"]
+=== Episode 2 - Lügen
+
+In der Episode stehen die psychischen Folgen der Mordnacht im Vordergrund:
+Jan und Lukas sind traumatisiert, gleichzeitig wächst die Anziehung zwischen
+ihnen, was das Schweigen noch komplizierter macht.
+
+Lukas entdeckt, dass jemand ein Video ihres Treffens in der Hütte aufgenommen
+hat. Ein Erpresservideo mit intimen Szenen taucht auf, das die beiden zu
+outen droht und sie zusätzlich in eine Spirale aus Angst, Scham und
+Geheimnissen zwingt.
+
+Hinter dem Video steckt Mirek Polanski, der die Jungs beobachtet hatte und
+nun Geld fordert, während gleichzeitig klar wird, dass der Mann, der die
+Biker erschossen hat, gezielt nach den Augenzeugen sucht.
+
+Helen spürt, dass Jan ihr etwas Entscheidendes verschweigt, während sie
+dienstlich mit Corinna Will die Spur zwischen Biker-Gang und Fontana-Clan
+verfolgt, in der auch das Verschwinden von Fontana-Tochter Vincenza eine
+beunruhigende Rolle spielt.
+
+Die Episode kulminiert darin, dass die Lügen der beiden Jungen ihr Umfeld
+immer stärker belasten und sie sich immer mehr in Gefahr bringen, ohne
+sich Erwachsenen anzuvertrauen.
+
+
+[role="mt-4"]
+=== Episode 3 - Kontrollverlust
+
+Die Lage eskaliert weiter, als Mirek Lukas mit dem Messer angreift, um mehr
+Geld aus der Erpressung herauszuschlagen. In einem Gerangel greift Lukas zur
+Tatwaffe aus der Mordnacht, erschießt Mirek und wird selbst durch das Messer
+schwer verletzt, sodass er ins Krankenhaus eingeliefert wird und im Koma liegt.
+
+Die Polizei nimmt Lukas’ Vater Erich fest, wodurch sich die familiäre Krise
+dramatisch zuspitzt und Jan sich noch isolierter fühlt. Unterdessen arbeitet
+Jan mit einem Polizeizeichner zusammen und fertigt - innerlich zwischen Angst
+und Verantwortungsgefühl hin- und hergerissen - ein Phantombild des Killers
+an, das später zur zentralen Spur wird.
+
+Die Ermittlungen von Helen und Corinna zeigen nun immer klarer, wie tief die
+Biker-Gang, der Fontana-Clan und der Auftragskiller Roman Berg im Münchner
+Untergrund vernetzt sind, während die Kontrolle über die Situation den
+Beteiligten zu entgleiten droht.
+
+
+[role="mt-4"]
+=== Episode 4 - Schutzlos
+
+Zu Beginn der letzten Folge liegt Lukas nach einem Zwischenfall im Sägewerk
+seines Vaters bewusstlos im Krankenhaus, wodurch Jan sich noch stärker bedroht
+fühlt. Ohne seinen Freund und Mitwisser scheint er dem Killer schutzlos
+ausgeliefert.
+
+Jan bricht schließlich sein Schweigen und vertraut sich Helen an, schildert
+die Nacht in der Hütte und die Morde, kennt aber nur das Gesicht, nicht den
+Namen des Täters.
+
+Als Jan Roman Berg überraschend auf dem Polizeirevier sieht, erkennt er ihn
+wieder. Berg gibt sich als Arzt aus, und in dem Moment wird klar, dass auch
+der Killer nun genau weiß, wer Jan ist.
+
+Berg lockt Jan ins Krankenhaus, versucht dort, den im Koma liegenden Lukas zu
+töten und entführt Jan als Geisel, während Helen und Corinna die Verfolgung
+aufnehmen.
+
+Im Wald kommt es zu einer finalen Konfrontation und Schießerei, bei der
+Helen Roman Berg erschießt, Jan gerettet wird, Lukas später aus dem Koma
+erwacht und die beiden Jungen ihre Beziehung öffentlich machen, während
+Corinna Will auf Helens Empfehlung die Leitung des Dezernats für Organisierte
+Kriminalität übernimmt.
+
+
+[role="mt-5"]
+== Kritik
+
+Die Augenzeugen ist eine solide, stilistisch hochwertige Miniserie, die vor
+allem durch Atmosphäre und moralische Grundfragen überzeugt. Sie eignet sich
+besonders für Zuschauer:innen, die psychologisch angelegte Thriller mögen
+und weniger Wert auf eine rasante Handlung legen.
+
+Bewertung (Stars): *3,5* von *5*.
+
+
+[role="mt-4"]
+=== Stärken
+
+Die Serie punktet mit einer dichten, oft bedrückenden Stimmung. Die
+Naturkulissen, das reduzierte Farbkonzept und ruhige Kamerafahrten erzeugen
+eine konstante Spannung. Visuell erinnert das an skandinavische Noir-
+Traditionen. Kühl, klar und kontrolliert.
+
+Die jugendlichen Darsteller überzeugen durch ein introvertiertes, glaubwürdiges
+Spiel. Auch die Rollen der Erwachsenen sind bewusst unterkühlt angelegt,
+was gut zur Atmosphäre passt.
+
+
+[role="mt-4"]
+=== Schwächen
+
+Trotz kurzer Laufzeit leidet die Serie unter Längen. Szenen wiederholen
+emotionale Zustände ohne neue Erkenntnisse zu liefern. Spannung entsteht
+mehr durch Atmosphäre als durch narrative Entwicklung.
+
+Die inneren Konflikte der Hauptfiguren werden angedeutet, aber selten
+konsequent vertieft. Gerade die Beziehung zwischen den Jugendlichen hätte
+mehr erzählerischen Raum verdient, um wirklich berührend zu sein.
+
+Wer das norwegischen Original kennt oder mit Genre-Konventionen vertraut ist,
+wird einige Wendungen früh erahnen. Überraschungen sind rar, das Finale wirkt
+eher konsequent als zwingend.
+

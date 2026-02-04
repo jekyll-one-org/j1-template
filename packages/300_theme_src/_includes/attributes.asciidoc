@@ -534,6 +534,10 @@ tag::tags[]
 :badge-j1-gh--last-commit:                        image://img.shields.io/github/last-commit/jekyll-one-org/j1-template-base[GitHub last commit]
 :badge-j1-gh--stars:                              image://img.shields.io/github/stars/jekyll-one-org/j1-template?style=social[GitHub Repo stars]
 
+// custom badges
+//
+// :powered-by-j1:                                ++++ <span class="powered-by">Powered by J1 Template</span> ++++
+
 // special characters
 //
 :char-space:                                      &nbsp;

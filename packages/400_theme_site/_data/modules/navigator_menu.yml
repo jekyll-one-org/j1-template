@@ -462,6 +462,14 @@
     #   href:                             /pages/public/tools/tester/ats/
     #   icon:                             speaker
 
+    - title:                            Die Augenzeugen
+      href:                             /pages/public/video/filme/die-augenzeugen/
+      icon:                             view-dashboard-variant
+
+    - title:                            SkipAd Tester
+      href:                             /pages/public/tester/yt_skipad_tester/
+      icon:                             advertisements-off
+
     - title:                            Speak2Me TTS Karaoke
       href:                             /pages/public/speak2me_hl_test_doc/
       icon:                             speaker

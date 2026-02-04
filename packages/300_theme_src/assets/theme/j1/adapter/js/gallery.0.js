@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/gallery.js (2)
+ # ~/assets/theme/j1/adapter/js/gallery.js (0)
  # Liquid template to create the J1 Adapter for J1 Gallery
  #
  # Product/Info:
@@ -38,33 +38,27 @@ regenerate:                             true
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign gallery_settings  = modules.gallery.settings %}
-
 {% assign gallery_defaults  = modules.defaults.gallery.defaults %}
-{% assign gallery_players   = modules.gallery_app.settings %}
-{% assign gallery_playlists = modules.gallery_playlists.settings %}
+{% assign gallery_settings  = modules.gallery.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign gallery_options   = gallery_defaults | merge: gallery_players %}
-{% assign gallery_options   = gallery_options  | merge: gallery_playlists %}
-{% assign galleries         = gallery_options.galleries %}
+{% assign gallery_options   = gallery_defaults | merge: gallery_settings %}
+
+
+{% comment %} Set config options II
+--------------------------------------------------------------------------------
+{% assign gallery_defaults    = modules.defaults.gallery.defaults %}
+{% assign gallery_players     = modules.gallery_app.settings %}
+{% assign gallery_playlists   = modules.gallery_playlists.settings %}
+-------------------------------------------------------------------------------- {% endcomment %}
 
 {% comment %} set config options II
 --------------------------------------------------------------------------------
-{% assign gallery_options2  = gallery_defaults  | merge: gallery_players %}
-{% assign gallery_options2  = gallery_options2  | merge: gallery_playlists %}
-{% assign galleries         = gallery_options2.galleries %}
+{% assign gallery_options     = gallery_defaults | merge: gallery_players %}
+{% assign gallery_options     = gallery_options  | merge: gallery_playlists %}
+{% assign galleries           = gallery_options.galleries %}
 -------------------------------------------------------------------------------- {% endcomment %}
-
-
-{% comment %} Debug gallery options
---------------------------------------------------------------------------------
-gallery_options:   {{gallery_options   | debug}}
-gallery_players:   {{gallery_players   | debug}}
-gallery_playlists: {{gallery_playlists | debug}}
--------------------------------------------------------------------------------- {% endcomment %}
-
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -72,6 +66,11 @@ gallery_playlists: {{gallery_playlists | debug}}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}
 {% endif %}
+
+
+{% comment %} Collect gallery options
+gallery_options: {{gallery_options | debug}}
+-------------------------------------------------------------------------------- {% endcomment %}
 
 
 /*
@@ -112,20 +111,16 @@ j1.adapter.gallery = ((j1, window) => {
 
   {% comment %} Global variables
   ------------------------------------------------------------------------------ {% endcomment %}
+  
   var state         = 'not_started';
   var play_button   = '/assets/theme/j1/modules/lightGallery/css/themes/uno/icons/play-button.png';
 
   var url;
   var origin;
-
   var galleryDefaults;
   var gallerySettings;
-  var galleryPlayers;
-  var galleryPlaylists;
   var galleryOptions;
-  var galleries;
-
-  // var frontmatterOptions;
+  var frontmatterOptions;
 
   var _this;
   var logger;
@@ -173,26 +168,16 @@ j1.adapter.gallery = ((j1, window) => {
       _this  = j1.adapter.gallery;
       logger = log4javascript.getLogger('j1.adapter.gallery');
 
-      // create settings object from frontmatter (page settings/if enabled)
-      // frontmatterOptions = options != null ? $.extend({}, options) : {};
+      // create settings object from frontmatter (page settings)
+      frontmatterOptions = options != null ? $.extend({}, options) : {};
 
-      // Load  module DEFAULTS|CONFIG I
-      // galleryDefaults = $.extend({}, {{gallery_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      // gallerySettings = $.extend({}, {{gallery_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      // galleryOptions  = $.extend(true, {}, galleryDefaults, gallerySettings);
-      // galleries       = galleryOptions.galleries;
+      // Load  module DEFAULTS|CONFIG
+      galleryDefaults = $.extend({}, {{gallery_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      gallerySettings = $.extend({}, {{gallery_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      galleryOptions  = $.extend(true, {}, galleryDefaults, gallerySettings, frontmatterOptions);
 
-      // Load  module DEFAULTS|CONFIGS II
-      galleryDefaults   = $.extend({}, {{gallery_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      galleryPlayers    = $.extend({}, {{gallery_players | replace: 'nil', 'null' | replace: '=>', ':' }});
-      galleryPlaylists  = $.extend({}, {{gallery_playlists | replace: 'nil', 'null' | replace: '=>', ':' }});
-      galleryOptions    = $.extend(true, {}, galleryDefaults, galleryPlayers, galleryPlaylists);
-      galleries         = galleryOptions.galleries;
-
-      // load HTML portion for all grids
-      isDev && console.debug('loading HTML portion for all galleries configured');
-      //_this.loadGalleryHTML(galleryOptions, galleryOptions.galleries);
-      _this.loadGalleryHTML(galleryOptions, galleries);
+      // load HTML portion for all galleries configured
+      _this.loadGalleryHTML(galleryOptions, galleryOptions.galleries);
 
       // -----------------------------------------------------------------------
       // module initializer
@@ -214,8 +199,7 @@ j1.adapter.gallery = ((j1, window) => {
           logger.debug('state: ' + _this.getState());
           logger.info('module is being initialized');
 
-          //_this.initGalleries(galleryOptions);
-          _this.initGalleries(galleries);
+          _this.initGallery(galleryOptions);
           _this.setState('finished');
 
           logger.debug('state: ' + _this.getState());
@@ -230,21 +214,20 @@ j1.adapter.gallery = ((j1, window) => {
     }, // END init
 
     // -----------------------------------------------------------------------
-    // Initialize (justfied) galleries using Liquid
+    // Load AJAX data and initialize the jg gallery
     // -----------------------------------------------------------------------
-    initGalleries: (options) => {
-      var galleries         = options;
+    initGallery: (options) => {
       var xhrLoadState      = 'pending';
       var load_dependencies = {};
       var dependency;
       var logger;
 
-      logger = log4javascript.getLogger('j1.adapter.gallery.initGalleries');
+      logger = log4javascript.getLogger('j1.adapter.gallery.initialize');
 
       _this.setState('running');
       logger.debug('state: ' + _this.getState());
 
-      {% for gallery in galleries %}
+      {% for gallery in gallery_options.galleries %}
         {% assign gallery_arg  = gallery %}
 
         // Debug gallery argument
@@ -466,11 +449,12 @@ j1.adapter.gallery = ((j1, window) => {
                 clearInterval(load_dependencies['dependencies_met_html_loaded_{{gallery_id}}']);
               } // END  if xhrLoadState === 'success'
             }, 10); // END dependencies_met_html_loaded
+
           }
 
         {% endif %} // ENDIF gallery enabled
       {% endfor %}
-    }, // END initGalleries
+    }, // END initGallery
 
     // -------------------------------------------------------------------------
     // loadGalleryHTML()
@@ -478,31 +462,33 @@ j1.adapter.gallery = ((j1, window) => {
     // NOTE: Make sure the placeholder DIV is available in the content
     // page as generated using the Asciidoc extension gallery::
     // -------------------------------------------------------------------------
-    loadGalleryHTML: (options, gallery) => {
-      var numGalleries  = Object.keys(gallery).length;
+    loadGalleryHTML: (options) => {
+      var galleries     = options.galleries;
+      var numGalleries  = Object.keys(galleries).length;
       var active_grids  = numGalleries;
       var xhr_data_path = options.xhr_data_path + '/index.html';
       var xhr_container_id;
 
-      isDev && console.debug('number of galleries found: ' + active_grids);
-
+      isDev && console.debug('j1.adapter.gallery: number of galleries found: ' + active_grids);
       _this.setState('load_data');
-      Object.keys(gallery).forEach((key) => {
-        if (gallery[key].enabled) {
-          xhr_container_id = gallery[key].id + '_parent';
 
-          isDev && console.debug('load HTML portion on gallery id: ' + gallery[key].id);
+      Object.keys(galleries).forEach((key) => {
+        if (galleries[key].enabled) {
+          xhr_container_id = galleries[key].id + '_parent';
+
+          isDev && console.debug('j1.adapter.gallery: load HTML portion on gallery id: ' + galleries[key].id);
           j1.loadHTML({
             xhr_container_id: xhr_container_id,
             xhr_data_path:    xhr_data_path,
-            xhr_data_element: gallery[key].id
+            xhr_data_element: galleries[key].id
           });
         } else {
-          isDev && console.debug('gallery found disabled on id: ' + gallery[key].id);
+          isDev && console.debug('j1.adapter.gallery: gallery found disabled on id: ' + galleries[key].id);
           active_grids--;
         }
       });
-      isDev && console.debug('galleries loaded in page enabled|all: ' + active_grids + '|' + numGalleries);
+
+      isDev && console.debug('j1.adapter.gallery: galleries loaded in page enabled|all: ' + active_grids + '|' + numGalleries);
       _this.setState('data_loaded');
     }, // END loadGalleryHTML
 

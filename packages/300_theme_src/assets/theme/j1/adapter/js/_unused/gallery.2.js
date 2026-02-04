@@ -24,46 +24,28 @@ regenerate:                             true
 
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment       = site.environment %}
-{% assign template_version  = site.version %}
+{% assign environment           = site.environment %}
+{% assign template_version      = site.version %}
 
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config   = site.data.j1_config %}
-{% assign apps              = site.data.apps %}
-{% assign modules           = site.data.modules %}
+{% assign template_config       = site.data.j1_config %}
+{% assign apps                  = site.data.apps %}
+{% assign modules               = site.data.modules %}
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign gallery_settings  = modules.gallery.settings %}
-
-{% assign gallery_defaults  = modules.defaults.gallery.defaults %}
-{% assign gallery_players   = modules.gallery_app.settings %}
-{% assign gallery_playlists = modules.gallery_playlists.settings %}
+{% assign gallery_defaults    = modules.defaults.gallery.defaults %}
+{% assign gallery_players     = modules.gallery_app.settings %}
+{% assign gallery_playlists   = modules.gallery_playlists.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign gallery_options   = gallery_defaults | merge: gallery_players %}
-{% assign gallery_options   = gallery_options  | merge: gallery_playlists %}
-{% assign galleries         = gallery_options.galleries %}
-
-{% comment %} set config options II
---------------------------------------------------------------------------------
-{% assign gallery_options2  = gallery_defaults  | merge: gallery_players %}
-{% assign gallery_options2  = gallery_options2  | merge: gallery_playlists %}
-{% assign galleries         = gallery_options2.galleries %}
--------------------------------------------------------------------------------- {% endcomment %}
-
-
-{% comment %} Debug gallery options
---------------------------------------------------------------------------------
-gallery_options:   {{gallery_options   | debug}}
-gallery_players:   {{gallery_players   | debug}}
-gallery_playlists: {{gallery_playlists | debug}}
--------------------------------------------------------------------------------- {% endcomment %}
+{% assign gallery_options     = gallery_defaults | merge: gallery_players %}
+{% assign gallery_options     = gallery_options  | merge: gallery_playlists %}
 
 
 {% comment %} Detect prod mode
@@ -74,9 +56,15 @@ gallery_playlists: {{gallery_playlists | debug}}
 {% endif %}
 
 
+{% comment %} Collect gallery options
+gallery_options: {{gallery_options | debug}}
+-------------------------------------------------------------------------------- {% endcomment %}
+gallery_options: {{gallery_options | debug}}
+
+
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/gallery.js (1)
+ # ~/assets/theme/j1/adapter/js/gallery.js (2)
  # JS Adapter for J1 Gallery
  #
  # Product/Info:
@@ -106,26 +94,20 @@ gallery_playlists: {{gallery_playlists | debug}}
 "use strict";
 j1.adapter.gallery = ((j1, window) => {
 
-  const environment = '{{environment}}';
-  const isDev       = (environment === "development" || environment === "dev") ? true : false;
-//const isDev       = (j1.env === "development" || j1.env === "dev") ? true : false;
+  const isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
 
   {% comment %} Global variables
   ------------------------------------------------------------------------------ {% endcomment %}
+  var environment   = '{{environment}}';
   var state         = 'not_started';
   var play_button   = '/assets/theme/j1/modules/lightGallery/css/themes/uno/icons/play-button.png';
 
   var url;
   var origin;
-
   var galleryDefaults;
   var gallerySettings;
-  var galleryPlayers;
-  var galleryPlaylists;
   var galleryOptions;
-  var galleries;
-
-  // var frontmatterOptions;
+  var frontmatterOptions;
 
   var _this;
   var logger;
@@ -173,26 +155,17 @@ j1.adapter.gallery = ((j1, window) => {
       _this  = j1.adapter.gallery;
       logger = log4javascript.getLogger('j1.adapter.gallery');
 
-      // create settings object from frontmatter (page settings/if enabled)
-      // frontmatterOptions = options != null ? $.extend({}, options) : {};
+      // create settings object from frontmatter (page settings)
+      frontmatterOptions = options != null ? $.extend({}, options) : {};
 
-      // Load  module DEFAULTS|CONFIG I
-      // galleryDefaults = $.extend({}, {{gallery_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      // gallerySettings = $.extend({}, {{gallery_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      // galleryOptions  = $.extend(true, {}, galleryDefaults, gallerySettings);
-      // galleries       = galleryOptions.galleries;
-
-      // Load  module DEFAULTS|CONFIGS II
-      galleryDefaults   = $.extend({}, {{gallery_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      galleryPlayers    = $.extend({}, {{gallery_players | replace: 'nil', 'null' | replace: '=>', ':' }});
-      galleryPlaylists  = $.extend({}, {{gallery_playlists | replace: 'nil', 'null' | replace: '=>', ':' }});
-      galleryOptions    = $.extend(true, {}, galleryDefaults, galleryPlayers, galleryPlaylists);
-      galleries         = galleryOptions.galleries;
+      // Load  module DEFAULTS|CONFIG
+      galleryDefaults = $.extend({}, {{gallery_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      gallerySettings = $.extend({}, {{gallery_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      galleryOptions  = $.extend(true, {}, galleryDefaults, gallerySettings, frontmatterOptions);
 
       // load HTML portion for all grids
       isDev && console.debug('loading HTML portion for all galleries configured');
-      //_this.loadGalleryHTML(galleryOptions, galleryOptions.galleries);
-      _this.loadGalleryHTML(galleryOptions, galleries);
+      _this.loadGalleryHTML(galleryOptions, galleryOptions.galleries);
 
       // -----------------------------------------------------------------------
       // module initializer
@@ -205,17 +178,12 @@ j1.adapter.gallery = ((j1, window) => {
         if (j1CoreFinished && pageVisible) {
           startTimeModule = Date.now();
 
-          // const galleryOptionsJSON = JSON.stringify(galleryOptions, undefined, 2);
-          // logText = '\n' + galleryOptionsJSON;
-          // logger.debug(logText);
-
           // initialize state flag
           _this.setState('started');
           logger.debug('state: ' + _this.getState());
           logger.info('module is being initialized');
 
-          //_this.initGalleries(galleryOptions);
-          _this.initGalleries(galleries);
+          _this.initialize(galleryOptions);
           _this.setState('finished');
 
           logger.debug('state: ' + _this.getState());
@@ -230,70 +198,157 @@ j1.adapter.gallery = ((j1, window) => {
     }, // END init
 
     // -----------------------------------------------------------------------
-    // Initialize (justfied) galleries using Liquid
+    // Load AJAX data and initialize the jg gallery
     // -----------------------------------------------------------------------
-    initGalleries: (options) => {
-      var galleries         = options;
-      var xhrLoadState      = 'pending';
+    initialize: (options) => {
+      var xhrLoadState      = 'pending';                                        // (initial) load state for the HTML portion of the slider
       var load_dependencies = {};
       var dependency;
-      var logger;
 
-      logger = log4javascript.getLogger('j1.adapter.gallery.initGalleries');
+      logger = log4javascript.getLogger('j1.adapter.gallery');
 
       _this.setState('running');
       logger.debug('state: ' + _this.getState());
 
-      {% for gallery in galleries %}
-        {% assign gallery_arg  = gallery %}
-
-        // Debug gallery argument
-        // ---------------------------------------------------------------------
-        /*
-              gallery: {{gallery_arg}}
-              */
+      {% for gallery in gallery_options.galleries %}
 
         {% if gallery.enabled %}
         {% assign gallery_id = gallery.id %}
+        logger.info('found gallery on id: ' + '{{gallery_id}}');
 
-          var galleryID = document.getElementById("{{gallery_id}}");
-          if ( galleryID !== null) {
-            logger.info('found gallery in page on id: ' + '{{gallery_id}}');
+          // create dynamic loader variable to setup the grid on id {{gallery_id}}
+          dependency = 'dependencies_met_html_loaded_{{gallery_id}}';
+          load_dependencies[dependency] = '';
 
-            // create dynamic loader variable to setup the grid on id {{gallery_id}}
-            dependency = 'dependencies_met_html_loaded_{{gallery_id}}';
-            load_dependencies[dependency] = '';
+          // initialize the gallery if HTML portion successfully loaded
+          //
+          load_dependencies['dependencies_met_html_loaded_{{gallery_id}}'] = setInterval (() => {
+            // check if HTML portion of the gallery is loaded successfully
+            xhrLoadState = j1.xhrDOMState['#{{gallery_id}}_parent'];
+            if (xhrLoadState === 'success') {
+              var $grid_{{gallery_id}} = $('#{{gallery_id}}');                  // used for later access
 
-            // initialize the gallery if HTML portion successfully loaded
-            //
-            load_dependencies['dependencies_met_html_loaded_{{gallery_id}}'] = setInterval (() => {
-              // check if HTML portion of the gallery is loaded successfully
-              xhrLoadState = j1.xhrDOMState['#{{gallery_id}}_parent'];
-              if (xhrLoadState === 'success') {
-                var $grid_{{gallery_id}} = $('#{{gallery_id}}');                  // used for later access
+              logger.debug('dyn_loader, initialize gallery on id: ' + '{{gallery_id}}');
 
-                logger.debug('dyn_loader, initialize gallery on id: ' + '{{gallery_id}}');
+              j1.jg.callback.{{gallery_id}} = 'waiting';
 
-                j1.jg.callback.{{gallery_id}} = 'waiting';
+              /* eslint-disable */
+              $('#{{gallery_id}}').justifiedGallery({
+                {% for option in gallery.gallery_options %}
+                {% if option[0] contains "gutters" %}
+                {{'margins' | json}}: {{option[1] | json}},
+                {% continue %}
+                {% endif %}
+                {{option[0] | json}}: {{option[1] | json}},
+                {% endfor %}
+              })
+              .on('jg.complete', (evt) => {
+                evt.stopPropagation();
 
-                /* eslint-disable */
-                $('#{{gallery_id}}').justifiedGallery({
-                  {% for option in gallery.gallery_options %}
-                  {% if option[0] contains "gutters" %}
-                  {{'margins' | json}}: {{option[1] | json}},
-                  {% continue %}
-                  {% endif %}
+                j1.jg.callback.{{gallery_id}} = 'successful';
+
+                // setup the lightbox
+                //
+                logger.debug('dyn_loader, callback "jg.complete" entered on id: ' + '{{gallery_id}}');
+                logger.debug('dyn_loader, initialize lightGallery on id: ' + '{{gallery_id}}');
+
+                var lg = document.getElementById("{{gallery_id}}");
+                lightGallery(lg, {
+                  "plugins":    [{{gallery.lightGallery.plugins}}],
+                  {% for option in gallery.lightGallery.options %}
                   {{option[0] | json}}: {{option[1] | json}},
                   {% endfor %}
-                })
-                .on('jg.complete', (evt) => {
-                  evt.stopPropagation();
+                  "galleryId":  "{{gallery_id}}",
+                  "selector":   ".lg-item",
+                  {% if gallery.video == 'html5' and gallery.lightGallery.videojsOptions.enabled %}
+                  "videojsOptions": {
+                    {% for option in gallery.lightGallery.videojsOptions %}
+                    {% if option[0] contains "enabled" %}
+                    {% continue %}
+                    {% endif %}
+                    {{option[0] | json}}: {{option[1] | json}},
+                    {% endfor %}
+                  }
+                  {% endif %}
 
-                  j1.jg.callback.{{gallery_id}} = 'successful';
+                  {% if gallery.video == 'youtube' and gallery.lightGallery.playerParams.enabled %}
+                  "youTubePlayerParams": {
+                    {% for option in gallery.lightGallery.playerParams %}
+                    {% if option[0] contains "enabled" %}
+                    {% continue %}
+                    {% endif %}
+                    {{option[0] | json}}: {{option[1] | json}},
+                    {% endfor %}
+                    "origin": "origin"
+                  },
+                  {% endif %}
 
-                  // setup the lightbox
-                  //
-                  logger.debug('dyn_loader, callback "jg.complete" entered on id: ' + '{{gallery_id}}');
+                  {% if gallery.video == 'youtube' and gallery.lightGallery.videojsOptions.enabled %}
+                  "videojsOptions": {
+                    {% for option in gallery.lightGallery.videojsOptions %}
+                    {% if option[0] contains "enabled" %}
+                    {% continue %}
+                    {% endif %}
+                    {{option[0] | json}}: {{option[1] | json}},
+                    {% endfor %}
+                  }
+                  {% endif %}
+
+                  {% if gallery.video == 'vimeo' and gallery.lightGallery.playerParams.enabled %}
+                  "vimeoPlayerParams": {
+                    {% for option in gallery.lightGallery.playerParams %}
+                    {% if option[0] contains "enabled" %}
+                    {% continue %}
+                    {% endif %}
+                    {{option[0] | json}}: {{option[1] | json}},
+                    {% endfor %}
+                  }
+                  {% endif %}
+
+                  {% if gallery.video == 'dailymotion' and gallery.lightGallery.playerParams.enabled %}
+                  "dailymotionPlayerParams": {
+                    {% for option in gallery.lightGallery.playerParams %}
+                    {% if option[0] contains "enabled" %}
+                    {% continue %}
+                    {% endif %}
+                    {{option[0] | json}}: {{option[1] | json}},
+                    {% endfor %}
+                  }
+                  {% endif %}
+
+                  {% if gallery.video == 'wistia' and gallery.lightGallery.playerParams.enabled %}
+                  "wistiaPlayerParams": {
+                    {% for option in gallery.lightGallery.playerParams %}
+                    {% if option[0] contains "enabled" %}
+                    {% continue %}
+                    {% endif %}
+                    {{option[0] | json}}: {{option[1] | json}},
+                    {% endfor %}
+                  }
+                  {% endif %}
+
+                  {% if gallery.video == 'tiktok' and gallery.lightGallery.playerParams.enabled %}
+                  "tiktokPlayerParams": {
+                    {% for option in gallery.lightGallery.playerParams %}
+                    {% if option[0] contains "enabled" %}
+                    {% continue %}
+                    {% endif %}
+                    {{option[0] | json}}: {{option[1] | json}},
+                    {% endfor %}
+                  }
+                  {% endif %}
+
+                }); // END lightGallery
+
+              }); // END justifiedGallery on('jg.complete)
+              /* eslint-enable */
+
+              // workaround for Chromium brwosers if callback jg.complete
+              // NOT fired
+              //
+              setTimeout(() => {
+                if (j1.jg.callback.{{gallery_id}} == 'waiting') {
+                  logger.debug('dyn_loader, callback "jg.callback": ' + j1.jg.callback.{{gallery_id}})
                   logger.debug('dyn_loader, initialize lightGallery on id: ' + '{{gallery_id}}');
 
                   var lg = document.getElementById("{{gallery_id}}");
@@ -324,17 +379,6 @@ j1.adapter.gallery = ((j1, window) => {
                       {{option[0] | json}}: {{option[1] | json}},
                       {% endfor %}
                       "origin": "origin"
-                    },
-                    {% endif %}
-
-                    {% if gallery.video == 'youtube' and gallery.lightGallery.videojsOptions.enabled %}
-                    "videojsOptions": {
-                      {% for option in gallery.lightGallery.videojsOptions %}
-                      {% if option[0] contains "enabled" %}
-                      {% continue %}
-                      {% endif %}
-                      {{option[0] | json}}: {{option[1] | json}},
-                      {% endfor %}
                     }
                     {% endif %}
 
@@ -371,106 +415,17 @@ j1.adapter.gallery = ((j1, window) => {
                     }
                     {% endif %}
 
-                    {% if gallery.video == 'tiktok' and gallery.lightGallery.playerParams.enabled %}
-                    "tiktokPlayerParams": {
-                      {% for option in gallery.lightGallery.playerParams %}
-                      {% if option[0] contains "enabled" %}
-                      {% continue %}
-                      {% endif %}
-                      {{option[0] | json}}: {{option[1] | json}},
-                      {% endfor %}
-                    }
-                    {% endif %}
-
                   }); // END lightGallery
+                } // END if j1.jg.callback
+              }, 1000); // END timeout
 
-                }); // END justifiedGallery on('jg.complete)
-                /* eslint-enable */
-
-                // workaround for Chromium brwosers if callback jg.complete
-                // NOT fired
-                //
-                setTimeout(() => {
-                  if (j1.jg.callback.{{gallery_id}} == 'waiting') {
-                    logger.debug('dyn_loader, callback "jg.callback": ' + j1.jg.callback.{{gallery_id}})
-                    logger.debug('dyn_loader, initialize lightGallery on id: ' + '{{gallery_id}}');
-
-                    var lg = document.getElementById("{{gallery_id}}");
-                    lightGallery(lg, {
-                      "plugins":    [{{gallery.lightGallery.plugins}}],
-                      {% for option in gallery.lightGallery.options %}
-                      {{option[0] | json}}: {{option[1] | json}},
-                      {% endfor %}
-                      "galleryId":  "{{gallery_id}}",
-                      "selector":   ".lg-item",
-                      {% if gallery.video == 'html5' and gallery.lightGallery.videojsOptions.enabled %}
-                      "videojsOptions": {
-                        {% for option in gallery.lightGallery.videojsOptions %}
-                        {% if option[0] contains "enabled" %}
-                        {% continue %}
-                        {% endif %}
-                        {{option[0] | json}}: {{option[1] | json}},
-                        {% endfor %}
-                      }
-                      {% endif %}
-
-                      {% if gallery.video == 'youtube' and gallery.lightGallery.playerParams.enabled %}
-                      "youTubePlayerParams": {
-                        {% for option in gallery.lightGallery.playerParams %}
-                        {% if option[0] contains "enabled" %}
-                        {% continue %}
-                        {% endif %}
-                        {{option[0] | json}}: {{option[1] | json}},
-                        {% endfor %}
-                        "origin": "origin"
-                      }
-                      {% endif %}
-
-                      {% if gallery.video == 'vimeo' and gallery.lightGallery.playerParams.enabled %}
-                      "vimeoPlayerParams": {
-                        {% for option in gallery.lightGallery.playerParams %}
-                        {% if option[0] contains "enabled" %}
-                        {% continue %}
-                        {% endif %}
-                        {{option[0] | json}}: {{option[1] | json}},
-                        {% endfor %}
-                      }
-                      {% endif %}
-
-                      {% if gallery.video == 'dailymotion' and gallery.lightGallery.playerParams.enabled %}
-                      "dailymotionPlayerParams": {
-                        {% for option in gallery.lightGallery.playerParams %}
-                        {% if option[0] contains "enabled" %}
-                        {% continue %}
-                        {% endif %}
-                        {{option[0] | json}}: {{option[1] | json}},
-                        {% endfor %}
-                      }
-                      {% endif %}
-
-                      {% if gallery.video == 'wistia' and gallery.lightGallery.playerParams.enabled %}
-                      "wistiaPlayerParams": {
-                        {% for option in gallery.lightGallery.playerParams %}
-                        {% if option[0] contains "enabled" %}
-                        {% continue %}
-                        {% endif %}
-                        {{option[0] | json}}: {{option[1] | json}},
-                        {% endfor %}
-                      }
-                      {% endif %}
-
-                    }); // END lightGallery
-                  } // END if j1.jg.callback
-                }, 1000); // END timeout
-
-                clearInterval(load_dependencies['dependencies_met_html_loaded_{{gallery_id}}']);
-              } // END  if xhrLoadState === 'success'
-            }, 10); // END dependencies_met_html_loaded
-          }
+              clearInterval(load_dependencies['dependencies_met_html_loaded_{{gallery_id}}']);
+            } // END  if xhrLoadState === 'success'
+          }, 10); // END dependencies_met_html_loaded
 
         {% endif %} // ENDIF gallery enabled
       {% endfor %}
-    }, // END initGalleries
+    }, // END initialize
 
     // -------------------------------------------------------------------------
     // loadGalleryHTML()

@@ -24,26 +24,26 @@ regenerate:                             true
 
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment           = site.environment %}
-{% assign template_version      = site.version %}
+{% assign environment       = site.environment %}
+{% assign template_version  = site.version %}
 
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config       = site.data.j1_config %}
-{% assign apps                  = site.data.apps %}
-{% assign modules               = site.data.modules %}
+{% assign template_config   = site.data.j1_config %}
+{% assign apps              = site.data.apps %}
+{% assign modules           = site.data.modules %}
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign gallery_defaults      = modules.defaults.gallery.defaults %}
-{% assign gallery_settings      = modules.gallery.settings %}
+{% assign gallery_defaults  = modules.defaults.gallery.defaults %}
+{% assign gallery_settings  = modules.gallery.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign gallery_options       = gallery_defaults | merge: gallery_settings %}
+{% assign gallery_options   = gallery_defaults | merge: gallery_settings %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -51,6 +51,13 @@ regenerate:                             true
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}
 {% endif %}
+
+
+{% comment %} Collect gallery options
+gallery_options: {{gallery_options | debug}}
+-------------------------------------------------------------------------------- {% endcomment %}
+gallery_options: {{gallery_options | debug}}
+
 
 /*
  # -----------------------------------------------------------------------------
@@ -270,7 +277,7 @@ j1.adapter.gallery = ((j1, window) => {
                     {{option[0] | json}}: {{option[1] | json}},
                     {% endfor %}
                     "origin": "origin"
-                  }
+                  },
                   {% endif %}
 
                   {% if gallery.video == 'youtube' and gallery.lightGallery.videojsOptions.enabled %}
@@ -282,7 +289,7 @@ j1.adapter.gallery = ((j1, window) => {
                     {{option[0] | json}}: {{option[1] | json}},
                     {% endfor %}
                   }
-                  {% endif %}                  
+                  {% endif %}
 
                   {% if gallery.video == 'vimeo' and gallery.lightGallery.playerParams.enabled %}
                   "vimeoPlayerParams": {

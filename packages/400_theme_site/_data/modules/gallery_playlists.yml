@@ -53,30 +53,6 @@ settings:
       image_base_path:                  /assets/image/module/gallery/old_time/image/grand_pa
 
       # ------------------------------------------------------------------------
-      # Justified Gallery settings
-      # ------------------------------------------------------------------------
-      #
-      gallery_options:
-        rowHeight:                      250
-        gutters:                        3
-
-      # ------------------------------------------------------------------------
-      # Lightbox settings
-      # ------------------------------------------------------------------------
-      #
-      lightbox:
-        enabled:                        true
-        type:                           lg                                      # lb | lg
-
-      lightGallery:
-        plugins:                        lgFullscreen, lgRotate, lgThumbnail
-
-        options:
-          licenseKey:                   0000-0000-000-0000
-          download:                     false
-          alignThumbnails:              left
-
-      # ------------------------------------------------------------------------
       # Images
       #
       images:
@@ -118,30 +94,6 @@ settings:
       id:                               jg_mega_cities
       type:                             image
       image_base_path:                  /assets/image/module/swiper/simple/mega_city/image
-
-      # ------------------------------------------------------------------------
-      # Justified Gallery settings
-      # ------------------------------------------------------------------------
-      #
-      gallery_options:
-        rowHeight:                      250
-        gutters:                        3
-
-      # ------------------------------------------------------------------------
-      # Lightbox settings
-      # ------------------------------------------------------------------------
-      #
-      lightbox:
-        enabled:                        true
-        type:                           lg                                      # lb | lg
-
-      lightGallery:
-        plugins:                        lgFullscreen, lgRotate, lgThumbnail
-
-        options:
-          licenseKey:                   0000-0000-000-0000
-          download:                     false
-          alignThumbnails:              left
 
       # ------------------------------------------------------------------------
       # Images
@@ -231,7 +183,6 @@ settings:
           description: >
                                         <h2>South Korea</h2>
                                         <h3>Lotte World Tower Seoul</h3>
-
 
     # ==========================================================================
     # Video Galleries
@@ -569,6 +520,180 @@ settings:
           description: >
                                         <h2> S02 Roberto Fonsecas </h2>
                                         <h3>At NPR 2025           </h3>
+
+    # --------------------------------------------------------------------------
+    # HTML5 VIDEO II (online)
+    #
+    - gallery:
+      enabled:                          true
+
+      id:                               die_augenzeugen
+      type:                             video
+      video:                            html5
+      video_base_path:                  /assets/video/html5
+      image_base_path:                  /assets/video/poster/html5
+      thumb_base_path:                  /assets/video/poster/html5
+
+
+      # # ------------------------------------------------------------------------
+      # # Justified Gallery settings
+      # # ------------------------------------------------------------------------
+      # #
+      # gallery_options:
+      #   rowHeight:                      250
+      #   gutters:                        3
+
+      # # ------------------------------------------------------------------------
+      # # Lightbox|lightGallery settings
+      # # ------------------------------------------------------------------------
+      # #
+      # lightbox:
+      #   enabled:                        true
+      #   type:                           lg
+
+      # lightGallery:
+      #   plugins:                        lgThumbnail, lgVideo
+
+      #   options:
+      #     licenseKey:                   0000-0000-000-0000
+      #     download:                     false
+      #     alignThumbnails:              left
+      #     animateThumb:                 true
+      #     autoplayFirstVideo:           true
+      #     videojs:                      true                                    # jadams: !!!
+      #     videojsTheme:                 vjs-theme-uno
+
+      #   videojsOptions:
+      #     enabled:                      true
+
+      #     muted:                        false
+      #     preload:                      true
+
+      #     controls:                     true
+
+      #     hotKeysPlugin:
+      #       enabled:                    true
+      #       options:
+      #         volumeStep:               0.2          
+
+      #     controlBar:
+      #       playbackRates:              [0.25, 0.5, 1, 1.5, 2]
+      #       remainingTimeDisplay:       true
+      #       pictureInPictureToggle:     false
+
+      #       volumePanel:
+      #         inline:                   false
+
+      #       skipButtonsPlugin:
+      #         enabled:                  true
+      #         options:
+      #           forward:                5
+      #           backward:               5
+      #           backwardIndex:          0
+      #           forwardIndex:           1
+
+      #       zoomPlugin:
+      #         enabled:                  true
+      #         options:
+      #           moveX:                  0
+      #           moveY:                  0
+      #           rotate:                 0
+      #           zoom:                   1
+
+      # # ------------------------------------------------------------------------
+      # # CSS filter options
+      # #
+      # filters:
+      #   enabled:                        false
+      #   grayscale:                      0
+      #   contrast:                       1
+      #   brightness:                     1
+
+
+      # ------------------------------------------------------------------------
+      # Video settings
+      # ------------------------------------------------------------------------
+      #
+      videos:
+
+        - video:                        # video 1
+          enabled:                      true
+
+          name:                         Peck Pocketed II
+          type:                         html5
+          api:                          videojs                                 # jadams !!!
+          size:                         1280-720
+          source:                       peck_pocketed.mp4
+          poster_image:                 peck_pocketed.jpg
+          pinterest_prefix:             Pin video
+          tweet_prefix:                 Try video
+          caption_text:                 Peck Pocketed &middot; Student Academy Award winning Cartoon Clip
+          description: >
+                                        <h2>Peck Pocketed by Kevin Herron | Disney Favorite</h2>
+                                        <h3>Student Academy Award winning Cartoon Clip</h3>
+
+        - video:                        # video 2
+          enabled:                      true
+
+          name:                         Rollin Wild II
+          type:                         html5
+          api:                          videojs                                 # jadams !!!
+          size:                         1280-720
+          source:                       rolling_wild.mp4
+          poster_image:                 rolling_wild.jpg
+          pinterest_prefix:             Pin video
+          tweet_prefix:                 Try video
+          caption_text:                 Rollin` Wild &middot; Short Funny animated video clip created at the Film Academy
+          description: >
+                                        <h2>Rollin` Wild</h2>
+                                        <h3>Short Funny Animated Clip created at the Film Academy</h3>
+
+    # ==========================================================================
+    # TUSHY Blonde
+    #
+    # - gallery:
+    #   enabled:                          true
+
+    #   id:                               tushy_blonde
+    #   type:                             video
+    #   video:                            html5
+
+    #   video_base_path:                  //localhost:10000/studios/tushy/blonde/video
+    #   image_base_path:                  //localhost:10000/studios/tushy/blonde/video/images
+
+    #   # ------------------------------------------------------------------------
+    #   # Video settings
+    #   # ------------------------------------------------------------------------
+    #   #
+    #   videos:
+
+    #     # video 1
+    #     - video:
+    #       enabled:                      true
+
+    #       name:                         01_alecia_ella
+    #       type:                         html5
+    #       size:                         1280-720
+    #       source:                       01_alecia_ella.mp4
+    #       poster_image:                 01_alecia_ella.jpg
+    #       caption_text:                 Blonde · Alecia & Ella
+    #       description: >
+    #                                     <h5>Blonde</h5>
+    #                                     <h6>Alecia & Ella</h6>
+
+    #     # video 2
+    #     - video:
+    #       enabled:                      true
+
+    #       name:                         02_alecia_sofi
+    #       type:                         html5
+    #       size:                         1280-720
+    #       source:                       02_alecia_sofi.mp4
+    #       poster_image:                 02_alecia_sofi.jpg
+    #       caption_text:                 Blonde · Alecia & Sofi
+    #       description: >
+    #                                     <h5>Blonde</h5>
+    #                                     <h6>Alecia & Sofi</h6>
 
 # ------------------------------------------------------------------------------
 # END config

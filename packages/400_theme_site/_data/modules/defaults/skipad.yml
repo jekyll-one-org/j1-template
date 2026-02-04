@@ -1,0 +1,34 @@
+# ------------------------------------------------------------------------------
+# ~/_data/modules/defaults/skipad.yml
+# Default configuration settings for J1 SkipAd module
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2023-2025 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# Description
+#
+description:
+  title:                                J1 SkipAd
+  scope:                                Default settings
+  location:                             _data/modules/defaults/skipad.yml
+
+# ------------------------------------------------------------------------------
+# Default settings
+#
+defaults:
+
+  # ----------------------------------------------------------------------------
+  # GENERAL options
+  # ----------------------------------------------------------------------------
+  #
+  enabled:                              false
+
+# ------------------------------------------------------------------------------
+# END config

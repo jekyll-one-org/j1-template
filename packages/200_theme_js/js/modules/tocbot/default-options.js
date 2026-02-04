@@ -27,7 +27,7 @@ module.exports = {
   // Which headings to grab inside of the contentSelector element.
   headingSelector: 'h1, h2, h3',
   // Headings that match the ignoreSelector will be skipped.
-  ignoreSelector: '.js-toc-ignore',
+  ignoreSelector: '.notoc',
   // For headings inside relative or absolute positioned containers within content
   hasInnerContainers: false,
   // Main class to add to links.
