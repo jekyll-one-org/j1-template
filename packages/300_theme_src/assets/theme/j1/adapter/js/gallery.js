@@ -52,8 +52,8 @@ regenerate:                             true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign mergeTest         = test_defaults    | deep_merge: test_players, test_playlists %}
 
-{% assign gallery_options   = gallery_defaults | merge_new: gallery_players %}
-{% assign gallery_options2  = gallery_options  | merge_new: gallery_playlists %}
+{% assign gallery_options   = gallery_defaults | merge: gallery_players %}
+{% assign gallery_options2  = gallery_options  | merge: gallery_playlists %}
 
 {% assign gallery_options   = gallery_options2 %}
 {% assign galleries         = gallery_options.galleries %}
@@ -258,7 +258,6 @@ j1.adapter.gallery = ((j1, window) => {
       {% assign galleryOptions  = gallery_players.galleries.gallery_options %}
       -------------------------------------------------------------------------- {% endcomment %}
 
-      {% assign galleryOptions  = site.data.modules.gallery_app.settings %}
       {% assign lightGallery    = gallery_options.lightGallery %}
 
       _this.setState('running');
