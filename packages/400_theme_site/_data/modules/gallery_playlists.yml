@@ -534,12 +534,11 @@ settings:
       image_base_path:                  /assets/video/poster/html5
       thumb_base_path:                  /assets/video/poster/html5
 
-
       # # ------------------------------------------------------------------------
       # # Justified Gallery settings
       # # ------------------------------------------------------------------------
       # #
-      # gallery_options:
+      # galleryOptions:
       #   rowHeight:                      250
       #   gutters:                        3
 

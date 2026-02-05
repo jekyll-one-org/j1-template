@@ -97,6 +97,70 @@ module Jekyll
     end
 
     # --------------------------------------------------------------------------
+    #  deep_merge: merge multiple hashes (input <- hash*)
+    #
+    #  Example:
+    #   {% assign settings = test_defaults | deep_merge: test_players, test_playlists %}
+    #
+    # --------------------------------------------------------------------------
+    def deep_merge(input, *hashes)
+      unless input.respond_to?(:to_hash)
+        is_caller = caller[0][/`([^']*)'/, 1]
+        raise ArgumentError.new(
+          "deep_merge benötigt mindestens einen Hash als erstes Argument, " \
+          "gefunden in #{is_caller}|#{input.inspect}"
+        )
+      end
+
+      # Beginne mit einer tiefen Kopie der defaults
+      result = deep_clone(input)
+
+      # Merge alle weiteren Hashes nacheinander ein
+      # Spätere Werte überschreiben frühere Werte
+      hashes.each do |hash|
+        next if hash.nil?
+        deep_merge_into!(result, hash)
+      end
+
+      result
+    end
+
+    def deep_merge_into!(target, source)
+      source.each do |key, value|
+        if value.is_a?(Hash) && target[key].is_a?(Hash)
+          # Beide sind Hashes - rekursiv mergen
+          deep_merge_into!(target[key], value)
+        else
+          # Production-Wert überschreibt Default-Wert
+          target[key] = deep_clone(value)
+        end
+      end
+
+      target
+    end
+
+    def deep_clone(value)
+      case value
+      when Hash
+        value.each_with_object({}) { |(k, v), h| h[k] = deep_clone(v) }
+      when Array
+        value.map { |v| deep_clone(v) }
+      else
+        # Sichere Duplikation für duplizierbare Werte
+        if value.respond_to?(:dup) && 
+          !value.is_a?(Symbol) && 
+          !value.is_a?(Numeric) && 
+          !value.is_a?(TrueClass) && 
+          !value.is_a?(FalseClass) && 
+          !value.nil?
+          value.dup
+        else
+          value
+        end
+      end
+    end
+
+    # --------------------------------------------------------------------------
     #  contain_substr: check if a string contains a substring
     #
     #  Example:

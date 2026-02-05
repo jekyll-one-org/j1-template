@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------
-# ~/_data/modules/defaults/gallery_app.yml
+# ~/_data/modules/defaults/gallery.yml
 # Default configuration for J1 justifiedGallery (jg)
 #
 # Product/Info:
@@ -63,8 +63,9 @@ defaults:
   # ----------------------------------------------------------------------------
   # justifiedGallery settings
   #
-  rowHeight:                            250
-  gutters:                              3
+  gallerySettings:
+    rowHeight:                            150
+    gutters:                              1
 
   # ----------------------------------------------------------------------------
   # Lightbox settings

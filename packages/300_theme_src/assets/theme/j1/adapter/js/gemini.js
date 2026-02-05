@@ -713,7 +713,7 @@ j1.adapter.gemini = ((j1, window) => {
 
     // -------------------------------------------------------------------------
     // loadModules()
-    // load required modules
+    // load required modules - to be fixed !!!
     // -------------------------------------------------------------------------
     loadModules: () => {
 
@@ -731,6 +731,7 @@ j1.adapter.gemini = ((j1, window) => {
         document.head.appendChild(geocoderScript);
       }
 
+      /* lint/error:  error  Parsing error: 'import' and 'export' may only appear at the top level
       // https://github.com/google/generative-ai-js/blob/main/docs/reference/generative-ai.md
       import('//esm.run/@google/generative-ai')
         .then((module) => {
@@ -778,6 +779,7 @@ j1.adapter.gemini = ((j1, window) => {
           // An error occurred during module import
           logger.warn('Importing Gemini module failed: ' + error);
         });
+      */        
     }, // END loadModules
 
     // -------------------------------------------------------------------------

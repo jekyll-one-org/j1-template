@@ -56,7 +56,7 @@ settings:
       # Justified Gallery settings
       # ------------------------------------------------------------------------
       #
-      gallery_options:
+      gallerySettings:
         rowHeight:                      250
         gutters:                        3
 
@@ -86,12 +86,11 @@ settings:
       type:                             image
       image_base_path:                  /assets/image/module/swiper/simple/mega_city/image
 
-
       # ------------------------------------------------------------------------
       # Justified Gallery settings
       # ------------------------------------------------------------------------
       #
-      gallery_options:
+      gallerySettings:
         rowHeight:                      150
         gutters:                        1
 
@@ -124,7 +123,6 @@ settings:
         contrast:                       0.8
         brightness:                     0.4
 
-
     # ==========================================================================
     # Video Galleries
     # --------------------------------------------------------------------------
@@ -146,7 +144,7 @@ settings:
       # Justified Gallery settings
       # ------------------------------------------------------------------------
       #
-      gallery_options:
+      gallerySettings:
         rowHeight:                      250
         gutters:                        3
 
@@ -234,7 +232,7 @@ settings:
       # Justified Gallery settings
       # ------------------------------------------------------------------------
       #
-      gallery_options:
+      gallerySettings:
         rowHeight:                      250
         gutters:                        3
 
@@ -330,7 +328,7 @@ settings:
       # Justified Gallery settings
       # ------------------------------------------------------------------------
       #
-      gallery_options:
+      gallerySettings:
         rowHeight:                      250
         gutters:                        3
 
@@ -430,7 +428,7 @@ settings:
       # Justified Gallery settings
       # ------------------------------------------------------------------------
       #
-      gallery_options:
+      gallerySettings:
         rowHeight:                      250
         gutters:                        3
 
@@ -521,7 +519,7 @@ settings:
       # Justified Gallery settings
       # ------------------------------------------------------------------------
       #
-      gallery_options:
+      gallerySettings:
         rowHeight:                      250
         gutters:                        3
 
@@ -644,7 +642,7 @@ settings:
       # Justified Gallery settings
       # ------------------------------------------------------------------------
       #
-      gallery_options:
+      gallerySettings:
         rowHeight:                      250
         gutters:                        3
 
@@ -739,7 +737,7 @@ settings:
       # Justified Gallery settings
       # ------------------------------------------------------------------------
       #
-      gallery_options:
+      gallerySettings:
         rowHeight:                      250
         gutters:                        3
 
@@ -751,7 +749,7 @@ settings:
         enabled:                        true
         type:                           lg
 
-      lightGallery:
+      lightGallery:   
         plugins:                        lgThumbnail, lgVideo
 
         options:
@@ -829,7 +827,7 @@ settings:
     #   # Justified Gallery settings
     #   # ------------------------------------------------------------------------
     #   #
-    #   gallery_options:
+    #   gallerySettings:
     #     rowHeight:                      200
     #     margins:                        3
 
