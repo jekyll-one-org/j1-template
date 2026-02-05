@@ -70,16 +70,19 @@ module Jekyll
     ADOC_INLINE_COMMENT = /^\s*(\/\/.*$)/
 
     # --------------------------------------------------------------------------
-    #  merge: merge two hashes (input <- hash)
+    #  merge: merge TWO hashes (input <- hash)
     #
     #  Example:
-    #   {% assign settings = options|merge:defaults %}
+    #   {% assign settings = options | merge: prodA %}
     # --------------------------------------------------------------------------
     def merge(input, hash)
       unless input.respond_to?(:to_hash)
         # value = input == EMPTY ? 'empty' : input
         is_caller = caller[0][/`([^']*)'/, 1]
-        raise ArgumentError.new('merge filter requires at least a hash for 1st arg, found caller|args: ' + "#{is_caller}|#{input}:#{hash}")
+        raise ArgumentError.new(
+          "merge: requires at least a hash for the 1st arg, " \
+          "for #{is_caller}|#{input.inspect}"
+        )
       end
       # if hash to merge is NOT a hash or empty return first hash (input)
       unless hash.respond_to?(:to_hash)
@@ -97,26 +100,25 @@ module Jekyll
     end
 
     # --------------------------------------------------------------------------
-    #  deep_merge: merge multiple hashes (input <- hash*)
+    #  deep_merge: merge MULTIPLE hashes (input <- hash*)
     #
     #  Example:
-    #   {% assign settings = test_defaults | deep_merge: test_players, test_playlists %}
-    #
+    #   {% assign settings = defaults | deep_merge: prodA, prodB %}
     # --------------------------------------------------------------------------
     def deep_merge(input, *hashes)
       unless input.respond_to?(:to_hash)
         is_caller = caller[0][/`([^']*)'/, 1]
         raise ArgumentError.new(
-          "deep_merge benötigt mindestens einen Hash als erstes Argument, " \
-          "gefunden in #{is_caller}|#{input.inspect}"
+          "deep_merge: requires at least a hash for the 1st arg, " \
+          "for #{is_caller}|#{input.inspect}"
         )
       end
 
-      # Beginne mit einer tiefen Kopie der defaults
+      # start by a deep copy of the defaults hash
       result = deep_clone(input)
 
-      # Merge alle weiteren Hashes nacheinander ein
-      # Spätere Werte überschreiben frühere Werte
+      # merge all subsequent hashes one after the other
+      # later values ​​overwrite earlier values
       hashes.each do |hash|
         next if hash.nil?
         deep_merge_into!(result, hash)
@@ -128,10 +130,10 @@ module Jekyll
     def deep_merge_into!(target, source)
       source.each do |key, value|
         if value.is_a?(Hash) && target[key].is_a?(Hash)
-          # Beide sind Hashes - rekursiv mergen
+          # both are hashes - merge recursively
           deep_merge_into!(target[key], value)
         else
-          # Production-Wert überschreibt Default-Wert
+          # production value overrides default value
           target[key] = deep_clone(value)
         end
       end
@@ -146,7 +148,7 @@ module Jekyll
       when Array
         value.map { |v| deep_clone(v) }
       else
-        # Sichere Duplikation für duplizierbare Werte
+        # secure duplication for duplicable value types
         if value.respond_to?(:dup) && 
           !value.is_a?(Symbol) && 
           !value.is_a?(Numeric) && 
