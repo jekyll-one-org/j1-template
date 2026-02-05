@@ -25,7 +25,7 @@ description:
 defaults:
 
   # ----------------------------------------------------------------------------
-  # GENERAL settings
+  # GLOBAL settings
   #
   # enabled
   # ----------------------------------------------------------------------------
@@ -35,33 +35,31 @@ defaults:
   #
   # enabled:                              false
   
+  # ----------------------------------------------------------------------------
+  # GLOBAL Default settings
+  # ----------------------------------------------------------------------------
+  #
+  defaults:                             &app_defaults
+    enabled:                            false
+    controls:                           true
+
+    settings:
+      width:                            800
+      height:                           600
+
+    options:
+      autoplay:                         false
+      loop:                             true
+      volume:                           1.0
 
   # ----------------------------------------------------------------------------
-  # Global settings
+  # APP Default settings
+  # ----------------------------------------------------------------------------
   #
   apps:
 
     - app:
-      enabled:                            false
-
-      settings:
-        width:                            800
-        height:                           600
-
-      options:
-        autoplay:                         false
-        loop:                             true
-        volume:                           1.0
+      <<:                               *app_defaults
 
     - app:
-      enabled:                            false
-
-      settings:
-        width:                            800
-        height:                           600
-
-      options:
-        autoplay:                         false
-        loop:                             true
-        volume:                           1.0
-
+      <<:                               *app_defaults

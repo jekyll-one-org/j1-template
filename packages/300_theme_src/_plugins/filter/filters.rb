@@ -70,12 +70,36 @@ module Jekyll
     ADOC_INLINE_COMMENT = /^\s*(\/\/.*$)/
 
     # --------------------------------------------------------------------------
-    #  merge: merge TWO hashes (input <- hash)
+    #  merge: merge TWO (nested) hashes (input <- hash)
     #
     #  Example:
     #   {% assign settings = options | merge: prodA %}
     # --------------------------------------------------------------------------
     def merge(input, hash)
+      unless input.respond_to?(:to_hash)
+        is_caller = caller[0][/`([^']*)'/, 1]
+        raise ArgumentError.new(
+          "merge: requires at least a hash for the 1st arg, " \
+          "for #{is_caller}|#{input.inspect}"
+        )
+      end
+
+      # early return on invalid hash
+      return input unless hash.respond_to?(:to_hash) && !hash.nil? && !hash.empty?
+
+      merged = input.dup
+      hash.each do |k, v|
+        if merged[k].respond_to?(:to_hash) && v.respond_to?(:to_hash)
+          # Rekursiv mergen bei nested Hashes
+          merged[k] = merge(merged[k], v)
+        else
+          merged[k] = v
+        end
+      end
+      merged
+    end
+
+    def merge_old(input, hash)
       unless input.respond_to?(:to_hash)
         # value = input == EMPTY ? 'empty' : input
         is_caller = caller[0][/`([^']*)'/, 1]
@@ -100,7 +124,7 @@ module Jekyll
     end
 
     # --------------------------------------------------------------------------
-    #  deep_merge: merge MULTIPLE hashes (input <- hash*)
+    #  deep_merge: merge MULTIPLE (nested) hashes (input <- hash*)
     #
     #  Example:
     #   {% assign settings = defaults | deep_merge: prodA, prodB %}
