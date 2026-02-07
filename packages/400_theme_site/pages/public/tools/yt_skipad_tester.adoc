@@ -1,7 +1,7 @@
 ---
-title:                                  SkipAd
+title:                                  SkipAd 
 title_extention:                        Block YT Advertising
-tagline:                                YouTube Video with No Advertising
+tagline:                                YouTube Video with No Ads
 
 date:                                   2026-01-29
 #last_modified:                         2026-01-01
@@ -21,7 +21,7 @@ categories:                             [ Tester ]
 tags:                                   [ Module, VideoJS ]
 
 image:
-  path:                                 /assets/image/module/attic/1920x1280/markus-spiske.jpg
+  path:                                 /assets/image/page/skipad/skipad-promo.png
   width:                                1920
   height:                               1280
 
@@ -35,8 +35,10 @@ resource_options:
   - toccer:
       collapseDepth:                    3
   - attic:
+      opacity:                          .6
+      padding_top:                      550
       slides:
-        - url:                          /assets/image/module/attic/1920x1280/markus-spiske.jpg
+        - url:                          /assets/image/page/skipad/skipad-promo.png
           alt:                          VideoJS Tester
 ---
 
@@ -68,8 +70,8 @@ resource_options:
 
 // Attribute settings for section control
 //
-:badges-enabled:                        true
-:history-enabled:                       true
+:badges-enabled:                        false
+:history-enabled:                       false
 
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
@@ -81,9 +83,9 @@ resource_options:
 
 ifeval::[{badges-enabled} == true]
 
-++++
-<span class="powered-by">Powered by J1 Template</span>
-++++
+// ++++
+// <span class="powered-by">Powered by J1 Template</span>
+// ++++
 
 [role="mb-5"]
 {badge-j1--version-latest} {badge-j1--downloads}
@@ -134,6 +136,34 @@ Paste a YT video link (or the YT video ID) to the input element below.
     controls
     width="640"
     height="360"
+    poster="//img.youtube.com/vi/D6iVKisliNg/maxresdefault.jpg" alt="Lea Kyle · All Performances in AGT 2021" 
+    aria-label="Lea Kyle"
+    data-setup='{
+        "fluid" : true,
+        "techOrder": [
+            "youtube", "html5"
+        ],
+        "sources": [{
+            "type": "video/youtube",
+            "src": "//youtu.be/D6iVKisliNg"
+        }],
+        "controlBar": {
+          "pictureInPictureToggle": false,
+          "volumePanel": {
+              "inline": false
+          }
+        }
+     }'
+  ></video>
+</div -->
+
+<!-- div class="mb-5">
+   <video
+    id="-w37wr0b6KE"
+    class="video-js vjs-theme-uno"
+    controls
+    width="640"
+    height="360"
     poster="//img.youtube.com/vi/-w37wr0b6KE/maxresdefault.jpg" alt="Hazel Brugger · Immer noch wach" 
     aria-label="Hazel Brugger · Immer noch wach"
     data-setup='{
@@ -156,13 +186,14 @@ Paste a YT video link (or the YT video ID) to the input element below.
 </div -->
 
 
-<div id="videoContainer" class="video-container mb-5">
+<div id="videoContainer" class="video-container mb-8">
 
   <div id="emptyPlayerOverlay" class="empty-player-overlay">
     <div class="empty-player-content">
+      <img src="/assets/image/page/skipad/skipad-logo.png" style="margin-bottom: 2rem"alt="Promo Image" width="512" height="128">
       <h3 class="notoc" style="opacity: 0.5">Paste YouTube Link/ID above</h3>
       <h4 class="notoc" style="opacity: 0.5">or</h4>
-      <h3 class="notoc" style="opacity: 0.5">Paste from Clipboard (Button)</h3>
+      <h3 class="notoc" style="opacity: 0.5">Paste from Clipboard (Paste Button)</h3>
       <!-- h4 class="notoc">and</h4>
       <h4 class="notoc">Lean back and watch your video ad-free</h4 -->
     </div>
