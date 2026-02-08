@@ -38,6 +38,10 @@ resource_options:
       slides:
         - url:                          /assets/image/page/die-augenzeugen/die-augenzeugen-1300.jpg
           alt:                          Die Augenzeugen
+          badge:
+            type:                       unsplash
+            author:                     ARD Mediathek
+            href:                       //ardmediathek.de/serien_spannung/
 ---
 
 // Page Initializer
@@ -335,8 +339,8 @@ Kriminalität übernimmt.
 [role="mt-5"]
 == Videos
 
-Über die Gallerie erreicht man alle Videos der Serie und direkt auf dieser
-Seite abgespielt werden können.
+Über die Gallerie erreicht man alle Videos der Serie, und können direkt von
+dieser Seite abgespielt werden.
 
 [role="mt-4 mb-5"]
 [CAUTION]
