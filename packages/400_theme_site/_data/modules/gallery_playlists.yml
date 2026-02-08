@@ -257,6 +257,57 @@ settings:
           tracks::                      []
 
     # --------------------------------------------------------------------------
+    # HTML5 VIDEO (over VideoJS)
+    #
+    - gallery:
+      enabled:                          true
+
+      id:                               jg_video_html5_videojs
+      type:                             video
+      video:                            html5
+      video_base_path:                  /assets/video/html5
+      image_base_path:                  /assets/video/poster/html5
+      thumb_base_path:                  /assets/video/poster/html5
+
+      # ------------------------------------------------------------------------
+      # Video settings
+      # ------------------------------------------------------------------------
+      #
+      videos:
+
+        - video:                        # video 1
+          enabled:                      true
+
+          name:                         Peck Pocketed
+          type:                         html5
+          api:                          videojs                                 # jadams !!!
+          size:                         1280-720
+          source:                       peck_pocketed.mp4
+          poster_image:                 peck_pocketed.jpg
+          pinterest_prefix:             Pin video
+          tweet_prefix:                 Try video
+          caption_text:                 Peck Pocketed &middot; Student Academy Award winning Cartoon Clip
+          description: >
+                                        <h2>Peck Pocketed by Kevin Herron | Disney Favorite</h2>
+                                        <h3>Student Academy Award winning Cartoon Clip</h3>
+
+        - video:                        # video 2
+          enabled:                      true
+        
+          name:                         Rollin Wild
+          type:                         html5
+          api:                          videojs                                 # jadams !!!
+          size:                         1280-720
+          source:                       rolling_wild.mp4
+          poster_image:                 rolling_wild.jpg
+          pinterest_prefix:             Pin video
+          tweet_prefix:                 Try video
+          caption_text:                 Rollin` Wild &middot; Short Funny animated video clip created at the Film Academy
+          description: >
+                                        <h2>Rollin` Wild</h2>
+                                        <h3>Short Funny Animated Clip created at the Film Academy</h3>
+
+    # --------------------------------------------------------------------------
     # Online VIDEO Carpool Karaoke (YouTube)
     #
     - gallery:
@@ -420,58 +471,7 @@ settings:
                                         <h3>Beginner Mat Pilates: Core Workout</h3>
 
     # --------------------------------------------------------------------------
-    # HTML5 VIDEO (over VideoJS)
-    #
-    - gallery:
-      enabled:                          true
-
-      id:                               jg_video_html5_videojs
-      type:                             video
-      video:                            html5
-      video_base_path:                  /assets/video/html5
-      image_base_path:                  /assets/video/poster/html5
-      thumb_base_path:                  /assets/video/poster/html5
-
-      # ------------------------------------------------------------------------
-      # Video settings
-      # ------------------------------------------------------------------------
-      #
-      videos:
-
-        - video:                        # video 1
-          enabled:                      true
-
-          name:                         Peck Pocketed
-          type:                         html5
-          api:                          videojs                                 # jadams !!!
-          size:                         1280-720
-          source:                       peck_pocketed.mp4
-          poster_image:                 peck_pocketed.jpg
-          pinterest_prefix:             Pin video
-          tweet_prefix:                 Try video
-          caption_text:                 Peck Pocketed &middot; Student Academy Award winning Cartoon Clip
-          description: >
-                                        <h2>Peck Pocketed by Kevin Herron | Disney Favorite</h2>
-                                        <h3>Student Academy Award winning Cartoon Clip</h3>
-
-        - video:                        # video 2
-          enabled:                      true
-        
-          name:                         Rollin Wild
-          type:                         html5
-          api:                          videojs                                 # jadams !!!
-          size:                         1280-720
-          source:                       rolling_wild.mp4
-          poster_image:                 rolling_wild.jpg
-          pinterest_prefix:             Pin video
-          tweet_prefix:                 Try video
-          caption_text:                 Rollin` Wild &middot; Short Funny animated video clip created at the Film Academy
-          description: >
-                                        <h2>Rollin` Wild</h2>
-                                        <h3>Short Funny Animated Clip created at the Film Academy</h3>
-
-    # --------------------------------------------------------------------------
-    # TinyDesk Concerts, Latin (YouTube)
+    # Online VIDEO, TinyDesk Concerts - Latin (YouTube)
     #
     - gallery:
       enabled:                          true
@@ -522,7 +522,7 @@ settings:
                                         <h3>At NPR 2025           </h3>
 
     # --------------------------------------------------------------------------
-    # HTML5 VIDEO II (online)
+    # Online VIDEO, Die Augenzeugen (ARD Meiathek)
     #
     - gallery:
       enabled:                          true
@@ -530,9 +530,9 @@ settings:
       id:                               die_augenzeugen
       type:                             video
       video:                            html5
-      video_base_path:                  /assets/video/html5
-      image_base_path:                  /assets/video/poster/html5
-      thumb_base_path:                  /assets/video/poster/html5
+      video_base_path:                  //pd-videos.daserste.de/dach/2025/04/12
+      image_base_path:                  //bilder.fernsehserien.de/sendung/hr2
+      thumb_base_path:                  //bilder.fernsehserien.de/sendung/hr2
 
       # ------------------------------------------------------------------------
       # Video settings
@@ -548,14 +548,15 @@ settings:
           type:                         html5
           api:                          videojs
           size:                         1280-720
-          source:                       peck_pocketed.mp4
+          source:                       4a7b7ab0-d5b9-41d3-8df5-a164d5c3943f/JOB_543450__sendeton_1920x1080-50p-5000kbit.mp4
           poster_image:                 peck_pocketed.jpg
+          poster_image:                 die-augenzeugen_460163-w-1000.png.webp
           pinterest_prefix:             Pin video
           tweet_prefix:                 Try video
-          caption_text:                 Peck Pocketed &middot; Student Academy Award winning Cartoon Clip
+          caption_text:                 Die Augenzeugen &middot; E01 Schweigen
           description: >
-                                        <h2>Peck Pocketed by Kevin Herron | Disney Favorite</h2>
-                                        <h3>Student Academy Award winning Cartoon Clip</h3>
+                                        <h2>Die Augenzeugen</h2>
+                                        <h3>E01 Schweigen</h3>
 
         # video 2
         - video:
@@ -565,61 +566,14 @@ settings:
           type:                         html5
           api:                          videojs 
           size:                         1280-720
-          source:                       rolling_wild.mp4
-          poster_image:                 rolling_wild.jpg
+          source:                       d6b68ba4-0634-427e-b886-6471ae571fb3/JOB_543448__sendeton_1920x1080-50p-5000kbit.mp4
+          poster_image:                 die-augenzeugen_460163-w-1000.png.webp
           pinterest_prefix:             Pin video
           tweet_prefix:                 Try video
-          caption_text:                 Rollin` Wild &middot; Short Funny animated video clip created at the Film Academy
+          caption_text:                 Die AugenzeSugen &middot; E02 Lügen
           description: >
-                                        <h2>Rollin` Wild</h2>
-                                        <h3>Short Funny Animated Clip created at the Film Academy</h3>
-
-    # ==========================================================================
-    # TUSHY Blonde
-    #
-    # - gallery:
-    #   enabled:                          true
-
-    #   id:                               tushy_blonde
-    #   type:                             video
-    #   video:                            html5
-
-    #   video_base_path:                  //localhost:10000/studios/tushy/blonde/video
-    #   image_base_path:                  //localhost:10000/studios/tushy/blonde/video/images
-
-    #   # ------------------------------------------------------------------------
-    #   # Video settings
-    #   # ------------------------------------------------------------------------
-    #   #
-    #   videos:
-
-    #     # video 1
-    #     - video:
-    #       enabled:                      true
-
-    #       name:                         01_alecia_ella
-    #       type:                         html5
-    #       size:                         1280-720
-    #       source:                       01_alecia_ella.mp4
-    #       poster_image:                 01_alecia_ella.jpg
-    #       caption_text:                 Blonde · Alecia & Ella
-    #       description: >
-    #                                     <h5>Blonde</h5>
-    #                                     <h6>Alecia & Ella</h6>
-
-    #     # video 2
-    #     - video:
-    #       enabled:                      true
-
-    #       name:                         02_alecia_sofi
-    #       type:                         html5
-    #       size:                         1280-720
-    #       source:                       02_alecia_sofi.mp4
-    #       poster_image:                 02_alecia_sofi.jpg
-    #       caption_text:                 Blonde · Alecia & Sofi
-    #       description: >
-    #                                     <h5>Blonde</h5>
-    #                                     <h6>Alecia & Sofi</h6>
+                                        <h2>Die Augenzeugen</h2>
+                                        <h3>E02 Lügen</h3>
 
 # ------------------------------------------------------------------------------
 # END config

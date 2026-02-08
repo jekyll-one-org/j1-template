@@ -1,18 +1,18 @@
 ---
 title:                                  Die Augenzeugen
-tagline:                                Thriller
+tagline:                                Vierteiliger Thriller
 title_extention:                        Vierteiliger Thriller
 
 
-date:                                   2024-09-14
-#last_modified:                         2023-01-01
+date:                                   2026-02-14
+#last_modified:                         2026-01-01
 
 description: >
                                         Vierteiliger Thriller über zwei 16-jährige Jungs,
                                         die zufällig einen dreifachen Mord beobachten, ins
                                         Visier des Killers geraten  und damit eine große
                                         Ermittlung der Polizei in München im Bereich der
-                                        Organisierten Kriminatität (OK) lostreten
+                                        Organisierten Kriminatität lostreten
 
 keywords:                               Musik, TV, Show, Igor Levit, Mark Forster,
                                         Piano, VOX
@@ -64,7 +64,7 @@ resource_options:
 Die Augenzeugen ist ein vierteiliger Thriller über zwei 16-jährige Jungs,
 die zufällig einen dreifachen Mord beobachten, ins Visier des Killers geraten
 und damit eine große Ermittlung der Polizei in München im Bereich der
-Organisierten Kriminatität (OK) lostreten.
+Organisierten Kriminatität lostreten.
 
 ++++
 <div class="video-title">
@@ -78,35 +78,73 @@ Organisierten Kriminatität (OK) lostreten.
 [role="mt-5"]
 == Über die Serie
 
+Die deutsche Miniserie *Die Augenzeugen* (ausgestrahlt ab Mai 2025 in der ARD)
+basiert auf der norwegischen Thriller-Serie *Øyevitne* (internationaler Titel:
+*Eyewitness*), die im Jahr 2014 veröffentlicht wurde.
+
+[role="mt-4"]
+=== Plot
+
 Lukas und sein Freund Jan werden im Wald Zeuge eines Mordes an drei
 Gangmitgliedern. Sie selbst geraten in Gefahr und können noch rechtzeitig
 entkommen.
 
 Jedoch sind sie sich sicher: Der Killer ist auf freiem Fuß und er weiß um
-ihre Existenz. Obwohl Jan bei der örtlichen Polizeichefin Helen aufwächst,
-behält er das Gesehene für sich.
+ihre Existenz. Obwohl Jan bei der örtlichen Polizeichefin Helen (seiner Tante)
+aufwächst, behält er das Gesehene für sich.
 
 Helen übernimmt den Fall zusammen mit ihrer Münchner Kollegin Corinna und
-deren neuen Chef Roman Berg, einem ehemaligen Undercover-Ermittler. Während
-die Jugendlichen sich in einem Gefühlschaos aus Angst und Scham befinden
-und hoffen, durch ihr Schweigen mit dem Leben davonzukommen, fasst der
-unbekannte Mörder inmitten eines sich anbahnenden Bandenkriegs in München
+deren neuen Chef Roman Berg, einem ehemaligen Undercover-Ermittler.
+
+Während die Jugendlichen sich in einem Gefühlschaos aus Angst und Scham
+befinden und hoffen, durch ihr Schweigen mit dem Leben davonzukommen, fasst
+der unbekannte Mörder inmitten eines sich anbahnenden Bandenkriegs in München
 den Entschluss, alle Zeugen auszuschalten.
-
-[role="mt-4"]
-[NOTE]
-====
-Zum Abspielen der Videos ist eine Internetverbindung zwingend *erforderlich*.
-Aus Gründen des *Urheberschutzes*, laden die Video Player alle Beiträge
-über das Angebot von
-link://www.ardmediathek.de/serien_spannung/[ARD Mediathek, {browser-window--new}].
-
-Videos verfügbar bis einschließlich: *01.05.2026*.
-====
 
 
 [role="mt-5"]
-=== Hauptfiguren
+== Kurz-Check
+
+Die Augenzeugen ist eine handwerklich gut gemachte Miniserie. Sie setzt eher
+auf eine starke Stimmung und schwierige moralische Fragen als auf Action. Wer
+Lust auf einen tiefgründigen Psychothriller hat und kein Problem mit einem
+langsamen Erzähltempo hat, ist hier genau richtig.
+
+Durchschnittliche Bewertung: *3,5* von *5* Stars (Quelle: Internet-Recherche)
+
+[role="mt-4"]
+=== Was die Serie gut macht
+
+Atmosphäre::
+Die Serie wirkt düster und packend. Die Naturaufnahmen und die kühlen Farben
+erinnern an Krimis aus Skandinavien.
+
+Schauspieler::
+Besonders die Jugendlichen spielen ihre Rollen sehr echt. Auch die Erwachsenen
+passen mit ihrer eher kühlen Art perfekt zur Stimmung.
+
+[role="mt-4"]
+=== Was weniger gut läuft
+
+Längen::
+Obwohl die Serie kurz ist, zieht sie sich zwischendurch. Manche Szenen
+wiederholen sich, ohne dass die Geschichte vorangeht.
+
+Charaktere::
+Die persönlichen Probleme der Charaktere werden zwar gezeigt, aber nicht
+richtig zu Ende erzählt. Vor allem die Beziehung der Jugendlichen hätte mehr
+Aufmerksamkeit verdient, um die Zuschauer auch emotional zu packen.
+
+Vorhersehbarkeit::
+Wer das norwegische Original oder viele Krimis kennt, wird wenig überrascht.
+Viele Wendungen lassen sich früh erahnen. Das Ende im letzten Teil ist
+logisch, aber nicht besonders spannend.
+
+
+[role="mt-5"]
+== Hauptfiguren
+
+Übersicht über die wichtigsten Rollen der Serie und deren Verbindungen.
 
 [cols="2a,3a,7a", options="header", width="100%", role="table-striped rtable mt-4"]
 |===
@@ -114,94 +152,89 @@ Videos verfügbar bis einschließlich: *01.05.2026*.
 
 |*Jan Severing*
 |16-jähriger Schüler, einer der titelgebenden Augenzeugen.
-|Neffe von Kommissarin Helen Severing, heimlich in Mitschüler Lukas
+|Neffe von Kommissarin Helen Severing. Heimlich in Mitschüler Lukas
 verliebt, gerät nach der Mordnacht massiv unter Druck, weil der Killer
-ihn erkannt hat; ringt zwischen Loyalität zu Lukas, Angst und dem Drang,
+ihn erkannt hat. Ringt zwischen Loyalität zu Lukas, Angst und dem Drang,
 die Wahrheit zu sagen.
 
 |*Lukas Watzinger*
-|16-jähriger Schüler, zweiter Augenzeuge und Jans
-Freund. |Sohn des Sägewerksbesitzers Erich Watzinger, entwickelt eine
-Beziehung zu Jan; will die Nacht im Wald unbedingt geheim halten,
-verstrickt sich in Lügen und wird zusätzlich durch ein Erpresservideo
-über ihr Sexvideo unter Druck gesetzt.
+|16-jähriger Schüler, zweiter Augenzeuge und Jans Freund.
+|Sohn des Sägewerksbesitzers Erich Watzinger. Er entwickelt eine
+Beziehung zu Jan. Will die Mordnacht im Wald unbedingt geheim halten.
+Verstrickt sich in Lügen und wird zusätzlich durch ein Erpresservideo
+unter Druck gesetzt.
 
 |*Helen Severing*
-|Kommissarin, Jans Tante und wichtigste Ermittlerin.
-|Zog nach dem Tod ihrer Schwester mit Jan aufs Land; wird in den
+|Kommissarin der örtlichen Polizei, Jans Tante und wichtige Ermittlerin.
+|Zog nach dem Tod ihrer Schwester mit Jan aufs Land und wird in den
 Mordfall hineingezogen, ohne zunächst zu wissen, dass ihr eigener Neffe
-Zeuge ist; arbeitet mit ihrer Nachfolgerin Corinna Will in der
-OK-Abteilung zusammen und ist beruflich wie privat stark involviert.
+Zeuge ist. Arbeitet mit ihrer Nachfolgerin Corinna Will in der Abteilung
+Organisierte Krininalität zusammen und ist beruflich wie privat stark
+involviert.
 
 |*Corinna Will*
-|Leiterin/Ermittlerin im Dezernat Organisierte Kriminalität (OK) München.
-|Früher Kollegin von Helen, jetzt ihre Nachfolgerin; pflegt einen eher
-harten, wenig teamorientierten Stil; muss mit Helen kooperieren, als klar
-wird, dass Biker-Gang und Mafia-Clan verwickelt sind; wird am Ende auf
-Helens Empfehlung zur neuen Leiterin des Dezernats befördert.
+|Die Leiterin/Ermittlerin im Dezernat Organisierte Kriminalität in München.
+|Früher Kollegin von Helen, jetzt ihre Nachfolgerin. Pflegt einen eher
+harten, wenig teamorientierten Stil und muss mit Helen kooperieren, als klar
+wird, dass die Biker-Gang und ein Mafia-Clan verwickelt sind. Am Ende wird
+auf Helens Empfehlung zur neuen Leiterin des Dezernats in München befördert.
 
 |*Roman Berg*
-|Auftragskiller und eigentlicher Täter in der Waldhütte.
-|Gibt sich zeitweise als Arzt aus; erschießt in der Hütte drei
-Mitglieder der Biker-Gang _Balkan Barbarians_, später versucht er, die
-beiden jugendlichen Zeugen zu finden und zu töten; wird im Finale bei
+|Auftragskiller und der eigentlicher Täter in der Waldhütte.
+|Gibt sich zeitweise als Arzt aus. Erschießt in der Hütte drei
+Mitglieder der Biker-Gang _Balkan Barbarians. Später versucht er, die
+beiden jugendlichen Zeugen zu finden und zu töten. Wird im Finale bei
 einer Schießerei im Wald von Helen erschossen.
 
 |*Balkan Barbarians*
 |Münchner Biker-Gang, drei ihrer Mitglieder werden in der Hütte getötet.
-|Verstrickt in organisierte Kriminalität; steht in Verbindung zum Münchner
-Untergrund, bildet eine Konfliktlinie gegen den italienischen Fontana-Clan;
-ihre interne Situation und der Mord an einem verdeckten Ermittler verschärfen
+|Verstrickt in organisierte Kriminalität. Stehen in Verbindung zum Münchner
+Untergrund und bilden eine Konfliktlinie gegen den italienischen Fontana-Clan.
+Ihre interne Situation wie der Mord an einem verdeckten Ermittler verschärfen
 den Druck auf die Polizei.
 
 |*Vincenzo Fontana*
 |Kopf eines italienischen Mafia-Clans in München.
 |Führt einen einflussreichen Clan, der mit der Biker-Gang um Einfluss
-konkurriert; als seine Tochter Vincenza verschwindet, eskaliert der Fall
+konkurriert. Als seine Tochter Vincenza verschwindet, eskaliert der Fall
 und die Ermittlungen nehmen größere Dimensionen an.
 
 |*Vincenza (Fontana)*
 |Tochter von Vincenzo Fontana.
-|Ihr Verschwinden erhöht den Druck auf Polizei und Clan; wird zum Hebel,
+|Ihr Verschwinden erhöht den Druck auf Polizei und den Clan. Wird zum Hebel,
 über den sich die Verbindungen zwischen Biker-Gang und Clan zuspitzen
-und die Ermittlungen beschleunigt werden.
+und die Ermittlungen beschleunigen.
 
 |*Erich Watzinger*
 |Vater von Lukas, Betreiber eines Sägewerks.
-|Hat ein angespanntes Verhältnis zu Lukas; sein Sägewerk wird Schauplatz
-eines späteren Zwischenfalls, nach dem Lukas im Koma landet; Erich wird
+|Hat ein angespanntes Verhältnis zu Lukas. Sein Sägewerk wird Schauplatz
+eines späteren Zwischenfalls, nach dem Lukas im Koma landet. Erich wird
 verhaftet, was die familiäre Krise verschärft.
 
 |*Mirek Polanski*
 |Kleinkrimineller, der die Jungs in der Mordnacht gesehen hat.
-|Beobachtet Jan und Lukas in der Hütte und filmt ein
-Sexvideo von ihnen; erpresst Lukas mit dem Video, um Geld zu bekommen;
-wird zunächst vom Killer Branic ins Visier genommen und später von Lukas
-im Handgemenge erschossen.
+|Beobachtet Jan und Lukas in der Hütte und filmt ein Sexvideo von ihnen.
+Eerpresst Lukas mit dem Video, um Geld zu bekommen. wird zunächst vom Killer
+Branic ins Visier genommen und später von Lukas im Handgemenge erschossen.
 
 |*Franjo Pranjic*
 |Mitglied/Figur im Umfeld der _Balkan Barbarians_.
-|Mit der Biker-Gang und der Münchner Unterwelt verknüpft; seine Rolle
-unterstreicht die internationale und brutale Struktur der Gang; Teil des
+|Mit der Biker-Gang und der Münchner Unterwelt verknüpft. Seine Rolle
+unterstreicht die internationale und brutale Struktur der Gang. Teil des
 Geflechts aus Gewalt, Drogen und Auftragsmorden.
 
 |*Hannah Berg*
 |Angehörige im Umfeld Roman Bergs.
-|Verknüpft den Killer mit einer bürgerlicheren Fassade; dient als
-emotionaler Bezugspunkt und Kontrast zu seiner Kaltblütigkeit.
+|Verknüpft den Killer mit einer bürgerlicheren Fassade. Dient als
+emotionaler Bezugspunkt und Kontrast zu Bergs Kaltblütigkeit.
 
 |===
 
 
 [role="mt-5"]
-== Videos
+== Episodenweise Zusammenfassung
 
-.Episoden
-gallery::die_augenzeugen[role="mt-4 mb-4"]
-
-
-[role="mt-5"]
-== Episoden
+Zum Nachlesen, Zusammenfassungen aller Folgen.
 
 [role="mt-4"]
 === Episode 1 - Schweigen
@@ -221,13 +254,12 @@ Gesehene zu sprechen.
 
 Parallel beginnt Helen Severing, die mit Jan auf dem Land lebt, in München
 zu ermitteln, nachdem unter den Toten ein verdeckter Ermittler identifiziert
-wird und sie ihre frühere Kollegin Corinna Will aus der OK-Abteilung
-wiedertrifft.
+wird und sie ihre frühere Kollegin Corinna Will aus der Abteilung Organisierte
+Krininalität wiedertrifft.
 
 Erste Hinweise deuten darauf hin, dass sowohl die _Balkan Barbarians_ als
 auch der Fontana-Clan in einen größeren Konflikt verstrickt sind, während
 Jan und Lukas versuchen, den Alltag in Schule und Familie aufrechtzuerhalten.
-
 
 [role="mt-4"]
 === Episode 2 - Lügen
@@ -254,7 +286,6 @@ Die Episode kulminiert darin, dass die Lügen der beiden Jungen ihr Umfeld
 immer stärker belasten und sie sich immer mehr in Gefahr bringen, ohne
 sich Erwachsenen anzuvertrauen.
 
-
 [role="mt-4"]
 === Episode 3 - Kontrollverlust
 
@@ -273,7 +304,6 @@ Die Ermittlungen von Helen und Corinna zeigen nun immer klarer, wie tief die
 Biker-Gang, der Fontana-Clan und der Auftragskiller Roman Berg im Münchner
 Untergrund vernetzt sind, während die Kontrolle über die Situation den
 Beteiligten zu entgleiten droht.
-
 
 [role="mt-4"]
 === Episode 4 - Schutzlos
@@ -303,41 +333,27 @@ Kriminalität übernimmt.
 
 
 [role="mt-5"]
-== Kritik
+== Videos
 
-Die Augenzeugen ist eine solide, stilistisch hochwertige Miniserie, die vor
-allem durch Atmosphäre und moralische Grundfragen überzeugt. Sie eignet sich
-besonders für Zuschauer:innen, die psychologisch angelegte Thriller mögen
-und weniger Wert auf eine rasante Handlung legen.
+Über die Gallerie erreicht man alle Videos der Serie und direkt auf dieser
+Seite abgespielt werden können.
 
-Bewertung (Stars): *3,5* von *5*.
+[role="mt-4 mb-5"]
+[CAUTION]
+====
+Zum Abspielen der Videos ist eine Internetverbindung zwingend *erforderlich*.
+Aus Gründen des *Urheberschutzes*, laden die Video Player alle Beiträge
+über das Angebot von
+link://www.ardmediathek.de/serien_spannung/[ARD Mediathek, {browser-window--new}].
 
+Videos in der ARD Mediathek sind zeitlich begrenzt abrufbar, da Medien-Gesetze
+(oder Rechteverträge) vorschreiben, wie lange welche Art von Inhalt online
+verfügbar sein dürfen. Filme und Serien in der Mediathek dürfen in der Regel
+*maximal 12 Monate* abrufbar sein.
 
-[role="mt-4"]
-=== Stärken
+* *Altersfreigabe* (FSK): *Ab 12 Jahren*
+* *Verfügbar* bis: *01.05.2026*
+====
 
-Die Serie punktet mit einer dichten, oft bedrückenden Stimmung. Die
-Naturkulissen, das reduzierte Farbkonzept und ruhige Kamerafahrten erzeugen
-eine konstante Spannung. Visuell erinnert das an skandinavische Noir-
-Traditionen. Kühl, klar und kontrolliert.
-
-Die jugendlichen Darsteller überzeugen durch ein introvertiertes, glaubwürdiges
-Spiel. Auch die Rollen der Erwachsenen sind bewusst unterkühlt angelegt,
-was gut zur Atmosphäre passt.
-
-
-[role="mt-4"]
-=== Schwächen
-
-Trotz kurzer Laufzeit leidet die Serie unter Längen. Szenen wiederholen
-emotionale Zustände ohne neue Erkenntnisse zu liefern. Spannung entsteht
-mehr durch Atmosphäre als durch narrative Entwicklung.
-
-Die inneren Konflikte der Hauptfiguren werden angedeutet, aber selten
-konsequent vertieft. Gerade die Beziehung zwischen den Jugendlichen hätte
-mehr erzählerischen Raum verdient, um wirklich berührend zu sein.
-
-Wer das norwegischen Original kennt oder mit Genre-Konventionen vertraut ist,
-wird einige Wendungen früh erahnen. Überraschungen sind rar, das Finale wirkt
-eher konsequent als zwingend.
-
+.Die Augenzeugen · Alle Folgen
+gallery::die_augenzeugen[role="nospeak mb-8"]

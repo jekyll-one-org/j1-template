@@ -1,7 +1,7 @@
 ---
 title:                                  SkipAd 
 title_extention:                        Block YouTube Advertising
-tagline:                                YouTube Video - No Ads
+tagline:                                YouTube Videos - No Ads
 
 date:                                   2026-01-29
 #last_modified:                         2026-01-01
