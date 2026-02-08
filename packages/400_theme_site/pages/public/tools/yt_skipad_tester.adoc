@@ -1,15 +1,15 @@
 ---
 title:                                  SkipAd 
-title_extention:                        Block YT Advertising
-tagline:                                YouTube Video with No Ads
+title_extention:                        Block YouTube Advertising
+tagline:                                YouTube Video - No Ads
 
 date:                                   2026-01-29
 #last_modified:                         2026-01-01
 
 description: >
-                                        SkipAd, excellent online YouTube video player
-                                        to block adverising. Blocks all ads instantly.
-                                        Test YT Video with No Advertising
+                                        SkipAd, an excellent online YouTube video player
+                                        to block all advertising. Blocks all ads instantly.
+                                        Watch your favorite YouTube Videos with No Advertising.
 
 keywords: >
                                         open source, free, template, jekyll,
@@ -96,16 +96,28 @@ endif::[]
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [role="dropcap"]
-SkipAd, excellent online YouTube video player to block adverising. Blocks
-all ads instantly - no more pre-roll, mid-roll, or overlay ads.
+SkipAd is an excellent YouTube video player for blocking ads. Blocks all ads
+instantly for a great watching  experience. No more pre-roll, mid-roll, or
+overlay ads.
 
-SkipAd provides an 100% *free alternative* to *YouTube Premium* for watching
-a video undisturbed.
+SkipAd provides an *100% free alternative* to e.g. *YouTube Premium* or 
+crasy browser plugins for watching YouTube videos undisturbed. No downloads
+required: simple cut-and-paste on this page to go.
+
 
 [role="mt-5"]
 == Video selection
 
-Paste a YT video link (or the YT video ID) to the input element below.
+Paste a video link from link://youtube.com[YouTube, {browser-window--new}] 
+(or the Video ID) to the input element below.
+
+[TIP]
+====
+If you have no idea what video to watch on YouTube yet, try for example
+this one, a compilation of grat Auditions on
+link://youtube.com/watch?v=cM4J-VXtChg[xGT Got Talent Shows, {browser-window--new}]
+for for half an hour of fun.
+====
 
 // Include sub-documents (if any)
 // https://skipcut.com/
