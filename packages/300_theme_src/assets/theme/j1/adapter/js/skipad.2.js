@@ -6,7 +6,7 @@ regenerate: true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/skipad.js (3)
+ # ~/assets/theme/j1/adapter/js/skipad.js (2)
  # Liquid template to adapt the J1 SkipAd module
  #
  # Product/Info:
@@ -54,7 +54,7 @@ regenerate: true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/skipad.js (3)
+ # ~/assets/theme/j1/adapter/js/skipad.js (2)
  # J1 Adapter for the J1 SkipAd module
  # Product/Info:
  # https://jekyll.one
@@ -168,10 +168,10 @@ j1.adapter.skipad = ((j1, window) => {
     video.poster      = `//img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
 
     video.setAttribute('aria-label', options.title || 'Video Player');
-
+    
     // Replace overlay with video element
     overlay.replaceWith(video);
-
+    
     // VideoJS configuration
     const videoConfig = {
       fluid: true,
@@ -186,11 +186,11 @@ j1.adapter.skipad = ((j1, window) => {
           inline: false
         }
       },
-      ...options.playerOptions
+//    ...options.playerOptions
     };
-
+    
     // Initialize VideoJS player manually
-    var player = null;
+    let player = null;
     if (typeof videojs !== 'undefined') {
       player = videojs(videoId, videoConfig, function onPlayerReady() {
         console.log('VideoJS player ready for:', videoId);
@@ -199,7 +199,7 @@ j1.adapter.skipad = ((j1, window) => {
         }
       });
     }
-
+    
     return player;
   }
 
@@ -429,13 +429,6 @@ j1.adapter.skipad = ((j1, window) => {
 
       const vjsPlayer = createVideoJsPlayer(videoId, {
         title: 'Hazel Brugger · Immer noch wach',
-        onStateChange: (event) => {
-          var state = e.data;
-          if (state === this.lastState || this.errorNumber) {
-            return;
-          }
-          this.lastState = state;
-        },
         onReady: (player) => {
           logger.info('player initialized and ready');
           if (autoPlay) {
@@ -449,18 +442,19 @@ j1.adapter.skipad = ((j1, window) => {
             // =================================================================
             // VideoJS plugin settings
             // ----------------------------------------------------------------- 
-            // const piAutoCaption     = skipAdOptions.videoJS.plugins.autoCaption;
-            // const piHotKeys         = skipAdOptions.videoJS.plugins.hotKeys;
+//          const piAutoCaption     = skipAdOptions.videoJS.plugins.autoCaption;
+//          const piHotKeys         = skipAdOptions.videoJS.plugins.hotKeys;
             const piSkipButtons     = skipAdOptions.videoJS.plugins.skipButtons;
-            // const piZoomButtons     = skipAdOptions.videoJS.lugins.zoomButtons;
+//          const piZoomButtons     = skipAdOptions.videoJS.lugins.zoomButtons;
 
             // customize the VideoJS Player
             // -----------------------------------------------------------------
-            // var vjsPlayerExist      = document.getElementById(player.id_) ? true : false;
+            var vjsPlayerExist          = document.getElementById(player.id_) ? true : false;
+            var vjsPlayerCustomButtons  = ("#{custom_buttons}" === 'true') ? true : false;
 
             // apply player customization
             // -----------------------------------------------------------------
-            const vjsPlayer         = player;
+            const vjsPlayer             = player;
 
             // add custom progressControlSilder
             // -----------------------------------------------------------------
@@ -529,18 +523,6 @@ j1.adapter.skipad = ((j1, window) => {
             //     appliedOnce = true;
             //   }
             // });
-
-            // scroll page to the players top position
-            // -------------------------------------------------------------
-            var vjs_player = document.getElementById(vjsPlayer.id_);
-            vjs_player.addEventListener('click', function(event) {
-              const targetDiv         = document.getElementById("video_container");
-              const targetDivPosition = targetDiv.offsetTop;
-              var scrollOffset        = (window.innerWidth >= 720) ? -160 : -110;
-
-              // scroll player to top position
-              window.scrollTo(0, targetDivPosition + scrollOffset);
-            }); // END EventListener 'click'
 
             setTimeout(() => vjsPlayer.play(), VIDEO_START_DELAY);
           }

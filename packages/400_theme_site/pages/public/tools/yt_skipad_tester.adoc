@@ -1,7 +1,7 @@
 ---
 title:                                  SkipAd 
-title_extention:                        Block YouTube Advertising
-tagline:                                YouTube Videos - No Ads
+title_extention:                        Block YouTube Ads
+tagline:                                Undisturbed YouTube Video
 
 date:                                   2026-01-29
 #last_modified:                         2026-01-01
@@ -147,12 +147,11 @@ ifeval::[{video-selection-enabled} == true]
 endif::[]
 
 
-// [role="mt-5"]
-// == Video
-
+[role="mt-5"]
+== Video
 
 ++++
-<div id="" class="video-container mb-8">
+<div id="video_container" class="video-container mb-8">
   <div id="emptyPlayerOverlay" class="empty-player-overlay">
     <div class="empty-player-content">
       <img src="/assets/image/page/skipad/skipad-logo.png" style="margin-bottom: 2rem"alt="Promo Image" width="512" height="128">
