@@ -107,7 +107,11 @@ SkipAd provides an *100% free alternative* to e.g. *YouTube Premium* or
 crasy browser plugins for watching YouTube videos undisturbed. No downloads
 required: simple cut-and-paste on this page to go.
 
-
+// Include sub-documents (if any)
+// https://skipcut.com/
+// https://www.youtube.com/watch?v=-w37wr0b6KE
+// https://www.youtube.com/watch?v=t9QIwqsbpDA
+// -----------------------------------------------------------------------------
 [role="mt-5"]
 == Video selection
 
@@ -122,10 +126,10 @@ link://youtube.com/watch?v=cM4J-VXtChg[xGT Got Talent Shows, {browser-window--ne
 for for half an hour of fun.
 ====
 
-// Include sub-documents (if any)
-// https://skipcut.com/
-// https://www.youtube.com/watch?v=-w37wr0b6KE
-// -----------------------------------------------------------------------------
+
+// .Video selection
+// skipad::video_selection[role="mt-4 mb-5"]
+
 
 ifeval::[{video-selection-enabled} == true]
 ++++
@@ -139,8 +143,15 @@ ifeval::[{video-selection-enabled} == true]
   </div>
   <button id="loadVideo" class="watch-adfree-btn">Watch Ad Free</button>
 </div>
+++++
+endif::[]
 
 
+// [role="mt-5"]
+// == Video
+
+
+++++
 <div id="" class="video-container mb-8">
   <div id="emptyPlayerOverlay" class="empty-player-overlay">
     <div class="empty-player-content">
@@ -154,7 +165,7 @@ ifeval::[{video-selection-enabled} == true]
   </div>
 </div>
 ++++
-endif::[]
+
 
 ifeval::[{history-enabled} == true]
 [role="mt-4"]

@@ -2,7 +2,7 @@
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/modules/videojs/css/theme/uno.css
  # Provides player styles for theme Uno
- # Theme Uno is based on theme fantasy, version 1.0.1
+ # Theme Uno is based on theme fantasy, version 1.0.2
  # See: https://www.mux.com/blog/the-new-video-js-themes
  # -----------------------------------------------------------------------------
  #
@@ -129,7 +129,8 @@
 
 .video-js .vjs-time-control {
   /* font-size: 1.6em; */
-  font-size: 1.4em;
+  font-size: 1.5em;
+  padding-bottom: 54px !important;
 }
 
 .vjs-theme-uno .vjs-play-control {
@@ -240,7 +241,7 @@
 /* styles for custom timeDisplay */
 .video-js .custom-time-display {
     color: #fff;
-    font-size: 0.9em;
+    /* font-size: 0.9em; */
     min-width: 50px;
     text-align: center;
 }
@@ -255,7 +256,7 @@
 .video-js .vjs-remaining-time-display,
 .video-js .vjs-duration-display {
     color: #fff;
-    font-size: 0.9em;
+    /* font-size: 0.9em; */
     padding: 0 5px;
     white-space: nowrap;
 }
@@ -287,8 +288,7 @@
 /* adjust time-tooltip sizes (vjsSliderProgess) */
 .video-js .vjs-progress-control:hover
 .vjs-play-progress .vjs-time-tooltip {
-  /*
-  display: none !important; */
+  /* display: none !important; */
   font-size: .9em;
   padding: 0.35em 0.35em;
   border-radius: 3px;

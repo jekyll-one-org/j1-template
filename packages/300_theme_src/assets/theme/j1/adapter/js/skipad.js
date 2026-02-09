@@ -81,11 +81,11 @@ j1.adapter.skipad = ((j1, window) => {
   // ---------------------------------------------------------------------------
   // Constants
   // ---------------------------------------------------------------------------
-  const MODULE_NAME = 'j1.adapter.skipad';
-  const MODULE_NAME_RUN = 'j1.adapter.skipad.runner';
-  const INIT_POLL_INTERVAL = 10;
-  const PASTE_DELAY = 10;
-  const VIDEO_START_DELAY = 500;
+  const MODULE_NAME         = 'j1.adapter.skipad';
+  const MODULE_NAME_RUN     = 'j1.adapter.skipad.runner';
+  const INIT_POLL_INTERVAL  = 10;
+  const PASTE_DELAY         = 10;
+  const VIDEO_START_DELAY   = 500;
   
   const YOUTUBE_PATTERNS = Object.freeze([
     /(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/,
@@ -95,11 +95,11 @@ j1.adapter.skipad = ((j1, window) => {
   ]);
 
   const MESSAGES = Object.freeze({
-    NO_CLIPBOARD_API: 'j1.adapter.skipad.InputWrapperHandler - Clipboard API not available. Please use Ctrl+V.',
-    CLIPBOARD_DENIED: 'j1.adapter.skipad.InputWrapperHandler - Clipboard access failed. Please paste URL manually.',
-    INVALID_URL: 'j1.adapter.skipad.InputWrapperHandler - Invalid YouTube URL. Please check your input.',
-    NO_URL: 'j1.adapter.skipad.InputWrapperHandler - No URL entered',
-    LOADING_VIDEO: 'j1.adapter.skipad.InputWrapperHandler - Loading ad-free video'
+    NO_CLIPBOARD_API:   'j1.adapter.skipad.InputWrapperHandler - Clipboard API not available. Please use Ctrl+V.',
+    CLIPBOARD_DENIED:   'j1.adapter.skipad.InputWrapperHandler - Clipboard access failed. Please paste URL manually.',
+    INVALID_URL:        'j1.adapter.skipad.InputWrapperHandler - Invalid YouTube URL. Please check your input.',
+    NO_URL:             'j1.adapter.skipad.InputWrapperHandler - No URL entered',
+    LOADING_VIDEO:      'j1.adapter.skipad.InputWrapperHandler - Loading ad-free video'
   });
 
   // ---------------------------------------------------------------------------
@@ -108,7 +108,7 @@ j1.adapter.skipad = ((j1, window) => {
   const isDev = j1.env === "development" || j1.env === "dev";
   const environment = '{{environment}}';
   const cookieNames = j1.getCookieNames();
-  const userState = j1.readCookie(cookieNames.user_state);
+  const userState   = j1.readCookie(cookieNames.user_state);
   
   let skipAdDefaults;
   let skipAdSettings;
@@ -139,7 +139,7 @@ j1.adapter.skipad = ((j1, window) => {
    */  
   function consoleLog(level, module, message) {
     const timestamp = new Date().toISOString().slice(11, 23);
-    const id = generateId();
+    const id        = generateId();
     
     console.log(`[${timestamp}] [${id}] [${level}] [${module}] \n${message}`);
     // console.log(message);
@@ -151,7 +151,7 @@ j1.adapter.skipad = ((j1, window) => {
    */  
   function createVideoJsPlayer(videoId, options = {}) {
     const container = document.querySelector('.video-container');
-    const overlay = document.getElementById('emptyPlayerOverlay');
+    const overlay   = document.getElementById('emptyPlayerOverlay');
     
     if (!container || !overlay) {
       console.error('Container or overlay element not found');
@@ -159,13 +159,14 @@ j1.adapter.skipad = ((j1, window) => {
     }
 
     // Create video element
-    const video = document.createElement('video');
-    video.id = videoId;
-    video.className = 'video-js vjs-theme-uno';
-    video.controls = true;
-    video.width = 640;
-    video.height = 360;
-    video.poster = `//img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+    const video       = document.createElement('video');
+    video.id          = videoId;
+    video.className   = 'video-js vjs-theme-uno';
+    video.controls    = true;
+    video.width       = 640;
+    video.height      = 360;
+    video.poster      = `//img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+
     video.setAttribute('aria-label', options.title || 'Video Player');
     
     // Replace overlay with video element
@@ -185,7 +186,7 @@ j1.adapter.skipad = ((j1, window) => {
           inline: false
         }
       },
-      ...options.playerOptions
+//    ...options.playerOptions
     };
     
     // Initialize VideoJS player manually
@@ -212,15 +213,15 @@ j1.adapter.skipad = ((j1, window) => {
    */
   class InputWrapperHandler {
     constructor() {
-      this.elements = this.#cacheElements();
-      this.#init();
+      this.elements = this.cacheElements();
+      this.init();
     }
 
     /**
      * Cache DOM elements
      * @private
      */
-    #cacheElements() {
+    cacheElements() {
       return {
         pasteButton: document.getElementById('pasteButton'),
         videoUrlInput: document.getElementById('videoUrl'),
@@ -232,18 +233,18 @@ j1.adapter.skipad = ((j1, window) => {
      * Initialize event listeners
      * @private
      */
-    #init() {
+    init() {
       const { pasteButton, videoUrlInput, loadVideoButton } = this.elements;
 
       // Paste Button Click Event
-      pasteButton?.addEventListener('click', () => this.handlePasteClick());
+      pasteButton.addEventListener('click', () => this.handlePasteClick());
 
       // Load Video Button Click Event
-      loadVideoButton?.addEventListener('click', () => this.handleLoadVideo());
+      loadVideoButton.addEventListener('click', () => this.handleLoadVideo());
 
       // Input field events
       if (videoUrlInput) {
-        videoUrlInput.addEventListener('paste', (e) => this.#handleDirectPaste(e));
+        videoUrlInput.addEventListener('paste', (e) => this.handleDirectPaste(e));
         videoUrlInput.addEventListener('keypress', (e) => {
           if (e.key === 'Enter') {
             e.preventDefault();
@@ -259,7 +260,7 @@ j1.adapter.skipad = ((j1, window) => {
      */
     async handlePasteClick() {
       try {
-        if (!navigator.clipboard?.readText) {
+        if (!navigator.clipboard.readText) {
           console.warn(MESSAGES.NO_CLIPBOARD_API);
           alert(MESSAGES.NO_CLIPBOARD_API);
           return;
@@ -267,7 +268,7 @@ j1.adapter.skipad = ((j1, window) => {
 
         const text = await navigator.clipboard.readText();
         this.elements.videoUrlInput.value = text.trim();
-        this.#processUrl();
+        this.processUrl();
       } catch (err) {
         console.error('Clipboard read error:', err);
         consoleLog('ERROR', MODULE_NAME_RUN, `Clipboard read error: ${err}`);
@@ -279,23 +280,23 @@ j1.adapter.skipad = ((j1, window) => {
      * Handle direct paste event in input field
      * @private
      */
-    #handleDirectPaste(event) {
+    handleDirectPaste(event) {
       // Delay to allow value to be pasted first
-      setTimeout(() => this.#processUrl(), PASTE_DELAY);
+      setTimeout(() => this.processUrl(), PASTE_DELAY);
     }
 
     /**
      * Handle load video button click
      */
     handleLoadVideo() {
-      this.#processUrl();
+      this.processUrl();
     }
 
     /**
      * Main function to process the URL
      * @private
      */
-    #processUrl() {
+    processUrl() {
       const url = this.elements.videoUrlInput.value.trim();
       
       if (!url) {
@@ -303,14 +304,14 @@ j1.adapter.skipad = ((j1, window) => {
         return;
       }
 
-      const videoId = this.#extractVideoId(url);
+      const videoId = this.extractVideoId(url);
       
       if (videoId) {
         // console.log('j1.adapter.skipad.InputWrapperHandler - Processed video ID:', videoId);
         // consoleLog('INFO', 'j1.adapter.skipad.runner', '[skipad.js] Embedding YT video with ID: -w37wr0b6KE');
         consoleLog('INFO', MODULE_NAME_RUN, 'Embedding YT video with ID: -w37wr0b6KE');
 
-        this.#loadAdFreeVideo(videoId);
+        this.loadAdFreeVideo(videoId);
       } else {
         consoleLog('ERROR', MODULE_NAME_RUN, `Invalid YouTube URL. Please check your input.`);
         alert(MESSAGES.INVALID_URL);
@@ -323,7 +324,7 @@ j1.adapter.skipad = ((j1, window) => {
      * @returns {string|null} - Extracted video ID or null if invalid
      * @private
      */
-    #extractVideoId(url) {
+    extractVideoId(url) {
       for (const pattern of YOUTUBE_PATTERNS) {
         const match = url.match(pattern);
         if (match) {
@@ -338,7 +339,7 @@ j1.adapter.skipad = ((j1, window) => {
      * @param {string} videoId - YouTube video ID
      * @private
      */
-    #loadAdFreeVideo(videoId) {
+    loadAdFreeVideo(videoId) {
       // console.log(MESSAGES.LOADING_VIDEO, videoId);
       consoleLog('INFO', MODULE_NAME_RUN, `Loading ad-free video: ${videoId}`);
 
@@ -359,6 +360,7 @@ j1.adapter.skipad = ((j1, window) => {
   // Main Module
   // ---------------------------------------------------------------------------
   return {
+
     /**
      * Adapter initializer
      * @param {Object} options - Configuration options
@@ -368,21 +370,21 @@ j1.adapter.skipad = ((j1, window) => {
       const settings = {
         module_name: MODULE_NAME,
         generated: '{{site.time}}',
-        ...options
+//      ...options
       };
 
       // Initialize global variable settings
-      skipAdDefaults = { ...{{skipad_defaults | replace: 'nil', 'null' | replace: '=>', ':'}} };
-      skipAdSettings = { ...{{skipad_settings | replace: 'nil', 'null' | replace: '=>', ':'}} };
-      skipAdOptions = { ...skipAdDefaults, ...skipAdSettings };
+      logger          = log4javascript.getLogger(MODULE_NAME);
 
-      logger = log4javascript.getLogger(MODULE_NAME);
+      skipAdDefaults = $.extend({}, {{skipad_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      skipAdSettings = $.extend({}, {{skipad_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      skipAdOptions  = $.extend(true, {}, skipAdDefaults, skipAdSettings);
 
       // Module initializer with dependency checking
       const dependencies_met_page_ready = setInterval(() => {
-        const pageState = $('#content').css("display");
-        const pageVisible = pageState === 'block';
-        const j1CoreFinished = j1.getState() === 'finished';
+        const pageState       = $('#content').css("display");
+        const pageVisible     = pageState === 'block';
+        const j1CoreFinished  = j1.getState() === 'finished';
 
         if (j1CoreFinished && pageVisible) {
           const startTimeModule = Date.now();
@@ -423,15 +425,106 @@ j1.adapter.skipad = ((j1, window) => {
       logger = log4javascript.getLogger(MODULE_NAME_RUN);
       var autoPlay = true;
 
-      logger?.info('Embedding YT video with ID:', videoId);
+      logger.info('Embedding YT video with ID:', videoId);
 
-      const player = createVideoJsPlayer(videoId, {
+      const vjsPlayer = createVideoJsPlayer(videoId, {
         title: 'Hazel Brugger · Immer noch wach',
         onReady: (player) => {
           logger.info('player initialized and ready');
           if (autoPlay) {
             logger.info('player started');
-            setTimeout(() => player.play(), VIDEO_START_DELAY);
+
+            // =================================================================
+            // VideoJS player settings
+            // -----------------------------------------------------------------
+            const vjsPlaybackRates  = skipAdOptions.videoJS.playbackRates.values;          
+
+            // =================================================================
+            // VideoJS plugin settings
+            // ----------------------------------------------------------------- 
+//          const piAutoCaption     = skipAdOptions.videoJS.plugins.autoCaption;
+//          const piHotKeys         = skipAdOptions.videoJS.plugins.hotKeys;
+            const piSkipButtons     = skipAdOptions.videoJS.plugins.skipButtons;
+//          const piZoomButtons     = skipAdOptions.videoJS.lugins.zoomButtons;
+
+            // customize the VideoJS Player
+            // -----------------------------------------------------------------
+            var vjsPlayerExist          = document.getElementById(player.id_) ? true : false;
+            var vjsPlayerCustomButtons  = ("#{custom_buttons}" === 'true') ? true : false;
+
+            // apply player customization
+            // -----------------------------------------------------------------
+            const vjsPlayer             = player;
+
+            // add custom progressControlSilder
+            // -----------------------------------------------------------------
+
+            // create customControlContainer for progressControlSilder|time (display) elements
+            const customProgressContainer = vjsPlayer.controlBar.addChild('Component', {
+              el: videojs.dom.createEl('div', {
+                className: 'vjs-theme-uno custom-progressbar-container'
+              })
+            });
+
+            // move progressControlSlider into customControlContainer
+            const progressControlSlider = vjsPlayer.controlBar.progressControl;
+            if (progressControlSlider) {
+              customProgressContainer.el().appendChild(progressControlSlider.el());
+            }
+
+            // time display
+            // -----------------------------------------------------------------
+            // move currentTimeDisplay BEFORE the progressControlSilder
+            const currentTimeDisplay = vjsPlayer.controlBar.currentTimeDisplay;
+            if (currentTimeDisplay) {
+              customProgressContainer.el().insertBefore(currentTimeDisplay.el(), progressControlSlider.el());
+            }
+
+            // move the durationDisplay AFTER the progressControlSilder
+            const durationDisplay = vjsPlayer.controlBar.durationDisplay;
+            if (durationDisplay) {
+              customProgressContainer.el().appendChild(durationDisplay.el());
+            }
+
+            // add|skip playbackRates
+            // -----------------------------------------------------------------
+            if (skipAdOptions.videoJS.playbackRates.enabled) {
+              vjsPlayer.playbackRates(vjsPlaybackRates);
+            }
+
+            // add|skip skipButtons plugin
+            // -----------------------------------------------------------------
+            if (piSkipButtons.enabled) {
+              var backwardIndex = piSkipButtons.backward;
+              var forwardIndex  = piSkipButtons.forwardIndex;
+
+              // property 'surroundPlayButton' takes precendence
+              //
+              if (piSkipButtons.surroundPlayButton) {
+                var backwardIndex = 0;
+                var forwardIndex  = 1;
+              }
+
+              vjsPlayer.skipButtons({
+                backwardIndex:  backwardIndex,
+                forwardIndex:   forwardIndex,
+                backward:       piSkipButtons.backward,
+                forward:        piSkipButtons.forward,
+              });
+            }
+
+            // set start position of current video (on play)
+            // -----------------------------------------------------------------
+            // var appliedOnce = false;
+            // vjsPlayer.on("play", function() {
+            //   var startFromSecond = new Date('1970-01-01T' + "#{attributes['start']}" + 'Z').getTime() / 1000;
+            //   if (!appliedOnce) {
+            //     vjsPlayer.currentTime(startFromSecond);
+            //     appliedOnce = true;
+            //   }
+            // });
+
+            setTimeout(() => vjsPlayer.play(), VIDEO_START_DELAY);
           }
         }
       });
@@ -446,11 +539,11 @@ j1.adapter.skipad = ((j1, window) => {
     messageHandler: (sender, message) => {
       try {
         const jsonMessage = JSON.stringify(message, null, 2);
-        logger?.debug(`Received message from ${sender}: ${jsonMessage}`);
+        logger.debug(`Received message from ${sender}: ${jsonMessage}`);
 
         // Process commands/actions
         if (message.type === 'command' && message.action === 'module_initialized') {
-          logger?.info(message.text);
+          logger.info(message.text);
           // Add command handling logic here
         }
 
@@ -458,7 +551,7 @@ j1.adapter.skipad = ((j1, window) => {
 
         return true;
       } catch (error) {
-        logger?.error('Message handler error:', error);
+        logger.error('Message handler error:', error);
         return false;
       }
     },
