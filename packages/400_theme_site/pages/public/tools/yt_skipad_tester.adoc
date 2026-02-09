@@ -71,7 +71,10 @@ resource_options:
 // Attribute settings for section control
 //
 :badges-enabled:                        false
+:video-selection-enabled:               true
 :history-enabled:                       false
+:script-enabled:                        false
+:style-enabled:                         false
 
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
@@ -124,6 +127,7 @@ for for half an hour of fun.
 // https://www.youtube.com/watch?v=-w37wr0b6KE
 // -----------------------------------------------------------------------------
 
+ifeval::[{video-selection-enabled} == true]
 ++++
 <div class="input-wrapper mt-4">
   <div class="input-container">
@@ -133,73 +137,11 @@ for for half an hour of fun.
     </button>
     <input type="text" id="videoUrl" placeholder="https://www.youtube.com/watch?v=xxxx.. or xxxx..">
   </div>
-  <!-- button id="loadVideo" class="watch-adfree-btn">Watch Ad Free</button -->
+  <button id="loadVideo" class="watch-adfree-btn">Watch Ad Free</button>
 </div>
 
-<!-- div class="video-title">
-  <i class="mdib mdib-video mdib-24px mr-2"></i>
-  Hazel Brugger · Immer noch wach
-</div -->
 
-<!-- div class="mb-5">
-   <video
-    id="-w37wr0b6KE"
-    class="video-js vjs-theme-uno"
-    controls
-    width="640"
-    height="360"
-    poster="//img.youtube.com/vi/D6iVKisliNg/maxresdefault.jpg" alt="Lea Kyle · All Performances in AGT 2021" 
-    aria-label="Lea Kyle"
-    data-setup='{
-        "fluid" : true,
-        "techOrder": [
-            "youtube", "html5"
-        ],
-        "sources": [{
-            "type": "video/youtube",
-            "src": "//youtu.be/D6iVKisliNg"
-        }],
-        "controlBar": {
-          "pictureInPictureToggle": false,
-          "volumePanel": {
-              "inline": false
-          }
-        }
-     }'
-  ></video>
-</div -->
-
-<!-- div class="mb-5">
-   <video
-    id="-w37wr0b6KE"
-    class="video-js vjs-theme-uno"
-    controls
-    width="640"
-    height="360"
-    poster="//img.youtube.com/vi/-w37wr0b6KE/maxresdefault.jpg" alt="Hazel Brugger · Immer noch wach" 
-    aria-label="Hazel Brugger · Immer noch wach"
-    data-setup='{
-        "fluid" : true,
-        "techOrder": [
-            "youtube", "html5"
-        ],
-        "sources": [{
-            "type": "video/youtube",
-            "src": "//youtu.be/-w37wr0b6KE"
-        }],
-        "controlBar": {
-          "pictureInPictureToggle": false,
-          "volumePanel": {
-              "inline": false
-          }
-        }
-     }'
-  ></video>
-</div -->
-
-
-<div id="videoContainer" class="video-container mb-8">
-
+<div id="" class="video-container mb-8">
   <div id="emptyPlayerOverlay" class="empty-player-overlay">
     <div class="empty-player-content">
       <img src="/assets/image/page/skipad/skipad-logo.png" style="margin-bottom: 2rem"alt="Promo Image" width="512" height="128">
@@ -210,10 +152,9 @@ for for half an hour of fun.
       <h4 class="notoc">Lean back and watch your video ad-free</h4 -->
     </div>
   </div>
-
 </div>
 ++++
-
+endif::[]
 
 ifeval::[{history-enabled} == true]
 [role="mt-4"]
@@ -240,351 +181,18 @@ browser Clear the cache to erase it anytime!
   </div>
 </div>
 ++++
-
 endif::[]
 
+ifeval::[{script-enabled} == true]
 ++++
 <script>
-
-  var vjsDefaults;
-  var vjsSettings;
-  var vjsOptions;
-
-  window.skipAdJS = (function () {
-    // -------------------------------------------------------------------------
-    // global variable settings
-    // -------------------------------------------------------------------------
-
-    // create settings object from module options
-    vjsDefaults = $.extend({}, {{videojs_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-    vjsSettings = $.extend({}, {{videojs_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-    vjsOptions  = $.extend(true, {}, vjsDefaults, vjsSettings);    
-
-    Element.prototype.appendAfter = function (element) {
-        element.parentNode.insertBefore(this, element.nextSibling);
-    };
-
-    String.prototype.contains = function (it) {
-        return this.indexOf(it) !== -1;
-    };
-
-    // =========================================================================
-    // helper functions
-    // -------------------------------------------------------------------------
-
-    // Funktion zum Erstellen des Video-Elements
-    function createVideoElement(videoId, width = 640, height = 360) {
-      // Video-Element erstellen
-      const video = document.createElement('video');
-      
-      // Klassen setzen
-      video.id = videoId;
-      video.className = 'video-js vjs-theme-uno';
-      
-      // Attribute setzen
-      video.setAttribute('controls', '');
-      video.setAttribute('width', width);
-      video.setAttribute('height', height);
-      video.setAttribute('poster', `//img.youtube.com/vi/${videoId}/maxresdefault.jpg`);
-      video.setAttribute('alt', 'Hazel Brugger · Immer noch wach');
-      video.setAttribute('aria-label', 'Hazel Brugger · Immer noch wach');
-      
-      // data-setup Konfiguration
-      const dataSetup = {
-        fluid: true,
-        techOrder: ['youtube', 'html5'],
-        sources: [{
-          type: 'video/youtube',
-          src: `//youtu.be/${videoId}`
-        }],
-        controlBar: {
-          pictureInPictureToggle: false,
-          volumePanel: {
-            inline: false
-          }
-        }
-      };
-      
-      video.setAttribute('data-setup', JSON.stringify(dataSetup));
-      
-      return video;
-    }
-
-    function addVideoToContainer(videoId, containerSelector) {
-        const container = document.getElementById(containerSelector);
-        
-        if (!container) {
-            console.error('Container nicht gefunden!');
-            return;
-        }
-        
-        container.innerHTML = `
-            <video
-                id="${videoId}"
-                class="video-js vjs-theme-uno"
-                controls
-                width="640"
-                height="360"
-                poster="//img.youtube.com/vi/${videoId}/maxresdefault.jpg"
-                alt="Hazel Brugger · Immer noch wach"
-                aria-label="Hazel Brugger · Immer noch wach"
-                data-setup='{
-                    "fluid": true,
-                    "techOrder": ["youtube", "html5"],
-                    "sources": [{
-                        "type": "video/youtube",
-                        "src": "//youtu.be/${videoId}"
-                    }],
-                    "controlBar": {
-                        "pictureInPictureToggle": false,
-                        "volumePanel": {
-                            "inline": false
-                        }
-                    }
-                }'
-            ></video>
-        `;
-    }
-
-    var skipadjs = {
-      text: 'Download',
-      title: 'Download with TubeNinja',
-      target: '_blank',
-      btnClass: 'btn-tubeninja',
-      init: function () {
-        var videoID  = '-w37wr0b6KE';
-
-        // Video dem Container hinzufügen
-        // addVideoToContainer(videoID, 'videoContainer');
-      }
-    };
-
-    document.addEventListener("DOMContentLoaded", function (event) {
-      skipAdJS.init();
-    });
-
-    return skipadjs;
-  }());
-
-  var dependencies_met_page_ready = setInterval (function (options) {
-    var pageState   = $('#no_flicker').css("display");
-    var pageVisible = (pageState == 'block') ? true : false;
-
-    if (j1.getState() === 'finished' && pageVisible) {
-
-      $(document).on('click', 'a.ts, a.share', function (e) {
-        e.preventDefault();
-        window.open($(this).attr('href'), '', "width=550,height=350");
-      });
-
-      $('#urlfield').on('paste', function () {
-          setTimeout(function () {
-              $('#videoUrl').submit();
-          }, 100);
-      });
-
-      clearInterval(dependencies_met_page_ready);
-    }
-  }, 10);
-
-  $(function() {
-
-    // =========================================================================
-    // create config objects from JSON data
-    // -------------------------------------------------------------------------
-    var videojsConfig           = vjsOptions;
-
-    // =========================================================================
-    // VideoJS player settings
-    // -------------------------------------------------------------------------
-    const vjsPlayerType         = 'ytp';
-    const vjsPlaybackRates      = videojsConfig.playbackRates.values;
-
-    // =========================================================================
-    // VideoJS plugin settings
-    // -------------------------------------------------------------------------
-    const piAutoCaption         = videojsConfig.plugins.autoCaption;
-    const piHotKeys             = videojsConfig.plugins.hotKeys;
-    const piSkipButtons         = videojsConfig.plugins.skipButtons;
-    const piZoomButtons         = videojsConfig.plugins.zoomButtons;
-
-    // =========================================================================
-    // helper functions
-    // -------------------------------------------------------------------------
-
-    // Funktion zum Erstellen des Video-Elements
-    function createVideoElement(videoId, width = 640, height = 360) {
-      // Video-Element erstellen
-      const video = document.createElement('video');
-      
-      // Klassen setzen
-      video.id = videoId;
-      video.className = 'video-js vjs-theme-uno';
-      
-      // Attribute setzen
-      video.setAttribute('controls', '');
-      video.setAttribute('width', width);
-      video.setAttribute('height', height);
-      video.setAttribute('poster', `//img.youtube.com/vi/${videoId}/maxresdefault.jpg`);
-      video.setAttribute('alt', 'Hazel Brugger · Immer noch wach');
-      video.setAttribute('aria-label', 'Hazel Brugger · Immer noch wach');
-      
-      // data-setup Konfiguration
-      const dataSetup = {
-        fluid: true,
-        techOrder: ['youtube', 'html5'],
-        sources: [{
-          type: 'video/youtube',
-          src: `//youtu.be/${videoId}`
-        }],
-        controlBar: {
-          pictureInPictureToggle: false,
-          volumePanel: {
-            inline: false
-          }
-        }
-      };
-      
-      video.setAttribute('data-setup', JSON.stringify(dataSetup));
-      
-      return video;
-    }
-
-    function addCaptionAfterImage(imageSrc) {
-      const image = document.querySelector(`img[src="${imageSrc}"]`);
-
-      if (image) {
-        // create div|caption container
-        const newDiv = document.createElement('div');
-        newDiv.classList.add('caption');
-        newDiv.textContent = 'Horst Evers - Parkfest 2019 (radioeins)';
-        // insert div|caption container AFTER the image
-        image.parentNode.insertBefore(newDiv, image.nextSibling);
-      } else {
-        console.error(`Kein Bild mit src="${imageSrc}" gefunden.`);
-      }
-    }
-
-    // =========================================================================
-    // initialize the VideoJS player (on page ready)
-    // -------------------------------------------------------------------------
-    var dependencies_met_page_ready = setInterval(function(options) {
-      var pageState = $('#content').css("display");
-      var pageVisible = (pageState == 'block') ? true : false;
-      var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
-
-      if (j1CoreFinished && pageVisible) {
-
-        $('#urlfield').on('paste', function () {
-          setTimeout(function () {
-              $('#videoUrl').submit();
-          }, 100);
-        });
-
-        var vjs_player = document.getElementById("-w37wr0b6KE");
-
-        // add captions (on poster image)
-        // addCaptionAfterImage('//img.youtube.com/vi/-w37wr0b6KE/maxresdefault.jpg');
-
-        // scroll page to the players top position
-        // ---------------------------------------------------------------------
-        // vjs_player.addEventListener('click', function(event) {
-        //   const targetDiv         = document.getElementById("-w37wr0b6KE");
-        //   const targetDivPosition = targetDiv.offsetTop;
-        //   var scrollOffset        = (window.innerWidth >= 720) ? -130 : -110;
-        //   // scroll player to top position
-        //   window.scrollTo(0, targetDivPosition + scrollOffset);
-        // });// END EventListener 'click'
-
-        clearInterval(dependencies_met_page_ready);
-      }
-    }, 10);
-
-    // customize the yt player created
-    // -------------------------------------------------------------------------
-    var dependencies_met_vjs_player_exist = setInterval(function(options) {
-      var vjsPlayerExist = document.getElementById("-w37wr0b6KE") ? true : false;
-
-      if (vjsPlayerExist) {
-
-        // apply player customization on 'player ready'
-        videojs("-w37wr0b6KE").ready(function() {
-          var vjsPlayer   = this;
-          var controlBar  = vjsPlayer.controlBar.el();
-          var playerEl    = vjsPlayer.el();
-
-          // create custom controlContainer (progressControlSilder|time display elements)
-          var customProgressContainer = vjsPlayer.controlBar.addChild('Component', {
-            el: videojs.dom.createEl('div', {
-              className: 'vjs-theme-uno  custom-progress-container'
-            })
-          });
-
-          // move progressControlSlider in den neuen Container
-          var progressControl = vjsPlayer.controlBar.progressControl;
-          if (progressControl) {
-            customProgressContainer.el().appendChild(progressControl.el());
-          }
-
-          // move remainingTimeDisplay BEFORE the progressControlSilder
-          var remainingTimeDisplay = vjsPlayer.controlBar.remainingTimeDisplay;
-          if (remainingTimeDisplay) {
-            customProgressContainer.el().insertBefore(remainingTimeDisplay.el(), progressControl.el());
-          }
-
-          // move the durationDisplay AFTER the progressControlSilder
-          var durationDisplay = vjsPlayer.controlBar.durationDisplay;
-          if (durationDisplay) {
-            customProgressContainer.el().appendChild(durationDisplay.el());
-          }
-
-          // add|skip playbackRates
-          if (videojsConfig.playbackRates.enabled) {
-            vjsPlayer.playbackRates(vjsPlaybackRates);
-          }
-
-          // add|skip skipButtons plugin
-          if (piSkipButtons.enabled) {
-            var backwardIndex = piSkipButtons.backward;
-            var forwardIndex  = piSkipButtons.forwardIndex;
-
-            // property 'surroundPlayButton' takes precendence
-            //
-            if (piSkipButtons.surroundPlayButton) {
-                var backwardIndex = 0;
-                var forwardIndex  = 1;
-            }
-            vjsPlayer.skipButtons({
-              backwardIndex: backwardIndex,
-              forwardIndex: forwardIndex,
-              backward: piSkipButtons.backward,
-              forward: piSkipButtons.forward,
-            });
-          }
-
-          // set start position of current video (on play)
-          // -------------------------------------------------------------------
-          var appliedOnce = false;
-          vjsPlayer.on("play", function() {
-            var startFromSecond = new Date('1970-01-01T' + "00:00:00" + 'Z').getTime() / 1000;
-            if (!appliedOnce) {
-                vjsPlayer.currentTime(startFromSecond);
-                appliedOnce = true;
-            }
-          });
-
-        }); // eventListener on 'player ready'
-
-        clearInterval(dependencies_met_vjs_player_exist);
-      } // END if 'vjsPlayerExist'
-    }, 10); // END 'dependencies_met_vjs_player_exist'
-  }); // END 'document ready'
-
 </script>
 ++++
+endif::[]
 
+ifeval::[{style-enabled} == true]
 ++++
 <style>
-
 </style>
 ++++
+endif::[]

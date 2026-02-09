@@ -1,5 +1,5 @@
 ---
-regenerate:                             true
+regenerate: true
 ---
 
 {%- capture cache -%}
@@ -16,10 +16,6 @@ regenerate:                             true
  # J1 Template is licensed under the MIT License.
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
- # Test data:
- #  {{ liquid_var | debug }}
- #  skipad_options:  {{ skipad_options | debug }}
- # -----------------------------------------------------------------------------
 {% endcomment %}
 
 {% comment %} Liquid procedures
@@ -27,30 +23,26 @@ regenerate:                             true
 
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment         = site.environment %}
-{% assign asset_path          = "/assets/theme/j1" %}
+{% assign environment = site.environment %}
+{% assign asset_path = "/assets/theme/j1" %}
 
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config     = site.data.j1_config %}
-{% assign blocks              = site.data.blocks %}
-{% assign modules             = site.data.modules %}
+{% assign template_config = site.data.j1_config %}
+{% assign blocks = site.data.blocks %}
+{% assign modules = site.data.modules %}
 
 {% comment %} Set config data (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign skipad_defaults       = modules.defaults.skipad.defaults %}
-{% assign skipad_settings       = modules.skipad.settings %}
+{% assign skipad_defaults = modules.defaults.skipad.defaults %}
+{% assign skipad_settings = modules.skipad.settings %}
 
 {% comment %} Set config options (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign skipad_options        = skipad_defaults | merge: skipad_settings %}
-
-{% comment %} Variables
--------------------------------------------------------------------------------- {% endcomment %}
-{% assign comments            = skipad_options.enabled %}
+{% assign skipad_options = skipad_defaults | merge: skipad_settings %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -58,6 +50,7 @@ regenerate:                             true
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}
 {% endif %}
+
 
 /*
  # -----------------------------------------------------------------------------
@@ -71,8 +64,6 @@ regenerate:                             true
  # J1 Template is licensed under the MIT License.
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
- # NOTE:
- # -----------------------------------------------------------------------------
  #  Adapter generated: {{site.time}}
  # -----------------------------------------------------------------------------
 */
@@ -80,140 +71,412 @@ regenerate:                             true
 // -----------------------------------------------------------------------------
 // ESLint shimming
 // -----------------------------------------------------------------------------
-/* eslint indent: "off"                                                       */
+/* eslint indent: "off" */
 // -----------------------------------------------------------------------------
+
 "use strict";
+
 j1.adapter.skipad = ((j1, window) => {
 
-  const isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
+  // ---------------------------------------------------------------------------
+  // Constants
+  // ---------------------------------------------------------------------------
+  const MODULE_NAME = 'j1.adapter.skipad';
+  const MODULE_NAME_RUN = 'j1.adapter.skipad.runner';
+  const INIT_POLL_INTERVAL = 10;
+  const PASTE_DELAY = 10;
+  const VIDEO_START_DELAY = 500;
+  
+  const YOUTUBE_PATTERNS = Object.freeze([
+    /(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/,
+    /^([a-zA-Z0-9_-]{11})$/,
+    /youtube\.com\/embed\/([a-zA-Z0-9_-]{11})/,
+    /youtube\.com\/v\/([a-zA-Z0-9_-]{11})/
+  ]);
 
-  {% comment %} Set global variables
-  ------------------------------------------------------------------------------ {% endcomment %}
-  var environment         = '{{environment}}';
-  var cookie_names        = j1.getCookieNames();
-  var user_state          = j1.readCookie(cookie_names.user_state);
-  var viewport_width      = $(window).width();
-  var state               = 'not_started';
-
-  var skipAdDefaults;
-  var skipAdSettings;
-  var skipAdOptions;
-
-  var _this;
-  var logger;
-  var logText;
-
-  // date|time
-  var startTime;
-  var endTime;
-  var startTimeModule;
-  var endTimeModule;
-  var timeSeconds;
+  const MESSAGES = Object.freeze({
+    NO_CLIPBOARD_API: 'j1.adapter.skipad.InputWrapperHandler - Clipboard API not available. Please use Ctrl+V.',
+    CLIPBOARD_DENIED: 'j1.adapter.skipad.InputWrapperHandler - Clipboard access failed. Please paste URL manually.',
+    INVALID_URL: 'j1.adapter.skipad.InputWrapperHandler - Invalid YouTube URL. Please check your input.',
+    NO_URL: 'j1.adapter.skipad.InputWrapperHandler - No URL entered',
+    LOADING_VIDEO: 'j1.adapter.skipad.InputWrapperHandler - Loading ad-free video'
+  });
 
   // ---------------------------------------------------------------------------
-  // main
+  // Module variables
   // ---------------------------------------------------------------------------
-  return {
+  const isDev = j1.env === "development" || j1.env === "dev";
+  const environment = '{{environment}}';
+  const cookieNames = j1.getCookieNames();
+  const userState = j1.readCookie(cookieNames.user_state);
+  
+  let skipAdDefaults;
+  let skipAdSettings;
+  let skipAdOptions;
+  let logger;
+  let moduleState = 'not_started';
 
-    // -------------------------------------------------------------------------
-    // adapter initializer
-    // -------------------------------------------------------------------------
-    init: (options) => {
+  // ---------------------------------------------------------------------------
+  // Helper Functions
+  // ---------------------------------------------------------------------------
 
-      // -----------------------------------------------------------------------
-      // default module settings
-      // -----------------------------------------------------------------------
-      var settings = $.extend({
-        module_name: 'j1.adapter.skipad',
-        generated:   '{{site.time}}'
-      }, options);
+  /**
+   * generateId -
+   * @param {string} videoId - YouTube video ID
+   */
+  function generateId(length = 11) {
+    const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    let id = '';
+    for (let i = 0; i < length; i++) {
+      id += chars[Math.floor(Math.random() * chars.length)];
+    }
+    return id;
+  }
 
-      // -----------------------------------------------------------------------
-      // global variable settings
-      // -----------------------------------------------------------------------
+  /**
+   * consoleLog -
+   * @param {string} videoId - YouTube video ID
+   */  
+  function consoleLog(level, module, message) {
+    const timestamp = new Date().toISOString().slice(11, 23);
+    const id = generateId();
+    
+    console.log(`[${timestamp}] [${id}] [${level}] [${module}] \n${message}`);
+    // console.log(message);
+  }
 
-      // create settings object from module options
-      skipAdDefaults = $.extend({}, {{skipad_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      skipAdSettings = $.extend({}, {{skipad_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      skipAdOptions  = $.extend(true, {}, skipAdDefaults, skipAdSettings);
+  /**
+   * createVideoJsPlayer - 
+   * @param {string} videoId - YouTube video ID
+   */  
+  function createVideoJsPlayer(videoId, options = {}) {
+    const container = document.querySelector('.video-container');
+    const overlay = document.getElementById('emptyPlayerOverlay');
+    
+    if (!container || !overlay) {
+      console.error('Container or overlay element not found');
+      return null;
+    }
 
-      _this          = j1.adapter.skipad;
-      logger         = log4javascript.getLogger('j1.adapter.skipad');
+    // Create video element
+    const video = document.createElement('video');
+    video.id = videoId;
+    video.className = 'video-js vjs-theme-uno';
+    video.controls = true;
+    video.width = 640;
+    video.height = 360;
+    video.poster = `//img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+    video.setAttribute('aria-label', options.title || 'Video Player');
+    
+    // Replace overlay with video element
+    overlay.replaceWith(video);
+    
+    // VideoJS configuration
+    const videoConfig = {
+      fluid: true,
+      techOrder: ['youtube', 'html5'],
+      sources: [{
+        type: 'video/youtube',
+        src: `//youtu.be/${videoId}`
+      }],
+      controlBar: {
+        pictureInPictureToggle: false,
+        volumePanel: {
+          inline: false
+        }
+      },
+      ...options.playerOptions
+    };
+    
+    // Initialize VideoJS player manually
+    let player = null;
+    if (typeof videojs !== 'undefined') {
+      player = videojs(videoId, videoConfig, function onPlayerReady() {
+        console.log('VideoJS player ready for:', videoId);
+        if (options.onReady) {
+          options.onReady(this);
+        }
+      });
+    }
+    
+    return player;
+  }
 
-      // -----------------------------------------------------------------------
-      // module initializer
-      // -----------------------------------------------------------------------
-      var dependencies_met_page_ready = setInterval (() => {
-        var pageState       = $('#content').css("display");
-        var pageVisible     = (pageState === 'block') ? true : false;
-        var j1CoreFinished  = (j1.getState() === 'finished') ? true : false;
-        // var atticFinished   = (j1.adapter.attic.getState() == 'finished') ? true : false;
+  // ---------------------------------------------------------------------------
+  // Helper Classes
+  // ---------------------------------------------------------------------------
 
-        if (j1CoreFinished && pageVisible) {
-          startTimeModule = Date.now();
+  /**
+   * Input Wrapper Handler Module
+   * Handles clipboard paste, input validation and URL processing
+   */
+  class InputWrapperHandler {
+    constructor() {
+      this.elements = this.#cacheElements();
+      this.#init();
+    }
 
-          _this.setState('started');
-          logger.debug('state: ' + _this.getState());
-          logger.info('module is being initialized');
+    /**
+     * Cache DOM elements
+     * @private
+     */
+    #cacheElements() {
+      return {
+        pasteButton: document.getElementById('pasteButton'),
+        videoUrlInput: document.getElementById('videoUrl'),
+        loadVideoButton: document.getElementById('loadVideo')
+      };
+    }
 
-          _this.setState('finished');
-          logger.debug('state: ' + _this.getState());
-          logger.info('initializing module finished');
+    /**
+     * Initialize event listeners
+     * @private
+     */
+    #init() {
+      const { pasteButton, videoUrlInput, loadVideoButton } = this.elements;
 
-          endTimeModule = Date.now();
-          logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+      // Paste Button Click Event
+      pasteButton?.addEventListener('click', () => this.handlePasteClick());
 
-          clearInterval(dependencies_met_page_ready);
-        } // END pageVisible
-      }, 10); // END dependencies_met_page_ready
-    }, // END init
+      // Load Video Button Click Event
+      loadVideoButton?.addEventListener('click', () => this.handleLoadVideo());
 
-    // -------------------------------------------------------------------------
-    // messageHandler()
-    // manage messages send from other J1 modules
-    // -------------------------------------------------------------------------
-    messageHandler: (sender, message) => {
-      var json_message = JSON.stringify(message, undefined, 2);
+      // Input field events
+      if (videoUrlInput) {
+        videoUrlInput.addEventListener('paste', (e) => this.#handleDirectPaste(e));
+        videoUrlInput.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            this.handleLoadVideo();
+          }
+        });
+      }
+    }
 
-      logText = 'received message from ' + sender + ': ' + json_message;
-      logger.debug(logText);
+    /**
+     * Handle paste button click - read from clipboard
+     * @async
+     */
+    async handlePasteClick() {
+      try {
+        if (!navigator.clipboard?.readText) {
+          console.warn(MESSAGES.NO_CLIPBOARD_API);
+          alert(MESSAGES.NO_CLIPBOARD_API);
+          return;
+        }
 
-      // -----------------------------------------------------------------------
-      //  process commands|actions
-      // -----------------------------------------------------------------------
-      if (message.type === 'command' && message.action === 'module_initialized') {
+        const text = await navigator.clipboard.readText();
+        this.elements.videoUrlInput.value = text.trim();
+        this.#processUrl();
+      } catch (err) {
+        console.error('Clipboard read error:', err);
+        consoleLog('ERROR', MODULE_NAME_RUN, `Clipboard read error: ${err}`);
+        alert(MESSAGES.CLIPBOARD_DENIED);
+      }
+    }
 
-        //
-        // place handling of command|action here
-        //
+    /**
+     * Handle direct paste event in input field
+     * @private
+     */
+    #handleDirectPaste(event) {
+      // Delay to allow value to be pasted first
+      setTimeout(() => this.#processUrl(), PASTE_DELAY);
+    }
 
-        logger.info(message.text);
+    /**
+     * Handle load video button click
+     */
+    handleLoadVideo() {
+      this.#processUrl();
+    }
+
+    /**
+     * Main function to process the URL
+     * @private
+     */
+    #processUrl() {
+      const url = this.elements.videoUrlInput.value.trim();
+      
+      if (!url) {
+        console.warn(MESSAGES.NO_URL);
+        return;
       }
 
-      //
-      // place handling of other command|action here
-      //
+      const videoId = this.#extractVideoId(url);
+      
+      if (videoId) {
+        // console.log('j1.adapter.skipad.InputWrapperHandler - Processed video ID:', videoId);
+        // consoleLog('INFO', 'j1.adapter.skipad.runner', '[skipad.js] Embedding YT video with ID: -w37wr0b6KE');
+        consoleLog('INFO', MODULE_NAME_RUN, 'Embedding YT video with ID: -w37wr0b6KE');
 
-      return true;
-    }, // END messageHandler
+        this.#loadAdFreeVideo(videoId);
+      } else {
+        consoleLog('ERROR', MODULE_NAME_RUN, `Invalid YouTube URL. Please check your input.`);
+        alert(MESSAGES.INVALID_URL);
+      }
+    }
 
-    // -------------------------------------------------------------------------
-    // setState()
-    // sets the current (processing) state of the module
-    // -------------------------------------------------------------------------
-    setState: (stat) => {
-      _this.state = stat;
-    }, // END setState
+    /**
+     * Extract YouTube video ID from URL
+     * @param {string} url - Input URL or video ID
+     * @returns {string|null} - Extracted video ID or null if invalid
+     * @private
+     */
+    #extractVideoId(url) {
+      for (const pattern of YOUTUBE_PATTERNS) {
+        const match = url.match(pattern);
+        if (match) {
+          return match[1];
+        }
+      }
+      return null;
+    }
 
-    // -------------------------------------------------------------------------
-    // getState()
-    // Returns the current (processing) state of the module
-    // -------------------------------------------------------------------------
-    getState: () => {
-      return _this.state;
-    } // END getState
+    /**
+     * Load ad-free video
+     * @param {string} videoId - YouTube video ID
+     * @private
+     */
+    #loadAdFreeVideo(videoId) {
+      // console.log(MESSAGES.LOADING_VIDEO, videoId);
+      consoleLog('INFO', MODULE_NAME_RUN, `Loading ad-free video: ${videoId}`);
 
-  }; // END main (return)
+      // Dispatch custom event for video load
+      const event = new CustomEvent('videoLoad', {
+        detail: { videoId },
+        bubbles: true
+      });
+
+      document.dispatchEvent(event);
+
+      // Embed video via adapter
+      j1.adapter.skipad.embedRunVideo(videoId);
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Main Module
+  // ---------------------------------------------------------------------------
+  return {
+    /**
+     * Adapter initializer
+     * @param {Object} options - Configuration options
+     */
+    init: (options) => {
+      // Default module settings
+      const settings = {
+        module_name: MODULE_NAME,
+        generated: '{{site.time}}',
+        ...options
+      };
+
+      // Initialize global variable settings
+      skipAdDefaults = { ...{{skipad_defaults | replace: 'nil', 'null' | replace: '=>', ':'}} };
+      skipAdSettings = { ...{{skipad_settings | replace: 'nil', 'null' | replace: '=>', ':'}} };
+      skipAdOptions = { ...skipAdDefaults, ...skipAdSettings };
+
+      logger = log4javascript.getLogger(MODULE_NAME);
+
+      // Module initializer with dependency checking
+      const dependencies_met_page_ready = setInterval(() => {
+        const pageState = $('#content').css("display");
+        const pageVisible = pageState === 'block';
+        const j1CoreFinished = j1.getState() === 'finished';
+
+        if (j1CoreFinished && pageVisible) {
+          const startTimeModule = Date.now();
+
+          j1.adapter.skipad.setState('started');
+          logger.debug(`State: ${j1.adapter.skipad.getState()}`);
+          logger.info('Module initialization started');
+
+          // Initialize InputWrapperHandler
+          try {
+            window.inputHandler = new InputWrapperHandler();
+            
+            // Export for module usage (if applicable)
+            if (typeof module !== 'undefined' && module.exports) {
+              module.exports = InputWrapperHandler;
+            }
+          } catch (error) {
+            logger.error('Failed to initialize InputWrapperHandler:', error);
+          }
+
+          j1.adapter.skipad.setState('finished');
+          logger.debug(`State: ${j1.adapter.skipad.getState()}`);
+          logger.info('Module initialization finished');
+
+          const endTimeModule = Date.now();
+          logger.info(`Module initialization time: ${endTimeModule - startTimeModule}ms`);
+
+          clearInterval(dependencies_met_page_ready);
+        }
+      }, INIT_POLL_INTERVAL);
+    },
+
+    /**
+     * Embed abd run YouTube video
+     * @param {string} videoId - YouTube video ID
+     */
+    embedRunVideo: (videoId) => {
+      logger = log4javascript.getLogger(MODULE_NAME_RUN);
+      var autoPlay = true;
+
+      logger?.info('Embedding YT video with ID:', videoId);
+
+      const player = createVideoJsPlayer(videoId, {
+        title: 'Hazel Brugger · Immer noch wach',
+        onReady: (player) => {
+          logger.info('player initialized and ready');
+          if (autoPlay) {
+            logger.info('player started');
+            setTimeout(() => player.play(), VIDEO_START_DELAY);
+          }
+        }
+      });
+    },
+
+    /**
+     * Message handler for inter-module communication
+     * @param {string} sender - Sender module identifier
+     * @param {Object} message - Message object
+     * @returns {boolean} - Success status
+     */
+    messageHandler: (sender, message) => {
+      try {
+        const jsonMessage = JSON.stringify(message, null, 2);
+        logger?.debug(`Received message from ${sender}: ${jsonMessage}`);
+
+        // Process commands/actions
+        if (message.type === 'command' && message.action === 'module_initialized') {
+          logger?.info(message.text);
+          // Add command handling logic here
+        }
+
+        // Add additional message handling here
+
+        return true;
+      } catch (error) {
+        logger?.error('Message handler error:', error);
+        return false;
+      }
+    },
+
+    /**
+     * Set the current processing state of the module
+     * @param {string} state - New state value
+     */
+    setState: (state) => {
+      moduleState = state;
+    },
+
+    /**
+     * Get the current processing state of the module
+     * @returns {string} - Current state
+     */
+    getState: () => moduleState
+  };
 })(j1, window);
 
 {%- endcapture -%}
