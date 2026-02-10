@@ -6,7 +6,7 @@ regenerate: true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/skipad.js (5)
+ # ~/assets/theme/j1/adapter/js/skipad.js (4)
  # Liquid template to adapt the J1 SkipAd module
  #
  # Product/Info:
@@ -54,7 +54,7 @@ regenerate: true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/skipad.js (5)
+ # ~/assets/theme/j1/adapter/js/skipad.js (4)
  # J1 Adapter for the J1 SkipAd module
  # Product/Info:
  # https://jekyll.one
@@ -66,9 +66,6 @@ regenerate: true
  # -----------------------------------------------------------------------------
  #  Adapter generated: {{site.time}}
  # -----------------------------------------------------------------------------
- # Claude:
- # https://claude.ai/chat/37e90143-424f-4d03-b547-376c13183030
- #
 */
 
 // -----------------------------------------------------------------------------
@@ -105,21 +102,6 @@ j1.adapter.skipad = ((j1, window) => {
     LOADING_VIDEO:      'j1.adapter.skipad.InputWrapperHandler - Loading ad-free video'
   });
 
-  const vjsStateEventMap = {
-    'loadstart':        -1,
-    'ended':             0,   // YT.PlayerState.ENDED
-    'playing':           1,   // YT.PlayerState.PLAYING
-    'pause':             2,   // YT.PlayerState.PAUSED
-    'waiting':           3    // YT.PlayerState.BUFFERING
-  };
-
-  const vjsStateEventNameMap = [
-    'ended',             // 0,   YT.PlayerState.ENDED
-    'playing',           // 1,   YT.PlayerState.PLAYING
-    'paused',            // 2,   YT.PlayerState.PAUSED
-    'waiting'            // 3,   YT.PlayerState.BUFFERING    
-  ];
-
   // ---------------------------------------------------------------------------
   // Module variables
   // ---------------------------------------------------------------------------
@@ -127,41 +109,17 @@ j1.adapter.skipad = ((j1, window) => {
   const environment = '{{environment}}';
   const cookieNames = j1.getCookieNames();
   const userState   = j1.readCookie(cookieNames.user_state);
-
-  let moduleState   = 'not_started';
-  let lastState     = null;
-
+  
   let skipAdDefaults;
   let skipAdSettings;
   let skipAdOptions;
   let logger;
+  let moduleState = 'not_started';
 
   // ---------------------------------------------------------------------------
   // Helper Functions
   // ---------------------------------------------------------------------------
 
-   /**
-   * doPostOnPlaying - process AFTER (state change) 'playing'
-   * @param {string} videoId - YouTube video ID
-   */
-   function doPostOnPlaying(state) {
-      logger.debug(`process post on: ${vjsStateEventNameMap[state]}`);
-      scrollToElement(document.getElementById("video_container"));
-   }
-
-   /**
-   * scrollToElement - scroll to Element to (vertical) top position
-   * @param {string} videoId - YouTube video ID
-   */
-  function scrollToElement(elm) {
-    const targetElm         = elm; // document.getElementById("video_container");
-    const targetElmPosition = targetElm.offsetTop;
-    var scrollOffset        = (window.innerWidth >= 720) ? -160 : -110;
-    var position            = targetElmPosition + scrollOffset;
-
-    logger.debug(`scroll page to vertical position: ${position}`);
-    window.scrollTo(0, position);
-  }
   /**
    * generateId -
    * @param {string} videoId - YouTube video ID
@@ -214,7 +172,7 @@ j1.adapter.skipad = ((j1, window) => {
     // Replace overlay with video element
     overlay.replaceWith(video);
 
-    // videoJS configuration
+    // VideoJS configuration
     const videoConfig = {
       fluid: true,
       techOrder: ['youtube', 'html5'],
@@ -231,27 +189,24 @@ j1.adapter.skipad = ((j1, window) => {
       // ...options.playerOptions
     };
 
-    // Initialize videoJS player
+    // Initialize VideoJS player manually
     var player = null;
     if (typeof videojs !== 'undefined') {
       player = videojs(videoId, videoConfig, function onPlayerReady() {
-        console.log('videoJS player ready on ID:', videoId);
-
-        // claude - fixed for onStateChange
-        // Register listeners for the actual videoJS events that correspond
-        // to YouTube player state changes, and forward them to onStateChange.
-        if (options.onStateChange) {
-          var vjsPlayer = this;
-
-          Object.keys(vjsStateEventMap).forEach(function(eventName) {
-            vjsPlayer.on(eventName, function() {
-              options.onStateChange({ data: vjsStateEventMap[eventName] });
-            });
-          });
-        }
-
+        console.log('VideoJS player ready on ID:', videoId);
         if (options.onReady) {
           options.onReady(this);
+        }
+      });
+    }
+
+    if (typeof videojs !== 'undefined') {
+      player = videojs(videoId, videoConfig, function onStateChange() {
+        console.log('VideoJS player changed on ID:', videoId);
+        
+        // Add state change listener if provided
+        if (options.onStateChange) {
+          this.on('statechange', options.onStateChange);
         }
       });
     }
@@ -485,42 +440,13 @@ j1.adapter.skipad = ((j1, window) => {
 
       const vjsPlayer = createVideoJsPlayer(videoId, {
         title: 'Hazel Brugger · Immer noch wach',
-        // claude - fixed for onStateChange
-        onStateChange: (() => {
-          // var lastState = null;
-          var errorNumber = null;
-          return (event) => {
-            var state = event.data;
-
-            if (state === lastState || errorNumber) {
-              return;
-            }
-            
-            switch (vjsStateEventNameMap[state]) {
-
-              case 'playing':
-                logger.debug('Player state changed to: ', vjsStateEventNameMap[state]);
-                doPostOnPlaying(state);
-                // scrollToElement(document.getElementById("video_container"));
-                break;
-
-              case 'paused':
-                logger.debug('Player state changed to: ', vjsStateEventNameMap[state]);
-                break;
-
-              case 'waiting':
-                logger.debug('Player state changed to: ', vjsStateEventNameMap[state]);
-                break;
-
-              case 'ended':
-                logger.debug('Player state changed to: ', vjsStateEventNameMap[state]);
-                break;
-
-            }
-
-            lastState = state;            
-          };
-        })(),
+        onStateChange: (event) => {
+          var state = e.data;
+          if (state === this.lastState || this.errorNumber) {
+            return;
+          }
+          this.lastState = state;
+        },
         onReady: (player) => {
           logger.info('player initialized and ready');
 
@@ -528,19 +454,19 @@ j1.adapter.skipad = ((j1, window) => {
             logger.info('player started');
 
             // =================================================================
-            // videoJS player settings
+            // VideoJS player settings
             // -----------------------------------------------------------------
             const vjsPlaybackRates  = skipAdOptions.videoJS.playbackRates.values;          
 
             // =================================================================
-            // videoJS plugin settings
+            // VideoJS plugin settings
             // ----------------------------------------------------------------- 
-            const piAutoCaption     = skipAdOptions.videoJS.plugins.autoCaption;
-            const piHotKeys         = skipAdOptions.videoJS.plugins.hotKeys;
+            // const piAutoCaption     = skipAdOptions.videoJS.plugins.autoCaption;
+            // const piHotKeys         = skipAdOptions.videoJS.plugins.hotKeys;
             const piSkipButtons     = skipAdOptions.videoJS.plugins.skipButtons;
-            const piZoomButtons     = skipAdOptions.videoJS.plugins.zoomButtons;
+            // const piZoomButtons     = skipAdOptions.videoJS.lugins.zoomButtons;
 
-            // customize the videoJS Player
+            // customize the VideoJS Player
             // -----------------------------------------------------------------
             // var vjsPlayerExist      = document.getElementById(player.id_) ? true : false;
 
@@ -620,14 +546,15 @@ j1.adapter.skipad = ((j1, window) => {
             // -------------------------------------------------------------
             var vjs_player = document.getElementById(vjsPlayer.id_);
             vjs_player.addEventListener('click', function(event) {
-              // scrollToElement(document.getElementById("video_container"));
+              const targetDiv         = document.getElementById("video_container");
+              const targetDivPosition = targetDiv.offsetTop;
+              var scrollOffset        = (window.innerWidth >= 720) ? -160 : -110;
+
+              // scroll player to top position
+              window.scrollTo(0, targetDivPosition + scrollOffset);
             }); // END EventListener 'click'
 
-            // start the player
             setTimeout(() => vjsPlayer.play(), VIDEO_START_DELAY);
-
-            // scroll page to the players top position after start
-            // scrollToElement(document.getElementById("video_container"));;            
           }
         }
       });
