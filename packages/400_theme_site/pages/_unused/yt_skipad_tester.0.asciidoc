@@ -26,7 +26,6 @@ image:
   height:                               1280
 
 attic:                                  false
-fab_menu_id:                            default                                 # default | open_toc
 regenerate:                             false
 personalization:                        true
 permalink:                              /pages/public/tester/yt_skipad_tester/
@@ -131,6 +130,7 @@ for for half an hour of fun.
 // .Video selection
 // skipad::video_selection[role="mt-4 mb-5"]
 
+
 ifeval::[{video-selection-enabled} == true]
 ++++
 <div class="input-wrapper mt-4">
@@ -141,19 +141,17 @@ ifeval::[{video-selection-enabled} == true]
     </button>
     <input type="text" id="videoUrl" placeholder="https://www.youtube.com/watch?v=xxxx.. or xxxx..">
   </div>
-  <button id="clearInput" class="watch-adfree-btn">Clear</button>
-  <button id="loadVideo" class="watch-adfree-btn">Watch Video</button>
-
+  <button id="loadVideo" class="watch-adfree-btn">Watch Ad Free</button>
 </div>
 ++++
 endif::[]
 
 
 [role="mt-5"]
-== Ad-free Video
+== Current Video
 
 ++++
-<div id="video_container" class="video-container mt-4 mb-4">
+<div id="video_container" class="video-container mt-4 mb-8">
   <div id="emptyPlayerOverlay" class="empty-player-overlay">
     <div class="empty-player-content">
       <img src="/assets/image/page/skipad/skipad-logo.png" style="margin-bottom: 2rem"alt="Promo Image" width="512" height="128">
@@ -167,8 +165,6 @@ endif::[]
 </div>
 ++++
 
-[role="mb-8"]
-Enjoy waching the video *ad-free*. To load *other* video, go back to <<Video selection>>.
 
 ifeval::[{history-enabled} == true]
 [role="mt-4"]

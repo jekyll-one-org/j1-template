@@ -6,7 +6,7 @@ regenerate: true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/skipad.js (5)
+ # ~/assets/theme/j1/adapter/js/skipad.js (6)
  # Liquid template to adapt the J1 SkipAd module
  #
  # Product/Info:
@@ -54,7 +54,7 @@ regenerate: true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/skipad.js (5)
+ # ~/assets/theme/j1/adapter/js/skipad.js (6)
  # J1 Adapter for the J1 SkipAd module
  # Product/Info:
  # https://jekyll.one
@@ -129,11 +129,14 @@ j1.adapter.skipad = ((j1, window) => {
   const userState   = j1.readCookie(cookieNames.user_state);
 
   let moduleState   = 'not_started';
+  let player        = null;
   let lastState     = null;
+  let previousPlayerId = null;
 
   let skipAdDefaults;
   let skipAdSettings;
   let skipAdOptions;
+
   let logger;
 
   // ---------------------------------------------------------------------------
@@ -183,8 +186,18 @@ j1.adapter.skipad = ((j1, window) => {
     const timestamp = new Date().toISOString().slice(11, 23);
     const id        = generateId();
     
-    console.log(`[${timestamp}] [${id}] [${level}] [${module}] \n${message}`);
-    // console.log(message);
+    switch (level) {
+
+      case 'INFO':
+        console.log(`[${timestamp}] [${id}] [${level}] [${module}] \n${message}`);
+        break;
+      case 'WARN':
+        console.warn(`[${timestamp}] [${id}] [${level}] [${module}] \n${message}`);
+        break;
+      case 'ERROR':
+        console.error(`[${timestamp}] [${id}] [${level}] [${module}] \n${message}`);
+        break;
+    }
   }
 
   /**
@@ -194,9 +207,16 @@ j1.adapter.skipad = ((j1, window) => {
   function createVideoJsPlayer(videoId, options = {}) {
     const container = document.querySelector('.video-container');
     const overlay   = document.getElementById('emptyPlayerOverlay');
-    
+
+    // Check if videoJS player already exists
+    // if (player !== null && player.id_ == previousPlayerId) {
+    //   return;
+    // }
+
+    // Initialize videoJS player
     if (!container || !overlay) {
-      console.error('Container or overlay element not found');
+      consoleLog('ERROR', MODULE_NAME_RUN, `Container or overlay element not found`);
+      // console.error('Container or overlay element not found');
       return null;
     }
 
@@ -232,12 +252,15 @@ j1.adapter.skipad = ((j1, window) => {
     };
 
     // Initialize videoJS player
-    var player = null;
+    // if (player !== null && player.id_ == previousPlayerId) {
+    //   return;
+    // }
+
     if (typeof videojs !== 'undefined') {
       player = videojs(videoId, videoConfig, function onPlayerReady() {
-        console.log('videoJS player ready on ID:', videoId);
+        consoleLog('INFO', MODULE_NAME_RUN, `videoJS player ready on ID: ${videoId}`);
+        // console.log('videoJS player ready on ID:', videoId);
 
-        // claude - fixed for onStateChange
         // Register listeners for the actual videoJS events that correspond
         // to YouTube player state changes, and forward them to onStateChange.
         if (options.onStateChange) {
@@ -256,6 +279,7 @@ j1.adapter.skipad = ((j1, window) => {
       });
     }
 
+    previousPlayerId = player.id_;
     return player;
   }
 
@@ -326,7 +350,7 @@ j1.adapter.skipad = ((j1, window) => {
         this.elements.videoUrlInput.value = text.trim();
         this.processUrl();
       } catch (err) {
-        console.error('Clipboard read error:', err);
+        // console.error('Clipboard read error:', err);
         consoleLog('ERROR', MODULE_NAME_RUN, `Clipboard read error: ${err}`);
         alert(MESSAGES.CLIPBOARD_DENIED);
       }
@@ -354,14 +378,19 @@ j1.adapter.skipad = ((j1, window) => {
      */
     processUrl() {
       const url = this.elements.videoUrlInput.value.trim();
-      
       if (!url) {
         console.warn(MESSAGES.NO_URL);
+        consoleLog('WARN', MODULE_NAME_RUN, MESSAGES.NO_URL);
         return;
       }
 
       const videoId = this.extractVideoId(url);
-      
+      // Check if videoJS player already exists
+      if (previousPlayerId !== undefined && videoId === previousPlayerId) {
+        consoleLog('WARN', MODULE_NAME_RUN, `videoJS player already exists on YouTube ID: ${videoId}`);
+        return;
+      }
+
       if (videoId) {
         // console.log('j1.adapter.skipad.InputWrapperHandler - Processed video ID:', videoId);
         // consoleLog('INFO', 'j1.adapter.skipad.runner', '[skipad.js] Embedding YT video with ID: -w37wr0b6KE');
@@ -372,6 +401,7 @@ j1.adapter.skipad = ((j1, window) => {
         consoleLog('ERROR', MODULE_NAME_RUN, `Invalid YouTube URL. Please check your input.`);
         alert(MESSAGES.INVALID_URL);
       }
+
     }
 
     /**

@@ -6,7 +6,7 @@ regenerate: true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/skipad.js (5)
+ # ~/assets/theme/j1/adapter/js/skipad.js (7)
  # Liquid template to adapt the J1 SkipAd module
  #
  # Product/Info:
@@ -54,7 +54,7 @@ regenerate: true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/skipad.js (5)
+ # ~/assets/theme/j1/adapter/js/skipad.js (7)
  # J1 Adapter for the J1 SkipAd module
  # Product/Info:
  # https://jekyll.one
@@ -123,17 +123,25 @@ j1.adapter.skipad = ((j1, window) => {
   // ---------------------------------------------------------------------------
   // Module variables
   // ---------------------------------------------------------------------------
-  const isDev = j1.env === "development" || j1.env === "dev";
-  const environment = '{{environment}}';
-  const cookieNames = j1.getCookieNames();
-  const userState   = j1.readCookie(cookieNames.user_state);
+  const isDev           = j1.env === "development" || j1.env === "dev";
+  const environment     = '{{environment}}';
+  const cookieNames     = j1.getCookieNames();
+  const userState       = j1.readCookie(cookieNames.user_state);
 
-  let moduleState   = 'not_started';
-  let lastState     = null;
+  const container       = document.querySelector('.video-container');
+  const containerHTML   = container.innerHTML;
+  const overlay         = document.getElementById('emptyPlayerOverlay');
+  const overlayHTML     = overlay.innerHTML;
+
+  let moduleState       = 'not_started';
+  let player            = null;
+  let lastState         = null;
+  let previousPlayerId  = null;
 
   let skipAdDefaults;
   let skipAdSettings;
   let skipAdOptions;
+
   let logger;
 
   // ---------------------------------------------------------------------------
@@ -183,8 +191,19 @@ j1.adapter.skipad = ((j1, window) => {
     const timestamp = new Date().toISOString().slice(11, 23);
     const id        = generateId();
     
-    console.log(`[${timestamp}] [${id}] [${level}] [${module}] \n${message}`);
-    // console.log(message);
+    switch (level) {
+
+      case 'INFO':
+        console.log(`[${timestamp}] [${id}] [${level}] [${module}] \n${message}`);
+        break;
+      case 'WARN':
+        console.warn(`[${timestamp}] [${id}] [${level}] [${module}] \n${message}`);
+        break;
+      case 'ERROR':
+        console.error(`[${timestamp}] [${id}] [${level}] [${module}] \n${message}`);
+        break;
+    }
+
   }
 
   /**
@@ -192,11 +211,37 @@ j1.adapter.skipad = ((j1, window) => {
    * @param {string} videoId - YouTube video ID
    */  
   function createVideoJsPlayer(videoId, options = {}) {
-    const container = document.querySelector('.video-container');
-    const overlay   = document.getElementById('emptyPlayerOverlay');
-    
-    if (!container || !overlay) {
-      console.error('Container or overlay element not found');
+    // const container = document.querySelector('.video-container');
+    // const overlay   = document.getElementById('emptyPlayerOverlay');
+
+    // Initialize videoJS player
+    if (!container) {
+      consoleLog('ERROR', MODULE_NAME_RUN, `Container or overlay element not found`);
+      return null;
+    }
+
+    // claude - fixed for video change
+    // Dispose existing videoJS player before creating a new one
+    if (player) {
+      consoleLog('INFO', MODULE_NAME_RUN, `Disposing existing videoJS player: ${player.id_}`);
+      player.dispose();
+      player = null;
+    }
+
+    // claude - fixed for video change
+    // Restore the container HTML (incl. overlay) so a fresh video element can be placed;
+    // the overlay was removed from the DOM by replaceWith() on the previous call
+    const overlayExists = document.getElementById('emptyPlayerOverlay');
+    if (!overlayExists) {
+      consoleLog('INFO', MODULE_NAME_RUN, `Restoring container and overlay for new video`);
+      container.innerHTML = containerHTML;
+    }
+
+    // claude - fixed for video change
+    // Re-query the overlay from the live DOM (the original const is stale after replaceWith)
+    const currentOverlay = document.getElementById('emptyPlayerOverlay');
+    if (!currentOverlay) {
+      consoleLog('ERROR', MODULE_NAME_RUN, `Overlay element could not be restored`);
       return null;
     }
 
@@ -211,8 +256,9 @@ j1.adapter.skipad = ((j1, window) => {
 
     video.setAttribute('aria-label', options.title || 'Video Player');
 
-    // Replace overlay with video element
-    overlay.replaceWith(video);
+    // claude - fixed for video change
+    // Replace overlay with video element (use live DOM reference, not stale module-level const)
+    currentOverlay.replaceWith(video);
 
     // videoJS configuration
     const videoConfig = {
@@ -232,12 +278,10 @@ j1.adapter.skipad = ((j1, window) => {
     };
 
     // Initialize videoJS player
-    var player = null;
     if (typeof videojs !== 'undefined') {
       player = videojs(videoId, videoConfig, function onPlayerReady() {
-        console.log('videoJS player ready on ID:', videoId);
+        consoleLog('INFO', MODULE_NAME_RUN, `videoJS player ready on ID: ${videoId}`);
 
-        // claude - fixed for onStateChange
         // Register listeners for the actual videoJS events that correspond
         // to YouTube player state changes, and forward them to onStateChange.
         if (options.onStateChange) {
@@ -256,6 +300,9 @@ j1.adapter.skipad = ((j1, window) => {
       });
     }
 
+    // claude - fixed for video change
+    // Store the YouTube video ID (not the videoJS internal id) for duplicate detection
+    previousPlayerId = videoId;
     return player;
   }
 
@@ -317,7 +364,7 @@ j1.adapter.skipad = ((j1, window) => {
     async handlePasteClick() {
       try {
         if (!navigator.clipboard.readText) {
-          console.warn(MESSAGES.NO_CLIPBOARD_API);
+          consoleLog('WARN', MODULE_NAME_RUN, MESSAGES.NO_CLIPBOARD_API);
           alert(MESSAGES.NO_CLIPBOARD_API);
           return;
         }
@@ -326,7 +373,6 @@ j1.adapter.skipad = ((j1, window) => {
         this.elements.videoUrlInput.value = text.trim();
         this.processUrl();
       } catch (err) {
-        console.error('Clipboard read error:', err);
         consoleLog('ERROR', MODULE_NAME_RUN, `Clipboard read error: ${err}`);
         alert(MESSAGES.CLIPBOARD_DENIED);
       }
@@ -354,17 +400,19 @@ j1.adapter.skipad = ((j1, window) => {
      */
     processUrl() {
       const url = this.elements.videoUrlInput.value.trim();
-      
       if (!url) {
-        console.warn(MESSAGES.NO_URL);
+        consoleLog('WARN', MODULE_NAME_RUN, MESSAGES.NO_URL);
         return;
       }
 
       const videoId = this.extractVideoId(url);
-      
+      // Check if videoJS player already exists
+      if (previousPlayerId !== undefined && videoId === previousPlayerId) {
+        consoleLog('WARN', MODULE_NAME_RUN, `videoJS player already exists on YouTube ID: ${videoId}`);
+        return;
+      }
+
       if (videoId) {
-        // console.log('j1.adapter.skipad.InputWrapperHandler - Processed video ID:', videoId);
-        // consoleLog('INFO', 'j1.adapter.skipad.runner', '[skipad.js] Embedding YT video with ID: -w37wr0b6KE');
         consoleLog('INFO', MODULE_NAME_RUN, 'Embedding YT video with ID: -w37wr0b6KE');
 
         this.loadAdFreeVideo(videoId);
@@ -372,6 +420,7 @@ j1.adapter.skipad = ((j1, window) => {
         consoleLog('ERROR', MODULE_NAME_RUN, `Invalid YouTube URL. Please check your input.`);
         alert(MESSAGES.INVALID_URL);
       }
+
     }
 
     /**
@@ -396,7 +445,6 @@ j1.adapter.skipad = ((j1, window) => {
      * @private
      */
     loadAdFreeVideo(videoId) {
-      // console.log(MESSAGES.LOADING_VIDEO, videoId);
       consoleLog('INFO', MODULE_NAME_RUN, `Loading ad-free video: ${videoId}`);
 
       // Dispatch custom event for video load
@@ -482,6 +530,10 @@ j1.adapter.skipad = ((j1, window) => {
       var autoPlay = true;
 
       logger.debug(`embedding YT video with ID: ${videoId}`);
+
+      // claude - fixed for video change
+      // Reset lastState so state change events fire correctly for the new player
+      lastState = null;
 
       const vjsPlayer = createVideoJsPlayer(videoId, {
         title: 'Hazel Brugger · Immer noch wach',

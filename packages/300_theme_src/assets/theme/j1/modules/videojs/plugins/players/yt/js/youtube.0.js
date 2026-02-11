@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/videojs/js/plugins/players/yt/youtube.js (1)
+ # ~/assets/theme/j1/modules/videojs/js/plugins/players/yt/youtube.js
  # Provides YouTube Playback Technology (Tech) for Video.js V8 and newer
  #
  # Product/Info:
@@ -16,7 +16,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 3.1, modified version for J1 Template */
+/* Version 3.0.1, modified version for J1 Template */
 
 /* global define, YT */
 (function (root, factory) {
@@ -33,9 +33,8 @@
 }(this, function(videojs) {
   'use strict';
 
-  // claude - optimization chances: added missing semicolon.
   // var isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
-  var isDev = false;
+  var isDev = false
 
   var logger      = log4javascript.getLogger('videoJS.plugin.youtube');
   var _isOnMobile = videojs.browser.IS_IOS || videojs.browser.IS_NATIVE_ANDROID;
@@ -162,11 +161,7 @@
         playerVars.cc_load_policy = this.options_['cc_load_policy'];
       }
 
-      // claude - optimization chances: the original code checked
-      // `this.options_['cc_load_policy']` a second time (copy-paste error)
-      // but assigned to `iv_load_policy`. Fixed the condition to check
-      // `iv_load_policy` as intended.
-      if (typeof this.options_['iv_load_policy'] !== 'undefined') {
+      if (typeof this.options_['cc_load_policy'] !== 'undefined') {
         playerVars.iv_load_policy = this.options_['iv_load_policy'];
       }
       if (typeof this.options_.ytControls !== 'undefined') {
@@ -545,7 +540,7 @@
 
     currentTime() {
       return this.ytPlayer ? this.ytPlayer.getCurrentTime() : 0;
-    } // END currentTime
+    } // END paused
 
     setCurrentTime(seconds) {
       if (this.lastState === YT.PlayerState.PAUSED) {
@@ -606,7 +601,7 @@
       try {
         return this.ytPlayer ? this.ytPlayer.getPlaybackRate() : 1;
       } catch (error) {
-        return 1; // getPlaybackRate is not available/supported
+        return 1; // getDuration is not available/supported
       }
     } // END playbackRate
 
@@ -619,7 +614,7 @@
       try {
         this.ytPlayer.setPlaybackRate(suggestedRate);
       } catch (error) {
-        this.ytPlayer.setPlaybackRate(1); // setPlaybackRate is not available/supported
+        this.ytPlayer.setPlaybackRate(1); // getDuration is not available/supported
       }
     } // END setPlaybackRate
 
@@ -656,15 +651,12 @@
       return this.ytPlayer ? this.ytPlayer.isMuted() : false;
     } // END muted
 
-    // claude - optimization chances: removed erroneous `this.muted(true)` call
-    // in the else-branch. `muted()` is a getter (returns boolean), so calling
-    // it with an argument had no effect. The else-branch was also logically
-    // unreachable (it ran when `!this.ytPlayer` was true, then immediately
-    // fell through to code that requires `this.ytPlayer`). Removed the dead
-    // else-branch entirely.
     setMuted(mute) {
       if (!this.ytPlayer) {
         return;
+      }
+      else{
+        this.muted(true);
       }
 
       if (mute) {
@@ -677,13 +669,11 @@
       }, 50);
     } // END setMuted
 
-    // claude - optimization chances: removed unused `bufferedEnd` variable.
-    // The value was computed but never used; the return always used full
-    // duration instead.
     buffered() {
       if(!this.ytPlayer || !this.ytPlayer.getVideoLoadedFraction) {
         return videojs.time.createTimeRanges();
       }
+      var bufferedEnd = this.ytPlayer.getVideoLoadedFraction() * this.ytPlayer.getDuration();
 
       return videojs.time.createTimeRanges(0, this.ytPlayer.getDuration());
     } // END buffered
@@ -808,12 +798,6 @@
     });
   } // END apiLoaded
 
-  // claude - optimization chances: replaced `this.readyState` inside the arrow
-  // function's `onreadystatechange` handler with `tag.readyState`. In the
-  // original code, the arrow function lexically captures the outer `this`
-  // (the module/window scope), NOT the script element, so
-  // `this.readyState` would always be undefined. Using `tag.readyState`
-  // correctly references the script element's ready state.
   function loadScript(src, callback) {
     var loaded = false;
     var tag = document.createElement('script');
@@ -831,7 +815,7 @@
       }
     };
     tag.onreadystatechange = () => {
-      if (!loaded && (tag.readyState === 'complete' || tag.readyState === 'loaded')) {
+      if (!loaded && (this.readyState === 'complete' || this.readyState === 'loaded')) {
         loaded = true;
         callback();
       }

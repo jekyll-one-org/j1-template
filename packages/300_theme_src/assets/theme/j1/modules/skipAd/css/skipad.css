@@ -168,9 +168,10 @@ input {
   bottom: 0px;
   top: 0px;
   z-index: 5;
+  box-shadow: 0 4px 6px var(--shadow-color);
   background: var(--card-background);
   border: 2px dashed var(--border-color);
-  border-radius: 12px;
+  /* border-radius: 12px; */
   transition: 0.3s;
 }
 
