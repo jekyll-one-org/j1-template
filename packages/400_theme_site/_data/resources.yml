@@ -393,7 +393,7 @@ resources:
       pass_init_data:                   false
 
       data:
-        css:                            []
+        css:                            [ modules/bootstrap/css/bootstrap ]
         files:                          []
         js:                             [ modules/bootstrap/js/bootstrap ]
         init_function:                  []

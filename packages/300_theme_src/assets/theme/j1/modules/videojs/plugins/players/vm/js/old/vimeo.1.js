@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/videojs/js/plugins/players/vm/js/vimeo.js
+ # ~/assets/theme/j1/modules/videojs/js/plugins/players/vm/js/vimeo.js (1)
  # Provides Vimeo Playback Technology (Tech) for Video.js V8 and newer
  #
  # Product/Info:
@@ -8,7 +8,7 @@
  # http://jekyll.one
  #
  # Copyright (c) 2020 Kevin Aguiar <kevin.aguiar@mobiliza.com.br>
- # Copyright (C) 2023-2026 Juergen Adams
+ # Copyright (C) 2023-2025 Juergen Adams
  #
  # VideoJS-Vimeo is licensed under MIT License.
  # See: https://github.com/mobiliza/videojs-vimeo/blob/0.6.0/LICENSE 
@@ -17,7 +17,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 2.11 for J1 Template */
+/*! @vimeo/player v2.10.0 | (c) 2019 Vimeo | MIT License | https://github.com/vimeo/player.js */
 
 /* global define, VM */
 (function (global, factory) {

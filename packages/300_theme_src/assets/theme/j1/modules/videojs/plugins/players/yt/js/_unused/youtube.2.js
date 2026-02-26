@@ -1,12 +1,12 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/videojs/js/plugins/players/yt/youtube.js
+ # ~/assets/theme/j1/modules/videojs/js/plugins/players/yt/youtube.js (1)
  # Provides YouTube Playback Technology (Tech) for Video.js V8 and newer
  #
  # Product/Info:
  # http://jekyll.one
  #
- # Copyright (C) 2023-2026 Juergen Adams
+ # Copyright (C) 2023-2025 Juergen Adams
  # Copyright (C) 2014-2015 Gary Katsevman, Benoit Tremblay
  #
  # YouTube Playback Technology (Tech) is licensed under MIT License.
@@ -16,7 +16,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 3.1.7 for J1 Template */
+/* Version 3.1.2, modified version for J1 Template */
 
 /* global define, YT */
 (function (root, factory) {
@@ -31,19 +31,11 @@
     root.Youtube = factory(root.videojs);
   }
 }(this, function(videojs) {
-  "use strict";
+  'use strict';
 
-  // ---------------------------------------------------------------------------
-  // Constants
-  // ---------------------------------------------------------------------------
-
-  const env          = 'dev';                                                   // dev | prod
-  const isDev        = (env === "dev") ? true : false;
-  const consoleLogId = generateId();
-
-  // ---------------------------------------------------------------------------
-  // Module variables
-  // ---------------------------------------------------------------------------
+  // claude - optimization chances: added missing semicolon.
+  // var isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
+  var isDev = false;
 
   var logger      = log4javascript.getLogger('videoJS.plugin.youtube');
   var _isOnMobile = videojs.browser.IS_IOS || videojs.browser.IS_NATIVE_ANDROID;
@@ -51,51 +43,6 @@
 
   var startTimeModule;
   var endTimeModule;
-
-  // ---------------------------------------------------------------------------
-  // Helper Functions
-  // ---------------------------------------------------------------------------
-
-  /**
-   * generateId - generate a random alphanumeric ID string
-   * @param {number} [length=11] - Desired ID length
-   * @returns {string} - Generated ID
-   */
-  function generateId(length = 11) {
-    const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-    let id = '';
-    for (let i = 0; i < length; i++) {
-      id += chars[Math.floor(Math.random() * chars.length)];
-    }
-    return id;
-  }
-
-  /**
-   * consoleLog - formatted console output with timestamp and unique ID
-   * @param {string} level   - Log level: 'INFO', 'WARN', or 'ERROR'
-   * @param {string} module  - Source module identifier
-   * @param {string} message - Log message text
-   */  
-  function consoleLog(level, module, message) {
-    const timestamp = new Date().toISOString().slice(11, 23);
-
-    switch (level) {
-
-      case 'INFO':
-        console.log(`[${timestamp}] [${consoleLogId}] [${level}] [${module}] \n${message}`);
-        break;
-      case 'WARN':
-        console.warn(`[${timestamp}] [${consoleLogId}] [${level}] [${module}] \n${message}`);
-        break;
-      case 'ERROR':
-        console.error(`[${timestamp}] [${consoleLogId}] [${level}] [${module}] \n${message}`);
-        break;
-      default:
-        console.log(`[${timestamp}] [${consoleLogId}] [${level}] [${module}] \n${message}`);
-        break;
-    }
-
-  }
 
   class Youtube extends Tech {
 
@@ -215,6 +162,7 @@
         playerVars.cc_load_policy = this.options_['cc_load_policy'];
       }
 
+      // claude - optimization chances: the original code checked
       // `this.options_['cc_load_policy']` a second time (copy-paste error)
       // but assigned to `iv_load_policy`. Fixed the condition to check
       // `iv_load_policy` as intended.
@@ -306,7 +254,7 @@
         playerVars.theme = this.options_.theme;
       }
 
-      // allow undocumented options to be passed along via customVars
+      // Allow undocumented options to be passed along via customVars
       //
       if (typeof this.options_.customVars !== 'undefined') {
         var customVars = this.options_.customVars;
@@ -350,44 +298,32 @@
         this.featuresPlaybackRate = true;
       }
 
-      // extract video data from YT video
-      // Extract ALL available video data from the YT player object
-      // and store it on the tech instance so the VJS player (and
-      // adapters like skipad.js) can access it via
-      //   player.tech().videoData()   – full data object
-      //   player.tech().videoTitle()  – title string (kept for backward compatibility)
+      // claude - extended for YT video title extraction
+      // Extract video title from the YT player object and store it
+      // on the tech instance so the VJS player (and adapters like
+      // skipad.js) can access it via player.tech().videoTitle()
+      // or by listening for the 'yttitlechange' event.
       try {
-        var rawVideoData   = this.ytPlayer.getVideoData();
-        this.ytVideoData_  = rawVideoData || {};
-        this.ytVideoTitle_ = (rawVideoData && rawVideoData.title) ? rawVideoData.title : '';
-
-        isDev && logger.debug('\n' + 'extracted YT video data: '
-          + JSON.stringify(this.ytVideoData_));
+        var videoData    = this.ytPlayer.getVideoData();
+        this.ytVideoTitle_ = (videoData && videoData.title) ? videoData.title : '';
+        isDev && logger.debug('\n' + 'extracted YT video title: ' + this.ytVideoTitle_);
       } catch (e) {
-        this.ytVideoData_  = {};
         this.ytVideoTitle_ = '';
-        isDev && logger.debug('\n' + 'failed to extract YT video data: ' + e);
+        isDev && logger.debug('\n' + 'failed to extract YT video title: ' + e);
       }
-      // END extract video data from YT video
-
-      // dispatch a custom DOM event so external modules (e.g. skipad.js)
-      // are notified when YT video data becomes available.
-      try {
-        var ytVideoDataEvent = new CustomEvent('ytVideoDataResolved', {
-          detail: {
-            videoData: this.ytVideoData_,
-            videoTitle: this.ytVideoTitle_,
-            source: 'onPlayerReady'
-          }
-        });
-        document.dispatchEvent(ytVideoDataEvent);
-        isDev && logger.debug('\n' + 'dispatched event: ytVideoDataResolved (source: onPlayerReady)');
-      } catch (evtErr) {
-        isDev && logger.debug('\n' + 'failed to dispatch ytVideoDataResolved: ' + evtErr);
-      }
+      // END claude - extended for YT video title extraction
 
       this.playerReady_ = true;
       this.triggerReady();
+
+      // claude - extended for YT video title extraction
+      // Fire a custom event AFTER triggerReady so the VJS player
+      // is fully wired and listeners on the player level can
+      // receive the event.
+      if (this.ytVideoTitle_) {
+        this.trigger('yttitlechange', { title: this.ytVideoTitle_ });
+      }
+      // END claude - extended for YT video title extraction
 
       if (this.playOnReady) {
         this.play();
@@ -427,44 +363,6 @@
           break;
 
         case YT.PlayerState.PLAYING:
-          // YouTube's IFrame API only populates the `author` field in
-          // getVideoData() AFTER playback begins. The initial fetch
-          // in onPlayerReady() runs before that, so `author` is always
-          // an empty string.
-          try {
-            if (this.ytPlayer && typeof this.ytPlayer.getVideoData === 'function') {
-              var freshData = this.ytPlayer.getVideoData();
-              if (freshData &&
-                  (  (freshData.author && (!this.ytVideoData_ || this.ytVideoData_.author !== freshData.author))
-                  || (freshData.title  && (!this.ytVideoData_ || this.ytVideoData_.title  !== freshData.title))
-                  )) {
-                this.ytVideoData_  = freshData;
-                this.ytVideoTitle_ = freshData.title || this.ytVideoTitle_;
-
-                isDev && logger.debug('\n' + 'updated YT video data (author now available): '
-                  + JSON.stringify(this.ytVideoData_));
-
-                // Re-dispatch the event with updated data (author field is
-                // only populated by the YT IFrame API after playback begins).
-                try {
-                  var ytVideoDataEvent = new CustomEvent('ytVideoDataResolved', {
-                    detail: {
-                      videoData: this.ytVideoData_,
-                      videoTitle: this.ytVideoTitle_,
-                      source: 'onPlayerStateChange:PLAYING'
-                    }
-                  });
-                  document.dispatchEvent(ytVideoDataEvent);
-                  isDev && logger.debug('\n' + 'dispatched event: ytVideoDataResolved (source: onPlayerStateChange:PLAYING)');
-                } catch (evtErr) {
-                  isDev && logger.debug('\n' + 'failed to dispatch ytVideoDataResolved: ' + evtErr);
-                }
-              }
-            }
-          } catch (e) {
-            isDev && logger.debug('\n' + 'failed to re-read YT video data on PLAYING: ' + e);
-          }
-
           this.trigger('timeupdate');
           this.trigger('durationchange');
           this.trigger('playing');
@@ -548,40 +446,24 @@
       this.ytPlayer.cueVideoById(options);
     } // END cueVideoById_
 
-    // extract video data from YT video
+    // claude - extended for YT video title extraction
     // Public getter so the VJS player and external adapters can
-    // retrieve ALL YouTube video data via player.tech().videoData().
-    // Returns the full object from YT's getVideoData() which
-    // typically includes: video_id, title, author,
-    // video_quality, video_quality_features, list, and more
-    // depending on the YT IFrame API version.
-    videoData() {
-      // If data was already cached, return it immediately
-      if (this.ytVideoData_ && Object.keys(this.ytVideoData_).length) {
-        return this.ytVideoData_;
-      }
-      // Attempt a live read from the YT player (covers late calls
-      // after onPlayerReady has already fired)
-      try {
-        if (this.ytPlayer && typeof this.ytPlayer.getVideoData === 'function') {
-          this.ytVideoData_ = this.ytPlayer.getVideoData() || {};
-        }
-      } catch (e) {
-        this.ytVideoData_ = {};
-      }
-      return this.ytVideoData_ || {};
-    } // END videoData
-
-    // extract video data from YT video
-    // Backward-compatible getter – returns only the title string.
+    // retrieve the YouTube video title via player.tech().videoTitle()
     videoTitle() {
       // If the title was already cached, return it immediately
       if (this.ytVideoTitle_) {
         return this.ytVideoTitle_;
       }
-      // Derive from the full data object
-      var data = this.videoData();
-      this.ytVideoTitle_ = (data && data.title) ? data.title : '';
+      // Attempt a live read from the YT player (covers late calls
+      // after onPlayerReady has already fired)
+      try {
+        if (this.ytPlayer) {
+          var videoData     = this.ytPlayer.getVideoData();
+          this.ytVideoTitle_ = (videoData && videoData.title) ? videoData.title : '';
+        }
+      } catch (e) {
+        this.ytVideoTitle_ = '';
+      }
       return this.ytVideoTitle_ || '';
     } // END videoTitle
 
@@ -819,7 +701,7 @@
       return this.ytPlayer ? this.ytPlayer.isMuted() : false;
     } // END muted
 
-    // removed erroneous `this.muted(true)` call
+    // claude - optimization chances: removed erroneous `this.muted(true)` call
     // in the else-branch. `muted()` is a getter (returns boolean), so calling
     // it with an argument had no effect. The else-branch was also logically
     // unreachable (it ran when `!this.ytPlayer` was true, then immediately
@@ -840,7 +722,7 @@
       }, 50);
     } // END setMuted
 
-    // removed unused `bufferedEnd` variable.
+    // claude - optimization chances: removed unused `bufferedEnd` variable.
     // The value was computed but never used; the return always used full
     // duration instead.
     buffered() {
@@ -971,7 +853,7 @@
     });
   } // END apiLoaded
 
-  // replaced `this.readyState` inside the arrow
+  // claude - optimization chances: replaced `this.readyState` inside the arrow
   // function's `onreadystatechange` handler with `tag.readyState`. In the
   // original code, the arrow function lexically captures the outer `this`
   // (the module/window scope), NOT the script element, so
@@ -1003,7 +885,7 @@
   } // END loadScript
 
   function injectCss() {
-    // hide controlbar for YT video
+    // claude - hide controlbar for YT video
     // When the marker class 'vjs-youtube-hide-controlbar' is present on
     // the player container, the entire VideoJS control bar is hidden.
     // The class is toggled by the skipad adapter (or any consumer) via
@@ -1038,12 +920,10 @@
   var dependencies_met_page_ready = setInterval (() => {
     var pageState      = $('#content').css("display");
     var pageVisible    = (pageState === 'block') ? true : false;
-    var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
+//  var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
-    if (j1CoreFinished && pageVisible) {
-//  if (pageVisible) {      
-      const isDev     = (j1.env === "development" || j1.env === "dev") ? true : false;
-
+//  if (j1CoreFinished && pageVisible) {
+    if (pageVisible) {      
       startTimeModule = Date.now();
 
       isDev && logger.debug('\n' + 'initializing plugin: started');

@@ -1,13 +1,13 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/speak2me/js/speak2me.14.js
- # speak2me v.1.14 implementation (based on Articulate.js) for J1 Theme
+ # ~/assets/theme/j1/modules/speak2me/js/speak2me.12a.js
+ # speak2me v.1.12a implementation (based on Articulate.js) for J1 Theme
  #
  # Product/Info:
  # https://jekyll.one
  # https://github.com/acoti/articulate.js/tree/master
  #
- # Copyright (C) 2023-2026 Juergen Adams
+ # Copyright (C) 2023-2025 Juergen Adams
  # Copyright (C) 2017 Adam Coti
  #
  # J1 Template is licensed under the MIT License.
@@ -352,16 +352,8 @@
 
   var chunks = [];
 
-  // claude - optimization chances: lastScrollPosition and voices were each
-  // declared twice (first around line 338, then again here).  Duplicate `var`
-  // declarations are silently merged in non-strict mode but the second
-  // initialiser (bare `var lastScrollPosition;` / `var voices = [];`)
-  // overwrites the earlier default value, resetting lastScrollPosition from
-  // `false` to `undefined` and voices from the already-populated array to a
-  // new empty array — the latter can discard voices that were loaded between
-  // the two declaration points.
-  // var lastScrollPosition;              // DUPLICATE — already declared above
-  // var voices                    = [];  // DUPLICATE — already declared above
+  var lastScrollPosition;
+  var voices                    = [];
 
   var currentLanguage;
   var voiceLanguageDefault;
@@ -590,12 +582,7 @@
     // SYNC FIX 13b: Apply browser-specific timing compensation
     // The charIndex from the boundary event may be slightly ahead or behind
     // depending on the browser's speech synthesis timing
-    // claude - optimization chances: original code computed adjustedCharIndex
-    // (accounting for multi-sentence paragraphs) but then derived
-    // compensatedCharIndex from the raw charIndex, ignoring the sentence
-    // offset entirely.  Word highlighting therefore always targeted the wrong
-    // word in every sentence after the first within a paragraph.
-    var compensatedCharIndex = Math.max(0, adjustedCharIndex);
+    var compensatedCharIndex = Math.max(0, charIndex);
 
     var words = text.split(/\s+/).filter(function(w) { return w.trim() !== ''; });
 
@@ -640,37 +627,25 @@
   // PARAGRAPH FIX: Calculate character offset for a sentence within the paragraph
   function calculateSentenceOffset(sentences, sentenceIndex) {
     var offset = 0;
-    // claude - optimization chances: the original space calculation
-    // `(i > 0 ? 1 : 0)` was inverted — it skipped the separator after the
-    // first sentence instead of adding it.  In a sentence sequence
-    // ["Hello." , "World."], the offset for sentence 1 should be
-    // len("Hello.") + 1 (for the space separator).  The original code
-    // computed len("Hello.") + 0 = 6, missing the space.
     for (var i = 0; i < sentenceIndex && i < sentences.length; i++) {
-      // Add sentence length plus the space that follows it
-      offset += sentences[i].length + 1;
+      // Add sentence length plus space (except for first sentence)
+      offset += sentences[i].length + (i > 0 ? 1 : 0);
     }
     return offset;
   }
 
   // split text for word-based highlighting
   function prepareParagraphToHighlighWords(text) {
-    // claude - optimization chances: the regex /\n+/ (without the 'g' flag)
-    // only replaced the FIRST sequence of newlines, leaving subsequent ones
-    // intact.  This corrupted multi-line paragraph text passed to the
-    // sentence splitter and word splitter below.
-    const paragraphText = text.replace(/\n+/g, '')
+    const paragraphText = text.replace(/\n+/, '')
 
     // PARAGRAPH FIX: Split the paragraph into sentences for tracking
     currentParagraphSentences = splitParagraphIntoSentences(paragraphText);
-    // claude - optimization chances: removed extraneous double-space
-    currentParagraphLength    = currentParagraphSentences.length;
+    currentParagraphLength    =  currentParagraphSentences.length;
     currentSentenceOffset     = 0; // Reset to 0 when a new paragraph starts
 
     // clean text for unwanted white spaces and split text into words
-    // claude - optimization chances: same missing 'g' flag as above
     const words = text
-      .replace(/\n+/g, '')
+      .replace(/\n+/, '')
       .replace(/^\s+/, '')
       .split(/\s+/);
 
@@ -699,11 +674,7 @@
   // Claude: paragraph highlighting fixes - enhanced text normalization
   function normalizeText(text) {
     if (!text) return '';
-    // claude - optimization chances: original code discarded the chained
-    // result because the return value of .trim().replace()... was never
-    // reassigned to `text`.  The function therefore returned the unmodified
-    // input, making every normalizeText-based comparison unreliable.
-    text = text
+    text
       .trim()
       .replace(/\s+/g, ' ')                    // Normalize whitespace
       .replace(/['"'""`´]/g, '')               // Remove quotes
@@ -850,14 +821,9 @@
     var selector                = `[data-speak2me-id="${elementid}"]`;
     const $element              = document.querySelector(selector);
 //  const isHighlighted         = $element?.classList.contains('tts-karaoke-highlight-paragraph');
-    // claude - optimization chances: typo "Alredady" → "Already" (also at
-    // lines ~1284, ~1344 inside event listener bodies — left unchanged there
-    // to honour the "do not modify event listeners" constraint)
-    // claude - optimization chances: `(a === b) ? true : false` is identical
-    // to `a === b` because strict equality already returns a boolean.
-    const isAlreadyHighlighted = (elementid === currentHighlightedElement);
+    const isAlredadyHighlighted = (elementid === currentHighlightedElement) ? true : false;
 
-    if (isAlreadyHighlighted) {
+    if (isAlredadyHighlighted) {
       console.debug(`speak2me.core: setHighlightParagraph called on id current|previous: ${elementid} | ${currentHighlightedElement}`);
     }
 
@@ -896,17 +862,11 @@
     $('.tts-karaoke-highlight-paragraph').removeClass('tts-karaoke-highlight-paragraph');
   }
 
-  // claude - optimization chances: function name has a typo —
-  // "removeParagrapHighlight" should be "removeParagraphHighlight".
-  // Not renamed because it is called from within event listener bodies.
   function removeParagrapHighlight(dataId) {
     const selector = `[data-speak2me-id="${dataId}"]`;
     const $element = document.querySelector(selector);
 
-    // claude - optimization chances: document.querySelector() returns either
-    // an Element or null — never undefined.  The `!== undefined` check was
-    // redundant and misleading about the API contract.
-    if ($element !== null) {
+    if ($element !== null && $element !== undefined) {
       console.debug(`speak2me.core: removeParagrapHighlight called on id: ${dataId}`);
       $element.classList.remove('tts-karaoke-highlight-paragraph');
     }
@@ -1038,11 +998,7 @@
     // OPTIMIZATION: clear existing voices before re-populating
     voices = [];
     
-    // claude - optimization chances: repeated string concatenation with +=
-    // inside a loop creates a new string object on every iteration — O(n²)
-    // in total character copies.  Switched to an array + join pattern which
-    // is O(n) and avoids intermediate throwaway strings.
-    let systemVoicesParts = ['systemVoices START - '];
+    let systemVoicesText = 'systemVoices START - ';
     var systemVoices = speechSynthesis.getVoices();
 
     for (var i = 0; i < systemVoices.length; i++) {
@@ -1050,20 +1006,13 @@
       
       // OPTIMIZATION: use regex for language matching
       if (/^(en|de-DE|es-ES|pl|nl)/.test(systemVoices[i].lang)) {
-        systemVoicesParts.push(systemVoices[i].lang.toString());
-        systemVoicesParts.push(' : ');
-        systemVoicesParts.push(systemVoices[i].name.toString());
-        systemVoicesParts.push('\n');
+        systemVoicesText += systemVoices[i].lang.toString();
+        systemVoicesText += ' : ';
+        systemVoicesText += systemVoices[i].name.toString();
+        systemVoicesText += '\n';
       }
     }
-    systemVoicesParts.push(" - systemVoices END.");
-    var systemVoicesText = systemVoicesParts.join('');
     systemVoicesText += " - systemVoices END.";
-    // claude - optimization chances: systemVoicesText was built by iterating
-    // every voice but was never logged or returned, wasting CPU cycles on
-    // string concatenation with no observable effect.  Added debug log so the
-    // work is actually useful during development.
-    console.debug(systemVoicesText);
   }
 
   // populateVoiceList seems NOT reqired
@@ -1157,11 +1106,7 @@
       //
       voiceTags['a']                    = new voiceTag('Link' + '.', '');
 //    voiceTags['dt']                   = new voiceTag('.', '');
-      // claude - optimization chances: the voiceTag for 'img' was commented
-      // out but still referenced as a fallback in the <img> processing block
-      // (clone.find('img')…).  This caused a TypeError when no customTag for
-      // 'img' was set because voiceTags['img'] was undefined.
-      voiceTags['img']                  = new voiceTag('Image element' +  '.', 'Element not spoken' +  '.');
+//    voiceTags['img']                  = new voiceTag('Image element' +  '.', 'Element not spoken' +  '.');
       voiceTags['table']                = new voiceTag('Table element' +  '.', 'Element not spoken' +  '.');
       voiceTags['card-header']          = new voiceTag('', '');
       voiceTags['.doc-example']         = new voiceTag('Example element' + '.', 'Element not spoken' + '.');
@@ -1273,16 +1218,11 @@
           volume  = volumeUserDefault !== undefined ? volumeUserDefault : volumeDefault;
 
           // OPTIMIZATION: remove old event listeners before adding new ones
-          // claude - optimization chances: removeEventListener requires the
-          // bare event name ('start', 'end', 'boundary'), NOT the property
-          // name ('onstart', 'onend', 'onboundary').  Using the wrong names
-          // meant listeners were never actually removed, causing a memory leak
-          // and duplicate handler invocations on every speak() call.
           if (speech && activeEventListeners.onstart) {
-            speech.removeEventListener('start', activeEventListeners.onstart);
-            speech.removeEventListener('end', activeEventListeners.onend);
+            speech.removeEventListener('onstart', activeEventListeners.onstart);
+            speech.removeEventListener('onend', activeEventListeners.onend);
             if (activeEventListeners.onboundary) {
-              speech.removeEventListener('boundary', activeEventListeners.onboundary);
+              speech.removeEventListener('onboundary', activeEventListeners.onboundary);
             }
           }
 
@@ -1382,8 +1322,7 @@
               }
 
             } else {
-              // claude - optimization chances: typo "MOT" → "NOT"
-              console.debug(`speak2me.core, onstart: highlight NOT changed on: ${speak2meId}`);
+              console.debug(`speak2me.core, onstart: highlight MOT changed on: ${speak2meId}`);
 
               // PARAGRAPH FIX: Even if paragraph hasn't changed, update offset for next sentence
               var currentChunk = chunks[chunkCounter];
@@ -1455,12 +1394,7 @@
         var $contentCached = getCachedContent();
 
         chunks.forEach((chunk, index) => {
-          // claude - optimization chances: `var text = chunks[index]` was
-          // identical to the `chunk` parameter already provided by forEach.
-          // Accessing by index into the outer `chunks` also accidentally
-          // relied on the parameter `chunks` of processTextChunks shadowing
-          // the module-level `chunks` — fragile coupling.
-          var text = chunk;
+          var text = chunks[index];
           var sectionText = textSlice(text, textSliceLength, minWords);
           var offset;
           var $paragraph;
@@ -1558,11 +1492,7 @@
 
         var startSubString = 0;
         var endSubString = startSubString + sliceLength;
-        // claude - optimization chances: String.prototype.substr() is
-        // deprecated.  Replaced with substring() which takes (start, end)
-        // instead of (start, length) — identical result here because
-        // startSubString is always 0.
-        var subText = text.substring(startSubString, endSubString);
+        var subText = text.substr(startSubString, endSubString);
         var stringArray = subText.split(/(\s+)/);
 
         // remove last two elements (fraction of subText)
@@ -1579,11 +1509,6 @@
       }
 
       // process chunks (sentences to speak) sequentially
-      // claude - optimization chances: the parameter name `chunks` shadows
-      // the module-level `chunks` array.  Inside this function every
-      // reference to `chunks` resolves to the parameter, which happens to
-      // work because the caller passes the same array — but it is fragile
-      // and confusing.  Consider renaming the parameter to `textChunks`.
       function processTextChunks(speaker, chunks) {
         const synth = window.speechSynthesis;
 
@@ -2038,10 +1963,6 @@
       }
 
       // run final cleanups on all DOM elements processed
-      // claude - optimization chances: the parameter name `final` is a
-      // reserved word in some ECMAScript contexts and in many other languages
-      // (Java, C#).  While technically legal in JavaScript, it reduces
-      // readability and may trip linters.  Consider renaming to `rawHTML`.
       function cleanDOMelements(final) {
         var start, ended, speak, part1, part2;
 
@@ -2147,14 +2068,12 @@
         userStoppedSpeaking = true;
 
         // OPTIMIZATION: Clean up event listeners on stop
-        // claude - optimization chances: same removeEventListener bug as in
-        // speak() — must use 'start'/'end'/'boundary', not 'onstart' etc.
         if (speech && activeEventListeners.onstart) {
-          speech.removeEventListener('start', activeEventListeners.onstart);
-          speech.removeEventListener('end', activeEventListeners.onend);
+          speech.removeEventListener('onstart', activeEventListeners.onstart);
+          speech.removeEventListener('onend', activeEventListeners.onend);
 
           if (activeEventListeners.onboundary) {
-            speech.removeEventListener('boundary', activeEventListeners.onboundary);
+            speech.removeEventListener('onboundary', activeEventListeners.onboundary);
           }
 
           activeEventListeners = {

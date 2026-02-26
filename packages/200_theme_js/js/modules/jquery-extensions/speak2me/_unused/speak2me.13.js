@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/speak2me/js/speak2me.14.js
- # speak2me v.1.14 implementation (based on Articulate.js) for J1 Theme
+ # ~/assets/theme/j1/modules/speak2me/js/speak2me.13.js
+ # speak2me v.1.13 implementation (based on Articulate.js) for J1 Theme
  #
  # Product/Info:
  # https://jekyll.one
@@ -24,21 +24,21 @@
  # - FIXED: Reliable paragraph highlighting with direct element references
  # - FIXED: Better text normalization and matching
  # - Claude: paragraph highlighting fixes - Enhanced paragraph tracking and highlighting
- # - SYNC FIX 13b: browser-specific timing compensation for word highlighting 
- # - PARAGRAPH FIX: highligt paragraps witm multiple sentences word-wise
+ # - SYNC FIX 13b: browser-specific timing compensation for word highlighting
+ # - PARAGRAPH FIX: highlight paragraphs with multiple sentences word-wise
  # -----------------------------------------------------------------------------
 */
 'use strict';
 
+// claude - optimization chances: removed overly broad eslint-disable rules that
+// mask real issues (no-redeclare, no-undef, no-unused-vars). The underlying
+// problems are fixed in this version instead of being suppressed.
 /* eslint no-extra-semi: "off"                                                */
 /* eslint no-useless-escape: "off"                                            */
-/* eslint no-undef: "off"                                                     */
-/* eslint no-redeclare: "off"                                                 */
-/* eslint no-unused-vars: "off"                                               */
 /* eslint indent: "off"                                                       */
 /* eslint quotes: "off"                                                       */
 /* eslint no-prototype-builtins: "off"                                        */
-/* global window                                                              */
+/* global window, $                                                           */
 
 (function($) {
 
@@ -177,7 +177,7 @@
         nodeName: heading.nodeName,
         headingLevel: getHeadingLevel(heading),
         textContent: options.headingLabelCallback ? String(options.headingLabelCallback(heading.textContent)) : heading.textContent.trim()
-      }
+      };
 
       if (options.includeHtml) {
         obj.childNodes = heading.childNodes;
@@ -200,7 +200,7 @@
       var obj = getHeadingObject(node);
       var level = obj.headingLevel;
       var array = nest;
-      var lastItem = getLastItem(array)
+      var lastItem = getLastItem(array);
       var lastItemLevel = lastItem ? lastItem.headingLevel : 0;
       var counter = level - lastItemLevel;
 
@@ -216,7 +216,7 @@
         obj.isCollapsed = true;
       }
 
-      array.push(obj)
+      array.push(obj);
       return array;
     }
 
@@ -270,9 +270,6 @@
   // module globals
   // ---------------------------------------------------------------------------
 
-  // var logger                  = log4javascript.getLogger('j1.speak2me.core');
-  // logger.info('initializing core module: started');
-
   const parseContent          = ParseContent(defaultOptions);
 
   const scrollBehavior        = 'smooth';
@@ -282,10 +279,12 @@
   const minWords              = 3;
   const pageScanCycle         = 1000;
   const pageScanLines         = 10000;
-  
+
   const sourceLanguage        = document.getElementsByTagName("html")[0].getAttribute("lang");
   const pauseBetweenSentences = 500;
-  const pauseOnHeadlines      = 750;
+  // claude - optimization chances: pauseOnHeadlines was declared but never
+  // referenced anywhere in the module, making it dead code.
+  // const pauseOnHeadlines   = 750;
 
   // browser detection
   var isChrome                = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor) && !/Edg/.test(navigator.userAgent);
@@ -300,11 +299,13 @@
   var previousParagraphHTML   = null;
   var currentParagraphHTML    = null;
 
-  // OPTIMIZATION: cache DOM elements to avoid repeated queries - cached on first use
+  // cache DOM elements to avoid repeated queries - cached on first use
   var $content                = null;
 
   var voiceUserDefault        = 'Google UK English Female';
-  var voiceChromeDefault      = 'Google US English';
+  // claude - optimization chances: voiceChromeDefault was declared but never
+  // read — only voiceLanguageDefault is actually used for voice selection.
+  // var voiceChromeDefault   = 'Google US English';
 
   var defaultLanguage         = '';
   var navigatorLanguage       = navigator.language || navigator.userLanguage;
@@ -347,21 +348,15 @@
   var pitchUserDefault;
   var volumeUserDefault;
 
-  // var processSpeech;
-  // var speechMonitor;
-
   var chunks = [];
 
-  // claude - optimization chances: lastScrollPosition and voices were each
-  // declared twice (first around line 338, then again here).  Duplicate `var`
-  // declarations are silently merged in non-strict mode but the second
-  // initialiser (bare `var lastScrollPosition;` / `var voices = [];`)
-  // overwrites the earlier default value, resetting lastScrollPosition from
-  // `false` to `undefined` and voices from the already-populated array to a
-  // new empty array — the latter can discard voices that were loaded between
-  // the two declaration points.
-  // var lastScrollPosition;              // DUPLICATE — already declared above
-  // var voices                    = [];  // DUPLICATE — already declared above
+  // claude - optimization chances: removed duplicate declarations of
+  // `lastScrollPosition` (was `var lastScrollPosition;` after line 338
+  // already declared it as `false`) and `voices` (was `var voices = [];`
+  // redeclared after line 321). Duplicate `var` in the same scope
+  // silently overwrites the first value to `undefined`, which caused
+  // `lastScrollPosition` to lose its `false` initializer and `voices` to
+  // be reset.
 
   var currentLanguage;
   var voiceLanguageDefault;
@@ -371,20 +366,23 @@
 
   var scanFinished;
 
+  // claude - optimization chances: removed module-scope `var wasRunOnce;`
+  // (line 367 original). The variable is only used inside
+  // `processTextChunks` where it is properly declared with `var wasRunOnce
+  // = false;` at line 1583. The module-scope declaration was shadowed and
+  // never read.
 
-  var wasRunOnce;
-
-  // OPTIMIZATION: store active event listeners for cleanup
+  // Store active event listeners for cleanup.
+  // claude - optimization chances: unified the key names to use DOM event
+  // names consistently (`start/end/boundary`) instead of mixing
+  // `onstart/onend/onboundary` with `start/end/boundary`. The `on*`
+  // prefix is only correct for property assignment (`speech.onstart =
+  // fn`), not for `addEventListener`/`removeEventListener` which require
+  // the bare event name.
   var activeEventListeners  = {
     start:        null,
-    end:          null,    
-    onstart:      null,
-    onend:        null,
-    onerror:      null,
-    onmark:       null,
-    onpause:      null,
-    onresume:     null,
-    onboundary:   null
+    end:          null,
+    boundary:     null
   };
 
   // SYNC FIX 13b: Browser-specific timing compensation (milliseconds)
@@ -397,14 +395,6 @@
     safari:     150,   // Safari has significant delay
     default:     50    // Fallback for unknown browsers
   };
-
-  // SYNC FIX 13a: Browser-specific timing compensation (in milliseconds)
-  // const TIMING_COMPENSATION = {
-  //   chrome: -50,    // Chrome fires events slightly early
-  //   firefox: 0,     // Firefox is most accurate
-  //   edge: -30,      // Edge similar to Chrome
-  //   safari: -100    // Safari needs more compensation
-  // };
 
   // FIX: Add counter for unique paragraph IDs
   var paragraphIdCounter = 0;
@@ -423,7 +413,7 @@
 
   var voiceLanguageMicrosoftDefault = {
     'en-GB':  'Microsoft Libby Online (Natural) - English (United Kingdom)',
-    'es-ES' :  'Microsoft Elvira Online (Natural) - Spanish (Spain)',
+    'es-ES':  'Microsoft Elvira Online (Natural) - Spanish (Spain)',
     'fr-FR':  'Microsoft Denise Online (Natural) - French (France)',
     'de-DE':  'Microsoft Katja Online (Natural) - German (Germany)',
     'it-IT':  'Microsoft Elsa Online (Natural) - Italian (Italy)',
@@ -434,7 +424,7 @@
     'de-DE':  'Microsoft Katja - German (Germany)',
   };
 
-  if (sourceLanguage == 'en') {
+  if (sourceLanguage === 'en') {
     defaultLanguage = sourceLanguage + '-' + 'GB';
   } else {
     defaultLanguage = sourceLanguage + '-' + sourceLanguage.toUpperCase();
@@ -452,102 +442,11 @@
     timingOffset = TIMING_COMPENSATION.safari;
   }
 
-  // default voices for different engines (based on language)
-  // var voiceLanguageGoogleDefault = {
-  //   'de-DE': 'Google Deutsch',
-  //   'en-GB': 'Google UK English Female',
-  //   'en-US': 'Google US English',
-  //   'es-ES': 'Google español',
-  //   'pl-PL': 'Google polski',
-  //   'zh-CN': 'Google 普通话(中国大陆)',
-  //   'nl-NL': 'Google Nederlands',
-  //   'cs-CZ': 'Google čeština',
-  //   'ar-SA': 'Google العربية',
-  //   'da-DK': 'Google dansk',
-  //   'et-EE': 'Google eesti',
-  //   'el-GR': 'Google Ελληνικά',
-  //   'he-IL': 'Google עברית',
-  //   'hi-IN': 'Google हिन्दी',
-  //   'ja-JP': 'Google 日本語',
-  //   'ka-GE': 'Google ქართული'
-  // };
-
-  // default voices for different engines (based on language)
-  // var voiceLanguageGoogleDefault = {
-  //   'de-DE': 'Google Deutsch',
-  //   'en-GB': 'Google UK English Female',
-  //   'en-US': 'Google US English',
-  //   'es-ES': 'Google español',
-  //   'pl-PL': 'Google polski',
-  //   'zh-CN': 'Google 普通话(中国大陆)',
-  //   'nl-NL': 'Google Nederlands',
-  //   'cs-CZ': 'Google čeština',
-  //   'ar-SA': 'Google العربية',
-  //   'da-DK': 'Google dansk',
-  //   'et-EE': 'Google eesti',
-  //   'el-GR': 'Google Ελληνικά',
-  //   'he-IL': 'Google עברית',
-  //   'hi-IN': 'Google हिन्दी',
-  //   'ja-JP': 'Google 日本語',
-  //   'ka-GE': 'Google ქართული'
-  // };
-
-  // var voiceLanguageMicrosoftDefault = {
-  //   'de-DE': 'Microsoft Katja - German (Germany)',
-  //   'en-GB': 'Microsoft Hazel - English (Great Britain)',
-  //   'en-US': 'Microsoft Zira - English (United States)',
-  //   'es-ES': 'Microsoft Helena - Spanish (Spain)',
-  //   'pl-PL': 'Microsoft Paulina - Polish (Poland)',
-  //   'zh-CN': 'Microsoft Huihui - Chinese (Simplified, PRC)',
-  //   'nl-NL': 'Microsoft Frank - Dutch (Netherlands)',
-  //   'cs-CZ': 'Microsoft Jakub - Czech (Czech Republic)',
-  //   'ar-SA': 'Microsoft Naayf - Arabic (Saudi Arabia)',
-  //   'da-DK': 'Microsoft Helle - Danish (Denmark)',
-  //   'et-EE': 'undefined',
-  //   'el-GR': 'Microsoft Stefanos - Greek (Greece)',
-  //   'he-IL': 'Microsoft Asaf - Hebrew (Israel)',
-  //   'hi-IN': 'Microsoft Hemant - Hindi (India)',
-  //   'ja-JP': 'Microsoft Haruka - Japanese (Japan)',
-  //   'ka-GE': 'undefined'
-  // };
-
-  // var voiceLanguageFirefoxDefault = {
-  //   'de-DE': 'undefined',
-  //   'en-GB': 'undefined',
-  //   'en-US': 'undefined',
-  //   'es-ES': 'undefined',
-  //   'pl-PL': 'undefined',
-  //   'zh-CN': 'undefined',
-  //   'nl-NL': 'undefined',
-  //   'cs-CZ': 'undefined',
-  //   'ar-SA': 'undefined',
-  //   'da-DK': 'undefined',
-  //   'et-EE': 'undefined',
-  //   'el-GR': 'undefined',
-  //   'he-IL': 'undefined',
-  //   'hi-IN': 'undefined',
-  //   'ja-JP': 'undefined',
-  //   'ka-GE': 'undefined'
-  // };
-
-  // var voiceLanguageFirefoxDefault = {
-  //   'de-DE': 'undefined',
-  //   'en-GB': 'undefined',
-  //   'en-US': 'undefined',
-  //   'es-ES': 'undefined',
-  //   'pl-PL': 'undefined',
-  //   'zh-CN': 'undefined',
-  //   'nl-NL': 'undefined',
-  //   'cs-CZ': 'undefined',
-  //   'ar-SA': 'undefined',
-  //   'da-DK': 'undefined',
-  //   'et-EE': 'undefined',
-  //   'el-GR': 'undefined',
-  //   'he-IL': 'undefined',
-  //   'hi-IN': 'undefined',
-  //   'ja-JP': 'undefined',
-  //   'ka-GE': 'undefined'
-  // };
+  // claude - optimization chances: removed ~200 lines of commented-out
+  // code (duplicate voice-language maps, unused buildParagraphCache /
+  // findParagraphForChunk / setHighlight functions). Commented-out code
+  // harms readability, inflates file size, and is still preserved in
+  // version control if needed later.
 
   // ---------------------------------------------------------------------------
   // Internal functions
@@ -561,7 +460,7 @@
       }, msPause);
   }
 
-  // OPTIMIZATION: cache DOM queries
+  // cache DOM queries
   function getCachedContent() {
     if (!$content) {
       $content = $('#content');
@@ -575,11 +474,9 @@
     var p = document.getElementById('speak_highlighted');
     if (!p) return;
 
-//  var spans = p.querySelectorAll('[data-word-index]');
     var spans = p.querySelectorAll('span');
     if (!spans.length) return;
 
-//  var text = previousParagraphHTML.replace(/<[^>]*>/g, '');
     var text = previousParagraphHTML;
     var currentPos = 0;
     var targetWordIndex = -1;
@@ -590,12 +487,7 @@
     // SYNC FIX 13b: Apply browser-specific timing compensation
     // The charIndex from the boundary event may be slightly ahead or behind
     // depending on the browser's speech synthesis timing
-    // claude - optimization chances: original code computed adjustedCharIndex
-    // (accounting for multi-sentence paragraphs) but then derived
-    // compensatedCharIndex from the raw charIndex, ignoring the sentence
-    // offset entirely.  Word highlighting therefore always targeted the wrong
-    // word in every sentence after the first within a paragraph.
-    var compensatedCharIndex = Math.max(0, adjustedCharIndex);
+    var compensatedCharIndex = Math.max(0, charIndex);
 
     var words = text.split(/\s+/).filter(function(w) { return w.trim() !== ''; });
 
@@ -625,52 +517,58 @@
   }
 
   // PARAGRAPH FIX: Split paragraph text into sentences to track offsets
+  // claude - optimization chances: fixed double-period bug. The original
+  // regex `split(/\.\s+/)` consumes the period, then `.map()` blindly
+  // appended a period to *every* element — including the last one that
+  // may already end with a period. This produced strings like
+  // `"Some sentence.."`. The fix now only appends a period when the
+  // trimmed fragment does not already end with one.
   function splitParagraphIntoSentences(text) {
-    // Split by period, but keep the period with each sentence
     var sentences = text.split(/\.\s+/).map(function(s, index, arr) {
-      // Add period back except for the last element if it's empty
-      return (index < arr.length - 1 || s.trim().length > 0) ? s.trim() + '.' : s.trim();
+      var trimmed = s.trim();
+      if (trimmed.length === 0) return '';
+      // Only append period if the fragment does not already end with one
+      return trimmed.endsWith('.') ? trimmed : trimmed + '.';
     }).filter(function(s) {
       return s.length > 0;
     });
-    
+
     return sentences;
   }
 
   // PARAGRAPH FIX: Calculate character offset for a sentence within the paragraph
+  // claude - optimization chances: the original offset formula used
+  // `(i > 0 ? 1 : 0)` which failed to account for the space separator
+  // between sentence 0 and sentence 1. In the original text the
+  // separator between sentences is ". " (period already part of the
+  // sentence string, plus one space). The loop must always add +1 for
+  // the inter-sentence space.
   function calculateSentenceOffset(sentences, sentenceIndex) {
     var offset = 0;
-    // claude - optimization chances: the original space calculation
-    // `(i > 0 ? 1 : 0)` was inverted — it skipped the separator after the
-    // first sentence instead of adding it.  In a sentence sequence
-    // ["Hello." , "World."], the offset for sentence 1 should be
-    // len("Hello.") + 1 (for the space separator).  The original code
-    // computed len("Hello.") + 0 = 6, missing the space.
     for (var i = 0; i < sentenceIndex && i < sentences.length; i++) {
-      // Add sentence length plus the space that follows it
+      // Each sentence's length plus the single space that separated them
+      // in the original text (the period is already included in the
+      // sentence string).
       offset += sentences[i].length + 1;
     }
     return offset;
   }
 
   // split text for word-based highlighting
-  function prepareParagraphToHighlighWords(text) {
-    // claude - optimization chances: the regex /\n+/ (without the 'g' flag)
-    // only replaced the FIRST sequence of newlines, leaving subsequent ones
-    // intact.  This corrupted multi-line paragraph text passed to the
-    // sentence splitter and word splitter below.
-    const paragraphText = text.replace(/\n+/g, '')
+  // claude - optimization chances: fixed typo in function name
+  // (`prepareParagraphToHighlighWords` → `prepareParagraphToHighlightWords`).
+  // All call-sites are updated below.
+  function prepareParagraphToHighlightWords(text) {
+    var paragraphText = text.replace(/\n+/, '');
 
     // PARAGRAPH FIX: Split the paragraph into sentences for tracking
     currentParagraphSentences = splitParagraphIntoSentences(paragraphText);
-    // claude - optimization chances: removed extraneous double-space
     currentParagraphLength    = currentParagraphSentences.length;
     currentSentenceOffset     = 0; // Reset to 0 when a new paragraph starts
 
     // clean text for unwanted white spaces and split text into words
-    // claude - optimization chances: same missing 'g' flag as above
-    const words = text
-      .replace(/\n+/g, '')
+    var words = text
+      .replace(/\n+/, '')
       .replace(/^\s+/, '')
       .split(/\s+/);
 
@@ -680,13 +578,12 @@
     currentParagraph     = document.getElementById('speak_highlighted');
     currentParagraphHTML = currentParagraph.innerHTML;
 
-    // split text into spans (for word-based highlighting
+    // split text into spans (for word-based highlighting)
     currentParagraph.innerHTML  = '';
-    words.forEach((word, index) => {
-      const span          = document.createElement('span');
-      span.textContent    = word + ' ';   // add single space between words
-      span.dataset.index  = index;
-//    span.className      = 'data-word-index';
+    words.forEach(function(word, index) {
+      var span          = document.createElement('span');
+      span.textContent  = word + ' ';   // add single space between words
+      span.dataset.index = index;
 
       currentParagraph.appendChild(span);
     });
@@ -697,12 +594,16 @@
   }
 
   // Claude: paragraph highlighting fixes - enhanced text normalization
+  // claude - optimization chances [CORRECTNESS]: the original function
+  // chained string methods on `text` (`text.trim().replace(...)`) but
+  // never assigned the result back — the chain's return value was
+  // discarded and the original, unmodified `text` was returned. This
+  // meant normalizeText() was effectively a no-op: it always returned
+  // the raw input unchanged, breaking all downstream fuzzy-matching
+  // logic that depended on normalized text. Fixed by assigning the
+  // chained result back to `text`.
   function normalizeText(text) {
     if (!text) return '';
-    // claude - optimization chances: original code discarded the chained
-    // result because the return value of .trim().replace()... was never
-    // reassigned to `text`.  The function therefore returned the unmodified
-    // input, making every normalizeText-based comparison unreliable.
     text = text
       .trim()
       .replace(/\s+/g, ' ')                    // Normalize whitespace
@@ -713,26 +614,29 @@
       .replace(/[\u200B-\u200D\uFEFF]/g, '')   // Remove zero-width characters
       .toLowerCase();
 
-      return text;
+    return text;
   }
 
   // Claude: paragraph highlighting fixes - Improved text matching with fuzzy logic
+  // claude - optimization chances: added early return on perfect match
+  // (score === 1.0) to avoid scanning remaining elements unnecessarily
+  // when an exact-length match is already found.
   function findParagraphByText(searchText, $container) {
     if (!searchText || !$container) return null;
-    
+
     var normalizedSearch = normalizeText(searchText);
     if (normalizedSearch.length < 3) return null; // Too short to match reliably
-    
+
     var bestMatch = null;
     var bestMatchScore = 0;
 
     $container.find('p, h1, h2, h3, h4, h5, h6, li, dt, dd').each(function() {
       var $elem = $(this);
       var elemText = normalizeText($elem.text());
-      
+
       // Skip empty elements
       if (elemText.length === 0) return;
-      
+
       // Check for exact substring match
       var index = elemText.indexOf(normalizedSearch);
       if (index !== -1) {
@@ -741,10 +645,13 @@
         var lengthScore = normalizedSearch.length / elemText.length;
         var positionScore = 1 - (index / elemText.length);
         var score = lengthScore * 0.7 + positionScore * 0.3;
-        
+
         if (score > bestMatchScore) {
           bestMatchScore = score;
           bestMatch = $elem;
+
+          // Early exit on perfect match
+          if (score >= 0.99) return false;
         }
       }
     });
@@ -752,113 +659,16 @@
     return bestMatch;
   }
 
-  // Claude: paragraph highlighting fixes
-  // Build paragraph cache for faster lookups (NOT used)
-  //   function buildParagraphCache() {
-  //     paragraphCache.clear();
-  //     var $contentCached = getCachedContent();
-
-  // //  $contentCached.find('p, h1, h2, h3, h4, h5, h6, li, dt, dd').each(function() {    
-  //     $contentCached.find('p, dt, h1, h2, h3, h4, h5, h6').each(function() {
-  //       var $elem = $(this);
-  //       var speak2meId = $elem.attr('data-speak2me-id');
-        
-  //       if (speak2meId) {
-  //         // Store both the element and its normalized text
-  //         paragraphCache.set(speak2meId, {
-  //           element: $elem,
-  //           normalizedText: normalizeText($elem.text()),
-  //           offsetTop: Math.round($elem.offset().top)
-  //         });
-  //       }
-  //     });
-  //   }
-
-  // Claude: paragraph highlighting fixes - Enhanced paragraph lookup (NOT used)
-  // function findParagraphForChunk(chunk) {
-  //   // Method 1: Try cached paragraph by ID (fastest and most reliable)
-  //   if (chunk.speak2meId && paragraphCache.has(chunk.speak2meId)) {
-  //     var cached = paragraphCache.get(chunk.speak2meId);
-  //     // Verify the element still exists in DOM
-  //     if (cached.element && cached.element.length > 0 && $.contains(document.documentElement, cached.element[0])) {
-  //       return cached.element;
-  //     }
-  //   }
-    
-  //   // Method 2: Try stored paragraph reference
-  //   if (chunk.$paragraph && chunk.$paragraph.length > 0 && $.contains(document.documentElement, chunk.$paragraph[0])) {
-  //     return chunk.$paragraph;
-  //   }
-    
-  //   // Method 3: Try text matching with the section text
-  //   if (chunk.sectionText) {
-  //     var $found = findParagraphByText(chunk.sectionText, getCachedContent());
-  //     if ($found && $found.length > 0) {
-  //       return $found;
-  //     }
-  //   }
-    
-  //   // Method 4: Try text matching with first part of chunk text
-  //   if (chunk.text && chunk.text.length > 20) {
-  //     var searchText = chunk.text.substring(0, 50).replace(/\s+/g, ' ').trim();
-  //     var $found = findParagraphByText(searchText, getCachedContent());
-  //     if ($found && $found.length > 0) {
-  //       return $found;
-  //     }
-  //   }
-    
-  //   return null;
-  // }
-
-  // Claude: paragraph highlighting fixes - Centralized highlight management (NOT used)
-  // function setHighlight($element) {
-  //   // remove previous highlight
-  //   if (currentHighlightedElement) {
-  //     currentHighlightedElement.removeClass('tts-karaoke-highlight-paragraph');
-  //   }
-    
-  //   // add new highlight
-  //   if ($element && $element.length > 0) {
-  //     $element.addClass('tts-karaoke-highlight-paragraph');
-  //     currentHighlightedElement = $element;
-      
-  //     // scroll to element with better error handling
-  //     try {
-  //       var elementTop = $element.offset().top;
-  //       var scrollTop = elementTop - scrollBlockOffset;
-        
-  //       // Only scroll if element is not already visible
-  //       var viewportTop = $(window).scrollTop();
-  //       var viewportBottom = viewportTop + $(window).height();
-        
-  //       if (elementTop < viewportTop || elementTop > viewportBottom) {
-  //         window.scrollTo({
-  //           top: scrollTop,
-  //           behavior: scrollBehavior
-  //         });
-  //       }
-  //     } catch (error) {
-  //       console.warn('speak2me.core: Could not scroll to highlighted element', error);
-  //     }
-  //     return true;
-  //   }
-  //   return false;
-  // }
-
   function setHighlightParagraph(elementid) {
     // get the element with data-speak2me-id like 'speak2me-p-0'
-    var selector                = `[data-speak2me-id="${elementid}"]`;
-    const $element              = document.querySelector(selector);
-//  const isHighlighted         = $element?.classList.contains('tts-karaoke-highlight-paragraph');
-    // claude - optimization chances: typo "Alredady" → "Already" (also at
-    // lines ~1284, ~1344 inside event listener bodies — left unchanged there
-    // to honour the "do not modify event listeners" constraint)
-    // claude - optimization chances: `(a === b) ? true : false` is identical
-    // to `a === b` because strict equality already returns a boolean.
-    const isAlreadyHighlighted = (elementid === currentHighlightedElement);
+    var selector                = '[data-speak2me-id="' + elementid + '"]';
+    var $element                = document.querySelector(selector);
+    // claude - optimization chances: fixed typo `isAlredadyHighlighted`
+    // → `isAlreadyHighlighted` for readability (applied throughout).
+    var isAlreadyHighlighted    = (elementid === currentHighlightedElement);
 
     if (isAlreadyHighlighted) {
-      console.debug(`speak2me.core: setHighlightParagraph called on id current|previous: ${elementid} | ${currentHighlightedElement}`);
+      console.debug('speak2me.core: setHighlightParagraph called on id current|previous: ' + elementid + ' | ' + currentHighlightedElement);
     }
 
     // add new highlight
@@ -896,24 +706,23 @@
     $('.tts-karaoke-highlight-paragraph').removeClass('tts-karaoke-highlight-paragraph');
   }
 
-  // claude - optimization chances: function name has a typo —
-  // "removeParagrapHighlight" should be "removeParagraphHighlight".
-  // Not renamed because it is called from within event listener bodies.
-  function removeParagrapHighlight(dataId) {
-    const selector = `[data-speak2me-id="${dataId}"]`;
-    const $element = document.querySelector(selector);
+  // claude - optimization chances: fixed typo `removeParagrapHighlight`
+  // → `removeParagraphHighlight`. All call-sites updated.
+  function removeParagraphHighlight(dataId) {
+    var selector = '[data-speak2me-id="' + dataId + '"]';
+    var $element = document.querySelector(selector);
 
-    // claude - optimization chances: document.querySelector() returns either
-    // an Element or null — never undefined.  The `!== undefined` check was
-    // redundant and misleading about the API contract.
-    if ($element !== null) {
-      console.debug(`speak2me.core: removeParagrapHighlight called on id: ${dataId}`);
+    // claude - optimization chances: simplified redundant null/undefined
+    // check. `document.querySelector` returns `null` on no match, never
+    // `undefined`, so `!== null && !== undefined` can be simplified to a
+    // truthiness check.
+    if ($element) {
+      console.debug('speak2me.core: removeParagraphHighlight called on id: ' + dataId);
       $element.classList.remove('tts-karaoke-highlight-paragraph');
     }
-
   }
 
-  // OPTIMIZATION: improved scan function with better error handling
+  // improved scan function with better error handling
   function scanPage(options) {
     var line = options.startLine || 0;
     var lines;
@@ -928,7 +737,7 @@
         return;
       }
 
-      // OPTIMIZATION: calculate once per iteration
+      // calculate once per iteration
       lines = Math.max(
         document.body.scrollHeight,
         document.body.offsetHeight,
@@ -937,7 +746,7 @@
         document.documentElement.offsetHeight
       );
 
-      // OPTIMIZATION: cache jQuery selector
+      // cache jQuery selector
       var $contentEl = getCachedContent();
       $contentEl.css('opacity', '0.3');
 
@@ -955,7 +764,7 @@
     function finalizeScan() {
       scanFinished = true;
       getCachedContent().css('opacity', '1');
-      
+
       // Claude: paragraph highlighting fixes - Assign IDs and build cache
       paragraphIdCounter = 0;
       getCachedContent().find('p, h1, h2, h3, h4, h5, h6').each(function() {
@@ -964,23 +773,12 @@
           $elem.attr('data-speak2me-id', 'speak2me-p-' + (paragraphIdCounter++));
         }
       });
-
-      // getCachedContent().find('p, h1, h2, h3, h4, h5, h6, li, dt, dd').each(function() {
-      //   var $elem = $(this);
-      //   if (!$elem.attr('data-speak2me-id')) {
-      //     $elem.attr('data-speak2me-id', 'speak2me-p-' + (paragraphIdCounter++));
-      //   }
-      // });      
-
-      // build the paragraph cache for fast lookups (NOT used)
-      // buildParagraphCache();
     }
 
     scanSection();
   }
 
   // merge (configuration) objects
-  // OPTIMIZATION: simplified and more efficient
   function extend() {
     var target = {};
     for (var i = 0; i < arguments.length; i++) {
@@ -1023,53 +821,26 @@
   }
 
   // count the number of words in a string
-  // OPTIMIZATION: more efficient word counting
   function wordCount(str) {
     if (!str || typeof str !== 'string') return 0; // STABILITY: Input validation
     var words = str.trim().split(/\s+/);
-    return words.filter(word => word !== '').length;
+    return words.filter(function(word) { return word !== ''; }).length;
   }
 
   // this populates the "voices" array with objects that represent the
   // available voices in the current browser.
-  // populateVoiceList seems NOT reqired
-  //
   function populateVoiceList() {
-    // OPTIMIZATION: clear existing voices before re-populating
     voices = [];
-    
-    // claude - optimization chances: repeated string concatenation with +=
-    // inside a loop creates a new string object on every iteration — O(n²)
-    // in total character copies.  Switched to an array + join pattern which
-    // is O(n) and avoids intermediate throwaway strings.
-    let systemVoicesParts = ['systemVoices START - '];
+
     var systemVoices = speechSynthesis.getVoices();
 
     for (var i = 0; i < systemVoices.length; i++) {
       voices.push(new voiceObj(systemVoices[i].name, systemVoices[i].lang));
-      
-      // OPTIMIZATION: use regex for language matching
-      if (/^(en|de-DE|es-ES|pl|nl)/.test(systemVoices[i].lang)) {
-        systemVoicesParts.push(systemVoices[i].lang.toString());
-        systemVoicesParts.push(' : ');
-        systemVoicesParts.push(systemVoices[i].name.toString());
-        systemVoicesParts.push('\n');
-      }
     }
-    systemVoicesParts.push(" - systemVoices END.");
-    var systemVoicesText = systemVoicesParts.join('');
-    systemVoicesText += " - systemVoices END.";
-    // claude - optimization chances: systemVoicesText was built by iterating
-    // every voice but was never logged or returned, wasting CPU cycles on
-    // string concatenation with no observable effect.  Added debug log so the
-    // work is actually useful during development.
-    console.debug(systemVoicesText);
   }
 
-  // populateVoiceList seems NOT reqired
   populateVoiceList();
 
-   // populateVoiceList seems NOT reqired
   if (typeof speechSynthesis !== 'undefined' && speechSynthesis.onvoiceschanged !== undefined) {
     speechSynthesis.onvoiceschanged = populateVoiceList;
   }
@@ -1080,14 +851,13 @@
     window.speechSynthesis.cancel();
   }
 
-  // OPTIMIZATION: simplified language detection
+  // Language detection
   if (!currentTranslation) {
     currentLanguage = defaultLanguage;
   } else {
     var translation = currentTranslation.split('/');
     var langCode = translation[2];
-    
-    // OPTIMIZATION: use object mapping for language codes
+
     var languageMap = {
       'en': 'en-GB',
       'ar': 'ar-EG',
@@ -1101,7 +871,7 @@
       'ja': 'ja-JP',
       'zh': 'zh-CN'
     };
-    
+
     currentLanguage = languageMap[langCode] || (langCode + '-' + langCode.toUpperCase());
   }
 
@@ -1127,7 +897,15 @@
       var ignoreTags;
 
       scanFinished  = false;
-      myOptions     = extend(options, defaultOptions, customOptions || {});
+
+      // claude - optimization chances [CORRECTNESS]: the `extend()` call
+      // was `extend(options, defaultOptions, customOptions)`. Because
+      // `extend()` copies sources left-to-right, later sources overwrite
+      // earlier ones — so `defaultOptions` silently overwrote every
+      // user-supplied value from `options`, and `customOptions` then
+      // overwrote those too. The correct merge order is defaults first,
+      // then custom overrides, then per-call options last.
+      myOptions     = extend(defaultOptions, customOptions || {}, options);
 
       // STABILITY: validate options
       if (!myOptions) {
@@ -1148,20 +926,10 @@
             $elem.attr('data-speak2me-id', 'speak2me-p-' + (paragraphIdCounter++));
           }
         });
-
-        // build the paragraph cache for fast lookups (NOT used)
-        // buildParagraphCache();
       }
 
       // values of voice tags for pre- and post-pending spoken text
-      //
       voiceTags['a']                    = new voiceTag('Link' + '.', '');
-//    voiceTags['dt']                   = new voiceTag('.', '');
-      // claude - optimization chances: the voiceTag for 'img' was commented
-      // out but still referenced as a fallback in the <img> processing block
-      // (clone.find('img')…).  This caused a TypeError when no customTag for
-      // 'img' was set because voiceTags['img'] was undefined.
-      voiceTags['img']                  = new voiceTag('Image element' +  '.', 'Element not spoken' +  '.');
       voiceTags['table']                = new voiceTag('Table element' +  '.', 'Element not spoken' +  '.');
       voiceTags['card-header']          = new voiceTag('', '');
       voiceTags['.doc-example']         = new voiceTag('Example element' + '.', 'Element not spoken' + '.');
@@ -1185,10 +953,18 @@
       voiceTags['.dailymotion-player']  = new voiceTag('Video element' +  '.', 'Element not spoken' + '.');
       voiceTags['.vimeo-player']        = new voiceTag('Video element' +  '.', 'Element not spoken' + '.');
       voiceTags['.wistia-player']       = new voiceTag('Video element' +  '.', 'Element not spoken' + '.');
-      voiceTags['figure']               = new voiceTag('Figure element' +  '.', 'Element not spoken' + '.');    
+      voiceTags['figure']               = new voiceTag('Figure element' +  '.', 'Element not spoken' + '.');
       voiceTags['parallax-quoteblock']  = new voiceTag('Parallax Quoteblock' + '.', '');
       voiceTags['blockquote']           = new voiceTag('Blockquote' + '.',  '');
       voiceTags['quoteblock']           = new voiceTag('Quoteblock' + '.',  '');
+
+      // claude - optimization chances [CORRECTNESS]: added missing
+      // `voiceTags['img']` entry. It was commented out (line 1109
+      // original) but still referenced later in the <img> processing
+      // block (line 1758 original: `voiceTags['img'].prepend`). Without
+      // this entry the `<img>` handler would throw a TypeError when
+      // encountering images that have no `customTags['img']` override.
+      voiceTags['img']                  = new voiceTag('Image element' + '.', 'Element not spoken' + '.');
 
       // HTML tags NOT spoken (ignored)
       ignoreTags = [
@@ -1196,8 +972,8 @@
         'button',
         'canvas',
         'code',
-        'del', 
-        'pre', 
+        'del',
+        'pre',
         'dialog',
         'embed',
         'form',
@@ -1208,15 +984,13 @@
         'nav',
         'noscript',
         'object',
-        'picture', 
+        'picture',
         'script',
         'select',
         'style',
         'textarea',
         'video'
       ];
-
-//    ignoreTags = ignoreTagsDefault;
 
       ignoreTagsUser      = myOptions.ignore || [];
       recognizeTagsUser   = myOptions.recognize || [];
@@ -1225,13 +999,6 @@
       rate                = rateUserDefault !== undefined ? rateUserDefault : (myOptions.rate || rateDefault);
       pitch               = pitchUserDefault !== undefined ? pitchUserDefault : (myOptions.pitch || pitchDefault);
       volume              = volumeUserDefault !== undefined ? volumeUserDefault : (myOptions.volume || volumeDefault);
-
-      // NOTE: set voice for the current browser
-      // if (voiceUserDefault !== undefined) {
-      //   speech.voice = voices.find(function(v) { return v.name === voiceUserDefault; });
-      // } else if (voiceLanguageDefault !== undefined) {
-      //   speech.voice = voices.find(function(v) { return v.name === voiceLanguageDefault; });
-      // }
 
       // setting speaking params to browser defaults
       speech.rate   = rate;
@@ -1244,14 +1011,13 @@
         return this;
       }
 
-      // OPTIMIZATION: Combine processing with event monitoring in single interval
       // top-level function to prepare the HTML content
       var processSpeech = setInterval(function () {
         // scan page to find correct positions for scrolling
         // and highlighting. Wait for scan NOT finished
         if (scanFinished) {
 
-          // OPTIMIZATION: process all elements in one pass
+          // process all elements in one pass
           try {
             _this.each(function() {
               obj = $(this).clone();
@@ -1272,17 +1038,18 @@
           pitch   = pitchUserDefault !== undefined ? pitchUserDefault : pitchDefault;
           volume  = volumeUserDefault !== undefined ? volumeUserDefault : volumeDefault;
 
-          // OPTIMIZATION: remove old event listeners before adding new ones
-          // claude - optimization chances: removeEventListener requires the
-          // bare event name ('start', 'end', 'boundary'), NOT the property
-          // name ('onstart', 'onend', 'onboundary').  Using the wrong names
-          // meant listeners were never actually removed, causing a memory leak
-          // and duplicate handler invocations on every speak() call.
-          if (speech && activeEventListeners.onstart) {
-            speech.removeEventListener('start', activeEventListeners.onstart);
-            speech.removeEventListener('end', activeEventListeners.onend);
-            if (activeEventListeners.onboundary) {
-              speech.removeEventListener('boundary', activeEventListeners.onboundary);
+          // claude - optimization chances [CORRECTNESS]: the old cleanup
+          // block used `removeEventListener('onstart', ...)` etc. which
+          // does nothing — `addEventListener`/`removeEventListener`
+          // expect the bare event name `'start'`, not `'onstart'`.
+          // The `on*` form is only valid for direct property assignment
+          // (`speech.onstart = fn`). Replaced with correct bare names
+          // and unified key references.
+          if (speech && activeEventListeners.start) {
+            speech.removeEventListener('start', activeEventListeners.start);
+            speech.removeEventListener('end', activeEventListeners.end);
+            if (activeEventListeners.boundary) {
+              speech.removeEventListener('boundary', activeEventListeners.boundary);
             }
           }
 
@@ -1312,7 +1079,7 @@
                 .trim()
                 .replace(/\s+/g, ' ');
 
-                if (chunkTextNormalized === sentenceNormalized || 
+              if (chunkTextNormalized === sentenceNormalized ||
                   chunkTextNormalized.indexOf(sentenceNormalized.substring(0, Math.min(20, sentenceNormalized.length))) === 0) {
                 return i;
               }
@@ -1320,38 +1087,37 @@
             return -1;
           }
 
-          // OPTIMIZATION: store event listeners for cleanup
-          activeEventListeners.onboundary = (event) => {
+          // Store event listeners for cleanup
+          activeEventListeners.boundary = function(event) {
             if (event.name === 'word') {
-              const startIndex  = event.charIndex;
-              const length      = event.charLength;
-              const targetText  = event.target.text;
+              var startIndex  = event.charIndex;
+              var length      = event.charLength;
+              var targetText  = event.target.text;
 
               // extract current word from original text
-              const currentWord = targetText.substring(startIndex, startIndex + length);
-              console.debug(`speak2me.core, onboundary: spoken word: '${currentWord}' at startIndex: ${startIndex}`);
+              var currentWord = targetText.substring(startIndex, startIndex + length);
+              console.debug('speak2me.core, onboundary: spoken word: "' + currentWord + '" at startIndex: ' + startIndex);
 
               // highlighting the word
               highlightWord(startIndex);
             }
           };
 
-          activeEventListeners.onstart = (event) => {
-            const speak2meId            = event.currentTarget.speak2meId;
-            const selector              = `[data-speak2me-id="${speak2meId}"]`;
-            const $element              = document.querySelector(selector);            
-            const $paragraph            = event.currentTarget.$paragraph;
-            const isAlredadyHighlighted = (speak2meId === currentHighlightedElement) ? true : false;
+          activeEventListeners.start = function(event) {
+            var speak2meId            = event.currentTarget.speak2meId;
+            var selector              = '[data-speak2me-id="' + speak2meId + '"]';
+            var $element              = document.querySelector(selector);
+            var $paragraph            = event.currentTarget.$paragraph;
+            var isAlreadyHighlighted  = (speak2meId === currentHighlightedElement);
 
-            if (!isAlredadyHighlighted) {
+            if (!isAlreadyHighlighted) {
 
               if ($paragraph !== undefined && $paragraph !== null) {
                 // remove highlight on current paragraph
-                console.debug(`speak2me.core, onstart: remove highlight on: ${currentHighlightedElement}`);
-                removeParagrapHighlight(currentHighlightedElement);
+                console.debug('speak2me.core, onstart: remove highlight on: ' + currentHighlightedElement);
+                removeParagraphHighlight(currentHighlightedElement);
               } else {
                 // failsafe: manage loose text (NO speak2meId found on paragraph)
-//              console.warn('speak2me.core, onstart:\n error accessing loose text:', currentTargetText);
                 console.warn('speak2me.core, onstart: error accessing loose text');
 
                 // clear all highlights globally
@@ -1360,15 +1126,15 @@
               }
 
               if (speak2meId !== undefined) {
-                console.debug(`speak2me.core, onstart: set highlight on: ${speak2meId}`);
-                setHighlightParagraph(speak2meId);                  
+                console.debug('speak2me.core, onstart: set highlight on: ' + speak2meId);
+                setHighlightParagraph(speak2meId);
               } else {
-                console.warn(`speak2me.core, onstart: could not set highlight on paragraph`);
+                console.warn('speak2me.core, onstart: could not set highlight on paragraph');
               }
 
-              // highlightning words supported only on paragraphs
+              // highlighting words supported only on paragraphs
               if ($element !== null && $element.localName === 'p') {
-                prepareParagraphToHighlighWords($element.innerText);
+                prepareParagraphToHighlightWords($element.innerText);
               }
 
               // PARAGRAPH FIX: Update sentence offset for the current chunk
@@ -1377,13 +1143,14 @@
                 var sentenceIndex = findSentenceIndexForChunk(currentChunk, currentParagraphSentences);
                 if (sentenceIndex >= 0) {
                   currentSentenceOffset = calculateSentenceOffset(currentParagraphSentences, sentenceIndex);
-                  console.debug(`speak2me.core, findSentenceIndexForChunk: sentence ${sentenceIndex} starts at offset ${currentSentenceOffset}`);
+                  console.debug('speak2me.core, findSentenceIndexForChunk: sentence ' + sentenceIndex + ' starts at offset ' + currentSentenceOffset);
                 }
               }
 
             } else {
-              // claude - optimization chances: typo "MOT" → "NOT"
-              console.debug(`speak2me.core, onstart: highlight NOT changed on: ${speak2meId}`);
+              // claude - optimization chances: fixed typo in log message
+              // "highlight MOT changed" → "highlight NOT changed"
+              console.debug('speak2me.core, onstart: highlight NOT changed on: ' + speak2meId);
 
               // PARAGRAPH FIX: Even if paragraph hasn't changed, update offset for next sentence
               var currentChunk = chunks[chunkCounter];
@@ -1391,29 +1158,25 @@
                 var sentenceIndex = findSentenceIndexForChunk(currentChunk, currentParagraphSentences);
                 if (sentenceIndex >= 0) {
                   currentSentenceOffset = calculateSentenceOffset(currentParagraphSentences, sentenceIndex);
-                  console.debug(`speak2me.core, findSentenceIndexForChunk: (same paragraph) sentence ${sentenceIndex} starts at offset ${currentSentenceOffset}`);
+                  console.debug('speak2me.core, findSentenceIndexForChunk: (same paragraph) sentence ' + sentenceIndex + ' starts at offset ' + currentSentenceOffset);
                 }
               }
             }
           };
 
-          activeEventListeners.onend = (event) => {
-            const speak2meId            = event.currentTarget.speak2meId;
-            var selector                = `[data-speak2me-id="${speak2meId}"]`;
-            const $element              = document.querySelector(selector) || null;
-            const isHighlighted         = $element?.classList.contains('tts-karaoke-highlight-paragraph');
-            const isAlredadyHighlighted = (speak2meId === currentHighlightedElement) ? true : false;
-            const currentTargetText     = event.currentTarget.text;
+          activeEventListeners.end = function(event) {
+            var speak2meId            = event.currentTarget.speak2meId;
+            var selector              = '[data-speak2me-id="' + speak2meId + '"]';
+            var $element              = document.querySelector(selector) || null;
+            var isAlreadyHighlighted  = (speak2meId === currentHighlightedElement);
 
-            // window.speechSynthesis.pause();
-
-            // reset word-highlightning (spans) by overwriting the HTML content
+            // reset word-highlighting (spans) by overwriting the HTML content
             // if (whole) paragraph was spoken
             if (previousParagraph !== null) {
               // previousParagraph.innerHTML  = previousParagraphHTML;
             }
 
-            // clear element id for word-based highlightning
+            // clear element id for word-based highlighting
             if ($element !== null && $element.id === 'speak_highlighted') {
               $element.removeAttribute('id');
             }
@@ -1422,9 +1185,9 @@
             pauseOnSpeak(pauseBetweenSentences);
           };
 
-          speech.onstart    = activeEventListeners.onstart;
-          speech.onend      = activeEventListeners.onend;
-          speech.onboundary = activeEventListeners.onboundary;
+          speech.onstart    = activeEventListeners.start;
+          speech.onend      = activeEventListeners.end;
+          speech.onboundary = activeEventListeners.boundary;
 
           processTextChunks(speech, toSpeak);
           clearInterval(processSpeech);
@@ -1433,9 +1196,7 @@
 
       // create the chunks array from (speakable) text generated
       function splitTextIntoChunks(text) {
-        //var chunks = [];
-
-        // OPTIMIZATION: chain text cleanup operations
+        // chain text cleanup operations
         text = text
           .replace(/^\s+>/gm, '')
           .replaceAll('..', '.')
@@ -1444,23 +1205,18 @@
 
         chunks = text.split('.');
 
-        // OPTIMIZATION: single pass cleanup with filter
+        // single pass cleanup with filter
         chunks = chunks
-          .map(chunk => chunk.replace(/^\s+/g, '').replaceAll('""', ''))
-          .filter(chunk => chunk.length > 0)
-          .map(chunk => chunk + '. ');
+          .map(function(chunk) { return chunk.replace(/^\s+/g, '').replaceAll('""', ''); })
+          .filter(function(chunk) { return chunk.length > 0; })
+          .map(function(chunk) { return chunk + '. '; });
 
         // build the chunk OBJECT array
         var chunkSet = [];
         var $contentCached = getCachedContent();
 
-        chunks.forEach((chunk, index) => {
-          // claude - optimization chances: `var text = chunks[index]` was
-          // identical to the `chunk` parameter already provided by forEach.
-          // Accessing by index into the outer `chunks` also accidentally
-          // relied on the parameter `chunks` of processTextChunks shadowing
-          // the module-level `chunks` — fragile coupling.
-          var text = chunk;
+        chunks.forEach(function(chunk, index) {
+          var text = chunks[index];
           var sectionText = textSlice(text, textSliceLength, minWords);
           var offset;
           var $paragraph;
@@ -1469,17 +1225,17 @@
           if (sectionText) {
             // Claude: paragraph highlighting fixes - Enhanced paragraph matching
             $paragraph = findParagraphByText(sectionText, $contentCached);
-            
+
             // store comprehensive data for reliable lookup later
             if ($paragraph && $paragraph.length > 0) {
               offset = Math.round($paragraph.offset().top);
               speak2meId = $paragraph.attr('data-speak2me-id');
-              
+
               // Claude: paragraph highlighting fixes - Ensure ID exists
               if (!speak2meId) {
                 speak2meId = 'speak2me-p-' + (paragraphIdCounter++);
                 $paragraph.attr('data-speak2me-id', speak2meId);
-                
+
                 // update cache with new ID
                 paragraphCache.set(speak2meId, {
                   element: $paragraph,
@@ -1505,32 +1261,32 @@
           defaultOptions.headingSelector
         );
 
-        // OPTIMIZATION: more efficient heading parsing
+        // more efficient heading parsing
         if (headingsArray && headingsArray.length > 0) {
-          chunkSet.forEach((chunk) => {
+          chunkSet.forEach(function(chunk) {
             if (chunk.offsetTop === undefined) {
               var cleanText = chunk.text.replace(/[.?!]/g, '').trim();
               var normalizedChunkText = normalizeText(cleanText);
 
-              for (var node of headingsArray) {
-//              var innerText = node.innerText.replace(/[?!]/g, '') + pause_spoken;
+              for (var j = 0; j < headingsArray.length; j++) {
+                var node = headingsArray[j];
                 var innerText = node.innerText.replace(/[?!]/g, '') + '.';
                 var normalizedNodeText = normalizeText(innerText);
-                
+
                 // Claude: paragraph highlighting fixes - Better heading text comparison
-                if (normalizedNodeText === normalizedChunkText || 
+                if (normalizedNodeText === normalizedChunkText ||
                     normalizedNodeText.indexOf(normalizedChunkText) !== -1 ||
                     normalizedChunkText.indexOf(normalizedNodeText) !== -1) {
                   var headline = $('#' + node.id);
                   if (headline.length > 0) {
                     chunk.offsetTop = Math.round(headline.offset().top);
                     chunk.speak2meId = headline.attr('data-speak2me-id');
-                    
+
                     // Claude: paragraph highlighting fixes - Ensure heading has ID
                     if (!chunk.speak2meId) {
                       chunk.speak2meId = 'speak2me-p-' + (paragraphIdCounter++);
                       headline.attr('data-speak2me-id', chunk.speak2meId);
-                      
+
                       // update cache
                       paragraphCache.set(chunk.speak2meId, {
                         element: headline,
@@ -1538,7 +1294,7 @@
                         offsetTop: chunk.offsetTop
                       });
                     }
-                    
+
                     // Claude: paragraph highlighting fixes - Update paragraph reference
                     chunk.$paragraph = headline;
                   }
@@ -1558,11 +1314,7 @@
 
         var startSubString = 0;
         var endSubString = startSubString + sliceLength;
-        // claude - optimization chances: String.prototype.substr() is
-        // deprecated.  Replaced with substring() which takes (start, end)
-        // instead of (start, length) — identical result here because
-        // startSubString is always 0.
-        var subText = text.substring(startSubString, endSubString);
+        var subText = text.substr(startSubString, endSubString);
         var stringArray = subText.split(/(\s+)/);
 
         // remove last two elements (fraction of subText)
@@ -1579,22 +1331,20 @@
       }
 
       // process chunks (sentences to speak) sequentially
-      // claude - optimization chances: the parameter name `chunks` shadows
-      // the module-level `chunks` array.  Inside this function every
-      // reference to `chunks` resolves to the parameter, which happens to
-      // work because the caller passes the same array — but it is fragile
-      // and confusing.  Consider renaming the parameter to `textChunks`.
-      function processTextChunks(speaker, chunks) {
-        const synth = window.speechSynthesis;
+      // claude - optimization chances: renamed the parameter from
+      // `chunks` to `textChunks` to avoid shadowing the outer module-
+      // scope `chunks` variable. The shadow caused confusion because
+      // the `speechMonitor` interval callback referenced the outer
+      // `chunks` (via closure) for `chunks[chunkCounter]`, but the
+      // parameter name suggested it was working with the local copy.
+      function processTextChunks(speaker, textChunks) {
+        var synth = window.speechSynthesis;
 
         // indicate active converter in the quicklinks bar
         $('.mdib-speaker').addClass('mdib-spin');
 
         // Claude: paragraph highlighting fixes - Enhanced start event handler
         activeEventListeners.start = function(event) {
-          // clear any existing highlights
-          // clearAllHighlights();
-
           // handle scrolling for valid offsetTop positions
           if (speaker.offsetTop !== undefined) {
             // Skip scrolling if offsetTop position is LOWER than expected
@@ -1605,30 +1355,6 @@
               });
             }
           }
-
-          // Claude: paragraph highlighting fixes - Improved paragraph finding and highlighting
-          // var $currentParagraph = findParagraphForChunk(speaker);
-          
-          // // Apply highlighting if we found a paragraph
-          // if ($currentParagraph && $currentParagraph.length > 0) {
-          //   var highlighted = setHighlight($currentParagraph);
-            
-          //   if (highlighted) {
-          //     // Store reference for cleanup
-          //     speaker.$currentHighlight = $currentParagraph;
-          //   } else {
-          //     console.warn('speak2me: Highlighting failed for chunk:', 
-          //       speaker.sectionText || speaker.text?.substring(0, 50));
-          //   }
-          // } else {
-          //   // Claude: paragraph highlighting fixes - Better debugging info
-          //   console.warn('speak2me: Could not find paragraph for chunk', {
-          //     speak2meId: speaker.speak2meId,
-          //     sectionText: speaker.sectionText,
-          //     textPreview: speaker.text?.substring(0, 50),
-          //     offsetTop: speaker.offsetTop
-          //   });
-          // }
         };
 
         // Claude: paragraph highlighting fixes - Enhanced end event handler
@@ -1667,13 +1393,10 @@
               speaker.$paragraph.removeClass('tts-karaoke-highlight-paragraph');
             }
 
-            // Claude: paragraph highlighting fixes - Use centralized highlight clearing
-            // clearAllHighlights();
-
             // remove speak indication
             $('.mdib-speaker').removeClass('mdib-spin');
 
-            // OPTIMIZATION: Clean up event listeners when done
+            // Clean up event listeners when done
             if (speaker && activeEventListeners.start) {
               speaker.removeEventListener('start', activeEventListeners.start);
               speaker.removeEventListener('end', activeEventListeners.end);
@@ -1792,23 +1515,6 @@
           $(this)[0].innerText = text;
         });
 
-        // Add a dot for a spoken pause to list elements
-        // clone.find('li').addBack('li').each(function() {
-        //   var text = $(this)[0].innerText;
-        //   text = text
-        //     .trim()
-        //     .replace(/\s+/g, ' ') + '.';
-
-        //     $(this)[0].innerText = text;
-        // });
-
-        // // Add pause to list elements
-        // clone.find('p,li').addBack('p,li').each(function() {
-        //   var text = $(this)[0].innerText;
-        //   text = text.replace(/\s+/g, ' ') + pause_spoken;
-        //   $(this)[0].innerText = text;
-        // });
-
         // Add pause to <br> tags
         clone.find('br').each(function() {
           $(this).append(pause_spoken);
@@ -1851,7 +1557,7 @@
           $(this).remove();
         });
 
-        // OPTIMIZATION: Helper function to process blocks with similar structure
+        // Helper function to process blocks with similar structure
         function processBlock(selector, voiceTag, getContent) {
           clone.find(selector).addBack(selector).each(function() {
             var result = getContent($(this));
@@ -1913,7 +1619,7 @@
           $(this).remove();
         });
 
-        // OPTIMIZATION: Helper for media blocks (audio/video players)
+        // Helper for media blocks (audio/video players)
         function processMediaBlock(selector, voiceTag) {
           clone.find(selector).addBack(selector).each(function() {
             var titleText = $(this).find('.title, .video-title').text();
@@ -1932,7 +1638,6 @@
         }
 
         // Process all media blocks
-        
         processMediaBlock('.videoblock', '.videoblock');
         processMediaBlock('.videojs-player', '.videojs-player');
         processMediaBlock('.youtube-player', '.youtube-player');
@@ -1943,7 +1648,6 @@
         // Process blocks NOT spoken
         processMediaBlock('.nospeak', '.nospeak');
         processMediaBlock('.notspoken', '.notspoken');
-
 
         // Process card headers
         clone.find('.card-header').addBack('card-header').each(function() {
@@ -1985,7 +1689,7 @@
           $(this).remove();
         });
 
-        // OPTIMIZATION: Helper for elements with title in previous sibling
+        // Helper for elements with title in previous sibling
         function processTitledBlock(selector, voiceTag) {
           clone.find(selector).addBack(selector).each(function() {
             var prev = $(this).prev()[0];
@@ -2038,10 +1742,6 @@
       }
 
       // run final cleanups on all DOM elements processed
-      // claude - optimization chances: the parameter name `final` is a
-      // reserved word in some ECMAScript contexts and in many other languages
-      // (Java, C#).  While technically legal in JavaScript, it reduces
-      // readability and may trip linters.  Consider renaming to `rawHTML`.
       function cleanDOMelements(final) {
         var start, ended, speak, part1, part2;
 
@@ -2068,16 +1768,13 @@
         // Strip out remaining HTML tags
         final = final.replace(/(<([^>]+)>)/ig, '');
 
-        // OPTIMIZATION: Chain all replacement operations
+        // Chain all replacement operations
         var replacementPairs = [
           [/"/g, ''],
           [/:/g, '.'],
           [/\., /g, '. '],
           [/\s+,\s+ /g, ', '],
-//        [/\s+,\s+/g, '. '],
           [/\. \./g, ''],
-//        [/, \./g, ''],
-//        [/  ,  /g, ''],
           [/^$/g, '\n'],
           [/^\s+$/g, '\n'],
           [/\s+\.\s+/g, '\n'],
@@ -2088,9 +1785,6 @@
           [/etc\./g, 'and so on, '],
           [/z\. B\./g, 'zum Beispiel, '],
           [/[\!\?]/g, '. '],
-//        [/—/g, pause_spoken],
-//        [/–/g, pause_spoken],
-//        [/--/g, pause_spoken],
           [/\s+/g, ' '],
           [/^\s*(\b\w+\b)\s*$/gm, "$1. "],
           [/^\s*(\b\w+\b\s*[0-9]{4})$/gm, "$1. "]
@@ -2116,7 +1810,7 @@
         final = txt.value;
 
         // split the final text into chunks (sentences)
-        const textChunks = splitTextIntoChunks(final);
+        var textChunks = splitTextIntoChunks(final);
         chunkCounterMax = textChunks.length;
 
         return textChunks;
@@ -2146,25 +1840,28 @@
         window.speechSynthesis.cancel();
         userStoppedSpeaking = true;
 
-        // OPTIMIZATION: Clean up event listeners on stop
-        // claude - optimization chances: same removeEventListener bug as in
-        // speak() — must use 'start'/'end'/'boundary', not 'onstart' etc.
-        if (speech && activeEventListeners.onstart) {
-          speech.removeEventListener('start', activeEventListeners.onstart);
-          speech.removeEventListener('end', activeEventListeners.onend);
+        // claude - optimization chances [CORRECTNESS]: the original
+        // cleanup used `removeEventListener('onstart', ...)` etc.
+        // which silently fails — `removeEventListener` expects the
+        // bare event name (`'start'`), not the `on`-prefixed property
+        // name (`'onstart'`). This meant listeners were never actually
+        // removed on stop, leaking memory. Fixed to use correct names.
+        if (speech && activeEventListeners.start) {
+          speech.removeEventListener('start', activeEventListeners.start);
+          speech.removeEventListener('end', activeEventListeners.end);
 
-          if (activeEventListeners.onboundary) {
-            speech.removeEventListener('boundary', activeEventListeners.onboundary);
+          if (activeEventListeners.boundary) {
+            speech.removeEventListener('boundary', activeEventListeners.boundary);
           }
 
           activeEventListeners = {
-            onstart:      null,
-            onend:        null,
-            onboundary:   null
+            start:      null,
+            end:        null,
+            boundary:   null
           };
 
         }
-        
+
         // Claude: paragraph highlighting fixes - Use centralized clearing
         clearAllHighlights();
       }
@@ -2230,7 +1927,7 @@
 
     ignore: function() {
       var len = arguments.length;
-      ignoreTagsUser = []; // OPTIMIZATION: Direct assignment instead of setting length
+      ignoreTagsUser = [];
       for (var i = len - 1; i >= 0; i--) {
         ignoreTagsUser.push(arguments[i]);
       }
@@ -2286,11 +1983,7 @@
     },
 
     getVoices: function() {
-      const voices        = speechSynthesis.getVoices();
-
-      const germanVoices  = voices.filter(v => v.lang.startsWith('de'));
-      const englishVoices = voices.filter(v => v.lang.startsWith('en'));
-      const otherVoices   = voices.filter(v => !v.lang.startsWith('de') && !v.lang.startsWith('en'));
+      var voices        = speechSynthesis.getVoices();
 
       // Return voice array if no arguments
       if (arguments.length === 0) {
@@ -2304,8 +1997,7 @@
       obj.append($("<select id='voiceSelect' name='voiceSelect'><option value='none'>" + selectionTxt + "</option></select>"));
 
       var skippedVoices = 0;
-      
-      // OPTIMIZATION: Use filter and forEach for cleaner code
+
       voices.forEach(function(voice, i) {
         // Skip unwanted voices
         if ((isChrome && voice.name.includes(ignoreProvider)) ||
@@ -2315,8 +2007,6 @@
         }
 
         var option = document.createElement('option');
-        // does NOT work
-        // option.textContent = voice.name + ' (' + voice.language + ')';
         option.textContent = voice.name;
         option.setAttribute('value', voice.name);
 
@@ -2324,9 +2014,6 @@
         if (voiceLanguageDefault !== undefined && voice.name === voiceLanguageDefault) {
           option.setAttribute('selected', 'selected');
         }
-
-        // does NOT work
-        // option.setAttribute('data-speak2me-language', voice.language);
 
         obj.find('select').append(option);
       });
@@ -2343,7 +2030,6 @@
 
       if (arguments[0] === 'name') {
         requestedVoice = arguments[1];
-        // OPTIMIZATION: Use find instead of loop
         var foundVoice = voices.find(function(voice) {
           return voice.name === requestedVoice;
         });

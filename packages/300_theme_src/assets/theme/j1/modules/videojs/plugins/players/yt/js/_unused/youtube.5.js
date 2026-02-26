@@ -1,12 +1,12 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/videojs/js/plugins/players/yt/youtube.js
+ # ~/assets/theme/j1/modules/videojs/js/plugins/players/yt/youtube.js (5)
  # Provides YouTube Playback Technology (Tech) for Video.js V8 and newer
  #
  # Product/Info:
  # http://jekyll.one
  #
- # Copyright (C) 2023-2026 Juergen Adams
+ # Copyright (C) 2023-2025 Juergen Adams
  # Copyright (C) 2014-2015 Gary Katsevman, Benoit Tremblay
  #
  # YouTube Playback Technology (Tech) is licensed under MIT License.
@@ -16,7 +16,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 3.1.7 for J1 Template */
+/* Version 3.1.5 for J1 Template */
 
 /* global define, YT */
 (function (root, factory) {
@@ -31,19 +31,12 @@
     root.Youtube = factory(root.videojs);
   }
 }(this, function(videojs) {
-  "use strict";
+  'use strict';
 
-  // ---------------------------------------------------------------------------
-  // Constants
-  // ---------------------------------------------------------------------------
-
-  const env          = 'dev';                                                   // dev | prod
-  const isDev        = (env === "dev") ? true : false;
   const consoleLogId = generateId();
 
-  // ---------------------------------------------------------------------------
-  // Module variables
-  // ---------------------------------------------------------------------------
+  // var isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
+  var isDev = true;
 
   var logger      = log4javascript.getLogger('videoJS.plugin.youtube');
   var _isOnMobile = videojs.browser.IS_IOS || videojs.browser.IS_NATIVE_ANDROID;
@@ -370,22 +363,6 @@
       }
       // END extract video data from YT video
 
-      // dispatch a custom DOM event so external modules (e.g. skipad.js)
-      // are notified when YT video data becomes available.
-      try {
-        var ytVideoDataEvent = new CustomEvent('ytVideoDataResolved', {
-          detail: {
-            videoData: this.ytVideoData_,
-            videoTitle: this.ytVideoTitle_,
-            source: 'onPlayerReady'
-          }
-        });
-        document.dispatchEvent(ytVideoDataEvent);
-        isDev && logger.debug('\n' + 'dispatched event: ytVideoDataResolved (source: onPlayerReady)');
-      } catch (evtErr) {
-        isDev && logger.debug('\n' + 'failed to dispatch ytVideoDataResolved: ' + evtErr);
-      }
-
       this.playerReady_ = true;
       this.triggerReady();
 
@@ -444,21 +421,6 @@
                 isDev && logger.debug('\n' + 'updated YT video data (author now available): '
                   + JSON.stringify(this.ytVideoData_));
 
-                // Re-dispatch the event with updated data (author field is
-                // only populated by the YT IFrame API after playback begins).
-                try {
-                  var ytVideoDataEvent = new CustomEvent('ytVideoDataResolved', {
-                    detail: {
-                      videoData: this.ytVideoData_,
-                      videoTitle: this.ytVideoTitle_,
-                      source: 'onPlayerStateChange:PLAYING'
-                    }
-                  });
-                  document.dispatchEvent(ytVideoDataEvent);
-                  isDev && logger.debug('\n' + 'dispatched event: ytVideoDataResolved (source: onPlayerStateChange:PLAYING)');
-                } catch (evtErr) {
-                  isDev && logger.debug('\n' + 'failed to dispatch ytVideoDataResolved: ' + evtErr);
-                }
               }
             }
           } catch (e) {
@@ -1038,12 +1000,10 @@
   var dependencies_met_page_ready = setInterval (() => {
     var pageState      = $('#content').css("display");
     var pageVisible    = (pageState === 'block') ? true : false;
-    var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
+//  var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
-    if (j1CoreFinished && pageVisible) {
-//  if (pageVisible) {      
-      const isDev     = (j1.env === "development" || j1.env === "dev") ? true : false;
-
+//  if (j1CoreFinished && pageVisible) {
+    if (pageVisible) {      
       startTimeModule = Date.now();
 
       isDev && logger.debug('\n' + 'initializing plugin: started');

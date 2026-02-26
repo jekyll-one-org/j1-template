@@ -16,7 +16,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 3.1.7 for J1 Template */
+/* Version 3.1.5 for J1 Template */
 
 /* global define, YT */
 (function (root, factory) {
@@ -33,21 +33,10 @@
 }(this, function(videojs) {
   "use strict";
 
-  // ---------------------------------------------------------------------------
-  // Constants
-  // ---------------------------------------------------------------------------
+  const consoleLogId  = generateId();
 
-  const env          = 'dev';                                                   // dev | prod
-  const isDev        = (env === "dev") ? true : false;
-  const consoleLogId = generateId();
-
-  // ---------------------------------------------------------------------------
-  // Module variables
-  // ---------------------------------------------------------------------------
-
-  var logger      = log4javascript.getLogger('videoJS.plugin.youtube');
-  var _isOnMobile = videojs.browser.IS_IOS || videojs.browser.IS_NATIVE_ANDROID;
-  var Tech        = videojs.getTech('Tech');
+  var _isOnMobile     = videojs.browser.IS_IOS || videojs.browser.IS_NATIVE_ANDROID;
+  var Tech            = videojs.getTech('Tech');
 
   var startTimeModule;
   var endTimeModule;
@@ -337,7 +326,7 @@
 
       this.ytPlayer = new YT.Player(this.options_.techId, playerConfig);
 
-      isDev && logger.debug('\n' + 'created ' + this.name_ + ' player on ID: ' + this.el_.firstChild.id);
+      // isDev && logger.debug('\n' + 'created ' + this.name_ + ' player on ID: ' + this.el_.firstChild.id);
     } // END initYTPlayer
 
     onPlayerReady() {
@@ -361,30 +350,14 @@
         this.ytVideoData_  = rawVideoData || {};
         this.ytVideoTitle_ = (rawVideoData && rawVideoData.title) ? rawVideoData.title : '';
 
-        isDev && logger.debug('\n' + 'extracted YT video data: '
+        // isDev && logger.debug('\n' + 'extracted YT video data: '
           + JSON.stringify(this.ytVideoData_));
       } catch (e) {
         this.ytVideoData_  = {};
         this.ytVideoTitle_ = '';
-        isDev && logger.debug('\n' + 'failed to extract YT video data: ' + e);
+        // isDev && logger.debug('\n' + 'failed to extract YT video data: ' + e);
       }
       // END extract video data from YT video
-
-      // dispatch a custom DOM event so external modules (e.g. skipad.js)
-      // are notified when YT video data becomes available.
-      try {
-        var ytVideoDataEvent = new CustomEvent('ytVideoDataResolved', {
-          detail: {
-            videoData: this.ytVideoData_,
-            videoTitle: this.ytVideoTitle_,
-            source: 'onPlayerReady'
-          }
-        });
-        document.dispatchEvent(ytVideoDataEvent);
-        isDev && logger.debug('\n' + 'dispatched event: ytVideoDataResolved (source: onPlayerReady)');
-      } catch (evtErr) {
-        isDev && logger.debug('\n' + 'failed to dispatch ytVideoDataResolved: ' + evtErr);
-      }
 
       this.playerReady_ = true;
       this.triggerReady();
@@ -441,28 +414,13 @@
                 this.ytVideoData_  = freshData;
                 this.ytVideoTitle_ = freshData.title || this.ytVideoTitle_;
 
-                isDev && logger.debug('\n' + 'updated YT video data (author now available): '
+                // isDev && logger.debug('\n' + 'updated YT video data (author now available): '
                   + JSON.stringify(this.ytVideoData_));
 
-                // Re-dispatch the event with updated data (author field is
-                // only populated by the YT IFrame API after playback begins).
-                try {
-                  var ytVideoDataEvent = new CustomEvent('ytVideoDataResolved', {
-                    detail: {
-                      videoData: this.ytVideoData_,
-                      videoTitle: this.ytVideoTitle_,
-                      source: 'onPlayerStateChange:PLAYING'
-                    }
-                  });
-                  document.dispatchEvent(ytVideoDataEvent);
-                  isDev && logger.debug('\n' + 'dispatched event: ytVideoDataResolved (source: onPlayerStateChange:PLAYING)');
-                } catch (evtErr) {
-                  isDev && logger.debug('\n' + 'failed to dispatch ytVideoDataResolved: ' + evtErr);
-                }
               }
             }
           } catch (e) {
-            isDev && logger.debug('\n' + 'failed to re-read YT video data on PLAYING: ' + e);
+            // isDev && logger.debug('\n' + 'failed to re-read YT video data on PLAYING: ' + e);
           }
 
           this.trigger('timeupdate');
@@ -958,16 +916,16 @@
   function apiLoaded() {
     YT.ready(() => {
       Youtube.isApiReady = true;
-      isDev && logger.debug('\n' + 'API loaded successfully');
+      // isDev && logger.debug('\n' + 'API loaded successfully');
 
       for (var i = 0; i < Youtube.apiReadyQueue.length; ++i) {
         Youtube.apiReadyQueue[i].initYTPlayer();
       }
-      isDev && logger.debug('\n' + 'created all players from queue: #' + i);
+      // isDev && logger.debug('\n' + 'created all players from queue: #' + i);
 
       endTimeModule = Date.now();
-      isDev && logger.debug('\n' + 'initializing plugin: finished');
-      isDev && logger.debug('\n' + 'plugin initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+      // isDev && logger.debug('\n' + 'initializing plugin: finished');
+      // isDev && logger.debug('\n' + 'plugin initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
     });
   } // END apiLoaded
 
@@ -1028,7 +986,7 @@
     }
 
     head.appendChild(style);
-    isDev && logger.debug('\n' + 'added additional CSS styles');
+    // isDev && logger.debug('\n' + 'added additional CSS styles');
   } // END injectCss
 
   Youtube.apiReadyQueue = [];
@@ -1036,13 +994,17 @@
   // initialize plugin if page ready
   // -------------------------------------------------------------------------
   var dependencies_met_page_ready = setInterval (() => {
+    var logger         = log4javascript.getLogger('videoJS.plugin.youtube');
+
     var pageState      = $('#content').css("display");
     var pageVisible    = (pageState === 'block') ? true : false;
     var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
     if (j1CoreFinished && pageVisible) {
-//  if (pageVisible) {      
-      const isDev     = (j1.env === "development" || j1.env === "dev") ? true : false;
+//  if (pageVisible) {    
+
+      const isDev         = (j1.env === "development" || j1.env === "dev") ? true : false;
+      //var isDev         = true;
 
       startTimeModule = Date.now();
 

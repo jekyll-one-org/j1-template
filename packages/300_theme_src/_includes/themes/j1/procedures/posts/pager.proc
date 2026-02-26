@@ -85,7 +85,8 @@
         last_pager_url = '<li class="page-item"><a class="page-link disabled" title="Back to {{pager_back_button_text}}">{{pager_back_button_text}}</a></li>';
       }
 
-      document.write( last_pager_url );
+      // document.write( last_pager_url );
+
       j1.writeCookie({
         name: user_state_cookie_name,
         data: user_state

@@ -8,7 +8,7 @@
  # http://jekyll.one
  #
  # Copyright (c) 2020 Kevin Aguiar <kevin.aguiar@mobiliza.com.br>
- # Copyright (C) 2023-2026 Juergen Adams
+ # Copyright (C) 2023-2025 Juergen Adams
  #
  # VideoJS-Vimeo is licensed under MIT License.
  # See: https://github.com/mobiliza/videojs-vimeo/blob/0.6.0/LICENSE 
@@ -17,7 +17,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 2.11 for J1 Template */
+/*! @vimeo/player v2.10.0 | (c) 2019 Vimeo | MIT License | https://github.com/vimeo/player.js */
 
 /* global define, VM */
 (function (global, factory) {
@@ -2165,46 +2165,25 @@
 
   // Since the iframe can't be touched using Vimeo's way of embedding,
   // let's add a new styling rule to have the same style as `vjs-tech`
-  // Claude - Vimeo plugins fixes.
-  // BUG 3 FIX: the original injectCss() only positioned the Vimeo iframe.
-  // Two additional rules are required:
-  //
-  //  a) z-index: the VideoJS control bar is a sibling element rendered after
-  //     the tech's div.vjs-vimeo.  Without an explicit z-index the bar is
-  //     painted behind the iframe on some browsers, even when visibility is
-  //     correct.  A z-index of 1 is sufficient to guarantee it sits on top.
-  //
-  //  b) vjs-vimeo-hide-controlbar: a CSS hook symmetric with the YouTube
-  //     tech's `vjs-youtube-hide-controlbar` class.  Consumers (or the
-  //     skipad adapter) can add/remove this class at runtime to swap between
-  //     VideoJS controls and native Vimeo controls without reloading the
-  //     player, e.g. vjsPlayer.addClass('vjs-vimeo-hide-controlbar').
-  //
   function injectCss() {
     if (cssInjected) {
       return;
     }
-
     cssInjected = true;
-    const css   = `
-      .vjs-vimeo iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-      }
-      .vjs-vimeo .vjs-control-bar {
-        z-index: 1;
-      }
-      .vjs-vimeo.vjs-vimeo-hide-controlbar .vjs-control-bar {
-        display: none !important;
-      }
-    `;
+    const css = `
+    .vjs-vimeo iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  `;
+    const head = document.head || document.getElementsByTagName('head')[0];
 
-    const head  = document.head || document.getElementsByTagName('head')[0];
     const style = document.createElement('style');
-    style.type  = 'text/css';
+
+    style.type = 'text/css';
 
     if (style.styleSheet) {
       style.styleSheet.cssText = css;
@@ -2239,17 +2218,7 @@
         url: this.options_.source.src,
         byline: false,
         portrait: false,
-        title: false,
-        // Claude - Vimeo plugins fixes.
-        // BUG 2 FIX: the Vimeo Player SDK accepts a `controls` option.
-        // Without it the native in-iframe Vimeo controls are always visible,
-        // regardless of what VideoJS does with its own control bar.
-        // Default to 0 (hidden) so VideoJS manages playback via its own UI,
-        // exactly as the YouTube tech suppresses YouTube's native overlay with
-        // playerVars.controls = 0.  Pass vmControls: 1 in the player options
-        // to opt back into native Vimeo controls (e.g. for embed-only pages).
-        //
-        controls: this.options_.vmControls ? 1 : 0
+        title: false
       };
 
       if (this.options_.autoplay) {
@@ -2331,20 +2300,8 @@
       return div;
     }
 
-    // Claude - Vimeo plugins fixes.
-    // BUG 1 FIX: returning `true` unconditionally told VideoJS that the tech
-    // provides its own native controls, causing it to call
-    // `player.usingNativeControls(true)`.  That adds the CSS class
-    // `vjs-using-native-controls` which applies `visibility: hidden` to the
-    // VideoJS control bar — the bar is rendered in the DOM but invisible.
-    // The YouTube tech never overrides controls(), so VideoJS always shows
-    // its own bar for YouTube.  Mirror that pattern: default to false so
-    // VideoJS manages its own control bar, and only defer to native Vimeo
-    // controls when the consumer explicitly opts in via vmControls: 1 in the
-    // player options (analogous to YouTube's ytControls option).
-    //
     controls() {
-      return !!(this.options_.vmControls);
+      return true;
     }
 
     supportsFullScreen() {

@@ -84,11 +84,11 @@ module.exports = (function (options) {
     bsFormClearButton: function () {
 //    $('.position-relative :input').on('keydown focus', function() {
       $(':input').on('keydown focus change mouseover', function() {
-        if ($(this).val().length > 0) {
+        if ($(this).val() !== null && $(this).val().length > 0) {
           $(this).nextAll('.form-clear').removeClass('d-none');
         }
       }).on('keydown keyup blur', function() {
-        if ($(this).val().length === 0) {
+        if ($(this).val() !== null && $(this).val().length === 0) {
           $(this).nextAll('.form-clear').addClass('d-none');
         }
       });

@@ -111,6 +111,7 @@
     "set-env:mode": "cross-var cross-env npm_config_mode=$npm_package_config_mode && echo done."
   },
   "dependencies": {
+    "bootstrap": "^5.3.8",
     "cross-env": "^7.0.3",
     "cross-var": "^1.1.0",
     "fs": "^0.0.1-security",

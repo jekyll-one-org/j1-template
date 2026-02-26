@@ -71,7 +71,7 @@ resource_options:
 :ytp_sky_elements:                      true
 :ytp_hb:                                false
 :dm_video:                              false
-:vm_video:                              false
+:vm_video:                              true
 :masonry:                               true
 :justifiedGallery:                      true
 :dm_gallery:                            true
