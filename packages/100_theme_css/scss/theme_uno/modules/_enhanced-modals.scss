@@ -50,31 +50,28 @@ body {
 // Base styles
 // -----------------------------------------------------------------------------
 .modal {
-		.modal-content {
-			border-radius: $border-radius !important;
-			box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.5) !important;
+	.modal-content {
+		border-radius: 0 !important;
+		box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.5) !important;
+	}
+
+	.modal-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		border-radius: 0 !important;
+
+		.lead {
+			margin-bottom: 0;
+			align-self: flex-start;
 		}
-    // jadams, 2021-10-23: Adjust height to navbar
-    .modal-header {
-	    	border-top-left-radius: 0;
-	    	border-top-right-radius: 0;
-        height: 80px;
-        .modal-title {
-            font-weight: 300;
-        }
-        .lead {
-			    font-size: 1.5rem;
-			    font-weight: 400;
-        }
-			  .close {
-			    padding-top: 1rem;
-			    // padding-right: 1rem;
-			    padding-bottom: 2rem;
-			    // padding-left: 1rem;
-          border: 0;
-          background-color: transparent;
-			  }
-    }
+
+		.close {
+			margin-left: auto;
+			align-self: flex-end;
+		}
+	}
+
     .modal-footer {
 	    padding: 2rem 2rem 2rem 2rem !important;
 	    border-top: 1px solid $gray-300 !important;
@@ -150,7 +147,7 @@ body {
 			max-width:100%;
 			.modal-content {
 				width:100%;
-				border-radius: 0.3rem !important;
+				// border-radius: 0.3rem !important;
 			}
 		}
 		.modal-frame {
@@ -208,7 +205,7 @@ body {
 			max-width:100%;
 			.modal-content {
 				width:100%;
-				border-radius: 0.3rem !important;
+				// border-radius: 0.3rem !important;
 				box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.5);
 			}
 		}

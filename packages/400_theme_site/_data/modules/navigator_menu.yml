@@ -23,12 +23,14 @@
 - item:                                 Tour
   sublevel:
 
-    - title:                            Image
-      href:                             /pages/public/tour/image_data/
-      icon:                             image
     - title:                            Audio
       href:                             /pages/public/tour/audio_data/
       icon:                             volume-high
+
+    - title:                            Image
+      href:                             /pages/public/tour/image_data/
+      icon:                             image
+
     - title:                            Video
       href:                             /pages/public/tour/video_data/
       icon:                             video
@@ -36,16 +38,18 @@
     - title:                            Typography
       href:                             /pages/public/tour/typography/
       icon:                             format-text
+
     - title:                            Icons
       href:                             /pages/public/tour/mdi_icon_font/
       icon:                             fan
+
     - title:                            Extensions
       href:                             /pages/public/tour/asciidoc_extensions/
       icon:                             format-annotation-plus
 
-    # - title:                          Modals
-    #   href:                           /pages/public/tour/modals/
-    #   icon:                           image
+    - title:                            Modals
+      href:                             /pages/public/tour/modals/
+      icon:                             image
 
     - title:                            Tables
       href:                             /pages/public/tour/responsive_tables/
@@ -54,9 +58,11 @@
     - title:                            Themes
       href:                             /pages/public/tour/themes/
       icon:                             theme-light-dark
+
     - title:                            Highligher
       href:                             /pages/public/tour/rouge/
       icon:                             code-parentheses
+
     - title:                            Search
       href:                             /pages/public/tour/quicksearch/
       icon:                             magnify

@@ -21,7 +21,7 @@ categories:                             [ Tour ]
 tags:                                   [ Video, Module ]
 
 image:
-  path:                                 /assets/image/module/attic/1920x1280/alexander-shatov.jpg
+  path:                                 /assets/image/module/attic/1920x1280/modern-dance.jpg
   width:                                1920
   height:                               1280
 
@@ -41,7 +41,7 @@ resource_options:
   - attic:
       slides:
         # AI generated video
-        - url:                          /assets/video/headers/present_videos/Tanzszene_Video_muted.mp4
+        - url:                          /assets/video/headers/present_videos/modern-dance.mp4
           alt:                          Broadway Underground Video
           title:                        Video Player
           tagline:                      Playback Video

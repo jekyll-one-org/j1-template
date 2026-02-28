@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/navigator.js
+ # ~/assets/theme/j1/adapter/js/navigator.js (1)
  # Liquid template to adapt Navigator Core functions
  #
  # Product/Info:
@@ -43,7 +43,8 @@ regenerate:                             true
 
 {% comment %} Liquid procedures
 -------------------------------------------------------------------------------- {% endcomment %}
-{% capture select_color %}themes/{{site.template.name}}/procedures/global/select_color.proc{% endcapture %}
+{% comment %} claude - dead code: captured but never referenced {% endcomment %}
+{% comment %} {% capture select_color %}themes/{{site.template.name}}/procedures/global/select_color.proc{% endcapture %} {% endcomment %}
 
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -53,8 +54,10 @@ regenerate:                             true
 {% comment %} Set config files
 {% assign auth_manager_config           = site.j1_auth %}
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config               = site.data.j1_config %}
-{% assign blocks                        = site.data.blocks %}
+{% comment %} claude - dead code: immediately overwritten on line below by site.data.template_settings {% endcomment %}
+{% comment %} {% assign template_config               = site.data.j1_config %} {% endcomment %}
+{% comment %} claude - dead code: assigned but never referenced {% endcomment %}
+{% comment %} {% assign blocks                        = site.data.blocks %} {% endcomment %}
 {% assign modules                       = site.data.modules %}
 
 {% assign themes_defaults               = modules.defaults.themes.defaults %}
@@ -88,17 +91,22 @@ regenerate:                             true
 {% assign quicklinks_options            = nav_quicklinks_defaults | merge: nav_quicklinks_settings %}
 {% assign authclient_options            = nav_authclient_defaults | merge: nav_authclient_settings %}
 
-{% assign nav_bar_id                    = navigator_defaults.nav_bar.id %}
+{% comment %} claude - dead code: assigned but never referenced {% endcomment %}
+{% comment %} {% assign nav_bar_id                    = navigator_defaults.nav_bar.id %} {% endcomment %}
 {% assign nav_menu_id                   = navigator_defaults.nav_menu.id %}
 {% assign nav_quicklinks_id             = navigator_defaults.nav_quicklinks.id %}
-{% assign nav_navbar_media_breakpoint   = navigator_defaults.nav_bar.media_breakpoint %}
+{% comment %} claude - dead code: assigned but never referenced {% endcomment %}
+{% comment %} {% assign nav_navbar_media_breakpoint   = navigator_defaults.nav_bar.media_breakpoint %} {% endcomment %}
 {% assign authclient_modals_id          = navigator_defaults.nav_authclient.xhr_container_id %}
 
+{% comment %} claude - dead code: animate_duration assigned but never referenced in template output {% endcomment %}
+{% comment %}
 {% if nav_bar_options.dropdown_animate_duration != null %}
  {% assign animate_duration             = nav_bar_options.dropdown_animate_duration %}
 {% else %}
  {% assign animate_duration             = 1 %}
 {% endif %}
+{% endcomment %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -112,11 +120,12 @@ regenerate:                             true
 Set|Overload Liquid vars hardwired to NOT break the (MD) style
 ToDo: Remove configuration from j1_navigator.yml
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign dropdown_border_height        = "3" %}
+{% comment %} claude - dead code: assigned but never referenced {% endcomment %}
+{% comment %} {% assign dropdown_border_height        = "3" %} {% endcomment %}
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/navigator.js
+ # ~/assets/theme/j1/adapter/js/navigator.js (1)
  # JS Adapter for J1 Navigator
  #
  # Product/Info:
@@ -145,14 +154,19 @@ ToDo: Remove configuration from j1_navigator.yml
 "use strict";
 j1.adapter.navigator = ((j1, window) => {
 
-  const isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
+  // claude - nav optimization chances: simplified redundant ternary
+  const environment = '{{environment}}';
+  const isDev       = (environment === "development" || environment === "dev") ? true : false;
 
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
-  var environment                 = '{{environment}}';
-  var dclFinished                 = false;
-  var moduleOptions               = {};
-  var state                       = 'not_started';
+
+  // claude - dead code: variables declared but never used
+  // var dclFinished                 = false;
+  // claude - dead code: declared but never used
+  // var moduleOptions               = {};
+  // claude - dead code: state managed via _this.setState/_this.getState, this variable is never referenced
+  // var state                       = 'not_started';
 
   var nav_menu_id                 = '{{nav_menu_id}}';
   var nav_quicklinks_id           = '{{nav_quicklinks_id}}';
@@ -161,11 +175,13 @@ j1.adapter.navigator = ((j1, window) => {
   var authclient_xhr_data_element = '{{authclient_options.xhr_data_element}}';
   var authclient_modals_data_path = '{{authclient_options.xhr_data_path}}';
 
-  var nav_menu_data_path          = '{{nav_menu_options.data_path}}';
-  var nav_quicklinks_data_path    = '{{quicklinks_options.data_path}}';
+  // claude - dead code: declared but never used
+  // var nav_menu_data_path          = '{{nav_menu_options.data_path}}';
+  // var nav_quicklinks_data_path    = '{{quicklinks_options.data_path}}';
 
-  var colors_data_path            = '{{template_config.colors_data_path}}';
-  var font_size_data_path         = '{{template_config.font_size_data_path}}';
+  // claude - dead code: declared but never used
+  // var colors_data_path            = '{{template_config.colors_data_path}}';
+  // var font_size_data_path         = '{{template_config.font_size_data_path}}';
 
   var cookie_names                = j1.getCookieNames();
   var cookie_user_session_name    = cookie_names.user_session;
@@ -174,8 +190,9 @@ j1.adapter.navigator = ((j1, window) => {
   var themesEnabled               = {{themes_options.enabled}};
 
   var user_session                = {};
-  var user_session_merged         = {};
-  var session_state               = {};
+  // claude - dead code: declared but never used
+  // var user_session_merged         = {};
+  // var session_state               = {};
 
   // switcher|state
   var desktopThemesLocalLoaded    =  false;
@@ -187,17 +204,20 @@ j1.adapter.navigator = ((j1, window) => {
 
   var authClientEnabled;
   var appDetected;
-  var json_data;
+  // claude - dead code: declared but never used
+  // var json_data;
   var _this;
   var logger;
   var logText;
 
   // date|time
-  var startTime;
-  var endTime;
+  // claude - dead code: only startTimeModule/endTimeModule are used
+  // var startTime;
+  // var endTime;
   var startTimeModule;
   var endTimeModule;
-  var timeSeconds;
+  // claude - dead code: declared but never used
+  // var timeSeconds;
 
   // ---------------------------------------------------------------------------
   // helper functions
@@ -246,11 +266,15 @@ j1.adapter.navigator = ((j1, window) => {
       var navMenuOptions            = {};
       var navQuicklinksOptions      = {};
       var navAuthClientOptions      = {};
-      var navAuthMAnagerConfig      = {};
+      // claude - nav optimization chances: fixed typo navAuthMAnagerConfig -> navAuthManagerConfig
+      var navAuthManagerConfig      = {};
 
-      var user_state                = {};
-      var cookie_names              = j1.getCookieNames();
-      var cookie_user_state_name    = cookie_names.user_state;
+      // claude - dead code: declared but never referenced
+      // var user_state                = {};
+      // claude - dead code: cookie_names already declared at module scope (line ~170)
+      // var cookie_names              = j1.getCookieNames();
+      // claude - dead code: declared but never referenced
+      // var cookie_user_state_name    = cookie_names.user_state;
 
       var themesOptions             = {};
 
@@ -260,15 +284,16 @@ j1.adapter.navigator = ((j1, window) => {
       navQuicklinksConfig           = $.extend({}, {{quicklinks_options | replace: '=>', ':' }});
       navAuthClientConfig           = $.extend({}, {{authclient_options | replace: '=>', ':' }});
 
-      navAuthMAnagerConfig          = $.extend({}, {{authentication_options | replace: '=>', ':' }});
-      authClientEnabled             = navAuthMAnagerConfig.enabled;
+      navAuthManagerConfig           = $.extend({}, {{authentication_options | replace: '=>', ':' }});
+      authClientEnabled             = navAuthManagerConfig.enabled;
 
       themesOptions                 = $.extend({}, {{themes_options | replace: '=>', ':' | replace: 'nil', '""' }});
 
       // merge|overload module CONFIG by DEFAULTS
       navBarOptions                  = $.extend(true, {}, navDefaults.nav_bar,  navBarConfig);
       navMenuOptions                 = $.extend(true, {}, navDefaults.nav_menu, navMenuConfig);
-      navQuicklinksOptions           = $.extend(true, {}, navDefaults.nav_bar,  navQuicklinksConfig,);
+      // claude - nav optimization chances: removed trailing comma in argument list
+      navQuicklinksOptions           = $.extend(true, {}, navDefaults.nav_bar,  navQuicklinksConfig);
       navAuthClientConfig            = $.extend(true, {}, navAuthClientConfig,  navDefaults.nav_authclient);
 
       // save config settings for later use
@@ -277,10 +302,10 @@ j1.adapter.navigator = ((j1, window) => {
       _this['navMenuOptions']        = navMenuOptions;
       _this['navQuicklinksOptions']  = navQuicklinksOptions;
       _this['navAuthClientConfig']   = navAuthClientConfig;
-      _this['navAuthManagerConfig']  = navAuthMAnagerConfig;
+      _this['navAuthManagerConfig']  = navAuthManagerConfig;
 
-      // load frontmatter options (currently NOT used)
-      if (options !== null) {var frontmatterOptions = $.extend({}, options)}
+      // claude - dead code: frontmatter options currently not used
+      // if (options !== null) {var frontmatterOptions = $.extend({}, options)}
       /* eslint-enable */
 
       // start module processing time
@@ -324,9 +349,10 @@ j1.adapter.navigator = ((j1, window) => {
 
       // initialize navigator core
       var dependencies_met_html_loaded = setInterval(() => {
+        // claude - nav optimization chances: simplified redundant ternary
         var htmloaded = (j1.xhrDOMState['#'+navQuicklinksOptions.xhr_container_id] === 'success'
           && j1.xhrDOMState['#'+navAuthClientConfig.xhr_container_id] === 'success'
-          && j1.xhrDOMState['#'+navMenuOptions.xhr_container_id] === 'success') ? true : false;
+          && j1.xhrDOMState['#'+navMenuOptions.xhr_container_id] === 'success');
 
         // initialize navigator core if all AJAX loads finished
         if (htmloaded) {
@@ -374,12 +400,14 @@ j1.adapter.navigator = ((j1, window) => {
       // -------------------------------------------------------------------
       var dependencies_met_module_initialized = setInterval (() => {
         var pageState          = $('#content').css("display");
-        var pageVisible        = (pageState === 'block') ? true: false;
-        var j1CoreFinished     = (j1.getState() === 'finished') ? true: false;
+        // claude - nav optimization chances: simplified redundant ternaries
+        var pageVisible        = (pageState === 'block');
+        var j1CoreFinished     = (j1.getState() === 'finished');
 
         {% if themes_options.enabled %}
-        var themesFinished     = (j1.adapter.themes.getState() === 'finished') ? true: false;
-        var themeMenuLoaded    = (desktopThemesLocalLoaded && desktopThemesRemoteLoaded) ? true: false;
+        // claude - nav optimization chances: simplified redundant ternaries
+        var themesFinished     = (j1.adapter.themes.getState() === 'finished');
+        var themeMenuLoaded    = (desktopThemesLocalLoaded && desktopThemesRemoteLoaded);
 
         if (pageVisible && j1CoreFinished && themesFinished && themeMenuLoaded) {
         {% else %}
@@ -619,7 +647,8 @@ j1.adapter.navigator = ((j1, window) => {
       var navbar_scrolled_color;
       var navbar_scrolled_style;
       var bg_scrolled;
-      var bg_collapsed;
+      // claude - dead code: declared but never used
+      // var bg_collapsed;
       var style;
 
       // Set dymanic styles
@@ -631,12 +660,15 @@ j1.adapter.navigator = ((j1, window) => {
 
       // set navbar background colors
       bg_scrolled    = bg_primary;
-      bg_collapsed   = bg_primary;
+      // claude - dead code: assigned but never used
+      // bg_collapsed   = bg_primary;
 
       // navBar styles
-      var navPrimaryColor     = navDefaults.nav_primary_color;
+      // claude - dead code: assigned but never used
+      // var navPrimaryColor     = navDefaults.nav_primary_color;
 
-      if (navBarOptions.background_color_scrolled == 'default' ) {
+      // claude - nav optimization chances: use strict equality for string comparison
+      if (navBarOptions.background_color_scrolled === 'default' ) {
         navbar_scrolled_color = bg_primary;
       } else {
         navbar_scrolled_color = navBarOptions.background_color_scrolled;
@@ -655,26 +687,20 @@ j1.adapter.navigator = ((j1, window) => {
 
       logger.debug('set dynamic styles for the theme');
 
-      // set|resolve navMenuOptions
-      navMenuOptions.dropdown_font_size               = navMenuOptions.dropdown_font_size;
-      navMenuOptions.megamenu_font_size               = navMenuOptions.megamenu_font_size;
-
-      // set|resolve navBarOptions
-      navBarOptions.background_color_full             = navBarOptions.background_color_full;
-
-      // set|resolve navMenuOptions
-      navMenuOptions.menu_item_color                  = navMenuOptions.menu_item_color;
-      navMenuOptions.menu_item_color_hover            = navMenuOptions.menu_item_color_hover;
-      navMenuOptions.menu_item_dropdown_color         = navMenuOptions.menu_item_dropdown_color;
-      navMenuOptions.dropdown_item_color              = navMenuOptions.dropdown_item_color;
-      navMenuOptions.dropdown_background_color_hover  = navMenuOptions.dropdown_background_color_hover;
-      navMenuOptions.dropdown_background_color_active = navMenuOptions.dropdown_background_color_active;
-      navMenuOptions.dropdown_border_color            = navMenuOptions.dropdown_border_color;
-
-      // set|resolve navQuicklinksOptions
-      navQuicklinksOptions.icon_color                 = navQuicklinksOptions.icon_color;
-      navQuicklinksOptions.icon_color_hover           = navQuicklinksOptions.icon_color_hover;
-      navQuicklinksOptions.background_color           = navQuicklinksOptions.background_color;
+      // claude - dead code: removed self-assignments (property = same property is a no-op)
+      // navMenuOptions.dropdown_font_size               = navMenuOptions.dropdown_font_size;
+      // navMenuOptions.megamenu_font_size               = navMenuOptions.megamenu_font_size;
+      // navBarOptions.background_color_full             = navBarOptions.background_color_full;
+      // navMenuOptions.menu_item_color                  = navMenuOptions.menu_item_color;
+      // navMenuOptions.menu_item_color_hover            = navMenuOptions.menu_item_color_hover;
+      // navMenuOptions.menu_item_dropdown_color         = navMenuOptions.menu_item_dropdown_color;
+      // navMenuOptions.dropdown_item_color              = navMenuOptions.dropdown_item_color;
+      // navMenuOptions.dropdown_background_color_hover  = navMenuOptions.dropdown_background_color_hover;
+      // navMenuOptions.dropdown_background_color_active = navMenuOptions.dropdown_background_color_active;
+      // navMenuOptions.dropdown_border_color            = navMenuOptions.dropdown_border_color;
+      // navQuicklinksOptions.icon_color                 = navQuicklinksOptions.icon_color;
+      // navQuicklinksOptions.icon_color_hover           = navQuicklinksOptions.icon_color_hover;
+      // navQuicklinksOptions.background_color           = navQuicklinksOptions.background_color;
 
       // timeline styles
       style  = '<style>';
@@ -740,45 +766,42 @@ j1.adapter.navigator = ((j1, window) => {
     // Apply settings from configuration
     // -------------------------------------------------------------------------
     applyNavigatorSettings: (navDefaults, navBarOptions, navMenuOptions, navQuicklinksOptions) => {
-      var logger              = log4javascript.getLogger('j1.adapter.navigator.applyThemeSettings');
+      // claude - nav optimization chances: fixed logger name (was 'applyThemeSettings')
+      var logger              = log4javascript.getLogger('j1.adapter.navigator.applyNavigatorSettings');
       var gridBreakpoint_lg   = '992px';
       var gridBreakpoint_md   = '768px';
       var gridBreakpoint_sm   = '576px';
 
-      var navPrimaryColor     = navDefaults.nav_primary_color;
+      // claude - dead code: assigned but never used
+      // var navPrimaryColor     = navDefaults.nav_primary_color;
       var navbar_scrolled_style;
-      var navbar_scrolled_color = '#212529';
-
-      navbar_scrolled_style  = '<style id="navbar_scrolled_color">';
-      navbar_scrolled_style += '  .navbar-scrolled {';
-      navbar_scrolled_style += '    background-color: ' + navbar_scrolled_color + ' !important;';
-      navbar_scrolled_style += '  }';
-      navbar_scrolled_style += '</style>';
-
-      $('head').append(navbar_scrolled_style);
+      // claude - dead code: this style is immediately overridden by applyThemeSettings
+      // which appends the same id="navbar_scrolled_color" with the correct computed color.
+      // Having duplicate element IDs is invalid HTML.
+      // var navbar_scrolled_color = '#212529';
+      // navbar_scrolled_style  = '<style id="navbar_scrolled_color">';
+      // navbar_scrolled_style += '  .navbar-scrolled {';
+      // navbar_scrolled_style += '    background-color: ' + navbar_scrolled_color + ' !important;';
+      // navbar_scrolled_style += '  }';
+      // navbar_scrolled_style += '</style>';
+      // $('head').append(navbar_scrolled_style);
 
       logger.debug('set dynamic styles');
 
-      // set|resolve navMenuOptions
-      navMenuOptions.dropdown_font_size               = navMenuOptions.dropdown_font_size;
-      navMenuOptions.megamenu_font_size               = navMenuOptions.megamenu_font_size;
-
-      // set|resolve navBarOptions
-      navBarOptions.background_color_full             = navBarOptions.background_color_full;
-
-      // set|resolve navMenuOptions
-      navMenuOptions.menu_item_color                  = navMenuOptions.menu_item_color;
-      navMenuOptions.menu_item_color_hover            = navMenuOptions.menu_item_color_hover;
-      navMenuOptions.menu_item_dropdown_color         = navMenuOptions.menu_item_dropdown_color;
-      navMenuOptions.dropdown_item_color              = navMenuOptions.dropdown_item_color;
-      navMenuOptions.dropdown_background_color_hover  = navMenuOptions.dropdown_background_color_hover;
-      navMenuOptions.dropdown_background_color_active = navMenuOptions.dropdown_background_color_active;
-      navMenuOptions.dropdown_border_color            = navMenuOptions.dropdown_border_color;
-
-      // set|resolve navQuicklinksOptions
-      navQuicklinksOptions.icon_color                 = navQuicklinksOptions.icon_color;
-      navQuicklinksOptions.icon_color_hover           = navQuicklinksOptions.icon_color_hover;
-      navQuicklinksOptions.background_color           = navQuicklinksOptions.background_color;
+      // claude - dead code: removed self-assignments (property = same property is a no-op)
+      // navMenuOptions.dropdown_font_size               = navMenuOptions.dropdown_font_size;
+      // navMenuOptions.megamenu_font_size               = navMenuOptions.megamenu_font_size;
+      // navBarOptions.background_color_full             = navBarOptions.background_color_full;
+      // navMenuOptions.menu_item_color                  = navMenuOptions.menu_item_color;
+      // navMenuOptions.menu_item_color_hover            = navMenuOptions.menu_item_color_hover;
+      // navMenuOptions.menu_item_dropdown_color         = navMenuOptions.menu_item_dropdown_color;
+      // navMenuOptions.dropdown_item_color              = navMenuOptions.dropdown_item_color;
+      // navMenuOptions.dropdown_background_color_hover  = navMenuOptions.dropdown_background_color_hover;
+      // navMenuOptions.dropdown_background_color_active = navMenuOptions.dropdown_background_color_active;
+      // navMenuOptions.dropdown_border_color            = navMenuOptions.dropdown_border_color;
+      // navQuicklinksOptions.icon_color                 = navQuicklinksOptions.icon_color;
+      // navQuicklinksOptions.icon_color_hover           = navQuicklinksOptions.icon_color_hover;
+      // navQuicklinksOptions.background_color           = navQuicklinksOptions.background_color;
 
       // set dymanic styles
       var style;
@@ -789,7 +812,8 @@ j1.adapter.navigator = ((j1, window) => {
 
       // set navbar background colors
       var bg_scrolled   = bg_primary;
-      var bg_collapsed  = bg_primary;
+      // claude - dead code: assigned but never used
+      // var bg_collapsed  = bg_primary;
 
       // navBar styles
       // -----------------------------------------------------------------------
@@ -846,12 +870,13 @@ j1.adapter.navigator = ((j1, window) => {
       style += '</style>';
       $('head').append(style);
 
-      style  = '<style>';
-      style += '  var(--bg-primary) {';
-      style += '    color: ' + bg_scrolled;
-      style += '  }';
-      style += '</style>';
-      $('head').append(style);
+      // claude - dead code: var(--bg-primary) is not a valid CSS selector
+      // style  = '<style>';
+      // style += '  var(--bg-primary) {';
+      // style += '    color: ' + bg_scrolled;
+      // style += '  }';
+      // style += '</style>';
+      // $('head').append(style);
 
       // size of brand image
       style  = '<style>';
@@ -994,6 +1019,8 @@ j1.adapter.navigator = ((j1, window) => {
       style += '    }';
       style += '  }';
       style += '</style>';
+      // claude - nav optimization chances: added missing append (style was built but never injected)
+      $('head').append(style);
 
       style  = '<style>';
       style += '  @media screen and (min-width: ' + gridBreakpoint_lg + ') {';
@@ -1002,6 +1029,8 @@ j1.adapter.navigator = ((j1, window) => {
       style += '    }';
       style += '  }';
       style += '</style>';
+      // claude - nav optimization chances: added missing append (style was built but never injected)
+      $('head').append(style);
 
       // 1st level dropdown menu styles
       style  = '<style>';
@@ -1030,7 +1059,12 @@ j1.adapter.navigator = ((j1, window) => {
       style += '    }';
       style += '  }';
       style += '</style>';
+      // claude - nav optimization chances: added missing append (style was built but never injected)
+      $('head').append(style);
 
+      {% comment %} claude - nav optimization chances: dropdown_style was never assigned as a Liquid variable,
+         so this condition was always false. Added assignment from nav_menu_options. {% endcomment %}
+      {% assign dropdown_style = nav_menu_options.dropdown_style %}
       {% if dropdown_style == 'raised' %}
       style  = '<style>';
       style += '  @media screen and (min-width: ' + gridBreakpoint_lg + ') {';
