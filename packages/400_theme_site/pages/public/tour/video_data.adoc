@@ -46,6 +46,7 @@ resource_options:
           title:                        Video Player
           tagline:                      Playback Video
           isVideo:                      true
+          mute:                         false
 #         loop:                         false
 ---
 

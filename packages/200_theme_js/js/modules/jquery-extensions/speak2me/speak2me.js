@@ -729,6 +729,10 @@
     $container.find('p, h1, h2, h3, h4, h5, h6, li, dt, dd').each(function() {
       var $elem = $(this);
       var elemText = normalizeText($elem.text());
+
+      // claude - not-spoken: skip elements with class "not-spoken"
+      // so they are never matched for paragraph highlighting
+      if ($elem.hasClass('not-spoken')) return;
       
       // Skip empty elements
       if (elemText.length === 0) return;
@@ -958,7 +962,9 @@
       
       // Claude: paragraph highlighting fixes - Assign IDs and build cache
       paragraphIdCounter = 0;
-      getCachedContent().find('p, h1, h2, h3, h4, h5, h6').each(function() {
+      // claude - not-spoken: exclude .not-spoken elements from ID assignment
+      // so they are never targeted for highlighting or scrolling
+      getCachedContent().find('p, h1, h2, h3, h4, h5, h6').not('.not-spoken').each(function() {
         var $elem = $(this);
         if (!$elem.attr('data-speak2me-id')) {
           $elem.attr('data-speak2me-id', 'speak2me-p-' + (paragraphIdCounter++));
@@ -1142,7 +1148,9 @@
         scanFinished = true;
         // Claude: paragraph highlighting fixes - Also build cache when resuming
         paragraphIdCounter = 0;
-        getCachedContent().find('p, h1, h2, h3, h4, h5, h6').each(function() {
+        // claude - not-spoken: exclude .not-spoken elements from ID assignment
+        // so they are never targeted for highlighting or scrolling
+        getCachedContent().find('p, h1, h2, h3, h4, h5, h6').not('.not-spoken').each(function() {
           var $elem = $(this);
           if (!$elem.attr('data-speak2me-id')) {
             $elem.attr('data-speak2me-id', 'speak2me-p-' + (paragraphIdCounter++));
@@ -1748,6 +1756,10 @@
 
         // Remove DOM objects marked by class "speak2me-ignore"
         clone.find('.speak2me-ignore').addBack('.speak2me-ignore').html('');
+
+        // claude - not-spoken: Remove DOM objects marked by class "not-spoken"
+        // so they are neither parsed nor spoken and skipped entirely
+        clone.find('.not-spoken').addBack('.not-spoken').html('');
 
         // Search for prepend data specified by "data-speak2me-prepend"
         clone.find('[data-speak2me-prepend]').addBack('[data-speak2me-prepend]').each(function() {
