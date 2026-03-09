@@ -25,16 +25,18 @@
 @import "modules/gallery";
 @import "modules/lightbox";
 
-// @import "modules/lightgallery";
+@import "modules/lightgallery";
 
 @import "modules/masonry";
 @import "modules/navigator";
 @import "modules/rouge";
 @import "modules/searcher";
+
+@import "modules/skipad";
+
 @import "modules/slider";
 @import "modules/speak2me";
-@import "modules/tocbot";
 @import "modules/toccer";
-@import "modules/totop";
-@import "modules/tts_karaoke";
 @import "modules/videojs";
+
+@import "modules/yt-metadata-fetcher";

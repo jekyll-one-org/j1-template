@@ -256,7 +256,7 @@ exclude_from_search:                    true
 
       {% comment %} Link buttons
       ------------------------------------------------------------------------------ {% endcomment %}
-      {% if home_url != "none" %}<li id="quickLinksHomeButton" class="nav-icon"><a id="home_id" href="{{home_url}}" aria-label="{{home_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{home_icon}} {{icon_size}}"></i></a></li>{% endif %}
+      {% if home_url != "none" %}<li id="quickLinksHomeButton" class="nav-icon"><a id="home_id" href="{{home_url}}" title="{{home_label}}" aria-label="{{home_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{home_icon}} {{icon_size}}"></i></a></li>{% endif %}
       {% if disqus_url != "none" %}<li id="quickLinksDisqusButton" class="nav-icon"><a id="disqus_id" href="{{disqus_url}}" aria-label="{{disqus_label}}" target="blank"><i class="nav-icon {{icon_family}} {{icon_family}}-{{disqus_icon}} {{icon_size}}"></i></a></li>{% endif %}
       {% if github_url != "none" %}<li id="quickLinksGithubButton" class="nav-icon"><a id="github_id" href="{{github_url}}" aria-label="{{github_label}}" target="blank"><i class="nav-icon {{icon_family}} {{icon_family}}-{{github_icon}} {{icon_size}}"></i></a></li>{% endif %}
       {% if patreon_url != "none" %}<li id="quickLinksPatreonButton" class="nav-icon"><a id="patreon_id" href="{{patreon_url}}" aria-label="{{patreon_label}}" target="blank"><i class="nav-icon {{icon_family}} {{icon_family}}-{{patreon_icon}} {{icon_size}}"></i></a></li>{% endif %}
@@ -266,13 +266,13 @@ exclude_from_search:                    true
 
       {% comment %} Action buttons
       ------------------------------------------------------------------------------ {% endcomment %}
-      {% if show_quicksearch_icon %}<li id="quickLinksSearchButton" class="nav-icon {{quicksearch_action}}"><a href="#" aria-label="{{quicksearch_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{quicksearch_icon}} {{icon_size}}"></i></a></li>{% endif %}
+      {% if show_quicksearch_icon %}<li id="quickLinksSearchButton" class="nav-icon {{quicksearch_action}}"><a href="#" title="{{quicksearch_label}}" aria-label="{{quicksearch_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{quicksearch_icon}} {{icon_size}}"></i></a></li>{% endif %}
       {% if show_docsearch_icon %}<li id="quickLinksDocSearchButton" class="nav-icon {{docsearch_action}}"><a href="#" aria-label="{{docsearch_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{docsearch_icon}} {{icon_size}}"></i></a></li>{% endif %}
       {% if show_auth_manager_icon %}<li id="quickLinksSignInOutButton" class="nav-icon sign-inout" style="display: none;"><a class="nav-icon" id="navLinkSignInOut" aria-label="SignOut" href="#" data-bs-toggle="modal" data-bs-target="#{{signin_modal_id}}"><i id="iconSignInOut" class="nav-icon {{icon_family}} {{icon_family}}-{{signin_icon}} {{icon_size}}"></i></a></li>{% endif %}
-      {% if show_cookieconsent_icon %}<li id="quickLinksCookieButton" class="nav-icon {{cookies_action}}" style="display: block;"><a href="#" aria-label="{{cookies_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{cookies_icon}} {{icon_size}}"></i></a></li>{% endif %}
-      {% if show_translator_icon %}<li id="quickLinksTranslateButton" class="nav-icon {{translate_action}}" style="display: block;"><a href="#" aria-label="{{translate_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{translate_icon}} {{icon_size}}"></i></a></li>{% endif %}
-      {% if show_speak2me_icon %}<li id="quickLinksSpeakButton" class="nav-icon {{speak2me_action}}" style="display: block;"><a href="#" aria-label="{{speak2me_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{speak2me_icon}} {{icon_size}}"></i></a></li>{% endif %}
-      {% if show_theme_toggler_icon %}<li id="quickLinksThemeTogglerButton" class="nav-icon {{theme_toggler_action}}" style="display: block;"><a href="#" aria-label="{{theme_toggler_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{theme_toggler_icon}} {{icon_size}}"></i></a></li>{% endif %}
+      {% if show_cookieconsent_icon %}<li id="quickLinksCookieButton" class="nav-icon {{cookies_action}}" style="display: block;"><a href="#" title="{{cookies_label}}" aria-label="{{cookies_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{cookies_icon}} {{icon_size}}"></i></a></li>{% endif %}
+      {% if show_translator_icon %}<li id="quickLinksTranslateButton" class="nav-icon {{translate_action}}" style="display: block;"><a href="#" title="{{translate_label}}" aria-label="{{translate_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{translate_icon}} {{icon_size}}"></i></a></li>{% endif %}
+      {% if show_speak2me_icon %}<li id="quickLinksSpeakButton" class="nav-icon {{speak2me_action}}" style="display: block;"><a href="#" title="{{speak2me_label}}"  aria-label="{{speak2me_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{speak2me_icon}} {{icon_size}}"></i></a></li>{% endif %}
+      {% if show_theme_toggler_icon %}<li id="quickLinksThemeTogglerButton" class="nav-icon {{theme_toggler_action}}" style="display: block;"><a href="#" title="{{theme_toggler_label}}" aria-label="{{theme_toggler_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{theme_toggler_icon}} {{icon_size}}"></i></a></li>{% endif %}
 
       {% comment %} Unused
       ------------------------------------------------------------------------------

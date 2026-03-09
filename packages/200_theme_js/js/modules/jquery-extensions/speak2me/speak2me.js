@@ -42,6 +42,8 @@
 
 (function($) {
 
+  const ENVIRONTMENT        = 'dev';                                            // dev | prod
+  
   const defaultOptions = {
     // Where to render the table of contents.
     tocSelector: '.js-toc',

@@ -138,7 +138,9 @@ settings:
                                           the ground and running - <b>free to use</b> for both <b>personal</b> and
                                           <b>business purposes</b>.
                                         </p>
-                                        <h5 class="notoc fw-bold d-flex justify-content-center flex-wrap mt-4">The most featured free Bootstrap V5 Theme for Jekyll</h5>
+                                        <p class="fw-bold d-flex justify-content-center flex-wrap mt-4" style="font-size: 1.5rem">
+                                          The most featured free Bootstrap V5 Theme for Jekyll
+                                        </p>
               buttons:
 
                 - name:                 Roundtrip

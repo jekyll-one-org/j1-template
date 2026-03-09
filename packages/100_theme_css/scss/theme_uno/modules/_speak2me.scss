@@ -37,3 +37,46 @@ div.settings-area input {
 div.voice-table {
   display: none;
 }
+
+// TTS Highlighting tester
+// -----------------------------------------------------------------------------
+
+.text-display {
+    background: #eeeeee;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    min-height: 150px;
+    font-size: 20px;
+    color: #333; 
+}
+
+.text-display span {
+    transition: all 0.15s ease;
+    padding: 2px 0;
+}
+
+.text-display span.highlight {
+    background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+    color: #fff;
+    font-weight: 600;
+    border-radius: 4px;
+    padding: 2px 4px;
+}
+
+// Module speak2me
+// -----------------------------------------------------------------------------
+
+.tts-karaoke-highlight-paragraph {
+    background-color: #E0E0E0 !important;
+    border-left: 4px solid #757575 !important;
+    padding-left: 12px !important;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.tts-karaoke-highlight-word {
+    background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+    color: #242323;
+    font-weight: 600;
+    border-radius: 4px;
+    padding: 2px 4px;
+}
