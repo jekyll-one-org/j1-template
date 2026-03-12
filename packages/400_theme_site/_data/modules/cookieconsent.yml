@@ -24,6 +24,13 @@ description:
 #
 settings:
 
+  postSelectionCallback:                j1.adapter.cookieConsent.cbCookie       # called after the user has made his selection
+
+  # claude - pass options to postSelectionCallback callback function
+  # ----------------------------------------------------------------------------
+  reloadPageOnChange:                   true                                    # reload current page if user settings has been changed
+  expireCookiesOnRequiredOnly:          true
+
   # ----------------------------------------------------------------------------
   # GENERAL options
   # ----------------------------------------------------------------------------

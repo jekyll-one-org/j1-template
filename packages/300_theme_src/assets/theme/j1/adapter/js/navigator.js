@@ -743,12 +743,12 @@ j1.adapter.navigator = ((j1, window) => {
       $('head').append(style);
 
       // extended modal styles
-      style  = '<style>';
-      style += '  .modal-dialog.modal-notify.modal-primary .modal-header {';
-      style += '    background-color: ' + bg_scrolled + ' !important;';
-      style += '  }';
-      style += '</style>';
-      $('head').append(style);
+      // style  = '<style>';
+      // style += '  .modal-dialog.modal-notify.modal-primary .modal-header {';
+      // style += '    background-color: ' + bg_scrolled + ' !important;';
+      // style += '  }';
+      // style += '</style>';
+      // $('head').append(style);
 
       // nav|pills styles
       style  = '<style>';

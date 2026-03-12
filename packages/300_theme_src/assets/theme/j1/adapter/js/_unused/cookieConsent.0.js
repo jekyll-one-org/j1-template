@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/cookieConsent.js (1)
+ # ~/assets/theme/j1/adapter/js/cookieConsent.js (0)
  # Liquid template to create the Template Adapter for J1 CookieConsent
  #
  # Product/Info:
@@ -62,7 +62,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/cookieConsent.js (1)
+ # ~/assets/theme/j1/adapter/js/cookieConsent.js (0)
  # JS Adapter for J1 CookieConsent
  #
  #  Product/Info:
@@ -293,8 +293,7 @@ j1.adapter.cookieConsent = ((j1, window) => {
     // callback for CookieConsent module after the user has
     // made his selection
     // -------------------------------------------------------------------------
-    cbCookie: (options) => {
-
+    cbCookie: () => {
       var url             = new liteURL(window.location.href);
       var hostname        = url.hostname;
       var gaCookies       = j1.findCookie('_ga');
@@ -346,8 +345,7 @@ j1.adapter.cookieConsent = ((j1, window) => {
           j1.expireCookie({ name: cookie_names.user_consent });
           j1.expireCookie({ name: cookie_names.user_translate });
         }
-
-        if (options.dataChanged && cookieConsentOptions.reloadPageOnChange) {
+        if (cookieConsentOptions.reloadPageOnChange) {
           // reload current page (skip cache)
           location.reload(true);
         }
@@ -402,7 +400,7 @@ j1.adapter.cookieConsent = ((j1, window) => {
           }
         }
 
-        if (options.dataChanged && cookieConsentOptions.reloadPageOnChange) {
+        if (cookieConsentOptions.reloadPageOnChange) {
           // reload current page (skip cache)
           location.reload(true);
         }

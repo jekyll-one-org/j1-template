@@ -142,12 +142,12 @@ exclude_from_search:                    true
 
               <h2 class="ml-2 mt-5 mb-3">{{speak2me_options.modal.settings.voice_control_title}}</h2>
               <!-- start control buttons -->
-              <div class="ml-2">
+              <div class="modal-footer">
 
                 <!-- stop button -->
                 <button type="button"
                   id="stop_button"
-                  class="btn btn-{{speak2me_options.modal.settings.stop_button_style}} btn-sm"
+                  class="btn btn-{{speak2me_options.modal.settings.stop_button_style}} btn-sm mr-2"
                   style="min-width: 180px; display: none;"
                   onclick="j1.adapter.speak2me.stop()"
                   data-bs-dismiss="modal">
@@ -158,7 +158,7 @@ exclude_from_search:                    true
                 <!-- speak button -->
                 <button type="button"
                   id="speak_button"
-                  class="btn btn-{{speak2me_options.modal.settings.speak_button_style}} btn-sm"
+                  class="btn btn-{{speak2me_options.modal.settings.speak_button_style}} btn-sm mr-2"
                   style="min-width: 180px;"
                   onclick="j1.adapter.speak2me.speak('{{speak2me_options.speechSelector}}')"
                   data-bs-dismiss="modal">
@@ -169,7 +169,7 @@ exclude_from_search:                    true
                 <!-- pause button -->
                 <button type="button"
                   id="pause_button"
-                  class="btn btn-{{speak2me_options.modal.settings.pause_button_style}} btn-sm"
+                  class="btn btn-{{speak2me_options.modal.settings.pause_button_style}} btn-sm mr-2"
                   style="min-width: 180px; display: none;"
                   onclick="j1.adapter.speak2me.pause()"
                   data-bs-dismiss="modal">
@@ -180,7 +180,7 @@ exclude_from_search:                    true
                 <!-- resume button -->
                 <button type="button"
                   id="resume_button"
-                  class="btn btn-{{speak2me_options.modal.settings.resume_button_style}} btn-sm"
+                  class="btn btn-{{speak2me_options.modal.settings.resume_button_style}} btn-sm mr-2"
                   style="min-width: 180px; display: none;"
                   onclick="j1.adapter.speak2me.resume()"
                   data-bs-dismiss="modal">
@@ -191,7 +191,7 @@ exclude_from_search:                    true
                 <!-- exit (modal) button -->
                 <button type="button"
                   id="exit_button"
-                  class="btn btn-{{speak2me_options.modal.settings.exit_button_style}}  btn-sm"
+                  class="btn btn-{{speak2me_options.modal.settings.exit_button_style}}  btn-sm mr-2"
                   style="min-width: 180px;"
                   data-bs-dismiss="modal">
                   <i class="mdib mdib-close mdib-sm mr-2"></i>

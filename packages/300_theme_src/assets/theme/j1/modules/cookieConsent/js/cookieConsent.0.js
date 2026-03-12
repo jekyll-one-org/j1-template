@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/cookieConsent/js/cookieConsent.js
+ # ~/assets/theme/j1/modules/cookieConsent/js/cookieConsent.js (0)
  # Provides JS Core for J1 Module BS Cookie Consent
  #
  #  Product/Info:
@@ -45,7 +45,7 @@ function CookieConsent(props) {
   var cookieSecure          = (url.protocol.includes('https')) ? true : false;
   var navigatorLanguage     = navigator.language || navigator.userLanguage;
   var defaultDialogLanguage = 'en';
-  var dataChanged           = null;
+  var isDataChanged         = null;
   var logText;
   var current_page;
   var whitelisted;
@@ -196,19 +196,13 @@ function CookieConsent(props) {
   // executeFunctionByName()
   // execute a function by NAME (functionName) in a browser context
   // (e.g. window) the function is published
-  // claude - pass options to a callback function #2
   // ---------------------------------------------------------------------------
   function executeFunctionByName (functionName, context, args) {
+    // var args = Array.prototype.slice.call(arguments, 2);
     var namespaces = functionName.split('.');
     var func = namespaces.pop();
     for(var i = 0; i < namespaces.length; i++) {
       context = context[namespaces[i]];
-    }
-    // apply() requires an array-like second argument; wrap non-array
-    // values (e.g. a plain options object) in an array so they are
-    // passed as the first argument of the called function
-    if (args !== undefined && !Array.isArray(args)) {
-      args = [args];
     }
     return context[func].apply(context, args);
   }
@@ -248,10 +242,11 @@ function CookieConsent(props) {
         // ---------------------------------------------------------------------
         self.$modal.on('hidden.bs.modal', function () {
           // process settings after the user has made his selections
-          // claude - pass options to a callback function #2
           //  executeFunctionByName(callbackName, context, options)
           executeFunctionByName (self.props.postSelectionCallback, window, {
-            dataChanged: dataChanged
+            dataChange:                   isDataChanged,
+            reloadPageOnChange:           self.props.reloadPageOnChange,
+            expireCookiesOnRequiredOnly:  self.props. expireCookiesOnRequiredOnly
           });
         }); // END modal on 'hidden'
 
@@ -292,27 +287,27 @@ function CookieConsent(props) {
           logger.info('initialze event handler');
 
           self.$buttonDoNotAgree.click(function () {
-            dataChanged = true;
+            isDataChanged = true;
             doNotAgree();
           });
           self.$buttonAgree.click(function () {
-            dataChanged = true;
+            isDataChanged = true;
             agreeAll();
           });
           self.$buttonSave.click(function () {
-            dataChanged = true;
+            isDataChanged = true;
             $("#bccs-options").collapse('hide');
             saveSettings();
             updateOptionsFromCookie();
           });
           self.$buttonAgreeAll.click(function () {
-            dataChanged = true;
+            isDataChanged = true;
             $("#bccs-options").collapse('hide');
             agreeAll();
             updateOptionsFromCookie();
           });
           self.$buttonDoNothing.click(function () {
-            dataChanged = false;
+            isDataChanged = false;
             doNoting();
           });
           self.$modal.modal('show');

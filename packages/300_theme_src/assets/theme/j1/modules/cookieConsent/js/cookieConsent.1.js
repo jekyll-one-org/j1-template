@@ -45,7 +45,7 @@ function CookieConsent(props) {
   var cookieSecure          = (url.protocol.includes('https')) ? true : false;
   var navigatorLanguage     = navigator.language || navigator.userLanguage;
   var defaultDialogLanguage = 'en';
-  var dataChanged           = null;
+  var isDataChanged         = null;
   var logText;
   var current_page;
   var whitelisted;
@@ -251,7 +251,9 @@ function CookieConsent(props) {
           // claude - pass options to a callback function #2
           //  executeFunctionByName(callbackName, context, options)
           executeFunctionByName (self.props.postSelectionCallback, window, {
-            dataChanged: dataChanged
+            dataChange:                   isDataChanged,
+            reloadPageOnChange:           self.props.reloadPageOnChange,
+            expireCookiesOnRequiredOnly:  self.props. expireCookiesOnRequiredOnly
           });
         }); // END modal on 'hidden'
 
@@ -292,27 +294,27 @@ function CookieConsent(props) {
           logger.info('initialze event handler');
 
           self.$buttonDoNotAgree.click(function () {
-            dataChanged = true;
+            isDataChanged = true;
             doNotAgree();
           });
           self.$buttonAgree.click(function () {
-            dataChanged = true;
+            isDataChanged = true;
             agreeAll();
           });
           self.$buttonSave.click(function () {
-            dataChanged = true;
+            isDataChanged = true;
             $("#bccs-options").collapse('hide');
             saveSettings();
             updateOptionsFromCookie();
           });
           self.$buttonAgreeAll.click(function () {
-            dataChanged = true;
+            isDataChanged = true;
             $("#bccs-options").collapse('hide');
             agreeAll();
             updateOptionsFromCookie();
           });
           self.$buttonDoNothing.click(function () {
-            dataChanged = false;
+            isDataChanged = false;
             doNoting();
           });
           self.$modal.modal('show');

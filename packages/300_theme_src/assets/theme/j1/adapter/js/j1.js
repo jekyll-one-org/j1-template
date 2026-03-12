@@ -269,7 +269,8 @@ var j1 = ((options) => {
   var user_consent = {
     'necessary':                    true,
     'analysis':                     false,
-    'personalization':              false
+    'personalization':              false,
+    'updated':                      false
   };
 
   var user_translate = {
