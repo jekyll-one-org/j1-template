@@ -13,7 +13,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 3.1.3 for J1 Template */
+/* Version 3.1.35 for J1 Template */
 
 /* -----------------------------------------------------------------------------
    CSS Custom Properties
@@ -40,10 +40,44 @@
    Input / URL Bar
   ------------------------------------------------------------------------------ */
 
+.input-section {
+  border: 2px dashed var(--md-gray-400) !important;
+  padding: 28px;
+}
+
+.select-btn-inside {
+  align-items: center;
+  background: #2196F3;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  display: flex;
+  font-size: 0.85rem;
+  font-weight: 500;
+  gap: 0.4rem;
+  height: auto;
+  justify-content: center;
+  left: 2.25rem;
+  min-width: auto;
+  padding: 0.5rem 0.6rem;
+  position: absolute;
+  top: 25%;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  width: auto;
+} 
+
+.select-btn-inside:hover {
+  background-color: var(--bs-primary);
+  box-shadow: 0 2px 8px var(--shadow-color);
+  color: var(--md-gray-900) !important;
+}
+
 input {
   background-color: var(--card-background);
   border: none;
-  border-radius: 0px;
+  border-radius: 8px;
   color: var(--text-color);
   flex: 1;
   font-size: 1rem;
@@ -64,19 +98,20 @@ input {
 }
 
 #serverPlaylistSelect {
-  background: none !important;
-  border: 1px solid var(--border-color) !important;
-  box-shadow: none !important;
-  color: var(--text-color) !important;
-  font-size: 1.01rem !important;
-  padding: .8rem 1rem .8rem 5.5rem !important;
+  background: none;
+  border: 1px solid var(--border-color);
+  box-shadow: none;
+  color: var(--text-color);
+  font-size: 1.01rem;
+  padding: 0.8rem 1rem 0.8rem 6rem;
   transition: border-color .2s, box-shadow .2s;
   width: 100%;
   flex: 1 1 100%;
 }
 
-/* center the load button below the server playlist select */
+/* claude - place buttons #2: center the load button below the server playlist select */
 #serverPlaylistSelect ~ #serverPlaylistLoadButton,
+/* claude - place buttons #3: align button to the left */
 #serverPlaylistSelect ~ .import-playlist-btn {
   flex-basis: auto;
   margin-left: 0;
@@ -84,14 +119,27 @@ input {
   margin-top: .75rem;
 }
 
-/* align content to the left */
+/* claude - place buttons #3: align content to the left */
 .input-container:has(#serverPlaylistSelect) {
   justify-content: flex-start !important;
 }
 
+/* claude - place buttons: wrap and center buttons below the input */
+/*
 .input-wrapper {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  width: 90%;
+  margin-bottom: 1.5rem;
+  background: transparent;
+  box-sizing: border-box;
+}
+*/
+.input-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  /* justify-content: center; */
   width: 100%;
   margin-bottom: 1.5rem;
   background: transparent;
@@ -104,19 +152,27 @@ input {
   flex: 1 1 0%;
   position: relative;
   width: 100%;
+  /* claude - place buttons: force full width to push buttons to next line */
   flex-basis: 100%;
   justify-content: center;
 }
 
-.input-container #videoUrl {
-  padding-left: 5.5rem !important;
+#videoUrl {
+  background: none !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 0px;
+  box-shadow: none !important;
+  color: var(--text-color) !important;
+  font-size: 1.01rem !important;
+  padding: .8rem 1rem .8rem 5.5rem !important;
+  transition: border-color .2s, box-shadow .2s;
 }
 
 .paste-btn-inside {
   align-items: center;
   background: #2196F3;
   border: none;
-  border-radius: 0px;
+  border-radius: 6px;
   color: #fff;
   display: flex;
   font-size: .85rem;
@@ -138,14 +194,15 @@ input {
 .paste-btn-inside:hover {
   background-color: var(--bs-primary);
   box-shadow: 0 2px 8px var(--shadow-color);
-  color: #000;
+  color: var(--md-gray-900) !important;
 }
 
-/* center buttons below input with top margin instead of left */
+
+/* claude - place buttons: center buttons below input with top margin instead of left */
 .watch-adfree-btn {
   background: linear-gradient(90deg, var(--md-green-500), var(--md-green-700));
   border: none;
-  border-radius: 0px;
+  border-radius: 10px;
   box-shadow: 0 2px 8px var(--shadow-color);
   color: #fff;
   flex-shrink: 0;
@@ -172,7 +229,7 @@ input {
 .export-playlist-btn {
   background: linear-gradient(90deg, var(--md-green-500), var(--md-green-700));
   border: none;
-  border-radius: 0px;
+  border-radius: 10px;
   box-shadow: 0 2px 8px var(--shadow-color);
   color: #000;
   flex-shrink: 0;
@@ -196,7 +253,7 @@ input {
 .import-playlist-btn {
   background: linear-gradient(90deg, var(--md-yellow-500), var(--md-yellow-700));
   border: none;
-  border-radius: 0px;
+  border-radius: 10px;
   box-shadow: 0 2px 8px var(--shadow-color);
   color: #000;
   flex-shrink: 0;
@@ -220,7 +277,7 @@ input {
 .delete-playlist-btn {
   background: linear-gradient(90deg, var(--md-red-500), var(--md-red-700));
   border: none;
-  border-radius: 0px;
+  border-radius: 10px;
   box-shadow: 0 2px 8px var(--shadow-color);
   color: #000;
   flex-shrink: 0;
@@ -270,22 +327,21 @@ input {
 }
 
 .empty-player-overlay {
-    align-items: center;
-    background: var(--bs-gray-100);
-    border: 2px dashed var(--bs-gray-600);
-    bottom: 0;
-    box-shadow: 0 4px 6px var(
-  --shadow-color);
-    display: flex;
-    flex: 1 1 0%;
-    justify-content: center;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    transition: .3s;
-    z-index: 5;
-}
+  align-items: center;
+  background: var(--bs-gray-100);
+  border: 2px dashed var(--bs-gray-400) !important;
+  bottom: 0;
+  box-shadow: 0 4px 6px var(--shadow-color);
+  display: flex;
+  flex: 1 1 0%;
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: 0.3s;
+  z-index: 5;
+} 
 
 .empty-player-content {
   max-width: 108%;
@@ -321,7 +377,9 @@ input {
 .playlist.list-mode {
   display: flex !important;
   flex-direction: column;
+  /* gap: 12px; */
   grid-template-columns: none !important;
+  /* padding-top: .5rem; */
 }
 
 .playlist.card-mode {
@@ -412,7 +470,7 @@ input {
 .playlist-duration,
 .playlist-badge-overlay {
   background: rgba(0,0,0,.8);
-  border-radius: 0px;
+  border-radius: 3px;
   font-size: 12px;
   font-weight: 500;
   padding: 2px 6px;
@@ -430,7 +488,7 @@ input {
 /* rating info, position rating badge top-right */
 .playlist-rating {
   backdrop-filter: blur(5px);
-  border-radius: 0px;
+  border-radius: 3px;
   color: #f5c518;
   font-size: 11px;
   letter-spacing: 1px;
@@ -502,7 +560,7 @@ input {
   align-items: center;
   background: var(--bg-secondary);
   border: none;
-  border-radius: 0px;
+  border-radius: 8px;
   box-shadow: none;
   color: var(--secondary-color);
   cursor: pointer;
@@ -534,7 +592,7 @@ input {
 }
 
 /* -----------------------------------------------------------------------------
-   Playlist (Row)
+   Playlist Row (List / Playlist View)
   ------------------------------------------------------------------------------ */
 
 .playlist-row {
@@ -758,14 +816,6 @@ input {
 }
 
 /* -----------------------------------------------------------------------------
-   Global Modal Settings
-  ------------------------------------------------------------------------------ */
-
-.modal .modal-header .lead {
-  font-weight: 500;
-}
-
-/* -----------------------------------------------------------------------------
    Rating Modal & Stars
   ------------------------------------------------------------------------------ */
 
@@ -798,7 +848,7 @@ input {
 
 .rating-modal-btn {
   border: none;
-  border-radius: 0px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: .95rem;
   font-weight: 500;
@@ -838,6 +888,10 @@ input {
   box-shadow: 0 2px 8px var(--shadow-color);
   color: #000;
 }
+
+/* -----------------------------------------------------------------------------
+   Bootstrap (BS) Modals
+  ------------------------------------------------------------------------------ */
 
 #ratingVideoTitle {
   font-weight: 600;
@@ -929,10 +983,10 @@ input {
 }
 
 /* -----------------------------------------------------------------------------
-   Search Input (Playlist)
+   Playlist Search Input
   ------------------------------------------------------------------------------ */
 
-/* align search wrapper to the left */
+/* claude - place buttons #3: align search wrapper to the left */
 #playlistSearchWrapper {
   background: transparent;
   box-sizing: border-box;
@@ -940,10 +994,9 @@ input {
   flex-direction: row;
   justify-content: flex-start;
   margin: 0 4.75rem 1.5rem 0;
-  width: 100%;
 }
 
-/* align search input to the left inside wrapper */
+/* claude - place buttons #3: align search input to the left inside wrapper */
 #playlistSearchWrapper .input-container {
   align-items: center;
   display: flex;

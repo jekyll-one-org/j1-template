@@ -42,7 +42,7 @@
 
 (function($) {
 
-  const ENVIRONTMENT        = 'dev';                                            // dev | prod
+  const ENVIRONTMENT = 'dev';                                                   // dev | prod
   
   const defaultOptions = {
     // Where to render the table of contents.
@@ -240,7 +240,7 @@
         return document.querySelector(contentSelector)
           .querySelectorAll(selectors);
       } catch (e) {
-        console.warn('speak2me.core: Could not find', contentSelector);
+        (ENVIRONTMENT === 'dev') && console.warn('speak2me.core: Could not find', contentSelector);
         return null;
       }
     }
@@ -864,7 +864,7 @@
     const isAlreadyHighlighted = (elementid === currentHighlightedElement);
 
     if (isAlreadyHighlighted) {
-      console.debug(`speak2me.core: setHighlightParagraph called on id current|previous: ${elementid} | ${currentHighlightedElement}`);
+      (ENVIRONTMENT === 'dev') && console.debug(`speak2me.core: setHighlightParagraph called on id current|previous: ${elementid} | ${currentHighlightedElement}`);
     }
 
     // add new highlight
@@ -890,7 +890,7 @@
           });
         }
       } catch (error) {
-        console.warn('speak2me.core: Could not scroll to highlighted element:', error);
+        (ENVIRONTMENT === 'dev') && console.error('speak2me.core: Could not scroll to highlighted element:', error);
       }
       return true;
     }
@@ -913,7 +913,7 @@
     // an Element or null — never undefined.  The `!== undefined` check was
     // redundant and misleading about the API contract.
     if ($element !== null) {
-      console.debug(`speak2me.core: removeParagrapHighlight called on id: ${dataId}`);
+      (ENVIRONTMENT === 'dev') && console.debug(`speak2me.core: removeParagrapHighlight called on id: ${dataId}`);
       $element.classList.remove('tts-karaoke-highlight-paragraph');
     }
 
@@ -929,7 +929,7 @@
     function scanSection() {
       // STABILITY: add maximum iteration check
       if (scanCounter++ > maxScanIterations) {
-        console.warn('speak2me.core: Page scan exceeded maximum iterations');
+        (ENVIRONTMENT === 'dev') && console.warn('speak2me.core: Page scan exceeded maximum iterations');
         finalizeScan();
         return;
       }
@@ -1071,7 +1071,7 @@
     // every voice but was never logged or returned, wasting CPU cycles on
     // string concatenation with no observable effect.  Added debug log so the
     // work is actually useful during development.
-    console.debug(systemVoicesText);
+    (ENVIRONTMENT === 'dev') && console.debug(systemVoicesText);
   }
 
   // populateVoiceList seems NOT reqired
@@ -1250,7 +1250,7 @@
 
       // STABILITY: check if speech synthesis is already active
       if (window.speechSynthesis.speaking) {
-        console.warn('speak2me.core: Speech synthesis already in progress');
+        (ENVIRONTMENT === 'dev') && console.warn('speak2me.core: Speech synthesis already in progress');
         return this;
       }
 
@@ -1339,7 +1339,7 @@
 
               // extract current word from original text
               const currentWord = targetText.substring(startIndex, startIndex + length);
-              console.debug(`speak2me.core, onboundary: spoken word: '${currentWord}' at startIndex: ${startIndex}`);
+              (ENVIRONTMENT === 'dev') && console.debug(`speak2me.core, onboundary: spoken word: '${currentWord}' at startIndex: ${startIndex}`);
 
               // highlighting the word
               highlightWord(startIndex);
@@ -1357,23 +1357,23 @@
 
               if ($paragraph !== undefined && $paragraph !== null) {
                 // remove highlight on current paragraph
-                console.debug(`speak2me.core, onstart: remove highlight on: ${currentHighlightedElement}`);
+                (ENVIRONTMENT === 'dev') && console.debug(`speak2me.core, onstart: remove highlight on: ${currentHighlightedElement}`);
                 removeParagrapHighlight(currentHighlightedElement);
               } else {
                 // failsafe: manage loose text (NO speak2meId found on paragraph)
 //              console.warn('speak2me.core, onstart:\n error accessing loose text:', currentTargetText);
-                console.warn('speak2me.core, onstart: error accessing loose text');
+                (ENVIRONTMENT === 'dev') && console.warn('speak2me.core, onstart: error accessing loose text');
 
                 // clear all highlights globally
                 $('.tts-karaoke-highlight-paragraph').removeClass('tts-karaoke-highlight-paragraph');
-                console.warn('speak2me.core, onstart: clear all highlights globally');
+                (ENVIRONTMENT === 'dev') && console.warn('speak2me.core, onstart: clear all highlights globally');
               }
 
               if (speak2meId !== undefined) {
-                console.debug(`speak2me.core, onstart: set highlight on: ${speak2meId}`);
+                (ENVIRONTMENT === 'dev') && console.debug(`speak2me.core, onstart: set highlight on: ${speak2meId}`);
                 setHighlightParagraph(speak2meId);                  
               } else {
-                console.warn(`speak2me.core, onstart: could not set highlight on paragraph`);
+                (ENVIRONTMENT === 'dev') && console.warn(`speak2me.core, onstart: could not set highlight on paragraph`);
               }
 
               // highlightning words supported only on paragraphs
@@ -1387,13 +1387,13 @@
                 var sentenceIndex = findSentenceIndexForChunk(currentChunk, currentParagraphSentences);
                 if (sentenceIndex >= 0) {
                   currentSentenceOffset = calculateSentenceOffset(currentParagraphSentences, sentenceIndex);
-                  console.debug(`speak2me.core, findSentenceIndexForChunk: sentence ${sentenceIndex} starts at offset ${currentSentenceOffset}`);
+                  (ENVIRONTMENT === 'dev') && console.debug(`speak2me.core, findSentenceIndexForChunk: sentence ${sentenceIndex} starts at offset ${currentSentenceOffset}`);
                 }
               }
 
             } else {
               // claude - optimization chances: typo "MOT" → "NOT"
-              console.debug(`speak2me.core, onstart: highlight NOT changed on: ${speak2meId}`);
+              (ENVIRONTMENT === 'dev') && console.debug(`speak2me.core, onstart: highlight NOT changed on: ${speak2meId}`);
 
               // PARAGRAPH FIX: Even if paragraph hasn't changed, update offset for next sentence
               var currentChunk = chunks[chunkCounter];
@@ -1401,7 +1401,7 @@
                 var sentenceIndex = findSentenceIndexForChunk(currentChunk, currentParagraphSentences);
                 if (sentenceIndex >= 0) {
                   currentSentenceOffset = calculateSentenceOffset(currentParagraphSentences, sentenceIndex);
-                  console.debug(`speak2me.core, findSentenceIndexForChunk: (same paragraph) sentence ${sentenceIndex} starts at offset ${currentSentenceOffset}`);
+                  (ENVIRONTMENT === 'dev') && console.debug(`speak2me.core, findSentenceIndexForChunk: (same paragraph) sentence ${sentenceIndex} starts at offset ${currentSentenceOffset}`);
                 }
               }
             }
@@ -1714,7 +1714,7 @@
                 chunkSpoken = true;
               }
             } else {
-              console.warn('speak2me.core: Invalid chunk at index', chunkCounter);
+              (ENVIRONTMENT === 'dev') && console.warn('speak2me.core: Invalid chunk at index', chunkCounter);
               clearInterval(speechMonitor);
             }
           }
@@ -2282,7 +2282,7 @@
 
       if (len === 2) {
         if (['img','table','figure'].indexOf(arguments[0]) === -1) {
-          console.warn("speak2me.core: When customizing, tag must be 'img', 'table', or 'figure'.");
+          (ENVIRONTMENT === 'dev') && console.warn("speak2me.core: When customizing, tag must be 'img', 'table', or 'figure'.");
           return this;
         }
         customTags[arguments[0].toString()] = new voiceTag(arguments[1].toString());
@@ -2290,7 +2290,7 @@
 
       if (len === 3) {
         if (['q','ol','ul','blockquote'].indexOf(arguments[0]) === -1) {
-          console.warn("speak2me.core: When customizing, tag must be 'q', 'ol', 'ul' or 'blockquote'.");
+          (ENVIRONTMENT === 'dev') && console.warn("speak2me.core: When customizing, tag must be 'q', 'ol', 'ul' or 'blockquote'.");
           return this;
         }
         customTags[arguments[0].toString()] = new voiceTag(arguments[1].toString(), arguments[2].toString());
