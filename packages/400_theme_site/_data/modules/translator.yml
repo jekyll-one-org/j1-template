@@ -35,8 +35,8 @@ settings:
   # ----------------------------------------------------------------------------
   translatorName:                       google
   contentLanguage:                      en                                      # [auto|any supported language], auto: language set by site config
-  dialogLanguage:                       auto                                    # [auto|en|de], auto: language set by site config
-  translationLanguage:                  de                                      # any supported language
+  dialogLanguage:                       en                                      # [auto|en|de], auto: language set by site config
+  translationLanguage:                  en                                      # any supported language
 
 # ------------------------------------------------------------------------------
 # END config

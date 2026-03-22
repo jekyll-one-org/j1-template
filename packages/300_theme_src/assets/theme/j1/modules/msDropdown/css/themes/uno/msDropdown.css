@@ -50,12 +50,23 @@
   outline: none
 }
 
+/*
 .ms-dd .ms-value-input {
   border: 0;
   left: 20px;
   position: absolute;
   top: 10px;
   width: 50%
+}
+*/
+
+.ms-dd .ms-value-input {
+  border: 0;
+  /* left: 20px; */
+  position: absolute;
+  /* top: -2px; */
+  width: 50%;
+  height: 99%;
 }
 
 .ms-dd .ms-dd-header {

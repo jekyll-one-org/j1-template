@@ -1,8 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/scss/theme_uno/modules/_yt-metadata-fetcher.scss
- # Provides styles for J1 Page yt-meta-data
- #
+ # ~/scss/theme_uno/modules/yt-metadata-fetcher.scss
+ # Provides styles for J1 Page mdCollector
  # Product/Info:
  # https://jekyll.one
  #
@@ -32,6 +31,19 @@
     --yellow: #ffd23c;
     --radius: 12px;
   }
+
+/* -----------------------------------------------------------------------------
+   Global Overrides
+  ------------------------------------------------------------------------------ */
+
+  code, pre {
+    font-weight: 500;
+    border-top: none;
+    word-break: break-word !important;
+    padding: 0.125em 0.275em 0.125em 0.275em;
+    color: #212121;
+    background-color: rgba(0, 0, 0, 0.1);
+}
 
 /* -----------------------------------------------------------------------------
    Input Section
@@ -313,15 +325,6 @@
     line-height: 1.6;
     white-space: pre-wrap;
     word-break: break-all;
-  }
-
-  code, pre {
-      font-weight: 500;
-      border-top: 1px solid var(--border);
-      word-break: break-word !important;
-      padding: 0.125em 0.275em 0.125em 0.275em;
-      color: #212121;
-      background-color: rgba(0, 0, 0, 0.1);
   }
 
 /* -----------------------------------------------------------------------------

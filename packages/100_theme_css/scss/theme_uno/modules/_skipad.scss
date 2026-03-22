@@ -13,18 +13,33 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 3.1.35 for J1 Template */
+/* Version 3.1.37 for J1 Template */
+/* claude - optimize css 2a */
 
 /* -----------------------------------------------------------------------------
    CSS Custom Properties
   ------------------------------------------------------------------------------ */
 
 :root {
-  --border-color: #d2d2d7;
-  --card-background: #ffffff;
-  --secondary-color: #86868b;
-  --shadow-color: rgba(0,0,0,.1);
-  --text-color: #1d1d1f;
+  --border-color:     #d2d2d7;
+  --card-background:  #ffffff;
+  --input-background: #E1F5FE;
+  --secondary-color:  #86868b;
+  --shadow-color:     rgba(0,0,0,.1);
+  --text-color:       #1d1d1f;
+}
+
+/* -----------------------------------------------------------------------------
+   Global Overrides
+  ------------------------------------------------------------------------------ */
+
+code, pre {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-top: none;
+  color: #212121;
+  font-weight: 500;
+  padding: 0.125em 0.275em 0.125em 0.275em;
+  word-break: break-word !important;
 }
 
 /* -----------------------------------------------------------------------------
@@ -45,33 +60,29 @@
   padding: 28px;
 }
 
-.select-btn-inside {
-  align-items: center;
-  background: #2196F3;
-  border: none;
-  border-radius: 6px;
-  color: #fff;
+.input-wrapper {
+  background: transparent;
+  box-sizing: border-box;
   display: flex;
-  font-size: 0.85rem;
-  font-weight: 500;
-  gap: 0.4rem;
-  height: auto;
-  justify-content: center;
-  left: 2.25rem;
-  min-width: auto;
-  padding: 0.5rem 0.6rem;
-  position: absolute;
-  top: 25%;
-  transform: translateY(-50%);
-  transition: all 0.3s ease;
-  white-space: nowrap;
-  width: auto;
-} 
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
 
-.select-btn-inside:hover {
-  background-color: var(--bs-primary);
-  box-shadow: 0 2px 8px var(--shadow-color);
-  color: var(--md-gray-900) !important;
+/* flex-basis: place buttons: force full width to push buttons to next line */
+.input-container {
+  align-items: center;
+  display: flex;
+  flex: 1 1 0%;
+  flex-basis: 100%;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+}
+
+/* align content to the left */
+.input-container:has(#serverPlaylistSelect) {
+  justify-content: flex-start !important;
 }
 
 input {
@@ -86,32 +97,116 @@ input {
   width: 100%;
 }
 
-#videoUrl {
-  background: none !important;
-  border: 1px solid var(--border-color) !important;
-  border-radius: 0px;
-  box-shadow: none !important;
+/* input elements
+   -----------------------------------------------------------------------------
+   Cross-browser autofill background overrides.
+   Uses a keyframe animation to trigger JS-based detection via
+   animationstart and forces the desired background on autofilled
+   inputs and selects in Chrome, Firefox and Safari.
+  ------------------------------------------------------------------------------ */
+
+@keyframes onAutoFillStart {
+  from { /* empty - used only as a detection signal */ }
+  to   { /* empty - used only as a detection signal */ }
+}
+
+@keyframes onAutoFillCancel {
+  from { /* empty - used only as a detection signal */ }
+  to   { /* empty - used only as a detection signal */ }
+}
+
+input:-webkit-autofill,
+select:-webkit-autofill {
+  animation-name: onAutoFillStart;
+  -webkit-box-shadow: 0 0 0 1000px var(--input-background) inset !important;
+  -webkit-text-fill-color: var(--text-color) !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+input:not(:-webkit-autofill),
+select:not(:-webkit-autofill) {
+  animation-name: onAutoFillCancel;
+}
+
+input:autofill,
+select:autofill {
+  animation-name: onAutoFillStart;
+  background-color: var(--input-background) !important;
   color: var(--text-color) !important;
-  font-size: 1.01rem !important;
-  padding: .8rem 1rem .8rem 5.5rem !important;
+}
+
+/* input elements #3
+   -----------------------------------------------------------------------------
+   Explicit background overrides for ALL input/select elements so the
+   browser's user-agent autofill background (Chrome's
+   :-internal-autofill-selected, Firefox's :-moz-autofill, etc.) is
+   suppressed.  #videoUrlInput already had "background: none !important";
+   the same treatment is now applied to #serverPlaylistSelect and
+   #playlistSearchInput.
+  ------------------------------------------------------------------------------ */
+
+#serverPlaylistSelect,
+#playlistSearchInput {
+  background: none !important;
+}
+
+/* input elements #4
+   -----------------------------------------------------------------------------
+   Value-aware background styling for <input> and <select> elements.
+   The JS companion (inputValueBackgroundHandler) toggles
+   data-value-filled on elements that hold a non-empty value and
+   applies inline background-color accordingly.  The default
+   (empty / no value) background is --card-background; the filled
+   state uses --input-background.
+   These rules provide the base defaults; the JS overrides them with
+   inline styles so the behaviour is identical across all browsers.
+  ------------------------------------------------------------------------------ */
+
+input[type="text"],
+input[type="search"],
+input[type="url"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+input:not([type]),
+select {
+  background-color: var(--card-background) !important;
+}
+
+input[data-value-filled="true"],
+select[data-value-filled="true"] {
+  background-color: var(--input-background) !important;
+  color: var(--text-color) !important;
+}
+
+/* -----------------------------------------------------------------------------
+   Input Elements: Specific Fields
+  ------------------------------------------------------------------------------ */
+
+#videoUrlInput {
+  background: none !important;
+  border: 1px solid var(--border-color);
+  border-radius: 0px;
+  padding: .8rem 1rem .8rem 6.5rem;
   transition: border-color .2s, box-shadow .2s;
 }
 
+/* claude - optimize css 2: removed redundant "background: none"
+   (already set with !important in the combined
+    #serverPlaylistSelect, #playlistSearchInput rule above)            */
 #serverPlaylistSelect {
-  background: none;
   border: 1px solid var(--border-color);
   box-shadow: none;
   color: var(--text-color);
+  flex: 1 1 100%;
   font-size: 1.01rem;
-  padding: 0.8rem 1rem 0.8rem 6rem;
+  padding: 0.8rem 1rem 0.8rem 6.5rem;
   transition: border-color .2s, box-shadow .2s;
   width: 100%;
-  flex: 1 1 100%;
 }
 
-/* claude - place buttons #2: center the load button below the server playlist select */
+/* center the load button below the server playlist select */
 #serverPlaylistSelect ~ #serverPlaylistLoadButton,
-/* claude - place buttons #3: align button to the left */
 #serverPlaylistSelect ~ .import-playlist-btn {
   flex-basis: auto;
   margin-left: 0;
@@ -119,60 +214,34 @@ input {
   margin-top: .75rem;
 }
 
-/* claude - place buttons #3: align content to the left */
-.input-container:has(#serverPlaylistSelect) {
-  justify-content: flex-start !important;
-}
-
-/* claude - place buttons: wrap and center buttons below the input */
-/*
-.input-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  width: 90%;
-  margin-bottom: 1.5rem;
-  background: transparent;
-  box-sizing: border-box;
-}
-*/
-.input-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  /* justify-content: center; */
-  width: 100%;
-  margin-bottom: 1.5rem;
-  background: transparent;
-  box-sizing: border-box;
-}
-
-.input-container {
-  align-items: center;
-  display: flex;
-  flex: 1 1 0%;
-  position: relative;
-  width: 100%;
-  /* claude - place buttons: force full width to push buttons to next line */
-  flex-basis: 100%;
-  justify-content: center;
-}
-
-#videoUrl {
-  background: none !important;
-  border: 1px solid var(--border-color) !important;
+/* claude - optimize css 2: removed redundant "background: none"
+   (already set with !important in the combined
+    #serverPlaylistSelect, #playlistSearchInput rule above)            */
+#playlistSearchInput {
+  border: 1px solid var(--border-color);
   border-radius: 0px;
-  box-shadow: none !important;
-  color: var(--text-color) !important;
-  font-size: 1.01rem !important;
-  padding: .8rem 1rem .8rem 5.5rem !important;
+  padding: .8rem 1rem .8rem 3.5rem;
   transition: border-color .2s, box-shadow .2s;
+  width: 100%;
 }
+
+#playlistSearchInput::placeholder {
+  color: var(--secondary-color);
+  opacity: 0.7;
+}
+
+/* claude - optimize css 2: removed unused #videoUrl rule
+   (the HTML only uses #videoUrlInput; #videoUrl was orphaned)         */
+
+/* -----------------------------------------------------------------------------
+   Input Buttons: Paste / Select
+  ------------------------------------------------------------------------------ */
 
 .paste-btn-inside {
   align-items: center;
   background: #2196F3;
   border: none;
-  border-radius: 6px;
+  border-radius: 0px;
   color: #fff;
   display: flex;
   font-size: .85rem;
@@ -189,6 +258,7 @@ input {
   transition: all .3s ease;
   white-space: nowrap;
   width: auto;
+  z-index: 1;
 }
 
 .paste-btn-inside:hover {
@@ -197,105 +267,197 @@ input {
   color: var(--md-gray-900) !important;
 }
 
-
-/* claude - place buttons: center buttons below input with top margin instead of left */
-.watch-adfree-btn {
-  background: linear-gradient(90deg, var(--md-green-500), var(--md-green-700));
+.select-btn-inside {
+  align-items: center;
+  background: #2196F3;
   border: none;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px var(--shadow-color);
+  border-radius: 0px;
   color: #fff;
+  display: flex;
+  font-size: 0.85rem;
+  font-weight: 500;
+  gap: 0.4rem;
+  height: auto;
+  justify-content: center;
+  left: 2.25rem;
+  min-width: auto;
+  padding: 0.5rem 0.6rem;
+  position: absolute;
+  top: 25%;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  width: auto;
+  z-index: 1;
+}
+
+.select-btn-inside:hover {
+  background-color: var(--bs-primary);
+  box-shadow: 0 2px 8px var(--shadow-color);
+  color: var(--md-gray-900) !important;
+}
+
+.search-icon-inside {
+  align-items: center;
+  color: var(--secondary-color);
+  display: flex;
+  font-size: 1rem;
+  left: .85rem;
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* -----------------------------------------------------------------------------
+   Input Clear Buttons
+  ------------------------------------------------------------------------------ */
+
+/* claude - optimize css 2: merged identical clear-button properties
+   into a shared rule; only 'top' differs per element                   */
+#playlistInputClear,
+#playlistSelectClear {
+  align-items: center;
+  background: transparent;
+  border-color: initial;
+  border-image: initial;
+  border-style: none;
+  border-width: initial;
+  color: var(--secondary-color);
+  cursor: pointer;
+  display: none;
+  font-size: 1rem;
+  justify-content: center;
+  padding: 0.5rem;
+  position: absolute;
+  right: .5rem;
+  transform: translateY(-50%);
+  transition: color 0.2s;
+}
+
+#playlistInputClear {
+  top: 33%;
+}
+
+#playlistSelectClear {
+  top: 14%;
+}
+
+#playlistSearchClear {
+  align-items: center;
+  background: transparent;
+  border: none;
+  color: var(--secondary-color);
+  cursor: pointer;
+  display: none;
+  font-size: 1rem;
+  justify-content: center;
+  padding: .5rem;
+  position: absolute;
+  right: 7.5rem;
+  top: 33%;
+  transform: translateY(-50%);
+  transition: color .2s ease;
+}
+
+#playlistSearchClear:hover {
+  color: var(--text-color);
+}
+
+#playlistSearchResultCount {
+  align-self: center;
+  color: var(--secondary-color);
+  display: none;
+  font-size: .85rem;
+  margin-left: 1rem;
+  white-space: nowrap;
+}
+
+/* -----------------------------------------------------------------------------
+   Action Buttons: Watch / Export / Import / Delete
+  ------------------------------------------------------------------------------ */
+
+/* claude - optimize css 2: extracted shared action-button properties
+   into a single base rule; per-button rules now carry only their
+   unique background, color and margin overrides                        */
+.watch-adfree-btn,
+.export-playlist-btn,
+.import-playlist-btn,
+.delete-playlist-btn {
+  border: none;
+  border-radius: 0px;
+  box-shadow: 0 2px 8px var(--shadow-color);
   flex-shrink: 0;
   font-size: 1.08rem;
   font-weight: 600;
   letter-spacing: .01em;
-  margin-top: .75rem;
-  margin-left: .375rem;
-  margin-right: .375rem;
-  margin-bottom: 0;
   padding: .85rem 2.2rem;
   transition: background .2s, box-shadow .2s, transform .1s;
 }
 
 .watch-adfree-btn:focus,
-.watch-adfree-btn:hover {
-  color: #000;
-  background: linear-gradient(90deg, var(--md-green-700), var(--md-green-500));
+.watch-adfree-btn:hover,
+.export-playlist-btn:focus,
+.export-playlist-btn:hover,
+.import-playlist-btn:focus,
+.import-playlist-btn:hover,
+.delete-playlist-btn:focus,
+.delete-playlist-btn:hover {
   box-shadow: 0 4px 16px var(--shadow-color);
   outline: none;
   transform: translateY(-2px) scale(1.03);
 }
 
+/* center buttons below input with top margin instead of left */
+.watch-adfree-btn {
+  background: linear-gradient(90deg, var(--md-green-500), var(--md-green-700));
+  color: #fff;
+  margin-bottom: 0;
+  margin-left: .375rem;
+  margin-right: .375rem;
+  margin-top: .75rem;
+}
+
+.watch-adfree-btn:focus,
+.watch-adfree-btn:hover {
+  background: linear-gradient(90deg, var(--md-green-700), var(--md-green-500));
+  color: #000;
+}
+
 .export-playlist-btn {
   background: linear-gradient(90deg, var(--md-green-500), var(--md-green-700));
-  border: none;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px var(--shadow-color);
   color: #000;
-  flex-shrink: 0;
-  font-size: 1.08rem;
-  font-weight: 600;
-  letter-spacing: .01em;
   margin-bottom: .5rem;
   margin-left: .75rem;
-  padding: .85rem 2.2rem;
-  transition: background .2s, box-shadow .2s, transform .1s;
 }
 
 .export-playlist-btn:focus,
 .export-playlist-btn:hover {
   background: linear-gradient(90deg, var(--md-green-700), var(--md-green-500));
-  box-shadow: 0 4px 16px var(--shadow-color);
-  outline: none;
-  transform: translateY(-2px) scale(1.03);
 }
 
 .import-playlist-btn {
   background: linear-gradient(90deg, var(--md-yellow-500), var(--md-yellow-700));
-  border: none;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px var(--shadow-color);
   color: #000;
-  flex-shrink: 0;
-  font-size: 1.08rem;
-  font-weight: 600;
-  letter-spacing: .01em;
   margin-bottom: .5rem;
   margin-left: .75rem;
-  padding: .85rem 2.2rem;
-  transition: background .2s, box-shadow .2s, transform .1s;
 }
 
 .import-playlist-btn:focus,
 .import-playlist-btn:hover {
   background: linear-gradient(90deg, var(--md-yellow-700), var(--md-yellow-500));
-  box-shadow: 0 4px 16px var(--shadow-color);
-  outline: none;
-  transform: translateY(-2px) scale(1.03);
 }
 
 .delete-playlist-btn {
   background: linear-gradient(90deg, var(--md-red-500), var(--md-red-700));
-  border: none;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px var(--shadow-color);
   color: #000;
-  flex-shrink: 0;
-  font-size: 1.08rem;
-  font-weight: 600;
-  letter-spacing: .01em;
   margin-bottom: .5rem;
   margin-left: .75rem;
-  padding: .85rem 2.2rem;
-  transition: background .2s, box-shadow .2s, transform .1s;
 }
 
 .delete-playlist-btn:focus,
 .delete-playlist-btn:hover {
   background: linear-gradient(90deg, var(--md-red-700), var(--md-red-500));
-  box-shadow: 0 4px 16px var(--shadow-color);
-  outline: none;
-  transform: translateY(-2px) scale(1.03);
 }
 
 /* -----------------------------------------------------------------------------
@@ -319,11 +481,11 @@ input {
 
 /* emulate CSS style text-overflow ellipsis */
 .video-title {
-  display: -webkit-box;
   -webkit-box-orient: vertical;
+  display: -webkit-box;
   -webkit-line-clamp: 1;
   line-clamp: 1;
-  overflow: hidden;  
+  overflow: hidden;
 }
 
 .empty-player-overlay {
@@ -341,18 +503,18 @@ input {
   top: 0;
   transition: 0.3s;
   z-index: 5;
-} 
+}
 
 .empty-player-content {
   max-width: 108%;
 }
 
-/* promo image/size: scale down to 368×92 on small devices (< 576px) */
+/* promo image/size: scale down to 368x92 on small devices (< 576px) */
 @media (max-width: 575.98px) {
   .empty-player-content img {
-    width: 368px;
-    height: 92px;
-  }
+  height: 92px;
+  width: 368px;
+}
 }
 
 /* -----------------------------------------------------------------------------
@@ -377,9 +539,7 @@ input {
 .playlist.list-mode {
   display: flex !important;
   flex-direction: column;
-  /* gap: 12px; */
   grid-template-columns: none !important;
-  /* padding-top: .5rem; */
 }
 
 .playlist.card-mode {
@@ -391,12 +551,12 @@ input {
 /* Medium devices (tablets, less than 992px) */
 @media (max-width: 991.98px) {
   .playlist.card-mode {
-    grid-template-columns: repeat(1, 1fr) !important;
-  }
+  grid-template-columns: repeat(1, 1fr) !important;
+}
 
   #playlistModeSwitch {
-    display: none !important;
-  }
+  display: none !important;
+}
 }
 
 /* -----------------------------------------------------------------------------
@@ -440,8 +600,8 @@ input {
   border: 1px solid #ffffff23;
   border-radius: 50%;
   box-shadow: 0 10px 30px rgba(0,0,0,.2);
-  cursor: pointer;
   color: #fff;
+  cursor: pointer;
   display: flex;
   font-size: 20px;
   height: 60px;
@@ -454,6 +614,18 @@ input {
   transition: opacity .3s ease;
   width: 60px;
 }
+
+.playlist-thumb-wrapper:hover {
+  transform: none;
+}
+
+.playlist-thumb-wrapper:hover .playlist-play-overlay {
+  opacity: 1;
+}
+
+/* -----------------------------------------------------------------------------
+   Playlist Badges & Duration
+  ------------------------------------------------------------------------------ */
 
 .featured-badge,
 .playlist-duration,
@@ -509,9 +681,9 @@ input {
   display: flex;
   flex-direction: column;
   height: auto;
+  margin-bottom: .75rem;
   overflow: hidden;
   transition: all .3s ease;
-  margin-bottom: .75rem;  
 }
 
 .playlist-info {
@@ -535,7 +707,7 @@ input {
   font-size: .85rem;
   line-height: 1.3;
   margin-bottom: 4px;
-  /* word-break: break-word; */
+  word-break: break-word;
 }
 
 .playlist-time-info {
@@ -626,29 +798,35 @@ input {
   transform: scale(1.05);
 }
 
+/* claude - optimize css 2: reduced to override-only — all other
+   properties cascade from the base .playlist-play-overlay rule         */
+.playlist-row .playlist-play-overlay {
+  z-index: 2;
+}
+
 .playlist-row .playlist-title {
   color: var(--text-primary);
   font-size: .95rem;
   font-weight: 600;
   line-height: 1.4;
-  margin-top: 8px;
   margin-bottom: 0;
+  margin-top: 8px;
 }
 
 .playlist-row .playlist-url {
   color: var(--text-primary);
   font-size: .85rem;
   line-height: 1.3;
-  margin-top: 0;
   margin-bottom: 0;
+  margin-top: 0;
 }
 
 .playlist-row .playlist-author {
   color: var(--text-primary);
   font-size: .85rem;
   line-height: 1.3;
-  margin-top: 0;
   margin-bottom: 0;
+  margin-top: 0;
 }
 
 .playlist-row .playlist-duration,
@@ -683,18 +861,9 @@ input {
   justify-content: flex-end;
 }
 
-.drag-handle {
-  align-items: center;
-  color: var(--secondary-color);
-  cursor: grab;
-  display: flex;
-  flex-shrink: 0;
-  height: 32px;
-  justify-content: center;
-  transition: color .2s ease;
-  width: 32px;
-}
-
+/* claude - optimize css 2: merged identical .drag-handle and
+   .playlist-row-action-delete into a single rule                       */
+.drag-handle,
 .playlist-row-action-delete {
   align-items: center;
   color: var(--secondary-color);
@@ -712,14 +881,14 @@ input {
   ------------------------------------------------------------------------------ */
 
 .playlist-block-title {
-  display: flex;
   align-items: center;
-  text-rendering: optimizeLegibility;
-  text-align: left;
-  line-height: 1.25;
+  display: flex;
   font-size: 1.125rem;
   font-weight: 500;
+  line-height: 1.25;
   margin-bottom: 0.5rem;
+  text-align: left;
+  text-rendering: optimizeLegibility;
 }
 
 .playlist-sort-select {
@@ -749,70 +918,53 @@ input {
   display: none;
 }
 
-.playlist-row .playlist-play-overlay {
-  align-items: center;
-  backdrop-filter: blur(10px);
-  background: rgba(0,0,0,.549);
-  border: 1px solid #ffffff23;
-  border-radius: 50%;
-  box-shadow: 0 10px 30px rgba(0,0,0,.2);
-  color: #fff;
-  display: flex;
-  font-size: 20px;
-  height: 60px;
-  justify-content: center;
-  left: 50%;
-  opacity: 0;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%,-50%);
-  transition: opacity .3s ease;
-  width: 60px;
-  z-index: 2;
-}
-
-.playlist-thumb-wrapper:hover {
-  transform: none;
-}
-
-.playlist-thumb-wrapper:hover .playlist-play-overlay {
-  opacity: 1;
-}
-
 .playlist-filters {
   align-items: center;
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 1rem;
   gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 .playlist-filters input, .playlist-filters select {
-  color: var(--text-color);
   background: var(--card-background);
   border: 1px solid var(--border-color);
   border-radius: 8px;
+  color: var(--text-color);
   padding: 0.5rem;
 }
 
-.playlist-block-title {
-  display: flex;
-  align-items: center;
-  text-rendering: optimizeLegibility;
-  text-align: left;
-  line-height: 1.25;
-  font-size: 1.125rem;
-  font-weight: 500;
-  margin-bottom: 0.5rem;
-}
-
 .playlist-info-link {
-  margin-left: 0.5rem;
   border-bottom: none;
+  margin-left: 0.5rem;
 }
 
 #playlistModeSwitch {
   margin-left: 1rem;
+}
+
+/* -----------------------------------------------------------------------------
+   Playlist Search Input
+  ------------------------------------------------------------------------------ */
+
+/* align search wrapper to the left */
+#playlistSearchWrapper {
+  background: transparent;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin: 0 4.75rem 1.5rem 0;
+}
+
+/* align search input to the left inside wrapper */
+#playlistSearchWrapper .input-container {
+  align-items: center;
+  display: flex;
+  flex: 1 1 0%;
+  justify-content: flex-start;
+  position: relative;
+  width: 100%;
 }
 
 /* -----------------------------------------------------------------------------
@@ -890,20 +1042,20 @@ input {
 }
 
 /* -----------------------------------------------------------------------------
-   Bootstrap (BS) Modals
+   Bootstrap (BS) Modals: Rating
   ------------------------------------------------------------------------------ */
 
 #ratingVideoTitle {
-  font-weight: 600;
   font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.3;
   margin-bottom: 0.25rem;
-  line-height: 1.3;  
 }
 
 #ratingVideoAuthor {
   color: var(--secondary-color);
   font-size: 0.85rem;
-  margin-bottom: 0;  
+  margin-bottom: 0;
 }
 
 .rating-dialog {
@@ -926,14 +1078,14 @@ input {
 }
 
 /* -----------------------------------------------------------------------------
-  Edit Modal
+   Bootstrap (BS) Modals: Edit
   ------------------------------------------------------------------------------ */
 
 #editVideoTitle {
-  font-weight: 600;
   font-size: 1rem;
-  margin-bottom: 0.25rem;
+  font-weight: 600;
   line-height: 1.3;
+  margin-bottom: 0.25rem;
 }
 
 #editVideoAuthor {
@@ -963,7 +1115,7 @@ input {
 .edit-field-input {
   background: var(--card-background);
   border: 1px solid var(--border-color);
-  border-radius: 6px;
+  border-radius: 0px;
   color: var(--text-color);
   font-size: 0.95rem;
   padding: 0.5rem 0.75rem;
@@ -980,95 +1132,6 @@ input {
 .edit-field-input::placeholder {
   color: var(--secondary-color);
   opacity: 0.6;
-}
-
-/* -----------------------------------------------------------------------------
-   Playlist Search Input
-  ------------------------------------------------------------------------------ */
-
-/* claude - place buttons #3: align search wrapper to the left */
-#playlistSearchWrapper {
-  background: transparent;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  margin: 0 4.75rem 1.5rem 0;
-}
-
-/* claude - place buttons #3: align search input to the left inside wrapper */
-#playlistSearchWrapper .input-container {
-  align-items: center;
-  display: flex;
-  flex: 1 1 0%;
-  justify-content: flex-start;
-  position: relative;
-  width: 100%;
-}
-
-#playlistSearchInput {
-  background: none !important;
-  border: 1px solid var(--border-color) !important;
-  border-radius: 0px;
-  box-shadow: none !important;
-  color: var(--text-color) !important;
-  font-size: 1.01rem !important;
-  padding: .8rem 1rem .8rem 3rem !important;
-  transition: border-color .2s, box-shadow .2s;
-  width: 100%;
-}
-
-#playlistSearchInput:focus {
-  border-color: var(--bs-primary, #2196F3) !important;
-  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.15) !important;
-  outline: none;
-}
-
-#playlistSearchInput::placeholder {
-  color: var(--secondary-color);
-  opacity: 0.7;
-}
-
-.search-icon-inside {
-  align-items: center;
-  color: var(--secondary-color);
-  display: flex;
-  font-size: 1rem;
-  left: .85rem;
-  pointer-events: none;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-#playlistSearchClear {
-  align-items: center;
-  background: transparent;
-  border: none;
-  color: var(--secondary-color);
-  cursor: pointer;
-  display: none;
-  font-size: 1rem;
-  justify-content: center;
-  padding: .5rem;
-  position: absolute;
-  right: 7.5rem;
-  top: 33%;
-  transform: translateY(-50%);
-  transition: color .2s ease;
-}
-
-#playlistSearchClear:hover {
-  color: var(--text-color);
-}
-
-#playlistSearchResultCount {
-  color: var(--secondary-color);
-  display: none;
-  font-size: .85rem;
-  margin-left: 1rem;
-  white-space: nowrap;
-  align-self: center;
 }
 
 /* -----------------------------------------------------------------------------

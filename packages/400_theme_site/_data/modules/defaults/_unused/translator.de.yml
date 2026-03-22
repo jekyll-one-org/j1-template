@@ -77,37 +77,69 @@ defaults:
                                         ]
     modal_settings:
 
-      title:                            Google Translator
+      title:                            Google Übersetzer
       body_text: >
-                                        This website uses the <b>free</b> service <b>Google Translate</b>
-                                        to translate its content into a different language in no time.
-                                        The translation language is taken from your selection below.
+                                        Diese Website nutzt den <b>kostenlosen</b> Dienst <b>Google Translator</b>
+                                        Übersetzen Sie den Inhalt dieser Website in Sekundenschnelle in über 100 Sprachen.
+                                        Die zu übersetzende Sprache wird automatisch von Ihrem Browser übernommen
+                                        Einstellungen.
       language_selector_title: >
-                                        Your current language setting
+                                        Ihre aktuellen Spracheinstellungen für die Übersetzung sind
       privacy_notice: >
-                                        The <b>free service</b> from Google Translate uses cookies to provide
-                                        its services, personalize advertising, and run traffic analysis.
-                                        To use the service, you must consent to the use of cookies. Find more
-                                        information about at the Google
-                                        <a href="https://policies.google.com/" target="_blank" rel="noopener">Privacy Policy</a>.
+                                        Der <b>kostenlose Dienst</b> von Google Translate verwendet zur Bereitstellung Cookies
+                                        seine Dienste, personalisieren Werbung und führen Verkehrsanalysen durch
+                                        Für die Nutzung von Cookies ist Ihre Einwilligung erforderlich. Weitere Informationen finden Sie hier
+                                        etwa bei Google
+                                        <a href="https://policies.google.com/" target="_blank" rel="noopener">Datenschutzerklärung</a>.
                                         <br><br>
-                                        Required Cookie Settings:
+                                        Erforderliche Cookie-Einstellungen:
                                         <ul>
                                           <li style="list-style-type: none;">
-                                            <b>Analysis</b>
+                                            <b>Analyse</b>
                                             <p>
-                                              For Google Translate, you must enable analysis in your
-                                              privacy settings.
+                                              Für die Nutzung von Google Translations ist Ihre Einwilligung zur Analyse erforderlich
+                                              in den Datenschutzeinstellungen ist erforderlich.
                                             </p>
                                           </li>
                                           <li style="list-style-type: none;">
-                                            <b>Personalization</b>
+                                            <b>Personalisierung</b>
                                             <p>
-                                              For Google Translate, you must enable personalization in your
-                                              privacy settings.
+                                              Für die Nutzung von Google Translations ist Ihre Einwilligung zur Personalisierung erforderlich
+                                              in den Datenschutzeinstellungen ist erforderlich.
                                             </p>
                                           </li>
                                         </ul>
+
+  # ------------------------------------------------------------------------------
+  # Default Deepl Translator settings (currently NOT supported)
+  #
+  # deepl:
+  #
+  #   postSelectionCallback:            j1.adapter.translator.cbDeepl()         # currently NOT used
+  #   translationLanguages:             [
+  #                                       bg, cs, da, de, el, es, en, en-us,
+  #                                       en-uk, et, ft, fr, hu, it, ja, lv,
+  #                                       lt, nl, af, pt, pt-pt, pt-br, ro,
+  #                                       ru, sk, sl, sv, zh-CN, zh-TW
+  #                                     ]
+  #
+  #   modal_settings:
+  #
+  #     title:
+  #       en:                           Deepl Translator
+  #       de:                           Deepl Übersetzer
+  #
+  #     body_text:
+  #       en:
+  #       de:
+  #
+  #     language_selector_title:
+  #       en:
+  #       de:
+  #
+  #     privacy_notice:
+  #       en:
+  #       de:
 
 # ------------------------------------------------------------------------------
 # END config
